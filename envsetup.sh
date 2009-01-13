@@ -188,7 +188,11 @@ function get_abs_build_var()
         return
     fi
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
       ${ANDROID_MAKER} --no-print-directory -C "$T" -f build/core/config.mk dumpvar-abs-$1
+=======
+      make --no-print-directory -C "$T" -f build/core/config.mk dumpvar-abs-$1
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
 }
 
 # Get the exact value of a build variable.
@@ -200,6 +204,7 @@ function get_build_var()
         return
     fi
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
       ${ANDROID_MAKER} --no-print-directory -C "$T" -f build/core/config.mk dumpvar-$1
 }
 
@@ -207,6 +212,15 @@ function get_build_var()
 function check_product()
 {
     local T=$(gettop)
+=======
+      make --no-print-directory -C "$T" -f build/core/config.mk dumpvar-$1
+}
+
+# check to see if the supplied product is one we can build
+function check_product()
+{
+    T=$(gettop)
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     if [ ! "$T" ]; then
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
@@ -280,7 +294,11 @@ function setpaths()
 
 function printconfig()
 {
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
     local T=$(gettop)
+=======
+    T=$(gettop)
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     if [ ! "$T" ]; then
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
@@ -296,6 +314,10 @@ function set_stuff_for_environment()
 
     # Don't try to do preoptimization until it works better on OSX.
     export DISABLE_DEXPREOPT=true
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     export ANDROID_BUILD_TOP=$(gettop)
 }
 
@@ -312,6 +334,77 @@ function settitle()
         export PROMPT_COMMAND="echo -ne \"\033]0;[${product}-${variant}] ${USER}@${HOSTNAME}: ${PWD}\007\""
     fi
 }
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+
+case `uname -s` in
+    Linux)
+        function choosesim()
+        {
+            echo "Build for the simulator or the device?"
+            echo "     1. Device"
+            echo "     2. Simulator"
+            echo
+
+            export TARGET_SIMULATOR=
+            local ANSWER
+            while [ -z $TARGET_SIMULATOR ]
+            do
+                echo -n "Which would you like? [1] "
+                if [ -z "$1" ] ; then
+                    read ANSWER
+                else
+                    echo $1
+                    ANSWER=$1
+                fi
+                case $ANSWER in
+                "")
+                    export TARGET_SIMULATOR=false
+                    ;;
+                1)
+                    export TARGET_SIMULATOR=false
+                    ;;
+                Device)
+                    export TARGET_SIMULATOR=false
+                    ;;
+                2)
+                    export TARGET_SIMULATOR=true
+                    ;;
+                Simulator)
+                    export TARGET_SIMULATOR=true
+                    ;;
+                *)
+                    echo
+                    echo "I didn't understand your response.  Please try again."
+                    echo
+                    ;;
+                esac
+                if [ -n "$1" ] ; then
+                    break
+                fi
+            done
+
+            set_stuff_for_environment
+        }
+        ;;
+    *)
+        function choosesim()
+        {
+            echo "Only device builds are supported for" `uname -s`
+            echo "     Forcing TARGET_SIMULATOR=false"
+            echo
+            if [ -z "$1" ]
+            then
+                echo -n "Press enter: "
+                read
+            fi
+
+            export TARGET_SIMULATOR=false
+            set_stuff_for_environment
+        }
+        ;;
+esac
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
 
 function choosetype()
 {
@@ -401,6 +494,7 @@ function chooseproduct()
         let "index = $index + 1"
     done
 
+
     if [ "x$TARGET_PRODUCT" != x ]; then
         default_value=$TARGET_PRODUCT
     else
@@ -417,6 +511,7 @@ function chooseproduct()
     do
         echo "You can also type the name of a product if you know it."
         echo -n "Which would you like? [$default_value] "
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
         if [ -z "$1" ]; then
             read ANSWER
         else
@@ -425,6 +520,16 @@ function chooseproduct()
         fi
 
         if [ -z "$ANSWER" ]; then
+=======
+        if [ -z "$1" ] ; then
+            read ANSWER
+        else
+            echo $1
+            ANSWER=$1
+        fi
+
+        if [ -z "$ANSWER" ] ; then
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
             export TARGET_PRODUCT=$default_value
         elif (echo -n $ANSWER | grep -q -e "^[0-9][0-9]*$") ; then
             local poo=`echo -n $ANSWER`
@@ -542,14 +647,26 @@ add_lunch_combo generic-eng
 
 # if we're on linux, add the simulator.  There is a special case
 # in lunch to deal with the simulator
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
 if [ "${ANDROID_HOST_SYSTEM}" = "Linux" ] ; then
+=======
+if [ "$(uname)" = "Linux" ] ; then
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     add_lunch_combo simulator
 fi
 
 function print_lunch_menu()
 {
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+    local uname=$(uname)
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     echo
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
     echo "You're building on" ${ANDROID_HOST_SYSTEM}
+=======
+    echo "You're building on" $uname
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     echo
     echo ${LUNCH_MENU_CHOICES[@]}
     echo "Lunch menu... pick a combo:"
@@ -649,10 +766,17 @@ function lunch()
     printconfig
 }
 
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
 function gettop()
 {
     local TOPFILE=build/core/envsetup.mk
     if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ]; then
+=======
+function gettop
+{
+    local TOPFILE=build/core/envsetup.mk
+    if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ] ; then
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
         echo $TOP
     else
         if [ -f $TOPFILE ]; then
@@ -662,7 +786,11 @@ function gettop()
             # a command that prints something as a side-effect
             # (like pushd)
             local HERE=$PWD
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
 	    local T=
+=======
+            T=
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
             while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
                 cd .. > /dev/null
                 T=$PWD
@@ -692,7 +820,11 @@ function findmakefile()
     # a command that prints something as a side-effect
     # (like pushd)
     local HERE=$PWD
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
     local T=
+=======
+    T=
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
         T=$PWD
         if [ -f "$T/Android.mk" ]; then
@@ -713,7 +845,11 @@ function mm()
         ${ANDROID_MAKER} $@
     else
         # Find the closest Android.mk file.
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
         local T=$(gettop)
+=======
+        T=$(gettop)
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
         local M=$(findmakefile)
         if [ ! "$T" ]; then
             echo "Couldn't locate the top of the tree.  Try setting TOP."
@@ -847,6 +983,36 @@ function resgrep()
         find $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color -n "$@";
     done;
 }
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+
+case `uname -s` in
+    Darwin)
+        function mgrep()
+        {
+            find -E . -type f -iregex '.*/(Makefile|Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -print0 | xargs -0 grep --color -n "$@"
+        }
+
+        function treegrep()
+        {
+            find -E . -type f -iregex '.*\.(c|h|cpp|S|java|xml)' -print0 | xargs -0 grep --color -n -i "$@"
+        }
+
+        ;;
+    *)
+        function mgrep()
+        {
+            find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n "$@"
+        }
+
+        function treegrep()
+        {
+            find . -regextype posix-egrep -iregex '.*\.(c|h|cpp|S|java|xml)' -type f -print0 | xargs -0 grep --color -n -i "$@"
+        }
+
+        ;;
+esac
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
 
 function getprebuilt
 {
@@ -1027,7 +1193,11 @@ function smoketest()
 # simple shortcut to the runtest command
 function runtest()
 {
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
     local T=$(gettop)
+=======
+    T=$(gettop)
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     if [ ! "$T" ]; then
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return

@@ -145,6 +145,15 @@ public class MethodInfo implements AbstractMethodInfo {
             consistent = false;
         }
         
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+        if (mIsSynchronized != mInfo.mIsSynchronized) {
+            Errors.error(Errors.CHANGED_SYNCHRONIZED, mInfo.position(),
+                    "Method " + mInfo.qualifiedName() + " has changed 'synchronized' qualifier from " + mIsSynchronized + " to " + mInfo.mIsSynchronized);
+            consistent = false;
+        }
+        
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
         for (String exec : mExceptions) {
             if (!mInfo.mExceptions.contains(exec)) {
                 // exclude 'throws' changes to finalize() overrides with no arguments

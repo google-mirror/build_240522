@@ -1,3 +1,12 @@
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+
+# Use bash, not whatever shell somebody has installed as /bin/sh
+# This is repeated in config.mk, since envsetup.sh runs that file
+# directly.
+SHELL := /bin/bash
+
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
 # this turns off the suffix rules built into make
 .SUFFIXES:
 

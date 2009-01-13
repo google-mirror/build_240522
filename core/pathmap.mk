@@ -31,10 +31,14 @@ pathmap_INCL := \
     bluez-libs:external/bluez/libs/include \
     bluez-utils:external/bluez/utils \
     bootloader:bootable/bootloader/legacy/include \
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
     corecg:external/skia/include/corecg \
+=======
+    corecg:external/skia/include/core \
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     dbus:external/dbus \
     frameworks-base:frameworks/base/include \
-    graphics:external/skia/include/graphics \
+    graphics:external/skia/include/core \
     libc:bionic/libc/include \
     libdrm1:frameworks/base/media/libdrm/mobile1/include \
     libdrm2:frameworks/base/media/libdrm/mobile2/include \

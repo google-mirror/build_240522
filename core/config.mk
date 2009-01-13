@@ -3,6 +3,7 @@
 # current configuration and platform, which
 # are not specific to what is being built.
 
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
 #
 # Use bash, not whatever shell somebody has installed as /bin/sh
 #
@@ -18,6 +19,13 @@ SHELL := /usr/local/bin/bash
 endif
 #
 #
+=======
+# Use bash, not whatever shell somebody has installed as /bin/sh
+# This is repeated from main.mk, since envsetup.sh runs this file
+# directly.
+SHELL := /bin/bash
+
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
 # Standard source directories.
 SRC_DOCS:= $(TOPDIR)docs
 # TODO: Enforce some kind of layering; only add include paths
@@ -297,9 +305,15 @@ TARGET_AVAILABLE_SDK_VERSIONS := current \
         $(shell \
             function sgrax() { \
                 while [ -n "$$1" ] ; do echo $$1 ; shift ; done \
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
 	    } ; \
             ( sgrax $(patsubst $(SRC_API_DIR)/%.xml,%, \
                $(filter-out $(SRC_API_DIR)/current.xml, \
+=======
+            } ; \
+            ( sgrax $(patsubst $(SRC_API_DIR)/%.xml,%, \
+                $(filter-out $(SRC_API_DIR)/current.xml, \
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
                 $(shell find $(SRC_API_DIR) -name "*.xml"))) | sort -g ) )
 
 

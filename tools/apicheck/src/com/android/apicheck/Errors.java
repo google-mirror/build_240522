@@ -114,6 +114,10 @@ public class Errors
     public static Error CHANGED_NATIVE = new Error(22, HIDDEN);
     public static Error CHANGED_CLASS = new Error(23, WARNING);
     public static Error CHANGED_DEPRECATED = new Error(24, WARNING);
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+    public static Error CHANGED_SYNCHRONIZED = new Error(25, ERROR);
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
     
     public static Error[] ERRORS = {
         PARSE_ERROR,
@@ -140,6 +144,10 @@ public class Errors
         CHANGED_NATIVE,
         CHANGED_CLASS,
         CHANGED_DEPRECATED,
+<<<<<<< HEAD   (1e3578 Merged latest changes from korg/master)
+=======
+        CHANGED_SYNCHRONIZED,
+>>>>>>> BRANCH (70b813 auto import from //branches/cupcake/...@125939)
         };
 
     public static boolean setErrorLevel(int code, int level) {
