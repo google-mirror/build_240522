@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (ae0b64 Merge commit 'korg/master' into freebsd-port)
 if [ "x$ANDROID_JAVA_HOME" != "x" -a -e $ANDROID_JAVA_HOME/lib/tools.jar ] ; then
+=======
+if [ "x$ANDROID_JAVA_HOME" != x ] && [ -e "$ANDROID_JAVA_HOME/lib/tools.jar" ] ; then
+>>>>>>> BRANCH (2f49d5 Add support for symbolic links for product folders)
     echo $ANDROID_JAVA_HOME/lib/tools.jar
 else
     JAVAC=$(which javac)
