@@ -92,17 +92,16 @@ ifneq ($(USE_CCACHE),)
   ifeq ($(HOST_OS)-$(BUILD_OS),windows-linux)
     CCACHE_HOST_TAG := linux-$(BUILD_ARCH)
   endif
-  ccache := prebuilts/misc/$(CCACHE_HOST_TAG)/ccache/ccache
+  CCACHE_BIN := prebuilts/misc/$(CCACHE_HOST_TAG)/ccache/ccache
   # Check that the executable is here.
-  ccache := $(strip $(wildcard $(ccache)))
-  ifdef ccache
+  CCACHE_BIN := $(strip $(wildcard $(CCACHE_BIN)))
+  ifdef CCACHE_BIN
     # prepend ccache if necessary
-    ifneq ($(ccache),$(firstword $($(combo_var_prefix)CC)))
-      $(combo_var_prefix)CC := $(ccache) $($(combo_var_prefix)CC)
+    ifneq ($(CCACHE_BIN),$(firstword $($(combo_var_prefix)CC)))
+      $(combo_var_prefix)CC := $(CCACHE_BIN) $($(combo_var_prefix)CC)
     endif
-    ifneq ($(ccache),$(firstword $($(combo_var_prefix)CXX)))
-      $(combo_var_prefix)CXX := $(ccache) $($(combo_var_prefix)CXX)
+    ifneq ($(CCACHE_BIN),$(firstword $($(combo_var_prefix)CXX)))
+      $(combo_var_prefix)CXX := $(CCACHE_BIN) $($(combo_var_prefix)CXX)
     endif
-    ccache =
   endif
 endif
