@@ -179,7 +179,8 @@ endif
 
 ifeq ($(strip $(LOCAL_ADDRESS_SANITIZER)),true)
   my_clang := true
-  my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
+  # Frame pointer based unwinder in ASan requires ARM frame setup.
+  LOCAL_ARM_MODE := arm
   my_ldflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS)
   my_shared_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES)
   my_static_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_STATIC_LIBRARIES)
