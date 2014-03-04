@@ -146,6 +146,11 @@ endif
 # Add in libcompiler_rt for all regular device builds
 ifeq (,$(LOCAL_SDK_VERSION)$(LOCAL_IS_HOST_MODULE)$(WITHOUT_LIBCOMPILER_RT))
   my_static_libraries += $(COMPILER_RT_CONFIG_EXTRA_STATIC_LIBRARIES)
+  ifeq ($(ENABLE_GCOV),true)
+  ifeq ($(LOCAL_CLANG),true)
+    my_static_libraries += libprofile_rt
+  endif
+  endif
 endif
 
 my_compiler_dependencies :=
@@ -218,7 +223,16 @@ else
 my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_CFLAGS)
 my_target_global_cppflags += $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_CPPFLAGS)
 my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_LDFLAGS)
+ifeq ($(ENABLE_GCOV),true)
+my_target_global_ldflags += -fprofile-arcs
+endif
 endif # LOCAL_CLANG
+
+ifeq ($(ENABLE_GCOV),true)
+my_target_global_cflags  += -fprofile-arcs -ftest-coverage
+my_target_global_cppflags  += -fprofile-arcs -ftest-coverage
+endif
+
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_PROJECT_INCLUDES := $(my_target_project_includes)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_C_INCLUDES := $(my_target_c_includes)
