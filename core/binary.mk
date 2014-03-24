@@ -45,8 +45,8 @@ ifdef LOCAL_SDK_VERSION
   else # LOCAL_NDK_STL_VARIANT is not stlport_* either
   ifneq (,$(filter c++_%, $(LOCAL_NDK_STL_VARIANT)))
     my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libcxx/include \
-                               $(my_ndk_source_root)/cxx-stl/llvm-libc++/gabi++/include \
-                               $(my_ndk_source_root)/android/support/include
+			       $(my_ndk_source_root)/cxx-stl/llvm-libc++/gabi++/include \
+			       $(my_ndk_source_root)/android/support/include
     ifeq (c++_static,$(LOCAL_NDK_STL_VARIANT))
       my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libc++_static.a
     else
@@ -57,7 +57,7 @@ ifdef LOCAL_SDK_VERSION
   else
     # LOCAL_NDK_STL_VARIANT is gnustl_static
     my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/include \
-                               $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/include
+			       $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/include
     my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libgnustl_static.a
   endif
   endif
@@ -146,7 +146,7 @@ ifdef LOCAL_HAL_STATIC_LIBRARIES
 $(foreach lib, $(LOCAL_HAL_STATIC_LIBRARIES), \
     $(eval b_lib := $(filter $(lib).%,$(BOARD_HAL_STATIC_LIBRARIES)))\
     $(if $(b_lib), $(eval my_static_libraries += $(b_lib)),\
-                   $(eval my_static_libraries += $(lib).default)))
+		   $(eval my_static_libraries += $(lib).default)))
 b_lib :=
 endif
 
@@ -809,12 +809,12 @@ ifdef LOCAL_SDK_VERSION
 built_shared_libraries := \
     $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
       $(addsuffix $(so_suffix), \
-        $(my_shared_libraries)))
+	$(my_shared_libraries)))
 
 my_system_shared_libraries_fullpath := \
     $(my_ndk_stl_shared_lib_fullpath) \
     $(addprefix $(my_ndk_version_root)/usr/lib/, \
-        $(addsuffix $(so_suffix), $(LOCAL_SYSTEM_SHARED_LIBRARIES)))
+	$(addsuffix $(so_suffix), $(LOCAL_SYSTEM_SHARED_LIBRARIES)))
 
 built_shared_libraries += $(my_system_shared_libraries_fullpath)
 my_shared_libraries += $(LOCAL_SYSTEM_SHARED_LIBRARIES)
@@ -823,13 +823,13 @@ my_shared_libraries += $(LOCAL_SYSTEM_SHARED_LIBRARIES)
 built_shared_libraries := \
     $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
       $(addsuffix $(so_suffix), \
-        $(my_shared_libraries)))
+	$(my_shared_libraries)))
 endif
 
 built_static_libraries := \
     $(foreach lib,$(my_static_libraries), \
       $(call intermediates-dir-for, \
-        STATIC_LIBRARIES,$(lib),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX))/$(lib)$(a_suffix))
+	STATIC_LIBRARIES,$(lib),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX))/$(lib)$(a_suffix))
 
 ifdef LOCAL_SDK_VERSION
 built_static_libraries += $(my_ndk_stl_static_lib)
@@ -838,7 +838,7 @@ endif
 built_whole_libraries := \
     $(foreach lib,$(my_whole_static_libraries), \
       $(call intermediates-dir-for, \
-        STATIC_LIBRARIES,$(lib),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX))/$(lib)$(a_suffix))
+	STATIC_LIBRARIES,$(lib),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX))/$(lib)$(a_suffix))
 
 # We don't care about installed static libraries, since the
 # libraries have already been linked into the module at that point.
@@ -909,8 +909,8 @@ $(export_includes) : $(LOCAL_MODULE_MAKEFILE)
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 ifdef LOCAL_EXPORT_C_INCLUDE_DIRS
 	$(hide) for d in $(PRIVATE_EXPORT_C_INCLUDE_DIRS); do \
-	        echo "-I $$d" >> $@; \
-	        done
+		echo "-I $$d" >> $@; \
+		done
 else
 	$(hide) touch $@
 endif
