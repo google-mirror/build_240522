@@ -63,13 +63,24 @@ remove_recursively(const string& path)
             string full = path;
             full += '/';
             full += ent->d_name;
+            bool is_directory;
 #ifdef HAVE_DIRENT_D_TYPE
-            bool is_directory = (ent->d_type == DT_DIR);
-#else
-            // If dirent.d_type is missing, then use stat instead
-            struct stat stat_buf;
-            stat(full.c_str(), &stat_buf);
-            bool is_directory = S_ISDIR(stat_buf.st_mode);
+            // DT_UNKNOWN means the OS supports d_type but not the filesystem
+            if (ent->d_type == DT_UNKNOWN) {
+#endif
+                // If dirent.d_type is missing or unknown, then use stat instead
+                struct stat stat_buf;
+                err = stat(full.c_str(), &stat_buf);
+                if (err != 0) {
+                    fprintf(stderr, "error doing stat on %s (%s)\n",
+                            full.c_str(), strerror(errno));
+                    return errno;
+                }
+                is_directory = S_ISDIR(stat_buf.st_mode);
+#ifdef HAVE_DIRENT_D_TYPE
+            } else {
+                is_directory = (ent->d_type == DT_DIR);
+            }
 #endif
             if (is_directory) {
                 dirs.push_back(full);

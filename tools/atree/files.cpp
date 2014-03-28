@@ -447,13 +447,20 @@ list_dir(const string& path, const FileRecord& rec,
             continue;
         }
         string entry = path_append(path, ent->d_name);
+        bool is_directory;
 #ifdef HAVE_DIRENT_D_TYPE
-		bool is_directory = (ent->d_type == DT_DIR);
-#else
-	    // If dirent.d_type is missing, then use stat instead
-		struct stat stat_buf;
-		stat(entry.c_str(), &stat_buf);
-		bool is_directory = S_ISDIR(stat_buf.st_mode);
+        // DT_UNKNOWN means the OS supports d_type but not the filesystem
+        if (ent->d_type == DT_UNKNOWN) {
+#endif
+            // If dirent.d_type is missing or unknown, then use stat instead
+            struct stat stat_buf;
+            err = stat(path_append(full, ent->d_name).c_str(), &stat_buf);
+            if (err != 0) return errno;
+            is_directory = S_ISDIR(stat_buf.st_mode);
+#ifdef HAVE_DIRENT_D_TYPE
+        } else {
+            is_directory = (ent->d_type == DT_DIR);
+        }
 #endif
         add_more(entry, is_directory, rec, more);
         if (is_directory) {
