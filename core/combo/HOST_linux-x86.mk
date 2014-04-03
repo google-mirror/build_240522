@@ -33,6 +33,7 @@ HOST_AR  := $(HOST_TOOLCHAIN_PREFIX)ar
 endif # $(HOST_TOOLCHAIN_PREFIX)gcc exists
 
 HOST_TOOLCHAIN_FOR_CLANG := prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6/
+
 ifneq ($(strip $(BUILD_HOST_64bit)),)
 # By default we build everything in 32-bit, because it gives us
 # more consistency between the host tools and the target.
