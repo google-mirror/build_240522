@@ -150,7 +150,7 @@ endif
 
 my_compiler_dependencies :=
 ifeq ($(strip $(LOCAL_CLANG)),true)
-  my_compiler_dependencies := $(CLANG) $(CLANG_CXX)
+#  my_compiler_dependencies := $(CLANG) $(CLANG_CXX)
 endif
 
 ####################################################

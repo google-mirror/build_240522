@@ -6,8 +6,8 @@ WITHOUT_TARGET_CLANG := true
 WITHOUT_HOST_CLANG := true
 endif
 
-LLVM_PREBUILTS_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.4/bin
-LLVM_PREBUILTS_HEADER_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.4/lib/clang/3.4/include/
+LLVM_PREBUILTS_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.5/bin
+LLVM_PREBUILTS_HEADER_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.5/lib/clang/3.5/include/
 
 CLANG := $(LLVM_PREBUILTS_PATH)/clang$(BUILD_EXECUTABLE_SUFFIX)
 CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++$(BUILD_EXECUTABLE_SUFFIX)
@@ -18,7 +18,7 @@ TBLGEN := $(LLVM_PREBUILTS_PATH)/tblgen$(BUILD_EXECUTABLE_SUFFIX)
 
 
 # Clang flags for all host or target rules
-CLANG_CONFIG_EXTRA_ASFLAGS :=
+CLANG_CONFIG_EXTRA_ASFLAGS := -no-integrated-as
 CLANG_CONFIG_EXTRA_CFLAGS :=
 CLANG_CONFIG_EXTRA_CPPFLAGS :=
 CLANG_CONFIG_EXTRA_LDFLAGS :=

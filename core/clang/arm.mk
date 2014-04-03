@@ -3,7 +3,6 @@
 CLANG_CONFIG_arm_EXTRA_ASFLAGS :=
 
 CLANG_CONFIG_arm_EXTRA_CFLAGS := \
-  -mllvm -arm-enable-ehabi
 
 CLANG_CONFIG_arm_EXTRA_LDFLAGS :=
 
