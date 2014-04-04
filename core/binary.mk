@@ -228,16 +228,16 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_glob
 
 else # LOCAL_IS_HOST_MODULE
 
-ifeq ($(LOCAL_CLANG),true)
-my_host_global_cflags := $(CLANG_HOST_GLOBAL_CFLAGS)
-my_host_global_cppflags := $(CLANG_HOST_GLOBAL_CPPFLAGS)
-my_host_global_ldflags := $(CLANG_HOST_GLOBAL_LDFLAGS)
-my_host_c_includes := $(HOST_C_INCLUDES) $(CLANG_CONFIG_EXTRA_HOST_C_INCLUDES)
-else
+ifeq ($(LOCAL_GCC),true)
 my_host_global_cflags := $(HOST_GLOBAL_CFLAGS)
 my_host_global_cppflags := $(HOST_GLOBAL_CPPFLAGS)
 my_host_global_ldflags := $(HOST_GLOBAL_LDFLAGS)
 my_host_c_includes := $(HOST_C_INCLUDES)
+else
+my_host_global_cflags := $(CLANG_HOST_GLOBAL_CFLAGS)
+my_host_global_cppflags := $(CLANG_HOST_GLOBAL_CPPFLAGS)
+my_host_global_ldflags := $(CLANG_HOST_GLOBAL_LDFLAGS)
+my_host_c_includes := $(HOST_C_INCLUDES) $(CLANG_CONFIG_EXTRA_HOST_C_INCLUDES)
 endif # LOCAL_CLANG
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HOST_C_INCLUDES := $(my_host_c_includes)
@@ -268,9 +268,17 @@ endif
 
 ifeq ($(strip $(my_cc)),)
   ifeq ($(strip $(LOCAL_CLANG)),true)
-    my_cc := $(CLANG)
+    my_cc := $(CLANG) # use clang if LOCAL_CLANG := true
   else
-    my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC)
+    ifeq ($(my_syntax_arch), host)
+      ifeq ($(strip $(LOCAL_GCC)),true)
+        my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC) # use gcc if host module and LOCAL_GCC := true
+      else
+        my_cc := $(CLANG) # use clang if host module and LOCAL_GCC not set
+      endif
+    else
+      my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC) # use gcc for target builds without LOCAL_CLANG
+    endif
   endif
 endif
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
@@ -284,9 +292,17 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CC := $(my_cc)
 
 ifeq ($(strip $(my_cxx)),)
   ifeq ($(strip $(LOCAL_CLANG)),true)
-    my_cxx := $(CLANG_CXX)
+    my_cxx := $(CLANG_CXX) # use clang if LOCAL_CLANG := true
   else
-    my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX)
+    ifeq ($(my_syntax_arch), host)
+      ifeq ($(strip $(LOCAL_GCC)),true)
+        my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX) # use gcc if host module and LOCAL_GCC := true
+      else
+        my_cxx := $(CLANG_CXX) # use clang if host module and LOCAL_GCC not set
+      endif
+    else
+      my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX) # use gcc for target builds without LOCAL_CLANG
+    endif
   endif
 endif
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
