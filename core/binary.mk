@@ -130,6 +130,14 @@ ifdef LOCAL_CLANG_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
 my_clang := $(LOCAL_CLANG_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
 endif
 
+# clang is enabled by default for host builds
+# enable it unless we've specifically disabled clang above
+ifdef LOCAL_IS_HOST_MODULE
+ifeq ($(my_clang),)
+    my_clang := true
+endif
+endif
+
 # arch-specific static libraries go first so that generic ones can depend on them
 my_static_libraries := $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_static_libraries)
 my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_WHOLE_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_whole_static_libraries)
@@ -246,7 +254,8 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_glob
 
 else # LOCAL_IS_HOST_MODULE
 
-ifeq ($(my_clang),true)
+# on the host, Clang is used except when specifically disabled
+ifneq ($(my_clang),false)
 my_host_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_CFLAGS)
 my_host_global_cppflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_CPPFLAGS)
 my_host_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_LDFLAGS)
@@ -288,7 +297,15 @@ ifeq ($(strip $(my_cc)),)
   ifeq ($(strip $(my_clang)),true)
     my_cc := $(CLANG)
   else
-    my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC)
+    ifeq ($(my_syntax_arch), host)
+      ifeq ($(strip $(my_clang)),false)
+        my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC) # use gcc if host module and LOCAL_CLANG := false
+      else
+        my_cc := $(CLANG) # use clang if host module and LOCAL_CLANG not set to false
+      endif
+    else
+      my_cc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CC) # use gcc for target builds without LOCAL_CLANG
+    endif
   endif
 endif
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
@@ -304,7 +321,15 @@ ifeq ($(strip $(my_cxx)),)
   ifeq ($(strip $(my_clang)),true)
     my_cxx := $(CLANG_CXX)
   else
-    my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX)
+    ifeq ($(my_syntax_arch), host)
+      ifeq ($(strip $(my_clang)),false)
+        my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX) # use gcc if host module and LOCAL_CLANG := false
+      else
+        my_cxx := $(CLANG_CXX) # use clang if host module and LOCAL_CLANG not set to false
+      endif
+    else
+      my_cxx := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)CXX) # use gcc for target builds without LOCAL_CLANG
+    endif
   endif
 endif
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
