@@ -231,6 +231,66 @@ combo_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/combo/select.mk
 endif
 
+# "ro.product.cpu.abilist" is a comma separated list of ABIs (in order
+# of preference) that the target supports. If a TARGET_CPU_ABI_LIST
+# is specified by the board configuration, we use that. If not, we
+# build a list out of the TARGET_CPU_ABIs specified by the config.
+ifeq (,$(TARGET_CPU_ABI_LIST))
+  TARGET_CPU_ABI_LIST := $(TARGET_CPU_ABI)
+  ifneq (,$(TARGET_CPU_ABI2))
+    TARGET_CPU_ABI_LIST += ,$(TARGET_CPU_ABI2)
+  endif
+  ifneq (,$(TARGET_2ND_CPU_ABI))
+    TARGET_CPU_ABI_LIST += ,$(TARGET_2ND_CPU_ABI)
+  endif
+  ifneq (,$(TARGET_2ND_CPU_ABI2))
+    TARGET_CPU_ABI_LIST += ,$(TARGET_2ND_CPU_ABI2)
+  endif
+endif
+
+# "ro.product.cpu.abilist32" and "ro.product.cpu.abilist64" are
+# comma separated lists of the 32 and 64 bit ABIs (in order of
+# preference) that the target supports. If TARGET_CPU_ABI_LIST_{32,64}_BIT
+# are defined by the board config, we use them. Else, we construct
+# these lists based on whether TARGET_IS_64_BIT is set.
+#
+# Note that this assumes that the 2ND_CPU_ABI for a 64 bit target
+# is always 32 bits. If this isn't the case, these variables should
+# be overriden in the boarc configuration.
+ifeq (,$(TARGET_CPU_ABI_LIST_64_BIT))
+  ifneq (,$(TARGET_IS_64_BIT))
+    TARGET_CPU_ABI_LIST_64_BIT := $(TARGET_CPU_ABI)
+    ifneq (,$(TARGET_CPU_ABI2))
+      TARGET_CPU_ABI_LIST_64_BIT += ,$(TARGET_CPU_ABI2)
+    endif
+  endif
+endif
+
+ifeq (,$(TARGET_CPU_ABI_LIST_32_BIT))
+  ifeq (,$(TARGET_IS_64_BIT))
+    TARGET_CPU_ABI_LIST_32_BIT := $(TARGET_CPU_ABI)
+    ifneq (,$(TARGET_CPU_ABI2))
+      TARGET_CPU_ABI_LIST_32_BIT += ,$(TARGET_CPU_ABI2)
+    endif
+  else
+    # For a 64 bit target, assume that the 2ND_CPU_ABI
+    # is a 32 bit ABI.
+    ifneq (,$(TARGET_2ND_CPU_ABI))
+      TARGET_CPU_ABI_LIST_32_BIT := $(TARGET_2ND_CPU_ABI)
+    endif
+    ifneq (,$(TARGET_2ND_CPU_ABI2))
+      TARGET_CPU_ABI_LIST_32_BIT += ,$(TARGET_2ND_CPU_ABI2)
+    endif
+  endif
+endif
+
+# Strip whitespace from the ABI list string.
+empty :=
+space := $(empty) $(empty)
+TARGET_CPU_ABI_LIST := $(subst $(space),,$(TARGET_CPU_ABI_LIST))
+TARGET_CPU_ABI_LIST_32_BIT := $(subst $(space),,$(TARGET_CPU_ABI_LIST_32_BIT))
+TARGET_CPU_ABI_LIST_64_BIT := $(subst $(space),,$(TARGET_CPU_ABI_LIST_64_BIT))
+
 # Compute TARGET_TOOLCHAIN_ROOT from TARGET_TOOLS_PREFIX
 # if only TARGET_TOOLS_PREFIX is passed to the make command.
 ifndef TARGET_TOOLCHAIN_ROOT
