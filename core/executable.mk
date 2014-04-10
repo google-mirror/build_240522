@@ -8,19 +8,6 @@
 
 include $(BUILD_SYSTEM)/multilib.mk
 
-ifeq ($(TARGET_PREFER_32_BIT),true)
-ifeq (,$(filter $(my_module_multilib),first both)
-# if TARGET_PREFER_32_BIT is not explicitly set to "first" or "both"
-# build only for secondary
-my_module_multilib := 32
-endif
-endif
-
-ifndef my_module_multilib
-# executables default to building for the first architecture
-my_module_multilib := first
-endif
-
 ifeq ($(my_module_multilib),both)
 ifeq ($(LOCAL_MODULE_PATH_32)$(LOCAL_MODULE_STEM_32),)
 $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_32 or LOCAL_MODULE_PATH_32 is required for LOCAL_MULTILIB := both for module $(LOCAL_MODULE))
@@ -30,6 +17,15 @@ $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_64 or LOCAL_MODULE_PATH_64 is required 
 endif
 else #!LOCAL_MULTILIB == both
 LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
+endif
+
+# if TARGET_PREFER_32_BIT is set, try to build 32-bit first
+ifdef TARGET_2ND_ARCH
+ifeq ($(TARGET_PREFER_32_BIT),true)
+LOCAL_2ND_ARCH_VAR_PREFIX := $(TARGET_2ND_ARCH_VAR_PREFIX)
+else
+LOCAL_2ND_ARCH_VAR_PREFIX :=
+endif
 endif
 
 my_skip_secondary_arch :=
@@ -47,8 +43,15 @@ endif
 # check if first arch was not supported or asked to build both
 ifndef my_skip_secondary_arch
 ifdef TARGET_2ND_ARCH
-# check if secondary arch is supported
+
+# check if the second arch to try should be the primary or secondary
+ifeq ($(TARGET_PREFER_32_BIT),true)
+LOCAL_2ND_ARCH_VAR_PREFIX :=
+else
 LOCAL_2ND_ARCH_VAR_PREFIX := $(TARGET_2ND_ARCH_VAR_PREFIX)
+endif
+
+# check if secondary arch is supported
 include $(BUILD_SYSTEM)/module_arch_supported.mk
 ifeq ($(my_module_arch_supported),true)
 # secondary arch is supported
