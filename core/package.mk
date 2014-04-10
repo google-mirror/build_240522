@@ -6,9 +6,15 @@
 include $(BUILD_SYSTEM)/multilib.mk
 
 ifndef my_module_multilib
+ifeq ($(TARGET_SUPPORTS_32_BIT_APPS)|$(TARGET_SUPPORTS_64_BIT_APPS),true|true)
 # packages default to building for either architecture,
 # the first if its supported, otherwise the second.
 my_module_multilib := both
+else ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
+my_module_multilib := 64
+else
+my_module_multilib := 32
+endif
 endif
 
 LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
