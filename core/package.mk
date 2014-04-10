@@ -5,6 +5,23 @@
 
 include $(BUILD_SYSTEM)/multilib.mk
 
+ifeq ($(TARGET_SUPPORTS_32_BIT_APPS)|$(TARGET_SUPPORTS_64_BIT_APPS),true|true)
+# packages default to building for either architecture,
+# the preferred if its supported, otherwise the non-preferred.
+else ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
+ifeq (,$(filter 32 none,$(my_module_multilib)))
+my_module_multilib := 64
+else
+my_module_multilib := none
+endif
+else
+ifeq (,$(filter 64 first none,$(my_module_multilib)))
+my_module_multilib := 32
+else
+my_module_multilib := none
+endif
+endif
+
 LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
 
 # if TARGET_PREFER_32_BIT is set, try to build 32-bit first
