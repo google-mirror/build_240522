@@ -5,7 +5,7 @@
 LOCAL_CFLAGS += -DGTEST_OS_LINUX_ANDROID -DGTEST_HAS_STD_STRING
 
 LOCAL_C_INCLUDES += external/gtest/include
-LOCAL_STATIC_LIBRARIES += libgtest libgtest_main
+LOCAL_STATIC_LIBRARIES += libgtest libgtest_main libstdc++
 
 ifndef LOCAL_SDK_VERSION
 LOCAL_C_INCLUDES += bionic \
