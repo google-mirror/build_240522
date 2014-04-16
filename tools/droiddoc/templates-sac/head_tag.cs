@@ -57,4 +57,33 @@ else
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Project', 'Number of commits'],
+          ['root', 10866126], ['external', 3824855], ['prebuilts', 1978812],
+          ['frameworks', 1258788], ['ndk', 1213050], ['packages', 1026796],
+          ['cts', 479854], ['hardware', 390558], ['libcore', 250101],
+          ['device', 110041], ['development', 92450], ['system', 68885],
+          ['bionic', 64332], ['developers', 45389], ['sdk', 23251],
+          ['dalvik', 16062], ['build', 8122], ['pdk', 7149],
+          ['docs', 3493], ['bootable', 2150], ['libnativehelper', 1938],
+                  ['abi', 28], ['tools', 22],
+        ]);
+
+
+        var options = {
+          title: 'Release commits by project',
+          is3D: true,
+        };
+
+        var chart = new
+google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
