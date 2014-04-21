@@ -128,6 +128,9 @@ $(hide) $(PRIVATE_CXX) \
         $(addprefix -force_load , $(PRIVATE_ALL_WHOLE_STATIC_LIBRARIES)) \
         $(call normalize-host-libraries,$(PRIVATE_ALL_SHARED_LIBRARIES)) \
         $(call normalize-host-libraries,$(PRIVATE_ALL_STATIC_LIBRARIES)) \
+	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
+	   $(PRIVATE_HOST_GLOBAL_LDFLAGS) \
+	) \
         $(PRIVATE_LDLIBS) \
         -o $@ \
         -install_name @rpath/$(notdir $@) \
@@ -140,13 +143,15 @@ define transform-host-o-to-executable-inner
 $(hide) $(PRIVATE_CXX) \
         -Wl,-rpath,@loader_path/../lib \
         -o $@ \
-        $(PRE_LION_DYNAMIC_LINKER_OPTIONS) -headerpad_max_install_names \
         $(HOST_GLOBAL_LD_DIRS) \
         $(HOST_GLOBAL_LDFLAGS) \
         $(call normalize-host-libraries,$(PRIVATE_ALL_SHARED_LIBRARIES)) \
         $(PRIVATE_ALL_OBJECTS) \
         $(call normalize-host-libraries,$(PRIVATE_ALL_WHOLE_STATIC_LIBRARIES)) \
         $(call normalize-host-libraries,$(PRIVATE_ALL_STATIC_LIBRARIES)) \
+	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
+	   $(PRIVATE_HOST_GLOBAL_LDFLAGS) \
+	) \
         $(PRIVATE_LDFLAGS) \
         $(PRIVATE_LDLIBS) \
         $(HOST_LIBGCC)
