@@ -110,10 +110,11 @@ TARGET_GLOBAL_CFLAGS += -Wno-psabi
 
 # TODO - temporarily remove "-Wl,-z,relro -Wl,-z,now" as they cause segmentation fault on the
 # v8 foundation model.
+# STOPSHIP: removed -Wl,--fatal-warnings, gcc 4.8 is sometimes emitting non-PIC
+# code
 TARGET_GLOBAL_LDFLAGS += \
 			-Wl,-z,noexecstack \
 			-Wl,--warn-shared-textrel \
-			-Wl,--fatal-warnings \
 			-Wl,-maarch64linux \
 			$(arch_variant_ldflags)
 
