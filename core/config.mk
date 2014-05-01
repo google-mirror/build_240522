@@ -241,7 +241,11 @@ endif
 # is specified by the board configuration, we use that. If not, we
 # build a list out of the TARGET_CPU_ABIs specified by the config.
 ifeq (,$(TARGET_CPU_ABI_LIST))
-  TARGET_CPU_ABI_LIST := $(TARGET_CPU_ABI) $(TARGET_CPU_ABI2) $(TARGET_2ND_CPU_ABI) $(TARGET_2ND_CPU_ABI2)
+  ifeq ($(TARGET_IS_64_BIT)|$(TARGET_PREFER_32_BIT_APPS),true|true)
+    TARGET_CPU_ABI_LIST := $(TARGET_2ND_CPU_ABI) $(TARGET_2ND_CPU_ABI2) $(TARGET_CPU_ABI) $(TARGET_CPU_ABI2)
+  else
+    TARGET_CPU_ABI_LIST := $(TARGET_CPU_ABI) $(TARGET_CPU_ABI2) $(TARGET_2ND_CPU_ABI) $(TARGET_2ND_CPU_ABI2)
+  endif
 endif
 
 # "ro.product.cpu.abilist32" and "ro.product.cpu.abilist64" are
