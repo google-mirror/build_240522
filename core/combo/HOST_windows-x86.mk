@@ -28,14 +28,15 @@ ifneq ($(strip $(USE_MINGW)),)
 HOST_ACP_UNAVAILABLE := true
 TOOLS_EXE_SUFFIX :=
 HOST_GLOBAL_CFLAGS += -DUSE_MINGW
+TOOLS_PREFIX := $(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/bin/x86_64-w64-mingw32-
+HOST_C_INCLUDES += $(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/include
+HOST_GLOBAL_LD_DIRS += -L$(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/lib
 ifneq ($(strip $(BUILD_HOST_64bit)),)
-TOOLS_PREFIX := /usr/bin/amd64-mingw32msvc-
-HOST_C_INCLUDES += /usr/lib/gcc/amd64-mingw32msvc/4.4.2/include
-HOST_GLOBAL_LD_DIRS += -L/usr/amd64-mingw32msvc/lib
+HOST_GLOBAL_CFLAGS  += -m64
+HOST_GLOBAL_LDFLAGS += -m64
 else
-TOOLS_PREFIX := /usr/bin/i586-mingw32msvc-
-HOST_C_INCLUDES += /usr/lib/gcc/i586-mingw32msvc/3.4.4/include
-HOST_GLOBAL_LD_DIRS += -L/usr/i586-mingw32msvc/lib
+HOST_GLOBAL_CFLAGS  += -m32
+HOST_GLOBAL_LDFLAGS += -m32
 endif # BUILD_HOST_64bit
 endif # USE_MINGW
 endif # Linux
