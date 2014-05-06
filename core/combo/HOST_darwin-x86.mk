@@ -164,3 +164,8 @@ endef
 # gcc location for clang; to be updated when clang is updated
 # HOST_TOOLCHAIN_ROOT is a Darwin-specific define
 HOST_TOOLCHAIN_FOR_CLANG := $(HOST_TOOLCHAIN_ROOT)
+
+# RM(2014-05-05) temporarily disable emulator build
+# (ongoing breakage with emulator-64 on darwin, being worked
+#  upon but we need the rest of the build to work in between.)
+BUILD_EMULATOR=false
