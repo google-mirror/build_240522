@@ -18,15 +18,16 @@
 # emulator-related modules to PRODUCT_PACKAGES.
 #
 
+
+ifneq ($(HOST_OS),darwin)
+$(warning ######### emulator-64 temporarily deactivated for $(HOST_OS) ########)
+
 # Host modules
 PRODUCT_PACKAGES += \
     emulator \
     emulator-x86 \
     emulator-arm \
     emulator-mips \
-    emulator64-x86 \
-    emulator64-arm \
-    emulator64-mips \
     libOpenglRender \
     libGLES_CM_translator \
     libGLES_V2_translator \
@@ -35,6 +36,11 @@ PRODUCT_PACKAGES += \
     lib64GLES_CM_translator \
     lib64GLES_V2_translator \
     lib64EGL_translator
+
+PRODUCT_PACKAGES += \
+    emulator64-x86 \
+    emulator64-arm \
+    emulator64-mips
 
 # Device modules
 PRODUCT_PACKAGES += \
@@ -62,3 +68,6 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/init.goldfish.rc:root/init.goldfish.rc \
     device/generic/goldfish/init.goldfish.sh:system/etc/init.goldfish.sh \
     device/generic/goldfish/ueventd.goldfish.rc:root/ueventd.goldfish.rc
+
+endif
+
