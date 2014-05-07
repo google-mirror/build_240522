@@ -14,8 +14,14 @@ CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++$(BUILD_EXECUTABLE_SUFFIX)
 LLVM_AS := $(LLVM_PREBUILTS_PATH)/llvm-as$(BUILD_EXECUTABLE_SUFFIX)
 LLVM_LINK := $(LLVM_PREBUILTS_PATH)/llvm-link$(BUILD_EXECUTABLE_SUFFIX)
 
+ifneq ($(HOST_OS),windows)
 CLANG_TBLGEN := $(HOST_OUT_EXECUTABLES)/clang-tblgen$(BUILD_EXECUTABLE_SUFFIX)
 TBLGEN := $(HOST_OUT_EXECUTABLES)/tblgen$(BUILD_EXECUTABLE_SUFFIX)
+else
+# Use linux-x86's clang-tblgen and tblgen built previously in sdk-win_sdk
+CLANG_TBLGEN := $(subst windows-x86,linux-x86,$(HOST_OUT_EXECUTABLES))/clang-tblgen
+TBLGEN := $(subst windows-x86,linux-x86,$(HOST_OUT_EXECUTABLES))/tblgen
+endif
 
 
 # Clang flags for all host or target rules

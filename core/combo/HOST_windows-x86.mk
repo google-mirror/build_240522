@@ -29,8 +29,7 @@ HOST_ACP_UNAVAILABLE := true
 TOOLS_EXE_SUFFIX :=
 HOST_GLOBAL_CFLAGS += -DUSE_MINGW
 TOOLS_PREFIX := $(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/bin/x86_64-w64-mingw32-
-HOST_C_INCLUDES += $(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/include
-HOST_GLOBAL_LD_DIRS += -L$(TOPDIR)prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/lib
+HOST_TOOLCHAIN_FOR_CLANG := prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8
 ifneq ($(strip $(BUILD_HOST_64bit)),)
 HOST_GLOBAL_CFLAGS  += -m64
 HOST_GLOBAL_LDFLAGS += -m64
@@ -43,7 +42,7 @@ endif # Linux
 
 # Workaround differences in inttypes.h between host and target.
 # See bug 12708004.
-HOST_GLOBAL_CFLAGS += -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS
+HOST_GLOBAL_CFLAGS += -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS -D__USE_MINGW_ANSI_STDIO
 
 HOST_CC := $(TOOLS_PREFIX)gcc$(TOOLS_EXE_SUFFIX)
 HOST_CXX := $(TOOLS_PREFIX)g++$(TOOLS_EXE_SUFFIX)
