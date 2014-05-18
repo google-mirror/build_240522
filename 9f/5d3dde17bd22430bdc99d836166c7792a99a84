@@ -1,0 +1,8 @@
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+1: David Turner <digit@android.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Submitted-by: Ji-Hwan Lee <jihwan@google.com>
+Submitted-at: Sun, 18 May 2014 06:39:50 +0000
+Reviewed-on: https://android-review.googlesource.com/94637
+Project: platform/build
+Branch: refs/heads/master
