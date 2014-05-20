@@ -190,7 +190,7 @@ function setpaths()
         export ANDROID_EMULATOR_PREBUILTS
     fi
 
-    export PATH=$ANDROID_BUILD_PATHS$PATH
+    export PATH=$ANDROID_BUILD_PATHS:$PATH
 
     unset ANDROID_JAVA_TOOLCHAIN
     unset ANDROID_PRE_BUILD_PATHS
