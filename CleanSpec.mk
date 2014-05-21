@@ -220,6 +220,11 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
 # Adding dalvik.vm.dex2oat-flags to eng builds
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
 
+# Removing STOPSHIP comment about hardcoding TARGET_PREFER_32_BIT_APPS
+# and switching the x86 emulator over to a 64 bit primary zygote.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/default.prop)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
