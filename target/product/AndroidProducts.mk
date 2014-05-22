@@ -63,5 +63,10 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/sdk.mk \
     $(LOCAL_DIR)/sdk_x86.mk \
     $(LOCAL_DIR)/sdk_mips.mk \
-    $(LOCAL_DIR)/large_emu_hw.mk
+    $(LOCAL_DIR)/large_emu_hw.mk \
+    $(LOCAL_DIR)/qemu_arm.mk \
+    $(LOCAL_DIR)/qemu_x86.mk \
+    $(LOCAL_DIR)/qemu_mips.mk \
+    $(LOCAL_DIR)/qemu_x86_64.mk \
+    $(LOCAL_DIR)/qemu_arm64.mk
 endif
