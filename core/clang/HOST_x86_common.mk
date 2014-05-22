@@ -18,10 +18,15 @@ ifneq ($(strip $($(clang_2nd_arch_prefix)HOST_IS_64_BIT)),)
 CLANG_CONFIG_x86_LINUX_HOST_EXTRA_CPPFLAGS := \
   --gcc-toolchain=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG) \
   --sysroot=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/sysroot \
+  -no-integrated-as
+
+ifeq ($(strip $(filter -nostdinc++,$(LOCAL_CPPFLAGS))),)
+CLANG_CONFIG_x86_LINUX_HOST_EXTRA_CPPFLAGS += \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6 \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6/x86_64-linux \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6/backward \
-  -no-integrated-as
+
+endif
 
 CLANG_CONFIG_x86_LINUX_HOST_EXTRA_LDFLAGS := \
   --gcc-toolchain=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG) \
@@ -35,10 +40,15 @@ else
 CLANG_CONFIG_x86_LINUX_HOST_EXTRA_CPPFLAGS := \
   --gcc-toolchain=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG) \
   --sysroot=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/sysroot \
+  -no-integrated-as
+
+ifeq ($(strip $(filter -nostdinc++,$(LOCAL_CPPFLAGS))),)
+CLANG_CONFIG_x86_LINUX_HOST_EXTRA_CPPFLAGS += \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6 \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6/x86_64-linux/32 \
   -isystem $($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-linux/include/c++/4.6/backward \
-  -no-integrated-as
+
+endif
 
 CLANG_CONFIG_x86_LINUX_HOST_EXTRA_LDFLAGS := \
   --gcc-toolchain=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG) \
