@@ -1180,19 +1180,23 @@ define _extract-and-include-single-target-whole-static-lib
 $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;\
     rm -rf $$ldir; \
     mkdir -p $$ldir; \
-    filelist=; \
-    for f in `$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) t $(1)`; do \
-        $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) p $(1) $$f > $$ldir/$$f; \
-        filelist="$$filelist $$ldir/$$f"; \
+    cd $$ldir; \
+    for f in `$$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) t $$ANDROID_BUILD_TOP/$(1) | sort | uniq`; do \
+        i=0; \
+        for ff in `$$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) t $$ANDROID_BUILD_TOP/$(1) $$f`; do \
+            i=$$(($$i + 1)); \
+            $$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) xN $$i $$ANDROID_BUILD_TOP/$(1) $$f; \
+            $$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) \
+                $(PRIVATE_ARFLAGS) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) $$ANDROID_BUILD_TOP/$@ $$f; \
+        done ; \
     done ; \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) \
-        $(PRIVATE_ARFLAGS) $@ $$filelist
+    cd $$ANDROID_BUILD_TOP ;
 
 endef
 
 define extract-and-include-target-whole-static-libs
 $(foreach lib,$(PRIVATE_ALL_WHOLE_STATIC_LIBRARIES), \
-    $(call _extract-and-include-single-target-whole-static-lib, $(lib)))
+    $(call _extract-and-include-single-target-whole-static-lib,$(lib)))
 endef
 
 # Explicitly delete the archive first so that ar doesn't
@@ -1217,19 +1221,23 @@ define _extract-and-include-single-host-whole-static-lib
 $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;\
     rm -rf $$ldir; \
     mkdir -p $$ldir; \
-    filelist=; \
-    for f in `$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) t $(1) | \grep '\.o$$'`; do \
-        $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) p $(1) $$f > $$ldir/$$f; \
-        filelist="$$filelist $$ldir/$$f"; \
+    cd $$ldir; \
+    for f in `$$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) t $$ANDROID_BUILD_TOP/$(1) | \grep '\.o$$' | sort | uniq`; do \
+        i=0; \
+        for ff in `$$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) t $$ANDROID_BUILD_TOP/$(1) $$f`; do \
+            i=$$(($$i + 1)); \
+            $$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) xN $$i $$ANDROID_BUILD_TOP/$(1) $$f; \
+            $$ANDROID_BUILD_TOP/$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) \
+                $(PRIVATE_ARFLAGS) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_ARFLAGS) $$ANDROID_BUILD_TOP/$@ $$f; \
+        done ; \
     done ; \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_ARFLAGS) \
-        $(PRIVATE_ARFLAGS) $@ $$filelist
+    cd $$ANDROID_BUILD_TOP ;
 
 endef
 
 define extract-and-include-host-whole-static-libs
 $(foreach lib,$(PRIVATE_ALL_WHOLE_STATIC_LIBRARIES), \
-    $(call _extract-and-include-single-host-whole-static-lib, $(lib)))
+    $(call _extract-and-include-single-host-whole-static-lib,$(lib)))
 endef
 
 # Explicitly delete the archive first so that ar doesn't
