@@ -1,5 +1,7 @@
 ## Clang configurations.
 
+FORCE_BUILD_LLVM_COMPONENTS := true
+
 # WITHOUT_CLANG covers both HOST and TARGET
 ifeq ($(WITHOUT_CLANG),true)
 WITHOUT_TARGET_CLANG := true
@@ -14,8 +16,14 @@ CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++$(BUILD_EXECUTABLE_SUFFIX)
 LLVM_AS := $(LLVM_PREBUILTS_PATH)/llvm-as$(BUILD_EXECUTABLE_SUFFIX)
 LLVM_LINK := $(LLVM_PREBUILTS_PATH)/llvm-link$(BUILD_EXECUTABLE_SUFFIX)
 
+ifneq ($(HOST_OS),windows)
 CLANG_TBLGEN := $(HOST_OUT_EXECUTABLES)/clang-tblgen$(BUILD_EXECUTABLE_SUFFIX)
 LLVM_TBLGEN := $(HOST_OUT_EXECUTABLES)/llvm-tblgen$(BUILD_EXECUTABLE_SUFFIX)
+else
+# Use linux-x86's clang-tblgen and tblgen built previously in sdk-win_sdk
+CLANG_TBLGEN := $(subst windows-x86,linux-x86,$(HOST_OUT_EXECUTABLES))/clang-tblgen
+LLVM_TBLGEN := $(subst windows-x86,linux-x86,$(HOST_OUT_EXECUTABLES))/llvm-tblgen
+endif
 
 
 # Clang flags for all host or target rules
