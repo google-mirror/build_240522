@@ -958,6 +958,8 @@ function is64bit()
                    | cut -d'/' -f4`
 
         local OUT_EXE_SYMBOLS=$(get_abs_build_var TARGET_OUT_EXECUTABLES_UNSTRIPPED)
+
+        # This is one of two places the /system/bin removal will affect
         local IS64BIT=`file $OUT_EXE_SYMBOLS/$EXE | grep "64-bit"`
         if [ "$IS64BIT" != "" ]; then
             echo "64"
@@ -978,6 +980,8 @@ function gdbclient()
    local OUT_SYMBOLS=$(get_abs_build_var TARGET_OUT_UNSTRIPPED)
    local OUT_SO_SYMBOLS=$(get_abs_build_var TARGET_OUT_SHARED_LIBRARIES_UNSTRIPPED)
    local OUT_VENDOR_SO_SYMBOLS=$(get_abs_build_var TARGET_OUT_VENDOR_SHARED_LIBRARIES_UNSTRIPPED)
+
+   # This is the other
    local OUT_EXE_SYMBOLS=$(get_abs_build_var TARGET_OUT_EXECUTABLES_UNSTRIPPED)
    local PREBUILTS=$(get_abs_build_var ANDROID_PREBUILTS)
    local ARCH=$(get_build_var TARGET_ARCH)
@@ -1033,7 +1037,7 @@ function gdbclient()
        else
                echo ""
                echo "If you haven't done so already, do this first on the device:"
-               echo "    gdbserver $PORT /system/bin/$EXE"
+               echo "    gdbserver /system/bin/$PORT $EXE"
                    echo " or"
                echo "    gdbserver $PORT --attach <PID>"
                echo ""
