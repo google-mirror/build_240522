@@ -1033,7 +1033,7 @@ function gdbclient()
        else
                echo ""
                echo "If you haven't done so already, do this first on the device:"
-               echo "    gdbserver $PORT /system/bin/$EXE"
+               echo "    gdbserver $PORT $EXE"
                    echo " or"
                echo "    gdbserver $PORT --attach <PID>"
                echo ""
