@@ -1,0 +1,7 @@
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Submitted-by: Dave Allison <dallison@google.com>
+Submitted-at: Thu, 29 May 2014 19:51:50 +0000
+Reviewed-on: https://android-review.googlesource.com/95115
+Project: platform/build
+Branch: refs/heads/master
