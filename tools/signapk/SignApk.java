@@ -108,6 +108,8 @@ class SignApk {
     private static final String CERT_SIG_MULTI_NAME = "META-INF/CERT%d.%s";
 
     private static final String OTACERT_NAME = "META-INF/com/android/otacert";
+    private static final String PASSWORD_FROM_FILE_PATTERN = "^\\[\\[\\[\\s*(.*?)\\s*\\]\\]\\]\\s*(\\S+)$";
+    private static final String PASSWORD_FROM_FILE_ENV_NAME = "SIGNAPK_ANDROID_PW_FILE";
 
     private static Provider sBouncyCastleProvider;
 
@@ -166,20 +168,61 @@ class SignApk {
     }
 
     /**
-     * Reads the password from stdin and returns it as a string.
+     * Reads the password from file defined by environment variable
+     * SignApk.PASSWORD_FROM_FILE_ENV_NAME (if defined) or from stdin and
+     * returns it as a string.
      *
      * @param keyFile The file containing the private key.  Used to prompt the user.
      */
     private static String readPassword(File keyFile) {
-        // TODO: use Console.readPassword() when it's available.
-        System.out.print("Enter password for " + keyFile + " (password will not be hidden): ");
-        System.out.flush();
-        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            return stdin.readLine();
-        } catch (IOException ex) {
-            return null;
+        String keyFilePathSuffix = keyFile.getPath();
+        String pwFilePath = System.getenv(SignApk.PASSWORD_FROM_FILE_ENV_NAME);
+        String password = null;
+        if (pwFilePath != null) {
+            String proposedkeyFilePath = null;
+            FileInputStream fis = null;
+            BufferedReader br = null;
+            try {
+                fis = new FileInputStream(pwFilePath);
+                br = new BufferedReader(new InputStreamReader(fis));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    proposedkeyFilePath = line.replaceAll(SignApk.PASSWORD_FROM_FILE_PATTERN, "$2");
+                    if (proposedkeyFilePath == null || ! keyFilePathSuffix.equals(proposedkeyFilePath + ".pk8") || line.indexOf('#') == 0) {
+                        continue;
+                    }
+                    password = line.replaceAll(SignApk.PASSWORD_FROM_FILE_PATTERN, "$1");
+                    if (password == null) {
+                        password = "";
+                    }
+                    return password;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            } finally {
+                try {
+                    if (br != null) {
+                        br.close();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.exit(1);
+                }
+            }
         }
+        if (password == null) {
+            // TODO: use Console.readPassword() when it's available.
+            System.out.print("Enter password for " + keyFile + " (password will not be hidden): ");
+            System.out.flush();
+            BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                return stdin.readLine();
+            } catch (IOException ex) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
@@ -833,7 +876,10 @@ class SignApk {
                            "[-providerClass <className>] " +
                            "publickey.x509[.pem] privatekey.pk8 " +
                            "[publickey2.x509[.pem] privatekey2.pk8 ...] " +
-                           "input.jar output.jar");
+                           "input.jar output.jar\n" +
+                           "Uses also environment variable " + SignApk.PASSWORD_FROM_FILE_ENV_NAME +
+                           "for reading password (pattern for getting password is '" +
+                           SignApk.PASSWORD_FROM_FILE_PATTERN + "', there can be more passwords in file)");
         System.exit(2);
     }
 
