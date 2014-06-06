@@ -744,6 +744,22 @@ endif
 asm_objects := $(asm_objects_S) $(asm_objects_s)
 
 
+# .asm for x86 needs to be compiled with yasm.
+ifeq (x86,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
+asm_sources_asm := $(filter %.asm,$(my_src_files))
+ifneq ($(strip $(asm_objects_asm)),)
+asm_objects_asm := $(addprefix $(intermediates)/,$(asm_sources_asm:.asm=.o))
+$(asm_objects_asm): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.asm \
+    $(LOCAL_ADDITIONAL_DEPENDENCIES)
+	$(transform-$(PRIVATE_HOST)s-to-o)
+-include $(asm_objects_asm:%.o=%.P)
+
+asm_objects += $(asm_objects_asm)
+# Override the PRIVATE_CC with YASM
+$(asm_objects_asm): PRIVATE_CC := $(YASM)
+endif
+endif
+
 ####################################################
 ## Import includes
 ####################################################
