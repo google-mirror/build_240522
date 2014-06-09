@@ -164,7 +164,7 @@ endif # unbundled_goals
 
 # Default to building dalvikvm on hosts that support it...
 ifeq ($(HOST_OS),linux)
-ifneq ($(HOST_ARCH),x86_64)
+ifeq ($(HOST_PREFER_32_BIT),true)
 # ... or if the if the option is already set
 ifeq ($(WITH_HOST_DALVIK),)
   WITH_HOST_DALVIK := true
