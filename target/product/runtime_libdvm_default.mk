@@ -17,5 +17,3 @@
 # Set Dalvik as the default runtime environment
 
 DALVIK_VM_LIB := libdvm.so
-
-include $(SRC_TARGET_DIR)/product/runtime_libdvm.mk
