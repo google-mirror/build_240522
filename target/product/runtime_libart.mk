@@ -23,9 +23,7 @@ PRODUCT_PACKAGES += \
         oatdump
 
 # host-only dependencies
-ifeq ($(WITH_HOST_DALVIK),true)
-    PRODUCT_PACKAGES += \
-        core-libart-hostdex
-endif
+PRODUCT_PACKAGES += \
+    core-libart-hostdex
 
 include $(SRC_TARGET_DIR)/product/runtime_common.mk
