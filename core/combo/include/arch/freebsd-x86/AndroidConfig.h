@@ -257,11 +257,6 @@
 #define MINCORE_POINTER_TYPE char *
 
 /*
- * Do we have the sigaction flag SA_NOCLDWAIT?
- */
-#define HAVE_SA_NOCLDWAIT
-
-/*
  * Define if we include <sys/mount.h> for statfs()
  */
 #define INCLUDE_SYS_MOUNT_FOR_STATFS 1
