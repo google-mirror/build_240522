@@ -62,14 +62,16 @@ def validate(prop):
       if dev_build:
         sys.stderr.write("warning: %s exceeds %d bytes: " %
                          (key, PROP_VALUE_MAX))
-        sys.stderr.write("%s (%d)\n" % (value, len(value)))
+        sys.stderr.write("%s (%d).\n" % (value, len(value)))
         sys.stderr.write("warning: This will cause the %s " % key)
-        sys.stderr.write("property return as empty at runtime\n")
+        sys.stderr.write("property return as empty at runtime.\n")
+        sys.stderr.write("warning: Value truncated.\n")
+        prop.put(key, value[0:PROP_VALUE_MAX])
       else:
         check_pass = False
         sys.stderr.write("error: %s cannot exceed %d bytes: " %
                          (key, PROP_VALUE_MAX))
-        sys.stderr.write("%s (%d)\n" % (value, len(value)))
+        sys.stderr.write("%s (%d).\n" % (value, len(value)))
   return check_pass
 
 class PropFile:
