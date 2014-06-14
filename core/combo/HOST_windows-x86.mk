@@ -33,9 +33,6 @@ $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += --sysroot=prebuilts/gcc/linux-x86/
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -m32
 $(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += -m32
 TOOLS_PREFIX := prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/bin/x86_64-w64-mingw32-
-$(combo_2nd_arch_prefix)HOST_C_INCLUDES += prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/include
-$(combo_2nd_arch_prefix)HOST_C_INCLUDES += prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/lib/gcc/x86_64-w64-mingw32/4.8.2/include
-$(combo_2nd_arch_prefix)HOST_GLOBAL_LD_DIRS += -Lprebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/lib32
 endif # USE_MINGW
 endif # Linux
 
