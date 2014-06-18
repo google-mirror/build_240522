@@ -81,6 +81,20 @@ else
     $(info Clean step: $(INTERNAL_CLEAN_STEP.$(step))) \
     $(shell $(INTERNAL_CLEAN_STEP.$(step))) \
    )
+  # Rewrite the clean step for the second arch.
+  ifdef TARGET_2ND_ARCH
+  $(foreach step,$(steps), \
+    $(eval clean_cmd := $(patsubst $(TARGET_OUT_INTERMEDIATES)/%,$($(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATES)/%,$(INTERNAL_CLEAN_STEP.$(step))))\
+    $(eval orign_cmd_1word := $(subst $(space),@,$(INTERNAL_CLEAN_STEP.$(step))))\
+    $(eval clean_cmd_1word := $(subst $(space),@,$(clean_cmd)))\
+    $(if $(filter $(clean_cmd_1word),$(orign_cmd_1word)),,\
+      $(info Clean step: $(clean_cmd)) \
+      $(shell $(clean_cmd)) \
+    ))
+  endif
+  clean_cmd :=
+  orign_cmd_1word :=
+  clean_cmd_1word :=
   steps :=
 endif
 CURRENT_CLEAN_BUILD_VERSION :=
