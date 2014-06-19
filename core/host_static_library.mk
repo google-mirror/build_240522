@@ -1,6 +1,9 @@
 my_prefix := HOST_
 include $(BUILD_SYSTEM)/multilib.mk
 
+# Stash intermediate targets for both 1st and 2nd arch
+local_all_intermediate_targets :=
+
 ifndef LOCAL_MODULE_HOST_ARCH
 ifndef my_module_multilib
 ifeq ($(HOST_PREFER_32_BIT),true)
@@ -17,6 +20,7 @@ include $(BUILD_SYSTEM)/module_arch_supported.mk
 
 ifeq ($(my_module_arch_supported),true)
 include $(BUILD_SYSTEM)/host_static_library_internal.mk
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 endif
 
 ifdef HOST_2ND_ARCH
@@ -30,6 +34,7 @@ LOCAL_INSTALLED_MODULE :=
 LOCAL_INTERMEDIATE_TARGETS :=
 
 include $(BUILD_SYSTEM)/host_static_library_internal.mk
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 endif
 LOCAL_2ND_ARCH_VAR_PREFIX :=
 endif  # HOST_2ND_ARCH

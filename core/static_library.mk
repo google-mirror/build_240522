@@ -1,6 +1,9 @@
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
+# Stash intermediate targets for both 1st and 2nd arch
+local_all_intermediate_targets :=
+
 ifndef my_module_multilib
 # libraries default to building for both architecturess
 my_module_multilib := both
@@ -11,6 +14,7 @@ include $(BUILD_SYSTEM)/module_arch_supported.mk
 
 ifeq ($(my_module_arch_supported),true)
 include $(BUILD_SYSTEM)/static_library_internal.mk
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 endif
 
 ifdef TARGET_2ND_ARCH
@@ -29,7 +33,7 @@ LOCAL_INSTALLED_MODULE_STEM :=
 LOCAL_INTERMEDIATE_TARGETS :=
 
 include $(BUILD_SYSTEM)/static_library_internal.mk
-
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 endif
 
 LOCAL_2ND_ARCH_VAR_PREFIX :=

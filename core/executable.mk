@@ -9,6 +9,9 @@
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
+# Stash intermediate targets for both 1st and 2nd arch
+local_all_intermediate_targets :=
+
 ifeq ($(my_module_multilib),both)
 ifeq ($(LOCAL_MODULE_PATH_32)$(LOCAL_MODULE_STEM_32),)
 $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_32 or LOCAL_MODULE_PATH_32 is required for LOCAL_MULTILIB := both for module $(LOCAL_MODULE))
@@ -36,6 +39,7 @@ include $(BUILD_SYSTEM)/module_arch_supported.mk
 ifeq ($(my_module_arch_supported),true)
 # first arch is supported
 include $(BUILD_SYSTEM)/executable_internal.mk
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 ifneq ($(my_module_multilib),both)
 my_skip_non_preferred_arch := true
 endif
@@ -64,6 +68,7 @@ LOCAL_BUILT_MODULE_STEM :=
 LOCAL_INSTALLED_MODULE_STEM :=
 LOCAL_INTERMEDIATE_TARGETS :=
 include $(BUILD_SYSTEM)/executable_internal.mk
+local_all_intermediate_targets += $(LOCAL_INTERMEDIATE_TARGETS)
 endif
 endif # TARGET_2ND_ARCH
 endif # !my_skip_non_preferred_arch || LOCAL_MULTILIB
