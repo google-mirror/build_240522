@@ -932,7 +932,8 @@ function stacks()
             adb shell cat $TMP
         else
             # Dump stacks of native process
-            adb shell debuggerd -b $PID
+            local USE64BIT="$(is64bit $PID)"
+            adb shell debuggerd$USE64BIT -b $PID
         fi
     fi
 }
@@ -956,10 +957,7 @@ function is64bit()
 {
     local PID="$1"
     if [ "$PID" ] ; then
-        local EXE=`adb shell readlink /proc/$PID/exe`
-        local EXE_DIR=`get_abs_build_var PRODUCT_OUT`
-        local IS64BIT=`file "$EXE_DIR$EXE" | grep "64-bit"`
-        if [ "$IS64BIT" != "" ]; then
+        if [[ "$(adb shell cat /proc/$PID/exe | xxd -l 1 -s 4 -ps)" -eq "02" ]] ; then
             echo "64"
         else
             echo ""
