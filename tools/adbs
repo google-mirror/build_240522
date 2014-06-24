@@ -15,9 +15,13 @@
 # limitations under the License.
 
 import os
+import os.path
 import re
 import string
 import sys
+sys.path.insert(0, os.path.dirname(__file__) + "/../../development/scripts")
+import stack_core
+import symbol
 
 ###############################################################################
 # match "#00 pc 0003f52e  /system/lib/libdvm.so" for example
@@ -197,25 +201,10 @@ if __name__ == '__main__':
 
   # invoke the adb command and filter its output
   stream = os.popen(adb_cmd)
-  while (True):
-    line = stream.readline()
 
-    # EOF reached
-    if (line == ''):
-      break
-
-    # remove the trailing \n
-    line = line.strip()
-
-    # see if this is a stack trace line
-    match = trace_line.match(line)
-    if (match):
-      groups = match.groups()
-      # translate raw address into symbols
-      SymbolTranslation(groups)
-    else:
-      print line
-      sys.stdout.flush()
+  lines = stream.readlines()
+  tracer = stack_core.TraceConverter(lines)
+  tracer.ConvertTrace(lines)
 
   # adb itself aborts
   stream.close()
