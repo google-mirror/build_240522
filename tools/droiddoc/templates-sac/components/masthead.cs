@@ -4,7 +4,9 @@
         <div class="wrap" id="header-wrap">
           <div class="col-3 logo">
           <a href="<?cs var:toroot ?>index.html">
-            <img src="<?cs var:toroot ?>assets/images/dac_logo.png" width="123" height="25" alt="Android Developers" />
+            <img src="<?cs var:toroot ?>assets/images/dac_logo.png"
+                srcset="<?cs var:toroot ?>assets/images/dac_logo@2x.png 2x"
+                width="123" height="25" alt="Android Developers" />
           </a>
           <div class="btn-quicknav" id="btn-quicknav">
           	<a href="#" class="arrow-inactive">Quicknav</a>
@@ -253,7 +255,9 @@ onkeyup="return search_changed(event, false, '<?cs var:toroot ?>')" />
         <div class="wrap" id="header-wrap">
           <div class="col-3 saclogo">
           <a href="<?cs var:toroot ?>index.html">
-            <img src="<?cs var:toroot ?>assets/images/sac_logo.png" width="114" height="16" alt="Android Developers" />
+            <img src="<?cs var:toroot ?>assets/images/sac_logo.png"
+                srcset="<?cs var:toroot ?>assets/images/sac_logo@2x.png 2x"
+                width="123" height="25" alt="Android Developers" />
           </a>
           </div>
             <ul class="nav-x col-9">
