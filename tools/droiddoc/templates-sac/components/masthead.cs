@@ -253,7 +253,7 @@ onkeyup="return search_changed(event, false, '<?cs var:toroot ?>')" />
         <div class="wrap" id="header-wrap">
           <div class="col-3 saclogo">
           <a href="<?cs var:toroot ?>index.html">
-            <img src="<?cs var:toroot ?>assets/images/sac_logo.png" width="114" height="16" alt="Android Developers" />
+            <img src="<?cs var:toroot ?>assets/images/sac_logo.png" width="123" height="25" alt="Android Developers" />
           </a>
           </div>
             <ul class="nav-x col-9">
