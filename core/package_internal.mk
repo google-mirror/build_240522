@@ -78,6 +78,10 @@ ifeq ($(filter tests, $(LOCAL_MODULE_TAGS)),)
 LOCAL_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS) -z
 endif
 
+ifneq ($(filter en_XA, $(PRODUCT_LOCALES))$(filter ar_XB, $(PRODUCT_LOCALES)),)
+LOCAL_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS) --pseudo-localize
+endif
+
 ifeq (,$(LOCAL_ASSET_DIR))
 LOCAL_ASSET_DIR := $(LOCAL_PATH)/assets
 endif
