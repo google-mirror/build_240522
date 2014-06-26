@@ -41,7 +41,8 @@ PRODUCT_PACKAGES += \
     lights.goldfish \
     gps.goldfish \
     sensors.goldfish \
-    e2fsck
+    e2fsck \
+    logd
 
 
 PRODUCT_COPY_FILES += \
