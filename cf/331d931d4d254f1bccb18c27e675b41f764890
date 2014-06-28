@@ -1,0 +1,7 @@
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Ian Rogers <irogers@google.com>
+Submitted-by: Ian Rogers <irogers@google.com>
+Submitted-at: Sat, 28 Jun 2014 00:26:33 +0000
+Reviewed-on: https://android-review.googlesource.com/99388
+Project: platform/build
+Branch: refs/heads/master
