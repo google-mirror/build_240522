@@ -199,12 +199,14 @@ if __name__ == '__main__':
   # setup the symbols directory
   FindSymbolsDir()
 
+  # create tracer for line parsing
+  tracer = stack_core.TraceConverter()
+
   # invoke the adb command and filter its output
   stream = os.popen(adb_cmd)
-
-  lines = stream.readlines()
-  tracer = stack_core.TraceConverter(lines)
-  tracer.ConvertTrace(lines)
+  while (True):
+    line = stream.readline()
+    tracer.ProcessLine(line)
 
   # adb itself aborts
   stream.close()
