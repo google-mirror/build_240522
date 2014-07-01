@@ -15,9 +15,14 @@
 # limitations under the License.
 
 import os
+import os.path
 import re
 import string
 import sys
+
+sys.path.insert(0, os.path.dirname(__file__) + "/../../development/scripts")
+import stack_core
+import symbol
 
 ###############################################################################
 # match "#00 pc 0003f52e  /system/lib/libdvm.so" for example
@@ -160,31 +165,6 @@ def SetupToolsPath():
   objdump_cmd = prefix + "arm-linux-androideabi-objdump"
   cppfilt_cmd = prefix + "arm-linux-androideabi-c++filt"
 
-###############################################################################
-# look up the function and file/line number for a raw stack trace line
-# groups[0]: log tag
-# groups[1]: stack level
-# groups[2]: "pc"
-# groups[3]: code address
-# groups[4]: library name
-###############################################################################
-def SymbolTranslation(groups):
-  lib_name = groups[4]
-  code_addr = groups[3]
-  caller = CallObjdump(lib_name, code_addr)
-  func_line_pair = CallAddr2Line(lib_name, code_addr)
-
-  # If a callee is inlined to the caller, objdump will see the caller's
-  # address but addr2line will report the callee's address. So the printed
-  # format is desgined to be "caller<-callee  file:line"
-  if (func_line_pair[0] != caller):
-    print groups[0] + groups[1] + " " + caller + "<-" + \
-          '  '.join(func_line_pair[:]) + " "
-  else:
-    print groups[0] + groups[1] + " " + '  '.join(func_line_pair[:]) + " "
-
-###############################################################################
-
 if __name__ == '__main__':
   # pass the options to adb
   adb_cmd  = "adb " + ' '.join(sys.argv[1:])
@@ -195,27 +175,14 @@ if __name__ == '__main__':
   # setup the symbols directory
   FindSymbolsDir()
 
+  # create tracer for line parsing
+  tracer = stack_core.TraceConverter()
+
   # invoke the adb command and filter its output
   stream = os.popen(adb_cmd)
   while (True):
     line = stream.readline()
-
-    # EOF reached
-    if (line == ''):
-      break
-
-    # remove the trailing \n
-    line = line.strip()
-
-    # see if this is a stack trace line
-    match = trace_line.match(line)
-    if (match):
-      groups = match.groups()
-      # translate raw address into symbols
-      SymbolTranslation(groups)
-    else:
-      print line
-      sys.stdout.flush()
+    tracer.ProcessLine(line)
 
   # adb itself aborts
   stream.close()
