@@ -1,0 +1,8 @@
+Code-Review+2: Ying Wang <wangying@android.com>
+Code-Review+1: Andreas Gampe <agampe@google.com>
+Verified+1: Brian Carlstrom <bdc@google.com>
+Submitted-by: Brian Carlstrom <bdc@google.com>
+Submitted-at: Wed, 09 Jul 2014 04:07:43 +0000
+Reviewed-on: https://android-review.googlesource.com/100555
+Project: platform/build
+Branch: refs/heads/master
