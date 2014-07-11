@@ -244,6 +244,14 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/default.prop)
 # dalvik.vm.image-dex2oat-Xms, and dalvik.vm.image-dex2oat-Xmx
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/default.prop)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/default.prop)
+
+# Switching to jemalloc in libc/art for some platforms.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/STATIC_LIBRARIES/libc_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/STATIC_LIBRARIES/libart_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/STATIC_LIBRARIES/libartd_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libc_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libart_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libartd_*)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
