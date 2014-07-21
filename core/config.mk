@@ -18,6 +18,8 @@ endif
 empty :=
 space := $(empty) $(empty)
 comma := ,
+# Default package alignment
+DEFAULT_PACKAGE_ALIGNMENT := 4
 
 # Tell python not to spam the source tree with .pyc files.  This
 # only has an effect on python 2.6 and above.

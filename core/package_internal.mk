@@ -73,6 +73,10 @@ ifeq ($(LOCAL_MODULE_TAGS),)
 LOCAL_MODULE_TAGS := optional
 endif
 
+ifeq ($(LOCAL_PACKAGE_ALIGNMENT),)
+LOCAL_PACKAGE_ALIGNMENT := $(DEFAULT_PACKAGE_ALIGNMENT)
+endif
+
 ifeq ($(filter tests, $(LOCAL_MODULE_TAGS)),)
 # Force localization check if it's not tagged as tests.
 LOCAL_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS) -z
@@ -348,6 +352,8 @@ $(LOCAL_BUILT_MODULE): $(AAPT) | $(ZIPALIGN)
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
 # PRIVATE_JNI_SHARED_LIBRARIES_ABI is a list of ABI names.
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
+$(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES_ZIP_OPTIONS := $(LOCAL_JNI_SHARED_LIBRARIES_ZIP_OPTIONS)
+$(LOCAL_BUILT_MODULE): PRIVATE_PACKAGE_ALIGNMENT := $(LOCAL_PACKAGE_ALIGNMENT)
 ifneq ($(TARGET_BUILD_APPS),)
     # Include all resources for unbundled apps.
     LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
@@ -364,7 +370,7 @@ $(LOCAL_BUILT_MODULE): $(all_res_assets) $(jni_shared_libraries) $(full_android_
 	$(create-empty-package)
 	$(add-assets-to-package)
 ifneq ($(jni_shared_libraries),)
-	$(add-jni-shared-libs-to-package)
+	$(call add-jni-shared-libs-to-package,$(PRIVATE_JNI_SHARED_LIBRARIES_ZIP_OPTIONS))
 endif
 ifneq ($(full_classes_jar),)
 	$(add-dex-to-package)
@@ -380,7 +386,7 @@ ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 endif
 endif
 	@# Alignment must happen after all other zip operations.
-	$(align-package)
+	$(call align-package,$(PRIVATE_PACKAGE_ALIGNMENT))
 
 ###############################
 ## Rule to build the odex file
@@ -418,7 +424,7 @@ $(apk_jni_stripped) : $(LOCAL_BUILT_MODULE) | $(ZIPALIGN)
 	@rm -rf $(dir $@) && mkdir -p $(dir $@)
 	$(hide) cp $< $@
 	$(hide) zip -d $@ $(foreach f,$(PRIVATE_JNI_SHARED_LIBRARIES),\*/$(f))
-	$(call align-package)
+	$(call align-package,$(PRIVATE_PACKAGE_ALIGNMENT))
 
 $(call dist-for-goals, apps_only, $(apk_jni_stripped):$(dist_subdir)/$(LOCAL_PACKAGE_NAME).apk)
 
