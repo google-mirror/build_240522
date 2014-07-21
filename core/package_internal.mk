@@ -28,6 +28,7 @@
 # If this makefile is being read from within an inheritance,
 # use the new values.
 skip_definition:=
+jni_zip_options:=
 ifdef LOCAL_PACKAGE_OVERRIDES
   package_overridden := $(call set-inherited-package-variables)
   ifeq ($(strip $(package_overridden)),)
@@ -309,6 +310,10 @@ endif # full_classes_jar
 
 include $(BUILD_SYSTEM)/install_jni_libs.mk
 
+ifeq ($(jni_shared_libraries_compress),false)
+  jni_zip_options := -0
+endif
+
 # Pick a key to sign the package with.  If this package hasn't specified
 # an explicit certificate, use the default.
 # Secure release builds will have their packages signed after the fact,
@@ -364,7 +369,7 @@ $(LOCAL_BUILT_MODULE): $(all_res_assets) $(jni_shared_libraries) $(full_android_
 	$(create-empty-package)
 	$(add-assets-to-package)
 ifneq ($(jni_shared_libraries),)
-	$(add-jni-shared-libs-to-package)
+	$(add-jni-shared-libs-to-package,jni_zip_options)
 endif
 ifneq ($(full_classes_jar),)
 	$(add-dex-to-package)

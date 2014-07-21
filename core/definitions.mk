@@ -1732,13 +1732,14 @@ $(hide) cp $(2) $(dir $@)lib/$(1)
 
 endef
 
+# $(1) zip options
 define add-jni-shared-libs-to-package
 $(hide) rm -rf $(dir $@)lib
 $(hide) mkdir -p $(addprefix $(dir $@)lib/,$(PRIVATE_JNI_SHARED_LIBRARIES_ABI))
 $(foreach abi,$(PRIVATE_JNI_SHARED_LIBRARIES_ABI),\
   $(call _add-jni-shared-libs-to-package-per-abi,$(abi),\
     $(patsubst $(abi):%,%,$(filter $(abi):%,$(PRIVATE_JNI_SHARED_LIBRARIES)))))
-$(hide) (cd $(dir $@) && zip -r $(notdir $@) lib)
+$(hide) (cd $(dir $@) && zip -r $(1) $(notdir $@) lib)
 $(hide) rm -rf $(dir $@)lib
 endef
 
