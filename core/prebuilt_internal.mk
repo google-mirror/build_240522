@@ -163,6 +163,7 @@ LOCAL_DEX_PREOPT := false
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 #######################################
 # Sign and align non-presigned .apks.
+$(built_module) : PRIVATE_PACKAGE_ALIGNMENT := $(DEFAULT_PACKAGE_ALIGNMENT)
 $(built_module) : $(my_prebuilt_src_file) | $(ACP) $(ZIPALIGN) $(SIGNAPK_JAR)
 	$(transform-prebuilt-to-target)
 ifdef extracted_jni_libs
