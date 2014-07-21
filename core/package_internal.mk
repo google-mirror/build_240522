@@ -28,6 +28,7 @@
 # If this makefile is being read from within an inheritance,
 # use the new values.
 skip_definition:=
+jni_zip_options:=
 ifdef LOCAL_PACKAGE_OVERRIDES
   package_overridden := $(call set-inherited-package-variables)
   ifeq ($(strip $(package_overridden)),)
@@ -71,6 +72,10 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := $(strip $(LOCAL_MODULE_TAGS))
 ifeq ($(LOCAL_MODULE_TAGS),)
 LOCAL_MODULE_TAGS := optional
+endif
+
+ifeq ($(LOCAL_PACKAGE_ALIGNMENT),)
+LOCAL_PACKAGE_ALIGNMENT := 4
 endif
 
 ifeq ($(filter tests, $(LOCAL_MODULE_TAGS)),)
@@ -309,6 +314,10 @@ endif # full_classes_jar
 
 include $(BUILD_SYSTEM)/install_jni_libs.mk
 
+ifeq ($(strip $(jni_shared_libraries_compress)),false)
+  jni_zip_options := -0
+endif
+
 # Pick a key to sign the package with.  If this package hasn't specified
 # an explicit certificate, use the default.
 # Secure release builds will have their packages signed after the fact,
@@ -348,6 +357,8 @@ $(LOCAL_BUILT_MODULE): $(AAPT) | $(ZIPALIGN)
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
 # PRIVATE_JNI_SHARED_LIBRARIES_ABI is a list of ABI names.
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
+$(LOCAL_BUILT_MODULE): PRIVATE_JNI_ZIP_OPTIONS := $(jni_zip_options)
+$(LOCAL_BUILT_MODULE): PRIVATE_PACKAGE_ALIGNMENT := $(LOCAL_PACKAGE_ALIGNMENT)
 ifneq ($(TARGET_BUILD_APPS),)
     # Include all resources for unbundled apps.
     LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
@@ -364,7 +375,7 @@ $(LOCAL_BUILT_MODULE): $(all_res_assets) $(jni_shared_libraries) $(full_android_
 	$(create-empty-package)
 	$(add-assets-to-package)
 ifneq ($(jni_shared_libraries),)
-	$(add-jni-shared-libs-to-package)
+	$(add-jni-shared-libs-to-package $(PRIVATE_JNI_ZIP_OPTIONS))
 endif
 ifneq ($(full_classes_jar),)
 	$(add-dex-to-package)
@@ -380,7 +391,7 @@ ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 endif
 endif
 	@# Alignment must happen after all other zip operations.
-	$(align-package)
+	$(align-package $(PRIVATE_PACKAGE_ALIGNMENT))
 
 ###############################
 ## Rule to build the odex file
@@ -418,7 +429,7 @@ $(apk_jni_stripped) : $(LOCAL_BUILT_MODULE) | $(ZIPALIGN)
 	@rm -rf $(dir $@) && mkdir -p $(dir $@)
 	$(hide) cp $< $@
 	$(hide) zip -d $@ $(foreach f,$(PRIVATE_JNI_SHARED_LIBRARIES),\*/$(f))
-	$(call align-package)
+	$(align-package $(PRIVATE_PACKAGE_ALIGNMENT))
 
 $(call dist-for-goals, apps_only, $(apk_jni_stripped):$(dist_subdir)/$(LOCAL_PACKAGE_NAME).apk)
 

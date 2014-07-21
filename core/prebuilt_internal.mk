@@ -163,6 +163,7 @@ LOCAL_DEX_PREOPT := false
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 #######################################
 # Sign and align non-presigned .apks.
+$(built_module) : PRIVATE_PACKAGE_ALIGNMENT := $(package_alignment)
 $(built_module) : $(my_prebuilt_src_file) | $(ACP) $(ZIPALIGN) $(SIGNAPK_JAR)
 	$(transform-prebuilt-to-target)
 ifdef extracted_jni_libs
@@ -176,7 +177,7 @@ ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 	$(call dexpreopt-remove-classes.dex,$@)
 endif
 endif
-	$(align-package)
+	$(align-package $(PRIVATE_PACKAGE_ALIGNMENT))
 
 ###############################
 ## Rule to build the odex file
