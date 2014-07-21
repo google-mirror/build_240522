@@ -10,12 +10,20 @@
 # Output variables:
 #   my_jni_shared_libraries, my_jni_shared_libraries_abi, if we are going to embed the libraries into the apk;
 #   my_extracted_jni_libs, if we extract jni libs from prebuilt apk.
+#   my_jni_shared_libraries_compress
 #
 
 my_jni_shared_libraries := \
     $(addprefix $($(my_2nd_arch_prefix)TARGET_OUT_INTERMEDIATE_LIBRARIES)/, \
       $(addsuffix .so, \
           $(LOCAL_JNI_SHARED_LIBRARIES)))
+
+# Compress shared libraries by default
+ifeq ($(LOCAL_JNI_SHARED_LIBRARIES_COMPRESS),false)
+my_jni_shared_libraries_compress := false
+else
+my_jni_shared_libraries_compress := true
+endif
 
 # App-specific lib path.
 my_app_lib_path :=  $($(my_2nd_arch_prefix)TARGET_OUT$(partition_tag)_SHARED_LIBRARIES)/$(basename $(my_installed_module_stem))

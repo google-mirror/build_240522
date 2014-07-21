@@ -25,6 +25,7 @@ endif
 
 jni_shared_libraries :=
 jni_shared_libraries_abis :=
+jni_shared_libraries_compress :=
 # jni_shared_libraries_with_abis is a list of <abi>:<path-to-the-built-jni-lib>
 jni_shared_libraries_with_abis :=
 extracted_jni_libs :=
@@ -49,6 +50,7 @@ endif
 include $(BUILD_SYSTEM)/install_jni_libs_internal.mk
 jni_shared_libraries += $(my_jni_shared_libraries)
 jni_shared_libraries_abis += $(my_jni_shared_libraries_abi)
+jni_shared_libraries_compress += $(my_jni_shared_libraries_compress)
 jni_shared_libraries_with_abis += $(addprefix $(my_jni_shared_libraries_abi):,\
     $(my_jni_shared_libraries))
 extracted_jni_libs += $(my_extracted_jni_libs)
@@ -81,6 +83,7 @@ endif
 include $(BUILD_SYSTEM)/install_jni_libs_internal.mk
 jni_shared_libraries += $(my_jni_shared_libraries)
 jni_shared_libraries_abis += $(my_jni_shared_libraries_abi)
+jni_shared_libraries_compress += $(my_jni_shared_libraries_compress)
 jni_shared_libraries_with_abis += $(addprefix $(my_jni_shared_libraries_abi):,\
     $(my_jni_shared_libraries))
 extracted_jni_libs += $(my_extracted_jni_libs)
