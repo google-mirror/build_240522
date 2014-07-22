@@ -61,7 +61,10 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment)
             return 1;
         }
 
-        if (pEntry->isCompressed()) {
+        // Do not align folders and compressed files.
+        // according to hexdump the right way to detect folders
+        // is to use uncompressed len.
+        if (pEntry->isCompressed() || pEntry->getUncompressedLen() == 0) {
             /* copy the entry without padding */
             //printf("--- %s: orig at %ld len=%ld (compressed)\n",
             //    pEntry->getFileName(), (long) pEntry->getFileOffset(),
@@ -161,6 +164,11 @@ static int verify(const char* fileName, int alignment, bool verbose)
         if (pEntry->isCompressed()) {
             if (verbose) {
                 printf("%8ld %s (OK - compressed)\n",
+                    (long) pEntry->getFileOffset(), pEntry->getFileName());
+            }
+        } else if (pEntry->getUncompressedLen() == 0) {
+            if (verbose) {
+                printf("%8ld %s (OK - dir)\n",
                     (long) pEntry->getFileOffset(), pEntry->getFileName());
             }
         } else {
