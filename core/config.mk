@@ -27,6 +27,10 @@ endef
 backslash := \a
 backslash := $(patsubst %a,%,$(backslash))
 
+# Default package alignment
+DEFAULT_PACKAGE_ALIGNMENT := 4
+DEFAULT_JNI_SHARED_LIBRARIES_PACKAGE_ALIGNMENT := 4096
+
 # Tell python not to spam the source tree with .pyc files.  This
 # only has an effect on python 2.6 and above.
 export PYTHONDONTWRITEBYTECODE := 1
