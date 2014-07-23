@@ -32,8 +32,8 @@ void usage(void)
     fprintf(stderr, "Zip alignment utility\n");
     fprintf(stderr, "Copyright (C) 2009 The Android Open Source Project\n\n");
     fprintf(stderr,
-        "Usage: zipalign [-f] [-v] [-z] <align> infile.zip outfile.zip\n"
-        "       zipalign -c [-v] <align> infile.zip\n\n" );
+        "Usage: zipalign [-f] [-v] [-z] <align> infile.zip outfile.zip [list of files]\n"
+        "       zipalign -c [-v] <align> infile.zip [list of files]\n\n" );
     fprintf(stderr,
         "  <align>: alignment in bytes, e.g. '4' provides 32-bit alignment\n");
     fprintf(stderr, "  -c: check alignment only (does not modify file)\n");
@@ -42,10 +42,51 @@ void usage(void)
     fprintf(stderr, "  -z: recompress using Zopfli\n");
 }
 
+static bool matchNameToOnePattern(const char* name, const char* const pattern) {
+  if (*name == '\0' && *name == *pattern) {
+    return true;
+  }
+
+  if (*name == '\0') {
+    return *pattern == '*' && matchNameToOnePattern(name, pattern+1);;
+  }
+
+  if (*pattern == '\0') {
+    return false;
+  }
+
+  if (*pattern == '*') {
+    return matchNameToOnePattern(name, pattern+1) ||
+        matchNameToOnePattern(name+1, pattern);
+  }
+
+  if (*pattern == '?' || *pattern == *name) {
+    return matchNameToOnePattern(name+1, pattern+1);
+  }
+
+  return false;
+}
+
+static bool matchNameToPatterns(const char* name, const char* const patterns[], size_t patternsSize) {
+  if (patternsSize == 0) {
+    return true;
+  }
+
+  for (size_t i = 0; i<patternsSize; ++i) {
+    const char* pattern = patterns[i];
+    if (matchNameToOnePattern(name, pattern)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 /*
  * Copy all entries from "pZin" to "pZout", aligning as needed.
  */
-static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfli)
+static int copyAndAlign(ZipFile* pZin, ZipFile* pZout,
+    const char* const patterns[], size_t patternsSize, int alignment, bool zopfli)
 {
     int numEntries = pZin->getNumEntries();
     ZipEntry* pEntry;
@@ -62,7 +103,10 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
             return 1;
         }
 
-        if (pEntry->isCompressed()) {
+        if (!matchNameToPatterns(pEntry->getFileName(), patterns, patternsSize)) {
+            // if it does not match patters - keep it as is
+            status = pZout->add(pZin, pEntry, padding, &pNewEntry);
+        } else if (pEntry->isCompressed()) {
             /* copy the entry without padding */
             //printf("--- %s: orig at %ld len=%ld (compressed)\n",
             //    pEntry->getFileName(), (long) pEntry->getFileOffset(),
@@ -105,6 +149,7 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
  * output file exists and "force" wasn't specified.
  */
 static int process(const char* inFileName, const char* outFileName,
+    const char* const patterns[], size_t patternsSize,
     int alignment, bool force, bool zopfli)
 {
     ZipFile zin, zout;
@@ -136,7 +181,7 @@ static int process(const char* inFileName, const char* outFileName,
         return 1;
     }
 
-    int result = copyAndAlign(&zin, &zout, alignment, zopfli);
+    int result = copyAndAlign(&zin, &zout, patterns, patternsSize, alignment, zopfli);
     if (result != 0) {
         printf("zipalign: failed rewriting '%s' to '%s'\n",
             inFileName, outFileName);
@@ -147,7 +192,8 @@ static int process(const char* inFileName, const char* outFileName,
 /*
  * Verify the alignment of a zip archive.
  */
-static int verify(const char* fileName, int alignment, bool verbose)
+static int verify(const char* fileName,
+    const char* const patterns[], size_t patternsSize, int alignment, bool verbose)
 {
     ZipFile zipFile;
     bool foundBad = false;
@@ -165,7 +211,12 @@ static int verify(const char* fileName, int alignment, bool verbose)
 
     for (int i = 0; i < numEntries; i++) {
         pEntry = zipFile.getEntryByIndex(i);
-        if (pEntry->isCompressed()) {
+        if (!matchNameToPatterns(pEntry->getFileName(), patterns, patternsSize)) {
+            if (verbose) {
+                printf("%8ld %s (OK - skipped)\n",
+                    (long) pEntry->getFileOffset(), pEntry->getFileName());
+            }
+        } else if (pEntry->isCompressed()) {
             if (verbose) {
                 printf("%8ld %s (OK - compressed)\n",
                     (long) pEntry->getFileOffset(), pEntry->getFileName());
@@ -246,7 +297,7 @@ int main(int argc, char* const argv[])
         argv++;
     }
 
-    if (!((check && argc == 2) || (!check && argc == 3))) {
+    if (!((check && argc >= 2) || (!check && argc >= 3))) {
         wantUsage = true;
         goto bail;
     }
@@ -260,14 +311,15 @@ int main(int argc, char* const argv[])
 
     if (check) {
         /* check existing archive for correct alignment */
-        result = verify(argv[1], alignment, verbose);
+        result = verify(argv[1], argv+2, argc-2, alignment, verbose);
     } else {
         /* create the new archive */
-        result = process(argv[1], argv[2], alignment, force, zopfli);
+        result = process(argv[1], argv[2], argv+3, argc-3, alignment, force, zopfli);
 
         /* trust, but verify */
-        if (result == 0)
-            result = verify(argv[2], alignment, verbose);
+        if (result == 0) {
+            result = verify(argv[2], argv+3, argc-3, alignment, verbose);
+        }
     }
 
 bail:
