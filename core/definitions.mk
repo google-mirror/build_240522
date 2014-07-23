@@ -1831,7 +1831,7 @@ $(hide) mkdir -p $(addprefix $(dir $@)lib/,$(PRIVATE_JNI_SHARED_LIBRARIES_ABI))
 $(foreach abi,$(PRIVATE_JNI_SHARED_LIBRARIES_ABI),\
   $(call _add-jni-shared-libs-to-package-per-abi,$(abi),\
     $(patsubst $(abi):%,%,$(filter $(abi):%,$(PRIVATE_JNI_SHARED_LIBRARIES)))))
-$(hide) (cd $(dir $@) && zip -r $(notdir $@) lib)
+$(hide) (cd $(dir $@) && zip -r $(PRIVATE_JNI_SHARED_LIBRARIES_ZIP_OPTIONS) $(notdir $@) lib)
 $(hide) rm -rf $(dir $@)lib
 endef
 
@@ -1861,10 +1861,13 @@ endef
 
 # Align STORED entries of a package on 4-byte boundaries
 # to make them easier to mmap.
+# Align STORED native libraries to page-size boundary (0x1000)
 #
 define align-package
 $(hide) mv $@ $@.unaligned
-$(hide) $(ZIPALIGN) -f 4 $@.unaligned $@.aligned
+$(hide) $(ZIPALIGN) -f $(PRIVATE_PACKAGE_ALIGNMENT) $@.unaligned $@.aligned
+$(hide) mv $@.aligned $@.unaligned
+$(hide) $(ZIPALIGN) -f $(PRIVATE_JNI_SHARED_LIBRARIES_PACKAGE_ALIGNMENT) $@.unaligned $@.aligned lib/*/lib*.so
 $(hide) mv $@.aligned $@
 endef
 
