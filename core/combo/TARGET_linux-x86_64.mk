@@ -130,7 +130,9 @@ TARGET_GLOBAL_LDFLAGS += -m64
 
 TARGET_GLOBAL_LDFLAGS += -Wl,-z,noexecstack
 TARGET_GLOBAL_LDFLAGS += -Wl,-z,relro -Wl,-z,now
-TARGET_GLOBAL_LDFLAGS += -Wl,--warn-shared-textrel
+# FIXME: Temporarily disable to fix the x86 build.
+# BUG: 14296739
+#TARGET_GLOBAL_LDFLAGS += -Wl,--warn-shared-textrel
 TARGET_GLOBAL_LDFLAGS += -Wl,--fatal-warnings
 TARGET_GLOBAL_LDFLAGS += -Wl,--gc-sections
 
