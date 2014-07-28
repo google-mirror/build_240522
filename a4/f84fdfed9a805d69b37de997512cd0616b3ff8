@@ -1,0 +1,9 @@
+Verified+1: Dan Albert <danalbert@google.com>
+Code-Review+1: Ian Rogers <irogers@google.com>
+Code-Review+1: Brian Carlstrom <bdc@google.com>
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Submitted-by: Marcin Kosiba <mkosiba@google.com>
+Submitted-at: Mon, 28 Jul 2014 09:02:13 +0000
+Reviewed-on: https://android-review.googlesource.com/102696
+Project: platform/build
+Branch: refs/heads/master
