@@ -115,7 +115,7 @@ $(R_file_stamp): PRIVATE_PROGUARD_OPTIONS_FILE := $(proguard_options_file)
 $(R_file_stamp): PRIVATE_MANIFEST_PACKAGE_NAME :=
 $(R_file_stamp): PRIVATE_MANIFEST_INSTRUMENTATION_FOR :=
 
-$(R_file_stamp) : $(all_resources) $(full_android_manifest) $(AAPT) $(framework_res_package_export_deps)
+$(R_file_stamp) : $(all_resources) $(full_android_manifest) $(AAPT) $(framework_res_package_export_deps) $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	@echo "target R.java/Manifest.java: $(PRIVATE_MODULE) ($@)"
 	$(create-resource-java-files)
 	$(hide) find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name R.java | xargs cat > $@
