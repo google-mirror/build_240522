@@ -54,12 +54,14 @@ endif
 files_to_copy += $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SDK_ADDON_COPY_FILES)
 
 # All SDK add-ons have these files
+ifneq ($(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SDK_ADDON_LIBRARY_ONLY)),true)
 files_to_copy += \
         $(BUILT_SYSTEMIMAGE):images/$(TARGET_CPU_ABI)/system.img \
         $(BUILT_USERDATAIMAGE_TARGET):images/$(TARGET_CPU_ABI)/userdata.img \
         $(BUILT_RAMDISK_TARGET):images/$(TARGET_CPU_ABI)/ramdisk.img \
         $(PRODUCT_OUT)/system/build.prop:images/$(TARGET_CPU_ABI)/build.prop \
         $(target_notice_file_txt):images/$(TARGET_CPU_ABI)/NOTICE.txt
+endif
 
 # Generate rules to copy the requested files
 $(foreach cf,$(files_to_copy), \
