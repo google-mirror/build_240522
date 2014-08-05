@@ -1256,7 +1256,7 @@ define transform-host-o-to-shared-lib-inner
 $(hide) $(PRIVATE_CXX) \
 	-Wl,-rpath-link=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_INTERMEDIATE_LIBRARIES) \
 	-Wl,-rpath,\$$ORIGIN/../$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_SHARED_LIBRARIES)) \
-	-shared -Wl,-soname,$(notdir $@) \
+	-Wl,-shared -Wl,-soname,$(notdir $@) \
 	$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_LD_DIRS) \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 	   $(PRIVATE_HOST_GLOBAL_LDFLAGS) \
@@ -1309,7 +1309,7 @@ $(hide) $(PRIVATE_CXX) \
 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
 	-Wl,-rpath-link=$(PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES) \
 	-Wl,-rpath,\$$ORIGIN/../lib \
-	-shared -Wl,-soname,$(notdir $@) \
+	-Wl,-shared -Wl,-soname,$(notdir $@) \
 	$(PRIVATE_LDFLAGS) \
 	$(PRIVATE_TARGET_GLOBAL_LD_DIRS) \
 	$(PRIVATE_ALL_OBJECTS) \
