@@ -2,6 +2,13 @@
 # This file depends on variables set in base_rules.mk
 # Output variables: LOCAL_DEX_PREOPT, built_odex, dexpreopt_boot_jar_module
 
+ifndef WITH_DEXPREOPT_APPS
+  # Just default to WITH_DEXPREOPT if we haven't given it explicitly
+  preopt_apps := $(WITH_DEXPREOPT)
+else
+  preopt_apps := $(WITH_DEXPREOPT_APPS)
+endif
+
 # Setting LOCAL_DEX_PREOPT based on WITH_DEXPREOPT, LOCAL_DEX_PREOPT, etc
 LOCAL_DEX_PREOPT := $(strip $(LOCAL_DEX_PREOPT))
 ifneq (true,$(WITH_DEXPREOPT))
@@ -11,7 +18,11 @@ else # WITH_DEXPREOPT=true
     ifndef LOCAL_DEX_PREOPT # LOCAL_DEX_PREOPT undefined
       ifneq ($(filter $(TARGET_OUT)/%,$(my_module_path)),) # Installed to system.img.
         ifeq (,$(LOCAL_APK_LIBRARIES)) # LOCAL_APK_LIBRARIES empty
-          LOCAL_DEX_PREOPT := $(DEX_PREOPT_DEFAULT)
+          ifeq (true,$(preopt_apps))
+            LOCAL_DEX_PREOPT := $(DEX_PREOPT_DEFAULT)
+          else
+            LOCAL_DEX_PREOPT := nostripping
+          endif
         else # LOCAL_APK_LIBRARIES not empty
           LOCAL_DEX_PREOPT := nostripping
         endif # LOCAL_APK_LIBRARIES not empty
@@ -33,12 +44,14 @@ ifneq (,$(filter $(LOCAL_MODULE),$(PRODUCT_DEX_PREOPT_PACKAGES_IN_DATA)))
 LOCAL_DEX_PREOPT :=
 endif
 
+actually_installed :=
 built_odex :=
 installed_odex :=
 built_installed_odex :=
 ifdef LOCAL_DEX_PREOPT
 dexpreopt_boot_jar_module := $(filter $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE))
 ifdef dexpreopt_boot_jar_module
+actually_installed := true
 ifeq ($(DALVIK_VM_LIB),libdvm.so)
 built_odex := $(basename $(LOCAL_BUILT_MODULE)).odex
 installed_odex := $(basename $(LOCAL_INSTALLED_MODULE)).odex
@@ -59,6 +72,9 @@ built_installed_odex := $(built_odex):$(installed_odex)
 $(built_odex) : $(DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT) \
                 $(DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS)
 else # libart
+ifeq (true,$(preopt_apps))
+actually_installed := true
+endif # preopt_apps=true
 ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
 # For a Java library, we build odex for both 1st arch and 2nd arch, if we have one.
 # #################################################
@@ -132,9 +148,11 @@ $(installed_odex) : $(dir $(LOCAL_INSTALLED_MODULE))%$(notdir $(word 1,$(install
 	$(copy-file-to-target)
 endif
 
+ifeq (true,$(actually_installed))
 # Add the installed_odex to the list of installed files for this module.
 ALL_MODULES.$(my_register_name).INSTALLED += $(installed_odex)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(built_installed_odex)
+endif
 
 # Make sure to install the .odex when you run "make <module_name>"
 $(my_register_name): $(installed_odex)

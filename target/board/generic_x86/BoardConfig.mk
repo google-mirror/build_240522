@@ -25,6 +25,7 @@ BOARD_MALLOC_ALIGNMENT := 16
 # of an SDK AVD. Note that this operation only works on Linux for now
 ifeq ($(HOST_OS),linux)
 WITH_DEXPREOPT ?= true
+WITH_DEXPREOPT_APPS ?= true
 endif
 
 # Build OpenGLES emulation host and guest libraries
