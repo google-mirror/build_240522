@@ -20,6 +20,7 @@ LOCAL_UNINSTALLABLE_MODULE := true
 
 LOCAL_IS_HOST_MODULE := true
 
+PRIVATE_CFLAGS += -fpic
 include $(BUILD_SYSTEM)/binary.mk
 
 $(LOCAL_BUILT_MODULE): $(built_whole_libraries)

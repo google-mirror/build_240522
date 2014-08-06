@@ -38,6 +38,7 @@ ifndef skip_build_from_source
 # to simplify the link line.
 OVERRIDE_BUILT_MODULE_PATH := $($(LOCAL_2ND_ARCH_VAR_PREFIX)HOST_OUT_INTERMEDIATE_LIBRARIES)
 
+PRIVATE_CFLAGS += -fpic
 include $(BUILD_SYSTEM)/binary.mk
 
 $(LOCAL_BUILT_MODULE): $(all_objects) $(all_libraries) $(LOCAL_ADDITIONAL_DEPENDENCIES)

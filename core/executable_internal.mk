@@ -24,6 +24,7 @@ endif
 
 ifndef skip_build_from_source
 
+PRIVATE_CFLAGS += -fpie
 include $(BUILD_SYSTEM)/dynamic_binary.mk
 
 # Define PRIVATE_ variables from global vars

@@ -18,6 +18,7 @@ ifneq ($(strip $(LOCAL_MODULE_STEM)$(LOCAL_BUILT_MODULE_STEM)),)
 $(error $(LOCAL_PATH): Cannot set module stem for a library)
 endif
 
+PRIVATE_CFLAGS += -fpic
 include $(BUILD_SYSTEM)/binary.mk
 
 ifeq ($(LOCAL_RAW_STATIC_LIBRARY),true)

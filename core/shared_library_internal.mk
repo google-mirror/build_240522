@@ -36,6 +36,7 @@ ifndef skip_build_from_source
 # to simplify the link line.
 OVERRIDE_BUILT_MODULE_PATH := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_LIBRARIES)
 
+PRIVATE_CFLAGS += -fpic
 include $(BUILD_SYSTEM)/dynamic_binary.mk
 
 # Define PRIVATE_ variables from global vars

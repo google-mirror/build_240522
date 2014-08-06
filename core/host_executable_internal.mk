@@ -25,6 +25,7 @@ endif
 
 ifndef skip_build_from_source
 
+PRIVATE_CFLAGS += -fpie
 include $(BUILD_SYSTEM)/binary.mk
 
 $(LOCAL_BUILT_MODULE): $(all_objects) $(all_libraries)
