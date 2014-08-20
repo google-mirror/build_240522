@@ -42,6 +42,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_mips.mk \
     $(LOCAL_DIR)/full_mips.mk \
     $(LOCAL_DIR)/aosp_arm64.mk \
+    $(LOCAL_DIR)/full_arm64.mk \
     $(LOCAL_DIR)/aosp_mips64.mk
 else
 PRODUCT_MAKEFILES := \
@@ -55,6 +56,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/full_x86.mk \
     $(LOCAL_DIR)/aosp_mips.mk \
     $(LOCAL_DIR)/full_mips.mk \
+    $(LOCAL_DIR)/full_arm64.mk \
     $(LOCAL_DIR)/aosp_arm64.mk \
     $(LOCAL_DIR)/aosp_mips64.mk \
     $(LOCAL_DIR)/aosp_x86_64.mk \
