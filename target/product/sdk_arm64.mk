@@ -21,6 +21,9 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
+
+PRODUCT_RUNTIMES := runtime_libart_default
 
 # Overrides
 PRODUCT_BRAND := generic_arm64
