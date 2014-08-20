@@ -22,8 +22,10 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk.mk)
 
+include $(SRC_TARGET_DIR)/product/ranchu_arm64.mk
+
 # Overrides
 PRODUCT_BRAND := generic_arm64
 PRODUCT_NAME := sdk_arm64
-PRODUCT_DEVICE := generic_arm64
+PRODUCT_DEVICE := ranchu
 PRODUCT_MODEL := Android SDK built for arm64
