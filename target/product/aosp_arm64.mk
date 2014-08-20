@@ -26,7 +26,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
 PRODUCT_RUNTIMES := runtime_libart_default
 
 include $(SRC_TARGET_DIR)/product/emulator.mk
+include $(SRC_TARGET_DIR)/product/ranchu_arm64.mk
+
 PRODUCT_NAME := aosp_arm64
-PRODUCT_DEVICE := generic_arm64
+PRODUCT_DEVICE := ranchu
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on ARM arm64 Emulator
