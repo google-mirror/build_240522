@@ -22,6 +22,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk.mk)
 
+include $(SRC_TARGET_DIR)/product/emulator_ranchu.mk
+
 # Overrides
 PRODUCT_BRAND := generic_arm64
 PRODUCT_NAME := sdk_arm64
