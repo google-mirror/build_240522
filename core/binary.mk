@@ -113,6 +113,11 @@ my_cxx := $(LOCAL_CXX)
 my_c_includes := $(LOCAL_C_INCLUDES)
 my_generated_sources := $(LOCAL_GENERATED_SOURCES)
 
+# GCC flags that are rejected by clang should be filtered out from my_*flags.
+GCC_ONLY_FLAGS := -fno-tree-copy-prop -fno-caller-saves -fno-early-inlining \
+    -fno-partial-inlining -fno-move-loop-invariants -fno-tree-loop-optimize \
+    -Wno-old-style-declaration -Wno-literal-suffix -Wl,--icf=safe
+
 # MinGW spits out warnings about -fPIC even for -fpie?!) being ignored because
 # all code is position independent, and then those warnings get promoted to
 # errors.
@@ -259,6 +264,9 @@ my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_TARGET_GLOBAL_CFL
 my_target_global_cppflags += $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_TARGET_GLOBAL_CPPFLAGS)
 my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_TARGET_GLOBAL_LDFLAGS)
 my_target_c_includes += $(CLANG_CONFIG_EXTRA_TARGET_C_INCLUDES)
+my_target_global_cflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_target_global_cflags))
+my_target_global_cppflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_target_global_cppflags))
+my_target_global_ldflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_target_global_ldflags))
 else
 my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_CFLAGS)
 my_target_global_cppflags += $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_CPPFLAGS)
@@ -278,6 +286,9 @@ my_host_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_CFLAGS)
 my_host_global_cppflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_CPPFLAGS)
 my_host_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_HOST_GLOBAL_LDFLAGS)
 my_host_c_includes := $($(LOCAL_2ND_ARCH_VAR_PREFIX)HOST_C_INCLUDES) $(CLANG_CONFIG_EXTRA_HOST_C_INCLUDES)
+my_host_global_cflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_host_global_cflags))
+my_host_global_cppflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_host_global_cppflags))
+my_host_global_ldflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_host_global_ldflags))
 else
 my_host_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_CFLAGS)
 my_host_global_cppflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_CPPFLAGS)
@@ -381,6 +392,8 @@ normal_objects_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)$(normal_obje
 ifeq ($(my_clang),true)
 arm_objects_cflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(arm_objects_cflags))
 normal_objects_cflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(normal_objects_cflags))
+arm_objects_cflags := $(filter-out $(GCC_ONLY_FLAGS),$(arm_objects_cflags))
+normal_objects_cflags := $(filter-out $(GCC_ONLY_FLAGS),$(normal_objects_cflags))
 endif
 
 else
@@ -931,6 +944,10 @@ my_cflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags
 my_cppflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_cppflags))
 my_asflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_asflags))
 my_ldflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_ldflags))
+my_cflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_cflags))
+my_cppflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_cppflags))
+my_asflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_asflags))
+my_ldflags := $(filter-out $(GCC_ONLY_FLAGS),$(my_ldflags))
 endif
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
