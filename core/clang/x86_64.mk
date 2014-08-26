@@ -10,7 +10,8 @@ CLANG_CONFIG_x86_64_UNKNOWN_CFLAGS := \
   -finline-limit=300 \
   -fno-inline-functions-called-once \
   -mfpmath=sse \
-  -mbionic
+  -mbionic \
+  -Wno-literal-suffix
 
 # We don't have any x86_64 flags to substitute yet.
 define subst-clang-incompatible-x86_64-flags
