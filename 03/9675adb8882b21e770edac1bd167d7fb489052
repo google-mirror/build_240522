@@ -1,0 +1,7 @@
+Code-Review+2: Tim Murray <timmurray@google.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Submitted-by: Stephen Hines <srhines@google.com>
+Submitted-at: Tue, 02 Sep 2014 16:23:10 +0000
+Reviewed-on: https://android-review.googlesource.com/106020
+Project: platform/build
+Branch: refs/heads/master
