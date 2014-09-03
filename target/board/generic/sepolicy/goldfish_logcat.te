@@ -1,0 +1,14 @@
+# goldfish-logcat service:  runs logcat -Q
+# Labeled via seclabel in init.goldfish.rc to avoid
+# needing a separate type on logcat executable.
+type goldfish_logcat, domain;
+permissive_or_unconfined(goldfish_logcat)
+
+# Entered via /system/bin/logcat, no specific type.
+domain_trans(init, system_file, goldfish_logcat)
+
+# Read from logd.
+read_logd(goldfish_logcat)
+
+# Write to /dev/ttyS2
+allow goldfish_logcat serial_device:chr_file { write open };
