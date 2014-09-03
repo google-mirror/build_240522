@@ -82,6 +82,9 @@ BOARD_SEPOLICY_UNION += \
         domain.te \
         file.te \
         file_contexts \
+        goldfish_setup.te \
+        goldfish_logcat.te \
+        qemu_props.te \
         qemud.te \
         rild.te \
         shell.te \

@@ -53,6 +53,9 @@ BOARD_SEPOLICY_UNION += \
         file_contexts \
         healthd.te \
         installd.te \
+        goldfish_setup.te \
+        goldfish_logcat.te \
+        qemu_props.te \
         qemud.te \
         rild.te \
         shell.te \
