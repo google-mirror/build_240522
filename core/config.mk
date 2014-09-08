@@ -134,6 +134,12 @@ TARGET_ERROR_FLAGS := -Werror=return-type -Werror=non-virtual-dtor -Werror=addre
 # TODO: do symbol compression
 TARGET_COMPRESS_MODULE_SYMBOLS := false
 
+ifdef TMPDIR
+JAVA_TMPDIR_ARG := -Djava.io.tmpdir=$(TMPDIR)
+else
+JAVA_TMPDIR_ARG :=
+endif
+
 # ###############################################################
 # Include sub-configuration files
 # ###############################################################
@@ -368,6 +374,9 @@ endif
 
 # ---------------------------------------------------------------
 # Generic tools.
+JACK_JAR := $(HOST_OUT_JAVA_LIBRARIES)/jack.jar
+JILL_JAR := $(HOST_OUT_JAVA_LIBRARIES)/jill.jar
+JACK_MULTIDEX_DEFAULT_PREPROCESSOR := frameworks/multidex/library/resources/JACK-INF/legacyMultidexInstallation.jpp
 
 LEX := prebuilts/misc/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/flex/flex-2.5.39
 # The default PKGDATADIR built in the prebuilt bison is a relative path
@@ -411,6 +420,37 @@ MKTARBALL := build/tools/mktarball.sh
 TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
 E2FSCK := $(HOST_OUT_EXECUTABLES)/e2fsck$(HOST_EXECUTABLE_SUFFIX)
 JARJAR := $(HOST_OUT_JAVA_LIBRARIES)/jarjar.jar
+
+ifeq ($(ANDROID_COMPILE_WITH_JACK),true)
+DEFAULT_JACK_ENABLED:=full
+else
+DEFAULT_JACK_ENABLED:=
+endif
+ifneq ($(strip $(ANDROID_JACK_VM)),)
+JACK_VM := $(ANDROID_JACK_VM)
+else
+JACK_VM := java
+endif
+# call jack
+#
+# $(1): vm arguments
+# $(2): jack perf arguments
+define call-jack
+$(JACK_VM) $(1) $(JAVA_TMPDIR_ARG) -jar $(JACK_JAR) $(2)
+endef
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_VM_ARGS := $(DEFAULT_JACK_VM_ARGS)
+ifneq ($(ANDROID_JACK_VM_ARGS),)
+DEFAULT_JACK_VM_ARGS := $(ANDROID_JACK_VM_ARGS)
+else
+DEFAULT_JACK_VM_ARGS := -Dfile.encoding=UTF-8 -Xmx3584m -Xms2560m -XX:+TieredCompilation
+endif
+ifneq ($(ANDROID_JACK_EXTRA_ARGS),)
+DEFAULT_JACK_EXTRA_ARGS := $(ANDROID_JACK_EXTRA_ARGS)
+else
+DEFAULT_JACK_EXTRA_ARGS := --sanity-checks off -D jack.reporter.level.file=error=--,warning=-
+endif
+
+JILL := java -Xmx3500m -jar $(JILL_JAR)
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/tools/java-event-log-tags.py
 LLVM_RS_CC := $(HOST_OUT_EXECUTABLES)/llvm-rs-cc$(HOST_EXECUTABLE_SUFFIX)
