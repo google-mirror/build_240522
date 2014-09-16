@@ -40,12 +40,12 @@ endif
 proto_sources := $(filter %.proto,$(LOCAL_SRC_FILES))
 ifneq ($(proto_sources),)
 ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),micro)
-    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.3.0-micro
+    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.6.0-micro
 else
   ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),nano)
-    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.3.0-nano
+    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.6.0-nano
   else
-    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.3.0-lite
+    LOCAL_STATIC_JAVA_LIBRARIES += libprotobuf-java-2.6.0-lite
   endif
 endif
 endif
