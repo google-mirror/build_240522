@@ -7,7 +7,7 @@ WITHOUT_HOST_CLANG := true
 endif
 
 LLVM_PREBUILTS_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.5/bin
-LLVM_PREBUILTS_HEADER_PATH := prebuilts/clang/$(BUILD_OS)-x86/host/3.5/lib/clang/3.5/include/
+LLVM_PREBUILTS_HEADER_PATH := $(LLVM_PREBUILTS_PATH)/../lib/clang/3.5/include/
 
 CLANG := $(LLVM_PREBUILTS_PATH)/clang$(BUILD_EXECUTABLE_SUFFIX)
 CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++$(BUILD_EXECUTABLE_SUFFIX)
