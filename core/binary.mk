@@ -113,6 +113,7 @@ my_cc := $(LOCAL_CC)
 my_cxx := $(LOCAL_CXX)
 my_c_includes := $(LOCAL_C_INCLUDES)
 my_generated_sources := $(LOCAL_GENERATED_SOURCES)
+my_native_coverage := $(LOCAL_NATIVE_COVERAGE)
 
 # MinGW spits out warnings about -fPIC even for -fpie?!) being ignored because
 # all code is position independent, and then those warnings get promoted to
@@ -321,11 +322,39 @@ my_target_global_cppflags += $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_CPPFLAG
 my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_LDFLAGS)
 endif # my_clang
 
+# If the global flag NATIVE_COVERAGE is set, my_native_coverage will be true
+# unless the module explicitly sets my_native_coverage := false.
+ifneq ($(NATIVE_COVERAGE),)
+    ifneq ($(my_native_coverage),false)
+        my_native_coverage := true
+    endif
+endif
+
+ifeq ($(my_native_coverage),true)
+    # We can't currently generate coverage for clang binaries for two
+    # reasons:
+    #
+    # 1) b/17574078 We currently don't have a prebuilt
+    # libclang_rt.profile-<ARCH>.a, which clang is hardcoded to link if
+    # --coverage is passed in the link stage. For now we manually link
+    #  libprofile_rt (which is the name it is built as from
+    #  external/compiler-rt).
+    #
+    # 2) b/17583330 Clang doesn't generate .gcno files when using
+    # -no-integrated-as. Since most of the assembly in our tree is
+    #  incompatible with clang's assembler, we can't turn off this flag.
+    ifneq ($(my_clang),true)
+        my_target_global_cflags += --coverage
+        my_target_global_ldflags += --coverage
+    endif
+endif
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_PROJECT_INCLUDES := $(my_target_project_includes)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_C_INCLUDES := $(my_target_c_includes)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CFLAGS := $(my_target_global_cflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CPPFLAGS := $(my_target_global_cppflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_global_ldflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_NATIVE_COVERAGE := $(my_native_coverage)
 
 else # LOCAL_IS_HOST_MODULE
 
