@@ -75,6 +75,13 @@
 #  define HAVE_WIN32_PROC
 #endif
 
+/*
+ * Process out-of-memory adjustment.  Set if running on Linux,
+ * where we can write to /proc/<pid>/oom_adj to modify the out-of-memory
+ * badness adjustment.
+ */
+/* #define HAVE_OOM_ADJ */
+
 /* TODO: replace references to this. */
 #define HAVE_WIN32_IPC
 
