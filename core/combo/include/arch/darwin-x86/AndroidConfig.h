@@ -50,6 +50,13 @@
 #define HAVE_FORKEXEC
 
 /*
+ * Process out-of-memory adjustment.  Set if running on Linux,
+ * where we can write to /proc/<pid>/oom_adj to modify the out-of-memory
+ * badness adjustment.
+ */
+/* #define HAVE_OOM_ADJ */
+
+/*
  * Memory-mapping model. Choose one:
  *
  * HAVE_POSIX_FILEMAP - use the Posix sys/mmap.h
