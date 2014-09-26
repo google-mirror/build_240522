@@ -42,6 +42,15 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -Werror=int-conversion
 
+# Don't error out on harmless warnings.
+# deprecated-register is emitted whenever the "register" keyword is used
+# (e.g. all over external/chromium_org)
+# mismatched-tags is emitted when the "class" and "struct" keywords mismatch
+# ("class A {}; struct A a;").
+CLANG_CONFIG_EXTRA_CFLAGS += \
+  -Wno-error=deprecated-register \
+  -Wno-error=mismatched-tags
+
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -finline-limit=64 \
   -fno-canonical-system-headers \
