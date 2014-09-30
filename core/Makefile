@@ -744,7 +744,8 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
 	@echo Copying baseline ramdisk...
 	$(hide) cp -R $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
 	@echo Modifying ramdisk contents...
-	$(hide) rm -f $(TARGET_RECOVERY_ROOT_OUT)/init*.rc
+	$(hide) find $(TARGET_RECOVERY_ROOT_OUT) -name init*.rc \
+	  -not -name init.recovery.*.rc -exec rm -f {} \;
 	$(hide) cp -f $(recovery_initrc) $(TARGET_RECOVERY_ROOT_OUT)/
 	$(hide) rm -f $(TARGET_RECOVERY_ROOT_OUT)/sepolicy
 	$(hide) cp -f $(recovery_sepolicy) $(TARGET_RECOVERY_ROOT_OUT)/sepolicy
