@@ -254,7 +254,7 @@ ifeq (,$(LOCAL_SDK_VERSION)$(LOCAL_IS_HOST_MODULE)$(WITHOUT_LIBCOMPILER_RT))
   my_static_libraries += $(COMPILER_RT_CONFIG_EXTRA_STATIC_LIBRARIES)
 endif
 
-my_compiler_dependencies :=
+my_compiler_dependencies := $(LOCAL_COMPILER_DEPENDENCIES)
 
 ####################################################
 ## Add FDO flags if FDO is turned on and supported
