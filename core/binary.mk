@@ -276,8 +276,8 @@ ifeq ($(NATIVE_COVERAGE),true)
         #    -no-integrated-as. Since most of the assembly in our tree is
         #    incompatible with clang's assembler, we can't turn off this flag.
         ifneq ($(my_clang),true)
-            my_target_global_cflags += --coverage
-            my_target_global_ldflags += --coverage
+            my_cflags += --coverage -O0
+            my_ldflags += --coverage
         endif
     endif
 else
