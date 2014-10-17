@@ -177,7 +177,19 @@ $(foreach lib, $(LOCAL_HAL_STATIC_LIBRARIES), \
 b_lib :=
 endif
 
-ifeq ($(strip $(LOCAL_ADDRESS_SANITIZER)),true)
+my_address_sanitizer := $(strip $(LOCAL_ADDRESS_SANITIZER))
+
+ifdef ASAN_ALL
+ifndef LOCAL_IS_HOST_MODULE # can go away once eugenis adds host modules
+ifneq ($(my_address_sanitizer),false)
+ifeq ($(my_clang),true)
+  my_address_sanitizer := true
+endif
+endif
+endif
+endif
+
+ifeq ($(my_address_sanitizer),true)
   my_clang := true
   my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
   my_ldflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS)
