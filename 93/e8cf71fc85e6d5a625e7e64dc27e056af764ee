@@ -1,0 +1,7 @@
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Submitted-by: Dan Albert <danalbert@google.com>
+Submitted-at: Fri, 17 Oct 2014 17:44:36 +0000
+Reviewed-on: https://android-review.googlesource.com/111109
+Project: platform/build
+Branch: refs/heads/master
