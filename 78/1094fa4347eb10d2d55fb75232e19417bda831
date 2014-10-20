@@ -1,0 +1,9 @@
+Code-Review+2: Ying Wang <wangying@android.com>
+Code-Review+1: Dan Albert <danalbert@google.com>
+Verified+1: Stephen Hines <srhines@google.com>
+Code-Review+1: Bionic Buildbot <bionic.buildbot@gmail.com>
+Submitted-by: Stephen Hines <srhines@google.com>
+Submitted-at: Mon, 20 Oct 2014 18:06:34 +0000
+Reviewed-on: https://android-review.googlesource.com/111315
+Project: platform/build
+Branch: refs/heads/master
