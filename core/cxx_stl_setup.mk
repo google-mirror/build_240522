@@ -28,6 +28,9 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
     my_c_includes += external/libcxx/include
     ifeq ($(my_cxx_stl),libc++)
         my_shared_libraries += libc++
+        ifndef LOCAL_IS_HOST_MODULE
+            my_shared_libraries += libc++abi
+        endif
     else
         my_static_libraries += libc++_static
     endif
