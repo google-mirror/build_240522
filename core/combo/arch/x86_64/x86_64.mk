@@ -9,7 +9,6 @@ ARCH_X86_HAVE_SSSE3 := true
 ARCH_X86_HAVE_MOVBE := false # Only supported on Atom.
 ARCH_X86_HAVE_POPCNT := true
 
-
 # CFLAGS for this arch
 arch_variant_cflags := \
     -march=x86-64
