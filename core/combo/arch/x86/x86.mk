@@ -19,5 +19,5 @@ ARCH_X86_HAVE_POPCNT := false
 # everything properly.
 
 arch_variant_cflags := \
-    -march=i686 \
+    -march=prescott \
 
