@@ -12,7 +12,6 @@ ARCH_X86_HAVE_SSSE3 := false
 ARCH_X86_HAVE_MOVBE := false
 ARCH_X86_HAVE_POPCNT := false
 
-
 # XXX: This flag is probably redundant, because it should be set by default
 # by our toolchain binaries. However, there have been reports that this may
 # not always work as intended, so keep it unless we have the time to check
