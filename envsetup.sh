@@ -992,6 +992,8 @@ function gdbclient()
            if [[ $EXE =~ ^[^/].* ]] ; then
                EXE="system/bin/"$EXE
            fi
+       elif [ "$(readlink $OUT_ROOT/system/bin/app_process)" != "" ] ; then
+           EXE="$(readlink $OUT_ROOT/system/bin/app_process)"
        else
            EXE="app_process"
        fi
@@ -1027,12 +1029,15 @@ function gdbclient()
            adb shell gdbserver$USE64BIT $PORT --attach $PID &
            sleep 2
        else
-               echo ""
-               echo "If you haven't done so already, do this first on the device:"
-               echo "    gdbserver $PORT /system/bin/$EXE"
-                   echo " or"
-               echo "    gdbserver $PORT --attach <PID>"
-               echo ""
+           if [[ "$(file $OUT_EXE_SYMBOLS/$EXE)" =~ 64-bit ]] ; then
+               local USE64BIT="64"
+           fi
+           echo ""
+           echo "If you haven't done so already, do this first on the device:"
+           echo "    gdbserver$USE64BIT $PORT /system/bin/$EXE"
+           echo " or"
+           echo "    gdbserver$USE64BIT $PORT --attach <PID>"
+           echo ""
        fi
 
        OUT_SO_SYMBOLS=$OUT_SO_SYMBOLS$USE64BIT
