@@ -1,0 +1,8 @@
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Submitted-by: Neil Fuller <nfuller@google.com>
+Submitted-at: Fri, 24 Oct 2014 08:16:03 +0000
+Reviewed-on: https://android-review.googlesource.com/111878
+Project: platform/build
+Branch: refs/heads/master
