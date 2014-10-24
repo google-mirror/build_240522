@@ -8,9 +8,13 @@ DEX2OATD := $(HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
 
 # By default, do not run rerun dex2oat if the tool changes.
 # Comment out the | to force dex2oat to rerun on after all changes.
+# With the optimizing compiler, we want to rerun dex2oat whenever there is
+# a dex2oat change.
 DEX2OAT_DEPENDENCY := art/runtime/oat.cc # dependency on oat version number
 DEX2OAT_DEPENDENCY += art/runtime/image.cc # dependency on image version number
+ifneq ($(ART_USE_OPTIMIZING_COMPILER), true)
 DEX2OAT_DEPENDENCY += |
+endif
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
 
 DEX2OATD_DEPENDENCY := $(DEX2OAT_DEPENDENCY)
