@@ -28,6 +28,12 @@ PRODUCT_COPY_FILES := \
     device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml \
     hardware/libhardware_legacy/audio/audio_policy.conf:system/etc/audio_policy.conf
 
+# The ranchu configuration files are needed to run under qemu-android
+PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
+    device/generic/goldfish/init.ranchu.rc:root/init.ranchu.rc \
+    device/generic/goldfish/fstab.ranchu:root/fstab.ranchu \
+    device/generic/goldfish/ueventd.ranchu.rc:root/ueventd.ranchu.rc)
+
 PRODUCT_PACKAGES := \
     audio.primary.goldfish \
     power.goldfish \
