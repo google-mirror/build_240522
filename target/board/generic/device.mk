@@ -32,6 +32,4 @@ PRODUCT_COPY_FILES := \
     hardware/libhardware_legacy/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_PACKAGES := \
-    audio.primary.goldfish \
-    power.goldfish \
-    vibrator.goldfish
+    power.goldfish
