@@ -177,6 +177,10 @@ $(foreach lib, $(LOCAL_HAL_STATIC_LIBRARIES), \
 b_lib :=
 endif
 
+ifdef LOCAL_IS_HOST_MODULE
+include $(BUILD_SYSTEM)/config_sanitize_host.mk
+endif
+
 ifeq ($(strip $(LOCAL_ADDRESS_SANITIZER)),true)
   my_clang := true
   my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
