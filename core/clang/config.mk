@@ -45,8 +45,7 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 # Workaround for ccache with clang.
 # See http://petereisentraut.blogspot.com/2011/05/ccache-and-clang.html.
 CLANG_CONFIG_EXTRA_CFLAGS += \
-  -Wno-unused-command-line-argument \
-  -fcolor-diagnostics
+  -Wno-unused-command-line-argument
 
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -finline-limit=64 \
@@ -62,7 +61,8 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -Wno-psabi \
   -Wno-unused-but-set-variable \
   -Wno-unused-but-set-parameter \
-  -Wno-unused-local-typedefs
+  -Wno-unused-local-typedefs \
+  -Wno-unused-local-typedef
 
 # Clang flags for all host rules
 CLANG_CONFIG_HOST_EXTRA_ASFLAGS :=
