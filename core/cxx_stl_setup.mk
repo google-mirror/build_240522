@@ -10,8 +10,8 @@ my_libcxx_is_default := false
 # Select the appropriate C++ STL
 ifeq ($(strip $(LOCAL_CXX_STL)),default)
     ifndef LOCAL_SDK_VERSION
+        # Platform code. Select the appropriate STL.
         ifeq ($(strip $(my_libcxx_is_default)),true)
-            # Platform code. Select the appropriate STL.
             my_cxx_stl := libc++
         else
             my_cxx_stl := libstdc++
@@ -53,13 +53,26 @@ else ifeq ($(my_cxx_stl),ndk)
         my_system_shared_libraries += libstdc++
     endif
 else ifeq ($(my_cxx_stl),libstdc++)
-    # Using bionic's basic libstdc++. Not actually an STL. Only around until the
-    # tree is in good enough shape to not need it.
     ifndef LOCAL_IS_HOST_MODULE
+        # Using bionic's basic libstdc++. Not actually an STL. Only around until
+        # the tree is in good enough shape to not need it.
         my_c_includes += bionic/libstdc++/include
         my_system_shared_libraries += libstdc++
     endif
-    # Host builds will use GNU libstdc++.
+    # Host builds will use the system's libstdc++.
+else ifeq ($(my_cxx_stl),system)
+    ifndef LOCAL_IS_HOST_MODULE
+        # Using bionic's basic libstdc++. Not actually an STL. Only around until
+        # the tree is in good enough shape to not need it.
+        my_c_includes += bionic/libstdc++/include
+        my_system_shared_libraries += libstdc++
+    else
+        ifeq ($(HOST_OS),darwin)
+            my_cppflags += -stdlib=libc++
+            my_ldflags += -stdlib=libc++
+        endif
+        # Linux will use the GNU libstdc++ by default.
+    endif
 else ifeq ($(my_cxx_stl),none)
     ifdef LOCAL_IS_HOST_MODULE
         my_cppflags += -nostdinc++
