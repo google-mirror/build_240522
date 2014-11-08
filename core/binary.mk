@@ -63,8 +63,24 @@ ifdef LOCAL_SDK_VERSION
   my_ndk_source_root := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/sources
   my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/platforms/android-$(LOCAL_SDK_VERSION)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
   my_ndk_sysroot_include := $(my_ndk_sysroot)/usr/include
+  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
+    first_mipsr6_libs_version := 21
+    no_mipsr6_libs := $(shell [ $(LOCAL_SDK_VERSION) -lt $(first_mipsr6_libs_version) ] && echo true)
+    ifeq ($(no_mipsr6_libs),true)
+      # Old libs for mipsr6 did not exist, but later ones support the same abi.
+      # Substitute with the first ndk lib released for mipsr6,
+      # but keep using the originally expected old header files.
+      # (This could alternatively be done via mipsr6-specific symlinks
+      #    from platforms/android-N/arch-mips/usr/libr6
+      #    to   platforms/android-21/arch-mips/usr/libr6 )
+      LOCAL_SDK_VERSION := $(first_mipsr6_libs_version)
+      my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/platforms/android-$(LOCAL_SDK_VERSION)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+    endif
+  endif
   ifeq (x86_64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/lib64
+  else ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
+    my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/libr6
   else
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/lib
   endif
@@ -82,6 +98,10 @@ ifdef LOCAL_SDK_VERSION
   my_ndk_stl_shared_lib :=
   my_ndk_stl_static_lib :=
   my_ndk_stl_cppflags :=
+  my_cpu_variant := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)
+  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
+    my_cpu_variant := mipsr6
+  endif
   LOCAL_NDK_STL_VARIANT := $(strip $(LOCAL_NDK_STL_VARIANT))
   ifeq (,$(LOCAL_NDK_STL_VARIANT))
     LOCAL_NDK_STL_VARIANT := system
@@ -96,9 +116,9 @@ ifdef LOCAL_SDK_VERSION
   ifneq (,$(filter stlport_%, $(LOCAL_NDK_STL_VARIANT)))
     my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/stlport/stlport
     ifeq (stlport_static,$(LOCAL_NDK_STL_VARIANT))
-      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libstlport_static.a
+      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(my_cpu_variant)/libstlport_static.a
     else
-      my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libstlport_shared.so
+      my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(my_cpu_variant)/libstlport_shared.so
       my_ndk_stl_shared_lib := -lstlport_shared
     endif
   else # LOCAL_NDK_STL_VARIANT is not stlport_* either
@@ -107,17 +127,18 @@ ifdef LOCAL_SDK_VERSION
                                $(my_ndk_source_root)/cxx-stl/llvm-libc++/gabi++/include \
                                $(my_ndk_source_root)/android/support/include
     ifeq (c++_static,$(LOCAL_NDK_STL_VARIANT))
-      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libc++_static.a
+      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++_static.a
     else
-      my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libc++_shared.so
+      my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++_shared.so
       my_ndk_stl_shared_lib := -lc++_shared
     endif
     my_ndk_stl_cppflags := -std=c++11
   else
     # LOCAL_NDK_STL_VARIANT is gnustl_static
-    my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/include \
+    temp_my_cpu_variant := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)
+    my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/libs/$(temp_my_cpu_variant)/include \
                                $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/include
-    my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/libs/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)/libgnustl_static.a
+    my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/libs/$(my_cpu_variant)/libgnustl_static.a
   endif
   endif
   endif
