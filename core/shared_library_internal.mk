@@ -65,6 +65,7 @@ $(linked_module): PRIVATE_TARGET_CRTBEGIN_SO_O := $(my_target_crtbegin_so_o)
 $(linked_module): PRIVATE_TARGET_CRTEND_SO_O := $(my_target_crtend_so_o)
 
 $(linked_module): $(all_objects) $(all_libraries) \
+				  $(MAKEFILE_LIST) \
                   $(LOCAL_ADDITIONAL_DEPENDENCIES) \
                   $(my_target_crtbegin_so_o) $(my_target_crtend_so_o)
 	$(transform-o-to-shared-lib)

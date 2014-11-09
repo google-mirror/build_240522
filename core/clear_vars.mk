@@ -278,8 +278,9 @@ LOCAL_MODULE_STEM_64:=
 LOCAL_CLANG_32:=
 LOCAL_CLANG_64:=
 
-# Trim MAKEFILE_LIST so that $(call my-dir) doesn't need to
-# iterate over thousands of entries every time.
-# Leave the current makefile to make sure we don't break anything
-# that expects to be able to find the name of the current makefile.
-MAKEFILE_LIST := $(lastword $(MAKEFILE_LIST))
+# Trim MAKEFILE_LIST so that $(call my-dir) doesn't need to iterate over
+# thousands of entries every time.  Leave the current makefile to make sure we
+# don't break anything that expects to be able to find the name of the current
+# makefile. Also leave the calling makefile so we can add it to the list of
+# dependencies.
+MAKEFILE_LIST := $(word $(shell expr $(words $(MAKEFILE_LIST)) - 1),$(MAKEFILE_LIST)) $(lastword $(MAKEFILE_LIST))

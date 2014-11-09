@@ -80,5 +80,5 @@ $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES :=
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES :=
 $(full_classes_compiled_jar): PRIVATE_RMTYPEDEFS :=
 $(full_classes_compiled_jar): $(java_sources) $(java_resource_sources) $(full_java_lib_deps) \
-		$(jar_manifest_file) $(proto_java_sources_file_stamp) $(LOCAL_ADDITIONAL_DEPENDENCIES)
+		$(jar_manifest_file) $(proto_java_sources_file_stamp) $(MAKEFILE_LIST) $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	$(transform-host-java-to-package)

@@ -154,7 +154,7 @@ endif
 # TODO: not clear if this is used any more
 $(full_target): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
 
-$(full_target): $(full_src_files) $(droiddoc_templates) $(droiddoc) $(html_dir_files) $(full_java_lib_deps) $(LOCAL_ADDITIONAL_DEPENDENCIES)
+$(full_target): $(full_src_files) $(droiddoc_templates) $(droiddoc) $(html_dir_files) $(full_java_lib_deps) $(MAKEFILE_LIST) $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	@echo Docs droiddoc: $(PRIVATE_OUT_DIR)
 	$(hide) mkdir -p $(dir $@)
 	$(call prepare-doc-source-list,$(PRIVATE_SRC_LIST_FILE),$(PRIVATE_JAVA_FILES), \
