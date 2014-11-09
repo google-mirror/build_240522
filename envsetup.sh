@@ -1605,9 +1605,9 @@ function make()
     local secs=$(($tdiff % 60))
     echo
     if [ $ret -eq 0 ] ; then
-        echo -n -e "#### make completed successfully "
+        echo -n -e "\e[0;32m#### make completed successfully "
     else
-        echo -n -e "#### make failed to build some targets "
+        echo -n -e "\e[0;31m#### make failed to build some targets "
     fi
     if [ $hours -gt 0 ] ; then
         printf "(%02g:%02g:%02g (hh:mm:ss))" $hours $mins $secs
@@ -1616,12 +1616,10 @@ function make()
     elif [ $secs -gt 0 ] ; then
         printf "(%s seconds)" $secs
     fi
-    echo -e " ####"
+    echo -e " ####\e[00m"
     echo
     return $ret
 }
-
-
 
 if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
