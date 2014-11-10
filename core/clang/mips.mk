@@ -7,6 +7,8 @@ CLANG_CONFIG_mips_EXTRA_LDFLAGS :=
 # Include common unknown flags
 CLANG_CONFIG_mips_UNKNOWN_CFLAGS := \
   $(CLANG_CONFIG_UNKNOWN_CFLAGS) \
+  -modd-spreg \
+  -no-odd-spreg \
   -fno-strict-volatile-bitfields \
   -fgcse-after-reload \
   -frerun-cse-after-loop \
