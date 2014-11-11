@@ -99,13 +99,6 @@
 #define HAVE_SCHED_SETSCHEDULER
 
 /*
- * Add any extra platform-specific defines here.
- */
-#ifndef __linux__
-#define __linux__
-#endif
-
-/*
  * Define if we have <malloc.h> header
  */
 #define HAVE_MALLOC_H
