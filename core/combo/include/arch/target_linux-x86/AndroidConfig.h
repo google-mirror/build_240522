@@ -91,18 +91,11 @@
 #define HAVE_SCHED_SETSCHEDULER
 
 /*
- * Add any extra platform-specific defines here.
- */
-#ifndef __linux__
-#define __linux__
-#endif
-
-/*
  * Define if we have <malloc.h> header
  */
 #define HAVE_MALLOC_H
 
-/* 
+/*
  * Define if we're running on *our* linux on device or emulator.
  */
 #define HAVE_ANDROID_OS 1
