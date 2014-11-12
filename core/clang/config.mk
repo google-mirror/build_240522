@@ -40,7 +40,7 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 
 # Help catch common 32/64-bit errors.
 CLANG_CONFIG_EXTRA_CFLAGS += \
-  -Werror=int-conversion
+  -Werror=int-conversion -fmodules -fno-autolink
 
 # Workaround for ccache with clang.
 # See http://petereisentraut.blogspot.com/2011/05/ccache-and-clang.html.
