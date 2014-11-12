@@ -968,7 +968,7 @@ function is64bit()
 }
 
 function adb_get_product_device() {
-  echo `adb shell getprop ro.product.device | sed s/.$//`
+  echo `adb shell getprop ro.hardware | sed s/.$//`
 }
 
 # returns 0 when process is not traced
@@ -1006,6 +1006,7 @@ function gdbclient() {
 
   local OUT_ROOT="$ROOT/out/target/product/$DEVICE"
   local SYMBOLS_DIR="$OUT_ROOT/symbols"
+  local TAPAS_SYMBOLS_DIR="$ROOT/out/target/product/generic/symbols"
 
   if [ ! -d $SYMBOLS_DIR ]; then
     echo "Error: couldn't find symbols: $SYMBOLS_DIR does not exist or is not a directory."
@@ -1080,11 +1081,12 @@ function gdbclient() {
   fi
 
   local OUT_SO_SYMBOLS=$SYMBOLS_DIR/system/lib$USE64BIT
+  local TAPAS_OUT_SO_SYMBOLS=$TAPAS_SYMBOLS_DIR/system/lib$USE64BIT
   local OUT_VENDOR_SO_SYMBOLS=$SYMBOLS_DIR/vendor/lib$USE64BIT
   local ART_CMD=""
 
-  echo >|"$OUT_ROOT/gdbclient.cmds" "set solib-absolute-prefix $SYMBOLS_DIR"
-  echo >>"$OUT_ROOT/gdbclient.cmds" "set solib-search-path $OUT_SO_SYMBOLS:$OUT_SO_SYMBOLS/hw:$OUT_SO_SYMBOLS/ssl/engines:$OUT_SO_SYMBOLS/drm:$OUT_SO_SYMBOLS/egl:$OUT_SO_SYMBOLS/soundfx:$OUT_VENDOR_SO_SYMBOLS:$OUT_VENDOR_SO_SYMBOLS/hw:$OUT_VENDOR_SO_SYMBOLS/egl"
+  echo >|"$OUT_ROOT/gdbclient.cmds" "set solib-absolute-prefix $SYMBOLS_DIR:$TAPAS_SYMBOLS_DIR"
+  echo >>"$OUT_ROOT/gdbclient.cmds" "set solib-search-path $OUT_SO_SYMBOLS:$OUT_SO_SYMBOLS/hw:$OUT_SO_SYMBOLS/ssl/engines:$OUT_SO_SYMBOLS/drm:$OUT_SO_SYMBOLS/egl:$OUT_SO_SYMBOLS/soundfx:$OUT_VENDOR_SO_SYMBOLS:$OUT_VENDOR_SO_SYMBOLS/hw:$OUT_VENDOR_SO_SYMBOLS/egl:$TAPAS_OUT_SO_SYMBOLS"
   local DALVIK_GDB_SCRIPT=$ROOT/development/scripts/gdb/dalvik.gdb
   if [ -f $DALVIK_GDB_SCRIPT ]; then
     echo >>"$OUT_ROOT/gdbclient.cmds" "source $DALVIK_GDB_SCRIPT"
