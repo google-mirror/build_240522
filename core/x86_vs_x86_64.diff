@@ -1,0 +1,20 @@
+1c1
+< define $(combo_2nd_arch_prefix)transform-o-to-shared-lib-inner
+---
+> define transform-o-to-shared-lib-inner
+26c26
+< define $(combo_2nd_arch_prefix)transform-o-to-executable-inner
+---
+> define transform-o-to-executable-inner
+53c53
+< define $(combo_2nd_arch_prefix)transform-o-to-static-executable-inner
+---
+> define transform-o-to-static-executable-inner
+65d64
+< 	-Wl,--start-group \
+67c66
+< 	$(PRIVATE_TARGET_LIBATOMIC) \
+---
+> 	-Wl,--start-group \
+69a69
+> 	$(PRIVATE_TARGET_LIBATOMIC) \

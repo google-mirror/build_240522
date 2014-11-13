@@ -1,0 +1,22 @@
+2a3
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+4d4
+< 	-Wl,--gc-sections \
+18d17
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+28a28
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+30,31d29
+< 	-Wl,-dynamic-linker,/system/bin/linker64 \
+< 	-Wl,--gc-sections \
+47d44
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+57,58c54,56
+< $(hide) $(PRIVATE_CXX) -nostdlib -Bstatic \
+< 	-Wl,--gc-sections \
+---
+> $(hide) $(PRIVATE_CXX) \
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+> 	-nostdlib -Bstatic \
+62d59
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \

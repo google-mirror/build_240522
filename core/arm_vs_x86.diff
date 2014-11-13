@@ -1,0 +1,26 @@
+2a3
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+4d4
+< 	-Wl,--gc-sections \
+18d17
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+28a28
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+30,31d29
+< 	-Wl,-dynamic-linker,/system/bin/linker \
+< 	-Wl,--gc-sections \
+47d44
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+57a55
+> 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+59d56
+< 	-Wl,--gc-sections \
+63d59
+< 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
+69d64
+< 	$(call normalize-target-libraries,$(filter-out %libcompiler_rt.a,$(filter-out %libc_nomalloc.a,$(filter-out %libc.a,$(PRIVATE_ALL_STATIC_LIBRARIES))))) \
+70a66,67
+> 	$(call normalize-target-libraries,$(filter-out %libcompiler_rt.a,$(filter-out %libc_nomalloc.a,$(filter-out %libc.a,$(PRIVATE_ALL_STATIC_LIBRARIES))))) \
+> 	$(PRIVATE_TARGET_LIBATOMIC) \
+73d69
+< 	$(PRIVATE_TARGET_LIBATOMIC) \
