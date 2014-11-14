@@ -1317,7 +1317,7 @@ $(hide) $(PRIVATE_CXX) \
 	$(if $(PRIVATE_GROUP_STATIC_LIBRARIES),-Wl$(comma)--end-group) \
 	$(if $(filter true,$(NATIVE_COVERAGE)),$(PRIVATE_TARGET_LIBGCOV)) \
 	$(PRIVATE_TARGET_LIBATOMIC) \
-	$(PRIVATE_TARGET_LIBGCC) \
+	$(if $(filter %libcompiler_rt.a,$(PRIVATE_ALL_STATIC_LIBRARIES)),,$(PRIVATE_TARGET_LIBGCC)) \
 	$(call normalize-target-libraries,$(PRIVATE_ALL_SHARED_LIBRARIES)) \
 	-o $@ \
 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
@@ -1379,7 +1379,7 @@ $(hide) $(PRIVATE_CXX) -pie \
 	$(if $(PRIVATE_GROUP_STATIC_LIBRARIES),-Wl$(comma)--end-group) \
 	$(if $(filter true,$(NATIVE_COVERAGE)),$(PRIVATE_TARGET_LIBGCOV)) \
 	$(PRIVATE_TARGET_LIBATOMIC) \
-	$(PRIVATE_TARGET_LIBGCC) \
+	$(if $(filter %libcompiler_rt.a,$(PRIVATE_ALL_STATIC_LIBRARIES)),,$(PRIVATE_TARGET_LIBGCC)) \
 	$(call normalize-target-libraries,$(PRIVATE_ALL_SHARED_LIBRARIES)) \
 	-o $@ \
 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
@@ -1421,7 +1421,7 @@ $(hide) $(PRIVATE_CXX) \
 	$(PRIVATE_TARGET_LIBATOMIC) \
 	$(if $(filter true,$(NATIVE_COVERAGE)),$(PRIVATE_TARGET_LIBGCOV)) \
 	$(call normalize-target-libraries,$(filter %libcompiler_rt.a,$(PRIVATE_ALL_STATIC_LIBRARIES))) \
-	$(PRIVATE_TARGET_LIBGCC) \
+	$(if $(filter %libcompiler_rt.a,$(PRIVATE_ALL_STATIC_LIBRARIES)),,$(PRIVATE_TARGET_LIBGCC)) \
 	-Wl,--end-group \
 	$(if $(filter true,$(PRIVATE_NO_CRT)),,$(PRIVATE_TARGET_CRTEND_O))
 endef
