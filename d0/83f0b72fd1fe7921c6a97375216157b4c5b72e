@@ -1,0 +1,9 @@
+Verified+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Andrew P Boie <andrew.p.boie@intel.com>
+Code-Review+1: Doug Zongker <dougz@android.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Submitted-by: Ying Wang <wangying@android.com>
+Submitted-at: Fri, 14 Nov 2014 18:53:57 +0000
+Reviewed-on: https://android-review.googlesource.com/114230
+Project: platform/build
+Branch: refs/heads/master
