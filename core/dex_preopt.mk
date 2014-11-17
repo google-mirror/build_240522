@@ -46,12 +46,6 @@ endef
 
 $(foreach b,$(DEXPREOPT_BOOT_JARS_MODULES),$(eval $(call _dexpreopt-boot-jar-remove-classes.dex,$(b))))
 
-# Conditionally include Dalvik support.
-ifeq ($(DALVIK_VM_LIB),libdvm.so)
-include $(BUILD_SYSTEM)/dex_preopt_libdvm.mk
-endif
-
-# Unconditionally include ART support because its used run dex2oat on the host for tests.
 include $(BUILD_SYSTEM)/dex_preopt_libart.mk
 
 # Define dexpreopt-one-file based on current default runtime.
