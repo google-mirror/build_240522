@@ -21,6 +21,7 @@ echo "ro.product.brand=$PRODUCT_BRAND"
 echo "ro.product.name=$PRODUCT_NAME"
 echo "ro.product.device=$TARGET_DEVICE"
 echo "ro.product.board=$TARGET_BOOTLOADER_BOARD_NAME"
+echo "ro.product.smp=$TARGET_CPU_SMP"
 
 # These values are deprecated, use "ro.product.cpu.abilist"
 # instead (see below).
