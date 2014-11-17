@@ -1,0 +1,10 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Code-Review+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Andrew Hsieh <andrewhsieh@google.com>
+Code-Review+1: Dmitriy Ivanov <dimitry@google.com>
+Verified+1: Dan Albert <danalbert@google.com>
+Submitted-by: Dan Albert <danalbert@google.com>
+Submitted-at: Mon, 17 Nov 2014 20:29:42 +0000
+Reviewed-on: https://android-review.googlesource.com/114664
+Project: platform/build
+Branch: refs/heads/master
