@@ -180,7 +180,13 @@ ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)
 endif
 ifdef LOCAL_DEX_PREOPT
 ifneq (nostripping,$(LOCAL_DEX_PREOPT))
+ifneq ($(DEX_PREOPT_IN_DATA),true)
 	$(call dexpreopt-remove-classes.dex,$@)
+else # ! DEX_PREOPT_IN_DATA
+ifeq ($(filter $(LOCAL_MODULE),$(DEX_PREOPT_IN_DATA_LIST)),)
+	$(call dexpreopt-remove-classes.dex,$@)
+endif
+endif # ! DEX_PREOPT_IN_DATA
 endif
 endif
 	$(align-package)
