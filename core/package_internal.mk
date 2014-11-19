@@ -406,7 +406,9 @@ endif
 	$(sign-package)
 ifdef LOCAL_DEX_PREOPT
 ifneq (nostripping,$(LOCAL_DEX_PREOPT))
+ifeq ($(filter $(LOCAL_MODULE),$(DEX_PREOPT_IN_DATA_LIST)),)
 	$(call dexpreopt-remove-classes.dex,$@)
+endif
 endif
 endif
 	@# Alignment must happen after all other zip operations.
