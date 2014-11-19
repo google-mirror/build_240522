@@ -1,0 +1,9 @@
+Code-Review+2: Bill Yi <byi@google.com>
+Code-Review-1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Chih-Wei Huang <cwhuang@android-x86.org>
+Verified+1: Ying Wang <wangying@android.com>
+Submitted-by: Ying Wang <wangying@android.com>
+Submitted-at: Wed, 19 Nov 2014 18:53:18 +0000
+Reviewed-on: https://android-review.googlesource.com/115202
+Project: platform/build
+Branch: refs/heads/master
