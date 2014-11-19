@@ -41,7 +41,9 @@ endif
 endif
 
 built_odex :=
+data_odex :=
 installed_odex :=
+preload_flag :=
 built_installed_odex :=
 ifdef LOCAL_DEX_PREOPT
 dexpreopt_boot_jar_module := $(filter $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE))
@@ -110,13 +112,29 @@ $(installed_odex) : $(dir $(LOCAL_INSTALLED_MODULE))%$(notdir $(word 1,$(install
     | $(ACP)
 	@echo "Install: $@"
 	$(copy-file-to-target)
+
+# Ugly syntax - See the definition get-odex-data-path.
+$(data_odex) : $(PRODUCT_OUT_DALVIK_CACHE)/%$(notdir $(word 1,$(built_odex))) \
+             : $(dir $(LOCAL_BUILT_MODULE))%$(notdir $(word 1,$(built_odex))) \
+    | $(ACP)
+	@echo "Install $@ from $<"
+	$(copy-file-to-target)
+
+# Use double colon syntax to avoid multiple definitions of the same rule
+# This rule is executed multiple times
+$(preload_flag) ::
+	@echo "Install $@"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) touch $@
 endif
 
 # Add the installed_odex to the list of installed files for this module.
+ALL_MODULES.$(my_register_name).INSTALLED += $(data_odex)
 ALL_MODULES.$(my_register_name).INSTALLED += $(installed_odex)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(built_installed_odex)
 
 # Make sure to install the .odex when you run "make <module_name>"
+$(my_register_name): $(data_odex)
 $(my_register_name): $(installed_odex)
 
 endif # LOCAL_DEX_PREOPT
