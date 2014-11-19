@@ -65,6 +65,14 @@ define get-odex-file-path
 $(dir $(2))$(1)/$(basename $(notdir $(2))).odex
 endef
 
+# Returns the path to the .classes.dex file
+# $(1): the arch name.
+# $(2): the full path (including file name) of the corresponding .jar or .apk.
+# $(3): the path where the file will be installed
+define get-odex-data-path
+$(dir $(2))$(1)/$(subst /,@,$(3))@classes.dex
+endef
+
 # Returns the path to the image file (such as "/system/framework/<arch>/boot.art"
 # $(1): the arch name (such as "arm")
 # $(2): the image location (such as "/system/framework/boot.art")
