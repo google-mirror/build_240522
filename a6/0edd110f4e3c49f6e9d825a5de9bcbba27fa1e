@@ -1,0 +1,9 @@
+Code-Review+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Christoffer Dall <christoffer.dall@linaro.org>
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Ying Wang <wangying@android.com>
+Submitted-by: Ying Wang <wangying@android.com>
+Submitted-at: Thu, 20 Nov 2014 17:17:54 +0000
+Reviewed-on: https://android-review.googlesource.com/112148
+Project: platform/build
+Branch: refs/heads/master
