@@ -218,13 +218,14 @@ rs_compatibility_jni_libs := $(addprefix \
 $(rs_generated_bc) : $(RenderScript_file_stamp)
 
 rs_support_lib := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)/libRSSupport.so
+rs_support_io_lib := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)/libRSSupportIO.so
 rs_jni_lib := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)/librsjni.so
-LOCAL_JNI_SHARED_LIBRARIES += libRSSupport librsjni
+LOCAL_JNI_SHARED_LIBRARIES += libRSSupport librsjni libRSSupportIO
 
 
 
 $(rs_compatibility_jni_libs): $(RenderScript_file_stamp) $(RS_PREBUILT_CLCORE) \
-    $(rs_support_lib) $(rs_jni_lib) $(rs_compiler_rt)
+    $(rs_support_lib) $(rs_support_io_lib) $(rs_jni_lib) $(rs_compiler_rt)
 $(rs_compatibility_jni_libs): $(BCC_COMPAT)
 $(rs_compatibility_jni_libs): PRIVATE_CXX := $(TARGET_CXX)
 $(rs_compatibility_jni_libs): $(renderscript_intermediate)/librs.%.so: \
