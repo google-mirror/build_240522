@@ -1,0 +1,8 @@
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Verified+1: Bionic Buildbot <bionicbb@android.com>
+Verified+1: Nicolas Geoffray <ngeoffray@google.com>
+Submitted-by: Nicolas Geoffray <ngeoffray@google.com>
+Submitted-at: Tue, 25 Nov 2014 14:22:36 +0000
+Reviewed-on: https://android-review.googlesource.com/116108
+Project: platform/build
+Branch: refs/heads/master
