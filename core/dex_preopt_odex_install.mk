@@ -15,7 +15,7 @@ else # WITH_DEXPREOPT=true
           ifeq (disable,$(DEXPREOPT.$(TARGET_PRODUCT).$(LOCAL_MODULE).CONFIG))
             LOCAL_DEX_PREOPT := false
           else
-            LOCAL_DEX_PREOPT := $(DEX_PREOPT_DEFAULT)
+            LOCAL_DEX_PREOPT := true
           endif
         else # LOCAL_APK_LIBRARIES not empty
           LOCAL_DEX_PREOPT := nostripping
@@ -50,26 +50,12 @@ built_installed_odex :=
 ifdef LOCAL_DEX_PREOPT
 dexpreopt_boot_jar_module := $(filter $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE))
 ifdef dexpreopt_boot_jar_module
-ifeq ($(DALVIK_VM_LIB),libdvm.so)
-built_odex := $(basename $(LOCAL_BUILT_MODULE)).odex
-installed_odex := $(basename $(LOCAL_INSTALLED_MODULE)).odex
-built_installed_odex := $(built_odex):$(installed_odex)
-else # libdvm.so
 # For libart, the boot jars' odex files are replaced by $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE).
 # We use this installed_odex trick to get boot.art installed.
 installed_odex := $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
 # Append the odex for the 2nd arch if we have one.
 installed_odex += $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
-endif # libdvm.so
 else  # boot jar
-ifeq ($(DALVIK_VM_LIB),libdvm.so)
-built_odex := $(basename $(LOCAL_BUILT_MODULE)).odex
-installed_odex := $(basename $(LOCAL_INSTALLED_MODULE)).odex
-built_installed_odex := $(built_odex):$(installed_odex)
-
-$(built_odex) : $(DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT) \
-                $(DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS)
-else # libart
 ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
 # For a Java library, we build odex for both 1st arch and 2nd arch, if we have one.
 # #################################################
@@ -95,7 +81,6 @@ include $(BUILD_SYSTEM)/setup_one_odex.mk
 endif  # LOCAL_MULTILIB is both
 endif  # TARGET_2ND_ARCH
 endif  # LOCAL_MODULE_CLASS
-endif  # libart
 endif  # boot jar
 
 ifdef built_odex

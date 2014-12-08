@@ -3,8 +3,6 @@
 #
 ####################################
 
-ifneq ($(DALVIK_VM_LIB),)
-
 # list of boot classpath jars for dexpreopt
 DEXPREOPT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
 DEXPREOPT_BOOT_JARS_MODULES := $(PRODUCT_BOOT_JARS)
@@ -36,9 +34,7 @@ _dbj_src_jar := $(call intermediates-dir-for,JAVA_LIBRARIES,$(1),,COMMON)/javali
 
 $$(_dbj_jar_no_dex) : $$(_dbj_src_jar) | $(ACP) $(AAPT)
 	$$(call copy-file-to-target)
-ifneq ($(DEX_PREOPT_DEFAULT),nostripping)
 	$$(call dexpreopt-remove-classes.dex,$$@)
-endif
 
 _dbj_jar_no_dex :=
 _dbj_src_jar :=
@@ -60,7 +56,3 @@ DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT := $(DEFAULT_DEX_PREOPT_BUILT_IM
 ifdef TARGET_2ND_ARCH
 $(TARGET_2ND_ARCH_VAR_PREFIX)DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT := $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
 endif  # TARGET_2ND_ARCH
-else
-$(warning No DALVIK_VM_LIB, disable dexpreopt.)
-WITH_DEXPREOPT := false
-endif  # DALVIK_VM_LIB is defined.
