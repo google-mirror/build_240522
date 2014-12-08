@@ -225,13 +225,8 @@ my_asflags += -D__ASSEMBLY__
 ## they may cusomize their install path with LOCAL_MODULE_PATH
 ##########################################################
 # Get the list of INSTALLED libraries as module names.
-ifdef LOCAL_SDK_VERSION
-  installed_shared_library_module_names := \
-      $(my_shared_libraries)
-else
-  installed_shared_library_module_names := \
-      $(my_shared_libraries) $(my_system_shared_libraries)
-endif
+installed_shared_library_module_names := \
+    $(my_shared_libraries) $(my_system_shared_libraries)
 
 # The real dependency will be added after all Android.mks are loaded and the install paths
 # of the shared libraries are determined.
