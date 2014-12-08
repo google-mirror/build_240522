@@ -225,10 +225,14 @@ my_asflags += -D__ASSEMBLY__
 ## they may cusomize their install path with LOCAL_MODULE_PATH
 ##########################################################
 # Get the list of INSTALLED libraries as module names.
-ifdef LOCAL_SDK_VERSION
+ifdef TARGET_BUILD_APPS
+  # Unbundled branches don't have the system shared libs, so we can't build
+  # them.
   installed_shared_library_module_names := \
       $(my_shared_libraries)
 else
+  # Platform builds, on the other hand, need to track these dependencies
+  # appropriately.
   installed_shared_library_module_names := \
       $(my_shared_libraries) $(my_system_shared_libraries)
 endif
