@@ -54,6 +54,15 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -Wno-unused-command-line-argument
 
+ifeq ($(TARGET_BUILD_VARIANT),eng)
+#CLANG_CONFIG_EXTRA_CFLAGS += \
+  #-fsanitize=undefined-trap \
+  #-fsanitize-undefined-trap-on-error
+#CLANG_CONFIG_EXTRA_LDFLAGS += \
+  #-fsanitize=undefined-trap \
+  #-fsanitize-undefined-trap-on-error
+endif
+
 # Disable -Winconsistent-missing-override until we can clean up the existing
 # codebase for it.
 CLANG_CONFIG_EXTRA_CPPFLAGS += \
@@ -115,7 +124,7 @@ endif
 
 # Address sanitizer clang config
 ADDRESS_SANITIZER_RUNTIME_LIBRARY := libclang_rt.asan_$(TARGET_ARCH)_android
-ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS := -fsanitize=address -fno-omit-frame-pointer
+ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS := -fno-omit-frame-pointer
 ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS := -Wl,-u,__asan_preinit
 
 ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES := libdl $(ADDRESS_SANITIZER_RUNTIME_LIBRARY)
