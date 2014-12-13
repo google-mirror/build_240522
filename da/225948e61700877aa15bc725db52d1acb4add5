@@ -1,0 +1,8 @@
+Verified+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Andreas Gampe <agampe@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Submitted-by: Elliott Hughes <enh@google.com>
+Submitted-at: Sat, 13 Dec 2014 18:51:23 +0000
+Reviewed-on: https://android-review.googlesource.com/119285
+Project: platform/build
+Branch: refs/heads/master
