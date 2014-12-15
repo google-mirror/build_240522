@@ -27,6 +27,7 @@ import sys
 import commands
 import shutil
 import tempfile
+from ast import literal_eval
 
 FIXED_SALT = "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
 
@@ -295,7 +296,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   """
   d = {}
   if "build.prop" in glob_dict:
-    bp = glob_dict["build.prop"]
+    bp = literal_eval(glob_dict["build.prop"])
     if "ro.build.date.utc" in bp:
       d["timestamp"] = bp["ro.build.date.utc"]
 
