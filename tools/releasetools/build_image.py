@@ -309,6 +309,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "mkyaffs2_extra_flags",
       "selinux_fc",
       "skip_fsck",
+      "timestamp",
       "verity",
       "verity_key",
       "verity_signer_cmd"
