@@ -36,7 +36,6 @@ ifneq ($(my_sanitize),)
   space := $(empty) $(empty)
   fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize)),
   my_cflags += -fsanitize=$(fsanitize_arg)
-
   ifdef LOCAL_IS_HOST_MODULE
     my_ldflags += -fsanitize=$(fsanitize_arg)
   endif
@@ -49,7 +48,7 @@ ifneq ($(filter address,$(my_sanitize)),)
   my_ldflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS)
   ifdef LOCAL_IS_HOST_MODULE
     # -nodefaultlibs (provided with libc++) prevents the driver from linking
-    # libraries needed with -fsanitize=address. http://b/18650275
+    # libraries needed with -fsanitize=address. http://b/18650275 (WAI)
     my_ldlibs += -ldl -lpthread
   else
     my_shared_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES)
@@ -61,6 +60,12 @@ ifneq ($(filter undefined,$(my_sanitize)),)
   ifdef LOCAL_IS_HOST_MODULE
     my_ldlibs += -ldl
   else
-    $(error ubsan is not yet supported on the target)
+    ifeq ($(LOCAL_RTTI_FLAG),-fno-rtti)
+      $(error $(LOCAL_MODULE): `LOCAL_SANITIZE := undefined` requires -frtti)
+    else
+      LOCAL_RTTI_FLAG := -frtti
+    endif
+    my_static_libraries += libubsan libubsan_cxx libsan
+    my_shared_libraries += liblog
   endif
 endif
