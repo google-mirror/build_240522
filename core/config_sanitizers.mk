@@ -63,6 +63,12 @@ ifneq ($(filter undefined,$(my_sanitize)),)
   ifdef LOCAL_IS_HOST_MODULE
     my_ldlibs += -ldl
   else
-    $(error ubsan is not yet supported on the target)
+    ifeq ($(LOCAL_RTTI_FLAG),-fno-rtti)
+      $(error $(LOCAL_MODULE): `LOCAL_SANITIZE := undefined` requires -frtti)
+    else
+      LOCAL_RTTI_FLAG := -frtti
+    endif
+    my_static_libraries += libubsan libubsan_cxx libsan
+    my_shared_libraries += liblog
   endif
 endif
