@@ -17,6 +17,7 @@
 # Base modules (will move elsewhere, previously user tagged)
 PRODUCT_PACKAGES += \
     20-dns.conf \
+    25-static-routes.conf \
     95-configured \
     appwidget \
     appops \
