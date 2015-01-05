@@ -169,6 +169,10 @@ endif
 # Turn on all warnings and warnings as errors for RS compiles.
 # This can be disabled with LOCAL_RENDERSCRIPT_FLAGS := -Wno-error
 renderscript_flags := -Wall -Werror
+# eng/userdebug builds turn on RS debugging by default
+ifneq ($(filter $(TARGET_BUILD_VARIANT),eng userdebug),)
+renderscript_flags += -g
+endif
 renderscript_flags += $(LOCAL_RENDERSCRIPT_FLAGS)
 
 # prepend the RenderScript system include path
