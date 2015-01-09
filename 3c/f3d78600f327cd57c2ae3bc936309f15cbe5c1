@@ -1,0 +1,9 @@
+Verified+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+1: Brian Carlstrom <bdc@google.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Code-Review+1: Andreas Gampe <agampe@google.com>
+Submitted-by: Brian Carlstrom <bdc@google.com>
+Submitted-at: Fri, 09 Jan 2015 17:51:57 +0000
+Reviewed-on: https://android-review.googlesource.com/122200
+Project: platform/build
+Branch: refs/heads/master
