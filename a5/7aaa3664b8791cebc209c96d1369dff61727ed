@@ -1,0 +1,9 @@
+Code-Review+1: Duane Sand <duane.1.sand@gmail.com>
+Code-Review+1: Andreas Gampe <agampe@google.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Submitted-by: Brian Carlstrom <bdc@google.com>
+Submitted-at: Fri, 09 Jan 2015 19:23:39 +0000
+Reviewed-on: https://android-review.googlesource.com/120813
+Project: platform/build
+Branch: refs/heads/master
