@@ -183,7 +183,9 @@ ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 	$(call dexpreopt-remove-classes.dex,$@)
 endif
 endif
+ifneq ($(LOCAL_ZIPALIGN),false)
 	$(align-package)
+endif
 
 ###############################
 ## Rule to build the odex file
