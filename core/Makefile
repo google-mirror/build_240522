@@ -156,7 +156,8 @@ else
   BUILD_DISPLAY_ID := $(build_desc)
 endif
 
-# Whether there is default locale set in PRODUCT_PROPERTY_OVERRIDES
+# Whether there is default language / region set in PRODUCT_PROPERTY_OVERRIDES.
+# If it exists, then we throw an error since it is not supported.
 product_property_override_locale_language := $(strip \
     $(patsubst ro.product.locale.language=%,%,\
     $(filter ro.product.locale.language=%,$(PRODUCT_PROPERTY_OVERRIDES))))
@@ -164,22 +165,26 @@ product_property_overrides_locale_region := $(strip \
     $(patsubst ro.product.locale.region=%,%,\
     $(filter ro.product.locale.region=%,$(PRODUCT_PROPERTY_OVERRIDES))))
 
-# Selects the first locale in the list given as the argument,
-# and splits it into language and region, which each may be
-# empty.
-define default-locale
-$(subst _, , $(firstword $(1)))
+# TODO: Add a warning here if product_property_override_locale_language
+# or product_property_overrides_locale_region are set.
+
+product_property_overrides_locale_tag := $(strip \
+    $(patsubst ro.product.locale.tag=%,%,\
+    $(filter ro.product.locale.tag=%,$(PRODUCT_PROPERTY_OVERRIDES))))
+
+# Accepts a whitespace separated list of product locales such as
+# (en_US en_AU en_GB...) and returns the first locale in the list with
+# underscores replaced with hyphens. In the example above, this will
+# return "en-US".
+define get-default-locale-from-locales
+$(subst _,-, $(firstword $(1)))
 endef
 
-# Selects the first locale in the list given as the argument
-# and returns the language (or the region), if it's not set in PRODUCT_PROPERTY_OVERRIDES;
-# Return empty string if it's already set in PRODUCT_PROPERTY_OVERRIDES.
-define default-locale-language
-$(if $(product_property_override_locale_language),,$(word 1, $(call default-locale, $(1))))
-endef
-define default-locale-region
-$(if $(product_property_overrides_locale_region),,$(word 2, $(call default-locale, $(1))))
-endef
+# Returns the overridden locale value from ro.product.locale.tag (if set)
+# or the first locale in the provided list of locales.
+define get-default-product-locale
+$(if $(product_property_overrides_locale_tag),,$(call get-default-locale-from-locales, $(1)))
+endif
 
 BUILDINFO_SH := build/tools/buildinfo.sh
 
@@ -203,8 +208,7 @@ endif
 			TARGET_DEVICE="$(TARGET_DEVICE)" \
 			PRODUCT_NAME="$(TARGET_PRODUCT)" \
 			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
-			PRODUCT_DEFAULT_LANGUAGE="$(call default-locale-language,$(PRODUCT_LOCALES))" \
-			PRODUCT_DEFAULT_REGION="$(call default-locale-region,$(PRODUCT_LOCALES))" \
+			PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
 			PRODUCT_DEFAULT_WIFI_CHANNELS="$(PRODUCT_DEFAULT_WIFI_CHANNELS)" \
 			PRODUCT_MODEL="$(PRODUCT_MODEL)" \
 			PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
