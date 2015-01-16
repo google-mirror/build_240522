@@ -417,6 +417,10 @@ $(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(built_dex)
 	$(hide) mv $@ $@.input
 	$(call dexpreopt-one-file,$@.input,$@)
 	$(hide) rm $@.input
+else
+$(LOCAL_BUILT_MODULE): $(DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
+ifdef TARGET_2ND_ARCH
+$(LOCAL_BUILT_MODULE): $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
 endif
 
 ###############################
