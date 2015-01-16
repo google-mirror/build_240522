@@ -8,5 +8,8 @@ arch_variant_cflags := \
     -mfp32 \
     -modd-spreg \
 
+# Workaround until clang generates this itself:
+arch_variant_cflags += -D__mips_isa_rev=1
+
 arch_variant_ldflags := \
     -Wl,-melf32ltsmip

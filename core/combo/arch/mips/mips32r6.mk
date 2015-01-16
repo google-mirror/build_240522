@@ -8,5 +8,8 @@ arch_variant_cflags := \
     -mno-odd-spreg \
     -msynci
 
+# Workaround until clang generates this itself:
+arch_variant_cflags += -D__mips_isa_rev=6
+
 arch_variant_ldflags := \
     -Wl,-melf32ltsmip
