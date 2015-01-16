@@ -190,6 +190,11 @@ endif
 ifdef LOCAL_DEX_PREOPT
 $(built_odex) : $(my_prebuilt_src_file)
 	$(call dexpreopt-one-file,$<,$@)
+else
+$(built_module): $(DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
+ifdef TARGET_2ND_ARCH
+$(built_module): $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
+endif
 endif
 
 ###############################
