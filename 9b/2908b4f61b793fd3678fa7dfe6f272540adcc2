@@ -1,0 +1,7 @@
+Verified+1: Bionic Buildbot <bionicbb@android.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Miao Wang <miaowang@google.com>
+Submitted-at: Fri, 16 Jan 2015 16:34:15 +0000
+Reviewed-on: https://android-review.googlesource.com/123010
+Project: platform/build
+Branch: refs/heads/master
