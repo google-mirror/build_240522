@@ -1429,7 +1429,7 @@ endef
 
 define transform-o-to-static-executable-inner
 $(hide) $(PRIVATE_CXX) \
-	-nostdlib -Bstatic \
+	-nostdlib -Bstatic -static \
 	-Wl,--gc-sections \
 	-o $@ \
 	$(PRIVATE_TARGET_GLOBAL_LD_DIRS) \
