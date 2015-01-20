@@ -53,7 +53,10 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CPPFLAGS += \
   -Wno-inconsistent-missing-override
 
+# Unknown/unsupported options.
+#  ffloat-store is not supported (but recognized). Suppress warning.
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
+  -ffloat-store \
   -finline-functions \
   -finline-limit=64 \
   -fno-canonical-system-headers \
