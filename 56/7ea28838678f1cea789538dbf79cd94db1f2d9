@@ -1,0 +1,9 @@
+Code-Review+1: Chih-Wei Huang <cwhuang@android-x86.org>
+Code-Review+1: Todd Poynor <toddpoynor@google.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Submitted-by: Ying Wang <wangying@android.com>
+Submitted-at: Wed, 21 Jan 2015 20:05:22 +0000
+Reviewed-on: https://android-review.googlesource.com/123936
+Project: platform/build
+Branch: refs/heads/master
