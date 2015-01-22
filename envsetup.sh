@@ -1045,7 +1045,12 @@ function gdbclient() {
   fi
 
   local EXE=`adb shell readlink /proc/$PID/exe | sed s/.$//`
-  # TODO: print error in case there is no such pid
+
+  if [ -z "$EXE" ]; then
+    echo "Error: unable to resolve executable by pid=$PID - is process still alive?"
+    return -4
+  fi
+
   local LOCAL_EXE_PATH=$SYMBOLS_DIR$EXE
 
   if [ ! -f $LOCAL_EXE_PATH ]; then
