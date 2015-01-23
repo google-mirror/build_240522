@@ -1778,7 +1778,7 @@ endef
 define initialize-package-file
 @mkdir -p $(dir $(2))
 $(hide) cp -f $(1) $(2)
-$(hide) zip -qd $(2) "*.class" "*/" || true # Ignore the error when nothing to delete.
+$(hide) zip -qd $(2) "*.class" || true # Ignore the error when nothing to delete.
 endef
 
 #TODO: we kinda want to build different asset packages for
@@ -1828,7 +1828,7 @@ endef
 
 #TODO: update the manifest to point to the dex file
 define add-dex-to-package
-$(hide) zip -qj $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
+$(hide) zip -q $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
 endef
 
 # Add java resources added by the current module.
