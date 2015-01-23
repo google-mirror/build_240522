@@ -1778,7 +1778,7 @@ endef
 define initialize-package-file
 @mkdir -p $(dir $(2))
 $(hide) cp -f $(1) $(2)
-$(hide) zip -qd $(2) "*.class" "*/" || true # Ignore the error when nothing to delete.
+$(hide) zip -qd $(2) "*.class" || true # Ignore the error when nothing to delete.
 endef
 
 #TODO: we kinda want to build different asset packages for
