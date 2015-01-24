@@ -61,7 +61,7 @@ else ifeq ($(my_cxx_stl),libstdc++)
 else ifeq ($(my_cxx_stl),none)
     ifdef LOCAL_IS_HOST_MODULE
         my_cppflags += -nostdinc++
-        my_ldflags += -nodefaultlibs -lc -lm
+        my_ldflags += -nodefaultlibs -lc -lm -lgcc_s
     endif
 else
     $(error $(my_cxx_stl) is not a supported STL.)
