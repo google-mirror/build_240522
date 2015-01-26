@@ -66,6 +66,9 @@ TARGET_LIBGCOV := \
 	$(shell $(TARGET_CC) -m64 -print-file-name=libgcov.a)
 endif
 
+include $(BUILD_SYSTEM)/clang/config.mk
+$(combo_2nd_arch_prefix)TARGET_LIBPROFILE_RT := $(LLVM_RTLIB_PATH)/libclang_rt.profile-x86_64-android.a
+
 TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
 libc_root := bionic/libc
