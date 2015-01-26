@@ -49,6 +49,8 @@ $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -D__STDC_FORMAT_MACROS -D__STDC_CO
 
 $(combo_2nd_arch_prefix)HOST_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
+include $(BUILD_SYSTEM)/clang/config.mk
+$(combo_2nd_arch_prefix)HOST_LIBPROFILE_RT := $(LLVM_RTLIB_PATH)/libclang_rt.profile-i686.a
 
 ############################################################
 ## Macros after this line are shared by the 64-bit config.
