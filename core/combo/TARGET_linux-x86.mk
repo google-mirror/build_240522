@@ -66,6 +66,9 @@ $(combo_2nd_arch_prefix)TARGET_LIBGCOV := \
 	$(shell $($(combo_2nd_arch_prefix)TARGET_CC) -m32 -print-file-name=libgcov.a)
 endif
 
+include $(BUILD_SYSTEM)/clang/config.mk
+$(combo_2nd_arch_prefix)TARGET_LIBPROFILE_RT := $(LLVM_RTLIB_PATH)/libclang_rt.profile-i686.a
+
 $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
 libc_root := bionic/libc
