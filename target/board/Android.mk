@@ -25,3 +25,4 @@ ifdef board_info_txt
 else
 	$(hide) echo "board=$(TARGET_BOOTLOADER_BOARD_NAME)" > $@
 endif
+	$(hide) cat $(@) | grep require | sed -e 's/require /ro.versionitis./g' >> $(INSTALLED_BUILD_PROP_TARGET) 
