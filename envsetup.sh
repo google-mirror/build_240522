@@ -1091,10 +1091,10 @@ function gdbclient() {
   elif [[ $CPU_ABI =~ (^|,)x86 ]]; then
     GDB=x86_64-linux-android-gdb
   elif [[ $CPU_ABI =~ (^|,)mips64 ]]; then
-    GDB=mipsel-linux-android-gdb
+    GDB=mips64el-linux-android-gdb
     GDB64=mips64el-linux-android-gdb
   elif [[ $CPU_ABI =~ (^|,)mips ]]; then
-    GDB=mipsel-linux-android-gdb
+    GDB=mips64el-linux-android-gdb
   else
     echo "Error: unrecognized cpu.abilist: $CPU_ABI"
     return -6
