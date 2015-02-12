@@ -578,6 +578,8 @@ else
   my_checked_module := $(LOCAL_BUILT_MODULE)
 endif
 
+__my_checked_module := $(my_checked_module)
+
 # If they request that this module not be checked, then don't.
 # PLEASE DON'T SET THIS.  ANY PLACES THAT SET THIS WITHOUT
 # GOOD REASON WILL HAVE IT REMOVED.
@@ -672,9 +674,9 @@ h_or_t := target
 endif
 
 ifdef j_or_n
-$(j_or_n) $(h_or_t) $(j_or_n)-$(h_or_t) : $(my_checked_module)
+$(j_or_n) $(h_or_t) $(j_or_n)-$(h_or_t) : $(__my_checked_module)
 ifneq (,$(filter $(my_module_tags),tests))
-$(j_or_n)-$(h_or_t)-tests $(j_or_n)-tests $(h_or_t)-tests : $(my_checked_module)
+$(j_or_n)-$(h_or_t)-tests $(j_or_n)-tests $(h_or_t)-tests : $(__my_checked_module)
 endif
 endif
 
