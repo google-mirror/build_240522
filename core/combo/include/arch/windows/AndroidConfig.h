@@ -58,19 +58,19 @@
 /* TODO: replace references to this. */
 #define HAVE_WIN32_IPC
 
+#ifdef __CYGWIN__
+#error "CYGWIN is unsupported for platform builds"
+#endif
+
 /*
  * Define this if you build against MSVCRT.DLL
  */
-#ifndef __CYGWIN__
-#  define HAVE_MS_C_RUNTIME
-#endif
+#define HAVE_MS_C_RUNTIME
 
 /*
  * Define this if we want to use WinSock.
  */
-#ifndef __CYGWIN__
 #define HAVE_WINSOCK
-#endif
 
 /*
  * We need to choose between 32-bit and 64-bit off_t.  All of our code should
