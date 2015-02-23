@@ -34,6 +34,11 @@ ifeq (true,$(WITH_DEXPREOPT_PIC))
   PRODUCT_DEX_PREOPT_BOOT_FLAGS += --compile-pic
 endif
 
+# Set boot compiler filter option to speed for small mode
+ifeq ($(WITH_ART_SMALL_MODE),true)
+  PRODUCT_DEX_PREOPT_BOOT_FLAGS += --compiler-filter=speed
+endif
+
 # If we have a compiled-classes file, create a parameter.
 COMPILED_CLASSES_FLAGS :=
 ifneq ($(COMPILED_CLASSES),)

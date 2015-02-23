@@ -51,3 +51,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-Xms=64m \
     dalvik.vm.dex2oat-Xmx=512m \
     ro.dalvik.vm.native.bridge=0 \
+
+ifeq ($(WITH_ART_SMALL_MODE),true)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-filter=interpret-only \
+    dalvik.vm.image-dex2oat-filter=speed
+endif

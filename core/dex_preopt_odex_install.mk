@@ -92,6 +92,11 @@ ifeq (true,$(WITH_DEXPREOPT_PIC))
   LOCAL_DEX_PREOPT_FLAGS += --compile-pic
 endif
 
+# Set non-boot compiler filter option to interpret-only for small mode
+ifeq ($(WITH_ART_SMALL_MODE),true)
+  LOCAL_DEX_PREOPT_FLAGS += --compiler-filter=interpret-only
+endif
+
 $(built_odex): PRIVATE_DEX_PREOPT_FLAGS := $(LOCAL_DEX_PREOPT_FLAGS)
 
 # Use pattern rule - we may have multiple installed odex files.
