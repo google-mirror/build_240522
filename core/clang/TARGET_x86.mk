@@ -18,7 +18,14 @@ CLANG_CONFIG_x86_TARGET_EXTRA_CFLAGS := \
   $(CLANG_CONFIG_EXTRA_CFLAGS) \
   $(CLANG_CONFIG_TARGET_EXTRA_CFLAGS) \
   $(CLANG_CONFIG_x86_EXTRA_CFLAGS) \
-  $(CLANG_CONFIG_x86_TARGET_EXTRA_ASFLAGS)
+  $(CLANG_CONFIG_x86_TARGET_EXTRA_ASFLAGS) \
+  -fno-optimize-sibling-calls \
+  -fno-builtin
+
+# http://llvm.org/bugs/show_bug.cgi?id=15086,
+# llvm tail call optimization is wrong for x86.
+# b/19234330, -fno-builtin is used to work around other boot up problems
+# on fugu devices, for bionic/linker, libc, and libcutils modules.
 
 CLANG_CONFIG_x86_TARGET_EXTRA_CONLYFLAGS := \
   $(CLANG_CONFIG_EXTRA_CONLYFLAGS) \
