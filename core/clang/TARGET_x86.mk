@@ -18,7 +18,12 @@ CLANG_CONFIG_x86_TARGET_EXTRA_CFLAGS := \
   $(CLANG_CONFIG_EXTRA_CFLAGS) \
   $(CLANG_CONFIG_TARGET_EXTRA_CFLAGS) \
   $(CLANG_CONFIG_x86_EXTRA_CFLAGS) \
-  $(CLANG_CONFIG_x86_TARGET_EXTRA_ASFLAGS)
+  $(CLANG_CONFIG_x86_TARGET_EXTRA_ASFLAGS) \
+  -fno-builtin
+
+# b/19234330, -fno-builtin is used to work around boot up problems
+# on fugu devices. At least some libc and libcutils modules have
+# broken builtin memset and/or memcpy code.
 
 CLANG_CONFIG_x86_TARGET_EXTRA_CONLYFLAGS := \
   $(CLANG_CONFIG_EXTRA_CONLYFLAGS) \
