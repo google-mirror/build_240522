@@ -1056,6 +1056,16 @@ $(hide) $(YASM) \
     -o $@ $<
 endef
 
+# YASM compilation
+define transform-asm-to-64o
+@mkdir -p $(dir $@)
+$(hide) $(YASM) \
+    $(addprefix -I , $(PRIVATE_C_INCLUDES)) \
+    -f elf64 -m amd64 \
+    $(PRIVATE_ASFLAGS) \
+    -o $@ $<
+endef
+
 ###########################################################
 ## Commands for running gcc to compile an Objective-C file
 ## This should never happen for target builds but this
