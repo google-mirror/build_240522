@@ -53,7 +53,8 @@ installed_odex := $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
 installed_odex += $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
 else  # boot jar
 ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
-# For a Java library, we build odex for both 1st arch and 2nd arch, if we have one.
+# For a Java library, by default we build odex for both 1st arch and 2nd arch, if we have one.
+# But it can be overridden with "LOCAL_MULTILIB := first".
 # #################################################
 # Odex for the 1st arch
 my_2nd_arch_prefix :=
@@ -61,8 +62,10 @@ include $(BUILD_SYSTEM)/setup_one_odex.mk
 # #################################################
 # Odex for the 2nd arch
 ifdef TARGET_2ND_ARCH
+ifneq (first,$(LOCAL_MULTILIB))
 my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/setup_one_odex.mk
+endif  # LOCAL_MULTILIB is not first.
 endif  # TARGET_2ND_ARCH
 # #################################################
 else  # must be APPS
