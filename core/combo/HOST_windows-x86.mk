@@ -30,9 +30,10 @@ TOOLS_EXE_SUFFIX :=
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -DUSE_MINGW -DWIN32_LEAN_AND_MEAN
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -Wno-unused-parameter
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += --sysroot=prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32
-$(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -m32
-$(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += -m32
-TOOLS_PREFIX := prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/bin/x86_64-w64-mingw32-
+$(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -target i386-pc-mingw32
+$(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += -target i386-pc-mingw32
+TOOLS_PREFIX := $(LLVM_PREBUILTS_PATH)
+GCC_TOOLS_PREFIX := prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/bin/x86_64-w64-mingw32-
 $(combo_2nd_arch_prefix)HOST_C_INCLUDES += prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/include
 $(combo_2nd_arch_prefix)HOST_C_INCLUDES += prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/lib/gcc/x86_64-w64-mingw32/4.8.3/include
 $(combo_2nd_arch_prefix)HOST_GLOBAL_LD_DIRS += -Lprebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/lib32
@@ -43,9 +44,9 @@ endif # Linux
 # See bug 12708004.
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS -D__USE_MINGW_ANSI_STDIO
 
-$(combo_2nd_arch_prefix)HOST_CC := $(TOOLS_PREFIX)gcc$(TOOLS_EXE_SUFFIX)
-$(combo_2nd_arch_prefix)HOST_CXX := $(TOOLS_PREFIX)g++$(TOOLS_EXE_SUFFIX)
-$(combo_2nd_arch_prefix)HOST_AR := $(TOOLS_PREFIX)ar$(TOOLS_EXE_SUFFIX)
+$(combo_2nd_arch_prefix)HOST_CC := $(TOOLS_PREFIX)clang$(TOOLS_EXE_SUFFIX)
+$(combo_2nd_arch_prefix)HOST_CXX := $(TOOLS_PREFIX)clang++$(TOOLS_EXE_SUFFIX)
+$(combo_2nd_arch_prefix)HOST_AR := $(GCC_TOOLS_PREFIX)ar$(TOOLS_EXE_SUFFIX)
 
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += \
     -include $(call select-android-config-h,windows)
