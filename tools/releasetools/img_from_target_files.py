@@ -141,6 +141,10 @@ def main(argv):
 
   finally:
     print "cleaning up..."
+    # http://b/18015246
+    # See common.py for background.  zipfile also refers to ZIP64_LIMIT during
+    # close() when it writes out the central directory
+    zipfile.ZIP64_LIMIT = (1 << 32) - 1
     output_zip.close()
     shutil.rmtree(OPTIONS.input_tmp)
 
