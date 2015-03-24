@@ -32,12 +32,8 @@ if sys.hexversion < 0x02070000:
   print >> sys.stderr, "Python 2.7 or newer is required."
   sys.exit(1)
 
-import errno
 import os
-import re
 import shutil
-import subprocess
-import tempfile
 import zipfile
 
 # missing in Python 2.4 and before
@@ -58,7 +54,7 @@ def CopyInfo(output_zip):
 def main(argv):
   bootable_only = [False]
 
-  def option_handler(o, a):
+  def option_handler(o, _):
     if o in ("-z", "--bootable_zip"):
       bootable_only[0] = True
     else:
@@ -116,7 +112,7 @@ def main(argv):
       boot_image = common.GetBootableImage(
           "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
       if boot_image:
-          boot_image.AddToZip(output_zip)
+        boot_image.AddToZip(output_zip)
       recovery_image = common.GetBootableImage(
           "recovery.img", "recovery.img", OPTIONS.input_tmp, "RECOVERY")
       if recovery_image:

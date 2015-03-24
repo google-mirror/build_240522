@@ -169,22 +169,25 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
           f.write(data)
 
   for info in input_tf_zip.infolist():
-    if info.filename.startswith("IMAGES/"): continue
+    if info.filename.startswith("IMAGES/"):
+      continue
 
     data = input_tf_zip.read(info.filename)
     out_info = copy.copy(info)
 
     if (info.filename == "META/misc_info.txt" and
         OPTIONS.replace_verity_private_key):
-      ReplaceVerityPrivateKey(input_tf_zip, output_tf_zip, misc_info, OPTIONS.replace_verity_private_key[1])
+      ReplaceVerityPrivateKey(input_tf_zip, output_tf_zip, misc_info,
+                              OPTIONS.replace_verity_private_key[1])
     elif (info.filename == "BOOT/RAMDISK/verity_key" and
-        OPTIONS.replace_verity_public_key):
-      new_data = ReplaceVerityPublicKey(output_tf_zip, OPTIONS.replace_verity_public_key[1])
+          OPTIONS.replace_verity_public_key):
+      new_data = ReplaceVerityPublicKey(output_tf_zip,
+                                        OPTIONS.replace_verity_public_key[1])
       write_to_temp(info.filename, info.external_attr, new_data)
     elif (info.filename.startswith("BOOT/") or
-        info.filename.startswith("RECOVERY/") or
-        info.filename.startswith("META/") or
-        info.filename == "SYSTEM/etc/recovery-resource.dat"):
+          info.filename.startswith("RECOVERY/") or
+          info.filename.startswith("META/") or
+          info.filename == "SYSTEM/etc/recovery-resource.dat"):
       write_to_temp(info.filename, info.external_attr, data)
 
     if info.filename.endswith(".apk"):
@@ -231,7 +234,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   if OPTIONS.replace_ota_keys:
     new_recovery_keys = ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info)
     if new_recovery_keys:
-      write_to_temp("RECOVERY/RAMDISK/res/keys", 0755 << 16, new_recovery_keys)
+      write_to_temp("RECOVERY/RAMDISK/res/keys", 0o755 << 16, new_recovery_keys)
 
   if rebuild_recovery:
     recovery_img = common.GetBootableImage(
@@ -268,8 +271,8 @@ def ReplaceCerts(data):
       if OPTIONS.verbose:
         print "    Replaced %d occurence(s) of %s.x509.pem with " \
             "%s.x509.pem" % (num, old, new)
-    except IOError, e:
-      if (e.errno == errno.ENOENT and not OPTIONS.verbose):
+    except IOError as e:
+      if e.errno == errno.ENOENT and not OPTIONS.verbose:
         continue
 
       print "    Error accessing %s. %s. Skip replacing %s.x509.pem " \
@@ -303,7 +306,7 @@ def RewriteProps(data, misc_info):
         pieces[-1] = EditTags(pieces[-1])
         value = "/".join(pieces)
       elif (key in ("ro.build.thumbprint", "ro.vendor.build.thumbprint")
-          and misc_info.get("oem_fingerprint_properties") is not None):
+            and misc_info.get("oem_fingerprint_properties") is not None):
         pieces = value.split("/")
         pieces[-1] = EditTags(pieces[-1])
         value = "/".join(pieces)
@@ -380,13 +383,13 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   # put into a zipfile system/etc/security/otacerts.zip.
   # We DO NOT include the extra_recovery_keys (if any) here.
 
-  tempfile = cStringIO.StringIO()
-  certs_zip = zipfile.ZipFile(tempfile, "w")
+  temp_file = cStringIO.StringIO()
+  certs_zip = zipfile.ZipFile(temp_file, "w")
   for k in mapped_keys:
     certs_zip.write(k)
   certs_zip.close()
   common.ZipWriteStr(output_tf_zip, "SYSTEM/etc/security/otacerts.zip",
-                     tempfile.getvalue())
+                     temp_file.getvalue())
 
   return new_recovery_keys
 
@@ -397,7 +400,8 @@ def ReplaceVerityPublicKey(targetfile_zip, key_path):
   common.ZipWriteStr(targetfile_zip, "BOOT/RAMDISK/verity_key", data)
   return data
 
-def ReplaceVerityPrivateKey(targetfile_input_zip, targetfile_output_zip, misc_info, key_path):
+def ReplaceVerityPrivateKey(targetfile_input_zip, targetfile_output_zip,
+                            misc_info, key_path):
   print "Replacing verity private key with %s" % key_path
   current_key = misc_info["verity_key"]
   original_misc_info = targetfile_input_zip.read("META/misc_info.txt")
