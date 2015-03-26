@@ -90,6 +90,7 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
 			-fstrict-aliasing \
 			-funswitch-loops \
 			-funwind-tables \
+			-fstack-check \
 			-fstack-protector \
 			-m32 \
 			-no-canonical-prefixes \
