@@ -73,6 +73,7 @@ TARGET_GLOBAL_CFLAGS += \
 android_config_h := $(call select-android-config-h,linux-arm64)
 
 TARGET_GLOBAL_CFLAGS += \
+			-fstack-check \
 			-fstack-protector \
 			-ffunction-sections \
 			-fdata-sections \
