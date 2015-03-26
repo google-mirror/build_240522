@@ -1,0 +1,8 @@
+Code-Review+2: Brian Carlstrom <bdc@google.com>
+Verified+1: Richard Uhler <ruhler@google.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Submitted-by: Richard Uhler <ruhler@google.com>
+Submitted-at: Thu, 26 Mar 2015 14:57:33 +0000
+Reviewed-on: https://android-review.googlesource.com/142006
+Project: platform/build
+Branch: refs/heads/master
