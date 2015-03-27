@@ -95,6 +95,7 @@ PRODUCT_BOOT_JARS := \
     android.policy \
     apache-xml \
     nullwebview \
+    icu4j
 
 # The order of PRODUCT_SYSTEM_SERVER_JARS matters.
 PRODUCT_SYSTEM_SERVER_JARS := \

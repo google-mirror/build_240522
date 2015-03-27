@@ -35,6 +35,7 @@ PRODUCT_PACKAGES += \
     dpm \
     framework \
     fsck_msdos \
+    icu4j \
     ime \
     input \
     javax.obex \
