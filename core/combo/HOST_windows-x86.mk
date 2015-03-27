@@ -51,8 +51,6 @@ $(combo_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG := prebuilts/gcc/linux-x86/host
 
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += \
     -include $(call select-android-config-h,windows)
-$(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += \
-    --enable-stdcall-fixup
 
 ifneq ($(strip $(BUILD_HOST_static)),)
 # Statically-linked binaries are desirable for sandboxed environment

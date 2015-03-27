@@ -13,11 +13,6 @@ ifeq ($(strip $(LOCAL_CXX_STL)),default)
             ifneq (,$(BUILD_HOST_static))
                 my_cxx_stl := libc++_static
             endif
-
-            ifdef USE_MINGW
-                # libc++ is not supported on mingw.
-                my_cxx_stl := libstdc++
-            endif
         endif
     else
         my_cxx_stl := ndk
@@ -34,8 +29,9 @@ HOST_darwin_dynamic_gcclibs := -lc -lSystem
 HOST_darwin_static_gcclibs := NO_STATIC_HOST_BINARIES_ON_DARWIN
 
 HOST_windows_dynamic_gcclibs := \
-    -lmsvcr110 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 \
-    -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt
+    -lmsvcr110 -lsupc++ -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt \
+    -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lmoldname \
+    -lmingwex -lmsvcrt
 HOST_windows_static_gcclibs := NO_STATIC_HOST_BINARIES_ON_WINDOWS
 
 my_link_type := dynamic
