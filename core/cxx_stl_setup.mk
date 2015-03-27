@@ -8,16 +8,11 @@
 ifeq ($(strip $(LOCAL_CXX_STL)),default)
     ifndef LOCAL_SDK_VERSION
         # Platform code. Select the appropriate STL.
-        ifndef USE_MINGW
-            my_cxx_stl := libc++
-            ifdef LOCAL_IS_HOST_MODULE
-                ifneq (,$(BUILD_HOST_static))
-                    my_cxx_stl := libc++_static
-                endif
+        my_cxx_stl := libc++
+        ifdef LOCAL_IS_HOST_MODULE
+            ifneq (,$(BUILD_HOST_static))
+                my_cxx_stl := libc++_static
             endif
-        else
-            # libc++ is not supported on mingw.
-            my_cxx_stl := libstdc++
         endif
     else
         my_cxx_stl := ndk
