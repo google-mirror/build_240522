@@ -42,6 +42,7 @@ endif
 
 built_odex :=
 installed_odex :=
+compressed_odex :=
 built_installed_odex :=
 ifdef LOCAL_DEX_PREOPT
 dexpreopt_boot_jar_module := $(filter $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE))
@@ -101,6 +102,17 @@ ifeq (true,$(WITH_DEXPREOPT_PIC))
   LOCAL_DEX_PREOPT_FLAGS += --compile-pic
 endif
 
+# Compress odex files if WITH_DEXPREOPT_COMP=true and set compiler
+# backend to Quick because the Optimizing backend generates PIC code,
+# which does not need relocation and can be used uncompressed inplace.
+ifeq (true,$(WITH_DEXPREOPT_COMP))
+ifeq (true,$(WITH_DEXPREOPT_PIC))
+  $(error Cannot generate compressed odex files that are PIC. \
+          Do not set both WITH_DEXPREOPT_PIC=true and WITH_DEXPREOPT_COMP=true)
+endif
+  LOCAL_DEX_PREOPT_FLAGS += --compiler-backend=Quick
+endif
+
 $(built_odex): PRIVATE_DEX_PREOPT_FLAGS := $(LOCAL_DEX_PREOPT_FLAGS)
 
 # Use pattern rule - we may have multiple installed odex files.
@@ -110,13 +122,22 @@ $(installed_odex) : $(dir $(LOCAL_INSTALLED_MODULE))%$(notdir $(word 1,$(install
     | $(ACP)
 	@echo "Install: $@"
 	$(copy-file-to-target)
+
+# Ugly syntax - See the definition get-odex-comp-path.
+$(compressed_odex) : $(dir $(LOCAL_INSTALLED_MODULE))%$(notdir $(word 1,$(compressed_odex))) \
+                   : $(dir $(LOCAL_BUILT_MODULE))%$(notdir $(word 1,$(built_odex))) \
+    | $(MINIGZIP)
+	$(hide) mkdir -p $(dir $@)
+	$(MINIGZIP) -9 < $< > $@
 endif
 
-# Add the installed_odex to the list of installed files for this module.
+# Add the installed_odex and compressed_odex to the list of installed files for this module.
+ALL_MODULES.$(my_register_name).INSTALLED += $(compressed_odex)
 ALL_MODULES.$(my_register_name).INSTALLED += $(installed_odex)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(built_installed_odex)
 
 # Make sure to install the .odex when you run "make <module_name>"
+$(my_register_name): $(compressed_odex)
 $(my_register_name): $(installed_odex)
 
 endif # LOCAL_DEX_PREOPT
