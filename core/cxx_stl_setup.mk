@@ -46,6 +46,11 @@ else
     endif
 endif
 
+# I really hope I don't have to actually commit this.
+ifneq ($(LOCAL_MODULE),libc)
+    my_ldflags += -Wl,--exclude-libs,libgcc.a
+endif
+
 ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
     my_cflags += -D_USING_LIBCXX
     my_c_includes += external/libcxx/include
@@ -70,6 +75,7 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
     else
         ifeq (arm,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
             my_static_libraries += libunwind_llvm
+            my_ldflags += -Wl,--exclude-libs,libunwind_llvm.a
         endif
 
         ifeq ($(my_link_type),static)
