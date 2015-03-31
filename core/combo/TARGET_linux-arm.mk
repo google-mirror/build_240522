@@ -136,9 +136,9 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += \
 			-Wl,--build-id=md5 \
 			-Wl,--warn-shared-textrel \
 			-Wl,--fatal-warnings \
-			-Wl,--icf=safe \
 			-Wl,--hash-style=gnu \
 			$(arch_variant_ldflags)
+			-fuse-ld=gold \
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
