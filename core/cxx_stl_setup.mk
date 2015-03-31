@@ -68,8 +68,10 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
     else
         ifeq (arm,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
             my_static_libraries += libunwind_llvm
+            my_ldflags += -Wl,--exclude-libs,libunwind_llvm.a
         else
             my_static_libraries += libunwind_backtrace
+            my_ldflags += -Wl,--exclude-libs,libunwind_backtrace.a
         endif
 
         ifeq ($(my_link_type),static)
