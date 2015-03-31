@@ -277,8 +277,13 @@ proto_java_intemediate_dir := $(intermediates)/proto
 endif
 proto_java_sources_file_stamp := $(proto_java_intemediate_dir)/Proto.stamp
 proto_java_sources_dir := $(proto_java_intemediate_dir)/src
-
-$(proto_java_sources_file_stamp): PRIVATE_PROTO_INCLUDES := $(TOP)
+# At least supply a '.' to the includes directories (for imports).
+ifeq ($(LOCAL_PROTO_INCLUDES),)
+proto_includes := .
+else
+proto_includes := $(LOCAL_PROTO_INCLUDES)
+endif
+$(proto_java_sources_file_stamp): PRIVATE_PROTO_INCLUDES := $(proto_includes)
 $(proto_java_sources_file_stamp): PRIVATE_PROTO_SRC_FILES := $(proto_sources_fullpath)
 $(proto_java_sources_file_stamp): PRIVATE_PROTO_JAVA_OUTPUT_DIR := $(proto_java_sources_dir)
 ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),micro)
