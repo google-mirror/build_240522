@@ -365,6 +365,11 @@ else # !user_variant
   ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 endif # !user_variant
 
+ifneq (user,$(TARGET_BUILD_VARIANT))
+  # Disable cache pruning on userdebug & eng builds
+  ADDITIONAL_DEFAULT_PROPERTIES += dalvik.vm.zygote.max-boot-retry=0
+endif
+
 ifeq (true,$(strip $(enable_target_debugging)))
   # Target is more debuggable and adbd is on by default
   ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
