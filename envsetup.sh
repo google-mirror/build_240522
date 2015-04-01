@@ -4,12 +4,12 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - lunch:   lunch <product_name>-<build_variant>
 - tapas:   tapas [<App1> <App2> ...] [arm|x86|mips|armv5|arm64|x86_64|mips64] [eng|userdebug|user]
 - croot:   Changes directory to the top of the tree.
-- m:       Makes from the top of the tree.
-- mm:      Builds all of the modules in the current directory, but not their dependencies.
-- mmm:     Builds all of the modules in the supplied directories, but not their dependencies.
+- m-1m:    Makes from the top of the tree.
+- m0m:     Builds all of the modules in the current directory, but not their dependencies.
+- m1m:     Builds all of the modules in the supplied directories, but not their dependencies.
            To limit the modules being built use the syntax: mmm dir/:target1,target2.
-- mma:     Builds all of the modules in the current directory, and their dependencies.
-- mmma:    Builds all of the modules in the supplied directories, and their dependencies.
+- m1a:     Builds all of the modules in the current directory, and their dependencies.
+- m2a:     Builds all of the modules in the supplied directories, and their dependencies.
 - cgrep:   Greps on all local C/C++ files.
 - ggrep:   Greps on all local Gradle files.
 - jgrep:   Greps on all local Java files.
@@ -666,6 +666,11 @@ $T/prebuilts/misc/linux-x86/analyzer/tools/scan-build/scan-build \
 
 function m()
 {
+  hmm
+}
+
+function m-1m()
+{
     local T=$(gettop)
     local DRV=$(getdriver $T)
     if [ "$T" ]; then
@@ -692,7 +697,11 @@ function findmakefile()
     \cd $HERE
 }
 
-function mm()
+function mm() {
+  hmm
+}
+
+function m0m()
 {
     local T=$(gettop)
     local DRV=$(getdriver $T)
@@ -731,6 +740,11 @@ function mm()
 }
 
 function mmm()
+{
+  hmm
+}
+
+function m1m()
 {
     local T=$(gettop)
     local DRV=$(getdriver $T)
@@ -779,6 +793,11 @@ function mmm()
 
 function mma()
 {
+  hmm
+}
+
+function m1a()
+{
   local T=$(gettop)
   local DRV=$(getdriver $T)
   if [ -f build/core/envsetup.mk -a -f Makefile ]; then
@@ -793,6 +812,11 @@ function mma()
 }
 
 function mmma()
+{
+  hmm
+}
+
+function m2a()
 {
   local T=$(gettop)
   local DRV=$(getdriver $T)
