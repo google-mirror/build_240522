@@ -64,7 +64,7 @@ class CommonZipTest(unittest.TestCase):
       self.assertEqual(int(old_stat.st_mtime), int(new_stat.st_mtime))
       self.assertIsNone(zip_file.testzip())
 
-      zip_file.close()
+      common.ZipClose(zip_file)
       zip_file = zipfile.ZipFile(zip_file_name, "r")
       info = zip_file.getinfo(arcname)
 
@@ -76,6 +76,136 @@ class CommonZipTest(unittest.TestCase):
     finally:
       os.remove(test_file_name)
       os.remove(zip_file_name)
+
+  def _test_ZipWriteStr_arcname(self, contents, extra_args=None):
+    extra_args = dict(extra_args or {})
+
+    zip_file = tempfile.NamedTemporaryFile(delete=False)
+    zip_file_name = zip_file.name
+
+    test_file = tempfile.NamedTemporaryFile(delete=False)
+    test_file_name = test_file.name
+
+    # File names within an archive strip the leading slash.
+    arcname = extra_args.get("arcname", test_file_name)
+    if arcname[0] == "/":
+      arcname = arcname[1:]
+
+    common.ZipClose(zip_file)
+    zip_file = zipfile.ZipFile(zip_file_name, "w")
+
+    try:
+      expected_mode = extra_args.get("perms", 0o644)
+      time.sleep(5)  # Make sure the atime/mtime will change measurably.
+
+      common.ZipWriteStr(zip_file, arcname, contents, **extra_args)
+
+      self.assertIsNone(zip_file.testzip())
+      common.ZipClose(zip_file)
+
+      zip_file = zipfile.ZipFile(zip_file_name, "r")
+      info = zip_file.getinfo(arcname)
+
+      self.assertEqual(info.date_time, (2009, 1, 1, 0, 0, 0))
+      mode = (info.external_attr >> 16) & 0o777
+      self.assertEqual(mode, expected_mode)
+      self.assertEqual(zip_file.read(arcname), contents)
+      self.assertIsNone(zip_file.testzip())
+    finally:
+      os.remove(zip_file_name)
+      os.remove(test_file_name)
+
+  def _test_ZipWriteStr_zinfo(self, contents, extra_args=None):
+    extra_args = dict(extra_args or {})
+
+    zip_file = tempfile.NamedTemporaryFile(delete=False)
+    zip_file_name = zip_file.name
+
+    test_file = tempfile.NamedTemporaryFile(delete=False)
+    test_file_name = test_file.name
+
+    # File names within an archive strip the leading slash.
+    arcname = extra_args.get("arcname", test_file_name)
+    if arcname[0] == "/":
+      arcname = arcname[1:]
+
+    common.ZipClose(zip_file)
+    zip_file = zipfile.ZipFile(zip_file_name, "w")
+
+    try:
+      expected_mode = extra_args.get("perms", 0o644)
+      time.sleep(5)  # Make sure the atime/mtime will change measurably.
+
+      zinfo = zipfile.ZipInfo(filename=arcname)
+
+      common.ZipWriteStr(zip_file, zinfo, contents, **extra_args)
+
+      self.assertIsNone(zip_file.testzip())
+      common.ZipClose(zip_file)
+
+      zip_file = zipfile.ZipFile(zip_file_name, "r")
+      info = zip_file.getinfo(arcname)
+
+      self.assertEqual(info.date_time, (2009, 1, 1, 0, 0, 0))
+      mode = (info.external_attr >> 16) & 0o777
+      self.assertEqual(mode, expected_mode)
+      self.assertEqual(zip_file.read(arcname), contents)
+      self.assertIsNone(zip_file.testzip())
+    finally:
+      os.remove(zip_file_name)
+      os.remove(test_file_name)
+
+  def _test_ZipWriteStr_large_file(self, large, small, extra_args=None):
+    extra_args = dict(extra_args or {})
+
+    zip_file = tempfile.NamedTemporaryFile(delete=False)
+    zip_file_name = zip_file.name
+
+    test_file = tempfile.NamedTemporaryFile(delete=False)
+    test_file_name = test_file.name
+
+    arcname_large = test_file_name
+    arcname_small = "bar"
+
+    if arcname_large[0] == "/":
+      arcname_large = arcname_large[1:]
+
+    common.ZipClose(zip_file)
+    zip_file = zipfile.ZipFile(zip_file_name, "w")
+
+    try:
+      test_file.write(large)
+      test_file.close()
+
+      common.ZipWrite(zip_file, test_file_name, **extra_args)
+      common.ZipWriteStr(zip_file, arcname_small, small, **extra_args)
+
+      self.assertIsNone(zip_file.testzip())
+      common.ZipClose(zip_file)
+
+      expected_mode = 0o644
+
+      # Check the contents written by ZipWrite()
+      zip_file = zipfile.ZipFile(zip_file_name, "r")
+      info = zip_file.getinfo(arcname_large)
+
+      self.assertEqual(info.date_time, (2009, 1, 1, 0, 0, 0))
+      mode = (info.external_attr >> 16) & 0o777
+      self.assertEqual(mode, expected_mode)
+      self.assertEqual(zip_file.read(arcname_large), large)
+      self.assertIsNone(zip_file.testzip())
+
+      # Check the contents written by ZipWriteStr()
+      info = zip_file.getinfo(arcname_small)
+
+      self.assertEqual(info.date_time, (2009, 1, 1, 0, 0, 0))
+      mode = (info.external_attr >> 16) & 0o777
+      self.assertEqual(mode, expected_mode)
+      self.assertEqual(zip_file.read(arcname_small), small)
+      self.assertIsNone(zip_file.testzip())
+    finally:
+      os.remove(zip_file_name)
+      os.remove(test_file_name)
 
   def test_ZipWrite(self):
     file_contents = os.urandom(1024)
@@ -107,4 +237,44 @@ class CommonZipTest(unittest.TestCase):
     default_limit = (1 << 31) - 1
     self.assertEqual(default_limit, zipfile.ZIP64_LIMIT)
     self._test_ZipWrite('')
+    self.assertEqual(default_limit, zipfile.ZIP64_LIMIT)
+
+  def test_ZipWriteStr(self):
+    file_contents = os.urandom(1024)
+    self._test_ZipWriteStr_arcname(file_contents)
+    self._test_ZipWriteStr_zinfo(file_contents)
+
+  def test_ZipWriteStr_with_opts(self):
+    file_contents = os.urandom(1024)
+    self._test_ZipWriteStr_arcname(file_contents, {
+        "perms": 0o777,
+        "compress_type": zipfile.ZIP_DEFLATED,
+    })
+    self._test_ZipWriteStr_zinfo(file_contents, {
+        "perms": 0o755,
+        "compress_type": zipfile.ZIP_DEFLATED,
+    })
+
+  def test_ZipWriteStr_large_file(self):
+    # zipfile.writestr() doesn't work when the str size is over 2GiB even with
+    # the workaround. We will only test the case of writing a string into a
+    # large archive.
+    kilobytes = 1024
+    megabytes = 1024 * kilobytes
+    gigabytes = 1024 * megabytes
+
+    size = int(2 * gigabytes + 1)
+    block_size = 4 * kilobytes
+    step_size = 4 * megabytes
+    large_file = random_string_with_holes(
+        size, block_size, step_size)
+    contents = os.urandom(1024)
+    self._test_ZipWriteStr_large_file(large_file, contents, {
+        "compress_type": zipfile.ZIP_DEFLATED,
+    })
+
+  def test_ZipWrite_resets_ZIP64_LIMIT(self):
+    default_limit = (1 << 31) - 1
+    self.assertEqual(default_limit, zipfile.ZIP64_LIMIT)
+    self._test_ZipWriteStr_arcname('')
     self.assertEqual(default_limit, zipfile.ZIP64_LIMIT)
