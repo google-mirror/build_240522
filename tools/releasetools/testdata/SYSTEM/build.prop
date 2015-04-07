@@ -1,0 +1,4 @@
+ro.build.fingerprint=fake_fingerprint
+ro.product.device=fake_device
+ro.build.date.utc=1427602371
+ro.build.date=Sat Mar 28 21:12:51 PDT 2015
