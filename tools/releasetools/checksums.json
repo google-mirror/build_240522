@@ -1,0 +1,12 @@
+{
+    "AddImgToTargetFilesTest:test_AddCache:1":"311fa4505efc3f1634e69c9b412921b1e516437f",
+    "AddImgToTargetFilesTest:test_AddSystem:1":"08c0d836f7c2fc0004d919592e84318b1b9851dc",
+    "AddImgToTargetFilesTest:test_AddSystem:2":"08c0d836f7c2fc0004d919592e84318b1b9851dc",
+    "AddImgToTargetFilesTest:test_AddSystem:3":"f6a3d541d248855e9a4806df6a8339b450e9a34a",
+    "OtaFromTargetFilesTest:test_Integration:1":"ae32124da551321c868e60ca2bea2719251c7c95",
+    "OtaFromTargetFilesTest:test_Integration:2":"35f2ba00b2df1d21aef3da830d07371959e8e4d8",
+    "OtaFromTargetFilesTest:test_Integration:3":"98b348c03bb954f90c2a6941f661f13f897c03ee",
+    "OtaFromTargetFilesTest:test_WriteFullOTAPackage:1":"ae32124da551321c868e60ca2bea2719251c7c95",
+    "OtaFromTargetFilesTest:test_WriteFullOTAPackage:2":"6e5c65b2d0dd1146a45941a574d08a3ccd6aad02",
+    "OtaFromTargetFilesTest:test_WriteFullOTAPackage:3":"6e5c65b2d0dd1146a45941a574d08a3ccd6aad02"
+}

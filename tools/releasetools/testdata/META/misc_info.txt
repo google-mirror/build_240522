@@ -1,0 +1,5 @@
+recovery_api_version=3
+fs_type=ext4
+system_size=1073741824
+cache_fs_type=ext4
+cache_size=104857600
