@@ -12,6 +12,12 @@ endif
 endif
 endif
 
+ifeq ($(my_module_multilib),first)
+ifeq ($(HOST_PREFER_32_BIT),true)
+my_module_multilib := 32
+endif
+endif
+
 LOCAL_2ND_ARCH_VAR_PREFIX :=
 include $(BUILD_SYSTEM)/module_arch_supported.mk
 
