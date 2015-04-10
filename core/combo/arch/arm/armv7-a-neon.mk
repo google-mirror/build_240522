@@ -40,3 +40,33 @@ endif
 arch_variant_cflags += \
     -mfloat-abi=softfp \
     -mfpu=neon
+
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a5)
+	arch_variant_cflags += -mfpu=neon-fp16
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a7)
+	arch_variant_cflags += -mfpu=neon-vfpv4
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a8)
+	arch_variant_cflags += -mfpu=neon
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a9)
+	arch_variant_cflags += -mfpu=neon-fp16
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a15)
+	arch_variant_cflags += -mfpu=neon-vfpv4
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),krait)
+	arch_variant_cflags += -mfpu=neon-vfpv4
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),denver)
+	arch_variant_cflags += -mfpu=neon-vfpv4
+else
+	arch_variant_cflags += -mfpu=neon
+endif
+endif
+endif
+endif
+endif
+endif
+endif
