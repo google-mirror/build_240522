@@ -15,11 +15,13 @@ LOCAL_SRC_FILES := \
 LOCAL_C_INCLUDES += external/zlib \
 	external/zopfli/src
 
+LOCAL_SHARED_LIBRARIES := \
+	libcutils \
+	liblog
+
 LOCAL_STATIC_LIBRARIES := \
 	libandroidfw \
 	libutils \
-	libcutils \
-	liblog \
 	libzopfli
 
 ifeq ($(HOST_OS),linux)
