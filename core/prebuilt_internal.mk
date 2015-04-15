@@ -197,12 +197,13 @@ ifdef extracted_jni_libs
 	$(hide) zip -d $@ 'lib/*.so'  # strip embedded JNI libraries.
 endif
 ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)
-	$(sign-package)
-endif
+# We cannot strip out classes.dex if we cannot resign the file.
 ifdef LOCAL_DEX_PREOPT
 ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 	$(call dexpreopt-remove-classes.dex,$@)
 endif
+endif
+	$(sign-package)
 endif
 	$(align-package)
 
