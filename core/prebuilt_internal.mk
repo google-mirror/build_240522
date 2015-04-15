@@ -196,13 +196,13 @@ $(built_module) : $(my_prebuilt_src_file) | $(ACP) $(ZIPALIGN) $(SIGNAPK_JAR)
 ifdef extracted_jni_libs
 	$(hide) zip -d $@ 'lib/*.so'  # strip embedded JNI libraries.
 endif
-ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)
-	$(sign-package)
-endif
 ifdef LOCAL_DEX_PREOPT
 ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 	$(call dexpreopt-remove-classes.dex,$@)
 endif
+endif
+ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)
+	$(sign-package)
 endif
 	$(align-package)
 
