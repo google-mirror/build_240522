@@ -1179,7 +1179,7 @@ fi
   # The install script location moved from /system/etc to /system/bin
   # in the L release.  Parse the init.rc file to find out where the
   # target-files expects it to be, and put it there.
-  sh_location = "etc/install-recovery.sh"
+  sh_location = "bin/install-recovery.sh"
   try:
     with open(os.path.join(input_dir, "BOOT", "RAMDISK", "init.rc")) as f:
       for line in f:

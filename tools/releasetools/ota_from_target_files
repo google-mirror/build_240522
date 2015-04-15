@@ -972,7 +972,8 @@ class FileDifference:
     for tf, sf, size, patch_sha in self.patch_list:
       if tf.name != sf.name:
         script.SkipNextActionIfTargetExists(tf.name, tf.sha1)
-      script.PatchCheck("/"+sf.name, tf.sha1, sf.sha1)
+      if sf.name != "system/bin/install-recovery.sh" and sf.name != "system/recovery-from-boot.p":
+	script.PatchCheck("/"+sf.name, tf.sha1, sf.sha1)
       so_far += sf.size
     return so_far
 
@@ -1245,16 +1246,16 @@ else
     # For older builds where recovery-resource.dat is not present, we
     # use only the boot image as the source.
 
-    if not target_has_recovery_patch:
-      def output_sink(fn, data):
+    #if target_has_recovery_patch:
+     def output_sink(fn, data):
         common.ZipWriteStr(output_zip, "recovery/" + fn, data)
         system_items.Get("system/" + fn, dir=False)
 
-      common.MakeRecoveryPatch(OPTIONS.target_tmp, output_sink,
+     common.MakeRecoveryPatch(OPTIONS.target_tmp, output_sink,
                                target_recovery, target_boot)
-      script.DeleteFiles(["/system/recovery-from-boot.p",
-                          "/system/etc/install-recovery.sh"])
-    print "recovery image changed; including as patch from boot."
+     script.DeleteFiles(["/system/recovery-from-boot.p",
+                          "/system/bin/install-recovery.sh"])
+     print "recovery image changed; including as patch from boot."
   else:
     print "recovery image unchanged; skipping."
 
@@ -1296,7 +1297,8 @@ else
     script.Print("Unpacking new vendor files...")
     script.UnpackPackageDir("vendor", "/vendor")
 
-  if updating_recovery and not target_has_recovery_patch:
+#  if updating_recovery and not target_has_recovery_patch:
+  if updating_recovery:
     script.Print("Unpacking new recovery...")
     script.UnpackPackageDir("recovery", "/system")
 
