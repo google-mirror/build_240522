@@ -1,42 +1,87 @@
 # Configuration for Linux on ARM.
-# Generating binaries for the ARMv7-a architecture and higher with NEON
+# Generating binaries for the ARMv7-a architecture.
 #
 ARCH_ARM_HAVE_ARMV7A            := true
 ARCH_ARM_HAVE_VFP               := true
 ARCH_ARM_HAVE_VFP_D32           := true
 ARCH_ARM_HAVE_NEON              := true
 
-ifneq (,$(filter cortex-a15 krait denver,$(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)))
-	# TODO: krait is not a cortex-a15, we set the variant to cortex-a15 so that
-	#       hardware divide operations are generated. This should be removed and a
-	#       krait CPU variant added to GCC. For clang we specify -mcpu for krait in
-	#       core/clang/arm.mk.
-	arch_variant_cflags := -mcpu=cortex-a15
+SUPPORTED_ARMV7_CPU_VARIANTS = \
+  generic    \
+  cortex-a5  \
+  cortex-a7  \
+  cortex-a8  \
+  cortex-a9  \
+  cortex-a12 \
+  cortex-a15 \
+  cortex-a15.cortex-a7 \
+  krait      \
 
-	# Fake an ARM compiler flag as these processors support LPAE which GCC/clang
-	# don't advertise.
-	arch_variant_cflags += -D__ARM_FEATURE_LPAE=1
-	arch_variant_ldflags := \
-		-Wl,--no-fix-cortex-a8
-else
-ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a8)
-	arch_variant_cflags := -mcpu=cortex-a8
-	arch_variant_ldflags := \
-		-Wl,--fix-cortex-a8
-else
-ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a7)
-	arch_variant_cflags := -mcpu=cortex-a7
-	arch_variant_ldflags := \
-		-Wl,--no-fix-cortex-a8
-else
-	arch_variant_cflags := -march=armv7-a
-	# Generic ARM might be a Cortex A8 -- better safe than sorry
-	arch_variant_ldflags := \
-		-Wl,--fix-cortex-a8
+ARMV7_CPU_VARIANTS_WITH_LPAE = \
+  cortex-a7  \
+  cortex-a12 \
+  cortex-a15 \
+  krait      \
+
+ARMV7_CPU_VARIANTS_WITH_FPU_FP16 = \
+  cortex-a5  \
+  cortex-a9  \
+
+ARMV7_CPU_VARIANTS_WITH_FPU_VFPV4 = \
+  cortex-a7  \
+  cortex-a12 \
+  cortex-a15 \
+  krait      \
+
+ifeq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT),$(SUPPORTED_ARMV7_CPU_VARIANTS)))
+$(info "Supported ARMv7 CPU variants: $(SUPPORTED_ARMV7_CPU_VARIANTS)")
+$(error "Unsupported ARMv7 CPU VARIANT. Please note that for 32bit builds of ARMV8-A devices \
+          you should specify TARGET_2ND_ARCH_VARIANT := armv8-a")
 endif
+
+# CPU Variant
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),generic)
+  arch_variant_cflags := -march=armv7-a
+else
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),krait)
+  # FIXME (Qualcomm): Add -mcpu=krait and support to GCC and Clang.
+  #
+  # TODO: krait is not a cortex-a15, we set the variant to cortex-a15 so that
+  #       hardware divide operations are generated. This should be removed and a
+  #       krait CPU variant added to GCC. For clang we specify -mcpu for krait in
+  #       core/clang/arm.mk.
+  arch_variant_cflags := -mcpu=cortex-a15
+else
+  arch_variant_cflags := -mcpu=$(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT))
 endif
 endif
 
-arch_variant_cflags += \
-    -mfloat-abi=softfp \
-    -mfpu=neon
+# FPU Variant
+ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT),$(ARMV7_CPU_VARIANTS_WITH_FPU_FP16)))
+  arch_variant_cflags += -mfpu=neon-fp16
+else
+ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT),$(ARMV7_CPU_VARIANTS_WITH_FPU_VFPV4)))
+  arch_variant_cflags += -mfpu=neon-vfpv4
+else
+  arch_variant_cflags += -mfpu=neon
+endif
+endif
+
+# Soft Float ABI
+arch_variant_cflags += -mfloat-abi=softfp
+
+# LPAE Support
+ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT),$(ARMV7_CPU_VARIANTS_WITH_LPAE)))
+  # Fake an ARM compiler flag as these processors support LPAE which GCC/clang
+  # don't advertise.
+  arch_variant_cflags += -D__ARM_FEATURE_LPAE=1
+endif
+
+
+# Errata fixes
+ifneq (,$(filter generic cortex-a8,$(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)))
+  # Generic ARM might be a Cortex A8 -- better safe than sorry
+  arch_variant_ldflags := -Wl,--fix-cortex-a8
+else
+  arch_variant_ldflags := -Wl,--no-fix-cortex-a8
+endif

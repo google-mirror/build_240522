@@ -50,8 +50,8 @@ TARGET_2ND_CPU_VARIANT := generic
 # DO NOT USE
 # DO NOT USE
 else
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_VARIANT := cortex-a15
+TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_CPU_VARIANT := generic
 endif
 
 
