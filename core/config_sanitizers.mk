@@ -115,9 +115,16 @@ ifneq ($(filter address,$(my_sanitize)),)
 endif
 
 ifneq ($(filter undefined,$(my_sanitize)),)
+  my_cflags += -fno-sanitize-recover=all
+
   ifdef LOCAL_IS_HOST_MODULE
     my_ldlibs += -ldl
   else
     $(error ubsan is not yet supported on the target)
   endif
+endif
+
+
+ifeq ($(strip $(LOCAL_SANITIZE_RECOVER)),true)
+  my_cflags += -fsanitize-recover=all
 endif
