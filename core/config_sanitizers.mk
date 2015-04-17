@@ -52,11 +52,42 @@ ifneq ($(my_clang),true)
   endif
 endif
 
-unknown_sanitizers := $(filter-out address, \
-                      $(filter-out undefined,$(my_sanitize)))
+ifneq ($(filter default-ub,$(my_sanitize)),)
+  my_default_ub_checks := \
+      bool \
+      integer-divide-by-zero \
+      return \
+      returns-nonnull-attribute \
+      shift-exponent \
+      unreachable \
+      vla-bound \
 
-ifneq ($(unknown_sanitizers),)
-  $(error Unknown sanitizers: $(unknown_sanitizers))
+  # TODO(danalbert): The following checks currently have compiler performance
+  # issues.
+  # my_default_ub_checks += alignment
+  # my_default_ub_checks += bounds
+  # my_default_ub_checks += enum
+  # my_default_ub_checks += float-cast-overflow
+  # my_default_ub_checks += float-divide-by-zero
+  # my_default_ub_checks += nonnull-attribute
+  # my_default_ub_checks += null
+  # my_default_ub_checks += shift-base
+  # my_default_ub_checks += signed-integer-overflow
+
+  # TODO(danalbert): Fix UB in libc++'s __tree so we can turn this on.
+  # https://llvm.org/PR19302
+  # http://reviews.llvm.org/D6974
+  # my_default_ub_checks += object-size
+
+  my_sanitize := $(my_default_ub_checks)
+
+  ifdef LOCAL_IS_HOST_MODULE
+    my_cflags += -fno-sanitize-recover=all
+  else
+    my_cflags += -fsanitize-undefined-trap-on-error
+  endif
+
+  my_ldlibs += -ldl
 endif
 
 ifneq ($(my_sanitize),)
