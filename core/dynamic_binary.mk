@@ -57,7 +57,9 @@ $(symbolic_output) : $(symbolic_input) | $(ACP)
 ## Strip
 ###########################################################
 strip_input := $(symbolic_output)
-strip_output := $(LOCAL_BUILT_MODULE)
+strip_output := $(LOCAL_BUILT_MODULE)-stripped
+
+#strip_output := $(LOCAL_BUILT_MODULE)
 
 my_strip_module := $(LOCAL_STRIP_MODULE)
 ifeq ($(my_strip_module),)
@@ -107,7 +109,34 @@ $(strip_output): $(strip_input)
 endif
 endif # my_strip_module
 
+###########################################################
+## Pack relocation tables
+###########################################################
+relocation_packer_input := $(strip_output)
+relocation_packer_output := $(LOCAL_BUILT_MODULE)
+
+my_pack_module_relocations := false
+
+ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+# Pack relocations for dynamic executables only.
+my_pack_module_relocations := $(LOCAL_PACK_MODULE_RELOCATIONS)
+
+ifeq ($(my_pack_module_relocations),)
+  my_pack_module_relocations := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_PACK_MODULE_RELOCATIONS)
+endif
+endif
+
+ifneq ($(filter true,$(my_pack_module_relocations)),)
+# Pack relocations
+$(relocation_packer_output): $(relocation_packer_input) | $(RELOCATION_PACKER)
+	$(pack-elf-relocations)
+else
+$(relocation_packer_output): $(relocation_packer_input) | $(ACP)
+	@echo "target Unpacked: $(PRIVATE_MODULE) ($@)"
+	$(copy-file-to-target)
+endif
 
 $(cleantarget): PRIVATE_CLEAN_FILES += \
     $(linked_module) \
-    $(symbolic_output)
+    $(symbolic_output) \
+    $(strip_output)
