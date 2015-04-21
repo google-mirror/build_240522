@@ -114,6 +114,7 @@ TARGET_GLOBAL_LDFLAGS += \
 			-Wl,--fatal-warnings \
 			-Wl,-maarch64linux \
 			-Wl,--hash-style=gnu \
+                        -fuse-ld=gold -Wl,--threads \
 			$(arch_variant_ldflags)
 
 # Disable transitive dependency library symbol resolving.
