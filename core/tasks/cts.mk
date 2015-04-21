@@ -23,6 +23,7 @@ TF_JAR := $(HOST_OUT_JAVA_LIBRARIES)/tradefed-prebuilt.jar
 CTS_TF_JAR := $(HOST_OUT_JAVA_LIBRARIES)/cts-tradefed.jar
 CTS_TF_EXEC_PATH := $(HOST_OUT_EXECUTABLES)/cts-tradefed
 CTS_TF_README_PATH := $(cts_tools_src_dir)/tradefed-host/README
+CTS_SHARED_LIB_DIR := $(cts_dir)/lib
 
 VMTESTSTF_INTERMEDIATES :=$(call intermediates-dir-for,JAVA_LIBRARIES,vm-tests-tf,HOST)
 VMTESTSTF_JAR := $(VMTESTSTF_INTERMEDIATES)/android.core.vm-tests-tf.jar
@@ -65,7 +66,7 @@ CTS_CORE_CASE_LIST += \
 
 CTS_TEST_JAR_LIST := \
         cts-junit \
-	CtsJdwp
+        CtsJdwp
 
 # Depend on the full package paths rather than the phony targets to avoid
 # rebuilding the packages every time.
@@ -86,17 +87,22 @@ $(foreach m, $(CTS_CASE_LIST),\
     $(eval $(call copy-one-file, $(built), $(installed)))\
     $(eval CTS_CASE_LIST_APKS += $(installed))))
 
+CTS_SHARED_LIBS := \
+	$(HOST_OUT_SHARED_LIBRARIES)/libc++.so
+
 DEFAULT_TEST_PLAN := $(cts_dir)/$(cts_name)/resource/plans
-$(cts_dir)/all_cts_files_stamp: $(CTS_CORE_CASES) $(CTS_TEST_CASES) $(CTS_CASE_LIST_APKS) $(JUNIT_HOST_JAR) $(HOSTTESTLIB_JAR) $(CTS_HOST_LIBRARY_JARS) $(TF_JAR) $(VMTESTSTF_JAR) $(CTS_TF_JAR) $(CTS_TF_EXEC_PATH) $(CTS_TF_README_PATH) $(ACP) $(CTS_TEST_JAR_FILES)
+$(cts_dir)/all_cts_files_stamp: $(CTS_CORE_CASES) $(CTS_TEST_CASES) $(CTS_CASE_LIST_APKS) $(JUNIT_HOST_JAR) $(HOSTTESTLIB_JAR) $(CTS_HOST_LIBRARY_JARS) $(TF_JAR) $(VMTESTSTF_JAR) $(CTS_TF_JAR) $(CTS_TF_EXEC_PATH) $(CTS_TF_README_PATH) $(ACP) $(CTS_TEST_JAR_FILES) $(CTS_SHARED_LIBS)
 # Make necessary directory for CTS
 	$(hide) mkdir -p $(TMP_DIR)
 	$(hide) mkdir -p $(PRIVATE_DIR)/docs
 	$(hide) mkdir -p $(PRIVATE_DIR)/tools
 	$(hide) mkdir -p $(PRIVATE_DIR)/repository/testcases
 	$(hide) mkdir -p $(PRIVATE_DIR)/repository/plans
+	$(hide) mkdir -p $(PRIVATE_DIR)/lib
 # Copy executable and JARs to CTS directory
 	$(hide) $(ACP) -fp $(VMTESTSTF_JAR) $(PRIVATE_DIR)/repository/testcases
 	$(hide) $(ACP) -fp $(HOSTTESTLIB_JAR) $(CTS_HOST_LIBRARY_JARS) $(TF_JAR) $(CTS_TF_JAR) $(CTS_TF_EXEC_PATH) $(CTS_TF_README_PATH) $(PRIVATE_DIR)/tools
+	$(hide) $(ACP) -fp $(CTS_SHARED_LIBS) $(PRIVATE_DIR)/lib
 # Change mode of the executables
 	$(foreach jar,$(CTS_TEST_JAR_LIST),$(call copy-testcase-jar,$(jar)))
 	$(foreach testcase,$(CTS_TEST_CASES),$(call copy-testcase,$(testcase)))
