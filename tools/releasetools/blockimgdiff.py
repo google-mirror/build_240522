@@ -18,12 +18,14 @@ from collections import deque, OrderedDict
 from hashlib import sha1
 import heapq
 import itertools
+import math
 import multiprocessing
 import os
 import re
 import subprocess
 import threading
 import tempfile
+import zlib
 
 from rangelib import RangeSet
 
@@ -218,6 +220,7 @@ class BlockImageDiff(object):
     self.transfers = []
     self.src_basenames = {}
     self.src_numpatterns = {}
+    self.stash_sizes = {}
 
     assert version in (1, 2, 3)
 
@@ -266,6 +269,31 @@ class BlockImageDiff(object):
     self.ComputePatches(prefix)
     self.WriteTransfers(prefix)
 
+  def GetStashSize(self, source, ranges, h):
+    if h in self.stash_sizes:
+        return self.stash_sizes[h]
+
+    size = 0
+    data = source.ReadRangeSet(ranges)
+    ctx = zlib.compressobj(6)
+
+    for p in data:
+      compressed = ctx.compress(p)
+      if compressed:
+        size += len(compressed)
+
+    compressed = ctx.flush()
+    if compressed:
+        size += len(compressed)
+
+    self.stash_sizes[h] = size
+
+    print("Compressed stash %s from %d to %d (ratio %.02f)" % (
+        h, ranges.size() * self.tgt.blocksize, size,
+        float(size) / (ranges.size() * self.tgt.blocksize)))
+
+    return size
+
   def HashBlocks(self, source, ranges): # pylint: disable=no-self-use
     data = source.ReadRangeSet(ranges)
     ctx = sha1()
@@ -282,8 +310,8 @@ class BlockImageDiff(object):
     performs_read = False
 
     stashes = {}
-    stashed_blocks = 0
-    max_stashed_blocks = 0
+    stashed_bytes = 0
+    max_stashed_bytes = 0
 
     free_stash_ids = []
     next_stash_id = 0
@@ -302,19 +330,20 @@ class BlockImageDiff(object):
           sid = next_stash_id
           next_stash_id += 1
         stashes[s] = sid
-        stashed_blocks += sr.size()
         if self.version == 2:
+          stashed_bytes += sr.size() * self.tgt.blocksize
           out.append("stash %d %s\n" % (sid, sr.to_string_raw()))
         else:
           sh = self.HashBlocks(self.src, sr)
+          stashed_bytes += self.GetStashSize(self.src, sr, sh)
           if sh in stashes:
             stashes[sh] += 1
           else:
             stashes[sh] = 1
             out.append("stash %s %s\n" % (sh, sr.to_string_raw()))
 
-      if stashed_blocks > max_stashed_blocks:
-        max_stashed_blocks = stashed_blocks
+      if stashed_bytes > max_stashed_bytes:
+        max_stashed_bytes = stashed_bytes
 
       free_string = []
 
@@ -335,9 +364,12 @@ class BlockImageDiff(object):
         mapped_stashes = []
         for s, sr in xf.use_stash:
           sid = stashes.pop(s)
-          stashed_blocks -= sr.size()
-          unstashed_src_ranges = unstashed_src_ranges.subtract(sr)
           sh = self.HashBlocks(self.src, sr)
+          if self.version == 2:
+            stashed_bytes -= sr.size() * self.tgt.blocksize
+          else:
+            stashed_bytes -= self.GetStashSize(self.src, sr, sh)
+          unstashed_src_ranges = unstashed_src_ranges.subtract(sr)
           sr = xf.src_ranges.map_within(sr)
           mapped_stashes.append(sr)
           if self.version == 2:
@@ -406,9 +438,11 @@ class BlockImageDiff(object):
           elif self.version >= 3:
             # take into account automatic stashing of overlapping blocks
             if xf.src_ranges.overlaps(xf.tgt_ranges):
-              temp_stash_usage = stashed_blocks + xf.src_ranges.size();
-              if temp_stash_usage > max_stashed_blocks:
-                max_stashed_blocks = temp_stash_usage
+              temp_stash_usage = (stashed_bytes +
+                self.GetStashSize(self.src, xf.src_ranges,
+                  self.HashBlocks(self.src, xf.src_ranges)))
+              if temp_stash_usage > max_stashed_bytes:
+                max_stashed_bytes = temp_stash_usage
 
             out.append("%s %s %s %s\n" % (
                 xf.style,
@@ -428,16 +462,18 @@ class BlockImageDiff(object):
               xf.style, xf.patch_start, xf.patch_len,
               xf.tgt_ranges.to_string_raw(), src_str))
         elif self.version >= 3:
+          sh = self.HashBlocks(self.src, xf.src_ranges)
           # take into account automatic stashing of overlapping blocks
           if xf.src_ranges.overlaps(xf.tgt_ranges):
-            temp_stash_usage = stashed_blocks + xf.src_ranges.size();
-            if temp_stash_usage > max_stashed_blocks:
-              max_stashed_blocks = temp_stash_usage
+            temp_stash_usage = (stashed_bytes +
+              self.GetStashSize(self.src, xf.src_ranges, sh))
+            if temp_stash_usage > max_stashed_bytes:
+              max_stashed_bytes = temp_stash_usage
 
           out.append("%s %d %d %s %s %s %s\n" % (
               xf.style,
               xf.patch_start, xf.patch_len,
-              self.HashBlocks(self.src, xf.src_ranges),
+              sh,
               self.HashBlocks(self.tgt, xf.tgt_ranges),
               xf.tgt_ranges.to_string_raw(), src_str))
         total += tgt_size
@@ -455,7 +491,7 @@ class BlockImageDiff(object):
 
       # sanity check: abort if we're going to need more than 512 MB if
       # stash space
-      assert max_stashed_blocks * self.tgt.blocksize < (512 << 20)
+      assert max_stashed_bytes < (512 << 20)
 
     all_tgt = RangeSet(data=(0, self.tgt.total_blocks))
     if performs_read:
@@ -472,6 +508,8 @@ class BlockImageDiff(object):
 
     out.insert(0, "%d\n" % (self.version,))   # format version number
     out.insert(1, str(total) + "\n")
+
+    max_stashed_blocks = int(math.ceil(float(max_stashed_bytes) / self.tgt.blocksize))
     if self.version >= 2:
       # version 2 only: after the total block count, we give the number
       # of stash slots needed, and the maximum size needed (in blocks)
@@ -484,7 +522,7 @@ class BlockImageDiff(object):
 
     if self.version >= 2:
       print("max stashed blocks: %d  (%d bytes)\n" % (
-          max_stashed_blocks, max_stashed_blocks * self.tgt.blocksize))
+          max_stashed_blocks, max_stashed_bytes))
 
   def ComputePatches(self, prefix):
     print("Reticulating splines...")
