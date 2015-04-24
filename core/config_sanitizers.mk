@@ -80,7 +80,10 @@ ifneq ($(filter address,$(my_sanitize)),)
     # libraries needed with -fsanitize=address. http://b/18650275 (WAI)
     my_ldlibs += -ldl -lpthread
   else
-    my_shared_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES)
+    # ASan runtime library must be the first in the link order.
+    my_shared_libraries := $(ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES_BEFORE) \
+                           $(my_shared_libraries) \
+                           $(ADDRESS_SANITIZER_CONFIG_EXTRA_SHARED_LIBRARIES_AFTER)
     my_static_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_STATIC_LIBRARIES)
   endif
 endif
