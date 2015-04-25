@@ -1,0 +1,8 @@
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+1: Tao Bao <tbao@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Submitted-by: Sami Tolvanen <samitolvanen@google.com>
+Submitted-at: Sat, 25 Apr 2015 08:00:01 +0000
+Reviewed-on: https://android-review.googlesource.com/148037
+Project: platform/build
+Branch: refs/heads/master
