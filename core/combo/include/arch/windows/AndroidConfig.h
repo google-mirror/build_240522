@@ -85,7 +85,7 @@
  */
 #define WIN32 1                 /* stock Cygwin doesn't define these */
 #define _WIN32 1
-#define _WIN32_WINNT 0x0500     /* admit to using >= Win2K */
+#define _WIN32_WINNT 0x0600     /* target Vista and newer */
 
 #define HAVE_WINDOWS_PATHS      /* needed by simulator */
 
