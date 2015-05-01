@@ -26,7 +26,7 @@ endif
 TARGET_NDK_GCC_VERSION := 4.9
 
 ifeq ($(strip $(TARGET_GCC_VERSION_EXP)),)
-TARGET_GCC_VERSION := 4.8
+TARGET_GCC_VERSION := 4.9
 else
 TARGET_GCC_VERSION := $(TARGET_GCC_VERSION_EXP)
 endif
@@ -84,6 +84,7 @@ TARGET_GLOBAL_CFLAGS += \
 			-ffunction-sections \
 			-finline-functions \
 			-finline-limit=300 \
+			-fno-devirtualize \
 			-fno-short-enums \
 			-fstrict-aliasing \
 			-funswitch-loops \

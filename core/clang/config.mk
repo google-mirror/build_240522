@@ -68,6 +68,7 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -finline-functions \
   -finline-limit=64 \
   -fno-canonical-system-headers \
+  -fno-devirtualize \
   -fno-tree-sra \
   -fprefetch-loop-arrays \
   -funswitch-loops \
