@@ -174,6 +174,20 @@ define all-named-subdir-makefiles
 $(wildcard $(addsuffix /Android.mk, $(addprefix $(call my-dir)/,$(1))))
 endef
 
+
+###########################################################
+## Find all files under the named directories.
+## Meant to be used like:
+##    SRC_FILES := $(call all-files-under, src, *.java)
+###########################################################
+
+define all-files-under
+$(patsubst ./%,%, \
+  $(shell cd $(LOCAL_PATH) ; \
+          find -L $(1) -name $(2) -and -not -name ".*") \
+ )
+endef
+
 ###########################################################
 ## Find all of the java files under the named directories.
 ## Meant to be used like:
@@ -313,6 +327,8 @@ define all-subdir-html-files
 $(call all-html-files-under,.)
 endef
 
+# ========================================================
+include $(call all-makefiles-under,$(LOCAL_PATH))
 ###########################################################
 ## Find all of the files matching pattern
 ##    SRC_FILES := $(call find-subdir-files, <pattern>)
