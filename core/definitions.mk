@@ -174,6 +174,20 @@ define all-named-subdir-makefiles
 $(wildcard $(addsuffix /Android.mk, $(addprefix $(call my-dir)/,$(1))))
 endef
 
+
+###########################################################
+## Find all files under the named directories.
+## Meant to be used like:
+##    SRC_FILES := $(call all-files-under, src, *.java)
+###########################################################
+
+define all-files-under
+$(patsubst ./%,%, \
+  $(shell cd $(LOCAL_PATH) ; \
+          find -L $(1) -name $(2) -and -not -name ".*") \
+ )
+endef
+
 ###########################################################
 ## Find all of the java files under the named directories.
 ## Meant to be used like:
@@ -181,10 +195,7 @@ endef
 ###########################################################
 
 define all-java-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.java" -and -not -name ".*") \
- )
+$(call all-files-under, $(1), *.java)
 endef
 
 ###########################################################
@@ -203,10 +214,7 @@ endef
 ###########################################################
 
 define all-c-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.c" -and -not -name ".*") \
- )
+$(call all-files-under, $(1), *.c)
 endef
 
 ###########################################################
@@ -225,10 +233,7 @@ endef
 ###########################################################
 
 define all-Iaidl-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "I*.aidl" -and -not -name ".*") \
- )
+$(call all-files-under, $(1), I*.aidl)
 endef
 
 ###########################################################
@@ -246,10 +251,7 @@ endef
 ###########################################################
 
 define all-logtags-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.logtags" -and -not -name ".*") \
-  )
+$(call all-files-under, $(1), *.logtags)
 endef
 
 ###########################################################
@@ -259,10 +261,7 @@ endef
 ###########################################################
 
 define all-proto-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.proto" -and -not -name ".*") \
-  )
+$(call all-files-under, $(1), *.proto)
 endef
 
 ###########################################################
@@ -285,10 +284,7 @@ endef
 ###########################################################
 
 define all-S-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.S" -and -not -name ".*") \
- )
+$(call all-files-under, $(1), *.S)
 endef
 
 ###########################################################
@@ -298,10 +294,7 @@ endef
 ###########################################################
 
 define all-html-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH) ; \
-          find -L $(1) -name "*.html" -and -not -name ".*") \
- )
+$(call all-files-under, $(1), *.html)
 endef
 
 ###########################################################
