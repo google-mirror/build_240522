@@ -68,6 +68,11 @@ $(error Unable to determine HOST_OS from uname -sm: $(UNAME)!)
 endif
 
 # HOST_ARCH
+ifeq ($(HOST_OS),windows)
+  HOST_ARCH := x86
+  HOST_2ND_ARCH :=
+  HOST_IS_64_BIT := false
+else
 ifneq (,$(findstring x86_64,$(UNAME)))
   HOST_ARCH := x86_64
   HOST_2ND_ARCH := x86
@@ -75,6 +80,7 @@ ifneq (,$(findstring x86_64,$(UNAME)))
 else
 ifneq (,$(findstring x86,$(UNAME)))
 $(error Building on a 32-bit x86 host is not supported: $(UNAME)!)
+endif
 endif
 endif
 
