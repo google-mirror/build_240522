@@ -52,7 +52,6 @@ PRODUCT_PACKAGES += \
     libpower \
     libsigchain \
     libstdc++ \
-    libstlport \
     libsurfaceflinger \
     libsurfaceflinger_ddmconnection \
     libsysutils \
@@ -71,6 +70,12 @@ PRODUCT_PACKAGES += \
     surfaceflinger \
     toolbox \
     toybox \
+
+# http://b/15193147
+# TODO(danalbert): Remove this once stlport is dead and gone.
+ifneq (,$(filter $(TARGET_DEVICE),$(STLPORT_WHITELIST)))
+PRODUCT_PACKAGES += libstlport
+endif
 
 # SELinux packages
 PRODUCT_PACKAGES += \

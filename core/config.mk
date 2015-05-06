@@ -618,4 +618,21 @@ RS_PREBUILT_COMPILER_RT := prebuilts/sdk/renderscript/lib/$(TARGET_ARCH)/libcomp
 RSCOMPAT_32BIT_ONLY_API_LEVELS := 8 9 10 11 12 13 14 15 16 17 18 19 20
 RSCOMPAT_NO_USAGEIO_API_LEVELS := 8 9 10 11 12 13
 
+# http://b/15193147
+# Whitelist devices that are still allowed to use stlport. This will prevent any
+# new devices from making the same mistakes.
+#
+# TODO(danalbert): Remove this once stlport is dead and gone.
+STLPORT_WHITELIST := \
+    deb \
+    flo \
+    flounder \
+    fugu \
+    grouper \
+    hammerhead \
+    mako \
+    manta \
+    shamu \
+    tilapia \
+
 include $(BUILD_SYSTEM)/dumpvar.mk
