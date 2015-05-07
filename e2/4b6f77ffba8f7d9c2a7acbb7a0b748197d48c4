@@ -1,0 +1,9 @@
+Code-Review+2: Elliott Hughes <enh@google.com>
+Code-Review+1: Evgeniy Stepanov <eugenis@google.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Dimitry Ivanov <dimitry@google.com>
+Submitted-by: Dimitry Ivanov <dimitry@google.com>
+Submitted-at: Thu, 07 May 2015 21:09:48 +0000
+Reviewed-on: https://android-review.googlesource.com/149787
+Project: platform/build
+Branch: refs/heads/master
