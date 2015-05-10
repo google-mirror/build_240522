@@ -78,6 +78,12 @@ $(error Building on a 32-bit x86 host is not supported: $(UNAME)!)
 endif
 endif
 
+ifeq ($(HOST_OS),windows)
+  HOST_ARCH := x86
+  HOST_2ND_ARCH :=
+  HOST_IS_64_BIT := false
+endif
+
 BUILD_ARCH := $(HOST_ARCH)
 BUILD_2ND_ARCH := $(HOST_2ND_ARCH)
 
