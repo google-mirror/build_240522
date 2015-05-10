@@ -47,6 +47,8 @@ $(combo_2nd_arch_prefix)HOST_CC := $(TOOLS_PREFIX)gcc$(TOOLS_EXE_SUFFIX)
 $(combo_2nd_arch_prefix)HOST_CXX := $(TOOLS_PREFIX)g++$(TOOLS_EXE_SUFFIX)
 $(combo_2nd_arch_prefix)HOST_AR := $(TOOLS_PREFIX)ar$(TOOLS_EXE_SUFFIX)
 
+$(combo_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG := prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8
+
 $(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += \
     -include $(call select-android-config-h,windows)
 $(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += \

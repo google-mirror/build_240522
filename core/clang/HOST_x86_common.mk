@@ -50,5 +50,12 @@ endif
 endif  # Linux
 
 ifeq ($(HOST_OS),windows)
-# nothing required here yet
+CLANG_CONFIG_x86_WINDOWS_HOST_EXTRA_LDFLAGS := \
+  --gcc-toolchain=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG) \
+  --sysroot=$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/sysroot \
+  -B$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-w64-mingw32/bin \
+  -B$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-w64-mingw32/lib32/ \
+  -L$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/x86_64-w64-mingw32/lib32/ \
+  -L$($(clang_2nd_arch_prefix)HOST_TOOLCHAIN_FOR_CLANG)/lib/gcc/x86_64-w64-mingw32/4.8.3/32/ \
+  -fno-use-linker-plugin
 endif
