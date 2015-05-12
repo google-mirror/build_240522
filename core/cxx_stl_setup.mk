@@ -50,7 +50,7 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
     my_cflags += -D_USING_LIBCXX
     my_c_includes += external/libcxx/include
 
-    ifeq ($(my_link_type),dynamic)
+    ifeq ($(my_cxx_stl),libc++)
         my_shared_libraries += libc++
     else
         my_static_libraries += libc++_static
