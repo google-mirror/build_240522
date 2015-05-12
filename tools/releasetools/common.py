@@ -1141,6 +1141,9 @@ class BlockDifference(object):
     self.partition = partition
     self.check_first_block = check_first_block
 
+    # Due to http://b/20939131, check_first_block is disabled.
+    assert not self.check_first_block
+
     if version is None:
       version = 1
       if OPTIONS.info_dict:
@@ -1174,18 +1177,17 @@ class BlockDifference(object):
     if not self.src:
       script.Print("Image %s will be patched unconditionally." % (partition,))
     else:
+      ranges = self.src.care_map.subtract(self.src.copy_blocks).to_string_raw()
       if self.version >= 3:
         script.AppendExtra(('if (range_sha1("%s", "%s") == "%s" || '
                             'block_image_verify("%s", '
                             'package_extract_file("%s.transfer.list"), '
                             '"%s.new.dat", "%s.patch.dat")) then') % (
-                            self.device, self.src.care_map.to_string_raw(),
-                            self.src.TotalSha1(),
+                            self.device, ranges, self.src.TotalSha1(),
                             self.device, partition, partition, partition))
       else:
         script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
-            self.device, self.src.care_map.to_string_raw(),
-            self.src.TotalSha1()))
+                           self.device, ranges, self.src.TotalSha1()))
       script.Print('Verified %s image...' % (partition,))
       script.AppendExtra('else')
 
@@ -1195,6 +1197,8 @@ class BlockDifference(object):
       # give an explicit log message about the partition having been
       # remounted R/W (the most likely explanation) and the need to flash to
       # get OTAs working again.
+      # Due to http://b/20939131, block 0 may be changed without remounting
+      # R/W.
       if self.check_first_block:
         self._CheckFirstBlock(script)
 
