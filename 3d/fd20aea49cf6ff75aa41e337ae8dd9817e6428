@@ -1,0 +1,7 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Submitted-by: Ying Wang <wangying@android.com>
+Submitted-at: Thu, 14 May 2015 16:11:58 +0000
+Reviewed-on: https://android-review.googlesource.com/148800
+Project: platform/build
+Branch: refs/heads/master
