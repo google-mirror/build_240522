@@ -1,0 +1,8 @@
+Code-Review+1: Stephen Smalley <stephen.smalley@gmail.com>
+Code-Review+2: Nick Kralevich <nnk@google.com>
+Verified+1: Nick Kralevich <nnk@google.com>
+Submitted-by: Nick Kralevich <nnk@google.com>
+Submitted-at: Fri, 15 May 2015 13:00:25 +0000
+Reviewed-on: https://android-review.googlesource.com/150850
+Project: platform/build
+Branch: refs/heads/master
