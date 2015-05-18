@@ -1,1 +1,5 @@
 type qemu_prop, property_type;
+
+# The following type is not really emulator-specific. Should it be
+# defined in $AOSP/external/sepolicy/property.te instead?
+type radio_noril_prop, property_type;

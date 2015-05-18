@@ -1,1 +1,5 @@
 qemu.                   u:object_r:qemu_prop:s0
+
+# The following property is not really emulator-specific. Should it be
+# labeled in $AOSP/external/sepolicy/property_contexts instead?
+radio.noril             u:object_r:radio_noril_prop:s0
