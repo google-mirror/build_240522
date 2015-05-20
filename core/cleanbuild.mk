@@ -264,7 +264,7 @@ force_installclean :=
 ###########################################################
 
 .PHONY: clean-jack-files
-clean-jack-files: clean-dex-files
+clean-jack-files: clean-dex-files clean-jack-incremental
 	$(hide) find $(OUT_DIR) -name "*.jack" | xargs rm -f
 	$(hide) find $(OUT_DIR) -type d -name "jack" | xargs rm -rf
 	@echo "All jack files have been removed."
