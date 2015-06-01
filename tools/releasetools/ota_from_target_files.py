@@ -598,6 +598,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     system_tgt.ResetFileMap()
     system_diff = common.BlockDifference("system", system_tgt, src=None)
     system_diff.WriteScript(script, output_zip)
+    system_diff.WritePostInstallVerifyScript(script)
   else:
     script.FormatPartition("/system")
     script.Mount("/system", recovery_mount_options)
@@ -631,6 +632,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
       vendor_tgt.ResetFileMap()
       vendor_diff = common.BlockDifference("vendor", vendor_tgt)
       vendor_diff.WriteScript(script, output_zip)
+      vendor_diff.WritePostInstallVerifyScript(script)
     else:
       script.FormatPartition("/vendor")
       script.Mount("/vendor", recovery_mount_options)
@@ -917,8 +919,11 @@ else
 
   system_diff.WriteScript(script, output_zip,
                           progress=0.8 if vendor_diff else 0.9)
+  system_diff.WritePostInstallVerifyScript(script)
+
   if vendor_diff:
     vendor_diff.WriteScript(script, output_zip, progress=0.1)
+    vendor_diff.WritePostInstallVerifyScript(script)
 
   if OPTIONS.two_step:
     common.ZipWriteStr(output_zip, "boot.img", target_boot.data)

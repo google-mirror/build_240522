@@ -1220,6 +1220,21 @@ class BlockDifference(object):
       script.AppendExtra(('abort("%s partition has unexpected contents");\n'
                           'endif;') % (partition,))
 
+  def WritePostInstallVerifyScript(self, script):
+    partition = self.partition
+    script.Print('Verifying the updated %s image...' % (partition,))
+    # Unlike pre-install verification, clobbered_blocks should not be ignored.
+    ranges = self.tgt.care_map
+    ranges_str = ranges.to_string_raw()
+    script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
+                       self.device, ranges_str,
+                       self.tgt.TotalSha1(include_clobbered_blocks=True)))
+    script.Print('Verified the updated %s image.' % (partition,))
+    script.AppendExtra(
+        'else\n'
+        '  abort("%s partition has unexpected contents after OTA update");\n'
+        'endif;' % (partition,))
+
   def _WriteUpdate(self, script, output_zip):
     ZipWrite(output_zip,
              '{}.transfer.list'.format(self.path),
