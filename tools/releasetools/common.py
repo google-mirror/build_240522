@@ -518,23 +518,17 @@ def SignFile(input_name, output_name, key, password, align=None,
   zip file.
   """
 
-  if align == 0 or align == 1:
-    align = None
-
-  if align:
-    temp = tempfile.NamedTemporaryFile()
-    sign_name = temp.name
-  else:
-    sign_name = output_name
+  if align is None or align == 1:
+    align = 0
 
   cmd = [OPTIONS.java_path, OPTIONS.java_args, "-jar",
-         os.path.join(OPTIONS.search_path, OPTIONS.signapk_path)]
+         os.path.join(OPTIONS.search_path, OPTIONS.signapk_path), "-a", str(align)]
   cmd.extend(OPTIONS.extra_signapk_args)
   if whole_file:
     cmd.append("-w")
   cmd.extend([key + OPTIONS.public_key_suffix,
               key + OPTIONS.private_key_suffix,
-              input_name, sign_name])
+              input_name, output_name])
 
   p = Run(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
   if password is not None:
@@ -542,13 +536,6 @@ def SignFile(input_name, output_name, key, password, align=None,
   p.communicate(password)
   if p.returncode != 0:
     raise ExternalError("signapk.jar failed: return code %s" % (p.returncode,))
-
-  if align:
-    p = Run(["zipalign", "-f", "-p", str(align), sign_name, output_name])
-    p.communicate()
-    if p.returncode != 0:
-      raise ExternalError("zipalign failed: return code %s" % (p.returncode,))
-    temp.close()
 
 
 def CheckSize(data, target, info_dict):
