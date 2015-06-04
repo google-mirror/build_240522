@@ -56,3 +56,15 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/init.ranchu.rc:root/init.ranchu.rc \
     device/generic/goldfish/fstab.ranchu:root/fstab.ranchu \
     device/generic/goldfish/ueventd.ranchu.rc:root/ueventd.ranchu.rc
+
+
+# Add ethernet permissions for ranchu emulators
+ifeq ($(TARGET_PRODUCT),aosp_arm64)
+  PRODUCT_COPY_FILES += \
+      frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
+endif
+
+ifeq ($(TARGET_PRODUCT),aosp_mips64)
+  PRODUCT_COPY_FILES += \
+      frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
+endif
