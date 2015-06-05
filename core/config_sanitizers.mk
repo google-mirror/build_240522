@@ -25,7 +25,7 @@ ifdef LOCAL_IS_HOST_MODULE
   ifeq ($(my_sanitize),)
     my_sanitize := $(strip $(SANITIZE_HOST))
 
-    # SANTIZIZE_HOST=true is a deprecated way to say SANITIZE_HOST=address.
+    # SANITIZE_HOST=true is a deprecated way to say SANITIZE_HOST=address.
     ifeq ($(my_sanitize),true)
       my_sanitize := address
     endif

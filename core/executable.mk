@@ -9,6 +9,14 @@
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
+
+my_sanitize_target := $(strip $(SANITIZE_TARGET))
+
+ifneq ($(filter $(my_sanitize_target),$(LOCAL_SUPPORTED_SANITIZERS)),)
+LOCAL_CLANG := true
+LOCAL_SANITIZE := $(my_sanitize_target)
+endif
+
 ifeq ($(my_module_multilib),both)
 ifeq ($(LOCAL_MODULE_PATH_32)$(LOCAL_MODULE_STEM_32),)
 $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_32 or LOCAL_MODULE_PATH_32 is required for LOCAL_MULTILIB := both for module $(LOCAL_MODULE))

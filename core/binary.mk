@@ -557,6 +557,11 @@ endif
 endif  # $(proto_sources) non-empty
 
 
+ifneq ($(filter address,$(LOCAL_SANITIZE)),)
+    my_static_libraries := $(addsuffix _address,$(my_static_libraries))
+    my_whole_static_libraries := $(addsuffix _address,$(my_whole_static_libraries))
+endif
+
 ###########################################################
 ## YACC: Compile .y and .yy files to .cpp and the to .o.
 ###########################################################
