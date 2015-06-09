@@ -23,7 +23,7 @@
 import os
 import sys
 
-def perform_find(mindepth, prune, dirlist, filename):
+def perform_find(mindepth, prune, mirror, dirlist, filename):
   result = []
   pruneleaves = set(map(lambda x: os.path.split(x)[1], prune))
   for rootdir in dirlist:
@@ -51,6 +51,10 @@ def perform_find(mindepth, prune, dirlist, filename):
       if filename in files:
         result.append(os.path.join(root, filename))
         del dirs[:]
+      # check the mirror
+      if mirror is not None and os.path.exists(os.path.join(mirror, root, filename)):
+        result.append(os.path.join(mirror, root, filename))
+        del dirs[:]
   return result
 
 def usage():
@@ -61,6 +65,8 @@ Options:
    --prune=<dirname>
        Avoids returning results from inside any directory called <dirname>
        (e.g., "*/out/*"). May be used multiple times.
+   --mirror=<dirname>
+       Also search for <filename> in a mirrored directory structure at <dirname>.
 """ % {
       "progName": os.path.split(sys.argv[0])[1],
     })
@@ -69,6 +75,7 @@ Options:
 def main(argv):
   mindepth = -1
   prune = []
+  mirror = None
   i=1
   while i<len(argv) and len(argv[i])>2 and argv[i][0:2] == "--":
     arg = argv[i]
@@ -82,6 +89,10 @@ def main(argv):
       if len(p) == 0:
         usage()
       prune.append(p)
+    elif arg.startswith("--mirror="):
+      mirror = arg[len("--mirror="):]
+      if len(mirror) == 0:
+        usage()
     else:
       usage()
     i += 1
@@ -89,7 +100,7 @@ def main(argv):
     usage()
   dirlist = argv[i:-1]
   filename = argv[-1]
-  results = list(set(perform_find(mindepth, prune, dirlist, filename)))
+  results = list(set(perform_find(mindepth, prune, mirror, dirlist, filename)))
   results.sort()
   for r in results:
     print r

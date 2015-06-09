@@ -118,6 +118,15 @@ endef
 
 
 ###########################################################
+## Normalizes the mk path to a source path
+## $(1): a Android.mk path, either in $MK_OUT_DIR or the source tree
+###########################################################
+
+define normalize-mk-dir
+$(patsubst $(MK_OUT_DIR)/%,%,$(1))
+endef
+
+###########################################################
 ## Retrieve the directory of the current makefile
 ## Must be called before including any other makefile!!
 ###########################################################
@@ -126,10 +135,11 @@ endef
 define my-dir
 $(strip \
   $(eval LOCAL_MODULE_MAKEFILE := $$(lastword $$(MAKEFILE_LIST))) \
-  $(if $(filter $(BUILD_SYSTEM)/% $(OUT_DIR)/%,$(LOCAL_MODULE_MAKEFILE)), \
+  $(eval my_dir := $$(call normalize-mk-dir,$$(LOCAL_MODULE_MAKEFILE))) \
+  $(if $(filter $(BUILD_SYSTEM)/% $(OUT_DIR)/%,$(my_dir)), \
     $(error my-dir must be called before including any other makefile.) \
    , \
-    $(patsubst %/,%,$(dir $(LOCAL_MODULE_MAKEFILE))) \
+    $(patsubst %/,%,$(dir $(my_dir))) \
    ) \
  )
 endef
@@ -139,7 +149,7 @@ endef
 ###########################################################
 
 define all-makefiles-under
-$(wildcard $(1)/*/Android.mk)
+$(wildcard $(1)/*/Android.mk) $(wildcard $(MK_OUT_DIR)/$(strip $(1))/*/Android.mk)
 endef
 
 ###########################################################
@@ -151,7 +161,7 @@ endef
 # Ignores $(1)/Android.mk
 define first-makefiles-under
 $(shell build/tools/findleaves.py --prune=$(OUT_DIR) --prune=.repo --prune=.git \
-        --mindepth=2 $(1) Android.mk)
+        --mindepth=2 --mirror=$(MK_OUT_DIR) $(1) Android.mk)
 endef
 
 ###########################################################
@@ -171,7 +181,8 @@ endef
 
 # $(1): List of directories to look for under this directory
 define all-named-subdir-makefiles
-$(wildcard $(addsuffix /Android.mk, $(addprefix $(call my-dir)/,$(1))))
+$(wildcard $(addsuffix /Android.mk, $(addprefix $(call my-dir)/,$(1)) \
+                                    $(addprefix $(MK_OUT_DIR)/$(call my-dir)/,$(1))))
 endef
 
 ###########################################################
