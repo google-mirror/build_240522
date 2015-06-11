@@ -6,6 +6,8 @@
 # LOCAL_MODULE_PATH_32 and LOCAL_MODULE_PATH_64 or LOCAL_MODULE_STEM_32 and
 # LOCAL_MODULE_STEM_64
 
+ifneq (true|address,$(LOCAL_FORCE_STATIC_EXECUTABLE)|$(strip $(SANITIZE_TARGET)))
+
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
@@ -71,3 +73,5 @@ LOCAL_2ND_ARCH_VAR_PREFIX :=
 LOCAL_NO_2ND_ARCH_MODULE_SUFFIX :=
 
 my_module_arch_supported :=
+
+endif
