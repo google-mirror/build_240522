@@ -234,7 +234,7 @@ endif
 # These are the modifier targets that don't do anything themselves, but
 # change the behavior of the build.
 # (must be defined before including definitions.make)
-INTERNAL_MODIFIER_TARGETS := showcommands all incrementaljavac
+INTERNAL_MODIFIER_TARGETS := showcommands all incrementaljavac notestchecks
 
 .PHONY: incrementaljavac
 incrementaljavac: ;
@@ -1008,9 +1008,11 @@ target-native-tests : native-target-tests
 tests : host-tests target-tests
 
 # To catch more build breakage, check build tests modules in eng and userdebug builds.
+ifeq ($(filter $(MAKECMDGOALS),notestchecks),)
 ifneq ($(TARGET_BUILD_PDK),true)
 ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
 droidcore : target-tests host-tests
+endif
 endif
 endif
 
