@@ -833,7 +833,7 @@ files: prebuilt \
 # -------------------------------------------------------------------
 
 .PHONY: checkbuild
-checkbuild: $(modules_to_check)
+checkbuild: $(modules_to_check) build-art-tests
 ifeq (true,$(ANDROID_BUILD_EVERYTHING_BY_DEFAULT)$(filter $(MAKECMDGOALS),checkbuild))
 droid: checkbuild
 else
