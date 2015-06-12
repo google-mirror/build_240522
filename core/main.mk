@@ -431,14 +431,14 @@ ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.stack-trace-file=/data/anr/traces.txt
 # For most goals, anything not tagged with the "tests" tag should
 # be installed in /system.
 define should-install-to-system
-$(if $(filter tests,$(1)),,true)
+$(if $(filter tests sanitizer-libraries,$(1)),,true)
 endef
 
 ifdef is_sdk_build
 # For the sdk goal, anything with the "samples" tag should be
 # installed in /data even if that module also has "eng"/"debug"/"user".
 define should-install-to-system
-$(if $(filter samples tests,$(1)),,true)
+$(if $(filter samples tests sanitizer-libraries,,$(1)),,true)
 endef
 endif
 
