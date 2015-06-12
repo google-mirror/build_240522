@@ -99,6 +99,12 @@ ifneq ($(words $(LOCAL_MODULE_CLASS)),1)
   $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS must contain exactly one word, not "$(LOCAL_MODULE_CLASS)")
 endif
 
+ifneq (,$(strip $(SANITIZE_TARGET)))
+  ifeq (SHARED_LIBRARIES,$(LOCAL_MODULE_CLASS))
+    my_module_tags += sanitizer-libraries
+  endif
+endif
+
 my_32_64_bit_suffix := $(if $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)IS_64_BIT),64,32)
 
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
