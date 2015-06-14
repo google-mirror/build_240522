@@ -1025,6 +1025,16 @@ ifeq ($(strip $(LOCAL_RTTI_FLAG)),)
 LOCAL_RTTI_FLAG := -fno-rtti
 endif
 
+ifeq ($(strip $(LOCAL_PARANOID_MATH)),true)
+  ifeq ($(my_clang),true)
+    my_cflags += -fsanitize=signed-integer-overflow,unsigned-integer-overflow
+    my_cflags += -ftrap-function=abort
+    my_cflags += -fsanitize-undefined-trap-on-error
+  else
+    $(error $(LOCAL_MODULE): You must enable LOCAL_CLANG:=true to use LOCAL_PARANOID_MATH)
+  endif
+endif
+
 ###########################################################
 # Rule-specific variable definitions
 ###########################################################
