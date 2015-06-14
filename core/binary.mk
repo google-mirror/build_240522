@@ -1025,6 +1025,16 @@ ifeq ($(strip $(LOCAL_RTTI_FLAG)),)
 LOCAL_RTTI_FLAG := -fno-rtti
 endif
 
+ifeq ($(strip $(LOCAL_DETECT_INTEGER_OVERFLOWS)),true)
+  ifeq ($(my_clang),true)
+    my_cflags += -fsanitize=signed-integer-overflow,unsigned-integer-overflow
+    my_cflags += -ftrap-function=abort
+    my_cflags += -fsanitize-undefined-trap-on-error
+  else
+    $(error $(LOCAL_MODULE): You must enable LOCAL_CLANG:=true to use LOCAL_DETECT_INTEGER_OVERFLOWS)
+  endif
+endif
+
 ###########################################################
 # Rule-specific variable definitions
 ###########################################################
