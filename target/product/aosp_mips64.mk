@@ -30,3 +30,9 @@ PRODUCT_NAME := aosp_mips64
 PRODUCT_DEVICE := generic_mips64
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on MIPS64 Emulator
+
+# This is for enabling ethernet support for ranchu.
+# Consider removing this after RIL support is provided in ranchu.
+# Having this permission file on the target requires additional
+# dhcpcd_eth0 service defined in the init.ranchu.rc.
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
