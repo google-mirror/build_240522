@@ -79,15 +79,6 @@ ifeq ($(FORCE_MIPS_DEBUGGING),true)
   TARGET_mips_CFLAGS += -fno-omit-frame-pointer
 endif
 
-# For mips r6 (both 32bit and 64bit), GDB cannot stop on a breakpoint
-# if it is set on a compact branch. Turn generation of compact
-# branches off, to allow GDB to work properly.
-# Note: JIC instruction is not affected by this flag.
-# TODO: Remove this after GDB is fixed.
-ifeq ($(TARGET_ARCH),mips64)
-TARGET_mips_CFLAGS += -mcompact-branches=never
-endif
-
 android_config_h := $(call select-android-config-h,linux-mips64)
 
 TARGET_GLOBAL_CFLAGS += \
@@ -137,7 +128,6 @@ TARGET_RELEASE_CFLAGS := \
 
 libc_root := bionic/libc
 libm_root := bionic/libm
-libthread_db_root := bionic/libthread_db
 
 
 ## on some hosts, the target cross-compiler is not available so do not run this command
@@ -168,7 +158,7 @@ TARGET_C_INCLUDES := \
 	$(KERNEL_HEADERS) \
 	$(libm_root)/include \
 	$(libm_root)/include/mips \
-	$(libthread_db_root)/include
+
 # TODO: perhaps use $(libm_root)/include/mips64 instead of mips ?
 
 TARGET_CRTBEGIN_STATIC_O := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)/crtbegin_static.o

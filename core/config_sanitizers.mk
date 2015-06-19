@@ -4,17 +4,6 @@
 
 my_sanitize := $(strip $(LOCAL_SANITIZE))
 
-# Keep compatibility for LOCAL_ADDRESS_SANITIZER until all targets have moved to
-# `LOCAL_SANITIZE := address`.
-ifeq ($(strip $(LOCAL_ADDRESS_SANITIZER)),true)
-  my_sanitize += address
-endif
-
-# And `LOCAL_SANITIZE := never`.
-ifeq ($(strip $(LOCAL_ADDRESS_SANITIZER)),false)
-  my_sanitize := never
-endif
-
 # Don't apply sanitizers to NDK code.
 ifdef LOCAL_SDK_VERSION
   my_sanitize := never
@@ -52,12 +41,13 @@ endif
 
 ifneq ($(filter default-ub,$(my_sanitize)),)
   my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
-  my_ldlibs += -ldl
 
   ifdef LOCAL_IS_HOST_MODULE
     my_cflags += -fno-sanitize-recover=all
+    my_ldlibs += -ldl
   else
     my_cflags += -fsanitize-undefined-trap-on-error
+    my_shared_libraries += libdl
   endif
 endif
 
@@ -104,4 +94,14 @@ endif
 ifneq ($(strip $(LOCAL_SANITIZE_RECOVER)),)
   recover_arg := $(subst $(space),$(comma),$(LOCAL_SANITIZE_RECOVER)),
   my_cflags += -fsanitize-recover=$(recover_arg)
+endif
+
+ifeq ($(strip $(LOCAL_DETECT_INTEGER_OVERFLOWS)),true)
+  ifeq ($(my_clang),true)
+    my_cflags += -fsanitize=signed-integer-overflow,unsigned-integer-overflow
+    my_cflags += -ftrap-function=abort
+    my_cflags += -fsanitize-undefined-trap-on-error
+  else
+    $(error $(LOCAL_MODULE): You must enable LOCAL_CLANG:=true to use LOCAL_DETECT_INTEGER_OVERFLOWS)
+  endif
 endif
