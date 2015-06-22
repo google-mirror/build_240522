@@ -71,6 +71,8 @@ PRODUCT_PACKAGES += \
     toolbox \
     toybox \
     tzdatacheck \
+    ueventd \
+    watchdogd \
 
 # SELinux packages
 PRODUCT_PACKAGES += \
