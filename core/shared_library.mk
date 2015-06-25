@@ -1,3 +1,14 @@
+# Undefined symbols can occur if a non-sanitized library links
+# sanitizer static libraries. That's OK, because the executable
+# always depends on the ASan runtime library, which defines these
+# symbols.
+ifeq (address,$(strip $(SANITIZE_TARGET)))
+  ifeq (false, $(LOCAL_CLANG))
+    LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+  endif
+endif
+
+
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
