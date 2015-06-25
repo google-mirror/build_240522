@@ -281,6 +281,55 @@ class BlockImageDiff(object):
     return ctx.hexdigest()
 
   def WriteTransfers(self, prefix):
+    def split_overlapping_move(xf):
+      out = []
+      (s1, e1) = map(int, str(xf.src_ranges).split('-'))
+      (s2, e2) = map(int, str(xf.tgt_ranges).split('-'))
+      e1 += 1
+      e2 += 1
+      assert s1 != s2
+
+      # move backwards
+      if s1 < s2:
+        gap = s2 - s1
+        i = e1
+        j = e2
+        while i - gap > s1:
+          src_rs = RangeSet((i - gap, i))
+          tgt_rs = RangeSet((j - gap, j))
+          out.append("%s %s %s %d %s\n" % (
+              xf.style, self.HashBlocks(self.tgt, tgt_rs),
+              tgt_rs.to_string_raw(), src_rs.size(), src_rs.to_string_raw()))
+          i -= gap
+          j -= gap
+
+        src_rs = RangeSet((s1, i))
+        tgt_rs = RangeSet((s2, j))
+        out.append("%s %s %s %d %s\n" % (
+            xf.style, self.HashBlocks(self.tgt, tgt_rs),
+            tgt_rs.to_string_raw(), src_rs.size(), src_rs.to_string_raw()))
+
+      # move forwards
+      else:
+        gap = s1 - s2
+        i = s1
+        j = s2
+        while i + gap < e1:
+          src_rs = RangeSet((i, i + gap))
+          tgt_rs = RangeSet((j, j + gap))
+          out.append("%s %s %s %d %s\n" % (
+              xf.style, self.HashBlocks(self.tgt, tgt_rs),
+              tgt_rs.to_string_raw(), src_rs.size(), src_rs.to_string_raw()))
+          i += gap
+          j += gap
+
+        src_rs = RangeSet((i, e1))
+        tgt_rs = RangeSet((j, e2))
+        out.append("%s %s %s %d %s\n" % (
+            xf.style, self.HashBlocks(self.tgt, tgt_rs),
+            tgt_rs.to_string_raw(), src_rs.size(), src_rs.to_string_raw()))
+      return out
+
     out = []
 
     total = 0
@@ -409,16 +458,28 @@ class BlockImageDiff(object):
                 xf.style,
                 xf.tgt_ranges.to_string_raw(), src_str))
           elif self.version >= 3:
-            # take into account automatic stashing of overlapping blocks
-            if xf.src_ranges.overlaps(xf.tgt_ranges):
-              temp_stash_usage = stashed_blocks + xf.src_ranges.size();
-              if temp_stash_usage > max_stashed_blocks:
-                max_stashed_blocks = temp_stash_usage
+            overlapped = xf.src_ranges.overlaps(xf.tgt_ranges)
+            # We may break a move that has overlapping blocks into multiple
+            # non-overlapping ones, if a) it doesn't use any stash and b) both
+            # of its src and tgt are continuous ranges. Non-overlapping moves
+            # don't need to be stashed during an update, which improves the
+            # efficiency and reduces stash space requirement.
+            may_break_move = (not xf.use_stash and
+                              xf.src_ranges.continuous() and
+                              xf.tgt_ranges.continuous())
+            if overlapped and may_break_move:
+              moves = split_overlapping_move(xf)
+              out += moves
+            else:
+              # take into account automatic stashing of overlapping blocks
+              if overlapped:
+                temp_stash_usage = stashed_blocks + xf.src_ranges.size();
+                if temp_stash_usage > max_stashed_blocks:
+                  max_stashed_blocks = temp_stash_usage
 
-            out.append("%s %s %s %s\n" % (
-                xf.style,
-                self.HashBlocks(self.tgt, xf.tgt_ranges),
-                xf.tgt_ranges.to_string_raw(), src_str))
+              out.append("%s %s %s %s\n" % (
+                  xf.style, self.HashBlocks(self.tgt, xf.tgt_ranges),
+                  xf.tgt_ranges.to_string_raw(), src_str))
           total += tgt_size
       elif xf.style in ("bsdiff", "imgdiff"):
         performs_read = True

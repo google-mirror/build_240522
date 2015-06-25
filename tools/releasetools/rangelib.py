@@ -209,6 +209,16 @@ class RangeSet(object):
         total -= p
     return total
 
+  def continuous(self):
+    """Returns true if it's a continuous range.
+
+    >>> RangeSet("10-19").continuous()
+    True
+    >>> RangeSet("10-19 21").continuous()
+    False
+    """
+    return len(self.data) == 2
+
   def map_within(self, other):
     """'other' should be a subset of 'self'.  Returns a RangeSet
     representing what 'other' would get translated to if the integers
