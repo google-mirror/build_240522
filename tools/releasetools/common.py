@@ -1288,8 +1288,14 @@ class BlockDifference(object):
         script.AppendExtra(('if (range_sha1("%s", "%s") == "%s" || '
                             'block_image_verify("%s", '
                             'package_extract_file("%s.transfer.list"), '
-                            '"%s.new.dat", "%s.patch.dat")) then') % (
+                            '"%s.new.dat", "%s.patch.dat") || '
+                            '(block_image_recover("%s", "%s") && '
+                            'block_image_verify("%s", '
+                            'package_extract_file("%s.transfer.list"), '
+                            '"%s.new.dat", "%s.patch.dat"))) then') % (
                             self.device, ranges_str, self.src.TotalSha1(),
+                            self.device, partition, partition, partition,
+                            self.device, ranges_str,
                             self.device, partition, partition, partition))
       else:
         script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
