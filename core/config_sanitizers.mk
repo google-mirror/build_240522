@@ -22,10 +22,19 @@ ifeq ($(my_sanitize),)
     my_sanitize := address
   endif
 
-  # SANITIZE_HOST is only in effect if the module is already using clang (host
-  # modules that haven't set `LOCAL_CLANG := false` and device modules that
-  # have set `LOCAL_CLANG := true`.
   ifneq ($(my_clang),true)
+    # Undefined symbols can occur if a non-sanitized library links
+    # sanitized static libraries. That's OK, because the executable
+    # always depends on the ASan runtime library, which defines these
+    # symbols.
+    ifneq ($(my_sanitize),)
+      ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+        my_allow_undefined_symbols := true
+      endif
+    endif
+    # SANITIZE_HOST is only in effect if the module is already using clang (host
+    # modules that haven't set `LOCAL_CLANG := false` and device modules that
+    # have set `LOCAL_CLANG := true`.
     my_sanitize :=
   endif
 endif
