@@ -12,6 +12,9 @@ else
   my_prefix := TARGET_
 endif
 
+# Save value of LOCAL_DEX_PREOPT to use it for the second arch
+prebuilt_local_dexpreopt := $(LOCAL_DEX_PREOPT)
+
 include $(BUILD_SYSTEM)/multilib.mk
 
 my_skip_non_preferred_arch :=
@@ -45,6 +48,7 @@ LOCAL_MODULE_STEM :=
 LOCAL_BUILT_MODULE_STEM :=
 LOCAL_INSTALLED_MODULE_STEM :=
 LOCAL_INTERMEDIATE_TARGETS :=
+LOCAL_DEX_PREOPT := $(prebuilt_local_dexpreopt)
 include $(BUILD_SYSTEM)/prebuilt_internal.mk
 endif # $(my_module_arch_supported)
 endif # $($(my_prefix)2ND_ARCH)
