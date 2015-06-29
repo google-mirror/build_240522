@@ -33,6 +33,7 @@ PRODUCT_PACKAGES += \
     init \
     init.environ.rc \
     init.rc \
+    foo.bar \
     libEGL \
     libETC1 \
     libFFTEm \
