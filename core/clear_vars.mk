@@ -286,6 +286,12 @@ LOCAL_MODULE_STEM_64:=
 LOCAL_CLANG_32:=
 LOCAL_CLANG_64:=
 
+$(call clear-static-shared-variants,LOCAL_SRC_FILES)
+$(call clear-static-shared-variants,LOCAL_SHARED_LIBRARIES)
+$(call clear-static-shared-variants,LOCAL_STATIC_LIBRARIES)
+$(call clear-static-shared-variants,LOCAL_WHOLE_STATIC_LIBRARIES)
+$(call clear-static-shared-variants,LOCAL_CFLAGS)
+
 # Trim MAKEFILE_LIST so that $(call my-dir) doesn't need to
 # iterate over thousands of entries every time.
 # Leave the current makefile to make sure we don't break anything

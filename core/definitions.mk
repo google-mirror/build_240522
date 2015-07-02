@@ -2339,6 +2339,43 @@ $(strip $(if $(filter $(TARGET_ARCH),$(1)),$(TARGET_ARCH),\
 endef
 
 ###########################################################
+## Helpers to deal with variable expansions
+###########################################################
+
+# Helper for binary.mk, used to pull in all of the variables relevant to the
+# current module build
+define local-variants-expand
+$($(1)_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $($(1)_$(my_32_64_bit_suffix))
+endef
+
+# Helper for clear_vars.mk to reduce the typing required
+define clear-static-shared-variants
+$(eval $(call clear-static-shared-variants-internal,$(1)))
+endef
+
+define clear-static-shared-variants-internal
+$(1)_static:=
+$(1)_shared:=
+$(1)_static_32:=
+$(1)_shared_32:=
+$(1)_static_64:=
+$(1)_shared_64:=
+$(1)_static_$(TARGET_ARCH):=
+$(1)_shared_$(TARGET_ARCH):=
+ifdef TARGET_2ND_ARCH
+$(1)_static_$$(TARGET_2ND_ARCH):=
+$(1)_shared_$$(TARGET_2ND_ARCH):=
+endif
+$(1)_static_$(HOST_ARCH):=
+$(1)_shared_$(HOST_ARCH):=
+ifdef HOST_2ND_ARCH
+$(1)_static_$$(HOST_2ND_ARCH):=
+$(1)_shared_$$(HOST_2ND_ARCH):=
+endif
+endef
+
+
+###########################################################
 ## Other includes
 ###########################################################
 

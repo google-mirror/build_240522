@@ -148,14 +148,14 @@ my_cflags += -fPIC
 endif
 endif
 
-my_src_files += $(LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SRC_FILES_$(my_32_64_bit_suffix))
-my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SHARED_LIBRARIES_$(my_32_64_bit_suffix))
-my_cflags += $(LOCAL_CFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_CFLAGS_$(my_32_64_bit_suffix))
-my_cppflags += $(LOCAL_CPPFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_CPPFLAGS_$(my_32_64_bit_suffix))
-my_ldflags += $(LOCAL_LDFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_LDFLAGS_$(my_32_64_bit_suffix))
-my_asflags += $(LOCAL_ASFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_ASFLAGS_$(my_32_64_bit_suffix))
-my_c_includes += $(LOCAL_C_INCLUDES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_C_INCLUDES_$(my_32_64_bit_suffix))
-my_generated_sources += $(LOCAL_GENERATED_SOURCES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_GENERATED_SOURCES_$(my_32_64_bit_suffix))
+my_src_files += $(call local-variants-expand,LOCAL_SRC_FILES)
+my_shared_libraries += $(call local-variants-expand,LOCAL_SHARED_LIBRARIES)
+my_cflags += $(call local-variants-expand,LOCAL_CFLAGS)
+my_cppflags += $(call local-variants-expand,LOCAL_CPPFLAGS)
+my_ldflags += $(call local-variants-expand,LOCAL_LDFLAGS)
+my_asflags += $(call local-variants-expand,LOCAL_ASFLAGS)
+my_c_includes += $(call local-variants-expand,LOCAL_C_INCLUDES)
+my_generated_sources += $(call local-variants-expand,LOCAL_GENERATED_SOURCES)
 
 my_clang := $(strip $(LOCAL_CLANG))
 ifdef LOCAL_CLANG_$(my_32_64_bit_suffix)
@@ -183,8 +183,54 @@ ifeq ($(USE_CLANG_PLATFORM_BUILD),true)
 endif
 
 # arch-specific static libraries go first so that generic ones can depend on them
-my_static_libraries := $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_static_libraries)
-my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_WHOLE_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_whole_static_libraries)
+my_static_libraries := $(call local-variants-expand,LOCAL_STATIC_LIBRARIES) $(my_static_libraries)
+my_whole_static_libraries := $(call local-variants-expand,LOCAL_WHOLE_STATIC_LIBRARIES) $(my_whole_static_libraries)
+
+ifdef my_static_shared_suffix
+  my_src_files_static := $(LOCAL_SRC_FILES_static) $(call local-variants-expand,LOCAL_SRC_FILES_static)
+  my_src_files_shared := $(LOCAL_SRC_FILES_shared) $(call local-variants-expand,LOCAL_SRC_FILES_shared)
+  my_cflags_static := $(LOCAL_CFLAGS_static) $(call local-variants-expand,LOCAL_CFLAGS_static)
+  my_cflags_shared := $(LOCAL_CFLAGS_shared) $(call local-variants-expand,LOCAL_CFLAGS_shared)
+  my_static_libraries_static := $(call local-variants-expand,LOCAL_STATIC_LIBRARIES_static) $(LOCAL_STATIC_LIBRARIES_static)
+  my_static_libraries_shared := $(call local-variants-expand,LOCAL_STATIC_LIBRARIES_shared) $(LOCAL_STATIC_LIBRARIES_shared)
+  my_whole_static_libraries_static := $(call local-variants-expand,LOCAL_WHOLE_STATIC_LIBRARIES_static) $(LOCAL_WHOLE_STATIC_LIBRARIES_static)
+  my_whole_static_libraries_shared := $(call local-variants-expand,LOCAL_WHOLE_STATIC_LIBRARIES_shared) $(LOCAL_WHOLE_STATIC_LIBRARIES_shared)
+
+  # Objects can't be shared if there are static-only cflags, src files, or static libs
+  my_use_whole_static_library := true
+  ifneq (,$(strip $(my_src_files_static))$(strip $(my_static_libraries_static))$(strip $(my_whole_static_libraries_static)))
+    my_use_whole_static_library :=
+  endif
+  ifneq ($(my_cflags_static),$(my_cflags_shared))
+    my_use_whole_static_library :=
+  endif
+
+  ifdef my_use_whole_static_library
+    ifeq ($(my_static_shared_suffix),shared)
+      my_src_files := $(my_src_files_shared)
+      my_static_libraries += $(my_static_libraries_shared)
+      my_whole_static_libraries += $(my_whole_static_libraries_shared) $(LOCAL_MODULE)
+    endif
+  else
+    my_src_files += $(my_src_files_$(my_static_shared_suffix))
+    my_static_libraries += $(my_static_libraries_$(my_static_shared_suffix))
+    my_whole_static_libraries += $(my_whole_static_libraries_$(my_static_shared_suffix))
+  endif
+
+  my_cflags += $(my_cflags_$(my_static_shared_suffix))
+
+  my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$(my_static_shared_suffix)) $(call local-variants-expand,LOCAL_SHARED_LIBRARIES_$(my_static_shared_suffix))
+
+  my_src_files_static :=
+  my_src_files_shared :=
+  my_cflags_static :=
+  my_cflags_shared :=
+  my_static_libraries_static :=
+  my_static_libraries_shared :=
+  my_whole_static_libraries_static :=
+  my_whole_static_libraries_shared :=
+  my_use_whole_static_library :=
+endif
 
 my_cflags := $(filter-out $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)GLOBAL_UNSUPPORTED_CFLAGS),$(my_cflags))
 

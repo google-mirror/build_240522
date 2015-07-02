@@ -1,0 +1,25 @@
+OVERRIDE_BUILT_MODULE_PATH :=
+LOCAL_BUILT_MODULE :=
+LOCAL_INSTALLED_MODULE :=
+LOCAL_INTERMEDIATE_TARGETS :=
+
+LOCAL_MODULE_CLASS :=
+LOCAL_MODULE_SUFFIX :=
+LOCAL_UNINSTALLABLE_MODULE :=
+
+my_static_shared_suffix := static
+include $(BUILD_SYSTEM)/host_static_library_internal.mk
+
+OVERRIDE_BUILT_MODULE_PATH :=
+LOCAL_BUILT_MODULE :=
+LOCAL_INSTALLED_MODULE :=
+LOCAL_INTERMEDIATE_TARGETS :=
+
+LOCAL_MODULE_CLASS :=
+LOCAL_MODULE_SUFFIX :=
+LOCAL_UNINSTALLABLE_MODULE :=
+
+my_static_shared_suffix := shared
+include $(BUILD_SYSTEM)/host_shared_library_internal.mk
+
+my_static_shared_suffix :=
