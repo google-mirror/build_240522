@@ -30,15 +30,12 @@ pathmap_INCL := \
     camera:system/media/camera/include \
     frameworks-base:frameworks/base/include \
     frameworks-native:frameworks/native/include \
-    libc:bionic/libc/include \
     libhardware:hardware/libhardware/include \
     libhardware_legacy:hardware/libhardware_legacy/include \
     libhost:build/libs/host/include \
-    libm:bionic/libm/include \
     libnativehelper:libnativehelper/include \
     libpagemap:system/extras/libpagemap/include \
     libril:hardware/ril/include \
-    libstdc++:bionic/libstdc++/include \
     mkbootimg:system/core/mkbootimg \
     opengl-tests-includes:frameworks/native/opengl/tests/include \
     recovery:bootable/recovery \
