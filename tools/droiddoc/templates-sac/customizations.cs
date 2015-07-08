@@ -357,6 +357,11 @@ def:custom_footerlinks() ?>
     <a href="<?cs var:toroot ?>source/index.html">About Android</a>&nbsp;&nbsp;|&nbsp;
     <a href="<?cs var:toroot ?>source/community.html">Community</a>&nbsp;&nbsp;|&nbsp;
     <a href="<?cs var:toroot ?>legal.html">Legal</a>&nbsp;&nbsp;|&nbsp;
+    <script type="text/javascript" src="//www.gstatic.com/feedback/api.js"></script>
+    <a href='#'
+       onclick="try{userfeedback.api.startFeedback({'productId':'715571','authuser':'1'});return false;}catch(e){}">
+      Send Feedback
+    </a>
   </p><?cs 
 /def ?>
 
