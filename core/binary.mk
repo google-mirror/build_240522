@@ -60,6 +60,20 @@ else
 my_allow_undefined_symbols := $(strip $(LOCAL_ALLOW_UNDEFINED_SYMBOLS))
 endif
 
+my_link_type := dynamic
+ifdef LOCAL_IS_HOST_MODULE
+    ifneq (,$(BUILD_HOST_static))
+        my_link_type := static
+    endif
+    ifeq (-static,$(filter -static,$(my_ldflags)))
+        my_link_type := static
+    endif
+else
+    ifeq (true,$(LOCAL_FORCE_STATIC_EXECUTABLE))
+        my_link_type := static
+    endif
+endif
+
 my_ndk_sysroot :=
 my_ndk_sysroot_include :=
 my_ndk_sysroot_lib :=
@@ -193,6 +207,32 @@ my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES_$($(my_prefix)$(LOCA
 my_cflags := $(filter-out $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)GLOBAL_UNSUPPORTED_CFLAGS),$(my_cflags))
 
 include $(BUILD_SYSTEM)/cxx_stl_setup.mk
+
+ifndef LOCAL_IS_HOST_MODULE
+  ifndef LOCAL_SDK_VERSION
+    ifneq (true,$(LOCAL_NO_UNWINDER))
+      ifeq (arm,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
+        my_static_libraries += libunwind_llvm
+        my_ldflags += -Wl,--exclude-libs,libunwind_llvm.a
+        ifeq ($(my_link_type),static)
+            my_static_libraries += libdl
+        else
+            my_shared_libraries += libdl
+        endif
+      else
+        my_static_libraries += libunwindbacktrace
+        my_ldflags += -Wl,--exclude-libs,libunwindbacktrace.a
+      endif
+    endif
+
+    # Need to link compiler_rt *after* the unwinder because the unwinder might
+    # depend on symbols from compiler-rt.
+    ifneq (true,$(LOCAL_NO_LIBGCC))
+      my_static_libraries += libcompiler_rt
+      my_ldflags += -Wl,--exclude-libs,libcompiler_rt.a
+    endif
+  endif
+endif
 
 # Add static HAL libraries
 ifdef LOCAL_HAL_STATIC_LIBRARIES
