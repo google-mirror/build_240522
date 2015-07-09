@@ -2218,6 +2218,12 @@ define transform-prebuilt-to-target
 $(copy-file-to-target)
 endef
 
+# Copy a prebuilt file to a target location, using cp.
+define transform-prebuilt-to-target-with-cp
+@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt: $(PRIVATE_MODULE) ($@)"
+$(copy-file-to-target-with-cp)
+endef
+
 # Copy a prebuilt file to a target location, using zipalign on it.
 define transform-prebuilt-to-target-with-zipalign
 @echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt APK: $(PRIVATE_MODULE) ($@)"
