@@ -495,11 +495,26 @@ $(error bootstrap.bash failed)
 endif
 endif
 
+ifneq ($(dont_bother),true)
 ifeq (error,$(shell $(SOONG_OUT_DIR)/soong androidmk >&2 || echo -n "error"))
 $(error Failed to generate Android.mk files)
 endif
+endif
+
+.PHONY: build-soong
+build-soong:
+	$(hide) $(SOONG_OUT_DIR)/soong $(PRIVATE_SOONG_VERBOSE) $(PRIVATE_SOONG_ARGS)
+
+build-soong: PRIVATE_SOONG_ARGS := all_mk_modules
+ifneq ($(strip $(SHOW_COMMANDS)),)
+build-soong: PRIVATE_SOONG_VERBOSE := -v
+else
+build-soong: PRIVATE_SOONG_VERBOSE :=
+endif
 
 ifneq ($(ONE_SHOT_MAKEFILE),)
+# TODO: limit to just available modules?
+build-soong: PRIVATE_SOONG_ARGS := $(patsubst %/Android.mk,mm/%,$(ONE_SHOT_MAKEFILE))
 # If any of the ONE_SHOT_MAKEFILE entries are actually generated from
 # Android.bp blueprints, then switch to using those
 ONE_SHOT_MAKEFILE := $(foreach m,$(ONE_SHOT_MAKEFILE),\
@@ -902,6 +917,8 @@ bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
 ifndef BUILD_MODULES_IN_PATHS
 all_modules: $(ALL_MODULES)
 else
+# TODO: make this work
+build-soong: PRIVATE_SOONG_ARGS := $(patsubst %,mma/%,$(BUILD_MODULES_IN_PATHS))
 # BUILD_MODULES_IN_PATHS is a list of paths relative to the top of the tree
 module_path_patterns := $(foreach p, $(BUILD_MODULES_IN_PATHS),\
     $(if $(filter %/,$(p)),$(p)%,$(p)/%))
