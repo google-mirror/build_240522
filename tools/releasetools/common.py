@@ -908,7 +908,7 @@ def ZipWriteStr(zip_file, zinfo_or_arcname, data, perms=None,
     zinfo = zipfile.ZipInfo(filename=zinfo_or_arcname)
     zinfo.compress_type = zip_file.compression
     if perms is None:
-      perms = 0o644
+      perms = 0o100644
   else:
     zinfo = zinfo_or_arcname
 
