@@ -10,6 +10,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
            To limit the modules being built use the syntax: mmm dir/:target1,target2.
 - mma:     Builds all of the modules in the current directory, and their dependencies.
 - mmma:    Builds all of the modules in the supplied directories, and their dependencies.
+- agrep:   Greps on all local Android.mk files.
 - cgrep:   Greps on all local C/C++ files.
 - ggrep:   Greps on all local Gradle files.
 - jgrep:   Greps on all local Java files.
@@ -1106,6 +1107,11 @@ function mangrep()
 function sepgrep()
 {
     find . -name .repo -prune -o -name .git -prune -o -path ./out -prune -o -name sepolicy -type d -print0 | xargs -0 grep --color -n -r --exclude-dir=\.git "$@"
+}
+
+function agrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name 'Android.mk' -print0 | xargs -0 grep --color -n "$@"
 }
 
 case `uname -s` in
