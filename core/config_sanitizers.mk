@@ -80,11 +80,13 @@ ifneq ($(filter address,$(my_sanitize)),)
   my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
   my_ldflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS)
   ifdef LOCAL_IS_HOST_MODULE
+    my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS_HOST)
     # -nodefaultlibs (provided with libc++) prevents the driver from linking
     # libraries needed with -fsanitize=address. http://b/18650275 (WAI)
     my_ldlibs += -lm -lpthread
     my_ldflags += -Wl,--no-as-needed
   else
+    my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS_TARGET)
     # ASan runtime library must be the first in the link order.
     my_shared_libraries := $($(LOCAL_2ND_ARCH_VAR_PREFIX)ADDRESS_SANITIZER_RUNTIME_LIBRARY) \
                            $(my_shared_libraries) \
