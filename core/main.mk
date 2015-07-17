@@ -1,3 +1,7 @@
+ifeq ($(USE_NINJA),true)
+include build/core/ninja.mk
+else # !USE_NINJA
+
 # Only use ANDROID_BUILD_SHELL to wrap around bash.
 # DO NOT use other shells such as zsh.
 ifdef ANDROID_BUILD_SHELL
@@ -1067,3 +1071,4 @@ showcommands:
 .PHONY: nothing
 nothing:
 	@echo Successfully read the makefiles.
+endif # !USE_NINJA
