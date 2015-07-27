@@ -11,10 +11,11 @@ DEX2OATD := $(HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
 DEX2OAT_DEPENDENCY := art/runtime/oat.cc # dependency on oat version number
 DEX2OAT_DEPENDENCY += art/runtime/image.cc # dependency on image version number
 DEX2OAT_DEPENDENCY += |
+ifeq ($(USE_DEX2OAT_DEBUG), false)
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
-
-DEX2OATD_DEPENDENCY := $(DEX2OAT_DEPENDENCY)
-DEX2OATD_DEPENDENCY += $(DEX2OATD)
+else
+DEX2OAT_DEPENDENCY += $(DEX2OATD)
+endif
 
 # Use the first preloaded-classes file in PRODUCT_COPY_FILES.
 PRELOADED_CLASSES := $(call word-colon,1,$(firstword \
@@ -28,7 +29,6 @@ COMPILED_CLASSES := $(call word-colon,1,$(firstword \
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifneq ($(USE_DEX2OAT_DEBUG), false)
 DEX2OAT = $(DEX2OATD)
-DEX2OAT_DEPENDENCY = $(DEX2OATD_DEPENDENCY)
 endif
 
 # start of image reserved address space
