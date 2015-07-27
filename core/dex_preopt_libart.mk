@@ -13,8 +13,7 @@ DEX2OAT_DEPENDENCY += art/runtime/image.cc # dependency on image version number
 DEX2OAT_DEPENDENCY += |
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
 
-DEX2OATD_DEPENDENCY := $(DEX2OAT_DEPENDENCY)
-DEX2OATD_DEPENDENCY += $(DEX2OATD)
+DEX2OATD_DEPENDENCY := $(subst $(DEX2OAT),$(DEX2OATD),$(DEX2OAT_DEPENDENCY))
 
 # Use the first preloaded-classes file in PRODUCT_COPY_FILES.
 PRELOADED_CLASSES := $(call word-colon,1,$(firstword \
