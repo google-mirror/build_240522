@@ -13,9 +13,6 @@ DEX2OAT_DEPENDENCY += art/runtime/image.cc # dependency on image version number
 DEX2OAT_DEPENDENCY += |
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
 
-DEX2OATD_DEPENDENCY := $(DEX2OAT_DEPENDENCY)
-DEX2OATD_DEPENDENCY += $(DEX2OATD)
-
 # Use the first preloaded-classes file in PRODUCT_COPY_FILES.
 PRELOADED_CLASSES := $(call word-colon,1,$(firstword \
     $(filter %system/etc/preloaded-classes,$(PRODUCT_COPY_FILES))))
@@ -27,8 +24,8 @@ COMPILED_CLASSES := $(call word-colon,1,$(firstword \
 # Default to debug version to help find bugs.
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifneq ($(USE_DEX2OAT_DEBUG), false)
-DEX2OAT = $(DEX2OATD)
-DEX2OAT_DEPENDENCY = $(DEX2OATD_DEPENDENCY)
+DEX2OAT_DEPENDENCY := $(subst $(DEX2OAT),$(DEX2OATD),$(DEX2OAT_DEPENDENCY))
+DEX2OAT := $(DEX2OATD)
 endif
 
 # start of image reserved address space
