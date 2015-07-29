@@ -352,7 +352,10 @@ LOCAL_JAVA_RESOURCE_FILES := $(strip $(LOCAL_JAVA_RESOURCE_FILES))
 ifneq ($(LOCAL_JAVA_RESOURCE_FILES),)
   java_resource_file_groups += \
     $(foreach f,$(LOCAL_JAVA_RESOURCE_FILES), \
-	$(patsubst %/,%,$(dir $(f)))::$(notdir $(f)) \
+        $(eval _p := $(subst :,$(space),$(f)))\
+        $(if $(word 2,$(_p)),\
+          $(patsubst %/,%,$(word 1,$(_p)))::$(word 2,$(_p)),\
+          $(patsubst %/,%,$(dir $(f)))::$(notdir $(f))) \
      )
 endif # LOCAL_JAVA_RESOURCE_FILES
 
