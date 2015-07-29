@@ -179,6 +179,22 @@ ifdef LOCAL_IS_HOST_MODULE
     endif
 endif
 
+my_cpp_std_version := -std=gnu++14
+ifdef LOCAL_SDK_VERSION
+    # The NDK handles this itself.
+    my_cpp_std_version :=
+endif
+
+ifdef LOCAL_IS_HOST_MODULE
+    ifneq ($(my_clang),true)
+        # The host GCC doesn't support C++14 (and is deprecated, so likely
+        # never will). Build these modules with C++11.
+        my_cpp_std_version := -std=gnu++11
+    endif
+endif
+
+my_cppflags := $(my_cpp_std_version) $(my_cppflags)
+
 # Add option to make clang the default for device build
 ifeq ($(USE_CLANG_PLATFORM_BUILD),true)
     ifeq ($(my_clang),)
@@ -242,7 +258,6 @@ endif
 ###########################################################
 my_asflags += -D__ASSEMBLY__
 
-
 ###########################################################
 ## Define PRIVATE_ variables from global vars
 ###########################################################
@@ -256,6 +271,7 @@ my_target_project_includes := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_PROJECT_INCLU
 my_target_c_includes := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_C_INCLUDES)
 my_target_global_cppflags :=
 endif # LOCAL_SDK_VERSION
+
 
 ifeq ($(my_clang),true)
 my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_TARGET_GLOBAL_CFLAGS)
