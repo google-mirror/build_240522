@@ -33,7 +33,13 @@ EOF
     for i in `cat $T/build/envsetup.sh | sed -n "/^[[:blank:]]*function /s/function \([a-z_]*\).*/\1/p" | sort | uniq`; do
       A="$A\n$i"
     done
-    printf "$A\n" | column
+
+    # Print in pretty table if column is available, otherwise print in list
+    if [ -z $(which column) ]; then
+      echo "$A\n" | sed 's/\\n/ /g'
+    else 
+      printf "$A\n" | column
+    fi
 }
 
 # Get the value of a build variable as an absolute path.
