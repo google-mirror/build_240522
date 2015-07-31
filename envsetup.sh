@@ -31,9 +31,9 @@ EOF
     local A
     A=""
     for i in `cat $T/build/envsetup.sh | sed -n "/^[[:blank:]]*function /s/function \([a-z_]*\).*/\1/p" | sort | uniq`; do
-      A="$A $i"
+      A="$A\n$i"
     done
-    echo $A
+    printf "$A\n" | column
 }
 
 # Get the value of a build variable as an absolute path.
