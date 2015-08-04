@@ -42,6 +42,9 @@ kati.intermediate: $(KATI)
 
 KATI_CXX := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_CPPFLAGS)
 KATI_LD := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_LDFLAGS)
+# Build static ckati
+KATI_LD += -static
+
 KATI_INTERMEDIATES_PATH := $(HOST_OUT_INTERMEDIATES)/EXECUTABLES/ckati_intermediates
 KATI_BIN_PATH := $(HOST_OUT_EXECUTABLES)
 include build/kati/Makefile.ckati
