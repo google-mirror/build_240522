@@ -397,7 +397,7 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCES := $(all_java_sources)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_OBJECTS := $(patsubst %.java,%.class,$(LOCAL_SRC_FILES))
 ifeq ($(my_prefix),TARGET_)
 ifeq ($(LOCAL_SDK_VERSION),)
-$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call java-lib-files,core-libart)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call java-lib-files,core-libart):$(call java-lib-files,okhttp)
 else
 ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
 # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
@@ -420,7 +420,7 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_STATIC_JAVA_LIBRARIES := $(full_static_ja
 #                 be up-to-date.
 ifdef LOCAL_IS_HOST_MODULE
 ifeq ($(USE_CORE_LIB_BOOTCLASSPATH),true)
-$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call java-lib-files,core-libart-hostdex,$(LOCAL_IS_HOST_MODULE))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call java-lib-files,core-libart-hostdex,$(LOCAL_IS_HOST_MODULE)):$(call java-lib-files,okhttp-hostdex,$(LOCAL_IS_HOST_MODULE))
 
 full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 full_java_lib_deps := $(call java-lib-deps,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE)) \
