@@ -85,7 +85,7 @@ ifneq ($(my_sanitize),)
     my_ldlibs += -ldl
   else
     my_cflags += -fsanitize-undefined-trap-on-error
-    my_cflags += -ftrap-function=abort
+    my_cflags += -ftrap-function=__fsanitize_chk_fail
     my_shared_libraries += libdl
   endif
 endif
