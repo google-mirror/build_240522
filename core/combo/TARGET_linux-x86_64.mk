@@ -89,6 +89,7 @@ TARGET_GLOBAL_CFLAGS += \
 			-fstrict-aliasing \
 			-funswitch-loops \
 			-funwind-tables \
+			-fstack-check \
 			-fstack-protector \
 			-m64 \
 			-no-canonical-prefixes \
