@@ -87,6 +87,7 @@ TARGET_DEPENDENCIES_ON_SHARED_LIBRARIES :=
 $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_DEPENDENCIES_ON_SHARED_LIBRARIES :=
 HOST_DEPENDENCIES_ON_SHARED_LIBRARIES :=
 $(HOST_2ND_ARCH_VAR_PREFIX)HOST_DEPENDENCIES_ON_SHARED_LIBRARIES :=
+HOST_CROSS_DEPENDENCIES_ON_SHARED_LIBRARIES :=
 
 # Generated class file names for Android resource.
 # They are escaped and quoted so can be passed safely to a bash command.
@@ -422,7 +423,8 @@ endef
 # $(2): target name, like "NotePad"
 # $(3): if non-empty, this is a HOST target.
 # $(4): if non-empty, force the intermediates to be COMMON
-# $(5): if non-empty, force the intermedistes to be for the 2nd arch
+# $(5): if non-empty, force the intermediates to be for the 2nd arch
+# $(6): if non-empty, force the intermediates to be for the host cross os
 define intermediates-dir-for
 $(strip \
     $(eval _idfClass := $(strip $(1))) \
@@ -431,7 +433,7 @@ $(strip \
     $(eval _idfName := $(strip $(2))) \
     $(if $(_idfName),, \
         $(error $(LOCAL_PATH): Name not defined in call to intermediates-dir-for)) \
-    $(eval _idfPrefix := $(if $(strip $(3)),HOST,TARGET)) \
+    $(eval _idfPrefix := $(if $(strip $(3)),$(if $(strip $(6)),HOST_CROSS,HOST),TARGET)) \
     $(eval _idf2ndArchPrefix := $(if $(strip $(5)),$(TARGET_2ND_ARCH_VAR_PREFIX))) \
     $(if $(filter $(_idfPrefix)-$(_idfClass),$(COMMON_MODULE_CLASSES))$(4), \
         $(eval _idfIntBase := $($(_idfPrefix)_OUT_COMMON_INTERMEDIATES)) \
@@ -449,13 +451,14 @@ endef
 #
 # $(1): if non-empty, force the intermediates to be COMMON
 # $(2): if non-empty, force the intermediates to be for the 2nd arch
+# $(3): if non-empty, force the intermediates to be for the host cross os
 define local-intermediates-dir
 $(strip \
     $(if $(strip $(LOCAL_MODULE_CLASS)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS not defined before call to local-intermediates-dir)) \
     $(if $(strip $(LOCAL_MODULE)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE not defined before call to local-intermediates-dir)) \
-    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(LOCAL_IS_HOST_MODULE),$(1),$(2)) \
+    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(LOCAL_IS_HOST_MODULE),$(1),$(2),$(3)) \
 )
 endef
 
@@ -1104,7 +1107,7 @@ $(hide) $(PRIVATE_CXX) \
 	$(addprefix -isystem ,\
 	    $(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 	        $(filter-out $(PRIVATE_C_INCLUDES), \
-	            $(HOST_PROJECT_INCLUDES) \
+	            $($(PRIVATE_PREFIX)PROJECT_INCLUDES) \
 	            $(PRIVATE_HOST_C_INCLUDES)))) \
 	-c \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
@@ -1134,7 +1137,7 @@ $(hide) $(PRIVATE_CC) \
 	$(addprefix -isystem ,\
 	    $(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 	        $(filter-out $(PRIVATE_C_INCLUDES), \
-	            $(HOST_PROJECT_INCLUDES) \
+	            $($(PRIVATE_PREFIX)PROJECT_INCLUDES) \
 	            $(PRIVATE_HOST_C_INCLUDES)))) \
 	-c \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
@@ -1328,19 +1331,19 @@ $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;
     lib_to_include=$$ldir/$(notdir $(1)); \
     filelist=; \
     subdir=0; \
-    for f in `$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) t $(1) | \grep '\.o$$'`; do \
+    for f in `$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) t $(1) | \grep '\.o$$'`; do \
         if [ -e $$ldir/$$f ]; then \
            mkdir $$ldir/$$subdir; \
            ext=$$subdir/; \
            subdir=$$((subdir+1)); \
-           $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) m $$lib_to_include $$f; \
+           $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) m $$lib_to_include $$f; \
         else \
            ext=; \
         fi; \
-        $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) p $$lib_to_include $$f > $$ldir/$$ext$$f; \
+        $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) p $$lib_to_include $$f > $$ldir/$$ext$$f; \
         filelist="$$filelist $$ldir/$$ext$$f"; \
     done ; \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_ARFLAGS) \
+    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_ARFLAGS) \
         $(PRIVATE_ARFLAGS) $@ $$filelist
 
 endef
@@ -1358,8 +1361,8 @@ define transform-host-o-to-static-lib
 @mkdir -p $(dir $@)
 @rm -f $@
 $(extract-and-include-host-whole-static-libs)
-$(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_AR) \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_ARFLAGS) \
+$(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) \
+    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_ARFLAGS) \
     $(PRIVATE_ARFLAGS) $@,$(PRIVATE_ALL_OBJECTS))
 endef
 
@@ -1373,11 +1376,11 @@ endef
 ifneq ($(HOST_CUSTOM_LD_COMMAND),true)
 define transform-host-o-to-shared-lib-inner
 $(hide) $(PRIVATE_CXX) \
-	-Wl,-rpath-link=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_INTERMEDIATE_LIBRARIES) \
-	-Wl,-rpath,\$$ORIGIN/../$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_SHARED_LIBRARIES)) \
-	-Wl,-rpath,\$$ORIGIN/$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_SHARED_LIBRARIES)) \
+	-Wl,-rpath-link=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_INTERMEDIATE_LIBRARIES) \
+	-Wl,-rpath,\$$ORIGIN/../$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_SHARED_LIBRARIES)) \
+	-Wl,-rpath,\$$ORIGIN/$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_SHARED_LIBRARIES)) \
 	-shared -Wl,-soname,$(notdir $@) \
-	$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_LD_DIRS) \
+	$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_LD_DIRS) \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 	   $(PRIVATE_HOST_GLOBAL_LDFLAGS) \
 	) \
@@ -1572,8 +1575,8 @@ HOST_FPIE_FLAGS :=
 else
 HOST_FPIE_FLAGS := -pie
 # Force the correct entry point to workaround a bug in binutils that manifests with -pie
-ifeq ($(HOST_OS),windows)
-HOST_FPIE_FLAGS += -Wl,-e_mainCRTStartup
+ifeq ($(HOST_CROSS_OS),windows)
+HOST_CROSS_FPIE_FLAGS += -Wl,-e_mainCRTStartup
 endif
 endif
 
@@ -1590,10 +1593,10 @@ $(hide) $(PRIVATE_CXX) \
 	$(if $(filter true,$(NATIVE_COVERAGE)),-lgcov) \
 	$(if $(filter true,$(NATIVE_COVERAGE)),$(PRIVATE_HOST_LIBPROFILE_RT)) \
 	$(call normalize-host-libraries,$(PRIVATE_ALL_SHARED_LIBRARIES)) \
-	-Wl,-rpath-link=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_INTERMEDIATE_LIBRARIES) \
-	-Wl,-rpath,\$$ORIGIN/../$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_SHARED_LIBRARIES)) \
-	-Wl,-rpath,\$$ORIGIN/$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_OUT_SHARED_LIBRARIES)) \
-	$($(PRIVATE_2ND_ARCH_VAR_PREFIX)HOST_GLOBAL_LD_DIRS) \
+	-Wl,-rpath-link=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_INTERMEDIATE_LIBRARIES) \
+	-Wl,-rpath,\$$ORIGIN/../$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_SHARED_LIBRARIES)) \
+	-Wl,-rpath,\$$ORIGIN/$(notdir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OUT_SHARED_LIBRARIES)) \
+	$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_LD_DIRS) \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 		$(PRIVATE_HOST_GLOBAL_LDFLAGS) \
 	) \
