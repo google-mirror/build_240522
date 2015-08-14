@@ -969,16 +969,26 @@ endef
 
 
 ######################################################################
-## Commands for running protoc to compile .proto into .pb.cc and .pb.h
+## Commands for generating DBus adaptors from .dbus.xml files.
 ######################################################################
-define generate-dbus-bindings
-@echo "Generating DBus bindings for $(PRIVATE_DBUS_MODULE)"
-@mkdir -p $(PRIVATE_DBUS_HEADER_DIRECTORY)
+define generate-dbus-adaptors
+@echo "Generating DBus adaptors for $(PRIVATE_DBUS_MODULE)"
+@mkdir -p $(PRIVATE_DBUS_CREATED_DIR)
 $(hide) $(DBUS_GENERATOR) \
 	--service-config=$(PRIVATE_DBUS_SERVICE_CONFIG) \
-	--adaptor=$(PRIVATE_DBUS_ADAPTORS_HEADER) \
-	--proxy=$(PRIVATE_DBUS_PROXIES_HEADER) \
-	--method-names=$(PRIVATE_DBUS_METHOD_NAMES_HEADER) \
+	--adaptor-prefix=$(PRIVATE_DBUS_CREATED_DIR) \
+	$(PRIVATE_DBUS_INTERFACE_DEFINITIONS)
+endef
+
+######################################################################
+## Commands for generating DBus proxies from .dbus.xml files.
+######################################################################
+define generate-dbus-proxies
+@echo "Generating DBus proxies for $(PRIVATE_DBUS_MODULE)"
+@mkdir -p $(PRIVATE_DBUS_CREATED_DIR)
+$(hide) $(DBUS_GENERATOR) \
+	--service-config=$(PRIVATE_DBUS_SERVICE_CONFIG) \
+	--proxy=$(PRIVATE_DBUS_PROXY_HEADER) \
 	$(PRIVATE_DBUS_INTERFACE_DEFINITIONS)
 endef
 
