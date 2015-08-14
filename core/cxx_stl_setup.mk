@@ -1,6 +1,6 @@
 #############################################################
 ## Set up flags based on LOCAL_CXX_STL.
-## Input variables: LOCAL_CXX_STL
+## Input variables: LOCAL_CXX_STL, my_prefix
 ## Output variables: My_cflags, my_c_includes, my_shared_libraries, etc.
 #############################################################
 
@@ -14,7 +14,7 @@ ifeq ($(strip $(LOCAL_CXX_STL)),default)
                 my_cxx_stl := libc++_static
             endif
 
-            ifeq ($(HOST_OS),windows)
+            ifeq ($($(my_prefix)OS),windows)
                 # libc++ is not supported on mingw.
                 my_cxx_stl := libstdc++
             endif
@@ -38,7 +38,7 @@ else
     endif
     ifeq ($(filter $(my_cxx_stl),libc++ libc++_static),)
         ifdef LOCAL_IS_HOST_MODULE
-            ifeq ($(HOST_OS),windows)
+            ifeq ($($(my_prefix)OS),windows)
                 # libc++ is not supported on mingw.
                 my_cxx_stl := libstdc++
             endif
