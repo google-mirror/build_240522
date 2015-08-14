@@ -34,7 +34,15 @@ ifdef LOCAL_IS_HOST_MODULE
   ifneq ($(LOCAL_IS_HOST_MODULE),true)
     $(error $(LOCAL_PATH): LOCAL_IS_HOST_MODULE must be "true" or empty, not "$(LOCAL_IS_HOST_MODULE)")
   endif
-  my_prefix := HOST_
+  ifeq ($(LOCAL_HOST_PREFIX),)
+    my_prefix := HOST_
+  else ifeq ($(LOCAL_HOST_PREFIX),HOST_)
+    my_prefix := HOST_
+  else ifeq ($(LOCAL_HOST_PREFIX),HOST_CROSS_)
+    my_prefix := HOST_CROSS_
+  else
+    $(error $(LOCAL_PATH): Unknown LOCAL_HOST_PREFIX="$(LOCAL_HOST_PREFIX)")
+  endif
   my_host := host-
 else
   my_prefix := TARGET_
@@ -42,6 +50,12 @@ else
 endif
 
 my_module_tags := $(LOCAL_MODULE_TAGS)
+# Don't automatically build anything cross-host
+ifdef LOCAL_IS_HOST_MODULE
+  ifeq ($(my_prefix),HOST_CROSS_)
+    my_module_tags :=
+  endif
+endif
 
 ###########################################################
 ## Validate and define fallbacks for input LOCAL_* variables.
@@ -150,15 +164,20 @@ ifndef LOCAL_NO_2ND_ARCH_MODULE_SUFFIX
 my_register_name := $(LOCAL_MODULE)$($(my_prefix)2ND_ARCH_MODULE_SUFFIX)
 endif
 endif
+ifdef LOCAL_IS_HOST_MODULE
+  ifeq ($(my_prefix),HOST_CROSS_)
+    my_register_name := host_cross_$(LOCAL_MODULE)
+  endif
+endif
 # Make sure that this IS_HOST/CLASS/MODULE combination is unique.
 module_id := MODULE.$(if \
-    $(LOCAL_IS_HOST_MODULE),HOST,TARGET).$(LOCAL_MODULE_CLASS).$(my_register_name)
+    $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),TARGET).$(LOCAL_MODULE_CLASS).$(my_register_name)
 ifdef $(module_id)
 $(error $(LOCAL_PATH): $(module_id) already defined by $($(module_id)))
 endif
 $(module_id) := $(LOCAL_PATH)
 
-intermediates := $(call local-intermediates-dir,,$(LOCAL_2ND_ARCH_VAR_PREFIX))
+intermediates := $(call local-intermediates-dir,,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(call streq,$(my_prefix),HOST_CROSS_))
 intermediates.COMMON := $(call local-intermediates-dir,COMMON)
 generated_sources_dir := $(call local-generated-sources-dir)
 
@@ -526,6 +545,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MANIFEST_INSTRUMENTATION_FOR:= $(LOCAL_M
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_ALL_JAVA_LIBRARIES:= $(full_java_libs)
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_IS_HOST_MODULE := $(LOCAL_IS_HOST_MODULE)
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_HOST:= $(my_host)
+$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_PREFIX := $(my_prefix)
 
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_INTERMEDIATES_DIR:= $(intermediates)
 
@@ -591,6 +611,12 @@ endif
 # Don't check build target module defined for the 2nd arch
 ifndef LOCAL_IS_HOST_MODULE
 ifdef LOCAL_2ND_ARCH_VAR_PREFIX
+  my_checked_module :=
+endif
+endif
+# Don't check host cross compile targets
+ifdef LOCAL_IS_HOST_MODULE
+ifeq ($(my_prefix),HOST_CROSS_)
   my_checked_module :=
 endif
 endif
