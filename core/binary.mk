@@ -50,6 +50,7 @@ my_cc_wrapper := $(CC_WRAPPER)
 my_cxx := $(LOCAL_CXX)
 my_cxx_wrapper := $(CXX_WRAPPER)
 my_c_includes := $(LOCAL_C_INCLUDES)
+my_export_c_include_dirs := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
 my_generated_sources := $(LOCAL_GENERATED_SOURCES)
 my_native_coverage := $(LOCAL_NATIVE_COVERAGE)
 my_additional_dependencies := $(LOCAL_MODULE_MAKEFILE) $(LOCAL_ADDITIONAL_DEPENDENCIES)
@@ -544,7 +545,7 @@ proto_generated_objects := $(addprefix $(proto_generated_obj_dir)/, \
     $(patsubst %.proto,%.pb.o,$(proto_sources_fullpath)))
 
 # Auto-export the generated proto source dir.
-LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_generated_cc_sources_dir)
+my_export_c_include_dirs += $(proto_generated_cc_sources_dir)
 
 # Ensure the transform-proto-to-cc rule is only defined once in multilib build.
 ifndef $(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined
@@ -624,7 +625,7 @@ $(dbus_generated_headers) : $(dbus_header_dependencies) $(dbus_if_sources_full_p
 	$(generate-dbus-proxies)
 
 # Auto-export the generated dbus proxy directory.
-LOCAL_EXPORT_C_INCLUDE_DIRS += $(dbus_header_prefix)/include
+my_export_c_include_dirs += $(dbus_header_prefix)/include
 my_c_includes += $(dbus_header_prefix)/include
 else
 
@@ -1188,12 +1189,12 @@ $(LOCAL_INSTALLED_MODULE): | $(installed_static_library_notice_file_targets)
 # Export includes
 ###########################################################
 export_includes := $(intermediates)/export_includes
-$(export_includes): PRIVATE_EXPORT_C_INCLUDE_DIRS := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
+$(export_includes): PRIVATE_EXPORT_C_INCLUDE_DIRS := $(my_export_c_include_dirs)
 # Make sure .pb.h are already generated before any dependent source files get compiled.
 $(export_includes) : $(LOCAL_MODULE_MAKEFILE) $(proto_generated_headers) $(dbus_generated_headers)
 	@echo Export includes file: $< -- $@
 	$(hide) mkdir -p $(dir $@) && rm -f $@
-ifdef LOCAL_EXPORT_C_INCLUDE_DIRS
+ifneq ($(strip $(my_export_c_include_dirs)),)
 	$(hide) for d in $(PRIVATE_EXPORT_C_INCLUDE_DIRS); do \
 	        echo "-I $$d" >> $@; \
 	        done
