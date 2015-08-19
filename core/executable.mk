@@ -17,6 +17,9 @@ endif
 
 ifneq (true,$(my_skip_this_target))
 
+# if this executable requires a init.rc script?
+LOCAL_REQUIRED_MODULES += $(LOCAL_INIT_RC)
+
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
@@ -83,4 +86,9 @@ LOCAL_NO_2ND_ARCH_MODULE_SUFFIX :=
 
 my_module_arch_supported :=
 
+endif
+
+# Define the LOCAL_INIT_RC module
+ifdef LOCAL_INIT_RC
+include $(BUILD_SYSTEM)/init_rc.mk
 endif

@@ -29,11 +29,15 @@ my_built_custom_image := $(intermediates)/$(my_custom_image_name).img
 my_staging_dir := $(intermediates)/$(CUSTOM_IMAGE_MOUNT_POINT)
 
 # Collect CUSTOM_IMAGE_MODULES's installd files and their PICKUP_FILES.
+custom_image_modules := $(CUSTOM_IMAGE_MODULES)
+# Expand required modules.
+$(call expand-required-modules,custom_image_modules,$(custom_image_modules))
+
 my_built_modules :=
 my_copy_pairs :=
 my_pickup_files :=
 
-$(foreach m,$(CUSTOM_IMAGE_MODULES),\
+$(foreach m,$(custom_image_modules),\
   $(eval _pickup_files := $(strip $(ALL_MODULES.$(m).PICKUP_FILES)\
     $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).PICKUP_FILES)))\
   $(eval _built_files := $(strip $(ALL_MODULES.$(m).BUILT_INSTALLED)\
