@@ -10,28 +10,33 @@ ifdef LOCAL_SDK_VERSION
 endif
 
 # Configure SANITIZE_HOST / SANITIZE_TARGET.
-ifeq ($(my_sanitize),)
+
+# SANITIZE_HOST is only in effect if the module is already using clang (host
+# modules that haven't set `LOCAL_CLANG := false` and device modules that
+# have set `LOCAL_CLANG := true`.
+# TODO: Similar for LOCAL_SANITIZE?
+ifneq ($(my_clang),false)
   ifdef LOCAL_IS_HOST_MODULE
-    my_sanitize := $(strip $(SANITIZE_HOST))
+    my_sanitize := $(strip $(my_sanitize) $(SANITIZE_HOST))
   else
-    my_sanitize := $(strip $(SANITIZE_TARGET))
-  endif
-
-  # SANITIZE_HOST=true is a deprecated way to say SANITIZE_HOST=address.
-  ifeq ($(my_sanitize),true)
-    my_sanitize := address
-  endif
-
-  # SANITIZE_HOST is only in effect if the module is already using clang (host
-  # modules that haven't set `LOCAL_CLANG := false` and device modules that
-  # have set `LOCAL_CLANG := true`.
-  ifneq ($(my_clang),true)
-    my_sanitize :=
+    my_sanitize := $(strip $(my_sanitize) $(SANITIZE_TARGET))
   endif
 endif
 
-ifeq ($(my_sanitize),never)
+# SANITIZE_HOST=true is a deprecated way to say SANITIZE_HOST=address.
+my_sanitize := $(subst true,address,$(my_sanitize))
+
+# Either LOCAL_SANITIZE or SANITIZE_HOST/TARGET contains "never," turn everything off.
+ifneq ($(filter never,$(my_sanitize)),)
   my_sanitize :=
+endif
+
+# Error out for impossible combinations. Currently only thread + address.
+# Note: Do this before thread-filtering to catch errors.
+ifneq ($(filter thread,$(my_sanitize)),)
+  ifneq ($(filter address,$(my_sanitize)),)
+    $(error Cannot use thread and address sanitization at the same time.)
+  endif
 endif
 
 # TSAN is not supported on 32-bit architectures. For non-multilib cases, make
