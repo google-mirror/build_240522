@@ -38,8 +38,8 @@ $(combo_2nd_arch_prefix)HOST_CC := $(TOOLS_PREFIX)gcc$(TOOLS_EXE_SUFFIX)
 $(combo_2nd_arch_prefix)HOST_CXX := $(TOOLS_PREFIX)g++$(TOOLS_EXE_SUFFIX)
 $(combo_2nd_arch_prefix)HOST_AR := $(TOOLS_PREFIX)ar$(TOOLS_EXE_SUFFIX)
 
-$(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += \
-    -include $(call select-android-config-h,windows)
+# Admit to using >= Win2K.
+$(combo_2nd_arch_prefix)HOST_GLOBAL_CFLAGS += -D_WIN32_WINNT=0x0500
 $(combo_2nd_arch_prefix)HOST_GLOBAL_LDFLAGS += \
     --enable-stdcall-fixup
 
