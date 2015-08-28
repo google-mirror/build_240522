@@ -50,6 +50,11 @@ java_alternative_checked_module := $(full_classes_compiled_jar)
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################
+java_sources := $(addprefix $(LOCAL_PATH)/, $(filter %.java,$(LOCAL_SRC_FILES))) \
+                $(filter %.java,$(LOCAL_GENERATED_SOURCES))
+all_java_sources := $(java_sources)
+
+include $(BUILD_SYSTEM)/java_common.mk
 
 $(full_classes_compiled_jar): PRIVATE_JAVAC_DEBUG_FLAGS := -g
 
