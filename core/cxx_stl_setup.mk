@@ -36,6 +36,14 @@ else
         # the two options use different names for the STLs.
         $(error $(LOCAL_PATH): $(LOCAL_MODULE): Must use LOCAL_NDK_STL_VARIANT rather than LOCAL_CXX_STL for NDK binaries)
     endif
+
+    ifdef LOCAL_IS_HOST_MODULE
+        ifndef USE_MINGW
+            ifeq ($(my_cxx_stl),libstdc++)
+                $(error $(LOCAL_PATH): $(LOCAL_MODULE): LOCAL_CXX_STL := libstdc++ is not supported for non-Windows host builds.)
+            endif
+        endif
+    endif
 endif
 
 # Yes, this is actually what the clang driver does.
