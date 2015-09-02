@@ -1394,9 +1394,30 @@ else
   # Delete all the symlinks in source that aren't in target.  This
   # needs to happen before verbatim files are unpacked, in case a
   # symlink in the source is replaced by a real file in the target.
+
+  # We skip files that will be sent verbatimly or be renamed to. Because if a
+  # symlink in the source will be replaced by a regular file, we cannot delete
+  # the file in case the package gets applied again. It won't affect the
+  # update, because a) unpacking will overwrite the dest; b) renaming will
+  # overwrite the dest if the source is still available, or skip the renaming
+  # otherwise. (Bug: 23646151)
+  verbatim_files = []
+  if system_diff:
+    verbatim_files += ["/%s" % (i[0],) for i in system_diff.verbatim_targets]
+  if vendor_diff:
+    verbatim_files += ["/%s" % (i[0],) for i in vendor_diff.verbatim_targets]
+
+  renames = []
+  if system_diff:
+    renames += ["/%s" % (i.name,) for i in system_diff.renames.values()]
+  if vendor_diff:
+    renames += ["/%s" % (i.name,) for i in vendor_diff.renames.values()]
+
   to_delete = []
   for dest, link in source_symlinks:
-    if link not in target_symlinks_d:
+    if (link not in target_symlinks_d and
+        link not in verbatim_files and
+        link not in renames):
       to_delete.append(link)
   script.DeleteFiles(to_delete)
 
