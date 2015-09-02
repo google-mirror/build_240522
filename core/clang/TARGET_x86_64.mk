@@ -64,3 +64,8 @@ RS_TRIPLE_CFLAGS := -D__x86_64__
 RS_COMPAT_TRIPLE := x86_64-linux-android
 
 TARGET_LIBPROFILE_RT := $(LLVM_RTLIB_PATH)/libclang_rt.profile-x86_64-android.a
+
+# Address sanitizer clang config
+$(clang_2nd_arch_prefix)ADDRESS_SANITIZER_RUNTIME_LIBRARY := libclang_rt.asan-x86_64-android
+$(clang_2nd_arch_prefix)ADDRESS_SANITIZER_RPATH := /data/vendor/lib:/$(TARGET_COPY_OUT_VENDOR)/lib:/data/lib
+$(clang_2nd_arch_prefix)ADDRESS_SANITIZER_LINKER := /system/bin/linker_asan
