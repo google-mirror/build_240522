@@ -92,6 +92,9 @@ include $(BUILD_SYSTEM)/help.mk
 # and host information.
 include $(BUILD_SYSTEM)/config.mk
 
+# Include the google-specific config
+-include vendor/google/build/config.mk
+
 ifeq ($(USE_NINJA),true)
 include build/core/ninja.mk
 else # !USE_NINJA
@@ -118,9 +121,6 @@ endif
 # file does the rm -rf inline so the deps which are all done below will
 # be generated correctly
 include $(BUILD_SYSTEM)/cleanbuild.mk
-
-# Include the google-specific config
--include vendor/google/build/config.mk
 
 VERSION_CHECK_SEQUENCE_NUMBER := 5
 -include $(OUT_DIR)/versions_checked.mk
