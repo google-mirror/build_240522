@@ -12,6 +12,9 @@ endif
 ifneq ($(ONE_SHOT_MAKEFILE),)
 KATI_NINJA_SUFFIX := $(KATI_NINJA_SUFFIX)-mmm-$(subst /,_,$(strip $(ONE_SHOT_MAKEFILE)))
 endif
+ifneq ($(BUILD_MODULES_IN_PATHS),)
+KATI_NINJA_SUFFIX := $(KATI_NINJA_SUFFIX)-mmma-$(subst /,_,$(strip $(BUILD_MODULES_IN_PATHS)))
+endif
 
 KATI_BUILD_NINJA := $(PRODUCT_OUT)/build$(KATI_NINJA_SUFFIX).ninja
 KATI_NINJA_SH := $(PRODUCT_OUT)/ninja$(KATI_NINJA_SUFFIX).sh
