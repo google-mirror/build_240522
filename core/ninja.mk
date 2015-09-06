@@ -1,4 +1,5 @@
 KATI ?= $(HOST_OUT_EXECUTABLES)/ckati
+MAKEPARALLEL ?= $(HOST_OUT_EXECUTABLES)/makeparallel
 
 KATI_OUTPUT_PATTERNS := $(PRODUCT_OUT)/build%.ninja $(PRODUCT_OUT)/ninja%.sh
 NINJA_GOALS := fastincremental generateonly droid showcommands
@@ -39,9 +40,9 @@ fastincremental droid $(ANDROID_TARGETS): ninja.intermediate
 	@#empty
 
 .INTERMEDIATE: ninja.intermediate
-ninja.intermediate: $(KATI_OUTPUTS)
+ninja.intermediate: $(KATI_OUTPUTS) $(MAKEPARALLEL)
 	@echo Starting build with ninja
-	$(hide) PATH=prebuilts/ninja/$(HOST_PREBUILT_TAG)/:$$PATH NINJA_STATUS="$(NINJA_STATUS)" $(KATI_NINJA_SH) -C $(TOP) $(NINJA_ARGS) $(ANDROID_TARGETS)
+	+$(hide) PATH=prebuilts/ninja/$(HOST_PREBUILT_TAG)/:$$PATH NINJA_STATUS="$(NINJA_STATUS)" $(MAKEPARALLEL) $(KATI_NINJA_SH) -C $(TOP) $(NINJA_ARGS) $(ANDROID_TARGETS)
 else
 generateonly droid $(ANDROID_TARGETS): $(KATI_OUTPUTS)
 	@#empty
@@ -69,6 +70,17 @@ endif
 KATI_INTERMEDIATES_PATH := $(HOST_OUT_INTERMEDIATES)/EXECUTABLES/ckati_intermediates
 KATI_BIN_PATH := $(HOST_OUT_EXECUTABLES)
 include build/kati/Makefile.ckati
+
+MAKEPARALLEL_CXX := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_CPPFLAGS)
+MAKEPARALLEL_LD := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_LDFLAGS)
+# Build static makeparallel. Unfortunately Mac OS X doesn't officially support static exectuables.
+ifeq ($(BUILD_OS),linux)
+MAKEPARALLEL_LD += -static
+endif
+
+MAKEPARALLEL_INTERMEDIATES_PATH := $(HOST_OUT_INTERMEDIATES)/EXECUTABLES/makeparallel_intermediates
+MAKEPARALLEL_BIN_PATH := $(HOST_OUT_EXECUTABLES)
+include build/tools/makeparallel/Makefile
 
 .PHONY: FORCE
 FORCE:
