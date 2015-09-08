@@ -147,9 +147,12 @@ class DataImage(Image):
         nonzero_blocks.append(i)
         nonzero_blocks.append(i+1)
 
-    self.file_map = {"__ZERO": RangeSet(zero_blocks),
-                     "__NONZERO": RangeSet(nonzero_blocks)}
+    assert zero_blocks or nonzero_blocks or self.clobbered_blocks
 
+    if zero_blocks:
+      self.file_map["__ZERO"] = RangeSet(zero_blocks)
+    if nonzero_blocks:
+      self.file_map["__NONZERO"] = RangeSet(nonzero_blocks)
     if self.clobbered_blocks:
       self.file_map["__COPY"] = self.clobbered_blocks
 
