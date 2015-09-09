@@ -211,8 +211,10 @@ my_cppflags := $(my_cpp_std_version) $(my_cppflags)
 
 # Add option to make clang the default for device build
 ifeq ($(USE_CLANG_PLATFORM_BUILD),true)
+    ifneq ($($(my_prefix)OS),windows)
     ifeq ($(my_clang),)
         my_clang := true
+    endif
     endif
 endif
 
