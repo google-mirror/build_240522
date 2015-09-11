@@ -34,3 +34,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_PACKAGES := \
     audio.primary.goldfish \
     power.goldfish
+
+# Adjust the Dalvik heap to be appropriate for a tablet.
+$(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/tablet-dalvik-heap.mk)
