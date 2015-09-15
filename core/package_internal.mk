@@ -256,7 +256,9 @@ $(R_file_stamp): $(all_res_assets) $(full_android_manifest) $(RenderScript_file_
 		$(ACP) -fp $$GENERATED_R_FILE $(TARGET_COMMON_OUT_ROOT)/R/$$dir \
 			|| exit 31; \
 		$(ACP) -fp $$GENERATED_R_FILE $@ || exit 32; \
-	done; \
+	done;
+	$(hide) mkdir -p $(dir $@)
+	$(hide) touch $@
 
 $(proguard_options_file): $(R_file_stamp)
 
