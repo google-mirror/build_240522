@@ -113,6 +113,9 @@ ifneq ($(filter address,$(my_sanitize)),)
     # Make sure linker_asan get installed.
     $(LOCAL_INSTALLED_MODULE) : | $(PRODUCT_OUT)$($(LOCAL_2ND_ARCH_VAR_PREFIX)ADDRESS_SANITIZER_LINKER)
   endif
+  ifneq ($(filter coverage,$(my_sanitize)),)
+    my_cflags += -fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp
+  endif
 endif
 
 ifneq ($(filter undefined,$(my_sanitize)),)
