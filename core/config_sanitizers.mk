@@ -75,21 +75,6 @@ ifneq ($(filter default-ub,$(my_sanitize)),)
   my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
 endif
 
-ifneq ($(my_sanitize),)
-  fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize)),
-  my_cflags += -fsanitize=$(fsanitize_arg)
-
-  ifdef LOCAL_IS_HOST_MODULE
-    my_cflags += -fno-sanitize-recover=all
-    my_ldflags += -fsanitize=$(fsanitize_arg)
-    my_ldlibs += -lrt -ldl
-  else
-    my_cflags += -fsanitize-undefined-trap-on-error
-    my_cflags += -ftrap-function=abort
-    my_shared_libraries += libdl
-  endif
-endif
-
 ifneq ($(filter address,$(my_sanitize)),)
   # Frame pointer based unwinder in ASan requires ARM frame setup.
   LOCAL_ARM_MODE := arm
@@ -115,6 +100,26 @@ ifneq ($(filter address,$(my_sanitize)),)
   endif
   ifneq ($(filter coverage,$(my_sanitize)),)
     my_cflags += -fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp
+    my_sanitize := $(filter-out coverage,$(my_sanitize))
+  endif
+endif
+
+ifneq ($(filter coverage,$(my_sanitize)),)
+  $(error $(LOCAL_PATH): $(LOCAL_MODULE): Use of 'coverage' also requires 'address')
+endif
+
+ifneq ($(my_sanitize),)
+  fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize)),
+  my_cflags += -fsanitize=$(fsanitize_arg)
+
+  ifdef LOCAL_IS_HOST_MODULE
+    my_cflags += -fno-sanitize-recover=all
+    my_ldflags += -fsanitize=$(fsanitize_arg)
+    my_ldlibs += -lrt -ldl
+  else
+    my_cflags += -fsanitize-undefined-trap-on-error
+    my_cflags += -ftrap-function=abort
+    my_shared_libraries += libdl
   endif
 endif
 
