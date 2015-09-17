@@ -1006,8 +1006,8 @@ endef
 ## Commands for running gcc to compile a C++ file
 ###########################################################
 
-define transform-cpp-to-o
-@echo "target $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
+# $(1): extra flags
+define transform-cpp-to-o-no-deps
 @mkdir -p $(dir $@)
 $(hide) $(PRIVATE_CXX) \
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
@@ -1024,12 +1024,18 @@ $(hide) $(PRIVATE_CXX) \
 	    $(PRIVATE_ARM_CFLAGS) \
 	 ) \
 	$(PRIVATE_RTTI_FLAG) \
-	$(PRIVATE_CFLAGS) \
-	$(PRIVATE_CPPFLAGS) \
-	$(PRIVATE_DEBUG_CFLAGS) \
-	$(PRIVATE_CFLAGS_NO_OVERRIDE) \
-	$(PRIVATE_CPPFLAGS_NO_OVERRIDE) \
+	$(1) \
 	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+endef
+
+define transform-cpp-to-o
+@echo "target $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
+$(call transform-cpp-to-o-no-deps, \
+    $(PRIVATE_CFLAGS) \
+    $(PRIVATE_CPPFLAGS) \
+    $(PRIVATE_DEBUG_CFLAGS) \
+    $(PRIVATE_CFLAGS_NO_OVERRIDE) \
+    $(PRIVATE_CPPFLAGS_NO_OVERRIDE))
 $(transform-d-to-p)
 endef
 
@@ -1110,11 +1116,32 @@ $(transform-d-to-p)
 endef
 
 ###########################################################
+## Commands for running gcc to compile an Objective-C++ file
+## This should never happen for target builds but this
+## will error at build time.
+###########################################################
+
+define transform-mm-to-o-no-deps
+@echo "target ObjC++: $(PRIVATE_MODULE) <= $<"
+$(call transform-cpp-to-o-no-deps, \
+    $(PRIVATE_CFLAGS) \
+    $(PRIVATE_CPPFLAGS) \
+    $(PRIVATE_DEBUG_CFLAGS) \
+    $(PRIVATE_CFLAGS_NO_OVERRIDE) \
+    $(PRIVATE_CPPFLAGS_NO_OVERRIDE))
+endef
+
+define transform-mm-to-o
+$(transform-mm-to-o-no-deps)
+$(transform-d-to-p)
+endef
+
+###########################################################
 ## Commands for running gcc to compile a host C++ file
 ###########################################################
 
-define transform-host-cpp-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
+# $(1): extra flags
+define transform-host-cpp-to-o-no-deps
 @mkdir -p $(dir $@)
 $(hide) $(PRIVATE_CXX) \
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
@@ -1129,12 +1156,18 @@ $(hide) $(PRIVATE_CXX) \
 	    $(PRIVATE_HOST_GLOBAL_CFLAGS) \
 	    $(PRIVATE_HOST_GLOBAL_CPPFLAGS) \
 	 ) \
-	$(PRIVATE_CFLAGS) \
-	$(PRIVATE_CPPFLAGS) \
-	$(PRIVATE_DEBUG_CFLAGS) \
-	$(PRIVATE_CFLAGS_NO_OVERRIDE) \
-	$(PRIVATE_CPPFLAGS_NO_OVERRIDE) \
+	$(1) \
 	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+endef
+
+define transform-host-cpp-to-o
+@echo "$($(PRIVATE_PREFIX)DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
+$(call transform-host-cpp-to-o-no-deps, \
+    $(PRIVATE_CFLAGS) \
+    $(PRIVATE_CPPFLAGS) \
+    $(PRIVATE_DEBUG_CFLAGS) \
+    $(PRIVATE_CFLAGS_NO_OVERRIDE) \
+    $(PRIVATE_CPPFLAGS_NO_OVERRIDE))
 $(transform-d-to-p)
 endef
 
@@ -1195,6 +1228,25 @@ endef
 
 define transform-host-m-to-o
 $(transform-host-m-to-o-no-deps)
+$(transform-d-to-p)
+endef
+
+###########################################################
+## Commands for running gcc to compile a host Objective-C++ file
+###########################################################
+
+define transform-host-mm-to-o-no-deps
+@echo "$($(PRIVATE_PREFIX)DISPLAY) ObjC++: $(PRIVATE_MODULE) <= $<"
+$(call transform-host-cpp-to-o-no-deps, \
+    $(PRIVATE_CFLAGS) \
+    $(PRIVATE_CPPFLAGS) \
+    $(PRIVATE_DEBUG_CFLAGS) \
+    $(PRIVATE_CFLAGS_NO_OVERRIDE) \
+    $(PRIVATE_CPPFLAGS_NO_OVERRIDE))
+endef
+
+define transform-host-mm-to-o
+$(transform-host-mm-to-o-no-deps)
 $(transform-d-to-p)
 endef
 
