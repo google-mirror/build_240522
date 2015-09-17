@@ -412,6 +412,13 @@ ifeq ($(my_allow_undefined_symbols),)
 endif
 endif
 
+# Target modules shouldn't re-export libgcc.a because we don't want other
+# binaries importing them when they should be getting their own copy of the
+# builtins.
+ifndef LOCAL_IS_HOST_MODULE
+    my_ldflags += -Wl,--exclude-libs,libgcc.a
+endif
+
 ifeq (true,$(LOCAL_GROUP_STATIC_LIBRARIES))
 $(LOCAL_BUILT_MODULE): PRIVATE_GROUP_STATIC_LIBRARIES := true
 else
