@@ -79,6 +79,11 @@ $(INSTALLED_DEFAULT_PROP_TARGET):
 
 # -----------------------------------------------------------------
 # build.prop
+ifeq ($(NEED_SAFE_STACK),true)
+  # Enable SafeStack support in libc.
+  ADDITIONAL_BUILD_PROPERTIES += ro.libc.safestack=1
+endif
+
 INSTALLED_BUILD_PROP_TARGET := $(TARGET_OUT)/build.prop
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_BUILD_PROP_TARGET)
 ADDITIONAL_BUILD_PROPERTIES := \

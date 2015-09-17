@@ -83,6 +83,11 @@ ifneq ($(filter coverage,$(my_sanitize)),)
   my_sanitize := $(filter-out coverage,$(my_sanitize))
 endif
 
+ifneq ($(filter safe-stack,$(my_sanitize)),)
+  # Enable SafeStack support in libc.
+  NEED_SAFE_STACK := true
+endif
+
 ifneq ($(my_sanitize),)
   fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize)),
   my_cflags += -fsanitize=$(fsanitize_arg)
