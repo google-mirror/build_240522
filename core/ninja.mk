@@ -73,8 +73,22 @@ ifneq ($(BUILD_MODULES_IN_PATHS),)
 KATI_NINJA_SUFFIX := $(KATI_NINJA_SUFFIX)-mmma-$(call replace_space_and_slash,$(BUILD_MODULES_IN_PATHS))
 endif
 
-KATI_BUILD_NINJA := $(PRODUCT_OUT)/build$(KATI_NINJA_SUFFIX).ninja
-KATI_NINJA_SH := $(PRODUCT_OUT)/ninja$(KATI_NINJA_SUFFIX).sh
+KATI_NINJA_SUFFIX_CKS :=
+ifneq ($(KATI_NINJA_SUFFIX),)
+KATI_NINJA_SUFFIX_CKS := -$(word 1, $(shell echo $(KATI_NINJA_SUFFIX) | $(MD5SUM)))
+endif
+
+KATI_BUILD_NINJA := $(PRODUCT_OUT)/build$(KATI_NINJA_SUFFIX_CKS).ninja
+KATI_NINJA_SH := $(PRODUCT_OUT)/ninja$(KATI_NINJA_SUFFIX_CKS).sh
+
+# Write out a file mapping checksum to the real suffix.
+ifneq ($(KATI_NINJA_SUFFIX_CKS),)
+my_ninja_cks_suffix_file := $(basename $(KATI_BUILD_NINJA)).suf
+$(shell mkdir -p $(dir $(my_ninja_cks_suffix_file)) && \
+    echo $(KATI_NINJA_SUFFIX) > $(my_ninja_cks_suffix_file))
+KATI_NINJA_SUFFIX :=
+endif
+
 KATI_OUTPUTS := $(KATI_BUILD_NINJA) $(KATI_NINJA_SH)
 
 ifeq (,$(NINJA_STATUS))
@@ -114,9 +128,8 @@ $(KATI_OUTPUTS): kati.intermediate $(KATI_FORCE)
 
 .INTERMEDIATE: kati.intermediate
 kati.intermediate: $(KATI) $(MAKEPARALLEL)
-	@echo Running kati to generate build$(KATI_NINJA_SUFFIX).ninja...
-	@#TODO: use separate ninja file for mm or single target build
-	+$(hide) $(KATI_MAKEPARALLEL) $(KATI) --ninja --ninja_dir=$(PRODUCT_OUT) --ninja_suffix=$(KATI_NINJA_SUFFIX) --regen --ignore_dirty=$(OUT_DIR)/% --ignore_optional_include=$(OUT_DIR)/%.P --detect_android_echo --use_find_emulator $(KATI_REMOTE_NUM_JOBS_FLAG) -f build/core/main.mk $(or $(KATI_TARGETS),--gen_all_phony_targets) USE_NINJA=false
+	@echo Running kati to generate build$(KATI_NINJA_SUFFIX_CKS).ninja...
+	+$(hide) $(KATI_MAKEPARALLEL) $(KATI) --ninja --ninja_dir=$(PRODUCT_OUT) --ninja_suffix=$(KATI_NINJA_SUFFIX_CKS) --regen --ignore_dirty=$(OUT_DIR)/% --ignore_optional_include=$(OUT_DIR)/%.P --detect_android_echo --use_find_emulator $(KATI_REMOTE_NUM_JOBS_FLAG) -f build/core/main.mk $(or $(KATI_TARGETS),--gen_all_phony_targets) USE_NINJA=false
 
 KATI_CXX := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_CPPFLAGS)
 KATI_LD := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_LDFLAGS)
