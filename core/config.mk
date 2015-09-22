@@ -120,7 +120,7 @@ hide := $(if $(SHOW_COMMANDS),,@)
 COMMON_GLOBAL_CFLAGS:= -DANDROID -fmessage-length=0 -W -Wall -Wno-unused -Winit-self -Wpointer-arith
 COMMON_RELEASE_CFLAGS:= -DNDEBUG -UDEBUG
 
-COMMON_GLOBAL_CPPFLAGS:= $(COMMON_GLOBAL_CFLAGS) -Wsign-promo
+COMMON_GLOBAL_CPPFLAGS:= -Wsign-promo
 COMMON_RELEASE_CPPFLAGS:= $(COMMON_RELEASE_CFLAGS)
 
 GLOBAL_CFLAGS_NO_OVERRIDE := \
@@ -181,7 +181,6 @@ BUILD_DATETIME_C_TIME := $$(cat $(OUT_DIR)/build_c_time.txt)
 
 ifeq ($(OVERRIDE_C_DATE_TIME),true)
 COMMON_GLOBAL_CFLAGS += -Wno-builtin-macro-redefined -D__DATE__="\"$(BUILD_DATETIME_C_DATE)\"" -D__TIME__=\"$(BUILD_DATETIME_C_TIME)\"
-COMMON_GLOBAL_CPPFLAGS += -Wno-builtin-macro-redefined -D__DATE__="\"$(BUILD_DATETIME_C_DATE)\"" -D__TIME__=\"$(BUILD_DATETIME_C_TIME)\"
 endif
 
 # The build system exposes several variables for where to find the kernel
