@@ -87,6 +87,10 @@ PHONY: showcommands
 showcommands: droid
 endif
 
+# Make multiple rules to generate the same target an error instead of
+# proceeding with undefined behavior.
+NINJA_ARGS += -w dupbuild=err
+
 ifdef KATI_REMOTE_NUM_JOBS_FLAG
 KATI_MAKEPARALLEL := $(MAKEPARALLEL)
 else
