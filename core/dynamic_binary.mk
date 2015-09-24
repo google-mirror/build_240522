@@ -86,6 +86,21 @@ $(symbolic_output) : $(symbolic_input) | $(ACP)
 	@echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 
+###########################################################
+## Store breakpad symbols
+###########################################################
+
+ifneq ($(BREAKPAD_DUMP_SYMS),)
+ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
+my_breakpad_path := $(PRODUCT_OUT)/breakpad/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+breakpad_input := $(relocation_packer_output)
+breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem)
+$(breakpad_output) : $(breakpad_input) | $(BREAKPAD_DUMP_SYMS)
+	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
+	@mkdir -p $(dir $@)
+	$(BREAKPAD_DUMP_SYMS) -c $< > $@.sym
+endif
+endif
 
 ###########################################################
 ## Strip
@@ -109,11 +124,11 @@ endif
 
 ifneq ($(filter true no_debuglink,$(my_strip_module)),)
 # Strip the binary
-$(strip_output): $(strip_input) | $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
+$(strip_output): $(strip_input) $(breakpad_output) | $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
 	$(transform-to-stripped)
 else ifeq ($(my_strip_module),keep_symbols)
 # Strip only the debug frames, but leave the symbol table.
-$(strip_output): $(strip_input) | $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
+$(strip_output): $(strip_input) $(breakpad_output) | $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
 	$(transform-to-stripped-keep-symbols)
 
 # A product may be configured to strip everything in some build variants.
@@ -131,11 +146,11 @@ else
 # If the binary we're copying is acp or a prerequisite,
 # use cp(1) instead.
 ifneq ($(LOCAL_ACP_UNAVAILABLE),true)
-$(strip_output): $(strip_input) | $(ACP)
+$(strip_output): $(strip_input) $(breakpad_output) | $(ACP)
 	@echo "target Unstripped: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 else
-$(strip_output): $(strip_input)
+$(strip_output): $(strip_input) $(breakpad_output)
 	@echo "target Unstripped: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target-with-cp)
 endif
