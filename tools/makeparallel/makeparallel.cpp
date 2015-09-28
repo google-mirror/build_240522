@@ -44,6 +44,14 @@
 #define TEMP_FAILURE_RETRY(exp) (exp)
 #endif
 
+struct MakeOpts {
+  int in_fd;
+  int out_fd;
+  bool parallel;
+  bool keep_going;
+  std::string load;
+};
+
 // Throw an error if fd is not valid.
 static void CheckFd(int fd) {
   int ret = fcntl(fd, F_GETFD);
@@ -98,8 +106,9 @@ static std::vector<std::string> ReadMakeflags() {
   return args;
 }
 
-static bool ParseMakeflags(std::vector<std::string>& args,
-    int* in_fd, int* out_fd, bool* parallel, bool* keep_going) {
+static bool ParseMakeflags(std::vector<std::string>& args, MakeOpts *opts) {
+  opts->in_fd = -1;
+  opts->out_fd = -1;
 
   std::vector<char*> getopt_argv;
   // getopt starts reading at argv[1]
@@ -118,7 +127,7 @@ static bool ParseMakeflags(std::vector<std::string>& args,
     };
     int longopt_index = 0;
 
-    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kj",
+    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kjl:",
         longopts, &longopt_index);
 
     if (c == -1) {
@@ -128,13 +137,14 @@ static bool ParseMakeflags(std::vector<std::string>& args,
     switch (c) {
     case 0:
       switch (longopt_index) {
-      case 0:
-      {
+      case 0: {
         // jobserver-fds
-        if (sscanf(optarg, "%d,%d", in_fd, out_fd) != 2) {
+        int in_fd, out_fd;
+        if (sscanf(optarg, "%d,%d", &in_fd, &out_fd) != 2) {
           error(EXIT_FAILURE, 0, "incorrect format for --jobserver-fds: %s", optarg);
         }
-        // TODO: propagate in_fd, out_fd
+        opts->in_fd = in_fd;
+        opts->out_fd = out_fd;
         break;
       }
       default:
@@ -142,11 +152,15 @@ static bool ParseMakeflags(std::vector<std::string>& args,
       }
       break;
     case 'j':
-      *parallel = true;
+      opts->parallel = true;
       break;
     case 'k':
-      *keep_going = true;
+      opts->keep_going = true;
       break;
+    case 'l': {
+      opts->load = optarg;
+      break;
+    }
     case '?':
       // ignore unknown arguments
       break;
@@ -285,10 +299,6 @@ static void PutJobserverTokens(int out_fd, int tokens) {
 }
 
 int main(int argc, char* argv[]) {
-  int in_fd = -1;
-  int out_fd = -1;
-  bool parallel = false;
-  bool keep_going = false;
   bool ninja = false;
   int tokens = 0;
 
@@ -302,27 +312,32 @@ int main(int argc, char* argv[]) {
   std::vector<char*> args(&argv[1], &argv[argc]);
 
   std::vector<std::string> makeflags = ReadMakeflags();
-  if (ParseMakeflags(makeflags, &in_fd, &out_fd, &parallel, &keep_going)) {
-    if (in_fd >= 0 && out_fd >= 0) {
-      CheckFd(in_fd);
-      CheckFd(out_fd);
-      fcntl(in_fd, F_SETFD, FD_CLOEXEC);
-      fcntl(out_fd, F_SETFD, FD_CLOEXEC);
-      tokens = GetJobserverTokens(in_fd);
+  MakeOpts opts = {};
+  if (ParseMakeflags(makeflags, &opts)) {
+    if (opts.in_fd >= 0 && opts.out_fd >= 0) {
+      CheckFd(opts.in_fd);
+      CheckFd(opts.out_fd);
+      fcntl(opts.in_fd, F_SETFD, FD_CLOEXEC);
+      fcntl(opts.out_fd, F_SETFD, FD_CLOEXEC);
+      tokens = GetJobserverTokens(opts.in_fd);
     }
   }
 
   std::string jarg = "-j" + std::to_string(tokens + 1);
 
   if (ninja) {
-    if (!parallel) {
+    if (!opts.parallel) {
       // ninja is parallel by default, pass -j1 to disable parallelism if make wasn't parallel
       args.push_back(strdup("-j1"));
     } else if (tokens > 0) {
       args.push_back(strdup(jarg.c_str()));
     }
-    if (keep_going) {
+    if (opts.keep_going) {
       args.push_back(strdup("-k0"));
+    }
+    if (!opts.load.empty()) {
+      std::string larg = "-l" + opts.load;
+      args.push_back(strdup(larg.c_str()));
     }
   } else {
     args.push_back(strdup(jarg.c_str()));
@@ -355,7 +370,7 @@ int main(int argc, char* argv[]) {
   }
 
   if (tokens > 0) {
-    PutJobserverTokens(out_fd, tokens);
+    PutJobserverTokens(opts.out_fd, tokens);
   }
   exit(exit_status);
 }
