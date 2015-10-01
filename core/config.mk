@@ -526,6 +526,8 @@ FINDBUGS_DIR := external/owasp/sanitizer/tools/findbugs/bin
 FINDBUGS := $(FINDBUGS_DIR)/findbugs
 EMMA_JAR := external/emma/lib/emma$(COMMON_JAVA_PACKAGE_SUFFIX)
 
+REALPATH := $(BUILD_OUT_EXECUTABLES)/android_realpath
+
 # Tool to merge AndroidManifest.xmls
 ANDROID_MANIFEST_MERGER := java -classpath prebuilts/devtools/tools/lib/manifest-merger.jar com.android.manifmerger.Main merge
 
