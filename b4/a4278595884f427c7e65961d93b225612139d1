@@ -1,0 +1,8 @@
+Code-Review+1: Shinichiro Hamaji <hamaji@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Verified+1: Colin Cross <ccross@android.com>
+Submitted-by: Colin Cross <ccross@android.com>
+Submitted-at: Thu, 01 Oct 2015 21:13:04 +0000
+Reviewed-on: https://android-review.googlesource.com/173588
+Project: platform/build
+Branch: refs/heads/master
