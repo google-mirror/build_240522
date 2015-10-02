@@ -113,17 +113,15 @@ else
 full_classes_jar := $(intermediates.COMMON)/classes.jar
 built_dex := $(intermediates.COMMON)/classes.dex
 endif
+full_classes_all_jars := $(full_classes_compiled_jar) $(full_classes_jarjar_jar) $(full_classes_emma_jar) $(full_classes_jar) $(full_classes_proguard_jar)
+full_classes_all_jar_tocs := $(addsuffix .toc,$(full_classes_all_jars))
 # final Jack library, shrinked and obfuscated if it must be
 full_classes_jack := $(intermediates.COMMON)/classes.jack
 # intermediate Jack library without shrink and obfuscation
 noshrob_classes_jack := $(intermediates.COMMON)/classes.noshrob.jack
 
 LOCAL_INTERMEDIATE_TARGETS += \
-    $(full_classes_compiled_jar) \
-    $(full_classes_jarjar_jar) \
-    $(full_classes_emma_jar) \
-    $(full_classes_jar) \
-    $(full_classes_proguard_jar) \
+    $(full_classes_all_jars) \
     $(built_dex_intermediate) \
     $(full_classes_jack) \
     $(noshrob_classes_jack) \
@@ -392,10 +390,11 @@ $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_F
 $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUDE_PACKAGES)
 $(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
+full_java_lib_dep_tocs := $(addsuffix .toc,$(full_java_lib_deps))
 $(full_classes_compiled_jar): \
         $(java_sources) \
         $(java_resource_sources) \
-        $(full_java_lib_deps) \
+        $(full_java_lib_dep_tocs) \
         $(jar_manifest_file) \
         $(layers_file) \
         $(RenderScript_file_stamp) \
@@ -443,6 +442,11 @@ endif
 $(full_classes_jar): $(full_classes_emma_jar) | $(ACP)
 	@echo Copying: $@
 	$(hide) $(ACP) -fp $< $@
+
+$(full_classes_all_jar_tocs): %.jar.toc: %.jar
+	@echo Generating: $@
+	$(hide) build/tools/dump-jar-toc.py $< > $@.tmp && (cmp $@ $@.tmp &> /dev/null || mv $@.tmp $@)
+.KATI_RESTAT: $(full_classes_all_jar_tocs)
 
 # Run proguard if necessary, otherwise just copy the file.
 ifdef LOCAL_PROGUARD_ENABLED
