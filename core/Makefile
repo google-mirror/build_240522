@@ -1405,6 +1405,7 @@ define package_files-copy-root
   fi
 endef
 
+ifneq ($(AB_OTA_UPDATER),true)
 built_ota_tools := \
     $(call intermediates-dir-for,EXECUTABLES,applypatch,,,$(TARGET_PREFER_32_BIT))/applypatch \
     $(call intermediates-dir-for,EXECUTABLES,sqlite3,,,$(TARGET_PREFER_32_BIT))/sqlite3
@@ -1418,6 +1419,7 @@ built_ota_tools += \
 endif
 
 $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_OTA_TOOLS := $(built_ota_tools)
+endif
 
 $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_RECOVERY_API_VERSION := $(RECOVERY_API_VERSION)
 $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_RECOVERY_FSTAB_VERSION := $(RECOVERY_FSTAB_VERSION)
@@ -1509,9 +1511,12 @@ ifdef BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
 		$(TARGET_OUT_VENDOR),$(zip_root)/VENDOR)
 endif
 	@# Extra contents of the OTA package
-	$(hide) mkdir -p $(zip_root)/OTA/bin
+	$(hide) mkdir -p $(zip_root)/OTA
 	$(hide) $(ACP) $(INSTALLED_ANDROID_INFO_TXT_TARGET) $(zip_root)/OTA/
+ifneq ($(AB_OTA_UPDATER),true)
+	$(hide) mkdir -p $(zip_root)/OTA/bin
 	$(hide) $(ACP) $(PRIVATE_OTA_TOOLS) $(zip_root)/OTA/bin/
+endif
 	@# Files that do not end up in any images, but are necessary to
 	@# build them.
 	$(hide) mkdir -p $(zip_root)/META
