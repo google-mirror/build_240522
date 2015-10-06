@@ -129,6 +129,10 @@ ifeq ($(ARCH_X86_HAVE_AES_NI),true)
     TARGET_GLOBAL_CFLAGS += -maes
 endif
 
+ifneq ($(TARGET_BUILD_VARIANT),user)
+    TARGET_GLOBAL_CFLAGS += -fno-omit-frame-pointer
+endif
+
 TARGET_GLOBAL_LDFLAGS += -m64
 
 TARGET_GLOBAL_LDFLAGS += -Wl,-z,noexecstack

@@ -120,6 +120,10 @@ ifeq ($(ARCH_X86_HAVE_AES_NI),true)
     $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -maes
 endif
 
+ifneq ($(TARGET_BUILD_VARIANT),user)
+    $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -fno-omit-frame-pointer
+endif
+
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += -m32
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += -Wl,-z,noexecstack
