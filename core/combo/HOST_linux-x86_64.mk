@@ -23,6 +23,9 @@ endif
 HOST_CC  := $(HOST_TOOLCHAIN_PREFIX)gcc
 HOST_CXX := $(HOST_TOOLCHAIN_PREFIX)g++
 HOST_AR  := $(HOST_TOOLCHAIN_PREFIX)ar
+HOST_READELF  := $(HOST_TOOLCHAIN_PREFIX)readelf
+HOST_NM  := $(HOST_TOOLCHAIN_PREFIX)nm
+HOST_GEN_TOC  := $(call gen_toc_command_for_elf,$(HOST_READELF),$(HOST_NM))
 
 # gcc location for clang; to be updated when clang is updated
 HOST_TOOLCHAIN_FOR_CLANG := prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8

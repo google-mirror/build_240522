@@ -1516,6 +1516,20 @@ define transform-o-to-shared-lib
 $(transform-o-to-shared-lib-inner)
 endef
 
+# .toc files have the list of external dynamic symbols without their addresses.
+#
+# For ninja build, .toc files will be updated only when the content of .toc
+# files are changed. As .KATI_RESTAT is specified to .toc files, dependent
+# binaries of a .toc file will be rebuilt only when the content of
+# the .toc file is changed.
+#
+# For make build, .toc files will be always updated so dependent binaries will
+# be always rebuilt.
+define transform-shared-lib-to-toc
+@echo "generate TOC: $(PRIVATE_MODULE) ($@)"
+$(if $(BUILDING_WITH_NINJA),$(PRIVATE_GEN_TOC) $< > $@.tmp && if cmp -s $@.tmp $@ ; then rm $@.tmp ; else mv $@.tmp $@ ; fi,$(PRIVATE_GEN_TOC) $< > $@)
+endef
+
 
 ###########################################################
 ## Commands for filtering a target executable or library

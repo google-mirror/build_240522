@@ -40,6 +40,9 @@ $(combo_var_prefix)GLOBAL_CFLAGS += -D_FILE_OFFSET_BITS=64
 $(combo_var_prefix)CC := $(TOOLS_PREFIX)gcc
 $(combo_var_prefix)CXX := $(TOOLS_PREFIX)g++
 $(combo_var_prefix)AR := $(TOOLS_PREFIX)ar
+$(combo_var_prefix)NM := $(TOOLS_PREFIX)nm
+$(combo_var_prefix)OBJDUMP := $(TOOLS_PREFIX)objdump
+$(combo_var_prefix)GEN_TOC := sh -c '$($(combo_var_prefix)OBJDUMP) -x $$0 | grep "^Name" | cut -f3 -d" " ; $($(combo_var_prefix)NM) -g -f p $$0 | cut -f1-2 -d" "'
 
 $(combo_var_prefix)GLOBAL_LDFLAGS += \
     --enable-stdcall-fixup

@@ -281,6 +281,17 @@ ifeq ($(TARGET_CPU_ABI),)
 endif
 TARGET_CPU_ABI2 := $(strip $(TARGET_CPU_ABI2))
 
+# $$0 is a shell argument which specifies the shared object.
+# $1 and $2 are make arguments for readelf and nm commands, specifically.
+define gen_toc_command_for_elf
+sh -c '$1 -d $$0 | grep SONAME ; $2 -gD -f p $$0 | cut -f1-2 -d" "'
+endef
+
+# $$0 is a shell argument which specifies the dynamic library.
+define gen_toc_command_for_macho
+sh -c 'otool -l $$0 | grep LC_ID_DYLIB -A 5; nm -gP $$0 | cut -f1-2 -d" " | grep -v U$$'
+endef
+
 combo_target := HOST_
 combo_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/combo/select.mk
