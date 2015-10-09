@@ -1134,7 +1134,9 @@ built_shared_libraries := \
     $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
       $(addsuffix $(so_suffix), \
         $(installed_shared_library_module_names)))
+my_system_shared_libraries_fullpath :=
 endif
+built_shared_library_tocs := $(addsuffix .toc,$(filter-out $(my_system_shared_libraries_fullpath),$(built_shared_libraries)))
 
 built_static_libraries := \
     $(foreach lib,$(my_static_libraries), \
@@ -1228,7 +1230,8 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_OBJECTS := $(all_objects)
 ###########################################################
 # all_libraries is used for the dependencies on LOCAL_BUILT_MODULE.
 all_libraries := \
-    $(built_shared_libraries) \
+    $(built_shared_library_tocs) \
+    $(my_system_shared_libraries_fullpath) \
     $(built_static_libraries) \
     $(built_whole_libraries)
 

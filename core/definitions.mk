@@ -1493,6 +1493,13 @@ define transform-o-to-shared-lib
 $(transform-o-to-shared-lib-inner)
 endef
 
+# .toc files have the list of external (-g) dynamic (-D) symbols
+# without their addresses.
+define transform-shared-lib-to-toc
+@echo "generate TOC: $(PRIVATE_MODULE) ($@)"
+( readelf -d $< | grep SONAME ; nm -gD -f p $< | cut -f1-2 -d' ' ) > $@.tmp && if cmp -s $@.tmp $@ ; then rm $@.tmp ; else mv $@.tmp $@ ; fi
+endef
+
 
 ###########################################################
 ## Commands for filtering a target executable or library

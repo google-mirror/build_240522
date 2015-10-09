@@ -221,6 +221,17 @@ endif
 LOCAL_INTERMEDIATE_TARGETS += $(LOCAL_BUILT_MODULE)
 
 ###########################################################
+## Create .toc files from shared objects to reduce unnecessary rebuild
+###########################################################
+ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+LOCAL_INTERMEDIATE_TARGETS += $(LOCAL_BUILT_MODULE)
+$(LOCAL_BUILT_MODULE).toc: $(LOCAL_BUILT_MODULE)
+	$(call transform-shared-lib-to-toc)
+# Kati adds restat=1 to ninja. GNU make does nothing for this.
+.KATI_RESTAT: $(LOCAL_BUILT_MODULE).toc
+endif
+
+###########################################################
 ## logtags: Add .logtags files to global list
 ###########################################################
 
