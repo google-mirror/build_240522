@@ -125,6 +125,13 @@ COMMON_RELEASE_CFLAGS:= -DNDEBUG -UDEBUG
 # color codes if it is not running in a terminal.
 COMMON_GLOBAL_CFLAGS += -fdiagnostics-color
 
+# We run gcc/clang with PWD=/proc/self/cwd to remove the $TOP
+# from the debug output. That way two builds in two different
+# directories will create the same output.
+RELATIVE_PWD := PWD=/proc/self/cwd
+# Remove this useless prefix from the debug output.
+COMMON_GLOBAL_CFLAGS += -fdebug-prefix-map=/proc/self/cwd=
+
 COMMON_GLOBAL_CPPFLAGS:= -Wsign-promo
 COMMON_RELEASE_CPPFLAGS:=
 
@@ -175,6 +182,11 @@ include $(BUILD_SYSTEM)/envsetup.mk
 # Pruned directory options used when using findleaves.py
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(OUT_DIR) $(SCAN_EXCLUDE_DIRS) .repo .git)
+
+# /proc/self doesn't exist on Darwin
+ifeq ($(HOST_OS),darwin)
+RELATIVE_PWD :=
+endif
 
 # ---------------------------------------------------------------
 # Allow the C/C++ macros __DATE__ and __TIME__ to be set to the
