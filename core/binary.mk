@@ -694,6 +694,43 @@ endif  # $(dbus_definitions) non-empty
 
 
 ###########################################################
+## AIDL: Compile .aidl files to .cpp and .h files
+###########################################################
+aidl_src := $(strip $(filter %.aidl,$(my_src_files)))
+ifneq ($(aidl_src),)
+
+aidl_gen_cpp_root := $(intermediates)/aidl/src
+aidl_gen_include_root := $(generated_sources_dir)/aidl/include
+
+aidl_gen_cpp := $(patsubst %.aidl,%$(LOCAL_CPP_EXTENSION),$(aidl_src))
+aidl_gen_cpp := $(addprefix $(aidl_gen_cpp_root)/,$(aidl_gen_cpp))
+
+# TODO(wiley): we could pass down a flag here to only generate the server or
+#              client side of the binder interface.
+$(aidl_gen_cpp) : PRIVATE_MODULE := $(LOCAL_MODULE)
+$(aidl_gen_cpp) : PRIVATE_CPP_EXTENSION := $(LOCAL_CPP_EXTENSION)
+$(aidl_gen_cpp) : PRIVATE_HEADER_OUTPUT_DIR := $(aidl_gen_include_root)
+$(aidl_gen_cpp) : PRIVATE_AIDL_FLAGS := $(addprefix -I,$(LOCAL_AIDL_INCLUDES))
+
+# Ensure that we only define build rules once in multilib builds.
+ifndef $(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_aidl_generated_defined
+$(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_aidl_generated_defined := true
+
+$(aidl_gen_cpp) : $(aidl_gen_cpp_root)/%$(LOCAL_CPP_EXTENSION) : $(LOCAL_PATH)/%.aidl $(AIDL_CPP)
+	$(transform-aidl-to-cpp)
+
+endif  # $(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_aidl_generated_defined
+
+-include $(aidl_gen_cpp:%$(LOCAL_CPP_EXTENSION)=%.P)
+
+# Add generated headers to include path.
+my_c_includes += $(aidl_gen_include_root)
+# Pick up the generated C++ files later for transformation to .o files.
+my_generated_sources += $(aidl_gen_cpp)
+
+endif  # $(aidl_src) non-empty
+
+###########################################################
 ## YACC: Compile .y and .yy files to .cpp and the to .o.
 ###########################################################
 
