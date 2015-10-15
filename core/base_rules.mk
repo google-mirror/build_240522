@@ -382,8 +382,11 @@ my_required_modules := $(LOCAL_REQUIRED_MODULES) \
 ifdef LOCAL_IS_HOST_MODULE
 my_required_modules += $(LOCAL_REQUIRED_MODULES_$($(my_prefix)OS))
 endif
+# Note we expand required modules with LOCAL_JNI_SHARED_LIBRARIES,
+# to establish direct dependency of system.img on the jni libraries.
 ALL_MODULES.$(my_register_name).REQUIRED := \
-    $(strip $(ALL_MODULES.$(my_register_name).REQUIRED) $(my_required_modules))
+    $(strip $(ALL_MODULES.$(my_register_name).REQUIRED) $(my_required_modules) \
+      $(LOCAL_JNI_SHARED_LIBRARIES))
 ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS := \
     $(ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS) $(event_log_tags)
 ALL_MODULES.$(my_register_name).MAKEFILE := \
