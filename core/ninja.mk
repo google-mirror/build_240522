@@ -103,6 +103,10 @@ PHONY: showcommands
 showcommands: droid
 endif
 
+ifneq (,$(findstring n,$(MAKEFLAGS)))
+NINJA_ARGS += "-n"
+endif
+
 ifdef USE_GOMA
 KATI_MAKEPARALLEL := $(MAKEPARALLEL)
 # Ninja runs remote jobs (i.e., commands which contain gomacc) with
