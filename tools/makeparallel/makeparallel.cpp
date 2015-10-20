@@ -298,6 +298,10 @@ int main(int argc, char* argv[]) {
     argc--;
   }
 
+  if (argc < 2) {
+    error(EXIT_FAILURE, 0, "expected command to run");
+  }
+
   const char* path = argv[1];
   std::vector<char*> args(&argv[1], &argv[argc]);
 
@@ -317,15 +321,15 @@ int main(int argc, char* argv[]) {
   if (ninja) {
     if (!parallel) {
       // ninja is parallel by default, pass -j1 to disable parallelism if make wasn't parallel
-      args.push_back(strdup("-j1"));
+      args.insert(args.begin() + 1, strdup("-j1"));
     } else if (tokens > 0) {
-      args.push_back(strdup(jarg.c_str()));
+      args.insert(args.begin() + 1, strdup(jarg.c_str()));
     }
     if (keep_going) {
-      args.push_back(strdup("-k0"));
+      args.insert(args.begin() + 1, strdup("-k0"));
     }
   } else {
-    args.push_back(strdup(jarg.c_str()));
+    args.insert(args.begin() + 1, strdup(jarg.c_str()));
   }
 
   args.push_back(nullptr);
