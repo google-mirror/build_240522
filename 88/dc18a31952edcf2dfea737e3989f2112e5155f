@@ -1,0 +1,8 @@
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Code-Review+2: Ying Wang <wangying@android.com>
+Verified+1: Colin Cross <ccross@android.com>
+Submitted-by: Colin Cross <ccross@android.com>
+Submitted-at: Wed, 21 Oct 2015 00:15:35 +0000
+Reviewed-on: https://android-review.googlesource.com/177587
+Project: platform/build
+Branch: refs/heads/master
