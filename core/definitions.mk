@@ -2100,7 +2100,7 @@ endef
 
 #TODO: update the manifest to point to the dex file
 define add-dex-to-package
-$(hide) zip -qj $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
+$(hide) zip -qjX $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
 endef
 
 # Add java resources added by the current module.
@@ -2145,6 +2145,17 @@ $(hide) $(ZIPALIGN) \
     4 \
     $@.unaligned $@.aligned
 $(hide) mv $@.aligned $@
+endef
+
+# Remove dynamic timestamps from packages
+#
+define remove-timestamps-from-package
+$(hide) mv $@ $@.timed
+$(hide) $(ZIPALIGN) \
+    -f -t \
+    1 \
+    $@.timed $@.untimed
+$(hide) mv $@.untimed $@
 endef
 
 # Uncompress shared libraries embedded in an apk.

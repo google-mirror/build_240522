@@ -92,6 +92,7 @@ endif
 ifdef LOCAL_JACK_ENABLED
 	$(add-carried-jack-resources)
 endif
+	$(remove-timestamps-from-package)
 
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(dexpreopt_boot_jar_module),) # boot jar

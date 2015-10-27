@@ -186,6 +186,12 @@ protected:
     void setModWhen(time_t when);
 
     /*
+     * Zero all timestamps. This includes creation and modification dates
+     * in both the standard zip headers and common extra fields.
+     */
+    void removeTimestamps();
+
+    /*
      * Return the offset of the local file header.
      */
     off_t getLFHOffset(void) const { return mCDE.mLocalHeaderRelOffset; }

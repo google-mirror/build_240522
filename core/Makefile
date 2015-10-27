@@ -666,12 +666,18 @@ $(kernel_notice_file): \
 #
 # This rule adds to ALL_DEFAULT_INSTALLED_MODULES, so it needs to come
 # before the rules that use that variable to build the image.
-ALL_DEFAULT_INSTALLED_MODULES += $(TARGET_OUT_ETC)/security/otacerts.zip
-$(TARGET_OUT_ETC)/security/otacerts.zip: KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
-$(TARGET_OUT_ETC)/security/otacerts.zip: $(addsuffix .x509.pem,$(DEFAULT_KEY_CERT_PAIR))
+OTACERTS_ZIP_BUILT := $(call intermediates-dir-for,PACKAGING,otacerts)/otacerts.zip
+OTACERTS_ZIP := $(TARGET_OUT_ETC)/security/otacerts.zip
+ALL_DEFAULT_INSTALLED_MODULES += $(OTACERTS_ZIP)
+
+$(OTACERTS_ZIP_BUILT): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
+$(OTACERTS_ZIP_BUILT): $(addsuffix .x509.pem,$(DEFAULT_KEY_CERT_PAIR)) | $(ZIPALIGN)
 	$(hide) rm -f $@
 	$(hide) mkdir -p $(dir $@)
-	$(hide) zip -qj $@ $<
+	$(hide) zip -qjX $@ $<
+	$(remove-timestamps-from-package)
+
+$(eval $(call copy-one-file,$(OTACERTS_ZIP_BUILT),$(OTACERTS_ZIP)))
 
 .PHONY: otacerts
 otacerts: $(TARGET_OUT_ETC)/security/otacerts.zip
@@ -928,9 +934,13 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
 		$(call build-recoveryimage-target, $@)
 
 ifneq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
-$(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET)
+RECOVERY_RESOURCE_ZIP_BUILT := $(call intermediates-dir-for,PACKAGING,recovery_resource)/recovery_resource.zip
+$(RECOVERY_RESOURCE_ZIP_BUILT): $(INSTALLED_RECOVERYIMAGE_TARGET) | $(ZIPALIGN)
 	$(hide) mkdir -p $(dir $@)
-	$(hide) find $(TARGET_RECOVERY_ROOT_OUT)/res -type f | sort | zip -0qrj $@ -@
+	$(hide) find $(TARGET_RECOVERY_ROOT_OUT)/res -type f | sort | zip -0qrjX $@ -@
+	$(remove-timestamps-from-package)
+
+$(eval $(call copy-one-file,$(RECOVERY_RESOURCE_ZIP_BUILT),$(RECOVERY_RESOURCE_ZIP)))
 endif
 
 .PHONY: recoveryimage-nodeps
