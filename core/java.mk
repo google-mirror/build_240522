@@ -463,6 +463,7 @@ ifneq ($(filter-out full custom nosystem obfuscation optimization shrinktests,$(
     $(error invalid value for LOCAL_PROGUARD_ENABLED: $(LOCAL_PROGUARD_ENABLED))
 endif
 proguard_dictionary := $(intermediates.COMMON)/proguard_dictionary
+jack_dictionary := $(intermediates.COMMON)/jack_dictionary
 
 # Hack: see b/20667396
 # When an app's LOCAL_SDK_VERSION is lower than the support library's LOCAL_SDK_VERSION,
@@ -486,9 +487,12 @@ endif
 
 # jack already has the libraries in its classpath and doesn't support jars
 legacy_proguard_flags := $(addprefix -libraryjars ,$(my_support_library_sdk_raise) $(full_shared_java_libs))
-common_proguard_flags :=  \
-                  -forceprocessing \
-                  -printmapping $(proguard_dictionary)
+
+legacy_proguard_flags += -printmapping $(proguard_dictionary)
+jack_proguard_flags := -printmapping $(jack_dictionary)
+
+common_proguard_flags := -forceprocessing
+                  
 
 ifeq ($(filter nosystem,$(LOCAL_PROGUARD_ENABLED)),)
 common_proguard_flags += -include $(BUILD_SYSTEM)/proguard.flags
@@ -521,15 +525,13 @@ else # obfuscation
 # If obfuscation is enabled, the main app must be obfuscated too.
 # We need to run obfuscation using the main app's dictionary,
 # and treat the main app's class.jar as injars instead of libraryjars.
-legacy_proguard_flags := -injars  $(link_instr_classes_jar) \
-    -outjars $(intermediates.COMMON)/proguard.$(LOCAL_INSTRUMENTATION_FOR).jar \
-    -include $(link_instr_intermediates_dir.COMMON)/proguard_options \
+legacy_proguard_flags += -libraryjars  $(link_instr_classes_jar) \
     -applymapping $(link_instr_intermediates_dir.COMMON)/proguard_dictionary \
-    -verbose \
-    $(legacy_proguard_flags)
+    -verbose
 # not supported with jack
 ifdef LOCAL_JACK_ENABLED
-    $(error $(LOCAL_MODULE): Build with jack of instrumentation when obfuscating is not yet supported)
+jack_proguard_flags += -applymapping $(link_instr_intermediates_dir.COMMON)/jack_dictionary
+full_jack_lib_deps += $(link_instr_intermediates_dir.COMMON)/jack_dictionary
 endif
 
 # Sometimes (test + main app) uses different keep rules from the main app -
@@ -638,7 +640,13 @@ ifdef LOCAL_TEST_MODULE_TO_PROGUARD_WITH
     $(error $(LOCAL_MODULE): Build with jack when LOCAL_TEST_MODULE_TO_PROGUARD_WITH is defined is not yet implemented)
 endif
 
-$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_PROGUARD_FLAGS := $(common_proguard_flags) $(LOCAL_JACK_PROGUARD_FLAGS)
+# $(jack_dictionary) is just by-product of $(built_dex_intermediate).
+# The dummy command was added because, without it, make misses the fact the $(built_dex) also
+# change $(jack_dictionary).
+$(jack_dictionary): $(built_dex_intermediate)
+	$(hide) touch $@	
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_PROGUARD_FLAGS := $(common_proguard_flags) $(jack_proguard_flags) $(LOCAL_JACK_PROGUARD_FLAGS)
 else  # LOCAL_PROGUARD_ENABLED not defined
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_PROGUARD_FLAGS :=
 endif # LOCAL_PROGUARD_ENABLED defined
