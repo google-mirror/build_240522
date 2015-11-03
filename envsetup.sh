@@ -1544,3 +1544,5 @@ done
 unset f
 
 addcompletions
+
+test
