@@ -52,8 +52,12 @@ public:
     static inline unsigned short getShortLE(const unsigned char* buf) {
         return buf[0] | (buf[1] << 8);
     }
+    /*
+     * We only want a 4-byte value. Need a mask to handle the case like
+     * "00000080", which would otherwise return 0xFFFFFFFF80000000 instead.
+     */
     static inline unsigned long getLongLE(const unsigned char* buf) {
-        return buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
+        return (buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24)) & 0xFFFFFFFF;
     }
     static inline void putShortLE(unsigned char* buf, short val) {
         buf[0] = (unsigned char) val;
