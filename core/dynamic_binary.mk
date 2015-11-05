@@ -97,7 +97,7 @@ breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
 $(breakpad_output) : $(breakpad_input) | $(BREAKPAD_DUMP_SYMS)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) $(BREAKPAD_DUMP_SYMS) -c $< > $@
+	$(hide) $(BREAKPAD_DUMP_SYMS) -c $< > $@ 2> /dev/null
 $(LOCAL_BUILT_MODULE) : $(breakpad_output)
 endif
 
