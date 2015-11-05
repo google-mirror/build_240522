@@ -19,7 +19,7 @@ LOCAL_PATH := $(call my-dir)
 ifeq (,$(TARGET_BUILD_APPS))
 
 ifeq ($(TARGET_BUILD_PDK),true)
-include $(filter-out %/acp/Android.mk %/signapk/Android.mk %/zipalign/Android.mk,\
+include $(filter-out %/acp/Android.mk %/dextoc/Android.mk %/signapk/Android.mk %/zipalign/Android.mk,\
   $(call all-makefiles-under,$(LOCAL_PATH)))
 else # !PDK
 include $(call all-makefiles-under,$(LOCAL_PATH))
