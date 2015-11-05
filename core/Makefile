@@ -1630,6 +1630,8 @@ ifeq ($(AB_OTA_UPDATER),true)
 	$(hide) for part in $(AB_OTA_PARTITIONS); do \
 	  echo "$${part}" >> $(zip_root)/META/ab_partitions.txt; \
 	done
+	@# Include the build type in META so the server can easily differentiate production builds.
+	$(hide) echo "$(TARGET_BUILD_VARIANT)" > $(zip_root)/META/build_type.txt
 ifdef OSRELEASED_DIRECTORY
 	$(hide) $(ACP) $(TARGET_OUT_ETC)/$(OSRELEASED_DIRECTORY)/product_id $(zip_root)/META/product_id.txt
 	$(hide) $(ACP) $(TARGET_OUT_ETC)/$(OSRELEASED_DIRECTORY)/product_version $(zip_root)/META/product_version.txt
