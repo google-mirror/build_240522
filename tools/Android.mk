@@ -27,6 +27,7 @@ endif # PDK
 
 else # TARGET_BUILD_APPS
 
+# TODO(hamaji): Add $(LOCAL_PATH)/dextoc/Android.mk once b/25904002 is fixed.
 include $(LOCAL_PATH)/apicheck/Android.mk
 
 endif
