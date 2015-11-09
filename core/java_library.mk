@@ -123,3 +123,5 @@ $(LOCAL_BUILT_MODULE) : $(common_javalib.jar) | $(ACP)
 
 endif # LOCAL_DEX_PREOPT
 endif # !LOCAL_IS_STATIC_JAVA_LIBRARY
+
+$(call define-jar-to-toc-rule, $(common_javalib.jar).toc)
