@@ -1529,6 +1529,11 @@ function provision()
     "$ANDROID_PRODUCT_OUT/provision-device" "$@"
 }
 
+function gdb()
+{
+    command gdb -d $(gettop) "$@"
+}
+
 if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
         *bash*)
