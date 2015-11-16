@@ -81,26 +81,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 /**
- * HISTORICAL NOTE:
- *
- * Prior to the keylimepie release, SignApk ignored the signature
- * algorithm specified in the certificate and always used SHA1withRSA.
- *
- * Starting with JB-MR2, the platform supports SHA256withRSA, so we use
- * the signature algorithm in the certificate to select which to use
- * (SHA256withRSA or SHA1withRSA). Also in JB-MR2, EC keys are supported.
- *
- * Because there are old keys still in use whose certificate actually
- * says "MD5withRSA", we treat these as though they say "SHA1withRSA"
- * for compatibility with older releases.  This can be changed by
- * altering the getAlgorithm() function below.
- */
-
-
-/**
  * Command line tool to sign JAR files (including APKs and OTA updates) in a way
- * compatible with the mincrypt verifier, using EC or RSA keys and SHA1 or
- * SHA-256 (see historical note).
+ * compatible with the mincrypt verifier, using EC or RSA keys and SHA-256.
  */
 class SignApk {
     private static final String CERT_SF_NAME = "META-INF/CERT.SF";
@@ -112,41 +94,15 @@ class SignApk {
 
     private static Provider sBouncyCastleProvider;
 
-    // bitmasks for which hash algorithms we need the manifest to include.
-    private static final int USE_SHA1 = 1;
-    private static final int USE_SHA256 = 2;
-
-    /**
-     * Return one of USE_SHA1 or USE_SHA256 according to the signature
-     * algorithm specified in the cert.
-     */
-    private static int getDigestAlgorithm(X509Certificate cert) {
-        String sigAlg = cert.getSigAlgName().toUpperCase(Locale.US);
-        if ("SHA1WITHRSA".equals(sigAlg) ||
-            "MD5WITHRSA".equals(sigAlg)) {     // see "HISTORICAL NOTE" above.
-            return USE_SHA1;
-        } else if (sigAlg.startsWith("SHA256WITH")) {
-            return USE_SHA256;
-        } else {
-            throw new IllegalArgumentException("unsupported signature algorithm \"" + sigAlg +
-                                               "\" in cert [" + cert.getSubjectDN());
-        }
-    }
-
     /** Returns the expected signature algorithm for this key type. */
     private static String getSignatureAlgorithm(X509Certificate cert) {
-        String sigAlg = cert.getSigAlgName().toUpperCase(Locale.US);
-        String keyType = cert.getPublicKey().getAlgorithm().toUpperCase(Locale.US);
-        if ("RSA".equalsIgnoreCase(keyType)) {
-            if (getDigestAlgorithm(cert) == USE_SHA256) {
-                return "SHA256withRSA";
-            } else {
-                return "SHA1withRSA";
-            }
-        } else if ("EC".equalsIgnoreCase(keyType)) {
+        String keyAlgorithm = cert.getPublicKey().getAlgorithm();
+        if ("RSA".equalsIgnoreCase(keyAlgorithm)) {
+            return "SHA256withRSA";
+        } else if ("EC".equalsIgnoreCase(keyAlgorithm)) {
             return "SHA256withECDSA";
         } else {
-            throw new IllegalArgumentException("unsupported key type: " + keyType);
+            throw new IllegalArgumentException("Unsupported key algorithm: " + keyAlgorithm);
         }
     }
 
@@ -257,10 +213,9 @@ class SignApk {
     }
 
     /**
-     * Add the hash(es) of every file to the manifest, creating it if
-     * necessary.
+     * Add the digest of every file to the manifest, creating it if necessary.
      */
-    private static Manifest addDigestsToManifest(JarFile jar, int hashes)
+    private static Manifest addDigestsToManifest(JarFile jar)
         throws IOException, GeneralSecurityException {
         Manifest input = jar.getManifest();
         Manifest output = new Manifest();
@@ -272,14 +227,7 @@ class SignApk {
             main.putValue("Created-By", "1.0 (Android SignApk)");
         }
 
-        MessageDigest md_sha1 = null;
-        MessageDigest md_sha256 = null;
-        if ((hashes & USE_SHA1) != 0) {
-            md_sha1 = MessageDigest.getInstance("SHA1");
-        }
-        if ((hashes & USE_SHA256) != 0) {
-            md_sha256 = MessageDigest.getInstance("SHA256");
-        }
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
         byte[] buffer = new byte[4096];
         int num;
@@ -301,21 +249,13 @@ class SignApk {
                 (stripPattern == null || !stripPattern.matcher(name).matches())) {
                 InputStream data = jar.getInputStream(entry);
                 while ((num = data.read(buffer)) > 0) {
-                    if (md_sha1 != null) md_sha1.update(buffer, 0, num);
-                    if (md_sha256 != null) md_sha256.update(buffer, 0, num);
+                    md.update(buffer, 0, num);
                 }
 
                 Attributes attr = null;
                 if (input != null) attr = input.getAttributes(name);
                 attr = attr != null ? new Attributes(attr) : new Attributes();
-                if (md_sha1 != null) {
-                    attr.putValue("SHA1-Digest",
-                                  new String(Base64.encode(md_sha1.digest()), "ASCII"));
-                }
-                if (md_sha256 != null) {
-                    attr.putValue("SHA-256-Digest",
-                                  new String(Base64.encode(md_sha256.digest()), "ASCII"));
-                }
+                attr.putValue("SHA-256-Digest", new String(Base64.encode(md.digest()), "ASCII"));
                 output.getEntries().put(name, attr);
             }
         }
@@ -333,10 +273,9 @@ class SignApk {
     private static void addOtacert(JarOutputStream outputJar,
                                    File publicKeyFile,
                                    long timestamp,
-                                   Manifest manifest,
-                                   int hash)
+                                   Manifest manifest)
         throws IOException, GeneralSecurityException {
-        MessageDigest md = MessageDigest.getInstance(hash == USE_SHA1 ? "SHA1" : "SHA256");
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
         JarEntry je = new JarEntry(OTACERT_NAME);
         je.setTime(timestamp);
@@ -351,8 +290,7 @@ class SignApk {
         input.close();
 
         Attributes attr = new Attributes();
-        attr.putValue(hash == USE_SHA1 ? "SHA1-Digest" : "SHA-256-Digest",
-                      new String(Base64.encode(md.digest()), "ASCII"));
+        attr.putValue("SHA-256-Digest", new String(Base64.encode(md.digest()), "ASCII"));
         manifest.getEntries().put(OTACERT_NAME, attr);
     }
 
@@ -386,16 +324,14 @@ class SignApk {
     }
 
     /** Write a .SF file with a digest of the specified manifest. */
-    private static void writeSignatureFile(Manifest manifest, OutputStream out,
-                                           int hash)
+    private static void writeSignatureFile(Manifest manifest, OutputStream out)
         throws IOException, GeneralSecurityException {
         Manifest sf = new Manifest();
         Attributes main = sf.getMainAttributes();
         main.putValue("Signature-Version", "1.0");
         main.putValue("Created-By", "1.0 (Android SignApk)");
 
-        MessageDigest md = MessageDigest.getInstance(
-            hash == USE_SHA256 ? "SHA256" : "SHA1");
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
         PrintStream print = new PrintStream(
             new DigestOutputStream(new ByteArrayOutputStream(), md),
             true, "UTF-8");
@@ -403,7 +339,7 @@ class SignApk {
         // Digest of the entire manifest
         manifest.write(print);
         print.flush();
-        main.putValue(hash == USE_SHA256 ? "SHA-256-Digest-Manifest" : "SHA1-Digest-Manifest",
+        main.putValue("SHA-256-Digest-Manifest",
                       new String(Base64.encode(md.digest()), "ASCII"));
 
         Map<String, Attributes> entries = manifest.getEntries();
@@ -417,8 +353,7 @@ class SignApk {
             print.flush();
 
             Attributes sfAttr = new Attributes();
-            sfAttr.putValue(hash == USE_SHA256 ? "SHA-256-Digest" : "SHA1-Digest-Manifest",
-                            new String(Base64.encode(md.digest()), "ASCII"));
+            sfAttr.putValue("SHA-256-Digest", new String(Base64.encode(md.digest()), "ASCII"));
             sf.getEntries().put(entry.getKey(), sfAttr);
         }
 
@@ -649,14 +584,12 @@ class SignApk {
                 signer = new WholeFileSignerOutputStream(out, outputStream);
                 JarOutputStream outputJar = new JarOutputStream(signer);
 
-                int hash = getDigestAlgorithm(publicKey);
-
                 // Assume the certificate is valid for at least an hour.
                 long timestamp = publicKey.getNotBefore().getTime() + 3600L * 1000;
 
-                Manifest manifest = addDigestsToManifest(inputJar, hash);
+                Manifest manifest = addDigestsToManifest(inputJar);
                 copyFiles(manifest, inputJar, outputJar, timestamp, 0);
-                addOtacert(outputJar, publicKeyFile, timestamp, manifest, hash);
+                addOtacert(outputJar, publicKeyFile, timestamp, manifest);
 
                 signFile(manifest, inputJar,
                          new X509Certificate[]{ publicKey },
@@ -774,7 +707,7 @@ class SignApk {
             je.setTime(timestamp);
             outputJar.putNextEntry(je);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            writeSignatureFile(manifest, baos, getDigestAlgorithm(publicKey[k]));
+            writeSignatureFile(manifest, baos);
             byte[] signedData = baos.toByteArray();
             outputJar.write(signedData);
 
@@ -896,7 +829,6 @@ class SignApk {
 
         JarFile inputJar = null;
         FileOutputStream outputFile = null;
-        int hashes = 0;
 
         try {
             File firstPublicKeyFile = new File(args[argstart+0]);
@@ -906,7 +838,6 @@ class SignApk {
                 for (int i = 0; i < numKeys; ++i) {
                     int argNum = argstart + i*2;
                     publicKey[i] = readPublicKey(new File(args[argNum]));
-                    hashes |= getDigestAlgorithm(publicKey[i]);
                 }
             } catch (IllegalArgumentException e) {
                 System.err.println(e);
@@ -942,7 +873,7 @@ class SignApk {
                 // (~0.1% on full OTA packages I tested).
                 outputJar.setLevel(9);
 
-                Manifest manifest = addDigestsToManifest(inputJar, hashes);
+                Manifest manifest = addDigestsToManifest(inputJar);
                 copyFiles(manifest, inputJar, outputJar, timestamp, alignment);
                 signFile(manifest, inputJar, publicKey, privateKey, outputJar);
                 outputJar.close();
