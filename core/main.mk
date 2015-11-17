@@ -475,7 +475,33 @@ endif
 #
 # Typical build; include any Android.mk files we can find.
 #
-subdirs := $(TOP)
+subdirs := \
+	$(TOP)/abi \
+	$(TOP)/art \
+	$(TOP)/bionic \
+	$(TOP)/bootable \
+	$(TOP)/build \
+	$(TOP)/cts \
+	$(TOP)/dalvik \
+	$(TOP)/developers \
+	$(TOP)/development \
+	$(TOP)/device \
+	$(TOP)/docs \
+	$(TOP)/external \
+	$(TOP)/frameworks \
+	$(TOP)/hardware \
+	$(TOP)/libcore \
+	$(TOP)/libnativehelper \
+	$(TOP)/ndk \
+	$(TOP)/packages \
+	$(TOP)/pdk \
+	$(TOP)/platform_testing \
+	$(TOP)/prebuilts \
+	$(TOP)/sdk \
+	$(TOP)/system \
+	$(TOP)/toolchain \
+	$(TOP)/tools \
+	$(TOP)/vendor
 
 FULL_BUILD := true
 
