@@ -1425,11 +1425,11 @@ function set_java_home() {
     #
     # If we don't do this, the JAVA_HOME value set by the first call to
     # build/envsetup.sh will persist forever.
-    if [ -n "$ANDROID_SET_JAVA_HOME" ]; then
+    if [ -z "$ANDROID_SET_JAVA_HOME" ]; then
       export JAVA_HOME=""
     fi
 
-    if [ ! "$JAVA_HOME" ]; then
+    if [ -z "$JAVA_HOME" ]; then
       case `uname -s` in
           Darwin)
               export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
