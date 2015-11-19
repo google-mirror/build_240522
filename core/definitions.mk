@@ -981,6 +981,10 @@ $(hide) $(AIDL_CPP) -d$(basename $@).P $(PRIVATE_AIDL_FLAGS) \
     $< $(PRIVATE_HEADER_OUTPUT_DIR) $@
 endef
 
+define aidl-generated-header-dir
+$(call local-intermediates-dir)/aidl-generated/include
+endef
+
 
 ###########################################################
 ## Commands for running java-event-log-tags.py

@@ -713,7 +713,7 @@ aidl_gen_cpp :=
 ifneq ($(aidl_src),)
 
 aidl_gen_cpp_root := $(intermediates)/aidl-generated/src
-aidl_gen_include_root := $(intermediates)/aidl-generated/include
+aidl_gen_include_root := $(call aidl-generated-header-dir)
 
 aidl_gen_cpp := $(patsubst %.aidl,%$(LOCAL_CPP_EXTENSION),$(aidl_src))
 aidl_gen_cpp := $(addprefix $(aidl_gen_cpp_root)/,$(aidl_gen_cpp))
