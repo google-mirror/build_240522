@@ -190,7 +190,9 @@ onkeyup="return search_changed(event, false, '<?cs var:toroot ?>')" />
 
   <div id="searchResults" class="wrap" style="display:none;">
           <h2 id="searchTitle">Results</h2>
-          <div id="leftSearchControl" class="search-control">Loading...</div>
+          <div id="leftSearchControl" class="search-control">
+	    <gcse:searchresults></gcse:searchresults>
+	  </div>
   </div>
 
 
@@ -327,7 +329,9 @@ onkeyup="return search_changed(event, false, '<?cs var:toroot ?>')" />
 
   <div id="searchResults" class="wrap" style="display:none;">
           <h2 id="searchTitle">Results</h2>
-          <div id="leftSearchControl" class="search-control">Loading...</div>
+          <div id="leftSearchControl" class="search-control">
+	    <gcse:searchresults></gcse:searchresults>
+	  </div>
   </div>
 
   <?cs
