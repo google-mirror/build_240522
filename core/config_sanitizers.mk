@@ -96,6 +96,9 @@ ifneq ($(my_sanitize),)
       my_cflags += -fsanitize-trap=all
       my_cflags += -ftrap-function=abort
     endif
+    ifneq ($(filter thread,$(my_sanitize)),)
+      my_ldflags += -fsanitize=$(fsanitize_arg)
+    endif
     my_shared_libraries += libdl
   endif
 endif
