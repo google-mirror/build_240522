@@ -1482,6 +1482,7 @@ endif
 
 # Depending on the various images guarantees that the underlying
 # directories are up-to-date.
+
 $(BUILT_TARGET_FILES_PACKAGE): \
 		$(INSTALLED_BOOTIMAGE_TARGET) \
 		$(INSTALLED_RADIOIMAGE_TARGET) \
@@ -1660,6 +1661,12 @@ endif
 	$(hide) (cd $(zip_root) && zip -qX ../$(notdir $@) META/*filesystem_config.txt)
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    ./build/tools/releasetools/add_img_to_target_files -v -p $(HOST_OUT) $@
+ifneq ($(filter dragonboard,$(TARGET_DEVICE)),)
+# Add all vendor partitions to target files zip (IMAGES/vendor) so it will be
+# available in INTERNAL_UPDATE_PACKAGE_TARGET.
+	$(hide) ./build/tools/releasetools/add_vendor_partition_to_target_files -v $@ \
+	    'vendor/bsp/qcom/device/dragonboard/qcom_410c_non-hlos_binaries_A8016BAAAAGLYD2131.1'
+endif
 
 .PHONY: target-files-package
 target-files-package: $(BUILT_TARGET_FILES_PACKAGE)

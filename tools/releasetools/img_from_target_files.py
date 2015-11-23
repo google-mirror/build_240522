@@ -88,6 +88,12 @@ def main(argv):
             continue
           common.ZipWrite(
               output_zip, os.path.join(images_path, image), image)
+        if not bootable_only:
+          # Include any vendor partitions if exists.
+          for partition in os.listdir(os.path.join(images_path, "vendor")):
+            common.ZipWrite(
+                output_zip, os.path.join(images_path, "vendor", partition),
+                os.path.join("vendor", partition))
         done = True
 
     if not done:
