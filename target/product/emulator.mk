@@ -48,7 +48,8 @@ PRODUCT_PACKAGES += \
     power.goldfish \
     fingerprint.ranchu \
     fingerprintd \
-    sensors.ranchu
+    sensors.ranchu \
+    libtwitter
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
