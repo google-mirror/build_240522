@@ -1482,6 +1482,7 @@ endif
 
 # Depending on the various images guarantees that the underlying
 # directories are up-to-date.
+
 $(BUILT_TARGET_FILES_PACKAGE): \
 		$(INSTALLED_BOOTIMAGE_TARGET) \
 		$(INSTALLED_RADIOIMAGE_TARGET) \
@@ -1666,6 +1667,28 @@ target-files-package: $(BUILT_TARGET_FILES_PACKAGE)
 
 ifneq ($(filter $(MAKECMDGOALS),target-files-package),)
 $(call dist-for-goals, target-files-package, $(BUILT_TARGET_FILES_PACKAGE))
+endif
+
+# -----------------------------------------------------------------
+# The vendor partition package
+
+ifdef VENDOR_PARTITIONS
+
+name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  name := $(name)_debug
+endif
+name := $(name)-vendor_partitions-$(FILE_NAME_TAG)
+
+VENDOR_PARTITIONS_TARGET := $(PRODUCT_OUT)/$(name).zip
+
+$(VENDOR_PARTITIONS_TARGET) : $(VENDOR_PARTITIONS)
+	@echo "Package vendor partitions: $@"
+	$(hide) rm -rf $@
+	$(hide) ./build/tools/releasetools/add_files_to_zip $@ $^
+
+$(call dist-for-goals, dist_files, $(VENDOR_PARTITIONS_TARGET))
+
 endif
 
 ifeq ($(build_ota_package),true)
