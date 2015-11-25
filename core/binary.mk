@@ -54,6 +54,7 @@ my_c_includes := $(LOCAL_C_INCLUDES)
 my_generated_sources := $(LOCAL_GENERATED_SOURCES)
 my_native_coverage := $(LOCAL_NATIVE_COVERAGE)
 my_additional_dependencies := $(LOCAL_MODULE_MAKEFILE_DEP) $(LOCAL_ADDITIONAL_DEPENDENCIES)
+my_additional_order_dependencies :=
 my_export_c_include_dirs := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
 
 ifdef LOCAL_IS_HOST_MODULE
@@ -315,6 +316,13 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CFLAGS := $(my_target_globa
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CONLYFLAGS := $(my_target_global_conlyflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CPPFLAGS := $(my_target_global_cppflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_global_ldflags)
+
+ifeq ($(my_clang),true)
+ifneq (,filter($(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH),arm arm64))
+# Make sure when clang is used, arm_neon.h does exist.
+my_additional_order_dependencies += $(TARGET_OUT_HEADERS)/clang/arm_neon.h
+endif
+endif
 
 else # LOCAL_IS_HOST_MODULE
 
@@ -757,7 +765,8 @@ yacc_objects := $(yacc_cpps:$(LOCAL_CPP_EXTENSION)=.o)
 ifneq ($(strip $(y_yacc_cpps)),)
 $(y_yacc_cpps): $(intermediates)/%$(LOCAL_CPP_EXTENSION): \
     $(TOPDIR)$(LOCAL_PATH)/%.y \
-    $(lex_cpps) $(my_additional_dependencies)
+    $(lex_cpps) $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies)
 	$(call transform-y-to-cpp,$(PRIVATE_CPP_EXTENSION))
 $(yacc_headers): $(intermediates)/%.h: $(intermediates)/%$(LOCAL_CPP_EXTENSION)
 endif
@@ -765,7 +774,8 @@ endif
 ifneq ($(strip $(yy_yacc_cpps)),)
 $(yy_yacc_cpps): $(intermediates)/%$(LOCAL_CPP_EXTENSION): \
     $(TOPDIR)$(LOCAL_PATH)/%.yy \
-    $(lex_cpps) $(my_additional_dependencies)
+    $(lex_cpps) $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies)
 	$(call transform-y-to-cpp,$(PRIVATE_CPP_EXTENSION))
 $(yacc_headers): $(intermediates)/%.h: $(intermediates)/%$(LOCAL_CPP_EXTENSION)
 endif
@@ -810,7 +820,8 @@ $(lex_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(lex_objects): $(intermediates)/%.o: \
     $(intermediates)/%$(LOCAL_CPP_EXTENSION) \
     $(my_additional_dependencies) \
-    $(yacc_headers)
+    $(yacc_headers) \
+    | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)cpp-to-o)
 endif
 
@@ -830,14 +841,16 @@ cpp_arm_objects := $(addprefix $(intermediates)/,$(cpp_arm_sources:$(LOCAL_CPP_E
 dotdot_arm_objects :=
 $(foreach s,$(dotdot_arm_sources),\
   $(eval $(call compile-dotdot-cpp-file,$(s),\
-  $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies),\
+  $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies) \
+  | $(my_additional_order_dependencies),\
   dotdot_arm_objects)))
 
 dotdot_sources := $(filter ../%$(LOCAL_CPP_EXTENSION),$(my_src_files))
 dotdot_objects :=
 $(foreach s,$(dotdot_sources),\
   $(eval $(call compile-dotdot-cpp-file,$(s),\
-    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies),\
+    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies),\
     dotdot_objects)))
 
 cpp_normal_sources := $(filter-out ../%,$(filter %$(LOCAL_CPP_EXTENSION),$(my_src_files)))
@@ -854,7 +867,7 @@ ifneq ($(strip $(cpp_objects)),)
 $(cpp_objects): $(intermediates)/%.o: \
     $(TOPDIR)$(LOCAL_PATH)/%$(LOCAL_CPP_EXTENSION) \
     $(yacc_cpps) $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)cpp-to-o)
 -include $(cpp_objects:%.o=%.P)
 endif
@@ -876,7 +889,8 @@ $(gen_cpp_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_cpp_objects): $(intermediates)/%.o: \
     $(intermediates)/%$(LOCAL_CPP_EXTENSION) $(yacc_cpps) \
     $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)cpp-to-o)
 -include $(gen_cpp_objects:%.o=%.P)
 endif
@@ -890,7 +904,8 @@ gen_S_objects := $(gen_S_sources:%.S=%.o)
 
 ifneq ($(strip $(gen_S_sources)),)
 $(gen_S_objects): $(intermediates)/%.o: $(intermediates)/%.S \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o)
 -include $(gen_S_objects:%.o=%.P)
 endif
@@ -900,7 +915,8 @@ gen_s_objects := $(gen_s_sources:%.s=%.o)
 
 ifneq ($(strip $(gen_s_objects)),)
 $(gen_s_objects): $(intermediates)/%.o: $(intermediates)/%.s \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o-no-deps)
 -include $(gen_s_objects:%.o=%.P)
 endif
@@ -927,14 +943,16 @@ c_arm_objects := $(addprefix $(intermediates)/,$(c_arm_sources:.c=.o))
 dotdot_arm_objects :=
 $(foreach s,$(dotdot_arm_sources),\
   $(eval $(call compile-dotdot-c-file,$(s),\
-    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies),\
+    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies),\
     dotdot_arm_objects)))
 
 dotdot_sources := $(filter ../%.c, $(my_src_files))
 dotdot_objects :=
 $(foreach s, $(dotdot_sources),\
   $(eval $(call compile-dotdot-c-file,$(s),\
-    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies),\
+    $(yacc_cpps) $(proto_generated_headers) $(my_additional_dependencies) \
+    | $(my_additional_order_dependencies),\
     dotdot_objects)))
 
 c_normal_sources := $(filter-out ../%,$(filter %.c,$(my_src_files)))
@@ -949,7 +967,7 @@ c_objects        := $(c_arm_objects) $(c_normal_objects)
 
 ifneq ($(strip $(c_objects)),)
 $(c_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.c $(yacc_cpps) $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)c-to-o)
 -include $(c_objects:%.o=%.P)
 endif
@@ -969,7 +987,7 @@ ifneq ($(strip $(gen_c_objects)),)
 $(gen_c_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(gen_c_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_c_objects): $(intermediates)/%.o: $(intermediates)/%.c $(yacc_cpps) $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)c-to-o)
 -include $(gen_c_objects:%.o=%.P)
 endif
@@ -983,7 +1001,7 @@ objc_objects := $(addprefix $(intermediates)/,$(objc_sources:.m=.o))
 
 ifneq ($(strip $(objc_objects)),)
 $(objc_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.m $(yacc_cpps) $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)m-to-o)
 -include $(objc_objects:%.o=%.P)
 endif
@@ -997,7 +1015,7 @@ objcpp_objects := $(addprefix $(intermediates)/,$(objcpp_sources:.mm=.o))
 
 ifneq ($(strip $(objcpp_objects)),)
 $(objcpp_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.mm $(yacc_cpps) $(proto_generated_headers) \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)mm-to-o)
 -include $(objcpp_objects:%.o=%.P)
 endif
@@ -1014,12 +1032,12 @@ asm_objects_S := $(addprefix $(intermediates)/,$(asm_sources_S:.S=.o))
 dotdot_objects_S :=
 $(foreach s,$(dotdot_sources),\
   $(eval $(call compile-dotdot-s-file,$(s),\
-    $(my_additional_dependencies),\
+    $(my_additional_dependencies) | $(my_additional_order_dependencies),\
     dotdot_objects_S)))
 
 ifneq ($(strip $(asm_objects_S)),)
 $(asm_objects_S): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.S \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o)
 -include $(asm_objects_S:%.o=%.P)
 endif
@@ -1032,12 +1050,12 @@ asm_objects_s := $(addprefix $(intermediates)/,$(asm_sources_s:.s=.o))
 dotdot_objects_s :=
 $(foreach s,$(dotdot_sources),\
   $(eval $(call compile-dotdot-s-file-no-deps,$(s),\
-    $(my_additional_dependencies),\
+    $(my_additional_dependencies) | $(my_additional_order_dependencies),\
     dotdot_objects_s)))
 
 ifneq ($(strip $(asm_objects_s)),)
 $(asm_objects_s): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.s \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o-no-deps)
 endif
 
@@ -1049,7 +1067,7 @@ asm_sources_asm := $(filter %.asm,$(my_src_files))
 ifneq ($(strip $(asm_sources_asm)),)
 asm_objects_asm := $(addprefix $(intermediates)/,$(asm_sources_asm:.asm=.o))
 $(asm_objects_asm): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.asm \
-    $(my_additional_dependencies)
+    $(my_additional_dependencies) | $(my_additional_order_dependencies)
 	$(transform-asm-to-o)
 
 asm_objects += $(asm_objects_asm)
