@@ -316,6 +316,13 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CONLYFLAGS := $(my_target_g
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CPPFLAGS := $(my_target_global_cppflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_global_ldflags)
 
+ifeq ($(my_clang),true)
+ifneq (,filter($(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH),arm arm64))
+# Make sure when clang is used, arm_neon.h does exist.
+my_additional_dependencies += $(TARGET_OUT_HEADERS)/clang/arm_neon.h
+endif
+endif
+
 else # LOCAL_IS_HOST_MODULE
 
 ifeq ($(my_clang),true)
