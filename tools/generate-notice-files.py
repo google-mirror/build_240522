@@ -111,6 +111,9 @@ def combine_notice_files_html(file_hash, input_dir, output_filename):
     print >> output_file, HTML_OUTPUT_CSS
     print >> output_file, '</head><body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">'
 
+    print >> output_file, "This version of android contains GPL and LGPL software. For complete source code to those portions required by license, please see source.android.com"
+    print >> output_file, "<br>"
+
     # Output our table of contents
     print >> output_file, '<div class="toc">'
     print >> output_file, "<ul>"
