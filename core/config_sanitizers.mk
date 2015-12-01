@@ -131,6 +131,16 @@ ifneq ($(filter undefined,$(my_sanitize)),)
   endif
 endif
 
+ifneq ($(filter integer,$(my_sanitize)),)
+  # Need to disable ICF for architectures using gold because otherwise the
+  # failure paths might be merged at link time, which severely hinders
+  # debugging.
+  # http://b/25935693
+  ifneq ($(filter arm x86 x86_64,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
+    my_ldflags += -Wl,--icf=none
+  endif
+endif
+
 ifneq ($(strip $(LOCAL_SANITIZE_RECOVER)),)
   recover_arg := $(subst $(space),$(comma),$(LOCAL_SANITIZE_RECOVER)),
   my_cflags += -fsanitize-recover=$(recover_arg)
