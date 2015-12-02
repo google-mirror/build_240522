@@ -102,6 +102,8 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
 			-fstack-protector \
 			-fwrapv \
 			-Wa,--noexecstack \
+			-Wsuggest-attribute=format \
+			-Wno-error=suggest-attribute=format \
 			-Werror=format-security \
 			-D_FORTIFY_SOURCE=2 \
 			-fno-short-enums \
