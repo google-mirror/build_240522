@@ -319,6 +319,16 @@ include build/core/pdk_config.mk
 -include $(TOPDIR)prebuilts/sdk/tools/jack_versions.mk
 -include $(TOPDIR)prebuilts/sdk/tools/jack_for_module.mk
 
+.PHONY: start-jack-server
+start-jack-server: $(JACK)
+	@echo Ensure Jack server is running if it is already installed
+ifneq ($(dist_goal),)
+	mkdir -p "$(DIST_DIR)/logs/jack/"
+	$(hide) JACK_SERVER_VM_ARGUMENTS="$(if $(ANDROID_JACK_VM_ARGS),$(ANDROID_JACK_VM_ARGS),-Dfile.encoding=UTF-8 -XX:+TieredCompilation) -Dcom.android.jack.server.log.file=$(abspath $(DIST_DIR))/logs/jack/jack-server-%u-%g.log" prebuilts/sdk/tools/jack-admin start-server 2>&1 || (exit 0)
+else
+	$(hide) JACK_SERVER_VM_ARGUMENTS="$(if $(ANDROID_JACK_VM_ARGS),$(ANDROID_JACK_VM_ARGS),-Dfile.encoding=UTF-8 -XX:+TieredCompilation)" prebuilts/sdk/tools/jack-admin start-server 2>&1 || (exit 0)
+endif
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
