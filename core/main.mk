@@ -319,6 +319,10 @@ include build/core/pdk_config.mk
 -include $(TOPDIR)prebuilts/sdk/tools/jack_versions.mk
 -include $(TOPDIR)prebuilts/sdk/tools/jack_for_module.mk
 
+start-jack-server:
+	@echo Ensure Jack server is running if it is already installed
+	prebuilts/sdk/tools/jack-admin start-server 2>&1 || (exit 0)
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
