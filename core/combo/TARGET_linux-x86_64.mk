@@ -92,7 +92,7 @@ TARGET_GLOBAL_CFLAGS += \
 			-funswitch-loops \
 			-funwind-tables \
 			-fstack-check \
-			-fstack-protector \
+			-fstack-protector-strong \
 			-m64 \
 			-no-canonical-prefixes \
 			-fno-canonical-system-headers

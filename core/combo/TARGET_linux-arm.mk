@@ -99,7 +99,7 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
 			-ffunction-sections \
 			-fdata-sections \
 			-funwind-tables \
-			-fstack-protector \
+			-fstack-protector-strong \
 			-fwrapv \
 			-Wa,--noexecstack \
 			-Wsuggest-attribute=format \
