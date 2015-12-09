@@ -1948,7 +1948,7 @@ $(hide) mv $1.tmp $1
 endef
 endif
 
-## Rule to creates a table of contents from a .jar file.
+## Rule to create a table of contents from a .jar file.
 ## Must be called with $(eval).
 # $1: A .jar file
 define _transform-jar-to-toc
@@ -1963,6 +1963,32 @@ define define-jar-to-toc-rule
 $(eval $(call _transform-jar-to-toc,$1))\
 $(eval .KATI_RESTAT: $1.toc)
 endef
+
+ifeq (,$(TARGET_BUILD_APPS))
+
+## Rule to create a table of contents from a .dex file.
+## Must be called with $(eval).
+# $1: A .dex file
+define _transform-dex-to-toc
+$1.toc: $1 $(DEXDUMP)
+	@echo Generating TOC: $$@
+	$(hide) $(DEXDUMP) -l xml $$< > $$@.tmp
+	$$(call commit-change-for-toc,$$@)
+endef
+
+## Define a rule which generates .dex.toc and mark it as .KATI_RESTAT.
+define define-dex-to-toc-rule
+$(eval $(call _transform-dex-to-toc,$1))\
+$(eval .KATI_RESTAT: $1.toc)
+endef
+
+else
+
+# Turn off .toc optimization for apps build as we cannot build dexdump.
+define define-dex-to-toc-rule
+endef
+
+endif  # TARGET_BUILD_APPS
 
 
 # Invoke Jack to compile java from source to jack files without shrink or obfuscation.
