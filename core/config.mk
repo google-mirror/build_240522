@@ -453,6 +453,7 @@ AIDL := $(HOST_OUT_EXECUTABLES)/aidl
 AAPT := $(HOST_OUT_EXECUTABLES)/aapt
 ZIPALIGN := $(HOST_OUT_EXECUTABLES)/zipalign
 SIGNAPK_JAR := $(HOST_OUT_JAVA_LIBRARIES)/signapk$(COMMON_JAVA_PACKAGE_SUFFIX)
+SIGNAPK_SHARED_LIBRARIES := $(HOST_OUT_SHARED_LIBRARIES)
 LLVM_RS_CC := $(HOST_OUT_EXECUTABLES)/llvm-rs-cc
 BCC_COMPAT := $(HOST_OUT_EXECUTABLES)/bcc_compat
 
@@ -469,6 +470,11 @@ AIDL := $(prebuilt_sdk_tools_bin)/aidl
 AAPT := $(prebuilt_sdk_tools_bin)/aapt
 ZIPALIGN := $(prebuilt_sdk_tools_bin)/zipalign
 SIGNAPK_JAR := $(prebuilt_sdk_tools)/lib/signapk$(COMMON_JAVA_PACKAGE_SUFFIX)
+ifeq ($(HOST_IS_64_BIT),true)
+SIGNAPK_SHARED_LIBRARIES := $(prebuilt_sdk_tools)/$(HOST_OS)/lib64
+else
+SIGNAPK_SHARED_LIBRARIES := $(prebuilt_sdk_tools)/$(HOST_OS)/lib
+endif
 
 DX := $(prebuilt_sdk_tools)/dx
 MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
