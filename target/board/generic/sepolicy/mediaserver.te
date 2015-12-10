@@ -1,0 +1,1 @@
+allow mediaserver qemu_prop:file rw_file_perms;
