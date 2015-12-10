@@ -209,11 +209,15 @@ ifdef LOCAL_IS_HOST_MODULE
         my_clang := true
     endif
     endif
-# Add option to make clang the default for device build
-else ifeq ($(USE_CLANG_PLATFORM_BUILD),true)
+# Add option to make gcc the default for device build
+else ifeq ($(USE_CLANG_PLATFORM_BUILD),false)
     ifeq ($(my_clang),)
-        my_clang := true
+        my_clang := false
     endif
+endif
+
+ifeq ($(my_clang),)
+  my_clang := true
 endif
 
 my_cpp_std_version := -std=gnu++14
