@@ -123,6 +123,9 @@ include $(BUILD_SYSTEM)/soong.mk
 
 COMBINED_BUILD_NINJA := $(OUT_DIR)/combined$(KATI_NINJA_SUFFIX).ninja
 
+SOONG_EMBEDDED_IN_MAKE := true
+export SOONG_EMBEDDED_IN_MAKE
+
 $(COMBINED_BUILD_NINJA): $(KATI_BUILD_NINJA) $(SOONG_ANDROID_MK)
 	$(hide) echo "builddir = $(OUT_DIR)" > $(COMBINED_BUILD_NINJA)
 	$(hide) echo "subninja $(SOONG_BUILD_NINJA)" >> $(COMBINED_BUILD_NINJA)
