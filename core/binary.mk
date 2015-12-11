@@ -75,7 +75,8 @@ ifdef LOCAL_SDK_VERSION
   my_ndk_source_root := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/sources
   my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/platforms/android-$(LOCAL_SDK_VERSION)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
   my_ndk_sysroot_include := $(my_ndk_sysroot)/usr/include
-  ifeq (x86_64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
+
+  ifeq ($(my_32_64_bit_suffix),64)
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/lib64
   else ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/libr6
