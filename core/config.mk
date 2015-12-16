@@ -627,6 +627,15 @@ endif
 # Set up final options.
 # ###############################################################
 
+ifdef BRILLO
+# Add a C define that identifies Brillo targets. __BRILLO__ should only be used
+# to differentiate between Brillo and non-Brillo-but-Android environments. Use
+# _ANDROID__ instead to test if something is being built in an Android-derived
+# environment (including Brillo) as opposed to an entirely different
+# environment (e.g. Chrome OS).
+COMMON_GLOBAL_CFLAGS += -D__BRILLO__
+endif
+
 HOST_GLOBAL_CFLAGS += $(COMMON_GLOBAL_CFLAGS)
 HOST_RELEASE_CFLAGS += $(COMMON_RELEASE_CFLAGS)
 
