@@ -127,35 +127,10 @@ endef
 # Set common values
 # ###############################################################
 
-# These can be changed to modify both host and device modules.
-COMMON_GLOBAL_CFLAGS:= -DANDROID -fmessage-length=0 -W -Wall -Wno-unused -Winit-self -Wpointer-arith
-COMMON_RELEASE_CFLAGS:= -DNDEBUG -UDEBUG
-
-# Force gcc to always output color diagnostics.  Ninja will strip the ANSI
-# color codes if it is not running in a terminal.
-COMMON_GLOBAL_CFLAGS += -fdiagnostics-color
-
-COMMON_GLOBAL_CPPFLAGS:= -Wsign-promo
-COMMON_RELEASE_CPPFLAGS:=
-
-GLOBAL_CFLAGS_NO_OVERRIDE := \
-    -Werror=int-to-pointer-cast \
-    -Werror=pointer-to-int-cast \
-
-GLOBAL_CLANG_CFLAGS_NO_OVERRIDE := \
-    -Werror=address-of-temporary \
-    -Werror=null-dereference \
-    -Werror=return-type \
-
-GLOBAL_CPPFLAGS_NO_OVERRIDE :=
-
 # Set the extensions used for various packages
 COMMON_PACKAGE_SUFFIX := .zip
 COMMON_JAVA_PACKAGE_SUFFIX := .jar
 COMMON_ANDROID_PACKAGE_SUFFIX := .apk
-
-# list of flags to turn specific warnings in to errors
-TARGET_ERROR_FLAGS := -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point
 
 ifdef TMPDIR
 JAVA_TMPDIR_ARG := -Djava.io.tmpdir=$(TMPDIR)
@@ -185,44 +160,6 @@ include $(BUILD_SYSTEM)/envsetup.mk
 # Pruned directory options used when using findleaves.py
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(OUT_DIR) $(SCAN_EXCLUDE_DIRS) .repo .git)
-
-ifdef BRILLO
-# Add a C define that identifies Brillo targets. __BRILLO__ should only be used
-# to differentiate between Brillo and non-Brillo-but-Android environments. Use
-# __ANDROID__ instead to test if something is being built in an Android-derived
-# environment (including Brillo) as opposed to an entirely different
-# environment (e.g. Chrome OS).
-COMMON_GLOBAL_CFLAGS += -D__BRILLO__
-endif
-
-# ---------------------------------------------------------------
-# We run gcc/clang with PWD=/proc/self/cwd to remove the $TOP
-# from the debug output. That way two builds in two different
-# directories will create the same output.
-# /proc doesn't exist on Darwin.
-ifeq ($(HOST_OS),linux)
-RELATIVE_PWD := PWD=/proc/self/cwd
-# Remove this useless prefix from the debug output.
-COMMON_GLOBAL_CFLAGS += -fdebug-prefix-map=/proc/self/cwd=
-else
-RELATIVE_PWD :=
-endif
-
-# ---------------------------------------------------------------
-# Allow the C/C++ macros __DATE__ and __TIME__ to be set to the
-# build date and time, so that a build may be repeated.
-# Write the date and time to a file so that the command line
-# doesn't change every time, which would cause ninja to rebuild
-# the files.
-$(shell mkdir -p $(OUT_DIR) && \
-    $(DATE) "+%b %_d %Y" > $(OUT_DIR)/build_c_date.txt && \
-    $(DATE) +%T > $(OUT_DIR)/build_c_time.txt)
-BUILD_DATETIME_C_DATE := $$(cat $(OUT_DIR)/build_c_date.txt)
-BUILD_DATETIME_C_TIME := $$(cat $(OUT_DIR)/build_c_time.txt)
-
-ifeq ($(OVERRIDE_C_DATE_TIME),true)
-COMMON_GLOBAL_CFLAGS += -Wno-builtin-macro-redefined -D__DATE__="\"$(BUILD_DATETIME_C_DATE)\"" -D__TIME__=\"$(BUILD_DATETIME_C_TIME)\"
-endif
 
 # The build system exposes several variables for where to find the kernel
 # headers:
@@ -635,6 +572,78 @@ endif
 # ###############################################################
 # Set up final options.
 # ###############################################################
+
+ifneq ($(COMMON_GLOBAL_CFLAGS)$(COMMON_GLOBAL_CPPFLAGS),)
+$(warning !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+$(warning Something has changed COMMON_GLOBAL_CFLAGS or)
+$(warning COMMON_GLOBAL_CPPFLAGS:)
+$(warning )
+$(warning  $(COMMON_GLOBAL_CFLAGS)$(COMMON_GLOBAL_CPPFLAGS))
+$(warning )
+$(warning This will stop working soon.)
+$(warning !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+$(shell sleep 2)
+endif
+
+# These can be changed to modify both host and device modules.
+COMMON_GLOBAL_CFLAGS:= -DANDROID -fmessage-length=0 -W -Wall -Wno-unused -Winit-self -Wpointer-arith $(COMMON_GLOBAL_CFLAGS)
+COMMON_RELEASE_CFLAGS:= -DNDEBUG -UDEBUG
+
+# Force gcc to always output color diagnostics.  Ninja will strip the ANSI
+# color codes if it is not running in a terminal.
+COMMON_GLOBAL_CFLAGS += -fdiagnostics-color
+
+COMMON_GLOBAL_CPPFLAGS:= -Wsign-promo $(COMMON_GLOBAL_CPPFLAGS)
+COMMON_RELEASE_CPPFLAGS:=
+
+GLOBAL_CFLAGS_NO_OVERRIDE := \
+    -Werror=int-to-pointer-cast \
+    -Werror=pointer-to-int-cast \
+
+GLOBAL_CLANG_CFLAGS_NO_OVERRIDE := \
+    -Werror=address-of-temporary \
+    -Werror=null-dereference \
+    -Werror=return-type \
+
+GLOBAL_CPPFLAGS_NO_OVERRIDE :=
+
+# list of flags to turn specific warnings in to errors
+TARGET_ERROR_FLAGS := -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point
+
+ifdef BRILLO
+# Add a C define that identifies Brillo targets. __BRILLO__ should only be used
+# to differentiate between Brillo and non-Brillo-but-Android environments. Use
+# __ANDROID__ instead to test if something is being built in an Android-derived
+# environment (including Brillo) as opposed to an entirely different
+# environment (e.g. Chrome OS).
+COMMON_GLOBAL_CFLAGS += -D__BRILLO__
+endif
+
+# We run gcc/clang with PWD=/proc/self/cwd to remove the $TOP
+# from the debug output. That way two builds in two different
+# directories will create the same output.
+# /proc doesn't exist on Darwin.
+ifeq ($(HOST_OS),linux)
+RELATIVE_PWD := PWD=/proc/self/cwd
+# Remove this useless prefix from the debug output.
+COMMON_GLOBAL_CFLAGS += -fdebug-prefix-map=/proc/self/cwd=
+else
+RELATIVE_PWD :=
+endif
+
+# Allow the C/C++ macros __DATE__ and __TIME__ to be set to the
+# build date and time, so that a build may be repeated.
+# Write the date and time to a file so that the command line
+# doesn't change every time, which would cause ninja to rebuild
+# the files.
+$(shell mkdir -p $(OUT_DIR) && \
+    $(DATE) "+%b %_d %Y" > $(OUT_DIR)/build_c_date.txt && \
+    $(DATE) +%T > $(OUT_DIR)/build_c_time.txt)
+BUILD_DATETIME_C_DATE := $$(cat $(OUT_DIR)/build_c_date.txt)
+BUILD_DATETIME_C_TIME := $$(cat $(OUT_DIR)/build_c_time.txt)
+ifeq ($(OVERRIDE_C_DATE_TIME),true)
+COMMON_GLOBAL_CFLAGS += -Wno-builtin-macro-redefined -D__DATE__="\"$(BUILD_DATETIME_C_DATE)\"" -D__TIME__=\"$(BUILD_DATETIME_C_TIME)\"
+endif
 
 HOST_GLOBAL_CFLAGS += $(COMMON_GLOBAL_CFLAGS)
 HOST_RELEASE_CFLAGS += $(COMMON_RELEASE_CFLAGS)
