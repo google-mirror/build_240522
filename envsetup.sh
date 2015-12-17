@@ -165,23 +165,32 @@ function setpaths()
     export ANDROID_DEV_SCRIPTS=$T/development/scripts:$T/prebuilts/devtools/tools:$T/external/selinux/prebuilts/bin
     export ANDROID_BUILD_PATHS=$(get_build_var ANDROID_BUILD_PATHS):$ANDROID_TOOLCHAIN:$ANDROID_TOOLCHAIN_2ND_ARCH:$ANDROID_DEV_SCRIPTS:
 
-    # If prebuilts/android-emulator/<system>/ exists, prepend it to our PATH
-    # to ensure that the corresponding 'emulator' binaries are used.
     case $(uname -s) in
         Darwin)
             ANDROID_EMULATOR_PREBUILTS=$T/prebuilts/android-emulator/darwin-x86_64
+            ANDROID_GDB_PREBUILTS=$T/prebuilts/gdb/darwin-x86/bin
             ;;
         Linux)
             ANDROID_EMULATOR_PREBUILTS=$T/prebuilts/android-emulator/linux-x86_64
+            ANDROID_GDB_PREBUILTS=$T/prebuilts/gdb/linux-x86/bin
             ;;
         *)
             ANDROID_EMULATOR_PREBUILTS=
+            ANDROID_GDB_PREBUILTS=
             ;;
     esac
+
+    # If prebuilts/android-emulator/<system>/ exists, prepend it to our PATH
+    # to ensure that the corresponding 'emulator' binaries are used.
     if [ -n "$ANDROID_EMULATOR_PREBUILTS" -a -d "$ANDROID_EMULATOR_PREBUILTS" ]; then
         ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS$ANDROID_EMULATOR_PREBUILTS:
         export ANDROID_EMULATOR_PREBUILTS
     fi
+
+    if [ -n "$ANDROID_GDB_PREBUILTS" ]; then
+        ANDROID_BUILD_PATHS=$ANDROID_GDB_PREBUILTS:$ANDROID_BUILD_PATHS
+    fi
+    unset ANDROID_GDB_PREBUILTS
 
     export PATH=$ANDROID_BUILD_PATHS$PATH
     export PYTHONPATH=$T/development/python-packages:$PYTHONPATH
