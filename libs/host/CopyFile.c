@@ -83,6 +83,8 @@ static bool isHiresMtime(const struct stat* pSrcStat)
 static bool isSameFile(const struct stat* pSrcStat, const struct stat* pDstStat)
 {
 #ifndef HAVE_VALID_STAT_ST_INO
+  (void)pSrcStat;
+  (void)pDstStat;
     /* with MSVCRT.DLL, stat always sets st_ino to 0, and there is no simple way to */
 	/* get the equivalent information with Win32 (Cygwin does some weird stuff in   */
 	/* its winsup/cygwin/fhandler_disk_file.cc to emulate this, too complex for us) */
@@ -98,7 +100,7 @@ static void printCopyMsg(const char* src, const char* dst, unsigned int options)
         printf("    '%s' --> '%s'\n", src, dst);
 }
 
-static void printNotNewerMsg(const char* src, const char* dst, unsigned int options)
+static void printNotNewerMsg(const char* /* src */, const char* dst, unsigned int options)
 {
     if ((options & COPY_VERBOSE_MASK) > 1)
         printf("    '%s' is up-to-date\n", dst);
@@ -525,7 +527,7 @@ int copyDirectory(const char* src, const char* dst, const struct stat* pSrcStat,
  *
  * Returns 0 on success.
  */
-static int copyFileRecursive(const char* src, const char* dst, bool isCmdLine, unsigned int options)
+static int copyFileRecursive(const char* src, const char* dst, bool /* isCmdLine */, unsigned int options)
 {
     char* srcExe = NULL;
     char* dstExe = NULL;
