@@ -109,6 +109,8 @@ if sys.hexversion < 0x02070000:
 
 import multiprocessing
 import os
+import struct
+import subprocess
 import tempfile
 import zipfile
 
@@ -1067,6 +1069,177 @@ def WriteVerifyPackage(input_zip, output_zip):
   WriteMetadata(metadata, output_zip)
 
 
+# Ideally we want to call system/update_engine/scripts/brillo_update_payload
+# which in turn calls delta_generator to generate OTA packages for A/B update.
+# It's currently being blocked by some dependent module (b/26113731). Prior to
+# that gets unblocked, we perform similar works as in brillo_update_payload
+# and call delta_generator directly.
+def WriteABOTAPackage(output_zip, is_incremental=False):
+  """Generate OTA package for A/B update."""
+
+  def extract_images(dirname):
+    # Images are already extracted at dirname/IMAGES. Check for sparse images
+    # and convert them to raw images. Pad the images to 4K-aligned.
+    images = []
+    for part in ab_partitions_list:
+      filename = os.path.join(dirname, "IMAGES", part) + ".img"
+      with open(filename, "rb") as f:
+        header_bin = f.read(28)
+        header = struct.unpack("<I4H4I", header_bin)
+        magic = header[0]
+        if magic == 0xED26FF3A: # sparse image magic
+          filename_raw = common.MakeTempFile(prefix="raw-", suffix=".img")
+          cmd = ["simg2img", filename, filename_raw]
+          p1 = common.Run(cmd, stdout=subprocess.PIPE)
+          p1.wait()
+          assert p1.returncode == 0, "simg2img of %s failed" % (part,)
+          filename = filename_raw
+
+      # Pad the file to 4K-aligned if necessary.
+      file_size = os.path.getsize(filename)
+      if file_size % 4096 != 0:
+        print "Rounding up partition %s to multiple of 4 KiB." % (part,)
+        with open(filename, "ab") as f:
+          f.write('\x00' * (4096 - file_size % 4096))
+
+      images.append(filename)
+      print "Extracted %s: %u bytes" % (part, file_size)
+
+    return images
+
+  def do_generate():
+    """Generate payload from input images."""
+
+    print "Extracting images for %s update." % (payload_type,)
+
+    # Target build.
+    new_partitions = extract_images(OPTIONS.input_tmp)
+
+    # Source build.
+    if is_incremental:
+      old_partitions = extract_images(OPTIONS.source_tmp)
+
+    cmd = ["delta_generator",
+           "-out_file=%s" % (payload_file,),
+           "-partition_names=%s" % (":".join(ab_partitions_list),),
+           "-new_partitions=%s" % (":".join(new_partitions),),
+           "-major_version=2"]
+    if is_incremental:
+      cmd.extend(["-old_partitions=%s" % (":".join(old_partitions),),
+                  "-minor_version=2"])
+    print "Generating %s update." % (payload_type,)
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "delta_generator failed"
+
+  def do_hash():
+    """Generate the hashes for payload and metadata."""
+
+    cmd = ["delta_generator",
+           "-in_file=%s" % (payload_file,),
+           "-signature_size=256",
+           "-out_hash_file=%s" % (payload_sig_file,),
+           "-out_metadata_hash_file=%s" % (metadata_sig_file,)]
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "delta_generator failed"
+
+  def do_sign():
+    """Sign the hashes and insert them back to the payload."""
+
+    # A/B updater expects key in RSA format.
+    cmd = ["openssl", "pkcs8",
+           "-in", OPTIONS.package_key + OPTIONS.private_key_suffix,
+           "-inform", "DER", "-nocrypt"]
+    rsa_key = common.MakeTempFile(prefix="key-", suffix=".key")
+    cmd.extend(["-out", rsa_key])
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "openssl pkcs8 failed"
+
+    signed_payload_sig_file = common.MakeTempFile(
+        prefix="signed-sig-", suffix=".bin")
+    signed_metadata_sig_file = common.MakeTempFile(
+        prefix="signed-sig-", suffix=".bin")
+
+    # Sign the payload hash.
+    cmd = ["openssl", "pkeyutl", "-sign",
+           "-inkey", rsa_key,
+           "-pkeyopt", "digest:sha256",
+           "-in", payload_sig_file,
+           "-out", signed_payload_sig_file]
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "openssl sign payload failed"
+
+    # Sign the metadata hash.
+    cmd = ["openssl", "pkeyutl", "-sign",
+           "-inkey", rsa_key,
+           "-pkeyopt", "digest:sha256",
+           "-in", metadata_sig_file,
+           "-out", signed_metadata_sig_file]
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "openssl sign metadata failed"
+
+    # Insert the signatures back into the payload file.
+    cmd = ["delta_generator",
+           "-in_file=%s" % (payload_file,),
+           "-out_file=%s" % (signed_payload_file,),
+           "-signature_size=256",
+           "-signature_file=%s" % (signed_payload_sig_file,),
+           "-metadata_signature_file=%s" % (signed_metadata_sig_file,)]
+    p1 = common.Run(cmd, stdout=subprocess.PIPE)
+    p1.wait()
+    assert p1.returncode == 0, "delta_generator sign failed"
+
+  oem_props = OPTIONS.info_dict.get("oem_fingerprint_properties", None)
+  oem_dict = None
+  if oem_props:
+    if OPTIONS.oem_source is None:
+      raise common.ExternalError("OEM source required for this build")
+    oem_dict = common.LoadDictionaryFromLines(
+        open(OPTIONS.oem_source).readlines())
+
+  metadata = {
+      "post-build": CalculateFingerprint(oem_props, oem_dict,
+                                         OPTIONS.info_dict),
+      "pre-device": GetOemProperty("ro.product.device", oem_props, oem_dict,
+                                   OPTIONS.info_dict),
+      "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
+  }
+
+  if is_incremental:
+    metadata["pre-build"] = CalculateFingerprint(oem_props, oem_dict,
+                                                 OPTIONS.source_info_dict)
+
+  ab_partitions = os.path.join(OPTIONS.input_tmp, "META", "ab_partitions.txt")
+  with open(ab_partitions, "rb") as f:
+    ab_partitions_list = [token.rstrip() for token in f.readlines()]
+  print "List of A/B partitions: %s" % (ab_partitions_list,)
+
+  payload_type = "full" if is_incremental else "delta"
+
+  # Generate payload.
+  payload_file = common.MakeTempFile(prefix="payload-", suffix=".bin")
+  do_generate()
+
+  # Generate hashes of the payload and metadata files.
+  payload_sig_file = common.MakeTempFile(prefix="sig-", suffix=".bin")
+  metadata_sig_file = common.MakeTempFile(prefix="sig-", suffix=".bin")
+  do_hash()
+
+  # Sign the hashes and insert them back into the payload file.
+  signed_payload_file = common.MakeTempFile(
+      prefix="signed-payload-", suffix=".bin")
+  do_sign()
+
+  # Add the signed payload file into the zip.
+  common.ZipWrite(output_zip, signed_payload_file, arcname="payload.bin",
+                  compress_type=zipfile.ZIP_STORED)
+  WriteMetadata(metadata, output_zip)
+
+
 class FileDifference(object):
   def __init__(self, partition, source_zip, target_zip, output_zip):
     self.deferred_patch_list = None
@@ -1740,8 +1913,7 @@ def main(argv):
   # Generate a full OTA.
   elif OPTIONS.incremental_source is None:
     if ab_update:
-      # TODO: Pending for b/25715402.
-      pass
+      WriteABOTAPackage(output_zip, is_incremental=False)
     else:
       WriteFullOTAPackage(input_zip, output_zip)
 
@@ -1758,7 +1930,10 @@ def main(argv):
       print "--- source info ---"
       common.DumpInfoDict(OPTIONS.source_info_dict)
     try:
-      WriteIncrementalOTAPackage(input_zip, source_zip, output_zip)
+      if ab_update:
+        WriteABOTAPackage(output_zip, is_incremental=True)
+      else:
+        WriteIncrementalOTAPackage(input_zip, source_zip, output_zip)
       if OPTIONS.log_diff:
         out_file = open(OPTIONS.log_diff, 'w')
         import target_files_diff
@@ -1772,7 +1947,10 @@ def main(argv):
         raise
       print "--- failed to build incremental; falling back to full ---"
       OPTIONS.incremental_source = None
-      WriteFullOTAPackage(input_zip, output_zip)
+      if ab_update:
+        WriteABOTAPackage(output_zip, is_incremental=False)
+      else:
+        WriteFullOTAPackage(input_zip, output_zip)
 
   common.ZipClose(output_zip)
 
