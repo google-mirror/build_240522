@@ -83,8 +83,7 @@ static bool isHiresMtime(const struct stat* pSrcStat)
  */
 static bool isSameFile(const struct stat* pSrcStat, const struct stat* pDstStat)
 {
-#ifndef HAVE_VALID_STAT_ST_INO
-  /* TODO: suspicious, we hit this case even when compiling for linux: b/26355387 */
+#if defined(__CYGWIN__) || defined(__MINGW32__)
   (void)pSrcStat;
   (void)pDstStat;
     /* with MSVCRT.DLL, stat always sets st_ino to 0, and there is no simple way to */
