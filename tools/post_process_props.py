@@ -29,6 +29,7 @@ PROP_VALUE_MAX = 91
 # function. The prop object has get(name) and put(name,value) methods.
 def mangle_build_prop(prop):
   prop.put("net.tethering.noprovisioning", "true")
+  prop.put("ro.build.selinux", "1")
 
 # Put the modifications that you need to make into the /default.prop into this
 # function. The prop object has get(name) and put(name,value) methods.
