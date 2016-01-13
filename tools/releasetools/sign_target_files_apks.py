@@ -127,14 +127,14 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map):
     sys.exit(1)
 
 
-def SignApk(data, keyname, pw):
+def SignApk(data, keyname, pw, codename_to_api_level_map):
   unsigned = tempfile.NamedTemporaryFile()
   unsigned.write(data)
   unsigned.flush()
 
   signed = tempfile.NamedTemporaryFile()
 
-  common.SignFile(unsigned.name, signed.name, keyname, pw)
+  common.SignFile(unsigned.name, signed.name, keyname, pw, codename_to_api_level_map)
 
   data = signed.read()
   unsigned.close()
@@ -144,7 +144,7 @@ def SignApk(data, keyname, pw):
 
 
 def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
-                       apk_key_map, key_passwords):
+                       apk_key_map, key_passwords, codename_to_api_level_map):
 
   maxsize = max([len(os.path.basename(i.filename))
                  for i in input_tf_zip.infolist()
@@ -200,7 +200,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       key = apk_key_map[name]
       if key not in common.SPECIAL_CERT_STRINGS:
         print "    signing: %-*s (%s)" % (maxsize, name, key)
-        signed_data = SignApk(data, key, key_passwords[key])
+        signed_data = SignApk(data, key, key_passwords[key], codename_to_api_level_map)
         common.ZipWriteStr(output_tf_zip, out_info, signed_data)
       else:
         # an APK we're not supposed to sign.
@@ -440,6 +440,34 @@ def BuildKeyMap(misc_info, key_mapping_options):
       OPTIONS.key_map[s] = d
 
 
+def GetCodenameToApiLevelMap(input_tf_zip):
+  data = input_tf_zip.read("SYSTEM/build.prop")
+  api_level = None
+  codenames = None
+  for line in data.split("\n"):
+    line = line.strip()
+    original_line = line
+    if line and line[0] != '#' and "=" in line:
+      key, value = line.split("=", 1)
+      key = key.strip()
+      if key == "ro.build.version.sdk":
+        api_level = int(value.strip())
+      elif key == "ro.build.version.all_codenames":
+        codenames = value.strip().split(",")
+
+  if api_level is None:
+    raise ValueError("No ro.build.version.sdk in SYSTEM/build.prop")
+  if codenames is None:
+    raise ValueError("No ro.ro.build.version.all_codenames in SYSTEM/build.prop")
+
+  result = dict()
+  for codename in codenames:
+    codename = codename.strip()
+    if len(codename) > 0:
+      result[codename] = api_level
+  return result
+
+
 def main(argv):
 
   key_mapping_options = []
@@ -498,8 +526,10 @@ def main(argv):
   CheckAllApksSigned(input_zip, apk_key_map)
 
   key_passwords = common.GetKeyPasswords(set(apk_key_map.values()))
+  codename_to_api_level_map = GetCodenameToApiLevelMap(input_zip)
   ProcessTargetFiles(input_zip, output_zip, misc_info,
-                     apk_key_map, key_passwords)
+                     apk_key_map, key_passwords,
+                     codename_to_api_level_map)
 
   common.ZipClose(input_zip)
   common.ZipClose(output_zip)
