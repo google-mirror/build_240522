@@ -588,6 +588,9 @@ class BlockImageDiff(object):
           # that will use this stash and replace the command with "new".
           use_cmd = stashes[idx][2]
           replaced_cmds.append(use_cmd)
+          # Add up blocks that violates space limit and print total number to
+          # screen later.
+          new_blocks += sr.size()
           print("%10d  %9s  %s" % (sr.size(), "explicit", use_cmd))
         else:
           stashed_blocks += sr.size()
@@ -603,6 +606,7 @@ class BlockImageDiff(object):
         if xf.src_ranges.overlaps(xf.tgt_ranges):
           if stashed_blocks + xf.src_ranges.size() > max_allowed:
             replaced_cmds.append(xf)
+            new_blocks += sr.size()
             print("%10d  %9s  %s" % (xf.src_ranges.size(), "implicit", xf))
 
       # Replace the commands in replaced_cmds with "new"s.
@@ -613,7 +617,6 @@ class BlockImageDiff(object):
           def_cmd = stashes[idx][1]
           assert (idx, sr) in def_cmd.stash_before
           def_cmd.stash_before.remove((idx, sr))
-          new_blocks += sr.size()
 
         cmd.ConvertToNew()
 
