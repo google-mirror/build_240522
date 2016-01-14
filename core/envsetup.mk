@@ -196,6 +196,12 @@ OUT_DIR := $(OUT_DIR_COMMON_BASE)/$(notdir $(PWD))
 endif
 endif
 
+ifeq ($(filter /%,$(OUT_DIR)),)
+OUT_DIR_ABS_PREFIX := $(PWD)/
+else
+OUT_DIR_ABS_PREFIX :=
+endif
+
 DEBUG_OUT_DIR := $(OUT_DIR)/debug
 
 # Move the host or target under the debug/ directory
