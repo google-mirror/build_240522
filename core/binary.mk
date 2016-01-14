@@ -267,7 +267,22 @@ endif
 ifneq ($(strip $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER)),)
   my_linker := $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER)
 else
-  my_linker := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_LINKER)
+  my_linker := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LINKER)
+  # Setting ANDROID_DEVICE_BINARIES_ON_HOST produces device binaries that
+  # will run on the host if HOST_ARCH == TARGET_ARCH by setting the linker
+  # to an absolute path to $(PRODUCT_OUT)/system/bin/linker[64] and -rpath
+  # to an absolute path to $(PRODUCT_OUT)/system/lib[64]
+  ifeq ($(my_prefix)$(ANDROID_DEVICE_BINARIES_ON_HOST),TARGET_true)
+    ifneq ($(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH),$(HOST_ARCH))
+      ifneq ($(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH),$(HOST_2ND_ARCH))
+        $(error Cannot use ANDROID_DEVICE_BINARIES_ON_HOST when HOST_ARCH != TARGET_ARCH)
+      endif
+    endif
+    my_linker := $(OUT_DIR_ABS_PREFIX)$(PRODUCT_OUT)$(my_linker)
+    my_ldflags += -Wl,-rpath,$(OUT_DIR_ABS_PREFIX)$($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_SHARED_LIBRARIES)
+    # The bionic dynamic linker needs DT_RUNPATH, not DT_RPATH
+    my_ldflags += -Wl,--enable-new-dtags
+  endif
 endif
 
 include $(BUILD_SYSTEM)/config_sanitizers.mk
