@@ -1258,6 +1258,15 @@ ifeq ($(my_fdo_build), true)
   my_cflags := $(filter-out $(fdo_incompatible_flags),$(my_cflags))
 endif
 
+ifndef LOCAL_IS_HOST_MODULE
+  # There are a lot of apps that expect libgcc symbols to be exported from
+  # libc.so, so we can't enable this for libc. Either way, libc is actually
+  # dealt with by a version script to hide everything that ought to be hidden.
+  ifneq ($(LOCAL_MODULE),libc)
+    my_ldflags += -Wl,--exclude-libs,libgcc.a
+  endif
+endif
+
 # No one should ever use this flag. On GCC it's mere presence will disable all
 # warnings, even those that are specified after it (contrary to typical warning
 # flag behavior). This circumvents CFLAGS_NO_OVERRIDE from forcibly enabling the
