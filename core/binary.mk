@@ -1014,9 +1014,11 @@ dotdot_objects_S :=
 $(foreach s,$(dotdot_sources),\
   $(eval $(call compile-dotdot-s-file,$(s),\
     $(my_additional_dependencies),\
-    dotdot_objects_S)))
+    dotdot_objects_S,\
+    $(normal_objects_cflags))))
 
 ifneq ($(strip $(asm_objects_S)),)
+$(asm_objects_S): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(asm_objects_S): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.S \
     $(my_additional_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o)
@@ -1032,9 +1034,11 @@ dotdot_objects_s :=
 $(foreach s,$(dotdot_sources),\
   $(eval $(call compile-dotdot-s-file-no-deps,$(s),\
     $(my_additional_dependencies),\
-    dotdot_objects_s)))
+    dotdot_objects_s,\
+    $(normal_objects_cflags))))
 
 ifneq ($(strip $(asm_objects_s)),)
+$(asm_objects_s): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(asm_objects_s): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.s \
     $(my_additional_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o-no-deps)

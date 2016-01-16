@@ -1304,8 +1304,10 @@ endef
 # $(1): the .S source file in LOCAL_SRC_FILES.
 # $(2): the additional dependencies.
 # $(3): the variable name to collect the output object file.
+# $(4): the arm cflags to set in PRIVATE_ARM_CFLAGS.
 define compile-dotdot-s-file
 o := $(intermediates)/$(patsubst %.S,%.o,$(subst ../,$(DOTDOT_REPLACEMENT),$(1)))
+$$(o) : PRIVATE_ARM_CFLAGS := $(4)
 $$(o) : $(TOPDIR)$(LOCAL_PATH)/$(1) $(2)
 	$$(transform-$$(PRIVATE_HOST)s-to-o)
 -include $$(o:%.o=%.P)
@@ -1317,8 +1319,10 @@ endef
 # $(1): the .s source file in LOCAL_SRC_FILES.
 # $(2): the additional dependencies.
 # $(3): the variable name to collect the output object file.
+# $(4): the arm cflags to set in PRIVATE_ARM_CFLAGS.
 define compile-dotdot-s-file-no-deps
 o := $(intermediates)/$(patsubst %.s,%.o,$(subst ../,$(DOTDOT_REPLACEMENT),$(1)))
+$$(o) : PRIVATE_ARM_CFLAGS := $(4)
 $$(o) : $(TOPDIR)$(LOCAL_PATH)/$(1) $(2)
 	$$(transform-$$(PRIVATE_HOST)s-to-o-no-deps)
 $(3) += $$(o)
