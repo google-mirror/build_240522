@@ -888,6 +888,7 @@ gen_S_sources := $(filter %.S,$(my_generated_sources))
 gen_S_objects := $(gen_S_sources:%.S=%.o)
 
 ifneq ($(strip $(gen_S_sources)),)
+$(gen_S_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_S_objects): $(intermediates)/%.o: $(intermediates)/%.S \
     $(my_additional_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o)
@@ -898,6 +899,7 @@ gen_s_sources := $(filter %.s,$(my_generated_sources))
 gen_s_objects := $(gen_s_sources:%.s=%.o)
 
 ifneq ($(strip $(gen_s_objects)),)
+$(gen_s_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_s_objects): $(intermediates)/%.o: $(intermediates)/%.s \
     $(my_additional_dependencies)
 	$(transform-$(PRIVATE_HOST)s-to-o-no-deps)
@@ -1041,6 +1043,7 @@ $(asm_objects_s): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.s \
 endif
 
 asm_objects := $(dotdot_objects_S) $(dotdot_objects_s) $(asm_objects_S) $(asm_objects_s)
+$(asm_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 
 
 # .asm for x86/x86_64 needs to be compiled with yasm.
