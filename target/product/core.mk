@@ -53,6 +53,7 @@ PRODUCT_PACKAGES += \
     VpnDialogs \
     MmsService \
     chromium \
-    Updater
+    Updater \
+    F-Droid
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_base.mk)
