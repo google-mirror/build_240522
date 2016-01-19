@@ -749,7 +749,7 @@ $(aidl_gen_cpp) : PRIVATE_AIDL_FLAGS := $(addprefix -I,$(LOCAL_AIDL_INCLUDES))
 # Thus we'll actually generate source for each architecture.
 $(foreach s,$(aidl_src),\
     $(eval $(call define-cpp-aidl-compilation-rule,$(s),$(aidl_gen_cpp_root),$(LOCAL_CPP_EXTENSION))))
--include $(addsuffix .P,$(basename $(aidl_gen_cpp)))
+-include $(addsuffix .gen.P,$(basename $(aidl_gen_cpp)))
 
 # Add generated headers to include paths.
 my_c_includes += $(aidl_gen_include_root)
