@@ -978,6 +978,13 @@ endef
 ## Commands for running aidl
 ###########################################################
 
+## Calculate the path to a generated .cpp file from a .aidl file
+# $(1): a list of .aidl source files
+# $(2): a directory to place the generated .cpp files in
+define aidl-definition-to-cpp
+$(patsubst %.aidl,%$(LOCAL_CPP_EXTENSION),$(subst ../,dotdot/,$(addprefix $(2)/,$(1))))
+endef
+
 define transform-aidl-to-java
 @mkdir -p $(dir $@)
 @echo "Aidl: $(PRIVATE_MODULE) <= $<"
@@ -993,6 +1000,14 @@ $(hide) $(AIDL_CPP) -d$(basename $@).P $(PRIVATE_AIDL_FLAGS) \
     $< $(PRIVATE_HEADER_OUTPUT_DIR) $@
 endef
 
+## Given a .aidl file path generate the rule to compile it a .cpp file.
+# $(1): a .aidl source file
+# $(2): a directory to place the generated .cpp files in
+# You must call this with $(eval).
+define define-cpp-aidl-compilation-rule
+$(call aidl-definition-to-cpp,$(1),$(2)) : $$(LOCAL_PATH)/$(1) $$(AIDL_CPP)
+	$$(transform-aidl-to-cpp)
+endef
 
 ###########################################################
 ## Commands for running java-event-log-tags.py
