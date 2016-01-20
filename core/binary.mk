@@ -749,7 +749,12 @@ $(aidl_gen_cpp) : PRIVATE_AIDL_FLAGS := $(addprefix -I,$(LOCAL_AIDL_INCLUDES))
 # Define rules for both architectures.
 $(aidl_gen_cpp) : $(aidl_gen_cpp_root)/%$(LOCAL_CPP_EXTENSION) : $(LOCAL_PATH)/%.aidl $(AIDL_CPP)
 	$(transform-aidl-to-cpp)
+ifeq ($(BUILDING_WITH_NINJA),true)
+$(foreach cpp, $(aidl_gen_cpp), \
+  $(eval $(cpp) : .KATI_DEPFILE := $(addsuffix .P,$(basename $(cpp)))))
+else
 -include $(addsuffix .P,$(basename $(aidl_gen_cpp)))
+endif
 
 # Add generated headers to include paths.
 my_c_includes += $(aidl_gen_include_root)
