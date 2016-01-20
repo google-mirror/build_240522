@@ -571,6 +571,7 @@ endif
 # Set up final options.
 # ###############################################################
 
+ifeq ($(ALLOW_DEVICE_CHANGES_COMMON_FLAGS),)
 ifneq ($(COMMON_GLOBAL_CFLAGS)$(COMMON_GLOBAL_CPPFLAGS),)
 $(warning COMMON_GLOBAL_C(PP)FLAGS changed)
 $(info *** Device configurations are no longer allowed to change the global flags.)
@@ -578,10 +579,11 @@ $(info *** COMMON_GLOBAL_CFLAGS: $(COMMON_GLOBAL_CFLAGS))
 $(info *** COMMON_GLOBAL_CPPFLAGS: $(COMMON_GLOBAL_CPPFLAGS))
 $(error bailing...)
 endif
+endif
 
 # These can be changed to modify both host and device modules.
-COMMON_GLOBAL_CFLAGS:= -DANDROID -fmessage-length=0 -W -Wall -Wno-unused -Winit-self -Wpointer-arith
-COMMON_RELEASE_CFLAGS:= -DNDEBUG -UDEBUG
+COMMON_GLOBAL_CFLAGS+= -DANDROID -fmessage-length=0 -W -Wall -Wno-unused -Winit-self -Wpointer-arith
+COMMON_RELEASE_CFLAGS+= -DNDEBUG -UDEBUG
 
 # Force gcc to always output color diagnostics.  Ninja will strip the ANSI
 # color codes if it is not running in a terminal.
