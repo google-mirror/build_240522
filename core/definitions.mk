@@ -890,6 +890,38 @@ $(call transform-d-to-p-args,$(@:%.o=%.d),$(@:%.o=%.P))
 endef
 
 ###########################################################
+## Track source files compiled to objects
+###########################################################
+# $(1): list of sources
+# $(2): list of matching objects
+define track-src-file-obj
+$(if $(strip $(1)),\
+  $(eval my_tracked_src_files += $(word 1,$(1)))\
+  $(eval my_src_file_obj_$(word 1,$(1)) := $(word 1,$(2)))\
+  $(call track-src-file-obj,\
+    $(wordlist 2,$(words $(1)),$(1)),\
+    $(wordlist 2,$(words $(2)),$(2))))
+endef
+
+# $(1): list of sources
+# $(2): list of matching generated sources
+define track-src-file-gen
+$(if $(strip $(1)),\
+  $(eval my_tracked_gen_files += $(word 1,$(2)))\
+  $(eval my_src_file_gen_$(word 1,$(2)) := $(word 1,$(1)))\
+  $(call track-src-file-gen,\
+    $(wordlist 2,$(words $(1)),$(1)),\
+    $(wordlist 2,$(words $(2)),$(2))))
+endef
+
+# $(1): list of generated sources
+# $(2): list of matching objects
+define track-gen-file-obj
+$(call track-src-file-obj,$(foreach f,$(1),\
+  $(or $(my_src_file_gen_$(f)),$(f))),$(2))
+endef
+
+###########################################################
 ## Commands for running lex
 ###########################################################
 
