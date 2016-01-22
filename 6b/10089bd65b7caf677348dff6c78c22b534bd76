@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 22 Jan 2016 01:28:31 +0000
+Reviewed-on: https://android-review.googlesource.com/197688
+Project: platform/build
+Branch: refs/heads/master
