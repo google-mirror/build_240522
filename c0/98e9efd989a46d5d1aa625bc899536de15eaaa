@@ -1,0 +1,9 @@
+Verified+1: Tao Bao <tbao@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Presubmit-Verified-1: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Code-Review+1: Alex Deymo <deymo@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 22 Jan 2016 17:23:30 +0000
+Reviewed-on: https://android-review.googlesource.com/195052
+Project: platform/build
+Branch: refs/heads/master
