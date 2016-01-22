@@ -409,6 +409,7 @@ systemimage:
 all_event_log_tags_file := $(TARGET_OUT_COMMON_INTERMEDIATES)/all-event-log-tags.txt
 
 event_log_tags_file := $(TARGET_OUT)/etc/event-log-tags
+built_event_log_tags_file := $(TARGET_OUT_COMMON_INTERMEDIATES)/event-log-tags
 
 # Include tags from all packages that we know about
 all_event_log_tags_src := \
@@ -433,16 +434,28 @@ event_log_tags_src := \
       $(ALL_MODULES.$(m).EVENT_LOG_TAGS)) \
       $(filter-out vendor/% device/% out/%,$(all_event_log_tags_src)))
 
-$(event_log_tags_file): PRIVATE_SRC_FILES := $(event_log_tags_src) $(pdk_fusion_log_tags_file)
-$(event_log_tags_file): PRIVATE_MERGED_FILE := $(all_event_log_tags_file)
-$(event_log_tags_file): $(event_log_tags_src) $(all_event_log_tags_file) $(pdk_fusion_log_tags_file)
+$(built_event_log_tags_file): PRIVATE_SRC_FILES := $(event_log_tags_src) $(pdk_fusion_log_tags_file)
+$(built_event_log_tags_file): PRIVATE_MERGED_FILE := $(all_event_log_tags_file)
+$(built_event_log_tags_file): $(event_log_tags_src) $(all_event_log_tags_file) $(pdk_fusion_log_tags_file)
 	$(hide) mkdir -p $(dir $@)
 	$(hide) build/tools/merge-event-log-tags.py -o $@ -m $(PRIVATE_MERGED_FILE) $(PRIVATE_SRC_FILES)
+
+$(event_log_tags_file) : $(built_event_log_tags_file) | $(ACP)
+	$(copy-file-to-target)
 
 event-log-tags: $(event_log_tags_file)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(event_log_tags_file)
 
+# Generate a global logtag header file.
+global_logtag_header := $(TARGET_OUT_HEADERS)/log/event-log-tags.h
+$(global_logtag_header) : $(built_event_log_tags_file) build/tools/generate-event-log-header.py
+	@echo "Generate logtag header ($@)"
+	@mkdir -p $(dir $@)
+	build/tools/generate-event-log-header.py $< $@
+
+# Make sure global_logtag_header is generated before compiling any source files.
+all_copied_headers : $(global_logtag_header)
 
 # #################################################################
 # Targets for boot/OS images
