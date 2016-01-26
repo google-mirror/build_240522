@@ -1,47 +1,4 @@
 # This file defines the rule to fuse the platform.zip into the current PDK build.
-
-.PHONY: pdk fusion
-pdk fusion: $(DEFAULT_GOAL)
-
-# What to build:
-# pdk fusion if:
-# 1) PDK_FUSION_PLATFORM_ZIP is passed in from the environment
-# or
-# 2) the platform.zip exists in the default location
-# or
-# 3) fusion is a command line build goal,
-#    PDK_FUSION_PLATFORM_ZIP is needed anyway, then do we need the 'fusion' goal?
-# otherwise pdk only if:
-# 1) pdk is a command line build goal
-# or
-# 2) TARGET_BUILD_PDK is passed in from the environment
-
-# if PDK_FUSION_PLATFORM_ZIP is specified, do not override.
-ifndef PDK_FUSION_PLATFORM_ZIP
-# Most PDK project paths should be using vendor/pdk/TARGET_DEVICE
-# but some legacy ones (e.g. mini_armv7a_neon generic PDK) were setup
-# with vendor/pdk/TARGET_PRODUCT.
-_pdk_fusion_default_platform_zip = $(strip \
-  $(wildcard vendor/pdk/$(TARGET_DEVICE)/$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)/platform/platform.zip) \
-  $(wildcard vendor/pdk/$(TARGET_DEVICE)/$(patsubst aosp_%,full_%,$(TARGET_PRODUCT))-$(TARGET_BUILD_VARIANT)/platform/platform.zip) \
-  $(wildcard vendor/pdk/$(TARGET_PRODUCT)/$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)/platform/platform.zip) \
-  $(wildcard vendor/pdk/$(TARGET_PRODUCT)/$(patsubst aosp_%,full_%,$(TARGET_PRODUCT))-$(TARGET_BUILD_VARIANT)/platform/platform.zip))
-ifneq (,$(_pdk_fusion_default_platform_zip))
-PDK_FUSION_PLATFORM_ZIP := $(word 1, $(_pdk_fusion_default_platform_zip))
-TARGET_BUILD_PDK := true
-$(info $(PDK_FUSION_PLATFORM_ZIP) found, do a PDK fusion build.)
-endif # _pdk_fusion_default_platform_zip
-endif # !PDK_FUSION_PLATFORM_ZIP
-
-ifneq (,$(filter pdk fusion, $(MAKECMDGOALS)))
-TARGET_BUILD_PDK := true
-ifneq (,$(filter fusion, $(MAKECMDGOALS)))
-ifndef PDK_FUSION_PLATFORM_ZIP
-  $(error Specify PDK_FUSION_PLATFORM_ZIP to do a PDK fusion.)
-endif
-endif  # fusion
-endif  # pdk or fusion
-
 PDK_PLATFORM_JAVA_ZIP_JAVA_TARGET_LIB_DIR :=
 PDK_PLATFORM_JAVA_ZIP_JAVA_HOST_LIB_DIR := \
 	host/common/obj/JAVA_LIBRARIES/bouncycastle-host_intermediates
@@ -80,6 +37,14 @@ PDK_PLATFORM_JAVA_ZIP_JAVA_LIB_DIR := \
 
 PDK_PLATFORM_JAVA_ZIP_CONTENTS += $(foreach lib_dir,$(PDK_PLATFORM_JAVA_ZIP_JAVA_LIB_DIR),\
     $(lib_dir)/classes.jack $(lib_dir)/classes.jar $(lib_dir)/javalib.jar)
+
+# -----------------------------------------------------------------
+# Variable to check java support level inside PDK build.
+# Not necessary if the components is not in PDK.
+# not defined : not supported
+# "sdk" : sdk API only
+# "platform" : platform API supproted
+TARGET_BUILD_JAVA_SUPPORT_LEVEL := platform
 
 # check and override java support level
 ifneq ($(TARGET_BUILD_PDK)$(PDK_FUSION_PLATFORM_ZIP),)
