@@ -34,7 +34,11 @@ ifndef skip_build_from_source
 
 # Put the built targets of all shared libraries in a common directory
 # to simplify the link line.
+ifdef LOCAL_SDK_VERSION
+OVERRIDE_BUILT_MODULE_PATH := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_NDK_LIBRARIES)
+else
 OVERRIDE_BUILT_MODULE_PATH := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_LIBRARIES)
+endif
 
 include $(BUILD_SYSTEM)/dynamic_binary.mk
 
@@ -58,8 +62,8 @@ ifdef LOCAL_SDK_VERSION
 # so we don't have race condition when the system libraries (such as libc, libstdc++) are also built in the tree.
 my_target_global_ld_dirs := \
     $(addprefix -L, $(patsubst %/,%,$(dir $(my_ndk_stl_shared_lib_fullpath))) \
-    $(my_ndk_sysroot_lib)) \
-    $(my_target_global_ld_dirs)
+    $(my_ndk_sysroot_lib) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_NDK_LIBRARIES))
 my_target_global_ldflags := $(my_ndk_stl_shared_lib) $(my_target_global_ldflags)
 my_target_crtbegin_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_so.o)
 my_target_crtend_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtend_so.o)

@@ -55,8 +55,8 @@ ifdef LOCAL_SDK_VERSION
 # so we don't have race condition when the system libraries (such as libc, libstdc++) are also built in the tree.
 my_target_global_ld_dirs := \
     $(addprefix -L, $(patsubst %/,%,$(dir $(my_ndk_stl_shared_lib_fullpath))) \
-    $(my_ndk_sysroot_lib)) \
-    $(my_target_global_ld_dirs)
+    $(my_ndk_sysroot_lib) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_NDK_LIBRARIES))
 my_target_global_ldflags := $(my_ndk_stl_shared_lib) $(my_target_global_ldflags)
 my_target_crtbegin_dynamic_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_dynamic.o)
 my_target_crtbegin_static_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_static.o)
@@ -69,7 +69,11 @@ $(linked_module): PRIVATE_TARGET_LIBATOMIC := $(my_target_libatomic)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_DYNAMIC_O := $(my_target_crtbegin_dynamic_o)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_STATIC_O := $(my_target_crtbegin_static_o)
 $(linked_module): PRIVATE_TARGET_CRTEND_O := $(my_target_crtend_o)
+ifdef LOCAL_SDK_VERSION
+$(linked_module): PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_NDK_LIBRARIES)
+else
 $(linked_module): PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_LIBRARIES)
+endif
 
 ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
 $(linked_module): PRIVATE_POST_LINK_CMD := $(LOCAL_POST_LINK_CMD)
