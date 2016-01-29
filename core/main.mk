@@ -144,7 +144,7 @@ include $(BUILD_SYSTEM)/cleanbuild.mk
 # Include the google-specific config
 -include vendor/google/build/config.mk
 
-VERSION_CHECK_SEQUENCE_NUMBER := 6
+VERSION_CHECK_SEQUENCE_NUMBER := 7
 -include $(OUT_DIR)/versions_checked.mk
 ifneq ($(VERSION_CHECK_SEQUENCE_NUMBER),$(VERSIONS_CHECKED))
 
@@ -176,6 +176,9 @@ $(warning any spaces.)
 $(warning ************************************************************)
 $(error Directory names containing spaces not supported)
 endif
+
+# Skip the Java checking if the build doesn't actually require it.
+ifneq ($(SKIP_JAVA_CHECK),true)
 
 java_version_str := $(shell unset _JAVA_OPTIONS && java -version 2>&1)
 javac_version_str := $(shell unset _JAVA_OPTIONS && javac -version 2>&1)
@@ -256,6 +259,7 @@ $(info ************************************************************)
 $(error stop)
 endif
 
+endif # SKIP_JAVA_CHECK
 
 ifndef BUILD_EMULATOR
   # Emulator binaries are now provided under prebuilts/android-emulator/
@@ -266,7 +270,7 @@ $(shell echo 'VERSIONS_CHECKED := $(VERSION_CHECK_SEQUENCE_NUMBER)' \
         > $(OUT_DIR)/versions_checked.mk)
 $(shell echo 'BUILD_EMULATOR ?= $(BUILD_EMULATOR)' \
         >> $(OUT_DIR)/versions_checked.mk)
-endif
+endif # ifneq ($(VERSION_CHECK_SEQUENCE_NUMBER),$(VERSIONS_CHECKED))
 
 # These are the modifier targets that don't do anything themselves, but
 # change the behavior of the build.
