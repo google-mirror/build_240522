@@ -1334,6 +1334,18 @@ my_cflags := $(filter-out $(my_illegal_flags),$(my_cflags))
 my_cppflags := $(filter-out $(my_illegal_flags),$(my_cppflags))
 my_conlyflags := $(filter-out $(my_illegal_flags),$(my_conlyflags))
 
+my_werror := -Werror -Wno-missing-field-initializers
+my_top_dir := $(firstword $(subst /, ,$(LOCAL_PATH)))
+ifeq ($(my_top_dir),vendor)
+    my_werror :=
+else ifeq ($(my_top_dir),device)
+    my_werror :=
+else ifeq ($(my_top_dir),external)
+    my_werror :=
+endif
+
+my_cflags_no_override += $(my_werror)
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
