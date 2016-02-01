@@ -1942,6 +1942,40 @@ define transform-java-to-classes.jar
 $(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 endef
 
+#
+# Helpers to support legacy EMMA filtering with Jack
+#
+
+# Splits an EMMA filter string ("+foo.*,-bar.*" -> "+foo.* -bar.*")
+#
+# $(1): a comma-separated EMMA list
+define split-emma-filter-list
+$(strip $(subst $(comma),$(space),$(1)))
+endef
+
+# Joins a list of filter strings (separated by a space) to a list separated by a comma.
+#
+# $(1): a whitespace-separated list
+define transform-to-jack-filter-list
+$(subst $(space),$(comma),$(1))
+endef
+
+# Extracts an included classes list from an EMMA list (+a,-b,c -> a,c)
+#
+# $(1): a comma-separated EMMA list
+define extract-jack-includes-list-from-emma-list
+$(eval list_ := $(call split-emma-filter-list,$(subst +,$(empty),$(1))))
+$(call transform-to-jack-filter-list,$(filter-out -%,$(list_)))
+endef
+
+# # Extracts an excluded classes list from an EMMA list (+a,-b,c -> b)
+#
+# $(1): a comma-separated EMMA list
+define extract-jack-excludes-list-from-emma-list
+$(eval list_ := $(call split-emma-filter-list,$(1)))
+$(call transform-to-jack-filter-list,$(patsubst -%,%,$(filter -%,$(list_))))
+endef
+
 # Invoke Jack to compile java from source to dex and jack files.
 #
 # Some historical notes:

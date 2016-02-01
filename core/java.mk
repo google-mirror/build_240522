@@ -672,10 +672,20 @@ else #LOCAL_IS_STATIC_JAVA_LIBRARY
 $(built_dex_intermediate): PRIVATE_CLASSES_JACK := $(full_classes_jack)
 
 ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
+ifdef LOCAL_EMMA_COVERAGE_FILTER
+jack_jacoco_includes := $(call extract-jack-includes-list-from-emma-list,$(LOCAL_EMMA_COVERAGE_FILTER))
+jack_jacoco_excludes := $(call extract-jack-excludes-list-from-emma-list,$(LOCAL_EMMA_COVERAGE_FILTER))
+else
+# Default is to include everything (empty include filter) and exclude Jacoco and Emma classes.
+jack_jacoco_includes :=
+jack_jacoco_excludes := org.jacoco.*,com.vladium.emma.*
+endif
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS := \
     -D jack.coverage="true" \
     -D jack.coverage.metadata.file=$(intermediates.COMMON)/coverage.em \
-    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME)
+    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME) \
+    $(if $(jack_jacoco_includes),-D jack.coverage.jacoco.include=$(jack_jacoco_includes)) \
+    $(if $(jack_jacoco_excludes),-D jack.coverage.jacoco.exclude=$(jack_jacoco_excludes))
 else
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS :=
 endif
