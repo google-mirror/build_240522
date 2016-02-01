@@ -1906,6 +1906,25 @@ define transform-java-to-classes.jar
 $(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 endef
 
+# Transforms the EMMA-based string to a string ready to be
+define from-emma-filter-list
+$(subst +,$(empty),$(subst $(comma),$(space),$(1)))
+endef
+
+define to-jack-filter-list
+$(subst $(space),$(comma),$(1))
+endef
+
+# Extracts only included classes (by removing excludes from the list).
+define emma-to-jack-include
+$(call to-jack-filter-list,$(filter-out -%,$(call from-emma-filter-list,$(1))))
+endef
+
+# Extracts only excluded classes.
+define emma-to-jack-exclude
+$(call to-jack-filter-list,$(patsubst -%,%,$(filter -%,$(call from-emma-filter-list,$(1)))))
+endef
+
 # Invoke Jack to compile java from source to dex and jack files.
 #
 # Some historical notes:
