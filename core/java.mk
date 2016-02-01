@@ -629,10 +629,23 @@ else #LOCAL_IS_STATIC_JAVA_LIBRARY
 $(built_dex_intermediate): PRIVATE_CLASSES_JACK := $(full_classes_jack)
 
 ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
+ifdef LOCAL_EMMA_COVERAGE_FILTER
+# Transform emma filters to jack filters only if LOCAL_JACK_FLAGS does not already contain ones.
+ifeq (,$(findstring jack.coverage.jacoco.include,$(LOCAL_JACK_FLAGS)))
+ifeq (,$(findstring jack.coverage.jacoco.exclude,$(LOCAL_JACK_FLAGS)))
+jack_jacoco_includes := $(call extract-jack-includes-list-from-emma-list,$(LOCAL_EMMA_COVERAGE_FILTER))
+jack_jacoco_excludes := $(call extract-jack-excludes-list-from-emma-list,$(LOCAL_EMMA_COVERAGE_FILTER))
+$(warning LOCAL_EMMA_INSTRUMENT is being deprecated: please use LOCAL_JACK_FLAGS to set coverage filters.)
+endif
+endif
+endif # LOCAL_EMMA_COVERAGE_FILTER
+
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS := \
-    -D jack.coverage="true" \
+    -D jack.coverage=true \
     -D jack.coverage.metadata.file=$(intermediates.COMMON)/coverage.em \
-    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME)
+    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME) \
+    $(if $(jack_jacoco_includes),-D jack.coverage.jacoco.include=$(jack_jacoco_includes)) \
+    $(if $(jack_jacoco_excludes),-D jack.coverage.jacoco.exclude=$(jack_jacoco_excludes))
 else
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS :=
 endif
