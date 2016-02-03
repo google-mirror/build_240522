@@ -55,8 +55,7 @@ ifdef LOCAL_SDK_VERSION
 # so we don't have race condition when the system libraries (such as libc, libstdc++) are also built in the tree.
 my_target_global_ld_dirs := \
     $(addprefix -L, $(patsubst %/,%,$(dir $(my_ndk_stl_shared_lib_fullpath))) \
-    $(my_ndk_sysroot_lib)) \
-    $(my_target_global_ld_dirs)
+    $(my_ndk_sysroot_lib))
 my_target_global_ldflags := $(my_ndk_stl_shared_lib) $(my_target_global_ldflags)
 my_target_crtbegin_dynamic_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_dynamic.o)
 my_target_crtbegin_static_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_static.o)
