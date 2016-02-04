@@ -1255,12 +1255,17 @@ class BlockDifference(object):
     OPTIONS.tempfiles.append(tmpdir)
     self.path = os.path.join(tmpdir, partition)
     b.Compute(self.path)
+    self._required_cache = b.max_stashed_size
 
     if src is None:
       _, self.device = GetTypeAndDevice("/" + partition, OPTIONS.info_dict)
     else:
       _, self.device = GetTypeAndDevice("/" + partition,
                                         OPTIONS.source_info_dict)
+
+  @property
+  def required_cache(self):
+    return self._required_cache
 
   def WriteScript(self, script, output_zip, progress=None):
     if not self.src:
