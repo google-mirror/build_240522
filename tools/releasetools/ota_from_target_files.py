@@ -542,6 +542,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   has_recovery_patch = HasRecoveryPatch(input_zip)
   block_based = OPTIONS.block_based and has_recovery_patch
 
+  metadata["type"] = "BLOCK" if block_based else "FILE"
+
   if not OPTIONS.omit_prereq:
     ts = GetBuildProp("ro.build.date.utc", OPTIONS.info_dict)
     ts_text = GetBuildProp("ro.build.date", OPTIONS.info_dict)
@@ -697,6 +699,8 @@ endif;
 endif;
 """ % bcb_dev)
   script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+
+  metadata["required-cache"] = str(script.GetRequiredCache)
   WriteMetadata(metadata, output_zip)
 
 
@@ -773,6 +777,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
                                    OPTIONS.source_info_dict),
       "post-timestamp": GetBuildProp("ro.build.date.utc",
                                      OPTIONS.target_info_dict),
+      "type": "BLOCK",
   }
 
   device_specific = common.DeviceSpecificParams(
@@ -815,7 +820,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
   # Check first block of system partition for remount R/W only if
   # disk type is ext4
   system_partition = OPTIONS.source_info_dict["fstab"]["/system"]
-  check_first_block = system_partition.fs_type=="ext4"
+  check_first_block = system_partition.fs_type == "ext4"
   system_diff = common.BlockDifference("system", system_tgt, system_src,
                                        check_first_block,
                                        version=blockimgdiff_version)
@@ -831,7 +836,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
     # Check first block of vendor partition for remount R/W only if
     # disk type is ext4
     vendor_partition = OPTIONS.source_info_dict["fstab"]["/vendor"]
-    check_first_block = vendor_partition.fs_type=="ext4"
+    check_first_block = vendor_partition.fs_type == "ext4"
     vendor_diff = common.BlockDifference("vendor", vendor_tgt, vendor_src,
                                          check_first_block,
                                          version=blockimgdiff_version)
@@ -1003,6 +1008,7 @@ endif;
 
   script.SetProgress(1)
   script.AddToZip(target_zip, output_zip, input_path=OPTIONS.updater_binary)
+  metadata["required-cache"] = str(script.GetRequiredCache)
   WriteMetadata(metadata, output_zip)
 
 
@@ -1076,6 +1082,7 @@ def WriteVerifyPackage(input_zip, output_zip):
 
   script.SetProgress(1.0)
   script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+  metadata["required-cache"] = str(script.GetRequiredCache)
   WriteMetadata(metadata, output_zip)
 
 
@@ -1119,6 +1126,8 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
       "pre-device": GetOemProperty("ro.product.device", oem_props, oem_dict,
                                    OPTIONS.info_dict),
       "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
+      "required-cache": "0",
+      "type": "AB",
   }
 
   if source_file is not None:
@@ -1363,6 +1372,7 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
                                    OPTIONS.source_info_dict),
       "post-timestamp": GetBuildProp("ro.build.date.utc",
                                      OPTIONS.target_info_dict),
+      "type": "FILE",
   }
 
   device_specific = common.DeviceSpecificParams(
@@ -1712,6 +1722,7 @@ endif;
     vendor_diff.EmitExplicitTargetVerification(script)
   script.AddToZip(target_zip, output_zip, input_path=OPTIONS.updater_binary)
 
+  metadata["required-cache"] = str(script.GetRequiredCache)
   WriteMetadata(metadata, output_zip)
 
 
