@@ -23,6 +23,7 @@ class EdifyGenerator(object):
   def __init__(self, version, info, fstab=None):
     self.script = []
     self.mounts = set()
+    self.required_cache = 0
     self.version = version
     self.info = info
     if fstab is None:
@@ -37,6 +38,10 @@ class EdifyGenerator(object):
     x = EdifyGenerator(self.version, self.info)
     x.mounts = self.mounts
     return x
+
+  def GetRequiredCache(self):
+    """Return the minimum cache size to apply the update."""
+    return self.required_cache
 
   @staticmethod
   def WordWrap(cmd, linelen=80):
@@ -171,6 +176,7 @@ class EdifyGenerator(object):
   def CacheFreeSpaceCheck(self, amount):
     """Check that there's at least 'amount' space that can be made
     available on /cache."""
+    self.required_cache = max(self.required_cache, amount)
     self.script.append(('apply_patch_space(%d) || abort("Not enough free space '
                         'on /cache to apply patches.");') % (amount,))
 
