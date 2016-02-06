@@ -57,9 +57,6 @@ TOPDIR :=
 
 BUILD_SYSTEM := $(TOPDIR)build/core
 
-# Ensure JAVA_NOT_REQUIRED is not set externally.
-JAVA_NOT_REQUIRED := false
-
 # This is the default target.  It must be the first declared target.
 .PHONY: droid
 DEFAULT_GOAL := droid
@@ -180,7 +177,7 @@ $(warning ************************************************************)
 $(error Directory names containing spaces not supported)
 endif
 
-ifeq ($(JAVA_NOT_REQUIRED), false)
+ifneq ($(JAVA_NOT_REQUIRED),true)
 java_version_str := $(shell unset _JAVA_OPTIONS && java -version 2>&1)
 javac_version_str := $(shell unset _JAVA_OPTIONS && javac -version 2>&1)
 
@@ -271,6 +268,14 @@ $(shell echo 'VERSIONS_CHECKED := $(VERSION_CHECK_SEQUENCE_NUMBER)' \
         > $(OUT_DIR)/versions_checked.mk)
 $(shell echo 'BUILD_EMULATOR ?= $(BUILD_EMULATOR)' \
         >> $(OUT_DIR)/versions_checked.mk)
+endif
+
+ifeq ($(JAVA_NOT_REQUIRED),true)
+# Remove java and tools from our path so that we make sure nobody uses them.
+unexport ANDROID_JAVA_HOME
+unexport JAVA_HOME
+export ANDROID_BUILD_PATHS:=$(abspath $(BUILD_SYSTEM)/no_java_path):$(ANDROID_BUILD_PATHS)
+export PATH:=$(abspath $(BUILD_SYSTEM)/no_java_path):$(PATH)
 endif
 
 # These are the modifier targets that don't do anything themselves, but
