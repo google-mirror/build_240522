@@ -230,6 +230,10 @@ LOCAL_INTERMEDIATE_TARGETS += $(LOCAL_BUILT_MODULE)
 ifndef LOCAL_IS_HOST_MODULE
 # Disable .toc optimization for host modules: we may run the host binaries during the build process
 # and the libraries' implementation matters.
+ifndef LOCAL_SKIP_TOC
+# Disable this optimization if we have explicitly skipped it. This option
+# should be used for modules that behave like shared libraries, but aren't
+# actually shared libraries.
 ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
 LOCAL_INTERMEDIATE_TARGETS += $(LOCAL_BUILT_MODULE).toc
 $(LOCAL_BUILT_MODULE).toc: $(LOCAL_BUILT_MODULE)
@@ -240,6 +244,7 @@ $(LOCAL_BUILT_MODULE).toc: $(LOCAL_BUILT_MODULE)
 .KATI_RESTAT: $(LOCAL_BUILT_MODULE).toc
 # Build .toc file when using mm, mma, or make $(my_register_name)
 $(my_register_name): $(LOCAL_BUILT_MODULE).toc
+endif
 endif
 endif
 
