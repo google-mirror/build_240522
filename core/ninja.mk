@@ -113,7 +113,9 @@ NINJA_STATUS := [%p %s/%t]$(space)
 endif
 
 ifneq (,$(filter showcommands,$(ORIGINAL_MAKECMDGOALS)))
-NINJA_ARGS += "-v"
+ANDROID_SHOPTS += -x
+PS4 :=
+export PS4
 endif
 
 # Make multiple rules to generate the same target an error instead of
@@ -148,7 +150,7 @@ $(sort $(DEFAULT_GOAL) $(ANDROID_GOALS)) : ninja_wrapper
 .PHONY: ninja_wrapper
 ninja_wrapper: $(COMBINED_BUILD_NINJA) $(MAKEPARALLEL)
 	@echo Starting build with ninja
-	+$(hide) export NINJA_STATUS="$(NINJA_STATUS)" && source $(KATI_ENV_SH) && $(NINJA_MAKEPARALLEL) $(NINJA) $(NINJA_GOALS) -C $(TOP) -f $(COMBINED_BUILD_NINJA) $(NINJA_ARGS)
+	+$(hide) export ANDROID_SHOPTS="$(ANDROID_SHOPTS)" && export NINJA_STATUS="$(NINJA_STATUS)" && source $(KATI_ENV_SH) && $(NINJA_MAKEPARALLEL) $(NINJA) $(NINJA_GOALS) -C $(TOP) -f $(COMBINED_BUILD_NINJA) $(NINJA_ARGS)
 
 KATI_FIND_EMULATOR := --use_find_emulator
 ifeq ($(KATI_EMULATE_FIND),false)

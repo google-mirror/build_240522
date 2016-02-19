@@ -11,7 +11,7 @@ else
 # Use bash, not whatever shell somebody has installed as /bin/sh
 # This is repeated from main.mk, since envsetup.sh runs this file
 # directly.
-SHELL := /bin/bash
+SHELL := /bin/bash $${ANDROID_SHOPTS}
 endif
 
 # Utility variables.
