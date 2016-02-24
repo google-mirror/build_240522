@@ -26,6 +26,12 @@ ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a8)
 else
 ifneq (,$(filter cortex-a7 cortex-a53 cortex-a53.a57,$(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)))
 	arch_variant_cflags := -mcpu=cortex-a7
+
+	# Fake an ARM compiler flag as these processors support LPAE which GCC/clang
+	# don't advertise.
+	# TODO This is a hack and we need to add it for each processor that supports LPAE until some
+	# better solution comes around. See Bug 27340895
+	arch_variant_cflags += -D__ARM_FEATURE_LPAE=1
 	arch_variant_ldflags := \
 		-Wl,--no-fix-cortex-a8
 else
