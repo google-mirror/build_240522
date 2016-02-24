@@ -187,6 +187,7 @@ $(module_id) := $(LOCAL_PATH)
 intermediates := $(call local-intermediates-dir,,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))
 intermediates.COMMON := $(call local-intermediates-dir,COMMON)
 generated_sources_dir := $(call local-generated-sources-dir)
+generated_sources_dir.COMMON := $(call local-generated-sources-dir,COMMON)
 
 ###########################################################
 # Pick a name for the intermediate and final targets

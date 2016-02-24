@@ -716,7 +716,7 @@ dbus_service_config_path := $(addprefix $(LOCAL_PATH)/,$(dbus_service_config))
 # Mark these source files as not producing objects
 $(call track-src-file-obj,$(dbus_definitions) $(dbus_service_config),)
 
-dbus_gen_dir := $(generated_sources_dir)/dbus_bindings
+dbus_gen_dir := $(generated_sources_dir.COMMON)/dbus_bindings
 
 ifdef LOCAL_DBUS_PROXY_PREFIX
 dbus_header_dir := $(dbus_gen_dir)/include/$(LOCAL_DBUS_PROXY_PREFIX)
@@ -766,10 +766,11 @@ ifneq ($(aidl_src),)
 
 # Use the intermediates directory to avoid writing our own .cpp -> .o rules.
 aidl_gen_cpp_root := $(intermediates)/aidl-generated/src
-aidl_gen_include_root := $(intermediates)/aidl-generated/include
+aidl_gen_include_root := $(intermediates.COMMON)/aidl-generated/include
 
 # Multi-architecture builds have distinct intermediates directories.
 # Thus we'll actually generate source for each architecture.
+# Header files will be shared.
 $(foreach s,$(aidl_src),\
     $(eval $(call define-aidl-cpp-rule,$(s),$(aidl_gen_cpp_root),aidl_gen_cpp)))
 $(foreach cpp,$(aidl_gen_cpp), \
