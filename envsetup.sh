@@ -644,11 +644,16 @@ function getdriver()
     local T="$1"
     test "$WITH_STATIC_ANALYZER" = "0" && unset WITH_STATIC_ANALYZER
     if [ -n "$WITH_STATIC_ANALYZER" ]; then
+        # Use scan-build to collect all static analyzer reports into directory
+        # /tmp/scan-build-yyyy-mm-dd-hhmmss-*
+        # The clang compiler passed by --use-analyzer here is not important.
+        # build/core/binary.mk will set CLANG_CXX and CLANG before calling
+        # c++-analyzer and ccc-analyzer.
+        local CLANG_DIR="$T/prebuilts/clang/host/linux-x86/clang-2629532"
         echo "\
-$T/prebuilts/misc/linux-x86/analyzer/tools/scan-build/scan-build \
---use-analyzer $T/prebuilts/misc/linux-x86/analyzer/bin/analyzer \
---status-bugs \
---top=$T"
+${CLANG_DIR}/tools/scan-build/bin/scan-build \
+--use-analyzer ${CLANG_DIR}/bin/clang \
+--status-bugs"
     fi
 }
 
