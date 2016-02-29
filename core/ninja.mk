@@ -65,6 +65,10 @@ PARSE_TIME_MAKE_GOALS := \
 	win_sdk \
 	winsdk-tools
 
+ifdef BRILLO
+PARSE_TIME_MAKE_GOALS += brillo_tests
+endif
+
 -include vendor/google/build/ninja_config.mk
 
 # Any Android goals that need to be built.
