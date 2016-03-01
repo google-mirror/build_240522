@@ -108,6 +108,11 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
   --gen_verify
       Generate an OTA package that verifies the partitions.
 
+  --gen_brick
+      Generate an OTA package that bricks a device by formatting the
+      /system, /vendor (if present), /data, /cache, /boot, /recovery
+      partitions.
+
   --log_diff <file>
       Generate a log file that shows the differences in the source and target
       builds for an incremental package. This option is only meaningful when
@@ -158,6 +163,7 @@ OPTIONS.full_bootloader = False
 OPTIONS.cache_size = None
 OPTIONS.stash_threshold = 0.8
 OPTIONS.gen_verify = False
+OPTIONS.gen_brick = False
 OPTIONS.log_diff = None
 
 def MostPopularKey(d, default):
@@ -1136,6 +1142,51 @@ def WriteVerifyPackage(input_zip, output_zip):
   WriteMetadata(metadata, output_zip)
 
 
+def WriteBrickPackage(input_zip, output_zip):
+  script = edify_generator.EdifyGenerator(3, OPTIONS.info_dict)
+
+  oem_props = OPTIONS.info_dict.get("oem_fingerprint_properties")
+  recovery_mount_options = OPTIONS.info_dict.get(
+      "recovery_mount_options")
+  oem_dict = None
+  if oem_props is not None and len(oem_props) > 0:
+    if OPTIONS.oem_source is None:
+      raise common.ExternalError("OEM source required for this build")
+    script.Mount("/oem", recovery_mount_options)
+    oem_dict = common.LoadDictionaryFromLines(
+        open(OPTIONS.oem_source).readlines())
+
+  target_fp = CalculateFingerprint(oem_props, oem_dict, OPTIONS.info_dict)
+  metadata = {
+      "post-build": target_fp,
+      "pre-device": GetOemProperty("ro.product.device", oem_props, oem_dict,
+                                   OPTIONS.info_dict),
+      "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
+      "ota-required-cache": "0",
+      "ota-type": "BLOCK",
+  }
+
+  AppendAssertions(script, OPTIONS.info_dict, oem_dict)
+
+  script.ShowProgress(0.2, 10)
+  script.FormatPartition("/system")
+
+  if HasVendorPartition(input_zip):
+    script.FormatPartition("/vendor")
+
+  script.ShowProgress(0.2, 10)
+  script.FormatPartition("/data")
+
+  script.ShowProgress(0.6, 10)
+  script.FormatPartition("/cache")
+  script.FormatPartition("/boot")
+  script.FormatPartition("/recovery")
+
+  script.SetProgress(1.0)
+  script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+  WriteMetadata(metadata, output_zip)
+
+
 def WriteABOTAPackageWithBrilloScript(target_file, output_file,
                                       source_file=None):
   """Generate an Android OTA package that has A/B update payload."""
@@ -1866,6 +1917,8 @@ def main(argv):
                          "a float" % (a, o))
     elif o == "--gen_verify":
       OPTIONS.gen_verify = True
+    elif o == "--gen_brick":
+      OPTIONS.gen_brick = True
     elif o == "--log_diff":
       OPTIONS.log_diff = a
     else:
@@ -1896,6 +1949,7 @@ def main(argv):
                                  "no_fallback_to_full",
                                  "stash_threshold=",
                                  "gen_verify",
+                                 "gen_brick",
                                  "log_diff=",
                              ], extra_option_handler=option_handler)
 
@@ -2008,6 +2062,10 @@ def main(argv):
   # Generate a verify package.
   if OPTIONS.gen_verify:
     WriteVerifyPackage(input_zip, output_zip)
+
+  # Generate a brick package.
+  elif OPTIONS.gen_brick:
+    WriteBrickPackage(input_zip, output_zip)
 
   # Generate a full OTA.
   elif OPTIONS.incremental_source is None:
