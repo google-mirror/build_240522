@@ -67,10 +67,10 @@ endif
 
 ifeq (true,$(my_pack_module_relocations))
 # Pack relocations
-$(relocation_packer_output): $(relocation_packer_input) | $(ACP)
+$(relocation_packer_output): $(relocation_packer_input)
 	$(pack-elf-relocations)
 else
-$(relocation_packer_output): $(relocation_packer_input) | $(ACP)
+$(relocation_packer_output): $(relocation_packer_input)
 	@echo "target Unpacked: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 endif
@@ -85,7 +85,7 @@ my_unstripped_path := $(LOCAL_UNSTRIPPED_PATH)
 endif
 symbolic_input := $(relocation_packer_output)
 symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
-$(symbolic_output) : $(symbolic_input) | $(ACP)
+$(symbolic_output) : $(symbolic_input)
 	@echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 
