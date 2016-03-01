@@ -105,6 +105,11 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       Specifies the threshold that will be used to compute the maximum
       allowed stash size (defaults to 0.8).
 
+  --gen_brick
+      Generate an OTA package that bricks a device by formatting the
+      /system, /vendor (if present), /data, /cache, /boot, /recovery
+      partitions.
+
   --gen_verify
       Generate an OTA package that verifies the partitions.
 
@@ -157,6 +162,7 @@ OPTIONS.full_bootloader = False
 # Stash size cannot exceed cache_size * threshold.
 OPTIONS.cache_size = None
 OPTIONS.stash_threshold = 0.8
+OPTIONS.gen_brick = False
 OPTIONS.gen_verify = False
 OPTIONS.log_diff = None
 
@@ -1061,6 +1067,55 @@ endif;
   WriteMetadata(metadata, output_zip)
 
 
+def WriteBrickPackage(input_zip, output_zip):
+  script = edify_generator.EdifyGenerator(3, OPTIONS.info_dict)
+
+  oem_props = OPTIONS.info_dict.get("oem_fingerprint_properties")
+  recovery_mount_options = OPTIONS.info_dict.get(
+      "recovery_mount_options")
+  oem_dict = None
+  if oem_props is not None and len(oem_props) > 0:
+    if OPTIONS.oem_source is None:
+      raise common.ExternalError("OEM source required for this build")
+    if not OPTIONS.oem_no_mount:
+      script.Mount("/oem", recovery_mount_options)
+    oem_dict = common.LoadDictionaryFromLines(
+        open(OPTIONS.oem_source).readlines())
+
+  target_fp = CalculateFingerprint(oem_props, oem_dict, OPTIONS.info_dict)
+  metadata = {
+      "post-build": target_fp,
+      "pre-device": GetOemProperty("ro.product.device", oem_props, oem_dict,
+                                   OPTIONS.info_dict),
+      "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
+      "ota-required-cache": "0",
+      "ota-type": "BLOCK",
+      "ota-wipe": "yes",
+  }
+
+  AppendAssertions(script, OPTIONS.info_dict, oem_dict)
+
+  script.ShowProgress(0.2, 10)
+  script.FormatPartition("/system")
+
+  if HasVendorPartition(input_zip):
+    script.FormatPartition("/vendor")
+
+  script.ShowProgress(0.2, 10)
+  script.FormatPartition("/data")
+
+  script.ShowProgress(0.6, 10)
+  script.FormatPartition("/cache")
+  script.FormatPartition("/boot")
+  script.FormatPartition("/recovery")
+
+  script.UnmountAll()
+
+  script.SetProgress(1.0)
+  script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+  WriteMetadata(metadata, output_zip)
+
+
 def WriteVerifyPackage(input_zip, output_zip):
   script = edify_generator.EdifyGenerator(3, OPTIONS.info_dict)
 
@@ -1865,6 +1920,8 @@ def main(argv):
       except ValueError:
         raise ValueError("Cannot parse value %r for option %r - expecting "
                          "a float" % (a, o))
+    elif o == "--gen_brick":
+      OPTIONS.gen_brick = True
     elif o == "--gen_verify":
       OPTIONS.gen_verify = True
     elif o == "--log_diff":
@@ -1896,6 +1953,7 @@ def main(argv):
                                  "verify",
                                  "no_fallback_to_full",
                                  "stash_threshold=",
+                                 "gen_brick",
                                  "gen_verify",
                                  "log_diff=",
                              ], extra_option_handler=option_handler)
@@ -2009,6 +2067,10 @@ def main(argv):
   # Generate a verify package.
   if OPTIONS.gen_verify:
     WriteVerifyPackage(input_zip, output_zip)
+
+  # Generate a brick package.
+  elif OPTIONS.gen_brick:
+    WriteBrickPackage(input_zip, output_zip)
 
   # Generate a full OTA.
   elif OPTIONS.incremental_source is None:
