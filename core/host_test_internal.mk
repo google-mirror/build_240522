@@ -12,3 +12,15 @@ LOCAL_CFLAGS += -DGTEST_HAS_STD_STRING -O0 -g
 LOCAL_C_INCLUDES +=  external/gtest/include
 
 LOCAL_STATIC_LIBRARIES += libgtest_main_host libgtest_host
+
+ifdef LOCAL_MODULE_PATH
+$(error $(LOCAL_PATH): Do not set LOCAL_MODULE_PATH when building test $(LOCAL_MODULE))
+endif
+
+ifdef LOCAL_MODULE_PATH_32
+$(error $(LOCAL_PATH): Do not set LOCAL_MODULE_PATH_32 when building test $(LOCAL_MODULE))
+endif
+
+ifdef LOCAL_MODULE_PATH_64
+$(error $(LOCAL_PATH): Do not set LOCAL_MODULE_PATH_64 when building test $(LOCAL_MODULE))
+endif
