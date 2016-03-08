@@ -166,6 +166,10 @@ KATI_LD := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_LDFLAGS)
 ifeq ($(BUILD_OS),linux)
 # We need everything in libpthread.a otherwise C++11's threading library will be disabled.
 KATI_LD += -static -Wl,--whole-archive -lpthread -Wl,--no-whole-archive -ldl
+else
+# Use the system version of libc++ on Darwin
+KATI_CXX += -isystem $(mac_sdk_path)/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
+KATI_LD += -stdlib=libc++
 endif
 
 KATI_INTERMEDIATES_PATH := $(HOST_OUT_INTERMEDIATES)/EXECUTABLES/ckati_intermediates
@@ -177,6 +181,10 @@ MAKEPARALLEL_LD := $(CLANG_CXX) $(CLANG_HOST_GLOBAL_LDFLAGS)
 # Build static makeparallel. Unfortunately Mac OS X doesn't officially support static exectuables.
 ifeq ($(BUILD_OS),linux)
 MAKEPARALLEL_LD += -static
+else
+# Use the system version of libc++ on Darwin
+MAKEPARALLEL_CXX += -isystem $(mac_sdk_path)/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
+MAKEPARALLEL_LD += -stdlib=libc++
 endif
 
 MAKEPARALLEL_INTERMEDIATES_PATH := $(HOST_OUT_INTERMEDIATES)/EXECUTABLES/makeparallel_intermediates
