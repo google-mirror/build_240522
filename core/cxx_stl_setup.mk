@@ -110,6 +110,10 @@ else ifeq ($(my_cxx_stl),libstdc++)
     ifndef LOCAL_IS_HOST_MODULE
         my_c_includes += bionic/libstdc++/include
         my_system_shared_libraries += libstdc++
+    else ifeq (darwin,$($(my_prefix)OS))
+        # This will use Darwin's libc++, as libstdc++ is old and does not support C++11
+        my_cppflags += -isystem $(mac_sdk_path)/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
+        my_ldflags += -stdlib=libc++
     endif
     # Host builds will use GNU libstdc++.
 else ifeq ($(my_cxx_stl),none)
