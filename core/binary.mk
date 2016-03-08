@@ -73,7 +73,12 @@ ifdef LOCAL_SDK_VERSION
     $(error $(LOCAL_PATH): LOCAL_SDK_VERSION cannot be used in host module)
   endif
   my_ndk_source_root := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/sources
-  my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/platforms/android-$(LOCAL_SDK_VERSION)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+  ifeq ($(LOCAL_SDK_VERSION),current)
+    my_api_level := $(PLATFORM_SDK_VERSION)
+  else
+    my_api_level := $(LOCAL_SDK_VERSION)
+  endif
+  my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/current/platforms/android-$(my_api_level)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
   my_ndk_sysroot_include := $(my_ndk_sysroot)/usr/include
 
   # x86_64 and and mips64 are both multilib toolchains, so their libraries are
