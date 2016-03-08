@@ -455,6 +455,9 @@ BCC_COMPAT := $(HOST_OUT_EXECUTABLES)/bcc_compat
 DX := $(HOST_OUT_EXECUTABLES)/dx
 MAINDEXCLASSES := $(HOST_OUT_EXECUTABLES)/mainDexClasses
 
+CKATI := $(HOST_OUT_EXECUTABLES)/ckati
+MAKEPARALLEL := $(HOST_OUT_EXECUTABLES)/makeparallel
+
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 
 # Override the definitions above for unbundled and PDK builds
@@ -472,6 +475,9 @@ SIGNAPK_JNI_LIBRARY_PATH := $(prebuilt_sdk_tools)/$(HOST_OS)/lib64
 
 DX := $(prebuilt_sdk_tools)/dx
 MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
+
+CKATI := $(prebuilt_sdk_tools_bin)/ckati
+MAKEPARALLEL := $(prebuilt_sdk_tools_bin)/makeparallel
 
 # Don't use prebuilts in PDK
 ifneq ($(TARGET_BUILD_PDK),true)
