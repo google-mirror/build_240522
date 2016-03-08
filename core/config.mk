@@ -455,6 +455,9 @@ BCC_COMPAT := $(HOST_OUT_EXECUTABLES)/bcc_compat
 DX := $(HOST_OUT_EXECUTABLES)/dx
 MAINDEXCLASSES := $(HOST_OUT_EXECUTABLES)/mainDexClasses
 
+CKATI := $(HOST_OUT_EXECUTABLES)/ckati
+MAKEPARALLEL := $(HOST_OUT_EXECUTABLES)/makeparallel
+
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 
 # Override the definitions above for unbundled and PDK builds
@@ -477,6 +480,9 @@ MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
 ifneq ($(TARGET_BUILD_PDK),true)
 LLVM_RS_CC := $(prebuilt_sdk_tools_bin)/llvm-rs-cc
 BCC_COMPAT := $(prebuilt_sdk_tools_bin)/bcc_compat
+
+CKATI := $(prebuilt_sdk_tools_bin)/ckati
+MAKEPARALLEL := $(prebuilt_sdk_tools_bin)/makeparallel
 endif # TARGET_BUILD_PDK
 endif # TARGET_BUILD_APPS || TARGET_BUILD_PDK
 

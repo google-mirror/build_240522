@@ -5,8 +5,6 @@ SOONG_ANDROID_MK := $(SOONG_OUT_DIR)/Android.mk
 SOONG_VARIABLES := $(SOONG_OUT_DIR)/soong.variables
 SOONG_IN_MAKE := $(SOONG_OUT_DIR)/.soong.in_make
 SOONG_HOST_EXECUTABLES := $(SOONG_OUT_DIR)/host/$(HOST_PREBUILT_TAG)/bin
-KATI := $(SOONG_HOST_EXECUTABLES)/ckati
-MAKEPARALLEL := $(SOONG_HOST_EXECUTABLES)/makeparallel
 
 ifeq (,$(filter /%,$(SOONG_OUT_DIR)))
 SOONG_TOP_RELPATH := $(shell python -c "import os; print os.path.relpath('$(TOP)', '$(SOONG_OUT_DIR)')")
@@ -61,9 +59,23 @@ $(SOONG_IN_MAKE):
 	$(hide) mkdir -p $(dir $@)
 	$(hide) touch $@
 
-# Build an Android.mk listing all soong outputs as prebuilts
-$(SOONG_ANDROID_MK): $(SOONG) $(SOONG_VARIABLES) $(SOONG_IN_MAKE) FORCE
-	$(hide) $(SOONG) $(KATI) $(MAKEPARALLEL) $(NINJA_ARGS)
+# Only build ckati/makeparallel with soong if we aren't using a prebuilt
+ifeq ($(CKATI),$(HOST_OUT_EXECUTABLES)/ckati)
+CKATI := $(SOONG_HOST_EXECUTABLES)/ckati
+MAKEPARALLEL := $(SOONG_HOST_EXECUTABLES)/makeparallel
 
-$(KATI): $(SOONG_ANDROID_MK)
+$(SOONG_ANDROID_MK): $(SOONG) $(SOONG_VARIABLES) $(SOONG_IN_MAKE) FORCE
+	$(hide) $(SOONG) $(CKATI) $(MAKEPARALLEL) $(NINJA_ARGS)
+
+$(CKATI): $(SOONG_ANDROID_MK)
 $(MAKEPARALLEL): $(SOONG_ANDROID_MK)
+else ifeq ($(USE_SOONG),true)
+# If we're using a prebuilt ckati, just build the build.ninja file
+$(SOONG_ANDROID_MK): $(SOONG) $(SOONG_VARIABLES) $(SOONG_IN_MAKE) FORCE
+	$(hide) $(SOONG) $(SOONG_BUILD_NINJA) $(NINJA_ARGS)
+endif
+
+# Unless USE_SOONG is true, don't load soong's Android.mk file into kati
+ifneq ($(USE_SOONG),true)
+SOONG_ANDROID_MK :=
+endif
