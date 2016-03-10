@@ -119,6 +119,7 @@ PRODUCT_PACKAGES += \
     svc \
     tc \
     telecom \
+    thermal.default \
     vdc \
     vold \
     wm
