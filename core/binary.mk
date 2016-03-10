@@ -131,6 +131,7 @@ ifdef LOCAL_SDK_VERSION
     my_system_shared_libraries += libstdc++
     ifeq (stlport_static,$(LOCAL_NDK_STL_VARIANT))
       my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(my_cpu_variant)/libstlport_static.a
+      my_ldlibs += -ldl
     else
       my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(my_cpu_variant)/libstlport_shared.so
       my_ndk_stl_shared_lib := -lstlport_shared
