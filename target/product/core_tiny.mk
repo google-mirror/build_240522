@@ -77,6 +77,12 @@ PRODUCT_PACKAGES += \
     logd \
     wifi-service
 
+ifeq ($(BOARD_CACHEIMAGE_PARTITION_SIZE),)
+PRODUCT_PACKAGES += \
+    recovery-persist \
+    recovery-refresh
+endif
+
 # The order matters
 PRODUCT_BOOT_JARS := \
     core-oj \

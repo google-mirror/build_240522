@@ -77,6 +77,12 @@ PRODUCT_PACKAGES += \
     webview \
     wifi-service
 
+ifeq ($(BOARD_CACHEIMAGE_PARTITION_SIZE),)
+PRODUCT_PACKAGES += \
+    recovery-persist \
+    recovery-refresh
+endif
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml
 
