@@ -33,7 +33,7 @@ $(SOONG_VARIABLES): FORCE
 	$(hide) (\
 	echo '{'; \
 	echo '    "Platform_sdk_version": $(PLATFORM_SDK_VERSION),'; \
-	echo '    "Unbundled_build": $(if $(TARGET_BUILD_APPS),true,false),'; \
+	echo '    "Unbundled_build": $(if $(TARGET_BUILD_APPS)$(filter true,$(TARGET_NATIVE_UNBUNDLED)),true,false),'; \
 	echo '    "Brillo": $(if $(BRILLO),true,false),'; \
 	echo '    "Malloc_not_svelte": $(if $(filter true,$(MALLOC_SVELTE)),false,true),'; \
 	echo ''; \
