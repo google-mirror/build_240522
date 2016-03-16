@@ -35,7 +35,7 @@ COMMON_JAVAC := $(JAVACC) -J-Xmx1024M $(common_jdk_flags)
 
 # Eclipse.
 ifeq ($(CUSTOM_JAVA_COMPILER), eclipse)
-    COMMON_JAVAC := java -Xmx256m -jar prebuilt/common/ecj/ecj.jar -5 \
+    COMMON_JAVAC := java -Xmx256m -jar prebuilts/misc/common/ecj/ecj.jar \
         -maxProblems 9999999 -nowarn
     $(info CUSTOM_JAVA_COMPILER=eclipse)
 endif
