@@ -638,6 +638,102 @@ $(findbugs_html) : $(findbugs_xml)
 
 $(LOCAL_MODULE)-findbugs : $(findbugs_html)
 
+### ERROR PRONE
+
+# The error-prone javac command that will be invoked.
+ERROR_PRONE_JAVAC := java -Xbootclasspath/p:$(ERROR_PRONE_JAR) \
+  com.google.errorprone.ErrorProneCompiler -Xmaxwarns 1000
+
+# Lower the severity of these errors to warnings to allow compilation progress
+# to later errors.
+KNOWN_ANDROID_ERROR_PRONE_ERRORS := \
+ ArrayEquals \
+ ArrayHashCode \
+ ArrayToString \
+ ArrayToStringCompoundAssignment \
+ ArrayToStringConcatenation \
+ BadShiftAmount \
+ ChainingConstructorIgnoresParameter \
+ ClassName \
+ ComparisonOutOfRange \
+ DeadException \
+ DepAnn \
+ EqualsNaN \
+ GetClassOnClass \
+ GuardedByChecker \
+ HashtableContains \
+ InvalidPatternSyntax \
+ JUnit3TestNotRun \
+ LongLiteralLowerCaseSuffix \
+ MislabeledAndroidString \
+ MisusedWeekYear \
+ Overrides \
+ RectIntersectReturnValueIgnored \
+ ReturnValueIgnored \
+ SizeGreaterThanOrEqualsZero \
+ StringBuilderInitWithChar \
+ SuppressWarningsDeprecated \
+ TryFailThrowable \
+ TypeParameterQualifier
+
+ERROR_PRONE_JAVAC += \
+  $(foreach known_error,$(KNOWN_ANDROID_ERROR_PRONE_ERRORS), \
+    -Xep:$(known_error):WARN)
+
+KNOWN_ANDROID_ERROR_PRONE_ERRORS :=
+
+# The jar file that the error-prone javac will build and the rule to build it.
+error_prone_classes_compiled_jar := \
+  $(intermediates.COMMON)/full-classes-error-prone.jar
+$(error_prone_classes_compiled_jar): PRIVATE_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS) $(PRODUCT_AAPT_FLAGS)
+$(error_prone_classes_compiled_jar): PRIVATE_ALL_JAVA_LIBRARIES := $(full_java_libs)
+$(error_prone_classes_compiled_jar): PRIVATE_ASSET_DIR := $(LOCAL_ASSET_DIR)
+$(error_prone_classes_compiled_jar): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call java-lib-files,core-oj):$(call java-lib-files,core-libart)
+$(error_prone_classes_compiled_jar): PRIVATE_CLASS_INTERMEDIATES_DIR := $(intermediates.COMMON)/classes-error-prone
+$(error_prone_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
+$(error_prone_classes_compiled_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
+$(error_prone_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_FILES)
+$(error_prone_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUDE_PACKAGES)
+$(error_prone_classes_compiled_jar): PRIVATE_JAR_MANIFEST := $(jar_manifest_file)
+$(error_prone_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
+$(error_prone_classes_compiled_jar): PRIVATE_JAVACFLAGS := $(GLOBAL_JAVAC_DEBUG_FLAGS) $(LOCAL_JAVACFLAGS)
+$(error_prone_classes_compiled_jar): PRIVATE_JAVA_SOURCES := $(all_java_sources)
+$(error_prone_classes_compiled_jar): PRIVATE_MANIFEST_INSTRUMENTATION_FOR := $(LOCAL_MANIFEST_INSTRUMENTATION_FOR)
+$(error_prone_classes_compiled_jar): PRIVATE_MANIFEST_PACKAGE_NAME := $(LOCAL_MANIFEST_PACKAGE_NAME)
+$(error_prone_classes_compiled_jar): PRIVATE_RESOURCE_DIR := $(LOCAL_RESOURCE_DIR)
+$(error_prone_classes_compiled_jar): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
+$(error_prone_classes_compiled_jar): PRIVATE_SOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/src
+$(error_prone_classes_compiled_jar): PRIVATE_STATIC_JAVA_LIBRARIES := $(full_static_java_libs)
+$(error_prone_classes_compiled_jar): \
+        $(java_sources) \
+        $(java_resource_sources) \
+        $(full_java_lib_deps) \
+        $(full_java_libs) \
+        $(jar_manifest_file) \
+        $(layers_file) \
+        $(RenderScript_file_stamp) \
+        $(proto_java_sources_file_stamp) \
+        $(LOCAL_MODULE_MAKEFILE_DEP) \
+        $(LOCAL_ADDITIONAL_DEPENDENCIES)
+	([  "x$(ERROR_PRONE_JAR)" != "x" ] && [ -f $(ERROR_PRONE_JAR) ]) \
+	  || (echo "Fatal: ERROR_PRONE_JAR variable not set to the location of an error prone jar file" \
+              && false)
+	$(call compile-java,$(ERROR_PRONE_JAVAC),$(PRIVATE_BOOTCLASSPATH))
+	$(hide) rm $@
+
+# Create a 'error-prone-everything' target for building all jar files using
+# error prone.
+ALL_ERROR_PRONE_JARS += $(error_prone_classes_compiled_jar)
+
+.PHONY: error-prone-everything
+error-prone-everything: $(ALL_ERROR_PRONE_JARS)
+
+# Build the jar file then immediately remove it, we just want the side effect of
+# running error-prone for the warnings and errors.
+$(LOCAL_MODULE)-error-prone : $(error_prone_classes_compiled_jar)
+
+### END ERROR PRONE
+
 endif  # full_classes_jar is defined
 
 ifdef LOCAL_JACK_ENABLED
