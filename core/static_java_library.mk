@@ -133,6 +133,7 @@ $(full_classes_jack): $(R_file_stamp)
 $(jack_check_timestamp): $(R_file_stamp)
 endif # LOCAL_JACK_ENABLED
 $(full_classes_compiled_jar): $(R_file_stamp)
+$(error_prone_classes_compiled_jar) : $(R_file_stamp)
 
 # Rule to build AAR, archive including classes.jar, resource, etc.
 built_aar := $(intermediates.COMMON)/javalib.aar

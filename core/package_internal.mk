@@ -314,6 +314,7 @@ ifneq ($(full_classes_jar),)
 # produces full_classes_compiled_jar) needs to ensure the
 # R.java and Manifest.java files have been generated first.
 $(full_classes_compiled_jar): $(R_file_stamp)
+$(error_prone_classes_compiled_jar) : $(R_file_stamp)
 endif
 
 endif  # need_compile_res
