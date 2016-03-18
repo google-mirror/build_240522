@@ -116,10 +116,10 @@ ifdef product_goals
   # The build server wants to do make PRODUCT-dream-installclean
   # which really means TARGET_PRODUCT=dream make installclean.
   ifneq ($(filter-out $(INTERNAL_VALID_VARIANTS),$(TARGET_BUILD_VARIANT)),)
-    MAKECMDGOALS := $(MAKECMDGOALS) $(TARGET_BUILD_VARIANT)
-    TARGET_BUILD_VARIANT := userdebug
-    default_goal_substitution :=
-  else
+    $(error Invalid build variant: $(TARGET_BUILD_VARIANT))
+  endif
+
+  ifneq ($(dont_bother),true)
     default_goal_substitution := $(DEFAULT_GOAL)
   endif
 
