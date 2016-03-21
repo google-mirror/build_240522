@@ -40,6 +40,40 @@ ifeq ($(CUSTOM_JAVA_COMPILER), eclipse)
     $(info CUSTOM_JAVA_COMPILER=eclipse)
 endif
 
+ifeq ($(RUN_ERROR_PRONE),true)
+COMMON_JAVAC := java -Xbootclasspath/p:$(ERROR_PRONE_JAR) \
+  com.google.errorprone.ErrorProneCompiler -Xmaxwarns 1000 \
+  -Xep:ArrayEquals:WARN \
+  -Xep:ArrayHashCode:WARN \
+  -Xep:ArrayToString:WARN \
+  -Xep:ArrayToStringCompoundAssignment:WARN \
+  -Xep:ArrayToStringConcatenation:WARN \
+  -Xep:BadShiftAmount:WARN \
+  -Xep:ChainingConstructorIgnoresParameter:WARN \
+  -Xep:ClassName:WARN \
+  -Xep:ComparisonOutOfRange:WARN \
+  -Xep:DeadException:WARN \
+  -Xep:DepAnn:WARN \
+  -Xep:EqualsNaN:WARN \
+  -Xep:GetClassOnClass:WARN \
+  -Xep:GuardedByChecker:WARN \
+  -Xep:HashtableContains:WARN \
+  -Xep:InvalidPatternSyntax:WARN \
+  -Xep:JUnit3TestNotRun:WARN \
+  -Xep:LongLiteralLowerCaseSuffix:WARN \
+  -Xep:MislabeledAndroidString:WARN \
+  -Xep:MisusedWeekYear:WARN \
+  -Xep:Overrides:WARN \
+  -Xep:RectIntersectReturnValueIgnored:WARN \
+  -Xep:ReturnValueIgnored:WARN \
+  -Xep:SizeGreaterThanOrEqualsZero:WARN \
+  -Xep:StringBuilderInitWithChar:WARN \
+  -Xep:SuppressWarningsDeprecated:WARN \
+  -Xep:TryFailThrowable:WARN \
+  -Xep:TypeParameterQualifier:WARN \
+
+endif
+
 GLOBAL_JAVAC_DEBUG_FLAGS := -g
 
 HOST_JAVAC ?= $(COMMON_JAVAC)
