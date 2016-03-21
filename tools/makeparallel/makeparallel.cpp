@@ -238,11 +238,38 @@ static bool ReadByteTimeout(int fd, int timeout_ms) {
   abort();
 }
 
+// global variables for atexit() handler
+static int tokens = 0;
+static int out_fd = -1;
+
+// atexit() handler to return tokens to the jobserver pool.
+static void PutJobserverTokens(void) {
+  // Return all the tokens to the pipe
+  char buf = '+';
+  for (int i = 0; i < tokens; i++) {
+    int ret = TEMP_FAILURE_RETRY(write(out_fd, &buf, 1));
+    if (ret < 0) {
+      // atexit() handlers are not allowed to call exit() - give up on error
+      fprintf(stderr, "%s: write failed: %s\n", program_invocation_name, strerror(errno));
+      return;
+    } else if (ret == 0) {
+      // atexit() handlers are not allowed to call exit() - give up on error
+      fprintf(stderr, "%s: EOF on jobserver pipe\n", program_invocation_name);
+      return;
+    }
+  }
+}
+
 // Measure the size of the jobserver pool by reading from in_fd until it blocks
-static int GetJobserverTokens(int in_fd) {
-  int tokens = 0;
+static void GetJobserverTokens(int in_fd) {
   pollfd pollfds[] = {{in_fd, POLLIN, 0}};
   int ret;
+
+  // make sure we always return reserved tokens at exit
+  ret = atexit(PutJobserverTokens);
+  if (ret)
+    return;
+
   while ((ret = TEMP_FAILURE_RETRY(poll(pollfds, 1, 0))) != 0) {
     if (ret < 0) {
       error(errno, errno, "poll failed");
@@ -267,30 +294,13 @@ static int GetJobserverTokens(int in_fd) {
   }
 
   // This process implicitly gets a token, so pool size is measured size + 1
-  return tokens;
-}
-
-// Return tokens to the jobserver pool.
-static void PutJobserverTokens(int out_fd, int tokens) {
-  // Return all the tokens to the pipe
-  char buf = '+';
-  for (int i = 0; i < tokens; i++) {
-    int ret = TEMP_FAILURE_RETRY(write(out_fd, &buf, 1));
-    if (ret < 0) {
-      error(errno, errno, "write failed");
-    } else if (ret == 0) {
-      error(EXIT_FAILURE, 0, "EOF on jobserver pipe");
-    }
-  }
 }
 
 int main(int argc, char* argv[]) {
   int in_fd = -1;
-  int out_fd = -1;
   bool parallel = false;
   bool keep_going = false;
   bool ninja = false;
-  int tokens = 0;
 
   if (argc > 1 && strcmp(argv[1], "--ninja") == 0) {
     ninja = true;
@@ -312,7 +322,7 @@ int main(int argc, char* argv[]) {
       CheckFd(out_fd);
       fcntl(in_fd, F_SETFD, FD_CLOEXEC);
       fcntl(out_fd, F_SETFD, FD_CLOEXEC);
-      tokens = GetJobserverTokens(in_fd);
+      GetJobserverTokens(in_fd);
     }
   }
 
@@ -362,8 +372,6 @@ int main(int argc, char* argv[]) {
     exit_status = -(status.si_status);
   }
 
-  if (tokens > 0) {
-    PutJobserverTokens(out_fd, tokens);
-  }
+  // tokens are released automatically on exit
   exit(exit_status);
 }
