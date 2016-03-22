@@ -1,19 +1,4 @@
 SOONG_OUT_DIR := $(OUT_DIR)/soong
-
-# This needs to exist before the realpath checks below
-$(shell mkdir -p $(SOONG_OUT_DIR))
-
-ifeq (,$(filter /%,$(SOONG_OUT_DIR)))
-SOONG_TOP_RELPATH := $(shell python -c "import os; print os.path.relpath('$(TOP)', '$(SOONG_OUT_DIR)')")
-# Protect against out being a symlink and relative paths not working
-ifneq ($(realpath $(SOONG_OUT_DIR)/$(SOONG_TOP_RELPATH)),$(realpath $(TOP)))
-SOONG_OUT_DIR := $(abspath $(SOONG_OUT_DIR))
-SOONG_TOP_RELPATH := $(abspath $(TOP))
-endif
-else
-SOONG_TOP_RELPATH := $(abspath $(TOP))
-endif
-
 SOONG := $(SOONG_OUT_DIR)/soong
 SOONG_BUILD_NINJA := $(SOONG_OUT_DIR)/build.ninja
 SOONG_VARIABLES := $(SOONG_OUT_DIR)/soong.variables
@@ -28,7 +13,7 @@ endif
 # Bootstrap soong.  Run only the first time for clean builds
 $(SOONG):
 	$(hide) mkdir -p $(dir $@)
-	$(hide) cd $(dir $@) && $(SOONG_TOP_RELPATH)/bootstrap.bash
+	$(hide) BUILDDIR=$(SOONG_OUT_DIR) ./bootstrap.bash
 
 # Create soong.variables with copies of makefile settings.  Runs every build,
 # but only updates soong.variables if it changes
