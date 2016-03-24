@@ -85,8 +85,6 @@ $(full_classes_compiled_jar): \
         $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	$(transform-host-java-to-package)
 
-javac-check : $(full_classes_compiled_jar)
-
 # Run jarjar if necessary, otherwise just copy the file.
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)

@@ -69,7 +69,10 @@ $(full_classes_compiled_jar): \
         $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	$(transform-host-java-to-package)
 
+ifneq ($(USE_CORE_LIB_BOOTCLASSPATH),true)
+# Don't run javac-check on host dalvik Java library; We know they don't compile.
 javac-check : $(full_classes_compiled_jar)
+endif
 
 # Run jarjar if necessary, otherwise just copy the file.
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
