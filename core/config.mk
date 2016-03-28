@@ -556,6 +556,7 @@ DEFAULT_JACK_EXTRA_ARGS += --verbose error
 JILL := java -Xmx3500m -jar $(JILL_JAR)
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/tools/java-event-log-tags.py
+MERGETAGS := build/tools/merge-event-log-tags.py
 RMTYPEDEFS := $(HOST_OUT_EXECUTABLES)/rmtypedefs
 APPEND2SIMG := $(HOST_OUT_EXECUTABLES)/append2simg
 VERITY_SIGNER := $(HOST_OUT_EXECUTABLES)/verity_signer
