@@ -106,6 +106,8 @@ $(shell mkdir -p $(OUT_DIR) && touch $(OUT_DIR)/ninja_build)
 include build/core/ninja.mk
 else # KATI
 
+include $(SOONG_MAKEVARS_MK)
+
 # With these files findleaves.py won't be unnecessarily slower even if
 # there is a user creates a copy of $(OUT_DIR).
 $(shell echo '# This file prevents findleaves.py from traversing this directory further' > $(OUT_DIR)/Android.mk)

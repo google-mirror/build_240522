@@ -16,6 +16,7 @@ endif
 
 SOONG := $(SOONG_OUT_DIR)/soong
 SOONG_BUILD_NINJA := $(SOONG_OUT_DIR)/build.ninja
+SOONG_MAKEVARS_MK := $(SOONG_OUT_DIR)/make_vars.mk
 SOONG_VARIABLES := $(SOONG_OUT_DIR)/soong.variables
 SOONG_IN_MAKE := $(SOONG_OUT_DIR)/.soong.in_make
 
