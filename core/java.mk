@@ -334,11 +334,7 @@ endif
 # command line.
 ifndef LOCAL_CHECKED_MODULE
 ifdef full_classes_jar
-ifdef LOCAL_JACK_ENABLED
 LOCAL_CHECKED_MODULE := $(jack_check_timestamp)
-else
-LOCAL_CHECKED_MODULE := $(full_classes_compiled_jar)
-endif
 endif
 endif
 
@@ -513,11 +509,7 @@ common_proguard_flags := -forceprocessing
 ifeq ($(filter nosystem,$(LOCAL_PROGUARD_ENABLED)),)
 common_proguard_flags += -include $(BUILD_SYSTEM)/proguard.flags
 ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
-ifdef LOCAL_JACK_ENABLED
 common_proguard_flags += -include $(BUILD_SYSTEM)/proguard.jacoco.flags
-else
-common_proguard_flags += -include $(BUILD_SYSTEM)/proguard.emma.flags
-endif # LOCAL_JACK_ENABLED
 endif
 # If this is a test package, add proguard keep flags for tests.
 ifneq ($(LOCAL_INSTRUMENTATION_FOR)$(filter tests,$(LOCAL_MODULE_TAGS)),)
@@ -551,10 +543,9 @@ legacy_proguard_flags := -injars  $(link_instr_classes_jar) \
     -applymapping $(link_instr_intermediates_dir.COMMON)/proguard_dictionary \
     -verbose \
     $(legacy_proguard_flags)
-ifdef LOCAL_JACK_ENABLED
+
 jack_proguard_flags += -applymapping $(link_instr_intermediates_dir.COMMON)/jack_dictionary
 full_jack_deps += $(link_instr_intermediates_dir.COMMON)/jack_dictionary
-endif
 
 # Sometimes (test + main app) uses different keep rules from the main app -
 # apply the main app's dictionary anyway.
@@ -586,22 +577,6 @@ $(full_classes_proguard_jar) : $(full_classes_jar) | $(ACP)
 	$(hide) $(ACP) -fp $< $@
 
 endif # LOCAL_PROGUARD_ENABLED defined
-
-ifndef LOCAL_JACK_ENABLED
-# Override PRIVATE_INTERMEDIATES_DIR so that install-dex-debug
-# will work even when intermediates != intermediates.COMMON.
-$(built_dex_intermediate): PRIVATE_INTERMEDIATES_DIR := $(intermediates.COMMON)
-$(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
-# If you instrument class files that have local variable debug information in
-# them emma does not correctly maintain the local variable table.
-# This will cause an error when you try to convert the class files for Android.
-# The workaround here is to build different dex file here based on emma switch
-# then later copy into classes.dex. When emma is on, dx is run with --no-locals
-# option to remove local variable information
-ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
-$(built_dex_intermediate): PRIVATE_DX_FLAGS += --no-locals
-endif
-endif # LOCAL_JACK_ENABLED is disabled
 
 $(built_dex): $(built_dex_intermediate) | $(ACP)
 	@echo Copying: $@
@@ -638,7 +613,6 @@ $(LOCAL_MODULE)-findbugs : $(findbugs_html)
 
 endif  # full_classes_jar is defined
 
-ifdef LOCAL_JACK_ENABLED
 $(LOCAL_INTERMEDIATE_TARGETS): \
 	PRIVATE_JACK_INTERMEDIATES_DIR := $(intermediates.COMMON)/jack-rsc
 ifeq ($(LOCAL_JACK_ENABLED),incremental)
@@ -729,4 +703,3 @@ $(noshrob_classes_jack): $(jack_all_deps) | setup-jack-server
 	@echo Building with Jack: $@
 	$(java-to-jack)
 endif  # full_classes_jar is defined
-endif # LOCAL_JACK_ENABLED
