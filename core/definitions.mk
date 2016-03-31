@@ -1147,10 +1147,7 @@ endef
 ## Commands for running gcc to compile a C++ file
 ###########################################################
 
-define transform-cpp-to-o
-@echo "target $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
-@mkdir -p $(dir $@)
-$(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
+define transform-cpp-to-o-compiler-args
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
 	$$(cat $(PRIVATE_IMPORT_INCLUDES)) \
 	$(addprefix -isystem ,\
@@ -1169,10 +1166,32 @@ $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
 	$(PRIVATE_CPPFLAGS) \
 	$(PRIVATE_DEBUG_CFLAGS) \
 	$(PRIVATE_CFLAGS_NO_OVERRIDE) \
-	$(PRIVATE_CPPFLAGS_NO_OVERRIDE) \
-	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(transform-d-to-p)
+	$(PRIVATE_CPPFLAGS_NO_OVERRIDE)
 endef
+
+define clang-tidy-cpp
+$(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
+  -checks=$(PRIVATE_TIDY_CHECKS) \
+  $< -- $(transform-cpp-to-o-compiler-args)
+endef
+
+ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
+define transform-cpp-to-o
+$(if $(PRIVATE_TIDY_CHECKS),
+  @echo "target tidy $(PRIVATE_ARM_MODE) C++: $<"
+  $(clang-tidy-cpp))
+endef
+else
+define transform-cpp-to-o
+@echo "target $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
+@mkdir -p $(dir $@)
+$(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-cpp))
+$(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
+  $(transform-cpp-to-o-compiler-args) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+$(hide) $(transform-d-to-p)
+endef
+endif
 
 
 ###########################################################
@@ -1180,9 +1199,7 @@ endef
 ###########################################################
 
 # $(1): extra flags
-define transform-c-or-s-to-o-no-deps
-@mkdir -p $(dir $@)
-$(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
+define transform-c-or-s-to-o-compiler-args
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
 	$$(cat $(PRIVATE_IMPORT_INCLUDES)) \
 	$(addprefix -isystem ,\
@@ -1196,32 +1213,54 @@ $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
 	    $(PRIVATE_TARGET_GLOBAL_CONLYFLAGS) \
 	    $(PRIVATE_ARM_CFLAGS) \
 	 ) \
-	 $(1) \
-	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+	 $(1)
 endef
 
-define transform-c-to-o-no-deps
-@echo "target $(PRIVATE_ARM_MODE) C: $(PRIVATE_MODULE) <= $<"
-$(call transform-c-or-s-to-o-no-deps, \
-    $(PRIVATE_CFLAGS) \
-    $(PRIVATE_CONLYFLAGS) \
-    $(PRIVATE_DEBUG_CFLAGS) \
-    $(PRIVATE_CFLAGS_NO_OVERRIDE))
+define transform-c-to-o-compiler-args
+$(call transform-c-or-s-to-o-compiler-args, \
+  $(PRIVATE_CFLAGS) \
+  $(PRIVATE_DEBUG_CFLAGS) \
+  $(PRIVATE_CONLYFLAGS) \
+  $(PRIVATE_CFLAGS_NO_OVERRIDE))
 endef
+
+define clang-tidy-c
+$(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
+  -checks=$(PRIVATE_TIDY_CHECKS) \
+  $< -- $(transform-c-to-o-compiler-args)
+endef
+
+ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
+define transform-c-to-o
+$(if $(PRIVATE_TIDY_CHECKS),
+  @echo "target tidy $(PRIVATE_ARM_MODE) C: $<"
+  $(clang-tidy-c))
+endef
+else
+define transform-c-to-o
+@echo "target $(PRIVATE_ARM_MODE) C: $(PRIVATE_MODULE) <= $<"
+@mkdir -p $(dir $@)
+$(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-c))
+$(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
+  $(transform-c-to-o-compiler-args) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+$(hide) $(transform-d-to-p)
+endef
+endif
 
 define transform-s-to-o-no-deps
 @echo "target asm: $(PRIVATE_MODULE) <= $<"
-$(call transform-c-or-s-to-o-no-deps, $(PRIVATE_ASFLAGS))
-endef
-
-define transform-c-to-o
-$(transform-c-to-o-no-deps)
-$(transform-d-to-p)
+@mkdir -p $(dir $@)
+$(RELATIVE_PWD) $(PRIVATE_CC) \
+  $(call transform-c-or-s-to-o-compiler-args, $(PRIVATE_ASFLAGS)) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
 endef
 
 define transform-s-to-o
-$(transform-s-to-o-no-deps)
-$(transform-d-to-p)
+$(if $(WITH_TIDY_ONLY),,
+  $(transform-s-to-o-no-deps)
+  $(hide) $(transform-d-to-p)
+)
 endef
 
 # YASM compilation
@@ -1254,10 +1293,7 @@ endef
 ## Commands for running gcc to compile a host C++ file
 ###########################################################
 
-define transform-host-cpp-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
-@mkdir -p $(dir $@)
-$(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
+define transform-host-cpp-to-o-compiler-args
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
 	$$(cat $(PRIVATE_IMPORT_INCLUDES)) \
 	$(addprefix -isystem ,\
@@ -1274,20 +1310,39 @@ $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
 	$(PRIVATE_CPPFLAGS) \
 	$(PRIVATE_DEBUG_CFLAGS) \
 	$(PRIVATE_CFLAGS_NO_OVERRIDE) \
-	$(PRIVATE_CPPFLAGS_NO_OVERRIDE) \
-	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(transform-d-to-p)
+	$(PRIVATE_CPPFLAGS_NO_OVERRIDE)
 endef
+
+define clang-tidy-host-cpp
+$(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
+  -checks=$(PRIVATE_TIDY_CHECKS) \
+  $< -- $(transform-host-cpp-to-o-compiler-args)
+endef
+
+ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
+define transform-host-cpp-to-o
+$(if $(PRIVATE_TIDY_CHECKS),
+  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C++: $<"
+  $(clang-tidy-host-cpp))
+endef
+else
+define transform-host-cpp-to-o
+@echo "$($(PRIVATE_PREFIX)DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
+@mkdir -p $(dir $@)
+$(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-host-cpp))
+$(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
+  $(transform-host-cpp-to-o-compiler-args) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+$(hide) $(transform-d-to-p)
+endef
+endif
 
 
 ###########################################################
 ## Commands for running gcc to compile a host C file
 ###########################################################
 
-# $(1): extra flags
-define transform-host-c-or-s-to-o-no-deps
-@mkdir -p $(dir $@)
-$(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
+define transform-host-c-or-s-to-o-common-args
 	$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
 	$$(cat $(PRIVATE_IMPORT_INCLUDES)) \
 	$(addprefix -isystem ,\
@@ -1299,29 +1354,58 @@ $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
 	$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
 	    $(PRIVATE_HOST_GLOBAL_CFLAGS) \
 	    $(PRIVATE_HOST_GLOBAL_CONLYFLAGS) \
-	 ) \
-	$(1) \
-	-MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+	 )
 endef
 
-define transform-host-c-to-o-no-deps
-@echo "$($(PRIVATE_PREFIX)DISPLAY) C: $(PRIVATE_MODULE) <= $<"
-$(call transform-host-c-or-s-to-o-no-deps, $(PRIVATE_CFLAGS) $(PRIVATE_CONLYFLAGS) $(PRIVATE_DEBUG_CFLAGS) $(PRIVATE_CFLAGS_NO_OVERRIDE))
+# $(1): extra flags
+define transform-host-c-or-s-to-o-no-deps
+@mkdir -p $(dir $@)
+$(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
+  $(transform-host-c-or-s-to-o-common-args) \
+  $(1) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
 endef
+
+define transform-host-c-to-o-compiler-args
+  $(transform-host-c-or-s-to-o-common-args) \
+  $(PRIVATE_CFLAGS) $(PRIVATE_CONLYFLAGS) \
+  $(PRIVATE_DEBUG_CFLAGS) $(PRIVATE_CFLAGS_NO_OVERRIDE)
+endef
+
+define clang-tidy-host-c
+$(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
+  -checks=$(PRIVATE_TIDY_CHECKS) \
+  $< -- $(transform-host-c-to-o-compiler-args)
+endef
+
+ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
+define transform-host-c-to-o
+$(if $(PRIVATE_TIDY_CHECKS),
+  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C: $<"
+  $(clang-tidy-host-c))
+endef
+else
+define transform-host-c-to-o
+@echo "$($(PRIVATE_PREFIX)DISPLAY) C: $(PRIVATE_MODULE) <= $<"
+@mkdir -p $(dir $@)
+$(if $(PRIVATE_TIDY_CHECKS), $(clang-tidy-host-c))
+$(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
+  $(transform-host-c-to-o-compiler-args) \
+  -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
+$(hide) $(transform-d-to-p)
+endef
+endif
 
 define transform-host-s-to-o-no-deps
 @echo "$($(PRIVATE_PREFIX)DISPLAY) asm: $(PRIVATE_MODULE) <= $<"
 $(call transform-host-c-or-s-to-o-no-deps, $(PRIVATE_ASFLAGS))
 endef
 
-define transform-host-c-to-o
-$(transform-host-c-to-o-no-deps)
-$(transform-d-to-p)
-endef
-
 define transform-host-s-to-o
-$(transform-host-s-to-o-no-deps)
-$(transform-d-to-p)
+$(if $(WITH_TIDY_ONLY),,
+  $(transform-host-s-to-o-no-deps)
+  $(transform-d-to-p)
+)
 endef
 
 ###########################################################
@@ -1469,13 +1553,15 @@ endef
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-o-to-static-lib
-@echo "target StaticLib: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-@rm -f $@
-$(extract-and-include-target-whole-static-libs)
-$(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) \
-    $(PRIVATE_ARFLAGS) $@,$(PRIVATE_ALL_OBJECTS))
+$(if $(WITH_TIDY_ONLY),,
+  @echo "target StaticLib: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  @rm -f $@
+  $(extract-and-include-target-whole-static-libs)
+  $(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) \
+      $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) \
+      $(PRIVATE_ARFLAGS) $@,$(PRIVATE_ALL_OBJECTS))
+)
 endef
 
 ###########################################################
@@ -1534,15 +1620,17 @@ endif  # HOST_OS is darwin
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-host-o-to-static-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-@rm -f $@
-$(extract-and-include-host-whole-static-libs)
-$(create-dummy.o-if-no-objs)
-$(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_ARFLAGS) \
-    $(PRIVATE_ARFLAGS) $@,$(PRIVATE_ALL_OBJECTS) $(get-dummy.o-if-no-objs))
-$(delete-dummy.o-if-no-objs)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "$($(PRIVATE_PREFIX)DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  @rm -f $@
+  $(extract-and-include-host-whole-static-libs)
+  $(create-dummy.o-if-no-objs)
+  $(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)AR) \
+      $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)GLOBAL_ARFLAGS) \
+      $(PRIVATE_ARFLAGS) $@,$(PRIVATE_ALL_OBJECTS) $(get-dummy.o-if-no-objs))
+  $(delete-dummy.o-if-no-objs)
+)
 endef
 
 
@@ -1586,9 +1674,11 @@ $(transform-host-o-to-shared-lib-inner)
 endef
 
 define transform-host-o-to-package
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Package: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-$(transform-host-o-to-shared-lib-inner)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "$($(PRIVATE_PREFIX)DISPLAY) Package: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  $(transform-host-o-to-shared-lib-inner)
+)
 endef
 
 
@@ -1622,9 +1712,11 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-o-to-shared-lib
-@echo "target SharedLib: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-$(transform-o-to-shared-lib-inner)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "target SharedLib: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  $(transform-o-to-shared-lib-inner)
+)
 endef
 
 ###########################################################
@@ -1710,9 +1802,11 @@ $(hide) $(PRIVATE_CXX) -pie \
 endef
 
 define transform-o-to-executable
-@echo "target Executable: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-$(transform-o-to-executable-inner)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "target Executable: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  $(transform-o-to-executable-inner)
+)
 endef
 
 
@@ -1753,9 +1847,11 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-o-to-static-executable
-@echo "target StaticExecutable: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-$(transform-o-to-static-executable-inner)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "target StaticExecutable: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  $(transform-o-to-static-executable-inner)
+)
 endef
 
 
@@ -1799,9 +1895,11 @@ endef
 endif
 
 define transform-host-o-to-executable
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
-$(transform-host-o-to-executable-inner)
+$(if $(WITH_TIDY_ONLY),,
+  @echo "$($(PRIVATE_PREFIX)DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
+  @mkdir -p $(dir $@)
+  $(transform-host-o-to-executable-inner)
+)
 endef
 
 
