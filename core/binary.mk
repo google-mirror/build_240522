@@ -456,9 +456,12 @@ ifneq ($(LOCAL_NO_SYNTAX_CHECK),true)
 endif
 endif
 
+my_tidy := $(PATH_TO_CLANG_TIDY)
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LINKER := $(my_linker)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CXX := $(my_cxx)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CLANG := $(my_clang)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY := $(my_tidy)
 
 # TODO: support a mix of standard extensions so that this isn't necessary
 LOCAL_CPP_EXTENSION := $(strip $(LOCAL_CPP_EXTENSION))
@@ -1360,6 +1363,44 @@ ifeq ($(my_strict),true)
     my_cflags += -DANDROID_STRICT
 endif
 
+# If LOCAL_TIDY is not defined, use global WITH_TIDY
+my_tidy_enabled = $(LOCAL_TIDY)
+ifeq ($(my_tidy_enabled),)
+  my_tidy_enabled = $(WITH_TIDY)
+endif
+
+# my_tidy_checks is empty if clang-tidy is disabled.
+my_tidy_checks :=
+ifneq (,$(filter 1 true,$(my_tidy_enabled)))
+  # Set up global default checks
+  my_tidy_checks := $(WITH_TIDY_CHECKS)
+  ifeq ($(my_tidy_checks),)
+    # AOSP source did not follow Google readability rules.
+    my_tidy_checks := -*,google*,-google-readability*
+  endif
+  # Append local clang-tidy checks.
+  ifneq ($(LOCAL_TIDY_CHECKS),)
+    my_tidy_checks := $(my_tidy_checks),$(LOCAL_TIDY_CHECKS)
+  endif
+  # Set up global default clang-tidy flags, which is none.
+  my_tidy_flags := $(WITH_TIDY_FLAGS)
+  # Use local clang-tidy flags if specified.
+  ifneq ($(LOCAL_TIDY_FLAGS),)
+    my_tidy_flags := $(LOCAL_TIDY_FLAGS)
+  endif
+endif
+
+# Disable clang-tidy if clang is disabled.
+ifneq ($(my_clang),true)
+  my_tidy_checks :=
+endif
+
+# Set my_skip_compilation if global WITH_TIDY_ONLY is true or 1.
+my_skip_compilation :=
+ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
+  my_skip_compilation := true
+endif
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
@@ -1373,6 +1414,9 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_C_INCLUDES := $(my_c_includes)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_IMPORT_INCLUDES := $(import_includes)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LDFLAGS := $(my_ldflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LDLIBS := $(my_ldlibs)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_CHECKS := $(my_tidy_checks)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_FLAGS := $(my_tidy_flags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_SKIP_COMPILATION := $(my_skip_compilation)
 
 # this is really the way to get the files onto the command line instead
 # of using $^, because then LOCAL_ADDITIONAL_DEPENDENCIES doesn't work

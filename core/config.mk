@@ -348,6 +348,13 @@ endif
 # define clang/llvm versions and base directory.
 include $(BUILD_SYSTEM)/clang/versions.mk
 
+PATH_TO_CLANG_TIDY := \
+    $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/bin/clang-tidy
+ifeq ($(wildcard $(PATH_TO_CLANG_TIDY)),)
+    $(warning *** Disable WITH_TIDY because $(PATH_TO_CLANG_TIDY) does not exist)
+    WITH_TIDY := 0
+endif
+
 # Disable WITH_STATIC_ANALYZER and WITH_SYNTAX_CHECK if tool can't be found
 SYNTAX_TOOLS_PREFIX := \
     $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/tools/scan-build/libexec
