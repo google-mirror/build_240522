@@ -35,12 +35,23 @@ endif
 
 # Define PRIVATE_ variables from global vars
 my_target_global_ld_dirs := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_LD_DIRS)
+
+my_libgcc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_LIBGCC)
 ifeq ($(LOCAL_NO_LIBGCC),true)
-my_target_libgcc :=
+    my_target_libgcc :=
+else ifdef my_libgcc_libdir
+    my_target_libgcc := $(dir $(my_libgcc))/../$(my_libgcc_libdir)/libgcc.a
 else
-my_target_libgcc := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_LIBGCC)
+    my_target_libgcc := $(my_libgcc)
 endif
-my_target_libatomic := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_LIBATOMIC)
+
+my_libatomic := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_LIBATOMIC)
+ifdef my_libatomic_libdir
+    my_target_libatomic := $(dir $(my_libatomic))/../$(my_libatomic_libdir)/libatomic.a
+else
+    my_target_libatomic := $(my_libatomic)
+endif
+
 ifeq ($(LOCAL_NO_CRT),true)
 my_target_crtbegin_dynamic_o :=
 my_target_crtbegin_static_o :=

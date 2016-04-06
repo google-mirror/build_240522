@@ -77,13 +77,9 @@ ifdef LOCAL_SDK_VERSION
   # installed in /usr/lib64. Aarch64, on the other hand, is not a multilib
   # compiler, so its libraries are in /usr/lib.
   #
-  # Mips32r6 is yet another variation, with libraries installed in libr6.
-  #
   # For the rest, the libraries are installed simply to /usr/lib.
   ifneq (,$(filter x86_64 mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)))
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/lib64
-  else ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
-    my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/libr6
   else
     my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/lib
   endif
@@ -109,6 +105,13 @@ ifdef LOCAL_SDK_VERSION
   my_ndk_stl_static_lib :=
   my_ndk_stl_cppflags :=
   my_cpu_variant := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)
+  my_atomic_libdir :=
+  my_libgcc_libdir :=
+  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
+    my_cflags += -mips32r2 -mfp32 -modd-spreg -mno-synci
+    my_libatomic_libdir := lib
+    my_libgcc_libdir := mips-r1
+  endif
   LOCAL_NDK_STL_VARIANT := $(strip $(LOCAL_NDK_STL_VARIANT))
   ifeq (,$(LOCAL_NDK_STL_VARIANT))
     LOCAL_NDK_STL_VARIANT := system
