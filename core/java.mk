@@ -629,10 +629,20 @@ else #LOCAL_IS_STATIC_JAVA_LIBRARY
 $(built_dex_intermediate): PRIVATE_CLASSES_JACK := $(full_classes_jack)
 
 ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
+# Manage coverage filtering.
+jacoco_filter_properties :=
+ifneq (,$(strip $(LOCAL_JACK_COVERAGE_INCLUDE_FILTER)))
+jacoco_filter_properties += -D jack.coverage.jacoco.include=$(strip $(LOCAL_JACK_COVERAGE_INCLUDE_FILTER))
+endif # LOCAL_JACK_COVERAGE_INCLUDE_FILTER
+ifneq (,$(strip $(LOCAL_JACK_COVERAGE_EXCLUDE_FILTER)))
+jacoco_filter_properties += -D jack.coverage.jacoco.exclude=$(strip $(LOCAL_JACK_COVERAGE_EXCLUDE_FILTER))
+endif # LOCAL_JACK_COVERAGE_EXCLUDE_FILTER
+
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS := \
-    -D jack.coverage="true" \
+    -D jack.coverage=true \
     -D jack.coverage.metadata.file=$(intermediates.COMMON)/coverage.em \
-    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME)
+    -D jack.coverage.jacoco.package=$(JACOCO_PACKAGE_NAME) \
+    $(jacoco_filter_properties)
 else
 $(built_dex_intermediate): PRIVATE_JACK_COVERAGE_OPTIONS :=
 endif
