@@ -117,6 +117,7 @@ class RangeSetTest(unittest.TestCase):
     self.assertTrue(RangeSet("").monotonic)
     self.assertTrue(RangeSet("0-4 5-9").monotonic)
     self.assertFalse(RangeSet("5-9 0-4").monotonic)
+    self.assertFalse(RangeSet("258768-259211 196604").monotonic)
 
     self.assertTrue(RangeSet(data=[0, 10]).monotonic)
     self.assertTrue(RangeSet(data=[0, 10, 15, 20]).monotonic)
@@ -137,3 +138,13 @@ class RangeSetTest(unittest.TestCase):
 
     with self.assertRaises(AssertionError):
       RangeSet.parse_raw("4,0,10")
+
+  def test_original_ordered_data(self):
+    self.assertEqual(
+        RangeSet("258768-259211 196604", True)._original_ordered_data(),
+        [258768, 259212, 196604, 196605])
+    self.assertEqual(
+        RangeSet("10-20 30-40 1-5", True).subtract(RangeSet(\
+        "15-20 35-45"))._original_ordered_data(),
+        [10, 15, 30, 35, 1, 6])
+
