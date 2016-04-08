@@ -206,7 +206,7 @@ class SparseImage(object):
     with open(fn) as f:
       for line in f:
         fn, ranges = line.split(None, 1)
-        ranges = rangelib.RangeSet.parse(ranges)
+        ranges = rangelib.RangeSet.parse(ranges, True)
         out[fn] = ranges
         assert ranges.size() == ranges.intersect(remaining).size()
 
