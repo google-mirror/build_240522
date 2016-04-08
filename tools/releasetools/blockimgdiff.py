@@ -1176,5 +1176,5 @@ class BlockImageDiff(object):
     so_far = RangeSet()
     for i in seq:
       assert not so_far.overlaps(i)
-      so_far = so_far.union(i)
+      so_far = so_far.union(RangeSet.parse(i.to_string()))
     assert so_far == total
