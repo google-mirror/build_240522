@@ -178,8 +178,10 @@ class Transfer(object):
     self.tgt_ranges = tgt_ranges
     self.src_ranges = src_ranges
     self.style = style
-    self.intact = (getattr(tgt_ranges, "monotonic", False) and
-                   getattr(src_ranges, "monotonic", False))
+    self.intact = ((getattr(tgt_ranges, "monotonic", False) or
+                   len(tgt_ranges.original_data) != 0) and
+                   (getattr(src_ranges, "monotonic", False) or
+                   len(tgt_ranges.original_data) != 0))
 
     # We use OrderedDict rather than dict so that the output is repeatable;
     # otherwise it would depend on the hash values of the Transfer objects.

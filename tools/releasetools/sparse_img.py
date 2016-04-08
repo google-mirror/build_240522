@@ -206,7 +206,7 @@ class SparseImage(object):
     with open(fn) as f:
       for line in f:
         fn, ranges = line.split(None, 1)
-        ranges = rangelib.RangeSet.parse(ranges)
+        ranges = rangelib.RangeSet.parse(ranges, True)
         out[fn] = ranges
         assert ranges.size() == ranges.intersect(remaining).size()
 
@@ -268,9 +268,7 @@ class SparseImage(object):
     if nonzero_blocks:
       nonzero_groups.append(nonzero_blocks)
       nonzero_blocks = []
-
     assert zero_blocks or nonzero_groups or clobbered_blocks
-
     if zero_blocks:
       out["__ZERO"] = rangelib.RangeSet(data=zero_blocks)
     if nonzero_groups:
