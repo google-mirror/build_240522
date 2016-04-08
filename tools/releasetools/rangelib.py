@@ -23,20 +23,26 @@ class RangeSet(object):
   integers (ie, a set of integers, but efficient when the set contains
   lots of runs."""
 
-  def __init__(self, data=None):
+  def __init__(self, data=None, reserve_order=False):
     self.monotonic = False
     if isinstance(data, str):
-      self._parse_internal(data)
+      self._parse_internal(data, reserve_order)
     elif data:
       assert len(data) % 2 == 0
       self.data = tuple(self._remove_pairs(data))
       self.monotonic = all(x < y for x, y in zip(self.data, self.data[1:]))
+      self.original_data = None
     else:
       self.data = ()
+      self.original_data = None
 
   def __iter__(self):
-    for i in range(0, len(self.data), 2):
-      yield self.data[i:i+2]
+    if self.original_data is not None:
+      data = self._original_ordered_data()
+    else:
+      data = self.data
+    for i in range(0, len(data), 2):
+      yield data[i:i+2]
 
   def __eq__(self, other):
     return self.data == other.data
@@ -57,7 +63,7 @@ class RangeSet(object):
     return '<RangeSet("' + self.to_string() + '")>'
 
   @classmethod
-  def parse(cls, text):
+  def parse(cls, text, reserve_order=False):
     """Parse a text string consisting of a space-separated list of
     blocks and ranges, eg "10-20 30 35-40".  Ranges are interpreted to
     include both their ends (so the above example represents 18
@@ -69,7 +75,7 @@ class RangeSet(object):
     "15-20 30 10-14" is not, even though they represent the same set
     of blocks (and the two RangeSets will compare equal with ==).
     """
-    return cls(text)
+    return cls(text, reserve_order)
 
   @classmethod
   def parse_raw(cls, text):
@@ -84,7 +90,7 @@ class RangeSet(object):
 
     return cls(data=raw[1:])
 
-  def _parse_internal(self, text):
+  def _parse_internal(self, text, reserve_order):
     data = []
     last = -1
     monotonic = True
@@ -105,7 +111,12 @@ class RangeSet(object):
           last = s+1
         else:
           monotonic = True
+    original_data = data[:]
     data.sort()
+    if reserve_order and original_data != data:
+      self.original_data = tuple(original_data)
+    else:
+      self.original_data = None
     self.data = tuple(self._remove_pairs(data))
     self.monotonic = monotonic
 
@@ -126,9 +137,13 @@ class RangeSet(object):
       yield last
 
   def to_string(self):
+    if self.original_data is not None:
+      data = self._original_ordered_data()
+    else:
+      data = self.data
     out = []
-    for i in range(0, len(self.data), 2):
-      s, e = self.data[i:i+2]
+    for i in range(0, len(data), 2):
+      s, e = data[i:i+2]
       if e == s+1:
         out.append(str(s))
       else:
@@ -136,8 +151,40 @@ class RangeSet(object):
     return " ".join(out)
 
   def to_string_raw(self):
-    assert self.data
-    return str(len(self.data)) + "," + ",".join(str(i) for i in self.data)
+    if self.original_data is not None:
+      data = self._original_ordered_data()
+    else:
+      data = self.data
+    assert data
+    return str(len(data)) + "," + ",".join(str(i) for i in data)
+
+  def _original_ordered_data(self):
+    """Return a list of data of the RangeSet in original unsorted order. Note
+    the block ranges should be identical to the one in self.data. For example,
+    this function could return a tuple (258768,259211,196604,196605) when
+    self.data equals (196604,196605,258768,259211).
+
+    >>> RangeSet("258768-259211 196604", True)._original_ordered_data()
+    [258768, 259212, 196604, 196605]
+    >>> RangeSet("10-20 30-40 1-5", True).subtract(RangeSet(\
+        "15-20 35-45"))._original_ordered_data()
+    [10, 15, 30, 35, 1, 6]
+    """
+    if self.original_data is None:
+      return self.data
+    out = []
+    # self.data should be a subset of self.original_data. Add the intersection
+    # of these two lists pair by pair, following the order of original data.
+    for i in range(0, len(self.original_data), 2):
+      range_pair = RangeSet(data=self.original_data[i:i+2])
+      range_pair = range_pair.intersect(self)
+      # Add intersection of the test pair and sorted data to the final output.
+      if len(range_pair.data) != 0:
+        out.extend(list(range_pair.data))
+    sorted_output = out[:]
+    sorted_output.sort()
+    assert sorted_output == list(self.data)
+    return out
 
   def union(self, other):
     """Return a new RangeSet representing the union of this RangeSet
@@ -192,7 +239,12 @@ class RangeSet(object):
       if (z == 0 and d == 1) or (z == 1 and d == -1):
         out.append(p)
       z += d
-    return RangeSet(data=out)
+    ranges = RangeSet(data=out)
+    # If there's a copy of reserve_ordered data in current rangeset,
+    # pass it to the new rangeset after subtraction.
+    if self.original_data is not None:
+      ranges.original_data = self.original_data
+    return ranges
 
   def overlaps(self, other):
     """Returns true if the argument has a nonempty overlap with this
