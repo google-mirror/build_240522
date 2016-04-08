@@ -206,8 +206,10 @@ class SparseImage(object):
     with open(fn) as f:
       for line in f:
         fn, ranges = line.split(None, 1)
+        ranges_unsorted = rangelib.RangeSet.parse_unsorted(ranges)
         ranges = rangelib.RangeSet.parse(ranges)
-        out[fn] = ranges
+
+        out[fn] = ranges_unsorted
         assert ranges.size() == ranges.intersect(remaining).size()
 
         # Currently we assume that blocks in clobbered_blocks are not part of

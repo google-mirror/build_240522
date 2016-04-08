@@ -1137,6 +1137,7 @@ class BlockImageDiff(object):
         # Look for an exact pathname match in the source.
         AddTransfer(tgt_fn, tgt_fn, tgt_ranges, self.src.file_map[tgt_fn],
                     "diff", self.transfers, self.version >= 3)
+        print (tgt_fn, tgt_ranges)
         continue
 
       b = os.path.basename(tgt_fn)
@@ -1176,5 +1177,5 @@ class BlockImageDiff(object):
     so_far = RangeSet()
     for i in seq:
       assert not so_far.overlaps(i)
-      so_far = so_far.union(i)
+      so_far = so_far.union(RangeSet.parse(i.to_string()))
     assert so_far == total

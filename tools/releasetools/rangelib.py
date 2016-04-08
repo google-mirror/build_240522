@@ -23,10 +23,10 @@ class RangeSet(object):
   integers (ie, a set of integers, but efficient when the set contains
   lots of runs."""
 
-  def __init__(self, data=None):
+  def __init__(self, data=None, sort=True):
     self.monotonic = False
     if isinstance(data, str):
-      self._parse_internal(data)
+      self._parse_internal(data, sort)
     elif data:
       assert len(data) % 2 == 0
       self.data = tuple(self._remove_pairs(data))
@@ -84,7 +84,10 @@ class RangeSet(object):
 
     return cls(data=raw[1:])
 
-  def _parse_internal(self, text):
+  def parse_unsorted(cls, text):
+    return cls(text, False)
+
+  def _parse_internal(self, text, sort):
     data = []
     last = -1
     monotonic = True
@@ -105,8 +108,12 @@ class RangeSet(object):
           last = s+1
         else:
           monotonic = True
-    data.sort()
-    self.data = tuple(self._remove_pairs(data))
+    if sort :
+      data.sort()
+      self.data = tuple(self._remove_pairs(data))
+    else :
+      self.data = tuple(data)
+      monotonic = True
     self.monotonic = monotonic
 
   @staticmethod
