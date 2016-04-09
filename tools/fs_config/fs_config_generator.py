@@ -203,6 +203,7 @@ def generate(files, dirs, aids):
         return
 
     if are_files:
+        files.sort(key= lambda x: file_key(x[1]))
         print OPEN_FILE_STRUCT
         for tup in files:
             f = tup[0]
@@ -272,7 +273,6 @@ def main():
     for x in sys.argv[1:]:
         parse(x, files, dirs, aids, seen_paths, seen_aids)
 
-    files.sort(key= lambda x: file_key(x[1]))
     generate(files, dirs, aids)
 
 if __name__ == '__main__':
