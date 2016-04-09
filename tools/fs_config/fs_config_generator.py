@@ -1,294 +1,383 @@
 #!/usr/bin/env python
 
+import argparse
 import ConfigParser
+import os
 import re
 import sys
 
+class generator(object):
 
-GENERATED = '''
+    _generators = {}
+
+    def __init__(self, gen):
+        self._gen = gen
+
+        if gen in generator._generators:
+            raise Exception('Duplicate generator name' + gen)
+
+        generator._generators[gen] = None
+
+    def __call__(self, cls):
+        generator._generators[self._gen] = cls
+        return cls
+
+    @staticmethod
+    def get():
+        return generator._generators
+
+    @staticmethod
+    def set(gens):
+        generator._generators = gens
+
+class FSConfigFileParser():
+
+    # from system/core/include/private/android_filesystem_config.h
+    _AID_OEM_RESERVED_RANGES = [
+        (2900, 2999),
+        (5000, 5999),
+    ]
+
+    _AID_MATCH = re.compile('AID_[a-zA-Z]+')
+
+    def __init__(self, config_files):
+
+        self._files = []
+        self._dirs = []
+        self._aids = []
+
+        self._seen_paths = {}
+        # (name to file, value to aid)
+        self._seen_aids = ({}, {})
+
+        self._config_files = config_files
+
+        for f in self._config_files:
+            self._parse(f)
+
+    def _parse(self, file_name):
+
+            # Separate config parsers for each file found. If you use read(filenames...) later
+            # files can override earlier files which is not what we want. Track state across
+            # files and enforce with handle_dup(). Note, strict ConfigParser is set to true in
+            # Python >= 3.2, so in previous versions same file sections can override previous
+            # sections.
+            config = ConfigParser.ConfigParser()
+            config.read(file_name)
+
+            for s in config.sections():
+
+                if FSConfigFileParser._AID_MATCH.match(s) and config.has_option(s, 'value'):
+                    FSConfigFileParser._handle_dup('AID', file_name, s, self._seen_aids[0])
+                    self._seen_aids[0][s] = file_name
+                    self._handle_aid(file_name, s, config)
+                else:
+                    FSConfigFileParser._handle_dup('path', file_name, s, self._seen_paths)
+                    self._seen_paths[s] = file_name
+                    self._handle_path(file_name, s, config)
+
+                # sort entries:
+                # * specified path before prefix match
+                # ** ie foo before f*
+                # * lexicographical less than before other
+                # ** ie boo before foo
+                # Given these paths:
+                # paths=['ac', 'a', 'acd', 'an', 'a*', 'aa', 'ac*']
+                # The sort order would be:
+                # paths=['a', 'aa', 'ac', 'acd', 'an', 'ac*', 'a*']
+                # Thus the fs_config tools will match on specified paths before attempting
+                # prefix, and match on the longest matching prefix.
+                self._files.sort(key= lambda x: FSConfigFileParser._file_key(x[1]))
+
+                # sort on value of (file_name, name, value, strvalue)
+                # This is only cosmetic so AIDS are arranged in ascending order
+                # within the generated file.
+                self._aids.sort(key=lambda x: x[2])
+
+    def _handle_aid(self, file_name, section_name, config):
+        value = config.get(section_name, 'value')
+
+        errmsg = '%s for: \"' + section_name + '" file: \"' + file_name + '\"'
+
+        if not value:
+            raise Exception(errmsg % 'Found specified but unset "value"')
+
+        v = FSConfigFileParser._convert_int(value)
+        if not v:
+            raise Exception(errmsg % ('Invalid "value", not a number, got: \"%s\"' % value))
+
+        # Values must be within OEM range
+        if not any(lower <= v <= upper for (lower, upper) in FSConfigFileParser._AID_OEM_RESERVED_RANGES):
+            s = '"value" not in valid range %s, got: %s'
+            s = s % (str(FSConfigFileParser._AID_OEM_RESERVED_RANGES), value)
+            raise Exception(errmsg % s)
+
+        # use the normalized int value in the dict and detect
+        # duplicate definitions of the same vallue
+        v = str(v)
+        if v in self._seen_aids[1]:
+            # map of value to aid name
+            a = self._seen_aids[1][v]
+
+            # aid name to file
+            f = self._seen_aids[0][a]
+
+            s = 'Duplicate AID value "%s" found on AID: "%s".' % (value, self._seen_aids[1][v])
+            s += ' Previous found in file: "%s."' % f
+            raise Exception(errmsg % s)
+
+        self._seen_aids[1][v] = section_name
+
+        # Append a tuple of (AID_*, base10(value), str(value))
+        # We keep the str version of value so we can print that out in the
+        # generated header so investigating parties can identify parts.
+        # We store the base10 value for sorting, so everything is ascending
+        # later.
+        self._aids.append((file_name, section_name, v, value))
+
+    def _handle_path(self, file_name, section_name, config):
+
+                mode = config.get(section_name, 'mode')
+                user = config.get(section_name, 'user')
+                group = config.get(section_name, 'group')
+                caps = config.get(section_name, 'caps')
+
+                errmsg = 'Found specified but unset option: \"%s" in file: \"' + file_name + '\"'
+
+                if not mode:
+                    raise Exception(errmsg % 'mode')
+
+                if not user:
+                    raise Exception(errmsg % 'user')
+
+                if not group:
+                    raise Exception(errmsg % 'group')
+
+                if not caps:
+                    raise Exception(errmsg % 'caps')
+
+                caps = caps.split()
+
+                tmp = []
+                for x in caps:
+                    if FSConfigFileParser._convert_int(x):
+                        tmp.append('(' + x + ')')
+                    else:
+                        tmp.append('(1ULL << CAP_' + x.upper() + ')')
+
+                caps = tmp
+
+                path = '"' + section_name + '"'
+
+                if len(mode) == 3:
+                    mode = '0' + mode
+
+                try:
+                    int(mode, 8)
+                except:
+                    raise Exception('Mode must be octal characters, got: "' + mode + '"')
+
+                if len(mode) != 4:
+                    raise Exception('Mode must be 3 or 4 characters, got: "' + mode + '"')
+
+
+                caps = '|'.join(caps)
+
+                x = [ mode, user, group, caps, section_name ]
+                if section_name[-1] == '/':
+                    self._dirs.append((file_name, x))
+                else:
+                    self._files.append((file_name, x))
+
+    def get_files(self):
+        return self._files
+
+    def get_dirs(self):
+        return self._dirs
+
+    def get_aids(self):
+        return self._aids
+
+    @staticmethod
+    def _file_key(x):
+
+        # Wrapper class for custom prefix matching strings
+        class S(object):
+            def __init__(self, str):
+
+                self.orig = str
+                self.is_prefix = str[-1] == '*'
+                if self.is_prefix:
+                    self.str = str[:-1]
+                else:
+                    self.str = str
+
+            def __lt__(self, other):
+
+                # if were both suffixed the smallest string
+                # is 'bigger'
+                if self.is_prefix and other.is_prefix:
+                    b = len(self.str) > len(other.str)
+                # If I am an the suffix match, im bigger
+                elif self.is_prefix:
+                    b = False
+                # If other is the suffix match, he's bigger
+                elif other.is_prefix:
+                    b = True
+                # Alphabetical
+                else:
+                    b = self.str < other.str
+                return b
+
+        return S(x[4])
+
+    @staticmethod
+    def _handle_dup(name, file_name, section_name, seen):
+            if section_name in seen:
+                dups = '"' + seen[section_name] + '" and '
+                dups += file_name
+                raise Exception('Duplicate ' + name + ' "' + section_name + '" found in files: ' + dups)
+
+    @staticmethod
+    def _convert_int(num):
+
+            try:
+                if num.startswith('0x'):
+                    return int(num, 16)
+                elif num.startswith('0b'):
+                    return int(num, 2)
+                elif num.startswith('0'):
+                    return int(num, 8)
+                else:
+                    return int(num, 10)
+            except ValueError:
+                pass
+            return None
+
+@generator("fsconfig")
+class FSConfigGen(object):
+    '''
+    Generates the android_filesystem_config.h file to be used in generating
+    fs_config_files and fs_config_dirs.
+    '''
+
+    GENERATED = '''
 /*
  * THIS IS AN AUTOGENERATED FILE! DO NOT MODIFY
  */
-'''
+ '''
+    INCLUDE = '#include <private/android_filesystem_config.h>'
 
-INCLUDE = '#include <private/android_filesystem_config.h>'
+    DEFINE_NO_DIRS = '#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS\n'
+    DEFINE_NO_FILES = '#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES\n'
 
-DEFINE_NO_DIRS = '#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS\n'
-DEFINE_NO_FILES = '#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES\n'
+    DEFAULT_WARNING = '#warning No device-supplied android_filesystem_config.h, using empty default.'
 
-DEFAULT_WARNING = '#warning No device-supplied android_filesystem_config.h, using empty default.'
+    NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_dirs" },'
+    NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_files" },'
 
-NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_dirs" },'
-NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_files" },'
+    IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS = '#ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS'
+    ENDIF = '#endif'
 
-IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS = '#ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS'
-ENDIF = '#endif'
+    OPEN_FILE_STRUCT = 'static const struct fs_path_config android_device_files[] = {'
+    OPEN_DIR_STRUCT = 'static const struct fs_path_config android_device_dirs[] = {'
+    CLOSE_FILE_STRUCT = '};'
 
-OPEN_FILE_STRUCT = 'static const struct fs_path_config android_device_files[] = {'
-OPEN_DIR_STRUCT = 'static const struct fs_path_config android_device_dirs[] = {'
-CLOSE_FILE_STRUCT = '};'
+    GENERIC_DEFINE = "#define %s\t%s"
 
-GENERIC_DEFINE = "#define %s\t%s"
+    FILE_COMMENT = '// Defined in file: \"%s\"'
 
-FILE_COMMENT = '// Defined in file: \"%s\"'
-
-# from system/core/include/private/android_filesystem_config.h
-AID_OEM_RESERVED_RANGES = [
-    (2900, 2999),
-    (5000, 5999),
-]
-
-
-AID_MATCH = re.compile('AID_[a-zA-Z]+')
-
-def handle_aid(file_name, section_name, config, aids, seen_aids):
-    value = config.get(section_name, 'value')
-
-    errmsg = '%s for: \"' + section_name + '" file: \"' + file_name + '\"'
-
-    if not value:
-        raise Exception(errmsg % 'Found specified but unset "value"')
-
-    v = convert_int(value)
-    if not v:
-        raise Exception(errmsg % ('Invalid "value", not a number, got: \"%s\"' % value))
-
-    # Values must be within OEM range
-    if not any(lower <= v <= upper for (lower, upper) in AID_OEM_RESERVED_RANGES):
-        s = '"value" not in valid range %s, got: %s'
-        s = s % (str(AID_OEM_RESERVED_RANGES), value)
-        raise Exception(errmsg % s)
-
-    # use the normalized int value in the dict and detect
-    # duplicate definitions of the same vallue
-    v = str(v)
-    if v in seen_aids[1]:
-        # map of value to aid name
-        a = seen_aids[1][v]
-
-        # aid name to file
-        f = seen_aids[0][a]
-
-        s = 'Duplicate AID value "%s" found on AID: "%s".' % (value, seen_aids[1][v])
-        s += ' Previous found in file: "%s."' % f
-        raise Exception(errmsg % s)
-
-    seen_aids[1][v] = section_name
-
-    # Append a tuple of (AID_*, base10(value), str(value))
-    # We keep the str version of value so we can print that out in the
-    # generated header so investigating parties can identify parts.
-    # We store the base10 value for sorting, so everything is ascending
-    # later.
-    aids.append((file_name, section_name, v, value))
-
-def convert_int(num):
-
-        try:
-            if num.startswith('0x'):
-                return int(num, 16)
-            elif num.startswith('0b'):
-                return int(num, 2)
-            elif num.startswith('0'):
-                return int(num, 8)
-            else:
-                return int(num, 10)
-        except ValueError:
-            pass
-        return None
-
-def handle_path(file_name, section_name, config, files, dirs):
-
-            mode = config.get(section_name, 'mode')
-            user = config.get(section_name, 'user')
-            group = config.get(section_name, 'group')
-            caps = config.get(section_name, 'caps')
-
-            errmsg = 'Found specified but unset option: \"%s" in file: \"' + file_name + '\"'
-
-            if not mode:
-                raise Exception(errmsg % 'mode')
-
-            if not user:
-                raise Exception(errmsg % 'user')
-
-            if not group:
-                raise Exception(errmsg % 'group')
-
-            if not caps:
-                raise Exception(errmsg % 'caps')
-
-            caps = caps.split()
-
-            tmp = []
-            for x in caps:
-                if convert_int(x):
-                    tmp.append('(' + x + ')')
-                else:
-                    tmp.append('(1ULL << CAP_' + x.upper() + ')')
-
-            caps = tmp
-
-            path = '"' + section_name + '"'
-
-            if len(mode) == 3:
-                mode = '0' + mode
-
-            try:
-                int(mode, 8)
-            except:
-                raise Exception('Mode must be octal characters, got: "' + mode + '"')
-
-            if len(mode) != 4:
-                raise Exception('Mode must be 3 or 4 characters, got: "' + mode + '"')
-
-
-            caps = '|'.join(caps)
-
-            x = [ mode, user, group, caps, section_name ]
-            if section_name[-1] == '/':
-                dirs.append((file_name, x))
-            else:
-                files.append((file_name, x))
-
-def handle_dup(name, file_name, section_name, seen):
-        if section_name in seen:
-            dups = '"' + seen[section_name] + '" and '
-            dups += file_name
-            raise Exception('Duplicate ' + name + ' "' + section_name + '" found in files: ' + dups)
-
-def parse(file_name, files, dirs, aids, seen_paths, seen_aids):
-
-        config = ConfigParser.ConfigParser()
-        config.read(file_name)
-
-        for s in config.sections():
-
-            if AID_MATCH.match(s) and config.has_option(s, 'value'):
-                handle_dup('AID', file_name, s, seen_aids[0])
-                seen_aids[0][s] = file_name
-                handle_aid(file_name, s, config, aids, seen_aids)
-            else:
-                handle_dup('path', file_name, s, seen_paths)
-                seen_paths[s] = file_name
-                handle_path(file_name, s, config, files, dirs)
-
-def generate(files, dirs, aids):
-    print GENERATED
-    print INCLUDE
-    print
-
-    are_dirs = len(dirs) > 0
-    are_files = len(files) > 0
-    are_aids = len(aids) > 0
-
-    if are_aids:
-        for a in aids:
-            # use the preserved str value
-            print FILE_COMMENT % a[0]
-            print GENERIC_DEFINE % (a[1], a[2])
-
+    @staticmethod
+    def generate(files, dirs, aids):
+        print FSConfigGen.GENERATED
+        print FSConfigGen.INCLUDE
         print
 
-    if not are_dirs:
-        print DEFINE_NO_DIRS
+        are_dirs = len(dirs) > 0
+        are_files = len(files) > 0
+        are_aids = len(aids) > 0
 
-    if not are_files:
-        print DEFINE_NO_FILES
+        if are_aids:
+            for a in aids:
+                # use the preserved str value
+                print FSConfigGen.FILE_COMMENT % a[0]
+                print FSConfigGen.GENERIC_DEFINE % (a[1], a[2])
 
-    if not are_files and not are_dirs and not are_aids:
-        print DEFAULT_WARNING
-        return
-
-    if are_files:
-        print OPEN_FILE_STRUCT
-        for tup in files:
-            f = tup[0]
-            c = tup[1]
-            c[4] = '"' + c[4] + '"'
-            c = '{ ' + '    ,'.join(c) + ' },'
-            print FILE_COMMENT % f
-            print '    ' + c
+            print
 
         if not are_dirs:
-            print IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
-            print '    ' + NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY
-            print ENDIF
-        print CLOSE_FILE_STRUCT
+            print FSConfigGen.DEFINE_NO_DIRS
 
-    if are_dirs:
-        print OPEN_DIR_STRUCT
-        for d in dirs:
-            f[4] = '"' + f[4] + '"'
-            d = '{ ' + '    ,'.join(d) + ' },'
-            print '    ' + d
+        if not are_files:
+            print FSConfigGen.DEFINE_NO_FILES
 
-        print CLOSE_FILE_STRUCT
+        if not are_files and not are_dirs and not are_aids:
+            print FSConfigGen.DEFAULT_WARNING
+            return
 
-def file_key(x):
+        if are_files:
+            print FSConfigGen.OPEN_FILE_STRUCT
+            for tup in files:
+                f = tup[0]
+                c = tup[1]
+                c[4] = '"' + c[4] + '"'
+                c = '{ ' + '    ,'.join(c) + ' },'
+                print FSConfigGen.FILE_COMMENT % f
+                print '    ' + c
 
-    # Wrapper class for custom prefix matching strings
-    class S(object):
-        def __init__(self, str):
+            if not are_dirs:
+                print FSConfigGen.IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
+                print '    ' + FSConfigGen.NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY
+                print FSConfigGen.ENDIF
+            print FSConfigGen.CLOSE_FILE_STRUCT
 
-            self.orig = str
-            self.is_prefix = str[-1] == '*'
-            if self.is_prefix:
-                self.str = str[:-1]
-            else:
-                self.str = str
+        if are_dirs:
+            print FSConfigGen.OPEN_DIR_STRUCT
+            for d in dirs:
+                f[4] = '"' + f[4] + '"'
+                d = '{ ' + '    ,'.join(d) + ' },'
+                print '    ' + d
 
-        def __lt__(self, other):
+            print FSConfigGen.CLOSE_FILE_STRUCT
 
-            # if were both suffixed the smallest string
-            # is 'bigger'
-            if self.is_prefix and other.is_prefix:
-                b = len(self.str) > len(other.str)
-            # If I am an the suffix match, im bigger
-            elif self.is_prefix:
-                b = False
-            # If other is the suffix match, he's bigger
-            elif other.is_prefix:
-                b = True
-            # Alphabetical
-            else:
-                b = self.str < other.str
-            return b
-
-    return S(x[4])
+    def __call__(self, files, dirs, aids):
+        FSConfigGen.generate(files, dirs, aids)
 
 def main():
+
+    opt_parser = argparse.ArgumentParser(description='A tool for parsing fsconfig config files and producing digestable outputs.')
+    opt_parser.add_argument('fsconfig', nargs='+', help='The list of fsconfig files to parse')
+
+    generators = generator.get()
+    tmp = {}
+    opts = []
+
+    opt_group = opt_parser.add_mutually_exclusive_group(required=True)
+
+    # for each generator, instantiate and add them as an option
+    for n, g in generators.iteritems():
+        o = '--' + n
+        opts.append(o)
+        opt_group.add_argument(o, help=g.__doc__, action='store_const', const=n, dest='which')
+        # Instantiate and save
+        tmp[n] = g()
+
+    # reassign constructed generators
+    generator.set(tmp)
+
+    args = opt_parser.parse_args()
 
     files = []
     dirs = []
     aids = []
     seen_paths = {}
 
-    # (name to file, value to aid)
-    seen_aids = ({}, {})
+    d = vars(args)
+    which = d['which']
 
-    for x in sys.argv[1:]:
-        parse(x, files, dirs, aids, seen_paths, seen_aids)
+    parser = FSConfigFileParser(d['fsconfig'])
 
-    # sort entries:
-    # * specified path before prefix match
-    # ** ie foo before f*
-    # * lexicographical less than before other
-    # ** ie boo before foo
-    # Given these paths:
-    # paths=['ac', 'a', 'acd', 'an', 'a*', 'aa', 'ac*']
-    # The sort order would be:
-    # paths=['a', 'aa', 'ac', 'acd', 'an', 'ac*', 'a*']
-    # Thus the fs_config tools will match on specified paths before attempting
-    # prefix, and match on the longest matching prefix.
-    files.sort(key= lambda x: file_key(x[1]))
-
-    # sort on value of (file_name, name, value, strvalue)
-    # This is only cosmetic so AIDS are arranged in ascending order
-    # within the generated file.
-    aids.sort(key=lambda x: x[2])
-
-    generate(files, dirs, aids)
+    generator.get()[which](parser.get_files(), parser.get_dirs(), parser.get_aids())
 
 if __name__ == '__main__':
     main()
