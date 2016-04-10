@@ -50,12 +50,14 @@ mode:
   prefixed with a 0, else mode is used as is.
 
 user:
-  The exact, C define for a valid AID. Note custom AIDs can be defined in the
-  AID section documented below.
+  One of the following:
+  * A valid AID_<name> identifier, like AID_SYSTEM
+  * The friendly name, such as system
+  * The value, such as 1000. See "caps" for an explanation of valid
+    integer formats.
 
 group:
-  The exact, C define for a valid AID. Note custom AIDs can be defined in the
-  AID section documented below.
+  Same as user, but applied to the group field.
 
 caps:
   The name as declared in
@@ -76,19 +78,31 @@ The next section type is the "AID" section, for specifying OEM specific AIDS.
 
 The AID section follows the following syntax:
 
-[AID_<name>]
+[name]
 value: <number>
+homedir: <string>
+interpreter: <string>
 
 Where:
 
-[AID_<name>]
-  The <name> can be any valid character for a #define identifier in C.
+[name]
+  The <name> can be any character within the set [a-z0-9_]. Note that when
+  generating the AID_<name> in C header files, the uppercase
+  versing of <name> is used. ie, a name of foo results in a declaration of
+  AID_FOO. However, the exact specified <name> is used as the friendly
+  name.
 
 value:
   A valid C style number string. Hex, octal, binary and decimal are supported.
   See "caps" above for more details on number formatting.
 
-It is an error to specify multiple sections with the same [AID_<name>]. With
+homedir (optional):
+  The homedir associated with that AID.
+
+interpreter (optional):
+  The interpreter associated with that AID.
+
+It is an error to specify multiple sections with the same [name]. With
 the same constraints as [path] described above. It is also an error to specify
 multiple sections with the same value option. It is also an error to specify a
 value that is outside of the inclusive OEM ranges:
