@@ -38,9 +38,7 @@ class FSConfigFileParser():
         (5000, 5999),
     ]
 
-    _AID_MATCH = re.compile('AID_[a-zA-Z]+')
-
-    def __init__(self, config_files):
+    def __init__(self, config_files, base=None):
 
         self._files = []
         self._dirs = []
@@ -51,11 +49,15 @@ class FSConfigFileParser():
         self._seen_aids = ({}, {})
 
         self._config_files = config_files
+        self._base = base
+
+        if base:
+            self._parse(base, is_base=True)
 
         for f in self._config_files:
             self._parse(f)
 
-    def _parse(self, file_name):
+    def _parse(self, file_name, is_base=False):
 
             # Separate config parsers for each file found. If you use read(filenames...) later
             # files can override earlier files which is not what we want. Track state across
@@ -67,10 +69,12 @@ class FSConfigFileParser():
 
             for s in config.sections():
 
-                if FSConfigFileParser._AID_MATCH.match(s) and config.has_option(s, 'value'):
+                if config.has_option(s, 'value'):
+                    # lowercase all section names
+                    s = s.lower()
                     FSConfigFileParser._handle_dup('AID', file_name, s, self._seen_aids[0])
                     self._seen_aids[0][s] = file_name
-                    self._handle_aid(file_name, s, config)
+                    self._handle_aid(file_name, s, config, is_base)
                 else:
                     FSConfigFileParser._handle_dup('path', file_name, s, self._seen_paths)
                     self._seen_paths[s] = file_name
@@ -94,26 +98,30 @@ class FSConfigFileParser():
                 # within the generated file.
                 self._aids.sort(key=lambda x: x[2])
 
-    def _handle_aid(self, file_name, section_name, config):
+    def _handle_aid(self, file_name, section_name, config, is_base):
         value = config.get(section_name, 'value')
 
         errmsg = '%s for: \"' + section_name + '" file: \"' + file_name + '\"'
 
+        if not re.match("^[A-Za-z0-9_]*$", section_name):
+            raise Exception(errmsg % 'Found bad characters in "%s"' % (section_name))
+
         if not value:
             raise Exception(errmsg % 'Found specified but unset "value"')
 
-        v = FSConfigFileParser._convert_int(value)
-        if not v:
-            raise Exception(errmsg % ('Invalid "value", not a number, got: \"%s\"' % value))
+        v = FSConfigFileParser.convert_int(value)
+        if v == None:
+            raise Exception(errmsg % ('Invalid "value", not a number, got: "%s"' % value))
 
-        # Values must be within OEM range
-        if not any(lower <= v <= upper for (lower, upper) in FSConfigFileParser._AID_OEM_RESERVED_RANGES):
-            s = '"value" not in valid range %s, got: %s'
-            s = s % (str(FSConfigFileParser._AID_OEM_RESERVED_RANGES), value)
-            raise Exception(errmsg % s)
+        # Values must be within OEM range in OEM supplied files
+        if not is_base:
+            if not any(lower <= v <= upper for (lower, upper) in FSConfigFileParser._AID_OEM_RESERVED_RANGES):
+                s = '"value" not in valid range %s, got: %s'
+                s = s % (str(FSConfigFileParser._AID_OEM_RESERVED_RANGES), value)
+                raise Exception(errmsg % s)
 
         # use the normalized int value in the dict and detect
-        # duplicate definitions of the same vallue
+        # duplicate definitions of the same value
         v = str(v)
         if v in self._seen_aids[1]:
             # map of value to aid name
@@ -160,7 +168,7 @@ class FSConfigFileParser():
 
                 tmp = []
                 for x in caps:
-                    if FSConfigFileParser._convert_int(x):
+                    if FSConfigFileParser.convert_int(x) != None:
                         tmp.append('(' + x + ')')
                     else:
                         tmp.append('(1ULL << CAP_' + x.upper() + ')')
@@ -239,7 +247,7 @@ class FSConfigFileParser():
                 raise Exception('Duplicate ' + name + ' "' + section_name + '" found in files: ' + dups)
 
     @staticmethod
-    def _convert_int(num):
+    def convert_int(num):
 
             try:
                 if num.startswith('0x'):
@@ -283,12 +291,12 @@ class FSConfigGen(object):
     OPEN_DIR_STRUCT = 'static const struct fs_path_config android_device_dirs[] = {'
     CLOSE_FILE_STRUCT = '};'
 
-    GENERIC_DEFINE = "#define %s\t%s"
+    AID_DEFINE = "#define AID_%s\t%s"
 
     FILE_COMMENT = '// Defined in file: \"%s\"'
 
     @staticmethod
-    def generate(files, dirs, aids):
+    def _generate(files, dirs, aids):
         print FSConfigGen.GENERATED
         print FSConfigGen.INCLUDE
         print
@@ -301,7 +309,7 @@ class FSConfigGen(object):
             for a in aids:
                 # use the preserved str value
                 print FSConfigGen.FILE_COMMENT % a[0]
-                print FSConfigGen.GENERIC_DEFINE % (a[1], a[2])
+                print FSConfigGen.AID_DEFINE % (a[1].upper(), a[2])
 
             print
 
@@ -320,6 +328,11 @@ class FSConfigGen(object):
             for tup in files:
                 f = tup[0]
                 c = tup[1]
+                # Convert any uses of friendly name uid/gids, ie system, instead
+                # of AID_SYSTEM or 1000
+                c[1] = FSConfigGen._convert_friendly_name(c[1])
+                c[2] = FSConfigGen._convert_friendly_name(c[2])
+
                 c[4] = '"' + c[4] + '"'
                 c = '{ ' + '    ,'.join(c) + ' },'
                 print FSConfigGen.FILE_COMMENT % f
@@ -340,13 +353,53 @@ class FSConfigGen(object):
 
             print FSConfigGen.CLOSE_FILE_STRUCT
 
+    @staticmethod
+    def _convert_friendly_name(name):
+
+        # AID_* just use as is
+        if name.startswith('AID'):
+            return name
+
+        # numbers, just us as is
+        if FSConfigFileParser.convert_int(name) != None:
+            return name
+
+        # else use as AID_<name>.upper()
+        return 'AID_' + name.upper()
+
     def __call__(self, files, dirs, aids):
-        FSConfigGen.generate(files, dirs, aids)
+        self._generate(files, dirs, aids)
+
+@generator("passwd")
+class PasswdGen(object):
+    '''
+    Generates a colon delimited passwd file in the format:
+      -login name
+      - encrypted password
+      - numerical uid
+      - numerical gid
+      - user name
+      - home dir
+      - interpreter
+    Note: Some fields may be blank.
+    '''
+
+    def __call__(self, files, dirs, aids):
+
+        for a in aids:
+            f = a[0]
+            n = a[1]
+            # use the normalized int value in passwd files.
+            v = a[2]
+            # name:passwd:uid:gid:user_name:homedir:intepreter
+            print '# source: "' + f + '"'
+            print n + '::' + v + ':' + v + ':' + n + ':/:/system/bin/sh'
 
 def main():
 
     opt_parser = argparse.ArgumentParser(description='A tool for parsing fsconfig config files and producing digestable outputs.')
-    opt_parser.add_argument('fsconfig', nargs='+', help='The list of fsconfig files to parse')
+    opt_parser.add_argument('fsconfig', nargs='*', help='The list of fsconfig files to parse')
+    opt_parser.add_argument('-b', '--base', help='Base Android fsconfig file', dest='base')
 
     generators = generator.get()
     tmp = {}
@@ -375,7 +428,7 @@ def main():
     d = vars(args)
     which = d['which']
 
-    parser = FSConfigFileParser(d['fsconfig'])
+    parser = FSConfigFileParser(d['fsconfig'], base=d['base'])
 
     generator.get()[which](parser.get_files(), parser.get_dirs(), parser.get_aids())
 
