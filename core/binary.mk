@@ -37,7 +37,7 @@ my_src_files := $(LOCAL_SRC_FILES)
 my_src_files_exclude := $(LOCAL_SRC_FILES_EXCLUDE)
 my_static_libraries := $(LOCAL_STATIC_LIBRARIES)
 my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES)
-my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
+my_shared_libraries := $(LOCAL_SHARED_LIBRARIES) $(LOCAL_REEXPORTED_SHARED_LIBRARIES)
 my_cflags := $(LOCAL_CFLAGS)
 my_conlyflags := $(LOCAL_CONLYFLAGS)
 my_cppflags := $(LOCAL_CPPFLAGS)
@@ -181,7 +181,8 @@ endif
 ifdef LOCAL_IS_HOST_MODULE
 my_src_files += $(LOCAL_SRC_FILES_$($(my_prefix)OS)) $(LOCAL_SRC_FILES_$($(my_prefix)OS)_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
 my_static_libraries += $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)OS))
-my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)OS))
+my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)OS)) \
+                       $(LOCAL_REXPORTED_SHARED_LIBRARIES_$($(my_prefix)OS))
 my_cflags += $(LOCAL_CFLAGS_$($(my_prefix)OS))
 my_cppflags += $(LOCAL_CPPFLAGS_$($(my_prefix)OS))
 my_ldflags += $(LOCAL_LDFLAGS_$($(my_prefix)OS))
@@ -193,7 +194,8 @@ endif
 
 my_src_files += $(LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SRC_FILES_$(my_32_64_bit_suffix))
 my_src_files_exclude += $(LOCAL_SRC_FILES_EXCLUDE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SRC_FILES_EXCLUDE_$(my_32_64_bit_suffix))
-my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SHARED_LIBRARIES_$(my_32_64_bit_suffix))
+my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_SHARED_LIBRARIES_$(my_32_64_bit_suffix)) \
+                       $(LOCAL_REEXPORTED_SHARED_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_REEXPORTED_SHARED_LIBRARIES_$(my_32_64_bit_suffix))
 my_cflags += $(LOCAL_CFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_CFLAGS_$(my_32_64_bit_suffix))
 my_cppflags += $(LOCAL_CPPFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_CPPFLAGS_$(my_32_64_bit_suffix))
 my_ldflags += $(LOCAL_LDFLAGS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_LDFLAGS_$(my_32_64_bit_suffix))
@@ -1234,6 +1236,7 @@ ALL_C_CPP_ETC_OBJECTS += $(all_objects)
 # these variables.  Each is a list of bare module names like "libc libm".
 #
 # LOCAL_SHARED_LIBRARIES
+# LOCAL_REEXPORTED_SHARED_LIBRARIES
 # LOCAL_STATIC_LIBRARIES
 # LOCAL_WHOLE_STATIC_LIBRARIES
 #
@@ -1409,9 +1412,14 @@ $(LOCAL_INSTALLED_MODULE): | $(installed_static_library_notice_file_targets)
 ###########################################################
 export_includes := $(intermediates)/export_includes
 $(export_includes): PRIVATE_EXPORT_C_INCLUDE_DIRS := $(my_export_c_include_dirs)
+# Headers exported by whole static libraries are also exported by this library.
 export_include_deps := $(strip \
    $(foreach l,$(my_whole_static_libraries), \
      $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes))
+# Headers exported by re-exported shared libraries will be exported.
+export_include_deps += $(strip \
+   $(foreach l,$(LOCAL_REEXPORTED_SHARED_LIBRARIES), \
+     $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),$(LOCAL_IS_HOST_MODULE),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes))
 $(export_includes): PRIVATE_REEXPORTED_INCLUDES := $(export_include_deps)
 # Make sure .pb.h are already generated before any dependent source files get compiled.
 # Similarly, the generated DBus headers need to exist before we export their location.
