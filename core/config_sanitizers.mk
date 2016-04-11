@@ -92,7 +92,7 @@ ifneq ($(my_sanitize),)
     my_ldflags += -fsanitize=$(fsanitize_arg)
     my_ldlibs += -lrt -ldl
   else
-    ifeq ($(filter address,$(my_sanitize)),)
+    ifeq ($(filter address undefined,$(my_sanitize)),)
       my_cflags += -fsanitize-trap=all
       my_cflags += -ftrap-function=abort
     endif
@@ -142,7 +142,9 @@ endif
 
 ifneq ($(filter undefined,$(my_sanitize)),)
   ifndef LOCAL_IS_HOST_MODULE
-    $(error ubsan is not yet supported on the target)
+#    $(error ubsan is not yet supported on the target)
+    my_static_libraries = libsan libubsan libubsan_cxx $(my_static_libraries)
+    my_shared_libraries += liblog
   endif
 endif
 

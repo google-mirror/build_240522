@@ -117,6 +117,8 @@ CLANG_DEFAULT_UB_CHECKS := \
   shift-exponent \
   unreachable \
   vla-bound \
+  signed-integer-overflow \
+  unsigned-integer-overflow \
 
 # TODO(danalbert): The following checks currently have compiler performance
 # issues.

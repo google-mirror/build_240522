@@ -265,7 +265,6 @@ my_cppflags := $(my_cpp_std_version) $(my_cppflags)
 my_static_libraries := $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_static_libraries)
 my_whole_static_libraries := $(LOCAL_WHOLE_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_WHOLE_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_whole_static_libraries)
 
-include $(BUILD_SYSTEM)/cxx_stl_setup.mk
 
 # Add static HAL libraries
 ifdef LOCAL_HAL_STATIC_LIBRARIES
@@ -283,6 +282,7 @@ else
 endif
 
 include $(BUILD_SYSTEM)/config_sanitizers.mk
+include $(BUILD_SYSTEM)/cxx_stl_setup.mk
 
 # Add in libcompiler_rt for all regular device builds
 ifeq (,$(LOCAL_SDK_VERSION)$(WITHOUT_LIBCOMPILER_RT))
@@ -1338,6 +1338,10 @@ my_cflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags
 my_cppflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_cppflags))
 my_asflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_asflags))
 my_ldflags := $(call $(LOCAL_2ND_ARCH_VAR_PREFIX)convert-to-$(my_host)clang-flags,$(my_ldflags))
+else
+# gcc does not handle hidden functions in a manner compatible with LLVM libcxx
+# see b/27908145
+my_cflags += -Wno-attributes
 endif
 
 ifeq ($(my_fdo_build), true)
