@@ -118,3 +118,15 @@ The declared AIDS are sorted in ascending numerical order based on the option "v
 representation of value is preserved. Both choices were made for maximum readability of the generated
 file and to line up files. Sync lines are placed with the source file as comments in the generated
 header file.
+
+For OEMs wishing to use the define AIDs in their native code, one can access the generated dir and
+file like so:
+  oem_aid_dir := $(call generated-sources-dir-for,EXECUTABLES,fs_config_generate_$(TARGET_DEVICE))
+  oem_aid_file := $(oem_aid_dir)/generated_oem_aid.h
+
+And don't forget to set-up both the include paths, as well as the additional dependency to generate
+the header.
+  LOCAL_C_INCLUDES := $(oem_aid_dir)
+  LOCAL_ADDITIONAL_DEPENDENCIES := $(oem_aid_file)
+
+Then in your C code just #include "generated_oem_aid.h" and start using the declared identifiers.
