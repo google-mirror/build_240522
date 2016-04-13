@@ -223,16 +223,29 @@ ifeq ($(TARGET_CPU_ABI),)
 endif
 TARGET_CPU_ABI2 := $(strip $(TARGET_CPU_ABI2))
 
+## Append checksums of prerequisites .toc files to a .toc file. We use
+## checksums instead of their full contents to avoid exponential
+## growth in size.
+# $(1): The output .toc file
+define _append_needed_tocs
+$(hide) for t in $(PRIVATE_NEEDED_TOCS); do \
+    echo -n "Needed: " >> $(1) ; \
+    sha1sum $$t >> $(1) ; \
+done
+endef
+
 # Commands to generate .toc file common to ELF .so files.
 define _gen_toc_command_for_elf
 $(hide) ($($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) -d $(1) | grep SONAME || echo "No SONAME for $1") > $(2)
 $(hide) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) --dyn-syms $(1) | awk '{$$2=""; $$3=""; print}' >> $(2)
+$(call _append_needed_tocs,$(2))
 endef
 
 # Commands to generate .toc file from Darwin dynamic library.
 define _gen_toc_command_for_macho
 $(hide) otool -l $(1) | grep LC_ID_DYLIB -A 5 > $(2)
 $(hide) nm -gP $(1) | cut -f1-2 -d" " | grep -v U$$ >> $(2)
+$(call _append_needed_tocs,$(2))
 endef
 
 combo_target := HOST_
