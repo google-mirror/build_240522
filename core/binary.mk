@@ -1391,6 +1391,9 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_STATIC_LIBRARIES := $(built_static_li
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_WHOLE_STATIC_LIBRARIES := $(built_whole_libraries)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_OBJECTS := $(strip $(all_objects))
 
+$(LOCAL_BUILT_MODULE).toc: $(built_shared_library_deps)
+$(LOCAL_BUILT_MODULE).toc: PRIVATE_NEEDED_TOCS := $(built_shared_library_deps)
+
 ###########################################################
 # Define library dependencies.
 ###########################################################
