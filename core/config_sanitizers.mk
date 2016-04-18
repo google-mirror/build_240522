@@ -71,8 +71,13 @@ ifneq ($(my_clang),true)
   endif
 endif
 
-ifneq ($(filter default-ub,$(my_sanitize)),)
-  my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
+ifneq ($(filter undefined,$(my_sanitize)),)
+  # If LOCAL_UNDEFINED_SANITIZE is set use its value, else use the default
+  ifneq ($(strip $(LOCAL_UNDEFINED_SANITIZE)),)
+    my_sanitize := $(LOCAL_UNDEFINED_SANITIZE)
+  else
+    my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
+  endif
 endif
 
 ifneq ($(filter coverage,$(my_sanitize)),)
@@ -92,7 +97,7 @@ ifneq ($(my_sanitize),)
     my_ldflags += -fsanitize=$(fsanitize_arg)
     my_ldlibs += -lrt -ldl
   else
-    ifeq ($(filter address,$(my_sanitize)),)
+    ifeq ($(filter address undefined,$(my_sanitize)),)
       my_cflags += -fsanitize-trap=all
       my_cflags += -ftrap-function=abort
     endif
@@ -143,6 +148,8 @@ endif
 ifneq ($(filter undefined,$(my_sanitize)),)
   ifndef LOCAL_IS_HOST_MODULE
     $(error ubsan is not yet supported on the target)
+    my_static_libraries += libsan libubsan libubsan_cxx
+    my_shared_libraries += liblog
   endif
 endif
 
