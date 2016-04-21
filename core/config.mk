@@ -890,3 +890,5 @@ export PATH:=$(abspath $(BUILD_SYSTEM)/no_java_path):$(PATH)
 endif
 
 include $(BUILD_SYSTEM)/dumpvar.mk
+
+include $(BUILD_SYSTEM)/tidy.mk
