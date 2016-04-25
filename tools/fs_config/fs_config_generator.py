@@ -90,7 +90,10 @@ class AID(object):
         value (str) The User Id (uid) of the associate define.
         found (str) The file it was found in, can be None.
         normalized_value (str): Same as value, but base 10.
+        friendly (str): The friendly name of aid.
     '''
+
+    PREFIX = 'AID_'
 
     def __init__(self, identifier, value, found, normalized_value=None):
         '''
@@ -110,6 +113,9 @@ class AID(object):
         self.found = found
         self.normalized_value = normalized_value if normalized_value else str(
             int(value))
+
+        # Where we calculate the friendly name
+        self.friendly = identifier[len(AID.PREFIX):].lower()
 
 
 class FSConfig(object):
@@ -153,8 +159,7 @@ class AIDHeaderParser(object):
     '''
 
     _SKIPWORDS = ['UNUSED']
-    _AID_KW = 'AID_'
-    _AID_DEFINE = re.compile('\s*#define\s+%s.*' % _AID_KW)
+    _AID_DEFINE = re.compile('\s*#define\s+%s.*' % AID.PREFIX)
     _OEM_START_KW = 'START'
     _OEM_END_KW = 'END'
     _OEM_RANGE = re.compile('AID_OEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
@@ -245,19 +250,21 @@ class AIDHeaderParser(object):
             Exception: With message set to indicate the error.
         '''
 
-        # friendly name
-        name = AIDHeaderParser._convert_friendly(identifier)
+        aid = AID(identifier, value, self._aid_header)
+
+        # Fixup the generated friendly name to our fixup list
+        aid.friendly = AIDHeaderParser._fixup_friendly(aid.friendly)
 
         # duplicate name
-        if name in self._aid_name_to_value:
+        if aid.friendly in self._aid_name_to_value:
             raise Exception('Duplicate aid "%s"' % identifier)
 
         if value in self._aid_value_to_name:
             raise Exception('Duplicate aid value "%u" for %s' % value,
                             identifier)
 
-        self._aid_name_to_value[name] = AID(identifier, value, self._aid_header)
-        self._aid_value_to_name[value] = name
+        self._aid_name_to_value[aid.friendly] = aid
+        self._aid_value_to_name[value] = aid.friendly
 
     def _handle_oem_range(self, identifier, value):
         '''
@@ -375,23 +382,22 @@ class AIDHeaderParser(object):
         return tuple(lst)
 
     @staticmethod
-    def _convert_friendly(identifier):
+    def _fixup_friendly(friendly):
         '''
-        Translate AID_FOO_BAR to foo_bar (ie name)
+        Fixup any friendly mappings that don't follow
+        the convention in the AID class.
 
         Args:
-            identifier (str): The name of the #define.
+            friendly (str): The friendly name.
 
         Returns:
-            The friendly name as a str.
+            The fixedup friendly name as a str.
         '''
 
-        name = identifier[len(AIDHeaderParser._AID_KW):].lower()
+        if friendly in AIDHeaderParser._FIXUPS:
+            return AIDHeaderParser._FIXUPS[friendly]
 
-        if name in AIDHeaderParser._FIXUPS:
-            return AIDHeaderParser._FIXUPS[name]
-
-        return name
+        return friendly
 
     @staticmethod
     def _is_oem_range(aid):
@@ -435,8 +441,7 @@ class FSConfigFileParser(object):
     # Since _AID_PREFIX is within the set of _AID_MATCH the error logic only
     # checks end, if you change this, you may have to update the error
     # detection code.
-    _AID_PREFIX = 'AID_'
-    _AID_MATCH = re.compile('%s[A-Z0-9_]+' % _AID_PREFIX)
+    _AID_MATCH = re.compile('%s[A-Z0-9_]+' % AID.PREFIX)
     _AID_ERR_MSG = 'Expecting upper case, a number or underscore'
 
     # list of handler to required options, used to identify the
@@ -543,7 +548,7 @@ class FSConfigFileParser(object):
         errmsg = ('%s for: \"' + section_name + '" file: \"' + file_name + '\"')
 
         match = FSConfigFileParser._AID_MATCH.match(section_name)
-        invalid = match.end() if match else len(FSConfigFileParser._AID_PREFIX)
+        invalid = match.end() if match else len(AID.PREFIX)
         if invalid != len(section_name):
             tmp_errmsg = ('Invalid characters in AID section at "%d" for: "%s"'
                           % (invalid, FSConfigFileParser._AID_ERR_MSG))
