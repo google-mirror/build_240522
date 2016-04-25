@@ -14,6 +14,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
+system_android_filesystem_config := system/core/include/private/android_filesystem_config.h
+
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := fs_config.c
@@ -81,7 +83,6 @@ LOCAL_SHARED_LIBRARIES := libcutils
 LOCAL_CFLAGS := -Werror -Wno-error=\#warnings
 
 ifneq ($(TARGET_FS_CONFIG_GEN),)
-system_android_filesystem_config := system/core/include/private/android_filesystem_config.h
 
 # Generate the "generated_oem_aid.h" file
 # One can access the dir and filelike so:
@@ -113,7 +114,6 @@ LOCAL_GENERATED_SOURCES := $(oem) $(gen)
 
 my_fs_config_h := $(gen)
 my_gen_oem_aid := $(oem)
-system_android_filesystem_config :=
 gen :=
 oem :=
 endif
@@ -146,6 +146,25 @@ include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
 	$< -F -o $@
+
+##################################
+# Generate the system/etc/passwd text file for the target
+# This file is always generated, but may be empty.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd
+LOCAL_MODULE_CLASS := ETC
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --aidhdr=$(PRIVATE_ANDROID_FS_HDR) $(PRIVATE_TARGET_FS_CONFIG_GEN) > $@
+
+system_android_filesystem_config :=
 
 ANDROID_FS_CONFIG_H :=
 my_fs_config_h :=
