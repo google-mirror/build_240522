@@ -84,6 +84,31 @@ class Utils(object):
 
         return any(lower <= value <= upper for (lower, upper) in ranges)
 
+    @staticmethod
+    def get_login_and_uid_cleansed(aid):
+        """Returns a passwd/group file safe logon and uid.
+
+        This checks that the logon and uid of the AID do not
+        contain the delimiter ":" for a passwd/group file.
+
+        Dies on failure by calling sys.exit().
+
+        Args:
+            aid (AID): The aid to check
+
+        Returns:
+            logon, uid of the AID after checking its safe.
+        """
+        logon = aid.friendly
+        uid = aid.normalized_value
+        if ':' in uid:
+            sys.exit('Cannot specify delimiter character ":" in uid: "%s"' %
+                     uid)
+        if ':' in logon:
+            sys.exit('Cannot specify delimiter character ":" in logon: "%s"' %
+                     logon)
+        return logon, uid
+
 
 # pylint: disable=too-few-public-methods
 class AID(object):
@@ -1139,9 +1164,9 @@ class PasswdGen(BaseGenerator):
         print PasswdGen._GENERATED
 
         for aid in aids:
-            self._print_aid_passwd_line(aid)
+            self._print_formatted_line(aid)
 
-    def _print_aid_passwd_line(self, aid):
+    def _print_formatted_line(self, aid):
         """
         Prints the aid to stdout in the passwd format.
         Internal use only.
@@ -1162,16 +1187,34 @@ class PasswdGen(BaseGenerator):
             self._old_file = aid.found
             print PasswdGen._FILE_COMMENT % aid.found
 
-        logon = aid.friendly
-        uid = aid.normalized_value
-        if ':' in uid:
-            sys.exit('Cannot specify delimiter character ":" in uid: "%s"' %
-                     uid)
-        if ':' in logon:
-            sys.exit('Cannot specify delimiter character ":" in logon: "%s"' %
-                     logon)
+        logon, uid = Utils.get_login_and_uid_cleansed(aid)
 
         print "%s::%s:%s::/:/system/bin/sh" % (logon, uid, uid)
+
+
+@generator('group')
+class GroupGen(PasswdGen):
+    """Generates the /etc/group file per man (5) group."""
+
+    # Overrides parent
+    def _print_formatted_line(self, aid):
+        """
+        Prints the aid to stdout in the group format.
+        Internal use only.
+
+        Formatted (per man 5 group) like:
+            group_name:password:GID:user_list
+
+        Args:
+            aid (AID): The aid to print.
+        """
+        if self._old_file != aid.found:
+            self._old_file = aid.found
+            print PasswdGen._FILE_COMMENT % aid.found
+
+        logon, uid = Utils.get_login_and_uid_cleansed(aid)
+
+        print "%s::%s:" % (logon, uid)
 
 
 def main():
