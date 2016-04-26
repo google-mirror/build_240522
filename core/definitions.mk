@@ -1698,6 +1698,8 @@ endef
 define transform-o-to-shared-lib
 @echo "target SharedLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
+$(hide) mkdir -p $(PRIVATE_INTERMEDIATES_DIR) && \
+        echo "$(PRIVATE_ALL_SHARED_LIBRARIES)" > $(PRIVATE_INTERMEDIATES_DIR)/shared_libraries.txt
 $(transform-o-to-shared-lib-inner)
 endef
 
