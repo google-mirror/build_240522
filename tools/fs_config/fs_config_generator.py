@@ -943,7 +943,6 @@ class FSConfigGen(BaseGenerator):
             print FSConfigGen._DEFINE_NO_FILES
 
         if not are_files and not are_dirs and not are_aids:
-            print FSConfigGen._DEFAULT_WARNING
             return
 
         if are_files:
