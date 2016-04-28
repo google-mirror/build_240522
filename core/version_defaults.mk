@@ -116,6 +116,13 @@ ifeq "" "$(PLATFORM_SECURITY_PATCH)"
   PLATFORM_SECURITY_PATCH := 2016-03-01
 endif
 
+ifeq "" "$(PLATFORM_SECURE_VERSION)"
+  # This is the version included in hardware keystore attestation. It's a
+  # simple integer that increases monotonically. Do not decrease the version
+  # number, and increase it at least for each major release.
+  PLATFORM_SECURE_VERSION := 0
+endif
+
 ifeq "" "$(PLATFORM_BASE_OS)"
   # Used to indicate the base os applied to the device.
   # Can be an arbitrary string, but must be a single word.
