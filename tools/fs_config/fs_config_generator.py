@@ -146,6 +146,19 @@ class AID(object):
         # Where we calculate the friendly name
         self.friendly = identifier[len(AID.PREFIX):].lower()
 
+    @staticmethod
+    def is_friendly(name):
+        '''Determines if an AID is a freindly name or C define
+
+        For example if name is AID_SYSTEM it returns false, if name
+        was system, it would return true.
+
+        Returns:
+            True if name is a friendly name False otherwise.
+        '''
+
+        return not name.startswith(AID.PREFIX)
+
 
 # pylint: disable=too-few-public-methods
 class FSConfig(object):
@@ -192,8 +205,7 @@ class AIDHeaderParser(object):
     """
 
     _SKIPWORDS = ['UNUSED']
-    _AID_KW = 'AID_'
-    _AID_DEFINE = re.compile(r'\s*#define\s+%s.*' % _AID_KW)
+    _AID_DEFINE = re.compile(r'\s*#define\s+%s.*' % AID.PREFIX)
     _OEM_START_KW = 'START'
     _OEM_END_KW = 'END'
     _OEM_RANGE = re.compile('AID_OEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
@@ -807,6 +819,8 @@ class FSConfigFileParser(object):
             sys.exit('Duplicate %s "%s" found in files: %s' %
                      (name, section_name, dups))
 
+        seen[section_name] = file_name
+
 
 class BaseGenerator(object):
     """Interface for Generators.
@@ -887,6 +901,13 @@ class FSConfigGen(BaseGenerator):
 
     _FILE_COMMENT = '// Defined in file: \"%s\"'
 
+    def __init__(self, *args, **kwargs):
+        BaseGenerator.__init__(args, kwargs)
+
+        self._oem_parser = None
+        self._base_parser = None
+        self._friendly_to_aid = None
+
     def add_opts(self, opt_group):
 
         opt_group.add_argument(
@@ -900,20 +921,48 @@ class FSConfigGen(BaseGenerator):
 
     def __call__(self, args):
 
-        hdr = AIDHeaderParser(args['aid_header'])
-        oem_ranges = hdr.get_oem_ranges()
+        self._base_parser = AIDHeaderParser(args['aid_header'])
+        self._oem_parser = FSConfigFileParser(
+            args['fsconfig'], self._base_parser.get_oem_ranges())
+        base_aids = self._base_parser.get_aids()
+        oem_aids = self._oem_parser.get_aids()
 
-        parser = FSConfigFileParser(args['fsconfig'], oem_ranges)
-        FSConfigGen._generate(parser.get_files(),
-                              parser.get_dirs(), parser.get_aids())
+        # Detect name collisions on AIDs. Since friendly works as the identifier
+        # for collision testing and we need friendly later on for name
+        # resolution, just calculate and use friendly.
+        # {aid.friendly: aid for aid in base_aids}
+        base_friendly = {aid.friendly: aid for aid in base_aids}
+        oem_friendly = {aid.friendly: aid for aid in oem_aids}
 
-    @staticmethod
-    def _to_fs_entry(fs_config):
+        base_set = set(base_friendly.keys())
+        oem_set = set(oem_friendly.keys())
+
+        common = base_set & oem_set
+
+        if len(common) > 0:
+            emsg = 'Following AID Collisions detected for: \n'
+            for friendly in common:
+                base = base_friendly[friendly]
+                oem = oem_friendly[friendly]
+                emsg += (
+                    'Identifier: "%s" Friendly Name: "%s" '
+                    'found in file "%s" and "%s"' %
+                    (base.identifier, base.friendly, base.found, oem.found))
+                sys.exit(emsg)
+
+        self._friendly_to_aid = oem_friendly
+        self._friendly_to_aid.update(base_friendly)
+
+        self._generate()
+
+    def _to_fs_entry(self, fs_config):
         """
         Given an FSConfig entry, converts it to a proper
         array entry for the array entry.
 
         { mode, user, group, caps, "path" },
+
+        Calls sys.exit() on error.
 
         Args:
             fs_config (FSConfig): The entry to convert to
@@ -927,6 +976,19 @@ class FSConfigGen(BaseGenerator):
         fname = fs_config.filename
         caps = fs_config.caps
         path = fs_config.path
+
+        emsg = 'Cannot convert friendly name "%s" to identifier!'
+
+        # remap friendly names to identifier names
+        if AID.is_friendly(user):
+            if user not in self._friendly_to_aid:
+                sys.exit(emsg % user)
+            user = self._friendly_to_aid[user].identifier
+
+        if AID.is_friendly(group):
+            if group not in self._friendly_to_aid:
+                sys.exit(emsg % group)
+            group = self._friendly_to_aid[group].identifier
 
         fmt = '{ %s, %s, %s, %s, "%s" },'
 
@@ -944,8 +1006,7 @@ class FSConfigGen(BaseGenerator):
         for include in FSConfigGen._INCLUDES:
             print '#include %s' % include
 
-    @staticmethod
-    def _generate(files, dirs, aids):
+    def _generate(self):
         """
         Generates a valid OEM android_filesystem_config.h header file to
         stdout.
@@ -961,6 +1022,10 @@ class FSConfigGen(BaseGenerator):
 
         FSConfigGen._gen_inc()
         print
+
+        dirs = self._oem_parser.get_dirs()
+        files = self._oem_parser.get_files()
+        aids = self._oem_parser.get_aids()
 
         are_dirs = len(dirs) > 0
         are_files = len(files) > 0
@@ -986,7 +1051,7 @@ class FSConfigGen(BaseGenerator):
         if are_files:
             print FSConfigGen._OPEN_FILE_STRUCT
             for fs_config in files:
-                FSConfigGen._to_fs_entry(fs_config)
+                self._to_fs_entry(fs_config)
 
             if not are_dirs:
                 print FSConfigGen._IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
@@ -999,7 +1064,7 @@ class FSConfigGen(BaseGenerator):
         if are_dirs:
             print FSConfigGen._OPEN_DIR_STRUCT
             for dir_entry in dirs:
-                FSConfigGen._to_fs_entry(dir_entry)
+                self._to_fs_entry(dir_entry)
 
             print FSConfigGen._CLOSE_FILE_STRUCT
 
