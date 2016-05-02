@@ -115,13 +115,11 @@ class AID(object):
         value (str) The User Id (uid) of the associate define.
         found (str) The file it was found in, can be None.
         normalized_value (str): Same as value, but base 10.
-        friendly (str): The friendly name of aid.
-
     '''
 
     PREFIX = 'AID_'
 
-    def __init__(self, identifier, value, normalized_value=None, found=None):
+    def __init__(self, identifier, value, found, normalized_value=None):
         '''
         Args:
             identifier: The identifier name for a #define <identifier>.
@@ -275,7 +273,7 @@ class AIDHeaderParser(object):
             Exception: With message set to indicate the error.
         '''
 
-        aid = AID(identifier, value)
+        aid = AID(identifier, value, self._aid_header)
 
         # Fixup the generated friendly name to our fixup list
         aid.friendly = AIDHeaderParser._fixup_friendly(aid.friendly)
@@ -607,7 +605,7 @@ class FSConfigFileParser(object):
         # generated header so investigating parties can identify parts.
         # We store the base10 value for sorting, so everything is ascending
         # later.
-        self._aids.append(AID(section_name, value, normalized_value, file_name))
+        self._aids.append(AID(section_name, value, file_name, normalized_value))
 
     def _handle_path(self, file_name, section_name, config):
         '''
