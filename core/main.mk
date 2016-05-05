@@ -104,6 +104,8 @@ endif
 
 # Mark this is a ninja build.
 $(shell mkdir -p $(OUT_DIR) && touch $(OUT_DIR)/ninja_build)
+# Default soong to on
+USE_SOONG ?= true
 include build/core/ninja.mk
 else # KATI
 
