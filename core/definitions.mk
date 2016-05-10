@@ -397,7 +397,7 @@ endef
 
 ###########################################################
 ## Find all of the files matching pattern
-##    SRC_FILES := $(call all-subdir-java-files)
+##    SRC_FILES := $(call find-subdir-assets, res)
 ###########################################################
 
 define find-subdir-assets
