@@ -404,8 +404,13 @@ def AddImagesToTargetFiles(filename):
     for line in lines:
       img_name = line.strip() + ".img"
       img_radio_path = os.path.join(OPTIONS.input_tmp, "RADIO", img_name)
+      img_vendor_path = os.path.join(
+        OPTIONS.input_tmp, "VENDOR_IMAGES", img_name)
       if os.path.exists(img_radio_path):
         common.ZipWrite(output_zip, img_radio_path,
+                        os.path.join("IMAGES", img_name))
+      elif os.path.exists(img_vendor_path):
+        common.ZipWrite(output_zip, img_vendor_path,
                         os.path.join("IMAGES", img_name))
 
       # Zip spec says: All slashes MUST be forward slashes.
