@@ -32,9 +32,14 @@ ifneq (,$(filter cortex-a7 cortex-a53 cortex-a53.a57,$(TARGET_$(combo_2nd_arch_p
 		-Wl,--no-fix-cortex-a8
 else
 	arch_variant_cflags := -march=armv7-a
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),cortex-a9)
+	arch_variant_ldflags := \
+		-Wl,--no-fix-cortex-a8
+else
 	# Generic ARM might be a Cortex A8 -- better safe than sorry
 	arch_variant_ldflags := \
 		-Wl,--fix-cortex-a8
+endif
 endif
 endif
 endif
