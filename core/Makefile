@@ -1640,10 +1640,6 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
 endif
 name := $(name)-target_files-$(FILE_NAME_TAG)
 
-ifdef BRILLO_VENDOR_PARTITIONS
-  vendor_partitions_intermediates := $(call intermediates-dir-for, PACKAGING, vendor-partitions)
-endif
-
 intermediates := $(call intermediates-dir-for,PACKAGING,target_files)
 BUILT_TARGET_FILES_PACKAGE := $(intermediates)/$(name).zip
 $(BUILT_TARGET_FILES_PACKAGE): intermediates := $(intermediates)
@@ -1878,8 +1874,12 @@ ifeq ($(AB_OTA_UPDATER),true)
 	$(hide) echo "build_type=$(TARGET_BUILD_VARIANT)" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo "ab_update=true" >> $(zip_root)/META/misc_info.txt
 ifdef BRILLO_VENDOR_PARTITIONS
-	@mkdir -p $(zip_root)/VENDOR_IMAGES
-	$(hide) $(ACP) -r -d -p $(vendor_partitions_intermediates)/*.img $(zip_root)/VENDOR_IMAGES
+	$(hide) mkdir -p $(zip_root)/VENDOR_IMAGES
+	$(hide) for f in $(BRILLO_VENDOR_PARTITIONS); do \
+		src=$${f/://}; \
+		dest=$(zip_root)/VENDOR_IMAGES/$$(basename $${src}); \
+		$(ACP) $${src} $${dest}; \
+	done;
 endif
 ifdef OSRELEASED_DIRECTORY
 	$(hide) $(ACP) $(TARGET_OUT_ETC)/$(OSRELEASED_DIRECTORY)/product_id $(zip_root)/META/product_id.txt
