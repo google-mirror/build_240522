@@ -1322,9 +1322,14 @@ installed_static_library_notice_file_targets := \
     $(foreach lib,$(my_static_libraries) $(my_whole_static_libraries), \
       NOTICE-$(if $(LOCAL_IS_HOST_MODULE),HOST,TARGET)-STATIC_LIBRARIES-$(lib))
 
-# Default is -fno-rtti.
+# Default is -fno-rtti for Android
+# Allow PLATFORM_DEFAULT_RTTI_FLAG to override
 ifeq ($(strip $(LOCAL_RTTI_FLAG)),)
+ifeq ($(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_DEFAULT_RTTI_FLAG)),)
 LOCAL_RTTI_FLAG := -fno-rtti
+else
+LOCAL_RTTI_FLAG := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_DEFAULT_RTTI_FLAG)
+endif
 endif
 
 ###########################################################
