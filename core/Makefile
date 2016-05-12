@@ -46,6 +46,10 @@ $(foreach cf,$(unique_product_copy_files_pairs), \
 unique_product_copy_files_pairs :=
 unique_product_copy_files_destinations :=
 
+# Used by art/tools/buildbot-build.sh.
+.phony: system/etc/public.libraries.txt
+system/etc/public.libraries.txt: $(call append-path,$(PRODUCT_OUT),system/etc/public.libraries.txt)
+
 # -----------------------------------------------------------------
 # Define rules to copy headers defined in copy_headers.mk
 # If more than one makefile declared a header, print a warning,
