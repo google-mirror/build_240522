@@ -82,7 +82,11 @@ ifdef LOCAL_SDK_VERSION
   endif
 
   my_ndk_source_root := $(HISTORICAL_NDK_VERSIONS_ROOT)/$(LOCAL_NDK_VERSION)/sources
-  my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/$(LOCAL_NDK_VERSION)/platforms/android-$(LOCAL_SDK_VERSION)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+  my_local_sdk_version := $(filter-out 3 4 5 6 7 8,$(LOCAL_SDK_VERSION))
+  ifeq ($(my_local_sdk_version),)
+    my_local_sdk_version := 9
+  endif
+  my_ndk_sysroot := $(HISTORICAL_NDK_VERSIONS_ROOT)/$(LOCAL_NDK_VERSION)/platforms/android-$(my_local_sdk_version)/arch-$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
   my_ndk_sysroot_include := $(my_ndk_sysroot)/usr/include
 
   # x86_64 and and mips64 are both multilib toolchains, so their libraries are
@@ -162,7 +166,7 @@ ifdef LOCAL_SDK_VERSION
     endif
 
     ifeq (c++_static,$(LOCAL_NDK_STL_VARIANT))
-      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++_static.a
+      my_ndk_stl_static_lib := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++_static.a $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++abi.a $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libunwind.a $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libandroid_support.a
       my_ldlibs += -ldl
     else
       my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/llvm-libc++/libs/$(my_cpu_variant)/libc++_shared.so
