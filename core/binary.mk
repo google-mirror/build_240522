@@ -70,17 +70,6 @@ ifdef LOCAL_SDK_VERSION
     $(error $(LOCAL_PATH): LOCAL_SDK_VERSION cannot be used in host module)
   endif
 
-  # mips32r6 is not supported by the NDK. No released NDK contains these
-  # libraries, but the r10 in prebuilts/ndk had a local hack to add them :(
-  #
-  # We need to find a real solution to this problem, but until we do just drop
-  # mips32r6 things back to r10 to get the tree building again.
-  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
-    ifeq ($(LOCAL_NDK_VERSION), current)
-      LOCAL_NDK_VERSION := r10
-    endif
-  endif
-
   my_ndk_source_root := $(HISTORICAL_NDK_VERSIONS_ROOT)/$(LOCAL_NDK_VERSION)/sources
   # oldest supported SDK api is 9
   my_local_sdk_version := $(filter-out 3 4 5 6 7 8,$(LOCAL_SDK_VERSION))
