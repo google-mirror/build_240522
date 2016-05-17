@@ -379,6 +379,7 @@ ifneq (,$(user_variant))
 
   ifeq ($(user_variant),user)
     ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
+    ADDITIONAL_DEFAULT_PROPERTIES += persist.security.perf_harden=1
   endif
 
   ifeq ($(user_variant),userdebug)
