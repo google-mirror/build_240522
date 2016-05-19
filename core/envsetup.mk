@@ -474,4 +474,9 @@ endif
 
 ifeq ($(USE_CLANG_PLATFORM_BUILD),)
 USE_CLANG_PLATFORM_BUILD := true
+ifneq ($(USE_CLANG_PLATFORM_BUILD),true)
+$(warning Empty USE_CLANG_PLATFORM_BUILD= on the command line not supported)
+$(warning Use true or false)
+$(error stopping)
+endif
 endif
