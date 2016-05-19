@@ -6,6 +6,7 @@ init_daemon_domain(goldfish_setup)
 
 # Inherit open file to shell (interpreter) for script.
 allow goldfish_setup shell_exec:file read;
+allow goldfish_setup shell_exec:file getattr;
 
 # Run ifconfig, route commands to configure interfaces and routes.
 allow goldfish_setup system_file:file execute_no_trans;
