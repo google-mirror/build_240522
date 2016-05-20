@@ -121,6 +121,12 @@ KATI_MAKEPARALLEL := $(MAKEPARALLEL)
 # limited by the -j flag passed to GNU make.
 NINJA_REMOTE_NUM_JOBS ?= 500
 NINJA_EXTRA_ARGS += -j$(NINJA_REMOTE_NUM_JOBS)
+else ifeq ($(USE_NINJA_JOBSERVER_CLIENT),true)
+# override kati default to enable GNU make jobserver for Ninja $(MAKE) jobs
+KATI_ARGS          := MAKEFLAGS= MAKELEVEL= MAKE=$(MAKE)
+KATI_MAKEPARALLEL  :=
+# Ninja with patch for PR#1139
+NINJA_MAKEPARALLEL := build/tools/makeflags2ninja.sh
 else
 NINJA_MAKEPARALLEL := $(MAKEPARALLEL) --ninja
 endif
@@ -159,7 +165,7 @@ ifeq ($(KATI_EMULATE_FIND),false)
 endif
 $(KATI_BUILD_NINJA): $(CKATI) $(MAKEPARALLEL) $(DUMMY_OUT_MKS) run_soong FORCE
 	@echo Running kati to generate build$(KATI_NINJA_SUFFIX).ninja...
-	+$(hide) $(KATI_MAKEPARALLEL) $(CKATI) --ninja --ninja_dir=$(OUT_DIR) --ninja_suffix=$(KATI_NINJA_SUFFIX) --regen --ignore_dirty=$(OUT_DIR)/% --no_ignore_dirty=$(SOONG_ANDROID_MK) --no_ignore_dirty=$(SOONG_MAKEVARS_MK) --ignore_optional_include=$(OUT_DIR)/%.P --detect_android_echo $(KATI_FIND_EMULATOR) -f build/core/main.mk $(KATI_GOALS) --gen_all_targets BUILDING_WITH_NINJA=true SOONG_ANDROID_MK=$(SOONG_ANDROID_MK) SOONG_MAKEVARS_MK=$(SOONG_MAKEVARS_MK)
+	+$(hide) $(KATI_MAKEPARALLEL) $(CKATI) --ninja --ninja_dir=$(OUT_DIR) --ninja_suffix=$(KATI_NINJA_SUFFIX) --regen --ignore_dirty=$(OUT_DIR)/% --no_ignore_dirty=$(SOONG_ANDROID_MK) --no_ignore_dirty=$(SOONG_MAKEVARS_MK) --ignore_optional_include=$(OUT_DIR)/%.P --detect_android_echo $(KATI_FIND_EMULATOR) -f build/core/main.mk $(KATI_GOALS) --gen_all_targets $(KATI_ARGS) BUILDING_WITH_NINJA=true SOONG_ANDROID_MK=$(SOONG_ANDROID_MK) SOONG_MAKEVARS_MK=$(SOONG_MAKEVARS_MK)
 
 .PHONY: FORCE
 FORCE:
