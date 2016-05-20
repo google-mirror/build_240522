@@ -21,7 +21,7 @@ endif
 
 # The sanitizer specified by the environment wins over the module.
 ifneq ($(my_global_sanitize),)
-  my_sanitize := $(my_global_sanitize)
+  my_sanitize := $(my_global_sanitize) $(my_sanitize)
 endif
 
 # Don't apply sanitizers to NDK code.
