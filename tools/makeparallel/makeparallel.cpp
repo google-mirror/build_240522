@@ -100,7 +100,9 @@ static std::vector<std::string> ReadMakeflags() {
 }
 
 static bool ParseMakeflags(std::vector<std::string>& args,
-    int* in_fd, int* out_fd, bool* parallel, bool* keep_going) {
+    int* in_fd, int* out_fd,
+    bool* parallel, int* load_limit,
+    bool* keep_going) {
 
   std::vector<char*> getopt_argv;
   // getopt starts reading at argv[1]
@@ -119,7 +121,7 @@ static bool ParseMakeflags(std::vector<std::string>& args,
     };
     int longopt_index = 0;
 
-    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kj",
+    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kjl:",
         longopts, &longopt_index);
 
     if (c == -1) {
@@ -148,6 +150,13 @@ static bool ParseMakeflags(std::vector<std::string>& args,
     case 'k':
       *keep_going = true;
       break;
+    case 'l':
+    {
+      if (sscanf(optarg, "%d", load_limit) != 1) {
+        error(EXIT_FAILURE, 0, "incorrect format for -l: %s", optarg);
+      }
+      break;
+    }
     case '?':
       // ignore unknown arguments
       break;
@@ -291,12 +300,20 @@ int main(int argc, char* argv[]) {
   bool parallel = false;
   bool keep_going = false;
   bool ninja = false;
+  bool passthrough = false;
   int tokens = 0;
+  int load_limit = 0;
 
   if (argc > 1 && strcmp(argv[1], "--ninja") == 0) {
     ninja = true;
     argv++;
     argc--;
+
+    if (argc > 1 && strcmp(argv[1], "--passthrough") == 0) {
+      passthrough = true;
+      argv++;
+      argc--;
+    }
   }
 
   if (argc < 2) {
@@ -307,24 +324,35 @@ int main(int argc, char* argv[]) {
   std::vector<char*> args({argv[1]});
 
   std::vector<std::string> makeflags = ReadMakeflags();
-  if (ParseMakeflags(makeflags, &in_fd, &out_fd, &parallel, &keep_going)) {
+  if (ParseMakeflags(makeflags, &in_fd, &out_fd, &parallel, &load_limit, &keep_going)) {
     if (in_fd >= 0 && out_fd >= 0) {
       CheckFd(in_fd);
       CheckFd(out_fd);
-      fcntl(in_fd, F_SETFD, FD_CLOEXEC);
-      fcntl(out_fd, F_SETFD, FD_CLOEXEC);
+      if (!passthrough) {
+        fcntl(in_fd, F_SETFD, FD_CLOEXEC);
+        fcntl(out_fd, F_SETFD, FD_CLOEXEC);
+      }
       tokens = GetJobserverTokens(in_fd);
     }
   }
 
   std::string jarg = "-j" + std::to_string(tokens + 1);
+  std::string larg = "-l" + std::to_string(load_limit);
 
   if (ninja) {
     if (!parallel) {
       // ninja is parallel by default, pass -j1 to disable parallelism if make wasn't parallel
       args.push_back(strdup("-j1"));
     } else if (tokens > 0) {
+      if (passthrough) {
+        // ninja is GNU make jobserver client - release tokens again
+        PutJobserverTokens(out_fd, tokens);
+        tokens = 0;
+      }
       args.push_back(strdup(jarg.c_str()));
+      if (load_limit > 0) {
+        args.push_back(strdup(larg.c_str()));
+      }
     }
     if (keep_going) {
       args.push_back(strdup("-k0"));
@@ -339,11 +367,14 @@ int main(int argc, char* argv[]) {
 
   pid_t pid = fork();
   if (pid < 0) {
+    PutJobserverTokens(out_fd, tokens);
     error(errno, errno, "fork failed");
   } else if (pid == 0) {
     // child
-    unsetenv("MAKEFLAGS");
-    unsetenv("MAKELEVEL");
+    if (!passthrough) {
+      unsetenv("MAKEFLAGS");
+      unsetenv("MAKELEVEL");
+    }
 
     // make 3.81 sets the stack ulimit to unlimited, which may cause problems
     // for child processes
@@ -365,6 +396,7 @@ int main(int argc, char* argv[]) {
   int exit_status = 0;
   int ret = waitid(P_PID, pid, &status, WEXITED);
   if (ret < 0) {
+    PutJobserverTokens(out_fd, tokens);
     error(errno, errno, "waitpid failed");
   } else if (status.si_code == CLD_EXITED) {
     exit_status = status.si_status;
@@ -372,8 +404,6 @@ int main(int argc, char* argv[]) {
     exit_status = -(status.si_status);
   }
 
-  if (tokens > 0) {
-    PutJobserverTokens(out_fd, tokens);
-  }
+  PutJobserverTokens(out_fd, tokens);
   exit(exit_status);
 }
