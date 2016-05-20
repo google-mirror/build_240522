@@ -19,9 +19,8 @@ ifeq ($(my_clang),true)
   endif
 endif
 
-# The sanitizer specified by the environment wins over the module.
 ifneq ($(my_global_sanitize),)
-  my_sanitize := $(my_global_sanitize)
+  my_sanitize := $(my_global_sanitize) $(my_sanitize)
 endif
 
 # Don't apply sanitizers to NDK code.
@@ -103,11 +102,10 @@ ifneq ($(my_sanitize),)
     my_ldflags += -fsanitize=$(fsanitize_arg)
     my_ldlibs += -lrt -ldl
   else
-    ifeq ($(filter address,$(my_sanitize)),)
-      my_cflags += -fsanitize-trap=all
-      my_cflags += -ftrap-function=abort
-    endif
+    my_cflags += -fsanitize-trap=all
+    my_cflags += -ftrap-function=abort
     ifneq ($(filter address thread,$(my_sanitize)),)
+      my_cflags += -fno-sanitize-trap=address,thread
       my_shared_libraries += libdl
     endif
   endif
