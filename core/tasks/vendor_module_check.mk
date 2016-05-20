@@ -113,3 +113,57 @@ _vendor_module_owner_info_txt :=
 _vendor_module_owner_info :=
 _vendor_check_modules :=
 endif
+
+
+ifneq (,$(PRODUCTS.$(INTERNAL_PRODUCT).VENDOR_PRODUCT_RESTRICT_VENDOR_FILES))
+
+_vendor_check_modules :=
+_vendor_exception_path_prefix := $(patsubst %, vendor/%/%, $(PRODUCTS.$(INTERNAL_PRODUCT).VENDOR_EXCEPTION_PATHS))
+
+$(foreach m, $(filter-out $(PRODUCTS.$(INTERNAL_PRODUCT).VENDOR_EXCEPTION_MODULES), $(product_MODULES)), \
+  $(if $(filter-out FAKE, $(ALL_MODULES.$(m).CLASS)),\
+    $(if $(filter vendor/%, $(ALL_MODULES.$(m).PATH)),\
+      $(if $(filter-out $(_vendor_exception_path_prefix), $(ALL_MODULES.$(m).PATH)),\
+        $(eval _vendor_check_modules += $(m))))))
+
+# Restrict owners
+ifneq (,$(filter true owner all, $(PRODUCTS.$(INTERNAL_PRODUCT).VENDOR_PRODUCT_RESTRICT_VENDOR_FILES)))
+
+_vendor_package_overlays := $(filter-out $(_vendor_exception_path_prefix),\
+    $(filter vendor/%, $(PRODUCT_PACKAGE_OVERLAYS) $(DEVICE_PACKAGE_OVERLAYS)))
+ifneq (,$(_vendor_package_overlays))
+$(error Error: Product "$(TARGET_PRODUCT)" cannot have overlay in vendor tree: $(_vendor_package_overlays))
+endif
+
+_vendor_check_copy_files := $(filter-out $(_vendor_exception_path_prefix),\
+    $(filter vendor/%, $(PRODUCT_COPY_FILES)))
+ifneq (,$(_vendor_check_copy_files))
+$(foreach c, $(_vendor_check_copy_files), \
+  $(if $(filter $(_vendor_owner_whitelist), $(call word-colon,3,$(c))),,\
+    $(error Error: vendor PRODUCT_COPY_FILES file "$(c)" has unknown owner)))
+endif
+
+$(foreach m, $(_vendor_check_modules), \
+  $(if $(filter $(_vendor_owner_whitelist), $(ALL_MODULES.$(m).OWNER)),,\
+    $(error Error: vendor module "$(m)" in $(ALL_MODULES.$(m).PATH) with unknown owner \
+      "$(ALL_MODULES.$(m).OWNER)" in product "$(TARGET_PRODUCT)")))
+
+endif # restrict owner
+
+# Restrict paths
+ifneq (,$(filter path all, $(PRODUCTS.$(INTERNAL_PRODUCT).VENDOR_PRODUCT_RESTRICT_VENDOR_FILES)))
+
+$(foreach m, $(_vendor_check_modules), \
+  $(if $(filter-out ,$(ALL_MODULES.$(m).INSTALLED)),\
+    $(if $(filter $(TARGET_OUT_VENDOR)/% $(TARGET_OUT_ODM)/% $(HOST_OUT)/%, $(ALL_MODULES.$(m).INSTALLED)),,\
+      $(error Error: vendor module "$(m)" in $(ALL_MODULES.$(m).PATH) \
+        in product "$(TARGET_PRODUCT)" being installed to \
+        $(ALL_MODULES.$(m).INSTALLED) which is not in the vendor tree or odm tree))))
+
+endif
+
+_vendor_check_modules :=
+_vendor_exception_path_prefix :=
+_vendor_package_overlays :=
+_vendor_check_copy_files :=
+endif
