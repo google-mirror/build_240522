@@ -19,117 +19,52 @@ $(error $(LOCAL_PATH): LOCAL_MODULE or LOCAL_MODULE_CLASS not needed by \
   BUILD_MULTI_PREBUILT, use BUILD_PREBUILT instead!)
 endif
 
-# Save these before they get cleared by CLEAR_VARS.
-prebuilt_static_libs := $(filter %.a,$(LOCAL_PREBUILT_LIBS))
-prebuilt_shared_libs := $(filter-out %.a,$(LOCAL_PREBUILT_LIBS))
-prebuilt_executables := $(LOCAL_PREBUILT_EXECUTABLES)
-prebuilt_java_libraries := $(LOCAL_PREBUILT_JAVA_LIBRARIES)
-prebuilt_static_java_libraries := $(LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES)
-prebuilt_is_host := $(LOCAL_IS_HOST_MODULE)
-prebuilt_module_tags := $(LOCAL_MODULE_TAGS)
-prebuilt_strip_module := $(LOCAL_STRIP_MODULE)
+ifdef LOCAL_PREBUILT_LIBS
+tmp_LOCAL_STRIP_MODULE := $(LOCAL_STRIP_MODULE)
+tmp_LOCAL_PREBUILT_LIBS := $(LOCAL_PREBUILT_LIBS)
+LOCAL_PREBUILT_LIBS :=
 
+# static libs
+LOCAL_MODULE_CLASS := STATIC_LIBRARIES
+prebuilt_list := $(filter %.a,$(tmp_LOCAL_PREBUILT_LIBS))
+OVERRIDE_BUILT_MODULE_PATH :=
+LOCAL_UNINSTALLABLE_MODULE := true
+LOCAL_STRIP_MODULE :=
+include $(BUILD_SYSTEM)/multi_prebuilt_internal.mk
 
-ifndef multi_prebuilt_once
-multi_prebuilt_once := true
+# shared libs
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+prebuilt_list := $(filter-out %.a,$(tmp_LOCAL_PREBUILT_LIBS))
+OVERRIDE_BUILT_MODULE_PATH := $($(if $(prebuilt_is_host),HOST,TARGET)_OUT_INTERMEDIATE_LIBRARIES)
+LOCAL_UNINSTALLABLE_MODULE :=
+LOCAL_STRIP_MODULE := $(tmp_LOCAL_STRIP_MODULE)
+include $(BUILD_SYSTEM)/multi_prebuilt_internal.mk
 
-# $(1): file list
-# $(2): IS_HOST_MODULE
-# $(3): MODULE_CLASS
-# $(4): MODULE_TAGS
-# $(5): OVERRIDE_BUILT_MODULE_PATH
-# $(6): UNINSTALLABLE_MODULE
-# $(7): BUILT_MODULE_STEM
-# $(8): LOCAL_STRIP_MODULE
-#
-# Elements in the file list may be bare filenames,
-# or of the form "<modulename>:<filename>".
-# If the module name is not specified, the module
-# name will be the filename with the suffix removed.
-#
-define auto-prebuilt-boilerplate
-$(if $(filter %: :%,$(1)), \
-  $(error $(LOCAL_PATH): Leading or trailing colons in "$(1)")) \
-$(foreach t,$(1), \
-  $(eval include $(CLEAR_VARS)) \
-  $(eval LOCAL_IS_HOST_MODULE := $(2)) \
-  $(eval LOCAL_MODULE_CLASS := $(3)) \
-  $(eval LOCAL_MODULE_TAGS := $(4)) \
-  $(eval OVERRIDE_BUILT_MODULE_PATH := $(5)) \
-  $(eval LOCAL_UNINSTALLABLE_MODULE := $(6)) \
-  $(eval tw := $(subst :, ,$(strip $(t)))) \
-  $(if $(word 3,$(tw)),$(error $(LOCAL_PATH): Bad prebuilt filename '$(t)')) \
-  $(if $(word 2,$(tw)), \
-    $(eval LOCAL_MODULE := $(word 1,$(tw))) \
-    $(eval LOCAL_SRC_FILES := $(word 2,$(tw))) \
-   , \
-    $(eval LOCAL_MODULE := $(basename $(notdir $(t)))) \
-    $(eval LOCAL_SRC_FILES := $(t)) \
-   ) \
-  $(if $(7), \
-    $(eval LOCAL_BUILT_MODULE_STEM := $(7)) \
-   , \
-    $(if $(word 2,$(tw)), \
-      $(eval LOCAL_BUILT_MODULE_STEM := $(LOCAL_MODULE)$(suffix $(LOCAL_SRC_FILES))) \
-     , \
-      $(eval LOCAL_BUILT_MODULE_STEM := $(notdir $(LOCAL_SRC_FILES))) \
-     ) \
-   ) \
-  $(eval LOCAL_MODULE_SUFFIX := $(suffix $(LOCAL_SRC_FILES))) \
-  $(eval LOCAL_STRIP_MODULE := $(8)) \
-  $(eval include $(BUILD_PREBUILT)) \
- )
-endef
+tmp_LOCAL_STRIP_MODULE :=
+tmp_LOCAL_PREBUILT_LIBS :=
 
-endif # multi_prebuilt_once
+else ifdef LOCAL_PREBUILT_EXECUTABLES
+LOCAL_MODULE_CLASS := EXECUTABLES
+prebuilt_list := $(LOCAL_PREBUILT_EXECUTABLES)
+LOCAL_PREBUILT_EXECUTABLES :=
+include $(BUILD_SYSTEM)/multi_prebuilt_internal.mk
 
+else ifdef LOCAL_PREBUILT_JAVA_LIBRARIES
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+prebuilt_list := $(LOCAL_PREBUILT_JAVA_LIBRARIES)
+LOCAL_PREBUILT_JAVA_LIBRARIES :=
+LOCAL_BUILT_MODULE_STEM := javalib.jar
+include $(BUILD_SYSTEM)/multi_prebuilt_internal.mk
 
-$(call auto-prebuilt-boilerplate, \
-    $(prebuilt_static_libs), \
-    $(prebuilt_is_host), \
-    STATIC_LIBRARIES, \
-    $(prebuilt_module_tags), \
-    , \
-    true)
+else ifdef LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+prebuilt_list := $(LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES)
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES :=
+LOCAL_BUILT_MODULE_STEM := javalib.jar
+LOCAL_UNINSTALLABLE_MODULE := true
+include $(BUILD_SYSTEM)/multi_prebuilt_internal.mk
 
-$(call auto-prebuilt-boilerplate, \
-    $(prebuilt_shared_libs), \
-    $(prebuilt_is_host), \
-    SHARED_LIBRARIES, \
-    $(prebuilt_module_tags), \
-    $($(if $(prebuilt_is_host),HOST,TARGET)_OUT_INTERMEDIATE_LIBRARIES), \
-    , \
-    , \
-    $(prebuilt_strip_module))
+endif
 
-$(call auto-prebuilt-boilerplate, \
-    $(prebuilt_executables), \
-    $(prebuilt_is_host), \
-    EXECUTABLES, \
-    $(prebuilt_module_tags))
+prebuilt_list :=
 
-$(call auto-prebuilt-boilerplate, \
-    $(prebuilt_java_libraries), \
-    $(prebuilt_is_host), \
-    JAVA_LIBRARIES, \
-    $(prebuilt_module_tags), \
-    , \
-    , \
-    javalib.jar)
-
-$(call auto-prebuilt-boilerplate, \
-    $(prebuilt_static_java_libraries), \
-    $(prebuilt_is_host), \
-    JAVA_LIBRARIES, \
-    $(prebuilt_module_tags), \
-    , \
-    true, \
-    javalib.jar)
-
-prebuilt_static_libs :=
-prebuilt_shared_libs :=
-prebuilt_executables :=
-prebuilt_java_libraries :=
-prebuilt_static_java_libraries :=
-prebuilt_is_host :=
-prebuilt_module_tags :=
