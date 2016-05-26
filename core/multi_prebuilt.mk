@@ -41,6 +41,8 @@ multi_prebuilt_once := true
 # $(6): UNINSTALLABLE_MODULE
 # $(7): BUILT_MODULE_STEM
 # $(8): LOCAL_STRIP_MODULE
+# $(9): LOCAL_PROPRIETARY_MODULE
+# $(10): LOCAL_MODULE_OWNER
 #
 # Elements in the file list may be bare filenames,
 # or of the form "<modulename>:<filename>".
@@ -77,6 +79,8 @@ $(foreach t,$(1), \
    ) \
   $(eval LOCAL_MODULE_SUFFIX := $(suffix $(LOCAL_SRC_FILES))) \
   $(eval LOCAL_STRIP_MODULE := $(8)) \
+  $(eval LOCAL_PROPRIETARY_MODULE := $(9)) \
+  $(eval LOCAL_MODULE_OWNER := $(10)) \
   $(eval include $(BUILD_PREBUILT)) \
  )
 endef
@@ -90,7 +94,11 @@ $(call auto-prebuilt-boilerplate, \
     STATIC_LIBRARIES, \
     $(prebuilt_module_tags), \
     , \
-    true)
+    true, \
+    , \
+    , \
+    $(LOCAL_PROPRIETARY_MODULE), \
+    $(LOCAL_MODULE_OWNER))
 
 $(call auto-prebuilt-boilerplate, \
     $(prebuilt_shared_libs), \
@@ -100,13 +108,21 @@ $(call auto-prebuilt-boilerplate, \
     $($(if $(prebuilt_is_host),HOST,TARGET)_OUT_INTERMEDIATE_LIBRARIES), \
     , \
     , \
-    $(prebuilt_strip_module))
+    $(prebuilt_strip_module), \
+    $(LOCAL_PROPRIETARY_MODULE), \
+    $(LOCAL_MODULE_OWNER))
 
 $(call auto-prebuilt-boilerplate, \
     $(prebuilt_executables), \
     $(prebuilt_is_host), \
     EXECUTABLES, \
-    $(prebuilt_module_tags))
+    $(prebuilt_module_tags), \
+    , \
+    , \
+    , \
+    , \
+    $(LOCAL_PROPRIETARY_MODULE), \
+    $(LOCAL_MODULE_OWNER))
 
 $(call auto-prebuilt-boilerplate, \
     $(prebuilt_java_libraries), \
@@ -115,7 +131,10 @@ $(call auto-prebuilt-boilerplate, \
     $(prebuilt_module_tags), \
     , \
     , \
-    javalib.jar)
+    javalib.jar, \
+    , \
+    $(LOCAL_PROPRIETARY_MODULE), \
+    $(LOCAL_MODULE_OWNER))
 
 $(call auto-prebuilt-boilerplate, \
     $(prebuilt_static_java_libraries), \
@@ -124,7 +143,10 @@ $(call auto-prebuilt-boilerplate, \
     $(prebuilt_module_tags), \
     , \
     true, \
-    javalib.jar)
+    javalib.jar, \
+    , \
+    $(LOCAL_PROPRIETARY_MODULE), \
+    $(LOCAL_MODULE_OWNER))
 
 prebuilt_static_libs :=
 prebuilt_shared_libs :=
