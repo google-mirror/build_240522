@@ -542,12 +542,7 @@ ifneq ($(dont_bother),true)
 # Include all of the makefiles in the system
 #
 
-# Can't use first-makefiles-under here because
-# --mindepth=2 makes the prunes not work.
-subdir_makefiles := \
-	$(shell build/tools/findleaves.py $(FIND_LEAVES_EXCLUDES) $(subdirs) Android.mk)
-
-subdir_makefiles := $(SOONG_ANDROID_MK) $(call filter-soong-makefiles,$(subdir_makefiles))
+subdir_makefiles := $(SOONG_ANDROID_MK) $(call first-makefiles-under,$(subdirs))
 
 $(foreach mk, $(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
 
