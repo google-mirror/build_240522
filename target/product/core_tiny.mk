@@ -91,6 +91,7 @@ PRODUCT_BOOT_JARS := \
     okhttp \
     legacy-test \
     bouncycastle \
+    tpm2m \
     ext \
     framework \
     telephony-common \
