@@ -91,6 +91,7 @@ endif
 PRODUCT_BOOT_JARS := \
     $(TARGET_CORE_JARS) \
     legacy-test \
+    tpm2m \
     ext \
     framework \
     telephony-common \
