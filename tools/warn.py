@@ -1822,8 +1822,12 @@ def dumpcategory(cat):
         if cat['option'] != '':
             header[1:1] = [' (related option: ' + cat['option'] +')']
         begintable(header, colorforseverity(cat['severity']), cat['anchor'])
+        j = 0;
         for i in cat['members']:
             tablerow(warningwithurl(i))
+            j += 1
+            if j >= 250:
+                break
         endtable()
 
 
