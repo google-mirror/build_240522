@@ -20,3 +20,8 @@
 define $(combo_var_prefix)transform-shared-lib-to-toc
 $(call _gen_toc_command_for_elf,$(1),$(2))
 endef
+
+# $(1): The file to check
+define get-file-size
+stat --format "%s" "$(1)" | tr -d '\n'
+endef
