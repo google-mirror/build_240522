@@ -2167,7 +2167,7 @@ endef
 # Call jack
 #
 define call-jack
- JACK_VERSION=$(PRIVATE_JACK_VERSION) $(JACK) $(DEFAULT_JACK_EXTRA_ARGS)
+$(if $(PRIVATE_JACK_VERSION),JACK_VERSION=$(PRIVATE_JACK_VERSION),) $(JACK) $(DEFAULT_JACK_EXTRA_ARGS)
 endef
 
 # Common definition to invoke javac on the host and target.
