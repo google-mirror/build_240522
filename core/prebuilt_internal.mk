@@ -400,7 +400,7 @@ ifneq ($(prebuilt_module_is_dex_javalib),true)
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_FLAGS:=$(LOCAL_JACK_FLAGS)
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_MIN_SDK_VERSION := 1
 $(intermediates.COMMON)/classes.jack : $(my_src_jar) \
-        $(LOCAL_ADDITIONAL_DEPENDENCIES) $(JACK_DEFAULT_ARGS) $(JACK) \
+        $(LOCAL_ADDITIONAL_DEPENDENCIES) $(JACK) \
         | setup-jack-server
 	$(transform-jar-to-jack)
 

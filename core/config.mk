@@ -564,14 +564,6 @@ MKTARBALL := build/tools/mktarball.sh
 TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
 JARJAR := $(HOST_OUT_JAVA_LIBRARIES)/jarjar.jar
 
-ifneq ($(ANDROID_JACK_EXTRA_ARGS),)
-JACK_DEFAULT_ARGS :=
-DEFAULT_JACK_EXTRA_ARGS := $(ANDROID_JACK_EXTRA_ARGS)
-else
-JACK_DEFAULT_ARGS := $(BUILD_SYSTEM)/jack-default.args
-DEFAULT_JACK_EXTRA_ARGS := @$(JACK_DEFAULT_ARGS)
-endif
-
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/tools/java-event-log-tags.py
 MERGETAGS := build/tools/merge-event-log-tags.py
