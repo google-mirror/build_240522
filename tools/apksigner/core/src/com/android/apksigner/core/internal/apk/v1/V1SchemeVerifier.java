@@ -71,13 +71,15 @@ public abstract class V1SchemeVerifier {
      *
      * @throws ZipFormatException if the APK is malformed
      * @throws IOException if an I/O error occurs when reading the APK
+     * @throws NoSuchAlgorithmException if the APK's JAR signatures cannot be verified because a
+     *         required cryptographic algorithm implementation is missing
      */
     public static Result verify(
             DataSource apk,
             ApkUtils.ZipSections apkSections,
             Map<Integer, String> supportedApkSigSchemeNames,
             Set<Integer> foundApkSigSchemeIds,
-            int minSdkVersion) throws IOException, ZipFormatException {
+            int minSdkVersion) throws IOException, ZipFormatException, NoSuchAlgorithmException {
         Result result = new Result();
 
         // Parse the ZIP Central Directory and check that there are no entries with duplicate names.
@@ -142,7 +144,7 @@ public abstract class V1SchemeVerifier {
                 Map<Integer, String> supportedApkSigSchemeNames,
                 Set<Integer> foundApkSigSchemeIds,
                 int minSdkVersion,
-                Result result) throws ZipFormatException, IOException {
+                Result result) throws ZipFormatException, IOException, NoSuchAlgorithmException {
 
             // Find JAR manifest and signature block files.
             CentralDirectoryRecord manifestEntry = null;
@@ -300,6 +302,7 @@ public abstract class V1SchemeVerifier {
                             cdRecords,
                             entryNameToManifestSection,
                             signers,
+                            minSdkVersion,
                             result);
             if (result.containsErrors()) {
                 return;
@@ -393,7 +396,7 @@ public abstract class V1SchemeVerifier {
         @SuppressWarnings("restriction")
         public void verifySigBlockAgainstSigFile(
                 DataSource apk, long cdStartOffset, int minSdkVersion)
-                        throws IOException, ZipFormatException {
+                        throws IOException, ZipFormatException, NoSuchAlgorithmException {
             byte[] sigBlockBytes =
                     LocalFileHeader.getUncompressedData(
                             apk, 0,
@@ -429,7 +432,7 @@ public abstract class V1SchemeVerifier {
                     // TODO: Reject sig/dig algorithms not supported on Android
                     try {
                         verifiedSignerInfo = sigBlock.verify(unverifiedSignerInfo, mSigFileBytes);
-                    } catch (NoSuchAlgorithmException | SignatureException e) {
+                    } catch (SignatureException e) {
                         mResult.addError(
                                 Issue.JAR_SIG_VERIFY_EXCEPTION,
                                 mSignatureBlockEntry.getName(),
@@ -478,7 +481,7 @@ public abstract class V1SchemeVerifier {
                 Map<String, ManifestParser.Section> entryNameToManifestSection,
                 Map<Integer, String> supportedApkSigSchemeNames,
                 Set<Integer> foundApkSigSchemeIds,
-                int minSdkVersion) {
+                int minSdkVersion) throws NoSuchAlgorithmException {
             // Inspect the main section of the .SF file.
             ManifestParser sf = new ManifestParser(mSigFileBytes);
             ManifestParser.Section sfMainSection = sf.readSection();
@@ -571,7 +574,7 @@ public abstract class V1SchemeVerifier {
                 ManifestParser.Section sfMainSection,
                 boolean createdBySigntool,
                 byte[] manifestBytes,
-                int minSdkVersion) {
+                int minSdkVersion) throws NoSuchAlgorithmException {
             Collection<NamedDigest> expectedDigests =
                     getDigestsToVerify(
                             sfMainSection,
@@ -612,7 +615,7 @@ public abstract class V1SchemeVerifier {
                 ManifestParser.Section sfMainSection,
                 ManifestParser.Section manifestMainSection,
                 byte[] manifestBytes,
-                int minSdkVersion) {
+                int minSdkVersion) throws NoSuchAlgorithmException {
             Collection<NamedDigest> expectedDigests =
                     getDigestsToVerify(
                             sfMainSection, "-Digest-Manifest-Main-Attributes", minSdkVersion);
@@ -649,7 +652,7 @@ public abstract class V1SchemeVerifier {
                 boolean createdBySigntool,
                 ManifestParser.Section manifestIndividualSection,
                 byte[] manifestBytes,
-                int minSdkVersion) {
+                int minSdkVersion) throws NoSuchAlgorithmException {
             String entryName = sfIndividualSection.getName();
             Collection<NamedDigest> expectedDigests =
                     getDigestsToVerify(sfIndividualSection, "-Digest", minSdkVersion);
@@ -938,7 +941,8 @@ public abstract class V1SchemeVerifier {
             Collection<CentralDirectoryRecord> cdRecords,
             Map<String, ManifestParser.Section> entryNameToManifestSection,
             List<Signer> signers,
-            Result result) throws ZipFormatException, IOException {
+            int minSdkVersion,
+            Result result) throws ZipFormatException, IOException, NoSuchAlgorithmException {
         // Iterate over APK contents as sequentially as possible to improve performance.
         List<CentralDirectoryRecord> cdRecordsSortedByLocalFileHeaderOffset =
                 new ArrayList<>(cdRecords);
@@ -985,22 +989,8 @@ public abstract class V1SchemeVerifier {
                 continue;
             }
 
-            List<NamedDigest> expectedDigests = new ArrayList<>();
-            for (ManifestParser.Attribute attr : manifestSection.getAttributes()) {
-                String name = attr.getName();
-                String nameUpperCase = name.toUpperCase(Locale.US);
-                if (!nameUpperCase.endsWith("-DIGEST")) {
-                    continue;
-                }
-                String jcaDigestAlgorithm =
-                        nameUpperCase.substring(0, nameUpperCase.length() - "-DIGEST".length());
-                if ("SHA1".equals(jcaDigestAlgorithm)) {
-                    jcaDigestAlgorithm = "SHA-1";
-                }
-                byte[] digest = Base64.getDecoder().decode(attr.getValue());
-                expectedDigests.add(new NamedDigest(jcaDigestAlgorithm, digest));
-            }
-
+            Collection<NamedDigest> expectedDigests =
+                    getDigestsToVerify(manifestSection, "-Digest", minSdkVersion);
             if (expectedDigests.isEmpty()) {
                 result.addError(Issue.JAR_SIG_NO_ZIP_ENTRY_DIGEST_IN_MANIFEST, entryName);
                 continue;
@@ -1059,21 +1049,19 @@ public abstract class V1SchemeVerifier {
         return result;
     }
 
-    private static MessageDigest getMessageDigest(String algorithm) {
-        try {
-            return MessageDigest.getInstance(algorithm);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Failed to obtain " + algorithm + " MessageDigest", e);
-        }
+    private static MessageDigest getMessageDigest(String algorithm)
+            throws NoSuchAlgorithmException {
+        return MessageDigest.getInstance(algorithm);
     }
 
-    private static byte[] digest(String algorithm, byte[] data, int offset, int length) {
+    private static byte[] digest(String algorithm, byte[] data, int offset, int length)
+            throws NoSuchAlgorithmException {
         MessageDigest md = getMessageDigest(algorithm);
         md.update(data, offset, length);
         return md.digest();
     }
 
-    private static byte[] digest(String algorithm, byte[] data) {
+    private static byte[] digest(String algorithm, byte[] data) throws NoSuchAlgorithmException {
         return getMessageDigest(algorithm).digest(data);
     }
 
