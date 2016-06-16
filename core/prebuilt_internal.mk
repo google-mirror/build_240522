@@ -486,7 +486,7 @@ $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_MIN_SDK_VERSION := $(if $(st
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_PLUGIN_PATH := $(LOCAL_JACK_PLUGIN_PATH)
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_PLUGIN := $(LOCAL_JACK_PLUGIN)
 $(intermediates.COMMON)/classes.jack : $(LOCAL_JACK_PLUGIN_PATH) $(my_src_jar) \
-        $(LOCAL_ADDITIONAL_DEPENDENCIES) $(JACK_DEFAULT_ARGS) $(JACK) \
+        $(LOCAL_ADDITIONAL_DEPENDENCIES) $(JACK) \
         | setup-jack-server
 	$(transform-jar-to-jack)
 

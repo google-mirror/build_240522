@@ -600,14 +600,6 @@ DATA_BINDING_COMPILER := $(HOST_OUT_JAVA_LIBRARIES)/databinding-compiler.jar
 FAT16COPY := build/tools/fat16copy.py
 CHECK_LINK_TYPE := build/tools/check_link_type.py
 
-ifneq ($(ANDROID_JACK_EXTRA_ARGS),)
-JACK_DEFAULT_ARGS :=
-DEFAULT_JACK_EXTRA_ARGS := $(ANDROID_JACK_EXTRA_ARGS)
-else
-JACK_DEFAULT_ARGS := $(BUILD_SYSTEM)/jack-default.args
-DEFAULT_JACK_EXTRA_ARGS := @$(JACK_DEFAULT_ARGS)
-endif
-
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/tools/java-event-log-tags.py
 MERGETAGS := build/tools/merge-event-log-tags.py
