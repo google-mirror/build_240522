@@ -1124,7 +1124,7 @@ systemimage_intermediates := \
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
 
 # Create symlink /system/vendor to /vendor if necessary.
-ifdef BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+ifdef BOARD_USES_VENDORIMAGE
 define create-system-vendor-symlink
 $(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
   echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
@@ -1519,7 +1519,10 @@ $(INSTALLED_VENDORIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDORIM
 vendorimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
 	$(build-vendorimage-target)
 
-endif # BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+else ifdef BOARD_PREBUILT_VENDORIMAGE
+INSTALLED_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_VENDORIMAGE),$(INSTALLED_VENDORIMAGE_TARGET)))
+endif
 
 # -----------------------------------------------------------------
 # bring in the installer image generation defines if necessary
