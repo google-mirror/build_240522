@@ -58,6 +58,7 @@ PARSE_TIME_MAKE_GOALS := \
 	winsdk-tools
 
 -include vendor/google/build/ninja_config.mk
+include platform_testing/build/ninja_config.mk
 
 # Any Android goals that need to be built.
 ANDROID_GOALS := $(filter-out $(KATI_OUTPUT_PATTERNS) $(CKATI) $(MAKEPARALLEL),\
