@@ -97,3 +97,71 @@ MODULES_WITH_GEN_JAVA_FILES :=
 modules_with_gen_java_files :=
 previous_gen_java_config :=
 current_gen_java_config :=
+
+#######################################################
+# Check if we need to delete obsolete installed files.
+# This won't work with mm/mmm, so disable it there.
+ifndef ONE_SHOT_MAKEFILE
+# Nor will it work with SANITIZE_TARGET, since that expects
+# to keep the old installed files in order to produce a full
+# build
+ifndef SANITIZE_TARGET
+previous_installed_config := $(PRODUCT_OUT)/previous_installed_files.mk
+current_installed_config := $(PRODUCT_OUT)/current_installed_files.mk
+
+$(shell rm -rf $(current_installed_config) \
+  && mkdir -p $(dir $(current_installed_config))\
+  && touch $(current_installed_config))
+previous_installed_files :=
+-include $(previous_installed_config)
+
+current_installed_files := \
+  $(INTERNAL_RAMDISK_FILES) \
+  $(INTERNAL_RECOVERYIMAGE_FILES) \
+  $(INTERNAL_SYSTEMIMAGE_FILES) \
+  $(INTERNAL_VENDORIMAGE_FILES) \
+  $(INTERNAL_USERDATAIMAGE_FILES) \
+  $(INTERNAL_CACHEIMAGE_FILES)
+
+installed_files_to_clean := $(filter-out $(current_installed_files),$(previous_installed_files))
+ifdef installed_files_to_clean
+$(info *** Obsolete installed files detected, cleaning...)
+$(info *** rm -rf $(installed_files_to_clean))
+$(shell rm -rf $(installed_files_to_clean))
+endif
+define dump_to_installed_files
+$(if $(1),$(shell echo "previous_installed_files += $(1)" >> $(current_installed_config)))
+endef
+$(call dump_to_installed_files,$(wordlist 1,500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 501,1000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 1001,1500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 1501,2000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 2001,2500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 2501,3000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 3001,3500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 3501,4000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 4001,4500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 4501,5000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 5001,5500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 5501,6000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 6001,6500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 6501,7000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 7001,7500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 7501,8000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 8001,8500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 8501,9000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 9001,9500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 9501,10000,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 10001,10500,$(current_installed_files)))
+$(call dump_to_installed_files,$(wordlist 10501,11000,$(current_installed_files)))
+
+# Replace previous with current if necessary
+$(shell cmp $(current_installed_config) $(previous_installed_config) >/dev/null 2>&1 || mv -f $(current_installed_config) $(previous_installed_config))
+
+previous_installed_config :=
+current_installed_config :=
+previous_installed_files :=
+current_installed_files :=
+installed_files_to_clean :=
+endif
+endif
