@@ -2247,7 +2247,18 @@ $(INTERNAL_FINDBUGS_HTML_TARGET): $(INTERNAL_FINDBUGS_XML_TARGET)
 	$(INTERNAL_FINDBUGS_XML_TARGET) > $@
 
 # -----------------------------------------------------------------
-# Findbugs
+# Compute list of installed files (not under obj*/)
+# This should include every INTERNAL_*_FILES variable, and potentially more
+ALL_INSTALLED_FILES := $(filter-out $(TARGET_OUT_INTERMEDIATES)/%,\
+  $(filter $(PRODUCT_OUT)/%,\
+    $(ALL_GENERATED_SOURCES) \
+    $(ALL_DEFAULT_INSTALLED_MODULES) \
+    $(PDK_FUSION_SYSIMG_FILES) \
+    $(RECOVERY_RESOURCE_ZIP)))
+
+ifdef TARGET_2ND_ARCH
+ALL_INSTALLED_FILES := $(filter-out $($(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATES)/%,$(ALL_INSTALLED_FILES))
+endif
 
 # -----------------------------------------------------------------
 # These are some additional build tasks that need to be run.

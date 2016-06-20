@@ -555,9 +555,6 @@ endif # dont_bother
 
 endif # ONE_SHOT_MAKEFILE
 
-# Now with all Android.mks loaded we can do post cleaning steps.
-include $(BUILD_SYSTEM)/post_clean.mk
-
 ifeq ($(stash_product_vars),true)
   $(call assert-product-vars, __STASHED)
 endif
@@ -847,6 +844,9 @@ include $(BUILD_SYSTEM)/Makefile
 modules_to_install := $(sort $(ALL_DEFAULT_INSTALLED_MODULES))
 ALL_DEFAULT_INSTALLED_MODULES :=
 
+# Now with all Android.mks loaded, and the installed file lists are generated,
+# we can do post cleaning steps.
+include $(BUILD_SYSTEM)/post_clean.mk
 
 # These are additional goals that we build, in order to make sure that there
 # is as little code as possible in the tree that doesn't build.
