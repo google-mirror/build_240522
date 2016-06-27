@@ -1396,7 +1396,7 @@ skip_userdata.img :=
 #######
 ## data partition tarball
 define build-userdatatarball-target
-    $(call pretty,"Target userdata fs tarball: " \
+    $(call pretty,"Target userdata fs tarball: " \f
                   "$(INSTALLED_USERDATATARBALL_TARGET)")
     $(MKTARBALL) $(FS_GET_STATS) \
 		$(PRODUCT_OUT) data $(PRIVATE_USERDATA_TAR) \
@@ -1443,6 +1443,29 @@ bptimage-nodeps:
 	$(build-bptimage-target)
 
 endif # BOARD_BPT_INPUT_FILES
+
+# -----------------------------------------------------------------
+# EFI image
+ifneq ($and ($(EFI_INPUT_FILES),$(EFI_IMAGE_BLOCK_SIZE),$(EFI_IMAGE_BLOCK_COUNT)))
+
+EFI_INPUT_FILE_PATHS:= \
+	$(foreach file, $(EFI_INPUT_FILES), $(word 1, $(subst :, ,$(file))))
+
+define build-efiimage-target
+	$(call pretty,"Target EFI image: $(INSTALLED_EFIIMAGE_TARGET)")
+	$(hide) $(MAKE_EFI_IMAGE)
+endef
+
+INSTALLED_EFIIMAGE_TARGET := $(PRODUCT_OUT)/EFI.img
+$(INSTALLED_EFIIMAGE_TARGET): $(MAKE_EFI_IMAGE) $(EFI_INPUT_FILE_PATHS)
+	$(build-efiimage-target) \
+		$(EFI_IMAGE_BLOCK_SIZE) $(EFI_IMAGE_BLOCK_COUNT) $(EFI_INPUT_FILES)
+
+.PHONY: efiimage-nodeps
+efiimage-nodeps:
+	$(build-efiimage-target)
+
+endif # EFI_INPUT_FILES && EFI_IMAGE_BLOCK_SIZE && EFI_IMAGE_BLOCK_COUNT
 
 # -----------------------------------------------------------------
 # cache partition image
