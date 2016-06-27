@@ -1445,6 +1445,31 @@ bptimage-nodeps:
 endif # BOARD_BPT_INPUT_FILES
 
 # -----------------------------------------------------------------
+# EFI image
+# EFI_INPUT_FILES: EFI application files host and target paths.
+# EFI_IMAGE_SIZE: Size of EFI partition.
+# EFI_OUTPUT_IMAGE: Path to image output.
+ifdef EFI_INPUT_FILES
+
+EFI_INPUT_FILE_PATHS:= \
+	$(foreach file, $(EFI_INPUT_FILES), $(word 1, $(subst :, ,$(file))))
+
+define build-efiimage-target
+	$(call pretty,"Target EFI image: $(INSTALLED_EFIIMAGE_TARGET)")
+	$(hide) $(MAKE_EFI_IMAGE)
+endef
+
+INSTALLED_EFIIMAGE_TARGET := $(PRODUCT_OUT)/EFI.img
+$(INSTALLED_EFIIMAGE_TARGET): $(MAKE_EFI_IMAGE) $(EFI_INPUT_FILE_PATHS)
+	$(build-efiimage-target) $(EFI_IMAGE_SIZE) $(EFI_OUTPUT_IMAGE) $(EFI_INPUT_FILES)
+
+.PHONY: efiimage-nodeps
+efiimage-nodeps:
+	$(build-efiimage-target)
+
+endif # EFI_INPUT_FILES
+
+# -----------------------------------------------------------------
 # cache partition image
 ifdef BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE
 INTERNAL_CACHEIMAGE_FILES := \
