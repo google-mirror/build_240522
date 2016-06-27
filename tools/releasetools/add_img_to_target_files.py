@@ -255,6 +255,28 @@ def AddPartitionTable(output_zip, prefix="IMAGES/"):
   common.ZipWrite(output_zip, bpt_file_name, prefix + "partition-table.bpt")
 
 
+def AddEFIImage(output_zip, prefix="IMAGES/"):
+  """Create an EFI image and store it in output_zip."""
+
+  prebuilt_path = os.path.join(OPTIONS.input_tmp, prefix, "EFI.img")
+  if os.path.exists(prebuilt_path):
+    print "EFI.img already exists in %s, no need to rebuild..." % (prefix,)
+    return
+
+  _, img_file_name = tempfile.mkstemp()
+
+  make_efi_image = os.getenv("MAKE_EFI_IMAGE") or "make_efi_image"
+  image_size = OPTIONS.info_dict["efi_image_size"]
+  efi_app_paths = OPTIONS.info_dict["efi_input_files"]
+  cmd = [make_efi_image, image_size, img_file_name]
+  cmd += efi_app_paths.split()
+
+  p = common.Run(cmd, stdout=subprocess.PIPE)
+  p.communicate()
+  assert p.returncode == 0, "make_efi_image failed"
+
+  common.ZipWrite(output_zip, img_file_name, prefix + "EFI.img")
+
 def AddCache(output_zip, prefix="IMAGES/"):
   """Create an empty cache image and store it in output_zip."""
 
@@ -392,6 +414,9 @@ def AddImagesToTargetFiles(filename):
   if OPTIONS.info_dict.get("board_bpt_enable", None) == "true":
     banner("partition-table")
     AddPartitionTable(output_zip)
+  if OPTIONS.info_dict.get("efi_enable", None) == "true":
+    banner("efi-image")
+    AddEFIImage(output_zip)
 
   # For devices using A/B update, copy over images from RADIO/ and/or
   # VENDOR_IMAGES/ to IMAGES/ and make sure we have all the needed

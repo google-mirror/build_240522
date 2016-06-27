@@ -1451,6 +1451,30 @@ bptimage-nodeps:
 endif # BOARD_BPT_INPUT_FILES
 
 # -----------------------------------------------------------------
+# EFI image
+# EFI_INPUT_FILES: EFI application files host and target paths.
+# EFI_IMAGE_SIZE: Size of EFI partition.
+ifdef EFI_INPUT_FILES
+
+EFI_INPUT_FILE_PATHS:= \
+	$(foreach file, $(EFI_INPUT_FILES), $(word 1, $(subst :, ,$(file))))
+
+define build-efiimage-target
+	$(call pretty,"Target EFI image: $(INSTALLED_EFIIMAGE_TARGET)")
+	$(hide) $(MAKE_EFI_IMAGE)
+endef
+
+INSTALLED_EFIIMAGE_TARGET := $(PRODUCT_OUT)/EFI.img
+$(INSTALLED_EFIIMAGE_TARGET): $(MAKE_EFI_IMAGE) $(EFI_INPUT_FILE_PATHS)
+	$(build-efiimage-target) $(EFI_IMAGE_SIZE) $@ $(EFI_INPUT_FILES)
+
+.PHONY: efiimage-nodeps
+efiimage-nodeps:
+	$(build-efiimage-target)
+
+endif # EFI_INPUT_FILES
+
+# -----------------------------------------------------------------
 # cache partition image
 ifdef BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE
 INTERNAL_CACHEIMAGE_FILES := \
@@ -1872,6 +1896,11 @@ ifdef BOARD_BPT_INPUT_FILES
 endif
 ifdef BOARD_BPT_DISK_SIZE
 	$(hide) echo "board_bpt_disk_size=$(BOARD_BPT_DISK_SIZE)" >> $(zip_root)/META/misc_info.txt
+endif
+ifdef EFI_INPUT_FILES
+	$(hide) echo "efi_enable=true" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "efi_image_size=$(EFI_IMAGE_SIZE)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "efi_input_files=$(EFI_INPUT_FILES)" >> $(zip_root)/META/misc_info.txt
 endif
 	$(call generate-userimage-prop-dictionary, $(zip_root)/META/misc_info.txt)
 ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
