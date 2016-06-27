@@ -1445,6 +1445,29 @@ bptimage-nodeps:
 endif # BOARD_BPT_INPUT_FILES
 
 # -----------------------------------------------------------------
+
+# -----------------------------------------------------------------
+# EFI image
+ifdef EFI_INPUT_FILES
+
+EFI_IMAGEBUILD	:= $(TARGET_DEVICE_DIR)/make_efi_image.sh
+
+define build-efiimage-target
+	$(call pretty,"Target EFI image: $(INSTALLED_EFIIMAGE_TARGET)")
+	$(hide) exec $(EFI_IMAGEBUILD)
+endef
+
+INSTALLED_EFIIMAGE_TARGET := $(PRODUCT_OUT)/EFI.img
+$(INSTALLED_EFIIMAGE_TARGET): $(make_efi_image)
+	$(build-efiimage-target)
+
+.PHONY: efiimage-nodeps
+efiimage-nodeps:
+	$(build-efiimage-target)
+
+endif # EFI_INPUT_FILES
+
+# -----------------------------------------------------------------
 # cache partition image
 ifdef BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE
 INTERNAL_CACHEIMAGE_FILES := \

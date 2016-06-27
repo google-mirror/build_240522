@@ -78,6 +78,7 @@ dont_bother_goals := clean clobber dataclean installclean \
     userdataimage-nodeps userdatatarball-nodeps \
     cacheimage-nodeps \
     bptimage-nodeps \
+    efiimage-nodeps \
     vendorimage-nodeps \
     ramdisk-nodeps \
     bootimage-nodeps \
@@ -914,6 +915,9 @@ cacheimage: $(INSTALLED_CACHEIMAGE_TARGET)
 .PHONY: bptimage
 bptimage: $(INSTALLED_BPTIMAGE_TARGET)
 
+.PHONY: efiimage
+efiimage: $(INSTALLED_EFIIMAGE_TARGET)
+
 .PHONY: vendorimage
 vendorimage: $(INSTALLED_VENDORIMAGE_TARGET)
 
@@ -944,6 +948,7 @@ droidcore: files \
 	$(INSTALLED_USERDATAIMAGE_TARGET) \
 	$(INSTALLED_CACHEIMAGE_TARGET) \
 	$(INSTALLED_BPTIMAGE_TARGET) \
+	$(INSTALLED_EFIIMAGE_TARGET) \
 	$(INSTALLED_VENDORIMAGE_TARGET) \
 	$(INSTALLED_FILES_FILE) \
 	$(INSTALLED_FILES_FILE_VENDOR)
