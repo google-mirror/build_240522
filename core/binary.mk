@@ -197,7 +197,9 @@ ifdef LOCAL_IS_HOST_MODULE
 my_src_files += $(LOCAL_SRC_FILES_$($(my_prefix)OS)) $(LOCAL_SRC_FILES_$($(my_prefix)OS)_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
 my_static_libraries += $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)OS))
 my_shared_libraries += $(LOCAL_SHARED_LIBRARIES_$($(my_prefix)OS))
-my_cflags += $(LOCAL_CFLAGS_$($(my_prefix)OS))
+my_cflags += $(LOCAL_CFLAGS_$($(my_prefix)OS)) \
+    $(LOCAL_CFLAGS_$($(my_prefix)OS)_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
+    $(LOCAL_CFLAGS_$($(my_prefix)OS)_$(my_32_64_bit_suffix))
 my_cppflags += $(LOCAL_CPPFLAGS_$($(my_prefix)OS))
 my_ldflags += $(LOCAL_LDFLAGS_$($(my_prefix)OS))
 my_ldlibs += $(LOCAL_LDLIBS_$($(my_prefix)OS))
