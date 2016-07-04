@@ -899,6 +899,7 @@ else
 BOARD_NAND_SPARE_SIZE := 64
 endif
 
+-include vendor/google/build/bootimg.mk
 # -----------------------------------------------------------------
 # system image
 #
@@ -1472,11 +1473,14 @@ INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
+ifneq ($(BLOCK_BASED_OTA),false)
+    $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
+endif
 $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	@echo "Package OTA: $@"
 	$(hide) MKBOOTIMG=$(MKBOOTIMG) \
 	   ./build/tools/releasetools/ota_from_target_files -v \
-	   --block \
+	   $(block_based) \
 	   -p $(HOST_OUT) \
 	   -k $(KEY_CERT_PAIR) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
