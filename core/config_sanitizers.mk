@@ -133,6 +133,11 @@ ifneq ($(my_sanitize),)
   endif
 endif
 
+ifneq ($(filter cfi,$(my_sanitize)),)
+  my_cflags += -flto -fsanitize-cfi-cross-dso -fno-sanitize-trap=cfi
+  my_ldflags += -flto -fsanitize=cfi -Wl,-plugin-opt,O1 -fsanitize-cfi-cross-dso -fno-sanitize-trap=cfi
+endif
+
 # If local or global modules need ASAN, add linker flags.
 ifneq ($(filter address,$(my_global_sanitize) $(my_sanitize)),)
   my_ldflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS)
