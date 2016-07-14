@@ -2605,6 +2605,24 @@ $(foreach t,$(1),\
   $(hide) mkdir -p $(dir $(3)/$(s)); cp -Rf $(t) $(3)/$(s)$(newline))
 endef
 
+# Define a rule to create a symlink to a file.
+# $(1): source
+# $(2): destination
+# $(2) doesn't need to depend on $(1): we can generate symlink to nonexistent
+# file.  If you add the dependency, make would compare the timestamp of a file
+# against that of its symlink: they are always equal, because make follows
+# symlinks.
+define symlink-file
+$(eval $(_symlink-file))
+endef
+define _symlink-file
+$(2):
+	@echo "Symlink: $$@ -> $(1)"
+	@mkdir -p $(dir $$@)
+	@rm -rf $$@
+	$(hide) ln -sf $(1) $$@
+endef
+
 ###########################################################
 ## Commands to call Proguard
 ###########################################################
