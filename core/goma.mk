@@ -31,6 +31,14 @@ ifneq ($(filter-out false,$(USE_GOMA)),)
   else
     goma_dir := $(HOME)/goma
   endif
+
+  goma_hermetic := error
+  ifdef GOMA_HERMETIC
+    ifeq ($(GOMA_HERMETIC), fallback)
+      goma_hermetic := fallback
+    endif
+  endif
+
   goma_ctl := $(goma_dir)/goma_ctl.py
   GOMA_CC := $(goma_dir)/gomacc
 
@@ -46,8 +54,9 @@ ifneq ($(filter-out false,$(USE_GOMA)),)
   # gomacc can start goma client's daemon process automatically, but
   # it is safer and faster to start up it beforehand. We run this as a
   # background process so this won't slow down the build.
-  $(shell ( GOMA_HERMETIC=error $(goma_ctl) ensure_start ) &> /dev/null &)
+  $(shell ( GOMA_HERMETIC=$(goma_hermetic) $(goma_ctl) ensure_start ) &> /dev/null &)
 
   goma_ctl :=
   goma_dir :=
+  goma_hermetic :=
 endif
