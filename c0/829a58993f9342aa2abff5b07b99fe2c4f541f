@@ -1,0 +1,10 @@
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Autosubmit+1: Fang Deng <fdeng@google.com>
+Presubmit-Ready+1: Fang Deng <fdeng@google.com>
+Verified+1: Fang Deng <fdeng@google.com>
+Submitted-by: Fang Deng <fdeng@google.com>
+Submitted-at: Tue, 19 Jul 2016 23:32:37 +0000
+Reviewed-on: https://android-review.googlesource.com/249003
+Project: platform/build
+Branch: refs/heads/master
