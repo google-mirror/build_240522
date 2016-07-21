@@ -48,3 +48,4 @@ endef
 $(combo_2nd_arch_prefix)TARGET_PACK_MODULE_RELOCATIONS := true
 
 $(combo_2nd_arch_prefix)TARGET_LINKER := /system/bin/linker
+$(combo_2nd_arch_prefix)TARGET_NDK_TRIPLE := mipsel-linux-android

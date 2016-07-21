@@ -41,3 +41,4 @@ endef
 TARGET_LINKER := /system/bin/linker64
 
 TARGET_GLOBAL_YASM_FLAGS := -f elf64 -m amd64
+TARGET_NDK_TRIPLE := x86_64-linux-android
