@@ -43,3 +43,4 @@ $(combo_2nd_arch_prefix)TARGET_PACK_MODULE_RELOCATIONS := true
 $(combo_2nd_arch_prefix)TARGET_LINKER := /system/bin/linker
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_YASM_FLAGS := -f elf32 -m x86
+$(combo_2nd_arch_prefix)TARGET_NDK_TRIPLE := i686-linux-android
