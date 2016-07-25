@@ -5,6 +5,9 @@
 ## None.
 ##
 ###########################################################
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+$(call record-module-type,PREBUILT)
+endif
 
 ifdef LOCAL_IS_HOST_MODULE
   my_prefix := HOST_
