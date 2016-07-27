@@ -211,7 +211,7 @@ ifdef LOCAL_SDK_VERSION
   endif
   endif
 
-  my_migrated_ndk_libs :=
+  my_migrated_ndk_libs := libc libm
   my_generated_ndk_shared_libraries := \
       $(filter $(my_migrated_ndk_libs),$(my_system_shared_libraries))
   my_system_shared_libraries := \
