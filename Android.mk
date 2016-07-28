@@ -6,3 +6,6 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(LOCAL_PATH),build)
 include $(call first-makefiles-under,$(LOCAL_PATH))
 endif
+
+ndk: $(OUT_DIR)/soong/ndk.timestamp
+.PHONY: ndk
