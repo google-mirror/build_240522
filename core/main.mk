@@ -457,6 +457,9 @@ ifneq ($(words $(sort $(filter-out $(INTERNAL_MODIFIER_TARGETS) checkbuild emula
 $(error The 'sdk' target may not be specified with any other targets)
 endif
 
+# AUX dependencies are already added by now; remove triggers from the MAKECMDGOALS
+MAKECMDGOALS := $(strip $(filter-out AUX-%,$(MAKECMDGOALS)))
+
 # TODO: this should be eng I think.  Since the sdk is built from the eng
 # variant.
 tags_to_install := debug eng
@@ -934,6 +937,8 @@ my_all_modules := $(sort $(foreach m, $(ALL_MODULES),$(if $(filter\
 all_modules: $(my_all_modules)
 endif
 
+.PHONY: auxiliary
+auxiliary: $(INSTALLED_AUX_TARGETS)
 
 # Build files and then package it into the rom formats
 .PHONY: droidcore
@@ -946,7 +951,8 @@ droidcore: files \
 	$(INSTALLED_BPTIMAGE_TARGET) \
 	$(INSTALLED_VENDORIMAGE_TARGET) \
 	$(INSTALLED_FILES_FILE) \
-	$(INSTALLED_FILES_FILE_VENDOR)
+	$(INSTALLED_FILES_FILE_VENDOR) \
+	$(INSTALLED_AUX_TARGETS)
 
 # dist_files only for putting your library into the dist directory with a full build.
 .PHONY: dist_files
