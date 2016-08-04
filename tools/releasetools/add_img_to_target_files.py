@@ -17,9 +17,11 @@
 """
 Given a target-files zipfile that does not contain images (ie, does
 not have an IMAGES/ top-level subdirectory), produce the images and
-add them to the zipfile.
+add them to the zipfile. If we are signing the target files with
+sign_target_files_apks, we will add the "--is_signing" option. This
+option will skip building & adding the images for userdata and cache.
 
-Usage:  add_img_to_target_files target_files
+Usage:  add_img_to_target_files [--is_signing] target_files
 """
 
 import sys
@@ -46,6 +48,7 @@ OPTIONS.add_missing = False
 OPTIONS.rebuild_recovery = False
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
+OPTIONS.is_signing = False
 OPTIONS.verity_signer_path = None
 
 def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
@@ -386,10 +389,11 @@ def AddImagesToTargetFiles(filename):
   if has_vendor:
     banner("vendor")
     AddVendor(output_zip)
-  banner("userdata")
-  AddUserdata(output_zip)
-  banner("cache")
-  AddCache(output_zip)
+  if not OPTIONS.is_signing:
+    banner("userdata")
+    AddUserdata(output_zip)
+    banner("cache")
+    AddCache(output_zip)
   if OPTIONS.info_dict.get("board_bpt_enable", None) == "true":
     banner("partition-table")
     AddPartitionTable(output_zip)
@@ -438,6 +442,8 @@ def main(argv):
       OPTIONS.replace_verity_private_key = (True, a)
     elif o == "--replace_verity_public_key":
       OPTIONS.replace_verity_public_key = (True, a)
+    elif o == "--is_signing":
+      OPTIONS.is_signing = True
     elif o == "--verity_signer_path":
       OPTIONS.verity_signer_path = a
     else:
@@ -449,6 +455,7 @@ def main(argv):
       extra_long_opts=["add_missing", "rebuild_recovery",
                        "replace_verity_public_key=",
                        "replace_verity_private_key=",
+                       "is_signing",
                        "verity_signer_path="],
       extra_option_handler=option_handler)
 
