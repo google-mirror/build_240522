@@ -46,6 +46,7 @@ OPTIONS.add_missing = False
 OPTIONS.rebuild_recovery = False
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
+OPTIONS.skip_userdata_cache = False
 OPTIONS.verity_signer_path = None
 
 def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
@@ -385,10 +386,11 @@ def AddImagesToTargetFiles(filename):
   if has_vendor:
     banner("vendor")
     AddVendor(output_zip)
-  banner("userdata")
-  AddUserdata(output_zip)
-  banner("cache")
-  AddCache(output_zip)
+  if not OPTIONS.skip_userdata_cache:
+    banner("userdata")
+    AddUserdata(output_zip)
+    banner("cache")
+    AddCache(output_zip)
   if OPTIONS.info_dict.get("board_bpt_enable", None) == "true":
     banner("partition-table")
     AddPartitionTable(output_zip)
@@ -437,6 +439,8 @@ def main(argv):
       OPTIONS.replace_verity_private_key = (True, a)
     elif o == "--replace_verity_public_key":
       OPTIONS.replace_verity_public_key = (True, a)
+    elif o == "--skip_userdata_cache":
+      OPTIONS.skip_userdata_cache = True
     elif o == "--verity_signer_path":
       OPTIONS.verity_signer_path = a
     else:
@@ -448,6 +452,7 @@ def main(argv):
       extra_long_opts=["add_missing", "rebuild_recovery",
                        "replace_verity_public_key=",
                        "replace_verity_private_key=",
+                       "skip_userdata_cache",
                        "verity_signer_path="],
       extra_option_handler=option_handler)
 

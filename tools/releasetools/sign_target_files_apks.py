@@ -702,7 +702,9 @@ def main(argv):
   common.ZipClose(input_zip)
   common.ZipClose(output_zip)
 
-  add_img_to_target_files.AddImagesToTargetFiles(args[1])
+  # Skip building userdata.img and cache.img when signing the target files.
+  new_args = ["--skip_userdata_cache", args[1]]
+  add_img_to_target_files.main(new_args)
 
   print "done."
 
