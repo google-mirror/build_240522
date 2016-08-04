@@ -297,7 +297,7 @@ def AddCache(output_zip, prefix="IMAGES/"):
   os.rmdir(temp_dir)
 
 
-def AddImagesToTargetFiles(filename):
+def AddImagesToTargetFiles(filename, skip_userdata_cache=False):
   OPTIONS.input_tmp, input_zip = common.UnzipTemp(filename)
 
   if not OPTIONS.add_missing:
@@ -385,10 +385,11 @@ def AddImagesToTargetFiles(filename):
   if has_vendor:
     banner("vendor")
     AddVendor(output_zip)
-  banner("userdata")
-  AddUserdata(output_zip)
-  banner("cache")
-  AddCache(output_zip)
+  if not skip_userdata_cache:
+    banner("userdata")
+    AddUserdata(output_zip)
+    banner("cache")
+    AddCache(output_zip)
   if OPTIONS.info_dict.get("board_bpt_enable", None) == "true":
     banner("partition-table")
     AddPartitionTable(output_zip)
