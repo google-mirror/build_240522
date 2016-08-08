@@ -1,0 +1,8 @@
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Chih-hung Hsieh <chh@google.com>
+Submitted-by: Chih-hung Hsieh <chh@google.com>
+Submitted-at: Mon, 08 Aug 2016 23:22:13 +0000
+Reviewed-on: https://android-review.googlesource.com/254605
+Project: platform/build
+Branch: refs/heads/master
