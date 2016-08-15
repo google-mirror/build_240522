@@ -138,6 +138,28 @@ $(my_link_type):
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 	$(hide) echo $(PRIVATE_LINK_TYPE) >$@
 
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+ifndef LOCAL_IS_HOST_MODULE
+ifeq (SHARED_LIBRARIES,$(LOCAL_MODULE_CLASS))
+my_prebuilt_check := $(intermediates)/soname_check
+$(my_prebuilt_check): PRIVATE_ARCH := $($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+$(my_prebuilt_check): PRIVATE_SONAME := $(my_installed_module_stem)
+$(my_prebuilt_check): PRIVATE_SHARED_LIBRARIES := $(foreach l,$(LOCAL_SHARED_LIBRARIES),$(l).so)
+$(my_prebuilt_check): $(my_prebuilt_src_file) $(VERIFY_PREBUILT_LIB)
+	@echo Check prebuilt library: $<
+	$(hide) mkdir -p $(dir $@)
+	$(hide) rm -f $@
+	$(hide) $(VERIFY_PREBUILT_LIB) \
+	    -arch $(PRIVATE_ARCH) -soname $(PRIVATE_SONAME) \
+	    $(foreach l,$(PRIVATE_SHARED_LIBRARIES),-need $(l)) $<
+	$(hide) touch $@
+
+$(LOCAL_BUILT_MODULE) : $(my_prebuilt_check)
+verify_all_prebuilt_libraries: $(my_prebuilt_check)
+endif
+endif
+endif
+
 $(LOCAL_BUILT_MODULE) : | $(export_includes) $(my_link_type)
 endif  # prebuilt_module_is_a_library
 

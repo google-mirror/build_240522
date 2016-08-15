@@ -1136,4 +1136,7 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+verify_all_prebuilt_libraries:
+.PHONY: verify_all_prebuilt_libraries
+
 endif # KATI
