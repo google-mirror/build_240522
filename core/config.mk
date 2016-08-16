@@ -796,4 +796,31 @@ export ANDROID_BUILD_PATHS:=$(abspath $(BUILD_SYSTEM)/no_java_path):$(ANDROID_BU
 export PATH:=$(abspath $(BUILD_SYSTEM)/no_java_path):$(PATH)
 endif
 
+# Projects clean of compiler warnings should be compiled with -Werror.
+ANDROID_WARNING_DISALLOWED_PROJECTS := \
+    art/% \
+    bionic/% \
+    external/fio/% \
+
+define find_warning_disallowed_projects
+    $(filter $(ANDROID_WARNING_DISALLOWED_PROJECTS),$(1)/)
+endef
+
+# Projects with compiler warnings are compiled without -Werror.
+ANDROID_WARNING_ALLOWED_PROJECTS := \
+    bootable/% \
+    cts/% \
+    dalvik/% \
+    device/% \
+    external/% \
+    frameworks/% \
+    hardware/% \
+    packages/% \
+    system/% \
+    vendor/% \
+
+define find_warning_allowed_projects
+    $(filter $(ANDROID_WARNING_ALLOWED_PROJECTS),$(1)/)
+endef
+
 include $(BUILD_SYSTEM)/dumpvar.mk
