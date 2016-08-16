@@ -20,17 +20,24 @@
 # or google-runtime-references.
 DEFAULT_GLOBAL_TIDY_CHECKS := \
   $(subst $(space),, \
-    -*,google*,performance*,misc-macro-parentheses \
-    ,-google-readability*,-google-runtime-references \
+    -*,google* \
+    ,misc-macro-parentheses \
+    ,performance* \
+    ,-google-readability* \
+    ,-google-runtime-references \
   )
 
 # There are too many clang-tidy warnings in external and vendor projects.
 # Enable only some google checks for these projects.
 DEFAULT_EXTERNAL_VENDOR_TIDY_CHECKS := \
   $(subst $(space),, \
-    -*,google*,-google-build-using-namespace \
-    ,-google-readability*,-google-runtime-references \
-    ,-google-explicit-constructor,-google-runtime-int \
+    -*,google* \
+    ,-google-build-using-namespace \
+    ,-google-default-arguments \
+    ,-google-explicit-constructor \
+    ,-google-readability* \
+    ,-google-runtime-int \
+    ,-google-runtime-references \
   )
 
 # Every word in DEFAULT_LOCAL_TIDY_CHECKS list has the following format:
@@ -43,6 +50,7 @@ DEFAULT_LOCAL_TIDY_CHECKS := \
   hardware/qcom:$(DEFAULT_EXTERNAL_VENDOR_TIDY_CHECKS) \
   vendor/:$(DEFAULT_EXTERNAL_VENDOR_TIDY_CHECKS) \
   vendor/google:$(DEFAULT_GLOBAL_TIDY_CHECKS) \
+  vendor/google/media/mca:$(DEFAULT_EXTERNAL_VENDOR_TIDY_CHECKS) \
 
 # Returns 2nd word of $(1) if $(2) has prefix of the 1st word of $(1).
 define find_default_local_tidy_check2
