@@ -359,6 +359,8 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     build_command.append(prop_dict["partition_size"])
     if "journal_size" in prop_dict:
       build_command.extend(["-j", prop_dict["journal_size"]])
+    if "reserve_size" in prop_dict:
+      build_command.extend(["-r", prop_dict["reserve_size"]])
     if "timestamp" in prop_dict:
       build_command.extend(["-T", str(prop_dict["timestamp"])])
     if fs_config:
@@ -525,9 +527,11 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("fs_type", "fs_type")
     copy_prop("userdata_fs_type", "fs_type")
     copy_prop("userdata_size", "partition_size")
+    copy_prop("userdata_reserve_size", "reserve_size")
   elif mount_point == "cache":
     copy_prop("cache_fs_type", "fs_type")
     copy_prop("cache_size", "partition_size")
+    copy_prop("cache_reserve_size", "reserve_size")
   elif mount_point == "vendor":
     copy_prop("vendor_fs_type", "fs_type")
     copy_prop("vendor_size", "partition_size")
