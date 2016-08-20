@@ -414,7 +414,7 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     cmd.extend(["--ramdisk", ramdisk_img.name])
 
   img_unsigned = None
-  if info_dict.get("vboot", None):
+  if info_dict.get("vboot", None) == "true":
     img_unsigned = tempfile.NamedTemporaryFile()
     cmd.extend(["--output", img_unsigned.name])
   else:
@@ -437,8 +437,8 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     p.communicate()
     assert p.returncode == 0, "boot_signer of %s image failed" % path
 
-  # Sign the image if vboot is non-empty.
-  elif info_dict.get("vboot", None):
+  # Sign the image if vboot is enabled.
+  elif info_dict.get("vboot", None) == "true":
     path = "/" + os.path.basename(sourcedir).lower()
     img_keyblock = tempfile.NamedTemporaryFile()
     cmd = [info_dict["vboot_signer_cmd"], info_dict["futility"],
