@@ -75,7 +75,7 @@ include $(BUILD_SYSTEM)/dex_preopt_libart.mk
 # $(1): the input .jar or .apk file
 # $(2): the output .odex file
 define dexpreopt-one-file
-$(call dex2oat-one-file,$(1),$(2))
+$(call dex2oat-one-file,$(1),$(patsubst %.odex,%.vdex,$(2)),$(2))
 endef
 
 DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS := $(DEX2OAT_DEPENDENCY)

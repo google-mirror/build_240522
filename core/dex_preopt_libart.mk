@@ -74,9 +74,10 @@ LIBART_TARGET_BOOT_DEX_FILES := $(foreach jar,$(LIBART_TARGET_BOOT_JARS),$(call 
 # dex preopt on the bootclasspath produces multiple files.  The first dex file
 # is converted into to boot.art (to match the legacy assumption that boot.art
 # exists), and the rest are converted to boot-<name>.art.
-# In addition, each .art file has an associated .oat file.
-LIBART_TARGET_BOOT_ART_EXTRA_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TARGET_BOOT_JARS)),boot-$(jar).art boot-$(jar).oat)
+# In addition, each .art file has an associated .oat file and a .vdex file.
+LIBART_TARGET_BOOT_ART_EXTRA_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TARGET_BOOT_JARS)),boot-$(jar).art boot-$(jar).oat boot-$(jar).vdex)
 LIBART_TARGET_BOOT_ART_EXTRA_FILES += boot.oat
+LIBART_TARGET_BOOT_ART_EXTRA_FILES += boot.vdex
 
 my_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
@@ -94,17 +95,20 @@ endif
 # For a single jar or APK
 
 # $(1): the input .jar or .apk file
-# $(2): the output .odex file
+# $(2): the output .vdex file
+# $(3): the output .odex file
 define dex2oat-one-file
-$(hide) rm -f $(2)
+$(hide) rm -f $(2) $(3)
 $(hide) mkdir -p $(dir $(2))
+$(hide) mkdir -p $(dir $(3))
 $(hide) ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	--runtime-arg -Xms$(DEX2OAT_XMS) --runtime-arg -Xmx$(DEX2OAT_XMX) \
 	--runtime-arg -classpath --runtime-arg $(DEX2OAT_CLASSPATH) \
 	--boot-image=$(PRIVATE_DEX_PREOPT_IMAGE_LOCATION) \
 	--dex-file=$(1) \
 	--dex-location=$(PRIVATE_DEX_LOCATION) \
-	--oat-file=$(2) \
+	--vdex-file=$(2) \
+	--oat-file=$(3) \
 	--android-root=$(PRODUCT_OUT)/system \
 	--instruction-set=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_ARCH) \
 	--instruction-set-variant=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT) \
