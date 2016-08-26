@@ -1420,9 +1420,9 @@ ifndef LOCAL_SDK_VERSION
   my_c_includes += $(JNI_H_INCLUDE)
 endif
 
-my_outside_includes := $(filter-out $(OUT_DIR)/%,$(filter /%,$(my_c_includes)))
+my_outside_includes := $(filter-out $(abspath $(OUT_DIR))/%,$(filter /%,$(my_c_includes)))
 ifneq ($(my_outside_includes),)
-$(error $(LOCAL_MODULE_MAKEFILE): $(LOCAL_MODULE): C_INCLUDES must be under the source or output directories: $(my_outside_includes))
+$(error $(LOCAL_MODULE_MAKEFILE): $(LOCAL_MODULE): C_INCLUDES must be under the source or output directories: $(abspath OUT_DIR). $(my_outside_includes))
 endif
 
 # all_objects includes gen_o_objects which were part of LOCAL_GENERATED_SOURCES;
