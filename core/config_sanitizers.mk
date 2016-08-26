@@ -172,7 +172,9 @@ ifneq ($(filter address,$(my_sanitize)),)
   # Frame pointer based unwinder in ASan requires ARM frame setup.
   LOCAL_ARM_MODE := arm
   my_cflags += $(ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
-  ifndef LOCAL_IS_HOST_MODULE
+  ifdef LOCAL_IS_HOST_MODULE
+    my_cflags += -D_LIBCPP_HAS_NO_ASAN=1
+  else
     my_cflags += -mllvm -asan-globals=0
   endif
 endif
