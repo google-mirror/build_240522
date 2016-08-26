@@ -22,7 +22,10 @@ DEX_PREOPT_DEFAULT ?= true
 # The default values for pre-opting: always preopt PIC.
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
-  WITH_DEXPREOPT_PIC ?= true
+  # Disable PIC for MIPS until it's functional.
+  ifneq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),mips mips64))
+    WITH_DEXPREOPT_PIC ?= true
+  endif
   WITH_DEXPREOPT ?= true
 # For an eng build only pre-opt the boot image. This gives reasonable performance and still
 # allows a simple workflow: building in frameworks/base and syncing.
