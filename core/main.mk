@@ -236,7 +236,7 @@ $(error stop)
 endif # java version is not Sun Oracle JDK
 endif # if requires_openjdk
 
-KNOWN_INCOMPATIBLE_JAVAC_VERSIONS := google
+KNOWN_INCOMPATIBLE_JAVAC_VERSIONS :=
 incompat_javac := $(foreach v,$(KNOWN_INCOMPATIBLE_JAVAC_VERSIONS),$(findstring $(v),$(javac_version_str)))
 ifneq ($(incompat_javac),)
 javac_version :=
