@@ -1,0 +1,10 @@
+Verified+1: Casey Dahlin <sadmac@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Autosubmit+1: Casey Dahlin <sadmac@google.com>
+Code-Review+1: Dmitry Shmidt <dimitrysh@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 07 Sep 2016 19:51:06 +0000
+Reviewed-on: https://android-review.googlesource.com/268837
+Project: platform/build
+Branch: refs/heads/master
