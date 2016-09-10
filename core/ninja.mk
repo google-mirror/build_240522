@@ -76,11 +76,15 @@ $(COMBINED_BUILD_NINJA): $(KATI_BUILD_NINJA) FORCE
 	$(hide) echo "include $(SOONG_BUILD_NINJA)" >> $(COMBINED_BUILD_NINJA)
 	$(hide) echo "build $(COMBINED_BUILD_NINJA): phony $(SOONG_BUILD_NINJA)" >> $(COMBINED_BUILD_NINJA)
 
+.PHONY: post_clean_gen_java
+post_clean_gen_java: $(KATI_BUILD_NINJA)
+	$(hide) build/tools/clean_gen_java.py $(TARGET_OUT_COMMON_INTERMEDIATES)
+
 $(sort $(DEFAULT_GOAL) $(ANDROID_GOALS)) : ninja_wrapper
 	@#empty
 
 .PHONY: ninja_wrapper
-ninja_wrapper: $(COMBINED_BUILD_NINJA) $(MAKEPARALLEL)
+ninja_wrapper: $(COMBINED_BUILD_NINJA) post_clean_gen_java $(MAKEPARALLEL)
 	@echo Starting build with ninja
 	+$(hide) export NINJA_STATUS="$(NINJA_STATUS)" && source $(KATI_ENV_SH) && exec $(NINJA_MAKEPARALLEL) $(NINJA) -d keepdepfile $(NINJA_GOALS) -C $(TOP) -f $(COMBINED_BUILD_NINJA) $(NINJA_ARGS)
 

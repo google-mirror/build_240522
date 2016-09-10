@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+package android.build.test;
+
+option java_package = "android.build.make.tests";
+option java_outer_classname = "ProtoTest";
+
+message Test {
+  optional int32 id = 1;
+}

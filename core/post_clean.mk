@@ -17,44 +17,36 @@
 
 #######################################################
 # Check if we need to delete obsolete generated java files.
-# When an proto/etc file gets deleted (or renamed), the generated java file is obsolete.
-previous_gen_java_config := $(TARGET_OUT_COMMON_INTERMEDIATES)/previous_gen_java_config.mk
-current_gen_java_config := $(TARGET_OUT_COMMON_INTERMEDIATES)/current_gen_java_config.mk
+# When an proto/etc file gets deleted (or renamed), the generated java
+# file is obsolete.
+#
+# We solve this by writing out the list of modules withtheir source files that
+# will create generated source files. Then build/make/tools/clean_gen_java.py
+# can compare that map against the previous, and if the file list has changed,
+# remove the intermediate directories causing them to rebuild.
+#
+# We need to store off a list of all possible modules separately in case we're
+# building with 'mm' and only know about a subset of the tree. The tool can
+# ignore any map entries that aren't in this possible module list.
+gen_java_modules :=
+gen_java_files :=
+$(foreach p,$(sort $(ALL_MODULES)), \
+  $(foreach class,$(sort $(filter APPS JAVA_LIBRARIES,$(ALL_MODULES.$(p).CLASS))), \
+    $(eval gen_java_modules += $$(class)/$$(p)_intermediates$$(newline)) \
+    $(eval gs := $$(strip $$(ALL_MODULES.$$(p).PROTO_FILES) \
+                          $$(ALL_MODULES.$$(p).RS_FILES))) \
+    $(if $(gs), \
+      $(eval gen_java_files += $$(class)/$$(p)_intermediates $$(gs)$$(newline)))))
 
-$(shell rm -rf $(current_gen_java_config) \
-  && mkdir -p $(dir $(current_gen_java_config))\
-  && touch $(current_gen_java_config))
--include $(previous_gen_java_config)
+current_gen_java_config := $(TARGET_OUT_COMMON_INTERMEDIATES)/current_gen_java.txt
+current_all_modules_config := $(TARGET_OUT_COMMON_INTERMEDIATES)/current_modules.txt
 
-intermediates_to_clean :=
-modules_with_gen_java_files :=
-$(foreach p, $(ALL_MODULES), \
-  $(eval gs := $(strip $(ALL_MODULES.$(p).PROTO_FILES)\
-                       $(ALL_MODULES.$(p).RS_FILES)))\
-  $(if $(gs),\
-    $(eval modules_with_gen_java_files += $(p))\
-    $(shell echo 'GEN_SRC_FILES.$(p) := $(gs)' >> $(current_gen_java_config)))\
-  $(if $(filter-out $(gs),$(GEN_SRC_FILES.$(p))),\
-    $(eval intermediates_to_clean += $(ALL_MODULES.$(p).INTERMEDIATE_SOURCE_DIR))))
-intermediates_to_clean := $(strip $(intermediates_to_clean))
-ifdef intermediates_to_clean
-$(info *** Obsolete generated java files detected, clean intermediate files...)
-$(info *** rm -rf $(intermediates_to_clean))
-$(shell rm -rf $(intermediates_to_clean))
-intermediates_to_clean :=
-endif
+$(shell mkdir -p $(dir $(current_gen_java_config)))
 
-# For modules not loaded by the current build (e.g. you are running mm/mmm),
-# we copy the info from the previous bulid.
-$(foreach p, $(filter-out $(ALL_MODULES),$(MODULES_WITH_GEN_JAVA_FILES)),\
-  $(shell echo 'GEN_SRC_FILES.$(p) := $(GEN_SRC_FILES.$(p))' >> $(current_gen_java_config)))
-MODULES_WITH_GEN_JAVA_FILES := $(sort $(MODULES_WITH_GEN_JAVA_FILES) $(modules_with_gen_java_files))
-$(shell echo 'MODULES_WITH_GEN_JAVA_FILES := $(MODULES_WITH_GEN_JAVA_FILES)' >> $(current_gen_java_config))
+$(file >$(current_gen_java_config),$(gen_java_files))
+$(file >$(current_all_modules_config),$(gen_java_modules))
 
-# Now current becomes previous.
-$(shell cmp $(current_gen_java_config) $(previous_gen_java_config) > /dev/null 2>&1 || mv -f $(current_gen_java_config) $(previous_gen_java_config))
-
-MODULES_WITH_GEN_JAVA_FILES :=
-modules_with_gen_java_files :=
-previous_gen_java_config :=
 current_gen_java_config :=
+current_all_modules_config :=
+gen_java_modules :=
+gen_java_files :=
