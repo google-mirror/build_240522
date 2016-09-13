@@ -2778,8 +2778,8 @@ endef
 # the old modification time.
 define copy-file-to-new-target
 @mkdir -p $(dir $@)
-$(hide) rm -f $@
-$(hide) cp $< $@
+$(hide) rm -fr $@
+$(hide) cp -r $< $@
 endef
 
 # The same as copy-file-to-new-target, but use the local
