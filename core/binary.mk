@@ -1370,7 +1370,7 @@ $(my_link_type): PRIVATE_LINK_TYPE := ndk
 $(my_link_type): PRIVATE_ALLOWED_TYPES := ndk
 else
 $(my_link_type): PRIVATE_LINK_TYPE := platform
-$(my_link_type): PRIVATE_ALLOWED_TYPES := (ndk|platform)
+$(my_link_type): PRIVATE_ALLOWED_TYPES := ndk platform
 endif
 my_link_type_deps := $(strip \
    $(foreach l,$(my_whole_static_libraries) $(my_static_libraries), \
@@ -1383,15 +1383,11 @@ endif
 $(my_link_type): PRIVATE_DEPS := $(my_link_type_deps)
 $(my_link_type): PRIVATE_MODULE := $(LOCAL_MODULE)
 $(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
-$(my_link_type): $(my_link_type_deps)
+$(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
 	@echo Check module type: $@
 	$(hide) mkdir -p $(dir $@) && rm -f $@
-ifdef my_link_type_deps
-	$(hide) for f in $(PRIVATE_DEPS); do \
-	  grep -qE '^$(PRIVATE_ALLOWED_TYPES)$$' $$f || \
-	    ($(call echo-error,"$(PRIVATE_MAKEFILE): $(PRIVATE_MODULE) ($(PRIVATE_LINK_TYPE)) should not link to $$(basename $${f%_intermediates/link_type}) ($$(cat $$f))"); exit 1) \
-	done
-endif
+	$(hide) $(CHECK_LINK_TYPE) --makefile $(PRIVATE_MAKEFILE) --module $(PRIVATE_MODULE) \
+	  --type $(PRIVATE_LINK_TYPE) $(addprefix --allowed ,$(PRIVATE_ALLOWED_TYPES)) $(PRIVATE_DEPS)
 	$(hide) echo $(PRIVATE_LINK_TYPE) >$@
 
 

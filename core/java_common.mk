@@ -388,26 +388,25 @@ my_link_type_deps := $(strip \
       APPS,$(lib),,COMMON)/link_type))
 ifeq ($(LOCAL_SDK_VERSION),system_current)
 $(my_link_type): PRIVATE_LINK_TYPE := system
-$(my_link_type): PRIVATE_ALLOWED_TYPES := (sdk|system)
+$(my_link_type): PRIVATE_ALLOWED_TYPES := sdk system
 else ifneq ($(LOCAL_SDK_VERSION),)
 $(my_link_type): PRIVATE_LINK_TYPE := sdk
 $(my_link_type): PRIVATE_ALLOWED_TYPES := sdk
 else
 $(my_link_type): PRIVATE_LINK_TYPE := platform
-$(my_link_type): PRIVATE_ALLOWED_TYPES := (sdk|system|platform)
+$(my_link_type): PRIVATE_ALLOWED_TYPES := sdk system platform
 endif
 $(my_link_type): PRIVATE_DEPS := $(my_link_type_deps)
 $(my_link_type): PRIVATE_MODULE := $(LOCAL_MODULE)
 $(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
-$(my_link_type): $(my_link_type_deps)
+$(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
 	@echo Check Java library module types: $@
 	$(hide) mkdir -p $(dir $@)
 	$(hide) rm -f $@
-	$(hide) for f in $(PRIVATE_DEPS); do \
-	  grep -qE '^$(PRIVATE_ALLOWED_TYPES)$$' $$f || \
-	    $(call echo-warning,"$(PRIVATE_MAKEFILE): $(PRIVATE_MODULE) ($(PRIVATE_LINK_TYPE)) should not link to $$(basename $${f%_intermediates/link_type}) ($$(cat $$f))"); \
-	done
+	$(hide) $(CHECK_LINK_TYPE) --warn --makefile $(PRIVATE_MAKEFILE) --module $(PRIVATE_MODULE) \
+	  --type $(PRIVATE_LINK_TYPE) $(addprefix --allowed ,$(PRIVATE_ALLOWED_TYPES)) $(PRIVATE_DEPS)
 	$(hide) echo $(PRIVATE_LINK_TYPE) >$@
 
+all_link_types: $(my_link_type)
 $(LOCAL_BUILT_MODULE): $(my_link_type)
 endif  # !LOCAL_IS_HOST_MODULE
