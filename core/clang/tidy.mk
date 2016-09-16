@@ -21,6 +21,7 @@
 DEFAULT_GLOBAL_TIDY_CHECKS := \
   $(subst $(space),, \
     -*,google* \
+    ,clang-analyzer-* \
     ,misc-macro-parentheses \
     ,performance* \
     ,-google-readability* \
@@ -32,6 +33,7 @@ DEFAULT_GLOBAL_TIDY_CHECKS := \
 DEFAULT_EXTERNAL_VENDOR_TIDY_CHECKS := \
   $(subst $(space),, \
     -*,google* \
+    ,clang-analyzer-* \
     ,-google-build-using-namespace \
     ,-google-default-arguments \
     ,-google-explicit-constructor \
