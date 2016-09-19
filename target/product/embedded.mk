@@ -75,6 +75,7 @@ PRODUCT_PACKAGES += \
     toolbox \
     toybox \
     tzdatacheck \
+    hwservicemanager \
 
 # SELinux packages
 PRODUCT_PACKAGES += \
