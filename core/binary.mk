@@ -1761,6 +1761,12 @@ endif
 	  mv $@.tmp $@ ; \
 	fi
 
+ifdef USE_GOMA
+  ifeq ($(my_clang),true)
+    my_cflags += clang_goma_cflags
+  endif
+endif
+
 # Kati adds restat=1 to ninja. GNU make does nothing for this.
 .KATI_RESTAT: $(export_includes)
 
