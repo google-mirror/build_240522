@@ -129,6 +129,10 @@ clang_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/clang/TARGET_$(TARGET_2ND_ARCH).mk
 endif
 
+ifdef USE_GOMA
+clang_gomacc_path := $(GOMA_DIR)/gomacc
+endif
+
 ADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS := -fno-omit-frame-pointer
 ADDRESS_SANITIZER_CONFIG_EXTRA_LDFLAGS := -Wl,-u,__asan_preinit
 

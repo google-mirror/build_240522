@@ -33,18 +33,15 @@ ifneq ($(filter-out false,$(USE_GOMA)),)
     goma_dir := $(GOMA_DIR)
   else
     goma_dir := $(HOME)/goma
+    GOMA_DIR := $(goma_dir)
+    export GOMA_DIR
   endif
   goma_ctl := $(goma_dir)/goma_ctl.py
-  GOMA_CC := $(goma_dir)/gomacc
+  goma_cc := $(goma_dir)/gomacc
 
   $(if $(wildcard $(goma_ctl)),, \
    $(warning You should have goma in $$GOMA_DIR or $(HOME)/goma) \
    $(error See go/ma/how-to-use-goma/how-to-use-goma-for-android for detail))
-
-  # Append gomacc to existing *_WRAPPER variables so it's possible to
-  # use both ccache and gomacc.
-  CC_WRAPPER := $(strip $(CC_WRAPPER) $(GOMA_CC))
-  CXX_WRAPPER := $(strip $(CXX_WRAPPER) $(GOMA_CC))
 
   # gomacc can start goma client's daemon process automatically, but
   # it is safer and faster to start up it beforehand. We run this as a
