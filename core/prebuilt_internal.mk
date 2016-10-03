@@ -175,7 +175,7 @@ endif  # my_strip_module not true
 # Coverage information is needed when static lib is a dependency of another
 # coverage-enabled module.
 ifeq (STATIC_LIBRARIES, $(LOCAL_MODULE_CLASS))
-GCNO_ARCHIVE := $(LOCAL_MODULE).gcnodir
+GCNO_ARCHIVE := $(LOCAL_MODULE)$(gcno_suffix)
 $(intermediates)/$(GCNO_ARCHIVE) : PRIVATE_ALL_OBJECTS :=
 $(intermediates)/$(GCNO_ARCHIVE) : PRIVATE_ALL_WHOLE_STATIC_LIBRARIES :=
 $(intermediates)/$(GCNO_ARCHIVE) :
