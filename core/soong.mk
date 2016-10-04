@@ -74,7 +74,12 @@ $(SOONG_VARIABLES): FORCE
 	echo '    "CrossHost": "$(HOST_CROSS_OS)",'; \
 	echo '    "CrossHostArch": "$(HOST_CROSS_ARCH)",'; \
 	echo '    "CrossHostSecondaryArch": "$(HOST_CROSS_2ND_ARCH)",'; \
-	echo '    "Safestack": $(if $(filter true,$(USE_SAFESTACK)),true,false)'; \
+	echo '    "Safestack": $(if $(filter true,$(USE_SAFESTACK)),true,false),'; \
+	echo ''; \
+	$(if $(MAX_EGL_CACHE_ENTRY_SIZE),echo "    \"Max_egl_cache_entry_size\": $$(($(MAX_EGL_CACHE_ENTRY_SIZE)))$(comma)";) \
+	$(if $(MAX_EGL_CACHE_KEY_SIZE),echo "    \"Max_egl_cache_key_size\": $$(($(MAX_EGL_CACHE_KEY_SIZE)))$(comma)";) \
+	$(if $(MAX_EGL_CACHE_SIZE),echo "    \"Max_egl_cache_size\": $$(($(MAX_EGL_CACHE_SIZE)))$(comma)";) \
+	echo '    "Allow_egl_hibernation": $(if $(filter true,$(BOARD_ALLOW_EGL_HIBERNATION)),true,false)'; \
 	echo '}') > $(SOONG_VARIABLES_TMP); \
 	if ! cmp -s $(SOONG_VARIABLES_TMP) $(SOONG_VARIABLES); then \
 	  mv $(SOONG_VARIABLES_TMP) $(SOONG_VARIABLES); \
