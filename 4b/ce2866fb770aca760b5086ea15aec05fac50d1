@@ -1,0 +1,9 @@
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Przemyslaw Szczepaniak <pszczepaniak@google.com>
+Autosubmit+1: Przemyslaw Szczepaniak <pszczepaniak@google.com>
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Submitted-by: Przemyslaw Szczepaniak <pszczepaniak@google.com>
+Submitted-at: Tue, 04 Oct 2016 11:35:58 +0000
+Reviewed-on: https://android-review.googlesource.com/278544
+Project: platform/build
+Branch: refs/heads/master
