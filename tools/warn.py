@@ -2028,7 +2028,8 @@ def parse_input_file():
   infile = open(args.buildlog, 'r')
   line_counter = 0
 
-  warning_pattern = re.compile('.* warning:.*')
+  # handle only warning messages with a file path
+  warning_pattern = re.compile('[^ ]*/[^ ]*: warning: .*')
   compile_patterns()
 
   # read the log file and classify all the warnings
