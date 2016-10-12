@@ -1,0 +1,10 @@
+Code-Review+1: minghao lee <liminghao@xiaomi.com>
+Code-Review+1: Mohamad Ayyash <mkayyash@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Mohamad Ayyash <mkayyash@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Jeff Sharkey <jsharkey@google.com>
+Submitted-at: Wed, 12 Oct 2016 01:16:33 +0000
+Reviewed-on: https://android-review.googlesource.com/249990
+Project: platform/build
+Branch: refs/heads/master
