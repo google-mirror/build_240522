@@ -144,7 +144,7 @@ OPTIONS.incremental_source = None
 OPTIONS.verify = False
 OPTIONS.require_verbatim = set()
 OPTIONS.prohibit_verbatim = set(("system/build.prop",))
-OPTIONS.patch_threshold = 0.95
+OPTIONS.patch_threshold = 1.0
 OPTIONS.wipe_user_data = False
 OPTIONS.downgrade = False
 OPTIONS.extra_script = None
@@ -748,7 +748,7 @@ def LoadPartitionFiles(z, partition):
       basefilename = info.filename[len(prefix):]
       fn = partition + "/" + basefilename
       data = z.read(info.filename)
-      out[fn] = common.File(fn, data)
+      out[fn] = common.File(fn, data, info.compress_size)
   return out
 
 
@@ -1379,7 +1379,7 @@ class FileDifference(object):
     for diff in diffs:
       tf, sf, d = diff.GetPatch()
       path = "/".join(tf.name.split("/")[:-1])
-      if d is None or len(d) > tf.size * OPTIONS.patch_threshold or \
+      if d is None or len(d) > tf.compress_size * OPTIONS.patch_threshold or \
           path not in known_paths:
         # patch is almost as big as the file; don't bother patching
         # or a patch + rename cannot take place due to the target
