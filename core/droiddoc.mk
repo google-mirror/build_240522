@@ -233,8 +233,10 @@ endif
 ##
 ##
 
-
+# LOCAL_EXCLUDE_FROM_ALL_DOCS can be used to prevent inclusion in the 'docs' build target.
+ifeq ($(strip $(LOCAL_EXCLUDE_FROM_ALL_DOCS)),)
 ALL_DOCS += $(full_target)
+endif
 
 .PHONY: $(LOCAL_MODULE)-docs
 $(LOCAL_MODULE)-docs : $(full_target)
