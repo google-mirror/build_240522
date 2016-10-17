@@ -184,6 +184,8 @@ ifdef LOCAL_SDK_VERSION
     else
       my_ndk_stl_shared_lib_fullpath := $(my_ndk_source_root)/cxx-stl/stlport/libs/$(my_cpu_variant)/libstlport_shared.so
     endif
+
+    my_ndk_stl_cppflags := -std=c++98
   else # LOCAL_NDK_STL_VARIANT is not stlport_* either
   ifneq (,$(filter c++_%, $(LOCAL_NDK_STL_VARIANT)))
     # Pre-r11 NDKs used libgabi++ for libc++'s C++ ABI, but r11 and later use
@@ -234,8 +236,6 @@ ifdef LOCAL_SDK_VERSION
     endif
 
     my_ldlibs += -ldl
-
-    my_ndk_stl_cppflags := -std=c++11
   else # LOCAL_NDK_STL_VARIANT is not c++_* either
   ifneq (,$(filter gnustl_%, $(LOCAL_NDK_STL_VARIANT)))
     my_ndk_stl_include_path := $(my_ndk_source_root)/cxx-stl/gnu-libstdc++/$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NDK_GCC_VERSION)/libs/$(my_cpu_variant)/include \
@@ -374,11 +374,6 @@ ifneq ($(my_clang),true)
     # __cxa_throw_bad_array_length, which is not a valid C++ RT ABI).
     # http://b/25022512
     my_cpp_std_version := -std=gnu++11
-endif
-
-ifdef LOCAL_SDK_VERSION
-    # The NDK handles this itself.
-    my_cpp_std_version :=
 endif
 
 ifdef LOCAL_IS_HOST_MODULE
