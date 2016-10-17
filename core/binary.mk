@@ -367,25 +367,26 @@ else ifeq ($(my_clang),)
     my_clang := true
 endif
 
-my_cpp_std_version := -std=gnu++14
+my_c_std_version := $(DEFAULT_C_STD_VERSION)
+my_cpp_std_version := $(DEFAULT_CPP_STD_VERSION)
 
 ifneq ($(my_clang),true)
     # GCC uses an invalid C++14 ABI (emits calls to
     # __cxa_throw_bad_array_length, which is not a valid C++ RT ABI).
     # http://b/25022512
-    my_cpp_std_version := -std=gnu++11
+    my_cpp_std_version := $(DEFAULT_GCC_CPP_STD_VERSION)
 endif
 
 ifdef LOCAL_IS_HOST_MODULE
     ifneq ($(my_clang),true)
         # The host GCC doesn't support C++14 (and is deprecated, so likely
         # never will). Build these modules with C++11.
-        my_cpp_std_version := -std=gnu++11
+        my_cpp_std_version := $(DEFAULT_GCC_CPP_STD_VERSION)
     endif
 endif
 
-my_cppflags := $(my_cpp_std_version) $(my_cppflags)
-
+my_cppflags := -std=$(my_cpp_std_version) $(my_cppflags)
+my_conlyflags := -std=$(my_c_std_version) $(my_conlyflags)
 
 # arch-specific static libraries go first so that generic ones can depend on them
 my_static_libraries := $(LOCAL_STATIC_LIBRARIES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) $(LOCAL_STATIC_LIBRARIES_$(my_32_64_bit_suffix)) $(my_static_libraries)
