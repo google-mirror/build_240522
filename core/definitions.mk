@@ -3185,6 +3185,18 @@ endef
 #$(warning 42 == $(call math_max,5,42))
 #$(warning 42 == $(call math_max,42,5))
 
+## VNDK ABI COMPLIANCE CHECK
+###########################################################
+define dump-vndk-abi
+$(VNDK_DUMP_ABI) $(PRIVATE_TARGET_LIB) -o $(1) -objdump $(PRIVATE_TARGET_OBJDUMP) -gpp $(PRIVATE_TARGET_GPP) \
+  -readelf $(PRIVATE_TARGET_READELF) -vt-dumper $(PRIVATE_TARGET_VT_DUMPER) -use-tu-dump -quiet
+endef
+
+define check-vndk-abi
+$(VNDK_CHECK_ABI_CMD) -lib $(PRIVATE_MODULE) -new $(PRIVATE_TARGET_LIB_DUMP) -old $(PRIVATE_TARGET_LIB_REF_DUMP) \
+  -report-path $(1) -strict
+endef
+
 ###########################################################
 ## Other includes
 ###########################################################

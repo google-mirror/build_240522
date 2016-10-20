@@ -38,6 +38,34 @@ LOCAL_INTERMEDIATE_TARGETS := $(linked_module)
 include $(BUILD_SYSTEM)/binary.mk
 ###################################
 
+## VNDK abi-dumps and abi-reports
+###########################################################
+ifneq (,$(filter $(LOCAL_MODULE), libc))
+vndk_ref_dump := $(VNDK_REF_DUMP_DIR)/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)/$(LOCAL_MODULE).so.bdump
+ifneq ($(wildcard $(vndk_ref_dump)), )
+vndk_out_dump := $(intermediates)/DUMPS/$(LOCAL_MODULE).so.bdump
+$(vndk_out_dump) : PRIVATE_TARGET_GPP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_CXX)
+$(vndk_out_dump) : PRIVATE_TARGET_OBJDUMP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJDUMP)
+$(vndk_out_dump) : PRIVATE_TARGET_READELF := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_READELF)
+$(vndk_out_dump) : PRIVATE_TARGET_VT_DUMPER := $(VT_DUMPER)
+$(vndk_out_dump) : PRIVATE_TARGET_LIB := $(linked_module)
+$(vndk_out_dump) : $(linked_module) $(VNDK_DUMP_ABI) $(VT_DUMPER) $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_CXX) $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJDUMP) \
+  $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_READELF)
+	$(call dump-vndk-abi, $@)
+
+vndk_abi_report := $(VNDK_ABI_REPORT_DIR)/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)/$(LOCAL_MODULE).html
+$(vndk_abi_report) : PRIVATE_TARGET_LIB_DUMP := $(vndk_out_dump)
+$(vndk_abi_report) : PRIVATE_MODULE := $(LOCAL_MODULE)
+$(vndk_abi_report) : PRIVATE_TARGET_LIB_REF_DUMP := $(vndk_ref_dump)
+
+$(my_all_targets): $(vndk_abi_report)
+
+$(vndk_abi_report) : $(vndk_out_dump) $(vndk_ref_dump) $(VNDK_CHECK_ABI_DEPS)
+	$(call check-vndk-abi, $@)
+endif
+endif
+###########################################################
+
 ###########################################################
 ## Pack relocation tables
 ###########################################################
