@@ -630,6 +630,14 @@ DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump2$(BUILD_EXECUTABLE_SUFFIX)
 # relocation packer
 RELOCATION_PACKER := prebuilts/misc/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/relocation_packer/relocation_packer
 
+# VNDK Binary abi-compliance checks
+VNDK_REF_DUMP_DIR := vndk/dumps/$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)
+VNDK_ABI_REPORT_DIR := $(PRODUCT_OUT)/abi-reports
+VNDK_DUMP_ABI := external/abi-dumper/abi-dumper.pl
+VNDK_CHECK_ABI_CMD := external/abi-compliance-checker/abi-compliance-checker.pl
+VNDK_CHECK_ABI_DEPS := $(sort $(shell find external/abi-compliance-checker -type f))
+VT_DUMPER := $(HOST_OUT_EXECUTABLES)/vndk-vtable-dumper
+
 FINDBUGS_DIR := external/owasp/sanitizer/tools/findbugs/bin
 FINDBUGS := $(FINDBUGS_DIR)/findbugs
 EMMA_JAR := external/emma/lib/emma$(COMMON_JAVA_PACKAGE_SUFFIX)
