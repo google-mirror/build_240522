@@ -64,10 +64,11 @@ else
   my_native_coverage := false
 endif
 
+my_allow_undefined_symbols := $(strip $(LOCAL_ALLOW_UNDEFINED_SYMBOLS))
+ifdef SANITIZE_HOST
 ifdef LOCAL_IS_HOST_MODULE
 my_allow_undefined_symbols := true
-else
-my_allow_undefined_symbols := $(strip $(LOCAL_ALLOW_UNDEFINED_SYMBOLS))
+endif
 endif
 
 my_ndk_sysroot :=
