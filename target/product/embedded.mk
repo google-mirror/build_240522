@@ -20,6 +20,7 @@
 PRODUCT_PACKAGES += \
     adb \
     adbd \
+    android.hardware.manager@1.0-service \
     atrace \
     bootanimation \
     bootstat \
@@ -32,7 +33,6 @@ PRODUCT_PACKAGES += \
     grep \
     gzip \
     healthd \
-    hwservicemanager \
     init \
     init.environ.rc \
     init.rc \
