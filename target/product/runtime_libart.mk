@@ -41,9 +41,10 @@ PRODUCT_PACKAGES += \
     libicui18n \
     libicuuc \
     libjavacore \
+    libnativehelper \
     libopenjdk \
     libopenjdkjvm \
-    libnativehelper \
+    libopenjdkjvmti \
     libssl \
     libz \
     oatdump \
