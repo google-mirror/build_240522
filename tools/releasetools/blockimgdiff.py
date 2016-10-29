@@ -66,13 +66,16 @@ def compute_patch(src, tgt, imgdiff=False):
     with open(patchfile, "rb") as f:
       return f.read()
   finally:
-    try:
-      os.unlink(srcfile)
-      os.unlink(tgtfile)
-      os.unlink(patchfile)
-    except OSError:
-      pass
-
+    if p and common.OPTIONS.debug:
+      print("temporarily files left for debug:\nsrcfile: %s\ntgtfile: %s\n"
+            "patchfile: %s" % (srcfile, tgtfile, patchfile))
+    else:
+      try:
+        os.unlink(srcfile)
+        os.unlink(tgtfile)
+        os.unlink(patchfile)
+      except OSError:
+        pass
 
 class Image(object):
   def ReadRangeSet(self, ranges):
@@ -777,21 +780,28 @@ class BlockImageDiff(object):
 
       # TODO: Rewrite with multiprocessing.ThreadPool?
       lock = threading.Lock()
+      error_message = []
       def diff_worker():
         while True:
           with lock:
             if not diff_q:
               return
             tgt_size, src, tgt, xf, patchnum = diff_q.pop()
-          patch = compute_patch(src, tgt, imgdiff=(xf.style == "imgdiff"))
-          size = len(patch)
-          with lock:
-            patches[patchnum] = (patch, xf)
-            print("%10d %10d (%6.2f%%) %7s %s %s %s" % (
-                size, tgt_size, size * 100.0 / tgt_size, xf.style,
-                xf.tgt_name if xf.tgt_name == xf.src_name else (
-                    xf.tgt_name + " (from " + xf.src_name + ")"),
-                str(xf.tgt_ranges), str(xf.src_ranges)))
+          try:
+            patch = compute_patch(src, tgt, imgdiff=(xf.style == "imgdiff"))
+            size = len(patch)
+            with lock:
+              patches[patchnum] = (patch, xf)
+              print("%10d %10d (%6.2f%%) %7s %s %s %s" % (
+                  size, tgt_size, size * 100.0 / tgt_size, xf.style,
+                  xf.tgt_name if xf.tgt_name == xf.src_name else (
+                      xf.tgt_name + " (from " + xf.src_name + ")"),
+                  str(xf.tgt_ranges), str(xf.src_ranges)))
+
+          except ValueError:
+            with lock:
+              error_message.append("%s failed on\nsrc: %s\ntgt: %s" % (
+                  xf.style, xf.src_name, xf.tgt_name))
 
       threads = [threading.Thread(target=diff_worker)
                  for _ in range(self.threads)]
@@ -801,6 +811,13 @@ class BlockImageDiff(object):
         threads.pop().join()
     else:
       patches = []
+
+    # Output the errors of bsdiff/imgdiff from the main thread so that
+    # they're not buried in messages of the children threads.
+    if error_message:
+      for msg in error_message:
+        print(msg)
+      exit(1)
 
     p = 0
     with open(prefix + ".patch.dat", "wb") as patch_f:

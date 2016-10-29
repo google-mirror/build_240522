@@ -55,6 +55,7 @@ class Options(object):
     self.verity_signer_path = None
     self.verity_signer_args = []
     self.verbose = False
+    self.debug = False
     self.tempfiles = []
     self.device_specific = None
     self.extras = {}
@@ -846,7 +847,7 @@ def ParseOptions(argv,
   try:
     opts, args = getopt.getopt(
         argv, "hvp:s:x:" + extra_opts,
-        ["help", "verbose", "path=", "signapk_path=",
+        ["help", "verbose", "debug", "path=", "signapk_path=",
          "signapk_shared_library_path=", "extra_signapk_args=",
          "java_path=", "java_args=", "public_key_suffix=",
          "private_key_suffix=", "boot_signer_path=", "boot_signer_args=",
@@ -864,6 +865,8 @@ def ParseOptions(argv,
       sys.exit()
     elif o in ("-v", "--verbose"):
       OPTIONS.verbose = True
+    elif o in ("--debug"):
+      OPTIONS.debug = True
     elif o in ("-p", "--path"):
       OPTIONS.search_path = a
     elif o in ("--signapk_path",):
