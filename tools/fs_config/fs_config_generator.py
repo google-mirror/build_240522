@@ -18,8 +18,8 @@ DEFINE_NO_FILES = '#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES\n'
 
 DEFAULT_WARNING = '#warning No device-supplied android_filesystem_config.h, using empty default.'
 
-NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_dirs" },'
-NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_files" },'
+NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      { 0, 0 }, "system/etc/fs_config_dirs" },'
+NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES_ENTRY = '{ 00000, AID_ROOT,      AID_ROOT,      { 0, 0 }, "system/etc/fs_config_files" },'
 
 IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS = '#ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS'
 ENDIF = '#endif'
@@ -82,27 +82,23 @@ def handle_aid(file_name, section_name, config, aids, seen_aids):
     # later.
     aids.append((file_name, section_name, v, value))
 
-def convert_int(num):
-
-        try:
-            if num.startswith('0x'):
-                return int(num, 16)
-            elif num.startswith('0b'):
-                return int(num, 2)
-            elif num.startswith('0'):
-                return int(num, 8)
-            else:
-                return int(num, 10)
-        except ValueError:
-            pass
-        return None
+def convert_caps(capabilities):
+        tmp = []
+        for x in capabilities:
+            try:
+                int(x, 0)
+                tmp.append('(' + x + ')')
+            except ValueError:
+                tmp.append('(1ULL << CAP_' + x.upper() + ')')
+	return '|'.join(tmp)
 
 def handle_path(file_name, section_name, config, files, dirs):
 
             mode = config.get(section_name, 'mode')
             user = config.get(section_name, 'user')
             group = config.get(section_name, 'group')
-            caps = config.get(section_name, 'caps')
+            permitted = config.get(section_name, 'permitted')
+            inheritable = config.get(section_name, 'inheritable')
 
             errmsg = 'Found specified but unset option: \"%s" in file: \"' + file_name + '\"'
 
@@ -115,19 +111,14 @@ def handle_path(file_name, section_name, config, files, dirs):
             if not group:
                 raise Exception(errmsg % 'group')
 
-            if not caps:
-                raise Exception(errmsg % 'caps')
+            if not permitted:
+                raise Exception(errmsg % 'permitted')
 
-            caps = caps.split()
+            if not inheritable:
+                raise Exception(errmsg % 'inheritable')
 
-            tmp = []
-            for x in caps:
-                if convert_int(x):
-                    tmp.append('(' + x + ')')
-                else:
-                    tmp.append('(1ULL << CAP_' + x.upper() + ')')
-
-            caps = tmp
+            permitted = convert_caps(permitted.split())
+            inheritable = convert_caps(inheritable.split())
 
             path = '"' + section_name + '"'
 
@@ -142,14 +133,20 @@ def handle_path(file_name, section_name, config, files, dirs):
             if len(mode) != 4:
                 raise Exception('Mode must be 3 or 4 characters, got: "' + mode + '"')
 
-
-            caps = '|'.join(caps)
-
-            x = [ mode, user, group, caps, section_name ]
+            x = {
+                "path" : section_name,
+                "mode" : mode,
+                "user" : user,
+                "group" : group,
+                "capabilities" : {
+                    "permitted" : permitted,
+                    "inheritable" : inheritable
+                }
+            }
             if section_name[-1] == '/':
-                dirs.append((file_name, x))
+                dirs.append({ "source_file" : file_name, "config" : x })
             else:
-                files.append((file_name, x))
+                files.append({ "source_file" : file_name, "config" : x })
 
 def handle_dup(name, file_name, section_name, seen):
         if section_name in seen:
@@ -172,6 +169,15 @@ def parse(file_name, files, dirs, aids, seen_paths, seen_aids):
                 handle_dup('path', file_name, s, seen_paths)
                 seen_paths[s] = file_name
                 handle_path(file_name, s, config, files, dirs)
+
+def config_to_str(config):
+        path = '"' + config["path"] + '"'
+        mode = config["mode"]
+        user = config["user"]
+        group = config["group"]
+	cap_config = config["capabilities"]
+	capabilites = "{ .permitted=" + cap_config["permitted"] + ", .inheritable=" + cap_config["inheritable"] + " }"
+	return "{" + ", ".join([mode, user, group, capabilites, path]) + "},"
 
 def generate(files, dirs, aids):
     print GENERATED
@@ -204,13 +210,9 @@ def generate(files, dirs, aids):
 
     if are_files:
         print OPEN_FILE_STRUCT
-        for tup in files:
-            f = tup[0]
-            c = tup[1]
-            c[4] = '"' + c[4] + '"'
-            c = '{ ' + '    ,'.join(c) + ' },'
-            print FILE_COMMENT % f
-            print '    ' + c
+        for file_config in files:
+            source_file = file_config["source_file"]
+            print '    ' + config_to_str(file_config["config"])
 
         if not are_dirs:
             print IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
@@ -220,10 +222,9 @@ def generate(files, dirs, aids):
 
     if are_dirs:
         print OPEN_DIR_STRUCT
-        for d in dirs:
-            f[4] = '"' + f[4] + '"'
-            d = '{ ' + '    ,'.join(d) + ' },'
-            print '    ' + d
+        for dir_config in dirs:
+            source_file = dir_config["source_file"]
+            print '    ' + config_to_str(dir_config["config"])
 
         print CLOSE_FILE_STRUCT
 
@@ -257,7 +258,7 @@ def file_key(x):
                 b = self.str < other.str
             return b
 
-    return S(x[4])
+    return S(x["path"])
 
 def main():
 
@@ -272,7 +273,7 @@ def main():
     for x in sys.argv[1:]:
         parse(x, files, dirs, aids, seen_paths, seen_aids)
 
-    files.sort(key= lambda x: file_key(x[1]))
+    files.sort(key= lambda x: file_key(x["config"]))
     generate(files, dirs, aids)
 
 if __name__ == '__main__':
