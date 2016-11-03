@@ -26,6 +26,7 @@ import sys
 def perform_find(mindepth, prune, dirlist, filenames):
   result = []
   pruneleaves = set(map(lambda x: os.path.split(x)[1], prune))
+  seen = set()
   for rootdir in dirlist:
     rootdepth = rootdir.count("/")
     for root, dirs, files in os.walk(rootdir, followlinks=True):
@@ -52,6 +53,17 @@ def perform_find(mindepth, prune, dirlist, filenames):
         if filename in files:
           result.append(os.path.join(root, filename))
           del dirs[:]
+
+      # filter out inodes that have already been seen due to symlink loops
+      traverse = []
+      for d in dirs:
+        st = os.stat(os.path.join(root, d))
+        key = (st.st_dev, st.st_ino)
+        if key not in seen:
+          seen.add(key)
+          traverse.append(d)
+
+      dirs[:] = traverse
   return result
 
 def usage():
