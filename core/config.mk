@@ -802,7 +802,6 @@ ANDROID_WARNING_ALLOWED_PROJECTS := \
     hardware/% \
     packages/% \
     system/% \
-    test/vts/% \
     tools/adt/idea/android/ultimate/get_modification_time/jni/% \
     vendor/% \
 
