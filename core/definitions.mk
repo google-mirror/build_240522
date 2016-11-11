@@ -898,22 +898,6 @@ endef
 endif
 
 ###########################################################
-## Commands for munging the dependency files the compiler generates
-###########################################################
-# $(1): the input .d file
-# $(2): the output .P file
-define transform-d-to-p-args
-$(hide) cp $(1) $(2); \
-	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(1) >> $(2); \
-	rm -f $(1)
-endef
-
-define transform-d-to-p
-$(call transform-d-to-p-args,$(@:%.o=%.d),$(@:%.o=%.P))
-endef
-
-###########################################################
 ## Commands for including the dependency files the compiler generates
 ###########################################################
 # $(1): the .P file
@@ -924,7 +908,7 @@ endef
 
 # $(1): object files
 define include-depfiles-for-objs
-$(foreach obj, $(1), $(call include-depfile, $(obj:%.o=%.P), $(obj)))
+$(foreach obj, $(1), $(call include-depfile, $(obj:%.o=%.d), $(obj)))
 endef
 
 ###########################################################
@@ -1023,7 +1007,6 @@ $(hide) $(PRIVATE_RS_CC) \
   $(foreach inc,$(PRIVATE_RS_INCLUDES),$(addprefix -I , $(inc))) \
   $(PRIVATE_RS_SOURCE_FILES)
 $(call _merge-renderscript-d,$(PRIVATE_DEP_FILES),$@.d)
-$(call transform-d-to-p-args,$@.d,$@.P)
 $(hide) mkdir -p $(dir $@)
 $(hide) touch $@
 endef
@@ -1060,7 +1043,6 @@ $(hide) $(PRIVATE_RS_CC) \
   $(addprefix -I , $(PRIVATE_RS_INCLUDES)) \
   $(PRIVATE_RS_SOURCE_FILES)
 $(call _merge-renderscript-d,$(PRIVATE_DEP_FILES),$@.d)
-$(call transform-d-to-p-args,$@.d,$@.P)
 $(hide) mkdir -p $(dir $@)
 $(hide) touch $@
 endef
@@ -1261,7 +1243,6 @@ $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-cpp))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
   $(transform-cpp-to-o-compiler-args) \
   -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(hide) $(transform-d-to-p)
 endef
 endif
 
@@ -1310,7 +1291,6 @@ $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-c))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
   $(transform-c-to-o-compiler-args) \
   -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(hide) $(transform-d-to-p)
 endef
 endif
 
@@ -1324,7 +1304,6 @@ endef
 
 define transform-s-to-o
 $(transform-s-to-o-no-deps)
-$(transform-d-to-p)
 endef
 
 # YASM compilation
@@ -1350,7 +1329,6 @@ endef
 
 define transform-m-to-o
 $(transform-m-to-o-no-deps)
-$(transform-d-to-p)
 endef
 
 ###########################################################
@@ -1391,7 +1369,6 @@ $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-host-cpp))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
   $(transform-host-cpp-to-o-compiler-args) \
   -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(hide) $(transform-d-to-p)
 endef
 endif
 
@@ -1444,7 +1421,6 @@ $(if $(PRIVATE_TIDY_CHECKS), $(clang-tidy-host-c))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
   $(transform-host-c-to-o-compiler-args) \
   -MD -MF $(patsubst %.o,%.d,$@) -o $@ $<
-$(hide) $(transform-d-to-p)
 endef
 endif
 
@@ -1455,7 +1431,6 @@ endef
 
 define transform-host-s-to-o
 $(transform-host-s-to-o-no-deps)
-$(transform-d-to-p)
 endef
 
 ###########################################################
@@ -1469,7 +1444,6 @@ endef
 
 define transform-host-m-to-o
 $(transform-host-m-to-o-no-deps)
-$(transform-d-to-p)
 endef
 
 ###########################################################
