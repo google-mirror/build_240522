@@ -1204,6 +1204,20 @@ $(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),,\
 endef
 
 ###########################################################
+## Helper to filter flags for clang-tidy
+###########################################################
+
+# Some flags should not be passed to compiler.
+# Some compilers ignore them, but clang-tidy gives unwanted warnings.
+CLANG_TIDY_UNKNOWN_FLAGS := \
+    -Wa,--noexecstack \
+    -rdynamic \
+
+define filter-tidy-compiler-args
+    $(filter-out $(CLANG_TIDY_UNKNOWN_FLAGS),$1)
+endef
+
+###########################################################
 ## Commands for running gcc to compile a C++ file
 ###########################################################
 
@@ -1226,7 +1240,7 @@ endef
 define clang-tidy-cpp
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-cpp-to-o-compiler-args)
+  $< -- $(call filter-tidy-compiler-args,$(transform-cpp-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
@@ -1274,7 +1288,7 @@ endef
 define clang-tidy-c
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-c-to-o-compiler-args)
+  $< -- $(call filter-tidy-compiler-args,$(transform-c-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
