@@ -122,7 +122,7 @@ def handle_path(file_name, section_name, config, files, dirs):
 
             tmp = []
             for x in caps:
-                if convert_int(x):
+                if convert_int(x) is not None:
                     tmp.append('(' + x + ')')
                 else:
                     tmp.append('(1ULL << CAP_' + x.upper() + ')')
