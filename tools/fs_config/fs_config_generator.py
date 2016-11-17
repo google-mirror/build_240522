@@ -49,8 +49,9 @@ def handle_aid(file_name, section_name, config, aids, seen_aids):
     if not value:
         raise Exception(errmsg % 'Found specified but unset "value"')
 
-    v = convert_int(value)
-    if not v:
+    try:
+        v = int(value, 0)
+    except ValueError:
         raise Exception(errmsg % ('Invalid "value", not a number, got: \"%s\"' % value))
 
     # Values must be within OEM range
@@ -82,21 +83,6 @@ def handle_aid(file_name, section_name, config, aids, seen_aids):
     # later.
     aids.append((file_name, section_name, v, value))
 
-def convert_int(num):
-
-        try:
-            if num.startswith('0x'):
-                return int(num, 16)
-            elif num.startswith('0b'):
-                return int(num, 2)
-            elif num.startswith('0'):
-                return int(num, 8)
-            else:
-                return int(num, 10)
-        except ValueError:
-            pass
-        return None
-
 def handle_path(file_name, section_name, config, files, dirs):
 
             mode = config.get(section_name, 'mode')
@@ -122,9 +108,10 @@ def handle_path(file_name, section_name, config, files, dirs):
 
             tmp = []
             for x in caps:
-                if convert_int(x):
+                try:
+                    int(x, 0)
                     tmp.append('(' + x + ')')
-                else:
+                except ValueError:
                     tmp.append('(1ULL << CAP_' + x.upper() + ')')
 
             caps = tmp
