@@ -63,6 +63,14 @@ my_target_global_ld_dirs := \
 my_target_global_ldflags := $(my_ndk_stl_shared_lib) $(my_target_global_ldflags)
 my_target_crtbegin_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_so.o)
 my_target_crtend_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtend_so.o)
+else ifdef LOCAL_USE_VNDK
+# Make sure the prebuilt NDK paths are put ahead of the TARGET_GLOBAL_LD_DIRS,
+# so we don't have race condition when the system libraries (such as libc, libstdc++) are also built in the tree.
+my_target_global_ld_dirs := \
+    -L$(my_ndk_sysroot_lib) \
+    $(my_target_global_ld_dirs)
+my_target_crtbegin_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_so.o)
+my_target_crtend_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtend_so.o)
 endif
 $(linked_module): PRIVATE_TARGET_GLOBAL_LD_DIRS := $(my_target_global_ld_dirs)
 $(linked_module): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_global_ldflags)

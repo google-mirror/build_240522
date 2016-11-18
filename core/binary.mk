@@ -74,7 +74,7 @@ endif
 my_ndk_sysroot :=
 my_ndk_sysroot_include :=
 my_ndk_sysroot_lib :=
-ifdef LOCAL_SDK_VERSION
+ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   ifdef LOCAL_IS_HOST_MODULE
     $(error $(LOCAL_PATH): LOCAL_SDK_VERSION cannot be used in host module)
   endif
@@ -104,9 +104,13 @@ ifdef LOCAL_SDK_VERSION
   # missing API levels to existing ones where necessary, but we're not doing
   # that for the generated libraries. Clip the API level to the minimum where
   # appropriate.
-  my_ndk_api := $(LOCAL_SDK_VERSION)
+  ifdef LOCAL_USE_VNDK
+    my_ndk_api := $(BOARD_VNDK_VERSION)
+  else
+    my_ndk_api := $(LOCAL_SDK_VERSION)
+  endif
   ifneq ($(my_ndk_api),current)
-      my_ndk_api := $(call math_max,$(LOCAL_SDK_VERSION),$(my_min_sdk_version))
+      my_ndk_api := $(call math_max,$(my_ndk_api),$(my_min_sdk_version))
   endif
 
   my_ndk_api_def := $(my_ndk_api)
@@ -154,6 +158,7 @@ ifdef LOCAL_SDK_VERSION
   my_built_ndk_libs := $(my_ndk_platform_dir)/usr/$(my_ndk_libdir_name)
   my_ndk_sysroot_lib := $(my_ndk_sysroot)/usr/$(my_ndk_libdir_name)
 
+  ifndef LOCAL_USE_VNDK
   # The bionic linker now has support for packed relocations and gnu style
   # hashes (which are much faster!), but shipping to older devices requires
   # the old style hash. Fortunately, we can build with both and it'll work
@@ -260,6 +265,7 @@ ifdef LOCAL_SDK_VERSION
   endif
   endif
   endif
+  endif
 endif
 
 ifndef LOCAL_IS_HOST_MODULE
@@ -280,7 +286,7 @@ my_shared_libraries += $(patsubst -l%,lib%,$(filter-out $(my_allowed_ldlibs),$(m
 my_ldlibs := $(filter $(my_allowed_ldlibs),$(my_ldlibs))
 endif
 
-ifdef LOCAL_SDK_VERSION
+ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   my_all_ndk_libraries := \
       $(NDK_MIGRATED_LIBS) $(addprefix lib,$(NDK_PREBUILT_SHARED_LIBRARIES))
   my_ndk_shared_libraries := \
@@ -489,17 +495,30 @@ my_asflags += -D__ASSEMBLY__
 ## Define PRIVATE_ variables from global vars
 ###########################################################
 ifndef LOCAL_IS_HOST_MODULE
-ifdef LOCAL_SDK_VERSION
+ifdef LOCAL_USE_VNDK
+my_target_global_c_includes := \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES)
+my_target_global_c_system_includes := \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_SYSTEM_INCLUDES) \
+    $(my_ndk_sysroot_include)
+else ifdef LOCAL_SDK_VERSION
 my_target_global_c_includes :=
 my_target_global_c_system_includes := $(my_ndk_stl_include_path) $(my_ndk_sysroot_include)
-else
+else ifdef BOARD_VNDK_VERSION
 my_target_global_c_includes := $(SRC_HEADERS) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
 my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_SYSTEM_INCLUDES) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
-endif # LOCAL_SDK_VERSION
+else
+my_target_global_c_includes := $(SRC_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
+my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) $(TARGET_OUT_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_SYSTEM_INCLUDES) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
+endif
 
 ifeq ($(my_clang),true)
 my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CFLAGS)
@@ -1339,7 +1358,7 @@ endif
 ## they may cusomize their install path with LOCAL_MODULE_PATH
 ##########################################################
 # Get the list of INSTALLED libraries as module names.
-ifdef LOCAL_SDK_VERSION
+ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   installed_shared_library_module_names := \
       $(my_shared_libraries)
 else
@@ -1508,7 +1527,7 @@ ALL_C_CPP_ETC_OBJECTS += $(all_objects)
 so_suffix := $($(my_prefix)SHLIB_SUFFIX)
 a_suffix := $($(my_prefix)STATIC_LIB_SUFFIX)
 
-ifdef LOCAL_SDK_VERSION
+ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
 built_shared_libraries := \
     $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
       $(addsuffix $(so_suffix), \
@@ -1690,7 +1709,7 @@ my_ldflags := $(filter-out -l%,$(my_ldlib_flags))
 # One last verification check for ldlibs
 ifndef LOCAL_IS_HOST_MODULE
 my_allowed_ldlibs :=
-ifdef LOCAL_SDK_VERSION
+ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   my_allowed_ldlibs := $(addprefix -l,$(NDK_PREBUILT_SHARED_LIBRARIES))
 endif
 
