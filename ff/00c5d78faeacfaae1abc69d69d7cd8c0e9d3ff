@@ -1,0 +1,9 @@
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Andrew Sapperstein <asapperstein@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Andreas Gampe <agampe@google.com>
+Submitted-by: Andreas Gampe <agampe@google.com>
+Submitted-at: Fri, 18 Nov 2016 02:53:28 +0000
+Reviewed-on: https://android-review.googlesource.com/304819
+Project: platform/build
+Branch: refs/heads/master
