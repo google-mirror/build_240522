@@ -14,7 +14,9 @@ import argparse
 import ConfigParser
 import re
 import sys
+import tempfile
 import textwrap
+import unittest
 
 # Keep the tool in one file to make it easy to run.
 #pylint: disable=too-many-lines
@@ -146,6 +148,14 @@ class AID(object):
         # Where we calculate the friendly name
         self.friendly = identifier[len(AID.PREFIX):].lower()
 
+    def __eq__(self, other):
+        if not isinstance(other, AID):
+            return False
+
+        return self.identifier == other.identifier \
+            and self.value == other.value and self.found == other.found \
+            and self.normalized_value == other.normalized_value
+
     @staticmethod
     def is_friendly(name):
         '''Determines if an AID is a freindly name or C define
@@ -191,6 +201,13 @@ class FSConfig(object):
         self.caps = caps
         self.path = path
         self.filename = filename
+
+    def __eq__(self, other):
+        if not isinstance(other, FSConfig):
+            return False
+        return self.mode == other.mode and self.user == other.user \
+            and self.group == other.group and self.caps == other.caps \
+            and self.path == other.path and self.filename == other.filename
 
 
 class AIDHeaderParser(object):
@@ -1279,6 +1296,277 @@ class GroupGen(PasswdGen):
         logon, uid = Utils.get_login_and_uid_cleansed(aid)
 
         print "%s::%s:" % (logon, uid)
+
+
+# We don't care about:
+#   docstrings on the unit test suite.
+#   the unit tests reaching into protected things (whitebox testing)
+#   Unit test asserts that always trigger. PyUnit testing exceptions is clunky
+#     compared to JUnit.
+#
+# pylint: disable=missing-docstring,protected-access,redundant-unittest-assert
+class Tests(unittest.TestCase):
+
+    def test_get_overlap(self):
+
+        overlap = AIDHeaderParser._get_overlap((0, 100), (101, 200))
+        self.assertEqual(overlap, 0)
+
+        overlap = AIDHeaderParser._get_overlap((0, 1), (1, 2))
+        self.assertEqual(overlap, 1)
+
+        overlap = AIDHeaderParser._get_overlap((0, 100), (90, 200))
+        self.assertEqual(overlap, 10)
+
+    def test_in_any_range(self):
+        self.assertFalse(Utils.in_any_range(50, [(100, 200), (1, 2), (1, 1)]))
+        self.assertFalse(Utils.in_any_range(250, [(100, 200), (1, 2), (1, 1)]))
+
+        self.assertTrue(Utils.in_any_range(100, [(100, 200), (1, 2), (1, 1)]))
+        self.assertTrue(Utils.in_any_range(200, [(100, 200), (1, 2), (1, 1)]))
+        self.assertTrue(Utils.in_any_range(150, [(100, 200)]))
+
+    def test_AID(self):
+        # __init__(self, identifier, value, found, normalized_value=None):
+        aid = AID('AID_FOO_BAR', 0xFF, 'myfakefile')
+        self.assertEquals(aid.identifier, 'AID_FOO_BAR')
+        self.assertEquals(aid.value, 0xFF)
+        self.assertEquals(aid.found, 'myfakefile')
+        self.assertEquals(aid.normalized_value, '255')
+        self.assertEquals(aid.friendly, 'foo_bar')
+
+        aid = AID('AID_FOOBAR', 0xFF, 'myfakefile', '255')
+        self.assertEquals(aid.identifier, 'AID_FOOBAR')
+        self.assertEquals(aid.value, 0xFF)
+        self.assertEquals(aid.found, 'myfakefile')
+        self.assertEquals(aid.normalized_value, '255')
+        self.assertEquals(aid.friendly, 'foobar')
+
+    def test_AIDHeaderParser_good(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_FOO 1000
+            #define AID_BAR 1001
+            #define SOMETHING "something"
+            #define AID_OEM_RESERVED_START 2900
+            #define AID_OEM_RESERVED_END   2999
+            #define AID_OEM_RESERVED_1_START  7000
+            #define AID_OEM_RESERVED_1_END    8000
+            '''))
+            temp_file.flush()
+
+            parser = AIDHeaderParser(temp_file.name)
+            oem_ranges = parser.get_oem_ranges()
+            aids = parser.get_aids()
+
+            self.assertTrue((2900, 2999) in oem_ranges)
+            self.assertFalse((5000, 6000) in oem_ranges)
+
+            self.assertTrue(expected in aids for expected in [1000, 1001])
+            self.assertFalse(1 in aids)
+
+    def test_AIDHeaderParser_good_unordered(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_FOO 1000
+            #define AID_OEM_RESERVED_1_END    8000
+            #define AID_BAR 1001
+            #define SOMETHING "something"
+            #define AID_OEM_RESERVED_END   2999
+            #define AID_OEM_RESERVED_1_START  7000
+            #define AID_OEM_RESERVED_START 2900
+            '''))
+            temp_file.flush()
+
+            parser = AIDHeaderParser(temp_file.name)
+            oem_ranges = parser.get_oem_ranges()
+            aids = parser.get_aids()
+
+            self.assertTrue((2900, 2999) in oem_ranges)
+            self.assertFalse((5000, 6000) in oem_ranges)
+
+            self.assertTrue(expected in aids for expected in [1000, 1001])
+            self.assertFalse(1 in aids)
+
+    def test_AIDHeaderParser_bad_aid(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_FOO "bad"
+            '''))
+            temp_file.flush()
+
+            try:
+                AIDHeaderParser(temp_file.name)
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_AIDHeaderParser_bad_oem_range(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_OEM_RESERVED_START 2900
+            #define AID_OEM_RESERVED_END   1800
+            '''))
+            temp_file.flush()
+
+            try:
+                AIDHeaderParser(temp_file.name)
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_AIDHeaderParser_bad_oem_range_no_end(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_OEM_RESERVED_START 2900
+            '''))
+            temp_file.flush()
+
+            try:
+                AIDHeaderParser(temp_file.name)
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_AIDHeaderParser_bad_oem_range_no_start(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_OEM_RESERVED_END 2900
+            '''))
+            temp_file.flush()
+
+            try:
+                AIDHeaderParser(temp_file.name)
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_AIDHeaderParser_bad_oem_range_mismatch_start_end(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            #define AID_OEM_RESERVED_START 2900
+            #define AID_OEM_RESERVED_2_END 2900
+            '''))
+            temp_file.flush()
+
+            try:
+                AIDHeaderParser(temp_file.name)
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_FSConfigFileParser_good(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            [/system/bin/file]
+            user: AID_FOO
+            group: AID_SYSTEM
+            mode: 0777
+            caps: BLOCK_SUSPEND
+
+            [/vendor/path/dir/]
+            user: AID_FOO
+            group: AID_SYSTEM
+            mode: 0777
+            caps: 0
+
+            [AID_OEM1]
+            # 5001 in base16
+            value: 0x1389
+            '''))
+            temp_file.flush()
+
+            parser = FSConfigFileParser([temp_file.name], [(5000, 5999)])
+            files = parser.get_files()
+            dirs = parser.get_dirs()
+            aids = parser.get_aids()
+
+            self.assertEquals(len(files), 1)
+            self.assertEquals(len(dirs), 1)
+            self.assertEquals(len(aids), 1)
+
+            aid = aids[0]
+            fcap = files[0]
+            dcap = dirs[0]
+
+            self.assertEqual(fcap,
+                             FSConfig('0777', 'AID_FOO', 'AID_SYSTEM',
+                                      '(1ULL << CAP_BLOCK_SUSPEND)',
+                                      '/system/bin/file', temp_file.name))
+
+            self.assertEqual(dcap,
+                             FSConfig('0777', 'AID_FOO', 'AID_SYSTEM', '(0)',
+                                      '/vendor/path/dir/', temp_file.name))
+
+            self.assertEqual(aid,
+                             AID('AID_OEM1', '0x1389', temp_file.name, '5001'))
+
+    def test_FSConfigFileParser_bad(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            [/system/bin/file]
+            caps: BLOCK_SUSPEND
+            '''))
+            temp_file.flush()
+            try:
+                FSConfigFileParser([temp_file.name], [(5000, 5999)])
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    def test_FSConfigFileParser_bad_aid_range(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent('''
+            [AID_OEM1]
+            value: 25
+            '''))
+            temp_file.flush()
+            try:
+                FSConfigFileParser([temp_file.name], [(5000, 5999)])
+            except SystemExit:
+                return
+
+            self.assertTrue(False)
+
+    @staticmethod
+    def suite():
+        ''' Gathers all the test_xxx methods and loads them into a test suite.'''
+        return unittest.TestLoader().loadTestsFromTestCase(Tests)
+
+
+@generator('test')
+class TestCommandlet(BaseGenerator):
+    """Runs the internal unit test suite. Returns 0 on succes. Anything else is a failure."""
+
+    def add_opts(self, opt_group):
+
+        opt_group.add_argument(
+            "-v",
+            "--verbose",
+            help='increase output verbosity. The value is passed to TextTestRunner(verbosity=int).',
+            type=int,
+            default=1)
+
+    def __call__(self, args):
+        runner = unittest.TextTestRunner(verbosity=args['verbose'])
+        result = runner.run(Tests.suite())
+        sys.exit(not result.wasSuccessful())
 
 
 def main():
