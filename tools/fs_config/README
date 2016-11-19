@@ -131,3 +131,15 @@ the header.
   LOCAL_ADDITIONAL_DEPENDENCIES := $(oem_aid_file)
 
 Then in your C code just #include "generated_oem_aid.h" and start using the declared identifiers.
+
+Unit Tests:
+Unit tests are inlined into the fsconfig generator tool. To execute it, from the root of the source
+tree, do:
+
+$ ./build/make/tools/fs_config/fs_config_generator.py test
+    .............
+    ----------------------------------------------------------------------
+    Ran 13 tests in 0.005s
+
+To add new tests, simply add a test_<xxx> method to the test class. It will automatically
+get picked up and added to the test suite.
