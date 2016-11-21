@@ -25,6 +25,7 @@ PRODUCT_PACKAGES += \
     bootstat \
     cmd \
     debuggerd \
+    dtc \
     dumpstate \
     dumpsys \
     fastboot \
