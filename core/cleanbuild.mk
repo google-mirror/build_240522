@@ -274,6 +274,7 @@ clean-dex-files:
 	$(hide) find $(OUT_DIR) -name "*.dex" ! -path "*/jack-incremental/*" | xargs rm -f
 	$(hide) for i in `find $(OUT_DIR) -name "*.jar" -o -name "*.apk"` ; do ((unzip -l $$i 2> /dev/null | \
 				grep -q "\.dex$$" && rm -f $$i) || continue ) ; done
+	$(hide) rm -f $(BUILT_SYSTEMIMAGE) $(INSTALLED_SYSTEMIMAGE)
 	@echo "All dex files and archives containing dex files have been removed."
 
 .PHONY: clean-jack-incremental
