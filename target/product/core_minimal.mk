@@ -31,6 +31,7 @@ PRODUCT_PACKAGES += \
     ExtServices \
     HTMLViewer \
     MediaProvider \
+    NetworkRecommendation \
     PackageInstaller \
     SettingsProvider \
     Shell \
