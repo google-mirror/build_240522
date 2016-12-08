@@ -35,7 +35,8 @@ PRODUCT_PACKAGES += \
     MagicSmokeWallpapers \
     NoiseField \
     PhaseBeam \
-    PhotoTable
+    PhotoTable \
+    NetworkRecommendation
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \
