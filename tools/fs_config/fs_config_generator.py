@@ -290,6 +290,13 @@ class AIDHeaderParser(object):
                 identifier = chunks[1]
                 value = chunks[2]
 
+                # Exclude various ranges that should just use the regular
+                # auto-generated names.
+                if identifier == 'AID_APP' or identifier == 'AID_USER' or \
+                        str.startswith(identifier, 'AID_ISOLATED_') or \
+                        str.startswith(identifier, 'AID_SHARED_GID_'):
+                    continue
+
                 try:
                     if AIDHeaderParser._is_oem_range(identifier):
                         self._handle_oem_range(identifier, value)
@@ -1092,7 +1099,7 @@ class AIDArrayGen(BaseGenerator):
 
     _OPEN_ID_ARRAY = 'static const struct android_id_info android_ids[] = {'
 
-    _ID_ENTRY = '    { "%s", %s },'
+    _ID_ENTRY = '    { "%s", %s, },'
 
     _CLOSE_FILE_STRUCT = '};'
 
