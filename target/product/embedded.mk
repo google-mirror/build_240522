@@ -88,10 +88,9 @@ PRODUCT_PACKAGES += \
     service_contexts
 
 # AID Generation for
-# <pwd.h> and <grp.h>
+# <pwd.h> and friends.
 PRODUCT_PACKAGES += \
-    passwd \
-    group
+    passwd
 
 # Ensure that this property is always defined so that bionic_systrace.cpp
 # can rely on it being initially set by init.
