@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Unit test suite for the fs_config_genertor.py tool."""
 
+import os
 import tempfile
 import textwrap
 import unittest
@@ -193,6 +194,32 @@ class Tests(unittest.TestCase):
 
             with self.assertRaises(SystemExit):
                 AIDHeaderParser(temp_file.name)
+
+    def test_aid_header_parser_no_bad_aids(self):
+        """Test AID Header Parser that it doesn't contain:
+        Ranges, ie things the end with "_START" or "_END"
+        AID_APP
+        AID_USER
+        For more details see: https://android-review.googlesource.com/#/c/313024/
+        """
+
+        hdr_path = '../../../../system/core/include/private/android_filesystem_config.h'
+
+        if 'T' in os.environ:
+            aosp_top = os.environ['T']
+            hdr_path = os.path.join(aosp_top, 'system', 'core', 'include',
+                                    'private', 'android_filesystem_config.h')
+
+        parser = AIDHeaderParser(hdr_path)
+        aids = parser.aids
+
+        bad_aids = ['_START', '_END', 'AID_APP', 'AID_USER']
+
+        for aid in aids:
+            self.assertFalse(
+                any(bad in aid.identifier for bad in bad_aids),
+                'Not expecting keywords "%s" in aids "%s"' %
+                (str(bad_aids), str([tmp.identifier for tmp in aids])))
 
     def test_fs_config_file_parser_good(self):
         """Test FSConfig Parser good input file"""
