@@ -180,6 +180,20 @@ class Tests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 AIDHeaderParser(temp_file.name)
 
+    def test_aid_header_parser_bad_duplicate_ranges(self):
+        """Test AID Header Parser exits cleanly on duplicate AIDs"""
+
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent("""
+                #define AID_FOO 100
+                #define AID_BAR 100
+            """))
+            temp_file.flush()
+
+            with self.assertRaises(SystemExit):
+                AIDHeaderParser(temp_file.name)
+
     def test_fs_config_file_parser_good(self):
         """Test FSConfig Parser good input file"""
 
