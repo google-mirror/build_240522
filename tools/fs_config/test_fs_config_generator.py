@@ -194,6 +194,48 @@ class Tests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 AIDHeaderParser(temp_file.name)
 
+    def test_aid_header_parser_no_bad_aids(self):
+        """Test AID Header Parser that it doesn't contain:
+        Ranges, ie things the end with "_START" or "_END"
+        AID_APP
+        AID_USER
+        For more details see:
+          - https://android-review.googlesource.com/#/c/313024
+          - https://android-review.googlesource.com/#/c/313169
+        """
+
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(
+                textwrap.dedent("""
+                #define AID_APP              10000 /* TODO: switch users over to AID_APP_START */
+                #define AID_APP_START        10000 /* first app user */
+                #define AID_APP_END          19999 /* last app user */
+
+                #define AID_CACHE_GID_START  20000 /* start of gids for apps to mark cached data */
+                #define AID_CACHE_GID_END    29999 /* end of gids for apps to mark cached data */
+
+                #define AID_SHARED_GID_START 50000 /* start of gids for apps in each user to share */
+                #define AID_SHARED_GID_END   59999 /* end of gids for apps in each user to share */
+
+                #define AID_ISOLATED_START   99000 /* start of uids for fully isolated sandboxed processes */
+                #define AID_ISOLATED_END     99999 /* end of uids for fully isolated sandboxed processes */
+
+                #define AID_USER            100000 /* TODO: switch users over to AID_USER_OFFSET */
+                #define AID_USER_OFFSET     100000 /* offset for uid ranges for each user */
+            """))
+            temp_file.flush()
+
+            parser = AIDHeaderParser(temp_file.name)
+            aids = parser.aids
+
+            bad_aids = ['_START', '_END', 'AID_APP', 'AID_USER']
+
+            for aid in aids:
+                self.assertFalse(
+                    any(bad in aid.identifier for bad in bad_aids),
+                    'Not expecting keywords "%s" in aids "%s"' %
+                    (str(bad_aids), str([tmp.identifier for tmp in aids])))
+
     def test_fs_config_file_parser_good(self):
         """Test FSConfig Parser good input file"""
 
