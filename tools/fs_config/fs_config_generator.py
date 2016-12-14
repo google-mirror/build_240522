@@ -235,6 +235,8 @@ class AIDHeaderParser(object):
     """Parses an android_filesystem_config.h file.
 
     Parses a C header file and extracts lines starting with #define AID_<name>
+    while capturing the OEM defined ranges and ignoring other ranges. It also
+    skips some hardcoded AID's it doesn't need to generate a mapping for.
     It provides some basic sanity checks. The information extracted from this
     file can later be used to sanity check other things (like oem ranges) as
     well as generating a mapping of names to uids. It was primarily designed to
@@ -242,12 +244,18 @@ class AIDHeaderParser(object):
     work.
     """
 
-    _SKIPWORDS = ['UNUSED']
+    _SKIP_AIDS = [
+        re.compile(r'%sUNUSED[0-9].*' % AID.PREFIX), re.compile(r'%sAPP' % AID.PREFIX),
+        re.compile(r'%sUSER' % AID.PREFIX)
+    ]
     _AID_DEFINE = re.compile(r'\s*#define\s+%s.*' % AID.PREFIX)
     _OEM_START_KW = 'START'
     _OEM_END_KW = 'END'
-    _OEM_RANGE = re.compile('AID_OEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
-                            (_OEM_START_KW, _OEM_END_KW))
+    _OEM_RANGE = re.compile('%sOEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
+                            (AID.PREFIX, _OEM_START_KW, _OEM_END_KW))
+    # AID lines cannot end with _START or _END, ie AID_FOO is OK
+    # but AID_FOO_START is skiped. Note that AID_FOOSTART is NOT skipped.
+    _AID_SKIP_RANGE = ['_' + _OEM_START_KW, '_' + _OEM_END_KW]
 
     def __init__(self, aid_header):
         """
@@ -284,20 +292,23 @@ class AIDHeaderParser(object):
             if AIDHeaderParser._AID_DEFINE.match(line):
                 chunks = line.split()
 
-                if any(x in chunks[1] for x in AIDHeaderParser._SKIPWORDS):
-                    continue
-
                 identifier = chunks[1]
                 value = chunks[2]
+
+                if any(x.match(chunks[1]) for x in AIDHeaderParser._SKIP_AIDS):
+                    continue
 
                 try:
                     if AIDHeaderParser._is_oem_range(identifier):
                         self._handle_oem_range(identifier, value)
-                    else:
+                    elif not any(
+                            identifier.endswith(x)
+                            for x in AIDHeaderParser._AID_SKIP_RANGE):
                         self._handle_aid(identifier, value)
                 except ValueError as exception:
-                    sys.exit(error_message(
-                        '{} for "{}"'.format(exception, identifier)))
+                    sys.exit(
+                        error_message('{} for "{}"'.format(exception,
+                                                           identifier)))
 
     def _handle_aid(self, identifier, value):
         """Handle an AID C #define.
