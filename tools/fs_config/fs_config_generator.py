@@ -320,8 +320,8 @@ class AIDHeaderParser(object):
             raise ValueError('Duplicate aid "%s"' % identifier)
 
         if value in self._aid_value_to_name:
-            raise ValueError('Duplicate aid value "%u" for %s' % value,
-                             identifier)
+            raise ValueError('Duplicate aid value "%s" for %s' % (value,
+                             identifier))
 
         self._aid_name_to_value[aid.friendly] = aid
         self._aid_value_to_name[value] = aid.friendly
