@@ -494,6 +494,16 @@ endif
 my_asflags += -D__ASSEMBLY__
 
 
+############################################
+## Check includes for modules with VNDK flag
+############################################
+ifdef LOCAL_USE_VNDK
+ifneq (,$(filter frameworks/% system/% external/%, $(filter-out $(LOCAL_PATH)%,$(my_c_includes))))
+    $(warning $(LOCAL_MODULE): LOCAL_USE_VNDK modules cannot include frameworks/, system/ or external/ headers directly.)
+    $(warning $(LOCAL_MODULE): Use LOCAL_SHARED_LIBRARIES instead.)
+endif
+endif
+
 ###########################################################
 ## Define PRIVATE_ variables from global vars
 ###########################################################
