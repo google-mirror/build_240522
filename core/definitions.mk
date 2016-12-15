@@ -2181,6 +2181,20 @@ define call-jack
  JACK_VERSION=$(PRIVATE_JACK_VERSION) $(JACK) $(DEFAULT_JACK_EXTRA_ARGS)
 endef
 
+jack_alarm := $(shell which alarm)
+ifeq (,$(jack_alarm))
+define jack
+ JACK_VERSION=$(PRIVATE_JACK_VERSION) $(JACK) $(DEFAULT_JACK_EXTRA_ARGS)
+endef
+else
+define jack
+  JACK_VERSION=$(PRIVATE_JACK_VERSION) $(jack_alarm) 3600 $(SHELL) -c "$(JACK) $(DEFAULT_JACK_EXTRA_ARGS) $1 || exit 1"; \
+    if [ "255" -eq "$$?" ]; then \
+      JACK_VERSION=$(PRIVATE_JACK_VERSION) JACK_EXTRA_CURL_OPTIONS=-v $(jack_alarm) -l 600 $(SHELL) -c "uptime; $(JACK) $(DEFAULT_JACK_EXTRA_ARGS) $1 || exit 1"; \
+    fi
+endef
+endif # jack_alarm
+
 # Common definition to invoke javac on the host and target.
 #
 # Some historical notes:
@@ -2280,7 +2294,7 @@ $(hide) if [ -s $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then
 else \
     export tmpEcjArg=""; \
 fi; \
-$(call call-jack) \
+$(call jack, \
     $(strip $(PRIVATE_JACK_FLAGS)) \
     $(strip $(PRIVATE_JACK_COVERAGE_OPTIONS)) \
     $(if $(NO_OPTIMIZE_DX), \
@@ -2302,7 +2316,7 @@ $(call call-jack) \
     --output-dex $(PRIVATE_JACK_INTERMEDIATES_DIR) \
     $(addprefix --config-jarjar ,$(strip $(PRIVATE_JARJAR_RULES))) \
     $(if $(PRIVATE_JACK_PROGUARD_FLAGS),--config-proguard $@.flags) \
-    $$tmpEcjArg \
+    $$tmpEcjArg) \
     || ( rm -rf $(PRIVATE_CLASSES_JACK); exit 41 )
 $(hide) mv $(PRIVATE_JACK_INTERMEDIATES_DIR)/classes*.dex $(dir $@)
 $(hide) rm -f $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list
@@ -2332,7 +2346,7 @@ fi
 $(hide) tr ' ' '\n' < $@.java-source-list \
     | sort -u > $@.java-source-list-uniq
 $(hide) if [ -s $@.java-source-list-uniq ] ; then \
-	$(call call-jack) \
+	$(call jack, \
 	    $(strip $(PRIVATE_JACK_FLAGS)) \
 	    $(addprefix --classpath ,$(strip \
 	        $(call normalize-path-list,$(call reverse-list,$(PRIVATE_STATIC_JACK_LIBRARIES)) $(PRIVATE_JACK_SHARED_LIBRARIES)))) \
@@ -2340,7 +2354,7 @@ $(hide) if [ -s $@.java-source-list-uniq ] ; then \
 	    -D jack.android.min-api-level=$(PRIVATE_JACK_MIN_SDK_VERSION) \
 	    -D jack.import.type.policy=keep-first \
 	    $(if $(PRIVATE_JACK_INCREMENTAL_DIR),--incremental-folder $(PRIVATE_JACK_INCREMENTAL_DIR)) \
-	    @$@.java-source-list-uniq; \
+	    @$@.java-source-list-uniq); \
 fi
 touch $@
 endef
@@ -2350,7 +2364,7 @@ define transform-jar-to-jack
 	$(hide) mkdir -p $@.tmpjill.res
 	$(hide) unzip -qo $< -d $@.tmpjill.res
 	$(hide) find $@.tmpjill.res -iname "*.class" -delete
-	$(hide) $(call call-jack) \
+	$(hide) $(call jack \
 	    $(PRIVATE_JACK_FLAGS) \
 	    $(addprefix --pluginpath ,$(strip \
                 $(call normalize-path-list,$(PRIVATE_JACK_PLUGIN_PATH)))) \
@@ -2360,7 +2374,7 @@ define transform-jar-to-jack
         -D jack.android.min-api-level=$(PRIVATE_JACK_MIN_SDK_VERSION) \
 	    --import $< \
 	    --import-resource $@.tmpjill.res \
-	    --output-jack $@
+	    --output-jack $@)
 	$(hide) rm -rf $@.tmpjill.res
 endef
 
@@ -2455,7 +2469,7 @@ $(hide) if [ -s $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then
 else \
     export tmpEcjArg=""; \
 fi; \
-$(call call-jack) \
+$(call jack \
     $(strip $(PRIVATE_JACK_FLAGS)) \
     $(if $(NO_OPTIMIZE_DX), \
         -D jack.dex.optimize="false") \
@@ -2473,7 +2487,7 @@ $(call call-jack) \
     --output-jack $@ \
     $(addprefix --config-jarjar ,$(strip $(PRIVATE_JARJAR_RULES))) \
     $(if $(PRIVATE_JACK_PROGUARD_FLAGS),--config-proguard $@.flags) \
-    $$tmpEcjArg \
+    $$tmpEcjArg) \
     || ( rm -f $@ ; exit 41 )
 $(hide) rm -f $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list
 $(if $(PRIVATE_EXTRA_JAR_ARGS),$(hide) rm -rf $@.res.tmp)
