@@ -45,31 +45,31 @@ include $(BUILD_HOST_EXECUTABLE)
 ANDROID_FS_CONFIG_H := android_filesystem_config.h
 
 ifneq ($(TARGET_ANDROID_FILESYSTEM_CONFIG_H),)
-ifneq ($(TARGET_FS_CONFIG_GEN),)
-$(error Cannot set TARGET_ANDROID_FILESYSTEM_CONFIG_H and TARGET_FS_CONFIG_GEN simultaneously)
-endif
+  ifneq ($(TARGET_FS_CONFIG_GEN),)
+    $(error Cannot set TARGET_ANDROID_FILESYSTEM_CONFIG_H and TARGET_FS_CONFIG_GEN simultaneously)
+  endif
 
-# One and only one file can be specified.
-ifneq ($(words $(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),1)
-$(error Multiple fs_config files specified, \
- see "$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)".)
-endif
+  # One and only one file can be specified.
+  ifneq ($(words $(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),1)
+    $(error Multiple fs_config files specified, \
+      see "$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)".)
+  endif
 
-ifeq ($(filter %/$(ANDROID_FS_CONFIG_H),$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),)
-$(error TARGET_ANDROID_FILESYSTEM_CONFIG_H file name must be $(ANDROID_FS_CONFIG_H), \
- see "$(notdir $(TARGET_ANDROID_FILESYSTEM_CONFIG_H))".)
-endif
+  ifeq ($(filter %/$(ANDROID_FS_CONFIG_H),$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),)
+  $(error TARGET_ANDROID_FILESYSTEM_CONFIG_H file name must be $(ANDROID_FS_CONFIG_H), \
+   see "$(notdir $(TARGET_ANDROID_FILESYSTEM_CONFIG_H))".)
+  endif
 
-my_fs_config_h := $(TARGET_ANDROID_FILESYSTEM_CONFIG_H)
+  my_fs_config_h := $(TARGET_ANDROID_FILESYSTEM_CONFIG_H)
 else ifneq ($(wildcard $(TARGET_DEVICE_DIR)/$(ANDROID_FS_CONFIG_H)),)
 
-ifneq ($(TARGET_FS_CONFIG_GEN),)
-$(error Cannot provide $(TARGET_DEVICE_DIR)/$(ANDROID_FS_CONFIG_H) and set TARGET_FS_CONFIG_GEN simultaneously)
-endif
-my_fs_config_h := $(TARGET_DEVICE_DIR)/$(ANDROID_FS_CONFIG_H)
+  ifneq ($(TARGET_FS_CONFIG_GEN),)
+    $(error Cannot provide $(TARGET_DEVICE_DIR)/$(ANDROID_FS_CONFIG_H) and set TARGET_FS_CONFIG_GEN simultaneously)
+  endif
+  my_fs_config_h := $(TARGET_DEVICE_DIR)/$(ANDROID_FS_CONFIG_H)
 
 else
-my_fs_config_h := $(LOCAL_PATH)/default/$(ANDROID_FS_CONFIG_H)
+  my_fs_config_h := $(LOCAL_PATH)/default/$(ANDROID_FS_CONFIG_H)
 endif
 
 ##################################
