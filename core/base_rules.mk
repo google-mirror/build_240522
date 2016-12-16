@@ -194,6 +194,20 @@ endif
 ifneq ($(my_module_relative_path),)
   my_module_path := $(my_module_path)/$(my_module_relative_path)
 endif
+
+# Force VNDK libraries to be installed under specific directory. Note that
+# LOCAL_MODULE_PATH and LOCAL_MODULE_RELATIVE_PATH are ignored here.
+# TODO: should we warn them?
+ifndef LOCAL_IS_HOST_MODULE
+ifdef BOARD_VNDK_VERSION
+ifeq ($(LOCAL_MODULE),$(filter $(LOCAL_MODULE),$(VNDK_LIBRARIES)))
+ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+  my_module_path := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SHARED_LIBRARIES)/vndk-$(BOARD_VNDK_VERSION)
+endif
+endif
+endif
+endif # not LOCAL_IS_HOST_MODULE
+
 endif # not LOCAL_UNINSTALLABLE_MODULE
 
 ifneq ($(strip $(LOCAL_BUILT_MODULE)$(LOCAL_INSTALLED_MODULE)),)

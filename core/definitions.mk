@@ -1874,6 +1874,8 @@ $(hide) $(PRIVATE_CXX) -pie \
 	-Wl,--gc-sections \
 	-Wl,-z,nocopyreloc \
 	-Wl,-rpath-link=$(PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES) \
+	$(foreach path,$(PRIVATE_RPATHS), \
+	-Wl,-rpath,$(path)) \
 	$(PRIVATE_TARGET_CRTBEGIN_DYNAMIC_O) \
 	$(PRIVATE_ALL_OBJECTS) \
 	-Wl,--whole-archive \

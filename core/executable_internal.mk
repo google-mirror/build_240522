@@ -61,6 +61,7 @@ $(linked_module): PRIVATE_TARGET_CRTBEGIN_STATIC_O := $(my_target_crtbegin_stati
 $(linked_module): PRIVATE_TARGET_CRTEND_O := $(my_target_crtend_o)
 $(linked_module): PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_LIBRARIES)
 $(linked_module): PRIVATE_POST_LINK_CMD := $(LOCAL_POST_LINK_CMD)
+$(linked_module): PRIVATE_RPATHS := $(patsubst $(PRODUCT_OUT)%,%,$($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SHARED_LIBRARIES)/vndk-$(BOARD_VNDK_VERSION))
 
 ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
 $(linked_module): $(my_target_crtbegin_static_o) $(all_objects) $(all_libraries) $(my_target_crtend_o) $(my_target_libgcc) $(my_target_libatomic)
