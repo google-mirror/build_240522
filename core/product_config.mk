@@ -423,3 +423,6 @@ $(foreach c,$(PRODUCT_SANITIZER_MODULE_CONFIGS),\
     $(eval cf := $(subst $(_PSMC_SP_PLACE_HOLDER),$(space),$(cf)))\
     $(eval SANITIZER.$(TARGET_PRODUCT).$(m).CONFIG := $(cf))))
 _psmc_modules :=
+
+# Make this art variable visiable to soong_config.mk.
+ART_USE_READ_BARRIER := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).ART_USE_READ_BARRIER))
