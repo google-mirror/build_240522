@@ -107,7 +107,7 @@ $(LOCAL_BUILT_MODULE) : $(full_classes_emma_jar)
 	$(hide) $(ACP) -fp $< $@
 
 else # LOCAL_EMMA_INSTRUMENT
-$(LOCAL_BUILT_MODULE) : $(full_classes_jarjar_jar) | $(ACP)
+$(LOCAL_BUILT_MODULE): $(full_classes_jarjar_jar) | $(ACP)
 	@echo Copying: $@
 	$(hide) $(ACP) -fp $< $@
 endif # LOCAL_EMMA_INSTRUMENT
