@@ -146,8 +146,8 @@ required_javac_version := "1.8"
 java_version := $(shell echo '$(java_version_str)' | grep '[ "]1\.8[\. "$$]')
 javac_version := $(shell echo '$(javac_version_str)' | grep '[ "]1\.8[\. "$$]')
 else
-required_version := "1.7.x"
-required_javac_version := "1.7"
+required_version := "1.8.x"
+required_javac_version := "1.8"
 java_version := $(shell echo '$(java_version_str)' | grep '^java .*[ "]1\.7[\. "$$]')
 javac_version := $(shell echo '$(javac_version_str)' | grep '[ "]1\.7[\. "$$]')
 endif # if LEGACY_USE_JAVA7 == ''
