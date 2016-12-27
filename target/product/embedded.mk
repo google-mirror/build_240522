@@ -82,12 +82,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     file_contexts.bin \
     nonplat_mac_permissions.xml \
+    nonplat_service_contexts \
     plat_mac_permissions.xml \
+    plat_service_contexts \
     property_contexts \
     seapp_contexts \
     selinux_version \
-    sepolicy \
-    service_contexts
+    sepolicy
 
 # Ensure that this property is always defined so that bionic_systrace.cpp
 # can rely on it being initially set by init.
