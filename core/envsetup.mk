@@ -167,6 +167,21 @@ TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(board_config_mk)))
 board_config_mk :=
 
 ###########################################
+# Map board configs into system properties.
+#   BOARD_CHARGER_DISABLE_INIT_BLANK
+#     -> ro.disable_charger_init_blank=true
+#   BOARD_CHARGER_ENABLE_SUSPEND
+#     -> ro.enable_charger_suspend=true
+ifeq ($(strip $(BOARD_CHARGER_DISABLE_INIT_BLANK)),true)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.disable_charger_init_blank=true
+endif
+ifeq ($(strip $(BOARD_CHARGER_ENABLE_SUSPEND)),true)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.enable_charger_suspend=true
+endif
+
+###########################################
 # Now we can substitute with the real value of TARGET_COPY_OUT_VENDOR
 ifeq ($(TARGET_COPY_OUT_VENDOR),$(_vendor_path_placeholder))
 TARGET_COPY_OUT_VENDOR := system/vendor
