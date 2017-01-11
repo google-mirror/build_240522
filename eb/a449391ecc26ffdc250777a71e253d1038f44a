@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Code-Review+1: Miao Wang <miaowang@google.com>
+Verified+1: Jean-Luc Brouillet <jeanluc@google.com>
+Submitted-by: Jean-Luc Brouillet <jeanluc@google.com>
+Submitted-at: Wed, 11 Jan 2017 02:04:15 +0000
+Reviewed-on: https://android-review.googlesource.com/319873
+Project: platform/build
+Branch: refs/heads/master
