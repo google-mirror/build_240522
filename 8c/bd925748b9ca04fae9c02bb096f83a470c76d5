@@ -1,0 +1,10 @@
+Presubmit-Ready+1: Jorim Jaggi <jjaggi@google.com>
+Verified+1: Jorim Jaggi <jjaggi@google.com>
+Code-Review+1: Jorim Jaggi <jjaggi@google.com>
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Code-Review+2: Bill Rassieur <rassb@google.com>
+Submitted-by: Jorim Jaggi <jjaggi@google.com>
+Submitted-at: Wed, 18 Jan 2017 16:33:31 +0000
+Reviewed-on: https://android-review.googlesource.com/324205
+Project: platform/build
+Branch: refs/heads/master
