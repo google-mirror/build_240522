@@ -69,7 +69,9 @@ $(SOONG_VARIABLES): FORCE
 	echo ''; \
 	echo '    "BtConfigIncludeDir": "$(BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR)",'; \
 	echo '    "BtHcilpIncluded": "$(BOARD_BLUETOOTH_BDROID_HCILP_INCLUDED)",'; \
-	echo '    "BtHciUseMct": $(if $(filter true,$(BLUETOOTH_HCI_USE_MCT)),true,false)'; \
+	echo '    "BtHciUseMct": $(if $(filter true,$(BLUETOOTH_HCI_USE_MCT)),true,false),'; \
+	echo ''; \
+	echo '    "SameProcessHalDeps": [$(if $(BOARD_SAME_PROCESS_HAL_DEPS),"$(subst $(space),"$(comma)",$(BOARD_SAME_PROCESS_HAL_DEPS))")]'; \
 	echo '}') > $(SOONG_VARIABLES_TMP); \
 	if ! cmp -s $(SOONG_VARIABLES_TMP) $(SOONG_VARIABLES); then \
 	  mv $(SOONG_VARIABLES_TMP) $(SOONG_VARIABLES); \
