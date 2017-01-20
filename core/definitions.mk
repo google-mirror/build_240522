@@ -2813,12 +2813,13 @@ endef
 
 # Order-only dependency because make/ninja will follow the link when checking
 # the timestamp, so the file must exist
+# Note: -r (relative) option is added.
 define _symlink-file
 $(3): | $(1)
 	@echo "Symlink: $$@ -> $(2)"
 	@mkdir -p $(dir $$@)
 	@rm -rf $$@
-	$(hide) ln -sf $(2) $$@
+	$(hide) ln -rsf $(2) $$@
 endef
 
 ###########################################################
