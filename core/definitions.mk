@@ -862,6 +862,31 @@ define echo-error
 echo -e "\e[1;31merror:\e[0m \e[1m" $(1) "\e[0m\n"
 endef
 
+###########################################################
+## Generate colored warning or error message with the make
+## file name and module name that caused the warning/error.
+##
+## $(1): message to print
+## $(2): keep_going. if set to "true", build is not stopped.
+##       default to true for log-warning, false for log-error
+###########################################################
+define log-warning
+$(eval \
+$(shell echo -ne "\e[1m"$(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE):"\e[0m " >&2) \
+$(shell echo -ne "\e[1;35mwarning:\e[0m " >&2) \
+$(shell echo -e  "\e[1m"$(1)"\e[0m" >&2) \
+$(if $(filter false,$(2)),$(error done),)\
+)
+endef
+
+define log-error
+$(eval \
+$(shell echo -ne "\e[1m"$(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE):"\e[0m " >&2) \
+$(shell echo -ne "\e[1;31merror:\e[0m " >&2) \
+$(shell echo -e  "\e[1m"$(1)"\e[0m" >&2) \
+$(if $(filter true,$(2)),,$(error done))\
+)
+endef
 
 ###########################################################
 ## Package filtering
@@ -1793,7 +1818,7 @@ endef
 
 define transform-o-to-shared-lib-inner
 $(hide) $(PRIVATE_CXX) \
-	-nostdlib -Wl,-soname,$(notdir $@) \
+	-nostdlib -Wl,-soname,$(PRIVATE_SONAME) \
 	-Wl,--gc-sections \
 	$(if $(filter true,$(PRIVATE_CLANG)),-shared,-Wl$(comma)-shared) \
 	$(PRIVATE_TARGET_CRTBEGIN_SO_O) \
@@ -2813,8 +2838,10 @@ endef
 
 # Define a rule to create a symlink to a file.
 # $(1): full path to source
-# $(2): source (may be relative)
-# $(3): full path to destination
+# $(2): target of the link
+# $(3): full path of the symlink
+# $(4): (optional) when set to true, $(2) is recognized as a path from the build root and
+#       thus -r option is used to link $(3) to $(2). Off by default.
 define symlink-file
 $(eval $(_symlink-file))
 endef
@@ -2826,7 +2853,9 @@ $(3): | $(1)
 	@echo "Symlink: $$@ -> $(2)"
 	@mkdir -p $(dir $$@)
 	@rm -rf $$@
-	$(hide) ln -sf $(2) $$@
+	$(if $(filter true,$(4)),\
+            $(hide) python -c "import os.path; import os; os.symlink(os.path.relpath('$(2)','$(dir $(3))'), '$$@')",\
+            $(hide) ln -sf $(2) $$@)
 endef
 
 ###########################################################

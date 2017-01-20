@@ -60,6 +60,11 @@ $(linked_module): PRIVATE_TARGET_LIBGCC := $(my_target_libgcc)
 $(linked_module): PRIVATE_TARGET_LIBATOMIC := $(my_target_libatomic)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_SO_O := $(my_target_crtbegin_so_o)
 $(linked_module): PRIVATE_TARGET_CRTEND_SO_O := $(my_target_crtend_so_o)
+ifneq ($(LOCAL_EXTENDS_MODULE),)
+$(linked_module): PRIVATE_SONAME := $(my_installed_module_stem)
+else
+$(linked_module): PRIVATE_SONAME := $(my_built_module_stem)
+endif
 
 $(linked_module): \
         $(all_objects) \
