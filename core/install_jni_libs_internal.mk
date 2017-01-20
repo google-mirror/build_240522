@@ -55,6 +55,10 @@ ifneq ($(my_jni_shared_libraries),)
 my_jni_filenames := $(notdir $(my_jni_shared_libraries))
 # Make sure the JNI libraries get installed
 my_shared_library_path := $($(my_2nd_arch_prefix)TARGET_OUT$(partition_tag)_SHARED_LIBRARIES)
+# JNI libraries in system partition go into /system/lib/framework
+ifeq ($(partition_tag),)
+my_shared_library_path := $(my_shared_library_path)/framework
+endif
 # Do not use order-only dependency, because we want to rebuild the image if an jni is updated.
 $(LOCAL_INSTALLED_MODULE) : $(addprefix $(my_shared_library_path)/, $(my_jni_filenames))
 
