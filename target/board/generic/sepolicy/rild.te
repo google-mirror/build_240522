@@ -1,1 +1,2 @@
+allow rild hwservicemanager:binder { call transfer };
 unix_socket_connect(rild, qemud, qemud)
