@@ -22,8 +22,8 @@ include $(BUILD_SYSTEM)/local_vndk.mk
 # present.
 ifdef BOARD_VNDK_VERSION
 ifndef LOCAL_USE_VNDK
-$(shell echo $(LOCAL_MODULE_MAKEFILE): $(LOCAL_MODULE): Only vendor modules using LOCAL_USE_VNDK may use LOCAL_COPY_HEADERS >&2)
-$(error done)
+#$(shell echo $(LOCAL_MODULE_MAKEFILE): $(LOCAL_MODULE): Only vendor modules using LOCAL_USE_VNDK may use LOCAL_COPY_HEADERS >&2)
+#$(error done)
 endif
 endif
 
