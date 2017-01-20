@@ -163,34 +163,95 @@ my_module_path := $(strip $(LOCAL_MODULE_PATH))
 endif
 my_module_path := $(patsubst %/,%,$(my_module_path))
 my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
-ifeq ($(my_module_path),)
-  ifdef LOCAL_IS_HOST_MODULE
-    partition_tag :=
-  else
-  ifeq (true,$(LOCAL_PROPRIETARY_MODULE))
-    partition_tag := _VENDOR
-  else ifeq (true,$(LOCAL_OEM_MODULE))
-    partition_tag := _OEM
-  else ifeq (true,$(LOCAL_ODM_MODULE))
-    partition_tag := _ODM
-  else ifeq (NATIVE_TESTS,$(LOCAL_MODULE_CLASS))
-    partition_tag := _DATA
-  else
-    # The definition of should-install-to-system will be different depending
-    # on which goal (e.g., sdk or just droid) is being built.
-    partition_tag := $(if $(call should-install-to-system,$(my_module_tags)),,_DATA)
-  endif
-  endif
-  install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
-  ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
-    install_path_var := $(install_path_var)_PRIVILEGED
-  endif
 
-  my_module_path := $($(install_path_var))
-  ifeq ($(strip $(my_module_path)),)
-    $(error $(LOCAL_PATH): unhandled install path "$(install_path_var) for $(LOCAL_MODULE)")
+# my_module_desired_path is the path that is automatically chosen according to the type of
+# a module. It is used when the module does not explicitly specify path using LOCAL_MODULE_PATH.
+# If LOCAL_MODULE_PATH is specified, it is always respected and my_module_desired_path is
+# ignored. However, for shared libraries, such conflict generates warning so that module owner
+# can place the library in the correct location (or stop using LOCAL_MODULE_PATH).
+my_module_desired_path :=
+ifdef LOCAL_IS_HOST_MODULE
+  partition_tag :=
+else
+ifeq (true,$(LOCAL_PROPRIETARY_MODULE))
+  partition_tag := _VENDOR
+else ifeq (true,$(LOCAL_OEM_MODULE))
+  partition_tag := _OEM
+else ifeq (true,$(LOCAL_ODM_MODULE))
+  partition_tag := _ODM
+else ifeq (NATIVE_TESTS,$(LOCAL_MODULE_CLASS))
+  partition_tag := _DATA
+else
+  # The definition of should-install-to-system will be different depending
+  # on which goal (e.g., sdk or just droid) is being built.
+  partition_tag := $(if $(call should-install-to-system,$(my_module_tags)),,_DATA)
+endif
+endif
+install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
+ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
+  install_path_var := $(install_path_var)_PRIVILEGED
+endif
+
+my_module_desired_path := $($(install_path_var))
+ifeq ($(strip $(my_module_path)$(my_module_desired_path)),)
+  $(error $(LOCAL_PATH): unhandled install path "$(install_path_var) for $(LOCAL_MODULE)")
+endif
+
+# Determine lib_type and do some sanity checks
+ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+  ifneq ($(filter $(LOCAL_MODULE),$(addprefix lib,$(NDK_PREBUILT_SHARED_LIBRARIES))),)
+    ifneq ($(partition_tag),)
+      $(error NDK library $(LOCAL_MODULE) must be installed at system partition.)
+    endif
+    lib_type := ndk
+  else ifneq ($(filter $(LOCAL_MODULE),$(VNDK_LIBRARIES)),)
+    ifneq ($(partition_tag),)
+      $(error VNDK library $(LOCAL_MODULE) must be installed at system partition.)
+    endif
+    lib_type := vndk
+    # TODO(jiyong): vndk-ext sould be handled
+  else ifneq ($(strip $(foreach name,$(SAMEPROCESS_HAL_LIBRARIES_PREFIXES),$(filter $(name)_%,$(LOCAL_MODULE)))),)
+    ifeq ($(partition_tag),)
+      $(error Sameprocess HAL $(LOCAL_MODULE) must not be installed at system partition.)
+    endif
+    lib_type := sameprocess_hal
+  else ifeq ($(LOCAL_IS_HOST_MODULE)$(partition_tag),)
+    lib_type := framework
+  else ifneq ($(partition_tag),_DATA)
+    # Here, vendor means vendor/oem/odm
+    lib_type := vendor_provided
+  endif
+else
+  lib_type :=
+endif
+
+# Amend path depending on lib_type
+ifeq ($(lib_type),vndk)
+  my_module_desired_path := $(my_module_desired_path)/vndk
+else ifeq ($(lib_type),framework)
+  my_module_desired_path := $(my_module_desired_path)/framework
+endif
+
+# We do respect LOCAL_MODULE_PATH
+ifeq ($(my_module_path),)
+  my_module_path := $(my_module_desired_path)
+else
+  # But, we are kind enough to warn if it seems to be wrong
+  ifndef LOCAL_IS_HOST_MODULE
+    ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+      ifneq ($(my_module_path),$(my_module_desired_path))
+        # warn only when the specified path is for real target
+        ifneq ($(filter $(TARGET_OUT_ROOT)/%,$(my_module_path)),)
+          # ... except that it is for data partition
+          ifeq ($(filter $(TARGET_OUT_DATA)%,$(my_module_path)),)
+            $(warning $(lib_type) library $(LOCAL_MODULE) must be installed to $(my_module_desired_path), but requested to be installed at $(my_module_path). Please fix.)
+          endif
+        endif
+      endif
+    endif
   endif
 endif
+
 ifneq ($(my_module_relative_path),)
   my_module_path := $(my_module_path)/$(my_module_relative_path)
 endif
