@@ -447,6 +447,7 @@ else
   my_linker := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LINKER)
 endif
 
+include $(BUILD_SYSTEM)/iosanitize.mk
 include $(BUILD_SYSTEM)/config_sanitizers.mk
 
 ifneq ($(LOCAL_NO_LIBCOMPILER_RT),true)

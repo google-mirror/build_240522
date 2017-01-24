@@ -73,6 +73,18 @@ ifneq ($(my_nosanitize),)
   my_sanitize := $(filter-out $(my_nosanitize),$(my_sanitize))
 endif
 
+# Global sanitizer option for selective integer overflow sanitization.
+ifneq (,$(IOSANITIZE_NEVER_PROJECTS))
+  ifneq ($(filter intoverflow, $(my_global_sanitize) $(my_sanitize)),)
+    ifneq ($(call find_in_iosanitize_never_projects,$(LOCAL_PATH)),)
+      # leave LOCAL_SANITIZE intact in terms of integer sanitization.
+      ifeq ($(filter integer, $(strip $(LOCAL_SANITIZE))),)
+        my_sanitize := $(filter-out intoverflow,$(mysanitize))
+      endif
+    endif
+  endif
+endif
+
 # TSAN is not supported on 32-bit architectures. For non-multilib cases, make
 # its use an error. For multilib cases, don't use it for the 32-bit case.
 ifneq ($(filter thread,$(my_sanitize)),)
@@ -122,6 +134,13 @@ ifneq ($(filter coverage,$(my_sanitize)),)
   endif
   my_cflags += -fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp
   my_sanitize := $(filter-out coverage,$(my_sanitize))
+endif
+
+ifneq ($(filter intoverflow,$(my_sanitize)),)
+  my_cflags += -fsanitize=signed-integer-overflow,unsigned-integer-overflow
+  my_cflags += -fsanitize-trap=all
+  my_cflags += -ftrap-function=abort
+  my_sanitize := $(filter-out intoverflow,$(my_sanitize))
 endif
 
 ifneq ($(my_sanitize),)
