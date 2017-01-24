@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Code-Review+1: Mathieu Chartier <mathieuc@google.com>
+Verified+1: Hiroshi Yamauchi <yamauchi@google.com>
+Submitted-by: Hiroshi Yamauchi <yamauchi@google.com>
+Submitted-at: Tue, 24 Jan 2017 22:14:43 +0000
+Reviewed-on: https://android-review.googlesource.com/327271
+Project: platform/build
+Branch: refs/heads/master
