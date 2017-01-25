@@ -46,6 +46,9 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+# MIPS32 doesn't yet have support for ART read barriers.
+PRODUCT_ART_USE_READ_BARRIER := false
+
 # Build OpenGLES emulation guest and host libraries
 BUILD_EMULATOR_OPENGL := true
 
