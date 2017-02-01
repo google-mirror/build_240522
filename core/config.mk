@@ -305,8 +305,6 @@ ifndef KATI
 include $(BUILD_SYSTEM)/ccache.mk
 include $(BUILD_SYSTEM)/goma.mk
 
-export CC_WRAPPER
-export CXX_WRAPPER
 endif
 
 ifdef TARGET_PREFER_32_BIT

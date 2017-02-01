@@ -97,4 +97,8 @@ $(subst $(space),, \
 )
 endef
 
+ifdef USE_GOMA
+clang_goma_cflags := --gomacc-path $(gomacc)
+endif
+
 include $(BUILD_SYSTEM)/clang/tidy.mk
