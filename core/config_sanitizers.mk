@@ -132,6 +132,12 @@ endif
 
 ifneq ($(my_sanitize),)
   fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize))
+  # Only enable indirect call CFI for 32-bit processes as a workaround
+  # for https://llvm.org/bugs/show_bug.cgi?id=31896. Revert when that
+  # is fixed (and pulled into our repo)
+  ifeq ($(my_32_64_bit_suffix),32)
+    fsanitize_arg := $(subst cfi,cfi-icall,$(fsanitize_arg))
+  endif
   my_cflags += -fsanitize=$(fsanitize_arg)
 
   ifdef LOCAL_IS_HOST_MODULE
@@ -154,8 +160,16 @@ ifneq ($(filter cfi,$(my_sanitize)),)
   # entire module.
   LOCAL_ARM_MODE := thumb
   my_cflags += -flto -fsanitize-cfi-cross-dso -fvisibility=default
-  my_ldflags += -flto -fsanitize-cfi-cross-dso -fsanitize=cfi -Wl,-plugin-opt,O1 -Wl,-export-dynamic-symbol=__cfi_check
+  my_ldflags += -flto -fsanitize-cfi-cross-dso -Wl,-plugin-opt,O1 -Wl,-export-dynamic-symbol=__cfi_check
   my_arflags += --plugin $(LLVM_PREBUILTS_PATH)/../lib64/LLVMgold.so
+  # Only enable indirect call CFI for 32-bit processes as a workaround
+  # for https://llvm.org/bugs/show_bug.cgi?id=31896. Revert when that
+  # is fixed (and pulled into our repo)
+  ifeq ($(my_32_64_bit_suffix),32)
+    my_ldflags += -fsanitize=cfi-icall
+  else
+    my_ldflags += -fsanitize=cfi-call
+  endif
   # Workaround for b/33678192. CFI jumptables need Thumb2 codegen.  Revert when
   # Clang is updated past r290384.
   ifneq ($(filter arm,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
