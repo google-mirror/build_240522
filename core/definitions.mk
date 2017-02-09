@@ -3100,6 +3100,15 @@ $(hide) $(CHECK_LINK_TYPE) --makefile $(PRIVATE_MAKEFILE) --module $(PRIVATE_MOD
 $(hide) echo "$(PRIVATE_LINK_TYPE)" >$@
 endef
 
+define check-vendor-bin
+$(if $(findstring $(TARGET_OUT), $(PRIVATE_INSTALLED_MODULE)), \
+  $(if $(findstring hardware/qcom, $(PRIVATE_MAKEFILE)), \
+    $(warning $(PRIVATE_MAKEFILE): Warning: device specific binary is getting installed to system location $(PRIVATE_INSTALLED_MODULE)), \
+  ), \
+)
+$(hide) touch $@
+endef
+
 define link-type-partitions
 ifndef LOCAL_IS_HOST_MODULE
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
