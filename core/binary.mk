@@ -1426,6 +1426,7 @@ $(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
 $(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
 	@echo Check module type: $@
 	$(check-link-type)
+	$(check-vendor-bin)
 
 
 ###########################################################
