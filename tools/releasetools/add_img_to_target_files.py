@@ -94,6 +94,26 @@ def GetCareMap(which, imgname):
   care_map_list.append(care_map_ranges.to_string_raw())
   return care_map_list
 
+def GetBlockSha1(which, imgname):
+  """Generate SHA-1 for blocks on the care_map of system/vendor partition.
+
+  This file has the format:
+
+  partition_name: total_block_count
+  0: SHA-1_for_block0
+  1: SHA-1_for_block1
+  ...
+  n: SHA-1_for_blockn
+  """
+
+  assert which in ("system", "vendor")
+  assert os.path.exists(imgname)
+
+  simg = sparse_img.SparseImage(imgname)
+  block_sha1 = simg.GetBlockSha1()
+  block_sha1.insert(0, which + " " + str(len(block_sha1)))
+  return block_sha1
+
 
 def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
   """Turn the contents of SYSTEM into a system image and store it in
@@ -518,7 +538,20 @@ def AddImagesToTargetFiles(filename):
 
     if care_map_list:
       file_path = "META/care_map.txt"
-      common.ZipWriteStr(output_zip, file_path, '\n'.join(care_map_list))
+      if not os.path.exists(os.path.join(OPTIONS.input_tmp, file_path)):
+        common.ZipWriteStr(output_zip, file_path, '\n'.join(care_map_list))
+
+  # Add SHA-1 for each block in the care_map for non-A/B devices
+  else:
+    block_sha1_list = []
+    assert system_img_path
+    block_sha1_list += GetBlockSha1("system", system_img_path)
+    if vendor_img_path:
+      block_sha1_list += GetBlockSha1("vendor", vendor_img_path)
+    sha1_file_path = "META/block_sha1.txt"
+    if not os.path.exists(os.path.join(OPTIONS.input_tmp, sha1_file_path)):
+      common.ZipWriteStr(output_zip, sha1_file_path,
+                         '\n'.join(block_sha1_list))
 
   common.ZipClose(output_zip)
 
