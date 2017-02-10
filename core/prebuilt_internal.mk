@@ -301,7 +301,10 @@ $(built_module): PRIVATE_EMBEDDED_JNI_LIBS := $(embedded_prebuilt_jni_libs)
 
 $(built_module) : $(my_prebuilt_src_file) | $(ZIPALIGN) $(SIGNAPK_JAR)
 	$(transform-prebuilt-to-target)
+# Do not touch libs when LOCAL_KEEP_LIBS_UNTOUCHED is true
+ifneq ($(LOCAL_KEEP_LIBS_UNTOUCHED),true)
 	$(uncompress-shared-libs)
+endif  # LOCAL_KEEP_LIBS_UNTOUCHED
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped
