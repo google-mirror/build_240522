@@ -160,6 +160,27 @@ class SparseImage(object):
       h.update(d)
     return h.hexdigest()
 
+  def GetBlockSha1(self, include_clobbered_blocks=False):
+    """Return a list of the SHA-1 hash for each block in the care map"""
+
+    ranges = self.care_map
+    if not include_clobbered_blocks:
+      ranges = ranges.subtract(self.clobbered_blocks)
+    sha1_map = {}
+
+    for block in ranges.next_item():
+      h = sha1()
+      block_range = rangelib.RangeSet(str(block))
+      data = self.ReadRangeSet(block_range)
+      assert len(data) == 1
+      h.update(data[0])
+      sha1_map[block] = h.hexdigest()
+
+    sha1_list = []
+    for block, value in sorted(sha1_map.items()):
+      sha1_list.append("{}: {}".format(block, value))
+    return sha1_list
+
   def _GetRangeData(self, ranges):
     """Generator that produces all the image data in 'ranges'.  The
     number of individual pieces returned is arbitrary (and in

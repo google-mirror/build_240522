@@ -94,6 +94,15 @@ def GetCareMap(which, imgname):
   care_map_list.append(care_map_ranges.to_string_raw())
   return care_map_list
 
+def GetBlockSha1(which, imgname):
+  """Generate SHA-1 for blocks on the care_map of system/vendor partition"""
+
+  assert which in ("system", "vendor")
+  simg = sparse_img.SparseImage(imgname)
+  block_sha1 = simg.GetBlockSha1()
+  block_sha1.insert(0, which + " " + str(len(block_sha1)))
+  return block_sha1
+
 
 def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
   """Turn the contents of SYSTEM into a system image and store it in
@@ -483,15 +492,18 @@ def AddImagesToTargetFiles(filename):
     # For devices using A/B update, generate care_map for system and vendor
     # partitions (if present), then write this file to target_files package.
     care_map_list = []
+    block_sha1_list = []
     for line in lines:
       if line.strip() == "system" and OPTIONS.info_dict.get(
           "system_verity_block_device", None) is not None:
         assert os.path.exists(system_img_path)
         care_map_list += GetCareMap("system", system_img_path)
+        block_sha1_list += GetBlockSha1("system", system_img_path)
       if line.strip() == "vendor" and OPTIONS.info_dict.get(
           "vendor_verity_block_device", None) is not None:
         assert os.path.exists(vendor_img_path)
         care_map_list += GetCareMap("vendor", vendor_img_path)
+        block_sha1_list += GetBlockSha1("vendor", vendor_img_path)
 
       img_name = line.strip() + ".img"
       prebuilt_path = os.path.join(OPTIONS.input_tmp, "IMAGES", img_name)
@@ -519,6 +531,10 @@ def AddImagesToTargetFiles(filename):
     if care_map_list:
       file_path = "META/care_map.txt"
       common.ZipWriteStr(output_zip, file_path, '\n'.join(care_map_list))
+
+    if block_sha1_list:
+      sha1_file_path = "META/block_sha1.txt"
+      common.ZipWriteStr(output_zip, sha1_file_path, '\n'.join(block_sha1_list))
 
   common.ZipClose(output_zip)
 
