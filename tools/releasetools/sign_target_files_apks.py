@@ -280,7 +280,8 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       pass
 
     # Skip the care_map as we will regenerate the system/vendor images.
-    elif info.filename == "META/care_map.txt":
+    elif (info.filename == "META/care_map.txt" or
+          info.filename == "META/block_sha1.txt"):
       pass
 
     # Copy BOOT/, RECOVERY/, META/, ROOT/ to rebuild recovery patch. This case
