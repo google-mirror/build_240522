@@ -94,6 +94,35 @@ def GetCareMap(which, imgname):
   return care_map_list
 
 
+def GetBlockSha1(which, imgname, file_map_path=None):
+  """Generate SHA-1 for blocks on the care_map of system/vendor partition.
+
+  This file has the format:
+
+  partition_name partition_range_size
+  file_name
+  file_range_size range_string
+  block_num: SHA-1
+  ...
+
+  For example:
+  system 762596
+  /system/bin/applypatch
+  56 393141-393196
+  393141: 0c7af64f51d4a2bd896fd6daaa7090b7e9b28478
+  393142: c3a6d59023a877d93b4a49e5343e9da421f30747
+  ...
+  """
+
+  assert which in ("system", "vendor")
+  assert os.path.exists(imgname)
+
+  simg = sparse_img.SparseImage(imgname, file_map_path)
+  block_sha1 = simg.BlockSha1List()
+  block_sha1.insert(0, which + " " + str(len(block_sha1)))
+  return block_sha1
+
+
 def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
   """Turn the contents of SYSTEM into a system image and store it in
   output_zip. Returns the name of the system image file."""
@@ -101,7 +130,10 @@ def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
   prebuilt_path = os.path.join(OPTIONS.input_tmp, prefix, "system.img")
   if os.path.exists(prebuilt_path):
     print("system.img already exists in %s, no need to rebuild..." % (prefix,))
-    return prebuilt_path
+    system_map_path = os.path.join(OPTIONS.input_tmp, prefix, "system.map")
+    if not os.path.exists(system_map_path):
+      system_map_path = None
+    return prebuilt_path, system_map_path
 
   def output_sink(fn, data):
     ofile = open(os.path.join(OPTIONS.input_tmp, "SYSTEM", fn), "w")
@@ -119,7 +151,7 @@ def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
 
   common.ZipWrite(output_zip, imgname, prefix + "system.img")
   common.ZipWrite(output_zip, block_list, prefix + "system.map")
-  return imgname
+  return imgname, block_list
 
 
 def BuildSystem(input_dir, info_dict, block_list=None):
@@ -141,6 +173,7 @@ def AddSystemOther(output_zip, prefix="IMAGES/"):
   imgname = BuildSystemOther(OPTIONS.input_tmp, OPTIONS.info_dict)
   common.ZipWrite(output_zip, imgname, prefix + "system_other.img")
 
+
 def BuildSystemOther(input_dir, info_dict):
   """Build the (sparse) system_other image and return the name of a temp
   file containing it."""
@@ -154,14 +187,17 @@ def AddVendor(output_zip, prefix="IMAGES/"):
   prebuilt_path = os.path.join(OPTIONS.input_tmp, prefix, "vendor.img")
   if os.path.exists(prebuilt_path):
     print("vendor.img already exists in %s, no need to rebuild..." % (prefix,))
-    return prebuilt_path
+    vendor_map_path = os.path.join(OPTIONS.input_tmp, prefix, "vendor.map")
+    if not os.path.exists(vendor_map_path):
+      vendor_map_path = None
+    return prebuilt_path, vendor_map_path
 
   block_list = common.MakeTempFile(prefix="vendor-blocklist-", suffix=".map")
   imgname = BuildVendor(OPTIONS.input_tmp, OPTIONS.info_dict,
                         block_list=block_list)
   common.ZipWrite(output_zip, imgname, prefix + "vendor.img")
   common.ZipWrite(output_zip, block_list, prefix + "vendor.map")
-  return imgname
+  return imgname, block_list
 
 
 def BuildVendor(input_dir, info_dict, block_list=None):
@@ -449,12 +485,12 @@ def AddImagesToTargetFiles(filename):
         recovery_two_step_image.AddToZip(output_zip)
 
   banner("system")
-  system_img_path = AddSystem(
+  system_img_path, system_map_path = AddSystem(
     output_zip, recovery_img=recovery_image, boot_img=boot_image)
   vendor_img_path = None
   if has_vendor:
     banner("vendor")
-    vendor_img_path = AddVendor(output_zip)
+    vendor_img_path, vendor_map_path = AddVendor(output_zip)
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
@@ -518,6 +554,20 @@ def AddImagesToTargetFiles(filename):
     if care_map_list:
       file_path = "META/care_map.txt"
       common.ZipWriteStr(output_zip, file_path, '\n'.join(care_map_list))
+
+  # Add SHA-1 for each block in the care_map for non-A/B devices. Skip this
+  # step if the target doesn't have recovery.
+  elif has_recovery:
+    block_sha1_list = []
+    assert system_img_path
+    block_sha1_list += GetBlockSha1("system", system_img_path, system_map_path)
+    if has_vendor:
+      assert vendor_img_path
+      block_sha1_list += GetBlockSha1("vendor", vendor_img_path,
+                                      vendor_map_path)
+    sha1_file_path = "META/block_sha1.txt"
+    common.ZipWriteStr(output_zip, sha1_file_path,
+                      '\n'.join(block_sha1_list))
 
   common.ZipClose(output_zip)
 
