@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Mathieu Chartier <mathieuc@google.com>
+Submitted-by: Mathieu Chartier <mathieuc@google.com>
+Submitted-at: Sat, 11 Feb 2017 00:05:02 +0000
+Reviewed-on: https://android-review.googlesource.com/337303
+Project: platform/build
+Branch: refs/heads/master
