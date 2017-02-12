@@ -30,7 +30,7 @@
 # version.
 #
 ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT)),)
-TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv5te
+TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv7-a
 endif
 
 TARGET_ARCH_SPECIFIC_MAKEFILE := $(BUILD_COMBOS)/arch/$(TARGET_$(combo_2nd_arch_prefix)ARCH)/$(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT).mk
