@@ -290,6 +290,12 @@ my_shared_libraries += $(patsubst -l%,lib%,$(filter-out $(my_allowed_ldlibs),$(m
 my_ldlibs := $(filter $(my_allowed_ldlibs),$(my_ldlibs))
 endif
 
+ifneq ($(LOCAL_USE_VNDK),)
+ifneq ($(filter liblog,$(my_shared_libraries)),)
+  my_shared_libraries += liblog_vndk_headers
+endif
+endif
+
 ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   my_all_ndk_libraries := \
       $(NDK_MIGRATED_LIBS) $(addprefix lib,$(NDK_PREBUILT_SHARED_LIBRARIES))
