@@ -694,6 +694,19 @@ class BlockImageDiff(object):
           use_cmd = stash_map[stash_raw_id][2]
           replaced_cmds.append(use_cmd)
           print("%10d  %9s  %s" % (sr.size(), "explicit", use_cmd))
+
+          # Reverse the above operation to recover the state of 'stashes', since
+          # this stash command won't be generated.
+          if self.version == 2:
+            assert stash_raw_id in stashes
+            sid = stashes.pop(stash_raw_id)
+            heapq.heappush(free_stash_ids, sid)
+          else:
+            sh = self.HashBlocks(self.src, sr)
+            assert sh in stashes
+            stashes[sh] -= 1
+            if stashes[sh] == 0:
+              stashes.pop(sh)
         else:
           stashed_blocks = stashed_blocks_after
 
