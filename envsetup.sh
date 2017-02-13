@@ -244,6 +244,8 @@ function setpaths()
 
     export PATH=$ANDROID_BUILD_PATHS$PATH
     export PYTHONPATH=$T/development/python-packages:$PYTHONPATH
+    export ART_TEST_RUNNER_PATH=$T/art/test/testrunner:
+    export PATH=$ART_TEST_RUNNER_PATH$PATH
 
     unset ANDROID_JAVA_TOOLCHAIN
     unset ANDROID_PRE_BUILD_PATHS
