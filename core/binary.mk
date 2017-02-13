@@ -1427,6 +1427,17 @@ $(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
 	@echo Check module type: $@
 	$(check-link-type)
 
+####################################################
+## Prevent vendor binaries from getting installed
+## to a system location
+####################################################
+my_vendor_bin_location := $(intermediates)/vendor_bin_location
+all_vendor_bin_locations: $(my_vendor_bin_location)
+$(my_vendor_bin_location): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
+$(my_vendor_bin_location): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
+$(my_vendor_bin_location):
+	@echo Check vendor binary location: $@
+	$(check-vendor-bin-location)
 
 ###########################################################
 ## Common object handling.
@@ -1758,7 +1769,6 @@ all_libraries := \
 # are linked into this module.  This will force them to be installed
 # when this module is.
 $(LOCAL_INSTALLED_MODULE): | $(installed_static_library_notice_file_targets)
-
 ###########################################################
 # Export includes
 ###########################################################
@@ -1802,7 +1812,8 @@ endif
 .KATI_RESTAT: $(export_includes)
 
 # Make sure export_includes gets generated when you are running mm/mmm
-$(LOCAL_BUILT_MODULE) : | $(export_includes) $(my_link_type)
+$(LOCAL_BUILT_MODULE) : | $(export_includes) $(my_link_type) $(my_vendor_bin_location)
+
 
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 ifneq (,$(filter-out $(LOCAL_PATH)/%,$(my_export_c_include_dirs)))

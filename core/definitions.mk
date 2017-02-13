@@ -3090,6 +3090,19 @@ $(strip $(if $(LOCAL_RECORDED_MODULE_TYPE),,
 endef
 
 ###########################################################
+# Vendor binary location checking
+###########################################################
+define check-vendor-bin-location
+$(if $(findstring $(TARGET_OUT), $(PRIVATE_INSTALLED_MODULE)), \
+  $(if $(findstring hardware/qcom, $(PRIVATE_MAKEFILE)), \
+    $(warning $(PRIVATE_MAKEFILE): Warning: a device specific vendor binary is \
+      getting installed to system location $(PRIVATE_INSTALLED_MODULE)), \
+  ), \
+)
+$(hide) touch $@
+endef
+
+###########################################################
 # Link type checking
 ###########################################################
 define check-link-type
