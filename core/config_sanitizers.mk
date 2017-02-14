@@ -159,7 +159,8 @@ ifneq ($(filter cfi,$(my_sanitize)),)
   # LLVM is not set up to do this on a function basis, so force Thumb on the
   # entire module.
   LOCAL_ARM_MODE := thumb
-  my_cflags += -flto -fsanitize-cfi-cross-dso -fvisibility=default
+  my_cflags += -flto -fsanitize-cfi-cross-dso -fvisibility=default \
+	       -fsanitize-blacklist=external/compiler-rt/lib/cfi/cfi_blacklist.txt
   my_ldflags += -flto -fsanitize-cfi-cross-dso -fsanitize=cfi -Wl,-plugin-opt,O1 -Wl,-export-dynamic-symbol=__cfi_check
   my_arflags += --plugin $(LLVM_PREBUILTS_PATH)/../lib64/LLVMgold.so
   # Workaround for b/33678192. CFI jumptables need Thumb2 codegen.  Revert when
