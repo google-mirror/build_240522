@@ -417,20 +417,20 @@ endif
 endif
 
 ###########################################################
-## Compatibiliy suite files.
+## Compatibility suite files.
 ###########################################################
 ifdef LOCAL_COMPATIBILITY_SUITE
-ifneq ($(words $(LOCAL_COMPATIBILITY_SUITE)),1)
-$(error $(LOCAL_PATH):$(LOCAL_MODULE) LOCAL_COMPATIBILITY_SUITE can be only one name)
-endif
+
+# Retrieve the testcase output directories.
+testcase_out_dirs := $(call get-testcase-out-dirs, \
+  $(LOCAL_COMPATIBILITY_SUITE), $($(my_prefix)OUT_TESTCASES))
 
 # Copy this module into its own subdirectory in the common testcases output directory.
 my_testcases_subdir := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)
 
 # The module itself.
-my_compat_dist := \
-  $(LOCAL_BUILT_MODULE):$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(my_installed_module_stem) \
-  $(LOCAL_BUILT_MODULE):$(my_testcases_subdir)/$(my_installed_module_stem)
+my_compat_dist := $(foreach dir, $(testcase_out_dirs),\
+   $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))
 
 # Make sure we only add the files once for multilib modules.
 ifndef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
@@ -441,29 +441,27 @@ my_compat_dist += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES),\
   $(eval p := $(subst :,$(space),$(f)))\
   $(eval s := $(word 1,$(p)))\
   $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
-  $(eval d := $(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(n)) \
-  $(s):$(d) $(s):$(my_testcases_subdir)/$(n))
+  $(foreach dir, $(testcase_out_dirs),\
+    $(s):$(dir)/$(n)))
+
 
 ifneq (,$(wildcard $(LOCAL_PATH)/AndroidTest.xml))
-my_compat_dist += \
-  $(LOCAL_PATH)/AndroidTest.xml:$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE).config
-my_compat_dist += \
-  $(LOCAL_PATH)/AndroidTest.xml:$(my_testcases_subdir)/$(LOCAL_MODULE).config
+my_compat_dist += $(foreach dir, $(testcase_out_dirs),\
+  $(LOCAL_PATH)/AndroidTest.xml:$(dir)/$(LOCAL_MODULE).config)
 endif
 
 ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
-my_compat_dist += \
-  $(LOCAL_PATH)/DynamicConfig.xml:$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE).dynamic
-my_compat_dist += \
-  $(LOCAL_PATH)/DynamicConfig.xml:$(my_testcases_subdir)/$(LOCAL_MODULE).dynamic
+my_compat_dist += $(foreach dir, $(testcase_out_dirs),\
+  $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)
 endif
 endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 
 my_compat_files := $(call copy-many-files, $(my_compat_dist))
 
-COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES := \
-  $(COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES) \
-  $(my_compat_files)
+# Add all the files to each suite's dependent files list.
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval COMPATIBILITY.$(suite).FILES := \
+    $(COMPATIBILITY.$(suite).FILES) $(my_compat_files)))
 
 # Copy over the compatibility files when user runs mm/mmm.
 $(my_all_targets) : $(my_compat_files)
