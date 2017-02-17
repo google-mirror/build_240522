@@ -3283,3 +3283,17 @@ include $(BUILD_SYSTEM)/distdir.mk
 #	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 #	      -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
 #	  rm -f $*.d
+
+
+###########################################################
+## Compatibility suite tools
+###########################################################
+
+# Generate a list of testcases directories and filter any that may not be defined.
+define get-testcases-out-dirs
+  $(eval suite_dirs := $(foreach suite, $(1),\
+    $(ifdef $(COMPATIBILITY_TESTCASES_OUT_$(suite))) \
+    $(COMPATIBILITY_TESTCASES_OUT_$(suite))))
+  $(eval suite_dirs += $(2)/$(LOCAL_MODULE))
+  $(suite_dirs)
+endef
