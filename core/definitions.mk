@@ -3286,3 +3286,16 @@ include $(BUILD_SYSTEM)/distdir.mk
 #	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 #	      -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
 #	  rm -f $*.d
+
+
+###########################################################
+## Compatibility suite tools
+###########################################################
+
+# Generate a map of suites names to testcase output directories.
+define generate-suite-out-dirs-map
+  $(foreach suite, $(1),\
+    $(eval COMPATIBILITY_SUITE_OUT_MAP.$(suite) := \
+      $(COMPATIBILITY_TESTCASES_OUT_$(suite)) \
+      $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)))
+endef

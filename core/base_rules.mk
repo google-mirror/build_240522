@@ -417,56 +417,56 @@ endif
 endif
 
 ###########################################################
-## Compatibiliy suite files.
+## Compatibility suite files.
 ###########################################################
 ifdef LOCAL_COMPATIBILITY_SUITE
-ifneq ($(words $(LOCAL_COMPATIBILITY_SUITE)),1)
-$(error $(LOCAL_PATH):$(LOCAL_MODULE) LOCAL_COMPATIBILITY_SUITE can be only one name)
-endif
 
-# Copy this module into its own subdirectory in the common testcases output directory.
-my_testcases_subdir := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)
+# Generate the suite output directories man.
+$(call generate-suite-out-dirs-map, $(LOCAL_COMPATIBILITY_SUITE))
 
 # The module itself.
-my_compat_dist := \
-  $(LOCAL_BUILT_MODULE):$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(my_installed_module_stem) \
-  $(LOCAL_BUILT_MODULE):$(my_testcases_subdir)/$(my_installed_module_stem)
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) := $(foreach dir, $(COMPATIBILITY_SUITE_OUT_MAP.$(suite)), \
+    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))))
 
 # Make sure we only add the files once for multilib modules.
 ifndef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
 
 # LOCAL_COMPATIBILITY_SUPPORT_FILES is a list of <src>[:<dest>].
-my_compat_dist += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES),\
-  $(eval p := $(subst :,$(space),$(f)))\
-  $(eval s := $(word 1,$(p)))\
-  $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
-  $(eval d := $(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(n)) \
-  $(s):$(d) $(s):$(my_testcases_subdir)/$(n))
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES), \
+    $(eval p := $(subst :,$(space),$(f))) \
+    $(eval s := $(word 1,$(p))) \
+    $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
+    $(foreach dir, $(COMPATIBILITY_SUITE_OUT_MAP.$(suite)), \
+      $(s):$(dir)/$(n)))))
+
 
 ifneq (,$(wildcard $(LOCAL_PATH)/AndroidTest.xml))
-my_compat_dist += \
-  $(LOCAL_PATH)/AndroidTest.xml:$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE).config
-my_compat_dist += \
-  $(LOCAL_PATH)/AndroidTest.xml:$(my_testcases_subdir)/$(LOCAL_MODULE).config
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) += $(foreach dir, $(COMPATIBILITY_SUITE_OUT_MAP.$(suite)), \
+    $(LOCAL_PATH)/AndroidTest.xml:$(dir)/$(LOCAL_MODULE).config)))
 endif
 
 ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
-my_compat_dist += \
-  $(LOCAL_PATH)/DynamicConfig.xml:$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE).dynamic
-my_compat_dist += \
-  $(LOCAL_PATH)/DynamicConfig.xml:$(my_testcases_subdir)/$(LOCAL_MODULE).dynamic
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) += $(foreach dir, $(COMPATIBILITY_SUITE_OUT_MAP.$(suite)), \
+    $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)))
 endif
 endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 
-my_compat_files := $(call copy-many-files, $(my_compat_dist))
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_files_$(suite) := $(call copy-many-files, $(my_compat_dist_$(suite)))))
 
-COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES := \
-  $(COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES) \
-  $(my_compat_files)
+# Add all the files to each suite's dependent files list.
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval COMPATIBILITY.$(suite).FILES := \
+    $(COMPATIBILITY.$(suite).FILES) $(my_compat_files_$(suite))))
 
-# Copy over the compatibility files when user runs mm/mmm.
-$(my_all_targets) : $(my_compat_files)
+$(my_all_targets) : $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(my_compat_files_$(suite)))
+
 endif  # LOCAL_COMPATIBILITY_SUITE
 
 ###########################################################
