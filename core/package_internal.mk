@@ -631,18 +631,25 @@ ALL_MODULES.$(my_register_name).BUILT_INSTALLED += \
 $(my_all_targets): $(installed_apk_splits)
 
 ifdef LOCAL_COMPATIBILITY_SUITE
+# Retrieve the testcase output directories.
+testcases_out_dirs := $(call get-testcases-out-dirs, \
+  $(LOCAL_COMPATIBILITY_SUITE), $($(my_prefix)OUT_TESTCASES))
+
+cts_testcase_files := $(foreach dir, $(testcases_out_dirs),\
+  $(foreach s,$(my_split_suffixes),\
+    $(built_module_path)/package_$(s).apk:$(dir)/$(LOCAL_MODULE)_$(s).apk))
+
+cts_testcase_dests := $(call copy-many-files, $(cts_testcase_files))
+
 cts_testcase_file := $(foreach s,$(my_split_suffixes),$(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE)_$(s).apk)
-$(cts_testcase_file) : $(COMPATIBILITY_TESTCASES_OUT_$(LOCAL_COMPATIBILITY_SUITE))/$(LOCAL_MODULE)_%.apk : $(built_module_path)/package_%.apk | $(ACP)
-	$(copy-file-to-new-target)
-common_testcase_file := $(foreach s,$(my_split_suffixes),$($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)/$(LOCAL_MODULE)_$(s).apk)
-$(common_testcase_file) : $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)/$(LOCAL_MODULE)_%.apk : $(built_module_path)/package_%.apk
-	$(copy-file-to-new-target)
 
-COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES := \
-  $(COMPATIBILITY.$(LOCAL_COMPATIBILITY_SUITE).FILES) \
-  $(cts_testcase_file) $(common_testcase_file)
+# Add all the files to each suite's dependent files list.
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval COMPATIBILITY.$(suite).FILES := \
+    $(COMPATIBILITY.$(suite).FILES) $(cts_testcase_dests)))
 
-$(my_all_targets) : $(cts_testcase_file) $(common_testcase_file)
+$(my_all_targets) : $(cts_testcase_dests)
+
 endif # LOCAL_COMPATIBILITY_SUITE
 endif # LOCAL_PACKAGE_SPLITS
 
