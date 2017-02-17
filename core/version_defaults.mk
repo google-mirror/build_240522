@@ -76,6 +76,13 @@ ENABLED_VERSIONS := $(call find_and_earlier,$(ALL_VERSIONS),$(TARGET_PLATFORM_VE
 $(foreach v,$(ENABLED_VERSIONS), \
   $(eval IS_AT_LEAST_$(v) := true))
 
+# Setup PLATFORM_* variables for "P" if needed.
+# TODO(b/35445510): Generalize this logic and support PLATFORM_SDK_VERSION.
+ifeq "P" "$(TARGET_PLATFORM_VERSION)"
+  PLATFORM_VERSION := "$(TARGET_PLATFORM_VERSION)"
+  PLATFORM_VERSION_CODENAME := "$(TARGET_PLATFORM_VERSION)"
+endif
+
 ifeq "" "$(PLATFORM_VERSION)"
   # This is the canonical definition of the platform version,
   # which is the version that we reveal to the end user.
