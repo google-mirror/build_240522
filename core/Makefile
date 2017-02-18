@@ -197,6 +197,11 @@ ifdef SANITIZE_TARGET
 TARGET_BUILD_FLAVOR := $(TARGET_BUILD_FLAVOR)_asan
 endif
 
+# Set unique flavor for CFI builds.
+ifneq ($(strip $(ENABLE_CFI)),)
+TARGET_BUILD_FLAVOR := $(TARGET_BUILD_FLAVOR)_cfi
+endif
+
 ifdef TARGET_SYSTEM_PROP
 system_prop_file := $(TARGET_SYSTEM_PROP)
 else
