@@ -55,6 +55,7 @@ LOCAL_INTERMEDIATE_TARGETS += \
     $(full_classes_jack) \
     $(full_classes_jar) \
     $(jack_check_timestamp) \
+    $(built_dex_intermediate) \
     $(built_dex)
 
 # See comment in java.mk
@@ -133,6 +134,15 @@ $(LOCAL_BUILT_MODULE): $(built_dex) $(java_resource_sources)
 	$(add-dex-to-package)
 
 endif # !LOCAL_IS_STATIC_JAVA_LIBRARY
+
+ifneq (,$(filter-out current system_current test_current, $(LOCAL_SDK_VERSION)))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_DEFAULT_APP_TARGET_SDK := $(LOCAL_SDK_VERSION)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_SDK_VERSION := $(LOCAL_SDK_VERSION)
+else
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_DEFAULT_APP_TARGET_SDK := $(DEFAULT_APP_TARGET_SDK)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_SDK_VERSION := $(PLATFORM_SDK_VERSION)
+endif
+
 else # LOCAL_JACK_ENABLED
 $(LOCAL_INTERMEDIATE_TARGETS): \
   PRIVATE_JACK_INTERMEDIATES_DIR := $(intermediates.COMMON)/jack-rsc
@@ -185,6 +195,7 @@ endif  # LOCAL_IS_STATIC_JAVA_LIBRARY
 $(jack_check_timestamp): $(jack_all_deps) | setup-jack-server
 	@echo Checking build with Jack: $@
 	$(jack-check-java)
+
 endif # LOCAL_JACK_ENABLED
 
 USE_CORE_LIB_BOOTCLASSPATH :=
