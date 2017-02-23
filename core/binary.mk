@@ -1742,6 +1742,11 @@ endif
 # (start-group/end-group), so append after the check above.
 my_ldlibs += $(my_cxx_ldlibs)
 
+ifeq ($($(my_prefix)OS),windows)
+    # Statically link libwinpthread at the end when cross compiling win32.
+    my_ldlibs += -static -lwinpthread
+endif
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
