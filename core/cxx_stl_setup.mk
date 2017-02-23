@@ -120,3 +120,8 @@ else ifeq ($(my_cxx_stl),none)
 else
     $(error $(LOCAL_PATH): $(LOCAL_MODULE): $(my_cxx_stl) is not a supported STL.)
 endif
+
+ifeq ($($(my_prefix)OS),windows)
+    # Abuse my_cxx_ldlibs to statically link libwinpthread at the end when cross compiling win32.
+    my_cxx_ldlibs += -static -lwinpthread
+endif
