@@ -402,7 +402,12 @@ subdir_makefiles := $(SOONG_ANDROID_MK) $(call first-makefiles-under,$(TOP))
 subdir_makefiles_total := $(words $(subdir_makefiles))
 .KATI_READONLY := subdir_makefiles_total
 
+ifneq ($(SHOW_COMMANDS),)
 $(foreach mk,$(subdir_makefiles),$(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] including $(mk) ...)$(eval include $(mk)))
+else
+$(info Parsing $(subdir_makefiles_total) makefiles.)
+$(foreach mk,$(subdir_makefiles),$(eval include $(mk)))
+endif
 
 ifdef PDK_FUSION_PLATFORM_ZIP
 # Bring in the PDK platform.zip modules.
