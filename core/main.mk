@@ -343,6 +343,14 @@ ifneq ($(PLATFORM_VERSION_CODENAME),REL)
   ADDITIONAL_BUILD_PROPERTIES += ro.bionic.ld.warning=1
 endif
 
+# Boolean variable determining if Treble is fully enabled
+PRODUCT_FULL_TREBLE := false
+ifeq ($(PRODUCT_FULL_TREBLE_OVERRIDE),true)
+  PRODUCT_FULL_TREBLE := true
+else ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),25),)
+  PRODUCT_FULL_TREBLE := true
+endif
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
