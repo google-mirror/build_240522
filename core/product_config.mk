@@ -358,6 +358,14 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_SHIPPING_API_LEVEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SHIPPING_API_LEVEL))
 
+# Boolean variable determining if Treble is fully enabled
+PRODUCT_FULL_TREBLE := false
+ifeq ($(PRODUCT_FULL_TREBLE_OVERRIDE),true)
+  PRODUCT_FULL_TREBLE := true
+else ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),25),)
+  PRODUCT_FULL_TREBLE := true
+endif
+
 # A list of property assignments, like "key = value", with zero or more
 # whitespace characters on either side of the '='.
 # used for adding properties to default.prop
