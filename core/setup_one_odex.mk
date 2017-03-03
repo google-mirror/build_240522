@@ -78,7 +78,8 @@ $(my_built_profile): $(LOCAL_DEX_PREOPT_PROFILE_CLASS_LISTING)
 $(my_built_profile): $(PROFMAN)
 $(my_built_profile): $(PRIVATE_INSTALLED_MODULE)
 $(my_built_profile):
-	cp $(PRIVATE_SOURCE_CLASSES) $(PRIVATE_PROFILE_CLASSES)
+	$(hide) mkdir -p $(dir $(PRIVATE_PROFILE_CLASSES))
+	$(hide) cp $(PRIVATE_SOURCE_CLASSES) $(PRIVATE_PROFILE_CLASSES)
 	ANDROID_LOG_TAGS="*:e" $(PROFMAN) \
 		--create-profile-from=$(PRIVATE_PROFILE_CLASSES) \
 		--apk=$(PRIVATE_INSTALLED_MODULE) \
