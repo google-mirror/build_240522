@@ -885,7 +885,7 @@ def Cleanup():
   for i in OPTIONS.tempfiles:
     if os.path.isdir(i):
       shutil.rmtree(i)
-    else:
+    elif os.path.exists(i):
       os.remove(i)
 
 
@@ -1190,6 +1190,10 @@ class File(object):
     t.write(self.data)
     t.flush()
     return t
+
+  def WriteToDir(self, d):
+    with open(os.path.join(d, self.name), "wb") as fp:
+      fp.write(self.data)
 
   def AddToZip(self, z, compression=None):
     ZipWriteStr(z, self.name, self.data, compress_type=compression)
