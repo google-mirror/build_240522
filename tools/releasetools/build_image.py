@@ -25,7 +25,6 @@ import os.path
 import re
 import subprocess
 import sys
-import commands
 import common
 import shlex
 import shutil
@@ -52,28 +51,26 @@ def RunCommand(cmd):
   return (output, p.returncode)
 
 def GetVerityFECSize(partition_size):
-  cmd = "fec -s %d" % partition_size
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["fec", "-s", str(partition_size)]
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print output
     return False, 0
   return True, int(output)
 
 def GetVerityTreeSize(partition_size):
-  cmd = "build_verity_tree -s %d"
-  cmd %= partition_size
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["build_verity_tree", "-s", str(partition_size)]
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print output
     return False, 0
   return True, int(output)
 
 def GetVerityMetadataSize(partition_size):
-  cmd = "system/extras/verity/build_verity_metadata.py size %d"
-  cmd %= partition_size
-
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["system/extras/verity/build_verity_metadata.py", "size",
+         str(partition_size)]
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print output
     return False, 0
   return True, int(output)
@@ -191,21 +188,21 @@ AdjustPartitionSizeForVerity.results = {}
 
 def BuildVerityFEC(sparse_image_path, verity_path, verity_fec_path,
                    padding_size):
-  cmd = "fec -e -p %d %s %s %s" % (padding_size, sparse_image_path,
-                                   verity_path, verity_fec_path)
-  print cmd
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["fec", "-e", "-p", str(padding_size), sparse_image_path,
+         verity_path, verity_fec_path]
+  print " ".join(cmd)
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print "Could not build FEC data! Error: %s" % output
     return False
   return True
 
 def BuildVerityTree(sparse_image_path, verity_image_path, prop_dict):
-  cmd = "build_verity_tree -A %s %s %s" % (
-      FIXED_SALT, sparse_image_path, verity_image_path)
-  print cmd
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["build_verity_tree", "-A", FIXED_SALT, sparse_image_path,
+         verity_image_path]
+  print " ".join(cmd)
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print "Could not build verity tree! Error: %s" % output
     return False
   root, salt = output.split()
@@ -215,16 +212,14 @@ def BuildVerityTree(sparse_image_path, verity_image_path, prop_dict):
 
 def BuildVerityMetadata(image_size, verity_metadata_path, root_hash, salt,
                         block_device, signer_path, key, signer_args):
-  cmd_template = (
-      "system/extras/verity/build_verity_metadata.py build " +
-      "%s %s %s %s %s %s %s")
-  cmd = cmd_template % (image_size, verity_metadata_path, root_hash, salt,
-                        block_device, signer_path, key)
+  cmd = ["system/extras/verity/build_verity_metadata.py", "build",
+         str(image_size), verity_metadata_path, root_hash, salt, block_device,
+         signer_path, key]
   if signer_args:
-    cmd += " --signer_args=\"%s\"" % (' '.join(signer_args),)
-  print cmd
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+    cmd.append("--signer_args=\"%s\"" % (' '.join(signer_args),))
+  print " ".join(cmd)
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print "Could not build verity metadata! Error: %s" % output
     return False
   return True
@@ -238,22 +233,20 @@ def Append2Simg(sparse_image_path, unsparse_image_path, error_message):
   Returns:
     True on success, False on failure.
   """
-  cmd = "append2simg %s %s"
-  cmd %= (sparse_image_path, unsparse_image_path)
-  print cmd
-  status, output = commands.getstatusoutput(cmd)
-  if status:
+  cmd = ["append2simg", sparse_image_path, unsparse_image_path]
+  print " ".join(cmd)
+  output, returncode = RunCommand(cmd)
+  if returncode != 0:
     print "%s: %s" % (error_message, output)
     return False
   return True
 
 def Append(target, file_to_append, error_message):
-  cmd = 'cat %s >> %s' % (file_to_append, target)
-  print cmd
-  status, output = commands.getstatusoutput(cmd)
-  if status:
-    print "%s: %s" % (error_message, output)
-    return False
+  print "appending %s to %s" % (file_to_append, target)
+  with open(target, "a") as out_file:
+    with open(file_to_append, "r") as input_file:
+      for line in input_file:
+        out_file.write(line)
   return True
 
 def BuildVerifiedImage(data_image_path, verity_image_path,
