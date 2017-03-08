@@ -296,8 +296,7 @@ my_ldlibs := $(filter $(my_allowed_ldlibs),$(my_ldlibs))
 endif
 
 ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
-  my_all_ndk_libraries := \
-      $(NDK_MIGRATED_LIBS) $(addprefix lib,$(NDK_PREBUILT_SHARED_LIBRARIES))
+  my_all_ndk_libraries := $(NDK_STUB_LIBS)
   my_ndk_shared_libraries := \
       $(filter $(my_all_ndk_libraries),\
         $(my_shared_libraries) $(my_system_shared_libraries))
@@ -1517,7 +1516,7 @@ my_system_shared_libraries_fullpath := \
 # lists and use addprefix.
 my_ndk_shared_libraries_fullpath := \
     $(foreach _lib,$(my_ndk_shared_libraries),\
-        $(if $(filter $(NDK_MIGRATED_LIBS),$(_lib)),\
+        $(if $(filter $(NDK_STUB_LIBS),$(_lib)),\
             $(my_built_ndk_libs)/$(_lib)$(so_suffix),\
             $(my_ndk_sysroot_lib)/$(_lib)$(so_suffix)))
 
@@ -1682,7 +1681,7 @@ my_ldflags := $(filter-out -l%,$(my_ldlib_flags))
 ifndef LOCAL_IS_HOST_MODULE
 my_allowed_ldlibs :=
 ifneq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
-  my_allowed_ldlibs := $(addprefix -l,$(NDK_PREBUILT_SHARED_LIBRARIES))
+    my_allowed_ldlibs := $(NDK_STUB_LIBS:lib%=-l%)
 endif
 
 my_bad_ldlibs := $(filter-out $(my_allowed_ldlibs),$(my_ldlibs))
