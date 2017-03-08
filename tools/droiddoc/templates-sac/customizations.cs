@@ -356,6 +356,7 @@ def:custom_footerlinks() ?>
   <p>
     <a href="<?cs var:toroot ?>source/index.html">About Android</a>&nbsp;&nbsp;|&nbsp;
     <a href="<?cs var:toroot ?>source/community.html">Community</a>&nbsp;&nbsp;|&nbsp;
+    <a href="<?cs var:toroot ?>source/code_of_conduct.html">Code of Conduct</a>&nbsp;&nbsp;&nbsp;
     <a href="<?cs var:toroot ?>legal.html">Legal</a>&nbsp;&nbsp;|&nbsp;
   </p><?cs 
 /def ?>
