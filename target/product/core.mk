@@ -51,6 +51,8 @@ PRODUCT_PACKAGES += \
     libpac \
     PrintSpooler \
     PrintRecommendationService \
+    PrototypeTimeZoneUpdaterApp \
+    DemoTimeZoneDataApp \
     ProxyHandler \
     QuickSearchBox \
     Settings \
