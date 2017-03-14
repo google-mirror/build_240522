@@ -70,6 +70,22 @@ $(gen): frameworks/base/docs/docs-redirect-index.html
 	@cp -f $< $@
 endif
 
+ndk_doxyfile := frameworks/native/docs/Doxyfile
+ndk_doxygen_out := $(OUT_NDK_DOCS)
+ndk_headers := $(SOONG_OUT_DIR)/ndk/sysroot/usr/include
+$(ndk_doxygen_out)/index.html: $(ndk_doxyfile) ndk
+	@mkdir -p $(ndk_doxygen_out)
+	@echo "Generating NDK docs to $(ndk_doxygen_out)"
+	@( cat $(ndk_doxyfile); \
+		echo "INPUT=$(ndk_headers)"; \
+		echo "HTML_OUTPUT=$(ndk_doxygen_out)" \
+	) | doxygen -
+
+ndk-docs: $(ndk_doxygen_out)/index.html
+.PHONY: ndk-docs
+
+ALL_DOCS += ndk-docs
+
 # -----------------------------------------------------------------
 # default.prop
 INSTALLED_DEFAULT_PROP_TARGET := $(TARGET_ROOT_OUT)/default.prop
