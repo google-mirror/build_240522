@@ -14,4 +14,10 @@
 
 
 .PHONY: device-tests
-device-tests: $(COMPATIBILITY.device-tests.FILES)
+device-tests-zip := device-tests.zip
+$(device-tests-zip): $(COMPATIBILITY.device-tests.FILES) $(SOONG_ZIP)
+	$(hide) find $(HOST_OUT_TESTCASES) $(TARGET_OUT_TESTCASES) | sort >$(OUT_DIR)/$@.list
+	$(hide) $(SOONG_ZIP) -d -o $(OUT_DIR)/$@ -C $(dir $@) -l $(OUT_DIR)/$@.list
+
+device-tests: $(device-tests-zip)
+$(call dist-for-goals, device-tests, $(device-tests-zip))
