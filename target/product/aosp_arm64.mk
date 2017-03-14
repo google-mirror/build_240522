@@ -23,6 +23,8 @@
 # Consider removing this after RIL support is provided in ranchu.
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
 
+PRODUCT_PACKAGES := libhello libhellow-fwk-ext libworld libworld-fwk-ext libworld-vnd-ext
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
