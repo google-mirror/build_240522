@@ -13,4 +13,10 @@
 # limitations under the License.
 
 .PHONY: general-tests
-device-tests: $(COMPATIBILITY.general-tests.FILES)
+general-tests-zip := general-tests.zip
+$(general-tests-zip): $(COMPATIBILITY.general-tests.FILES) $(SOONG_ZIP)
+	$(hide) find $(HOST_OUT_TESTCASES) $(TARGET_OUT_TESTCASES) | sort >$@.list
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
+
+general-tests: $(general-tests-zip)
+$(call dist-for-goals, general-tests, $(general-tests-zip))
