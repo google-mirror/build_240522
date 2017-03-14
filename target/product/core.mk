@@ -31,6 +31,7 @@ PRODUCT_PACKAGES += \
     CaptivePortalLogin \
     CertInstaller \
     Contacts \
+    DemoTimeZoneDataApp \
     DeskClock \
     DocumentsUI \
     DownloadProviderUi \
@@ -58,6 +59,7 @@ PRODUCT_PACKAGES += \
     StorageManager \
     Telecom \
     TeleService \
+    TimeZoneUpdater \
     VpnDialogs \
     MmsService
 
