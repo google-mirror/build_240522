@@ -198,6 +198,15 @@ ifeq ($(AB_OTA_UPDATER),true)
   endif
 endif
 
+# Check BOARD_VNDK_VERSION
+BOARD_VNDK_VERSION ?=
+.KATI_READONLY := BOARD_VNDK_VERSION
+ifdef BOARD_VNDK_VERSION
+  ifneq ($(BOARD_VNDK_VERSION),current)
+    $(error BOARD_VNDK_VERSION: Only "current" is implemented)
+  endif
+endif
+
 # ---------------------------------------------------------------
 # Set up configuration for target machine.
 # The following must be set:
