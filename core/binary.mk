@@ -1738,7 +1738,12 @@ $(LOCAL_INSTALLED_MODULE): | $(installed_static_library_notice_file_targets)
 # Export includes
 ###########################################################
 export_includes := $(intermediates)/export_includes
-$(export_includes): PRIVATE_EXPORT_C_INCLUDE_DIRS := $(my_export_c_include_dirs)
+# Soong includes -I as necessary (or -isystem in a few cases)
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+$(export_includes): PRIVATE_EXPORT_CFLAGS := $(my_export_c_include_dirs)
+else
+$(export_includes): PRIVATE_EXPORT_CFLAGS := $(foreach d,$(my_export_c_include_dirs),-I $(d))
+endif
 # Headers exported by whole static libraries are also exported by this library.
 export_include_deps := $(strip \
    $(foreach l,$(my_whole_static_libraries), \
@@ -1762,9 +1767,7 @@ $(export_includes) : $(my_export_c_include_deps) $(my_generated_sources) $(expor
 	@echo Export includes file: $< -- $@
 	$(hide) mkdir -p $(dir $@) && rm -f $@.tmp && touch $@.tmp
 ifdef my_export_c_include_dirs
-	$(hide) for d in $(PRIVATE_EXPORT_C_INCLUDE_DIRS); do \
-	        echo "-I $$d" >> $@.tmp; \
-	        done
+	$(hide) echo "$(PRIVATE_EXPORT_CFLAGS)" >>$@.tmp
 endif
 ifdef export_include_deps
 	$(hide) for f in $(PRIVATE_REEXPORTED_INCLUDES); do \

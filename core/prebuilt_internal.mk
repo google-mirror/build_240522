@@ -126,14 +126,17 @@ else  # my_strip_module and my_pack_module_relocations not true
 
 ifdef prebuilt_module_is_a_library
 export_includes := $(intermediates)/export_includes
-$(export_includes): PRIVATE_EXPORT_C_INCLUDE_DIRS := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
+# Soong includes -I as necessary (or -isystem in a few cases)
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+$(export_includes): PRIVATE_EXPORT_CFLAGS := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
+else
+$(export_includes): PRIVATE_EXPORT_CFLAGS := $(foreach d,$(LOCAL_EXPORT_C_INCLUDE_DIRS),-I $(d))
+endif
 $(export_includes): $(LOCAL_EXPORT_C_INCLUDE_DEPS)
 	@echo Export includes file: $< -- $@
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 ifdef LOCAL_EXPORT_C_INCLUDE_DIRS
-	$(hide) for d in $(PRIVATE_EXPORT_C_INCLUDE_DIRS); do \
-	        echo "-I $$d" >> $@; \
-	        done
+	$(hide) echo "$(PRIVATE_EXPORT_CFLAGS)" >$@
 else
 	$(hide) touch $@
 endif
