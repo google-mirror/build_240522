@@ -1404,7 +1404,7 @@ $(my_link_type): PRIVATE_WARN_TYPES :=
 $(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk
 else ifdef LOCAL_USE_VNDK
 $(my_link_type): PRIVATE_LINK_TYPE := native:vendor
-$(my_link_type): PRIVATE_WARN_TYPES :=
+$(my_link_type): PRIVATE_WARN_TYPES := native:ndk native:platform# TODO: remove
 $(my_link_type): PRIVATE_ALLOWED_TYPES := native:vendor
 else
 $(my_link_type): PRIVATE_LINK_TYPE := native:platform
