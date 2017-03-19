@@ -609,4 +609,7 @@ endif
 ## NOTICE files
 ###########################################################
 
+# llndk modules are just compilation stubs
+ifeq ($(filter %.llndk,$(LOCAL_MODULE)),)
 include $(BUILD_NOTICE_FILE)
+endif
