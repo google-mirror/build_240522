@@ -1402,7 +1402,7 @@ my_warn_types :=
 my_allowed_types := native:ndk
 else ifdef LOCAL_USE_VNDK
 my_link_type := native:vendor
-my_warn_types :=
+my_warn_types := native:ndk native:platform# TODO: remove
 my_allowed_types := native:vendor
 else
 my_link_type := native:platform
