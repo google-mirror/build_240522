@@ -14,13 +14,21 @@ ifeq ($(LOCAL_MODULE_CLASS),GYP)
   notice_file :=
 endif
 
-# ndk stub libraries are stubs, don't get installed, and don't need
+# ndk/llndk stub libraries are stubs, don't get installed, and don't need
 # NOTICE files.
 ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   ifneq ($(filter $(SOONG_OUT_DIR)/ndk/%,$(LOCAL_MODULE_PATH)),)
     # Sanity check
     ifeq ($(findstring .ndk.,$(LOCAL_MODULE)),)
       $(call pretty-error,Unexpected module in $(SOONG_OUT_DIR)/ndk/)
+    endif
+    notice_file :=
+  endif
+
+  ifneq ($(filter %.llndk,$(LOCAL_MODULE)),)
+    # Sanity check
+    ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
+      $(call pretty-error,llndk modules must be uninstallable)
     endif
     notice_file :=
   endif
