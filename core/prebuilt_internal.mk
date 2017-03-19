@@ -154,6 +154,12 @@ endif  # prebuilt_module_is_a_library
 ifdef LOCAL_INSTALLED_MODULE
 ifdef LOCAL_SHARED_LIBRARIES
 my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
+
+ifneq ($(LOCAL_USE_VNDK),)
+  my_shared_libraries := $(foreach lib,$(my_shared_libraries),\
+      $(if $(filter $(VNDK_LIBRARIES),$(lib)),$(lib).vndk,$(lib)))
+endif
+
 # Extra shared libraries introduced by LOCAL_CXX_STL.
 include $(BUILD_SYSTEM)/cxx_stl_setup.mk
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \

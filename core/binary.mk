@@ -522,6 +522,11 @@ ifneq ($(LOCAL_USE_VNDK),)
       $(if $(filter $(LLNDK_LIBRARIES),$(lib)),$(lib).llndk,$(lib)))
   my_system_shared_libraries := $(foreach lib,$(my_system_shared_libraries),\
       $(if $(filter $(LLNDK_LIBRARIES),$(lib)),$(lib).llndk,$(lib)))
+
+  my_shared_libraries := $(foreach lib,$(my_shared_libraries),\
+      $(if $(filter $(VNDK_LIBRARIES),$(lib)),$(lib).vndk,$(lib)))
+  my_system_shared_libraries := $(foreach lib,$(my_system_shared_libraries),\
+      $(if $(filter $(VNDK_LIBRARIES),$(lib)),$(lib).vndk,$(lib)))
 endif
 
 ###########################################################

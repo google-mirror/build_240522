@@ -760,6 +760,10 @@ ifdef FULL_BUILD
   product_MODULES := $(filter-out $(foreach p, $(product_MODULES), \
       $(PACKAGES.$(p).OVERRIDES)), $(product_MODULES))
 
+  ifdef BOARD_VNDK_VERSION
+    product_MODULES += $(addsuffix .vndk,$(VNDK_LIBRARIES))
+  endif
+
   # Resolve the :32 :64 module name
   modules_32 := $(patsubst %:32,%,$(filter %:32, $(product_MODULES)))
   modules_64 := $(patsubst %:64,%,$(filter %:64, $(product_MODULES)))
