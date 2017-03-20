@@ -1386,6 +1386,15 @@ ifdef LOCAL_SDK_VERSION
 $(my_link_type): PRIVATE_LINK_TYPE := native:ndk
 $(my_link_type): PRIVATE_WARN_TYPES :=
 $(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk
+else ifdef LOCAL_USE_VNDK
+$(my_link_type): PRIVATE_LINK_TYPE := native:vndk
+# ndk, at least on vendor, is probably fine? we'd at least want to understand the installation story though
+$(my_link_type): PRIVATE_WARN_TYPES := native:ndk
+$(my_link_type): PRIVATE_ALLOWED_TYPES := native:vndk native:llndk
+else ifneq ($(filter %.llndk,$(LOCAL_MODULE)),)
+$(my_link_type): PRIVATE_LINK_TYPE := native:llndk
+$(my_link_type): PRIVATE_WARN_TYPES :=
+$(my_link_type): PRIVATE_ALLOWED_TYPES := native:llndk
 else
 $(my_link_type): PRIVATE_LINK_TYPE := native:platform
 $(my_link_type): PRIVATE_WARN_TYPES :=

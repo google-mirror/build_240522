@@ -139,7 +139,15 @@ else
 endif
 
 my_link_type := $(intermediates)/link_type
-$(my_link_type): PRIVATE_LINK_TYPE := native:$(if $(LOCAL_SDK_VERSION),ndk,platform)
+ifdef LOCAL_SDK_VERSION
+$(my_link_type): PRIVATE_LINK_TYPE := native:ndk
+else ifdef LOCAL_USE_VNDK
+$(my_link_type): PRIVATE_LINK_TYPE := native:vndk
+else ifneq ($(filter %.llndk,$(LOCAL_MODULE)),)
+$(my_link_type): PRIVATE_LINK_TYPE := native:llndk
+else
+$(my_link_type): PRIVATE_LINK_TYPE := native:platform
+endif
 $(eval $(call link-type-partitions,$(my_link_type)))
 $(my_link_type):
 	@echo Check module type: $@
