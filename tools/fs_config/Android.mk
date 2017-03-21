@@ -124,7 +124,9 @@ LOCAL_MODULE_CLASS := ETC
 include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
-	$< -D -o $@
+	@rm -f $(dir $@)/[0-9]-$(notdir $@).*
+	$< -D -S -o $@
+	@cat $(dir $@)/[0-9]-$(notdir $@).* >$@
 
 ##################################
 # Generate the system/etc/fs_config_files binary file for the target
@@ -136,7 +138,9 @@ LOCAL_MODULE_CLASS := ETC
 include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
-	$< -F -o $@
+	@rm -f $(dir $@)/[0-9]-$(notdir $@).*
+	$< -F -S -o $@
+	@cat $(dir $@)/[0-9]-$(notdir $@).* >$@
 
 # The newer passwd/group targets are only generated if you
 # use the new TARGET_FS_CONFIG_GEN method.
