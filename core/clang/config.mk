@@ -76,6 +76,10 @@ LOCAL_CLANG_EXCEPTION_PROJECTS = \
   device/lge/bullhead/ \
   external/gentoo/integration/ \
   hardware/qcom/ \
+  test/vts/hals/camera/bullhead/ \
+  test/vts/hals/etc/libqdutils/ \
+  vendor/huawei/angler/ \
+  vendor/lge/bullhead/ \
   $(INTERNAL_LOCAL_CLANG_EXCEPTION_PROJECTS)
 
 # Find $1 in the exception project list.
