@@ -529,14 +529,14 @@ jack_dictionary := $(intermediates.COMMON)/jack_dictionary
 my_support_library_sdk_raise :=
 ifneq (,$(filter android-support-%,$(LOCAL_STATIC_JAVA_LIBRARIES)))
 ifdef LOCAL_SDK_VERSION
-ifdef TARGET_BUILD_APPS
 ifeq (,$(filter current system_current test_current, $(LOCAL_SDK_VERSION)))
+ifdef TARGET_BUILD_APPS
   my_support_library_sdk_raise := $(call java-lib-files, sdk_vcurrent)
-endif
 else
   # For platform build, we can't just raise to the "current" SDK,
   # that would break apps that use APIs removed from the current SDK.
   my_support_library_sdk_raise := $(call java-lib-files,$(TARGET_DEFAULT_JAVA_LIBRARIES))
+endif
 endif
 endif
 endif
