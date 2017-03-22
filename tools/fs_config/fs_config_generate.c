@@ -41,10 +41,12 @@ static const struct fs_path_config android_device_files[] = {
     {0000, AID_ROOT, AID_ROOT, 0, "system/etc/fs_config_dirs"},
     {0000, AID_ROOT, AID_ROOT, 0, "vendor/etc/fs_config_dirs"},
     {0000, AID_ROOT, AID_ROOT, 0, "oem/etc/fs_config_dirs"},
+    {0000, AID_ROOT, AID_ROOT, 0, "odm/etc/fs_config_dirs"},
 #endif
     {0000, AID_ROOT, AID_ROOT, 0, "system/etc/fs_config_files"},
     {0000, AID_ROOT, AID_ROOT, 0, "vendor/etc/fs_config_files"},
     {0000, AID_ROOT, AID_ROOT, 0, "oem/etc/fs_config_files"},
+    {0000, AID_ROOT, AID_ROOT, 0, "odm/etc/fs_config_files"},
 };
 #endif
 
