@@ -138,6 +138,126 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
 	$< -F -o $@
 
+##################################
+# Generate the system/etc/fs_config_dirs binary file for the system.img target
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs.system
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+ifeq ($(TARGET_OUT_ODM),) # until supported by build
+	$< -D -P -vendor,-oem -o $@
+else
+	$< -D -P -vendor,-oem,-odm -o $@
+endif
+
+##################################
+# Generate the system/etc/fs_config_files binary file for the system.img target
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files.system
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+ifeq ($(TARGET_OUT_ODM),) # until supported by build
+	$< -F -P -vendor,-oem -o $@
+else
+	$< -F -P -vendor,-oem,-odm -o $@
+endif
+
+##################################
+# Generate the vendor/etc/fs_config_dirs binary file for the vendor.img target
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs.vendor
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -D -P vendor -o $@
+
+##################################
+# Generate the vendor/etc/fs_config_files binary file for the vendor.img target
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files.vendor
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -F -P vendor -o $@
+
+##################################
+# Generate the oem/etc/fs_config_dirs binary file for the oem.img target
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs.oem
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -D -P oem -o $@
+
+##################################
+# Generate the oem/etc/fs_config_files binary file for the oem.img target
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files.oem
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -F -P oem -o $@
+
+##################################
+# Generate the odm/etc/fs_config_dirs binary file for the odm.img target
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable
+ifneq ($(TARGET_OUT_ODM),) # until supported by build
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs.odm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -D -P odm -o $@
+
+##################################
+# Generate the odm/etc/fs_config_files binary file for the odm.img target
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files.odm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := $(basename $(LOCAL_MODULE))
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $(dir $@)
+	$< -F -P odm -o $@
+endif # !TARGET_OUT_ODM until supported by build
+
 # The newer passwd/group targets are only generated if you
 # use the new TARGET_FS_CONFIG_GEN method.
 ifneq ($(TARGET_FS_CONFIG_GEN),)
