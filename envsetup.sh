@@ -569,50 +569,43 @@ function lunch()
         then
             selection=${LUNCH_MENU_CHOICES[$(($answer-1))]}
         fi
-    elif (echo -n $answer | grep -q -e "^[^\-][^\-]*-[^\-][^\-]*$")
-    then
+    else
         selection=$answer
-    fi
-
-    if [ -z "$selection" ]
-    then
-        echo
-        echo "Invalid lunch combo: $answer"
-        return 1
     fi
 
     export TARGET_BUILD_APPS=
 
-    local variant=$(echo -n $selection | sed -e "s/^[^\-]*-//")
-    check_variant $variant
-    if [ $? -ne 0 ]
-    then
-        echo
-        echo "** Invalid variant: '$variant'"
-        echo "** Must be one of ${VARIANT_CHOICES[@]}"
-        variant=
+    local product variant_and_version variant version
+
+    product=${selection%%-*} # Trim everything after first dash
+    variant_and_version=${selection#*-} # Trim everything up to first dash
+    if [ "$variant_and_version" != "$selection" ]; then
+	variant=${variant_and_version%%-*}
+	if [ "$variant" != "$variant_and_version" ]; then
+	    version=${variant_and_version#*-}
+	fi
     fi
 
-    local product=$(echo -n $selection | sed -e "s/-.*$//")
-    TARGET_PRODUCT=$product \
-    TARGET_BUILD_VARIANT=$variant \
-    build_build_var_cache
-    if [ $? -ne 0 ]
+    if [ -z "$product" ]
     then
         echo
-        echo "** Don't have a product spec for: '$product'"
-        echo "** Do you have the right repo manifest?"
-        product=
-    fi
-
-    if [ -z "$product" -o -z "$variant" ]
-    then
-        echo
+        echo "Invalid lunch combo: $selection"
         return 1
     fi
 
-    export TARGET_PRODUCT=$product
-    export TARGET_BUILD_VARIANT=$variant
+    TARGET_PRODUCT=$product \
+    TARGET_BUILD_VARIANT=$variant \
+    TARGET_PLATFORM_VERSION=$version \
+    build_build_var_cache
+    if [ $? -ne 0 ]
+    then
+	echo
+        return 1
+    fi
+
+    export TARGET_PRODUCT=$(get_build_var TARGET_PRODUCT)
+    export TARGET_BUILD_VARIANT=$(get_build_var TARGET_BUILD_VARIANT)
+    export TARGET_PLATFORM_VERSION=$(get_build_var TARGET_PLATFORM_VERSION)
     export TARGET_BUILD_TYPE=release
 
     echo
@@ -1671,3 +1664,36 @@ done
 unset f
 
 addcompletions
+
+if [ "$1" = "test" ]; then (
+    unset TARGET_PRODUCT TARGET_BUILD_VARIANT TARGET_PLATFORM_VERSION
+
+    function check_lunch
+    (
+	echo lunch $1
+	lunch $1 > /dev/null 2> /dev/null
+	[ "$TARGET_PRODUCT" = "$2" ] || ( echo "lunch $1: expected TARGET_PRODUCT='$2', got '$TARGET_PRODUCT'" && exit 1 )
+	[ "$TARGET_BUILD_VARIANT" = "$3" ] || ( echo "lunch $1: expected TARGET_BUILD_VARIANT='$3', got '$TARGET_BUILD_VARIANT'" && exit 1 )
+	[ "$TARGET_PLATFORM_VERSION" = "$4" ] || ( echo "lunch $1: expected TARGET_PLATFORM_VERSION='$4', got '$TARGET_PLATFORM_VERSION'" && exit 1 )
+    )
+
+    default_version=$(get_build_var DEFAULT_PLATFORM_VERSION)
+    valid_version=PPR1
+
+    # lunch tests
+    check_lunch "aosp_arm64"                                "aosp_arm64" "eng"       "$default_version"
+    check_lunch "aosp_arm64-userdebug"                      "aosp_arm64" "userdebug" "$default_version"
+    check_lunch "aosp_arm64-userdebug-$valid_version"       "aosp_arm64" "userdebug" "$valid_version"
+    check_lunch "abc"                                       "" "" ""
+    check_lunch "aosp_arm64-abc"                            "" "" ""
+    check_lunch "aosp_arm64-userdebug-abc"                  "" "" ""
+    check_lunch "aosp_arm64-abc-$valid_version"             "" "" ""
+    check_lunch "abc-userdebug-$valid_version"              "" "" ""
+    check_lunch "-"                                         "" "" ""
+    check_lunch "--"                                        "" "" ""
+    check_lunch "-userdebug"                                "" "" ""
+    check_lunch "-userdebug-"                               "" "" ""
+    check_lunch "-userdebug-$valid_version"                 "" "" ""
+    check_lunch "aosp_arm64-userdebug-$valid_version-"      "" "" ""
+    check_lunch "aosp_arm64-userdebug-$valid_version-abc"   "" "" ""
+); fi
