@@ -25,6 +25,12 @@ static const struct fs_path_config android_device_dirs[] = {
     {00555, AID_ROOT, AID_SYSTEM, 0, "system/etc"},
     {00555, AID_ROOT, AID_SYSTEM, 0, "vendor/etc"},
     {00555, AID_ROOT, AID_SYSTEM, 0, "oem/etc"},
+    {00755, AID_SYSTEM, AID_ROOT, 0, "system/oem/etc"},
+    {00755, AID_SYSTEM, AID_ROOT, 0, "system/vendor/etc"},
+    {00755, AID_SYSTEM, AID_ROOT, 0, "data/misc"},
+    {00755, AID_SYSTEM, AID_ROOT, 0, "oem/data/misc"},
+    {00755, AID_SYSTEM, AID_ROOT, 0, "vendor/data/misc"},
+    {00555, AID_SYSTEM, AID_ROOT, 0, "etc"},
 };
 
 static const struct fs_path_config android_device_files[] = {
@@ -34,4 +40,10 @@ static const struct fs_path_config android_device_files[] = {
     {00444, AID_ROOT, AID_SYSTEM, 0, "system/etc/fs_config_files"},
     {00444, AID_ROOT, AID_SYSTEM, 0, "vendor/etc/fs_config_files"},
     {00444, AID_ROOT, AID_SYSTEM, 0, "oem/etc/fs_config_files"},
+    {00644, AID_SYSTEM, AID_ROOT, 0, "system/vendor/etc/fs_config_dirs"},
+    {00644, AID_SYSTEM, AID_ROOT, 0, "system/oem/etc/fs_config_dirs"},
+    {00644, AID_SYSTEM, AID_ROOT, 0, "system/vendor/etc/fs_config_files"},
+    {00644, AID_SYSTEM, AID_ROOT, 0, "system/oem/etc/fs_config_files"},
+    {00644, AID_SYSTEM, AID_ROOT, 0, "etc/fs_config_files"},
+    {00666, AID_ROOT, AID_SYSTEM, 0, "data/misc/oem"},
 };
