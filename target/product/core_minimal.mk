@@ -74,6 +74,7 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
     resize2fs \
+    rs2spirv \
     tune2fs \
     screencap \
     sensorservice \
