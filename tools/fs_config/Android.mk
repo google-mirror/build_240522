@@ -195,3 +195,39 @@ ANDROID_FS_CONFIG_H :=
 my_fs_config_h :=
 fs_config_generate_bin :=
 my_gen_oem_aid :=
+
+test_module_prefix := fs_config-
+
+# -----------------------------------------------------------------------------
+# Unit tests.
+# -----------------------------------------------------------------------------
+
+test_c_flags := \
+    -fstack-protector-all \
+    -g \
+    -Wall \
+    -Wextra \
+    -Werror \
+    -fno-builtin \
+    -DANDROID_FILESYSTEM_CONFIG='"android_filesystem_config_test_data.h"'
+
+test_src_files := \
+    fs_config_test.cpp
+
+################################## test executable
+include $(CLEAR_VARS)
+LOCAL_MODULE := fs_config_generate_test
+LOCAL_SRC_FILES := fs_config_generate.c
+LOCAL_SHARED_LIBRARIES := libcutils
+LOCAL_CFLAGS := $(test_c_flags)
+LOCAL_MODULE_RELATIVE_PATH := $(test_module_prefix)unit-tests
+LOCAL_GTEST := false
+include $(BUILD_HOST_NATIVE_TEST)
+
+################################## gTest tool
+include $(CLEAR_VARS)
+LOCAL_MODULE := $(test_module_prefix)unit-tests
+LOCAL_CFLAGS += $(test_c_flags) -DHOST
+LOCAL_SHARED_LIBRARIES := liblog libcutils libbase
+LOCAL_SRC_FILES := $(test_src_files)
+include $(BUILD_HOST_NATIVE_TEST)
