@@ -117,6 +117,8 @@ static const char vendor_str[] = "vendor/";
 static const char vendor_alt_str[] = "system/vendor/";
 static const char oem_str[] = "oem/";
 static const char oem_alt_str[] = "system/oem/";
+static const char odm_str[] = "odm/";
+static const char odm_alt_str[] = "system/odm/";
 
 TEST(fs_conf_test, system_dirs) {
   std::vector<fs_path_config> dirs;
@@ -125,13 +127,15 @@ TEST(fs_conf_test, system_dirs) {
     if (strncmp(config->prefix, vendor_str, strlen(vendor_str)) &&
         strncmp(config->prefix, vendor_alt_str, strlen(vendor_alt_str)) &&
         strncmp(config->prefix, oem_str, strlen(oem_str)) &&
-        strncmp(config->prefix, oem_alt_str, strlen(oem_alt_str))) {
+        strncmp(config->prefix, oem_alt_str, strlen(oem_alt_str)) &&
+        strncmp(config->prefix, odm_str, strlen(oem_str)) &&
+        strncmp(config->prefix, odm_alt_str, strlen(oem_alt_str))) {
       dirs.emplace_back(*config);
     }
     ++config;
   }
   confirm(popenToString(android::base::StringPrintf(
-              "%s -D -P -vendor,-oem", fs_config_generate_command)),
+              "%s -D -P -vendor,-oem,-odm", fs_config_generate_command)),
           &dirs[0], dirs.size());
 }
 
@@ -165,6 +169,21 @@ TEST(fs_conf_test, oem_dirs) {
           &dirs[0], dirs.size());
 }
 
+TEST(fs_conf_test, odm_dirs) {
+  std::vector<fs_path_config> dirs;
+  const fs_path_config* config = android_device_dirs;
+  for (size_t num = ARRAY_SIZE(android_device_dirs); num; --num) {
+    if (!strncmp(config->prefix, odm_str, strlen(odm_str)) ||
+        !strncmp(config->prefix, odm_alt_str, strlen(odm_alt_str))) {
+      dirs.emplace_back(*config);
+    }
+    ++config;
+  }
+  confirm(popenToString(android::base::StringPrintf(
+              "%s -D -P odm", fs_config_generate_command)),
+          &dirs[0], dirs.size());
+}
+
 TEST(fs_conf_test, system_files) {
   std::vector<fs_path_config> files;
   const fs_path_config* config = android_device_files;
@@ -172,13 +191,15 @@ TEST(fs_conf_test, system_files) {
     if (strncmp(config->prefix, vendor_str, strlen(vendor_str)) &&
         strncmp(config->prefix, vendor_alt_str, strlen(vendor_alt_str)) &&
         strncmp(config->prefix, oem_str, strlen(oem_str)) &&
-        strncmp(config->prefix, oem_alt_str, strlen(oem_alt_str))) {
+        strncmp(config->prefix, oem_alt_str, strlen(oem_alt_str)) &&
+        strncmp(config->prefix, odm_str, strlen(odm_str)) &&
+        strncmp(config->prefix, odm_alt_str, strlen(odm_alt_str))) {
       files.emplace_back(*config);
     }
     ++config;
   }
   confirm(popenToString(android::base::StringPrintf(
-              "%s -F -P -vendor,-oem", fs_config_generate_command)),
+              "%s -F -P -vendor,-oem,-odm", fs_config_generate_command)),
           &files[0], files.size());
 }
 
@@ -209,5 +230,20 @@ TEST(fs_conf_test, oem_files) {
   }
   confirm(popenToString(android::base::StringPrintf(
               "%s -F -P oem", fs_config_generate_command)),
+          &files[0], files.size());
+}
+
+TEST(fs_conf_test, odm_files) {
+  std::vector<fs_path_config> files;
+  const fs_path_config* config = android_device_files;
+  for (size_t num = ARRAY_SIZE(android_device_files); num; --num) {
+    if (!strncmp(config->prefix, odm_str, strlen(odm_str)) ||
+        !strncmp(config->prefix, odm_alt_str, strlen(odm_alt_str))) {
+      files.emplace_back(*config);
+    }
+    ++config;
+  }
+  confirm(popenToString(android::base::StringPrintf(
+              "%s -F -P odm", fs_config_generate_command)),
           &files[0], files.size());
 }
