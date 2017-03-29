@@ -165,6 +165,7 @@ HOST_PREBUILT_TAG := $(BUILD_OS)-$(HOST_PREBUILT_ARCH)
 
 # TARGET_COPY_OUT_* are all relative to the staging directory, ie PRODUCT_OUT.
 # Define them here so they can be used in product config files.
+TARGET_COPY_OUT_ASAN := asan
 TARGET_COPY_OUT_SYSTEM := system
 TARGET_COPY_OUT_SYSTEM_OTHER := system_other
 TARGET_COPY_OUT_DATA := data
@@ -393,7 +394,7 @@ TARGET_OUT_COMMON_GEN := $(TARGET_COMMON_OUT_ROOT)/gen
 
 TARGET_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_SYSTEM)
 ifneq ($(filter address,$(SANITIZE_TARGET)),)
-target_out_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_DATA)
+target_out_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_DATA)/$(TARGET_COPY_OUT_ASAN)/system
 else
 target_out_shared_libraries_base := $(TARGET_OUT)
 endif
@@ -473,7 +474,7 @@ TARGET_OUT_CACHE := $(PRODUCT_OUT)/cache
 
 TARGET_OUT_VENDOR := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)
 ifneq ($(filter address,$(SANITIZE_TARGET)),)
-target_out_vendor_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_DATA)/vendor
+target_out_vendor_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_DATA)/$(TARGET_COPY_OUT_ASAN)/vendor
 else
 target_out_vendor_shared_libraries_base := $(TARGET_OUT_VENDOR)
 endif
