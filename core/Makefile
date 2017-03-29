@@ -763,7 +763,7 @@ $(TARGET_OUT_ETC)/security/otacerts.zip: $(addsuffix .x509.pem,$(DEFAULT_KEY_CER
 # uses the AB updater. We use the same key as otacerts but in RSA public key
 # format.
 ifeq ($(AB_OTA_UPDATER),true)
-ifeq ($(BRILLO),)
+ifneq ($(PRODUCT_IOT),true)
 ALL_DEFAULT_INSTALLED_MODULES += $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem
 $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem: $(addsuffix .x509.pem,$(DEFAULT_KEY_CERT_PAIR))
 	$(hide) rm -f $@
