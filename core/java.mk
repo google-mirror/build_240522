@@ -492,13 +492,8 @@ else
 full_classes_emma_jar := $(full_classes_jarjar_jar)
 endif
 
-# Keep a copy of the jar just before proguard processing.
 # TODO: this should depend on full_classes_emma_jar once coverage works again
-$(full_classes_jar): $(full_classes_jarjar_jar)
-	@echo Copying: $@
-	$(hide) cp -fp $< $@
-
-$(call define-jar-to-toc-rule, $(full_classes_jar))
+full_classes_pre_proguard_jar := $(full_classes_jarjar_jar)
 
 # Run proguard if necessary
 ifdef LOCAL_PROGUARD_ENABLED
@@ -629,12 +624,18 @@ endif
 $(full_classes_proguard_jar): PRIVATE_PROGUARD_INJAR_FILTERS := $(proguard_injar_filters)
 $(full_classes_proguard_jar): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
 $(full_classes_proguard_jar): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
-$(full_classes_proguard_jar) : $(full_classes_jar) $(extra_input_jar) $(my_support_library_sdk_raise) $(common_proguard_flag_files) $(proguard_flag_files) | $(PROGUARD)
+$(full_classes_proguard_jar) : $(full_classes_pre_proguard_jar) $(extra_input_jar) $(my_support_library_sdk_raise) $(common_proguard_flag_files) $(proguard_flag_files) | $(PROGUARD)
 	$(call transform-jar-to-proguard)
 
 else  # LOCAL_PROGUARD_ENABLED not defined
-full_classes_proguard_jar := $(full_classes_jar)
+full_classes_proguard_jar := $(full_classes_pre_proguard_jar)
 endif # LOCAL_PROGUARD_ENABLED defined
+
+$(full_classes_jar): $(full_classes_proguard_jar)
+	@echo Copying: $@
+	$(hide) cp -fp $< $@
+
+$(call define-jar-to-toc-rule, $(full_classes_jar))
 
 ifndef LOCAL_JACK_ENABLED
 $(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
@@ -661,7 +662,7 @@ findbugs_xml := $(intermediates.COMMON)/findbugs.xml
 $(findbugs_xml): PRIVATE_AUXCLASSPATH := $(addprefix -auxclasspath ,$(strip \
     $(call normalize-path-list,$(filter %.jar,$(full_java_libs)))))
 $(findbugs_xml): PRIVATE_FINDBUGS_FLAGS := $(LOCAL_FINDBUGS_FLAGS)
-$(findbugs_xml) : $(full_classes_jar) $(filter %.xml, $(LOCAL_FINDBUGS_FLAGS))
+$(findbugs_xml) : $(full_classes_pre_proguard_jar) $(filter %.xml, $(LOCAL_FINDBUGS_FLAGS))
 	@echo Findbugs: $@
 	$(hide) $(FINDBUGS) -textui -effort:min -xml:withMessages \
 		$(PRIVATE_AUXCLASSPATH) $(PRIVATE_FINDBUGS_FLAGS) \
