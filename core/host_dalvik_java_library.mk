@@ -120,14 +120,12 @@ $(full_classes_jarjar_jar): $(full_classes_desugar_jar) $(LOCAL_JARJAR_RULES) | 
 	@echo JarJar: $@
 	$(hide) java -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
-$(full_classes_jarjar_jar): $(full_classes_desugar_jar) | $(ACP)
-	@echo Copying: $@
-	$(hide) $(ACP) -fp $< $@
+full_classes_jarjar_jar := $(full_classes_desugar_jar)
 endif
 
-$(full_classes_jar): $(full_classes_jarjar_jar) | $(ACP)
+$(full_classes_jar): $(full_classes_jarjar_jar)
 	@echo Copying: $@
-	$(hide) $(ACP) -fp $< $@
+	$(hide) cp -fp $< $@
 
 ifeq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
 # No dex; all we want are the .class files with resources.

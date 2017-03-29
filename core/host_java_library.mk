@@ -83,9 +83,7 @@ $(full_classes_jarjar_jar): $(full_classes_compiled_jar) $(LOCAL_JARJAR_RULES) |
 	@echo JarJar: $@
 	$(hide) java -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
-$(full_classes_jarjar_jar): $(full_classes_compiled_jar) | $(ACP)
-	@echo Copying: $@
-	$(hide) $(ACP) -fp $< $@
+full_classes_jarjar_jar := $(full_classes_compiled_jar)
 endif
 
 ifeq (true,$(LOCAL_EMMA_INSTRUMENT))
@@ -102,13 +100,10 @@ endif
 # $(full_classes_emma_jar)
 $(full_classes_emma_jar) : $(full_classes_jarjar_jar) | $(EMMA_JAR)
 	$(transform-classes.jar-to-emma)
+else # LOCAL_EMMA_INSTRUMENT
+full_classes_emma_jar := $(full_classes_jarjar_jar)
+endif # LOCAL_EMMA_INSTRUMENT
 
 $(LOCAL_BUILT_MODULE) : $(full_classes_emma_jar)
 	@echo Copying: $@
-	$(hide) $(ACP) -fp $< $@
-
-else # LOCAL_EMMA_INSTRUMENT
-$(LOCAL_BUILT_MODULE) : $(full_classes_jarjar_jar) | $(ACP)
-	@echo Copying: $@
-	$(hide) $(ACP) -fp $< $@
-endif # LOCAL_EMMA_INSTRUMENT
+	$(hide) cp -fp $< $@
