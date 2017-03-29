@@ -83,9 +83,6 @@ LOCAL_BUILT_MODULE_STEM := $(strip $(LOCAL_BUILT_MODULE_STEM))
 ifeq ($(LOCAL_BUILT_MODULE_STEM),)
 $(error $(LOCAL_PATH): Target java template must define LOCAL_BUILT_MODULE_STEM)
 endif
-ifneq ($(filter classes-compiled.jar classes.jar,$(LOCAL_BUILT_MODULE_STEM)),)
-$(error LOCAL_BUILT_MODULE_STEM may not be "$(LOCAL_BUILT_MODULE_STEM)")
-endif
 
 
 ##############################################################################
@@ -117,7 +114,8 @@ emma_intermediates_dir := $(intermediates.COMMON)/emma_out
 # emma is hardcoded to use the leaf name of its input for the output file --
 # only the output directory can be changed
 full_classes_emma_jar := $(emma_intermediates_dir)/lib/$(jarjar_leaf)
-full_classes_proguard_jar := $(intermediates.COMMON)/proguard.classes.jar
+full_classes_proguard_jar := $(intermediates.COMMON)/classes.proguard.jar
+full_classes_noproguard_jar := $(intermediates.COMMON)/classes.noproguard.jar
 built_dex_intermediate := $(intermediates.COMMON)/$(built_dex_intermediate_leaf)/classes.dex
 full_classes_stubs_jar := $(intermediates.COMMON)/stubs.jar
 
@@ -630,6 +628,10 @@ $(full_classes_proguard_jar) : $(full_classes_pre_proguard_jar) $(extra_input_ja
 else  # LOCAL_PROGUARD_ENABLED not defined
 full_classes_proguard_jar := $(full_classes_pre_proguard_jar)
 endif # LOCAL_PROGUARD_ENABLED defined
+
+$(full_classes_noproguard_jar): $(full_classes_pre_proguard_jar)
+	@echo Copying: $@
+	$(hide) cp -fp $< $@
 
 $(full_classes_jar): $(full_classes_proguard_jar)
 	@echo Copying: $@
