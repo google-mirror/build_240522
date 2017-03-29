@@ -23,23 +23,23 @@ endif
 all_res_assets :=
 endif
 
-LOCAL_BUILT_MODULE_STEM := javalib.jar
-
 #################################
 include $(BUILD_SYSTEM)/configure_local_jack.mk
 #################################
 
-ifdef LOCAL_JACK_ENABLED
 ifdef LOCAL_IS_STATIC_JAVA_LIBRARY
-LOCAL_BUILT_MODULE_STEM := classes.jack
+  ifdef LOCAL_JACK_ENABLED
+    LOCAL_BUILT_MODULE_STEM := classes.jack
+  else
+    LOCAL_BUILT_MODULE_STEM := classes.jar
+  endif
+else
+  LOCAL_BUILT_MODULE_STEM := javalib.jar
+  # This file will be the one that other modules should depend on.
+  intermediates.COMMON := $(call local-intermediates-dir,COMMON)
+  common_javalib.jar := $(intermediates.COMMON)/javalib.jar
+  LOCAL_INTERMEDIATE_TARGETS += $(common_javalib.jar)
 endif
-endif
-
-intermediates.COMMON := $(call local-intermediates-dir,COMMON)
-
-# This file will be the one that other modules should depend on.
-common_javalib.jar := $(intermediates.COMMON)/javalib.jar
-LOCAL_INTERMEDIATE_TARGETS += $(common_javalib.jar)
 
 ifeq ($(LOCAL_PROGUARD_ENABLED),disabled)
   LOCAL_PROGUARD_ENABLED :=
@@ -65,16 +65,10 @@ include $(BUILD_SYSTEM)/java.mk
 #################################
 
 ifeq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
-# No dex; all we want are the .class files with resources.
-$(common_javalib.jar) : $(java_resource_sources)
-$(common_javalib.jar) : $(full_classes_jar)
-	@echo "target Static Jar: $(PRIVATE_MODULE) ($@)"
-	$(copy-file-to-target)
-
 ifdef LOCAL_JACK_ENABLED
 $(LOCAL_BUILT_MODULE) : $(full_classes_jack)
 else
-$(LOCAL_BUILT_MODULE) : $(common_javalib.jar)
+$(LOCAL_BUILT_MODULE) : $(full_classes_jar)
 endif
 	$(copy-file-to-target)
 
