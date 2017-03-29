@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Jean-Philippe Lesot <jplesot@google.com>
+Verified+1: Benoit Lamarche <benoitlamarche@google.com>
+Submitted-by: Benoit Lamarche <benoitlamarche@google.com>
+Submitted-at: Wed, 29 Mar 2017 08:49:31 +0000
+Reviewed-on: https://android-review.googlesource.com/358589
+Project: platform/build
+Branch: refs/heads/master
