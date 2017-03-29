@@ -91,10 +91,14 @@ ifeq (STATIC_LIBRARIES,$(LOCAL_MODULE_CLASS))
 endif
 endif
 
-ifeq (JAVA_LIBRARIES,$(LOCAL_IS_HOST_MODULE)$(LOCAL_MODULE_CLASS)$(filter true,$(LOCAL_UNINSTALLABLE_MODULE)))
-  prebuilt_module_is_dex_javalib := true
-else
-  prebuilt_module_is_dex_javalib :=
+prebuilt_module_is_dex_javalib :=
+ifeq (JAVA_LIBRARIES,$(LOCAL_MODULE_CLASS))
+  ifeq (,$(LOCAL_IS_HOST_MODULE)$(filter true,$(LOCAL_UNINSTALLABLE_MODULE)))
+    prebuilt_module_is_dex_javalib := true
+    LOCAL_BUILT_MODULE_STEM := javalib.jar
+  else
+    LOCAL_BUILT_MODULE_STEM := classes.jar
+  endif
 endif
 
 ifeq ($(LOCAL_MODULE_CLASS),APPS)
@@ -516,6 +520,7 @@ endif # LOCAL_IS_HOST_MODULE is not set
 
 ifneq ($(prebuilt_module_is_dex_javalib),true)
 
+ifdef LOCAL_JACK_ENABLED
 # We may be building classes.jack from a host jar for host dalvik Java library.
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_FLAGS:=$(LOCAL_JACK_FLAGS)
 $(intermediates.COMMON)/classes.jack : PRIVATE_JACK_MIN_SDK_VERSION := $(if $(strip $(LOCAL_MIN_SDK_VERSION)),$(LOCAL_MIN_SDK_VERSION),1)
@@ -530,7 +535,7 @@ $(intermediates.COMMON)/classes.jack : $(LOCAL_JACK_PLUGIN_PATH) $(my_src_jar) \
 # always rebuilt.
 $(intermediates.COMMON)/classes.dex.toc: $(intermediates.COMMON)/classes.jack
 	touch $@
-
+endif # LOCAL_JACK_ENABLED
 endif # ! prebuilt_module_is_dex_javalib
 endif # JAVA_LIBRARIES
 
