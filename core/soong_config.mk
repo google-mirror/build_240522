@@ -13,6 +13,8 @@ BINDER32BIT := true
 endif
 endif
 
+ALL_CODENAMES_JSON := ["$(subst $(comma),"$(comma)",$(PLATFORM_VERSION_ALL_CODENAMES))"]
+
 # Create soong.variables with copies of makefile settings.  Runs every build,
 # but only updates soong.variables if it changes
 SOONG_VARIABLES_TMP := $(SOONG_VARIABLES).$$$$
@@ -23,6 +25,7 @@ $(SOONG_VARIABLES): FORCE
 	echo '    "Make_suffix": "-$(TARGET_PRODUCT)",'; \
 	echo ''; \
 	echo '    "Platform_sdk_version": $(PLATFORM_SDK_VERSION),'; \
+	echo '    "Platform_version_all_codenames": $(ALL_CODENAMES_JSON),'; \
 	echo '    "Unbundled_build": $(if $(TARGET_BUILD_APPS),true,false),'; \
 	echo '    "Brillo": $(if $(BRILLO),true,false),'; \
 	echo '    "Malloc_not_svelte": $(if $(filter true,$(MALLOC_SVELTE)),false,true),'; \
