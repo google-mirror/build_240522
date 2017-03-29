@@ -83,9 +83,6 @@ LOCAL_BUILT_MODULE_STEM := $(strip $(LOCAL_BUILT_MODULE_STEM))
 ifeq ($(LOCAL_BUILT_MODULE_STEM),)
 $(error $(LOCAL_PATH): Target java template must define LOCAL_BUILT_MODULE_STEM)
 endif
-ifneq ($(filter classes-compiled.jar classes.jar,$(LOCAL_BUILT_MODULE_STEM)),)
-$(error LOCAL_BUILT_MODULE_STEM may not be "$(LOCAL_BUILT_MODULE_STEM)")
-endif
 
 
 ##############################################################################

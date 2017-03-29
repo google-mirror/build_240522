@@ -24,6 +24,8 @@ $(call record-module-type,HOST_JAVA_LIBRARY)
 include $(BUILD_SYSTEM)/host_java_library_common.mk
 #######################################
 
+LOCAL_BUILT_MODULE_STEM := classes.jar
+
 # Enable emma instrumentation only if the module asks so.
 ifeq (true,$(LOCAL_EMMA_INSTRUMENT))
 ifneq (true,$(EMMA_INSTRUMENT))
