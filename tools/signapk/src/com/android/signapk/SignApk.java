@@ -39,8 +39,14 @@ import com.android.apksig.DefaultApkSignerEngine;
 import com.android.apksig.apk.ApkUtils;
 import com.android.apksig.apk.MinSdkVersionException;
 import com.android.apksig.util.DataSink;
+import com.android.apksig.util.DataSinks;
 import com.android.apksig.util.DataSources;
 import com.android.apksig.zip.ZipFormatException;
+import com.android.apksig.internal.zip.CentralDirectoryRecord;
+import com.android.apksig.internal.zip.EocdRecord;
+import com.android.apksig.internal.zip.LocalFileRecord;
+import com.android.apksig.internal.zip.ZipUtils;
+import com.android.apksig.internal.zip.ZipUtils.DeflateResult;
 
 import java.io.Console;
 import java.io.BufferedReader;
@@ -59,6 +65,7 @@ import java.lang.reflect.Constructor;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.KeyFactory;
@@ -363,6 +370,170 @@ class SignApk {
     }
 
     /**
+     * Write the modified CD record with the new ota cert. Return the bytes written.
+     */
+    private static int otaWriteCentralDir(
+            ByteBuffer centralDir,
+            int currentCertCdOffset, int oldCertCdSize,
+            DeflateResult deflatedKey,
+            int certLfhOffset,
+            DataSink zipSink) throws IOException, ZipFormatException {
+        int index = currentCertCdOffset + oldCertCdSize;
+        if (index > centralDir.limit()) {
+            throw new ZipFormatException(
+                    "index exceeds the limit of central directory record: " + centralDir.limit()
+                            + " cdOffset: " + currentCertCdOffset
+                                    + " oldCertCdSize: " + oldCertCdSize);
+        }
+
+        int written = 0;
+        zipSink.consume(centralDir.array(), centralDir.arrayOffset(), currentCertCdOffset);
+        written += currentCertCdOffset;
+        // Skip the record of the old cert. If it is not the last entry in the CD record, copy in
+        // all the subsequent entries.
+        if (index < centralDir.limit()) {
+            zipSink.consume(
+                    centralDir.array(),
+                    centralDir.arrayOffset() + index,
+                    centralDir.limit() - index);
+            written += centralDir.limit() - index;
+        }
+
+        // Append the record of the new cert.
+        CentralDirectoryRecord certCentralRecord = CentralDirectoryRecord.
+            createWithDeflateCompressedData(
+                OTACERT_NAME,
+                0x0,
+                0x3a21,
+                deflatedKey.inputCrc32,
+                deflatedKey.output.length,
+                deflatedKey.inputSizeBytes,
+                certLfhOffset
+            );
+        ByteBuffer otaCertCdBuf = ByteBuffer.allocate(certCentralRecord.getSize());
+        certCentralRecord.copyTo(otaCertCdBuf);
+        zipSink.consume(
+                otaCertCdBuf.array(),
+                otaCertCdBuf.arrayOffset(),
+                certCentralRecord.getSize());
+        written += certCentralRecord.getSize();
+
+        return written;
+    }
+
+    /**
+    * Construct the new zip file without extraction to speed up the signing of an OTA package.
+    * Remove old OTA cert in META-INF/com/android/otacert if possible; add a new cert file and copy
+     * the other files byte by byte.
+    */
+    private static void otaFastConstructFiles(
+            File in,
+            File publicKeyFile,
+            WholeFileSignerOutputStream out) throws IOException, ZipFormatException {
+
+       ByteBuffer input_buf = ByteBuffer.wrap(Files.readAllBytes(in.toPath()));
+       ZipSections zipSections = findMainZipSections(input_buf);
+       DataSink zipSink = DataSinks.asDataSink(out);
+       zipSections.centralDir.order(ByteOrder.LITTLE_ENDIAN);
+
+       // Search for the old ota cert, remove its record from the central directory.
+       int currentCdOffset = 0;
+       int oldCertCdSize = 0;
+       int zipContentSize = zipSections.beforeCentralDir.limit();
+       int cdCount = 0;
+       while (cdCount < zipSections.recordCount) {
+           CentralDirectoryRecord centralRecord =
+                   CentralDirectoryRecord.getRecord(zipSections.centralDir);
+           cdCount++;
+
+           if (centralRecord.getName().equals(OTACERT_NAME)) {
+               int oldCertLfhOffset = (int)centralRecord.getLocalFileHeaderOffset();
+               LocalFileRecord oldCertLocalRecord =
+                       LocalFileRecord.getRecord(
+                               DataSources.asDataSource(zipSections.beforeCentralDir),
+                               centralRecord,
+                               zipSections.beforeCentralDir.limit());
+
+               // If the old cert is the last entry before the CD record, remove it entirely
+               // from the zipfile.  Otherwise, we don't bother to change the local file
+               // offset for every subsequent entries; so just remove its central directory
+               // record. As a result, the new zip file could be ~1k larger due to the
+               // existence of the old cert.
+               if (oldCertLfhOffset + (int)oldCertLocalRecord.getSize() >
+                       zipSections.beforeCentralDir.limit()) {
+                   throw new ZipFormatException(
+                            "index exceeds the limit of beforeCentralDir: "
+                                    + zipSections.beforeCentralDir.limit()
+                                    + " oldCertLFHOffset: " + oldCertLfhOffset
+                                    + " oldCertSize: " + (int)oldCertLocalRecord.getSize());
+               } else if (oldCertLfhOffset + (int)oldCertLocalRecord.getSize() ==
+                       zipSections.beforeCentralDir.limit()) {
+                   zipContentSize = oldCertLfhOffset;
+               }
+
+               oldCertCdSize = centralRecord.getSize();
+               break;
+           }
+           currentCdOffset += centralRecord.getSize();
+       }
+
+       // Write the contents before the central directory of the new zip file.
+       //   1. no old cert exists:  copy the entire old contents
+       //   2. old cert is the last entry before cd:  copy all the old contents up to the old cert.
+       //   3. old cert isn't the last entry:  copy the entire old contents
+       int written = 0;
+       zipSink.consume(
+               zipSections.beforeCentralDir.array(),
+               zipSections.beforeCentralDir.arrayOffset(),
+               zipContentSize);
+       written += zipContentSize;
+
+       // Save the local header offset for the new cert.
+       int certLfhOffset = written;
+       // Write the deflated contents of the new cert, make it the last entry before the
+       // central directory record.
+       ByteBuffer otaCertBuf = ByteBuffer.wrap(Files.readAllBytes(publicKeyFile.toPath()));
+       ZipUtils.DeflateResult deflatedKey = ZipUtils.deflate(otaCertBuf);
+       int certLfhSize = (int)LocalFileRecord.outputRecordWithDeflateCompressedData(
+               OTACERT_NAME,
+               0x0,
+               0x3a21,  // 2009-Jan-01
+               deflatedKey.output,
+               deflatedKey.inputCrc32,
+               deflatedKey.inputSizeBytes,
+               zipSink);
+       written += certLfhSize;
+       zipSink.consume(deflatedKey.output, 0, deflatedKey.output.length);
+       written += deflatedKey.output.length;
+
+       // Save the start offset and write the modified CD record.
+       int modifiedCdOffset = written;
+       written +=
+               otaWriteCentralDir(
+                       zipSections.centralDir,
+                       currentCdOffset, oldCertCdSize,
+                       deflatedKey,
+                       certLfhOffset,
+                       zipSink);
+
+       // Set the EOCD with modified central directory and remove all the old comments.
+       int recordCount = (oldCertCdSize > 0)
+               ? zipSections.recordCount
+               : zipSections.recordCount + 1;
+       ByteBuffer modifiedEocd =
+               EocdRecord.createWithModifiedCentralDirectoryInfo(
+                       zipSections.eocd,
+                       recordCount,
+                       written - modifiedCdOffset,
+                       modifiedCdOffset);
+       modifiedEocd.putInt(20, (short)0);
+
+       out.notifyClosing();
+       zipSink.consume(modifiedEocd.array(), modifiedEocd.arrayOffset(), 22);
+       out.finish();
+    }
+
+    /**
      * Copy all JAR entries from input to output. We set the modification times in the output to a
      * fixed time, so as to reduce variation in the output file and make incremental OTAs more
      * efficient.
@@ -642,6 +813,7 @@ class SignApk {
         private final OutputStream outputStream;
         private final ASN1ObjectIdentifier type;
         private WholeFileSignerOutputStream signer;
+        private final boolean fastSign;
 
         // Files matching this pattern are not copied to the output.
         private static final Pattern STRIP_PATTERN =
@@ -650,7 +822,7 @@ class SignApk {
 
         public CMSSigner(JarFile inputJar, File publicKeyFile,
                          X509Certificate publicKey, PrivateKey privateKey, int hash,
-                         long timestamp, OutputStream outputStream) {
+                         long timestamp, boolean fastSign, OutputStream outputStream) {
             this.inputJar = inputJar;
             this.publicKeyFile = publicKeyFile;
             this.publicKey = publicKey;
@@ -659,6 +831,7 @@ class SignApk {
             this.timestamp = timestamp;
             this.outputStream = outputStream;
             this.type = new ASN1ObjectIdentifier(CMSObjectIdentifiers.data.getId());
+            this.fastSign = fastSign;
         }
 
         /**
@@ -679,14 +852,29 @@ class SignApk {
         public void write(OutputStream out) throws IOException {
             try {
                 signer = new WholeFileSignerOutputStream(out, outputStream);
-                JarOutputStream outputJar = new JarOutputStream(signer);
 
-                copyFiles(inputJar, STRIP_PATTERN, null, outputJar, timestamp, 0);
-                addOtacert(outputJar, publicKeyFile, timestamp);
+                // ByteBuffer can hold up to INT_MAX bytes, so we have to fall back to the old way
+                // if the file size exceeds the limit. Hopefully we don't have that big OTA package.
+                File in = new File(inputJar.getName());
+                if (this.fastSign && in.length() < Integer.MAX_VALUE) {
+                    try {
+                        otaFastConstructFiles(in, publicKeyFile, signer);
+                    }
+                    catch (ZipFormatException e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                        return;
+                    }
+                } else {
+                    JarOutputStream outputJar = new JarOutputStream(signer);
 
-                signer.notifyClosing();
-                outputJar.close();
-                signer.finish();
+                    copyFiles(inputJar, STRIP_PATTERN, null, outputJar, timestamp, 0);
+                    addOtacert(outputJar, publicKeyFile, timestamp);
+
+                    signer.notifyClosing();
+                    outputJar.close();
+                    signer.finish();
+                }
             }
             catch (Exception e) {
                 throw new IOException(e);
@@ -708,10 +896,10 @@ class SignApk {
 
     private static void signWholeFile(JarFile inputJar, File publicKeyFile,
                                       X509Certificate publicKey, PrivateKey privateKey,
-                                      int hash, long timestamp,
+                                      int hash, long timestamp, boolean fastSign,
                                       OutputStream outputStream) throws Exception {
         CMSSigner cmsOut = new CMSSigner(inputJar, publicKeyFile,
-                publicKey, privateKey, hash, timestamp, outputStream);
+                publicKey, privateKey, hash, timestamp, fastSign, outputStream);
 
         ByteArrayOutputStream temp = new ByteArrayOutputStream();
 
@@ -853,6 +1041,7 @@ class SignApk {
         ByteBuffer beforeCentralDir;
         ByteBuffer centralDir;
         ByteBuffer eocd;
+        int recordCount;
     }
 
     private static ZipSections findMainZipSections(ByteBuffer apk)
@@ -863,6 +1052,8 @@ class SignApk {
         long centralDirSizeBytes = sections.getZipCentralDirectorySizeBytes();
         long centralDirEndOffset = centralDirStartOffset + centralDirSizeBytes;
         long eocdStartOffset = sections.getZipEndOfCentralDirectoryOffset();
+        int recordCount = sections.getZipCentralDirectoryRecordCount();
+
         if (centralDirEndOffset != eocdStartOffset) {
             throw new ZipFormatException(
                     "ZIP Central Directory is not immediately followed by End of Central Directory"
@@ -888,6 +1079,7 @@ class SignApk {
         result.beforeCentralDir = beforeCentralDir;
         result.centralDir = centralDir;
         result.eocd = eocd;
+        result.recordCount = recordCount;
         return result;
     }
 
@@ -924,6 +1116,7 @@ class SignApk {
 
     private static void usage() {
         System.err.println("Usage: signapk [-w] " +
+                           "[--ota-fast-sign]" +
                            "[-a <alignment>] " +
                            "[-providerClass <className>] " +
                            "[--min-sdk-version <n>] " +
@@ -950,11 +1143,15 @@ class SignApk {
         int alignment = 4;
         Integer minSdkVersionOverride = null;
         boolean signUsingApkSignatureSchemeV2 = true;
+        boolean fastSign = false;
 
         int argstart = 0;
         while (argstart < args.length && args[argstart].startsWith("-")) {
             if ("-w".equals(args[argstart])) {
                 signWholeFile = true;
+                ++argstart;
+            } else if("--ota-fast-sign".equals(args[argstart])) {
+                fastSign = true;
                 ++argstart;
             } else if ("-providerClass".equals(args[argstart])) {
                 if (argstart + 1 >= args.length) {
@@ -1033,7 +1230,7 @@ class SignApk {
                 int digestAlgorithm = getDigestAlgorithmForOta(publicKey[0]);
                 signWholeFile(inputJar, firstPublicKeyFile,
                         publicKey[0], privateKey[0], digestAlgorithm,
-                        timestamp,
+                        timestamp, fastSign,
                         outputFile);
             } else {
                 // Determine the value to use as minSdkVersion of the APK being signed
