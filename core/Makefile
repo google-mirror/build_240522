@@ -892,6 +892,8 @@ $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_signing_args=$(INTERNAL_AVB_SIGNING_A
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_avbtool=$(AVBTOOL)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_add_hashtree_footer_args=$(BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_add_hashtree_footer_args=$(BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
     $(hide) echo "recovery_as_boot=true" >> $(1))
 $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)),\
@@ -1591,6 +1593,7 @@ BUILT_VBMETAIMAGE_TARGET := $(PRODUCT_OUT)/vbmeta.img
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS := \
     --include_descriptors_from_image $(INSTALLED_BOOTIMAGE_TARGET) \
     --include_descriptors_from_image $(INSTALLED_SYSTEMIMAGE) \
+    --include_descriptors_from_image $(INSTALLED_VENDORIMAGE_TARGET) \
     --generate_dm_verity_cmdline_from_hashtree $(INSTALLED_SYSTEMIMAGE)
 
 ifdef BOARD_AVB_ROLLBACK_INDEX
@@ -1625,7 +1628,7 @@ define build-vbmetaimage-target
 endef
 
 INSTALLED_VBMETAIMAGE_TARGET := $(BUILT_VBMETAIMAGE_TARGET)
-$(INSTALLED_VBMETAIMAGE_TARGET): $(AVBTOOL) $(INSTALLED_BOOTIMAGE_TARGET) $(INSTALLED_SYSTEMIMAGE)
+$(INSTALLED_VBMETAIMAGE_TARGET): $(AVBTOOL) $(INSTALLED_BOOTIMAGE_TARGET) $(INSTALLED_SYSTEMIMAGE) $(INSTALLED_VENDORIMAGE_TARGET)
 	$(build-vbmetaimage-target)
 
 .PHONY: vbmetaimage-nodeps
