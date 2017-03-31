@@ -9,7 +9,7 @@ ifdef LOCAL_SDK_VERSION
 endif
 
 LOCAL_CFLAGS += -fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp
-LOCAL_STATIC_LIBRARIES += libLLVMFuzzer
+LOCAL_STATIC_LIBRARIES += libFuzzer
 
 ifdef LOCAL_MODULE_PATH
 $(error $(LOCAL_PATH): Do not set LOCAL_MODULE_PATH when building test $(LOCAL_MODULE))
