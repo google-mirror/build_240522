@@ -14,6 +14,18 @@ ifeq ($(LOCAL_MODULE_CLASS),GYP)
   notice_file :=
 endif
 
+# ndk stub libraries are stubs, don't get installed, and don't need
+# NOTICE files.
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  ifneq ($(filter $(SOONG_OUT_DIR)/ndk/%,$(LOCAL_MODULE_PATH)),)
+    # Sanity check
+    ifeq ($(findstring .ndk.,$(LOCAL_MODULE)),)
+      $(call pretty-error,Unexpected module in $(SOONG_OUT_DIR)/ndk/)
+    endif
+    notice_file :=
+  endif
+endif
+
 ifeq ($(LOCAL_MODULE_CLASS),NOTICE_FILES)
 # If this is a NOTICE-only module, we don't include base_rule.mk,
 # so my_prefix is not set at this point.
