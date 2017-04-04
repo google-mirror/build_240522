@@ -76,6 +76,8 @@ PRODUCT_PACKAGES += \
     surfaceflinger \
     tombstoned \
     tzdatacheck \
+    matrix.xml \
+    manifest.xml \
 
 # SELinux packages
 PRODUCT_PACKAGES += \
@@ -109,5 +111,4 @@ PRODUCT_COPY_FILES += \
     system/core/rootdir/etc/hosts:system/etc/hosts
 
 # Framework Manifest
-PRODUCT_COPY_FILES += \
-    system/libhidl/manifest.xml:system/manifest.xml
+PRODUCT_COPY_FILES += system/libhidl/manifest.xml:system/manifest.xml
