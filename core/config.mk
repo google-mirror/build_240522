@@ -71,6 +71,18 @@ $(warning The build system needs unmodified output of grep.)
 $(error Please remove --color=always from your  $$GREP_OPTIONS)
 endif
 
+ALLOW_MISSING_DEPENDENCIES := $(filter true,$(ALLOW_MISSING_DEPENDENCIES))
+ifneq ($(TARGET_BUILD_APPS),)
+ALLOW_MISSING_DEPENDENCIES := true
+endif
+ifneq ($(filter true,$(SOONG_ALLOW_MISSING_DEPENDENCIES)),)
+ALLOW_MISSING_DEPENDENCIES := true
+endif
+ifneq ($(ONE_SHOT_MAKEFILE),)
+ALLOW_MISSING_DEPENDENCIES := true
+endif
+.KATI_READONLY := ALLOW_MISSING_DEPENDENCIES
+
 SRC_TARGET_DIR := $(TOPDIR)build/target
 SRC_API_DIR := $(TOPDIR)prebuilts/sdk/api
 SRC_SYSTEM_API_DIR := $(TOPDIR)prebuilts/sdk/system-api
