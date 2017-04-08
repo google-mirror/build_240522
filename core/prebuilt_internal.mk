@@ -79,9 +79,13 @@ else
 endif
 
 ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-ifeq ($(prebuilt_module_is_a_library),true)
-SOONG_ALREADY_CONV := $(SOONG_ALREADY_CONV) $(LOCAL_MODULE)
-endif
+  ifeq ($(prebuilt_module_is_a_library),true)
+    SOONG_ALREADY_CONV := $(SOONG_ALREADY_CONV) $(LOCAL_MODULE)
+  endif
+
+  ifdef LOCAL_USE_VNDK
+    SPLIT_VENDOR.$(LOCAL_MODULE_CLASS).$(patsubst %.vendor,%,$(LOCAL_MODULE)) := $(LOCAL_MODULE).vendor
+  endif
 endif
 
 # Don't install static libraries by default.
@@ -145,8 +149,15 @@ endif
 export_cflags :=
 
 my_link_type := $(intermediates)/link_type
-$(my_link_type): PRIVATE_LINK_TYPE := native:$(if $(LOCAL_SDK_VERSION),ndk,platform)
+ifdef LOCAL_SDK_VERSION
+$(my_link_type): PRIVATE_LINK_TYPE := native:ndk
+else ifdef LOCAL_USE_VNDK
+$(my_link_type): PRIVATE_LINK_TYPE := native:vendor
+else
+$(my_link_type): PRIVATE_LINK_TYPE := native:platform
+endif
 $(eval $(call link-type-partitions,$(my_link_type)))
+# TODO: we should verify what this is linking against
 $(my_link_type):
 	@echo Check module type: $@
 	$(hide) mkdir -p $(dir $@) && rm -f $@
@@ -162,11 +173,20 @@ ifdef LOCAL_SHARED_LIBRARIES
 my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
 # Extra shared libraries introduced by LOCAL_CXX_STL.
 include $(BUILD_SYSTEM)/cxx_stl_setup.mk
+ifdef LOCAL_USE_VNDK
+  ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    my_shared_libraries := $(addsuffix .vendor,$(my_shared_libraries))
+  else
+    my_shared_libraries := $(foreach l,$(my_shared_libraries),\
+      $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+  endif
+endif
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
   $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
 
 # We also need the LOCAL_BUILT_MODULE dependency,
 # since we use -rpath-link which points to the built module's path.
+# TODO: remove? or move separately for vendor?
 my_built_shared_libraries := \
     $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
     $(addsuffix $($(my_prefix)SHLIB_SUFFIX), \
