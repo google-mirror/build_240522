@@ -1396,25 +1396,39 @@ endif
 ## other NDK-built libraries
 ####################################################
 
-my_link_type := $(intermediates)/link_type
-all_link_types: $(my_link_type)
 ifdef LOCAL_SDK_VERSION
-$(my_link_type): PRIVATE_LINK_TYPE := native:ndk
-$(my_link_type): PRIVATE_WARN_TYPES :=
-$(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk
+my_link_type := native:ndk
+my_warn_types :=
+my_allowed_types := native:ndk
 else ifdef LOCAL_USE_VNDK
-$(my_link_type): PRIVATE_LINK_TYPE := native:vendor
-$(my_link_type): PRIVATE_WARN_TYPES := native:ndk native:platform# TODO: remove
-$(my_link_type): PRIVATE_ALLOWED_TYPES := native:vendor
+my_link_type := native:vendor
+my_warn_types := native:ndk native:platform# TODO: remove
+my_allowed_types := native:vendor
 else
-$(my_link_type): PRIVATE_LINK_TYPE := native:platform
-$(my_link_type): PRIVATE_WARN_TYPES :=
-$(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk native:platform
+my_link_type := native:platform
+my_warn_types :=
+my_allowed_types := native:ndk native:platform
 endif
-$(eval $(call link-type-partitions,$(my_link_type)))
+
+my_link_prefix := LINK_TYPE$(comma)$(if $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if $(LOCAL_IS_AUX_MODULE),$(aux_class),android))$(comma)$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+link_type := $(my_link_prefix)$(comma)$(LOCAL_MODULE_CLASS)$(comma)$(LOCAL_MODULE)
+ALL_LINK_TYPES := $(ALL_LINK_TYPES) $(link_type)
+$(link_type).TYPE := $(my_link_type)
+$(link_type).MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
+$(link_type).WARN := $(my_warn_types)
+$(link_type).ALLOWED := $(my_allowed_types)
+$(link_type).DEPS := $(strip $(foreach l,$(my_header_libraries),$(my_link_prefix)$(comma)HEADER_LIBRARIES$(comma)$(l)))
+$(link_type).DEPS += $(strip $(foreach l,$(my_static_libraries),$(my_link_prefix)$(comma)STATIC_LIBRARIES$(comma)$(l)))
+ifneq ($(filter-out STATIC_LIBRARIES HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS)),)
+$(link_type).DEPS += $(strip $(foreach l,$(my_shared_libraries),$(my_link_prefix)$(comma)SHARED_LIBRARIES$(comma)$(l)))
+endif
+
 my_link_type_deps := $(strip \
    $(foreach l,$(my_whole_static_libraries) $(my_static_libraries), \
      $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/link_type))
+my_link_type_deps += $(strip \
+   $(foreach l,$(my_header_libraries), \
+     $(call intermediates-dir-for,HEADER_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/link_type))
 ifneq ($(LOCAL_MODULE_CLASS),STATIC_LIBRARIES)
 ifneq ($(LOCAL_MODULE_CLASS),HEADER_LIBRARIES)
 my_link_type_deps += $(strip \
@@ -1422,13 +1436,9 @@ my_link_type_deps += $(strip \
      $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/link_type))
 endif
 endif
-$(my_link_type): PRIVATE_DEPS := $(my_link_type_deps)
-$(my_link_type): PRIVATE_MODULE := $(LOCAL_MODULE)
-$(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
-$(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
-	@echo Check module type: $@
-	$(check-link-type)
 
+my_link_type_file := $(intermediates)/link_type
+$(call define-file-based-link-type,$(link_type),$(my_link_type_file),$(my_link_type_deps))
 
 ###########################################################
 ## Common object handling.
@@ -1815,7 +1825,7 @@ export_cflags :=
 .KATI_RESTAT: $(export_includes)
 
 # Make sure export_includes gets generated when you are running mm/mmm
-$(LOCAL_BUILT_MODULE) : | $(export_includes) $(my_link_type)
+$(LOCAL_BUILT_MODULE) : | $(export_includes) $(my_link_type_file)
 
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 ifneq (,$(filter-out $(LOCAL_PATH)/%,$(my_export_c_include_dirs)))

@@ -381,8 +381,30 @@ endif # LOCAL_JACK_ENABLED
 # Verify that all libraries are safe to use
 ###########################################################
 ifndef LOCAL_IS_HOST_MODULE
-my_link_type := $(intermediates.COMMON)/link_type
-all_link_types: $(my_link_type)
+ifeq ($(LOCAL_SDK_VERSION),system_current)
+my_link_type := java:system
+my_warn_types := java:platform
+my_allowed_types := java:sdk java:system
+else ifneq ($(LOCAL_SDK_VERSION),)
+my_link_type := java:sdk
+my_warn_types := java:system java:platform
+my_allowed_types := java:sdk
+else
+my_link_type := java:platform
+my_warn_types :=
+my_allowed_types := java:sdk java:system java:platform
+endif
+
+my_link_prefix := LINK_TYPE$(comma)$(if $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if $(LOCAL_IS_AUX_MODULE),$(aux_class),android))$(comma)$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+link_type := $(my_link_prefix)$(comma)$(LOCAL_MODULE_CLASS)$(comma)$(LOCAL_MODULE)
+ALL_LINK_TYPES := $(ALL_LINK_TYPES) $(link_type)
+$(link_type).TYPE := $(my_link_type)
+$(link_type).MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
+$(link_type).WARN := $(my_warn_types)
+$(link_type).ALLOWED := $(my_allowed_types)
+$(link_type).DEPS := $(foreach lib,$(LOCAL_STATIC_JAVA_LIBRARIES),$(my_link_prefix)$(comma)JAVA_LIBRARIES$(comma)$(lib))
+$(link_type).DEPS += $(foreach lib,$(apk_libraries),$(my_link_prefix)$(comma)APPS$(comma)$(lib))
+
 my_link_type_deps := $(strip \
   $(foreach lib,$(LOCAL_STATIC_JAVA_LIBRARIES),\
     $(call intermediates-dir-for, \
@@ -390,26 +412,9 @@ my_link_type_deps := $(strip \
   $(foreach lib,$(apk_libraries), \
     $(call intermediates-dir-for, \
       APPS,$(lib),,COMMON)/link_type))
-ifeq ($(LOCAL_SDK_VERSION),system_current)
-$(my_link_type): PRIVATE_LINK_TYPE := java:system
-$(my_link_type): PRIVATE_WARN_TYPES := java:platform
-$(my_link_type): PRIVATE_ALLOWED_TYPES := java:sdk java:system
-else ifneq ($(LOCAL_SDK_VERSION),)
-$(my_link_type): PRIVATE_LINK_TYPE := java:sdk
-$(my_link_type): PRIVATE_WARN_TYPES := java:system java:platform
-$(my_link_type): PRIVATE_ALLOWED_TYPES := java:sdk
-else
-$(my_link_type): PRIVATE_LINK_TYPE := java:platform
-$(my_link_type): PRIVATE_WARN_TYPES :=
-$(my_link_type): PRIVATE_ALLOWED_TYPES := java:sdk java:system java:platform
-endif
-$(eval $(call link-type-partitions,$(my_link_type)))
-$(my_link_type): PRIVATE_DEPS := $(my_link_type_deps)
-$(my_link_type): PRIVATE_MODULE := $(LOCAL_MODULE)
-$(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
-$(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
-	@echo Check Java library module types: $@
-	$(check-link-type)
 
-$(LOCAL_BUILT_MODULE): $(my_link_type)
+my_link_type_file := $(intermediates.COMMON)/link_type
+$(call define-file-based-link-type,$(link_type),$(my_link_type_file),$(my_link_type_deps))
+
+$(LOCAL_BUILT_MODULE): $(my_link_type_file)
 endif  # !LOCAL_IS_HOST_MODULE

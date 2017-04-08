@@ -726,6 +726,98 @@ p :=
 deps :=
 add-required-deps :=
 
+################################################################################
+# Link type checking
+#
+# ALL_LINK_TYPES contains a list of all link type prefixes (generally one per
+# module). The link type prefix consists of several fields separated by commas:
+#   1: LINK_TYPE string
+#   2: OS
+#     - android
+#     - linux
+#     - darwin
+#     - windows
+#   3: ARCH
+#     - arm
+#     - arm64
+#     - mips
+#     - x86
+#     - x86_64
+#   4: Module Class
+#     - STATIC_LIBRARIES
+#     - SHARED_LIBRARIES
+#     - ...
+#   5: Module Name
+#
+# Then fields under that are separated by a period and the field name:
+#   - TYPE: the link types for this module
+#   - MAKEFILE: Where this module was defined
+#   - DEPS: the link type prefixes for the module's dependencies
+#   - ALLOWED: the link types to allow in this module's dependencies
+#   - WARN: the link types to warn about in this module's dependencies
+#
+# All of the dependency link types not listed in ALLOWED or WARN will become
+# errors.
+################################################################################
+
+link_type_error :=
+
+define link-type-os
+$(word 2,$(subst $(comma),$(space),$(1)))
+endef
+define link-type-arch
+$(word 3,$(subst $(comma),$(space),$(1)))
+endef
+define link-type-class
+$(word 4,$(subst $(comma),$(space),$(1)))
+endef
+define link-type-name
+$(word 5,$(subst $(comma),$(space),$(1)))
+endef
+define link-type-name-variant
+$(link-type-name) ($(link-type-class) $(link-type-os)-$(link-type-arch))
+endef
+
+define link-type-warning
+$(shell $(call echo-warning,$($(1).MAKEFILE),"$(call link-type-name,$(1)) ($($(1).TYPE)) should not link against $(call link-type-name,$(2)) ($(3))"))
+endef
+define link-type-error
+$(shell $(call echo-error,$($(1).MAKEFILE),"$(call link-type-name,$(1)) ($($(1).TYPE)) can not link against $(call link-type-name,$(2)) ($(3))"))\
+$(eval link_type_error := true)
+endef
+
+link-type-missing :=
+ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
+  define link-type-missing
+  $(shell $(call echo-error,$($(1).MAKEFILE),"$(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
+  $(eval available_variants := $(filter %$(comma)$(call link-type-name,$(2)),$(ALL_LINK_TYPES)))\
+  $(if $(available_variants),\
+    $(info Available variants:)\
+    $(foreach v,$(available_variants),$(info $(space)$(space)$(call link-type-name-variant,$(v)))))\
+  $(eval link_type_error := true)
+  endef
+endif
+
+define verify-link-type
+$(foreach t,$($(2).TYPE),\
+  $(if $(filter-out $($(1).ALLOWED),$(t)),\
+    $(if $(filter $(t),$($(1).WARN)),\
+      $(call link-type-warning,$(1),$(2),$(t)),\
+      $(call link-type-error,$(1),$(2),$(t)))))
+endef
+
+$(foreach lt,$(ALL_LINK_TYPES),\
+  $(foreach d,$($(lt).DEPS),\
+    $(if $($(d).TYPE),\
+      $(call verify-link-type,$(lt),$(d)),\
+      $(call link-type-missing,$(lt),$(d)))))
+
+# TODO: fix all the problems, uncomment this
+#ifdef link_type_error
+#  $(error done)
+#endif
+
+
 # -------------------------------------------------------------------
 # Figure out our module sets.
 #

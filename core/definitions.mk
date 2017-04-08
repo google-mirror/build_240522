@@ -3134,39 +3134,29 @@ endef
 ###########################################################
 # Link type checking
 ###########################################################
+define define-file-based-link-type
+$(eval $(file-based-link-type))
+endef
+
+define file-based-link-type
+all_link_types: $(2)
+$(2): PRIVATE_LINK_TYPE := $($(1).TYPE)
+$(2): PRIVATE_WARN_TYPES := $($(1).WARN)
+$(2): PRIVATE_ALLOWED_TYPES := $($(1).ALLOWED)
+$(2): PRIVATE_DEPS := $(3)
+$(2): PRIVATE_MODULE := $(LOCAL_MODULE)
+$(2): PRIVATE_MAKEFILE := $($(1).MAKEFILE)
+$(2): $(3) $(CHECK_LINK_TYPE)
+	@echo Check module type: $$@
+	$$(check-link-type)
+endef
+
 define check-link-type
 $(hide) mkdir -p $(dir $@) && rm -f $@
 $(hide) $(CHECK_LINK_TYPE) --makefile $(PRIVATE_MAKEFILE) --module $(PRIVATE_MODULE) \
   --type "$(PRIVATE_LINK_TYPE)" $(addprefix --allowed ,$(PRIVATE_ALLOWED_TYPES)) \
   $(addprefix --warn ,$(PRIVATE_WARN_TYPES)) $(PRIVATE_DEPS)
 $(hide) echo "$(PRIVATE_LINK_TYPE)" >$@
-endef
-
-define link-type-partitions
-ifndef LOCAL_IS_HOST_MODULE
-ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
-ifneq ($(filter $(TARGET_OUT_VENDOR)/%,$(my_module_path)),)
-$(1): PRIVATE_LINK_TYPE += partition:vendor
-$(1): PRIVATE_WARN_TYPES += partition:data
-$(1): PRIVATE_ALLOWED_TYPES += partition:vendor partition:oem partition:odm
-else ifneq ($(filter $(TARGET_OUT_OEM)/%,$(my_module_path)),)
-$(1): PRIVATE_LINK_TYPE += partition:oem
-$(1): PRIVATE_WARN_TYPES += partition:data
-$(1): PRIVATE_ALLOWED_TYPES += partition:vendor partition:oem partition:odm
-else ifneq ($(filter $(TARGET_OUT_ODM)/%,$(my_module_path)),)
-$(1): PRIVATE_LINK_TYPE += partition:odm
-$(1): PRIVATE_WARN_TYPES += partition:data
-$(1): PRIVATE_ALLOWED_TYPES += partition:vendor partition:oem partition:odm
-else ifneq ($(filter $(TARGET_OUT_DATA)/%,$(my_module_path)),)
-$(1): PRIVATE_LINK_TYPE += partition:data
-$(1): PRIVATE_ALLOWED_TYPES += partition:data partition:vendor partition:oem partition:odm
-else
-$(1): PRIVATE_WARN_TYPES += partition:vendor partition:oem partition:odm partition:data
-endif
-else # uninstallable module
-$(1): PRIVATE_ALLOWED_TYPES += partition:vendor partition:oem partition:odm partition:data
-endif
-endif
 endef
 
 ###########################################################

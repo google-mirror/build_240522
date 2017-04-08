@@ -108,30 +108,38 @@ endif  # outer my_prebuilt_jni_libs
 
 # Verify that all included libraries are built against the NDK
 ifneq ($(strip $(LOCAL_JNI_SHARED_LIBRARIES)),)
-my_link_type := $(call intermediates-dir-for,APPS,$(LOCAL_MODULE))/$(my_2nd_arch_prefix)jni_link_type
-all_link_types: $(my_link_type)
+ifneq ($(LOCAL_SDK_VERSION),)
+my_link_type := app:sdk
+my_warn_types := native:platform
+my_allowed_types := native:ndk
+else
+my_link_type := app:platform
+my_warn_types :=
+my_allowed_types := native:ndk native:platform
+endif
+
+my_link_prefix := LINK_TYPE$(comma)$(if $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if $(LOCAL_IS_AUX_MODULE),$(aux_class),android))$(comma)$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+link_type := $(my_link_prefix)$(comma)$(LOCAL_MODULE_CLASS)$(comma)$(LOCAL_MODULE)
+ALL_LINK_TYPES := $(ALL_LINK_TYPES) $(link_type)
+$(link_type).TYPE := $(my_link_type)
+$(link_type).MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
+$(link_type).WARN := $(my_warn_types)
+$(link_type).ALLOWED := $(my_allowed_types)
+$(link_type).DEPS := $(foreach l,$(LOCAL_JNI_SHARED_LIBRARIES),$(my_link_prefix)$(comma)SHARED_LIBRARIES$(comma)$(l))
+
+my_link_type_file := $(call intermediates-dir-for,APPS,$(LOCAL_MODULE))/$(my_2nd_arch_prefix)jni_link_type
 my_link_type_deps := $(strip \
   $(foreach l,$(LOCAL_JNI_SHARED_LIBRARIES),\
     $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),,,$(my_2nd_arch_prefix))/link_type))
-ifneq ($(LOCAL_SDK_VERSION),)
-$(my_link_type): PRIVATE_LINK_TYPE := app:sdk
-$(my_link_type): PRIVATE_WARN_TYPES := native:platform
-$(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk
-else
-$(my_link_type): PRIVATE_LINK_TYPE := app:platform
-$(my_link_type): PRIVATE_WARN_TYPES :=
-$(my_link_type): PRIVATE_ALLOWED_TYPES := native:ndk native:platform
-endif
-$(eval $(call link-type-partitions,$(my_link_type)))
-$(my_link_type): PRIVATE_DEPS := $(my_link_type_deps)
-$(my_link_type): PRIVATE_MODULE := $(LOCAL_MODULE)
-$(my_link_type): PRIVATE_MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
-$(my_link_type): $(my_link_type_deps) $(CHECK_LINK_TYPE)
-	@echo Check JNI module types: $@
-	$(check-link-type)
+$(call define-file-based-link-type,$(link_type),$(my_link_type_file),$(my_link_type_deps))
 
-$(LOCAL_BUILT_MODULE): | $(my_link_type)
+$(LOCAL_BUILT_MODULE): | $(my_link_type_file)
 
+my_link_prefix :=
+link_type :=
 my_link_type :=
+my_warn_types :=
+my_allowed_types :=
+my_link_type_file :=
 my_link_type_deps :=
 endif
