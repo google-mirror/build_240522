@@ -81,6 +81,7 @@ Use option --gencsv to output warning counts in CSV format.
 #   dump_csv():
 
 import argparse
+import io
 import multiprocessing
 import os
 import re
@@ -88,6 +89,9 @@ import signal
 import sys
 
 parser = argparse.ArgumentParser(description='Convert a build log into HTML')
+parser.add_argument('--csvpath',
+                    help='Save CSV warning file to the passed absolute path',
+                    default=None)
 parser.add_argument('--gencsv',
                     help='Generate a CSV file with number of various warnings',
                     action='store_true',
@@ -2681,41 +2685,98 @@ def string_for_csv(s):
   return s
 
 
-def count_severity(sev, kind):
-  """Count warnings of given severity."""
+def count_severity(writer, sev, kind):
+  """Count warnings of given severity.
+
+  Args:
+    writer: An instance that implements a write function that takes a string.
+    sev: A number.
+    kind: The (string) warning kind.
+
+  Returns:
+    An (int) total warning count.
+  """
+
   total = 0
+
   for i in warn_patterns:
     if i['severity'] == sev and i['members']:
       n = len(i['members'])
       total += n
       warning = string_for_csv(kind + ': ' + description_for_csv(i))
-      print '{},,{}'.format(n, warning)
+      writer.write('{},,{}'.format(n, warning))
       # print number of warnings for each project, ordered by project name.
       projects = i['projects'].keys()
       projects.sort()
       for p in projects:
-        print '{},{},{}'.format(i['projects'][p], p, warning)
-  print '{},,{}'.format(total, kind + ' warnings')
+        writer.write('{},{},{}'.format(i['projects'][p], p, warning))
+  writer.write('{},,{}'.format(total, kind + ' warnings'))
+
   return total
 
 
 # dump number of warnings in csv format to stdout
-def dump_csv():
-  """Dump number of warnings in csv format to stdout."""
+def dump_csv(writer):
+  """Generates a CSV string of the number of warnings.
+
+  Args:
+    writer: An instance that implements a write function that takes a string.
+
+  Returns:
+    A string that is a formatted CSV.
+  """
+
   sort_warnings()
   total = 0
+
   for s in Severity.range:
-    total += count_severity(s, Severity.column_headers[s])
-  print '{},,{}'.format(total, 'All warnings')
+    severity_total = count_severity(writer, s, Severity.column_headers[s])
+
+    total += severity_total
+
+  writer.write('{},,{}'.format(total, 'All warnings'))
+
+
+class _FileWriter(object):
+  """A simple file wrapper to have the same interface as io.TextIOBase."""
+
+  def __init__(self, io_writer):
+    self.io_writer = io_writer
+
+  def write(self, string):
+    """Writes a string to stdout.
+
+    Args:
+      string: The (string) contents to write to the io_writer.
+    """
+
+    self.io_writer.write(unicode(string) + '\n')
+
+
+class _PrintWriter(object):
+  """A simple print wrapper to have the same interface as io.TextIOBase."""
+
+  def write(self, string):
+    """Writes a string to stdout.
+
+    Args:
+      string: The (string) contents to write to stdout.
+    """
+
+    print string
 
 
 def main():
   warning_lines = parse_input_file(open(args.buildlog, 'r'))
   parallel_classify_warnings(warning_lines)
-  if args.gencsv:
-    dump_csv()
+  if args.csvpath:
+    with io.open(args.csvpath, 'w') as f:
+      dump_csv(_FileWriter(f))
   else:
-    dump_html()
+    if args.gencsv:
+      dump_csv(_PrintWriter())
+    else:
+      dump_html()
 
 
 # Run main function if warn.py is the main program.
