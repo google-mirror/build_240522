@@ -88,6 +88,9 @@ import signal
 import sys
 
 parser = argparse.ArgumentParser(description='Convert a build log into HTML')
+parser.add_argument('--csvpath',
+                    help='Save CSV warning file to the passed absolute path',
+                    default=None)
 parser.add_argument('--gencsv',
                     help='Generate a CSV file with number of various warnings',
                     action='store_true',
@@ -2682,38 +2685,65 @@ def string_for_csv(s):
 
 
 def count_severity(sev, kind):
-  """Count warnings of given severity."""
+  """Count warnings of given severity.
+
+  Args:
+    sev: A number.
+    kind: The (string) warning kind.
+
+  Returns:
+    A tuple of (int) total warning, (string) csv rows.
+  """
+
   total = 0
+  ret = ''
+
   for i in warn_patterns:
     if i['severity'] == sev and i['members']:
       n = len(i['members'])
       total += n
       warning = string_for_csv(kind + ': ' + description_for_csv(i))
-      print '{},,{}'.format(n, warning)
+      ret += '{},,{}'.format(n, warning) + '\n'
       # print number of warnings for each project, ordered by project name.
       projects = i['projects'].keys()
       projects.sort()
       for p in projects:
-        print '{},{},{}'.format(i['projects'][p], p, warning)
-  print '{},,{}'.format(total, kind + ' warnings')
-  return total
+        ret += '{},{},{}'.format(i['projects'][p], p, warning) + '\n'
+  ret += '{},,{}'.format(total, kind + ' warnings') + '\n'
+  return total, ret
 
 
 # dump number of warnings in csv format to stdout
 def dump_csv():
-  """Dump number of warnings in csv format to stdout."""
+  """Generates a CSV string of the number of warnings.
+
+  Returns:
+    A string that is a formatted CSV.
+  """
+
   sort_warnings()
   total = 0
+  ret = ''
+
   for s in Severity.range:
-    total += count_severity(s, Severity.column_headers[s])
-  print '{},,{}'.format(total, 'All warnings')
+    severity_total, severity_csv_rows = count_severity(
+        s, Severity.column_headers[s])
+
+    total += severity_total
+    ret += severity_csv_rows
+
+  ret += '{},,{}'.format(total, 'All warnings')
+  return ret
 
 
 def main():
   warning_lines = parse_input_file(open(args.buildlog, 'r'))
   parallel_classify_warnings(warning_lines)
+  if args.csvpath:
+    with open(args.csvpath, 'w') as f:
+      f.write(dump_csv())
   if args.gencsv:
-    dump_csv()
+    print dump_csv()
   else:
     dump_html()
 
