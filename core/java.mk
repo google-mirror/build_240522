@@ -113,10 +113,8 @@ full_classes_compiled_jar := $(intermediates.COMMON)/$(full_classes_compiled_jar
 full_classes_desugar_jar := $(intermediates.COMMON)/classes-desugar.jar
 jarjar_leaf := classes-jarjar.jar
 full_classes_jarjar_jar := $(intermediates.COMMON)/$(jarjar_leaf)
-emma_intermediates_dir := $(intermediates.COMMON)/emma_out
-# emma is hardcoded to use the leaf name of its input for the output file --
-# only the output directory can be changed
-full_classes_emma_jar := $(emma_intermediates_dir)/lib/$(jarjar_leaf)
+jacoco_intermediates_dir := $(intermediates.COMMON)/jacoco_out
+full_classes_jacoco_jar := $(jacoco_intermediates_dir)/lib/classes-jacoco.jar
 full_classes_proguard_jar := $(intermediates.COMMON)/classes-proguard.jar
 built_dex_intermediate := $(intermediates.COMMON)/$(built_dex_intermediate_leaf)/classes.dex
 full_classes_stubs_jar := $(intermediates.COMMON)/stubs.jar
@@ -139,7 +137,7 @@ LOCAL_INTERMEDIATE_TARGETS += \
     $(full_classes_compiled_jar) \
     $(full_classes_desugar_jar) \
     $(full_classes_jarjar_jar) \
-    $(full_classes_emma_jar) \
+    $(full_classes_jacoco_jar) \
     $(full_classes_jar) \
     $(full_classes_proguard_jar) \
     $(built_dex_intermediate) \
@@ -470,29 +468,30 @@ else
 full_classes_jarjar_jar := $(full_classes_desugar_jar)
 endif
 
+
+my_jacoco_include_filter :=
+my_jacoco_exclude_filter :=
 ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
-$(full_classes_emma_jar): PRIVATE_EMMA_COVERAGE_FILE := $(intermediates.COMMON)/coverage.emma.ignore
-$(full_classes_emma_jar): PRIVATE_EMMA_INTERMEDIATES_DIR := $(emma_intermediates_dir)
-# module level coverage filter can be defined using LOCAL_EMMA_COVERAGE_FILTER
-# in Android.mk
-ifdef LOCAL_EMMA_COVERAGE_FILTER
-$(full_classes_emma_jar): PRIVATE_EMMA_COVERAGE_FILTER := $(LOCAL_EMMA_COVERAGE_FILTER)
-else
-# by default, avoid applying emma instrumentation onto emma classes itself,
-# otherwise there will be exceptions thrown
-$(full_classes_emma_jar): PRIVATE_EMMA_COVERAGE_FILTER := *,-emma,-emmarun,-com.vladium.*
-endif
-# this rule will generate both $(PRIVATE_EMMA_COVERAGE_FILE) and
-# $(full_classes_emma_jar)
-$(full_classes_emma_jar): $(full_classes_jarjar_jar) | $(EMMA_JAR)
-	$(transform-classes.jar-to-emma)
+  #determine Jacoco include/exclude filters
+  DEFAULT_JACOCO_EXCLUDE_FILTER := org.junit.*:org.jacoco.*:org.mockito.*
+  #copy filters from Jack but also skip some known java packages
+  my_jacoco_include_filter := $(LOCAL_JACK_COVERAGE_INCLUDE_FILTER)
+  my_jacoco_exclude_filter := $(DEFAULT_JACOCO_EXCLUDE_FILTER):$(subst $(comma),:,$(LOCAL_JACK_COVERAGE_EXCLUDE_FILTER))
+endif #LOCAL_EMMA_INSTRUMENT == true
 
-else
-full_classes_emma_jar := $(full_classes_jarjar_jar)
-endif
+#if this module doesn't require any classes to be instrumented via jacoco in this build, then don't even run the jacoco instrumenter
+ifneq ($(my_jacoco_include_filter),)
+$(full_classes_jacoco_jar): PRIVATE_JACOCO_INCLUDE_FILTER := $(my_jacoco_include_filter)
+$(full_classes_jacoco_jar): PRIVATE_JACOCO_EXCLUDE_FILTER := $(my_jacoco_exclude_filter)
 
-# TODO: this should depend on full_classes_emma_jar once coverage works again
-full_classes_pre_proguard_jar := $(full_classes_jarjar_jar)
+$(full_classes_jacoco_jar): $(full_classes_jarjar_jar) | $(JACOCO_CLI_JAR)
+	$(transform-classes.jar-to-jacoco)
+
+else #includes != ''
+  full_classes_jacoco_jar := $(full_classes_jarjar_jar)
+endif #includes != ''
+
+full_classes_pre_proguard_jar := $(full_classes_jacoco_jar)
 
 # Keep a copy of the jar just before proguard processing.
 $(eval $(call copy-one-file,$(full_classes_pre_proguard_jar),$(intermediates.COMMON)/classes-pre-proguard.jar))

@@ -2514,10 +2514,15 @@ $(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) echo unsupported options JAR_EXCLU
 $(if $(PRIVATE_JAR_MANIFEST), $(hide) echo unsupported options JAR_MANIFEST in $@; exit 53)
 endef
 
-define transform-classes.jar-to-emma
-$(hide) java -classpath $(EMMA_JAR) emma instr -outmode fullcopy -outfile \
-    $(PRIVATE_EMMA_COVERAGE_FILE) -ip $< -d $(PRIVATE_EMMA_INTERMEDIATES_DIR) \
-    $(addprefix -ix , $(PRIVATE_EMMA_COVERAGE_FILTER))
+define transform-classes.jar-to-jacoco
+$(hide) \
+  java -jar $(JACOCO_CLI_JAR) \
+     instrument \
+     --quiet \
+     --src '$<' \
+     --dest '$@' \
+     --include '$(PRIVATE_JACOCO_INCLUDE_FILTER)' \
+     --exclude '$(PRIVATE_JACOCO_EXCLUDE_FILTER)'
 endef
 
 define desugar-classpath
