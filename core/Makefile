@@ -2467,18 +2467,25 @@ $(APPS_ZIP): $(INSTALLED_SYSTEMIMAGE)
 	fi
 
 #------------------------------------------------------------------
-# A zip of emma code coverage meta files. Generated for fully emma
-# instrumented build.
+# An archive of classes for use in generating code-coverage reports
+# These are the uninstrumented versions of any classes that were to be instrumented.
+# Any dependencies are set up later in build/core/main.mk.
 #
 ifeq (true,$(EMMA_INSTRUMENT))
-EMMA_META_ZIP := $(PRODUCT_OUT)/emma_meta.zip
-# the dependency will be set up later in build/core/main.mk.
-$(EMMA_META_ZIP) :
-	@echo "Collecting Emma coverage meta files."
-	$(hide) find $(TARGET_COMMON_OUT_ROOT) $(HOST_COMMON_OUT_ROOT) -name "coverage.em" | \
-		zip -@ -qX $@
+my_jacoco_report_all_resources_path := $(PRODUCT_OUT)/jacoco-report-all-resources.jar
+$(JACOCO_META_ZIP) : PRIVATE_JACOCO_REPORT_ALL_RESOURCES_PATH := $(my_jacoco_report_all_resources_path)
+$(JACOCO_META_ZIP) : $(PRIVATE_JACOCO_REPORT_ALL_RESOURCES_PATH)
+	@echo "Collecting uninstrumented classes"
+	$(hide) find $(TARGET_COMMON_OUT_ROOT) $(HOST_COMMON_OUT_ROOT) -name "jacoco-report-classes.jar" | \
+		zip -@ -0 -q -X $@
+# Meaning of these options:
+# -@ scan stdin for file paths to add to the zip
+# -0 don't do any compression
+# -q supress most output
+# -X skip storing extended file attributes
 
 endif # EMMA_INSTRUMENT=true
+
 
 #------------------------------------------------------------------
 # A zip of Proguard obfuscation dictionary files.

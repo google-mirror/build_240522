@@ -1003,13 +1003,19 @@ ifneq ($(TARGET_BUILD_APPS),)
   $(call dist-for-goals,apps_only, $(apps_only_dist_built_files))
 
   ifeq ($(EMMA_INSTRUMENT),true)
-    $(EMMA_META_ZIP) : $(apps_only_installed_files)
+    $(JACOCO_META_ZIP) : $(apps_only_installed_files)
 
-    $(call dist-for-goals,apps_only, $(EMMA_META_ZIP))
+    $(call dist-for-goals,apps_only, $(JACOCO_META_ZIP))
   endif
 
   $(PROGUARD_DICT_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP))
+
+  ifeq ($(EMMA_INSTRUMENT),true)
+    $(JACOCO_META_ZIP) : $(INSTALLED_SYSTEMIMAGE)
+
+    $(call dist-for-goals, dist_files, $(EMMA_META_ZIP))
+  endif
 
   $(SYMBOLS_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP))
@@ -1059,12 +1065,6 @@ else # TARGET_BUILD_APPS
       $(PACKAGE_STATS_FILE) \
     )
   endif
-  endif
-
-  ifeq ($(EMMA_INSTRUMENT),true)
-    $(EMMA_META_ZIP) : $(INSTALLED_SYSTEMIMAGE)
-
-    $(call dist-for-goals, dist_files, $(EMMA_META_ZIP))
   endif
 
 # Building a full system-- the default is to build droidcore
