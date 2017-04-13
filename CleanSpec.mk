@@ -417,6 +417,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/vendor/lib*)
 # Soong module variant change, remove obsolete intermediates
 $(call add-clean-step, rm -rf $(OUT_DIR)/soong/.intermediates)
 
+# Treble java lib naming change, remove obsolete files
+$(call add-clean-step, find $(OUT_DIR) -regex ".*/.*@[0-9].[0-9]-java.*" -print0 |xargs -0 rm -rf)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
