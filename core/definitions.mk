@@ -91,10 +91,10 @@ $(HOST_CROSS_2ND_ARCH_VAR_PREFIX)HOST_CROSS_DEPENDENCIES_ON_SHARED_LIBRARIES :=
 ANDROID_RESOURCE_GENERATED_CLASSES := 'R.class' 'R$$*.class' 'Manifest.class' 'Manifest$$*.class'
 
 # Display names for various build targets
-TARGET_DISPLAY := target
-AUX_DISPLAY := aux
-HOST_DISPLAY := host
-HOST_CROSS_DISPLAY := host cross
+TARGET_MODULE_DISPLAY := target
+AUX_MODULE_DISPLAY := aux
+HOST_MODULE_DISPLAY := host
+HOST_CROSS_MODULE_DISPLAY := host cross
 
 # All installed initrc files
 ALL_INIT_RC_INSTALLED_PAIRS :=
@@ -1232,12 +1232,12 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-cpp-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C++: $<"
+  @echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) tidy $(PRIVATE_ARM_MODE) C++: $<"
   $(clang-tidy-cpp))
 endef
 else
 define transform-cpp-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) $(PRIVATE_ARM_MODE) C++: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-cpp))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
@@ -1280,12 +1280,12 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-c-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C: $<"
+  @echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) tidy $(PRIVATE_ARM_MODE) C: $<"
   $(clang-tidy-c))
 endef
 else
 define transform-c-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) $(PRIVATE_ARM_MODE) C: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) $(PRIVATE_ARM_MODE) C: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-c))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
@@ -1295,7 +1295,7 @@ endef
 endif
 
 define transform-s-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) asm: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) asm: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(RELATIVE_PWD) $(PRIVATE_CC) \
   $(call transform-c-or-s-to-o-compiler-args, $(PRIVATE_ASFLAGS)) \
@@ -1319,7 +1319,7 @@ endef
 ###########################################################
 
 define transform-m-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) ObjC: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) ObjC: $(PRIVATE_MODULE) <= $<"
 $(call transform-c-or-s-to-o, $(PRIVATE_CFLAGS) $(PRIVATE_DEBUG_CFLAGS))
 endef
 
@@ -1350,12 +1350,12 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-host-cpp-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C++: $<"
+  @echo "tidy $($(PRIVATE_PREFIX)MODULE_DISPLAY) C++: $<"
   $(clang-tidy-host-cpp))
 endef
 else
 define transform-host-cpp-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) C++: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(if $(PRIVATE_TIDY_CHECKS),$(clang-tidy-host-cpp))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CXX) \
@@ -1402,12 +1402,12 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-host-c-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C: $<"
+  @echo "tidy $($(PRIVATE_PREFIX)MODULE_DISPLAY) C: $<"
   $(clang-tidy-host-c))
 endef
 else
 define transform-host-c-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) C: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) C: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(if $(PRIVATE_TIDY_CHECKS), $(clang-tidy-host-c))
 $(hide) $(RELATIVE_PWD) $(PRIVATE_CC) \
@@ -1417,7 +1417,7 @@ endef
 endif
 
 define transform-host-s-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) asm: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) asm: $(PRIVATE_MODULE) <= $<"
 $(call transform-host-c-or-s-to-o, $(PRIVATE_ASFLAGS))
 endef
 
@@ -1426,7 +1426,7 @@ endef
 ###########################################################
 
 define transform-host-m-to-o
-@echo "$($(PRIVATE_PREFIX)DISPLAY) ObjC: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) ObjC: $(PRIVATE_MODULE) <= $<"
 $(call transform-host-c-or-s-to-o, $(PRIVATE_CFLAGS) $(PRIVATE_DEBUG_CFLAGS) $(PRIVATE_CFLAGS_NO_OVERRIDE))
 endef
 
@@ -1564,7 +1564,7 @@ endef
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-o-to-static-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 @rm -f $@ $@.tmp
 $(call extract-and-include-target-whole-static-libs,$@.tmp)
@@ -1610,7 +1610,7 @@ endef
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-o-to-aux-static-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 @rm -f $@ $@.tmp
 $(call extract-and-include-aux-whole-static-libs,$@.tmp)
@@ -1633,7 +1633,7 @@ $(hide) $(PRIVATE_CXX) -pie \
 endef
 
 define transform-o-to-aux-executable
-@echo "$(AUX_DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
+@echo "$(AUX_MODULE_DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-o-to-aux-executable-inner)
 endef
@@ -1653,7 +1653,7 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-o-to-aux-static-executable
-@echo "$(AUX_DISPLAY) StaticExecutable: $(PRIVATE_MODULE) ($@)"
+@echo "$(AUX_MODULE_DISPLAY) StaticExecutable: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-o-to-aux-static-executable-inner)
 endef
@@ -1715,7 +1715,7 @@ endif  # HOST_OS is darwin
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-host-o-to-static-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) StaticLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 @rm -f $@ $@.tmp
 $(call extract-and-include-host-whole-static-libs,$@.tmp)
@@ -1761,13 +1761,13 @@ endef
 endif
 
 define transform-host-o-to-shared-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) SharedLib: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) SharedLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-host-o-to-shared-lib-inner)
 endef
 
 define transform-host-o-to-package
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Package: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Package: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-host-o-to-shared-lib-inner)
 endef
@@ -1802,7 +1802,7 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-o-to-shared-lib
-@echo "$($(PRIVATE_PREFIX)DISPLAY) SharedLib: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) SharedLib: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-o-to-shared-lib-inner)
 endef
@@ -1817,14 +1817,14 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 endif
 
 define transform-to-stripped
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(hide) $(PRIVATE_STRIP) --strip-all $< -o $@ \
   $(if $(PRIVATE_NO_DEBUGLINK),,$(TARGET_STRIP_EXTRA))
 endef
 
 define transform-to-stripped-keep-mini-debug-info
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip (mini debug info): $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Strip (mini debug info): $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(hide) rm -f $@ $@.dynsyms $@.funcsyms $@.keep_symbols $@.debug $@.mini_debuginfo.xz
 if $(PRIVATE_STRIP) --strip-all -R .comment $< -o $@; then \
@@ -1844,7 +1844,7 @@ fi
 endef
 
 define transform-to-stripped-keep-symbols
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip (keep symbols): $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Strip (keep symbols): $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(hide) $(PRIVATE_OBJCOPY) \
     `$(PRIVATE_READELF) -S $< | awk '/.debug_/ {print "-R " $$2}' | xargs` \
@@ -1856,7 +1856,7 @@ endef
 ###########################################################
 
 define pack-elf-relocations
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Pack Relocations: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Pack Relocations: $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target)
 $(hide) $(RELOCATION_PACKER) $@
 endef
@@ -1892,7 +1892,7 @@ $(hide) $(PRIVATE_CXX) -pie \
 endef
 
 define transform-o-to-executable
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-o-to-executable-inner)
 endef
@@ -1934,7 +1934,7 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-o-to-static-executable
-@echo "$($(PRIVATE_PREFIX)DISPLAY) StaticExecutable: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) StaticExecutable: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-o-to-static-executable-inner)
 endef
@@ -1979,7 +1979,7 @@ endef
 endif
 
 define transform-host-o-to-executable
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Executable: $(PRIVATE_MODULE) ($@)"
 @mkdir -p $(dir $@)
 $(transform-host-o-to-executable-inner)
 endef
@@ -2243,7 +2243,7 @@ $(if $(PRIVATE_EXTRA_JAR_ARGS),$(call add-java-resources-to,$@))
 endef
 
 define transform-java-to-classes.jar
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
 $(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 endef
 
@@ -2722,7 +2722,7 @@ endef
 # Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
 # in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-package
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
 $(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 endef
 
@@ -2824,13 +2824,13 @@ endef
 
 # Copy a prebuilt file to a target location.
 define transform-prebuilt-to-target
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target)
 endef
 
 # Copy a prebuilt file to a target location, stripping "# comment" comments.
 define transform-prebuilt-to-target-strip-comments
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-strip-comments)
 endef
 
@@ -2878,7 +2878,7 @@ endef
 ###########################################################
 
 define transform-generated-source
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Generated: $(PRIVATE_MODULE) <= $<"
+@echo "$($(PRIVATE_PREFIX)MODULE_DISPLAY) Generated: $(PRIVATE_MODULE) <= $<"
 @mkdir -p $(dir $@)
 $(hide) $(PRIVATE_CUSTOM_TOOL)
 endef
