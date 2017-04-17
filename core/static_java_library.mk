@@ -46,6 +46,18 @@ need_compile_res := true
 endif
 endif
 
+ifdef LOCAL_RESOURCE_DIR
+  invalid_resource_overlays := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_PACKAGE_OVERLAYS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))) \
+    $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+
+  ifdef invalid_resource_overlays
+    $(call pretty-error,BUILD_STATIC_JAVA_LIBRARY does not support resource overlays: $(invalid_resource_overlays))
+  endif
+endif
+
 ifeq ($(need_compile_res),true)
 all_resources := $(strip \
     $(foreach dir, $(LOCAL_RESOURCE_DIR), \
