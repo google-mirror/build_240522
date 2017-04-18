@@ -1411,6 +1411,7 @@ my_allowed_types := native:ndk native:platform
 endif
 
 my_link_deps := $(addprefix STATIC_LIBRARIES:,$(my_whole_static_libraries) $(my_static_libraries))
+my_link_deps += $(addprefix HEADER_LIBRARIES:,$(my_header_libraries))
 ifneq ($(filter-out STATIC_LIBRARIES HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS)),)
 my_link_deps += $(addprefix SHARED_LIBRARIES:,$(my_shared_libraries))
 endif
