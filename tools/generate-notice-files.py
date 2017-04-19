@@ -14,14 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Usage: generate-notice-files [plain text output file] [html output file] [file title] [directory of notices]
+Usage: generate-notice-files --text-output [plain text output file] \
+               --html-output [html output file] -t [file title] \
+               -s [directory of notices]
 
 Generate the Android notice files, including both text and html files.
 
 -h to display this usage message and exit.
 """
 from collections import defaultdict
-import getopt
+import argparse
 import hashlib
 import itertools
 import os
@@ -37,26 +39,6 @@ HTML_ESCAPE_TABLE = {
     ">": "&gt;",
     "<": "&lt;",
     }
-
-try:
-  opts, args = getopt.getopt(sys.argv[1:], "h")
-except getopt.GetoptError, err:
-    print str(err)
-    print __doc__
-    sys.exit(2)
-
-for o, a in opts:
-  if o == "-h":
-    print __doc__
-    sys.exit(2)
-  else:
-    print >> sys.stderr, "unhandled option %s" % (o,)
-
-if len(args) != 4:
-    print """need exactly four arguments, the two output files, the file title
-             and the directory containing notices, not %d""" % (len(args),)
-    print __doc__
-    sys.exit(1)
 
 def hexify(s):
     return ("%02x"*len(s)) % tuple(map(ord, s))
@@ -163,17 +145,59 @@ def combine_notice_files_text(file_hash, input_dir, output_filename, file_title)
       print >> output_file, open(value[0]).read()
     output_file.close()
 
-def main(args):
-    txt_output_file = args[0]
-    html_output_file = args[1]
-    file_title = args[2]
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--text-output', required=True,
+        help='The text output file path.')
+    parser.add_argument(
+        '--html-output', required=True,
+        help='The html output file path.')
+    parser.add_argument(
+        '-t', '--title', required=True,
+        help='The file title.')
+    parser.add_argument(
+        '-s', '--source-dir', required=True,
+        help='The directory containing notices.')
+    parser.add_argument(
+        '-i', '--included-subdirs', default='',
+        help='The sub directories which should be included.')
+    parser.add_argument(
+        '-e', '--excluded-subdirs', default='',
+        help='The sub directories which should be excluded.')
+    return parser.parse_args()
+
+def main(argv):
+    args = get_args()
+
+    txt_output_file = args.text_output
+    html_output_file = args.html_output
+    file_title = args.title
+    included_subdirs = []
+    if args.included_subdirs:
+        included_subdirs = args.included_subdirs.split(':')
+    excluded_subdirs = []
+    if args.excluded_subdirs:
+        excluded_subdirs = args.excluded_subdirs.split(':')
 
     # Find all the notice files and md5 them
-    input_dir = os.path.normpath(args[3])
+    input_dir = os.path.normpath(args.source_dir)
     files_with_same_hash = defaultdict(list)
     for root, dir, files in os.walk(input_dir):
         for file in files:
-            if file.endswith(".txt"):
+            matched = True
+            if len(included_subdirs) > 0:
+                matched = False
+                for subdir in included_subdirs:
+                    if root.startswith(input_dir + '/' + subdir):
+                        matched = True
+                        break
+            elif len(excluded_subdirs) > 0:
+                for subdir in excluded_subdirs:
+                    if root.startswith(input_dir + '/' + subdir):
+                        matched = False
+                        break
+            if matched and file.endswith(".txt"):
                 filename = os.path.join(root, file)
                 file_md5sum = md5sum(filename)
                 files_with_same_hash[file_md5sum].append(filename)
@@ -186,4 +210,4 @@ def main(args):
     combine_notice_files_text(filesets, input_dir, txt_output_file, file_title)
 
 if __name__ == "__main__":
-    main(args)
+    main(sys.argv)
