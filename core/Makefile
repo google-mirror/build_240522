@@ -677,10 +677,27 @@ $(1) $(2): PRIVATE_MESSAGE := $(3)
 $(1) $(2): PRIVATE_DIR := $(4)
 $(1) : $(2)
 $(2) : $(5) $(BUILD_SYSTEM)/Makefile build/tools/generate-notice-files.py
-	build/tools/generate-notice-files.py $(1) $(2) $$(PRIVATE_MESSAGE) $$(PRIVATE_DIR)/src
+	build/tools/generate-notice-files.py --text-output $(1) --html-output $(2) -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
 notice_files: $(1) $(2)
 endef
 
+define combine-notice-files-without-vendor
+$(1) $(2): PRIVATE_MESSAGE := $(3)
+$(1) $(2): PRIVATE_DIR := $(4)
+$(1) : $(2)
+$(2) : $(5) $(BUILD_SYSTEM)/Makefile build/tools/generate-notice-files.py
+	build/tools/generate-notice-files.py --text-output $(1) --html-output $(2) -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src -e vendor
+notice_files: $(1) $(2)
+endef
+
+define combine-vendor-notice-files
+$(1) $(2): PRIVATE_MESSAGE := $(3)
+$(1) $(2): PRIVATE_DIR := $(4)
+$(1) : $(2)
+$(2) : $(5) $(BUILD_SYSTEM)/Makefile build/tools/generate-notice-files.py
+	build/tools/generate-notice-files.py --text-output $(1) --html-output $(2) -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src -i vendor
+notice_files: $(1) $(2)
+endef
 # TODO These intermediate NOTICE.txt/NOTICE.html files should go into
 # TARGET_OUT_NOTICE_FILES now that the notice files are gathered from
 # the src subdirectory.
@@ -691,17 +708,38 @@ target_notice_file_html_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html.gz
 tools_notice_file_txt := $(HOST_OUT_INTERMEDIATES)/NOTICE.txt
 tools_notice_file_html := $(HOST_OUT_INTERMEDIATES)/NOTICE.html
 
+ifeq ($(PRODUCT_FULL_TREBLE),true)
+target_vendor_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.txt
+target_vendor_notice_file_html := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.html
+target_vendor_notice_file_html_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.html.gz
+endif
+
 ifndef TARGET_BUILD_APPS
 kernel_notice_file := $(TARGET_OUT_NOTICE_FILES)/src/kernel.txt
 winpthreads_notice_file := $(TARGET_OUT_NOTICE_FILES)/src/winpthreads.txt
 pdk_fusion_notice_files := $(filter $(TARGET_OUT_NOTICE_FILES)/%, $(ALL_PDK_FUSION_FILES))
 
+ifdef target_vendor_notice_file_html_gz
+$(eval $(call combine-notice-files-without-vendor, \
+			$(target_notice_file_txt), \
+			$(target_notice_file_html), \
+			"Notices for files contained in the filesystem images in this directory:", \
+			$(TARGET_OUT_NOTICE_FILES), \
+			$(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)))
+$(eval $(call combine-vendor-notice-files, \
+			$(target_vendor_notice_file_txt), \
+			$(target_vendor_notice_file_html), \
+			"Notices for files contained in the vendor filesystem image in this directory:", \
+			$(TARGET_OUT_NOTICE_FILES), \
+			$(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)))
+else
 $(eval $(call combine-notice-files, \
 			$(target_notice_file_txt), \
 			$(target_notice_file_html), \
 			"Notices for files contained in the filesystem images in this directory:", \
 			$(TARGET_OUT_NOTICE_FILES), \
 			$(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)))
+endif
 
 $(eval $(call combine-notice-files, \
 			$(tools_notice_file_txt), \
@@ -722,9 +760,21 @@ installed_notice_html_gz := $(TARGET_OUT)/etc/NOTICE.html.gz
 $(installed_notice_html_gz): $(target_notice_file_html_gz)
 	$(copy-file-to-target)
 
+ifdef target_notice_file_html_gz
+# Install the vendor html file at /vendor/etc/NOTICE.html.gz.
+$(target_vendor_notice_file_html_gz): $(target_vendor_notice_file_html) | $(MINIGZIP)
+	$(hide) $(MINIGZIP) -9 < $< > $@
+installed_vendor_notice_html_gz := $(TARGET_OUT_VENDOR)/etc/NOTICE.html.gz
+$(installed_vendor_notice_html_gz): $(target_vendor_notice_file_html_gz)
+	$(copy-file-to-target)
+endif
+
 # if we've been run my mm, mmm, etc, don't reinstall this every time
 ifeq ($(ONE_SHOT_MAKEFILE),)
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_notice_html_gz)
+  ifdef target_vendor_notice_file_html_gz
+    ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_html_gz)
+  endif
 endif
 endif  # TARGET_BUILD_APPS
 
