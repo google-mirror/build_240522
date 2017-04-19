@@ -12,6 +12,9 @@
 #
 
 my_embed_jni :=
+ifeq ($(LOCAL_EMBED_JNI_LIBRARIES),true)
+my_embed_jni := true
+endif
 ifneq ($(TARGET_BUILD_APPS),)
 my_embed_jni := true
 endif
