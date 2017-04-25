@@ -1281,7 +1281,7 @@ define build-systemimage-target
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-userimage-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt, \
       skip_fsck=true)
-  $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+  $(hide) PATH=$(call normalize-path-list,$(INTERNAL_USERIMAGES_BINARY_PATHS)):$$PATH \
       ./build/tools/releasetools/build_image.py \
       $(TARGET_OUT) $(systemimage_intermediates)/system_image_info.txt $(1) $(TARGET_OUT) \
       || ( echo "Out of space? the tree size of $(TARGET_OUT) is (MB): " 1>&2 ;\
@@ -1504,7 +1504,7 @@ define build-userdataimage-target
   @mkdir -p $(TARGET_OUT_DATA)
   @mkdir -p $(userdataimage_intermediates) && rm -rf $(userdataimage_intermediates)/userdata_image_info.txt
   $(call generate-userimage-prop-dictionary, $(userdataimage_intermediates)/userdata_image_info.txt, skip_fsck=true)
-  $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+  $(hide) PATH=$(call normalize-path-list,$(INTERNAL_USERIMAGES_BINARY_PATHS)):$$PATH \
       ./build/tools/releasetools/build_image.py \
       $(TARGET_OUT_DATA) $(userdataimage_intermediates)/userdata_image_info.txt $(INSTALLED_USERDATAIMAGE_TARGET) $(TARGET_OUT)
   $(hide) $(call assert-max-image-size,$(INSTALLED_USERDATAIMAGE_TARGET),$(BOARD_USERDATAIMAGE_PARTITION_SIZE))
@@ -1611,7 +1611,7 @@ define build-cacheimage-target
   @mkdir -p $(TARGET_OUT_CACHE)
   @mkdir -p $(cacheimage_intermediates) && rm -rf $(cacheimage_intermediates)/cache_image_info.txt
   $(call generate-userimage-prop-dictionary, $(cacheimage_intermediates)/cache_image_info.txt, skip_fsck=true)
-  $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+  $(hide) PATH=$(call normalize-path-list,$(INTERNAL_USERIMAGES_BINARY_PATHS)):$$PATH \
       ./build/tools/releasetools/build_image.py \
       $(TARGET_OUT_CACHE) $(cacheimage_intermediates)/cache_image_info.txt $(INSTALLED_CACHEIMAGE_TARGET) $(TARGET_OUT)
   $(hide) $(call assert-max-image-size,$(INSTALLED_CACHEIMAGE_TARGET),$(BOARD_CACHEIMAGE_PARTITION_SIZE))
@@ -1714,7 +1714,7 @@ define build-vendorimage-target
   $(call generate-userimage-prop-dictionary, $(vendorimage_intermediates)/vendor_image_info.txt, skip_fsck=true)
   $(if $(BOARD_VENDOR_KERNEL_MODULES), \
     $(call build-image-kernel-modules,$(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_OUT_VENDOR),vendor/,$(call intermediates-dir-for,PACKAGING,depmod_vendor)))
-  $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+  $(hide) PATH=$(call normalize-path-list,$(INTERNAL_USERIMAGES_BINARY_PATHS)):$$PATH \
       ./build/tools/releasetools/build_image.py \
       $(TARGET_OUT_VENDOR) $(vendorimage_intermediates)/vendor_image_info.txt $(INSTALLED_VENDORIMAGE_TARGET) $(TARGET_OUT)
   $(hide) $(call assert-max-image-size,$(INSTALLED_VENDORIMAGE_TARGET),$(BOARD_VENDORIMAGE_PARTITION_SIZE))
