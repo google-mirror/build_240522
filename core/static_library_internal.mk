@@ -20,6 +20,19 @@ endif
 
 include $(BUILD_SYSTEM)/binary.mk
 
+ifneq ($(my_create_source_abi_dump),false)
+ifneq ($(strip $(all_sdump_objects)),)
+sabi_lsdump := $(LOCAL_BUILT_MODULE).lsdump
+$(sabi_lsdump): $(all_sdump_objects) $(PRIVATE_HEADER_ABI_LINKER)
+	$(transform-sdumps-to-lsdump)
+$(LOCAL_BUILT_MODULE): $(sabi_lsdump)
+zipped_ref_sabi_lsdump := $(VNDK_REF_ABI_DUMP_DIR)/current/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)/source-based/$(LOCAL_MODULE).a.lsdump.gz
+ifneq ($(wildcard $(zipped_ref_sabi_dump)),)
+$(eval $(call create-sabi-diff-report,LOCAL_BUILT_MODULE,$(zipped_ref_sabi_lsdump), sabi_lsdump, $(LOCAL_MODULE), $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)))
+endif
+endif
+endif
+
 $(LOCAL_BUILT_MODULE) : $(built_whole_libraries)
 $(LOCAL_BUILT_MODULE) : $(all_objects)
 	$(transform-o-to-static-lib)
