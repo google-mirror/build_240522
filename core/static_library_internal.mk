@@ -20,6 +20,26 @@ endif
 
 include $(BUILD_SYSTEM)/binary.mk
 
+ifneq ($(my_create_source_abi_dump),false)
+ifneq ($(strip $(all_sdump_objects)),)
+$(LOCAL_BUILT_MODULE).lsdump: $(all_sdump_objects) $(PRIVATE_HEADER_ABI_LINKER)
+	$(transform-sdumps-to-lsdump)
+$(LOCAL_BUILT_MODULE): $(LOCAL_BUILT_MODULE).lsdump
+zipped_ref_sabi_dump := $(VNDK_REF_ABI_DUMP_DIR)/current/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)/source-based/$(LOCAL_MODULE).a.lsdump.gz
+ifneq ($(wildcard $(zipped_ref_sabi_dump)),)
+unzipped_ref_sabi_dump := $(LOCAL_BUILT_MODULE)_ref.lsdump
+$(unzipped_ref_sabi_dump): $(zipped_ref_sabi_dump)
+	$(transform-zipped-lsdump-to-unzipped-lsdump)
+sabi_diff_report := $(LOCAL_BUILT_MODULE).abidiff
+$(sabi_diff_report) : PRIVATE_SABI_DUMP := $(sabi_dump)
+$(sabi_diff_report) : PRIVATE_SABI_REF_DUMP := $(unzipped_ref_sabi_dump)
+$(sabi_diff_report) : $(unzipped_ref_sabi_dump) $(sabi_dump) $(HEADER_ABI_DIFF)
+	$(diff-sabi)
+$(LOCAL_BUILT_MODULE) : $(sabi_diff_report)
+endif
+endif
+endif
+
 $(LOCAL_BUILT_MODULE) : $(built_whole_libraries)
 $(LOCAL_BUILT_MODULE) : $(all_objects)
 	$(transform-o-to-static-lib)
