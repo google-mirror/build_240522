@@ -1204,6 +1204,44 @@ endif
 c_objects += $(dotdot_arm_objects) $(dotdot_objects)
 
 ###########################################################
+## Source Abi Dumps : Transform .c / .cpp files to .sdump.
+###########################################################
+
+c_sdump_objects :=
+cpp_sdump_objects :=
+my_create_source_abi_dump := true
+# Only vndk-core eligible libraries should get abi stability checks.
+ifeq ($(filter $(LOCAL_MODULE), $(strip $(VNDK_ELIGIBLE_LIBRARIES))),)
+  my_create_source_abi_dump := false
+endif
+ifneq ($(my_clang), true)
+  my_create_source_abi_dump := false
+endif
+
+ifneq ($(my_create_source_abi_dump),false)
+c_normal_sdump_objects := $(addprefix $(intermediates)/,$(c_normal_sources:.c=.sdump))
+c_arm_sdump_objects := $(addprefix $(intermediates)/,$(c_arm_sources:.c=.sdump))
+c_gen_sdump_objects := $(addprefix $(intermediates)/,$(c_gen_sources:.c=.sdump))
+c_sdump_objects := $(c_normal_sdump_objects) $(c_arm_sdump_objects) $(c_gen_sdump_objects)
+$(c_sdump_objects): $(HEADER_ABI_DUMPER)
+$(c_sdump_objects): $(intermediates)/%.sdump: $(intermediates)/%.o
+$(c_sdump_objects): $(intermediates)/%.sdump: $(LOCAL_PATH)/%.c
+	$(transform-c-source-to-abi-dump)
+
+
+cpp_normal_sdump_objects = $(addprefix $(intermediates)/,$(cpp_normal_sources:$(LOCAL_CPP_EXTENSION)=.sdump))
+cpp_arm_sdump_objects := $(addprefix $(intermediates)/,$(cpp_arm_sources:$(LOCAL_CPP_EXTENSION)=.sdump))
+cpp_gen_sdump_objects := $(addprefix $(intermediates)/,$(cpp_gen_sources:$(LOCAL_CPP_EXTENSION)=.sdump))
+cpp_sdump_objects := $(cpp_normal_sdump_objects) $(cpp_arm_sdump_objects) $(cpp_gen_sdump_objects)
+$(cpp_sdump_objects): $(HEADER_ABI_DUMPER)
+$(cpp_sdump_objects): $(intermediates)/%.sdump: $(intermediates)/%.o
+$(cpp_sdump_objects): $(intermediates)/%.sdump: $(TOPDIR)$(LOCAL_PATH)/%$(LOCAL_CPP_EXTENSION)
+	$(transform-cpp-source-to-abi-dump)
+endif
+
+all_sdump_objects := $(cpp_sdump_objects) $(c_sdump_objects)
+
+###########################################################
 ## C: Compile generated .c files to .o.
 ###########################################################
 
@@ -1727,6 +1765,13 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LDLIBS := $(my_ldlibs)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_CHECKS := $(my_tidy_checks)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_FLAGS := $(my_tidy_flags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ARFLAGS := $(my_arflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_C_EXPORTS := $(addprefix -I ,$(my_export_c_include_dirs))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RS_LLVM_INCLUDES := $(RS_LLVM_INCLUDES)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HEADER_ABI_DUMPER := $(HEADER_ABI_DUMPER)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HEADER_ABI_DUMPER_ADDITIONAL_FLAGS := -Wno-packed -Qunused-arguments
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HEADER_ABI_LINKER := $(HEADER_ABI_LINKER)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_UNZIP := $(GUNZIP)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HEADER_ABI_DIFF := $(HEADER_ABI_DIFF)
 
 # this is really the way to get the files onto the command line instead
 # of using $^, because then LOCAL_ADDITIONAL_DEPENDENCIES doesn't work
@@ -1734,6 +1779,7 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_SHARED_LIBRARIES := $(built_shared_li
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_STATIC_LIBRARIES := $(built_static_libraries)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_WHOLE_STATIC_LIBRARIES := $(built_whole_libraries)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_OBJECTS := $(strip $(all_objects))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ALL_SDUMP_OBJECTS := $(strip $(all_sdump_objects))
 
 ###########################################################
 # Define library dependencies.

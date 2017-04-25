@@ -1807,6 +1807,44 @@ define transform-o-to-shared-lib
 $(transform-o-to-shared-lib-inner)
 endef
 
+##########################################################
+## Source based abi dumping, linking and diffing for Vndk.
+##########################################################
+
+define transform-c-source-to-abi-dump
+$(PRIVATE_HEADER_ABI_DUMPER) $< -o $@ $(PRIVATE_C_EXPORTS)  -- $(transform-c-to-o-compiler-args) -isystem $(PRIVATE_RS_LLVM_INCLUDES) \
+	$(PRIVATE_HEADER_ABI_DUMPER_ADDITIONAL_FLAGS)
+endef
+
+define transform-cpp-source-to-abi-dump
+$(PRIVATE_HEADER_ABI_DUMPER) $< -o $@ $(PRIVATE_C_EXPORTS)  -- $(transform-cpp-to-o-compiler-args) -isystem $(PRIVATE_RS_LLVM_INCLUDES) \
+	$(PRIVATE_HEADER_ABI_DUMPER_ADDITIONAL_FLAGS)
+endef
+
+define transform-sdumps-to-lsdump
+$(PRIVATE_HEADER_ABI_LINKER) $(PRIVATE_ALL_SDUMP_OBJECTS) -o $@ $(PRIVATE_C_EXPORTS)
+endef
+
+define transform-zipped-lsdump-to-unzipped-lsdump
+$(PRIVATE_UNZIP) -c $< > $@
+endef
+
+define diff-sabi
+$(PRIVATE_HEADER_ABI_DIFF) -new $(PRIVATE_SABI_DUMP) -old $(PRIVATE_SABI_REF_DUMP) -o $@ -advice-only
+endef
+
+define create-sabi-diff-report
+unzipped_ref_sabi_dump := $$($1)_ref.lsdump
+$$(unzipped_ref_sabi_dump) : $2
+	$$(transform-zipped-lsdump-to-unzipped-lsdump)
+sabi_diff_report := $$($1).abidiff
+$$(sabi_diff_report) : PRIVATE_SABI_DUMP := $$($3)
+$$(sabi_diff_report) : PRIVATE_SABI_REF_DUMP := $$(unzipped_ref_sabi_dump)
+$$(sabi_diff_report) : $$(unzipped_ref_sabi_dump) $$($3) $$(HEADER_ABI_DIFF)
+	$$(diff-sabi)
+$$($1) : $$(sabi_diff_report)
+endef
+
 ###########################################################
 ## Commands for filtering a target executable or library
 ###########################################################
