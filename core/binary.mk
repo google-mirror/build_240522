@@ -1201,6 +1201,17 @@ $(c_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.c \
 $(call include-depfiles-for-objs, $(c_objects))
 endif
 
+c_sdump_objects := $(addprefix $(intermediates)/,$(c_normal_sources:.c=.sdump))
+
+$(c_sdump_objects): $(intermediates)/%.sdump: $(TOPDIR)$(LOCAL_PATH)/%.c
+  @echo "Transform file: $@"
+  $(call transform-c-to-source-abi-dump)
+
+#For testing make all targets depend on these dumps
+$(my_all_targets) : $(c_sdump_objects)
+
+
+
 c_objects += $(dotdot_arm_objects) $(dotdot_objects)
 
 ###########################################################
@@ -1659,6 +1670,13 @@ endif
 # my_tidy_checks is empty if clang-tidy is disabled.
 my_tidy_checks :=
 my_tidy_flags :=
+
+# Flag to turn soure abi dumps on, not used currently.
+my_create_source_abi_dump := true
+ifneq ($(my_clang), true)
+	my_create_source_abi_dump :=
+endif
+
 ifneq (,$(filter 1 true,$(my_tidy_enabled)))
   ifneq ($(my_clang),true)
     # Disable clang-tidy if clang is disabled.
@@ -1688,6 +1706,15 @@ ifneq (,$(filter 1 true,$(my_tidy_enabled)))
 endif
 
 my_tidy_checks := $(subst $(space),,$(my_tidy_checks))
+
+# Only static and shared non proprietary libraries should have abi stability checks.
+ifneq ($(filter $(LOCAL_MODULE), SHARED_LIBRARIES STATIC_LIBRARIES),)
+  $(warning $(LOCAL_MODULE) wont get source dumps)
+  my_create_source_abi_dump :=
+endif
+ifneq ($(LOCAL_PROPRIETARY_MODULE),)
+  my_create_source_abi_dump :=
+endif
 
 # Move -l* entries from ldflags to ldlibs, and everything else to ldflags
 my_ldlib_flags := $(my_ldflags) $(my_ldlibs)
@@ -1727,6 +1754,9 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LDLIBS := $(my_ldlibs)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_CHECKS := $(my_tidy_checks)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TIDY_FLAGS := $(my_tidy_flags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ARFLAGS := $(my_arflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CREATE_SOURCE_ABI_DUMP := $(my_create_source_abi_dump)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_C_EXPORTS := $(addprefix -I ,$(my_export_c_include_dirs))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RS_LLVM_INCLUDES := $(RS_LLVM_PREBUILTS_PATH)/../lib64/clang/3.8/include
 
 # this is really the way to get the files onto the command line instead
 # of using $^, because then LOCAL_ADDITIONAL_DEPENDENCIES doesn't work

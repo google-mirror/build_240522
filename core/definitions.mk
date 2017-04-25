@@ -1229,6 +1229,10 @@ $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   $< -- $(transform-cpp-to-o-compiler-args)
 endef
 
+define create-cpp-source-abi-dump
+header-abi-dumper $< -o $@.sdump $(PRIVATE_C_EXPORTS)  -- $(transform-cpp-to-o-compiler-args) -isystem $(PRIVATE_RS_LLVM_INCLUDES)
+endef
+
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-cpp-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
@@ -1275,6 +1279,10 @@ define clang-tidy-c
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
   $< -- $(transform-c-to-o-compiler-args)
+endef
+
+define transform-c-to-source-abi-dump
+header-abi-dumper $< -o $@.sdump $(PRIVATE_C_EXPORTS)  -- $(transform-c-to-o-compiler-args) -isystem $(PRIVATE_RS_LLVM_INCLUDES)
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
