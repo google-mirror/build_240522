@@ -352,6 +352,17 @@ ifneq ($(my_register_name),$(LOCAL_MODULE))
 $(LOCAL_MODULE) : $(my_all_targets)
 endif
 
+# Summarize all the vndk abi check diff reports.
+ifneq ($(HEADER_ABI_DIFFS),)
+MERGED_ABI_DIFF_REPORT = $(PRODUCT_OUT)/vndk_abi_diff
+$(MERGED_ABI_DIFF_REPORT) : PRIVATE_SABI_DIFFS := $(HEADER_ABI_DIFFS)
+$(MERGED_ABI_DIFF_REPORT) : PRIVATE_MERGE_SABI_DIFFS := $(MERGE_SABI_DIFFS)
+$(MERGED_ABI_DIFF_REPORT) : $(MERGED_REPORT) $(HEADER_ABI_DIFFS) $(MERGE_SABI_DIFFS)
+	$(merge-abi-diffs)
+$(my_all_targets): $(MERGED_ABI_DIFF_REPORT)
+endif
+
+
 # Set up phony targets that covers all modules under the given paths.
 # This allows us to build everything in given paths by running mmma/mma.
 my_path_components := $(subst /,$(space),$(LOCAL_PATH))
