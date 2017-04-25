@@ -74,6 +74,19 @@ $(linked_module): \
         $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	$(transform-o-to-shared-lib)
 
+ifneq ($(my_create_source_abi_dump),false)
+ifneq ($(strip $(all_sdump_objects)),)
+sabi_lsdump := $(linked_module).lsdump
+$(sabi_lsdump): $(all_sdump_objects) $(HEADER_ABI_LINKER)
+	$(transform-sdumps-to-lsdump)
+$(linked_module): $(sabi_lsdump)
+zipped_ref_sabi_lsdump := $(VNDK_REF_ABI_DUMP_DIR)/current/$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)/source-based/$(LOCAL_MODULE).so.lsdump.gz
+ifneq ($(wildcard $(zipped_ref_sabi_lsdump)),)
+$(eval $(call create-sabi-diff-report,linked_module,$(zipped_ref_sabi_lsdump),sabi_lsdump))
+endif
+endif
+endif
+
 ifeq ($(my_native_coverage),true)
 gcno_suffix := .gcnodir
 
