@@ -20,6 +20,14 @@ endif
 
 include $(BUILD_SYSTEM)/binary.mk
 
+ifneq ($(my_create_source_abi_dump),false)
+ifneq ($(strip $(all_sdump_objects)),)
+$(LOCAL_BUILT_MODULE).lsdump: $(all_sdump_objects) $(PRIVATE_HEADER_ABI_LINKER)
+	$(transform-sdumps-to-lsdump)
+$(LOCAL_BUILT_MODULE): $(LOCAL_BUILT_MODULE).lsdump
+endif
+endif
+
 $(LOCAL_BUILT_MODULE) : $(built_whole_libraries)
 $(LOCAL_BUILT_MODULE) : $(all_objects)
 	$(transform-o-to-static-lib)

@@ -73,7 +73,13 @@ $(linked_module): \
         $(my_target_libatomic) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	$(transform-o-to-shared-lib)
-
+ifneq ($(my_create_source_abi_dump),false)
+ifneq ($(strip $(all_sdump_objects)),)
+$(linked_module).lsdump: $(all_sdump_objects) $(PRIVATE_HEADER_ABI_LINKER)
+	$(transform-sdumps-to-lsdump)
+$(linked_module): $(linked_module).lsdump
+endif
+endif
 ifeq ($(my_native_coverage),true)
 gcno_suffix := .gcnodir
 

@@ -542,7 +542,8 @@ prebuilt_sdk_tools_bin :=
 # ---------------------------------------------------------------
 # Generic tools.
 JACK := $(HOST_OUT_EXECUTABLES)/jack
-
+HEADER_ABI_DUMPER := prebuilts/build-tools/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/bin/header-abi-dumper
+HEADER_ABI_LINKER := prebuilts/build-tools/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/bin/header-abi-linker
 LEX := prebuilts/misc/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/flex/flex-2.5.39
 # The default PKGDATADIR built in the prebuilt bison is a relative path
 # external/bison/data.

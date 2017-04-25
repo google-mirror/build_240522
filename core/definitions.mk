@@ -1277,6 +1277,10 @@ $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   $< -- $(transform-c-to-o-compiler-args)
 endef
 
+define transform-source-to-abi-dump
+$(PRIVATE_HEADER_ABI_DUMPER) $< -o $@ $(PRIVATE_C_EXPORTS)  -- $(transform-c-to-o-compiler-args) -isystem $(PRIVATE_RS_LLVM_INCLUDES)
+endef
+
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-c-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
@@ -1807,6 +1811,13 @@ define transform-o-to-shared-lib
 $(transform-o-to-shared-lib-inner)
 endef
 
+##########################################################
+## Link source abi dumps from a module into a single dump
+##########################################################
+
+define transform-sdumps-to-lsdump
+$(PRIVATE_HEADER_ABI_LINKER) $(PRIVATE_ALL_SDUMP_OBJECTS) -o $@ $(PRIVATE_C_EXPORTS)
+endef
 ###########################################################
 ## Commands for filtering a target executable or library
 ###########################################################
