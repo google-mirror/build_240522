@@ -1077,10 +1077,13 @@ endef
 ## Commands for running aidl
 ###########################################################
 
+# b/37749857
+AIDL_ASAN_OPTIONS := ASAN_OPTIONS=detect_leaks=0
+
 define transform-aidl-to-java
 @mkdir -p $(dir $@)
 @echo "Aidl: $(PRIVATE_MODULE) <= $<"
-$(hide) $(AIDL) -d$(patsubst %.java,%.P,$@) $(PRIVATE_AIDL_FLAGS) $< $@
+$(hide) $(AIDL_ASAN_OPTIONS) $(AIDL) -d$(patsubst %.java,%.P,$@) $(PRIVATE_AIDL_FLAGS) $< $@
 endef
 #$(AIDL) $(PRIVATE_AIDL_FLAGS) $< - | indent -nut -br -npcs -l1000 > $@
 
@@ -1088,7 +1091,7 @@ define transform-aidl-to-cpp
 @mkdir -p $(dir $@)
 @mkdir -p $(PRIVATE_HEADER_OUTPUT_DIR)
 @echo "Generating C++ from AIDL: $(PRIVATE_MODULE) <= $<"
-$(hide) $(AIDL_CPP) -d$(basename $@).aidl.d -ninja $(PRIVATE_AIDL_FLAGS) \
+$(hide) $(AIDL_ASAN_OPTIONS) $(AIDL_CPP) -d$(basename $@).aidl.d -ninja $(PRIVATE_AIDL_FLAGS) \
     $< $(PRIVATE_HEADER_OUTPUT_DIR) $@
 endef
 
