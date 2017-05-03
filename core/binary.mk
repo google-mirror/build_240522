@@ -1755,6 +1755,11 @@ $(LOCAL_INSTALLED_MODULE): | $(installed_static_library_notice_file_targets)
 ###########################################################
 export_includes := $(intermediates)/export_includes
 export_cflags := $(foreach d,$(my_export_c_include_dirs),-I $(d))
+# Ensure that exported directories exist
+$(foreach d,$(my_export_c_include_dirs),\
+  $(if $(filter-out $(OUT_DIR)/%,$(d)),\
+    $(if $(wildcard $(d)),,\
+      $(call pretty-error,Exported include directory \"$(d)\" does not exist.))))
 # Soong exports cflags instead of include dirs, so that -isystem can be included.
 ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 export_cflags += $(LOCAL_EXPORT_CFLAGS)

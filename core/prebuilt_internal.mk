@@ -131,6 +131,11 @@ else  # my_strip_module and my_pack_module_relocations not true
 ifdef prebuilt_module_is_a_library
 export_includes := $(intermediates)/export_includes
 export_cflags := $(foreach d,$(LOCAL_EXPORT_C_INCLUDE_DIRS),-I $(d))
+# Ensure that exported directories exist
+$(foreach d,$(LOCAL_EXPORT_C_INCLUDE_DIRS),\
+  $(if $(filter-out $(OUT_DIR)/%,$(d)),\
+    $(if $(wildcard $(d)),,\
+      $(call pretty-error,Exported include directory \"$(d)\" does not exist.))))
 # Soong exports cflags instead of include dirs, so that -isystem can be included.
 ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 export_cflags += $(LOCAL_EXPORT_CFLAGS)
