@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Andreas Gampe <agampe@google.com>
+Verified+1: Andreas Gampe <agampe@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 04 May 2017 04:47:02 +0000
+Reviewed-on: https://android-review.googlesource.com/382993
+Project: platform/build
+Branch: refs/heads/master
