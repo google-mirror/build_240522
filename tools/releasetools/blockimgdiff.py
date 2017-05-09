@@ -26,6 +26,7 @@ import re
 import subprocess
 import sys
 import threading
+import zipfile
 
 from collections import deque, OrderedDict
 from hashlib import sha1
@@ -33,6 +34,230 @@ from rangelib import RangeSet
 
 
 __all__ = ["EmptyImage", "DataImage", "BlockImageDiff"]
+
+class BlockDifference(object):
+  def __init__(self, partition, tgt, src=None, check_first_block=False,
+               version=None, disable_imgdiff=False):
+    self.tgt = tgt
+    self.src = src
+    self.partition = partition
+    self.check_first_block = check_first_block
+    self.disable_imgdiff = disable_imgdiff
+
+    if version is None:
+      version = 1
+      if common.OPTIONS.info_dict:
+        version = max(int(i) for i in common.OPTIONS.info_dict.get(
+            "blockimgdiff_versions", "1").split(","))
+    assert version >= 3
+    self.version = version
+
+    b = BlockImageDiff(tgt, src, threads=common.OPTIONS.worker_threads,
+                       version=self.version,
+                       disable_imgdiff=self.disable_imgdiff)
+    tmpdir = common.tempfile.mkdtemp()
+    common.OPTIONS.tempfiles.append(tmpdir)
+    self.path = os.path.join(tmpdir, partition)
+    b.Compute(self.path)
+    self._required_cache = b.max_stashed_size
+    self.touched_src_ranges = b.touched_src_ranges
+    self.touched_src_sha1 = b.touched_src_sha1
+
+    if src is None:
+      _, self.device = common.GetTypeAndDevice("/" + partition,
+                                               common.OPTIONS.info_dict)
+    else:
+      _, self.device = common.GetTypeAndDevice("/" + partition,
+                                               common.OPTIONS.source_info_dict)
+
+  @property
+  def required_cache(self):
+    return self._required_cache
+
+  def WriteScript(self, script, output_zip, progress=None):
+    if not self.src:
+      # write the output unconditionally
+      script.Print("Patching %s image unconditionally..." % (self.partition,))
+    else:
+      script.Print("Patching %s image after verification." % (self.partition,))
+
+    if progress:
+      script.ShowProgress(progress, 0)
+    self._WriteUpdate(script, output_zip)
+    if common.OPTIONS.verify:
+      self._WritePostInstallVerifyScript(script)
+
+  def WriteStrictVerifyScript(self, script):
+    """Verify all the blocks in the care_map, including clobbered blocks.
+
+    This differs from the WriteVerifyScript() function: a) it prints different
+    error messages; b) it doesn't allow half-way updated images to pass the
+    verification."""
+
+    partition = self.partition
+    script.Print("Verifying %s..." % (partition,))
+    ranges = self.tgt.care_map
+    ranges_str = ranges.to_string_raw()
+    script.AppendExtra('range_sha1("%s", "%s") == "%s" && '
+                       'ui_print("    Verified.") || '
+                       'ui_print("\\"%s\\" has unexpected contents.");' % (
+                       self.device, ranges_str,
+                       self.tgt.TotalSha1(include_clobbered_blocks=True),
+                       self.device))
+    script.AppendExtra("")
+
+  def WriteVerifyScript(self, script, touched_blocks_only=False):
+    partition = self.partition
+
+    # full OTA
+    if not self.src:
+      script.Print("Image %s will be patched unconditionally." % (partition,))
+
+    # incremental OTA
+    else:
+      if touched_blocks_only:
+        ranges = self.touched_src_ranges
+        expected_sha1 = self.touched_src_sha1
+      else:
+        ranges = self.src.care_map.subtract(self.src.clobbered_blocks)
+        expected_sha1 = self.src.TotalSha1()
+
+      # No blocks to be checked, skipping.
+      if not ranges:
+        return
+
+      ranges_str = ranges.to_string_raw()
+      script.AppendExtra(('if (range_sha1("%s", "%s") == "%s" || '
+                          'block_image_verify("%s", '
+                          'package_extract_file("%s.transfer.list"), '
+                          '"%s.new.dat", "%s.patch.dat")) then') % (
+                          self.device, ranges_str, expected_sha1,
+                          self.device, partition, partition, partition))
+      script.Print('Verified %s image...' % (partition,))
+      script.AppendExtra('else')
+
+      if self.version >= 4:
+
+        # Bug: 21124327
+        # When generating incrementals for the system and vendor partitions in
+        # version 4 or newer, explicitly check the first block (which contains
+        # the superblock) of the partition to see if it's what we expect. If
+        # this check fails, give an explicit log message about the partition
+        # having been remounted R/W (the most likely explanation).
+        if self.check_first_block:
+          script.AppendExtra('check_first_block("%s");' % (self.device,))
+
+        # If version >= 4, try block recovery before abort update
+        if partition == "system":
+          code = common.ErrorCode.SYSTEM_RECOVER_FAILURE
+        else:
+          code = common.ErrorCode.VENDOR_RECOVER_FAILURE
+        script.AppendExtra((
+            'ifelse (block_image_recover("{device}", "{ranges}") && '
+            'block_image_verify("{device}", '
+            'package_extract_file("{partition}.transfer.list"), '
+            '"{partition}.new.dat", "{partition}.patch.dat"), '
+            'ui_print("{partition} recovered successfully."), '
+            'abort("E{code}: {partition} partition fails to recover"));\n'
+            'endif;').format(device=self.device, ranges=ranges_str,
+                             partition=partition, code=code))
+
+      # Abort the OTA update. Note that the incremental OTA cannot be applied
+      # even if it may match the checksum of the target partition.
+      # a) If version < 3, operations like move and erase will make changes
+      #    unconditionally and damage the partition.
+      # b) If version >= 3, it won't even reach here.
+      else:
+        if partition == "system":
+          code = common.ErrorCode.SYSTEM_VERIFICATION_FAILURE
+        else:
+          code = common.ErrorCode.VENDOR_VERIFICATION_FAILURE
+        script.AppendExtra((
+            'abort("E%d: %s partition has unexpected contents");\n'
+            'endif;') % (code, partition))
+
+  def _WritePostInstallVerifyScript(self, script):
+    partition = self.partition
+    script.Print('Verifying the updated %s image...' % (partition,))
+    # Unlike pre-install verification, clobbered_blocks should not be ignored.
+    ranges = self.tgt.care_map
+    ranges_str = ranges.to_string_raw()
+    script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
+                       self.device, ranges_str,
+                       self.tgt.TotalSha1(include_clobbered_blocks=True)))
+
+    # Bug: 20881595
+    # Verify that extended blocks are really zeroed out.
+    if self.tgt.extended:
+      ranges_str = self.tgt.extended.to_string_raw()
+      script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
+                         self.device, ranges_str,
+                         self._HashZeroBlocks(self.tgt.extended.size())))
+      script.Print('Verified the updated %s image.' % (partition,))
+      if partition == "system":
+        code = common.ErrorCode.SYSTEM_NONZERO_CONTENTS
+      else:
+        code = common.ErrorCode.VENDOR_NONZERO_CONTENTS
+      script.AppendExtra(
+          'else\n'
+          '  abort("E%d: %s partition has unexpected non-zero contents after '
+          'OTA update");\n'
+          'endif;' % (code, partition))
+    else:
+      script.Print('Verified the updated %s image.' % (partition,))
+
+    if partition == "system":
+      code = common.ErrorCode.SYSTEM_UNEXPECTED_CONTENTS
+    else:
+      code = common.ErrorCode.VENDOR_UNEXPECTED_CONTENTS
+
+    script.AppendExtra(
+        'else\n'
+        '  abort("E%d: %s partition has unexpected contents after OTA '
+        'update");\n'
+        'endif;' % (code, partition))
+
+  def _WriteUpdate(self, script, output_zip):
+    common.ZipWrite(output_zip,
+                    '{}.transfer.list'.format(self.path),
+                    '{}.transfer.list'.format(self.partition))
+    common.ZipWrite(output_zip,
+                    '{}.new.dat'.format(self.path),
+                    '{}.  new.dat'.format(self.partition))
+    common.ZipWrite(output_zip,
+                    '{}.patch.dat'.format(self.path),
+                    '{}.patch.dat'.format(self.partition),
+                    compress_type=zipfile.ZIP_STORED)
+
+    if self.partition == "system":
+      code = common.ErrorCode.SYSTEM_UPDATE_FAILURE
+    else:
+      code = common.ErrorCode.VENDOR_UPDATE_FAILURE
+
+    call = ('block_image_update("{device}", '
+            'package_extract_file("{partition}.transfer.list"), '
+            '"{partition}.new.dat", "{partition}.patch.dat") ||\n'
+            '  abort("E{code}: Failed to update {partition} image.");'.format(
+                device=self.device, partition=self.partition, code=code))
+    script.AppendExtra(script.WordWrap(call))
+
+  def _HashBlocks(self, source, ranges): # pylint: disable=no-self-use
+    data = source.ReadRangeSet(ranges)
+    ctx = sha1()
+
+    for p in data:
+      ctx.update(p)
+
+    return ctx.hexdigest()
+
+  def _HashZeroBlocks(self, num_blocks): # pylint: disable=no-self-use
+    """Return the hash value for all zero blocks."""
+    zero_block = '\x00' * 4096
+    ctx = sha1()
+    for _ in range(num_blocks):
+      ctx.update(zero_block)
+
+    return ctx.hexdigest()
 
 
 def compute_patch(srcfile, tgtfile, imgdiff=False):
@@ -540,9 +765,9 @@ class BlockImageDiff(object):
         f.write(i)
 
     self._max_stashed_size = max_stashed_blocks * self.tgt.blocksize
-    OPTIONS = common.OPTIONS
-    if OPTIONS.cache_size is not None:
-      max_allowed = OPTIONS.cache_size * OPTIONS.stash_threshold
+    common.OPTIONS = common.OPTIONS
+    if common.OPTIONS.cache_size is not None:
+      max_allowed = common.OPTIONS.cache_size * common.OPTIONS.stash_threshold
       print("max stashed blocks: %d  (%d bytes), "
             "limit: %d bytes (%.2f%%)\n" % (
             max_stashed_blocks, self._max_stashed_size, max_allowed,

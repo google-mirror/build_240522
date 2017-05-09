@@ -148,6 +148,7 @@ import shlex
 import tempfile
 import zipfile
 
+import blockimgdiff
 import common
 import edify_generator
 import sparse_img
@@ -485,7 +486,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # do it.
   system_tgt = GetImage("system", OPTIONS.input_tmp)
   system_tgt.ResetFileMap()
-  system_diff = common.BlockDifference("system", system_tgt, src=None)
+  system_diff = blockimgdiff.BlockDifference("system", system_tgt, src=None)
   system_diff.WriteScript(script, output_zip)
 
   boot_img = common.GetBootableImage(
@@ -496,7 +497,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
     vendor_tgt = GetImage("vendor", OPTIONS.input_tmp)
     vendor_tgt.ResetFileMap()
-    vendor_diff = common.BlockDifference("vendor", vendor_tgt)
+    vendor_diff = blockimgdiff.BlockDifference("vendor", vendor_tgt)
     vendor_diff.WriteScript(script, output_zip)
 
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
@@ -665,7 +666,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
   system_tgt_partition = OPTIONS.target_info_dict["fstab"]["/system"]
   disable_imgdiff = (system_src_partition.fs_type == "squashfs" or
                      system_tgt_partition.fs_type == "squashfs")
-  system_diff = common.BlockDifference("system", system_tgt, system_src,
+  system_diff = blockimgdiff.BlockDifference("system", system_tgt, system_src,
                                        check_first_block,
                                        version=blockimgdiff_version,
                                        disable_imgdiff=disable_imgdiff)
@@ -681,7 +682,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
     vendor_partition = OPTIONS.source_info_dict["fstab"]["/vendor"]
     check_first_block = vendor_partition.fs_type == "ext4"
     disable_imgdiff = vendor_partition.fs_type == "squashfs"
-    vendor_diff = common.BlockDifference("vendor", vendor_tgt, vendor_src,
+    vendor_diff = blockimgdiff.BlockDifference("vendor", vendor_tgt, vendor_src,
                                          check_first_block,
                                          version=blockimgdiff_version,
                                          disable_imgdiff=disable_imgdiff)
@@ -946,13 +947,13 @@ def WriteVerifyPackage(input_zip, output_zip):
 
   system_tgt = GetImage("system", OPTIONS.input_tmp)
   system_tgt.ResetFileMap()
-  system_diff = common.BlockDifference("system", system_tgt, src=None)
+  system_diff = blockimgdiff.BlockDifference("system", system_tgt, src=None)
   system_diff.WriteStrictVerifyScript(script)
 
   if HasVendorPartition(input_zip):
     vendor_tgt = GetImage("vendor", OPTIONS.input_tmp)
     vendor_tgt.ResetFileMap()
-    vendor_diff = common.BlockDifference("vendor", vendor_tgt, src=None)
+    vendor_diff = blockimgdiff.BlockDifference("vendor", vendor_tgt, src=None)
     vendor_diff.WriteStrictVerifyScript(script)
 
   # Device specific partitions, such as radio, bootloader and etc.
