@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Christian Oder <myself5@carbonrom.org>
+Code-Review+2: Tao Bao <tbao@google.com>
+Verified+1: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Thu, 11 May 2017 19:28:05 +0000
+Reviewed-on: https://android-review.googlesource.com/387492
+Project: platform/build
+Branch: refs/heads/master
