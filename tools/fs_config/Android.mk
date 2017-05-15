@@ -149,104 +149,55 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	   -P '$(subst $(space),$(comma),$(addprefix -,$(fs_config_generate_extra_partition_list)))') \
 	   -o $@
 
-ifneq ($(filter vendor,$(fs_config_generate_extra_partition_list)),)
-##################################
-# Generate the vendor/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_vendor to PRODUCT_PACKAGES in
-# the device make file to enable.
-include $(CLEAR_VARS)
+# Uppercase a string.
+# Notes: Since we don't have GNU Make Standard Library, define uc (upper case).
+# This avoids having to go to the shell, which is slow.
+# Arguments:
+#   1 - The string to uppercase.
+define uc
+$(subst a,A,$(subst b,B,$(subst c,C,$(subst d,D,$(subst e,E,$(subst f,F,$(subst\
+g,G,$(subst h,H,$(subst i,I,$(subst j,J,$(subst k,K,$(subst l,L,$(subst\
+m,M,$(subst n,N,$(subst o,O,$(subst p,P,$(subst q,Q,$(subst r,R,$(subst\
+s,S,$(subst t,T,$(subst u,U,$(subst v,V,$(subst w,W,$(subst x,X,$(subst\
+y,Y,$(subst z,Z,$1))))))))))))))))))))))))))
+endef
 
-LOCAL_MODULE := fs_config_dirs_vendor
-LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -D -P vendor -o $@
 
 ##################################
-# Generate the vendor/etc/fs_config_files binary file for the target
-# Add fs_config_files or fs_config_files_vendor to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add an fs_config_<files|dirs>_<partition> target to the build.
+# Note: these are added as LOCAL_REQUIRED_MODULES for fs_config_<files|dirs>.
+# Arguments:
+#    1 - files or dirs.
+#    2 - The partition name.
+#
+define add_fs_config_for
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_files_vendor
+LOCAL_MODULE := fs_config_$1_$2
 LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_files
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
+LOCAL_INSTALLED_MODULE_STEM := fs_config_$1
+LOCAL_MODULE_PATH := $(TARGET_OUT_$(call uc,$2))/etc
 include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -F -P vendor -o $@
 
-endif
+$(if $(filter $1,files),
+$$(LOCAL_BUILT_MODULE): PRIVATE_OPTIONS := -F,
+$$(LOCAL_BUILT_MODULE): PRIVATE_OPTIONS := -D
+)
+$$(LOCAL_BUILT_MODULE): PRIVATE_PARTITION := $2
+$$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
+	@mkdir -p $$(dir $$@)
+	$$< $$(PRIVATE_OPTIONS) -P $$(PRIVATE_PARTITION) -o $$@
+endef
 
-ifneq ($(filter oem,$(fs_config_generate_extra_partition_list)),)
-##################################
-# Generate the oem/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_oem to PRODUCT_PACKAGES in
-# the device make file to enable
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := fs_config_dirs_oem
-LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
-LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -D -P oem -o $@
-
-##################################
-# Generate the oem/etc/fs_config_files binary file for the target
-# Add fs_config_files or fs_config_files_oem to PRODUCT_PACKAGES in
-# the device make file to enable
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := fs_config_files_oem
-LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_files
-LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -F -P oem -o $@
-
-endif
-
-ifneq ($(filter odm,$(fs_config_generate_extra_partition_list)),)
-##################################
-# Generate the odm/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_odm to PRODUCT_PACKAGES in
-# the device make file to enable
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := fs_config_dirs_odm
-LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
-LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -D -P odm -o $@
-
-##################################
-# Generate the odm/etc/fs_config_files binary file for the target
-# Add fs_config_files of fs_config_files_odm to PRODUCT_PACKAGES in
-# the device make file to enable
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := fs_config_files_odm
-LOCAL_MODULE_CLASS := ETC
-LOCAL_INSTALLED_MODULE_STEM := fs_config_files
-LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
-	@mkdir -p $(dir $@)
-	$< -F -P odm -o $@
-
-endif
+# For each parition (eg. vendor, oem, odm), generate the
+# fs_config_<files|dirs>_<partition> target. For example,
+# the oem generation would be for:
+#     fs_config_files_oem and fs_config_dirs_oem.
+$(foreach partition, $(fs_config_generate_extra_partition_list), \
+  $(foreach type, dirs files, \
+    $(eval $(call add_fs_config_for,$(type),$(partition))) \
+  ) \
+)
 
 # The newer passwd/group targets are only generated if you
 # use the new TARGET_FS_CONFIG_GEN method.
