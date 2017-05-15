@@ -74,6 +74,9 @@ $(my_built_custom_image): PRIVATE_SUPPORT_VERITY := $(CUSTOM_IMAGE_SUPPORT_VERIT
 $(my_built_custom_image): PRIVATE_VERITY_KEY := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY)
 $(my_built_custom_image): PRIVATE_VERITY_BLOCK_DEVICE := $(CUSTOM_IMAGE_VERITY_BLOCK_DEVICE)
 $(my_built_custom_image): PRIVATE_DICT_FILE := $(CUSTOM_IMAGE_DICT_FILE)
+ifneq (,$(findstring avb_enable=true,$$(cat $(CUSTOM_IMAGE_DICT_FILE) || true)))
+  $(my_built_custom_image): $(AVBTOOL)
+endif
 $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_image_copy_files) \
   $(CUSTOM_IMAGE_DICT_FILE)
 	@echo "Build image $@"
