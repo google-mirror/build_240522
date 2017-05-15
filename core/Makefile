@@ -1742,20 +1742,20 @@ endif
 
 # -----------------------------------------------------------------
 # dtbo image
-ifdef BOARD_PREBUILT_DTBOIMAGE
+ifdef BOARD_DTBOIMAGE
 INSTALLED_DTBOIMAGE_TARGET := $(PRODUCT_OUT)/dtbo.img
 
 ifeq ($(BOARD_AVB_ENABLE),true)
-$(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE) $(AVBTOOL)
-	cp $(BOARD_PREBUILT_DTBOIMAGE) $@
+$(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_DTBOIMAGE) $(AVBTOOL)
+	cp $(BOARD_DTBOIMAGE) $@
 	$(AVBTOOL) add_hash_footer \
 		--image $@ \
 		--partition_size $(BOARD_DTBOIMG_PARTITION_SIZE) \
 		--partition_name dtbo $(INTERNAL_AVB_SIGNING_ARGS) \
 		$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)
 else
-$(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)
-	cp $(BOARD_PREBUILT_DTBOIMAGE) $@
+$(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_DTBOIMAGE)
+	cp $(BOARD_DTBOIMAGE) $@
 endif
 
 endif
@@ -2275,7 +2275,7 @@ ifdef BOARD_PREBUILT_VENDORIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_VENDORIMAGE_TARGET) $(zip_root)/IMAGES/
 endif
-ifdef BOARD_PREBUILT_DTBOIMAGE
+ifdef BOARD_DTBOIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_DTBOIMAGE_TARGET) $(zip_root)/IMAGES/
 endif
