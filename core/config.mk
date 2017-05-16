@@ -85,45 +85,66 @@ include $(BUILD_SYSTEM)/pathmap.mk
 # ###############################################################
 # Build system internal files
 # ###############################################################
-
 BUILD_COMBOS:= $(BUILD_SYSTEM)/combo
-
 CLEAR_VARS:= $(BUILD_SYSTEM)/clear_vars.mk
-BUILD_HOST_STATIC_LIBRARY:= $(BUILD_SYSTEM)/host_static_library.mk
-BUILD_HOST_SHARED_LIBRARY:= $(BUILD_SYSTEM)/host_shared_library.mk
+
+# Target files
 BUILD_STATIC_LIBRARY:= $(BUILD_SYSTEM)/static_library.mk
 BUILD_HEADER_LIBRARY:= $(BUILD_SYSTEM)/header_library.mk
 BUILD_AUX_STATIC_LIBRARY:= $(BUILD_SYSTEM)/aux_static_library.mk
 BUILD_AUX_EXECUTABLE:= $(BUILD_SYSTEM)/aux_executable.mk
 BUILD_SHARED_LIBRARY:= $(BUILD_SYSTEM)/shared_library.mk
 BUILD_EXECUTABLE:= $(BUILD_SYSTEM)/executable.mk
+BUILD_NATIVE_TEST := $(BUILD_SYSTEM)/native_test.mk
+BUILD_NATIVE_BENCHMARK := $(BUILD_SYSTEM)/native_benchmark.mk
+BUILD_FUZZ_TEST := $(BUILD_SYSTEM)/fuzz_test.mk
+BUILD_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/shared_test_lib.mk
+BUILD_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/static_test_lib.mk
+BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk
+BUILD_PREBUILT:= $(BUILD_SYSTEM)/prebuilt.mk
+BUILD_MULTI_PREBUILT:= $(BUILD_SYSTEM)/multi_prebuilt.mk
+
+# Host files
+BUILD_HOST_STATIC_LIBRARY:= $(BUILD_SYSTEM)/host_static_library.mk
+BUILD_HOST_SHARED_LIBRARY:= $(BUILD_SYSTEM)/host_shared_library.mk
 BUILD_HOST_EXECUTABLE:= $(BUILD_SYSTEM)/host_executable.mk
+BUILD_HOST_NATIVE_TEST := $(BUILD_SYSTEM)/host_native_test.mk
+BUILD_HOST_FUZZ_TEST := $(BUILD_SYSTEM)/host_fuzz_test.mk
+BUILD_HOST_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/host_shared_test_lib.mk
+BUILD_HOST_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/host_static_test_lib.mk
+BUILD_HOST_PREBUILT:= $(BUILD_SYSTEM)/host_prebuilt.mk
+
+# The following components only need to be built when in the
+# non-sanitized build phase.
+#ifeq ($(filter address,$(strip $(SANITIZE_TARGET))),)
+ifndef SANITIZE_TARGET
 BUILD_PACKAGE:= $(BUILD_SYSTEM)/package.mk
 BUILD_PHONY_PACKAGE:= $(BUILD_SYSTEM)/phony_package.mk
 BUILD_RRO_PACKAGE:= $(BUILD_SYSTEM)/build_rro_package.mk
-BUILD_HOST_PREBUILT:= $(BUILD_SYSTEM)/host_prebuilt.mk
-BUILD_PREBUILT:= $(BUILD_SYSTEM)/prebuilt.mk
-BUILD_MULTI_PREBUILT:= $(BUILD_SYSTEM)/multi_prebuilt.mk
 BUILD_JAVA_LIBRARY:= $(BUILD_SYSTEM)/java_library.mk
 BUILD_STATIC_JAVA_LIBRARY:= $(BUILD_SYSTEM)/static_java_library.mk
-BUILD_HOST_JAVA_LIBRARY:= $(BUILD_SYSTEM)/host_java_library.mk
-BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk
+
 BUILD_COPY_HEADERS := $(BUILD_SYSTEM)/copy_headers.mk
-BUILD_NATIVE_TEST := $(BUILD_SYSTEM)/native_test.mk
-BUILD_NATIVE_BENCHMARK := $(BUILD_SYSTEM)/native_benchmark.mk
-BUILD_HOST_NATIVE_TEST := $(BUILD_SYSTEM)/host_native_test.mk
-BUILD_FUZZ_TEST := $(BUILD_SYSTEM)/fuzz_test.mk
-BUILD_HOST_FUZZ_TEST := $(BUILD_SYSTEM)/host_fuzz_test.mk
 
-BUILD_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/shared_test_lib.mk
-BUILD_HOST_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/host_shared_test_lib.mk
-BUILD_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/static_test_lib.mk
-BUILD_HOST_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/host_static_test_lib.mk
-
-BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk
+BUILD_HOST_JAVA_LIBRARY:= $(BUILD_SYSTEM)/host_java_library.mk
 BUILD_HOST_DALVIK_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_java_library.mk
 BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_static_java_library.mk
+BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk
+else
+BUILD_PACKAGE:=
+BUILD_PHONY_PACKAGE:=
+BUILD_RRO_PACKAGE:=
+BUILD_JAVA_LIBRARY:=
+BUILD_STATIC_JAVA_LIBRARY:=
 
+BUILD_COPY_HEADERS :=
+
+BUILD_HOST_JAVA_LIBRARY:=
+BUILD_HOST_DALVIK_JAVA_LIBRARY :=
+BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY :=
+
+BUILD_DROIDDOC:=
+endif
 
 # ###############################################################
 # Parse out any modifier targets.
