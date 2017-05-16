@@ -18,6 +18,7 @@ endif
 empty :=
 space := $(empty) $(empty)
 comma := ,
+dot := .
 # Note that make will eat the newline just before endef.
 define newline
 
@@ -580,11 +581,32 @@ BPTTOOL := $(HOST_OUT_EXECUTABLES)/bpttool$(HOST_EXECUTABLE_SUFFIX)
 else
 BPTTOOL := $(BOARD_CUSTOM_BPTTOOL)
 endif
-ifeq (,$(strip $(BOARD_CUSTOM_AVBTOOL)))
+
 AVBTOOL := $(HOST_OUT_EXECUTABLES)/avbtool$(HOST_EXECUTABLE_SUFFIX)
+define avbtool_version
+$(shell $(AVBTOOL) version | cut -d" " -f2)
+endef
+
+define vbmeta_version_major
+$(word 1, $(subst $(dot),$(space),$(call avbtool_version)))
+endef
+
+define vbmeta_version_minor
+$(word 2, $(subst $(dot),$(space),$(call avbtool_version)))
+endef
+
+ifneq (true,$(BOARD_AVB_ENABLE))
+get_vbmeta_version := 0.0
 else
-AVBTOOL := $(BOARD_CUSTOM_AVBTOOL)
+ifdef BOARD_VBMETA_VERSION
+get_vbmeta_version := $(BOARD_VBMETA_VERSION)
+else
+define get_vbmeta_version
+$(call vbmeta_version_major).$(call vbmeta_version_minor)
+endef
 endif
+endif
+
 APICHECK := $(HOST_OUT_EXECUTABLES)/apicheck$(HOST_EXECUTABLE_SUFFIX)
 FS_GET_STATS := $(HOST_OUT_EXECUTABLES)/fs_get_stats$(HOST_EXECUTABLE_SUFFIX)
 ifeq ($(TARGET_USES_MKE2FS),true)
