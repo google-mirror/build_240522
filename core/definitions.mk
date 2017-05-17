@@ -2535,7 +2535,11 @@ define desugar-classes-jar
 @echo Desugar: $@
 @mkdir -p $(dir $@)
 $(hide) rm -f $@ $@.tmp
-$(hide) java -jar $(DESUGAR) \
+@mkdir $(dir $@)/desugar_dumped_classes
+$(hide) java \
+    --add-opens java.base/java.lang.invoke=ALL-UNNAMED \
+    -Djdk.internal.lambda.dumpProxyClasses=$(dir $@)/desugar_dumped_classes \
+    -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
     $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
@@ -2543,6 +2547,7 @@ $(hide) java -jar $(DESUGAR) \
     $(if $(filter --core-library,$(PRIVATE_DX_FLAGS)),--core_library) \
     -i $< -o $@.tmp
     mv $@.tmp $@
+rm -rf $(dir $@)/desugar_dumped_classes
 endef
 
 
