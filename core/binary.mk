@@ -861,7 +861,7 @@ my_rename_cpp_ext :=
 ifneq (,$(filter nanopb-c nanopb-c-enable_malloc, $(LOCAL_PROTOC_OPTIMIZE_TYPE)))
 my_proto_source_suffix := .c
 my_proto_c_includes := external/nanopb-c
-my_protoc_flags := --nanopb_out=$(proto_gen_dir) \
+my_protoc_flags := "--nanopb_out=$(LOCAL_PROTOC_OPTIMIZE_OPTIONS):$(proto_gen_dir)" \
     --plugin=external/nanopb-c/generator/protoc-gen-nanopb
 my_protoc_deps := $(NANOPB_SRCS) $(proto_sources_fullpath:%.proto=%.options)
 else
@@ -879,14 +879,14 @@ endif
 my_proto_c_includes += $(proto_gen_dir)
 
 proto_generated_cpps := $(addprefix $(proto_gen_dir)/, \
-    $(patsubst %.proto,%.pb$(my_proto_source_suffix),$(proto_sources_fullpath)))
+    $(patsubst %.proto,%.pb$(my_proto_source_suffix),$(proto_sources)))
 
 # Ensure the transform-proto-to-cc rule is only defined once in multilib build.
 ifndef $(my_host)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined
-$(proto_generated_cpps): PRIVATE_PROTO_INCLUDES := $(TOP)
+$(proto_generated_cpps): PRIVATE_PROTO_INCLUDES := $(LOCAL_PATH)
 $(proto_generated_cpps): PRIVATE_PROTOC_FLAGS := $(LOCAL_PROTOC_FLAGS) $(my_protoc_flags)
 $(proto_generated_cpps): PRIVATE_RENAME_CPP_EXT := $(my_rename_cpp_ext)
-$(proto_generated_cpps): $(proto_gen_dir)/%.pb$(my_proto_source_suffix): %.proto $(my_protoc_deps) $(PROTOC)
+$(proto_generated_cpps): $(proto_gen_dir)/%.pb$(my_proto_source_suffix): $(LOCAL_PATH)/%.proto $(my_protoc_deps) $(PROTOC)
 	$(transform-proto-to-cc)
 
 $(my_host)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined := true
