@@ -2538,7 +2538,6 @@ $(hide) rm -f $@ $@.tmp
 @rm -rf $(dir $@)/desugar_dumped_classes
 @mkdir $(dir $@)/desugar_dumped_classes
 $(hide) java \
-    --add-opens java.base/java.lang.invoke=ALL-UNNAMED \
     -Djdk.internal.lambda.dumpProxyClasses=$(dir $@)/desugar_dumped_classes \
     -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
