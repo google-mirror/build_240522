@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Tobias Thierer <tobiast@google.com>
+Code-Review+2: Narayan Kamath <narayan@google.com>
+Verified+1: Tobias Thierer <tobiast@google.com>
+Submitted-by: Tobias Thierer <tobiast@google.com>
+Submitted-at: Thu, 18 May 2017 14:25:14 +0000
+Reviewed-on: https://android-review.googlesource.com/399392
+Project: platform/build
+Branch: refs/heads/master
