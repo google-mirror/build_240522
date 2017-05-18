@@ -594,6 +594,16 @@ AVBTOOL := $(HOST_OUT_EXECUTABLES)/avbtool$(HOST_EXECUTABLE_SUFFIX)
 else
 AVBTOOL := $(BOARD_CUSTOM_AVBTOOL)
 endif
+ifneq (true,$(BOARD_AVB_ENABLE))
+# 0.0 means AVB is not enabled
+BOARD_AVB_VBMETA_VERSION := 0.0
+else
+ifndef BOARD_AVB_VBMETA_VERSION
+$(warning BOARD_AVB_VBMETA_VERSION not specified, using current avbtool version)
+# Keep in sync with external/avb/avbtool
+BOARD_AVB_VBMETA_VERSION := 1.0
+endif
+endif
 APICHECK := $(HOST_OUT_EXECUTABLES)/apicheck$(HOST_EXECUTABLE_SUFFIX)
 FS_GET_STATS := $(HOST_OUT_EXECUTABLES)/fs_get_stats$(HOST_EXECUTABLE_SUFFIX)
 ifeq ($(TARGET_USES_MKE2FS),true)

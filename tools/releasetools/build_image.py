@@ -142,6 +142,35 @@ def AVBAddHashtree(image_path, avbtool, partition_size, partition_name,
   (_, exit_code) = RunCommand(shlex.split(cmdline))
   return exit_code == 0
 
+def AVBCheckVbmetaVersion(image_path, avbtool, vbmeta_version):
+  """Checks the value of vbmeta_version in Treble compatibility matrix.
+
+  Checks that vbmeta_version in Treble compatibility matrix matches the
+  minimum libavb version in the vbmeta header of the image after signing.
+  The vbmeta_verion is specified by BOARD_AVB_VBMETA_VERSION.
+
+  Args:
+    image_path: Path to image to get minimum libavb version from.
+    avbtool: String with path to avbtool.
+    vbmeta_version: vbmeta_version in Treble compatibility matrix.
+  Returns:
+    True if the check succeeded.
+  """
+  cmdline = "%s info_image --image %s" % (avbtool, image_path)
+  output, exit_code = RunCommand(shlex.split(cmdline))
+
+  if exit_code != 0:
+    print "Failed to run command %r" % cmdline
+    return False
+
+  match = re.search(r'Minimum libavb version:\s+(\d+\.\d+)\s+', output)
+  if match and vbmeta_version == match.group(1):
+    return True
+
+  print "Incorrect BOARD_AVB_VBMETA_VERSION: %r (expected: %r)" % (
+      vbmeta_version, match.group(1))
+  return False
+
 def AdjustPartitionSizeForVerity(partition_size, fec_supported):
   """Modifies the provided partition size to account for the verity metadata.
 
@@ -571,6 +600,9 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     if not AVBAddHashtree(out_file, avbtool, original_partition_size,
                           partition_name, signing_args, additional_args):
       return False
+    if "avb_vbmeta_version" in prop_dict and not AVBCheckVbmetaVersion(
+        out_file, avbtool, prop_dict.get("avb_vbmeta_version")):
+      return False
 
   if run_fsck and prop_dict.get("skip_fsck") != "true":
     success, unsparse_image = UnsparseImage(out_file, replace=False)
@@ -642,6 +674,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_avb_enable", "avb_enable")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+    copy_prop("system_avb_vbmeta_version", "avb_vbmeta_version")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its files.
@@ -659,6 +692,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_avb_enable", "avb_enable")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+    copy_prop("system_avb_vbmeta_version", "avb_vbmeta_version")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
