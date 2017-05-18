@@ -891,6 +891,17 @@ ifeq ($(INTERNAL_USERIMAGES_USE_EXT),true)
 INTERNAL_USERIMAGES_DEPS += $(MKE2FS_CONF)
 endif
 
+# Sets BOARD_AVB_VBMETA_VERSION
+ifneq (true,$(BOARD_AVB_ENABLE))
+# 0.0 means AVB is not enabled.
+BOARD_AVB_VBMETA_VERSION := 0.0
+else ifndef BOARD_AVB_VBMETA_VERSION
+# Defaults to avbtool version if it's not set.
+# `$(AVBTOOL)` version outputs `avbtool major.minor.sub`.
+# Gets "major.minor.sub" then deletes ".sub" to output "major.minor".
+BOARD_AVB_VBMETA_VERSION := $$("${AVBTOOL}" version | cut -d" " -f2 | sed 's/\.[^.]*$$//')
+endif
+
 # $(1): the path of the output dictionary file
 # $(2): additional "key=value" pairs to append to the dictionary file.
 define generate-userimage-prop-dictionary
@@ -944,6 +955,7 @@ $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_signing_args=$(INTERNAL_AVB_SIGNING_A
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_avbtool=$(AVBTOOL)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_add_hashtree_footer_args=$(BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_vbmeta_version=$(BOARD_AVB_VBMETA_VERSION)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_add_hashtree_footer_args=$(BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
@@ -1829,6 +1841,9 @@ vbmetaimage-nodeps:
 
 # We need $(AVBTOOL) for system.img generation.
 FULL_SYSTEMIMAGE_DEPS += $(AVBTOOL)
+
+# We need $(AVBTOOL) to get $(BOARD_AVB_VBMETA_VERSION) in generate-userimage-prop-dictionary
+INTERNAL_USERIMAGES_DEPS += $(AVBTOOL)
 
 endif # BOARD_AVB_ENABLE
 
