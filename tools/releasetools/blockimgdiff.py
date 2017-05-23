@@ -649,6 +649,7 @@ class BlockImageDiff(object):
     patch_num = 0
     with open(prefix + ".new.dat", "wb") as new_f:
       for index, xf in enumerate(self.transfers):
+        print(xf.style + " " + xf.tgt_name)
         if xf.style == "zero":
           tgt_size = xf.tgt_ranges.size() * self.tgt.blocksize
           print("%10d %10d (%6.2f%%) %7s %s %s" % (
@@ -1249,7 +1250,6 @@ class BlockImageDiff(object):
           tgt_name, src_name, tgt_ranges, src_ranges, style, by_id)
 
     print("Finding transfers...")
-
     empty = RangeSet()
     for tgt_fn, tgt_ranges in self.tgt.file_map.items():
       if tgt_fn == "__ZERO":
