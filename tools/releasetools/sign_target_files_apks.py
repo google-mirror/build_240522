@@ -105,6 +105,7 @@ OPTIONS = common.OPTIONS
 
 OPTIONS.extra_apks = {}
 OPTIONS.key_map = {}
+OPTIONS.rebuild_recovery = False
 OPTIONS.replace_ota_keys = False
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
@@ -187,7 +188,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   maxsize = max([len(os.path.basename(i.filename))
                  for i in input_tf_zip.infolist()
                  if i.filename.endswith('.apk')])
-  rebuild_recovery = False
   system_root_image = misc_info.get("system_root_image") == "true"
 
   # tmpdir will only be used to regenerate the recovery-from-boot patch.
@@ -251,11 +251,11 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       new_data = ReplaceCerts(data)
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
-    # Trigger a rebuild of the recovery patch if needed.
+    # Ask add_image_to_target_files to rebuild the recovery patch if needed.
     elif info.filename in ("SYSTEM/recovery-from-boot.p",
                            "SYSTEM/etc/recovery.img",
                            "SYSTEM/bin/install-recovery.sh"):
-      rebuild_recovery = True
+      OPTIONS.rebuild_recovery = True
 
     # Don't copy OTA keys if we're replacing them.
     elif (OPTIONS.replace_ota_keys and
@@ -338,18 +338,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     # is not exercised while building the boot image for the A/B
     # path
     write_to_temp("BOOT/cmdline", 0o755 << 16, new_cmdline)
-
-  if rebuild_recovery:
-    recovery_img = common.GetBootableImage(
-        "recovery.img", "recovery.img", tmpdir, "RECOVERY", info_dict=misc_info)
-    boot_img = common.GetBootableImage(
-        "boot.img", "boot.img", tmpdir, "BOOT", info_dict=misc_info)
-
-    def output_sink(fn, data):
-      common.ZipWriteStr(output_tf_zip, "SYSTEM/" + fn, data)
-
-    common.MakeRecoveryPatch(tmpdir, output_sink, recovery_img, boot_img,
-                             info_dict=misc_info)
 
   shutil.rmtree(tmpdir)
 
@@ -716,6 +704,10 @@ def main(argv):
 
   # Skip building userdata.img and cache.img when signing the target files.
   new_args = ["--is_signing", args[1]]
+  # add_img_to_target_files is build system image from scratch, so the recovery
+  # patch is guranteed to generate.
+  if OPTIONS.rebuild_recovery:
+    new_args.insert(0, "--rebuild_recovery")
   add_img_to_target_files.main(new_args)
 
   print "done."
