@@ -126,6 +126,10 @@ def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
     ofile = open(os.path.join(OPTIONS.input_tmp, "SYSTEM", fn), "w")
     ofile.write(data)
     ofile.close()
+    # Write a copy of patch to the output zip if we're signing APKs in the
+    # target file.
+    if OPTIONS.is_signing:
+      common.ZipWriteStr(output_zip, "SYSTEM/" + fn, data);
 
   if OPTIONS.rebuild_recovery:
     print("Building new recovery patch")
