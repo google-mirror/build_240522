@@ -369,7 +369,13 @@ def AddCompatibilityArchive(target_zip, output_zip, system_included=True,
                     compress_type=zipfile.ZIP_STORED)
 
 
-def WriteFullOTAPackage(input_zip, output_zip):
+def WriteFullOTAPackageWrapper(output_zip, input_zip):
+  has_vendor = HasVendorPartition(input_zip)
+  WriteFullOTAPackage(output_zip, has_vendor, input_zip)
+
+
+def WriteFullOTAPackage(output_zip, has_vendor, input_zip=None,
+                        updater_binary=OPTIONS.updater_binary):
   # TODO: how to determine this?  We don't know what version it will
   # be installed on top of. For now, we expect the API just won't
   # change very often. Similarly for fstab, it might have changed
@@ -401,7 +407,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip)
+  if input_zip:
+    assert HasRecoveryPatch(input_zip)
 
   metadata["ota-type"] = "BLOCK"
 
@@ -467,7 +474,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
-  if HasVendorPartition(input_zip):
+  if has_vendor:
     system_progress -= 0.1
 
   # Place a copy of file_contexts.bin into the OTA package which will be used
@@ -491,7 +498,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   boot_img = common.GetBootableImage(
       "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
 
-  if HasVendorPartition(input_zip):
+  if has_vendor:
     script.ShowProgress(0.1, 0)
 
     vendor_tgt = GetImage("vendor", OPTIONS.input_tmp)
@@ -535,7 +542,7 @@ endif;
 """ % bcb_dev)
 
   script.SetProgress(1)
-  script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+  script.AddToZip(input_zip, output_zip, input_path=updater_binary)
   metadata["ota-required-cache"] = str(script.required_cache)
   WriteMetadata(metadata, output_zip)
 
@@ -585,7 +592,17 @@ def HandleDowngradeMetadata(metadata):
     metadata["post-timestamp"] = post_timestamp
 
 
-def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
+def WriteBlockIncrementalOTAPackageWrapper(output_zip, source_zip, target_zip):
+  has_vendor = HasVendorPartition(target_zip)
+  if has_vendor and not HasVendorPartition(source_zip):
+    raise RuntimeError("can't generate incremental that adds /vendor")
+  WriteBlockIncrementalOTAPackage(output_zip, has_vendor, source_zip,
+                                  target_zip)
+
+
+def WriteBlockIncrementalOTAPackage(output_zip, has_vendor,
+                                    source_zip=None, target_zip=None,
+                                    updater_binary=OPTIONS.updater_binary):
   source_version = OPTIONS.source_info_dict["recovery_api_version"]
   target_version = OPTIONS.target_info_dict["recovery_api_version"]
 
@@ -670,9 +687,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
                                        version=blockimgdiff_version,
                                        disable_imgdiff=disable_imgdiff)
 
-  if HasVendorPartition(target_zip):
-    if not HasVendorPartition(source_zip):
-      raise RuntimeError("can't generate incremental that adds /vendor")
+  if has_vendor:
     vendor_src = GetImage("vendor", OPTIONS.source_tmp)
     vendor_tgt = GetImage("vendor", OPTIONS.target_tmp)
 
@@ -885,14 +900,20 @@ endif;
   # For downgrade OTAs, we prefer to use the update-binary in the source
   # build that is actually newer than the one in the target build.
   if OPTIONS.downgrade:
-    script.AddToZip(source_zip, output_zip, input_path=OPTIONS.updater_binary)
+    script.AddToZip(source_zip, output_zip, input_path=updater_binary)
   else:
-    script.AddToZip(target_zip, output_zip, input_path=OPTIONS.updater_binary)
+    script.AddToZip(target_zip, output_zip, input_path=updater_binary)
   metadata["ota-required-cache"] = str(script.required_cache)
   WriteMetadata(metadata, output_zip)
 
 
-def WriteVerifyPackage(input_zip, output_zip):
+def WriteVerifyPackageWrapper(output_zip, input_zip):
+  has_vendor = HasVendorPartition(OPTIONS.input_tmp)
+  WriteVerifyPackage(output_zip, has_vendor, input_zip)
+
+
+def WriteVerifyPackage(output_zip, has_vendor, input_zip=None,
+                       updater_binary=OPTIONS.updater_binary):
   script = edify_generator.EdifyGenerator(3, OPTIONS.info_dict)
 
   oem_props = OPTIONS.info_dict.get("oem_fingerprint_properties")
@@ -949,7 +970,7 @@ def WriteVerifyPackage(input_zip, output_zip):
   system_diff = common.BlockDifference("system", system_tgt, src=None)
   system_diff.WriteStrictVerifyScript(script)
 
-  if HasVendorPartition(input_zip):
+  if has_vendor:
     vendor_tgt = GetImage("vendor", OPTIONS.input_tmp)
     vendor_tgt.ResetFileMap()
     vendor_diff = common.BlockDifference("vendor", vendor_tgt, src=None)
@@ -959,7 +980,7 @@ def WriteVerifyPackage(input_zip, output_zip):
   device_specific.VerifyOTA_Assertions()
 
   script.SetProgress(1.0)
-  script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
+  script.AddToZip(input_zip, output_zip, input_path=updater_binary)
   metadata["ota-required-cache"] = str(script.required_cache)
   WriteMetadata(metadata, output_zip)
 
@@ -1478,7 +1499,7 @@ def main(argv):
 
   # Generate a full OTA.
   elif OPTIONS.incremental_source is None:
-    WriteFullOTAPackage(input_zip, output_zip)
+    WriteFullOTAPackageWrapper(output_zip, input_zip)
 
   # Generate an incremental OTA. It will fall back to generate a full OTA on
   # failure unless no_fallback_to_full is specified.
@@ -1494,7 +1515,7 @@ def main(argv):
       print("--- source info ---")
       common.DumpInfoDict(OPTIONS.source_info_dict)
     try:
-      WriteBlockIncrementalOTAPackage(input_zip, source_zip, output_zip)
+      WriteBlockIncrementalOTAPackageWrapper(output_zip, source_zip, input_zip)
       if OPTIONS.log_diff:
         out_file = open(OPTIONS.log_diff, 'w')
         import target_files_diff
@@ -1508,7 +1529,7 @@ def main(argv):
         raise
       print("--- failed to build incremental; falling back to full ---")
       OPTIONS.incremental_source = None
-      WriteFullOTAPackage(input_zip, output_zip)
+      WriteFullOTAPackageWrapper(output_zip, input_zip)
 
   common.ZipClose(output_zip)
 

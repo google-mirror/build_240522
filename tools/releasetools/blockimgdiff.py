@@ -1249,8 +1249,8 @@ class BlockImageDiff(object):
           tgt_name, src_name, tgt_ranges, src_ranges, style, by_id)
 
     print("Finding transfers...")
-
     empty = RangeSet()
+
     for tgt_fn, tgt_ranges in self.tgt.file_map.items():
       if tgt_fn == "__ZERO":
         # the special "__ZERO" domain is all the blocks not contained
