@@ -52,7 +52,6 @@ if sys.hexversion < 0x02070000:
   sys.exit(1)
 
 import datetime
-import errno
 import hashlib
 import os
 import shlex
@@ -214,22 +213,6 @@ def AddDtbo(output_zip, prefix="IMAGES/"):
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   print("creating " + what + ".img...")
 
-  # The name of the directory it is making an image out of matters to
-  # mkyaffs2image.  It wants "system" but we have a directory named
-  # "SYSTEM", so create a symlink.
-  temp_dir = tempfile.mkdtemp()
-  OPTIONS.tempfiles.append(temp_dir)
-  try:
-    os.symlink(os.path.join(input_dir, what.upper()),
-               os.path.join(temp_dir, what))
-  except OSError as e:
-    # bogus error on my mac version?
-    #   File "./build/tools/releasetools/img_from_target_files"
-    #     os.path.join(OPTIONS.input_tmp, "system"))
-    # OSError: [Errno 17] File exists
-    if e.errno == errno.EEXIST:
-      pass
-
   image_props = build_image.ImagePropFromGlobalDict(info_dict, what)
   fstab = info_dict["fstab"]
   mount_point = "/" + what
@@ -258,7 +241,7 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   if block_list:
     image_props["block_list"] = block_list.name
 
-  succ = build_image.BuildImage(os.path.join(temp_dir, what),
+  succ = build_image.BuildImage(os.path.join(input_dir, what.upper()),
                                 image_props, output_file.name)
   assert succ, "build " + what + ".img image failed"
 
@@ -308,21 +291,11 @@ def AddUserdata(output_zip, prefix="IMAGES/"):
   timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
   image_props["timestamp"] = int(timestamp)
 
-  # The name of the directory it is making an image out of matters to
-  # mkyaffs2image.  So we create a temp dir, and within it we create an
-  # empty dir named "data", or a symlink to the DATA dir,
-  # and build the image from that.
-  temp_dir = tempfile.mkdtemp()
-  OPTIONS.tempfiles.append(temp_dir)
-  user_dir = os.path.join(temp_dir, "data")
-  empty = (OPTIONS.info_dict.get("userdata_img_with_data") != "true")
-  if empty:
-    # Create an empty dir.
-    os.mkdir(user_dir)
+  if OPTIONS.info_dict.get("userdata_img_with_data") == "true":
+    user_dir = os.path.join(OPTIONS.input_tmp, "DATA")
   else:
-    # Symlink to the DATA dir.
-    os.symlink(os.path.join(OPTIONS.input_tmp, "DATA"),
-               user_dir)
+    user_dir = tempfile.mkdtemp()
+    OPTIONS.tempfiles.append(user_dir)
 
   fstab = OPTIONS.info_dict["fstab"]
   if fstab:
@@ -455,13 +428,8 @@ def AddCache(output_zip, prefix="IMAGES/"):
   timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
   image_props["timestamp"] = int(timestamp)
 
-  # The name of the directory it is making an image out of matters to
-  # mkyaffs2image.  So we create a temp dir, and within it we create an
-  # empty dir named "cache", and build the image from that.
-  temp_dir = tempfile.mkdtemp()
-  OPTIONS.tempfiles.append(temp_dir)
-  user_dir = os.path.join(temp_dir, "cache")
-  os.mkdir(user_dir)
+  user_dir = tempfile.mkdtemp()
+  OPTIONS.tempfiles.append(user_dir)
 
   fstab = OPTIONS.info_dict["fstab"]
   if fstab:
