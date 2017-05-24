@@ -2537,7 +2537,9 @@ define desugar-classes-jar
 $(hide) rm -f $@ $@.tmp
 @rm -rf $(dir $@)/desugar_dumped_classes
 @mkdir $(dir $@)/desugar_dumped_classes
+# --add-opens is required because desugar reflects via java.lang.invoke.MethodHandles.Lookup
 $(hide) java \
+    $(if $(EXPERIMENTAL_USE_OPENJDK9),--add-opens java.base/java.lang.invoke=ALL-UNNAMED,) \
     -Djdk.internal.lambda.dumpProxyClasses=$(abspath $(dir $@))/desugar_dumped_classes \
     -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
