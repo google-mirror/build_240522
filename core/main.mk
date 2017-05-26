@@ -42,7 +42,7 @@ DEFAULT_GOAL := droid
 $(DEFAULT_GOAL): droid_targets
 
 .PHONY: droid_targets
-droid_targets:
+droid_targets: blueprint_tools
 
 # Set up various standard variables based on configuration
 # and host information.
