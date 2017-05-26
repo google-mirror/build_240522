@@ -574,7 +574,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILE
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $@ \
 	  --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-	  --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+	  --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
 	  $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 
 .PHONY: bootimage-nodeps
@@ -585,7 +585,7 @@ bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL)
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $@ \
 	  --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-	  --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+	  --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
 	  $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 
 else ifeq (true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_BOOT_SIGNER)) # BOARD_AVB_ENABLE != true
@@ -940,11 +940,12 @@ $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_subkey=$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VBOOT_SIGNING_SUBKEY)" >> $(1))
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "futility=$(notdir $(FUTILITY))" >> $(1))
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_signer_cmd=$(VBOOT_SIGNER)" >> $(1))
-$(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_signing_args=$(INTERNAL_AVB_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_avbtool=$(notdir $(AVBTOOL))" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_hashtree_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_signing_args=$(INTERNAL_AVB_SYSTEM_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_add_hashtree_footer_args=$(BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_hashtree_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_signing_args=$(INTERNAL_AVB_VENDOR_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_add_hashtree_footer_args=$(BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
     $(hide) echo "recovery_as_boot=true" >> $(1))
@@ -1149,7 +1150,7 @@ define build-recoveryimage-target
       $(hide) $(AVBTOOL) add_hash_footer \
         --image $(1) \
         --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-        --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+        --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
         $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS))
   $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)), \
     $(hide) $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE)), \
@@ -1755,7 +1756,7 @@ $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE) $(AVBTOOL)
 	$(AVBTOOL) add_hash_footer \
 		--image $@ \
 		--partition_size $(BOARD_DTBOIMG_PARTITION_SIZE) \
-		--partition_name dtbo $(INTERNAL_AVB_SIGNING_ARGS) \
+		--partition_name dtbo $(INTERNAL_AVB_DTBO_SIGNING_ARGS) \
 		$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)
 else
 $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)
@@ -1770,26 +1771,64 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 
 BUILT_VBMETAIMAGE_TARGET := $(PRODUCT_OUT)/vbmeta.img
 
+# A temp directory to extract public keys from each BOARD_AVB_CHAIN_<PARTITION>_KEY_PATH.
+# The extracted public key is named as <partition>.avbpubkey.
+# We'll substitute with the real value for droidcore and dist-files, respectively.
+AVB_CHAIN_KEY_DIR_PLACEHOLDER := ||AVB-CHAIN-KEY-DIR||
+AVB_CHAIN_KEY_DIR_DROID := $(PRODUCT_OUT)/avb_chain_keys
+
+ifdef BOARD_AVB_CHAIN_BOOT_KEY_PATH
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS := \
-    --include_descriptors_from_image $(INSTALLED_BOOTIMAGE_TARGET) \
-    --include_descriptors_from_image $(INSTALLED_SYSTEMIMAGE) \
+    --chain_partition boot:$(BOARD_AVB_CHAIN_BOOT_ROLLBACK_INDEX_LOCATION):$(AVB_CHAIN_KEY_DIR_PLACEHOLDER)/boot.avbpubkey
+else
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS := \
+    --include_descriptors_from_image $(INSTALLED_BOOTIMAGE_TARGET)
+endif
+
+ifdef BOARD_AVB_CHAIN_SYSTEM_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition system:$(BOARD_AVB_CHAIN_SYSTEM_ROLLBACK_INDEX_LOCATION):$(AVB_CHAIN_KEY_DIR_PLACEHOLDER)/system.avbpubkey
+else
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --include_descriptors_from_image $(INSTALLED_SYSTEMIMAGE)
+endif
 
 ifdef INSTALLED_VENDORIMAGE_TARGET
+ifdef BOARD_AVB_CHAIN_VENDOR_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition vendor:$(BOARD_AVB_CHAIN_VENDOR_ROLLBACK_INDEX_LOCATION):$(AVB_CHAIN_KEY_DIR_PLACEHOLDER)/vendor.avbpubkey
+else
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
     --include_descriptors_from_image $(INSTALLED_VENDORIMAGE_TARGET)
 endif
+endif
 
 ifdef INSTALLED_DTBOIMAGE_TARGET
+ifdef BOARD_AVB_CHAIN_DTBO_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition vendor:$(BOARD_AVB_CHAIN_DTBO_ROLLBACK_INDEX_LOCATION):$(AVB_CHAIN_KEY_DIR_PLACEHOLDER)/dtbo.avbpubkey
+else
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
     --include_descriptors_from_image $(INSTALLED_DTBOIMAGE_TARGET)
 endif
+endif
 
+# Add kernel cmdline descriptor for kernel to mount system.img as root with
+# dm-verity. This works when system.img is either chained or not-chained:
+# - chained: The --setup_as_rootfs_from_kernel option will add dm-verity kernel
+#   cmdline descriptor to system.img
+# - not-chained: The --include_descriptors_from_image option for make_vbmeta_image
+#   will include the kernel cmdline descriptor from system.img into vbmeta.img
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
-INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += --setup_rootfs_from_kernel $(BUILT_SYSTEMIMAGE)
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += --setup_as_rootfs_from_kernel
 endif
 
 ifdef BOARD_AVB_ROLLBACK_INDEX
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += --rollback_index $(BOARD_AVB_ROLLBACK_INDEX)
+endif
+
+ifdef BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += $(BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS)
 endif
 
 ifndef BOARD_AVB_KEY_PATH
@@ -1802,6 +1841,34 @@ INTERNAL_AVB_SIGNING_ARGS := \
     --algorithm $(BOARD_AVB_ALGORITHM) --key $(BOARD_AVB_KEY_PATH)
 endif
 
+ifndef BOARD_AVB_CHAIN_BOOT_KEY_PATH
+INTERNAL_AVB_BOOT_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_BOOT_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_BOOT_ALGORITHM) --key $(BOARD_AVB_CHAIN_BOOT_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_SYSTEM_KEY_PATH
+INTERNAL_AVB_SYSTEM_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_SYSTEM_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_SYSTEM_ALGORITHM) --key $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_VENDOR_KEY_PATH
+INTERNAL_AVB_VENDOR_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_VENDOR_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_VENDOR_ALGORITHM) --key $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_DTBO_KEY_PATH
+INTERNAL_AVB_DTBO_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_DTBO_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_DTBO_ALGORITHM) --key $(BOARD_AVB_CHAIN_DTBO_KEY_PATH)
+endif
+
 ifndef BOARD_BOOTIMAGE_PARTITION_SIZE
   $(error BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
 endif
@@ -1810,13 +1877,31 @@ ifndef BOARD_SYSTEMIMAGE_PARTITION_SIZE
   $(error BOARD_SYSTEMIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
 endif
 
+# $(1): the directory to extract public keys to
+define extract-avb-chain-public-keys
+  $(if $(BOARD_AVB_CHAIN_BOOT_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_BOOT_KEY_PATH) \
+      --output $(1)/boot.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH) \
+      --output $(1)/system.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH) \
+      --output $(1)/vendor.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_DTBO_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_DTBO_KEY_PATH) \
+      --output $(1)/dtbo.avbpubkey)
+endef
+
 define build-vbmetaimage-target
   $(call pretty,"Target vbmeta image: $(INSTALLED_VBMETAIMAGE_TARGET)")
+  $(hide) mkdir -p $(AVB_CHAIN_KEY_DIR_DROID)
+  $(call extract-avb-chain-public-keys, $(AVB_CHAIN_KEY_DIR_DROID))
   $(hide) $(AVBTOOL) make_vbmeta_image \
-    $(INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS) \
+    $(subst $(AVB_CHAIN_KEY_DIR_PLACEHOLDER),$(AVB_CHAIN_KEY_DIR_DROID),$(INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS)) \
     $(INTERNAL_AVB_SIGNING_ARGS) \
-    $(BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS) \
     --output $@
+  $(hide) rm -rf $(AVB_CHAIN_KEY_DIR_DROID)
 endef
 
 INSTALLED_VBMETAIMAGE_TARGET := $(BUILT_VBMETAIMAGE_TARGET)
@@ -2062,6 +2147,11 @@ define fs_config
 (cd $(1); find . -type d | sed 's,$$,/,'; find . \! -type d) | cut -c 3- | sort | sed 's,^,$(2),' | $(HOST_OUT_EXECUTABLES)/fs_config -C -D $(TARGET_OUT) -S $(SELINUX_FC)
 endef
 
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(BUILT_TARGET_FILES_PACKAGE): AVB_CHAIN_KEY_DIR_TARGET := $(zip_root)/AVB_CHAIN_KEYS
+$(BUILT_TARGET_FILES_PACKAGE): AVB_MAKE_VBMETA_IMAGE_ARGS_TARGET := $(subst $(AVB_CHAIN_KEY_DIR_PLACEHOLDER),$(AVB_CHAIN_KEY_DIR_TARGET),$(INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS))
+endif
+
 # Depending on the various images guarantees that the underlying
 # directories are up-to-date.
 $(BUILT_TARGET_FILES_PACKAGE): \
@@ -2233,12 +2323,12 @@ ifeq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
 endif
 ifeq ($(BOARD_AVB_ENABLE),true)
 	$(hide) echo "board_avb_enable=true" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo "board_avb_rollback_index=$(BOARD_AVB_ROLLBACK_INDEX)" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo "board_avb_key_path=$(BOARD_AVB_KEY_PATH)" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo "board_avb_algorithm=$(BOARD_AVB_ALGORITHM)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "board_avb_vbmeta_signing_args=$(INTERNAL_AVB_SIGNING_ARGS)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "board_avb_make_vbmeta_image_args=$(AVB_MAKE_VBMETA_IMAGE_ARGS_TARGET)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "board_avb_boot_signing_args=$(INTERNAL_AVB_BOOT_SIGNING_ARGS)" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo "board_avb_boot_add_hash_footer_args=$(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo "board_avb_system_add_hashtree_footer_args=$(BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS)" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo "board_avb_make_vbmeta_image_args=$(BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "board_avb_dtbo_signing_args=$(INTERNAL_AVB_DTBO_SIGNING_ARGS)" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "board_avb_dtbo_add_hash_footer_args=$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)" >> $(zip_root)/META/misc_info.txt
 endif
 ifdef BOARD_BPT_INPUT_FILES
 	$(hide) echo "board_bpt_enable=true" >> $(zip_root)/META/misc_info.txt
@@ -2317,13 +2407,25 @@ endif
 ifdef INSTALLED_SYSTEMOTHERIMAGE_TARGET
 	$(hide) $(call fs_config,$(zip_root)/SYSTEM_OTHER,system/) > $(zip_root)/META/system_other_filesystem_config.txt
 endif
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+	$(hide) mkdir -p $(AVB_CHAIN_KEY_DIR_TARGET)
+	$(call extract-avb-chain-public-keys, $(AVB_CHAIN_KEY_DIR_TARGET))
+endif
+
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    ./build/tools/releasetools/add_img_to_target_files -a -v -p $(HOST_OUT) $(zip_root)
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+	$(hide) rm -rf $(AVB_CHAIN_KEY_DIR_TARGET)
+endif
+
 	@# Zip everything up, preserving symlinks and placing META/ files first to
 	@# help early validation of the .zip file while uploading it.
 	$(hide) find $(zip_root)/META | sort >$@.list
 	$(hide) find $(zip_root) -path $(zip_root)/META -prune -o -print | sort >>$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(zip_root) -l $@.list
+
 
 .PHONY: target-files-package
 target-files-package: $(BUILT_TARGET_FILES_PACKAGE)

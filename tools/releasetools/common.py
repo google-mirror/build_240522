@@ -345,14 +345,17 @@ def DumpInfoDict(d):
     print("%-25s = (%s) %s" % (k, type(v).__name__, v))
 
 
-def AppendAVBSigningArgs(cmd):
+def AppendAVBSigningArgs(cmd, partition):
   """Append signing arguments for avbtool."""
-  keypath = OPTIONS.info_dict.get("board_avb_key_path", None)
-  algorithm = OPTIONS.info_dict.get("board_avb_algorithm", None)
-  if not keypath or not algorithm:
-    algorithm = "SHA256_RSA4096"
-    keypath = "external/avb/test/data/testkey_rsa4096.pem"
-  cmd.extend(["--key", keypath, "--algorithm", algorithm])
+  # signing_args contains full args.
+  # e.g., "--key path/to/signing_key --algorithm SHA256_RSA4096"
+  signing_args = OPTIONS.info_dict.get(
+      "board_avb_" + partition + "_signing_args", None)
+
+  if signing_args and signing_args.strip():
+    cmd.extend(shlex.split(signing_args))
+  else:
+    raise ExternalError("No AVB signing args for partition: %r" % partition)
 
 
 def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
@@ -495,7 +498,7 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     part_size = info_dict.get("boot_size", None)
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
            "--partition_size", str(part_size), "--partition_name", "boot"]
-    AppendAVBSigningArgs(cmd)
+    AppendAVBSigningArgs(cmd, "boot")
     args = info_dict.get("board_avb_boot_add_hash_footer_args", None)
     if args and args.strip():
       cmd.extend(shlex.split(args))
