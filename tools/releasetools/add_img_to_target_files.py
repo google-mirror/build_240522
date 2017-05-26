@@ -198,8 +198,8 @@ def AddDtbo(output_zip, prefix="IMAGES/"):
     # The AVB hash footer will be replaced if already present.
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
            "--partition_size", str(part_size), "--partition_name", "dtbo"]
-    cmd.extend(shlex.split(OPTIONS.info_dict["avb_signing_args"]))
-    args = OPTIONS.info_dict.get("board_avb_dtbo_add_hash_footer_args")
+    common.AppendAVBSigningArgs(cmd, "dtbo")
+    args = OPTIONS.info_dict.get("dtbo_avb_add_hash_footer_args")
     if args and args.strip():
       cmd.extend(shlex.split(args))
     p = common.Run(cmd, stdout=subprocess.PIPE)
@@ -334,25 +334,47 @@ def AddUserdata(output_zip, prefix="IMAGES/"):
   img.Write()
 
 
+def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
+  if img_path is not None:
+    # Check if chain partition is used.
+    key_path = OPTIONS.info_dict.get(partition + "_avb_key_path", None)
+    if key_path is not None:
+      # extract public key in AVB format to be included in vbmeta.img
+      avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
+      public_key_path = os.path.join(public_key_dir, "%s.avbpubkey" % partition)
+      p = common.Run([avbtool, "extract_public_key", "--key", key_path,
+                      "--output", public_key_path],
+                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      p.communicate()
+      assert p.returncode == 0, \
+          "avbtool extract_public_key fail for partition: %r" % partition
+
+      algorithm = OPTIONS.info_dict.get(partition + "_avb_algorithm", None)
+      rollback_index_location = OPTIONS.info_dict.get(
+          partition + "_avb_rollback_index_location", None)
+      chain_args = "--chain_partition %s:%s:%s" % (
+          partition, rollback_index_location, public_key_path)
+      cmd.extend(shlex.split(chain_args))
+    else:
+      cmd.extend(["--include_descriptors_from_image", img_path])
+
+
 def AddVBMeta(output_zip, boot_img_path, system_img_path, vendor_img_path,
               dtbo_img_path, prefix="IMAGES/"):
   """Create a VBMeta image and store it in output_zip."""
   img = OutputFile(output_zip, OPTIONS.input_tmp, prefix, "vbmeta.img")
   avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
-  cmd = [avbtool, "make_vbmeta_image",
-         "--output", img.name,
-         "--include_descriptors_from_image", boot_img_path,
-         "--include_descriptors_from_image", system_img_path]
-  if vendor_img_path is not None:
-    cmd.extend(["--include_descriptors_from_image", vendor_img_path])
-  if dtbo_img_path is not None:
-    cmd.extend(["--include_descriptors_from_image", dtbo_img_path])
-  if OPTIONS.info_dict.get("system_root_image") == "true":
-    cmd.extend(["--setup_rootfs_from_kernel", system_img_path])
-  cmd.extend(shlex.split(OPTIONS.info_dict["avb_signing_args"]))
-  args = OPTIONS.info_dict.get("board_avb_make_vbmeta_image_args")
-  if args and args.strip():
-    cmd.extend(shlex.split(args))
+  cmd = [avbtool, "make_vbmeta_image", "--output", img.name]
+  common.AppendAVBSigningArgs(cmd, "vbmeta")
+
+  public_key_dir = tempfile.mkdtemp(prefix="avbpubkey-")
+  OPTIONS.tempfiles.append(public_key_dir)
+
+  AppendVBMetaArgsForPartition(cmd, "boot", boot_img_path, public_key_dir)
+  AppendVBMetaArgsForPartition(cmd, "system", system_img_path, public_key_dir)
+  AppendVBMetaArgsForPartition(cmd, "vendor", vendor_img_path, public_key_dir)
+  AppendVBMetaArgsForPartition(cmd, "dtbo", dtbo_img_path, public_key_dir)
+
   p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   p.communicate()
   assert p.returncode == 0, "avbtool make_vbmeta_image failed"
