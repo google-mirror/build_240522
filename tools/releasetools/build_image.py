@@ -120,7 +120,8 @@ def AVBCalcMaxImageSize(avbtool, footer_type, partition_size, additional_args):
     return int(output)
 
 def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
-                 partition_name, signing_args, additional_args):
+                 partition_name, key_path, algorithm,
+                 additional_args):
   """Adds dm-verity hashtree and AVB metadata to an image.
 
   Args:
@@ -129,7 +130,8 @@ def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
     footer_type: 'hash' or 'hashtree' for generating footer.
     partition_size: The size of the partition in question.
     partition_name: The name of the partition - will be embedded in metadata.
-    signing_args: Arguments for signing the image.
+    key_path: Path to key to use or None.
+    algorithm: Name of algorithm to use or None.
     additional_args: Additional arguments to pass to 'avbtool
       add_hashtree_image'.
   Returns:
@@ -139,7 +141,8 @@ def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
   cmdline += "--partition_size %d " % partition_size
   cmdline += "--partition_name %s " % partition_name
   cmdline += "--image %s " % image_path
-  cmdline += signing_args + " "
+  if key_path is not None and algorithm is not None:
+    cmdline += "--key %s --algorithm %s " %(key_path, algorithm)
   cmdline += additional_args
   (_, exit_code) = RunCommand(shlex.split(cmdline))
   return exit_code == 0
@@ -575,11 +578,12 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     avbtool = prop_dict.get("avb_avbtool")
     original_partition_size = int(prop_dict.get("original_partition_size"))
     partition_name = prop_dict["partition_name"]
-    signing_args = prop_dict["avb_signing_args"]
+    key_path = prop_dict.get("avb_key_path", None)
+    algorithm = prop_dict.get("avb_algorithm", None)
     # avb_add_hash_footer_args or avb_add_hashtree_footer_args
     additional_args = prop_dict["avb_add_" + avb_footer_type + "_footer_args"]
     if not AVBAddFooter(out_file, avbtool, avb_footer_type, original_partition_size,
-                      partition_name, signing_args, additional_args):
+                      partition_name, key_path, algorithm, additional_args):
       return False
 
   if run_fsck and prop_dict.get("skip_fsck") != "true":
@@ -625,7 +629,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "verity_signer_cmd",
       "verity_fec",
       "board_avb_enable",
-      "avb_signing_args",
       "avb_avbtool"
       )
   for p in common_props:
@@ -653,6 +656,8 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_avb_hashtree_enable", "avb_hashtree_enable")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+    copy_prop("system_avb_key_path", "avb_key_path")
+    copy_prop("system_avb_algorithm", "avb_algorithm")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its files.
@@ -670,6 +675,8 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_avb_hashtree_enable", "avb_hashtree_enable")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+    copy_prop("system_avb_key_path", "avb_key_path")
+    copy_prop("system_avb_algorithm", "avb_algorithm")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
@@ -695,6 +702,8 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("vendor_avb_hashtree_enable", "avb_hashtree_enable")
     copy_prop("vendor_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+    copy_prop("vendor_avb_key_path", "avb_key_path")
+    copy_prop("vendor_avb_algorithm", "avb_algorithm")
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "oem":
     copy_prop("fs_type", "fs_type")

@@ -345,6 +345,15 @@ def DumpInfoDict(d):
     print("%-25s = (%s) %s" % (k, type(v).__name__, v))
 
 
+def AppendAVBSigningArgs(cmd, partition):
+  """Append signing arguments for avbtool."""
+  # e.g., "--key path/to/signing_key --algorithm SHA256_RSA4096"
+  key_path = OPTIONS.info_dict.get(partition + "_avb_key_path", None)
+  algorithm = OPTIONS.info_dict.get(partition + "_avb_algorithm", None)
+  if key_path and algorithm:
+    cmd.extend(["--key", key_path, "--algorithm", algorithm])
+
+
 def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
                         has_ramdisk=False, two_step_image=False):
   """Build a bootable image from the specified sourcedir.
@@ -485,8 +494,8 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     part_size = info_dict["boot_size"]
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
            "--partition_size", str(part_size), "--partition_name", "boot"]
-    cmd.extend(shlex.split(info_dict["avb_signing_args"]))
-    args = info_dict.get("board_avb_boot_add_hash_footer_args")
+    AppendAVBSigningArgs(cmd, "boot")
+    args = info_dict.get("boot_avb_add_hash_footer_args")
     if args and args.strip():
       cmd.extend(shlex.split(args))
     p = Run(cmd, stdout=subprocess.PIPE)
