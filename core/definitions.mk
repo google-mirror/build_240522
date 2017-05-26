@@ -2186,13 +2186,27 @@ define call-jack
  JACK_VERSION=$(PRIVATE_JACK_VERSION) $(JACK) $(DEFAULT_JACK_EXTRA_ARGS)
 endef
 
-# Common definition to invoke javac on the host and target.
-#
+
 # Some historical notes:
 # - below we write the list of java files to java-source-list to avoid argument
 #   list length problems with Cygwin
 # - we filter out duplicate java file names because eclipse's compiler
 #   doesn't like them.
+define write-java-source-list
+@echo "$($(PRIVATE_PREFIX)DISPLAY) Java source list: $(PRIVATE_MODULE)"
+$(hide) rm -f $@
+$(call dump-words-to-file,$(sort $(PRIVATE_JAVA_SOURCES)),$@.tmp)
+$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
+    find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $@.tmp; \
+fi
+$(if $(PRIVATE_HAS_PROTO_SOURCES), \
+    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $@.tmp)
+$(if $(PRIVATE_HAS_RS_SOURCES), \
+    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $@.tmp)
+mv -f $@.tmp $@
+endef
+
+# Common definition to invoke javac on the host and target.
 #
 # $(1): javac
 # $(2): bootclasspath
@@ -2202,17 +2216,7 @@ $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_D
 $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
 $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_LIBRARIES),$(PRIVATE_CLASS_INTERMEDIATES_DIR))
-$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list)
-$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
-          find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list; \
-fi
-$(if $(PRIVATE_HAS_PROTO_SOURCES), \
-    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list )
-$(if $(PRIVATE_HAS_RS_SOURCES), \
-    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list )
-$(hide) tr ' ' '\n' < $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list \
-    | $(NORMALIZE_PATH) | sort -u > $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
-$(hide) if [ -s $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then \
+$(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     $(2) \
@@ -2221,13 +2225,11 @@ $(hide) if [ -s $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq ] ; the
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -extdirs "" -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
-    \@$(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq \
+    @$(PRIVATE_JAVA_SOURCE_LIST) \
     || ( rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) ; exit 41 ) \
 fi
 $(if $(PRIVATE_JAVA_LAYERS_FILE), $(hide) build/tools/java-layers.py \
-    $(PRIVATE_JAVA_LAYERS_FILE) \@$(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq,)
-$(hide) rm -f $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list
-$(hide) rm -f $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
+    $(PRIVATE_JAVA_LAYERS_FILE) @$(PRIVATE_JAVA_SOURCE_LIST),)
 $(if $(PRIVATE_JAR_EXCLUDE_FILES), $(hide) find $(PRIVATE_CLASS_INTERMEDIATES_DIR) \
     -name $(word 1, $(PRIVATE_JAR_EXCLUDE_FILES)) \
     $(addprefix -o -name , $(wordlist 2, 999, $(PRIVATE_JAR_EXCLUDE_FILES))) \
@@ -2255,11 +2257,6 @@ $(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 endef
 
 # Invoke Jack to compile java from source to dex and jack files.
-#
-# Some historical notes:
-# - below we write the list of java files to java-source-list to avoid argument
-#   list length problems with Cygwin
-# - we filter out duplicate java file names because Jack doesn't like them.
 define jack-java-to-dex
 $(hide) rm -f $@
 $(hide) rm -f $(PRIVATE_CLASSES_JACK)
@@ -2268,17 +2265,6 @@ $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(dir $(PRIVATE_CLASSES_JACK))
 $(hide) mkdir -p $(PRIVATE_JACK_INTERMEDIATES_DIR)
 $(if $(PRIVATE_JACK_INCREMENTAL_DIR),$(hide) mkdir -p $(PRIVATE_JACK_INCREMENTAL_DIR))
-$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list)
-$(if $(PRIVATE_SOURCE_INTERMEDIATES_DIR), \
-    $(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
-            find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list; \
-    fi)
-$(if $(PRIVATE_HAS_PROTO_SOURCES), \
-    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list )
-$(if $(PRIVATE_HAS_RS_SOURCES), \
-    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list )
-$(hide) tr ' ' '\n' < $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list \
-    | $(NORMALIZE_PATH) | sort -u > $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq
 $(if $(PRIVATE_JACK_PROGUARD_FLAGS), \
     $(hide) echo -basedirectory $(CURDIR) > $@.flags; \
     echo $(PRIVATE_JACK_PROGUARD_FLAGS) >> $@.flags; \
@@ -2293,8 +2279,8 @@ $(if $(PRIVATE_JACK_IMPORT_JAR),
     $(hide) mkdir -p $@.tmpjill.res
     $(hide) unzip -qo $(PRIVATE_JACK_IMPORT_JAR) -d $@.tmpjill.res
     $(hide) find $@.tmpjill.res -iname "*.class" -delete)
-$(hide) if [ -s $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then \
-    export tmpEcjArg="@$(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq"; \
+$(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
+    export tmpEcjArg="@$(PRIVATE_JAVA_SOURCE_LIST)"; \
 else \
     export tmpEcjArg=""; \
 fi; \
@@ -2325,37 +2311,18 @@ $(call call-jack) \
     $$tmpEcjArg \
     || ( rm -rf $(PRIVATE_CLASSES_JACK); exit 41 )
 $(hide) mv $(PRIVATE_JACK_INTERMEDIATES_DIR)/classes*.dex $(dir $@)
-$(hide) rm -f $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list
 $(if $(PRIVATE_EXTRA_JAR_ARGS),$(hide) rm -rf $@.res.tmp)
-$(hide) mv $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq $(PRIVATE_JACK_INTERMEDIATES_DIR).java-source-list
 $(if $(PRIVATE_JAR_PACKAGES), $(hide) echo unsupported options PRIVATE_JAR_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) echo unsupported options JAR_EXCLUDE_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_MANIFEST), $(hide) echo unsupported options JAR_MANIFEST in $@; exit 53)
 endef
 
 # Invoke Jack to compile java source just to check it compiles correctly.
-#
-# Some historical notes:
-# - below we write the list of java files to java-source-list to avoid argument
-#   list length problems with Cygwin
-# - we filter out duplicate java file names because Jack doesn't like them.
 define jack-check-java
 $(hide) rm -f $@
-$(hide) rm -f $@.java-source-list
-$(hide) rm -f $@.java-source-list-uniq
 $(hide) mkdir -p $(dir $@)
 $(if $(PRIVATE_JACK_INCREMENTAL_DIR),$(hide) mkdir -p $(PRIVATE_JACK_INCREMENTAL_DIR))
-$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$@.java-source-list)
-$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
-          find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $@.java-source-list; \
-fi
-$(if $(PRIVATE_HAS_PROTO_SOURCES), \
-    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $@.java-source-list )
-$(if $(PRIVATE_HAS_RS_SOURCES), \
-    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $@.java-source-list )
-$(hide) tr ' ' '\n' < $@.java-source-list \
-    | sort -u > $@.java-source-list-uniq
-$(hide) if [ -s $@.java-source-list-uniq ] ; then \
+$(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
 	$(call call-jack,$(PRIVATE_JACK_EXTRA_ARGS)) \
 	    $(strip $(PRIVATE_JACK_FLAGS)) \
 	    $(strip $(PRIVATE_JACK_DEBUG_FLAGS)) \
@@ -2365,7 +2332,7 @@ $(hide) if [ -s $@.java-source-list-uniq ] ; then \
 	    -D jack.android.min-api-level=$(PRIVATE_JACK_MIN_SDK_VERSION) \
 	    -D jack.import.type.policy=keep-first \
 	    $(if $(PRIVATE_JACK_INCREMENTAL_DIR),--incremental-folder $(PRIVATE_JACK_INCREMENTAL_DIR)) \
-	    @$@.java-source-list-uniq; \
+	    @$(PRIVATE_JAVA_SOURCE_LIST); \
 fi
 touch $@
 endef
@@ -2451,27 +2418,12 @@ endif  # TARGET_BUILD_APPS
 
 
 # Invoke Jack to compile java from source to jack files without shrink or obfuscation.
-#
-# Some historical notes:
-# - below we write the list of java files to java-source-list to avoid argument
-#   list length problems with Cygwin
-# - we filter out duplicate java file names because Jack doesn't like them.
 define java-to-jack
 $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_JACK_INTERMEDIATES_DIR)
 $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(PRIVATE_JACK_INTERMEDIATES_DIR)
 $(if $(PRIVATE_JACK_INCREMENTAL_DIR),$(hide) mkdir -p $(PRIVATE_JACK_INCREMENTAL_DIR))
-$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list)
-$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
-          find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list; \
-fi
-$(if $(PRIVATE_HAS_PROTO_SOURCES), \
-    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list )
-$(if $(PRIVATE_HAS_RS_SOURCES), \
-    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' >> $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list )
-$(hide) tr ' ' '\n' < $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list \
-    | $(NORMALIZE_PATH) | sort -u > $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq
 $(if $(PRIVATE_JACK_PROGUARD_FLAGS), \
     $(hide) echo -basedirectory $(CURDIR) > $@.flags; \
     echo $(PRIVATE_JACK_PROGUARD_FLAGS) >> $@.flags; \
@@ -2482,8 +2434,8 @@ $(if $(PRIVATE_EXTRA_JAR_ARGS),
 	$(hide) $(call add-java-resources-to,$@.res.tmp.zip)
 	$(hide) unzip -qo $@.res.tmp.zip -d $@.res.tmp
 	$(hide) rm $@.res.tmp.zip)
-$(hide) if [ -s $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then \
-    export tmpEcjArg="@$(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq"; \
+$(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
+    export tmpEcjArg="@$(PRIVATE_JAVA_SOURCE_LIST)"; \
 else \
     export tmpEcjArg=""; \
 fi; \
@@ -2507,9 +2459,7 @@ $(call call-jack) \
     $(if $(PRIVATE_JACK_PROGUARD_FLAGS),--config-proguard $@.flags) \
     $$tmpEcjArg \
     || ( rm -f $@ ; exit 41 )
-$(hide) rm -f $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list
 $(if $(PRIVATE_EXTRA_JAR_ARGS),$(hide) rm -rf $@.res.tmp)
-$(hide) mv $(PRIVATE_JACK_INTERMEDIATES_DIR)/java-source-list-uniq $(PRIVATE_JACK_INTERMEDIATES_DIR).java-source-list
 $(if $(PRIVATE_JAR_PACKAGES), $(hide) echo unsupported options PRIVATE_JAR_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) echo unsupported options JAR_EXCLUDE_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_MANIFEST), $(hide) echo unsupported options JAR_MANIFEST in $@; exit 53)
