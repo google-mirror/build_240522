@@ -120,6 +120,8 @@ full_classes_emma_jar := $(emma_intermediates_dir)/lib/$(jarjar_leaf)
 full_classes_proguard_jar := $(intermediates.COMMON)/classes-proguard.jar
 built_dex_intermediate := $(intermediates.COMMON)/$(built_dex_intermediate_leaf)/classes.dex
 full_classes_stubs_jar := $(intermediates.COMMON)/stubs.jar
+java_source_list_file := $(intermediates.COMMON)/java-source-list
+
 
 ifeq ($(LOCAL_MODULE_CLASS)$(LOCAL_SRC_FILES)$(LOCAL_STATIC_JAVA_LIBRARIES)$(LOCAL_SOURCE_FILES_ALL_GENERATED),APPS)
 # If this is an apk without any Java code (e.g. framework-res), we should skip compiling Java.
@@ -147,7 +149,8 @@ LOCAL_INTERMEDIATE_TARGETS += \
     $(noshrob_classes_jack) \
     $(jack_check_timestamp) \
     $(built_dex) \
-    $(full_classes_stubs_jar)
+    $(full_classes_stubs_jar) \
+    $(java_source_list_file)
 
 
 LOCAL_INTERMEDIATE_SOURCE_DIR := $(intermediates.COMMON)/src
@@ -424,19 +427,24 @@ ifeq ($(RUN_ERROR_PRONE),true)
 LOCAL_JAVACFLAGS += $(LOCAL_ERROR_PRONE_FLAGS)
 endif
 
+$(java_source_list_file): \
+    $(java_sources) \
+    $(java_resoruce_sources) \
+    $(full_java_lib_deps) \
+    $(RenderScript_file_stamp) \
+    $(proto_java_sources_file_stamp)
+	$(write-java-source-list)
+
 $(full_classes_compiled_jar): PRIVATE_JAVACFLAGS := $(GLOBAL_JAVAC_DEBUG_FLAGS) $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_FILES)
 $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUDE_PACKAGES)
 $(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
+$(full_classes_compiled_jar): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
 $(full_classes_compiled_jar): \
-        $(java_sources) \
-        $(java_resource_sources) \
-        $(full_java_lib_deps) \
+        $(java_source_list_file) \
         $(jar_manifest_file) \
         $(layers_file) \
-        $(RenderScript_file_stamp) \
-        $(proto_java_sources_file_stamp) \
         $(annotation_processor_deps) \
         $(NORMALIZE_PATH) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES) \
@@ -737,10 +745,9 @@ endif # LOCAL_PROGUARD_ENABLED defined
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_FLAGS := $(GLOBAL_JAVAC_DEBUG_FLAGS) $(LOCAL_JACK_FLAGS) $(annotation_processor_flags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_VERSION := $(LOCAL_JACK_VERSION)
 
-jack_all_deps := $(java_sources) $(java_resource_sources) $(full_jack_deps) \
-        $(jar_manifest_file) $(layers_file) $(RenderScript_file_stamp) \
-        $(common_proguard_flag_files) $(proguard_flag_files) \
-        $(proto_java_sources_file_stamp) $(annotation_processor_deps) \
+jack_all_deps := $(java_source_list_file) $(full_jack_deps) \
+        $(jar_manifest_file) $(layers_file) $(common_proguard_flag_files) \
+        $(proguard_flag_files) $(annotation_processor_deps) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES) $(LOCAL_JARJAR_RULES) \
         $(NORMALIZE_PATH) $(JACK_DEFAULT_ARGS) $(JACK)
 

@@ -434,26 +434,9 @@ endif  # LOCAL_USE_AAPT2
 # they want to use this module's R.java file.
 $(LOCAL_BUILT_MODULE): $(R_file_stamp)
 
-ifdef LOCAL_JACK_ENABLED
-ifneq ($(built_dex_intermediate),)
-$(built_dex_intermediate): $(R_file_stamp)
-endif
-ifneq ($(noshrob_classes_jack),)
-$(noshrob_classes_jack): $(R_file_stamp)
-endif
-ifneq ($(full_classes_jack),)
-$(full_classes_jack): $(R_file_stamp)
-$(jack_check_timestamp): $(R_file_stamp)
-endif
-endif # LOCAL_JACK_ENABLED
-
-ifneq ($(full_classes_jar),)
-# If full_classes_jar is non-empty, we're building sources.
-# If we're building sources, the initial javac step (which
-# produces full_classes_compiled_jar) needs to ensure the
-# R.java and Manifest.java files have been generated first.
-$(full_classes_compiled_jar): $(R_file_stamp)
-endif
+# The R.java file must exist by the time the java source
+# list is generated
+$(java_source_list_file): $(R_file_stamp)
 
 endif  # need_compile_res
 
