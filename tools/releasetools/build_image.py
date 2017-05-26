@@ -614,7 +614,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "verity_key",
       "verity_signer_cmd",
       "verity_fec",
-      "avb_signing_args",
       "avb_avbtool"
       )
   for p in common_props:
@@ -640,6 +639,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("system_base_fs_file", "base_fs_file")
     copy_prop("system_avb_enable", "avb_enable")
+    copy_prop("system_avb_signing_args", "avb_signing_args")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
@@ -657,6 +657,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_squashfs_block_size", "squashfs_block_size")
     copy_prop("system_base_fs_file", "base_fs_file")
     copy_prop("system_avb_enable", "avb_enable")
+    copy_prop("system_avb_signing_args", "avb_signing_args")
     copy_prop("system_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
@@ -682,6 +683,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("vendor_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("vendor_base_fs_file", "base_fs_file")
     copy_prop("vendor_avb_enable", "avb_enable")
+    copy_prop("vendor_avb_signing_args", "avb_signing_args")
     copy_prop("vendor_avb_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")

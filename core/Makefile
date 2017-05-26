@@ -574,7 +574,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILE
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $@ \
 	  --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-	  --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+	  --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
 	  $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 
 .PHONY: bootimage-nodeps
@@ -585,7 +585,7 @@ bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL)
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $@ \
 	  --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-	  --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+	  --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
 	  $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 
 else ifeq (true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_BOOT_SIGNER)) # BOARD_AVB_ENABLE != true
@@ -940,11 +940,12 @@ $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_subkey=$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VBOOT_SIGNING_SUBKEY)" >> $(1))
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "futility=$(notdir $(FUTILITY))" >> $(1))
 $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_signer_cmd=$(VBOOT_SIGNER)" >> $(1))
-$(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_signing_args=$(INTERNAL_AVB_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_avbtool=$(AVBTOOL)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_signing_args=$(INTERNAL_AVB_SYSTEM_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "system_avb_add_hashtree_footer_args=$(BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_signing_args=$(INTERNAL_AVB_VENDOR_SIGNING_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "vendor_avb_add_hashtree_footer_args=$(BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
     $(hide) echo "recovery_as_boot=true" >> $(1))
@@ -1149,7 +1150,7 @@ define build-recoveryimage-target
       $(hide) $(AVBTOOL) add_hash_footer \
         --image $(1) \
         --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
-        --partition_name boot $(INTERNAL_AVB_SIGNING_ARGS) \
+        --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
         $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS))
   $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)), \
     $(hide) $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE)), \
@@ -1755,7 +1756,7 @@ $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE) $(AVBTOOL)
 	$(AVBTOOL) add_hash_footer \
 		--image $@ \
 		--partition_size $(BOARD_DTBOIMG_PARTITION_SIZE) \
-		--partition_name dtbo $(INTERNAL_AVB_SIGNING_ARGS) \
+		--partition_name dtbo $(INTERNAL_AVB_DTBO_SIGNING_ARGS) \
 		$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)
 else
 $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)
@@ -1770,22 +1771,50 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 
 BUILT_VBMETAIMAGE_TARGET := $(PRODUCT_OUT)/vbmeta.img
 
+# A temp directory to extract public keys from each BOARD_AVB_CHAIN_<PARTITION>_KEY_PATH.
+# The extracted public key is named as <partition>.avbpubkey.
+BOARD_AVB_CHAIN_PUBKEY_DIR := $(PRODUCT_OUT)/avb_chain_pub_keys
+
+ifdef BOARD_AVB_CHAIN_BOOT_KEY_PATH
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS := \
-    --include_descriptors_from_image $(INSTALLED_BOOTIMAGE_TARGET) \
-    --include_descriptors_from_image $(INSTALLED_SYSTEMIMAGE) \
+    --chain_partition boot:$(BOARD_AVB_CHAIN_BOOT_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_CHAIN_PUBKEY_DIR)/boot.avbpubkey
+else
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS := \
+    --include_descriptors_from_image $(INSTALLED_BOOTIMAGE_TARGET)
+endif
+
+ifdef BOARD_AVB_CHAIN_SYSTEM_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition system:$(BOARD_AVB_CHAIN_SYSTEM_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_CHAIN_PUBKEY_DIR)/system.avbpubkey
+else
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --include_descriptors_from_image $(INSTALLED_SYSTEMIMAGE)
+endif
 
 ifdef INSTALLED_VENDORIMAGE_TARGET
+ifdef BOARD_AVB_CHAIN_VENDOR_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition vendor:$(BOARD_AVB_CHAIN_VENDOR_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_CHAIN_PUBKEY_DIR)/vendor.avbpubkey
+else
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
     --include_descriptors_from_image $(INSTALLED_VENDORIMAGE_TARGET)
 endif
+endif
 
 ifdef INSTALLED_DTBOIMAGE_TARGET
+ifdef BOARD_AVB_CHAIN_DTBO_KEY_PATH
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition vendor:$(BOARD_AVB_CHAIN_DTBO_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_CHAIN_PUBKEY_DIR)/dtbo.avbpubkey
+else
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
 		--include_descriptors_from_image $(INSTALLED_DTBOIMAGE_TARGET)
 endif
+endif
 
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+ifndef BOARD_AVB_CHAIN_SYSTEM_KEY_PATH
 INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += --setup_rootfs_from_kernel $(BUILT_SYSTEMIMAGE)
+endif
 endif
 
 ifdef BOARD_AVB_ROLLBACK_INDEX
@@ -1802,6 +1831,34 @@ INTERNAL_AVB_SIGNING_ARGS := \
     --algorithm $(BOARD_AVB_ALGORITHM) --key $(BOARD_AVB_KEY_PATH)
 endif
 
+ifndef BOARD_AVB_CHAIN_BOOT_KEY_PATH
+INTERNAL_AVB_BOOT_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_BOOT_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_BOOT_ALGORITHM) --key $(BOARD_AVB_CHAIN_BOOT_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_SYSTEM_KEY_PATH
+INTERNAL_AVB_SYSTEM_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_SYSTEM_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_SYSTEM_ALGORITHM) --key $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_VENDOR_KEY_PATH
+INTERNAL_AVB_VENDOR_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_VENDOR_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_VENDOR_ALGORITHM) --key $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH)
+endif
+
+ifndef BOARD_AVB_CHAIN_DTBO_KEY_PATH
+INTERNAL_AVB_DTBO_SIGNING_ARGS := $(INTERNAL_AVB_SIGNING_ARGS)
+else
+INTERNAL_AVB_DTBO_SIGNING_ARGS := \
+    --algorithm $(BOARD_AVB_CHAIN_DTBO_ALGORITHM) --key $(BOARD_AVB_CHAIN_DTBO_KEY_PATH)
+endif
+
 ifndef BOARD_BOOTIMAGE_PARTITION_SIZE
   $(error BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
 endif
@@ -1812,11 +1869,25 @@ endif
 
 define build-vbmetaimage-target
   $(call pretty,"Target vbmeta image: $(INSTALLED_VBMETAIMAGE_TARGET)")
+  $(hide) mkdir -p $(BOARD_AVB_CHAIN_PUBKEY_DIR)
+  $(if $(BOARD_AVB_CHAIN_BOOT_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_BOOT_KEY_PATH) \
+	  --output $(BOARD_AVB_CHAIN_PUBKEY_DIR)/boot.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_SYSTEM_KEY_PATH) \
+	  --output $(BOARD_AVB_CHAIN_PUBKEY_DIR)/system.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_VENDOR_KEY_PATH) \
+	  --output $(BOARD_AVB_CHAIN_PUBKEY_DIR)/vendor.avbpubkey)
+  $(if $(BOARD_AVB_CHAIN_DTBO_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_CHAIN_DTBO_KEY_PATH) \
+	  --output $(BOARD_AVB_CHAIN_PUBKEY_DIR)/dtbo.avbpubkey)
   $(hide) $(AVBTOOL) make_vbmeta_image \
     $(INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS) \
     $(INTERNAL_AVB_SIGNING_ARGS) \
     $(BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS) \
     --output $@
+  $(hide) rm -rf $(BOARD_AVB_CHAIN_PUBKEY_DIR)
 endef
 
 INSTALLED_VBMETAIMAGE_TARGET := $(BUILT_VBMETAIMAGE_TARGET)
