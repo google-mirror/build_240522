@@ -16,19 +16,7 @@
 
 .PHONY: help
 help:
-	@echo
-	@echo "Common make targets:"
-	@echo "----------------------------------------------------------------------------------"
-	@echo "droid                   Default target"
-	@echo "clean                   (aka clobber) equivalent to rm -rf out/"
-	@echo "snod                    Quickly rebuild the system image from built packages"
-	@echo "vnod                    Quickly rebuild the vendor image from built packages"
-	@echo "offline-sdk-docs        Generate the HTML for the developer SDK docs"
-	@echo "doc-comment-check-docs  Check HTML doc links & validity, without generating HTML"
-	@echo "libandroid_runtime      All the JNI framework stuff"
-	@echo "framework               All the java framework stuff"
-	@echo "services                The system server (Java) and friends"
-	@echo "help                    You're reading it right now"
+	build/make/core/help.sh
 
 .PHONY: out
 out:
