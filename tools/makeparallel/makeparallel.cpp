@@ -100,7 +100,7 @@ static std::vector<std::string> ReadMakeflags() {
 }
 
 static bool ParseMakeflags(std::vector<std::string>& args,
-    int* in_fd, int* out_fd, bool* parallel, bool* keep_going) {
+    int* in_fd, int* out_fd, bool* parallel, bool* keep_going, int* max_load) {
 
   std::vector<char*> getopt_argv;
   // getopt starts reading at argv[1]
@@ -115,11 +115,15 @@ static bool ParseMakeflags(std::vector<std::string>& args,
   while (1) {
     const static option longopts[] = {
         {"jobserver-fds", required_argument, 0, 0},
+        {"jobs",          no_argument,       0, 'j'},
+        {"keep-going",    no_argument,       0, 'k'},
+        {"max-load",      required_argument, 0, 'l'},
+        {"load-average",  required_argument, 0, 'l'},
         {0, 0, 0, 0},
     };
     int longopt_index = 0;
 
-    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kj",
+    int c = getopt_long(getopt_argv.size(), getopt_argv.data(), "kjl:",
         longopts, &longopt_index);
 
     if (c == -1) {
@@ -147,6 +151,9 @@ static bool ParseMakeflags(std::vector<std::string>& args,
       break;
     case 'k':
       *keep_going = true;
+      break;
+    case 'l':
+      *max_load = atoi(optarg);
       break;
     case '?':
       // ignore unknown arguments
@@ -290,6 +297,7 @@ int main(int argc, char* argv[]) {
   int out_fd = -1;
   bool parallel = false;
   bool keep_going = false;
+  int max_load = 0;
   bool ninja = false;
   int tokens = 0;
 
@@ -307,7 +315,8 @@ int main(int argc, char* argv[]) {
   std::vector<char*> args({argv[1]});
 
   std::vector<std::string> makeflags = ReadMakeflags();
-  if (ParseMakeflags(makeflags, &in_fd, &out_fd, &parallel, &keep_going)) {
+  if (ParseMakeflags(makeflags, &in_fd, &out_fd, &parallel, &keep_going,
+                     &max_load)) {
     if (in_fd >= 0 && out_fd >= 0) {
       CheckFd(in_fd);
       CheckFd(out_fd);
@@ -344,6 +353,10 @@ int main(int argc, char* argv[]) {
     }
     if (keep_going) {
       args.push_back(strdup("-k0"));
+    }
+    if (max_load > 0) {
+      std::string larg = "-l" + std::to_string(max_load);
+      args.push_back(strdup(larg.c_str()));
     }
   } else {
     if (jarg != "") {
