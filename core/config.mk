@@ -701,6 +701,14 @@ APICHECK_CLASSPATH := $(subst $(space),:,$(strip $(APICHECK_CLASSPATH_ENTRIES)))
 
 APICHECK_COMMAND := $(APICHECK) -JXmx1024m -J"classpath $(APICHECK_CLASSPATH)"
 
+define math_gt_or_eq
+$(if $(filter $(1),$(call math_max,$(1),$(2))),true)
+endef
+
+#$(warning $(call math_gt_or_eq, 2, 1))
+#$(warning $(call math_gt_or_eq, 1, 1))
+#$(warning $(if $(call math_gt_or_eq, 1, 2),false,true))
+
 # Boolean variable determining if Treble is fully enabled
 PRODUCT_FULL_TREBLE := false
 ifneq ($(PRODUCT_FULL_TREBLE_OVERRIDE),)
