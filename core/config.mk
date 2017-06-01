@@ -720,6 +720,11 @@ else
   DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
 endif
 
+# Apply proguard to core libraries on user builds
+ifeq ($(TARGET_BUILD_VARIANT),user)
+ANDROID_ENABLE_CORE_OBFUSCATION := true
+endif
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
