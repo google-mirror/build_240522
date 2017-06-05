@@ -269,8 +269,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
   # Replace the keyid string in META/misc_info.txt.
   if OPTIONS.replace_verity_private_key:
-    ReplaceVerityPrivateKey(input_tf_zip, output_tf_zip, misc_info,
-                            OPTIONS.replace_verity_private_key[1])
+    ReplaceVerityPrivateKey(misc_info, OPTIONS.replace_verity_private_key[1])
 
   if OPTIONS.replace_verity_public_key:
     if system_root_image:
@@ -286,6 +285,11 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   if OPTIONS.replace_verity_keyid:
     ReplaceVerityKeyId(input_tf_zip, output_tf_zip,
                        OPTIONS.replace_verity_keyid[1])
+
+  # Write back misc_info with the latest values.
+  misc_info_all = '\n'.join(
+        ['%s=%s' % (k, v) for k, v in sorted(misc_info.iteritems())])
+  common.ZipWriteStr(output_tf_zip, "META/misc_info.txt", misc_info_all)
 
 
 def ReplaceCerts(data):
@@ -464,20 +468,12 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
 
 
 def ReplaceVerityPublicKey(targetfile_zip, filename, key_path):
-  print "Replacing verity public key with %s" % key_path
-  with open(key_path) as f:
-    data = f.read()
-  common.ZipWriteStr(targetfile_zip, filename, data)
-  return data
+  print "Replacing verity public key with %s" % (key_path,)
+  common.ZipWrite(targetfile_zip, key_path, arcname=filename)
 
 
-def ReplaceVerityPrivateKey(targetfile_input_zip, targetfile_output_zip,
-                            misc_info, key_path):
-  print "Replacing verity private key with %s" % key_path
-  current_key = misc_info["verity_key"]
-  original_misc_info = targetfile_input_zip.read("META/misc_info.txt")
-  new_misc_info = original_misc_info.replace(current_key, key_path)
-  common.ZipWriteStr(targetfile_output_zip, "META/misc_info.txt", new_misc_info)
+def ReplaceVerityPrivateKey(misc_info, key_path):
+  print "Replacing verity private key with %s" % (key_path,)
   misc_info["verity_key"] = key_path
 
 
@@ -506,7 +502,6 @@ def ReplaceVerityKeyId(targetfile_input_zip, targetfile_output_zip, keypath):
   out_cmdline = out_cmdline.strip()
   print "out_cmdline %s" % (out_cmdline)
   common.ZipWriteStr(targetfile_output_zip, "BOOT/cmdline", out_cmdline)
-  return out_cmdline
 
 
 def BuildKeyMap(misc_info, key_mapping_options):
