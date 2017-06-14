@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Paul Duffin <paulduffin@google.com>
+Submitted-by: Paul Duffin <paulduffin@google.com>
+Submitted-at: Wed, 14 Jun 2017 11:06:19 +0000
+Reviewed-on: https://android-review.googlesource.com/413019
+Project: platform/build
+Branch: refs/heads/master
