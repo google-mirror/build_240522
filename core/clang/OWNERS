@@ -1,0 +1,3 @@
+per-file config.mk = srhines@google.com
+per-file tidy.mk = srhines@google.com
+per-file versions.mk = srhines@google.com
