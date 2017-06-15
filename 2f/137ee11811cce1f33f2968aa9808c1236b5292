@@ -1,0 +1,7 @@
+Build-Cop-Override+1: Narayan Kamath <narayan@google.com>
+Presubmit-Ready+1: Mariano Giardina <giardina@google.com>
+Submitted-by: Mariano Giardina <giardina@google.com>
+Submitted-at: Thu, 15 Jun 2017 11:01:26 +0000
+Reviewed-on: https://android-review.googlesource.com/416319
+Project: platform/build
+Branch: refs/heads/master
