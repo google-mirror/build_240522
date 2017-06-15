@@ -19,6 +19,12 @@
 # build quite specifically for the emulator, and might not be
 # entirely appropriate to inherit from for on-device configurations.
 
+PRODUCT_COPY_FILES += \
+    development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
+    prebuilts/qemu-kernel/arm64/3.18/kernel-qemu2:kernel-ranchu \
+    device/generic/goldfish/fstab.ranchu.arm:root/fstab.ranchu \
+    device/generic/goldfish/fstab.ranchu.early.arm:root/fstab.ranchu.early
+
 # This is for enabling ethernet support for ranchu.
 # Consider removing this after RIL support is provided in ranchu.
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml

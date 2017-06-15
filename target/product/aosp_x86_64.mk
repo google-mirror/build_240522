@@ -19,6 +19,13 @@
 # build quite specifically for the emulator, and might not be
 # entirely appropriate to inherit from for on-device configurations.
 
+PRODUCT_COPY_FILES += \
+    development/sys-img/advancedFeatures.ini:advancedFeatures.ini \
+    device/generic/goldfish/data/etc/encryptionkey.img:encryptionkey.img \
+    device/generic/goldfish/fstab.ranchu:root/fstab.ranchu \
+    device/generic/goldfish/fstab.ranchu.early:root/fstab.ranchu.early \
+    prebuilts/qemu-kernel/x86_64/3.18/kernel-qemu2:kernel-ranchu
+
 # If running on an emulator or some other device that has a LAN connection
 # that isn't a wifi connection. This will instruct init.rc to enable the
 # network connection so that you can use it with ADB
