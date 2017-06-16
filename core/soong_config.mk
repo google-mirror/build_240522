@@ -73,9 +73,14 @@ $(SOONG_VARIABLES): FORCE
 	echo '    "HostArch": "$(HOST_ARCH)",'; \
 	echo '    "HostSecondaryArch": "$(HOST_2ND_ARCH)",'; \
 	echo ''; \
-	echo '    "CrossHost": "$(HOST_CROSS_OS)",'; \
-	echo '    "CrossHostArch": "$(HOST_CROSS_ARCH)",'; \
-	echo '    "CrossHostSecondaryArch": "$(HOST_CROSS_2ND_ARCH)",'; \
+	echo '    "CrossHosts":['; \
+        echo '      {'; \
+        echo '        "OsName":"$(HOST_CROSS_OS)",'; \
+        echo '        "ArchPrimary":"$(HOST_CROSS_ARCH)",'; \
+        echo '        "ArchSecondary":"$(HOST_CROSS_2ND_ARCH)"'; \
+        echo '      }'; \
+        echo '    ],'; \
+        echo ''; \
 	echo '    "Safestack": $(if $(filter true,$(USE_SAFESTACK)),true,false),'; \
 	echo '    "EnableCFI": $(if $(filter false,$(ENABLE_CFI)),false,true),'; \
 	echo '    "Device_uses_hwc2": $(if $(filter true,$(TARGET_USES_HWC2)),true,false),'; \
