@@ -531,6 +531,35 @@ $(foreach m,$(ALL_MODULES), \
    ) \
  )
 
+# TODO (sbasi) - Support the general testcase folders as well.
+# As-per request by the VTS team, they want their required modules to be in the
+# testcase directory with the same layout as they are under the product/host
+# build roots.
+$(foreach m, $(ALL_MODULES), \
+  $(eval req_mods := $($(m)_REQ_MODS)) \
+  $(if $(req_mods), \
+    $(eval copy_list := ) \
+    $(foreach mod,$(req_mods), \
+      $(eval mod_target_files := $(filter $(PRODUCT_OUT)/%, $(ALL_MODULES.$(mod).INSTALLED))) \
+      $(eval mod_host_files := $(filter $(HOST_OUT)/%, $(ALL_MODULES.$(mod).INSTALLED))) \
+      $(foreach file, $(mod_target_files) $(mod_host_files), \
+        $(eval testcase_dest := $(file:$(PRODUCT_OUT)/%=%)) \
+        $(eval testcase_dest := $(testcase_dest:$(HOST_OUT)/%=%)) \
+        $(foreach suite, $($(m)_SUITES), \
+          $(eval copy_list := $(copy_list) \
+            $(file):$(COMPATIBILITY_TESTCASES_OUT_$(suite))/$(testcase_dest)) \
+        ) \
+      )\
+    ) \
+    $(eval dst_list := $(call copy-many-files, $(copy_list))) \
+    $(eval $(m) : $(dst_list)) \
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval COMPATIBILITY.$(suite).FILES := \ $(COMPATIBILITY.$(suite).FILES) \
+        $(dst_list)) \
+    )\
+  ) \
+)
+
 t_m :=
 h_m :=
 hc_m :=
