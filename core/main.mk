@@ -531,6 +531,25 @@ $(foreach m,$(ALL_MODULES), \
    ) \
  )
 
+# TODO (sbasi) - Support the general testcase folders as well.
+$(foreach m, $(ALL_MODULES), \
+  $(eval req_mods := $($(m)_REQ_MODS)) \
+  $(if $(req_mods), \
+    $(eval copy_list := ) \
+    $(foreach mod,$(req_mods), \
+      $(eval mod_target_files := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(mod).INSTALLED))) \
+      $(eval mod_host_files := $(filter $(HOST_OUT)/%, $(ALL_MODULES.$(mod).INSTALLED))) \
+      $(foreach file, $(mod_target_files) $(mod_host_files), \
+        $(foreach suite, $($(m)_SUITES), \
+          $(eval copy_list := $(copy_list) \
+            $(file):$(COMPATIBILITY_TESTCASES_OUT_$(suite))/$(basename $(notdir $(file)))) \
+        ) \
+      )\
+    ) \
+    $(eval $(m) : $(call copy-many-files, $(copy_list))) \
+  ) \
+)
+
 t_m :=
 h_m :=
 hc_m :=
