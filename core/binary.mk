@@ -1685,10 +1685,18 @@ ifneq (,$(filter 1 true,$(my_tidy_enabled)))
       my_tidy_flags := $(call default_tidy_header_filter,$(LOCAL_PATH))
     endif
 
-    # We might be using the static analyzer through clang-tidy.
-    # https://bugs.llvm.org/show_bug.cgi?id=32914
     ifneq ($(my_tidy_checks),)
+      # We might be using the static analyzer through clang-tidy.
+      # https://bugs.llvm.org/show_bug.cgi?id=32914
       my_tidy_flags += "-extra-arg-before=-D__clang_analyzer__"
+
+      # In the analyzer, if kBar is true, we'll get noreturn warnings for
+      # void SomeClass::foo() { CHECK(!kBar); /* useful things */ }
+      # since clang knows that CHECK(false) is itself noreturn.
+      #
+      # This just generates unwanted noise. Let clang handle complaining about
+      # "real" cases during compilation.
+      my_tidy_flags += "-extra-arg=-Wno-missing-noreturn"
     endif
   endif
 endif
