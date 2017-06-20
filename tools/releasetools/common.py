@@ -736,6 +736,13 @@ def CheckSize(data, target, info_dict):
     return
 
   size = len(data)
+  if target == "boot" and info_dict.get("avb_enable") == "true":
+    if size != limit:
+      raise ExternalError(
+          "AVB signed boot image should have the same size as the limit. "
+          "size {}, limit {}".format(size, limit))
+    return
+
   pct = float(size) * 100.0 / limit
   msg = "%s size (%d) is %.2f%% of limit (%d)" % (target, size, pct, limit)
   if pct >= 99.0:
