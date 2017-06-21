@@ -474,14 +474,14 @@ ALL_DEFAULT_INSTALLED_MODULES += $(event_log_tags_file)
 # #################################################################
 ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true)
   ifeq ($(strip $(TARGET_BOOTLOADER_IS_2ND)),true)
-    INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
+    INSTALLED_SECOND_TARGET := $(PRODUCT_OUT)/2ndbootloader
   else
-    INSTALLED_2NDBOOTLOADER_TARGET :=
+    INSTALLED_SECOND_TARGET :=
   endif
 else ifeq ($(strip $(TARGET_DTB_IN_SECOND)),true)
-  INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/dtb
+  INSTALLED_SECOND_TARGET := $(PRODUCT_OUT)/dtb
 else
-  INSTALLED_2NDBOOTLOADER_TARGET :=
+  INSTALLED_SECOND_TARGET :=
 endif # TARGET_NO_BOOTLOADER
 ifneq ($(strip $(TARGET_NO_KERNEL)),true)
   INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
@@ -513,7 +513,7 @@ ifneq ($(strip $(TARGET_NO_KERNEL)),true)
 # -----------------------------------------------------------------
 # the boot image, which is a collection of other images.
 INTERNAL_BOOTIMAGE_ARGS := \
-	$(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET)) \
+	$(addprefix --second ,$(INSTALLED_SECOND_TARGET)) \
 	--kernel $(INSTALLED_KERNEL_TARGET)
 
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
@@ -995,7 +995,7 @@ ifeq ($(recovery_fstab),)
 endif
 
 INTERNAL_RECOVERYIMAGE_ARGS := \
-	$(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET)) \
+	$(addprefix --second ,$(INSTALLED_SECOND_TARGET)) \
 	--kernel $(recovery_kernel) \
 	--ramdisk $(recovery_ramdisk)
 
@@ -1114,7 +1114,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
 		$(INSTALLED_RAMDISK_TARGET) \
 		$(INTERNAL_RECOVERYIMAGE_FILES) \
 		$(recovery_initrc) $(recovery_sepolicy) $(recovery_kernel) \
-		$(INSTALLED_2NDBOOTLOADER_TARGET) \
+		$(INSTALLED_SECOND_TARGET) \
 		$(recovery_build_prop) $(recovery_resource_deps) \
 		$(recovery_fstab) \
 		$(RECOVERY_INSTALL_OTA_KEYS) \
@@ -1129,7 +1129,7 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
 		$(INSTALLED_BOOTIMAGE_TARGET) \
 		$(INTERNAL_RECOVERYIMAGE_FILES) \
 		$(recovery_initrc) $(recovery_sepolicy) $(recovery_kernel) \
-		$(INSTALLED_2NDBOOTLOADER_TARGET) \
+		$(INSTALLED_SECOND_TARGET) \
 		$(recovery_build_prop) $(recovery_resource_deps) \
 		$(recovery_fstab) \
 		$(RECOVERY_INSTALL_OTA_KEYS) \
@@ -1948,7 +1948,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(INTERNAL_SYSTEMOTHERIMAGE_FILES) \
 		$(INSTALLED_ANDROID_INFO_TXT_TARGET) \
 		$(INSTALLED_KERNEL_TARGET) \
-		$(INSTALLED_2NDBOOTLOADER_TARGET) \
+		$(INSTALLED_SECOND_TARGET) \
 		$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_BASE_FS_PATH) \
 		$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VENDOR_BASE_FS_PATH) \
 		$(SELINUX_FC) \
@@ -1968,8 +1968,8 @@ ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_
 ifdef INSTALLED_KERNEL_TARGET
 	$(hide) cp $(INSTALLED_KERNEL_TARGET) $(zip_root)/$(PRIVATE_RECOVERY_OUT)/kernel
 endif
-ifdef INSTALLED_2NDBOOTLOADER_TARGET
-	$(hide) cp $(INSTALLED_2NDBOOTLOADER_TARGET) $(zip_root)/$(PRIVATE_RECOVERY_OUT)/second
+ifdef INSTALLED_SECOND_TARGET
+	$(hide) cp $(INSTALLED_SECOND_TARGET) $(zip_root)/$(PRIVATE_RECOVERY_OUT)/second
 endif
 ifdef INTERNAL_KERNEL_CMDLINE
 	$(hide) echo "$(INTERNAL_KERNEL_CMDLINE)" > $(zip_root)/$(PRIVATE_RECOVERY_OUT)/cmdline
@@ -1996,8 +1996,8 @@ ifneq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
 ifdef INSTALLED_KERNEL_TARGET
 	$(hide) cp $(INSTALLED_KERNEL_TARGET) $(zip_root)/BOOT/kernel
 endif
-ifdef INSTALLED_2NDBOOTLOADER_TARGET
-	$(hide) cp $(INSTALLED_2NDBOOTLOADER_TARGET) $(zip_root)/BOOT/second
+ifdef INSTALLED_SECOND_TARGET
+	$(hide) cp $(INSTALLED_SECOND_TARGET) $(zip_root)/BOOT/second
 endif
 ifdef INTERNAL_KERNEL_CMDLINE
 	$(hide) echo "$(INTERNAL_KERNEL_CMDLINE)" > $(zip_root)/BOOT/cmdline
