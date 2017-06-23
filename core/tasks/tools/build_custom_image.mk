@@ -79,7 +79,12 @@ $(my_built_custom_image): PRIVATE_AVB_ADD_HASHTREE_FOOTER_ARGS := $(CUSTOM_IMAGE
 ifeq (true,$(CUSTOM_IMAGE_AVB_ENABLE))
   $(my_built_custom_image): $(AVBTOOL)
 endif
-$(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_image_copy_files) \
+
+my_custom_image_modules_var:=BOARD_$(shell echo $(my_custom_image_name) | tr '[:lower:]' '[:upper:]')_KERNEL_MODULES
+my_custom_image_modules:=$($(my_custom_image_modules_var))
+my_custom_image_dep:=$(if $(my_custom_image_modules),$(my_custom_image_modules) $(DEPMOD),)
+
+$(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_image_copy_files) $(my_custom_image_dep) \
   $(CUSTOM_IMAGE_DICT_FILE)
 	@echo "Build image $@"
 	$(hide) rm -rf $(PRIVATE_INTERMEDIATES) && mkdir -p $(PRIVATE_INTERMEDIATES)
@@ -89,6 +94,8 @@ $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_i
 	          $(eval pair := $(subst :,$(space),$(p)))\
 	          mkdir -p $(dir $(word 2,$(pair)));\
 	          cp -Rf $(word 1,$(pair)) $(word 2,$(pair));)
+	$(if $(my_custom_image_modules), \
+		$(call build-image-kernel-modules,$(my_custom_image_modules),$(PRIVATE_STAGING_DIR),$(my_custom_image_name)/,$(call intermediates-dir-for,PACKAGING,depmod_$(my_custom_image_name))))
 	$(if $($(PRIVATE_PICKUP_FILES)),$(hide) cp -Rf $(PRIVATE_PICKUP_FILES) $(PRIVATE_STAGING_DIR))
 	# Generate the dict.
 	$(hide) echo "# For all accepted properties, see BuildImage() in tools/releasetools/build_image.py" > $(PRIVATE_INTERMEDIATES)/image_info.txt
