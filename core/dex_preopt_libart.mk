@@ -59,18 +59,36 @@ $(dir $(2))oat/$(1)/$(basename $(notdir $(2))).odex
 endef
 
 # Returns the full path to the installed .odex file.
-# This handles BOARD_USES_SYSTEM_OTHER_ODEX to install odex files into another
+# This handles BOARD_USES_SYSTEM_OTHER_ODEX and BOARD_USES_OEM_OTHER_ODEX to install odex files into another
 # partition.
 # $(1): the arch name.
 # $(2): the full install path (including file name) of the corresponding .apk.
 ifeq ($(BOARD_USES_SYSTEM_OTHER_ODEX),true)
+ifeq ($(BOARD_USES_OEM_OTHER_ODEX),true)
+define get-odex-installed-file-path
+$(if $(call install-on-system-other, $(2)),
+  $(call get-odex-file-path,$(1),$(patsubst $(TARGET_OUT)/%,$(TARGET_OUT_SYSTEM_OTHER)/%,$(2))),
+  $(if $(filter $(foreach f,$(OEM_OTHER_ODEX_FILTER),$(TARGET_OUT_OEM)/$(f)),$(2)),
+  $(strip $(call get-odex-file-path,$(1),$(patsubst $(TARGET_OUT_OEM)/%,$(TARGET_OUT_OEM_OTHER)/%,$(2)))),
+  $(call get-odex-file-path,$(1),$(2))))
+endef
+else
 define get-odex-installed-file-path
 $(if $(call install-on-system-other, $(2)),
   $(call get-odex-file-path,$(1),$(patsubst $(TARGET_OUT)/%,$(TARGET_OUT_SYSTEM_OTHER)/%,$(2))),
   $(call get-odex-file-path,$(1),$(2)))
 endef
+endif
+else
+ifeq ($(BOARD_USES_OEM_OTHER_ODEX),true)
+define get-odex-installed-file-path
+$(if $(filter $(foreach f,$(OEM_OTHER_ODEX_FILTER),$(TARGET_OUT_OEM)/$(f)),$(2)),
+  $(call get-odex-file-path,$(1),$(patsubst $(TARGET_OUT_OEM)/%,$(TARGET_OUT_OEM_OTHER)/%,$(2))),
+  $(call get-odex-file-path,$(1),$(2)))
+endef
 else
 get-odex-installed-file-path = $(get-odex-file-path)
+endif
 endif
 
 # Returns the path to the image file (such as "/system/framework/<arch>/boot.art"

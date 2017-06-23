@@ -47,6 +47,14 @@ LOCAL_DEX_PREOPT := nostripping
 endif
 endif
 endif
+# if installing into oem, and odex are being installed into oem_other, don't strip
+ifeq ($(BOARD_USES_OEM_OTHER_ODEX),true)
+ifeq ($(LOCAL_DEX_PREOPT),true)
+ifneq ($(filter $(foreach f,$(OEM_OTHER_ODEX_FILTER),$(TARGET_OUT_OEM)/$(f)),$(my_module_path)),)
+LOCAL_DEX_PREOPT := nostripping
+endif
+endif
+endif
 
 built_odex :=
 built_vdex :=

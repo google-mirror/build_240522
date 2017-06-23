@@ -33,6 +33,7 @@ PARSE_TIME_MAKE_GOALS := \
 	eng \
 	fusion \
 	oem_image \
+	oem_other_image \
 	online-system-api-sdk-docs \
 	pdk \
 	platform \

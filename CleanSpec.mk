@@ -432,6 +432,10 @@ $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/*/*/jack*)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/sbin/adbd)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/sbin/adbd)
 
+# Clean oem related files
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/oem/app/*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/oem/priv-app/*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************

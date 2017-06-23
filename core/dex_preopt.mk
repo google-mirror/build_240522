@@ -31,6 +31,10 @@ else
 install-on-system-other = $(filter-out $(PRODUCT_DEXPREOPT_SPEED_APPS) $(PRODUCT_SYSTEM_SERVER_APPS),$(basename $(notdir $(filter $(foreach f,$(SYSTEM_OTHER_ODEX_FILTER),$(TARGET_OUT)/$(f)),$(1)))))
 endif
 
+# The default filter for which files go into the oem_other image (if it is
+# being used). To bundle everything one should set this to '%'
+OEM_OTHER_ODEX_FILTER ?= app/% priv-app/%
+
 # The default values for pre-opting: always preopt PIC.
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
