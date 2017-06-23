@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	rild.libpath=/vendor/lib/libreference-ril.so
+
 PRODUCT_COPY_FILES += \
     development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
     prebuilts/qemu-kernel/arm/3.18/kernel-qemu2:kernel-ranchu \
