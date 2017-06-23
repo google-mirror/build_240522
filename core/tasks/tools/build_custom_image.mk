@@ -89,6 +89,9 @@ $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_i
 	          $(eval pair := $(subst :,$(space),$(p)))\
 	          mkdir -p $(dir $(word 2,$(pair)));\
 	          cp -Rf $(word 1,$(pair)) $(word 2,$(pair));)
+	$(if $(filter odm,$(my_custom_image_name)), \
+		$(if $(BOARD_ODM_KERNEL_MODULES), \
+			$(call build-image-kernel-modules,$(BOARD_ODM_KERNEL_MODULES),$(PRIVATE_STAGING_DIR),odm/,$(call intermediates-dir-for,PACKAGING,depmod_odm))))
 	$(if $($(PRIVATE_PICKUP_FILES)),$(hide) cp -Rf $(PRIVATE_PICKUP_FILES) $(PRIVATE_STAGING_DIR))
 	# Generate the dict.
 	$(hide) echo "# For all accepted properties, see BuildImage() in tools/releasetools/build_image.py" > $(PRIVATE_INTERMEDIATES)/image_info.txt
