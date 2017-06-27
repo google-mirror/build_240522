@@ -29,6 +29,32 @@
 # include defines, and compiler settings for the given architecture
 # version.
 #
+ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),)
+TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT := generic
+endif
+
+KNOWN_ARMv8_CORES := cortex-a53 cortex-a57 cortex-a72 cortex-a73
+KNOWN_ARMv8_CORES += kryo denver64 exynos-m1 exynos-m2
+
+# You can include armv8-a cores not listed above to MORE_ARMv8_CORES if the
+# compiler and other part of the build system support them.
+ifneq (,$(MORE_ARMv8_CORES))
+KNOWN_ARMv8_CORES += $(MORE_ARMv8_CORES)
+endif
+
+# Many devices (incorrectly) use armv7-a-neon as the 2nd architecture variant
+# for cores that implement armv8-a ISAs. The following set it to armv8-a.
+ifneq (,$(findstring $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT), $(KNOWN_ARMv8_CORES)))
+  ifneq ($(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT),armv8-a)
+    $(warning $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT) is armv8-a.)
+    ifneq (,$(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT))
+      $(warning TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT, $(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT), ignored! Use armv8-a instead.)
+    endif
+    # Overwrite TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT
+    TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv8-a
+  endif
+endif
+
 ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT)),)
 TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv5te
 endif
