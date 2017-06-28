@@ -86,6 +86,27 @@ ifneq ($(filter mips mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+# Support for local sanitize blacklist paths
+ifneq ($(my_sanitize)$(my_global_sanitize),)
+  ifneq ($(LOCAL_SANITIZE_BLACKLIST),)
+    my_cflags += -fsanitize-blacklist=$(LOCAL_PATH)/$(LOCAL_SANITIZE_BLACKLIST)
+  endif
+endif
+
+ifneq ($(filter intoverflow, $(my_global_sanitize) $(my_sanitize)),)
+  # Leave LOCAL_SANITIZE intact and don't try to apply additional integer
+  # sanitization if the project is already applying some sanitization.
+  ifneq ($(filter %integer-overflow, $(strip $(LOCAL_SANITIZE))),)
+    my_sanitize := $(filter-out intoverflow,$(my_sanitize))
+  endif
+
+  # Also disable this for LOCAL_NOSANITIZE=integer
+  ifneq ($(filter integer, $(strip $(LOCAL_NOSANITIZE))),)
+    my_sanitize := $(filter-out intoverflow,$(my_sanitize))
+  endif
+endif
+
+
 my_nosanitize = $(strip $(LOCAL_NOSANITIZE))
 ifneq ($(my_nosanitize),)
   my_sanitize := $(filter-out $(my_nosanitize),$(my_sanitize))
@@ -140,6 +161,31 @@ ifneq ($(filter coverage,$(my_sanitize)),)
   endif
   my_cflags += -fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp
   my_sanitize := $(filter-out coverage,$(my_sanitize))
+endif
+
+ifneq ($(filter intoverflow,$(my_sanitize)),)
+  ifneq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
+    ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+
+      # Respect LOCAL_NOSANITIZE for integer-overflow flags.
+      ifeq ($(filter signed-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
+        my_cflags += -fsanitize=signed-integer-overflow
+      endif
+      ifeq ($(filter unsigned-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
+        my_cflags += -fsanitize=unsigned-integer-overflow
+      endif
+      my_cflags += -fsanitize-trap=all
+      my_cflags += -ftrap-function=abort
+      my_cflags += $(IOSAN_EXTRA_CFLAGS)
+
+      # Check for diagnostics mode (on by default)
+      ifneq ($(strip $(IOSAN_DIAG)),false)
+        my_cflags += -fno-sanitize-trap=signed-integer-overflow,unsigned-integer-overflow
+        my_shared_libraries := $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY) $(my_shared_libraries)
+      endif
+    endif
+  endif
+  my_sanitize := $(filter-out intoverflow,$(my_sanitize))
 endif
 
 ifneq ($(my_sanitize),)
