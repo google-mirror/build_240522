@@ -151,7 +151,15 @@ export_cflags :=
 ifdef LOCAL_SDK_VERSION
 my_link_type := native:ndk
 else ifdef LOCAL_USE_VNDK
-my_link_type := native:vendor
+ifeq ($(LOCAL_VNDK_CLASS), vndk)
+	my_link_type := native:vndk
+else ifeq ($(LOCAL_VNDK_CLASS), vndksp)
+	my_link_type := native:spvndk
+else ifeq ($(LOCAL_VNDK_CLASS), llndk)
+	my_link_type := native:llndk
+else
+	my_link_type := native:vendor
+endif
 else
 my_link_type := native:platform
 endif
