@@ -1401,9 +1401,19 @@ my_link_type := native:ndk
 my_warn_types :=
 my_allowed_types := native:ndk
 else ifdef LOCAL_USE_VNDK
-my_link_type := native:vendor
-my_warn_types :=
-my_allowed_types := native:vendor
+    ifdef LOCAL_VNDK_MODULE
+    my_link_type := native:vndk
+    my_warn_types :=
+    my_allowed_types := native:vndk native:vndksp
+    else ifdef LOCAL_VNDK_SP
+    my_link_type := native:vndksp
+    my_warn_types :=
+    my_allowed_types := native:vndksp
+    else
+    my_link_type := native:vendor
+    my_warn_types :=
+    my_allowed_types := native:vendor native:vndk native:vndksp
+    endif
 else
 my_link_type := native:platform
 my_warn_types :=
