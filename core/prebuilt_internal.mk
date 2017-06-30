@@ -151,7 +151,15 @@ export_cflags :=
 ifdef LOCAL_SDK_VERSION
 my_link_type := native:ndk
 else ifdef LOCAL_USE_VNDK
-my_link_type := native:vendor
+ifdef LOCAL_VNDK_MODULE
+	my_link_type := native:vndk
+else ifdef LOCAL_VNDK_SP
+	my_link_type := native:spvndk
+else ifdef LOCAL_VNDK_LLNDK
+	my_link_type := native:llndk
+else
+	my_link_type := native:vendor
+endif
 else
 my_link_type := native:platform
 endif
