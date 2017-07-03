@@ -465,6 +465,9 @@ ifdef is_native
   is_native :=
 endif
 
+$(LOCAL_MODULE)_REQ_DEPS := $(LOCAL_REQUIRED_MODULES) $(LOCAL_JAVA_LIBRARIES)
+$(LOCAL_MODULE)_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \

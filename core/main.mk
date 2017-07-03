@@ -531,6 +531,18 @@ $(foreach m,$(ALL_MODULES), \
    ) \
  )
 
+$(foreach m, $(ALL_MODULES), \
+  $(eval req_deps := $($(m)_REQ_DEPS)) \
+  $(if $(req_deps), \
+    $(foreach suite, $($(m)_SUITES), \
+      $(foreach dep, $(req_deps), \
+        $(eval dep_suite_files := $(foreach v,$(COMPATIBILITY.$(suite).FILES),$(if $(findstring $(dep),$(v)),$(v)))) \
+        $(eval $(call add-required-deps, $(m), $(dep_suite_files))) \
+      ) \
+    ) \
+  ) \
+)
+
 t_m :=
 h_m :=
 hc_m :=
