@@ -223,9 +223,15 @@ $(full_target): $(full_src_files) $(full_java_lib_deps)
                 -J-Xmx1024m \
                 -XDignore.symbol.file \
                 -Xdoclint:none \
+                $(if $(EXPERIMENTAL_USE_OPENJDK9), \
+                  --patch-module=java.base=$(subst $(space),:,${ANDROID_BUILD_TOP}/libcore/dalvik/src/main/java \
+                    ${ANDROID_BUILD_TOP}/libcore/libart/src/main/java \
+                    ${ANDROID_BUILD_TOP}/libcore/luni/src/main/java \
+                    ${ANDROID_BUILD_TOP}/libcore/ojluni/src/main/java \
+                    ${ANDROID_BUILD_TOP}/external/icu/android_icu4j/src/main/java), \
+                  $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH))) \
                 $(PRIVATE_PROFILING_OPTIONS) \
                 $(addprefix -classpath ,$(PRIVATE_CLASSPATH)) \
-                $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH)) \
                 -sourcepath $(PRIVATE_SOURCE_PATH)$(addprefix :,$(PRIVATE_CLASSPATH)) \
                 -d $(PRIVATE_OUT_DIR) \
                 -quiet \
