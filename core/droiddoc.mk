@@ -166,6 +166,10 @@ endif
 # TODO: not clear if this is used any more
 $(full_target): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
 
+# Unlike the standard doclet invocation below, the javadoc invocation here still accepts a
+# -bootclasspath argument (I don't know what causes the difference).
+# TODO: For -source 1.9, we'd probably need to use PRIVATE_BOOTCLASSPATH_ARG here (OpenJDK 9
+# does not have the concept of a "boot classpath").
 $(full_target): \
         $(full_src_files) \
         $(droiddoc_templates) \
@@ -210,6 +214,23 @@ else
 ## standard doclet only
 ##
 ##
+
+ifneq ($(EXPERIMENTAL_USE_OPENJDK9),)
+# The source files here replace classes from not only java.base, but also other modules
+# (http://b/62049770#comment4). For now we claim that they all live in java.base, which
+# doesn't affect the generated documentation (http://b/62049770#comment5). This is probably
+# because Android doesn't support the OpenJDK 9 module system as of July 2017, so the
+# generated documentation doesn't say which module each package belongs to. This saves us
+# having to reorganize the sources by module for now.
+$(full_target): PRIVATE_BOOTCLASSPATH_ARG := --patch-module=java.base=$(subst $(space),:,libcore/dalvik/src/main/java \
+                                                           libcore/libart/src/main/java \
+                                                           libcore/luni/src/main/java \
+                                                           libcore/ojluni/src/main/java \
+                                                           external/icu/android_icu4j/src/main/java)
+else
+$(full_target): PRIVATE_BOOTCLASSPATH_ARG := $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH))
+endif
+
 $(full_target): $(full_src_files) $(full_java_lib_deps)
 	@echo Docs javadoc: $(PRIVATE_OUT_DIR)
 	@mkdir -p $(dir $@)
@@ -223,9 +244,9 @@ $(full_target): $(full_src_files) $(full_java_lib_deps)
                 -J-Xmx1024m \
                 -XDignore.symbol.file \
                 -Xdoclint:none \
+                $(PRIVATE_BOOTCLASSPATH_ARG) \
                 $(PRIVATE_PROFILING_OPTIONS) \
                 $(addprefix -classpath ,$(PRIVATE_CLASSPATH)) \
-                $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH)) \
                 -sourcepath $(PRIVATE_SOURCE_PATH)$(addprefix :,$(PRIVATE_CLASSPATH)) \
                 -d $(PRIVATE_OUT_DIR) \
                 -quiet \
