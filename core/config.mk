@@ -512,7 +512,7 @@ ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
   ZIPALIGN := $(HOST_OUT_EXECUTABLES)/zipalign
 
   ifndef DX_ALT_JAR
-    DX := $(HOST_OUT_EXECUTABLES)/dx
+    DX ?= $(HOST_OUT_EXECUTABLES)/dx
     DX_COMMAND := $(DX) -JXms16M -JXmx2048M
   else
     DX := $(DX_ALT_JAR)
@@ -522,7 +522,7 @@ else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
   AIDL := $(prebuilt_sdk_tools_bin)/aidl
   AAPT := $(prebuilt_sdk_tools_bin)/aapt
   AAPT2 := $(prebuilt_sdk_tools_bin)/aapt2
-  DX := $(prebuilt_sdk_tools)/dx
+  DX ?= $(prebuilt_sdk_tools)/dx
   DX_COMMAND := $(DX) -JXms16M -JXmx2048M
   MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
   ZIPALIGN := $(prebuilt_sdk_tools_bin)/zipalign
