@@ -515,6 +515,11 @@ endef
 $(foreach m,$(ALL_MODULES), \
   $(eval r := $(ALL_MODULES.$(m).REQUIRED)) \
   $(if $(r), \
+    $(if $(filter $(ALLOW_MISSING_DEPENDENCIES),true),,\
+      $(foreach dep,$(r),\
+        $(if $(ALL_MODULES.$(dep).INSTALLED)$(filter $(ALL_MODULES.$(dep).CLASS),PHONY),,\
+          $(error $(ALL_MODULES.$(m).MAKEFILE): Module $(m) requires \
+            $(if $(ALL_MODULES.$(dep).CLASS),uninstallable,missing) module $(dep))))) \
     $(eval r := $(call module-installed-files,$(r))) \
     $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
     $(eval h_m := $(filter $(HOST_OUT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
