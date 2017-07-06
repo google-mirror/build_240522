@@ -2001,6 +2001,7 @@ OTATOOLS :=  $(HOST_OUT_EXECUTABLES)/minigzip \
   $(HOST_OUT_EXECUTABLES)/brillo_update_payload \
   $(HOST_OUT_EXECUTABLES)/lib/shflags/shflags \
   $(HOST_OUT_EXECUTABLES)/delta_generator \
+  $(HOST_OUT_EXECUTABLES)/bro \
   $(AVBTOOL) \
   $(BLK_ALLOC_TO_BASE_FS)
 
