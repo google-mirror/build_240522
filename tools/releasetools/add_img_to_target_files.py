@@ -346,9 +346,15 @@ def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
     cmd.extend(["--include_descriptors_from_image", img_path])
 
 
-def AddVBMeta(output_zip, boot_img_path, system_img_path, vendor_img_path,
-              dtbo_img_path, prefix="IMAGES/"):
-  """Create a VBMeta image and store it in output_zip."""
+def AddVBMeta(output_zip, partitions, prefix="IMAGES/"):
+  """Create a VBMeta image and store it in output_zip.
+
+  Args:
+    output_zip: The output zip file, which needs to be already open.
+    partitions: A dict that's keyed by partition names with paths as values.
+        Only valid partition names are accepted, which include 'boot',
+        'recovery', 'system', 'vendor', 'dtbo'.
+  """
   img = OutputFile(output_zip, OPTIONS.input_tmp, prefix, "vbmeta.img")
   if os.path.exists(img.input_name):
     print("vbmeta.img already exists in %s; not rebuilding..." % (prefix,))
@@ -361,10 +367,10 @@ def AddVBMeta(output_zip, boot_img_path, system_img_path, vendor_img_path,
   public_key_dir = tempfile.mkdtemp(prefix="avbpubkey-")
   OPTIONS.tempfiles.append(public_key_dir)
 
-  AppendVBMetaArgsForPartition(cmd, "boot", boot_img_path, public_key_dir)
-  AppendVBMetaArgsForPartition(cmd, "system", system_img_path, public_key_dir)
-  AppendVBMetaArgsForPartition(cmd, "vendor", vendor_img_path, public_key_dir)
-  AppendVBMetaArgsForPartition(cmd, "dtbo", dtbo_img_path, public_key_dir)
+  for partition, path in partitions.items():
+    assert partition in common.AVB_PARTITION, 'Unknown partition: %s' % (
+        partition,)
+    AppendVBMetaArgsForPartition(cmd, partition, path, public_key_dir)
 
   args = OPTIONS.info_dict.get("avb_vbmeta_args")
   if args and args.strip():
@@ -530,6 +536,10 @@ def AddImagesToTargetFiles(filename):
     if fp:
       OPTIONS.info_dict["avb_salt"] = hashlib.sha256(fp).hexdigest()
 
+  # A map between partition names and their paths, which could be used when
+  # generating AVB vbmeta image.
+  partitions = dict()
+
   def banner(s):
     print("\n\n++++ " + s + " ++++\n\n")
 
@@ -537,8 +547,8 @@ def AddImagesToTargetFiles(filename):
   # common.GetBootableImage() returns the image directly if present.
   boot_image = common.GetBootableImage(
       "IMAGES/boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
-  boot_img_path = os.path.join(OPTIONS.input_tmp, "IMAGES", "boot.img")
-  if not os.path.exists(boot_img_path):
+  partitions['boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES", "boot.img")
+  if not os.path.exists(partitions['boot']):
     boot_image.WriteToDir(OPTIONS.input_tmp)
     if output_zip:
       boot_image.AddToZip(output_zip)
@@ -548,9 +558,9 @@ def AddImagesToTargetFiles(filename):
     banner("recovery")
     recovery_image = common.GetBootableImage(
         "IMAGES/recovery.img", "recovery.img", OPTIONS.input_tmp, "RECOVERY")
-    recovery_img_path = os.path.join(
+    partitions['recovery'] = os.path.join(
         OPTIONS.input_tmp, "IMAGES", "recovery.img")
-    if not os.path.exists(recovery_img_path):
+    if not os.path.exists(partitions['recovery']):
       recovery_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         recovery_image.AddToZip(output_zip)
@@ -566,15 +576,18 @@ def AddImagesToTargetFiles(filename):
           recovery_two_step_image.AddToZip(output_zip)
 
   banner("system")
-  system_img_path = AddSystem(
+  partitions['system'] = AddSystem(
       output_zip, recovery_img=recovery_image, boot_img=boot_image)
+
   vendor_img_path = None
   if has_vendor:
     banner("vendor")
-    vendor_img_path = AddVendor(output_zip)
+    partitions['vendor'] = vendor_img_path = AddVendor(output_zip)
+
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
+
   if not OPTIONS.is_signing:
     banner("userdata")
     AddUserdata(output_zip)
@@ -585,15 +598,13 @@ def AddImagesToTargetFiles(filename):
     banner("partition-table")
     AddPartitionTable(output_zip)
 
-  dtbo_img_path = None
   if OPTIONS.info_dict.get("has_dtbo") == "true":
     banner("dtbo")
-    dtbo_img_path = AddDtbo(output_zip)
+    partitions['dtbo'] = AddDtbo(output_zip)
 
   if OPTIONS.info_dict.get("avb_enable") == "true":
     banner("vbmeta")
-    AddVBMeta(output_zip, boot_img_path, system_img_path, vendor_img_path,
-              dtbo_img_path)
+    AddVBMeta(output_zip, partitions)
 
   # For devices using A/B update, copy over images from RADIO/ and/or
   # VENDOR_IMAGES/ to IMAGES/ and make sure we have all the needed
