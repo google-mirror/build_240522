@@ -447,10 +447,11 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
   else:
     cmd.extend(["--output", img.name])
 
+  partition_name = os.path.basename(sourcedir).lower()
+
   p = Run(cmd, stdout=subprocess.PIPE)
   p.communicate()
-  assert p.returncode == 0, "mkbootimg of %s image failed" % (
-      os.path.basename(sourcedir),)
+  assert p.returncode == 0, "mkbootimg of %s image failed" % (partition_name,)
 
   if (info_dict.get("boot_signer", None) == "true" and
       info_dict.get("verity_key", None)):
@@ -459,7 +460,7 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     if two_step_image:
       path = "/boot"
     else:
-      path = "/" + os.path.basename(sourcedir).lower()
+      path = "/" + partition_name
     cmd = [OPTIONS.boot_signer_path]
     cmd.extend(OPTIONS.boot_signer_args)
     cmd.extend([path, img.name,
@@ -471,7 +472,7 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
 
   # Sign the image if vboot is non-empty.
   elif info_dict.get("vboot", None):
-    path = "/" + os.path.basename(sourcedir).lower()
+    path = "/" + partition_name
     img_keyblock = tempfile.NamedTemporaryFile()
     # We have switched from the prebuilt futility binary to using the tool
     # (futility-host) built from the source. Override the setting in the old
@@ -498,15 +499,16 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     avbtool = os.getenv('AVBTOOL') or info_dict["avb_avbtool"]
     part_size = info_dict["boot_size"]
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
-           "--partition_size", str(part_size), "--partition_name", "boot"]
-    AppendAVBSigningArgs(cmd, "boot")
+           "--partition_size", str(part_size), "--partition_name",
+           partition_name]
+    AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get("avb_boot_add_hash_footer_args")
     if args and args.strip():
       cmd.extend(shlex.split(args))
     p = Run(cmd, stdout=subprocess.PIPE)
     p.communicate()
     assert p.returncode == 0, "avbtool add_hash_footer of %s failed" % (
-        os.path.basename(OPTIONS.input_tmp))
+        partition_name,)
 
   img.seek(os.SEEK_SET, 0)
   data = img.read()
@@ -727,9 +729,13 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
 
 
 def CheckSize(data, target, info_dict):
-  """Check the data string passed against the max size limit, if
-  any, for the given target.  Raise exception if the data is too big.
-  Print a warning if the data is nearing the maximum size."""
+  """Checks the data string passed against the max size limit.
+
+  For non-AVB images, raise exception if the data is too big. Print a warning
+  if the data is nearing the maximum size.
+
+  For AVB images, the actual image size should be identical to the limit.
+  """
 
   if target.endswith(".img"):
     target = target[:-4]
@@ -750,14 +756,21 @@ def CheckSize(data, target, info_dict):
     return
 
   size = len(data)
-  pct = float(size) * 100.0 / limit
-  msg = "%s size (%d) is %.2f%% of limit (%d)" % (target, size, pct, limit)
-  if pct >= 99.0:
-    raise ExternalError(msg)
-  elif pct >= 95.0:
-    print("\n  WARNING: %s\n" % (msg,))
-  elif OPTIONS.verbose:
-    print("  ", msg)
+  if (info_dict.get("avb_enable") == "true" and
+      target not in ('cache', 'userdata')):
+    if size != limit:
+      raise ExternalError(
+          "Mismatching image size for %s: expected %d actual %d" % (
+              target, limit, size))
+  else:
+    pct = float(size) * 100.0 / limit
+    msg = "%s size (%d) is %.2f%% of limit (%d)" % (target, size, pct, limit)
+    if pct >= 99.0:
+      raise ExternalError(msg)
+    elif pct >= 95.0:
+      print("\n  WARNING: %s\n" % (msg,))
+    elif OPTIONS.verbose:
+      print("  ", msg)
 
 
 def ReadApkCerts(tf_zip):
@@ -891,6 +904,7 @@ def MakeTempFile(prefix='tmp', suffix=''):
 
 
 def Cleanup():
+  return
   for i in OPTIONS.tempfiles:
     if os.path.isdir(i):
       shutil.rmtree(i)
