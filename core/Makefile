@@ -1301,12 +1301,15 @@ endif
 .PHONY: recoveryimage
 recoveryimage: $(INSTALLED_RECOVERYIMAGE_TARGET) $(RECOVERY_RESOURCE_ZIP)
 
-ifeq ($(BOARD_NAND_PAGE_SIZE),)
-BOARD_NAND_PAGE_SIZE := 2048
+# TODO(b/35790399) setting these should break the build
+ifneq ($(BOARD_NAND_PAGE_SIZE),)
+$(warn MTD device is no longer supported and thus BOARD_NAND_PAGE_SIZE is deprecated. Ignoring.)
+BOARD_NAND_PAGE_SIZE :=
 endif
 
-ifeq ($(BOARD_NAND_SPARE_SIZE),)
-BOARD_NAND_SPARE_SIZE := 64
+ifneq ($(BOARD_NAND_SPARE_SIZE),)
+$(warn MTD device is no longer supported and thus BOARD_NAND_SPARE_SIZE is deprecated. Ignoring.)
+BOARD_NAND_SPARE_SIZE :=
 endif
 
 # -----------------------------------------------------------------
