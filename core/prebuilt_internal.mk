@@ -84,7 +84,11 @@ ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   endif
 
   ifdef LOCAL_USE_VNDK
-    SPLIT_VENDOR.$(LOCAL_MODULE_CLASS).$(patsubst %.vendor,%,$(LOCAL_MODULE)) := 1
+    original_name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    ifneq ($(original_name),$(LOCAL_MODULE))
+      SPLIT_VENDOR.$(LOCAL_MODULE_CLASS).$(original_name) := 1
+    endif
+    original_name :=
   endif
 endif
 
