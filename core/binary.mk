@@ -521,9 +521,9 @@ my_asflags += -D__ASSEMBLY__
 ifndef LOCAL_IS_HOST_MODULE
 ifdef LOCAL_USE_VNDK
 my_target_global_c_includes := \
-    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES)
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES) \
+    $(TARGET_OUT_HEADERS)
 my_target_global_c_system_includes := \
-    $(TARGET_OUT_HEADERS) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_SYSTEM_INCLUDES)
 else ifdef LOCAL_SDK_VERSION
 my_target_global_c_includes :=
@@ -538,8 +538,9 @@ my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) \
 else
 my_target_global_c_includes := $(SRC_HEADERS) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_INCLUDES) \
-    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
-my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) $(TARGET_OUT_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES) \
+    $(TARGET_OUT_HEADERS)
+my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)PROJECT_SYSTEM_INCLUDES) \
     $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
 endif
