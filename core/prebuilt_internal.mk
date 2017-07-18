@@ -172,9 +172,7 @@ my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
 # Extra shared libraries introduced by LOCAL_CXX_STL.
 include $(BUILD_SYSTEM)/cxx_stl_setup.mk
 ifdef LOCAL_USE_VNDK
-  ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-    my_shared_libraries := $(addsuffix .vendor,$(my_shared_libraries))
-  else
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
     my_shared_libraries := $(foreach l,$(my_shared_libraries),\
       $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
   endif
