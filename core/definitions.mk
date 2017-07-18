@@ -3392,3 +3392,23 @@ $(foreach source,$(ENFORCE_RRO_SOURCES), \
   $(eval ALL_MODULES.$(enforce_rro_source_module).REQUIRED += $(enforce_rro_module)) \
 )
 endef
+
+define _if_or_not_soong
+$(strip \
+  $(eval _is_soong := $$(filter $$(LOCAL_MODULE_MAKEFILE),$$(SOONG_ANDROID_MK)))\
+  $(if $(_is_soong),$(1),$(2))\
+)
+endef
+
+###########################################################
+# Return the argument if the current module is from soong
+# (if_soong), or not (if_not_soong)
+# $(1): string to emit
+###########################################################
+define if_soong
+$(call _if_or_not_soong,$(1))
+endef
+
+define if_not_soong
+$(call _if_or_not_soong,,$(1))
+endef

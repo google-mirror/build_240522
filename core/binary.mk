@@ -287,8 +287,8 @@ my_ldflags := $(filter-out -l%,$(my_ldlib_flags))
 my_ldlib_flags :=
 
 # Move other ldlibs back to shared libraries
-my_shared_libraries += $(patsubst -l%,lib%,$(filter-out $(my_allowed_ldlibs),$(my_ldlibs)))
-my_ldlibs := $(filter $(my_allowed_ldlibs),$(my_ldlibs))
+my_shared_libraries += $(call if_not_soong,$(patsubst -l%,lib%,$(filter-out $(my_allowed_ldlibs),$(my_ldlibs))))
+my_ldlibs := $(call if_not_soong,$(filter $(my_allowed_ldlibs),$(my_ldlibs)))
 endif
 
 ifneq ($(LOCAL_SDK_VERSION),)
@@ -469,13 +469,13 @@ include $(BUILD_SYSTEM)/config_sanitizers.mk
 ifneq ($(LOCAL_NO_LIBCOMPILER_RT),true)
 # Add in libcompiler_rt for all regular device builds
 ifeq (,$(WITHOUT_LIBCOMPILER_RT))
-  my_static_libraries += $(COMPILER_RT_CONFIG_EXTRA_STATIC_LIBRARIES)
+  my_static_libraries += $(call if_not_soong,$(COMPILER_RT_CONFIG_EXTRA_STATIC_LIBRARIES))
 endif
 endif
 
 # Statically link libwinpthread when cross compiling win32.
 ifeq ($($(my_prefix)OS),windows)
-  my_static_libraries += libwinpthread
+  my_static_libraries += $(call if_not_soong,libwinpthread)
 endif
 
 ifneq ($(filter ../%,$(my_src_files)),)
@@ -912,22 +912,22 @@ my_c_includes += $(my_proto_c_includes)
 my_export_c_include_dirs += $(my_proto_c_includes)
 
 ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),nanopb-c-enable_malloc)
-    my_static_libraries += libprotobuf-c-nano-enable_malloc
+    my_static_libraries += $(call if_not_soong,libprotobuf-c-nano-enable_malloc)
 else ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),nanopb-c)
-    my_static_libraries += libprotobuf-c-nano
+    my_static_libraries += $(call if_not_soong,libprotobuf-c-nano)
 else ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),full)
     ifdef LOCAL_SDK_VERSION
-        my_static_libraries += libprotobuf-cpp-full-ndk
+        my_static_libraries += $(call if_not_soong,libprotobuf-cpp-full-ndk)
     else
-        my_shared_libraries += libprotobuf-cpp-full
+        my_shared_libraries += $(call if_not_soong,libprotobuf-cpp-full)
     endif
 else ifeq ($(LOCAL_PROTOC_OPTIMIZE_TYPE),lite-static)
-    my_static_libraries += libprotobuf-cpp-lite
+    my_static_libraries += $(call if_not_soong,libprotobuf-cpp-lite)
 else
     ifdef LOCAL_SDK_VERSION
-        my_static_libraries += libprotobuf-cpp-lite-ndk
+        my_static_libraries += $(call if_not_soong,libprotobuf-cpp-lite-ndk)
     else
-        my_shared_libraries += libprotobuf-cpp-lite
+        my_shared_libraries += $(call if_not_soong,libprotobuf-cpp-lite)
     endif
 endif
 endif  # $(proto_sources) non-empty
@@ -1324,14 +1324,9 @@ ifneq ($(LOCAL_USE_VNDK),)
   ## switch all soong libraries over to the /vendor
   ## variant.
   ####################################################
-  ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-    # Soong-built libraries should always use the .vendor variant
-    my_whole_static_libraries := $(addsuffix .vendor,$(my_whole_static_libraries))
-    my_static_libraries := $(addsuffix .vendor,$(my_static_libraries))
-    my_shared_libraries := $(addsuffix .vendor,$(my_shared_libraries))
-    my_system_shared_libraries := $(addsuffix .vendor,$(my_system_shared_libraries))
-    my_header_libraries := $(addsuffix .vendor,$(my_header_libraries))
-  else
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    # We don't do this renaming for soong-defined modules since they already have correct
+    # names (with .vendor suffix when necessary) in their LOCAL_*_LIBRARIES.
     my_whole_static_libraries := $(foreach l,$(my_whole_static_libraries),\
       $(if $(SPLIT_VENDOR.STATIC_LIBRARIES.$(l)),$(l).vendor,$(l)))
     my_static_libraries := $(foreach l,$(my_static_libraries),\
@@ -1375,7 +1370,7 @@ endif
 import_includes := $(intermediates)/import_includes
 import_includes_deps := $(strip \
     $(if $(LOCAL_USE_VNDK),\
-      $(call intermediates-dir-for,HEADER_LIBRARIES,device_kernel_headers.vendor,$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes) \
+      $(call intermediates-dir-for,HEADER_LIBRARIES,device_kernel_headers,$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes) \
     $(foreach l, $(installed_shared_library_module_names), \
       $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes) \
     $(foreach l, $(my_static_libraries) $(my_whole_static_libraries), \

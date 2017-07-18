@@ -256,7 +256,7 @@ ifneq ($(filter address,$(my_global_sanitize) $(my_sanitize)),)
                              $(my_shared_libraries)
     endif
     ifeq (,$(filter $(LOCAL_MODULE),$(ADDRESS_SANITIZER_CONFIG_EXTRA_STATIC_LIBRARIES)))
-      my_static_libraries += $(ADDRESS_SANITIZER_CONFIG_EXTRA_STATIC_LIBRARIES)
+      my_static_libraries += $(call if_not_soong,$(ADDRESS_SANITIZER_CONFIG_EXTRA_STATIC_LIBRARIES))
     endif
 
     # Do not add unnecessary dependency in shared libraries.
@@ -301,6 +301,6 @@ ifneq ($(my_sanitize_diag),)
   # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
   ifeq ($(filter address thread,$(my_sanitize)),)
     # Does not have to be the first DT_NEEDED unlike ASan.
-    my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
+    my_shared_libraries += $(call if_not_soong,$($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY))
   endif
 endif
