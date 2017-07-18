@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2008 The Android Open Source Project
+# # Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,12 +60,6 @@ pathmap_INCL := \
 define include-path-for
 $(foreach n,$(1),$(patsubst $(n):%,%,$(filter $(n):%,$(pathmap_INCL))))
 endef
-
-#
-# Many modules expect to be able to say "#include <jni.h>",
-# so make it easy for them to find the correct path.
-#
-JNI_H_INCLUDE := libnativehelper/include/nativehelper
 
 #
 # A list of all source roots under frameworks/base, which will be
