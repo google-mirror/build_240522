@@ -296,11 +296,14 @@ ifneq ($(strip $(LOCAL_SANITIZE_RECOVER)),)
 endif
 
 ifneq ($(my_sanitize_diag),)
-  notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
-  my_cflags += -fno-sanitize-trap=$(notrap_arg)
-  # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
-  ifeq ($(filter address thread,$(my_sanitize)),)
-    # Does not have to be the first DT_NEEDED unlike ASan.
-    my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
+  # StaticExecutables can't link to UBSAN
+  ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+    notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
+    my_cflags += -fno-sanitize-trap=$(notrap_arg)
+    # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
+    ifeq ($(filter address thread,$(my_sanitize)),)
+      # Does not have to be the first DT_NEEDED unlike ASan.
+      my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
+    endif
   endif
 endif
