@@ -242,6 +242,15 @@ ifneq ($(filter cfi,$(my_sanitize)),)
   ifneq ($(filter arm,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
     my_ldflags += -march=armv7-a
   endif
+
+  ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+        my_ldflags := $(filter-out -fsanitize-cfi-cross-dso,$(my_ldflags))
+        my_cflags := $(filter-out -fsanitize-cfi-cross-dso,$(my_cflags))
+  else
+        # Apply the version script to non-static executables
+        my_ldflags += -Wl,--version-script,build/soong/cc/config/cfi_exports.map
+        LOCAL_ADDITIONAL_DEPENDENCIES += build/soong/cc/config/cfi_exports.map
+  endif
 endif
 
 # If local or global modules need ASAN, add linker flags.
@@ -293,11 +302,16 @@ ifneq ($(strip $(LOCAL_SANITIZE_RECOVER)),)
 endif
 
 ifneq ($(my_sanitize_diag),)
-  notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
-  my_cflags += -fno-sanitize-trap=$(notrap_arg)
-  # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
-  ifeq ($(filter address thread,$(my_sanitize)),)
-    # Does not have to be the first DT_NEEDED unlike ASan.
-    my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
+  # TODO(vishwath): Add diagnostic support for static executables once
+  # we switch to clang-4393122 (which adds the static ubsan runtime
+  # that this depends on)
+  ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+    notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
+    my_cflags += -fno-sanitize-trap=$(notrap_arg)
+    # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
+    ifeq ($(filter address thread,$(my_sanitize)),)
+      # Does not have to be the first DT_NEEDED unlike ASan.
+      my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
+    endif
   endif
 endif
