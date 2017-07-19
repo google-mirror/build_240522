@@ -113,6 +113,10 @@ ifneq ($(LOCAL_SDK_VERSION),)
 my_link_type := app:sdk
 my_warn_types := native:platform
 my_allowed_types := native:ndk
+else ifdef LOCAL_USE_VNDK
+my_link_type := app:vendor
+my_warn_types :=
+my_allowed_types := native:ndk native:vendor
 else
 my_link_type := app:platform
 my_warn_types :=
