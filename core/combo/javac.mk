@@ -16,7 +16,12 @@ endif
 
 common_jdk_flags := -Xmaxerrs 9999999
 
+# Android bundles an OpenJDK-derived compilation toolchain.
+# If EXPERIMENTAL_USE_OPENJDK9 is set, the toolchain identified
+# by the environment variable $ANDROID_JAVA_HOME is used instead.
+ifneq ($(EXPERIMENTAL_USE_OPENJDK9),)
 ANDROID_JAVA_HOME := prebuilts/jdk/jdk8/$(HOST_PREBUILT_TAG)
+endif
 ANDROID_JAVA_TOOLCHAIN := $(ANDROID_JAVA_HOME)/bin
 export JAVA_HOME := $(abspath $(ANDROID_JAVA_HOME))
 
