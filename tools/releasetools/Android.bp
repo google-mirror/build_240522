@@ -1,0 +1,264 @@
+// Copyright 2017 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+python_defaults {
+    name: "release_default",
+    version: {
+        py2: {
+            enabled: true,
+            embedded_launcher: true,
+        },
+        py3: {
+            enabled: false,
+            embedded_launcher: false,
+        },
+    },
+}
+
+python_library_host {
+    name: "release_common",
+    defaults: ["release_default"],
+    srcs: [
+        "common.py",
+    ],
+    libs: [
+        "release_blockimgdiff",
+    ],
+}
+
+python_test_host {
+    name: "release_test_common",
+    defaults: ["release_default"],
+    srcs: [
+        "test_common.py",
+        "validate_target_files.py",
+        "sparse_img.py",
+    ],
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+    main: "test_common.py",
+}
+
+python_library_host {
+    name: "release_blockimgdiff",
+    defaults: ["release_default"],
+    srcs: [
+        "blockimgdiff.py",
+    ],
+    libs: [
+        "release_rangelib",
+    ],
+}
+
+python_test_host {
+    name: "release_test_blockimgdiff",
+    defaults: ["release_default"],
+    srcs: [
+        "test_blockimgdiff.py"
+    ],
+    libs: [
+        "release_common",
+        "release_blockimgdiff",
+    ],
+    main: "test_blockimgdiff.py",
+}
+
+python_library_host {
+    name: "release_rangelib",
+    defaults: ["release_default"],
+    srcs: [
+        "rangelib.py",
+    ],
+}
+
+python_test_host {
+    name: "release_test_rangelib",
+    defaults: ["release_default"],
+    srcs: [
+        "test_rangelib.py"
+    ],
+    libs: [
+        "release_rangelib",
+    ],
+    main: "test_rangelib.py",
+}
+
+python_binary_host {
+    name: "release_add_img_to_target_files",
+    defaults: ["release_default"],
+    srcs: [
+        "build_image.py",
+        "add_img_to_target_files.py",
+        "sparse_img.py",
+    ],
+    main: "add_img_to_target_files.py",
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_build_image",
+    defaults: ["release_default"],
+    srcs: [
+        "build_image.py",
+        "sparse_img.py",
+    ],
+    main: "build_image.py",
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_check_ota_package_signature",
+    defaults: ["release_default"],
+    srcs: [
+        "check_ota_package_signature.py",
+    ],
+    main: "check_ota_package_signature.py",
+    libs: [
+        "release_common",
+    ],
+}
+
+python_binary_host {
+    name: "release_check_target_files_signatures",
+    defaults: ["release_default"],
+    srcs: [
+        "check_target_files_signatures.py",
+    ],
+    main: "check_target_files_signatures.py",
+    libs: [
+        "release_common",
+    ],
+}
+
+python_binary_host {
+    name: "release_edify_generator",
+    defaults: ["release_default"],
+    srcs: [
+        "edify_generator.py",
+    ],
+    main: "edify_generator.py",
+    libs: [
+        "release_common",
+    ],
+}
+
+python_binary_host {
+    name: "release_img_from_target_files",
+    defaults: ["release_default"],
+    srcs: [
+        "img_from_target_files.py",
+    ],
+    main: "img_from_target_files.py",
+    libs: [
+        "release_common",
+    ],
+}
+
+python_binary_host {
+    name: "release_make_recovery_patch",
+    defaults: ["release_default"],
+    srcs: [
+        "make_recovery_patch.py",
+    ],
+    main: "make_recovery_patch.py",
+    libs: [
+        "release_common",
+    ],
+}
+
+python_binary_host {
+    name: "release_ota_from_target_files",
+    defaults: ["release_default"],
+    srcs: [
+        "edify_generator.py",
+        "ota_from_target_files.py",
+        "sparse_img.py",
+    ],
+    main: "ota_from_target_files.py",
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_ota_package_parser",
+    defaults: ["release_default"],
+    srcs: [
+        "ota_package_parser.py",
+    ],
+    main: "ota_package_parser.py",
+    libs: [
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_sign_target_files_apks",
+    defaults: ["release_default"],
+    srcs: [
+        "sign_target_files_apks.py",
+        "build_image.py",
+        "add_img_to_target_files.py",
+        "sparse_img.py",
+    ],
+    main: "sign_target_files_apks.py",
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_sparse_img",
+    defaults: ["release_default"],
+    srcs: [
+        "sparse_img.py",
+    ],
+    main: "sparse_img.py",
+    libs: [
+        "release_rangelib",
+    ],
+}
+
+python_binary_host {
+    name: "release_target_files_diff",
+    defaults: ["release_default"],
+    srcs: [
+        "target_files_diff.py",
+    ],
+    main: "target_files_diff.py",
+}
+
+python_binary_host {
+    name: "release_validate_target_files",
+    defaults: ["release_default"],
+    srcs: [
+        "validate_target_files.py",
+        "sparse_img.py",
+    ],
+    libs: [
+        "release_common",
+        "release_rangelib",
+    ],
+    main: "validate_target_files.py",
+}
