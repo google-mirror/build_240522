@@ -16,7 +16,13 @@ endif
 
 common_jdk_flags := -Xmaxerrs 9999999
 
+# Set ANDROID_JAVA_HOME, unless it's already set *and* EXPERIMENTAL_USE_OPENJDK9 is set.
+ifneq ($(EXPERIMENTAL_USE_OPENJDK9),)
 ANDROID_JAVA_HOME := prebuilts/jdk/jdk8/$(HOST_PREBUILT_TAG)
+endif
+ifeq ($(ANDROID_JAVA_HOME),)
+ANDROID_JAVA_HOME := prebuilts/jdk/jdk8/$(HOST_PREBUILT_TAG)
+endif
 ANDROID_JAVA_TOOLCHAIN := $(ANDROID_JAVA_HOME)/bin
 export JAVA_HOME := $(abspath $(ANDROID_JAVA_HOME))
 
