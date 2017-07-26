@@ -62,12 +62,27 @@ $(foreach f,$(CUSTOM_IMAGE_COPY_FILES),\
   $(eval my_image_copy_files += $(src))\
   $(eval my_copy_pairs += $(src):$(my_staging_dir)/$(word 2,$(pair))))
 
-ifndef CUSTOM_IMAGE_AVB_KEY_PATH
-# If key path isn't specified, use the default signing args.
-my_avb_signing_args := $(INTERNAL_AVB_SIGNING_ARGS)
+# Check and set required build variables for chain configuration.
+define custom-image-set-avb-chain-args
+$(if $(CUSTOM_IMAGE_AVB_KEY_PATH),,$(error CUSTOM_IMAGE_AVB_KEY_PATH is not defined))
+$(if $(CUSTOM_IMAGE_AVB_ALGORITHM),,$(error CUSTOM_IMAGE_AVB_ALGORITHM is not defined))
+$(if $(CUSTOM_IMAGE_AVB_ROLLBACK_INDEX),,$(error CUSTOM_IMAGE_AVB_ROLLBACK_INDEX is not defined))
+$(if $(CUSTOM_IMAGE_AVB_ROLLBACK_INDEX_LOCATION),,$(error CUSTOM_IMAGE_AVB_ROLLBACK_INDEX_LOCATION is not defined))
+
+$(eval my_avb_public_key_path := $(my_staging_dir)/$(my_custom_image_name).avbpubkey)
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --chain_partition $(CUSTOM_IMAGE_MOUNT_POINT):$(CUSTOM_IMAGE_AVB_ROLLBACK_INDEX_LOCATION):$(my_avb_public_key_path)
+
+# set rollback_index via footer args
+$(eval CUSTOM_IMAGE_AVB_ADD_HASH_FOOTER_ARGS += --rollback_index $(CUSTOM_IMAGE_AVB_ROLLBACK_INDEX))
+$(eval CUSTOM_IMAGE_AVB_ADD_HASHTREE_FOOTER_ARGS += --rollback_index $(CUSTOM_IMAGE_AVB_ROLLBACK_INDEX))
+endef
+
+ifdef CUSTOM_IMAGE_AVB_KEY_PATH
+$(eval $(call custom-image-set-avb-chain-args))
 else
-my_avb_signing_args := \
-  --algorithm $(CUSTOM_IMAGE_AVB_ALGORITHM) --key $(CUSTOM_IMAGE_AVB_KEY_PATH)
+INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --include_descriptors_from_image $(my_built_custom_image)
 endif
 
 $(my_built_custom_image): PRIVATE_INTERMEDIATES := $(intermediates)
@@ -84,7 +99,9 @@ $(my_built_custom_image): PRIVATE_VERITY_KEY := $(PRODUCTS.$(INTERNAL_PRODUCT).P
 $(my_built_custom_image): PRIVATE_VERITY_BLOCK_DEVICE := $(CUSTOM_IMAGE_VERITY_BLOCK_DEVICE)
 $(my_built_custom_image): PRIVATE_DICT_FILE := $(CUSTOM_IMAGE_DICT_FILE)
 $(my_built_custom_image): PRIVATE_AVB_AVBTOOL := $(AVBTOOL)
-$(my_built_custom_image): PRIVATE_AVB_SIGNING_ARGS := $(my_avb_signing_args)
+$(my_built_custom_image): PRIVATE_AVB_KEY_PATH := $(CUSTOM_IMAGE_AVB_KEY_PATH)
+$(my_built_custom_image): PRIVATE_AVB_PUBLIC_KEY_PATH := $(my_avb_public_key_path)
+$(my_built_custom_image): PRIVATE_AVB_ALGORITHM:= $(CUSTOM_IMAGE_AVB_ALGORITHM)
 $(my_built_custom_image): PRIVATE_AVB_HASH_ENABLE := $(CUSTOM_IMAGE_AVB_HASH_ENABLE)
 $(my_built_custom_image): PRIVATE_AVB_ADD_HASH_FOOTER_ARGS := $(CUSTOM_IMAGE_AVB_ADD_HASH_FOOTER_ARGS)
 $(my_built_custom_image): PRIVATE_AVB_HASHTREE_ENABLE := $(CUSTOM_IMAGE_AVB_HASHTREE_ENABLE)
@@ -131,7 +148,10 @@ $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_i
 	$(if $(PRIVATE_SUPPORT_VERITY_FEC),\
 	  $(hide) echo "verity_fec=$(PRIVATE_SUPPORT_VERITY_FEC)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt)
 	$(hide) echo "avb_avbtool=$(PRIVATE_AVB_AVBTOOL)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt
-	$(hide) echo "avb_signing_args=$(PRIVATE_AVB_SIGNING_ARGS)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt
+	$(if $(PRIVATE_AVB_KEY_PATH),\
+      $(hide) $(PRIVATE_AVB_AVBTOOL) extract_public_key --key $(PRIVATE_AVB_KEY_PATH) --output $(PRIVATE_AVB_PUBLIC_KEY_PATH);\
+        echo "avb_key_path=$(PRIVATE_AVB_KEY_PATH)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt;\
+        echo "avb_algorithm=$(PRIVATE_AVB_ALGORITHM)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt)
 	$(if $(PRIVATE_AVB_HASH_ENABLE),\
 	  $(hide) echo "avb_hash_enable=$(PRIVATE_AVB_HASH_ENABLE)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt;\
 	    echo "avb_add_hash_footer_args=$(PRIVATE_AVB_ADD_HASH_FOOTER_ARGS)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt)

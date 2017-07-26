@@ -50,8 +50,6 @@
 #
 # To build all those images, run "make custom_images".
 
-ifneq ($(filter $(MAKECMDGOALS),custom_images),)
-
 .PHONY: custom_images
 
 custom_image_parameter_variables := \
@@ -77,5 +75,3 @@ custom_image_parameter_variables := \
 $(foreach mk, $(PRODUCT_CUSTOM_IMAGE_MAKEFILES),\
   $(eval my_custom_imag_makefile := $(mk))\
   $(eval include $(BUILD_SYSTEM)/tasks/tools/build_custom_image.mk))
-
-endif
