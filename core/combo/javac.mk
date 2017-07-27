@@ -11,7 +11,11 @@
 
 ifndef ANDROID_COMPILE_WITH_JACK
 # Defines if compilation with jack is enabled by default.
+ifdef TARGET_BUILD_APPS
 ANDROID_COMPILE_WITH_JACK := true
+else
+ANDROID_COMPILE_WITH_JACK := false
+endif
 endif
 
 common_jdk_flags := -Xmaxerrs 9999999
