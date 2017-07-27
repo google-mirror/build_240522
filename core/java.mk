@@ -479,12 +479,14 @@ full_classes_processed_jar := $(full_classes_compiled_jar)
 endif
 
 my_desugaring :=
+ifndef TARGET_BUILD_APPS
 ifndef LOCAL_JACK_ENABLED
 ifndef LOCAL_IS_STATIC_JAVA_LIBRARY
 my_desugaring := true
 $(full_classes_desugar_jar): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 $(full_classes_desugar_jar): $(full_classes_processed_jar) $(DESUGAR)
 	$(desugar-classes-jar)
+endif
 endif
 endif
 
