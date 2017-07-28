@@ -24,6 +24,19 @@ endef
 #$(warning $(call find_and_earlier,A B C,C))
 #$(warning $(call find_and_earlier,A B C,D))
 
+# Returns all words in $1 after $2.
+define find_after
+  $(strip $(if $(1),
+    $(if $(filter $(firstword $(1)),$(2)),
+      $(wordlist 2,$(words $(1)),$(1)),
+      $(call find_after,$(wordlist 2,$(words $(1)),$(1)),$(2)))))
+endef
+
+#$(warning $(call find_after,A B C,A))
+#$(warning $(call find_after,A B C,B))
+#$(warning $(call find_after,A B C,C))
+#$(warning $(call find_after,A B C,D))
+
 define version-list
 $(1)PR1 $(1)PD1 $(1)PD2 $(1)PM1 $(1)PM2
 endef
