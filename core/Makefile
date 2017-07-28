@@ -2647,6 +2647,23 @@ endif # TARGET_BUILD_APPS
 .PHONY: dalvikfiles
 dalvikfiles: $(INTERNAL_DALVIK_MODULES)
 
+ifeq ($(BUILD_QEMU_IMAGES),true)
+INSTALLED_QEMU_SYSTEMIMAGE := $(PRODUCT_OUT)/system-qemu.img
+INSTALLED_QEMU_VENDORIMAGE := $(PRODUCT_OUT)/vendor-qemu.img
+MK_QEMU_IMAGE_SH := device/generic/goldfish/tools/mk_qemu_image.sh
+$(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE)
+	@echo Create system-qemu.img
+	(MKCMD=$$(pwd)/${MK_QEMU_IMAGE_SH};cd ${PRODUCT_OUT}; $${MKCMD} system)
+
+$(INSTALLED_QEMU_VENDORIMAGE): $(INSTALLED_VENDORIMAGE_TARGET)
+	@echo Create vendor-qemu.img
+	(MKCMD=$$(pwd)/${MK_QEMU_IMAGE_SH};cd ${PRODUCT_OUT}; $${MKCMD} vendor)
+
+systemimage: $(INSTALLED_QEMU_SYSTEMIMAGE)
+ifeq ($(BOARD_USES_VENDORIMAGE),true)
+systemimage: $(INSTALLED_QEMU_VENDORIMAGE)
+endif
+endif
 # -----------------------------------------------------------------
 # The emulator package
 ifeq ($(BUILD_EMULATOR),true)
