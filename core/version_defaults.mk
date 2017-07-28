@@ -132,19 +132,31 @@ ifndef PLATFORM_VERSION_CODENAME
   # This is all of the development codenames that are active.  Should be either
   # the same as PLATFORM_VERSION_CODENAME or a comma-separated list of additional
   # codenames after PLATFORM_VERSION_CODENAME.
-  PLATFORM_VERSION_ALL_CODENAMES :=
+  PLATFORM_VERSION_ACTIVE_CODENAMES :=
 
   # Build a list of all possible code names. Avoid duplicates, and stop when we
   # reach a codename that matches PLATFORM_VERSION_CODENAME (anything beyond
-  # that is not included in our build.
+  # that is not included in our build).
   _versions_in_target := \
     $(call find_and_earlier,$(ALL_VERSIONS),$(TARGET_PLATFORM_VERSION))
   $(foreach version,$(_versions_in_target),\
+    $(eval _codename := $(PLATFORM_VERSION_CODENAME.$(version)))\
+    $(if $(filter $(_codename),$(PLATFORM_VERSION_ACTIVE_CODENAMES)),,\
+      $(eval PLATFORM_VERSION_ACTIVE_CODENAMES += $(_codename))))
+
+  # This is all of the development codenames, including those not active in the
+  # current taret.
+  PLATFORM_VERSION_ALL_CODENAMES :=
+
+  # Build a list of all possible code names. Avoid duplicates.
+  $(foreach version,$(ALL_VERSIONS),\
     $(eval _codename := $(PLATFORM_VERSION_CODENAME.$(version)))\
     $(if $(filter $(_codename),$(PLATFORM_VERSION_ALL_CODENAMES)),,\
       $(eval PLATFORM_VERSION_ALL_CODENAMES += $(_codename))))
 
   # And convert from space separated to comma separated.
+  PLATFORM_VERSION_ACTIVE_CODENAMES := \
+    $(subst $(space),$(comma),$(strip $(PLATFORM_VERSION_ACTIVE_CODENAMES)))
   PLATFORM_VERSION_ALL_CODENAMES := \
     $(subst $(space),$(comma),$(strip $(PLATFORM_VERSION_ALL_CODENAMES)))
 
