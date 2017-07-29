@@ -71,19 +71,9 @@ $(my_unzipped_timestamp_path): PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR := $(LOCAL_FU
 $(my_unzipped_timestamp_path): $(LOCAL_FULL_CLASSES_PRE_JACOCO_JAR)
 	rm -rf $(PRIVATE_UNZIPPED_PATH) $@
 	mkdir -p $(PRIVATE_UNZIPPED_PATH)
-	unzip -q $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR) \
-	  -d $(PRIVATE_UNZIPPED_PATH) \
-	  $(PRIVATE_INCLUDE_ARGS)
+	JarPath=$$(cd $(dir $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR)) && pwd)/$(notdir $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR)) && (cd $(PRIVATE_UNZIPPED_PATH) && jar -xf "$$JarPath" $(PRIVATE_INCLUDE_ARGS))
 	rm -rf $(PRIVATE_EXCLUDE_ARGS)
 	touch $(PRIVATE_UNZIPPED_TIMESTAMP_PATH)
-# Unfortunately in the previous task above,
-# 'rm -rf $(PRIVATE_EXCLUDE_ARGS)' needs to be a separate
-# shell command after 'unzip'.
-# We can't just use the '-x' (exclude) option of 'unzip' because if both
-# inclusions and exclusions are specified and an exclusion matches no
-# inclusions, then 'unzip' exits with an error (error 11).
-# We could ignore the error, but that would make the process less reliable
-
 
   # make a task that zips only the classes that will be instrumented
   # (for passing in to the report generator later)
