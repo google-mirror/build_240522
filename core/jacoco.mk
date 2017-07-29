@@ -46,7 +46,7 @@ ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
 
       my_exclude_args := $(subst .,/,$(my_exclude_args))
       my_exclude_args := $(subst $(comma)$(comma),$(comma),$(my_exclude_args))
-      my_exclude_args := '$(subst $(comma),' ', $(my_exclude_args))'
+      my_exclude_args := -x '$(subst $(comma),' ',$(my_exclude_args))'
     else
       my_exclude_args :=
     endif
@@ -71,18 +71,19 @@ $(my_unzipped_timestamp_path): PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR := $(LOCAL_FU
 $(my_unzipped_timestamp_path): $(LOCAL_FULL_CLASSES_PRE_JACOCO_JAR)
 	rm -rf $(PRIVATE_UNZIPPED_PATH) $@
 	mkdir -p $(PRIVATE_UNZIPPED_PATH)
-	unzip -q $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR) \
+	unzip \
+	  -q \
+	  $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR) \
+	  `zipinfo -1 \
+	    $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR) \
+	    $(PRIVATE_INCLUDE_ARGS) \
+	    $(PRIVATE_EXCLUDE_ARGS) \
+	    2>/dev/null`\
 	  -d $(PRIVATE_UNZIPPED_PATH) \
-	  $(PRIVATE_INCLUDE_ARGS)
-	rm -rf $(PRIVATE_EXCLUDE_ARGS)
 	touch $(PRIVATE_UNZIPPED_TIMESTAMP_PATH)
-# Unfortunately in the previous task above,
-# 'rm -rf $(PRIVATE_EXCLUDE_ARGS)' needs to be a separate
-# shell command after 'unzip'.
-# We can't just use the '-x' (exclude) option of 'unzip' because if both
-# inclusions and exclusions are specified and an exclusion matches no
-# inclusions, then 'unzip' exits with an error (error 11).
-# We could ignore the error, but that would make the process less reliable
+
+  # The reason we use 'zipinfo' in the command above is to ignore errors from
+  # unmatched file globs without ignoring other errors
 
 
   # make a task that zips only the classes that will be instrumented
