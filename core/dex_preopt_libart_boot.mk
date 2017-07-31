@@ -58,6 +58,8 @@ my_boot_image_flags := --compiler-filter=speed-profile
 my_boot_image_flags += --profile-file=$(my_out_boot_image_profile_location)
 endif
 
+my_boot_image_flags += --dirty-image-objects=dirty_image_objects
+
 $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME): PRIVATE_BOOT_IMAGE_FLAGS := $(my_boot_image_flags)
 $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
 # Use dex2oat debug version for better error reporting
