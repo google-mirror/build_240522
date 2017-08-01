@@ -116,7 +116,11 @@ my_strip_module := $(firstword \
   $(LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
   $(LOCAL_STRIP_MODULE))
 ifeq ($(my_strip_module),)
-  my_strip_module := mini-debug-info
+  ifneq ($(filter coverage,$(my_sanitize)),)
+    my_strip_module := keep_symbols
+  else
+    my_strip_module := mini-debug-info
+  endif
 endif
 
 ifeq ($(my_strip_module),mini-debug-info)
