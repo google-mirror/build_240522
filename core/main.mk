@@ -717,7 +717,9 @@ endif
 #  2. The jni_link_type rule for embedded native code
 #  3. The 2ND_jni_link_type for the second architecture native code
 define link-type-file
-$(call intermediates-dir-for,$(link-type-class),$(link-type-name),$(filter AUX HOST HOST_CROSS,$(link-type-prefix)),$(link-type-common),$(link-type-2ndarchprefix),$(filter HOST_CROSS,$(link-type-prefix)))/$(if $(filter APPS,$(link-type-class)),$(if $(link-type-common),,$(link-type-2ndarchprefix)jni_))link_type
+$(if $(filter AUX,$(link-type-prefix)),,\
+$(call intermediates-dir-for,$(link-type-class),$(link-type-name),$(filter AUX HOST HOST_CROSS,$(link-type-prefix)),$(link-type-common),$(link-type-2ndarchprefix),$(filter HOST_CROSS,$(link-type-prefix)))/$(if $(filter APPS,$(link-type-class)),$(if $(link-type-common),,$(link-type-2ndarchprefix)jni_))link_type\
+)
 endef
 
 # Write out the file-based link_type rules for the ALLOW_MISSING_DEPENDENCIES
