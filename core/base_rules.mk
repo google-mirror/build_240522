@@ -377,6 +377,11 @@ $(foreach c, $(my_path_components),\
   $(eval .PHONY : $(my_path_prefix))\
   $(eval $(my_path_prefix) : $(my_all_targets)))
 
+# Set up phony targets that covers all modules under a module's path.
+# This allows us to build everything in a given module's source directory.
+.PHONY: MODULES-UNDER-$(LOCAL_MODULE)
+MODULES-UNDER-$(LOCAL_MODULE) : MODULES-IN-$(subst /,-,$(LOCAL_PATH))
+
 ###########################################################
 ## Module installation rule
 ###########################################################
