@@ -561,7 +561,6 @@ MAKEPARALLEL := $(prebuilt_build_tools_bin)/makeparallel
 SOONG_JAVAC_WRAPPER := $(SOONG_HOST_OUT_EXECUTABLES)/soong_javac_wrapper
 SOONG_ZIP := $(SOONG_HOST_OUT_EXECUTABLES)/soong_zip
 ZIP2ZIP := $(SOONG_HOST_OUT_EXECUTABLES)/zip2zip
-ZIPTIME := $(prebuilt_build_tools_bin)/ziptime
 
 # ---------------------------------------------------------------
 # Generic tools.
