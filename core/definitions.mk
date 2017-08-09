@@ -2247,6 +2247,7 @@ $(if $(PRIVATE_JAR_MANIFEST), \
             -C $(PRIVATE_CLASS_INTERMEDIATES_DIR) ., \
     $(hide) $(JAR) -cf $@ -C $(PRIVATE_CLASS_INTERMEDIATES_DIR) .)
 $(if $(PRIVATE_EXTRA_JAR_ARGS),$(call add-java-resources-to,$@))
+$(remove-timestamps-and-sort-package)
 endef
 
 define transform-java-to-classes.jar
@@ -2730,8 +2731,9 @@ endef
 
 # Remove dynamic timestamps from packages
 #
-define remove-timestamps-from-package
-$(hide) $(ZIPTIME) $@
+define remove-timestamps-and-sort-package
+$(ZIP2ZIP) -i $@ -o $@.tmp -t -j "**"
+mv -f $@.tmp $@
 endef
 
 # Uncompress shared libraries embedded in an apk.

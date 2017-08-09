@@ -98,6 +98,7 @@ $(full_classes_compiled_jar): \
         $(proto_java_sources_file_stamp) \
         $(annotation_processor_deps) \
         $(NORMALIZE_PATH) \
+        $(ZIP2ZIP) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES) \
         | $(SOONG_JAVAC_WRAPPER)
 	$(transform-host-java-to-package)
