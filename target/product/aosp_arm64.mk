@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013 The Android Open-Source Project
+# Copyright (C) 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	rild.libpath=/vendor/lib64/libreference-ril.so
+
 # This is a build configuration for a full-featured build of the
 # Open-Source part of the tree. It's geared toward a US-centric
 # build quite specifically for the emulator, and might not be
@@ -24,10 +27,6 @@ PRODUCT_COPY_FILES += \
     prebuilts/qemu-kernel/arm64/3.18/kernel-qemu2:kernel-ranchu \
     device/generic/goldfish/fstab.ranchu.arm:root/fstab.ranchu \
     device/generic/goldfish/fstab.ranchu.early.arm:root/fstab.ranchu.early
-
-# This is for enabling ethernet support for ranchu.
-# Consider removing this after RIL support is provided in ranchu.
-PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)

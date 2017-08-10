@@ -20,6 +20,9 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/fstab.ranchu.early:root/fstab.ranchu.early \
     prebuilts/qemu-kernel/x86/3.18/kernel-qemu2:kernel-ranchu
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	rild.libpath=/vendor/lib/libreference-ril.so
+
 include $(SRC_TARGET_DIR)/product/full_x86.mk
 
 PRODUCT_NAME := aosp_x86

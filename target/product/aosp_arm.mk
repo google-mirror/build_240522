@@ -1,5 +1,5 @@
 #
-# Copyright 2013 The Android Open-Source Project
+# Copyright 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	rild.libpath=/vendor/lib/libreference-ril.so
+
 PRODUCT_COPY_FILES += \
     development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
     prebuilts/qemu-kernel/arm/3.18/kernel-qemu2:kernel-ranchu \

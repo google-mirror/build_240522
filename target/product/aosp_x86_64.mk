@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	rild.libpath=/vendor/lib64/libreference-ril.so
+
 # This is a build configuration for a full-featured build of the
 # Open-Source part of the tree. It's geared toward a US-centric
 # build quite specifically for the emulator, and might not be
@@ -25,14 +28,6 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/fstab.ranchu:root/fstab.ranchu \
     device/generic/goldfish/fstab.ranchu.early:root/fstab.ranchu.early \
     prebuilts/qemu-kernel/x86_64/3.18/kernel-qemu2:kernel-ranchu
-
-# If running on an emulator or some other device that has a LAN connection
-# that isn't a wifi connection. This will instruct init.rc to enable the
-# network connection so that you can use it with ADB
-
-# This is for enabling ethernet support for ranchu.
-# Consider removing this after RIL support is provided in ranchu.
-PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
