@@ -200,7 +200,7 @@ $(built_aar) : $(full_classes_jar) $(full_android_manifest)
 	$(hide) $(foreach res,$(PRIVATE_RESOURCE_DIR),cp -Rfn $(res)/* $(dir $@)aar/res;)
 	$(hide) cp $(PRIVATE_R_TXT) $(dir $@)aar/R.txt
 	$(hide) $(JAR) -cMf $@ \
-	  -C $(dir $@)aar .
+	  $(call jar-args-sorted-files-in-directory,(dir $@)aar)
 
 # Register the aar file.
 ALL_MODULES.$(LOCAL_MODULE).AAR := $(built_aar)
