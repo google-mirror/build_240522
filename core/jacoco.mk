@@ -125,7 +125,7 @@ $(LOCAL_FULL_CLASSES_JACOCO_JAR): $(my_instrumented_timestamp_path) $(LOCAL_FULL
 	# copy the pre-jacoco jar (containing files excluded from instrumentation)
 	cp $(PRIVATE_FULL_CLASSES_PRE_JACOCO_JAR) $(PRIVATE_TEMP_JAR_PATH)
 	# copy instrumented files back into the resultant jar
-	$(JAR) -uf $(PRIVATE_TEMP_JAR_PATH) -C $(PRIVATE_INSTRUMENTED_PATH) .
+	$(JAR) -uf $(PRIVATE_TEMP_JAR_PATH) $(call jar-args-sorted-files-in-directory,$(PRIVATE_INSTRUMENTED_PATH))
 	mv $(PRIVATE_TEMP_JAR_PATH) $@
 
   # this is used to trigger $(my_classes_to_report_on_path) to build
