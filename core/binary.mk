@@ -1402,9 +1402,21 @@ my_link_type := native:ndk
 my_warn_types :=
 my_allowed_types := native:ndk
 else ifdef LOCAL_USE_VNDK
-my_link_type := native:vendor
-my_warn_types :=
-my_allowed_types := native:vendor
+    ifneq ($(LOCAL_VENDOR_MODULE)|$(LOCAL_PROPRIETARY_MODULE)|$(filter $(TARGET_OUT_VENDOR)%,$(LOCAL_MODULE_PATH) $(LOCAL_MODULE_PATH_32) $(LOCAL_MODULE_PATH_64)),||)
+        # Modules installed to /vendor cannot directly depend on modules marked
+        # with vendor_available: false
+        my_link_type := native:vendor
+        my_warn_types :=
+        my_allowed_types := native:vendor native:vndk
+    else ifndef LOCAL_VNDK_PRIVATE
+        my_link_type := native:vndk
+        my_warn_types :=
+        my_allowed_types := native:vndk native:vndk_private
+    else
+        my_link_type := native:vndk_private
+        my_warn_types :=
+        my_allowed_types := native:vndk native:vndk_private
+    endif
 else
 my_link_type := native:platform
 my_warn_types :=
