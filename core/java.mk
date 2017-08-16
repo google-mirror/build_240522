@@ -280,7 +280,8 @@ $(rs_compatibility_jni_libs): $(RenderScript_file_stamp) $(RS_PREBUILT_CLCORE) \
 $(rs_compatibility_jni_libs): $(BCC_COMPAT)
 $(rs_compatibility_jni_libs): PRIVATE_CXX := $(CXX_WRAPPER) $(TARGET_CXX)
 $(rs_compatibility_jni_libs): $(renderscript_intermediate)/librs.%.so: \
-    $(renderscript_intermediate.bc_folder)%.bc
+    $(renderscript_intermediate.bc_folder)%.bc \
+    $(SOONG_OUT_DIR)/ndk.timestamp
 	$(transform-bc-to-so)
 
 endif
