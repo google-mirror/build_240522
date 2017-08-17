@@ -11,6 +11,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - tapas:      tapas [<App1> <App2> ...] [arm|x86|mips|arm64|x86_64|mips64] [eng|userdebug|user]
 - croot:      Changes directory to the top of the tree, or a subdirectory thereof.
 - m:          Makes from the top of the tree.
+- mka:        Makes from the top of the tree and utilizes all threads avaliable.
 - mm:         Builds and installs all of the modules in the current directory, and their
               dependencies.
 - mmm:        Builds and installs all of the modules in the supplied directories, and their
@@ -1486,6 +1487,11 @@ function _trigger_build()
 function m()
 (
     _trigger_build "all-modules" "$@"
+)
+
+function mka()
+(
+    m -j "$@"
 )
 
 function mm()
