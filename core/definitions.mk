@@ -692,6 +692,14 @@ define java-lib-files
 $(foreach lib,$(1),$(call _java-lib-full-classes.jar,$(lib),$(2)))
 endef
 
+# Get the header jar files (you can pass to "javac -classpath") of static or shared
+# Java libraries that you want to link against.
+# $(1): library name list
+# $(2): Non-empty if IS_HOST_MODULE
+define java-lib-header-files
+$(foreach lib,$(1),$(call intermediates-dir-for, JAVA_LIBRARIES,$(lib),$(2),COMMON)/classes-header.jar)
+endef
+
 # Get the dependency files (you can put on the right side of "|" of a build rule)
 # of the Java libraries.
 # $(1): library name list
@@ -2227,8 +2235,13 @@ endef
 
 # Common definition to invoke javac on the host and target.
 #
+# Some historical notes:
+# - below we write the list of java files to java-source-list to avoid argument
+#   list length problems with Cygwin
+#
 # $(1): javac
 # $(2): bootclasspath
+# $(3): classpath_libs
 define compile-java
 $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
@@ -2240,7 +2253,7 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     $(2) \
     $(addprefix -classpath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_ALL_JAVA_LIBRARIES)))) \
+        $(call normalize-path-list,$(3)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
@@ -2272,7 +2285,29 @@ endef
 
 define transform-java-to-classes.jar
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
+$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
+endef
+
+define transform-java-to-header.jar
+@echo "$($(PRIVATE_PREFIX)DISPLAY) Turbine: $(PRIVATE_MODULE)"
+@mkdir -p $(dir $@)
+@rm -rf $(dir $@)/classes-turbine
+@mkdir $(dir $@)/classes-turbine
+$(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
+    $(JAVA) -jar $(TURBINE)  \
+    --output $@ --temp_dir $(dir $@)/classes-turbine -$(PRIVATE_BOOTCLASSPATH) \
+    --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
+    --javacopts $(PRIVATE_JAVACFLAGS) -encoding UTF-8 \
+    $(addprefix --classpath ,$(strip \
+        $(call normalize-path-list,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)))) \
+    || ( rm -rf $(dir $@)/classes-turbine ; exit 41 ) \
+fi
+$(hide) $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES),$(dir $@)/classes-turbine)
+$(hide) if [ -s $@ ] ; then \
+    unzip -qo $@ -d $(dir $@)/classes-turbine; rm -f $(dir $@)/classes-turbine/module-info.class; \
+fi
+$(hide) $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,$(hide) rm -rf $(dir $@)/classes-turbine/META-INF)
+$(hide) $(JAR) -cf $@ $(call jar-args-sorted-files-in-directory,$(dir $@)/classes-turbine)
 endef
 
 # Invoke Jack to compile java from source to dex and jack files.
@@ -2508,7 +2543,7 @@ $(hide) $(JAVA) \
     -Djdk.internal.lambda.dumpProxyClasses=$(abspath $(dir $@))/desugar_dumped_classes \
     -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
-    $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_LIBRARIES)) \
+    $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
     --desugar_try_with_resources_if_needed=false \
     --allow_empty_bootclasspath \
@@ -2718,8 +2753,15 @@ endef
 # Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
 # in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-package
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH))
+@echo "Host Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_LIBRARIES))
+endef
+
+# Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
+# in transform-java-to-classes for the sake of vm-tests.
+define transform-host-java-to-dalvik-package
+@echo "Dalvik Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
 endef
 
 ###########################################################
