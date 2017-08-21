@@ -692,6 +692,14 @@ define java-lib-files
 $(foreach lib,$(1),$(call _java-lib-full-classes.jar,$(lib),$(2)))
 endef
 
+# Get the header jar files (you can pass to "javac -classpath") of static or shared
+# Java libraries that you want to link against.
+# $(1): library name list
+# $(2): Non-empty if IS_HOST_MODULE
+define java-lib-header-files
+$(foreach lib,$(1),$(call intermediates-dir-for, JAVA_LIBRARIES,$(lib),$(2),COMMON)/classes-header.jar)
+endef
+
 # Get the dependency files (you can put on the right side of "|" of a build rule)
 # of the Java libraries.
 # $(1): library name list
@@ -2206,38 +2214,69 @@ define jar-args-sorted-files-in-directory
     @<(find $(1) -type f | sort | $(JAR_ARGS) $(1); echo "-C $(EMPTY_DIRECTORY) .")
 endef
 
+# $(1): output dir that contains java-source-list.
+# The caller is responsible for the creation of $(1). $(1) must be empty before calling this function.
+# We filter out duplicate java file names because eclipse's compiler doesn't like them.
+# func:dump-words-to-file is responsible for cleaning java-source-list file first.
+# java-source-list-uniq file will be overwritten if file exists already.
+define create-uniq-java-src-list
+$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$(1)/java-source-list)
+$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
+          find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(1)/java-source-list; \
+fi
+$(if $(PRIVATE_HAS_PROTO_SOURCES), \
+    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(1)/java-source-list )
+$(if $(PRIVATE_HAS_RS_SOURCES), \
+    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(1)/java-source-list )
+$(hide) tr ' ' '\n' < $(1)/java-source-list \
+    | $(NORMALIZE_PATH) | sort -u > $(1)/java-source-list-uniq
+endef
+
+# $(1): the dir that contains .class files for creating jar file.
+define create-jar
+$(if $(PRIVATE_JAR_EXCLUDE_FILES), $(hide) find $(1) \
+    -name $(word 1, $(PRIVATE_JAR_EXCLUDE_FILES)) \
+    $(addprefix -o -name , $(wordlist 2, 999, $(PRIVATE_JAR_EXCLUDE_FILES))) \
+    | xargs rm -rf)
+$(if $(PRIVATE_JAR_PACKAGES), \
+    $(hide) find $(1) -mindepth 1 -type f \
+        $(foreach pkg, $(PRIVATE_JAR_PACKAGES), \
+            -not -path $(PRIVATE_CLASS_INTERMEDIATES_DIR)/$(subst .,/,$(pkg))/\*) -delete ; \
+        find $(PRIVATE_CLASS_INTERMEDIATES_DIR) -empty -delete)
+$(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) rm -rf \
+    $(foreach pkg, $(PRIVATE_JAR_EXCLUDE_PACKAGES), \
+        $(1)/$(subst .,/,$(pkg))))
+$(if $(PRIVATE_JAR_MANIFEST), \
+    $(hide) sed -e "s/%BUILD_NUMBER%/$(BUILD_NUMBER_FROM_FILE)/" \
+            $(PRIVATE_JAR_MANIFEST) > $(dir $@)/manifest.mf && \
+        $(JAR) -cfm $@ $(dir $@)/manifest.mf, \
+    $(hide) $(JAR) -cf $@) \
+        $(call jar-args-sorted-files-in-directory,$(PRIVATE_CLASS_INTERMEDIATES_DIR))
+$(if $(PRIVATE_EXTRA_JAR_ARGS),$(call add-java-resources-to,$@))
+endef
+
 # Common definition to invoke javac on the host and target.
 #
 # Some historical notes:
 # - below we write the list of java files to java-source-list to avoid argument
 #   list length problems with Cygwin
-# - we filter out duplicate java file names because eclipse's compiler
-#   doesn't like them.
 #
 # $(1): javac
 # $(2): bootclasspath
+# $(3): classpath_libs
 define compile-java
 $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
 $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
 $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_LIBRARIES),$(PRIVATE_CLASS_INTERMEDIATES_DIR))
-$(call dump-words-to-file,$(PRIVATE_JAVA_SOURCES),$(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list)
-$(hide) if [ -d "$(PRIVATE_SOURCE_INTERMEDIATES_DIR)" ]; then \
-          find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list; \
-fi
-$(if $(PRIVATE_HAS_PROTO_SOURCES), \
-    $(hide) find $(PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list )
-$(if $(PRIVATE_HAS_RS_SOURCES), \
-    $(hide) find $(PRIVATE_RS_SOURCE_INTERMEDIATES_DIR) -name '*.java' -and -not -name '.*' >> $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list )
-$(hide) tr ' ' '\n' < $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list \
-    | $(NORMALIZE_PATH) | sort -u > $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
+$(call create-uniq-java-src-list,$(PRIVATE_CLASS_INTERMEDIATES_DIR))
 $(hide) if [ -s $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     $(2) \
     $(addprefix -classpath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_ALL_JAVA_LIBRARIES)))) \
+        $(call normalize-path-list,$(3)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
@@ -2248,30 +2287,37 @@ $(if $(PRIVATE_JAVA_LAYERS_FILE), $(hide) build/tools/java-layers.py \
     $(PRIVATE_JAVA_LAYERS_FILE) \@$(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq,)
 $(hide) rm -f $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list
 $(hide) rm -f $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
-$(if $(PRIVATE_JAR_EXCLUDE_FILES), $(hide) find $(PRIVATE_CLASS_INTERMEDIATES_DIR) \
-    -name $(word 1, $(PRIVATE_JAR_EXCLUDE_FILES)) \
-    $(addprefix -o -name , $(wordlist 2, 999, $(PRIVATE_JAR_EXCLUDE_FILES))) \
-    | xargs rm -rf)
-$(if $(PRIVATE_JAR_PACKAGES), \
-    $(hide) find $(PRIVATE_CLASS_INTERMEDIATES_DIR) -mindepth 1 -type f \
-        $(foreach pkg, $(PRIVATE_JAR_PACKAGES), \
-            -not -path $(PRIVATE_CLASS_INTERMEDIATES_DIR)/$(subst .,/,$(pkg))/\*) -delete ; \
-        find $(PRIVATE_CLASS_INTERMEDIATES_DIR) -empty -delete)
-$(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) rm -rf \
-    $(foreach pkg, $(PRIVATE_JAR_EXCLUDE_PACKAGES), \
-        $(PRIVATE_CLASS_INTERMEDIATES_DIR)/$(subst .,/,$(pkg))))
-$(if $(PRIVATE_JAR_MANIFEST), \
-    $(hide) sed -e "s/%BUILD_NUMBER%/$(BUILD_NUMBER_FROM_FILE)/" \
-            $(PRIVATE_JAR_MANIFEST) > $(dir $@)/manifest.mf && \
-        $(JAR) -cfm $@ $(dir $@)/manifest.mf, \
-    $(hide) $(JAR) -cf $@) \
-        $(call jar-args-sorted-files-in-directory,$(PRIVATE_CLASS_INTERMEDIATES_DIR))
-$(if $(PRIVATE_EXTRA_JAR_ARGS),$(call add-java-resources-to,$@))
+$(call create-jar,$(PRIVATE_CLASS_INTERMEDIATES_DIR))
 endef
 
 define transform-java-to-classes.jar
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH))
+$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
+endef
+
+define transform-java-to-header.jar
+@echo "$($(PRIVATE_PREFIX)DISPLAY) Turbine: $(PRIVATE_MODULE)"
+@mkdir -p $(dir $@)
+@rm -rf $(dir $@)/turbine-temp
+@mkdir $(dir $@)/turbine-temp
+$(call create-uniq-java-src-list, $(dir $@)/turbine-temp)
+$(hide) if [ -s $(dir $@)/turbine-temp/java-source-list-uniq ] ; then \
+    $(JAVA) -jar $(TURBINE)  \
+    --output $@ --temp_dir $(dir $@)/turbine-temp -$(PRIVATE_BOOTCLASSPATH) \
+    --sources \@$(dir $@)/turbine-temp/java-source-list-uniq \
+    --javacopts $(PRIVATE_JAVACFLAGS) -encoding UTF-8 \
+    $(addprefix --classpath ,$(strip \
+        $(call normalize-path-list,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)))) \
+    || ( rm -rf $(dir $@)/turbine-temp ; exit 41 ) \
+fi
+$(hide) rm -f $(dir $@)/turbine-temp/java-source-list
+$(hide) rm -f $(dir $@)/turbine-temp/java-source-list-uniq
+$(hide) $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES),$(dir $@)/turbine-temp)
+$(hide) if [ -s $@ ] ; then \
+    unzip -qo $@ -d $(dir $@)/turbine-temp; rm -f $(dir $@)/turbine-temp/module-info.class; \
+fi
+$(hide) $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,$(hide) rm -rf $(dir $@)/turbine-temp/META-INF)
+$(hide) $(JAR) -cf $@ $(call jar-args-sorted-files-in-directory,$(dir $@)/turbine-temp)
 endef
 
 # Invoke Jack to compile java from source to dex and jack files.
@@ -2559,7 +2605,7 @@ $(hide) $(JAVA) \
     -Djdk.internal.lambda.dumpProxyClasses=$(abspath $(dir $@))/desugar_dumped_classes \
     -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
-    $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_LIBRARIES)) \
+    $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
     --desugar_try_with_resources_if_needed=false \
     --allow_empty_bootclasspath \
@@ -2768,9 +2814,16 @@ endef
 
 # Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
 # in transform-java-to-classes for the sake of vm-tests.
+define transform-pure-host-java-to-package
+@echo "Host Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_LIBRARIES))
+endef
+
+# Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
+# in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-package
-@echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH))
+@echo "Dalvik Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_SDK_LIBRARIES) $(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
 endef
 
 ###########################################################

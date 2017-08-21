@@ -34,6 +34,7 @@ endif
 full_classes_compiled_jar := $(intermediates.COMMON)/classes-full-debug.jar
 full_classes_jarjar_jar := $(intermediates.COMMON)/classes-jarjar.jar
 full_classes_jar := $(intermediates.COMMON)/classes.jar
+full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 
 LOCAL_INTERMEDIATE_TARGETS += \
     $(full_classes_compiled_jar) \
@@ -75,7 +76,7 @@ $(full_classes_compiled_jar): \
         $(ZIPTIME) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES) \
         | $(SOONG_JAVAC_WRAPPER)
-	$(transform-host-java-to-package)
+	$(transform-pure-host-java-to-package)
 	$(remove-timestamps-from-package)
 
 javac-check : $(full_classes_compiled_jar)
@@ -101,3 +102,4 @@ include $(BUILD_SYSTEM)/jacoco.mk
 $(eval $(call copy-one-file,$(LOCAL_FULL_CLASSES_JACOCO_JAR),$(LOCAL_BUILT_MODULE)))
 $(eval $(call copy-one-file,$(LOCAL_FULL_CLASSES_JACOCO_JAR),$(full_classes_jar)))
 
+$(eval $(call copy-one-file,$(LOCAL_FULL_CLASSES_JACOCO_JAR),$(full_classes_header_jar)))

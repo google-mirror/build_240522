@@ -42,6 +42,9 @@ ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
   LOCAL_JAVA_LIBRARIES :=  core-oj-hostdex core-libart-hostdex $(LOCAL_JAVA_LIBRARIES)
 endif
 
+full_classes_turbine_jar := $(intermediates.COMMON)/classes-turbine.jar
+full_classes_header_jarjar := $(intermediates.COMMON)/classes-header-jarjar.jar
+full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 full_classes_compiled_jar := $(intermediates.COMMON)/classes-full-debug.jar
 full_classes_desugar_jar := $(intermediates.COMMON)/desugar.classes.jar
 full_classes_jarjar_jar := $(intermediates.COMMON)/classes-jarjar.jar
@@ -51,6 +54,7 @@ jack_check_timestamp := $(intermediates.COMMON)/jack.check.timestamp
 built_dex := $(intermediates.COMMON)/classes.dex
 
 LOCAL_INTERMEDIATE_TARGETS += \
+    $(full_classes_turbine_jar) \
     $(full_classes_compiled_jar) \
     $(full_classes_desugar_jar) \
     $(full_classes_jarjar_jar) \
@@ -93,7 +97,8 @@ $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES :=
 $(full_classes_compiled_jar): \
         $(java_sources) \
         $(java_resource_sources) \
-        $(full_java_lib_deps) \
+        $(full_java_header_libs) \
+        $(full_static_java_libs) \
         $(jar_manifest_file) \
         $(proto_java_sources_file_stamp) \
         $(annotation_processor_deps) \
@@ -103,11 +108,38 @@ $(full_classes_compiled_jar): \
         | $(SOONG_JAVAC_WRAPPER)
 	$(transform-host-java-to-package)
 
+$(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(GLOBAL_JAVAC_DEBUG_FLAGS) $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
+$(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
+$(full_classes_turbine_jar): \
+        $(java_sources) \
+        $(full_java_header_libs) \
+        $(jar_manifest_file) \
+        $(layers_file) \
+        $(RenderScript_file_stamp) \
+        $(proto_java_sources_file_stamp) \
+        $(NORMALIZE_PATH) \
+        $(JAR_ARGS) \
+        $(LOCAL_ADDITIONAL_DEPENDENCIES) \
+        | $(TURBINE)
+	$(transform-java-to-header.jar)
+
+# Run jarjar before generate classes-header.jar if necessary.
+ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
+$(full_classes_header_jarjar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
+$(full_classes_header_jarjar): $(full_classes_turbine_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
+	@echo Header JarJar: $@
+	$(hide) $(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
+else
+full_classes_header_jarjar := $(full_classes_turbine_jar)
+endif
+
+$(eval $(call copy-one-file,$(full_classes_header_jarjar),$(full_classes_header_jar)))
+
 my_desugaring :=
 ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.8)
 my_desugaring := true
 $(full_classes_desugar_jar): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
-$(full_classes_desugar_jar): $(full_classes_compiled_jar) $(DESUGAR)
+$(full_classes_desugar_jar): $(full_classes_compiled_jar) $(full_java_header_libs) $(DESUGAR)
 	$(desugar-classes-jar)
 endif
 
