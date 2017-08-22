@@ -156,7 +156,6 @@ LOCAL_INTERMEDIATE_TARGETS += \
     $(full_classes_stubs_jar) \
     $(java_source_list_file)
 
-
 LOCAL_INTERMEDIATE_SOURCE_DIR := $(intermediates.COMMON)/src
 
 ###############################################################
@@ -481,8 +480,11 @@ $(full_classes_turbine_jar): \
     $(layers_file) \
     $(NORMALIZE_PATH) \
     $(JAR_ARGS) \
+    $(ZIPTIME) \
     | $(TURBINE)
 	$(transform-java-to-header.jar)
+
+.KATI_RESTAT: $(full_classes_turbine_jar)
 
 # Run jarjar before generate classes-header.jar if necessary.
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
@@ -701,8 +703,6 @@ full_classes_proguard_jar := $(full_classes_pre_proguard_jar)
 endif # LOCAL_PROGUARD_ENABLED defined
 
 $(eval $(call copy-one-file,$(full_classes_proguard_jar),$(full_classes_jar)))
-
-$(call define-jar-to-toc-rule, $(full_classes_jar))
 
 ifneq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
 ifndef LOCAL_JACK_ENABLED

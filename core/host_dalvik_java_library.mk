@@ -127,8 +127,11 @@ $(full_classes_turbine_jar): \
     $(jar_manifest_file) \
     $(NORMALIZE_PATH) \
     $(JAR_ARGS) \
+    $(ZIPTIME) \
     | $(TURBINE)
 	$(transform-java-to-header.jar)
+
+.KATI_RESTAT: $(full_classes_turbine_jar)
 
 # Run jarjar before generate classes-header.jar if necessary.
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)

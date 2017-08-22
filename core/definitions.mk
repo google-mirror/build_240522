@@ -2295,7 +2295,7 @@ define transform-java-to-header.jar
 @mkdir $(dir $@)/classes-turbine
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(JAVA) -jar $(TURBINE)  \
-    --output $@ --temp_dir $(dir $@)/classes-turbine -$(PRIVATE_BOOTCLASSPATH) \
+    --output $@.tmp --temp_dir $(dir $@)/classes-turbine -$(PRIVATE_BOOTCLASSPATH) \
     --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
     --javacopts $(PRIVATE_JAVACFLAGS) -encoding UTF-8 \
     $(addprefix --classpath ,$(strip \
@@ -2303,11 +2303,13 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     || ( rm -rf $(dir $@)/classes-turbine ; exit 41 ) \
 fi
 $(hide) $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES),$(dir $@)/classes-turbine)
-$(hide) if [ -s $@ ] ; then \
-    unzip -qo $@ -d $(dir $@)/classes-turbine; rm -f $(dir $@)/classes-turbine/module-info.class; \
+$(hide) if [ -s $@.tmp ] ; then \
+    unzip -qo $@.tmp -d $(dir $@)/classes-turbine; rm -f $(dir $@)/classes-turbine/module-info.class; \
 fi
 $(hide) $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,$(hide) rm -rf $(dir $@)/classes-turbine/META-INF)
-$(hide) $(JAR) -cf $@ $(call jar-args-sorted-files-in-directory,$(dir $@)/classes-turbine)
+$(hide) $(JAR) -cf $@.tmp $(call jar-args-sorted-files-in-directory,$(dir $@)/classes-turbine)
+$(hide) $(ZIPTIME) $@.tmp
+$(hide) $(call commit-change-for-toc,$@)
 endef
 
 # Invoke Jack to compile java from source to dex and jack files.
@@ -2420,26 +2422,6 @@ $(hide) if cmp -s $1.tmp $1 ; then \
 else \
  mv $1.tmp $1 ; \
 fi
-endef
-
-# b/37756495
-IJAR_ASAN_OPTIONS := ASAN_OPTIONS=detect_leaks=0
-
-## Rule to create a table of contents from a .jar file.
-## Must be called with $(eval).
-# $(1): A .jar file
-define _transform-jar-to-toc
-$1.toc: $1 | $(IJAR)
-	@echo Generating TOC: $$@
-	$(hide) $(IJAR_ASAN_OPTIONS) $(IJAR) $$< $$@.tmp
-	$$(call commit-change-for-toc,$$@)
-endef
-
-## Define a rule which generates .jar.toc and mark it as .KATI_RESTAT.
-# $(1): A .jar file
-define define-jar-to-toc-rule
-$(eval $(call _transform-jar-to-toc,$1))\
-$(eval .KATI_RESTAT: $1.toc)
 endef
 
 ifeq (,$(TARGET_BUILD_APPS))

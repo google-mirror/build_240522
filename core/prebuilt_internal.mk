@@ -524,8 +524,6 @@ $(common_classes_pre_proguard_jar) : $(my_src_jar)
 $(common_javalib_jar) : $(common_classes_jar)
 	$(transform-prebuilt-to-target)
 
-$(call define-jar-to-toc-rule, $(common_classes_jar))
-
 ifdef LOCAL_USE_AAPT2
 ifneq ($(my_src_aar),)
 LOCAL_SDK_RES_VERSION:=$(strip $(LOCAL_SDK_RES_VERSION))
