@@ -26,6 +26,17 @@ ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
     endif
   endif
 endif
+
+ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.7)
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := true
+else # not 1.7
+ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.8)
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := true
+else # neither 1.7 nor 1.8
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED :=
+endif # 1.8
+endif # 1.7
+
 LOCAL_JAVACFLAGS += -source $(LOCAL_JAVA_LANGUAGE_VERSION) -target $(LOCAL_JAVA_LANGUAGE_VERSION)
 
 ###########################################################
@@ -191,21 +202,50 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR := $(inter
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HAS_RS_SOURCES :=
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCES := $(all_java_sources)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
-
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := $(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
+
+ifdef $(LOCAL_IS_HOST_MODULE)
+default_system_modules := core-system-modules
+else
+default_system_modules :=
+endif
+
+# The default system modules can be overridden via LOCAL_JAVA_SYSTEM_MODULES.
+# This is important because e.g. core-oj and core-libart need core-system-modules (the default),
+# but core-all needs --system=none.
+ifeq ($(LOCAL_JAVA_SYSTEM_MODULES),)
+LOCAL_CORE_LIBRARIES_ON_CLASSPATH := $(subst $(space),:,$(strip $(sort $(filter core-oj core-libart framework,$(LOCAL_JAVA_LIBRARIES)))))
+ifeq (core-libart:core-oj:framework,$(LOCAL_CORE_LIBRARIES_ON_CLASSPATH))
+LOCAL_JAVA_SYSTEM_MODULES := core-framework-system-modules
+else ifeq (core-libart:core-oj,$(LOCAL_CORE_LIBRARIES_ON_CLASSPATH))
+LOCAL_JAVA_SYSTEM_MODULES := core-system-modules
+else ifeq (,$(sort($(filter core-libart core-oj framework,$(LOCAL_JAVA_LIBRARIES)))))
+LOCAL_JAVA_SYSTEM_MODULES := none
+else
+LOCAL_JAVA_SYSTEM_MODULES := $(default_system_modules)
+endif # LOCAL_JAVA_LIBRARIES
+endif # LOCAL_JAVA_SYSTEM_MODULES
 
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 
 # full_java_libs: The list of files that should be used as the classpath.
 #                 Using this list as a dependency list WILL NOT WORK.
+# my_system_modules: Set by the below logic to one of the following:
+#                  a) "none" for no standard libraries (--system=none)
+#                  b) empty for the standard libraries built into javac/java (no --system argument)
+#                  c) any other value, e.g. "core-system-modules" to depend on the build target of
+#                     that name and use it as the system modules.
 ifndef LOCAL_IS_HOST_MODULE
   ifeq ($(LOCAL_SDK_VERSION),)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
       empty_bootclasspath := ""
+      my_system_modules := $(LOCAL_JAVA_SYSTEM_MODULES)
     else  # LOCAL_NO_STANDARD_LIBRARIES
       full_java_bootclasspath_libs := $(call java-lib-header-files,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES))
+      my_system_modules := $(LOCAL_JAVA_SYSTEM_MODULES)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
   else
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
@@ -218,12 +258,16 @@ ifndef LOCAL_IS_HOST_MODULE
     ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
       # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_stubs_current)
+      my_system_modules := android_stubs_current-system-modules
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),system_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_system_stubs_current)
+      my_system_modules := android_system_stubs_current-system-modules
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),test_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_test_stubs_current)
+      my_system_modules := android_test_stubs_current-system-modules
     else
       full_java_bootclasspath_libs := $(call java-lib-header-files,sdk_v$(LOCAL_SDK_VERSION))
+      my_system_modules := sdk_v$(LOCAL_SDK_VERSION)-system-modules
     endif # current, system_current, or test_current
   endif # LOCAL_SDK_VERSION
 
@@ -242,7 +286,7 @@ ifndef LOCAL_IS_HOST_MODULE
   full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 
 else # LOCAL_IS_HOST_MODULE
-
+  my_system_modules :=
   ifeq ($(USE_CORE_LIB_BOOTCLASSPATH),true)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       empty_bootclasspath := ""
@@ -267,6 +311,11 @@ endif
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := $(full_java_bootclasspath_libs)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EMPTY_BOOTCLASSPATH := $(empty_bootclasspath)
+
+ifneq ($(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED),true)
+$(LOCAL_INTERMEDIATE_TARGETS): $(filter-out none,$(my_system_modules))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_SYSTEM_MODULES := $(my_system_modules)
+endif
 
 full_java_libs := $(full_shared_java_libs) $(full_static_java_libs) $(LOCAL_CLASSPATH)
 full_java_header_libs := $(full_shared_java_header_libs) $(full_static_java_header_libs)
