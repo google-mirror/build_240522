@@ -2246,9 +2246,11 @@ $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
-    $(addprefix -bootclasspath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
-        $(PRIVATE_EMPTY_BOOTCLASSPATH))) \
+    $(if $(PRIVATE_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED), \
+        $(addprefix -bootclasspath ,$(strip \
+            $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
+            $(PRIVATE_EMPTY_BOOTCLASSPATH))), \
+        $(call java-system-image-arg,$(PRIVATE_BOOTCLASSPATH))) \
     $(addprefix -classpath ,$(strip \
         $(call normalize-path-list,$(2)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
@@ -2290,9 +2292,11 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     --output $@.premerged --temp_dir $(dir $@)/classes-turbine \
     --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
     --javacopts $(PRIVATE_JAVACFLAGS) $(COMMON_JDK_FLAGS) \
-    $(addprefix --bootclasspath ,$(strip \
-         $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
-         $(PRIVATE_EMPTY_BOOTCLASSPATH))) \
+    $(if $(PRIVATE_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED), \
+        $(addprefix --bootclasspath ,$(strip \
+            $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
+            $(PRIVATE_EMPTY_BOOTCLASSPATH))), \
+        $(call java-system-image-arg,$(PRIVATE_BOOTCLASSPATH))) \
     $(addprefix --classpath ,$(strip \
         $(call normalize-path-list,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)))) \
     || ( rm -rf $(dir $@)/classes-turbine ; exit 41 ) && \
@@ -2512,7 +2516,8 @@ $(hide) $(JAVA) \
     $(if $(EXPERIMENTAL_USE_OPENJDK9),--add-opens java.base/java.lang.invoke=ALL-UNNAMED,) \
     -Djdk.internal.lambda.dumpProxyClasses=$(abspath $(dir $@))/desugar_dumped_classes \
     -jar $(DESUGAR) \
-    $(addprefix --bootclasspath_entry ,$(PRIVATE_BOOTCLASSPATH)) \
+    $(if $(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED), \
+       $(addprefix --bootclasspath_entry ,$(filter-out none,$(PRIVATE_BOOTCLASSPATH)))) \
     $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
     --desugar_try_with_resources_if_needed=false \
@@ -3398,5 +3403,19 @@ $(foreach source,$(ENFORCE_RRO_SOURCES), \
   $(eval enforce_rro_module := $(enforce_rro_source_module)__auto_generated_rro) \
   $(eval include $(BUILD_SYSTEM)/generate_enforce_rro.mk) \
   $(eval ALL_MODULES.$(enforce_rro_source_module).REQUIRED += $(enforce_rro_module)) \
+)
+endef
+
+# The --system argument to pass to java / javac for the specified image.
+#  $(1): none for --system=none, or empty for no --system argument, or the
+#        LOCAL_MODULE of an image built via BUILD_JAVA_SYSTEM_IMAGE.
+define java-system-image-arg
+$(if $(1), \
+  $(strip \
+    $(if $(filter none,$(1)),
+      --system=none, \
+      --system=$(call intermediates-dir-for,JAVA_LIBRARIES,$(1),$(call def-host-aux-target),COMMON)/system-image \
+     ) \
+  ) \
 )
 endef

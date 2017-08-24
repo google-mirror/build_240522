@@ -26,6 +26,17 @@ ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
     endif
   endif
 endif
+
+ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.7)
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := true
+else # not 1.7
+ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.8)
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := true
+else # neither 1.7 nor 1.8
+LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED :=
+endif # 1.8
+endif # 1.7
+
 LOCAL_JAVACFLAGS += -source $(LOCAL_JAVA_LANGUAGE_VERSION) -target $(LOCAL_JAVA_LANGUAGE_VERSION)
 
 ###########################################################
@@ -198,21 +209,52 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_PROTO_SOURCE_INTERMEDIATES_DIR := $(inter
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HAS_RS_SOURCES :=
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCES := $(all_java_sources)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
-
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := $(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
+
+ifdef $(LOCAL_IS_HOST_MODULE)
+default_system_image := core-system-image
+else
+default_system_image :=
+endif
+
+# The default system image can be overridden via LOCAL_JAVA_SYSTEM_IMAGE.
+# This is important because e.g. core-oj and core-libart need core-system-image (the default),
+# but core-all needs --system=none.
+ifeq ($(LOCAL_JAVA_SYSTEM_IMAGE),)
+LOCAL_CORE_LIBRARIES_ON_CLASSPATH := $(subst $(space),:,$(strip $(sort $(filter core-oj core-libart framework,$(LOCAL_JAVA_LIBRARIES)))))
+ifeq (core-libart:core-oj:framework,$(LOCAL_CORE_LIBRARIES_ON_CLASSPATH))
+LOCAL_JAVA_SYSTEM_IMAGE := core-framework-system-image
+else ifeq (core-libart:core-oj,$(LOCAL_CORE_LIBRARIES_ON_CLASSPATH))
+LOCAL_JAVA_SYSTEM_IMAGE := core-system-image
+else ifeq (core-oj,$(LOCAL_CORE_LIBRARIES_ON_CLASSPATH))
+LOCAL_JAVA_SYSTEM_IMAGE := none
+else ifeq (,$(sort($(filter core-libart core-oj framework,$(LOCAL_JAVA_LIBRARIES)))))
+LOCAL_JAVA_SYSTEM_IMAGE := none
+else
+LOCAL_JAVA_SYSTEM_IMAGE := $(default_system_image)
+endif # LOCAL_JAVA_LIBRARIES
+endif # LOCAL_JAVA_SYSTEM_IMAGE
 
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 
 # full_java_libs: The list of files that should be used as the classpath.
 #                 Using this list as a dependency list WILL NOT WORK.
+# my_system_image: Set by the below logic to one of the following:
+#                  a) "none" for no standard libraries (--system=none)
+#                  b) empty for the standard libraries built into javac/java (no --system argument)
+#                  c) any other value, e.g. "core-system-image" to depend on the build target of
+#                     that name and use it as the image.
 ifndef LOCAL_IS_HOST_MODULE
   ifeq ($(LOCAL_SDK_VERSION),)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
       empty_bootclasspath := ""
+      my_system_image := $(LOCAL_JAVA_SYSTEM_IMAGE)
     else  # LOCAL_NO_STANDARD_LIBRARIES
       full_java_bootclasspath_libs := $(call java-lib-header-files,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES))
+      my_system_image := $(LOCAL_JAVA_SYSTEM_IMAGE)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
   else
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
@@ -225,12 +267,16 @@ ifndef LOCAL_IS_HOST_MODULE
     ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
       # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_stubs_current)
+      my_system_image := android_stubs_current-system-image
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),system_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_system_stubs_current)
+      my_system_image := android_system_stubs_current-system-image
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),test_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_test_stubs_current)
+      my_system_image := android_test_stubs_current-system-image
     else
       full_java_bootclasspath_libs := $(call java-lib-header-files,sdk_v$(LOCAL_SDK_VERSION))
+      my_system_image := sdk_v$(LOCAL_SDK_VERSION)-system-image
     endif # current, system_current, or test_current
   endif # LOCAL_SDK_VERSION
 
@@ -250,7 +296,7 @@ ifndef LOCAL_IS_HOST_MODULE
   full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
 
 else # LOCAL_IS_HOST_MODULE
-
+  my_system_image :=
   ifeq ($(USE_CORE_LIB_BOOTCLASSPATH),true)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       empty_bootclasspath := ""
@@ -273,8 +319,13 @@ ifdef empty_bootclasspath
   endif
 endif
 
+ifeq ($(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED),true)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := $(full_java_bootclasspath_libs)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EMPTY_BOOTCLASSPATH := $(empty_bootclasspath)
+else
+$(LOCAL_INTERMEDIATE_TARGETS): $(filter-out none,$(my_system_image))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := $(my_system_image)
+endif
 
 full_java_libs := $(full_shared_java_libs) $(full_static_java_libs) $(LOCAL_CLASSPATH)
 full_java_header_libs := $(full_shared_java_header_libs) $(full_static_java_header_libs)
