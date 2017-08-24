@@ -501,6 +501,10 @@ prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
 
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 
+ifndef DX_ALT_JAR
+  DX_ALT_JAR := $(HOST_OUT_JAVA_LIBRARIES)/d8.jar
+endif
+
 #
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
