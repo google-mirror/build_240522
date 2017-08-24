@@ -111,6 +111,7 @@ BUILD_HOST_PREBUILT:= $(BUILD_SYSTEM)/host_prebuilt.mk
 BUILD_PREBUILT:= $(BUILD_SYSTEM)/prebuilt.mk
 BUILD_MULTI_PREBUILT:= $(BUILD_SYSTEM)/multi_prebuilt.mk
 BUILD_JAVA_LIBRARY:= $(BUILD_SYSTEM)/java_library.mk
+BUILD_JAVA_SYSTEM_IMAGE := $(BUILD_SYSTEM)/java_system_image.mk
 BUILD_STATIC_JAVA_LIBRARY:= $(BUILD_SYSTEM)/static_java_library.mk
 BUILD_HOST_JAVA_LIBRARY:= $(BUILD_SYSTEM)/host_java_library.mk
 BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk

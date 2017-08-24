@@ -583,6 +583,7 @@ ifndef LOCAL_JACK_ENABLED
 ifndef LOCAL_IS_STATIC_JAVA_LIBRARY
 my_desugaring := true
 $(full_classes_desugar_jar): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
+$(full_classes_desugar_jar): PRIVATE_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED := $(LOCAL_JAVAC_BOOTCLASSPATH_ARG_SUPPORTED)
 $(full_classes_desugar_jar): $(full_classes_jar) $(full_java_header_libs) $(DESUGAR)
 	$(desugar-classes-jar)
 endif
