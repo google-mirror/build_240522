@@ -1,0 +1,8 @@
+Code-Review+2: Nick Kralevich <nnk@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 25 Aug 2017 23:07:45 +0000
+Reviewed-on: https://android-review.googlesource.com/469397
+Project: platform/build
+Branch: refs/heads/master
