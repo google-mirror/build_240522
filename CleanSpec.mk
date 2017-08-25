@@ -428,6 +428,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/nativetest*)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/*/*/classes*.jack)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/*/*/jack*)
 
+# Split nonplat_sepolicy.cil into vendor_sepolicy.cil and odm_sepolicy.cil
+$(call add-clean-step, rm -rf $(TARGET_OUT_VENDOR)/etc/selinux/nonplat_sepolicy.cil)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/ETC/nonplat_sepolicy.cil_intermediates)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
