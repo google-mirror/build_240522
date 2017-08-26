@@ -275,6 +275,11 @@ def HasVendorPartition(target_files_zip):
     return False
 
 
+def HasTrebleEnabled(target_files_zip, info_dict):
+  return (HasVendorPartition(target_files_zip) and
+          GetBuildProp("ro.treble.enabled", info_dict) == "true")
+
+
 def GetOemProperty(name, oem_props, oem_dict, info_dict):
   if oem_props is not None and name in oem_props:
     return oem_dict[name]
@@ -494,6 +499,10 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     vendor_diff = common.BlockDifference("vendor", vendor_tgt)
     vendor_diff.WriteScript(script, output_zip)
 
+  # Include compatibility info if it's a Treble-enabled target.
+  if HasTrebleEnabled(input_zip, OPTIONS.info_dict):
+    AddCompatibilityArchive(input_zip, output_zip)
+
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
@@ -542,11 +551,20 @@ def WriteMetadata(metadata, output_zip):
 
 
 def GetBuildProp(prop, info_dict):
-  """Return the fingerprint of the build of a given target-files info_dict."""
+  """Returns the inquired build property from a given info_dict."""
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
     raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+
+
+def GetVendorBuildProp(prop, info_dict):
+  """Returns the inquired vendor build property from a given info_dict."""
+  try:
+    return info_dict.get("vendor.build.prop", {})[prop]
+  except KeyError:
+    raise common.ExternalError(
+        "couldn't find %s in vendor.build.prop" % (prop,))
 
 
 def HandleDowngradeMetadata(metadata):
@@ -678,6 +696,22 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
                                          disable_imgdiff=disable_imgdiff)
   else:
     vendor_diff = None
+
+  # Include compatibility info if it's treble-enabled target.
+  if HasTrebleEnabled(target_zip, OPTIONS.target_info_dict):
+    # We don't support thumbprint in Treble world.
+    assert not source_oem_props and not target_oem_props
+
+    update_system = source_fp != target_fp
+
+    source_fp_vendor = GetVendorBuildProp("ro.vendor.build.fingerprint",
+                                          OPTIONS.source_info_dict)
+    target_fp_vendor = GetVendorBuildProp("ro.vendor.build.fingerprint",
+                                          OPTIONS.target_info_dict)
+    update_vendor = source_fp_vendor != target_fp_vendor
+
+    AddCompatibilityArchive(target_zip, output_zip,
+                            update_system, update_vendor)
 
   AppendAssertions(script, OPTIONS.target_info_dict, oem_dicts)
   device_specific.IncrementalOTA_Assertions()
@@ -1169,28 +1203,27 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     else:
       print("Warning: cannot find care map file in target_file package")
 
-  if HasVendorPartition(target_zip):
+  if HasTrebleEnabled(target_zip, OPTIONS.info_dict):
+    # We don't support OEM thumbprint in Treble world.
+    assert not oem_props
+
     update_vendor = True
     update_system = True
 
     # If incremental then figure out what is being updated so metadata only for
     # the updated image is included.
     if source_file is not None:
-      input_tmp, input_zip = common.UnzipTemp(
-          target_file, UNZIP_PATTERN)
-      source_tmp, source_zip = common.UnzipTemp(
-          source_file, UNZIP_PATTERN)
+      source_fp = GetBuildProp("ro.build.fingerprint",
+                               OPTIONS.source_info_dict)
+      target_fp = GetBuildProp("ro.build.fingerprint",
+                               OPTIONS.target_info_dict)
+      update_system = source_fp != target_fp
 
-      vendor_src = GetImage("vendor", source_tmp)
-      vendor_tgt = GetImage("vendor", input_tmp)
-      system_src = GetImage("system", source_tmp)
-      system_tgt = GetImage("system", input_tmp)
-
-      update_system = system_src.TotalSha1() != system_tgt.TotalSha1()
-      update_vendor = vendor_src.TotalSha1() != vendor_tgt.TotalSha1()
-
-      input_zip.close()
-      source_zip.close()
+      source_fp_vendor = GetVendorBuildProp("ro.vendor.build.fingerprint",
+                                            OPTIONS.source_info_dict)
+      target_fp_vendor = GetVendorBuildProp("ro.vendor.build.fingerprint",
+                                            OPTIONS.target_info_dict)
+      update_vendor = source_fp_vendor != target_fp_vendor
 
     target_zip = zipfile.ZipFile(target_file, "r")
     AddCompatibilityArchive(target_zip, output_zip, update_system,
