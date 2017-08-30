@@ -510,9 +510,10 @@ endif  # TARGET_TRANSLATE_2ND_ARCH
 # If a module is for a cross host os, the required modules must be for
 # that OS too.
 # If a module is built for 32-bit, the required modules must be 32-bit too;
-# Otherwise if the module is an exectuable or shared library,
+# Otherwise if the module is an executable or shared library,
 #   the required modules must be 64-bit;
 #   otherwise we require both 64-bit and 32-bit variant, if one exists.
+define select-bitness-of-required-modules
 $(foreach m,$(ALL_MODULES),\
   $(eval r := $(ALL_MODULES.$(m).REQUIRED))\
   $(if $(r),\
@@ -528,6 +529,8 @@ $(foreach m,$(ALL_MODULES),\
      $(eval ALL_MODULES.$(m).REQUIRED := $(strip $(r_r)))\
   )\
 )
+endef
+$(call select-bitness-of-required-modules)
 r_r :=
 
 define add-required-deps
@@ -542,24 +545,61 @@ define add-required-host-so-deps
 $(1): $(2)
 endef
 
+# Connects dependencies for host modules that require other host modules
+define add-all-host-to-host-required-modules-deps
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).REQUIRED)) \
+  $(if $(r), \
+    $(eval r := $(call module-installed-files,$(r))) \
+    $(eval h_m := $(filter $(HOST_OUT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
+    $(eval hc_m := $(filter $(HOST_CROSS_OUT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
+    $(eval h_r := $(filter $(HOST_OUT)/%, $(r))) \
+    $(eval hc_r := $(filter $(HOST_CROSS_OUT)/%, $(r))) \
+    $(eval h_m := $(filter-out $(h_r), $(h_m))) \
+    $(eval hc_m := $(filter-out $(hc_r), $(hc_m))) \
+    $(if $(h_m), $(eval $(call add-required-deps, $(h_m),$(h_r)))) \
+    $(if $(hc_m), $(eval $(call add-required-deps, $(hc_m),$(hc_r)))) \
+   ) \
+ )
+endef
+$(call add-all-host-to-host-required-modules-deps)
+
+# Connects dependencies for target modules that require other target modules
+define add-all-target-to-target-required-modules-deps
 $(foreach m,$(ALL_MODULES), \
   $(eval r := $(ALL_MODULES.$(m).REQUIRED)) \
   $(if $(r), \
     $(eval r := $(call module-installed-files,$(r))) \
     $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
-    $(eval h_m := $(filter $(HOST_OUT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
-    $(eval hc_m := $(filter $(HOST_CROSS_OUT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
     $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r))) \
-    $(eval h_r := $(filter $(HOST_OUT)/%, $(r))) \
-    $(eval hc_r := $(filter $(HOST_CROSS_OUT)/%, $(r))) \
     $(eval t_m := $(filter-out $(t_r), $(t_m))) \
-    $(eval h_m := $(filter-out $(h_r), $(h_m))) \
-    $(eval hc_m := $(filter-out $(hc_r), $(hc_m))) \
     $(if $(t_m), $(eval $(call add-required-deps, $(t_m),$(t_r)))) \
-    $(if $(h_m), $(eval $(call add-required-deps, $(h_m),$(h_r)))) \
-    $(if $(hc_m), $(eval $(call add-required-deps, $(hc_m),$(hc_r)))) \
    ) \
  )
+endef
+$(call add-all-target-to-target-required-modules-deps)
+
+# Connects dependencies for target modules that require other target modules
+# $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
+
+#  $(if $(ALL_MODULES.$(m).INSTALLED),\
+#    $(info found installed modules $(ALL_MODULES.$(m).INSTALLED) for module $(m)))\
+
+define add-all-host-to-target-required-modules-deps
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).TARGET_REQUIRED)) \
+  $(if $(r), \
+    $(eval r := $(call module-installed-files,$(r))) \
+    $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r))) \
+    $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
+    $(eval t_m := $(filter-out $(t_r), $(t_m))) \
+    $(shell echo "hi Jeff r=$(r) t_m=$(t_m) t_r=$(t_r)" >>/tmp/log)\
+    $(if $(t_m), $(eval $(call add-required-deps, $(t_m),$(t_r)))) \
+   ) \
+ )
+endef
+$(call add-all-host-to-target-required-modules-deps)
+
 
 t_m :=
 h_m :=
