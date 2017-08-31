@@ -48,3 +48,5 @@ endef
 TARGET_PACK_MODULE_RELOCATIONS := true
 
 TARGET_LINKER := /system/bin/linker64
+
+TARGET_SUPPORTS_PAGERANDO := true

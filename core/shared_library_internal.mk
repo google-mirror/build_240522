@@ -36,15 +36,31 @@ ifndef skip_build_from_source
 # to simplify the link line.
 OVERRIDE_BUILT_MODULE_PATH := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OUT_INTERMEDIATE_LIBRARIES)
 
+# Determine if pagerando should be used for this library
+include $(BUILD_SYSTEM)/pagerando.mk
+ifeq ($(LOCAL_PAGERANDO),true)
+  LOCAL_PAGERANDO_STATIC_SUFFIX := _pagerando
+endif
+
 include $(BUILD_SYSTEM)/dynamic_binary.mk
 
 # Define PRIVATE_ variables from global vars
 ifeq ($(LOCAL_NO_LIBGCC),true)
 my_target_libgcc :=
 else
-my_target_libgcc := $(call intermediates-dir-for,STATIC_LIBRARIES,libgcc,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libgcc.a
+  my_target_libgcc := $(call intermediates-dir-for,STATIC_LIBRARIES,libgcc,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libgcc.a
+  ifeq ($(LOCAL_PAGERANDO),true)
+    ifndef PAGERANDO.libgcc.$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED
+      my_target_libgcc := $(call intermediates-dir-for,STATIC_LIBRARIES,libgcc,,,$(LOCAL_2ND_ARCH_VAR_PREFIX),,$(LOCAL_PAGERANDO_STATIC_SUFFIX))/libgcc.a
+    endif
+  endif
 endif
 my_target_libatomic := $(call intermediates-dir-for,STATIC_LIBRARIES,libatomic,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libatomic.a
+ifeq ($(LOCAL_PAGERANDO),true)
+  ifndef PAGERANDO.libatomic.$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED
+    my_target_libatomic := $(call intermediates-dir-for,STATIC_LIBRARIES,libatomic,,,$(LOCAL_2ND_ARCH_VAR_PREFIX),,$(LOCAL_PAGERANDO_STATIC_SUFFIX))/libatomic.a
+  endif
+endif
 ifeq ($(LOCAL_NO_CRT),true)
 my_target_crtbegin_so_o :=
 my_target_crtend_so_o :=

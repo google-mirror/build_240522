@@ -481,6 +481,22 @@ endif
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 include $(BUILD_SYSTEM)/config_sanitizers.mk
 
+ifeq ($(LOCAL_PAGERANDO),true)
+  ifeq ($(my_clang),true)
+    my_cflags += -flto -fpagerando
+    my_ldflags += -flto -Wl,--plugin-opt,pagerando
+
+    # Clang doe not pass correct emulated TLS option in LTO mode, so force
+    # emulated TLS
+    my_ldflags += -Wl,-plugin-opt,-emulated-tls
+  else
+    LOCAL_PAGERANDO_STATIC_SUFFIX :=
+  endif
+
+  my_arflags += --plugin $(LLVM_PREBUILTS_PATH)/../lib64/LLVMgold.so
+endif
+
+
 ifneq ($(LOCAL_NO_LIBCOMPILER_RT),true)
 # Add in libcompiler_rt for all regular device builds
 ifeq (,$(WITHOUT_LIBCOMPILER_RT))
@@ -1390,7 +1406,9 @@ import_includes_deps := $(strip \
     $(foreach l, $(installed_shared_library_module_names), \
       $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes) \
     $(foreach l, $(my_static_libraries) $(my_whole_static_libraries), \
-      $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes) \
+      $(if $(PAGERANDO.$(l).$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED), \
+        $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes, \
+        $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross),$(LOCAL_PAGERANDO_STATIC_SUFFIX))/export_includes)) \
     $(foreach l, $(my_header_libraries), \
       $(call intermediates-dir-for,HEADER_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes))
 $(import_includes): PRIVATE_IMPORT_EXPORT_INCLUDES := $(import_includes_deps)
@@ -1568,8 +1586,12 @@ endif
 
 built_static_libraries := \
     $(foreach lib,$(my_static_libraries), \
-      $(call intermediates-dir-for, \
-        STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/$(lib)$(a_suffix))
+      $(if $(PAGERANDO.$(lib).$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED), \
+	$(call intermediates-dir-for, \
+		STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/$(lib)$(a_suffix), \
+	$(call intermediates-dir-for, \
+		STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross),$(LOCAL_PAGERANDO_STATIC_SUFFIX))/$(lib)$(a_suffix)))
+
 
 ifdef LOCAL_SDK_VERSION
 built_static_libraries += $(my_ndk_stl_static_lib)
@@ -1577,8 +1599,11 @@ endif
 
 built_whole_libraries := \
     $(foreach lib,$(my_whole_static_libraries), \
-      $(call intermediates-dir-for, \
-        STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/$(lib)$(a_suffix))
+      $(if $(PAGERANDO.$(lib).$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED), \
+        $(call intermediates-dir-for, \
+          STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/$(lib)$(a_suffix), \
+        $(call intermediates-dir-for, \
+          STATIC_LIBRARIES,$(lib),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross),$(LOCAL_PAGERANDO_STATIC_SUFFIX))/$(lib)$(a_suffix)))
 
 # We don't care about installed static libraries, since the
 # libraries have already been linked into the module at that point.
@@ -1789,7 +1814,9 @@ $(export_includes): PRIVATE_EXPORT_CFLAGS := $(export_cflags)
 # Headers exported by whole static libraries are also exported by this library.
 export_include_deps := $(strip \
    $(foreach l,$(my_whole_static_libraries), \
-     $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes))
+     $(if $(PAGERANDO.$(l).$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED), \
+       $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes, \
+       $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross),$(LOCAL_PAGERANDO_STATIC_SUFFIX))/export_includes)))
 # Re-export requested headers from shared libraries.
 export_include_deps += $(strip \
    $(foreach l,$(LOCAL_EXPORT_SHARED_LIBRARY_HEADERS), \
@@ -1797,7 +1824,9 @@ export_include_deps += $(strip \
 # Re-export requested headers from static libraries.
 export_include_deps += $(strip \
    $(foreach l,$(LOCAL_EXPORT_STATIC_LIBRARY_HEADERS), \
-     $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes))
+     $(if $(PAGERANDO.$(l).$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH).DISABLED), \
+       $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))/export_includes, \
+       $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross),$(LOCAL_PAGERANDO_STATIC_SUFFIX))/export_includes)))
 # Re-export requested headers from header libraries.
 export_include_deps += $(strip \
    $(foreach l,$(LOCAL_EXPORT_HEADER_LIBRARY_HEADERS), \
