@@ -17,7 +17,7 @@ endif
 # know its results before base_rules.mk is included.
 include $(BUILD_SYSTEM)/configure_module_stem.mk
 
-intermediates := $(call local-intermediates-dir,,$(LOCAL_2ND_ARCH_VAR_PREFIX))
+intermediates := $(call local-intermediates-dir,,$(LOCAL_2ND_ARCH_VAR_PREFIX),,$(LOCAL_PAGERANDO_INTERMEDIATES_SUFFIX))
 
 # Define the target that is the unmodified output of the linker.
 # The basename of this target must be the same as the final output
