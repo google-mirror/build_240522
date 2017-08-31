@@ -534,6 +534,7 @@ endef
 # $(4): if non-empty, force the intermediates to be COMMON
 # $(5): if non-empty, force the intermediates to be for the 2nd arch
 # $(6): if non-empty, force the intermediates to be for the host cross os
+# $(7): suffix to add to target class
 define intermediates-dir-for
 $(strip \
     $(eval _idfClass := $(strip $(1))) \
@@ -551,7 +552,8 @@ $(strip \
        ,$(eval _idfIntBase := $($(_idfPrefix)_OUT_INTERMEDIATES)) \
        ) \
      ) \
-    $(_idfIntBase)/$(_idfClass)/$(_idfName)_intermediates \
+    $(eval _idfClassSuffix := $(strip $(7))) \
+    $(_idfIntBase)/$(_idfClass)$(_idfClassSuffix)/$(_idfName)_intermediates \
 )
 endef
 
@@ -561,13 +563,14 @@ endef
 # $(1): if non-empty, force the intermediates to be COMMON
 # $(2): if non-empty, force the intermediates to be for the 2nd arch
 # $(3): if non-empty, force the intermediates to be for the host cross os
+# $(4): suffix to add to target class
 define local-intermediates-dir
 $(strip \
     $(if $(strip $(LOCAL_MODULE_CLASS)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS not defined before call to local-intermediates-dir)) \
     $(if $(strip $(LOCAL_MODULE)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE not defined before call to local-intermediates-dir)) \
-    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(call def-host-aux-target),$(1),$(2),$(3)) \
+    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(call def-host-aux-target),$(1),$(2),$(3),$(4)) \
 )
 endef
 
@@ -1555,7 +1558,7 @@ $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;
         $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) p $$lib_to_include $$f > $$ldir/$$ext$$f; \
         filelist="$$filelist $$ldir/$$ext$$f"; \
     done ; \
-    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) \
+    $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_GLOBAL_ARFLAGS) $(PRIVATE_ARFLAGS) \
         $(2) $$filelist
 
 endef

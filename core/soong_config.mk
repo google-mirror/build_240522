@@ -104,6 +104,7 @@ $(call add_json_bool, Uml,                               $(filter true,$(TARGET_
 $(call add_json_str,  VendorPath,                        $(TARGET_COPY_OUT_VENDOR))
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
+$(call add_json_bool, Pagerando,                         $(filter-out false,$(PAGERANDO)))
 
 _contents := $(subst $(comma)$(newline)__SV_END,$(newline)}$(newline),$(_contents)__SV_END)
 
