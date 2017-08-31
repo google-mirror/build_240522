@@ -13,6 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+PRODUCT_COPY_FILES += \
+    development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
+    prebuilts/qemu-kernel/mips/3.18/kernel-qemu2:kernel-ranchu \
+    device/generic/goldfish/fstab.ranchu.arm:root/fstab.ranchu \
+    device/generic/goldfish/fstab.ranchu.early.arm:root/fstab.ranchu.early
+
 include $(SRC_TARGET_DIR)/product/full_mips.mk
 
 PRODUCT_NAME := aosp_mips

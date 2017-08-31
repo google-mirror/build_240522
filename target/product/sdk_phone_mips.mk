@@ -14,6 +14,12 @@
 # limitations under the License.
 #
 
+PRODUCT_COPY_FILES += \
+    development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
+    prebuilts/qemu-kernel/mips/3.18/kernel-qemu2:kernel-ranchu \
+    device/generic/goldfish/fstab.ranchu.arm:root/fstab.ranchu \
+    device/generic/goldfish/fstab.ranchu.early.arm:root/fstab.ranchu.early
+
 # This is a build configuration for a full-featured build of the
 # Open-Source part of the tree. It's geared toward a US-centric
 # build quite specifically for the emulator, and might not be
