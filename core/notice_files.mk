@@ -49,7 +49,7 @@ else
     # We can't use xxx_OUT_STATIC_LIBRARIES because it points into
     # device-obj or host-obj.
     module_installed_filename := \
-        $(patsubst $(PRODUCT_OUT)/%,%,$($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_SHARED_LIBRARIES))/$(notdir $(LOCAL_BUILT_MODULE))
+        $(patsubst $(PRODUCT_OUT)/%,%,$($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_SHARED_LIBRARIES))/$(notdir $(LOCAL_BUILT_MODULE)$(LOCAL_PAGERANDO_MODULE_SUFFIX))
   else
     ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
       # Stick the static java libraries with the regular java libraries.

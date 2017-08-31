@@ -86,6 +86,7 @@ $(SOONG_VARIABLES): FORCE
 	echo '    "Treble": $(if $(filter true,$(PRODUCT_FULL_TREBLE)),true,false),'; \
 	echo '    "Pdk": $(if $(filter true,$(TARGET_BUILD_PDK)),true,false),'; \
 	echo '    "Uml": $(if $(filter true,$(TARGET_USER_MODE_LINUX)),true,false),'; \
+	echo '    "Pagerando": $(if $(filter true,$(PAGERANDO)),true,false),'; \
 	echo ''; \
 	echo '    "ArtUseReadBarrier": $(if $(filter false,$(PRODUCT_ART_USE_READ_BARRIER)),false,true),'; \
 	echo ''; \
