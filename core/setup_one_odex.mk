@@ -32,9 +32,49 @@ $(my_built_odex) : $($(my_2nd_arch_prefix)DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BO
     $(DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS) \
     $(my_dex_preopt_image_filename)
 
-# Pass special class loader context to skip the classpath and collision check.
-# Should modify build system to pass used libraries properly later.
+
+# For the system server, we know all modules. Detect these modules and construct
+# an actual classloader context.
+ifneq (,$(filter $(PRODUCT_SYSTEM_SERVER_JARS),$(LOCAL_MODULE)))
+$(warning Detected system server jar: $(LOCAL_MODULE) in $(PRODUCT_SYSTEM_SERVER_JARS))
+classpath_modules :=
+classpath_modules_go_on := true
+define check-and-save-module
+  ifeq ($$(classpath_modules_go_on),true)
+    ifneq ($(1),$(LOCAL_MODULE))
+      classpath_modules := $$(classpath_modules) $(1)
+    else
+      classpath_modules_go_on := false
+    endif
+  endif
+
+endef
+$(eval $(foreach module,$(PRODUCT_SYSTEM_SERVER_JARS),$(call check-and-save-module,$(module))))
+
+# Transform the dependencies to their classes.dex files. This is computing intermediates
+# for other modules, which isn't great.
+classpath_dex := $(foreach module,$(classpath_modules),$(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(module),$(call def-host-aux-target),COMMON,,)/classes.dex)
+
+# Add these as build dependencies.
+define add_dex_dependency
+$(my_built_odex) : $(1)
+
+endef
+$(eval $(foreach dex,$(classpath_dex),$(call add_dex_dependency,$(dex))))
+
+# Construct a classloader context.
+space :=
+space +=
+classpath_list := $(subst $(space),:,$(classpath_dex))
+$(warning $(classpath_list))
+
+# $(call intermediates-dir-for,$(BUILD_TARGET_BITS),$(LOCAL_MODULE))
 $(my_built_odex): PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT := \&
+else
+# Otherwise, pass special class loader context to skip the classpath and collision
+# check. Should modify build system to pass used libraries properly later.
+$(my_built_odex): PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT := \&
+endif
 
 my_installed_odex := $(call get-odex-installed-file-path,$($(my_2nd_arch_prefix)DEX2OAT_TARGET_ARCH),$(LOCAL_INSTALLED_MODULE))
 
