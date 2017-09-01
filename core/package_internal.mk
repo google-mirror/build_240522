@@ -122,7 +122,24 @@ ifneq ($(PRODUCT_ENFORCE_RRO_TARGETS),)
   endif
 endif
 
-ifndef enforce_rro_enabled
+ifdef enforce_rro_enabled
+  ifneq ($(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS),)
+    static_only_dirs := $(foreach _dir, $(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS), $(_dir)%)
+    static_only_resource_overlays := $(strip $(foreach _res_path, $(package_resource_overlays), \
+        $(if $(filter $(static_only_dirs),$(_res_path)),$(_res_path))))
+    ifneq ($(static_only_resource_overlays),)
+      rro_resource_overlays := $(strip $(foreach _res_path, $(package_resource_overlays), \
+          $(if $(filter $(static_only_resource_overlays),$(_res_path)),,$(_res_path))))
+      ifneq ($(rro_resource_overlays),)
+        package_resource_overlays := $(rro_resource_overlays)
+        LOCAL_RESOURCE_DIR := $(static_only_resource_overlays) $(LOCAL_RESOURCE_DIR)
+      else
+        enforce_rro_enabled :=
+        LOCAL_RESOURCE_DIR := $(package_resource_overlays) $(LOCAL_RESOURCE_DIR)
+      endif
+    endif
+  endif
+else
 LOCAL_RESOURCE_DIR := $(package_resource_overlays) $(LOCAL_RESOURCE_DIR)
 endif
 
