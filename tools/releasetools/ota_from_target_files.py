@@ -1500,7 +1500,7 @@ def main(argv):
   cache_size = OPTIONS.info_dict.get("cache_size", None)
   if cache_size is None:
     print("--- can't determine the cache partition size ---")
-  OPTIONS.cache_size = cache_size
+  OPTIONS.cache_size = 100 * 1024*1024 #cache_size
 
   # Generate a verify package.
   if OPTIONS.gen_verify:
@@ -1551,6 +1551,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+  tempfile.tempdir = "/usr/local/google/home/xunchang/1/tmp2/"
   try:
     common.CloseInheritedPipes()
     main(sys.argv[1:])

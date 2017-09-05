@@ -176,11 +176,14 @@ class DataImage(Image):
       return sha1(self.data).hexdigest()
 
   def WriteRangeDataToFd(self, ranges, fd):
-    for data in self._GetRangeData(ranges):
+    for s, e in ranges:
+      data = self.data[s*self.blocksize:e*self.blocksize]
       fd.write(data)
 
 
 class Transfer(object):
+  id_lock = threading.Lock()
+
   def __init__(self, tgt_name, src_name, tgt_ranges, src_ranges, tgt_sha1,
                src_sha1, style, by_id):
     self.tgt_name = tgt_name
@@ -201,8 +204,14 @@ class Transfer(object):
     self.stash_before = []
     self.use_stash = []
 
-    self.id = len(by_id)
-    by_id.append(self)
+    with Transfer.id_lock:
+      self.id = len(by_id)
+      by_id.append(self)
+
+    self.patch = None
+  def SetPatch(self, patch):
+    assert self.style == "diff"
+    self.patch = patch
 
   def NetStashChange(self):
     return (sum(sr.size() for (_, sr) in self.stash_before) -
@@ -335,8 +344,8 @@ class BlockImageDiff(object):
     self.ImproveVertexSequence()
 
     # Ensure the runtime stash size is under the limit.
-    if common.OPTIONS.cache_size is not None:
-      self.ReviseStashSize()
+    #if common.OPTIONS.cache_size is not None:
+    #  self.ReviseStashSize()
 
     # Double-check our work.
     self.AssertSequenceGood()
@@ -702,6 +711,7 @@ class BlockImageDiff(object):
                        xf.tgt_name.split(".")[-1].lower()
                        in ("apk", "jar", "zip"))
             xf.style = "imgdiff" if imgdiff else "bsdiff"
+
             diff_queue.append((index, imgdiff, patch_num))
             patch_num += 1
 
@@ -737,26 +747,26 @@ class BlockImageDiff(object):
             xf_index, imgdiff, patch_index = diff_queue.pop()
 
           xf = self.transfers[xf_index]
-          src_ranges = xf.src_ranges
-          tgt_ranges = xf.tgt_ranges
-
-          # Needs lock since WriteRangeDataToFd() is stateful (calling seek).
-          with lock:
-            src_file = common.MakeTempFile(prefix="src-")
-            with open(src_file, "wb") as fd:
-              self.src.WriteRangeDataToFd(src_ranges, fd)
-
-            tgt_file = common.MakeTempFile(prefix="tgt-")
-            with open(tgt_file, "wb") as fd:
-              self.tgt.WriteRangeDataToFd(tgt_ranges, fd)
-
-          try:
-            patch = compute_patch(src_file, tgt_file, imgdiff)
-          except ValueError as e:
+          patch = xf.patch
+          if not patch:
+            src_ranges = xf.src_ranges
+            tgt_ranges = xf.tgt_ranges
             with lock:
-              error_messages.append(
-                  "Failed to generate %s for %s: tgt=%s, src=%s:\n%s" % (
-                      "imgdiff" if imgdiff else "bsdiff",
+              src_file = common.MakeTempFile(prefix="src-")
+              with open(src_file, "wb") as fd:
+                self.src.WriteRangeDataToFd(src_ranges, fd)
+
+              tgt_file = common.MakeTempFile(prefix="tgt-")
+              with open(tgt_file, "wb") as fd:
+                self.tgt.WriteRangeDataToFd(tgt_ranges, fd)
+
+            try:
+              patch = compute_patch(src_file, tgt_file, imgdiff)
+            except ValueError as e:
+              with lock:
+                error_messages.append(
+                    "Failed to generate %s for %s: tgt=%s, src=%s:\n%s" % (
+                        "imgdiff" if imgdiff else "bsdiff",
                       xf.tgt_name if xf.tgt_name == xf.src_name else
                           xf.tgt_name + " (from " + xf.src_name + ")",
                       xf.tgt_ranges, xf.src_ranges, e.message))
@@ -816,7 +826,6 @@ class BlockImageDiff(object):
     # Imagine processing the transfers in order.
     for xf in self.transfers:
       # Check that the input blocks for this transfer haven't yet been touched.
-
       x = xf.src_ranges
       for _, sr in xf.use_stash:
         x = x.subtract(sr)
@@ -839,7 +848,7 @@ class BlockImageDiff(object):
     # Check that we've written every target block.
     for s, e in self.tgt.care_map:
       for i in range(s, e):
-        assert touched[i] == 1
+        assert touched[i] == 1, "index: " + str(i)
 
   def ImproveVertexSequence(self):
     print("Improving vertex order...")
@@ -1124,6 +1133,8 @@ class BlockImageDiff(object):
   def FindTransfers(self):
     """Parse the file_map to generate all the transfers."""
 
+    write_lock = threading.Lock()
+
     def AddSplitTransfers(tgt_name, src_name, tgt_ranges, src_ranges,
                           style, by_id):
       """Add one or multiple Transfer()s by splitting large files.
@@ -1151,20 +1162,105 @@ class BlockImageDiff(object):
       if (tgt_ranges.size() <= max_blocks_per_transfer and
           src_ranges.size() <= max_blocks_per_transfer):
         Transfer(tgt_name, src_name, tgt_ranges, src_ranges,
-                 self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
-                 style, by_id)
+               self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
+               style, by_id)
         return
 
+      if not self.disable_imgdiff and src_ranges.monotonic and tgt_ranges.monotonic and \
+          self.tgt.RangeSha1(tgt_ranges) != self.src.RangeSha1(src_ranges) and\
+          tgt_name.split(".")[-1].lower() in ("apk", "jar", "zip"):
+
+        #with write_lock:
+        print("within lock {}, lock status {}".format(threading.current_thread(),
+                                                    write_lock.locked()))
+        src_file = common.MakeTempFile(prefix="src-")
+        with open(src_file, "wb") as src_fd:
+          print("{} {} {}".format(src_name, src_file, src_ranges))
+          self.src.WriteRangeDataToFd(src_ranges, src_fd, True)
+
+        tgt_file = common.MakeTempFile(prefix="tgt-")
+        with open(tgt_file, "wb") as tgt_fd:
+          print("{} {} {}".format(tgt_name, tgt_file, tgt_ranges))
+          self.tgt.WriteRangeDataToFd(tgt_ranges, tgt_fd, True)
+
+        print("about to out lock {}, lock status {}".format(threading.current_thread(),
+                                                      write_lock.locked()))
+
+
+
+        patch_file = common.MakeTempFile(prefix="patch-")
+        patch_info_file = common.MakeTempFile(prefix="patch_info-")
+        cmd = ["imgdiff", "-z", "-l", str(max_blocks_per_transfer), "-i",
+               patch_info_file, src_file, tgt_file, patch_file]
+        p = common.Run(cmd, verbose=False, stdout=subprocess.PIPE)
+        output, _ = p.communicate()
+
+        if p.returncode != 0:
+          raise ValueError("error")
+
+        print("tgt_total: " + tgt_ranges.to_string())
+        with open(patch_info_file) as patch_info:
+          lines = patch_info.readlines()
+          print(patch_info_file)
+          num = int(lines[0])
+          assert len(lines) - 1 == num
+          tgt_offset = 0
+          patch_offset = 0
+          tgt_remain = RangeSet.parse(tgt_ranges.to_string())
+          patch_size_total = os.path.getsize(patch_file)
+          tgt_size_total = os.path.getsize(tgt_file)
+
+          for line in lines[1:]:
+            split_info = line.strip().split()
+            assert len(split_info) == 3
+            tgt_split_blocks = int(split_info[0].strip())
+            patch_split_size = int(split_info[1].strip())
+            src_split_position = RangeSet.parse_raw(split_info[2].strip())
+
+
+            assert tgt_split_blocks <= tgt_remain.size()
+            tgt_split_ranges = tgt_remain.first(tgt_split_blocks)
+            tgt_remain = tgt_remain.subtract(tgt_split_ranges)
+
+            src_split_ranges = RangeSet()
+            for r in src_split_position:
+              assert r[1] <= src_ranges.size()
+              curr_range = src_ranges.first(r[1]).subtract(src_ranges.first(r[0]))
+              src_split_ranges = src_split_ranges.union(curr_range)
+
+
+            with open(patch_file) as f:
+              f.seek(patch_offset)
+              patch_content = f.read(patch_split_size)
+
+            tgt_offset += tgt_split_blocks
+            patch_offset += patch_split_size
+
+            src_split_name = "{}-{}".format(src_name, pieces)
+            tgt_split_name = "{}-{}".format(tgt_name, pieces)
+            transfer_split = Transfer(tgt_split_name, src_split_name, tgt_split_ranges,
+                                      src_split_ranges, self.tgt.RangeSha1(tgt_split_ranges),
+                                      self.src.RangeSha1(src_split_ranges), "diff", by_id)
+            transfer_split.SetPatch(patch_content)
+
+            pieces += 1
+
+          assert tgt_offset == tgt_ranges.size()
+          assert patch_offset == patch_size_total
+          assert tgt_offset * 4096 == tgt_size_total
+          print("patch_size: {} tgt_size: {} ratio: {}\n".format(patch_size_total, tgt_size_total,
+                  patch_size_total*100.0/tgt_size_total))
+
+        return
       while (tgt_ranges.size() > max_blocks_per_transfer and
              src_ranges.size() > max_blocks_per_transfer):
         tgt_split_name = "%s-%d" % (tgt_name, pieces)
         src_split_name = "%s-%d" % (src_name, pieces)
         tgt_first = tgt_ranges.first(max_blocks_per_transfer)
         src_first = src_ranges.first(max_blocks_per_transfer)
-
         Transfer(tgt_split_name, src_split_name, tgt_first, src_first,
-                 self.tgt.RangeSha1(tgt_first), self.src.RangeSha1(src_first),
-                 style, by_id)
+               self.tgt.RangeSha1(tgt_first), self.src.RangeSha1(src_first),
+               style, by_id)
 
         tgt_ranges = tgt_ranges.subtract(tgt_first)
         src_ranges = src_ranges.subtract(src_first)
@@ -1177,8 +1273,8 @@ class BlockImageDiff(object):
         tgt_split_name = "%s-%d" % (tgt_name, pieces)
         src_split_name = "%s-%d" % (src_name, pieces)
         Transfer(tgt_split_name, src_split_name, tgt_ranges, src_ranges,
-                 self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
-                 style, by_id)
+               self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
+               style, by_id)
 
     def AddTransfer(tgt_name, src_name, tgt_ranges, src_ranges, style, by_id,
                     split=False):
@@ -1188,8 +1284,8 @@ class BlockImageDiff(object):
       # otherwise add the Transfer() as is.
       if style != "diff" or not split:
         Transfer(tgt_name, src_name, tgt_ranges, src_ranges,
-                 self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
-                 style, by_id)
+               self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
+               style, by_id)
         return
 
       # Handle .odex files specially to analyze the block-wise difference. If
@@ -1249,50 +1345,68 @@ class BlockImageDiff(object):
           tgt_name, src_name, tgt_ranges, src_ranges, style, by_id)
 
     print("Finding transfers...")
-
-    empty = RangeSet()
+    transfer_queue = []
     for tgt_fn, tgt_ranges in self.tgt.file_map.items():
-      if tgt_fn == "__ZERO":
-        # the special "__ZERO" domain is all the blocks not contained
-        # in any file and that are filled with zeros.  We have a
-        # special transfer style for zero blocks.
-        src_ranges = self.src.file_map.get("__ZERO", empty)
-        AddTransfer(tgt_fn, "__ZERO", tgt_ranges, src_ranges,
-                    "zero", self.transfers)
-        continue
+      transfer_queue.append((tgt_fn, tgt_ranges))
 
-      elif tgt_fn == "__COPY":
-        # "__COPY" domain includes all the blocks not contained in any
-        # file and that need to be copied unconditionally to the target.
+    def AddTransferParallel():
+      empty = RangeSet()
+      while True:
+        with write_lock:
+          if not transfer_queue:
+            return
+          tgt_fn, tgt_ranges = transfer_queue.pop(0)
+
+        if tgt_fn == "__ZERO":
+          # the special "__ZERO" domain is all the blocks not contained
+          # in any file and that are filled with zeros.  We have a
+          # special transfer style for zero blocks.
+          src_ranges = self.src.file_map.get("__ZERO", empty)
+          AddTransfer(tgt_fn, "__ZERO", tgt_ranges, src_ranges,
+                      "zero", self.transfers)
+          continue
+
+        elif tgt_fn == "__COPY":
+          # "__COPY" domain includes all the blocks not contained in any
+          # file and that need to be copied unconditionally to the target.
+          AddTransfer(tgt_fn, None, tgt_ranges, empty, "new", self.transfers)
+          continue
+
+        elif tgt_fn in self.src.file_map:
+          # Look for an exact pathname match in the source.
+          AddTransfer(tgt_fn, tgt_fn, tgt_ranges, self.src.file_map[tgt_fn],
+                      "diff", self.transfers, True)
+          continue
+
+        b = os.path.basename(tgt_fn)
+        if b in self.src_basenames:
+          # Look for an exact basename match in the source.
+          src_fn = self.src_basenames[b]
+          AddTransfer(tgt_fn, src_fn, tgt_ranges, self.src.file_map[src_fn],
+                      "diff", self.transfers, True)
+          continue
+
+        b = re.sub("[0-9]+", "#", b)
+        if b in self.src_numpatterns:
+          # Look for a 'number pattern' match (a basename match after
+          # all runs of digits are replaced by "#").  (This is useful
+          # for .so files that contain version numbers in the filename
+          # that get bumped.)
+          src_fn = self.src_numpatterns[b]
+          AddTransfer(tgt_fn, src_fn, tgt_ranges, self.src.file_map[src_fn],
+                      "diff", self.transfers, True)
+          continue
+
         AddTransfer(tgt_fn, None, tgt_ranges, empty, "new", self.transfers)
-        continue
 
-      elif tgt_fn in self.src.file_map:
-        # Look for an exact pathname match in the source.
-        AddTransfer(tgt_fn, tgt_fn, tgt_ranges, self.src.file_map[tgt_fn],
-                    "diff", self.transfers, True)
-        continue
+    threads = [threading.Thread(target=AddTransferParallel)
+                 for _ in range(10)]
 
-      b = os.path.basename(tgt_fn)
-      if b in self.src_basenames:
-        # Look for an exact basename match in the source.
-        src_fn = self.src_basenames[b]
-        AddTransfer(tgt_fn, src_fn, tgt_ranges, self.src.file_map[src_fn],
-                    "diff", self.transfers, True)
-        continue
+    for th in threads:
+      th.start()
 
-      b = re.sub("[0-9]+", "#", b)
-      if b in self.src_numpatterns:
-        # Look for a 'number pattern' match (a basename match after
-        # all runs of digits are replaced by "#").  (This is useful
-        # for .so files that contain version numbers in the filename
-        # that get bumped.)
-        src_fn = self.src_numpatterns[b]
-        AddTransfer(tgt_fn, src_fn, tgt_ranges, self.src.file_map[src_fn],
-                    "diff", self.transfers, True)
-        continue
-
-      AddTransfer(tgt_fn, None, tgt_ranges, empty, "new", self.transfers)
+    while threads:
+      threads.pop().join()
 
   def AbbreviateSourceNames(self):
     for k in self.src.file_map.keys():

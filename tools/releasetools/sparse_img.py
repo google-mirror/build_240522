@@ -19,6 +19,7 @@ from hashlib import sha1
 
 import rangelib
 
+import threading
 
 class SparseImage(object):
   """Wraps a sparse image file into an image object.
@@ -30,7 +31,7 @@ class SparseImage(object):
   contents (i.e. copying instead of patching). clobbered_blocks should be in
   the form of a string like "0" or "0 1-5 8".
   """
-
+  generator_lock = threading.Lock()
   def __init__(self, simg_fn, file_map_fn=None, clobbered_blocks=None,
                mode="rb", build_map=True):
     self.simg_f = f = open(simg_fn, mode)
@@ -163,11 +164,11 @@ class SparseImage(object):
       ranges = ranges.subtract(self.clobbered_blocks)
     return self.RangeSha1(ranges)
 
-  def WriteRangeDataToFd(self, ranges, fd):
-    for data in self._GetRangeData(ranges):
+  def WriteRangeDataToFd(self, ranges, fd, verb=False):
+    for data in self._GetRangeData(ranges, verb):
       fd.write(data)
 
-  def _GetRangeData(self, ranges):
+  def _GetRangeData(self, ranges, verb=False):
     """Generator that produces all the image data in 'ranges'.  The
     number of individual pieces returned is arbitrary (and in
     particular is not necessarily equal to the number of ranges in
@@ -176,35 +177,37 @@ class SparseImage(object):
     This generator is stateful -- it depends on the open file object
     contained in this SparseImage, so you should not try to run two
     instances of this generator on the same object simultaneously."""
-
-    f = self.simg_f
-    for s, e in ranges:
-      to_read = e-s
-      idx = bisect.bisect_right(self.offset_index, s) - 1
-      chunk_start, chunk_len, filepos, fill_data = self.offset_map[idx]
-
-      # for the first chunk we may be starting partway through it.
-      remain = chunk_len - (s - chunk_start)
-      this_read = min(remain, to_read)
-      if filepos is not None:
-        p = filepos + ((s - chunk_start) * self.blocksize)
-        f.seek(p, os.SEEK_SET)
-        yield f.read(this_read * self.blocksize)
-      else:
-        yield fill_data * (this_read * (self.blocksize >> 2))
-      to_read -= this_read
-
-      while to_read > 0:
-        # continue with following chunks if this range spans multiple chunks.
-        idx += 1
+    with SparseImage.generator_lock:
+      f = self.simg_f
+      for s, e in ranges:
+        if verb:
+          print("{} {}--{}".format(threading.current_thread(), s,e))
+        to_read = e-s
+        idx = bisect.bisect_right(self.offset_index, s) - 1
         chunk_start, chunk_len, filepos, fill_data = self.offset_map[idx]
-        this_read = min(chunk_len, to_read)
+
+        # for the first chunk we may be starting partway through it.
+        remain = chunk_len - (s - chunk_start)
+        this_read = min(remain, to_read)
         if filepos is not None:
-          f.seek(filepos, os.SEEK_SET)
+          p = filepos + ((s - chunk_start) * self.blocksize)
+          f.seek(p, os.SEEK_SET)
           yield f.read(this_read * self.blocksize)
         else:
           yield fill_data * (this_read * (self.blocksize >> 2))
         to_read -= this_read
+
+        while to_read > 0:
+          # continue with following chunks if this range spans multiple chunks.
+          idx += 1
+          chunk_start, chunk_len, filepos, fill_data = self.offset_map[idx]
+          this_read = min(chunk_len, to_read)
+          if filepos is not None:
+            f.seek(filepos, os.SEEK_SET)
+            yield f.read(this_read * self.blocksize)
+          else:
+            yield fill_data * (this_read * (self.blocksize >> 2))
+          to_read -= this_read
 
   def LoadFileBlockMap(self, fn, clobbered_blocks):
     remaining = self.care_map

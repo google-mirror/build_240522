@@ -882,7 +882,7 @@ def MakeTempFile(prefix='tmp', suffix=''):
   when Cleanup() is called.  Return the filename."""
   fd, fn = tempfile.mkstemp(prefix=prefix, suffix=suffix)
   os.close(fd)
-  OPTIONS.tempfiles.append(fn)
+  #OPTIONS.tempfiles.append(fn)
   return fn
 
 
