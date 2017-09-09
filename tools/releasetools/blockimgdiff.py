@@ -204,6 +204,12 @@ class Transfer(object):
     self.id = len(by_id)
     by_id.append(self)
 
+    self.patch = None
+
+  def SetPatch(self, patch):
+    assert self.style == "diff"
+    self.patch = patch
+
   def NetStashChange(self):
     return (sum(sr.size() for (_, sr) in self.stash_before) -
             sum(sr.size() for (_, sr) in self.use_stash))
@@ -702,6 +708,7 @@ class BlockImageDiff(object):
                        xf.tgt_name.split(".")[-1].lower()
                        in ("apk", "jar", "zip"))
             xf.style = "imgdiff" if imgdiff else "bsdiff"
+
             diff_queue.append((index, imgdiff, patch_num))
             patch_num += 1
 
@@ -737,26 +744,28 @@ class BlockImageDiff(object):
             xf_index, imgdiff, patch_index = diff_queue.pop()
 
           xf = self.transfers[xf_index]
-          src_ranges = xf.src_ranges
-          tgt_ranges = xf.tgt_ranges
+          patch = xf.patch
+          if not patch:
+            src_ranges = xf.src_ranges
+            tgt_ranges = xf.tgt_ranges
 
-          # Needs lock since WriteRangeDataToFd() is stateful (calling seek).
-          with lock:
-            src_file = common.MakeTempFile(prefix="src-")
-            with open(src_file, "wb") as fd:
-              self.src.WriteRangeDataToFd(src_ranges, fd)
-
-            tgt_file = common.MakeTempFile(prefix="tgt-")
-            with open(tgt_file, "wb") as fd:
-              self.tgt.WriteRangeDataToFd(tgt_ranges, fd)
-
-          try:
-            patch = compute_patch(src_file, tgt_file, imgdiff)
-          except ValueError as e:
+            # Needs lock since WriteRangeDataToFd() is stateful (calling seek).
             with lock:
-              error_messages.append(
-                  "Failed to generate %s for %s: tgt=%s, src=%s:\n%s" % (
-                      "imgdiff" if imgdiff else "bsdiff",
+              src_file = common.MakeTempFile(prefix="src-")
+              with open(src_file, "wb") as fd:
+                self.src.WriteRangeDataToFd(src_ranges, fd)
+
+              tgt_file = common.MakeTempFile(prefix="tgt-")
+              with open(tgt_file, "wb") as fd:
+                self.tgt.WriteRangeDataToFd(tgt_ranges, fd)
+
+            try:
+              patch = compute_patch(src_file, tgt_file, imgdiff)
+            except ValueError as e:
+              with lock:
+                error_messages.append(
+                    "Failed to generate %s for %s: tgt=%s, src=%s:\n%s" % (
+                        "imgdiff" if imgdiff else "bsdiff",
                       xf.tgt_name if xf.tgt_name == xf.src_name else
                           xf.tgt_name + " (from " + xf.src_name + ")",
                       xf.tgt_ranges, xf.src_ranges, e.message))
@@ -1124,6 +1133,14 @@ class BlockImageDiff(object):
   def FindTransfers(self):
     """Parse the file_map to generate all the transfers."""
 
+    large_apks = []
+    transfer_lock = threading.Lock()
+
+    cache_size = common.OPTIONS.cache_size
+    split_threshold = 0.125
+    max_blocks_per_transfer = int(cache_size * split_threshold /
+                                  self.tgt.blocksize)
+
     def AddSplitTransfers(tgt_name, src_name, tgt_ranges, src_ranges,
                           style, by_id):
       """Add one or multiple Transfer()s by splitting large files.
@@ -1142,10 +1159,6 @@ class BlockImageDiff(object):
 
       # Possibly split large files into smaller chunks.
       pieces = 0
-      cache_size = common.OPTIONS.cache_size
-      split_threshold = 0.125
-      max_blocks_per_transfer = int(cache_size * split_threshold /
-                                    self.tgt.blocksize)
 
       # Change nothing for small files.
       if (tgt_ranges.size() <= max_blocks_per_transfer and
@@ -1154,6 +1167,14 @@ class BlockImageDiff(object):
                  self.tgt.RangeSha1(tgt_ranges), self.src.RangeSha1(src_ranges),
                  style, by_id)
         return
+
+      if tgt_name.split(".")[-1].lower() in ("apk", "jar", "zip"):
+        split_enable = not self.disable_imgdiff and src_ranges.monotonic and \
+                    tgt_ranges.monotonic
+        if split_enable and (self.tgt.RangeSha1(tgt_ranges) !=
+            self.src.RangeSha1(src_ranges)):
+          large_apks.append((tgt_name, src_name, tgt_ranges, src_ranges))
+          return
 
       while (tgt_ranges.size() > max_blocks_per_transfer and
              src_ranges.size() > max_blocks_per_transfer):
@@ -1248,6 +1269,95 @@ class BlockImageDiff(object):
       AddSplitTransfers(
           tgt_name, src_name, tgt_ranges, src_ranges, style, by_id)
 
+    def ParseAndValidateSplitInfo(patch_size, tgt_ranges, src_ranges, lines):
+      version = int(lines[0])
+      count = int(lines[1])
+      assert len(lines) - 2 == count
+
+      split_info_list = []
+      patch_offset = 0
+      tgt_remain = RangeSet.parse(tgt_ranges.to_string())
+      # each line as the format <patch_size>, <tgt_size>, <src_ranges>
+      for line in lines[2:]:
+        info = line.strip().split()
+        assert len(info) == 3
+        patch_split_size = int(info[0].strip())
+
+        tgt_split_size = int(info[1].strip())
+        assert tgt_split_size % 4096 == 0
+        assert tgt_split_size / 4096 <= tgt_remain.size()
+        tgt_split_ranges = tgt_remain.first(tgt_split_size / 4096)
+        tgt_remain = tgt_remain.subtract(tgt_split_ranges)
+
+        # finding the split_src_ranges within the image file from its relative
+        # position in file.
+        src_split_index = RangeSet.parse_raw(info[2].strip())
+        src_split_ranges = RangeSet()
+        for r in src_split_index:
+          curr_range = src_ranges.first(r[1]).subtract(src_ranges.first(r[0]))
+          assert not src_split_ranges.overlaps(curr_range)
+          src_split_ranges = src_split_ranges.union(curr_range)
+
+        split_info_list.append((patch_offset, patch_split_size,
+                                tgt_split_ranges, src_split_ranges))
+        patch_offset += patch_split_size
+
+      assert tgt_remain.size() == 0
+      assert patch_offset == patch_size
+      return split_info_list
+
+    def AddSplitTransferForLargeApks():
+      while True:
+        with transfer_lock:
+          if not large_apks:
+            return
+          tgt_name, src_name, tgt_ranges, src_ranges = large_apks.pop(0)
+
+        src_file = common.MakeTempFile(prefix="src-")
+        tgt_file = common.MakeTempFile(prefix="tgt-")
+        with transfer_lock:
+          with open(src_file, "wb") as src_fd:
+            self.src.WriteRangeDataToFd(src_ranges, src_fd)
+          with open(tgt_file, "wb") as tgt_fd:
+            self.tgt.WriteRangeDataToFd(tgt_ranges, tgt_fd)
+
+        patch_file = common.MakeTempFile(prefix="patch-")
+        patch_info_file = common.MakeTempFile(prefix="split_info-")
+        cmd = ["imgdiff", "-z",
+               "--block-limit={}".format(max_blocks_per_transfer),
+               "--split-info=" + patch_info_file,
+               src_file, tgt_file, patch_file]
+        p = common.Run(cmd, stdout=subprocess.PIPE)
+        output, _ = p.communicate()
+        if p.returncode != 0:
+          raise ValueError("Failed to create patch between {}, {}".format(
+            src_name, tgt_name))
+
+        with open(patch_info_file) as patch_info:
+          lines = patch_info.readlines()
+
+        patch_size_total = os.path.getsize(patch_file)
+        split_info_list = ParseAndValidateSplitInfo(patch_size_total,
+                                                    tgt_ranges, src_ranges,
+                                                    lines)
+        pieces = 0
+        for patch_offset, patch_split_size, tgt_split_ranges, src_split_ranges\
+            in split_info_list:
+          with open(patch_file) as f:
+            f.seek(patch_offset)
+            patch_content = f.read(patch_split_size)
+
+          src_split_name = "{}-{}".format(src_name, pieces)
+          tgt_split_name = "{}-{}".format(tgt_name, pieces)
+          transfer_split = Transfer(tgt_split_name, src_split_name,
+                                    tgt_split_ranges, src_split_ranges,
+                                    self.tgt.RangeSha1(tgt_split_ranges),
+                                    self.src.RangeSha1(src_split_ranges),
+                                    "diff", self.transfers)
+          transfer_split.SetPatch(patch_content)
+          pieces += 1
+
+
     print("Finding transfers...")
 
     empty = RangeSet()
@@ -1293,6 +1403,14 @@ class BlockImageDiff(object):
         continue
 
       AddTransfer(tgt_fn, None, tgt_ranges, empty, "new", self.transfers)
+
+    threads = [threading.Thread(target=AddSplitTransferForLargeApks)
+                 for _ in range(self.threads)]
+    for th in threads:
+      th.start()
+    while threads:
+      threads.pop().join()
+
 
   def AbbreviateSourceNames(self):
     for k in self.src.file_map.keys():
