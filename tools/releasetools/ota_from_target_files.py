@@ -130,6 +130,10 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
 
   --payload_signer_args <args>
       Specify the arguments needed for payload signer.
+
+  --disable_streaming
+      Disable the generation of streaming property (defaults to False). This is
+      only meaningful for A/B OTAs.
 """
 
 from __future__ import print_function
@@ -182,6 +186,7 @@ OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
+OPTIONS.disable_streaming = False
 
 METADATA_NAME = 'META-INF/com/android/metadata'
 UNZIP_PATTERN = ['IMAGES/*', 'META/*']
@@ -1235,6 +1240,15 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
 
   common.ZipClose(target_zip)
 
+  # Write the metadata, sign the whole package and we're done, if not needing
+  # streaming support.
+  if OPTIONS.disable_streaming:
+    WriteMetadata(metadata, output_zip)
+    common.ZipClose(output_zip)
+    SignOutput(temp_zip_file.name, output_file)
+    temp_zip_file.close()
+    return
+
   # Write the current metadata entry with placeholders.
   metadata['ota-streaming-property-files'] = ComputeStreamingMetadata(
       output_zip, reserve_space=True)
@@ -1347,6 +1361,8 @@ def main(argv):
       OPTIONS.payload_signer_args = shlex.split(a)
     elif o == "--extracted_input_target_files":
       OPTIONS.extracted_input = a
+    elif o == "--disable_streaming":
+      OPTIONS.disable_streaming = True
     else:
       return False
     return True
@@ -1378,6 +1394,7 @@ def main(argv):
                                  "payload_signer=",
                                  "payload_signer_args=",
                                  "extracted_input_target_files=",
+                                 "disable_streaming",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
