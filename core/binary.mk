@@ -370,12 +370,6 @@ ifdef LOCAL_CLANG_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
 my_clang := $(strip $(LOCAL_CLANG_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)))
 endif
 
-# if custom toolchain is in use, default is not to use clang, if not explicitly required
-ifneq ($(my_cc)$(my_cxx),)
-    ifeq ($(my_clang),)
-        my_clang := false
-    endif
-endif
 # Issue warning if LOCAL_CLANG* is set to false and the local makefile is not found
 # in the exception project list.
 ifeq ($(my_clang),false)
