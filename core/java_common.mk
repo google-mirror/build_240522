@@ -156,7 +156,7 @@ annotation_processor_flags :=
 annotation_processor_deps :=
 
 ifdef LOCAL_ANNOTATION_PROCESSORS
-  annotation_processor_jars := $(call java-lib-deps,$(LOCAL_ANNOTATION_PROCESSORS),true)
+  annotation_processor_jars := $(call java-lib-files,$(LOCAL_ANNOTATION_PROCESSORS),true)
   annotation_processor_flags += -processorpath $(call normalize-path-list,$(annotation_processor_jars))
   annotation_processor_deps += $(annotation_processor_jars)
 
@@ -234,8 +234,6 @@ endif
 
 full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
 full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
-full_java_lib_deps := $(call java-lib-deps,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
-full_java_lib_deps := $(addsuffix .toc, $(full_java_lib_deps))
 
 else # LOCAL_IS_HOST_MODULE
 
@@ -263,7 +261,8 @@ endif # !LOCAL_IS_HOST_MODULE
 full_java_libs := $(full_shared_java_libs) $(full_static_java_libs) $(LOCAL_CLASSPATH)
 full_java_header_libs := $(full_shared_java_header_libs) $(full_static_java_header_libs)
 
-full_java_lib_deps := $(full_java_lib_deps) $(full_static_java_libs) $(LOCAL_CLASSPATH)
+# Only host java libraries use full_java_lib_deps.
+full_java_lib_deps := $(full_java_lib_deps) $(LOCAL_CLASSPATH)
 
 ifndef LOCAL_IS_HOST_MODULE
 # This is set by packages that are linking to other packages that export
@@ -274,11 +273,15 @@ ifneq ($(apk_libraries),)
       $(foreach lib,$(apk_libraries), \
         $(call intermediates-dir-for, \
               APPS,$(lib),,COMMON)/classes-pre-proguard.jar)
+  link_apk_header_libs := \
+      $(foreach lib,$(apk_libraries), \
+        $(call intermediates-dir-for, \
+              APPS,$(lib),,COMMON)/classes-header.jar)
 
   # link against the jar with full original names (before proguard processing).
   full_shared_java_libs += $(link_apk_libraries)
   full_java_libs += $(link_apk_libraries)
-  full_java_header_libs += $(link_apk_libraries)
+  full_java_header_libs += $(link_apk_header_libs)
   full_java_lib_deps += $(link_apk_libraries)
 endif
 
@@ -296,8 +299,9 @@ ifdef LOCAL_INSTRUMENTATION_FOR
       APPS,$(LOCAL_INSTRUMENTATION_FOR),,COMMON)
   # link against the jar with full original names (before proguard processing).
   link_instr_classes_jar := $(link_instr_intermediates_dir.COMMON)/classes-pre-proguard.jar
+  link_instr_classes_header_jar := $(link_instr_intermediates_dir.COMMON)/classes-header.jar
   full_java_libs += $(link_instr_classes_jar)
-  full_java_header_libs += $(link_instr_classes_jar)
+  full_java_header_libs += $(link_instr_classes_header_jar)
   full_java_lib_deps += $(link_instr_classes_jar)
 endif  # LOCAL_INSTRUMENTATION_FOR
 endif  # LOCAL_IS_HOST_MODULE
