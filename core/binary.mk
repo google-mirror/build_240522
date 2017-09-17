@@ -1373,7 +1373,7 @@ my_illegal_flags := -w
 my_cflags := $(filter-out $(my_illegal_flags),$(my_cflags))
 my_cppflags := $(filter-out $(my_illegal_flags),$(my_cppflags))
 my_conlyflags := $(filter-out $(my_illegal_flags),$(my_conlyflags))
-
+-include $(TOPDIR)vendor/*/build/core/binary.mk
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
