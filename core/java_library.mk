@@ -93,6 +93,10 @@ ifdef LOCAL_JACK_ENABLED
 endif
 	$(hide) $(ZIPTIME) $@.tmp
 	$(call commit-change-for-toc,$@)
+ifneq (,$(filter $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES), $(LOCAL_MODULE)))
+	$(uncompress-dexs)
+	$(align-package)
+endif  # PRODUCT_LOADED_BY_PRIVILEGED_MODULES
 
 .KATI_RESTAT: $(common_javalib.jar)
 
