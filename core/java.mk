@@ -481,7 +481,8 @@ $(full_classes_turbine_jar): \
     $(NORMALIZE_PATH) \
     $(JAR_ARGS) \
     $(ZIPTIME) \
-    | $(TURBINE)
+    | $(TURBINE) \
+    $(MERGE_ZIPS)
 	$(transform-java-to-header.jar)
 
 .KATI_RESTAT: $(full_classes_turbine_jar)

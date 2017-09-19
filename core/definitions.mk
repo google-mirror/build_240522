@@ -2291,19 +2291,18 @@ define transform-java-to-header.jar
 @mkdir $(dir $@)/classes-turbine
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(JAVA) -jar $(TURBINE) \
-    --output $@.tmp --temp_dir $(dir $@)/classes-turbine -$(PRIVATE_BOOTCLASSPATH) \
+    --output $@.premerged --temp_dir $(dir $@)/classes-turbine -$(PRIVATE_BOOTCLASSPATH) \
     --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
     --javacopts $(PRIVATE_JAVACFLAGS) $(COMMON_JDK_FLAGS) \
     $(addprefix --classpath ,$(strip \
         $(call normalize-path-list,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)))) \
     || ( rm -rf $(dir $@)/classes-turbine ; exit 41 ) \
 fi
-$(hide) $(call unzip-jar-files,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES),$(dir $@)/classes-turbine)
-$(hide) if [ -s $@.tmp ] ; then \
-    unzip -qo $@.tmp -d $(dir $@)/classes-turbine; rm -f $(dir $@)/classes-turbine/module-info.class; \
+$(hide) if [ -s $@.premerged ] ; then \
+    $(MERGE_ZIPS) -j -strip META-INF $@.tmp $@.premerged $(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES) ; \
+else \
+    $(MERGE_ZIPS) -j -strip META-INF $@.tmp $(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES) ; \
 fi
-$(hide) $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,$(hide) rm -rf $(dir $@)/classes-turbine/META-INF)
-$(hide) $(JAR) -cf $@.tmp $(call jar-args-sorted-files-in-directory,$(dir $@)/classes-turbine)
 $(hide) $(ZIPTIME) $@.tmp
 $(hide) $(call commit-change-for-toc,$@)
 endef
