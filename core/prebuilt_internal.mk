@@ -346,6 +346,9 @@ ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
 	$(uncompress-dexs)
 endif  # LOCAL_PRIVILEGED_MODULE
 endif  # DONT_UNCOMPRESS_PRIV_APPS_DEXS
+ifneq (,$(filter $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES), $(LOCAL_MODULE)))
+	$(uncompress-dexs)
+endif  # PRODUCT_LOADED_BY_PRIVILEGED_MODULES
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped

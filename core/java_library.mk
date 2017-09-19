@@ -93,6 +93,9 @@ ifdef LOCAL_JACK_ENABLED
 endif
 	$(hide) $(ZIPTIME) $@.tmp
 	$(call commit-change-for-toc,$@)
+ifneq (,$(filter $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES), $(LOCAL_MODULE)))
+	$(uncompress-dexs)
+endif  # PRODUCT_LOADED_BY_PRIVILEGED_MODULES
 
 .KATI_RESTAT: $(common_javalib.jar)
 
@@ -121,4 +124,5 @@ else # LOCAL_DEX_PREOPT
 $(eval $(call copy-one-file,$(common_javalib.jar),$(LOCAL_BUILT_MODULE)))
 
 endif # LOCAL_DEX_PREOPT
+
 endif # !LOCAL_IS_STATIC_JAVA_LIBRARY
