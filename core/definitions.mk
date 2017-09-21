@@ -2294,6 +2294,8 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
 fi
 $(hide) if [ -s $@.premerged ] ; then \
     $(MERGE_ZIPS) -j -stripDir META-INF $@.tmp $@.premerged $(call reverse-list,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES)) ; \
+elif [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
+    echo "java_source_list is not empty but turbine.jar is missing!" && cat $(PRIVATE_JAVA_SOURCE_LIST); exit 1 ; \
 else \
     $(MERGE_ZIPS) -j -stripDir META-INF $@.tmp $(call reverse-list,$(PRIVATE_STATIC_JAVA_HEADER_LIBRARIES)) ; \
 fi
