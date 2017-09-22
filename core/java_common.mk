@@ -209,7 +209,7 @@ ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
 # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
 my_bootclasspath := ""
 else  # LOCAL_NO_STANDARD_LIBRARIES
-my_bootclasspath := $(call java-lib-header-files,core-oj):$(call java-lib-header-files,core-libart)
+my_bootclasspath := $(call java-lib-header-files,core-oj) $(call java-lib-header-files,core-libart)
 endif  # LOCAL_NO_STANDARD_LIBRARIES
 else
 ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
@@ -223,22 +223,22 @@ else
 my_bootclasspath := $(call java-lib-header-files,sdk_v$(LOCAL_SDK_VERSION))
 endif # current, system_current, or test_current
 endif # LOCAL_SDK_VERSION
-$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(my_bootclasspath)
 
 # In order to compile lambda code javac requires various invokedynamic-
 # related classes to be present. This change adds stubs needed for
 # javac to compile lambdas.
-my_additional_javac_libs :=
-ifndef TARGET_BUILD_APPS
-# TODO: support to build lamdbas using javac in unbundled build.
-# We may need to check in a prebuilt core-lambda-stubs to prebuilts/sdk.
 ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
-my_additional_javac_libs := core-lambda-stubs
+ifdef TARGET_BUILD_APPS
+my_bootclasspath += $(call java-lib-header-files,sdk-core-lambda-stubs)
+else
+my_bootclasspath += $(call java-lib-header-files,core-lambda-stubs)
 endif
 endif
 
-full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
-full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(call normalize-path-list, $(my_bootclasspath))
+
+full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
+full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 
 else # LOCAL_IS_HOST_MODULE
 
