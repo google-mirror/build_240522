@@ -114,7 +114,6 @@ ifneq ($(LOCAL_JAVA_RESOURCE_FILES),)
       $(eval _base := $(call word-colon,1,$(res))), \
       $(eval _base := $(dir $(res))) \
         $(eval _file := $(notdir $(res)))) \
-    $(if $(filter /%,$(_base) $(_file)),$(call pretty-error,LOCAL_JAVA_RESOURCE_FILES may not include absolute paths: $(_base) $(_file))) \
     $(patsubst %/,%,$(_base))::$(_file)))
 
 endif # LOCAL_JAVA_RESOURCE_FILES
