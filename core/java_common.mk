@@ -207,18 +207,38 @@ ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
 # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
 my_bootclasspath := ""
 else  # LOCAL_NO_STANDARD_LIBRARIES
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call java-lib-files,core-oj):$(call java-lib-files,core-libart)
+else
 my_bootclasspath := $(call java-lib-header-files,core-oj):$(call java-lib-header-files,core-libart)
+endif
 endif  # LOCAL_NO_STANDARD_LIBRARIES
 else
 ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
 # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call java-lib-files,android_stubs_current)
+else
 my_bootclasspath := $(call java-lib-header-files,android_stubs_current)
+endif
 else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),system_current)
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call java-lib-files,android_system_stubs_current)
+else
 my_bootclasspath := $(call java-lib-header-files,android_system_stubs_current)
+endif
 else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),test_current)
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call java-lib-files,android_test_stubs_current)
+else
 my_bootclasspath := $(call java-lib-header-files,android_test_stubs_current)
+endif
+else
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call java-lib-files,sdk_v$(LOCAL_SDK_VERSION))
 else
 my_bootclasspath := $(call java-lib-header-files,sdk_v$(LOCAL_SDK_VERSION))
+endif
 endif # current, system_current, or test_current
 endif # LOCAL_SDK_VERSION
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(my_bootclasspath)
@@ -244,7 +264,11 @@ ifeq ($(USE_CORE_LIB_BOOTCLASSPATH),true)
 ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
 my_bootclasspath := ""
 else
+ifeq ($(DISABLE_TURBINE),true)
+my_bootclasspath := $(call normalize-path-list,$(call java-lib-files,core-oj-hostdex core-libart-hostdex,true))
+else
 my_bootclasspath := $(call normalize-path-list,$(call java-lib-header-files,core-oj-hostdex core-libart-hostdex,true))
+endif
 endif
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(my_bootclasspath)
 
@@ -259,7 +283,11 @@ endif # USE_CORE_LIB_BOOTCLASSPATH
 endif # !LOCAL_IS_HOST_MODULE
 
 full_java_libs := $(full_shared_java_libs) $(full_static_java_libs) $(LOCAL_CLASSPATH)
+ifeq ($(DISABLE_TURBINE),true)
+full_java_header_libs := $(full_shared_java_libs) $(full_static_java_libs)
+else
 full_java_header_libs := $(full_shared_java_header_libs) $(full_static_java_header_libs)
+endif
 
 ifndef LOCAL_IS_HOST_MODULE
 # This is set by packages that are linking to other packages that export
@@ -278,7 +306,11 @@ ifneq ($(apk_libraries),)
   # link against the jar with full original names (before proguard processing).
   full_shared_java_libs += $(link_apk_libraries)
   full_java_libs += $(link_apk_libraries)
+  ifeq ($(DISABLE_TURBINE),true)
+  full_java_header_libs += $(link_apk_libraries)
+  else
   full_java_header_libs += $(link_apk_header_libs)
+  endif
 endif
 
 # This is set by packages that contain instrumentation, allowing them to
@@ -297,7 +329,11 @@ ifdef LOCAL_INSTRUMENTATION_FOR
   link_instr_classes_jar := $(link_instr_intermediates_dir.COMMON)/classes-pre-proguard.jar
   link_instr_classes_header_jar := $(link_instr_intermediates_dir.COMMON)/classes-header.jar
   full_java_libs += $(link_instr_classes_jar)
+  ifeq ($(DISABLE_TURBINE),true)
+  full_java_header_libs += $(link_instr_classes_jar)
+  else
   full_java_header_libs += $(link_instr_classes_header_jar)
+  endif
 endif  # LOCAL_INSTRUMENTATION_FOR
 endif  # LOCAL_IS_HOST_MODULE
 
