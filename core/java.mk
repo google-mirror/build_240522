@@ -605,22 +605,38 @@ ifneq (,$(filter android-support-%,$(LOCAL_STATIC_JAVA_LIBRARIES)))
 ifdef LOCAL_SDK_VERSION
 ifdef TARGET_BUILD_APPS
 ifeq (,$(filter current system_current test_current, $(LOCAL_SDK_VERSION)))
-  my_support_library_sdk_raise := $(call java-lib-header-files, sdk_vcurrent)
+  ifeq ($(DISABLE_TURBINE),true)
+    my_support_library_sdk_raise := $(call java-lib-files, sdk_vcurrent)
+  else
+    my_support_library_sdk_raise := $(call java-lib-header-files, sdk_vcurrent)
+  endif
 endif
 else
   # For platform build, we can't just raise to the "current" SDK,
   # that would break apps that use APIs removed from the current SDK.
-  my_support_library_sdk_raise := $(call java-lib-header-files,$(TARGET_DEFAULT_JAVA_LIBRARIES))
+  ifeq ($(DISABLE_TURBINE),true)
+    my_support_library_sdk_raise := $(call java-lib-files,$(TARGET_DEFAULT_JAVA_LIBRARIES))
+  else
+    my_support_library_sdk_raise := $(call java-lib-header-files,$(TARGET_DEFAULT_JAVA_LIBRARIES))
+  endif
 endif
 endif
 endif
 
 # jack already has the libraries in its classpath and doesn't support jars
+ifeq ($(DISABLE_TURBINE),true)
+legacy_proguard_flags := $(addprefix -libraryjars ,$(my_support_library_sdk_raise) \
+  $(filter-out $(my_support_library_sdk_raise),$(full_shared_java_libs)))
+
+legacy_proguard_lib_deps := $(my_support_library_sdk_raise) \
+  $(filter-out $(my_support_library_sdk_raise),$(full_shared_java_libs))
+else
 legacy_proguard_flags := $(addprefix -libraryjars ,$(my_support_library_sdk_raise) \
   $(filter-out $(my_support_library_sdk_raise),$(full_shared_java_header_libs)))
 
 legacy_proguard_lib_deps := $(my_support_library_sdk_raise) \
   $(filter-out $(my_support_library_sdk_raise),$(full_shared_java_header_libs))
+endif
 
 legacy_proguard_flags += -printmapping $(proguard_dictionary)
 jack_proguard_flags := -printmapping $(jack_dictionary)
