@@ -228,17 +228,16 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := -bootclasspath $(my_boot
 # In order to compile lambda code javac requires various invokedynamic-
 # related classes to be present. This change adds stubs needed for
 # javac to compile lambdas.
-my_additional_javac_libs :=
-ifndef TARGET_BUILD_APPS
-# TODO: support to build lamdbas using javac in unbundled build.
-# We may need to check in a prebuilt core-lambda-stubs to prebuilts/sdk.
 ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
-my_additional_javac_libs := core-lambda-stubs
+ifdef TARGET_BUILD_APPS
+my_bootclasspath += $(call java-lib-header-files,sdk-core-lambda-stubs)
+else
+my_bootclasspath += $(call java-lib-header-files,core-lambda-stubs)
 endif
 endif
 
-full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
-full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES) $(my_additional_javac_libs),$(LOCAL_IS_HOST_MODULE))
+full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
+full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 
 else # LOCAL_IS_HOST_MODULE
 
