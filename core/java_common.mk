@@ -215,6 +215,13 @@ ifndef LOCAL_IS_HOST_MODULE
       full_java_bootclasspath_libs := $(call java-lib-header-files,core-oj core-libart)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
   else
+    ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+      $(call pretty-error,Must not define both LOCAL_NO_STANDARD_LIBRARIES and LOCAL_SDK_VERSION)
+    endif
+    ifeq ($(strip $(filter $(LOCAL_SDK_VERSION),$(TARGET_AVAILABLE_SDK_VERSIONS))),)
+      $(call pretty-error,Invalid LOCAL_SDK_VERSION '$(LOCAL_SDK_VERSION)' \
+             Choices are: $(TARGET_AVAILABLE_SDK_VERSIONS))
+    endif
     ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
       # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_stubs_current)
@@ -266,7 +273,8 @@ ifdef empty_bootclasspath
   endif
 endif
 
-$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := $(empty_bootclasspath)$(full_java_bootclasspath_libs)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_BOOTCLASSPATH := $(full_java_bootclasspath_libs)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_EMPTY_BOOTCLASSPATH := $(empty_bootclasspath)
 
 full_java_libs := $(full_shared_java_libs) $(full_static_java_libs) $(LOCAL_CLASSPATH)
 full_java_header_libs := $(full_shared_java_header_libs) $(full_static_java_header_libs)

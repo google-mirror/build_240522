@@ -2237,8 +2237,7 @@ endef
 # Common definition to invoke javac on the host and target.
 #
 # $(1): javac
-# $(2): bootclasspath
-# $(3): classpath_libs
+# $(2): classpath_libs
 define compile-java
 $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
@@ -2248,9 +2247,10 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     $(addprefix -bootclasspath ,$(strip \
-        $(call normalize-path-list,$(2)))) \
+        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
+        $(PRIVATE_EMPTY_BOOTCLASSPATH))) \
     $(addprefix -classpath ,$(strip \
-        $(call normalize-path-list,$(3)))) \
+        $(call normalize-path-list,$(2)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
@@ -2277,7 +2277,7 @@ endef
 
 define transform-java-to-classes.jar
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
+$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
 endef
 
 define transform-java-to-header.jar
@@ -2290,8 +2290,9 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     --output $@.premerged --temp_dir $(dir $@)/classes-turbine \
     --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
     --javacopts $(PRIVATE_JAVACFLAGS) $(COMMON_JDK_FLAGS) \
-    $(addprefix --bootclasspath, $(strip \
-         $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)))) \
+    $(addprefix --bootclasspath ,$(strip \
+         $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
+         $(PRIVATE_EMPTY_BOOTCLASSPATH))) \
     $(addprefix --classpath ,$(strip \
         $(call normalize-path-list,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)))) \
     || ( rm -rf $(dir $@)/classes-turbine ; exit 41 ) && \
@@ -2341,7 +2342,7 @@ $(call call-jack) \
     $(if $(PRIVATE_JACK_IMPORT_JAR), \
         --import $(PRIVATE_JACK_IMPORT_JAR) --import-resource $@.tmpjill.res) \
     $(addprefix --classpath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_JACK_SHARED_LIBRARIES)))) \
+        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH) $(PRIVATE_JACK_SHARED_LIBRARIES)))) \
     $(addprefix --import ,$(call reverse-list,$(PRIVATE_STATIC_JACK_LIBRARIES))) \
     $(addprefix --pluginpath ,$(strip \
          $(call normalize-path-list,$(PRIVATE_JACK_PLUGIN_PATH)))) \
@@ -2374,7 +2375,7 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
 	    $(strip $(PRIVATE_JACK_FLAGS)) \
 	    $(strip $(PRIVATE_JACK_DEBUG_FLAGS)) \
 	    $(addprefix --classpath ,$(strip \
-	        $(call normalize-path-list,$(call reverse-list,$(PRIVATE_STATIC_JACK_LIBRARIES)) $(PRIVATE_JACK_SHARED_LIBRARIES)))) \
+	        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH) $(call reverse-list,$(PRIVATE_STATIC_JACK_LIBRARIES)) $(PRIVATE_JACK_SHARED_LIBRARIES)))) \
 	    -D jack.import.resource.policy=keep-first \
 	    -D jack.android.min-api-level=$(PRIVATE_JACK_MIN_SDK_VERSION) \
 	    -D jack.import.type.policy=keep-first \
@@ -2471,7 +2472,7 @@ $(call call-jack) \
     $(if $(NO_OPTIMIZE_DX), \
         -D jack.dex.optimize="false") \
     $(addprefix --classpath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_JACK_SHARED_LIBRARIES)))) \
+        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH) $(PRIVATE_JACK_SHARED_LIBRARIES)))) \
     $(addprefix --import ,$(call reverse-list,$(PRIVATE_STATIC_JACK_LIBRARIES))) \
     $(addprefix --pluginpath ,$(strip \
         $(call normalize-path-list,$(PRIVATE_JACK_PLUGIN_PATH)))) \
@@ -2490,10 +2491,6 @@ $(if $(PRIVATE_EXTRA_JAR_ARGS),$(hide) rm -rf $@.res.tmp)
 $(if $(PRIVATE_JAR_PACKAGES), $(hide) echo unsupported options PRIVATE_JAR_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) echo unsupported options JAR_EXCLUDE_PACKAGES in $@; exit 53)
 $(if $(PRIVATE_JAR_MANIFEST), $(hide) echo unsupported options JAR_MANIFEST in $@; exit 53)
-endef
-
-define desugar-bootclasspath
-$(filter-out -classpath -bootclasspath "",$(subst :,$(space),$(1)))
 endef
 
 # Takes an sdk version that might be PLATFORM_VERSION_CODENAME (for example P),
@@ -2515,7 +2512,7 @@ $(hide) $(JAVA) \
     $(if $(EXPERIMENTAL_USE_OPENJDK9),--add-opens java.base/java.lang.invoke=ALL-UNNAMED,) \
     -Djdk.internal.lambda.dumpProxyClasses=$(abspath $(dir $@))/desugar_dumped_classes \
     -jar $(DESUGAR) \
-    $(addprefix --bootclasspath_entry ,$(call desugar-bootclasspath,$(PRIVATE_BOOTCLASSPATH))) \
+    $(addprefix --bootclasspath_entry ,$(PRIVATE_BOOTCLASSPATH)) \
     $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
     --desugar_try_with_resources_if_needed=false \
@@ -2744,14 +2741,14 @@ endef
 # in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-package
 @echo "Host Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_LIBRARIES))
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_ALL_JAVA_LIBRARIES))
 endef
 
 # Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
 # in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-dalvik-package
 @echo "Dalvik Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
-$(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
+$(call compile-java,$(HOST_JAVAC),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
 endef
 
 ###########################################################
@@ -2897,7 +2894,9 @@ endef
 define transform-jar-to-proguard
 @echo Proguard: $@
 $(hide) $(PROGUARD) -injars '$<$(PRIVATE_PROGUARD_INJAR_FILTERS)' \
-    -outjars $@ $(PRIVATE_PROGUARD_FLAGS) \
+    -outjars $@ \
+    $(addprefix -libraryjars , $(PRIVATE_BOOTCLASSPATH)) \
+    $(PRIVATE_PROGUARD_FLAGS) \
     $(addprefix -injars , $(PRIVATE_EXTRA_INPUT_JAR))
 endef
 
