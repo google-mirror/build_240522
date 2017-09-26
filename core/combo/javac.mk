@@ -22,6 +22,10 @@ ifndef ANDROID_COMPILE_WITH_JACK
     endif
 endif
 
+ifdef TARGET_BUILD_APPS
+  TURBINE_ENABLED ?= false
+endif
+
 ifeq ($(OVERRIDE_ANDROID_JAVA_HOME),)
 ANDROID_JAVA_HOME := prebuilts/jdk/jdk8/$(HOST_PREBUILT_TAG)
 else
