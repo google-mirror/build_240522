@@ -273,6 +273,8 @@ function setpaths()
     unset ANDROID_TARGET_OUT_TESTCASES
     export ANDROID_TARGET_OUT_TESTCASES=$(get_abs_build_var TARGET_OUT_TESTCASES)
 
+    export LC_ALL=C
+
     # needed for building linux on MacOS
     # TODO: fix the path
     #export HOST_EXTRACFLAGS="-I "$T/system/kernel_headers/host_include
