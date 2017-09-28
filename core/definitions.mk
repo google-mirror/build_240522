@@ -2520,7 +2520,7 @@ $(hide) $(JAVA) \
     -jar $(DESUGAR) \
     $(addprefix --bootclasspath_entry ,$(PRIVATE_BOOTCLASSPATH)) \
     $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
-    --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
+    --min_sdk_version $(PRIVATE_MIN_SDK_VERSION) \
     --desugar_try_with_resources_if_needed=false \
     --allow_empty_bootclasspath \
     $(if $(filter --core-library,$(PRIVATE_DX_FLAGS)),--core_library) \
@@ -2535,7 +2535,7 @@ define transform-classes.jar-to-dex
 $(hide) rm -f $(dir $@)classes*.dex
 $(hide) $(DX_COMMAND) \
     --dex --output=$(dir $@) \
-    --min-sdk-version=$(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
+    --min-sdk-version=$(PRIVATE_MIN_SDK_VERSION) \
     $(if $(NO_OPTIMIZE_DX), \
         --no-optimize) \
     $(if $(GENERATE_DEX_DEBUG), \

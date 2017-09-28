@@ -73,6 +73,13 @@ ifdef LOCAL_JACK_ENABLED
   endif
 endif
 
+ifdef LOCAL_MIN_SDK_VERSION
+  my_min_sdk_version := $(LOCAL_MIN_SDK_VERSION)
+else
+  my_min_sdk_version := $(call codename-or-sdk-to-sdk,\
+    $(PRIVATE_DEFAULT_APP_TARGET_SDK))
+endif
+
 ifndef LOCAL_SDK_VERSION
   ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
     LOCAL_JAVA_LIBRARIES := $(TARGET_DEFAULT_JAVA_LIBRARIES) $(LOCAL_JAVA_LIBRARIES)
@@ -431,6 +438,8 @@ endif
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JACK_MIN_SDK_VERSION := $(my_jack_min_sdk_version)
 my_jack_min_sdk_version :=
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_MIN_SDK_VERSION := $(my_min_sdk_version)
 
 # Since we're using intermediates.COMMON, make sure that it gets cleaned
 # properly.
