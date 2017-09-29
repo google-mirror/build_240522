@@ -119,6 +119,16 @@ representation of value is preserved. Both choices were made for maximum readabi
 file and to line up files. Sync lines are placed with the source file as comments in the generated
 header file.
 
+When accessing TARGET_FS_CONFIG_GEN defined AIDs in service scripts, like
+init.rc files, the raw numerical identifiers will suffice. Thus, if one defined
+an AID as follows:
+
+[AID_FOO]
+value: 5005
+
+The user option to the service block in an init.rc could be: user 5005. It would also work this way
+for all shell and init built-in commands.
+
 For OEMs wishing to use the define AIDs in their native code, one can access the generated header
 file like so:
   1. In your C code just #include "generated_oem_aid.h" and start using the declared identifiers.
