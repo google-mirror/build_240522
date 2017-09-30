@@ -363,7 +363,7 @@ LOCAL_AIDL_INCLUDES += $(FRAMEWORKS_BASE_JAVA_SRC_DIRS)
 endif # LOCAL_SDK_VERSION
 
 $(foreach s,$(aidl_sources),\
-    $(eval $(call define-aidl-java-rule,$(s),$(intermediates.COMMON),aidl_java_sources)))
+    $(eval $(call define-aidl-java-rule,$(s),$(intermediates.COMMON)/aidl,aidl_java_sources)))
 $(foreach java,$(aidl_java_sources), \
     $(call include-depfile,$(java:%.java=%.P),$(java)))
 
