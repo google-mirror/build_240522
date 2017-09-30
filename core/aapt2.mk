@@ -69,6 +69,10 @@ $(my_res_package): PRIVATE_OVERLAY_FLAT := $(my_static_library_resources) $(my_g
 $(my_res_package): PRIVATE_SHARED_ANDROID_LIBRARIES := $(my_shared_library_resources)
 $(my_res_package): PRIVATE_PROGUARD_OPTIONS_FILE := $(proguard_options_file)
 $(my_res_package): PRIVATE_ASSET_DIRS := $(my_asset_dirs)
+ifdef R_file_stamp
+$(my_res_package): PRIVATE_R_FILE_STAMP := $(R_file_stamp)
+$(my_res_package): .KATI_IMPLICIT_OUTPUTS := $(R_file_stamp)
+endif
 $(my_res_package): $(full_android_manifest) $(my_static_library_resources) $(my_shared_library_resources)
 $(my_res_package): $(my_full_asset_paths)
 $(my_res_package): $(my_res_resources_flat) $(my_overlay_resources_flat) \
@@ -76,12 +80,9 @@ $(my_res_package): $(my_res_resources_flat) $(my_overlay_resources_flat) \
   $(AAPT2)
 	@echo "AAPT2 link $@"
 	$(call aapt2-link)
-
 ifdef R_file_stamp
-$(R_file_stamp) : $(my_res_package) | $(ACP)
-	@echo "target R.java/Manifest.java: $(PRIVATE_MODULE) ($@)"
-	@rm -rf $@ && mkdir -p $(dir $@)
-	$(call find-generated-R.java)
+	@rm -f $(PRIVATE_R_FILE_STAMP)
+	$(call find-generated-R.java,$(PRIVATE_R_FILE_STAMP))
 endif
 
 ifdef proguard_options_file
@@ -94,7 +95,6 @@ ifdef LOCAL_EXPORT_PACKAGE_RESOURCES
 # other packages can use to build their own PRODUCT-agnostic R.java (etc.)
 # files.
 resource_export_package := $(intermediates.COMMON)/package-export.apk
-$(R_file_stamp) : $(resource_export_package)
 
 $(resource_export_package) : $(my_res_package) | $(ACP)
 	@echo "target Export Resources: $(PRIVATE_MODULE) $(@)"
