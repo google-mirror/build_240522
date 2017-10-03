@@ -511,6 +511,12 @@ endif
 
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 
+# USE_D8_BY_DEFAULT is the default behavior, use USE_D8 to override.
+USE_D8_BY_DEFAULT := false
+ifndef USE_D8
+  USE_D8 := $(USE_D8_BY_DEFAULT)
+endif
+
 #
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
@@ -525,7 +531,12 @@ ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
   ZIPALIGN := $(HOST_OUT_EXECUTABLES)/zipalign
 
   ifeq ($(USE_D8),true)
-    DX := $(HOST_OUT_EXECUTABLES)/d8
+    ifeq ($(USE_D8_PREBUILD),false)
+      # All builds will use prebuilt D8 unless explicitly stated otherwise.
+      DX := $(HOST_OUT_EXECUTABLES)/d8
+    else
+      DX := $(prebuilt_build_tools_wrappers)/d8
+    endif
   else
     DX := $(HOST_OUT_EXECUTABLES)/dx
   endif
