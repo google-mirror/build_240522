@@ -90,7 +90,6 @@ $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES :=
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES :=
 $(full_classes_compiled_jar): \
     $(java_source_list_file) \
-    $(java_sources_deps) \
     $(full_java_header_libs) \
     $(full_java_bootclasspath_libs) \
     $(annotation_processor_deps) \
@@ -105,7 +104,6 @@ $(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotat
 $(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_turbine_jar): \
     $(java_source_list_file) \
-    $(java_sources_deps) \
     $(full_java_header_libs) \
     $(full_java_bootclasspath_libs) \
     $(NORMALIZE_PATH) \
