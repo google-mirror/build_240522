@@ -352,7 +352,43 @@ endif
 ##########################################
 java_sources := $(addprefix $(LOCAL_PATH)/, $(filter %.java,$(LOCAL_SRC_FILES))) $(aidl_java_sources) $(logtags_java_sources) \
                 $(filter %.java,$(LOCAL_GENERATED_SOURCES))
-all_java_sources := $(java_sources) $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/, $(filter %.java,$(LOCAL_INTERMEDIATE_SOURCES)))
+java_intermediate_sources := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/, $(filter %.java,$(LOCAL_INTERMEDIATE_SOURCES)))
+all_java_sources := $(java_sources) $(java_intermediate_sources)
+
+enable_sharding :=
+ifneq ($(TURBINE_ENABLED),false)
+ifneq ($(LOCAL_JAVAC_SHARD_SIZE),)
+ifneq ($(LOCAL_JAR_PROCESSOR),)
+$(call pretty-error,Cannot set both LOCAL_JAVAC_SHARD_SIZE and LOCAL_JAR_PROCESSOR!)
+endif # LOCAL_JAR_PROCESSOR is not empty
+enable_sharding := true
+# 0 < $(LOCAL_JAVAC_SHARD_SIZE) <= 8000
+$(call int_check_valid,$(LOCAL_JAVAC_SHARD_SIZE))
+# 0 < $(java_sources) <= 8000
+$(call int_check_valid,$(words $(java_sources)))
+
+num_shards := $(call int_divide,$(words $(java_sources)),$(LOCAL_JAVAC_SHARD_SIZE))
+ifneq ($(words $(java_sources)),$(words $(call int_multiply,$(LOCAL_JAVAC_SHARD_SIZE),$(num_shards))))
+# increment number of shards by 1.
+num_shards := $(call int_plus,$(num_shards),1)
+endif
+
+# currently we don't allow the number of shards are greater than 100.
+$(call _math_check_valid,$(num_shards))
+shard_idx_list := $(wordlist 1,$(num_shards),$(__MATH_NUMBERS))
+
+sharded_java_source_list_files += $(foreach x,$(shard_idx_list),$(java_source_list_file).shard.$(x))
+sharded_jar_list += $(foreach x,$(shard_idx_list),$(full_classes_compiled_jar).shard.$(x))
+
+# always put additonal Java sources to a seperate shard(resource/Proto sources, and etc).
+# increment number of shards by 1.
+num_shards := $(call int_plus,$(num_shards),1)
+sharded_java_source_list_files += $(java_source_list_file).shard.$(num_shards)
+sharded_jar_list += $(full_classes_compiled_jar).shard.$(num_shards)
+LOCAL_INTERMEDIATE_TARGETS += $(sharded_java_source_list_files)
+LOCAL_INTERMEDIATE_TARGETS += $(sharded_jar_list)
+endif # LOCAL_JAVAC_SHARD_SIZE is not empty
+endif # TURBINE_ENABLED != false
 
 include $(BUILD_SYSTEM)/java_common.mk
 
@@ -419,23 +455,44 @@ java_sources_deps := \
 $(java_source_list_file): $(java_sources_deps)
 	$(write-java-source-list)
 
-$(full_classes_compiled_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
-$(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_FILES)
-$(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
-$(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUDE_PACKAGES)
-$(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
-$(full_classes_compiled_jar): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
-$(full_classes_compiled_jar): \
-    $(java_source_list_file) \
-    $(java_sources_deps) \
-    $(full_java_header_libs) \
-    $(full_java_bootclasspath_libs) \
-    $(layers_file) \
-    $(annotation_processor_deps) \
-    $(NORMALIZE_PATH) \
-    $(JAR_ARGS) \
-    | $(SOONG_JAVAC_WRAPPER)
-	$(transform-java-to-classes.jar)
+ifdef enable_sharding
+# 0 < $(LOCAL_JAVAC_SHARD_SIZE) <= 8000
+$(call int_check_valid,$(LOCAL_JAVAC_SHARD_SIZE))
+# 0 < $(java_sources) <= 8000
+$(call int_check_valid,$(words $(java_sources)))
+
+$(foreach x,$(shard_idx_list),\
+  $(eval $(call save-sharded-java-source-list,$(x),\
+    $(wordlist $(call int_plus,1,$(call int_multiply,$(LOCAL_JAVAC_SHARD_SIZE),$(call int_subtract,$(x),1))),\
+      $(call int_multiply,$(LOCAL_JAVAC_SHARD_SIZE),$(x)),$(sort $(java_sources))))))
+
+# always put additonal Java sources to a seperate shard(resource/Proto sources, and etc).
+shard_idx_list += $(num_shards)
+$(java_source_list_file).shard.$(lastword $(shard_idx_list)): PRIVATE_JAVA_INTERMEDIATE_SOURCES := $(java_intermediate_sources)
+$(java_source_list_file).shard.$(lastword $(shard_idx_list)): $(java_resource_sources) \
+    $(RenderScript_file_stamp) \
+    $(proto_java_sources_file_stamp) \
+    $(LOCAL_ADDITIONAL_DEPENDENCIES) \
+    $(NORMALIZE_PATH)
+	$(hide) rm -f $@
+	$(call dump-words-to-file,$(PRIVATE_JAVA_INTERMEDIATE_SOURCES),$@.tmp)
+	$(call fetch-additional-java-source,$@.tmp)
+	$(hide) tr ' ' '\n' < $@.tmp | $(NORMALIZE_PATH) | sort -u > $@
+
+# Javac sharding with header libs including its own header jar as one of dependency.
+$(foreach x,$(shard_idx_list),\
+  $(eval $(call create-classes-full-debug.jar,$(full_classes_compiled_jar).shard.$(x),\
+    $(java_source_list_file).shard.$(x),\
+      $$(full_java_header_libs) $(full_classes_header_jar),$(x))))
+
+$(full_classes_compiled_jar): PRIVATE_SHARDED_JAR_LIST := $(sharded_jar_list)
+$(full_classes_compiled_jar): $(sharded_jar_list) | $(MERGE_ZIPS)
+	$(MERGE_ZIPS) -j $@ $(PRIVATE_SHARDED_JAR_LIST)
+else
+$(eval $(call create-classes-full-debug.jar,$(full_classes_compiled_jar),\
+  $(java_source_list_file),$(full_java_header_libs)))
+
+endif # ifdef enable_sharding
 
 ifneq ($(TURBINE_ENABLED),false)
 
@@ -443,7 +500,6 @@ $(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotat
 $(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_turbine_jar): \
     $(java_source_list_file) \
-    $(java_sources_deps) \
     $(full_java_header_libs) \
     $(full_java_bootclasspath_libs) \
     $(NORMALIZE_PATH) \
