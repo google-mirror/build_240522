@@ -75,3 +75,71 @@ endef
 define inc_and_print
 $(strip $(eval $(1) := $($(1)) .)$(words $($(1))))
 endef
+
+# 0 < $1 <= 8000
+define int_check_valid
+$(if $(call _int_greater-or-equal,$(call int_encode,8000),$(call int_encode,$(1))),\
+  $(if $(call _int_greater-than,$(call int_encode,$(1)),$(call int_encode,0)),,$(error Integer < 0 are not supported!)),\
+    $(error Integers > 8000 are not supported!))
+endef
+
+# Max output(integer upper limit) consists of 2^13 (8192) x's built from 16 x's
+# 0 < $1 <= 8000 (int_check_valid has to be invoked before calling int_encode)
+define int_encode
+$(wordlist 1,$(1),$(foreach a,x x,$(foreach b,x x x x x x x x x x x x x x x x,\
+  $(foreach c,x x x x x x x x x x x x x x x x,x x x x x x x x x x x x x x x x))))
+endef
+
+# _int_max returns the maximum of the two arguments
+# input: two (x) lists; output: one (x) list
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define _int_max
+$(subst xx,x,$(join $(1),$(2)))
+endef
+
+# first argument is greater than second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define _int_greater-than
+$(filter-out $(words $(2)),$(words $(call _int_max,$(1),$(2))))
+endef
+
+# first argument equals to second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define _int_equal
+$(filter $(words $(1)),$(words $(2)))
+endef
+
+# first argument is greater than or equal to second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define _int_greater-or-equal
+$(call _int_greater-than,$(1),$(2))$(call _int_equal,$(1),$(2))
+endef
+
+# input: two (x) lists; output: one (x) list
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define int_plus
+$(1) $(2)
+endef
+
+# first argument subtract second argument if first one is greater or equals to second one.
+# input: two (x) lists; output: one (x) list or ERROR
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define int_subtract
+$(if $(call _int_greater-or-equal,$(1),$(2)),$(filter-out xx,$(join $(1),$(2))),$(error $(1) subtract underflow $(2)))
+endef
+
+# input: two (x) lists; output: one (x) list
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define int_multiply
+$(foreach a,$(1),$(2))
+endef
+
+# caller is responsible that second argument is greater than 0
+# input: two (x) lists; output: one (x) list or ERROR
+# integer cannot be passed in directly. It has to be converted using int_encode.
+define int_divide
+$(if $(call _int_greater-or-equal,$(1),$(2)),x $(call int_divide,$(call int_subtract,$(1),$(2)),$(2)),)
+endef
