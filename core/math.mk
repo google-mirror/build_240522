@@ -42,6 +42,11 @@ define _math_check_valid
 $(if $(call math_is_number,$(1)),,$(error Only positive integers <= 100 are supported (not $(1))))
 endef
 
+# return a list containing integers ranging from [$(1),$(2)]
+define int_range_list
+$(call _math_check_valid,$(1))$(call _math_check_valid,$(2))$(wordlist $(1),$(2),$(__MATH_NUMBERS))
+endef
+
 #$(call _math_check_valid,0)
 #$(call _math_check_valid,1)
 #$(call _math_check_valid,100)
@@ -74,4 +79,73 @@ endef
 # $1 is the variable name to increment
 define inc_and_print
 $(strip $(eval $(1) := $($(1)) .)$(words $($(1))))
+endef
+
+_INT_MAX_WORDS := $(foreach a,x x,$(foreach b,x x x x x x x x x x x x x x x x,\
+  $(foreach c,x x x x x x x x x x x x x x x x,x x x x x x x x x x x x x x x x)))
+
+# 0 < $1 < 8192
+define int_check_valid
+$(eval _int_limit := $(call int_subtract,$(words $(_INT_MAX_WORDS)),1))\
+$(if $(call _int_greater-or-equal,$(call _int_encode,$(_int_limit)),$(call _int_encode,$(1))),\
+  $(if $(call _int_greater-than,$(call _int_encode,$(1)),$(call _int_encode,0)),,\
+    $(call pretty-error,Integer <= 0 are not supported!)),\
+      $(call pretty-error,Integers > $(_int_limit) are not supported!))
+endef
+
+# Max output(integer upper limit) consists of 2^13 (8192) x's built from 16 x's
+# 0 < $1 < 8192 (int_check_valid has to be invoked before calling _int_encode)
+define _int_encode
+$(wordlist 1,$(1),$(_INT_MAX_WORDS))
+endef
+
+# _int_max returns the maximum of the two arguments
+# input: two (x) lists; output: one (x) list
+# integer cannot be passed in directly. It has to be converted using _int_encode.
+define _int_max
+$(subst xx,x,$(join $(1),$(2)))
+endef
+
+# first argument is greater than second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using _int_encode.
+define _int_greater-than
+$(filter-out $(words $(2)),$(words $(call _int_max,$(1),$(2))))
+endef
+
+# first argument equals to second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using _int_encode.
+define _int_equal
+$(filter $(words $(1)),$(words $(2)))
+endef
+
+# first argument is greater than or equal to second argument
+# output: non-empty if true
+# integer cannot be passed in directly. It has to be converted using _int_encode.
+define _int_greater-or-equal
+$(call _int_greater-than,$(1),$(2))$(call _int_equal,$(1),$(2))
+endef
+
+# caller has to be responsible for checking if input numbers are valid.
+define int_plus
+$(words $(call _int_encode,$(1)) $(call _int_encode,$(2)))
+endef
+
+# caller has to be responsible for checking if input numbers are valid.
+define int_subtract
+$(if $(call _int_greater-or-equal,$(call _int_encode,$(1)),$(call _int_encode,$(2))),\
+  $(words $(filter-out xx,$(join $(call _int_encode,$(1)),$(call _int_encode,$(2))))),\
+    $(call pretty-error,$(1) subtract underflow $(2)))
+endef
+
+# caller has to be responsible for checking if input numbers are valid.
+define int_multiply
+$(words $(foreach a,$(call _int_encode,$(1)),$(call _int_encode,$(2))))
+endef
+
+# caller has to be responsible for checking if input numbers are valid.
+define int_divide
+$(if $(call _int_greater-or-equal,$(call _int_encode,$(1)),$(call _int_encode,$(2))),\
+  $(call int_plus,$(call int_divide,$(call int_subtract,$(1),$(2)),$(2)),1),)
 endef
