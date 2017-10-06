@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Tobias Thierer <tobiast@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Submitted-by: Tobias Thierer <tobiast@google.com>
+Submitted-at: Fri, 06 Oct 2017 19:42:55 +0000
+Reviewed-on: https://android-review.googlesource.com/504194
+Project: platform/build
+Branch: refs/heads/master
