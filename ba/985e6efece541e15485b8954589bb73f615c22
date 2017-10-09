@@ -1,0 +1,10 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Code-Review+1: Alan Leung <acleung@google.com>
+Verified+1: Alan Leung <acleung@google.com>
+Autosubmit+1: Alan Leung <acleung@google.com>
+Presubmit-Ready+1: Alan Leung <acleung@google.com>
+Submitted-by: Alan Leung <acleung@google.com>
+Submitted-at: Mon, 09 Oct 2017 21:28:11 +0000
+Reviewed-on: https://android-review.googlesource.com/505275
+Project: platform/build
+Branch: refs/heads/master
