@@ -427,7 +427,6 @@ $(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_D
 $(full_classes_compiled_jar): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
 $(full_classes_compiled_jar): \
     $(java_source_list_file) \
-    $(java_sources_deps) \
     $(full_java_header_libs) \
     $(full_java_bootclasspath_libs) \
     $(layers_file) \
@@ -443,7 +442,6 @@ $(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotat
 $(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_turbine_jar): \
     $(java_source_list_file) \
-    $(java_sources_deps) \
     $(full_java_header_libs) \
     $(full_java_bootclasspath_libs) \
     $(NORMALIZE_PATH) \
