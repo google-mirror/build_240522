@@ -33,6 +33,10 @@ ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
 endif
 LOCAL_JAVACFLAGS += -source $(LOCAL_JAVA_LANGUAGE_VERSION) -target $(LOCAL_JAVA_LANGUAGE_VERSION)
 
+ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.9)
+LOCAL_JAVACFLAGS += -XDstringConcat=inline
+endif # 1.9
+
 ###########################################################
 ## .proto files: Compile proto files to .java
 ###########################################################
