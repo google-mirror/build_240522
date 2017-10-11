@@ -531,7 +531,7 @@ ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
   ZIPALIGN := $(HOST_OUT_EXECUTABLES)/zipalign
 
   ifeq ($(USE_D8),true)
-    DX := $(HOST_OUT_EXECUTABLES)/d8
+    DX := $(HOST_OUT_EXECUTABLES)/d8-dx-compat
   else
     DX := $(HOST_OUT_EXECUTABLES)/dx
   endif
@@ -547,7 +547,7 @@ else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
   ZIPALIGN := $(prebuilt_sdk_tools_bin)/zipalign
 
   ifeq ($(USE_D8),true)
-    DX := $(prebuilt_build_tools_wrappers)/d8
+    DX := $(prebuilt_build_tools_wrappers)/d8-dx-compat
   else
     DX := $(prebuilt_build_tools_wrappers)/dx
   endif
