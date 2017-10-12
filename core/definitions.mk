@@ -2236,9 +2236,11 @@ $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
-    $(addprefix -bootclasspath ,$(strip \
-        $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
-        $(PRIVATE_EMPTY_BOOTCLASSPATH))) \
+    $(if $(PRIVATE_USE_SYSTEM_MODULES), \
+      $(addprefix --system=,$(PRIVATE_SYSTEM_MODULES)), \
+      $(addprefix -bootclasspath ,$(strip \
+          $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
+          $(PRIVATE_EMPTY_BOOTCLASSPATH)))) \
     $(addprefix -classpath ,$(strip \
         $(call normalize-path-list,$(2)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
