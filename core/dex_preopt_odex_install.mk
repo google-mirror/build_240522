@@ -37,7 +37,15 @@ endif
 # Also preopt system server jars since selinux prevents system server from loading anything from
 # /data. If we don't do this they will need to be extracted which is not favorable for RAM usage
 # or performance.
-ifeq (true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
+ifneq (,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
+my_dexpreopt_boot_img_and_system_server_only=$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY)
+else
+ifneq (,$(PRODUCT_DEX_PREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
+my_dexpreopt_boot_img_and_system_server_only=$(PRODUCT_DEX_PREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY)
+endif
+endif
+
+ifeq (true,$(my_dexpreopt_boot_img_and_system_server_only))
 ifeq ($(filter $(PRODUCT_SYSTEM_SERVER_JARS) $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE)),)
 LOCAL_DEX_PREOPT :=
 endif
@@ -251,3 +259,5 @@ DEXPREOPT.MODULES.$(LOCAL_MODULE_CLASS) := $(sort \
 $(my_all_targets): $(installed_odex) $(installed_vdex) $(installed_art) $(my_installed_profile)
 
 endif # LOCAL_DEX_PREOPT
+
+my_dexpreopt_boot_img_and_system_server_only :=
