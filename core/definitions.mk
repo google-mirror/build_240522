@@ -2746,6 +2746,17 @@ $(hide) $(PROGUARD) -injars '$<$(PRIVATE_PROGUARD_INJAR_FILTERS)' \
 endef
 
 ###########################################################
+## Commands to call R8
+###########################################################
+define transform-jar-to-dex-r8
+@echo R8: $@
+$(hide) $(R8) -injars '$<$(PRIVATE_PROGUARD_INJAR_FILTERS)' \
+    --force-proguard-compatibility --output $(subst classes.dex,,$@) \
+    $(PRIVATE_PROGUARD_FLAGS) \
+    $(addprefix -injars , $(PRIVATE_EXTRA_INPUT_JAR))
+endef
+
+###########################################################
 ## Stuff source generated from one-off tools
 ###########################################################
 
