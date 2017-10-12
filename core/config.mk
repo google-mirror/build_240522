@@ -517,6 +517,12 @@ ifndef USE_D8
   USE_D8 := $(USE_D8_BY_DEFAULT)
 endif
 
+# USE_R8_BY_DEFAULT is the default behavior, use USE_R8 to override.
+USE_R8_BY_DEFAULT := false
+ifndef USE_R8
+  USE_R8 := $(USE_R8_BY_DEFAULT)
+endif
+
 #
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
@@ -535,6 +541,7 @@ ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
   else
     DX := $(HOST_OUT_EXECUTABLES)/dx
   endif
+  R8 := $(HOST_OUT_EXECUTABLES)/r8
 
 else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
   AIDL := $(prebuilt_sdk_tools_bin)/aidl
@@ -551,6 +558,7 @@ else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
   else
     DX := $(prebuilt_build_tools_wrappers)/dx
   endif
+  R8 := $(prebuilt_build_tools_wrappers)/r8
 endif # TARGET_BUILD_APPS || TARGET_BUILD_PDK
 
 DX_COMMAND := $(DX) -JXms16M -JXmx2048M
