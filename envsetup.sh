@@ -847,9 +847,11 @@ function mmm()
         local DIR_MODULES
         local GET_INSTALL_PATH=
         local GET_INSTALL_PATHS=
-        local DASH_ARGS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/')
-        local DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
-        for DIR in $DIRS ; do
+        declare -a DASH_ARGS
+        declare -a DIRS
+        DASH_ARGS=($(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/'))
+        DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
+        for DIR in ${DIRS[*]} ; do
             DIR_MODULES=`echo $DIR | sed -n -e 's/.*:\(.*$\)/\1/p' | sed 's/,/ /'`
             DIR=`echo $DIR | sed -e 's/:.*//' -e 's:/$::'`
             # Remove the leading ./ and trailing / if any exists.
@@ -897,7 +899,7 @@ function mmm()
         fi
         # Convert "/" to "-".
         MODULES_IN_PATHS=${MODULES_IN_PATHS//\//-}
-        ONE_SHOT_MAKEFILE="$MAKEFILE" _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode $DASH_ARGS $MODULES $MODULES_IN_PATHS $ARGS
+        ONE_SHOT_MAKEFILE="$MAKEFILE" _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode ${DASH_ARGS[*]} $MODULES $MODULES_IN_PATHS $ARGS
     else
         echo "Couldn't locate the top of the tree.  Try setting TOP."
         return 1
@@ -930,8 +932,10 @@ function mmma()
   local T=$(gettop)
   local DRV=$(getdriver $T)
   if [ "$T" ]; then
-    local DASH_ARGS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/')
-    local DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
+    declare -a DASH_ARGS
+    declare -a DIRS
+    DASH_ARGS=($(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/'))
+    DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
     local MY_PWD=`PWD= /bin/pwd`
     if [ "$MY_PWD" = "$T" ]; then
       MY_PWD=
@@ -941,7 +945,7 @@ function mmma()
     local DIR=
     local MODULES_IN_PATHS=
     local ARGS=
-    for DIR in $DIRS ; do
+    for DIR in ${DIRS[*]} ; do
       if [ -d $DIR ]; then
         # Remove the leading ./ and trailing / if any exists.
         DIR=${DIR#./}
@@ -959,7 +963,7 @@ function mmma()
     done
     # Convert "/" to "-".
     MODULES_IN_PATHS=${MODULES_IN_PATHS//\//-}
-    _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode $DASH_ARGS $ARGS $MODULES_IN_PATHS
+    _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode ${DASH_ARGS[*]} $ARGS $MODULES_IN_PATHS
   else
     echo "Couldn't locate the top of the tree.  Try setting TOP."
     return 1
