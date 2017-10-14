@@ -830,8 +830,8 @@ function mmm()
         local DIR_MODULES
         local GET_INSTALL_PATH=
         local GET_INSTALL_PATHS=
-        local DASH_ARGS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/')
-        local DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
+        local DASH_ARGS=$(echo "$@" | awk '/^-.*$/')
+        local DIRS=$(echo "$@" | awk '/^[^-].*$/')
         for DIR in $DIRS ; do
             DIR_MODULES=`echo $DIR | sed -n -e 's/.*:\(.*$\)/\1/p' | sed 's/,/ /'`
             DIR=`echo $DIR | sed -e 's/:.*//' -e 's:/$::'`
@@ -913,8 +913,8 @@ function mmma()
   local T=$(gettop)
   local DRV=$(getdriver $T)
   if [ "$T" ]; then
-    local DASH_ARGS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^-.*$/')
-    local DIRS=$(echo "$@" | awk -v RS=" " -v ORS=" " '/^[^-].*$/')
+    local DASH_ARGS=$(echo "$@" | awk '/^-.*$/')
+    local DIRS=$(echo "$@" | awk '/^[^-].*$/')
     local MY_PWD=`PWD= /bin/pwd`
     if [ "$MY_PWD" = "$T" ]; then
       MY_PWD=
