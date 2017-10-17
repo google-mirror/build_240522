@@ -2407,6 +2407,7 @@ $(hide) $(JAVA) \
 endef
 
 
+DX_COMMAND := $(DX) -JXms16M -JXmx2048M
 define transform-classes.jar-to-dex
 @echo "target Dex: $(PRIVATE_MODULE)"
 @mkdir -p $(dir $@)
