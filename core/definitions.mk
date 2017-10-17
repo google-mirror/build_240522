@@ -2773,7 +2773,7 @@ $(if $(2), \
   total=$$(( $$( echo "$$size" ) )); \
   printname=$$(echo -n "$(1)" | tr " " +); \
   maxsize=$(2); \
-  if [ "$$total" -gt "$$maxsize" ]; then \
+  if [ "$$total" -gt "$$((maxsize))" ]; then \
     echo "error: $$printname too large ($$total > $$maxsize)"; \
     false; \
   elif [ "$$total" -gt $$((maxsize - 32768)) ]; then \
