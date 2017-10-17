@@ -1,0 +1,9 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Autosubmit+1: Yoshisato Yanagisawa <yyanagisawa@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Dan Willemsen <dwillemsen@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 17 Oct 2017 05:08:08 +0000
+Reviewed-on: https://android-review.googlesource.com/509756
+Project: platform/build
+Branch: refs/heads/master
