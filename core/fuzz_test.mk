@@ -8,7 +8,8 @@ ifdef LOCAL_SDK_VERSION
     $(error $(LOCAL_PATH): $(LOCAL_MODULE): NDK fuzz tests are not supported.)
 endif
 
-LOCAL_CFLAGS += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
+LOCAL_SANITIZE := address
+LOCAL_CFLAGS += -fsanitize-coverage=edge,8bit-counters,indirect-calls,trace-cmp
 LOCAL_STATIC_LIBRARIES += libFuzzer
 
 ifdef LOCAL_MODULE_PATH
