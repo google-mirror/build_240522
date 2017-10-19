@@ -105,6 +105,8 @@ $(call add_json_str,  VendorPath,                        $(TARGET_COPY_OUT_VENDO
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
 
+$(call add_json_bool, My_build_is_broken_outdated_prebuilts_hidl_to_string_and_equality, $(filter true,$(MY_BUILD_IS_BROKEN_OUTDATED_PREBUILTS_HIDL_TO_STRING_AND_EQUALITY)))
+
 _contents := $(subst $(comma)$(newline)__SV_END,$(newline)}$(newline),$(_contents)__SV_END)
 
 $(file >$(SOONG_VARIABLES).tmp,$(_contents))
