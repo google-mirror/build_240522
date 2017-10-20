@@ -3184,9 +3184,9 @@ endif
 include $(BUILD_SYSTEM)/distdir.mk
 
 # Include any vendor specific definitions.mk file
--include $(TOPDIR)vendor/*/build/core/definitions.mk
--include $(TOPDIR)device/*/build/core/definitions.mk
--include $(TOPDIR)product/*/build/core/definitions.mk
+-include $(TOPDIR)vendor/*/build/make/core/definitions.mk
+-include $(TOPDIR)device/*/build/make/core/definitions.mk
+-include $(TOPDIR)product/*/build/make/core/definitions.mk
 
 # broken:
 #	$(foreach file,$^,$(if $(findstring,.a,$(suffix $file)),-l$(file),$(file)))
