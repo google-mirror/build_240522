@@ -55,6 +55,15 @@ endif # LOCAL_EMMA_INSTRUMENT == true
 # for it to do
 ifneq ($(my_include_filter),)
 
+  # Also check JACOCO_COVERAGE_EXCLUDE_FILES
+  # Values in this list refer to files, not to classes
+  # This enables specifying file paths containing dots
+  # In practice, the only distinction here is that we don't replace '.' with '/' in these names
+  DEFAULT_JACOCO_EXCLUDE_FILES := tests/resources
+  my_exclude_files := $(strip $(DEFAULT_JACOCO_EXCLUDE_FILES))
+  my_exclude_files := $(subst $(comma), ,$(my_exclude_files))
+  my_exclude_args := $(strip $(my_exclude_args) $(my_exclude_files))
+
   my_files := $(intermediates.COMMON)/jacoco
 
   # make a task that unzips the classes that we want to instrument from the
