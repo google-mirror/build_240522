@@ -49,11 +49,6 @@ ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
   else
     my_exclude_args :=
   endif
-endif # LOCAL_EMMA_INSTRUMENT == true
-
-# determine whether to run the instrumenter based on whether there is any work
-# for it to do
-ifneq ($(my_include_filter),)
 
   # Also check JACOCO_COVERAGE_EXCLUDE_FILES
   # Values in this list refer to files, not to classes
@@ -141,8 +136,8 @@ $(LOCAL_FULL_CLASSES_JACOCO_JAR): $(my_instrumented_timestamp_path) $(LOCAL_FULL
   # dependency.
 $(LOCAL_FULL_CLASSES_JACOCO_JAR): $(my_classes_to_report_on_path)
 
-else # my_include_filter == ''
+else # LOCAL_EMMA_INSTRUMENT != true
   LOCAL_FULL_CLASSES_JACOCO_JAR := $(LOCAL_FULL_CLASSES_PRE_JACOCO_JAR)
-endif # my_include_filter != ''
+endif # LOCAL_EMMA_INSTRUMENT == true
 
 LOCAL_INTERMEDIATE_TARGETS += $(LOCAL_FULL_CLASSES_JACOCO_JAR)
