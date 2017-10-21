@@ -2399,7 +2399,6 @@ $(hide) $(JAVA) \
     $(addprefix --bootclasspath_entry ,$(PRIVATE_BOOTCLASSPATH)) \
     $(addprefix --classpath_entry ,$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES)) \
     --min_sdk_version $(call codename-or-sdk-to-sdk,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
-    --desugar_try_with_resources_if_needed=false \
     --allow_empty_bootclasspath \
     $(if $(filter --core-library,$(PRIVATE_DX_FLAGS)),--core_library) \
     -i $< -o $@.tmp
