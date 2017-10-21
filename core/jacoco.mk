@@ -49,11 +49,6 @@ ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
   else
     my_exclude_args :=
   endif
-endif # LOCAL_EMMA_INSTRUMENT == true
-
-# determine whether to run the instrumenter based on whether there is any work
-# for it to do
-ifneq ($(my_include_filter),)
 
   # Also check JACOCO_COVERAGE_EXCLUDE_FILES
   # Values in this list refer to files, not to classes
