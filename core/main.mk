@@ -118,14 +118,6 @@ ifneq ($(ADDITIONAL_BUILD_PROPERTIES),)
 $(error ADDITIONAL_BUILD_PROPERTIES must not be set before here: $(ADDITIONAL_BUILD_PROPERTIES))
 endif
 
-#
-# -----------------------------------------------------------------
-# Add the product-defined properties to the build properties.
-ifdef PRODUCT_SHIPPING_API_LEVEL
-ADDITIONAL_BUILD_PROPERTIES += \
-  ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
-endif
-
 ifneq ($(BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED), true)
   ADDITIONAL_BUILD_PROPERTIES += $(PRODUCT_PROPERTY_OVERRIDES)
 else
