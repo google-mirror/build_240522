@@ -366,6 +366,11 @@ $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(VENDOR_BUILDINFO_SH)
 	$(hide) echo ro.vendor.build.date=`$(DATE_FROM_FILE)`>>$@
 	$(hide) echo ro.vendor.build.date.utc=`$(DATE_FROM_FILE) +%s`>>$@
 	$(hide) echo ro.vendor.build.fingerprint="$(BUILD_FINGERPRINT_FROM_FILE)">>$@
+
+ifdef PRODUCT_API_SHIPPING_LEVEL
+	$(hide) echo ro.vendor.product.first_api_level="$(PRODUCT_API_SHIPPING_LEVEL)">>$@
+endif  # PRODUCT_SHIPPING_API_LEVEL
+
 ifdef property_overrides_split_enabled
 	$(hide) TARGET_BOOTLOADER_BOARD_NAME="$(TARGET_BOOTLOADER_BOARD_NAME)" \
 			TARGET_BOARD_PLATFORM="$(TARGET_BOARD_PLATFORM)" \
