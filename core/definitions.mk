@@ -798,6 +798,109 @@ $(eval _upbfc_fc_set :=)\
 $(eval _first:=)
 endef
 
+
+###########################################################
+## Given a string, removes all the newlines from it
+##
+## $(1): input string
+define remove-newlines
+$(subst $(newline),,$(1))
+endef
+
+###########################################################
+## Given a filepath, returns nonempty if the path cannot be
+## validated to be contained in the current directory
+## This is, this function checks for '/' and '..'
+##
+## $(1): path to validate
+define try-validate-path-is-subdir
+$(strip $(call remove-newlines,
+        $(if $(filter /%,$(1)),
+            Error: $(1) starts with a slash
+        ,
+            $(if $(findstring ..,$(1)),
+                Error: $(1) contains '..'
+            ,
+                $(if $(call streq,,$(1)),
+                  Error: '$(1)' is empty
+                ,
+                    $(if $(filter $(space),$(1)),
+                        Error: '$(1)' contains a space
+                    )
+                )
+            )
+        )
+))
+endef
+
+define validate-path-is-subdir
+$(if $(call try-validate-path-is-subdir,$(1)),
+  $(error Illegal path in $(LOCAL_MODULE): $(call try-validate-path-is-subdir,$(1)))
+)
+endef
+
+###########################################################
+## Given a space-delimited list of filepaths, returns
+## nonempty if any cannot be validated to be contained in
+## the current directory
+##
+## $(1): path list to validate
+define try-validate-paths-are-subdirs
+$(foreach my_path,$(1),\
+    $(call try-validate-path-is-subdir,$(my_path))\
+)
+endef
+
+define validate-paths-are-subdirs
+$(if $(call try-validate-paths-are-subdirs,$(1)),
+    $(error Illegal path in $(LOCAL_MODULE): $(call try-validate-paths-are-subdirs,$(1)))
+)
+endef
+
+###########################################################
+## Tests of try-validate-path-is-subdir
+##     and  try-validate-paths-are-subdirs
+define test-validate-paths-are-subdirs
+$(eval my_error := $(call try-validate-path-is-subdir,/tmp)) \
+$(if $(call streq,$(my_error),Error: /tmp starts with a slash),
+,
+  $(error incorrect error message for path /tmp. Got '$(my_error)')
+) \
+$(eval my_error := $(call try-validate-path-is-subdir,../sibling)) \
+$(if $(call streq,$(my_error),Error: ../sibling contains '..'),
+,
+  $(error incorrect error message for path ../sibling. Got '$(my_error)')
+) \
+$(eval my_error := $(call try-validate-path-is-subdir,child/../../sibling)) \
+$(if $(call streq,$(my_error),Error: child/../../sibling contains '..'),
+,
+  $(error incorrect error message for path child/../../sibling. Got '$(my_error)')
+) \
+$(eval my_error := $(call try-validate-path-is-subdir,)) \
+$(if $(call streq,$(my_error),Error: '' is empty),
+,
+  $(error incorrect error message for empty path ''. Got '$(my_error)')
+) \
+$(eval my_error := $(call try-validate-path-is-subdir,subdir/subsubdir)) \
+$(if $(call streq,$(my_error),),
+,
+  $(error rejected valid path 'subdir/subsubdir'. Got '$(my_error)')
+)
+
+$(eval my_error := $(call try-validate-paths-are-subdirs,a/b /c/d e/f))
+$(if $(call streq,$(my_error),Error: /c/d starts with a slash),
+,
+  $(error incorrect error message for path list 'a/b /c/d e/f'. Got '$(my_error)')
+)
+$(eval my_error := $(call try-validate-paths-are-subdirs,a/b c/d))
+$(if $(call streq,$(my_error),),
+,
+  $(error rejected valid path list 'a/b c/d'. Got '$(my_error)')
+)
+endef
+# run test
+$(strip $(call test-validate-paths-are-subdirs))
+
 ###########################################################
 ## MODULE_TAG set operations
 ###########################################################
