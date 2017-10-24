@@ -61,6 +61,8 @@ ifeq ($(LOCAL_EMMA_INSTRUMENT),true)
 
   my_files := $(intermediates.COMMON)/jacoco
 
+  $(call validate-paths-are-subdirs,$(PRIVATE_EXCLUDE_ARGS))
+
   # make a task that unzips the classes that we want to instrument from the
   # input jar
   my_unzipped_path := $(my_files)/work/classes-to-instrument/classes
