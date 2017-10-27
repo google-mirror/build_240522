@@ -125,6 +125,8 @@ class SignApk {
      */
     private static final short ALIGNMENT_ZIP_EXTRA_DATA_FIELD_MIN_SIZE_BYTES = 6;
 
+    private static final short ANDROID_COMMON_PAGE_ALIGNMENT_BYTES = 4096;
+
     // bitmasks for which hash algorithms we need the manifest to include.
     private static final int USE_SHA1 = 1;
     private static final int USE_SHA256 = 2;
@@ -296,7 +298,7 @@ class SignApk {
         je.setTime(timestamp);
         outputJar.putNextEntry(je);
         FileInputStream input = new FileInputStream(publicKeyFile);
-        byte[] b = new byte[4096];
+        byte[] b = new byte[ANDROID_COMMON_PAGE_ALIGNMENT_BYTES];
         int read;
         while ((read = input.read(b)) != -1) {
             outputJar.write(b, 0, read);
@@ -374,7 +376,7 @@ class SignApk {
             JarOutputStream out,
             long timestamp,
             int defaultAlignment) throws IOException {
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[ANDROID_COMMON_PAGE_ALIGNMENT_BYTES];
         int num;
 
         ArrayList<String> names = new ArrayList<String>();
@@ -567,7 +569,7 @@ class SignApk {
         if (entryName.endsWith(".so")) {
             // Align .so contents to memory page boundary to enable memory-mapped
             // execution.
-            return 4096;
+            return ANDROID_COMMON_PAGE_ALIGNMENT_BYTES;
         } else {
             return defaultAlignment;
         }
@@ -892,6 +894,32 @@ class SignApk {
     }
 
     /**
+     * Generates padding before Central Directory to round up to the closest 4 KB multiple, so that
+     * the APK Signing Block will be 4 KB aligned.
+     */
+    private static void addPaddingForAligningSigningBlock(ZipSections zipSections) {
+        ByteBuffer beforeCentralDir = zipSections.beforeCentralDir.slice();
+        if (beforeCentralDir.remaining() % ANDROID_COMMON_PAGE_ALIGNMENT_BYTES == 0) {
+            return;
+        }
+
+        long newBeforeCentralDirSize = roundup(beforeCentralDir.remaining(),
+                ANDROID_COMMON_PAGE_ALIGNMENT_BYTES);
+        ByteBuffer newBeforeCentralDir = ByteBuffer.allocate(
+                Math.toIntExact(newBeforeCentralDirSize));
+        newBeforeCentralDir.put(beforeCentralDir);
+        newBeforeCentralDir.rewind();
+        zipSections.beforeCentralDir = newBeforeCentralDir;
+
+        ByteBuffer eocd = zipSections.eocd.slice();
+        ApkUtils.setZipEocdCentralDirectoryOffset(eocd, newBeforeCentralDirSize);
+    }
+
+    private static long roundup(long number, long chunkSize) {
+        return chunkSize * ((number + chunkSize - 1) / chunkSize);
+    }
+
+    /**
      * Returns the API Level corresponding to the APK's minSdkVersion.
      *
      * @throws MinSdkVersionException if the API Level cannot be determined from the APK.
@@ -1082,6 +1110,7 @@ class SignApk {
                     ByteBuffer[] outputChunks = new ByteBuffer[] {v1SignedApk};
 
                     ZipSections zipSections = findMainZipSections(v1SignedApk);
+                    addPaddingForAligningSigningBlock(zipSections);
                     ApkSignerEngine.OutputApkSigningBlockRequest addV2SignatureRequest =
                             apkSigner.outputZipSections(
                                     DataSources.asDataSource(zipSections.beforeCentralDir),
