@@ -511,6 +511,12 @@ endif
 
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 
+# USE_R8_BY_DEFAULT is the default behavior, use USE_R8 to override.
+USE_R8_BY_DEFAULT := true
+ifndef USE_R8
+  USE_R8 := $(USE_R8_BY_DEFAULT)
+endif
+
 #
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
