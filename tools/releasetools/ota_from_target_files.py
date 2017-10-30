@@ -46,9 +46,11 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       Similar to --full_radio. When generating an incremental OTA, always
       include a full copy of bootloader image.
 
-  -v  (--verify)
-      Remount and verify the checksums of the files written to the
-      system and vendor (if used) partitions.  Incremental builds only.
+  --verify
+      Remount and verify the checksums of the files written to the system and
+      vendor (if used) partitions. File-based incremental OTAs only. This has
+      been deprecated since Oreo. Keeping the flag here to avoid breaking
+      existing callers.
 
   -o  (--oem_settings)  <main_file[,additional_files...]>
       Comma seperated list of files used to specify the expected OEM-specific
@@ -155,7 +157,6 @@ import sparse_img
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = None
 OPTIONS.incremental_source = None
-OPTIONS.verify = False
 OPTIONS.patch_threshold = 0.95
 OPTIONS.wipe_user_data = False
 OPTIONS.downgrade = False
@@ -1324,7 +1325,8 @@ def main(argv):
     elif o == "--no_signing":
       OPTIONS.no_signing = True
     elif o == "--verify":
-      OPTIONS.verify = True
+      # Deprecated since Oreo.
+      pass
     elif o == "--block":
       OPTIONS.block_based = True
     elif o in ("-b", "--binary"):
