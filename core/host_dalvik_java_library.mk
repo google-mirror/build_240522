@@ -154,7 +154,7 @@ my_desugaring :=
 ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.8)
 my_desugaring := true
 $(full_classes_desugar_jar): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
-$(full_classes_desugar_jar): $(full_classes_jar) $(full_java_header_libs) $(DESUGAR)
+$(full_classes_desugar_jar): $(full_classes_jar) $(full_shared_java_header_libs) $(DESUGAR)
 	$(desugar-classes-jar)
 endif
 
