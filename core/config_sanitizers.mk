@@ -285,6 +285,9 @@ ifneq ($(filter address,$(my_sanitize)),)
   ifndef LOCAL_IS_HOST_MODULE
     my_cflags += -mllvm -asan-globals=0
   endif
+  ifeq ($(my_32_64_bit_suffix),32)
+    my_cflags += -mllvm -asan-force-dynamic-shadow=1
+  endif
 endif
 
 ifneq ($(strip $(LOCAL_SANITIZE_RECOVER)),)
