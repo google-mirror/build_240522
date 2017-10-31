@@ -1,0 +1,6 @@
+Build-Cop-Override+1: Colin Cross <ccross@android.com>
+Submitted-by: Colin Cross <ccross@android.com>
+Submitted-at: Tue, 31 Oct 2017 21:01:40 +0000
+Reviewed-on: https://android-review.googlesource.com/524978
+Project: platform/build
+Branch: refs/heads/master
