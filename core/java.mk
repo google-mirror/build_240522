@@ -602,7 +602,9 @@ endif
 else
   # For platform build, we can't just raise to the "current" SDK,
   # that would break apps that use APIs removed from the current SDK.
-  my_proguard_sdk_raise := $(call java-lib-header-files,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES))
+  my_modules_to_raise := $(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES)
+  my_modules_to_raise := $(my_modules_to_raise) $(filter jacocoagent,$(full_java_bootclasspath_libs))
+  my_proguard_sdk_raise := $(call java-lib-header-files,$(my_modules_to_raise))
 endif
 endif
 
