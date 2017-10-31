@@ -455,3 +455,11 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := \
 # Whether any paths are excluded from sanitization when SANITIZE_TARGET=integer_overflow
 PRODUCT_INTEGER_OVERFLOW_EXCLUDE_PATHS := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_INTEGER_OVERFLOW_EXCLUDE_PATHS))
+
+# Whether any paths are excluded from sanitization when SANITIZE_TARGET=cfi
+PRODUCT_CFI_EXCLUDE_PATHS := \
+    $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_CFI_EXCLUDE_PATHS))
+
+# Whether any paths should have CFI enabled for components
+PRODUCT_CFI_INCLUDE_PATHS := \
+    $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_CFI_INCLUDE_PATHS))
