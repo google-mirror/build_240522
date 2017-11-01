@@ -25,14 +25,14 @@ COMPILED_CLASSES := $(call word-colon,1,$(firstword \
 DIRTY_IMAGE_OBJECTS := $(call word-colon,1,$(firstword \
     $(filter %system/etc/dirty-image-objects,$(PRODUCT_COPY_FILES))))
 
-define get-product-default-property
-$(strip $(patsubst $(1)=%,%,$(filter $(1)=%,$(PRODUCT_DEFAULT_PROPERTY_OVERRIDES))))
+define get-product-property
+$(strip $(patsubst $(1)=%,%,$(filter $(1)=%,$(PRODUCT_PROPERTY_OVERRIDES))))
 endef
 
-DEX2OAT_IMAGE_XMS := $(call get-product-default-property,dalvik.vm.image-dex2oat-Xms)
-DEX2OAT_IMAGE_XMX := $(call get-product-default-property,dalvik.vm.image-dex2oat-Xmx)
-DEX2OAT_XMS := $(call get-product-default-property,dalvik.vm.dex2oat-Xms)
-DEX2OAT_XMX := $(call get-product-default-property,dalvik.vm.dex2oat-Xmx)
+DEX2OAT_IMAGE_XMS := $(call get-product-property,dalvik.vm.image-dex2oat-Xms)
+DEX2OAT_IMAGE_XMX := $(call get-product-property,dalvik.vm.image-dex2oat-Xmx)
+DEX2OAT_XMS := $(call get-product-property,dalvik.vm.dex2oat-Xms)
+DEX2OAT_XMX := $(call get-product-property,dalvik.vm.dex2oat-Xmx)
 
 ifeq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),mips mips64))
 # MIPS specific overrides.
