@@ -177,7 +177,7 @@ ifneq ($(filter coverage,$(my_sanitize)),)
   ifeq ($(filter address,$(my_sanitize)),)
     $(error $(LOCAL_PATH): $(LOCAL_MODULE): Use of 'coverage' also requires 'address')
   endif
-  my_cflags += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
+  my_cflags += $(COVERAGE_CONFIG_EXTRA_CFLAGS)
   my_sanitize := $(filter-out coverage,$(my_sanitize))
 endif
 
