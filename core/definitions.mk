@@ -2256,8 +2256,9 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
       $(addprefix -bootclasspath ,$(strip \
           $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
           $(PRIVATE_EMPTY_BOOTCLASSPATH)))) \
-    $(addprefix -classpath ,$(strip \
-        $(call normalize-path-list,$(2)))) \
+    $(addprefix -classpath ,$(call normalize-path-list,$(strip \
+       $(2) \
+       $(if $(PRIVATE_USE_SYSTEM_MODULES),$(filter-out $(TARGET_DEFAULT_JAVA_LIBRARIES),$(PRIVATE_BOOTCLASSPATH)))))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
