@@ -2248,8 +2248,9 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(if $(PRIVATE_USE_SYSTEM_MODULES), \
       $(if $(PRIVATE_PATCH_MODULE), \
         --patch-module=$(PRIVATE_PATCH_MODULE)=$(call normalize-path-list,. $(2)))) \
-    $(addprefix -classpath ,$(strip \
-        $(call normalize-path-list,$(2)))) \
+    $(addprefix -classpath ,$(call normalize-path-list,$(strip \
+       $(if $(PRIVATE_USE_SYSTEM_MODULES),$(filter-out core-oj core-libart core-lambda-stubs,$(PRIVATE_BOOTCLASSPATH))) \
+       $(2)))) \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
