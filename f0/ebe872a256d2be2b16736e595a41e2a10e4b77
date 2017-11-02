@@ -1,0 +1,11 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Code-Review+1: Jin Qian <jinqian@google.com>
+Code-Review+1: Wei Wang <wvw@google.com>
+Verified+1: Jin Qian <jinqian@google.com>
+Autosubmit+1: Jin Qian <jinqian@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 02 Nov 2017 21:34:48 +0000
+Reviewed-on: https://android-review.googlesource.com/527270
+Project: platform/build
+Branch: refs/heads/master
