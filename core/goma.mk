@@ -37,6 +37,22 @@ ifneq ($(filter-out false,$(USE_GOMA)),)
   goma_ctl := $(goma_dir)/goma_ctl.py
   GOMA_CC := $(goma_dir)/gomacc
 
+  ifdef DOWNLOAD_GOMA_REF
+    goma_ref := $(DOWNLOAD_GOMA_REF)
+  else
+    goma_ref := release
+  endif
+  ifdef DOWNLOAD_GOMA_IN_GCE
+    ifneq ($(shell curl metadata.google.internal -i --silent),)
+      $(shell curl -s https://chromium.googlesource.com/chromium/tools/depot_tools/+/master/cipd?format=TEXT | base64 -d > /tmp/cipd)
+      $(shell curl -s https://chromium.googlesource.com/chromium/tools/depot_tools/+/master/cipd_client_version?format=TEXT | base64 -d > /tmp/cipd_client_version)
+      $(shell echo 'infra_internal/goma/client/linux-amd64 $(goma_ref)' | \
+          sh /tmp/cipd ensure -ensure-file - -root $(goma_dir) \
+	     -service-account-json :gce)
+    endif
+  endif
+  goma_ref :=
+
   $(if $(wildcard $(goma_ctl)),, \
    $(warning You should have goma in $$GOMA_DIR or $(HOME)/goma) \
    $(error See go/ma/how-to-use-goma/how-to-use-goma-for-android for detail))
