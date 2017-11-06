@@ -863,35 +863,48 @@ else
 APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)
 endif
 
-# Projects clean of compiler warnings should be compiled with -Werror.
-# If most modules in a directory such as external/ have warnings,
-# the directory should be in ANDROID_WARNING_ALLOWED_PROJECTS list.
-# When some of its subdirectories are cleaned up, the subdirectories
-# can be added into ANDROID_WARNING_DISALLOWED_PROJECTS list, e.g.
-# external/fio/.
-ANDROID_WARNING_DISALLOWED_PROJECTS := \
-    art/% \
-    bionic/% \
-    external/fio/% \
-    hardware/interfaces/% \
-
-define find_warning_disallowed_projects
-    $(filter $(ANDROID_WARNING_DISALLOWED_PROJECTS),$(1)/)
-endef
-
-# Projects with compiler warnings are compiled without -Werror.
 ANDROID_WARNING_ALLOWED_PROJECTS := \
-    bootable/% \
-    cts/% \
-    dalvik/% \
-    development/% \
-    device/% \
-    external/% \
-    frameworks/% \
-    hardware/% \
-    packages/% \
-    system/% \
-    test/vts/% \
+    cts/hostsidetests/security/securityPatch/% \
+    cts/tests/tests/permission/jni/% \
+    device/google/gce/% \
+    device/google/marlin/% \
+    device/google/wahoo/wifi_offload/% \
+    device/generic/goldfish/% \
+    device/generic/goldfish-opengl/% \
+    device/sample/frameworks/PlatformLibrary/jni/% \
+    external/openssh/% \
+    external/freetype/% \
+    external/skia/% \
+    frameworks/av/drm/mediacas/plugins/% \
+    frameworks/av/media/libaaudio/examples/% \
+    frameworks/av/media/libeffects/factory/% \
+    frameworks/av/media/libstagefright/codecs/avcdec/% \
+    frameworks/av/services/mediaextractor/% \
+    frameworks/base/core/tests/webkit/apk_with_native_libs/jni/% \
+    frameworks/base/tests/backup/% \
+    frameworks/base/tools/stats_log_api_gen/% \
+    frameworks/base/tools/streaming_proto/% \
+    frameworks/ml/nn/% \
+    frameworks/native/cmds/cmd/% \
+    frameworks/native/libs/vr/% \
+    frameworks/native/opengl/tests/% \
+    frameworks/native/services/surfaceflinger/tests/% \
+    frameworks/native/services/vr/% \
+    frameworks/webview/chromium/% \
+    hardware/broadcom/wlan/bcmdhd/% \
+    hardware/interfaces/audio/% \
+    hardware/libhardware/modules/% \
+    hardware/libhardware/tests/% \
+    hardware/qcom/audio/visualizer/% \
+    hardware/qcom/data/ipacfg-mgr/msm8998/ipanat/% \
+    hardware/qcom/gps/% \
+    hardware/qcom/media/% \
+    packages/apps/OMA-DM/engine/% \
+    sdk/emulator/mksdcard/% \
+    system/nfc/src/% \
+    system/vold/tests/% \
+    test/vts-testcase/kernel/api/qtaguid/% \
+    test/vts-testcase/security/poc/target/% \
     tools/adt/idea/android/ultimate/get_modification_time/jni/% \
     vendor/% \
 
