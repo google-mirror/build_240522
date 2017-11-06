@@ -1664,13 +1664,31 @@ ifeq ($(my_strict),true)
     my_cflags += -DANDROID_STRICT
 endif
 
-# Add -Werror if LOCAL_PATH is in the WARNING_DISALLOWED project list,
-# or not in the WARNING_ALLOWED project list.
-ifneq (,$(strip $(call find_warning_disallowed_projects,$(LOCAL_PATH))))
-  my_cflags_no_override += -Werror
-else
-  ifeq (,$(strip $(call find_warning_allowed_projects,$(LOCAL_PATH))))
-    my_cflags_no_override += -Werror
+# Check if -Werror or -Wno-error is used in C compiler flags.
+# Modules defined in $(SOONG_ANDROID_MK) are checked in soong's cc.go.
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  # Header libraries do not need cflags.
+  ifneq (HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS))
+    # Prebuilt modules do not need cflags.
+    ifeq (,$(LOCAL_PREBUILT_MODULE_FILE))
+      my_all_cflags := $(my_cflags) $(my_cppflags) $(my_cflags_no_override)
+      # Issue warning if -Wno-error is used.
+      ifneq (,$(filter -Wno-error,$(my_all_cflags)))
+        $(call pretty-warning, "uses -Wno-error")
+      else
+        # Issue warning if -Werror is not used. Add it.
+        ifeq (,$(filter -Werror,$(my_all_cflags)))
+          # Add -Wall -Werror unless the project is in the WARNING_ALLOWED project list.
+          ifeq (,$(strip $(call find_warning_allowed_projects,$(LOCAL_PATH))))
+            $(call pretty-warning, "does not use -Werror; added default -Wall -Werror")
+            my_cflags := -Wall -Werror $(my_cflags)
+          else
+            $(call pretty-warning, "does not use -Werror; added default -Wall")
+            my_cflags := -Wall $(my_cflags)
+          endif
+        endif
+      endif
+    endif
   endif
 endif
 
