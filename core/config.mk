@@ -879,35 +879,33 @@ else
 APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)
 endif
 
-# Projects clean of compiler warnings should be compiled with -Werror.
-# If most modules in a directory such as external/ have warnings,
-# the directory should be in ANDROID_WARNING_ALLOWED_PROJECTS list.
-# When some of its subdirectories are cleaned up, the subdirectories
-# can be added into ANDROID_WARNING_DISALLOWED_PROJECTS list, e.g.
-# external/fio/.
-ANDROID_WARNING_DISALLOWED_PROJECTS := \
-    art/% \
-    bionic/% \
-    external/fio/% \
-    hardware/interfaces/% \
-
-define find_warning_disallowed_projects
-    $(filter $(ANDROID_WARNING_DISALLOWED_PROJECTS),$(1)/)
-endef
-
-# Projects with compiler warnings are compiled without -Werror.
 ANDROID_WARNING_ALLOWED_PROJECTS := \
-    bootable/% \
-    cts/% \
-    dalvik/% \
-    development/% \
+    cts/hostsidetests/security/securityPatch/% \
+    cts/tests/tests/permission/jni/% \
     device/% \
-    external/% \
-    frameworks/% \
-    hardware/% \
-    packages/% \
-    system/% \
-    test/vts/% \
+    external/freetype/% \
+    external/skia/% \
+    frameworks/av/drm/mediacas/plugins/% \
+    frameworks/av/media/libaaudio/examples/% \
+    frameworks/av/media/libeffects/factory/% \
+    frameworks/av/media/libstagefright/codecs/avcdec/% \
+    frameworks/av/services/mediaextractor/% \
+    frameworks/base/core/tests/webkit/apk_with_native_libs/jni/% \
+    frameworks/base/tests/backup/% \
+    frameworks/base/tools/streaming_proto/% \
+    frameworks/ml/nn/% \
+    frameworks/native/cmds/cmd/% \
+    frameworks/native/services/surfaceflinger/tests/% \
+    frameworks/native/services/vr/% \
+    frameworks/webview/chromium/% \
+    hardware/interfaces/audio/% \
+    hardware/libhardware/modules/% \
+    hardware/libhardware/tests/% \
+    hardware/qcom/% \
+    sdk/emulator/mksdcard/% \
+    system/vold/tests/% \
+    test/vts-testcase/kernel/api/qtaguid/% \
+    test/vts-testcase/security/poc/target/% \
     tools/adt/idea/android/ultimate/get_modification_time/jni/% \
     vendor/% \
 
