@@ -15,17 +15,16 @@ cc_binary_host {
 
     cflags: ["-Wall", "-Werror"],
 
+    // NOTE: Do not add any shared_libs dependencies because they will break the
+    // static_sdk_tools target.
     static_libs: [
+        "libbase",
         "libutils",
         "libcutils",
         "liblog",
-        "libzopfli",
-    ],
-
-    shared_libs: [
-      "libbase",
-      "libz",
-      "libziparchive"
+        "libz",
+        "libziparchive",
+        "libzopfli"
     ],
 
     target: {
