@@ -1674,6 +1674,26 @@ else
   endif
 endif
 
+# Check if -Werror or -Wno-error is used in C compiler flags.
+# Modules defined in $(SOONG_ANDROID_MK) are checked in soong's cc.go.
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  # Modules defined in vendor/ projects are ignored
+  ifeq (,$(strip $(filter vendor/%,$(LOCAL_PATH)/)))
+    my_all_cflags := $(my_cflags) $(my_cppflags) $(my_cflags_no_override)
+    # Issue warning if -Wno-error is used.
+    ifneq ($(filter -Wno-error,$(my_all_cflags)),)
+      $(call pretty-warning, "uses -Wno-error")
+    # Issue warning if -Wno-error is used.
+    else
+      # Issue warning if -Werror is not used. Add it.
+      ifeq ($(filter -Werror,$(my_all_cflags)),)
+        $(call pretty-warning, "does not use -Werror; add default -Wall -Werror")
+        my_cflags += -Wall -Werror
+      endif
+    endif
+  endif
+endif
+
 # Disable clang-tidy if it is not found.
 ifeq ($(PATH_TO_CLANG_TIDY),)
   my_tidy_enabled := false
