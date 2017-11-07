@@ -331,9 +331,19 @@ class InstallRecoveryScriptFormatTest(unittest.TestCase):
                                                         self._info)
 
   def test_recovery_from_boot(self):
-    recovery_image = common.File("recovery.img", "recovery");
+    # Construct the gzipped recovery.img and boot.img
+    recovery_data = bytearray([0x1f, 0x8b, 0x08, 0x00, 0x81, 0x11, 0x02, 0x5a,
+                               0x00, 0x03, 0x2b, 0x4a, 0x4d, 0xce, 0x2f, 0x4b,
+                               0x2d, 0xaa, 0x04, 0x00, 0xc9, 0x93, 0x43, 0xf3,
+                               0x08, 0x00, 0x00, 0x00])
+    # echo -n "boot" | gzip -f | hd
+    boot_data = bytearray([0x1f, 0x8b, 0x08, 0x00, 0x8c, 0x12, 0x02, 0x5a,
+                           0x00, 0x03, 0x4b, 0xca, 0xcf, 0x2f, 0x01, 0x00,
+                           0xc4, 0xae, 0xed, 0x46, 0x04, 0x00, 0x00, 0x00])
+
+    recovery_image = common.File("recovery.img", recovery_data);
     self._out_tmp_sink("recovery.img", recovery_image.data, "IMAGES")
-    boot_image = common.File("boot.img", "boot");
+    boot_image = common.File("boot.img", boot_data);
     self._out_tmp_sink("boot.img", boot_image.data, "IMAGES")
 
     common.MakeRecoveryPatch(self._tempdir, self._out_tmp_sink,
