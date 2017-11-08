@@ -177,8 +177,6 @@ TARGET_COPY_OUT_SYSTEM := system
 TARGET_COPY_OUT_SYSTEM_OTHER := system_other
 TARGET_COPY_OUT_DATA := data
 TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
-TARGET_COPY_OUT_OEM := oem
-TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
 
@@ -188,14 +186,17 @@ $(patsubst $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/%,$(PRODUCT_OUT)/%,$1)
 endef
 
 ###########################################
-# Define TARGET_COPY_OUT_VENDOR to a placeholder, for at this point
-# we don't know if the device wants to build a separate vendor.img
-# or just build vendor stuff into system.img.
-# A device can set up TARGET_COPY_OUT_VENDOR to "vendor" in its
+# Define TARGET_COPY_OUT_[VENDOR|ODM|OEM] to a placeholder, for at this point
+# we don't know if the device has a separate partition of the type or not.
+# A device can set up TARGET_COPY_OUT_* to "vendor", "odm", or "oem" in its
 # BoardConfig.mk.
 # We'll substitute with the real value after loading BoardConfig.mk.
 _vendor_path_placeholder := ||VENDOR-PATH-PH||
 TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+_odm_path_placeholder := ||ODM-PATH-PH||
+TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
+_oem_path_placeholder := ||OEM-PATH-PH||
+TARGET_COPY_OUT_OEM := $(_oem_path_placeholder)
 ###########################################
 
 #################################################################
@@ -253,13 +254,27 @@ TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(board_config_mk)))
 board_config_mk :=
 
 ###########################################
-# Now we can substitute with the real value of TARGET_COPY_OUT_VENDOR
+# Now we can substitute with the real value of TARGET_COPY_OUT_[VENDOR|ODM|OEM]
 ifeq ($(TARGET_COPY_OUT_VENDOR),$(_vendor_path_placeholder))
 TARGET_COPY_OUT_VENDOR := system/vendor
 else ifeq ($(filter vendor system/vendor,$(TARGET_COPY_OUT_VENDOR)),)
-$(error TARGET_COPY_OUT_VENDOR must be either 'vendor' or 'system/vendor', seeing '$(TARGET_COPY_OUT_VENDOR)'.)
+$(call pretty-error,TARGET_COPY_OUT_VENDOR must be either 'vendor' or 'system/vendor', seeing '$(TARGET_COPY_OUT_VENDOR)'.)
 endif
 PRODUCT_COPY_FILES := $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),$(PRODUCT_COPY_FILES))
+
+ifeq ($(TARGET_COPY_OUT_ODM),$(_odm_path_placeholder))
+TARGET_COPY_OUT_ODM := $(TARGET_COPY_OUT_VENDOR)/odm
+else ifeq ($(filter odm $(TARGET_COPY_OUT_VENDOR)/odm,$(TARGET_COPY_OUT_ODM)),)
+$(call pretty-error,TARGET_COPY_OUT_ODM must be either 'odm' or '$(TARGET_COPY_OUT_VENDOR)/odm', seeing '$(TARGET_COPY_OUT_ODM)'.)
+endif
+PRODUCT_COPY_FILES := $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),$(PRODUCT_COPY_FILES))
+
+ifeq ($(TARGET_COPY_OUT_OEM),$(_oem_path_placeholder))
+TARGET_COPY_OUT_OEM := $(TARGET_COPY_OUT_SYSTEM)/oem
+else ifeq ($(filter oem $(TARGET_COPY_OUT_SYSTEM)/oem,$(TARGET_COPY_OUT_OEM)),)
+$(call pretty-error,TARGET_COPY_OUT_OEM must be either 'oem' or '$(TARGET_COPY_OUT_SYSTEM)/oem', seeing '$(TARGET_COPY_OUT_OEM)'.)
+endif
+PRODUCT_COPY_FILES := $(subst $(_oem_path_placeholder),$(TARGET_COPY_OUT_OEM),$(PRODUCT_COPY_FILES))
 
 BOARD_USES_VENDORIMAGE :=
 ifdef BOARD_PREBUILT_VENDORIMAGE
@@ -271,8 +286,27 @@ endif
 ifeq ($(TARGET_COPY_OUT_VENDOR),vendor)
 BOARD_USES_VENDORIMAGE := true
 else ifdef BOARD_USES_VENDORIMAGE
-$(error TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
+$(call pretty-error,TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
 endif
+
+ifeq ($(TARGET_COPY_OUT_ODM),odm)
+BOARD_USES_ODMIMAGE := true
+else ifdef BOARD_USES_ODMIMAGE
+$(call pretty-error,TARGET_COPY_OUT_ODM must be set to `odm` to use an odm image)
+endif
+
+ifneq ($(BOARD_USES_VENDORIMAGE),true)
+  ifeq ($(BOARD_USES_ODMIMAGE),true)
+    $(call pretty-error,BOARD_USES_ODMIMAGE is true, but BOARD_USES_VENDORIMAGE is false. Cannot have odm image when there is no vendor image.)
+  endif
+endif
+
+ifeq ($(TARGET_COPY_OUT_OEM),oem)
+BOARD_USES_OEMIMAGE := true
+else ifdef BOARD_USES_OEMIMAGE
+$(call pretty-error,TARGET_COPY_OUT_OEM must be set to `oem` to use an oem image)
+endif
+
 ###########################################
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
 TARGET_RECOVERY_UPDATER_LIBS ?=
