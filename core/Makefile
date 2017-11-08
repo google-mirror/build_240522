@@ -1390,25 +1390,34 @@ systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
 
-# Create symlink /system/vendor to /vendor if necessary.
-ifdef BOARD_USES_VENDORIMAGE
-define create-system-vendor-symlink
-$(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
+# When a [vendor|odm|oem] partition exists, create a symlink which
+# points to the mount point of the partition
+# $1: path to the symlink under $(PRODUCT_OUT)
+# $2: mount point of the partition in the device
+# $3: name of BOARD_USES_*IMAGE variable
+define create-symlink-for
+$(if $(filter $($3),true),
+$(hide) if [ -d $(PRODUCT_OUT)$1 ] && [ ! -h $(PRODUCT_OUT)$1 ]; then \
+  echo 'Non-symlink $(PRODUCT_OUT)$1 detected!' 1>&2; \
+  echo 'You cannot install files to $(PRODUCT_OUT)$1 when $3 is true!' 1>&2; \
   exit 1; \
-fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
+fi; \
+ln -sf $2 $(PRODUCT_OUT)$1)
 endef
-else
-define create-system-vendor-symlink
+
+define create-symlinks-in-system-partition
+$(call create-symlink-for,/system/vendor,/vendor,BOARD_USES_VENDORIMAGE)
+$(call create-symlink-for,/system/oem,/oem,BOARD_USES_OEMIMAGE)
 endef
-endif
+
+define create-symlinks-in-vendor-partition
+$(call create-symlink-for,/vendor/odm,/odm,BOARD_USES_ODMIMAGE)
+endef
 
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
-  $(call create-system-vendor-symlink)
+  $(call create-symlinks-in-system-partition)
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-userimage-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt, \
       skip_fsck=true)
@@ -1485,7 +1494,7 @@ sync: $(INTERNAL_SYSTEMIMAGE_FILES)
 ## system tarball
 define build-systemtarball-target
   $(call pretty,"Target system fs tarball: $(INSTALLED_SYSTEMTARBALL_TARGET)")
-  $(call create-system-vendor-symlink)
+  $(call create-symlinks-in-system-partition)
   $(MKTARBALL) $(FS_GET_STATS) \
     $(PRODUCT_OUT) system $(PRIVATE_SYSTEM_TAR) \
     $(INSTALLED_SYSTEMTARBALL_TARGET) $(TARGET_OUT)
@@ -1846,6 +1855,7 @@ vendorimage_intermediates := \
 BUILT_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 define build-vendorimage-target
   $(call pretty,"Target vendor fs image: $(INSTALLED_VENDORIMAGE_TARGET)")
+  $(call create-symlinks-in-vendor-partition)
   @mkdir -p $(TARGET_OUT_VENDOR)
   @mkdir -p $(vendorimage_intermediates) && rm -rf $(vendorimage_intermediates)/vendor_image_info.txt
   $(call generate-userimage-prop-dictionary, $(vendorimage_intermediates)/vendor_image_info.txt, skip_fsck=true)
@@ -2309,7 +2319,8 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(INSTALLED_VENDOR_MATRIX) \
 		| $(ACP)
 	@echo "Package target files: $@"
-	$(call create-system-vendor-symlink)
+	$(call create-symlinks-in-system-partition)
+	$(call create-symlinks-in-vendor-partition)
 	$(hide) rm -rf $@ $@.list $(zip_root)
 	$(hide) mkdir -p $(dir $@) $(zip_root)
 ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)))
