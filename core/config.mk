@@ -60,6 +60,21 @@ backslash := $(patsubst %a,%,$(backslash))
 
 # Mark variables deprecated/obsolete
 $(KATI_deprecated_var PATH,Do not use PATH directly)
+$(KATI_deprecated_var PYTHONPATH,Do not use PYTHONPATH directly)
+$(KATI_deprecated_var OUT,Use OUT_DIR instead)
+$(KATI_deprecated_var ANDROID_HOST_OUT,Use HOST_OUT instead)
+$(KATI_deprecated_var ANDROID_PRODUCT_OUT,Use PRODUCT_OUT instead)
+$(KATI_deprecated_var ANDROID_HOST_OUT_TESTCASES,Use HOST_OUT_TESTCASES instead)
+$(KATI_deprecated_var ANDROID_TARGET_OUT_TESTCASES,Use TARGET_OUT_TESTCASES instead)
+$(KATI_deprecated_var ANDROID_BUILD_TOP,Use '.' instead)
+$(KATI_deprecated_var \
+  ANDROID_TOOLCHAIN \
+  ANDROID_TOOLCHAIN_2ND_ARCH \
+  ANDROID_DEV_SCRIPTS \
+  ANDROID_EMULATOR_PREBUILTS \
+  ANDROID_PRE_BUILD_PATHS \
+  ,It is an environment variable$(comma) not a make variable)
+
 
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
