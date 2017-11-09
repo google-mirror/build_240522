@@ -375,6 +375,7 @@ ifneq ($(my_register_name),$(LOCAL_MODULE))
 $(LOCAL_MODULE) : $(my_all_targets)
 endif
 
+ifneq (true,$(LOCAL_EXCLUDE_FROM_MODULES_IN))
 # Set up phony targets that covers all modules under the given paths.
 # This allows us to build everything in given paths by running mmma/mma.
 my_path_components := $(subst /,$(space),$(LOCAL_PATH))
@@ -383,6 +384,7 @@ $(foreach c, $(my_path_components),\
   $(eval my_path_prefix := $(my_path_prefix)-$(c))\
   $(eval .PHONY : $(my_path_prefix))\
   $(eval $(my_path_prefix) : $(my_all_targets)))
+endif
 
 ###########################################################
 ## Module installation rule
