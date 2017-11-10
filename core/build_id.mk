@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (bc9609 Merge "Version bump to OPR1.171026.001" into oreo-cts-releas)
 export BUILD_ID=OPR1.171026.001
+=======
+export BUILD_ID=OPR1.170623.032
+>>>>>>> BRANCH (282182 Version bump to OPR1.170623.032)
