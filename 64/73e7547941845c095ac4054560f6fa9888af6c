@@ -1,0 +1,9 @@
+Verified+1: Michael Schwartz <schwartzmi@google.com>
+Code-Review+1: Andrew Hsieh <andrewhsieh@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Michael Schwartz <schwartzmi@google.com>
+Submitted-at: Fri, 10 Nov 2017 22:12:25 +0000
+Reviewed-on: https://android-review.googlesource.com/534339
+Project: platform/build
+Branch: refs/heads/master
