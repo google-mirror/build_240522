@@ -97,6 +97,6 @@ $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME) : $(LIBART_TARGE
 		--runtime-arg -Xnorelocate --compile-pic \
 		--no-generate-debug-info --generate-build-id \
 		--multi-image --no-inline-from=core-oj.jar \
-		$(PRODUCT_DEX_PREOPT_BOOT_FLAGS) $(GLOBAL_DEXPREOPT_FLAGS) $(ART_BOOT_IMAGE_EXTRA_ARGS)
+		$(TARGET_DEX_PREOPT_BOOT_FLAGS) $(GLOBAL_DEXPREOPT_FLAGS) $(ART_BOOT_IMAGE_EXTRA_ARGS)
 
 endif

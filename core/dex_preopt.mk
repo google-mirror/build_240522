@@ -31,6 +31,8 @@ else
 install-on-system-other = $(filter-out $(PRODUCT_DEXPREOPT_SPEED_APPS) $(PRODUCT_SYSTEM_SERVER_APPS),$(basename $(notdir $(filter $(foreach f,$(SYSTEM_OTHER_ODEX_FILTER),$(TARGET_OUT)/$(f)),$(1)))))
 endif
 
+TARGET_DEX_PREOPT_BOOT_FLAGS := $(PRODUCT_DEX_PREOPT_BOOT_FLAGS)
+
 # The default values for pre-opting: always preopt PIC.
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
@@ -42,10 +44,11 @@ ifeq ($(HOST_OS),linux)
   endif
 # Add mini-debug-info to the boot classpath unless explicitly asked not to.
   ifneq (false,$(WITH_DEXPREOPT_DEBUG_INFO))
-    PRODUCT_DEX_PREOPT_BOOT_FLAGS += --generate-mini-debug-info
+    TARGET_DEX_PREOPT_BOOT_FLAGS += --generate-mini-debug-info
   endif
 endif
 
+.KATI_READONLY := TARGET_DEX_PREOPT_BOOT_FLAGS WITH_DEXPREOPT WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY
 GLOBAL_DEXPREOPT_FLAGS :=
 
 # Special rules for building stripped boot jars that override java_library.mk rules
