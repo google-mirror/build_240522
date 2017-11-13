@@ -480,3 +480,6 @@ PRODUCT_CFI_EXCLUDE_PATHS := \
 # Whether any paths should have CFI enabled for components
 PRODUCT_CFI_INCLUDE_PATHS := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_CFI_INCLUDE_PATHS))
+
+# TODO(b/68153540): Remove filter-out after fixing offendors
+.KATI_READONLY := $(filter-out PRODUCT_VENDOR_KERNEL_HEADERS DEVICE_PACKAGE_OVERLAYS,$(_product_var_list))
