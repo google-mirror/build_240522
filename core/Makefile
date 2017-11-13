@@ -25,9 +25,11 @@ define check-product-copy-files
 $(if $(filter %.apk, $(call word-colon, 2, $(1))),$(error \
     Prebuilt apk found in PRODUCT_COPY_FILES: $(1), use BUILD_PREBUILT instead!))
 endef
+# Fix the TARGET_COPY_OUT_VENDOR placeholder
+product_copy_files := $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),$(PRODUCT_COPY_FILES))
 # filter out the duplicate <source file>:<dest file> pairs.
 unique_product_copy_files_pairs :=
-$(foreach cf,$(PRODUCT_COPY_FILES), \
+$(foreach cf,$(product_copy_files), \
     $(if $(filter $(unique_product_copy_files_pairs),$(cf)),,\
         $(eval unique_product_copy_files_pairs += $(cf))))
 unique_product_copy_files_destinations :=
