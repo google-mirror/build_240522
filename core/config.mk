@@ -941,6 +941,7 @@ dont_bother_goals := out \
     cacheimage-nodeps \
     bptimage-nodeps \
     vnod vendorimage-nodeps \
+	odmnod odmimage-nodeps \
     systemotherimage-nodeps \
     ramdisk-nodeps \
     bootimage-nodeps \
