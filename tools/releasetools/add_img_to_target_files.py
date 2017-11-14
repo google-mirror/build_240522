@@ -74,7 +74,8 @@ OPTIONS.is_signing = False
 
 
 # Partitions that should have their care_map added to META/care_map.txt.
-PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product', 'product-services')
+PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product', 'product-services',
+                            'odm')
 
 
 class OutputFile(object):
@@ -210,6 +211,22 @@ def AddProductServices(output_zip):
       output_zip, OPTIONS.input_tmp, "IMAGES", "product-services.map")
   CreateImage(
       OPTIONS.input_tmp, OPTIONS.info_dict, "product-services", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdm(output_zip):
+  """Turn the contents of ODM into an odm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm.img")
+  if os.path.exists(img.input_name):
+    print("odm.img already exists; no need to rebuild...")
+    return img.input_name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
       block_list=block_list)
   return img.name
 
@@ -642,7 +659,7 @@ def AddImagesToTargetFiles(filename):
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
 
-  # {vendor,product,product-services}.img are unlike system.img or
+  # {vendor,odm,product,product-services}.img are unlike system.img or
   # system_other.img. Because it could be built from source, or dropped into
   # target_files.zip as a prebuilt blob. We consider either of them as
   # {vendor,product,product-services}.img being available, which could be
@@ -650,6 +667,9 @@ def AddImagesToTargetFiles(filename):
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
+  has_odm = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "ODM")) or
+                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                             "odm.img")))
   has_product = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "PRODUCT")) or
                  os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                              "product.img")))
@@ -737,6 +757,10 @@ def AddImagesToTargetFiles(filename):
   if has_product_services:
     banner("product-services")
     partitions['product-services'] = AddProductServices(output_zip)
+
+  if has_odm:
+    banner("odm")
+    partitions['odm'] = AddOdm(output_zip)
 
   if has_system_other:
     banner("system_other")
