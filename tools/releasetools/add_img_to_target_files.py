@@ -174,6 +174,21 @@ def AddVendor(output_zip, prefix="IMAGES/"):
   return img.name
 
 
+def AddOdm(output_zip, prefix="IMAGES/"):
+  """Turn the contents of ODM into a odm image and store in it
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, prefix, "odm.img")
+  if os.path.exists(img.input_name):
+    print("odm.img already exists in %s, no need to rebuild..." % (prefix,))
+    return img.input_name
+
+  block_list = OutputFile(output_zip, OPTIONS.input_tmp, prefix, "odm.map")
+  CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
+              block_list=block_list)
+  return img.name
+
+
 def AddDtbo(output_zip, prefix="IMAGES/"):
   """Adds the DTBO image.
 
@@ -511,13 +526,16 @@ def AddImagesToTargetFiles(filename):
       print("target_files appears to already contain images.")
       sys.exit(1)
 
-  # vendor.img is unlike system.img or system_other.img. Because it could be
-  # built from source, or dropped into target_files.zip as a prebuilt blob. We
-  # consider either of them as vendor.img being available, which could be used
-  # when generating vbmeta.img for AVB.
+  # {vendor,odm}.img is unlike system.img or system_other.img. Because it could
+  # be built from source, or dropped into target_files.zip as a prebuilt blob.
+  # We consider either of them as {vendor,odm}.img being available, which could
+  # be used when generating vbmeta.img for AVB.
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
+  has_odm = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "ODM")) or
+                os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                            "odm.img")))
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
 
@@ -605,6 +623,10 @@ def AddImagesToTargetFiles(filename):
     banner("vendor")
     partitions['vendor'] = vendor_img_path = AddVendor(output_zip)
 
+  if has_odm:
+    banner("odm")
+    partitions['odm'] = odm_img_path = AddOdm(output_zip)
+
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
@@ -649,6 +671,11 @@ def AddImagesToTargetFiles(filename):
           OPTIONS.info_dict.get("avb_vendor_hashtree_enable") == "true"):
         assert os.path.exists(vendor_img_path)
         care_map_list += GetCareMap("vendor", vendor_img_path)
+      if line.strip() == "odm" and (
+          "odm_verity_block_device" in OPTIONS.info_dict or
+          OPTIONS.info_dict.get("avb_odm_hashtree_enable") == "true"):
+        assert os.path.exists(odm_img_path)
+        care_map_list += GetCareMap("odm", odm_img_path)
 
       img_name = line.strip() + ".img"
       prebuilt_path = os.path.join(OPTIONS.input_tmp, "IMAGES", img_name)
