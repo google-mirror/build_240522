@@ -38,6 +38,8 @@ Common goals are:
                             Stands for "System, NO Dependencies"
     vnod                    Quickly rebuild the vendor image from built packages
                             Stands for "Vendor, NO Dependencies"
+    odmnod                  Quickly rebuild the odm image from built packages
+                            Stands for "ODM, NO Dependencies"
 
 
 So, for example, you could run:
