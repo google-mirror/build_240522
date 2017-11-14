@@ -178,7 +178,6 @@ TARGET_COPY_OUT_SYSTEM_OTHER := system_other
 TARGET_COPY_OUT_DATA := data
 TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
 TARGET_COPY_OUT_OEM := oem
-TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
 
@@ -196,6 +195,17 @@ endef
 # We'll substitute with the real value after loading BoardConfig.mk.
 _vendor_path_placeholder := ||VENDOR-PATH-PH||
 TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+###########################################
+
+###########################################
+# Define TARGET_COPY_OUT_ODM to a placeholder, for at this point
+# we don't know if the device wants to build a separate odm.img
+# or just build odm stuff into vendor.img.
+# A device can set up TARGET_COPY_OUT_ODM to "odm" in its
+# BoardConfig.mk.
+# We'll substitute with the real value after loading BoardConfig.mk.
+_odm_path_placeholder := ||ODM-PATH-PH||
+TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
 ###########################################
 
 #################################################################
@@ -273,6 +283,29 @@ BOARD_USES_VENDORIMAGE := true
 else ifdef BOARD_USES_VENDORIMAGE
 $(error TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
 endif
+
+###########################################
+# Now we can substitute with the real value of TARGET_COPY_OUT_ODM
+ifeq ($(TARGET_COPY_OUT_ODM),$(_odm_path_placeholder))
+TARGET_COPY_OUT_ODM := vendor/odm
+else ifeq ($(filter odm vendor/odm,$(TARGET_COPY_OUT_ODM)),)
+$(error TARGET_COPY_OUT_ODM must be either 'odm' or 'vendor/odm', seeing '$(TARGET_COPY_OUT_ODM)'.)
+endif
+PRODUCT_COPY_FILES := $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),$(PRODUCT_COPY_FILES))
+
+BOARD_USES_ODMIMAGE :=
+ifdef BOARD_PREBUILT_ODMIMAGE
+BOARD_USES_ODMIMAGE := true
+endif
+ifdef BOARD_ODMIMAGE_FILE_SYSTEM_TYPE
+BOARD_USES_ODMIMAGE := true
+endif
+ifeq ($(TARGET_COPY_OUT_ODM),odm)
+BOARD_USES_ODMIMAGE := true
+else ifdef BOARD_USES_ODMIMAGE
+$(error TARGET_COPY_OUT_ODM must be set to 'odm' to use an odm image)
+endif
+
 ###########################################
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
 TARGET_RECOVERY_UPDATER_LIBS ?=
@@ -531,6 +564,7 @@ endif
 TARGET_OUT_CACHE := $(PRODUCT_OUT)/cache
 
 TARGET_OUT_VENDOR := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)
+TARGET_OUT_ODM:= $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ODM)
 ifneq ($(filter address,$(SANITIZE_TARGET)),)
 target_out_vendor_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/vendor
 ifeq ($(SANITIZE_LITE),true)
