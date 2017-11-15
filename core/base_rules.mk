@@ -183,11 +183,11 @@ my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
 ifdef LOCAL_IS_HOST_MODULE
   partition_tag :=
 else
-ifeq (true,$(LOCAL_VENDOR_MODULE))
+ifneq ($(or $(filter true,$(LOCAL_VENDOR_MODULE)),$(filter $(TARGET_OUT_VENDOR)/%,$(my_module_path))),)
   partition_tag := _VENDOR
-else ifeq (true,$(LOCAL_OEM_MODULE))
+else ifneq ($(or $(filter true,$(LOCAL_OEM_MODULE)),$(filter $(TARGET_OUT_OEM)/%,$(my_module_path))),)
   partition_tag := _OEM
-else ifeq (true,$(LOCAL_ODM_MODULE))
+else ifneq ($(or $(filter true,$(LOCAL_ODM_MODULE)),$(filter $(TARGET_OUT_ODM)/%,$(my_module_path))),)
   partition_tag := _ODM
 else ifeq (NATIVE_TESTS,$(LOCAL_MODULE_CLASS))
   partition_tag := _DATA
