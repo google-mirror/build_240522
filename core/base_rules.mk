@@ -180,6 +180,15 @@ my_module_path := $(strip $(LOCAL_MODULE_PATH))
 endif
 my_module_path := $(patsubst %/,%,$(my_module_path))
 my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
+
+ifneq ($(filter $(TARGET_OUT_VENDOR)/%,$(my_module_path)),)
+LOCAL_VENDOR_MODULE := true
+else ifneq ($(filter $(TARGET_OUT_OEM)/%,$(my_module_path)),)
+LOCAL_OEM_MODULE := true
+else ifneq ($(filter $(TARGET_OUT_ODM)/%,$(my_module_path)),)
+LOCAL_ODM_MODULE := true
+endif
+
 ifdef LOCAL_IS_HOST_MODULE
   partition_tag :=
 else
