@@ -65,6 +65,16 @@ else
   my_host_cross :=
 endif
 
+_path := $(LOCAL_MODULE_PATH) $(LOCAL_MODULE_PATH_32) $(LOCAL_MODULE_PATH_64)
+ifneq ($(filter $(TARGET_OUT_VENDOR)%,$(_path)),)
+LOCAL_VENDOR_MODULE := true
+else ifneq ($(filter $(TARGET_OUT_OEM)/%,$(_path)),)
+LOCAL_OEM_MODULE := true
+else ifneq ($(filter $(TARGET_OUT_ODM)/%,$(_path)),)
+LOCAL_ODM_MODULE := true
+endif
+_path :=
+
 ifndef LOCAL_PROPRIETARY_MODULE
   LOCAL_PROPRIETARY_MODULE := $(LOCAL_VENDOR_MODULE)
 endif
@@ -180,6 +190,7 @@ my_module_path := $(strip $(LOCAL_MODULE_PATH))
 endif
 my_module_path := $(patsubst %/,%,$(my_module_path))
 my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
+
 ifdef LOCAL_IS_HOST_MODULE
   partition_tag :=
 else
