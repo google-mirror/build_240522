@@ -14,6 +14,17 @@
 # limitations under the License.
 #
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
+# The following is from full_base_telephony.mk and emulator/vendor specific,
+# so not included in treble_common.mk.
+PRODUCT_PROPERTY_OVERRIDES += \
+	keyguard.no_require_sim=true \
+	ro.com.android.dataroaming=true
+
+# To produce a system image as GSI, the following is needed.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common_64.mk)
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/vendor/lib64/libreference-ril.so
 
@@ -26,10 +37,6 @@ PRODUCT_COPY_FILES += \
     development/sys-img/advancedFeatures.ini:advancedFeatures.ini \
     device/generic/goldfish/data/etc/encryptionkey.img:encryptionkey.img \
     prebuilts/qemu-kernel/x86_64/3.18/kernel-qemu2:kernel-ranchu
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
 
 include $(SRC_TARGET_DIR)/product/emulator.mk
 
