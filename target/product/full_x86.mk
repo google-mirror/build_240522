@@ -23,8 +23,20 @@
 # that isn't a wifi connection. This will instruct init.rc to enable the
 # network connection so that you can use it with ADB
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86/device.mk)
+# Please put this before the inclusion of treble_common_32.mk.
+# Otherwise, the related property setting therein won't be
+# "overridden" by the setting here probably because of how
+# PRODUCT_DEFAULT_PROPERTY_OVERRIDES is handled by the build system.
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
+
+# The following is from full_base_telephony.mk and emulator/vendor specific,
+# so not included in treble_common.mk.
+PRODUCT_PROPERTY_OVERRIDES += \
+	keyguard.no_require_sim=true \
+	ro.com.android.dataroaming=true
+
+# To produce a system image as GSI, the following is needed.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/treble_common_32.mk)
 
 include $(SRC_TARGET_DIR)/product/emulator.mk
 

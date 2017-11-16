@@ -463,6 +463,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/manifest.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/vendor/compatibility_matrix.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/compatibility_matrix.xml)
 
+# Remove device configuration rules under root
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/*.ranchu.rc)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/fstab*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
