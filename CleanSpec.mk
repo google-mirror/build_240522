@@ -456,6 +456,10 @@ $(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/*/*_intermediat
 $(call add-clean-step, rm -rf $(HOST_OUT_COMMON_INTERMEDIATES)/*/*_intermediates/with-local/)
 $(call add-clean-step, rm -rf $(HOST_OUT_COMMON_INTERMEDIATES)/*/*_intermediates/no-local/)
 
+# Remove device configuration fules under root
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/*.ranchu.rc)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/fstab*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
