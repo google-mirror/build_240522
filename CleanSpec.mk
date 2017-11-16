@@ -450,6 +450,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp)
 
+# Remove device configuration fules under root
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/*.ranchu.rc)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/root/fstab*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
