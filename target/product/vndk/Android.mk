@@ -102,5 +102,8 @@ LOCAL_REQUIRED_MODULES := \
     $(addsuffix .vendor,$(VNDK_SAMEPROCESS_LIBRARIES)) \
     $(LLNDK_LIBRARIES)
 
+LOCAL_REQUIRED_MODULES += \
+    $(foreach vndk_ver,$(PRODUCT_EXTRA_VNDK_VERSIONS),vndk_v$(vndk_ver))
+
 include $(BUILD_PHONY_PACKAGE)
 endif # BOARD_VNDK_VERSION is set
