@@ -725,8 +725,10 @@ $(foreach req,$(requirements),$(eval \
     $(req) := $(if $($(req)_OVERRIDE),$($(req)_OVERRIDE),$(PRODUCT_FULL_TREBLE))))
 
 .KATI_READONLY := \
+    $(eval PRODUCT_FULL_TREBLE_OVERRIDE ?=) \
+    $(foreach req,$(requirements),$(eval $(req)_OVERRIDE ?=)) \
     $(requirements) \
-    PRODUCT_FULL_TREBLE
+    PRODUCT_FULL_TREBLE \
 
 requirements :=
 
