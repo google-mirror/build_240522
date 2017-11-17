@@ -98,9 +98,17 @@ endif
 include $(CLEAR_VARS)
 LOCAL_MODULE := vndk_package
 LOCAL_REQUIRED_MODULES := \
+    $(foreach vndk_ver,$(PRODUCT_EXTRA_VNDK_VERSIONS),vndk_v$(vndk_ver))
+
+ifeq (current,$(BOARD_VNDK_VERSION))
+LOCAL_REQUIRED_MODULES += \
     $(addsuffix .vendor,$(VNDK_CORE_LIBRARIES)) \
     $(addsuffix .vendor,$(VNDK_SAMEPROCESS_LIBRARIES)) \
     $(LLNDK_LIBRARIES)
+else
+LOCAL_REQUIRED_MODULES += \
+    vndk_v$(BOARD_VNDK_VERSION)
+endif
 
 include $(BUILD_PHONY_PACKAGE)
 endif # BOARD_VNDK_VERSION is set
