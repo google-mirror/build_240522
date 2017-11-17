@@ -1330,6 +1330,42 @@ $(call track-src-file-obj,$(asm_sources_asm),$(asm_objects_asm))
 asm_objects += $(asm_objects_asm)
 endif
 
+###################################################################
+## When compiling a CFI enabled target, use the .cfi variant of any
+## static dependencies (where they exist).
+##################################################################
+define get_correct_variant
+  $(if $(filter $(1),$(CFI_LIBRARIES)),
+      $(1).cfi,$(1))
+endef
+
+ifneq ($(filter cfi,$(my_sanitize)),)
+  my_whole_static_libraries := $(foreach l,$(my_whole_static_libraries),\
+    $(call get_correct_variant,$(l)))
+
+  my_static_libraries := $(foreach l,$(my_static_libraries),\
+    $(call get_correct_variant,$(l)))
+endif
+
+
+# ifneq ($(filter cfi,$(my_sanitize)),)
+#   my_whole_static_libraries := $(foreach l,$(my_whole_static_libraries),\
+#     $(ifdef $(MODULE.$(if $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if \
+#       $(LOCAL_IS_AUX_MODULE),$(aux_class),TARGET)).$(LOCAL_MODULE_CLASS).$(l).cfi) \
+#       $(l).cfi \
+#       else \
+#       $(l) \
+#       endif))
+
+#   my_static_libraries := $(foreach l,$(my_static_libraries),\
+#     $(ifdef $(MODULE.$(if $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if \
+#       $(LOCAL_IS_AUX_MODULE),$(aux_class),TARGET)).$(LOCAL_MODULE_CLASS).$(l).cfi) \
+#       $(l).cfi \
+#       else \
+#       $(l) \
+#       endif))
+# endif
+
 ###########################################################
 ## When compiling against the VNDK, use LL-NDK libraries
 ###########################################################
