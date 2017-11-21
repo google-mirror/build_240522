@@ -128,22 +128,22 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
 
 from __future__ import print_function
 
-import sys
-
-if sys.hexversion < 0x02070000:
-  print("Python 2.7 or newer is required.", file=sys.stderr)
-  sys.exit(1)
-
 import multiprocessing
 import os.path
-import subprocess
 import shlex
+import subprocess
+import sys
 import tempfile
 import zipfile
 
 import common
 import edify_generator
 import sparse_img
+
+if sys.hexversion < 0x02070000:
+  print("Python 2.7 or newer is required.", file=sys.stderr)
+  sys.exit(1)
+
 
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = None
@@ -203,7 +203,7 @@ def AppendAssertions(script, info_dict, oem_dicts=None):
       if not values:
         raise common.ExternalError(
             "The OEM file is missing the property %s" % prop)
-      script.AssertOemProperty(prop, values)
+      script.AssertOemProperty(prop, values, OPTIONS.oem_no_mount)
 
 
 def _LoadOemDicts(script, recovery_mount_options=None):
@@ -353,8 +353,8 @@ def AddCompatibilityArchiveIfTrebleEnabled(target_zip, output_zip,
 
     # Create new archive.
     compatibility_archive = tempfile.NamedTemporaryFile()
-    compatibility_archive_zip = zipfile.ZipFile(compatibility_archive, "w",
-        compression=zipfile.ZIP_DEFLATED)
+    compatibility_archive_zip = zipfile.ZipFile(
+        compatibility_archive, "w", compression=zipfile.ZIP_DEFLATED)
 
     # Add metadata.
     for file_name in compatibility_files:
@@ -512,7 +512,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   system_tgt = GetImage("system", OPTIONS.input_tmp)
   system_tgt.ResetFileMap()
   system_diff = common.BlockDifference("system", system_tgt, src=None)
-  system_diff.WriteScript(script, output_zip)
+  system_diff.WriteScript(script, output_zip,
+                          write_verify_script=OPTIONS.verify)
 
   boot_img = common.GetBootableImage(
       "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
@@ -523,7 +524,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     vendor_tgt = GetImage("vendor", OPTIONS.input_tmp)
     vendor_tgt.ResetFileMap()
     vendor_diff = common.BlockDifference("vendor", vendor_tgt)
-    vendor_diff.WriteScript(script, output_zip)
+    vendor_diff.WriteScript(script, output_zip,
+                            write_verify_script=OPTIONS.verify)
 
   AddCompatibilityArchiveIfTrebleEnabled(input_zip, output_zip,
                                          OPTIONS.info_dict)
@@ -855,10 +857,12 @@ else
   device_specific.IncrementalOTA_InstallBegin()
 
   system_diff.WriteScript(script, output_zip,
-                          progress=0.8 if vendor_diff else 0.9)
+                          progress=0.8 if vendor_diff else 0.9,
+                          write_verify_script=OPTIONS.verify)
 
   if vendor_diff:
-    vendor_diff.WriteScript(script, output_zip, progress=0.1)
+    vendor_diff.WriteScript(script, output_zip, progress=0.1,
+                            write_verify_script=OPTIONS.verify)
 
   if OPTIONS.two_step:
     common.ZipWriteStr(output_zip, "boot.img", target_boot.data)
@@ -984,7 +988,8 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     cmd.extend(["-passin", "pass:" + pw] if pw else ["-nocrypt"])
     rsa_key = common.MakeTempFile(prefix="key-", suffix=".key")
     cmd.extend(["-out", rsa_key])
-    p1 = common.Run(cmd, verbose=False, stdout=log_file, stderr=subprocess.STDOUT)
+    p1 = common.Run(cmd, verbose=False, stdout=log_file,
+                    stderr=subprocess.STDOUT)
     p1.communicate()
     assert p1.returncode == 0, "openssl pkcs8 failed"
 
@@ -1126,7 +1131,8 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     namelist = target_zip.namelist()
     if care_map_path in namelist:
       care_map_data = target_zip.read(care_map_path)
-      common.ZipWriteStr(output_zip, "care_map.txt", care_map_data,
+      common.ZipWriteStr(
+          output_zip, "care_map.txt", care_map_data,
           compress_type=zipfile.ZIP_STORED)
     else:
       print("Warning: cannot find care map file in target_file package")
@@ -1289,7 +1295,8 @@ def main(argv):
   # Load the dict file from the zip directly to have a peek at the OTA type.
   # For packages using A/B update, unzipping is not needed.
   if OPTIONS.extracted_input is not None:
-    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input, OPTIONS.extracted_input)
+    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input,
+                                            OPTIONS.extracted_input)
   else:
     input_zip = zipfile.ZipFile(args[0], "r")
     OPTIONS.info_dict = common.LoadInfoDict(input_zip)
@@ -1337,7 +1344,8 @@ def main(argv):
   if OPTIONS.extracted_input is not None:
     OPTIONS.input_tmp = OPTIONS.extracted_input
     OPTIONS.target_tmp = OPTIONS.input_tmp
-    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
+    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp,
+                                            OPTIONS.input_tmp)
     input_zip = zipfile.ZipFile(args[0], "r")
   else:
     print("unzipping target target-files...")
