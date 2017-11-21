@@ -855,7 +855,7 @@ function mmm()
             # Remove the leading ./ and trailing / if any exists.
             DIR=${DIR#./}
             DIR=${DIR%/}
-            if [ -f $DIR/Android.mk -o -f $DIR/Android.bp ]; then
+            if [ -d $DIR ]; then
                 local TO_CHOP=`(\cd -P -- $T && pwd -P) | wc -c | tr -d ' '`
                 local TO_CHOP=`expr $TO_CHOP + 1`
                 local START=`PWD= /bin/pwd`
@@ -877,11 +877,8 @@ function mmm()
                 case $DIR in
                   showcommands | snod | dist | *=*) ARGS="$ARGS $DIR";;
                   GET-INSTALL-PATH) GET_INSTALL_PATH=$DIR;;
-                  *) if [ -d $DIR ]; then
-                         echo "No Android.mk in $DIR.";
-                     else
-                         echo "Couldn't locate the directory $DIR";
-                     fi
+                  *)
+                     echo "Couldn't locate the directory $DIR";
                      return 1;;
                 esac
             fi
