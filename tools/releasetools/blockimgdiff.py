@@ -1075,7 +1075,8 @@ class BlockImageDiff(object):
       while sinks:
         new_sinks = OrderedDict()
         for u in sinks:
-          if u not in G: continue
+          if u not in G:
+            continue
           s2.appendleft(u)
           del G[u]
           for iu in u.incoming:
@@ -1088,7 +1089,8 @@ class BlockImageDiff(object):
       while sources:
         new_sources = OrderedDict()
         for u in sources:
-          if u not in G: continue
+          if u not in G:
+            continue
           s1.append(u)
           del G[u]
           for iu in u.outgoing:
@@ -1097,7 +1099,8 @@ class BlockImageDiff(object):
               new_sources[iu] = None
         sources = new_sources
 
-      if not G: break
+      if not G:
+        break
 
       # Find the "best" vertex to put next.  "Best" is the one that
       # maximizes the net difference in source blocks saved we get by
@@ -1154,14 +1157,16 @@ class BlockImageDiff(object):
       intersections = OrderedDict()
       for s, e in a.tgt_ranges:
         for i in range(s, e):
-          if i >= len(source_ranges): break
+          if i >= len(source_ranges):
+            break
           # Add all the Transfers in source_ranges[i] to the (ordered) set.
           if source_ranges[i] is not None:
             for j in source_ranges[i]:
               intersections[j] = None
 
       for b in intersections:
-        if a is b: continue
+        if a is b:
+          continue
 
         # If the blocks written by A are read by B, then B needs to go before A.
         i = a.tgt_ranges.intersect(b.src_ranges)

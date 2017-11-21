@@ -71,7 +71,7 @@ def main(argv):
     common.Usage(__doc__)
     sys.exit(1)
 
-  OPTIONS.input_tmp, input_zip = common.UnzipTemp(
+  OPTIONS.input_tmp, _ = common.UnzipTemp(
       args[0], ["IMAGES/*", "OTA/*"])
   output_zip = zipfile.ZipFile(args[1], "w", compression=zipfile.ZIP_DEFLATED)
   CopyInfo(output_zip)

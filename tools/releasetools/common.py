@@ -686,8 +686,7 @@ def GetMinSdkVersionInt(apk_name, codename_to_api_level_map):
 
 
 def SignFile(input_name, output_name, key, password, min_api_level=None,
-    codename_to_api_level_map=dict(),
-    whole_file=False):
+             codename_to_api_level_map=None, whole_file=False):
   """Sign the input_name zip/jar/apk, producing output_name.  Use the
   given key and password (the latter may be None if the key does not
   have a password.
@@ -703,6 +702,8 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
   codename_to_api_level_map is needed to translate the codename which may be
   encountered as the APK's minSdkVersion.
   """
+  if codename_to_api_level_map is None:
+    codename_to_api_level_map = dict()
 
   java_library_path = os.path.join(
       OPTIONS.search_path, OPTIONS.signapk_shared_library_path)
@@ -1142,7 +1143,8 @@ class DeviceSpecificParams(object):
             f = b
           info = imp.find_module(f, [d])
         print("loaded device-specific extensions from", path)
-        self.module = imp.load_module("device_specific", *info)
+        self.module = imp.load_module(  # pylint: disable=star-args
+            "device_specific", *info)
       except ImportError:
         print("unable to load device-specific module; assuming none")
 
@@ -1154,7 +1156,8 @@ class DeviceSpecificParams(object):
     'default' kwarg (which itself defaults to None)."""
     if self.module is None or not hasattr(self.module, function_name):
       return kwargs.get("default", None)
-    return getattr(self.module, function_name)(*((self,) + args), **kwargs)
+    return getattr(  # pylint: disable=star-args
+        self.module, function_name)(*((self,) + args), **kwargs)
 
   def FullOTA_Assertions(self):
     """Called after emitting the block of assertions at the top of a
@@ -1204,7 +1207,7 @@ class DeviceSpecificParams(object):
     return self._DoCall("VerifyOTA_Assertions")
 
 class File(object):
-  def __init__(self, name, data, compress_size = None):
+  def __init__(self, name, data, compress_size=None):
     self.name = name
     self.data = data
     self.size = len(data)
@@ -1340,7 +1343,7 @@ def ComputeDifferences(diffs):
         else:
           name = "%s (%s)" % (tf.name, sf.name)
         if patch is None:
-          print("patching failed!                                  %s" % (name,))
+          print("patching failed!                                 %s" % (name,))
         else:
           print("%8.2f sec %8d / %8d bytes (%6.2f%%) %s" % (
               dur, len(patch), tf.size, 100.0 * len(patch) / tf.size, name))
@@ -1397,7 +1400,8 @@ class BlockDifference(object):
   def required_cache(self):
     return self._required_cache
 
-  def WriteScript(self, script, output_zip, progress=None):
+  def WriteScript(self, script, output_zip, progress=None,
+                  write_verify_script=False):
     if not self.src:
       # write the output unconditionally
       script.Print("Patching %s image unconditionally..." % (self.partition,))
@@ -1407,7 +1411,8 @@ class BlockDifference(object):
     if progress:
       script.ShowProgress(progress, 0)
     self._WriteUpdate(script, output_zip)
-    if OPTIONS.verify:
+
+    if write_verify_script:
       self._WritePostInstallVerifyScript(script)
 
   def WriteStrictVerifyScript(self, script):
@@ -1545,9 +1550,9 @@ class BlockDifference(object):
              '{}.transfer.list'.format(self.path),
              '{}.transfer.list'.format(self.partition))
 
-    # For full OTA, compress the new.dat with brotli with quality 6 to reduce its size. Quailty 9
-    # almost triples the compression time but doesn't further reduce the size too much.
-    # For a typical 1.8G system.new.dat
+    # For full OTA, compress the new.dat with brotli with quality 6 to reduce
+    # its size. Quailty 9 almost triples the compression time but doesn't
+    # further reduce the size too much. For a typical 1.8G system.new.dat
     #                       zip  | brotli(quality 6)  | brotli(quality 9)
     #   compressed_size:    942M | 869M (~8% reduced) | 854M
     #   compression_time:   75s  | 265s               | 719s

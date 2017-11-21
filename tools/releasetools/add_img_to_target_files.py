@@ -388,9 +388,9 @@ def AddVBMeta(output_zip, partitions, prefix="IMAGES/"):
         if os.path.exists(image_path):
           continue
         found = False
-        for dir in ['IMAGES', 'RADIO', 'VENDOR_IMAGES', 'PREBUILT_IMAGES']:
+        for dirname in ['IMAGES', 'RADIO', 'VENDOR_IMAGES', 'PREBUILT_IMAGES']:
           alt_path = os.path.join(
-              OPTIONS.input_tmp, dir, os.path.basename(image_path))
+              OPTIONS.input_tmp, dirname, os.path.basename(image_path))
           if os.path.exists(alt_path):
             split_args[index + 1] = alt_path
             found = True
