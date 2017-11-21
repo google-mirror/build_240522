@@ -801,41 +801,7 @@ function mm()
     if [ -f build/soong/soong_ui.bash ]; then
         _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode $@
     else
-        # Find the closest Android.mk file.
-        local M=$(findmakefile)
-        local MODULES=
-        local GET_INSTALL_PATH=
-        local ARGS=
-        # Remove the path to top as the makefilepath needs to be relative
-        local M=`echo $M|sed 's:'$T'/::'`
-        if [ ! "$T" ]; then
-            echo "Couldn't locate the top of the tree.  Try setting TOP."
-            return 1
-        elif [ ! "$M" ]; then
-            echo "Couldn't locate a makefile from the current directory."
-            return 1
-        else
-            local ARG
-            for ARG in $@; do
-                case $ARG in
-                  GET-INSTALL-PATH) GET_INSTALL_PATH=$ARG;;
-                esac
-            done
-            if [ -n "$GET_INSTALL_PATH" ]; then
-              MODULES=
-              ARGS=GET-INSTALL-PATH-IN-$(dirname ${M})
-              ARGS=${ARGS//\//-}
-            else
-              MODULES=MODULES-IN-$(dirname ${M})
-              # Convert "/" to "-".
-              MODULES=${MODULES//\//-}
-              ARGS=$@
-            fi
-            if [ "1" = "${WITH_TIDY_ONLY}" -o "true" = "${WITH_TIDY_ONLY}" ]; then
-              MODULES=tidy_only
-            fi
-            ONE_SHOT_MAKEFILE=$M _wrap_build $DRV $T/build/soong/soong_ui.bash --make-mode $MODULES $ARGS
-        fi
+        mmm . "$@"
     fi
 }
 
@@ -860,7 +826,7 @@ function mmm()
             # Remove the leading ./ and trailing / if any exists.
             DIR=${DIR#./}
             DIR=${DIR%/}
-            if [ -f $DIR/Android.mk -o -f $DIR/Android.bp ]; then
+            if [ -d $DIR ]; then
                 local TO_CHOP=`(\cd -P -- $T && pwd -P) | wc -c | tr -d ' '`
                 local TO_CHOP=`expr $TO_CHOP + 1`
                 local START=`PWD= /bin/pwd`
@@ -882,11 +848,8 @@ function mmm()
                 case $DIR in
                   showcommands | snod | dist | *=*) ARGS="$ARGS $DIR";;
                   GET-INSTALL-PATH) GET_INSTALL_PATH=$DIR;;
-                  *) if [ -d $DIR ]; then
-                         echo "No Android.mk in $DIR.";
-                     else
-                         echo "Couldn't locate the directory $DIR";
-                     fi
+                  *)
+                     echo "Couldn't locate the directory $DIR.";
                      return 1;;
                 esac
             fi
