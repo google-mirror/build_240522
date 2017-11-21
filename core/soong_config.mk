@@ -119,6 +119,8 @@ $(call add_json_bool, MinimizeJavaDebugInfo,             $(filter true,$(PRODUCT
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
 
+$(call add_json_list, NamespacesToExport,                $(PRODUCT_SOONG_NAMESPACES))
+
 _contents := $(subst $(comma)$(newline)__SV_END,$(newline)}$(newline),$(_contents)__SV_END)
 
 $(file >$(SOONG_VARIABLES).tmp,$(_contents))
