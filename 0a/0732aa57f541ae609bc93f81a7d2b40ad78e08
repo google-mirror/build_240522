@@ -1,0 +1,10 @@
+Verified+1: Simran Basi <sbasi@google.com>
+Code-Review+1: Jesse Badash <badash@google.com>
+Code-Review+2: Tina Zhou <tinazh@google.com>
+Autosubmit+1: Simran Basi <sbasi@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 21 Nov 2017 20:55:12 +0000
+Reviewed-on: https://android-review.googlesource.com/526058
+Project: platform/build
+Branch: refs/heads/nougat-cts-dev
