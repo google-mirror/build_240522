@@ -30,23 +30,32 @@ endef
 
 # Args:
 #   $(1): list of lib names without '.so' suffix (e.g., libX.vendor)
-#   $(2): if not empty, evaluates for TARGET_2ND_ARCH
+#   $(2): target class, such as "SHARED_LIBRARIES", "STATIC_LIBRARIES","ETC"
+#   $(3): if not empty, evaluates for TARGET_2ND_ARCH
 define paths-of-intermediates
-  $(strip \
+  $(strip $(wildcard \
     $(foreach lib,$(1), \
-      $(call append-path,$(call intermediates-dir-for,SHARED_LIBRARIES,$(lib),,,$(2)),$(lib).so)))
+      $(eval lib_file_name := $(if $(filter %.vendor,$(lib)),$(lib).so,$(lib))) \
+      $(call append-path,$(call intermediates-dir-for,$(2),$(lib),,,$(3)),$(lib_file_name)) \
+    ) \
+  ))
 endef
 
 vndk_core_libs := $(addsuffix .vendor,$(filter-out libclang_rt.ubsan%,$(VNDK_CORE_LIBRARIES)))
 vndk_sp_libs := $(addsuffix .vendor,$(VNDK_SAMEPROCESS_LIBRARIES))
+text_files := \
+  ld.config.txt \
+  vndksp.libraries.txt \
+  llndk.libraries.txt
 vndk_snapshot_dependencies := \
   $(vndk_core_libs) \
-  $(vndk_sp_libs)
+  $(vndk_sp_libs) \
+  $(text_files)
 
 # If in the future libclang_rt.ubsan* is removed from the VNDK-core list,
 # need to update the related logic in this file.
 ifeq (,$(filter libclang_rt.ubsan%,$(VNDK_CORE_LIBRARIES)))
-  $(error libclang_rt.ubsan* is no longer a VNDK-core library.)
+  $(error libclang_rt.ubsan* is no longer a VNDK-core library)
 endif
 
 # for TARGET_ARCH
@@ -64,32 +73,45 @@ vndk_snapshot_zip := $(PRODUCT_OUT)/android-vndk-$(TARGET_ARCH).zip
 vndk_snapshot_out := $(call intermediates-dir-for,PACKAGING,vndk-snapshot)
 $(vndk_snapshot_zip): PRIVATE_VNDK_SNAPSHOT_OUT := $(vndk_snapshot_out)
 
+vndk_snapshot_out_$(TARGET_ARCH) := $(vndk_snapshot_out)/arch-$(TARGET_ARCH)-$(TARGET_ARCH_VARIANT)
 $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_OUT_$(TARGET_ARCH) := \
-  $(vndk_snapshot_out)/arch-$(TARGET_ARCH)/shared/vndk-core
+  $(vndk_snapshot_out_$(TARGET_ARCH))/shared/vndk-core
 $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_ARCH) := \
-  $(call paths-of-intermediates,$(vndk_core_libs) $(clang_ubsan_vndk_core_$(TARGET_ARCH)))
+  $(call paths-of-intermediates,$(vndk_core_libs) $(clang_ubsan_vndk_core_$(TARGET_ARCH)),SHARED_LIBRARIES)
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT_$(TARGET_ARCH) := \
-  $(vndk_snapshot_out)/arch-$(TARGET_ARCH)/shared/vndk-sp
+  $(vndk_snapshot_out_$(TARGET_ARCH))/shared/vndk-sp
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_ARCH) := \
-  $(call paths-of-intermediates,$(vndk_sp_libs))
+  $(call paths-of-intermediates,$(vndk_sp_libs),SHARED_LIBRARIES)
+$(vndk_snapshot_zip): PRIVATE_TEXT_FILES_OUT_$(TARGET_ARCH) := \
+  $(vndk_snapshot_out_$(TARGET_ARCH))
+$(vndk_snapshot_zip): PRIVATE_TEXT_FILES_INTERMEDIATES_$(TARGET_ARCH) := \
+  $(call paths-of-intermediates,$(text_files),ETC)
 
-ifdef TARGET_2ND_ARCH
-$(vndk_snapshot_zip): PRIVATE_VNDK_CORE_OUT_$(TARGET_2ND_ARCH) := \
-  $(vndk_snapshot_out)/arch-$(TARGET_2ND_ARCH)/shared/vndk-core
-$(vndk_snapshot_zip): PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_2ND_ARCH) := \
-  $(call paths-of-intermediates,$(vndk_core_libs) $(clang_ubsan_vndk_core_$(TARGET_2ND_ARCH)),true)
-$(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT_$(TARGET_2ND_ARCH) := \
-  $(vndk_snapshot_out)/arch-$(TARGET_2ND_ARCH)/shared/vndk-sp
-$(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_2ND_ARCH) := \
-  $(call paths-of-intermediates,$(vndk_sp_libs),true)
-endif
+# TODO(jaeshin): Package additional arch variants such as (arch, variant)=(arm, armv8-a)
+# ifdef TARGET_2ND_ARCH
+# vndk_snapshot_out_$(TARGET_2ND_ARCH) := $(vndk_snapshot_out)/arch-$(TARGET_2ND_ARCH)-$(TARGET_2ND_ARCH_VARIANT)
+# $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_OUT_$(TARGET_2ND_ARCH) := \
+#   $(vndk_snapshot_out_$(TARGET_2ND_ARCH))/shared/vndk-core
+# $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_2ND_ARCH) := \
+#   $(call paths-of-intermediates,$(vndk_core_libs) $(clang_ubsan_vndk_core_$(TARGET_2ND_ARCH)),SHARED_LIBRARIES,true)
+# $(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT_$(TARGET_2ND_ARCH) := \
+#   $(vndk_snapshot_out_$(TARGET_2ND_ARCH))/shared/vndk-sp
+# $(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_2ND_ARCH) := \
+#   $(call paths-of-intermediates,$(vndk_sp_libs),SHARED_LIBRARIES,true)
+# $(vndk_snapshot_zip): PRIVATE_TEXT_FILES_OUT_$(TARGET_2ND_ARCH) := \
+#   $(vndk_snapshot_out_$(TARGET_2ND_ARCH))
+# $(vndk_snapshot_zip): PRIVATE_TEXT_FILES_INTERMEDIATES_$(TARGET_2ND_ARCH) := \
+#   $(call paths-of-intermediates,$(text_files),ETC,true)
+# endif
 
 # Args
 #   $(1): destination directory
 #   $(2): list of libs to copy
 $(vndk_snapshot_zip): private-copy-vndk-intermediates = \
-	@mkdir -p $(1); \
-	$(foreach lib,$(2),cp -p $(lib) $(call append-path,$(1),$(subst .vendor,,$(notdir $(lib))));)
+	$(if $(2), $(strip \
+  	  @mkdir -p $(1); \
+	  $(foreach lib,$(2),cp -p $(lib) $(call append-path,$(1),$(subst .vendor,,$(notdir $(lib))));) \
+	))
 
 $(vndk_snapshot_zip): $(vndk_snapshot_dependencies) $(SOONG_ZIP)
 	@echo 'Generating VNDK snapshot: $@'
@@ -100,12 +122,16 @@ $(vndk_snapshot_zip): $(vndk_snapshot_dependencies) $(SOONG_ZIP)
 		$(PRIVATE_VNDK_CORE_OUT_$(TARGET_ARCH)),$(PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_ARCH)))
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_VNDK_SP_OUT_$(TARGET_ARCH)),$(PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_ARCH)))
-ifdef TARGET_2ND_ARCH
 	$(call private-copy-vndk-intermediates, \
-		$(PRIVATE_VNDK_CORE_OUT_$(TARGET_2ND_ARCH)),$(PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_2ND_ARCH)))
-	$(call private-copy-vndk-intermediates, \
-		$(PRIVATE_VNDK_SP_OUT_$(TARGET_2ND_ARCH)),$(PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_2ND_ARCH)))
-endif
+		$(PRIVATE_TEXT_FILES_OUT_$(TARGET_ARCH)),$(PRIVATE_TEXT_FILES_INTERMEDIATES_$(TARGET_ARCH)))
+# ifdef TARGET_2ND_ARCH
+# 	$(call private-copy-vndk-intermediates, \
+# 		$(PRIVATE_VNDK_CORE_OUT_$(TARGET_2ND_ARCH)),$(PRIVATE_VNDK_CORE_INTERMEDIATES_$(TARGET_2ND_ARCH)))
+# 	$(call private-copy-vndk-intermediates, \
+# 		$(PRIVATE_VNDK_SP_OUT_$(TARGET_2ND_ARCH)),$(PRIVATE_VNDK_SP_INTERMEDIATES_$(TARGET_2ND_ARCH)))
+# 	$(call private-copy-vndk-intermediates, \
+# 		$(PRIVATE_TEXT_FILES_OUT_$(TARGET_2ND_ARCH)),$(PRIVATE_TEXT_FILES_INTERMEDIATES_$(TARGET_2ND_ARCH)))
+# endif
 	$(hide) $(SOONG_ZIP) -o $@ -P vndk-snapshot -C $(PRIVATE_VNDK_SNAPSHOT_OUT) \
 	-D $(PRIVATE_VNDK_SNAPSHOT_OUT)
 
@@ -113,6 +139,21 @@ endif
 vndk: $(vndk_snapshot_zip)
 
 $(call dist-for-goals, vndk, $(vndk_snapshot_zip))
+
+# clear global vars
+clang-ubsan-vndk-core :=
+paths-of-intermediates :=
+vndk_core_libs :=
+vndk_sp_libs :=
+text_files :=
+vndk_snapshot_dependencies :=
+vndk_snapshot_out :=
+clang_ubsan_vndk_core_$(TARGET_ARCH) :=
+vndk_snapshot_out_$(TARGET_ARCH) :=
+ifdef TARGET_2ND_ARCH
+clang_ubsan_vndk_core_$(TARGET_2ND_ARCH) :=
+vndk_snapshot_out_$(TARGET_2nD_ARCH) :=
+endif
 
 else # BOARD_VNDK_VERSION is NOT set to 'current'
 
