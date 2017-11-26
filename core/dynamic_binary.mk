@@ -61,7 +61,7 @@ endif
 ifeq ($(LOCAL_MODULE_CLASS),EXECUTABLES)
   my_pack_module_relocations := false
 endif
-
+-include $(TOPDIR)vendor/*/build/core/dynamic_binary.mk
 # TODO (dimitry): Relocation packer is not yet available for darwin
 ifneq ($(HOST_OS),linux)
   my_pack_module_relocations := false
