@@ -273,6 +273,17 @@ BOARD_USES_VENDORIMAGE := true
 else ifdef BOARD_USES_VENDORIMAGE
 $(error TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
 endif
+
+###########################################
+# Set BOARD_USES_OEMIMAGE
+BOARD_USES_OEMIMAGE :=
+ifdef BOARD_PREBUILT_OEMIMAGE
+BOARD_USES_OEMIMAGE := true
+endif
+ifdef BOARD_OEMIMAGE_FILE_SYSTEM_TYPE
+BOARD_USES_OEMIMAGE := true
+endif
+
 ###########################################
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
 TARGET_RECOVERY_UPDATER_LIBS ?=
