@@ -19,8 +19,11 @@
 
 dist_goal := $(strip $(filter dist,$(MAKECMDGOALS)))
 MAKECMDGOALS := $(strip $(filter-out dist,$(MAKECMDGOALS)))
+DIST_DIR_SOONG :=
 
 ifdef dist_goal
+
+DIST_DIR_SOONG := $(DIST_DIR)
 
 # $(1): source file
 # $(2): destination file
