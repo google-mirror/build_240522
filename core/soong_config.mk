@@ -119,6 +119,9 @@ $(call add_json_bool, MinimizeJavaDebugInfo,             $(filter true,$(PRODUCT
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
 
+include $(BUILD_SYSTEM)/distdir.mk
+$(call add_json_str,  DistDir,                           $(DIST_DIR_SOONG))
+
 _contents := $(subst $(comma)$(newline)__SV_END,$(newline)}$(newline),$(_contents)__SV_END)
 
 $(file >$(SOONG_VARIABLES).tmp,$(_contents))
