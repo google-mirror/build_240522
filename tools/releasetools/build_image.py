@@ -752,10 +752,24 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("vendor_base_fs_file", "base_fs_file")
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")
   elif mount_point == "oem":
-    copy_prop("fs_type", "fs_type")
+    copy_prop("avb_oem_hashtree_enable", "avb_hashtree_enable")
+    copy_prop("avb_oem_add_hashtree_footer_args",
+              "avb_add_hashtree_footer_args")
+    copy_prop("avb_oem_key_path", "avb_key_path")
+    copy_prop("avb_oem_algorithm", "avb_algorithm")
+    if "oem_fs_type" in glob_dict:
+      copy_prop("oem_fs_type", "fs_type")
+    else:
+      copy_prop("fs_type", "fs_type")
     copy_prop("oem_size", "partition_size")
     copy_prop("oem_journal_size", "journal_size")
+    copy_prop("oem_verity_block_device", "verity_block_device")
     copy_prop("has_ext4_reserved_blocks", "has_ext4_reserved_blocks")
+    copy_prop("oem_squashfs_compressor", "squashfs_compressor")
+    copy_prop("oem_squashfs_compressor_opt", "squashfs_compressor_opt")
+    copy_prop("oem_squashfs_block_size", "squashfs_block_size")
+    copy_prop("oem_squashfs_disable_4k_align", "squashfs_disable_4k_align")
+    copy_prop("oem_base_fs_file", "base_fs_file")
     copy_prop("oem_extfs_inode_count", "extfs_inode_count")
   d["partition_name"] = mount_point
   return d
