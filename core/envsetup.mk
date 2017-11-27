@@ -177,7 +177,6 @@ TARGET_COPY_OUT_SYSTEM := system
 TARGET_COPY_OUT_SYSTEM_OTHER := system_other
 TARGET_COPY_OUT_DATA := data
 TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
-TARGET_COPY_OUT_OEM := oem
 TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
@@ -196,6 +195,17 @@ endef
 # We'll substitute with the real value after loading BoardConfig.mk.
 _vendor_path_placeholder := ||VENDOR-PATH-PH||
 TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+###########################################
+
+###########################################
+# Define TARGET_COPY_OUT_OEM to a placeholder, for at this point
+# we don't know if the device wants to build a separate oem.img
+# or just build oem stuff into system.img.
+# A device can set up TARGET_COPY_OUT_OEM to "oem" in its
+# BoardConfig.mk.
+# We'll substitute with the real value after loading BoardConfig.mk.
+_oem_path_placeholder := ||OEM-PATH-PH||
+TARGET_COPY_OUT_OEM := $(_oem_path_placeholder)
 ###########################################
 
 #################################################################
@@ -273,6 +283,44 @@ BOARD_USES_VENDORIMAGE := true
 else ifdef BOARD_USES_VENDORIMAGE
 $(error TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
 endif
+
+###########################################
+# Now we can substitute with the real value of TARGET_COPY_OUT_OEM
+BOARD_USES_OEM :=
+ifdef BOARD_PREBUILT_OEMIMAGE
+BOARD_USES_OEMIMAGE := true
+endif
+ifdef BOARD_OEMIMAGE_FILE_SYSTEM_TYPE
+BOARD_USES_OEMIMAGE := true
+endif
+
+_is_using_legacy_oem_image :=
+ifeq ($(TARGET_COPY_OUT_OEM),$(_oem_path_placeholder))
+  TARGET_COPY_OUT_OEM := system/oem
+
+  # Set TARGET_COPY_OUT_OEM as 'oem' if BOARD_OEMIMAGE_PARTITION_SIZE is defined
+  # even though BOARD_USES_OEMIMAGE isn't set, which is considered as the case of
+  # using legacy 'oem_image'.
+  ifndef BOARD_USES_OEMIMAGE
+    ifdef BOARD_OEMIMAGE_PARTITION_SIZE
+      TARGET_COPY_OUT_OEM := oem
+      _is_using_legacy_oem_image := true
+    endif
+  endif
+else ifeq ($(filter oem system/oem,$(TARGET_COPY_OUT_OEM)),)
+$(error TARGET_COPY_OUT_OEM must be either 'oem' or 'system/oem', seeing '$(TARGET_COPY_OUT_OEM)'.)
+endif
+
+PRODUCT_COPY_FILES := $(subst $(_oem_path_placeholder),$(TARGET_COPY_OUT_OEM),$(PRODUCT_COPY_FILES))
+
+ifndef _is_using_legacy_oem_image
+  ifeq ($(TARGET_COPY_OUT_OEM),oem)
+    BOARD_USES_OEMIMAGE := true
+  else ifdef BOARD_USES_OEMIMAGE
+    $(error TARGET_COPY_OUT_OEM must be set to 'oem' to use an oem image)
+  endif
+endif
+
 ###########################################
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
 TARGET_RECOVERY_UPDATER_LIBS ?=
