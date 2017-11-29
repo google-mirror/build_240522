@@ -737,6 +737,7 @@ requirements := \
     PRODUCT_TREBLE_LINKER_NAMESPACES \
     PRODUCT_SEPOLICY_SPLIT \
     PRODUCT_ENFORCE_VINTF_MANIFEST \
+    PRODUCT_NOTICE_SPLIT \
 
 # If it is overriden, then the requirement override is taken, otherwise it's
 # PRODUCT_FULL_TREBLE
