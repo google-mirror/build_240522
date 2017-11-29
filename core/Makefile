@@ -817,7 +817,7 @@ installed_notice_html_or_xml_gz := $(TARGET_OUT)/etc/NOTICE.html.gz
 tools_notice_file_txt := $(HOST_OUT_INTERMEDIATES)/NOTICE.txt
 tools_notice_file_html := $(HOST_OUT_INTERMEDIATES)/NOTICE.html
 
-ifeq ($(PRODUCT_FULL_TREBLE),true)
+ifeq ($(PRODUCT_NOTICE_SPLIT),true)
 target_notice_file_html_or_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml
 target_notice_file_html_or_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml.gz
 installed_notice_html_or_xml_gz := $(TARGET_OUT)/etc/NOTICE.xml.gz
