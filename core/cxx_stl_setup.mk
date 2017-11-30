@@ -107,6 +107,9 @@ else ifeq ($(my_cxx_stl),libstdc++)
         $(error $(LOCAL_PATH): $(LOCAL_MODULE): libstdc++ is not supported for device modules)
     else ifneq ($($(my_prefix)OS),windows)
         $(error $(LOCAL_PATH): $(LOCAL_MODULE): libstdc++ is not supported on $($(my_prefix)OS))
+    else
+        # TODO(b/69970955): using -nodefaultlibs
+        my_cxx_ldlibs += -lstdc++ -lpthread
     endif
 else ifeq ($(my_cxx_stl),none)
     ifdef LOCAL_IS_HOST_MODULE

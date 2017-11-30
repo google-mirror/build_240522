@@ -1782,6 +1782,27 @@ endif
 # (start-group/end-group), so append after the check above.
 my_ldlibs += $(my_cxx_ldlibs)
 
+# TODO(b/69970955): clang looks for -lgcc_s by default, but our mingw doesn't have that library.
+ifdef LOCAL_IS_HOST_MODULE
+  ifeq ($($(my_prefix)OS)|$(my_clang),windows|true)
+    my_ldlibs += -nodefaultlibs \
+		 -lmingw32 \
+		 -lgcc \
+		 -lmoldname \
+		 -lmingwex \
+		 -lmsvcrt \
+		 -ladvapi32 \
+		 -lshell32 \
+		 -luser32 \
+		 -lkernel32 \
+		 -lmingw32 \
+		 -lgcc \
+		 -lmoldname \
+		 -lmingwex \
+		 -lmsvcrt
+  endif
+endif
+
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
