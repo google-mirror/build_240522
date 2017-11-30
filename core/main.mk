@@ -1206,3 +1206,7 @@ ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
 endif # KATI
+
+# Create artifact to include TEST_MAPPING files in source code.
+include $(BUILD_SYSTEM)/test_mapping.mk
+
