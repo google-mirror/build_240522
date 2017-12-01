@@ -77,11 +77,8 @@ javac-check : $(full_classes_jar)
 javac-check-$(LOCAL_MODULE) : $(full_classes_jar)
 
 ifndef LOCAL_IS_HOST_MODULE
-ifeq ($(LOCAL_SDK_VERSION),system_current)
-my_link_type := java:system
-my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
-else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
+ifndef BOARD_SYSTEM_SDK_VERSION
+ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
 my_link_type := java:system
 my_warn_types := java:platform
 my_allowed_types := java:sdk java:system
@@ -94,6 +91,43 @@ my_link_type := java:platform
 my_warn_types :=
 my_allowed_types := java:sdk java:system java:platform
 endif
+else # BOARD_SYSTEM_SDK_VERSION
+ifeq (true,$(my_module_is_vendor_app))
+my_link_type := java:vendor
+my_warn_types :=
+my_allowed_types := java:vendor
+my_allowed_static_types := java:sdk java:system
+else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
+ifndef LOCAL_IS_STATIC_JAVA_LIBRARY
+my_link_type := java:system
+my_warn_types := java:platform
+my_allowed_types := java:sdk java:system
+my_allowed_static_types := java:sdk java:system
+else
+my_link_type := java:system
+my_warn_types := java:platform
+my_allowed_types :=
+my_allowed_static_types := java:sdk java:system
+endif
+else ifneq ($(LOCAL_SDK_VERSION),)
+ifndef LOCAL_IS_STATIC_JAVA_LIBRARY
+my_link_type := java:sdk
+my_warn_types := java:system java:platform
+my_allowed_types := java:sdk
+my_allowed_static_types := java:sdk
+else
+my_link_type := java:sdk
+my_warn_types := java:sdk java:platform
+my_allowed_types :=
+my_allowed_static_types := java:sdk
+endif
+else
+my_link_type := java:platform
+my_warn_types :=
+my_allowed_types := java:sdk java:system java:platform
+my_allowed_static_types := java:sdk java:system java:platform
+endif
+endif # !BOARD_SYSTEM_SDK_VERSION
 
 my_link_deps :=
 my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)

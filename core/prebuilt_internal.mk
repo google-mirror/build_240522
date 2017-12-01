@@ -498,8 +498,17 @@ common_javalib_jar := $(intermediates.COMMON)/javalib.jar
 $(common_classes_jar) $(common_classes_pre_proguard_jar) $(common_javalib_jar): PRIVATE_MODULE := $(LOCAL_MODULE)
 $(common_classes_jar) $(common_classes_pre_proguard_jar) $(common_javalib_jar): PRIVATE_PREFIX := $(my_prefix)
 
-ifeq ($(LOCAL_SDK_VERSION),system_current)
+ifndef BOARD_SYSTEM_SDK_VERSION
+ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
 my_link_type := java:system
+else ifneq ($(LOCAL_SDK_VERSION),)
+my_link_type := java:sdk
+else
+my_link_type := java:platform
+endif
+else # BOARD_SYSTEM_SDK_VERSION
+ifeq (true,$(my_module_is_vendor_app))
+my_link_type := java:vendor
 else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
 my_link_type := java:system
 else ifneq ($(LOCAL_SDK_VERSION),)
@@ -507,6 +516,7 @@ my_link_type := java:sdk
 else
 my_link_type := java:platform
 endif
+endif # !BOARD_SYSTEM_SDK_VERSION
 
 # TODO: check dependencies of prebuilt files
 my_link_deps :=

@@ -759,6 +759,28 @@ $(foreach lt,$(ALL_LINK_TYPES),\
       $(call verify-link-type,$(lt),$(d)),\
       $(call link-type-missing,$(lt),$(d)))))
 
+ifdef BOARD_SYSTEM_SDK_VERSION
+# Verify that $(1) can static link against $(2)
+# Both $(1) and $(2) are the link type prefix defined above
+define verify-static-link-type
+$(foreach t,$($(2).TYPE),\
+  $(if $(filter-out $($(1).ALLOWED_STATIC),$(t)),\
+    $(if $(filter $(t),$($(1).WARN)),\
+      $(call link-type-warning,$(1),$(2),$(t)),\
+      $(call link-type-error,$(1),$(2),$(t)))))
+endef
+
+# TODO: Verify all branches/configs have reasonable warnings/errors, and remove
+# this override
+verify-static-link-type = $(eval $$(1).MISSING := true)
+
+$(foreach lt,$(ALL_LINK_TYPES),\
+  $(foreach d,$($(lt).DEPS_STATIC),\
+    $(if $($(d).TYPE),\
+      $(call verify-static-link-type,$(lt),$(d)),\
+      $(call link-type-missing,$(lt),$(d)))))
+endif
+
 ifdef link_type_error
   $(error exiting from previous errors)
 endif
