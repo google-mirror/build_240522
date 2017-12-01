@@ -2404,10 +2404,22 @@ $(hide) $(DX_COMMAND) \
     $(if $(NO_OPTIMIZE_DX), \
         --no-optimize) \
     $(if $(GENERATE_DEX_DEBUG), \
-	    --debug --verbose \
-	    --dump-to=$(@:.dex=.lst) \
-	    --dump-width=1000) \
+	       --debug --verbose \
+	       --dump-to=$(@:.dex=.lst) \
+	       --dump-width=1000) \
     $(PRIVATE_DX_FLAGS) \
+    $<
+endef
+
+
+define transform-classes-d8.jar-to-dex
+@echo "target Dex: $(PRIVATE_MODULE)"
+@mkdir -p $(dir $@)
+$(hide) rm -f $(dir $@)classes*.dex
+$(hide) $(DX_COMMAND) \
+    --output $(dir $@) \
+    --min-api $(PRIVATE_MIN_SDK_VERSION) \
+    $(filter-out --core-library --multi-dex,$(PRIVATE_DX_FLAGS)) \
     $<
 endef
 
