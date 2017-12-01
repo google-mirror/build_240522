@@ -19,9 +19,13 @@ $(link_type).WARN := $(my_warn_types)
 $(link_type).ALLOWED := $(my_allowed_types)
 $(link_type).DEPS := $(addprefix $(my_link_prefix):,$(my_link_deps))
 $(link_type).BUILT := $(LOCAL_BUILT_MODULE)
+$(link_type).ALLOWED_STATIC := $(my_allowed_static_types)
+$(link_type).DEPS_STATIC := $(addprefix $(my_link_prefix):,$(my_static_link_deps))
 
 link_type :=
 my_allowed_types :=
 my_link_prefix :=
 my_link_type :=
 my_warn_types :=
+my_allowed_static_types :=
+my_static_link_deps :=
