@@ -305,6 +305,7 @@ class BlockImageDiff(object):
     self.touched_src_ranges = RangeSet()
     self.touched_src_sha1 = None
     self.disable_imgdiff = disable_imgdiff
+    self.stash_counts = {}
 
     assert version in (3, 4)
 
@@ -356,7 +357,17 @@ class BlockImageDiff(object):
     self.AssertSequenceGood()
 
     self.ComputePatches(prefix)
+    self.ReviseStashCount(prefix)
     self.WriteTransfers(prefix)
+
+  def ReviseStashCount(self, prefix):
+    for xf in self.transfers:
+      for _, sr in xf.stash_before:
+        sh = self.src.RangeSha1(sr)
+        if sh in self.stash_counts:
+          self.stash_counts[sh] += 1
+        else:
+          self.stash_counts[sh] = 1
 
   def WriteTransfers(self, prefix):
     def WriteSplitTransfers(out, style, target_blocks):
@@ -419,12 +430,14 @@ class BlockImageDiff(object):
         sh = self.src.RangeSha1(sr)
         sr = xf.src_ranges.map_within(sr)
         mapped_stashes.append(sr)
+        assert sh in self.stash_counts
         assert sh in stashes
         src_str.append("%s:%s" % (sh, sr.to_string_raw()))
-        stashes[sh] -= 1
-        if stashes[sh] == 0:
+        self.stash_counts[sh] -= 1
+        if self.stash_counts[sh] == 0:
           free_string.append("free %s\n" % (sh,))
           free_size += sr.size()
+          self.stash_counts.pop(sh)
           stashes.pop(sh)
 
       if unstashed_src_ranges:
