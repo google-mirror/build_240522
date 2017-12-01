@@ -83,11 +83,8 @@ javac-check : $(full_classes_jar)
 javac-check-$(LOCAL_MODULE) : $(full_classes_jar)
 
 ifndef LOCAL_IS_HOST_MODULE
-ifeq ($(LOCAL_SDK_VERSION),system_current)
-my_link_type := java:system
-my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
-else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
+ifndef BOARD_ENFORCE_SYSTEM_SDK
+ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
 my_link_type := java:system
 my_warn_types := java:platform
 my_allowed_types := java:sdk java:system
@@ -100,6 +97,30 @@ my_link_type := java:platform
 my_warn_types :=
 my_allowed_types := java:sdk java:system java:platform
 endif
+my_static_allowed_types := $(my_allowed_types)
+else # BOARD_ENFORCE_SYSTEM_SDK is true
+ifeq (true,$(my_vendor_module))
+my_link_type := java:vendor
+my_warn_types :=
+my_allowed_types := java:vendor
+my_static_allowed_types := java:sdk java:system java:vendor
+else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
+my_link_type := java:system
+my_warn_types := java:platform
+my_allowed_types := java:sdk java:system
+my_static_allowed_types := java:sdk java:system
+else ifneq ($(LOCAL_SDK_VERSION),)
+my_link_type := java:sdk
+my_warn_types := java:system java:platform
+my_allowed_types := java:sdk
+my_static_allowed_types := java:sdk
+else
+my_link_type := java:platform
+my_warn_types :=
+my_allowed_types := java:sdk java:system java:platform
+my_static_allowed_types := java:sdk java:system java:platform
+endif
+endif # !BOARD_ENFORCE_SYSTEM_SDK
 
 my_link_deps :=
 my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
