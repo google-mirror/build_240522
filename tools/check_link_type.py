@@ -36,6 +36,11 @@ def parse_args():
     parser.add_argument('--type', help='The link type of module')
     parser.add_argument('--allowed', help='Allow deps to use these types',
                         action='append', default=[], metavar='TYPE')
+    parser.add_argument('--static_allowed',
+                        help='Allow static deps to use these types',
+                        action='append', default=[], metavar='TYPE')
+    parser.add_argument('--static_deps', help='The dependencies to check',
+                        action='append', default=[], metavar='TYPE')
     parser.add_argument('--warn', help='Warn if deps use these types',
                         action='append', default=[], metavar='TYPE')
     parser.add_argument('deps', help='The dependencies to check',
@@ -66,6 +71,23 @@ def main():
 
         for dep_type in dep_types:
             if dep_type in args.allowed:
+                continue
+            if dep_type in args.warn:
+                print_msg(WARNING_MSG, args, dep_name, dep_type)
+            else:
+                print_msg(ERROR_MSG, args, dep_name, dep_type)
+                failed = True
+
+    for dep in args.static_deps:
+        dep_name = os.path.basename(os.path.dirname(dep))
+        if dep_name.endswith('_intermediates'):
+            dep_name = dep_name[:len(dep_name)-len('_intermediates')]
+
+        with open(dep, 'r') as dep_file:
+            dep_types = dep_file.read().strip().split(' ')
+
+        for dep_type in dep_types:
+            if dep_type in args.static_allowed:
                 continue
             if dep_type in args.warn:
                 print_msg(WARNING_MSG, args, dep_name, dep_type)

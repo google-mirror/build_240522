@@ -769,6 +769,26 @@ $(foreach lt,$(ALL_LINK_TYPES),\
       $(call verify-link-type,$(lt),$(d)),\
       $(call link-type-missing,$(lt),$(d)))))
 
+# Verify that $(1) can link against $(2)
+# Both $(1) and $(2) are the static link type prefix defined above
+define verify-static-link-type
+$(foreach t,$($(2).TYPE),\
+  $(if $(filter-out $($(1).STATIC_ALLOWED),$(t)),\
+    $(if $(filter $(t),$($(1).WARN)),\
+      $(call link-type-warning,$(1),$(2),$(t)),\
+      $(call link-type-error,$(1),$(2),$(t)))))
+endef
+
+# TODO: Verify all branches/configs have reasonable warnings/errors, and remove
+# this override
+verify-static-link-type = $(eval $$(1).MISSING := true)
+
+$(foreach lt,$(ALL_LINK_TYPES),\
+  $(foreach d,$($(lt).STATIC_DEPS),\
+    $(if $($(d).TYPE),\
+      $(call verify-static-link-type,$(lt),$(d)),\
+      $(call link-type-missing,$(lt),$(d)))))
+
 ifdef link_type_error
   $(error exiting from previous errors)
 endif
@@ -792,22 +812,46 @@ endef
 # check it if we weren't able to check it when reading the Android.mk files.
 define link-type-file-rule
 my_link_type_deps := $(foreach l,$($(1).DEPS),$(call link-type-file,$(l)))
+my_static_link_type_deps := $(foreach l,$($(1).STATIC_DEPS),$(call link-type-file,$(l)))
 my_link_type_file := $(call link-type-file,$(1))
 $($(1).BUILT): | $$(my_link_type_file)
 $$(my_link_type_file): PRIVATE_DEPS := $$(my_link_type_deps)
+$$(my_link_type_file): PRIVATE_STATIC_DEPS := $$(my_static_link_type_deps)
 ifeq ($($(1).MISSING),true)
 $$(my_link_type_file): $(CHECK_LINK_TYPE)
 endif
-$$(my_link_type_file): $$(my_link_type_deps)
+$$(my_link_type_file): $$(my_link_type_deps) $$(my_static_link_type_deps)
 	@echo Check module type: $$@
 	$$(hide) mkdir -p $$(dir $$@) && rm -f $$@
 ifeq ($($(1).MISSING),true)
 	$$(hide) $(CHECK_LINK_TYPE) --makefile $($(1).MAKEFILE) --module $(link-type-name) \
 	  --type "$($(1).TYPE)" $(addprefix --allowed ,$($(1).ALLOWED)) \
-	  $(addprefix --warn ,$($(1).WARN)) $$(PRIVATE_DEPS)
+	  $(addprefix --warn ,$($(1).WARN)) $$(PRIVATE_DEPS) \
+	  $(addprefix --static_allowed ,$($(1).STATIC_ALLOWED)) \
+	  $$(if $$(PRIVATE_STATIC_DEPS),$$(addprefix --static_deps ,$$(PRIVATE_STATIC_DEPS)))
 endif
 	$$(hide) echo "$($(1).TYPE)" >$$@
 endef
+
+###########################################################
+## add static link type deps
+###########################################################
+# $(1): Target link type. $(1).TYPE should be java:vendor.
+# $(2): Static library
+define add-static-link-type-deps
+$(eval $$(1).DEPS += $($(2).DEPS))\
+$(eval $$(1).ADD_STATIC_DEPS += $($(2).STATIC_DEPS))\
+$(foreach lt,$($(2).STATIC_DEPS),\
+  $(if $(filter-out $($(1).STATIC_DEPS),$(lt)),\
+    $(call add-static-link-type-deps,$(1),$(lt))))
+endef
+
+$(foreach lt,$(ALL_LINK_TYPES),\
+  $(if $(filter java:vendor,$($(lt).TYPE)),\
+    $(foreach d,$($(lt).STATIC_DEPS),\
+      $(if $(filter-out java:vendor,$($(d)).TYPE),\
+        $(call add-static-link-type-deps,$(lt),$(d))))\
+        $(eval $$(lt).STATIC_DEPS += $($(lt).ADD_STATIC_DEPS))))
 
 $(foreach lt,$(ALL_LINK_TYPES),\
   $(eval $(call link-type-file-rule,$(lt))))
