@@ -18,6 +18,7 @@ import os
 import os.path
 import unittest
 import zipfile
+from unittest.mock import patch, call
 
 import common
 from add_img_to_target_files import AddPackRadioImages, AddRadioImagesForAbOta
@@ -166,3 +167,47 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
 
     self.assertRaises(AssertionError, AddPackRadioImages, None,
                       images + ['baz'])
+
+  @patch('add_img_to_target_files.GetCareMap')
+  def test_AddCareMapTxtForAbOta(self, mock_GetCareMap):
+    OPTIONS.info_dict = {
+        'system_verity_block_device' : '/dev/block/system',
+        'vendor_verity_block_device' : '/dev/block/vendor',
+    }
+
+    image_path = os.path.join(OPTIONS.input_tmp, 'IMAGES')
+    os.mkdir(image_path)
+
+    meta_path = os.path.join(OPTIONS.input_tmp, 'META')
+    os.mkdir(meta_path)
+
+    system_image_path = os.path.join(image_path, 'system.img')
+    with open(system_image_path, 'w') as system_image_file:
+      system_image_file.write('system')
+
+    vendor_image_path = os.path.join(image_path, 'vendor.img')
+    with open(vendor_image_path, 'w') as vendor_image_file:
+      vendor_image_file.write('vendor')
+
+    image_paths = {
+        'system' : system_image_path,
+        'vendor' : vendor_image_path,
+    }
+
+    """
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apkcerts.txt', apkcerts_txt)
+    """
+
+    mock_GetCareMap.return_value = ['foo', 'bar']
+
+    add_img_to_target_files.AddCareMapTxtForAbOta(None, ['system', 'vendor'],
+                                                  image_paths)
+
+    mock_GetCareMap.assert_has_calls([call('system', system_image_path),
+                                      call('vendor', vendor_image_path)])
+    self.assertTrue(os.path.exists(os.path.join(meta_path, 'care_map.txt')))
+
+  def test_AddCareMapTxtForAbOta_ReplaceExistingFiles(self):
+    pass
