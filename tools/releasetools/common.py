@@ -1171,7 +1171,7 @@ def ZipDelete(zip_filename, entries):
   Raises:
     AssertionError: In case of non-zero return from 'zip'.
   """
-  if isinstance(entries, basestring):
+  if isinstance(entries, str):
     entries = [entries]
   cmd = ["zip", "-d", zip_filename] + entries
   proc = Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -1790,6 +1790,6 @@ fi
   # in the L release.
   sh_location = "bin/install-recovery.sh"
 
-  print("putting script in", sh_location)
-
-  output_sink(sh_location, sh)
+  if OPTIONS.verbose:
+    print("Putting install-recovery script in {}".format(sh_location))
+  output_sink(sh_location, sh.encode('utf-8'))

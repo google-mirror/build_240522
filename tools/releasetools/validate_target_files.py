@@ -52,7 +52,7 @@ def _ReadFile(file_name, unpacked_name, round_up=False):
     return rounded_up - (rounded_up % 4096)
 
   assert os.path.exists(unpacked_name)
-  with open(unpacked_name, 'r') as f:
+  with open(unpacked_name, 'rb') as f:
     file_data = f.read()
   file_size = len(file_data)
   if round_up:
