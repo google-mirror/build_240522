@@ -47,6 +47,9 @@ class RangeSet(object):
   def __nonzero__(self):
     return bool(self.data)
 
+  def __bool__(self):
+    return bool(self.data)
+
   def __str__(self):
     if not self.data:
       return "empty"
