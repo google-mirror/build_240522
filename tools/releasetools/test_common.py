@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #
 # Copyright (C) 2015 The Android Open Source Project
 #
@@ -13,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 import os
 import shutil
 import tempfile
@@ -36,7 +38,7 @@ def get_2gb_string():
   # Generate a long string with holes, e.g. 'xyz\x00abc\x00...'.
   for _ in range(0, size, step_size):
     yield os.urandom(block_size)
-    yield '\0' * (step_size - block_size)
+    yield b'\0' * (step_size - block_size)
 
 
 class CommonZipTest(unittest.TestCase):
@@ -66,7 +68,7 @@ class CommonZipTest(unittest.TestCase):
     # Verify the zip contents.
     entry = zip_file.open(arcname)
     sha1_hash = sha1()
-    for chunk in iter(lambda: entry.read(4 * MiB), ''):
+    for chunk in iter(lambda: entry.read(4 * MiB), b''):
       sha1_hash.update(chunk)
     self.assertEqual(expected_hash, sha1_hash.hexdigest())
     self.assertIsNone(zip_file.testzip())
@@ -91,8 +93,8 @@ class CommonZipTest(unittest.TestCase):
     try:
       sha1_hash = sha1()
       for data in contents:
-        sha1_hash.update(data)
-        test_file.write(data)
+        test_file.write(bytes(data))
+        sha1_hash.update(bytes(data))
       test_file.close()
 
       expected_stat = os.stat(test_file_name)
@@ -268,9 +270,9 @@ class CommonZipTest(unittest.TestCase):
     })
 
   def test_ZipWriteStr_resets_ZIP64_LIMIT(self):
-    self._test_reset_ZIP64_LIMIT(self._test_ZipWriteStr, "foo", "")
+    self._test_reset_ZIP64_LIMIT(self._test_ZipWriteStr, "foo", b"")
     zinfo = zipfile.ZipInfo(filename="foo")
-    self._test_reset_ZIP64_LIMIT(self._test_ZipWriteStr, zinfo, "")
+    self._test_reset_ZIP64_LIMIT(self._test_ZipWriteStr, zinfo, b"")
 
   def test_bug21309935(self):
     zip_file = tempfile.NamedTemporaryFile(delete=False)
@@ -383,7 +385,7 @@ class InstallRecoveryScriptFormatTest(unittest.TestCase):
     loc = os.path.join(self._tempdir, prefix, name)
     if not os.path.exists(os.path.dirname(loc)):
       os.makedirs(os.path.dirname(loc))
-    with open(loc, "w+") as f:
+    with open(loc, "wb") as f:
       f.write(data)
 
   def test_full_recovery(self):
@@ -407,7 +409,7 @@ class InstallRecoveryScriptFormatTest(unittest.TestCase):
     validate_target_files.ValidateInstallRecoveryScript(self._tempdir,
                                                         self._info)
     # Validate 'recovery-from-boot' with bonus argument.
-    self._out_tmp_sink("etc/recovery-resource.dat", "bonus", "SYSTEM")
+    self._out_tmp_sink("etc/recovery-resource.dat", b"bonus", "SYSTEM")
     common.MakeRecoveryPatch(self._tempdir, self._out_tmp_sink,
                              recovery_image, boot_image, self._info)
     validate_target_files.ValidateInstallRecoveryScript(self._tempdir,

@@ -20,6 +20,8 @@ Build image output_image_file from input_directory, properties_file, and target_
 Usage:  build_image input_directory properties_file output_image_file target_out_dir
 
 """
+from __future__ import print_function
+
 import os
 import os.path
 import re
@@ -209,7 +211,7 @@ def BuildVerityFEC(sparse_image_path, verity_path, verity_fec_path,
          verity_path, verity_fec_path]
   output, exit_code = RunCommand(cmd)
   if exit_code != 0:
-    print "Could not build FEC data! Error: %s" % output
+    print("Could not build FEC data! Error: %s" % output)
     return False
   return True
 
@@ -218,7 +220,7 @@ def BuildVerityTree(sparse_image_path, verity_image_path, prop_dict):
          verity_image_path]
   output, exit_code = RunCommand(cmd)
   if exit_code != 0:
-    print "Could not build verity tree! Error: %s" % output
+    print("Could not build verity tree! Error: %s" % output)
     return False
   root, salt = output.split()
   prop_dict["verity_root_hash"] = root
@@ -237,7 +239,7 @@ def BuildVerityMetadata(image_size, verity_metadata_path, root_hash, salt,
     cmd.append("--verity_disable")
   output, exit_code = RunCommand(cmd)
   if exit_code != 0:
-    print "Could not build verity metadata! Error: %s" % output
+    print("Could not build verity metadata! Error: %s" % output)
     return False
   return True
 
@@ -253,7 +255,7 @@ def Append2Simg(sparse_image_path, unsparse_image_path, error_message):
   cmd = ["append2simg", sparse_image_path, unsparse_image_path]
   output, exit_code = RunCommand(cmd)
   if exit_code != 0:
-    print "%s: %s" % (error_message, output)
+    print("%s: %s" % (error_message, output))
     return False
   return True
 
@@ -778,7 +780,7 @@ def LoadGlobalDict(filename):
 
 def main(argv):
   if len(argv) != 4:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
   in_dir = argv[0]
@@ -807,14 +809,14 @@ def main(argv):
     elif image_filename == "oem.img":
       mount_point = "oem"
     else:
-      print >> sys.stderr, "error: unknown image file name ", image_filename
+      print("error: unknown image file name ", image_filename, file=sys.stderr)
       exit(1)
 
     image_properties = ImagePropFromGlobalDict(glob_dict, mount_point)
 
   if not BuildImage(in_dir, image_properties, out_file, target_out):
-    print >> sys.stderr, "error: failed to build %s from %s" % (out_file,
-                                                                in_dir)
+    print("error: failed to build %s from %s" % (out_file, in_dir),
+          file=sys.stderr)
     exit(1)
 
 

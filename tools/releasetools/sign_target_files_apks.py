@@ -90,6 +90,8 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       the existing ones in info dict.
 """
 
+from __future__ import print_function
+
 import sys
 
 if sys.hexversion < 0x02070000:
@@ -97,7 +99,6 @@ if sys.hexversion < 0x02070000:
   sys.exit(1)
 
 import base64
-import cStringIO
 import copy
 import errno
 import gzip
@@ -156,10 +157,10 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
       if name not in apk_key_map:
         unknown_apks.append(name)
   if unknown_apks:
-    print "ERROR: no key specified for:\n\n ",
-    print "\n  ".join(unknown_apks)
-    print "\nUse '-e <apkname>=' to specify a key (which may be an"
-    print "empty string to not sign this apk)."
+    print("ERROR: no key specified for:\n\n")
+    print("\n  ".join(unknown_apks))
+    print("\nUse '-e <apkname>=' to specify a key (which may be an"
+          "empty string to not sign this apk).")
     sys.exit(1)
 
 
@@ -256,13 +257,13 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
       key = apk_key_map[name]
       if key not in common.SPECIAL_CERT_STRINGS:
-        print "    signing: %-*s (%s)" % (maxsize, name, key)
+        print("    signing: %-*s (%s)" % (maxsize, name, key))
         signed_data = SignApk(data, key, key_passwords[key], platform_api_level,
             codename_to_api_level_map, is_compressed)
         common.ZipWriteStr(output_tf_zip, out_info, signed_data)
       else:
         # an APK we're not supposed to sign.
-        print "NOT signing: %s" % (name,)
+        print("NOT signing: %s" % (name,))
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
     # System properties.
@@ -274,7 +275,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
                            "ROOT/default.prop",  # legacy
                            "RECOVERY/RAMDISK/prop.default",
                            "RECOVERY/RAMDISK/default.prop"):  # legacy
-      print "rewriting %s:" % (info.filename,)
+      print("rewriting %s:" % (info.filename,))
       if stat.S_ISLNK(info.external_attr >> 16):
         new_data = data
       else:
@@ -282,7 +283,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
     elif info.filename.endswith("mac_permissions.xml"):
-      print "rewriting %s with new keys." % (info.filename,)
+      print("rewriting %s with new keys." % (info.filename,))
       new_data = ReplaceCerts(data)
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
@@ -361,7 +362,7 @@ def ReplaceCerts(data):
   for old, new in OPTIONS.key_map.iteritems():
     try:
       if OPTIONS.verbose:
-        print "    Replacing %s.x509.pem with %s.x509.pem" % (old, new)
+        print("    Replacing %s.x509.pem with %s.x509.pem" % (old, new))
       f = open(old + ".x509.pem")
       old_cert16 = base64.b16encode(common.ParseCertificate(f.read())).lower()
       f.close()
@@ -372,14 +373,14 @@ def ReplaceCerts(data):
       pattern = "\\b"+old_cert16+"\\b"
       (data, num) = re.subn(pattern, new_cert16, data, flags=re.IGNORECASE)
       if OPTIONS.verbose:
-        print "    Replaced %d occurence(s) of %s.x509.pem with " \
-            "%s.x509.pem" % (num, old, new)
+        print("    Replaced %d occurence(s) of %s.x509.pem with "
+              "%s.x509.pem" % (num, old, new))
     except IOError as e:
       if e.errno == errno.ENOENT and not OPTIONS.verbose:
         continue
 
-      print "    Error accessing %s. %s. Skip replacing %s.x509.pem " \
-          "with %s.x509.pem." % (e.filename, e.strerror, old, new)
+      print("    Error accessing %s. %s. Skip replacing %s.x509.pem "
+            "with %s.x509.pem." % (e.filename, e.strerror, old, new))
 
   return data
 
@@ -445,8 +446,8 @@ def RewriteProps(data):
         value = " ".join(value)
       line = key + "=" + value
     if line != original_line:
-      print "  replace: ", original_line
-      print "     with: ", line
+      print("  replace: ", original_line)
+      print("     with: ", line)
     output.append(line)
   return "\n".join(output) + "\n"
 
@@ -462,7 +463,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
     extra_recovery_keys = [OPTIONS.key_map.get(k, k) + ".x509.pem"
                            for k in extra_recovery_keys.split()]
     if extra_recovery_keys:
-      print "extra recovery-only key(s): " + ", ".join(extra_recovery_keys)
+      print("extra recovery-only key(s): " + ", ".join(extra_recovery_keys))
   else:
     extra_recovery_keys = []
 
@@ -476,8 +477,8 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
     mapped_keys.append(OPTIONS.key_map.get(k, k) + ".x509.pem")
 
   if mapped_keys:
-    print "using:\n   ", "\n   ".join(mapped_keys)
-    print "for OTA package verification"
+    print("using:\n   ", "\n   ".join(mapped_keys))
+    print("for OTA package verification")
   else:
     devkey = misc_info.get("default_system_dev_certificate",
                            "build/target/product/security/testkey")
@@ -511,7 +512,11 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   # put into a zipfile system/etc/security/otacerts.zip.
   # We DO NOT include the extra_recovery_keys (if any) here.
 
-  temp_file = cStringIO.StringIO()
+  try:
+    from StringIO import StringIO
+  except ImportError:
+    from io import StringIO
+  temp_file = StringIO()
   certs_zip = zipfile.ZipFile(temp_file, "w")
   for k in mapped_keys:
     common.ZipWrite(certs_zip, k)
@@ -527,7 +532,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
       print("\n  WARNING: Found more than one OTA keys; Using the first one"
             " as payload verification key.\n\n")
 
-    print "Using %s for payload verification." % (mapped_keys[0],)
+    print("Using %s for payload verification." % (mapped_keys[0],))
     cmd = common.Run(
         ["openssl", "x509", "-pubkey", "-noout", "-in", mapped_keys[0]],
         stdout=subprocess.PIPE)
@@ -545,12 +550,12 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
 
 
 def ReplaceVerityPublicKey(targetfile_zip, filename, key_path):
-  print "Replacing verity public key with %s" % (key_path,)
+  print("Replacing verity public key with %s" % (key_path,))
   common.ZipWrite(targetfile_zip, key_path, arcname=filename)
 
 
 def ReplaceVerityPrivateKey(misc_info, key_path):
-  print "Replacing verity private key with %s" % (key_path,)
+  print("Replacing verity private key with %s" % (key_path,))
   misc_info["verity_key"] = key_path
 
 
@@ -570,14 +575,14 @@ def ReplaceVerityKeyId(targetfile_input_zip, targetfile_output_zip, keypath):
       keyid, stderr = p.communicate()
       keyid = re.search(
           r'keyid:([0-9a-fA-F:]*)', keyid).group(1).replace(':', '').lower()
-      print "Replacing verity keyid with %s error=%s" % (keyid, stderr)
+      print("Replacing verity keyid with %s error=%s" % (keyid, stderr))
       out_cmdline.append("veritykeyid=id:%s" % (keyid,))
     else:
       out_cmdline.append(param)
 
   out_cmdline = ' '.join(out_cmdline)
   out_cmdline = out_cmdline.strip()
-  print "out_cmdline %s" % (out_cmdline)
+  print("out_cmdline %s" % (out_cmdline))
   common.ZipWriteStr(targetfile_output_zip, "BOOT/cmdline", out_cmdline)
 
 
@@ -616,15 +621,15 @@ def ReplaceAvbSigningKeys(misc_info):
     algorithm = OPTIONS.avb_algorithms.get(partition)
     assert algorithm, 'Missing AVB signing algorithm for %s' % (partition,)
 
-    print 'Replacing AVB signing key for %s with "%s" (%s)' % (
-        partition, key, algorithm)
+    print('Replacing AVB signing key for %s with "%s" (%s)' % (
+        partition, key, algorithm))
     misc_info['avb_' + partition + '_algorithm'] = algorithm
     misc_info['avb_' + partition + '_key_path'] = key
 
     extra_args = OPTIONS.avb_extra_args.get(partition)
     if extra_args:
-      print 'Setting extra AVB signing args for %s to "%s"' % (
-          partition, extra_args)
+      print('Setting extra AVB signing args for %s to "%s"' % (
+          partition, extra_args))
       args_key = AVB_FOOTER_ARGS_BY_PARTITION[partition]
       misc_info[args_key] = (misc_info.get(args_key, '') + ' ' + extra_args)
 
@@ -832,16 +837,14 @@ def main(argv):
   new_args.append(args[1])
   add_img_to_target_files.main(new_args)
 
-  print "done."
+  print("done.")
 
 
 if __name__ == '__main__':
   try:
     main(sys.argv[1:])
-  except common.ExternalError, e:
-    print
-    print "   ERROR: %s" % (e,)
-    print
+  except common.ExternalError as e:
+    print("\n   ERROR: %s\n" % (e,))
     sys.exit(1)
   finally:
     common.Cleanup()

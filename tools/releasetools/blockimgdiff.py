@@ -240,12 +240,19 @@ class HeapItem(object):
     # Negate the score since python's heap is a min-heap and we want
     # the maximum score.
     self.score = -item.score
+
   def clear(self):
     self.item = None
+
   def __bool__(self):
-    return self.item is None
+    return self.item is not None
+
+  # Python 2 uses __nonzero__, while Python 3 uses __bool__.
+  __nonzero__ = __bool__
+
   def __eq__(self, other):
     return self.score == other.score
+
   def __le__(self, other):
     return self.score <= other.score
 
