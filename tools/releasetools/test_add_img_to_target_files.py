@@ -18,6 +18,7 @@ import os
 import os.path
 import unittest
 import zipfile
+from unittest.mock import patch, call
 
 import common
 import test_utils
