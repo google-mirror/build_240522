@@ -1160,7 +1160,7 @@ def ZipDelete(zip_filename, entries):
   Raises:
     AssertionError: In case of non-zero return from 'zip'.
   """
-  if isinstance(entries, basestring):
+  if isinstance(entries, str):
     entries = [entries]
   cmd = ["zip", "-d", zip_filename] + entries
   proc = Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
