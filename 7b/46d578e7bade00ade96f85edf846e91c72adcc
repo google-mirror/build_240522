@@ -1,0 +1,9 @@
+Verified+1: Bo Hu <bohu@google.com>
+Code-Review+1: Bo Hu <bohu@google.com>
+Code-Review+2: Jeffrey Vander Stoep <jeffv@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Bo Hu <bohu@google.com>
+Submitted-at: Tue, 05 Dec 2017 19:38:45 +0000
+Reviewed-on: https://android-review.googlesource.com/556386
+Project: platform/build
+Branch: refs/heads/master
