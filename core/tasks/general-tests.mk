@@ -15,12 +15,19 @@
 .PHONY: general-tests
 
 general-tests-zip := $(PRODUCT_OUT)/general-tests.zip
-$(general-tests-zip): $(COMPATIBILITY.general-tests.FILES) $(SOONG_ZIP)
+# Create an artifact to include a list of test config files in general-tests.
+general-tests-list-zip := $(PRODUCT_OUT)/general-tests-list.zip
+$(general-tests-zip) $(general-tests-list-zip) : PRIVATE_general_tests_list := $(PRODUCT_OUT)/general-tests-list
+
+$(general-tests-zip) $(general-tests-list-zip): $(COMPATIBILITY.general-tests.FILES) $(SOONG_ZIP)
 	echo $(sort $(COMPATIBILITY.general-tests.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
 	grep $(TARGET_OUT_TESTCASES) $@.list > $@-target.list || true
 	$(hide) $(SOONG_ZIP) -d -o $@ -P host -C $(HOST_OUT) -l $@-host.list -P target -C $(PRODUCT_OUT) -l $@-target.list
-	rm -f $@.list $@-host.list $@-target.list
+	$(hide) grep -e .*.config$$ $@-host.list | sed s%$(HOST_OUT)%host%g >> $(PRIVATE_general_tests_list)
+	$(hide) grep -e .*.config$$ $@-target.list | sed s%$(PRODUCT_OUT)%target%g >> $(PRIVATE_general_tests_list)
+	$(hide) $(SOONG_ZIP) -d -o $(general-tests-list-zip) -C $(dir $@) -f $(PRIVATE_general_tests_list)
+	rm -f $@.list $@-host.list $@-target.list $(PRIVATE_general_tests_list)
 
-general-tests: $(general-tests-zip)
-$(call dist-for-goals, general-tests, $(general-tests-zip))
+general-tests: $(general-tests-zip) $(general-tests-list-zip)
+$(call dist-for-goals, general-tests, $(general-tests-zip) $(general-tests-list-zip))
