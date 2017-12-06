@@ -480,7 +480,6 @@ ifdef LOCAL_MULTILIB
 endif
 ifdef is_native
   arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
-  is_native :=
 endif
 
 # The module itself.
@@ -501,11 +500,24 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(s):$(dir)/$(n)))))
 
+test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+ifeq (,$(test_config))
+  ifneq (true,$(is_native))
+    ifeq (host,$findstring host,$(call compatibility_suite_dirs,general-tests,$(arch_dir))))
+      $(error Can't determine if $(LOCAL_MODULE) is an instrumentation test.)
+    endif
+  endif
+  include $(BUILD_AUTOGEN_TEST_CONFIG)
+  test_config := $(LOCAL_AUTOGEN_TEST_CONFIG_FILE)
+endif
 
-ifneq (,$(wildcard $(LOCAL_PATH)/AndroidTest.xml))
+arch_dir :=
+is_native :=
+
+ifneq (,$(test_config))
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-    $(LOCAL_PATH)/AndroidTest.xml:$(dir)/$(LOCAL_MODULE).config)))
+    $(test_config):$(dir)/$(LOCAL_MODULE).config)))
 endif
 
 ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
