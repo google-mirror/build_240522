@@ -463,6 +463,14 @@ endif
 ###########################################################
 ## Compatibility suite files.
 ###########################################################
+autogen_test_config := $(filter true,$(LOCAL_AUTOGEN_INSTRUMENTATION_TEST_CONFIG) $(LOCAL_AUTOGEN_NATIVE_TEST_CONFIG))
+
+ifeq ($(autogen_test_config),true)
+ifeq (,$(filter general-tests, $(LOCAL_COMPATIBILITY_SUITE)))
+  LOCAL_COMPATIBILITY_SUITE += general-tests
+endif
+endif
+
 ifdef LOCAL_COMPATIBILITY_SUITE
 
 # If we are building a native test or benchmark and its stem variants are not defined,
@@ -501,11 +509,18 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(s):$(dir)/$(n)))))
 
+ifeq ($(autogen_test_config),true)
+  include $(BUILD_AUTOGEN_TEST_CONFIG)
+  test_config := $(LOCAL_AUTOGEN_TEST_CONFIG_FILE)
+  autogen_test_config :=
+else
+  test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+endif
 
-ifneq (,$(wildcard $(LOCAL_PATH)/AndroidTest.xml))
+ifneq (,$(test_config))
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-    $(LOCAL_PATH)/AndroidTest.xml:$(dir)/$(LOCAL_MODULE).config)))
+    $(test_config):$(dir)/$(LOCAL_MODULE).config)))
 endif
 
 ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
