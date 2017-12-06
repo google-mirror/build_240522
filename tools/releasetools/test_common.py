@@ -334,7 +334,7 @@ class InstallRecoveryScriptFormatTest(unittest.TestCase):
         0xcf, 0x2f, 0x01, 0x00, 0xc4, 0xae, 0xed, 0x46, 0x04, 0x00, 0x00, 0x00
     ])
 
-  def _out_tmp_sink(self, name, data, prefix="SYSTEM"):
+  def _out_tmp_sink(self, name, data, prefix="VENDOR"):
     loc = os.path.join(self._tempdir, prefix, name)
     if not os.path.exists(os.path.dirname(loc)):
       os.makedirs(os.path.dirname(loc))
@@ -362,7 +362,7 @@ class InstallRecoveryScriptFormatTest(unittest.TestCase):
     validate_target_files.ValidateInstallRecoveryScript(self._tempdir,
                                                         self._info)
     # Validate 'recovery-from-boot' with bonus argument.
-    self._out_tmp_sink("etc/recovery-resource.dat", "bonus", "SYSTEM")
+    self._out_tmp_sink("etc/recovery-resource.dat", "bonus", "VENDOR")
     common.MakeRecoveryPatch(self._tempdir, self._out_tmp_sink,
                              recovery_image, boot_image, self._info)
     validate_target_files.ValidateInstallRecoveryScript(self._tempdir,

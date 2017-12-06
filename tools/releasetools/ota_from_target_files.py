@@ -260,7 +260,7 @@ def _WriteRecoveryImageToBoot(script, output_zip):
 
 def HasRecoveryPatch(target_files_zip):
   namelist = [name for name in target_files_zip.namelist()]
-  return ("SYSTEM/recovery-from-boot.p" in namelist or
+  return ("VENDOR/recovery-from-boot.p" in namelist or
           "SYSTEM/etc/recovery.img" in namelist)
 
 

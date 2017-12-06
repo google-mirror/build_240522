@@ -42,8 +42,8 @@ def ignore(name):
   if name in ['IMAGES']:
     return True
   # These are packages of the recovery partition, which we're already diffing
-  if name in ['SYSTEM/etc/recovery-resource.dat',
-              'SYSTEM/recovery-from-boot.p']:
+  if name in ['VENDOR/etc/recovery-resource.dat',
+              'VENDOR/recovery-from-boot.p']:
     return True
 
   # These files are just the BUILD_NUMBER, and will always be different

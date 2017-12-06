@@ -1666,11 +1666,11 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
 
   else:
     diff_program = ["imgdiff"]
-    path = os.path.join(input_dir, "SYSTEM", "etc", "recovery-resource.dat")
+    path = os.path.join(input_dir, "VENDOR", "etc", "recovery-resource.dat")
     if os.path.exists(path):
       diff_program.append("-b")
       diff_program.append(path)
-      bonus_args = "-b /system/etc/recovery-resource.dat"
+      bonus_args = "-b /vendor/etc/recovery-resource.dat"
     else:
       bonus_args = ""
 
@@ -1700,7 +1700,7 @@ fi
   else:
     sh = """#!/system/bin/sh
 if ! applypatch -c %(recovery_type)s:%(recovery_device)s:%(recovery_size)d:%(recovery_sha1)s; then
-  applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/system/recovery-from-boot.p && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
+  applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/vendor/recovery-from-boot.p && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
 else
   log -t recovery "Recovery image already installed"
 fi
