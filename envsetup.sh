@@ -779,6 +779,9 @@ function findmakefile()
 {
     local TOPFILE=build/make/core/envsetup.mk
     local HERE=$PWD
+    if [ -n "$1" ]; then
+        cd "$1"
+    fi
     local T=
     while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
         T=`PWD= /bin/pwd`
@@ -827,15 +830,11 @@ function mmm()
             DIR=${DIR#./}
             DIR=${DIR%/}
             if [ -d $DIR ]; then
+                ABS_MDIR=$(findmakefile $DIR)
                 local TO_CHOP=`(\cd -P -- $T && pwd -P) | wc -c | tr -d ' '`
                 local TO_CHOP=`expr $TO_CHOP + 1`
                 local START=`PWD= /bin/pwd`
-                local MDIR=`echo $START | cut -c${TO_CHOP}-`
-                if [ "$MDIR" = "" ] ; then
-                    MDIR=$DIR
-                else
-                    MDIR=$MDIR/$DIR
-                fi
+                local MDIR=`echo $ABS_MDIR | cut -c${TO_CHOP}-`
                 MDIR=${MDIR%/.}
                 if [ "$DIR_MODULES" = "" ]; then
                     MODULES_IN_PATHS="$MODULES_IN_PATHS MODULES-IN-$MDIR"
