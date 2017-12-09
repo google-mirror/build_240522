@@ -878,9 +878,9 @@ proto_sources_fullpath := $(addprefix $(LOCAL_PATH)/, $(proto_sources))
 my_rename_cpp_ext :=
 ifneq (,$(filter nanopb-c nanopb-c-enable_malloc, $(LOCAL_PROTOC_OPTIMIZE_TYPE)))
 my_proto_source_suffix := .c
-my_proto_c_includes := external/nanopb-c
+my_proto_c_includes := external/nanopb-c/nanopb-0.2.7
 my_protoc_flags := --nanopb_out=$(proto_gen_dir) \
-    --plugin=external/nanopb-c/generator/protoc-gen-nanopb
+    --plugin=external/nanopb-c-0.2.7/generator/protoc-gen-nanopb
 my_protoc_deps := $(NANOPB_SRCS) $(proto_sources_fullpath:%.proto=%.options)
 else
 my_proto_source_suffix := $(LOCAL_CPP_EXTENSION)
