@@ -26,6 +26,7 @@ PRODUCT_PACKAGES += \
     atrace \
     bootanimation \
     bootstat \
+    bufferhubd \
     charger \
     cmd \
     crash_dump \
