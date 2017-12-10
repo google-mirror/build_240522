@@ -27,5 +27,8 @@ PRODUCT_COPY_FILES += \
     prebuilts/qemu-kernel/x86/3.18/kernel-qemu2:kernel-ranchu
 
 include $(SRC_TARGET_DIR)/product/full_x86.mk
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+config.disable_systemui=true \
+config.disable_location=true \
 
 PRODUCT_NAME := aosp_x86

@@ -27,5 +27,9 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/fstab.ranchu.early.arm:root/fstab.ranchu.early
 
 include $(SRC_TARGET_DIR)/product/full.mk
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+config.disable_systemui=true \
+config.disable_location=true \
+debug.sf.nobootanimation=1
 
 PRODUCT_NAME := aosp_arm

@@ -37,6 +37,10 @@ ifdef NET_ETH0_STARTONBOOT
   PRODUCT_PROPERTY_OVERRIDES += net.eth0.startonboot=1
 endif
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+config.disable_systemui=true \
+config.disable_location=true \
+
 # Ensure we package the BIOS files too.
 PRODUCT_PACKAGES += \
 	bios.bin \
