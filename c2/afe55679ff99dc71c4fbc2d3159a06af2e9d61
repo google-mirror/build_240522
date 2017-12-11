@@ -1,0 +1,7 @@
+Build-Cop-Override+1: Przemyslaw Szczepaniak <pszczepaniak@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Søren Gjesse <sgjesse@google.com>
+Submitted-at: Mon, 11 Dec 2017 10:34:00 +0000
+Reviewed-on: https://android-review.googlesource.com/562236
+Project: platform/build
+Branch: refs/heads/master
