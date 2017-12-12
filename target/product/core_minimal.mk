@@ -137,6 +137,7 @@ PRODUCT_PACKAGES += \
     mke2fs \
     fsck.f2fs \
     make_f2fs \
+    resize_f2fs \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.zygote=zygote32
