@@ -1881,6 +1881,8 @@ BUILT_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 define build-vendorimage-target
   $(call pretty,"Target vendor fs image: $(INSTALLED_VENDORIMAGE_TARGET)")
   @mkdir -p $(TARGET_OUT_VENDOR)
+  $(if $(BOARD_VENDOR_EXTRA_FOLDERS), \
+    @mkdir -p $(addprefix $(TARGET_OUT_VENDOR)/,$(BOARD_VENDOR_EXTRA_FOLDERS)))
   @mkdir -p $(vendorimage_intermediates) && rm -rf $(vendorimage_intermediates)/vendor_image_info.txt
   $(call generate-userimage-prop-dictionary, $(vendorimage_intermediates)/vendor_image_info.txt, skip_fsck=true)
   $(if $(BOARD_VENDOR_KERNEL_MODULES), \
