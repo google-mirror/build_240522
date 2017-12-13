@@ -544,6 +544,10 @@ ifndef USE_D8
   USE_D8 := true
 endif
 
+ifndef USE_D8_DESUGAR
+  USE_D8_DESUGAR := true
+endif
+
 # Default R8 behavior when USE_R8 is not specified.
 ifndef USE_R8
   USE_R8 := false
