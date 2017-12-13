@@ -150,7 +150,9 @@ endif
 
 $(eval $(call copy-one-file,$(full_classes_jarjar_jar),$(full_classes_jar)))
 
-ifneq ($(USE_D8_DESUGAR),true)
+ifneq ($(USE_D8_DESUGAR),false)
+my_desugaring :=
+else
 my_desugaring :=
 ifeq ($(LOCAL_JAVA_LANGUAGE_VERSION),1.8)
 my_desugaring := true
@@ -158,8 +160,6 @@ $(full_classes_desugar_jar): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 $(full_classes_desugar_jar): $(full_classes_jar) $(full_java_header_libs) $(DESUGAR)
 	$(desugar-classes-jar)
 endif
-else
-my_desugaring :=
 endif
 
 ifndef my_desugaring
@@ -177,10 +177,10 @@ else # !LOCAL_IS_STATIC_JAVA_LIBRARY
 $(built_dex): PRIVATE_INTERMEDIATES_DIR := $(intermediates.COMMON)
 $(built_dex): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 $(built_dex): $(full_classes_desugar_jar) $(DX)
-ifneq ($(USE_D8_DESUGAR),true)
-	$(transform-classes.jar-to-dex)
-else
+ifneq ($(USE_D8_DESUGAR),false)
 	$(transform-classes-d8.jar-to-dex)
+else
+	$(transform-classes.jar-to-dex)
 endif
 
 $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE := $(built_dex)
