@@ -21,6 +21,7 @@ PARSE_TIME_MAKE_GOALS := \
 	btnod \
 	build-art% \
 	build_kernel-nodeps \
+	check_emu_boot \
 	clean-oat% \
 	continuous_instrumentation_tests \
 	continuous_native_tests \
