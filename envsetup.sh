@@ -324,14 +324,17 @@ function settitle()
     # window manager in debian right now, so switch it to opt-in for anyone
     # who actually wants this.
     if [ "$ANDROID_BUILD_SET_WINDOW_TITLE" = "true" ]; then
+        if [ "$ANDROID_PROMPT_COMMAND" = "" ]; then
+            export ANDROID_PROMPT_COMMAND="$PROMPT_COMMAND"
+        fi
         local arch=$(gettargetarch)
         local product=$TARGET_PRODUCT
         local variant=$TARGET_BUILD_VARIANT
         local apps=$TARGET_BUILD_APPS
         if [ -z "$apps" ]; then
-            export PROMPT_COMMAND="echo -ne \"\033]0;[${arch}-${product}-${variant}] ${USER}@${HOSTNAME}: ${PWD}\007\""
+            export PROMPT_COMMAND="$ANDROID_PROMPT_COMMAND"$'\n'"echo -ne \"\033]0;[${arch}-${product}-${variant}] ${USER}@${HOSTNAME}: ${PWD}\007\""
         else
-            export PROMPT_COMMAND="echo -ne \"\033]0;[$arch $apps $variant] ${USER}@${HOSTNAME}: ${PWD}\007\""
+            export PROMPT_COMMAND="$ANDROID_PROMPT_COMMAND"$'\n'"echo -ne \"\033]0;[$arch $apps $variant] ${USER}@${HOSTNAME}: ${PWD}\007\""
         fi
     fi
 }
