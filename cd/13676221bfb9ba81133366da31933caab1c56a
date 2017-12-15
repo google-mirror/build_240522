@@ -1,0 +1,8 @@
+Code-Review+2: Insaf Latypov <saferif@google.com>
+Build-Cop-Override+1: Insaf Latypov <saferif@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Søren Gjesse <sgjesse@google.com>
+Submitted-at: Fri, 15 Dec 2017 15:27:14 +0000
+Reviewed-on: https://android-review.googlesource.com/569982
+Project: platform/build
+Branch: refs/heads/master
