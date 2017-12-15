@@ -1147,6 +1147,28 @@ def ZipWriteStr(zip_file, zinfo_or_arcname, data, perms=None,
   zipfile.ZIP64_LIMIT = saved_zip64_limit
 
 
+def ZipDelete(zip_filename, entries):
+  """Deletes entries from a ZIP file.
+
+  Since deleting entries from a ZIP file is not supported, It shells out to
+  'zip -d'.
+
+  Args:
+    zip_filename: The string of the ZIP file.
+    entries: The entry name string, or the list of strings.
+
+  Raises:
+    AssertionError: In case of non-zero return code from zip.
+  """
+  if isinstance(entries, basestring):
+    entries = [entries]
+  cmd = ["zip", "-d", zip_filename] + entries
+  proc = Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  stdoutdata, _ = proc.communicate()
+  assert proc.returncode == 0, "Failed to delete %s:\n%s" % (entries,
+                                                             stdoutdata)
+
+
 def ZipClose(zip_file):
   # http://b/18015246
   # zipfile also refers to ZIP64_LIMIT during close() when it writes out the
