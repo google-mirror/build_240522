@@ -1,0 +1,10 @@
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Code-Review+1: Bo Hu <bohu@google.com>
+Code-Review+1: Andrew Hsieh <andrewhsieh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Bo Hu <bohu@google.com>
+Submitted-by: Bo Hu <bohu@google.com>
+Submitted-at: Fri, 15 Dec 2017 19:14:19 +0000
+Reviewed-on: https://android-review.googlesource.com/567850
+Project: platform/build
+Branch: refs/heads/master
