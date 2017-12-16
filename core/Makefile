@@ -2857,7 +2857,8 @@ $(INSTALLED_QEMU_VENDORIMAGE): $(INSTALLED_VENDORIMAGE_TARGET) $(MK_QEMU_IMAGE_S
 	(export SGDISK=$(SGDISK_HOST); $(MK_QEMU_IMAGE_SH) ${PRODUCT_OUT}/vendor.img)
 
 vendorimage: $(INSTALLED_QEMU_VENDORIMAGE)
-droidcore: $(INSTALLED_QEMU_VENDORIMAGE)
+include build/make/core/tasks/check_emu_boot.mk
+droidcore: $(INSTALLED_QEMU_VENDORIMAGE) check_emu_boot
 endif
 endif
 # -----------------------------------------------------------------
