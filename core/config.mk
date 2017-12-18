@@ -792,7 +792,6 @@ else
 endif
 
 FRAMEWORK_MANIFEST_FILE := system/libhidl/manifest.xml
-FRAMEWORK_COMPATIBILITY_MATRIX_FILES := $(wildcard hardware/interfaces/compatibility_matrix.*.xml)
 
 BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
 BUILD_DATETIME_FROM_FILE := $$(cat $(OUT_DIR)/build_date.txt)
