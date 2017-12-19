@@ -2787,12 +2787,17 @@ $(2): $(1)
 endef
 
 # $(1): the .jar or .apk to remove classes.dex
+# We only remove the dex files for APKs with compressed dex code.
+# ART will not copy the dex file for APKs that have uncompressed dex code,
+# so it must remain in the APK.
 define dexpreopt-remove-classes.dex
-$(hide) zip --quiet --delete $(1) classes.dex; \
-dex_index=2; \
-while zip --quiet --delete $(1) classes$${dex_index}.dex > /dev/null; do \
-  let dex_index=dex_index+1; \
-done
+$(hide) if (zipinfo $(1) 'classes.dex' 2>/dev/null | grep -v ' stor ' >/dev/null) ; then \
+  zip --quiet --delete $(1) classes.dex; \
+  dex_index=2; \
+  while zip --quiet --delete $(1) classes$${dex_index}.dex > /dev/null; do \
+    let dex_index=dex_index+1; \
+  done \
+fi
 endef
 
 ###########################################################
