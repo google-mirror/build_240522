@@ -17,6 +17,9 @@ current_makefile := $(lastword $(MAKEFILE_LIST))
 # BOARD_VNDK_VERSION must be set to 'current' in order to generate a VNDK snapshot.
 ifeq ($(BOARD_VNDK_VERSION),current)
 
+# PLATFORM_VNDK_VERSION must be set.
+ifneq (,$(PLATFORM_VNDK_VERSION))
+
 # Returns arch-specific libclang_rt.ubsan* library name.
 # Because VNDK_CORE_LIBRARIES includes all arch variants for libclang_rt.ubsan*
 # libs, the arch-specific libs are selected separately.
@@ -39,7 +42,9 @@ endef
 define paths-of-intermediates
 $(strip \
   $(foreach obj,$(1), \
-    $(eval file_name := $(if $(filter SHARED_LIBRARIES,$(2)),$(patsubst %.so,%,$(obj)).so,$(obj))) \
+    $(eval file_name := \
+      $(if $(filter SHARED_LIBRARIES,$(2)),$(patsubst %.so,%,$(obj)).so, \
+        $(if $(filter ETC,$(2)),$(patsubst %.txt,%.$(PLATFORM_VNDK_VERSION).txt,$(obj)),$(obj)))) \
     $(eval dir := $(call intermediates-dir-for,$(2),$(obj),,,$(3))) \
     $(call append-path,$(dir),$(file_name)) \
   ) \
@@ -232,6 +237,15 @@ vndk_snapshot_dependencies :=
 # ifdef TARGET_2ND_ARCH
 # vndk_snapshot_arch_2ND :=
 # endif
+
+else # PLATFORM_VNDK_VERSION is NOT set
+
+.PHONY: vndk
+vndk:
+	$(call echo-error,$(current_makefile),CANNOT generate VNDK snapshot. PLATFORM_VNDK_VERSION must be set.)
+	exit 1
+
+endif # PLATFORM_VNDK_VERSION
 
 else # BOARD_VNDK_VERSION is NOT set to 'current'
 
