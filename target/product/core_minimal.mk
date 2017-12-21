@@ -83,6 +83,8 @@ PRODUCT_PACKAGES += \
     screencap \
     sensorservice \
     telephony-common \
+    traced \
+    traced_probes \
     uiautomator \
     uncrypt \
     voip-common \
