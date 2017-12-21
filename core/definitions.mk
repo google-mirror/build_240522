@@ -2420,8 +2420,7 @@ $(hide) unzip -qq -d $(dir $@)d8_input $< "*.class"
 $(hide) $(DX_COMMAND) \
     --output $(dir $@) \
     --min-api $(PRIVATE_MIN_SDK_VERSION) \
-    $(subst --no-locals, --release, \
-        $(filter-out --core-library --multi-dex,$(PRIVATE_DX_FLAGS))) \
+    $(filter-out --core-library --multi-dex,$(PRIVATE_DX_FLAGS)) \
     $$(find $(dir $@)d8_input -name *.class | sort)
 $(hide) rm -fr $(dir $@)d8_input
 endef
