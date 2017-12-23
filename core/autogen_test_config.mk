@@ -40,10 +40,10 @@ else
   my_android_manifest := $(LOCAL_PATH)/$(LOCAL_MANIFEST_FILE)
 endif
 ifneq (,$(wildcard $(my_android_manifest)))
-$(autogen_test_config_file) : $(my_android_manifest) $(EMPTY_TEST_CONFIG) $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE)
+$(autogen_test_config_file) : $(my_android_manifest) $(EMPTY_TEST_CONFIG) $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE) $(AUTOGEN_TEST_CONFIG_SCRIPT)
 	@echo "Auto generating test config $(notdir $@)"
 	@rm -f $@
-	$(hide) $(AUTOGEN_TEST_CONFIG_SCRIPT) $@ $^
+	$(hide) $(word 4,$^) $@ $^
 my_auto_generate_config := true
 endif # ifeq (,$(wildcard $(my_android_manifest)))
 endif # ifneq (true,$(is_native))

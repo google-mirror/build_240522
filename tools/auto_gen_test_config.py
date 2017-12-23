@@ -41,7 +41,7 @@ def main(argv):
   Returns:
     0 if no error, otherwise 1.
   """
-  if len(argv) != 4:
+  if len(argv) < 4:
     sys.stderr.write(
         'Invalid arguements. The script requires 4 arguments for file paths: '
         'target_config android_manifest empty_config '
