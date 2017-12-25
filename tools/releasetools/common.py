@@ -955,12 +955,24 @@ def MakeTempFile(prefix='tmp', suffix=''):
   return fn
 
 
+def MakeTempDir(prefix='tmp', suffix=''):
+  """Makes a temporary directory that will be cleaned up with calls to Cleanup().
+
+  Returns:
+      The absolute pathname of the new directory.
+  """
+  dir_name = tempfile.mkdtemp(suffix=suffix, prefix=prefix)
+  OPTIONS.tempfiles.append(dir_name)
+  return dir_name
+
+
 def Cleanup():
   for i in OPTIONS.tempfiles:
     if os.path.isdir(i):
-      shutil.rmtree(i)
+      shutil.rmtree(i, ignore_errors=True)
     else:
       os.remove(i)
+  del OPTIONS.tempfiles[:]
 
 
 class PasswordManager(object):
