@@ -149,6 +149,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG := \
     logpersist.start \
     perfprofd \
+    r \
     sqlite3 \
     strace
 
