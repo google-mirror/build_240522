@@ -58,14 +58,16 @@ endef
 #
 # Args:
 #   $(1): list of lib names (e.g., libfoo.vendor)
-#   $(2): vndk lib type, one of 'vndk' or 'vndk-sp'
+#   $(2): lib install partition, one of 'system' or 'vendor'
+#   $(3): if applicable, vndk lib type, one of 'vndk' or 'vndk-sp'
 define paths-of-notice-files
 $(strip \
   $(eval lib_dir := lib$(if $(TARGET_IS_64BIT),64,)) \
-  $(eval vndk_dir := $(2)-$(PLATFORM_VNDK_VERSION)) \
+  $(eval vndk_dir := $(if $(3),$(3)-$(PLATFORM_VNDK_VERSION),)) \
+  $(eval sub_path := $(subst $(space),/,$(strip $(2) $(lib_dir) $(vndk_dir)))) \
   $(foreach lib,$(1), \
     $(eval notice_file_name := $(patsubst %.vendor,%.so.txt,$(lib))) \
-    $(TARGET_OUT_NOTICE_FILES)/src/system/$(lib_dir)/$(vndk_dir)/$(notice_file_name) \
+    $(TARGET_OUT_NOTICE_FILES)/src/$(sub_path)/$(notice_file_name) \
   ) \
 )
 endef
@@ -86,15 +88,31 @@ endif
 
 vndk_sp_libs := $(addsuffix .vendor,$(VNDK_SAMEPROCESS_LIBRARIES))
 vndk_private_libs := $(addsuffix .vendor,$(VNDK_PRIVATE_LIBRARIES))
+vendor_installed_libs := $(addsuffix .vendor,$(VENDOR_INSTALLED_LIBRARIES))
 
 vndk_snapshot_libs := \
   $(vndk_core_libs) \
-  $(vndk_sp_libs)
+  $(vndk_sp_libs) \
+  $(vendor_installed_libs)
 
 vndk_prebuilt_txts := \
   ld.config.txt \
   vndksp.libraries.txt \
   llndk.libraries.txt
+
+# Rule for writing libs to a file
+#
+# Args:
+#   $(1): file to write to
+#   $(2): dependency list of libs
+define write-libs-to-file
+$(1): $(2)
+	@echo 'Generating: $$@'
+	@rm -f $$@
+	@mkdir -p $$(dir $$@)
+	$(hide) echo -n > $$@
+	$(hide) $$(foreach lib,$$^,echo $$(patsubst %.vendor,%,$$(lib)).so >> $$@;)
+endef
 
 vndk_snapshot_top := $(call intermediates-dir-for,PACKAGING,vndk-snapshot)
 vndk_snapshot_out := $(vndk_snapshot_top)/vndk-snapshot
@@ -103,24 +121,17 @@ vndk_snapshot_configs_out := $(vndk_snapshot_top)/configs
 #######################################
 # vndkcore.libraries.txt
 vndkcore.libraries.txt := $(vndk_snapshot_configs_out)/vndkcore.libraries.txt
-$(vndkcore.libraries.txt): $(vndk_core_libs)
-	@echo 'Generating: $@'
-	@rm -f $@
-	@mkdir -p $(dir $@)
-	$(hide) echo -n > $@
-	$(hide) $(foreach lib,$^,echo $(patsubst %.vendor,%,$(lib)).so >> $@;)
-
+$(eval $(call write-libs-to-file,$(vndkcore.libraries.txt),$(vndk_core_libs)))
 
 #######################################
 # vndkprivate.libraries.txt
 vndkprivate.libraries.txt := $(vndk_snapshot_configs_out)/vndkprivate.libraries.txt
-$(vndkprivate.libraries.txt): $(vndk_private_libs)
-	@echo 'Generating: $@'
-	@rm -f $@
-	@mkdir -p $(dir $@)
-	$(hide) echo -n > $@
-	$(hide) $(foreach lib,$^,echo $(patsubst %.vendor,%,$(lib)).so >> $@;)
+$(eval $(call write-libs-to-file,$(vndkprivate.libraries.txt),$(vndk_private_libs)))
 
+#######################################
+# vendor.libraries.txt
+vendor.libraries.txt := $(vndk_snapshot_configs_out)/vendor.libraries.txt
+$(eval $(call write-libs-to-file,$(vendor.libraries.txt),$(vendor_installed_libs)))
 
 #######################################
 # module_paths.txt
@@ -132,10 +143,10 @@ $(module_paths.txt): $(vndk_snapshot_libs)
 	$(hide) echo -n > $@
 	$(hide) $(foreach lib,$^,echo $(patsubst %.vendor,%,$(lib)).so $(ALL_MODULES.$(lib).PATH) >> $@;)
 
-
 vndk_snapshot_configs := \
   $(vndkcore.libraries.txt) \
   $(vndkprivate.libraries.txt) \
+  $(vendor.libraries.txt) \
   $(module_paths.txt)
 
 #######################################
@@ -155,6 +166,10 @@ $(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT := $(vndk_lib_dir)/shared/vndk-sp
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES := \
   $(call paths-of-intermediates,$(foreach lib,$(vndk_sp_libs),$(lib):$(lib).so),SHARED_LIBRARIES)
 
+$(vndk_snapshot_zip): PRIVATE_VENDOR_LIB_OUT := $(vndk_lib_dir)/shared/vendor
+$(vndk_snapshot_zip): PRIVATE_VENDOR_LIB_INTERMEDIATES := \
+  $(call paths-of-intermediates,$(foreach lib,$(vendor_installed_libs),$(lib):$(lib).so),SHARED_LIBRARIES)
+
 $(vndk_snapshot_zip): PRIVATE_CONFIGS_OUT := $(vndk_snapshot_variant)/configs
 $(vndk_snapshot_zip): PRIVATE_CONFIGS_INTERMEDIATES := \
   $(call paths-of-intermediates,$(foreach txt,$(vndk_prebuilt_txts), \
@@ -163,8 +178,9 @@ $(vndk_snapshot_zip): PRIVATE_CONFIGS_INTERMEDIATES := \
 
 $(vndk_snapshot_zip): PRIVATE_NOTICE_FILES_OUT := $(vndk_snapshot_variant)/NOTICE_FILES
 $(vndk_snapshot_zip): PRIVATE_NOTICE_FILES_INTERMEDIATES := \
-  $(call paths-of-notice-files,$(vndk_core_libs),vndk) \
-  $(call paths-of-notice-files,$(vndk_sp_libs),vndk-sp)
+  $(call paths-of-notice-files,$(vndk_core_libs),system,vndk) \
+  $(call paths-of-notice-files,$(vndk_sp_libs),system,vndk-sp) \
+  $(call paths-of-notice-files,$(vendor_installed_libs),vendor)
 
 ifdef TARGET_2ND_ARCH
 $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_OUT_2ND := $(vndk_lib_dir_2nd)/shared/vndk-core
@@ -174,6 +190,10 @@ $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_INTERMEDIATES_2ND := \
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT_2ND := $(vndk_lib_dir_2nd)/shared/vndk-sp
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES_2ND := \
   $(call paths-of-intermediates,$(foreach lib,$(vndk_sp_libs),$(lib):$(lib).so),SHARED_LIBRARIES,true)
+
+$(vndk_snapshot_zip): PRIVATE_VENDOR_LIB_OUT_2ND := $(vndk_lib_dir_2nd)/shared/vendor
+$(vndk_snapshot_zip): PRIVATE_VENDOR_LIB_INTERMEDIATES_2ND := \
+  $(call paths-of-intermediates,$(foreach lib,$(vendor_installed_libs),$(lib):$(lib).so),SHARED_LIBRARIES,true)
 endif
 
 # Args
@@ -204,6 +224,8 @@ $(vndk_snapshot_zip): $(vndk_snapshot_dependencies) $(SOONG_ZIP)
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_VNDK_SP_OUT),$(PRIVATE_VNDK_SP_INTERMEDIATES))
 	$(call private-copy-vndk-intermediates, \
+		$(PRIVATE_VENDOR_LIB_OUT),$(PRIVATE_VENDOR_LIB_INTERMEDIATES))
+	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_CONFIGS_OUT),$(PRIVATE_CONFIGS_INTERMEDIATES))
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_NOTICE_FILES_OUT),$(PRIVATE_NOTICE_FILES_INTERMEDIATES))
@@ -212,6 +234,8 @@ ifdef TARGET_2ND_ARCH
 		$(PRIVATE_VNDK_CORE_OUT_2ND),$(PRIVATE_VNDK_CORE_INTERMEDIATES_2ND))
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_VNDK_SP_OUT_2ND),$(PRIVATE_VNDK_SP_INTERMEDIATES_2ND))
+	$(call private-copy-vndk-intermediates, \
+		$(PRIVATE_VENDOR_LIB_OUT_2ND),$(PRIVATE_VENDOR_LIB_INTERMEDIATES_2ND))
 endif
 	$(hide) $(SOONG_ZIP) -o $@ -C $(PRIVATE_VNDK_SNAPSHOT_OUT) -D $(PRIVATE_VNDK_SNAPSHOT_OUT)
 
@@ -226,12 +250,14 @@ paths-of-intermediates :=
 paths-of-notice-files :=
 vndk_core_libs :=
 vndk_sp_libs :=
+vendor_installed_libs :=
 vndk_snapshot_libs :=
 vndk_prebuilt_txts :=
-vndk_snapshot_configs :=
+write-libs-to-file :=
 vndk_snapshot_top :=
 vndk_snapshot_out :=
 vndk_snapshot_configs_out :=
+vndk_snapshot_configs :=
 vndk_snapshot_variant :=
 vndk_lib_dir :=
 vndk_lib_dir_2nd :=
