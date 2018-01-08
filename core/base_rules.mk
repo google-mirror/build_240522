@@ -538,9 +538,9 @@ ifeq (,$(test_config))
       is_instrumentation_test := false
     endif
   endif
-  # CTS modules can be used for test data, so test config files must be
+  # CTS and other *TS modules can be used for test data, so test config files must be
   # explicitly created using AndroidTest.xml
-  ifeq (,$(filter cts, $(LOCAL_COMPATIBILITY_SUITE)))
+  ifeq (,$(filter %ts, $(filter-out %tests,$(LOCAL_COMPATIBILITY_SUITE))))
     ifeq (true, $(filter true,$(is_native) $(is_instrumentation_test)))
       include $(BUILD_SYSTEM)/autogen_test_config.mk
       test_config := $(autogen_test_config_file)
