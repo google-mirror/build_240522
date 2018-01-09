@@ -1286,14 +1286,19 @@ def main(argv):
   assert not (OPTIONS.downgrade and OPTIONS.timestamp), \
       "Cannot have --downgrade AND --override_timestamp both"
 
-  # Load the dict file from the zip directly to have a peek at the OTA type.
-  # For packages using A/B update, unzipping is not needed.
+  # Load the dict file from the zip directly or the extracted input directory
+  # to have a peek at the OTA type. For packages using A/B update, unzipping the
+  # entire target-files zip is not needed.
   if OPTIONS.extracted_input is not None:
-    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input, OPTIONS.extracted_input)
+    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input,
+                                            OPTIONS.extracted_input)
   else:
-    input_zip = zipfile.ZipFile(args[0], "r")
-    OPTIONS.info_dict = common.LoadInfoDict(input_zip)
-    common.ZipClose(input_zip)
+    with zipfile.ZipFile(args[0], "r") as input_zip:
+      OPTIONS.info_dict = common.LoadInfoDict(input_zip)
+
+  if OPTIONS.verbose:
+    print("--- target info ---")
+    common.DumpInfoDict(OPTIONS.info_dict)
 
   ab_update = OPTIONS.info_dict.get("ab_update") == "true"
 
@@ -1315,11 +1320,7 @@ def main(argv):
       OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
       common.ZipClose(source_zip)
 
-    if OPTIONS.verbose:
-      print("--- target info ---")
-      common.DumpInfoDict(OPTIONS.info_dict)
-
-      if OPTIONS.incremental_source is not None:
+      if OPTIONS.verbose:
         print("--- source info ---")
         common.DumpInfoDict(OPTIONS.source_info_dict)
 
@@ -1336,20 +1337,12 @@ def main(argv):
 
   if OPTIONS.extracted_input is not None:
     OPTIONS.input_tmp = OPTIONS.extracted_input
-    OPTIONS.target_tmp = OPTIONS.input_tmp
-    OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
     input_zip = zipfile.ZipFile(args[0], "r")
   else:
     print("unzipping target target-files...")
     OPTIONS.input_tmp, input_zip = common.UnzipTemp(
         args[0], UNZIP_PATTERN)
-
-    OPTIONS.target_tmp = OPTIONS.input_tmp
-    OPTIONS.info_dict = common.LoadInfoDict(input_zip, OPTIONS.target_tmp)
-
-  if OPTIONS.verbose:
-    print("--- target info ---")
-    common.DumpInfoDict(OPTIONS.info_dict)
+  OPTIONS.target_tmp = OPTIONS.input_tmp
 
   # If the caller explicitly specified the device-specific extensions
   # path via -s/--device_specific, use that.  Otherwise, use
