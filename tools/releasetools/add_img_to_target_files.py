@@ -634,19 +634,18 @@ def AddImagesToTargetFiles(filename):
   """
   if os.path.isdir(filename):
     OPTIONS.input_tmp = os.path.abspath(filename)
-    input_zip = None
   else:
-    OPTIONS.input_tmp, input_zip = common.UnzipTemp(filename)
+    OPTIONS.input_tmp = common.UnzipTemp(filename)
 
   if not OPTIONS.add_missing:
     if os.path.isdir(os.path.join(OPTIONS.input_tmp, "IMAGES")):
       print("target_files appears to already contain images.")
       sys.exit(1)
 
-  # {vendor,product}.img is unlike system.img or system_other.img. Because it could
-  # be built from source, or dropped into target_files.zip as a prebuilt blob.
-  # We consider either of them as {vendor,product}.img being available, which could
-  # be used when generating vbmeta.img for AVB.
+  # {vendor,product}.img is unlike system.img or system_other.img. Because it
+  # could be built from source, or dropped into target_files.zip as a prebuilt
+  # blob. We consider either of them as {vendor,product}.img being available,
+  # which could be used when generating vbmeta.img for AVB.
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
@@ -656,16 +655,14 @@ def AddImagesToTargetFiles(filename):
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
 
-  if input_zip:
-    OPTIONS.info_dict = common.LoadInfoDict(input_zip, OPTIONS.input_tmp)
+  OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
 
-    common.ZipClose(input_zip)
+  if os.path.isdir(filename):
+    output_zip = None
+  else:
     output_zip = zipfile.ZipFile(filename, "a",
                                  compression=zipfile.ZIP_DEFLATED,
                                  allowZip64=True)
-  else:
-    OPTIONS.info_dict = common.LoadInfoDict(filename, filename)
-    output_zip = None
 
   # Always make input_tmp/IMAGES available, since we may stage boot / recovery
   # images there even under zip mode. The directory will be cleaned up as part
