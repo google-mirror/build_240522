@@ -499,6 +499,8 @@ class BlockImageDiff(object):
             xf.tgt_ranges.to_string_raw(), src_str))
         total += tgt_size
       elif xf.style == "zero":
+        raise ValueError("unknown transfer style '%s'\n" % xf.style)
+
         assert xf.tgt_ranges
         to_zero = xf.tgt_ranges.subtract(xf.src_ranges)
         assert WriteSplitTransfers(out, xf.style, to_zero) == to_zero.size()
