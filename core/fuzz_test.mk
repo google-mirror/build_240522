@@ -10,6 +10,7 @@ endif
 
 LOCAL_CFLAGS += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
 LOCAL_STATIC_LIBRARIES += libFuzzer
+LOCAL_CXX_STL := libc++_static
 
 ifdef LOCAL_MODULE_PATH
 $(error $(LOCAL_PATH): Do not set LOCAL_MODULE_PATH when building test $(LOCAL_MODULE))
