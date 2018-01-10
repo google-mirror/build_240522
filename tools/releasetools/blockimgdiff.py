@@ -1452,16 +1452,17 @@ class BlockImageDiff(object):
 
           split_src_name = "{}-{}".format(src_name, index)
           split_tgt_name = "{}-{}".format(tgt_name, index)
-          transfer_split = Transfer(split_tgt_name, split_src_name,
-                                    split_tgt_ranges, split_src_ranges,
-                                    self.tgt.RangeSha1(split_tgt_ranges),
-                                    self.src.RangeSha1(split_src_ranges),
-                                    "diff", self.transfers)
-          transfer_split.patch = patch_content
+          with transfer_lock:
+            split_transfers_for_apk.append((split_tgt_name,
+                                            split_src_name,
+                                            split_tgt_ranges,
+                                            split_src_ranges,
+                                            patch_content))
 
     print("Finding transfers...")
 
     large_apks = []
+    split_transfers_for_apk = []
     cache_size = common.OPTIONS.cache_size
     split_threshold = 0.125
     max_blocks_per_transfer = int(cache_size * split_threshold /
@@ -1517,6 +1518,16 @@ class BlockImageDiff(object):
       th.start()
     while threads:
       threads.pop().join()
+
+    # Sort the split transfers for large apks to generate a determinate package.
+    split_transfers_for_apk.sort()
+    for (tgt_name, src_name, tgt_ranges, src_ranges,
+         patch) in split_transfers_for_apk:
+      transfer_split = Transfer(tgt_name, src_name, tgt_ranges, src_ranges,
+                                self.tgt.RangeSha1(tgt_ranges),
+                                self.src.RangeSha1(src_ranges),
+                                "diff", self.transfers)
+      transfer_split.patch = patch
 
   def AbbreviateSourceNames(self):
     for k in self.src.file_map.keys():
