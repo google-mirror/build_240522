@@ -42,6 +42,14 @@ _contents := {$(newline)
 
 $(call add_json_str,  Make_suffix, -$(TARGET_PRODUCT))
 
+$(call add_json_str,  BuildId,                           $(BUILD_ID))
+$(call add_json_str,  BuildNumberFromFile,               $$$(BUILD_NUMBER_FROM_FILE))
+ifeq ($(HOST_OS),darwin)
+$(call add_json_str,  DateFromFile,                      date -r $$$(BUILD_DATETIME_FROM_FILE))
+else
+$(call add_json_str,  DateFromFile,                      date -d @$$$(BUILD_DATETIME_FROM_FILE))
+endif
+
 $(call add_json_val,  Platform_sdk_version,              $(PLATFORM_SDK_VERSION))
 $(call add_json_csv,  Platform_version_active_codenames, $(PLATFORM_VERSION_ALL_CODENAMES))
 $(call add_json_csv,  Platform_version_future_codenames, $(PLATFORM_VERSION_FUTURE_CODENAMES))
