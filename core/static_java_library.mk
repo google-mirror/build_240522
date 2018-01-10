@@ -205,6 +205,9 @@ else
 aar_classes_jar = $(full_classes_pre_proguard_jar)
 endif
 
+# Expose full_android_manifest for other libraries to use
+$(eval $(call copy-one-file,$(full_android_manifest),$(intermediates.COMMON)/aar_AndroidManifest.xml))
+
 # Rule to build AAR, archive including classes.jar, resource, etc.
 built_aar := $(intermediates.COMMON)/javalib.aar
 $(built_aar): PRIVATE_MODULE := $(LOCAL_MODULE)
