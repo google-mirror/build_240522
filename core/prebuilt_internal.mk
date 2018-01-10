@@ -581,8 +581,9 @@ ifneq ($(my_src_aar),)
 # This is .aar file, archive of classes.jar and Android resources.
 my_src_jar := $(intermediates.COMMON)/aar/classes.jar
 my_src_proguard_options := $(intermediates.COMMON)/aar/proguard.txt
+my_src_full_manifest := $(intermediates.COMMON)/aar/AndroidManifest.xml
 
-$(my_src_jar) : .KATI_IMPLICIT_OUTPUTS := $(my_src_proguard_options)
+$(my_src_jar) : .KATI_IMPLICIT_OUTPUTS := $(my_src_proguard_options) $(my_src_full_manifest)
 $(my_src_jar) : $(my_src_aar)
 	$(hide) rm -rf $(dir $@) && mkdir -p $(dir $@) $(dir $@)/res
 	$(hide) unzip -qo -d $(dir $@) $<
@@ -590,6 +591,11 @@ $(my_src_jar) : $(my_src_aar)
 	$(hide) touch $@
 	# Make sure the proguard file exists and has a new timestamp.
 	$(hide) touch $(dir $@)/proguard.txt
+	# Make sure the AndroidManifest.xml has a new timestamp.
+	$(hide) touch $(dir $@)/AndroidManifest.xml
+
+# Copy AndroidManifest.xml to standard location for library users
+$(eval $(call copy-one-file,$(my_src_full_manifest),$(intermediates.COMMON)/aar_AndroidManifest.xml))
 
 endif
 
