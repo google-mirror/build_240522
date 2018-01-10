@@ -29,6 +29,15 @@ LOCAL_RESOURCE_DIR += $(foreach lib, $(LOCAL_STATIC_JAVA_AAR_LIBRARIES),\
 endif  # LOCAL_USE_AAPT2
 endif  # LOCAL_STATIC_JAVA_AAR_LIBRARIES
 
+ifdef LOCAL_STATIC_ANDROID_LIBRARIES
+ifdef LOCAL_USE_AAPT2
+my_full_libs_manifest_deps += $(foreach lib,$(LOCAL_STATIC_ANDROID_LIBRARIES),\
+  $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/aar_AndroidManifest.xml)
+my_full_libs_manifest_files += $(foreach lib,$(LOCAL_STATIC_ANDROID_LIBRARIES),\
+  $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/aar_AndroidManifest.xml)
+endif
+endif
+
 # Set up rules to merge library manifest files
 ifdef my_full_libs_manifest_files
 main_android_manifest := $(full_android_manifest)
