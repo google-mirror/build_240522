@@ -57,6 +57,8 @@ def main():
 
     failed = False
     for dep in args.deps:
+        if "STATIC_LIBRARIES" in dep:
+            continue
         dep_name = os.path.basename(os.path.dirname(dep))
         if dep_name.endswith('_intermediates'):
             dep_name = dep_name[:len(dep_name)-len('_intermediates')]
