@@ -205,6 +205,10 @@ $(KATI_obsolete_var PRODUCT_FULL_TREBLE,\
 	variables like PRODUCT_SEPOLICY_SPLIT should be used until that is \
 	possible.)
 
+# Sets ro.compatible_property.enabled to know on runtime whether the whitelist
+# of compatible properties is enabled or not.
+ADDITIONAL_DEFAULT_PROPERTIES += ro.compatible_property.enabled=$(PRODUCT_COMPATIBLE_PROPERTY)
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
