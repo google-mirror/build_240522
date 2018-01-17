@@ -98,7 +98,7 @@ vndk_prebuilt_txts := \
 
 vndk_snapshot_top := $(call intermediates-dir-for,PACKAGING,vndk-snapshot)
 vndk_snapshot_out := $(vndk_snapshot_top)/vndk-snapshot
-vndk_snapshot_configs_out := $(vndk_snapshot_top)/configs
+vndk_snapshot_configs_out := $(vndk_snapshot_top)/config
 
 #######################################
 # vndkcore.libraries.txt
@@ -155,7 +155,7 @@ $(vndk_snapshot_zip): PRIVATE_VNDK_SP_OUT := $(vndk_lib_dir)/shared/vndk-sp
 $(vndk_snapshot_zip): PRIVATE_VNDK_SP_INTERMEDIATES := \
   $(call paths-of-intermediates,$(foreach lib,$(vndk_sp_libs),$(lib):$(lib).so),SHARED_LIBRARIES)
 
-$(vndk_snapshot_zip): PRIVATE_CONFIGS_OUT := $(vndk_snapshot_variant)/configs
+$(vndk_snapshot_zip): PRIVATE_CONFIGS_OUT := $(vndk_snapshot_variant)/config
 $(vndk_snapshot_zip): PRIVATE_CONFIGS_INTERMEDIATES := \
   $(call paths-of-intermediates,$(foreach txt,$(vndk_prebuilt_txts), \
     $(txt):$(patsubst %.txt,%.$(PLATFORM_VNDK_VERSION).txt,$(txt))),ETC) \
