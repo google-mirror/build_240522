@@ -15,11 +15,13 @@
 #
 
 import copy
+import os.path
 import unittest
 
 import common
 from ota_from_target_files import (
-    _LoadOemDicts, BuildInfo, GetPackageMetadata, WriteFingerprintAssertion)
+    _LoadOemDicts, BuildInfo, GetPackageMetadata, PayloadSigner,
+    WriteFingerprintAssertion)
 
 
 class MockScriptWriter(object):
@@ -476,3 +478,87 @@ class OtaFromTargetFilesTest(unittest.TestCase):
             'pre-build-incremental' : 'build-version-incremental-source',
         },
         metadata)
+
+
+class PayloadSignerTest(unittest.TestCase):
+
+  SIGFILE = 'sigfile.bin'
+  SIGNED_SIGFILE = 'signed-sigfile.bin'
+
+  def setUp(self):
+    # We need the current dir for this .py file (instead of pwd), so that we can
+    # find the testdata.
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    self.testdata_dir = os.path.join(current_dir, 'testdata')
+    common.OPTIONS.package_key = None
+    common.OPTIONS.payload_signer = None
+    common.OPTIONS.key_passwords = {}
+
+  def tearDown(self):
+    common.Cleanup()
+
+  def _default_signer(self):
+    common.OPTIONS.package_key = os.path.join(self.testdata_dir, 'testkey')
+    common.OPTIONS.key_passwords = {
+        common.OPTIONS.package_key : None,
+    }
+    return PayloadSigner()
+
+  def _assertFilesEqual(self, file1, file2):
+    with open(file1) as fp1, open(file2) as fp2:
+      self.assertEqual(fp1.read(), fp2.read())
+
+  def test_init(self):
+    payload_signer = self._default_signer()
+    self.assertEqual('openssl', payload_signer.signer)
+
+  def test_init_withPassword(self):
+    common.OPTIONS.package_key = os.path.join(
+        self.testdata_dir, 'testkey_with_passwd')
+    common.OPTIONS.key_passwords = {
+        common.OPTIONS.package_key : 'foo',
+    }
+    payload_signer = PayloadSigner()
+    self.assertEqual('openssl', payload_signer.signer)
+
+  def test_init_withExternalSigner(self):
+    common.OPTIONS.payload_signer = 'abc'
+    common.OPTIONS.payload_signer_args = ['arg1', 'arg2']
+    payload_signer = PayloadSigner()
+    self.assertEqual('abc', payload_signer.signer)
+    self.assertEqual(['arg1', 'arg2'], payload_signer.signer_args)
+
+  def test_Sign(self):
+    payload_signer = self._default_signer()
+    input_file = os.path.join(self.testdata_dir, self.SIGFILE)
+    signed_file = payload_signer.Sign(input_file)
+
+    verify_file = os.path.join(self.testdata_dir, self.SIGNED_SIGFILE)
+    self._assertFilesEqual(verify_file, signed_file)
+
+  def test_Sign_withExternalSigner_openssl(self):
+    """Uses openssl as the external payload signer."""
+    common.OPTIONS.payload_signer = 'openssl'
+    common.OPTIONS.payload_signer_args = [
+        'pkeyutl', '-sign', '-keyform', 'DER', '-inkey',
+        os.path.join(self.testdata_dir, 'testkey.pk8'),
+        '-pkeyopt', 'digest:sha256']
+    payload_signer = PayloadSigner()
+    input_file = os.path.join(self.testdata_dir, self.SIGFILE)
+    signed_file = payload_signer.Sign(input_file)
+
+    verify_file = os.path.join(self.testdata_dir, self.SIGNED_SIGFILE)
+    self._assertFilesEqual(verify_file, signed_file)
+
+  def test_Sign_withExternalSigner_script(self):
+    """Uses testdata/payload_signer.sh as the external payload signer."""
+    common.OPTIONS.payload_signer = os.path.join(
+        self.testdata_dir, 'payload_signer.sh')
+    common.OPTIONS.payload_signer_args = [
+        os.path.join(self.testdata_dir, 'testkey.pk8')]
+    payload_signer = PayloadSigner()
+    input_file = os.path.join(self.testdata_dir, self.SIGFILE)
+    signed_file = payload_signer.Sign(input_file)
+
+    verify_file = os.path.join(self.testdata_dir, self.SIGNED_SIGFILE)
+    self._assertFilesEqual(verify_file, signed_file)
