@@ -454,22 +454,31 @@ ALL_MODULES.$(my_register_name).INTERMEDIATE_SOURCE_DIR := \
 # Verify that all libraries are safe to use
 ###########################################################
 ifndef LOCAL_IS_HOST_MODULE
-ifeq ($(LOCAL_SDK_VERSION),system_current)
-my_link_type := java:system
-my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
+ifneq (,$(filter $(filter-out $(TARGET_CORE_JARS),$(PRODUCT_BOOT_JARS)),$(LOCAL_JAVA_LIBRARIES)))
+  # If framework libraries are explicitly used, then categorize this as java:platform
+  # regardless of LOCAL_SDK_VERSION or LOCAL_NO_STANDARD_LIBS
+  my_link_type := java:platform
+  my_warn_types :=
+  my_allowed_types := java:core java:sdk java:system
 else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
-my_link_type := java:system
-my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
-else ifneq ($(LOCAL_SDK_VERSION),)
-my_link_type := java:sdk
-my_warn_types := java:system java:platform
-my_allowed_types := java:sdk
+  # If targeted for System SDK
+  my_link_type := java:system
+  my_warn_types := java:platform
+  my_allowed_types := java:core java:sdk java:system
+else ifneq (,$(LOCAL_SDK_VERSION))
+  # If targeted for other SDKs
+  my_link_type := java:sdk
+  my_warn_types := java:system java:platform
+  my_allowed_types := java:core java:sdk
+else ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+  # Not using framework libs, not using any SDK
+  my_link_type := java:core
+  my_warn_types := java:platform java:system java:sdk
+  my_allowed_types := java:core
 else
-my_link_type := java:platform
-my_warn_types :=
-my_allowed_types := java:sdk java:system java:platform
+  my_link_type := java:platform
+  my_warn_types :=
+  my_allowed_types := java:core java:sdk java:system
 endif
 
 ifdef LOCAL_AAPT2_ONLY
