@@ -540,14 +540,14 @@ common_javalib_jar := $(intermediates.COMMON)/javalib.jar
 $(common_classes_jar) $(common_classes_pre_proguard_jar) $(common_javalib_jar): PRIVATE_MODULE := $(LOCAL_MODULE)
 $(common_classes_jar) $(common_classes_pre_proguard_jar) $(common_javalib_jar): PRIVATE_PREFIX := $(my_prefix)
 
-ifeq ($(LOCAL_SDK_VERSION),system_current)
-my_link_type := java:system
-else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
-my_link_type := java:system
+ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
+  my_link_type := java:system
 else ifneq ($(LOCAL_SDK_VERSION),)
-my_link_type := java:sdk
+  my_link_type := java:sdk
+else ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+  my_link_type := java:core
 else
-my_link_type := java:platform
+  my_link_type := java:platform
 endif
 
 # TODO: check dependencies of prebuilt files
