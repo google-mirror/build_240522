@@ -86,19 +86,23 @@ ifndef LOCAL_IS_HOST_MODULE
 ifeq ($(LOCAL_SDK_VERSION),system_current)
 my_link_type := java:system
 my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
+my_allowed_types := java:core java:sdk java:system
 else ifneq (,$(call has-system-sdk-version,$(LOCAL_SDK_VERSION)))
 my_link_type := java:system
 my_warn_types := java:platform
-my_allowed_types := java:sdk java:system
+my_allowed_types := java:core java:sdk java:system
 else ifneq ($(LOCAL_SDK_VERSION),)
 my_link_type := java:sdk
 my_warn_types := java:system java:platform
-my_allowed_types := java:sdk
+my_allowed_types := java:core java:sdk
+else ifeq ($(LOCAL_NO_FRAMEWORK_LIBRARIES),true)
+my_link_type := java:core
+my_warn_types := java:sdk java:system java:platform
+my_allowed_types := java:core
 else
 my_link_type := java:platform
 my_warn_types :=
-my_allowed_types := java:sdk java:system java:platform
+my_allowed_types := java:core java:sdk java:system java:platform
 endif
 
 my_link_deps :=

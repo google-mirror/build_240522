@@ -3431,3 +3431,25 @@ define get-numeric-sdk-version
 $(filter-out current,\
   $(if $(call has-system-sdk-version,$(1)),$(patsubst system_%,%,$(1)),$(1)))
 endef
+
+###########################################################
+# Determine whether current Java module is not using
+# framework libraries such as framework, telephony-common,
+# ext, etc, but only using core Java libraries like core-oj.
+#
+# LOCAL_NO_STANDARD_LIBRARIES only isn't enough because they
+# can manually add framework libraries.
+#
+# Returns true if it is, <empty> otherwise.
+#
+# No argument. Uses LOCAL_* variables
+##########################################################
+define is-using-core-libs-only
+$(strip \
+  $(if $(filter true,$(LOCAL_NO_STANDARD_LIBRARIES)), \
+    $(if $(filter $(filter-out $(TARGET_CORE_JARS),$(PRODUCT_BOOT_JARS)),$(LOCAL_JAVA_LIBRARIES)),,
+      true
+    ) \
+  ) \
+)
+endef
