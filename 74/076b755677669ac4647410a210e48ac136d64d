@@ -1,0 +1,10 @@
+Verified+1: Ian Pedowitz <ijpedowitz@google.com>
+Autosubmit+1: Ian Pedowitz <ijpedowitz@google.com>
+Code-Review+2: clarabayarri <clarabayarri@google.com>
+Build-Cop-Override+1: clarabayarri <clarabayarri@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 19 Jan 2018 14:34:59 +0000
+Reviewed-on: https://android-review.googlesource.com/594033
+Project: platform/build
+Branch: refs/heads/master
