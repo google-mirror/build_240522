@@ -1008,6 +1008,12 @@ endif
 
 ifeq ($(BOARD_AVB_ENABLE),true)
 INTERNAL_USERIMAGES_DEPS += $(AVBTOOL)
+# vboot 1.0 and AVB (a.k.a. vboot 2.0) cannot be enabled simultaneously.
+ifneq (,$(filter true, $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_BOOT_SIGNER) \
+                       $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VERITY) \
+                       $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VERITY_FEC)))
+$(error BOARD_AVB_ENABLE and build/target/product/verity.mk cannot be enabled at the same time)
+endif
 endif
 
 ifneq (true,$(TARGET_USERIMAGES_SPARSE_SQUASHFS_DISABLED))
