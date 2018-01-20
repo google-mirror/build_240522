@@ -1,0 +1,10 @@
+Code-Review+2: Tao Bao <tbao@google.com>
+Code-Review+1: Jin Qian <jinqian@google.com>
+Autosubmit+1: Zhi An Ng <zhin@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Zhi An Ng <zhin@google.com>
+Submitted-by: Zhi An Ng <zhin@google.com>
+Submitted-at: Sat, 20 Jan 2018 05:59:47 +0000
+Reviewed-on: https://android-review.googlesource.com/594650
+Project: platform/build
+Branch: refs/heads/master
