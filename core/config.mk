@@ -824,6 +824,16 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
       $(error When PRODUCT_SHIPPING_API_LEVEL >= 27, TARGET_USES_MKE2FS must be true)
     endif
   endif
+  ifeq ($(call math_is_number,$(BOARD_VNDK_VERSION)),true)
+    ifeq ($(call math_lt,$(BOARD_VNDK_VERSION),$(PRODUCT_SHIPPING_API_LEVEL)),true)
+      $(error BOARD_VNDK_VERSION ($(BOARD_VNDK_VERSION)) is too old; must be greater than or equal to PRODUCT_SHIPPING_API_LEVEL ($(PRODUCT_SHIPPING_API_LEVEL)))
+    endif
+  endif
+  ifdef BOARD_SYSTEMSDK_VERSIONS
+    ifneq ($(call numbers_less_than,$(PRODUCT_SHIPPING_API_LEVEL),$(BOARD_SYSTEMSDK_VERSIONS)),)
+      $(error BOARD_SYSTEMSDK_VERSIONS ($(BOARD_SYSTEMSDK_VERSIONS)) must all be greater than or equal to PRODUCT_SHIPPING_API_LEVEL ($(PRODUCT_SHIPPING_API_LEVEL)))
+    endif
+  endif
 endif
 
 # The default key if not set as LOCAL_CERTIFICATE
