@@ -810,6 +810,13 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
       $(error When PRODUCT_SHIPPING_API_LEVEL >= 27, TARGET_USES_MKE2FS must be true)
     endif
   endif
+  ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),28),)
+    ifneq ($(TARGET_IS_64_BIT), true)
+      ifneq ($(TARGET_USES_64_BIT_BINDER), true)
+        $(error When PRODUCT_SHIPPING_API_LEVEL >= 28, TARGET_USES_64_BIT_BINDER must be true)
+      endif
+    endif
+  endif
 endif
 
 # The default key if not set as LOCAL_CERTIFICATE
