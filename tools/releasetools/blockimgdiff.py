@@ -362,6 +362,7 @@ class BlockImageDiff(object):
 
     # Double-check our work.
     self.AssertSequenceGood()
+    self.AssertSha1Good()
 
     self.ComputePatches(prefix)
     self.WriteTransfers(prefix)
@@ -866,6 +867,14 @@ class BlockImageDiff(object):
                 xf.tgt_name if xf.tgt_name == xf.src_name else (
                     xf.tgt_name + " (from " + xf.src_name + ")"),
                 xf.tgt_ranges, xf.src_ranges))
+
+  def AssertSha1Good(self):
+    for xf in self.transfers:
+      tgt_sha1 = self.tgt.RangeSha1(xf.tgt_ranges)
+      assert xf.tgt_sha1 == tgt_sha1
+      if xf.style == "diff":
+        src_sha1 = self.src.RangeSha1(xf.src_ranges)
+        assert xf.src_sha1 == src_sha1
 
   def AssertSequenceGood(self):
     # Simulate the sequences of transfers we will output, and check that:
