@@ -2370,8 +2370,9 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(HOST_OUT_EXECUTABLES)/imgdiff \
 		$(HOST_OUT_EXECUTABLES)/bsdiff \
 		$(BUILD_IMAGE_SRCS) \
-		$(INSTALLED_VENDOR_MANIFEST) \
-		$(INSTALLED_VENDOR_MATRIX) \
+		$(BUILT_VENDOR_MANIFEST) \
+		$(BUILT_VENDOR_MATRIX) \
+		$(BUILT_ODM_MANIFEST) \
 		| $(ACP)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
@@ -2630,6 +2631,9 @@ endif
 	@# Metadata for compatibility verification.
 	$(hide) cp $(BUILT_SYSTEM_MANIFEST) $(zip_root)/META/system_manifest.xml
 	$(hide) cp $(BUILT_SYSTEM_COMPATIBILITY_MATRIX) $(zip_root)/META/system_matrix.xml
+ifdef BUILT_ODM_MANIFEST
+	$(hide) cp $(BUILT_ODM_MANIFEST) $(zip_root)/META/odm_manifest.xml
+endif
 ifdef BUILT_VENDOR_MANIFEST
 	$(hide) cp $(BUILT_VENDOR_MANIFEST) $(zip_root)/META/vendor_manifest.xml
 endif
