@@ -46,6 +46,9 @@ ifeq ($(HOST_OS),linux)
   ifneq (false,$(WITH_DEXPREOPT_DEBUG_INFO))
     PRODUCT_DEX_PREOPT_BOOT_FLAGS += --generate-mini-debug-info
   endif
+else
+  $(warning Not building on Linux, and so skipping dex preeopt.)
+  $(warning BUILD ANDROID WITH LINUX TO MAKE ANDROID FASTEST.)
 endif
 
 GLOBAL_DEXPREOPT_FLAGS :=
