@@ -90,6 +90,7 @@ PRODUCT_PACKAGES += \
     device_manifest.xml \
     framework_manifest.xml \
     framework_compatibility_matrix.xml \
+    odm_manifest.xml \
 
 # SELinux packages are added as dependencies of the selinux_policy
 # phony package.

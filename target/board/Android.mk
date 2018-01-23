@@ -30,6 +30,24 @@ endif
 
 # Copy compatibility metadata to the device.
 
+# ODM Manifest
+ifdef DEVICE_ODM_MANIFEST_FILE
+include $(CLEAR_VARS)
+LOCAL_MODULE := odm_manifest.xml
+LOCAL_MODULE_STEM := manifest.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc/vintf
+
+GEN := $(local-generated-sources-dir)/manifest.xml
+$(GEN): PRIVATE_DEVICE_ODM_MANIFEST_FILE := $(DEVICE_ODM_MANIFEST_FILE)
+$(GEN): $(DEVICE_ODM_MANIFEST_FILE) $(HOST_OUT_EXECUTABLES)/assemble_vintf
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf -o $@ \
+		-i $(call normalize-path-list,$(PRIVATE_DEVICE_ODM_MANIFEST_FILE))
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ODM_MANIFEST := $(LOCAL_BUILT_MODULE)
+endif
+
 # Device Manifest
 ifdef DEVICE_MANIFEST_FILE
 # $(DEVICE_MANIFEST_FILE) can be a list of files
