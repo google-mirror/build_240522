@@ -73,6 +73,7 @@ PRODUCT_PACKAGES += \
     logcat \
     logwrapper \
     lshal \
+    perfetto \
     recovery \
     service \
     servicemanager \
@@ -81,6 +82,8 @@ PRODUCT_PACKAGES += \
     surfaceflinger \
     thermalserviced \
     tombstoned \
+    traced \
+    traced_probes \
     tzdatacheck \
     vndservice \
     vndservicemanager \
