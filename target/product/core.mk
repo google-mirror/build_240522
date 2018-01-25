@@ -47,6 +47,7 @@ PRODUCT_PACKAGES += \
     MtpDocumentsProvider \
     PacProcessor \
     libpac \
+    perfetto \
     PrintSpooler \
     PrintRecommendationService \
     ProxyHandler \
@@ -56,6 +57,8 @@ PRODUCT_PACKAGES += \
     StorageManager \
     Telecom \
     TeleService \
+    traced \
+    traced_probes \
     VpnDialogs \
     vr \
     MmsService
