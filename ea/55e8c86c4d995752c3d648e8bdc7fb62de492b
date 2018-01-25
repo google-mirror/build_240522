@@ -1,0 +1,9 @@
+Verified+1: Alexey Polyudov <apolyudov@google.com>
+Autosubmit+1: Alexey Polyudov <apolyudov@google.com>
+Presubmit-Ready+1: Alexey Polyudov <apolyudov@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Submitted-by: Alexey Polyudov <apolyudov@google.com>
+Submitted-at: Thu, 25 Jan 2018 03:33:58 +0000
+Reviewed-on: https://android-review.googlesource.com/599393
+Project: platform/build
+Branch: refs/heads/master
