@@ -1,0 +1,9 @@
+Presubmit-Ready+1: Jaekyun Seok <jaekyun@google.com>
+Code-Review+1: Tao Bao <tbao@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Verified+1: Jaekyun Seok <jaekyun@google.com>
+Submitted-by: Jaekyun Seok <jaekyun@google.com>
+Submitted-at: Thu, 25 Jan 2018 03:53:32 +0000
+Reviewed-on: https://android-review.googlesource.com/598454
+Project: platform/build
+Branch: refs/heads/master
