@@ -118,6 +118,7 @@ PRODUCT_PACKAGES += \
     ping \
     ping6 \
     platform.xml \
+    prezygote \
     privapp-permissions-platform.xml \
     pppd \
     pm \
