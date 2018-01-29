@@ -120,6 +120,7 @@ $(my_out_boot_image_profile_location): $(PROFMAN) $(LIBART_TARGET_BOOT_DEX_FILES
 	@mkdir -p $(dir $@)
 	ANDROID_LOG_TAGS="*:e" $(PROFMAN) \
 		--create-profile-from=$(PRIVATE_PROFILE_INPUT_LOCATION) \
+		--boot-jars \
 		$(addprefix --apk=,$(LIBART_TARGET_BOOT_DEX_FILES)) \
 		$(addprefix --dex-location=,$(LIBART_TARGET_BOOT_DEX_LOCATIONS)) \
 		--reference-profile-file=$@
