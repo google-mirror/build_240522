@@ -36,7 +36,8 @@ full_classes_combined_jar := $(intermediates.COMMON)/classes-combined.jar
 full_classes_desugar_jar := $(intermediates.COMMON)/desugar.classes.jar
 full_classes_jarjar_jar := $(intermediates.COMMON)/classes-jarjar.jar
 full_classes_jar := $(intermediates.COMMON)/classes.jar
-built_dex := $(intermediates.COMMON)/classes.dex
+built_dex_intermediate := $(intermediates.COMMON)/dex/classes.dex
+built_dex_hiddenapi := $(intermediates.COMMON)/dex-hiddenapi/classes.dex
 java_source_list_file := $(intermediates.COMMON)/java-source-list
 
 LOCAL_INTERMEDIATE_TARGETS += \
@@ -46,7 +47,7 @@ LOCAL_INTERMEDIATE_TARGETS += \
     $(full_classes_desugar_jar) \
     $(full_classes_jarjar_jar) \
     $(full_classes_jar) \
-    $(built_dex) \
+    $(built_dex_intermediate) \
     $(java_source_list_file)
 
 # See comment in java.mk
@@ -54,7 +55,7 @@ ifndef LOCAL_CHECKED_MODULE
 ifeq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
 LOCAL_CHECKED_MODULE := $(full_classes_compiled_jar)
 else
-LOCAL_CHECKED_MODULE := $(built_dex)
+LOCAL_CHECKED_MODULE := $(built_dex_intermediate)
 endif
 endif
 
@@ -174,14 +175,21 @@ $(LOCAL_BUILT_MODULE) : $(full_classes_jar)
 	$(copy-file-to-target)
 
 else # !LOCAL_IS_STATIC_JAVA_LIBRARY
-$(built_dex): PRIVATE_INTERMEDIATES_DIR := $(intermediates.COMMON)
-$(built_dex): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
-$(built_dex): $(full_classes_desugar_jar) $(DX) $(ZIP2ZIP)
+$(built_dex_intermediate): PRIVATE_INTERMEDIATES_DIR := $(intermediates.COMMON)
+$(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
+$(built_dex_intermediate): $(full_classes_desugar_jar) $(DX) $(ZIP2ZIP)
 ifneq ($(USE_D8_DESUGAR),true)
 	$(transform-classes.jar-to-dex)
 else
 	$(transform-classes-d8.jar-to-dex)
 endif
+
+ifneq ($(filter $(LOCAL_MODULE),$(HOST_CORE_JARS)),)  # is_boot_jar
+  $(eval $(call hiddenapi-copy-dex-files,$(built_dex_intermediate),$(built_dex_hiddenapi)))
+  built_dex := $(built_dex_hiddenapi)
+else # !is_boot_jar
+  built_dex := $(built_dex_intermediate)
+endif # is_boot_jar
 
 $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE := $(built_dex)
 $(LOCAL_BUILT_MODULE): PRIVATE_SOURCE_ARCHIVE := $(full_classes_jarjar_jar)
