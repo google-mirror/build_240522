@@ -98,6 +98,7 @@ $(call add_json_list, IntegerOverflowExcludePaths,       $(INTEGER_OVERFLOW_EXCL
 
 $(call add_json_bool, ClangTidy,                         $(filter 1 true,$(WITH_TIDY)))
 $(call add_json_str,  TidyChecks,                        $(WITH_TIDY_CHECKS))
+$(call add_json_bool, SkipAbiChecks,                     $(filter 1 true,$(SKIP_ABI_CHECKS)))
 
 $(call add_json_bool, NativeCoverage,                    $(filter true,$(NATIVE_COVERAGE)))
 $(call add_json_list, CoveragePaths,                     $(COVERAGE_PATHS))
