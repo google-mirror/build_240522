@@ -214,6 +214,16 @@ class SparseImage(object):
       for line in f:
         fn, ranges = line.split(None, 1)
         ranges = rangelib.RangeSet.parse(ranges)
+
+        shared_blocks = ranges.subtract(remaining)
+        if shared_blocks:
+          print("[{}][{}]".format(fn, shared_blocks.to_string()))
+          ranges = ranges.subtract(shared_blocks)
+          ranges.monotonic = False
+
+          if not ranges:
+            continue
+
         out[fn] = ranges
         assert ranges.size() == ranges.intersect(remaining).size()
 
