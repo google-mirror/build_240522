@@ -586,7 +586,7 @@ class PayloadTest(unittest.TestCase):
     common.Cleanup()
 
   @staticmethod
-  def _construct_target_files():
+  def _construct_target_files(secondary=False):
     target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
     with zipfile.ZipFile(target_files, 'w') as target_files_zip:
       # META/update_engine_config.txt
@@ -605,10 +605,14 @@ class PayloadTest(unittest.TestCase):
         target_files_zip.writestr('IMAGES/' + partition + '.img',
                                   os.urandom(len(partition)))
 
+      if secondary:
+        target_files_zip.writestr('IMAGES/system_other.img',
+                                  os.urandom(len(partition)))
+
     return target_files
 
-  def _create_payload_full(self):
-    target_file = self._construct_target_files()
+  def _create_payload_full(self, secondary=False):
+    target_file = self._construct_target_files(secondary)
     payload = Payload()
     payload.Generate(target_file)
     return payload
@@ -720,3 +724,31 @@ class PayloadTest(unittest.TestCase):
     output_file = common.MakeTempFile(suffix='.zip')
     with zipfile.ZipFile(output_file, 'w') as output_zip:
       self.assertRaises(AssertionError, payload.WriteToZip, output_zip)
+
+  def test_WriteToZip_secondary(self):
+    payload = self._create_payload_full(secondary=True)
+    payload.Sign(PayloadSigner())
+
+    output_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(output_file, 'w') as output_zip:
+      payload.WriteToZip(output_zip, secondary=True)
+
+    with zipfile.ZipFile(output_file) as verify_zip:
+      # First make sure we have the essential entries.
+      namelist = verify_zip.namelist()
+      self.assertIn(Payload.SECONDARY_PAYLOAD_BIN, namelist)
+      self.assertIn(Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT, namelist)
+
+      # Then assert these entries are stored.
+      for entry_info in verify_zip.infolist():
+        if entry_info.filename not in (
+            Payload.SECONDARY_PAYLOAD_BIN,
+            Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
+          continue
+        self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
+
+
+class WriteABOTAPackageWithBrilloScriptTest(unittest.TestCase):
+
+  def test_GetTargetFilesZipForSecondaryImages(self):
+    pass
