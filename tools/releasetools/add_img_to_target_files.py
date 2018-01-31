@@ -127,12 +127,18 @@ def AddSystem(output_zip, prefix="IMAGES/", recovery_img=None, boot_img=None):
     ofile.close()
 
     arc_name = "SYSTEM/" + fn
-    if arc_name in output_zip.namelist():
-      OPTIONS.replace_updated_files_list.append(arc_name)
-    else:
-      common.ZipWrite(output_zip, ofile.name, arc_name)
+    if output_zip is not None:
+      if arc_name in output_zip.namelist():
+        OPTIONS.replace_updated_files_list.append(arc_name)
+      else:
+        common.ZipWrite(output_zip, ofile.name, arc_name)
 
-  if OPTIONS.rebuild_recovery:
+  # Call MakeRecoveryPatch for AVB enabled devices with non-A/B configuration.
+  # This is to update the SHA values in install-recovery.sh in /system, since
+  # boot and recovery images are modified due to avb footer addition.
+  ab_update = OPTIONS.info_dict.get("ab_update") == "true"
+  avb_enable = OPTIONS.info_dict.get("avb_enable") == "true"
+  if OPTIONS.rebuild_recovery or (avb_enable and not ab_update):
     print("Building new recovery patch")
     common.MakeRecoveryPatch(OPTIONS.input_tmp, output_sink, recovery_img,
                              boot_img, info_dict=OPTIONS.info_dict)
