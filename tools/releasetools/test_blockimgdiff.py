@@ -53,6 +53,50 @@ class HealpItemTest(unittest.TestCase):
     self.assertFalse(item)
 
 
+class TransferTest(unittest.TestCase):
+
+  def test_CanUseImgdiff(self):
+    block_image_diff = BlockImageDiff(EmptyImage(), EmptyImage())
+    transfers = block_image_diff.transfers
+    self.assertTrue(
+        Transfer(
+            "/system/app/app1.apk", "/system/app/app1.apk", RangeSet("10-15"),
+            RangeSet("0-5"), "t1-dst-hash", "t1-src-hash", "diff",
+            transfers).CanUseImgdiff())
+
+  def test_CanUseImgdiff_ineligible(self):
+    block_image_diff = BlockImageDiff(EmptyImage(), EmptyImage())
+    transfers = block_image_diff.transfers
+
+    # Not a diff command.
+    self.assertFalse(
+        Transfer(
+            "/system/app/app1.apk", "/system/app/app1.apk", RangeSet("10-15"),
+            RangeSet("0-5"), "dst-hash", "src-hash", "move",
+            transfers).CanUseImgdiff())
+
+    # Unsupported file type.
+    self.assertFalse(
+        Transfer(
+            "/system/bin/gzip", "/system/bin/gzip", RangeSet("10-15"),
+            RangeSet("0-5"), "dst-hash", "src-hash", "diff",
+            transfers).CanUseImgdiff())
+
+    # Ranges in non-monotonic order.
+    self.assertFalse(
+        Transfer(
+            "/system/app/app2.apk", "/system/app/app2.apk", RangeSet("10-15"),
+            RangeSet("15-20 30 10-14"), "dst-hash", "src-hash", "diff",
+            transfers).CanUseImgdiff())
+
+    # Either source or target ranges have been modified.
+    transfer = Transfer(
+        "/system/app/app2.apk", "/system/app/app2.apk", RangeSet("10-15"),
+        RangeSet("15-20 30 10-14"), "dst-hash", "src-hash", "diff", transfers)
+    transfer.intact = False
+    self.assertFalse(transfer.CanUseImgdiff())
+
+
 class BlockImageDiffTest(unittest.TestCase):
 
   def test_GenerateDigraphOrder(self):
@@ -172,3 +216,21 @@ class BlockImageDiffTest(unittest.TestCase):
     # Insufficient cache to stash 15 blocks (size * 0.8 < 15).
     common.OPTIONS.cache_size = 15 * 4096
     self.assertEqual(15, block_image_diff.ReviseStashSize())
+
+  def test_FileTypeSupportedByImgdiff(self):
+    self.assertTrue(
+        BlockImageDiff.FileTypeSupportedByImgdiff(
+            '/system/priv-app/Settings/Settings.apk'))
+    self.assertTrue(
+        BlockImageDiff.FileTypeSupportedByImgdiff(
+            '/system/framework/am.jar'))
+    self.assertTrue(
+        BlockImageDiff.FileTypeSupportedByImgdiff(
+            '/system/etc/security/otacerts.zip'))
+
+    self.assertFalse(
+        BlockImageDiff.FileTypeSupportedByImgdiff(
+            '/system/framework/arm/boot.oat'))
+    self.assertFalse(
+        BlockImageDiff.FileTypeSupportedByImgdiff(
+            '/system/priv-app/notanapk'))
