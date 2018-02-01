@@ -191,7 +191,7 @@ class Transfer(object):
     self.tgt_sha1 = tgt_sha1
     self.src_sha1 = src_sha1
     self.style = style
-    self.intact = tgt_ranges.monotonic and src_ranges.monotonic
+    self.intact = True
 
     # We use OrderedDict rather than dict so that the output is repeatable;
     # otherwise it would depend on the hash values of the Transfer objects.
@@ -226,6 +226,33 @@ class Transfer(object):
     self.style = "new"
     self.src_ranges = RangeSet()
     self.patch = None
+
+  def CanUseImgdiff(self):
+    """Checks whether we can apply imgdiff to the current transfer.
+
+    For files in ZIP format (e.g., APKs, JARs, etc.) we would like to use
+    'imgdiff -z' if possible. Because it usually produces significantly smaller
+    patches than bsdiff.
+
+    This is permissible if all of the following conditions hold.
+      - This is a 'diff' command;
+      - The source and target blocks are monotonic (i.e. the data is stored with
+        blocks in increasing order);
+      - We haven't removed any blocks from the source set.
+
+    If all these conditions are satisfied, concatenating all the blocks in the
+    RangeSet in order will produce a valid ZIP file (plus possibly extra zeros
+    in the last block). imgdiff is fine with extra zeros at the end of the file.
+
+    Returns:
+      A boolean result.
+    """
+    return (
+        self.style == 'diff' and
+        BlockImageDiff.FileTypeSupportedByImgdiff(self.tgt_name) and
+        self.src_ranges.monotonic and
+        self.tgt_ranges.monotonic and
+        self.intact)
 
   def __str__(self):
     return (str(self.id) + ": <" + str(self.src_ranges) + " " + self.style +
@@ -332,6 +359,10 @@ class BlockImageDiff(object):
   @property
   def max_stashed_size(self):
     return self._max_stashed_size
+
+  @staticmethod
+  def FileTypeSupportedByImgdiff(filename):
+    return filename.lower().endswith(('.apk', '.jar', '.zip'))
 
   def Compute(self, prefix):
     # When looking for a source file to use as the diff input for a
@@ -715,24 +746,7 @@ class BlockImageDiff(object):
                 imgdiff = False
                 xf.patch = None
             else:
-              # For files in zip format (eg, APKs, JARs, etc.) we would
-              # like to use imgdiff -z if possible (because it usually
-              # produces significantly smaller patches than bsdiff).
-              # This is permissible if:
-              #
-              #  - imgdiff is not disabled, and
-              #  - the source and target files are monotonic (ie, the
-              #    data is stored with blocks in increasing order), and
-              #  - we haven't removed any blocks from the source set.
-              #
-              # If these conditions are satisfied then appending all the
-              # blocks in the set together in order will produce a valid
-              # zip file (plus possibly extra zeros in the last block),
-              # which is what imgdiff needs to operate.  (imgdiff is
-              # fine with extra zeros at the end of the file.)
-              imgdiff = (not self.disable_imgdiff and xf.intact and
-                         xf.tgt_name.split(".")[-1].lower()
-                         in ("apk", "jar", "zip"))
+              imgdiff = not self.disable_imgdiff and xf.CanUseImgdiff()
             xf.style = "imgdiff" if imgdiff else "bsdiff"
             diff_queue.append((index, imgdiff, patch_num))
             patch_num += 1
@@ -1261,11 +1275,10 @@ class BlockImageDiff(object):
                  style, by_id)
         return
 
-      if tgt_name.split(".")[-1].lower() in ("apk", "jar", "zip"):
-        split_enable = (not self.disable_imgdiff and src_ranges.monotonic and
-                        tgt_ranges.monotonic)
-        if split_enable and (self.tgt.RangeSha1(tgt_ranges) !=
-                             self.src.RangeSha1(src_ranges)):
+      # Split large APKs with imgdiff, if possible.
+      if not self.disable_imgdiff and self.FileTypeSupportedByImgdiff(tgt_name):
+        if (tgt_ranges.monotonic and src_ranges.monotonic and
+            self.tgt.RangeSha1(tgt_ranges) != self.src.RangeSha1(src_ranges)):
           large_apks.append((tgt_name, src_name, tgt_ranges, src_ranges))
           return
 
