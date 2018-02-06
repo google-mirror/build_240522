@@ -238,6 +238,7 @@ class Transfer(object):
       - This is a 'diff' command;
       - The source and target blocks are monotonic (i.e. the data is stored with
         blocks in increasing order);
+      - Both files have complete lists of blocks;
       - We haven't removed any blocks from the source set.
 
     If all these conditions are satisfied, concatenating all the blocks in the
@@ -252,6 +253,8 @@ class Transfer(object):
         BlockImageDiff.FileTypeSupportedByImgdiff(self.tgt_name) and
         self.src_ranges.monotonic and
         self.tgt_ranges.monotonic and
+        not self.src_ranges.extra.get('incomplete') and
+        not self.tgt_ranges.extra.get('incomplete') and
         self.intact)
 
   def __str__(self):
@@ -763,7 +766,6 @@ class BlockImageDiff(object):
       diff_total = len(diff_queue)
       patches = [None] * diff_total
       error_messages = []
-      warning_messages = []
       if sys.stdout.isatty():
         global diff_done
         diff_done = 0
@@ -807,23 +809,6 @@ class BlockImageDiff(object):
                   xf.tgt_name if xf.tgt_name == xf.src_name else
                       xf.tgt_name + " (from " + xf.src_name + ")",
                   xf.tgt_ranges, xf.src_ranges, e.message))
-              # TODO(b/68016761): Better handle the holes in mke2fs created
-              # images.
-              if imgdiff:
-                try:
-                  patch = compute_patch(src_file, tgt_file, imgdiff=False)
-                  message.append(
-                      "Fell back and generated with bsdiff instead for %s" % (
-                      xf.tgt_name,))
-                  xf.style = "bsdiff"
-                  with lock:
-                    warning_messages.extend(message)
-                  del message[:]
-                except ValueError as e:
-                  message.append(
-                      "Also failed to generate with bsdiff for %s:\n%s" % (
-                      xf.tgt_name, e.message))
-
             if message:
               with lock:
                 error_messages.extend(message)
@@ -847,11 +832,6 @@ class BlockImageDiff(object):
 
       if sys.stdout.isatty():
         print('\n')
-
-      if warning_messages:
-        print('WARNING:')
-        print('\n'.join(warning_messages))
-        print('\n\n\n')
 
       if error_messages:
         print('ERROR:')
@@ -1279,8 +1259,13 @@ class BlockImageDiff(object):
       if not self.disable_imgdiff and self.FileTypeSupportedByImgdiff(tgt_name):
         if (tgt_ranges.monotonic and src_ranges.monotonic and
             self.tgt.RangeSha1(tgt_ranges) != self.src.RangeSha1(src_ranges)):
-          large_apks.append((tgt_name, src_name, tgt_ranges, src_ranges))
-          return
+          if (tgt_ranges.extra.get('incomplete') or
+              src_ranges.extra.get('incomplete')):
+            print("WARNING: Not splitting large APK {} with imgdiff due to "
+                  "incomplete ranges".format(tgt_name))
+          else:
+            large_apks.append((tgt_name, src_name, tgt_ranges, src_ranges))
+            return
 
       AddSplitTransfersWithFixedSizeChunks(tgt_name, src_name, tgt_ranges,
                                            src_ranges, style, by_id)
@@ -1425,11 +1410,6 @@ class BlockImageDiff(object):
       be valid because the block ranges of src-X & tgt-X will always stay the
       same afterwards; but there's a chance we don't use the patch if we
       convert the "diff" command into "new" or "move" later.
-
-      The split will be attempted by calling imgdiff, which expects the input
-      files to be valid zip archives. If imgdiff fails for some reason (i.e.
-      holes in the APK file), we will fall back to split the failed APKs into
-      fixed size chunks.
       """
 
       while True:
@@ -1451,16 +1431,11 @@ class BlockImageDiff(object):
                "--block-limit={}".format(max_blocks_per_transfer),
                "--split-info=" + patch_info_file,
                src_file, tgt_file, patch_file]
-        p = common.Run(cmd, stdout=subprocess.PIPE)
-        p.communicate()
-        if p.returncode != 0:
-          print("Failed to create patch between {} and {},"
-                " falling back to bsdiff".format(src_name, tgt_name))
-          with transfer_lock:
-            AddSplitTransfersWithFixedSizeChunks(tgt_name, src_name,
-                                                 tgt_ranges, src_ranges,
-                                                 "diff", self.transfers)
-          continue
+        p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        imgdiff_output, _ = p.communicate()
+        assert p.returncode == 0, \
+            "Failed to create imgdiff patch between {} and {}:\n{}".format(
+                src_name, tgt_name, imgdiff_output)
 
         with open(patch_info_file) as patch_info:
           lines = patch_info.readlines()
