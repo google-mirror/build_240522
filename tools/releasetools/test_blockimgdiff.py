@@ -89,6 +89,15 @@ class TransferTest(unittest.TestCase):
             RangeSet("15-20 30 10-14"), "dst-hash", "src-hash", "diff",
             transfers).CanUseImgdiff())
 
+    # At lest one of the ranges has incomplete block list.
+    dst_ranges = RangeSet("10-15")
+    dst_ranges._extra['incomplete'] = True  # pylint: disable=protected-access
+    self.assertFalse(
+        Transfer(
+            "/system/app/app2.apk", "/system/app/app2.apk", dst_ranges,
+            RangeSet("0-5"), "dst-hash", "src-hash", "diff",
+            transfers).CanUseImgdiff())
+
     # At least one of the ranges has been modified.
     transfer = Transfer(
         "/system/app/app2.apk", "/system/app/app2.apk", RangeSet("10-15"),
