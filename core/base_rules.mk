@@ -494,6 +494,16 @@ endif
 endif
 endif
 
+# For modules tagged as tests but lacking a suite tag, set general-tests as the default.
+ifneq ($(filter $(my_module_tags),tests),)
+ifndef LOCAL_COMPATIBILITY_SUITE
+# We only support 
+ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK APPS, $(LOCAL_MODULE_CLASS)),)
+LOCAL_COMPATIBILITY_SUITE := null-suite
+endif
+endif
+endif
+
 ###########################################################
 ## Compatibility suite files.
 ###########################################################
