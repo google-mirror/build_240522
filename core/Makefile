@@ -140,6 +140,13 @@ FINAL_DEFAULT_PROPERTIES := \
 ifndef property_overrides_split_enabled
   FINAL_DEFAULT_PROPERTIES += \
       $(call collapse-pairs, $(PRODUCT_DEFAULT_PROPERTY_OVERRIDES))
+  ifdef BOARD_VNDK_VERSION
+    ifeq ($(BOARD_VNDK_VERSION),current)
+      FINAL_DEFAULT_PROPERTIES += ro.vndk.version=$(PLATFORM_VNDK_VERSION)
+    else
+      FINAL_DEFAULT_PROPERTIES += ro.vndk.version=$(BOARD_VNDK_VERSION)
+    endif
+  endif
 endif
 FINAL_DEFAULT_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_DEFAULT_PROPERTIES),=)
