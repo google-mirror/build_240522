@@ -8,12 +8,7 @@ ifeq ($(LOCAL_GTEST),true)
   ifndef LOCAL_SDK_VERSION
     LOCAL_STATIC_LIBRARIES += libgtest_main libgtest
   else
-    # TODO(danalbert): Remove the suffix from the module since we only need the
-    # one variant now.
-    my_ndk_gtest_suffix := _c++
-    LOCAL_STATIC_LIBRARIES += \
-        libgtest_main_ndk$(my_ndk_gtest_suffix) \
-        libgtest_ndk$(my_ndk_gtest_suffix)
+    LOCAL_STATIC_LIBRARIES += libgtest_main_ndk libgtest_ndk
   endif
 endif
 
