@@ -433,6 +433,8 @@ endif
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 include $(BUILD_SYSTEM)/config_sanitizers.mk
 
+include $(BUILD_SYSTEM)/config_pgo.mk
+
 ifneq ($(LOCAL_NO_LIBCOMPILER_RT),true)
 # Add in libcompiler_rt for all regular device builds
 ifeq (,$(WITHOUT_LIBCOMPILER_RT))
