@@ -7,13 +7,24 @@
 # privileged apps
 LOCAL_UNCOMPRESS_DEX := false
 ifneq (true,$(DONT_UNCOMPRESS_PRIV_APPS_DEXS))
+
+# Always uncompress dex in priv apps.
 ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
   LOCAL_UNCOMPRESS_DEX := true
-else
-  ifneq (,$(filter $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES), $(LOCAL_MODULE)))
-    LOCAL_UNCOMPRESS_DEX := true
-  endif  # PRODUCT_LOADED_BY_PRIVILEGED_MODULES
-endif  # LOCAL_PRIVILEGED_MODULE
+endif
+
+# Always uncompress dex in jars in vendor image.
+ifneq ($(filter $(TARGET_OUT_VENDOR)/%,$(my_module_path)),)
+ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
+  LOCAL_UNCOMPRESS_DEX := true
+endif
+endif
+
+# If specified, uncompress dex in the given modules.
+ifneq (,$(filter $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES), $(LOCAL_MODULE)))
+  LOCAL_UNCOMPRESS_DEX := true
+endif
+
 endif  # DONT_UNCOMPRESS_PRIV_APPS_DEXS
 
 # Setting LOCAL_DEX_PREOPT based on WITH_DEXPREOPT, LOCAL_DEX_PREOPT, etc
