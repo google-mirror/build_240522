@@ -261,6 +261,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := passwd
 LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
 
 include $(BUILD_SYSTEM)/base_rules.mk
 
@@ -279,6 +280,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := group
 LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
 
 include $(BUILD_SYSTEM)/base_rules.mk
 
