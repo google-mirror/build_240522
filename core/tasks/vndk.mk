@@ -166,6 +166,10 @@ $(vndk_snapshot_zip): PRIVATE_NOTICE_FILES_INTERMEDIATES := \
   $(call paths-of-notice-files,$(vndk_core_libs),vndk) \
   $(call paths-of-notice-files,$(vndk_sp_libs),vndk-sp)
 
+$(vndk_snapshot_zip): PRIVATE_BUILD_PROPERTIES_OUT := $(vndk_snapshot_variant)/build_properties
+$(vndk_snapshot_zip): PRIVATE_BUILD_PROPERTIES_INTERMEDIATES := \
+  $(foreach lib,$(vndk_snapshot_libs),out/soong/vndk/$(patsubst %.vendor,%,$(lib)).properties.json)
+
 ifdef TARGET_2ND_ARCH
 $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_OUT_2ND := $(vndk_lib_dir_2nd)/shared/vndk-core
 $(vndk_snapshot_zip): PRIVATE_VNDK_CORE_INTERMEDIATES_2ND := \
@@ -192,7 +196,8 @@ $(vndk_snapshot_zip): private-copy-vndk-intermediates = \
 vndk_snapshot_dependencies := \
   $(vndk_snapshot_libs) \
   $(vndk_prebuilt_txts) \
-  $(vndk_snapshot_configs)
+  $(vndk_snapshot_configs) \
+  vndk_properties
 
 $(vndk_snapshot_zip): $(vndk_snapshot_dependencies) $(SOONG_ZIP)
 	@echo 'Generating VNDK snapshot: $@'
@@ -207,6 +212,8 @@ $(vndk_snapshot_zip): $(vndk_snapshot_dependencies) $(SOONG_ZIP)
 		$(PRIVATE_CONFIGS_OUT),$(PRIVATE_CONFIGS_INTERMEDIATES))
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_NOTICE_FILES_OUT),$(PRIVATE_NOTICE_FILES_INTERMEDIATES))
+	$(call private-copy-vndk-intermediates, \
+		$(PRIVATE_BUILD_PROPERTIES_OUT),$(PRIVATE_BUILD_PROPERTIES_INTERMEDIATES))
 ifdef TARGET_2ND_ARCH
 	$(call private-copy-vndk-intermediates, \
 		$(PRIVATE_VNDK_CORE_OUT_2ND),$(PRIVATE_VNDK_CORE_INTERMEDIATES_2ND))
