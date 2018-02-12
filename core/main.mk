@@ -588,10 +588,17 @@ $(call add-all-host-to-host-required-modules-deps)
 define add-all-target-to-target-required-modules-deps
 $(foreach m,$(ALL_MODULES), \
   $(eval r := $(ALL_MODULES.$(m).REQUIRED)) \
-  $(if $(r), \
-    $(eval r := $(call module-installed-files,$(r))) \
+  $(foreach r_i, $(r), \
+    $(eval r_j := $(call module-installed-files,$(r_i))) \
+    $(if $(filter $(ALLOW_MISSING_DEPENDENCIES),true),,\
+        $(if $(filter $(ALL_MODULES.$(m).CLASS),FAKE),,\
+            $(if $(r_j),,\
+                $(error Missing required dependency $(r_i) from module $(m) defined in$(ALL_MODULES.$(m).MAKEFILE)) \
+            ) \
+        ) \
+    ) \
     $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
-    $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r))) \
+    $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r_j))) \
     $(eval t_m := $(filter-out $(t_r), $(t_m))) \
     $(if $(t_m), $(eval $(call add-required-deps, $(t_m),$(t_r)))) \
   ) \
