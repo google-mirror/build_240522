@@ -500,12 +500,25 @@ $(sort $(foreach m,$(1),\
     $(if $(ALL_MODULES.$(m)$(HOST_2ND_ARCH_MODULE_SUFFIX).CLASS),$(m)$(HOST_2ND_ARCH_MODULE_SUFFIX)),\
   $(m))))
 endef
+
+# Returns the 64 and 32-bit variants of the module only if they exist.
+define get-existing-64-and-32-bit-variants
+$(strip \
+  $(if $(ALL_MODULES.$(1).CLASS),$(1)) \
+  $(if $(ALL_MODULES.$(1)$(TARGET_2ND_ARCH_MODULE_SUFFIX).CLASS),$(1)$(TARGET_2ND_ARCH_MODULE_SUFFIX)) \
+  $(if $(ALL_MODULES.$(1)$(HOST_2ND_ARCH_MODULE_SUFFIX).CLASS),$(1)$(HOST_2ND_ARCH_MODULE_SUFFIX)) \
+)
+endef
 else  # TARGET_TRANSLATE_2ND_ARCH
 # For binary translation config, by default only install the first arch.
 define get-32-bit-modules
 endef
 
 define get-32-bit-modules-if-we-can
+$(strip $(1))
+endef
+
+define get-existing-64-and-32-bit-variants
 $(strip $(1))
 endef
 endif  # TARGET_TRANSLATE_2ND_ARCH
@@ -516,6 +529,8 @@ endif  # TARGET_TRANSLATE_2ND_ARCH
 # Otherwise if the module is an executable or shared library,
 #   the required modules must be 64-bit;
 #   otherwise we require both 64-bit and 32-bit variant, if one exists.
+# From phony module, we require both variants, but does not complain if one of the variants
+# are missing, unless all variants are missing.
 define select-bitness-of-required-modules
 $(foreach m,$(ALL_MODULES),\
   $(eval r := $(ALL_MODULES.$(m).REQUIRED))\
@@ -526,7 +541,17 @@ $(foreach m,$(ALL_MODULES),\
       $(eval r_r := $(call get-32-bit-modules-if-we-can,$(r))),\
       $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
         $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-32-bit-modules,$(r)))\
+        $(if $(filter $(ALL_MODULES.$(m).CLASS),FAKE),\
+          $(eval r_r := $(foreach mm,$(r),\
+            $(eval variants := $(call get-existing-64-and-32-bit-variants,$(mm)))\
+            $(if $(variants),$(variants),\
+              $(if $(filter $(ALLOW_MISSING_DEPENDENCIES),true),,\
+                $(warning Missing required dependency $(mm) from module $(m) defined in $(ALL_MODULES.$(m).MAKEFILE)) \
+               )\
+             )\
+           )),\
+          $(eval r_r := $(r) $(call get-32-bit-modules,$(r)))\
+         )\
        )\
      )\
      $(eval ALL_MODULES.$(m).REQUIRED := $(strip $(r_r)))\
@@ -573,10 +598,13 @@ $(call add-all-host-to-host-required-modules-deps)
 define add-all-target-to-target-required-modules-deps
 $(foreach m,$(ALL_MODULES), \
   $(eval r := $(ALL_MODULES.$(m).REQUIRED)) \
-  $(if $(r), \
-    $(eval r := $(call module-installed-files,$(r))) \
+  $(foreach r_i, $(r), \
+    $(eval r_j := $(call module-installed-files,$(r_i))) \
+    $(if $(filter $(ALLOW_MISSING_DEPENDENCIES),true),,\
+      $(if $(r_j)$(filter $(ALL_MODULES.$(r_i).CLASS),FAKE),,\
+        $(warning Missing required dependency $(r_i) from module $(m) defined in$(ALL_MODULES.$(m).MAKEFILE)))) \
     $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
-    $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r))) \
+    $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r_j))) \
     $(eval t_m := $(filter-out $(t_r), $(t_m))) \
     $(if $(t_m), $(eval $(call add-required-deps, $(t_m),$(t_r)))) \
   ) \
