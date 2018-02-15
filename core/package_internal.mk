@@ -464,6 +464,9 @@ $(foreach x,$(sharded_java_source_list_files),$(eval $(x): $(R_file_stamp)))
 
 endif  # need_compile_res
 
+framework_res_package_export :=
+framework_res_package_export_deps :=
+
 ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
 # We need to explicitly clear this var so that we don't
 # inherit the value from whomever caused us to be built.
@@ -486,6 +489,8 @@ framework_res_package_export := \
 framework_res_package_export_deps := \
     $(dir $(framework_res_package_export))src/R.stamp
 endif # LOCAL_SDK_RES_VERSION
+endif # LOCAL_NO_STANDARD_LIBRARIES
+
 all_library_res_package_exports := \
     $(framework_res_package_export) \
     $(foreach lib,$(LOCAL_RES_LIBRARIES),\
@@ -502,7 +507,6 @@ $(LOCAL_INTERMEDIATE_TARGETS): \
 ifdef LOCAL_USE_AAPT2
 $(my_res_package) : $(all_library_res_package_export_deps)
 endif
-endif # LOCAL_NO_STANDARD_LIBRARIES
 
 ifneq ($(full_classes_jar),)
 $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE := $(built_dex)
