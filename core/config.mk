@@ -413,9 +413,6 @@ ifeq ($(strip $(WITH_STATIC_ANALYZER)),0)
   WITH_STATIC_ANALYZER :=
 endif
 
-# define clang/llvm versions and base directory.
-include $(BUILD_SYSTEM)/clang/versions.mk
-
 # Unset WITH_TIDY_ONLY if global WITH_TIDY_ONLY is not true nor 1.
 ifeq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
   WITH_TIDY_ONLY :=
