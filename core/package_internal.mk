@@ -527,6 +527,10 @@ ifeq ($(LOCAL_CERTIFICATE),EXTERNAL)
   PACKAGES.$(LOCAL_PACKAGE_NAME).EXTERNAL_KEY := 1
 endif
 
+ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
+$(warning LOCAL_PRIVATE_PLATFORM_APIS: $(LOCAL_PACKAGE_NAME) cert: $(LOCAL_CERTIFICATE) path: $(LOCAL_PATH) tags: $(LOCAL_MODULE_TAGS) libs: $(LOCAL_JAVA_LIBRARIES))
+endif # LOCAL_SDK_VERSION
+
 # If this is not an absolute certificate, assign it to a generic one.
 ifeq ($(dir $(strip $(LOCAL_CERTIFICATE))),./)
     LOCAL_CERTIFICATE := $(dir $(DEFAULT_SYSTEM_DEV_CERTIFICATE))$(LOCAL_CERTIFICATE)
