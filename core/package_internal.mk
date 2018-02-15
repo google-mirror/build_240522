@@ -516,6 +516,10 @@ endif # full_classes_jar
 
 include $(BUILD_SYSTEM)/install_jni_libs.mk
 
+ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
+$(warning LOCAL_PRIVATE_PLATFORM_APIS: $(LOCAL_PACKAGE_NAME) cert: $(LOCAL_CERTIFICATE) path: $(LOCAL_PATH) tags: $(LOCAL_MODULE_TAGS) libs: $(LOCAL_JAVA_LIBRARIES))
+endif # LOCAL_SDK_VERSION
+
 # Pick a key to sign the package with.  If this package hasn't specified
 # an explicit certificate, use the default.
 # Secure release builds will have their packages signed after the fact,
