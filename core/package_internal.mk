@@ -532,6 +532,12 @@ ifeq ($(LOCAL_CERTIFICATE),EXTERNAL)
   PACKAGES.$(LOCAL_PACKAGE_NAME).EXTERNAL_KEY := 1
 endif
 
+ifeq (,$(LOCAL_SDK_VERSION))
+ifneq (,$(filter-out tests, $(LOCAL_MODULE_TAGS))) # ignore tests
+$(warning No LOCAL_SDK_VERSION: $(LOCAL_PACKAGE_NAME) cert: $(LOCAL_CERTIFICATE))
+endif # LOCAL_MODULE_TAGS
+endif # LOCAL_SDK_VERSION
+
 # If this is not an absolute certificate, assign it to a generic one.
 ifeq ($(dir $(strip $(LOCAL_CERTIFICATE))),./)
     LOCAL_CERTIFICATE := $(dir $(DEFAULT_SYSTEM_DEV_CERTIFICATE))$(LOCAL_CERTIFICATE)
