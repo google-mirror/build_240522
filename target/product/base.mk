@@ -42,6 +42,7 @@ PRODUCT_PACKAGES += \
     framework-sysconfig.xml \
     fsck_msdos \
     hid \
+    hiddenapi-whitelist.xml \
     ime \
     incidentd \
     incident \
