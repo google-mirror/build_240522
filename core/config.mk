@@ -77,6 +77,8 @@ $(KATI_obsolete_var \
   ,See $(CHANGES_URL)#other_envsetup_variables)
 $(KATI_obsolete_var PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE,Set FCM Version in device manifest instead. See $(CHANGES_URL)#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE)
 $(KATI_obsolete_var USE_CLANG_PLATFORM_BUILD,Clang is the only supported Android compiler. See $(CHANGES_URL)#USE_CLANG_PLATFORM_BUILD)
+$(KATI_obsolete_var BUILD_NUMBER,Do not use BUILD_NUMBER directly. See $(CHANGES_URL)#BUILD_NUMBER)
+$(KATI_obsolete_var BUILD_DATETIME,Do not use BUILD_DATETIME directly. See $(CHANGES_URL)#BUILD_DATETIME)
 
 CHANGES_URL :=
 
@@ -823,7 +825,7 @@ else
   DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
 endif
 
-BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
+BUILD_NUMBER_FROM_FILE := $$(cat $(BUILD_NUMBER_FILE))
 BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 
 # SEPolicy versions
