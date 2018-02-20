@@ -97,6 +97,16 @@ is 26 or 27, you can add `"target-level"="1"` to your device manifest instead.
 Clang is the default and only supported Android compiler, so there is no reason
 for this option to exist.
 
+### Stop using BUILD_NUMBER {#BUILD_NUMBER}
+
+Soong will handle BUILD_NUMBER and generate a txt file containing the proper
+value. So in Make side, please use BUILD_NUMBER_FROM_FILE instead.
+
+### Stop using BUILD_DATETIME {#BUILD_DATETIME}
+
+Soong will handle BUILD_DATETIME and generate a txt file containing the proper
+value. So in Make side, please use BUILD_DATETIME_FROM_FILE instead.
+
 ### Other envsetup.sh variables  {#other_envsetup_variables}
 
 * ANDROID_TOOLCHAIN
