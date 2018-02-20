@@ -5,12 +5,12 @@
 LOCAL_PATH := $(BUILD_SYSTEM)
 
 # Pick a reasonable string to use to identify files.
-ifneq (,$(filter eng.%,$(BUILD_NUMBER)))
+ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
   # BUILD_NUMBER has a timestamp in it, which means that
   # it will change every time.  Pick a stable value.
   FILE_NAME_TAG := eng.$(USER)
 else
-  FILE_NAME_TAG := $(BUILD_NUMBER)
+  FILE_NAME_TAG := $(file <$(BUILD_NUMBER_FILE))
 endif
 
 # -----------------------------------------------------------------
@@ -238,15 +238,12 @@ $(intermediate_system_build_prop): PRIVATE_BUILD_DESC := $(build_desc)
 
 # The string used to uniquely identify the combined build and product; used by the OTA server.
 ifeq (,$(strip $(BUILD_FINGERPRINT)))
-  ifneq ($(filter eng.%,$(BUILD_NUMBER)),)
-    BF_BUILD_NUMBER := $(USER)$(shell $(DATE) +%m%d%H%M)
+  ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
+    BF_BUILD_NUMBER := $(USER)$$($(DATE_FROM_FILE) +%m%d%H%M)
   else
-    BF_BUILD_NUMBER := $(BUILD_NUMBER)
+    BF_BUILD_NUMBER := $(file <$(BUILD_NUMBER_FILE))
   endif
   BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
-endif
-ifneq ($(words $(BUILD_FINGERPRINT)),1)
-  $(error BUILD_FINGERPRINT cannot contain spaces: "$(BUILD_FINGERPRINT)")
 endif
 
 $(shell mkdir -p $(PRODUCT_OUT) && echo $(BUILD_FINGERPRINT) > $(PRODUCT_OUT)/build_fingerprint.txt)
@@ -255,11 +252,11 @@ BUILD_FINGERPRINT_FROM_FILE := $$(cat $(PRODUCT_OUT)/build_fingerprint.txt)
 # The string used to uniquely identify the system build; used by the OTA server.
 # This purposefully excludes any product-specific variables.
 ifeq (,$(strip $(BUILD_THUMBPRINT)))
-  BUILD_THUMBPRINT := $(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
+  BUILD_THUMBPRINT := $(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_FROM_FILE):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
 endif
-ifneq ($(words $(BUILD_THUMBPRINT)),1)
-  $(error BUILD_THUMBPRINT cannot contain spaces: "$(BUILD_THUMBPRINT)")
-endif
+
+$(shell mkdir -p $(PRODUCT_OUT) && echo $(BUILD_THUMBPRINT) > $(PRODUCT_OUT)/build_thumbprint.txt)
+BUILD_THUMBPRINT_FROM_FILE := $$(cat $(PRODUCT_OUT)/build_thumbprint.txt)
 
 KNOWN_OEM_THUMBPRINT_PROPERTIES := \
     ro.product.brand \
@@ -347,7 +344,7 @@ endif
 			PLATFORM_VERSION_ALL_CODENAMES="$(PLATFORM_VERSION_ALL_CODENAMES)" \
 			BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
 			BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
-			$(if $(OEM_THUMBPRINT_PROPERTIES),BUILD_THUMBPRINT="$(BUILD_THUMBPRINT)") \
+			$(if $(OEM_THUMBPRINT_PROPERTIES),BUILD_THUMBPRINT="$(BUILD_THUMBPRINT_FROM_FILE)") \
 			TARGET_CPU_ABI_LIST="$(TARGET_CPU_ABI_LIST)" \
 			TARGET_CPU_ABI_LIST_32_BIT="$(TARGET_CPU_ABI_LIST_32_BIT)" \
 			TARGET_CPU_ABI_LIST_64_BIT="$(TARGET_CPU_ABI_LIST_64_BIT)" \
