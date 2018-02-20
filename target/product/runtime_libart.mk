@@ -56,6 +56,10 @@ PRODUCT_PACKAGES += art-tools
 PRODUCT_PACKAGES += \
     cacerts \
 
+# hiddenapi package whitelist:
+PRODUCT_PACKAGES += \
+    hiddenapi-whitelist.xml \
+
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.image-dex2oat-Xms=64m \
     dalvik.vm.image-dex2oat-Xmx=64m \
