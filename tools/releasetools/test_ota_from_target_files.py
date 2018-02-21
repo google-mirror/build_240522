@@ -26,7 +26,7 @@ import test_utils
 from ota_from_target_files import (
     _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, GetPackageMetadata,
     GetTargetFilesZipForSecondaryImages,
-    GetTargetFilesZipWithoutPostinstallConfig,
+    GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
 
@@ -988,6 +988,16 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
           zip_fp, reserve_space=False)
 
       property_files.Verify(zip_fp, raw_metadata)
+
+
+class NonAbOtaPropertyFilesTest(PropertyFilesTest):
+  """Additional sanity checks specialized for NonAbOtaPropertyFiles."""
+
+  def test_init(self):
+    property_files = NonAbOtaPropertyFiles()
+    self.assertEqual('ota-property-files', property_files.name)
+    self.assertEqual((), property_files.required)
+    self.assertEqual((), property_files.optional)
 
 
 class PayloadSignerTest(unittest.TestCase):
