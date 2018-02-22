@@ -49,6 +49,10 @@ USE_XML_AUDIO_POLICY_CONF := 1
 # Adding /odm mount point under root directory.
 BOARD_ROOT_EXTRA_FOLDERS += odm
 
+# b/73720182: add default mount points for firmware and persist
+# The directories are required for some SoC vendors.
+BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
+
 # Android Verified Boot (AVB):
 #   Builds a special vbmeta.img that disables AVB verification.
 #   Otherwise, AVB will prevent the device from booting the generic system.img.
