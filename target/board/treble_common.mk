@@ -49,6 +49,13 @@ USE_XML_AUDIO_POLICY_CONF := 1
 # Adding /odm mount point under root directory.
 BOARD_ROOT_EXTRA_FOLDERS += odm
 
+# TODO(b/36764215): add default mount points for firmware and persist.
+# Remove this settings when the generic system image no longer has
+# QCOM-specific directories under /.
+BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+BOARD_SEPOLICY_DIRS += build/target/board/generic_arm64_ab/sepolicy
+
 # Android Verified Boot (AVB):
 #   Builds a special vbmeta.img that disables AVB verification.
 #   Otherwise, AVB will prevent the device from booting the generic system.img.
