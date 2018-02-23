@@ -71,10 +71,6 @@ PRODUCT_PACKAGES += \
     libwilhelm \
     libdrmframework_jni \
     libdrmframework \
-    mke2fs \
-    e2fsck \
-    resize2fs \
-    tune2fs \
     nullwebview \
     screencap \
     sensorservice \
@@ -83,6 +79,13 @@ PRODUCT_PACKAGES += \
     telephony-common \
     voip-common \
     logd \
+
+# Filesystems tools
+PRODUCT_PACKAGES += \
+    e2fsck \
+    mke2fs \
+    resize2fs \
+    tune2fs
 
 # Wifi modules
 PRODUCT_PACKAGES += \
