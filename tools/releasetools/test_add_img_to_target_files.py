@@ -174,15 +174,17 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
   @staticmethod
   def _test_AddCareMapTxtForAbOta():
     """Helper function to set up the test for test_AddCareMapTxtForAbOta()."""
-    OPTIONS.info_dict = {
-        'system_verity_block_device' : '/dev/block/system',
-        'vendor_verity_block_device' : '/dev/block/vendor',
-    }
-
     # Prepare the META/ folder.
     meta_path = os.path.join(OPTIONS.input_tmp, 'META')
     if not os.path.exists(meta_path):
       os.mkdir(meta_path)
+
+    OPTIONS.info_dict = {
+        'system_verity_block_device' : '/dev/block/system',
+        'vendor_verity_block_device' : '/dev/block/vendor',
+        'system_last_data_block' : 13,
+        'vendor_last_data_block' : 8,
+    }
 
     system_image = test_utils.construct_sparse_image([
         (0xCAC1, 6),
@@ -209,9 +211,9 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
     self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
+    self.assertEqual(RangeSet("0-5 10-13").to_string_raw(), lines[1])
     self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    self.assertEqual(RangeSet("0-8").to_string_raw(), lines[3])
 
   def test_AddCareMapTxtForAbOta_withNonCareMapPartitions(self):
     """Partitions without care_map should be ignored."""
@@ -227,9 +229,9 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
     self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
+    self.assertEqual(RangeSet("0-5 10-13").to_string_raw(), lines[1])
     self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    self.assertEqual(RangeSet("0-8").to_string_raw(), lines[3])
 
   def test_AddCareMapTxtForAbOta_withAvb(self):
     """Tests the case for device using AVB."""
@@ -237,6 +239,8 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     OPTIONS.info_dict = {
         'avb_system_hashtree_enable' : 'true',
         'avb_vendor_hashtree_enable' : 'true',
+        'system_last_data_block' : 13,
+        'vendor_last_data_block' : 8,
     }
 
     AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
@@ -248,9 +252,9 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
     self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
+    self.assertEqual(RangeSet("0-5 10-13").to_string_raw(), lines[1])
     self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    self.assertEqual(RangeSet("0-8").to_string_raw(), lines[3])
 
   def test_AddCareMapTxtForAbOta_verityNotEnabled(self):
     """No care_map.txt should be generated if verity not enabled."""
@@ -268,6 +272,13 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     self.assertRaises(AssertionError, AddCareMapTxtForAbOta, None,
                       ['system', 'vendor'], image_paths)
 
+  def test_AddCareMapTxtForAbOta_missingLastDataBlock(self):
+    image_paths = self._test_AddCareMapTxtForAbOta()
+    del OPTIONS.info_dict['vendor_last_data_block']
+
+    self.assertRaises(AssertionError, AddCareMapTxtForAbOta, None,
+                      ['system', 'vendor'], image_paths)
+
   def test_AddCareMapTxtForAbOta_zipOutput(self):
     """Tests the case with ZIP output."""
     image_paths = self._test_AddCareMapTxtForAbOta()
@@ -282,9 +293,9 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
     self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
+    self.assertEqual(RangeSet("0-5 10-13").to_string_raw(), lines[1])
     self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    self.assertEqual(RangeSet("0-8").to_string_raw(), lines[3])
 
   def test_AddCareMapTxtForAbOta_zipOutput_careMapEntryExists(self):
     """Tests the case with ZIP output which already has care_map entry."""
@@ -306,9 +317,9 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
     self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
+    self.assertEqual(RangeSet("0-5 10-13").to_string_raw(), lines[1])
     self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    self.assertEqual(RangeSet("0-8").to_string_raw(), lines[3])
 
     # The existing entry should be scheduled to be replaced.
     self.assertIn('META/care_map.txt', OPTIONS.replace_updated_files_list)
@@ -319,7 +330,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         (0xCAC3, 4),
         (0xCAC1, 6)])
     OPTIONS.info_dict = {
-        'system_adjusted_partition_size' : 12,
+        'system_last_data_block' : 12,
     }
     name, care_map = GetCareMap('system', sparse_image)
     self.assertEqual('system', name)
@@ -334,6 +345,6 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         (0xCAC3, 4),
         (0xCAC1, 6)])
     OPTIONS.info_dict = {
-        'system_adjusted_partition_size' : -12,
+        'system_last_data_block' : -12,
     }
     self.assertRaises(AssertionError, GetCareMap, 'system', sparse_image)
