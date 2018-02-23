@@ -37,6 +37,15 @@ from hashlib import sha1, sha256
 import blockimgdiff
 import sparse_img
 
+
+# Values for "certificate" in apkcerts that mean special things.
+SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
+
+
+# The partitions allowed to be signed by AVB (Android verified boot 2.0).
+AVB_PARTITIONS = ('boot', 'recovery', 'system', 'vendor', 'product', 'dtbo')
+
+
 class Options(object):
   def __init__(self):
     platform_search_path = {
@@ -73,14 +82,6 @@ class Options(object):
 OPTIONS = Options()
 
 
-# Values for "certificate" in apkcerts that mean special things.
-SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
-
-
-# The partitions allowed to be signed by AVB (Android verified boot 2.0).
-AVB_PARTITIONS = ('boot', 'recovery', 'system', 'vendor', 'product', 'dtbo')
-
-
 class ErrorCode(object):
   """Define error_codes for failures that happen during the actual
   update package installation.
@@ -108,6 +109,7 @@ class ErrorCode(object):
   INSUFFICIENT_CACHE_SPACE = 3006
   TUNE_PARTITION_FAILURE = 3007
   APPLY_PATCH_FAILURE = 3008
+
 
 class ExternalError(RuntimeError):
   pass
@@ -147,22 +149,32 @@ def CloseInheritedPipes():
       pass
 
 
+def read_helper(input_file, fn):
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn)
+
+  path = os.path.join(input_file, *fn.split("/"))
+  if not os.path.isfile(path):
+    raise KeyError(fn)
+
+  with open(path) as f:
+    return f.read()
+
+
 def LoadInfoDict(input_file, input_dir=None):
-  """Read and parse the META/misc_info.txt key/value pairs from the
-  input target files and return a dict."""
+  """Reads and parses the info dict from the given input_file.
 
-  def read_helper(fn):
-    if isinstance(input_file, zipfile.ZipFile):
-      return input_file.read(fn)
-    else:
-      path = os.path.join(input_file, *fn.split("/"))
-      try:
-        with open(path) as f:
-          return f.read()
-      except IOError as e:
-        if e.errno == errno.ENOENT:
-          raise KeyError(fn)
+  It loads the info from the META/misc_info.txt entry in the input zip file, or
+  under the directory specified by input_file.
 
+  Args:
+    input_file: Either a Zipfile.ZipFile object, or a directory name that
+        will be packed as target-files.zip.
+    input_dir: TODO
+
+  Returns:
+    A dict that contains the loaded key/value pairs.
+  """
   try:
     d = LoadDictionaryFromLines(read_helper("META/misc_info.txt").split("\n"))
   except KeyError:
@@ -235,15 +247,15 @@ def LoadInfoDict(input_file, input_dir=None):
   makeint("boot_size")
   makeint("fstab_version")
 
-  system_root_image = d.get("system_root_image", None) == "true"
-  if d.get("no_recovery", None) != "true":
+  system_root_image = d.get("system_root_image") == "true"
+  if d.get("no_recovery") != "true":
     recovery_fstab_path = "RECOVERY/RAMDISK/etc/recovery.fstab"
-    d["fstab"] = LoadRecoveryFSTab(read_helper, d["fstab_version"],
-        recovery_fstab_path, system_root_image)
-  elif d.get("recovery_as_boot", None) == "true":
+    d["fstab"] = LoadRecoveryFSTab(
+        read_helper, d["fstab_version"], recovery_fstab_path, system_root_image)
+  elif d.get("recovery_as_boot") == "true":
     recovery_fstab_path = "BOOT/RAMDISK/etc/recovery.fstab"
-    d["fstab"] = LoadRecoveryFSTab(read_helper, d["fstab_version"],
-        recovery_fstab_path, system_root_image)
+    d["fstab"] = LoadRecoveryFSTab(
+        read_helper, d["fstab_version"], recovery_fstab_path, system_root_image)
   else:
     d["fstab"] = None
 
@@ -542,12 +554,12 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
   prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
   if os.path.exists(prebuilt_path):
     print("using prebuilt %s from BOOTABLE_IMAGES..." % (prebuilt_name,))
-    return File.FromLocalFile(name, prebuilt_path)
+    return File.FromLocalFile(name, prebuilt_path, filename=prebuilt_path)
 
   prebuilt_path = os.path.join(unpack_dir, "IMAGES", prebuilt_name)
   if os.path.exists(prebuilt_path):
     print("using prebuilt %s from IMAGES..." % (prebuilt_name,))
-    return File.FromLocalFile(name, prebuilt_path)
+    return File.FromLocalFile(name, prebuilt_path, filename=prebuilt_path)
 
   print("building image from target_files %s..." % (tree_subdir,))
 
@@ -1255,7 +1267,7 @@ def ZipDelete(zip_filename, entries):
   Raises:
     AssertionError: In case of non-zero return from 'zip'.
   """
-  if isinstance(entries, basestring):
+  if esinstance(entries, basestring):
     entries = [entries]
   cmd = ["zip", "-d", zip_filename] + entries
   proc = Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -1361,20 +1373,25 @@ class DeviceSpecificParams(object):
   def VerifyOTA_Assertions(self):
     return self._DoCall("VerifyOTA_Assertions")
 
+
 class File(object):
-  def __init__(self, name, data, compress_size = None):
+
+  def __init__(self, name, data, compress_size=None, filename=None):
     self.name = name
     self.data = data
     self.size = len(data)
     self.compress_size = compress_size or self.size
+    self.filename = filename
     self.sha1 = sha1(data).hexdigest()
 
   @classmethod
   def FromLocalFile(cls, name, diskname):
-    f = open(diskname, "rb")
-    data = f.read()
-    f.close()
-    return File(name, data)
+    with open(diskname, "rb") as f:
+      return File(name, f.read(), filename=diskname)
+
+  @property
+  def prebuilt(self):
+    return self.filename is not None
 
   def WriteToTemp(self):
     t = tempfile.NamedTemporaryFile()
@@ -1389,15 +1406,18 @@ class File(object):
   def AddToZip(self, z, compression=None):
     ZipWriteStr(z, self.name, self.data, compress_type=compression)
 
+
 DIFF_PROGRAM_BY_EXT = {
     ".gz" : "imgdiff",
     ".zip" : ["imgdiff", "-z"],
     ".jar" : ["imgdiff", "-z"],
     ".apk" : ["imgdiff", "-z"],
     ".img" : "imgdiff",
-    }
+}
+
 
 class Difference(object):
+
   def __init__(self, tf, sf, diff_program=None):
     self.tf = tf
     self.sf = sf
@@ -1461,7 +1481,6 @@ class Difference(object):
 
     self.patch = diff
     return self.tf, self.sf, self.patch
-
 
   def GetPatch(self):
     """Return a tuple (target_file, source_file, patch_data).
@@ -1831,22 +1850,23 @@ def ExtractPublicKey(cert):
 
 def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
                       info_dict=None):
-  """Generate a binary patch that creates the recovery image starting
-  with the boot image.  (Most of the space in these images is just the
-  kernel, which is identical for the two, so the resulting patch
-  should be efficient.)  Add it to the output zip, along with a shell
-  script that is run from init.rc on first boot to actually do the
-  patching and install the new recovery image.
+  """Generates a patch that creates the recovery image from the boot image.
 
-  recovery_img and boot_img should be File objects for the
-  corresponding images.  info should be the dictionary returned by
-  common.LoadInfoDict() on the input target_files.
+  Most of the space in these images is just the kernel, which is identical for
+  the two, so the resulting patch should be efficient. Add it to the output zip,
+  along with a shell script that is run from init.rc on first boot to actually
+  do the patching and install the new recovery image.
+
+  Args:
+    recovery_img: File objects for the corresponding images.
+    boot_img: File objects for the corresponding images.
+    info_dict: The dictionary returned by common.LoadInfoDict() on the input
+        target_files.
   """
-
   if info_dict is None:
     info_dict = OPTIONS.info_dict
 
-  full_recovery_image = info_dict.get("full_recovery_image", None) == "true"
+  full_recovery_image = info_dict.get("full_recovery_image") == "true"
 
   if full_recovery_image:
     output_sink("etc/recovery.img", recovery_img.data)
@@ -1901,8 +1921,7 @@ fi
        'recovery_device': recovery_device,
        'bonus_args': bonus_args}
 
-  # The install script location moved from /system/etc to /system/bin
-  # in the L release.
+  # The install script location moved from /system/etc to /system/bin in L.
   sh_location = "bin/install-recovery.sh"
 
   print("putting script in", sh_location)

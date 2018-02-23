@@ -45,6 +45,7 @@ Usage:  add_img_to_target_files [flag] target_files
 
 from __future__ import print_function
 
+import collections
 import datetime
 import os
 import shlex
@@ -78,6 +79,7 @@ PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product')
 
 
 class OutputFile(object):
+
   def __init__(self, output_zip, input_dir, prefix, name):
     self._output_zip = output_zip
     self.input_name = os.path.join(input_dir, prefix, name)
@@ -92,42 +94,59 @@ class OutputFile(object):
 
   def Write(self):
     if self._output_zip:
-      common.ZipWrite(self._output_zip, self.name, self._zip_name)
+      if self._zip_name not in self._output_zip.namelist():
+        common.ZipWrite(self._output_zip, self.name, self._zip_name)
+      else:
+        OPTIONS.replace_updated_files_list.append(self._zip_name)
 
 
-def GetCareMap(which, imgname):
+ImageFile = collections.namedtuple('ImageFile', ['filename', 'prebuilt'])
+
+
+def GetCareMap(which, imgname, last_data_block):
   """Returns the care_map string for the given partition.
 
   Args:
     which: The partition name, must be listed in PARTITIONS_WITH_CARE_MAP.
     imgname: The filename of the image.
+    last_data_block: TODO
+    # The generated care_map.txt would be invalid (blocking the device from
+    # booting) if just based on the raw care_map.
 
   Returns:
-    (which, care_map_ranges): care_map_ranges is the raw string of the care_map
-    RangeSet.
+    A care_map raw string.
+
+  Raises:
+    AssertionError: On invalid last_data_block info.
   """
   assert which in PARTITIONS_WITH_CARE_MAP
 
-  simg = sparse_img.SparseImage(imgname)
-  care_map_ranges = simg.care_map
-  key = which + "_adjusted_partition_size"
-  adjusted_blocks = OPTIONS.info_dict.get(key)
-  if adjusted_blocks:
-    assert adjusted_blocks > 0, "blocks should be positive for " + which
-    care_map_ranges = care_map_ranges.intersect(rangelib.RangeSet(
-        "0-%d" % (adjusted_blocks,)))
+  last_data_block = last_data_blocks[which]
+  assert last_data_block > 0, "Invalid last_data_block info for {}: {}".format(
+      which, last_data_block)
 
-  return [which, care_map_ranges.to_string_raw()]
+  simg = sparse_img.SparseImage(imgname)
+  care_map_ranges = simg.care_map.intersect(
+      rangelib.RangeSet("0-%d" % (last_data_block,)))
+  return care_map_ranges.to_string_raw()
 
 
 def AddSystem(output_zip, recovery_img=None, boot_img=None):
-  """Turn the contents of SYSTEM into a system image and store it in
-  output_zip. Returns the name of the system image file."""
+  """Builds and adds system image.
 
+  Args:
+    output_zip:
+    recovery_img:
+    boot_img:
+
+  Returns:
+    (existing, name): Whether the image is rebuilt from the given source; and
+        the name of the system image file.
+  """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system.img")
   if os.path.exists(img.input_name):
     print("system.img already exists; no need to rebuild...")
-    return img.input_name
+    return ImageFile(img.input_name, True)
 
   def output_sink(fn, data):
     ofile = open(os.path.join(OPTIONS.input_tmp, "SYSTEM", fn), "w")
@@ -149,51 +168,54 @@ def AddSystem(output_zip, recovery_img=None, boot_img=None):
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system", img,
               block_list=block_list)
 
-  return img.name
+  return ImageFile(img.input_name, False)
 
 
 def AddSystemOther(output_zip):
-  """Turn the contents of SYSTEM_OTHER into a system_other image
-  and store it in output_zip."""
+  """Builds and adds system_other image.
 
+  Args:
+    output_zip:
+    prefix:
+  """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system_other.img")
   if os.path.exists(img.input_name):
     print("system_other.img already exists; no need to rebuild...")
-    return
+    return ImageFile(img.input_name, True)
 
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system_other", img)
+  return ImageFile(img.name, False)
 
 
 def AddVendor(output_zip):
-  """Turn the contents of VENDOR into a vendor image and store in it
-  output_zip."""
+  """Builds vendor image from VENDOR/ and adds it to the given output zip.
 
+  Returns:
+  """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.img")
   if os.path.exists(img.input_name):
     print("vendor.img already exists; no need to rebuild...")
-    return img.input_name
+    return ImageFile(img.input_name, True)
 
   block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "vendor", img,
               block_list=block_list)
-  return img.name
+  return ImageFile(img.name, False)
 
 
 def AddProduct(output_zip):
-  """Turn the contents of PRODUCT into a product image and store it in
-  output_zip."""
-
+  """Build prodcut.img from PRODUCT/ and adds it to the given output zip."""
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "product.img")
   if os.path.exists(img.input_name):
     print("product.img already exists; no need to rebuild...")
-    return img.input_name
+    return ImageFile(img.input_name, True)
 
   block_list = OutputFile(
       output_zip, OPTIONS.input_tmp, "IMAGES", "product.map")
   CreateImage(
       OPTIONS.input_tmp, OPTIONS.info_dict, "product", img,
       block_list=block_list)
-  return img.name
+  return ImageFile(img.name, False)
 
 
 def AddDtbo(output_zip):
@@ -201,11 +223,14 @@ def AddDtbo(output_zip):
 
   Uses the image under IMAGES/ if it already exists. Otherwise looks for the
   image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.
+
+  Returns:
+    TODO
   """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "dtbo.img")
   if os.path.exists(img.input_name):
     print("dtbo.img already exists; no need to rebuild...")
-    return img.input_name
+    return ImageFile(img.input_name, True)
 
   dtbo_prebuilt_path = os.path.join(
       OPTIONS.input_tmp, "PREBUILT_IMAGES", "dtbo.img")
@@ -229,7 +254,7 @@ def AddDtbo(output_zip):
         "avbtool add_hash_footer of %s failed" % (img.name,)
 
   img.Write()
-  return img.name
+  return ImageFile(img.name, False)
 
 
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
@@ -284,29 +309,27 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   if block_list:
     block_list.Write()
 
-  # Set the 'adjusted_partition_size' that excludes the verity blocks of the
-  # given image. When avb is enabled, this size is the max image size returned
-  # by the avb tool.
-  is_verity_partition = "verity_block_device" in image_props
+  # Set the '_last_data_block' that excludes the verity/FEC blocks of the given
+  # image. Only blocks between 0 and _last_data_block (inclusive) would contain
+  # the filesystem data. When AVB is enabled, this size is the max image size
+  # returned by the AVB tool.
   verity_supported = (image_props.get("verity") == "true" or
                       image_props.get("avb_enable") == "true")
+  is_verity_partition = "verity_block_device" in image_props
   is_avb_enable = image_props.get("avb_hashtree_enable") == "true"
   if verity_supported and (is_verity_partition or is_avb_enable):
-    adjusted_blocks_value = image_props.get("partition_size")
-    if adjusted_blocks_value:
-      adjusted_blocks_key = what + "_adjusted_partition_size"
-      info_dict[adjusted_blocks_key] = int(adjusted_blocks_value)/4096 - 1
+    adjusted_partition_size = image_props["partition_size"]
+    info_dict['last_data_blocks'][what] = (
+        int(adjusted_partition_size) / 4096 - 1)
 
 
 def AddUserdata(output_zip):
   """Create a userdata image and store it in output_zip.
 
-  In most case we just create and store an empty userdata.img;
-  But the invoker can also request to create userdata.img with real
-  data from the target files, by setting "userdata_img_with_data=true"
-  in OPTIONS.info_dict.
+  In most case we just create and store an empty userdata.img; But the invoker
+  can also request to create userdata.img with real data from the target files,
+  by setting "userdata_img_with_data=true" in OPTIONS.info_dict.
   """
-
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "userdata.img")
   if os.path.exists(img.input_name):
     print("userdata.img already exists; no need to rebuild...")
@@ -365,7 +388,7 @@ def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
     cmd.extend(["--include_descriptors_from_image", img_path])
 
 
-def AddVBMeta(output_zip, partitions):
+def AddVBMeta(output_zip, partitions, force_rebuild=False):
   """Creates a VBMeta image and store it in output_zip.
 
   Args:
@@ -373,11 +396,12 @@ def AddVBMeta(output_zip, partitions):
     partitions: A dict that's keyed by partition names with image paths as
         values. Only valid partition names are accepted, which include 'boot',
         'recovery', 'system', 'vendor', 'dtbo'.
+    force_rebuild: TODO
   """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vbmeta.img")
-  if os.path.exists(img.input_name):
+  if not force_rebuild and os.path.exists(img.input_name):
     print("vbmeta.img already exists; not rebuilding...")
-    return img.input_name
+    return ImageFile(img.input_name, True)
 
   avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
   cmd = [avbtool, "make_vbmeta_image", "--output", img.name]
@@ -419,6 +443,7 @@ def AddVBMeta(output_zip, partitions):
   p.communicate()
   assert p.returncode == 0, "avbtool make_vbmeta_image failed"
   img.Write()
+  return ImageFile(img.name, False)
 
 
 def AddPartitionTable(output_zip):
@@ -539,7 +564,8 @@ def AddRadioImagesForAbOta(output_zip, ab_partitions):
       assert os.path.exists(img_path), "cannot find " + img_name
 
 
-def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
+def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths,
+                          last_data_blocks):
   """Generates and adds care_map.txt for system and vendor partitions.
 
   Args:
@@ -547,8 +573,9 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
         write images to OPTIONS.input_tmp/.
     ab_partitions: The list of A/B partitions.
     image_paths: A map from the partition name to the image path.
+    last_data_blocks: TODO
   """
-  care_map_list = []
+  care_map_partitions = []
   for partition in ab_partitions:
     partition = partition.strip()
     if partition not in PARTITIONS_WITH_CARE_MAP:
@@ -558,19 +585,25 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
     avb_hashtree_enable = "avb_{}_hashtree_enable".format(partition)
     if (verity_block_device in OPTIONS.info_dict or
         OPTIONS.info_dict.get(avb_hashtree_enable) == "true"):
-      image_path = image_paths[partition]
-      assert os.path.exists(image_path)
-      care_map_list += GetCareMap(partition, image_path)
+      care_map_partitions.append(partition)
 
-  if care_map_list:
-    care_map_path = "META/care_map.txt"
-    if output_zip and care_map_path not in output_zip.namelist():
-      common.ZipWriteStr(output_zip, care_map_path, '\n'.join(care_map_list))
-    else:
-      with open(os.path.join(OPTIONS.input_tmp, care_map_path), 'w') as fp:
-        fp.write('\n'.join(care_map_list))
-      if output_zip:
-        OPTIONS.replace_updated_files_list.append(care_map_path)
+  if not care_map_partitions:
+    return
+
+  care_map_data = []
+  for partition in care_map_partitions:
+    image_path = image_paths[partition].filename
+    assert os.path.exists(image_path)
+
+    care_map_data.append(partition)
+    care_map_data.append(
+        GetCareMap(partition, image_path, last_data_blocks[partition]))
+
+  care_map_output = OutputFile(
+      output_zip, OPTIONS.input_tmp, 'META', 'care_map.txt')
+  with open(care_map_output.name, 'w') as fp:
+    fp.write('\n'.join(care_map_data))
+  care_map.output.Write()
 
 
 def AddPackRadioImages(output_zip, images):
@@ -622,6 +655,34 @@ def ReplaceUpdatedFiles(zip_filename, files_list):
   common.ZipClose(output_zip)
 
 
+LAST_DATA_BLOCKS_ENTRY = 'META/LAST_DATA_BLOCKS_ENTRY'
+
+
+def LoadLastDataBlocks(input_file):
+  """Loads META/last_data_blocks.txt and returns as a dict."""
+  try:
+    data = common.read_helper(input_file, LAST_DATA_BLOCKS_ENTRY)
+  except KeyError:
+    return {}
+
+  last_data_blocks = {}
+  for line in data.split("\n"):
+    name, value = line.split(" ")
+    last_data_blocks[name] = int(value)
+  return last_data_blocks
+
+
+def SaveLastDataBlocks(output_file, last_data_blocks):
+  entries = []
+  for name, value in last_data_blocks.items():
+    entries.append('{} {}'.format(name, value))
+
+  with open(output_file.name, 'w') as fp:
+    fp.write('\n'.join(entries))
+
+  output_file.Write()
+
+
 def AddImagesToTargetFiles(filename):
   """Creates and adds images (boot/recovery/system/...) to a target_files.zip.
 
@@ -645,10 +706,10 @@ def AddImagesToTargetFiles(filename):
       print("target_files appears to already contain images.")
       sys.exit(1)
 
-  # {vendor,product}.img is unlike system.img or system_other.img. Because it could
-  # be built from source, or dropped into target_files.zip as a prebuilt blob.
-  # We consider either of them as {vendor,product}.img being available, which could
-  # be used when generating vbmeta.img for AVB.
+  # {vendor,product}.img is unlike system.img or system_other.img. Because it
+  # could be built from source, or dropped into target_files.zip as a prebuilt
+  # blob. We consider either of them as {vendor,product}.img being available,
+  # which could be used when generating vbmeta.img for AVB.
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
@@ -660,6 +721,7 @@ def AddImagesToTargetFiles(filename):
 
   if input_zip:
     OPTIONS.info_dict = common.LoadInfoDict(input_zip, OPTIONS.input_tmp)
+    OPTIONS.info_dict['last_data_blocks'] = LoadLastDataBlocks(input_zip)
 
     common.ZipClose(input_zip)
     output_zip = zipfile.ZipFile(filename, "a",
@@ -667,7 +729,10 @@ def AddImagesToTargetFiles(filename):
                                  allowZip64=True)
   else:
     OPTIONS.info_dict = common.LoadInfoDict(filename, filename)
+    OPTIONS.info_dict['last_data_blocks'] = LoadLastDataBlocks(filename)
     output_zip = None
+
+  has_recovery = (OPTIONS.info_dict.get("no_recovery") != "true")
 
   # Always make input_tmp/IMAGES available, since we may stage boot / recovery
   # images there even under zip mode. The directory will be cleaned up as part
@@ -676,11 +741,9 @@ def AddImagesToTargetFiles(filename):
   if not os.path.isdir(images_dir):
     os.makedirs(images_dir)
 
-  has_recovery = (OPTIONS.info_dict.get("no_recovery") != "true")
-
   # A map between partition names and their paths, which could be used when
   # generating AVB vbmeta image.
-  partitions = dict()
+  images = {}
 
   def banner(s):
     print("\n\n++++ " + s + " ++++\n\n")
@@ -691,8 +754,11 @@ def AddImagesToTargetFiles(filename):
       "IMAGES/boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
   # boot.img may be unavailable in some targets (e.g. aosp_arm64).
   if boot_image:
-    partitions['boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES", "boot.img")
-    if not os.path.exists(partitions['boot']):
+    if boot_image.prebuilt:
+      images['boot'] = ImageFile(boot_image.filename, True)
+    else:
+      images['boot'] = ImageFile(
+          os.path.join(OPTIONS.input_tmp, 'IMAGES', 'boot.img', False))
       boot_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         boot_image.AddToZip(output_zip)
@@ -703,9 +769,11 @@ def AddImagesToTargetFiles(filename):
     recovery_image = common.GetBootableImage(
         "IMAGES/recovery.img", "recovery.img", OPTIONS.input_tmp, "RECOVERY")
     assert recovery_image, "Failed to create recovery.img."
-    partitions['recovery'] = os.path.join(
-        OPTIONS.input_tmp, "IMAGES", "recovery.img")
-    if not os.path.exists(partitions['recovery']):
+    if recovery_image.prebuilt:
+      images['recovery'] = ImageFile(recovery_image.filename, True)
+    else:
+      images['recovery'] = ImageFile(
+          os.path.join(OPTIONS.input_tmp, "IMAGES", "recovery.img"), False)
       recovery_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         recovery_image.AddToZip(output_zip)
@@ -716,24 +784,22 @@ def AddImagesToTargetFiles(filename):
           "IMAGES/recovery-two-step.img", "recovery-two-step.img",
           OPTIONS.input_tmp, "RECOVERY", two_step_image=True)
       assert recovery_two_step_image, "Failed to create recovery-two-step.img."
-      recovery_two_step_image_path = os.path.join(
-          OPTIONS.input_tmp, "IMAGES", "recovery-two-step.img")
-      if not os.path.exists(recovery_two_step_image_path):
+      if not recovery_two_step_image.prebuilt:
         recovery_two_step_image.WriteToDir(OPTIONS.input_tmp)
         if output_zip:
           recovery_two_step_image.AddToZip(output_zip)
 
   banner("system")
-  partitions['system'] = AddSystem(
+  images['system'] = AddSystem(
       output_zip, recovery_img=recovery_image, boot_img=boot_image)
 
   if has_vendor:
     banner("vendor")
-    partitions['vendor'] = AddVendor(output_zip)
+    images['vendor'] = AddVendor(output_zip)
 
   if has_product:
     banner("product")
-    partitions['product'] = AddProduct(output_zip)
+    images['product'] = AddProduct(output_zip)
 
   if has_system_other:
     banner("system_other")
@@ -751,15 +817,31 @@ def AddImagesToTargetFiles(filename):
 
   if OPTIONS.info_dict.get("has_dtbo") == "true":
     banner("dtbo")
-    partitions['dtbo'] = AddDtbo(output_zip)
+    images['dtbo'] = AddDtbo(output_zip)
 
   if OPTIONS.info_dict.get("avb_enable") == "true":
     banner("vbmeta")
-    AddVBMeta(output_zip, partitions)
+
+    avb_partitions = {}
+    for partition in common.AVB_PARTITIONS:
+      avb_partitions[partition] = images[partition].filename
+
+    if not OPTIONS.add_missing:
+      images['vbmeta'] = AddVBMeta(output_zip, avb_partitions)
+    else:
+      # Find changed images that would require regenerating vbmeta image.
+      changed_images = set(
+          [image.name for image in images if not image.prebuilt])
+
+      # Enforce a rebuild of the vbmeta image if any of the AVB partitions has
+      # changed. Otherwise would only build the image if not existing.
+      force_rebuild = changed_images & set(common.AVB_PARTITIONS)
+      images['vbmeta'] = AddVBMeta(
+          output_zip, avb_partitions, force_rebuild=force_rebuild)
 
   banner("radio")
-  ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
-                                   "ab_partitions.txt")
+  ab_partitions_txt = os.path.join(
+      OPTIONS.input_tmp, "META", "ab_partitions.txt")
   if os.path.exists(ab_partitions_txt):
     with open(ab_partitions_txt, 'r') as f:
       ab_partitions = f.readlines()
@@ -769,9 +851,11 @@ def AddImagesToTargetFiles(filename):
     # images ready under IMAGES/. All images should have '.img' as extension.
     AddRadioImagesForAbOta(output_zip, ab_partitions)
 
-    # Generate care_map.txt for system and vendor partitions (if present), then
-    # write this file to target_files package.
-    AddCareMapTxtForAbOta(output_zip, ab_partitions, partitions)
+    # Generate care_map.txt for partitions in PARTITIONS_WITH_CARE_MAP (if
+    # present), then write this file to target_files package.
+    AddCareMapTxtForAbOta(
+        output_zip, ab_partitions, images,
+        OPTIONS.info_dict['last_data_blocks'])
 
   # Radio images that need to be packed into IMAGES/, and product-img.zip.
   pack_radioimages_txt = os.path.join(
@@ -779,6 +863,11 @@ def AddImagesToTargetFiles(filename):
   if os.path.exists(pack_radioimages_txt):
     with open(pack_radioimages_txt, 'r') as f:
       AddPackRadioImages(output_zip, f.readlines())
+
+  last_data_blocks_file = OutputFile(
+      output_zip, OPTIONS.input_tmp, 'META', 'last_data_blocks.txt')
+  SaveLastDataBlocks(
+      last_data_blocks_file, OPTIONS.info_dict['last_data_blocks'])
 
   if output_zip:
     common.ZipClose(output_zip)
