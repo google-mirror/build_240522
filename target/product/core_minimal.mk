@@ -76,10 +76,6 @@ PRODUCT_PACKAGES += \
     libwebviewchromium_plat_support \
     libwilhelm \
     logd \
-    mke2fs \
-    e2fsck \
-    resize2fs \
-    tune2fs \
     screencap \
     sensorservice \
     telephony-common \
@@ -132,12 +128,14 @@ PRODUCT_SYSTEM_SERVER_APPS += \
     SettingsProvider \
     WallpaperBackup
 
-# Adoptable external storage supports both ext4 and f2fs
+# Filesystems tools
 PRODUCT_PACKAGES += \
     e2fsck \
-    mke2fs \
     fsck.f2fs \
     make_f2fs \
+    mke2fs \
+    resize2fs \
+    tune2fs
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.zygote=zygote32

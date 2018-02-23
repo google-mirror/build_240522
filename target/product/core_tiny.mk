@@ -71,10 +71,6 @@ PRODUCT_PACKAGES += \
     libwilhelm \
     libdrmframework_jni \
     libdrmframework \
-    mke2fs \
-    e2fsck \
-    resize2fs \
-    tune2fs \
     nullwebview \
     screencap \
     sensorservice \
@@ -88,6 +84,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     wifi-service \
     wificond \
+
+# Filesystems tools
+    e2fsck \
+    mke2fs \
+    resize2fs \
+    tune2fs
 
 ifeq ($(TARGET_CORE_JARS),)
 $(error TARGET_CORE_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
