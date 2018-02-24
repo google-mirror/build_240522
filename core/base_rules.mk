@@ -329,6 +329,12 @@ $(LOCAL_BUILT_MODULE).toc: $(LOCAL_BUILT_MODULE)
 # Build .toc file when using mm, mma, or make $(my_register_name)
 $(my_all_targets): $(LOCAL_BUILT_MODULE).toc
 
+LSDUMP_FILE := $(OUT_DIR)/lsdump_paths/$(TARGET_PRODUCT)/paths.txt
+$(LSDUMP_FILE) : $(LSDUMP_PATHS)
+	$(hide) rm -rf $@ && echo "$^" > $@
+
+$(my_all_targets): $(LSDUMP_FILE)
+
 ifdef OVERRIDE_BUILT_MODULE_PATH
 $(eval $(call copy-one-file,$(LOCAL_BUILT_MODULE).toc,$(OVERRIDE_BUILT_MODULE_PATH)/$(my_built_module_stem).toc))
 $(OVERRIDE_BUILT_MODULE_PATH)/$(my_built_module_stem).toc: $(OVERRIDE_BUILT_MODULE_PATH)/$(my_built_module_stem)
