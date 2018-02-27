@@ -2686,6 +2686,7 @@ endef
 # $(1): source file
 # $(2): destination file, must end with .xml.
 define copy-xml-file-checked
+unexport LD_LIBRARY_PATH
 $(2): $(1)
 	@echo "Copy xml: $$@"
 	$(hide) xmllint $$< >/dev/null  # Don't print the xml file to stdout.
