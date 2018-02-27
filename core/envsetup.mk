@@ -273,6 +273,15 @@ endif
 board_config_mk :=
 
 ###########################################
+# Mark things obsolete / deprecated that shouldn't be used after product/board
+# configuration.
+CHANGES_URL := https://android.googlesource.com/platform/build/+/master/Changes.md
+
+$(KATI_obsolete_export It is a global setting. See $(CHANGES_URL)#export_keyword)
+
+CHANGES_URL :=
+
+###########################################
 # Now we can substitute with the real value of TARGET_COPY_OUT_VENDOR
 ifeq ($(TARGET_COPY_OUT_VENDOR),$(_vendor_path_placeholder))
 TARGET_COPY_OUT_VENDOR := system/vendor
