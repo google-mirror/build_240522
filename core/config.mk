@@ -78,6 +78,8 @@ $(KATI_obsolete_var \
 $(KATI_obsolete_var PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE,Set FCM Version in device manifest instead. See $(CHANGES_URL)#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE)
 $(KATI_obsolete_var USE_CLANG_PLATFORM_BUILD,Clang is the only supported Android compiler. See $(CHANGES_URL)#USE_CLANG_PLATFORM_BUILD)
 
+$(KATI_deprecate_export)
+
 CHANGES_URL :=
 
 # Used to force goals to build.  Only use for conditionally defined goals.
