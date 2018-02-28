@@ -25,7 +25,7 @@ $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(full_classes_pre_pro
 
 ifdef LOCAL_DROIDDOC_STUBS_JAR
 $(eval $(call copy-one-file,$(LOCAL_DROIDDOC_STUBS_JAR),$(OUT_DOCS)/$(LOCAL_MODULE)-stubs.jar))
-ALL_DOCS += $(OUT_DOCS)/$(LOCAL_MODULE)-stubs.jar
+ALL_DOCS += $(OUT_DOCS)/$(LOCAL_MODULE).srcjar
 endif
 
 ifdef LOCAL_DROIDDOC_DOC_ZIP
