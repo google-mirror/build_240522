@@ -7,6 +7,10 @@
 ###########################################################
 $(call record-module-type,PREBUILT)
 
+ifeq ($(filter out/soong/%,$(LOCAL_PREBUILT_MODULE_FILE)),)
+$(warning asdfasdf $(LOCAL_MODULE) $(LOCAL_PATH))
+endif
+
 ifdef LOCAL_IS_HOST_MODULE
   my_prefix := HOST_
   LOCAL_HOST_PREFIX :=
