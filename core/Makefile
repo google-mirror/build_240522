@@ -1694,7 +1694,8 @@ ifneq ($(PDK_PLATFORM_ZIP_PRODUCT_BINARIES),)
 endif
 	@# Add dex-preopt files and config.
 	$(if $(PRIVATE_DEX_FILES),$(hide) cd $(OUT_DIR) && zip -qryX $(patsubst $(OUT_DIR)/%,%,$@ $(PRIVATE_DEX_FILES)))
-	$(hide) zip -qryXj $@ $(PRIVATE_ODEX_CONFIG)
+	$(hide) touch $(PRODUCT_OUT)/pdk.mk
+	$(hide) zip -qryXj $@ $(PRIVATE_ODEX_CONFIG) $(PRODUCT_OUT)/pdk.mk
 
 .PHONY: platform
 platform: $(INSTALLED_PLATFORM_ZIP)
