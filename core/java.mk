@@ -402,6 +402,7 @@ java_sources_deps := \
     $(java_resource_sources) \
     $(RenderScript_file_stamp) \
     $(proto_java_sources_file_stamp) \
+    $(LOCAL_SRCJARS) \
     $(LOCAL_ADDITIONAL_DEPENDENCIES)
 
 $(java_source_list_file): $(java_sources_deps)
@@ -410,6 +411,7 @@ $(java_source_list_file): $(java_sources_deps)
 ifneq ($(TURBINE_ENABLED),false)
 
 $(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
+$(full_classes_turbine_jar): PRIVATE_SRCJARS := $(LOCAL_SRCJARS)
 $(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_turbine_jar): \
     $(java_source_list_file) \
@@ -447,6 +449,9 @@ $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUD
 $(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_compiled_jar): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
 $(full_classes_compiled_jar): PRIVATE_ALL_JAVA_HEADER_LIBRARIES := $(full_java_header_libs)
+$(full_classes_compiled_jar): PRIVATE_SRCJARS := $(LOCAL_SRCJARS)
+$(full_classes_compiled_jar): PRIVATE_SRCJAR_LIST_FILE := $(intermediates.COMMON)/srcjar-list
+$(full_classes_compiled_jar): PRIVATE_SRCJAR_INTERMEDIATES_DIR := $(intermediates.COMMON)/srcjars
 $(full_classes_compiled_jar): \
     $(java_source_list_file) \
     $(full_java_header_libs) \
@@ -457,6 +462,7 @@ $(full_classes_compiled_jar): \
     $(annotation_processor_deps) \
     $(NORMALIZE_PATH) \
     $(JAR_ARGS) \
+    $(EXTRACT_SRCJARS) \
     | $(SOONG_JAVAC_WRAPPER)
 	@echo "Target Java: $@
 	$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))

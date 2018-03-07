@@ -2231,6 +2231,7 @@ $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
 $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
+$(EXTRACT_SRCJARS) $(PRIVATE_SRCJAR_INTERMEDIATES_DIR) $(PRIVATE_SRCJAR_LIST_FILE) $(PRIVATE_SRCJARS)
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
@@ -2249,7 +2250,7 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
-    \@$(PRIVATE_JAVA_SOURCE_LIST) \
+    \@$(PRIVATE_JAVA_SOURCE_LIST) \@$(PRIVATE_SRCJAR_LIST_FILE) \
     || ( rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) ; exit 41 ) \
 fi
 $(if $(PRIVATE_JAVA_LAYERS_FILE), $(hide) build/make/tools/java-layers.py \
@@ -2278,7 +2279,7 @@ define transform-java-to-header.jar
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(JAVA) -jar $(TURBINE) \
     --output $@.premerged --temp_dir $(dir $@)/classes-turbine \
-    --sources \@$(PRIVATE_JAVA_SOURCE_LIST) \
+    --sources \@$(PRIVATE_JAVA_SOURCE_LIST) --source_jars $(PRIVATE_SRCJARS) \
     --javacopts $(PRIVATE_JAVACFLAGS) $(COMMON_JDK_FLAGS) \
     $(addprefix --bootclasspath ,$(strip \
          $(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)) \
