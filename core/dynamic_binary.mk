@@ -102,7 +102,7 @@ breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
 $(breakpad_output) : $(breakpad_input) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
+	$(hide) if $(PRIVATE_READELF) -h $< 2>&1 | grep 'Machine' | grep -v 'unknown' > /dev/null ; then \
 	  $(BREAKPAD_DUMP_SYMS) -c $< > $@ ; \
 	else \
 	  echo "skipped for non-elf file."; \
