@@ -149,6 +149,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     media_profiles_V1_0.dtd
 
+# BPF elf binary file used by bpfloader to load kernel bpf program
+PRODUCT_PACKAGES += \
+    cgroup_bpf_ingress_prog.o \
+    cgroup_bpf_egress_prog.o
+
 # Packages included only for eng or userdebug builds, previously debug tagged
 PRODUCT_PACKAGES_DEBUG := \
     logpersist.start \
