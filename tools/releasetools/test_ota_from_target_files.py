@@ -655,6 +655,15 @@ class StreamingPropertyFilesTest(unittest.TestCase):
     self.assertEqual(5, len(tokens))
     self._verify_entries(zip_file, tokens, entries)
 
+  def test_Compute_missingRequiredEntry(self):
+    entries = (
+        'payload.bin',
+    )
+    zip_file = self._construct_zip_package(entries)
+    property_files = StreamingPropertyFiles()
+    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+      self.assertRaises(KeyError, property_files.Compute, zip_fp)
+
   def test_Finalize(self):
     entries = [
         'payload.bin',
