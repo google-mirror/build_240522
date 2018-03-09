@@ -2043,26 +2043,26 @@ $(hide) $(AAPT_ASAN_OPTIONS) $(AAPT) package $(PRIVATE_AAPT_FLAGS) -m \
 $(hide) echo $(PRIVATE_RESOURCE_LIST) >/dev/null
 endef
 
-# Search for generated R.java/Manifest.java, copy the found R.java as $1.
+# Search for generated R.java/Manifest.java in $1, copy the found R.java as $2.
 # Also copy them to a central 'R' directory to make it easier to add the files to an IDE.
 define find-generated-R.java
-$(hide) for GENERATED_MANIFEST_FILE in `find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) \
+$(hide) for GENERATED_MANIFEST_FILE in `find $(1) \
   -name Manifest.java 2> /dev/null`; do \
     dir=`awk '/package/{gsub(/\./,"/",$$2);gsub(/;/,"",$$2);print $$2;exit}' $$GENERATED_MANIFEST_FILE`; \
     mkdir -p $(TARGET_COMMON_OUT_ROOT)/R/$$dir; \
     $(ACP) -fp $$GENERATED_MANIFEST_FILE $(TARGET_COMMON_OUT_ROOT)/R/$$dir; \
   done;
-$(hide) for GENERATED_R_FILE in `find $(PRIVATE_SOURCE_INTERMEDIATES_DIR) \
+$(hide) for GENERATED_R_FILE in `find $(1) \
   -name R.java 2> /dev/null`; do \
     dir=`awk '/package/{gsub(/\./,"/",$$2);gsub(/;/,"",$$2);print $$2;exit}' $$GENERATED_R_FILE`; \
     mkdir -p $(TARGET_COMMON_OUT_ROOT)/R/$$dir; \
     $(ACP) -fp $$GENERATED_R_FILE $(TARGET_COMMON_OUT_ROOT)/R/$$dir \
       || exit 31; \
-    $(ACP) -fp $$GENERATED_R_FILE $1 || exit 32; \
+    $(ACP) -fp $$GENERATED_R_FILE $(2) || exit 32; \
   done;
 @# Ensure that the target file is always created, i.e. also in case we did not
 @# enter the GENERATED_R_FILE-loop above. This avoids unnecessary rebuilding.
-$(hide) touch $1
+$(hide) touch $(2)
 endef
 
 ###########################################################
@@ -2103,6 +2103,8 @@ endef
 
 define aapt2-link
 @mkdir -p $(dir $@)
+rm -rf $(PRIVATE_JAVA_GEN_DIR)
+mkdir -p $(PRIVATE_JAVA_GEN_DIR)
 $(call dump-words-to-file,$(PRIVATE_RES_FLAT),$(dir $@)aapt2-flat-list)
 $(call dump-words-to-file,$(PRIVATE_OVERLAY_FLAT),$(dir $@)aapt2-flat-overlay-list)
 $(hide) $(AAPT2) link -o $@ \
@@ -2111,7 +2113,7 @@ $(hide) $(AAPT2) link -o $@ \
   $(addprefix -I ,$(PRIVATE_AAPT_INCLUDES)) \
   $(addprefix -I ,$(PRIVATE_SHARED_ANDROID_LIBRARIES)) \
   $(addprefix -A ,$(PRIVATE_ASSET_DIR)) \
-  $(addprefix --java ,$(PRIVATE_SOURCE_INTERMEDIATES_DIR)) \
+  $(addprefix --java ,$(PRIVATE_JAVA_GEN_DIR)) \
   $(addprefix --proguard ,$(PRIVATE_PROGUARD_OPTIONS_FILE)) \
   $(addprefix --min-sdk-version ,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
   $(addprefix --target-sdk-version ,$(PRIVATE_DEFAULT_APP_TARGET_SDK)) \
@@ -2124,6 +2126,7 @@ $(hide) $(AAPT2) link -o $@ \
   $(addprefix --rename-instrumentation-target-package ,$(PRIVATE_MANIFEST_INSTRUMENTATION_FOR)) \
   -R \@$(dir $@)aapt2-flat-overlay-list \
   \@$(dir $@)aapt2-flat-list
+$(SOONG_ZIP) -o $(PRIVATE_SRCJAR) -C $(PRIVATE_JAVA_GEN_DIR) -D $(PRIVATE_JAVA_GEN_DIR)
 endef
 
 ###########################################################
@@ -2231,7 +2234,8 @@ $(hide) rm -f $@
 $(hide) rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
 $(hide) mkdir -p $(dir $@)
 $(hide) mkdir -p $(PRIVATE_CLASS_INTERMEDIATES_DIR) $(PRIVATE_ANNO_INTERMEDIATES_DIR)
-$(EXTRACT_SRCJARS) $(PRIVATE_SRCJAR_INTERMEDIATES_DIR) $(PRIVATE_SRCJAR_LIST_FILE) $(PRIVATE_SRCJARS)
+$(if $(PRIVATE_SRCJARS),\
+    $(EXTRACT_SRCJARS) $(PRIVATE_SRCJAR_INTERMEDIATES_DIR) $(PRIVATE_SRCJAR_LIST_FILE) $(PRIVATE_SRCJARS))
 $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(SOONG_JAVAC_WRAPPER) $(JAVAC_WRAPPER) $(1) -encoding UTF-8 \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
@@ -2250,7 +2254,8 @@ $(hide) if [ -s $(PRIVATE_JAVA_SOURCE_LIST) ] ; then \
     $(if $(findstring true,$(PRIVATE_WARNINGS_ENABLE)),$(xlint_unchecked),) \
     -d $(PRIVATE_CLASS_INTERMEDIATES_DIR) -s $(PRIVATE_ANNO_INTERMEDIATES_DIR) \
     $(PRIVATE_JAVACFLAGS) \
-    \@$(PRIVATE_JAVA_SOURCE_LIST) \@$(PRIVATE_SRCJAR_LIST_FILE) \
+    \@$(PRIVATE_JAVA_SOURCE_LIST) \
+    $(if $(PRIVATE_SRCJARS),\@$(PRIVATE_SRCJAR_LIST_FILE)) \
     || ( rm -rf $(PRIVATE_CLASS_INTERMEDIATES_DIR) ; exit 41 ) \
 fi
 $(if $(PRIVATE_JAVA_LAYERS_FILE), $(hide) build/make/tools/java-layers.py \
