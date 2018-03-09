@@ -395,7 +395,7 @@ else  # LOCAL_USE_AAPT2
 	@echo "target R.java/Manifest.java: $(PRIVATE_MODULE) ($@)"
 	@rm -rf $@ && mkdir -p $(dir $@)
 	$(create-resource-java-files)
-	$(call find-generated-R.java,$@)
+	$(call find-generated-R.java,$(PRIVATE_SOURCE_INTERMEDIATES_DIR),$@)
 
   $(proguard_options_file): $(R_file_stamp)
 

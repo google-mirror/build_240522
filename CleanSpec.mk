@@ -463,6 +463,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/manifest.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/vendor/compatibility_matrix.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/compatibility_matrix.xml)
 
+$(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/APPS/*_intermediates/src)
+$(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/*_intermediates/src)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
