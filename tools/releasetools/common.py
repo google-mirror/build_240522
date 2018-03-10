@@ -1828,35 +1828,40 @@ def ExtractPublicKey(cert):
 
 def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
                       info_dict=None):
-  """Generate a binary patch that creates the recovery image starting
-  with the boot image.  (Most of the space in these images is just the
-  kernel, which is identical for the two, so the resulting patch
-  should be efficient.)  Add it to the output zip, along with a shell
-  script that is run from init.rc on first boot to actually do the
-  patching and install the new recovery image.
+  """Generates the recovery-from-boot patch and writes the script to output.
 
-  recovery_img and boot_img should be File objects for the
-  corresponding images.  info should be the dictionary returned by
-  common.LoadInfoDict() on the input target_files.
+  Most of the space in the boot and recovery images is just the kernel, which is
+  identical for the two, so the resulting patch should be efficient. Add it to
+  the output zip, along with a shell script that is run from init.rc on first
+  boot to actually do the patching and install the new recovery image.
+
+  recovery_img and boot_img should be File objects for the corresponding images.
+  info should be the dictionary returned by common.LoadInfoDict() on the input
+  target_files.
   """
-
   if info_dict is None:
     info_dict = OPTIONS.info_dict
 
-  full_recovery_image = info_dict.get("full_recovery_image", None) == "true"
+  full_recovery_image = info_dict.get("full_recovery_image") == "true"
 
   if full_recovery_image:
     output_sink("etc/recovery.img", recovery_img.data)
 
   else:
-    diff_program = ["imgdiff"]
+    system_root_image = info_dict.get("system_root_image") == "true"
     path = os.path.join(input_dir, "SYSTEM", "etc", "recovery-resource.dat")
-    if os.path.exists(path):
-      diff_program.append("-b")
-      diff_program.append(path)
-      bonus_args = "-b /system/etc/recovery-resource.dat"
-    else:
+    if system_root_image:
+      diff_program = ["bsdiff"]
       bonus_args = ""
+      assert not os.path.exists(path)
+    else:
+      diff_program = ["imgdiff"]
+      if os.path.exists(path):
+        diff_program.append("-b")
+        diff_program.append(path)
+        bonus_args = "-b /system/etc/recovery-resource.dat"
+      else:
+        bonus_args = ""
 
     d = Difference(recovery_img, boot_img, diff_program=diff_program)
     _, _, patch = d.ComputePatch()
@@ -1873,7 +1878,9 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
   if full_recovery_image:
     sh = """#!/system/bin/sh
 if ! applypatch -c %(type)s:%(device)s:%(size)d:%(sha1)s; then
-  applypatch /system/etc/recovery.img %(type)s:%(device)s %(sha1)s %(size)d && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
+  applypatch /system/etc/recovery.img %(type)s:%(device)s %(sha1)s %(size)d \\
+    && log -t recovery "Installing new recovery image: succeeded" \\
+    || log -t recovery "Installing new recovery image: failed"
 else
   log -t recovery "Recovery image already installed"
 fi
@@ -1884,7 +1891,13 @@ fi
   else:
     sh = """#!/system/bin/sh
 if ! applypatch -c %(recovery_type)s:%(recovery_device)s:%(recovery_size)d:%(recovery_sha1)s; then
-  applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/system/recovery-from-boot.p && log -t recovery "Installing new recovery image: succeeded" || log -t recovery "Installing new recovery image: failed"
+  applypatch %(bonus_args)s \\
+      %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s \\
+      %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s \\
+      %(recovery_size)d \\
+      %(boot_sha1)s:/system/recovery-from-boot.p \\
+    && log -t recovery "Installing new recovery image: succeeded" \\
+    || log -t recovery "Installing new recovery image: failed"
 else
   log -t recovery "Recovery image already installed"
 fi
