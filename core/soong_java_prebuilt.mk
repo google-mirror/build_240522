@@ -30,6 +30,25 @@ endif
 
 ifdef LOCAL_DROIDDOC_DOC_ZIP
 $(eval $(call copy-one-file,$(LOCAL_DROIDDOC_DOC_ZIP),$(OUT_DOCS)/$(LOCAL_MODULE)-docs.zip))
+$(call dist-for-goals,docs,$(OUT_DOCS)/$(LOCAL_MODULE)-docs.zip)
+endif
+
+ifeq ($(LOCAL_MODULE),api-stubs-docs)
+ifdef INTERNAL_PLATFORM_API_FILE
+$(call dist-for-goals,sdk,$(INTERNAL_PLATFORM_API_FILE))
+endif
+endif
+
+ifeq ($(LOCAL_MODULE),system-api-stubs-docs)
+ifdef INTERNAL_PLATFORM_SYSTEM_API_FILE
+$(call dist-for-goals,sdk,$(INTERNAL_PLATFORM_SYSTEM_API_FILE))
+endif
+endif
+
+ifeq ($(LOCAL_MODULE),test-api-stubs-docs)
+ifdef INTERNAL_PLATFORM_TEST_API_FILE
+$(call dist-for-goals,sdk,$(INTERNAL_PLATFORM_TEST_API_FILE))
+endif
 endif
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
