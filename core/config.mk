@@ -189,6 +189,9 @@ else
 JAVA_TMPDIR_ARG :=
 endif
 
+# Initialize SOONG_CONFIG_NAMESPACES so that it isn't recursive.
+SOONG_CONFIG_NAMESPACES :=
+
 # ###############################################################
 # Broken build defaults
 # ###############################################################
