@@ -217,6 +217,15 @@ $(KATI_obsolete_var PRODUCT_FULL_TREBLE,\
 	variables like PRODUCT_SEPOLICY_SPLIT should be used until that is \
 	possible.)
 
+# TODO(b/74403751): enforce vintf manifest on all targets
+# PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true can be set on a device
+# to avoid this and the device's VINTF manifest may have to be updated.
+ifneq ($(PRODUCT_ENFORCE_VINTF_MANIFEST),true)
+  $(warning PRODUCT_ENFORCE_VINTF_MANIFEST is not true. This means hardware \
+      services may work, but race conditions where the service is not started \
+      may happen if a service is not declared in the device's manifest.)
+endif
+
 # Sets ro.actionable_compatible_property.enabled to know on runtime whether the whitelist
 # of actionable compatible properties is enabled or not.
 ifeq ($(PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE),true)
