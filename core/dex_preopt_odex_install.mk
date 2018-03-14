@@ -3,9 +3,17 @@
 # Output variables: LOCAL_DEX_PREOPT, LOCAL_UNCOMPRESS_DEX, built_odex,
 #                   dexpreopt_boot_jar_module
 
-# We explicitly uncompress APKs of privileged apps, and used by
-# privileged apps
+# We explicitly uncompress APKs of privileged apps, and used by privileged apps, unless the module
+# is configured to be recompressed.
 LOCAL_UNCOMPRESS_DEX := false
+LOCAL_RECOMPRESS_DEX := false
+
+# Recompress the dex if it's uncompressed.  This may be used to reduce the space pressure on
+# device with limited /system size and is taking new version of APKs with uncompressed dex.
+ifneq ($(filter $(PRODUCT_RECOMPRESS_APK_DEXS),$(LOCAL_MODULE)),)
+  LOCAL_RECOMPRESS_DEX := true
+else
+
 ifneq (true,$(DONT_UNCOMPRESS_PRIV_APPS_DEXS))
 ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
   LOCAL_UNCOMPRESS_DEX := true
@@ -14,6 +22,8 @@ else
     LOCAL_UNCOMPRESS_DEX := true
   endif  # PRODUCT_LOADED_BY_PRIVILEGED_MODULES
 endif  # LOCAL_PRIVILEGED_MODULE
+
+endif  # RECOMPRESS_DEX_IN_APK
 endif  # DONT_UNCOMPRESS_PRIV_APPS_DEXS
 
 # Setting LOCAL_DEX_PREOPT based on WITH_DEXPREOPT, LOCAL_DEX_PREOPT, etc

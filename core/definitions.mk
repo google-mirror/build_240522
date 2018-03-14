@@ -2586,6 +2586,18 @@ $(hide) if (zipinfo $@ '*.dex' 2>/dev/null | grep -v ' stor ' >/dev/null) ; then
   fi
 endef
 
+# Recompress dex files embedded in an apk.
+#
+define recompress-dexs
+$(hide) if (zipinfo $@ '*.dex' 2>/dev/null | grep ' stor ' >/dev/null) ; then \
+  rm -rf $(dir $@)uncompresseddexs && mkdir $(dir $@)uncompresseddexs; \
+  unzip -q $@ '*.dex' -d $(dir $@)uncompresseddexs && \
+  zip -qd $@ '*.dex' && \
+  ( cd $(dir $@)uncompresseddexs && find . -type f | sort | zip -qD -X -9 ../$(notdir $@) -@ ) && \
+  rm -rf $(dir $@)uncompresseddexs; \
+  fi
+endef
+
 # Uncompress shared libraries embedded in an apk.
 #
 define uncompress-shared-libs
