@@ -742,6 +742,15 @@ ifdef PRODUCT_NOTICE_SPLIT_OVERRIDE
    $(error PRODUCT_NOTICE_SPLIT_OVERRIDE cannot be set.)
 endif
 
+# TODO(b/70694532): delete this file
+# These devices were previously using the legacy VNDK for no great effect. As
+# BOARD_VNDK_VERSION applies to all devices, this will go away.
+ifneq ($(filter generic%,$(TARGET_DEVICE)),)
+ifndef BOARD_VNDK_VERSION
+PRODUCT_TREBLE_LINKER_NAMESPACES_OVERRIDE ?= false
+endif # BOARD_VNDK_VERSION
+endif # TARGET_DEVICE is generic*
+
 requirements := \
     PRODUCT_TREBLE_LINKER_NAMESPACES \
     PRODUCT_SEPOLICY_SPLIT \
