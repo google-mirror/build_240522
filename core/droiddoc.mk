@@ -87,14 +87,14 @@ else
   else
     LOCAL_JAVA_LIBRARIES := core-oj core-libart ext framework $(LOCAL_JAVA_LIBRARIES)
   endif
-  $(full_target): PRIVATE_BOOTCLASSPATH := $(call java-lib-files, core-oj):$(call java-lib-files, core-libart)
+  $(full_target): PRIVATE_BOOTCLASSPATH := $(call java-lib-files, core-oj) $(call java-lib-files, core-libart)
 endif  # LOCAL_SDK_VERSION
 LOCAL_JAVA_LIBRARIES := $(sort $(LOCAL_JAVA_LIBRARIES))
 
 full_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES)) $(LOCAL_CLASSPATH)
 endif # !LOCAL_IS_HOST_MODULE
 
-$(full_target): PRIVATE_CLASSPATH := $(call normalize-path-list,$(full_java_libs))
+$(full_target): PRIVATE_CLASSPATH := $(full_java_libs)
 
 intermediates.COMMON := $(call local-intermediates-dir,COMMON)
 
@@ -132,6 +132,19 @@ $(full_target): PRIVATE_PROFILING_OPTIONS := \
     -J-agentlib:jprofilerti=port=8849 -J-Xbootclasspath/a:/Applications/jprofiler5/bin/agent.jar
 endif
 
+# Use at least -source 1.8 even for lower LOCAL_JAVA_LANGUAGE_VERSION.
+# Some legacy targets rely on javadoc always getting -source 1.8.
+ifeq (,$(filter-out 1.6 1.7 1.8,$(LOCAL_JAVA_LANGUAGE_VERSION))) # -source 1.8
+  $(full_target): PRIVATE_JAVA_LANGUAGE_VERSION := 1.8
+  $(full_target): PRIVATE_BOOTCLASSPATH_ARG := $(addprefix -bootclasspath ,$(call normalize-path-list,$(PRIVATE_BOOTCLASSPATH)))
+else # -source 1.9 or higher
+  $(full_target): PRIVATE_JAVA_LANGUAGE_VERSION := $(LOCAL_JAVA_LANGUAGE_VERSION)
+  system_modules := core-system-modules
+  $(full_target): $(system_modules)
+  $(full_target): PRIVATE_SYSTEM_MODULES_DIR := $(patsubst %/lib/modules,%,$(SOONG_SYSTEM_MODULES_$(system_modules)))
+  $(full_target): PRIVATE_BOOTCLASSPATH_ARG := $(if $(PRIVATE_BOOTCLASSPATH),$(addprefix --system ,$(PRIVATE_SYSTEM_MODULES_DIR)) --patch-module java.base=.)
+  $(full_target): PRIVATE_CLASSPATH := $(filter-out $(PRIVATE_SYSTEM_MODULES_LIBS),$(PRIVATE_BOOTCLASSPATH)) $(PRIVATE_CLASSPATH)
+endif
 
 ifneq ($(strip $(LOCAL_DROIDDOC_USE_STANDARD_DOCLET)),true)
 ##
@@ -174,13 +187,6 @@ else
 $(full_target): PRIVATE_ADDITIONAL_HTML_DIR :=
 endif
 
-# TODO: not clear if this is used any more
-$(full_target): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
-
-# TODO(tobiast): Clean this up once we move to -source 1.9.
-# OpenJDK 9 does not have the concept of a "boot classpath" so we should
-# then rename PRIVATE_BOOTCLASSPATH to PRIVATE_MODULE or similar. For now,
-# keep -bootclasspath here since it works in combination with -source 1.8.
 $(full_target): \
         $(full_src_files) \
         $(LOCAL_GENERATED_SOURCES) \
@@ -200,7 +206,7 @@ $(full_target): \
 	$(hide) ( \
 		$(JAVADOC) \
                 -encoding UTF-8 \
-                -source 1.8 \
+                -source $(PRIVATE_JAVA_LANGUAGE_VERSION) \
                 \@$(PRIVATE_SRC_LIST_FILE) \
                 \@$(PRIVATE_SRCJAR_LIST_FILE) \
                 -J-Xmx1600m \
@@ -213,8 +219,8 @@ $(full_target): \
                 -templatedir $(PRIVATE_CUSTOM_TEMPLATE_DIR) \
                 $(PRIVATE_DROIDDOC_HTML_DIR) \
                 $(PRIVATE_ADDITIONAL_HTML_DIR) \
-                $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH)) \
-                $(addprefix -classpath ,$(PRIVATE_CLASSPATH)) \
+                $(PRIVATE_BOOTCLASSPATH_ARG) \
+                $(addprefix -classpath ,$(call normalize-path-list,$(PRIVATE_CLASSPATH))) \
                 -sourcepath $(PRIVATE_SOURCE_PATH) \
                 -d $(PRIVATE_OUT_DIR) \
                 $(PRIVATE_CURRENT_BUILD) $(PRIVATE_CURRENT_TIME) \
@@ -223,8 +229,6 @@ $(full_target): \
         && touch -f $@ \
     ) || (rm -rf $(PRIVATE_OUT_DIR) $(PRIVATE_SRC_LIST_FILE); exit 45)
 
-
-
 else
 ##
 ##
@@ -232,16 +236,6 @@ else
 ##
 ##
 
-ifdef USE_OPENJDK9
-# For OpenJDK 9 we use --patch-module to define the core libraries code.
-# TODO(tobiast): Reorganize this when adding proper support for OpenJDK 9
-# modules. Here we treat all code in core libraries as being in java.base
-# to work around the OpenJDK 9 module system. http://b/62049770
-$(full_target): PRIVATE_BOOTCLASSPATH_ARG := --patch-module=java.base=$(PRIVATE_BOOTCLASSPATH)
-else
-# For OpenJDK 8 we can use -bootclasspath to define the core libraries code.
-$(full_target): PRIVATE_BOOTCLASSPATH_ARG := $(addprefix -bootclasspath ,$(PRIVATE_BOOTCLASSPATH))
-endif
 $(full_target): $(full_src_files) $(LOCAL_GENERATED_SOURCES) $(full_java_libs) $(ZIPSYNC) $(LOCAL_SRCJARS) $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	@echo Docs javadoc: $(PRIVATE_OUT_DIR)
 	@mkdir -p $(dir $@)
@@ -251,6 +245,7 @@ $(full_target): $(full_src_files) $(LOCAL_GENERATED_SOURCES) $(full_java_libs) $
 	$(hide) ( \
 		$(JAVADOC) \
                 -encoding UTF-8 \
+                -source $(PRIVATE_JAVA_LANGUAGE_VERSION) \
                 $(PRIVATE_DROIDDOC_OPTIONS) \
                 \@$(PRIVATE_SRC_LIST_FILE) \
                 \@$(PRIVATE_SRCJAR_LIST_FILE) \
@@ -258,7 +253,7 @@ $(full_target): $(full_src_files) $(LOCAL_GENERATED_SOURCES) $(full_java_libs) $
                 -XDignore.symbol.file \
                 -Xdoclint:none \
                 $(PRIVATE_PROFILING_OPTIONS) \
-                $(addprefix -classpath ,$(PRIVATE_CLASSPATH)) \
+                $(addprefix -classpath ,$(call normalize-path-list,$(PRIVATE_CLASSPATH))) \
                 $(PRIVATE_BOOTCLASSPATH_ARG) \
                 -sourcepath $(PRIVATE_SOURCE_PATH) \
                 -d $(PRIVATE_OUT_DIR) \
