@@ -34,6 +34,16 @@ ifneq ($(filter integer_overflow, $(my_global_sanitize)),)
   endif
 endif
 
+# Global integer sanitization doesn't support static modules.
+ifeq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
+  my_global_sanitize := $(filter-out integer_overflow,$(my_global_sanitize))
+  my_global_sanitize_diag := $(filter-out integer_overflow,$(my_global_sanitize_diag))
+endif
+ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+  my_global_sanitize := $(filter-out integer_overflow,$(my_global_sanitize))
+  my_global_sanitize_diag := $(filter-out integer_overflow,$(my_global_sanitize_diag))
+endif
+
 # Disable global CFI in excluded paths
 ifneq ($(filter cfi, $(my_global_sanitize)),)
   combined_exclude_paths := $(CFI_EXCLUDE_PATHS) \
@@ -212,23 +222,26 @@ ifneq ($(filter coverage,$(my_sanitize)),)
 endif
 
 ifneq ($(filter integer_overflow,$(my_sanitize)),)
-  ifneq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
-    ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+  # Respect LOCAL_NOSANITIZE for integer-overflow flags.
+  ifeq ($(filter signed-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
+    my_sanitize += signed-integer-overflow
+  endif
+  ifeq ($(filter unsigned-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
+    my_sanitize += unsigned-integer-overflow
+  endif
+  my_cflags += $(INTEGER_OVERFLOW_EXTRA_CFLAGS)
 
-      # Respect LOCAL_NOSANITIZE for integer-overflow flags.
-      ifeq ($(filter signed-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
-        my_sanitize += signed-integer-overflow
-      endif
-      ifeq ($(filter unsigned-integer-overflow, $(strip $(LOCAL_NOSANITIZE))),)
-        my_sanitize += unsigned-integer-overflow
-      endif
-      my_cflags += $(INTEGER_OVERFLOW_EXTRA_CFLAGS)
-
-      # Check for diagnostics mode (on by default).
-      ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
+  # Check for diagnostics mode.
+  ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
+    ifneq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
+      ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
         my_sanitize_diag += signed-integer-overflow
         my_sanitize_diag += unsigned-integer-overflow
+      else
+        $(warning Make cannot apply integer overflow diagnostics to static binary $(LOCAL_MODULE))
       endif
+    else
+      $(warning Make cannot apply integer overflow diagnostics to static library $(LOCAL_MODULE))
     endif
   endif
   my_sanitize := $(filter-out integer_overflow,$(my_sanitize))
