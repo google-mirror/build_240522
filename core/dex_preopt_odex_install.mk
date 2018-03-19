@@ -279,18 +279,33 @@ $(my_built_dm): $(my_copied_vdex) $(ZIPTIME)
 $(eval $(call copy-one-file,$(my_built_dm),$(my_installed_dm)))
 endif
 
-# PRODUCT_SYSTEM_SERVER_DEBUG_INFO overrides WITH_DEXPREOPT_DEBUG_INFO.
-my_system_server_debug_info := $(PRODUCT_SYSTEM_SERVER_DEBUG_INFO)
-ifeq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
-# Only enable for non-eng builds.
-ifeq (,$(my_system_server_debug_info))
-my_system_server_debug_info := true
-endif
+# If the global setting does not suppress mini-debug-info, enable it.
+ifneq (false,$(WITH_DEXPREOPT_DEBUG_INFO))
+  LOCAL_DEX_PREOPT_FLAGS += --generate-mini-debug-info
 endif
 
-ifeq (true, $(my_system_server_debug_info))
-  ifneq (,$(filter $(PRODUCT_SYSTEM_SERVER_JARS),$(LOCAL_MODULE)))
+# PRODUCT_SYSTEM_SERVER_DEBUG_INFO overrides WITH_DEXPREOPT_DEBUG_INFO.
+# PRODUCT_OTHER_JAVA_DEBUG_INFO overrides WITH_DEXPREOPT_DEBUG_INFO.
+my_system_server_debug_info := $(PRODUCT_SYSTEM_SERVER_DEBUG_INFO)
+my_other_java_debug_info := $(PRODUCT_OTHER_JAVA_DEBUG_INFO)
+
+# Never enable on eng.
+ifeq (eng,$(filter eng, $(TARGET_BUILD_VARIANT)))
+my_system_server_debug_info := false
+my_other_java_debug_info := false
+endif
+
+ifneq (,$(filter $(PRODUCT_SYSTEM_SERVER_JARS),$(LOCAL_MODULE)))
+  ifeq (true,$(my_system_server_debug_info))
     LOCAL_DEX_PREOPT_FLAGS += --generate-mini-debug-info
+  elif (false,$(my_system_server_debug_info))
+    LOCAL_DEX_PREOPT_FLAGS += --no-generate-mini-debug-info
+  endif
+else
+  ifeq (true,$(my_other_java_debug_info))
+    LOCAL_DEX_PREOPT_FLAGS += --generate-mini-debug-info
+  elif (false,$(my_other_java_debug_info))
+    LOCAL_DEX_PREOPT_FLAGS += --no-generate-mini-debug-info
   endif
 endif
 
