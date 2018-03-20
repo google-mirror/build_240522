@@ -355,6 +355,16 @@ $(call all-named-files-under,*.proto,$(1))
 endef
 
 ###########################################################
+## Find all of the .fbs files under the named directories.
+## Meant to be used like:
+##    SRC_FILES := $(call all-fbs-files-under,src)
+###########################################################
+
+define all-fbs-files-under
+$(call all-named-files-under,*.fbs,$(1))
+endef
+
+###########################################################
 ## Find all of the RenderScript files under the named directories.
 ##  Meant to be used like:
 ##    SRC_FILES := $(call all-renderscript-files-under,src)
@@ -1205,6 +1215,22 @@ $(hide) for f in $(PRIVATE_PROTO_SRC_FILES); do \
         $$f || exit 33; \
         done
 $(hide) touch $@
+endef
+
+###########################################################
+## Commands for running flatc to compile .fbs into .java
+###########################################################
+
+define transform-fbs-to-java
+@mkdir -p $(dir $@)
+@echo "Flatc: $@ <= $(PRIVATE_FBS_SOURCE_FILES)"
+@rm -rf $(PRIVATE_FBS_JAVA_OUTPUT_DIR)
+@mkdir -p $(PRIVATE_FBS_OUTPUT_DIR)
+$(hide) for f in $(PRIVATE_FBS_SOURCE_FILES); do \
+        $(FLATC) --java -o $(PRIVATE_FBS_OUTPUT_DIR)/src \
+        $$f || exit 33; \
+        done
+$(SOONG_ZIP) -o $@ -C $(PRIVATE_FBS_OUTPUT_DIR)/src -D $(PRIVATE_FBS_OUTPUT_DIR)/src
 endef
 
 ######################################################################
