@@ -100,6 +100,30 @@ $(proto_java_sources_file_stamp) : $(proto_sources_fullpath) $(PROTOC)
 ALL_MODULES.$(my_register_name).PROTO_FILES := $(proto_sources_fullpath)
 endif # proto_sources
 
+###########################################################
+## .fbs files: Compile fbs (flatbuffer scheme) files to .java
+###########################################################
+fbs_sources := $(filter %.fbs,$(LOCAL_SRC_FILES))
+LOCAL_SRC_FILES := $(filter-out %.fbs,$(LOCAL_SRC_FILES))
+
+fbs_generated_src_jar :=
+
+ifneq ($(fbs_sources),)
+fbs_sources_fullpath := $(addprefix $(LOCAL_PATH)/, $(fbs_sources))
+fbs_intermediate.COMMON := $(intermediates.COMMON)/fbs
+fbs_generated_src_jar := $(fbs_intermediate.COMMON)/fbs.srcjar
+
+LOCAL_SRCJARS += $(fbs_generated_src_jar)
+
+$(fbs_generated_src_jar): PRIVATE_FBS_SOURCE_FILES := $(fbs_sources_fullpath)
+$(fbs_generated_src_jar): PRIVATE_FBS_OUTPUT_DIR := $(fbs_intermediate.COMMON)
+$(fbs_generated_src_jar): $(fbs_sources_fullpath) $(SOONG_ZIP) $(FLATC)
+	$(transform-fbs-to-java)
+
+LOCAL_INTERMEDIATE_TARGETS += $(fbs_generated_src_jar)
+
+endif # fbs_sources
+
 #########################################
 ## Java resources
 
