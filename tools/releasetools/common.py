@@ -461,6 +461,13 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
   # "boot" or "recovery", without extension.
   partition_name = os.path.basename(sourcedir).lower()
 
+  if (partition_name == "recovery" and
+      info_dict.get("include_recovery_dtbo") == "true"):
+    fn = os.path.join(sourcedir, "recovery_dtbo")
+    if os.access(fn, os.F_OK):
+      cmd.append("--recovery_dtbo")
+      cmd.append(fn)
+
   p = Run(cmd, stdout=subprocess.PIPE)
   p.communicate()
   assert p.returncode == 0, "mkbootimg of %s image failed" % (partition_name,)
