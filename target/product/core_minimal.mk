@@ -117,6 +117,7 @@ PRODUCT_BOOT_JARS := \
     voip-common \
     ims-common \
     org.apache.http.legacy.boot \
+    kotlin-stdlib-renamed \
     android.hidl.base-V1.0-java \
     android.hidl.manager-V1.0-java
 
