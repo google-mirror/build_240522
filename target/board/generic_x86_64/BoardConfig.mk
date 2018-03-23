@@ -3,9 +3,8 @@
 # Product-specific compile-time definitions.
 #
 
-# The generic product target doesn't have any hardware-specific pieces.
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := true
+include build/make/target/board/treble_common.mk
+
 TARGET_CPU_ABI := x86_64
 TARGET_ARCH := x86_64
 TARGET_ARCH_VARIANT := x86_64
@@ -25,16 +24,6 @@ BOARD_USES_GENERIC_AUDIO := true
 # no hardware camera
 USE_CAMERA_STUB := true
 
-# Enable dex-preoptimization to speed up the first boot sequence
-# of an SDK AVD. Note that this operation only works on Linux for now
-ifeq ($(HOST_OS),linux)
-WITH_DEXPREOPT ?= true
-WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= false
-endif
-
-TARGET_USES_HWC2 := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-
 # Build OpenGLES emulation host and guest libraries
 BUILD_EMULATOR_OPENGL := true
 BUILD_QEMU_IMAGES := true
@@ -44,16 +33,13 @@ BUILD_QEMU_IMAGES := true
 USE_OPENGL_RENDERER := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560 # 2.5 GB
+# 1.5 GB system image, 64 MB vendor image. Adjust them when needed.
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
-TARGET_COPY_OUT_VENDOR := vendor
-# ~100 MB vendor image. Please adjust system image / vendor image sizes
-# when finalizing them.
-BOARD_VENDORIMAGE_PARTITION_SIZE := 100000000
+BOARD_VENDORIMAGE_PARTITION_SIZE := 67108864
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 DEVICE_MATRIX_FILE   := device/generic/goldfish/compatibility_matrix.xml
 
 BOARD_SEPOLICY_DIRS += \
