@@ -25,16 +25,33 @@ else
 my_dex_preopt_image_location := $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_LOCATION)
 endif
 my_dex_preopt_image_filename := $(call get-image-file-path,$($(my_2nd_arch_prefix)DEX2OAT_TARGET_ARCH),$(my_dex_preopt_image_location))
+
+my_dex_preopt_uses_libraries := $(LOCAL_USES_LIBRARIES)
+ifeq (,$(my_dex_preopt_uses_libraries))
+# Pass special class loader context to skip the classpath and collision check.
+# This will get removed once LOCAL_USES_LIBRARIES is enforced in the manifest.
+my_dex_preopt_system_dependencies :=
+my_dex_preopt_class_loader_context := \&
+my_stored_preopt_class_loader_context_arg :=
+else
+my_lib_names := $(basename $(notdir $(my_dex_preopt_uses_libraries)))
+my_intermediate_libs := $(addsuffix /javalib.jar,$(foreach lib_name, $(my_lib_names), \
+  $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib_name),,COMMON)))
+my_dex_preopt_system_dependencies := $(my_intermediate_libs)
+my_dex_preopt_class_loader_context := PCL[$(call normalize-path-list,$(my_intermediate_libs))]
+# The class loader context checksums are filled in by dex2oat.
+my_stored_preopt_class_loader_context_arg := --stored-class-loader-context=PCL[$(call normalize-path-list,$(my_dex_preopt_uses_libraries))]
+endif
+
+$(my_built_odex): $(my_dex_preopt_system_dependencies)
 $(my_built_odex): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
 $(my_built_odex): PRIVATE_DEX_LOCATION := $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE))
 $(my_built_odex): PRIVATE_DEX_PREOPT_IMAGE_LOCATION := $(my_dex_preopt_image_location)
+$(my_built_odex): PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT := $(my_dex_preopt_class_loader_context)
+$(my_built_odex): PRIVATE_DEX2OAT_STORED_CLASS_LOADER_CONTEXT_ARG := $(my_stored_preopt_class_loader_context_arg)
 $(my_built_odex) : $($(my_2nd_arch_prefix)DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT) \
     $(DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS) \
     $(my_dex_preopt_image_filename)
-
-# Pass special class loader context to skip the classpath and collision check.
-# Should modify build system to pass used libraries properly later.
-$(my_built_odex): PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT := \&
 
 my_installed_odex := $(call get-odex-installed-file-path,$($(my_2nd_arch_prefix)DEX2OAT_TARGET_ARCH),$(LOCAL_INSTALLED_MODULE))
 

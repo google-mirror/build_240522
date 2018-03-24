@@ -174,6 +174,7 @@ $(hide) mkdir -p $(dir $(2))
 $(hide) ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	--runtime-arg -Xms$(DEX2OAT_XMS) --runtime-arg -Xmx$(DEX2OAT_XMX) \
 	--class-loader-context=$(PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT) \
+	$(PRIVATE_DEX2OAT_STORED_CLASS_LOADER_CONTEXT_ARG) \
 	--boot-image=$(PRIVATE_DEX_PREOPT_IMAGE_LOCATION) \
 	--dex-file=$(1) \
 	--dex-location=$(PRIVATE_DEX_LOCATION) \
