@@ -1,0 +1,9 @@
+Code-Review+2: Kuan-Tung Pan <kuantung@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Autosubmit+1: Kuan-Tung Pan <kuantung@google.com>
+Verified+1: Kuan-Tung Pan <kuantung@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Mon, 26 Mar 2018 18:10:04 +0000
+Reviewed-on: https://android-review.googlesource.com/649502
+Project: platform/build
+Branch: refs/heads/emu-2.7-release
