@@ -4,6 +4,9 @@
 ## Output variables: my_use_clang_lld
 #############################################################
 
+# FAKED for TreeHugger Test. DO NOT SUBMIT.
+USE_CLANG_LLD := true
+
 # Use LLD only if it's not disabled by LOCAL_USE_CLANG_LLD,
 # and enabled by LOCAL_USE_CLANG_LLD or USE_CLANG_LLD.
 my_use_clang_lld := false
