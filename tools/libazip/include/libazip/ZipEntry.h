@@ -188,6 +188,11 @@ protected:
     void setModWhen(time_t when);
 
     /*
+     * Set the modification date directly from given fields.
+     */
+    void setModWhenExplicit(uint16_t ztime, uint16_t zdate);
+
+    /*
      * Return the offset of the local file header.
      */
     off_t getLFHOffset(void) const { return mCDE.mLocalHeaderRelOffset; }
@@ -202,6 +207,9 @@ protected:
 
     /* mark for deletion; used by ZipFile::remove() */
     void setDeleted(void) { mDeleted = true; }
+
+    /* overwrites the LFH in case we updated it */
+    status_t rewriteLFH(FILE* fp);
 
 private:
     /* these are private and not defined */

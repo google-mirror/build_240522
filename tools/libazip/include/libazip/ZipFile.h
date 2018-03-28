@@ -25,7 +25,7 @@
 #include <utils/Errors.h>
 #include <stdio.h>
 
-#include "ZipEntry.h"
+#include <libazip/ZipEntry.h>
 
 namespace android {
 
@@ -157,6 +157,10 @@ public:
      */
     int getNumEntries(void) const { return mEntries.size(); }
     ZipEntry* getEntryByIndex(int idx) const;
+
+    /* Reset all timestamps to zero; rewrites LFHs and marks central
+     * directory as needing rewriting in flush. */
+    status_t resetTimestamps(uint16_t ztime, uint16_t zdate);
 
 private:
     /* these are private and not defined */

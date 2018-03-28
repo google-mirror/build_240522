@@ -1,0 +1,32 @@
+cc_library_host_static {
+
+    srcs: [
+        "ZipEntry.cpp",
+        "ZipFile.cpp",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+
+    name: "libazip",
+    local_include_dirs: ["include"],
+    export_include_dirs: ["include"],
+
+    static_libs: [
+        "libziparchive",
+        "libzopfli",
+        "libutils",
+        "libcutils",
+        "libz",
+    ],
+
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
+
+
+}

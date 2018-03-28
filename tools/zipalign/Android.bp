@@ -9,8 +9,6 @@ cc_binary_host {
 
     srcs: [
         "ZipAlign.cpp",
-        "ZipEntry.cpp",
-        "ZipFile.cpp",
     ],
 
     cflags: ["-Wall", "-Werror"],
@@ -25,6 +23,7 @@ cc_binary_host {
         "libz",
         "libbase",
         "libzopfli",
+        "libazip",
     ],
 
     target: {
