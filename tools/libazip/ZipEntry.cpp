@@ -20,7 +20,7 @@
 
 #define LOG_TAG "zip"
 
-#include "ZipEntry.h"
+#include <libazip/ZipEntry.h>
 #include <utils/Log.h>
 
 #include <assert.h>
@@ -384,10 +384,36 @@ void ZipEntry::setModWhen(time_t when)
     zdate = (year - 80) << 9 | (ptm->tm_mon+1) << 5 | ptm->tm_mday;
     ztime = ptm->tm_hour << 11 | ptm->tm_min << 5 | ptm->tm_sec >> 1;
 
-    mCDE.mLastModFileTime = mLFH.mLastModFileTime = ztime;
-    mCDE.mLastModFileDate = mLFH.mLastModFileDate = zdate;
+    setModWhenExplicit(ztime, zdate);
 }
 
+void ZipEntry::setModWhenExplicit(uint16_t ztime, uint16_t zdate)
+{
+    mCDE.mLastModFileTime = mLFH.mLastModFileTime = ztime;
+    mCDE.mLastModFileDate = mLFH.mLastModFileDate = zdate;
+
+}
+
+status_t ZipEntry::rewriteLFH(FILE* fp)
+{
+    off_t posn = ftell(fp);
+    if (fseek(fp, mCDE.mLocalHeaderRelOffset, SEEK_SET) != 0) {
+        ALOGD("local header seek failed (%" PRIu32 ")\n",
+            mCDE.mLocalHeaderRelOffset);
+        return UNKNOWN_ERROR;
+    }
+
+    status_t result = mLFH.write(fp);
+    if (result != NO_ERROR) {
+        ALOGD("mLFH.write failed\n");
+        return result;
+    }
+
+    if (fseek(fp, posn, SEEK_SET) != 0)
+        return UNKNOWN_ERROR;
+
+    return NO_ERROR;
+}
 
 /*
  * ===========================================================================

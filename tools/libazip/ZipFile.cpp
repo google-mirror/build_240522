@@ -23,7 +23,7 @@
 #include <utils/Log.h>
 #include <ziparchive/zip_archive.h>
 
-#include "ZipFile.h"
+#include <libazip/ZipFile.h>
 
 #include <zlib.h>
 
@@ -184,6 +184,20 @@ void ZipFile::discardEntries(void)
     mEntries.clear();
 }
 
+status_t ZipFile::resetTimestamps(uint16_t ztime, uint16_t zdate)
+{
+    if (mReadOnly)
+        return INVALID_OPERATION;
+
+    for (size_t i = 0; i < mEntries.size(); ++i) {
+        mEntries[i]->setModWhenExplicit(ztime, zdate);
+        status_t result = mEntries[i]->rewriteLFH(mZipFp);
+        if (result != NO_ERROR)
+            return result;
+    }
+    mNeedCDRewrite = true;
+    return NO_ERROR;
+}
 
 /*
  * Find the central directory and read the contents.

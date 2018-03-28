@@ -22,12 +22,21 @@ cc_binary_host {
 
     srcs: [
         "ZipTime.cpp",
-        "ZipEntry.cpp",
-        "ZipFile.cpp",
     ],
 
     name: "ziptime",
     cflags: ["-Wall", "-Werror"],
+    static_libs: [
+        "libutils",
+        "libcutils",
+        "liblog",
+        "libziparchive",
+        "libz",
+        "libbase",
+        "libzopfli",
+        "libazip",
+    ],
+
     target: {
         windows: {
             enabled: true,

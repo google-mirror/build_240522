@@ -17,12 +17,16 @@
 /*
  * Zip tool to remove dynamic timestamps
  */
-#include "ZipFile.h"
+#include <libazip/ZipFile.h>
 
 #include <stdlib.h>
 #include <stdio.h>
 
 using namespace android;
+
+/* Jan 01 2008 */
+#define STATIC_DATE (28 << 9 | 1 << 5 | 1)
+#define STATIC_TIME 0
 
 static void usage(void)
 {
@@ -39,8 +43,25 @@ int main(int argc, char* const argv[])
     }
 
     ZipFile zip;
-    if (zip.rewrite(argv[1]) != 0) {
-        fprintf(stderr, "Unable to rewrite '%s' as zip archive\n", argv[1]);
+    status_t status;
+    status = zip.open(argv[1], ZipFile::kOpenReadWrite);
+    if (status != NO_ERROR) {
+        fprintf(stderr, "Unable to open zip archive '%s': %d\n",
+                argv[1], (int) status);
+        return 1;
+    }
+
+    status = zip.resetTimestamps(STATIC_TIME, STATIC_DATE);
+    if (status != NO_ERROR) {
+        fprintf(stderr, "Unable to zero timestamps in '%s': %d\n",
+                argv[1], (int) status);
+        return 1;
+    }
+
+    status = zip.flush();
+    if (status != NO_ERROR) {
+        fprintf(stderr, "unable to finalize zip '%s': %d\n",
+                argv[1], (int) status);
         return 1;
     }
 
