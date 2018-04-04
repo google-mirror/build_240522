@@ -440,6 +440,32 @@ $(my_all_targets) : | $(my_installed_symlinks)
 endif # !LOCAL_UNINSTALLABLE_MODULE
 
 ###########################################################
+## VINTF manifest fragment goals
+###########################################################
+
+my_vintf_installed:=
+my_vintf_pairs:=
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+ifndef LOCAL_IS_HOST_MODULE
+ifneq ($(strip $(LOCAL_VINTF_FRAGMENTS)),)
+
+my_vintf_pairs := $(foreach xml,$(LOCAL_VINTF_FRAGMENTS),$(LOCAL_PATH)/$(xml):$(TARGET_OUT$(partition_tag)_ETC)/vintf/manifest/$(notdir $(xml)))
+my_vintf_installed := $(foreach xml,$(my_vintf_pairs),$(call word-colon,2,$(xml)))
+
+# Only set up copy rules once, even if another arch variant shares it
+my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS.$(partition_tag).LIST),$(my_vintf_pairs))
+
+# FIXME: parse check
+my_vintf_new_installed := $(call copy-many-files,$(my_vintf_pairs))
+
+ALL_VINTF_MANIFEST_FRAGMENTS.$(partition_tag).LIST += $(my_vintf_new_pairs)
+
+$(my_all_targets) : $(my_vintf_installed)
+endif # LOCAL_VINTF_FRAGMENTS
+endif # !LOCAL_IS_HOST_MODULE
+endif # !LOCAL_UNINSTALLABLE_MODULE
+
+###########################################################
 ## CHECK_BUILD goals
 ###########################################################
 my_checked_module :=
