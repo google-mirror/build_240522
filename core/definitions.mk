@@ -99,6 +99,9 @@ HOST_CROSS_DISPLAY := host cross
 # All installed initrc files
 ALL_INIT_RC_INSTALLED_PAIRS :=
 
+# All installed vintf manifest fragments for a partition at
+ALL_VINTF_MANIFEST_FRAGMENTS_LIST:=
+
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################
