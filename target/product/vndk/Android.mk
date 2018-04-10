@@ -21,26 +21,32 @@ $(INTERNAL_VNDK_LIB_LIST):
 # This is the up-to-date list of vndk libs.
 # TODO(b/62012285): the lib list should be stored somewhere under
 # /prebuilts/vndk
+ifeq (REL,$(PLATFORM_VERSION_CODENAME))
 LATEST_VNDK_LIB_LIST := $(LOCAL_PATH)/$(PLATFORM_VNDK_VERSION).txt
+ifeq ($(wildcard $(LATEST_VNDK_LIB_LIST)),)
+$(error $(LATEST_VNDK_LIB_LIST) file not found. Please copy "$(LOCAL_PATH)/current.txt" to "$(LATEST_VNDK_LIB_LIST)" and commit a CL for release branch)
+endif
+else
+LATEST_VNDK_LIB_LIST := $(LOCAL_PATH)/current.txt
+endif
 
 #####################################################################
 # Check the generate list against the latest list stored in the
 # source tree
 .PHONY: check-vndk-list
 
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
-# The check is enforced in release branches
+# Check if vndk list is changed
 droidcore: check-vndk-list
-endif
 
 check-vndk-list-timestamp := $(call intermediates-dir-for,PACKAGING,vndk)/check-list-timestamp
 check-vndk-list: $(check-vndk-list-timestamp)
 
-_vndk_check_failure_message := "VNDK library list has changed."
-ifeq (REL,$(PLATFORM_VERSION_CODENAME)
-_vndk_check_failure_message += "This isn't allowed in API locked branches."
+_vndk_check_failure_message := " error: VNDK library list has been changed.\n"
+ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+_vndk_check_failure_message += "       Changing the VNDK library list is not allowed in API locked branches."
 else
-_vndk_check_failure_message += "Run update-vndk-list.sh to update the list."
+_vndk_check_failure_message += "       Run update-vndk-list.sh in the build root directory to update the\n"
+_vndk_check_failure_message += "       $(LATEST_VNDK_LIB_LIST) file."
 endif
 
 $(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST) $(HOST_OUT_EXECUTABLES)/update-vndk-list.sh
@@ -48,7 +54,7 @@ $(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST) 
 	  --new-line-format="Added %L" \
 	  --unchanged-line-format="" \
 	  $(LATEST_VNDK_LIB_LIST) $(INTERNAL_VNDK_LIB_LIST) \
-	  || ( echo $(_vndk_check_failure_message); exit 1 ))
+	  || ( echo -e $(_vndk_check_failure_message); exit 1 ))
 	$(hide) mkdir -p $(dir $@)
 	$(hide) touch $@
 
