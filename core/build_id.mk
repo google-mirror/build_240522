@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (506190 Merge "Version bump to OVM1.180410.001" into oreo-mr1-vts-re)
 export BUILD_ID=OVM1.180410.001
+=======
+export BUILD_ID=OPM1.171019.026
+>>>>>>> BRANCH (af0825 Make change and version bump to OPM1.171019.026)
