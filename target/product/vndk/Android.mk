@@ -21,29 +21,31 @@ $(INTERNAL_VNDK_LIB_LIST):
 # This is the up-to-date list of vndk libs.
 # TODO(b/62012285): the lib list should be stored somewhere under
 # /prebuilts/vndk
+ifeq (REL,$(PLATFORM_VERSION_CODENAME))
 LATEST_VNDK_LIB_LIST := $(LOCAL_PATH)/$(PLATFORM_VNDK_VERSION).txt
+else
+LATEST_VNDK_LIB_LIST := $(LOCAL_PATH)/current.txt
+endif
 
 #####################################################################
 # Check the generate list against the latest list stored in the
 # source tree
 .PHONY: check-vndk-list
 
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
-# The check is enforced in release branches
+# Check if vndk list is changed
 droidcore: check-vndk-list
-endif
 
 check-vndk-list-timestamp := $(call intermediates-dir-for,PACKAGING,vndk)/check-list-timestamp
 check-vndk-list: $(check-vndk-list-timestamp)
 
 _vndk_check_failure_message := "VNDK library list has changed."
-ifeq (REL,$(PLATFORM_VERSION_CODENAME)
+ifeq (REL,$(PLATFORM_VERSION_CODENAME))
 _vndk_check_failure_message += "This isn't allowed in API locked branches."
 else
-_vndk_check_failure_message += "Run update-vndk-list.sh to update the list."
+_vndk_check_failure_message += "Run 'make update-vndk-list' to update the list."
 endif
 
-$(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST) $(HOST_OUT_EXECUTABLES)/update-vndk-list.sh
+$(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST)
 	$(hide) ( diff --old-line-format="Removed %L" \
 	  --new-line-format="Added %L" \
 	  --unchanged-line-format="" \
@@ -52,29 +54,17 @@ $(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST) 
 	$(hide) mkdir -p $(dir $@)
 	$(hide) touch $@
 
-#####################################################################
-# Script to update the latest VNDK lib list
-include $(CLEAR_VARS)
-LOCAL_MODULE := update-vndk-list.sh
-LOCAL_MODULE_CLASS := EXECUTABLES
-LOCAL_MODULE_STEM := $(LOCAL_MODULE)
-LOCAL_IS_HOST_MODULE := true
-include $(BUILD_SYSTEM)/base_rules.mk
-$(LOCAL_BUILT_MODULE): PRIVATE_INTERNAL_VNDK_LIB_LIST := $(INTERNAL_VNDK_LIB_LIST)
-$(LOCAL_BUILT_MODULE): PRIVATE_LATEST_VNDK_LIB_LIST := $(LATEST_VNDK_LIB_LIST)
-$(LOCAL_BUILT_MODULE):
-	@echo "Generate: $@"
-	@mkdir -p $(dir $@)
-	@rm -f $@
-	$(hide) echo "#!/bin/bash" > $@
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
-	$(hide) echo "echo Updating VNDK library list is NOT allowed in API locked branches." >> $@; \
-	        echo "exit 1" >> $@
-else
-	$(hide) echo "cp $(PRIVATE_INTERNAL_VNDK_LIB_LIST) $(PRIVATE_LATEST_VNDK_LIB_LIST)" >> $@; \
-	        echo "echo $(PRIVATE_LATEST_VNDK_LIB_LIST) updated." >> $@
-endif
-	@chmod a+x $@
+# Update the latest VNDK lib list
+.PHONY: update-vndk-list
+
+update-vndk-list: $(INTERNAL_VNDK_LIB_LIST)
+	$(if $(filter-out REL,$(PLATFORM_VERSION_CODENAME)), \
+		$(hide) echo "Generate: $(LATEST_VNDK_LIB_LIST)"; \
+		mkdir -p $(dir $(LATEST_VNDK_LIB_LIST)); \
+		rm -f $(LATEST_VNDK_LIB_LIST); \
+		cp $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST); \
+		echo "$(LATEST_VNDK_LIB_LIST) updated.", \
+		@echo "Updating VNDK library list is NOT allowed in API locked branches.")
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := vndk_package
