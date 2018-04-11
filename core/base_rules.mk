@@ -525,7 +525,7 @@ ifndef LOCAL_COMPATIBILITY_SUITE
 ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
 LOCAL_COMPATIBILITY_SUITE := null-suite
 endif
-ifneq ($(filter APPS, $(LOCAL_MODULE_CLASS)),)
+ifneq ($(filter APPS JAVA_LIBRARIES, $(LOCAL_MODULE_CLASS)),)
 ifneq ($(filter $(my_module_tags),tests),)
 LOCAL_COMPATIBILITY_SUITE := null-suite
 endif
