@@ -964,10 +964,11 @@ endif
 # system_current -> sdk_system_current_android
 # Note: this also replaces core_X with X (to be removed as there are prebuilts for core now).
 # $(1): An sdk version (LOCAL_SDK_VERSION)
+# $(2): optional library name (default: android)
 define resolve-prebuilt-sdk-module
 $(if $(findstring _,$(1)),\
-  sdk_$(patsubst core_%,%,$(1))_android,\
-  sdk_public_$(1)_android)
+  sdk_$(patsubst core_%,%,$(1))_$(or $(2),android),\
+  sdk_public_$(1)_$(or $(2),android))
 endef
 
 # Historical SDK version N is stored in $(HISTORICAL_SDK_VERSIONS_ROOT)/N.
