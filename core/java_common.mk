@@ -225,6 +225,18 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_fi
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
 
+
+# Sanity check class path vars.
+disallowed_deps := $(foreach sdk,$(TARGET_AVAILABLE_SDK_VERSIONS),$(call resolve-prebuilt-sdk-module,$(sdk)))
+disallowed_deps += $(foreach sdk,$(TARGET_AVAILABLE_SDK_VERSIONS),\
+  $(foreach sdk_lib,$(JAVA_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,$(sdk),$(sdk_lib))))
+maybe_bad_deps := $(foreach disallowed_dep,$(disallowed_deps),\
+  $(patsubst $(disallowed_dep),bad_dep,$(LOCAL_JAVA_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES)))
+ifneq (,$(strip $(filter bad_dep,$(maybe_bad_deps))))
+  $(call pretty-error,SDK modules should not be depended on directly. Please use LOCAL_SDK_VERSION.\
+      Libraries: [$(LOCAL_JAVA_LIBRARIES)] Static libraries: [$(LOCAL_STATIC_JAVA_LIBRARIES)])
+endif
+
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 my_system_modules :=
