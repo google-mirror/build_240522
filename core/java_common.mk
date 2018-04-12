@@ -225,6 +225,12 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_fi
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
 
+# Sanity check class path vars.
+maybe_bad_deps := $(patsubst sdk_%,bad_dep,$(LOCAL_JAVA_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES))
+ifneq (,$(strip $(filter bad_dep,$(maybe_bad_deps))))
+  $(call pretty-error,Do not depend on SDK modules directly. Classpath [$(LOCAL_JAVA_LIBRARIES)] Static: [$(LOCAL_STATIC_JAVA_LIBRARIES)])
+endif
+
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 my_system_modules :=
