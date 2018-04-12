@@ -74,15 +74,20 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       doc for --override_timestamp below.
 
   --override_timestamp
-      Intentionally generate an incremental OTA that updates from a newer
-      build to an older one (based on timestamp comparison), by overriding the
-      timestamp in package metadata. This differs from --downgrade flag: we
-      know for sure this is NOT an actual downgrade case, but two builds are
-      cut in a reverse order. A legit use case is that we cut a new build C
-      (after having A and B), but want to enfore an update path of A -> C -> B.
-      Specifying --downgrade may not help since that would enforce a data wipe
-      for C -> B update. The value of "post-timestamp" will be set to the newer
-      timestamp plus one, so that the package can be pushed and applied.
+      Intentionally generate an incremental OTA that updates from a newer build
+      to an older one (based on timestamp comparison), by setting the downgrade
+      flag in the package metadata. This differs from --downgrade flag, as we
+      know for sure this is NOT an actual downgrade case, but two builds happen
+      to be cut in a reverse order (e.g. from two branches). A legit use case is
+      that we cut a new build C (after having A and B), but want to enfore an
+      update path of A -> C -> B. Specifying --downgrade may not help since that
+      would enforce a data wipe for C -> B update. With this flag enabled, there
+      will be no "post-timestamp" in the package metadata, but instead with
+      "ota-downgrade=yes".
+
+      We used to set a fake timestamp in the package metadata for this flow. But
+      now we consolidate the two cases with the same "ota-downgrade=yes" flag,
+      with the difference being whether "ota-wipe=yes" is set.
 
   -e  (--extra_script)  <file>
       Insert the contents of file at the end of the update script.
@@ -180,7 +185,6 @@ OPTIONS.verify = False
 OPTIONS.patch_threshold = 0.95
 OPTIONS.wipe_user_data = False
 OPTIONS.downgrade = False
-OPTIONS.timestamp = False
 OPTIONS.extra_script = None
 OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
 if OPTIONS.worker_threads == 0:
@@ -898,22 +902,16 @@ def HandleDowngradeMetadata(metadata, target_info, source_info):
 
   if OPTIONS.downgrade:
     if not is_downgrade:
-      raise RuntimeError("--downgrade specified but no downgrade detected: "
-                         "pre: %s, post: %s" % (pre_timestamp, post_timestamp))
+      raise RuntimeError(
+          "--downgrade or --override_timestamp specified but no downgrade "
+          "detected: pre: %s, post: %s" % (pre_timestamp, post_timestamp))
     metadata["ota-downgrade"] = "yes"
-  elif OPTIONS.timestamp:
-    if not is_downgrade:
-      raise RuntimeError("--override_timestamp specified but no timestamp hack "
-                         "needed: pre: %s, post: %s" % (pre_timestamp,
-                                                        post_timestamp))
-    metadata["post-timestamp"] = str(long(pre_timestamp) + 1)
   else:
     if is_downgrade:
-      raise RuntimeError("Downgrade detected based on timestamp check: "
-                         "pre: %s, post: %s. Need to specify "
-                         "--override_timestamp OR --downgrade to allow "
-                         "building the incremental." % (pre_timestamp,
-                                                        post_timestamp))
+      raise RuntimeError(
+          "Downgrade detected based on timestamp check: pre: %s, post: %s. "
+          "Need to specify --override_timestamp OR --downgrade to allow "
+          "building the incremental." % (pre_timestamp, post_timestamp))
     metadata["post-timestamp"] = post_timestamp
 
 
@@ -922,7 +920,7 @@ def GetPackageMetadata(target_info, source_info=None):
 
   It generates a dict() that contains the info to be written into an OTA
   package (META-INF/com/android/metadata). It also handles the detection of
-  downgrade / timestamp override / data wipe based on the global options.
+  downgrade / data wipe based on the global options.
 
   Args:
     target_info: The BuildInfo instance that holds the target build info.
@@ -1782,7 +1780,7 @@ def main(argv):
       OPTIONS.downgrade = True
       OPTIONS.wipe_user_data = True
     elif o == "--override_timestamp":
-      OPTIONS.timestamp = True
+      OPTIONS.downgrade = True
     elif o in ("-o", "--oem_settings"):
       OPTIONS.oem_source = a.split(',')
     elif o == "--oem_no_mount":
@@ -1860,18 +1858,11 @@ def main(argv):
     sys.exit(1)
 
   if OPTIONS.downgrade:
-    # Sanity check to enforce a data wipe.
-    if not OPTIONS.wipe_user_data:
-      raise ValueError("Cannot downgrade without a data wipe")
-
     # We should only allow downgrading incrementals (as opposed to full).
     # Otherwise the device may go back from arbitrary build with this full
     # OTA package.
     if OPTIONS.incremental_source is None:
       raise ValueError("Cannot generate downgradable full OTAs")
-
-  assert not (OPTIONS.downgrade and OPTIONS.timestamp), \
-      "Cannot have --downgrade AND --override_timestamp both"
 
   # Load the build info dicts from the zip directly or the extracted input
   # directory. We don't need to unzip the entire target-files zips, because they
