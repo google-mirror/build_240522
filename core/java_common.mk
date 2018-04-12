@@ -225,6 +225,16 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_fi
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
 
+# Sanity check class path vars.
+maybe_bad_deps := $(LOCAL_JAVA_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES)
+# The legacy uiautomator 'current' is okay to depend on, as it's not suitable as an sdk_library.
+maybe_bad_deps := $(patsubst sdk_%_current_uiautomator,ok_dep,$(maybe_bad_deps))
+maybe_bad_deps := $(patsubst sdk_%,bad_dep,$(maybe_bad_deps))
+ifneq (,$(strip $(filter bad_dep,$(maybe_bad_deps))))
+  $(call pretty-error,SDK modules should not be depended on directly. Please use LOCAL_SDK_VERSION. \
+      Libraries: [$(LOCAL_JAVA_LIBRARIES)] Static libraries: [$(LOCAL_STATIC_JAVA_LIBRARIES)])
+endif
+
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 my_system_modules :=
