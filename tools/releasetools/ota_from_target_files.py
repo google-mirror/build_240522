@@ -1095,9 +1095,18 @@ class PropertyFiles(object):
 
     def ComputeEntryOffsetSize(name):
       """Computes the zip entry offset and size."""
+
+      # For ZIP64_LIMIT workaround (ref: releasetools/common.py, Python 2.7's
+      # zipfile implementation wrongly thinks that zip64 is required for files
+      # larger than 2GiB)
+      # This will prevent to change the offset for magic number in zip file
+      # When package larger than 2GiB
+      saved_zip64_limit = zipfile.ZIP64_LIMIT
+      zipfile.ZIP64_LIMIT = (1 << 32) - 1
       info = zip_file.getinfo(name)
       offset = info.header_offset + len(info.FileHeader())
       size = info.file_size
+      zipfile.ZIP64_LIMIT = saved_zip64_limit
       return '%s:%d:%d' % (os.path.basename(name), offset, size)
 
     tokens = []
@@ -1219,9 +1228,18 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
     'payload-metadata.bin' contains all the bytes from the beginning of the
     payload, till the end of 'medatada_signature_message'.
     """
+
+    # For ZIP64_LIMIT workaround (ref: releasetools/common.py, Python 2.7's
+    # zipfile implementation wrongly thinks that zip64 is required for files
+    # larger than 2GiB)
+    # This will prevent to change the offset for magic number in zip file
+    # When package larger than 2GiB
+    saved_zip64_limit = zipfile.ZIP64_LIMIT
+    zipfile.ZIP64_LIMIT = (1 << 32) - 1
     payload_info = input_zip.getinfo('payload.bin')
     payload_offset = payload_info.header_offset + len(payload_info.FileHeader())
     payload_size = payload_info.file_size
+    zipfile.ZIP64_LIMIT = saved_zip64_limit
 
     with input_zip.open('payload.bin', 'r') as payload_fp:
       header_bin = payload_fp.read(24)
