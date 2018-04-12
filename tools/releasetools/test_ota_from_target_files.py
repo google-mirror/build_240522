@@ -538,31 +538,6 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         },
         metadata)
 
-  def test_GetPackageMetadata_overrideTimestamp(self):
-    target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
-    source_info_dict = copy.deepcopy(self.TEST_SOURCE_INFO_DICT)
-    self._test_GetPackageMetadata_swapBuildTimestamps(
-        target_info_dict, source_info_dict)
-
-    target_info = BuildInfo(target_info_dict, None)
-    source_info = BuildInfo(source_info_dict, None)
-    common.OPTIONS.incremental_source = ''
-    common.OPTIONS.timestamp = True
-    metadata = GetPackageMetadata(target_info, source_info)
-    self.assertDictEqual(
-        {
-            'ota-type' : 'BLOCK',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000001',
-            'pre-device' : 'product-device',
-            'pre-build' : 'build-fingerprint-source',
-            'pre-build-incremental' : 'build-version-incremental-source',
-        },
-        metadata)
-
   def test_GetTargetFilesZipForSecondaryImages(self):
     input_file = construct_target_files(secondary=True)
     target_file = GetTargetFilesZipForSecondaryImages(input_file)
