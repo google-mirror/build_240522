@@ -1058,3 +1058,5 @@ include $(BUILD_SYSTEM)/soong_config.mk
 endif
 
 include $(BUILD_SYSTEM)/dumpvar.mk
+
+ALL_DISABLED_PRESUBMIT_TESTS :=
