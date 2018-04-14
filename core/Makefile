@@ -2396,6 +2396,7 @@ BUILT_OTATOOLS_PACKAGE := $(PRODUCT_OUT)/otatools.zip
 $(BUILT_OTATOOLS_PACKAGE): zip_root := $(call intermediates-dir-for,PACKAGING,otatools)/otatools
 
 OTATOOLS_DEPS := \
+  $(BOARD_EXTRA_OTATOOLS_DEPS) \
   system/extras/ext4_utils/mke2fs.conf \
   external/avb/test/data/testkey_rsa4096.pem \
   $(sort $(shell find system/update_engine/scripts -name \*.pyc -prune -o -type f -print)) \
