@@ -541,14 +541,14 @@ ifdef LOCAL_COMPATIBILITY_SUITE
 # separate the multiple architectures into subdirectories of the testcase folder.
 arch_dir :=
 is_native :=
+is_native_benchmark :=
 multi_arch :=
 ifeq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)
   is_native := true
   multi_arch := true
+ifeq ($(LOCAL_NATIVE_BENCHMARK),true)
+  is_native_benchmark := true
 endif
-ifeq ($(LOCAL_MODULE_CLASS),NATIVE_BENCHMARK)
-  is_native := true
-  multi_arch := true
 endif
 ifdef LOCAL_MULTILIB
   multi_arch := true
@@ -640,6 +640,7 @@ endif
 
 arch_dir :=
 is_native :=
+is_native_benchmark :=
 
 $(call create-suite-dependencies)
 

@@ -24,8 +24,14 @@
 
 autogen_test_config_file := $(dir $(LOCAL_BUILT_MODULE))$(LOCAL_MODULE).config
 ifeq (true,$(is_native))
+ifeq (true,$(is_native_benchmark))
+# Auto generating test config file for native_benchmark test
+autogen_test_config_template := $(NATIVE_BENCHMARK_TEST_CONFIG_TEMPLATE)
+else
 # Auto generating test config file for native test
-$(autogen_test_config_file) : $(NATIVE_TEST_CONFIG_TEMPLATE)
+autogen_test_config_template := $(NATIVE_TEST_CONFIG_TEMPLATE)
+endif
+$(autogen_test_config_file) : $(autogen_test_config_template)
 	@echo "Auto generating test config $(notdir $@)"
 	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE)&g' $^ > $@
 my_auto_generate_config := true
