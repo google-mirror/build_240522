@@ -151,6 +151,7 @@ BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_static_java
 BUILD_HOST_TEST_CONFIG := $(BUILD_SYSTEM)/host_test_config.mk
 BUILD_TARGET_TEST_CONFIG := $(BUILD_SYSTEM)/target_test_config.mk
 
+CC_BENCHMARK_TEST_CONFIG_TEMPLATE := $(BUILD_SYSTEM)/cc_benchmark_test_config_template.xml
 INSTRUMENTATION_TEST_CONFIG_TEMPLATE := $(BUILD_SYSTEM)/instrumentation_test_config_template.xml
 NATIVE_TEST_CONFIG_TEMPLATE := $(BUILD_SYSTEM)/native_test_config_template.xml
 EMPTY_TEST_CONFIG := $(BUILD_SYSTEM)/empty_test_config.xml
