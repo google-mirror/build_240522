@@ -426,7 +426,8 @@ class Payload(object):
     payload_file = common.MakeTempFile(prefix="payload-", suffix=".bin")
     cmd = ["brillo_update_payload", "generate",
            "--payload", payload_file,
-           "--target_image", target_file]
+           "--target_image", target_file,
+           "--path_in_image=IMAGES:RADIO"]
     if source_file is not None:
       cmd.extend(["--source_image", source_file])
     cmd.extend(additional_args)
