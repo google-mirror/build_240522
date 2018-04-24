@@ -231,6 +231,9 @@ my_system_modules :=
 
 ifndef LOCAL_IS_HOST_MODULE
   sdk_libs :=
+  # Note: this naming scheme is duplicated in sdk_library.go, and they must be kept in sync.
+  sdk_lib_stub_name = $(1).stubs
+  sdk_lib_system_stub_name = $(1).stubs.system
   ifeq ($(LOCAL_SDK_VERSION),)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
@@ -255,10 +258,15 @@ ifndef LOCAL_IS_HOST_MODULE
     ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
       # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_stubs_current)
+      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call sdk_lib_stub_name,$(lib_name)))
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),system_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_system_stubs_current)
+      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call sdk_lib_system_stub_name,$(lib_name)))
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),test_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_test_stubs_current)
+      ifneq (,$(LOCAL_SDK_LIBRARIES))
+        $(call pretty-error,LOCAL_SDK_LIBRARIES is not yet supported when LOCAL_SDK_VERSION := test_current)
+      endif
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),core_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,core.current.stubs)
     else
