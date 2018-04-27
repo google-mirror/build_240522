@@ -205,6 +205,17 @@ ifdef LOCAL_ANNOTATION_PROCESSORS
   annotation_processor_jars :=
 endif
 
+# When sdk lib name is listed in LOCAL_STATIC_JAVA_LIBRARIES, convert it to the stubs lib name of the sdk lib
+ifeq (current,$(LOCAL_SDK_VERSION))
+  sdk_lib_suffix := .stubs
+else ifeq (test_current,$(LOCAL_SDK_VERSION))
+  sdk_lib_suffix := .stubs.test
+else
+  sdk_lib_suffix := .stubs.system
+endif
+LOCAL_STATIC_JAVA_LIBRARIES := $(foreach lib_name,$(LOCAL_STATIC_JAVA_LIBRARIES),\
+    $(if $(filter $(lib_name),$(JAVA_SDK_LIBRARIES)),$(lib_name)$(sdk_lib_suffix),$(lib_name)))
+
 full_static_java_libs := $(call java-lib-files,$(LOCAL_STATIC_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 full_static_java_header_libs := $(call java-lib-header-files,$(LOCAL_STATIC_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 
@@ -232,6 +243,11 @@ my_system_modules :=
 ifndef LOCAL_IS_HOST_MODULE
   sdk_libs :=
 
+  # When an sdk lib name is listed in LOCAL_JAVA_LIBRARIES, move it to LOCAL_SDK_LIBRARIES, so that
+  # it is correctly redirected to the stubs library.
+  LOCAL_SDK_LIBRARIES += $(filter $(JAVA_SDK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
+  LOCAL_JAVA_LIBRARIES := $(filter-out $(JAVA_SDK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
+
   ifeq ($(LOCAL_SDK_VERSION),)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       # No bootclasspath. But we still need "" to prevent javac from using default host bootclasspath.
@@ -245,6 +261,9 @@ ifndef LOCAL_IS_HOST_MODULE
       LOCAL_JAVA_LIBRARIES := $(filter-out $(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
       my_system_modules := $(DEFAULT_SYSTEM_MODULES)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
+    # When SDK libraries are referenced from modules built without SDK, provide the system stub to them
+    # because it has the largest API surface.
+    sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(lib_name).stubs.system)
   else
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       $(call pretty-error,Must not define both LOCAL_NO_STANDARD_LIBRARIES and LOCAL_SDK_VERSION)
