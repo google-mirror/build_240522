@@ -971,6 +971,11 @@ $(if $(findstring _,$(1)),\
   sdk_public_$(1)_$(or $(2),android))
 endef
 
+# Resolve LOCAL_SDK_VERSION to prebuilt android.jar
+define resolve-android-jar-path
+$(HISTORICAL_SDK_VERSIONS_ROOT)/$(subst core_,,$(subst system_,,$(subst test_,,$(1))))/public/android.jar
+endef
+
 # Resolve LOCAL_SDK_VERSION to prebuilt framework.aidl
 # $(1): An sdk version (LOCAL_SDK_VERSION)
 define resolve-prebuilt-aidl-path
