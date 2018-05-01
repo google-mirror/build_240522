@@ -1600,8 +1600,14 @@ RECOVERY_FROM_BOOT_PATCH := $(INSTALLED_RECOVERYIMAGE_TARGET)
 endif
 endif
 
+.PHONY: unverified-system-image
+unverified-system-image: $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH)
 
-$(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH)
+.PHONY: system-image-verifiers
+system-image-verifiers: assembled_framework_manifest.xml
+
+$(INSTALLED_SYSTEMIMAGE): unverified-system-image
+$(INSTALLED_SYSTEMIMAGE): system-image-verifiers
 	@echo "Install system fs image: $@"
 	$(copy-file-to-target)
 	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
@@ -2008,10 +2014,17 @@ define build-vendorimage-target
   $(hide) $(call assert-max-image-size,$(INSTALLED_VENDORIMAGE_TARGET),$(BOARD_VENDORIMAGE_PARTITION_SIZE))
 endef
 
+.PHONY: unverified-vendor-image
+unverified-vendor-image: $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDORIMAGE_FILES) $(INSTALLED_FILES_FILE_VENDOR) $(BUILD_IMAGE_SRCS) $(DEPMOD) $(BOARD_VENDOR_KERNEL_MODULES)
+	$(build-vendorimage-target)
+
+.PHONY: vendor-image-verifiers
+vendor-image-verifiers: assembled_vendor_manifest.xml
+
 # We just build this directly to the install location.
 INSTALLED_VENDORIMAGE_TARGET := $(BUILT_VENDORIMAGE_TARGET)
-$(INSTALLED_VENDORIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDORIMAGE_FILES) $(INSTALLED_FILES_FILE_VENDOR) $(BUILD_IMAGE_SRCS) $(DEPMOD) $(BOARD_VENDOR_KERNEL_MODULES)
-	$(build-vendorimage-target)
+$(INSTALLED_VENDORIMAGE_TARGET): unverified-vendor-image
+$(INSTALLED_VENDORIMAGE_TARGET): vendor-image-verifiers
 
 .PHONY: vendorimage-nodeps vnod
 vendorimage-nodeps vnod: | $(INTERNAL_USERIMAGES_DEPS) $(DEPMOD)
@@ -2432,6 +2445,62 @@ $(BUILT_OTATOOLS_PACKAGE): $(OTATOOLS) $(OTATOOLS_DEPS) $(OTATOOLS_RELEASETOOLS)
 otatools-package: $(BUILT_OTATOOLS_PACKAGE)
 
 endif # build_ota_package
+
+# -----------------------------------------------------------------
+# Final VINTF manifests including fragments. These are not assembled
+# on the device because it depends on everything in a given device
+# image which defines a vintf_fragment.
+
+include $(CLEAR_VARS)
+LOCAL_MODULE         := assembled_framework_manifest.xml
+LOCAL_MODULE_CLASS   := GEN
+LOCAL_IS_HOST_MODULE := true
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE)
+$(GEN): $(HOST_OUT_EXECUTABLES)/assemble_vintf
+$(GEN): $(BUILT_VENDOR_MATRIX)
+$(GEN): $(BUILT_SYSTEM_MANIFEST)
+$(GEN): unverified-system-image
+	@echo "Verifying system VINTF manifest."
+	PRODUCT_ENFORCE_VINTF_MANIFEST=$(PRODUCT_ENFORCE_VINTF_MANIFEST) \
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf \
+		-c $(BUILT_VENDOR_MATRIX) \
+		-i $(BUILT_SYSTEM_MANIFEST) \
+		$$([ -d $(TARGET_OUT)/etc/vintf/manifest ] && \
+			find $(TARGET_OUT)/etc/vintf/manifest -type f -name "*.xml" | \
+			sed "s/^/-i /" | tr '\n' ' ') -o $@
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ASSEMBLED_FRAMEWORK_MANIFEST := $(LOCAL_BUILT_MODULE)
+
+ifdef BUILT_VENDOR_MANIFEST
+include $(CLEAR_VARS)
+LOCAL_MODULE         := assembled_vendor_manifest.xml
+LOCAL_MODULE_CLASS   := GEN
+LOCAL_IS_HOST_MODULE := true
+ifeq (true,$(strip $(PRODUCT_ENFORCE_VINTF_MANIFEST)))
+ifdef DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE
+# TODO(b/65028233): turn this on globally
+$(GEN): PRIVATE_SYSTEM_ASSEMBLE_VINTF_ENV_VARS := VINTF_ENFORCE_NO_UNUSED_HALS=true
+endif
+endif
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE)
+$(GEN): $(HOST_OUT_EXECUTABLES)/assemble_vintf
+$(GEN): $(BUILT_SYSTEM_MATRIX)
+$(GEN): $(BUILT_VENDOR_MANIFEST)
+$(GEN): unverified-vendor-image
+	@echo "Verifying vendor VINTF manifest."
+	PRODUCT_ENFORCE_VINTF_MANIFEST=$(PRODUCT_ENFORCE_VINTF_MANIFEST) \
+	$(PRIVATE_SYSTEM_ASSEMBLE_VINTF_ENV_VARS) \
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf \
+		-c $(BUILT_SYSTEM_MATRIX) \
+		-i $(BUILT_VENDOR_MANIFEST) \
+		$$([ -d $(TARGET_OUT_VENDOR)/etc/vintf/manifest ] && \
+			find $(TARGET_OUT_VENDOR)/etc/vintf/manifest -type f -name "*.xml" | \
+			sed "s/^/-i /" | tr '\n' ' ') -o $@
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ASSEMBLED_VENDOR_MANIFEST := $(LOCAL_BUILT_MODULE)
+endif
 
 # -----------------------------------------------------------------
 # A zip of the directories that map to the target filesystem.
