@@ -2434,6 +2434,68 @@ otatools-package: $(BUILT_OTATOOLS_PACKAGE)
 endif # build_ota_package
 
 # -----------------------------------------------------------------
+# Final VINTF manifests including fragments. These are not assembled
+# on the device because it depends on everything in a given device
+# image which defines a vintf_fragment.
+
+include $(CLEAR_VARS)
+LOCAL_MODULE         := assembled_framework_manifest.xml
+LOCAL_MODULE_CLASS   := GEN
+LOCAL_IS_HOST_MODULE := true
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE)
+$(GEN): $(HOST_OUT_EXECUTABLES)/assemble_vintf
+$(GEN): $(BUILT_VENDOR_MATRIX)
+$(GEN): $(BUILT_SYSTEM_MANIFEST)
+$(GEN): $(FULL_SYSTEMIMAGE_DEPS)
+	@echo "Verifying system VINTF manifest."
+	PRODUCT_ENFORCE_VINTF_MANIFEST=$(PRODUCT_ENFORCE_VINTF_MANIFEST) \
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf \
+		-c $(BUILT_VENDOR_MATRIX) \
+		-i $(BUILT_SYSTEM_MANIFEST) \
+		$$([ -d $(TARGET_OUT)/etc/vintf/manifest ] && \
+			find $(TARGET_OUT)/etc/vintf/manifest -type f -name "*.xml" | \
+			sed "s/^/-i /" | tr '\n' ' ') -o $@
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ASSEMBLED_FRAMEWORK_MANIFEST := $(LOCAL_BUILT_MODULE)
+
+ifdef BUILT_VENDOR_MANIFEST
+include $(CLEAR_VARS)
+LOCAL_MODULE         := assembled_vendor_manifest.xml
+LOCAL_MODULE_CLASS   := GEN
+LOCAL_IS_HOST_MODULE := true
+ifeq (true,$(strip $(PRODUCT_ENFORCE_VINTF_MANIFEST)))
+ifdef DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE
+# TODO(b/65028233): turn this on globally
+$(GEN): PRIVATE_SYSTEM_ASSEMBLE_VINTF_ENV_VARS := VINTF_ENFORCE_NO_UNUSED_HALS=true
+endif
+endif
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE)
+$(GEN): $(HOST_OUT_EXECUTABLES)/assemble_vintf
+$(GEN): $(BUILT_SYSTEM_MATRIX)
+$(GEN): $(BUILT_VENDOR_MANIFEST)
+$(GEN): $(INSTALLED_VENDORIMAGE_TARGET)
+	@echo "Verifying vendor VINTF manifest."
+	PRODUCT_ENFORCE_VINTF_MANIFEST=$(PRODUCT_ENFORCE_VINTF_MANIFEST) \
+	$(PRIVATE_SYSTEM_ASSEMBLE_VINTF_ENV_VARS) \
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf \
+		-c $(BUILT_SYSTEM_MATRIX) \
+		-i $(BUILT_VENDOR_MANIFEST) \
+		$$([ -d $(TARGET_OUT_VENDOR)/etc/vintf/manifest ] && \
+			find $(TARGET_OUT_VENDOR)/etc/vintf/manifest -type f -name "*.xml" | \
+			sed "s/^/-i /" | tr '\n' ' ') -o $@
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ASSEMBLED_VENDOR_MANIFEST := $(LOCAL_BUILT_MODULE)
+endif
+
+.PHONY: verify_vintf_matrices
+verify_vintf_matrices: assembled_framework_manifest.xml
+ifdef BUILT_VENDOR_MANIFEST
+verify_vintf_matrices: assembled_vendor_manifest.xml
+endif
+
+# -----------------------------------------------------------------
 # A zip of the directories that map to the target filesystem.
 # This zip can be used to create an OTA package or filesystem image
 # as a post-build step.
