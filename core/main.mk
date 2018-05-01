@@ -44,6 +44,9 @@ $(DEFAULT_GOAL): droid_targets
 .PHONY: droid_targets
 droid_targets:
 
+# Verification targets
+droid_targets: verify_vintf_matrices
+
 # Set up various standard variables based on configuration
 # and host information.
 include $(BUILD_SYSTEM)/config.mk
