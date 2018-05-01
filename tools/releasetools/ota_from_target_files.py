@@ -1694,8 +1694,7 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
   return target_file
 
 
-def WriteABOTAPackageWithBrilloScript(target_file, output_file,
-                                      source_file=None):
+def WriteAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
   if not OPTIONS.no_signing:
@@ -1775,6 +1774,67 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
       StreamingPropertyFiles(),
   )
   FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
+
+
+def WriteNonAbOtaPackage(target_file, output_file, source_file):
+  # Sanity check the loaded info dicts first.
+  if OPTIONS.info_dict.get("no_recovery") == "true":
+    raise common.ExternalError(
+        "--- target build has specified no recovery ---")
+
+  # Non-A/B OTAs rely on /cache partition to store temporary files.
+  cache_size = OPTIONS.info_dict.get("cache_size")
+  if cache_size is None:
+    print("--- can't determine the cache partition size ---")
+  OPTIONS.cache_size = cache_size
+
+  if OPTIONS.extra_script is not None:
+    OPTIONS.extra_script = open(OPTIONS.extra_script).read()
+
+  if OPTIONS.extracted_input is not None:
+    OPTIONS.input_tmp = OPTIONS.extracted_input
+  else:
+    print("unzipping target target-files...")
+    OPTIONS.input_tmp = common.UnzipTemp(target_file, UNZIP_PATTERN)
+  OPTIONS.target_tmp = OPTIONS.input_tmp
+
+  if source_file is not None:
+    print("unzipping source target-files...")
+    OPTIONS.source_tmp = common.UnzipTemp(source_file, UNZIP_PATTERN)
+
+  # If the caller explicitly specified the device-specific extensions path via
+  # -s / --device_specific, use that. Otherwise, use META/releasetools.py if it
+  # is present in the target target_files. Otherwise, take the path of the file
+  # from 'tool_extensions' in the info dict and look for that in the local
+  # filesystem, relative to the current directory.
+  if OPTIONS.device_specific is None:
+    from_input = os.path.join(OPTIONS.input_tmp, "META", "releasetools.py")
+    if os.path.exists(from_input):
+      print("(using device-specific extensions from target_files)")
+      OPTIONS.device_specific = from_input
+    else:
+      OPTIONS.device_specific = OPTIONS.info_dict.get("tool_extensions")
+
+  if OPTIONS.device_specific is not None:
+    OPTIONS.device_specific = os.path.abspath(OPTIONS.device_specific)
+
+  # Generate a full OTA.
+  if source_file is None:
+    with zipfile.ZipFile(target_file) as input_zip:
+      WriteFullOTAPackage(input_zip, output_file)
+
+  # Generate an incremental OTA.
+  else:
+    with zipfile.ZipFile(target_file) as input_zip, \
+        zipfile.ZipFile(source_file) as source_zip:
+      WriteBlockIncrementalOTAPackage(
+          input_zip, source_zip, output_file)
+
+    if OPTIONS.log_diff:
+      with open(OPTIONS.log_diff, 'w') as out_file:
+        import target_files_diff
+        target_files_diff.recursiveDiff(
+            '', OPTIONS.source_tmp, OPTIONS.input_tmp, out_file)
 
 
 def main(argv):
@@ -1922,75 +1982,15 @@ def main(argv):
     OPTIONS.key_passwords = common.GetKeyPasswords([OPTIONS.package_key])
 
   if ab_update:
-    WriteABOTAPackageWithBrilloScript(
+    WriteAbOtaPackage(
         target_file=args[0],
         output_file=args[1],
         source_file=OPTIONS.incremental_source)
-
-    print("done.")
-    return
-
-  # Sanity check the loaded info dicts first.
-  if OPTIONS.info_dict.get("no_recovery") == "true":
-    raise common.ExternalError(
-        "--- target build has specified no recovery ---")
-
-  # Non-A/B OTAs rely on /cache partition to store temporary files.
-  cache_size = OPTIONS.info_dict.get("cache_size")
-  if cache_size is None:
-    print("--- can't determine the cache partition size ---")
-  OPTIONS.cache_size = cache_size
-
-  if OPTIONS.extra_script is not None:
-    OPTIONS.extra_script = open(OPTIONS.extra_script).read()
-
-  if OPTIONS.extracted_input is not None:
-    OPTIONS.input_tmp = OPTIONS.extracted_input
   else:
-    print("unzipping target target-files...")
-    OPTIONS.input_tmp = common.UnzipTemp(args[0], UNZIP_PATTERN)
-  OPTIONS.target_tmp = OPTIONS.input_tmp
-
-  # If the caller explicitly specified the device-specific extensions path via
-  # -s / --device_specific, use that. Otherwise, use META/releasetools.py if it
-  # is present in the target target_files. Otherwise, take the path of the file
-  # from 'tool_extensions' in the info dict and look for that in the local
-  # filesystem, relative to the current directory.
-  if OPTIONS.device_specific is None:
-    from_input = os.path.join(OPTIONS.input_tmp, "META", "releasetools.py")
-    if os.path.exists(from_input):
-      print("(using device-specific extensions from target_files)")
-      OPTIONS.device_specific = from_input
-    else:
-      OPTIONS.device_specific = OPTIONS.info_dict.get("tool_extensions")
-
-  if OPTIONS.device_specific is not None:
-    OPTIONS.device_specific = os.path.abspath(OPTIONS.device_specific)
-
-  # Generate a full OTA.
-  if OPTIONS.incremental_source is None:
-    with zipfile.ZipFile(args[0], 'r') as input_zip:
-      WriteFullOTAPackage(
-          input_zip,
-          output_file=args[1])
-
-  # Generate an incremental OTA.
-  else:
-    print("unzipping source target-files...")
-    OPTIONS.source_tmp = common.UnzipTemp(
-        OPTIONS.incremental_source, UNZIP_PATTERN)
-    with zipfile.ZipFile(args[0], 'r') as input_zip, \
-        zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
-      WriteBlockIncrementalOTAPackage(
-          input_zip,
-          source_zip,
-          output_file=args[1])
-
-    if OPTIONS.log_diff:
-      with open(OPTIONS.log_diff, 'w') as out_file:
-        import target_files_diff
-        target_files_diff.recursiveDiff(
-            '', OPTIONS.source_tmp, OPTIONS.input_tmp, out_file)
+    WriteNonAbOTAPackage(
+        target_file=args[0],
+        output_file=args[1],
+        source_file=OPTIONS.incremental_source)
 
   print("done.")
 
