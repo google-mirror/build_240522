@@ -2602,8 +2602,9 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(HOST_OUT_EXECUTABLES)/imgdiff \
 		$(HOST_OUT_EXECUTABLES)/bsdiff \
 		$(BUILD_IMAGE_SRCS) \
-		$(HOST_OUT_EXECUTABLES)/assemble_vintf \
-		$(BUILT_VENDOR_MANIFEST) \
+		$(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST) \
+		$(BUILT_ASSEMBLED_VENDOR_MANIFEST) \
+		$(BUILT_SYSTEM_MATRIX) \
 		$(BUILT_VENDOR_MATRIX) \
 		| $(ACP)
 	@echo "Package target files: $@"
@@ -2880,15 +2881,9 @@ ifdef INSTALLED_SYSTEMOTHERIMAGE_TARGET
 endif
 	@# Metadata for compatibility verification.
 	$(hide) cp $(BUILT_SYSTEM_MATRIX) $(zip_root)/META/system_matrix.xml
-	$(hide) $(HOST_OUT_EXECUTABLES)/assemble_vintf \
-		-i $(BUILT_SYSTEM_MANIFEST) $$(find $(zip_root)/SYSTEM/etc/vintf/manifest -type f -name "*.xml" | \
-			sed "s/^/-i /" | tr '\n' ' ') \
-		-o $(zip_root)/META/system_manifest.xml
+	$(hide) cp $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST) $(zip_root)/META/system_manifest.xml
 ifdef BUILT_VENDOR_MANIFEST
-	$(hide) $(HOST_OUT_EXECUTABLES)/assemble_vintf \
-		-i $(BUILT_VENDOR_MANIFEST) $$(find $(zip_root)/VENDOR/etc/vintf/manifest -type f -name "*.xml" | \
-			sed "s/^/-i /" | tr '\n' ' ') \
-		-o $(zip_root)/META/vendor_manifest.xml
+	$(hide) cp $(BUILT_ASSEMBLED_VENDOR_MANIFEST) $(zip_root)/META/vendor_manifest.xml
 endif
 ifdef BUILT_VENDOR_MATRIX
 	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
