@@ -13,6 +13,7 @@ $(MODULE_INFO_JSON):
 			'"installed": [$(foreach w,$(sort $(ALL_MODULES.$(m).INSTALLED)),"$(w)", )], ' \
 			'"compatibility_suites": [$(foreach w,$(sort $(ALL_MODULES.$(m).COMPATIBILITY_SUITES)),"$(w)", )], ' \
 			'"auto_test_config": [$(ALL_MODULES.$(m).auto_test_config)], ' \
+			'"both_arch_32": [$(ALL_MODULES.$(m).BOTH_ARCH_32)], ' \
 			'},\n' \
 	 ) | sed -e 's/, *\]/]/g' -e 's/, *\}/ }/g' -e '$$s/,$$//' >> $@
 	$(hide) echo '}' >> $@
