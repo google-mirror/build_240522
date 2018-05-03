@@ -2671,6 +2671,18 @@ $(2): $(1) $(XMLLINT)
 	$$(copy-file-to-target)
 endef
 
+# Copies many xml files and check they are well-formed.
+# $(1): The xml files to copy.  Each entry is a ':' separated src:dst pair
+# Evaluates to the list of the dst files (ie suitable for a dependency list)
+define copy-many-xml-files-checked
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(eval $(call copy-xml-file-checked,$(_cmf_src),$(_cmf_dest))) \
+    $(_cmf_dest)))
+endef
+
 # Copy the file only if it is a well-formed manifest file. For use viea $(eval)
 # $(1): source file
 # $(2): destination file
@@ -3122,9 +3134,12 @@ endef
 define create-suite-dependencies
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval COMPATIBILITY.$(suite).FILES := \
-    $$(COMPATIBILITY.$(suite).FILES) $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))))) \
+    $$(COMPATIBILITY.$(suite).FILES) $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))) \
+      $$(foreach f,$$(my_compat_dist_config_$(suite)),$$(call word-colon,2,$$(f))))) \
 $(eval $(my_all_targets) : $(call copy-many-files, \
-  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_$(suite))))))
+  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_$(suite))))) \
+  $(call copy-many-xml-files-checked, \
+  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite)))))) 
 endef
 
 ###########################################################

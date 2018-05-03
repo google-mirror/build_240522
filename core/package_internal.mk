@@ -702,7 +702,8 @@ ifdef LOCAL_COMPATIBILITY_SUITE
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
     $(foreach s,$(my_split_suffixes),\
-      $(intermediates)/package_$(s).apk:$(dir)/$(LOCAL_MODULE)_$(s).apk))))
+      $(intermediates)/package_$(s).apk:$(dir)/$(LOCAL_MODULE)_$(s).apk))) \
+  $(eval my_compat_dist_config_$(suite) := ))
 
 $(call create-suite-dependencies)
 
