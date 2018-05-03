@@ -1626,23 +1626,35 @@ class BlockDifference(object):
     # incremental OTA
     else:
       if touched_blocks_only:
-        ranges = self.touched_src_ranges
-        expected_sha1 = self.touched_src_sha1
+        src_ranges = self.touched_src_ranges
+        src_sha1 = self.touched_src_sha1
       else:
-        ranges = self.src.care_map.subtract(self.src.clobbered_blocks)
-        expected_sha1 = self.src.TotalSha1()
+        src_ranges = self.src.care_map.subtract(self.src.clobbered_blocks)
+        src_sha1 = self.src.TotalSha1()
 
       # No blocks to be checked, skipping.
-      if not ranges:
+      if not src_ranges:
         return
 
-      ranges_str = ranges.to_string_raw()
-      script.AppendExtra(('if (range_sha1("%s", "%s") == "%s" || '
-                          'block_image_verify("%s", '
-                          'package_extract_file("%s.transfer.list"), '
-                          '"%s.new.dat", "%s.patch.dat")) then') % (
-                          self.device, ranges_str, expected_sha1,
-                          self.device, partition, partition, partition))
+      tgt_ranges = self.tgt.care_map
+      tgt_sha1 = self.tgt.TotalSha1(include_clobbered_blocks=True)
+
+      script.AppendExtra((
+          'if (range_sha1("{device}",\n'
+          '               "{src_ranges}") == "{src_sha1}" ||\n'
+          '    range_sha1("{device}",\n'
+          '               "{tgt_ranges}") == "{tgt_sha1}" ||\n'
+          '    block_image_verify(\n'
+          '        "{device}",\n'
+          '        package_extract_file("{partition}.transfer.list"),\n'
+          '        "{partition}.new.dat",\n'
+          '        "{partition}.patch.dat")) then').format(
+              device=self.device,
+              partition=partition,
+              src_ranges=src_ranges.to_string_raw(),
+              src_sha1=src_sha1,
+              tgt_ranges=tgt_ranges.to_string_raw(),
+              tgt_sha1=tgt_sha1))
       script.Print('Verified %s image...' % (partition,))
       script.AppendExtra('else')
 
@@ -1669,8 +1681,9 @@ class BlockDifference(object):
             '"{partition}.new.dat", "{partition}.patch.dat"), '
             'ui_print("{partition} recovered successfully."), '
             'abort("E{code}: {partition} partition fails to recover"));\n'
-            'endif;').format(device=self.device, ranges=ranges_str,
-                             partition=partition, code=code))
+            'endif;').format(
+                device=self.device, ranges=src_ranges.to_string_raw(),
+                partition=partition, code=code))
 
       # Abort the OTA update. Note that the incremental OTA cannot be applied
       # even if it may match the checksum of the target partition.
