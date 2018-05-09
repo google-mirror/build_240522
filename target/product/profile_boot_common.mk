@@ -33,6 +33,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jitmaxsize=32m \
     dalvik.vm.usejitprofiles=true \
     dalvik.vm.hot-startup-method-samples=256 \
-    dalvik.vm.extra-opts=-Xps-profile-boot-class-path \
     dalvik.vm.profilesystemserver=true \
     dalvik.vm.profilebootimage=true
