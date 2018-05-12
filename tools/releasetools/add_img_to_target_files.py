@@ -55,6 +55,7 @@ import uuid
 import zipfile
 
 import build_image
+import care_map_pb2
 import common
 import rangelib
 import sparse_img
@@ -103,8 +104,9 @@ def GetCareMap(which, imgname):
     imgname: The filename of the image.
 
   Returns:
-    (which, care_map_ranges): care_map_ranges is the raw string of the care_map
-    RangeSet.
+    A dictionary of the partition info
+      name: name of the partition, e.g. system, vendor
+      ranges: the raw string of the care_map RangeSet.
   """
   assert which in PARTITIONS_WITH_CARE_MAP
 
@@ -117,7 +119,7 @@ def GetCareMap(which, imgname):
     care_map_ranges = care_map_ranges.intersect(rangelib.RangeSet(
         "0-%d" % (adjusted_blocks,)))
 
-  return [which, care_map_ranges.to_string_raw()]
+  return {"name": which, "ranges": care_map_ranges.to_string_raw()}
 
 
 def AddSystem(output_zip, recovery_img=None, boot_img=None):
@@ -519,8 +521,8 @@ def CheckAbOtaImages(output_zip, ab_partitions):
     assert available, "Failed to find " + img_name
 
 
-def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
-  """Generates and adds care_map.txt for system and vendor partitions.
+def AddCareMapForAbOta(output_zip, ab_partitions, image_paths):
+  """Generates and adds care_map.pb for system and vendor partitions.
 
   Args:
     output_zip: The output zip file (needs to be already open), or None to
@@ -540,15 +542,23 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
         OPTIONS.info_dict.get(avb_hashtree_enable) == "true"):
       image_path = image_paths[partition]
       assert os.path.exists(image_path)
-      care_map_list += GetCareMap(partition, image_path)
+      care_map_list.append(GetCareMap(partition, image_path))
 
   if care_map_list:
-    care_map_path = "META/care_map.txt"
+    care_map_path = "META/care_map.pb"
+    care_map_proto = care_map_pb2.CareMap()
+    for info_dict in care_map_list:
+      info = care_map_proto.partitions.add()
+      info.name = info_dict.get("name", "")
+      info.ranges = info_dict.get("ranges", "")
+      info.fingerprint = info_dict.get("fingerprint", "")
+
     if output_zip and care_map_path not in output_zip.namelist():
-      common.ZipWriteStr(output_zip, care_map_path, '\n'.join(care_map_list))
+      common.ZipWriteStr(output_zip, care_map_path,
+                         care_map_proto.SerializeToString())
     else:
       with open(os.path.join(OPTIONS.input_tmp, care_map_path), 'w') as fp:
-        fp.write('\n'.join(care_map_list))
+        fp.write(care_map_proto.SerializeToString())
       if output_zip:
         OPTIONS.replace_updated_files_list.append(care_map_path)
 
@@ -749,7 +759,7 @@ def AddImagesToTargetFiles(filename):
 
     # Generate care_map.txt for system and vendor partitions (if present), then
     # write this file to target_files package.
-    AddCareMapTxtForAbOta(output_zip, ab_partitions, partitions)
+    AddCareMapForAbOta(output_zip, ab_partitions, partitions)
 
   # Radio images that need to be packed into IMAGES/, and product-img.zip.
   pack_radioimages_txt = os.path.join(

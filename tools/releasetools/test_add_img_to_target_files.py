@@ -19,10 +19,11 @@ import os.path
 import unittest
 import zipfile
 
+import care_map_pb2
 import common
 import test_utils
 from add_img_to_target_files import (
-    AddCareMapTxtForAbOta, AddPackRadioImages, CheckAbOtaImages, GetCareMap)
+  AddCareMapForAbOta, AddPackRadioImages, CheckAbOtaImages, GetCareMap)
 from rangelib import RangeSet
 
 
@@ -148,39 +149,62 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     }
     return image_paths
 
+  def _test_ValidateCareMapPb(self, expected, care_map_string):
+    """Helper function to validate the contents of the care_map protobuf
+      Args:
+        expected: A dictionary from partition name to detailed partition
+                  info including name, ranges, fingerprint.
+        care_map_string: Serialized protobuf message of the care_map.
+      """
+
+    care_map = care_map_pb2.CareMap()
+    self.assertTrue(care_map.ParseFromString(care_map_string))
+    self.assertEqual(len(care_map.partitions), len(expected))
+    for partition in care_map.partitions:
+      self.assertTrue(partition.name in expected)
+      self.assertEqual(partition.name, expected.get(partition.name).get("name"))
+      self.assertEqual(partition.ranges,
+                       expected.get(partition.name).get("ranges"))
+      self.assertEqual(partition.fingerprint,
+                       expected.get(partition.name).get("fingerprint"))
+
   def test_AddCareMapTxtForAbOta(self):
     image_paths = self._test_AddCareMapTxtForAbOta()
 
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
-    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
     with open(care_map_file, 'r') as verify_fp:
       care_map = verify_fp.read()
 
-    lines = care_map.split('\n')
-    self.assertEqual(4, len(lines))
-    self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
-    self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    expected = {"system" : {"name" : "system",
+                            "ranges" : RangeSet("0-5 10-15").to_string_raw(),
+                            "fingerprint" : ""},
+                "vendor" : {"name" : "vendor",
+                            "ranges" : RangeSet("0-9").to_string_raw(),
+                            "fingerprint" : ""}}
+
+    self._test_ValidateCareMapPb(expected, care_map)
 
   def test_AddCareMapTxtForAbOta_withNonCareMapPartitions(self):
     """Partitions without care_map should be ignored."""
     image_paths = self._test_AddCareMapTxtForAbOta()
 
-    AddCareMapTxtForAbOta(
+    AddCareMapForAbOta(
         None, ['boot', 'system', 'vendor', 'vbmeta'], image_paths)
 
-    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
     with open(care_map_file, 'r') as verify_fp:
       care_map = verify_fp.read()
 
-    lines = care_map.split('\n')
-    self.assertEqual(4, len(lines))
-    self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
-    self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    expected = {"system" : {"name" : "system",
+                            "ranges" : RangeSet("0-5 10-15").to_string_raw(),
+                            "fingerprint" : ""},
+                "vendor" : {"name" : "vendor",
+                            "ranges" : RangeSet("0-9").to_string_raw(),
+                            "fingerprint" : ""}}
+
+    self._test_ValidateCareMapPb(expected, care_map)
 
   def test_AddCareMapTxtForAbOta_withAvb(self):
     """Tests the case for device using AVB."""
@@ -190,33 +214,35 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         'avb_vendor_hashtree_enable' : 'true',
     }
 
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
-    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
     with open(care_map_file, 'r') as verify_fp:
       care_map = verify_fp.read()
 
-    lines = care_map.split('\n')
-    self.assertEqual(4, len(lines))
-    self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
-    self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    expected = {"system" : {"name" : "system",
+                            "ranges" : RangeSet("0-5 10-15").to_string_raw(),
+                            "fingerprint" : ""},
+                "vendor" : {"name" : "vendor",
+                            "ranges" : RangeSet("0-9").to_string_raw(),
+                            "fingerprint" : ""}}
+
+    self._test_ValidateCareMapPb(expected, care_map)
 
   def test_AddCareMapTxtForAbOta_verityNotEnabled(self):
     """No care_map.txt should be generated if verity not enabled."""
     image_paths = self._test_AddCareMapTxtForAbOta()
     OPTIONS.info_dict = {}
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
-    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
     self.assertFalse(os.path.exists(care_map_file))
 
   def test_AddCareMapTxtForAbOta_missingImageFile(self):
     """Missing image file should be considered fatal."""
     image_paths = self._test_AddCareMapTxtForAbOta()
     image_paths['vendor'] = ''
-    self.assertRaises(AssertionError, AddCareMapTxtForAbOta, None,
+    self.assertRaises(AssertionError, AddCareMapForAbOta, None,
                       ['system', 'vendor'], image_paths)
 
   def test_AddCareMapTxtForAbOta_zipOutput(self):
@@ -225,17 +251,19 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
 
     output_file = common.MakeTempFile(suffix='.zip')
     with zipfile.ZipFile(output_file, 'w') as output_zip:
-      AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)
+      AddCareMapForAbOta(output_zip, ['system', 'vendor'], image_paths)
 
     with zipfile.ZipFile(output_file, 'r') as verify_zip:
-      care_map = verify_zip.read('META/care_map.txt').decode('ascii')
+      care_map = verify_zip.read('META/care_map.pb')
 
-    lines = care_map.split('\n')
-    self.assertEqual(4, len(lines))
-    self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
-    self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    expected = {"system" : {"name" : "system",
+                            "ranges" : RangeSet("0-5 10-15").to_string_raw(),
+                            "fingerprint" : ""},
+                "vendor" : {"name" : "vendor",
+                            "ranges" : RangeSet("0-9").to_string_raw(),
+                            "fingerprint" : ""}}
+
+    self._test_ValidateCareMapPb(expected, care_map)
 
   def test_AddCareMapTxtForAbOta_zipOutput_careMapEntryExists(self):
     """Tests the case with ZIP output which already has care_map entry."""
@@ -244,25 +272,27 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     output_file = common.MakeTempFile(suffix='.zip')
     with zipfile.ZipFile(output_file, 'w') as output_zip:
       # Create an existing META/care_map.txt entry.
-      common.ZipWriteStr(output_zip, 'META/care_map.txt', 'dummy care_map.txt')
+      common.ZipWriteStr(output_zip, 'META/care_map.pb', 'dummy care_map.pb')
 
       # Request to add META/care_map.txt again.
-      AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)
+      AddCareMapForAbOta(output_zip, ['system', 'vendor'], image_paths)
 
     # The one under OPTIONS.input_tmp must have been replaced.
-    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
     with open(care_map_file, 'r') as verify_fp:
       care_map = verify_fp.read()
 
-    lines = care_map.split('\n')
-    self.assertEqual(4, len(lines))
-    self.assertEqual('system', lines[0])
-    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), lines[1])
-    self.assertEqual('vendor', lines[2])
-    self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
+    expected = {"system" : {"name" : "system",
+                            "ranges" : RangeSet("0-5 10-15").to_string_raw(),
+                            "fingerprint" : ""},
+                "vendor" : {"name" : "vendor",
+                            "ranges" : RangeSet("0-9").to_string_raw(),
+                            "fingerprint" : ""}}
+
+    self._test_ValidateCareMapPb(expected, care_map)
 
     # The existing entry should be scheduled to be replaced.
-    self.assertIn('META/care_map.txt', OPTIONS.replace_updated_files_list)
+    self.assertIn('META/care_map.pb', OPTIONS.replace_updated_files_list)
 
   def test_GetCareMap(self):
     sparse_image = test_utils.construct_sparse_image([
@@ -272,9 +302,10 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     OPTIONS.info_dict = {
         'system_adjusted_partition_size' : 12,
     }
-    name, care_map = GetCareMap('system', sparse_image)
-    self.assertEqual('system', name)
-    self.assertEqual(RangeSet("0-5 10-12").to_string_raw(), care_map)
+    info_dict = GetCareMap('system', sparse_image)
+    self.assertEqual('system', info_dict.get("name"))
+    self.assertEqual(RangeSet("0-5 10-12").to_string_raw(),
+                     info_dict.get("ranges"))
 
   def test_GetCareMap_invalidPartition(self):
     self.assertRaises(AssertionError, GetCareMap, 'oem', None)
