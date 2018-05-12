@@ -22,7 +22,7 @@ import zipfile
 import common
 import test_utils
 from add_img_to_target_files import (
-    AddCareMapTxtForAbOta, AddPackRadioImages, CheckAbOtaImages, GetCareMap)
+  AddCareMapForAbOta, AddPackRadioImages, CheckAbOtaImages, GetCareMap)
 from rangelib import RangeSet
 
 
@@ -151,7 +151,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
   def test_AddCareMapTxtForAbOta(self):
     image_paths = self._test_AddCareMapTxtForAbOta()
 
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
     with open(care_map_file, 'r') as verify_fp:
@@ -168,7 +168,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     """Partitions without care_map should be ignored."""
     image_paths = self._test_AddCareMapTxtForAbOta()
 
-    AddCareMapTxtForAbOta(
+    AddCareMapForAbOta(
         None, ['boot', 'system', 'vendor', 'vbmeta'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
@@ -190,7 +190,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         'avb_vendor_hashtree_enable' : 'true',
     }
 
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
     with open(care_map_file, 'r') as verify_fp:
@@ -207,7 +207,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     """No care_map.txt should be generated if verity not enabled."""
     image_paths = self._test_AddCareMapTxtForAbOta()
     OPTIONS.info_dict = {}
-    AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
     self.assertFalse(os.path.exists(care_map_file))
@@ -216,7 +216,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     """Missing image file should be considered fatal."""
     image_paths = self._test_AddCareMapTxtForAbOta()
     image_paths['vendor'] = ''
-    self.assertRaises(AssertionError, AddCareMapTxtForAbOta, None,
+    self.assertRaises(AssertionError, AddCareMapForAbOta, None,
                       ['system', 'vendor'], image_paths)
 
   def test_AddCareMapTxtForAbOta_zipOutput(self):
@@ -225,7 +225,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
 
     output_file = common.MakeTempFile(suffix='.zip')
     with zipfile.ZipFile(output_file, 'w') as output_zip:
-      AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)
+      AddCareMapForAbOta(output_zip, ['system', 'vendor'], image_paths)
 
     with zipfile.ZipFile(output_file, 'r') as verify_zip:
       care_map = verify_zip.read('META/care_map.txt').decode('ascii')
@@ -247,7 +247,7 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
       common.ZipWriteStr(output_zip, 'META/care_map.txt', 'dummy care_map.txt')
 
       # Request to add META/care_map.txt again.
-      AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)
+      AddCareMapForAbOta(output_zip, ['system', 'vendor'], image_paths)
 
     # The one under OPTIONS.input_tmp must have been replaced.
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.txt')
