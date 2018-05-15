@@ -113,6 +113,20 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndk-sp
 
+# WiFi
+PRODUCT_PACKAGES += \
+	createns \
+	dhcpclient \
+	dhcpserver \
+	execns \
+	hostapd \
+	hostapd_nohidl \
+	ip \
+	ipv6proxy \
+	iw \
+	wificond \
+	wpa_supplicant \
+
 PRODUCT_COPY_FILES += \
     device/generic/goldfish/init.ranchu-core.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ranchu-core.sh \
     device/generic/goldfish/init.ranchu-net.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ranchu-net.sh \
