@@ -25,11 +25,14 @@ ifeq (,$(filter true, $(WITHOUT_CHECK_API) $(TARGET_BUILD_PDK)))
 # Run the checkapi rules by default.
 droidcore: checkapi
 
-last_released_sdk_version := $(lastword $(call numerically_sort, \
-            $(filter-out current, \
-                $(patsubst $(SRC_API_DIR)/%.txt,%, $(wildcard $(SRC_API_DIR)/*.txt)) \
-             )\
-        ))
+last_released_sdk_version := \
+    $(lastword $(call numerically_sort, \
+        $(patsubst \
+            $(HISTORICAL_SDK_VERSIONS_ROOT)/%/public/api/android.txt,\
+            %,\
+            $(wildcard $(HISTORICAL_SDK_VERSIONS_ROOT)/*/public/api/android.txt)\
+        ) \
+    ))
 
 .PHONY: check-public-api
 checkapi : check-public-api
@@ -45,7 +48,7 @@ checkapi : check-public-api
 # SDK version.
 $(eval $(call check-api, \
     checkpublicapi-last, \
-    $(SRC_API_DIR)/$(last_released_sdk_version).txt, \
+    $(HISTORICAL_SDK_VERSIONS_ROOT)/$(last_released_sdk_version)/public/api/android.txt, \
     $(INTERNAL_PLATFORM_API_FILE), \
     frameworks/base/api/removed.txt, \
     $(INTERNAL_PLATFORM_REMOVED_API_FILE), \
@@ -54,7 +57,7 @@ $(eval $(call check-api, \
     -error 16 -error 17 -error 18 , \
     cat $(BUILD_SYSTEM)/apicheck_msg_last.txt, \
     check-public-api, \
-    $(call doc-timestamp-for,api-stubs) \
+    $(OUT_DOCS)/api-stubs-docs-stubs.srcjar \
     ))
 
 # Check that the API we're building hasn't changed from the not-yet-released
@@ -71,7 +74,7 @@ $(eval $(call check-api, \
     -error 25 -error 26 -error 27, \
     cat $(BUILD_SYSTEM)/apicheck_msg_current.txt, \
     check-public-api, \
-    $(call doc-timestamp-for,api-stubs) \
+    $(OUT_DOCS)/api-stubs-docs-stubs.srcjar \
     ))
 
 .PHONY: update-public-api
@@ -91,7 +94,7 @@ checkapi : check-system-api
 # SDK version.
 $(eval $(call check-api, \
     checksystemapi-last, \
-    $(SRC_SYSTEM_API_DIR)/$(last_released_sdk_version).txt, \
+    $(HISTORICAL_SDK_VERSIONS_ROOT)/$(last_released_sdk_version)/system/api/android.txt, \
     $(INTERNAL_PLATFORM_SYSTEM_API_FILE), \
     frameworks/base/api/system-removed.txt, \
     $(INTERNAL_PLATFORM_SYSTEM_REMOVED_API_FILE), \
@@ -100,7 +103,7 @@ $(eval $(call check-api, \
     -error 16 -error 17 -error 18 , \
     cat $(BUILD_SYSTEM)/apicheck_msg_last.txt, \
     check-system-api, \
-    $(call doc-timestamp-for,system-api-stubs) \
+    $(OUT_DOCS)/system-api-stubs-docs-stubs.srcjar \
     ))
 
 # Check that the System API we're building hasn't changed from the not-yet-released
@@ -117,7 +120,7 @@ $(eval $(call check-api, \
     -error 25 -error 26 -error 27, \
     cat $(BUILD_SYSTEM)/apicheck_msg_current.txt, \
     check-system-api, \
-    $(call doc-timestamp-for,system-api-stubs) \
+    $(OUT_DOCS)/system-api-stubs-docs-stubs.srcjar \
     ))
 
 .PHONY: update-system-api
@@ -149,7 +152,7 @@ $(eval $(call check-api, \
     -error 25 -error 26 -error 27, \
     cat $(BUILD_SYSTEM)/apicheck_msg_current.txt, \
     check-test-api, \
-    $(call doc-timestamp-for,test-api-stubs) \
+    $(OUT_DOCS)/test-api-stubs-docs-stubs.srcjar \
     ))
 
 .PHONY: update-test-api
