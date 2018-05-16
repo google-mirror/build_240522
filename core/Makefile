@@ -442,7 +442,7 @@ FINAL_PRODUCT_PROPERTIES += \
 FINAL_PRODUCT_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_PRODUCT_PROPERTIES),=)
 
-$(INSTALLED_PRODUCT_BUILD_PROP_TARGET):
+$(INSTALLED_PRODUCT_BUILD_PROP_TARGET): $(intermediate_system_build_prop)
 	@echo Target product buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
