@@ -265,7 +265,12 @@ ifndef LOCAL_IS_HOST_MODULE
     else
       # When SDK libraries are referenced from modules built without SDK, provide the system stub to them
       # because it has the largest API surface.
-      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(lib_name).stubs.system)
+      # And if LOCAL_PRIVATE_PLATFORM_APIS is true, all APIs are provided to them.
+      ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
+        sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(lib_name).impl)
+      else
+        sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(lib_name).stubs.system)
+      endif
     endif
   else
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
