@@ -500,3 +500,10 @@ PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := \
 # Whether the whitelist of actionable compatible properties should be disabled or not
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE))
+
+# Logical and Resizable Partitions feature flag.
+# Set PRODUCT_USE_LOGICAL_PARTITIONS to true if a product should enable this feature.
+ifndef PRODUCT_USE_LOGICAL_PARTITIONS
+  PRODUCT_USE_LOGICAL_PARTITIONS := false
+endif
+.KATI_READONLY := PRODUCT_USE_LOGICAL_PARTITIONS
