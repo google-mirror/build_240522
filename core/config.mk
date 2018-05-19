@@ -913,6 +913,13 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+ifndef BOARD_USE_LOGICAL_PARTITIONS
+  BOARD_USE_LOGICAL_PARTITIONS := false
+endif
+# Logical and Resizable Partitions feature flag. Set this to true if a board should enable
+# this feature.
+.KATI_READONLY := BOARD_USE_LOGICAL_PARTITIONS
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
