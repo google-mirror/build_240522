@@ -913,6 +913,19 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+# Logical and Resizable Partitions feature flag.
+# Set BOARD_USE_LOGICAL_PARTITIONS to true if a board should enable this feature.
+# USE_LOGICAL_PARTITIONS can be overridden from the command line.
+ifndef USE_LOGICAL_PARTITIONS
+  USE_LOGICAL_PARTITIONS := $(BOARD_USE_LOGICAL_PARTITIONS)
+endif
+$(KATI_obsolete_var BOARD_USE_LOGICAL_PARTITIONS,Use USE_LOGICAL_PARTITIONS instead)
+.KATI_READONLY := USE_LOGICAL_PARTITIONS
+
+ifeq ($(USE_LOGICAL_PARTITIONS),true)
+  BOARD_KERNEL_CMDLINE += androidboot.lrap=1
+endif
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
