@@ -1588,6 +1588,18 @@ function validate_current_shell() {
     esac
 }
 
+function acloud()
+{
+    local os_arch=$(get_build_var HOST_OS)_$(get_build_var HOST_ARCH)
+    case $os_arch in
+        linux_x86|linux_x86_64) "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
+            ;;
+    *)
+        echo "acloud is not supported for your host: $os_arch"
+            ;;
+    esac
+}
+
 # Execute the contents of any vendorsetup.sh files we can find.
 function source_vendorsetup() {
     for dir in device vendor product; do
