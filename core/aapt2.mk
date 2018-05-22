@@ -115,6 +115,10 @@ ifdef proguard_options_file
 $(my_res_package): .KATI_IMPLICIT_OUTPUTS += $(proguard_options_file)
 endif
 
+my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
+$(my_res_package): PRIVATE_EXPORTED_SDK_LIBS_FILE := $(my_exported_sdk_libs_file)
+$(my_res_package): $(my_exported_sdk_libs_file)
+
 $(my_res_package): $(full_android_manifest) $(my_static_library_resources) $(my_shared_library_resources)
 $(my_res_package): $(my_full_asset_paths)
 $(my_res_package): $(my_res_resources_flat) $(my_overlay_resources_flat) \

@@ -515,6 +515,7 @@ ifeq ($(LOCAL_USE_AAPT2),true)
 $(my_res_package) : $(all_library_res_package_export_deps)
 endif
 
+
 # These four are set above for $(R_stamp_file) and $(my_res_package), but
 # $(LOCAL_BUILT_MODULE) is not set before java.mk, so they have to be set again
 # here.
@@ -595,6 +596,8 @@ $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COM
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
 $(LOCAL_BUILT_MODULE) : $(jni_shared_libraries)
 $(LOCAL_BUILT_MODULE) : $(JAR_ARGS)
+$(LOCAL_BUILT_MODULE): PRIVATE_EXPORTED_SDK_LIBS_FILE := $(my_exported_sdk_libs_file)
+$(LOCAL_BUILT_MODULE) : $(my_exported_sdk_libs_file)
 ifeq ($(LOCAL_USE_AAPT2),true)
 $(LOCAL_BUILT_MODULE): PRIVATE_RES_PACKAGE := $(my_res_package)
 $(LOCAL_BUILT_MODULE) : $(my_res_package) $(AAPT2) | $(ACP)
