@@ -1588,6 +1588,11 @@ function validate_current_shell() {
     esac
 }
 
+function acloud()
+{
+    "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
+}
+
 # Execute the contents of any vendorsetup.sh files we can find.
 function source_vendorsetup() {
     for dir in device vendor product; do
