@@ -1613,6 +1613,11 @@ function atest()
     "$(gettop)"/tools/tradefederation/core/atest/atest.py "$@"
 }
 
+function acloud()
+{
+    "$(gettop)"/tools/acloud/acloud.sh "$@"
+}
+
 if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
         *bash*)
