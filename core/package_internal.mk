@@ -595,6 +595,14 @@ $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COM
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
 $(LOCAL_BUILT_MODULE) : $(jni_shared_libraries)
 $(LOCAL_BUILT_MODULE) : $(JAR_ARGS)
+
+# my_exported_sdk_libs_file is set in java_common.mk. It contains sdk library names that
+# this apk uses directly or indirectly via other java modules. For each lib name in the file,
+# --uses-library <name> is appended, which automatically adds <uses-library> tag in the
+# AndroidManifest.xml file
+$(LOCAL_BUILT_MODULE): PRIVATE_EXPORTED_SDK_LIBS_FILE := $(my_exported_sdk_libs_file)
+$(LOCAL_BUILT_MODULE) : $(my_exported_sdk_libs_file)
+
 ifeq ($(LOCAL_USE_AAPT2),true)
 $(LOCAL_BUILT_MODULE): PRIVATE_RES_PACKAGE := $(my_res_package)
 $(LOCAL_BUILT_MODULE) : $(my_res_package) $(AAPT2) | $(ACP)
