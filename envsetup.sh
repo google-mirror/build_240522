@@ -1613,6 +1613,15 @@ function atest()
     "$(gettop)"/tools/tradefederation/core/atest/atest.py "$@"
 }
 
+function acloud()
+{
+    # TODO: There will eventually be an acloud prebuilt, may want to point to
+    #       that once we got a good release cadence going.
+    # Need to pass in tools dir so acloud libs can do relative imports.
+    local tools_dir="$(gettop)/tools"
+    PYTHONPATH="$tools_dir":"$PYTHONPATH" python "$tools_dir"/acloud/public/acloud_main.py "$@"
+}
+
 if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
         *bash*)
