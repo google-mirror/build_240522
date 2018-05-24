@@ -167,3 +167,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Also enable CFI for security sensitive components
+$(call inherit-product, $(SRC_TARGET_DIR)/product/cfi-common.mk)
