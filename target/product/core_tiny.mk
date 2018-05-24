@@ -49,7 +49,6 @@ PRODUCT_PACKAGES += \
     bcc \
     bu \
     com.android.location.provider \
-    com.android.location.provider.xml \
     framework-res \
     installd \
     ims-common \
