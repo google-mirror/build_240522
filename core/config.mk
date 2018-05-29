@@ -926,6 +926,22 @@ ifeq ($(USE_LOGICAL_PARTITIONS),true)
   BOARD_KERNEL_CMDLINE += androidboot.lrap=1
 endif
 
+# Allow to determine system image sizes dynamically
+ifeq ($(USE_LOGICAL_PARTITIONS),true)
+
+ifneq (,$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+  ifneq (,$(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE))
+    $$(error Cannot define both BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE and BOARD_SYSTEMIMAGE_PARTITION_SIZE)
+  endif
+else
+  ifeq (,$(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE))
+    $$(error Must define either BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE or BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE but not both.)
+  endif
+endif
+
+endif  # USE_LOGICAL_PARTITIONS
+
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
