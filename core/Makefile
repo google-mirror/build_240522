@@ -1084,6 +1084,44 @@ ifeq ($(INTERNAL_USERIMAGES_USE_EXT),true)
 INTERNAL_USERIMAGES_DEPS += $(MKE2FS_CONF)
 endif
 
+ifeq (true,$(USE_LOGICAL_PARTITIONS))
+
+ifeq ($(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VERITY),true)
+  $(error vboot 1.0 doesn't support logical partition)
+endif
+
+# Return the size of a directory on the host file system in number of bytes.
+# $(1): path
+define get-directory-size
+  $$(( $$(POSIXLY_CORRECT=1 du -s $(1) | cut -f1) * 512 ))
+endef
+
+# Compute an estimated size of system image
+# If USE_LOGICAL_PARTITIONS, this procedure should be invoked after all dependencies of
+# system image is built.
+# _RESERVED_SIZE is defined: (size of TARGET_OUT) + _RESERVED_SIZE
+# _RESERVED_SIZE not defined but _PARTITION_SIZE defined: _PARTITION_SIZE
+# both not defined: (size of TARGET_OUT)
+define get-systemimage-partition-size
+$(if $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE), \
+  $$(( $(call get-directory-size,$(TARGET_OUT)) + $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE) )), \
+  $(if $(BOARD_SYSTEMIMAGE_PARTITION_SIZE),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE), \
+    $(call get-directory-size,$(TARGET_OUT)) \
+))
+endef
+
+# TODO(b/80195851): Should not define BOARD_AVB_SYSTEM_KEY_PATH without
+# BOARD_AVB_SYSTEM_DETACHED_VBMETA.
+
+else # USE_LOGICAL_PARTITIONS
+
+define get-systemimage-partition-size
+  $(BOARD_SYSTEMIMAGE_PARTITION_SIZE)
+endef
+
+endif # USE_LOGICAL_PARTITIONS
+
+
 # $(1): the path of the output dictionary file
 # $(2): a subset of "system vendor cache userdata product oem"
 # $(3): additional "key=value" pairs to append to the dictionary file.
@@ -1091,7 +1129,7 @@ define generate-image-prop-dictionary
 $(hide) echo "ext_mkuserimg=$(notdir $(MKEXTUSERIMG))" >> $(1)
 $(if $(INTERNAL_USERIMAGES_EXT_VARIANT),$(hide) echo "fs_type=$(INTERNAL_USERIMAGES_EXT_VARIANT)" >> $(1))
 $(if $(filter $(2),system),\
-    $(if $(BOARD_SYSTEMIMAGE_PARTITION_SIZE),$(hide) echo "system_size=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE)" >> $(1))
+    $(if $(call get-systemimage-partition-size),$(hide) echo "system_size=$(call get-systemimage-partition-size)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "system_fs_type=$(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT),$(hide) echo "system_extfs_inode_count=$(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT),$(hide) echo "system_extfs_rsv_pct=$(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT)" >> $(1))
@@ -1587,6 +1625,18 @@ endif
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
+  @echo "Target system fs image size: $(call get-systemimage-partition-size)"
+  # Check that (expected image size) <= (hard-coded partition size)
+  # Never error if USE_LOGICAL_PARTITIONS is not set because the two values are equal.
+  if [ ! -z $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) ] \
+    && [ $(call get-systemimage-partition-size) -gt $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) ]; then \
+      echo "Out of space. The tree size of $(TARGET_OUT) is (MB): " 1>&2; \
+      du -sm $(TARGET_OUT) 1>&2; \
+      [ -z $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE) ] || \
+        echo "Required reserved empty space is $$(( $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE) / 1048576 )) MB." 1>&2; \
+      echo "The max is $$(( $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) / 1048576 )) MB." 1>&2; \
+      exit 1; \
+  fi
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
@@ -1597,7 +1647,7 @@ define build-systemimage-target
       $(TARGET_OUT) $(systemimage_intermediates)/system_image_info.txt $(1) $(TARGET_OUT) \
       || ( echo "Out of space? the tree size of $(TARGET_OUT) is (MB): " 1>&2 ;\
            du -sm $(TARGET_OUT) 1>&2;\
-           echo "The max is $$(( $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) / 1048576 )) MB." 1>&2 ;\
+           echo "The max is $$(( $(call get-systemimage-partition-size) / 1048576 )) MB." 1>&2 ;\
            mkdir -p $(DIST_DIR); cp $(INSTALLED_FILES_FILE) $(DIST_DIR)/installed-files-rescued.txt; \
            exit 1 )
 endef
@@ -1640,7 +1690,7 @@ endif
 $(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH)
 	@echo "Install system fs image: $@"
 	$(copy-file-to-target)
-	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),$(call get-systemimage-partition-size))
 
 systemimage: $(INSTALLED_SYSTEMIMAGE)
 
@@ -1649,7 +1699,7 @@ systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
 	            | $(INTERNAL_USERIMAGES_DEPS)
 	@echo "make $@: ignoring dependencies"
 	$(call build-systemimage-target,$(INSTALLED_SYSTEMIMAGE))
-	$(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMIMAGE),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+	$(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMIMAGE),$(call get-systemimage-partition-size))
 
 ifneq (,$(filter systemimage-nodeps snod, $(MAKECMDGOALS)))
 ifeq (true,$(WITH_DEXPREOPT))
@@ -1984,13 +2034,14 @@ BUILT_SYSTEMOTHERIMAGE_TARGET := $(PRODUCT_OUT)/system_other.img
 # Note that we assert the size is SYSTEMIMAGE_PARTITION_SIZE since this is the 'b' system image.
 define build-systemotherimage-target
   $(call pretty,"Target system_other fs image: $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)")
+  $(call pretty,"Target system_other fs image size: $(call get-systemimage-partition-size)")
   @mkdir -p $(TARGET_OUT_SYSTEM_OTHER)
   @mkdir -p $(systemotherimage_intermediates) && rm -rf $(systemotherimage_intermediates)/system_other_image_info.txt
   $(call generate-image-prop-dictionary, $(systemotherimage_intermediates)/system_other_image_info.txt,system,skip_fsck=true)
   $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
       build/make/tools/releasetools/build_image.py \
       $(TARGET_OUT_SYSTEM_OTHER) $(systemotherimage_intermediates)/system_other_image_info.txt $(INSTALLED_SYSTEMOTHERIMAGE_TARGET) $(TARGET_OUT)
-  $(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMOTHERIMAGE_TARGET),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+  $(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMOTHERIMAGE_TARGET),$(call get-systemimage-partition-size))
 endef
 
 # We just build this directly to the install location.
@@ -2284,10 +2335,6 @@ endif
 
 ifndef BOARD_BOOTIMAGE_PARTITION_SIZE
   $(error BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
-endif
-
-ifndef BOARD_SYSTEMIMAGE_PARTITION_SIZE
-  $(error BOARD_SYSTEMIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
 endif
 
 # $(1): the directory to extract public keys to
