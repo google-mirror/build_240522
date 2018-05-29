@@ -1,0 +1,10 @@
+Autosubmit+1: Yifan Hong <elsk@google.com>
+Code-Review+1: Tao Bao <tbao@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Yifan Hong <elsk@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 29 May 2018 20:02:34 +0000
+Reviewed-on: https://android-review.googlesource.com/695443
+Project: platform/build
+Branch: refs/heads/master
