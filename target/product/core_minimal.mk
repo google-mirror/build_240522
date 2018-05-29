@@ -61,6 +61,7 @@ PRODUCT_PACKAGES += \
     gatekeeperd \
     keystore \
     ld.config.txt \
+    ld.config.recovery.txt \
     ld.mc \
     libaaudio \
     libOpenMAXAL \
