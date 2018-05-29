@@ -39,5 +39,6 @@ $(call _gen_toc_command_for_elf,$(1),$(2))
 endef
 
 TARGET_LINKER := /system/bin/linker64
+TARGET_LINKER_RECOVERY := /sbin/linker64
 
 TARGET_GLOBAL_YASM_FLAGS := -f elf64 -m amd64

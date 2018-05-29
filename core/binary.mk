@@ -424,10 +424,16 @@ $(foreach lib, $(LOCAL_HAL_STATIC_LIBRARIES), \
 b_lib :=
 endif
 
-ifneq ($(strip $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER)),)
-  my_linker := $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER)
+ifneq ($(filter $(TARGET_RECOVERY_OUT)/%,$(my_module_path)),)
+  recovery := _RECOVERY
 else
-  my_linker := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LINKER)
+  recovery :=
+endif
+
+ifneq ($(strip $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER$(RECOVERY))),)
+  my_linker := $(CUSTOM_$(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)LINKER$(RECOVERY))
+else
+  my_linker := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LINKER$(RECOVERY))
 endif
 
 # Modules from soong do not need this since the dependencies are already handled there.
