@@ -40,6 +40,8 @@ Common goals are:
                             Stands for "Vendor, NO Dependencies"
     pnod                    Quickly rebuild the product image from built packages
                             Stands for "Product, NO Dependencies"
+    gnod                    Quickly rebuild the google image from built packages
+                            Stands for "Google, NO Dependencies"
 
 
 So, for example, you could run:
