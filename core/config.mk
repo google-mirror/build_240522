@@ -926,6 +926,28 @@ ifeq ($(USE_LOGICAL_PARTITIONS),true)
   BOARD_KERNEL_CMDLINE += androidboot.lrap=1
 endif
 
+# Allow to determine system image sizes dynamically
+ifeq ($(USE_LOGICAL_PARTITIONS),true)
+
+  # $(1): for example, SYSTEMIMAGE / VENDORIMAGE
+  define check-partition-size-variable
+    ifneq (,$(BOARD_$(1)_PARTITION_SIZE))
+      ifneq (,$(BOARD_$(1)_PARTITION_RESERVED_SIZE))
+        $$(error Cannot define both BOARD_$(1)_PARTITION_RESERVED_SIZE and BOARD_$(1)_PARTITION_SIZE)
+      endif
+    else
+      ifeq (,$(BOARD_$(1)_PARTITION_RESERVED_SIZE))
+        $$(error Must define either BOARD_$(1)_PARTITION_RESERVED_SIZE or BOARD_$(1)_PARTITION_RESERVED_SIZE but not both.)
+      endif
+    endif
+    .KATI_READONLY := BOARD_$(1)_PARTITION_SIZE
+  endef
+
+  $(call check-partition-size-variable,SYSTEMIMAGE)
+
+endif  # USE_LOGICAL_PARTITIONS
+
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
