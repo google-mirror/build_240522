@@ -1565,6 +1565,19 @@ define create-system-product-symlink
 endef
 endif
 
+# Return estimated size of system image
+ifeq (true,$(USE_LOGICAL_PARTITIONS))
+  define get-systemimage-partition-size
+    $(if $(BOARD_SYSTEMIMAGE_PARTITION_SIZE),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE), \
+      $(if $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE), \
+        $$(( $$( du -s --block-size=1 $(TARGET_OUT) | cut -f1) + $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE) )) ) )
+  endef
+else
+  define get-systemimage-partition-size
+    $(BOARD_SYSTEMIMAGE_PARTITION_SIZE)
+  endef
+endif
+
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
@@ -1573,12 +1586,16 @@ define build-systemimage-target
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-userimage-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt, \
       skip_fsck=true)
+  # FIXME do this in a more elegant way
+  $(if $(BOARD_SYSTEMIMAGE_PARTITION_SIZE),,\
+    $(if $(call get-systemimage-partition-size),\
+      echo system_size=$(strip $(call get-systemimage-partition-size)) >> $(systemimage_intermediates)/system_image_info.txt))
   $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
       build/make/tools/releasetools/build_image.py \
       $(TARGET_OUT) $(systemimage_intermediates)/system_image_info.txt $(1) $(TARGET_OUT) \
       || ( echo "Out of space? the tree size of $(TARGET_OUT) is (MB): " 1>&2 ;\
            du -sm $(TARGET_OUT) 1>&2;\
-           echo "The max is $$(( $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) / 1048576 )) MB." 1>&2 ;\
+           echo "The max is $$(( $(call get-systemimage-partition-size) / 1048576 )) MB." 1>&2 ;\
            mkdir -p $(DIST_DIR); cp $(INSTALLED_FILES_FILE) $(DIST_DIR)/installed-files-rescued.txt; \
            exit 1 )
 endef
@@ -2264,7 +2281,9 @@ ifndef BOARD_BOOTIMAGE_PARTITION_SIZE
 endif
 
 ifndef BOARD_SYSTEMIMAGE_PARTITION_SIZE
-  $(error BOARD_SYSTEMIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
+  ifndef BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE
+    $(error BOARD_SYSTEMIMAGE_PARTITION_SIZE or BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE must be set for BOARD_AVB_ENABLE)
+  endif
 endif
 
 # $(1): the directory to extract public keys to
