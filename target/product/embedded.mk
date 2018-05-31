@@ -37,6 +37,7 @@ PRODUCT_PACKAGES += \
     dumpstate \
     dumpsys \
     fastboot \
+    fastbootd \
     gralloc.default \
     healthd \
     hwservicemanager \
