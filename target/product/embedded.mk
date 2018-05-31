@@ -78,10 +78,12 @@ PRODUCT_PACKAGES += \
     service \
     servicemanager \
     shell_and_utilities \
+    sh_recovery \
     storaged \
     surfaceflinger \
     thermalserviced \
     tombstoned \
+    toybox_recovery \
     tzdatacheck \
     vndservice \
     vndservicemanager \
