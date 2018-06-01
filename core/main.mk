@@ -931,6 +931,34 @@ else
   product_FILES :=
 endif
 
+# Verify the isolation claims made by included products.
+$(foreach makefile,$(ISOLATION_CLAIM_PRODUCTS),\
+  $(eval claims := $(PRODUCTS.$(makefile).ISOLATION_CLAIMS)) \
+  $(eval claim_paths := $(foreach claim,$(claims),$(PRODUCT_OUT)/$(claim)%)) \
+  $(eval ### Verify that the product only produces files inside its claims.) \
+  $(eval whitelist := $(PRODUCTS.$(makefile).ISOLATION_WHITELIST)) \
+  $(eval whitelist_paths := $(foreach f,$(whitelist),$(PRODUCT_OUT)/$(f))) \
+  $(eval files := $(call product-installed-files, $(makefile))) \
+  $(eval files := $(filter-out $(HOST_OUT)/%,$(files))) \
+  $(eval ok_paths := $(claim_paths) $(whitelist_paths)) \
+  $(eval ok_paths := $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),$(ok_paths))) \
+  $(eval ok_paths := $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),$(ok_paths))) \
+  $(eval offending_files := $(filter-out $(ok_paths),$(files))) \
+  $(if $(offending_files), \
+    $(warning $(makefile) produces files outside its isolation claim.) \
+    $(info Offending files:) \
+    $(foreach f,$(sort $(offending_files)),$(info    $(f))) \
+    $(error Build failed) \
+  ) \
+  $(eval unused_whitelist := $(filter-out $(files),$(foreach f,$(whitelist),$(PRODUCT_OUT)/$(f)))) \
+  $(if $(unused_whitelist), \
+    $(warning $(makefile) includes redundant whitelist entries in its isolation claim.) \
+    $(info Offending entries:) \
+    $(foreach f,$(sort $(unused_whitelist)),$(info    $(f))) \
+    $(error Build failed) \
+  ) \
+)
+
 ifeq (0,1)
   $(info product_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
   $(foreach p,$(product_FILES),$(info :   $(p)))
