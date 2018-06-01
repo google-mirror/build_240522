@@ -17,7 +17,7 @@
 # This is a generic phone product that isn't specialized for a specific device.
 # It includes the base Android platform.
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 
 # Overrides

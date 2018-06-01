@@ -57,6 +57,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_arm64.mk \
     $(LOCAL_DIR)/aosp_arm64_a.mk \
     $(LOCAL_DIR)/aosp_arm64_ab.mk \
+    $(LOCAL_DIR)/aosp_system.mk \
     $(LOCAL_DIR)/aosp_x86_64.mk \
     $(LOCAL_DIR)/aosp_x86_64_a.mk \
     $(LOCAL_DIR)/aosp_x86_64_ab.mk \
