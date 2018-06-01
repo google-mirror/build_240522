@@ -17,10 +17,19 @@
 # This is a generic phone product that isn't specialized for a specific device.
 # It includes the base Android platform.
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 
 # Overrides
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
 PRODUCT_NAME := generic
+
+PRODUCT_ENFORCE_ISOLATION_CLAIMS := true
+PRODUCT_ISOLATION_CLAIM_WHITELIST := \
+	system/app/CarrierDefaultApp/CarrierDefaultApp.apk \
+	system/priv-app/CallLogBackup/CallLogBackup.apk \
+	system/priv-app/CarrierConfig/CarrierConfig.apk \
+	system/priv-app/CellBroadcastReceiver/CellBroadcastReceiver.apk \
+	system/priv-app/Dialer/Dialer.apk \
+	system/priv-app/EmergencyInfo/EmergencyInfo.apk \
