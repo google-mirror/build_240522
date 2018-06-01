@@ -231,6 +231,15 @@ define inherit-product
   $(eval ALL_PRODUCTS := $(sort $(ALL_PRODUCTS) $(word 1,$(_include_stack))))
 endef
 
+# Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
+# product makefile hierarchy rooted in the current node places its artifacts.
+# Creating artifacts outside the specified paths will cause a build-time error.
+define make-isolation-claim
+  $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+  $(eval PRODUCTS.$(current_mk).ISOLATION_CLAIMS := $(strip $(1))) \
+  $(eval PRODUCTS.$(current_mk).ISOLATION_WHITELIST := $(strip $(2))) \
+  $(eval ISOLATION_CLAIM_PRODUCTS := $(sort $(ISOLATION_CLAIM_PRODUCTS) $(current_mk)))
+endef
 
 #
 # Do inherit-product only if $(1) exists
