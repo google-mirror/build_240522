@@ -921,6 +921,25 @@ define product-installed-files
   $(call module-installed-files, $(_pif_modules))
 endef
 
+# Verify the isolation claims made by included products.
+$(foreach makefile,$(ISOLATION_CLAIM_PRODUCTS),\
+  $(eval claims := $(PRODUCTS.$(makefile).ISOLATION_CLAIMS)) \
+  $(eval whitelist := $(PRODUCTS.$(makefile).ISOLATION_WHITELIST)) \
+  $(eval files := $(call product-installed-files, $(makefile))) \
+  $(eval files := $(filter-out $(HOST_OUT)/%,$(files))) \
+  $(eval paths := $(foreach claim,$(claims),$(PRODUCT_OUT)/$(claim)%))) \
+  $(eval paths += $(foreach f,$(whitelist),$(PRODUCT_OUT)/$(f)))) \
+  $(eval paths := $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),$(paths))) \
+  $(eval paths := $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),$(paths))) \
+  $(eval offending_files := $(filter-out $(paths),$(files))) \
+  $(if $(offending_files), \
+    $(warning $(makefile) produces files outside its isolation claim.) \
+    $(warning Offending files:) \
+    $(foreach f,$(sort $(offending_files)),$(info    $(f))) \
+    $(error Build failed) \
+  )
+)
+
 ifdef FULL_BUILD
   product_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
 else
