@@ -117,15 +117,32 @@ ifneq ($(filter mips mips64,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
 endif
 endif
 
-$(strip_output): PRIVATE_STRIP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
+ifeq ($(my_use_clang_lld),true)
+  # b/80093681: GNU strip and objcopy --add-section has bug in handling
+  # GNU_RELRO segment of files lnked by clang lld; so they are replaced
+  # by llvm-strip and llvm-objcopy here.
+  $(strip_output): PRIVATE_OBJCOPY_ADD_SECTION := $(PATH_TO_LLVM_OBJCOPY)
+  $(strip_output): PRIVATE_STRIP := $(PATH_TO_LLVM_STRIP)
+  $(strip_output): PRIVATE_STRIP_O_FLAG :=
+  $(strip_output): PRIVATE_STRIP_ALL_FLAGS := -strip-all -keep=.ARM.attributes
+  $(strip_output): PRIVATE_STRIP_NO_COMMENT := -remove-section=.comment
+  # TODO: use --add-gnu-debuglink with llvm-strip?
+  $(strip_output): PRIVATE_NO_DEBUGLINK := true
+else
+  $(strip_output): PRIVATE_OBJCOPY_ADD_SECTION := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJCOPY)
+  $(strip_output): PRIVATE_STRIP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
+  $(strip_output): PRIVATE_STRIP_O_FLAG := -o
+  $(strip_output): PRIVATE_STRIP_ALL_FLAGS := --strip-all
+  $(strip_output): PRIVATE_STRIP_NO_COMMENT := -R .comment
+  ifeq ($(my_strip_module),no_debuglink)
+    $(strip_output): PRIVATE_NO_DEBUGLINK := true
+  else
+    $(strip_output): PRIVATE_NO_DEBUGLINK :=
+  endif
+endif
 $(strip_output): PRIVATE_OBJCOPY := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJCOPY)
 $(strip_output): PRIVATE_NM := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NM)
 $(strip_output): PRIVATE_READELF := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_READELF)
-ifeq ($(my_strip_module),no_debuglink)
-$(strip_output): PRIVATE_NO_DEBUGLINK := true
-else
-$(strip_output): PRIVATE_NO_DEBUGLINK :=
-endif
 
 ifeq ($(my_strip_module),mini-debug-info)
 # Strip the binary, but keep debug frames and symbol table in a compressed .gnu_debugdata section.
