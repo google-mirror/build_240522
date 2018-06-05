@@ -966,6 +966,17 @@ $(foreach makefile,$(ISOLATION_CLAIM_PRODUCTS),\
   $(call maybe-print-list-and-error,$(offending_files),$(makefile) produces files outside its isolation claim.) \
   $(eval unused_whitelist := $(filter-out $(files),$(whitelist_patterns))) \
   $(call maybe-print-list-and-error,$(unused_whitelist),$(makefile) includes redundant whitelist entries in its isolation claim.) \
+  $(eval ### Optionally verify that nothing else produces files inside this claim.) \
+  $(if PRODUCT_ENFORCE_ISOLATION_CLAIMS,\
+    $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_FILES))) \
+    $(eval whitelist := $(PRODUCT_ISOLATION_CLAIM_WHITELIST)) \
+    $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
+    $(eval files_in_claim := $(filter $(claim_patterns),$(extra_files))) \
+    $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_claim))) \
+    $(call maybe-print-list-and-error,$(offending_files),$(INTERNAL_PRODUCT) produces files inside $(makefile)s isolation claims.) \
+    $(eval unused_whitelist := $(filter-out $(extra_files),$(whitelist_patterns))) \
+    $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant isolation claim whitelist entries.) \
+  ) \
 )
 
 ifeq (0,1)
