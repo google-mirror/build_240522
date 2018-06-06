@@ -2835,35 +2835,46 @@ done \
 fi
 endef
 
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): $(HIDDENAPI) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+	PARAMS=($^); \
+	DEX_INPUTS="$${PARAMS[@]:4}"; \
+	for DEX_INPUT in $${DEX_INPUTS}; do \
+		INPUT_DIR=`dirname $${DEX_INPUT}`; \
+		OUTPUT_DIR=$${INPUT_DIR}-hiddenapi; \
+		rm -rf $${OUTPUT_DIR}; \
+		mkdir -p $${OUTPUT_DIR}; \
+		find $${INPUT_DIR} -maxdepth 1 -name "classes*.dex" | sort | \
+			xargs -I{} cp -f {} $${OUTPUT_DIR} && \
+		find $${OUTPUT_DIR} -maxdepth 1 -name "classes*.dex" | sort | sed 's/^/--dex=/'; \
+	done | xargs $(HIDDENAPI) --whitelist=$(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST) \
+	                          --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+	                          --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+	                          --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+	touch $@
+
 define hiddenapi-copy-dex-files
-$(2): $(1) $(HIDDENAPI) $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-      $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	@rm -rf $(dir $(2))
-	@mkdir -p $(dir $(2))
-	find $(dir $(1)) -maxdepth 1 -name "classes*.dex" | sort | \
-		xargs -I{} cp -f {} $(dir $(2))
-	find $(dir $(2)) -name "classes*.dex" | sort | sed 's/^/--dex=/' | \
-		xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-		                   --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
-		                   --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): $(1)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): .KATI_IMPLICIT_OUTPUTS += $(2)
 endef
 
 define hiddenapi-copy-soong-jar
-$(2): PRIVATE_FOLDER := $(dir $(2))dex-hiddenapi
-$(2): $(1) $(HIDDENAPI) $(SOONG_ZIP) $(MERGE_ZIPS) $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-      $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	@echo "Hidden API: $$@"
-	$$(copy-file-to-target)
-	@rm -rf $${PRIVATE_FOLDER}
-	@mkdir -p $${PRIVATE_FOLDER}
-	unzip -q $(2) 'classes*.dex' -d $${PRIVATE_FOLDER}
-	find $${PRIVATE_FOLDER} -name "classes*.dex" | sort | sed 's/^/--dex=/' | \
-		xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-		                   --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
-		                   --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	$(SOONG_ZIP) -o $${PRIVATE_FOLDER}/classes.dex.jar -C $${PRIVATE_FOLDER} -D $${PRIVATE_FOLDER}
-	$(MERGE_ZIPS) -D -zipToNotStrip $${PRIVATE_FOLDER}/classes.dex.jar -stripFile "classes*.dex" \
-		$(2) $${PRIVATE_FOLDER}/classes.dex.jar $(1)
+$(dir $(2))dex/classes.dex: $(1)
+	@rm -rf $(dir $(2))dex
+	@mkdir -p $(dir $(2))dex
+	unzip -q $(1) 'classes*.dex' -d $(dir $(2))dex
+
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): $(dir $(2))dex/classes.dex
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): .KATI_IMPLICIT_OUTPUTS += $(dir $(2))dex-hiddenapi/classes.dex
+
+$(2): PRIVATE_DIR_FINAL := $(dir $(2))dex-hiddenapi
+$(2): $(1) $(dir $(2))dex-hiddenapi/classes.dex | $(SOONG_ZIP) $(MERGE_ZIPS)
+	$(SOONG_ZIP) -o $${PRIVATE_DIR_FINAL}/classes.dex.jar -C $${PRIVATE_DIR_FINAL} -D $${PRIVATE_DIR_FINAL}
+	$(MERGE_ZIPS) -D -zipToNotStrip $${PRIVATE_DIR_FINAL}/classes.dex.jar -stripFile "classes*.dex" \
+		$(2) $${PRIVATE_DIR_FINAL}/classes.dex.jar $(1)
 endef
 
 ###########################################################
