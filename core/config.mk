@@ -1041,6 +1041,9 @@ INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)
 INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-dark-greylist.txt
 INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-blacklist.txt
 
+# Last timestamp of running $(HIDDENAPI) over boot class path dex files
+INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-dex.timestamp
+
 # Missing optional uses-libraries so that the platform doesn't create build rules that depend on
 # them. See setup_one_odex.mk.
 INTERNAL_PLATFORM_MISSING_USES_LIBRARIES := com.google.android.ble com.google.android.wearable
