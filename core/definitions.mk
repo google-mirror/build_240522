@@ -2823,35 +2823,52 @@ done \
 fi
 endef
 
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): $(HIDDENAPI) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+                                          $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+	INPUTS=( $(DEX_INPUTS) ); OUTPUTS=( $(DEX_OUTPUTS) ); \
+	while [ $${#INPUTS[@]} -gt 0 -a $${#OUTPUTS[@]} -gt 0 ]; do \
+		INPUT_DIR=`dirname $${INPUTS[0]}`; INPUTS=( $${INPUTS[@]:1}); \
+		OUTPUT_DIR=`dirname $${OUTPUTS[0]}`; OUTPUTS=( $${OUTPUTS[@]:1}); \
+		rm -rf $${OUTPUT_DIR} && \
+		mkdir -p $${OUTPUT_DIR} && \
+		find $${INPUT_DIR} -maxdepth 1 -name "classes*.dex" | sort | \
+			xargs -I{} cp -f {} $${OUTPUT_DIR} && \
+		find $${OUTPUT_DIR} -maxdepth 1 -name "classes*.dex" | sort | sed 's/^/--dex=/'; \
+	done | xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+	                          --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+	                          --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+	touch $@
+
+# Copy dex files, invoking $(HIDDENAPI) on them in the process.
 define hiddenapi-copy-dex-files
-$(2): $(1) $(HIDDENAPI) $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-      $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	@rm -rf $(dir $(2))
-	@mkdir -p $(dir $(2))
-	find $(dir $(1)) -maxdepth 1 -name "classes*.dex" | sort | \
-		xargs -I{} cp -f {} $(dir $(2))
-	find $(dir $(2)) -name "classes*.dex" | sort | sed 's/^/--dex=/' | \
-		xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-		                   --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
-		                   --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): $(1)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): .KATI_IMPLICIT_OUTPUTS += $(2)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): DEX_INPUTS += $(1)
+$(INTERNAL_PLATFORM_HIDDENAPI_TIMESTAMP): DEX_OUTPUTS += $(2)
 endef
 
+# File names for intermediate dex files of `hiddenapi-copy-soong-jar`.
+hiddenapi-soong-input-dex = $(dir $(1))/hiddenapi/dex-input/classes.dex
+hiddenapi-soong-output-dex = $(dir $(1))/hiddenapi/dex-output/classes.dex
+
+# Decompress a JAR with dex files, invoke $(HIDDENAPI) on them and compress again.
 define hiddenapi-copy-soong-jar
-$(2): PRIVATE_FOLDER := $(dir $(2))dex-hiddenapi
-$(2): $(1) $(HIDDENAPI) $(SOONG_ZIP) $(MERGE_ZIPS) $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-      $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	@echo "Hidden API: $$@"
-	$$(copy-file-to-target)
-	@rm -rf $${PRIVATE_FOLDER}
-	@mkdir -p $${PRIVATE_FOLDER}
-	unzip -q $(2) 'classes*.dex' -d $${PRIVATE_FOLDER}
-	find $${PRIVATE_FOLDER} -name "classes*.dex" | sort | sed 's/^/--dex=/' | \
-		xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-		                   --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
-		                   --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
-	$(SOONG_ZIP) -o $${PRIVATE_FOLDER}/classes.dex.jar -C $${PRIVATE_FOLDER} -D $${PRIVATE_FOLDER}
-	$(MERGE_ZIPS) -D -zipToNotStrip $${PRIVATE_FOLDER}/classes.dex.jar -stripFile "classes*.dex" \
-		$(2) $${PRIVATE_FOLDER}/classes.dex.jar $(1)
+$(call hiddenapi-soong-input-dex,$(2)): $(1)
+	@rm -rf `dirname $$@`
+	@mkdir -p `dirname $$@`
+	unzip -q $(1) 'classes*.dex' -d `dirname $$@`
+
+$(call hiddenapi-copy-dex-files,\
+	$(call hiddenapi-soong-input-dex,$(2)),\
+	$(call hiddenapi-soong-output-dex,$(2)))
+
+$(2): OUTPUT_DIR := $(dir $(call hiddenapi-soong-output-dex,$(2)))
+$(2): OUTPUT_JAR := $(dir $(call hiddenapi-soong-output-dex,$(2)))classes.jar
+$(2): $(1) $(call hiddenapi-soong-output-dex,$(2)) | $(SOONG_ZIP) $(MERGE_ZIPS)
+	$(SOONG_ZIP) -o $${OUTPUT_JAR} -C $${OUTPUT_DIR} -D $${OUTPUT_DIR}
+	$(MERGE_ZIPS) -D -zipToNotStrip $${OUTPUT_JAR} -stripFile "classes*.dex" $(2) $${OUTPUT_JAR} $(1)
 endef
 
 ###########################################################
