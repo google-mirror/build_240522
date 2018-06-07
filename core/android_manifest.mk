@@ -16,7 +16,7 @@ my_full_libs_manifest_files := $(LOCAL_FULL_LIBS_MANIFEST_FILES)
 # Set up dependency on aar libraries
 LOCAL_STATIC_JAVA_AAR_LIBRARIES := $(strip $(LOCAL_STATIC_JAVA_AAR_LIBRARIES))
 ifdef LOCAL_STATIC_JAVA_AAR_LIBRARIES
-my_full_libs_manifest_files += $(foreach lib, $(LOCAL_STATIC_JAVA_AAR_LIBRARIES),\
+my_full_libs_manifest_files += $(foreach lib, $(LOCAL_STATIC_JAVA_AAR_LIBRARIES) $(LOCAL_STATIC_ANDROID_LIBRARIES),\
   $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/aar/AndroidManifest.xml)
 
 # With aapt2, we'll link in the built resource from the AAR.
