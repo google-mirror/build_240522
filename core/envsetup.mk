@@ -179,7 +179,6 @@ TARGET_COPY_OUT_DATA := data
 TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
 TARGET_COPY_OUT_OEM := oem
 TARGET_COPY_OUT_ODM := odm
-TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
 
@@ -188,27 +187,21 @@ define get_non_asan_path
 $(patsubst $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/%,$(PRODUCT_OUT)/%,$1)
 endef
 
-###########################################
-# Define TARGET_COPY_OUT_VENDOR to a placeholder, for at this point
-# we don't know if the device wants to build a separate vendor.img
-# or just build vendor stuff into system.img.
-# A device can set up TARGET_COPY_OUT_VENDOR to "vendor" in its
-# BoardConfig.mk.
-# We'll substitute with the real value after loading BoardConfig.mk.
-_vendor_path_placeholder := ||VENDOR-PATH-PH||
-TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
-###########################################
+# For these type of modules we don't know at this point whether we'll have to create a dedicated
+# partition or we'll end up installing them in the system image. Define a placeholder string for
+# now, it will be substituted later in this file where appropriate.
+#
+# We'll create variables in the form of e.g. TARGET_COPY_OUT_VENDOR, that may be customized in the
+# product configuration.
+TARGETS_WITH_OPTIONAL_PARTITION := VENDOR PRODUCT
 
-###########################################
-# Define TARGET_COPY_OUT_PRODUCT to a placeholder, for at this point
-# we don't know if the device wants to build a separate product.img
-# or just build product stuff into system.img.
-# A device can set up TARGET_COPY_OUT_PRODUCT to "product" in its
-# BoardConfig.mk.
-# We'll substitute with the real value after loading BoardConfig.mk.
-_product_path_placeholder := ||PRODUCT-PATH-PH||
-TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
-###########################################
+define _path_placeholder
+||$(strip $(1))-PATH-PH||
+endef
+
+$(foreach m,$(TARGETS_WITH_OPTIONAL_PARTITION), \
+  $(eval TARGET_COPY_OUT_$(m) := $(call _path_placeholder,$(m))) \
+)
 
 #################################################################
 # Set up minimal BOOTCLASSPATH list of jars to build/execute
@@ -272,49 +265,65 @@ ifneq ($(MALLOC_IMPL),)
 endif
 board_config_mk :=
 
-###########################################
-# Now we can substitute with the real value of TARGET_COPY_OUT_VENDOR
-ifeq ($(TARGET_COPY_OUT_VENDOR),$(_vendor_path_placeholder))
-TARGET_COPY_OUT_VENDOR := system/vendor
-else ifeq ($(filter vendor system/vendor,$(TARGET_COPY_OUT_VENDOR)),)
-$(error TARGET_COPY_OUT_VENDOR must be either 'vendor' or 'system/vendor', seeing '$(TARGET_COPY_OUT_VENDOR)'.)
-endif
-PRODUCT_COPY_FILES := $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),$(PRODUCT_COPY_FILES))
+# Convert to lower case without requiring a shell, which isn't cacheable.
+# This function is also in definitions.mk at the time of writing, but we don't import it in this
+# file.
+to-lower=$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(subst G,g,$(subst H,h,$(subst I,i,$(subst J,j,$(subst K,k,$(subst L,l,$(subst M,m,$(subst N,n,$(subst O,o,$(subst P,p,$(subst Q,q,$(subst R,r,$(subst S,s,$(subst T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$1))))))))))))))))))))))))))
 
-BOARD_USES_VENDORIMAGE :=
-ifdef BOARD_PREBUILT_VENDORIMAGE
-BOARD_USES_VENDORIMAGE := true
-endif
-ifdef BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
-BOARD_USES_VENDORIMAGE := true
-endif
-ifeq ($(TARGET_COPY_OUT_VENDOR),vendor)
-BOARD_USES_VENDORIMAGE := true
-else ifdef BOARD_USES_VENDORIMAGE
-$(error TARGET_COPY_OUT_VENDOR must be set to 'vendor' to use a vendor image)
-endif
+# For the TARGETS_WITH_OPTIONAL_PARTITION, we now check whether they have been configured in the
+# product configuration. If they haven't, we set them to a default destination inside the system
+# partition, e.g. VENDOR -> /system/vendor
+define _set_target_out_default
+$(if \
+  $(filter $(TARGET_COPY_OUT_$(1)),$(call _path_placeholder, $(1))), \
+  $(eval TARGET_COPY_OUT_$(1) := $(2)), \
+)
+endef
 
-###########################################
-# Now we can substitute with the real value of TARGET_COPY_OUT_PRODUCT
-ifeq ($(TARGET_COPY_OUT_PRODUCT),$(_product_path_placeholder))
-TARGET_COPY_OUT_PRODUCT := system/product
-else ifeq ($(filter product system/product,$(TARGET_COPY_OUT_PRODUCT)),)
-$(error TARGET_COPY_OUT_PRODUCT must be either 'product' or 'system/product', seeing '$(TARGET_COPY_OUT_PRODUCT)'.)
-endif
-PRODUCT_COPY_FILES := $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),$(PRODUCT_COPY_FILES))
+$(foreach l,$(TARGETS_WITH_OPTIONAL_PARTITION), \
+  $(call _set_target_out_default,$(l),system/$(call to-lower,$(l))) \
+)
 
-BOARD_USES_PRODUCTIMAGE :=
-ifdef BOARD_PREBUILT_PRODUCTIMAGE
-BOARD_USES_PRODUCTIMAGE := true
-endif
-ifdef BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE
-BOARD_USES_PRODUCTIMAGE := true
-endif
-ifeq ($(TARGET_COPY_OUT_PRODUCT),product)
-BOARD_USES_PRODUCTIMAGE := true
-else ifdef BOARD_USES_PRODUCTIMAGE
-$(error TARGET_COPY_OUT_PRODUCT must be set to 'product' to use a product image)
-endif
+# Additional check to make sure the TARGETS_WITH_OPTIONAL_PARTITION are either placed in their own
+# partition or under /system.
+define _check_if_target_out_is_system_or_root_dir
+$(if \
+  $(filter-out $(2) system/$(2),$(TARGET_COPY_OUT_$(1))), \
+  $(error TARGET_COPY_OUT_$(1) must be either '$(2)' or 'system/$(2)', seeing '$(TARGET_COPY_OUT_$(1))'.), \
+)
+endef
+
+$(foreach l,$(TARGETS_WITH_OPTIONAL_PARTITION), \
+  $(call _check_if_target_out_is_system_or_root_dir,$(l),$(call to-lower,$(l))) \
+)
+
+# For each target in TARGETS_WITH_OPTIONAL_PARTITION, check if they will be in a dedicate image.
+# Also check whether we are using a prebuilt image or we are building one.
+define _check_if_board_uses_additional_image
+$(eval BOARD_USES_$(1)IMAGE := ) \
+$(if $(BOARD_PREBUILT_$(1)IMAGE), \
+  $(eval BOARD_USES_$(1)IMAGE := true), \
+) \
+$(if $(BOARD_$(1)IMAGE_FILE_SYSTEM_TYPE), \
+  $(eval BOARD_USES_$(1)IMAGE := true), \
+) \
+$(if $(filter $(TARGET_COPY_OUT_$(1)),$(2)), \
+  $(eval BOARD_USES_$(1)IMAGE := true), \
+  $(if $(BOARD_USES_$(1)IMAGE), \
+    $(error TARGET_COPY_OUT_$(1) must be set to '$(2)' to use a dedicated image. Found '$(TARGET_COPY_OUT_$(1))'),\
+  ) \
+)
+endef
+
+$(foreach l,$(TARGETS_WITH_OPTIONAL_PARTITION), \
+  $(call _check_if_board_uses_additional_image,$(l),$(call to-lower,$(l))) \
+)
+
+# Replace all the placeholders with the final destination.
+$(foreach l,$(TARGETS_WITH_OPTIONAL_PARTITION),\
+ $(eval PRODUCT_COPY_FILES := $(subst $(call _path_placeholder,$(l)),$(TARGET_COPY_OUT_$(l)),$(PRODUCT_COPY_FILES)) \
+ ) \
+)
 
 ###########################################
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
