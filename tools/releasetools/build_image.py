@@ -18,8 +18,10 @@
 Builds output_image from the given input_directory, properties_file,
 and writes the image to target_output_directory.
 
+If argument generated_prop_file exist, write additional properties to the file.
+
 Usage:  build_image.py input_directory properties_file output_image \\
-            target_output_directory
+            target_output_directory [generated_prop_file]
 """
 
 from __future__ import print_function
@@ -40,9 +42,10 @@ OPTIONS = common.OPTIONS
 
 FIXED_SALT = "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
 BLOCK_SIZE = 4096
+B_IN_MB = 1024 * 1024
 
 
-def RunCommand(cmd, verbose=None):
+def RunCommand(cmd, verbose=None, env=None):
   """Echo and run the given command.
 
   Args:
@@ -51,11 +54,16 @@ def RunCommand(cmd, verbose=None):
   Returns:
     A tuple of the output and the exit code.
   """
+  env_copy = None
+  if env:
+    env_copy = os.environ.copy()
+    env_copy.update(env)
   if verbose is None:
     verbose = OPTIONS.verbose
   if verbose:
     print("Running: " + " ".join(cmd))
-  p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                       env=env_copy)
   output, _ = p.communicate()
 
   if verbose:
@@ -102,6 +110,22 @@ def GetVeritySize(partition_size, fec_supported):
     return verity_size + fec_size
   return verity_size
 
+def GetDiskUsage(path):
+  """Return number of bytes that "path" occupies on host.
+
+  Args:
+    path: The directory or file to calculate size on
+  Returns:
+    True and the number of bytes if successful,
+    False and 0 otherwise.
+  """
+  env = {"POSIXLY_CORRECT": "1"}
+  cmd = ["du", "-s", path]
+  output, exit_code = RunCommand(cmd, verbose=False, env=env)
+  if exit_code != 0:
+    return False, 0
+  # POSIX du returns number of blocks with block size 512
+  return True, int(output.split()[0]) * 512
 
 def GetSimgSize(image_file):
   simg = sparse_img.SparseImage(image_file, build_map=False)
@@ -440,7 +464,8 @@ def CheckHeadroom(ext4fs_output, prop_dict):
   return True
 
 
-def BuildImage(in_dir, prop_dict, out_file, target_out=None):
+def BuildImage(in_dir, prop_dict, out_file, target_out=None,
+    prop_file_out=None):
   """Build an image to out_file from in_dir with property prop_dict.
 
   Args:
@@ -449,6 +474,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     out_file: path of the output image file.
     target_out: path of the product out directory to read device specific FS
         config files.
+    prop_file_out: path of the output properties file.
 
   Returns:
     True iff the image is built successfully.
@@ -485,6 +511,22 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   is_verity_partition = "verity_block_device" in prop_dict
   verity_supported = prop_dict.get("verity") == "true"
   verity_fec_supported = prop_dict.get("verity_fec") == "true"
+
+  if (prop_dict.get("use_logical_partitions") == "true" and
+      "partition_size" not in prop_dict):
+    # if partition_size is not defined, use output of `du' + reserved_size
+    success, size = GetDiskUsage(origin_in)
+    if not success:
+      return 0
+    print("The tree size of %s is %d MB." % (origin_in, size // B_IN_MB),
+        file=sys.stderr)
+    if "partition_reserved_size" in prop_dict:
+      size += int(prop_dict["partition_reserved_size"])
+    # Round this up to a multiple of BLOCK_SIZE so that avbtool works
+    size = (size + BLOCK_SIZE - 1) // BLOCK_SIZE * BLOCK_SIZE
+    prop_dict["partition_size"] = str(size)
+    print("Allocating %d MB for %s." % (size // B_IN_MB, out_file),
+        file=sys.stderr)
 
   # Adjust the partition size to make room for the hashes if this is to be
   # verified.
@@ -668,6 +710,11 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
           e2fsck_command, exit_code, e2fsck_output))
       return False
 
+  if prop_file_out:
+    with open(prop_file_out, "w") as f:
+      if "partition_size" in prop_dict:
+        f.write("partition_size=%s\n" % prop_dict["partition_size"])
+
   return True
 
 
@@ -713,6 +760,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "avb_enable",
       "avb_avbtool",
       "avb_salt",
+      "use_logical_partitions",
   )
   for p in common_props:
     copy_prop(p, p)
@@ -745,6 +793,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+    copy_prop("system_reserved_size", "partition_reserved_size")
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its
     # files.
@@ -767,6 +816,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+    copy_prop("system_reserved_size", "partition_reserved_size")
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
     copy_prop("fs_type", "fs_type")
@@ -797,6 +847,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("vendor_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+    copy_prop("vendor_reserved_size", "partition_reserved_size")
   elif mount_point == "product":
     copy_prop("avb_product_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_product_add_hashtree_footer_args",
@@ -843,7 +894,7 @@ def LoadGlobalDict(filename):
 
 
 def main(argv):
-  if len(argv) != 4:
+  if len(argv) < 4 or len(argv) > 5:
     print(__doc__)
     sys.exit(1)
 
@@ -851,6 +902,7 @@ def main(argv):
   glob_dict_file = argv[1]
   out_file = argv[2]
   target_out = argv[3]
+  prop_file_out = argv[4] if len(argv) >= 5 else None
 
   glob_dict = LoadGlobalDict(glob_dict_file)
   if "mount_point" in glob_dict:
@@ -880,7 +932,8 @@ def main(argv):
 
     image_properties = ImagePropFromGlobalDict(glob_dict, mount_point)
 
-  if not BuildImage(in_dir, image_properties, out_file, target_out):
+  if not BuildImage(in_dir, image_properties, out_file, target_out,
+      prop_file_out):
     print("error: failed to build %s from %s" % (out_file, in_dir),
           file=sys.stderr)
     sys.exit(1)
