@@ -1101,10 +1101,22 @@ $$(( $(call get-directory-size,$(TARGET_OUT)) + \
 ))
 endef
 
+# Compute an estimated size of vendor image
+# If USE_LOGICAL_PARTITIONS, this procedure should be invoked after all dependencies of
+# vendor image is built.
+define get-vendorimage-partition-size
+$$(( $(call get-directory-size,$(TARGET_OUT_VENDOR)) + \
+  $(if $(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),$(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),0) \
+))
+endef
+
 else # USE_LOGICAL_PARTITIONS
 
 define get-systemimage-partition-size
   $(BOARD_SYSTEMIMAGE_PARTITION_SIZE)
+endef
+define get-vendorimage-partition-size
+  $(BOARD_VENDORIMAGE_PARTITION_SIZE)
 endef
 
 endif # USE_LOGICAL_PARTITIONS
@@ -1144,7 +1156,7 @@ $(if $(filter $(2),vendor),\
     $(if $(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "vendor_fs_type=$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_EXTFS_INODE_COUNT),$(hide) echo "vendor_extfs_inode_count=$(BOARD_VENDORIMAGE_EXTFS_INODE_COUNT)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_EXTFS_RSV_PCT),$(hide) echo "vendor_extfs_rsv_pct=$(BOARD_VENDORIMAGE_EXTFS_RSV_PCT)" >> $(1))
-    $(if $(BOARD_VENDORIMAGE_PARTITION_SIZE),$(hide) echo "vendor_size=$(BOARD_VENDORIMAGE_PARTITION_SIZE)" >> $(1))
+    $(if $(call get-vendorimage-partition-size),$(hide) echo "vendor_size=$(call get-vendorimage-partition-size)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_JOURNAL_SIZE),$(hide) echo "vendor_journal_size=$(BOARD_VENDORIMAGE_JOURNAL_SIZE)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "vendor_squashfs_compressor=$(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "vendor_squashfs_compressor_opt=$(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
@@ -2098,6 +2110,18 @@ vendorimage_intermediates := \
 BUILT_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 define build-vendorimage-target
   $(call pretty,"Target vendor fs image: $(INSTALLED_VENDORIMAGE_TARGET)")
+  $(call pretty,"Target vendor fs image size: $(call get-vendorimage-partition-size)")
+  # Check that (expected image size) <= (hard-coded partition size)
+  # Never error if USE_LOGICAL_PARTITIONS is not set because the two values are equal.
+  if [ ! -z $(BOARD_VENDORIMAGE_PARTITION_SIZE) ] \
+    && [ $(call get-vendorimage-partition-size) -gt $(BOARD_VENDORIMAGE_PARTITION_SIZE) ]; then \
+      echo "Out of space. The tree size of $(TARGET_OUT_VENDOR) is (MB): " 1>&2; \
+      du -sm $(TARGET_OUT_VENDOR) 1>&2; \
+      [ -z $(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE) ] || \
+        echo "Required reserved empty space is $$(( $(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE) / 1048576 )) MB." 1>&2; \
+      echo "The max is $$(( $(BOARD_VENDORIMAGE_PARTITION_SIZE) / 1048576 )) MB." 1>&2; \
+      exit 1; \
+  fi
   @mkdir -p $(TARGET_OUT_VENDOR)
   @mkdir -p $(vendorimage_intermediates) && rm -rf $(vendorimage_intermediates)/vendor_image_info.txt
   $(call generate-image-prop-dictionary, $(vendorimage_intermediates)/vendor_image_info.txt,vendor,skip_fsck=true)
@@ -2106,7 +2130,7 @@ define build-vendorimage-target
   $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
       build/make/tools/releasetools/build_image.py \
       $(TARGET_OUT_VENDOR) $(vendorimage_intermediates)/vendor_image_info.txt $(INSTALLED_VENDORIMAGE_TARGET) $(TARGET_OUT)
-  $(hide) $(call assert-max-image-size,$(INSTALLED_VENDORIMAGE_TARGET),$(BOARD_VENDORIMAGE_PARTITION_SIZE))
+  $(hide) $(call assert-max-image-size,$(INSTALLED_VENDORIMAGE_TARGET),$(call get-vendorimage-partition-size))
 endef
 
 # We just build this directly to the install location.
