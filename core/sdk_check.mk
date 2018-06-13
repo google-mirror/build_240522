@@ -13,7 +13,7 @@ ifeq (,$(JAVA_SDK_ENFORCEMENT_ERROR))
   JAVA_SDK_ENFORCEMENT_ERROR := APPS
 endif
 
-ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS),)
+ifeq (,$(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS))
   ifeq (,$(filter $(LOCAL_MODULE),$(whitelisted_modules)))
     ifneq ($(JAVA_SDK_ENFORCEMENT_WARNING)$(JAVA_SDK_ENFORCEMENT_ERROR),)
       my_message := Must specify LOCAL_SDK_VERSION or LOCAL_PRIVATE_PLATFORM_APIS,
@@ -26,12 +26,31 @@ ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS),)
       my_message :=
     endif
   endif
-else ifneq ($(LOCAL_SDK_VERSION),)
-  ifneq ($(LOCAL_PRIVATE_PLATFORM_APIS),)
-    my_message := Specifies both LOCAL_SDK_VERSION ($(LOCAL_SDK_VERSION)) and
-    my_message += LOCAL_PRIVATE_PLATFORM_APIS ($(LOCAL_PRIVATE_PLATFORM_APIS))
-    my_message += but should specify only one
-    $(call pretty-error,$(my_message))
-    my_message :=
+else ifneq (,$(and $(LOCAL_SDK_VERSION),$(LOCAL_PRIVATE_PLATFORM_APIS)))
+  my_message := Specifies both LOCAL_SDK_VERSION ($(LOCAL_SDK_VERSION)) and
+  my_message += LOCAL_PRIVATE_PLATFORM_APIS ($(LOCAL_PRIVATE_PLATFORM_APIS))
+  my_message += but should specify only one
+  $(call pretty-error,$(my_message))
+  my_message :=
+endif
+
+# Optionally enforce that modules outside /system specify LOCAL_SDK_VERSION.
+ifeq (true,$(PRODUCT_ENFORCE_SDK_OUTSIDE_SYSTEM))
+  ifeq (,$(LOCAL_SDK_VERSION))
+    dest := $(patsubst $(PRODUCT_OUT)/%,%,$(LOCAL_INSTALLED_MODULE))
+    dest_dir := $(firstword $(subst /,$(space),$(dest)))
+    ifeq (,$(filter $(TARGET_COPY_OUT_SYSTEM),$(dest_dir)))
+      product_modules := $(PRODUCTS.$(strip $(INTERNAL_PRODUCT)).PRODUCT_PACKAGES)
+      ifneq (,$(filter $(LOCAL_MODULE),$(product_modules)))
+        # Use TARGET_BUILD_VARIANT-specific whitelist, if it exists.
+        whitelist := $(PRODUCT_SDK_OFFENDER_WHITELIST_$(TARGET_BUILD_VARIANT))
+        ifeq (,$(whitelist))
+          whitelist := $(PRODUCT_SDK_OFFENDER_WHITELIST)
+        endif
+        ifeq (,$(filter $(LOCAL_MODULE),$(whitelist)))
+          $(call pretty-error,LOCAL_PRIVATE_PLATFORM_APIS is set but destination partition is not system. Found $(dest))
+        endif
+      endif
+    endif
   endif
 endif
