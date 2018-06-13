@@ -26,8 +26,25 @@ ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS),)
       my_message :=
     endif
   endif
-else ifneq ($(LOCAL_SDK_VERSION),)
-  ifneq ($(LOCAL_PRIVATE_PLATFORM_APIS),)
+else ifneq ($(LOCAL_PRIVATE_PLATFORM_APIS),)
+  dest := $(patsubst $(PRODUCT_OUT)/%,%,$(LOCAL_INSTALLED_MODULE))
+  dest_dir := $(firstword $(subst /,$(space),$(dest)))
+  # Optionally enforce that only modules in /system specify LOCAL_PRIVATE_PLATFORM_APIS.
+  ifeq (true,$(PRODUCT_ENFORCE_SDK_OUTSIDE_SYSTEM))
+    ifeq (,$(filter $(TARGET_COPY_OUT_SYSTEM),$(dest_dir)))
+      ifneq (,$(filter $(LOCAL_MODULE),$(PRODUCTS.$(strip $(INTERNAL_PRODUCT)).PRODUCT_PACKAGES)))
+        # Use TARGET_BUILD_VARIANT-specific whitelist, if it exists.
+        whitelist := $(PRODUCT_SDK_OFFENDER_WHITELIST_$(TARGET_BUILD_VARIANT))
+        ifeq (,$(whitelist))
+          whitelist := $(PRODUCT_SDK_OFFENDER_WHITELIST)
+        endif
+        ifeq (,$(filter $(LOCAL_MODULE),$(whitelist)))
+          $(call pretty-error,LOCAL_PRIVATE_PLATFORM_APIS is set but destination partition is not system. Found $(dest))
+        endif
+      endif
+    endif
+  endif
+  ifneq ($(LOCAL_SDK_VERSION),)
     my_message := Specifies both LOCAL_SDK_VERSION ($(LOCAL_SDK_VERSION)) and
     my_message += LOCAL_PRIVATE_PLATFORM_APIS ($(LOCAL_PRIVATE_PLATFORM_APIS))
     my_message += but should specify only one
