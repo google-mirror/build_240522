@@ -1223,6 +1223,26 @@ droid_targets: droidcore dist_files
 
 endif # TARGET_BUILD_APPS
 
+ifdef USE_LOGICAL_PARTITIONS
+ifdef BOARD_ANDROID_PARTITION_SIZE
+ifdef BOARD_ANDROID_PARTITION_PARTITION_LIST
+
+droid_targets: check_android_partition_sizes
+
+.PHONY: check_android_partition_sizes
+check_android_partition_sizes: partition_size_list=$(foreach p,$(BOARD_ANDROID_PARTITION_PARTITION_LIST),$(BOARD_$(call to-upper,$(p))IMAGE_PARTITION_SIZE))
+check_android_partition_sizes: sum_sizes_expr=$(subst $(space),+,$(partition_size_list))
+check_android_partition_sizes:
+	if [ $$(( $(sum_sizes_expr) )) -gt $(BOARD_ANDROID_PARTITION_SIZE) ]; then \
+		echo The sum of sizes of all logical partitions is larger than BOARD_ANDROID_PARTITION_SIZE.; \
+		echo $(sum_sizes_expr) == $$(( $(sum_sizes_expr) )) '>' $(BOARD_ANDROID_PARTITION_SIZE); \
+		exit 1; \
+	fi
+
+endif # BOARD_ANDROID_PARTITION_PARTITION_LIST
+endif # BOARD_ANDROID_PARTITION_SIZE
+endif # USE_LOGICAL_PARTITIONS
+
 .PHONY: docs
 docs: $(ALL_DOCS)
 
