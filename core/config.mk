@@ -927,7 +927,7 @@ endif
 
 ifeq ($(USE_LOGICAL_PARTITIONS),true)
   BOARD_KERNEL_CMDLINE += androidboot.logical_partitions=1
-endif
+endif # USE_LOGICAL_PARTITIONS
 
 # ###############################################################
 # Set up final options.
