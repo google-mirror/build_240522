@@ -19,6 +19,7 @@ cc_binary_host {
     // static_sdk_tools target.
     static_libs: [
         "libutils",
+        "libfilemap",
         "libcutils",
         "liblog",
         "libziparchive",
