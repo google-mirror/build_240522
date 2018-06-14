@@ -364,6 +364,12 @@ _product_stash_var_list += \
 	WITH_DEXPREOPT \
 	WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY
 
+# Logical partitions related variables.
+_product_stash_var_list += \
+	BOARD_ANDROID_PARTITION_SIZE \
+	BOARD_ANDROID_PARTITION_PARTITION_LIST \
+
+
 #
 # Mark the variables in _product_stash_var_list as readonly
 #
