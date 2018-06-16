@@ -746,9 +746,11 @@ $(my_generated_sources): PRIVATE_MODULE := $(my_register_name)
 
 my_gen_sources_copy := $(patsubst $(generated_sources_dir)/%,$(intermediates)/%,$(filter $(generated_sources_dir)/%,$(my_generated_sources)))
 
+ifdef my_gen_sources_copy
 $(my_gen_sources_copy): $(intermediates)/% : $(generated_sources_dir)/%
 	@echo "Copy: $@"
 	$(copy-file-to-target)
+endif
 
 my_generated_sources := $(patsubst $(generated_sources_dir)/%,$(intermediates)/%,$(my_generated_sources))
 

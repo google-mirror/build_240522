@@ -36,10 +36,12 @@ sdk_rename_font = PYTHONPATH=$$PYTHONPATH:$(fonttools_lib) $(sdk_font_rename_scr
 
 # TODO: If the font file is a symlink, reuse the font renamed from the symlink
 # target.
+ifdef sdk_fonts_device
 $(sdk_fonts_device): $(SDK_FONT_TEMP)/%.ttf: $(TARGET_OUT)/fonts/%.ttf \
 			$(sdk_font_rename_script)
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(call sdk_rename_font,$<,$@)
+endif
 
 # List of all dependencies - all fonts and configuration files.
 SDK_FONT_DEPS := $(sdk_fonts_device) $(sdk_font_config)

@@ -1,5 +1,45 @@
 # Build System Changes for Android.mk Writers
 
+## Implicit make rules are deprecated
+
+Implicit rules look something like the following:
+
+``` make
+$(TARGET_OUT_SHARED_LIBRARIES)/%_vendor.so: $(TARGET_OUT_SHARED_LIBRARIES)/%.so
+	...
+
+%.o : %.foo
+	...
+```
+
+These can have wide ranging effects across unrelated modules, so they're now deprecated. Instead, use static pattern rules, which are similar, but explicitly match the specified outputs:
+
+``` make
+libs := $(foreach lib,libfoo libbar,$(TARGET_OUT_SHARED_LIBRARIES)/$(lib)_vendor.so)
+$(libs): %_vendor.so: %.so
+	...
+
+files := $(wildcard $(LOCAL_PATH)/*.foo)
+gen := $(patsubst $(LOCAL_PATH)/%.foo,$(intermediates)/%.o,$(files))
+$(gen): %.o : %.foo
+	...
+```
+
+Note: Kati has a bug in where it treats static rules with an empty targets
+declaration as an implicit rule. This is easy to workaround (if you optionally
+generate files) by wrapping the rule in an ifdef of the variable you're using
+for the target:
+
+``` make
+files := $(wildcard $(LOCAL_PATH)/*.foo)
+gen := $(patsubst $(LOCAL_PATH)/%.foo,$(intermediates)/%.o,$(files))
+
+ifdef gen
+$(gen): %.o : %.foo
+	...
+endif
+```
+
 ## Valid Module Names {#name}
 
 We've adopted lexical requirements very similar to [Bazel's
