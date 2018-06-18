@@ -42,7 +42,7 @@ FIXED_SALT = "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
 BLOCK_SIZE = 4096
 
 
-def RunCommand(cmd, verbose=None):
+def RunCommand(cmd, verbose=None, env=None):
   """Echo and run the given command.
 
   Args:
@@ -51,11 +51,16 @@ def RunCommand(cmd, verbose=None):
   Returns:
     A tuple of the output and the exit code.
   """
+  env_copy = None
+  if env:
+    env_copy = os.environ.copy()
+    env_copy.update(env)
   if verbose is None:
     verbose = OPTIONS.verbose
   if verbose:
     print("Running: " + " ".join(cmd))
-  p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+  p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                       env=env_copy)
   output, _ = p.communicate()
 
   if verbose:
@@ -102,6 +107,27 @@ def GetVeritySize(partition_size, fec_supported):
     return verity_size + fec_size
   return verity_size
 
+def GetDiskUsage(path):
+  """Return number of bytes that "path" occupies on host.
+  """
+  env = {"POSIXLY_CORRECT": "1"}
+  cmd = ["du", "-s", path]
+  output, exit_code = RunCommand(cmd, verbose=False, env=env)
+  if exit_code != 0:
+    return False, 0
+  # POSIX du returns number of blocks with block size 512
+  return True, int(output.split()[0]) * 512
+
+def GetPartitionSize(in_dir, prop_dict):
+  if "partition_size" in prop_dict:
+    return prop_dict["partition_size"]
+  success, estimated_size = GetDiskUsage(in_dir)
+  if not success:
+    return 0
+  if "partition_reserved_size" in prop_dict:
+    estimated_size += int(prop_dict["partition_reserved_size"])
+  # Round this up to a multiple of BLOCK_SIZE so that avbtool works
+  return (estimated_size + BLOCK_SIZE - 1) // BLOCK_SIZE * BLOCK_SIZE
 
 def GetSimgSize(image_file):
   simg = sparse_img.SparseImage(image_file, build_map=False)
@@ -486,6 +512,9 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   verity_supported = prop_dict.get("verity") == "true"
   verity_fec_supported = prop_dict.get("verity_fec") == "true"
 
+  # if partition_size is not defined, use output of `du' + reserved_size
+  prop_dict["partition_size"] = str(GetPartitionSize(origin_in, prop_dict))
+
   # Adjust the partition size to make room for the hashes if this is to be
   # verified.
   if verity_supported and is_verity_partition:
@@ -730,6 +759,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_fs_type", "fs_type")
     copy_prop("system_headroom", "partition_headroom")
     copy_prop("system_size", "partition_size")
+    copy_prop("system_reserved_size", "partition_reserved_size")
     if not copy_prop("system_journal_size", "journal_size"):
       d["journal_size"] = "0"
     copy_prop("system_verity_block_device", "verity_block_device")
@@ -757,6 +787,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("fs_type", "fs_type")
     copy_prop("system_fs_type", "fs_type")
     copy_prop("system_size", "partition_size")
+    copy_prop("system_reserved_size", "partition_reserved_size")
     if not copy_prop("system_journal_size", "journal_size"):
       d["journal_size"] = "0"
     copy_prop("system_verity_block_device", "verity_block_device")
