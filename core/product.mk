@@ -364,6 +364,9 @@ _product_stash_var_list += \
 	WITH_DEXPREOPT \
 	WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY
 
+_product_stash_var_list += \
+	BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE \
+
 #
 # Mark the variables in _product_stash_var_list as readonly
 #
