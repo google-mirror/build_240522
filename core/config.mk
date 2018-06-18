@@ -371,6 +371,10 @@ ifeq (,$(TARGET_SUPPORTS_32_BIT_APPS)$(TARGET_SUPPORTS_64_BIT_APPS))
   TARGET_SUPPORTS_32_BIT_APPS := true
 endif
 
+ifndef TARGET_RECOVERY_USES_FIRST_ARCH_ONLY
+TARGET_RECOVERY_USES_FIRST_ARCH_ONLY := true
+endif
+
 # "ro.product.cpu.abilist32" and "ro.product.cpu.abilist64" are
 # comma separated lists of the 32 and 64 bit ABIs (in order of
 # preference) that the target supports. If TARGET_CPU_ABI_LIST_{32,64}_BIT
