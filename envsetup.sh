@@ -329,6 +329,10 @@ function addcompletions()
         return
     fi
 
+    if [ x"$ENVSETUP_NO_COMPLETIONS" = x1 ] ; then
+        return
+    fi
+
     for f in system/core/adb/adb.bash system/core/fastboot/fastboot.bash; do
         if [ -f $f ]; then
             . $f
