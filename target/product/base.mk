@@ -42,10 +42,12 @@ PRODUCT_PACKAGES += \
     bugreportz \
     cameraserver \
     com.android.location.provider \
+    ContactsProvider \
     content \
     CtsShimPrebuilt \
     CtsShimPrivPrebuilt \
     dnsmasq \
+    DefaultContainerService \
     DownloadProvider \
     dpm \
     e2fsck \

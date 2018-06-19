@@ -23,8 +23,6 @@ PRODUCT_PACKAGES := \
     CertInstaller \
     clatd \
     clatd.conf \
-    ContactsProvider \
-    DefaultContainerService \
     FusedLocation \
     InputDevices \
     local_time.default \
