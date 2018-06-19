@@ -79,6 +79,7 @@ PRODUCT_PACKAGES += \
     hid \
     hwservicemanager \
     idmap \
+    ike \
     ime \
     ims-common \
     incident \
