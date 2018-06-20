@@ -193,17 +193,24 @@ ifdef need_compile_java
 
 annotation_processor_flags :=
 annotation_processor_deps :=
+annotation_processor_jars :=
+
+# If error prone is enabled then add LOCAL_ERROR_PRONE_FLAGS to LOCAL_JAVACFLAGS
+ifeq ($(RUN_ERROR_PRONE),true)
+annotation_processor_jars += $(ERROR_PRONE_JARS)
+LOCAL_JAVACFLAGS += $(ERROR_PRONE_FLAGS)
+LOCAL_JAVACFLAGS += '-Xplugin:ErrorProne $(ERROR_PRONE_CHECKS) $(LOCAL_ERROR_PRONE_FLAGS)'
+endif
 
 ifdef LOCAL_ANNOTATION_PROCESSORS
-  annotation_processor_jars := $(call java-lib-files,$(LOCAL_ANNOTATION_PROCESSORS),true)
-  annotation_processor_flags += -processorpath $(call normalize-path-list,$(annotation_processor_jars))
-  annotation_processor_deps += $(annotation_processor_jars)
+  annotation_processor_jars += $(call java-lib-files,$(LOCAL_ANNOTATION_PROCESSORS),true)
 
   # b/25860419: annotation processors must be explicitly specified for grok
   annotation_processor_flags += $(foreach class,$(LOCAL_ANNOTATION_PROCESSOR_CLASSES),-processor $(class))
-
-  annotation_processor_jars :=
 endif
+
+annotation_processor_flags += -processorpath $(call normalize-path-list,$(annotation_processor_jars))
+annotation_processor_deps += $(annotation_processor_jars)
 
 full_static_java_libs := $(call java-lib-files,$(LOCAL_STATIC_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
 full_static_java_header_libs := $(call java-lib-header-files,$(LOCAL_STATIC_JAVA_LIBRARIES),$(LOCAL_IS_HOST_MODULE))
