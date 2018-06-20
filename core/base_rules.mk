@@ -375,6 +375,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_2ND_ARCH_VAR_PREFIX := $(LOCAL_2ND_ARCH_
 
 # Tell the module and all of its sub-modules who it is.
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
+$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE_NAME:= $(LOCAL_MODULE)
 
 # Provide a short-hand for building this module.
 # We name both BUILT and INSTALLED in case
@@ -599,6 +600,25 @@ ifeq (,$(test_config))
       endif
     endif
   endif
+else # ifeq (,$(test_config))
+  # Even AndroidTest.xml exist but it's not using the correct testtype 
+  # for hose-side native test. Always regenerated it LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG
+  # not set.
+  _my_class_name := $(call get-test-class-in-xml,$(test_config))
+  ifeq (,$(filter cts, $(LOCAL_COMPATIBILITY_SUITE)))
+    ifneq (true, $(LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG))
+      ifeq (true,$(is_native))
+        ifeq (true, $(LOCAL_IS_HOST_MODULE))
+              ifneq (com.android.tradefed.testtype.HostGTest, $(_my_class_name))
+                include $(BUILD_SYSTEM)/autogen_test_config.mk
+                test_config := $(autogen_test_config_file)
+                autogen_test_config_file :=
+              endif
+        endif
+      endif
+    endif
+  endif
+  _my_class_name :=
 endif
 
 is_instrumentation_test :=
