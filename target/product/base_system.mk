@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2012 The Android Open Source Project
+# Copyright (C) 2018 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-# Base modules (will move elsewhere, previously user tagged)
+# Base modules and settings for the system partition.
 PRODUCT_PACKAGES += \
     20-dns.conf \
     95-configured \
@@ -22,9 +22,6 @@ PRODUCT_PACKAGES += \
     adbd \
     adbd.recovery \
     am \
-    android.hardware.cas@1.0-service \
-    android.hardware.configstore@1.0-service \
-    android.hardware.media.omx@1.0-service \
     android.hidl.allocator@1.0-service \
     android.hidl.base-V1.0-java \
     android.hidl.manager-V1.0-java \
@@ -61,8 +58,8 @@ PRODUCT_PACKAGES += \
     CtsShimPrebuilt \
     CtsShimPrivPrebuilt \
     debuggerd\
-    dnsmasq \
     DefaultContainerService \
+    dnsmasq \
     DownloadProvider \
     dpm \
     dumpstate \
@@ -76,7 +73,6 @@ PRODUCT_PACKAGES += \
     framework-sysconfig.xml \
     fsck_msdos \
     gatekeeperd \
-    gralloc.default \
     healthd \
     hid \
     hwservicemanager \
@@ -109,22 +105,16 @@ PRODUCT_PACKAGES += \
     libaudiopolicymanager \
     libaudiopolicyservice \
     libbinder \
-    libbundlewrapper \
     libc \
     libcamera2ndk \
     libcamera_client \
     libcameraservice \
-    libclearkeycasplugin \
     libc_malloc_debug \
     libc_malloc_hooks \
     libcutils \
     libdl \
-    libdownmix \
-    libdrmclearkeyplugin \
     libdrmframework \
     libdrmframework_jni \
-    libeffectproxy \
-    libeffects \
     libEGL \
     libETC1 \
     libFFTEm \
@@ -142,7 +132,6 @@ PRODUCT_PACKAGES += \
     libjnigraphics \
     libjpeg \
     libkeystore \
-    libldnhncr \
     liblog \
     libm \
     libmedia \
@@ -160,9 +149,6 @@ PRODUCT_PACKAGES += \
     libpixelflinger \
     libpower \
     libradio_metadata \
-    libreference-ril \
-    libreverbwrapper \
-    libril \
     librtp_jni \
     libsensorservice \
     libsigchain \
@@ -187,7 +173,6 @@ PRODUCT_PACKAGES += \
     libui \
     libusbhost \
     libutils \
-    libvisualizer \
     libvorbisidec \
     libvulkan \
     libwifi-service \
@@ -238,7 +223,8 @@ PRODUCT_PACKAGES += \
     SettingsProvider \
     sgdisk \
     Shell \
-    shell_and_utilities \
+    shell_and_utilities_recovery \
+    shell_and_utilities_system \
     sm \
     storaged \
     surfaceflinger \
@@ -256,8 +242,6 @@ PRODUCT_PACKAGES += \
     uncrypt \
     usbd \
     vdc \
-    vndservice \
-    vndservicemanager \
     voip-common \
     vold \
     WallpaperBackup \
@@ -268,18 +252,9 @@ PRODUCT_PACKAGES += \
 
 # VINTF data
 PRODUCT_PACKAGES += \
-    device_compatibility_matrix.xml \
     device_manifest.xml \
     framework_manifest.xml \
     framework_compatibility_matrix.xml \
-
-# AID Generation for
-# <pwd.h> and <grp.h>
-PRODUCT_PACKAGES += \
-    passwd \
-    group \
-    fs_config_files \
-    fs_config_dirs
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.usb.rc:root/init.usb.rc \
