@@ -1,0 +1,7 @@
+Presubmit-Ready+1: Bo Hu <bohu@google.com>
+Build-Cop-Override+1: Seigo Nonaka <nona@google.com>
+Submitted-by: Bo Hu <bohu@google.com>
+Submitted-at: Wed, 20 Jun 2018 05:04:20 +0000
+Reviewed-on: https://android-review.googlesource.com/707389
+Project: platform/build
+Branch: refs/heads/master
