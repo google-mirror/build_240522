@@ -3540,3 +3540,12 @@ $(if $(call _invalid-name-chars,$($(1))), \
   $(call pretty-error,Invalid characters in module stem \($(1)\): $(call _invalid-name-chars,$($(1)))))
 endef
 .KATI_READONLY := verify-module-stem
+
+###########################################################
+## Get test class for input Xml
+##
+## $(1): AndroidTestXml Path
+###########################################################
+define get-test-class-in-xml
+$(strip $(shell sh -c "cat $(1) | grep '<test class=' | sed 's/<test class=\"/@/g' | sed 's/\"/@/g' | cut -d @ -f 2"))
+endef
