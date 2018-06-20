@@ -379,6 +379,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_2ND_ARCH_VAR_PREFIX := $(LOCAL_2ND_ARCH_
 
 # Tell the module and all of its sub-modules who it is.
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
+$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE_NAME:= $(LOCAL_MODULE)
 
 # Provide a short-hand for building this module.
 # We name both BUILT and INSTALLED in case
@@ -579,6 +580,7 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(s):$(dir)/$(n)))))
 
 test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+
 ifeq (,$(test_config))
   ifneq (true,$(is_native))
     is_instrumentation_test := true
