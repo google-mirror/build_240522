@@ -375,6 +375,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_2ND_ARCH_VAR_PREFIX := $(LOCAL_2ND_ARCH_
 
 # Tell the module and all of its sub-modules who it is.
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
+$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE_NAME:= $(LOCAL_MODULE)
 
 # Provide a short-hand for building this module.
 # We name both BUILT and INSTALLED in case
@@ -574,6 +575,14 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(s):$(dir)/$(n)))))
 
 test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+# Include DevicelessTest.xml for testing for
+# 1. native-tests + 2. host-side
+ifeq (true,$(is_native))
+  ifeq (true, $(LOCAL_IS_HOST_MODULE))
+     test_config := $(wildcard $(LOCAL_PATH)/DevicelessTest.xml)
+  endif
+endif
+
 ifeq (,$(test_config))
   ifneq (true,$(is_native))
     is_instrumentation_test := true
@@ -624,6 +633,13 @@ $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
       $(extra_config):$(dir)/$(notdir $(extra_config))))))
 endif
 endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+
+# Modules with same compat_files sync their auto_test_config
+ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+  ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen
+    ALL_MODULES.$(my_register_name).auto_test_config := true
+  endif
+endif
 
 ifneq ($(my_test_data_file_pairs),)
 $(foreach pair, $(my_test_data_file_pairs), \
