@@ -139,6 +139,8 @@ $(call add_json_str,  DistDir,                           $(if $(dist_goal), $(DI
 
 $(call add_json_list, NamespacesToExport,                $(PRODUCT_SOONG_NAMESPACES))
 
+$(call add_json_bool, ProductIsIot,                      $(filter true,$(PRODUCT_IOT)))
+
 $(call add_json_list, PgoAdditionalProfileDirs,          $(PGO_ADDITIONAL_PROFILE_DIRS))
 
 $(call add_json_list, BoardVendorSepolicyDirs,           $(BOARD_SEPOLICY_DIRS))
