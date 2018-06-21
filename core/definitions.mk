@@ -105,6 +105,14 @@ ALL_VINTF_MANIFEST_FRAGMENTS_LIST:=
 # All tests that should be skipped in presubmit check.
 ALL_DISABLED_PRESUBMIT_TESTS :=
 
+# clang-tidy doesn't recognize every flag that clang does. This is unlikely to
+# be a complete list, but we can populate this with the ones we know to avoid
+# issues with clang-diagnostic-unused-command-line-argument.
+CLANG_TIDY_UNKNOWN_CFLAGS := \
+    -Wa,% \
+
+sanitize_tidy_cflags = $(filter-out $(CLANG_TIDY_UNKNOWN_CFLAGS),$1)
+
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################
@@ -1264,7 +1272,7 @@ endef
 define clang-tidy-cpp
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-cpp-to-o-compiler-args)
+  $< -- $(call sanitize_tidy_cflags,$(transform-cpp-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
@@ -1312,7 +1320,7 @@ endef
 define clang-tidy-c
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-c-to-o-compiler-args)
+  $< -- $(call sanitize_tidy_cflags,$(transform-c-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
@@ -1382,7 +1390,7 @@ endef
 define clang-tidy-host-cpp
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-host-cpp-to-o-compiler-args)
+  $< -- $(call sanitize_tidy_cflags,$(transform-host-cpp-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
@@ -1434,7 +1442,7 @@ endef
 define clang-tidy-host-c
 $(hide) $(PATH_TO_CLANG_TIDY) $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS) \
-  $< -- $(transform-host-c-to-o-compiler-args)
+  $< -- $(call sanitize_tidy_cflags,$(transform-host-c-to-o-compiler-args))
 endef
 
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
