@@ -42,9 +42,8 @@ LOCAL_CHECKED_MODULE := $(my_prebuilt_src_file)
 my_strip_module := $(firstword \
   $(LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
   $(LOCAL_STRIP_MODULE))
-my_pack_module_relocations := $(firstword \
-  $(LOCAL_PACK_MODULE_RELOCATIONS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
-  $(LOCAL_PACK_MODULE_RELOCATIONS))
+
+include $(BUILD_SYSTEM)/pack_dyn_relocs_setup.mk
 
 ifeq (SHARED_LIBRARIES,$(LOCAL_MODULE_CLASS))
   # LOCAL_COPY_TO_INTERMEDIATE_LIBRARIES indicates that this prebuilt should be
@@ -62,21 +61,6 @@ ifeq (SHARED_LIBRARIES,$(LOCAL_MODULE_CLASS))
   ifeq ($(LOCAL_IS_HOST_MODULE)$(my_strip_module),)
     # Strip but not try to add debuglink
     my_strip_module := no_debuglink
-  endif
-
-  ifeq ($(LOCAL_IS_HOST_MODULE)$(my_pack_module_relocations),)
-    # Do not pack relocations by default
-    my_pack_module_relocations := false
-  endif
-
-  ifeq ($(DISABLE_RELOCATION_PACKER),true)
-    my_pack_module_relocations := false
-  endif
-
-  # Relocation packer does not work with LLD yet.
-  # my_use_clang_lld might be used before being set up in binary.mk
-  ifeq ($(my_use_clang_lld),true)
-    my_pack_module_relocations := false
   endif
 endif
 
@@ -151,9 +135,8 @@ ifneq ($(filter true keep_symbols no_debuglink mini-debug-info,$(my_strip_module
   ifneq ($(LOCAL_PREBUILT_STRIP_COMMENTS),)
     $(error Cannot strip/pack scripts LOCAL_PATH=$(LOCAL_PATH))
   endif
-  # Set the arch-specific variables to set up the strip/pack rules.
+  # Set the arch-specific variables to set up the strip rules
   LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH) := $(my_strip_module)
-  LOCAL_PACK_MODULE_RELOCATIONS_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH) := $(my_pack_module_relocations)
   include $(BUILD_SYSTEM)/dynamic_binary.mk
   built_module := $(linked_module)
 
