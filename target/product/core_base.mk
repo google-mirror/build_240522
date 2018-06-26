@@ -22,13 +22,7 @@ PRODUCT_PACKAGES += \
     Home \
     TelephonyProvider \
     UserDictionaryProvider \
-    libandroidfw \
-    libaudioutils \
-    libmdnssd \
     libnfc_ndef \
-    libpowermanager \
-    libspeexresampler \
     libvariablespeed \
-    libwebrtc_audio_preprocessing \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
