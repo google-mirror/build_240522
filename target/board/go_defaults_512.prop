@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
-# Inherit common Android Go defaults.
-$(call inherit-product, build/target/product/go_defaults_common.mk)
+# 512MB specific properties.
 
+# lmkd can kill more now.
+ro.lmk.medium=700
+
+# madvise random in ART to reduce page cache thrashing.
+dalvik.vm.madvise-random=true
