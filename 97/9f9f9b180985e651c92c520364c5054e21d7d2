@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Code-Review+1: Chih-hung Hsieh <chh@google.com>
+Verified+1: Colin Cross <ccross@android.com>
+Submitted-by: Colin Cross <ccross@android.com>
+Submitted-at: Tue, 26 Jun 2018 17:40:56 +0000
+Reviewed-on: https://android-review.googlesource.com/709456
+Project: platform/build
+Branch: refs/heads/master
