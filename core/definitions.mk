@@ -2847,9 +2847,10 @@ $(2): $(1) $(HIDDENAPI) $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
 	find $(dir $(1)) -maxdepth 1 -name "classes*.dex" | sort | \
 		xargs -I{} cp -f {} $(dir $(2))
 	find $(dir $(2)) -name "classes*.dex" | sort | sed 's/^/--dex=/' | \
-		xargs $(HIDDENAPI) --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
-		                   --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
-		                   --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+		xargs $(HIDDENAPI) encode \
+		    --light-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+		    --dark-greylist=$(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+		    --blacklist=$(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
 endef
 
 define hiddenapi-copy-soong-jar
