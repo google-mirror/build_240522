@@ -1988,7 +1988,9 @@ else
 HOST_FPIE_FLAGS := -pie
 # Force the correct entry point to workaround a bug in binutils that manifests with -pie
 ifeq ($(HOST_CROSS_OS),windows)
+ifeq ($(my_arch),x86)
 HOST_CROSS_FPIE_FLAGS += -Wl,-e_mainCRTStartup
+endif
 endif
 endif
 
