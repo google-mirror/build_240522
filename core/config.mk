@@ -372,6 +372,14 @@ ifeq (,$(TARGET_SUPPORTS_32_BIT_APPS)$(TARGET_SUPPORTS_64_BIT_APPS))
   TARGET_SUPPORTS_32_BIT_APPS := true
 endif
 
+# Sanity check to warn about likely cryptic errors later in the build.
+ifneq (,$(findstring 64,$(TARGET_ARCH)$(TARGET_2ND_ARCH)))
+  ifeq (,$(filter true false,$(TARGET_SUPPORTS_64_BIT_APPS)))
+    $(warning Building a 32-bit-app-only product on a 64-bit device. \
+      If this is intentional, set TARGET_SUPPORTS_64_BIT_APPS := false)
+  endif
+endif
+
 # "ro.product.cpu.abilist32" and "ro.product.cpu.abilist64" are
 # comma separated lists of the 32 and 64 bit ABIs (in order of
 # preference) that the target supports. If TARGET_CPU_ABI_LIST_{32,64}_BIT
