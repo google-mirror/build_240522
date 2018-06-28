@@ -20,7 +20,6 @@ PRODUCT_PACKAGES += \
     95-configured \
     adb \
     adbd \
-    adbd.recovery \
     am \
     android.hidl.allocator@1.0-service \
     android.hidl.base-V1.0-java \
@@ -95,7 +94,6 @@ PRODUCT_PACKAGES += \
     ip-up-vpn \
     javax.obex \
     keystore \
-    ld.config.recovery.txt \
     ld.config.txt \
     ld.mc \
     libaaudio \
@@ -186,7 +184,6 @@ PRODUCT_PACKAGES += \
     libwifi-service \
     libwilhelm \
     linker \
-    linker.recovery \
     lmkd \
     locksettings \
     logcat \
@@ -231,7 +228,6 @@ PRODUCT_PACKAGES += \
     SettingsProvider \
     sgdisk \
     Shell \
-    shell_and_utilities_recovery \
     shell_and_utilities_system \
     sm \
     storaged \

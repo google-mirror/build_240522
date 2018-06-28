@@ -14,6 +14,12 @@
 # limitations under the License.
 #
 
+PRODUCT_PACKAGES += \
+    adbd.recovery \
+    ld.config.recovery.txt \
+    linker.recovery \
+    shell_and_utilities_recovery \
+
 # Base modules and settings for the vendor partition.
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.0-service \
