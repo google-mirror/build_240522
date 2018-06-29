@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Anton Hansson <hansson@google.com>
+Build-Cop-Override+1: Rubin Xu <rubinxu@google.com>
+Verified+1: Anton Hansson <hansson@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Fri, 29 Jun 2018 12:04:25 +0000
+Reviewed-on: https://android-review.googlesource.com/711445
+Project: platform/build
+Branch: refs/heads/master
