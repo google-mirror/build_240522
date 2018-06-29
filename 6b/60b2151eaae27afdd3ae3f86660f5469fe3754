@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: David Brazdil <dbrazdil@google.com>
+Submitted-by: David Brazdil <dbrazdil@google.com>
+Submitted-at: Fri, 29 Jun 2018 11:33:07 +0000
+Reviewed-on: https://android-review.googlesource.com/710867
+Project: platform/build
+Branch: refs/heads/master
