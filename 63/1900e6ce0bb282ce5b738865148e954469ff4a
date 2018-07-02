@@ -1,0 +1,10 @@
+Verified+1: Anton Hansson <hansson@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Roland Levillain <rpl@google.com>
+Code-Review+1: SzuWei Lin <szuweilin@google.com>
+Build-Cop-Override+1: Richard Uhler <ruhler@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Mon, 02 Jul 2018 10:16:35 +0000
+Reviewed-on: https://android-review.googlesource.com/711544
+Project: platform/build
+Branch: refs/heads/master
