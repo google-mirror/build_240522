@@ -71,6 +71,9 @@ BOARD_VNDK_VERSION := current
 
 BUILD_BROKEN_DUP_RULES := false
 
+# Audio: must using XML format for Treblized devices
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Enable A/B update
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
