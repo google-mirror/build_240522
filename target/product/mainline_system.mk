@@ -36,7 +36,6 @@ _selinux_policy_whitelist := \
 
 _base_mk_whitelist := \
   $(_selinux_policy_whitelist) \
-  recovery/root/etc/mke2fs.conf \
   root/init \
   root/init.environ.rc \
   root/init.rc \
