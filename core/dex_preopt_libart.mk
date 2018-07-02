@@ -99,12 +99,18 @@ endif
 
 ifeq (true,$(my_use_profile_for_boot_image))
 
-# Location of text based profile for the boot image.
-my_boot_image_profile_location := $(PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION)
-ifeq (,$(my_boot_image_profile_location))
+ifeq (,$(PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION))
 # If not set, use the default.
-my_boot_image_profile_location := frameworks/base/config/boot-image-profile.txt
+default_boot_image_profile := frameworks/base/config/boot-image-profile.txt
 endif
+
+# Location of text based profile for the boot image.
+my_boot_image_profile_location := $(PRODUCT_OUT)/dex_bootjars/boot-image-profile.txt
+
+$(my_boot_image_profile_location): $(PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION)
+	@echo 'Generating $@ for profman'
+	@rm -rf $@
+	$(hide) cat $^ $(default_boot_image_profile) > $@
 
 # Code to create the boot image profile, not in dex_preopt_libart_boot.mk since the profile is the same for all archs.
 my_out_boot_image_profile_location := $(DEXPREOPT_BOOT_JAR_DIR_FULL_PATH)/boot.prof
