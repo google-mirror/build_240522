@@ -107,6 +107,9 @@ BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 # no longer has QCOM-specific directories under /.
 BOARD_SEPOLICY_DIRS += build/target/board/generic_arm64_ab/sepolicy
 
+# Audio: must using XML format for Treblized devices
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Enable A/B update
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true

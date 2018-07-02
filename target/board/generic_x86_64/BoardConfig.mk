@@ -68,6 +68,9 @@ TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
 endif
 BOARD_VNDK_VERSION := current
 
+# Audio: must using XML format for Treblized devices
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Enable A/B update
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
