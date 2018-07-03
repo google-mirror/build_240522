@@ -1530,6 +1530,12 @@ ifneq (,$(SANITIZE_TARGET))
   endif
 endif
 
+# When building a system root image, also add the ramdisk image as a dependency
+# to ensure all files in it are built before it is created.
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+  FULL_SYSTEMIMAGE_DEPS += $(INSTALLED_RAMDISK_TARGET)
+endif
+
 # -----------------------------------------------------------------
 # Final System VINTF manifest including fragments. This is not assembled
 # on the device because it depends on everything in a given device
