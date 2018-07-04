@@ -249,9 +249,12 @@ PRODUCT_PACKAGES += \
 
 # VINTF data
 PRODUCT_PACKAGES += \
-    device_manifest.xml \
     framework_manifest.xml \
     framework_compatibility_matrix.xml \
+
+ifdef DEVICE_MANIFEST_FILE
+PRODUCT_PACKAGES += device_manifest.xml
+endif
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.usb.rc:root/init.usb.rc \
