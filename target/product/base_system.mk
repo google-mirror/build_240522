@@ -248,8 +248,10 @@ PRODUCT_PACKAGES += \
 
 
 # VINTF data
+ifdef DEVICE_MANIFEST_FILE
+PRODUCT_PACKAGES += device_manifest.xml
+endif
 PRODUCT_PACKAGES += \
-    device_manifest.xml \
     framework_manifest.xml \
     framework_compatibility_matrix.xml \
 

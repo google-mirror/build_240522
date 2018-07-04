@@ -24,3 +24,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
 PRODUCT_NAME := generic
+
+_whitelist := \
+  adbd.recovery \
+  linker.recovery \
+
+$(call enforce-product-packages-exist,$(_whitelist))
