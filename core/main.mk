@@ -917,6 +917,17 @@ define product-installed-files
   $(call module-installed-files, $(_pif_modules))
 endef
 
+ifeq (true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_PACKAGES_EXIST))
+  _whitelist := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_PACKAGES_EXIST_WHITELIST)
+  _modules := $(filter-out $(_whitelist),$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_PACKAGES))
+  # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
+  # existence if either <module> or the <module>_32 variant.
+  $(foreach m,$(_modules),\
+    $(if $(filter $(m) $(call get-32-bit-modules,$(m)),$(ALL_MODULES)),,\
+      $(error $(INTERNAL_PRODUCT) includes non-existant module $(m) in PRODUCT_PACKAGES))\
+  )
+endif
+
 ifdef FULL_BUILD
   product_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
 else
