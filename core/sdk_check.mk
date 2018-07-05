@@ -16,12 +16,11 @@ endif
 ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS),)
   ifeq (,$(filter $(LOCAL_MODULE),$(whitelisted_modules)))
     ifneq ($(JAVA_SDK_ENFORCEMENT_WARNING)$(JAVA_SDK_ENFORCEMENT_ERROR),)
-      my_message := Must specify LOCAL_SDK_VERSION or LOCAL_PRIVATE_PLATFORM_APIS,
-      ifeq ($(LOCAL_MODULE_CLASS),$(JAVA_SDK_ENFORCEMENT_ERROR))
-        $(call pretty-error,$(my_message))
-      endif
+      my_message := Must specify LOCAL_SDK_VERSION or LOCAL_PRIVATE_PLATFORM_APIS.
       ifeq ($(LOCAL_MODULE_CLASS),$(JAVA_SDK_ENFORCEMENT_WARNING))
         $(call pretty-warning,$(my_message))
+      else ifeq ($(LOCAL_MODULE_CLASS),$(JAVA_SDK_ENFORCEMENT_ERROR))
+        $(call pretty-error,$(my_message))
       endif
       my_message :=
     endif
