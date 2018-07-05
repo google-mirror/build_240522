@@ -574,6 +574,7 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(s):$(dir)/$(n)))))
 
+ifneq (true, $(LOCAL_DISABLE_TEST_CONFIG))
 test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
 ifeq (,$(test_config))
   ifneq (true,$(is_native))
@@ -609,6 +610,7 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
     $(test_config):$(dir)/$(LOCAL_MODULE).config)))
 endif
+endif  # LOCAL_DISABLE_TEST_CONFIG
 
 test_config :=
 
