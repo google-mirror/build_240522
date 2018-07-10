@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Dario Freni <dariofreni@google.com>
+Submitted-by: Dario Freni <dariofreni@google.com>
+Submitted-at: Tue, 10 Jul 2018 16:16:11 +0000
+Reviewed-on: https://android-review.googlesource.com/714909
+Project: platform/build
+Branch: refs/heads/master
