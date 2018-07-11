@@ -47,4 +47,4 @@ PRODUCT_PACKAGES += \
     selinux_policy_nonsystem \
     shell_and_utilities_vendor \
     vndservice \
-    vndservicemanager \
+    vndservicemanager
