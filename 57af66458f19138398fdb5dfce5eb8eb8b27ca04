@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f34b8b2_1dbd9352",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1139803
+      },
+      "writtenOn": "2018-07-12T10:34:30Z",
+      "side": 1,
+      "message": "If we put this here, the ones in target/board/generic*/BoardConfig.mk are redundant and may be removed.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "57af66458f19138398fdb5dfce5eb8eb8b27ca04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e21df9c_0efee64b",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1139803
+      },
+      "writtenOn": "2018-07-12T10:34:30Z",
+      "side": 1,
+      "message": "Aren\u0027t these two the same as line 31-32 above?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "57af66458f19138398fdb5dfce5eb8eb8b27ca04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
