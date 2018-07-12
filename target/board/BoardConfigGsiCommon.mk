@@ -3,6 +3,16 @@
 # Common compile-time definitions for GSI
 #
 
+# system.img is always ext4 with sparse option
+TARGET_USERIMAGES_USE_EXT4 := true
+# TODO(b/63790380): emulator doesn't support sparse yet
+#TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
+TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+TARGET_USES_MKE2FS := true
+
+# Enable dyanmic system image size and reserved 16MB in it.
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 67108864
+
 # Android Verified Boot (AVB):
 #   Builds a special vbmeta.img that disables AVB verification.
 #   Otherwise, AVB will prevent the device from booting the generic system.img.
@@ -23,6 +33,21 @@ BOARD_VNDK_VERSION := current
 # Pi GSI supports system-as-root
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+# system-as-root is mandatory from Android P
+TARGET_NO_RECOVERY := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+# 64 bits binder interface is mandatory from Android P
+TARGET_USES_64_BIT_BINDER := true
+
+# Android generic system image always create metadata partition
+BOARD_USES_METADATA_PARTITION := true
+
+# Set this to create /cache mount point for non-A/B devices that mounts /cache.
+# The partition size doesn't matter, just to make build pass.
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 
 # Audio: must using XML format for Treblized devices
 USE_XML_AUDIO_POLICY_CONF := 1
