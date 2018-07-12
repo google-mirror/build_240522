@@ -66,6 +66,13 @@ else
   my_host_cross :=
 endif
 
+ifeq (true, $(LOCAL_PRODUCT_MODULE))
+ifneq (,$(filter $(LOCAL_MODULE),$(PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION)))
+  $(warning Overriding $(LOCAL_MODULE) to not be marked as LOCAL_PRODUCT_MODULE)
+  LOCAL_PRODUCT_MODULE :=
+endif
+endif
+
 _path := $(LOCAL_MODULE_PATH) $(LOCAL_MODULE_PATH_32) $(LOCAL_MODULE_PATH_64)
 ifneq ($(filter $(TARGET_OUT_VENDOR)%,$(_path)),)
 LOCAL_VENDOR_MODULE := true
