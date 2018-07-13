@@ -376,6 +376,17 @@ ifdef LOCAL_COMPRESSED_MODULE
 $(built_module) : $(MINIGZIP)
 endif
 
+ifdef LOCAL_PRODUCT_MODULE
+system_stub_dex := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/core_dex_intermediates/classes.dex
+oahl_stub_dex := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/oahl_dex_intermediates/classes.dex
+app_compat_lists := \
+  $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+  $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+  $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+
+$(built_module) : $(system_stub_dex) $(oahl_stub_dex) $(HOST_OUT_EXECUTABLES)/veridex $(app_compat_lists)
+endif
+
 $(built_module) : $(my_prebuilt_src_file) | $(ZIPALIGN) $(SIGNAPK_JAR)
 	$(transform-prebuilt-to-target)
 	$(uncompress-shared-libs)
@@ -403,6 +414,9 @@ endif  # LOCAL_CERTIFICATE
 ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
+ifdef LOCAL_PRODUCT_MODULE
+	$(run-appcompat)
+endif  # LOCAL_PRODUCT_MODULE
 endif  # ! LOCAL_REPLACE_PREBUILT_APK_INSTALLED
 
 ###############################
