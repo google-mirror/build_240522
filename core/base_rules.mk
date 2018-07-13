@@ -561,6 +561,13 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
+# Modules with same compat_files sync their auto_test_config
+ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+  ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen
+    ALL_MODULES.$(my_register_name).auto_test_config := true
+  endif
+endif
+
 # Make sure we only add the files once for multilib modules.
 ifndef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
