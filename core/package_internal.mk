@@ -590,6 +590,10 @@ else
 endif
 endif
 
+ifdef LOCAL_PRODUCT_MODULE
+$(LOCAL_BUILT_MODULE) : appcompat
+endif
+
 $(LOCAL_BUILT_MODULE): PRIVATE_DONT_DELETE_JAR_DIRS := $(LOCAL_DONT_DELETE_JAR_DIRS)
 $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/resources
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
@@ -643,6 +647,9 @@ endif  # LOCAL_DEX_PREOPT
 ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
+ifdef LOCAL_PRODUCT_MODULE
+	$(run-appcompat)
+endif  # LOCAL_PRODUCT_MODULE
 
 ###############################
 ## Build dpi-specific apks, if it's apps_only build.

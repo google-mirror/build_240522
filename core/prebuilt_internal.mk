@@ -376,6 +376,10 @@ ifdef LOCAL_COMPRESSED_MODULE
 $(built_module) : $(MINIGZIP)
 endif
 
+ifdef LOCAL_PRODUCT_MODULE
+$(built_module) : appcompat
+endif
+
 $(built_module) : $(my_prebuilt_src_file) | $(ZIPALIGN) $(SIGNAPK_JAR)
 	$(transform-prebuilt-to-target)
 	$(uncompress-shared-libs)
@@ -403,6 +407,9 @@ endif  # LOCAL_CERTIFICATE
 ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
+ifdef LOCAL_PRODUCT_MODULE
+	$(run-appcompat)
+endif  # LOCAL_PRODUCT_MODULE
 endif  # ! LOCAL_REPLACE_PREBUILT_APK_INSTALLED
 
 ###############################
