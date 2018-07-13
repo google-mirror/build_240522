@@ -590,6 +590,17 @@ else
 endif
 endif
 
+ifdef LOCAL_PRODUCT_MODULE
+system_stub_dex := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/core_dex_intermediates/classes.dex
+oahl_stub_dex := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/oahl_dex_intermediates/classes.dex
+app_compat_lists := \
+  $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST) \
+  $(INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST) \
+  $(INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST)
+
+$(LOCAL_BUILT_MODULE) : $(system_stub_dex) $(oahl_stub_dex) $(HOST_OUT_EXECUTABLES)/veridex $(app_compat_lists) art/tools/veridex/appcompat.sh
+endif
+
 $(LOCAL_BUILT_MODULE): PRIVATE_DONT_DELETE_JAR_DIRS := $(LOCAL_DONT_DELETE_JAR_DIRS)
 $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/resources
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
@@ -630,6 +641,10 @@ ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
 	@# No need to align, sign-package below will do it.
 	$(uncompress-dexs)
 endif
+# Run appcompat before stripping the classes.dex file.
+ifdef LOCAL_PRODUCT_MODULE
+	$(run-appcompat)
+endif  # LOCAL_PRODUCT_MODULE
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped
