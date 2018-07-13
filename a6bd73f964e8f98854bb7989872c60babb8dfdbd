@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "259e8e2e_afb00bed",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-13T15:56:30Z",
+      "side": 1,
+      "message": "real files cannot depend on phony targets, because then they\u0027d always be rebuilt. so this needs those dependencies explicitly",
+      "range": {
+        "startLine": 594,
+        "startChar": 24,
+        "endLine": 594,
+        "endChar": 33
+      },
+      "revId": "a6bd73f964e8f98854bb7989872c60babb8dfdbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
