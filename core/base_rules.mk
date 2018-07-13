@@ -380,6 +380,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_2ND_ARCH_VAR_PREFIX := $(LOCAL_2ND_ARCH_
 
 # Tell the module and all of its sub-modules who it is.
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
+$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE_NAME:= $(LOCAL_MODULE)
 
 # Provide a short-hand for building this module.
 # We name both BUILT and INSTALLED in case
@@ -566,10 +567,15 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
-# Make sure we only add the files once for multilib modules.
-ifndef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
-$(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
 
+# Make sure we only add the files once for multilib modules.
+ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+  # Sync the auto_test_config value for multilib modules.
+  ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen
+    ALL_MODULES.$(my_register_name).auto_test_config := true
+  endif
+else # ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+$(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
 # LOCAL_COMPATIBILITY_SUPPORT_FILES is a list of <src>[:<dest>].
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES), \
