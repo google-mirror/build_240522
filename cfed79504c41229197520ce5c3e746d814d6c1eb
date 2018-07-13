@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83d63334_acd8a03a",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-13T19:11:32Z",
+      "side": 1,
+      "message": "it\u0027s also using art/tools/veridex/appcompat.sh",
+      "revId": "cfed79504c41229197520ce5c3e746d814d6c1eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
