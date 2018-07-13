@@ -52,6 +52,7 @@ ifeq (true,$(my_auto_generate_config))
   LOCAL_INTERMEDIATE_TARGETS += $(autogen_test_config_file)
   $(LOCAL_BUILT_MODULE): $(autogen_test_config_file)
   ALL_MODULES.$(my_register_name).auto_test_config := true
+  $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen := true
 else
   autogen_test_config_file :=
 endif
