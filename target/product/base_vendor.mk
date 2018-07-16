@@ -22,6 +22,11 @@ PRODUCT_PACKAGES += \
     recovery \
     shell_and_utilities_recovery \
 
+# VINTF data for recovery image
+PRODUCT_PACKAGES += \
+    device_manifest.recovery.xml \
+    framework_manifest.recovery.xml \
+
 # Base modules and settings for the vendor partition.
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.0-service \
