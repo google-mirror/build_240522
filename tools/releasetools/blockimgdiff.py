@@ -1484,9 +1484,15 @@ class BlockImageDiff(object):
                src_file, tgt_file, patch_file]
         p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         imgdiff_output, _ = p.communicate()
-        assert p.returncode == 0, \
-            "Failed to create imgdiff patch between {} and {}:\n{}".format(
-                src_name, tgt_name, imgdiff_output)
+        if p.returncode != 0:
+          with transfer_lock:
+            print("Failed to create imgdiff patch between {} and {}:\n{},"
+                  " fall back to linear split".format(src_name, tgt_name,
+                                                      imgdiff_output))
+            AddSplitTransfersWithFixedSizeChunks(tgt_name, src_name, tgt_ranges,
+                                           src_ranges, "diff", self.transfers)
+
+          continue
 
         with open(patch_info_file) as patch_info:
           lines = patch_info.readlines()
