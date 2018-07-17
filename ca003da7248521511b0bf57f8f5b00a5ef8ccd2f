@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f551df29_f07dbc64",
+        "filename": "core/dex_preopt_libart_boot.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-07-17T15:36:20Z",
+      "side": 1,
+      "message": "Rearrange to be together (and before?) the oat-symbols and strip parameters.",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 23
+      },
+      "revId": "ca003da7248521511b0bf57f8f5b00a5ef8ccd2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
