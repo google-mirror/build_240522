@@ -986,6 +986,8 @@ else
 endif
 
 # Verify the artifact path requirements made by included products.
+offending_artifacts_file := $(PRODUCT_OUT)/offending_artifacts.txt
+$(shell rm -f $(offending_artifacts_file))
 $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
   $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
   $(eval ### Verify that the product only produces files inside its path requirements.) \
@@ -999,12 +1001,13 @@ $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
   $(eval unused_whitelist := $(filter-out $(files),$(whitelist_patterns))) \
   $(call maybe-print-list-and-error,$(unused_whitelist),$(makefile) includes redundant whitelist entries in its artifact path requirement.) \
   $(eval ### Optionally verify that nothing else produces files inside this artifact path requirement.) \
+  $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_FILES))) \
+  $(eval whitelist := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
+  $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
+  $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
+  $(file >>$(offending_artifacts_file),$(subst $(space),$(newline),$(sort $(strip $(files_in_requirement))))) \
+  $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
   $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS),\
-    $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_FILES))) \
-    $(eval whitelist := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
-    $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
-    $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
-    $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
     $(call maybe-print-list-and-error,$(offending_files),$(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement.) \
     $(eval unused_whitelist := $(filter-out $(extra_files),$(whitelist_patterns))) \
     $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.) \
