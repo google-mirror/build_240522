@@ -58,3 +58,6 @@ PRODUCT_NAME := aosp_x86_64
 PRODUCT_DEVICE := generic_x86_64
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on IA x86_64 Emulator
+
+# Enable dyanmic system image size
+PRODUCT_USE_LOGICAL_PARTITIONS := true
