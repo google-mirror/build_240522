@@ -22,6 +22,7 @@ PRODUCT_PACKAGES += \
     recovery \
     shell_and_utilities_recovery \
     watchdogd.recovery \
+    android.hardware.health@2.0-impl-default.recovery \
 
 # Base modules and settings for the vendor partition.
 PRODUCT_PACKAGES += \
