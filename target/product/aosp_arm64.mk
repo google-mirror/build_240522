@@ -51,3 +51,6 @@ PRODUCT_NAME := aosp_arm64
 PRODUCT_DEVICE := generic_arm64
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on ARM arm64 Emulator
+
+# Enable dyanmic system image size
+PRODUCT_USE_LOGICAL_PARTITIONS := true
