@@ -31,3 +31,6 @@ include $(SRC_TARGET_DIR)/product/full.mk
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 PRODUCT_NAME := aosp_arm
+
+# Enable dyanmic system image size
+PRODUCT_USE_LOGICAL_PARTITIONS := true
