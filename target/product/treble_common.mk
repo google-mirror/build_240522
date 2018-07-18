@@ -23,6 +23,9 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 
+# Enable dyanmic system image size
+PRODUCT_USE_LOGICAL_PARTITIONS := true
+
 # Split selinux policy
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
