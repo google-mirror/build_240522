@@ -32,3 +32,6 @@ include $(SRC_TARGET_DIR)/product/full_x86.mk
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 PRODUCT_NAME := aosp_x86
+
+# Enable dyanmic system image size
+PRODUCT_USE_LOGICAL_PARTITIONS := true
