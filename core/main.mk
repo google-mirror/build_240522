@@ -1340,16 +1340,6 @@ ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
 
 droid_targets: check_android_partition_sizes
 
-.PHONY: check_android_partition_sizes
-check_android_partition_sizes: partition_size_list=$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST),$(BOARD_$(call to-upper,$(p))IMAGE_PARTITION_SIZE))
-check_android_partition_sizes: sum_sizes_expr=$(subst $(space),+,$(partition_size_list))
-check_android_partition_sizes:
-	if [ $$(( $(sum_sizes_expr) )) -gt $(BOARD_SUPER_PARTITION_SIZE) ]; then \
-		echo The sum of sizes of all logical partitions is larger than BOARD_SUPER_PARTITION_SIZE.; \
-		echo $(sum_sizes_expr) == $$(( $(sum_sizes_expr) )) '>' $(BOARD_SUPER_PARTITION_SIZE); \
-		exit 1; \
-	fi
-
 endif # BOARD_SUPER_PARTITION_PARTITION_LIST
 endif # BOARD_SUPER_PARTITION_SIZE
 endif # USE_LOGICAL_PARTITIONS
