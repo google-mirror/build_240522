@@ -905,6 +905,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("oem_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("oem_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+    copy_prop("oem_reserved_size", "partition_reserved_size")
   d["partition_name"] = mount_point
   return d
 
@@ -938,6 +939,8 @@ def GlobalDictFromImageProp(image_prop, mount_point):
     copy_prop("partition_size", "vendor_size")
   elif mount_point == "product":
     copy_prop("partition_size", "product_size")
+  elif mount_point == "oem":
+    copy_prop("partition_size", "oem_size")
   return d
 
 
