@@ -1662,6 +1662,9 @@ installed-file-list: $(INSTALLED_FILES_FILE)
 
 $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE))
 
+check_android_partition_sizes_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,check_android_partition_sizes)
+
 systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
@@ -2555,6 +2558,44 @@ $(INSTALLED_VBMETAIMAGE_TARGET): $(AVBTOOL)
 	  --flag 2 --padding_size 4096 --output $@
 
 endif # BOARD_AVB_ENABLE
+
+# -----------------------------------------------------------------
+# Check image sizes <= super partition
+
+ifeq (,$(TARGET_BUILD_APPS))
+# Do not check for apps-only build
+
+ifdef USE_LOGICAL_PARTITIONS
+ifdef BOARD_SUPER_PARTITION_SIZE
+ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
+
+.PHONY: check_android_partition_sizes
+
+# BOARD_SUPER_PARTITION_PARTITION_LIST: a list of the following tokens:
+# system, vendor, product, product_services
+
+ifneq (,$(filter system,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+check_android_partition_sizes: $(BUILT_SYSTEMIMAGE)
+endif
+check_android_partition_sizes: $(foreach p,$(filter-out system,$(BOARD_SUPER_PARTITION_PARTITION_LIST)),$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
+
+check_android_partition_sizes: partition_size_list=$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST),\
+	$(call read-image-prop-dictionary,\
+		$($(subst _,,$(p))image_intermediates)/generated_$(subst _,,$(p))_image_info.txt),\
+		$(subst _,,$(p))_size)))
+check_android_partition_sizes: sum_sizes_expr=$(subst $(space),+,$(partition_size_list))
+check_android_partition_sizes:
+	if [ $$(( $(sum_sizes_expr) )) -gt $(BOARD_SUPER_PARTITION_SIZE) ]; then \
+		echo The sum of sizes of all logical partitions is larger than BOARD_SUPER_PARTITION_SIZE.; \
+		echo $(sum_sizes_expr) == $$(( $(sum_sizes_expr) )) '>' $(BOARD_SUPER_PARTITION_SIZE); \
+		exit 1; \
+	fi
+
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+endif # BOARD_SUPER_PARTITION_SIZE
+endif # USE_LOGICAL_PARTITIONS
+
+endif # TARGET_BUILD_APPS
 
 # -----------------------------------------------------------------
 # bring in the installer image generation defines if necessary
