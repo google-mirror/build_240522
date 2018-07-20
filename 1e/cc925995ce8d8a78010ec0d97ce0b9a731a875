@@ -1,0 +1,10 @@
+Code-Review+1: David Brazdil <dbrazdil@google.com>
+Code-Review+2: Nicolas Geoffray <ngeoffray@google.com>
+Code-Review+1: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Dario Freni <dariofreni@google.com>
+Submitted-by: Dario Freni <dariofreni@google.com>
+Submitted-at: Fri, 20 Jul 2018 08:59:30 +0000
+Reviewed-on: https://android-review.googlesource.com/716914
+Project: platform/build
+Branch: refs/heads/master
