@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35b522be_792e205f",
+        "filename": "core/main.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-23T19:10:20Z",
+      "side": 1,
+      "message": "should this be moved as well? then the 3 ifdefs can be removed here too",
+      "range": {
+        "startLine": 1341,
+        "startChar": 0,
+        "endLine": 1341,
+        "endChar": 44
+      },
+      "revId": "b90c010bac67104a943b5a48660f91a5968dc50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
