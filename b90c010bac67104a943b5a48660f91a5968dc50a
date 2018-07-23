@@ -22,6 +22,30 @@
       "revId": "b90c010bac67104a943b5a48660f91a5968dc50a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df44c321_39405429",
+        "filename": "core/main.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-07-23T20:10:04Z",
+      "side": 1,
+      "message": "I didn\u0027t move that because droid_targets is defined in this file. If you think it makes sense to move it I am happy to do so.",
+      "parentUuid": "35b522be_792e205f",
+      "range": {
+        "startLine": 1341,
+        "startChar": 0,
+        "endLine": 1341,
+        "endChar": 44
+      },
+      "revId": "b90c010bac67104a943b5a48660f91a5968dc50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
