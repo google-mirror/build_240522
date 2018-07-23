@@ -1,0 +1,11 @@
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Code-Review+1: Bowgo Tsai <bowgotsai@google.com>
+Code-Review+1: Andrew Hsieh <andrewhsieh@google.com>
+Verified+1: SzuWei Lin <szuweilin@google.com>
+Autosubmit+1: SzuWei Lin <szuweilin@google.com>
+Presubmit-Verified-1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: SzuWei Lin <szuweilin@google.com>
+Submitted-at: Mon, 23 Jul 2018 14:22:51 +0000
+Reviewed-on: https://android-review.googlesource.com/713869
+Project: platform/build
+Branch: refs/heads/master
