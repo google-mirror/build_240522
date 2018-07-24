@@ -578,7 +578,11 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(s):$(dir)/$(n)))))
 
-test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+test_config := $(wildcard $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG))
+ifeq (,$(test_config))
+    test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+endif
+
 ifeq (,$(test_config))
   ifneq (true,$(is_native))
     is_instrumentation_test := true
