@@ -205,13 +205,13 @@ endif
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
   $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
 
-# We also need the LOCAL_BUILT_MODULE dependency,
-# since we use -rpath-link which points to the built module's path.
-my_built_shared_libraries := \
-    $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
-    $(addsuffix $($(my_prefix)SHLIB_SUFFIX), \
-        $(my_shared_libraries)))
-$(LOCAL_BUILT_MODULE) : $(my_built_shared_libraries)
+## We also need the LOCAL_BUILT_MODULE dependency,
+## since we use -rpath-link which points to the built module's path.
+#my_built_shared_libraries := \
+#    $(addprefix $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_INTERMEDIATE_LIBRARIES)/, \
+#    $(addsuffix $($(my_prefix)SHLIB_SUFFIX), \
+#        $(my_shared_libraries)))
+#$(LOCAL_BUILT_MODULE) : $(my_built_shared_libraries)
 endif
 endif
 
