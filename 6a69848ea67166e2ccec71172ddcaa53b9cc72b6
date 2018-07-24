@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be974fb1_6468c9b7",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-07-24T11:49:20Z",
+      "side": 1,
+      "message": "can probably delete this line, it\u0027s the default.",
+      "revId": "6a69848ea67166e2ccec71172ddcaa53b9cc72b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
