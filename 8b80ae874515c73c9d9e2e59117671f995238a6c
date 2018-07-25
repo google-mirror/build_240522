@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f5a894f_5b952f08",
+        "filename": "core/java.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-25T23:01:36Z",
+      "side": 1,
+      "message": "can we fix the users? there aren\u0027t that many",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 25
+      },
+      "revId": "8b80ae874515c73c9d9e2e59117671f995238a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
