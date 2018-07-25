@@ -1,0 +1,10 @@
+Verified+1: Nan Zhang <nanzhang@google.com>
+Autosubmit+1: Nan Zhang <nanzhang@google.com>
+Presubmit-Ready+1: Nan Zhang <nanzhang@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Code-Review+2: Nan Zhang <nanzhang@google.com>
+Submitted-by: Nan Zhang <nanzhang@google.com>
+Submitted-at: Wed, 25 Jul 2018 01:28:24 +0000
+Reviewed-on: https://android-review.googlesource.com/721319
+Project: platform/build
+Branch: refs/heads/master
