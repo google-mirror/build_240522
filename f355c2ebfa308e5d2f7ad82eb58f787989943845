@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a9413f7_c6064856",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-25T21:24:37Z",
+      "side": 1,
+      "message": "This happens above?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 46
+      },
+      "revId": "f355c2ebfa308e5d2f7ad82eb58f787989943845",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
