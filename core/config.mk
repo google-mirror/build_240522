@@ -909,6 +909,17 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+# If true, kernel configuration requirements are present in OTA package (and will be enforced
+# during OTA). Otherwise, kernel configuration requirements are enforced in VTS.
+# Devices that checks the running kernel (instead of the kernel in OTA package) should not
+# set this variable to prevent OTA failures.
+ifndef PRODUCT_OTA_REQUIRE_KERNEL_CONFIG
+  PRODUCT_OTA_REQUIRE_KERNEL_CONFIG :=
+  # TODO(b/111125947): Set this to true by default for newer devices that checks kernel from
+  # the OTA package.
+endif
+.KATI_READONLY := PRODUCT_OTA_REQUIRE_KERNEL_CONFIG
+
 ifndef USE_LOGICAL_PARTITIONS
   USE_LOGICAL_PARTITIONS := $(PRODUCT_USE_LOGICAL_PARTITIONS)
 endif
