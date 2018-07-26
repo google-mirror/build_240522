@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2089833c_9f82c617",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-26T18:04:05Z",
+      "side": 1,
+      "message": "Where is the dependency on this? It should also be specified as $(HOST_OUT_EXECUTABLES)/lpmake",
+      "range": {
+        "startLine": 2599,
+        "startChar": 1,
+        "endLine": 2599,
+        "endChar": 7
+      },
+      "revId": "0dee1f2b6fbba0f78977a04a6acde3b48a23d21e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17db4e24_455e0531",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2606,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-26T18:04:05Z",
+      "side": 1,
+      "message": "can we make this reproducible?",
+      "range": {
+        "startLine": 2606,
+        "startChar": 53,
+        "endLine": 2606,
+        "endChar": 60
+      },
+      "revId": "0dee1f2b6fbba0f78977a04a6acde3b48a23d21e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
