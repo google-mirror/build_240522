@@ -34,6 +34,24 @@
       "revId": "fcb441b2b7b8a8c1ad39029a4540ec8fa84b8a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cc2647b_14eb5093",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-26T21:24:54Z",
+      "side": 0,
+      "message": "It\u0027s useful for downstream branches (or vendors, though I\u0027m not sure they would have picked up on this)",
+      "parentUuid": "a5773fae_e04c7bbc",
+      "revId": "fcb441b2b7b8a8c1ad39029a4540ec8fa84b8a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

@@ -46,6 +46,30 @@
       "revId": "8b80ae874515c73c9d9e2e59117671f995238a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fd7226d_5c212ac2",
+        "filename": "core/java.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-26T21:24:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "45b8e2eb_690cdb3b",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 25
+      },
+      "revId": "8b80ae874515c73c9d9e2e59117671f995238a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
