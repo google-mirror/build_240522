@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37c55996_f966376b",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-26T21:39:04Z",
+      "side": 1,
+      "message": "preferred not to set it to false, saves us a variable, etc..",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 44
+      },
+      "revId": "3dca1d01de941cad5f8c0e0b70840965c58a584f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
