@@ -909,6 +909,18 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+# If true, kernel configuration requirements are enforced during OTA (and will make OTA fail if
+# mismatch). Otherwise, kernel configuration requirements are only enforced in VTS.
+ifndef PRODUCT_OTA_REQUIRE_KERNEL_CONFIG
+  PRODUCT_OTA_REQUIRE_KERNEL_CONFIG := false
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      PRODUCT_OTA_REQUIRE_KERNEL_CONFIG := true
+    endif
+  endif
+endif
+.KATI_READONLY := PRODUCT_OTA_REQUIRE_KERNEL_CONFIG
+
 ifndef USE_LOGICAL_PARTITIONS
   USE_LOGICAL_PARTITIONS := $(PRODUCT_USE_LOGICAL_PARTITIONS)
 endif
