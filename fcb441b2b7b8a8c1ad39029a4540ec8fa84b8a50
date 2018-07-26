@@ -16,6 +16,24 @@
       "revId": "fcb441b2b7b8a8c1ad39029a4540ec8fa84b8a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5773fae_e04c7bbc",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-26T19:30:26Z",
+      "side": 0,
+      "message": "I\u0027m working on removing those, didn\u0027t seem worth setting it to obsolete once they are all gone.",
+      "parentUuid": "a4e7a06f_af80c32a",
+      "revId": "fcb441b2b7b8a8c1ad39029a4540ec8fa84b8a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

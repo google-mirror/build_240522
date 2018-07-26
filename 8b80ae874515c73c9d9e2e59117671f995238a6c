@@ -22,6 +22,30 @@
       "revId": "8b80ae874515c73c9d9e2e59117671f995238a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45b8e2eb_690cdb3b",
+        "filename": "core/java.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-26T19:30:26Z",
+      "side": 1,
+      "message": "I was going to fix those separately, especially since this conflicts in internal master.",
+      "parentUuid": "6f5a894f_5b952f08",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 25
+      },
+      "revId": "8b80ae874515c73c9d9e2e59117671f995238a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
