@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd1d3840_bc66de59",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-07-27T20:24:21Z",
+      "side": 1,
+      "message": "Dan, I have to check this, otherwise collapse-pairs doesn\u0027t work:\n\n\"key\u003d\" (subst \u003d, \u003d ) \"key \u003d \" (strip) \"key \u003d\" (subst $(space)\u003d$(space),\u003d) \"key \u003d\", then the following is written to build.prop:\n\nkey\n\u003d\n\nMaybe collapse-pairs needs to be fixed as well?",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 34
+      },
+      "revId": "1c1314e272f801c8639bc7f86722c82e8e888c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
