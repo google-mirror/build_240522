@@ -231,7 +231,7 @@ else
 ADDITIONAL_DEFAULT_PROPERTIES += ro.actionable_compatible_property.enabled=${PRODUCT_COMPATIBLE_PROPERTY}
 endif
 
-ADDITIONAL_BUILD_PROPERTIES += ro.boot.logical_partitions=${USE_LOGICAL_PARTITIONS}
+ADDITIONAL_PRODUCT_PRODUCT_PROPERTIES += ro.boot.logical_partitions=${USE_LOGICAL_PARTITIONS}
 
 # -----------------------------------------------------------------
 ###
