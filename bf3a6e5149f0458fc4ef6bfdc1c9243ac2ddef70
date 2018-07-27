@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96b23b93_9a341c29",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-27T21:09:12Z",
+      "side": 1,
+      "message": "Why PRODUCT_PRODUCT?\n\nIf you\u0027re adding this, you also need to mark it as readonly with the others (~line 402). I\u0027d also like to be (checked? \u0026)reset after we read the board file so that it\u0027s not usable by device-specific configuration (they should be using PRODUCT_PRODUCT_PROPERTIES instead).",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 37
+      },
+      "revId": "bf3a6e5149f0458fc4ef6bfdc1c9243ac2ddef70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
