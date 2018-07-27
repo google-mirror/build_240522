@@ -22,6 +22,30 @@
       "revId": "bf3a6e5149f0458fc4ef6bfdc1c9243ac2ddef70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "305deec3_fcdf1a08",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-07-27T23:14:50Z",
+      "side": 1,
+      "message": "\u003e Why PRODUCT_PRODUCT?\n\nBecause we have `PRODUCT_PRODUCT_PROPERTIES`. But you are right I should use ADDITIONAL_PRODUCT...\n\nI\u0027ll reset it there.",
+      "parentUuid": "96b23b93_9a341c29",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 37
+      },
+      "revId": "bf3a6e5149f0458fc4ef6bfdc1c9243ac2ddef70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
