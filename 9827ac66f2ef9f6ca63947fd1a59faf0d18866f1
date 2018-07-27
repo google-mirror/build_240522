@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e669529e_f9867940",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-27T21:12:35Z",
+      "side": 1,
+      "message": "please elaborate. this needs either manual testing, or test cases written (as annoying as that is in make)",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 10
+      },
+      "revId": "9827ac66f2ef9f6ca63947fd1a59faf0d18866f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
