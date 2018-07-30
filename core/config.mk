@@ -918,6 +918,18 @@ endif
 ifeq ($(USE_LOGICAL_PARTITIONS),true)
   BOARD_KERNEL_CMDLINE += androidboot.logical_partitions=1
 
+ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
+# BOARD_SUPER_PARTITION_PARTITION_LIST: a list of the following tokens
+valid_super_partition_list := system vendor product productservices
+ifneq (,$(filter-out $(valid_super_partition_list),$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+$(error BOARD_SUPER_PARTITION_PARTITION_LIST contains invalid partition name. \
+        Valid names are $(valid_super_partition_list).)
+endif
+valid_super_partition_list :=
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
+endif # USE_LOGICAL_PARTITIONS
+
 ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),)
 $(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
@@ -945,18 +957,6 @@ $(error Should not define BOARD_PRODUCT_SERVICESIMAGE_PARTITION_SIZE and \
     BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
-
-ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
-# BOARD_SUPER_PARTITION_PARTITION_LIST: a list of the following tokens
-valid_super_partition_list := system vendor product productservices
-ifneq (,$(filter-out $(valid_super_partition_list),$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
-$(error BOARD_SUPER_PARTITION_PARTITION_LIST contains invalid partition name. \
-        Valid names are $(valid_super_partition_list).)
-endif
-valid_super_partition_list :=
-endif # BOARD_SUPER_PARTITION_PARTITION_LIST
-
-endif # USE_LOGICAL_PARTITIONS
 
 # ###############################################################
 # Set up final options.
