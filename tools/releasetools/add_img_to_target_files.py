@@ -72,10 +72,8 @@ OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
 OPTIONS.is_signing = False
 
-
 # Partitions that should have their care_map added to META/care_map.txt.
 PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product', 'product-services')
-
 
 class OutputFile(object):
   def __init__(self, output_zip, input_dir, prefix, name):
@@ -259,11 +257,7 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   if fstab and mount_point in fstab:
     image_props["fs_type"] = fstab[mount_point].fs_type
 
-  # Use a fixed timestamp (01/01/2009) when packaging the image.
-  # Bug: 24377993
-  epoch = datetime.datetime.fromtimestamp(0)
-  timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
-  image_props["timestamp"] = int(timestamp)
+  image_props["timestamp"] = GetFixedFileTimestamp()
 
   if what == "system":
     fs_config_prefix = ""
@@ -337,11 +331,7 @@ def AddUserdata(output_zip):
 
   print("creating userdata.img...")
 
-  # Use a fixed timestamp (01/01/2009) when packaging the image.
-  # Bug: 24377993
-  epoch = datetime.datetime.fromtimestamp(0)
-  timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
-  image_props["timestamp"] = int(timestamp)
+  image_props["timestamp"] = GetFixedFileTimestamp()
 
   if OPTIONS.info_dict.get("userdata_img_with_data") == "true":
     user_dir = os.path.join(OPTIONS.input_tmp, "DATA")
@@ -483,11 +473,7 @@ def AddCache(output_zip):
 
   print("creating cache.img...")
 
-  # Use a fixed timestamp (01/01/2009) when packaging the image.
-  # Bug: 24377993
-  epoch = datetime.datetime.fromtimestamp(0)
-  timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
-  image_props["timestamp"] = int(timestamp)
+  image_props["timestamp"] = GetFixedFileTimestamp()
 
   user_dir = common.MakeTempDir()
 

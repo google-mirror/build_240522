@@ -15,6 +15,7 @@
 from __future__ import print_function
 
 import copy
+import datetime
 import errno
 import getopt
 import getpass
@@ -1244,7 +1245,6 @@ class PasswordManager(object):
 
 def ZipWrite(zip_file, filename, arcname=None, perms=0o644,
              compress_type=None):
-  import datetime
 
   # http://b/18015246
   # Python 2.7's zipfile implementation wrongly thinks that zip64 is required
@@ -1271,9 +1271,7 @@ def ZipWrite(zip_file, filename, arcname=None, perms=0o644,
     os.chmod(filename, perms)
 
     # Use a fixed timestamp so the output is repeatable.
-    epoch = datetime.datetime.fromtimestamp(0)
-    timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
-    os.utime(filename, (timestamp, timestamp))
+    os.utime(filename, (timestamp, GetFixedFileTimestamp()))
 
     zip_file.write(filename, arcname=arcname, compress_type=compress_type)
   finally:
@@ -2022,3 +2020,10 @@ fi
   print("putting script in", sh_location)
 
   output_sink(sh_location, sh)
+
+
+# Use a fixed timestamp (01/01/2009 00:00:00 UTC) for files when packaging
+# images. (b/24377993, b/80600931)
+def GetFixedFileTimestamp():
+  return (datetime.datetime(2009, 1, 1, 0, 0, 0, 0, None)
+          - datetime.datetime.utcfromtimestamp(0)).total_seconds()
