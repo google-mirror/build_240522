@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6f4adda_6e22a948",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-30T22:26:43Z",
+      "side": 1,
+      "message": "missing \"common.\"?",
+      "range": {
+        "startLine": 260,
+        "startChar": 29,
+        "endLine": 260,
+        "endChar": 50
+      },
+      "revId": "e31ec43e754e4f74fcced67e6cdac7224bf0b09a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
