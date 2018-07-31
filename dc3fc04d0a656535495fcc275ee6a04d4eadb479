@@ -34,6 +34,24 @@
       "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33dd627d_d4eb7a78",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-07-31T20:04:49Z",
+      "side": 1,
+      "message": "This is the current behavior (in config.mk). It is just annoying that I have to remember to use USE_LOGICAL_PARTITIONS instead of using PRODUCT_USE_LOGICAL_PARTITIONS all the time, because they can have different values.\n\nIf you truly think so, I\u0027ll abandon this change.",
+      "parentUuid": "40fef15d_e9bfc1a6",
+      "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
