@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "487f0836_8613f0d6",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2552,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-31T17:43:15Z",
+      "side": 1,
+      "message": "Use \u0026\u0026, otherwise a failure here would be silently ignored",
+      "range": {
+        "startLine": 2552,
+        "startChar": 107,
+        "endLine": 2552,
+        "endChar": 108
+      },
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f4ca92_5da23be7",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2558,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-31T17:43:15Z",
+      "side": 1,
+      "message": "\u0026\u0026",
+      "range": {
+        "startLine": 2558,
+        "startChar": 54,
+        "endLine": 2558,
+        "endChar": 55
+      },
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbc14bae_66985d96",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-31T17:43:15Z",
+      "side": 1,
+      "message": "This is probably already available as PRIVATE_PATH",
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
