@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4985db7b_2537e3c9",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-31T23:37:42Z",
+      "side": 1,
+      "message": "Use \u0026\u0026 so that if it fails for any reason, the failure will be caught. You\u0027ll need to add a \" true\" to the end of the line too, so that it doesn\u0027t end in \"\u0026\u0026\"",
+      "range": {
+        "startLine": 1459,
+        "startChar": 58,
+        "endLine": 1459,
+        "endChar": 59
+      },
+      "revId": "8f1d69c098b328ad3e1c1b17ab5a60fc84f3d8d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1ef6823_cb973518",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-07-31T23:37:42Z",
+      "side": 1,
+      "message": "What is this for? the next line will overwrite the file.\n\nThis should probably be a \"rm -f $@\" so that if the file was a symlink, we\u0027ll convert it to a real file.",
+      "range": {
+        "startLine": 1470,
+        "startChar": 0,
+        "endLine": 1470,
+        "endChar": 18
+      },
+      "revId": "8f1d69c098b328ad3e1c1b17ab5a60fc84f3d8d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
