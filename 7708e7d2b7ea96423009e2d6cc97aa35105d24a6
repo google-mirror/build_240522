@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9e5fe816_80ef9daa",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2552,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2018-07-31T17:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487f0836_8613f0d6",
+      "range": {
+        "startLine": 2552,
+        "startChar": 107,
+        "endLine": 2552,
+        "endChar": 108
+      },
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67f4ca92_5da23be7",
         "filename": "core/definitions.mk",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "100f9bbb_742c535a",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2558,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2018-07-31T17:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67f4ca92_5da23be7",
+      "range": {
+        "startLine": 2558,
+        "startChar": 54,
+        "endLine": 2558,
+        "endChar": 55
+      },
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbc14bae_66985d96",
         "filename": "core/package_internal.mk",
         "patchSetId": 3
@@ -62,6 +110,24 @@
       "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec851753_dd8e23a5",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2018-07-31T17:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbc14bae_66985d96",
+      "revId": "7708e7d2b7ea96423009e2d6cc97aa35105d24a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
