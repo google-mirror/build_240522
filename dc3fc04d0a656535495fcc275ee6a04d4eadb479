@@ -16,6 +16,24 @@
       "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb281b94_5520f33e",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-07-31T20:03:56Z",
+      "side": 1,
+      "message": "Or just get rid of USE_LOGICAL_PARTITIONS and always use the product variable",
+      "parentUuid": "40fef15d_e9bfc1a6",
+      "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
