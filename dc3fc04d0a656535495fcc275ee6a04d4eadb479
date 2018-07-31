@@ -52,6 +52,24 @@
       "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94a99772_bc8a6276",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-07-31T20:13:19Z",
+      "side": 1,
+      "message": "I\u0027ll get rid of it; it was for development purposes anyways.",
+      "parentUuid": "33dd627d_d4eb7a78",
+      "revId": "dc3fc04d0a656535495fcc275ee6a04d4eadb479",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
