@@ -482,6 +482,11 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/gsi/init.noenforce.
 # Remove old merged AndroidManifest.xml location
 $(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/APPS/*_intermediates/AndroidManifest.xml)
 
+# Split watchdogd from init
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/sbin/watchdogd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/system/bin/watchdogd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/sbin/watchdogd)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
