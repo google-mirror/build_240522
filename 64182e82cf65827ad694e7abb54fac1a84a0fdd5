@@ -22,6 +22,30 @@
       "revId": "64182e82cf65827ad694e7abb54fac1a84a0fdd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "612a0364_7db1985f",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-08-01T23:29:10Z",
+      "side": 1,
+      "message": "It\u0027s not anymore that I moved this to soong.  I\u0027ll drop it tomorrow.  The other CLs need some work too.",
+      "parentUuid": "8eecd4f1_768e1bec",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "64182e82cf65827ad694e7abb54fac1a84a0fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
