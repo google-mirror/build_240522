@@ -34,6 +34,24 @@
       "revId": "bd032d51ab126a77f6c551d21191f213975bdd50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c30e2819_7db95464",
+        "filename": "core/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-08-06T19:03:35Z",
+      "side": 1,
+      "message": "Matched per-file rules overwrites non-per-file rule.\nSo dex_preopt*.mk will have only the owners listed here.\nIf multiple per-file rules match, owners of all those rules are included.\n\nIf you want ccross@ as owner of these files, you can add per-file *\u003dcross@...\nor per-file dex_preopt*.mk \u003d cross@...",
+      "parentUuid": "badbdc35_9e6d3db8",
+      "revId": "bd032d51ab126a77f6c551d21191f213975bdd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
