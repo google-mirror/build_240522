@@ -16,6 +16,24 @@
       "revId": "bd032d51ab126a77f6c551d21191f213975bdd50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "badbdc35_9e6d3db8",
+        "filename": "core/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2018-08-06T18:43:22Z",
+      "side": 1,
+      "message": "I would think ../OWNERS is inherited unless we specify \u0027set noparent\u0027",
+      "parentUuid": "fad8d88c_5123fa75",
+      "revId": "bd032d51ab126a77f6c551d21191f213975bdd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
