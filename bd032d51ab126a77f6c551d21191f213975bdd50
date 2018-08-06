@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad8d88c_5123fa75",
+        "filename": "core/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-08-06T18:28:44Z",
+      "side": 1,
+      "message": "chh, does this also need:\n\n per-file * \u003d ccross@android.com\n per-file * \u003d dwillemsen@google.com\n per-file * \u003d nanzhang@google.com\n\nor is that inherited from ../OWNERS?",
+      "revId": "bd032d51ab126a77f6c551d21191f213975bdd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
