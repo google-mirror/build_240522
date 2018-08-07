@@ -583,10 +583,12 @@ else
       $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
       $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
         $(s):$(dir)/$(n)))))
-  ifeq (,$(LOCAL_TEST_CONFIG))
-    test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
-  else
+  ifneq (,$(LOCAL_FULL_TEST_CONFIG))
+    test_config := $(LOCAL_FULL_TEST_CONFIG)
+  else ifneq (,$(LOCAL_TEST_CONFIG))
     test_config := $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG)
+  else
+    test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
   endif
   ifeq (,$(test_config))
     ifneq (true,$(is_native))
