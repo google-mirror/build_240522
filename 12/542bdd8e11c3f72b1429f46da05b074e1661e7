@@ -1,0 +1,9 @@
+Verified+1: Tom Cherry <tomcherry@google.com>
+Presubmit-Ready+1: Tom Cherry <tomcherry@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Autosubmit+1: Tom Cherry <tomcherry@google.com>
+Submitted-by: Tom Cherry <tomcherry@google.com>
+Submitted-at: Tue, 07 Aug 2018 20:29:27 +0000
+Reviewed-on: https://android-review.googlesource.com/727433
+Project: platform/build
+Branch: refs/heads/master
