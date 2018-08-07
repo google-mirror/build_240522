@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "221aa6c5_2e6bdfa0",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2018-08-07T13:55:09Z",
+      "side": 1,
+      "message": "Need to change to \"$(ALL_MODULES.$(m).MODULE_NAME)\"\nOr the json file format will be broken.",
+      "range": {
+        "startLine": 16,
+        "startChar": 20,
+        "endLine": 16,
+        "endChar": 51
+      },
+      "revId": "0470d6164bcea318938b3a08d342c78d1bbcd216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
