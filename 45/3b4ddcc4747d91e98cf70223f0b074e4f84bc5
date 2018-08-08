@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Wed, 08 Aug 2018 16:36:15 +0000
+Reviewed-on: https://android-review.googlesource.com/727768
+Project: platform/build
+Branch: refs/heads/master
