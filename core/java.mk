@@ -542,7 +542,7 @@ ifneq ($(filter $(LOCAL_MODULE),$(PRODUCT_BOOT_JARS)),) # is_boot_jar
   # later on. The difference is academic currently, as we don't proguard any
   # bootclasspath code at the moment. If we were to do that, we should add keep
   # rules for all members with the @UnsupportedAppUsage annotation.
-  $(eval $(call hiddenapi-generate-greylist-txt,$(full_classes_proguard_jar),$(greylist_txt)))
+  $(eval $(call hiddenapi-generate-greylist-txt,$(full_classes_proguard_jar),$(greylist_txt),$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)))
   LOCAL_INTERMEDIATE_TARGETS += $(greylist_txt)
   $(eval $(call hiddenapi-copy-dex-files,$(built_dex_intermediate),$(built_dex_hiddenapi)))
   built_dex_copy_from := $(built_dex_hiddenapi)
