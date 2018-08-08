@@ -16,7 +16,7 @@ ifeq ($(strip $(LOCAL_CXX_STL)),default)
 
             ifeq ($($(my_prefix)OS),windows)
                 # libc++ is not supported on mingw.
-                my_cxx_stl := libstdc++
+                my_cxx_stl := libc++_static
             endif
         endif
     else
@@ -40,7 +40,7 @@ else
         ifeq ($($(my_prefix)OS),windows)
             ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
                 # libc++ is not supported on mingw.
-                my_cxx_stl := libstdc++
+                my_cxx_stl := libc++_static
             endif
         endif
     endif
@@ -52,8 +52,9 @@ linux_static_gcclibs := -Wl,--start-group -lgcc -lgcc_eh -lc -Wl,--end-group
 darwin_dynamic_gcclibs := -lc -lSystem
 darwin_static_gcclibs := NO_STATIC_HOST_BINARIES_ON_DARWIN
 windows_dynamic_gcclibs := \
-    -lmsvcr110 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 \
-    -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt
+	-Wl,--start-group -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcr110
+	-lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lpsapi
+	-Wl,--end-group
 windows_static_gcclibs := NO_STATIC_HOST_BINARIES_ON_WINDOWS
 
 my_link_type := dynamic
@@ -100,6 +101,15 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
         my_cppflags += -nostdinc++
         my_ldflags += -nodefaultlibs
         my_cxx_ldlibs += $($($(my_prefix)OS)_$(my_link_type)_gcclibs)
+
+		ifeq ($($(my_prefix)OS),windows)
+			ifeq (x86,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
+				my_cppflags += -fsjlj-exceptions
+			endif
+			my_cppflags += -D_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS
+			my_cppflags += -D_LIBCXXABI_DISABLE_VISIBILITY_ANNOTATIONS
+			my_cppflags += -D_LIBCPP_HAS_THREAD_API_WIN32
+		endif
     else
         ifeq (arm,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
             my_static_libraries += libunwind_llvm
