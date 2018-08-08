@@ -91,7 +91,7 @@ ifdef LOCAL_SOONG_DEX_JAR
         # We use full_classes_jar here, which is the post-proguard jar (on the basis that we also
         # have a full_classes_pre_proguard_jar). This is consistent with the equivalent code in
         # java.mk.
-        $(eval $(call hiddenapi-generate-greylist-txt,$(full_classes_jar),$(greylist_txt)))
+        $(eval $(call hiddenapi-generate-greylist-txt,$(full_classes_jar),$(greylist_txt),$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)))
         $(eval $(call hiddenapi-copy-soong-jar,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
       else # !is_boot_jar
         $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
