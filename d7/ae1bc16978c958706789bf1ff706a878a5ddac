@@ -1,0 +1,12 @@
+Verified+1: SzuWei Lin <szuweilin@google.com>
+Autosubmit+1: SzuWei Lin <szuweilin@google.com>
+Autosubmit+1: Orion Hodson <oth@google.com>
+Presubmit-Ready+1: SzuWei Lin <szuweilin@google.com>
+Presubmit-Ready+1: Orion Hodson <oth@google.com>
+Code-Review+2: Orion Hodson <oth@google.com>
+Build-Cop-Override+1: Orion Hodson <oth@google.com>
+Submitted-by: Orion Hodson <oth@google.com>
+Submitted-at: Wed, 08 Aug 2018 07:52:12 +0000
+Reviewed-on: https://android-review.googlesource.com/727733
+Project: platform/build
+Branch: refs/heads/master
