@@ -2875,12 +2875,20 @@ endef
 
 # Generate a greylist.txt from a classes.jar
 define hiddenapi-generate-greylist-txt
-$(2): $(1) $(CLASS2GREYLIST)
-	$(CLASS2GREYLIST) $(1) > $(2)
+ifneq (,$(wildcard $(TOPDIR)frameworks/base*/))
+# Only generate this target if we're in a tree with frameworks/base present.
+# Creating the target that nothing depends on should be harmless, but it seems
+# to cause some builds to fail.
+$(2): $(1) $(CLASS2GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)
+	$(CLASS2GREYLIST) --public-api-list $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST) $(1) > $(2)
 
 $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST): $(2)
 $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST): \
     PRIVATE_GREYLIST_INPUTS := $$(PRIVATE_GREYLIST_INPUTS) $(2)
+else
+$(2):
+	echo "Nothing!" > $(2)
+endif
 endef
 
 # File names for intermediate dex files of `hiddenapi-copy-soong-jar`.
