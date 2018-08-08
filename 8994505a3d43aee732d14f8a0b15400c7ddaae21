@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b6e6e18_df6ed496",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1083173
+      },
+      "writtenOn": "2018-08-08T21:01:47Z",
+      "side": 1,
+      "message": "Bug: 70770641",
+      "revId": "8994505a3d43aee732d14f8a0b15400c7ddaae21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5308f4f4_a1531d59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1083173
+      },
+      "writtenOn": "2018-08-08T21:01:47Z",
+      "side": 1,
+      "message": "Does this work? I suspect it gets close\n\nmake cts-dalvik-device-test-runner\natest junit-params-test",
+      "revId": "8994505a3d43aee732d14f8a0b15400c7ddaae21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
