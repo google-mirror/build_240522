@@ -13,9 +13,12 @@
 # limitations under the License.
 
 """A module for reading and parsing event-log-tags files."""
+from __future__ import print_function
 
 import re
 import sys
+from typing import Optional, TextIO, Union
+
 
 class Tag(object):
   __slots__ = ["tagnum", "tagname", "description", "filename", "linenum"]
@@ -52,56 +55,58 @@ class TagFile(object):
     self.filename = filename
     self.linenum = 0
 
-    if file_object is None:
-      try:
-        file_object = open(filename, "rb")
-      except (IOError, OSError), e:
-        self.AddError(str(e))
-        return
-
     try:
-      for self.linenum, line in enumerate(file_object):
-        self.linenum += 1
+      if file_object:
+        self.read_tags_from_file(file_object)
+      else:
+        with open(filename, "r") as tag_file:
+          self.read_tags_from_file(tag_file)
+    except (IOError, OSError) as ex:
+      self.AddError(str(ex))
 
-        line = line.strip()
-        if not line or line[0] == '#': continue
-        parts = re.split(r"\s+", line, 2)
+  def read_tags_from_file(self, file_object):
+    # type: (TextIO) -> None
+    for self.linenum, line in enumerate(file_object):
+      self.linenum += 1
 
-        if len(parts) < 2:
-          self.AddError("failed to parse \"%s\"" % (line,))
+      line = line.strip()
+      if not line or line[0] == '#':
+        continue
+      parts = re.split(r"\s+", line, 2)
+
+      if len(parts) < 2:
+        self.AddError("failed to parse \"%s\"" % (line,))
+        continue
+
+      if parts[0] == "option":
+        self.options[parts[1]] = parts[2:]
+        continue
+
+      if parts[0] == "?":
+        tag = None
+      else:
+        try:
+          tag = int(parts[0])
+        except ValueError:
+          self.AddError("\"%s\" isn't an integer tag or '?'" % (parts[0],))
           continue
 
-        if parts[0] == "option":
-          self.options[parts[1]] = parts[2:]
+      tagname = parts[1]
+      if len(parts) == 3:
+        description = parts[2]
+      else:
+        description = None
+
+      if description:
+        # EventLog.java checks that the description field is
+        # surrounded by parens, so we should too (to avoid a runtime
+        # crash from badly-formatted descriptions).
+        if not re.match(r"\(.*\)\s*$", description):
+          self.AddError("tag \"%s\" has unparseable description" % (tagname,))
           continue
 
-        if parts[0] == "?":
-          tag = None
-        else:
-          try:
-            tag = int(parts[0])
-          except ValueError:
-            self.AddError("\"%s\" isn't an integer tag or '?'" % (parts[0],))
-            continue
-
-        tagname = parts[1]
-        if len(parts) == 3:
-          description = parts[2]
-        else:
-          description = None
-
-        if description:
-          # EventLog.java checks that the description field is
-          # surrounded by parens, so we should too (to avoid a runtime
-          # crash from badly-formatted descriptions).
-          if not re.match(r"\(.*\)\s*$", description):
-            self.AddError("tag \"%s\" has unparseable description" % (tagname,))
-            continue
-
-        self.tags.append(Tag(tag, tagname, description,
-                             self.filename, self.linenum))
-    except (IOError, OSError), e:
-      self.AddError(str(e))
+      self.tags.append(Tag(tag, tagname, description,
+                           self.filename, self.linenum))
 
 
 def BooleanFromString(s):
@@ -117,6 +122,7 @@ def BooleanFromString(s):
 
 
 def WriteOutput(output_file, data):
+  # type: (Optional[TextIO], Union[str, TextIO]) -> None
   """Write 'data' to the given output filename (which may be None to
   indicate stdout).  Emit an error message and die on any failure.
   'data' may be a string or a StringIO object."""
@@ -127,9 +133,11 @@ def WriteOutput(output_file, data):
       out = sys.stdout
       output_file = "<stdout>"
     else:
-      out = open(output_file, "wb")
+      out = open(output_file, "w")
     out.write(data)
-    out.close()
-  except (IOError, OSError), e:
-    print >> sys.stderr, "failed to write %s: %s" % (output_file, e)
+  except (IOError, OSError) as e:
+    print("failed to write %s: %s" % (output_file, e), file=sys.stderr)
     sys.exit(1)
+  finally:
+    if out != sys.stdout:
+      out.close()

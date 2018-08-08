@@ -24,8 +24,9 @@ import sys
 # so we decrease the value by 1 here.
 PROP_VALUE_MAX = 91
 
-# Put the modifications that you need to make into the /system/build.prop into this
-# function. The prop object has get(name) and put(name,value) methods.
+# pylint: disable=unused-argument
+# Put the modifications that you need to make into the /system/build.prop into
+# this function. The prop object has get(name) and put(name,value) methods.
 def mangle_build_prop(prop):
   pass
 
@@ -34,9 +35,11 @@ def mangle_build_prop(prop):
 # put(name,value) methods.
 def mangle_default_prop_override(prop):
   pass
+# pylint: enable=unused-argument
 
-# Put the modifications that you need to make into the /system/etc/prop.default into this
-# function. The prop object has get(name) and put(name,value) methods.
+# Put the modifications that you need to make into the /system/etc/prop.default
+# into this function. The prop object has get(name) and put(name,value)
+# methods.
 def mangle_default_prop(prop):
   # If ro.debuggable is 1, then enable adb on USB by default
   # (this is for userdebug builds)
@@ -52,7 +55,7 @@ def mangle_default_prop(prop):
   # default to "adb". That might not the right policy there, but it's better
   # to be explicit.
   if not prop.get("persist.sys.usb.config"):
-    prop.put("persist.sys.usb.config", "none");
+    prop.put("persist.sys.usb.config", "none")
 
 def validate(prop):
   """Validate the properties.
@@ -62,7 +65,7 @@ def validate(prop):
   """
   check_pass = True
   buildprops = prop.to_dict()
-  for key, value in buildprops.iteritems():
+  for key, value in buildprops.items():
     # Check build properties' length.
     if len(value) > PROP_VALUE_MAX and not key.startswith("ro."):
       check_pass = False
@@ -95,7 +98,7 @@ class PropFile:
 
   def put(self, name, value):
     key = name + "="
-    for i in range(0,len(self.lines)):
+    for i in range(0, len(self.lines)):
       if self.lines[i].startswith(key):
         self.lines[i] = key + value
         return
@@ -103,7 +106,7 @@ class PropFile:
 
   def delete(self, name):
     key = name + "="
-    self.lines = [ line for line in self.lines if not line.startswith(key) ]
+    self.lines = [line for line in self.lines if not line.startswith(key)]
 
   def write(self, f):
     f.write("\n".join(self.lines))
