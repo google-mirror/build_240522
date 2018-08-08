@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c836a85a_0b851395",
+        "filename": "core/java.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2018-08-08T13:31:47Z",
+      "side": 1,
+      "message": "this doesn\u0027t feel very nice - is there a better way of passing this in? Or is this ok?",
+      "range": {
+        "startLine": 545,
+        "startChar": 95,
+        "endLine": 545,
+        "endChar": 134
+      },
+      "revId": "e582baee5187dc39f2754fd4ba385d8ac9560f34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
