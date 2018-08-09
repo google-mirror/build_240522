@@ -428,9 +428,8 @@ def ConvertBlockMapToBaseFs(block_map_file):
 def SetUpInDirAndFsConfig(origin_in, prop_dict):
   """Returns the in_dir and fs_config that should be used for image building.
 
-  If the target uses system_root_image and it's building system.img, it creates
-  and returns a staged dir that combines the contents of /system (i.e. in the
-  given in_dir) and root.
+  When building system.img for all targets, it creates and returns a staged dir
+  that combines the contents of /system (i.e. in the given in_dir) and root.
 
   Args:
     origin_in: Path to the input directory.
@@ -441,8 +440,12 @@ def SetUpInDirAndFsConfig(origin_in, prop_dict):
     A tuple of in_dir and fs_config that should be used to build the image.
   """
   fs_config = prop_dict.get("fs_config")
-  if (prop_dict.get("system_root_image") != "true" or
-      prop_dict["mount_point"] != "system"):
+
+  if prop_dict["mount_point"] == "system_other":
+    prop_dict["mount_point"] = "system"
+    return origin_in, fs_config
+
+  if prop_dict["mount_point"] != "system":
     return origin_in, fs_config
 
   # Construct a staging directory of the root file system.
@@ -451,6 +454,9 @@ def SetUpInDirAndFsConfig(origin_in, prop_dict):
   if root_dir:
     shutil.rmtree(in_dir)
     shutil.copytree(root_dir, in_dir, symlinks=True)
+  ramdisk_dir = prop_dict.get("ramdisk_dir")
+  if ramdisk_dir:
+    os.system('cp -R %s/* %s' % (ramdisk_dir, in_dir))
   in_dir_system = os.path.join(in_dir, "system")
   shutil.rmtree(in_dir_system, ignore_errors=True)
   shutil.copytree(origin_in, in_dir_system, symlinks=True)
@@ -515,9 +521,6 @@ def CheckHeadroom(ext4fs_output, prop_dict):
 
 def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   """Builds an image for the files under in_dir and writes it to out_file.
-
-  When using system_root_image, it will additionally look for the files under
-  root (specified by 'root_dir') and builds an image that contains both sources.
 
   Args:
     in_dir: Path to input directory.
@@ -823,6 +826,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["journal_size"] = "0"
     copy_prop("system_verity_block_device", "verity_block_device")
     copy_prop("system_root_image", "system_root_image")
+    copy_prop("ramdisk_dir", "ramdisk_dir")
     copy_prop("root_dir", "root_dir")
     copy_prop("root_fs_config", "root_fs_config")
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
@@ -838,7 +842,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its
     # files.
-    d["mount_point"] = "system"
     copy_prop("avb_system_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_system_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
