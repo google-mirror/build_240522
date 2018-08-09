@@ -102,9 +102,7 @@ ifeq ($(my_use_clang_lld),true)
   $(strip_output): PRIVATE_OBJCOPY_ADD_SECTION := $(LLVM_OBJCOPY)
   $(strip_output): PRIVATE_STRIP := $(LLVM_STRIP)
   $(strip_output): PRIVATE_STRIP_O_FLAG :=
-  # GNU strip keeps .ARM.attributes section even with -strip-all,
-  # so here pass -keep=.ARM.attributes to llvm-strip.
-  $(strip_output): PRIVATE_STRIP_ALL_FLAGS := -strip-all -keep=.ARM.attributes
+  $(strip_output): PRIVATE_STRIP_ALL_FLAGS := -strip-all-gnu
 else
   $(strip_output): PRIVATE_OBJCOPY_ADD_SECTION := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJCOPY)
   $(strip_output): PRIVATE_STRIP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
