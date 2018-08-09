@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce4d8c4a_a3d59247",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-08-09T22:07:56Z",
+      "side": 1,
+      "message": "This ifneq is sketchy, but it breaks without it due to fileslist_util.py aborting that there are no files in TARGET_RAMDISK_OUT.\n\nHow can I better handle the case where there is no ramdisk to be created and therefore nothing in TARGET_RAMDISK_OUT?",
+      "revId": "2da5689e17f1619e8ca031c66f437c48d347a29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
