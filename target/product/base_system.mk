@@ -66,6 +66,7 @@ PRODUCT_PACKAGES += \
     ExtServices \
     ExtShared \
     fastboot \
+    fastbootd \
     framework \
     framework-res \
     framework-sysconfig.xml \
