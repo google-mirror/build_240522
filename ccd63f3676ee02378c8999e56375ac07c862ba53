@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fda55a3c_d2511305",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-08-09T19:28:11Z",
+      "side": 1,
+      "message": "Everything here is switching between TARGET_RAMDISK_OUT and TARGET_ROOT_OUT.  Can you add a new variable that you set to $(TARGET_RAMDISK_OUT) or $(TARGET_ROOT_OUT) and then use that everywhere?",
+      "range": {
+        "startLine": 717,
+        "startChar": 37,
+        "endLine": 717,
+        "endChar": 55
+      },
+      "revId": "ccd63f3676ee02378c8999e56375ac07c862ba53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
