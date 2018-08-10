@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "81194f8f_45f129bf",
+        "filename": "core/soong_app_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1042886
+      },
+      "writtenOn": "2018-08-10T17:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a15d4c_a7e6368e",
+      "revId": "d2e0e5b3c2e315d5ff6d5f4362e2d0e6859f967d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7de8b11_18255159",
         "filename": "core/soong_app_prebuilt.mk",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "d2e0e5b3c2e315d5ff6d5f4362e2d0e6859f967d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb47a5bb_5392ecdb",
+        "filename": "core/soong_app_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042886
+      },
+      "writtenOn": "2018-08-10T17:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7de8b11_18255159",
+      "revId": "d2e0e5b3c2e315d5ff6d5f4362e2d0e6859f967d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
