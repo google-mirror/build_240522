@@ -42,6 +42,9 @@ $(eval $(call copy-one-file,$(full_classes_jar),$(full_classes_header_jar)))
 endif
 endif # TURBINE_ENABLED != false
 
+ifeq ($(LOCAL_MODULE_CLASS),APPS)
+PACKAGES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
+endif
 
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
 
