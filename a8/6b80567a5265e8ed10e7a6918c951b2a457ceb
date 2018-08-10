@@ -1,0 +1,11 @@
+Verified+1: Roland Levillain <rpl@google.com>
+Code-Review+2: Roland Levillain <rpl@google.com>
+Code-Review+2: Hans Boehm <hboehm@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Autosubmit+1: Roland Levillain <rpl@google.com>
+Presubmit-Ready+1: Roland Levillain <rpl@google.com>
+Submitted-by: Roland Levillain <rpl@google.com>
+Submitted-at: Fri, 10 Aug 2018 18:23:00 +0000
+Reviewed-on: https://android-review.googlesource.com/729525
+Project: platform/build
+Branch: refs/heads/master
