@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "484f7bb1_3772149b",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-08-13T21:02:28Z",
+      "side": 1,
+      "message": "Keep the list alphabetized",
+      "revId": "b5beea4ad4e404f1f0515abe18b57f4adef397d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
