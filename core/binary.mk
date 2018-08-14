@@ -789,7 +789,7 @@ endif
 
 # Turn on all warnings and warnings as errors for RS compiles.
 # This can be disabled with LOCAL_RENDERSCRIPT_FLAGS := -Wno-error
-renderscript_flags := -Wall -Werror
+renderscript_flags := -Wall -Wimplicit-fallthrough -Werror
 renderscript_flags += $(LOCAL_RENDERSCRIPT_FLAGS)
 # -m32 or -m64
 renderscript_flags += -m$(my_32_64_bit_suffix)
@@ -1686,10 +1686,10 @@ ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
         ifeq (,$(filter -Werror,$(my_all_cflags)))
           # Add -Wall -Werror unless the project is in the WARNING_ALLOWED project list.
           ifeq (,$(strip $(call find_warning_allowed_projects,$(LOCAL_PATH))))
-            my_cflags := -Wall -Werror $(my_cflags)
+            my_cflags := -Wall -Wimplicit-fallthrough -Werror $(my_cflags)
           else
             $(eval MODULES_ADDED_WALL := $(MODULES_ADDED_WALL) $(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE))
-            my_cflags := -Wall $(my_cflags)
+            my_cflags := -Wall -Wimplicit-fallthrough $(my_cflags)
           endif
         endif
       endif
