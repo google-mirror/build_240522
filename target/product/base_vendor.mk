@@ -17,6 +17,7 @@
 # Base modules and settings for recovery.
 PRODUCT_PACKAGES += \
     adbd.recovery \
+    init_second_stage.recovery \
     ld.config.recovery.txt \
     linker.recovery \
     recovery \
