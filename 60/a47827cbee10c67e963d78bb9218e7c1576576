@@ -1,0 +1,7 @@
+Presubmit-Ready+1: Tao Bao <tbao@google.com>
+Build-Cop-Override+1: Alex Light <allight@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Tue, 14 Aug 2018 18:42:00 +0000
+Reviewed-on: https://android-review.googlesource.com/731527
+Project: platform/build
+Branch: refs/heads/master
