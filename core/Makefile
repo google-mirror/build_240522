@@ -162,7 +162,7 @@ FINAL_DEFAULT_PROPERTIES := $(call uniq-pairs-by-first-component, \
 
 intermediate_system_build_prop := $(call intermediates-dir-for,ETC,system_build_prop)/build.prop
 
-$(INSTALLED_DEFAULT_PROP_TARGET): $(intermediate_system_build_prop)
+$(INSTALLED_DEFAULT_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(intermediate_system_build_prop)
 	@echo Target buildinfo: $@
 	@mkdir -p $(dir $@)
 	@rm -f $@
@@ -174,9 +174,15 @@ $(INSTALLED_DEFAULT_PROP_TARGET): $(intermediate_system_build_prop)
 	$(hide) echo "#" >> $@; \
 	        echo "# BOOTIMAGE_BUILD_PROPERTIES" >> $@; \
 	        echo "#" >> $@;
-	$(hide) echo ro.bootimage.build.date=`$(DATE_FROM_FILE)`>>$@
-	$(hide) echo ro.bootimage.build.date.utc=`$(DATE_FROM_FILE) +%s`>>$@
-	$(hide) echo ro.bootimage.build.fingerprint="$(BUILD_FINGERPRINT_FROM_FILE)">>$@
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+			BUILD_ID="$(BUILD_ID)" \
+			BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
+			BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
+			DATE="$(DATE_FROM_FILE)" \
+			PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
+			PLATFORM_VERSION="$(PLATFORM_VERSION)" \
+			TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+			bash $(BUILDINFO_COMMON_SH) bootimage >> $@
 	$(hide) build/make/tools/post_process_props.py $@
 ifdef property_overrides_split_enabled
 	$(hide) mkdir -p $(TARGET_ROOT_OUT)
@@ -300,7 +306,8 @@ $(strip $(subst _,-, $(firstword $(1))))
 endef
 
 BUILDINFO_SH := build/make/tools/buildinfo.sh
-VENDOR_BUILDINFO_SH := build/make/tools/vendor_buildinfo.sh
+BUILDINFO_COMMON_SH := build/make/tools/buildinfo_common.sh
+BUILDINFO_VENDOR_SH := build/make/tools/buildinfo_vendor.sh
 
 # TARGET_BUILD_FLAVOR and ro.build.flavor are used only by the test
 # harness to distinguish builds. Only add _asan for a sanitized build
@@ -318,7 +325,7 @@ system_prop_file := $(TARGET_SYSTEM_PROP)
 else
 system_prop_file := $(wildcard $(TARGET_DEVICE_DIR)/system.prop)
 endif
-$(intermediate_system_build_prop): $(BUILDINFO_SH) $(INTERNAL_BUILD_ID_MAKEFILE) $(BUILD_SYSTEM)/version_defaults.mk $(system_prop_file) $(INSTALLED_ANDROID_INFO_TXT_TARGET)
+$(intermediate_system_build_prop): $(BUILDINFO_SH) $(BUILDINFO_COMMON_SH) $(INTERNAL_BUILD_ID_MAKEFILE) $(BUILD_SYSTEM)/version_defaults.mk $(system_prop_file) $(INSTALLED_ANDROID_INFO_TXT_TARGET)
 	@echo Target buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
@@ -329,6 +336,15 @@ ifneq ($(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES),)
 	$(hide) $(foreach prop,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES), \
 		echo "import /oem/oem.prop $(prop)" >> $@;)
 endif
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+			BUILD_ID="$(BUILD_ID)" \
+			BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
+			BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
+			DATE="$(DATE_FROM_FILE)" \
+			PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
+			PLATFORM_VERSION="$(PLATFORM_VERSION)" \
+			TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+			bash $(BUILDINFO_COMMON_SH) system >> $@
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 			TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 			TARGET_DEVICE="$(TARGET_DEVICE)" \
@@ -410,32 +426,32 @@ FINAL_VENDOR_BUILD_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_VENDOR_BUILD_PROPERTIES),=)
 endif  # property_overrides_split_enabled
 
-$(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(VENDOR_BUILDINFO_SH) $(intermediate_system_build_prop)
+$(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(BUILDINFO_VENDOR_SH) $(intermediate_system_build_prop)
 	@echo Target vendor buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
 	$(hide) grep 'ro.product.first_api_level' $(intermediate_system_build_prop) >> $@ || true
-	$(hide) echo ro.vendor.build.date=`$(DATE_FROM_FILE)`>>$@
-	$(hide) echo ro.vendor.build.date.utc=`$(DATE_FROM_FILE) +%s`>>$@
-	$(hide) echo ro.vendor.build.fingerprint="$(BUILD_FINGERPRINT_FROM_FILE)">>$@
 	$(hide) echo ro.vendor.build.security_patch="$(VENDOR_SECURITY_PATCH)">>$@
 	$(hide) echo ro.vendor.product.cpu.abilist="$(TARGET_CPU_ABI_LIST)">>$@
 	$(hide) echo ro.vendor.product.cpu.abilist32="$(TARGET_CPU_ABI_LIST_32_BIT)">>$@
 	$(hide) echo ro.vendor.product.cpu.abilist64="$(TARGET_CPU_ABI_LIST_64_BIT)">>$@
-	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
 			BUILD_ID="$(BUILD_ID)" \
 			BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
-			PLATFORM_VERSION="$(PLATFORM_VERSION)" \
-			PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
 			BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
-			TARGET_DEVICE="$(TARGET_DEVICE)" \
-			PRODUCT_NAME="$(TARGET_PRODUCT)" \
-			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
-			PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+			DATE="$(DATE_FROM_FILE)" \
+			PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
+			PLATFORM_VERSION="$(PLATFORM_VERSION)" \
+			TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+			bash $(BUILDINFO_COMMON_SH) vendor >> $@
+	$(hide) PRODUCT_BRAND="$(PRODUCT_BRAND)" \
 			PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
-			TARGET_BOOTLOADER_BOARD_NAME="$(TARGET_BOOTLOADER_BOARD_NAME)" \
+			PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+			PRODUCT_NAME="$(TARGET_PRODUCT)" \
 			TARGET_BOARD_PLATFORM="$(TARGET_BOARD_PLATFORM)" \
-	        bash $(VENDOR_BUILDINFO_SH) >> $@
+	        TARGET_BOOTLOADER_BOARD_NAME="$(TARGET_BOOTLOADER_BOARD_NAME)" \
+			TARGET_DEVICE="$(TARGET_DEVICE)" \
+			bash $(BUILDINFO_VENDOR_SH) >> $@
 ifdef property_overrides_split_enabled
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL VENDOR BUILD PROPERTIES" >> $@; \
@@ -455,14 +471,20 @@ FINAL_PRODUCT_PROPERTIES += \
 FINAL_PRODUCT_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_PRODUCT_PROPERTIES),=)
 
-$(INSTALLED_PRODUCT_BUILD_PROP_TARGET):
+$(INSTALLED_PRODUCT_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH)
 	@echo Target product buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
 ifdef BOARD_USES_PRODUCTIMAGE
-	$(hide) echo ro.product.build.date=`$(DATE_FROM_FILE)`>>$@
-	$(hide) echo ro.product.build.date.utc=`$(DATE_FROM_FILE) +%s`>>$@
-	$(hide) echo ro.product.build.fingerprint="$(BUILD_FINGERPRINT_FROM_FILE)">>$@
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+				BUILD_ID="$(BUILD_ID)" \
+				BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
+				BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
+				DATE="$(DATE_FROM_FILE)" \
+				PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
+				PLATFORM_VERSION="$(PLATFORM_VERSION)" \
+				TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+				bash $(BUILDINFO_COMMON_SH) product >> $@
 endif  # BOARD_USES_PRODUCTIMAGE
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL PRODUCT PROPERTIES" >> $@; \
@@ -483,14 +505,20 @@ FINAL_PRODUCT_SERVICES_PROPERTIES += \
 FINAL_PRODUCT_SERVICES_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_PRODUCT_SERVICES_PROPERTIES),=)
 
-$(INSTALLED_PRODUCT_SERVICES_BUILD_PROP_TARGET):
+$(INSTALLED_PRODUCT_SERVICES_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH)
 	@echo Target product-services buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
 ifdef BOARD_USES_PRODUCT_SERVICESIMAGE
-	$(hide) echo ro.product_services.build.date=`$(DATE_FROM_FILE)`>>$@
-	$(hide) echo ro.product_services.build.date.utc=`$(DATE_FROM_FILE) +%s`>>$@
-	$(hide) echo ro.product_services.build.fingerprint="$(BUILD_FINGERPRINT_FROM_FILE)">>$@
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+			BUILD_ID="$(BUILD_ID)" \
+			BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
+			BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
+			DATE="$(DATE_FROM_FILE)" \
+			PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
+			PLATFORM_VERSION="$(PLATFORM_VERSION)" \
+			TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+			bash $(BUILDINFO_COMMON_SH) product_services >> $@
 endif  # BOARD_USES_PRODUCT_SERVICESIMAGE
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL PRODUCT_SERVICES PROPERTIES" >> $@; \
