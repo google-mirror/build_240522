@@ -45,16 +45,13 @@ PRODUCT_PACKAGES += \
     camera.ranchu \
     camera.ranchu.jpeg \
     gatekeeper.ranchu \
-    lights.goldfish \
     gps.goldfish \
     gps.ranchu \
     fingerprint.goldfish \
-    sensors.goldfish \
     audio.primary.goldfish \
     audio.primary.goldfish_legacy \
     android.hardware.audio@2.0-service \
     android.hardware.wifi@1.0-service \
-    vibrator.goldfish \
     power.goldfish \
     power.ranchu \
     fingerprint.ranchu \
