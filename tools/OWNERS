@@ -1,2 +1,4 @@
-per-file warn.py = chh@google.com
-per-file checkowners.py = chh@google.com
+# inherit from parent:
+# per-file * = ccross@android.com,dwillemsen@google.com,nanzhang@google.com
+
+per-file warn.py,checkowners.py = chh@google.com
