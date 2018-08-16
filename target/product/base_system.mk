@@ -20,8 +20,6 @@ PRODUCT_PACKAGES += \
     adbd \
     am \
     android.hidl.allocator@1.0-service \
-    android.hidl.base-V1.0-java \
-    android.hidl.manager-V1.0-java \
     android.hidl.memory@1.0-impl \
     android.hidl.memory@1.0-impl.vendor \
     android.test.base \
@@ -272,9 +270,7 @@ PRODUCT_BOOT_JARS := \
     framework \
     telephony-common \
     voip-common \
-    ims-common \
-    android.hidl.base-V1.0-java \
-    android.hidl.manager-V1.0-java
+    ims-common
 
 # Add the compatibility library that is needed when org.apache.http.legacy
 # is removed from the bootclasspath.
