@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a12d837_5fd0cbd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-08-16T07:40:51Z",
+      "side": 1,
+      "message": "could you add some more \u0027why\u0027 into the description? go/cl-descriptions",
+      "revId": "4712b74313c0e0ba92569aacd7bf7626a73e4ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc43851_1b342b4f",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-08-16T07:40:51Z",
+      "side": 1,
+      "message": "This makefile (mainline_system) is intended to only produce artifacts on the system partition, but this change adds a bunch of things that don\u0027t end up on /system.",
+      "revId": "4712b74313c0e0ba92569aacd7bf7626a73e4ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
