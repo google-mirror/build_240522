@@ -1,0 +1,9 @@
+Code-Review+2: Sen Jiang <senj@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Verified+1: Yu Shan <shanyu@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Yu Shan <shanyu@google.com>
+Submitted-at: Thu, 16 Aug 2018 23:24:36 +0000
+Reviewed-on: https://android-review.googlesource.com/733636
+Project: platform/build
+Branch: refs/heads/master
