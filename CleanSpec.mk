@@ -493,6 +493,9 @@ $(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/APPS/*_intermed
 
 $(call add-clean-step, find $(PRODUCT_OUT) -type f -name "vr_hwc*" -print0 | xargs -0 rm -f)
 
+# Remove product-services related files / images
+$(call add-clean-step, find $(PRODUCT_OUT) -type d,f -name "*product-services*" -print0 | xargs -0 rm -rf)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
