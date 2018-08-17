@@ -603,6 +603,12 @@ ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled ap
 endif
 endif
 
+# If this is a bundled module, add it to the list of package names exempted from
+# hidden API access checks.
+ifeq ($(LOCAL_BUNDLED_MODULE),true)
+$(eval $(call hiddenapi-bundled-module-manifest,$(full_android_manifest)))
+endif  # LOCAL_BUNDLED_MODULE
+
 ifeq ($(module_run_appcompat),true)
 $(LOCAL_BUILT_MODULE) : $(call intermediates-dir-for,PACKAGING,veridex,HOST)/veridex.zip
 $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
