@@ -771,6 +771,7 @@ endif
 ALL_MODULES.$(my_register_name).FOR_HOST_CROSS := $(my_host_cross)
 ALL_MODULES.$(my_register_name).MODULE_NAME := $(LOCAL_MODULE)
 ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+ALL_MODULES.$(my_register_name).LOCAL_TEST_CONFIG := $(LOCAL_TEST_CONFIG)
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 
