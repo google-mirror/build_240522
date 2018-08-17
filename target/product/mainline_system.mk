@@ -26,7 +26,7 @@ PRODUCT_BRAND := generic
 PRODUCT_SHIPPING_API_LEVEL := 28
 
 _base_mk_whitelist := \
-  recovery/root/etc/mke2fs.conf \
+  recovery/root/system/etc/mke2fs.conf \
 
 _my_whitelist := $(_base_mk_whitelist)
 
