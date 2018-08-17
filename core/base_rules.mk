@@ -572,91 +572,77 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
-
-# Make sure we only add the files once for multilib modules.
-ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
-  # Sync the auto_test_config value for multilib modules.
-  ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen
-    ALL_MODULES.$(my_register_name).auto_test_config := true
-  endif
+$(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
+# LOCAL_COMPATIBILITY_SUPPORT_FILES is a list of <src>[:<dest>].
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES), \
+    $(eval p := $(subst :,$(space),$(f))) \
+    $(eval s := $(word 1,$(p))) \
+    $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
+    $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+      $(s):$(dir)/$(n)))))
+ifneq (,$(LOCAL_FULL_TEST_CONFIG))
+  test_config := $(LOCAL_FULL_TEST_CONFIG)
+else ifneq (,$(LOCAL_TEST_CONFIG))
+  test_config := $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG)
 else
-  $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
-  # LOCAL_COMPATIBILITY_SUPPORT_FILES is a list of <src>[:<dest>].
+  test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+endif
+ifeq (,$(test_config))
+  ifneq (true,$(is_native))
+    is_instrumentation_test := true
+    ifeq (true, $(LOCAL_IS_HOST_MODULE))
+      is_instrumentation_test := false
+    endif
+    # If LOCAL_MODULE_CLASS is not APPS, it's certainly not an instrumentation
+    # test. However, some packages for test data also have LOCAL_MODULE_CLASS
+    # set to APPS. These will require flag LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG
+    # to disable auto-generating test config file.
+    ifneq (APPS, $(LOCAL_MODULE_CLASS))
+      is_instrumentation_test := false
+    endif
+  endif
+  # CTS modules can be used for test data, so test config files must be
+  # explicitly created using AndroidTest.xml
+  ifeq (,$(filter cts, $(LOCAL_COMPATIBILITY_SUITE)))
+    ifneq (true, $(LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG))
+      ifeq (true, $(filter true,$(is_native) $(is_instrumentation_test)))
+        include $(BUILD_SYSTEM)/autogen_test_config.mk
+        test_config := $(autogen_test_config_file)
+        autogen_test_config_file :=
+      endif
+    endif
+  endif
+endif
+
+is_instrumentation_test :=
+
+ifneq (,$(test_config))
   $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
-    $(eval my_compat_dist_$(suite) += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES), \
-      $(eval p := $(subst :,$(space),$(f))) \
-      $(eval s := $(word 1,$(p))) \
-      $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
-      $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(s):$(dir)/$(n)))))
-  ifneq (,$(LOCAL_FULL_TEST_CONFIG))
-    test_config := $(LOCAL_FULL_TEST_CONFIG)
-  else ifneq (,$(LOCAL_TEST_CONFIG))
-    test_config := $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG)
-  else
-    test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
-  endif
-  ifeq (,$(test_config))
-    ifneq (true,$(is_native))
-      is_instrumentation_test := true
-      ifeq (true, $(LOCAL_IS_HOST_MODULE))
-        is_instrumentation_test := false
-      endif
-      # If LOCAL_MODULE_CLASS is not APPS, it's certainly not an instrumentation
-      # test. However, some packages for test data also have LOCAL_MODULE_CLASS
-      # set to APPS. These will require flag LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG
-      # to disable auto-generating test config file.
-      ifneq (APPS, $(LOCAL_MODULE_CLASS))
-        is_instrumentation_test := false
-      endif
-    endif
-    # CTS modules can be used for test data, so test config files must be
-    # explicitly created using AndroidTest.xml
-    ifeq (,$(filter cts, $(LOCAL_COMPATIBILITY_SUITE)))
-      ifneq (true, $(LOCAL_DISABLE_AUTO_GENERATE_TEST_CONFIG))
-        ifeq (true, $(filter true,$(is_native) $(is_instrumentation_test)))
-          include $(BUILD_SYSTEM)/autogen_test_config.mk
-          test_config := $(autogen_test_config_file)
-          autogen_test_config_file :=
-        endif
-      endif
-    endif
-  endif
+    $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+      $(test_config):$(dir)/$(LOCAL_MODULE).config)))
+endif
 
-  is_instrumentation_test :=
+ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
+  $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+    $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+      $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)))
+endif
 
-  ifneq (,$(test_config))
-    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
-      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(test_config):$(dir)/$(LOCAL_MODULE).config)))
-  endif
+ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
+$(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
+  $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+    $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+      $(extra_config):$(dir)/$(notdir $(extra_config))))))
+endif
 
-  test_config :=
-
-  ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
-    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
-      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)))
-  endif
-
-  ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
-  $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
-    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
-      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(extra_config):$(dir)/$(notdir $(extra_config))))))
-  endif
-endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
-
-# HACK: pretend a soong LOCAL_FULL_TEST_CONFIG is autogenerated by copying it to
-# the location autogenerated test configs use and setting the flag in
-# module-info.json
-ifdef LOCAL_FULL_TEST_CONFIG
+# HACK: pretend a soong LOCAL_FULL_TEST_CONFIG is autogenerated
+# and setting the flag in module-info.json
+# TODO: (b/113029686) Add explicit flag from Soong to determine if a test was
+# autogenerated.
+ifneq (,$(filter $(SOONG_OUT_DIR)%,$(LOCAL_FULL_TEST_CONFIG)))
   ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-    my_test_config_file := $(dir $(LOCAL_BUILT_MODULE))$(LOCAL_MODULE).config
-    $(eval $(call copy-one-file,$(LOCAL_FULL_TEST_CONFIG),$(my_test_config_file)))
-    $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_test_config_file))
     ALL_MODULES.$(my_register_name).auto_test_config := true
-    my_test_config_file :=
   endif
 endif
 
@@ -771,6 +757,10 @@ endif
 ALL_MODULES.$(my_register_name).FOR_HOST_CROSS := $(my_host_cross)
 ALL_MODULES.$(my_register_name).MODULE_NAME := $(LOCAL_MODULE)
 ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+ifneq (,$(test_config))
+  ALL_MODULES.$(my_register_name).TEST_CONFIG := "$(test_config)"
+endif
+test_config :=
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 
