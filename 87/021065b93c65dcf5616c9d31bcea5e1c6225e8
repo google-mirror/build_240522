@@ -1,0 +1,10 @@
+Verified+1: Shawn Yang <shawny@google.com>
+Code-Review+2: Shawn Yang <shawny@google.com>
+Autosubmit+1: Shawn Yang <shawny@google.com>
+Build-Cop-Override+1: Shawn Yang <shawny@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 17 Aug 2018 20:32:17 +0000
+Reviewed-on: https://android-review.googlesource.com/734281
+Project: platform/build
+Branch: refs/heads/master
