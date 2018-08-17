@@ -20,6 +20,7 @@
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
         <option name="push" value="{MODULE}->/data/local/tmp/{MODULE}" />
+        <option name="file_only" value="true" />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.GTest" >
