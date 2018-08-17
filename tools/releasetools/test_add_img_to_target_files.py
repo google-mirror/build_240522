@@ -27,7 +27,6 @@ from add_img_to_target_files import (
     CheckAbOtaImages, GetCareMap)
 from rangelib import RangeSet
 
-
 OPTIONS = common.OPTIONS
 
 
