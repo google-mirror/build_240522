@@ -14,6 +14,7 @@ $(MODULE_INFO_JSON):
 			'"compatibility_suites": [$(foreach w,$(sort $(ALL_MODULES.$(m).COMPATIBILITY_SUITES)),"$(w)", )], ' \
 			'"auto_test_config": [$(ALL_MODULES.$(m).auto_test_config)], ' \
 			'"module_name": ["$(ALL_MODULES.$(m).MODULE_NAME)"], ' \
+			'"local_full_test_config": ["$(ALL_MODULES.$(m).LOCAL_FULL_TEST_CONFIG)"], ' \
 			'},\n' \
 	 ) | sed -e 's/, *\]/]/g' -e 's/, *\}/ }/g' -e '$$s/,$$//' >> $@
 	$(hide) echo '}' >> $@
