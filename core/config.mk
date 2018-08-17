@@ -713,6 +713,7 @@ DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump2$(BUILD_EXECUTABLE_SUFFIX)
 PROFMAN := $(HOST_OUT_EXECUTABLES)/profman
 HIDDENAPI := $(HOST_OUT_EXECUTABLES)/hiddenapi
 CLASS2GREYLIST := $(HOST_OUT_EXECUTABLES)/class2greylist
+MANIFEST_PKGNAME := build/make/tools/manifest-pkgname.py
 
 FINDBUGS_DIR := external/owasp/sanitizer/tools/findbugs/bin
 FINDBUGS := $(FINDBUGS_DIR)/findbugs

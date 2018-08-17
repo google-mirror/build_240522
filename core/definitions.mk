@@ -2886,6 +2886,16 @@ $(INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST): \
 endif
 endef
 
+hiddenapi-package-whitelist-xml := \
+    $(call intermediates-dir-for,ETC,hiddenapi-package-whitelist.xml)/hiddenapi-package-whitelist.xml
+
+# Add a package defined by its manifest (first argument) to the list of packages
+# exempted from hidden API access checks.
+define hiddenapi-bundled-module-manifest
+$(hiddenapi-package-whitelist-xml): $(1)
+$(hiddenapi-package-whitelist-xml): PRIVATE_MANIFESTS := $$(PRIVATE_MANIFESTS) $(1)
+endef
+
 # File names for intermediate dex files of `hiddenapi-copy-soong-jar`.
 hiddenapi-soong-input-dex = $(dir $(1))/hiddenapi/dex-input/classes.dex
 hiddenapi-soong-output-dex = $(dir $(1))/hiddenapi/dex-output/classes.dex
