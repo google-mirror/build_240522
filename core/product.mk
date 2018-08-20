@@ -212,10 +212,10 @@ _product_var_list := \
     PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION \
 
 define dump-product
-$(info ==== $(1) ====)\
+$(warning ==== $(1) ====)\
 $(foreach v,$(_product_var_list),\
-$(info PRODUCTS.$(1).$(v) := $(PRODUCTS.$(1).$(v))))\
-$(info --------)
+$(warning PRODUCTS.$(1).$(v) := $(PRODUCTS.$(1).$(v))))\
+$(warning --------)
 endef
 
 define dump-products
