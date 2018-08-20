@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c820488_c050282f",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2018-08-20T07:46:37Z",
+      "side": 1,
+      "message": "we already have LOCAL_PRIVATE_PLATFORM_APIS - is this any different? Can we re-use that flag?\n\n+hansson",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "67ca12c5cbf1e4afc335ca28829be2d20ead1497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1b9dd45_2b87c1f5",
+        "filename": "tools/manifest-pkgname.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2018-08-20T07:46:37Z",
+      "side": 1,
+      "message": "It\u0027s possible to rename a package when building the APK with AAPT (--rename-manifest-package). I don\u0027t know if any APKs in the tree do that, but it might be safer to use AAPT to extract the package name from the built APK?\n\naapt dump badging apk | grep ^package\\:",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "67ca12c5cbf1e4afc335ca28829be2d20ead1497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
