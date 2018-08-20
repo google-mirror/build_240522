@@ -1,2 +1,3 @@
+# should inherit from parent per-file.
 per-file warn.py = chh@google.com
 per-file checkowners.py = chh@google.com
