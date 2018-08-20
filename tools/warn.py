@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# This file uses the following encoding: utf-8
+#   This file uses the following encoding: utf-8
 
 """Grep warnings messages and output HTML tables or warning counts in CSV.
 
