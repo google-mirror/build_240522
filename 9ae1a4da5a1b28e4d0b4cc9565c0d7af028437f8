@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c5d927c_dda19b93",
+        "filename": "core/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-08-20T21:17:13Z",
+      "side": 1,
+      "message": "Done. Yes, see example in c/735144.",
+      "parentUuid": "55a59617_4f5a6e38",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 75
+      },
+      "revId": "9ae1a4da5a1b28e4d0b4cc9565c0d7af028437f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4d66445_f361e165",
         "filename": "tools/OWNERS",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "9ae1a4da5a1b28e4d0b4cc9565c0d7af028437f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84d5d997_58583bde",
+        "filename": "tools/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-08-20T21:17:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4d66445_f361e165",
+      "revId": "9ae1a4da5a1b28e4d0b4cc9565c0d7af028437f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
