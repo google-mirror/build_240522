@@ -2,9 +2,6 @@
 -optimizations !code/simplification/arithmetic
 -optimizations !code/simplification/cast
 
-# To prevent name conflict in incremental obfuscation.
--useuniqueclassmembernames
-
 # Some classes in the libraries extend package private classes to chare common functionality
 # that isn't explicitly part of the API
 -dontskipnonpubliclibraryclasses -dontskipnonpubliclibraryclassmembers
