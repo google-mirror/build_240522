@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8b9dbded_2734082d",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-08-20T10:19:54Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "5c820488_c050282f",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "67ca12c5cbf1e4afc335ca28829be2d20ead1497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1b9dd45_2b87c1f5",
         "filename": "tools/manifest-pkgname.py",
         "patchSetId": 2
