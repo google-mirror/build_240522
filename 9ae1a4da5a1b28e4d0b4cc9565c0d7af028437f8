@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55a59617_4f5a6e38",
+        "filename": "core/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-08-20T20:55:48Z",
+      "side": 1,
+      "message": "Does this actually inherit? If so, can we just remove it?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 75
+      },
+      "revId": "9ae1a4da5a1b28e4d0b4cc9565c0d7af028437f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d66445_f361e165",
+        "filename": "tools/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-08-20T20:55:48Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "9ae1a4da5a1b28e4d0b4cc9565c0d7af028437f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
