@@ -2777,16 +2777,16 @@ endif # BOARD_AVB_ENABLE
 # -----------------------------------------------------------------
 # super partition image
 
-# (1): list of items like "system", "vendor", "product", "product_services"
-# return: map each item to the corresponding image target.
-# system => $(BUILT_SYSTEMIMAGE), vendor => $(INSTALLED_VENDORIMAGE_TARGET), etc.
-define image-for-partitions
-$(foreach item,$(1),$(or $(strip $(foreach mapping,
-            system:$(BUILT_SYSTEMIMAGE)
-            product_services:$(INSTALLED_PRODUCT_SERVICESIMAGE_TARGET),
-        $(if $(filter $(call word-colon,1,$(mapping)),$(item)),
-            $(patsubst $(call word-colon,1,$(mapping)),$(call word-colon,2,$(mapping)),$(item))))),
-    $(INSTALLED_$(call to-upper,$(item)IMAGE_TARGET))))
+# Returns a list of image targets corresponding to the given list of partitions. For example,
+# "$(BUILT_SYSTEMIMAGE) $(INSTALLED_VENDORIMAGE_TARGET)" for "system vendor" etc.
+# (1): list of partitions like "system", "vendor", "product", "product_services"
+define images-for-partitions
+$(strip $(foreach item,$(1),\
+    $(or $(strip $(foreach mapping,system:$(BUILT_SYSTEMIMAGE),\
+                     $(eval _partition := $(call word-colon,1,$(mapping))) \
+                     $(eval _value := $(call word-colon,2,$(mapping))) \
+                     $(if $(filter $(_partition),$(item)),$(_value)))),
+         $(INSTALLED_$(call to-upper,$(item))IMAGE_TARGET))))
 endef
 
 # (1): list of items like "system", "vendor", "product", "product_services"
@@ -2801,7 +2801,7 @@ ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
 ifdef BOARD_SUPER_PARTITION_SIZE
 
 INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
-$(INSTALLED_SUPERIMAGE_TARGET): $(call image-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
+$(INSTALLED_SUPERIMAGE_TARGET): $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
 # For A/B devices, super partition always contains sub-partitions in the _a slot, because this
 # image should only be used for bootstrapping / initializing the device. When flashing the image,
@@ -2823,7 +2823,7 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(HOST_OUT_EXECUTABLES)/lpmake
 		--output $@ \
 		$(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
 			--partition $(name)$(PRIVATE_PARTITION_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_PARTITION_SUFFIX)):readonly:$(call read-size-of-partitions,$(name)) \
-			--image $(name)$(PRIVATE_PARTITION_SUFFIX)=$(call image-for-partitions,$(name)))
+			--image $(name)$(PRIVATE_PARTITION_SUFFIX)=$(call images-for-partitions,$(name)))
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
 
@@ -2845,7 +2845,7 @@ droid_targets: check_android_partition_sizes
 .PHONY: check_android_partition_sizes
 
 # Add image dependencies so that generated_*_image_info.txt are written before checking.
-check_android_partition_sizes: $(call image-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
+check_android_partition_sizes: $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
 check_android_partition_sizes:
 	partition_size_list="$(call read-size-of-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))"; \
