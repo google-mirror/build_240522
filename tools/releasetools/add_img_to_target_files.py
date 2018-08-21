@@ -391,32 +391,52 @@ def AppendVBMetaArgsForPartition(cmd, partition, image):
     cmd.extend(["--include_descriptors_from_image", image])
 
 
-def AddVBMeta(output_zip, partitions):
-  """Creates a VBMeta image and store it in output_zip.
+def AddVBMeta(output_zip, partitions, name, needed_partitions=None):
+  """Creates a VBMeta image and stores it in output_zip.
+
+  It generates the requested VBMeta image. The requested image could be for
+  top-level or chained VBMeta image, which is determined based on the name.
 
   Args:
     output_zip: The output zip file, which needs to be already open.
     partitions: A dict that's keyed by partition names with image paths as
         values. Only valid partition names are accepted, as listed in
         common.AVB_PARTITIONS.
+    name: Name of the VBMeta partition, e.g. 'vbmeta', 'vbmeta_mainline'.
+    needed_partitions: Partitions whose descriptors should be included into the
+        generated VBMeta image.
+
+  Raises:
+    AssertionError: On invalid input.
   """
-  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vbmeta.img")
+  if name != 'vbmeta':
+    assert needed_partitions is not None, \
+        "Needed partitions must be specified for chained VBMeta image"
+  else:
+    assert needed_partitions is None, \
+        "Needed partitions must be None for top-level VBMeta image"
+
+  img = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "{}.img".format(name))
   if os.path.exists(img.input_name):
-    print("vbmeta.img already exists; not rebuilding...")
+    print("{}.img already exists; not rebuilding...".format(name))
     return img.input_name
 
   avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
   cmd = [avbtool, "make_vbmeta_image", "--output", img.name]
-  common.AppendAVBSigningArgs(cmd, "vbmeta")
+  common.AppendAVBSigningArgs(cmd, name)
 
   for partition, path in partitions.items():
+    if (needed_partitions is not None and
+        partition not in needed_partitions):
+      continue
     assert partition in common.AVB_PARTITIONS, \
         'Unknown partition: {}'.format(partition)
     assert os.path.exists(path), \
         'Failed to find {} for {}'.format(path, partition)
     AppendVBMetaArgsForPartition(cmd, partition, path)
 
-  args = OPTIONS.info_dict.get("avb_vbmeta_args")
+  args = OPTIONS.info_dict.get("avb_{}_args".format(name))
   if args and args.strip():
     split_args = shlex.split(args)
     for index, arg in enumerate(split_args[:-1]):
@@ -437,7 +457,7 @@ def AddVBMeta(output_zip, partitions):
             split_args[index + 1] = alt_path
             found = True
             break
-        assert found, 'failed to find %s' % (image_path,)
+        assert found, 'Failed to find {}'.format(image_path)
     cmd.extend(split_args)
 
   p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -675,8 +695,8 @@ def AddImagesToTargetFiles(filename):
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
   has_odm = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "ODM")) or
-                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
-                                             "odm.img")))
+             os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                         "odm.img")))
   has_product = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "PRODUCT")) or
                  os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                              "product.img")))
@@ -788,8 +808,20 @@ def AddImagesToTargetFiles(filename):
     partitions['dtbo'] = AddDtbo(output_zip)
 
   if OPTIONS.info_dict.get("avb_enable") == "true":
+    vbmeta_mainline = OPTIONS.info_dict.get("avb_vbmeta_mainline", "").strip()
+    if vbmeta_mainline:
+      banner("vbmeta_mainline")
+      AddVBMeta(
+          output_zip, partitions, "vbmeta_mainline", vbmeta_mainline.split())
+
+    vbmeta_vendor = OPTIONS.info_dict.get("avb_vbmeta_vendor", "").strip()
+    if vbmeta_vendor:
+      banner("vbmeta_vendor")
+      AddVBMeta(
+          output_zip, partitions, "vbmeta_vendor", vbmeta_vendor.split())
+
     banner("vbmeta")
-    AddVBMeta(output_zip, partitions)
+    AddVBMeta(output_zip, partitions, "vbmeta")
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
