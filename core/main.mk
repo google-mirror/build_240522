@@ -406,7 +406,6 @@ endif
 # Typical build; include any Android.mk files we can find.
 #
 
-FULL_BUILD := true
 
 # Before we go and include all of the module makefiles, mark the PRODUCT_*
 # and ADDITIONAL*PROPERTIES values readonly so that they won't be modified.
@@ -463,6 +462,7 @@ UNIQUE_ALL_MODULES :=
 else # ONE_SHOT_MAKEFILE
 
 ifneq ($(dont_bother),true)
+FULL_BUILD := true
 #
 # Include all of the makefiles in the system
 #
