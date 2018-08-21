@@ -2777,16 +2777,16 @@ endif # BOARD_AVB_ENABLE
 # -----------------------------------------------------------------
 # super partition image
 
-# (1): list of items like "system", "vendor", "product", "product_services"
-# return: map each item to the corresponding image target.
-# system => $(BUILT_SYSTEMIMAGE), vendor => $(INSTALLED_VENDORIMAGE_TARGET), etc.
+# Returns a list of image targets corresponding to the given list of partitions. For example,
+# "$(BUILT_SYSTEMIMAGE) $(INSTALLED_VENDORIMAGE_TARGET)" for "system vendor" etc.
+# (1): list of partitions like "system", "vendor", "product", "product_services"
 define image-for-partitions
-$(foreach item,$(1),$(or $(strip $(foreach mapping,
-            system:$(BUILT_SYSTEMIMAGE)
-            product_services:$(INSTALLED_PRODUCT_SERVICESIMAGE_TARGET),
-        $(if $(filter $(call word-colon,1,$(mapping)),$(item)),
-            $(patsubst $(call word-colon,1,$(mapping)),$(call word-colon,2,$(mapping)),$(item))))),
-    $(INSTALLED_$(call to-upper,$(item)IMAGE_TARGET))))
+$(foreach item,$(1),\
+    $(or $(strip $(foreach mapping,system:$(BUILT_SYSTEMIMAGE),\
+                     $(eval _partition := $(call word-colon,1,$(mapping))) \
+                     $(eval _value := $(call word-colon,2,$(mapping))) \
+                     $(if $(filter $(_partition),$(item)),$(_value)))),
+         $(INSTALLED_$(call to-upper,$(item))IMAGE_TARGET)))
 endef
 
 # (1): list of items like "system", "vendor", "product", "product_services"
