@@ -2812,6 +2812,7 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(call images-for-partitions,$(BOARD_SUPER_PARTI
 # bootloader fastboot should always mark _a slot as bootable.
 ifeq ($(AB_OTA_UPDATER),true)
 $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_PARTITION_SUFFIX=_a
+$(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_PARTITION_OTHER_SUFFIX=_b
 $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_METADATA_SLOTS=2
 else
 $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_METADATA_SLOTS=1
@@ -2826,7 +2827,8 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(HOST_OUT_EXECUTABLES)/lpmake
 		--output $@ \
 		$(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
 			--partition $(name)$(PRIVATE_PARTITION_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_PARTITION_SUFFIX)):readonly:$(call read-size-of-partitions,$(name)) \
-			--image $(name)$(PRIVATE_PARTITION_SUFFIX)=$(call images-for-partitions,$(name)))
+			--image $(name)$(PRIVATE_PARTITION_SUFFIX)=$(call images-for-partitions,$(name))) \
+			--partition $(name)$(PRIVATE_PARTITION_OTHER_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_PARTITION_OTHER_SUFFIX)):readonly:0
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
 
@@ -2837,7 +2839,8 @@ $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(HOST_OUT_EXECUTABLES)/lpmake
 		--device-size $(BOARD_SUPER_PARTITION_SIZE) \
 		--output $@ \
 		$(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-			--partition $(name)$(PRIVATE_PARTITION_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_SUPER_PARTITION_SUFFIX)):readonly:0)
+			--partition $(name)$(PRIVATE_PARTITION_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_PARTITION_SUFFIX)):readonly:0) \
+			--partition $(name)$(PRIVATE_PARTITION_SUFFIX):$$($(UUIDGEN) $(name)$(PRIVATE_PARTITION_OTHER_SUFFIX)):readonly:0)
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
