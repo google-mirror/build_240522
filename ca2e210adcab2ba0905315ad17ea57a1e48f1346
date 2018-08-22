@@ -16,6 +16,24 @@
       "revId": "ca2e210adcab2ba0905315ad17ea57a1e48f1346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d57294fe_f40c640a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2828,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-08-22T23:30:51Z",
+      "side": 1,
+      "message": "Thanks, will fix.",
+      "parentUuid": "106c5cc8_0a65fbba",
+      "revId": "ca2e210adcab2ba0905315ad17ea57a1e48f1346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
