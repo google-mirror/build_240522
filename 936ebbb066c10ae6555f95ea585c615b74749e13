@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cab493aa_73a0580b",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3117,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-08-22T17:54:40Z",
+      "side": 1,
+      "message": "Add BOARD_PREBUILT_DTBOIMAGE here too (not replace, since INSTALLED_DTBOIMAGE_TARGET is also being used further down)",
+      "range": {
+        "startLine": 3117,
+        "startChar": 4,
+        "endLine": 3117,
+        "endChar": 30
+      },
+      "revId": "936ebbb066c10ae6555f95ea585c615b74749e13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
