@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dea0348_9bc1ada7",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2840,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-08-22T23:30:32Z",
+      "side": 0,
+      "message": "Note: also fixes this typo here.",
+      "range": {
+        "startLine": 2840,
+        "startChar": 73,
+        "endLine": 2840,
+        "endChar": 103
+      },
+      "revId": "10f1a69a2bd649532b89a551d7dd5e32e90ebaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
