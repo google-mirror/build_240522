@@ -22,6 +22,30 @@
       "revId": "f5cffc624ee6976be2bf7da017c9b8cf9455fc11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ee7314_baf8c8ed",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2018-08-23T09:41:48Z",
+      "side": 1,
+      "message": "Yes, you need to load those part into ALL_MODULES like below in base_rules.mk\nALL_MODULES.$(my_register_name).SRCS :\u003d $(LOCAL_SRC_FILES)",
+      "parentUuid": "f6360a69_d002fe97",
+      "range": {
+        "startLine": 18,
+        "startChar": 34,
+        "endLine": 18,
+        "endChar": 55
+      },
+      "revId": "f5cffc624ee6976be2bf7da017c9b8cf9455fc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
