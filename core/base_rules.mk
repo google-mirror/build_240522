@@ -707,6 +707,8 @@ ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
     $(LOCAL_BUILT_MODULE):$(LOCAL_INSTALLED_MODULE) \
     $(my_init_rc_pairs) $(my_test_data_pairs) $(my_vintf_pairs))
+ALL_MODULES.$(my_register_name).SRCS := \
+    $(ALL_MODULES.$(my_register_name).SRCS) $(LOCAL_SRC_FILES)
 endif
 ifdef LOCAL_PICKUP_FILES
 # Files or directories ready to pick up by the build system
