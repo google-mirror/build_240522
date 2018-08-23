@@ -2915,6 +2915,7 @@ endef
 ###########################################################
 define transform-jar-to-dex-r8
 @echo R8: $@
+$(hide) truncate -s0 $(PRIVATE_PROGUARD_DICTIONARY)
 $(hide) $(R8_COMPAT_PROGUARD) -injars '$<' \
     --min-api $(PRIVATE_MIN_SDK_VERSION) \
     --force-proguard-compatibility --output $(subst classes.dex,,$@) \
