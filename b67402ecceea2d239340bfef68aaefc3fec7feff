@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bab4dae1_c44b0a48",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2018-08-23T13:48:44Z",
+      "side": 1,
+      "message": "note, the set of maxTargetSdk values accepted by the tool is determined by the values passed via --write-greylist, meaning that any value set in there now will break the build.\n\nThere are none yet, so that\u0027s ok, but I will make a change to fix that once this has gone in.",
+      "range": {
+        "startLine": 2883,
+        "startChar": 28,
+        "endLine": 2883,
+        "endChar": 44
+      },
+      "revId": "b67402ecceea2d239340bfef68aaefc3fec7feff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
