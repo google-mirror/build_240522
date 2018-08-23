@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6360a69_d002fe97",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2018-08-23T09:19:33Z",
+      "side": 1,
+      "message": "Currently, no such value in build system. It\u0027s always empty.\nWould it be added in another CL#?",
+      "range": {
+        "startLine": 18,
+        "startChar": 34,
+        "endLine": 18,
+        "endChar": 55
+      },
+      "revId": "f5cffc624ee6976be2bf7da017c9b8cf9455fc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
