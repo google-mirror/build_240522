@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fe8c42d0_8c3a449c",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-08-24T15:30:00Z",
+      "side": 1,
+      "message": "Deserves a comment?",
+      "range": {
+        "startLine": 2880,
+        "startChar": 0,
+        "endLine": 2880,
+        "endChar": 36
+      },
+      "revId": "b67402ecceea2d239340bfef68aaefc3fec7feff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bab4dae1_c44b0a48",
         "filename": "core/definitions.mk",
         "patchSetId": 2
