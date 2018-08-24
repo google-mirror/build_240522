@@ -1,0 +1,10 @@
+Verified+1: Satoshi Futenma <Satoshi.Futenma@sony.com>
+Verified+1: Tao Bao <tbao@google.com>
+Code-Review+1: Satoshi Futenma <Satoshi.Futenma@sony.com>
+Code-Review+2: Tao Bao <tbao@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 24 Aug 2018 19:54:09 +0000
+Reviewed-on: https://android-review.googlesource.com/729262
+Project: platform/build
+Branch: refs/heads/master
