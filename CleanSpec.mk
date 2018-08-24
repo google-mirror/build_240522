@@ -285,7 +285,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/default.prop)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system)
 
 # Switch host builds to Clang by default
-$(call add-clean-step, rm -rf $(OUT_DIR)/host)
+$(call add-clean-step, rm -rf $(OUT_DIR)/deprecated-clean-step)
 
 # Adding dalvik.vm.dex2oat-filter
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
@@ -308,7 +308,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/APPS/*)
 
 # Move to libc++ as the default STL.
-$(call add-clean-step, rm -rf $(OUT_DIR))
+$(call add-clean-step, rm -rf $(OUT_DIR)/deprecated-clean-step)
 
 # dex2oat instruction-set changes
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
@@ -318,7 +318,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/default.prop)
 # Make GNU++11 the default standard version. This requires a cleanspec because
 # char16_t/char32_t will be real types now instead of typedefs, which means
 # an ABI change since the names will mangle differently.
-$(call add-clean-step, rm -rf $(OUT_DIR))
+$(call add-clean-step, rm -rf $(OUT_DIR)/deprecated-clean-step)
 
 # 5.1!
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/build.prop)
