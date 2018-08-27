@@ -46,6 +46,30 @@
       "revId": "f5cffc624ee6976be2bf7da017c9b8cf9455fc11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e46f27_8a026450",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2018-08-27T09:47:01Z",
+      "side": 1,
+      "message": "Done,\n\nFixed https://android-review.googlesource.com/c/platform/build/+/736443 PatchSet 2\nSCRS is declared in base_rules.mk, upload base_rules.mk to fix it.",
+      "parentUuid": "81ee7314_baf8c8ed",
+      "range": {
+        "startLine": 18,
+        "startChar": 34,
+        "endLine": 18,
+        "endChar": 55
+      },
+      "revId": "f5cffc624ee6976be2bf7da017c9b8cf9455fc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
