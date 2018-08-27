@@ -1776,6 +1776,13 @@ endif
 
 my_tidy_checks := $(subst $(space),,$(my_tidy_checks))
 
+# Add dependency of clang-tidy and clang-tidy.sh
+ifneq ($(my_tidy_checks),)
+  my_clang_tidy_programs := $(PATH_TO_CLANG_TIDY) $(PATH_TO_CLANG_TIDY_SHELL)
+  $(cpp_objects): $(intermediates)/%.o: $(my_clang_tidy_programs)
+  $(c_objects): $(intermediates)/%.o: $(my_clang_tidy_programs)
+endif
+
 # Move -l* entries from ldflags to ldlibs, and everything else to ldflags
 my_ldlib_flags := $(my_ldflags) $(my_ldlibs)
 my_ldlibs := $(filter -l%,$(my_ldlib_flags))
