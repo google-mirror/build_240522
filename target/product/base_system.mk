@@ -169,6 +169,16 @@ PRODUCT_PACKAGES += \
     libstagefright_enc_common \
     libstagefright_foundation \
     libstagefright_omx \
+    libaacextractor \
+    libamrextractor \
+    libflacextractor \
+    libmidiextractor \
+    libmkvextractor \
+    libmp3extractor \
+    libmp4extractor \
+    libmpeg2extractor \
+    liboggextractor \
+    libwavextractor \
     libstdc++ \
     libsurfaceflinger \
     libsurfaceflinger_ddmconnection \
