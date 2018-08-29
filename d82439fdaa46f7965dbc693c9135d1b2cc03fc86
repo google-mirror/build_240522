@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37216717_a5d92bbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1083173
+      },
+      "writtenOn": "2018-08-29T14:11:59Z",
+      "side": 1,
+      "message": "Test bit as well:\n\nmake bit\nbit \u003csome module name\u003e",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "d82439fdaa46f7965dbc693c9135d1b2cc03fc86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
