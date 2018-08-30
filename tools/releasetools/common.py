@@ -651,7 +651,7 @@ def UnzipTemp(filename, pattern=None):
   return tmp
 
 
-def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks):
+def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks, not_care_as_zero=False):
   """Returns a SparseImage object suitable for passing to BlockImageDiff.
 
   This function loads the specified sparse image from the given path, and
@@ -683,7 +683,8 @@ def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks):
   clobbered_blocks = "0"
 
   image = sparse_img.SparseImage(path, mappath, clobbered_blocks,
-                                 allow_shared_blocks=allow_shared_blocks)
+                                 allow_shared_blocks=allow_shared_blocks,
+                                 not_care_as_zero=not_care_as_zero)
 
   # block.map may contain less blocks, because mke2fs may skip allocating blocks
   # if they contain all zeros. We can't reconstruct such a file from its block
@@ -1624,7 +1625,13 @@ class BlockDifference(object):
     assert version >= 3
     self.version = version
 
-    b = blockimgdiff.BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
+    from verity_utils import VerityTreeInfo
+    verity_tree_info = VerityTreeInfo(partition, tgt, OPTIONS.info_dict)
+    if verity_tree_info.enabled:
+      assert verity_tree_info.GetVerityTreeInfo()
+
+    b = blockimgdiff.BlockImageDiff(tgt, verity_tree_info, src,
+                                    threads=OPTIONS.worker_threads,
                                     version=self.version,
                                     disable_imgdiff=self.disable_imgdiff)
     self.path = os.path.join(MakeTempDir(), partition)

@@ -36,11 +36,11 @@ import sys
 
 import common
 import sparse_img
+import verity_utils
 
 
 OPTIONS = common.OPTIONS
 
-FIXED_SALT = "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
 BLOCK_SIZE = 4096
 BYTES_IN_MB = 1024 * 1024
 
@@ -70,47 +70,6 @@ def RunCommand(cmd, verbose=None, env=None):
   if verbose:
     print(output.rstrip())
   return (output, p.returncode)
-
-
-def GetVerityFECSize(partition_size):
-  cmd = ["fec", "-s", str(partition_size)]
-  output, exit_code = RunCommand(cmd, False)
-  if exit_code != 0:
-    return False, 0
-  return True, int(output)
-
-
-def GetVerityTreeSize(partition_size):
-  cmd = ["build_verity_tree", "-s", str(partition_size)]
-  output, exit_code = RunCommand(cmd, False)
-  if exit_code != 0:
-    return False, 0
-  return True, int(output)
-
-
-def GetVerityMetadataSize(partition_size):
-  cmd = ["build_verity_metadata.py", "size", str(partition_size)]
-  output, exit_code = RunCommand(cmd, False)
-  if exit_code != 0:
-    return False, 0
-  return True, int(output)
-
-
-def GetVeritySize(partition_size, fec_supported):
-  success, verity_tree_size = GetVerityTreeSize(partition_size)
-  if not success:
-    return 0
-  success, verity_metadata_size = GetVerityMetadataSize(partition_size)
-  if not success:
-    return 0
-  verity_size = verity_tree_size + verity_metadata_size
-  if fec_supported:
-    success, fec_size = GetVerityFECSize(partition_size + verity_size)
-    if not success:
-      return 0
-    return verity_size + fec_size
-  return verity_size
-
 
 def GetDiskUsage(path):
   """Return number of bytes that "path" occupies on host.
@@ -201,94 +160,6 @@ def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
   return exit_code == 0
 
 
-def AdjustPartitionSizeForVerity(partition_size, fec_supported):
-  """Modifies the provided partition size to account for the verity metadata.
-
-  This information is used to size the created image appropriately.
-
-  Args:
-    partition_size: the size of the partition to be verified.
-
-  Returns:
-    A tuple of the size of the partition adjusted for verity metadata, and
-    the size of verity metadata.
-  """
-  key = "%d %d" % (partition_size, fec_supported)
-  if key in AdjustPartitionSizeForVerity.results:
-    return AdjustPartitionSizeForVerity.results[key]
-
-  hi = partition_size
-  if hi % BLOCK_SIZE != 0:
-    hi = (hi // BLOCK_SIZE) * BLOCK_SIZE
-
-  # verity tree and fec sizes depend on the partition size, which
-  # means this estimate is always going to be unnecessarily small
-  verity_size = GetVeritySize(hi, fec_supported)
-  lo = partition_size - verity_size
-  result = lo
-
-  # do a binary search for the optimal size
-  while lo < hi:
-    i = ((lo + hi) // (2 * BLOCK_SIZE)) * BLOCK_SIZE
-    v = GetVeritySize(i, fec_supported)
-    if i + v <= partition_size:
-      if result < i:
-        result = i
-        verity_size = v
-      lo = i + BLOCK_SIZE
-    else:
-      hi = i
-
-  if OPTIONS.verbose:
-    print("Adjusted partition size for verity, partition_size: {},"
-          " verity_size: {}".format(result, verity_size))
-  AdjustPartitionSizeForVerity.results[key] = (result, verity_size)
-  return (result, verity_size)
-
-
-AdjustPartitionSizeForVerity.results = {}
-
-
-def BuildVerityFEC(sparse_image_path, verity_path, verity_fec_path,
-                   padding_size):
-  cmd = ["fec", "-e", "-p", str(padding_size), sparse_image_path,
-         verity_path, verity_fec_path]
-  output, exit_code = RunCommand(cmd)
-  if exit_code != 0:
-    print("Could not build FEC data! Error: %s" % output)
-    return False
-  return True
-
-
-def BuildVerityTree(sparse_image_path, verity_image_path, prop_dict):
-  cmd = ["build_verity_tree", "-A", FIXED_SALT, sparse_image_path,
-         verity_image_path]
-  output, exit_code = RunCommand(cmd)
-  if exit_code != 0:
-    print("Could not build verity tree! Error: %s" % output)
-    return False
-  root, salt = output.split()
-  prop_dict["verity_root_hash"] = root
-  prop_dict["verity_salt"] = salt
-  return True
-
-
-def BuildVerityMetadata(image_size, verity_metadata_path, root_hash, salt,
-                        block_device, signer_path, key, signer_args,
-                        verity_disable):
-  cmd = ["build_verity_metadata.py", "build", str(image_size),
-         verity_metadata_path, root_hash, salt, block_device, signer_path, key]
-  if signer_args:
-    cmd.append("--signer_args=\"%s\"" % (' '.join(signer_args),))
-  if verity_disable:
-    cmd.append("--verity_disable")
-  output, exit_code = RunCommand(cmd)
-  if exit_code != 0:
-    print("Could not build verity metadata! Error: %s" % output)
-    return False
-  return True
-
-
 def Append2Simg(sparse_image_path, unsparse_image_path, error_message):
   """Appends the unsparse image to the given sparse image.
 
@@ -327,8 +198,8 @@ def BuildVerifiedImage(data_image_path, verity_image_path,
 
   if fec_supported:
     # build FEC for the entire partition, including metadata
-    if not BuildVerityFEC(data_image_path, verity_image_path,
-                          verity_fec_path, padding_size):
+    if not verity_utils.BuildVerityFEC(data_image_path, verity_image_path,
+                                       verity_fec_path, padding_size):
       return False
 
     if not Append(verity_image_path, verity_fec_path, "Could not append FEC!"):
@@ -388,16 +259,17 @@ def MakeVerityEnabledImage(out_file, fec_supported, prop_dict):
   verity_fec_path = os.path.join(tempdir_name, "verity_fec.img")
 
   # build the verity tree and get the root hash and salt
-  if not BuildVerityTree(out_file, verity_image_path, prop_dict):
+  if not verity_utils.BuildVerityTree(out_file, verity_image_path, prop_dict):
     return False
 
   # build the metadata blocks
   root_hash = prop_dict["verity_root_hash"]
   salt = prop_dict["verity_salt"]
   verity_disable = "verity_disable" in prop_dict
-  if not BuildVerityMetadata(image_size, verity_metadata_path, root_hash, salt,
-                             block_dev, signer_path, signer_key, signer_args,
-                             verity_disable):
+  if not verity_utils.BuildVerityMetadata(image_size, verity_metadata_path,
+                                          root_hash, salt, block_dev,
+                                          signer_path, signer_key, signer_args,
+                                          verity_disable):
     return False
 
   # build the full verified image
@@ -565,8 +437,8 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   # verified.
   if verity_supported and is_verity_partition:
     partition_size = int(prop_dict.get("partition_size"))
-    (adjusted_size, verity_size) = AdjustPartitionSizeForVerity(
-        partition_size, verity_fec_supported)
+    (adjusted_size, verity_size) = verity_utils.AdjustPartitionSizeForVerity(
+        partition_size, verity_fec_supported, BLOCK_SIZE, OPTIONS.verbose)
     if not adjusted_size:
       return False
     prop_dict["partition_size"] = str(adjusted_size)
