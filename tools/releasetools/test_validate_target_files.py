@@ -28,6 +28,7 @@ import build_image
 import common
 import test_utils
 from validate_target_files import ValidateVerifiedBootImages
+from verity_utils import AdjustPartitionSizeForVerity
 
 
 class ValidateTargetFilesTest(unittest.TestCase):
@@ -116,7 +117,7 @@ class ValidateTargetFilesTest(unittest.TestCase):
   def _generate_system_image(self, output_file):
     verity_fec = True
     partition_size = 1024 * 1024
-    adjusted_size, verity_size = build_image.AdjustPartitionSizeForVerity(
+    adjusted_size, verity_size = AdjustPartitionSizeForVerity(
         partition_size, verity_fec)
 
     # Use an empty root directory.
