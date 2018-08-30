@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cbdeb8b5_625c19ea",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2838,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "$(LPMAKE)",
+      "range": {
+        "startLine": 2838,
+        "startChar": 69,
+        "endLine": 2838,
+        "endChar": 99
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a6e88ad_191242b9",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -49,6 +72,53 @@
     },
     {
       "key": {
+        "uuid": "07703081_fb2c1586",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2849,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d56ac647_c2c65414",
+      "range": {
+        "startLine": 2849,
+        "startChar": 35,
+        "endLine": 2849,
+        "endChar": 72
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec6c6fb_05203607",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2859,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "nit: space",
+      "range": {
+        "startLine": 2859,
+        "startChar": 0,
+        "endLine": 2859,
+        "endChar": 1
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b12adc24_c1fc9413",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -72,6 +142,52 @@
     },
     {
       "key": {
+        "uuid": "6a8afd4b_61f8fa64",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2996,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "$(LPMAKE)",
+      "range": {
+        "startLine": 2996,
+        "startChar": 12,
+        "endLine": 2996,
+        "endChar": 42
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ba6323b_2c753d4b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3169,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "sufficient to rely on $(LPMAKE) only?",
+      "range": {
+        "startLine": 3169,
+        "startChar": 4,
+        "endLine": 3169,
+        "endChar": 37
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c694334_8ee0c561",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -88,6 +204,98 @@
         "startChar": 15,
         "endLine": 3503,
         "endChar": 25
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "015d2f30_bde4193f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "nit: two blank lines between top-level functions",
+      "range": {
+        "startLine": 627,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 1
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09af608d_2d1b7457",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 628,
+        "startChar": 5,
+        "endLine": 628,
+        "endChar": 6
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad7b555c_3439c109",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "shlex.split()",
+      "range": {
+        "startLine": 632,
+        "startChar": 54,
+        "endLine": 632,
+        "endChar": 61
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e9a583c_b9ab68ee",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-30T21:19:11Z",
+      "side": 1,
+      "message": "Use a similar trigger as in Makefile, e.g. passing BOARD_SUPER_PARTITION_SIZE as \"super_size\u003d...\".",
+      "range": {
+        "startLine": 810,
+        "startChar": 5,
+        "endLine": 810,
+        "endChar": 42
       },
       "revId": "3966e37323814b734706f7c36564393045447ba8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
