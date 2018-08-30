@@ -1,0 +1,9 @@
+Code-Review+2: Nan Zhang <nanzhang@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Autosubmit+1: Nan Zhang <nanzhang@google.com>
+Verified+1: Nan Zhang <nanzhang@google.com>
+Submitted-by: Nan Zhang <nanzhang@google.com>
+Submitted-at: Thu, 30 Aug 2018 15:28:45 +0000
+Reviewed-on: https://android-review.googlesource.com/741361
+Project: platform/build
+Branch: refs/heads/master
