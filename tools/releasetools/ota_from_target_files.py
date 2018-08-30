@@ -177,6 +177,8 @@ import zipfile
 import common
 import edify_generator
 
+import verity_utils
+
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
   sys.exit(1)
@@ -1411,8 +1413,12 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
                          target_info.get('ext4_share_dup_blocks') == "true")
   system_src = common.GetSparseImage("system", OPTIONS.source_tmp, source_zip,
                                      allow_shared_blocks)
+
+  hashtree_info_generator = verity_utils.CreateHashTreeInfoGenerator(
+      "system", 4096, target_info)
   system_tgt = common.GetSparseImage("system", OPTIONS.target_tmp, target_zip,
-                                     allow_shared_blocks)
+                                     allow_shared_blocks,
+                                     hashtree_info_generator)
 
   blockimgdiff_version = max(
       int(i) for i in target_info.get("blockimgdiff_versions", "1").split(","))
@@ -1439,8 +1445,11 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
       raise RuntimeError("can't generate incremental that adds /vendor")
     vendor_src = common.GetSparseImage("vendor", OPTIONS.source_tmp, source_zip,
                                        allow_shared_blocks)
-    vendor_tgt = common.GetSparseImage("vendor", OPTIONS.target_tmp, target_zip,
-                                       allow_shared_blocks)
+    hashtree_info_generator = verity_utils.CreateHashTreeInfoGenerator(
+        "vendor", 4096, target_info)
+    vendor_tgt = common.GetSparseImage(
+        "vendor", OPTIONS.target_tmp, target_zip, allow_shared_blocks,
+        hashtree_info_generator)
 
     # Check first block of vendor partition for remount R/W only if
     # disk type is ext4
