@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d56ac647_c2c65414",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2849,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-08-30T20:59:47Z",
+      "side": 1,
+      "message": "In this case, $2 will be false, so this line won\u0027t be included. super_empty.img doesn\u0027t include the size of contents of any partitions, just their names/UUIDs.",
+      "parentUuid": "4a6e88ad_191242b9",
+      "range": {
+        "startLine": 2849,
+        "startChar": 35,
+        "endLine": 2849,
+        "endChar": 72
+      },
+      "revId": "3966e37323814b734706f7c36564393045447ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b12adc24_c1fc9413",
         "filename": "core/Makefile",
         "patchSetId": 1
