@@ -31,7 +31,7 @@ from hashlib import sha1
 
 import common
 from rangelib import RangeSet
-
+import verity_utils
 
 __all__ = ["EmptyImage", "DataImage", "BlockImageDiff"]
 
@@ -359,8 +359,8 @@ class BlockImageDiff(object):
   list of transfers produced will never read from the original image.
   """
 
-  def __init__(self, tgt, src=None, threads=None, version=4,
-               disable_imgdiff=False):
+  def __init__(self, tgt, verity_tree_info=None, src=None, threads=None,
+               version=4, disable_imgdiff=False):
     if threads is None:
       threads = multiprocessing.cpu_count() // 2
       if threads == 0:
@@ -379,6 +379,7 @@ class BlockImageDiff(object):
     assert version in (3, 4)
 
     self.tgt = tgt
+    self.verity_tree_info = verity_tree_info
     if src is None:
       src = EmptyImage()
     self.src = src
@@ -648,6 +649,14 @@ class BlockImageDiff(object):
                    stash_threshold)
 
     self.touched_src_sha1 = self.src.RangeSha1(self.touched_src_ranges)
+
+    if self.verity_tree_info:
+      out.append("compute_hash_tree {} {} {} {} {}\n".format(
+          self.verity_tree_info.verity_tree_range.to_string_raw(),
+          self.verity_tree_info.file_system_range.to_string_raw(),
+          self.verity_tree_info.hash_algorithm,
+          self.verity_tree_info.salt,
+          self.verity_tree_info.root_hash))
 
     # Zero out extended blocks as a workaround for bug 20881595.
     if self.tgt.extended:
@@ -984,6 +993,12 @@ class BlockImageDiff(object):
       # been touched, and touch all the blocks written by this
       # transfer.
       for s, e in xf.tgt_ranges:
+        for i in range(s, e):
+          assert touched[i] == 0
+          touched[i] = 1
+
+    if self.verity_tree_info:
+      for s, e in self.verity_tree_info.verity_tree_range:
         for i in range(s, e):
           assert touched[i] == 0
           touched[i] = 1
@@ -1517,7 +1532,16 @@ class BlockImageDiff(object):
     max_blocks_per_transfer = int(cache_size * split_threshold /
                                   self.tgt.blocksize)
     empty = RangeSet()
+    verity_tree_range = RangeSet()
+    if self.verity_tree_info:
+      verity_tree_range = self.verity_tree_info.verity_tree_range
+
     for tgt_fn, tgt_ranges in sorted(self.tgt.file_map.items()):
+      # Subtracts the ranges that overlap with the hash_tree range
+      tgt_ranges = tgt_ranges.subtract(verity_tree_range)
+      if not tgt_ranges:
+        continue
+
       if tgt_fn == "__ZERO":
         # the special "__ZERO" domain is all the blocks not contained
         # in any file and that are filled with zeros.  We have a

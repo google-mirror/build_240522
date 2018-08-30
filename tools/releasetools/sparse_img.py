@@ -33,7 +33,7 @@ class SparseImage(object):
   """
 
   def __init__(self, simg_fn, file_map_fn=None, clobbered_blocks=None,
-               mode="rb", build_map=True, allow_shared_blocks=False):
+               mode="rb", build_map=True, allow_shared_blocks=False, not_care_as_zero=False):
     self.simg_f = f = open(simg_fn, mode)
 
     header_bin = f.read(28)
@@ -102,8 +102,17 @@ class SparseImage(object):
         if data_sz != 0:
           raise ValueError("Don't care chunk input size is non-zero (%u)" %
                            (data_sz))
-        else:
-          pos += chunk_sz
+        # Fills the don't care data ranges with zeros.
+        elif not_care_as_zero:
+          fill_data = '\x00' * 4
+          # In order to compute verity hash_tree on device, we need to write
+          # zeros explicitly to the don't care ranges. Because these ranges may
+          # contain non-zero data from the previous build.
+          care_data.append(pos)
+          care_data.append(pos + chunk_sz)
+          offset_map.append((pos, chunk_sz, None, fill_data))
+
+        pos += chunk_sz
 
       elif chunk_type == 0xCAC4:
         raise ValueError("CRC32 chunks are not supported")
