@@ -2837,21 +2837,27 @@ endif # AB_OTA_UPDATER
 
 $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(HOST_OUT_EXECUTABLES)/lpmake
 
+# $(1): slot A suffix (_a or empty)
+# $(2): include images or not (true or empty)
+define build-superimage-target-args
+  $(if $(2), --sparse) \
+  --metadata-size 65536 \
+  --metadata-slots $(if $(1),2,1) \
+  --device-size $(BOARD_SUPER_PARTITION_SIZE) \
+  $(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+    --partition $(name)$(1):$$($(UUIDGEN) $(name)$(1)):readonly:$(if $(2),$(call read-size-of-partitions,$(name)),0) \
+    $(if $(2), --image $(name)$(1)=$(call images-for-partitions,$(name))) \
+    $(if $(1), --partition $(name)_b:$$($(UUIDGEN) $(name)_b):readonly:0) \
+  )
+endef
+
 # $(1): output image path
 # $(2): slot A suffix (_a or empty)
 # $(3): include images or not (true or empty)
 define build-superimage-target
   $(HOST_OUT_EXECUTABLES)/lpmake \
-    $(if $(3), --sparse) \
-    --metadata-size 65536 \
-    --metadata-slots $(if $(2),2,1) \
-    --device-size $(BOARD_SUPER_PARTITION_SIZE) \
-    --output $(1) \
-    $(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-      --partition $(name)$(2):$$($(UUIDGEN) $(name)$(2)):readonly:$(if $(3),$(call read-size-of-partitions,$(name)),0) \
-      $(if $(3), --image $(name)$(2)=$(call images-for-partitions,$(name))) \
-      $(if $(2), --partition $(name)_b:$$($(UUIDGEN) $(name)_b):readonly:0) \
-    )
+	$(call build-superimage-target-args,$2,$3) \
+    --output $(1)
 endef
 
 $(INSTALLED_SUPERIMAGE_TARGET):
@@ -2984,6 +2990,10 @@ ifeq (true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT))
 OTATOOLS += \
   $(FUTILITY) \
   $(VBOOT_SIGNER)
+endif
+
+ifeq (true,$(PRODUCT_USE_LOGICAL_PARTITIONS))
+OTATOOLS += $(HOST_OUT_EXECUTABLES)/lpmake
 endif
 
 # Shared libraries.
@@ -3156,6 +3166,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(INSTALLED_ANDROID_INFO_TXT_TARGET) \
 		$(INSTALLED_KERNEL_TARGET) \
 		$(INSTALLED_2NDBOOTLOADER_TARGET) \
+		$(INSTALLED_SUPERIMAGE_EMPTY_TARGET) \
 		$(BOARD_PREBUILT_DTBOIMAGE) \
 		$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_BASE_FS_PATH) \
 		$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VENDOR_BASE_FS_PATH) \
@@ -3487,6 +3498,12 @@ ifdef BUILT_ASSEMBLED_VENDOR_MANIFEST
 endif
 ifdef BUILT_VENDOR_MATRIX
 	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
+endif
+ifdef BOARD_SUPER_PARTITION_SIZE
+	$(hide) echo "lpmake_bin=$(notdir $(LPMAKE))" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo -n "lpmake_args=" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo $(call build-superimage-target-args,$(if $(filter true,$(AB_OTA_UPDATER)),_a,)) \
+	    >> $(zip_root)/META/misc_info.txt
 endif
 
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
