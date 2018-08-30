@@ -1396,8 +1396,11 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
                          target_info.get('ext4_share_dup_blocks') == "true")
   system_src = common.GetSparseImage("system", OPTIONS.source_tmp, source_zip,
                                      allow_shared_blocks)
+  compute_system_hash_tree = (target_info.get("verity") == "true" and
+                              target_info.get("system_verity_block_device"))
   system_tgt = common.GetSparseImage("system", OPTIONS.target_tmp, target_zip,
-                                     allow_shared_blocks)
+                                     allow_shared_blocks,
+                                     not_care_as_zero=compute_system_hash_tree)
 
   blockimgdiff_version = max(
       int(i) for i in target_info.get("blockimgdiff_versions", "1").split(","))
@@ -1424,8 +1427,11 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
       raise RuntimeError("can't generate incremental that adds /vendor")
     vendor_src = common.GetSparseImage("vendor", OPTIONS.source_tmp, source_zip,
                                        allow_shared_blocks)
-    vendor_tgt = common.GetSparseImage("vendor", OPTIONS.target_tmp, target_zip,
-                                       allow_shared_blocks)
+    compute_vendor_hash_tree = (target_info.get("verity") == "true" and
+                                target_info.get("vendor_verity_block_device"))
+    vendor_tgt = common.GetSparseImage(
+        "vendor", OPTIONS.target_tmp, target_zip, allow_shared_blocks,
+        not_care_as_zero=compute_vendor_hash_tree)
 
     # Check first block of vendor partition for remount R/W only if
     # disk type is ext4
