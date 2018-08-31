@@ -289,6 +289,7 @@ endif
 ifneq ($(my_sanitize),)
   fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize))
   my_cflags += -fsanitize=$(fsanitize_arg)
+  my_asflags += -fsanitize=$(fsanitize_arg)
 
   ifdef LOCAL_IS_HOST_MODULE
     my_cflags += -fno-sanitize-recover=all
