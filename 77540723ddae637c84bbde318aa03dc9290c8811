@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e100904c_c544a025",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-09-04T14:23:24Z",
+      "side": 1,
+      "message": "This CL will add HASHTREE footer to vendor.img, too.",
+      "revId": "77540723ddae637c84bbde318aa03dc9290c8811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
