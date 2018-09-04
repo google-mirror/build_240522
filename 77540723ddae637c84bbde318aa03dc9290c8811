@@ -16,6 +16,23 @@
       "revId": "77540723ddae637c84bbde318aa03dc9290c8811",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a00538f8_f695cd6a",
+        "filename": "target/board/treble_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-09-04T14:32:56Z",
+      "side": 1,
+      "message": "This treble_common.mk is for legacy GSIs, while BoardConfigGsiCommon.mk is for new GSIs in P going forward.\n\nWe can probably merge the two .mk so we don\u0027t have to dup the settings here.\n\nLet\u0027s do that separately in the future.",
+      "revId": "77540723ddae637c84bbde318aa03dc9290c8811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
