@@ -849,6 +849,7 @@ else ifeq (true,$(BOARD_AVB_ENABLE)) # TARGET_BOOTIMAGE_USE_EXT2 != true
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH)
 	$(call pretty,"Target boot image: $@")
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
+	$(if $(BOARD_BOOTIMAGE_PARTITION_SIZE),,$(hide) echo "BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE")
 	$(hide) $(call assert-max-image-size,$@,$(call get-hash-image-max-size,$(BOARD_BOOTIMAGE_PARTITION_SIZE)))
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $@ \
@@ -860,6 +861,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILE
 bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL) $(BOARD_AVB_BOOT_KEY_PATH)
 	@echo "make $@: ignoring dependencies"
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(INSTALLED_BOOTIMAGE_TARGET)
+	$(if $(BOARD_BOOTIMAGE_PARTITION_SIZE),,$(hide) echo "BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE")
 	$(hide) $(call assert-max-image-size,$(INSTALLED_BOOTIMAGE_TARGET),$(call get-hash-image-max-size,$(BOARD_BOOTIMAGE_PARTITION_SIZE)))
 	$(hide) $(AVBTOOL) add_hash_footer \
 	  --image $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -1683,6 +1685,7 @@ define build-recoveryimage-target
     $(hide) $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE))))
   $(if $(filter true,$(BOARD_AVB_ENABLE)), \
     $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)), \
+      $(if $(BOARD_BOOTIMAGE_PARTITION_SIZE),,$(hide) echo "BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE")
       $(hide) $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS),\
       $(hide) $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) --partition_name recovery $(INTERNAL_AVB_RECOVERY_SIGNING_ARGS) $(BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS)))
 endef
@@ -2634,10 +2637,6 @@ else
 # If key path isn't specified, use the 4096-bit test key.
 BOARD_AVB_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-endif
-
-ifndef BOARD_BOOTIMAGE_PARTITION_SIZE
-$(error BOARD_BOOTIMAGE_PARTITION_SIZE must be set for BOARD_AVB_ENABLE)
 endif
 
 BOOT_FOOTER_ARGS := BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS
