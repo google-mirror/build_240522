@@ -1045,6 +1045,39 @@ my_generated_sources += $(ll_lex_cpps)
 endif
 
 ###########################################################
+## sysprop: Compile .sysprop files to .cpp and .h files
+###########################################################
+sysprop_src := $(strip $(filter %.sysprop,$(my_src_files)))
+sysprop_gen_cpp :=
+ifneq ($(sysprop_src),)
+
+# Use the intermediates directory to avoid writing our own .cpp -> .o rules.
+sysprop_gen_cpp_root := $(intermediates)/sysprop-generated/src
+sysprop_gen_include_root := $(intermediates)/sysprop-generated/include
+
+# Multi-architecture builds have distinct intermediates directories.
+# Thus we'll actually generate source for each architecture.
+$(foreach s,$(sysprop_src),\
+    $(eval $(call define-sysprop-cpp-rule,$(s),$(sysprop_gen_cpp_root),sysprop_gen_cpp)))
+$(foreach cpp,$(sysprop_gen_cpp), \
+    $(call include-depfile,$(addsuffix .,$(basename $(cpp))),$(cpp)))
+$(call track-src-file-gen,$(sysprop_src),$(sysprop_gen_cpp))
+
+$(sysprop_gen_cpp) : PRIVATE_MODULE := $(LOCAL_MODULE)
+$(sysprop_gen_cpp) : PRIVATE_HEADER_OUTPUT_DIR := $(sysprop_gen_include_root)
+
+# Add generated headers to include paths.
+my_c_includes += $(sysprop_gen_include_root)
+my_export_c_include_dirs += $(sysprop_gen_include_root)
+# Pick up the generated C++ files later for transformation to .o files.
+my_generated_sources += $(sysprop_gen_cpp)
+
+my_shared_libraries += libbase
+
+endif  # $(sysprop_src) non-empty
+
+#
+###########################################################
 ## C++: Compile .cpp files to .o.
 ###########################################################
 

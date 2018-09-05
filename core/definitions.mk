@@ -1140,6 +1140,31 @@ $(3) += $$(define-aidl-cpp-rule-src)
 endef
 
 ###########################################################
+## Commands for running sysprop
+###########################################################
+
+define transform-sysprop-to-cpp
+@mkdir -p $(dir $@)
+@mkdir -p $(PRIVATE_HEADER_OUTPUT_DIR)
+@echo "Generating C++ from sysprop: $(PRIVATE_MODULE) <= $<"
+$(hide) $(SYSPROP_CPP) --source-output-dir $(dir $@) \
+    --header-output-dir $(PRIVATE_HEADER_OUTPUT_DIR) $<
+endef
+
+## Given a .sysprop file path generate the rule to compile it a .cpp file.
+# $(1): a .sysprop source file
+# $(2): a directory to place the generated .cpp files in
+# $(3): name of a variable to add the path to the generated source file to
+#
+# You must call this with $(eval).
+define define-sysprop-cpp-rule
+define-sysprop-cpp-rule-src := $(patsubst %.sysprop,%$(LOCAL_CPP_EXTENSION),$(subst ../,dotdot/,$(addprefix $(2)/,$(1))))
+$$(define-sysprop-cpp-rule-src) : $(LOCAL_PATH)/$(1) $(SYSPROP_CPP)
+	$$(transform-sysprop-to-cpp)
+$(3) += $$(define-sysprop-cpp-rule-src)
+endef
+
+###########################################################
 ## Commands for running vts
 ###########################################################
 
