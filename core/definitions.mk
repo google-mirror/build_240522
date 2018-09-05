@@ -1808,7 +1808,7 @@ define transform-o-to-shared-lib-inner
 $(hide) $(PRIVATE_CXX) \
 	-nostdlib -Wl,-soname,$(notdir $@) \
 	-Wl,--gc-sections \
-	$(if $(filter true,$(PRIVATE_CLANG)),-shared,-Wl$(comma)-shared) \
+	-shared \
 	$(PRIVATE_TARGET_CRTBEGIN_SO_O) \
 	$(PRIVATE_ALL_OBJECTS) \
 	-Wl,--whole-archive \
