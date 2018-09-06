@@ -1,5 +1,12 @@
 # Build System Changes for Android.mk Writers
 
+## .../obj/lib/*.so  {#intermediate_libraries}
+
+`OVERRIDE_BUILT_MODULE_PATH` is no longer necessary, and has been removed.
+
+We no longer use `TARGET_OUT_INTERMEDIATE_LIBRARIES`
+(`$(PRODUCT_OUT)/obj/lib`), but directly link to the necessary intermediates.
+
 ## `.PHONY` rule enforcement  {#phony_targets}
 
 There are several new warnings/errors meant to ensure the proper use of

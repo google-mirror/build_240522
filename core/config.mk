@@ -112,6 +112,15 @@ $(KATI_obsolete_var \
   TARGET_CC 2ND_TARGET_CC \
   TARGET_CXX 2ND_TARGET_CXX \
   ,GCC support has been removed. Use Clang instead)
+$(KATI_deprecate_var OVERRIDE_BUILT_MODULE_PATH,See $(CHANGES_URL)#intermediate_libraries)
+$(KATI_deprecate_var \
+  HOST_OUT_INTERMEDIATE_LIBRARIES \
+  HOST_CROSS_OUT_INTERMEDIATE_LIBRARIES \
+  2ND_HOST_OUT_INTERMEDIATE_LIBRARIES \
+  2ND_HOST_CROSS_OUT_INTERMEDIATE_LIBRARIES \
+  TARGET_OUT_INTERMEDIATE_LIBRARIES \
+  2ND_TARGET_OUT_INTERMEDIATE_LIBRARIES \
+  ,See $(CHANGES_URL)#intermediate_libraries)
 
 # This is marked as obsolete in envsetup.mk after reading the BoardConfig.mk
 $(KATI_deprecate_export It is a global setting. See $(CHANGES_URL)#export_keyword)
