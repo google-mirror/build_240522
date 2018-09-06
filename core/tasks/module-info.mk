@@ -26,3 +26,4 @@ ifndef ONE_SHOT_MAKEFILE
 files: $(MODULE_INFO_JSON)
 endif
 
+$(call dist-for-goals, dist_files module-info, $(MODULE_INFO_JSON))
