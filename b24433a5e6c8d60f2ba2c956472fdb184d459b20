@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48c2a806_29bcd423",
+        "filename": "core/header_library_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-06T23:15:43Z",
+      "side": 1,
+      "message": "This is missing a )",
+      "range": {
+        "startLine": 17,
+        "startChar": 48,
+        "endLine": 17,
+        "endChar": 49
+      },
+      "revId": "b24433a5e6c8d60f2ba2c956472fdb184d459b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
