@@ -142,17 +142,18 @@ ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@
 endif
 
-ifdef LOCAL_SOONG_UNSTRIPPED_BINARY
-  # Store a copy with symbols for symbolic debugging
-  my_unstripped_path := $(TARGET_OUT_UNSTRIPPED)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
-  symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
-  $(eval $(call copy-one-file,$(LOCAL_SOONG_UNSTRIPPED_BINARY),$(symbolic_output)))
-  $(call add-dependency,$(LOCAL_BUILT_MODULE),$(symbolic_output))
+ifndef LOCAL_IS_HOST_MODULE
+  ifdef LOCAL_SOONG_UNSTRIPPED_BINARY
+    # Store a copy with symbols for symbolic debugging
+    my_unstripped_path := $(TARGET_OUT_UNSTRIPPED)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+    symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
+    $(eval $(call copy-one-file,$(LOCAL_SOONG_UNSTRIPPED_BINARY),$(symbolic_output)))
+    $(call add-dependency,$(LOCAL_BUILT_MODULE),$(symbolic_output))
 
-  ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
-  my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
-  breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
-  $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
+    ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
+      my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+      breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
+      $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
 	$(hide) if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
@@ -161,8 +162,9 @@ ifdef LOCAL_SOONG_UNSTRIPPED_BINARY
 	  echo "skipped for non-elf file."; \
 	  touch $@; \
 	fi
-  $(call add-dependency,$(LOCAL_BUILT_MODULE),$(breakpad_output))
-endif
+      $(call add-dependency,$(LOCAL_BUILT_MODULE),$(breakpad_output))
+    endif
+  endif
 endif
 
 ifeq ($(NATIVE_COVERAGE),true)
