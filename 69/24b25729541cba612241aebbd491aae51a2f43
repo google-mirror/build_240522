@@ -1,0 +1,9 @@
+Verified+1: Bowgo Tsai <bowgotsai@google.com>
+Build-Cop-Override+1: Benjamin Franz <bfranz@google.com>
+Autosubmit+1: Bowgo Tsai <bowgotsai@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 11 Sep 2018 14:33:19 +0000
+Reviewed-on: https://android-review.googlesource.com/753428
+Project: platform/build
+Branch: refs/heads/master
