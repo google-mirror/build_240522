@@ -8,8 +8,9 @@ ifdef LOCAL_DROIDDOC_STUBS_SRCJAR
 $(eval $(call copy-one-file,$(LOCAL_DROIDDOC_STUBS_SRCJAR),$(OUT_DOCS)/$(LOCAL_MODULE)-stubs.srcjar))
 ALL_DOCS += $(OUT_DOCS)/$(LOCAL_MODULE)-stubs.srcjar
 
-.PHONY: $(LOCAL_MODULE)
-$(LOCAL_MODULE) : $(OUT_DOCS)/$(LOCAL_MODULE)-stubs.srcjar
+my_phony_target := $(if $(filter %-docs,$(LOCAL_MODULE)),$(LOCAL_MODULE),$(LOCAL_MODULE)-docs)
+.PHONY: $(my_phony_target)
+$(my_phony_target) : $(OUT_DOCS)/$(LOCAL_MODULE)-stubs.srcjar
 endif
 
 ifdef LOCAL_DROIDDOC_DOC_ZIP
