@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ca57376_76963f16",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3878,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-12T17:44:26Z",
+      "side": 1,
+      "message": "It doesn\u0027t make real difference, but INSTALLED_VBMETAIMAGE_TARGET looks more consistent",
+      "range": {
+        "startLine": 3878,
+        "startChar": 100,
+        "endLine": 3878,
+        "endChar": 124
+      },
+      "revId": "a8f093fa356553dba965905f59ca99d7669921d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb0ca3b_3a0ce320",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3880,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-12T17:44:26Z",
+      "side": 1,
+      "message": "nit: they can be merged in one line (export XX\u003dxx YY\u003dyy).\n\n(Also I suspect we can write \"XX\u003dxx YY\u003dyy /path/to/script\" without exporting. But there\u0027re existing codes anyway.)",
+      "range": {
+        "startLine": 3880,
+        "startChar": 9,
+        "endLine": 3880,
+        "endChar": 57
+      },
+      "revId": "a8f093fa356553dba965905f59ca99d7669921d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
