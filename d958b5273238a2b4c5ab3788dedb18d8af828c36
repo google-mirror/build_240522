@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc26dae5_2d1aedf9",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2018-09-12T10:26:53Z",
+      "side": 1,
+      "message": "why directly under /? can we have this under somewhere like /system/etc/keys/ ?",
+      "range": {
+        "startLine": 22,
+        "startChar": 25,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "d958b5273238a2b4c5ab3788dedb18d8af828c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
