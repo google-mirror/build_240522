@@ -44,9 +44,10 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     text_file = common.MakeTempFile(prefix="caremap-", suffix=".txt")
 
     # Calls an external binary to convert the proto message.
-    cmd = ["care_map_generator", "--parse_proto", file_name, text_file]
+    cmd = ["care_map_generator", "--parse_proto", "--fingerprint_enabled",
+           file_name, text_file]
     p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    output, _ = p.communicate()
+    p.communicate()
     self.assertEqual(0, p.returncode)
 
     with open(text_file, 'r') as verify_fp:
@@ -142,8 +143,14 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
   def _test_AddCareMapForAbOta():
     """Helper function to set up the test for test_AddCareMapForAbOta()."""
     OPTIONS.info_dict = {
-        'system_verity_block_device' : '/dev/block/system',
-        'vendor_verity_block_device' : '/dev/block/vendor',
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+        'build.prop': {
+            'ro.build.fingerprint': 'google/sailfish/12345:user/dev-keys',
+        },
+        'vendor.build.prop': {
+            'ro.vendor.build.fingerprint': 'google/sailfish/678:user/dev-keys',
+        }
     }
 
     # Prepare the META/ folder.
@@ -170,8 +177,11 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
-    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), 'vendor',
-                RangeSet("0-9").to_string_raw()]
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/12345:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/678:user/dev-keys"]
 
     self._verifyCareMap(expected, care_map_file)
 
@@ -183,8 +193,11 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         None, ['boot', 'system', 'vendor', 'vbmeta'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
-    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), 'vendor',
-                RangeSet("0-9").to_string_raw()]
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/12345:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/678:user/dev-keys"]
 
     self._verifyCareMap(expected, care_map_file)
 
@@ -194,13 +207,92 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     OPTIONS.info_dict = {
         'avb_system_hashtree_enable' : 'true',
         'avb_vendor_hashtree_enable' : 'true',
+        'build.prop': {
+            'ro.build.fingerprint': 'google/sailfish/12345:user/dev-keys',
+        },
+        'vendor.build.prop': {
+            'ro.vendor.build.fingerprint': 'google/sailfish/678:user/dev-keys',
+        }
     }
 
     AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
 
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
-    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), 'vendor',
-                RangeSet("0-9").to_string_raw()]
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/12345:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/678:user/dev-keys"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  def test_AddCareMapForAbOta_noFingerprint(self):
+    """Tests the case for device using AVB."""
+    image_paths = self._test_AddCareMapForAbOta()
+    OPTIONS.info_dict = {
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+    }
+
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), "unknown",
+                "unknown", 'vendor', RangeSet("0-9").to_string_raw(), "unknown",
+                "unknown"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  def test_AddCareMapForAbOta_withThumbprint(self):
+    """Tests the case for device using AVB."""
+    image_paths = self._test_AddCareMapForAbOta()
+    OPTIONS.info_dict = {
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+        'build.prop': {
+            'ro.build.thumbprint': 'google/sailfish/123:user/dev-keys',
+        },
+        'vendor.build.prop' : {
+            'ro.vendor.build.thumbprint': 'google/sailfish/456:user/dev-keys',
+        }
+    }
+
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.thumbprint", "google/sailfish/123:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.thumbprint",
+                "google/sailfish/456:user/dev-keys"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  def test_AddCareMapForAbOta_parseBuildProp(self):
+    """Tests the case for device using AVB."""
+    image_paths = self._test_AddCareMapForAbOta()
+    OPTIONS.info_dict = {
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/product',
+        'build.prop': {
+            'ro.build.fingerprint': 'google/sailfish/1234:user/dev-keys',
+        },
+    }
+
+    vendor_path = os.path.join(OPTIONS.input_tmp, 'VENDOR')
+    if not os.path.exists(vendor_path):
+      os.mkdir(vendor_path)
+    with open(os.path.join(vendor_path, "build.prop"), "w") as fd:
+      fd.write("ro.vendor.build.fingerprint=google/sailfish/567:user/dev-keys")
+
+    AddCareMapForAbOta(None, ['system', 'vendor'], image_paths)
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/1234:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/567:user/dev-keys"]
 
     self._verifyCareMap(expected, care_map_file)
 
@@ -234,8 +326,11 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
       self.assertTrue(care_map_name in verify_zip.namelist())
       verify_zip.extract(care_map_name, path=temp_dir)
 
-    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), 'vendor',
-                RangeSet("0-9").to_string_raw()]
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/12345:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/678:user/dev-keys"]
     self._verifyCareMap(expected, os.path.join(temp_dir, care_map_name))
 
   def test_AddCareMapForAbOta_zipOutput_careMapEntryExists(self):
@@ -253,8 +348,11 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
 
     # The one under OPTIONS.input_tmp must have been replaced.
     care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
-    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), 'vendor',
-                RangeSet("0-9").to_string_raw()]
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.build.fingerprint", "google/sailfish/12345:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.fingerprint",
+                "google/sailfish/678:user/dev-keys"]
 
     self._verifyCareMap(expected, care_map_file)
 
