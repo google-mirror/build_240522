@@ -543,7 +543,7 @@ def CheckAbOtaImages(output_zip, ab_partitions):
 
 
 def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
-  """Generates and adds care_map.txt for system and vendor partitions.
+  """Generates and adds care_map.txt for a/b partition that has care_map.
 
   Args:
     output_zip: The output zip file (needs to be already open), or None to
@@ -551,6 +551,14 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
     ab_partitions: The list of A/B partitions.
     image_paths: A map from the partition name to the image path.
   """
+
+  def read_props(file_name):
+    """ read helper to load the build props."""
+    if not os.path.exists(file_name):
+      return ""
+    with open(file_name, 'r') as fd:
+      return fd.read()
+
   care_map_list = []
   for partition in ab_partitions:
     partition = partition.strip()
@@ -565,6 +573,32 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
       assert os.path.exists(image_path)
       care_map_list += GetCareMap(partition, image_path)
 
+      # adds fingerprint field to the care_map
+      if partition == "system":
+        build_props = OPTIONS.info_dict.get("build.prop", {})
+        prop_name_list = ["ro.build.fingerprint", "ro.build.thumbprint"]
+      else:
+        build_props = OPTIONS.info_dict.get(partition + ".build.prop", {})
+        prop_name_list = ["ro.{}.build.fingerprint".format(partition),
+                          "ro.{}.build.thumbprint".format(partition)]
+
+      # Try to reload the build props from PARTITION/build.prop.
+      if not build_props:
+        prop_file = os.path.join(OPTIONS.input_tmp, partition.upper(),
+                                 "build.prop")
+        build_props = common.LoadBuildProp(read_props, prop_file)
+
+      property_present = list(filter(lambda x: x in build_props,
+                                     prop_name_list))
+      if not property_present:
+        print("Warning: fingerprint is not present for partition {}".
+              format(partition))
+        property_id, fingerprint = "unknown", "unknown"
+      else:
+        property_id = property_present[0]
+        fingerprint = build_props.get(property_id)
+      care_map_list += [property_id, fingerprint]
+
   if not care_map_list:
     return
 
@@ -576,13 +610,14 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
     text_file.write('\n'.join(care_map_list))
 
   temp_care_map = common.MakeTempFile(prefix="caremap-", suffix=".txt")
-  care_map_gen_cmd = (["care_map_generator", temp_care_map_text, temp_care_map])
+  care_map_gen_cmd = ["care_map_generator", "--fingerprint_enabled",
+                      temp_care_map_text, temp_care_map]
   p = common.Run(care_map_gen_cmd, stdout=subprocess.PIPE,
                  stderr=subprocess.STDOUT)
   output, _ = p.communicate()
-  assert p.returncode == 0, "Failed to generate the care_map proto message."
   if OPTIONS.verbose:
     print(output.rstrip())
+  assert p.returncode == 0, "Failed to generate the care_map proto message."
 
   care_map_path = "META/care_map.txt"
   if output_zip and care_map_path not in output_zip.namelist():
@@ -824,8 +859,8 @@ def AddImagesToTargetFiles(filename):
     # ready under IMAGES/ or RADIO/.
     CheckAbOtaImages(output_zip, ab_partitions)
 
-    # Generate care_map.txt for system and vendor partitions (if present), then
-    # write this file to target_files package.
+    # Generate care_map.txt for ab_partitions (if present), then write this file
+    # to target_files package.
     AddCareMapTxtForAbOta(output_zip, ab_partitions, partitions)
 
   # Radio images that need to be packed into IMAGES/, and product-img.zip.
