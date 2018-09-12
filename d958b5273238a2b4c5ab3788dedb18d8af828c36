@@ -22,6 +22,30 @@
       "revId": "d958b5273238a2b4c5ab3788dedb18d8af828c36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8165a8c_8058cedf",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-09-12T10:41:04Z",
+      "side": 1,
+      "message": "Good point. That\u0027s where other keys like adb_keys and verity_key are, and I think at least for verity_key it\u0027s necessary because you need it before /system. I don\u0027t think we need this one to be on the root though, so I\u0027ll move it.",
+      "parentUuid": "bc26dae5_2d1aedf9",
+      "range": {
+        "startLine": 22,
+        "startChar": 25,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "d958b5273238a2b4c5ab3788dedb18d8af828c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
