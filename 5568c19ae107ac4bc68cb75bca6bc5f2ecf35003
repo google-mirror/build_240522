@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bd1fdc5_66edd338",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2018-09-12T15:48:54Z",
+      "side": 1,
+      "message": "Please respond to Colin\u0027s comment in the original CL:\n\n\"\nYou probably don\u0027t want this inside the ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE)) check, you won\u0027t get any srcs for static java libraries.\n\nYou also won\u0027t get any srcs for modules defined in Soong, will those be handled another way?\n\"",
+      "revId": "5568c19ae107ac4bc68cb75bca6bc5f2ecf35003",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
