@@ -82,6 +82,11 @@ AVB_PARTITIONS = ('boot', 'recovery', 'system', 'vendor', 'product',
                   'product_services', 'dtbo', 'odm')
 
 
+# Partitions that should have their care_map added to META/care_map.pb
+PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product', 'product_services',
+                            'odm')
+
+
 class ErrorCode(object):
   """Define error_codes for failures that happen during the actual
   update package installation.
@@ -290,8 +295,14 @@ def LoadInfoDict(input_file, repacking=False):
   else:
     d["fstab"] = None
 
+  # tries to load the build props for all partitions with care_map, including
+  # system and vendor
   d["build.prop"] = LoadBuildProp(read_helper, 'SYSTEM/build.prop')
-  d["vendor.build.prop"] = LoadBuildProp(read_helper, 'VENDOR/build.prop')
+  for partition in PARTITIONS_WITH_CARE_MAP:
+    if partition == "system":
+      continue
+    d["{}.build.prop".format(partition)] = LoadBuildProp(
+        read_helper, '{}/build.prop'.format(partition.upper()))
 
   # Set up the salt (based on fingerprint or thumbprint) that will be used when
   # adding AVB footer.
