@@ -16,6 +16,24 @@
       "revId": "5568c19ae107ac4bc68cb75bca6bc5f2ecf35003",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "890e1469_2dad20d2",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2018-09-12T23:08:47Z",
+      "side": 1,
+      "message": "Done,\nI move ALL_MODULES.$(my_register_name).SRCS out of ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE)) statement. Thank you for finding out this bug.\nWe handle modules in make build system here and handle Soong build system in java/jdeps.go to collect information we want.",
+      "parentUuid": "2bd1fdc5_66edd338",
+      "revId": "5568c19ae107ac4bc68cb75bca6bc5f2ecf35003",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
