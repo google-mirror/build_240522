@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (459635 Merge "Version bump to PCR1.180904.002" into pie-cts-release)
 export BUILD_ID=PCR1.180904.002
+=======
+export BUILD_ID=PPR1.180905.003
+>>>>>>> BRANCH (510b1b Version bump to PPR1.180905.003)
