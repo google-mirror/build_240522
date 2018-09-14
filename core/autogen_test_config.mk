@@ -34,9 +34,15 @@ else
 endif
 # Auto generating test config file for native test
 $(autogen_test_config_file): PRIVATE_MODULE_NAME := $(LOCAL_MODULE)
+$(autogen_test_config_file): PRIVATE_RUN_UID := $(LOCAL_RUN_AS_UID)
 $(autogen_test_config_file) : $(autogen_test_config_template)
 	@echo "Auto generating test config $(notdir $@)"
 	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE_NAME)&g' $< > $@
+ifneq ($(LOCAL_RUN_AS_UID),)
+	@echo "Add UID $(LOCAL_RUN_AS_UID)"
+	$(hide) sed -i '/testtype.GTest" >/a <option name="run-test-as" value="$(PRIVATE_RUN_UID)" />' $@
+endif
+
 my_auto_generate_config := true
 else
 # Auto generating test config file for instrumentation test
