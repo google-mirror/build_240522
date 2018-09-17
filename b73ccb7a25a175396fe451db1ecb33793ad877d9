@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe3204dc_e753652f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-17T23:25:50Z",
+      "side": 1,
+      "message": "Packaging is generally one of the unsafe incremental operations right now, so for host and device packaging intermediates, we remove them during installclean (which the build servers do between every incremental build).\n\nThe complete list is in this file: https://android.googlesource.com/platform/build/soong/+/master/ui/build/cleanbuild.go#53",
+      "parentUuid": "e505727c_e92ad17f",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "343aa65c_6b24b9fd",
         "filename": "core/definitions.mk",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-17T23:07:09Z",
       "side": 1,
       "message": "is \u003d here (i.e. not :\u003d) intentional?",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa97ed0a_4fb87503",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-17T23:25:50Z",
+      "side": 1,
+      "message": "Yeah, I wasn\u0027t sure whether these variables were all defined at this point, but it looks like they\u0027re all defined much earlier. So it doesn\u0027t actually make much of a difference.",
+      "parentUuid": "343aa65c_6b24b9fd",
       "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
