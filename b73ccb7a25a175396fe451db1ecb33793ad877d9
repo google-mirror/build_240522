@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9fadf6f0_c2055b3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-17T23:56:46Z",
+      "side": 1,
+      "message": "marking as resolved",
+      "parentUuid": "fe3204dc_e753652f",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "343aa65c_6b24b9fd",
         "filename": "core/definitions.mk",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14983928_78e25aac",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-17T23:56:46Z",
+      "side": 1,
+      "message": "difference here doesn\u0027t really matter",
+      "parentUuid": "fa97ed0a_4fb87503",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
