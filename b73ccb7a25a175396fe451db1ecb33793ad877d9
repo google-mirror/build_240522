@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e505727c_e92ad17f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-17T23:07:09Z",
+      "side": 1,
+      "message": "just curious -- why is this? it\u0027s not true for most other intermediate dirs right?",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "343aa65c_6b24b9fd",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-17T23:07:09Z",
+      "side": 1,
+      "message": "is \u003d here (i.e. not :\u003d) intentional?",
+      "revId": "b73ccb7a25a175396fe451db1ecb33793ad877d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
