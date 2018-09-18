@@ -188,7 +188,8 @@ optional_uses_library_names="$(PRIVATE_OPTIONAL_USES_LIBRARY_NAMES)" && \
 aapt_binary="$(AAPT)" && \
 $(if $(filter true,$(PRIVATE_ENFORCE_USES_LIBRARIES)), \
 source build/make/core/verify_uses_libraries.sh "$(1)" && \
-source build/make/core/construct_context.sh "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST)" "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET)" && \
+source build/make/core/construct_context.sh "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_28)" "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_28)" "28" && \
+source build/make/core/construct_context.sh "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_29)" "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_29)" "29" && \
 ,) \
 ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	--runtime-arg -Xms$(DEX2OAT_XMS) --runtime-arg -Xmx$(DEX2OAT_XMX) \

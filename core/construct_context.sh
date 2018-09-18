@@ -17,8 +17,9 @@
 set -e
 
 # inputs:
-# $1 is PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST
-# $2 is PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET
+# $1 is PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST*
+# $2 is PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET*
+# $3 is api level at which these conditions no longer matter
 
 # class_loader_context: library paths on the host
 # stored_class_loader_context_libs: library paths on device
@@ -34,9 +35,9 @@ set -e
 
 my_conditional_host_libs=$1
 my_conditional_target_libs=$2
+my_until_api_level=$3
 
-# Note that SDK 28 is P.
-if [[ "${target_sdk_version}" -lt "28" ]]; then
+if [[ "${target_sdk_version}" -lt "${my_until_api_level}" ]]; then
   if [[ -z "${class_loader_context}" ]]; then
     export class_loader_context="${my_conditional_host_libs}"
   else

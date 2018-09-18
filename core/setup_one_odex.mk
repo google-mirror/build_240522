@@ -49,8 +49,10 @@ my_optional_lib_names :=
 my_filtered_optional_uses_libraries :=
 my_system_dependencies :=
 my_stored_preopt_class_loader_context_libs :=
-my_conditional_uses_libraries_host :=
-my_conditional_uses_libraries_target :=
+my_conditional_uses_libraries_host_28 :=
+my_conditional_uses_libraries_target_28 :=
+my_conditional_uses_libraries_host_29 :=
+my_conditional_uses_libraries_target_29 :=
 
 ifneq (true,$(LOCAL_ENFORCE_USES_LIBRARIES))
   # Pass special class loader context to skip the classpath and collision check.
@@ -82,17 +84,25 @@ else
   my_lib_names := $(patsubst org.apache.http.legacy.impl,org.apache.http.legacy,$(my_lib_names))
   my_optional_lib_names := $(patsubst org.apache.http.legacy.impl,org.apache.http.legacy,$(my_optional_lib_names))
   ifeq (,$(filter org.apache.http.legacy,$(my_lib_names) $(my_optional_lib_names)))
-    my_conditional_uses_libraries_host := $(call intermediates-dir-for,JAVA_LIBRARIES,org.apache.http.legacy.impl,,COMMON)/javalib.jar
-    my_conditional_uses_libraries_target := /system/framework/org.apache.http.legacy.impl.jar
+    my_conditional_uses_libraries_host_28 := $(call intermediates-dir-for,JAVA_LIBRARIES,org.apache.http.legacy.impl,,COMMON)/javalib.jar
+    my_conditional_uses_libraries_target_28 := /system/framework/org.apache.http.legacy.impl.jar
   endif
+
 endif
 
+my_conditional_uses_libraries_host_29 += $(call intermediates-dir-for,JAVA_LIBRARIES,android.hidl.base-V1.0-java,,COMMON)/javalib.jar
+my_conditional_uses_libraries_target_29 += /system/framework/android.hidl.base-V1.0-java.jar
+my_conditional_uses_libraries_host_29 += $(call intermediates-dir-for,JAVA_LIBRARIES,android.hidl.manager-V1.0-java,,COMMON)/javalib.jar
+my_conditional_uses_libraries_target_29 += /system/framework/android.hidl.manager-V1.0-java.jar
+
 $(my_built_odex): $(AAPT)
-$(my_built_odex): $(my_conditional_uses_libraries_host)
+$(my_built_odex): $(my_conditional_uses_libraries_host_28)
 $(my_built_odex): $(my_dex_preopt_system_dependencies)
 $(my_built_odex): PRIVATE_ENFORCE_USES_LIBRARIES := $(LOCAL_ENFORCE_USES_LIBRARIES)
-$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST := $(my_conditional_uses_libraries_host)
-$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET := $(my_conditional_uses_libraries_target)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_28 := $(my_conditional_uses_libraries_host_28)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_28 := $(my_conditional_uses_libraries_target_28)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_29 := $(my_conditional_uses_libraries_host_29)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_29 := $(my_conditional_uses_libraries_target_29)
 $(my_built_odex): PRIVATE_USES_LIBRARY_NAMES := $(my_lib_names)
 $(my_built_odex): PRIVATE_OPTIONAL_USES_LIBRARY_NAMES := $(my_optional_lib_names)
 $(my_built_odex): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
