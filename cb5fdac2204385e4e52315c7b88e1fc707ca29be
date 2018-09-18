@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ec66fbb_40b1e028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-09-18T22:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c88d3a5_9ec41f99",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23715dfe_62a0cdcb",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-09-18T21:51:37Z",
       "side": 1,
       "message": "no-op",
+      "range": {
+        "startLine": 1790,
+        "startChar": 20,
+        "endLine": 1790,
+        "endChar": 24
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6557b78d_73751235",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-09-18T22:44:14Z",
+      "side": 1,
+      "message": "done. pylint prefers list comprehension.",
+      "parentUuid": "23715dfe_62a0cdcb",
       "range": {
         "startLine": 1790,
         "startChar": 20,
@@ -68,6 +116,30 @@
       "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb60eb99_bf2a4683",
+        "filename": "tools/releasetools/test_add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-09-18T22:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39566503_57739dfc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 2
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
