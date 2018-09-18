@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c88d3a5_9ec41f99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-18T21:51:37Z",
+      "side": 1,
+      "message": "This looks like the plain text file that defines the proto format. care_map.pb?",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23715dfe_62a0cdcb",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-18T21:51:37Z",
+      "side": 1,
+      "message": "no-op",
+      "range": {
+        "startLine": 1790,
+        "startChar": 20,
+        "endLine": 1790,
+        "endChar": 24
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39566503_57739dfc",
+        "filename": "tools/releasetools/test_add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-18T21:51:37Z",
+      "side": 1,
+      "message": "run pylint. it should be 4-space",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 2
+      },
+      "revId": "cb5fdac2204385e4e52315c7b88e1fc707ca29be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
