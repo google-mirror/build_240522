@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ffce6ef_69a0faa6",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-09-19T22:12:01Z",
+      "side": 1,
+      "message": "spaces, not tab",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 1
+      },
+      "revId": "202d2dc2661f05f1e1f8ef5c44831d6b15cb1672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
