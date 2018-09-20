@@ -1,0 +1,9 @@
+Verified+1: Hung-ying Tyan <tyanh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: SzuWei Lin <szuweilin@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 20 Sep 2018 06:21:42 +0000
+Reviewed-on: https://android-review.googlesource.com/761223
+Project: platform/build
+Branch: refs/heads/master
