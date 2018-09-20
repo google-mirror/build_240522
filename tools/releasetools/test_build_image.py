@@ -15,11 +15,14 @@
 #
 
 import filecmp
+import math
 import os.path
 import unittest
 
 import common
-from build_image import CheckHeadroom, RunCommand, SetUpInDirAndFsConfig
+from build_image import (
+    AVBCalcMinPartitionSize, BLOCK_SIZE,
+    CheckHeadroom, RunCommand, SetUpInDirAndFsConfig)
 
 
 class BuildImageTest(unittest.TestCase):
@@ -176,3 +179,13 @@ class BuildImageTest(unittest.TestCase):
     self.assertIn('fs-config-system\n', fs_config_data)
     self.assertIn('fs-config-root\n', fs_config_data)
     self.assertEqual('/', prop_dict['mount_point'])
+
+  def test_AVBCalcMinPartitionSize(self):
+    for block_number in range(1, 500, 23):
+      for block_offset in range(BLOCK_SIZE):
+        for ratio in 0.95, 0.56, 0.22:
+          image_size = BLOCK_SIZE * block_number + block_offset
+          expected_size = common.RoundUpTo4K(math.ceil(image_size / ratio))
+          self.assertEqual(
+              int(expected_size),
+              AVBCalcMinPartitionSize(image_size, lambda x: int(x * ratio)))
