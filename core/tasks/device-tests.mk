@@ -25,7 +25,11 @@ $(device-tests-zip) : $(COMPATIBILITY.device-tests.FILES) $(SOONG_ZIP)
 	echo $(sort $(COMPATIBILITY.device-tests.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
 	grep $(TARGET_OUT_TESTCASES) $@.list > $@-target.list || true
-	$(hide) $(SOONG_ZIP) -d -o $@ -P host -C $(HOST_OUT) -l $@-host.list -P target -C $(PRODUCT_OUT) -l $@-target.list
+	$(hide) $(SOONG_ZIP) -d -o $@ \
+	  -P host -C $(HOST_OUT) -l $@-host.list \
+	  -P target -C $(PRODUCT_OUT) -l $@-target.list \
+	  -P host -C $(HOST_OUT) -D $(HOST_OUT)/lib \
+	  -P host -C $(HOST_OUT) -D $(HOST_OUT)/lib64
 	rm -f $(PRIVATE_device_tests_list)
 	$(hide) grep -e .*.config$$ $@-host.list | sed s%$(HOST_OUT)%host%g > $(PRIVATE_device_tests_list)
 	$(hide) grep -e .*.config$$ $@-target.list | sed s%$(PRODUCT_OUT)%target%g >> $(PRIVATE_device_tests_list)

@@ -36,6 +36,8 @@ $(general_tests_zip) : $(COMPATIBILITY.general-tests.FILES) $(general_tests_tool
 	cp -fp $(PRIVATE_TOOLS) $(PRIVATE_INTERMEDIATES_DIR)/tools/
 	$(SOONG_ZIP) -d -o $@ \
 	  -P host -C $(PRIVATE_INTERMEDIATES_DIR) -D $(PRIVATE_INTERMEDIATES_DIR)/tools \
+	  -P host -C $(HOST_OUT) -D $(HOST_OUT)/lib \
+	  -P host -C $(HOST_OUT) -D $(HOST_OUT)/lib64 \
 	  -P host -C $(HOST_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/host.list \
 	  -P target -C $(PRODUCT_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/target.list
 	grep -e .*.config$$ $(PRIVATE_INTERMEDIATES_DIR)/host.list | sed s%$(HOST_OUT)%host%g > $(PRIVATE_INTERMEDIATES_DIR)/general-tests_list
