@@ -15,3 +15,4 @@
 #
 
 include build/make/target/board/treble_common.mk
+TARGET_USES_64_BIT_BINDER := true
