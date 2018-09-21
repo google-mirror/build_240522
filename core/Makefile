@@ -2914,99 +2914,43 @@ define read-size-of-partitions
 $(foreach p,$(1),$(call read-image-prop-dictionary,$($(p)image_intermediates)/generated_$(p)_image_info.txt,$(p)_size))
 endef
 
-ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
-
-# BOARD_SUPER_PARTITION_SIZE must be defined to build super image.
-ifdef BOARD_SUPER_PARTITION_SIZE
-
-INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
-INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
-
-$(INSTALLED_SUPERIMAGE_TARGET): $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
-
-# For A/B devices, super partition always contains sub-partitions in the _a slot, because this
-# image should only be used for bootstrapping / initializing the device. When flashing the image,
-# bootloader fastboot should always mark _a slot as bootable.
-ifeq ($(AB_OTA_UPDATER),true)
-$(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_PARTITION_SUFFIX=_a
-endif # AB_OTA_UPDATER
-
-$(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE)
-
-# $(1): slot A suffix (_a or empty)
-# $(2): include images or not (true or empty)
+# $(1): super partition size
+# $(2): super partition list
+# $(3): slot A suffix (_a or empty)
+# $(4): include images or not (true or empty)
 define build-superimage-target-args
-  $(if $(2), --sparse) \
+  $(if $(4), --sparse) \
   --metadata-size 65536 \
-  --metadata-slots $(if $(1),2,1) \
-  --device-size $(BOARD_SUPER_PARTITION_SIZE) \
-  $(foreach name,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-    --partition $(name)$(1):$$($(UUIDGEN) $(name)$(1)):readonly:$(if $(2),$(call read-size-of-partitions,$(name)),0) \
-    $(if $(2), --image $(name)$(1)=$(call images-for-partitions,$(name))) \
-    $(if $(1), --partition $(name)_b:$$($(UUIDGEN) $(name)_b):readonly:0) \
+  --metadata-slots $(if $(3),2,1) \
+  --device-size $(1) \
+  $(foreach name,$(2), \
+    --partition $(name)$(3):$$($(UUIDGEN) $(name)$(3)):readonly:$(if $(4),$(call read-size-of-partitions,$(name)),0) \
+    $(if $(4), --image $(name)$(3)=$(call images-for-partitions,$(name))) \
+    $(if $(3), --partition $(name)_b:$$($(UUIDGEN) $(name)_b):readonly:0) \
   )
 endef
 
-# $(1): output image path
-# $(2): slot A suffix (_a or empty)
-# $(3): include images or not (true or empty)
+# $(1): super partition size
+# $(2): super partition list
+# $(3): output image path
+# $(4): slot A suffix (_a or empty)
+# $(5): include images or not (true or empty)
 define build-superimage-target
   $(HOST_OUT_EXECUTABLES)/lpmake \
-    $(call build-superimage-target-args,$(2),$(3)) \
-    --output $(1)
+    $(call build-superimage-target-args,$(1),$(2),$(4),$(5)) \
+    --output $(3)
 endef
 
-$(INSTALLED_SUPERIMAGE_TARGET):
-	$(call pretty,"Target super fs image: $@")
-	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX),true)
-
-$(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
-
-$(INSTALLED_SUPERIMAGE_EMPTY_TARGET):
-	$(call pretty,"Target empty super fs image: $@")
-	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX))
-
-$(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
-
-endif # BOARD_SUPER_PARTITION_SIZE
-endif # PRODUCT_BUILD_SUPER_PARTITION
-
-# -----------------------------------------------------------------
-# Check image sizes <= size of super partition
-
-ifeq (,$(TARGET_BUILD_APPS))
-# Do not check for apps-only build
-
-ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
-ifdef BOARD_SUPER_PARTITION_SIZE
-ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
-
-droid_targets: check_android_partition_sizes
+# $(1): name of the dynamic partition group
+define build_super_partition_group_template
+LOCAL_SUPER_PARTITION_NAME := $(1)
+include $(BUILD_SYSTEM)/build_super_partition.mk
+endef
 
 .PHONY: check_android_partition_sizes
+droid_targets: check_android_partition_sizes
 
-# Add image dependencies so that generated_*_image_info.txt are written before checking.
-check_android_partition_sizes: $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
-
-check_android_partition_sizes:
-	partition_size_list="$(call read-size-of-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))"; \
-	sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${partition_size_list}"); \
-	max_size_tail=$(if $(filter true,$(AB_OTA_UPDATER))," / 2"); \
-	max_size_expr=$(BOARD_SUPER_PARTITION_SIZE)$${max_size_tail}; \
-	if [ $$(( $${sum_sizes_expr} )) -gt $$(( $${max_size_expr} )) ]; then \
-		echo "The sum of sizes of all logical partitions is larger than BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
-		echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
-		exit 1; \
-	else \
-		echo "The sum of sizes of all logical partitions is within BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
-		echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
-	fi
-
-endif # BOARD_SUPER_PARTITION_PARTITION_LIST
-endif # BOARD_SUPER_PARTITION_SIZE
-endif # PRODUCT_BUILD_SUPER_PARTITION
-
-endif # TARGET_BUILD_APPS
+$(foreach name,$(BOARD_SUPER_PARTITION_GROUPS),$(eval $(call build_super_partition_group_template,$(name))))
 
 # -----------------------------------------------------------------
 # bring in the installer image generation defines if necessary
@@ -3241,6 +3185,19 @@ endif
 # $2: add prefix
 define fs_config
 (cd $(1); find . -type d | sed 's,$$,/,'; find . \! -type d) | cut -c 3- | sort | sed 's,^,$(2),' | $(HOST_OUT_EXECUTABLES)/fs_config -C -D $(TARGET_OUT) -S $(SELINUX_FC) -R "$(2)"
+endef
+
+# Write build commands and flags of a super partition to specified output file
+# $(1): super partition group name
+# $(2): output file name
+define dump_super_partition_build_flags
+$(if $(BOARD_$(call to-upper,$(1))_PARTITION_SIZE), \
+    echo "$(1)_size=$(BOARD_$(call to-upper,$(1))_PARTITION_SIZE)" >> $(2); \
+    echo -n "lpmake_$(1)_args=" >> $(2); \
+    echo $(call build-superimage-target-args, \
+        $(BOARD_$(call to-upper,$(1))_PARTITION_SIZE), \
+        $(BOARD_$(call to-upper,$(1))_PARTITION_PARTITION_LIST), \
+        $(if $(filter true,$(AB_OTA_UPDATER)),_a,)) >> $(2); )
 endef
 
 # Depending on the various images guarantees that the underlying
@@ -3603,14 +3560,11 @@ endif
 ifdef BUILT_VENDOR_MATRIX
 	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
 endif
-ifdef BOARD_SUPER_PARTITION_SIZE
-	$(hide) echo "super_size=$(BOARD_SUPER_PARTITION_SIZE)" >> $(zip_root)/META/misc_info.txt
+ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
 	$(hide) echo "lpmake=$(notdir $(LPMAKE))" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo -n "lpmake_args=" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo $(call build-superimage-target-args,$(if $(filter true,$(AB_OTA_UPDATER)),_a,)) \
-	    >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "super_partition_groups=$(BOARD_SUPER_PARTITION_GROUPS)" >> $(zip_root)/META/misc_info.txt
 endif
-
+	$(foreach name,$(BOARD_SUPER_PARTITION_GROUPS),$(call dump_super_partition_build_flags,$(name)))
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    build/make/tools/releasetools/add_img_to_target_files -a -v -p $(HOST_OUT) $(zip_root)
 	@# Zip everything up, preserving symlinks and placing META/ files first to
