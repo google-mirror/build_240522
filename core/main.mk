@@ -1200,12 +1200,6 @@ odmimage: $(INSTALLED_ODMIMAGE_TARGET)
 .PHONY: systemotherimage
 systemotherimage: $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
 
-.PHONY: superimage
-superimage: $(INSTALLED_SUPERIMAGE_TARGET)
-
-.PHONY: superimage_empty
-superimage_empty: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
-
 .PHONY: bootimage
 bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
 
