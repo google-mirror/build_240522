@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Hung-ying Tyan <tyanh@google.com>
+Code-Review+2: Hung-ying Tyan <tyanh@google.com>
+DrNo-Review+1: Hung-ying Tyan <tyanh@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 21 Sep 2018 15:23:02 +0000
+Reviewed-on: https://android-review.googlesource.com/764242
+Project: platform/build
+Branch: refs/heads/pie-gsi
