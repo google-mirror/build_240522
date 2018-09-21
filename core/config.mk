@@ -1013,16 +1013,28 @@ endif
 endif # PRODUCT_USE_DYNAMIC_PARTITION_SIZE
 
 ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
-ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
-# BOARD_SUPER_PARTITION_PARTITION_LIST: a list of the following tokens
+
+# Implicitly add "super" to BOARD_SUPER_PARTITION_GROUPS if BOARD_SUPER_PARTITION_SIZE
+# is defined.
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+BOARD_SUPER_PARTITION_GROUPS += super
+endif # BOARD_SUPER_PARTITION_SIZE
+BOARD_SUPER_PARTITION_GROUPS := $(sort $(BOARD_SUPER_PARTITION_GROUPS))
+ifeq ($(BOARD_SUPER_PARTITION_GROUPS),)
+$(error No BOARD_SUPER_PARTITION_GROUPS is defined. Please define it explicitly, \
+    or implicitly by defining BOARD_SUPER_PARTITION_SIZE)
+endif # BOARD_SUPER_PARTITION_GROUPS
+.KATI_READONLY := BOARD_SUPER_PARTITION_GROUPS
+
+# BOARD_.*_PARTITION_PARTITION_LIST: a list of the following tokens
 valid_super_partition_list := system vendor product product_services
-ifneq (,$(filter-out $(valid_super_partition_list),$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
-$(error BOARD_SUPER_PARTITION_PARTITION_LIST contains invalid partition name \
-		($(filter-out $(valid_super_partition_list),$(BOARD_SUPER_PARTITION_PARTITION_LIST))). \
-        Valid names are $(valid_super_partition_list))
-endif
+$(foreach name,$(BOARD_SUPER_PARTITION_GROUPS), \
+	$(if $(filter-out $(valid_super_partition_list),$(BOARD_$(call to-upper,$(name))_PARTITION_PARTITION_LIST)), \
+		$(error BOARD_$(call to-upper,$(name))_PARTITION_PARTITION_LIST contains invalid partition name \
+			$(filter-out $(valid_super_partition_list),$(BOARD_$(call to-upper,$(name))_PARTITION_PARTITION_LIST)). \
+			Valid names are $(valid_super_partition_list))))
 valid_super_partition_list :=
-endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
 # ###############################################################

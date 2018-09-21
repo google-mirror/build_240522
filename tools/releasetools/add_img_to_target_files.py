@@ -639,12 +639,12 @@ def AddPackRadioImages(output_zip, images):
       shutil.copy(img_radio_path, prebuilt_path)
 
 
-def AddSuperEmpty(output_zip):
-  """Create a super_empty.img and store it in output_zip."""
+def AddSuperEmpty(output_zip, name):
+  """Create a {name}_empty.img and store it in output_zip."""
 
-  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "super_empty.img")
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "{}_empty.img".format(name))
   cmd = [OPTIONS.info_dict.get('lpmake')]
-  cmd += shlex.split(OPTIONS.info_dict.get('lpmake_args').strip())
+  cmd += shlex.split(OPTIONS.info_dict.get("lpmake_{}_args".format(name)).strip())
   cmd += ['--output', img.name]
 
   p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -848,9 +848,11 @@ def AddImagesToTargetFiles(filename):
     banner("vbmeta")
     AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
 
-  if OPTIONS.info_dict.get("super_size"):
-    banner("super_empty")
-    AddSuperEmpty(output_zip)
+  super_partition_groups = OPTIONS.info_dict.get("super_partition_groups")
+  if super_partition_groups:
+    for name in super_partition_groups.split():
+      banner("{}_empty".format(name))
+      AddSuperEmpty(output_zip, name)
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
