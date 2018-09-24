@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aea3681_3618c05d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "As mentioned in previous CL reviews, this is not the case for release-keys signed images yet. Because {name}.img is still generated from make.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 37
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb6ef27_65d5dd61",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2945,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "nit: inconsistent naming (build-super-...)\n\nand similarly for the dump_super_partition_build_flags below.",
+      "range": {
+        "startLine": 2945,
+        "startChar": 7,
+        "endLine": 2945,
+        "endChar": 43
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4bb5842_649eaf21",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 3194,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "Should be mandatory upon reaching here?",
+      "range": {
+        "startLine": 3194,
+        "startChar": 0,
+        "endLine": 3194,
+        "endChar": 51
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "812602e3_dcff1c81",
+        "filename": "core/build_super_partition.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "Having the check inside this file looks weird. Should the check be done before including this mk file?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e4702d0_10d87479",
+        "filename": "core/build_super_partition.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "Similarly for this one. If TARGET_BUILD_APPS is true, it shouldn\u0027t run into this file?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fce8ac2e_867c9d55",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "(unrelated to this change, but odm seems missing from the list)",
+      "range": {
+        "startLine": 1030,
+        "startChar": 30,
+        "endLine": 1030,
+        "endChar": 68
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aa46986_abba1f26",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-24T22:21:28Z",
+      "side": 1,
+      "message": "nit: too long. run pylint",
+      "range": {
+        "startLine": 645,
+        "startChar": 2,
+        "endLine": 645,
+        "endChar": 88
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
