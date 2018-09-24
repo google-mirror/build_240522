@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8334ddd7_7d82e011",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1099852
+      },
+      "writtenOn": "2018-09-24T14:57:42Z",
+      "side": 1,
+      "message": "See my comment in another CL",
+      "range": {
+        "startLine": 2292,
+        "startChar": 16,
+        "endLine": 2292,
+        "endChar": 21
+      },
+      "revId": "ec17af3364525001703701a6186de75e5c9bb2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
