@@ -140,6 +140,30 @@
     },
     {
       "key": {
+        "uuid": "c3d67a5b_299fff81",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-09-25T17:41:44Z",
+      "side": 1,
+      "message": "odm is not resizable",
+      "parentUuid": "fce8ac2e_867c9d55",
+      "range": {
+        "startLine": 1030,
+        "startChar": 30,
+        "endLine": 1030,
+        "endChar": 68
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3aa46986_abba1f26",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 3
