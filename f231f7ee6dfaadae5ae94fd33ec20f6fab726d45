@@ -188,6 +188,30 @@
     },
     {
       "key": {
+        "uuid": "d828152f_8cee02fc",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-09-25T18:13:20Z",
+      "side": 1,
+      "message": "This is the list of dynamic partitions for our internal experiment device. We have not finalize this list yet.\n\nWe can bring this up in the next meeting when Sandeep is back.",
+      "parentUuid": "8bab2513_6f8f4891",
+      "range": {
+        "startLine": 1030,
+        "startChar": 30,
+        "endLine": 1030,
+        "endChar": 68
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3aa46986_abba1f26",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 3
