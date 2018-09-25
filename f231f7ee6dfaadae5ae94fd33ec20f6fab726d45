@@ -164,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "8bab2513_6f8f4891",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-25T18:10:53Z",
+      "side": 1,
+      "message": "that\u0027s oem?\n\nmy understanding is that odm is similar to vendor, but containing device-specific modules (as opposed to the SoC-specific modules in /vendor).",
+      "parentUuid": "c3d67a5b_299fff81",
+      "range": {
+        "startLine": 1030,
+        "startChar": 30,
+        "endLine": 1030,
+        "endChar": 68
+      },
+      "revId": "f231f7ee6dfaadae5ae94fd33ec20f6fab726d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3aa46986_abba1f26",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 3
