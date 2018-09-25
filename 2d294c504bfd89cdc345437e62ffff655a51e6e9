@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc27d2f_b683aaad",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-25T17:29:15Z",
+      "side": 1,
+      "message": "nit: can you update the comment here as well? since it no longer fully matches the behavior of BOARD_BUILD_SYSTEM_ROOT_IMAGE \u003d\u003d true.",
+      "range": {
+        "startLine": 1548,
+        "startChar": 7,
+        "endLine": 1548,
+        "endChar": 42
+      },
+      "revId": "2d294c504bfd89cdc345437e62ffff655a51e6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bc7199a_720cc81c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3570,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-25T17:29:15Z",
+      "side": 1,
+      "message": "Maybe additionally mention that the BOOT/RAMDISK here contains the ramdisk for recovery. And a similar comment below that explains the BOOT/RAMDISK there contains the ramdisk for normal boot. It took me some time to figure out the inconsistency between the line here and in sign_target_files_apks.py. And likely I\u0027ll be confused again next time reading the code.",
+      "range": {
+        "startLine": 3570,
+        "startChar": 60,
+        "endLine": 3570,
+        "endChar": 61
+      },
+      "revId": "2d294c504bfd89cdc345437e62ffff655a51e6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3a02a5e_a57169c5",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-09-25T17:29:15Z",
+      "side": 1,
+      "message": "drop parentheses\n\n(and run pylint: `pylint --rcfile\u003dpylintrc sign_target_files_apks.py`)",
+      "range": {
+        "startLine": 600,
+        "startChar": 5,
+        "endLine": 600,
+        "endChar": 6
+      },
+      "revId": "2d294c504bfd89cdc345437e62ffff655a51e6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
