@@ -27,6 +27,10 @@ PRODUCT_PACKAGES += \
     SafetyRegulatoryInfo \
     Stk \
 
+# Shared java libs
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+
 # OTA support
 PRODUCT_PACKAGES += \
     update_engine \
