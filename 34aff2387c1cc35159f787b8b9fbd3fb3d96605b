@@ -16,6 +16,24 @@
       "revId": "34aff2387c1cc35159f787b8b9fbd3fb3d96605b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05033597_a1fc6f13",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1071489
+      },
+      "writtenOn": "2018-09-27T15:31:58Z",
+      "side": 1,
+      "message": "Those are loaded dynamically by the audio server.",
+      "parentUuid": "11f0e05d_a1e18a53",
+      "revId": "34aff2387c1cc35159f787b8b9fbd3fb3d96605b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
