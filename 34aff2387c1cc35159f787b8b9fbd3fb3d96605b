@@ -52,6 +52,24 @@
       "revId": "34aff2387c1cc35159f787b8b9fbd3fb3d96605b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca7263c_52ac3f74",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1071489
+      },
+      "writtenOn": "2018-09-27T16:53:08Z",
+      "side": 1,
+      "message": "For all practical purposes they are pretty much mandatory:\n* audio.a2dp.default - used for Bluetooth A2DP audio streaming for the software\n  encoding datapath\n* audio.hearing_aid.default - used when Hearing Aid is enabled / in use.\n\nEric?",
+      "parentUuid": "a7c1b669_3afbc62c",
+      "revId": "34aff2387c1cc35159f787b8b9fbd3fb3d96605b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
