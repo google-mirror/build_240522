@@ -16,6 +16,24 @@
       "revId": "89e84e0d221ce2acc359e9a6e563528ba1a65c75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78ae8289_a88e3901",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-27T12:15:14Z",
+      "side": 1,
+      "message": "actually, could you clarify whether the ramdisk dir will end up in system.img or not? The point of this setup is to only include things in system.img in this product hierarchy.\n\nIf ramdisk is a separate img file, the modules installing files there should be moved from the _system.mk hierarchy to the _vendor.mk hierarchy.",
+      "parentUuid": "535dd1f7_f68a3dcf",
+      "revId": "89e84e0d221ce2acc359e9a6e563528ba1a65c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
