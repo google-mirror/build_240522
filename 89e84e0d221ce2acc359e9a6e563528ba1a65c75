@@ -34,6 +34,24 @@
       "revId": "89e84e0d221ce2acc359e9a6e563528ba1a65c75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ff9c5c2_988a4bd4",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-09-27T19:41:38Z",
+      "side": 1,
+      "message": "It will for system-as-root, but it won\u0027t otherwise.  I encountered this when removing BOARD_BUILD_SYSTEM_ROOT_IMAGE from a device to get it ready for dm-linear.\n\nI\u0027ll push some changes that should do what you\u0027re asking.  We do plan the first stage init is vendor owned except for system-as-root, so you\u0027re right that it should be in the vendor hierarchy.",
+      "parentUuid": "78ae8289_a88e3901",
+      "revId": "89e84e0d221ce2acc359e9a6e563528ba1a65c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
