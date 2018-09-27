@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11f0e05d_a1e18a53",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-27T14:55:59Z",
+      "side": 1,
+      "message": "Hi Pavlin. Do you know what uses these libraries?",
+      "revId": "34aff2387c1cc35159f787b8b9fbd3fb3d96605b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
