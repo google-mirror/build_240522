@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "535dd1f7_f68a3dcf",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-27T12:13:26Z",
+      "side": 1,
+      "message": "The props that affect what belong in this list should ideally be defined in this file I think, so maybe PRODUCT_USE_LOGICAL_PARTITIONS :\u003d true deserves to be added here?\n\nWe can do this separately.",
+      "revId": "89e84e0d221ce2acc359e9a6e563528ba1a65c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
