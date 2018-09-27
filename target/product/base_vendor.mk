@@ -25,6 +25,13 @@ PRODUCT_PACKAGES += \
     shell_and_utilities_recovery \
     watchdogd.recovery \
 
+# First stage init goes on a vendor owned ramdisk for non system-as-root.
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),)
+PRODUCT_PACKAGES += \
+    init_first_stage
+endif
+
+
 # Base modules and settings for the vendor partition.
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.0-service \
