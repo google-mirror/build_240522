@@ -85,9 +85,9 @@ PRODUCT_PACKAGES += \
     incidentd \
     incident_helper \
     incident_report \
-    init \
     init.environ.rc \
     init.rc \
+    init_second_stage \
     input \
     installd \
     ip \
@@ -254,6 +254,13 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+
+# First stage init goes on system.img for system-as-root only.
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+PRODUCT_PACKAGES += \
+    init_first_stage \
+
+endif
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
