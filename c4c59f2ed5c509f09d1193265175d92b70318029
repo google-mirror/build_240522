@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6df21fb0_9e478348",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-09-27T11:49:50Z",
+      "side": 1,
+      "message": "Robert - do you think these 3 make sense to add to the generic telephony.mk ? Here are the other packages in that file:\n\n    CarrierConfig \\\n    CarrierDefaultApp \\\n    Dialer \\\n    CallLogBackup \\\n    CellBroadcastReceiver \\\n    EmergencyInfo \\",
+      "revId": "c4c59f2ed5c509f09d1193265175d92b70318029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
