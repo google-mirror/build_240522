@@ -18,6 +18,15 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system.mk)
 
+# Applications
+PRODUCT_PACKAGES += \
+    DMService \
+    LiveWallpapersPicker \
+    PartnerBookmarksProvider \
+    RcsService \
+    SafetyRegulatoryInfo \
+    Stk \
+
 # OTA support.
 PRODUCT_PACKAGES += \
     update_engine \
