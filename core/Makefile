@@ -789,7 +789,9 @@ $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_ROOT))
 # the ramdisk
 INTERNAL_RAMDISK_FILES := $(filter $(TARGET_RAMDISK_OUT)/%, \
 	$(ALL_GENERATED_SOURCES) \
-	$(ALL_DEFAULT_INSTALLED_MODULES))
+	$(ALL_DEFAULT_INSTALLED_MODULES)) \
+	$(if $(BOARD_BOOT_KERNEL_MODULES), \
+	$(BOARD_BOOT_KERNEL_MODULES) $(DEPMOD))
 
 INSTALLED_FILES_FILE_RAMDISK := $(PRODUCT_OUT)/installed-files-ramdisk.txt
 INSTALLED_FILES_JSON_RAMDISK := $(INSTALLED_FILES_FILE_RAMDISK:.txt=.json)
@@ -808,6 +810,10 @@ BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 INSTALLED_RAMDISK_TARGET := $(BUILT_RAMDISK_TARGET)
 $(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_RAMDISK_FILES) $(INSTALLED_FILES_FILE_RAMDISK) | $(MINIGZIP)
 	$(call pretty,"Target ram disk: $@")
+	$(if $(BOARD_BOOT_KERNEL_MODULES), \
+	  $(call build-image-kernel-modules, \
+	  $(BOARD_BOOT_KERNEL_MODULES),$(TARGET_ROOT_OUT),, \
+	  $(call intermediates-dir-for,PACKAGING,depmod_boot)))
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $@
 
 .PHONY: ramdisk-nodeps
@@ -1440,6 +1446,10 @@ ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_
 INTERNAL_RECOVERYIMAGE_FILES := $(filter $(TARGET_RECOVERY_OUT)/%, \
     $(ALL_DEFAULT_INSTALLED_MODULES))
 
+# Passed into rsync from non-recovery root to recovery root, to avoid conflicts with recovery-specific
+IGNORE_BOOT_KERNEL_MODULES := $(addprefix --exclude=lib/modules/,$(notdir \
+    $(BOARD_BOOT_KERNEL_MODULES)) modules.{alias,dep}) --prune-empty-dirs
+
 INSTALLED_FILES_FILE_RECOVERY := $(PRODUCT_OUT)/installed-files-recovery.txt
 INSTALLED_FILES_JSON_RECOVERY := $(INSTALLED_FILES_FILE_RECOVERY:.txt=.json)
 
@@ -1652,7 +1662,7 @@ define build-recoveryimage-target
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
   # Copying baseline ramdisk...
   # Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
-  $(hide) rsync -a --exclude=sdcard $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
+  $(hide) rsync -a --exclude=sdcard $(IGNORE_BOOT_KERNEL_MODULES) $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
   $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)),, \
     $(hide) rsync -a $(TARGET_RAMDISK_OUT)/* $(TARGET_RECOVERY_ROOT_OUT)/)
   # Modifying ramdisk contents...
