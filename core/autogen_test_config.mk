@@ -23,34 +23,38 @@
 
 autogen_test_config_file := $(dir $(LOCAL_BUILT_MODULE))$(LOCAL_MODULE).config
 ifeq (true,$(is_native))
-ifeq ($(LOCAL_NATIVE_BENCHMARK),true)
-autogen_test_config_template := $(NATIVE_BENCHMARK_TEST_CONFIG_TEMPLATE)
-else
-  ifeq ($(LOCAL_IS_HOST_MODULE),true)
-    autogen_test_config_template := $(NATIVE_HOST_TEST_CONFIG_TEMPLATE)
+  ifeq ($(LOCAL_NATIVE_BENCHMARK),true)
+    autogen_test_config_template := $(NATIVE_BENCHMARK_TEST_CONFIG_TEMPLATE)
   else
-    autogen_test_config_template := $(NATIVE_TEST_CONFIG_TEMPLATE)
+    ifeq ($(LOCAL_IS_HOST_MODULE),true)
+      autogen_test_config_template := $(NATIVE_HOST_TEST_CONFIG_TEMPLATE)
+    else
+      autogen_test_config_template := $(NATIVE_TEST_CONFIG_TEMPLATE)
+    endif
   endif
-endif
-# Auto generating test config file for native test
-$(autogen_test_config_file): PRIVATE_MODULE_NAME := $(LOCAL_MODULE)
-$(autogen_test_config_file) : $(autogen_test_config_template)
+  # User's own template
+  ifneq (,$(LOCAL_TEST_CONFIG_TEMPLATE))
+    autogen_test_config_template := $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG_TEMPLATE)
+  endif
+  # Auto generating test config file for native test
+  $(autogen_test_config_file): PRIVATE_MODULE_NAME := $(LOCAL_MODULE)
+  $(autogen_test_config_file) : $(autogen_test_config_template)
 	@echo "Auto generating test config $(notdir $@)"
 	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE_NAME)&g' $< > $@
-my_auto_generate_config := true
+  my_auto_generate_config := true
 else
-# Auto generating test config file for instrumentation test
-ifneq (,$(full_android_manifest))
-$(autogen_test_config_file): PRIVATE_AUTOGEN_TEST_CONFIG_SCRIPT := $(AUTOGEN_TEST_CONFIG_SCRIPT)
-$(autogen_test_config_file): PRIVATE_TEST_CONFIG_ANDROID_MANIFEST := $(full_android_manifest)
-$(autogen_test_config_file): PRIVATE_EMPTY_TEST_CONFIG := $(EMPTY_TEST_CONFIG)
-$(autogen_test_config_file): PRIVATE_TEMPLATE := $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE)
-$(autogen_test_config_file) : $(full_android_manifest) $(EMPTY_TEST_CONFIG) $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE) $(AUTOGEN_TEST_CONFIG_SCRIPT)
+  # Auto generating test config file for instrumentation test
+  ifneq (,$(full_android_manifest))
+    $(autogen_test_config_file): PRIVATE_AUTOGEN_TEST_CONFIG_SCRIPT := $(AUTOGEN_TEST_CONFIG_SCRIPT)
+    $(autogen_test_config_file): PRIVATE_TEST_CONFIG_ANDROID_MANIFEST := $(full_android_manifest)
+    $(autogen_test_config_file): PRIVATE_EMPTY_TEST_CONFIG := $(EMPTY_TEST_CONFIG)
+    $(autogen_test_config_file): PRIVATE_TEMPLATE := $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE)
+    $(autogen_test_config_file) : $(full_android_manifest) $(EMPTY_TEST_CONFIG) $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE) $(AUTOGEN_TEST_CONFIG_SCRIPT)
 	@echo "Auto generating test config $(notdir $@)"
 	@rm -f $@
 	$(hide) $(PRIVATE_AUTOGEN_TEST_CONFIG_SCRIPT) $@ $(PRIVATE_TEST_CONFIG_ANDROID_MANIFEST) $(PRIVATE_EMPTY_TEST_CONFIG) $(PRIVATE_TEMPLATE)
-my_auto_generate_config := true
-endif # ifneq (,$(full_android_manifest))
+    my_auto_generate_config := true
+  endif # ifneq (,$(full_android_manifest))
 endif # ifneq (true,$(is_native))
 
 ifeq (true,$(my_auto_generate_config))
