@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f342b9d7_71a4babb",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-02T12:30:24Z",
+      "side": 1,
+      "message": "an alternative would be to change this macro to substitute TARGET_COPY_OUT_X for X\u003d[vendor,product,product_services,odm]. Seemed cleaner to keep the \u0027asan\u0027 dir match the structure of the outer dir though.",
+      "revId": "ae9f10544d19d653f7ef47f8d133690d35c2961e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
