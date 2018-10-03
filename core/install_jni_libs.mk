@@ -11,7 +11,7 @@
 #   embedded_prebuilt_jni_libs, prebuilt jni libs embedded in prebuilt apk.
 #
 
-my_embed_jni :=
+my_embed_jni := true
 ifneq ($(TARGET_BUILD_APPS),)
 my_embed_jni := true
 endif
