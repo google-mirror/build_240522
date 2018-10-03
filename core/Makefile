@@ -2960,8 +2960,6 @@ $(INSTALLED_SUPERIMAGE_TARGET):
 	$(call pretty,"Target super fs image: $@")
 	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX),true)
 
-$(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
-
 $(INSTALLED_SUPERIMAGE_EMPTY_TARGET):
 	$(call pretty,"Target empty super fs image: $@")
 	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX))
