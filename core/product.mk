@@ -210,6 +210,7 @@ _product_var_list := \
     PRODUCT_BUILD_SUPER_PARTITION \
     PRODUCT_USE_FASTBOOTD \
     PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION \
+    PRODUCT_CHECK_COPY_FILES \
 
 define dump-product
 $(info ==== $(1) ====)\
@@ -282,6 +283,20 @@ define import-products
 $(call import-nodes,PRODUCTS,$(1),$(_product_var_list))
 endef
 
+define check-copy-files-unique-dest
+$(eval _pcf := $(PRODUCTS.$(1).PRODUCT_COPY_FILES)) \
+$(eval _uniq := $(call uniq-words-by-nth-component,$(_pcf),:,2)) \
+$(eval _dups := $(filter-out $(_uniq),$(_pcf))) \
+$(if $(_dups),$(warning $(1) defines multiple PRODUCT_COPY_FILES with the same destination)) \
+$(foreach dup,$(_dups),\
+  $(eval _dup_dest := $(call word-colon,2,$(dup))) \
+  $(warning dest: $(_dup_dest)) \
+  $(foreach w,$(call filter-words-by-nth-component,$(_pcf),:,2,$(_dup_dest)),\
+    $(warning - src: $(call word-colon,1,$(w))) \
+  )\
+) \
+$(if $(_dups),$(error Fix the above warnings))
+endef
 
 #
 # Does various consistency checks on all of the known products.
@@ -311,9 +326,10 @@ $(if ,, \
     $(foreach cf,$(strip $(PRODUCTS.$(p).PRODUCT_COPY_FILES)), \
       $(if $(filter 2 3,$(words $(subst :,$(space),$(cf)))),, \
         $(error $(p): malformed COPY_FILE "$(cf)") \
-       ) \
-     ) \
-   ) \
+      ) \
+    ) \
+    $(if $(PRODUCTS.$(p).PRODUCT_CHECK_COPY_FILES),$(call check-copy-files-unique-dest,$(p))) \
+  ) \
 )
 endef
 
