@@ -405,6 +405,7 @@ endif
 #
 
 
+$(check-unique-dest)
 # Before we go and include all of the module makefiles, mark the PRODUCT_*
 # and ADDITIONAL*PROPERTIES values readonly so that they won't be modified.
 $(call readonly-product-vars)

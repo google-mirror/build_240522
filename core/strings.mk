@@ -72,6 +72,14 @@ define normalize-comma-list
 $(subst $(space),$(comma),$(strip $(1)))
 endef
 
+# Grab the nth component of a word, given a component separator and n
+# $(1): word
+# $(2): component separator
+# $(3): n
+define nth-component
+$(word $(3),$(subst $(2),$(space),$(1)))
+endef
+
 ###########################################################
 ## Read the word out of a colon-separated list of words.
 ## This has the same behavior as the built-in function
@@ -84,7 +92,7 @@ endef
 ###########################################################
 
 define word-colon
-$(word $(1),$(subst :,$(space),$(2)))
+$(call nth-component,$(2),:,$(1))
 endef
 
 ###########################################################
@@ -108,10 +116,30 @@ endef
 ## $(1): list of pairs
 ## $(2): the separator word, such as ":", "=", etc.
 define uniq-pairs-by-first-component
+$(call uniq-words-by-nth-component,$(1),$(2),1)
+endef
+
+# Given a list of words, get the ones that have a component
+# matching a particular string.
+# $(1): the list of words
+# $(2): the separator
+# $(3): n
+# $(4): the component to filter for
+define filter-words-by-nth-component
+$(foreach w,$(1),$(if $(filter $(call nth-component,$(w),$(2),$(3)),$(4)),$(w)))
+endef
+
+# Given a list of words, get the unique ones, looking only
+# at the nth component of each word, given a component
+# separator and n.
+# $(1): list of words
+# $(2): component separator
+# $(3): n
+define uniq-words-by-nth-component
 $(eval _upbfc_fc_set :=)\
-$(strip $(foreach w,$(1), $(eval _first := $(word 1,$(subst $(2),$(space),$(w))))\
-    $(if $(filter $(_upbfc_fc_set),$(_first)),,$(w)\
-        $(eval _upbfc_fc_set += $(_first)))))\
+$(strip $(foreach w,$(1), $(eval _nth := $(call nth-component,$(w),$(2),$(3)))\
+    $(if $(filter $(_upbfc_fc_set),$(_nth)),,$(w)\
+        $(eval _upbfc_fc_set += $(_nth)))))\
 $(eval _upbfc_fc_set :=)\
 $(eval _first:=)
 endef
