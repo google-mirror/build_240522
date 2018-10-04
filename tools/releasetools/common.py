@@ -37,6 +37,7 @@ from hashlib import sha1, sha256
 import blockimgdiff
 import sparse_img
 
+
 class Options(object):
   def __init__(self):
     platform_search_path = {
@@ -72,15 +73,12 @@ class Options(object):
 
 OPTIONS = Options()
 
-
 # Values for "certificate" in apkcerts that mean special things.
 SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
-
 
 # The partitions allowed to be signed by AVB (Android verified boot 2.0).
 AVB_PARTITIONS = ('boot', 'recovery', 'system', 'vendor', 'product',
                   'product_services', 'dtbo', 'odm')
-
 
 # Partitions that should have their care_map added to META/care_map.pb
 PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product', 'product_services',
