@@ -1,0 +1,9 @@
+Verified+1: Yifan Hong <elsk@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Tao Bao <tbao@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Submitted-by: Yifan Hong <elsk@google.com>
+Submitted-at: Thu, 04 Oct 2018 22:21:57 +0000
+Reviewed-on: https://android-review.googlesource.com/765112
+Project: platform/build
+Branch: refs/heads/master
