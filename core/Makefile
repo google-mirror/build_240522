@@ -796,15 +796,22 @@ $(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST)
 $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_RAMDISK))
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
+# Set up the same mount points on the ramdisk that system-as-root contains.
+define create-ramdisk-mountpoints
+  mkdir -p $(addprefix $(TARGET_RAMDISK_OUT)/,dev mnt proc sys)
+endef
+
 # We just build this directly to the install location.
 INSTALLED_RAMDISK_TARGET := $(BUILT_RAMDISK_TARGET)
 $(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_RAMDISK_FILES) $(INSTALLED_FILES_FILE_RAMDISK) | $(MINIGZIP)
 	$(call pretty,"Target ram disk: $@")
+	$(call create-ramdisk-mountpoints)
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $@
 
 .PHONY: ramdisk-nodeps
 ramdisk-nodeps: $(MKBOOTFS) | $(MINIGZIP)
 	@echo "make $@: ignoring dependencies"
+	$(call create-ramdisk-mountpoints)
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $(INSTALLED_RAMDISK_TARGET)
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
@@ -1650,37 +1657,40 @@ RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
 # $(1): output file
 define build-recoveryimage-target
   # Making recovery image
-  $(hide) mkdir -p $(TARGET_RECOVERY_OUT)
-  $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
+  mkdir -p $(TARGET_RECOVERY_OUT)
+  mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/tmp
   # Copying baseline ramdisk...
   # Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
-  $(hide) rsync -a --exclude=sdcard $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
+  rsync -a $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
   $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)),, \
-    $(hide) rsync -a $(TARGET_RAMDISK_OUT)/* $(TARGET_RECOVERY_ROOT_OUT)/)
+    rsync -a $(TARGET_RAMDISK_OUT)/* $(TARGET_RECOVERY_ROOT_OUT)/)
+  $(call create-root-mountpoints-and-symlinks,$(TARGET_RECOVERY_ROOT_OUT))
   # Modifying ramdisk contents...
+  rm -rf $(TARGET_RECOVERY_ROOT_OUT)/sdcard
+  mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sdcard
   $(if $(BOARD_RECOVERY_KERNEL_MODULES), \
     $(call build-image-kernel-modules,$(BOARD_RECOVERY_KERNEL_MODULES),$(TARGET_RECOVERY_ROOT_OUT),,$(call intermediates-dir-for,PACKAGING,depmod_recovery)))
   # Removes $(TARGET_RECOVERY_ROOT_OUT)/init*.rc EXCEPT init.recovery*.rc.
-  $(hide) find $(TARGET_RECOVERY_ROOT_OUT) -maxdepth 1 -name 'init*.rc' -type f -not -name "init.recovery.*.rc" | xargs rm -f
-  $(hide) cp -f $(recovery_initrc) $(TARGET_RECOVERY_ROOT_OUT)/
-  $(hide) cp $(TARGET_ROOT_OUT)/init.recovery.*.rc $(TARGET_RECOVERY_ROOT_OUT)/ 2> /dev/null || true # Ignore error when the src file doesn't exist.
-  $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/res
-  $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/res/*
-  $(hide) cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
-  $(hide) cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
-  $(hide) $(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
+  find $(TARGET_RECOVERY_ROOT_OUT) -maxdepth 1 -name 'init*.rc' -type f -not -name "init.recovery.*.rc" | xargs rm -f
+  cp -f $(recovery_initrc) $(TARGET_RECOVERY_ROOT_OUT)/
+  cp $(TARGET_ROOT_OUT)/init.recovery.*.rc $(TARGET_RECOVERY_ROOT_OUT)/ 2> /dev/null || true # Ignore error when the src file doesn't exist.
+  mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/res
+  rm -rf $(TARGET_RECOVERY_ROOT_OUT)/res/*
+  cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
+  cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
+  $(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
     cp -rf $(item) $(TARGET_RECOVERY_ROOT_OUT)/$(newline))
-  $(hide) $(foreach item,$(recovery_fstab), \
+  $(foreach item,$(recovery_fstab), \
     cp -f $(item) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.fstab)
   $(if $(strip $(recovery_wipe)), \
-    $(hide) cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
-  $(hide) cp $(RECOVERY_INSTALL_OTA_KEYS) $(TARGET_RECOVERY_ROOT_OUT)/res/keys
-  $(hide) ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
+    cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
+  cp $(RECOVERY_INSTALL_OTA_KEYS) $(TARGET_RECOVERY_ROOT_OUT)/res/keys
+  ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
   $(BOARD_RECOVERY_IMAGE_PREPARE)
-  $(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(MINIGZIP) > $(recovery_ramdisk)
+  $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(MINIGZIP) > $(recovery_ramdisk)
   $(if $(filter true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT)), \
-    $(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1).unsigned, \
-    $(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1) --id > $(RECOVERYIMAGE_ID_FILE))
+    $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1).unsigned, \
+    $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1) --id > $(RECOVERYIMAGE_ID_FILE))
   $(if $(filter true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_BOOT_SIGNER)),\
     $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
       $(BOOT_SIGNER) /boot $(1) $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY).pk8 $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY).x509.pem $(1),\
@@ -1690,12 +1700,12 @@ define build-recoveryimage-target
   $(if $(filter true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VBOOT)), \
     $(VBOOT_SIGNER) $(FUTILITY) $(1).unsigned $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VBOOT_SIGNING_KEY).vbpubk $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VBOOT_SIGNING_KEY).vbprivk $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VBOOT_SIGNING_SUBKEY).vbprivk $(1).keyblock $(1))
   $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)), \
-    $(hide) $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_BOOTIMAGE_PARTITION_SIZE))), \
-    $(hide) $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE))))
+    $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_BOOTIMAGE_PARTITION_SIZE))), \
+    $(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE))))
   $(if $(filter true,$(BOARD_AVB_ENABLE)), \
     $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)), \
-      $(hide) $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS),\
-      $(hide) $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) --partition_name recovery $(INTERNAL_AVB_RECOVERY_SIGNING_ARGS) $(BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS)))
+      $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS),\
+      $(AVBTOOL) add_hash_footer --image $(1) --partition_size $(BOARD_RECOVERYIMAGE_PARTITION_SIZE) --partition_name recovery $(INTERNAL_AVB_RECOVERY_SIGNING_ARGS) $(BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS)))
 endef
 
 ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
@@ -1845,69 +1855,124 @@ systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
 
+INTERNAL_ROOT_DIRS := $(BOARD_ROOT_EXTRA_FOLDERS)
+INTERNAL_ROOT_SYMLINKS := $(BOARD_ROOT_EXTRA_SYMLINKS)
+
 # Create symlink /system/vendor to /vendor if necessary.
 ifdef BOARD_USES_VENDORIMAGE
-define create-system-vendor-symlink
-$(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
-endef
+  define create-system-vendor-symlink
+    if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /vendor $(TARGET_OUT)/vendor
+  endef
+  INTERNAL_ROOT_DIRS += vendor
 else
-define create-system-vendor-symlink
-endef
+  define create-system-vendor-symlink
+  endef
+  INTERNAL_ROOT_SYMLINKS += /system/vendor:vendor
 endif
 
 # Create symlink /system/product to /product if necessary.
 ifdef BOARD_USES_PRODUCTIMAGE
-define create-system-product-symlink
-$(hide) if [ -d $(TARGET_OUT)/product ] && [ ! -h $(TARGET_OUT)/product ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/product detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/product while building a separate product.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /product $(TARGET_OUT)/product
-endef
+  define create-system-product-symlink
+    if [ -d $(TARGET_OUT)/product ] && [ ! -h $(TARGET_OUT)/product ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/product detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/product while building a separate product.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /product $(TARGET_OUT)/product
+  endef
+  INTERNAL_ROOT_DIRS += product
 else
-define create-system-product-symlink
-endef
+  define create-system-product-symlink
+  endef
+  INTERNAL_ROOT_SYMLINKS += /system/product:product
 endif
 
 # Create symlink /system/product_services to /product_services if necessary.
 ifdef BOARD_USES_PRODUCT_SERVICESIMAGE
-define create-system-product_services-symlink
-$(hide) if [ -d $(TARGET_OUT)/product_services ] && [ ! -h $(TARGET_OUT)/product_services ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/product_services detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/product_services while building a separate product_services.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /product_services $(TARGET_OUT)/product_services
-endef
+  define create-system-product_services-symlink
+    if [ -d $(TARGET_OUT)/product_services ] && [ ! -h $(TARGET_OUT)/product_services ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/product_services detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/product_services while building a separate product_services.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /product_services $(TARGET_OUT)/product_services
+  endef
+  INTERNAL_ROOT_DIRS += product_services
 else
-define create-system-product_services-symlink
-endef
+  define create-system-product_services-symlink
+  endef
+  INTERNAL_ROOT_SYMLINKS += /system/product_services:product_services
 endif
 
 # Create symlink /vendor/odm to /odm if necessary.
 ifdef BOARD_USES_ODMIMAGE
-define create-vendor-odm-symlink
-$(hide) if [ -d $(TARGET_OUT_VENDOR)/odm ] && [ ! -h $(TARGET_OUT_VENDOR)/odm ]; then \
-  echo 'Non-symlink $(TARGET_OUT_VENDOR)/odm detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT_VENDOR)/odm while building a separate odm.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /odm $(TARGET_OUT_VENDOR)/odm
-endef
+  define create-vendor-odm-symlink
+    if [ -d $(TARGET_OUT_VENDOR)/odm ] && [ ! -h $(TARGET_OUT_VENDOR)/odm ]; then \
+      echo 'Non-symlink $(TARGET_OUT_VENDOR)/odm detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT_VENDOR)/odm while building a separate odm.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /odm $(TARGET_OUT_VENDOR)/odm
+  endef
 else
-define create-vendor-odm-symlink
-endef
+  define create-vendor-odm-symlink
+  endef
 endif
+
+# For Treble Generic System Image (GSI), system-as-root GSI needs to work on
+# both devices with and without /odm partition. Those symlinks are for devices
+# without /odm partition. For devices with /odm partition, mount odm.img under
+# /odm will hide those symlinks.
+INTERNAL_ROOT_DIRS += odm
+INTERNAL_ROOT_SYMLINKS += \
+  $(foreach d, app bin etc firmware framework lib lib64 overlay priv-app,\
+    /vendor/odm/$d:odm/$d)
+
+ifdef BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE
+  INTERNAL_ROOT_DIRS += cache
+else
+  INTERNAL_ROOT_SYMLINKS += /data/cache:cache
+endif
+
+ifdef BOARD_USES_METADATA_PARTITION
+  INTERNAL_ROOT_DIRS += metadata
+endif
+
+# The A/B updater uses a top-level /postinstall directory to mount the new
+# system before reboot.
+ifeq ($(AB_OTA_UPDATER),true)
+  INTERNAL_ROOT_DIRS += postinstall
+endif
+
+INTERNAL_ROOT_SYMLINKS += \
+  /system/bin:bin \
+  /system/etc:etc \
+  /data/user_de/0/com.android.shell/files/bugreports:bugreports \
+  /sys/kernel/debug:d \
+  /storage/self/primary:sdcard \
+
+# Create root mount points and symlinks
+# $(1): the directory to update, either TARGET_ROOT_OUT or TARGET_RECOVERY_ROOT_OUT
+define create-root-mountpoints-and-symlinks
+  mkdir -p $(addprefix $(1)/, \
+    sbin dev proc sys system data odm oem acct config storage mnt apex $(INTERNAL_ROOT_DIRS))
+
+  # INTERNAL_ROOT_SYMLINKS is a list of <target>:<link_name>.
+  $(foreach s, $(INTERNAL_ROOT_SYMLINKS), \
+    $(eval p := $(subst :,$(space),$(s))) \
+    ln -sfn $(word 1,$(p)) $(1)/$(word 2,$(p))$(newline))
+endef
+
 
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
+  $(call create-root-mountpoints-and-symlinks,$(TARGET_ROOT_OUT))
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   $(call create-system-product_services-symlink)
