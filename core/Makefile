@@ -962,14 +962,129 @@ endif
 
 # -----------------------------------------------------------------
 # the root dir
+
+INTERNAL_ROOT_DIRS := $(BOARD_ROOT_EXTRA_FOLDERS)
+INTERNAL_ROOT_SYMLINKS := $(BOARD_ROOT_EXTRA_SYMLINKS)
+
+# Create symlink /system/vendor to /vendor if necessary.
+ifdef BOARD_USES_VENDORIMAGE
+  define create-system-vendor-symlink
+    if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /vendor $(TARGET_OUT)/vendor
+  endef
+  INTERNAL_ROOT_DIRS += vendor
+else
+  create-system-vendor-symlink :=
+  INTERNAL_ROOT_SYMLINKS += /system/vendor:vendor
+endif
+
+# Create symlink /system/product to /product if necessary.
+ifdef BOARD_USES_PRODUCTIMAGE
+  define create-system-product-symlink
+    if [ -d $(TARGET_OUT)/product ] && [ ! -h $(TARGET_OUT)/product ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/product detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/product while building a separate product.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /product $(TARGET_OUT)/product
+  endef
+  INTERNAL_ROOT_DIRS += product
+else
+  create-system-product-symlink :=
+  INTERNAL_ROOT_SYMLINKS += /system/product:product
+endif
+
+# Create symlink /system/system_ext to /system_ext if necessary.
+ifdef BOARD_USES_SYSTEM_EXTIMAGE
+  define create-system-system_ext-symlink
+    if [ -d $(TARGET_OUT)/system_ext ] && [ ! -h $(TARGET_OUT)/system_ext ]; then \
+      echo 'Non-symlink $(TARGET_OUT)/system_ext detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT)/system_ext while building a separate system_ext.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /system_ext $(TARGET_OUT)/system_ext
+  endef
+  INTERNAL_ROOT_DIRS += system_ext
+else
+  create-system-system_ext-symlink :=
+  INTERNAL_ROOT_SYMLINKS += /system/system_ext:system_ext
+endif
+
+# Create symlink /vendor/odm to /odm if necessary.
+ifdef BOARD_USES_ODMIMAGE
+  define create-vendor-odm-symlink
+    if [ -d $(TARGET_OUT_VENDOR)/odm ] && [ ! -h $(TARGET_OUT_VENDOR)/odm ]; then \
+      echo 'Non-symlink $(TARGET_OUT_VENDOR)/odm detected!' 1>&2; \
+      echo 'You cannot install files to $(TARGET_OUT_VENDOR)/odm while building a separate odm.img!' 1>&2; \
+      exit 1; \
+    fi
+    ln -sf /odm $(TARGET_OUT_VENDOR)/odm
+  endef
+else
+  create-vendor-odm-symlink :=
+endif
+
+# For Treble Generic System Image (GSI), system-as-root GSI needs to work on
+# both devices with and without /odm partition. Those symlinks are for devices
+# without /odm partition. For devices with /odm partition, mount odm.img under
+# /odm will hide those symlinks.
+INTERNAL_ROOT_DIRS += odm
+INTERNAL_ROOT_SYMLINKS += \
+  $(foreach d, app bin etc firmware framework lib lib64 overlay priv-app usr,\
+    /vendor/odm/$d:odm/$d)
+
+ifdef BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE
+  INTERNAL_ROOT_DIRS += cache
+else
+  INTERNAL_ROOT_SYMLINKS += /data/cache:cache
+endif
+
+ifdef BOARD_USES_METADATA_PARTITION
+  INTERNAL_ROOT_DIRS += metadata
+endif
+
+# The A/B updater uses a top-level /postinstall directory to mount the new system before reboot.
+ifeq ($(AB_OTA_UPDATER),true)
+  INTERNAL_ROOT_DIRS += postinstall
+endif
+
+INTERNAL_ROOT_SYMLINKS += \
+  /system/bin:bin \
+  /system/etc:etc \
+  /data/user_de/0/com.android.shell/files/bugreports:bugreports \
+  /sys/kernel/debug:d \
+  /storage/self/primary:sdcard \
+
+# Create root mount points and symlinks
+# $(1): the directory to update, either TARGET_ROOT_OUT or TARGET_RECOVERY_ROOT_OUT
+define create-root-mountpoints-and-symlinks
+  mkdir -p $(addprefix $(1)/, \
+    dev proc sys system data odm oem acct config storage mnt apex debug_ramdisk $(INTERNAL_ROOT_DIRS))
+
+  # INTERNAL_ROOT_SYMLINKS is a list of <target>:<link_name>.
+  $(foreach s, $(INTERNAL_ROOT_SYMLINKS), \
+    $(eval p := $(subst :,$(space),$(s))) \
+    ln -sfn $(word 1,$(p)) $(1)/$(word 2,$(p))$(newline))
+endef
+
 INTERNAL_ROOT_FILES := $(filter $(TARGET_ROOT_OUT)/%, \
-	$(ALL_GENERATED_SOURCES) \
-	$(ALL_DEFAULT_INSTALLED_MODULES))
+    $(ALL_GENERATED_SOURCES) \
+    $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INTERNAL_ROOT_TARGET := $(call intermediates-dir-for,PACKAGING,root)/timestamp
+$(INTERNAL_ROOT_TARGET): $(INTERNAL_ROOT_FILES)
+	$(call pretty,"Target root dir")
+	$(call create-root-mountpoints-and-symlinks,$(TARGET_ROOT_OUT))
+	touch $@
 
 INSTALLED_FILES_FILE_ROOT := $(PRODUCT_OUT)/installed-files-root.txt
 INSTALLED_FILES_JSON_ROOT := $(INSTALLED_FILES_FILE_ROOT:.txt=.json)
 $(INSTALLED_FILES_FILE_ROOT): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_ROOT)
-$(INSTALLED_FILES_FILE_ROOT) : $(INTERNAL_ROOT_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+$(INSTALLED_FILES_FILE_ROOT): $(INTERNAL_ROOT_TARGET) $(FILESLIST) $(FILESLIST_UTIL)
 	@echo Installed file list: $@
 	@mkdir -p $(dir $@)
 	@rm -f $@
@@ -1009,15 +1124,22 @@ $(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST) $(FILES
 $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_RAMDISK))
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
+# Set up the same mount points on the ramdisk that system-as-root contains.
+define create-ramdisk-mountpoints
+  mkdir -p $(addprefix $(TARGET_RAMDISK_OUT)/,apex debug_ramdisk dev mnt proc sys)
+endef
+
 # We just build this directly to the install location.
 INSTALLED_RAMDISK_TARGET := $(BUILT_RAMDISK_TARGET)
 $(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_RAMDISK_FILES) $(INSTALLED_FILES_FILE_RAMDISK) | $(MINIGZIP)
 	$(call pretty,"Target ram disk: $@")
+	$(call create-ramdisk-mountpoints)
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $@
 
 .PHONY: ramdisk-nodeps
 ramdisk-nodeps: $(MKBOOTFS) | $(MINIGZIP)
 	@echo "make $@: ignoring dependencies"
+	$(call create-ramdisk-mountpoints)
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $(INSTALLED_RAMDISK_TARGET)
 
 endif # BUILDING_RAMDISK_IMAGE
@@ -2021,7 +2143,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_DTBIMAGE_TARGET)
 endif
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
-	    $(INTERNAL_ROOT_FILES) \
+	    $(INTERNAL_ROOT_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INTERNAL_RECOVERYIMAGE_FILES) \
 	    $(recovery_initrc) $(recovery_sepolicy) $(recovery_kernel) \
@@ -2048,7 +2170,7 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(INSTALLED_DTBIMAGE_TARGET)
 endif
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) \
-	    $(INTERNAL_ROOT_FILES) \
+	    $(INTERNAL_ROOT_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
 	    $(INTERNAL_RECOVERYIMAGE_FILES) \
@@ -2241,7 +2363,7 @@ ifneq (,$(filter address, $(SANITIZE_TARGET)))
   endif
 endif
 
-FULL_SYSTEMIMAGE_DEPS += $(INTERNAL_ROOT_FILES) $(INSTALLED_FILES_FILE_ROOT)
+FULL_SYSTEMIMAGE_DEPS += $(INTERNAL_ROOT_TARGET)
 
 # -----------------------------------------------------------------
 ifdef BUILDING_SYSTEM_IMAGE
@@ -2269,51 +2391,6 @@ $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE))
 systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
-
-# Create symlink /system/vendor to /vendor if necessary.
-ifdef BOARD_USES_VENDORIMAGE
-define create-system-vendor-symlink
-$(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
-endef
-else
-define create-system-vendor-symlink
-endef
-endif
-
-# Create symlink /system/product to /product if necessary.
-ifdef BOARD_USES_PRODUCTIMAGE
-define create-system-product-symlink
-$(hide) if [ -d $(TARGET_OUT)/product ] && [ ! -h $(TARGET_OUT)/product ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/product detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/product while building a separate product.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /product $(TARGET_OUT)/product
-endef
-else
-define create-system-product-symlink
-endef
-endif
-
-# Create symlink /system/system_ext to /system_ext if necessary.
-ifdef BOARD_USES_SYSTEM_EXTIMAGE
-define create-system-system_ext-symlink
-$(hide) if [ -d $(TARGET_OUT)/system_ext ] && [ ! -h $(TARGET_OUT)/system_ext ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/system_ext detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/system_ext while building a separate system_ext.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /system_ext $(TARGET_OUT)/system_ext
-endef
-else
-define create-system-system_ext-symlink
-endef
-endif
 
 # $(1): output file
 define build-systemimage-target
