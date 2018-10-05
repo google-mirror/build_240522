@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69de037a_2baa8e40",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2018-10-05T07:33:06Z",
+      "side": 0,
+      "message": "May I know the reason that you removed this part, it\u0027s due to that you only want java\u0027s SRC infor?",
+      "range": {
+        "startLine": 762,
+        "startChar": 0,
+        "endLine": 763,
+        "endChar": 62
+      },
+      "revId": "d1242407195cd0b5e28c7d3060a5f589e1902a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
