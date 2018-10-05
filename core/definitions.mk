@@ -2700,13 +2700,14 @@ endef
 define hiddenapi-generate-greylist-txt
 ifneq (,$(wildcard frameworks/base))
 # Only generate this target if we're in a tree with frameworks/base present.
-$(3): .KATI_IMPLICIT_OUTPUTS := $(2) $(4)
+$(3): .KATI_IMPLICIT_OUTPUTS := $(2) $(4) $(5)
 # For now, write P & Q blacklist to single file until runtime support is finished
 $(3): $(1) $(CLASS2GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)
 	$(CLASS2GREYLIST) --public-api-list $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST) $(1) \
 	    --write-whitelist $(2) \
 	    --write-greylist $(3) \
-	    --write-greylist 26,28:$(4)
+	    --write-greylist 26,28:$(4) \
+	    --write-metadata-csv $(5)
 
 $(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST): $(2) $(3) $(4)
 $(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST): \
@@ -2714,6 +2715,10 @@ $(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST): \
 $(INTERNAL_PLATFORM_HIDDENAPI_WHITELIST): \
     PRIVATE_GREYLIST_INPUTS := $$(PRIVATE_GREYLIST_INPUTS) $(3)
     PRIVATE_DARKGREYLIST_INPUTS := $$(PRIVATE_DARKGREYLIST_INPUTS) $(4)
+$(INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA): $(5)
+$(INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA): \
+    PRIVATE_METADATA_INPUTS := $$(PRIVATE_METADATA_INPUTS) $(5)
+
 endif
 endef
 
