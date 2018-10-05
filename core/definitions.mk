@@ -2545,6 +2545,18 @@ $(2): $(1)
 	$$(copy-file-to-target)
 endef
 
+# Copy a file if source and destination are different.
+# For use via $(eval).
+# $(1): source file
+# $(2): destination file
+define copy-one-file-if-necessary
+ifneq ($(1),$(2))
+$(2): $(1)
+	@echo "Copy: $$@"
+	$$(copy-file-to-target)
+endif
+endef
+
 define copy-and-uncompress-dexs
 $(2): $(1) $(ZIPALIGN)
 	@echo "Uncompress dexs in: $$@"
@@ -2561,7 +2573,7 @@ $(foreach f, $(1), $(strip \
     $(eval _cmf_tuple := $(subst :, ,$(f))) \
     $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
     $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
-    $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest))) \
+    $(eval $(call copy-one-file-if-necessary,$(_cmf_src),$(_cmf_dest))) \
     $(_cmf_dest)))
 endef
 
