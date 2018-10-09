@@ -55,3 +55,6 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 
 # Audio: must using XML format for Treblized devices
 USE_XML_AUDIO_POLICY_CONF := 1
+
+# Build otatools.zip to sign GSI.
+TARGET_BUILD_OTATOOLS_PACKAGE := true
