@@ -760,8 +760,6 @@ def WriteFullOTAPackage(input_zip, output_file):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip)
-
   # Assertions (e.g. downgrade check, device properties check).
   ts = target_info.GetBuildProp("ro.build.date.utc")
   ts_text = target_info.GetBuildProp("ro.build.date")
@@ -1980,11 +1978,6 @@ def main(argv):
 
     print("done.")
     return
-
-  # Sanity check the loaded info dicts first.
-  if OPTIONS.info_dict.get("no_recovery") == "true":
-    raise common.ExternalError(
-        "--- target build has specified no recovery ---")
 
   # Non-A/B OTAs rely on /cache partition to store temporary files.
   cache_size = OPTIONS.info_dict.get("cache_size")
