@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d58d6ec9_30534c53",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-10-10T00:04:40Z",
+      "side": 1,
+      "message": "This used to only apply for !system modules -- do we have anything mis-marked as a test on the system partition?",
+      "revId": "f334124d0ce570d3313b7d0c8cc9fbaf133d7275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aad1c72_bd7f6d51",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-10-10T00:04:40Z",
+      "side": 1,
+      "message": "just remove the comment, now that it\u0027s wrong?",
+      "range": {
+        "startLine": 49,
+        "startChar": 29,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "f334124d0ce570d3313b7d0c8cc9fbaf133d7275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
