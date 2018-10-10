@@ -183,8 +183,12 @@ ifdef LOCAL_USE_VNDK
 endif
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
   $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
+
+$(call update-suite-host-shared-libraries, $(my_prefix),$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_shared_libraries))
 endif
 endif
+
+my_shared_libraries :=
 
 # We need to enclose the above export_includes and my_built_shared_libraries in
 # "my_strip_module not true" because otherwise the rules are defined in dynamic_binary.mk.
