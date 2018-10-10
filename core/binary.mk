@@ -1306,6 +1306,7 @@ ifdef LOCAL_INSTALLED_MODULE
 ifdef installed_shared_library_module_names
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
     $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(installed_shared_library_module_names))
+$(call update-suite-host-shared-libraries, $(my_prefix),$(LOCAL_2ND_ARCH_VAR_PREFIX),$(installed_shared_library_module_names))
 endif
 endif
 

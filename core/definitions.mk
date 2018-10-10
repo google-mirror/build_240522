@@ -3016,6 +3016,34 @@ $(eval $(my_all_targets) : $(call copy-many-files, \
     $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite))))))
 endef
 
+
+###########################################################
+## Add the host shared libraries to COMPATIBILITY.$(suite).shared_lib.FILES
+## $(1): TARGET_ or HOST_ or HOST_CROSS_.
+## $(2): non-empty for 2nd arch.
+## $(3): Names of shared libraries.
+###########################################################
+define update-suite-host-shared-libraries
+$(if $(call streq,$(1),HOST_), \
+  $(if $(LOCAL_COMPATIBILITY_SUITE), \
+    $(foreach lib, $(3), \
+      $(eval lib_source := $(call intermediates-dir-for, \
+          SHARED_LIBRARIES,$(lib),$(my_kind),,$(2),$(my_host_cross))/$(lib).so) \
+      $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+        $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+          $(eval entry := $(lib_source):$(dir $(dir))$(notdir $($(2)HOST_OUT_SHARED_LIBRARIES))/$(notdir $(lib_source))) \
+          $(eval my_compat_dist_shared_lib_$(suite) += $(entry))))) \
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(foreach entry, $(my_compat_dist_shared_lib_$(suite)), \
+        $(if $(filter $(entry),$(COMPATIBILITY.$(suite).shared_lib.FILES)),, \
+          $(eval COMPATIBILITY.$(suite).shared_lib.FILES := \
+            $$(COMPATIBILITY.$(suite).shared_lib.FILES) $(entry)) \
+          $(eval COMPATIBILITY.$(suite).shared_lib.DEPS := \
+            $$(COMPATIBILITY.$(suite).shared_lib.DEPS) $(call word-colon,1,$(entry))))) \
+      $(eval my_compat_dist_shared_lib_$(suite) := ))))
+endef
+
+
 ###########################################################
 ## Path Cleaning
 ###########################################################
