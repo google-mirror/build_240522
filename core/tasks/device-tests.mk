@@ -20,8 +20,16 @@ device-tests-zip := $(PRODUCT_OUT)/device-tests.zip
 device-tests-list-zip := $(PRODUCT_OUT)/device-tests_list.zip
 $(device-tests-zip) : .KATI_IMPLICIT_OUTPUTS := $(device-tests-list-zip)
 $(device-tests-zip) : PRIVATE_device_tests_list := $(PRODUCT_OUT)/device-tests_list
-
+$(device_tests_zip) : PRIVATE_SHARED_LIB_FILES := $(COMPATIBILITY.device-tests.shared_lib.FILES)
+$(warning COMPATIBILITY.device-tests.shared_lib.FILES: $(COMPATIBILITY.device-tests.shared_lib.FILES))
 $(device-tests-zip) : $(COMPATIBILITY.device-tests.FILES) $(SOONG_ZIP)
+	echo PRIVATE_SHARED_LIB_FILES: $(PRIVATE_SHARED_LIB_FILES)
+	$(hide) for shared_lib in $(PRIVATE_SHARED_LIB_FILES); do \
+	  src=$$(cut -f1 -d":" <<< $$shared_lib); \
+	  dest=$$(cut -f2 -d":" <<< $$shared_lib); \
+		mkdir -p $$(dirname $$dest); \
+		cp -fp $$src $$dest || echo Failed to copy $$src to $$dest; \
+	done
 	echo $(sort $(COMPATIBILITY.device-tests.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
 	grep $(TARGET_OUT_TESTCASES) $@.list > $@-target.list || true
