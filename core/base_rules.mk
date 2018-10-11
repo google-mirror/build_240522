@@ -556,6 +556,13 @@ ifdef multi_arch
 endif
 multi_arch :=
 
+# Let the default testcase target dir always be built out if suite be set.
+LOCAL_DEFAULT_TEST_MODULE := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(arch_dir)/$(my_built_module_stem)
+$(LOCAL_INSTALLED_MODULE) :| $(LOCAL_DEFAULT_TEST_MODULE)
+$(LOCAL_DEFAULT_TEST_MODULE): $(LOCAL_BUILT_MODULE)
+	@echo "Install: $@"
+	$(copy-file-to-new-target)
+
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \

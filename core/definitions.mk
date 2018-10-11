@@ -2986,8 +2986,7 @@ endef
 # Can be passed a subdirectory to use for the common testcase directory.
 define compatibility_suite_dirs
   $(strip \
-    $(COMPATIBILITY_TESTCASES_OUT_$(1)) \
-    $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(2))
+    $(COMPATIBILITY_TESTCASES_OUT_$(1)))
 endef
 
 # For each suite:
