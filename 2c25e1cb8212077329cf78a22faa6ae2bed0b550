@@ -22,6 +22,30 @@
       "revId": "2c25e1cb8212077329cf78a22faa6ae2bed0b550",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a18d41d_6be109c9",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1272474
+      },
+      "writtenOn": "2018-10-11T22:05:01Z",
+      "side": 1,
+      "message": "Good catch thanks! Line 374 exhibits the same issue! I\u0027ll correct both.",
+      "parentUuid": "09d145ae_4dabdb66",
+      "range": {
+        "startLine": 388,
+        "startChar": 57,
+        "endLine": 388,
+        "endChar": 58
+      },
+      "revId": "2c25e1cb8212077329cf78a22faa6ae2bed0b550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
