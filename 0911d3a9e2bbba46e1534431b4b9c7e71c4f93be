@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b57855fa_173dce28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1083173
+      },
+      "writtenOn": "2018-10-11T21:28:05Z",
+      "side": 1,
+      "message": "Please don\u0027t reference Pts in AOSP.",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 40
+      },
+      "revId": "0911d3a9e2bbba46e1534431b4b9c7e71c4f93be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
