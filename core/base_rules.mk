@@ -559,12 +559,18 @@ ifdef multi_arch
 endif
 multi_arch :=
 
+# Install also into the testcase folder
+# TODO(b/118819597) Change LOCAL_INSTALLED_MODULE to the location of LOCAL_DEFAULT_TEST_MODULE and remove LOCAL_DEFAULT_TEST_MODULE
+LOCAL_DEFAULT_TEST_MODULE := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(arch_dir)/$(my_installed_module_stem)
+ifneq ($(LOCAL_INSTALLED_MODULE),$(LOCAL_DEFAULT_TEST_MODULE))
+$(LOCAL_INSTALLED_MODULE) : $(LOCAL_DEFAULT_TEST_MODULE)
+endif
+
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
+    $(call compat-copy-pair,$(LOCAL_BUILT_MODULE),$(dir)/$(my_installed_module_stem)))) \
   $(eval my_compat_dist_config_$(suite) := ))
-
 
 # Auto-generate build config.
 ifneq (,$(LOCAL_FULL_TEST_CONFIG))
