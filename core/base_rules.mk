@@ -410,10 +410,13 @@ my_init_rc_pairs :=
 my_installed_symlinks :=
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
+LOCAL_DEFAULT_TEST_MODULE := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(arch_dir)/$(my_built_module_stem)
+ifneq ($(LOCAL_INSTALLED_MODULE),$(LOCAL_DEFAULT_TEST_MODULE))
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
 	$(copy-file-to-new-target)
 	$(PRIVATE_POST_INSTALL_CMD)
+endif
 
 ifndef LOCAL_IS_HOST_MODULE
 # Rule to install the module's companion init.rc.
