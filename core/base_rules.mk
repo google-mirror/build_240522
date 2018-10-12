@@ -410,10 +410,19 @@ my_init_rc_pairs :=
 my_installed_symlinks :=
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
+is_suite_in_testcase :=
+ifdef LOCAL_COMPATIBILITY_SUITE
+ifneq (, $(filter $($(my_prefix)OUT_TESTCASES)%, $(LOCAL_INSTALLED_MODULE)))
+  is_suite_in_testcase := true
+endif
+endif
+# We handle it in create-suite-dependencies if it's a test module and installed to testcase directory.
+ifneq (true,$(is_suite_in_testcase))
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
 	$(copy-file-to-new-target)
 	$(PRIVATE_POST_INSTALL_CMD)
+endif
 
 ifndef LOCAL_IS_HOST_MODULE
 # Rule to install the module's companion init.rc.
