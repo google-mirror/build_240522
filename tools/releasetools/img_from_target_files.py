@@ -28,6 +28,7 @@ Usage:  img_from_target_files [flags] input_target_files output_image_zip
 
 from __future__ import print_function
 
+import logging
 import os
 import shutil
 import sys
@@ -39,6 +40,7 @@ if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
   sys.exit(1)
 
+logger = logging.getLogger(__name__)
 
 OPTIONS = common.OPTIONS
 
@@ -90,11 +92,11 @@ def main(argv):
       common.ZipWrite(output_zip, os.path.join(images_path, image), image)
 
   finally:
-    print("cleaning up...")
+    logger.info("cleaning up...")
     common.ZipClose(output_zip)
     shutil.rmtree(OPTIONS.input_tmp)
 
-  print("done.")
+  logger.info("done.")
 
 
 if __name__ == '__main__':
@@ -102,5 +104,5 @@ if __name__ == '__main__':
     common.CloseInheritedPipes()
     main(sys.argv[1:])
   except common.ExternalError as e:
-    print("\n   ERROR: %s\n" % (e,))
+    logger.exception("\n   ERROR:\n")
     sys.exit(1)
