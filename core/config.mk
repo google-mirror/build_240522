@@ -32,6 +32,7 @@ endif
 empty :=
 space := $(empty) $(empty)
 comma := ,
+percent := %
 # Note that make will eat the newline just before endef.
 define newline
 

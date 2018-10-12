@@ -1037,6 +1037,8 @@ ifdef FULL_BUILD
     $(if $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS),\
       $(call maybe-print-list-and-error,$(offending_files),$(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement.) \
       $(eval unused_whitelist := $(filter-out $(extra_files),$(whitelist_patterns))) \
+      $(eval # Assume all patterns with wildcard match something) \
+      $(eval unused_whitelist := $(foreach w,$(unused_whitelist),$(if $(findstring $(percent),$(w)),,$(w)))) \
       $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.) \
     ) \
   )
