@@ -16,6 +16,24 @@
       "revId": "1b532182960c7f7d0226d51d5aa6fbb07b930eab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3bbd18c_b49bfa8a",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2018-10-15T12:55:23Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "fb299ab7_dbb907ab",
+      "revId": "1b532182960c7f7d0226d51d5aa6fbb07b930eab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
