@@ -1,0 +1,7 @@
+Code-Review+2: Nandana Dutt <nandana@google.com>
+Build-Cop-Override+1: Nandana Dutt <nandana@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Mon, 15 Oct 2018 10:17:36 +0000
+Reviewed-on: https://android-review.googlesource.com/789056
+Project: platform/build
+Branch: refs/heads/master
