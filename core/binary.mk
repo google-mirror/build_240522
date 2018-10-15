@@ -1650,6 +1650,7 @@ ifneq (HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS))
 endif
 
 # Disable clang-tidy if it is not found.
+WITH_TIDY := true
 ifeq ($(PATH_TO_CLANG_TIDY),)
   my_tidy_enabled := false
 else
