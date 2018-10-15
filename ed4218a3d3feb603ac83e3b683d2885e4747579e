@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a3ecd66_6edcc1fd",
+        "filename": "core/definitions.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2018-10-15T13:29:27Z",
+      "side": 1,
+      "message": "Did you consider running this in a separate build rule as this is not needed for the default android build? It won\u0027t significantly affect build times, just wondering about the precedent.",
+      "range": {
+        "startLine": 2710,
+        "startChar": 5,
+        "endLine": 2710,
+        "endChar": 30
+      },
+      "revId": "ed4218a3d3feb603ac83e3b683d2885e4747579e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
