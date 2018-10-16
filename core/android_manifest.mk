@@ -72,8 +72,10 @@ ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
     my_manifest_fixer_flags += --uses-non-sdk-api
 endif
 $(fixed_android_manifest): PRIVATE_MANIFEST_FIXER_FLAGS := $(my_manifest_fixer_flags)
+$(fixed_android_manifest): PRIVATE_OPTIONAL_SDK_LIB_NAMES := android.test.base android.test.mock
 $(fixed_android_manifest): $(MANIFEST_FIXER)
 $(fixed_android_manifest): $(main_android_manifest)
+	echo $(PRIVATE_OPTIONAL_SDK_LIB_NAMES) | tr ' ' '\n' > $(PRIVATE_EXPORTED_SDK_LIBS_FILE).optional
 	@echo "Fix manifest: $@"
 	$(MANIFEST_FIXER) \
 	  --minSdkVersion $(PRIVATE_MIN_SDK_VERSION) \
@@ -81,5 +83,8 @@ $(fixed_android_manifest): $(main_android_manifest)
           --raise-min-sdk-version \
 	  $(PRIVATE_MANIFEST_FIXER_FLAGS) \
 	  $(if (PRIVATE_EXPORTED_SDK_LIBS_FILE),\
-	    $$(cat $(PRIVATE_EXPORTED_SDK_LIBS_FILE) | sort -u | sed -e 's/^/\ --uses-library\ /' | tr '\n' ' ')) \
+	    $$(cat $(PRIVATE_EXPORTED_SDK_LIBS_FILE) | grep -v -f $(PRIVATE_EXPORTED_SDK_LIBS_FILE).optional | sort -u | sed -e 's/^/\ --uses-library\ /' | tr '\n' ' ') \
+	    $$(cat $(PRIVATE_EXPORTED_SDK_LIBS_FILE) | grep -f $(PRIVATE_EXPORTED_SDK_LIBS_FILE).optional | sort -u | sed -e 's/^/\ --optional-uses-library\ /' | tr '\n' ' ') \
+	   ) \
 	  $< $@
+	rm $(PRIVATE_EXPORTED_SDK_LIBS_FILE).optional
