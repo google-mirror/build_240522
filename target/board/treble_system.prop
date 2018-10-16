@@ -6,3 +6,6 @@ ro.adb.secure=0
 
 # TODO(b/78105955): disable privapp_permissions checking before the bug solved
 ro.control_privapp_permissions=disable
+
+# Set network mode to Global by default and no DSDS/DSDA
+ro.telephony.default_network=10
