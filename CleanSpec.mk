@@ -509,6 +509,9 @@ $(call add-clean-step, rm -rf $(addsuffix /lib,\
   $(HOST_CROSS_OUT_INTERMEDIATES) $(2ND_HOST_CROSS_OUT_INTERMEDIATES) \
   $(TARGET_OUT_INTERMEDIATES) $(2ND_TARGET_OUT_INTERMEDIATES)))
 
+# Clean up old ninja files
+$(call add-clean-step, rm -rf $(OUT_DIR)/build-*-dist*.ninja)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
