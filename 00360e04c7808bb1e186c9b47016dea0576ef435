@@ -22,6 +22,30 @@
       "revId": "00360e04c7808bb1e186c9b47016dea0576ef435",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a99895da_be2f8fc0",
+        "filename": "core/dex_preopt_libart_boot.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-10-17T18:07:16Z",
+      "side": 1,
+      "message": "Any other option will need special tracking. This fits our build philosophy of checking most things at compile-time.",
+      "parentUuid": "cf903ed6_7ee63372",
+      "range": {
+        "startLine": 114,
+        "startChar": 27,
+        "endLine": 114,
+        "endChar": 32
+      },
+      "revId": "00360e04c7808bb1e186c9b47016dea0576ef435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
