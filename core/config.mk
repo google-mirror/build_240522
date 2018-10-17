@@ -24,7 +24,13 @@ include $(BUILD_SYSTEM_COMMON)/core.mk
 
 # Mark variables that should be coming as environment variables from soong_ui
 # as readonly
-.KATI_READONLY := OUT_DIR TMPDIR BUILD_DATETIME_FILE DIST_DIR
+.KATI_READONLY := OUT_DIR TMPDIR BUILD_DATETIME_FILE
+ifdef CALLED_FROM_SETUP
+  .KATI_READONLY := CALLED_FROM_SETUP DIST_DIR
+endif
+ifdef KATI_PACKAGE_MK_DIR
+  .KATI_READONLY := KATI_PACKAGE_MK_DIR
+endif
 
 # Mark variables deprecated/obsolete
 CHANGES_URL := https://android.googlesource.com/platform/build/+/master/Changes.md
@@ -95,8 +101,13 @@ FORCE:
 
 ORIGINAL_MAKECMDGOALS := $(MAKECMDGOALS)
 
-dist_goal := $(strip $(filter dist,$(MAKECMDGOALS)))
-MAKECMDGOALS := $(strip $(filter-out dist,$(MAKECMDGOALS)))
+ifdef CALLED_FROM_SETUP
+  dist_goal := $(strip $(filter dist,$(MAKECMDGOALS)))
+  MAKECMDGOALS := $(strip $(filter-out dist,$(MAKECMDGOALS)))
+  .KATI_READONLY := dist_goal
+else
+  $(KATI_obsolete_var DIST_DIR dist_goal,Use dist-for-goals instead)
+endif
 
 UNAME := $(shell uname -sm)
 
