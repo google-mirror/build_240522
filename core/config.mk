@@ -110,6 +110,12 @@ $(KATI_obsolete_var \
   GLOBAL_CFLAGS_NO_OVERRIDE GLOBAL_CPPFLAGS_NO_OVERRIDE \
   ,GCC support has been removed. Use Clang instead)
 
+ifndef CALLED_FROM_SETUP
+  ifeq (,$(filter dist,$(MAKECMDGOALS)))
+    $(KATI_deprecated_var DIST_DIR,It should not be used unless dist was specified)
+  endif
+endif
+
 # This is marked as obsolete in envsetup.mk after reading the BoardConfig.mk
 $(KATI_deprecate_export It is a global setting. See $(CHANGES_URL)#export_keyword)
 
