@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf903ed6_7ee63372",
+        "filename": "core/dex_preopt_libart_boot.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1022077
+      },
+      "writtenOn": "2018-10-17T17:49:25Z",
+      "side": 1,
+      "message": "Not sure how I feel about this. We generate the profile with scripts and this will require quite a bit of burden on whoever updates the profile. Also my long standing goals is that we can auto-upload CLs with the profile which I\u0027m not sure it\u0027s feasible with an abort here.\n\nMaybe we should explore other options as well?",
+      "range": {
+        "startLine": 114,
+        "startChar": 27,
+        "endLine": 114,
+        "endChar": 32
+      },
+      "revId": "00360e04c7808bb1e186c9b47016dea0576ef435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
