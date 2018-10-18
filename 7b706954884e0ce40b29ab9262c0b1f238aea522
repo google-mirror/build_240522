@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1093460f_3dc4d9cd",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-18T22:04:12Z",
+      "side": 1,
+      "message": "You don\u0027t want ?\u003d here, ?\u003d tests if the variable is $(origin) \"undefined\", which, in true Make style, is not what the same as what ifdef is testing (a non-empty value before expansion).\n\nifndef LOCAL_UNCOMPRESS_DEX\n  LOCAL_UNCOMPRESS_DEX :\u003d false\nendif",
+      "revId": "7b706954884e0ce40b29ab9262c0b1f238aea522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
