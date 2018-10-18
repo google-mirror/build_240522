@@ -20,7 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
 
 PRODUCT_NAME := mainline_arm64
-PRODUCT_DEVICE := generic_arm64
+PRODUCT_DEVICE := mainline_arm64
 PRODUCT_BRAND := generic
 PRODUCT_SHIPPING_API_LEVEL := 28
 
