@@ -23,7 +23,7 @@ ifdef BOARD_SYSTEMSDK_VERSIONS
     _is_vendor_app := true
   endif
   ifneq (,$(filter JAVA_LIBRARIES APPS,$(LOCAL_MODULE_CLASS)))
-    ifndef LOCAL_SDK_VERSION
+    ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_PRIVATE_PLATFORM_APIS),)
       ifeq ($(_is_vendor_app),true)
         ifeq (,$(findstring __auto_generated_rro,$(LOCAL_MODULE)))
           # Runtime resource overlay for framework-res is exempted from building
