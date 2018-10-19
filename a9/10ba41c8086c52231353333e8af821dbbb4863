@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Primiano Tucci <primiano@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Verified+1: Florian Mayer <fmayer@google.com>
+Submitted-by: Florian Mayer <fmayer@google.com>
+Submitted-at: Fri, 19 Oct 2018 20:45:00 +0000
+Reviewed-on: https://android-review.googlesource.com/789059
+Project: platform/build
+Branch: refs/heads/master
