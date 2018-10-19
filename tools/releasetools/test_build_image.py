@@ -19,7 +19,7 @@ import os.path
 
 import common
 from build_image import (
-    BuildImageError, CheckHeadroom, GetFilesystemCharacteristics, SetUpInDirAndFsConfig)
+    BuildImage, BuildImageError, CheckHeadroom, GetFilesystemCharacteristics, SetUpInDirAndFsConfig)
 from test_utils import ReleaseToolsTestCase
 
 
@@ -198,3 +198,39 @@ class BuildImageTest(ReleaseToolsTestCase):
     self.assertGreater(int(fs_dict['Inode count']), 0)      # expect ~64
     self.assertGreaterEqual(int(fs_dict['Free inodes']), 0) # expect ~53
     self.assertGreater(int(fs_dict['Inode count']), int(fs_dict['Free inodes']))
+
+  def test_BuildImage_WithDynamic(self):
+    output_image = common.MakeTempFile(suffix='.img')
+
+    root_dir = common.MakeTempDir()
+    with open(os.path.join(root_dir, 'init'), 'w') as init_fp:
+      init_fp.write('init')
+
+    origin_in = common.MakeTempDir()
+    with open(os.path.join(origin_in, 'file'), 'w') as in_fp:
+      in_fp.write('system-file')
+    os.symlink('../etc', os.path.join(origin_in, 'symlink'))
+
+    fs_config_system = self._gen_fs_config('system')
+
+    prop_dict = {
+        'fs_config': fs_config_system,
+        'fs_type': 'ext4',
+        'mount_point': 'system',
+        'root_dir': root_dir,
+        'ext_mkuserimg': 'mkuserimg_mke2fs',
+        'use_dynamic_partition_size': 'true',
+    }
+    BuildImage(origin_in, prop_dict, output_image)
+
+    self.assertTrue(filecmp.cmp(
+        os.path.join(in_dir, 'init'), os.path.join(root_dir, 'init')))
+    self.assertTrue(filecmp.cmp(
+        os.path.join(in_dir, 'system', 'file'),
+        os.path.join(origin_in, 'file')))
+    self.assertTrue(os.path.islink(os.path.join(in_dir, 'system', 'symlink')))
+
+    self.assertTrue(filecmp.cmp(fs_config_system, fs_config))
+    self.assertEqual('/', prop_dict['mount_point'])
+    self.assertEqual('50', prop_dict.get('partition_size', -1))
+    self.assertEqual('3', prop_dict.get('extfs_inode_count', -1))
