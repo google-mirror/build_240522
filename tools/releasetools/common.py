@@ -1252,7 +1252,7 @@ def Cleanup():
   for i in OPTIONS.tempfiles:
     if os.path.isdir(i):
       shutil.rmtree(i, ignore_errors=True)
-    else:
+    elif os.path.exists(i):
       os.remove(i)
   del OPTIONS.tempfiles[:]
 
