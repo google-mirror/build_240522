@@ -27,8 +27,11 @@ TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # TODO(jiyong) These might be SoC specific.
-BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
-BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/image:/firmware/image
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/verinfo:/firmware/verinfo
 
 # Set this to create /cache mount point for non-A/B devices that mounts /cache.
 # The partition size doesn't matter, just to make build pass.
