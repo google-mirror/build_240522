@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "079174bb_cbc11906",
+        "filename": "Changes.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-19T17:10:11Z",
+      "side": 1,
+      "message": "It will also copy if foo is not a command line goal, but is a dependency of a command line goal.",
+      "revId": "252b2df47ba13587a2feeab24ae415a58532ddc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
