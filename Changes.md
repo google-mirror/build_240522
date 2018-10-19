@@ -43,6 +43,18 @@ $(call dist-for-goals,foo,bar/baz:logs/foo.log)
 
 will copy `bar/baz` into `$DIST_DIR/logs/foo.log` when `m foo dist` is run.
 
+#### FILE_NAME_TAG
+
+To embed the `BUILD_NUMBER` (or for local builds, `eng.${USER}`), include
+`FILE_NAME_TAG` in the destination:
+
+``` make
+$(call dist-for-goals,foo,bar.zip:baz-FILE_NAME_TAG.zip)
+```
+
+Which will produce `$DIST_DIR/baz-1234567.zip` on build servers which set
+`BUILD_NUMBER=1234567`, or `$DIST_DIR/baz-eng.builder.zip` for local builds.
+
 ## `.PHONY` rule enforcement  {#phony_targets}
 
 There are several new warnings/errors meant to ensure the proper use of
