@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c0285b5_7570647c",
+        "filename": "common/core.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-10-19T17:08:06Z",
+      "side": 1,
+      "message": "Kati natively prints colored warnings and errors",
+      "parentUuid": "a216a4a7_f5a53ed1",
+      "revId": "0201c21248ba3303b357e532511d1a3590670103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5114c13_048a0daa",
         "filename": "core/main.mk",
         "patchSetId": 2
