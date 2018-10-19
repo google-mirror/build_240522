@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a216a4a7_f5a53ed1",
+        "filename": "common/core.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-19T17:05:30Z",
+      "side": 1,
+      "message": "Maybe move the colorizing here?",
+      "revId": "0201c21248ba3303b357e532511d1a3590670103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5114c13_048a0daa",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-19T17:05:30Z",
+      "side": 1,
+      "message": "This turns of colorization too",
+      "revId": "0201c21248ba3303b357e532511d1a3590670103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
