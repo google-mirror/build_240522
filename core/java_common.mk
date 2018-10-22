@@ -336,7 +336,10 @@ ifndef LOCAL_IS_HOST_MODULE
     ifdef TARGET_BUILD_APPS
       full_java_bootclasspath_libs += $(call java-lib-header-files,sdk-core-lambda-stubs)
     else
+      # core-lambda-stubs was split up after the prebuilt for sdk-core-lambda-stubs was created,
+      # hence -extra-deps is also needed here.
       full_java_bootclasspath_libs += $(call java-lib-header-files,core-lambda-stubs)
+      full_java_bootclasspath_libs += $(call java-lib-header-files,core-lambda-stubs-extra-deps)
     endif
   endif
   full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES) $(sdk_libs),$(LOCAL_IS_HOST_MODULE))
