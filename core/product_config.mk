@@ -259,6 +259,12 @@ all_product_configs :=
 
 # A list of module names of BOOTCLASSPATH (jar files)
 PRODUCT_BOOT_JARS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BOOT_JARS))
+
+# A list of the jars that provide information about usages of the hidden API.
+# The core-oj-hiddenapi provides information for the core-oj jar.
+EXTRA_HIDDENAPI_JARS := \
+    core-oj-hiddenapi \
+
 PRODUCT_SYSTEM_SERVER_JARS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_SERVER_JARS))
 PRODUCT_SYSTEM_SERVER_APPS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_SERVER_APPS))
 PRODUCT_DEXPREOPT_SPEED_APPS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_DEXPREOPT_SPEED_APPS))
