@@ -380,9 +380,9 @@ endif
 	$(run-appcompat)
 endif  # module_run_appcompat
 ifdef LOCAL_DEX_PREOPT
-ifneq (nostripping,$(LOCAL_DEX_PREOPT))
+ifdef LOCAL_STRIP_DEX
 	$(call dexpreopt-remove-classes.dex,$@)
-endif  # LOCAL_DEX_PREOPT != nostripping
+endif  # LOCAL_STRIP_DEX
 endif  # LOCAL_DEX_PREOPT
 	$(sign-package)
 	# No need for align-package because sign-package takes care of alignment
@@ -400,7 +400,7 @@ endif  # ! LOCAL_REPLACE_PREBUILT_APK_INSTALLED
 # can do optimizations based on whether the built module only
 # contains uncompressed dex code.
 ifdef LOCAL_DEX_PREOPT
-ifeq (nostripping,$(LOCAL_DEX_PREOPT))
+ifndef LOCAL_STRIP_DEX
 $(built_odex) : $(built_module)
 	$(call dexpreopt-one-file,$<,$@)
 else
