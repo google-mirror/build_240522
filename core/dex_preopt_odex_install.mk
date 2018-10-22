@@ -5,7 +5,12 @@
 
 # We explicitly uncompress APKs of privileged apps, and used by
 # privileged apps
-LOCAL_UNCOMPRESS_DEX := false
+ifeq (true,$(LOCAL_PREFER_INTEGRITY))
+  LOCAL_UNCOMPRESS_DEX := true
+else
+  LOCAL_UNCOMPRESS_DEX := false
+endif
+
 ifneq (true,$(DONT_UNCOMPRESS_PRIV_APPS_DEXS))
   ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
     LOCAL_UNCOMPRESS_DEX := true

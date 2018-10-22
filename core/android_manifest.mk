@@ -71,6 +71,11 @@ endif
 ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
     my_manifest_fixer_flags += --uses-non-sdk-api
 endif
+
+ifdef LOCAL_PREFER_INTEGRITY
+    my_manifest_fixer_flags += --prefer-integrity=$(LOCAL_PREFER_INTEGRITY)
+endif
+
 $(fixed_android_manifest): PRIVATE_MANIFEST_FIXER_FLAGS := $(my_manifest_fixer_flags)
 # These two libs are added as optional dependencies (<uses-library> with
 # android:required set to false). This is because they haven't existed in pre-P
