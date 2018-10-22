@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Anton Hansson <hansson@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Mon, 22 Oct 2018 12:28:55 +0000
+Reviewed-on: https://android-review.googlesource.com/788157
+Project: platform/build
+Branch: refs/heads/master
