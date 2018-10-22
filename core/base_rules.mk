@@ -559,9 +559,8 @@ multi_arch :=
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
+    $(call create_copy_pair,$(LOCAL_BUILT_MODULE),$(dir)/$(my_installed_module_stem)))) \
   $(eval my_compat_dist_config_$(suite) := ))
-
 
 # Auto-generate build config.
 ifneq (,$(LOCAL_FULL_TEST_CONFIG))
@@ -614,25 +613,25 @@ else
       $(eval s := $(word 1,$(p))) \
       $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
       $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(s):$(dir)/$(n)))))
+        $(call create_copy_pair,$(s),$(dir)/$(n))))))
 
   ifneq (,$(test_config))
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(test_config):$(dir)/$(LOCAL_MODULE).config)))
+        $(call create_copy_pair,$(test_config),$(dir)/$(LOCAL_MODULE).config))))
   endif
 
   ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)))
+        $(call create_copy_pair,$(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic))))
   endif
 
   ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
   $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(extra_config):$(dir)/$(notdir $(extra_config))))))
+        $(call create_copy_pair,$(extra_config),$(dir)/$(notdir $(extra_config)))))))
   endif
 endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 
@@ -654,7 +653,7 @@ $(foreach pair, $(my_test_data_file_pairs), \
   $(eval file := $(word 2,$(parts))) \
   $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-      $(src_path):$(call append-path,$(dir),$(file))))))
+      $(call create_copy_pair,$(src_path),$(call append-path,$(dir),$(file)))))))
 endif
 
 arch_dir :=

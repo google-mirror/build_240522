@@ -2460,6 +2460,14 @@ $(2): $(1) $(ZIPALIGN) $(ZIP2ZIP)
 	$$(align-package)
 endef
 
+# Only create copy pair when src and dst are different.
+# $(1): source path
+# $(2): destination path
+# The format of copy pair is src:dst
+define create_copy_pair
+$(if $(filter-out $(1), $(2)), $(1):$(2))
+endef
+
 # Copies many files.
 # $(1): The files to copy.  Each entry is a ':' separated src:dst pair
 # Evaluates to the list of the dst files (ie suitable for a dependency list)
