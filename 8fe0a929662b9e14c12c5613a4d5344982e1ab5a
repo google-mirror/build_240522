@@ -105,6 +105,24 @@
       "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69898cbd_62c50051",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T23:17:41Z",
+      "side": 1,
+      "message": "That covers LOCAL_PREFER_INTEGRITY :\u003d true, but why support LOCAL_PREFER_INTEGRITY :\u003d false too?  I.e., why do we need all 3 of unset, true, and false?",
+      "parentUuid": "03adda36_d4a6b2aa",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
