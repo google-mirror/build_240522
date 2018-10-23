@@ -16,6 +16,24 @@
       "revId": "3d1a0bcaf1372e6998a580f8fefa2e230cc4c70d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c7a4395_52df354c",
+        "filename": "core/java_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1103203
+      },
+      "writtenOn": "2018-10-23T21:51:51Z",
+      "side": 1,
+      "message": "The issue is that I don\u0027t understand why sdk-core-lambda-stubs exists / is different from core-lambda-stubs.\n\nhttp://aosp/492539 suggests that it\u0027s just a prebuilt version of core-lambda-stubs from a particular historic build, so perhaps it should be replaced when the core-lambda-stubs definition changes. But, since I don\u0027t understand why the prebuilts exist, I don\u0027t know whether we\u0027d then also need a prebuilt core-lambda-stubs-extra-deps, or whether it\u0027d be fine to depend on that one in source form?\n\n\nAnyway, I just had another idea:\n\nInstead of \n (a) changing the definition of core-lambda-stubs by moving the extra-deps out into their own target, vs.\n (b) I could leave the definition of core-lambda-stubs unchanged and instead introduce a new java_library \"core-lambda-stubs-without-extra-deps\" that contains just the parts that core-lambda-stubs would have needed under (a)? Then I can change the definition of core-platform-api-stubs-system-modules to depend on core-lambda-stubs-without-extra-deps without affecting anything else.\n\nI think (b) is the safer alternative, and can be done in a single libcore CL. I have to go home now, but I\u0027ll try that tomorrow and will probably drop this CL topic.",
+      "parentUuid": "32dd953e_93a43087",
+      "revId": "3d1a0bcaf1372e6998a580f8fefa2e230cc4c70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
