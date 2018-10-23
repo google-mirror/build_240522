@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32dd953e_93a43087",
+        "filename": "core/java_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T21:30:26Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment, we can update the prebuilt core-lamba-stubs.jar if we want to.",
+      "revId": "3d1a0bcaf1372e6998a580f8fefa2e230cc4c70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
