@@ -34,6 +34,24 @@
       "revId": "3d1a0bcaf1372e6998a580f8fefa2e230cc4c70d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d70bd68_1393d947",
+        "filename": "core/java_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T23:33:55Z",
+      "side": 1,
+      "message": "sdk-core-lambda-stubs is for unbundled builds, which may not have the source for core-lambda-stubs in their manifest.",
+      "parentUuid": "7c7a4395_52df354c",
+      "revId": "3d1a0bcaf1372e6998a580f8fefa2e230cc4c70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
