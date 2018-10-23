@@ -87,6 +87,24 @@
       "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03adda36_d4a6b2aa",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2018-10-23T22:52:20Z",
+      "side": 1,
+      "message": "android:preferIntegrity is not going to be true by default due to the difference performance characteristics (e.g. app start up time).  It\u0027s up to the individual app to opt in.  For system apps, it might be ok or not to completely switch to this mode, but that requires some experiment to gather meaningful system health data.  Do that answer the question?",
+      "parentUuid": "280b10be_5649b686",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
