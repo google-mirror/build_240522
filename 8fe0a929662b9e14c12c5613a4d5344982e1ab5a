@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d0d9f39_14aa7b51",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T22:29:11Z",
+      "side": 1,
+      "message": "Indent this",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0e87c81_e5a6ce5f",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T22:29:11Z",
+      "side": 1,
+      "message": "Do we need to explicitly set this to false?",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
