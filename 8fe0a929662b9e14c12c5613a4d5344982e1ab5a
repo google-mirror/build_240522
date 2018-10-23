@@ -69,6 +69,24 @@
       "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280b10be_5649b686",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-23T22:43:25Z",
+      "side": 1,
+      "message": "What\u0027s the usecase for LOCAL_PREFER_INTEGRITY :\u003d false?",
+      "parentUuid": "36e78413_0f4daa19",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
