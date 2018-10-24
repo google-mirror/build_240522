@@ -16,6 +16,24 @@
       "revId": "4446211021397e852738cb9f208eb9c678a23d08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eafed451_72ecd946",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2018-10-24T18:40:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c9402a1_aae3a843",
+      "revId": "4446211021397e852738cb9f208eb9c678a23d08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
