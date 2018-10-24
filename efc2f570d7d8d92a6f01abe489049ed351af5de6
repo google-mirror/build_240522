@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8aeaf0c_9e587429",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2018-10-24T09:45:53Z",
+      "side": 1,
+      "message": "It should be :",
+      "range": {
+        "startLine": 561,
+        "startChar": 26,
+        "endLine": 561,
+        "endChar": 28
+      },
+      "revId": "efc2f570d7d8d92a6f01abe489049ed351af5de6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
