@@ -123,6 +123,24 @@
       "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e962b034_9f630d14",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2018-10-24T17:25:47Z",
+      "side": 1,
+      "message": "We don\u0027t.  It was originally to make my local CTS build, but I don\u0027t need it any more.",
+      "parentUuid": "69898cbd_62c50051",
+      "revId": "8fe0a929662b9e14c12c5613a4d5344982e1ab5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
