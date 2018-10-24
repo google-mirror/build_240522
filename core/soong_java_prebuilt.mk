@@ -98,7 +98,14 @@ ifdef LOCAL_SOONG_DEX_JAR
       endif # is_boot_jar
       $(eval $(call add-dependency,$(common_javalib.jar),$(full_classes_jar) $(full_classes_header_jar)))
 
-      $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+      ifneq (,$(filter \
+                $(filter-out $(DEXPREOPT_BOOT_JARS_MODULES),$(PRODUCT_BOOT_JARS)), \
+                $(LOCAL_MODULE)))
+        $(eval $(call copy-and-uncompress-dexs,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+        $(warning copy-and-uncompress-dexs $(LOCAL_PREBUILT_MODULE_FILE) $(LOCAL_BUILT_MODULE))
+      else
+        $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+      endif
       $(eval $(call add-dependency,$(LOCAL_BUILT_MODULE),$(common_javalib.jar)))
     else # LOCAL_IS_HOST_MODULE
       $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(LOCAL_BUILT_MODULE)))
