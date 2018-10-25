@@ -20,4 +20,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 PRODUCT_NAME := mainline_system_arm64
 PRODUCT_DEVICE := generic_arm64
 PRODUCT_BRAND := generic
-PRODUCT_SHIPPING_API_LEVEL := 28
+
+# TODO(b/111538404): having shipping api level set and inheriting from goldfish
+# fails Treble sepolicy tests. Set PRODUCT_FULL_TREBLE_OVERRIDE to 28 and unset
+# PRODUCT_FULL_TREBLE_OVERRIDE once mainline_system is decoupled from goldfish.
+# PRODUCT_SHIPPING_API_LEVEL := 28
+PRODUCT_FULL_TREBLE_OVERRIDE := true
