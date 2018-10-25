@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c2f68cb_af4cf698",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 3666,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-10-25T22:23:21Z",
+      "side": 1,
+      "message": "this needs to be removed then (because of aosp/802153)",
+      "range": {
+        "startLine": 3666,
+        "startChar": 5,
+        "endLine": 3666,
+        "endChar": 49
+      },
+      "revId": "d538fd23d6839ee6d0a637e68e9d6b28d6e1efd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
