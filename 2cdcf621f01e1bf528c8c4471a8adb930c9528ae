@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0245bf86_8e080f47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2018-10-26T10:40:03Z",
+      "side": 1,
+      "message": "# w/ UID setting in the config\nmake -j hello_world_test_mk\n# w/o UID in the config\nmake -j hello_world_test_mk2\n\nfor i in hello_world_test_mk hello_world_test_mk2; do\n    if [[ -n $(grep \u0027UID_OPTION\u0027 $ANDROID_TARTGET_OUT_TESTCASES/$i/$i.config) ]]; then\n        echo \"$i has UID_OPTION\"\n    else\n        echo \"$i does not have UID_OPTION\"\n    fi\ndone",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 81
+      },
+      "revId": "2cdcf621f01e1bf528c8c4471a8adb930c9528ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
