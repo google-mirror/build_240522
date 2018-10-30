@@ -24,7 +24,7 @@ include $(BUILD_SYSTEM_COMMON)/core.mk
 
 # Mark variables that should be coming as environment variables from soong_ui
 # as readonly
-.KATI_READONLY := OUT_DIR TMPDIR BUILD_DATETIME_FILE
+.KATI_READONLY := OUT_DIR TMPDIR BUILD_DATETIME_FILE BUILD_NUMBER_FILE HAS_BUILD_NUMBER FILE_NAME_TAG
 ifdef CALLED_FROM_SETUP
   .KATI_READONLY := CALLED_FROM_SETUP
 endif
@@ -90,6 +90,10 @@ $(KATI_obsolete_var \
   GLOBAL_CFLAGS_NO_OVERRIDE GLOBAL_CPPFLAGS_NO_OVERRIDE \
   ,GCC support has been removed. Use Clang instead)
 $(KATI_obsolete_var DIST_DIR dist_goal,Use dist-for-goals instead. See $(CHANGES_URL)#dist)
+$(KATI_obsolete_var BUILD_NUMBER,See $(CHANGES_URL)#BUILD_NUMBER)
+$(KATI_obsolete_var BUILD_DATETIME,Use BUILD_DATETIME_FROM_FILE)
+$(KATI_obsolete_var DATE,Use DATE_FROM_FILE)
+
 
 # This is marked as obsolete in envsetup.mk after reading the BoardConfig.mk
 $(KATI_deprecate_export It is a global setting. See $(CHANGES_URL)#export_keyword)
@@ -876,8 +880,8 @@ else
   DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
 endif
 
-BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
-BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
+BUILD_NUMBER_FROM_FILE :=$= $$(cat $(BUILD_NUMBER_FILE))
+BUILD_DATETIME_FROM_FILE :=$= $$(cat $(BUILD_DATETIME_FILE))
 
 # SEPolicy versions
 

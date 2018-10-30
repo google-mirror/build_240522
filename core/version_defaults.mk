@@ -23,7 +23,6 @@
 #     PLATFORM_VERSION_CODENAME
 #     DEFAULT_APP_TARGET_SDK
 #     BUILD_ID
-#     BUILD_NUMBER
 #     PLATFORM_SECURITY_PATCH
 #     PLATFORM_VNDK_VERSION
 #     PLATFORM_SYSTEMSDK_VERSIONS
@@ -281,40 +280,6 @@ ifndef BUILD_ID
   BUILD_ID := UNKNOWN
 endif
 .KATI_READONLY := BUILD_ID
-
-ifndef BUILD_DATETIME
-  # Used to reproduce builds by setting the same time. Must be the number
-  # of seconds since the Epoch.
-  BUILD_DATETIME := $(shell date +%s)
-endif
-
-ifneq (,$(findstring Darwin,$(UNAME)))
-DATE := date -r $(BUILD_DATETIME)
-else
-DATE := date -d @$(BUILD_DATETIME)
-endif
-.KATI_READONLY := DATE
-
-# Everything should be using BUILD_DATETIME_FROM_FILE instead.
-# BUILD_DATETIME and DATE can be removed once BUILD_NUMBER moves
-# to soong_ui.
-$(KATI_obsolete_var BUILD_DATETIME,Use BUILD_DATETIME_FROM_FILE)
-
-HAS_BUILD_NUMBER := true
-ifndef BUILD_NUMBER
-  # BUILD_NUMBER should be set to the source control value that
-  # represents the current state of the source code.  E.g., a
-  # perforce changelist number or a git hash.  Can be an arbitrary string
-  # (to allow for source control that uses something other than numbers),
-  # but must be a single word and a valid file name.
-  #
-  # If no BUILD_NUMBER is set, create a useful "I am an engineering build
-  # from this date/time" value.  Make it start with a non-digit so that
-  # anyone trying to parse it as an integer will probably get "0".
-  BUILD_NUMBER := eng.$(shell echo $${USER:0:6}).$(shell $(DATE) +%Y%m%d.%H%M%S)
-  HAS_BUILD_NUMBER := false
-endif
-.KATI_READONLY := BUILD_NUMBER HAS_BUILD_NUMBER
 
 ifndef PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION
   # Used to set minimum supported target sdk version. Apps targeting sdk
