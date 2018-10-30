@@ -114,6 +114,7 @@ endif # proto_sources
 java_resource_file_groups :=
 
 LOCAL_JAVA_RESOURCE_DIRS := $(strip $(LOCAL_JAVA_RESOURCE_DIRS))
+ALL_MODULES.$(my_register_name).JAVA_RESOURCE_DIRS := $(LOCAL_JAVA_RESOURCE_DIRS)
 ifneq ($(LOCAL_JAVA_RESOURCE_DIRS),)
   # This makes a list of words like
   #     <dir1>::<file1>:<file2> <dir2>::<file1> <dir3>:
