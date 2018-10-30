@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9302052d_140a7f85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2018-10-30T07:16:35Z",
+      "side": 1,
+      "message": "Either ${ANDROID_PRODUCT_OUT} or $ANDROID_PRODUCT_OUT, but not $()",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "fafa657152abaee2fd335fff958741ca8eb58b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
