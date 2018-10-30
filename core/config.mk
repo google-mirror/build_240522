@@ -932,6 +932,19 @@ ifndef PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
 endif
 .KATI_READONLY := PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
 
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+  ifneq ($(PRODUCT_USE_LOGICAL_PARTITIONS),true)
+    $(error PRODUCT_USE_LOGICAL_PARTITIONS must be true when PRODUCT_RETROFIT_DYNAMIC_PARTITIONS \
+        is set)
+  endif
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      $(error Devices with shipping API level $(PRODUCT_SHIPPING_API_LEVEL) must not set \
+          PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
+    endif
+  endif
+endif
+
 ifeq ($(PRODUCT_USE_LOGICAL_PARTITIONS),true)
     requirements := \
         PRODUCT_USE_DYNAMIC_PARTITION_SIZE \

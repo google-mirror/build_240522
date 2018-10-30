@@ -2919,20 +2919,6 @@ ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
 # BOARD_SUPER_PARTITION_SIZE must be defined to build super image.
 ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
 
-INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
-INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
-
-$(INSTALLED_SUPERIMAGE_TARGET): $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
-
-# For A/B devices, super partition always contains sub-partitions in the _a slot, because this
-# image should only be used for bootstrapping / initializing the device. When flashing the image,
-# bootloader fastboot should always mark _a slot as bootable.
-ifeq ($(AB_OTA_UPDATER),true)
-$(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): PRIVATE_PARTITION_SUFFIX=_a
-endif # AB_OTA_UPDATER
-
-$(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE)
-
 # $(1): slot A suffix (_a or empty)
 # $(2): include images or not (true or empty)
 define build-superimage-target-args
@@ -2959,15 +2945,23 @@ define build-superimage-target
     --output $(1)
 endef
 
-$(INSTALLED_SUPERIMAGE_TARGET):
+# For A/B devices, super partition always contains sub-partitions in the _a slot, because this
+# image should only be used for bootstrapping / initializing the device. When flashing the image,
+# bootloader fastboot should always mark _a slot as bootable.
+
+ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
+INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
+$(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 	$(call pretty,"Target super fs image: $@")
-	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX),true)
+	$(call build-superimage-target,$@,$(if $(filter true,$(AB_OTA_UPDATER)),_a),true)
+endif
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
 
-$(INSTALLED_SUPERIMAGE_EMPTY_TARGET):
+INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
+$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE)
 	$(call pretty,"Target empty super fs image: $@")
-	$(call build-superimage-target,$@,$(PRIVATE_PARTITION_SUFFIX))
+	$(call build-superimage-target,$@,$(if $(filter true,$(AB_OTA_UPDATER)),_a))
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
@@ -2997,37 +2991,46 @@ define check-sum-of-partition-sizes
   sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${partition_size_list}"); \
   if [ $$(( $${sum_sizes_expr} )) -gt $$(( $(2) )) ]; then \
     echo "The sum of sizes of [$(strip $(3))] is larger than $(strip $(1)):"; \
-    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(2)" '==' $$(( $(2) )); \
+    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(strip $(2))" '==' $$(( $(2) )); \
     exit 1; \
   else \
     echo "The sum of sizes of [$(strip $(3))] is within $(strip $(1)):"; \
-    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' "$(2)" '==' $$(( $(2) )); \
+    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' "$(strip $(2))" '==' $$(( $(2) )); \
   fi
 endef
 
+# Append "/2" to $(1) if A/B and not retrofitting dynamic partitions.
+# $(1): expression of BOARD_SUPER_PARTITION_SIZE
+define get-maximum-size-for-slot
+  $(if $(filter true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)),$(1), \
+    $(if $(filter true,$(AB_OTA_UPDATER)),$(1) / 2,$(1)))
+endef
+
 define check-all-partition-sizes-target
-  # Check sum(all partitions) <= super partition (/ 2 for A/B)
+  # Check sum(all partitions) <= super partition (/ 2 for A/B && !retrofit)
   $(if $(BOARD_SUPER_PARTITION_SIZE),$(if $(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-    $(call check-sum-of-partition-sizes,BOARD_SUPER_PARTITION_SIZE$(if $(filter true,$(AB_OTA_UPDATER)), / 2), \
-      $(BOARD_SUPER_PARTITION_SIZE)$(if $(filter true,$(AB_OTA_UPDATER)), / 2),$(BOARD_SUPER_PARTITION_PARTITION_LIST))))
+    $(call check-sum-of-partition-sizes,\
+      $(call get-maximum-size-for-slot,BOARD_SUPER_PARTITION_SIZE), \
+      $(call get-maximum-size-for-slot,$(BOARD_SUPER_PARTITION_SIZE)), \
+      $(BOARD_SUPER_PARTITION_PARTITION_LIST))))
 
   # For each group, check sum(partitions in group) <= group size
   $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
     $(if $(BOARD_$(group)_SIZE),$(if $(BOARD_$(group)_PARTITION_LIST), \
       $(call check-sum-of-partition-sizes,BOARD_$(group)_SIZE,$(BOARD_$(group)_SIZE),$(BOARD_$(group)_PARTITION_LIST)))))
 
-  # Check sum(all group sizes) <= super partition (/ 2 for A/B)
+  # Check sum(all group sizes) <= super partition (/ 2 for A/B && !retrofit)
   if [[ ! -z $(BOARD_SUPER_PARTITION_SIZE) ]]; then \
     group_size_list="$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)),$(BOARD_$(group)_SIZE))"; \
     sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${group_size_list}"); \
-    max_size_tail=$(if $(filter true,$(AB_OTA_UPDATER))," / 2"); \
-    max_size_expr="$(BOARD_SUPER_PARTITION_SIZE)$${max_size_tail}"; \
+    max_size_str="$(strip $(call get-maximum-size-for-slot,BOARD_SUPER_PARTITION_SIZE))"; \
+    max_size_expr="$(call get-maximum-size-for-slot,$(BOARD_SUPER_PARTITION_SIZE))"; \
     if [ $$(( $${sum_sizes_expr} )) -gt $$(( $${max_size_expr} )) ]; then \
-      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is larger than BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
+      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is larger than $${max_size_str}:"; \
       echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
       exit 1; \
     else \
-      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is within BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
+      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is within $${max_size_str}:"; \
       echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
     fi \
   fi
