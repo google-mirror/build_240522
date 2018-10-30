@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab62b354_7fd3797f",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-10-30T20:09:30Z",
+      "side": 1,
+      "message": "This file is computing config options selected by the product makefiles.  This should go in config.mk.",
+      "revId": "c049a1bcebc4dc03cfacaaef17d77f3cbad835bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
