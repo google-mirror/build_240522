@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cd83731_1ccd5016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-10-31T15:47:13Z",
+      "side": 1,
+      "message": "I\u0027m probably missing the whole picture: why don\u0027t we define BOARD_SUPER_PARTITION_SIZE to be the sum of both slots for the retrofitting path?",
+      "range": {
+        "startLine": 13,
+        "startChar": 20,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "cd28a75669709d89412bcc5f47cde52dddc8f9fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
