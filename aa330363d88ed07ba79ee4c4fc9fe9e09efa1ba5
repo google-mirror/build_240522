@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33427a60_ccb2ff23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2018-10-31T03:19:05Z",
+      "side": 1,
+      "message": "m out/target/product/generic_arm64/module-info.json",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 55
+      },
+      "revId": "aa330363d88ed07ba79ee4c4fc9fe9e09efa1ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
