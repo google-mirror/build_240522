@@ -22,6 +22,30 @@
       "revId": "cd28a75669709d89412bcc5f47cde52dddc8f9fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec969266_3cdcad98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-10-31T17:55:06Z",
+      "side": 1,
+      "message": "for retrofit (using blueline as an example):\n\nMetadata in system_a spans across block devices (system_a, vendor_a, product_a)\n    Logical system_a, vendor_a, product_a lives here\nMetadata in system_b spans across block devices (system_b, vendor_b, product_b)\n    Logical system_b, vendor_b, product_b lives here\n\nYou can think of it as having two super partitions.\n\nI am holding this CL until CL:807789 is merged; that CL has a clearer picture.",
+      "parentUuid": "0cd83731_1ccd5016",
+      "range": {
+        "startLine": 13,
+        "startChar": 20,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "cd28a75669709d89412bcc5f47cde52dddc8f9fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
