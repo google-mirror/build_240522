@@ -2939,7 +2939,10 @@ define build-superimage-target-args
   $(if $(2), --sparse) \
   --metadata-size 65536 \
   --metadata-slots $(if $(1),2,1) \
-  --device-size $(BOARD_SUPER_PARTITION_SIZE) \
+  --super-name $(BOARD_SUPER_PARTITION_METADATA_DEVICE) \
+  $(if $(filter true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)), $(if $(filter true,$(AB_OTA_UPDATER)), --auto-slot-suffixing)) \
+  $(foreach device,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES), \
+    --device $(device):$(BOARD_SUPER_PARTITION_$(call to-upper,$(device))_DEVICE_SIZE)) \
   $(foreach group,$(BOARD_SUPER_PARTITION_GROUPS), \
     --group $(group)$(1):$(BOARD_$(call to-upper,$(group))_SIZE) \
     $(if $(1), --group $(group)_b:$(BOARD_$(call to-upper,$(group))_SIZE)) \
@@ -2989,6 +2992,18 @@ droid_targets: check-all-partition-sizes
 # Add image dependencies so that generated_*_image_info.txt are written before checking.
 check-all-partition-sizes: $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
+define check-super-partition-size
+  size_list="$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),$(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))"; \
+  sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${size_list}"); \
+  if [ $$(( $${sum_sizes_expr} )) -ne $(BOARD_SUPER_PARTITION_SIZE) ]; then \
+    echo "The sum of super partition block device sizes must be equal to BOARD_SUPER_PARTITION_SIZE."; \
+    echo $${sum_sizes_expr} '!=' $(BOARD_SUPER_PARTITION_SIZE); \
+    exit 1; \
+  else \
+    echo $${sum_sizes_expr} '==' $(BOARD_SUPER_PARTITION_SIZE); \
+  fi
+endef
+
 # $(1): human-readable max size string
 # $(2): max size expression
 # $(3): list of partition names
@@ -3035,6 +3050,7 @@ endef
 
 check-all-partition-sizes check-all-partition-sizes-nodeps:
 	$(call check-all-partition-sizes-target)
+	$(call check-super-partition-size)
 
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
