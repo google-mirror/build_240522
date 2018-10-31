@@ -16,6 +16,24 @@
       "revId": "c049a1bcebc4dc03cfacaaef17d77f3cbad835bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e21cef66_f6581171",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2018-10-31T13:05:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab62b354_7fd3797f",
+      "revId": "c049a1bcebc4dc03cfacaaef17d77f3cbad835bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
