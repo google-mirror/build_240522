@@ -1021,6 +1021,30 @@ BOARD_SUPER_PARTITION_PARTITION_LIST := \
         $(BOARD_$(group)_PARTITION_LIST))
 .KATI_READONLY := BOARD_SUPER_PARTITION_PARTITION_LIST
 
+# If BOARD_SUPER_PARTITION_BLOCK_DEVICES is defined, this is a retrofit device. The
+# first partition name is the super partition, which we have to add to the kernel
+# command line.
+#
+# If BOARD_SUPER_PARTITION_BLOCK_DEVICES is not defined, we populate it with the
+# normal configuration for consistency.
+ifdef BOARD_SUPER_PARTITION_SIZE
+ifdef BOARD_SUPER_PARTITION_BLOCK_DEVICES
+ifeq ($(PRODUCT_USE_LOGICAL_PARTITIONS),true)
+BOARD_KERNEL_CMDLINE += androidboot.super_partition_name=$(firstword \
+	$(BOARD_SUPER_PARTITION_BLOCK_DEVICES))
+endif
+else
+BOARD_SUPER_PARTITION_BLOCK_DEVICES := super
+BOARD_SUPER_PARTITION_SUPER_DEVICE_SIZE := $(BOARD_SUPER_PARTITION_SIZE)
+endif
+endif
+.KATI_READONLY := BOARD_SUPER_PARTITION_BLOCK_DEVICES
+
+$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)), \
+	$(if $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE),, \
+		$(error $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE must not be empty))) \
+	$(eval .KATI_READONLY := BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))
+
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
 # ###############################################################
