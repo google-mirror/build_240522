@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc54ba3_59ddff1e",
+        "filename": "core/soong_cc_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-11-01T23:26:09Z",
+      "side": 1,
+      "message": "This check (and the else portion) isn\u0027t necessary, since Soong ignores ONE_SHOT_MAKEFILE, and so all the dependencies will be defined.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "8fdb3dac42009016988cc487f76b36e24260dd99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
