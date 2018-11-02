@@ -311,7 +311,6 @@ PRODUCT_PACKAGES_DEBUG := \
     apex_debug_key \
     iotop \
     logpersist.start \
-    perfprofd \
     procrank \
     showmap \
     sqlite3 \
