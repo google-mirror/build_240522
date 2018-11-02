@@ -316,7 +316,6 @@ PRODUCT_PACKAGES_DEBUG := \
     iotop \
     iw \
     logpersist.start \
-    perfprofd \
     procrank \
     showmap \
     sqlite3 \
