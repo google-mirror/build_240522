@@ -1823,6 +1823,29 @@ $(BUILT_ASSEMBLED_SYSTEM_MANIFEST): $(FULL_SYSTEMIMAGE_DEPS)
 			sed "s/^/-i /" | tr '\n' ' ') -o $@
 
 # -----------------------------------------------------------------
+# Kernel version and configurations.
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
+ifndef INSTALLED_KERNEL_TARGET
+$(warning No INSTALLED_KERNEL_TARGET is defined when \
+    PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS is true. OTA package will \
+    not contain information about the updated kernel)
+else
+intermediates := $(call intermediates-dir-for,ETC,extracted_kernel)
+my_kernel_configs := $(intermediates)/kernel_configs.txt
+my_kernel_version := $(intermediates)/kernel_version.txt
+$(my_kernel_configs): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
+	$< --input $(INSTALLED_KERNEL_TARGET) --output-configs $@
+$(my_kernel_version): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
+	$< --input $(INSTALLED_KERNEL_TARGET) --output-version $@
+
+intermediates :=
+my_kernel_configs :=
+my_kernel_version :=
+
+endif
+endif
+
+# -----------------------------------------------------------------
 # installed file list
 # Depending on anything that $(BUILT_SYSTEMIMAGE) depends on.
 # We put installed-files.txt ahead of image itself in the dependency graph
