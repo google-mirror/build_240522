@@ -535,6 +535,19 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
 # Remove corrupt generated rule due to using toybox's sed
 $(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates/system/core/init/generated_stub_builtin_function_map)
 
+# Remove `libopenjdk` and `libopenjdkd` from the system partition, now
+# that they have moved to the Android Runtime APEX.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/libopenjdk.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/libopenjdk.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/libopenjdkd.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/libopenjdkd.so)
+
+# Remove binaries and libraries installed on the system partition, to
+# ensure ART artifacts that used to be installed by modules
+# `art-runtime` and `art-tools` are deleted.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
