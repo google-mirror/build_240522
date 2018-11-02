@@ -1823,6 +1823,43 @@ $(BUILT_ASSEMBLED_SYSTEM_MANIFEST): $(FULL_SYSTEMIMAGE_DEPS)
 			sed "s/^/-i /" | tr '\n' ' ') -o $@
 
 # -----------------------------------------------------------------
+# Kernel version and configurations.
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
+ifndef INSTALLED_KERNEL_TARGET
+$(warning No INSTALLED_KERNEL_TARGET is defined when \
+    PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS is true. OTA package will \
+    not contain information about the updated kernel)
+else
+intermediates := $(call intermediates-dir-for,ETC,extracted_kernel)
+
+# Tools for decompression that is not in PATH.
+# Check $(EXTRACT_KERNEL) for decompression algorithms supported by the script.
+# Algorithms that are in the script but not in this list will be found in PATH.
+my_decompress_tools := \
+    lz4:$(HOST_OUT_EXECUTABLES)/lz4
+
+my_kernel_configs := $(intermediates)/kernel_configs.txt
+$(my_kernel_configs): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
+	$< --tools $(my_decompress_tools) --input $(INSTALLED_KERNEL_TARGET) --output-configs $@
+
+my_kernel_version := $(intermediates)/kernel_version.txt
+$(my_kernel_version): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
+	$< --tools $(my_decompress_tools) --input $(INSTALLED_KERNEL_TARGET) --output-version $@
+
+BUILT_ASSEMBLED_RUNTIME_INFO := $(intermediates)/verified_assembled_runtime_info.xml
+$(BUILT_ASSEMBLED_RUNTIME_INFO): PRIVATE_KERNEL_CONFIGS := $(my_kernel_configs)
+$(BUILT_ASSEMBLED_RUNTIME_INFO): PRIVATE_KERNEL_VERSION := $(my_kernel_version)
+$(BUILT_ASSEMBLED_RUNTIME_INFO): $(HOST_OUT_EXECUTABLES)/assemble_vintf $(my_kernel_configs) $(my_kernel_version)
+	$< --runtime-info --kernel $$(cat $(PRIVATE_KERNEL_VERSION)):$(PRIVATE_KERNEL_CONFIGS) -o $@
+
+intermediates :=
+my_kernel_configs :=
+my_kernel_version :=
+
+endif
+endif
+
+# -----------------------------------------------------------------
 # installed file list
 # Depending on anything that $(BUILT_SYSTEMIMAGE) depends on.
 # We put installed-files.txt ahead of image itself in the dependency graph
@@ -3333,6 +3370,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 		$(BUILT_ASSEMBLED_VENDOR_MANIFEST) \
 		$(BUILT_SYSTEM_MATRIX) \
 		$(BUILT_VENDOR_MATRIX) \
+		$(BUILT_ASSEMBLED_RUNTIME_INFO)
 		| $(ACP)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
@@ -3653,6 +3691,9 @@ ifdef BUILT_ASSEMBLED_VENDOR_MANIFEST
 endif
 ifdef BUILT_VENDOR_MATRIX
 	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
+endif
+ifdef BUILT_ASSEMBLED_RUNTIME_INFO
+	$(hide) cp $(BUILT_ASSEMBLED_RUNTIME_INFO) $(zip_root)/META/runtime_info.xml
 endif
 ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
 	$(hide) echo "super_size=$(BOARD_SUPER_PARTITION_SIZE)" >> $(zip_root)/META/misc_info.txt
