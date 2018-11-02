@@ -656,7 +656,7 @@ def AddCompatibilityArchiveIfTrebleEnabled(target_zip, output_zip, target_info,
           its metadata should be included.
     """
     # Determine what metadata we need. Files are names relative to META/.
-    compatibility_files = []
+    compatibility_files = ["runtime_info.xml"]
     vendor_metadata = ("vendor_manifest.xml", "vendor_matrix.xml")
     system_metadata = ("system_manifest.xml", "system_matrix.xml")
     if vendor_updated:
