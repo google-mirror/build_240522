@@ -49,7 +49,6 @@ PRODUCT_PACKAGES += \
     bu \
     bugreport \
     bugreportz \
-    charger \
     cmd \
     com.android.conscrypt \
     com.android.location.provider \
