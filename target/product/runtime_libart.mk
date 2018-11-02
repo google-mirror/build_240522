@@ -40,17 +40,12 @@ PRODUCT_PACKAGES += \
 # Libcore.
 PRODUCT_PACKAGES += \
     libjavacore \
-    libopenjdk \
 
 # Libcore ICU. TODO: Try to figure out if/why we need them explicitly.
 PRODUCT_PACKAGES += \
     libicui18n \
     libicuuc \
 
-# ART.
-PRODUCT_PACKAGES += art-runtime
-# ART/dex helpers.
-PRODUCT_PACKAGES += art-tools
 # Android Runtime APEX module.
 PRODUCT_PACKAGES += com.android.runtime
 

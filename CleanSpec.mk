@@ -535,6 +535,13 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
 # Remove corrupt generated rule due to using toybox's sed
 $(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates/system/core/init/generated_stub_builtin_function_map)
 
+# Remove binaries and libraries installed on /system, to ensure ART
+# artifacts that used to be installed on the system partition by
+# modules `art-runtime`, `art-tools`, `libopenjdk` and `libopenjdkd`
+# are deleted.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
