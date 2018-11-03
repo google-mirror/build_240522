@@ -307,7 +307,12 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   for info in input_tf_zip.infolist():
     filename = info.filename
     if filename.startswith("IMAGES/"):
-      continue
+      # External AOSP builds have IMAGES/vendor.img but no VENDOR/ directory.
+      # Therefore, add_img_to_target_files can't reconstruct vendor.img and we
+      # just need to copy it into the output zip.
+      if filename != "IMAGES/vendor.img" or (
+          "VENDOR/" in input_tf_zip.namelist()):
+        continue
 
     data = input_tf_zip.read(filename)
     out_info = copy.copy(info)
@@ -949,7 +954,7 @@ def main(argv):
   common.ZipClose(output_zip)
 
   # Skip building userdata.img and cache.img when signing the target files.
-  new_args = ["--is_signing"]
+  new_args = ["--is_signing", "--add_missing"]
   # add_img_to_target_files builds the system image from scratch, so the
   # recovery patch is guaranteed to be regenerated there.
   if OPTIONS.rebuild_recovery:
