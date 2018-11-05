@@ -86,9 +86,12 @@ def BuildVerityFEC(sparse_image_path, verity_path, verity_fec_path,
   common.RunAndCheckOutput(cmd)
 
 
-def BuildVerityTree(sparse_image_path, verity_image_path):
-  cmd = ["build_verity_tree", "-A", FIXED_SALT, sparse_image_path,
-         verity_image_path]
+def BuildVerityTree(sparse_image_path, verity_image_path, hash_algorithm=None):
+  cmd = ["build_verity_tree", "-A", FIXED_SALT]
+  if hash_algorithm:
+    cmd.extend(["--hash-algorithm", hash_algorithm])
+  cmd.extend([sparse_image_path, verity_image_path])
+
   output = common.RunAndCheckOutput(cmd)
   root, salt = output.split()
   return root, salt
@@ -528,6 +531,37 @@ def CreateHashtreeInfoGenerator(partition_name, block_size, info_dict):
   return generator
 
 
+def ValidateHashtreeInfo(image, hashtree_info):
+  """Checks that we can reconstruct the verity hash tree."""
+
+  # Writes the file system section to a temp file; and calls the executable
+  # build_verity_tree to construct the hash tree.
+  adjusted_partition = common.MakeTempFile(prefix="adjusted_partition")
+  with open(adjusted_partition, "wb") as fd:
+    image.WriteRangeDataToFd(hashtree_info.filesystem_range, fd)
+
+    generated_verity_tree = common.MakeTempFile(prefix="verity")
+    root_hash, salt = BuildVerityTree(adjusted_partition, generated_verity_tree,
+                                      hashtree_info.hash_algorithm)
+
+    # The salt should be always identical, as we use fixed value.
+    assert salt == hashtree_info.salt, \
+      "Calculated salt {} doesn't match the one in metadata {}".format(
+          salt, hashtree_info.salt)
+
+    if root_hash != hashtree_info.root_hash:
+      logger.warning(
+          "Calculated root hash %s doesn't match the one in metadata %s",
+          root_hash, hashtree_info.root_hash)
+      return False
+
+    # Reads the generated hash tree and checks if it has the exact same bytes
+    # as the one in the sparse image.
+    with open(generated_verity_tree, "rb") as fd:
+      return fd.read() == ''.join(image.ReadRangeSet(
+          hashtree_info.hashtree_range))
+
+
 class HashtreeInfoGenerator(object):
   def Generate(self, image):
     raise NotImplementedError
@@ -645,33 +679,7 @@ class VerifiedBootVersion1HashtreeInfoGenerator(HashtreeInfoGenerator):
     self.hashtree_info.salt = table_entries[9]
 
   def ValidateHashtree(self):
-    """Checks that we can reconstruct the verity hash tree."""
-
-    # Writes the filesystem section to a temp file; and calls the executable
-    # build_verity_tree to construct the hash tree.
-    adjusted_partition = common.MakeTempFile(prefix="adjusted_partition")
-    with open(adjusted_partition, "wb") as fd:
-      self.image.WriteRangeDataToFd(self.hashtree_info.filesystem_range, fd)
-
-    generated_verity_tree = common.MakeTempFile(prefix="verity")
-    root_hash, salt = BuildVerityTree(adjusted_partition, generated_verity_tree)
-
-    # The salt should be always identical, as we use fixed value.
-    assert salt == self.hashtree_info.salt, \
-        "Calculated salt {} doesn't match the one in metadata {}".format(
-            salt, self.hashtree_info.salt)
-
-    if root_hash != self.hashtree_info.root_hash:
-      logger.warning(
-          "Calculated root hash %s doesn't match the one in metadata %s",
-          root_hash, self.hashtree_info.root_hash)
-      return False
-
-    # Reads the generated hash tree and checks if it has the exact same bytes
-    # as the one in the sparse image.
-    with open(generated_verity_tree, "rb") as fd:
-      return fd.read() == ''.join(self.image.ReadRangeSet(
-          self.hashtree_info.hashtree_range))
+    return ValidateHashtreeInfo(self.image, self.hashtree_info)
 
   def Generate(self, image):
     """Parses and validates the hashtree info in a sparse image.
@@ -687,6 +695,66 @@ class VerifiedBootVersion1HashtreeInfoGenerator(HashtreeInfoGenerator):
     self.DecomposeSparseImage(image)
     self._ParseHashtreeMetadata()
 
+    if not self.ValidateHashtree():
+      raise HashtreeInfoGenerationError("Failed to reconstruct the verity tree")
+
+    return self.hashtree_info
+
+
+class VerifiedBootVersion2HashtreeInfoGenerator(HashtreeInfoGenerator):
+  def __init__(self, block_size):
+    self.block_size = block_size
+
+    self.image = None
+    self.hashtree_info = HashtreeInfo()
+
+  def ReadAvbHashtreeDescriptor(self, image_path):
+    self.image = sparse_img.SparseImage(image_path)
+
+    avb_command = ["avbtool", "hashtree_info", "--image", image_path]
+    output = common.RunAndCheckOutput(avb_command)
+    info_dict = {}
+    for line in output.split('\n'):
+      if "=" in line:
+        key, value = line.split("=", 1)
+        info_dict[key.strip()] = value.strip()
+
+    verity_version = info_dict.get("dm_verity_version")
+    if int(verity_version) != 1:
+      raise AssertionError("Unsupported dm verity version {}".format(
+          verity_version))
+
+    data_block_size = info_dict.get("data_block_size")
+    hash_block_size = info_dict.get("hash_block_size")
+    if (int(data_block_size) != self.block_size or
+        int(hash_block_size) != self.block_size):
+      raise AssertionError(
+          "Unexpected block size, expected {}, data block size {}, hash block"
+          " size {}".format(self.block_size, data_block_size, hash_block_size))
+
+    filesystem_size = int(info_dict.get("image_size"))
+    hashtree_offset = int(info_dict.get("tree_offset"))
+    hashtree_size = int(info_dict.get("tree_size"))
+    self.hashtree_info.filesystem_range = RangeSet(
+        data=[0, filesystem_size / self.block_size])
+    self.hashtree_info.hashtree_range = RangeSet(
+        data=[hashtree_offset / self.block_size,
+              (hashtree_offset + hashtree_size) / self.block_size])
+
+    self.hashtree_info.hash_algorithm = info_dict.get("hash_algorithm")
+    self.hashtree_info.salt = info_dict.get("salt")
+    root_digest = info_dict.get("root_digest")
+    if root_digest:
+      padded_digest_length = 2**len(root_digest).bit_length()
+      root_digest = root_digest + '0' * (padded_digest_length -
+                                         len(root_digest))
+    self.hashtree_info.root_hash = root_digest
+
+  def ValidateHashtree(self):
+    return ValidateHashtreeInfo(self.image, self.hashtree_info)
+
+  def Generate(self, image_path):
+    self.ReadAvbHashtreeDescriptor(image_path)
     if not self.ValidateHashtree():
       raise HashtreeInfoGenerationError("Failed to reconstruct the verity tree")
 

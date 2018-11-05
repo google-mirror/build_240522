@@ -26,7 +26,8 @@ from rangelib import RangeSet
 from test_utils import get_testdata_dir, ReleaseToolsTestCase
 from verity_utils import (
     CreateHashtreeInfoGenerator, CreateVerityImageBuilder, HashtreeInfo,
-    VerifiedBootVersion1HashtreeInfoGenerator)
+    VerifiedBootVersion1HashtreeInfoGenerator,
+    VerifiedBootVersion2HashtreeInfoGenerator)
 
 BLOCK_SIZE = common.BLOCK_SIZE
 
@@ -234,3 +235,69 @@ class VerifiedBootVersion2VerityImageBuilderTest(ReleaseToolsTestCase):
       self.assertLess(
           _SizeCalculator(min_partition_size - BLOCK_SIZE),
           image_size)
+
+
+class VerifiedBootVersion2HashtreeInfoGeneratorTest(ReleaseToolsTestCase):
+  def setUp(self):
+    self.hash_algorithm = "sha1"
+    self.fixed_salt = \
+      "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
+    self.expected_root_hash = \
+       "d568e4ccd400546acc771e5d5e7f6348159becf3000000000000000000000000"
+
+  def _create_simg(self, raw_data):
+    #output_file = common.MakeTempFile()
+    output_file = "/usr/local/google/home/xunchang/1/output"
+    raw_image = common.MakeTempFile()
+    with open(raw_image, 'wb') as f:
+      f.write(raw_data)
+
+    cmd = ["img2simg", raw_image, output_file, '4096']
+    p = common.Run(cmd)
+    p.communicate()
+    self.assertEqual(0, p.returncode)
+
+    return output_file
+
+  def _generate_image(self):
+    partition_size = 1024 * 1024
+    prop_dict = {
+      'partition_name': 'system',
+      'partition_size': partition_size,
+      'avb_avbtool': 'avbtool',
+      'avb_hashtree_enable': 'true',
+      'avb_salt': self.fixed_salt,
+      'avb_add_hashtree_footer_args': '--algorithm SHA256_RSA4096'
+                                      ' --key testdata/testkey_rsa4096.pem'
+    }
+
+    verity_image_builder = CreateVerityImageBuilder(prop_dict)
+    self.assertIsNotNone(verity_image_builder)
+    max_image_size = verity_image_builder.CalculateMaxImageSize()
+
+    raw_image = ""
+    for i in range(max_image_size):
+      raw_image += str(i % 10)
+
+    output_file = self._create_simg(raw_image)
+
+    verity_image_builder.Build(output_file)
+
+    return output_file
+
+  def test_GenerateImage(self):
+    self._generate_image()
+
+
+  def test_Generate(self):
+    image_path = self._generate_image()
+
+    generator = VerifiedBootVersion2HashtreeInfoGenerator(4096)
+    info = generator.Generate(image_path)
+
+    self.assertEqual(RangeSet(data=[0, 946176 / 4096]), info.filesystem_range)
+    self.assertEqual(RangeSet(data=[946176 / 4096, (946176 + 12288) / 4096]),
+                     info.hashtree_range)
+    self.assertEqual("sha1", info.hash_algorithm)
+    self.assertEqual(self.fixed_salt, info.salt)
+    self.assertEqual(self.expected_root_hash, info.root_hash)
