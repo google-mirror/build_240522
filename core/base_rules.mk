@@ -183,6 +183,20 @@ endif
 
 my_32_64_bit_suffix := $(if $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)IS_64_BIT),64,32)
 
+multi_arch :=
+arch_dir :=
+ifeq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)
+  is_native := true
+  multi_arch := true
+endif
+ifdef LOCAL_MULTILIB
+  multi_arch := true
+endif
+ifdef multi_arch
+  arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+endif
+multi_arch :=
+
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 ifeq ($(TARGET_TRANSLATE_2ND_ARCH),true)
 # When in TARGET_TRANSLATE_2ND_ARCH both TARGET_ARCH and TARGET_2ND_ARCH are 32-bit,
@@ -236,6 +250,9 @@ ifeq ($(my_module_path),)
 endif
 ifneq ($(my_module_relative_path),)
   my_module_path := $(my_module_path)/$(my_module_relative_path)
+  ifneq ($(arch_dir),)
+    my_module_path := $(my_module_path)/$(my_module_relative_path)$(arch_dir)
+  endif
 endif
 endif # not LOCAL_UNINSTALLABLE_MODULE
 
@@ -307,6 +324,20 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   endif
   endif
   LOCAL_INSTALLED_MODULE := $(my_module_path)/$(my_installed_module_stem)
+  multi_arch :=
+  arch_dir :=
+  ifeq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)
+    is_native := true
+    multi_arch := true
+  endif
+  ifdef LOCAL_MULTILIB
+    multi_arch := true
+  endif
+  ifdef multi_arch
+    arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+    LOCAL_INSTALLED_MODULE := $(my_module_path)$(arch_dir)/$(my_installed_module_stem)
+  endif
+  multi_arch :=
 endif
 
 # Assemble the list of targets to create PRIVATE_ variables for.
@@ -560,7 +591,7 @@ multi_arch :=
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
+    $(call compat-copy-pair,$(LOCAL_BUILT_MODULE),$(dir)/$(my_installed_module_stem)))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
 
