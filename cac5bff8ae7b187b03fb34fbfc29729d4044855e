@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36c20c69_41083a8c",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2018-11-06T11:29:49Z",
+      "side": 1,
+      "message": "Does it matter it\u0027s also referenced in nexus_experience.mk internally?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "cac5bff8ae7b187b03fb34fbfc29729d4044855e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
