@@ -46,6 +46,30 @@
       "revId": "cac5bff8ae7b187b03fb34fbfc29729d4044855e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e3243bd_f6d3bf73",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2018-11-06T11:37:31Z",
+      "side": 1,
+      "message": "Ok. I think the only possible wrinkle is that previously it was up to the OEM to decide if they wanted it, now it looks like the TimeZoneUpdater is going to be there whether the OEM plans to use it or not. It\u0027s not big, though, and if time zone updates are not enabled it should be entirely passive; listening for an intent that will never come.\n\nI suppose we could put it in the oem-specific portion if we wanted to avoid the space overhead. So long as system server is configured properly and the app has the correct permissions, nothing should mind. Perhaps something to think about later.",
+      "parentUuid": "2ea1632e_9bf2f776",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "cac5bff8ae7b187b03fb34fbfc29729d4044855e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
