@@ -16,6 +16,24 @@
       "revId": "b573941f850fd548cfc2cefcbd43bcbb1be825c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4ecd130_10d933d1",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-11-06T23:09:58Z",
+      "side": 1,
+      "message": "You can, but it\u0027s generally suggested not to.  It\u0027ll go in the default property file like this then get overridden once the persistent property file on /data gets loaded.",
+      "parentUuid": "93409c1f_3c309249",
+      "revId": "b573941f850fd548cfc2cefcbd43bcbb1be825c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
