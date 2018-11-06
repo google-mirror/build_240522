@@ -778,9 +778,33 @@ ifdef HOST_CROSS_OS
 $(call resolve-shared-libs-depes,HOST_CROSS_,,true)
 endif
 
+# Pass the shared libraries dependencies to prebuilt ELF file check.
+define add-elf-file-check-shared-lib
+$(1): PRIVATE_SHARED_LIBRARY_FILES += $(2)
+$(1): $(2)
+endef
+
+define resolve-shared-libs-for-elf-file-check
+$(foreach m,$($(if $(2),$($(1)2ND_ARCH_VAR_PREFIX))$(1)DEPENDENCIES_ON_SHARED_LIBRARIES),\
+  $(eval p := $(subst :,$(space),$(m)))\
+  $(eval mod := $(firstword $(p)))\
+  $(eval deps := $(subst $(comma),$(space),$(lastword $(p))))\
+  $(eval root := $(1)OUT$(if $(call streq,$(1),TARGET_),_ROOT))\
+  $(if $(2),$(eval deps := $(addsuffix $($(1)2ND_ARCH_MODULE_SUFFIX),$(deps))))\
+  $(eval elfcheck := $(dir $(firstword $(call module-built-files,$(mod))))elf_file_checked.timestamp)\
+  $(eval deps := $(filter $($(root))/%$($(1)SHLIB_SUFFIX),$(call module-built-files,$(deps))))\
+  $(eval $(call add-elf-file-check-shared-lib,$(elfcheck),$(deps))))
+endef
+
+$(call resolve-shared-libs-for-elf-file-check,TARGET_)
+ifdef TARGET_2ND_ARCH
+$(call resolve-shared-libs-for-elf-file-check,TARGET_,true)
+endif
+
 m :=
 r :=
 p :=
+elfcheck :=
 deps :=
 add-required-deps :=
 
@@ -1510,6 +1534,9 @@ findbugs: $(INTERNAL_FINDBUGS_HTML_TARGET) $(INTERNAL_FINDBUGS_XML_TARGET)
 
 .PHONY: findlsdumps
 findlsdumps: $(FIND_LSDUMPS_FILE)
+
+.PHONY: check-prebuilt-elf-files
+check-prebuilt-elf-files:
 
 #xxx scrape this from ALL_MODULE_NAME_TAGS
 .PHONY: modules

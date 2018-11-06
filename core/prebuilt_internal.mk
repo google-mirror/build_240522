@@ -170,6 +170,38 @@ my_common :=
 include $(BUILD_SYSTEM)/link_type.mk
 endif  # prebuilt_module_is_a_library
 
+# Check prebuilt ELF binaries.
+#
+# This check ensures that DT_SONAME matches with the filename, DT_NEEDED
+# matches the shared libraries specified in LOCAL_SHARED_LIBRARIES, and all
+# undefined symbols in the prebuilt binrary can be found in one of the shared
+# libraries specified in LOCAL_SHARED_LIBRARIES.
+ifndef LOCAL_IS_HOST_MODULE
+ifneq ($(filter $(LOCAL_MODULE_CLASS),SHARED_LIBRARIES EXECUTABLES NATIVE_TESTS),)
+my_elf_file_checked := $(intermediates)/elf_file_checked.timestamp
+$(my_elf_file_checked): PRIVATE_SONAME := $(if $(prebuilt_module_is_a_library),$(my_installed_module_stem))
+$(my_elf_file_checked): PRIVATE_ALLOW_UNDEFINED_SYMBOLS := $(LOCAL_ALLOW_UNDEFINED_SYMBOLS)
+$(my_elf_file_checked): PRIVATE_SHARED_LIBRARY_FILES := # Filled by `core/main.mk`
+$(my_elf_file_checked): $(my_prebuilt_src_file) $(CHECK_ELF_FILE)
+	@echo Check prebuilt binary: $<
+	$(hide) mkdir -p $(dir $@)
+	$(hide) rm -f $@
+	$(hide) $(CHECK_ELF_FILE) \
+	    --skip-bad-elf-magic \
+	    --skip-unknown-elf-machine \
+	    $(if $(PRIVATE_SONAME),--soname $(PRIVATE_SONAME)) \
+	    $(foreach l,$(PRIVATE_SHARED_LIBRARY_FILES),--shared-lib $(l)) \
+	    $(if $(PRIVATE_ALLOW_UNDEFINED_SYMBOLS),,--disallow-unresolved-symbols) \
+	    $< -o $@
+	$(hide) touch $@
+
+ifeq ($(LOCAL_NO_ELF_FILE_CHECK),)
+$(LOCAL_BUILT_MODULE): $(my_elf_file_checked)
+check-prebuilt-elf-files: $(my_elf_file_checked)
+endif
+endif  # SHARED_LIBRARIES, EXECUTABLES, NATIVE_TESTS
+endif  # !LOCAL_IS_HOST_MODULE
+
 # The real dependency will be added after all Android.mks are loaded and the install paths
 # of the shared libraries are determined.
 ifdef LOCAL_INSTALLED_MODULE
