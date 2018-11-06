@@ -214,6 +214,7 @@ _product_var_list := \
     PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS \
     PRODUCT_XOM_EXCLUDE_PATHS \
     PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES \
+    PRODUCT_CHECK_ELF_FILES \
 
 define dump-product
 $(info ==== $(1) ====)\
