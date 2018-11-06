@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93409c1f_3c309249",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-06T23:08:26Z",
+      "side": 1,
+      "message": "I don\u0027t think you can set persist properties in the build, persist properties are stored on /data which is not generated during the build.",
+      "revId": "b573941f850fd548cfc2cefcbd43bcbb1be825c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
