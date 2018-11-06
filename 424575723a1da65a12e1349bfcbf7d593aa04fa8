@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad1a8369_aa6ba87d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1659,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-06T23:09:56Z",
+      "side": 1,
+      "message": "nit: move this line below L1660 since it\u0027s \"modifying\"",
+      "range": {
+        "startLine": 1659,
+        "startChar": 2,
+        "endLine": 1659,
+        "endChar": 3
+      },
+      "revId": "424575723a1da65a12e1349bfcbf7d593aa04fa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
