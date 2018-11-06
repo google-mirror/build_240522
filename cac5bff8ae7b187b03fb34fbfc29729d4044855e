@@ -22,6 +22,30 @@
       "revId": "cac5bff8ae7b187b03fb34fbfc29729d4044855e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea1632e_9bf2f776",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-06T11:31:54Z",
+      "side": 1,
+      "message": "No, dupes are fine (as is referencing non-existant packages, usually..).\n\nI might do a global sweep internally and remove dupes, when the dust has settled.",
+      "parentUuid": "36c20c69_41083a8c",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "cac5bff8ae7b187b03fb34fbfc29729d4044855e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
