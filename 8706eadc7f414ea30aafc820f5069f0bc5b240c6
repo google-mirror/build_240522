@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ceec6ba_15be9b53",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-07T20:00:23Z",
+      "side": 1,
+      "message": "The logic doesn\u0027t seem right to me. CalculateDynamicPartitionSize() should take the FSImageSize, which doesn\u0027t contain AvbMetadataSize. That is, it returns \"FSImageSize + AvbMetadataSize\" for the given FSImageSize.\n\nAfter the first pass, old_size \u003d\u003d FSImageSize + AvbMetadataSize. It then does some adjustments to FSImageSize between L285-L295, so the resulting size at L300 should be \"FSImageSize-adjusted + AvbMetadataSize\". But then L301 sends this sum to CalculateDynamicPartitionSize()?",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 73
+      },
+      "revId": "8706eadc7f414ea30aafc820f5069f0bc5b240c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
