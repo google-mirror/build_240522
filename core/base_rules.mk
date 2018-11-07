@@ -284,7 +284,11 @@ ifneq ($(LOCAL_OVERRIDES_MODULES),)
       $(call pretty-error,host modules cannot use LOCAL_OVERRIDES_MODULES)
     endif
   else
+    ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+      SHARED_LIBRARIES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_MODULES))
+    else
       $(call pretty-error,LOCAL_MODULE_CLASS := $(LOCAL_MODULE_CLASS) cannot use LOCAL_OVERRIDES_MODULES)
+    endif
   endif
 endif
 
