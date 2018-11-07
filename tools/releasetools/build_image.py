@@ -274,6 +274,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       prop_dict["mount_point"] = original_mount_point
       BuildImage(in_dir, prop_dict, out_file, target_out)
       fs_dict = GetFilesystemCharacteristics(out_file)
+      os.remove(out_file)
       block_size = int(fs_dict.get("Block size", "4096"))
       free_size = int(fs_dict.get("Free blocks", "0")) * block_size
       reserved_size = int(prop_dict.get("partition_reserved_size", 0))
@@ -281,12 +282,23 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
         logger.info(
             "Not worth reducing image %d <= %d.", free_size, reserved_size)
       else:
+        old_size = size
         size -= free_size
         size += reserved_size
+        # Heuristic to account for space released by reduction in tracking of
+        # free list. Confidence in the adjustment drops if free space is > 10%.
+        if verity_image_builder:
+          size -= (old_size - size) // 59
+        elif old_size > ((old_size - size) * 10):
+          size -= (old_size - size) // 61
+        else:
+          size -= (old_size - size) // 120
         if block_size <= 4096:
           size = common.RoundUpTo4K(size)
         else:
           size = ((size + block_size - 1) // block_size) * block_size
+        if verity_image_builder:
+          size = verity_image_builder.CalculateDynamicPartitionSize(size)
       extfs_inode_count = prop_dict["extfs_inode_count"]
       inodes = int(fs_dict.get("Inode count", extfs_inode_count))
       inodes -= int(fs_dict.get("Free inodes", "0"))
