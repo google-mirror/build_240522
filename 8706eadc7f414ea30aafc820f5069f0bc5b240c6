@@ -22,6 +22,30 @@
       "revId": "8706eadc7f414ea30aafc820f5069f0bc5b240c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9fd1c24_8d9a1f20",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-07T20:08:31Z",
+      "side": 1,
+      "message": "(I\u0027m fine to submit this to unbreak builds. But feels like we may want some refactoring to a) compute the ideal value for FSImageSize but without any verity stuff in the first pass, then b) call CalculateDynamicPartitionSize() to add the AvbMetadataSize as the final partition size.)",
+      "parentUuid": "3ceec6ba_15be9b53",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 73
+      },
+      "revId": "8706eadc7f414ea30aafc820f5069f0bc5b240c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
