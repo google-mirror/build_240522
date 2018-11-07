@@ -88,6 +88,7 @@ def GetFilesystemCharacteristics(sparse_image_path):
   Returns:
     The characteristics dictionary.
   """
+  print("GetFilesystemCharacteristics({})".format(sparse_image_path))
   unsparse_image_path = UnsparseImage(sparse_image_path, replace=False)
 
   cmd = ["tune2fs", "-l", unsparse_image_path]
@@ -100,6 +101,7 @@ def GetFilesystemCharacteristics(sparse_image_path):
     fields = line.split(":")
     if len(fields) == 2:
       fs_dict[fields[0].strip()] = fields[1].strip()
+      print("{}={}".format(fields[0].strip(), fields[1].strip()))
   return fs_dict
 
 
@@ -422,6 +424,10 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       partition_headroom = int(fs_dict.get("partition_headroom", 0))
       if fs_type.startswith("ext4") and partition_headroom > reserved_size:
         reserved_size = partition_headroom
+      my_fs_type = fs_type
+      if "ext4_share_dup_blocks" in prop_dict:
+        my_fs_type += "-dedupe"
+      print("fs_type={} size={} inode={} block_size={} free_size={} reserved_size={}".format(my_fs_type, size, prop_dict["extfs_inode_count"], block_size, free_size, reserved_size))
       if free_size <= reserved_size:
         logger.info(
             "Not worth reducing image %d <= %d.", free_size, reserved_size)
@@ -445,6 +451,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       inodes = inodes * 1002 // 1000
       prop_dict["extfs_inode_count"] = str(inodes)
       prop_dict["partition_size"] = str(size)
+      print("size={} inode={}".format(size, inodes))
       logger.info(
           "Allocating %d Inodes for %s.", inodes, out_file)
     if verity_image_builder:
@@ -771,6 +778,14 @@ def main(argv):
 
   try:
     BuildImage(in_dir, image_properties, out_file, target_out)
+    fs_type = image_properties.get("fs_type", "")
+    if fs_type.startswith("ext"):
+      fs_dict = GetFilesystemCharacteristics(out_file)
+      inodes = int(fs_dict.get("Inode count", "0"))
+      free_inodes = int(fs_dict.get("Free inodes", "0"))
+      block_size = int(fs_dict.get("Block size", "4096"))
+      free_size = int(fs_dict.get("Free blocks", "0")) * block_size
+      print("size={} inode={} free_inode={} block_size={} free_size={}".format(image_properties["partition_size"], inodes, free_inodes, block_size, free_size))
   except:
     logger.error("Failed to build %s from %s", out_file, in_dir)
     raise
