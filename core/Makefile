@@ -1514,11 +1514,59 @@ else
 recovery_font := $(call include-path-for, recovery)/fonts/12x22.png
 endif
 
+RECOVERY_FONT_FILES_DIR := \
+	$(call intermediates-dir-for,PACKAGING,recovery_font_file)
+$(RECOVERY_FONT_FILES_DIR): PRIVATE_SOURCE_FONT := $(recovery_noto-fonts_dep) $(recovery_roboto-fonts_dep)
+$(RECOVERY_FONT_FILES_DIR): $(recovery_noto-fonts_dep) $(recovery_roboto-fonts_dep)
+	@rm -rf $@
+	@mkdir -p $@
+	$(foreach filename,$(PRIVATE_SOURCE_FONT), cp $(filename) $@;)
+
+# Set the recovery screen width according to the dpi if it's not initialized elsewhere.
+ifeq ($(recovery_density),xxxhdpi)
+TARGET_RECOVERY_UI_SCREEN_WIDTH ?= 1440
+else ifeq ($(recovery_density),xxhdpi)
+TARGET_RECOVERY_UI_SCREEN_WIDTH ?= 1080
+endif
+
+# Generates the recovery background text images only if TARGET_RECOVERY_UI_SCREEN_WIDTH is defined.
+# This variable is defined for devices with xxxhdpi and xxhdpi, and optional for lower density
+# devices. We can also set a device specific variable to control these image generations.
+ifneq ($(TARGET_RECOVERY_UI_SCREEN_WIDTH),)
+# Subtracts the margin width and menu indent from the screen width; it's safe to be conservative.
+ifeq ($(TARGET_RECOVERY_UI_MARGIN_WIDTH),)
+  recovery_image_width := $$(($(TARGET_RECOVERY_UI_SCREEN_WIDTH) - 10))
+else
+  recovery_image_width := $$(($(TARGET_RECOVERY_UI_SCREEN_WIDTH) - $(TARGET_RECOVERY_UI_MARGIN_WIDTH) - 10))
+endif
+
+RECOVERY_BACKGROUND_TEXT_RESOURCES := \
+	$(call intermediates-dir-for,PACKAGING,background_text_resources)
+resource_dir := $(call include-path-for, recovery)/tools/recovery_l10n/res/
+image_generator_jar := $(HOST_OUT_JAVA_LIBRARIES)/RecoveryImageGenerator.jar
+recovery_text_list := recovery_installing recovery_erasing recovery_no_command recovery_error recovery_installing_security
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_RECOVERY_FONT_FILES_DIR := $(RECOVERY_FONT_FILES_DIR)
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_RESOURCE_DIR := $(resource_dir)
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_IMAGE_GENERATOR_JAR := $(image_generator_jar)
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): $(image_generator_jar) $(resource_dir) $(RECOVERY_FONT_FILES_DIR)
+	@rm -rf $@
+	@mkdir -p $@
+	$(foreach text_name,$(recovery_text_list), \
+	  java -jar $(PRIVATE_IMAGE_GENERATOR_JAR) \
+	    --image_width $(recovery_image_width) \
+	    --text_name $(text_name) \
+	    --font_dir $(PRIVATE_RECOVERY_FONT_FILES_DIR) \
+	    --resource_dir $(PRIVATE_RESOURCE_DIR) \
+	    --output_file $@/$(patsubst recovery_%,%_text.png,$(text_name)); true;)
+endif
+
 ifndef TARGET_PRIVATE_RES_DIRS
 TARGET_PRIVATE_RES_DIRS := $(wildcard $(TARGET_DEVICE_DIR)/recovery/res)
 endif
 recovery_resource_deps := $(shell find $(recovery_resources_common) \
   $(TARGET_PRIVATE_RES_DIRS) -type f)
+recovery_resource_deps += $(RECOVERY_BACKGROUND_TEXT_RESOURCES)
+
 ifdef TARGET_RECOVERY_FSTAB
 recovery_fstab := $(TARGET_RECOVERY_FSTAB)
 else
@@ -1660,6 +1708,8 @@ define build-recoveryimage-target
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/res
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/res/*
   $(hide) cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
+  $(if $(RECOVERY_BACKGROUND_TEXT_RESOURCES), \
+    $(hide) cp -rf $(RECOVERY_BACKGROUND_TEXT_RESOURCES)/* $(TARGET_RECOVERY_ROOT_OUT)/res/images)
   $(hide) cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
   $(hide) $(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
     cp -rf $(item) $(TARGET_RECOVERY_ROOT_OUT)/$(newline))
