@@ -89,6 +89,8 @@ def GetFilesystemCharacteristics(image_path, sparse_image=True):
   Returns:
     The characteristics dictionary.
   """
+  logger.info(
+      "GetFilesystemCharacteristics(%s,%d)", image_path, sparse_image)
   unsparse_image_path = image_path
   if sparse_image:
     unsparse_image_path = UnsparseImage(image_path, replace=False)
@@ -104,6 +106,8 @@ def GetFilesystemCharacteristics(image_path, sparse_image=True):
     fields = line.split(":")
     if len(fields) == 2:
       fs_dict[fields[0].strip()] = fields[1].strip()
+      logger.info(
+          "%s=%s", fields[0].strip(), fields[1].strip())
   return fs_dict
 
 
@@ -429,6 +433,13 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       partition_headroom = int(fs_dict.get("partition_headroom", 0))
       if fs_type.startswith("ext4") and partition_headroom > reserved_size:
         reserved_size = partition_headroom
+      my_fs_type = fs_type
+      if "ext4_share_dup_blocks" in prop_dict:
+        my_fs_type += "-dedupe"
+      logger.info(
+          "fs_type=%s size=%d inode=%d block_size=%d free_size=%d reserved_size=%d",
+          my_fs_type, size, prop_dict["extfs_inode_count"], block_size,
+          free_size, reserved_size)
       if free_size <= reserved_size:
         logger.info(
             "Not worth reducing image %d <= %d.", free_size, reserved_size)
@@ -453,7 +464,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       prop_dict["extfs_inode_count"] = str(inodes)
       prop_dict["partition_size"] = str(size)
       logger.info(
-          "Allocating %d Inodes for %s.", inodes, out_file)
+          "Allocating %d Bytes %d Inodes for %s.", size, inodes, out_file)
     if verity_image_builder:
       size = verity_image_builder.CalculateDynamicPartitionSize(size)
     prop_dict["partition_size"] = str(size)
@@ -778,6 +789,20 @@ def main(argv):
 
   try:
     BuildImage(in_dir, image_properties, out_file, target_out)
+    fs_type = image_properties.get("fs_type", "")
+    if fs_type.startswith("ext"):
+      sparse_image = False
+      if "extfs_sparse_flag" in image_properties:
+        sparse_image = True
+      fs_dict = GetFilesystemCharacteristics(out_file, sparse_image)
+      inodes = int(fs_dict.get("Inode count", "0"))
+      free_inodes = int(fs_dict.get("Free inodes", "0"))
+      block_size = int(fs_dict.get("Block size", "4096"))
+      free_size = int(fs_dict.get("Free blocks", "0")) * block_size
+      logger.info(
+          "size=%d inode=%d free_inode=%d block_size=%d free_size=%d",
+          image_properties["partition_size"], inodes, free_inodes,
+          block_size, free_size)
   except:
     logger.error("Failed to build %s from %s", out_file, in_dir)
     raise
