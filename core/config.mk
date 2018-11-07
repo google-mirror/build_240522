@@ -874,6 +874,14 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
   endif
 endif
 
+ifdef PRODUCT_SHIPPING_API_LEVEL
+  ifeq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+    ifeq ($(TARGET_FLATTEN_APEXS),true)
+      $(error TARGET_FLATTEN_APEXS cannot be true when PRODUCT_SHIPPING_API_LEVEL >= 29)
+    endif
+  endif
+endif
+
 # The default key if not set as LOCAL_CERTIFICATE
 ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
   DEFAULT_SYSTEM_DEV_CERTIFICATE := $(PRODUCT_DEFAULT_DEV_CERTIFICATE)
