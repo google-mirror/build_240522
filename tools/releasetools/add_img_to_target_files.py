@@ -657,7 +657,7 @@ def AddSuperEmpty(output_zip):
 
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "super_empty.img")
   cmd = [OPTIONS.info_dict.get('lpmake')]
-  cmd += shlex.split(OPTIONS.info_dict.get('lpmake_args').strip())
+  cmd += shlex.split(OPTIONS.info_dict.get('lpmake_empty_args').strip())
   cmd += ['--output', img.name]
 
   proc = common.Run(cmd)
@@ -666,6 +666,34 @@ def AddSuperEmpty(output_zip):
       "lpmake tool failed:\n{}".format(stdoutdata)
 
   img.Write()
+
+
+def AddSuperSplit(output_zip):
+  """Create split super_*.img and store it in output_zip."""
+
+  outdir = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "")
+  cmd = [OPTIONS.info_dict.get('lpmake')]
+  cmd += shlex.split(OPTIONS.info_dict.get('lpmake_args').strip())
+
+  source = OPTIONS.info_dict.get('dynamic_partition_list', '').strip()
+  if source:
+    cmd.append('--sparse')
+    for name in shlex.split(source):
+      img = os.path.join(OPTIONS.input_tmp, "IMAGES", '{}.img'.format(name))
+      # Because --auto-slot-suffixing for A/B, there is no need to add suffix here.
+      cmd += ['--image', '{}={}'.format(name, img)]
+
+  cmd += ['--output', outdir.name]
+
+  proc = common.Run(cmd)
+  stdoutdata, _ = proc.communicate()
+  assert proc.returncode == 0, \
+      "lpmake tool failed:\n{}".format(stdoutdata)
+
+  for dev in OPTIONS.info_dict.get('super_block_devices').strip().split():
+    img = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
+                     "super_" + dev + ".img")
+    img.Write()
 
 
 def ReplaceUpdatedFiles(zip_filename, files_list):
@@ -861,9 +889,15 @@ def AddImagesToTargetFiles(filename):
     banner("vbmeta")
     AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
 
-  if OPTIONS.info_dict.get("super_size"):
+  if OPTIONS.info_dict.get("lpmake_empty_args"):
     banner("super_empty")
     AddSuperEmpty(output_zip)
+
+  if OPTIONS.info_dict.get("lpmake_args"):
+    if OPTIONS.info_dict.get("dynamic_partition_retrofit") == "true":
+      banner("super split images")
+      AddSuperSplit(output_zip)
+    # TODO(b/119322123): Add super.img to target_files for non-retrofit
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
