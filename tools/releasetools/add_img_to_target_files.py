@@ -150,7 +150,7 @@ def AddSystem(output_zip, recovery_img=None, boot_img=None):
 
   block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system", img,
-              block_list=block_list)
+              block_list=block_list, output_props=True)
 
   return img.name
 
@@ -164,7 +164,8 @@ def AddSystemOther(output_zip):
     logger.info("system_other.img already exists; no need to rebuild...")
     return
 
-  CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system_other", img)
+  CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system_other", img,
+              output_props=False)
 
 
 def AddVendor(output_zip):
@@ -178,7 +179,7 @@ def AddVendor(output_zip):
 
   block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "vendor", img,
-              block_list=block_list)
+              block_list=block_list, output_props=True)
   return img.name
 
 
@@ -195,7 +196,7 @@ def AddProduct(output_zip):
       output_zip, OPTIONS.input_tmp, "IMAGES", "product.map")
   CreateImage(
       OPTIONS.input_tmp, OPTIONS.info_dict, "product", img,
-      block_list=block_list)
+      block_list=block_list, output_props=True)
   return img.name
 
 
@@ -213,7 +214,7 @@ def AddProductServices(output_zip):
       output_zip, OPTIONS.input_tmp, "IMAGES", "product_services.map")
   CreateImage(
       OPTIONS.input_tmp, OPTIONS.info_dict, "product_services", img,
-      block_list=block_list)
+      block_list=block_list, output_props=True)
   return img.name
 
 
@@ -229,7 +230,7 @@ def AddOdm(output_zip):
       output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
   CreateImage(
       OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
-      block_list=block_list)
+      block_list=block_list, output_props=False)
   return img.name
 
 
@@ -270,7 +271,12 @@ def AddDtbo(output_zip):
   return img.name
 
 
-def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
+def CreateImage(input_dir, info_dict, what, output_file,
+    block_list=None, output_props=None):
+  """
+  Set output_props to True if it is a dynamic partition, so that its size can
+  be used when building super images.
+  """
   logger.info("creating " + what + ".img...")
 
   image_props = build_image.ImagePropFromGlobalDict(info_dict, what)
@@ -330,6 +336,8 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
       image_blocks_key = what + "_image_blocks"
       info_dict[image_blocks_key] = int(image_size) / 4096 - 1
 
+  if output_props:
+    info_dict.update(build_image.GlobalDictFromImageProp(image_props, what))
 
 def AddUserdata(output_zip):
   """Create a userdata image and store it in output_zip.
@@ -656,7 +664,7 @@ def AddSuperEmpty(output_zip):
   """Create a super_empty.img and store it in output_zip."""
 
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "super_empty.img")
-  cmd = [OPTIONS.info_dict.get('lpmake')]
+  cmd = [OPTIONS.info_dict['lpmake']]
   cmd += shlex.split(OPTIONS.info_dict.get('lpmake_args').strip())
   cmd += ['--output', img.name]
 
@@ -666,6 +674,58 @@ def AddSuperEmpty(output_zip):
       "lpmake tool failed:\n{}".format(stdoutdata)
 
   img.Write()
+
+
+def AddSuperSplit(output_zip):
+  """Create split super_*.img and store it in output_zip."""
+
+  def TransformPartitionArg(arg):
+    lst = arg.split(':')
+    # Because --auto-slot-suffixing for A/B, there is no need to remove suffix.
+    name = lst[0]
+    assert name + '_size' in OPTIONS.info_dict, (
+        "{} is a prebuilt. Dynamic partitions with prebuilt images "
+        "are not supported yet.".format(name))
+    size = OPTIONS.info_dict[name + '_size']
+    assert size is not None, \
+        '{}_size is not found; is {} built?'.format(name)
+    lst[2] = str(size)
+    return ':'.join(lst)
+
+  def GetLpmakeArgsWithSizes():
+    lpmake_args = shlex.split(OPTIONS.info_dict.get('lpmake_args').strip())
+
+    for i in range(len(lpmake_args)):
+      if lpmake_args[i] == '--partition':
+        assert i + 1 < len(lpmake_args), \
+          'lpmake_args has --partition without value'
+        lpmake_args[i + 1] = TransformPartitionArg(lpmake_args[i + 1])
+
+    return lpmake_args
+
+  outdir = OutputFile(output_zip, OPTIONS.input_tmp, "OTA", "")
+  cmd = [OPTIONS.info_dict['lpmake']]
+  cmd += GetLpmakeArgsWithSizes()
+
+  source = OPTIONS.info_dict.get('dynamic_partition_list', '').strip()
+  if source:
+    cmd.append('--sparse')
+    for name in shlex.split(source):
+      img = os.path.join(OPTIONS.input_tmp, "IMAGES", '{}.img'.format(name))
+      # Because --auto-slot-suffixing for A/B, there is no need to add suffix.
+      cmd += ['--image', '{}={}'.format(name, img)]
+
+  cmd += ['--output', outdir.name]
+
+  proc = common.Run(cmd)
+  stdoutdata, _ = proc.communicate()
+  assert proc.returncode == 0, \
+      "lpmake tool failed:\n{}".format(stdoutdata)
+
+  for dev in OPTIONS.info_dict['super_block_devices'].strip().split():
+    img = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
+                     "super_" + dev + ".img")
+    img.Write()
 
 
 def ReplaceUpdatedFiles(zip_filename, files_list):
@@ -861,9 +921,14 @@ def AddImagesToTargetFiles(filename):
     banner("vbmeta")
     AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
 
-  if OPTIONS.info_dict.get("super_size"):
+  if OPTIONS.info_dict.get("lpmake_args"):
     banner("super_empty")
     AddSuperEmpty(output_zip)
+
+    if OPTIONS.info_dict.get("dynamic_partition_retrofit") == "true":
+      banner("super split images")
+      AddSuperSplit(output_zip)
+    # TODO(b/119322123): Add super.img to target_files for non-retrofit
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
