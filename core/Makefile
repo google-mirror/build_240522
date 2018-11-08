@@ -2925,6 +2925,7 @@ endef
 
 # $(1): slot A suffix (_a or empty)
 # $(2): include images or not (true or empty)
+# $(3): include image sizes or not (true or empty)
 define build-superimage-target-args
   $(if $(2), --sparse) \
   --metadata-size 65536 \
@@ -2937,7 +2938,7 @@ define build-superimage-target-args
     --group $(group)$(1):$(BOARD_$(call to-upper,$(group))_SIZE) \
     $(if $(1), --group $(group)_b:$(BOARD_$(call to-upper,$(group))_SIZE)) \
     $(foreach name,$(BOARD_$(call to-upper,$(group))_PARTITION_LIST), \
-      --partition $(name)$(1):readonly:$(if $(2),$(call read-size-of-partitions,$(name)),0):$(group)$(1) \
+      --partition $(name)$(1):readonly:$(if $(3),$(call read-size-of-partitions,$(name)),0):$(group)$(1) \
       $(if $(2), --image $(name)$(1)=$(call images-for-partitions,$(name))) \
       $(if $(1), --partition $(name)_b:readonly:0:$(group)_b) \
   ))
@@ -2948,7 +2949,7 @@ endef
 # $(3): include images or not (true or empty)
 define build-superimage-target
   $(LPMAKE) \
-    $(call build-superimage-target-args,$(2),$(3)) \
+    $(call build-superimage-target-args,$(2),$(3),$(3)) \
     --output $(1)
 endef
 
@@ -3675,12 +3676,26 @@ endif
 ifdef BUILT_VENDOR_MATRIX
 	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
 endif
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+	$(hide) echo "dynamic_partition_use=true" >> $(zip_root)/META/misc_info.txt
+endif
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+	$(hide) echo "dynamic_partition_retrofit=true" >> $(zip_root)/META/misc_info.txt
+endif
 ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
-	$(hide) echo "super_size=$(BOARD_SUPER_PARTITION_SIZE)" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo "lpmake=$(notdir $(LPMAKE))" >> $(zip_root)/META/misc_info.txt
-	$(hide) echo -n "lpmake_args=" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo -n "lpmake_empty_args=" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo $(call build-superimage-target-args,$(call super-slot-suffix)) \
 	    >> $(zip_root)/META/misc_info.txt
+	$(hide) echo -n "lpmake_args=" >> $(zip_root)/META/misc_info.txt
+	$(hide) echo $(call build-superimage-target-args,$(call super-slot-suffix),,true) \
+	    >> $(zip_root)/META/misc_info.txt
+endif
+ifneq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+	$(hide) echo "super_block_devices=$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)" >> $(zip_root)/META/misc_info.txt
+endif
+ifneq ($(BOARD_SUPER_PARTITION_PARTITION_LIST),)
+	$(hide) echo "dynamic_partition_list=$(BOARD_SUPER_PARTITION_PARTITION_LIST)" >> $(zip_root)/META/misc_info.txt
 endif
 ifneq ($(BOARD_SUPER_PARTITION_GROUPS),)
 	$(hide) echo "super_partition_groups=$(BOARD_SUPER_PARTITION_GROUPS)" > $(zip_root)/META/dynamic_partitions_info.txt
