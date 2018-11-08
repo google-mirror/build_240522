@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d117daa2_2d08c1c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2018-11-08T08:10:39Z",
+      "side": 1,
+      "message": "Changed to TARGET_FLATTEN_APEX, thanks!",
+      "parentUuid": "19ebf9a7_60106fe7",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "ea9992a2be98750db64c6aa3844dad6823d12857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "09e752aa_4510aa6b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1442bb50_bef7ffeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2018-11-08T08:10:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09e752aa_4510aa6b",
+      "range": {
+        "startLine": 10,
+        "startChar": 9,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "ea9992a2be98750db64c6aa3844dad6823d12857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c50133fd_560e9ba6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "ea9992a2be98750db64c6aa3844dad6823d12857",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbd19e82_2818c606",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2018-11-08T08:10:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c50133fd_560e9ba6",
+      "range": {
+        "startLine": 12,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "ea9992a2be98750db64c6aa3844dad6823d12857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
