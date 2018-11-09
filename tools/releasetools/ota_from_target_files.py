@@ -1778,6 +1778,11 @@ def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
 
   common.ZipClose(target_zip)
 
+  with zipfile.ZipFile(target_file, 'r') as tmp:
+    for info in tmp.infolist():
+      if info.filename in replace:
+        logger.info("{}: {} size = {}".format(target_file, info.filename, info.file_size))
+
   return target_file
 
 

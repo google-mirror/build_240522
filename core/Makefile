@@ -3770,6 +3770,13 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 .PHONY: otapackage
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 
+.PHONY: otapackage_nodeps
+otapackage_nodeps: KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
+otapackage_nodeps: build/make/tools/releasetools/ota_from_target_files
+	@echo "Package OTA without deps: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)"
+	$(call build-ota-package-target,$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET),-k $(KEY_CERT_PAIR))
+
+
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
 name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
@@ -3796,7 +3803,46 @@ $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BUILT_TARGET_FILES
 
 otardppackage: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)
 
+.PHONY: otardppackage_nodeps
+otardppackage_nodeps: KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
+otardppackage_nodeps: build/make/tools/releasetools/ota_from_target_files
+	@echo "Package OTA (retrofit dynamic partitions) without deps: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)"
+	$(call build-ota-package-target,$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET),-k $(KEY_CERT_PAIR) --retrofit_dynamic_partitions)
+
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+
+ifneq ($(BASE_TARGET_FILES),)
+name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  name := $(name)_debug
+endif
+name := $(name)-ota-incremental-$(FILE_NAME_TAG)
+
+INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
+
+$(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
+
+ifeq ($(AB_OTA_UPDATER),true)
+$(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET): $(BRILLO_UPDATE_PAYLOAD)
+else
+$(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET): $(BROTLI)
+endif
+
+$(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
+		build/make/tools/releasetools/ota_from_target_files
+	@echo "Package OTA (incremental): $@"
+	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) -i $(BASE_TARGET_FILES))
+
+.PHONY: otaincpackage
+otaincpackage: $(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET)
+
+.PHONY: otaincpackage_nodeps
+otaincpackage_nodeps: KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
+otaincpackage_nodeps: build/make/tools/releasetools/ota_from_target_files
+	@echo "Package OTA (incremental) without deps: $(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET)"
+	$(call build-ota-package-target,$(INTERNAL_OTA_INCREMENTAL_PACKAGE_TARGET),-k $(KEY_CERT_PAIR) -i $(BASE_TARGET_FILES))
+
+endif # BASE_TARGET_FILES
 
 endif    # build_ota_package
 
