@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63b59852_1cc6c317",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-09T17:04:54Z",
+      "side": 1,
+      "message": "Move this check outside the EXECUTABLES check so that it applies to SHARED_LIBRARIES too",
+      "revId": "1d9410a97d5581c4965129b7d72b91258cc0c9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "075d6d22_95580d58",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-09T17:04:54Z",
+      "side": 1,
+      "message": "else ifeq",
+      "revId": "1d9410a97d5581c4965129b7d72b91258cc0c9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
