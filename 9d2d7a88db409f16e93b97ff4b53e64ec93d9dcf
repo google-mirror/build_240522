@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13ea2c16_8a8f3091",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-12T15:40:30Z",
+      "side": 1,
+      "message": "We prefer to avoid conditionals here when possible.  If your only concern is RAM, can you check config.disable_cameraservice in cameraservice.rc, and then set config.disable_cameraservice\u003dtrue in your product makefiles?",
+      "revId": "9d2d7a88db409f16e93b97ff4b53e64ec93d9dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
