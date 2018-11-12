@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d99d26b1_b2116402",
+        "filename": "target/product/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-11-12T14:10:39Z",
+      "side": 1,
+      "message": "Add oth@, mast@, vmarko@, sehr@",
+      "revId": "a5e0d4b46e120371ef5541804605e4d98ca50794",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
