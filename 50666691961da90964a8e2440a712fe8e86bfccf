@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "577398fe_e90c125b",
+        "filename": "target/product/vndk/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-11-12T23:13:43Z",
+      "side": 1,
+      "message": "This HAL is the same as a2dp, right? It appears to be very similar.",
+      "range": {
+        "startLine": 69,
+        "startChar": 38,
+        "endLine": 69,
+        "endChar": 42
+      },
+      "revId": "50666691961da90964a8e2440a712fe8e86bfccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
