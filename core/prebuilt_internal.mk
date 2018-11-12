@@ -319,6 +319,15 @@ ifdef LOCAL_COMPRESSED_MODULE
 LOCAL_DEX_PREOPT := false
 endif
 
+# In case we don't strip the built module, use it, as dexpreopt
+# can do optimizations based on whether the built module only
+# contains uncompressed dex code.
+ifndef LOCAL_STRIP_DEX
+  my_dex_jar := $(built_module)
+else
+  my_dex_jar := $(my_prebuilt_src_file)
+endif
+
 #######################################
 # defines built_odex along with rule to install odex
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
@@ -396,17 +405,9 @@ endif  # ! LOCAL_REPLACE_PREBUILT_APK_INSTALLED
 
 ###############################
 ## Rule to build the odex file.
-# In case we don't strip the built module, use it, as dexpreopt
-# can do optimizations based on whether the built module only
-# contains uncompressed dex code.
 ifdef LOCAL_DEX_PREOPT
-ifndef LOCAL_STRIP_DEX
-$(built_odex) : $(built_module)
+$(built_odex) : $(my_dex_jar)
 	$(call dexpreopt-one-file,$<,$@)
-else
-$(built_odex) : $(my_prebuilt_src_file)
-	$(call dexpreopt-one-file,$<,$@)
-endif
 endif
 
 ###############################

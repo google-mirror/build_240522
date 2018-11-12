@@ -432,6 +432,8 @@ endif  # LOCAL_USE_AAPT2
 
 endif  # need_compile_res
 
+my_dex_jar := $(intermediates.COMMON)/dex.jar
+
 called_from_package_internal := true
 #################################
 include $(BUILD_SYSTEM)/java.mk
@@ -738,21 +740,22 @@ endif
 ###############################
 ## Rule to build the odex file
 ifdef LOCAL_DEX_PREOPT
-$(built_odex): PRIVATE_DEX_FILE := $(built_dex)
-ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
-$(built_odex): $(ZIP2ZIP) $(ZIPALIGN)
-endif
-# Use pattern rule - we may have multiple built odex files.
-$(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(built_dex)
+  $(my_dex_jar): PRIVATE_DEX_FILE := $(built_dex)
+  ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
+    $(my_dex_jar): $(ZIP2ZIP) $(ZIPALIGN)
+  endif
+  $(my_dex_jar): $(built_dex)
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 	$(call create-dex-jar,$@,$(PRIVATE_DEX_FILE))
-ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
+  ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
 	$(uncompress-dexs)
 	$(align-package)
-endif
-	$(hide) mv $@ $@.input
-	$(call dexpreopt-one-file,$@.input,$@)
-	$(hide) rm $@.input
+  endif
+
+# Use pattern rule - we may have multiple built odex files.
+$(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(my_dex_jar)
+	$(hide) mkdir -p $(dir $@) && rm -f $@
+	$(call dexpreopt-one-file,$<,$@)
 endif
 
 ###############################

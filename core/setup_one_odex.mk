@@ -47,7 +47,7 @@ my_missing_uses_libraries := $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES)
 my_lib_names :=
 my_optional_lib_names :=
 my_filtered_optional_uses_libraries :=
-my_system_dependencies :=
+my_dex_preopt_system_dependencies :=
 my_stored_preopt_class_loader_context_libs :=
 my_conditional_uses_libraries_host :=
 my_conditional_uses_libraries_target :=
@@ -69,7 +69,7 @@ else
   my_optional_lib_names := $(my_optional_uses_libraries)
 
   # Calculate system build dependencies based on the filtered libraries.
-  my_intermediate_libs := $(foreach lib_name, $(my_lib_names) $(my_filtered_optional_uses_libraries), \
+  my_intermediate_libs := $(foreach lib_name, $(my_filtered_uses_libraries), \
     $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib_name),,COMMON)/javalib.jar)
   my_dex_preopt_system_dependencies := $(my_intermediate_libs)
   my_dex_preopt_class_loader_context := $(call normalize-path-list,$(my_intermediate_libs))
