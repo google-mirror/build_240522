@@ -89,6 +89,8 @@ ifdef LOCAL_SOONG_DEX_JAR
 
       dex_preopt_profile_src_file := $(common_javalib.jar)
 
+      my_dex_jar := $(LOCAL_SOONG_DEX_JAR)
+
       # defines built_odex along with rule to install odex
       include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 

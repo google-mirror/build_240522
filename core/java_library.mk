@@ -50,6 +50,8 @@ else
 LOCAL_EMMA_INSTRUMENT := false
 endif # EMMA_INSTRUMENT
 
+my_dex_jar := $(common_javalib.jar)
+
 #################################
 include $(BUILD_SYSTEM)/java.mk
 #################################

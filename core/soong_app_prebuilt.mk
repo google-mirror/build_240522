@@ -59,6 +59,8 @@ endif # LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 
 java-dex: $(LOCAL_SOONG_DEX_JAR)
 
+my_dex_jar := $(LOCAL_SOONG_DEX_JAR)
+
 # defines built_odex along with rule to install odex
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 
@@ -67,7 +69,7 @@ ifneq ($(BUILD_PLATFORM_ZIP),)
 endif
 
 ifdef LOCAL_DEX_PREOPT
-  $(built_odex): $(LOCAL_SOONG_DEX_JAR)
+  $(built_odex): $(LOCAL_BUILT_MODULE)
 	$(call dexpreopt-one-file,$<,$@)
   $(eval $(call dexpreopt-copy-jar,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE),$(LOCAL_STRIP_DEX)))
 else

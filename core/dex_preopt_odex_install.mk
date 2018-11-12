@@ -204,6 +204,9 @@ else
   my_installed_profile :=
 endif
 
+my_dexpreopt_archs :=
+my_orig_dexpreopt_flags := $(LOCAL_DEX_PREOPT_FLAGS)
+
 ifdef LOCAL_DEX_PREOPT
 
   dexpreopt_boot_jar_module := $(filter $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE))
@@ -237,6 +240,7 @@ ifdef LOCAL_DEX_PREOPT
       # #################################################
       # Odex for the 1st arch
       my_2nd_arch_prefix :=
+      my_dexpreopt_archs += $(TARGET_ARCH)
       include $(BUILD_SYSTEM)/setup_one_odex.mk
       # #################################################
       # Odex for the 2nd arch
@@ -244,7 +248,8 @@ ifdef LOCAL_DEX_PREOPT
         ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
           ifneq (first,$(my_module_multilib))
             my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
-            include $(BUILD_SYSTEM)/setup_one_odex.mk
+              my_dexpreopt_archs += $(TARGET_2ND_ARCH)
+              include $(BUILD_SYSTEM)/setup_one_odex.mk
           endif  # my_module_multilib is not first.
         endif  # TARGET_TRANSLATE_2ND_ARCH not true
       endif  # TARGET_2ND_ARCH
@@ -254,12 +259,14 @@ ifdef LOCAL_DEX_PREOPT
       my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
       # Save the module multilib since setup_one_odex modifies it.
       saved_my_module_multilib := $(my_module_multilib)
+      my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
       include $(BUILD_SYSTEM)/setup_one_odex.mk
       my_module_multilib := $(saved_my_module_multilib)
       ifdef TARGET_2ND_ARCH
         ifeq ($(my_module_multilib),both)
           # The non-preferred arch
           my_2nd_arch_prefix := $(if $(LOCAL_2ND_ARCH_VAR_PREFIX),,$(TARGET_2ND_ARCH_VAR_PREFIX))
+          my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
           include $(BUILD_SYSTEM)/setup_one_odex.mk
         endif  # LOCAL_MULTILIB is both
       endif  # TARGET_2ND_ARCH
@@ -433,3 +440,71 @@ ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(build_installed_profile)
 my_process_profile :=
 
 $(my_all_targets): $(my_installed_profile)
+
+$(call json_start)
+
+$(call add_json_str,  Name,                          $(LOCAL_MODULE))
+$(call add_json_str,  DexLocation,                   $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE)))
+$(call add_json_str,  BuildPath,                     $(LOCAL_BUILT_MODULE))
+$(call add_json_str,  InstallPath,                   $(LOCAL_INSTALLED_MODULE))
+$(call add_json_str,  DexPath,                       $(my_dex_jar))
+$(call add_json_bool, OnSystemPartition,             $(filter $(TARGET_OUT)/%,$(my_module_path)))
+$(call add_json_bool, PreferIntegrity,               $(LOCAL_PREFER_INTEGRITY))
+$(call add_json_bool, Privileged,                    $(LOCAL_PRIVILEGED_MODULE))
+$(call add_json_bool, HasApkLibraries,               $(LOCAL_APK_LIBRARIES))
+$(call add_json_bool, IsApp,                         $(filter APPS,$(LOCAL_MODULE_CLASS)))
+$(call add_json_str,  Multilib,                      $(LOCAL_MULTILIB))
+$(call add_json_list, PreoptFlags,                   $(my_orig_dexpreopt_flags))
+$(call add_json_str,  ProfileClassListing,           $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE)))
+$(call add_json_bool, ProfileIsTextListing,          $(my_profile_is_text_listing))
+$(call add_json_bool, EnforceUsesLibraries,          $(LOCAL_ENFORCE_USES_LIBRARIES))
+$(call add_json_list, OptionalUsesLibraries,         $(LOCAL_OPTIONAL_USES_LIBRARIES))
+$(call add_json_list, UsesLibraries,                 $(LOCAL_USES_LIBRARIES))
+$(call add_json_map,  LibraryPaths)
+$(foreach lib,$(sort $(LOCAL_USES_LIBRARIES) $(LOCAL_OPTIONAL_USES_LIBRARIES) org.apache.http.legacy.impl),\
+  $(call add_json_str, $(lib), $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar))
+$(call end_json_map)
+$(call add_json_list, Archs,                         $(my_dexpreopt_archs))
+$(call add_json_str,  DexPreoptImageLocation,        $(LOCAL_DEX_PREOPT_IMAGE_LOCATION))
+$(call add_json_bool, PreoptExtractedApk,            $(my_preopt_for_extracted_apk))
+$(call add_json_bool, NoCreateAppImage,              $(filter false,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
+$(call add_json_bool, ForceCreateAppImage,           $(filter true,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
+$(call add_json_str,  IntermediatesDir,              $(intermediates))
+$(call add_json_str,  CommonIntermediatesDir,        $(intermediates.COMMON))
+
+$(call json_end)
+
+$(intermediates)/dexpreopt.config: PRIVATE_MODULE := $(LOCAL_MODULE)
+$(intermediates)/dexpreopt.config: PRIVATE_CONTENTS := $(json_contents)
+$(intermediates)/dexpreopt.config:
+	@echo "$(PRIVATE_MODULE) dexpreopt.config"
+	echo -e -n '$(subst $(newline),\n,$(subst ','\'',$(subst \,\\,$(PRIVATE_CONTENTS))))' > $@
+
+.KATI_RESTAT: $(intermediates)/dexpreopt.sh
+$(intermediates)/dexpreopt.sh: PRIVATE_MODULE := $(LOCAL_MODULE)
+$(intermediates)/dexpreopt.sh: PRIVATE_GLOBAL_CONFIG := $(PRODUCT_OUT)/dexpreopt.config
+$(intermediates)/dexpreopt.sh: PRIVATE_MODULE_CONFIG := $(intermediates)/dexpreopt.config
+$(intermediates)/dexpreopt.sh: PRIVATE_EXTRAS_ZIP := $(intermediates)/dexpreopt.zip
+$(intermediates)/dexpreopt.sh: $(DEXPREOPT_GEN)
+$(intermediates)/dexpreopt.sh: $(intermediates)/dexpreopt.config $(PRODUCT_OUT)/dexpreopt.config
+	@echo "$(PRIVATE_MODULE) dexpreopt gen"
+	$(DEXPREOPT_GEN) -g $(PRIVATE_GLOBAL_CONFIG) -m $(PRIVATE_MODULE_CONFIG) \
+	-i $(LOCAL_BUILT_MODULE) -o $(LOCAL_BUILT_MODULE).dexpreopted \
+	-e $(PRIVATE_EXTRAS_ZIP) -s $@
+
+my_dexpreopt_deps := $(DEXPREOPT_DEPS)
+my_dexpreopt_deps += $(my_dex_jar)
+my_dexpreopt_deps += $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE))
+my_dexpreopt_deps += \
+  $(foreach lib,$(sort $(LOCAL_USES_LIBRARIES) $(LOCAL_OPTIONAL_USES_LIBRARIES) org.apache.http.legacy.impl),\
+    $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar)
+my_dexpreopt_deps += $(LOCAL_DEX_PREOPT_IMAGE_LOCATION)
+
+$(LOCAL_BUILT_MODULE).dexpreopted: PRIVATE_MODULE := $(LOCAL_MODULE)
+$(LOCAL_BUILT_MODULE).dexpreopted: $(my_dexpreopt_deps)
+$(LOCAL_BUILT_MODULE).dexpreopted: $(LOCAL_BUILT_MODULE)
+$(LOCAL_BUILT_MODULE).dexpreopted: PRIVATE_SCRIPT := $(intermediates)/dexpreopt.sh
+$(LOCAL_BUILT_MODULE).dexpreopted: .KATI_IMPLICIT_OUTPUTS := $(intermediates)/dexpreopt.zip
+$(LOCAL_BUILT_MODULE).dexpreopted: $(intermediates)/dexpreopt.sh
+	@echo "$(PRIVATE_MODULE) dexpreopt"
+	bash $(PRIVATE_SCRIPT)
