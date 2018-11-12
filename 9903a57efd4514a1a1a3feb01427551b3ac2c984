@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5b199fe_32fd32a8",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-12T19:23:30Z",
+      "side": 1,
+      "message": "use $() instead of ${}",
+      "range": {
+        "startLine": 151,
+        "startChar": 50,
+        "endLine": 151,
+        "endChar": 64
+      },
+      "revId": "9903a57efd4514a1a1a3feb01427551b3ac2c984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
