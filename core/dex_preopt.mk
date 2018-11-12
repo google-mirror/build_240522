@@ -149,6 +149,8 @@ $(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST): $(HIDDENAPI) $(HIDDENAPI_STUBS) \
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST))
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST))
 
+
+
 ifeq ($(PRODUCT_DIST_BOOT_AND_SYSTEM_JARS),true)
 boot_profile_jars_zip := $(PRODUCT_OUT)/boot_profile_jars.zip
 all_boot_jars := \
@@ -165,3 +167,5 @@ droidcore: $(boot_profile_jars_zip)
 
 $(call dist-for-goals, droidcore, $(boot_profile_jars_zip))
 endif
+
+include $(BUILD_SYSTEM)/dex_preopt_config.mk
