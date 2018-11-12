@@ -48,7 +48,6 @@ PRODUCT_PACKAGES += \
     bu \
     bugreport \
     bugreportz \
-    cameraserver \
     charger \
     cmd \
     com.android.location.provider \
@@ -259,6 +258,14 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+
+ifeq ($(PRODUCT_DISABLE_CAMERASERVICE),true)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    config.disable_cameraservice=true
+else
+PRODUCT_PACKAGES += \
+    cameraserver
+endif
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
