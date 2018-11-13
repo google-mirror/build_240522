@@ -3417,3 +3417,18 @@ $(KATI_obsolete_var \
   initialize-package-file \
   add-jni-shared-libs-to-package,\
   These functions have been removed)
+
+###########################################################
+## Verify the variants of a VNDK library are identical
+##
+## $(1): Path to the core variant shared library file.
+## $(2): Path to the vendor variant shared library file.
+## $(3): TOOLS_PREFIX
+###########################################################
+define verify-vndk-libs-identical
+@echo "Checking VNDK vendor variant: $(2)"
+$(hide) CLANG_BIN="$(LLVM_PREBUILTS_PATH)" \
+	CROSS_COMPILE="$(strip $(3))" \
+	XZ="$(XZ)" \
+	build/tools/check_identical_lib.sh $(SOONG_STRIP_PATH) $(1) $(2)
+endef
