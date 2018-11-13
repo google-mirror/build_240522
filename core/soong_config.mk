@@ -128,6 +128,7 @@ $(call add_json_list, ModulesLoadedByPrivilegedModules,  $(PRODUCT_LOADED_BY_PRI
 $(call add_json_bool, DefaultStripDex,                   $(call invert_bool,$(filter nostripping,$(DEX_PREOPT_DEFAULT))))
 $(call add_json_bool, DisableDexPreopt,                  $(filter false,$(WITH_DEXPREOPT)))
 $(call add_json_list, DisableDexPreoptModules,           $(DEXPREOPT_DISABLED_MODULES))
+$(call add_json_bool, VndkUseCoreVariant,                $(TARGET_VNDK_USE_CORE_VARIANT))
 
 $(call add_json_bool, Product_is_iot,                    $(filter true,$(PRODUCT_IOT)))
 
