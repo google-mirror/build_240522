@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "793c4f42_f9abacf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2018-11-13T06:19:00Z",
+      "side": 1,
+      "message": "We still must have intermediates for vendor variants, or have a build option to ignore the TARGET_VNDK_USE_CORE_VARIANT flag to build the vendor variant. This is required to build vndk snapshots. (build/make/core/tasks/vndk.mk)",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "325b6b347459e19ee4cff3ef2b5395133084dee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
