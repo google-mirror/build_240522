@@ -107,6 +107,16 @@ ifdef LOCAL_INSTALLED_MODULE
   endif
 endif
 
+# When no-vendor-variant VNDK is enabled for a VNDK library, the vendor variant
+# is not installed and vendor binaries depending on it are expected to link
+# against the core variant at runtime.  We add a dependency on the core variant
+# here to ensure the core variant is installed regardless of whether there is a
+# system binary depending on it.
+ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
+$(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
+	$(my_register_name)::$(LOCAL_MODULE:.vendor=)
+endif
+
 $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
 	$(transform-prebuilt-to-target)
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
