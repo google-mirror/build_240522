@@ -22,6 +22,30 @@
       "revId": "50666691961da90964a8e2440a712fe8e86bfccf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc6ee25b_cf91b89b",
+        "filename": "target/product/vndk/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1318371
+      },
+      "writtenOn": "2018-11-13T01:07:13Z",
+      "side": 1,
+      "message": "The new BluetoothAudio HAL is more common for audio streaming over BT. It will be used for A2DP and Hearing Aid also. And, yes, they are similar that BluetoothAudio is extended from BluetoothA2dp and this is the reason that started from 2.0 (1.0 is for A2DP).",
+      "parentUuid": "577398fe_e90c125b",
+      "range": {
+        "startLine": 69,
+        "startChar": 38,
+        "endLine": 69,
+        "endChar": 42
+      },
+      "revId": "50666691961da90964a8e2440a712fe8e86bfccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
