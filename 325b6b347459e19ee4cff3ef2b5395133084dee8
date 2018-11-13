@@ -46,6 +46,30 @@
       "revId": "325b6b347459e19ee4cff3ef2b5395133084dee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "881f0068_55faf00c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1349653
+      },
+      "writtenOn": "2018-11-13T21:54:49Z",
+      "side": 1,
+      "message": "Indeed the plan is to keep building the intermediates. Other than required to build snapshots, we want to build them so that we can perform compatibility check (which is not implemented yet)",
+      "parentUuid": "dab073c7_a572fe75",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "325b6b347459e19ee4cff3ef2b5395133084dee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
