@@ -107,7 +107,32 @@ ifdef LOCAL_INSTALLED_MODULE
   endif
 endif
 
+ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
+# When no-vendor-variant VNDK is enabled for a VNDK library, the vendor variant
+# is not installed and vendor binaries depending on it are expected to link
+# against the core variant at runtime.  We add a dependency on the core variant
+# here to ensure the core variant is installed regardless of whether there is a
+# system binary depending on it.
+$(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
+	$(my_register_name)::$(my_register_name:.vendor=)
+
+# Add $(LOCAL_BUILT_MODULE) as a dependency to no_vendor_variant_vndk_check so
+# that the vendor variant will be built and checked against the core variant.
+no_vendor_variant_vndk_check: $(LOCAL_BUILT_MODULE)
+
+my_core_variant_files := $(call module-built-files,$(subst .vendor,,$(my_register_name)))
+my_core_shared_lib := $(sort $(filter %.so,$(my_core_variant_files)))
+$(LOCAL_BUILT_MODULE): PRIVATE_CORE_VARIANT := $(my_core_shared_lib)
+$(LOCAL_BUILT_MODULE): $(my_core_shared_lib)
+endif
+
 $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
+ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
+	$(call verify-vndk-libs-identical,\
+		$(PRIVATE_CORE_VARIANT),\
+		$<,\
+		$($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)TOOLS_PREFIX))
+endif
 	$(transform-prebuilt-to-target)
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@

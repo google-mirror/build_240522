@@ -115,6 +115,8 @@ $(call add_json_bool, DisableDexPreopt,                  $(call invert_bool,$(fi
 $(call add_json_list, DisableDexPreoptModules,           $(DEXPREOPT_DISABLED_MODULES))
 $(call add_json_str,  DexPreoptProfileDir,               $(PRODUCT_DEX_PREOPT_PROFILE_DIR))
 
+$(call add_json_bool, VndkUseCoreVariant,                $(TARGET_VNDK_USE_CORE_VARIANT))
+
 $(call add_json_bool, Product_is_iot,                    $(filter true,$(PRODUCT_IOT)))
 
 $(call add_json_bool, Treble_linker_namespaces,          $(filter true,$(PRODUCT_TREBLE_LINKER_NAMESPACES)))
