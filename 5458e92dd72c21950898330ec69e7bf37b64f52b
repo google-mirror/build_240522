@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "3dcc697e_6c64f591",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3768,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "See below.",
+      "parentUuid": "5042855e_108175e1",
+      "range": {
+        "startLine": 3768,
+        "startChar": 55,
+        "endLine": 3768,
+        "endChar": 56
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6189540f_c75c5857",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3797,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "Tao, I can change this line to \"otapackage otardppackage:\" if you want.",
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0751db51_972ca6e3",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -39,6 +80,24 @@
       "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaae4f75_f415a60e",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0751db51_972ca6e3",
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "02c0b6b7_ab144142",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d0f0065_50044b06",
+      "range": {
+        "startLine": 1744,
+        "startChar": 4,
+        "endLine": 1744,
+        "endChar": 21
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b6ff732_4f432bc3",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 1
@@ -88,6 +171,30 @@
     },
     {
       "key": {
+        "uuid": "84f92826_e4dae243",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b6ff732_4f432bc3",
+      "range": {
+        "startLine": 2018,
+        "startChar": 34,
+        "endLine": 2018,
+        "endChar": 35
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c94e2e6_45dab253",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 1
@@ -108,6 +215,30 @@
       "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2d8111_55f3caba",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-14T22:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c94e2e6_45dab253",
+      "range": {
+        "startLine": 2026,
+        "startChar": 4,
+        "endLine": 2026,
+        "endChar": 5
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
