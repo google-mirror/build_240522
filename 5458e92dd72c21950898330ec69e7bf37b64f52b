@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5042855e_108175e1",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3768,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-14T02:15:58Z",
+      "side": 1,
+      "message": "I wonder if we could add the retrofit package generation here with .KATI_IMPLICIT_OUTPUTS, to avoid duplicating the dependency rules. Both packages will be generated with `m otapackage` as a side effect, but seems reasonable?",
+      "range": {
+        "startLine": 3768,
+        "startChar": 55,
+        "endLine": 3768,
+        "endChar": 56
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0751db51_972ca6e3",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-14T02:15:58Z",
+      "side": 1,
+      "message": "dist $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)",
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d0f0065_50044b06",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-14T02:15:58Z",
+      "side": 1,
+      "message": "Seems an error to me, if caller says --retrofit_dynamic_partitions but without giving a valid super_block_devices",
+      "range": {
+        "startLine": 1744,
+        "startChar": 4,
+        "endLine": 1744,
+        "endChar": 21
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6ff732_4f432bc3",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-14T02:15:58Z",
+      "side": 1,
+      "message": "nit: prefer using parentheses when feasible\n\nif (OPTIONS.... and\n    OPTIONS.... and\n    ...):",
+      "range": {
+        "startLine": 2018,
+        "startChar": 34,
+        "endLine": 2018,
+        "endChar": 35
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c94e2e6_45dab253",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-14T02:15:58Z",
+      "side": 1,
+      "message": "nit: logger.info() something for this path",
+      "range": {
+        "startLine": 2026,
+        "startChar": 4,
+        "endLine": 2026,
+        "endChar": 5
+      },
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
