@@ -52,8 +52,27 @@ PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
 # Android Runtime APEX module.
-ifneq ($(DONT_INCLUDE_RUNTIME_APEX), true)
-  PRODUCT_PACKAGES += com.android.runtime
+#
+# Potentially use the debug APEX module (containing debug variants and
+# tools, in addition to release variants) instead of the release APEX
+# module (containing just release variants).
+#
+# * We will use it if PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD = false.
+# * We will always use it if PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD = true.
+# * Otherwise, we will use it by default in userdebug and eng builds.
+art_target_include_debug_build := $(PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD)
+ifneq (false,$(art_target_include_debug_build))
+  ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+    art_target_include_debug_build := true
+  endif
+  ifeq (true,$(art_target_include_debug_build))
+    # Module with both release and debug variants, as well as
+    # additional tools.
+    PRODUCT_PACKAGES += com.android.runtime.debug
+  else
+    # Release module (without debug variants nor tools).
+    PRODUCT_PACKAGES += com.android.runtime
+  endif
 endif
 
 # Certificates.
@@ -101,3 +120,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Enable minidebuginfo generation unless overridden.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=true
+
+# Clear locally used variables.
+art_target_include_debug_build :=
