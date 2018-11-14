@@ -22,6 +22,30 @@
       "revId": "1ab192ee39542058e3e354d13ecdc2af0c106c24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10d8587d_107236d3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2018-11-14T23:56:26Z",
+      "side": 1,
+      "message": "Thanks. I\u0027ve fixed this in my checkout, but\n1. ota generation succeeds both with and without the fix\n2. otas don\u0027t include \"update-binary\"\n\nIs it an \"A/B\" OTA? I\u0027m on walleye.\n\nOTAs then fail to apply after passing verification because exit code 1, with nothing interesting in serial console. How do I debug this?",
+      "parentUuid": "ba0d9955_5c58f7f4",
+      "range": {
+        "startLine": 3247,
+        "startChar": 0,
+        "endLine": 3247,
+        "endChar": 35
+      },
+      "revId": "1ab192ee39542058e3e354d13ecdc2af0c106c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
