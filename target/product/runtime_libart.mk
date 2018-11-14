@@ -52,7 +52,11 @@ PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
 # Android Runtime APEX module.
-ifneq ($(DONT_INCLUDE_RUNTIME_APEX), true)
+ifeq ($(INCLUDE_ESSENTIAL_RUNTIME_APEX),true)
+  # Essential (minimal) version (for storage-constrained devices).
+  PRODUCT_PACKAGES += com.android.runtime.essential
+else
+  # Full version (included by default).
   PRODUCT_PACKAGES += com.android.runtime
 endif
 
