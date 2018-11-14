@@ -3058,7 +3058,7 @@ else
   ifeq ($(TARGET_SKIP_OTA_PACKAGE),true)
     build_ota_package := false
   endif
-  ifneq ($(strip $(SANITIZE_TARGET)),)
+  ifneq (,$(filter address, $(SANITIZE_TARGET)))
     build_ota_package := false
   endif
   ifeq ($(TARGET_PRODUCT),sdk)
