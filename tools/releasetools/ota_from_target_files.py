@@ -459,7 +459,7 @@ class Payload(object):
     if source_file is not None:
       cmd.extend(["--source_image", source_file])
     cmd.extend(additional_args)
-    common.RunAndCheckOutput(cmd)
+    common.RunAndCheckOutput(cmd, verbose=False, stdout=None, stderr=None)
 
     self.payload_file = payload_file
     self.payload_properties = None
@@ -1762,6 +1762,7 @@ def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
 
   # Remove the existing partition images.
   to_delete += replace.values()
+  to_delete += ['IMAGES/{}.map'.format(dev) for dev in super_block_devices]
 
   common.ZipDelete(target_file, to_delete)
 
