@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7b6176b_5e07eced",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2018-11-15T05:55:37Z",
+      "side": 1,
+      "message": "Isn\u0027t it our practice to have common prefix (like TARGET_?) for build flags like this?",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "63cd538e9bc00c0d016dbb705c3f6d095687670b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
