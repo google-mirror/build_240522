@@ -46,6 +46,30 @@
       "revId": "1ab192ee39542058e3e354d13ecdc2af0c106c24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fbc4238_9db8d0d1",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-15T00:06:31Z",
+      "side": 1,
+      "message": "walleye is using A/B OTA. We actually don\u0027t have an AOSP device that\u0027s actively using non-A/B OTA. Only non-A/B OTA will have that entry, which will become part of the package.\n\nOTA failing to apply is likely a different issue. If it failed during apply (i.e. as opposed to trying to boot into the new build), the logs are available in logcat (and a copy in /data/misc/update_engine_log/). Maybe we can discuss that in the bug with logs.",
+      "parentUuid": "10d8587d_107236d3",
+      "range": {
+        "startLine": 3247,
+        "startChar": 0,
+        "endLine": 3247,
+        "endChar": 35
+      },
+      "revId": "1ab192ee39542058e3e354d13ecdc2af0c106c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
