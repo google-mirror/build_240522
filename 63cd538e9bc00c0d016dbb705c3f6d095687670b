@@ -22,6 +22,30 @@
       "revId": "63cd538e9bc00c0d016dbb705c3f6d095687670b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7340f7f1_ab118534",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2018-11-15T19:16:12Z",
+      "side": 1,
+      "message": "Thanks for the heads-up. I\u0027ve rewritten the logic here to leverage an existing variable (`PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD`), so this is no longer an issue.",
+      "parentUuid": "c7b6176b_5e07eced",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "63cd538e9bc00c0d016dbb705c3f6d095687670b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
