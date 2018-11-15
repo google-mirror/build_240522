@@ -42,6 +42,9 @@ import sparse_img
 
 logger = logging.getLogger(__name__)
 
+#FIXME
+if os.getenv("TMPDIR"):
+  tempfile.tempdir = os.getenv("TMPDIR")
 
 class Options(object):
   def __init__(self):
