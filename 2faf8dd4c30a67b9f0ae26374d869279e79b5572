@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b169ce2c_59a2f6b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-11-16T17:28:00Z",
+      "side": 1,
+      "message": "Isn\u0027t this doing the opposite?",
+      "revId": "2faf8dd4c30a67b9f0ae26374d869279e79b5572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
