@@ -93,23 +93,35 @@ static const char oem_str[] = "oem/";
 static const char oem_alt_str[] = "system/oem/";
 static const char odm_str[] = "odm/";
 static const char odm_alt_str[] = "system/odm/";
+static const char product_str[] = "product/";
+static const char product_alt_str[] = "system/product/";
+static const char product_services_str[] = "product_services/";
+static const char product_services_alt_str[] = "system/product_services/";
+
+static bool is_system(const char* prefix) {
+  return !android::base::StartsWith(prefix, vendor_str) &&
+         !android::base::StartsWith(prefix, vendor_alt_str) &&
+         !android::base::StartsWith(prefix, oem_str) &&
+         !android::base::StartsWith(prefix, oem_alt_str) &&
+         !android::base::StartsWith(prefix, odm_str) &&
+         !android::base::StartsWith(prefix, odm_alt_str) &&
+         !android::base::StartsWith(prefix, product_str) &&
+         !android::base::StartsWith(prefix, product_alt_str) &&
+         !android::base::StartsWith(prefix, product_services_str) &&
+         !android::base::StartsWith(prefix, product_services_alt_str);
+}
 
 TEST(fs_conf_test, system_dirs) {
   std::vector<fs_path_config> dirs;
   const fs_path_config* config = android_device_dirs;
   for (size_t num = arraysize(android_device_dirs); num; --num) {
-    if (!android::base::StartsWith(config->prefix, vendor_str) &&
-        !android::base::StartsWith(config->prefix, vendor_alt_str) &&
-        !android::base::StartsWith(config->prefix, oem_str) &&
-        !android::base::StartsWith(config->prefix, oem_alt_str) &&
-        !android::base::StartsWith(config->prefix, odm_str) &&
-        !android::base::StartsWith(config->prefix, odm_alt_str)) {
+    if (is_system(config->prefix)) {
       dirs.emplace_back(*config);
     }
     ++config;
   }
   confirm(popenToString(android::base::StringPrintf(
-              "%s -D -P -vendor,-oem,-odm", fs_config_generate_command)),
+              "%s -D -P -vendor,-oem,-odm,-product,-product_services", fs_config_generate_command)),
           &dirs[0], dirs.size());
 }
 
@@ -162,18 +174,13 @@ TEST(fs_conf_test, system_files) {
   std::vector<fs_path_config> files;
   const fs_path_config* config = android_device_files;
   for (size_t num = arraysize(android_device_files); num; --num) {
-    if (!android::base::StartsWith(config->prefix, vendor_str) &&
-        !android::base::StartsWith(config->prefix, vendor_alt_str) &&
-        !android::base::StartsWith(config->prefix, oem_str) &&
-        !android::base::StartsWith(config->prefix, oem_alt_str) &&
-        !android::base::StartsWith(config->prefix, odm_str) &&
-        !android::base::StartsWith(config->prefix, odm_alt_str)) {
+    if (is_system(config->prefix)) {
       files.emplace_back(*config);
     }
     ++config;
   }
   confirm(popenToString(android::base::StringPrintf(
-              "%s -F -P -vendor,-oem,-odm", fs_config_generate_command)),
+              "%s -F -P -vendor,-oem,-odm,-product,-product_services", fs_config_generate_command)),
           &files[0], files.size());
 }
 
@@ -219,5 +226,35 @@ TEST(fs_conf_test, odm_files) {
   }
   confirm(popenToString(android::base::StringPrintf(
               "%s -F -P odm", fs_config_generate_command)),
+          &files[0], files.size());
+}
+
+TEST(fs_conf_test, product_files) {
+  std::vector<fs_path_config> files;
+  const fs_path_config* config = android_device_files;
+  for (size_t num = arraysize(android_device_files); num; --num) {
+    if (android::base::StartsWith(config->prefix, product_str) ||
+        android::base::StartsWith(config->prefix, product_alt_str)) {
+      files.emplace_back(*config);
+    }
+    ++config;
+  }
+  confirm(popenToString(android::base::StringPrintf(
+              "%s -F -P product", fs_config_generate_command)),
+          &files[0], files.size());
+}
+
+TEST(fs_conf_test, product_services_files) {
+  std::vector<fs_path_config> files;
+  const fs_path_config* config = android_device_files;
+  for (size_t num = arraysize(android_device_files); num; --num) {
+    if (android::base::StartsWith(config->prefix, product_services_str) ||
+        android::base::StartsWith(config->prefix, product_services_alt_str)) {
+      files.emplace_back(*config);
+    }
+    ++config;
+  }
+  confirm(popenToString(android::base::StringPrintf(
+              "%s -F -P product_services", fs_config_generate_command)),
           &files[0], files.size());
 }
