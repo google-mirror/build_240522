@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebeb3e01_d03fe43f",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-16T03:25:47Z",
+      "side": 1,
+      "message": "nit: duplicate",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "e34d5666e9a33c8f88e82f57b773a24e7247e8da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88815fdc_d9878d67",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1805,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-16T03:25:47Z",
+      "side": 1,
+      "message": "nit: I think pylint would prefer writing this arg at next line, or to align all the args to the same indentation. just run `pylint --rcfile\u003dpylintrc ota_from_target_files.py`",
+      "range": {
+        "startLine": 1805,
+        "startChar": 64,
+        "endLine": 1805,
+        "endChar": 76
+      },
+      "revId": "e34d5666e9a33c8f88e82f57b773a24e7247e8da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

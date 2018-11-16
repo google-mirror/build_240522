@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "2f3f48bc_f26e7fe8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3797,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-16T03:25:47Z",
+      "side": 1,
+      "message": "I think the goal is to avoid having duplicate dependency rules (and we probably have to live with retrofit package generation for a few releases). Whether having both packages built from the same command looks minor to me.",
+      "parentUuid": "6189540f_c75c5857",
+      "revId": "5458e92dd72c21950898330ec69e7bf37b64f52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0751db51_972ca6e3",
         "filename": "core/main.mk",
         "patchSetId": 1
