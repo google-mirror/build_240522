@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45efecba_d75b9b31",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2018-11-16T16:41:12Z",
+      "side": 1,
+      "message": "Are there tabs for indentation also on the other lines (can\u0027t tell from the codereview) ? If not use spaces.",
+      "revId": "a43b5d1089d5cbdba63acda088254fdb8de868ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
