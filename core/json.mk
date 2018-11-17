@@ -1,3 +1,5 @@
+ifndef json_start
+
 4space :=$= $(space)$(space)$(space)$(space)
 invert_bool =$= $(if $(strip $(1)),,true)
 
@@ -33,3 +35,5 @@ json_start =$= $(eval _json_contents := {$$(newline))$(eval _json_indent := $$(4
 json_end =$= $(eval _json_contents := $$(subst $$(comma)$$(newline)__SV_END,$$(newline),$$(_json_contents)__SV_END}$$(newline)))
 
 json_contents =$= $(_json_contents)
+
+endif # json_start defined
