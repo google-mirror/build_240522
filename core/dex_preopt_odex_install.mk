@@ -288,6 +288,12 @@ ifdef LOCAL_DEX_PREOPT
       endif
     endif
 
+    # If the dex file will be uncompressed in the APK don't copy it to the
+    # vdex file.
+    ifdef LOCAL_UNCOMPRESS_DEX
+      LOCAL_DEX_PREOPT_FLAGS += --copy-dex-files=false
+    endif
+
     my_system_server_compiler_filter := $(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER)
     ifeq (,$(my_system_server_compiler_filter))
       my_system_server_compiler_filter := speed
