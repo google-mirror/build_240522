@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64d8accb_30512538",
+        "filename": "core/dex_preopt_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-17T08:07:07Z",
+      "side": 1,
+      "message": "nice! sadly looks like --oat-file and --boot-image also have PRODUCT_OUT in them :( you think they are fixable too?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 18
+      },
+      "revId": "fee2d76722dc1fa649bdeea335102c2da953793b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
