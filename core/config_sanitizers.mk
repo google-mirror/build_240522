@@ -414,3 +414,11 @@ ifneq ($(my_sanitize_diag),)
     endif
   endif
 endif
+
+# http://b/119329758, Android core not boot up with this sanitizer yet.
+# Previously sanitized modules might not pass new implicit-integer-sign-change checks.
+ifneq ($(findstring fsanitize,$(my_cflags)),)
+  ifneq ($(findstring integer,$(my_cflags)),)
+    my_cflags += -fno-sanitize=implicit-integer-sign-change
+  endif
+endif
