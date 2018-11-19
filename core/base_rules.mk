@@ -234,6 +234,22 @@ ifeq ($(my_module_path),)
     $(error $(LOCAL_PATH): unhandled install path "$(install_path_var) for $(LOCAL_MODULE)")
   endif
 endif
+# For test modules that lack a suite tag, set null-suite as the default.
+# We only support adding a default suite to native tests, native benchmarks, and instrumentation tests.
+# This is because they are the only tests we currently auto-generate test configs for.
+ifndef LOCAL_COMPATIBILITY_SUITE
+ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
+LOCAL_COMPATIBILITY_SUITE := null-suite
+endif
+ifneq ($(filter APPS, $(LOCAL_MODULE_CLASS)),)
+ifneq ($(filter $(my_module_tags),tests),)
+LOCAL_COMPATIBILITY_SUITE := null-suite
+endif
+endif
+endif
+ifdef LOCAL_COMPATIBILITY_SUITE
+  my_module_path := $(testcase_folder)
+endif
 ifneq ($(my_module_relative_path),)
   my_module_path := $(my_module_path)/$(my_module_relative_path)
 endif
