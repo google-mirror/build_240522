@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03ede46a_32b5d31b",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2018-11-19T06:34:34Z",
+      "side": 1,
+      "message": "Will it be more reasonable to move this block to line 227?\nI think we should not force break the rules for local_module_path.\nIf user has set it, maybe we should keep what they want, for those that hardcode to data/xxxtest/ cases, we could manually remove the customize part in their Android.mk/Android.bp.\n\nHow do you think?\nI am just afraid if we just overwrite every test for our own rule, maybe some really special cases will be break by this modification.",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 5
+      },
+      "revId": "48c9c433d6c523de08efbec6e3c5f03fece9fb85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
