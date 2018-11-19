@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a2600f77_0617feea",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-19T22:39:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebeb3e01_d03fe43f",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "e34d5666e9a33c8f88e82f57b773a24e7247e8da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88815fdc_d9878d67",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 5
@@ -69,6 +93,30 @@
       "revId": "e34d5666e9a33c8f88e82f57b773a24e7247e8da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5c6dca8_c3ca5f1c",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1805,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-19T22:39:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "109d34e5_8550194c",
+      "range": {
+        "startLine": 1805,
+        "startChar": 64,
+        "endLine": 1805,
+        "endChar": 76
+      },
+      "revId": "e34d5666e9a33c8f88e82f57b773a24e7247e8da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
