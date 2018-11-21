@@ -64,13 +64,6 @@ Common options that apply to both of non-A/B and A/B OTAs
       Generate an OTA package that will wipe the user data partition when
       installed.
 
-  --retrofit_dynamic_partitions
-      Generates an OTA package that updates a device to support dynamic
-      partitions (default False). This flag is implied when generating
-      an incremental OTA where the base build does not support dynamic
-      partitions but the target build does. For A/B, when this flag is set,
-      --skip_postinstall is implied.
-
 Non-A/B OTA specific options
 
   -b  (--binary) <file>
@@ -2012,16 +2005,9 @@ def main(argv):
   # Load OEM dicts if provided.
   OPTIONS.oem_dicts = _LoadOemDicts(OPTIONS.oem_source)
 
-  # Assume retrofitting dynamic partitions when base build does not set
-  # use_dynamic_partitions but target build does.
-  if (OPTIONS.source_info_dict and
-      OPTIONS.source_info_dict.get("use_dynamic_partitions") != "true" and
-      OPTIONS.target_info_dict.get("use_dynamic_partitions") == "true"):
-    if OPTIONS.target_info_dict.get("dynamic_partition_retrofit") != "true":
-      raise common.ExternalError(
-          "Expect to generate incremental OTA for retrofitting dynamic "
-          "partitions, but dynamic_partition_retrofit is not set in target "
-          "build.")
+  # Assume retrofitting dynamic partitions when target build sets
+  # dynamic_partition_retrofit.
+  if (OPTIONS.target_info_dict.get("dynamic_partition_retrofit") == "true"):
     logger.info("Implicitly generating retrofit incremental OTA.")
     OPTIONS.retrofit_dynamic_partitions = True
 
