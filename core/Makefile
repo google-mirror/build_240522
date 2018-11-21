@@ -1544,20 +1544,24 @@ RECOVERY_BACKGROUND_TEXT_RESOURCES := \
 	$(call intermediates-dir-for,PACKAGING,background_text_resources)
 resource_dir := $(call include-path-for, recovery)/tools/recovery_l10n/res/
 image_generator_jar := $(HOST_OUT_JAVA_LIBRARIES)/RecoveryImageGenerator.jar
+zopflipng := $(HOST_OUT_EXECUTABLES)/zopflipng
 recovery_text_list := recovery_installing recovery_erasing recovery_no_command recovery_error recovery_installing_security
 $(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_RECOVERY_FONT_FILES_DIR := $(RECOVERY_FONT_FILES_DIR)
 $(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_RESOURCE_DIR := $(resource_dir)
 $(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_IMAGE_GENERATOR_JAR := $(image_generator_jar)
-$(RECOVERY_BACKGROUND_TEXT_RESOURCES): $(image_generator_jar) $(resource_dir) $(RECOVERY_FONT_FILES_DIR)
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): PRIVATE_ZOPFLIPNG := $(zopflipng)
+$(RECOVERY_BACKGROUND_TEXT_RESOURCES): $(image_generator_jar) $(resource_dir) $(RECOVERY_FONT_FILES_DIR) $(zopflipng)
 	@rm -rf $@
 	@mkdir -p $@
 	$(foreach text_name,$(recovery_text_list), \
+	  $(eval output_file_name := $(patsubst recovery_%,%_text.png,$(text_name))) \
 	  java -jar $(PRIVATE_IMAGE_GENERATOR_JAR) \
 	    --image_width $(recovery_image_width) \
 	    --text_name $(text_name) \
 	    --font_dir $(PRIVATE_RECOVERY_FONT_FILES_DIR) \
 	    --resource_dir $(PRIVATE_RESOURCE_DIR) \
-	    --output_file $@/$(patsubst recovery_%,%_text.png,$(text_name)); true;)
+	    --output_file $@/$(output_file_name); \
+	  $(PRIVATE_ZOPFLIPNG) -y --iterations=1 --filters=0 $@/$(output_file_name) $@/$(output_file_name); true;)
 endif
 
 ifndef TARGET_PRIVATE_RES_DIRS
