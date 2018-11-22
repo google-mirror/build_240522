@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33ccb7b4_2024359b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-22T16:56:44Z",
+      "side": 1,
+      "message": "+jreck FYI, that ifdef in libhwui you added ages ago was the only use of the flag I could see.. so the flag can probably be deleted? (I didn\u0027t look too closely though).",
+      "revId": "f3cbed4447a7eaab30c869606d8bf1ab26314a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
