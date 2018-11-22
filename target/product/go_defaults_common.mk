@@ -65,3 +65,7 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+
+# Do not spin up a separate process for the network stack on go devices, use an in-process lib.
+PRODUCT_PACKAGES += NetworkStackLib
+PRODUCT_SYSTEM_SERVER_JARS += NetworkStackLib
