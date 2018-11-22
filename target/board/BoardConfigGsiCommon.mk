@@ -1,14 +1,11 @@
 # BoardConfigGsiCommon.mk
 #
 # Common compile-time definitions for GSI
+# Builds upon the mainline config.
 #
 
-# The generic product target doesn't have any hardware-specific pieces.
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := true
+include build/make/target/board/BoardConfigMainlineCommon.mk
 
-# GSIs always use ext4.
-TARGET_USERIMAGES_USE_EXT4 := true
 # GSIs are historically released in sparse format.
 # Some vendors' bootloaders don't work properly with raw format images. So
 # we explicit specify this need below (even though it's the current default).
@@ -42,10 +39,6 @@ TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
 endif
 BOARD_VNDK_VERSION := current
 
-# system-as-root is mandatory from Android P
-TARGET_NO_RECOVERY := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-
 # 64 bits binder interface is mandatory from Android P
 TARGET_USES_64_BIT_BINDER := true
 
@@ -56,6 +49,3 @@ BOARD_USES_METADATA_PARTITION := true
 # The partition size doesn't matter, just to make build pass.
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
-
-# Audio: must using XML format for Treblized devices
-USE_XML_AUDIO_POLICY_CONF := 1
