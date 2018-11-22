@@ -52,6 +52,8 @@ PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
 # Android Runtime APEX module.
+# TODO(b/113373927): Remove this condition when all products include
+# the Android Runtime APEX.
 ifneq ($(DONT_INCLUDE_RUNTIME_APEX), true)
   PRODUCT_PACKAGES += com.android.runtime
 endif
