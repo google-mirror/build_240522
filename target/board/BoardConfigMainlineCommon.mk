@@ -18,3 +18,9 @@ BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 # Audio: must using XML format for Treblized devices
 USE_XML_AUDIO_POLICY_CONF := 1
+
+# Enable stats logging in LMKD.
+TARGET_LMKD_LOG_STATS := true
+
+# Controls some sync timings in libhwui.
+TARGET_USES_HWC2 := true
