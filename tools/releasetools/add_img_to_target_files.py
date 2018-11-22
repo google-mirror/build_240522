@@ -677,14 +677,24 @@ def AddSuperEmpty(output_zip):
 def AddSuperSplit(output_zip):
   """Create split super_*.img and store it in output_zip."""
 
+  def GetImagePartitionSize(img):
+    try:
+      simg = sparse_img.SparseImage(img)
+      return simg.blocksize * simg.total_blocks
+    except ValueError:
+      return os.stat(img).st_size
+
   def TransformPartitionArg(arg):
     lst = arg.split(':')
     # Because --auto-slot-suffixing for A/B, there is no need to remove suffix.
     name = lst[0]
-    assert name + '_size' in OPTIONS.info_dict, (
-        "{} is a prebuilt. Dynamic partitions with prebuilt images "
-        "are not supported yet.".format(name))
-    size = OPTIONS.info_dict[name + '_size']
+    if name + '_size' in OPTIONS.info_dict:
+      size = OPTIONS.info_dict[name + '_size']
+      logger.info("Using {}_size = {}".format(name, size))
+    else:
+      size = GetImagePartitionSize(
+          os.path.join(OPTIONS.input_tmp, "IMAGES", '{}.img'.format(name)))
+      logger.info("Using {} size = {}".format(name, size))
     assert size is not None, \
         '{0}_size is not found; is {0} built?'.format(name)
     lst[2] = str(size)
