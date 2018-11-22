@@ -86,6 +86,14 @@ PRODUCT_PACKAGES_DEBUG += \
     tinypcminfo \
     update_engine_client \
 
+# Enable stats logging in LMKD
+TARGET_LMKD_STATS_LOG := true
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.lmk.log_stats=true
+
+# Controls some sync timings in libhwui
+TARGET_USES_HWC2 := true
+
 # Enable dynamic partition size
 PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 
