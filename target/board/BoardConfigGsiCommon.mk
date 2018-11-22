@@ -59,3 +59,6 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 
 # Audio: must using XML format for Treblized devices
 USE_XML_AUDIO_POLICY_CONF := 1
+
+TARGET_USES_HWC2 := true
+TARGET_LMKD_STATS_LOG := true
