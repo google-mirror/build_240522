@@ -15,10 +15,20 @@ ifneq ($(LOCAL_SRC_FILES),)
   $(error runtime resource overlay package should not contain sources)
 endif
 
-ifeq ($(LOCAL_RRO_THEME),)
-  LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/overlay
+ifeq ($(LOCAL_VENDOR_MODULE),true)
+  LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)
+else ifeq ($(LOCAL_PRODUCT_MODULE),true)
+  LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)
+else ifeq ($(LOCAL_PRODUCT_SERVICES_MODULE),true)
+  LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT_SERVICES)
 else
-  LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/overlay/$(LOCAL_RRO_THEME)
+  LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)
+endif
+
+ifeq ($(LOCAL_RRO_THEME),)
+  LOCAL_MODULE_PATH := $(LOCAL_MODULE_PATH)/overlay
+else
+  LOCAL_MODULE_PATH := $(LOCAL_MODULE_PATH)/overlay/$(LOCAL_RRO_THEME)
 endif
 
 include $(BUILD_SYSTEM)/package.mk
