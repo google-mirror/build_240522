@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "326620fd_079b46bd",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-11-26T21:08:49Z",
+      "side": 1,
+      "message": "i don\u0027t think you need this any more, but iirc we do have some qcom hexagon DSP ELF files on the system?",
+      "revId": "13bf63f38706cef18aea0ad801a67630f3bc35d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb43dd0_1ecd9bf0",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-11-26T21:08:49Z",
+      "side": 1,
+      "message": "(typo)",
+      "range": {
+        "startLine": 230,
+        "startChar": 5,
+        "endLine": 230,
+        "endChar": 14
+      },
+      "revId": "13bf63f38706cef18aea0ad801a67630f3bc35d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
