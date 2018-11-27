@@ -53,6 +53,7 @@ PRODUCT_PACKAGES += \
     cmd \
     com.android.location.provider \
     com.android.tzdata \
+    com.android.resolv \
     ContactsProvider \
     content \
     crash_dump \
