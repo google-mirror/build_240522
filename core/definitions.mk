@@ -2353,7 +2353,7 @@ ifeq ($(HOST_OS),linux)
 # Runs appcompat and store logs in $(PRODUCT_OUT)/appcompat
 define extract-package
 $(if $(filter aapt2, $(1)), \
-  $(AAPT2) dump $@ | awk -F ' |=' '/^Package/{print $$3}' >> $(PRODUCT_OUT)/appcompat/$(PRIVATE_MODULE).log &&, \
+  $(AAPT2) dump resources $@ | awk -F ' |=' '/^Package/{print $$3}' >> $(PRODUCT_OUT)/appcompat/$(PRIVATE_MODULE).log &&, \
   $(AAPT) dump badging $@ | awk -F \' '/^package/{print $$2}' >> $(PRODUCT_OUT)/appcompat/$(PRIVATE_MODULE).log &&)
 endef
 define appcompat-header
@@ -2461,6 +2461,15 @@ $(2): $(1) $(ZIPALIGN) $(ZIP2ZIP)
 	$$(copy-file-to-target)
 	$$(uncompress-dexs)
 	$$(align-package)
+endef
+
+# Create copy pair for compatibility suite
+# Filter out $(LOCAL_INSTALLED_MODULE) to prevent overriding target
+# $(1): source path
+# $(2): destination path
+# The format of copy pair is src:dst
+define compat-copy-pair
+$(if $(filter-out $(2), $(LOCAL_INSTALLED_MODULE)), $(1):$(2))
 endef
 
 # Copies many files.
