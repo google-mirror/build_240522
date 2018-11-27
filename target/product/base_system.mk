@@ -312,6 +312,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += debug.atrace.tags.enableflags=0
 PRODUCT_PACKAGES_DEBUG := \
     adb_keys \
     apex.test.key \
+    com.android.apex.test_package.key \
+    com.android.apex.test_package.preinstall.key \
     arping \
     iotop \
     iw \
