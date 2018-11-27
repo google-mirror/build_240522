@@ -323,6 +323,8 @@ PRODUCT_PACKAGES_DEBUG := \
     ss \
     strace \
     sanitizer-status \
+    test.apex.key \
+    test_preinstall.apex.key \
     tracepath \
     tracepath6 \
     traceroute6 \
