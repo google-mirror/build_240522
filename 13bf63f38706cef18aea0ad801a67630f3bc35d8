@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b3b8a09_7bf11533",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2018-11-27T11:01:56Z",
+      "side": 1,
+      "message": "I\u0027ve removed EM_MIPS from PS#5.\n\nRegarding to Hexagon DSP ELF files, I think we can skip them by default.  Those ELF files depend on some QCOM-specific libs that are not in the system/vendor partitions (probably on the ROM for the DSP).",
+      "parentUuid": "326620fd_079b46bd",
+      "revId": "13bf63f38706cef18aea0ad801a67630f3bc35d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccb43dd0_1ecd9bf0",
         "filename": "tools/check_elf_file.py",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "13bf63f38706cef18aea0ad801a67630f3bc35d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b57a99eb_72e72ae2",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2018-11-27T11:01:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccb43dd0_1ecd9bf0",
+      "range": {
+        "startLine": 230,
+        "startChar": 5,
+        "endLine": 230,
+        "endChar": 14
+      },
+      "revId": "13bf63f38706cef18aea0ad801a67630f3bc35d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
