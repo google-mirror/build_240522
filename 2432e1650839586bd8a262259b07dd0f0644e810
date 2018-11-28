@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3a341146_f485445b",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1139803
+      },
+      "writtenOn": "2018-11-28T11:30:33Z",
+      "side": 1,
+      "message": "It is, but so are a lot of SOs (under /system/lib) which are not included by the current make file.",
+      "parentUuid": "ca82cfa7_7cced9e9",
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3383a94f_98dbde95",
         "filename": "target/product/cf_vendor.mk",
         "patchSetId": 1
@@ -47,6 +65,30 @@
       "writtenOn": "2018-11-28T11:23:38Z",
       "side": 1,
       "message": "there\u0027s a typo here",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74534cd9_53368e5c",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1139803
+      },
+      "writtenOn": "2018-11-28T11:30:33Z",
+      "side": 1,
+      "message": "Yeah. Should be $(TARGET_COPY_OUT_VENDOR), which resulted the same failure.",
+      "parentUuid": "3383a94f_98dbde95",
       "range": {
         "startLine": 28,
         "startChar": 40,
