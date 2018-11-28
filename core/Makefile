@@ -2978,8 +2978,6 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(call images-for-partitions,$(BOARD_S
 	$(call build-superimage-target,$@,$(call super-slot-suffix),true)
 endif
 
-$(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
-
 INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
 $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE)
 	$(call pretty,"Target empty super fs image: $@")
@@ -3700,6 +3698,7 @@ ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
 	$(hide) echo -n "lpmake_args=" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo $(call build-superimage-target-args,$(call super-slot-suffix)) \
 	    >> $(zip_root)/META/misc_info.txt
+	$(hide) echo "super_slot_suffix=$(call super-slot-suffix)" >> $(zip_root)/META/misc_info.txt
 endif
 ifneq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
 	$(hide) echo "super_block_devices=$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)" >> $(zip_root)/META/misc_info.txt

@@ -656,8 +656,10 @@ def AddSuperEmpty(output_zip):
   img.Write()
 
 
-def AddSuperSplit(output_zip):
-  """Create split super_*.img and store it in output_zip."""
+def AddSuper(output_zip, split):
+  """Create super.img or split super_*.img and store it in output_zip."""
+
+  super_slot_suffix = OPTIONS.info_dict['super_slot_suffix']
 
   def GetPartitionSizeFromImage(img):
     try:
@@ -670,6 +672,10 @@ def AddSuperSplit(output_zip):
     lst = arg.split(':')
     # Because --auto-slot-suffixing for A/B, there is no need to remove suffix.
     name = lst[0]
+    if not name.endswith(super_slot_suffix):
+      # This is the --partition argument for slot B, so ignore
+      return arg
+    name = name[:-len(super_slot_suffix)]
     if name + '_size' in OPTIONS.info_dict:
       size = str(OPTIONS.info_dict[name + '_size'])
       logger.info("Using %s_size = %s", name, size)
@@ -691,7 +697,6 @@ def AddSuperSplit(output_zip):
 
     return lpmake_args
 
-  outdir = OutputFile(output_zip, OPTIONS.input_tmp, "OTA", "")
   cmd = [OPTIONS.info_dict['lpmake']]
   cmd += GetLpmakeArgsWithSizes()
 
@@ -701,16 +706,22 @@ def AddSuperSplit(output_zip):
     for name in shlex.split(source):
       img = os.path.join(OPTIONS.input_tmp, "IMAGES", '{}.img'.format(name))
       # Because --auto-slot-suffixing for A/B, there is no need to add suffix.
-      cmd += ['--image', '{}={}'.format(name, img)]
+      cmd += ['--image', '{}{}={}'.format(name, super_slot_suffix, img)]
 
-  cmd += ['--output', outdir.name]
+  cmd.append('--output')
+  output = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
+                      "" if split else "super.img")
+  cmd.append(output.name)
 
   common.RunAndCheckOutput(cmd)
 
-  for dev in OPTIONS.info_dict['super_block_devices'].strip().split():
-    img = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
-                     "super_" + dev + ".img")
-    img.Write()
+  if split:
+    for dev in OPTIONS.info_dict['super_block_devices'].strip().split():
+      img = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
+                       "super_" + dev + ".img")
+      img.Write()
+  else:
+    output.Write()
 
 
 def ReplaceUpdatedFiles(zip_filename, files_list):
@@ -910,10 +921,9 @@ def AddImagesToTargetFiles(filename):
     banner("super_empty")
     AddSuperEmpty(output_zip)
 
-    if OPTIONS.info_dict.get("dynamic_partition_retrofit") == "true":
-      banner("super split images")
-      AddSuperSplit(output_zip)
-    # TODO(b/119322123): Add super.img to target_files for non-retrofit
+    retrofit = OPTIONS.info_dict.get("dynamic_partition_retrofit") == "true"
+    banner("super split images" if retrofit else "super")
+    AddSuper(output_zip, split=retrofit)
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
