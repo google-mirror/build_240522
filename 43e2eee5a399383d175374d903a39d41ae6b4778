@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ddf748e_0e36e63f",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-11-28T22:07:28Z",
+      "side": 1,
+      "message": "Please alphabetize",
+      "revId": "43e2eee5a399383d175374d903a39d41ae6b4778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
