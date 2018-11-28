@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c47941ba_7d6d5324",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2018-11-28T18:00:23Z",
+      "side": 1,
+      "message": "Move before com.android.tzdata to keep the list sorted alphabetically.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 24
+      },
+      "revId": "ee8c78bcea5a112bad6f2e9859f3313458f48154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
