@@ -98,6 +98,30 @@
       "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6d41641_c883215e",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-28T13:24:41Z",
+      "side": 1,
+      "message": "it\u0027s a different failure, actually\n\n- as is, this mk claims to own /, so it\u0027s an error that mainline_x86 is producing files under /\n- with the typo fixed, this mk claims to own /vendor, but it produces a bunch of files outside /vendor (e.g. /system).",
+      "parentUuid": "74534cd9_53368e5c",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
