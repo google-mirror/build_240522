@@ -223,6 +223,20 @@ else
   partition_tag := $(if $(call should-install-to-system,$(my_module_tags)),,_DATA)
 endif
 endif
+# For test modules that lack a suite tag, set null-suite as the default.
+# We only support adding a default suite to native tests, native benchmarks, and instrumentation tests.
+# This is because they are the only tests we currently auto-generate test configs for.
+ifndef LOCAL_COMPATIBILITY_SUITE
+  ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
+    LOCAL_COMPATIBILITY_SUITE := null-suite
+  endif
+  ifneq ($(filter APPS, $(LOCAL_MODULE_CLASS)),)
+    ifneq ($(filter $(my_module_tags),tests),)
+      LOCAL_COMPATIBILITY_SUITE := null-suite
+    endif
+  endif
+endif
+
 ifeq ($(my_module_path),)
   install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
   ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
@@ -230,6 +244,17 @@ ifeq ($(my_module_path),)
   endif
 
   my_module_path := $($(install_path_var))
+
+  # If LOCAL_COMPATIBILITY_SUITE be set, and LOCAL_MODULE_PATH not set,
+  # overwrite the default path under testcase.
+  #ifdef LOCAL_COMPATIBILITY_SUITE
+  #  arch_dir := $($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+  #  testcase_folder := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)/$(arch_dir)
+  #  ifneq (true, $(LOCAL_IS_HOST_MODULE))
+  #    my_module_path := $(testcase_folder)
+  #  endif
+  #endif
+
   ifeq ($(strip $(my_module_path)),)
     $(error $(LOCAL_PATH): unhandled install path "$(install_path_var) for $(LOCAL_MODULE)")
   endif
@@ -305,7 +330,9 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   # Neither do Runtime Resource Overlay apks, which contain just the overlaid resources.
   else ifeq ($(LOCAL_IS_RUNTIME_RESOURCE_OVERLAY),true)
   else
+    #ifndef LOCAL_COMPATIBILITY_SUITE
     my_module_path := $(my_module_path)/$(LOCAL_MODULE)
+    #endif
   endif
   endif
   LOCAL_INSTALLED_MODULE := $(my_module_path)/$(my_installed_module_stem)
@@ -523,20 +550,6 @@ endif
 endif
 endif
 
-# For test modules that lack a suite tag, set null-suite as the default.
-# We only support adding a default suite to native tests, native benchmarks, and instrumentation tests.
-# This is because they are the only tests we currently auto-generate test configs for.
-ifndef LOCAL_COMPATIBILITY_SUITE
-ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
-LOCAL_COMPATIBILITY_SUITE := null-suite
-endif
-ifneq ($(filter APPS, $(LOCAL_MODULE_CLASS)),)
-ifneq ($(filter $(my_module_tags),tests),)
-LOCAL_COMPATIBILITY_SUITE := null-suite
-endif
-endif
-endif
-
 ###########################################################
 ## Compatibility suite files.
 ###########################################################
@@ -554,15 +567,21 @@ endif
 ifdef LOCAL_MULTILIB
   multi_arch := true
 endif
-ifdef multi_arch
-  arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
-endif
+arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
 multi_arch :=
+
+# Install also into the testcase folder
+# TODO(b/118819597) Change LOCAL_INSTALLED_MODULE to the location of LOCAL_DEFAULT_TEST_MODULE and remove LOCAL_DEFAULT_TEST_MODULE
+LOCAL_DEFAULT_TEST_MODULE := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(arch_dir)/$(my_installed_module_stem)
+TMP_TEST_MODULE := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)$(arch_dir)/$(my_installed_module_stem)
+ifneq ($(LOCAL_INSTALLED_MODULE),$(LOCAL_DEFAULT_TEST_MODULE))
+$(LOCAL_INSTALLED_MODULE) : $(LOCAL_DEFAULT_TEST_MODULE)
+endif
 
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
+    $(call compat-copy-pair,$(LOCAL_BUILT_MODULE),$(dir)/$(my_installed_module_stem)))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
 
