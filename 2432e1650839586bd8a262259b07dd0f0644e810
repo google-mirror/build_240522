@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01d214c9_58fd9387",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-28T11:23:38Z",
+      "side": 1,
+      "message": "I\u0027ll take a look at this",
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca82cfa7_7cced9e9",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-28T11:23:38Z",
+      "side": 1,
+      "message": "looks like it is?",
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3383a94f_98dbde95",
+        "filename": "target/product/cf_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-11-28T11:23:38Z",
+      "side": 1,
+      "message": "there\u0027s a typo here",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "2432e1650839586bd8a262259b07dd0f0644e810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
