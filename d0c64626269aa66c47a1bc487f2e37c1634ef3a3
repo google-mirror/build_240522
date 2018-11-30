@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6a57b2e_3a2921cc",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2971,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "are we using this var?",
+      "range": {
+        "startLine": 2971,
+        "startChar": 29,
+        "endLine": 2971,
+        "endChar": 42
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69312888_d3256bd4",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 3321,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "nit: hyphen",
+      "range": {
+        "startLine": 3321,
+        "startChar": 7,
+        "endLine": 3321,
+        "endChar": 35
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41d63624_3f217fbc",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 3322,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "nit: no need to use tabs",
+      "range": {
+        "startLine": 3322,
+        "startChar": 0,
+        "endLine": 3322,
+        "endChar": 1
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d77837c_e3815d28",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 3660,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s preferred to not have blank lines in the recipe (don\u0027t remember the exact reason...)",
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d55f4fb_99343799",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 3986,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "Need to depend on build_super_image",
+      "range": {
+        "startLine": 3986,
+        "startChar": 32,
+        "endLine": 3986,
+        "endChar": 71
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d1ba0ba_966f676e",
+        "filename": "tools/releasetools/build_super_image",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "I think it\u0027s only due to historical reason of having separate symlink files. We can call .py from Makefile directly",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfeaea67_39852a8e",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "nit: move local modules after standard ones",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 13
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb893369_663accce",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "nit: two blank lines (and L147)",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 1
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a19b1fb_61dc9f02",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-11-30T01:37:42Z",
+      "side": 1,
+      "message": "Since we want to call this function during signing, it should additionally support taking a target_files.zip (i.e. a zip file) as the input. that way we don\u0027t need to request caller unzipping or setting *_image.",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 145,
+        "endChar": 17
+      },
+      "revId": "d0c64626269aa66c47a1bc487f2e37c1634ef3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
