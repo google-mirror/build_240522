@@ -1700,6 +1700,7 @@ function validate_current_shell() {
 
 function acloud()
 {
+    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
     # Let's use the built version over the prebuilt.
     local built_acloud=${ANDROID_HOST_OUT}/bin/acloud
     if [ -f $built_acloud ]; then
@@ -1707,9 +1708,15 @@ function acloud()
         return $?
     fi
 
-    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
     case $host_os_arch in
         linux-x86) "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
+        ;;
+        darwin-x86)
+        if [[ -z $ACLOUD_MAC_ENABLE ]]; then
+            echo "workaround required for acloud on mac, check go/acloud-mac"
+            return 1
+        fi
+        "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/acloud "$@"
         ;;
     *)
         echo "acloud is not supported on your host arch: $host_os_arch"
