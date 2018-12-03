@@ -1608,16 +1608,25 @@ function validate_current_shell() {
 
 function acloud()
 {
+    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
     # Let's use the built version over the prebuilt.
     local built_acloud=${ANDROID_HOST_OUT}/bin/acloud
     if [ -f $built_acloud ]; then
-        $built_acloud "$@"
+        case $host_os_arch in
+            darwin-x86) "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/run_acloud_mac.sh $built_acloud "$@"
+            ;;
+        *)
+            $built_acloud "$@"
+            ;;
+        esac
+
         return $?
     fi
 
-    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
     case $host_os_arch in
         linux-x86) "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
+        ;;
+        darwin-x86) "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/run_acloud_mac.sh "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/acloud "$@"
         ;;
     *)
         echo "acloud is not supported on your host arch: $host_os_arch"
