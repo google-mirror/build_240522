@@ -2661,6 +2661,11 @@ dex_index=2; \
 while zip --quiet --delete $(1) classes$${dex_index}.dex > /dev/null; do \
   let dex_index=dex_index+1; \
 done \
+\
+unzip $(1) META-INF/MANIFEST.MF -d $(dir $(1)); \
+sed -i '/^Name: .*classes\d*\.dex\r$/,/^\r$/d' $(dir $(1))/META-INF/MANIFEST.MF \
+(cd $(dir $(1)); zip uf $(1) META-INF/MANIFEST.MF); \
+rm -r $(dir $(1))/META-INF; \
 fi
 endef
 
