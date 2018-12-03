@@ -1203,7 +1203,6 @@ endif
 INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-public-list.txt
 INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-private-list.txt
 INTERNAL_PLATFORM_HIDDENAPI_FLAGS := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-flags.csv
-INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-greylist.csv
 
 # Missing optional uses-libraries so that the platform doesn't create build rules that depend on
 # them. See setup_one_odex.mk.
