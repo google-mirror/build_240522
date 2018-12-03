@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c39d2e8_d4b7d6ae",
+        "filename": "core/combo/arch/x86_64/x86_64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-12-03T18:33:29Z",
+      "side": 1,
+      "message": "All x86_64 devices have AVX and AVX2?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "b8d4288617b91a67ba66aee629aa51058e277437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
