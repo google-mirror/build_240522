@@ -89,13 +89,20 @@ def ValidateFileConsistency(input_zip, input_tmp, info_dict):
         logging.warning('Skipping %s that has incomplete block list', entry)
         continue
 
+      # Use the original RangeSet if applicable, which includes the shared
+      # blocks. And this needs to happen before checking the monotonicity flag.
+      if ranges.extra.get('uses_shared_blocks'):
+        file_ranges = ranges.extra['uses_shared_blocks']
+      else:
+        file_ranges = ranges
+
       # TODO(b/79951650): Handle files with non-monotonic ranges.
-      if not ranges.monotonic:
+      if not file_ranges.monotonic:
         logging.warning(
-            'Skipping %s that has non-monotonic ranges: %s', entry, ranges)
+            'Skipping %s that has non-monotonic ranges: %s', entry, file_ranges)
         continue
 
-      blocks_sha1 = image.RangeSha1(ranges)
+      blocks_sha1 = image.RangeSha1(file_ranges)
 
       # The filename under unpacked directory, such as SYSTEM/bin/sh.
       unpacked_name = os.path.join(
