@@ -1711,6 +1711,14 @@ function acloud()
     case $host_os_arch in
         linux-x86) "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
         ;;
+        darwin-x86)
+        if [[ -z $ACLOUD_MAC_ENABLE ]]; then
+            # TODO: Remove when b/120883119 is resolved.
+            echo "workaround required for acloud on mac, check go/acloud-mac"
+            return 1
+        fi
+        "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/acloud "$@"
+        ;;
     *)
         echo "acloud is not supported on your host arch: $host_os_arch"
         ;;
