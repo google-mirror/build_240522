@@ -22,6 +22,30 @@
       "revId": "13adeec01e4ac1b216dc4eacf654f2c12fbb0610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd24cb4f_72a5e221",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2018-12-04T15:31:40Z",
+      "side": 1,
+      "message": "I used \"disabled\" because I thought it might be helpful to have \"relaxed\" mode for those who cannot pass the dependency check but would like to check soname (or other simple checks).  However, thinking this again, it seemed that it does not worth the complexity.  In PS#5, I switched to a boolean value (empty means follow the product-level settings and false means disabled).",
+      "parentUuid": "d97e0f4a_32c725f5",
+      "range": {
+        "startLine": 28,
+        "startChar": 21,
+        "endLine": 28,
+        "endChar": 32
+      },
+      "revId": "13adeec01e4ac1b216dc4eacf654f2c12fbb0610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
