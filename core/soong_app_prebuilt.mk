@@ -69,7 +69,11 @@ endif
 ifdef LOCAL_DEX_PREOPT
   $(built_odex): $(LOCAL_SOONG_DEX_JAR)
 	$(call dexpreopt-one-file,$<,$@)
-  $(eval $(call dexpreopt-copy-jar,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE),$(LOCAL_STRIP_DEX)))
+
+$(LOCAL_BUILT_MODULE) : $(LOCAL_PREBUILT_MODULE_FILE) | $(ZIPALIGN) $(SIGNAPK_JAR)
+	$(copy-file-to-target)
+	$(call dexpreopt-remove-classes.dex,$@)
+	$(sign-package)
 else
   $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
 endif
@@ -96,8 +100,16 @@ my_2nd_arch_prefix :=
 
 PACKAGES := $(PACKAGES) $(LOCAL_MODULE)
 ifdef LOCAL_CERTIFICATE
+  my_private_key := $(patsubst %.x509.pem,%.pk8,$(LOCAL_CERTIFICATE))
+
   PACKAGES.$(LOCAL_MODULE).CERTIFICATE := $(LOCAL_CERTIFICATE)
-  PACKAGES.$(LOCAL_MODULE).PRIVATE_KEY := $(patsubst %.x509.pem,%.pk8,$(LOCAL_CERTIFICATE))
+  PACKAGES.$(LOCAL_MODULE).PRIVATE_KEY := $(my_private_key)
+
+  $(LOCAL_BUILT_MODULE) : $(LOCAL_CERTIFICATE) $(my_private_key)
+  $(LOCAL_BUILT_MODULE) : PRIVATE_PRIVATE_KEY := $(my_private_key)
+  $(LOCAL_BUILT_MODULE) : PRIVATE_CERTIFICATE := $(LOCAL_CERTIFICATE)
+
+  my_private_key :=
 endif
 
 PACKAGES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
