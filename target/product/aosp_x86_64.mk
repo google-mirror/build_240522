@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (2cb443 Merge "Workaround Legancy GSI for some Wifi firmware" into p)
 # The system image of aosp_x86_64-userdebug is a GSI for the devices with:
 # - x86 64 bits user space
 # - 64 bits binder interface
@@ -21,6 +22,8 @@
 # - VNDK enforcement
 # - compatible property override enabled
 
+=======
+>>>>>>> BRANCH (2bdb84 Merge pi-qpr1-release PQ1A.181105.017.A1 to pi-platform-rele)
 # This is a build configuration for a full-featured build of the
 # Open-Source part of the tree. It's geared toward a US-centric
 # build quite specifically for the emulator, and might not be

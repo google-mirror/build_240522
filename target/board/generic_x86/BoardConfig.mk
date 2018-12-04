@@ -26,7 +26,42 @@ include build/make/target/board/BoardConfigGsiCommon.mk
 # Resize to 4G to accomodate ASAN and CTS
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 4294967296
 
+<<<<<<< HEAD   (2cb443 Merge "Workaround Legancy GSI for some Wifi firmware" into p)
 BOARD_SEPOLICY_DIRS += device/generic/goldfish/sepolicy/x86
+=======
+# Android generic system image always create metadata partition
+BOARD_USES_METADATA_PARTITION := true
+
+# Set this to create /cache mount point for non-A/B devices that mounts /cache.
+# The partition size doesn't matter, just to make build pass.
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
+
+BOARD_SEPOLICY_DIRS += \
+        device/generic/goldfish/sepolicy/common \
+        device/generic/goldfish/sepolicy/x86
+
+# Android Verified Boot (AVB):
+#   Builds a special vbmeta.img that disables AVB verification.
+#   Otherwise, AVB will prevent the device from booting the generic system.img.
+#   Also checks that BOARD_AVB_ENABLE is not set, to prevent adding verity
+#   metadata into system.img.
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(error BOARD_AVB_ENABLE cannot be set for GSI)
+endif
+BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+# GSI is always userdebug and needs a couple of properties taking precedence
+# over those set by the vendor.
+TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
+endif
+BOARD_VNDK_VERSION := current
+
+# Enable A/B update
+TARGET_NO_RECOVERY := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+>>>>>>> BRANCH (2bdb84 Merge pi-qpr1-release PQ1A.181105.017.A1 to pi-platform-rele)
 
 # Wifi.
 BOARD_WLAN_DEVICE           := emulator

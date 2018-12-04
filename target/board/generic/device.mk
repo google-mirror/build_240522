@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (2cb443 Merge "Workaround Legancy GSI for some Wifi firmware" into p)
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
 
@@ -24,6 +25,15 @@ PRODUCT_COPY_FILES := \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     device/generic/goldfish/camera/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     hardware/libhardware_legacy/audio/audio_policy.conf:system/etc/audio_policy.conf
+=======
+# minimal configuration for audio policy.
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml \
+>>>>>>> BRANCH (2bdb84 Merge pi-qpr1-release PQ1A.181105.017.A1 to pi-platform-rele)
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in

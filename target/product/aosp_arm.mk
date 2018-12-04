@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (2cb443 Merge "Workaround Legancy GSI for some Wifi firmware" into p)
 # The system image of aosp_arm-userdebug is a GSI for the devices with:
 # - ARM 32 bits user space
 # - 64 bits binder interface
@@ -22,6 +23,13 @@
 # - compatible property override enabled
 
 -include device/generic/goldfish/arm32-vendor.mk
+=======
+-include device/generic/goldfish/arm32-vendor.mk
+
+# TODO(b/78308559): includes vr_hwc into GSI before vr_hwc move to vendor
+PRODUCT_PACKAGES += \
+    vr_hwc
+>>>>>>> BRANCH (2bdb84 Merge pi-qpr1-release PQ1A.181105.017.A1 to pi-platform-rele)
 
 include $(SRC_TARGET_DIR)/product/full.mk
 
