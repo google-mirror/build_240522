@@ -218,6 +218,7 @@ OPTIONS.log_diff = None
 OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
+OPTIONS.extracted_source = None
 OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
 OPTIONS.retrofit_dynamic_partitions = False
@@ -1935,6 +1936,8 @@ def main(argv):
       OPTIONS.payload_signer_args = shlex.split(a)
     elif o == "--extracted_input_target_files":
       OPTIONS.extracted_input = a
+    elif o == "--extracted_source_target_files":
+      OPTIONS.extracted_source = a
     elif o == "--skip_postinstall":
       OPTIONS.skip_postinstall = True
     elif o == "--retrofit_dynamic_partitions":
@@ -1968,6 +1971,7 @@ def main(argv):
                                  "payload_signer=",
                                  "payload_signer_args=",
                                  "extracted_input_target_files=",
+                                 "extracted_source_target_files=",
                                  "skip_postinstall",
                                  "retrofit_dynamic_partitions",
                              ], extra_option_handler=option_handler)
@@ -2004,8 +2008,11 @@ def main(argv):
   # Load the source build dict if applicable.
   if OPTIONS.incremental_source is not None:
     OPTIONS.target_info_dict = OPTIONS.info_dict
-    with zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
-      OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
+    if not OPTIONS.extracted_source:
+      OPTIONS.source_info_dict = common.LoadInfoDict(OPTIONS.extracted_source)
+    else:
+      with zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
+        OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
 
     logger.info("--- source info ---")
     common.DumpInfoDict(OPTIONS.source_info_dict)
@@ -2098,9 +2105,12 @@ def main(argv):
 
   # Generate an incremental OTA.
   else:
-    logger.info("unzipping source target-files...")
-    OPTIONS.source_tmp = common.UnzipTemp(
-        OPTIONS.incremental_source, UNZIP_PATTERN)
+    if OPTIONS.extracted_source:
+      OPTIONS.source_tmp = OPTIONS.extracted_source
+    else:
+      logger.info("unzipping source target-files...")
+      OPTIONS.source_tmp = common.UnzipTemp(
+          OPTIONS.incremental_source, UNZIP_PATTERN)
     with zipfile.ZipFile(args[0], 'r') as input_zip, \
         zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
       WriteBlockIncrementalOTAPackage(
