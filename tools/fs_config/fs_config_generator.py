@@ -1110,7 +1110,7 @@ class AIDArrayGen(BaseGenerator):
 
     _STRUCT_FS_CONFIG = textwrap.dedent("""
                          struct android_id_info {
-                             const char *name;
+                             const char name[%d];
                              unsigned aid;
                          };""")
 
@@ -1132,12 +1132,13 @@ class AIDArrayGen(BaseGenerator):
     def __call__(self, args):
 
         hdr = AIDHeaderParser(args['hdrfile'])
+        max_name_length = max(len(aid.friendly) for aid in hdr.aids)
 
         print AIDArrayGen._GENERATED
         print
         print AIDArrayGen._INCLUDE
         print
-        print AIDArrayGen._STRUCT_FS_CONFIG
+        print AIDArrayGen._STRUCT_FS_CONFIG % (max_name_length + 1)
         print
         print AIDArrayGen._OPEN_ID_ARRAY
 
