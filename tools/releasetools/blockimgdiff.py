@@ -468,6 +468,19 @@ class BlockImageDiff(object):
 
     self.FindSequenceForTransfers()
 
+    stash_limit = (common.OPTIONS.cache_size * common.OPTIONS.stash_threshold /
+                   self.tgt.blocksize)
+    max_stashed_blocks = self.CalculateMaxStashBlocks()
+    # We cannot stash more blocks than the stash limit simultaneously. As a
+    # result, some 'diff' commands will be converted to new; leading to an
+    # unintended large package. To mitigate this issue, we can carefully choose
+    # the transfer for conversion. The number '1024' can be further tweak here
+    # to balance the package size and build time.
+    if max_stashed_blocks > stash_limit + 1024:
+      self.SelectAndConvertDiffTransfersToNew(max_stashed_blocks - stash_limit)
+      # Regenerate the sequence as the graph has changed.
+      self.FindSequenceForTransfers()
+
     # Ensure the runtime stash size is under the limit.
     if common.OPTIONS.cache_size is not None:
       self.ReviseStashSize()
@@ -1294,6 +1307,66 @@ class BlockImageDiff(object):
       sys.exit(1)
 
     return patches
+
+  def SelectAndConvertDiffTransfersToNew(self, stash_to_remove):
+    """Converts the diff transfers to reduce the max simultaneous stash.
+
+      Since the 'new' data is compressed with deflate, we can select the 'diff'
+      transfers for conversion by comparing its patch size with the size of the
+      compressed data. Ideally, we want to convert the transfers with a small
+      size loss, but using a large number of stashed blocks.
+    """
+
+    logger.info("Selecting diff commands to convert to new.")
+    diff_queue = []
+    for xf in self.transfers:
+      if xf.style == "diff" and xf.src_sha1 != xf.tgt_sha1:
+        use_imgdiff = self.CanUseImgdiff(xf.tgt_name, xf.tgt_ranges,
+                                         xf.src_ranges)
+        diff_queue.append((xf.order, use_imgdiff, len(diff_queue)))
+
+    # Removes the 'move' transfers, and computes the patch & compressed size
+    # for the remaining.
+    result = self.ComputePatchesForInputList(diff_queue, True)
+
+    removed_stashed_blocks = 0
+    for xf_index, patch_info, compressed_size in result:
+      xf = self.transfers[xf_index]
+      if not xf.patch_info:
+        xf.patch_info = patch_info
+
+      size_ratio = len(xf.patch_info.content) * 100.0 / compressed_size
+      diff_style = "imgdiff" if xf.patch_info.imgdiff else "bsdiff"
+      logger.info("%s, target size: %d, style: %s, patch size: %d,"
+                  " compression_size: %d, ratio %.2f%%", xf.tgt_name,
+                  xf.tgt_ranges.size(), diff_style,
+                  len(xf.patch_info.content), compressed_size, size_ratio)
+      if size_ratio > 99:
+        removed_stashed_blocks += sum(sr.size() for _, sr in xf.use_stash)
+        logger.info("Converting %s to new", xf.tgt_name)
+        xf.ConvertToNew()
+
+    # TODO(xunchang) convert more transfers by sorting:
+    # (compressed size - patch_size) / used_stashed_blocks
+
+    logger.info("Removed %d stashed blocks", removed_stashed_blocks)
+
+  def CalculateMaxStashBlocks(self):
+    """A quick estimate of the maximum simultaneous stash size."""
+
+    stashed_range = RangeSet()
+    max_stash_blocks = 0
+    for xf in self.transfers:
+      for _, sr in xf.stash_before:
+        stashed_range = stashed_range.union(sr)
+
+      implicit_stash_size = (xf.src_ranges.size() if xf.src_ranges.overlaps(
+          xf.tgt_ranges) else 0)
+      max_stash_blocks = max(max_stash_blocks, stashed_range.size()
+                             + implicit_stash_size)
+      stashed_range = stashed_range.subtract(xf.src_ranges)
+
+    return max_stash_blocks
 
   def FindTransfers(self):
     """Parse the file_map to generate all the transfers."""
