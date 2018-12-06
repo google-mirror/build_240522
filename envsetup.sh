@@ -1463,6 +1463,63 @@ function godir () {
     \cd $T/$pathname
 }
 
+# Update module-info.json in out.
+function refresh-targets() {
+    >&2 echo "Refreshing targets (building module-info.json). Log at $ANDROID_BUILD_TOP/module-info.json.out."
+    # Note, can't use absolute path because of the way make works.
+    m -j "${ANDROID_PRODUCT_OUT#$ANDROID_BUILD_TOP/}/module-info.json" \
+        > $ANDROID_PRODUCT_OUT/module-info.json.build.log 2>&1
+}
+
+# List all targets for the current device, as cached in module-info.json. If any build change is
+# made and it should be reflected in the output, you should run 'refresh-targets' first.
+function all-targets() {
+    if [ ! -f "$ANDROID_PRODUCT_OUT/module-info.json" ]; then
+        echo "Could not find module-info.json. It will only be built once, and it can be updated with 'refresh-targets'"
+        refresh-targets || return 1
+    fi
+
+    python3 -c "import json; print('\n'.join(sorted(json.load(open('$ANDROID_PRODUCT_OUT/module-info.json')).keys())))"
+}
+
+# Go to a specific target in the android tree, as cached in module-info.json. If any build change
+# is made, and it should be reflected in the output, you should run 'refresh-targets' first.
+function goto-target() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: goto-target <target>"
+        return 1
+    fi
+
+    if [ ! -f "$ANDROID_PRODUCT_OUT/module-info.json" ]; then
+        echo "Could not find module-info.json. It will only be built once, and it can be updated with 'refresh-targets'"
+        refresh-targets || return 1
+    fi
+
+    local relpath=$(python3 -c "import json, os
+module = '$1'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+if module not in module_info:
+    exit(1)
+print(module_info[module]['path'][0])" 2>/dev/null)
+
+    if [ -z "$relpath" ]; then
+        echo "Could not find module '$1'."
+        return 1
+    else
+        cd $ANDROID_BUILD_TOP/$relpath
+    fi
+}
+
+function _complete-android-target-names() {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(all-targets | grep -P "^$word") )
+}
+
+complete -F _complete-android-target-names goto-target
+# for android builds
+complete -F _complete-android-target-names m
+complete -F _complete-android-target-names make
+
 # Print colored exit condition
 function pez {
     "$@"
