@@ -107,7 +107,6 @@ fs_config_generate_bin := $(LOCAL_INSTALLED_MODULE)
 # List of supported vendor, oem, odm, product and product_services Partitions
 fs_config_generate_extra_partition_list := $(strip \
   $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),vendor) \
-  $(if $(BOARD_USES_OEMIMAGE)$(BOARD_OEMIMAGE_FILE_SYSTEM_TYPE),oem) \
   $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm) \
   $(if $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),product) \
   $(if $(BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE),product_services) \
