@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8e016b1_80bed681",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-12-07T18:52:06Z",
+      "side": 1,
+      "message": "Need to check the result here to skip L662?",
+      "range": {
+        "startLine": 660,
+        "startChar": 2,
+        "endLine": 660,
+        "endChar": 62
+      },
+      "revId": "2b3fa347695366f3c21925b18b93c2c1a6ae33cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
