@@ -3275,7 +3275,7 @@ define dump-dynamic-partitions-info
     echo "use_dynamic_partitions=true" >> $(1))
   $(if $(filter true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)), \
     echo "dynamic_partition_retrofit=true" >> $(1))
-  echo "lpmake=$(notdir $(LPMAKE))" >> $(1)
+  echo "lpmake=$(LPMAKE)" >> $(1)
   $(if $(filter true,$(PRODUCT_BUILD_SUPER_PARTITION)), $(if $(BOARD_SUPER_PARTITION_SIZE), \
     echo "build_super_partition=true" >> $(1)))
   echo "super_metadata_device=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)" >> $(1)
