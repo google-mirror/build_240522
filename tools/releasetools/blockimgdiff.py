@@ -1316,6 +1316,8 @@ class BlockImageDiff(object):
       compressed data. Ideally, we want to convert the transfers with a small
       size loss, but using a large number of stashed blocks.
     """
+    TransferSizeScore = namedtuple("TransferSizeScore",
+                                   'xf, used_stash_blocks, score')
 
     logger.info("Selecting diff commands to convert to new.")
     diff_queue = []
@@ -1330,6 +1332,7 @@ class BlockImageDiff(object):
     result = self.ComputePatchesForInputList(diff_queue, True)
 
     removed_stashed_blocks = 0
+    conversion_candidate = []
     for xf_index, patch_info, compressed_size in result:
       xf = self.transfers[xf_index]
       if not xf.patch_info:
@@ -1341,13 +1344,28 @@ class BlockImageDiff(object):
                   " compression_size: %d, ratio %.2f%%", xf.tgt_name,
                   xf.tgt_ranges.size(), diff_style,
                   len(xf.patch_info.content), compressed_size, size_ratio)
+
+      used_stash_blocks = sum(sr.size() for _, sr in xf.use_stash)
       if size_ratio > 99:
-        removed_stashed_blocks += sum(sr.size() for _, sr in xf.use_stash)
+        removed_stashed_blocks += used_stash_blocks
         logger.info("Converting %s to new", xf.tgt_name)
         xf.ConvertToNew()
+      elif used_stash_blocks > 0:
+        score = ((compressed_size - len(xf.patch_info.content)) * 100.0
+                 / used_stash_blocks)
+        conversion_candidate.append(TransferSizeScore(
+            xf, used_stash_blocks, score))
 
-    # TODO(xunchang) convert more transfers by sorting:
-    # (compressed size - patch_size) / used_stashed_blocks
+    conversion_candidate.sort(key=lambda x: x.score, reverse=True)
+
+    while conversion_candidate:
+      xf, used_stash_blocks, _ = conversion_candidate.pop()
+      if removed_stashed_blocks + used_stash_blocks > stash_to_remove:
+        break
+
+      logger.info("Converting %s to new", xf.tgt_name)
+      xf.ConvertToNew()
+      removed_stashed_blocks += used_stash_blocks
 
     logger.info("Removed %d stashed blocks", removed_stashed_blocks)
 
