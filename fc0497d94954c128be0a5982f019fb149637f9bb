@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51846cd2_3157eea5",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-12-11T06:55:26Z",
+      "side": 1,
+      "message": "ifdef BOARD_INCLUDE_RECOVERY_DTBO\n$(INSTALLED_BOOTIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)\nendif\nifdef BOARD_INCLUDE_RECOVERY_ACPIO\n$(INSTALLED_BOOTIMAGE_TARGET): $(BOARD_RECOVERY_ACPIO)\nendif",
+      "range": {
+        "startLine": 1805,
+        "startChar": 0,
+        "endLine": 1807,
+        "endChar": 5
+      },
+      "revId": "fc0497d94954c128be0a5982f019fb149637f9bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7877be07_b4e491a1",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-12-11T06:55:26Z",
+      "side": 1,
+      "message": "ifdef BOARD_INCLUDE_RECOVERY_DTBO\n$(INSTALLED_RECOVERYIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)\nendif\nifdef BOARD_INCLUDE_RECOVERY_ACPIO\n$(INSTALLED_RECOVERYIMAGE_TARGET): $(BOARD_RECOVERY_ACPIO)\nendif",
+      "range": {
+        "startLine": 1825,
+        "startChar": 0,
+        "endLine": 1827,
+        "endChar": 5
+      },
+      "revId": "fc0497d94954c128be0a5982f019fb149637f9bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
