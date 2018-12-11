@@ -179,17 +179,22 @@ my_2nd_arch_prefix :=
 define dex2oat-one-file
 $(hide) rm -f $(2)
 $(hide) mkdir -p $(dir $(2))
-stored_class_loader_context_libs=$(PRIVATE_DEX2OAT_STORED_CLASS_LOADER_CONTEXT_LIBS) && \
-class_loader_context_arg=--class-loader-context=$(PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT) && \
-class_loader_context=$(PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT) && \
-stored_class_loader_context_arg="" && \
 uses_library_names="$(PRIVATE_USES_LIBRARY_NAMES)" && \
 optional_uses_library_names="$(PRIVATE_OPTIONAL_USES_LIBRARY_NAMES)" && \
+dex_preopt_host_libraries="$(PRIVATE_DEX_PREOPT_HOST_LIBRARIES)" && \
+dex_preopt_target_libraries="$(PRIVATE_DEX_PREOPT_TARGET_LIBRARIES)" && \
 aapt_binary="$(AAPT)" && \
+conditional_host_libs_28="$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_28)" && \
+conditional_target_libs_28="$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_28)" && \
+conditional_host_libs_29="$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_29)" && \
+conditional_target_libs_29="$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_29)" && \
 $(if $(filter true,$(PRIVATE_ENFORCE_USES_LIBRARIES)), \
 source build/make/core/verify_uses_libraries.sh "$(1)" && \
-source build/make/core/construct_context.sh "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST)" "$(PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET)" && \
-,) \
+source build/make/core/construct_context.sh && \
+, \
+class_loader_context_arg="--class-loader-context=&" && \
+stored_class_loader_context_arg="" \
+) \
 ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	--avoid-storing-invocation \
 	--runtime-arg -Xms$(DEX2OAT_XMS) --runtime-arg -Xmx$(DEX2OAT_XMX) \
