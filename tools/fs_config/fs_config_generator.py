@@ -911,14 +911,6 @@ class FSConfigGen(BaseGenerator):
 
     # Long names.
     # pylint: disable=invalid-name
-    _NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY = (
-        '{ 00000, AID_ROOT, AID_ROOT, 0,'
-        '"system/etc/fs_config_dirs" },')
-
-    _NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_FILES_ENTRY = (
-        '{ 00000, AID_ROOT, AID_ROOT, 0,'
-        '"system/etc/fs_config_files" },')
-
     _IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS = (
         '#ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS')
     # pylint: enable=invalid-name
@@ -1084,9 +1076,6 @@ class FSConfigGen(BaseGenerator):
 
             if not are_dirs:
                 print FSConfigGen._IFDEF_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
-                print(
-                    '    ' +
-                    FSConfigGen._NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS_ENTRY)
                 print FSConfigGen._ENDIF
             print FSConfigGen._CLOSE_FILE_STRUCT
 
