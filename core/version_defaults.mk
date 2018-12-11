@@ -252,7 +252,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (5e5cf8 Merge "Rename _complete-android-module-names")
       PLATFORM_SECURITY_PATCH := 2018-09-05
+=======
+      PLATFORM_SECURITY_PATCH := 2018-12-05
+>>>>>>> BRANCH (4a676a Version bump to PPRL.181205.001)
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH
 

@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (5e5cf8 Merge "Rename _complete-android-module-names")
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.181205.001
+>>>>>>> BRANCH (4a676a Version bump to PPRL.181205.001)
