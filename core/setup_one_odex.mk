@@ -49,8 +49,10 @@ my_optional_lib_names :=
 my_filtered_optional_uses_libraries :=
 my_system_dependencies :=
 my_stored_preopt_class_loader_context_libs :=
-my_conditional_uses_libraries_host :=
-my_conditional_uses_libraries_target :=
+my_conditional_uses_libraries_host_28 :=
+my_conditional_uses_libraries_target_28 :=
+my_conditional_uses_libraries_host_29 :=
+my_conditional_uses_libraries_target_29 :=
 
 ifneq (true,$(LOCAL_ENFORCE_USES_LIBRARIES))
   # Pass special class loader context to skip the classpath and collision check.
@@ -69,37 +71,42 @@ else
   my_optional_lib_names := $(my_optional_uses_libraries)
 
   # Calculate system build dependencies based on the filtered libraries.
-  my_intermediate_libs := $(foreach lib_name, $(my_lib_names) $(my_filtered_optional_uses_libraries), \
+  my_dex_preopt_host_libraries := $(foreach lib_name, $(my_filtered_uses_libraries), \
     $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib_name),,COMMON)/javalib.jar)
-  my_dex_preopt_system_dependencies := $(my_intermediate_libs)
-  my_dex_preopt_class_loader_context := $(call normalize-path-list,$(my_intermediate_libs))
-
-  # The class loader context checksums are filled in by dex2oat.
-  my_stored_preopt_class_loader_context_libs := $(call normalize-path-list, \
-      $(foreach lib_name,$(my_filtered_uses_libraries),/system/framework/$(lib_name).jar))
+  my_dex_preopt_target_libraries := \
+    $(foreach lib_name,$(my_filtered_uses_libraries),/system/framework/$(lib_name).jar)
 
   # Fix up org.apache.http.legacy.impl since it should be org.apache.http.legacy in the manifest.
   my_lib_names := $(patsubst org.apache.http.legacy.impl,org.apache.http.legacy,$(my_lib_names))
   my_optional_lib_names := $(patsubst org.apache.http.legacy.impl,org.apache.http.legacy,$(my_optional_lib_names))
   ifeq (,$(filter org.apache.http.legacy,$(my_lib_names) $(my_optional_lib_names)))
-    my_conditional_uses_libraries_host := $(call intermediates-dir-for,JAVA_LIBRARIES,org.apache.http.legacy.impl,,COMMON)/javalib.jar
-    my_conditional_uses_libraries_target := /system/framework/org.apache.http.legacy.impl.jar
+    my_conditional_uses_libraries_host_28 := $(call intermediates-dir-for,JAVA_LIBRARIES,org.apache.http.legacy.impl,,COMMON)/javalib.jar
+    my_conditional_uses_libraries_target_28 := /system/framework/org.apache.http.legacy.impl.jar
   endif
+
 endif
 
+my_conditional_uses_libraries_host_29 += $(call intermediates-dir-for,JAVA_LIBRARIES,android.hidl.manager-V1.0-java,,COMMON)/javalib.jar
+my_conditional_uses_libraries_target_29 += /system/framework/android.hidl.manager-V1.0-java.jar
+my_conditional_uses_libraries_host_29 += $(call intermediates-dir-for,JAVA_LIBRARIES,android.hidl.base-V1.0-java,,COMMON)/javalib.jar
+my_conditional_uses_libraries_target_29 += /system/framework/android.hidl.base-V1.0-java.jar
+
 $(my_built_odex): $(AAPT)
-$(my_built_odex): $(my_conditional_uses_libraries_host)
-$(my_built_odex): $(my_dex_preopt_system_dependencies)
+$(my_built_odex): $(my_conditional_uses_libraries_host_28)
+$(my_built_odex): $(my_conditional_uses_libraries_host_29)
+$(my_built_odex): $(my_dex_preopt_host_libraries)
 $(my_built_odex): PRIVATE_ENFORCE_USES_LIBRARIES := $(LOCAL_ENFORCE_USES_LIBRARIES)
-$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST := $(my_conditional_uses_libraries_host)
-$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET := $(my_conditional_uses_libraries_target)
+$(my_built_odex): PRIVATE_DEX_PREOPT_HOST_LIBRARIES := $(my_dex_preopt_host_libraries)
+$(my_built_odex): PRIVATE_DEX_PREOPT_TARGET_LIBRARIES := $(my_dex_preopt_target_libraries)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_28 := $(my_conditional_uses_libraries_host_28)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_28 := $(my_conditional_uses_libraries_target_28)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_HOST_29 := $(my_conditional_uses_libraries_host_29)
+$(my_built_odex): PRIVATE_CONDITIONAL_USES_LIBRARIES_TARGET_29 := $(my_conditional_uses_libraries_target_29)
 $(my_built_odex): PRIVATE_USES_LIBRARY_NAMES := $(my_lib_names)
 $(my_built_odex): PRIVATE_OPTIONAL_USES_LIBRARY_NAMES := $(my_optional_lib_names)
 $(my_built_odex): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
 $(my_built_odex): PRIVATE_DEX_LOCATION := $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE))
 $(my_built_odex): PRIVATE_DEX_PREOPT_IMAGE_LOCATION := $(my_dex_preopt_image_location)
-$(my_built_odex): PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT := $(my_dex_preopt_class_loader_context)
-$(my_built_odex): PRIVATE_DEX2OAT_STORED_CLASS_LOADER_CONTEXT_LIBS := $(my_stored_preopt_class_loader_context_libs)
 $(my_built_odex) : $($(my_2nd_arch_prefix)DEXPREOPT_ONE_FILE_DEPENDENCY_BUILT_BOOT_PREOPT) \
     $(DEXPREOPT_ONE_FILE_DEPENDENCY_TOOLS) \
     $(my_dex_preopt_image_filename)
