@@ -483,7 +483,7 @@ ifneq (,$(PDK_FUSION_PLATFORM_ZIP)$(PDK_FUSION_PLATFORM_DIR))
 include $(BUILD_SYSTEM)/pdk_fusion_modules.mk
 endif # PDK_FUSION_PLATFORM_ZIP || PDK_FUSION_PLATFORM_DIR
 
-droid_targets : blueprint_tools
+droid_targets : blueprint_tools kythe_all_cxx_extractions
 
 endif # dont_bother
 
