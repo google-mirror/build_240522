@@ -711,6 +711,14 @@ ALL_MODULES.$(my_register_name).PICKUP_FILES := \
     $(ALL_MODULES.$(my_register_name).PICKUP_FILES) $(LOCAL_PICKUP_FILES)
 endif
 
+ifeq (true,$(filter true, \
+   $(LOCAL_PRODUCT_MODULE) $(LOCAL_PRODUCT_SERVICES_MODULE) \
+   $(LOCAL_VENDOR_MODULE) $(LOCAL_PROPRIETARY_MODULE)))
+    ifeq ($(LOCAL_CERTIFICATE),platform)
+      ALL_MODULES.$(my_register_name).NO_PLATFORM_CERTIFICATE := true
+      $(warning $(my_register_name) cannot be signed by platform key because this is (product|product service|vendor|proprietary) module)
+    endif
+endif
 my_required_modules := $(LOCAL_REQUIRED_MODULES) \
     $(LOCAL_REQUIRED_MODULES_$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
 ifdef LOCAL_IS_HOST_MODULE
