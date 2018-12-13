@@ -20,13 +20,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
 
 PRODUCT_NAME := mainline_arm64
-PRODUCT_DEVICE := generic_arm64
+PRODUCT_DEVICE := mainline_arm64
 PRODUCT_BRAND := generic
 PRODUCT_SHIPPING_API_LEVEL := 28
 PRODUCT_RESTRICT_VENDOR_FILES := all
 
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
+
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST := \
+  system/bin/recovery-refresh \
+  system/etc/init/recovery-refresh.rc \
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
   root/init.zygote64_32.rc \
   system/etc/seccomp_policy/crash_dump.arm.policy \
   system/etc/seccomp_policy/mediacodec.policy \
+
