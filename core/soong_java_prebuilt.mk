@@ -81,7 +81,7 @@ ifdef LOCAL_SOONG_DEX_JAR
         # have a full_classes_pre_proguard_jar). This is consistent with the equivalent code in
         # java.mk.
         $(eval $(call hiddenapi-generate-csv,$(full_classes_jar),$(hiddenapi_flags_csv),$(hiddenapi_metadata_csv)))
-        $(eval $(call hiddenapi-copy-soong-jar,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
+        $(eval $(call hiddenapi-copy-soong-jar,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar),$(LOCAL_CORE_PLATFORM)))
 
         ifeq (true,$(WITH_DEXPREOPT))
           # For libart, the boot jars' odex files are replaced by $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE).

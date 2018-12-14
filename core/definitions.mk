@@ -2671,13 +2671,18 @@ endef
 # Java semantics of the result dex bytecode. Use at own risk.
 ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
 define hiddenapi-copy-dex-files
+ifeq ($(strip $(3)),true)
+$(2): PRIVATE_CORE_PLATFORM_ARG := "--core-platform"
+endif
 $(2): $(1) $(HIDDENAPI) $(INTERNAL_PLATFORM_HIDDENAPI_FLAGS)
 	@rm -rf $(dir $(2))
 	@mkdir -p $(dir $(2))
 	for INPUT_DEX in `find $(dir $(1)) -maxdepth 1 -name "classes*.dex" | sort`; do \
 	    echo "--input-dex=$$$${INPUT_DEX}"; \
 	    echo "--output-dex=$(dir $(2))/`basename $$$${INPUT_DEX}`"; \
-	done | xargs $(HIDDENAPI) encode --api-flags=$(INTERNAL_PLATFORM_HIDDENAPI_FLAGS)
+	done | xargs $(HIDDENAPI) encode \
+	    --api-flags=$(INTERNAL_PLATFORM_HIDDENAPI_FLAGS) \
+	    $$(PRIVATE_CORE_PLATFORM_ARG)
 
 $(INTERNAL_PLATFORM_HIDDENAPI_STUB_FLAGS): $(1)
 $(INTERNAL_PLATFORM_HIDDENAPI_STUB_FLAGS): PRIVATE_DEX_INPUTS := $$(PRIVATE_DEX_INPUTS) $(1)
@@ -2728,7 +2733,8 @@ $(call hiddenapi-soong-input-dex,$(2)): $(1)
 
 $(call hiddenapi-copy-dex-files,\
     $(call hiddenapi-soong-input-dex,$(2)),\
-    $(call hiddenapi-soong-output-dex,$(2)))
+    $(call hiddenapi-soong-output-dex,$(2)),\
+    $(3))
 
 $(2): OUTPUT_DIR := $(dir $(call hiddenapi-soong-output-dex,$(2)))
 $(2): OUTPUT_JAR := $(dir $(call hiddenapi-soong-output-dex,$(2)))classes.jar
