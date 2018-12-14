@@ -244,6 +244,7 @@ PRODUCT_PACKAGES += \
     storaged \
     surfaceflinger \
     svc \
+    task_profiles.json \
     tc \
     telecom \
     telephony-common \
