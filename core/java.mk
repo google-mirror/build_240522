@@ -508,7 +508,7 @@ ifneq ($(filter $(LOCAL_MODULE),$(PRODUCT_BOOT_JARS)),) # is_boot_jar
   # rules for all members with the @UnsupportedAppUsage annotation.
   $(eval $(call hiddenapi-generate-csv, $(full_classes_pre_proguard_jar),$(hiddenapi_flags_csv),$(hiddenapi_metadata_csv)))
   LOCAL_INTERMEDIATE_TARGETS += $(hiddenapi_flags_csv) $(hiddenapi_metadata_csv)
-  $(eval $(call hiddenapi-copy-dex-files,$(built_dex_intermediate),$(built_dex_hiddenapi)))
+  $(eval $(call hiddenapi-copy-dex-files,$(built_dex_intermediate),$(built_dex_hiddenapi),$(LOCAL_CORE_PLATFORM)))
   built_dex_copy_from := $(built_dex_hiddenapi)
 else # !is_boot_jar
   built_dex_copy_from := $(built_dex_intermediate)
