@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
     pc = android_device_files;
     end = &android_device_files[ARRAY_SIZE(android_device_files)];
   }
-  for (; (pc < end) && pc->prefix; pc++) {
+  for (; (pc < end) && pc->prefix[0] != '\0'; pc++) {
     bool submit;
     char buffer[512];
     ssize_t len = fs_config_generate(buffer, sizeof(buffer), pc);
