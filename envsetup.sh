@@ -532,6 +532,7 @@ function choosecombo()
 # Clear this variable.  It will be built up again when the vendorsetup.sh
 # files are included at the end of this file.
 unset LUNCH_MENU_CHOICES
+unset ATEST_PYTHONPATH
 function add_lunch_combo()
 {
     local new_combo=$1
@@ -1572,13 +1573,13 @@ function atest()
     local built_atest=${ANDROID_HOST_OUT}/bin/atest
     local prebuilt_atest="$(gettop)"/prebuilts/asuite/atest/$os_arch/atest
     if [[ -x $built_atest ]]; then
-        $built_atest "$@"
+        PYTHONPATH=$ATEST_PYTHONPATH:$PYTHONPATH $built_atest "$@"
     elif [[ -x $prebuilt_atest ]]; then
-        $prebuilt_atest "$@"
+        PYTHONPATH=$ATEST_PYTHONPATH:$PYTHONPATH $prebuilt_atest "$@"
     else
         # TODO: once prebuilt atest released, remove the source code section
         # and change the location of atest_completion.sh in addcompletions().
-        "$(gettop)"/tools/tradefederation/core/atest/atest.py "$@"
+        PYTHONPATH=$ATEST_PYTHONPATH:$PYTHONPATH "$(gettop)"/tools/tradefederation/core/atest/atest.py "$@"
     fi
 }
 
