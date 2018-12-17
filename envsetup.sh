@@ -265,8 +265,14 @@ function setpaths()
         export ANDROID_EMULATOR_PREBUILTS
     fi
 
+
     export PATH=$ANDROID_BUILD_PATHS$PATH
-    export PYTHONPATH=$T/development/python-packages:$PYTHONPATH
+
+    local ANDROID_PYTHONPATH=$T/development/python-packages
+    if [ -n $(echo $PYTHONPATH | grep $ANDROID_PYTHONPATH || true) ]; then
+        PYTHONPATH=${PYTHONPATH/$ANDROID_PYTHONPATH:}
+    fi
+    export PYTHONPATH=$ANDROID_PYTHONPATH:$PYTHONPATH
 
     export ANDROID_JAVA_HOME=$(get_abs_build_var ANDROID_JAVA_HOME)
     export JAVA_HOME=$ANDROID_JAVA_HOME
