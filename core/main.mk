@@ -1096,6 +1096,18 @@ ifdef FULL_BUILD
       $(TARGET_OUT_SYSTEM_OTHER)/%.vdex \
       $(TARGET_OUT_SYSTEM_OTHER)/%.art
   endif
+  all_ceritiface_error_modules :=
+  $(foreach p,$(PACKAGES),\
+    $(if $(PACKAGES.$(p).CERTIFICATE_VIOLATION), \
+      $(eval all_ceritiface_error_modules +=$(p))))
+  $(foreach m,$(all_ceritiface_error_modules),\
+    $(if $(PRODUCT_ENFORCE_ARTIFACT_PLATFORM_CERTIFICATE_REQUIREMENT),\
+      $(if $(filter $(m),$(PRODUCT_ARTIFACT_PLATFORM_CERTIFICATE_REQUIREMENT_WHITELIST)),,$(error These moudules cannot be signed with platform certificate. ($(m))))))
+
+$(PRODUCT_OUT)/certificate_error_modules.txt:
+	rm -f $@
+	$(foreach m,$(sort $(all_ceritiface_error_modules)), echo $(m) >> $@;)
+
   all_offending_files :=
   $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
     $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
