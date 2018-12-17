@@ -266,7 +266,10 @@ function setpaths()
     fi
 
     export PATH=$ANDROID_BUILD_PATHS$PATH
-    export PYTHONPATH=$T/development/python-packages:$PYTHONPATH
+    local dev_python_pkg=$T/development/python-packages
+    if [ -z $(echo $PYTHONPATH | grep $dev_python_pkg || true) ]; then
+        export PYTHONPATH=$dev_python_pkg:$PYTHONPATH
+    fi
 
     export ANDROID_JAVA_HOME=$(get_abs_build_var ANDROID_JAVA_HOME)
     export JAVA_HOME=$ANDROID_JAVA_HOME
