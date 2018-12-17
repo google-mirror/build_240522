@@ -1096,6 +1096,26 @@ ifdef FULL_BUILD
       $(TARGET_OUT_SYSTEM_OTHER)/%.vdex \
       $(TARGET_OUT_SYSTEM_OTHER)/%.art
   endif
+  certificate_violation_modules :=
+  $(foreach p,$(PACKAGES),\
+    $(if $(PACKAGES.$(p).CERTIFICATE_VIOLATION), \
+      $(eval certificate_violation_modules +=$(p))))
+
+  ifeq (true,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT))
+    certificate_violation_modules_except_whitelist :=
+    $(foreach m,$(certificate_violation_modules),\
+      $(if $(filter $(m),$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_WHITELIST)),,\
+        $(eval certificate_violation_modules_except_whitelist += $(m))))
+    $(if $(strip $(certificate_violation_modules_except_whitelist)),\
+      $(error These modules cannot be signed with certificate in system:$(certificate_violation_modules_except_whitelist)))
+  endif
+
+CERT_ERROR_MODULES_FILE := $(PRODUCT_OUT)/certificate_error_modules.txt
+$(CERT_ERROR_MODULES_FILE):
+	rm -f $@
+	$(foreach m,$(sort $(certificate_violation_modules)), echo $(m) >> $@;)
+$(call dist-for-goals,droidcore,$(CERT_ERROR_MODULES_FILE))
+
   all_offending_files :=
   $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
     $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
