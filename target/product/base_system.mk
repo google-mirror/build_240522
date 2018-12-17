@@ -54,7 +54,7 @@ PRODUCT_PACKAGES += \
     com.android.conscrypt \
     com.android.location.provider \
     com.android.resolv \
-    com.android.tzdata \
+    com.google.android.tzdata \
     ContactsProvider \
     content \
     crash_dump \
