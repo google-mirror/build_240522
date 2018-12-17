@@ -48,7 +48,8 @@ PRODUCT_COPY_FILES += \
 
 # GSI specific tasks on boot
 PRODUCT_COPY_FILES += \
-    build/make/target/product/vndk/init.gsi.rc:system/etc/init/init.gsi.rc
+    build/make/target/product/vndk/skip_mount.cfg:system/etc/init/config/skip_mount.cfg \
+    build/make/target/product/vndk/init.gsi.rc:system/etc/init/init.gsi.rc \
 
 # Support for the O-MR1 devices
 PRODUCT_COPY_FILES += \
