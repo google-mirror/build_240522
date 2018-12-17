@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67a97d3c_78d0e98e",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2018-12-17T06:47:35Z",
+      "side": 1,
+      "message": "It will cause the value of $PYTHONPATH becomes longer and longer when lunch() be executed every time.\n(e.g. before lunch: $PYTHONPATH\u003d/usr/local/buildtools/current/sitecustomize\n      1st lunch: $PYTHONPATH\u003d(1st atest python path):/usr/local/buildtools/current/sitecustomize\n      2nd lunch: $PYTHONPATH\u003d(2nd atest path):(1st atest python path):/usr/local/buildtools/current/sitecustomize\n      ... etc",
+      "range": {
+        "startLine": 1576,
+        "startChar": 8,
+        "endLine": 1576,
+        "endChar": 48
+      },
+      "revId": "0653f9532de6f9cdbe5ba3686292b14f466699dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
