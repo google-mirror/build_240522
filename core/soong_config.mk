@@ -144,6 +144,9 @@ $(call add_json_bool, FlattenApex,                       $(filter true,$(TARGET_
 
 $(call add_json_str,  DexpreoptGlobalConfig,             $(DEX_PREOPT_CONFIG))
 
+$(call add_json_bool, EnforceSystemCertificate,          $(ENFORCE_SYSTEM_CERTIFICATE))
+$(call add_json_list, EnforceSystemCertificateWhitelist, $(ENFORCE_SYSTEM_CERTIFICATE_WHITELIST))
+
 $(call add_json_map, VendorVars)
 $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
   $(call add_json_map, $(namespace))\
