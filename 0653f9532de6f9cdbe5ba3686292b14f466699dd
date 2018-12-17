@@ -69,6 +69,30 @@
       "revId": "0653f9532de6f9cdbe5ba3686292b14f466699dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4be70ec_1e1f8604",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2018-12-17T07:08:17Z",
+      "side": 1,
+      "message": "Yup, it should cause by this, not caused by your CL#.\nhttps://cs.corp.google.com/android/vendor/google/tools/vendorsetup.sh?q\u003dgoogle_atest_pat\u0026g\u003d0\u0026l\u003d8",
+      "parentUuid": "116e2889_95631c00",
+      "range": {
+        "startLine": 1576,
+        "startChar": 8,
+        "endLine": 1576,
+        "endChar": 48
+      },
+      "revId": "0653f9532de6f9cdbe5ba3686292b14f466699dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
