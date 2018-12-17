@@ -22,6 +22,30 @@
       "revId": "0653f9532de6f9cdbe5ba3686292b14f466699dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "116e2889_95631c00",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2018-12-17T06:56:04Z",
+      "side": 1,
+      "message": "I think this problem should not cause by my changes due to I am just change the PYTHONPATH in this run. The situation is already existed without my change.",
+      "parentUuid": "67a97d3c_78d0e98e",
+      "range": {
+        "startLine": 1576,
+        "startChar": 8,
+        "endLine": 1576,
+        "endChar": 48
+      },
+      "revId": "0653f9532de6f9cdbe5ba3686292b14f466699dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
