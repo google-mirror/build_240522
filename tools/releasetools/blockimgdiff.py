@@ -33,7 +33,7 @@ from hashlib import sha1
 import common
 from rangelib import RangeSet
 
-__all__ = ["EmptyImage", "DataImage", "BlockImageDiff"]
+__all__ = ["Image", "EmptyImage", "DataImage", "BlockImageDiff"]
 
 logger = logging.getLogger(__name__)
 
@@ -73,6 +73,78 @@ class Image(object):
   def WriteRangeDataToFd(self, ranges, fd):
     raise NotImplementedError
 
+  @staticmethod
+  def LoadFileBlockMap(care_map, map_path, clobbered_blocks, allow_shared_blocks):
+    """Loads the given block map file.
+
+    Args:
+      care_map: A RangeSet of all cared blocks on the device.
+      map_path: The filename of the block map file.
+      clobbered_blocks: A RangeSet instance for the clobbered blocks.
+      allow_shared_blocks: Whether having shared blocks is allowed.
+    """
+    remaining = care_map
+    out = {}
+
+    with open(map_path) as f:
+      for line in f:
+        fn, ranges = line.split(None, 1)
+        ranges = RangeSet.parse(ranges)
+
+        if allow_shared_blocks:
+          # Find the shared blocks that have been claimed by others. If so, tag
+          # the entry so that we can skip applying imgdiff on this file.
+          shared_blocks = ranges.subtract(remaining)
+          if shared_blocks:
+            non_shared = ranges.subtract(shared_blocks)
+            if not non_shared:
+              continue
+
+            # There shouldn't anything in the extra dict yet.
+            assert not ranges.extra, "Non-empty RangeSet.extra"
+
+            # Put the non-shared RangeSet as the value in the block map, which
+            # has a copy of the original RangeSet.
+            non_shared.extra['uses_shared_blocks'] = ranges
+            ranges = non_shared
+
+        out[fn] = ranges
+        assert ranges.size() == ranges.intersect(remaining).size()
+
+        # Currently we assume that blocks in clobbered_blocks are not part of
+        # any file.
+        assert not clobbered_blocks.overlaps(ranges)
+        remaining = remaining.subtract(ranges)
+
+    remaining = remaining.subtract(clobbered_blocks)
+    return out, remaining
+
+  @staticmethod
+  def FindNonZeroBlocks(remaining, blocksize, read_func):
+    zero_blocks = []
+    nonzero_blocks = []
+    reference = '\0' * blocksize
+
+    MAX_BLOCKS_PER_GROUP = 1024
+    nonzero_groups = []
+
+    for index, data in read_func(remaining):
+      if data == reference:
+        zero_blocks.append(index)
+        zero_blocks.append(index + 1)
+      else:
+        nonzero_blocks.append(index)
+        nonzero_blocks.append(index + 1)
+
+        if len(nonzero_blocks) * 2 > MAX_BLOCKS_PER_GROUP:
+          nonzero_groups.append(nonzero_blocks)
+          nonzero_blocks = []
+
+    if nonzero_blocks:
+      nonzero_groups.append(nonzero_blocks)
+
+    return zero_blocks, nonzero_groups
+
 
 class EmptyImage(Image):
   """A zero-length image."""
@@ -104,7 +176,7 @@ class EmptyImage(Image):
 class DataImage(Image):
   """An image wrapped around a single string of data."""
 
-  def __init__(self, data, trim=False, pad=False):
+  def __init__(self, data, trim=False, pad=False, file_map_fn=None):
     self.data = data
     self.blocksize = 4096
 
@@ -136,31 +208,36 @@ class DataImage(Image):
       clobbered_blocks = [self.total_blocks-1, self.total_blocks]
     else:
       clobbered_blocks = []
-    self.clobbered_blocks = clobbered_blocks
+    self.clobbered_blocks = RangeSet(data=clobbered_blocks)
     self.extended = RangeSet()
 
-    zero_blocks = []
-    nonzero_blocks = []
-    reference = '\0' * self.blocksize
+    self.file_map = {}
+    self.LoadFileMap(file_map_fn)
 
-    for i in range(self.total_blocks-1 if padded else self.total_blocks):
-      d = self.data[i*self.blocksize : (i+1)*self.blocksize]
-      if d == reference:
-        zero_blocks.append(i)
-        zero_blocks.append(i+1)
-      else:
-        nonzero_blocks.append(i)
-        nonzero_blocks.append(i+1)
+  def LoadFileMap(self, file_map_fn):
+    if file_map_fn:
+      self.file_map, remaining = Image.LoadFileBlockMap(
+          self.care_map, file_map_fn, self.clobbered_blocks, True)
+    else:
+      remaining = self.care_map
 
-    assert zero_blocks or nonzero_blocks or clobbered_blocks
+    def DataImageReader(block_ranges):
+      for s, e in block_ranges:
+        for i in range(s, e):
+          yield i, self.data[i * self.blocksize: (i + 1) * self.blocksize]
 
-    self.file_map = dict()
+    zero_blocks, nonzero_groups = Image.FindNonZeroBlocks(
+        remaining, self.blocksize, DataImageReader)
+
+    assert zero_blocks or nonzero_groups or self.clobbered_blocks
+
     if zero_blocks:
       self.file_map["__ZERO"] = RangeSet(data=zero_blocks)
-    if nonzero_blocks:
-      self.file_map["__NONZERO"] = RangeSet(data=nonzero_blocks)
-    if clobbered_blocks:
-      self.file_map["__COPY"] = RangeSet(data=clobbered_blocks)
+    if nonzero_groups:
+      for i, blocks in enumerate(nonzero_groups):
+        self.file_map["__NONZERO-%d" % i] = RangeSet(data=blocks)
+    if self.clobbered_blocks:
+      self.file_map["__COPY"] = self.clobbered_blocks
 
   def _GetRangeData(self, ranges):
     for s, e in ranges:
