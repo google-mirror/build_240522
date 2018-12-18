@@ -195,6 +195,10 @@ ifdef LOCAL_DEX_PREOPT
   $(foreach lib,$(sort $(LOCAL_USES_LIBRARIES) $(LOCAL_OPTIONAL_USES_LIBRARIES) org.apache.http.legacy.impl android.hidl.base-V1.0-java android.hidl.manager-V1.0-java),\
     $(call add_json_str, $(lib), $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar))
   $(call end_json_map)
+  $(call add_json_map,  InstallLibraryPaths)
+  $(foreach lib,$(sort $(LOCAL_USES_LIBRARIES) $(LOCAL_OPTIONAL_USES_LIBRARIES) org.apache.http.legacy.impl android.hidl.base-V1.0-java android.hidl.manager-V1.0-java),\
+    $(call add_json_str, $(lib), $(patsubst $(PRODUCT_OUT)%,%,$(filter %$(lib).jar,$(ALL_MODULES.$(lib).INSTALLED)))))
+  $(call end_json_map)
   $(call add_json_list, Archs,                         $(my_dexpreopt_archs))
   $(call add_json_str,  DexPreoptImageLocation,        $(LOCAL_DEX_PREOPT_IMAGE_LOCATION))
   $(call add_json_bool, PreoptExtractedApk,            $(my_preopt_for_extracted_apk))
