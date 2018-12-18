@@ -192,6 +192,7 @@ source build/make/core/construct_context.sh "$(PRIVATE_CONDITIONAL_USES_LIBRARIE
 ,) \
 ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	--avoid-storing-invocation \
+	--write-invocation-to=$(patsubst %.odex,%.invocation,$(2)) \
 	--runtime-arg -Xms$(DEX2OAT_XMS) --runtime-arg -Xmx$(DEX2OAT_XMX) \
 	$${class_loader_context_arg} \
 	$${stored_class_loader_context_arg} \
