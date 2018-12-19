@@ -145,18 +145,15 @@ def BuildSuperImageFromExtractedTargetFiles(inp, out):
   info_dict = common.LoadInfoDict(inp)
   partition_list = shlex.split(
       info_dict.get("dynamic_partition_list", "").strip())
-  missing_images = []
   for partition in partition_list:
-    image_path = os.path.join(inp, "IMAGES", "{}.img".format(partition))
-    if not os.path.isfile(image_path):
-      missing_images.append(image_path)
-    else:
+    image_path = os.path.join(
+        inp, "IMAGES", "{}.img".format(partition))
+    if os.path.isfile(image_path):
       info_dict["{}_image".format(partition)] = image_path
-  if missing_images:
-    logger.warning("Skip building super image because the following "
-                   "images are missing from target files:\n%s",
-                   "\n".join(missing_images))
-    return False
+    else:
+      logger.warning(
+          "Ignoring '%s' from the dynamic partition list because the image is "
+          "missing", partition)
   return BuildSuperImageFromDict(info_dict, out)
 
 
@@ -184,7 +181,8 @@ def BuildSuperImage(inp, out):
       with open(inp) as f:
         lines = f.read()
       logger.info("Building super image from info dict...")
-      return BuildSuperImageFromDict(common.LoadDictionaryFromLines(lines.split("\n")), out)
+      return BuildSuperImageFromDict(
+          common.LoadDictionaryFromLines(lines.split("\n")), out)
 
   raise ValueError("{} is not a dictionary or a valid path".format(inp))
 
