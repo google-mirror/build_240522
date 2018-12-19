@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7fa4090_ed54e83d",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3794,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-12-19T21:27:56Z",
+      "side": 1,
+      "message": "What about precomputing $(filter-out vendor,$(BOARD_*_PARTITION_LIST)) into new variables outside the rule?",
+      "revId": "ec3ca56cb21f10e350a0844d06e804180a4df636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
