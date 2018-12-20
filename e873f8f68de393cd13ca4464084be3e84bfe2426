@@ -33,6 +33,24 @@
       "revId": "e873f8f68de393cd13ca4464084be3e84bfe2426",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4b9e7fe_d977a11b",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1018108
+      },
+      "writtenOn": "2018-12-20T15:52:15Z",
+      "side": 1,
+      "message": "When I tried to put this include directly into the dex_preopt_config.mk, it was included twice from somewhere else and immediately reported an error. But I\u0027ll remove it since it was needed only for intermediates-dir-for in PS4 and PS5 doesn\u0027t need it.",
+      "parentUuid": "74999aa0_3cc1a51f",
+      "revId": "e873f8f68de393cd13ca4464084be3e84bfe2426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
