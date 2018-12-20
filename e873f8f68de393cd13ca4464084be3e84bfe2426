@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e345c440_0a620bba",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1018108
+      },
+      "writtenOn": "2018-12-20T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5fe1d54_b2a91019",
+      "revId": "e873f8f68de393cd13ca4464084be3e84bfe2426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74999aa0_3cc1a51f",
         "filename": "core/soong_config.mk",
         "patchSetId": 5
