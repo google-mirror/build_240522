@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d34df092_f3914229",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-12-20T07:42:03Z",
+      "side": 1,
+      "message": "The desired flow is to use the default dev-keys at build time, then replace that key with the actual production OTA public key at release-signing time (https://source.android.com/devices/tech/ota/sign_builds).\n\nThe touched Makefile only affects the key selection at _build_ time, which should use the dev-keys or test-keys (i.e. DEFAULT_SYSTEM_DEV_CERTIFICATE). The release signing script (https://android-review.googlesource.com/c/platform/build/+/855710/1/tools/releasetools/sign_target_files_apks.py#572) is the one to honor PRODUCT_OTA_PUBLIC_KEYS.",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 13,
+        "endChar": 74
+      },
+      "revId": "b5ae75fb00dea6f0f83f9ce95fb57b2840c31869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
