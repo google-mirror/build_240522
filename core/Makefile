@@ -711,8 +711,11 @@ $(call dist-for-goals,droidcore,$(PGO_PROFILE_MISSING))
 # for future OTA packages installed by this system.  Actual product
 # deliverables will be re-signed by hand.  We expect this file to
 # exist with the suffixes ".x509.pem" and ".pk8".
+ifeq (,$(PRODUCT_OTA_PUBLIC_KEYS))
 DEFAULT_KEY_CERT_PAIR := $(strip $(DEFAULT_SYSTEM_DEV_CERTIFICATE))
-
+else
+DEFAULT_KEY_CERT_PAIR := $(strip $(PRODUCT_OTA_PUBLIC_KEYS))
+endif
 
 # Rules that need to be present for the all targets, even
 # if they don't do anything.
@@ -1753,7 +1756,11 @@ endif
 # Keys authorized to sign OTA packages this build will accept.  The
 # build always uses dev-keys for this; release packaging tools will
 # substitute other keys for this one.
+ifeq (,$(PRODUCT_OTA_PUBLIC_KEYS))
 OTA_PUBLIC_KEYS := $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem
+else
+OTA_PUBLIC_KEYS := $(PRODUCT_OTA_PUBLIC_KEYS).x509.pem
+endif
 
 # Generate a file containing the keys that will be read by the
 # recovery binary.
