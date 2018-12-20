@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5fe1d54_b2a91019",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-12-20T15:43:54Z",
+      "side": 1,
+      "message": "Can this go in a new variable?  We generally don\u0027t like to modify PRODUCT variables once they are set by the product, it\u0027s already hard enough to figure out how they get their values.",
+      "revId": "e873f8f68de393cd13ca4464084be3e84bfe2426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74999aa0_3cc1a51f",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-12-20T15:43:54Z",
+      "side": 1,
+      "message": "This may cause definitions.mk to be included twice, which could cause strange problems.",
+      "revId": "e873f8f68de393cd13ca4464084be3e84bfe2426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
