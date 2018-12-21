@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a402834_976d8147",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-12-21T21:19:24Z",
+      "side": 1,
+      "message": "One of Nicholas\u0027 patch was changing the assumption that these jars were always in /system (as opposed to /system/product).",
+      "range": {
+        "startLine": 6,
+        "startChar": 86,
+        "endLine": 6,
+        "endChar": 103
+      },
+      "revId": "3266d6ef22d93da317abd3f28582fa489c92bb75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
