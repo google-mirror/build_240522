@@ -175,23 +175,18 @@ FINAL_VENDOR_DEFAULT_PROPERTIES := $(call uniq-pairs-by-first-component, \
 
 BUILDINFO_SH := build/make/tools/buildinfo.sh
 BUILDINFO_COMMON_SH := build/make/tools/buildinfo_common.sh
+
 # Generates a set of common build system properties to a file.
 # $(1): Partition name
 # $(2): Output file name
 define generate-common-build-props
-	BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
 	BUILD_ID="$(BUILD_ID)" \
 	BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
 	BUILD_VERSION_TAGS="$(BUILD_VERSION_TAGS)" \
 	DATE="$(DATE_FROM_FILE)" \
 	PLATFORM_SDK_VERSION="$(PLATFORM_SDK_VERSION)" \
 	PLATFORM_VERSION="$(PLATFORM_VERSION)" \
-	PRODUCT_BRAND="$(PRODUCT_BRAND)" \
-	PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
-	PRODUCT_MODEL="$(PRODUCT_MODEL)" \
-	PRODUCT_NAME="$(TARGET_PRODUCT)" \
 	TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
-	TARGET_DEVICE="$(TARGET_DEVICE)" \
 	bash $(BUILDINFO_COMMON_SH) "$(1)" >> $(2)
 endef
 
@@ -229,7 +224,13 @@ $(INSTALLED_DEFAULT_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(intermediate_system_b
 	$(hide) echo "#" >> $@; \
 	        echo "# BOOTIMAGE_BUILD_PROPERTIES" >> $@; \
 	        echo "#" >> $@;
-	$(hide) $(call generate-common-build-props,bootimage,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
+	        PRODUCT_DEVICE="$(TARGET_DEVICE)" \
+	        $(call generate-common-build-props,bootimage,$@)
 	$(hide) build/make/tools/post_process_props.py $@
 ifdef property_overrides_split_enabled
 	$(hide) mkdir -p $(TARGET_ROOT_OUT)
@@ -379,7 +380,13 @@ ifneq ($(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES),)
 	$(hide) $(foreach prop,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OEM_PROPERTIES), \
 	    echo "import /oem/oem.prop $(prop)" >> $@;)
 endif
-	$(hide) $(call generate-common-build-props,system,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_SYSTEM_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_SYSTEM_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_SYSTEM_MODEL)" \
+	        PRODUCT_NAME="$(PRODUCT_SYSTEM_NAME)" \
+	        PRODUCT_DEVICE="$(PRODUCT_SYSTEM_DEVICE)" \
+	        $(call generate-common-build-props,system,$@)
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 	        TARGET_DEVICE="$(TARGET_DEVICE)" \
@@ -473,7 +480,13 @@ $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(intermediate_sys
 	$(hide) echo ro.vendor.product.cpu.abilist64="$(TARGET_CPU_ABI_LIST_64_BIT)">>$@
 	$(hide) echo ro.product.board="$(TARGET_BOOTLOADER_BOARD_NAME)">>$@
 	$(hide) echo ro.board.platform="$(TARGET_BOARD_PLATFORM)">>$@
-	$(hide) $(call generate-common-build-props,vendor,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
+	        PRODUCT_DEVICE="$(TARGET_DEVICE)" \
+	        $(call generate-common-build-props,vendor,$@)
 ifdef property_overrides_split_enabled
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL VENDOR BUILD PROPERTIES" >> $@; \
@@ -504,7 +517,13 @@ $(INSTALLED_PRODUCT_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(product_prop_fi
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
 ifdef BOARD_USES_PRODUCTIMAGE
-	$(hide) $(call generate-common-build-props,product,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
+	        PRODUCT_DEVICE="$(TARGET_DEVICE)" \
+	        $(call generate-common-build-props,product,$@)
 endif  # BOARD_USES_PRODUCTIMAGE
 	$(hide) $(foreach file,$(product_prop_files), \
 	    if [ -f "$(file)" ]; then \
@@ -541,7 +560,13 @@ $(INSTALLED_ODM_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH)
 	$(hide) echo ro.odm.product.cpu.abilist="$(TARGET_CPU_ABI_LIST)">>$@
 	$(hide) echo ro.odm.product.cpu.abilist32="$(TARGET_CPU_ABI_LIST_32_BIT)">>$@
 	$(hide) echo ro.odm.product.cpu.abilist64="$(TARGET_CPU_ABI_LIST_64_BIT)">>$@
-	$(hide) $(call generate-common-build-props,odm,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
+	        PRODUCT_DEVICE="$(TARGET_DEVICE)" \
+	        $(call generate-common-build-props,odm,$@)
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL ODM BUILD PROPERTIES" >> $@; \
 	        echo "#" >> $@;
@@ -564,7 +589,13 @@ $(INSTALLED_PRODUCT_SERVICES_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH)
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
 ifdef BOARD_USES_PRODUCT_SERVICESIMAGE
-	$(hide) $(call generate-common-build-props,product_services,$@)
+	$(hide) BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
+	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
+	        PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
+	        PRODUCT_MODEL="$(PRODUCT_MODEL)" \
+	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
+	        PRODUCT_DEVICE="$(TARGET_DEVICE)" \
+	        $(call generate-common-build-props,product_services,$@)
 endif  # BOARD_USES_PRODUCT_SERVICESIMAGE
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL PRODUCT_SERVICES PROPERTIES" >> $@; \
@@ -2158,9 +2189,9 @@ stnod: systemtarball-nodeps
 ## Files under out dir will be rejected to prevent possible conflicts with other rules.
 ifneq (,$(BUILD_PLATFORM_ZIP))
 pdk_odex_javalibs := $(strip $(foreach m,$(DEXPREOPT.MODULES.JAVA_LIBRARIES),\
-  $(if $(filter $(DEXPREOPT.$(m).INSTALLED_STRIPPED),$(ALL_DEFAULT_INSTALLED_MODULES)),$(m))))
+  $(if $(filter $(DEXPREOPT.$(m).INSTALLED),$(ALL_DEFAULT_INSTALLED_MODULES)),$(m))))
 pdk_odex_apps := $(strip $(foreach m,$(DEXPREOPT.MODULES.APPS),\
-  $(if $(filter $(DEXPREOPT.$(m).INSTALLED_STRIPPED),$(ALL_DEFAULT_INSTALLED_MODULES)),$(m))))
+  $(if $(filter $(DEXPREOPT.$(m).INSTALLED),$(ALL_DEFAULT_INSTALLED_MODULES)),$(m))))
 pdk_classes_dex := $(strip \
   $(foreach m,$(pdk_odex_javalibs),$(call intermediates-dir-for,JAVA_LIBRARIES,$(m),,COMMON)/javalib.jar) \
   $(foreach m,$(pdk_odex_apps),$(call intermediates-dir-for,APPS,$(m))/package.dex.apk))
@@ -2445,9 +2476,6 @@ INTERNAL_SYSTEMOTHERIMAGE_FILES := \
       $(ALL_DEFAULT_INSTALLED_MODULES)\
       $(ALL_PDK_FUSION_FILES)) \
     $(PDK_FUSION_SYMLINK_STAMP)
-
-# system_other dex files are installed as a side-effect of installing system image files
-INTERNAL_SYSTEMOTHERIMAGE_FILES += $(INTERNAL_SYSTEMIMAGE_FILES)
 
 INSTALLED_FILES_FILE_SYSTEMOTHER := $(PRODUCT_OUT)/installed-files-system-other.txt
 INSTALLED_FILES_JSON_SYSTEMOTHER := $(INSTALLED_FILES_FILE_SYSTEMOTHER:.txt=.json)
@@ -3779,16 +3807,12 @@ ifdef BUILT_VENDOR_MATRIX
 endif
 ifneq ($(BOARD_SUPER_PARTITION_GROUPS),)
 	$(hide) echo "super_partition_groups=$(BOARD_SUPER_PARTITION_GROUPS)" > $(zip_root)/META/dynamic_partitions_info.txt
-	@# Remove 'vendor' from the group partition list if the image is not available. This should only
-	@# happen to AOSP targets built without vendor.img. We can't remove the partition from the
-	@# BoardConfig file, as it's still needed elsewhere (e.g. when creating super_empty.img).
 	$(foreach group,$(BOARD_SUPER_PARTITION_GROUPS), \
-	    $(eval _group_partition_list := $(BOARD_$(call to-upper,$(group))_PARTITION_LIST)) \
-	    $(if $(INSTALLED_VENDORIMAGE_TARGET),,$(eval _group_partition_list := $(filter-out vendor,$(_group_partition_list)))) \
 	    echo "$(group)_size=$(BOARD_$(call to-upper,$(group))_SIZE)" >> $(zip_root)/META/dynamic_partitions_info.txt; \
-	    $(if $(_group_partition_list), \
-	        echo "$(group)_partition_list=$(_group_partition_list)" >> $(zip_root)/META/dynamic_partitions_info.txt;))
-endif # BOARD_SUPER_PARTITION_GROUPS
+	    $(if $(BOARD_$(call to-upper,$(group))_PARTITION_LIST), \
+	        echo "$(group)_partition_list=$(BOARD_$(call to-upper,$(group))_PARTITION_LIST)" >> $(zip_root)/META/dynamic_partitions_info.txt;))
+endif
+
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    build/make/tools/releasetools/add_img_to_target_files -a -v -p $(HOST_OUT) $(zip_root)
 	@# Zip everything up, preserving symlinks and placing META/ files first to
