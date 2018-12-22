@@ -267,6 +267,18 @@ function setpaths()
 
     export PATH=$ANDROID_BUILD_PATHS$PATH
 
+    # Remove ASUITE_PREBUILD_PATH from PATH.
+    local os_arch=$(get_build_var HOST_PREBUILT_TAG)
+    if [ -n $ASUITE_PREBUILD_PATH ]; then
+        export PATH=${PATH/$ASUITE_PREBUILD_PATH/}
+    fi
+    local ACLOUD_PATH=":$T/prebuilts/asuite/acloud/$os_arch"
+    local AIDEGEN_PATH=":$T/prebuilts/asuite/aidegen/$os_arch"
+    local ATEST_PATH=":$T/prebuilts/asuite/atest/$os_arch"
+    # Re-add ASUITE_PREBUILD_PATH by appending to PATH.
+    export ASUITE_PREBUILD_PATH=$ACLOUD_PATH$AIDEGEN_PATH$ATEST_PATH
+    export PATH=$PATH$ASUITE_PREBUILD_PATH
+
     # out with the duplicate old
     if [ -n $ANDROID_PYTHONPATH ]; then
         export PYTHONPATH=${PYTHONPATH//$ANDROID_PYTHONPATH/}
@@ -353,7 +365,7 @@ function addcompletions()
     local completion_files=(
       system/core/adb/adb.bash
       system/core/fastboot/fastboot.bash
-      tools/tradefederation/core/atest/atest_completion.sh
+      tools/asuite/asuite.sh
     )
     # Completion can be disabled selectively to allow users to use non-standard completion.
     # e.g.
@@ -1657,23 +1669,6 @@ function provision()
     "$ANDROID_PRODUCT_OUT/provision-device" "$@"
 }
 
-function atest()
-{
-    # Let's use the built version over the prebuilt, then source code.
-    local os_arch=$(get_build_var HOST_PREBUILT_TAG)
-    local built_atest=${ANDROID_HOST_OUT}/bin/atest
-    local prebuilt_atest="$(gettop)"/prebuilts/asuite/atest/$os_arch/atest
-    if [[ -x $built_atest ]]; then
-        $built_atest "$@"
-    elif [[ -x $prebuilt_atest ]]; then
-        $prebuilt_atest "$@"
-    else
-        # TODO: once prebuilt atest released, remove the source code section
-        # and change the location of atest_completion.sh in addcompletions().
-        "$(gettop)"/tools/tradefederation/core/atest/atest.py "$@"
-    fi
-}
-
 # Zsh needs bashcompinit called to support bash-style completion.
 function enable_zsh_completion() {
     # Don't override user's options if bash-style completion is already enabled.
@@ -1695,40 +1690,6 @@ function validate_current_shell() {
         *)
             echo -e "WARNING: Only bash and zsh are supported.\nUse of other shell would lead to erroneous results."
             ;;
-    esac
-}
-
-function acloud()
-{
-    # Let's use the built version over the prebuilt.
-    local built_acloud=${ANDROID_HOST_OUT}/bin/acloud
-    if [ -f $built_acloud ]; then
-        $built_acloud "$@"
-        return $?
-    fi
-
-    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
-    case $host_os_arch in
-        linux-x86) "$(gettop)"/prebuilts/asuite/acloud/linux-x86/acloud "$@"
-        ;;
-        darwin-x86) "$(gettop)"/prebuilts/asuite/acloud/darwin-x86/acloud "$@"
-        ;;
-    *)
-        echo "acloud is not supported on your host arch: $host_os_arch"
-        ;;
-    esac
-}
-
-function aidegen()
-{
-    # Always use the prebuilt version.
-    local host_os_arch=$(get_build_var HOST_PREBUILT_TAG)
-    case $host_os_arch in
-        linux-x86) "$(gettop)"/prebuilts/asuite/aidegen/linux-x86/aidegen "$@"
-        ;;
-    *)
-        echo "aidegen is not supported on your host arch: $host_os_arch"
-        ;;
     esac
 }
 
