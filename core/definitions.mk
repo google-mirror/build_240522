@@ -2689,6 +2689,7 @@ $(2): $(1)
 endef
 endif  # UNSAFE_DISABLE_HIDDENAPI_FLAGS
 
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
 # Generate a greylist.txt from a classes.jar
 define hiddenapi-generate-csv
 ifneq (,$(wildcard frameworks/base))
@@ -2710,6 +2711,10 @@ $(INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA): \
 
 endif
 endef
+else  # UNSAFE_DISABLE_HIDDENAPI_FLAGS
+define hiddenapi-generate-csv
+endef
+endif
 
 # File names for intermediate dex files of `hiddenapi-copy-soong-jar`.
 hiddenapi-soong-input-dex = $(dir $(1))/hiddenapi/dex-input/classes.dex

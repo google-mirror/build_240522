@@ -31,6 +31,7 @@ $(foreach b,$(DEXPREOPT_BOOT_JARS_MODULES),$(eval $(call _dexpreopt-boot-jar-rem
 include $(BUILD_SYSTEM)/dex_preopt_libart.mk
 
 # === hiddenapi rules ===
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
 
 hiddenapi_stubs_jar = $(call intermediates-dir-for,JAVA_LIBRARIES,$(1),,COMMON)/javalib.jar
 
@@ -83,6 +84,7 @@ $(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST): $(HIDDENAPI) $(HIDDENAPI_STUBS) \
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST))
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST))
 
+endif
 
 
 ifeq ($(PRODUCT_DIST_BOOT_AND_SYSTEM_JARS),true)
