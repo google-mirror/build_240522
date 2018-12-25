@@ -72,16 +72,18 @@ $(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST): \
     .KATI_IMPLICIT_OUTPUTS := $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)
 $(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST): $(HIDDENAPI) $(HIDDENAPI_STUBS) \
                                              $(HIDDENAPI_STUBS_SYSTEM) $(HIDDENAPI_STUBS_TEST)
-	for INPUT_DEX in $(PRIVATE_DEX_INPUTS); do \
-		find `dirname $${INPUT_DEX}` -maxdepth 1 -name "classes*.dex"; \
-	done | sort | sed 's/^/--boot-dex=/' | xargs $(HIDDENAPI) list \
-	    --stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS)) \
-	    --stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS_SYSTEM)) \
-	    --stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS_TEST)) \
-	    --out-public=$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST).tmp \
-	    --out-private=$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST).tmp
-	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST))
-	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST))
+	$(if $(PRIVATE_DEX_INPUTS), \
+		for INPUT_DEX in $(PRIVATE_DEX_INPUTS); do \
+			find `dirname $${INPUT_DEX}` -maxdepth 1 -name "classes*.dex"; \
+		done | sort | sed 's/^/--boot-dex=/' | xargs $(HIDDENAPI) list \
+			--stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS)) \
+			--stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS_SYSTEM)) \
+			--stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS_TEST)) \
+			--out-public=$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST).tmp \
+			--out-private=$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST).tmp \
+		$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)) \
+		$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST)) \
+	)
 
 
 

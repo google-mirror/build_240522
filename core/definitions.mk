@@ -2691,6 +2691,7 @@ endif  # UNSAFE_DISABLE_HIDDENAPI_FLAGS
 
 # Generate a greylist.txt from a classes.jar
 define hiddenapi-generate-csv
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
 ifneq (,$(wildcard frameworks/base))
 # Only generate this target if we're in a tree with frameworks/base present.
 $(2): $(1) $(CLASS2GREYLIST) $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)
@@ -2708,6 +2709,7 @@ $(INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA): $(5)
 $(INTERNAL_PLATFORM_HIDDENAPI_GREYLIST_METADATA): \
     PRIVATE_METADATA_INPUTS := $$(PRIVATE_METADATA_INPUTS) $(5)
 
+endif
 endif
 endef
 
