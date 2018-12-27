@@ -1766,13 +1766,17 @@ def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
 
   common.ZipDelete(target_file, to_delete)
 
+  missing = [src for src in replace if src not in namelist]
+  if missing:
+    logger.warning('No retrofit package built; missing %s in %s',
+                   missing, input_file)
+    return None
+
   input_tmp = common.UnzipTemp(input_file, SUPER_SPLIT_PATTERN)
   target_zip = zipfile.ZipFile(target_file, 'a', allowZip64=True)
 
   # Write super_{foo}.img as {foo}.img.
   for src, dst in replace.items():
-    assert src in namelist, \
-          'Missing {} in {}; {} cannot be written'.format(src, input_file, dst)
     unzipped_file = os.path.join(input_tmp, *src.split('/'))
     common.ZipWrite(target_zip, unzipped_file, arcname=dst)
 
@@ -1789,8 +1793,6 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     staging_file = common.MakeTempFile(suffix='.zip')
   else:
     staging_file = output_file
-  output_zip = zipfile.ZipFile(staging_file, "w",
-                               compression=zipfile.ZIP_DEFLATED)
 
   if source_file is not None:
     target_info = BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
@@ -1807,6 +1809,12 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
         target_file, target_info.get("super_block_devices").strip().split())
   elif OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
+
+  if not target_file:
+    return
+
+  output_zip = zipfile.ZipFile(staging_file, "w",
+                               compression=zipfile.ZIP_DEFLATED)
 
   # Generate payload.
   payload = Payload()
