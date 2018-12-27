@@ -1064,6 +1064,19 @@ endif
 # The metadata device must be supplied to init via the kernel command-line.
 BOARD_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
 
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := true
+
+# If "vendor" is listed as one of the dynamic partitions but without its image available (e.g. an
+# AOSP target built without vendor image), don't build the retrofit full OTA package. Because we
+# won't be able to build meaningful super_* images for retrofitting purpose.
+ifneq (,$(filter vendor,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+ifndef BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+ifndef BOARD_PREBUILT_VENDORIMAGE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+endif # BOARD_PREBUILT_VENDORIMAGE
+endif # BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
 else # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 
 # These should not be specified on devices launching with dynamic partition support.
@@ -1079,11 +1092,13 @@ endif
 BOARD_SUPER_PARTITION_BLOCK_DEVICES := super
 BOARD_SUPER_PARTITION_METADATA_DEVICE := super
 BOARD_SUPER_PARTITION_SUPER_DEVICE_SIZE := $(BOARD_SUPER_PARTITION_SIZE)
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 endif # BOARD_SUPER_PARTITION_SIZE
 .KATI_READONLY := BOARD_SUPER_PARTITION_BLOCK_DEVICES
 .KATI_READONLY := BOARD_SUPER_PARTITION_METADATA_DEVICE
+.KATI_READONLY := BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE
 
 $(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)), \
     $(eval BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE := $(strip $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))) \
