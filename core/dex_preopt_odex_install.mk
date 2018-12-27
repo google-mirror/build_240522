@@ -23,40 +23,67 @@ endif  # DONT_UNCOMPRESS_PRIV_APPS_DEXS
 
 # Setting LOCAL_DEX_PREOPT based on WITH_DEXPREOPT, LOCAL_DEX_PREOPT, etc
 LOCAL_DEX_PREOPT := $(strip $(LOCAL_DEX_PREOPT))
+ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+  $(warning LOCAL_DEX_PREOPT 1= $(LOCAL_DEX_PREOPT))
+endif
 ifndef LOCAL_DEX_PREOPT # LOCAL_DEX_PREOPT undefined
   LOCAL_DEX_PREOPT := $(DEX_PREOPT_DEFAULT)
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 2= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 ifeq (false,$(LOCAL_DEX_PREOPT))
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 3= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 # Only enable preopt for non tests.
 ifneq (,$(filter $(LOCAL_MODULE_TAGS),tests))
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 4= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 # If we have product-specific config for this module?
 ifneq (,$(filter $(LOCAL_MODULE),$(DEXPREOPT_DISABLED_MODULES)))
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 5= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 # Disable preopt for TARGET_BUILD_APPS
 ifneq (,$(TARGET_BUILD_APPS))
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 6= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 # Disable preopt if not WITH_DEXPREOPT
 ifneq (true,$(WITH_DEXPREOPT))
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 7= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 ifdef LOCAL_UNINSTALLABLE_MODULE
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 8= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 ifeq (,$(strip $(built_dex)$(my_prebuilt_src_file)$(LOCAL_SOONG_DEX_JAR))) # contains no java code
   LOCAL_DEX_PREOPT :=
+  ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+    $(warning LOCAL_DEX_PREOPT 9= $(LOCAL_DEX_PREOPT))
+  endif
 endif
 
 # if WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY=true and module is not in boot class path skip
@@ -68,6 +95,9 @@ ifneq (true,$(my_preopt_for_extracted_apk))
   ifeq (true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
     ifeq ($(filter $(PRODUCT_SYSTEM_SERVER_JARS) $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE)),)
       LOCAL_DEX_PREOPT :=
+      ifeq ($(LOCAL_PACKAGE_NAME),ModuleMetadata)
+        $(warning LOCAL_DEX_PREOPT 0= $(LOCAL_DEX_PREOPT))
+      endif
     endif
   endif
 endif

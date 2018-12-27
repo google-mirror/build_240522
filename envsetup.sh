@@ -766,8 +766,12 @@ function findmakefile()
     local TOPFILE=build/make/core/envsetup.mk
     local HERE=$PWD
     local T=
+    if [ "$1" ]; then
+        \cd $1
+    fi;
     while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
         T=`PWD= /bin/pwd`
+        >&2 echo 8-$T
         if [ -f "$T/Android.mk" -o -f "$T/Android.bp" ]; then
             echo $T/Android.mk
             \cd $HERE
@@ -789,6 +793,7 @@ function mm()
     else
         # Find the closest Android.mk file.
         local M=$(findmakefile)
+        echo 1-$M
         local MODULES=
         local GET_INSTALL_PATH=
         local ARGS=
@@ -845,7 +850,9 @@ function mmm()
             # Remove the leading ./ and trailing / if any exists.
             DIR=${DIR#./}
             DIR=${DIR%/}
-            if [ -f $DIR/Android.mk -o -f $DIR/Android.bp ]; then
+            local M=$(findmakefile $DIR)
+            echo 111-$M
+            if [ "$M" ]; then
                 local TO_CHOP=`(\cd -P -- $T && pwd -P) | wc -c | tr -d ' '`
                 local TO_CHOP=`expr $TO_CHOP + 1`
                 local START=`PWD= /bin/pwd`
