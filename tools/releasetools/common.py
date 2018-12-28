@@ -1745,11 +1745,28 @@ class BlockDifference(object):
     self.touched_src_ranges = b.touched_src_ranges
     self.touched_src_sha1 = b.touched_src_sha1
 
-    if src is None:
-      _, self.device = GetTypeAndDevice("/" + partition, OPTIONS.info_dict)
+    # For dynamic partitions builds, always check partition list in target build
+    # because new partitions may be added. In that case, src is None but
+    # OPTIONS.source_info_dict is not.
+    if OPTIONS.source_info_dict is None:
+      is_dynamic_build = OPTIONS.info_dict.get(
+          "use_dynamic_partitions") == "true"
     else:
-      _, self.device = GetTypeAndDevice("/" + partition,
-                                        OPTIONS.source_info_dict)
+      is_dynamic_build = OPTIONS.source_info_dict.get(
+          "use_dynamic_partitions") == "true"
+
+    is_dynamic = is_dynamic_build and partition in shlex.split(
+        OPTIONS.info_dict.get("dynamic_partition_list", "").strip())
+
+    if is_dynamic:
+      self.device = 'map_partition("%s")' % partition
+    else:
+      if OPTIONS.source_info_dict is None:
+        _, device_path = GetTypeAndDevice("/" + partition, OPTIONS.info_dict)
+      else:
+        _, device_path = GetTypeAndDevice("/" + partition,
+                                          OPTIONS.source_info_dict)
+      self.device = '"%s"' % device_path
 
   @property
   def required_cache(self):
@@ -1768,7 +1785,7 @@ class BlockDifference(object):
     self._WriteUpdate(script, output_zip)
 
     if write_verify_script:
-      self._WritePostInstallVerifyScript(script)
+      self.WritePostInstallVerifyScript(script)
 
   def WriteStrictVerifyScript(self, script):
     """Verify all the blocks in the care_map, including clobbered blocks.
@@ -1782,11 +1799,11 @@ class BlockDifference(object):
     ranges = self.tgt.care_map
     ranges_str = ranges.to_string_raw()
     script.AppendExtra(
-        'range_sha1("%s", "%s") == "%s" && ui_print("    Verified.") || '
-        'ui_print("\\"%s\\" has unexpected contents.");' % (
+        'range_sha1(%s, "%s") == "%s" && ui_print("    Verified.") || '
+        'ui_print("%s has unexpected contents.");' % (
             self.device, ranges_str,
             self.tgt.TotalSha1(include_clobbered_blocks=True),
-            self.device))
+            self.partition))
     script.AppendExtra("")
 
   def WriteVerifyScript(self, script, touched_blocks_only=False):
@@ -1811,7 +1828,7 @@ class BlockDifference(object):
 
       ranges_str = ranges.to_string_raw()
       script.AppendExtra(
-          'if (range_sha1("%s", "%s") == "%s" || block_image_verify("%s", '
+          'if (range_sha1(%s, "%s") == "%s" || block_image_verify(%s, '
           'package_extract_file("%s.transfer.list"), "%s.new.dat", '
           '"%s.patch.dat")) then' % (
               self.device, ranges_str, expected_sha1,
@@ -1828,7 +1845,7 @@ class BlockDifference(object):
         # this check fails, give an explicit log message about the partition
         # having been remounted R/W (the most likely explanation).
         if self.check_first_block:
-          script.AppendExtra('check_first_block("%s");' % (self.device,))
+          script.AppendExtra('check_first_block(%s);' % (self.device,))
 
         # If version >= 4, try block recovery before abort update
         if partition == "system":
@@ -1836,8 +1853,8 @@ class BlockDifference(object):
         else:
           code = ErrorCode.VENDOR_RECOVER_FAILURE
         script.AppendExtra((
-            'ifelse (block_image_recover("{device}", "{ranges}") && '
-            'block_image_verify("{device}", '
+            'ifelse (block_image_recover({device}, "{ranges}") && '
+            'block_image_verify({device}, '
             'package_extract_file("{partition}.transfer.list"), '
             '"{partition}.new.dat", "{partition}.patch.dat"), '
             'ui_print("{partition} recovered successfully."), '
@@ -1859,14 +1876,14 @@ class BlockDifference(object):
             'abort("E%d: %s partition has unexpected contents");\n'
             'endif;') % (code, partition))
 
-  def _WritePostInstallVerifyScript(self, script):
+  def WritePostInstallVerifyScript(self, script):
     partition = self.partition
     script.Print('Verifying the updated %s image...' % (partition,))
     # Unlike pre-install verification, clobbered_blocks should not be ignored.
     ranges = self.tgt.care_map
     ranges_str = ranges.to_string_raw()
     script.AppendExtra(
-        'if range_sha1("%s", "%s") == "%s" then' % (
+        'if range_sha1(%s, "%s") == "%s" then' % (
             self.device, ranges_str,
             self.tgt.TotalSha1(include_clobbered_blocks=True)))
 
@@ -1875,7 +1892,7 @@ class BlockDifference(object):
     if self.tgt.extended:
       ranges_str = self.tgt.extended.to_string_raw()
       script.AppendExtra(
-          'if range_sha1("%s", "%s") == "%s" then' % (
+          'if range_sha1(%s, "%s") == "%s" then' % (
               self.device, ranges_str,
               self._HashZeroBlocks(self.tgt.extended.size())))
       script.Print('Verified the updated %s image.' % (partition,))
@@ -1941,7 +1958,7 @@ class BlockDifference(object):
     else:
       code = ErrorCode.VENDOR_UPDATE_FAILURE
 
-    call = ('block_image_update("{device}", '
+    call = ('block_image_update({device}, '
             'package_extract_file("{partition}.transfer.list"), '
             '"{new_data_name}", "{partition}.patch.dat") ||\n'
             '  abort("E{code}: Failed to update {partition} image.");'.format(
@@ -2134,3 +2151,189 @@ fi
   logger.info("putting script in %s", sh_location)
 
   output_sink(sh_location, sh)
+
+
+class DynamicPartitionUpdate(object):
+  def __init__(self, src_group=None, tgt_group=None, progress=None,
+               block_difference=None):
+    self.src_group = src_group
+    self.tgt_group = tgt_group
+    self.progress = progress
+    self.block_difference = block_difference
+  @property
+  def src_size(self):
+    if not self.block_difference:
+      return 0
+    return DynamicPartitionUpdate._GetSparseImageSize(self.block_difference.src)
+
+  @property
+  def tgt_size(self):
+    if not self.block_difference:
+      return 0
+    return DynamicPartitionUpdate._GetSparseImageSize(self.block_difference.tgt)
+
+  @staticmethod
+  def _GetSparseImageSize(img):
+    if not img:
+      return 0
+    return img.blocksize * img.total_blocks
+
+
+class DynamicGroupUpdate(object):
+  def __init__(self, src_size=None, tgt_size=None):
+    # None: group does not exist. 0: no size limits.
+    self.src_size = src_size
+    self.tgt_size = tgt_size
+
+
+class DynamicPartitionsDifference(object):
+  def __init__(self, info_dict, block_diff_dict, progress_dict=None,
+               source_info_dict=None):
+
+    if progress_dict is None:
+      progress_dict = dict()
+
+    self._remove_all_before_apply = False
+    if source_info_dict is None:
+      self._remove_all_before_apply = True
+      source_info_dict = dict()
+
+    assert set(block_diff_dict.keys()) == set(
+        shlex.split(info_dict.get("dynamic_partition_list", "").strip()))
+
+    partition_updates = dict()
+
+    for p, block_diff in block_diff_dict.items():
+      partition_updates[p] = DynamicPartitionUpdate()
+      partition_updates[p].block_difference = block_diff
+
+    for p, progress in progress_dict.items():
+      if p in partition_updates:
+        partition_updates[p].progress = progress
+
+    tgt_groups = shlex.split(info_dict.get(
+        "super_partition_groups", "").strip())
+    src_groups = shlex.split(source_info_dict.get(
+        "super_partition_groups", "").strip())
+
+    ignored_partitions = set()
+
+    for g in tgt_groups:
+      for p in shlex.split(info_dict.get(
+          "super_%s_group_partition_list" % g, "").strip()):
+        if p in partition_updates:
+          partition_updates[p].tgt_group = g
+        else:
+          ignored_partitions.add(p)
+
+    for g in src_groups:
+      for p in shlex.split(source_info_dict.get(
+          "super_%s_group_partition_list" % g, "").strip()):
+        if p in partition_updates:
+          partition_updates[p].src_group = g
+        else:
+          ignored_partitions.add(p)
+
+    if ignored_partitions:
+      logger.warning("Ignoring %s because no BlockDifference object is found",
+                     list(ignored_partitions))
+
+    group_updates = dict()
+
+    for g in tgt_groups:
+      group_updates[g] = DynamicGroupUpdate()
+      group_updates[g].tgt_size = int(info_dict.get(
+          "super_%s_group_size" % g, "0").strip())
+
+    for g in src_groups:
+      if g not in group_updates:
+        group_updates[g] = DynamicGroupUpdate()
+      group_updates[g].src_size = int(source_info_dict.get(
+          "super_%s_group_size" % g, "0").strip())
+
+    self._partition_updates = partition_updates
+    self._group_updates = group_updates
+
+  def WriteScript(self, script, output_zip, write_verify_script=False):
+    # TODO: change assert to || abort()
+    def append(line):
+      script.AppendExtra('assert(%s);' % line)
+
+    script.Comment('--- Start patching dynamic partitions ---')
+
+    if self._remove_all_before_apply:
+      script.Comment('Remove all existing dynamic partitions and groups before '
+                     'applying full OTA')
+      append("remove_all_partition_groups()")
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and not u.tgt_group:
+        script.Comment('Remove partition %s' % p)
+        append('unmap_partition("%s")' % p)
+        append('remove_partition("%s")' % p)
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and u.tgt_group and u.src_group != u.tgt_group:
+        script.Comment('Move partition %s from %s to default' %
+                       (p, u.src_group))
+        append('unmap_partition("%s")' % p)
+        append('move_partition("%s", "default")' % p)
+
+    for p, u in self._partition_updates.items():
+      if u.src_size and u.tgt_size and u.src_size > u.tgt_size:
+        script.Comment('Patch partition %s' % p)
+        u.block_difference.WriteScript(script, output_zip, progress=u.progress,
+                                       write_verify_script=False)
+        script.Comment('Shrink partition %s from %d to %d' %
+                       (p, u.src_size, u.tgt_size))
+        append('unmap_partition("%s")' % p)
+        append('resize_partition("%s", "%s")' % (p, u.tgt_size))
+        if write_verify_script:
+          u.block_difference.WritePostInstallVerifyScript(script)
+          append('unmap_partition("%s")' % p)
+
+    for g, u in self._group_updates.items():
+      if u.src_size is not None and u.tgt_size is None:
+        script.Comment('Remove group %s' % g)
+        append('remove_partition_group("%s")' % g)
+      if (u.src_size is not None and u.tgt_size is not None and
+          u.src_size > u.tgt_size):
+        script.Comment('Shrink group %s from %d to %d' %
+                       (g, u.src_size, u.tgt_size))
+        append('resize_partition_group("%s", "%d")' % (g, u.tgt_size))
+
+    for g, u in self._group_updates.items():
+      if u.src_size is None and u.tgt_size is not None:
+        script.Comment('Add group %s with maximum size %d' % (g, u.tgt_size))
+        append('add_partition_group("%s", "%d")' % (g, u.tgt_size))
+      if (u.src_size is not None and u.tgt_size is not None and
+          u.src_size < u.tgt_size):
+        script.Comment('Grow group %s from %d to %d' %
+                       (g, u.src_size, u.tgt_size))
+        append('resize_partition_group("%s", "%d")' % (g, u.tgt_size))
+
+    for p, u in self._partition_updates.items():
+      if u.tgt_group and not u.src_group:
+        script.Comment('Add partition %s to group %s' % (p, u.tgt_group))
+        append('add_partition("%s", "%s")' % (p, u.tgt_group))
+
+    for p, u in self._partition_updates.items():
+      if u.tgt_size and u.src_size < u.tgt_size:
+        script.Comment('Grow partition %s from %d to %d' %
+                       (p, u.src_size, u.tgt_size))
+        append('unmap_partition("%s")' % p)
+        append('resize_partition("%s", "%s")' % (p, u.tgt_size))
+        script.Comment('Patch partition %s' % p)
+        u.block_difference.WriteScript(script, output_zip, progress=u.progress,
+                                       write_verify_script=write_verify_script)
+        if write_verify_script:
+          append('unmap_partition("%s")' % p)
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and u.tgt_group and u.src_group != u.tgt_group:
+        script.Comment('Move partition %s from default to %s' %
+                       (p, u.tgt_group))
+        append('unmap_partition("%s")' % p)
+        append('move_partition("%s", "%s")' % (p, u.tgt_group))
+
+    script.Comment('--- End patching dynamic partitions ---')
