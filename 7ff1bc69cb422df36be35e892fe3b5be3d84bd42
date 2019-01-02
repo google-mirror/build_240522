@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bb906c4_78d4f32d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-02T19:47:18Z",
+      "side": 1,
+      "message": "instead of doing this, should I just use **kwargs and place \"system_block_difference\", \"system_progress\" etc. in kwargs?",
+      "range": {
+        "startLine": 2191,
+        "startChar": 32,
+        "endLine": 2191,
+        "endChar": 68
+      },
+      "revId": "7ff1bc69cb422df36be35e892fe3b5be3d84bd42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
