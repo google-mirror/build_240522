@@ -3,7 +3,7 @@
 # Output variables: LOCAL_DEX_PREOPT, LOCAL_UNCOMPRESS_DEX, built_odex,
 #                   dexpreopt_boot_jar_module
 
-ifeq (true,$(LOCAL_PREFER_INTEGRITY))
+ifeq (true,$(LOCAL_PREFER_CODE_INTEGRITY))
   LOCAL_UNCOMPRESS_DEX := true
 else
   LOCAL_UNCOMPRESS_DEX :=
