@@ -803,6 +803,12 @@ $(INSTALLED_FILES_FILE_ROOT) : $(INTERNAL_ROOT_FILES) $(FILESLIST)
 
 $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_ROOT))
 
+ifeq ($(PRODUCT_FUCHSIA), true)
+
+BUILT_RAMDISK_TARGET :=
+
+else
+
 # -----------------------------------------------------------------
 # the ramdisk
 INTERNAL_RAMDISK_FILES := $(filter $(TARGET_RAMDISK_OUT)/%, \
@@ -834,6 +840,8 @@ ramdisk-nodeps: $(MKBOOTFS) | $(MINIGZIP)
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(MINIGZIP) > $(INSTALLED_RAMDISK_TARGET)
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
+
+endif
 
 ifneq ($(strip $(TARGET_NO_KERNEL)),true)
 
@@ -2099,7 +2107,11 @@ $(INSTALLED_SYSTEMIMAGE_TARGET): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH
 	    $(call read-image-prop-dictionary,\
 	        $(systemimage_intermediates)/generated_system_image_info.txt,system_size))
 
+ifeq ($(PRODUCT_FUCHSIA),true)
+systemimage:
+else
 systemimage: $(INSTALLED_SYSTEMIMAGE_TARGET)
+endif
 
 .PHONY: systemimage-nodeps snod
 systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
@@ -2288,6 +2300,11 @@ ifdef INTERNAL_USERIMAGES_EXT_VARIANT
 ifndef BOARD_USERDATAIMAGE_PARTITION_SIZE
 skip_userdata.img := true
 endif
+endif
+
+# Don't build userdata.img for Fuchsia targets.
+ifeq ($(PRODUCT_FUCHSIA),true)
+skip_userdata.img := true
 endif
 
 ifneq ($(skip_userdata.img),true)
