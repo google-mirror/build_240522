@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae4add72_4ce4558e",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-04T23:52:53Z",
+      "side": 1,
+      "message": "This won\u0027t set the value to \"super\" if it\u0027s already be set to empty -- is that OK? `?\u003d` only overwrites if it hasn\u0027t been set. `ifdef` checks to see if it\u0027s empty or not.",
+      "range": {
+        "startLine": 1071,
+        "startChar": 38,
+        "endLine": 1071,
+        "endChar": 40
+      },
+      "revId": "0bef59fe1b90122285450704e1b2023060b91c09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
