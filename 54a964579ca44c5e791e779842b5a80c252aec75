@@ -22,6 +22,30 @@
       "revId": "54a964579ca44c5e791e779842b5a80c252aec75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ca27bf0_eb0ae624",
+        "filename": "target/product/aosp_arm64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-01-04T06:35:41Z",
+      "side": 1,
+      "message": "Another question, SCS should not work on x86, right?",
+      "parentUuid": "5db33e9d_c2dcd7c2",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "54a964579ca44c5e791e779842b5a80c252aec75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
