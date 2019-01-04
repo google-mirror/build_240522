@@ -144,6 +144,8 @@ $(call add_json_bool, FlattenApex,                       $(filter true,$(TARGET_
 
 $(call add_json_str,  DexpreoptGlobalConfig,             $(DEX_PREOPT_CONFIG))
 
+$(call add_json_bool, Requires_scs_vdso_workaround,      $(filter true,$(PRODUCT_REQUIRES_SCS_VDSO_WORKAROUND)))
+
 $(call add_json_map, VendorVars)
 $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
   $(call add_json_map, $(namespace))\

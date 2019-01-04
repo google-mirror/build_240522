@@ -35,3 +35,7 @@ PRODUCT_COPY_FILES += \
 
 TARGET_SUPPORTS_32_BIT_APPS := true
 TARGET_SUPPORTS_64_BIT_APPS := true
+
+# We don't know whether the GSI will be flashed onto a device that needs the SCS
+# vDSO workaround, so we always include the workaround.
+PRODUCT_REQUIRES_SCS_VDSO_WORKAROUND := true

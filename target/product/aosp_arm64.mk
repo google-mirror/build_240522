@@ -62,6 +62,10 @@ PRODUCT_COPY_FILES += \
 # Support addtional P vendor interface
 PRODUCT_EXTRA_VNDK_VERSIONS := 28
 
+# We don't know whether the GSI will be flashed onto a device that needs the SCS
+# vDSO workaround, so we always include the workaround.
+PRODUCT_REQUIRES_SCS_VDSO_WORKAROUND := true
+
 PRODUCT_NAME := aosp_arm64
 PRODUCT_DEVICE := generic_arm64
 PRODUCT_BRAND := Android
