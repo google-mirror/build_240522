@@ -46,6 +46,30 @@
       "revId": "54a964579ca44c5e791e779842b5a80c252aec75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf03973_80b1d6bc",
+        "filename": "target/product/aosp_arm64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2019-01-04T16:22:29Z",
+      "side": 1,
+      "message": "Since you\u0027ve confirmed separately that this is sufficient for GSI, I\u0027ve left the GSI logic here.\n\nAnd yes, SCS is ARM64-only (and therefore the workaround is only needed there).",
+      "parentUuid": "4ca27bf0_eb0ae624",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "54a964579ca44c5e791e779842b5a80c252aec75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
