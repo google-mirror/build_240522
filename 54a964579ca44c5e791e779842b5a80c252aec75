@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5db33e9d_c2dcd7c2",
+        "filename": "target/product/aosp_arm64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-01-04T06:31:17Z",
+      "side": 1,
+      "message": "Do we only need to enable the workaround on 64 bits platform?\n\nMaybe you don\u0027t need to enable the workaround by this patch, and I could apply it on all GSI build targets.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "54a964579ca44c5e791e779842b5a80c252aec75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
