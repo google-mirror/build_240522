@@ -46,6 +46,30 @@
       "revId": "0bef59fe1b90122285450704e1b2023060b91c09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd7ea22d_06d0e550",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-05T00:24:18Z",
+      "side": 1,
+      "message": "ifdef is equivalent to ifeq(...,), not ?\u003d  (yes, that doesn\u0027t really make sense...)",
+      "parentUuid": "07158f5c_57b43aa3",
+      "range": {
+        "startLine": 1071,
+        "startChar": 38,
+        "endLine": 1071,
+        "endChar": 40
+      },
+      "revId": "0bef59fe1b90122285450704e1b2023060b91c09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
