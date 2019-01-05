@@ -22,6 +22,30 @@
       "revId": "0bef59fe1b90122285450704e1b2023060b91c09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07158f5c_57b43aa3",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-05T00:00:59Z",
+      "side": 1,
+      "message": "I don\u0027t expect it to be \"set to empty\". But yeah let me do that.\n\nDo you mean ifeq(...,)? ifdef does the same thing as ?\u003d, no?",
+      "parentUuid": "ae4add72_4ce4558e",
+      "range": {
+        "startLine": 1071,
+        "startChar": 38,
+        "endLine": 1071,
+        "endChar": 40
+      },
+      "revId": "0bef59fe1b90122285450704e1b2023060b91c09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
