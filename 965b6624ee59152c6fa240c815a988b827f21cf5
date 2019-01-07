@@ -25,6 +25,70 @@
     },
     {
       "key": {
+        "uuid": "4e1467f5_8bea46f4",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-07T21:00:15Z",
+      "side": 1,
+      "message": "Oh. I want to justify why I check \"source_info_dict is None\" instead of \"src is None\" here.",
+      "parentUuid": "8600a139_7880edff",
+      "range": {
+        "startLine": 1748,
+        "startChar": 4,
+        "endLine": 1750,
+        "endChar": 38
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afdb8e33_6d5669a0",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-07T21:00:15Z",
+      "side": 1,
+      "message": "Tao, maybe change this to:\n\n    set(block_diff_dict.keys()).issubset(set(.split(info_dict.get(\"dynamic_partition_list\", \"\").strip())));\n\n?",
+      "range": {
+        "startLine": 2202,
+        "startChar": 0,
+        "endLine": 2203,
+        "endChar": 73
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe8dcfd2_44543528",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-07T21:00:15Z",
+      "side": 1,
+      "message": "Tao, the other partitions in the list would just be ignored.",
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee7a1322_30d2e790",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 6
@@ -45,6 +109,30 @@
       "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3945419_bacc5ecb",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-07T21:00:15Z",
+      "side": 1,
+      "message": "Got it.  See other comment. That will make DynamicPartitionsDifference only update partitions in block_diff_dict, and ignore other partitions in dynamic_partition_list. Then, FullOTA_InstallEnd() can re-use DynamicPartitionsDifference class. Does that work?",
+      "parentUuid": "ee7a1322_30d2e790",
+      "range": {
+        "startLine": 855,
+        "startChar": 4,
+        "endLine": 855,
+        "endChar": 38
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
