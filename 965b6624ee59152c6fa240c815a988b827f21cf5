@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8600a139_7880edff",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-07T19:32:48Z",
+      "side": 1,
+      "message": "This comment should be moved to L1758?",
+      "range": {
+        "startLine": 1748,
+        "startChar": 4,
+        "endLine": 1750,
+        "endChar": 38
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee7a1322_30d2e790",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-07T19:32:48Z",
+      "side": 1,
+      "message": "This doesn\u0027t allow updating device-specific partitions (e.g. \"odm\"). Prior to this CL, additional partitions could be updated via the hook at L872. But the current CL requires all the partitions listed in \u0027dynamic_partition_list\u0027 available in `block_diff_dict` upon getting to this point.",
+      "range": {
+        "startLine": 855,
+        "startChar": 4,
+        "endLine": 855,
+        "endChar": 38
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

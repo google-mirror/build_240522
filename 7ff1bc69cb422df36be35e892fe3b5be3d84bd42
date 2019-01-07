@@ -22,6 +22,30 @@
       "revId": "7ff1bc69cb422df36be35e892fe3b5be3d84bd42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cbe568c_f34db080",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-07T19:32:48Z",
+      "side": 1,
+      "message": "Prefer the way in this CL",
+      "parentUuid": "8bb906c4_78d4f32d",
+      "range": {
+        "startLine": 2191,
+        "startChar": 32,
+        "endLine": 2191,
+        "endChar": 68
+      },
+      "revId": "7ff1bc69cb422df36be35e892fe3b5be3d84bd42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
