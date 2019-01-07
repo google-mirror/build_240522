@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5424c2eb_5475c5b2",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-07T21:42:14Z",
+      "side": 1,
+      "message": "We may still hit two issues:\n- When we call DynamicPartitionsDifference from device-specific releasetools, it may keep trying to \"remove_all_before_apply\" (L2267).\n- The shrink-before-grow may not apply to all the partitions at the same time. If we happen to grow system and vendor, by taking space from device-specific partitions (e.g. odm), it may run out of space when updating system/vendor.",
+      "parentUuid": "afdb8e33_6d5669a0",
+      "range": {
+        "startLine": 2202,
+        "startChar": 0,
+        "endLine": 2203,
+        "endChar": 73
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe8dcfd2_44543528",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 6
