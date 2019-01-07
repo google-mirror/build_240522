@@ -712,6 +712,9 @@ $(SOONG_TO_CONVERT): $(SOONG_CONV_DATA) $(SOONG_TO_CONVERT_SCRIPT)
 	$(hide) $(SOONG_TO_CONVERT_SCRIPT) $< >$@
 $(call dist-for-goals,droidcore,$(SOONG_TO_CONVERT))
 
+BUILD_METRICS := $(PRODUCT_OUT)/build_metrics
+$(call dist-for-goals,droidcore,$(BUILD_METRICS))
+
 # -----------------------------------------------------------------
 # Modules use -Wno-error, or added default -Wall -Werror
 WALL_WERROR := $(PRODUCT_OUT)/wall_werror.txt
