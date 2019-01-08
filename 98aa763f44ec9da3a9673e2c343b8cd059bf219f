@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b28b51a0_e83cfc69",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-08T10:09:02Z",
+      "side": 1,
+      "message": "Done.  PS#10 uses llvm-readobj.",
+      "parentUuid": "196a354b_b45774fc",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 1
+      },
+      "revId": "98aa763f44ec9da3a9673e2c343b8cd059bf219f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0721cea_b951e1bd",
         "filename": "tools/check_elf_file.py",
         "patchSetId": 9
@@ -36,6 +60,24 @@
       "writtenOn": "2019-01-07T18:51:11Z",
       "side": 1,
       "message": "use $ANDROID_BUILD_TOP instead?",
+      "revId": "98aa763f44ec9da3a9673e2c343b8cd059bf219f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40e6c1ac_3bf0b7cc",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-08T10:09:02Z",
+      "side": 1,
+      "message": "I did not read $ANDROID_BUILD_TOP from the environment variables because I wish this tool can work even without a envsetup.sh.",
+      "parentUuid": "a0721cea_b951e1bd",
       "revId": "98aa763f44ec9da3a9673e2c343b8cd059bf219f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
