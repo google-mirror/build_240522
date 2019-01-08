@@ -74,8 +74,31 @@ ifneq ($(BUILD_PLATFORM_ZIP),)
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(dir $(LOCAL_BUILT_MODULE))package.dex.apk))
 endif
 
-$(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+# Run veridex on product, product_services and vendor modules.
+# We skip it for unbundled app builds where we cannot build veridex.
+module_run_appcompat :=
+ifeq (true,$(filter true, \
+   $(LOCAL_PRODUCT_MODULE) $(LOCAL_PRODUCT_SERVICES_MODULE) \
+   $(LOCAL_VENDOR_MODULE) $(LOCAL_PROPRIETARY_MODULE)))
+ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled app build
+  module_run_appcompat := true
+endif
+endif
 
+ifeq ($(module_run_appcompat),true)
+$(LOCAL_BUILT_MODULE) : $(appcompat-files)
+$(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
+endif
+
+$(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+ifeq ($(module_run_appcompat),true)
+ifeq ($(LOCAL_USE_AAPT2),true)
+	$(call appcompat-header, aapt2)
+else
+	$(appcompat-header)
+endif
+	$(run-appcompat)
+endif  # module_run_appcompat
 my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
   $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
 my_installed := $(call copy-many-files, $(my_built_installed))
