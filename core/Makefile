@@ -3830,6 +3830,10 @@ endif # BOARD_SUPER_PARTITION_GROUPS
 	$(hide) find $(zip_root)/META | sort >$@.list
 	$(hide) find $(zip_root) -path $(zip_root)/META -prune -o -print | sort >>$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(zip_root) -l $@.list
+ifneq ($(PRODUCT_OTA_PUBLIC_KEYS),)
+	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
+	    build/make/tools/releasetools/sign_target_files_apks -o $@ $@.signed && mv $@.signed $@
+endif
 
 .PHONY: target-files-package
 target-files-package: $(BUILT_TARGET_FILES_PACKAGE)
