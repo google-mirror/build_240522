@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "478c2b2b_3028a84a",
+        "filename": "core/soong_app_prebuilt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-01-08T06:52:42Z",
+      "side": 1,
+      "message": "This is tricky as you are appending actions to the rules created by copy-one-file. \n\nMaybe we create an intermediate target in between LOCAL_BUILT_MODULE and LOCAL_PREBUILT_MODULE_FILE?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 81
+      },
+      "revId": "96775201e50e0c4ed01fb2879163454bba04a097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
