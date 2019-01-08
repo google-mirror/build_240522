@@ -3,7 +3,10 @@ DEX_PREOPT_CONFIG := $(PRODUCT_OUT)/dexpreopt.config
 # list of boot classpath jars for dexpreopt
 DEXPREOPT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
 DEXPREOPT_BOOT_JARS_MODULES := $(PRODUCT_BOOT_JARS)
-PRODUCT_BOOTCLASSPATH := $(subst $(space),:,$(foreach m,$(DEXPREOPT_BOOT_JARS_MODULES),/system/framework/$(m).jar))
+# The boot classpath using only references to jars in /system/framework
+PRODUCT_BOOTCLASSPATH_FRAMEWORK_ONLY := $(subst $(space),:,$(foreach m,$(DEXPREOPT_BOOT_JARS_MODULES),/system/framework/$(m).jar)))
+# The true boot classpath, with APEX jars replacing frameworks ones
+PRODUCT_BOOTCLASSPATH := $(subst /system/framework/conscrypt.jar,/apex/com.android.conscrypt/javalib/conscrypt.jar,$(PRODUCT_BOOTCLASSPATH_FRAMEWORK_ONLY))
 
 PRODUCT_SYSTEM_SERVER_CLASSPATH := $(subst $(space),:,$(foreach m,$(PRODUCT_SYSTEM_SERVER_JARS),/system/framework/$(m).jar))
 
