@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "93ba2c73_adebacc0",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-08T00:13:14Z",
+      "side": 1,
+      "message": "Good point. Maybe add these functions:\n\n    device_specific.IncrementalOTA_GetDynamicPartitionDifferences()\n    device_specific.FullOTA_GetDynamicPartitionDifferences()\n\nAnd let them provide the block_difference objects?",
+      "parentUuid": "5424c2eb_5475c5b2",
+      "range": {
+        "startLine": 2202,
+        "startChar": 0,
+        "endLine": 2203,
+        "endChar": 73
+      },
+      "revId": "965b6624ee59152c6fa240c815a988b827f21cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe8dcfd2_44543528",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 6
