@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be77a59c_fddb589e",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-01-09T16:17:17Z",
+      "side": 1,
+      "message": "szuwei: any thoughts on this...?",
+      "revId": "ac952ee4d7f047946bc3c75991b36d84ed97461f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
