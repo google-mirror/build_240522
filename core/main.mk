@@ -1461,8 +1461,17 @@ else # TARGET_BUILD_APPS
     api_xmls :=
   endif
 
+ifeq ($(PRODUCT_FUCHSIA),true)
+
+# Don't build anything extra for Fuchsia targets.
+droid_targets: files
+
+else
+
 # Building a full system-- the default is to build droidcore
 droid_targets: droidcore dist_files
+
+endif # PRODUCT_FUCHSIA
 
 endif # TARGET_BUILD_APPS
 
