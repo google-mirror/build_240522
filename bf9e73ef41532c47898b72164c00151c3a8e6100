@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad92cd5a_10a0b427",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-09T07:37:21Z",
+      "side": 1,
+      "message": "checked for some reason",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 58
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67c9516d_fab2282f",
+        "filename": "core/prebuilt_internal.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-09T07:37:21Z",
+      "side": 1,
+      "message": "binary",
+      "range": {
+        "startLine": 177,
+        "startChar": 36,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "604e2b6a_4b68336b",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-09T07:37:21Z",
+      "side": 1,
+      "message": "2019 - Sorry about the delay in getting this stuff reviewed.",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a634764_d86759b6",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-09T07:37:21Z",
+      "side": 1,
+      "message": "Using the latest version should be ok, but we do check in new versions before switching to them officially.",
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
