@@ -16,6 +16,24 @@
       "revId": "b04f08aedf13e6c278c80b8e1f5d46e63ab97e66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79397f7c_9b35f4da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-09T20:16:24Z",
+      "side": 1,
+      "message": "yeah, i\u0027ll continue to make that mistake for the next 3 or 4 months...\n\ni really should come up with a new catchphrase that doesn\u0027t need updating every year.",
+      "parentUuid": "0fea45e7_440dc010",
+      "revId": "b04f08aedf13e6c278c80b8e1f5d46e63ab97e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
