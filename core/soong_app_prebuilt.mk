@@ -74,6 +74,15 @@ ifneq ($(BUILD_PLATFORM_ZIP),)
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(dir $(LOCAL_BUILT_MODULE))package.dex.apk))
 endif
 
+ifneq (,$(LOCAL_SOONG_APPCOMPAT_LOG))
+  appcompat_output := $(PRODUCT_OUT)/appcompat/$(LOCAL_MODULE).log
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_APPCOMPAT_LOG),$(appcompat_output)))
+  $(LOCAL_BUILT_MODULE): $(appcompat_output)
+  appcompat_output :=
+endif
+
+
+
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
 
 my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
