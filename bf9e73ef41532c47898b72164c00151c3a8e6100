@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aeb1044e_8e950f17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-09T12:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad92cd5a_10a0b427",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 58
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67c9516d_fab2282f",
         "filename": "core/prebuilt_internal.mk",
         "patchSetId": 11
@@ -45,6 +69,30 @@
       "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea82612_b31d2e04",
+        "filename": "core/prebuilt_internal.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-09T12:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67c9516d_fab2282f",
+      "range": {
+        "startLine": 177,
+        "startChar": 36,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "870e11c5_e78b7d73",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-09T12:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "604e2b6a_4b68336b",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a634764_d86759b6",
         "filename": "tools/check_elf_file.py",
         "patchSetId": 11
@@ -82,6 +154,24 @@
       "writtenOn": "2019-01-09T07:37:21Z",
       "side": 1,
       "message": "Using the latest version should be ok, but we do check in new versions before switching to them officially.",
+      "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea714d08_d081b1c0",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-01-09T12:36:39Z",
+      "side": 1,
+      "message": "In normal built, the build system passes the path to llvm-readobj executable with --llvm-readobj, thus LLVM_PREBUILTS_VERSION is respected by default (see also. PS#10 line 520-524).\n\nThis function is only for the case when the user wish to run check_elf_file.py directly (e.g. for debugging).",
+      "parentUuid": "6a634764_d86759b6",
       "revId": "bf9e73ef41532c47898b72164c00151c3a8e6100",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
