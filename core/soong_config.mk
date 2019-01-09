@@ -127,6 +127,7 @@ $(call add_json_str,  OdmPath,                           $(TARGET_COPY_OUT_ODM))
 $(call add_json_str,  ProductPath,                       $(TARGET_COPY_OUT_PRODUCT))
 $(call add_json_str,  ProductServicesPath,               $(TARGET_COPY_OUT_PRODUCT_SERVICES))
 $(call add_json_bool, MinimizeJavaDebugInfo,             $(filter true,$(PRODUCT_MINIMIZE_JAVA_DEBUG_INFO)))
+$(call add_json_str,  CommonIntermediatesPath,           $(TARGET_OUT_COMMON_INTERMEDIATES))
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
 $(call add_json_bool, Arc,                               $(filter true,$(TARGET_ARC)))
