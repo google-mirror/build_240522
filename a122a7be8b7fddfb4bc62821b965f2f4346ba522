@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fb5a4f6_c42433cc",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-01-09T11:46:26Z",
+      "side": 1,
+      "message": "fwiw, I think we want this in the mainline boardconfig, but I can add that separately.",
+      "revId": "a122a7be8b7fddfb4bc62821b965f2f4346ba522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
