@@ -145,6 +145,7 @@ $(call add_json_bool, FlattenApex,                       $(filter true,$(TARGET_
 $(call add_json_str,  DexpreoptGlobalConfig,             $(DEX_PREOPT_CONFIG))
 
 $(call add_json_list, ManifestPackageNameOverrides,      $(PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES))
+$(call add_json_bool, BionicUpdatable,                   $(filter true,$(TARGET_BIONIC_UPDATABLE)))
 
 $(call add_json_map, VendorVars)
 $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
