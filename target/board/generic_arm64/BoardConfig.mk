@@ -23,7 +23,8 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 
-ifneq ($(TARGET_BUILD_APPS)$(filter cts vts sdk,$(MAKECMDGOALS)),)
+# TODO: VTS should probably be building for armv7-a-neon, not armv7-a...
+ifneq ($(TARGET_BUILD_APPS)$(filter vts,$(MAKECMDGOALS)),)
 # DO NOT USE
 # DO NOT USE
 #
