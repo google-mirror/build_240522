@@ -242,6 +242,8 @@ PRODUCT_PACKAGES += \
     sgdisk \
     Shell \
     shell_and_utilities_system \
+    simpleperf \
+    simpleperf_app_runner \
     sm \
     statsd \
     storaged \
