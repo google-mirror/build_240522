@@ -17,6 +17,7 @@
 # Notice: this works only with Google's Goma build infrastructure.
 ifneq ($(filter-out false,$(USE_GOMA)),)
   # Goma requires a lot of processes and file descriptors.
+  # TODO(yyanagisawa): move these code to build/soong/uil/build/goma.go
   ifeq ($(shell echo $$(($$(ulimit -u) < 2500 || $$(ulimit -n) < 16000))),1)
     $(warning Max user processes and/or open files are insufficient)
     ifeq ($(shell uname),Darwin)
@@ -31,26 +32,14 @@ ifneq ($(filter-out false,$(USE_GOMA)),)
   else
     goma_dir := $(HOME)/goma
   endif
-  goma_ctl := $(goma_dir)/goma_ctl.py
   GOMA_CC := $(goma_dir)/gomacc
 
-  $(if $(wildcard $(goma_ctl)),, \
-   $(warning You should have goma in $$GOMA_DIR or $(HOME)/goma) \
-   $(error See go/ma/how-to-use-goma/how-to-use-goma-for-android for detail))
-
+  # TODO(yyanagisawa): remove them if nobody uses *_WRAPPER.
   # Append gomacc to existing *_WRAPPER variables so it's possible to
   # use both ccache and gomacc.
   CC_WRAPPER := $(strip $(CC_WRAPPER) $(GOMA_CC))
   CXX_WRAPPER := $(strip $(CXX_WRAPPER) $(GOMA_CC))
   JAVAC_WRAPPER := $(strip $(JAVAC_WRAPPER) $(GOMA_CC))
 
-  # gomacc can start goma client's daemon process automatically, but
-  # it is safer and faster to start up it beforehand. We run this as a
-  # background process so this won't slow down the build.
-  ifndef NOSTART_GOMA
-    $(shell ( $(goma_ctl) ensure_start ) &> /dev/null &)
-  endif
-
-  goma_ctl :=
   goma_dir :=
 endif
