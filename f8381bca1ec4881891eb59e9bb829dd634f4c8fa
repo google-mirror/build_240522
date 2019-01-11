@@ -45,6 +45,30 @@
       "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0045096_f2f603b0",
+        "filename": "target/product/gsi/skip_mount.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-01-11T06:40:19Z",
+      "side": 1,
+      "message": "Just curious, how did you handle these on flashing GSI P on your P devices?",
+      "parentUuid": "5ce59c42_77735772",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 8
+      },
+      "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
