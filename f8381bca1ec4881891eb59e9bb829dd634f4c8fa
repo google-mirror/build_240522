@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db0be441_d5f879a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-11T06:02:06Z",
+      "side": 1,
+      "message": "any failure if we still keep them mounted?",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce59c42_77735772",
+        "filename": "target/product/gsi/skip_mount.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-11T06:02:06Z",
+      "side": 1,
+      "message": "when will those be mounted? Is it early mount or a later \u0027mount_all\u0027?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 8
+      },
+      "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
