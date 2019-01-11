@@ -118,14 +118,14 @@ PRODUCT_PACKAGES += \
     libaudioutils \
     libbinder \
     libbinder_ndk \
-    libc.bootstrap \
+    libc \
     libcamera2ndk \
     libcamera_client \
     libcameraservice \
     libc_malloc_debug \
     libc_malloc_hooks \
     libcutils \
-    libdl.bootstrap \
+    libdl \
     libdrmframework \
     libdrmframework_jni \
     libEGL \
@@ -145,7 +145,7 @@ PRODUCT_PACKAGES += \
     libjnigraphics \
     libjpeg \
     liblog \
-    libm.bootstrap \
+    libm \
     libmdnssd \
     libmedia \
     libmedia_jni \
