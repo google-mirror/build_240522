@@ -22,6 +22,30 @@
       "revId": "4012f2982df02878e91d8f666b3ee14882582a81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed700afd_f0999cf5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-01-11T15:28:41Z",
+      "side": 1,
+      "message": "Added a sparse_image bool to GetFilesystemCharacteristics and feed it.",
+      "parentUuid": "63b6d919_3b6e9e3d",
+      "range": {
+        "startLine": 783,
+        "startChar": 45,
+        "endLine": 783,
+        "endChar": 53
+      },
+      "revId": "4012f2982df02878e91d8f666b3ee14882582a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
