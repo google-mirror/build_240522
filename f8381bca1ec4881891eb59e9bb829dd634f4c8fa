@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59abcd30_ef3662ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1256966
+      },
+      "writtenOn": "2019-01-11T06:41:12Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/system/core/+/822182\n\nvoid SwitchRoot(const std::string\u0026 new_root) {\n    auto mounts \u003d GetMounts(new_root);\n\n    LOG(INFO) \u003c\u003c \"Switching root to \u0027\" \u003c\u003c new_root \u003c\u003c \"\u0027\";\n\n    for (const auto\u0026 mount_path : mounts) {\n        auto new_mount_path \u003d new_root + mount_path;\n        mkdir(new_mount_path.c_str(), 0755); // Maybe it will fail because GSI\u0027s parition don\u0027t have these directories and it is readonly.",
+      "parentUuid": "db0be441_d5f879a5",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ce59c42_77735772",
         "filename": "target/product/gsi/skip_mount.cfg",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2019-01-11T06:40:19Z",
       "side": 1,
       "message": "Just curious, how did you handle these on flashing GSI P on your P devices?",
+      "parentUuid": "5ce59c42_77735772",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 8
+      },
+      "revId": "f8381bca1ec4881891eb59e9bb829dd634f4c8fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "467c6606_bf136dc1",
+        "filename": "target/product/gsi/skip_mount.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1256966
+      },
+      "writtenOn": "2019-01-11T06:41:12Z",
+      "side": 1,
+      "message": "early mount",
       "parentUuid": "5ce59c42_77735772",
       "range": {
         "startLine": 3,
