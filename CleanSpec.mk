@@ -532,6 +532,15 @@ $(call add-clean-step, rm -f .d)
 # Remove obsolete apps
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
 
+# Clean up core JNI libraries moved to runtime apex
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libjavacore.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libjavacore.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libopenjdk.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libopenjdk.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libexpat.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libexpat.so)
+
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
