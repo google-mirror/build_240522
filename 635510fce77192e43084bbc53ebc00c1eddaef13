@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e12674e_437a19d5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-11T20:24:24Z",
+      "side": 1,
+      "message": "This will add too much noise for normal/local builds (`m`, or `m systemimage`), which goes against the goal of having quiet builds... Is it sufficient to only have them in `m dist`? If so, using logger.info() will get us there.",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 7
+      },
+      "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22d9fa45_325a72eb",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-11T20:24:24Z",
+      "side": 1,
+      "message": "nit: wrap to 80-char",
+      "range": {
+        "startLine": 437,
+        "startChar": 92,
+        "endLine": 437,
+        "endChar": 93
+      },
+      "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
