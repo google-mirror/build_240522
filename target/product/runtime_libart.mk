@@ -33,11 +33,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ext \
 
-# Libcore ICU. TODO: Try to figure out if/why we need them explicitly.
-PRODUCT_PACKAGES += \
-    libicui18n \
-    libicuuc \
-
 # Android Runtime APEX module.
 PRODUCT_PACKAGES += com.android.runtime
 
