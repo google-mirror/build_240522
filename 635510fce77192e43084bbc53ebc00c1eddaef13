@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2cfd87e9_5e1031e8",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-01-14T17:24:58Z",
+      "side": 1,
+      "message": "I tried logger.info, but I was hoping for a local build to report this debugging information somewhere (eg: in out/verbose.log.gz), or to be able to mine this information from working build logs to determine how efficient/stable the right-sizing operations are.\n\nIf neither is practical, then this CL turns into a reference debug add-on to help diagnose right-size issues on local builds.",
+      "parentUuid": "2e12674e_437a19d5",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 7
+      },
+      "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22d9fa45_325a72eb",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff20650_bd239bb5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-01-14T17:24:58Z",
+      "side": 1,
+      "message": "Will do along with change over to logger.info().",
+      "parentUuid": "22d9fa45_325a72eb",
+      "range": {
+        "startLine": 437,
+        "startChar": 92,
+        "endLine": 437,
+        "endChar": 93
+      },
+      "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
