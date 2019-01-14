@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ba5cc421_fa1943d7",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:49:42Z",
+      "side": 1,
+      "message": "\u003e I tried logger.info, but I was hoping for a local build to report this debugging information somewhere (eg: in out/verbose.log.gz)\n\nI talked to dwillemsen@ the other day regarding this (i.e. to dump more info into out/verbose.log.gz), but learned that it cannot be easily done.\n\nThe other idea in my mind is to honor some env var to increase the verbosity level. But haven\u0027t made that into a CL...",
+      "parentUuid": "2cfd87e9_5e1031e8",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 7
+      },
+      "revId": "635510fce77192e43084bbc53ebc00c1eddaef13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22d9fa45_325a72eb",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 3
