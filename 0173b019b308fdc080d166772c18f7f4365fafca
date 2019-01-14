@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6c0fb01_a04ab5e5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-01-14T17:49:35Z",
+      "side": 1,
+      "message": "IDNK how to direct these to the verbose logs?",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 13
+      },
+      "revId": "0173b019b308fdc080d166772c18f7f4365fafca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
