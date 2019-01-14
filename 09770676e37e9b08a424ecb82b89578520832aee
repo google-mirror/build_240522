@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2493d16_b9687b15",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:16:39Z",
+      "side": 1,
+      "message": "nit: excess blank lines",
+      "range": {
+        "startLine": 1581,
+        "startChar": 0,
+        "endLine": 1581,
+        "endChar": 0
+      },
+      "revId": "09770676e37e9b08a424ecb82b89578520832aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9366bbcf_fa6cc961",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:16:39Z",
+      "side": 1,
+      "message": "nit: remove",
+      "range": {
+        "startLine": 1767,
+        "startChar": 61,
+        "endLine": 1767,
+        "endChar": 71
+      },
+      "revId": "09770676e37e9b08a424ecb82b89578520832aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75d06372_a81d79a5",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:16:39Z",
+      "side": 1,
+      "message": "is this still a feasible path given L2230?",
+      "range": {
+        "startLine": 2270,
+        "startChar": 4,
+        "endLine": 2272,
+        "endChar": 62
+      },
+      "revId": "09770676e37e9b08a424ecb82b89578520832aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f95f8122_d00e91c1",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 2316,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:16:39Z",
+      "side": 1,
+      "message": "\u003c\u003d",
+      "range": {
+        "startLine": 2316,
+        "startChar": 35,
+        "endLine": 2316,
+        "endChar": 37
+      },
+      "revId": "09770676e37e9b08a424ecb82b89578520832aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb38c97d_eb5ba15b",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1584,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-14T17:16:39Z",
+      "side": 1,
+      "message": "We should also verify OEM dynamic partitions as part of this step.",
+      "range": {
+        "startLine": 1584,
+        "startChar": 4,
+        "endLine": 1584,
+        "endChar": 35
+      },
+      "revId": "09770676e37e9b08a424ecb82b89578520832aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
