@@ -543,6 +543,16 @@ $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libopenjdk.so)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libexpat.so)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libexpat.so)
 
+# Clean up ICU libraries moved to runtime apex
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libicuuc.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libicuuc.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libicui18n.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libicui18n.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libandroidicu.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libandroidicu.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libpac.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libpac.so)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
