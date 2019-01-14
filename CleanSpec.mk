@@ -532,6 +532,15 @@ $(call add-clean-step, rm -f .d)
 # Remove obsolete apps
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
 
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libicuuc.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libicuuc.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libicui18n.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libicui18n.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libandroidicu.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libandroidicu.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib/libpac.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib64/libpac.so)
+
 # Remove corrupt generated rule due to using toybox's sed
 $(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates/system/core/init/generated_stub_builtin_function_map)
 
