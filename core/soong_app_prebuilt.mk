@@ -30,6 +30,18 @@ full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_jar)))
 $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_pre_proguard_jar)))
 
+ifneq ($(TURBINE_ENABLED),false)
+ifdef LOCAL_SOONG_HEADER_JAR
+$(eval $(call copy-one-file,$(LOCAL_SOONG_HEADER_JAR),$(full_classes_header_jar)))
+$(eval $(call add-dependency,$(full_classes_jar),$(full_classes_header_jar)))
+else
+$(eval $(call copy-one-file,$(full_classes_jar),$(full_classes_header_jar)))
+endif
+endif # TURBINE_ENABLED != false
+
+$(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+$(eval $(call add-dependency,$(LOCAL_BUILT_MODULE),$(full_classes_jar) $(full_classes_header_jar)))
+
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR),\
     $(intermediates.COMMON)/jacoco-report-classes.jar))
@@ -43,15 +55,6 @@ ifdef LOCAL_SOONG_PROGUARD_DICT
   $(call add-dependency,$(LOCAL_BUILT_MODULE),\
     $(intermediates.COMMON)/proguard_dictionary)
 endif
-
-ifneq ($(TURBINE_ENABLED),false)
-ifdef LOCAL_SOONG_HEADER_JAR
-$(eval $(call copy-one-file,$(LOCAL_SOONG_HEADER_JAR),$(full_classes_header_jar)))
-else
-$(eval $(call copy-one-file,$(full_classes_jar),$(full_classes_header_jar)))
-endif
-endif # TURBINE_ENABLED != false
-
 
 ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 resource_export_package := $(intermediates.COMMON)/package-export.apk
@@ -73,8 +76,6 @@ java-dex: $(LOCAL_SOONG_DEX_JAR)
 ifneq ($(BUILD_PLATFORM_ZIP),)
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(dir $(LOCAL_BUILT_MODULE))package.dex.apk))
 endif
-
-$(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
 
 my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
   $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
