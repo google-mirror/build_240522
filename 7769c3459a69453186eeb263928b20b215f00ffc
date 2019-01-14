@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b746a7c4_6de57e69",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2019-01-14T15:22:02Z",
+      "side": 0,
+      "message": "Will there need to be a CleanSpec for this change?",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "7769c3459a69453186eeb263928b20b215f00ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
