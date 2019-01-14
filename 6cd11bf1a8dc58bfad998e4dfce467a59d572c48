@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db12522d_da360a71",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-14T21:52:36Z",
+      "side": 1,
+      "message": "Do you also need to remove whatever was installed by art-runtime and art-tools?",
+      "revId": "6cd11bf1a8dc58bfad998e4dfce467a59d572c48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
