@@ -549,6 +549,11 @@ $(call add-clean-step, rm -f $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hidden
 
 # Clean up previous default location of RROs
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/overlay)
+
+# Clean up ICU libraries moved to runtime apex
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libandroidicu.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libpac.so)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
