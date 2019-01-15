@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37f552a2_c5ea272c",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-15T19:29:03Z",
+      "side": 1,
+      "message": "Do you need to change here too?",
+      "revId": "efc742bacbd018db642e6e533867c5bcb8973002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
