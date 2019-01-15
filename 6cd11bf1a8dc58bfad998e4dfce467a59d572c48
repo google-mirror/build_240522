@@ -16,6 +16,24 @@
       "revId": "6cd11bf1a8dc58bfad998e4dfce467a59d572c48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13443466_fae793a0",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-01-15T19:55:14Z",
+      "side": 1,
+      "message": "Indeed; thanks for the heads-up. Done in PS8 and refined in PS9.",
+      "parentUuid": "db12522d_da360a71",
+      "revId": "6cd11bf1a8dc58bfad998e4dfce467a59d572c48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
