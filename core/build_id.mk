@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (63d012 Merge "Error if a Soong module attempts to install a classes)
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.190105.001
+>>>>>>> BRANCH (0252b8 Make change and version bump to PPRL.190105.001)
