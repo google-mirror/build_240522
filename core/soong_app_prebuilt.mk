@@ -81,7 +81,9 @@ ifeq (true,$(filter true, \
    $(LOCAL_PRODUCT_MODULE) $(LOCAL_PRODUCT_SERVICES_MODULE) \
    $(LOCAL_VENDOR_MODULE) $(LOCAL_PROPRIETARY_MODULE)))
 ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled app build
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
   module_run_appcompat := true
+endif
 endif
 endif
 
