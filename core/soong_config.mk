@@ -13,6 +13,7 @@ BINDER32BIT := true
 endif
 endif
 
+include $(BUILD_SYSTEM)/definitions.mk
 include $(BUILD_SYSTEM)/dex_preopt_config.mk
 
 ifeq ($(WRITE_SOONG_VARIABLES),true)
