@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1aeb766_bc6cbadd",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2019-01-15T10:53:21Z",
+      "side": 0,
+      "message": "Not 100% sure, but since this is an \"installable\" module you\u0027re removing ideally you\u0027d have a CleanSpec.mk for this to remove the files from the /system image otherwise it\u0027ll appear in incremental builds until somebody does a \"make clean\".\n\nAFAIK, incremental builds are most important for ART host builds and this is above that so it may not be critical. Also, no idea where you\u0027d put the clean spec entries. hansson@ may be able to advise (if not, ccross@, etc. will, I\u0027m sure)",
+      "range": {
+        "startLine": 292,
+        "startChar": 21,
+        "endLine": 292,
+        "endChar": 58
+      },
+      "revId": "7769c3459a69453186eeb263928b20b215f00ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
