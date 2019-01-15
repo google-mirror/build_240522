@@ -62,6 +62,7 @@ endif
 
 # Singleton rule which applies $(HIDDENAPI) on all boot class path dex files.
 # Inputs are filled with `hiddenapi-copy-dex-files` rules.
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
 .KATI_RESTAT: \
 	$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST) \
 	$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST)
@@ -82,7 +83,7 @@ $(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST): $(HIDDENAPI) $(HIDDENAPI_STUBS) \
 	    --out-private=$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST).tmp
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST))
 	$(call commit-change-for-toc,$(INTERNAL_PLATFORM_HIDDENAPI_PRIVATE_LIST))
-
+endif  # UNSAFE_DISABLE_HIDDENAPI_FLAGS
 
 
 ifeq ($(PRODUCT_DIST_BOOT_AND_SYSTEM_JARS),true)
