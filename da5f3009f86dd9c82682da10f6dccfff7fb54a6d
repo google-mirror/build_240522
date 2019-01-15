@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e4c52db_627b1993",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2019-01-15T17:52:02Z",
+      "side": 1,
+      "message": "Move steps here.",
+      "range": {
+        "startLine": 556,
+        "startChar": 35,
+        "endLine": 556,
+        "endChar": 38
+      },
+      "revId": "da5f3009f86dd9c82682da10f6dccfff7fb54a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
