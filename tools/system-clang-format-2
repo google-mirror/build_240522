@@ -4,6 +4,7 @@ ColumnLimit: 100
 CommentPragmas: NOLINT:.*
 DerivePointerAlignment: false
 IndentWidth: 2
+AlignAfterOpenBracket: DontAlign
 PointerAlignment: Left
 TabWidth: 2
 UseTab: Never
