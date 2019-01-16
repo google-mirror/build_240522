@@ -2907,7 +2907,7 @@ endef
 define check-api
 $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/$(strip $(1))-timestamp: $(2) $(3) $(4) $(APICHECK) $(9)
 	@echo "Checking API:" $(1)
-	$(hide) ( $(APICHECK_COMMAND) --check-api-files $(6) $(2) $(3) $(4) $(5) || ( $(7) ; exit 38 ) )
+	$(hide) ( $(APICHECK_COMMAND) --check-api-files $(2) $(3) $(4) $(5) $(6) || ( $(7) ; exit 38 ) )
 	$(hide) mkdir -p $$(dir $$@)
 	$(hide) touch $$@
 $(8): $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/$(strip $(1))-timestamp
