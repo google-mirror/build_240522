@@ -34,6 +34,24 @@
       "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d22e5cbf_9eb57651",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-16T16:18:33Z",
+      "side": 1,
+      "message": "If you did it there you\u0027d have to do it in java.mk too to support boot jars that are not defined in Soong, although I\u0027ll have to require all boot jars in Soong once I move boot jar dexproepting there.  I\u0027d suggest doing it in dex_preopt_libart.mk or dex_preopt_libart_boot.mk",
+      "parentUuid": "38728076_275a2798",
+      "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
