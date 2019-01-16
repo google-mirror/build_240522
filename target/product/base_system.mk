@@ -79,6 +79,7 @@ PRODUCT_PACKAGES += \
     fsck_msdos \
     fs_config_files_system \
     fs_config_dirs_system \
+    gsi_tool \
     gsid \
     heapprofd \
     heapprofd_client \
@@ -268,6 +269,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+    LiveImageInstallationService \
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
