@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3bb7530_b934f25b",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-16T16:14:22Z",
+      "side": 1,
+      "message": "intermediates-dir-for here breaks the layering between Soong and Make.  That layering is already a little confused due to dexpreopting the boot jars in Make, but I\u0027d like to not make it worse.  I\u0027d suggest copying the boot jars into $(PRODUCT_OUT)/dex_bootjars_input or something, and using that path here.  Then when I move dexpreopting the boot jars into Soong I can remove the extra copy.",
+      "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
