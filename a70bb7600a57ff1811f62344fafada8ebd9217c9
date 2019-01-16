@@ -22,6 +22,30 @@
       "revId": "a70bb7600a57ff1811f62344fafada8ebd9217c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f9b024_4ed415b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-16T23:59:13Z",
+      "side": 1,
+      "message": "Good catch, sorry, updated with the actual change.\n\nHowever, this also affects other places. It might be better to just leave it how it is and not affect things. I\u0027m happy to fix or close the bug.\n\nAll this bikeshedding about formatting actually drives me crazy. I just want increasingly shared and common formats (and for something to be the default sometime).",
+      "parentUuid": "7cbdb984_ddc22260",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "a70bb7600a57ff1811f62344fafada8ebd9217c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
