@@ -16,6 +16,24 @@
       "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38728076_275a2798",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-01-16T16:16:34Z",
+      "side": 1,
+      "message": "Where should I do that copy? Here?\nhttps://cs.corp.google.com/android/build/make/core/soong_java_prebuilt.mk?l\u003d85",
+      "parentUuid": "d3bb7530_b934f25b",
+      "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
