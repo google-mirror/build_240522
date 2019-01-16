@@ -106,6 +106,24 @@
       "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6708f84_8ffdc22a",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-01-16T22:25:54Z",
+      "side": 1,
+      "message": "Yeah, it is. When I had the paths wrong, the rule for boot.art complained (that rule is in makefile). Once paths were fixed, it\u0027s soong rules that complained.\n\nNote that DEXPREOPT_BOOTCLASSPATH_DEX_FILES is passed below in this file to a soong variable.",
+      "parentUuid": "9b0c8bac_4158aea4",
+      "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
