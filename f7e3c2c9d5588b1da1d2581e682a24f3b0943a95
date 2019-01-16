@@ -70,6 +70,24 @@
       "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a37cc97_9716f59a",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-01-16T22:18:25Z",
+      "side": 1,
+      "message": "Here\u0027s what I did to get this error: I\u0027ve added this to dex_preopt_libart.mk:\n\n$(foreach mod,$(NON_UPDATABLE_BOOT_MODULES),$(eval $(call copy-one-file,$(call intermediates-dir-for,JAVA_LIBRARIES,$(mod),,COMMON)/javalib.jar),$(DEXPREOPT_BOOT_JARS_INPUT_PATH)/$(mod).jar))",
+      "parentUuid": "93683dbf_15bfc874",
+      "revId": "f7e3c2c9d5588b1da1d2581e682a24f3b0943a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
