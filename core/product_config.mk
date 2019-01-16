@@ -566,3 +566,66 @@ PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := \
 PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES))
 .KATI_READONLY := PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES
+
+# Allows disabling the build of the system image for this product
+PRODUCT_BUILD_SYSTEM_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_SYSTEM_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_SYSTEM_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_SYSTEM_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_SYSTEM_IMAGE: $(PRODUCT_BUILD_SYSTEM_IMAGE) -- true false and empty are supported.)
+endif
+
+# Allows disabling the build of the system_other image for this product
+PRODUCT_BUILD_SYSTEM_OTHER_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_SYSTEM_OTHER_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_SYSTEM_OTHER_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_SYSTEM_OTHER_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_SYSTEM_OTHER_IMAGE: $(PRODUCT_BUILD_SYSTEM_OTHER_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the vendor image for this product
+PRODUCT_BUILD_VENDOR_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_VENDOR_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_VENDOR_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_VENDOR_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_VENDOR_IMAGE: $(PRODUCT_BUILD_VENDOR_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the product image for this product
+PRODUCT_BUILD_PRODUCT_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_PRODUCT_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_PRODUCT_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_PRODUCT_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_PRODUCT_IMAGE: $(PRODUCT_BUILD_PRODUCT_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the product services image for this product
+PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE: $(PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the odm image for this product
+PRODUCT_BUILD_ODM_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_ODM_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_ODM_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_ODM_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_ODM_IMAGE: $(PRODUCT_BUILD_ODM_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the cache image for this product
+PRODUCT_BUILD_CACHE_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_CACHE_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_CACHE_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_CACHE_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_CACHE_IMAGE: $(PRODUCT_BUILD_CACHE_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the ramdisk image for this product
+PRODUCT_BUILD_RAMDISK_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_RAMDISK_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_RAMDISK_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_RAMDISK_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_RAMDISK_IMAGE: $(PRODUCT_BUILD_RAMDISK_IMAGE) -- true false and empty are supported.)
+endif
+
+# Configures whether to build the userdata image for this product
+PRODUCT_BUILD_USERDATA_IMAGE := $(firstword $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_USERDATA_IMAGE)))
+.KATI_READONLY := PRODUCT_BUILD_USERDATA_IMAGE
+ifneq ($(filter-out true false,$(PRODUCT_BUILD_USERDATA_IMAGE)),)
+    $(error Invalid PRODUCT_BUILD_USERDATA_IMAGE: $(PRODUCT_BUILD_USERDATA_IMAGE) -- true false and empty are supported.)
+endif
