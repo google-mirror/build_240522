@@ -448,8 +448,12 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       extfs_inode_count = prop_dict["extfs_inode_count"]
       inodes = int(fs_dict.get("Inode count", extfs_inode_count))
       inodes -= int(fs_dict.get("Free inodes", "0"))
-      # add .2% margin
-      inodes = inodes * 1002 // 1000
+      # add .2% margin or 1 inode, whichever is greater
+      spare_inodes = inodes * 2 // 1000
+      min_spare_inodes = 1
+      if spare_inodes < min_spare_inodes:
+        spare_inodes = min_spare_inodes
+      inodes += spare_inodes
       prop_dict["extfs_inode_count"] = str(inodes)
       prop_dict["partition_size"] = str(size)
       logger.info(
