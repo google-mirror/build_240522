@@ -16,6 +16,24 @@
       "revId": "9b3bd4e6f386a67fdbd5f707e50e04f6d99475bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98db2862_3e2b56dd",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2686,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-17T17:52:29Z",
+      "side": 1,
+      "message": "I plan to remove Make boot jar support when I move the boot image and the hiddenapi singletons into Soong.",
+      "parentUuid": "e6ead32d_22822bde",
+      "revId": "9b3bd4e6f386a67fdbd5f707e50e04f6d99475bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
