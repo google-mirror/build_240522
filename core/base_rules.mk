@@ -780,6 +780,14 @@ ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(sort \
   $(LOCAL_JAVA_LIBRARIES)\
   $(LOCAL_JNI_SHARED_LIBRARIES))
 
+ifndef LOCAL_IS_HOST_MODULE
+  ifeq ($(LOCAL_SDK_VERSION),)
+    ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+      ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS += $(call java-lib-header-files,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES))
+    endif
+  endif
+endif
+
 ALL_DEPS.$(LOCAL_MODULE).LICENSE := $(sort $(ALL_DEPS.$(LOCAL_MODULE).LICENSE) $(license_files))
 
 ###########################################################
