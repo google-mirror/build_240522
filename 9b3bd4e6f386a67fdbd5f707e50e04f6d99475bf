@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6ead32d_22822bde",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 2686,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-01-17T15:17:29Z",
+      "side": 1,
+      "message": "AFAICT, all boot jars are now in soong, so we could get rid of this. but let\u0027s merge this to unblock mainline and i can take care of it post-IC",
+      "revId": "9b3bd4e6f386a67fdbd5f707e50e04f6d99475bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
