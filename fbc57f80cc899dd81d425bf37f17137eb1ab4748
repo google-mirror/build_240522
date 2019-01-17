@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b7cd2f62_9b816b94",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-17T21:19:32Z",
+      "side": 1,
+      "message": "(my gmail response attached to the change instead of this comment...)\n\nI need to finish switching simpleperf to our build version stamping, which will do the right thing here.",
+      "parentUuid": "7157a49a_ab4d775d",
+      "revId": "fbc57f80cc899dd81d425bf37f17137eb1ab4748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "48f36de6_df053224",
         "filename": "target/product/base_system.mk",
         "patchSetId": 1
