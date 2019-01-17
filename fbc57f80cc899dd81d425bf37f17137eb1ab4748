@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7157a49a_ab4d775d",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-17T20:45:45Z",
+      "side": 1,
+      "message": "simpleperf cannot have the git version embedded in it if it is going to be in the system image.",
+      "revId": "fbc57f80cc899dd81d425bf37f17137eb1ab4748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
