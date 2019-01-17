@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4084746_4ad4e044",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1348646
+      },
+      "writtenOn": "2019-01-17T09:13:16Z",
+      "side": 1,
+      "message": "DocumentsUI ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "9c1bb55c8dbf642bbfbd3cdca0e374d136e6fa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
