@@ -133,6 +133,7 @@ $(call add_json_bool, MinimizeJavaDebugInfo,             $(filter true,$(PRODUCT
 
 $(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
 $(call add_json_bool, Arc,                               $(filter true,$(TARGET_ARC)))
+$(call add_json_bool, Pagerando,                         $(filter-out false,$(PAGERANDO)))
 
 $(call add_json_list, NamespacesToExport,                $(PRODUCT_SOONG_NAMESPACES))
 

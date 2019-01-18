@@ -43,6 +43,12 @@ my_strip_module := $(firstword \
   $(LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
   $(LOCAL_STRIP_MODULE))
 
+# Do not fall back global PAGERANDO flag for prebuilts, only check local
+# flag. Thus we cannot use pagerando.mk
+LOCAL_PAGERANDO := $(firstword \
+  $(LOCAL_PAGERANDO_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
+  $(LOCAL_PAGERANDO))
+
 ifeq (SHARED_LIBRARIES,$(LOCAL_MODULE_CLASS))
   ifeq ($(LOCAL_IS_HOST_MODULE)$(my_strip_module),)
     # Strip but not try to add debuglink

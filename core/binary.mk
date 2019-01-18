@@ -430,6 +430,19 @@ endif
 
 include $(BUILD_SYSTEM)/config_sanitizers.mk
 
+ifeq ($(LOCAL_PAGERANDO),true)
+  ifeq ($(my_clang),true)
+    my_cflags += -flto -fsanitize=pagerando -fsanitize-blacklist=build/soong/cc/config/pagerando_blacklist.txt
+    my_ldflags += -flto -Wl,--plugin-opt,pagerando -Wl,--plugin-opt,-pagerando-skip-trivial -Wl,--plugin-opt,-pagerando-binning-strategy=pgo
+
+    # Clang doe not pass correct emulated TLS option in LTO mode, so force
+    # emulated TLS
+    my_ldflags += -Wl,-plugin-opt,-emulated-tls
+  endif
+
+  my_arflags += --plugin $(LLVM_PREBUILTS_PATH)/../lib64/LLVMgold.so
+endif
+
 # Statically link libwinpthread when cross compiling win32.
 ifeq ($($(my_prefix)OS),windows)
   my_static_libraries += libwinpthread
