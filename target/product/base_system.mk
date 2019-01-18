@@ -320,9 +320,12 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += debug.atrace.tags.enableflags=0
 PRODUCT_PACKAGES_DEBUG := \
     adb_keys \
     arping \
+    asan-test \
+    gdbserver \
     iotop \
     iw \
     logpersist.start \
+    logtagd.rc \
     procrank \
     showmap \
     sqlite3 \
