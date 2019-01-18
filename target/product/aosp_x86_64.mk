@@ -51,6 +51,10 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier
 
+# Enable fake network location provider for GSI.
+PRODUCT_PACKAGES += \
+    StubNetworkLocation \
+
 # Needed by Pi newly launched device to pass VtsTrebleSysProp on GSI
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
