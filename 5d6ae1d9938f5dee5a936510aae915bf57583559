@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe5805b7_b3780978",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3661,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-18T22:05:10Z",
+      "side": 1,
+      "message": "this space shouldn\u0027t be here (I don\u0027t remember the parsing rules on whether it matters or not, but better to be safe)",
+      "range": {
+        "startLine": 3661,
+        "startChar": 8,
+        "endLine": 3661,
+        "endChar": 9
+      },
+      "revId": "5d6ae1d9938f5dee5a936510aae915bf57583559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
