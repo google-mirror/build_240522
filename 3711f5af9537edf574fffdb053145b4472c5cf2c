@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc9ba8ea_2c928026",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-18T23:17:10Z",
+      "side": 1,
+      "message": "I\u0027m thinking whether using EmptyImage could be better. I did a quick look through blockimgdiff.py, and seems it would be mostly no-ops with an EmptyImage.",
+      "range": {
+        "startLine": 1754,
+        "startChar": 4,
+        "endLine": 1754,
+        "endChar": 16
+      },
+      "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
