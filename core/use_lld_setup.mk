@@ -18,3 +18,8 @@ endif
 ifeq ($($(my_prefix)OS),darwin)
 my_use_clang_lld := false
 endif
+
+# Don't use LLD if we're building with pagerando
+ifeq ($(LOCAL_PAGERANDO),true)
+  my_use_clang_lld := false
+endif
