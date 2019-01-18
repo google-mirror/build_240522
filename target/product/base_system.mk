@@ -320,6 +320,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += debug.atrace.tags.enableflags=0
 PRODUCT_PACKAGES_DEBUG := \
     adb_keys \
     arping \
+    asan-test \
     iotop \
     iw \
     logpersist.start \
