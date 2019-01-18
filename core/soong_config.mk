@@ -155,6 +155,7 @@ $(call add_json_list, EnforceSystemCertificateWhitelist, $(ENFORCE_SYSTEM_CERTIF
 $(call add_json_str,  HiddenAPIPublicList,               $(INTERNAL_PLATFORM_HIDDENAPI_PUBLIC_LIST))
 $(call add_json_str,  HiddenAPIFlags,                    $(INTERNAL_PLATFORM_HIDDENAPI_FLAGS))
 $(call add_json_list, HiddenAPIExtraAppUsageJars,        $(HIDDENAPI_EXTRA_APP_USAGE_JARS))
+$(call add_json_bool, DisableHiddenAPI,                  $filter true,$(UNSAFE_DISABLE_HIDDENAPI_FLAGS))
 
 $(call add_json_map, VendorVars)
 $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
