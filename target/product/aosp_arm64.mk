@@ -48,6 +48,7 @@ PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := system
 PRODUCT_PACKAGES += \
+    StubNetworkLocation \
     update_engine \
     update_verifier
 
