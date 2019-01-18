@@ -1751,11 +1751,13 @@ class BlockDifference(object):
     assert version >= 3
     self.version = version
 
-    b = blockimgdiff.BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
-                                    version=self.version,
-                                    disable_imgdiff=self.disable_imgdiff)
-    self.path = os.path.join(MakeTempDir(), partition)
-    b.Compute(self.path)
+    if self.tgt:
+      b = blockimgdiff.BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
+                                      version=self.version,
+                                      disable_imgdiff=self.disable_imgdiff)
+      self.path = os.path.join(MakeTempDir(), partition)
+      b.Compute(self.path)
+
     self._required_cache = b.max_stashed_size
     self.touched_src_ranges = b.touched_src_ranges
     self.touched_src_sha1 = b.touched_src_sha1
@@ -1790,6 +1792,9 @@ class BlockDifference(object):
 
   def WriteScript(self, script, output_zip, progress=None,
                   write_verify_script=False):
+    if not self.tgt:
+      return
+
     if not self.src:
       # write the output unconditionally
       script.Print("Patching %s image unconditionally..." % (self.partition,))
@@ -1810,6 +1815,9 @@ class BlockDifference(object):
     error messages; b) it doesn't allow half-way updated images to pass the
     verification."""
 
+    if not self.tgt:
+      return
+
     partition = self.partition
     script.Print("Verifying %s..." % (partition,))
     ranges = self.tgt.care_map
@@ -1823,6 +1831,9 @@ class BlockDifference(object):
     script.AppendExtra("")
 
   def WriteVerifyScript(self, script, touched_blocks_only=False):
+    if not self.tgt:
+      return
+
     partition = self.partition
 
     # full OTA
@@ -1893,6 +1904,9 @@ class BlockDifference(object):
             'endif;') % (code, partition))
 
   def WritePostInstallVerifyScript(self, script):
+    if not self.tgt:
+      return
+
     partition = self.partition
     script.Print('Verifying the updated %s image...' % (partition,))
     # Unlike pre-install verification, clobbered_blocks should not be ignored.
@@ -1936,6 +1950,9 @@ class BlockDifference(object):
         'endif;' % (code, partition))
 
   def _WriteUpdate(self, script, output_zip):
+    if not self.tgt:
+      return
+
     ZipWrite(output_zip,
              '{}.transfer.list'.format(self.path),
              '{}.transfer.list'.format(self.partition))
@@ -2221,11 +2238,21 @@ class DynamicPartitionsDifference(object):
              collections.Counter(e.partition for e in block_diffs).items()
              if count > 1])
 
-    dynamic_partitions = set(shlex.split(info_dict.get(
+    target_dynamic_partitions = set(shlex.split(info_dict.get(
         "dynamic_partition_list", "").strip()))
-    assert set(block_diff_dict.keys()) == dynamic_partitions, \
-        "Dynamic partitions: {}, BlockDifference objects: {}".format(
-            list(dynamic_partitions), list(block_diff_dict.keys()))
+    block_diffs_with_target = set(p for p in block_diff_dict
+                                  if block_diff_dict[p].tgt)
+    assert block_diffs_with_target == target_dynamic_partitions, \
+        "Target Dynamic partitions: {}, BlockDifference with target: {}".format(
+            list(target_dynamic_partitions), list(block_diffs_with_target))
+
+    source_dynamic_partitions = set(shlex.split(source_info_dict.get(
+        "dynamic_partition_list", "").strip()))
+    block_diffs_with_source = set(p for p in block_diff_dict
+                                  if block_diff_dict[p].src)
+    assert block_diffs_with_source == source_dynamic_partitions, \
+        "Source Dynamic partitions: {}, BlockDifference with source: {}".format(
+            list(source_dynamic_partitions), list(block_diffs_with_source))
 
     self._partition_updates = dict()
 
