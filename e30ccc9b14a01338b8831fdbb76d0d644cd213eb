@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dac5ed06_f5105f75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083173
+      },
+      "writtenOn": "2019-01-19T02:17:22Z",
+      "side": 1,
+      "message": "Title the bug about the change you are introducing, less about the specific bug you are fixing.\n\n\"Build System: Add java lib header files to module dependency list\"?\n\nSomething along those lines.",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "e30ccc9b14a01338b8831fdbb76d0d644cd213eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
