@@ -22,6 +22,30 @@
       "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62942978_781b88d8",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-01-19T00:26:50Z",
+      "side": 1,
+      "message": "I don\u0027t have a preference here. Since the computation and script writing are both skipped, this BlockDifference object is not very useful here. And it only serves as a container to access partition, src, tgt...",
+      "parentUuid": "dc9ba8ea_2c928026",
+      "range": {
+        "startLine": 1754,
+        "startChar": 4,
+        "endLine": 1754,
+        "endChar": 16
+      },
+      "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
