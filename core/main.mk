@@ -1131,6 +1131,9 @@ ifdef FULL_BUILD
       $(TARGET_OUT_SYSTEM_OTHER)/%.art
   endif
 
+  # NDK stub libraries are not installed to the final image
+  static_whitelist_patterns += $(SOONG_OUT_DIR)/ndk/%
+
 CERTIFICATE_VIOLATION_MODULES_FILENAME := $(PRODUCT_OUT)/certificate_violation_modules.txt
 $(CERTIFICATE_VIOLATION_MODULES_FILENAME):
 	rm -f $@
