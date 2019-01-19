@@ -46,6 +46,30 @@
       "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a742f328_e64a6000",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-01-19T00:34:55Z",
+      "side": 1,
+      "message": "The difference is in the pre-install verification. If we ever want to verify a matching source image before doing removal, that would be the part skipped (by the added L1834).",
+      "parentUuid": "62942978_781b88d8",
+      "range": {
+        "startLine": 1754,
+        "startChar": 4,
+        "endLine": 1754,
+        "endChar": 16
+      },
+      "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
