@@ -90,6 +90,7 @@ ifdef LOCAL_SOONG_DEX_JAR
           # Append the odex for the 2nd arch if we have one.
           installed_odex += $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
           ALL_MODULES.$(my_register_name).INSTALLED += $(installed_odex)
+          ALL_MODULES.$(my_register_name).TARGET_INSTALLED += $(installed_odex)
           # Make sure to install the .odex and .vdex when you run "make <module_name>"
          $(my_all_targets): $(installed_odex)
         endif
@@ -128,6 +129,7 @@ my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
   $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
 my_installed := $(call copy-many-files, $(my_built_installed))
 ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+ALL_MODULES.$(my_register_name).TARGET_INSTALLED += $(my_installed)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(my_built_installed)
 $(my_register_name): $(my_installed)
 

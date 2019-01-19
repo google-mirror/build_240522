@@ -54,6 +54,7 @@ my_shared_library_path := $(call get_non_asan_path,\
 my_installed_library := $(addprefix $(my_shared_library_path)/, $(my_jni_filenames))
 $(LOCAL_INSTALLED_MODULE) : $(my_installed_library)
 ALL_MODULES.$(LOCAL_MODULE).INSTALLED += $(my_installed_library)
+ALL_MODULES.$(LOCAL_MODULE).TARGET_INSTALLED += $(my_installed_library)
 
 # Create symlink in the app specific lib path
 # Skip creating this symlink when running the second part of a target sanitization build.
@@ -101,6 +102,7 @@ $(foreach lib, $(my_prebuilt_jni_libs), \
 my_installed_library := $(addprefix $(my_app_lib_path)/, $(notdir $(my_prebuilt_jni_libs)))
 $(LOCAL_INSTALLED_MODULE) : $(my_installed_library)
 ALL_MODULES.$(LOCAL_MODULE).INSTALLED += $(my_installed_library)
+ALL_MODULES.$(LOCAL_MODULE).TARGET_INSTALLED += $(my_installed_library)
 endif  # my_embed_jni
 endif  # inner my_prebuilt_jni_libs
 endif  # outer my_prebuilt_jni_libs

@@ -437,6 +437,7 @@ $(installed_apk_splits) : $(my_module_path)/%.apk : $(intermediates)/%.apk
 
 # Register the additional built and installed files.
 ALL_MODULES.$(my_register_name).INSTALLED += $(installed_apk_splits)
+ALL_MODULES.$(my_register_name).TARGET_INSTALLED += $(installed_apk_splits)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += \
   $(foreach s,$(LOCAL_PACKAGE_SPLITS),$(intermediates)/$(notdir $(s)):$(my_module_path)/$(notdir $(s)))
 

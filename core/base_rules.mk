@@ -703,6 +703,12 @@ ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
     $(LOCAL_BUILT_MODULE):$(LOCAL_INSTALLED_MODULE) \
     $(my_init_rc_pairs) $(my_test_data_pairs) $(my_vintf_pairs))
+ifndef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).TARGET_INSTALLED := \
+    $(strip $(ALL_MODULES.$(my_register_name).TARGET_INSTALLED) \
+    $(LOCAL_INSTALLED_MODULE) $(my_init_rc_installed) $(my_installed_symlinks) \
+    $(my_installed_test_data) $(my_vintf_installed))
+endif
 endif
 ifdef LOCAL_PICKUP_FILES
 # Files or directories ready to pick up by the build system

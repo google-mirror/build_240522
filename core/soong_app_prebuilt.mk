@@ -80,6 +80,7 @@ my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
   $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
 my_installed := $(call copy-many-files, $(my_built_installed))
 ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+ALL_MODULES.$(my_register_name).TARGET_INSTALLED += $(my_installed)
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(my_built_installed)
 $(my_register_name): $(my_installed)
 

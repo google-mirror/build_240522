@@ -41,6 +41,9 @@ $(call symlink-file,$(my_module_path)/$(my_src_binary_name),$(my_src_binary_name
 # We need this so that the installed files could be picked up based on the
 # local module name
 ALL_MODULES.$(LOCAL_MODULE).INSTALLED += $(my_symlink)
+ifneq ($(LOCAL_IS_HOST_MODULE),true)
+ALL_MODULES.$(LOCAL_MODULE).TARGET_INSTALLED += $(my_symlink)
+endif
 
 # Create the symlink when you run mm/mmm or "make <module_name>"
 $(LOCAL_MODULE) : $(my_symlink)
