@@ -70,6 +70,30 @@
       "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09039a62_ac1d65cc",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-19T00:53:07Z",
+      "side": 1,
+      "message": "See new PS. I updated the assert checks in DynamicPartitionsDifference.__init__ as well to handle the case when it is EmptyImage() (using DynamicPartitionUpdate._GetSparseImageSize, which handles None and EmptyImage() properly.)\n\nI\u0027ll update the Google Doc as well.",
+      "parentUuid": "a742f328_e64a6000",
+      "range": {
+        "startLine": 1754,
+        "startChar": 4,
+        "endLine": 1754,
+        "endChar": 16
+      },
+      "revId": "3711f5af9537edf574fffdb053145b4472c5cf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
