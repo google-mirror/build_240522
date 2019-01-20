@@ -417,7 +417,11 @@ my_init_rc_installed :=
 my_init_rc_pairs :=
 my_installed_symlinks :=
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+ifneq ($(LOCAL_POST_INSTALL_CMD_$(my_32_64_bit_suffix)),)
+$(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD_$(my_32_64_bit_suffix))
+else
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
+endif
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
 	$(copy-file-to-new-target)
