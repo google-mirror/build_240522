@@ -1095,6 +1095,12 @@ ifdef FULL_BUILD
       $(TARGET_OUT_SYSTEM_OTHER)/%.odex \
       $(TARGET_OUT_SYSTEM_OTHER)/%.vdex \
       $(TARGET_OUT_SYSTEM_OTHER)/%.art
+  else
+    # Allow odex in system
+    static_inside_whitelist_patterns := \
+      $(TARGET_OUT)/%.odex \
+      $(TARGET_OUT)/%.vdex \
+      $(TARGET_OUT)/%.art
   endif
 
 CERTIFICATE_VIOLATION_MODULES_FILENAME := $(PRODUCT_OUT)/certificate_violation_modules.txt
@@ -1121,7 +1127,7 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
     $(eval all_offending_files += $(files_in_requirement)) \
     $(eval whitelist := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
     $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
-    $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
+    $(eval offending_files := $(filter-out $(whitelist_patterns) $(static_inside_whitelist_patterns),$(files_in_requirement))) \
     $(eval enforcement := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
     $(if $(enforcement),\
       $(call maybe-print-list-and-error,$(offending_files),\
