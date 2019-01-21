@@ -39,6 +39,7 @@ test_tools := $(HOST_OUT_JAVA_LIBRARIES)/hosttestlib.jar \
   $(HOST_OUT_JAVA_LIBRARIES)/$(test_suite_tradefed).jar \
   $(HOST_OUT_JAVA_LIBRARIES)/$(test_suite_tradefed)-tests.jar \
   $(HOST_OUT_EXECUTABLES)/$(test_suite_tradefed) \
+  $(HOST_OUT_EXECUTABLES)/run_cts_auto.sh \
   $(test_suite_readme)
 
 test_tools += $(test_suite_tools)
