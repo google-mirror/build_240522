@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59f30bc3_4835637d",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-01-21T14:22:11Z",
+      "side": 1,
+      "message": "can you please put this into the other list of things not installed on device (line 1123), and tweak the comment?",
+      "revId": "ad1aa585617d926b87a29e807876268415d642df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
