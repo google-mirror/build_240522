@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "008be315_66e63431",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-01-22T20:30:03Z",
+      "side": 1,
+      "message": "since the result of write script is deterministic, how about remove the comment lines and just assert equality.",
+      "range": {
+        "startLine": 1076,
+        "startChar": 4,
+        "endLine": 1076,
+        "endChar": 19
+      },
+      "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
