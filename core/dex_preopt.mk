@@ -77,7 +77,7 @@ $(INTERNAL_PLATFORM_HIDDENAPI_STUB_FLAGS): $(HIDDENAPI) $(HIDDENAPI_STUBS) \
                                            $(HIDDENAPI_STUBS_SYSTEM) $(HIDDENAPI_STUBS_TEST) \
                                            $(HIDDENAPI_STUBS_CORE_PLATFORM)
 	for INPUT_DEX in $(PRIVATE_DEX_INPUTS); do \
-		find `dirname $${INPUT_DEX}` -maxdepth 1 -name "classes*.dex"; \
+		echo $${INPUT_DEX}; \
 	done | sort | sed 's/^/--boot-dex=/' | xargs $(HIDDENAPI) list \
 	    --public-stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS)) \
 	    --public-stub-classpath=$(call normalize-path-list, $(PRIVATE_HIDDENAPI_STUBS_SYSTEM)) \
