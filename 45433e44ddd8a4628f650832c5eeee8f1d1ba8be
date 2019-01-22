@@ -46,6 +46,53 @@
       "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f0b4a44_2379e546",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-01-22T20:57:44Z",
+      "side": 1,
+      "message": "wait.. then we may not get a deterministic package across multiple runs? Is it better to use an ordered map then?",
+      "parentUuid": "f077d4c0_b426c331",
+      "range": {
+        "startLine": 1076,
+        "startChar": 4,
+        "endLine": 1076,
+        "endChar": 19
+      },
+      "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a692da5_9769525c",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-01-22T20:57:44Z",
+      "side": 1,
+      "message": "we could test EmtryImage here.",
+      "range": {
+        "startLine": 1139,
+        "startChar": 43,
+        "endLine": 1139,
+        "endChar": 58
+      },
+      "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
