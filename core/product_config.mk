@@ -592,3 +592,8 @@ $(foreach image, \
   $(eval $(call product-build-image-config,$(image))))
 
 product-build-image-config :=
+
+# If set, DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE will be installed to product partition.
+# Otherwise, it will be installed to system partition.
+PRODUCT_USE_PRODUCT_COMPATIBILITY_MATRIX := \
+    $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_USE_PRODUCT_COMPATIBILITY_MATRIX))
