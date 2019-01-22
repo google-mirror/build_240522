@@ -22,6 +22,30 @@
       "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f077d4c0_b426c331",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-22T20:42:13Z",
+      "side": 1,
+      "message": "It is, but the test itself shouldn\u0027t care; but logically, the test only cares about these orders.\n\n(For example, right now ota_from_target_files calls DynamicPartitionsDifference as follows:\n\n    DynamicPartitionsDifference(block_diffs\u003d[BlockDifference(\"system\"), BlockDifference(\"vendor\")], ...)\n\nThen, DynamicPartitionsDifference.__init__ creates a map:\n\n    self._partition_updates \u003d dict()\n    self._partition_updates[\"system\"] \u003d ...\n    self._partition_updates[\"vendor\"] \u003d ...\n\nThen, in DynamicPartitionsDifference.WriteScript:\n\n    for p, u in self._partition_updates.items():\n        ...\n\nThere is no guarantee that \"vendor\" goes before \"system\" in self._partition_updates. Hence, \"add vendor\" may go before or after \"add system\".)",
+      "parentUuid": "008be315_66e63431",
+      "range": {
+        "startLine": 1076,
+        "startChar": 4,
+        "endLine": 1076,
+        "endChar": 19
+      },
+      "revId": "45433e44ddd8a4628f650832c5eeee8f1d1ba8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
