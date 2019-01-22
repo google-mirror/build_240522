@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "564a46c6_f15f28fd",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-01-22T11:52:24Z",
+      "side": 1,
+      "message": "You should be able to simplify this to:\n  \n  $(HIDDENAPI) $(addprefix --boot-dex\u003d,$(PRIVATE_DEX_INPUTS)) list ...",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 46
+      },
+      "revId": "ffad4204530156cfe69bd414831317c818603fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
