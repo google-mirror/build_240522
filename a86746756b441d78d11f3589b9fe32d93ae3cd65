@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37c42a34_6ebe0010",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-23T06:24:43Z",
+      "side": 1,
+      "message": "This dependency needs to be on the files in the directory, not the directory itself. The directory timestamp is not updated when the files in it change, but the output of this rule does.\n\n`find` also isn\u0027t deterministic, it\u0027s based on the ordering in the underlying filesystem, and will change from machine to machine.\n\nThe best thing here is to have make evaluate the conditional, then using that list in the dependencies:\n\n $(INSTALLED_DTBIMAGE_TARGET): $(call find-files-in-subdirs,$(BOARD_PREBUILT_DTBIMAGE_DIR),*.dtb,.)\n\tcat $^ \u003e$@",
+      "range": {
+        "startLine": 839,
+        "startChar": 30,
+        "endLine": 839,
+        "endChar": 61
+      },
+      "revId": "a86746756b441d78d11f3589b9fe32d93ae3cd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
