@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccd6ac92_1461945a",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-23T22:50:08Z",
+      "side": 1,
+      "message": "nit: we should also rename this at some point",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 22
+      },
+      "revId": "28ee89dda1c0d9213bdf813551fe59bf529f107c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
