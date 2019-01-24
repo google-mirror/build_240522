@@ -324,6 +324,7 @@ PRODUCT_PACKAGES_DEBUG := \
     iw \
     logpersist.start \
     procrank \
+    remount \
     showmap \
     sqlite3 \
     ss \
