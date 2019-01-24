@@ -25,6 +25,14 @@ full_classes_jar := $(intermediates.COMMON)/classes.jar
 full_classes_pre_proguard_jar := $(intermediates.COMMON)/classes-pre-proguard.jar
 full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 
+ifdef LOCAL_SOONG_CLASSES_JAR
+  ifneq ($(TURBINE_ENABLED),false)
+    ifdef LOCAL_SOONG_HEADER_JAR
+      LOCAL_ADDITIONAL_CHECKED_MODULE := $(full_classes_header_jar)
+    endif
+  endif
+endif
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################

@@ -134,14 +134,18 @@ endif
 
 ##########################################
 
-# All of the rules after full_classes_compiled_jar are very unlikely
-# to fail except for bugs in their respective tools.  If you would
-# like to run these rules, add the "all" modifier goal to the make
-# command line.
-ifndef LOCAL_CHECKED_MODULE
 ifdef full_classes_jar
-LOCAL_CHECKED_MODULE := $(full_classes_compiled_jar)
-endif
+  # All of the rules after full_classes_compiled_jar are very unlikely
+  # to fail except for bugs in their respective tools.  If you would
+  # like to run these rules, add the "all" modifier goal to the make
+  # command line.
+  ifndef LOCAL_CHECKED_MODULE
+    LOCAL_CHECKED_MODULE := $(full_classes_compiled_jar)
+  endif
+
+  ifneq ($(TURBINE_ENABLED),false)
+    LOCAL_ADDITIONAL_CHECKED_MODULE := $(full_classes_header_jar)
+  endif
 endif
 
 #######################################
