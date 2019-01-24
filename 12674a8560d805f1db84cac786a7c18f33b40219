@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0413b218_7460095d",
+        "filename": "core/java_common.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-24T00:26:20Z",
+      "side": 1,
+      "message": "Can you put it here, and use:\n\n    ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS :\u003d $(ALL_DEPS.$(LOCAL_MODULE}.ALL_DEPS) $(full_java_bootclasspath_libs)\n\nThat will cover all of the various cases like LOCAL_SDK_VERSION, host module, etc.",
+      "revId": "12674a8560d805f1db84cac786a7c18f33b40219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
