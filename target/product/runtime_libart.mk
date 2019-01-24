@@ -87,6 +87,13 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     pm.dexopt.inactive=verify \
     pm.dexopt.shared=speed
 
+# Currently for all non-user builds only.
+ifneq (user,$(TARGET_BUILD_VARIANT))
+# Enable layout compilation by default.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    pm.precompile_layouts=true
+endif
+
 # Enable minidebuginfo generation unless overridden.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.minidebuginfo=true \
