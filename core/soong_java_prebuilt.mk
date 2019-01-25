@@ -30,6 +30,10 @@ ifdef LOCAL_SOONG_CLASSES_JAR
   endif
 endif
 
+ifdef LOCAL_SOONG_AAR
+  LOCAL_ADDITIONAL_CHECKED_MODULE += $(LOCAL_SOONG_AAR)
+endif
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################
