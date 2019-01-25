@@ -72,8 +72,6 @@ ALL_DEFAULT_INSTALLED_MODULES += $(my_installed_profile)
 
 endif
 
-LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES := $(addprefix $(PRODUCT_OUT)/$(DEXPREOPT_BOOT_JAR_DIR)/,$(LIBART_TARGET_BOOT_ART_VDEX_FILES))
-
 my_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
 
@@ -83,19 +81,5 @@ my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
 endif
 endif
-
-# Copy shared vdex to the directory and create corresponding symlinks in primary and secondary arch.
-$(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : PRIMARY_ARCH_DIR := $(dir $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE))
-$(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : SECOND_ARCH_DIR := $(dir $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE))
-$(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : $(DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
-	@echo "Install: $@"
-	@mkdir -p $(dir $@)
-	@rm -f $@
-	$(hide) cp "$(dir $<)$(notdir $@)" "$@"
-	# Make symlink for both the archs. In the case its single arch the symlink will just get overridden.
-	@mkdir -p $(PRIMARY_ARCH_DIR)
-	$(hide) ln -sf /$(DEXPREOPT_BOOT_JAR_DIR)/$(notdir $@) $(PRIMARY_ARCH_DIR)$(notdir $@)
-	@mkdir -p $(SECOND_ARCH_DIR)
-	$(hide) ln -sf /$(DEXPREOPT_BOOT_JAR_DIR)/$(notdir $@) $(SECOND_ARCH_DIR)$(notdir $@)
 
 my_2nd_arch_prefix :=
