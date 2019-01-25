@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "362229ad_350cb649",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-25T20:42:33Z",
+      "side": 1,
+      "message": "Note that this has to be after \"import common\", because there is a recursive dependency:\n\n    # blockimgdiff.py:\n    import common\n\n    # common.py:\n    import blockimgdiff\n    DataImage \u003d blockimgdiff.DataImage\n\nThe line \u0027DataImage \u003d blockimgdiff.DataImage\u0027 fails when I include blockimgdiff.py before common.py.",
+      "revId": "655e1271110e85d15895c8e4384f3e2bbe61c029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
