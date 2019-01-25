@@ -106,9 +106,7 @@ class RangeSetTest(ReleaseToolsTestCase):
     self.assertEqual(RangeSet("0-9").to_string_raw(), "2,0,10")
     self.assertEqual(RangeSet("2-10 12").to_string_raw(), "4,2,11,12,13")
     self.assertEqual(RangeSet("11 2-10 12 1 0").to_string_raw(), "2,0,13")
-
-    with self.assertRaises(AssertionError):
-      RangeSet("").to_string_raw()
+    self.assertEqual(RangeSet("").to_string_raw(), "0")
 
   def test_monotonic(self):
     self.assertTrue(RangeSet("0-9").monotonic)

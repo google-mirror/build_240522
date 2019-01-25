@@ -150,7 +150,7 @@ class RangeSet(object):
     return " ".join(out)
 
   def to_string_raw(self):
-    assert self.data
+    if not self.data: return "0"
     return str(len(self.data)) + "," + ",".join(str(i) for i in self.data)
 
   def union(self, other):
