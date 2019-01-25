@@ -1065,6 +1065,7 @@ define product-installed-files
     $(if $(filter tests,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_TESTS)) \
     $(if $(filter asan,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG_ASAN)) \
     $(if $(BOARD_VNDK_VERSION),vndk_package) \
+    $(if $(DEVICE_MANIFEST_FILE),device_manifest.xml) \
   ) \
   $(eval ### Filter out the overridden packages and executables before doing expansion) \
   $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
