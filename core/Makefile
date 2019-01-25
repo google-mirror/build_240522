@@ -2659,6 +2659,15 @@ BUILT_PRODUCTIMAGE_TARGET := $(PRODUCT_OUT)/product.img
 define build-productimage-target
   $(call pretty,"Target product fs image: $(INSTALLED_PRODUCTIMAGE_TARGET)")
   @mkdir -p $(TARGET_OUT_PRODUCT)
+  $(foreach m, $(ALL_MODULES), \
+      $(if $(filter APPS,$(ALL_MODULES.$(m).CLASS)), \
+        $(if $(filter true,$(PACKAGES.$(m).PRODUCT_MODULE)),, \
+          $(if $(findstring $(patsubst %.x509.pem,%,$(notdir $(PACKAGES.$(m).CERTIFICATE))),"platform media shared"),
+              $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+                  ./build/tools/generate-stub-apk-in-product.py \
+                  --path $(firstword $(ALL_MODULES.$(m).PATH)) --key $(PACKAGES.$(m).PRIVATE_KEY) \
+                  --cert $(PACKAGES.$(m).CERTIFICATE) --outpath $(TARGET_OUT_PRODUCT)/app
+              ))))
   @mkdir -p $(productimage_intermediates) && rm -rf $(productimage_intermediates)/product_image_info.txt
   $(call generate-image-prop-dictionary, $(productimage_intermediates)/product_image_info.txt,product,skip_fsck=true)
   $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
