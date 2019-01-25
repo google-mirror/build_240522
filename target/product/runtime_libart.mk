@@ -98,9 +98,16 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Currently for all non-user builds only.
 ifneq (user,$(TARGET_BUILD_VARIANT))
+
 # Enable layout compilation by default.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     pm.precompile_layouts=true
+
+
+# Enable resolution of startup const strings.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-resolve-startup-strings=true
+
 endif
 
 # Enable minidebuginfo generation unless overridden.
