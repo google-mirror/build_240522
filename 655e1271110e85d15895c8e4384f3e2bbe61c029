@@ -16,6 +16,24 @@
       "revId": "655e1271110e85d15895c8e4384f3e2bbe61c029",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b59fe477_fca62a92",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-25T20:43:05Z",
+      "side": 1,
+      "message": "(I mean circular dependency)",
+      "parentUuid": "362229ad_350cb649",
+      "revId": "655e1271110e85d15895c8e4384f3e2bbe61c029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
