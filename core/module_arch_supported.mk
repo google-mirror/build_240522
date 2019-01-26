@@ -62,10 +62,14 @@ endif
 
 ifdef LOCAL_IS_HOST_MODULE
 ifneq (,$(LOCAL_MODULE_HOST_OS))
+  ifneq (,$(filter windows,$(LOCAL_MODULE_HOST_OS)))
+    $(call pretty-error,Windows is only supported in Android.bp files)
+  endif
   ifeq (,$(filter $($(my_prefix)OS),$(LOCAL_MODULE_HOST_OS)))
     my_module_arch_supported := false
   endif
 else ifeq ($($(my_prefix)OS),windows)
+  # TODO: remove
   # If LOCAL_MODULE_HOST_OS is empty, only linux and darwin are supported
   my_module_arch_supported := false
 endif
