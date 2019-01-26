@@ -1,5 +1,10 @@
 # Build System Changes for Android.mk Writers
 
+## `HOST_CROSS` Windows no longer supported in Android.mk
+
+Modules that build for Windows (our only HOST_CROSS OS currently) must now be
+defined in Android.bp files.
+
 ## `USER` deprecation  {#USER}
 
 `USER` will soon be `nobody` in many cases due to the addition of a sandbox
