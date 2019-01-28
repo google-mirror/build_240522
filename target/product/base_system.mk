@@ -246,6 +246,7 @@ PRODUCT_PACKAGES += \
     storaged \
     surfaceflinger \
     svc \
+    system_legacy_hidl_apps_config.xml \
     tc \
     telecom \
     telephony-common \

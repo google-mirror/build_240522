@@ -50,6 +50,7 @@ PRODUCT_PACKAGES += \
     passwd \
     selinux_policy_nonsystem \
     shell_and_utilities_vendor \
+    vendor_legacy_hidl_apps_config.xml \
     vndservice \
     vndservicemanager \
 
