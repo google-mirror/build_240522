@@ -14,4 +14,6 @@
 # limitations under the License.
 #
 
-# nothing yet
+# Base modules and settings for the odm partition.
+PRODUCT_PACKAGES += \
+    odm_legacy_hidl_apps_config.xml
