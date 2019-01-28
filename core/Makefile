@@ -4010,6 +4010,66 @@ $(APPCOMPAT_ZIP): $(SOONG_ZIP)
 	$(hide) find $(PRODUCT_OUT)/appcompat | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(PRODUCT_OUT)/appcompat -l $(PRIVATE_LIST_FILE)
 
+# -----------------------------------------------------------------
+# sysconfig files for legacy hidl app lists
+
+# (1): list of package names
+# (2): file
+define build-hidl-legacy-app-sysconfig
+echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > $2
+echo "<config>" >> $2
+$(foreach app_name,$(1),\
+  echo "    <legacy-hidl-api-app package=\"$1\" />" >> $2)
+echo "</config>" >> $2
+endef
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := product_legacy_hidl_apps_config.xml
+LOCAL_MODULE_STEM := legacy_hidl_apps_config.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc/sysconfig
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE_STEM)
+$(GEN): PRIVATE_APPS := $(PRODUCT_PRODUCT_LEGACY_HIDL_APPS)
+$(GEN):
+	$(call build-hidl-legacy-app-sysconfig,$(PRIVATE_APPS),$@)
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := system_legacy_hidl_apps_config.xml
+LOCAL_MODULE_STEM := legacy_hidl_apps_config.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/etc/sysconfig
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE_STEM)
+$(GEN): PRIVATE_APPS := $(PRODUCT_SYSTEM_LEGACY_HIDL_APPS)
+$(GEN):
+	$(call build-hidl-legacy-app-sysconfig,$(PRIVATE_APPS),$@)
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := vendor_legacy_hidl_apps_config.xml
+LOCAL_MODULE_STEM := legacy_hidl_apps_config.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/sysconfig
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE_STEM)
+$(GEN): PRIVATE_APPS := $(PRODUCT_VENDOR_LEGACY_HIDL_APPS)
+$(GEN):
+	$(call build-hidl-legacy-app-sysconfig,$(PRIVATE_APPS),$@)
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := odm_legacy_hidl_apps_config.xml
+LOCAL_MODULE_STEM := legacy_hidl_apps_config.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc/sysconfig
+GEN := $(local-generated-sources-dir)/$(LOCAL_MODULE_STEM)
+$(GEN): PRIVATE_APPS := $(PRODUCT_ODM_LEGACY_HIDL_APPS)
+$(GEN):
+	$(call build-hidl-legacy-app-sysconfig,$(PRIVATE_APPS),$@)
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
 
 # -----------------------------------------------------------------
 # A zip of the symbols directory.  Keep the full paths to make it

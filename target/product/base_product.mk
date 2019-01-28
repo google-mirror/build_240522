@@ -18,3 +18,4 @@
 PRODUCT_PACKAGES += \
     healthd \
     ModuleMetadata \
+    product_legacy_hidl_apps_config.xml \
