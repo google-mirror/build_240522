@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd5fe6a6_5f1aaae2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-28T23:09:36Z",
+      "side": 1,
+      "message": "Yes, but I don\u0027t want gitwatcher vandalizing them.",
+      "parentUuid": "60128537_5077fca3",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fcb911c7_4eb5b8c0",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-28T23:01:33Z",
       "side": 1,
       "message": "Isn\u0027t this too luxurious? :) These XML files can be created manually.\n\nAlso, how about eliminating the duplication below using macro?",
+      "range": {
+        "startLine": 4026,
+        "startChar": 0,
+        "endLine": 4036,
+        "endChar": 25
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9af6c82c_1e42094c",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4036,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-28T23:09:36Z",
+      "side": 1,
+      "message": "This is required because the data also needs to be fed into the dexpreopt. Will merge into macro though.",
+      "parentUuid": "fcb911c7_4eb5b8c0",
       "range": {
         "startLine": 4026,
         "startChar": 0,
