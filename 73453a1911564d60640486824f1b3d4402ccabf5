@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0e580fa_f79cd196",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4014,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-28T22:51:44Z",
+      "side": 1,
+      "message": "is this the right location, Dan?",
+      "revId": "73453a1911564d60640486824f1b3d4402ccabf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afa0f33f_4e2dbb04",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4027,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-28T22:51:44Z",
+      "side": 1,
+      "message": "note, choosing to do individual files over something like init_rc because the data is aggregated into a single file.",
+      "range": {
+        "startLine": 4027,
+        "startChar": 0,
+        "endLine": 4027,
+        "endChar": 12
+      },
+      "revId": "73453a1911564d60640486824f1b3d4402ccabf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
