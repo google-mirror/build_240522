@@ -3315,7 +3315,7 @@ include $(BUILD_SYSTEM)/distdir.mk
 ###########################################################
 define append_enforce_rro_sources
   $(eval ENFORCE_RRO_SOURCES += \
-      $(strip $(1))||$(strip $(2))||$(strip $(3))||$(strip $(4))||$(call normalize-path-list, $(strip $(5))))
+      $(strip $(1))||$(strip $(2))||$(strip $(3))||$(if $(strip $(4)),true,false)||$(call normalize-path-list, $(strip $(5))))
 endef
 
 ###########################################################
@@ -3328,7 +3328,7 @@ $(foreach source,$(ENFORCE_RRO_SOURCES), \
   $(eval enforce_rro_source_module := $(word 1,$(_o))) \
   $(eval enforce_rro_source_is_manifest_package_name := $(word 2,$(_o))) \
   $(eval enforce_rro_source_manifest_package_info := $(word 3,$(_o))) \
-  $(eval enforce_rro_use_res_lib := $(word 4,$(_o))) \
+  $(eval enforce_rro_use_res_lib := $(filter true,$(word 4,$(_o)))) \
   $(eval enforce_rro_source_overlays := $(subst :, ,$(word 5,$(_o)))) \
   $(eval enforce_rro_module := $(enforce_rro_source_module)__auto_generated_rro) \
   $(eval include $(BUILD_SYSTEM)/generate_enforce_rro.mk) \
