@@ -38,7 +38,7 @@ import time
 import zipfile
 from hashlib import sha1, sha256
 
-import blockimgdiff
+import image
 import sparse_img
 
 logger = logging.getLogger(__name__)
@@ -1743,6 +1743,8 @@ def ComputeDifferences(diffs):
 class BlockDifference(object):
   def __init__(self, partition, tgt, src=None, check_first_block=False,
                version=None, disable_imgdiff=False):
+    from blockimgdiff import BlockImageDiff
+
     self.tgt = tgt
     self.src = src
     self.partition = partition
@@ -1756,9 +1758,9 @@ class BlockDifference(object):
     assert version >= 3
     self.version = version
 
-    b = blockimgdiff.BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
-                                    version=self.version,
-                                    disable_imgdiff=self.disable_imgdiff)
+    b = BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
+                       version=self.version,
+                       disable_imgdiff=self.disable_imgdiff)
     self.path = os.path.join(MakeTempDir(), partition)
     b.Compute(self.path)
     self._required_cache = b.max_stashed_size
@@ -2012,7 +2014,7 @@ class BlockDifference(object):
     return ctx.hexdigest()
 
 
-DataImage = blockimgdiff.DataImage
+DataImage = image.DataImage
 
 
 # map recovery.fstab's fs_types to mount/format "partition types"
