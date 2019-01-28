@@ -34,6 +34,7 @@ PRODUCT_PACKAGES += \
     appops \
     app_process \
     appwidget \
+    ashmemd \
     atest \
     atrace \
     audioserver \
