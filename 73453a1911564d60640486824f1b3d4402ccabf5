@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5029c7c9_5f0e13ef",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4014,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-28T23:04:52Z",
+      "side": 1,
+      "message": "If you want to use BUILD_PREBUILT, it needs to happen far before build/make/core/Makefile is included -- in an Android.mk somewhere.",
+      "parentUuid": "d0e580fa_f79cd196",
+      "revId": "73453a1911564d60640486824f1b3d4402ccabf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afa0f33f_4e2dbb04",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2019-01-28T22:51:44Z",
       "side": 1,
       "message": "note, choosing to do individual files over something like init_rc because the data is aggregated into a single file.",
+      "range": {
+        "startLine": 4027,
+        "startChar": 0,
+        "endLine": 4027,
+        "endChar": 12
+      },
+      "revId": "73453a1911564d60640486824f1b3d4402ccabf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db8063bb_b1c114bf",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4027,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-28T23:04:52Z",
+      "side": 1,
+      "message": "That does mean that you always need to write everything you know, whether or not the app will be installed. And duplicate a bunch of information about which partition the app will be installed to and whether it\u0027s a legacy hidl app to every product makefile.",
+      "parentUuid": "afa0f33f_4e2dbb04",
       "range": {
         "startLine": 4027,
         "startChar": 0,

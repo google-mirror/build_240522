@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "60128537_5077fca3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-28T23:04:52Z",
+      "side": 1,
+      "message": "what are these, bugs?",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fcb911c7_4eb5b8c0",
         "filename": "core/Makefile",
         "patchSetId": 2
