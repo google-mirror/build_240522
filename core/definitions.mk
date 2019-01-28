@@ -2326,6 +2326,12 @@ $(hide) mv $(1) $(1).unsigned
 $(hide) $(JAVA) -Djava.library.path=$(SIGNAPK_JNI_LIBRARY_PATH) -jar $(SIGNAPK_JAR) \
     $(PRIVATE_CERTIFICATE) $(PRIVATE_PRIVATE_KEY) \
     $(PRIVATE_ADDITIONAL_CERTIFICATES) $(1).unsigned $(1).signed
+$(if $(filter true,$(PRIVATE_PRODUCT_MODULE)), \
+  $(if $(strip $(wildcard $(PRIVATE_LOCAL_CERTIFICATE).lineage)), \
+    $(if $(findstring $(notdir $(PRIVATE_LOCAL_CERTIFICATE)),"platform media shared"), \
+      $(APKSIGNER) sign --v1-signing-enabled false --v2-signing-enabled false \
+        --key $(PRIVATE_PRIVATE_KEY) --cert $(PRIVATE_CERTIFICATE) \
+        --lineage $(PRIVATE_LOCAL_CERTIFICATE).lineage $(1).signed)))
 $(hide) mv $(1).signed $(1)
 endef
 
