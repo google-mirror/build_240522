@@ -146,6 +146,7 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
   $(call add_json_str,  Dex2oatXmx,                         $(DEX2OAT_XMX))
   $(call add_json_str,  Dex2oatXms,                         $(DEX2OAT_XMS))
   $(call add_json_str,  EmptyDirectory,                     $(OUT_DIR)/empty)
+  $(call add_json_list, LegacyHidlApiApps,                  $(PRODUCT_ALL_HIDL_LEGACY_APPS))
 
   $(call add_json_map,  DefaultDexPreoptImageLocation)
   $(call add_json_str,  $(TARGET_ARCH), $(DEFAULT_DEX_PREOPT_BUILT_IMAGE_LOCATION))
