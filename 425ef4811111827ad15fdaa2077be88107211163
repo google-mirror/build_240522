@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcb911c7_4eb5b8c0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4036,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-01-28T23:01:33Z",
+      "side": 1,
+      "message": "Isn\u0027t this too luxurious? :) These XML files can be created manually.\n\nAlso, how about eliminating the duplication below using macro?",
+      "range": {
+        "startLine": 4026,
+        "startChar": 0,
+        "endLine": 4036,
+        "endChar": 25
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
