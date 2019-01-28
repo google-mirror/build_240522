@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9a76c5_5d4ad1e4",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-28T18:46:17Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be in the else case?",
+      "range": {
+        "startLine": 585,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 5
+      },
+      "revId": "cf6224fcd6bb34c4c72f07cb7c0c8da8de0c9bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
