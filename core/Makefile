@@ -1314,6 +1314,7 @@ endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 define generate-image-prop-dictionary
 $(if $(filter $(2),system),\
     $(if $(BOARD_SYSTEMIMAGE_PARTITION_SIZE),$(hide) echo "system_size=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE)" >> $(1))
+    $(if $(INTERNAL_SYSTEM_OTHER_PARTITION_SIZE),$(hide) echo "system_other_size=$(INTERNAL_SYSTEM_OTHER_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "system_fs_type=$(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT),$(hide) echo "system_extfs_inode_count=$(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT),$(hide) echo "system_extfs_rsv_pct=$(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT)" >> $(1))
@@ -2509,6 +2510,17 @@ $(INSTALLED_FILES_FILE_SYSTEMOTHER) : $(INTERNAL_SYSTEMOTHERIMAGE_FILES) $(FILES
 	@rm -f $@
 	$(hide) $(FILESLIST) $(TARGET_OUT_SYSTEM_OTHER) > $(@:.txt=.json)
 	$(hide) build/make/tools/fileslist_util.py -c $(@:.txt=.json) > $@
+
+# Determines partition size for system_other.img.
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+ifneq ($(filter system,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
+INTERNAL_SYSTEM_OTHER_PARTITION_SIZE := $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE)
+endif
+endif
+
+ifndef INTERNAL_SYSTEM_OTHER_PARTITION_SIZE
+INTERNAL_SYSTEM_OTHER_PARTITION_SIZE:= $(BOARD_SYSTEMIMAGE_PARTITION_SIZE)
+endif
 
 systemotherimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,system_other)
