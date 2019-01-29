@@ -70,12 +70,27 @@ def ValidateFileConsistency(input_zip, input_tmp, info_dict):
 
   def CheckAllFiles(which):
     logging.info('Checking %s image.', which)
+    # Loads the image file as DataImage.
+    if info_dict.get('extfs_sparse_flag') != '-s':
+      path = os.path.join(input_tmp, "IMAGES", which + ".img")
+      mappath = os.path.join(input_tmp, "IMAGES", which + ".map")
+      assert os.path.exists(path) and os.path.exists(mappath)
+
+      with open(path, 'rb') as f:
+        data = f.read()
+      image = common.DataImage(data, pad=True, file_map_fn=mappath)
+    else:
+      image = common.GetSparseImage(which, input_tmp, input_zip, True)
+
+    CheckAllFilesWithImage(which, image)
+
+  def CheckAllFilesWithImage(which, image):
     # Allow having shared blocks when loading the sparse image, because allowing
     # that doesn't affect the checks below (we will have all the blocks on file,
     # unless it's skipped due to the holes).
-    image = common.GetSparseImage(which, input_tmp, input_zip, True)
     prefix = '/' + which
-    for entry in image.file_map:
+    file_map = image.GetFileMap()
+    for entry in file_map:
       # Skip entries like '__NONZERO-0'.
       if not entry.startswith(prefix):
         continue
@@ -114,11 +129,6 @@ def ValidateFileConsistency(input_zip, input_tmp, info_dict):
               entry, file_ranges, blocks_sha1, file_sha1)
 
   logging.info('Validating file consistency.')
-
-  # TODO(b/79617342): Validate non-sparse images.
-  if info_dict.get('extfs_sparse_flag') != '-s':
-    logging.warning('Skipped due to target using non-sparse images')
-    return
 
   # Verify IMAGES/system.img.
   CheckAllFiles('system')
