@@ -22,6 +22,29 @@
       "revId": "60bcc3921c1c1328c6937ed91b293b5dc1349404",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bde5e6d2_e4e62680",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-29T06:51:50Z",
+      "side": 1,
+      "message": "Applies to system_other only.",
+      "range": {
+        "startLine": 569,
+        "startChar": 7,
+        "endLine": 569,
+        "endChar": 37
+      },
+      "revId": "60bcc3921c1c1328c6937ed91b293b5dc1349404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
