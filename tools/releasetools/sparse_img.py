@@ -20,11 +20,12 @@ import threading
 from hashlib import sha1
 
 import rangelib
+from image import Image
 
 logger = logging.getLogger(__name__)
 
 
-class SparseImage(object):
+class SparseImage(Image):
   """Wraps a sparse image file into an image object.
 
   Wraps a sparse image file (and optional file map and clobbered_blocks) into
@@ -150,8 +151,7 @@ class SparseImage(object):
       self.hashtree_info = hashtree_info_generator.Generate(self)
 
     if file_map_fn:
-      self.LoadFileBlockMap(file_map_fn, self.clobbered_blocks,
-                            allow_shared_blocks)
+      self.file_map = self.BuildFileMap(file_map_fn, allow_shared_blocks)
     else:
       self.file_map = {"__DATA": self.care_map}
 
@@ -231,114 +231,30 @@ class SparseImage(object):
             yield fill_data * (this_read * (self.blocksize >> 2))
           to_read -= this_read
 
-  def LoadFileBlockMap(self, fn, clobbered_blocks, allow_shared_blocks):
-    """Loads the given block map file.
+  def BuildFileMap(self, file_map_fn, allow_shared_blocks):
+    """Initializes the file_map field for SparseImage."""
 
-    Args:
-      fn: The filename of the block map file.
-      clobbered_blocks: A RangeSet instance for the clobbered blocks.
-      allow_shared_blocks: Whether having shared blocks is allowed.
-    """
-    remaining = self.care_map
-    self.file_map = out = {}
-
-    with open(fn) as f:
-      for line in f:
-        fn, ranges = line.split(None, 1)
-        ranges = rangelib.RangeSet.parse(ranges)
-
-        if allow_shared_blocks:
-          # Find the shared blocks that have been claimed by others. If so, tag
-          # the entry so that we can skip applying imgdiff on this file.
-          shared_blocks = ranges.subtract(remaining)
-          if shared_blocks:
-            non_shared = ranges.subtract(shared_blocks)
-            if not non_shared:
-              continue
-
-            # There shouldn't anything in the extra dict yet.
-            assert not ranges.extra, "Non-empty RangeSet.extra"
-
-            # Put the non-shared RangeSet as the value in the block map, which
-            # has a copy of the original RangeSet.
-            non_shared.extra['uses_shared_blocks'] = ranges
-            ranges = non_shared
-
-        out[fn] = ranges
-        assert ranges.size() == ranges.intersect(remaining).size()
-
-        # Currently we assume that blocks in clobbered_blocks are not part of
-        # any file.
-        assert not clobbered_blocks.overlaps(ranges)
-        remaining = remaining.subtract(ranges)
-
-    remaining = remaining.subtract(clobbered_blocks)
-    if self.hashtree_info:
-      remaining = remaining.subtract(self.hashtree_info.hashtree_range)
-
-    # For all the remaining blocks in the care_map (ie, those that
-    # aren't part of the data for any file nor part of the clobbered_blocks),
-    # divide them into blocks that are all zero and blocks that aren't.
-    # (Zero blocks are handled specially because (1) there are usually
-    # a lot of them and (2) bsdiff handles files with long sequences of
-    # repeated bytes especially poorly.)
-
-    zero_blocks = []
-    nonzero_blocks = []
     reference = '\0' * self.blocksize
 
-    # Workaround for bug 23227672. For squashfs, we don't have a system.map. So
-    # the whole system image will be treated as a single file. But for some
-    # unknown bug, the updater will be killed due to OOM when writing back the
-    # patched image to flash (observed on lenok-userdebug MEA49). Prior to
-    # getting a real fix, we evenly divide the non-zero blocks into smaller
-    # groups (currently 1024 blocks or 4MB per group).
-    # Bug: 23227672
-    MAX_BLOCKS_PER_GROUP = 1024
-    nonzero_groups = []
-
-    f = self.simg_f
-    for s, e in remaining:
-      for b in range(s, e):
-        idx = bisect.bisect_right(self.offset_index, b) - 1
-        chunk_start, _, filepos, fill_data = self.offset_map[idx]
-        if filepos is not None:
-          filepos += (b-chunk_start) * self.blocksize
-          f.seek(filepos, os.SEEK_SET)
-          data = f.read(self.blocksize)
-        else:
-          if fill_data == reference[:4]:   # fill with all zeros
-            data = reference
+    def SparseImageReader(block_ranges):
+      for s, e in block_ranges:
+        for b in range(s, e):
+          idx = bisect.bisect_right(self.offset_index, b) - 1
+          chunk_start, _, filepos, fill_data = self.offset_map[idx]
+          if filepos is not None:
+            filepos += (b-chunk_start) * self.blocksize
+            self.simg_f.seek(filepos, os.SEEK_SET)
+            yield b, self.simg_f.read(self.blocksize)
           else:
-            data = None
+            data = reference if fill_data == reference[:4] else None
+            yield b, data
 
-        if data == reference:
-          zero_blocks.append(b)
-          zero_blocks.append(b+1)
-        else:
-          nonzero_blocks.append(b)
-          nonzero_blocks.append(b+1)
+    return Image.LoadFileBlockMap(self.care_map, file_map_fn, self.blocksize,
+                                  self.clobbered_blocks, self.hashtree_info,
+                                  SparseImageReader, allow_shared_blocks)
 
-          if len(nonzero_blocks) >= MAX_BLOCKS_PER_GROUP:
-            nonzero_groups.append(nonzero_blocks)
-            # Clear the list.
-            nonzero_blocks = []
-
-    if nonzero_blocks:
-      nonzero_groups.append(nonzero_blocks)
-      nonzero_blocks = []
-
-    assert zero_blocks or nonzero_groups or clobbered_blocks
-
-    if zero_blocks:
-      out["__ZERO"] = rangelib.RangeSet(data=zero_blocks)
-    if nonzero_groups:
-      for i, blocks in enumerate(nonzero_groups):
-        out["__NONZERO-%d" % i] = rangelib.RangeSet(data=blocks)
-    if clobbered_blocks:
-      out["__COPY"] = clobbered_blocks
-    if self.hashtree_info:
-      out["__HASHTREE"] = self.hashtree_info.hashtree_range
+  def GetFileMap(self):
+    return self.file_map
 
   def ResetFileMap(self):
     """Throw away the file map and treat the entire image as
