@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2018 The Android Open-Source Project
+# Copyright (C) 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,4 @@
 # limitations under the License.
 #
 
-# This makefile is suitable to inherit by products that don't need to be split
-# up by partition.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base_system.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base_product.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base_odm.mk)
+# nothing yet

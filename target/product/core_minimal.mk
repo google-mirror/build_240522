@@ -24,6 +24,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/media_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/media_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_odm.mk)
 
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
