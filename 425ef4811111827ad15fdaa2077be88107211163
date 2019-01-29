@@ -93,6 +93,52 @@
       "revId": "425ef4811111827ad15fdaa2077be88107211163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fc499a4_c7ad2457",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-01-29T09:41:16Z",
+      "side": 1,
+      "message": "nit: space before \u0027?\u0027 ?",
+      "range": {
+        "startLine": 852,
+        "startChar": 32,
+        "endLine": 852,
+        "endChar": 34
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff4e026_9eda4ab1",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-01-29T09:41:16Z",
+      "side": 1,
+      "message": "nit: add comment",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 19
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
