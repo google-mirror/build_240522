@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa489043_8102aeed",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-29T23:04:16Z",
+      "side": 1,
+      "message": "nit: I think you can simplify this\n\n    round-partition\u003d$(1)\n\nNot sure if it is recommended though",
+      "range": {
+        "startLine": 3132,
+        "startChar": 0,
+        "endLine": 3134,
+        "endChar": 5
+      },
+      "revId": "1d8d3bef47b716f318380e2022b60ae60627e124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
