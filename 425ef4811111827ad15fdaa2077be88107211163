@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5ad46b65_f777fc6b",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-29T21:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fc499a4_c7ad2457",
+      "range": {
+        "startLine": 852,
+        "startChar": 32,
+        "endLine": 852,
+        "endChar": 34
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ff4e026_9eda4ab1",
         "filename": "core/config.mk",
         "patchSetId": 2
@@ -139,6 +163,30 @@
       "revId": "425ef4811111827ad15fdaa2077be88107211163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf81ef2a_bc18d191",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-29T21:09:21Z",
+      "side": 1,
+      "message": "It\u0027s pretty standard these days to .KATI_READONLY everything after its last use. Nothing in Android.mk should modify these. This ensures that the value used is the last value presented from device makefiles.",
+      "parentUuid": "0ff4e026_9eda4ab1",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 19
+      },
+      "revId": "425ef4811111827ad15fdaa2077be88107211163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
