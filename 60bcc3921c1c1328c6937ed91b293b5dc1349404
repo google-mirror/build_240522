@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebdc1ed6_9d68574d",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2486,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-29T06:41:28Z",
+      "side": 1,
+      "message": "Determine the value of INTERNAL_SYSTEM_OTHER_PARTITION_SIZE, when BUILDING_SYSTEM_OTHER_IMAGE is defined.",
+      "range": {
+        "startLine": 2485,
+        "startChar": 0,
+        "endLine": 2486,
+        "endChar": 33
+      },
+      "revId": "60bcc3921c1c1328c6937ed91b293b5dc1349404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
