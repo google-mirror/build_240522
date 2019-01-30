@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6456e709_a8cc8958",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-30T00:04:02Z",
+      "side": 1,
+      "message": "make private, and add dependency",
+      "range": {
+        "startLine": 2591,
+        "startChar": 12,
+        "endLine": 2591,
+        "endChar": 34
+      },
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
