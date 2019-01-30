@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "d1111957_6dd9a1e9",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-30T19:30:00Z",
+      "side": 1,
+      "message": "That is really fragile right? what if I have a string that says , \"Linux Version 2.4.9 is not compatible with foo\" or may be \"Compatible with Linux Version 4.5.6 +\"",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04e67aa2_578aa0f5",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-30T19:30:00Z",
+      "side": 1,
+      "message": "nit: can you please add a comment here to say what exactly we are doing.",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd30c02e_34a00fe4",
         "filename": "tools/extract-kernel.py",
         "patchSetId": 11
