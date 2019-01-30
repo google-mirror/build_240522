@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e9a1553_98a2a066",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-30T21:15:39Z",
+      "side": 1,
+      "message": "Better :0), but still fragile",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "890184f03c2da3b83a8dfd8bef9148920936a452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
