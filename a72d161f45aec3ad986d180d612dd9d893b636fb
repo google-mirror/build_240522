@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ab52aeba_37f23f8b",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T00:11:56Z",
+      "side": 1,
+      "message": "But the tools are in the whitelist (this includes gzip, xz, bzip2). lz4 is not in the whitelist so its path has to be stated here. The script also uses unlzma and lzop, but I don\u0027t find them in the build or in the whitelist, so I disabled them for now.",
+      "parentUuid": "196acc85_dc124715",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "926fd83a_f246d9ce",
         "filename": "core/Makefile",
         "patchSetId": 9
@@ -87,6 +105,30 @@
       "writtenOn": "2019-01-30T00:08:52Z",
       "side": 1,
       "message": "python3 is not on our mac builders btw",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 22
+      },
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e2247d4_4f53c9dc",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T00:11:56Z",
+      "side": 1,
+      "message": "Got it. Will change to python2.",
+      "parentUuid": "33aa8834_b33a122c",
       "range": {
         "startLine": 1,
         "startChar": 15,
