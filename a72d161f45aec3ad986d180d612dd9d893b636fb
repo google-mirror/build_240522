@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "5615f944_af4df93e",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T00:35:10Z",
+      "side": 1,
+      "message": "See the last paragraphs of https://www.gnu.org/software/make/manual/html_node/Target_002dspecific.html.  If the rule below runs without this conditional setting PRIVATE_FLAGS, it will attempt to non-deterministically pick up a value of PRIVATE_FLAGS from any rule that depends on this rule.",
+      "parentUuid": "cf3415b2_97131f20",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33aa8834_b33a122c",
         "filename": "tools/extract-kernel.py",
         "patchSetId": 9
