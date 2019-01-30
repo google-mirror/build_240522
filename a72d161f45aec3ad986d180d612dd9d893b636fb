@@ -190,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "59e45241_2a4f8f59",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T00:52:35Z",
+      "side": 1,
+      "message": "So, would this fix the issue?\n\nL2571 (outside the conditional):\n\n    $(BUILT_ASSEMBLED_VENDOR_MANIFEST): PRIVATE_FLAGS :\u003d\n\nL2596 (inside the conditional):\n\n    $(BUILT_ASSEMBLED_VENDOR_MANIFEST): PRIVATE_FLAGS +\u003d --kernel $$(cat $(my_kernel_version)):$(my_kernel_configs)",
+      "parentUuid": "5615f944_af4df93e",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33aa8834_b33a122c",
         "filename": "tools/extract-kernel.py",
         "patchSetId": 9
