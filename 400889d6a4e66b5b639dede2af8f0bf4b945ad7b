@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "34e1e41b_d49f2440",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T19:41:38Z",
+      "side": 1,
+      "message": "Yeah, that wouldn\u0027t work. Although, I don\u0027t have any better ideas. Steve?\n\nAlso, OEMs can still use BOARD_KERNEL_CONFIG_FILE and BOARD_KERNEL_VERSION to override this.",
+      "parentUuid": "d1111957_6dd9a1e9",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "04e67aa2_578aa0f5",
         "filename": "tools/extract-kernel.py",
         "patchSetId": 11
