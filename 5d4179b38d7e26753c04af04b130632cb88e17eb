@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fac6821a_3104b707",
+        "filename": "envsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-30T19:33:33Z",
+      "side": 1,
+      "message": "Oh sorry, I didn\u0027t catch this exactly before. \u0027gettop\u0027 already exists, and it will work even if $ANDROID_BUILD_TOP isn\u0027t set (e.g. not lunched). It seems like it would be nicer if we didn\u0027t have this special case (who knows, there could even be a module added named \u0027top\u0027 in the future).",
+      "range": {
+        "startLine": 1523,
+        "startChar": 7,
+        "endLine": 1523,
+        "endChar": 10
+      },
+      "revId": "5d4179b38d7e26753c04af04b130632cb88e17eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
