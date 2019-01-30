@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "9e364424_2930b119",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T01:01:22Z",
+      "side": 1,
+      "message": "Oops, sure, leave this (although we should figure out a way to get paths to PATH tools so you can make them explicit and add dependencies).",
+      "parentUuid": "20fd4f2e_cfc3171b",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "926fd83a_f246d9ce",
         "filename": "core/Makefile",
         "patchSetId": 9
@@ -238,6 +256,24 @@
       "side": 1,
       "message": "So, would this fix the issue?\n\nL2571 (outside the conditional):\n\n    $(BUILT_ASSEMBLED_VENDOR_MANIFEST): PRIVATE_FLAGS :\u003d\n\nL2596 (inside the conditional):\n\n    $(BUILT_ASSEMBLED_VENDOR_MANIFEST): PRIVATE_FLAGS +\u003d --kernel $$(cat $(my_kernel_version)):$(my_kernel_configs)",
       "parentUuid": "5615f944_af4df93e",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "926e38c2_03881a0f",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T01:01:22Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "59e45241_2a4f8f59",
       "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
