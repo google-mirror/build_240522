@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0c9bc9b5_c638136f",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T00:27:10Z",
+      "side": 1,
+      "message": "(By whitelist, I mean build/soong/ui/build/paths/config.go )",
+      "parentUuid": "ab52aeba_37f23f8b",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "926fd83a_f246d9ce",
         "filename": "core/Makefile",
         "patchSetId": 9
