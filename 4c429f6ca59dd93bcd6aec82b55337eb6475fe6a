@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c9dac473_03bfa2fd",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1426851
+      },
+      "writtenOn": "2019-01-30T19:58:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7c05a75_8acb64a3",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 7
+      },
+      "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e47f320_1c0f0cc6",
         "filename": "envsetup.sh",
         "patchSetId": 5
@@ -57,6 +81,24 @@
       "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "345dacf5_3ff9bec1",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1426851
+      },
+      "writtenOn": "2019-01-30T19:58:20Z",
+      "side": 1,
+      "message": "oh sorry, I was misreading the code. You\u0027re right.",
+      "parentUuid": "9fb2a6d9_0c752d89",
+      "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
