@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "196acc85_dc124715",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T00:05:56Z",
+      "side": 1,
+      "message": "Can you disable searching PATH from within the build?  If it finds it in the PATH that means the build cannot have a dependency on the tool.",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "926fd83a_f246d9ce",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T00:05:56Z",
+      "side": 1,
+      "message": "This needs a dependency on $(HOST_OUT_EXECUTABLES)/lz4",
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6456e709_a8cc8958",
         "filename": "core/Makefile",
         "patchSetId": 9
@@ -19,6 +53,23 @@
         "endLine": 2591,
         "endChar": 34
       },
+      "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b052e92_b8cf3e72",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-01-30T00:05:56Z",
+      "side": 1,
+      "message": "Set PRIVATE_FLAGS :\u003d outside this conditional, make has very strange behavior for unset rule-local variables.",
       "revId": "a72d161f45aec3ad986d180d612dd9d893b636fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
