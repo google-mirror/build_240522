@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4aec7150_e3bbf9cc",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T20:56:30Z",
+      "side": 1,
+      "message": "See new PS. I used a regex search for linux_banner.\n\n(Also, since I renamed the files for testing, the diff between patchsets are gone...)",
+      "parentUuid": "34e1e41b_d49f2440",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04e67aa2_578aa0f5",
         "filename": "tools/extract-kernel.py",
         "patchSetId": 11
@@ -69,6 +93,30 @@
       "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb5ae59_5f3318fb",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-30T20:56:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04e67aa2_578aa0f5",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
