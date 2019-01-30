@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7c05a75_8acb64a3",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-30T19:46:47Z",
+      "side": 1,
+      "message": "can you also add an entry here?",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 7
+      },
+      "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e47f320_1c0f0cc6",
         "filename": "envsetup.sh",
         "patchSetId": 5
@@ -13,6 +36,24 @@
       "writtenOn": "2019-01-30T19:40:06Z",
       "side": 1,
       "message": "I was thinking... is there a reason this `return 1` here? If we\u0027re going to auto-call refreshmod, can\u0027t we complete the command?",
+      "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb2a6d9_0c752d89",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-30T19:46:47Z",
+      "side": 1,
+      "message": "if refreshmod doesn\u0027t successfully complete (e.g. build failure), I would expect the module-info file to exist. There could technically be a build failure after that file is created, but that would be strange enough/serious enough, that it would be good to know about it.",
+      "parentUuid": "1e47f320_1c0f0cc6",
       "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
