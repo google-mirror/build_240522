@@ -34,6 +34,24 @@
       "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6549ed31_030f2140",
+        "filename": "tools/extract-kernel.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-01-30T19:16:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "020ace5d_9bbb8463",
+      "revId": "400889d6a4e66b5b639dede2af8f0bf4b945ad7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
