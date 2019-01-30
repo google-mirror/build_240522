@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00119f0e_58e0e5a3",
+        "filename": "envsetup.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-01-30T20:40:45Z",
+      "side": 1,
+      "message": "nit: after gomod for alphabetical",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "f0a08c5a0acc9f4d65d65bbfb90e8bdf69abae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
