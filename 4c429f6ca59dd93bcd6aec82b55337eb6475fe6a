@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e47f320_1c0f0cc6",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1426851
+      },
+      "writtenOn": "2019-01-30T19:40:06Z",
+      "side": 1,
+      "message": "I was thinking... is there a reason this `return 1` here? If we\u0027re going to auto-call refreshmod, can\u0027t we complete the command?",
+      "revId": "4c429f6ca59dd93bcd6aec82b55337eb6475fe6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
