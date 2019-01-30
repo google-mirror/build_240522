@@ -259,6 +259,13 @@ class BuildInfo(object):
     device: The device name, which could come from OEM dicts if applicable.
   """
 
+  _RO_PRODUCT_RESOLVE_PROPS = ["brand", "device", "manufacturer", "model",
+                               "name"]
+  _RO_PRODUCT_PROPS_ALLOWED_SOURCES = ["odm", "product", "product_services",
+                                       "system", "vendor"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER = ["product", "product_services",
+                                            "odm", "vendor", "system"]
+
   def __init__(self, info_dict, oem_dicts):
     """Initializes a BuildInfo instance with the given dicts.
 
@@ -325,10 +332,44 @@ class BuildInfo(object):
 
   def GetBuildProp(self, prop):
     """Returns the inquired build property."""
+    if prop.startswith("ro.product."):
+      prop_suffix = prop[len("ro.product."):]
+      if prop_suffix in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+        return self._ResolveRoProductBuildProp(prop_suffix)
+
     try:
       return self.info_dict.get("build.prop", {})[prop]
     except KeyError:
       raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+
+  def _ResolveRoProductBuildProp(self, prop_suffix):
+    """Resolves the inquired ro.product.<prop_suffix> build property"""
+    try:
+      return self.info_dict.get("build.prop", {})["ro.product.%s" % (
+        prop_suffix,)]
+    except KeyError:
+      pass
+
+    try:
+      source_order = self.info_dict.get("build.prop", {})[
+        "ro.product.property_source_order"].split(",")
+      # Check that all sources in ro.product.property_source_order are valid
+      if any([x not in BuildInfo._RO_PRODUCT_PROPS_ALLOWED_SOURCES
+              for x in source_order]):
+        raise common.ExternalError(
+          "Invalid ro.product.property_source_order '%s'" % (source_order,))
+    except KeyError:
+      source_order = BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
+
+    for source in source_order:
+      try:
+        return self.info_dict.get("%s.build.prop" % (source,), {})[
+          "ro.product.%s.%s" % (source, prop_suffix)]
+      except KeyError:
+        pass
+
+    raise common.ExternalError("couldn't resolve ro.product.%s" % (
+      prop_suffix,))
 
   def GetVendorBuildProp(self, prop):
     """Returns the inquired vendor build property."""
@@ -345,7 +386,18 @@ class BuildInfo(object):
 
   def CalculateFingerprint(self):
     if self.oem_props is None:
-      return self.GetBuildProp("ro.build.fingerprint")
+      try:
+        return self.GetBuildProp("ro.build.fingerprint")
+      except common.ExternalError:
+        return "%s/%s/%s:%s/%s/%s:%s/%s" % (
+          self.GetBuildProp("ro.product.brand"),
+          self.GetBuildProp("ro.product.name"),
+          self.GetBuildProp("ro.product.device"),
+          self.GetBuildProp("ro.build.version.release"),
+          self.GetBuildProp("ro.build.id"),
+          self.GetBuildProp("ro.build.version.incremental"),
+          self.GetBuildProp("ro.build.type"),
+          self.GetBuildProp("ro.build.tags"))
     return "%s/%s/%s:%s" % (
         self.GetOemProperty("ro.product.brand"),
         self.GetOemProperty("ro.product.name"),
