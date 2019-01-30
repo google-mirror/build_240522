@@ -46,6 +46,30 @@
       "revId": "890184f03c2da3b83a8dfd8bef9148920936a452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01452d22_96c71ec5",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-01-30T22:13:59Z",
+      "side": 1,
+      "message": "Not offhand unfortunately. I think dropping a mail to LKML would be a good idea here. I\u0027ll also poke around a bit more. But in the meantime this LGTM as at least an interim solution.",
+      "parentUuid": "a31978ba_87843164",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "890184f03c2da3b83a8dfd8bef9148920936a452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
