@@ -207,6 +207,7 @@ PRODUCT_PACKAGES += \
     media_profiles_V1_0.dtd \
     MediaProvider \
     mediaserver \
+    mini-keyctl \
     mke2fs \
     monkey \
     mtpd \
