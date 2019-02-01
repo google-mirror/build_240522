@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f358d9cc_0d227121",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1340374
+      },
+      "writtenOn": "2019-02-01T19:45:25Z",
+      "side": 1,
+      "message": "This construction is stricter than that in https://android-review.googlesource.com/c/platform/system/core/+/892953; it will fail if one of the constituent properties is not found, whereas the on-target resolution will use \"unknown\". I believe enforcing the ability to resolve all these properties at build time is desirable, and should guarantee that \"unknown\" is never actually encountered on target.",
+      "revId": "2f83d825ba8f6dd0670232e637eec8b8644e483b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

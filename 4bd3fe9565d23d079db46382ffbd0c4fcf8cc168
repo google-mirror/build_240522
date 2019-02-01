@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4c9ba83_474f4f54",
+        "filename": "tools/buildinfo.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1340374
+      },
+      "writtenOn": "2019-02-01T19:45:25Z",
+      "side": 0,
+      "message": "Thoughts on whether these should be removed unconditionally (always relying on the new property resolution code), or hidden behind a flag?",
+      "revId": "4bd3fe9565d23d079db46382ffbd0c4fcf8cc168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
