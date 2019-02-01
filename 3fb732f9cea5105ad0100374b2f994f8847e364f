@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63d2154e_37e7adbe",
+        "filename": "target/product/gsi_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-02-01T05:01:23Z",
+      "side": 1,
+      "message": "These are not from mainline_system.mk.\nI will ask to fix these items by another bug.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 49
+      },
+      "revId": "3fb732f9cea5105ad0100374b2f994f8847e364f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
