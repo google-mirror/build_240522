@@ -540,6 +540,8 @@ $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libjavacore.so)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libopenjdk.so)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libexpat.so)
 
+# Clean up old location of hiddenapi files
+$(call add-clean-step, rm -f $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi*)
 
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
