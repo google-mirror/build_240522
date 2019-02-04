@@ -9,7 +9,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
               build, and stores those selections in the environment to be read by subsequent
               invocations of 'm' etc.
 - tapas:      tapas [<App1> <App2> ...] [arm|x86|mips|arm64|x86_64|mips64] [eng|userdebug|user]
-- croot:      Changes directory to the top of the tree.
+- croot:      Changes directory to the top of the tree, or a subdirectory thereof.
 - m:          Makes from the top of the tree.
 - mm:         Builds all of the modules in the current directory, but not their dependencies.
 - mmm:        Builds all of the modules in the supplied directories, but not their dependencies.
@@ -369,6 +369,7 @@ function addcompletions()
     if should_add_completion bit ; then
         complete -C "bit --tab" bit
     fi
+    complete -o nospace -F _croot croot
     complete -F _lunch lunch
 
     complete -F _complete_android_module_names gomod
@@ -981,6 +982,18 @@ function croot()
         fi
     else
         echo "Couldn't locate the top of the tree.  Try setting TOP."
+    fi
+}
+
+function _croot()
+{
+    local T=$(gettop)
+    if [ "$T" ]; then
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        k=0
+        for c in $(compgen -d ${T}/${cur}); do
+            COMPREPLY[k++]=${c#${T}/}/
+        done
     fi
 }
 
