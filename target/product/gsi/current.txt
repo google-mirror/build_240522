@@ -251,6 +251,7 @@ VNDK-core: libstagefright_soft_vpxdec.so
 VNDK-core: libstagefright_soft_vpxenc.so
 VNDK-core: libstagefright_xmlparser.so
 VNDK-core: libsysutils.so
+VNDK-core: libtflite.so
 VNDK-core: libtinyalsa.so
 VNDK-core: libtinyxml2.so
 VNDK-core: libui.so
