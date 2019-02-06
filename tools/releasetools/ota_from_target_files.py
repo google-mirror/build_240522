@@ -701,6 +701,31 @@ def AddCompatibilityArchiveIfTrebleEnabled(target_zip, output_zip, target_info,
   if not HasTrebleEnabled(target_zip, target_info):
     return
 
+  # (b/114240221). If ro.compatible.build.version.incremental is specified in
+  # the oem property, we will intentionally skip adding the compatibility
+  # package for older source builds. Because these builds lack certain kernel
+  # interfaces to run the compatibility check on device.
+  compatible_source_build_number = None
+  if target_info.oem_dicts:
+    compatible_source_build_number = target_info.oem_dicts[0].get(
+        "ro.compatible.build.version.incremental")
+  if compatible_source_build_number:
+    if source_info is None:
+      logger.warning("Skip adding the compatibility package for full OTA, the "
+                     "compatible source build number is: %s",
+                     compatible_source_build_number)
+      return
+
+    source_build_number = source_info.GetBuildProp(
+        "ro.build.version.incremental")
+    if (not source_build_number or
+        int(source_build_number) < int(compatible_source_build_number)):
+      logger.warning("Skip adding the compatibility package for incremental OTA"
+                     ", the source build number: %s is less than the compatible"
+                     " source build: %s", source_build_number,
+                     compatible_source_build_number)
+      return
+
   # Full OTA carries the info for system/vendor both.
   if source_info is None:
     AddCompatibilityArchive(True, True)
