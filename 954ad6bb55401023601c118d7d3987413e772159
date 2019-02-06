@@ -22,6 +22,30 @@
       "revId": "954ad6bb55401023601c118d7d3987413e772159",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f04dca92_3c9be197",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-06T17:24:22Z",
+      "side": 1,
+      "message": "I actually went the way you suggest initially, but then got lost into how the unit tests worked, as it seemed to me they were relying on default values and they were hitting the \"panic\" check I added.",
+      "parentUuid": "567f48f5_6dd50940",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "954ad6bb55401023601c118d7d3987413e772159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
