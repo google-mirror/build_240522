@@ -544,7 +544,8 @@ $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libexpat.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/product_services)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product_services)
 
-
+# Change the default location of RROs
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/overlay)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
