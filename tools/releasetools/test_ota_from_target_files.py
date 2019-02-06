@@ -22,8 +22,9 @@ import zipfile
 import common
 import test_utils
 from ota_from_target_files import (
-    _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
-    GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
+    _LoadOemDicts, AbOtaPropertyFiles, AddCompatibilityArchiveIfTrebleEnabled,
+    BuildInfo, FinalizeMetadata, GetPackageMetadata,
+    GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
@@ -1375,3 +1376,92 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
             Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
+
+
+class AddCompatibilityArchiveTest(test_utils.ReleaseToolsTestCase):
+  TEST_INFO_DICT = {
+      'build.prop': {
+          'ro.product.device': "test_device",
+          'ro.build.version.incremental': '5285595',
+          'ro.build.fingerprint': "target_fingerprint",
+          'ro.treble.enabled': "true",
+      },
+      'vendor.build.prop': {
+          'ro.vendor.build.fingerprint': "target_vendor_fingerprint",
+      }
+  }
+
+  TEST_OEM_DICTS = [
+      {
+          'ro.compatible.build.version.incremental': '5280000',
+      },
+  ]
+
+  def setUp(self):
+    self.output_path = common.MakeTempFile("output-")
+    self.output_zip = zipfile.ZipFile(self.output_path, "w")
+
+    self.target_path = common.MakeTempFile("target-")
+    self.target_zip = zipfile.ZipFile(self.target_path, "w")
+    common.ZipWriteStr(self.target_zip, "META/system_matrix.xml",
+                       "system matrix")
+    common.ZipWriteStr(self.target_zip, "VENDOR/", "")
+
+  def test_AddCompatibilityArchive_fullOTA(self):
+    target_info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    oem_info_dict = copy.deepcopy(self.TEST_OEM_DICTS)
+    target_info = BuildInfo(target_info_dict, oem_info_dict)
+
+    AddCompatibilityArchiveIfTrebleEnabled(self.target_zip, self.output_zip,
+                                           target_info)
+    # No compatibility package for full OTA
+    self.assertFalse("compatibility.zip" in self.output_zip.namelist())
+
+  def test_AddCompatibilityArchive_incrementalOTA(self):
+    target_info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    target_info = BuildInfo(target_info_dict, None)
+
+    source_info_dict = {
+        'build.prop': {
+            'ro.product.device': "test_device",
+            'ro.build.version.incremental': '5271000',
+            'ro.build.fingerprint': "source_fingerprint",
+            'ro.treble.enabled': "true",
+        },
+        'vendor.build.prop': {
+            'ro.vendor.build.fingerprint': "source_vendor_fingerprint",
+        }
+    }
+    source_info = BuildInfo(source_info_dict, None)
+
+    AddCompatibilityArchiveIfTrebleEnabled(self.target_zip, self.output_zip,
+                                           target_info, source_info)
+    self.assertTrue("compatibility.zip" in self.output_zip.namelist())
+
+  def test_AddCompatibilityArchive_incrementalOTAwithOemProperty(self):
+    target_info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    oem_info_dict = copy.deepcopy(self.TEST_OEM_DICTS)
+    target_info = BuildInfo(target_info_dict, oem_info_dict)
+
+    # No compatibility package for older source build
+    source_info_dict = {
+        'build.prop': {
+            'ro.product.device': "test_device",
+            'ro.build.version.incremental': '5271000',
+            'ro.build.fingerprint': "source_fingerprint",
+            'ro.treble.enabled': "true",
+        },
+        'vendor.build.prop': {
+            'ro.vendor.build.fingerprint': "source_vendor_fingerprint",
+        }
+    }
+    source_info = BuildInfo(source_info_dict, None)
+    AddCompatibilityArchiveIfTrebleEnabled(self.target_zip, self.output_zip,
+                                           target_info, source_info)
+    self.assertFalse("compatibility.zip" in self.output_zip.namelist())
+
+    source_info_dict['build.prop']['ro.build.version.incremental'] = '5281000'
+    source_info = BuildInfo(source_info_dict, None)
+    AddCompatibilityArchiveIfTrebleEnabled(self.target_zip, self.output_zip,
+                                           target_info, source_info)
+    self.assertTrue("compatibility.zip" in self.output_zip.namelist())
