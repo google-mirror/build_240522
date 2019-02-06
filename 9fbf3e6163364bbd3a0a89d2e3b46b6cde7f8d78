@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3621f95c_c6eb24fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-06T15:36:26Z",
+      "side": 1,
+      "message": "The build system only sees an apex, which will most likely always be the case it\u0027s more a matter whether the product wants to optimize space as long as it\u0027s not required to.",
+      "parentUuid": "9a117e82_029c2340",
+      "revId": "9fbf3e6163364bbd3a0a89d2e3b46b6cde7f8d78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "91a60827_b94656b8",
         "filename": "core/dex_preopt_config.mk",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-06T15:30:34Z",
       "side": 1,
       "message": "does this actually work as expected? I think PRODUCT_ variables may be defined, just have an empty value, be default, which would make this assignment never trigger (not entirely sure about that)",
+      "revId": "9fbf3e6163364bbd3a0a89d2e3b46b6cde7f8d78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd450040_28a58d94",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-06T15:36:26Z",
+      "side": 1,
+      "message": "Ah yes, good catch. Done.",
+      "parentUuid": "91a60827_b94656b8",
       "revId": "9fbf3e6163364bbd3a0a89d2e3b46b6cde7f8d78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
