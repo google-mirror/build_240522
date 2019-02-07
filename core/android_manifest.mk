@@ -1,5 +1,6 @@
 # Handle AndroidManifest.xmls
-# Input: LOCAL_MANIFEST_FILE, LOCAL_FULL_MANIFEST_FILE, LOCAL_FULL_LIBS_MANIFEST_FILES
+# Input: LOCAL_MANIFEST_FILE, LOCAL_FULL_MANIFEST_FILE, LOCAL_FULL_LIBS_MANIFEST_FILES,
+#        LOCAL_USE_EMBEDDED_NATIVE_LIBS
 # Output: full_android_manifest
 
 ifeq ($(strip $(LOCAL_MANIFEST_FILE)),)
@@ -63,6 +64,18 @@ endif
 
 ifeq (true,$(LOCAL_USE_EMBEDDED_DEX))
     my_manifest_fixer_flags += --use-embedded-dex
+endif
+
+ifeq ($(LOCAL_MODULE_CLASS),APPS)
+  ifeq (true,$(call math_gt_or_eq,$(patsubst $(PLATFORM_VERSION_CODENAME),100,$(module-min-sdk-version)),23))
+    ifeq (true,$(LOCAL_USE_EMBEDDED_NATIVE_LIBS))
+      my_manifest_fixer_flags += --extract-native-libs=false
+    else
+      my_manifest_fixer_flags += --extract-native-libs=true
+    endif
+  else ifeq (true,$(LOCAL_USE_EMBEDDED_NATIVE_LIBS))
+    $(call pretty-error,module attempted to store uncompressed native libraries, but minSdkVersion does not support it)
+  endif
 endif
 
 $(fixed_android_manifest): PRIVATE_MANIFEST_FIXER_FLAGS := $(my_manifest_fixer_flags)
