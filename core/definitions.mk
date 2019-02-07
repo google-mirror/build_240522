@@ -443,6 +443,21 @@ $(call all-html-files-under,$(1))
 endef
 
 ###########################################################
+# Use utility find to find given files in the given dir.
+# This function uses $(1), instead of LOCAL_PATH as the base.
+# $(1): the base dir, relative to the root of the source tree.
+# $(2): the file name pattern to be passed to find as "-name".
+# Returns: a list of files found in the base dir.
+###########################################################
+
+define find-files-in-dir
+$(sort $(patsubst ./%,%, \
+  $(shell cd $(1) ; \
+          find . -maxdepth 1 -name $(2)) \
+ ))
+endef
+
+###########################################################
 # Use utility find to find given files in the given subdirs.
 # This function uses $(1), instead of LOCAL_PATH as the base.
 # $(1): the base dir, relative to the root of the source tree.
