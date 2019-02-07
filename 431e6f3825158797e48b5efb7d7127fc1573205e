@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81e8d256_4c2f1e13",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-02-07T00:25:47Z",
+      "side": 1,
+      "message": "then, we need this property in oem.prop for affected devices.",
+      "range": {
+        "startLine": 711,
+        "startChar": 8,
+        "endLine": 711,
+        "endChar": 49
+      },
+      "revId": "431e6f3825158797e48b5efb7d7127fc1573205e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
