@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "493fa8e3_72376bb0",
+        "filename": "target/product/AndroidProducts.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2019-02-08T01:40:32Z",
+      "side": 1,
+      "message": "Hi Dan. Could you please help? I see goldfish_kernel_tests_x86_64 in PRODUCT_MAKEFILES, bit not in lunch options. Did I forget something?",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 7
+      },
+      "revId": "8b72798b107b39302314c6acf579b17969f66330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f722e34_15a16eaf",
+        "filename": "target/product/goldfish_kernel_tests_x86_64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2019-02-08T01:40:32Z",
+      "side": 1,
+      "message": "This one does not fire.",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 7
+      },
+      "revId": "8b72798b107b39302314c6acf579b17969f66330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
