@@ -75,11 +75,17 @@ endef
 has_dup_copy_headers :=
 $(foreach dest,$(ALL_COPIED_HEADERS), \
     $(eval _srcs := $(ALL_COPIED_HEADERS.$(dest).SRC)) \
-    $(eval _src := $(word $(words $(_srcs)),$(_srcs))) \
+    $(eval _src := $(lastword $(_srcs))) \
     $(if $(call streq,$(_src),$(_srcs)),, \
         $(warning Duplicate header copy: $(dest)) \
-	$(warning Defined in: $(ALL_COPIED_HEADERS.$(dest).MAKEFILE)) \
-	$(eval has_dup_copy_headers := true)) \
+        $(warning Using $(_src)) \
+        $(warning   from $(lastword $(ALL_COPIED_HEADERS.$(dest).MAKEFILE))) \
+        $(eval _makefiles := $$(patsubst %$$(lastword $$(ALL_COPIED_HEADERS.$$(dest).MAKEFILE)),%,$$(ALL_COPIED_HEADERS.$$(dest).MAKEFILE))) \
+        $(foreach src,$(patsubst %$(_src),%,$(_srcs)), \
+            $(warning Ignoring $(src)) \
+            $(warning   from $(firstword $(_makefiles))) \
+            $(eval _makefiles := $$(wordlist 2,9999,$$(_makefiles)))) \
+        $(eval has_dup_copy_headers := true)) \
     $(eval $(call copy-one-header,$(_src),$(dest))))
 all_copied_headers: $(ALL_COPIED_HEADERS)
 
