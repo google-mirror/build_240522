@@ -1,0 +1,8 @@
+Code-Review+2: Chen Xu <fionaxu@google.com>
+Build-Cop-Override+1: Chen Xu <fionaxu@google.com>
+Presubmit-Ready+1: Chen Xu <fionaxu@google.com>
+Submitted-by: Chen Xu <fionaxu@google.com>
+Submitted-at: Fri, 08 Feb 2019 21:58:31 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/898423
+Project: platform/build
+Branch: refs/heads/master
