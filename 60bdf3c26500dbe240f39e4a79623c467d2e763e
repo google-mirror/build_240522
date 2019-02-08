@@ -16,6 +16,24 @@
       "revId": "60bdf3c26500dbe240f39e4a79623c467d2e763e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21be7555_129b6f33",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3344,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-02-08T21:24:13Z",
+      "side": 1,
+      "message": "TARGET_SKIP_OTA_PACKAGE works well for my use case, so no need to change core/Makefile.",
+      "parentUuid": "ddfd75f4_c70a97ec",
+      "revId": "60bdf3c26500dbe240f39e4a79623c467d2e763e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
