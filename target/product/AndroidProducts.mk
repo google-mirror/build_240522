@@ -71,8 +71,11 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/sdk_phone_x86.mk \
     $(LOCAL_DIR)/sdk_x86_64.mk \
     $(LOCAL_DIR)/sdk_x86.mk \
+    $(LOCAL_DIR)/goldfish_kernel_tests_x86_64.mk \
 
 endif
+
+$(error $(PRODUCT_MAKEFILES))
 
 COMMON_LUNCH_CHOICES := \
     aosp_arm64-eng \
