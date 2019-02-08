@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc51f8b2_7b6aa90e",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-08T01:41:57Z",
+      "side": 1,
+      "message": "Maybe refer to LOCAL_USE_EMBEDDED_NATIVE_LIBS here to be clear?",
+      "range": {
+        "startLine": 77,
+        "startChar": 24,
+        "endLine": 77,
+        "endChar": 79
+      },
+      "revId": "10c233157e878ac6355bad310dfa66c9ec78ab42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
