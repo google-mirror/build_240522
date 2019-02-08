@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddfd75f4_c70a97ec",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3344,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-08T01:00:59Z",
+      "side": 1,
+      "message": "The system check should go here, marking build_ota_package as false. It almost seems a bit too specific for your use case though -- does TARGET_SKIP_OTA_PACKAGE work for you, at least until we figure out how partial OTAs should work?",
+      "revId": "60bdf3c26500dbe240f39e4a79623c467d2e763e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
