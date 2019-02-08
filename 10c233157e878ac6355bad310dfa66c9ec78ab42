@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "01c8ce1e_6062f53f",
+        "filename": "core/android_manifest.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-08T01:43:19Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be using $(call module-min-sdk-version)?",
+      "range": {
+        "startLine": 70,
+        "startChar": 80,
+        "endLine": 70,
+        "endChar": 102
+      },
+      "revId": "10c233157e878ac6355bad310dfa66c9ec78ab42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc51f8b2_7b6aa90e",
         "filename": "core/android_manifest.mk",
         "patchSetId": 2
@@ -18,6 +41,29 @@
         "startChar": 24,
         "endLine": 77,
         "endChar": 79
+      },
+      "revId": "10c233157e878ac6355bad310dfa66c9ec78ab42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28dc491a_5fbfdb65",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-08T01:43:19Z",
+      "side": 1,
+      "message": "call?",
+      "range": {
+        "startLine": 338,
+        "startChar": 49,
+        "endLine": 338,
+        "endChar": 51
       },
       "revId": "10c233157e878ac6355bad310dfa66c9ec78ab42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
