@@ -665,7 +665,7 @@ $(foreach m,$(ALL_MODULES), \
   $(if $(req_mods), \
     $(eval req_files := )\
     $(foreach req_mod,$(req_mods), \
-      $(eval req_file := $(filter $(TARGET_OUT_ROOT)/%, $(call module-installed-files,$(req_mod)))) \
+      $(eval req_file := $(filter $(TARGET_OUT_ROOT)/%, $(call module-installed-files,host_$(req_mod)))) \
       $(if $(strip $(req_file)),\
         ,\
         $(error $(m).LOCAL_TARGET_REQUIRED_MODULES : illegal value $(req_mod) : not a device module. If you want to specify host modules to be required to be installed along with your host module, add those module names to LOCAL_REQUIRED_MODULES instead)\

@@ -263,6 +263,9 @@ ifneq ($(strip $(LOCAL_BUILT_MODULE)$(LOCAL_INSTALLED_MODULE)),)
 endif
 
 my_register_name := $(LOCAL_MODULE)
+ifneq ($(my_host),)
+  my_register_name := host_$(LOCAL_MODULE)
+else
 ifeq ($(my_host_cross),true)
   my_register_name := host_cross_$(LOCAL_MODULE)
 endif
