@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f81c5add_10569e92",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-10T21:36:18Z",
+      "side": 1,
+      "message": "This should check the _DEBUG / _ENG / _TESTS / _DEBUG_ASAN variants too",
+      "range": {
+        "startLine": 1152,
+        "startChar": 73,
+        "endLine": 1152,
+        "endChar": 74
+      },
+      "revId": "6c88b466ec816dcb1ed885b5b2cce49bf85c1449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
