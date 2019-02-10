@@ -583,6 +583,22 @@ $(strip $(1))
 endef
 endif  # TARGET_TRANSLATE_2ND_ARCH
 
+# TODO: we can probably check to see if these modules are actually host
+# modules
+define get-host-32-bit-modules
+$(sort $(foreach m,$(1),\
+  $(if $(ALL_MODULES.$(m)$(HOST_2ND_ARCH_MODULE_SUFFIX).CLASS),\
+    $(m)$(HOST_2ND_ARCH_MODULE_SUFFIX))))
+endef
+# Get a list of corresponding 32-bit module names, if one exists;
+# otherwise return the original module name
+define get-host-32-bit-modules-if-we-can
+$(sort $(foreach m,$(1),\
+  $(if $(ALL_MODULES.$(m)$(HOST_2ND_ARCH_MODULE_SUFFIX).CLASS),\
+    $(m)$(HOST_2ND_ARCH_MODULE_SUFFIX),\
+    $(m))))
+endef
+
 # If a module is for a cross host os, the required modules must be for
 # that OS too.
 # If a module is built for 32-bit, the required modules must be 32-bit too;
@@ -1017,17 +1033,19 @@ endef
 #       the variable will be modified to hold the expanded results.
 # $(2): The initial module name list.
 # $(3): The list of overridden modules.
+# $(4): If non-empty, do not look for overrides
 # Returns empty string (maybe with some whitespaces).
 define expand-required-modules
 $(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED))) \
 $(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
-$(eval _erm_new_overrides := $(call module-overrides,$(_erm_new_modules))) \
-$(eval _erm_all_overrides := $(3) $(_erm_new_overrides)) \
-$(eval _erm_new_modules := $(filter-out $(_erm_all_overrides), $(_erm_new_modules))) \
-$(eval $(1) := $(filter-out $(_erm_new_overrides),$($(1)))) \
+$(if $(4),,\
+  $(eval _erm_new_overrides := $(call module-overrides,$(_erm_new_modules))) \
+  $(eval _erm_all_overrides := $(3) $(_erm_new_overrides)) \
+  $(eval _erm_new_modules := $(filter-out $(_erm_all_overrides), $(_erm_new_modules))) \
+  $(eval $(1) := $(filter-out $(_erm_new_overrides),$($(1))))) \
 $(eval $(1) += $(_erm_new_modules)) \
 $(if $(_erm_new_modules),\
-  $(call expand-required-modules,$(1),$(_erm_new_modules),$(_erm_all_overrides)))
+  $(call expand-required-modules,$(1),$(_erm_new_modules),$(if $(4),,$(_erm_all_overrides)),$(4)))
 endef
 
 # Transforms paths relative to PRODUCT_OUT to absolute paths.
@@ -1064,33 +1082,40 @@ endef
 #   If a module is built for 2nd arch, its required module resolves to
 #   32-bit variant, if it exits. See the select-bitness-of-required-modules definition.
 # $(1): product makefile
+# $(2): non-empty means get the host packages
 define product-installed-files
   $(eval _mk := $(strip $(1))) \
   $(eval _pif_modules := \
-    $(PRODUCTS.$(_mk).PRODUCT_PACKAGES) \
-    $(if $(filter eng,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_ENG)) \
-    $(if $(filter debug,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG)) \
-    $(if $(filter tests,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_TESTS)) \
-    $(if $(filter asan,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG_ASAN)) \
-    $(call auto-included-modules) \
+    $(PRODUCTS.$(_mk).$(if $(2),HOST,PRODUCT)_PACKAGES) \
+    $(if $(2),, \
+      $(if $(filter eng,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_ENG)) \
+      $(if $(filter debug,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG)) \
+      $(if $(filter tests,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_TESTS)) \
+      $(if $(filter asan,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG_ASAN)) \
+      $(call auto-included-modules)) \
   ) \
   $(eval ### Filter out the overridden packages and executables before doing expansion) \
-  $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
-  $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
+  $(if $(2),, \
+    $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
+    $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
+  ) \
   $(eval ### Resolve the :32 :64 module name) \
   $(eval _pif_modules_32 := $(patsubst %:32,%,$(filter %:32, $(_pif_modules)))) \
   $(eval _pif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_pif_modules)))) \
   $(eval _pif_modules_rest := $(filter-out %:32 %:64,$(_pif_modules))) \
   $(eval ### Note for 32-bit product, 32 and 64 will be added as their original module names.) \
-  $(eval _pif_modules := $(call get-32-bit-modules-if-we-can, $(_pif_modules_32))) \
+  $(eval _pif_modules := $(call get-$(if $(2),host-)32-bit-modules-if-we-can, $(_pif_modules_32))) \
   $(eval _pif_modules += $(_pif_modules_64)) \
   $(eval ### For the rest we add both) \
-  $(eval _pif_modules += $(call get-32-bit-modules, $(_pif_modules_rest))) \
+  $(eval _pif_modules += $(call get-$(if $(2),host-)32-bit-modules, $(_pif_modules_rest))) \
   $(eval _pif_modules += $(_pif_modules_rest)) \
-  $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
-  $(call module-installed-files, $(_pif_modules)) \
-  $(call resolve-product-relative-paths,\
-    $(foreach cf,$(PRODUCTS.$(_mk).PRODUCT_COPY_FILES),$(call word-colon,2,$(cf))))
+  $(call expand-required-modules,_pif_modules,$(_pif_modules),$(if $(2),,$(_pif_overrides)),$(2)) \
+  $(if $(2), \
+    $(filter $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))), \
+    $(call module-installed-files, $(_pif_modules))) \
+  $(if $(2),, \
+    $(call resolve-product-relative-paths,\
+      $(foreach cf,$(PRODUCTS.$(_mk).PRODUCT_COPY_FILES),$(call word-colon,2,$(cf)))))
 endef
 
 # Fails the build if the given list is non-empty, and prints it entries (stripping PRODUCT_OUT).
@@ -1119,10 +1144,31 @@ ifeq (true|,$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_PACKAGES_EXIST)|$(fil
     $(INTERNAL_PRODUCT) includes redundant whitelist entries for nonexistant PRODUCT_PACKAGES)
 endif
 
+ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
+  _modules := $(PRODUCTS.$(INTERNAL_PRODUCT).HOST_PACKAGES)
+  _nonexistant_modules := $(foreach m,$(_modules),\
+    $(if $(filter FAKE,$(ALL_MODULES.$(m).CLASS))$(filter $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,$(m)))
+  $(call maybe-print-list-and-error,$(_nonexistant_modules),\
+    $(INTERNAL_PRODUCT) includes non-existant modules in HOST_PACKAGES)
+endif
+
 ifdef FULL_BUILD
+  host_FILES := $(call product-installed-files,$(INTERNAL_PRODUCT),true)
   product_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
   # WARNING: The product_MODULES variable is depended on by external files.
   product_MODULES := $(_pif_modules)
+
+  # Verify that HOST_PACKAGES is complete
+  # This is a temporary requirement during migration
+  product_host_FILES := $(filter $(HOST_OUT_ROOT)/%,$(product_FILES))
+  ifneq (,$(filter-out $(host_FILES),$(product_host_FILES)))
+    packages := $(foreach f,$(filter-out $(host_FILES),$(product_host_FILES)), \
+      $(if $(INSTALLABLE_FILES.$(f).MODULE),$(INSTALLABLE_FILES.$(f).MODULE),$(f)))
+    $(warning Missing from HOST_PACKAGES:)
+    $(foreach f,$(sort $(packages)),$(warning _ $(f)))
+    $(error stop)
+  endif
+  product_host_FILES :=
 
   # Verify the artifact path requirements made by included products.
   is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
