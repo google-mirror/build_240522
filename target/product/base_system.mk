@@ -276,6 +276,92 @@ PRODUCT_PACKAGES += \
     framework_manifest.xml \
     system_compatibility_matrix.xml \
 
+# Host tools to install
+HOST_PACKAGES += \
+    BugReport \
+    adb \
+    adbd \
+    atest \
+    bcc \
+    bit \
+    e2fsck \
+    fastboot \
+    flags_health_check \
+    incident_report \
+    ld.mc \
+    lpdump \
+    mdnsd \
+    minigzip \
+    mke2fs \
+    resize2fs \
+    selinux_policy_system \
+    sgdisk \
+    shell_and_utilities_system \
+    sqlite3 \
+    tinyplay \
+    tune2fs \
+    tzdatacheck \
+    unwind_info \
+    unwind_reg_info \
+    unwind_symbols \
+    viewcompiler \
+    tzdata_host \
+    tzdata_host_runtime_apex \
+    tzlookup.xml_host_runtime_apex \
+    tz_version_host \
+    tz_version_host_runtime_apex \
+
+# This list probably doesn't need to exist, but it's here to preserve what was
+# installed when we built host libraries with PRODUCT_PACKAGES
+HOST_PACKAGES += \
+    libandroidicu \
+    libasyncio \
+    libaudioutils \
+    libbrillo \
+    libbrillo-stream \
+    libbrotli \
+    libcap \
+    libclang_rt.asan-x86_64-android \
+    libcompiler_rt \
+    libcurl \
+    libdng_sdk \
+    libese \
+    libese-app-boot \
+    libese-sysdeps \
+    libese-teq1 \
+    libexpat \
+    libft2 \
+    libgsi \
+    libgtest_prod \
+    libharfbuzz_ng \
+    libhidl-gen-hash \
+    libhidparser \
+    libjavacrypto \
+    libjpeg \
+    liblz4 \
+    libmetricslogger \
+    libminijail \
+    libminikin \
+    libnl \
+    libnos \
+    libnosprotos \
+    libopus \
+    libpiex \
+    libpng \
+    libprocinfo \
+    libprotobuf-cpp-full \
+    libprotobuf-cpp-lite \
+    libsqlite \
+    libssl \
+    libstatslog \
+    libtinyalsa \
+    libtinyxml2 \
+    libusbhost \
+    libvintf \
+    libvts_multidevice_proto \
+    libvts_profiling_utils \
+    libxml2 \
+
 ifeq ($(TARGET_CORE_JARS),)
 $(error TARGET_CORE_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
 endif

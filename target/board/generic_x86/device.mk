@@ -22,3 +22,7 @@ endif
 PRODUCT_PACKAGES += \
 	bios.bin \
 	vgabios-cirrus.bin \
+
+HOST_PACKAGES += \
+	bios.bin \
+	vgabios-cirrus.bin \
