@@ -276,6 +276,78 @@ PRODUCT_PACKAGES += \
     framework_manifest.xml \
     system_compatibility_matrix.xml \
 
+# Host tools to install
+HOST_PACKAGES += \
+    adb \
+    adbd \
+    atest \
+    bcc \
+    bit \
+    e2fsck \
+    fastboot \
+    flags_health_check \
+    incident_report \
+    ld.mc \
+    lpdump \
+    mdnsd \
+    mke2fs \
+    resize2fs \
+    selinux_policy_system \
+    sgdisk \
+    shell_and_utilities_system \
+    sqlite3 \
+    tune2fs \
+    tzdatacheck \
+    unwind_info \
+    unwind_reg_info \
+    unwind_symbols \
+    viewcompiler \
+    tzdata_host \
+    tzdata_host_runtime_apex \
+    tzlookup.xml_host_runtime_apex \
+    tz_version_host \
+    tz_version_host_runtime_apex \
+
+# This list probably doesn't need to exist, but it's here to preserve what was
+# installed when we built host libraries with PRODUCT_PACKAGES
+HOST_PACKAGES += \
+    libandroidicu \
+    libasyncio \
+    libaudioutils \
+    libbrillo \
+    libbrillo-stream \
+    libbrotli \
+    libcompiler_rt \
+    libcurl \
+    libdng_sdk \
+    libft2 \
+    libgsi \
+    libgtest_prod \
+    libharfbuzz_ng \
+    libhidl-gen-hash \
+    libjavacrypto \
+    libjpeg \
+    liblz4 \
+    libmetricslogger \
+    libminikin \
+    libnl \
+    libnos \
+    libnosprotos \
+    libopus \
+    libpiex \
+    libpng \
+    libprocinfo \
+    libprotobuf-cpp-full \
+    libprotobuf-cpp-lite \
+    libsqlite \
+    libssl \
+    libstatslog \
+    libtinyalsa \
+    libtinyxml2 \
+    libusbhost \
+    libvintf \
+    libxml2 \
+
 ifeq ($(TARGET_CORE_JARS),)
 $(error TARGET_CORE_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
 endif

@@ -40,10 +40,13 @@ PRODUCT_PACKAGES += \
 
 # ART.
 PRODUCT_PACKAGES += art-runtime
+HOST_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
+HOST_PACKAGES += art-tools
 # Android Runtime APEX module.
 PRODUCT_PACKAGES += com.android.runtime
+HOST_PACKAGES += com.android.runtime
 
 # Certificates.
 PRODUCT_PACKAGES += \
