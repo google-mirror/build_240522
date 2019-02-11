@@ -2491,6 +2491,20 @@ $(foreach f, $(1), $(strip \
     $(_cmf_dest)))
 endef
 
+# Copies many files into a directory.
+# $(1): The files to copy.  Each entry is a ':' separated src:dst pair
+# $(2): The destination directory.
+# Evaluates to the list of the dst files (ie suitable for a dependency list)
+define copy-many-files-into
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(2)$(word 2,$(_cmf_tuple))) \
+    $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
+      $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest)))) \
+    $(_cmf_dest)))
+endef
+
 # Copy the file only if it's a well-formed init script file. For use via $(eval).
 # $(1): source file
 # $(2): destination file
