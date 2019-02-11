@@ -549,6 +549,11 @@ $(call add-clean-step, rm -f $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hidden
 
 # Clean up previous default location of RROs
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/overlay)
+
+# Clean up old location of dexpreopted boot jars
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars_input)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
