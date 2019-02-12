@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a609559_82a98b67",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2019-02-12T15:35:31Z",
+      "side": 1,
+      "message": "I wonder if we can just improve copy-many-files a little bit to make it cover both use cases?",
+      "revId": "f49731746b56b42933249b1498ce9ed2dea3a68f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
