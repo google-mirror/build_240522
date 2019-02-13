@@ -24,6 +24,7 @@ PRODUCT_PACKAGES += \
     recovery \
     shell_and_utilities_recovery \
     watchdogd.recovery \
+    cgroups.recovery.json \
 
 # Base modules and settings for the vendor partition.
 PRODUCT_PACKAGES += \
