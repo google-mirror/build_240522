@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57946451_fd66d9a2",
+        "filename": "core/prebuilt_internal.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-14T09:22:32Z",
+      "side": 1,
+      "message": "Have this check in java_library.mk too?",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 5
+      },
+      "revId": "c7cd92dea2d0a56d39937db8dad8d4cacea660cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
