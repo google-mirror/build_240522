@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02bf6bb9_911b98c8",
+        "filename": "tools/fs_config/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-14T02:26:22Z",
+      "side": 1,
+      "message": "Dependencies should be added for the two header files too.",
+      "revId": "0e2747a122ab3546ce36674856ca4111911f7ed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
