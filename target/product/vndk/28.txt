@@ -248,5 +248,4 @@ VNDK-private: libbacktrace.so
 VNDK-private: libblas.so
 VNDK-private: libcompiler_rt.so
 VNDK-private: libft2.so
-VNDK-private: libgui.so
 VNDK-private: libunwind.so
