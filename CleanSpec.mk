@@ -595,6 +595,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libtombstoned_client.so
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libvixl.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libvixld.so)
 
+# Discard previous naming "atest", which is going to be replaced with "atest-dev".
+$(call add-clean-step, rm -f $(HOST_OUT_EXECUTABLES)/atest)
+$(call add-clean-step, rm -f $(SOONG_HOST_OUT_EXECUTABLES)/atest)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
