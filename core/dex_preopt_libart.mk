@@ -13,15 +13,6 @@ LIBART_TARGET_BOOT_DEX_FILES := $(foreach mod,$(NON_UPDATABLE_BOOT_MODULES),$(ca
 # Copy the files to a location Soong dex preopt will look at.
 $(foreach mod,$(LIBART_TARGET_BOOT_JARS),$(eval $(call copy-one-file,$(call intermediates-dir-for,JAVA_LIBRARIES,$(mod),,COMMON)/javalib.jar,$(DEXPREOPT_BOOT_JARS_INPUT_PATH)/$(mod).jar)))
 
-# dex preopt on the bootclasspath produces multiple files.  The first dex file
-# is converted into to boot.art (to match the legacy assumption that boot.art
-# exists), and the rest are converted to boot-<name>.art.
-# In addition, each .art file has an associated .oat file.
-LIBART_TARGET_BOOT_ART_EXTRA_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TARGET_BOOT_JARS)),boot-$(jar).art boot-$(jar).oat)
-LIBART_TARGET_BOOT_ART_EXTRA_FILES += boot.oat
-LIBART_TARGET_BOOT_ART_VDEX_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TARGET_BOOT_JARS)),boot-$(jar).vdex)
-LIBART_TARGET_BOOT_ART_VDEX_FILES += boot.vdex
-
 # If we use a boot image profile.
 my_use_profile_for_boot_image := $(PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE)
 ifeq (,$(my_use_profile_for_boot_image))
@@ -72,18 +63,31 @@ ALL_DEFAULT_INSTALLED_MODULES += $(my_installed_profile)
 
 endif
 
-LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES := $(addprefix $(PRODUCT_OUT)/$(DEXPREOPT_BOOT_JAR_DIR)/,$(LIBART_TARGET_BOOT_ART_VDEX_FILES))
 
+DEFAULT_DEX_PREOPT_INSTALLED_IMAGE :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE :=
+
+my_image_name := boot
+my_boot_jars := $(LIBART_TARGET_BOOT_JARS)
+my_boot_dex_files := $(LIBART_TARGET_BOOT_DEX_FILES)
+my_boot_dex_locations := $(LIBART_TARGET_BOOT_DEX_LOCATIONS)
+my_boot_image_filename = $(DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
 my_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
 
 ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
 ifdef TARGET_2ND_ARCH
+my_image_name := boot
+my_boot_jars := $(LIBART_TARGET_BOOT_JARS)
+my_boot_dex_files := $(LIBART_TARGET_BOOT_DEX_FILES)
+my_boot_dex_locations := $(LIBART_TARGET_BOOT_DEX_LOCATIONS)
+my_boot_image_filename = $(2ND_DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)
 my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
 endif
 endif
 
+LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES := $(addprefix $(PRODUCT_OUT)/$(DEXPREOPT_BOOT_JAR_DIR)/,$(LIBART_TARGET_BOOT_ART_VDEX_FILES))
 # Copy shared vdex to the directory and create corresponding symlinks in primary and secondary arch.
 $(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : PRIMARY_ARCH_DIR := $(dir $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE))
 $(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : SECOND_ARCH_DIR := $(dir $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE))
@@ -98,4 +102,29 @@ $(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : $(DEFAULT_DEX_PREOPT_BUI
 	@mkdir -p $(SECOND_ARCH_DIR)
 	$(hide) ln -sf /$(DEXPREOPT_BOOT_JAR_DIR)/$(notdir $@) $(SECOND_ARCH_DIR)$(notdir $@)
 
+my_image_name := apex
+my_boot_jars := $(RUNTIME_MODULES)
+my_boot_dex_locations := $(RUNTIME_LOCATIONS)
+my_boot_dex_files := $(foreach mod,$(RUNTIME_MODULES),$(call intermediates-dir-for,JAVA_LIBRARIES,$(mod),,COMMON)/javalib.jar)
+my_boot_image_filename := $(PRODUCT_OUT)/dex_corejars/$(DEXPREOPT_BOOT_JAR_DIR)/$(DEX2OAT_TARGET_ARCH)/$(my_image_name).art
+my_2nd_arch_prefix :=
+include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
+
+ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
+ifdef TARGET_2ND_ARCH
+my_image_name := apex
+my_boot_jars := $(RUNTIME_MODULES)
+my_boot_dex_locations := $(RUNTIME_LOCATIONS)
+my_boot_dex_files := $(foreach mod,$(RUNTIME_MODULES),$(call intermediates-dir-for,JAVA_LIBRARIES,$(mod),,COMMON)/javalib.jar)
+my_boot_image_filename := $(PRODUCT_OUT)/dex_corejars/$(DEXPREOPT_BOOT_JAR_DIR)/$($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_ARCH)/$(my_image_name).art
+my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
+include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
+endif
+endif
+
+my_image_name :=
+my_boot_jars :=
+my_boot_dex_files :=
+my_boot_dex_locations :=
+my_boot_image_filename :=
 my_2nd_arch_prefix :=

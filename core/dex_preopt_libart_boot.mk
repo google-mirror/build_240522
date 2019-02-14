@@ -1,6 +1,11 @@
-# Rules to build boot.art
+# Rules to build a boot image
 # Input variables:
 #   my_2nd_arch_prefix: indicates if this is to build for the 2nd arch.
+#   my_image_name: the name of the image
+#   my_boot_jars: the files to compile for creating a boot image
+#   my_boot_dex_files: the files to compile for creating a boot image
+#   my_boot_dex_locations: the locations on device of the dex files
+#
 
 # The image "location" is a symbolic path that with multiarchitecture
 # support doesn't really exist on the device. Typically it is
@@ -13,22 +18,36 @@
 # Here are some example values for an x86_64 / x86 configuration:
 #
 # DEFAULT_DEX_PREOPT_BUILT_IMAGE_LOCATION=out/target/product/generic_x86_64/dex_bootjars/system/framework/boot.art
-# DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME=out/target/product/generic_x86_64/dex_bootjars/system/framework/x86_64/boot.art
+# my_boot_image_filename=out/target/product/generic_x86_64/dex_bootjars/system/framework/x86_64/boot.art
 # LIBART_BOOT_IMAGE=/system/framework/x86_64/boot.art
 #
 # 2ND_DEFAULT_DEX_PREOPT_BUILT_IMAGE_LOCATION=out/target/product/generic_x86_64/dex_bootjars/system/framework/boot.art
-# 2ND_DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME=out/target/product/generic_x86_64/dex_bootjars/system/framework/x86/boot.art
+# 2ND_my_boot_image_filename=out/target/product/generic_x86_64/dex_bootjars/system/framework/x86/boot.art
 # 2ND_LIBART_BOOT_IMAGE=/system/framework/x86/boot.art
 
-$(my_2nd_arch_prefix)LIBART_BOOT_IMAGE_FILENAME := /$(DEXPREOPT_BOOT_JAR_DIR)/$($(my_2nd_arch_prefix)DEX2OAT_TARGET_ARCH)/boot.art
+$(my_2nd_arch_prefix)LIBART_BOOT_IMAGE_FILENAME := /$(DEXPREOPT_BOOT_JAR_DIR)/$($(my_2nd_arch_prefix)DEX2OAT_TARGET_ARCH)/$(my_image_name).art
 
 # The .oat with symbols
 $(my_2nd_arch_prefix)LIBART_TARGET_BOOT_OAT_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)$(patsubst %.art,%.oat,$($(my_2nd_arch_prefix)LIBART_BOOT_IMAGE_FILENAME))
 
-$(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE := $(PRODUCT_OUT)$($(my_2nd_arch_prefix)LIBART_BOOT_IMAGE_FILENAME)
-$(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES := $(addprefix $(dir $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)),\
+# dex preopt on the bootclasspath produces multiple files.  The first dex file
+# is converted into to boot.art (to match the legacy assumption that boot.art
+# exists), and the rest are converted to boot-<name>.art.
+# In addition, each .art file has an associated .oat file.
+LIBART_TARGET_BOOT_ART_EXTRA_FILES := $(foreach jar,$(wordlist 2,999,$(my_boot_jars)),$(my_image_name)-$(jar).art $(my_image_name)-$(jar).oat)
+LIBART_TARGET_BOOT_ART_EXTRA_FILES += $(my_image_name).oat
+ifeq ($(my_image_name),boot)
+LIBART_TARGET_BOOT_ART_VDEX_FILES := $(foreach jar,$(wordlist 2,999,$(my_boot_jars)),$(my_image_name)-$(jar).vdex)
+LIBART_TARGET_BOOT_ART_VDEX_FILES += $(my_image_name).vdex
+else
+LIBART_TARGET_BOOT_ART_EXTRA_FILES += $(foreach jar,$(wordlist 2,999,$(my_boot_jars)),$(my_image_name)-$(jar).vdex)
+LIBART_TARGET_BOOT_ART_EXTRA_FILES += $(my_image_name).vdex
+endif
+
+$(my_2nd_arch_prefix)DEX_PREOPT_INSTALLED_IMAGE := $(PRODUCT_OUT)$($(my_2nd_arch_prefix)LIBART_BOOT_IMAGE_FILENAME)
+$(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES := $(addprefix $(dir $($(my_2nd_arch_prefix)DEX_PREOPT_INSTALLED_IMAGE)),\
     $(LIBART_TARGET_BOOT_ART_EXTRA_FILES))
-$(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_FILES := $(addprefix $(dir $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)),\
+$(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_FILES := $(addprefix $(dir $($(my_2nd_arch_prefix)DEX_PREOPT_INSTALLED_IMAGE)),\
     $(LIBART_TARGET_BOOT_ART_VDEX_FILES))
 
 # If we have a dirty-image-objects file, create a parameter.
@@ -39,13 +58,15 @@ endif
 
 # The rule to install boot.art
 # Depends on installed boot.oat, boot-*.art, boot-*.oat
-$($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE) : $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME) | $(ACP) $($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES) $($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES)
+$($(my_2nd_arch_prefix)DEX_PREOPT_INSTALLED_IMAGE) : $(my_boot_image_filename) | $(ACP) $($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES) $($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES)
 	@echo "Install: $@"
 	$(copy-file-to-target)
 
+$(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE += $($(my_2nd_arch_prefix)DEX_PREOPT_INSTALLED_IMAGE)
+
 # The rule to install boot.oat, boot-*.art, boot-*.oat
 # Depends on built-but-not-installed boot.art
-$($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES) : $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME)  | $(ACP)
+$($(my_2nd_arch_prefix)LIBART_TARGET_BOOT_ART_EXTRA_INSTALLED_FILES) : $(my_boot_image_filename)  | $(ACP)
 	@echo "Install: $@"
 	@mkdir -p $(dir $@)
 	$(hide) $(ACP) -fp $(dir $<)$(notdir $@) $@
@@ -81,12 +102,14 @@ else
   DEX2OAT_FAILURE_MESSAGE += Build with m, mma, or mmma instead of mm or mmm to remedy the situation.
 endif
 
-$($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME): PRIVATE_BOOT_IMAGE_FLAGS := $(my_boot_image_flags)
-$($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
+$(my_boot_image_filename): PRIVATE_BOOT_IMAGE_FLAGS := $(my_boot_image_flags)
+$(my_boot_image_filename): PRIVATE_2ND_ARCH_VAR_PREFIX := $(my_2nd_arch_prefix)
+$(my_boot_image_filename): PRIVATE_BOOT_DEX_FILES := $(my_boot_dex_files)
+$(my_boot_image_filename): PRIVATE_BOOT_DEX_LOCATIONS := $(my_boot_dex_locations)
 # Use dex2oat debug version for better error reporting
 # Pass --avoid-storing-invocation to make the output deterministics between
 # different products that may have different paths on the command line.
-$($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME) : $(LIBART_TARGET_BOOT_DEX_FILES) $(PRELOADED_CLASSES) $(DIRTY_IMAGE_OBJECTS) $(DEX2OAT_DEPENDENCY) $(my_out_boot_image_profile_location)
+$(my_boot_image_filename) : $(my_boot_dex_files) $(PRELOADED_CLASSES) $(DIRTY_IMAGE_OBJECTS) $(DEX2OAT_DEPENDENCY) $(my_out_boot_image_profile_location)
 	@echo "target dex2oat: $@"
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $($(PRIVATE_2ND_ARCH_VAR_PREFIX)LIBART_TARGET_BOOT_OAT_UNSTRIPPED))
@@ -99,8 +122,8 @@ $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME) : $(LIBART_TARGE
 		--write-invocation-to=$(patsubst %.art,%.invocation,$@) \
 		--runtime-arg -Xmx$(DEX2OAT_IMAGE_XMX) \
 		$(PRIVATE_BOOT_IMAGE_FLAGS) \
-		$(addprefix --dex-file=,$(LIBART_TARGET_BOOT_DEX_FILES)) \
-		$(addprefix --dex-location=,$(LIBART_TARGET_BOOT_DEX_LOCATIONS)) \
+		$(addprefix --dex-file=,$(PRIVATE_BOOT_DEX_FILES)) \
+		$(addprefix --dex-location=,$(PRIVATE_BOOT_DEX_LOCATIONS)) \
 		--generate-debug-info --generate-build-id \
 		--oat-symbols=$($(PRIVATE_2ND_ARCH_VAR_PREFIX)LIBART_TARGET_BOOT_OAT_UNSTRIPPED) \
 		--strip \
