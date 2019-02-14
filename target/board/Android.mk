@@ -52,3 +52,26 @@ LOCAL_PREBUILT_MODULE_FILE := $(GEN)
 include $(BUILD_PREBUILT)
 BUILT_VENDOR_MANIFEST := $(LOCAL_BUILT_MODULE)
 endif
+
+# ODM manifest
+ifdef ODM_MANIFEST_FILES
+# ODM_MANIFEST_FILES is a list of files that is combined and installed as the default ODM manifest.
+include $(CLEAR_VARS)
+LOCAL_MODULE := device_manifest.xml
+LOCAL_MODULE_STEM := manifest.xml
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_RELATIVE_PATH := vintf
+LOCAL_ODM_MODULE := true
+
+GEN := $(local-generated-sources-dir)/manifest.xml
+$(GEN): PRIVATE_SRC_FILES := $(ODM_MANIFEST_FILES)
+$(GEN): $(ODM_MANIFEST_FILES) $(HOST_OUT_EXECUTABLES)/assemble_vintf
+	# Set VINTF_IGNORE_TARGET_FCM_VERSION to true because it should only be in device manifest.
+	VINTF_IGNORE_TARGET_FCM_VERSION=true \
+	$(HOST_OUT_EXECUTABLES)/assemble_vintf -o $@ \
+		-i $(call normalize-path-list,$(PRIVATE_SRC_FILES))
+
+LOCAL_PREBUILT_MODULE_FILE := $(GEN)
+include $(BUILD_PREBUILT)
+BUILT_ODM_MANIFEST := $(LOCAL_BUILT_MODULE)
+endif
