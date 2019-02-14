@@ -1758,6 +1758,8 @@ function aidegen()
     case $host_os_arch in
         linux-x86) "$(gettop)"/prebuilts/asuite/aidegen/linux-x86/aidegen "$@"
         ;;
+	darwin-x86) "$(gettop)"/prebuilts/asuite/aidegen/darwin-x86/aidegen "$@"
+        ;;
     *)
         echo "aidegen is not supported on your host arch: $host_os_arch"
         ;;
