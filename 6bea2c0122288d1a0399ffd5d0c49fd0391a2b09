@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1ef9e2_5e3bb684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2019-02-14T08:19:16Z",
+      "side": 1,
+      "message": "Clean up old atest naming in out dirs",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "6bea2c0122288d1a0399ffd5d0c49fd0391a2b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8170be1f_1a188de8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2019-02-14T08:19:16Z",
+      "side": 1,
+      "message": "This patch is to clean old naming \"atest\" in out directories. This is one of the patches that fix the ambiguous executable name of atest which has been confusing users which atest(built or prebuilt) is currently running.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "6bea2c0122288d1a0399ffd5d0c49fd0391a2b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1919589d_eb04eb99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2019-02-14T08:19:16Z",
+      "side": 1,
+      "message": "$HOST_OUT_EXECUTABLES and $SOONG_HOST_OUT_EXECUTABLES are not shell variables. Can we make more friendly test:\n\n$ source build/envsetup.sh \u0026\u0026 lunch\n$ os_arch\u003d$($(uname -s | tr [:upper:] [:lower:])-x86)\n$ built\u003d$ANDROID_HOST_OUT/bin/atest\n$ sbuilt\u003d$ANDROID_BUILD_TOP/out/soong/host/$os_arch/bin/atest\n\n# before applying this patch\n$ m atest \u0026\u0026 ls $built $sbuilt (both exist)\n\n# after patching it\n$ m atest \u0026\u0026 $built $sbuilt (both don\u0027t exist)\n$ ls ${built}-dev ${sbuilt}-dev (new binaries exits)",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 59
+      },
+      "revId": "6bea2c0122288d1a0399ffd5d0c49fd0391a2b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7a0881b_956ee79c",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2019-02-14T08:19:16Z",
+      "side": 1,
+      "message": "nit: Discard previous naming \"atest\", which is going to be replaced with \"atest-dev\".",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 26
+      },
+      "revId": "6bea2c0122288d1a0399ffd5d0c49fd0391a2b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
