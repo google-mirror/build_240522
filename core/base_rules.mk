@@ -548,6 +548,13 @@ endif
 # We only support adding a default suite to native tests, native benchmarks, and instrumentation tests.
 # This is because they are the only tests we currently auto-generate test configs for.
 ifndef LOCAL_COMPATIBILITY_SUITE
+ifeq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)
+ifeq ($(LOCAL_IS_HOST_MODULE),true)
+LOCAL_COMPATIBILITY_SUITE := general-tests
+endif
+endif
+
+
 ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
 LOCAL_COMPATIBILITY_SUITE := null-suite
 endif
