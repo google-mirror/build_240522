@@ -207,6 +207,11 @@ else
 JAVA_TMPDIR_ARG :=
 endif
 
+# Default to remove the android.test.base from bootclasspath
+ifeq ($(REMOVE_ATB_FROM_BCP),)
+REMOVE_ATB_FROM_BCP := true
+endif
+
 # ###############################################################
 # Broken build defaults
 # ###############################################################
