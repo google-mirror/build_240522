@@ -47,9 +47,9 @@ endif
 # Default to debug version to help find bugs.
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifeq ($(USE_DEX2OAT_DEBUG),false)
-DEX2OAT := $(HOST_OUT_EXECUTABLES)/dex2oat$(HOST_EXECUTABLE_SUFFIX)
+DEX2OAT := $(SOONG_HOST_OUT_EXECUTABLES)/dex2oat$(HOST_EXECUTABLE_SUFFIX)
 else
-DEX2OAT := $(HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
+DEX2OAT := $(SOONG_HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
 endif
 
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
@@ -161,9 +161,9 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
   $(call add_json_str,  Dex2oatImageXms,                    $(DEX2OAT_IMAGE_XMS))
 
   $(call add_json_map,  Tools)
-  $(call add_json_str,  Profman,                            $(PROFMAN))
+  $(call add_json_str,  Profman,                            $(SOONG_HOST_OUT_EXECUTABLES)/profman)
   $(call add_json_str,  Dex2oat,                            $(DEX2OAT))
-  $(call add_json_str,  Aapt,                               $(AAPT))
+  $(call add_json_str,  Aapt,                               $(SOONG_HOST_OUT_EXECUTABLES)/aapt)
   $(call add_json_str,  SoongZip,                           $(SOONG_ZIP))
   $(call add_json_str,  Zip2zip,                            $(ZIP2ZIP))
   $(call add_json_str,  VerifyUsesLibraries,                $(BUILD_SYSTEM)/verify_uses_libraries.sh)
@@ -190,9 +190,9 @@ $(DEX_PREOPT_CONFIG):
 	@#empty
 
 DEXPREOPT_GEN_DEPS := \
-  $(PROFMAN) \
+  $(SOONG_HOST_OUT_EXECUTABLES)/profman \
   $(DEX2OAT) \
-  $(AAPT) \
+  $(SOONG_HOST_OUT_EXECUTABLES)/aapt \
   $(SOONG_ZIP) \
   $(ZIP2ZIP) \
   $(BUILD_SYSTEM)/verify_uses_libraries.sh \
