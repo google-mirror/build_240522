@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e3cad79_725d1349",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4319,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-15T01:09:02Z",
+      "side": 1,
+      "message": "This is $(PRODUCT_OUT)/system.img, so it seems like it\u0027s in the dependencies already...",
+      "range": {
+        "startLine": 4319,
+        "startChar": 33,
+        "endLine": 4319,
+        "endChar": 61
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7edf7ca2_a69e93f0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4321,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-15T01:09:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t work, you\u0027ll always use the last version of MK_QEMU_IMAGE_INPUT. Our standard way to do this is with PRIVATE_* variables:\n\n  $(INSTALLED_QEMU_SYSTEMIMAGE): PRIVATE_INPUT :\u003d $(PRODUCT_OUT)/system.img\n  $(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(PRODUCT_OUT)/system.img\n  \t... $(MK_QEMU_IMAGE_SH) $(PRIVATE_INPUT)",
+      "range": {
+        "startLine": 4321,
+        "startChar": 73,
+        "endLine": 4321,
+        "endChar": 95
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3fd014b_20fe73bd",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4328,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-15T01:09:02Z",
+      "side": 1,
+      "message": "same here, this is $(PRODUCT_OUT)/vendor.img (and all the ones below)",
+      "range": {
+        "startLine": 4328,
+        "startChar": 33,
+        "endLine": 4328,
+        "endChar": 61
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
