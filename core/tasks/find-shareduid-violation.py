@@ -28,14 +28,25 @@ else:
     product_out = sys.argv[1]
     aapt = sys.argv[2]
 
-def make_aapt_cmd(file):
-    cmds = [aapt + ' dump ' + file + ' --file AndroidManifest.xml',
+def exectue(cmd):
+    result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return result.returncode == 0, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+
+def make_aapt_cmds(file):
+    return [aapt + ' dump ' + file + ' --file AndroidManifest.xml',
             aapt + ' dump xmltree ' + file + ' --file AndroidManifest.xml']
-    return " || ".join(cmds)
 
 def extract_shared_uid(file):
-    manifest = subprocess.check_output(make_aapt_cmd(file), shell=True).decode().split('\n')
-    for l in manifest:
+    for cmd in make_aapt_cmds(file):
+        success, manifest, error_msg = exectue(cmd)
+        if success:
+            break
+    else:
+        print(error_msg, file=sys.stderr)
+        sys.exit()
+        return None
+
+    for l in manifest.split('\n'):
         if "sharedUserId" in l:
             return l.split('"')[-2]
     return None
