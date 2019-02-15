@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9868eab9_05c76d27",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4319,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2019-02-15T01:12:43Z",
+      "side": 1,
+      "message": "It used to fail with\n\n[ 71% 16730/23427] Create system-qemu.img\nFAILED: out/target/product/generic_x86_64/system-qemu.img\n/bin/bash -c \"(export SGDISK\u003dout/host/linux-x86/bin/sgdisk SIMG2IMG\u003dout/host/linux-x86/bin/simg2img; device/generic/goldfish/tools/mk_qemu_image.sh out/target/product/generic_x86_64/system.img)\"\ndevice/generic/goldfish/tools/mk_qemu_image.sh: out/target/product/generic_x86_64/system.img does not exist\n\nnow it fails with\n\nFAILED: ninja: \u0027out/target/product/generic_x86_64/system.img\u0027, needed by \u0027out/target/product/generic_x86_64/system-qemu.img\u0027, missing and no known rule to make it\n\nLet me confirm what is happening.",
+      "parentUuid": "2e3cad79_725d1349",
+      "range": {
+        "startLine": 4319,
+        "startChar": 33,
+        "endLine": 4319,
+        "endChar": 61
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7edf7ca2_a69e93f0",
         "filename": "core/Makefile",
         "patchSetId": 1
