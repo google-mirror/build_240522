@@ -190,10 +190,12 @@ ifdef LOCAL_DEX_PREOPT
 
   $(call json_start)
 
+  # DexPath, StripInputPath, and StripOutputPath are not set, they will
+  # be filled in by dexpreopt_gen.
+
   $(call add_json_str,  Name,                           $(LOCAL_MODULE))
   $(call add_json_str,  DexLocation,                    $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE)))
   $(call add_json_str,  BuildPath,                      $(LOCAL_BUILT_MODULE))
-  $(call add_json_str,  DexPath,                        $$1)
   $(call add_json_str,  ExtrasOutputPath,               $$2)
   $(call add_json_bool, Privileged,                     $(filter true,$(LOCAL_PRIVILEGED_MODULE)))
   $(call add_json_bool, UncompressedDex,                $(filter true,$(LOCAL_UNCOMPRESS_DEX)))
@@ -218,8 +220,6 @@ ifdef LOCAL_DEX_PREOPT
   $(call add_json_bool, PresignedPrebuilt,              $(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
 
   $(call add_json_bool, NoStripping,                    $(filter nostripping,$(LOCAL_DEX_PREOPT)))
-  $(call add_json_str,  StripInputPath,                 $$1)
-  $(call add_json_str,  StripOutputPath,                $$2)
 
   $(call json_end)
 
@@ -239,12 +239,14 @@ ifdef LOCAL_DEX_PREOPT
   $(my_dexpreopt_script): PRIVATE_GLOBAL_CONFIG := $(PRODUCT_OUT)/dexpreopt.config
   $(my_dexpreopt_script): PRIVATE_MODULE_CONFIG := $(my_dexpreopt_config)
   $(my_dexpreopt_script): PRIVATE_STRIP_SCRIPT := $(my_strip_script)
+  $(my_dexpreopt_script): PRIVATE_INTERMEDIATES := $(intermediates)
   $(my_dexpreopt_script): .KATI_IMPLICIT_OUTPUTS := $(my_strip_script)
   $(my_dexpreopt_script): $(DEXPREOPT_GEN)
   $(my_dexpreopt_script): $(my_dexpreopt_config) $(PRODUCT_OUT)/dexpreopt.config
 	@echo "$(PRIVATE_MODULE) dexpreopt gen"
 	$(DEXPREOPT_GEN) -global $(PRIVATE_GLOBAL_CONFIG) -module $(PRIVATE_MODULE_CONFIG) \
-	-dexpreopt_script $@ -strip_script $(PRIVATE_STRIP_SCRIPT)
+	-dexpreopt_script $@ -strip_script $(PRIVATE_STRIP_SCRIPT) \
+	-out_dir $(PRIVATE_INTERMEDIATES)
 
   my_dexpreopt_deps := $(my_dex_jar)
   my_dexpreopt_deps += $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE))
