@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "552078da_570a43c9",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4319,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-15T01:15:15Z",
+      "side": 1,
+      "message": "Ah, that\u0027s probably because INSTALLED_SYSTEMIMAGE_TARGET isn\u0027t being set. In which case, the fix for the error is to ifdef it like the vendorimage below, but you probably need to set up the size and filesystem type of your systemimage so that we build one.",
+      "parentUuid": "9868eab9_05c76d27",
+      "range": {
+        "startLine": 4319,
+        "startChar": 33,
+        "endLine": 4319,
+        "endChar": 61
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7edf7ca2_a69e93f0",
         "filename": "core/Makefile",
         "patchSetId": 1
