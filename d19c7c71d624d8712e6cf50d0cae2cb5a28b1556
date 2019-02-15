@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "16788987_3c1c3ceb",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4319,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2019-02-15T01:20:40Z",
+      "side": 1,
+      "message": "Thank you. I will take a look.",
+      "parentUuid": "552078da_570a43c9",
+      "range": {
+        "startLine": 4319,
+        "startChar": 33,
+        "endLine": 4319,
+        "endChar": 61
+      },
+      "revId": "d19c7c71d624d8712e6cf50d0cae2cb5a28b1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7edf7ca2_a69e93f0",
         "filename": "core/Makefile",
         "patchSetId": 1
