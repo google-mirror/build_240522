@@ -2028,6 +2028,27 @@ $(BUILT_ASSEMBLED_SYSTEM_MANIFEST): $(FULL_SYSTEMIMAGE_DEPS)
 	        sed "s/^/-i /" | tr '\n' ' ') -o $@
 
 # -----------------------------------------------------------------
+# Final VINTF check against the PRODCUT_OUT directory.
+
+.PHONY: check_all_vintf_metadata
+check_all_vintf_metadata: \
+    $(TARGET_OUT)/etc/vintf/% \
+    $(TARGET_OUT_VENDOR)/etc/vintf/% \
+    $(TARGET_OUT_ODM)/etc/vintf/% \
+    $(TARGET_OUT_PRODUCT})/etc/vintf/% \
+    $(INSTALLED_BUILD_PROP_TARGET) \
+    $(HOST_OUT_EXECUTABLES)/checkvintf
+	for sku in $(ODM_MANIFEST_SKUS); do \
+	  $(HOST_OUT_EXECUTABLES)/checkvintf \
+	    --property-file $(INSTALLED_BUILD_PROP_TARGET) \
+	    --dir-map "system:$(TARGET_OUT)" \
+	    --dir-map "vendor:$(TARGET_VENDOR_OUT)" \
+	    --dir-map "odm:$(TARGET_ODM_OUT)" \
+	    --dir-map "product:$(TARGET_PRODUCT_OUT)" \
+	    --check-compat > /dev/null
+	done
+
+# -----------------------------------------------------------------
 ifdef BUILDING_SYSTEM_IMAGE
 
 # installed file list
