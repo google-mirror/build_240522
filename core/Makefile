@@ -2028,6 +2028,39 @@ $(BUILT_ASSEMBLED_SYSTEM_MANIFEST): $(FULL_SYSTEMIMAGE_DEPS)
 	        sed "s/^/-i /" | tr '\n' ' ') -o $@
 
 # -----------------------------------------------------------------
+# Final VINTF check against the PRODCUT_OUT directory.
+
+.PHONY: check_all_vintf_metadata
+
+# BUILT_ASSEMBLED_{SYSTEM,VENDOR}_MANIFEST include all system / vendor / product deps.
+# Note that BUILT_ASSEMBLED_VENDOR_MANIFEST does not include ODM manifests, so they
+# are listed separately.
+check_all_vintf_metadata: \
+    $(BUILT_ASSEMBLED_SYSTEM_MANIFEST) \
+    $(BUILT_ASSEMBLED_VENDOR_MANIFEST) \
+    $(BUILT_ODM_MANIFESTS) \
+
+# By specifying an empty SKU, it will check against the default ODM manifest.
+check_all_vintf_metadata: \
+    PRIVATE_SKU_PROPS := \
+      ro.boot.product.hardware.sku= \
+      $(addprefix ro.boot.product.hardware.sku=,$(ODM_MANIFEST_SKUS))
+
+check_all_vintf_metadata: \
+    $(INSTALLED_BUILD_PROP_TARGET) \
+    $(HOST_OUT_EXECUTABLES)/checkvintf
+	$(hide) for skuprop in $(PRIVATE_SKU_PROPS); do \
+	  msg=$$($(HOST_OUT_EXECUTABLES)/checkvintf \
+	    --property-file $(INSTALLED_BUILD_PROP_TARGET) \
+	    --property $${skuprop} \
+	    --dir-map /system/etc/vintf:$(TARGET_OUT)/etc/vintf \
+	    --dir-map /vendor/etc/vintf:$(TARGET_OUT_VENDOR)/etc/vintf \
+	    --dir-map /odm/etc/vintf:$(TARGET_OUT_ODM)/etc/vintf \
+	    --dir-map /product/etc/vintf:$(TARGET_OUT_PRODUCT)/etc/vintf \
+	    --check-compat 2>&1) || echo "$${msg}"; \
+	done
+
+# -----------------------------------------------------------------
 ifdef BUILDING_SYSTEM_IMAGE
 
 # installed file list

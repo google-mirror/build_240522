@@ -73,6 +73,7 @@ $(GEN): $(ODM_MANIFEST_FILES) $(HOST_OUT_EXECUTABLES)/assemble_vintf
 
 LOCAL_PREBUILT_MODULE_FILE := $(GEN)
 include $(BUILD_PREBUILT)
+BUILT_ODM_MANIFESTS := $(LOCAL_BUILT_MODULE)
 endif # ODM_MANIFEST_FILES
 
 # ODM_MANIFEST_SKUS: a list of SKUS where ODM_MANIFEST_<sku>_FILES are defined.
@@ -100,6 +101,7 @@ $$(GEN): $$(my_fragment_files) $$(HOST_OUT_EXECUTABLES)/assemble_vintf
 		-i $$(call normalize-path-list,$$(PRIVATE_SRC_FILES))
 LOCAL_PREBUILT_MODULE_FILE := $$(GEN)
 include $$(BUILD_PREBUILT)
+BUILT_ODM_MANIFESTS += $(LOCAL_BUILT_MODULE)
 my_fragment_files_var :=
 my_fragment_files :=
 endef
