@@ -2439,12 +2439,26 @@ endef
 define copy-init-script-file-checked
 # Host init verifier doesn't exist on darwin.
 ifneq ($(HOST_OS),darwin)
+$(2): PRIVATE_VENDOR_PASSWD := $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE), $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor)
+$(2): PRIVATE_ODM_PASSWD := $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE), $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm)
+$(2): PRIVATE_PRODUCT_PASSWD := $(if $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE), $(call intermediates-dir-for,ETC,passwd_product)/passwd_product)
+$(2): PRIVATE_SYSTEM_EXT_PASSWD := $(if $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE), $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext)
 $(2): \
 	$(1) \
 	$(HOST_INIT_VERIFIER) \
 	$(KNOWN_HIDL_INTERFACES) \
-	$(call intermediates-dir-for,ETC,passwd)/passwd
-	$(hide) $(HOST_INIT_VERIFIER) -p $(call intermediates-dir-for,ETC,passwd)/passwd -k $(KNOWN_HIDL_INTERFACES) $$<
+	$(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	$(PRIVATE_VENDOR_PASSWD) \
+	$(PRIVATE_ODM_PASSWD) \
+	$(PRIVATE_PRODUCT_PASSWD) \
+	$(PRIVATE_SYSTEM_EXT_PASSWD)
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  -p $(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	  -p $(or $(PRIVATE_VENDOR_PASSWD),/dev/null) \
+	  -p $(or $(PRIVATE_ODM_PASSWD),/dev/null) \
+	  -p $(or $(PRIVATE_PRODUCT_PASSWD),/dev/null) \
+	  -p $(or $(PRIVATE_SYSTEM_EXT_PASSWD),/dev/null) \
+	  -k $(KNOWN_HIDL_INTERFACES) $$<
 else
 $(2): $(1)
 endif
