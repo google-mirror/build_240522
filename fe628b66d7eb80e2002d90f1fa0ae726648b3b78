@@ -16,6 +16,24 @@
       "revId": "fe628b66d7eb80e2002d90f1fa0ae726648b3b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a510d5e_e1ccc033",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2503,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-17T22:11:13Z",
+      "side": 1,
+      "message": "It probably shouldn\u0027t be using the vendor file when verifying the system init rc files...",
+      "parentUuid": "459157fe_d48a6893",
+      "revId": "fe628b66d7eb80e2002d90f1fa0ae726648b3b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
