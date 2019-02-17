@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "459157fe_d48a6893",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2503,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-02-17T17:48:11Z",
+      "side": 1,
+      "message": "FWIW, this is broken.  Either I need to aggregate all of these files, or alternatively, can I depend on generated_oem_aid.h?  That will have all of them and I can make host_init_verifier parse that instead.",
+      "revId": "fe628b66d7eb80e2002d90f1fa0ae726648b3b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
