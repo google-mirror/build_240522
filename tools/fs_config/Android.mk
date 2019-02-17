@@ -29,11 +29,11 @@ system_capability_header := bionic/libc/kernel/uapi/linux/capability.h
 
 # List of supported vendor, oem, odm, product and system_ext Partitions
 fs_config_generate_extra_partition_list := $(strip \
-  $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),vendor) \
+  $(if $(BUILDING_VENDOR_IMAGE),vendor) \
   $(if $(BOARD_USES_OEMIMAGE)$(BOARD_OEMIMAGE_FILE_SYSTEM_TYPE),oem) \
-  $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm) \
-  $(if $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),product) \
-  $(if $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),system_ext) \
+  $(if $(BUILDING_ODM_IMAGE),odm) \
+  $(if $(BUILDING_PRODUCT_IMAGE),product) \
+  $(if $(BUILDING_SYSTEM_EXT_IMAGE),system_ext) \
 )
 
 ##################################
@@ -381,6 +381,25 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_G
 	   --out_file $@ \
 	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
 endif
+
+
+##################################
+# Generate the <p>/etc/passwd files for each partition.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd
+LOCAL_REQUIRED_MODULES := \
+	$(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/group files for each partition.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group
+LOCAL_REQUIRED_MODULES := \
+	$(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
 
 system_android_filesystem_config :=
 system_capability_header :=

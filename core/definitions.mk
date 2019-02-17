@@ -2443,8 +2443,18 @@ $(2): \
 	$(1) \
 	$(HOST_INIT_VERIFIER) \
 	$(KNOWN_HIDL_INTERFACES) \
-	$(call intermediates-dir-for,ETC,passwd)/passwd
-	$(hide) $(HOST_INIT_VERIFIER) -p $(call intermediates-dir-for,ETC,passwd)/passwd -k $(KNOWN_HIDL_INTERFACES) $$<
+	$(if $(BUILDING_SYSTEM_IMAGE), $(call intermediates-dir-for,ETC,passwd_system)/passwd_system) \
+	$(if $(BUILDING_VENDOR_IMAGE), $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor) \
+	$(if $(BUILDING_ODM_IMAGE), $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm) \
+	$(if $(BUILDING_PRODUCT_IMAGE), $(call intermediates-dir-for,ETC,passwd_product)/passwd_product) \
+	$(if $(BUILDING_SYSTEM_EXT_IMAGE), $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext)
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  $(if $(BUILDING_SYSTEM_IMAGE), -p $(call intermediates-dir-for,ETC,passwd_system)/passwd_system) \
+	  $(if $(BUILDING_VENDOR_IMAGE), -p $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor) \
+	  $(if $(BUILDING_ODM_IMAGE), -p $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm) \
+	  $(if $(BUILDING_PRODUCT_IMAGE), -p $(call intermediates-dir-for,ETC,passwd_product)/passwd_product) \
+	  $(if $(BUILDING_SYSTEM_EXT_IMAGE), -p $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext) \
+	  -k $(KNOWN_HIDL_INTERFACES) $$<
 else
 $(2): $(1)
 endif
