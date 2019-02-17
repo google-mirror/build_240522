@@ -2439,12 +2439,27 @@ endef
 define copy-init-script-file-checked
 # Host init verifier doesn't exist on darwin.
 ifneq ($(HOST_OS),darwin)
+$(2): INIT_VERIFIER_SYSTEM_PASSWD := $(if $(BUILDING_SYSTEM_IMAGE), $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor)
+$(2): INIT_VERIFIER_VENDOR_PASSWD := $(if $(BUILDING_VENDOR_IMAGE), $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor)
+$(2): INIT_VERIFIER_ODM_PASSWD := $(if $(BUILDING_ODM_IMAGE), $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm)
+$(2): INIT_VERIFIER_PRODUCT_PASSWD := $(if $(BUILDING_PRODUCT_IMAGE), $(call intermediates-dir-for,ETC,passwd_product)/passwd_product)
+$(2): INIT_VERIFIER_SYSTEM_EXT_PASSWD := $(if $(BUILDING_SYSTEM_EXT_IMAGE), $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext)
 $(2): \
 	$(1) \
 	$(HOST_INIT_VERIFIER) \
 	$(KNOWN_HIDL_INTERFACES) \
-	$(call intermediates-dir-for,ETC,passwd)/passwd
-	$(hide) $(HOST_INIT_VERIFIER) -p $(call intermediates-dir-for,ETC,passwd)/passwd -k $(KNOWN_HIDL_INTERFACES) $$<
+	$(INIT_VERIFIER_SYSTEM_PASSWD) \
+	$(INIT_VERIFIER_VENDOR_PASSWD) \
+	$(INIT_VERIFIER_ODM_PASSWD) \
+	$(INIT_VERIFIER_PRODUCT_PASSWD) \
+	$(INIT_VERIFIER_SYSTEM_EXT_PASSWD)
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  -p $(or $(INIT_VERIFIER_SYSTEM_PASSWD),/dev/null) \
+	  -p $(or $(INIT_VERIFIER_VENDOR_PASSWD),/dev/null) \
+	  -p $(or $(INIT_VERIFIER_ODM_PASSWD),/dev/null) \
+	  -p $(or $(INIT_VERIFIER_PRODUCT_PASSWD),/dev/null) \
+	  -p $(or $(INIT_VERIFIER_SYSTEM_EXT_PASSWD),/dev/null) \
+	  -k $(KNOWN_HIDL_INTERFACES) $$<
 else
 $(2): $(1)
 endif
