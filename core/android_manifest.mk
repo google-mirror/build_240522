@@ -78,6 +78,12 @@ ifeq ($(LOCAL_MODULE_CLASS),APPS)
   endif
 endif
 
+ifeq ($(LOCAL_MODULE_CLASS),APPS)
+  ifeq ($(strip $(LOCAL_SRC_FILES)),)
+    my_manifest_fixer_flags += --has-code=false
+  endif
+endif
+
 $(fixed_android_manifest): PRIVATE_MANIFEST_FIXER_FLAGS := $(my_manifest_fixer_flags)
 # These two libs are added as optional dependencies (<uses-library> with
 # android:required set to false). This is because they haven't existed in pre-P
