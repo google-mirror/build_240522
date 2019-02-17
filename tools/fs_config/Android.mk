@@ -29,11 +29,11 @@ system_capability_header := bionic/libc/kernel/uapi/linux/capability.h
 
 # List of supported vendor, oem, odm, product and system_ext Partitions
 fs_config_generate_extra_partition_list := $(strip \
-  $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),vendor) \
+  $(if $(BUILDING_VENDOR_IMAGE),vendor) \
   $(if $(BOARD_USES_OEMIMAGE)$(BOARD_OEMIMAGE_FILE_SYSTEM_TYPE),oem) \
-  $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm) \
-  $(if $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),product) \
-  $(if $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),system_ext) \
+  $(if $(BUILDING_ODM_IMAGE),odm) \
+  $(if $(BUILDING_PRODUCT_IMAGE),product) \
+  $(if $(BUILDING_SYSTEM_EXT_IMAGE),system_ext) \
 )
 
 ##################################
@@ -381,6 +381,213 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_G
 	   --out_file $@ \
 	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
 endif
+
+
+##################################
+# Generate the <p>/etc/passwd files for each partition.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd
+LOCAL_REQUIRED_MODULES := \
+	$(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/group files for each partition.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group
+LOCAL_REQUIRED_MODULES := \
+	$(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the system/etc/passwd text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd_system
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := passwd
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --partition=system --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the vendor/etc/passwd text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd_vendor
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := passwd
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --partition=vendor --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the odm/etc/passwd text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd_odm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := passwd
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --partition=odm --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the product/etc/passwd text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd_product
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := passwd
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --partition=product --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the system_ext/etc/passwd text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := passwd_system_ext
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := passwd
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< passwd --partition=system_ext --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the system/etc/group text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group_system
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := group
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< group --partition=system --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the vendor/etc/group text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group_vendor
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := group
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< group --partition=vendor --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the odm/etc/group text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group_odm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := group
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< group --partition=odm --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the product/etc/group text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group_product
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := group
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< group --partition=product --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
+
+##################################
+# Generate the system_ext/etc/group text file for the target
+# This file may be empty if no AIDs are defined in
+# TARGET_FS_CONFIG_GEN files.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := group_system_ext
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := group
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT)/etc
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
+	@mkdir -p $(dir $@)
+	$(hide) $< group --partition=system_ext --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null) > $@
 
 system_android_filesystem_config :=
 system_capability_header :=
