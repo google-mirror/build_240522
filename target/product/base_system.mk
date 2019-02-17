@@ -81,6 +81,7 @@ PRODUCT_PACKAGES += \
     fsck_msdos \
     fs_config_files_system \
     fs_config_dirs_system \
+    group_system
     gsid \
     heapprofd \
     heapprofd_client \
@@ -216,6 +217,7 @@ PRODUCT_PACKAGES += \
     netd \
     NetworkStack \
     org.apache.http.legacy \
+    passwd_system \
     perfetto \
     ping \
     ping6 \
