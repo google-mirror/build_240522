@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05fce1de_252c4c5f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-02-18T16:30:25Z",
+      "side": 1,
+      "message": "Add this to your AndroidMk/MakeVarsProvider so you don\u0027t need to assume the value here.",
+      "revId": "c4ba8316d0821583700fb4f0c9590b6ef6907d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
