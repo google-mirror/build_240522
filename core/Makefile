@@ -693,6 +693,10 @@ ifneq (,$(TARGET_BUILD_APPS))
 endif
 
 # -----------------------------------------------------------------
+# APEX-to-keys mapping.
+APEX_KEYS_FILE := $(SOONG_OUT_DIR)/apex_keys.txt
+
+# -----------------------------------------------------------------
 # build system stats
 BUILD_SYSTEM_STATS := $(PRODUCT_OUT)/build_system_stats.txt
 $(BUILD_SYSTEM_STATS):
@@ -3645,6 +3649,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(LPMAKE) \
 	    $(SELINUX_FC) \
 	    $(APKCERTS_FILE) \
+	    $(APEX_KEYS_FILE) \
 	    $(SOONG_ZIP) \
 	    $(HOST_OUT_EXECUTABLES)/fs_config \
 	    $(HOST_OUT_EXECUTABLES)/imgdiff \
@@ -3778,6 +3783,7 @@ endif
 	@# build them.
 	$(hide) mkdir -p $(zip_root)/META
 	$(hide) cp $(APKCERTS_FILE) $(zip_root)/META/apkcerts.txt
+	$(hide) cp $(APEX_KEYS_FILE) $(zip_root)/META/apex_keys.txt
 ifneq ($(tool_extension),)
 	$(hide) cp $(PRIVATE_TOOL_EXTENSION) $(zip_root)/META/
 endif
