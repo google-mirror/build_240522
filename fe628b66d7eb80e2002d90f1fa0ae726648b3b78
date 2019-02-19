@@ -34,6 +34,24 @@
       "revId": "fe628b66d7eb80e2002d90f1fa0ae726648b3b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f211b01b_dc3e0303",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2503,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-02-19T19:10:08Z",
+      "side": 1,
+      "message": "True...  I guess what we really need is something like \n\nif system init.rc file, use system passwd only\nif vendor init.rc file, use vendor passwd only, etc\n...\n\n+/- if we think it\u0027s reasonable to allow odm init.rc files to read vendor passwd or product init.rc files to real system passwd too?",
+      "parentUuid": "4a510d5e_e1ccc033",
+      "revId": "fe628b66d7eb80e2002d90f1fa0ae726648b3b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
