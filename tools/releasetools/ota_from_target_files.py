@@ -71,6 +71,10 @@ Common options that apply to both of non-A/B and A/B OTAs
       partitions but the target build does. For A/B, when this flag is set,
       --skip_postinstall is implied.
 
+  --output_metadata_path
+      Write a copy of the metadata to a separate file. Therefore, users can
+      read the post build fingerprint without extracting the OTA package.
+
 Non-A/B OTA specific options
 
   -b  (--binary) <file>
@@ -221,6 +225,7 @@ OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
 OPTIONS.retrofit_dynamic_partitions = False
+OPTIONS.output_metadata_path = None
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -1416,6 +1421,13 @@ def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
     for property_files in needed_property_files:
       property_files.Verify(output_zip, metadata[property_files.name].strip())
 
+  # If requested, dump the metadata to a separate file.
+  output_metadata_path = OPTIONS.output_metadata_path
+  if output_metadata_path:
+    with open(output_metadata_path, 'w') as f:
+      value = "".join(["%s=%s\n" % kv for kv in sorted(metadata.iteritems())])
+      f.write(value)
+
 
 def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   target_info = BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
@@ -2032,6 +2044,8 @@ def main(argv):
       OPTIONS.skip_postinstall = True
     elif o == "--retrofit_dynamic_partitions":
       OPTIONS.retrofit_dynamic_partitions = True
+    elif o == "--output_metadata_path":
+      OPTIONS.output_metadata_path = a
     else:
       return False
     return True
@@ -2063,6 +2077,7 @@ def main(argv):
                                  "extracted_input_target_files=",
                                  "skip_postinstall",
                                  "retrofit_dynamic_partitions",
+                                 "output_metadata_path=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
