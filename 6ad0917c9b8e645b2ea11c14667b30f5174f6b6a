@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39de0d20_2f049aec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-02-20T13:06:51Z",
+      "side": 1,
+      "message": "in",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "6ad0917c9b8e645b2ea11c14667b30f5174f6b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc7aff5_3d98ac3e",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2182,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-02-20T13:06:51Z",
+      "side": 1,
+      "message": "nit: recovery-from-boot",
+      "range": {
+        "startLine": 2182,
+        "startChar": 17,
+        "endLine": 2182,
+        "endChar": 30
+      },
+      "revId": "6ad0917c9b8e645b2ea11c14667b30f5174f6b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f86ffa19_e4f981e4",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-02-20T13:06:51Z",
+      "side": 1,
+      "message": "nit: accounts",
+      "range": {
+        "startLine": 2183,
+        "startChar": 3,
+        "endLine": 2183,
+        "endChar": 10
+      },
+      "revId": "6ad0917c9b8e645b2ea11c14667b30f5174f6b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
