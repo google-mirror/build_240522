@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "167f3ade_51152421",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1428,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-02-20T01:15:39Z",
+      "side": 1,
+      "message": "make WriteMetadata taking ZipFile or str to avoid duplicating this line?",
+      "range": {
+        "startLine": 1428,
+        "startChar": 6,
+        "endLine": 1428,
+        "endChar": 78
+      },
+      "revId": "0b60133a9d1645a653efedbb3b12f73bce8d175d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
