@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c857c08e_9752c278",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-21T13:33:20Z",
+      "side": 1,
+      "message": "just curious -- how do I repro this? static RROs on the system image seem to be working fine on my device, which has ead7b66590c (it is an internal build, which might be relevant)\n\n$ adb shell dumpsys overlay | grep android.auto_generated -A10\n  android.auto_generated_rro__:0 {\n    mPackageName.......: android.auto_generated_rro__\n    mUserId............: 0\n    mTargetPackageName.: android\n    mBaseCodePath......: /product/overlay/framework-res__auto_generated_rro.apk\n    mState.............: STATE_ENABLED_STATIC\n    mState.............: STATE_ENABLED_STATIC\n    mIsEnabled.........: true\n    mIsStatic..........: true\n    mPriority..........: 0\n    mCategory..........: null\n  }\n\n$ adb pull /product/overlay/framework-res__auto_generated_rro.apk\n$ aapt dump xmltree framework-res__auto_generated_rro.apk AndroidManifest.xml\n[...]\n    E: application (line\u003d3)\n      A: android:extractNativeLibs(0x010104ea)\u003d(type 0x12)0x0\n      A: android:usesNonSdkApi(0x0101058e)\u003d(type 0x12)0xffffffff\n[...]",
+      "revId": "43bc1c7f80ac75b88cc9277f2733c37e354e8363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
