@@ -52,6 +52,24 @@
       "revId": "901351dab6377db5a66cadd830d385130248bd22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13855b9d_c329e139",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2019-02-21T15:36:40Z",
+      "side": 1,
+      "message": "Ah ok, I understand you were not talking about changing this code but instead changing the code that uses it. The only use of that variable is in build/make/config.mk so either way the core build system has to know about it. It would probably be better to have all the changes in one file but I do not know if there is some benefit to having the changes in this file as we did for REMOVE_OAHL_FROM_BCP.",
+      "parentUuid": "618bcba4_82abf030",
+      "revId": "901351dab6377db5a66cadd830d385130248bd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
