@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5239ea5_1dc5c387",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-21T12:19:52Z",
+      "side": 1,
+      "message": "not sure if this is ready for review, but since this popped up in my inbox may I suggest you just swap around the conditional that decides whether to include this or not instead? e.g. \nifneq (false,$(REMOVE_ATB_FROM_BCP))\n  // Add ATB",
+      "revId": "901351dab6377db5a66cadd830d385130248bd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
