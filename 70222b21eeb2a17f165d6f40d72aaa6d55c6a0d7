@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d5b5157_acc37822",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-21T14:07:11Z",
+      "side": 1,
+      "message": "Not clear to me if this needs to be $(TARGET_2ND_ARCH_VAR_PREFIX). Is that just for host builds ?",
+      "range": {
+        "startLine": 378,
+        "startChar": 9,
+        "endLine": 378,
+        "endChar": 13
+      },
+      "revId": "70222b21eeb2a17f165d6f40d72aaa6d55c6a0d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
