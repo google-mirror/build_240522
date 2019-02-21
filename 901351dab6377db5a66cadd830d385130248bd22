@@ -16,6 +16,24 @@
       "revId": "901351dab6377db5a66cadd830d385130248bd22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eb7f177_a9e242d0",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2019-02-21T13:37:19Z",
+      "side": 1,
+      "message": "Why? This is what was done for the similar REMOVE_OAHL_FROM_BCP variable and there weren\u0027t any issues with that. Also, this is more consistent with the following conditional which is used to select the different behaviors:\n\nifeq ($(REMOVE_ATB_FROM_BCP),true)",
+      "parentUuid": "e5239ea5_1dc5c387",
+      "revId": "901351dab6377db5a66cadd830d385130248bd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
