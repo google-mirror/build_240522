@@ -201,12 +201,16 @@ def RunAndWait(args, verbose=None, **kwargs):
         stdin, etc. stdout and stderr will default to subprocess.PIPE and
         subprocess.STDOUT respectively unless caller specifies any of them.
 
-  Returns:
-    The process return code.
+  Raises:
+    ExternalError: On non-zero exit from the command.
   """
   proc = Run(args, verbose=verbose, **kwargs)
   proc.wait()
-  return proc.returncode
+
+  if proc.returncode != 0:
+    raise ExternalError(
+        "Failed to run command '{}' (exit code {})".format(
+            args, proc.returncode))
 
 
 def RunAndCheckOutput(args, verbose=None, **kwargs):
