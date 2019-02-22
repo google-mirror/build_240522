@@ -34,6 +34,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dceef263_f6693790",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-22T21:43:04Z",
+      "side": 1,
+      "message": "yeah, I believe so, but cs/ seems to suggest neither of them are either set so they can probably just be deleted",
+      "parentUuid": "57da62b5_0249375c",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
