@@ -16,6 +16,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57da62b5_0249375c",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-22T21:23:37Z",
+      "side": 1,
+      "message": "So do the others PRODUCT_BOOTCLASSPATH and PRODUCT_SYSTEM_SERVER_CLASSPATH then, right?",
+      "parentUuid": "f41bc120_1a1d7f6e",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
