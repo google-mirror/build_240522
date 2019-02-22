@@ -34,6 +34,24 @@
       "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68e2290a_ed175ae8",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-02-22T02:47:30Z",
+      "side": 1,
+      "message": "Ninja reruns any rules whose command line has changed.  Since $(LSDUMP_PATHS) ends up on the command line, it will rerun whenever $(LSDUMP_PATHS) changes.",
+      "parentUuid": "c49163a4_18982595",
+      "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
