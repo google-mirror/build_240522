@@ -52,6 +52,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b92d7a5_e42c961d",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-22T21:58:53Z",
+      "side": 1,
+      "message": "I guess I should look at the rest of the topic before commenting :) normally PRODUCT_ variables are for product makefiles, but these ones don\u0027t seem to be as they\u0027re only written by soong. It would probably be nicest to rename them.. but you\u0027re just following an established pattern and someone should probably deal with all 3 at the same time.",
+      "parentUuid": "dceef263_f6693790",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
