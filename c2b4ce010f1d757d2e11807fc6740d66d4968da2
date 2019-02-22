@@ -52,6 +52,24 @@
       "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "269c3c2f_a49843f0",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-02-22T02:58:10Z",
+      "side": 1,
+      "message": "Thank you for the information.  Updated as suggested.",
+      "parentUuid": "68e2290a_ed175ae8",
+      "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
