@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f41bc120_1a1d7f6e",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-22T17:10:09Z",
+      "side": 1,
+      "message": "It needs to go in the _product_var_list above instead, to be inherited properly",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
