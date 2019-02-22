@@ -16,6 +16,24 @@
       "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c49163a4_18982595",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-02-22T02:07:41Z",
+      "side": 1,
+      "message": "I am switch  this to phony target because I wish to ensure $(PRODUCT_OUT)/lsdump_paths.txt is always updated when the value of the variable $(LSDUMP_PATHS) is changed (regardless the existence of the file).  If this is not a phony target, the file will not be regenerated when $(LSDUMP_PATHS) changes.\n\nI am not aware of any Makefile tricks that can keep track of this kind of dependency.  Does KATI have any directives that can keep track of the change of the variable?\n\nOr, is it guaranteed that all generated targets implicitly depend on \"out/soong/make_vars-$(product).mk\"?",
+      "parentUuid": "759ba485_e2234d0c",
+      "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
