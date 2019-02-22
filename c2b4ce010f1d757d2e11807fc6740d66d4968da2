@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "759ba485_e2234d0c",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-02-22T00:00:20Z",
+      "side": 1,
+      "message": "Why is this target phony if it has a real output?  Can you make it a non-phony rule, and then have the phony dump-lsdump-paths depend on it as a shortcut?",
+      "revId": "c2b4ce010f1d757d2e11807fc6740d66d4968da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
