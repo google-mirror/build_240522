@@ -369,6 +369,7 @@ endef
 
 _product_stash_var_list := $(_product_var_list) \
   PRODUCT_BOOTCLASSPATH \
+  PRODUCT_DEX2OAT_BOOTCLASSPATH \
   PRODUCT_SYSTEM_SERVER_CLASSPATH \
   TARGET_ARCH \
   TARGET_ARCH_VARIANT \
