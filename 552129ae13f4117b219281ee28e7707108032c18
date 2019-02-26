@@ -22,6 +22,30 @@
       "revId": "552129ae13f4117b219281ee28e7707108032c18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05d87800_0d601482",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-02-26T21:51:37Z",
+      "side": 1,
+      "message": "L2063 add it to droidcore. Should I use droid instead?",
+      "parentUuid": "6334ada8_1ff6d307",
+      "range": {
+        "startLine": 2033,
+        "startChar": 8,
+        "endLine": 2033,
+        "endChar": 32
+      },
+      "revId": "552129ae13f4117b219281ee28e7707108032c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
