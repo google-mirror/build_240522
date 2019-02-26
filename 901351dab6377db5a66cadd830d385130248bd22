@@ -106,6 +106,24 @@
       "revId": "901351dab6377db5a66cadd830d385130248bd22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55794320_c7ff0dcc",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2019-02-26T16:06:11Z",
+      "side": 1,
+      "message": "tl;dr; To make it easy to build with and without android.test.base by supplying command line/environment variable rather than changing code.\n\nI did something similar to this but for org.apache.http.legacy and it had to be submitted and reverted a number of times. At least one of those reverts was due to a performance regression. Being able to build with and without the org.apache.http.legacy made comparing the before/after behavior much easier and quicker than having to patch/unpatch the build files.",
+      "parentUuid": "778fbee8_3545fb8b",
+      "revId": "901351dab6377db5a66cadd830d385130248bd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
