@@ -106,6 +106,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "185cef10_5d4ce360",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-26T12:48:49Z",
+      "side": 1,
+      "message": "Colin, are you confirming what Anton is saying, and do you agree I\u0027m just following an established (but broken) pattern? Ie, PRODUCT_BOOTCLASSPATH is also set by soong. If so, ok to submit this now, and I can focus on rewriting this in a follow-cup CL?",
+      "parentUuid": "f89bd4c0_b7c66b34",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
