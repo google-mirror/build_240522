@@ -124,6 +124,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f95de5_9d79ad7a",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-02-26T18:35:07Z",
+      "side": 1,
+      "message": "I\u0027m suggesting abandoning this CL, since it doesn\u0027t do anything, and removing PRODUCT_BOOTCLASSPATH in a future CL.",
+      "parentUuid": "185cef10_5d4ce360",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
