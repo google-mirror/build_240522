@@ -88,6 +88,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f89bd4c0_b7c66b34",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-02-26T00:45:37Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be here at all since it is exported from Soong and not set by Make.",
+      "parentUuid": "4ef477f2_36a15afa",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
