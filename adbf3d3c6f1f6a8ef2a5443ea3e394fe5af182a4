@@ -142,6 +142,24 @@
       "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc5bb73_57727adf",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-26T20:37:34Z",
+      "side": 1,
+      "message": "Ah I see, Anton was saying the same to me in chat. Thanks!",
+      "parentUuid": "52f95de5_9d79ad7a",
+      "revId": "adbf3d3c6f1f6a8ef2a5443ea3e394fe5af182a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
