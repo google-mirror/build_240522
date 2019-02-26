@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6334ada8_1ff6d307",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-02-26T21:44:06Z",
+      "side": 1,
+      "message": "add this as a dependency of droid?",
+      "range": {
+        "startLine": 2033,
+        "startChar": 8,
+        "endLine": 2033,
+        "endChar": 32
+      },
+      "revId": "552129ae13f4117b219281ee28e7707108032c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
