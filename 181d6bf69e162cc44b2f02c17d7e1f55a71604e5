@@ -46,6 +46,30 @@
       "revId": "181d6bf69e162cc44b2f02c17d7e1f55a71604e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "035ff530_3eb7a25f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-27T02:05:29Z",
+      "side": 1,
+      "message": "That\u0027s not a public bug, so the necessary information to understand why this change exists should be in the commit message.",
+      "parentUuid": "2ac6aabd_14cf2659",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "181d6bf69e162cc44b2f02c17d7e1f55a71604e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
