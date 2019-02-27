@@ -22,6 +22,30 @@
       "revId": "181d6bf69e162cc44b2f02c17d7e1f55a71604e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac6aabd_14cf2659",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-02-27T02:02:19Z",
+      "side": 1,
+      "message": "The bug has the details, but the gist is that there\u0027s no reason to add the images to the target files at this stage since they\u0027ll be added later once all of them are assembled from the various partial builds that create them. The processing time is saved and we also avoid the build error described in the bug.",
+      "parentUuid": "ae18eea9_e4275ff7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "181d6bf69e162cc44b2f02c17d7e1f55a71604e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
