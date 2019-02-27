@@ -46,6 +46,11 @@ PRODUCT_PACKAGES += \
 # Android Runtime APEX module.
 PRODUCT_PACKAGES += com.android.runtime
 
+# Until "required: []" works in APEXes. b/124439236
+ifneq (true,$(TARGET_FLATTEN_APEX))
+    PRODUCT_PACKAGES += fsverity
+endif
+
 # Certificates.
 PRODUCT_PACKAGES += \
     cacerts \
