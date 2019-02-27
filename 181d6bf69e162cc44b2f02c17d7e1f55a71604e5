@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae18eea9_e4275ff7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-02-27T01:56:59Z",
+      "side": 1,
+      "message": "This is why it\u0027s safe to skip, but why do we want to skip this in the first place? IIRC, this can happen more than once in other cases to, which is fine.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "181d6bf69e162cc44b2f02c17d7e1f55a71604e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
