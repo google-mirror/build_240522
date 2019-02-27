@@ -1453,7 +1453,7 @@ $(if $(BOARD_AVB_ENABLE),\
     $(if $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH),\
         $(hide) echo "avb_system_other_key_path=$(BOARD_AVB_SYSTEM_OTHER_KEY_PATH)" >> $(1)
         $(hide) echo "avb_system_other_algorithm=$(BOARD_AVB_SYSTEM_OTHER_ALGORITHM)" >> $(1)
-        $(hide) echo "avb_system_extract_system_other_key=true" >> $(1)))
+        $(hide) echo "avb_product_extract_system_other_key=true" >> $(1)))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_vendor_hashtree_enable=$(BOARD_AVB_ENABLE)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_vendor_add_hashtree_footer_args=$(BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),\
@@ -2791,9 +2791,15 @@ define build-productimage-target
           $(productimage_intermediates)/generated_product_image_info.txt,product_size))
 endef
 
+FULL_PRODUCTIMAGE_DEPS := $(INTERNAL_PRODUCTIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
+FULL_PRODUCTIMAGE_DEPS += $(INSTALLED_FILES_FILE_PRODUCT) $(BUILD_IMAGE_SRCS)
+# To extract the public key of SYSTEM_OTHER AVB signing key into product.img:
+#   /product/etc/avb/system_other.avbpubkey.
+FULL_PRODUCTIMAGE_DEPS += $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH)
+
 # We just build this directly to the install location.
 INSTALLED_PRODUCTIMAGE_TARGET := $(BUILT_PRODUCTIMAGE_TARGET)
-$(INSTALLED_PRODUCTIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_PRODUCTIMAGE_FILES) $(INSTALLED_FILES_FILE_PRODUCT) $(BUILD_IMAGE_SRCS)
+$(INSTALLED_PRODUCTIMAGE_TARGET): $(FULL_PRODUCTIMAGE_DEPS)
 	$(build-productimage-target)
 
 .PHONY: productimage-nodeps pnod
@@ -2970,10 +2976,6 @@ else
 BOARD_AVB_SYSTEM_OTHER_KEY_PATH := $(BOARD_AVB_KEY_PATH)
 BOARD_AVB_SYSTEM_OTHER_ALGORITHM := $(BOARD_AVB_ALGORITHM)
 endif
-
-# To extract the public key of SYSTEM_OTHER_KEY_PATH will into system.img:
-# /system/etc/security/avb/system_other.avbpubkey.
-FULL_SYSTEMIMAGE_DEPS += $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH)
 
 ifndef BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX
 BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
