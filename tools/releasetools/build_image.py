@@ -740,10 +740,10 @@ def SaveGlobalDict(filename, glob_dict):
     f.writelines(["%s=%s" % (key, value) for (key, value) in glob_dict.items()])
 
 def ExtractSystemOtherAvbKey(in_dir, glob_dict):
-  if glob_dict.get("avb_system_extract_system_other_key") != "true":
+  if glob_dict.get("avb_product_extract_system_other_key") != "true":
     return
 
-  extract_to = os.path.join(in_dir, "etc/security/avb/system_other.avbpubkey")
+  extract_to = os.path.join(in_dir, "etc/avb/system_other.avbpubkey")
   extract_to_dir = os.path.dirname(extract_to)
 
   if os.path.isdir(extract_to_dir):
@@ -783,7 +783,6 @@ def main(argv):
     mount_point = ""
     if image_filename == "system.img":
       mount_point = "system"
-      ExtractSystemOtherAvbKey(in_dir, glob_dict)
     elif image_filename == "system_other.img":
       mount_point = "system_other"
     elif image_filename == "userdata.img":
@@ -798,6 +797,7 @@ def main(argv):
       mount_point = "oem"
     elif image_filename == "product.img":
       mount_point = "product"
+      ExtractSystemOtherAvbKey(in_dir, glob_dict)
     elif image_filename == "product_services.img":
       mount_point = "product_services"
     else:
