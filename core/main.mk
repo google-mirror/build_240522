@@ -257,6 +257,11 @@ ifneq (,$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER))
 ADDITIONAL_PRODUCT_PROPERTIES += dalvik.vm.systemservercompilerfilter=$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER)
 endif
 
+# Sets the default value of ro.fstab.product.mount.system_other=0
+# Device board config can override this value to 1, to use /product/etc/fstab.postinstall
+# to mount system_other partition. Otherwise, it uses /system/etc/fstab.postinstall.
+ADDITIONAL_DEFAULT_PROPERTIES += ro.fstab.product.mount.system_other=0
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
