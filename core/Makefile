@@ -3409,6 +3409,12 @@ else
   endif
 endif
 
+# set build_add_img_to_target_files, and allow opt-out below.
+invoke_add_img_to_target_files := true
+ifeq ($(TARGET_SKIP_ADD_IMG_TO_TARGET_FILES),true)
+  invoke_add_img_to_target_files := false
+endif
+
 ifeq ($(build_otatools_package),true)
 OTATOOLS :=  $(HOST_OUT_EXECUTABLES)/minigzip \
   $(HOST_OUT_EXECUTABLES)/aapt \
@@ -4049,8 +4055,10 @@ ifneq ($(BOARD_SUPER_PARTITION_GROUPS),)
 	    $(if $(_group_partition_list), \
 	        echo "$(group)_partition_list=$(_group_partition_list)" >> $(zip_root)/META/dynamic_partitions_info.txt;))
 endif # BOARD_SUPER_PARTITION_GROUPS
+ifeq ($(invoke_add_img_to_target_files),true)
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    build/make/tools/releasetools/add_img_to_target_files -a -v -p $(HOST_OUT) $(zip_root)
+endif
 	@# Zip everything up, preserving symlinks and placing META/ files first to
 	@# help early validation of the .zip file while uploading it.
 	$(hide) find $(zip_root)/META | sort >$@.list
