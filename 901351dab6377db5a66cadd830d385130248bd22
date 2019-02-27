@@ -142,6 +142,24 @@
       "revId": "901351dab6377db5a66cadd830d385130248bd22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33693665_ea999c93",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2019-02-27T11:51:37Z",
+      "side": 1,
+      "message": "It can be removed once we are happy that it will not be reverted. e.g the similar REMOVE_OAHL_FROM_BCP flag defaulted to true for P and was removed in Q.\n\nIt was complex because I attempted to make the change you originally suggested which had the test inverted and so in order to fix it I swapped the conditions around, got confused and ended up with a messy multi-line change.\n\nYour latest change is definitely an improvement over this change.",
+      "parentUuid": "5d2cf6c8_7c61ceab",
+      "revId": "901351dab6377db5a66cadd830d385130248bd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
