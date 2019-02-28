@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d89295b5_816210fb",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-02-28T17:53:35Z",
+      "side": 1,
+      "message": "I would like to default all variables in the above lists to empty, to avoid them being set in product makefiles. Not currently possible of course...",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "33c217b81b3122f3674666e26b19a925ed6bac60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
