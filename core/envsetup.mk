@@ -152,6 +152,29 @@ ifeq ($(HOST_OS),darwin)
   HOST_2ND_ARCH :=
 endif
 
+combo_target := HOST_
+combo_2nd_arch_prefix :=
+include $(BUILD_COMBOS)/select.mk
+ifdef HOST_2ND_ARCH
+  combo_2nd_arch_prefix := $(HOST_2ND_ARCH_VAR_PREFIX)
+  include $(BUILD_SYSTEM)/combo/select.mk
+endif
+
+# Load the windows cross compiler under Linux
+ifdef HOST_CROSS_OS
+  combo_target := HOST_CROSS_
+  combo_2nd_arch_prefix :=
+  include $(BUILD_SYSTEM)/combo/select.mk
+
+  ifdef HOST_CROSS_2ND_ARCH
+    combo_2nd_arch_prefix := $(HOST_CROSS_2ND_ARCH_VAR_PREFIX)
+    include $(BUILD_SYSTEM)/combo/select.mk
+  endif
+endif
+
+# on windows, the tools have .exe at the end, and we depend on the
+# host config stuff being done first
+
 BUILD_ARCH := $(HOST_ARCH)
 BUILD_2ND_ARCH := $(HOST_2ND_ARCH)
 
@@ -232,10 +255,9 @@ $(error must be empty or one of: eng user userdebug)
 endif
 
 SDK_HOST_ARCH := x86
+TARGET_OS := linux
 
 include $(BUILD_SYSTEM)/board_config.mk
-
-TARGET_OS := linux
 
 # the target build type defaults to release
 ifneq ($(TARGET_BUILD_TYPE),debug)
