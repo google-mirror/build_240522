@@ -718,7 +718,8 @@ h_r :=
 hc_r :=
 
 # Establish the dependencies on the shared libraries.
-# It also adds the shared library module names to ALL_MODULES.$(m).REQUIRED,
+# It also adds the shared library module names to ALL_MODULES.$(m).TARGET_REQUIRED and
+# ALL_MODULES.$(m).HOST_REQUIRED
 # so they can be expanded to product_MODULES later.
 # $(1): TARGET_ or HOST_ or HOST_CROSS_.
 # $(2): non-empty for 2nd arch.
@@ -738,7 +739,9 @@ $(foreach m,$($(if $(2),$($(1)2ND_ARCH_VAR_PREFIX))$(1)DEPENDENCIES_ON_SHARED_LI
     $(eval ALL_MODULES.$(mod).HOST_SHARED_LIBRARIES := $$(ALL_MODULES.$(mod).HOST_SHARED_LIBRARIES) $(deps))\
     $(eval $(call add-required-host-so-deps,$(word 2,$(p)),$(r))),\
     $(eval $(call add-required-deps,$(word 2,$(p)),$(r))))\
-  $(eval ALL_MODULES.$(mod).REQUIRED += $(deps)))
+  $(if $(filter $(1),TARGET_),\
+    $(eval ALL_MODULES.$(mod).TARGET_REQUIRED += $(deps)),\
+    $(eval ALL_MODULES.$(mod).HOST_REQUIRED += $(deps))))
 endef
 
 # Recursively resolve host shared library dependency for a given module.
@@ -1012,7 +1015,7 @@ $(foreach m,$(1),$(PACKAGES.$(m).OVERRIDES) $(EXECUTABLES.$(m).OVERRIDES) $(SHAR
 endef
 
 ###########################################################
-## Expand a module name list with REQUIRED modules
+## Expand a module name list with REQUIRED and TARGET_REQUIRED modules
 ###########################################################
 # $(1): The variable name that holds the initial module name list.
 #       the variable will be modified to hold the expanded results.
@@ -1021,6 +1024,7 @@ endef
 # Returns empty string (maybe with some whitespaces).
 define expand-required-modules
 $(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED))) \
+$(eval _erm_req += $(foreach m,$(2),$(ALL_MODULES.$(m).TARGET_REQUIRED))) \
 $(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
 $(eval _erm_new_overrides := $(call module-overrides,$(_erm_new_modules))) \
 $(eval _erm_all_overrides := $(3) $(_erm_new_overrides)) \
@@ -1035,6 +1039,7 @@ endef
 # we don't intend to support them on the host.
 define expand-required-host-modules
 $(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED))) \
+$(eval _erm_req += $(foreach m,$(2),$(ALL_MODULES.$(m).HOST_REQUIRED))) \
 $(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
 $(eval $(1) += $(_erm_new_modules)) \
 $(if $(_erm_new_modules),\
