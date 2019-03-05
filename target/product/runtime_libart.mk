@@ -33,11 +33,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ext \
 
-# Libcore ICU. TODO(b/124218500): Remove them explicitly when the bug is resolved.
-PRODUCT_PACKAGES += \
-    libicui18n \
-    libicuuc \
-
 # TODO(b/124498388): This currently needs to be in /system/lib for the debugger
 # transport to work.
 PRODUCT_PACKAGES += \

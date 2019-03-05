@@ -599,6 +599,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libvixld.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars_input)
 
+# Clean up libicuuc.so and libicui18n.so
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libicu*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
