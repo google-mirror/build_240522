@@ -1714,7 +1714,25 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     max_timestamp = metadata["post-timestamp"]
   additional_args = ["--max_timestamp", max_timestamp]
 
+<<<<<<< HEAD   (31c45d Merge "Merge empty history for sparse-5241043-L3900000026334)
   payload.Generate(target_file, source_file, additional_args)
+=======
+  # 1. Generate payload.
+  payload_file = common.MakeTempFile(prefix="payload-", suffix=".bin")
+  cmd = ["brillo_update_payload", "generate",
+         "--payload", payload_file,
+         "--target_image", target_file]
+  if source_file is not None:
+    cmd.extend(["--source_image", source_file])
+  if OPTIONS.downgrade:
+    max_timestamp = GetBuildProp("ro.build.date.utc", OPTIONS.source_info_dict)
+  else:
+    max_timestamp = metadata["post-timestamp"]
+  cmd.extend(["--max_timestamp", max_timestamp])
+  p1 = common.Run(cmd, stdout=log_file, stderr=subprocess.STDOUT)
+  p1.communicate()
+  assert p1.returncode == 0, "brillo_update_payload generate failed"
+>>>>>>> BRANCH (68f15b Merge "Version bump to OMC1.190221.001.A1" into sparse-53283)
 
   # Sign the payload.
   payload_signer = PayloadSigner()

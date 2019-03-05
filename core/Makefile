@@ -390,7 +390,15 @@ endif
 
 $(INSTALLED_BUILD_PROP_TARGET): $(intermediate_system_build_prop) $(INSTALLED_RECOVERYIMAGE_TARGET)
 	@echo "Target build info: $@"
+<<<<<<< HEAD   (31c45d Merge "Merge empty history for sparse-5241043-L3900000026334)
 	$(hide) grep -v 'ro.product.first_api_level' $(intermediate_system_build_prop) > $@
+=======
+ifdef BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+	$(hide) grep -v 'ro.product.first_api_level' $(intermediate_system_build_prop) > $@
+else
+	$(hide) cat $(intermediate_system_build_prop) > $@
+endif
+>>>>>>> BRANCH (68f15b Merge "Version bump to OMC1.190221.001.A1" into sparse-53283)
 ifdef INSTALLED_RECOVERYIMAGE_TARGET
 	$(hide) echo ro.expect.recovery_id=`cat $(RECOVERYIMAGE_ID_FILE)` >> $@
 endif
