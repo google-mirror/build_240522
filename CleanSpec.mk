@@ -615,6 +615,10 @@ $(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/security/avb/)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/super.img)
+
+# Clean up libicuuc.so and libicui18n.so
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libicu*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
