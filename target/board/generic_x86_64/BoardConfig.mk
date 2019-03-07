@@ -23,10 +23,13 @@ TARGET_2ND_ARCH := x86
 TARGET_2ND_ARCH_VARIANT := x86_64
 
 TARGET_PRELINK_MODULE := false
-
 include build/make/target/board/BoardConfigEmuCommon.mk
 include build/make/target/board/BoardConfigGsiCommon.mk
 
+BOARD_EXT4_SHARE_DUP_BLOCKS := false
+AB_OTA_UPDATER := false
+
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 
 BOARD_SEPOLICY_DIRS += device/generic/goldfish/sepolicy/x86
