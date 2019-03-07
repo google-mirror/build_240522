@@ -724,8 +724,12 @@ ifeq ($(PRODUCT_USE_VNDK),true)
 endif
 
 $(KATI_obsolete_var PRODUCT_USE_VNDK_OVERRIDE,Use PRODUCT_USE_VNDK instead)
+
+BOARD_VNDK_VERSION?=
+
 .KATI_READONLY := \
-    PRODUCT_USE_VNDK
+    BOARD_VNDK_VERSION \
+    PRODUCT_USE_VNDK \
 
 # Set BOARD_SYSTEMSDK_VERSIONS to the latest SystemSDK version starting from P-launching
 # devices if unset.
