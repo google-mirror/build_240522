@@ -21,8 +21,6 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 # for some devices
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Enable dynamic system image size and reserved 64MB in it.
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 67108864
 
 # GSI forces product packages to /system for now.
 TARGET_COPY_OUT_PRODUCT := system/product
@@ -42,7 +40,10 @@ BOARD_USES_METADATA_PARTITION := true
 # To enable AVB for GSI, include the GSI public key into the device-specific
 # vbmeta.img.
 BOARD_AVB_ROLLBACK_INDEX := 0
+
+ifneq (,$(filter eng,$(TARGET_BUILD_VARIANT)))
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
+endif
 
 # Enable chain partition for system.
 BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
