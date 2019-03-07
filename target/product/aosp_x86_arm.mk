@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # aosp_x86 with arm libraries needed by binary translation.
 
