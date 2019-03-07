@@ -4436,17 +4436,18 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_
 
 # supernod uses images in the $(PRODUCT_OUT) directory instead of images from target files package.
 .PHONY: superimage-nodeps supernod
-superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
-superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
+INSTALLED_SUPERIMAGE_NODEP_TARGET := $(PRODUCT_OUT)/super.img
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
     $(foreach p, $(BOARD_SUPER_PARTITION_PARTITION_LIST), $(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
-	$(call pretty,"make $(INSTALLED_SUPERIMAGE_TARGET): ignoring dependencies")
+	$(call pretty,"make $(INSTALLED_SUPERIMAGE_NODEP_TARGET): ignoring dependencies")
 	mkdir -p $(intermediates)
 	rm -rf $(intermediates)/misc_info.txt
 	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
 	$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
 	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(intermediates)/misc_info.txt;)
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_TARGET)
+	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_NODEP_TARGET)
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
 
@@ -4474,13 +4475,22 @@ dalvikfiles: $(INTERNAL_DALVIK_MODULES)
 
 ifeq ($(BUILD_QEMU_IMAGES),true)
 MK_QEMU_IMAGE_SH := device/generic/goldfish/tools/mk_qemu_image.sh
+MK_COMBINE_QEMU_IMAGE_SH := device/generic/goldfish/tools/mk_combined_img.py
 SGDISK_HOST := $(HOST_OUT_EXECUTABLES)/sgdisk
 
 ifdef INSTALLED_SYSTEMIMAGE_TARGET
 INSTALLED_QEMU_SYSTEMIMAGE := $(PRODUCT_OUT)/system-qemu.img
-$(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG)
-	@echo Create system-qemu.img
-	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); $(MK_QEMU_IMAGE_SH) $(INSTALLED_SYSTEMIMAGE_TARGET))
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET):$(INSTALLED_SYSTEMIMAGE_TARGET) $(INSTALLED_VENDORIMAGE_TARGET)
+INSTALLED_SYSTEM_QEMU_CONFIG := $(PRODUCT_OUT)/system-qemu-config.txt
+$(INSTALLED_SYSTEM_QEMU_CONFIG):$(INSTALLED_SUPERIMAGE_NODEP_TARGET) $(INSTALLED_VBMETAIMAGE_TARGET)
+	@echo "$(PRODUCT_OUT)/vbmeta.img vbmeta 1" > $@
+	@echo "$(INSTALLED_SUPERIMAGE_NODEP_TARGET) super 2" >> $@
+
+$(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG) \
+                                     $(INSTALLED_SUPERIMAGE_NODEP_TARGET) $(INSTALLED_SYSTEM_QEMU_CONFIG)
+	@echo Create system-qemu.img now
+	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG) ANDROID_HOST_OUT=$(HOST_OUT_EXECUTABLES)/../; \
+     $(MK_COMBINE_QEMU_IMAGE_SH) -i $(INSTALLED_SYSTEM_QEMU_CONFIG) -o $@)
 
 systemimage: $(INSTALLED_QEMU_SYSTEMIMAGE)
 droidcore: $(INSTALLED_QEMU_SYSTEMIMAGE)
@@ -4498,7 +4508,7 @@ ifdef INSTALLED_PRODUCTIMAGE_TARGET
 INSTALLED_QEMU_PRODUCTIMAGE := $(PRODUCT_OUT)/product-qemu.img
 $(INSTALLED_QEMU_PRODUCTIMAGE): $(INSTALLED_PRODUCTIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG)
 	@echo Create product-qemu.img
-	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); $(MK_QEMU_IMAGE_SH) $(INSTALLED_PRODUCTIMAGE_TARGET))
+	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); touch $(INSTALLED_PRODUCTIMAGE_TARGET))
 
 productimage: $(INSTALLED_QEMU_PRODUCTIMAGE)
 droidcore: $(INSTALLED_QEMU_PRODUCTIMAGE)
@@ -4527,7 +4537,7 @@ QEMU_VERIFIED_BOOT_PARAMS := $(PRODUCT_OUT)/VerifiedBootParams.textproto
 MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH := device/generic/goldfish/tools/mk_verified_boot_params.sh
 $(QEMU_VERIFIED_BOOT_PARAMS): $(INSTALLED_QEMU_SYSTEMIMAGE) $(MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH) $(INSTALLED_VBMETAIMAGE_TARGET) $(SGDISK_HOST) $(AVBTOOL)
 	@echo Creating $@
-	(export SGDISK=$(SGDISK_HOST) AVBTOOL=$(AVBTOOL); $(MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH) $(INSTALLED_VBMETAIMAGE_TARGET) $(INSTALLED_QEMU_SYSTEMIMAGE) $(QEMU_VERIFIED_BOOT_PARAMS))
+	(touch $@)
 
 
 systemimage: $(QEMU_VERIFIED_BOOT_PARAMS)
@@ -4632,7 +4642,6 @@ deps := \
 	$(APPCOMPAT_ZIP) \
 	$(INSTALLED_SYSTEMIMAGE_TARGET) \
 	$(INSTALLED_QEMU_SYSTEMIMAGE) \
-	$(INSTALLED_QEMU_VENDORIMAGE) \
 	$(QEMU_VERIFIED_BOOT_PARAMS) \
 	$(INSTALLED_USERDATAIMAGE_TARGET) \
 	$(INSTALLED_RAMDISK_TARGET) \
