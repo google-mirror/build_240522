@@ -14,8 +14,9 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
 # Define the host tools and libs that are parts of the SDK.
 -include sdk/build/product_sdk.mk
 -include development/build/product_sdk.mk
