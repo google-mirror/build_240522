@@ -40,16 +40,10 @@ BOARD_USES_METADATA_PARTITION := true
 # To enable AVB for GSI, include the GSI public key into the device-specific
 # vbmeta.img.
 BOARD_AVB_ROLLBACK_INDEX := 0
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
-
-# Enable chain partition for system.
-BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
 # GSI specific System Properties
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
 TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
 else
 TARGET_SYSTEM_PROP := build/make/target/board/gsi_system_user.prop
