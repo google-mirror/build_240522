@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
