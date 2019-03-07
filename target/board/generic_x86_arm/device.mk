@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
 #   vendor/etc because aosp system image (of aosp_$arch products) is going to
