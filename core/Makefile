@@ -4436,17 +4436,18 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_
 
 # supernod uses images in the $(PRODUCT_OUT) directory instead of images from target files package.
 .PHONY: superimage-nodeps supernod
-superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
-superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
+INSTALLED_SUPERIMAGE_NODEP_TARGET := $(PRODUCT_OUT)/super.img
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
     $(foreach p, $(BOARD_SUPER_PARTITION_PARTITION_LIST), $(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
-	$(call pretty,"make $(INSTALLED_SUPERIMAGE_TARGET): ignoring dependencies")
+	$(call pretty,"make $(INSTALLED_SUPERIMAGE_NODEP_TARGET): ignoring dependencies")
 	mkdir -p $(intermediates)
 	rm -rf $(intermediates)/misc_info.txt
 	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
 	$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
 	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(intermediates)/misc_info.txt;)
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_TARGET)
+	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_NODEP_TARGET)
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
 
@@ -4474,13 +4475,22 @@ dalvikfiles: $(INTERNAL_DALVIK_MODULES)
 
 ifeq ($(BUILD_QEMU_IMAGES),true)
 MK_QEMU_IMAGE_SH := device/generic/goldfish/tools/mk_qemu_image.sh
+MK_COMBINE_QEMU_IMAGE_SH := device/generic/goldfish/tools/mk_combined_img.py
 SGDISK_HOST := $(HOST_OUT_EXECUTABLES)/sgdisk
 
 ifdef INSTALLED_SYSTEMIMAGE_TARGET
 INSTALLED_QEMU_SYSTEMIMAGE := $(PRODUCT_OUT)/system-qemu.img
-$(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG)
-	@echo Create system-qemu.img
-	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); $(MK_QEMU_IMAGE_SH) $(INSTALLED_SYSTEMIMAGE_TARGET))
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET):$(INSTALLED_SYSTEMIMAGE_TARGET) $(INSTALLED_VENDORIMAGE_TARGET)
+INSTALLED_SYSTEM_QEMU_CONFIG := $(PRODUCT_OUT)/system-qemu-config.txt
+$(INSTALLED_SYSTEM_QEMU_CONFIG):$(INSTALLED_SUPERIMAGE_NODEP_TARGET) $(INSTALLED_VBMETAIMAGE_TARGET)
+	@echo "$(PRODUCT_OUT)/vbmeta.img vbmeta 1" > $@
+	@echo "$(INSTALLED_SUPERIMAGE_NODEP_TARGET) super 2" >> $@
+
+$(INSTALLED_QEMU_SYSTEMIMAGE): $(INSTALLED_SYSTEMIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG) \
+                                     $(INSTALLED_SUPERIMAGE_NODEP_TARGET) $(INSTALLED_SYSTEM_QEMU_CONFIG)
+	@echo Create system-qemu.img now
+	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG) ANDROID_HOST_OUT=$(HOST_OUT_EXECUTABLES)/../; \
+     $(MK_COMBINE_QEMU_IMAGE_SH) -i $(INSTALLED_SYSTEM_QEMU_CONFIG) -o $@)
 
 systemimage: $(INSTALLED_QEMU_SYSTEMIMAGE)
 droidcore: $(INSTALLED_QEMU_SYSTEMIMAGE)
@@ -4524,15 +4534,23 @@ endif
 
 ifeq ($(BOARD_AVB_ENABLE),true)
 QEMU_VERIFIED_BOOT_PARAMS := $(PRODUCT_OUT)/VerifiedBootParams.textproto
+ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
+MK_VBMETA_BOOT_KERNEL_CMDLINE_SH := device/generic/goldfish/tools/mk_vbmeta_boot_params.sh
+$(QEMU_VERIFIED_BOOT_PARAMS): $(INSTALLED_VBMETAIMAGE_TARGET) $(MK_VBMETA_BOOT_KERNEL_CMDLINE_SH) $(AVBTOOL)
+	@echo Creating $@
+	(export AVBTOOL=$(AVBTOOL); $(MK_VBMETA_BOOT_KERNEL_CMDLINE_SH) $(INSTALLED_VBMETAIMAGE_TARGET) $(QEMU_VERIFIED_BOOT_PARAMS))
+
+else # not using dynamic partition
 MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH := device/generic/goldfish/tools/mk_verified_boot_params.sh
 $(QEMU_VERIFIED_BOOT_PARAMS): $(INSTALLED_QEMU_SYSTEMIMAGE) $(MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH) $(INSTALLED_VBMETAIMAGE_TARGET) $(SGDISK_HOST) $(AVBTOOL)
 	@echo Creating $@
 	(export SGDISK=$(SGDISK_HOST) AVBTOOL=$(AVBTOOL); $(MK_VERIFIED_BOOT_KERNEL_CMDLINE_SH) $(INSTALLED_VBMETAIMAGE_TARGET) $(INSTALLED_QEMU_SYSTEMIMAGE) $(QEMU_VERIFIED_BOOT_PARAMS))
 
-
+endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 systemimage: $(QEMU_VERIFIED_BOOT_PARAMS)
 droidcore: $(QEMU_VERIFIED_BOOT_PARAMS)
-endif
+endif # BOARD_AVB_ENABLE
+
 endif
 # -----------------------------------------------------------------
 # The emulator package
