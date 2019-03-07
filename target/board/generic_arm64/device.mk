@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Adjust the Dalvik heap to be appropriate for a tablet.
 $(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)
