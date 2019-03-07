@@ -20,6 +20,13 @@ BUILD_QEMU_IMAGES := true
 # the GLES renderer disables itself if host GL acceleration isn't available.
 USE_OPENGL_RENDERER := true
 
+BOARD_SUPER_PARTITION_SIZE := 8145338368
+BOARD_SUPER_PARTITION_GROUPS := google_dynamic_partitions
+BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+    system \
+    vendor
+
+BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 4068474880
 # ~140 MB vendor image. Please adjust system image / vendor image sizes
 # when finalizing them. The partition size needs to be a multiple of image
 # block size: 4096.
