@@ -70,6 +70,8 @@ _board_strip_readonly_list += \
   BOARD_PRODUCT_SERVICESIMAGE_FILE_SYSTEM_TYPE \
   BOARD_ODMIMAGE_PARTITION_SIZE \
   BOARD_ODMIMAGE_FILE_SYSTEM_TYPE \
+  BOARD_METADATAIMAGE_FILE_SYSTEM_TYPE \
+  BOARD_METADATAIMAGE_PARTITION_SIZE \
 
 # Logical partitions related variables.
 _dynamic_partitions_var_list += \
@@ -306,6 +308,17 @@ else ifeq ($(PRODUCT_BUILD_USERDATA_IMAGE),true)
   BUILDING_USERDATA_IMAGE := true
 endif
 .KATI_READONLY := BUILDING_USERDATA_IMAGE
+
+# Are we building a metadata image
+BUILDING_METADATA_IMAGE :=
+ifeq ($(PRODUCT_BUILD_METADATA_IMAGE),)
+  ifdef BOARD_METADATAIMAGE_PARTITION_SIZE
+    BUILDING_METADATA_IMAGE := true
+  endif
+else ifeq ($(PRODUCT_BUILD_METADATA_IMAGE),true)
+  BUILDING_METADATA_IMAGE := true
+endif
+.KATI_READONLY := BUILDING_METADATA_IMAGE
 
 ###########################################
 # Now we can substitute with the real value of TARGET_COPY_OUT_VENDOR

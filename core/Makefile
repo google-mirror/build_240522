@@ -1331,7 +1331,7 @@ endif
 endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 
 # $(1): the path of the output dictionary file
-# $(2): a subset of "system vendor cache userdata product product_services oem odm"
+# $(2): a subset of "system vendor cache userdata product product_services oem odm metadata"
 # $(3): additional "key=value" pairs to append to the dictionary file.
 define generate-image-prop-dictionary
 $(if $(filter $(2),system),\
@@ -1414,6 +1414,10 @@ $(if $(filter $(2),oem),\
     $(if $(BOARD_OEMIMAGE_EXTFS_INODE_COUNT),$(hide) echo "oem_extfs_inode_count=$(BOARD_OEMIMAGE_EXTFS_INODE_COUNT)" >> $(1))
     $(if $(BOARD_OEMIMAGE_EXTFS_RSV_PCT),$(hide) echo "oem_extfs_rsv_pct=$(BOARD_OEMIMAGE_EXTFS_RSV_PCT)" >> $(1))
 )
+$(if $(filter $(2),metadata),\
+    $(if $(BOARD_METADATAIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "metadata_fs_type=$(BOARD_METADATAIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
+    $(if $(BOARD_METADATAIMAGE_PARTITION_SIZE),$(hide) echo "metadata_size=$(BOARD_METADATAIMAGE_PARTITION_SIZE)" >> $(1))
+)
 $(hide) echo "ext_mkuserimg=$(notdir $(MKEXTUSERIMG))" >> $(1)
 
 $(if $(INTERNAL_USERIMAGES_EXT_VARIANT),$(hide) echo "fs_type=$(INTERNAL_USERIMAGES_EXT_VARIANT)" >> $(1))
@@ -1494,7 +1498,7 @@ endef
 # $(1): the path of the output dictionary file
 # $(2): additional "key=value" pairs to append to the dictionary file.
 define generate-userimage-prop-dictionary
-$(call generate-image-prop-dictionary,$(1),system vendor cache userdata product product_services oem odm,$(2))
+$(call generate-image-prop-dictionary,$(1),system vendor cache userdata product product_services oem odm metadata,$(2))
 endef
 
 # $(1): the path of the input dictionary file, where each line has the format key=value
@@ -2914,6 +2918,37 @@ else ifdef BOARD_PREBUILT_ODMIMAGE
 INSTALLED_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
 $(eval $(call copy-one-file,$(BOARD_PREBUILT_ODMIMAGE),$(INSTALLED_ODMIMAGE_TARGET)))
 endif
+
+# -----------------------------------------------------------------
+# metadata partition image
+ifdef BUILDING_METADATA_IMAGE
+INTERNAL_METADATAIMAGE_FILES := \
+    $(filter $(TARGET_OUT_METADATA)/%,$(ALL_DEFAULT_INSTALLED_MODULES))
+
+metadataimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,metadata)
+BUILT_METADATAIMAGE_TARGET := $(PRODUCT_OUT)/metadata.img
+
+define build-metadataimage-target
+  $(call pretty,"Target metadata fs image: $(INSTALLED_METADATAIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_METADATA)
+  @mkdir -p $(metadataimage_intermediates) && rm -rf $(metadataimage_intermediates)/metadata_image_info.txt
+  $(call generate-image-prop-dictionary, $(metadataimage_intermediates)/metadata_image_info.txt,metadata,skip_fsck=true)
+  $(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
+      build/make/tools/releasetools/build_image.py \
+      $(TARGET_OUT_METADATA) $(metadataimage_intermediates)/metadata_image_info.txt $(INSTALLED_METADATAIMAGE_TARGET) $(TARGET_OUT)
+  $(hide) $(call assert-max-image-size,$(INSTALLED_METADATAIMAGE_TARGET),$(BOARD_METADATAIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_METADATAIMAGE_TARGET := $(BUILT_METADATAIMAGE_TARGET)
+$(INSTALLED_METADATAIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_METADATAIMAGE_FILES) $(BUILD_IMAGE_SRCS)
+	$(build-metadataimage-target)
+
+.PHONY: metadataimage-nodeps
+metadataimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-metadataimage-target)
+endif # BUILDING_METADATA_IMAGE
 
 # -----------------------------------------------------------------
 # dtbo image

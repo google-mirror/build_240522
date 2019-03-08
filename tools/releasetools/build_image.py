@@ -599,6 +599,9 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   elif mount_point == "cache":
     copy_prop("cache_fs_type", "fs_type")
     copy_prop("cache_size", "partition_size")
+  elif mount_point == "metadata":
+    copy_prop("metadata_fs_type", "fs_type")
+    copy_prop("metadata_size", "partition_size")
   elif mount_point == "vendor":
     copy_prop("avb_vendor_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_vendor_add_hashtree_footer_args",
@@ -794,6 +797,8 @@ def main(argv):
       mount_point = "vendor"
     elif image_filename == "odm.img":
       mount_point = "odm"
+    elif image_filename == "metadata.img":
+      mount_point = "metadata"
     elif image_filename == "oem.img":
       mount_point = "oem"
     elif image_filename == "product.img":
