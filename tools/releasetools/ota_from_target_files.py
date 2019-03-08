@@ -806,7 +806,7 @@ def WriteFullOTAPackage(input_zip, output_file):
     staging_file = output_file
 
   output_zip = zipfile.ZipFile(
-      staging_file, "w", compression=zipfile.ZIP_DEFLATED)
+      staging_file, "w", compression=zipfile.ZIP_DEFLATED, allowZip64=True)
 
   device_specific = common.DeviceSpecificParams(
       input_zip=input_zip,
@@ -1477,7 +1477,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
     staging_file = output_file
 
   output_zip = zipfile.ZipFile(
-      staging_file, "w", compression=zipfile.ZIP_DEFLATED)
+      staging_file, "w", compression=zipfile.ZIP_DEFLATED, allowZip64=True)
 
   device_specific = common.DeviceSpecificParams(
       source_zip=source_zip,
@@ -1948,7 +1948,7 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   else:
     staging_file = output_file
   output_zip = zipfile.ZipFile(staging_file, "w",
-                               compression=zipfile.ZIP_DEFLATED)
+                               compression=zipfile.ZIP_DEFLATED, allowZip64=True)
 
   if source_file is not None:
     target_info = BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
