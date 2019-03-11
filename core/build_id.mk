@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (15e76e Merge "Build System: Solve dependency problem for test")
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.190305.001
+>>>>>>> BRANCH (0b0044 Make change and version bump to PPRL.190305.001)
