@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bc2e5e22_3848265d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1442058
+      },
+      "writtenOn": "2019-03-11T16:27:17Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "863fd510_deda3b9d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "b049069cf2236ae29f18985bb823b1b716f1d9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6131ae48_f09404b3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "60efeedc_f20f1e06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1442058
+      },
+      "writtenOn": "2019-03-11T16:27:17Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "6131ae48_f09404b3",
+      "range": {
+        "startLine": 9,
+        "startChar": 56,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "b049069cf2236ae29f18985bb823b1b716f1d9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4eeb3fd9_ccd10901",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2019-03-06T19:09:07Z",
       "side": 1,
       "message": "nit: commit",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "b049069cf2236ae29f18985bb823b1b716f1d9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be154caa_e1e5a332",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1442058
+      },
+      "writtenOn": "2019-03-11T16:27:17Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "4eeb3fd9_ccd10901",
       "range": {
         "startLine": 12,
         "startChar": 5,
