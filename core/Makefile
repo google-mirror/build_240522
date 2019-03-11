@@ -4319,12 +4319,17 @@ ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
 
 ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
 INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
-$(INSTALLED_SUPERIMAGE_TARGET): extracted_input_target_files := $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))
-$(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
-	$(call pretty,"Target super fs image: $@")
+$(INSTALLED_SUPERIMAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE)
+
+.PHONY: superimage-nodeps supernod
+superimage-nodeps supernod: | $(BUILT_TARGET_FILES_PACKAGE)
+
+$(INSTALLED_SUPERIMAGE_TARGET) superimage-nodeps supernod: $(LPMAKE) $(BUILD_SUPER_IMAGE)
+	$(call pretty,"Target super fs image: $(INSTALLED_SUPERIMAGE_TARGET)")
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	    $(BUILD_SUPER_IMAGE) -v $(extracted_input_target_files) $@
-endif
+	    $(BUILD_SUPER_IMAGE) -v $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE)) $(INSTALLED_SUPERIMAGE_TARGET)
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != true
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
 
