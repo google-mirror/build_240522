@@ -4324,7 +4324,25 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_
 	$(call pretty,"Target super fs image: $@")
 	PATH=$(dir $(LPMAKE)):$$PATH \
 	    $(BUILD_SUPER_IMAGE) -v $(extracted_input_target_files) $@
+
+# supernod uses images in the $(PRODUCT_OUT) directory instead of images from target files package.
+.PHONY: superimage-nodeps supernod
+superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
+superimage-nodeps supernod: $(LPMAKE) $(BUILD_SUPER_IMAGE) \
+    | $(foreach p, $(BOARD_SUPER_PARTITION_PARTITION_LIST), $(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
+	$(call pretty,"Make super image from unsigned images: $(INSTALLED_SUPERIMAGE_TARGET)")
+	mkdir -p $(intermediates)
+	rm -rf $(intermediates)/misc_info.txt
+	$(call dump-dynamic-partitions-info,$(intermediates)/misc_info.txt)
+ifeq ($(AB_OTA_UPDATER),true)
+	echo "ab_update=true" >> $(intermediates)/misc_info.txt
 endif
+	$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(intermediates)/misc_info.txt;)
+	PATH=$(dir $(LPMAKE)):$$PATH \
+	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_TARGET)
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_TARGET))
 
