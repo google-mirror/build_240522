@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3688df92_952b34db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120648
+      },
+      "writtenOn": "2019-03-12T02:47:30Z",
+      "side": 1,
+      "message": "like the title says: \"Use allowZip64\u003dTrue by default\"",
+      "parentUuid": "2ddaa777_d23e762e",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "4be9e8ce352f1eadb9446e2ae30efbd5591d2fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c071b745_c0c62ec4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-11T15:42:12Z",
       "side": 1,
       "message": "zip64 !\u003d using _FILE_OFFSET_BITS\u003d64\n\nlibziparchive doesn\u0027t support archives using zip64 extensions. If all you want is to support unpacking \u003e 2GiB (but \u003c 4GiB) files, that\u0027s expected to work without this change.",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4be9e8ce352f1eadb9446e2ae30efbd5591d2fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b01a95ff_a8043f0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120648
+      },
+      "writtenOn": "2019-03-12T02:47:30Z",
+      "side": 1,
+      "message": "Is there any plan to support zip64 for libziparchive?  Can we introduce this change after that is done?",
+      "parentUuid": "c071b745_c0c62ec4",
       "range": {
         "startLine": 11,
         "startChar": 28,
