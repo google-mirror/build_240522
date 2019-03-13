@@ -836,16 +836,17 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
     ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
         $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE cannot be true for devices with dynamic partitions)
     endif
-
-    requirements := \
-        PRODUCT_USE_DYNAMIC_PARTITION_SIZE \
-        PRODUCT_BUILD_SUPER_PARTITION \
-
-    $(foreach req,$(requirements),$(if $(filter false,$($(req))),\
-        $(error PRODUCT_USE_DYNAMIC_PARTITIONS requires $(req) to be true)))
-
-    requirements :=
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+        $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
+    endif
 endif
+
+ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+        $(error Can only build super partition for devices with dynamic partitions)
+    endif
+endif
+
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
 
