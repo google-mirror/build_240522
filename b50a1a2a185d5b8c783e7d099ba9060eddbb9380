@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c8bd1e1_ae6b7b02",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-13T21:13:01Z",
+      "side": 1,
+      "message": "Note: the value of PRODUCT_USE_DYNAMIC_PARTITION_SIZE will be PRODUCT_USE_DYNAMIC_PARTITIONS if unset. See product_config.mk. Hence, it makes sense to check for PRODUCT_USE_DYNAMIC_PARTITION_SIZE !\u003d \"true\" here (instead of PRODUCT_USE_DYNAMIC_PARTITION_SIZE \u003d\u003d \"false\")",
+      "revId": "b50a1a2a185d5b8c783e7d099ba9060eddbb9380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
