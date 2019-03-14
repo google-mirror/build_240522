@@ -103,6 +103,7 @@ $(proto_java_sources_file_stamp) : $(proto_sources_fullpath) $(PROTOC)
 #TODO: protoc should output the dependencies introduced by imports.
 
 ALL_MODULES.$(my_register_name).PROTO_FILES := $(proto_sources_fullpath)
+ALL_MODULES.$(my_register_name).PROTO_SRC := $(proto_java_sources_dir)
 endif # proto_sources
 
 #########################################
