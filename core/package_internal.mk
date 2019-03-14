@@ -109,14 +109,20 @@ include $(BUILD_SYSTEM)/force_aapt2.mk
 # Process Support Library dependencies.
 include $(BUILD_SYSTEM)/support_libraries.mk
 
-package_resource_overlays := $(strip \
+all_package_resource_overlays := $(strip \
     $(wildcard $(foreach dir, $(PRODUCT_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))) \
     $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
 
+static_resource_overlays :=
+ifneq ($(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS),)
+  static_resource_overlays += $(filter $(addsuffix %,$(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS)),$(all_package_resource_overlays))
+endif
+maybe_runtime_resource_overlays := $(filter-out $(static_resource_overlays),$(all_package_resource_overlays))
+
 enforce_rro_enabled :=
-ifneq ($(package_resource_overlays),)
+ifneq ($(maybe_runtime_resource_overlays),)
   ifeq ($(PRODUCT_ENFORCE_RRO_TARGETS),*)
     # * means all system APKs, so enable conditionally based on module path.
 
@@ -139,20 +145,11 @@ ifneq ($(package_resource_overlays),)
   endif
 endif
 
-ifdef enforce_rro_enabled
-  ifneq ($(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS),)
-    static_only_resource_overlays := $(filter $(addsuffix %,$(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS)),$(package_resource_overlays))
-    ifneq ($(static_only_resource_overlays),)
-      package_resource_overlays := $(filter-out $(static_only_resource_overlays),$(package_resource_overlays))
-      LOCAL_RESOURCE_DIR := $(static_only_resource_overlays) $(LOCAL_RESOURCE_DIR)
-      ifeq ($(package_resource_overlays),)
-        enforce_rro_enabled :=
-      endif
-    endif
-  endif
-else
-  LOCAL_RESOURCE_DIR := $(package_resource_overlays) $(LOCAL_RESOURCE_DIR)
+ifndef enforce_rro_enabled
+  static_resource_overlays += maybe_runtime_resource_overlays
 endif
+
+LOCAL_RESOURCE_DIR := $(static_resource_overlays) $(LOCAL_RESOURCE_DIR)
 
 all_assets := $(strip \
     $(foreach dir, $(LOCAL_ASSET_DIR), \
@@ -799,11 +796,11 @@ ifdef enforce_rro_enabled
     enforce_rro_manifest_package_info := $(full_android_manifest)
   endif
 
-$(call append_enforce_rro_sources, \
-    $(my_register_name), \
-    $(enforce_rro_is_manifest_package_name), \
-    $(enforce_rro_manifest_package_info), \
-    $(enforce_rro_use_res_lib), \
-    $(package_resource_overlays) \
-    )
-endif  # enforce_rro_enabled
+  $(call append_enforce_rro_sources, \
+      $(my_register_name), \
+      $(enforce_rro_is_manifest_package_name), \
+      $(enforce_rro_manifest_package_info), \
+      $(enforce_rro_use_res_lib), \
+      $(maybe_runtime_resource_overlays) \
+  )
+endif
