@@ -32,24 +32,6 @@ TARGET_COPY_OUT_PRODUCT := system/product
 # the devices with metadata parition
 BOARD_USES_METADATA_PARTITION := true
 
-# Android Verified Boot (AVB):
-#   Set AVB_VBMETA_IMAGE_FLAGS_VERIFICATION_DISABLED (--flags 2) in
-#   vbmeta.img to disable AVB verification. Also set the rollback index
-#   to zero, to prevent the device bootloader from updating the last seen
-#   rollback index in the tamper-evident storage.
-#
-# To disable AVB for GSI, use the vbmeta.img and the GSI together.
-# To enable AVB for GSI, include the GSI public key into the device-specific
-# vbmeta.img.
-BOARD_AVB_ROLLBACK_INDEX := 0
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
-
-# Enable chain partition for system.
-BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
-
 # GSI specific System Properties
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
