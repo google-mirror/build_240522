@@ -26,6 +26,11 @@ TARGET_PRELINK_MODULE := false
 
 include build/make/target/board/BoardConfigEmuCommon.mk
 include build/make/target/board/BoardConfigGsiCommon.mk
+TARGET_NO_KERNEL := false
+TARGET_NO_RECOVERY := false
+
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 
