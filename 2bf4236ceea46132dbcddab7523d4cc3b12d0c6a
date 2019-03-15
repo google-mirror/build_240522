@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3be04316_55bbf938",
+        "filename": "target/board/generic_x86_64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-03-15T17:17:48Z",
+      "side": 1,
+      "message": "This should be set by https://android-review.googlesource.com/c/platform/build/+/930417/1/core/Makefile#483.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "2bf4236ceea46132dbcddab7523d4cc3b12d0c6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
