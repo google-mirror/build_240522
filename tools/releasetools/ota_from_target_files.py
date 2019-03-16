@@ -1939,6 +1939,26 @@ def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
   return target_file
 
 
+def GetTargetFilesZipWithRemovedPartitions(input_file, force_full_partitions):
+  """Returns a target_files.zip that removes the partitions from the list."""
+  with zipfile.ZipFile(input_file) as input_zip:
+    partition_list = input_zip.read(AB_PARTITIONS).split('\n')
+
+  updated_list = [p for p in partition_list if p not in force_full_partitions]
+  assert partition_list != updated_list, \
+      "Failed to find partitions '{}' in the update list".format(
+          force_full_partitions)
+
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  shutil.copyfile(input_file, target_file)
+  common.ZipDelete(target_file, AB_PARTITIONS)
+
+  # Add the new list.
+  with zipfile.ZipFile(target_file, 'a', allowZip64=True) as target_zip:
+    common.ZipWriteStr(target_zip, AB_PARTITIONS, '\n'.join(updated_list))
+  return target_file
+
+
 def WriteABOTAPackageWithBrilloScript(target_file, output_file,
                                       source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
@@ -1966,6 +1986,10 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
         target_info.get("dynamic_partition_list").strip().split())
   elif OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
+
+  if OPTIONS.force_full_partitions:
+    source_file = GetTargetFilesZipWithRemovedPartitions(
+        source_file, OPTIONS.force_full_partitions)
 
   # Generate payload.
   payload = Payload()
@@ -2102,6 +2126,8 @@ def main(argv):
       OPTIONS.skip_compatibility_check = True
     elif o == "--output_metadata_path":
       OPTIONS.output_metadata_path = a
+    elif o == "--force_full_partitions":
+      OPTIONS.force_full_partitions = a.split(',')
     else:
       return False
     return True
@@ -2135,6 +2161,7 @@ def main(argv):
                                  "retrofit_dynamic_partitions",
                                  "skip_compatibility_check",
                                  "output_metadata_path=",
+                                 "force_full_partitions=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
