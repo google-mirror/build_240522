@@ -23,7 +23,7 @@ import os
 import sys
 
 ANDROID_MANIFEST_TEMPLATE="""<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="%s.auto_generated_rro__"
+    package="%s.auto_generated_rro_%s__"
     android:versionCode="1"
     android:versionName="1.0">
     <overlay android:targetPackage="%s" android:priority="0" android:isStatic="true"/>
@@ -40,6 +40,9 @@ def get_args():
         '-p', '--package-info', required=True,
         help='Manifest package name or manifest file path of source module.')
     parser.add_argument(
+        '--partition', required=True,
+        help='The partition this RRO package is installed on.')
+    parser.add_argument(
         '-o', '--output', required=True,
         help='Output manifest file path.')
     return parser.parse_args()
@@ -48,6 +51,7 @@ def get_args():
 def main(argv):
   args = get_args()
 
+  partition = args.partition
   if args.use_package_name:
     package_name = args.package_info
   else:
@@ -58,7 +62,7 @@ def main(argv):
       package_name = dom.documentElement.getAttribute('package')
 
   with open(args.output, 'w+') as f:
-    f.write(ANDROID_MANIFEST_TEMPLATE % (package_name, package_name))
+    f.write(ANDROID_MANIFEST_TEMPLATE % (package_name, partition, package_name))
     f.close()
 
 

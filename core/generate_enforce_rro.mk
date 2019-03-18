@@ -1,6 +1,6 @@
 include $(CLEAR_VARS)
 
-enforce_rro_module := $(enforce_rro_source_module)__auto_generated_rro
+enforce_rro_module := $(enforce_rro_source_module)__auto_generated_rro_$(enforce_rro_partition)
 LOCAL_PACKAGE_NAME := $(enforce_rro_module)
 
 intermediates := $(call intermediates-dir-for,APPS,$(LOCAL_PACKAGE_NAME),,COMMON)
@@ -18,6 +18,7 @@ $(rro_android_manifest_file): build/make/tools/generate-enforce-rro-android-mani
 	$(hide) build/make/tools/generate-enforce-rro-android-manifest.py \
 	    --package-info $(PRIVATE_PACKAGE_INFO) \
 	    $(use_package_name_arg) \
+	    --partition $(enforce_rro_partition) \
 	    -o $@
 
 LOCAL_PATH:= $(intermediates)
@@ -31,7 +32,14 @@ LOCAL_CERTIFICATE := platform
 
 LOCAL_AAPT_FLAGS += --auto-add-overlay
 LOCAL_RESOURCE_DIR := $(enforce_rro_source_overlays)
-LOCAL_PRODUCT_MODULE := true
+
+ifeq (product,$(enforce_rro_partition))
+  LOCAL_PRODUCT_MODULE := true
+else ifeq (vendor,$(enforce_rro_partition))
+  LOCAL_VENDOR_MODULE := true
+else
+  $(error Unsupported partition. Want: [vendor/product] Got: [$(enforce_rro_partition)])
+endif
 
 ifneq (,$(LOCAL_RES_LIBRARIES))
   # Technically we are linking against the app (if only to grab its resources),
