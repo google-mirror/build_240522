@@ -2128,12 +2128,57 @@ define create-vendor-odm-symlink
 endef
 endif
 
+# Ad-hoc check that libraries that should only be in APEXes don't end up in the
+# system image. For the Runtime APEX this complements the checks in
+# art/build/apex/art_apex_test.py.
+# TODO(b/124293228): Fix remaining bugs and add these libraries to the list:
+#   libart-compiler.so
+#   libart-dexlayout.so
+#   libart.so
+#   libartbase.so
+#   libartpalette.so
+#   libdexfile.so
+#   libicui18n.so
+#   libicuuc.so
+#   libprofile.so
+#   libsigchain.so
+#   libtombstoned_client.so
+# TODO(b/128708192): Implement this restriction in Soong instead.
+APEX_MODULE_LIBS= \
+  libadbconnection.so \
+  libandroidicu.so \
+  libdexfile_external.so \
+  libdt_fd_forward.so \
+  libdt_socket.so \
+  libjavacore.so \
+  libjdwp.so \
+  libnativebridge.so \
+  libnativehelper.so \
+  libnativeloader.so \
+  libnpt.so \
+  libopenjdk.so \
+  libopenjdkjvm.so \
+  libopenjdkjvmti.so \
+
+define check-apex-libs-absence
+$(hide) ( \
+  cd $(TARGET_OUT); \
+  findres=$$(find lib* -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) -print) || exit 1; \
+  if [ -n "$$findres" ]; then \
+    echo "APEX libraries found in system image:" 1>&2; \
+    echo "$$findres" | sort 1>&2; \
+    false; \
+  fi; \
+)
+endef
+
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   $(call create-system-product_services-symlink)
+  $(call check-apex-libs-absence)
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-image-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt,system, \
       skip_fsck=true)
