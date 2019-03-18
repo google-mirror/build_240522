@@ -754,7 +754,7 @@ def ExtractSystemOtherAvbKey(in_dir, glob_dict):
 
   # Extracts the public key used to sign system_other.img, into system.img:
   #   /system/etc/security/avb/system_other.avbpubkey.
-  avbtool = os.getenv('AVBTOOL') or glob_dict.get("avb_avbtool")
+  avbtool = glob_dict.get("avb_avbtool")
   extract_from = glob_dict.get("avb_system_other_key_path")
   cmd = [avbtool, "extract_public_key", "--key", extract_from,
          "--output", extract_to]
