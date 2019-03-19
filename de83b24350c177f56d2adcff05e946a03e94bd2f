@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b06ea0ba_d3928bd1",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-03-19T18:24:57Z",
+      "side": 1,
+      "message": "Keep these alphabetized",
+      "revId": "de83b24350c177f56d2adcff05e946a03e94bd2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
