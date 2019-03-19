@@ -299,6 +299,17 @@ def process_misc_info_txt(
   for key in system_misc_info_keys:
     merged_info_dict[key] = system_info_dict[key]
 
+  # Merge misc info keys used for Dynamic Partitions.
+  if merged_info_dict.get('use_dynamic_partitions') == 'true':
+    merged_info_dict['dynamic_partition_list'] = '%s %s' % (
+        system_info_dict.get('dynamic_partition_list', ''),
+        merged_info_dict.get('dynamic_partition_list', ''))
+    for partition_group in merged_info_dict['super_partition_groups'].split(' '):
+      key = 'super_%s_partition_list' % partition_group
+      merged_info_dict[key] = '%s %s' % (
+        system_info_dict.get(key, ''),
+        merged_info_dict.get(key, ''))
+
   output_misc_info_txt = os.path.join(
       output_target_files_temp_dir,
       'META', 'misc_info.txt')
