@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37592641_01849637",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2019-03-19T10:19:20Z",
+      "side": 1,
+      "message": "Maybe move to Line 629?",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 25
+      },
+      "revId": "fe04351f6fbb1816c5033ca342ebd8c1a93c75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
