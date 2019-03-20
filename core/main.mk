@@ -1429,6 +1429,9 @@ endif
 .PHONY: ramdisk
 ramdisk: $(INSTALLED_RAMDISK_TARGET)
 
+.PHONY: ramdisk_debug
+ramdisk_debug: $(INSTALLED_DEBUG_RAMDISK_TARGET)
+
 .PHONY: systemtarball
 systemtarball: $(INSTALLED_SYSTEMTARBALL_TARGET)
 
@@ -1475,6 +1478,9 @@ superimage_empty: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
 .PHONY: bootimage
 bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
 
+.PHONY: bootimage_debug
+bootimage_debug: $(INSTALLED_DEBUG_BOOTIMAGE_TARGET)
+
 .PHONY: vbmetaimage
 vbmetaimage: $(INSTALLED_VBMETAIMAGE_TARGET)
 
@@ -1518,6 +1524,14 @@ droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
     auxiliary \
     soong_docs
+
+# Add boot-debug.img and ramdisk-debug.img, for user build.
+ifeq ($(TARGET_BUILD_VARIANT),user)
+droidcore: $(INSTALLED_DEBUG_BOOTIMAGE_TARGET) \
+    $(INSTALLED_DEBUG_RAMDISK_TARGET) \
+    $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
+    $(INSTALLED_FILES_JSON_DEBUG_RAMDISK)
+endif
 
 # dist_files only for putting your library into the dist directory with a full build.
 .PHONY: dist_files
@@ -1631,6 +1645,15 @@ else # TARGET_BUILD_APPS
     $(call dist-for-goals, droidcore, \
       $(INSTALLED_FILES_FILE_RAMDISK) \
       $(INSTALLED_FILES_JSON_RAMDISK) \
+    )
+  endif
+
+  ifeq ($(TARGET_BUILD_VARIANT),user)
+    $(call dist-for-goals, droidcore, \
+      $(INSTALLED_DEBUG_BOOTIMAGE_TARGET) \
+      $(INSTALLED_DEBUG_RAMDISK_TARGET) \
+      $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_JSON_DEBUG_RAMDISK) \
     )
   endif
 
