@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9824ca7_895c91b7",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-03-20T01:08:34Z",
+      "side": 1,
+      "message": "It looks tricky to properly set up the keys in the two configs:\n- \u0027use_dynamic_partitions\u0027 needs to be set in at least one of them;\n- \u0027dynamic_partition_list\u0027 must not be present in system_misc_info_keys. otherwise the merged_info_dict at L300 will pick up the value from system;\n- \u0027super_partition_groups\u0027 should come from which config?\n- all the rest of \u0027super_*_partition_list\u0027 from system target_files needs to be explicitly listed to be picked up;\n- how about \u0027super_*_group_size\u0027?",
+      "range": {
+        "startLine": 306,
+        "startChar": 8,
+        "endLine": 306,
+        "endChar": 58
+      },
+      "revId": "17b7099ff1856645d50d04630338ce82df348435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
