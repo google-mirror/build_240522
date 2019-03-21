@@ -57,6 +57,10 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
     system/product/% \
     system/product_services/%
 
+# Allow 'adb root' in USER build GSI, if a special ramdisk is used and
+# the device is unlocked. See b/126493225 for details.
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
+    system/etc/adb_debug.prop
 
 # Split selinux policy
 PRODUCT_FULL_TREBLE_OVERRIDE := true
@@ -97,3 +101,7 @@ PRODUCT_COPY_FILES += \
 #   Provide a libnfc-nci.conf to GSI product
 PRODUCT_COPY_FILES += \
     device/generic/common/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
+
+# Allow adb root on GSI user build
+PRODUCT_COPY_FILES += \
+    build/make/target/product/gsi/adb_debug.prop:$(TARGET_COPY_OUT_SYSTEM)/etc/adb_debug.prop
