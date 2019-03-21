@@ -1,0 +1,13 @@
+# Note: This file has the highest priority to override other system
+# properties, if a special ramdisk "/force_debuggable" is used and the
+# device is unlocked.
+
+# Disable adb authentication.
+ro.adb.secure=0
+
+# Allow 'adb root' in USER build, if the device is unlocked.
+ro.debuggable=1
+
+# Introduce this property to indicate that init has loaded adb_debug.prop,
+# if a special ramdisk is used and the device is unlocked.
+ro.force.debuggable=1
