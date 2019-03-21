@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38bf2e90_b67b763c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-03-21T16:50:54Z",
+      "side": 1,
+      "message": "This file will be removed after b/116660991, but then $(TARGET_OUT_ETC)/security/otacerts.zip will be in the same situation. The goal is to have $(TARGET_OUT_ETC)/security/otacerts.zip carrying the keys for system image, and $(TARGET_OUT_PRODUCT_ETC)/security/otacerts.zip carrying product-specific keys.\n\nAB_OTA_UPDATER (i.e. ro.build.ab_update) should also go to /product (or maybe /vendor), which determines the update type for a given device. But for the change in this CL, I think it looks fine to me.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "571fab0610dc51afafe3d33c1ab460b61adeba00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
