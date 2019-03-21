@@ -1,0 +1,9 @@
+Verified+1: Bowgo Tsai <bowgotsai@google.com>
+Autosubmit+1: Bowgo Tsai <bowgotsai@google.com>
+Presubmit-Ready+1: Bowgo Tsai <bowgotsai@google.com>
+Build-Cop-Override+1: Vince Chiu <vincechiu@google.com>
+Submitted-by: Bowgo Tsai <bowgotsai@google.com>
+Submitted-at: Thu, 21 Mar 2019 07:01:52 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/930850
+Project: platform/build
+Branch: refs/heads/master
