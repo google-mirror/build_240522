@@ -4216,15 +4216,12 @@ $(SYMBOLS_ZIP): $(SOONG_ZIP)
 	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_UNSTRIPPED) $(dir $(PRIVATE_LIST_FILE))
 	$(hide) find $(TARGET_OUT_UNSTRIPPED) | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(OUT_DIR)/.. -l $(PRIVATE_LIST_FILE)
+
 # -----------------------------------------------------------------
-# A zip of the coverage directory.
+# A zip of the native coverage files.  Keep the full paths to be
+# able to map gcno <-> gcda files.
 #
-name := $(TARGET_PRODUCT)
-ifeq ($(TARGET_BUILD_TYPE),debug)
-name := $(name)_debug
-endif
-name := $(name)-coverage-$(FILE_NAME_TAG)
-COVERAGE_ZIP := $(PRODUCT_OUT)/$(name).zip
+COVERAGE_ZIP := $(PRODUCT_OUT)/gcov-report-files-all.zip
 ifndef TARGET_BUILD_APPS
 $(COVERAGE_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
@@ -4240,8 +4237,8 @@ $(COVERAGE_ZIP): $(SOONG_ZIP)
 	@echo "Package coverage: $@"
 	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
 	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_COVERAGE) $(dir $(PRIVATE_LIST_FILE))
-	$(hide) find $(TARGET_OUT_COVERAGE) | sort >$(PRIVATE_LIST_FILE)
-	$(hide) $(SOONG_ZIP) -d -o $@ -C $(TARGET_OUT_COVERAGE) -l $(PRIVATE_LIST_FILE)
+	$(hide) find $(OUT_DIR) -name "*.gcno" | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SOONG_ZIP) -d -o $@ -l $(PRIVATE_LIST_FILE)
 
 # -----------------------------------------------------------------
 # A zip of the Android Apps. Not keeping full path so that we don't
