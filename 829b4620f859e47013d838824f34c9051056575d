@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ecc6f28_1adf5ba9",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-22T15:05:10Z",
+      "side": 1,
+      "message": "SzuWei, I assumed GSI stills wants this set, but LMK if not.",
+      "revId": "829b4620f859e47013d838824f34c9051056575d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
