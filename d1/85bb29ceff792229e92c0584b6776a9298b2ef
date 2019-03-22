@@ -1,0 +1,9 @@
+Verified+1: Martin Stjernholm <mast@google.com>
+Autosubmit+1: Martin Stjernholm <mast@google.com>
+Presubmit-Ready+1: Martin Stjernholm <mast@google.com>
+Code-Review+2: Anton Hansson <hansson@google.com>
+Submitted-by: Martin Stjernholm <mast@google.com>
+Submitted-at: Fri, 22 Mar 2019 15:35:07 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/932361
+Project: platform/build
+Branch: refs/heads/master
