@@ -68,3 +68,6 @@ TARGET_ENABLE_MEDIADRM_64 :=
 # Ordinary (non-flattened) APEX may require kernel changes. For maximum compatibility,
 # use flattened APEX for GSI
 TARGET_FLATTEN_APEX := true
+
+# system-as-root was mandatory in Android P
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
