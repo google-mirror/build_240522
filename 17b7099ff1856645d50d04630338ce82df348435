@@ -22,6 +22,30 @@
       "revId": "17b7099ff1856645d50d04630338ce82df348435",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "222270c5_7966cbee",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-03-22T21:49:36Z",
+      "side": 1,
+      "message": "Great catches, thanks Tao! I believe I\u0027ve addressed them but let me know:\n\n* It now checks that \u0027use_dynamic_partitions\u0027 is set for both.\n* I added verifying that dynamic_partition_list and super_partition_groups don\u0027t come from the system misc_info.txt in validate_config_lists()\n* I added a comment to make it clear that super partition groups and sizes come from the other misc_info, to allow per-board variation for a shared system image. I also added verifying that the other misc_info contains super_*_group_size for each partition group.",
+      "parentUuid": "a9824ca7_895c91b7",
+      "range": {
+        "startLine": 306,
+        "startChar": 8,
+        "endLine": 306,
+        "endChar": 58
+      },
+      "revId": "17b7099ff1856645d50d04630338ce82df348435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
