@@ -4216,16 +4216,12 @@ $(SYMBOLS_ZIP): $(SOONG_ZIP)
 	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_UNSTRIPPED) $(dir $(PRIVATE_LIST_FILE))
 	$(hide) find $(TARGET_OUT_UNSTRIPPED) | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(OUT_DIR)/.. -l $(PRIVATE_LIST_FILE)
+
 # -----------------------------------------------------------------
-# A zip of the coverage directory.
+# A zip of the native coverage files.  Keep the full paths to be
+# able to map gcno <-> gcda files.
 #
-name := $(TARGET_PRODUCT)
-ifeq ($(TARGET_BUILD_TYPE),debug)
-name := $(name)_debug
-endif
-name := $(name)-coverage-$(FILE_NAME_TAG)
-COVERAGE_ZIP := $(PRODUCT_OUT)/$(name).zip
-ifndef TARGET_BUILD_APPS
+COVERAGE_ZIP := $(PRODUCT_OUT)/gcov-report-files-all.zip
 $(COVERAGE_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -4234,14 +4230,14 @@ $(COVERAGE_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCT_SERVICESIMAGE_TARGET) \
 	    $(INSTALLED_ODMIMAGE_TARGET)
-endif
-$(COVERAGE_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,coverage)/filelist
-$(COVERAGE_ZIP): $(SOONG_ZIP)
+$(COVERAGE_ZIP):
 	@echo "Package coverage: $@"
-	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
-	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_COVERAGE) $(dir $(PRIVATE_LIST_FILE))
-	$(hide) find $(TARGET_OUT_COVERAGE) | sort >$(PRIVATE_LIST_FILE)
-	$(hide) $(SOONG_ZIP) -d -o $@ -C $(TARGET_OUT_COVERAGE) -l $(PRIVATE_LIST_FILE)
+	$(hide) find $(OUT_DIR) -name "*.gcno" | zip -@ -0 -q -X $@
+# Meaning of these options:
+#  -@ scan stdin for file paths to add to the zip
+#  -0 don't do any compression
+#  -q suppress most output
+#  -X skip storing extended file attributes
 
 # -----------------------------------------------------------------
 # A zip of the Android Apps. Not keeping full path so that we don't
