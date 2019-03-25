@@ -34,6 +34,24 @@
       "revId": "b099a10adddc80f58466e8c85d01be91e98e09e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3422fb96_99878a6c",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1071150
+      },
+      "writtenOn": "2019-03-25T14:48:42Z",
+      "side": 1,
+      "message": "For sanity, we could change art-tools from having LOCAL_REQUIRED_MODULES to LOCAL_HOST_REQUIRED_MODULES. \n\nOtherwise \u0027m art-tools\u0027 will build the system/ variants that Roland has flagged. Post-APEX, they should be used from the APEX.",
+      "parentUuid": "2887c8ec_95b06ad0",
+      "revId": "b099a10adddc80f58466e8c85d01be91e98e09e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
