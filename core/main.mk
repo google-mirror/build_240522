@@ -1238,17 +1238,18 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
     $(eval path_patterns := $(call resolve-product-relative-paths,$(requirements),%)) \
     $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
     $(eval files := $(call product-installed-files, $(makefile))) \
+    $(eval files_in_requirement := $(filter $(path_patterns),$(files))) \
     $(eval offending_files := $(filter-out $(path_patterns) $(whitelist_patterns) $(static_whitelist_patterns),$(files))) \
     $(call maybe-print-list-and-error,$(offending_files),$(makefile) produces files outside its artifact path requirement.) \
     $(eval unused_whitelist := $(filter-out $(files),$(whitelist_patterns))) \
     $(call maybe-print-list-and-error,$(unused_whitelist),$(makefile) includes redundant whitelist entries in its artifact path requirement.) \
     $(eval ### Optionally verify that nothing else produces files inside this artifact path requirement.) \
-    $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_target_FILES))) \
-    $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
-    $(eval all_offending_files += $(files_in_requirement)) \
+    $(eval target_files_in_requirement := $(filter $(path_patterns),$(product_target_FILES))) \
+    $(eval extra_files := $(filter-out $(files_in_requirement),$(target_files_in_requirement))) \
+    $(eval all_offending_files += $(extra_files)) \
     $(eval whitelist := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
     $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
-    $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
+    $(eval offending_files := $(filter-out $(whitelist_patterns),$(extra_files))) \
     $(eval enforcement := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
     $(if $(enforcement),\
       $(call maybe-print-list-and-error,$(offending_files),\
@@ -1258,6 +1259,9 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
         $(foreach p,$(whitelist_patterns),$(if $(filter $(p),$(extra_files)),,$(p))))) \
       $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.) \
     ) \
+    $(eval ### Verify the target produces all the files from $(makefile).) \
+    $(eval missing_files := $(filter-out $(target_files_in_requirement),$(files_in_requirement))) \
+    $(call maybe-print-list-and-error,$(missing_files),$(INTERNAL_PRODUCT) hides files from $(makefile).) \
   )
 $(PRODUCT_OUT)/offending_artifacts.txt:
 	rm -f $@
