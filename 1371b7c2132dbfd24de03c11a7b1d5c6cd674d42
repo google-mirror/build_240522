@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e8bd85a_8b75c971",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-25T18:13:21Z",
+      "side": 1,
+      "message": "...because:\n- mainline modules internal paths \n- EmergencyInfo needs to go move to /product\n\nI mainly wanted to get this CL exported, and I\u0027ll merge it once the two above things are resolved (I didn\u0027t want to make a whitelist variable).",
+      "revId": "1371b7c2132dbfd24de03c11a7b1d5c6cd674d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "943eaa79_78619289",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1248,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-25T18:13:21Z",
+      "side": 1,
+      "message": "slight modification here that presumably speeds things up a tiny bit",
+      "revId": "1371b7c2132dbfd24de03c11a7b1d5c6cd674d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
