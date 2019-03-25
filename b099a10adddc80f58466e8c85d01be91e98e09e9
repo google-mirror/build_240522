@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1e64c38_25799cce",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-03-25T13:47:47Z",
+      "side": 1,
+      "message": "Note: art-tools includes host and/or target tools. I\u0027m a bit worried that this change might trigger the construction and installation of oatdump (and other target tools) as well as their dependencies (libart.so, etc.) in /system (I haven\u0027t checked though).\n\nMaybe we should consider introducing art-tools-host?",
+      "revId": "b099a10adddc80f58466e8c85d01be91e98e09e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
