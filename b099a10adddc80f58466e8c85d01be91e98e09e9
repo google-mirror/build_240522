@@ -16,6 +16,24 @@
       "revId": "b099a10adddc80f58466e8c85d01be91e98e09e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2887c8ec_95b06ad0",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-25T13:52:04Z",
+      "side": 1,
+      "message": "I think PRODUCT_HOST_PACKAGES will filter out non-host packages (granted, if the host packages depend on target files, those would still get built I guess). Dan knows the details.",
+      "parentUuid": "f1e64c38_25799cce",
+      "revId": "b099a10adddc80f58466e8c85d01be91e98e09e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
