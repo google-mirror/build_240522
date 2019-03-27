@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d10bad31_e7dadfa8",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2187,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-03-27T18:12:46Z",
+      "side": 1,
+      "message": "thanks",
+      "range": {
+        "startLine": 2187,
+        "startChar": 0,
+        "endLine": 2187,
+        "endChar": 34
+      },
+      "revId": "ce035f6a50e2019cd5f3a0e56bf4612ce5c665fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdbafb6b_918f268a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-03-27T18:12:46Z",
+      "side": 1,
+      "message": "Ah, now that I\u0027m looking at it... I should have mentioned there is also $(error). You could consider using that, but you\u0027d have to merge the \"$$findres\" into it because it crashes right away",
+      "range": {
+        "startLine": 2216,
+        "startChar": 8,
+        "endLine": 2216,
+        "endChar": 15
+      },
+      "revId": "ce035f6a50e2019cd5f3a0e56bf4612ce5c665fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
