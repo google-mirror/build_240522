@@ -2182,6 +2182,10 @@ APEX_MODULE_LIBS= \
   libopenjdkjvmti.so \
   libpac.so \
 
+# An option to disable the check below, for local use since some build targets
+# still may create these libraries in /system (b/129006418).
+DISABLE_APEX_LIBS_ABSENCE_CHECK :=
+
 # If the check below fails, some library has ended up in system/lib or
 # system/lib64 that is intended to only go into some APEX package. The likely
 # cause is that a library or binary in /system has grown a dependency that
@@ -2204,15 +2208,16 @@ APEX_MODULE_LIBS= \
 # out to the APEX package owners and/or soong-team@, or
 # android-building@googlegroups.com externally.
 define check-apex-libs-absence
-$(hide) ( \
-  cd $(TARGET_OUT); \
-  findres=$$(find lib* -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) -print) || exit 1; \
-  if [ -n "$$findres" ]; then \
-    echo "APEX libraries found in system image (see comment in this makefile for details):" 1>&2; \
-    echo "$$findres" | sort 1>&2; \
-    false; \
-  fi; \
-)
+$(if $(DISABLE_APEX_LIBS_ABSENCE_CHECK),,
+  $(hide) ( \
+    cd $(TARGET_OUT); \
+    findres=$$(find lib* -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) -print) || exit 1; \
+    if [ -n "$$findres" ]; then \
+      $(warning APEX libraries found in system image (see comment in this makefile for details):) \
+      echo "$$findres" | sort 1>&2; \
+      false; \
+    fi; \
+  ))
 endef
 
 # $(1): output file
