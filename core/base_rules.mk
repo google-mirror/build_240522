@@ -684,8 +684,13 @@ else
       $(eval p := $(subst :,$(space),$(f))) \
       $(eval s := $(word 1,$(p))) \
       $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
-      $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
-        $(s):$(dir)/$(n)))))
+      $(eval my_compat_file_dst := $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+        $(dir)/$(n))) \
+      $(foreach dst, $(my_compat_file_dst), \
+	    $(if $(filter $(dst), $(ALL_COMPATIBILITY_SUPPORT_FILES)),, \
+          $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+            $(s):$(dir)/$(n)) \
+          $(eval ALL_COMPATIBILITY_SUPPORT_FILES += $(my_compat_file_dst)))))))
 
   ifneq (,$(test_config))
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
