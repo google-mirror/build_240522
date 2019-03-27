@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "1f6caf95_86f399b6",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-03-27T23:35:18Z",
+      "side": 1,
+      "message": "You could use \"ifeq\" here, finish with \"endif\" (cs/ will give you tons of examples)",
+      "range": {
+        "startLine": 2211,
+        "startChar": 0,
+        "endLine": 2211,
+        "endChar": 41
+      },
+      "revId": "ce035f6a50e2019cd5f3a0e56bf4612ce5c665fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdbafb6b_918f268a",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -60,6 +83,30 @@
       "side": 1,
       "message": "It expands in a weird way:\n\n(echo -e \\\"build/make/core/Makefile:2242: *** APEX libraries found in system image ...\\\" 2\u003e\u00261 \u0026\u0026 false ) \u0026\u0026 ... \u0026\u0026 (( cd out/target/product/taimen/system; findres\u003d\\$(find lib* -type f ...) || exit 1; if [ -n \\\"\\$findres\\\" ]; then  fi; ) ) \u0026\u0026 ...\n\nI.e. it goes first instead of inside the \"then fi\" block. Actually, $(warning) does the same - I just didn\u0027t notice since the message isn\u0027t printed (or maybe scrolls away) when the check succeeds. (Guess the uses of echo in the shell scripts a few lines up are there for good reason.)\n\nSo I changed back to echo again. It would be nice to expand the file and line location just by themselves, but I can\u0027t find anything for that.",
       "parentUuid": "fdbafb6b_918f268a",
+      "range": {
+        "startLine": 2216,
+        "startChar": 8,
+        "endLine": 2216,
+        "endChar": 15
+      },
+      "revId": "ce035f6a50e2019cd5f3a0e56bf4612ce5c665fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "129a09e2_e80ecd3c",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-03-27T23:35:18Z",
+      "side": 1,
+      "message": "Don\u0027t worry, nobody in the world fully understands makefile expansion... I think this gets evaluated when the Makefile is parsed, so you can\u0027t get `findres` in there. You\u0027d have to convert it to makefile commands. But leave it if too complicated.",
+      "parentUuid": "3b0079ab_e1344658",
       "range": {
         "startLine": 2216,
         "startChar": 8,
