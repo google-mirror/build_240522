@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3456635_1eb5d2d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-03-28T12:43:00Z",
+      "side": 1,
+      "message": "seems no this word?\n\nHow about: Unset default value of BUILDING_RAMDISK_IMAGE\n\nor\n\nFix ramdisk build error in no vendor.img lunch target",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "46029082070c101f28ba220d206780871f07f36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa4f2340_b5a91221",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-03-28T12:43:00Z",
+      "side": 1,
+      "message": "How about add a bit more explanation of the build error you met?\n\ne.g., \n\nWhen BUILDING_RAMDISK_IMAGE is set, it\u0027s possible that init_vendor module isn\u0027t built, which leads to build error. Unset BUILDING_RAMDISK_IMAGE and set it to True in base_vendor.img, where init_vendor is included.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "46029082070c101f28ba220d206780871f07f36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
