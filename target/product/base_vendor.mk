@@ -69,3 +69,10 @@ PRODUCT_PACKAGES += \
 # VINTF data for vendor image
 PRODUCT_PACKAGES += \
     device_compatibility_matrix.xml \
+
+ifeq ($(BOARD_INCLUDE_GSI_KEYS),true)
+PRODUCT_PACKAGES += \
+    q-gsi.avbpubkey \
+    r-gsi.avbpubkey \
+    s-gsi.avbpubkey
+endif
