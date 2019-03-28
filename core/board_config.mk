@@ -286,13 +286,13 @@ endif
 # This gets complicated with BOARD_USES_RECOVERY_AS_BOOT, so skipping for now.
 
 # Are we building a ramdisk image
-BUILDING_RAMDISK_IMAGE := true
+BUILDING_RAMDISK_IMAGE :=
 ifeq ($(PRODUCT_BUILD_RAMDISK_IMAGE),)
   # TODO: Be smarter about this. This probably only needs to happen when one of the follow is true:
   #  BUILDING_BOOT_IMAGE
   #  BUILDING_RECOVERY_IMAGE
-else ifeq ($(PRODUCT_BUILD_RAMDISK_IMAGE),false)
-  BUILDING_RAMDISK_IMAGE :=
+else ifeq ($(PRODUCT_BUILD_RAMDISK_IMAGE),true)
+  BUILDING_RAMDISK_IMAGE := true
 endif
 .KATI_READONLY := BUILDING_RAMDISK_IMAGE
 

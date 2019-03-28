@@ -47,7 +47,6 @@ PRODUCT_PACKAGES += \
     fs_config_dirs_nonsystem \
     gralloc.default \
     group \
-    init_vendor \
     libbundlewrapper \
     libclearkeycasplugin \
     libdownmix \
@@ -69,3 +68,8 @@ PRODUCT_PACKAGES += \
 # VINTF data for vendor image
 PRODUCT_PACKAGES += \
     device_compatibility_matrix.xml \
+
+# Build Ramdisk
+PRODUCT_BUILD_RAMDISK_IMAGE := true
+PRODUCT_PACKAGES += \
+    init_vendor \
