@@ -2165,7 +2165,6 @@ endif
 #   libicuuc.so
 #   libnativehelper.so  - cf_x86_phone-userdebug builds get this in system/lib/arm
 #   libprofile.so
-#   libsigchain.so
 #   libtombstoned_client.so
 APEX_MODULE_LIBS= \
   libadbconnection.so \
@@ -2181,6 +2180,7 @@ APEX_MODULE_LIBS= \
   libopenjdkjvm.so \
   libopenjdkjvmti.so \
   libpac.so \
+  libsigchain.so \
 
 # If the check below fails, some library has ended up in system/lib or
 # system/lib64 that is intended to only go into some APEX package. The likely
