@@ -70,6 +70,30 @@
       "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "422c6f26_bf1cd156",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-29T15:03:39Z",
+      "side": 1,
+      "message": "I shuffled things around to remove WAPPushManager before making these changes and removed all mention of it here",
+      "parentUuid": "f0b218d4_8300dcfe",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
