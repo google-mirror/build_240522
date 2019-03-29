@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebf5ba6c_8689361b",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-03-29T05:01:37Z",
+      "side": 1,
+      "message": "I am not sure if the name should be PRODUCT_XXX or can be BOARD_XXX",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 30
+      },
+      "revId": "056d642d49472f93f8cdf3e815184d8faba515d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
