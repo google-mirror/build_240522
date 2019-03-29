@@ -22,6 +22,30 @@
       "revId": "056d642d49472f93f8cdf3e815184d8faba515d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e001e01_7640941f",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-03-29T06:17:05Z",
+      "side": 1,
+      "message": "Me either. Actually it\u0027s not very clear to me for the diff between BOARD_* and PRODUCT_*.\n\nLet\u0027s see if Anton has other thoughts.",
+      "parentUuid": "ebf5ba6c_8689361b",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 30
+      },
+      "revId": "056d642d49472f93f8cdf3e815184d8faba515d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
