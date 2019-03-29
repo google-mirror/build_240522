@@ -11,7 +11,7 @@
 
 LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
 
-ifneq ($(LOCAL_SRC_FILES),)
+ifneq ($(strip $(LOCAL_SRC_FILES)),)
   $(error runtime resource overlay package should not contain sources)
 endif
 
