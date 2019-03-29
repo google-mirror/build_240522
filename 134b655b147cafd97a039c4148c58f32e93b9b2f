@@ -46,6 +46,30 @@
       "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b218d4_8300dcfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2019-03-29T14:47:17Z",
+      "side": 1,
+      "message": "OK I misinterpreted the commit message.",
+      "parentUuid": "7966013f_3c3a2762",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
