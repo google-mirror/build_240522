@@ -22,6 +22,30 @@
       "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7966013f_3c3a2762",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-03-29T14:40:15Z",
+      "side": 1,
+      "message": "hmmm don\u0027t think so? I\u0027m adding it to mainline.mk. In gsi_common, I\u0027m just removing the whitelist entry.",
+      "parentUuid": "38361438_ee5b3919",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "134b655b147cafd97a039c4148c58f32e93b9b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
