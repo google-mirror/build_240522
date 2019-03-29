@@ -613,6 +613,10 @@ $(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
 
 # Clean up old location of system_other.avbpubkey
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/security/avb/)
+
+# Clean up old location of super.img
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/super.img)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
