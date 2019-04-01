@@ -15,6 +15,7 @@
 #
 
 # Base modules (will move elsewhere, previously user tagged)
+OPTICAL_FINGERPRINT_SUPPORT = yes
 PRODUCT_PACKAGES += \
     20-dns.conf \
     95-configured \
@@ -154,6 +155,15 @@ endif
 # is removed from the bootclasspath.
 ifeq ($(REMOVE_ATB_FROM_BCP),true)
 PRODUCT_PACKAGES += framework-atb-backward-compatibility
+endif
+
+#This is only a demo to support OPTICAL_FINGERPRINT
+#please define OPTICAL_FINGERPRINT_SUPPORT as board config 
+#and OPTICAL_FINGERPRINT_SUPPORT is defined, please also remove 2.1
+ifeq (yes, $(strip $(OPTICAL_FINGERPRINT_SUPPORT)))
+PRODUCT_PACKAGES += android.hardware.biometrics.fingerprint@2.2-service
+else
+PRODUCT_PACKAGES += android.hardware.biometrics.fingerprint@2.1-service
 endif
 
 # Essential HAL modules
