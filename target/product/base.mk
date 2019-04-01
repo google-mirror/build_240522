@@ -156,6 +156,14 @@ ifeq ($(REMOVE_ATB_FROM_BCP),true)
 PRODUCT_PACKAGES += framework-atb-backward-compatibility
 endif
 
+#SID1: add for OPTICAL_FINGERPRINT_SUPPORT start
+ifeq (yes, $(strip $(OPTICAL_FINGERPRINT_SUPPORT)))
+PRODUCT_PACKAGES += android.hardware.biometrics.fingerprint@2.2-service
+else
+PRODUCT_PACKAGES += android.hardware.biometrics.fingerprint@2.1-service
+endif
+#SID1: add for OPTICAL_FINGERPRINT_SUPPORT end
+
 # Essential HAL modules
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.0-service \
