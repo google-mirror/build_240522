@@ -52,7 +52,7 @@ PRODUCT_PACKAGES += \
     cmd \
     com.android.conscrypt \
     com.android.location.provider \
-    com.android.resolv \
+    com.android.dnsresolver \
     com.android.tzdata \
     ContactsProvider \
     content \
