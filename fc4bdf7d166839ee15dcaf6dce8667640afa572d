@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9789db7f_596462a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-01T12:36:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we change that files to *not* set LOCAL_SRC_FILES instead?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
