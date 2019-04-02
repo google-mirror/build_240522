@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92bdf0fd_56aae021",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-04-02T16:29:28Z",
+      "side": 1,
+      "message": "To complete the topic, can you please also add libjavacrypto.so to the absence check at [1]? And while you\u0027re there, please feel free to add libandroidio.so as well (I got that in a CL somewhere but it\u0027s still in the hopper).\n\n[1] http://cs/aosp-master/build/make/core/Makefile?l\u003d2171-2184\u0026rcl\u003d5f4186b0007c9a4c78688cb999f972752c40e4fe",
+      "revId": "3d2f1347a653560eb74bedd657ae58a020d938e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
