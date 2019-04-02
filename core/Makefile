@@ -2201,9 +2201,11 @@ endif
 APEX_MODULE_LIBS= \
   libadbconnection.so \
   libandroidicu.so \
+  libandroidio.so \
   libdt_fd_forward.so \
   libdt_socket.so \
   libjavacore.so \
+  libjavacrypto.so \
   libjdwp.so \
   libnativebridge.so \
   libnativeloader.so \
