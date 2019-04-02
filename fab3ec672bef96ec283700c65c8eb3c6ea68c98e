@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c883f613_a198a47b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-02T12:17:50Z",
+      "side": 1,
+      "message": "...because there are no overlapping classes? which of he boot jars actually have overlapping classes?",
+      "revId": "fab3ec672bef96ec283700c65c8eb3c6ea68c98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
