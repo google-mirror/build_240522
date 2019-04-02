@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5e2a93_a04f2310",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-04-02T21:04:45Z",
+      "side": 1,
+      "message": "I think \"uninstallable\" (LOCAL_UNINSTALLABLE_MODULE :\u003d true) is more accurate.  There are two reasons why a module is not installed (a) it is an uninstallable module or (b) it is not in PRODUCT_PACKAGES or is not one of PRODUCT_PACKAGES dependencies.  I think you refer to uninstallable module here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "7a6af98afdbb525745a092ffba63673f04acf114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
