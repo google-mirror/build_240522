@@ -31,6 +31,7 @@ import os
 import os.path
 import re
 import shutil
+import sparse_img
 import sys
 
 import common
@@ -112,7 +113,16 @@ def GetFilesystemCharacteristics(image_path, sparse_image=True):
   return fs_dict
 
 
+def IsSparseImage(image_path):
+  try:
+    sparse_img.SparseImage(image_path)
+    return True
+  except ValueError:
+    return False
+
 def UnsparseImage(sparse_image_path, replace=True):
+  if not IsSparseImage(sparse_image_path):
+    return sparse_image_path
   img_dir = os.path.dirname(sparse_image_path)
   unsparse_image_path = "unsparse_" + os.path.basename(sparse_image_path)
   unsparse_image_path = os.path.join(img_dir, unsparse_image_path)
