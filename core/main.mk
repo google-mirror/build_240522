@@ -1242,6 +1242,8 @@ ifdef FULL_BUILD
 
   product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
   product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  $(warning $(sort $(product_host_FILES)))
+  $(warning $(sort $(product_target_FILES)))
   # WARNING: The product_MODULES variable is depended on by external files.
   product_MODULES := $(_pif_modules)
 
