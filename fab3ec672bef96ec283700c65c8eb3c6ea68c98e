@@ -16,6 +16,24 @@
       "revId": "fab3ec672bef96ec283700c65c8eb3c6ea68c98e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2a2bfcf_ac755f01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-04-02T12:24:08Z",
+      "side": 1,
+      "message": "We don\u0027t allow overlapping classes anymore. Classes in the boot classpath should be unique.",
+      "parentUuid": "c883f613_a198a47b",
+      "revId": "fab3ec672bef96ec283700c65c8eb3c6ea68c98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
