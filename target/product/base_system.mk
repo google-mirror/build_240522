@@ -321,8 +321,8 @@ endif
 # The order matters
 PRODUCT_BOOT_JARS := \
     $(TARGET_CORE_JARS) \
-    ext \
     framework \
+    ext \
     telephony-common \
     voip-common \
     ims-common
