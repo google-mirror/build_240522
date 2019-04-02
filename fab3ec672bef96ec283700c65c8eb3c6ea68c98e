@@ -34,6 +34,23 @@
       "revId": "fab3ec672bef96ec283700c65c8eb3c6ea68c98e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb58a89_f3c19ead",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-02T12:28:44Z",
+      "side": 1,
+      "message": "Can you remove this comment?",
+      "revId": "fab3ec672bef96ec283700c65c8eb3c6ea68c98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
