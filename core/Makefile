@@ -2192,8 +2192,6 @@ endif
 #   libartpalette.so
 #   libdexfile.so
 #   libdexfile_external.so  - aosp_marlin-userdebug gets this in a vndk-sp-Q subdirectory.
-#   libicui18n.so
-#   libicuuc.so
 #   libnativehelper.so  - cf_x86_phone-userdebug builds get this in system/lib/arm
 #   libprofile.so
 #   libsigchain.so  - cf_x86_phone-userdebug builds get this in system/lib/arm
@@ -2201,8 +2199,11 @@ endif
 APEX_MODULE_LIBS= \
   libadbconnection.so \
   libandroidicu.so \
+  libandroidio.so \
   libdt_fd_forward.so \
   libdt_socket.so \
+  libicui18n.so \
+  libicuuc.so \
   libjavacore.so \
   libjdwp.so \
   libnativebridge.so \
@@ -2212,6 +2213,10 @@ APEX_MODULE_LIBS= \
   libopenjdkjvm.so \
   libopenjdkjvmti.so \
   libpac.so \
+
+# Conscrypt APEX_MODULE_LIBS
+APEX_MODULE_LIBS += \
+  libjavacrypto.so \
 
 # An option to disable the check below, for local use since some build targets
 # still may create these libraries in /system (b/129006418).
