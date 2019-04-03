@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61872b91_6bb1f829",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-03T17:42:25Z",
+      "side": 1,
+      "message": "This will break the building of super_empty image on blueline?",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 64
+      },
+      "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
