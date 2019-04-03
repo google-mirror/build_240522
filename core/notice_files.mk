@@ -38,6 +38,8 @@ else
 endif
 endif
 
+installed_notice_file :=
+
 ifdef notice_file
 
 ifdef my_register_name
@@ -49,6 +51,7 @@ endif
 # not work for root and isn't exact, but it's probably good enough for
 # compliance.
 # Includes the leading slash
+module_installed_filename :=
 ifdef LOCAL_INSTALLED_MODULE
   module_installed_filename := $(patsubst $(PRODUCT_OUT)/%,%,$(LOCAL_INSTALLED_MODULE))
 else
@@ -71,11 +74,11 @@ else
       endif
       module_installed_filename := \
           $(patsubst $(PRODUCT_OUT)/%,%,$($(my_prefix)OUT_JAVA_LIBRARIES))/$(module_leaf)
-    else
-      $(error Cannot determine where to install NOTICE file for $(LOCAL_MODULE))
     endif # JAVA_LIBRARIES
   endif # STATIC_LIBRARIES
 endif
+
+ifdef module_installed_filename
 
 # In case it's actually a host file
 module_installed_filename := $(patsubst $(HOST_OUT)/%,%,$(module_installed_filename))
@@ -110,10 +113,8 @@ $(LOCAL_BUILT_MODULE): | $(installed_notice_file)
 endif  # JAVA_LIBRARIES
 endif  # TARGET_BUILD_APPS
 
-else
-# NOTICE file does not exist
-installed_notice_file :=
-endif
+endif  # module_installed_filename
+endif  # notice_file
 
 # Create a predictable, phony target to build this notice file.
 # Define it even if the notice file doesn't exist so that other
