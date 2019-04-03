@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7348679c_493db8a0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-03T17:38:49Z",
+      "side": 1,
+      "message": "There\u0027re only two callers (L99 and L372) of this function. Both of them explicitly check for sparse before calling. Is there another path that calls the function with sparse image?",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 17
+      },
+      "revId": "fd3f31e212615740ace990c16e11786d6a33764e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
