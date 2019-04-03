@@ -46,6 +46,30 @@
       "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9737e27c_b5b0ddfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-03T09:01:21Z",
+      "side": 1,
+      "message": "For the same reason we don\u0027t put try{}catch(Throwable x){} around every bit of code that we write - we want to fix bugs at their source. I think the error is working as intended -- you shouldn\u0027t set LOCAL_SRC_FILES at all for an RRO, it\u0027s wrong.",
+      "parentUuid": "bc2fa31e_a3dc43a3",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
