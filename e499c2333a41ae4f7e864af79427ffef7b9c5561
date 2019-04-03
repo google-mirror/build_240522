@@ -70,6 +70,30 @@
       "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f241c47_c720909b",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-03T17:48:31Z",
+      "side": 1,
+      "message": "To preserve current behavior of the script, I should check has_image here. But lpmake will ignore --sparse flag if there are no --image flags. See CL:938736 main(). Given that, it\u0027s fine to put a --sparse flag for super_empty.",
+      "parentUuid": "3f6dec32_0d5622ac",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 64
+      },
+      "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
