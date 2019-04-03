@@ -52,7 +52,8 @@ else ifneq ($(my_jni_shared_libraries),) # not my_embed_jni
   # Do not use order-only dependency, because we want to rebuild the image if an jni is updated.
   $(LOCAL_INSTALLED_MODULE) : $(my_installed_library)
 
-  ALL_MODULES.$(LOCAL_MODULE).INSTALLED += $(my_installed_library)
+  bit_suffix := $(if $(filter %64,$(TARGET_$(my_2nd_arch_prefix)ARCH)),:64,:32)
+  ALL_MODULES.$(LOCAL_MODULE).REQUIRED += $(addsuffix $(bit_suffix),$(LOCAL_JNI_SHARED_LIBRARIES))
 
   # Create symlink in the app specific lib path
   # Skip creating this symlink when running the second part of a target sanitization build.
