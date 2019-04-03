@@ -46,6 +46,30 @@
       "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f6dec32_0d5622ac",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-03T17:45:25Z",
+      "side": 1,
+      "message": "But it no longer checks for has_image? Unless the check on has_image was a no-op prior to this change.",
+      "parentUuid": "fc0067be_7aa3ac95",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 64
+      },
+      "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
