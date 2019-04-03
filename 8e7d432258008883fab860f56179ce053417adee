@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88b6fa44_4a4dc1ca",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4436,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-03T03:02:13Z",
+      "side": 1,
+      "message": "It\u0027s not needed in this case, as ninja guarantees the the directory of the output file exists before the rule is run.",
+      "revId": "8e7d432258008883fab860f56179ce053417adee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
