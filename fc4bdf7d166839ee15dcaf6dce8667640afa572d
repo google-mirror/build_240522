@@ -22,6 +22,30 @@
       "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc2fa31e_a3dc43a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1447100
+      },
+      "writtenOn": "2019-04-03T01:38:15Z",
+      "side": 1,
+      "message": "Yes, it\u0027s another solution.\nSet LOCAL_SRC_FILES in RRO modules is a mistake,however if we can avoid these mistakes by modify build logic,why don\u0027t we do it?",
+      "parentUuid": "9789db7f_596462a7",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
