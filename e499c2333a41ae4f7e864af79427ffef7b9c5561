@@ -22,6 +22,30 @@
       "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc0067be_7aa3ac95",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-03T17:43:55Z",
+      "side": 1,
+      "message": "It shouldn\u0027t, because this flag should be empty on real devices.",
+      "parentUuid": "61872b91_6bb1f829",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 64
+      },
+      "revId": "e499c2333a41ae4f7e864af79427ffef7b9c5561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
