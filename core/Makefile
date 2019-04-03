@@ -4433,6 +4433,7 @@ INSTALLED_SUPERIMAGE_TARGET := $(call intermediates-dir-for,PACKAGING,super.img)
 $(INSTALLED_SUPERIMAGE_TARGET): extracted_input_target_files := $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))
 $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
 	$(call pretty,"Target super fs image: $@")
+	mkdir -p $(dir $(INSTALLED_SUPERIMAGE_TARGET))
 	PATH=$(dir $(LPMAKE)):$$PATH \
 	    $(BUILD_SUPER_IMAGE) -v $(extracted_input_target_files) $@
 
@@ -4447,6 +4448,7 @@ superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
 	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
 	$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
 	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(intermediates)/misc_info.txt;)
+	mkdir -p $(dir $(INSTALLED_SUPERIMAGE_TARGET))
 	PATH=$(dir $(LPMAKE)):$$PATH \
 	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_TARGET)
 
