@@ -589,27 +589,31 @@ $(sort $(foreach m,$(1),\
     $(m))))
 endef
 
-# If a module is for a cross host os, the required modules must be for
-# that OS too.
-# If a module is built for 32-bit, the required modules must be 32-bit too;
-# Otherwise if the module is an executable or shared library,
-#   the required modules must be 64-bit;
-#   otherwise we require both 64-bit and 32-bit variant, if one exists.
+# The maps a "REQUIRED" entry to specific module variant. The logic is roughly:
+# - If a module is for a cross host os, the required modules is also for that OS
+# - entries explicitly suffixed with :64 or :32 resolve to that bitness
+# - otherwise,
+#   * if a module is built for 32-bit, the required modules is 32-bit too
+#   * if not: native modules get the same bitness, whereas other modules
+#     get both variants, if they exist.
 define select-bitness-of-required-modules
 $(foreach m,$(ALL_MODULES),\
   $(eval r := $(ALL_MODULES.$(m).REQUIRED))\
+  $(if $(ALL_MODULES.$(m).FOR_HOST_CROSS),\
+    $(eval r := $(addprefix host_cross_,$(r))))\
+  $(eval r_r := $(call get-32-bit-modules,$(patsubst %:32,%,$(filter %:32, $(r)))))
+  $(eval r_r += $(patsubst %:64,%,$(filter %:64, $(r)))) \
+  $(eval r := $(filter-out %:32 %:64,$(r))) \
   $(if $(r),\
-    $(if $(ALL_MODULES.$(m).FOR_HOST_CROSS),\
-      $(eval r := $(addprefix host_cross_,$(r))))\
     $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),\
-      $(eval r_r := $(call get-32-bit-modules-if-we-can,$(r))),\
+      $(eval r_r += $(call get-32-bit-modules-if-we-can,$(r))),\
       $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
-        $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-32-bit-modules,$(r)))\
+        $(eval r_r += $(r)),\
+        $(eval r_r += $(r) $(call get-32-bit-modules,$(r)))\
        )\
      )\
-     $(eval ALL_MODULES.$(m).REQUIRED := $(strip $(r_r)))\
   )\
+  $(eval ALL_MODULES.$(m).REQUIRED := $(strip $(r_r)))\
 )
 endef
 $(call select-bitness-of-required-modules)
@@ -1079,8 +1083,7 @@ endef
 #   foo resolves to both foo and foo_32 (if foo_32 is defined).
 #
 # Name resolution for LOCAL_REQUIRED_MODULES:
-#   If a module is built for 2nd arch, its required module resolves to
-#   32-bit variant, if it exits. See the select-bitness-of-required-modules definition.
+#   See the comment for the select-bitness-of-required-modules definition.
 # $(1): product makefile
 define product-installed-files
   $(eval _mk := $(strip $(1))) \
