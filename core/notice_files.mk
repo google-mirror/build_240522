@@ -71,11 +71,12 @@ else
       endif
       module_installed_filename := \
           $(patsubst $(PRODUCT_OUT)/%,%,$($(my_prefix)OUT_JAVA_LIBRARIES))/$(module_leaf)
-    else
-      $(error Cannot determine where to install NOTICE file for $(LOCAL_MODULE))
     endif # JAVA_LIBRARIES
   endif # STATIC_LIBRARIES
 endif
+endif # notice_file
+
+ifdef module_installed_filename
 
 # In case it's actually a host file
 module_installed_filename := $(patsubst $(HOST_OUT)/%,%,$(module_installed_filename))
@@ -110,10 +111,10 @@ $(LOCAL_BUILT_MODULE): | $(installed_notice_file)
 endif  # JAVA_LIBRARIES
 endif  # TARGET_BUILD_APPS
 
-else
-# NOTICE file does not exist
+else  # module_installed_filename
+# NOTICE file does not exist or need to be installed.
 installed_notice_file :=
-endif
+endif  # module_installed_filename
 
 # Create a predictable, phony target to build this notice file.
 # Define it even if the notice file doesn't exist so that other
