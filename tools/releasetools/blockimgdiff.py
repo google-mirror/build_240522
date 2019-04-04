@@ -102,10 +102,63 @@ class EmptyImage(Image):
     raise ValueError("Can't write data from EmptyImage to file")
 
 
-class DataImage(Image):
-  """An image wrapped around a single string of data."""
+class FileData(object):
+  """
+  An object wrapped around a file that mimics the behavior of a string for
+  DataImage to use.
+  """
+  def __init__(self, path):
+    self.path = path
+    self.file = open(path, 'r')
+    self._file_size = os.path.getsize(path)
+    self.suffix = ""
+    self.start = 0
+    self.end = self._file_size
 
-  def __init__(self, data, trim=False, pad=False):
+  def __len__(self):
+    assert self.end >= self.start
+    return self.end - self.start
+
+  def _normalize_index(self, idx):
+    if idx < -len(self): return 0
+    if idx < 0: return idx + len(self)
+    if idx < len(self): return idx
+    return len(self)
+
+  def __getslice__(self, rel_start, rel_end):
+    new = FileData(self.path)
+    new.suffix = self.suffix
+
+    rel_start = self._normalize_index(rel_start)
+    rel_end = self._normalize_index(rel_end)
+    if rel_end < rel_start: rel_end = rel_start
+
+    new.start = self.start + rel_start
+    new.end = self.start + rel_end
+    assert new.start <= new.end and new.end <= self.end, \
+      "FileData[%d:%d][%d:%d] becomes FileData[%d:%d]" % \
+      (self.start, self.end, rel_start, rel_end, new.start, new.end)
+    return new
+
+  def __iadd__(self, data):
+    self.suffix += data
+    self.end += len(data)
+
+  def __str__(self):
+    ret = ""
+    if self.start < self._file_size:
+      self.file.seek(self.start)
+      ret += self.file.read(min(self.end, self._file_size) - self.start)
+    if self.end > self._file_size:
+      ret += suffix[:self.end - self._file_size]
+    return ret
+
+
+class DataImage(Image):
+  """An image wrapped around a string-like object of data."""
+
+  def __init__(self, data, trim=False, pad=False,
+               hashtree_info_generator=None):
     self.data = data
     self.blocksize = 4096
 
@@ -155,6 +208,10 @@ class DataImage(Image):
 
     assert zero_blocks or nonzero_blocks or clobbered_blocks
 
+    self.hashtree_info = None
+    if hashtree_info_generator:
+      self.hashtree_info = hashtree_info_generator.Generate(self)
+
     self.file_map = dict()
     if zero_blocks:
       self.file_map["__ZERO"] = RangeSet(data=zero_blocks)
@@ -165,7 +222,7 @@ class DataImage(Image):
 
   def _GetRangeData(self, ranges):
     for s, e in ranges:
-      yield self.data[s*self.blocksize:e*self.blocksize]
+      yield str(self.data[s*self.blocksize:e*self.blocksize])
 
   def RangeSha1(self, ranges):
     h = sha1()
@@ -177,10 +234,10 @@ class DataImage(Image):
     return [self._GetRangeData(ranges)]
 
   def TotalSha1(self, include_clobbered_blocks=False):
+    ranges = self.care_map
     if not include_clobbered_blocks:
-      return self.RangeSha1(self.care_map.subtract(self.clobbered_blocks))
-    else:
-      return sha1(self.data).hexdigest()
+      ranges = ranges.subtract(self.clobbered_blocks)
+    return self.RangeSha1(ranges)
 
   def WriteRangeDataToFd(self, ranges, fd):
     for data in self._GetRangeData(ranges): # pylint: disable=not-an-iterable
