@@ -735,13 +735,8 @@ def GlobalDictFromImageProp(image_prop, mount_point):
   return d
 
 
-def SaveGlobalDict(filename, glob_dict):
-  with open(filename, "w") as f:
-    f.writelines(["%s=%s" % (key, value) for (key, value) in glob_dict.items()])
-
-
 def main(argv):
-  if len(argv) < 4 or len(argv) > 5:
+  if len(argv) != 4:
     print(__doc__)
     sys.exit(1)
 
@@ -751,7 +746,6 @@ def main(argv):
   glob_dict_file = argv[1]
   out_file = argv[2]
   target_out = argv[3]
-  prop_file_out = argv[4] if len(argv) >= 5 else None
 
   glob_dict = LoadGlobalDict(glob_dict_file)
   if "mount_point" in glob_dict:
@@ -790,10 +784,6 @@ def main(argv):
   except:
     logger.error("Failed to build %s from %s", out_file, in_dir)
     raise
-
-  if prop_file_out:
-    glob_dict_out = GlobalDictFromImageProp(image_properties, mount_point)
-    SaveGlobalDict(prop_file_out, glob_dict_out)
 
 
 if __name__ == '__main__':
