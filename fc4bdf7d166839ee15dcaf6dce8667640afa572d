@@ -70,6 +70,30 @@
       "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dba56f94_7f150cc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1447100
+      },
+      "writtenOn": "2019-04-04T00:47:19Z",
+      "side": 1,
+      "message": "Well, that\u0027s ok. We will turn to the other way which you\u0027ve suggested.",
+      "parentUuid": "9737e27c_b5b0ddfc",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "fc4bdf7d166839ee15dcaf6dce8667640afa572d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
