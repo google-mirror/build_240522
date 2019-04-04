@@ -103,9 +103,10 @@ class EmptyImage(Image):
 
 
 class DataImage(Image):
-  """An image wrapped around a single string of data."""
+  """An image wrapped around a string-like object of data."""
 
-  def __init__(self, data, trim=False, pad=False):
+  def __init__(self, data, trim=False, pad=False,
+               hashtree_info_generator=None):
     self.data = data
     self.blocksize = 4096
 
@@ -155,6 +156,10 @@ class DataImage(Image):
 
     assert zero_blocks or nonzero_blocks or clobbered_blocks
 
+    self.hashtree_info = None
+    if hashtree_info_generator:
+      self.hashtree_info = hashtree_info_generator.Generate(self)
+
     self.file_map = dict()
     if zero_blocks:
       self.file_map["__ZERO"] = RangeSet(data=zero_blocks)
@@ -165,7 +170,7 @@ class DataImage(Image):
 
   def _GetRangeData(self, ranges):
     for s, e in ranges:
-      yield self.data[s*self.blocksize:e*self.blocksize]
+      yield str(self.data[s*self.blocksize:e*self.blocksize])
 
   def RangeSha1(self, ranges):
     h = sha1()
@@ -177,14 +182,77 @@ class DataImage(Image):
     return [self._GetRangeData(ranges)]
 
   def TotalSha1(self, include_clobbered_blocks=False):
+    ranges = self.care_map
     if not include_clobbered_blocks:
-      return self.RangeSha1(self.care_map.subtract(self.clobbered_blocks))
-    else:
-      return sha1(self.data).hexdigest()
+      ranges = ranges.subtract(self.clobbered_blocks)
+    return self.RangeSha1(ranges)
 
   def WriteRangeDataToFd(self, ranges, fd):
     for data in self._GetRangeData(ranges): # pylint: disable=not-an-iterable
       fd.write(data)
+
+
+class FileData(object):
+  """
+  An object wrapped around a file that mimics the behavior of a string for
+  FileImage to use.
+  """
+  def __init__(self, path):
+    self._path = path
+    self._file_size = os.path.getsize(path)
+    self._file = open(path, 'r')
+    self._start = 0
+    self._end = self._file_size
+
+  def __len__(self):
+    assert self._end >= self._start
+    return self._end - self._start
+
+  def _normalize_index(self, idx):
+    if idx < 0:
+      return 0
+    if idx < len(self):
+      return idx
+    return len(self)
+
+  def __getslice__(self, rel_start, rel_end):
+    new = FileData(self._path)
+
+    rel_start = self._normalize_index(rel_start)
+    rel_end = self._normalize_index(rel_end)
+    if rel_end < rel_start:
+      rel_end = rel_start
+
+    new._start = self._start + rel_start
+    new._end = self._start + rel_end
+    return new
+
+  def __getitem__(self, key):
+    if isinstance(key, slice):
+      if key.step is not None or key.step != 1:
+        raise NotImplementedError(
+            "FileData doesn't support slices with step != 1")
+      return self.__getslice__(key.start, key.end)
+    elif isinstance(key, int):
+      if key < -len(self) or key >= len(self):
+        raise IndexError(str(key))
+      if key < 0:
+        return self[key + len(self)]
+      return self[key:key + 1]
+    else:
+      raise TypeError(type(key))
+
+  def __str__(self):
+    if self._start < self._file_size:
+      self._file.seek(self._start)
+      return self._file.read(min(self._end, self._file_size) - self._start)
+    return ""
+
+
+class FileImage(DataImage):
+  def __init__(self, path, hashtree_info_generator=None):
+    super(FileImage, self).__init__(FileData(path),
+        hashtree_info_generator=hashtree_info_generator)
 
 
 class Transfer(object):
