@@ -16,7 +16,7 @@
 
 import common
 from blockimgdiff import (
-    BlockImageDiff, EmptyImage, HeapItem, ImgdiffStats, Transfer)
+    BlockImageDiff, FileData, EmptyImage, HeapItem, ImgdiffStats, Transfer)
 from rangelib import RangeSet
 from test_utils import ReleaseToolsTestCase
 
@@ -261,3 +261,74 @@ class ImgdiffStatsTest(ReleaseToolsTestCase):
 
     self.assertRaises(AssertionError, imgdiff_stats.Log, "/system/app/app1.apk",
                       "invalid reason")
+
+
+class FileDataTest(ReleaseToolsTestCase):
+
+    def setUp(self):
+        self.file_path = common.MakeTempFile()
+        with open(self.file_path, 'w') as f:
+            f.write("file")
+        self.data = FileData(self.file_path)
+
+    def test_constructor(self):
+        self.assertEqual("file", str(self.data))
+
+    def test_len(self):
+        self.assertEqual(len("file"), len(self.data))
+
+    def test_iadd(self):
+        self.data += "12345"
+        self.assertEqual("file12345", str(self.data))
+        self.assertEqual(len("file12345"), len(self.data))
+
+        self.data += "67890"
+        self.assertEqual("file1234567890", str(self.data))
+        self.assertEqual(len("file1234567890"), len(self.data))
+
+    def slice_test(self, orig, depth=0):
+        if depth < 0: return
+        for start in range(-len(orig) - 1, len(orig) + 1):
+            for end in range(-len(orig) - 1, len(orig) + 1):
+                self.assertEqual(orig[start:], str(self.data[start:]),
+                                 "\"%s\"[%d:] -> %s" % (orig, start,
+                                                        self.data[start:]))
+                self.assertEqual(orig[start:end],
+                                 str(self.data[start:end]),
+                                 "\"%s\"[%d:%d] -> %s" % (orig, start, end,
+                                                          self.data[start:end]))
+                self.assertEqual(orig[:end],
+                                 str(self.data[:end]),
+                                 "\"%s\"[:%d] -> %s" % (orig, end,
+                                                        self.data[:end]))
+
+                # Verify that slices of slices work.
+                self.slice_test(orig[start:], depth - 1)
+                self.slice_test(orig[start:end], depth - 1)
+                self.slice_test(orig[:end], depth - 1)
+
+    def test_slice_without_suffix(self):
+        self.slice_test("file")
+
+    def test_slice_with_suffix(self):
+        self.data += "12345"
+        self.slice_test("file12345")
+
+        self.data += "67890"
+        self.slice_test("file1234567890")
+
+    def getitem_test(self, orig):
+        for start in range(0, len(orig) - 1):
+            self.assertEqual(orig[start], str(self.data[start]),
+                             "\"%s\"[%d] -> %s" % (orig, start,
+                                                   self.data[start]))
+
+    def test_getitem_without_suffix(self):
+        self.getitem_test("file")
+
+    def test_getitem_with_suffix(self):
+        self.data += "12345"
+        self.getitem_test("file12345")
+
+        self.data += "67890"
+        self.getitem_test("file1234567890")

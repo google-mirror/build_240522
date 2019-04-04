@@ -824,6 +824,69 @@ def UnzipTemp(filename, pattern=None):
   return tmp
 
 
+def GetUserImage(which, tmpdir, input_zip, allow_shared_blocks,
+                 hashtree_info_generator=None,
+                 reset_file_map=False,
+                 info_dict=None):
+  """Returns a Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified image from the given path.
+  If the specified image is sparse, it also
+  performs additional processing for OTA purpose. For example, it always adds
+  block 0 to clobbered blocks list. It also detects files that cannot be
+  reconstructed from the block list, for whom we should avoid applying imgdiff.
+
+  Args:
+    which: The partition name, which must be "system" or "vendor".
+    tmpdir: The directory that contains the prebuilt image and block map file.
+    input_zip: The target-files ZIP archive.
+    allow_shared_blocks: If image is sparse, whether having shared blocks is
+        allowed.
+    hashtree_info_generator: If present and image is sparse, generates the
+        hashtree_info for this sparse image.
+    reset_file_map: If true and image is sparse, reset file map before returning
+        the image.
+  Returns:
+    A SparseImage object, with file_map info loaded.
+  """
+  if info_dict is None:
+    is_sparse = OPTIONS.info_dict.get("extfs_sparse_flag")
+  else:
+    is_sparse = info_dict.get("extfs_sparse_flag")
+
+  if is_sparse:
+    img = GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks,
+                         hashtree_info_generator)
+    if reset_file_map:
+      img.ResetFileMap()
+    return img
+  else:
+    return GetNonSparseImage(which, tmpdir, hashtree_info_generator)
+
+
+def GetNonSparseImage(which, tmpdir, hashtree_info_generator=None):
+  """Returns a Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified non-sparse image from the given path.
+
+  Args:
+    which: The partition name, which must be "system" or "vendor".
+    tmpdir: The directory that contains the prebuilt image and block map file.
+  Returns:
+    A Image object.
+  """
+  assert which in ("system", "vendor")
+
+  path = os.path.join(tmpdir, "IMAGES", which + ".img")
+
+  # The image and must have been created prior to calling
+  # ota_from_target_files.py (since LMP).
+  assert os.path.exists(path)
+
+  return blockimgdiff.DataImage(blockimgdiff.FileData(path),
+      hashtree_info_generator=hashtree_info_generator);
+
+
 def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks,
                    hashtree_info_generator=None):
   """Returns a SparseImage object suitable for passing to BlockImageDiff.
