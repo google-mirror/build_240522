@@ -54,6 +54,7 @@ PRODUCT_PACKAGES += \
     com.android.location.provider \
     com.android.resolv \
     com.android.tzdata \
+		com.android.apex.cts.shim.v1_prebuilt \
     ContactsProvider \
     content \
     crash_dump \
