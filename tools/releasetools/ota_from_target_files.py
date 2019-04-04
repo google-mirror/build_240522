@@ -925,9 +925,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     # has the effect of writing new data from the package to the entire
     # partition, but lets us reuse the updater code that writes incrementals to
     # do it.
-    tgt = common.GetSparseImage(partition, OPTIONS.input_tmp, input_zip,
-                                allow_shared_blocks)
-    tgt.ResetFileMap()
+    tgt = common.GetUserImage(partition, OPTIONS.input_tmp, input_zip,
+                              info_dict=target_info,
+                              reset_file_map=True)
     diff = common.BlockDifference(partition, tgt, src=None)
     return diff
 
@@ -1512,8 +1512,10 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   device_specific = common.DeviceSpecificParams(
       source_zip=source_zip,
       source_version=source_api_version,
+      source_tmp=OPTIONS.source_tmp,
       target_zip=target_zip,
       target_version=target_api_version,
+      target_tmp=OPTIONS.target_tmp,
       output_zip=output_zip,
       script=script,
       metadata=metadata,
@@ -1535,14 +1537,17 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   # disable imgdiff for all later occurrences.
   allow_shared_blocks = (source_info.get('ext4_share_dup_blocks') == "true" or
                          target_info.get('ext4_share_dup_blocks') == "true")
-  system_src = common.GetSparseImage("system", OPTIONS.source_tmp, source_zip,
-                                     allow_shared_blocks)
+  system_src = common.GetUserImage("system", OPTIONS.source_tmp, source_zip,
+                                   info_dict=source_info,
+                                   allow_shared_blocks=allow_shared_blocks)
 
   hashtree_info_generator = verity_utils.CreateHashtreeInfoGenerator(
       "system", 4096, target_info)
-  system_tgt = common.GetSparseImage("system", OPTIONS.target_tmp, target_zip,
-                                     allow_shared_blocks,
-                                     hashtree_info_generator)
+  system_tgt = common.GetUserImage("system", OPTIONS.target_tmp, target_zip,
+                                   info_dict=target_info,
+                                   allow_shared_blocks=allow_shared_blocks,
+                                   hashtree_info_generator=
+                                   hashtree_info_generator)
 
   blockimgdiff_version = max(
       int(i) for i in target_info.get("blockimgdiff_versions", "1").split(","))
@@ -1567,13 +1572,16 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   if HasVendorPartition(target_zip):
     if not HasVendorPartition(source_zip):
       raise RuntimeError("can't generate incremental that adds /vendor")
-    vendor_src = common.GetSparseImage("vendor", OPTIONS.source_tmp, source_zip,
-                                       allow_shared_blocks)
+    vendor_src = common.GetUserImage("vendor", OPTIONS.source_tmp, source_zip,
+                                     info_dict=source_info,
+                                     allow_shared_blocks=allow_shared_blocks)
     hashtree_info_generator = verity_utils.CreateHashtreeInfoGenerator(
         "vendor", 4096, target_info)
-    vendor_tgt = common.GetSparseImage(
-        "vendor", OPTIONS.target_tmp, target_zip, allow_shared_blocks,
-        hashtree_info_generator)
+    vendor_tgt = common.GetUserImage(
+        "vendor", OPTIONS.target_tmp, target_zip,
+        info_dict=target_info,
+        allow_shared_blocks=allow_shared_blocks,
+        hashtree_info_generator=hashtree_info_generator)
 
     # Check first block of vendor partition for remount R/W only if
     # disk type is ext4
