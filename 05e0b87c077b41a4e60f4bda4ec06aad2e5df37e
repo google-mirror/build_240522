@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5171af7_3e646201",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-08T22:31:03Z",
+      "side": 1,
+      "message": "nit: just group_emulator / group_emu is good enough",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8cf445d_4a048db0",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-08T22:31:03Z",
+      "side": 1,
+      "message": "Can you explain why do you need reserved size?",
+      "range": {
+        "startLine": 31,
+        "startChar": 45,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
