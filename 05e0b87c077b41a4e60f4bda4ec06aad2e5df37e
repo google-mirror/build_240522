@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7c411e11_f9a34c70",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T22:35:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5171af7_3e646201",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8cf445d_4a048db0",
         "filename": "target/board/BoardConfigEmuCommon.mk",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-08T22:31:03Z",
       "side": 1,
       "message": "Can you explain why do you need reserved size?",
+      "range": {
+        "startLine": 31,
+        "startChar": 45,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90805d54_bac3a015",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T22:35:51Z",
+      "side": 1,
+      "message": "for framework developers who want to do adb sync .\nIIUC, adb sync will fail if there is enough space available ?",
+      "parentUuid": "f8cf445d_4a048db0",
       "range": {
         "startLine": 31,
         "startChar": 45,
