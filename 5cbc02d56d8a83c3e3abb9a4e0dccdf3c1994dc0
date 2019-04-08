@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "391dbe30_52500ff5",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-08T13:54:27Z",
+      "side": 1,
+      "message": "don\u0027t believe there anything \u0027google\u0027-y about this device?",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 57
+      },
+      "revId": "5cbc02d56d8a83c3e3abb9a4e0dccdf3c1994dc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
