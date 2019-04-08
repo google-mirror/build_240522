@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ccc761b_363d5616",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T23:20:20Z",
+      "side": 1,
+      "message": "Why don\u0027t we implement FileImage on top of Image directly? There\u0027re only four functions to implement (and most of them seems straightforward).\n\nOperating on FD looks more readable than __getslice__ and __getitem__. And we\u0027ll have a better chance to optimize the FileImage implementation if we want to avoid loading too much data into memory. Also the padding / trimming logic in DataImage doesn\u0027t naturally apply to FileData (e.g. the +\u003d at L121 doesn\u0027t work with FileData).",
+      "range": {
+        "startLine": 252,
+        "startChar": 16,
+        "endLine": 252,
+        "endChar": 25
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71312ee1_075b29bb",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T23:20:20Z",
+      "side": 1,
+      "message": "Seems we\u0027re not using blockimgdiff directly in this file?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 19
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f2242f_94da9f2e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T23:20:20Z",
+      "side": 1,
+      "message": "source_info",
+      "range": {
+        "startLine": 1514,
+        "startChar": 45,
+        "endLine": 1514,
+        "endChar": 69
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
