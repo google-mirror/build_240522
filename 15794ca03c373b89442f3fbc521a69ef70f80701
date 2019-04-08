@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4934efba_dd1f8cf0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-08T16:55:52Z",
+      "side": 1,
+      "message": "I saw it used in sign_target_files_apks.py as well, which if I\u0027m reading it right looks like it deals with vendor/build.prop too. Anything else you think I should test Tao?",
+      "revId": "15794ca03c373b89442f3fbc521a69ef70f80701",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
