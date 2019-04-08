@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bd43293_95e211b4",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-08T15:47:51Z",
+      "side": 1,
+      "message": "This one, and the other BOARD_GOOGLE variable needs to be BOARD_EMULATOR now",
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
