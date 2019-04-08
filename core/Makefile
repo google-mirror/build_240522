@@ -3507,7 +3507,7 @@ else
 endif
 
 ifeq ($(build_otatools_package),true)
-OTATOOLS :=  $(HOST_OUT_EXECUTABLES)/minigzip \
+OTATOOLS := \
   $(HOST_OUT_EXECUTABLES)/aapt \
   $(HOST_OUT_EXECUTABLES)/checkvintf \
   $(HOST_OUT_EXECUTABLES)/mkbootfs \

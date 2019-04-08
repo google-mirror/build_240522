@@ -286,7 +286,6 @@ PRODUCT_HOST_PACKAGES += \
     ld.mc \
     lpdump \
     mdnsd \
-    minigzip \
     mke2fs \
     resize2fs \
     sgdisk \

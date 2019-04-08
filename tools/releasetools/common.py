@@ -582,12 +582,12 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     else:
       cmd = ["mkbootfs", os.path.join(sourcedir, "RAMDISK")]
     p1 = Run(cmd, stdout=subprocess.PIPE)
-    p2 = Run(["minigzip"], stdin=p1.stdout, stdout=ramdisk_img.file.fileno())
+    p2 = Run(["gzip"], stdin=p1.stdout, stdout=ramdisk_img.file.fileno())
 
     p2.wait()
     p1.wait()
     assert p1.returncode == 0, "mkbootfs of %s ramdisk failed" % (sourcedir,)
-    assert p2.returncode == 0, "minigzip of %s ramdisk failed" % (sourcedir,)
+    assert p2.returncode == 0, "gzip of %s ramdisk failed" % (sourcedir,)
 
     return ramdisk_img
 
