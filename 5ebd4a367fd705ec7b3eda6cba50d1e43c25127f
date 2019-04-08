@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c39f0811_85677acd",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4486,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5264c34a_fe22cf53",
+      "range": {
+        "startLine": 4486,
+        "startChar": 37,
+        "endLine": 4486,
+        "endChar": 99
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7e6ab38_b804bf2f",
         "filename": "core/Makefile",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80056d66_f77ae28c",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4489,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "AVB is enabled on all emulator targets (arm/arm64/x86/x86_64)\nDone",
+      "parentUuid": "b7e6ab38_b804bf2f",
+      "range": {
+        "startLine": 4489,
+        "startChar": 1,
+        "endLine": 4489,
+        "endChar": 43
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c737af53_022db1d3",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4495,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c44a5b99_da5d3dcf",
+      "range": {
+        "startLine": 4495,
+        "startChar": 52,
+        "endLine": 4495,
+        "endChar": 96
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6766d424_c6eaf5b8",
         "filename": "core/Makefile",
         "patchSetId": 10
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ca36c4d6_d091e47a",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4496,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6766d424_c6eaf5b8",
+      "range": {
+        "startLine": 4496,
+        "startChar": 7,
+        "endLine": 4496,
+        "endChar": 31
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bd43293_95e211b4",
         "filename": "target/board/BoardConfigEmuCommon.mk",
         "patchSetId": 10
@@ -108,6 +204,24 @@
       "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c9cd017_83223c29",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bd43293_95e211b4",
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -131,6 +245,30 @@
       "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4da21e6_f3c75802",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-08T21:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bbc5ac0_d1cd1cbf",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 23
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
