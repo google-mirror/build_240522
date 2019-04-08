@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "5264c34a_fe22cf53",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4486,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T15:48:56Z",
+      "side": 1,
+      "message": "This has been covered by L4443 (in PS10)",
+      "range": {
+        "startLine": 4486,
+        "startChar": 37,
+        "endLine": 4486,
+        "endChar": 99
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e6ab38_b804bf2f",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4489,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T15:48:56Z",
+      "side": 1,
+      "message": "Is AVB enabled / required on all the emulator targets? Because L4535 still generates the VB params conditionally.\n\nOr does MK_COMBINE_QEMU_IMAGE_SH handle a non-existent vbmeta.img automatically?",
+      "range": {
+        "startLine": 4489,
+        "startChar": 1,
+        "endLine": 4489,
+        "endChar": 43
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c44a5b99_da5d3dcf",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4495,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T15:48:56Z",
+      "side": 1,
+      "message": "Seems no-op to me: HOST_OUT_EXECUTABLES is $(HOST_OUT)/bin, and ANDROID_HOST_OUT is already set to HOST_OUT.",
+      "range": {
+        "startLine": 4495,
+        "startChar": 52,
+        "endLine": 4495,
+        "endChar": 96
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6766d424_c6eaf5b8",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4496,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T15:48:56Z",
+      "side": 1,
+      "message": "missing dependency on this file",
+      "range": {
+        "startLine": 4496,
+        "startChar": 7,
+        "endLine": 4496,
+        "endChar": 31
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bd43293_95e211b4",
         "filename": "target/board/BoardConfigEmuCommon.mk",
         "patchSetId": 10
@@ -13,6 +105,29 @@
       "writtenOn": "2019-04-08T15:47:51Z",
       "side": 1,
       "message": "This one, and the other BOARD_GOOGLE variable needs to be BOARD_EMULATOR now",
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bbc5ac0_d1cd1cbf",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-08T15:48:56Z",
+      "side": 1,
+      "message": "nit: no longer applies",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 23
+      },
       "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
