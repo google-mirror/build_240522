@@ -117,6 +117,30 @@
       "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2ea1c8e_50e43f8a",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-08T22:37:59Z",
+      "side": 1,
+      "message": "You can keep this for now, but the proper solution is to enable overlayfs (I think). Also, I don\u0027t think 50MB\u0027s of free space is going to help a lot (frameworks.jar is much larger than this).\n\nI am not sure how hard it is to enable overlayfs on emulator though...",
+      "parentUuid": "90805d54_bac3a015",
+      "range": {
+        "startLine": 31,
+        "startChar": 45,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
