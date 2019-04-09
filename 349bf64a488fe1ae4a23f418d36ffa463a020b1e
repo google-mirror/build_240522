@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc66c2de_a1ff5e5e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T23:24:42Z",
+      "side": 1,
+      "message": "we should still assert the value being \"256\" or \"512\" here, as they\u0027re the only accepted values in brillo_update_payload. we may put the sanity check to arg parsing, and have OPTIONS.payload_signer_key_size holds an int (with a default value of 256).",
+      "range": {
+        "startLine": 480,
+        "startChar": 8,
+        "endLine": 480,
+        "endChar": 60
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68e7c22b_3d8cd39d",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T23:24:42Z",
+      "side": 1,
+      "message": "Add test to PayloadSignerTest",
+      "range": {
+        "startLine": 485,
+        "startChar": 6,
+        "endLine": 485,
+        "endChar": 24
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d54b2fe_23af1471",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T23:24:42Z",
+      "side": 1,
+      "message": "nit: drop",
+      "range": {
+        "startLine": 491,
+        "startChar": 26,
+        "endLine": 491,
+        "endChar": 31
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ccb2577_83b907d4",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T23:24:42Z",
+      "side": 1,
+      "message": "nit: CAP",
+      "range": {
+        "startLine": 495,
+        "startChar": 4,
+        "endLine": 495,
+        "endChar": 18
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb88b4f_5ebe71ab",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T23:24:42Z",
+      "side": 1,
+      "message": "this is to remove the trailing \u0027\\n\u0027? if so, explicitly use rstrip(\u0027\\n\u0027)",
+      "range": {
+        "startLine": 497,
+        "startChar": 58,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
