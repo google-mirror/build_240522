@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3557cfdb_bb7c4798",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-09T18:44:30Z",
+      "side": 1,
+      "message": "I agree. In PS1, I did implement padding and trimming logic, but I notice that it won\u0027t be used anywhere. Hence I removed it. Should I put it back?\n\nI implement FileData mostly to avoid duplicated code with SparseImage and DataImage. If you think those duplicated code is fine, I can reimplement this.",
+      "parentUuid": "6ccc761b_363d5616",
+      "range": {
+        "startLine": 252,
+        "startChar": 16,
+        "endLine": 252,
+        "endChar": 25
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71312ee1_075b29bb",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-08T23:20:20Z",
       "side": 1,
       "message": "Seems we\u0027re not using blockimgdiff directly in this file?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 19
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "466b0d81_ccd7a717",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-09T18:44:30Z",
+      "side": 1,
+      "message": "Yeah this is introduced in an earlier patchset. Will remove.",
+      "parentUuid": "71312ee1_075b29bb",
       "range": {
         "startLine": 195,
         "startChar": 0,
