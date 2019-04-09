@@ -264,7 +264,7 @@ class ImgdiffStatsTest(ReleaseToolsTestCase):
 
 
 class DataImageTest(ReleaseToolsTestCase):
-    def test_read_range_set(self):
-        data = "file" + ('\0' * 4092)
-        image = DataImage(data)
-        self.assertEqual(data, "".join(image.ReadRangeSet(image.care_map)))
+  def test_read_range_set(self):
+    data = "file" + ('\0' * 4092)
+    image = DataImage(data)
+    self.assertEqual(data, "".join(image.ReadRangeSet(image.care_map)))
