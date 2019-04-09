@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "48c36c98_7ff38427",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-09T23:57:54Z",
+      "side": 1,
+      "message": "Done, ptal",
+      "parentUuid": "ae19d89c_28f71aed",
+      "range": {
+        "startLine": 252,
+        "startChar": 16,
+        "endLine": 252,
+        "endChar": 25
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71312ee1_075b29bb",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 4
