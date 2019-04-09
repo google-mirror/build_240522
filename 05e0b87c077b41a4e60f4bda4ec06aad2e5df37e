@@ -188,6 +188,30 @@
       "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d499b4d_02e01b33",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-04-09T15:05:36Z",
+      "side": 1,
+      "message": "Conditions for overlayfs (you are probably already there and you do not know it?)\n- kernel is merged down from android common (and thus has the overlayfs patches)\n- CONFIG_OVERLAY_FS\u003dy\n- Access to either /system/bin/make_f2fs or /system/bin/mke2fs (these are always there, but are at the option of the Board Configuration so must be mentioned)\n- first_stage_init (on some system configes can be skipped, so must be mentioned).\n- Storage that overlayfs can steal(tm) as backing, one of:\n 1) super partition (any) with lots of free space (\u003e2GB) after all other partitions accounted for.\n 2) on A/B system_\u003cother\u003e partition just sitting there ready to capture.\n 3) on non A/B systems, a /cache partition with free space (you might wish to make it larger, 2GB+)\n\nPartitions that are candidate for overlayfs:\n1) readonly filesystems squashfs, erofs or ext4 deduped (last is kind of a requirement for dynamic partitions, missing here(!))\n2) right sized partitions (a requirement for dynamic partitions, circumventing here(!)) with less than 1% free space.",
+      "parentUuid": "902f6546_b5482345",
+      "range": {
+        "startLine": 31,
+        "startChar": 45,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
