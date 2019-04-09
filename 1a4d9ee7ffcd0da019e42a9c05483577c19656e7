@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92b15bb7_78396d42",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T20:57:12Z",
+      "side": 1,
+      "message": "The change at https://android-review.googlesource.com/c/platform/bootable/recovery/+/940083/12/Android.bp#126 is expected to take care of this. No need to specify twice.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 11
+      },
+      "revId": "1a4d9ee7ffcd0da019e42a9c05483577c19656e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
