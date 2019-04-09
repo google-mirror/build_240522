@@ -36,6 +36,7 @@ PRODUCT_PACKAGES += \
     ashmemd \
     atrace \
     audioserver \
+    auditctl \
     BackupRestoreConfirmation \
     bcc \
     blank_screen \
