@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ae19d89c_28f71aed",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-09T21:54:27Z",
+      "side": 1,
+      "message": "Having a separate FileImage looks cleaner. DataImage tends to load and keep the entire image in memory. It\u0027s okay for smaller images in past (e.g. radio or bootloader), but I want to avoid unintentionally doing that for system images.\n\nIf the current images are always 4096-byte aligned, I think it\u0027s fine to just leave the padding / trimming logic as future works.",
+      "parentUuid": "3557cfdb_bb7c4798",
+      "range": {
+        "startLine": 252,
+        "startChar": 16,
+        "endLine": 252,
+        "endChar": 25
+      },
+      "revId": "bf663ff7f74bf92c85cffd5abd4ada639e52a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71312ee1_075b29bb",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 4
