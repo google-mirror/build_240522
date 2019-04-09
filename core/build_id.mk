@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (6b5297 Merge "Move the profile rule out of dex_preopt_libart.mk.")
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.190405.003
+>>>>>>> BRANCH (505063 Make change and version bump to PPRL.190405.003)
