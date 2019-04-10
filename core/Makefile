@@ -2155,22 +2155,22 @@ endif
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
 # TODO(b/124293228): Fix remaining bugs and add these libraries to the list:
-#   libart-compiler.so
-#   libart-dexlayout.so
-#   libart.so
-#   libartbase.so
-#   libartpalette.so
-#   libdexfile.so
-#   libdexfile_external.so  - aosp_marlin-userdebug gets this in a vndk-sp-Q subdirectory.
-#   libicui18n.so
-#   libicuuc.so
-#   libnativehelper.so  - cf_x86_phone-userdebug builds get this in system/lib/arm
-#   libprofile.so
-#   libsigchain.so  - cf_x86_phone-userdebug builds get this in system/lib/arm
-#   libtombstoned_client.so
+#   libart-compiler.so       - b/123925742
+#   libart-dexlayout.so      - b/123925742
+#   libart.so                - b/123925742
+#   libartbase.so            - b/123925742
+#   libartpalette.so         - b/123925742
+#   libdexfile.so            - b/123925742
+#   libicui18n.so            - b/123925742
+#   libicuuc.so              - b/123925742
+#   libnativehelper.so       - cf_x86_phone-userdebug builds get this in system/lib/arm
+#   libprofile.so            - b/123925742
+#   libsigchain.so           - cf_x86_phone-userdebug builds get this in system/lib/arm
+#   libtombstoned_client.so  - b/130025619
 APEX_MODULE_LIBS= \
   libadbconnection.so \
   libandroidicu.so \
+  libdexfile_external.so \
   libdt_fd_forward.so \
   libdt_socket.so \
   libjavacore.so \
