@@ -46,6 +46,30 @@
       "revId": "6b529750c5720d598fe59470e1023d22d6553991",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ad52a38_d457fb4c",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-10T16:17:23Z",
+      "side": 0,
+      "message": "1.153095] init: init first stage started!\n[    1.153964] init: [libfs_mgr]ReadFstabFromDt(): failed to read fstab from dt\n[    1.155481] init: Using Android DT directory /proc/device-tree/firmware/android/\n[    1.176232] init: [libfs_mgr]Created logical partition system on device /dev/block/dm-0\n[    1.178956] init: [libfs_mgr]Created logical partition vendor on device /dev/block/dm-1\n[    1.680278] tsc: Refined TSC clocksource calibration: 2594.002 MHz\n[    1.682483] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x25641a0378f, max_idle_ns: 440795279393 ns\n[    2.190123] init: [libfs_avb]Device path not found: /dev/block/by-name/system\n[    2.193080] init: [libfs_avb]Fallback to use logical device path: /dev/block/dm-0\n[    2.690573] clocksource: Switched to clocksource tsc\n[    3.201025] init: [libfs_avb]Device path not found: /dev/block/by-name/system\n[    3.203804] init: [libfs_avb]Fallback to use logical device path: /dev/block/dm-0\n[    3.208093] init: [libfs_avb]total vbmeta size mismatch: 4224 (expected: 2752)\n[    3.211929] reboot: Restarting system with command \u0027bootloader\u0027\n[    3.214026] reboot: machine restart\n[    0.000000] Linux version 4.14.88+ (android-build@wprc12.hot.corp.google.com) (gcc version 4.9.x 2015012",
+      "parentUuid": "521cd2b2_bba9d2d3",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "6b529750c5720d598fe59470e1023d22d6553991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
