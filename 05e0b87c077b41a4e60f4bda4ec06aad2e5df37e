@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "39562606_34448da0",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-10T18:26:40Z",
+      "side": 1,
+      "message": "thanks Mark, Yifan:\nI removed the _RESERVED_SIZE \nour kernel just updated with CONFIG_OVERLAY_FS\u003dy",
+      "parentUuid": "3d499b4d_02e01b33",
+      "range": {
+        "startLine": 31,
+        "startChar": 45,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4c2c3de_39389b4a",
         "filename": "target/board/BoardConfigGsiCommon.mk",
         "patchSetId": 11

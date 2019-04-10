@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9a2333ee_a73aad7f",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4486,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2019-04-10T18:26:40Z",
+      "side": 1,
+      "message": "Tao:\n  I actually need this dependency so that every time vbmeta/system.img changes, I get\n$OUT/super.img updated.",
+      "parentUuid": "c39f0811_85677acd",
+      "range": {
+        "startLine": 4486,
+        "startChar": 37,
+        "endLine": 4486,
+        "endChar": 99
+      },
+      "revId": "5ebd4a367fd705ec7b3eda6cba50d1e43c25127f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7e6ab38_b804bf2f",
         "filename": "core/Makefile",
         "patchSetId": 10
