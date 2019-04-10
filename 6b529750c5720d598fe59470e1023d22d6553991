@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2e4b42_c9672a2a",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-04-10T02:16:59Z",
+      "side": 0,
+      "message": "Oh, this removes chain signing for the GSI.\n\nNot sure will this impact the release signing: b/112293933 \n\ni.e., can https://android-review.googlesource.com/c/platform/build/+/913493/6/tools/releasetools/sign_target_files_apks.py  still work?  \n\n\nLet\u0027s try to not remove this (still keep chain signing for GSI).\nI\u0027ll send a CL to make libfs_avb can read a logical partition today.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "6b529750c5720d598fe59470e1023d22d6553991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
