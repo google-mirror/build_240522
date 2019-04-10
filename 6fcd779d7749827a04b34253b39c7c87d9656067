@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "b3240646_0e948f4f",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-10T23:05:05Z",
+      "side": 1,
+      "message": "Should I remove L910 as well?",
+      "parentUuid": "0449084c_4aeaccde",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d44081a5_0d3d0285",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 9
