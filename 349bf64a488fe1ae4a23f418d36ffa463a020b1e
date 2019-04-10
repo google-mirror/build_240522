@@ -258,6 +258,30 @@
       "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf9683d4_a6947b1e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-04-10T00:39:39Z",
+      "side": 1,
+      "message": "Removed as we don\u0027t need to strip() here.",
+      "parentUuid": "64e6df2c_700304a1",
+      "range": {
+        "startLine": 497,
+        "startChar": 58,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
