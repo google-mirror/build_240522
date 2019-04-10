@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a75498b6_a3e05e6c",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-10T00:03:27Z",
+      "side": 1,
+      "message": "I don\u0027t know what to do with IMAGES/*.map yet, so I am using a simple zero / non-zero split in FileImage. We can probably improve this later.",
+      "revId": "f91a6268df82d23afebe4f7d89e9e390fc74dc86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
