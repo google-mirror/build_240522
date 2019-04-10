@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c113728_e5ad3eb0",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "RangeSet()",
+      "range": {
+        "startLine": 203,
+        "startChar": 28,
+        "endLine": 203,
+        "endChar": 30
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a791356d_ad51679b",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: {} to be more pythonic",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 26
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf382c6_4be3031e",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: an",
+      "range": {
+        "startLine": 831,
+        "startChar": 13,
+        "endLine": 831,
+        "endChar": 14
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4db22d6d_422fac58",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: format",
+      "range": {
+        "startLine": 833,
+        "startChar": 2,
+        "endLine": 837,
+        "endChar": 79
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0449084c_4aeaccde",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "We should remove this assert (or update the list to include product/odm/product_services)\n\nI also checked the reason of not hitting this assertion error for cuttlefish CLs. Seems we\u0027re importing and using blockimgdiff.FileImage() directly. I think we should use common.GetUserImage() in device-specific script:\nhttps://android-review.googlesource.com/c/device/google/cuttlefish/+/836180/19/shared/releasetools.py#30",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d44081a5_0d3d0285",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: align the indentation for args (\"path\" and \"hashtree_info\")",
+      "range": {
+        "startLine": 887,
+        "startChar": 32,
+        "endLine": 888,
+        "endChar": 53
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59865625_320fdb1b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "The current pattern is to import common alone from device-specific scripts. We can do the same for EmptyImage, since I\u0027m seeing a reference at https://android-review.googlesource.com/c/device/google/cuttlefish/+/836180/19/shared/releasetools.py#20.",
+      "range": {
+        "startLine": 2136,
+        "startChar": 0,
+        "endLine": 2136,
+        "endChar": 9
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d728413_87827124",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: fix the indentation",
+      "range": {
+        "startLine": 1516,
+        "startChar": 6,
+        "endLine": 1516,
+        "endChar": 7
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a60e26b_256a9ed0",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "range": {
+        "startLine": 1543,
+        "startChar": 36,
+        "endLine": 1543,
+        "endChar": 37
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2ff74ac_408827c1",
+        "filename": "tools/releasetools/test_blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: put import before",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6464a2b2_c6540c47",
+        "filename": "tools/releasetools/test_blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "nit: change all these two 2-space indent (4-space + 80-char line limit is painful)",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 4
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

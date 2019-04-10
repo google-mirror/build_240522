@@ -16,6 +16,24 @@
       "revId": "f91a6268df82d23afebe4f7d89e9e390fc74dc86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3adce363_d6cc227a",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T16:56:01Z",
+      "side": 1,
+      "message": "Can you help check if we currently have .map files from cuttlefish builds (i.e. when using non-sparse)? If so, I\u0027d prefer we at least assert the presence of the file (at https://android-review.googlesource.com/c/platform/build/+/940360/9/tools/releasetools/common.py#885), and leave the actual use to future work (seems xunchang@ has that plan and WIP CLs).",
+      "parentUuid": "a75498b6_a3e05e6c",
+      "revId": "f91a6268df82d23afebe4f7d89e9e390fc74dc86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
