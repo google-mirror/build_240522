@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "383341ef_f5b47c9c",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3947,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-10T08:03:26Z",
+      "side": 1,
+      "message": "wouldn\u0027t mind the comparison being consistent with the one in board_config.mk (ifeq true)",
+      "range": {
+        "startLine": 3947,
+        "startChar": 0,
+        "endLine": 3947,
+        "endChar": 39
+      },
+      "revId": "a09f929c9adaa222e9ed547a64cc6aecf91ac2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3ef6607_61a0c117",
         "filename": "core/board_config.mk",
         "patchSetId": 2
@@ -18,6 +41,53 @@
         "startChar": 0,
         "endLine": 478,
         "endChar": 1
+      },
+      "revId": "a09f929c9adaa222e9ed547a64cc6aecf91ac2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edfb08a8_86f3f08e",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-10T08:03:26Z",
+      "side": 1,
+      "message": "I tried to consolidate most of the product+boardconfig sanity checks to this file a while ago, so it\u0027s the right place (for now at least).",
+      "parentUuid": "d3ef6607_61a0c117",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 1
+      },
+      "revId": "a09f929c9adaa222e9ed547a64cc6aecf91ac2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e33ac85_af4e15a9",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-10T08:03:26Z",
+      "side": 1,
+      "message": "is AB_OTA_PARTITIONS optional in general when AB_OTA_UPDATER:\u003dtrue? Could untie this from generic ota if not",
+      "range": {
+        "startLine": 483,
+        "startChar": 0,
+        "endLine": 483,
+        "endChar": 39
       },
       "revId": "a09f929c9adaa222e9ed547a64cc6aecf91ac2a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
