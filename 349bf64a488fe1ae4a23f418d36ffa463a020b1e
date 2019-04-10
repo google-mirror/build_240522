@@ -234,6 +234,30 @@
       "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64e6df2c_700304a1",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T00:17:11Z",
+      "side": 1,
+      "message": "Then do we need to strip anything?\n\n(I got the question as I saw the len() below - whether the strip() here would give any side effect)",
+      "parentUuid": "e5b68304_d6173de1",
+      "range": {
+        "startLine": 497,
+        "startChar": 58,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "349bf64a488fe1ae4a23f418d36ffa463a020b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
