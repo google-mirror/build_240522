@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "24505f8f_67650c73",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-10T23:40:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71902e09_a1154f9f",
+      "range": {
+        "startLine": 203,
+        "startChar": 28,
+        "endLine": 203,
+        "endChar": 30
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a791356d_ad51679b",
         "filename": "tools/releasetools/blockimgdiff.py",
         "patchSetId": 9
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Same; copied from DataImage()",
       "parentUuid": "a791356d_ad51679b",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 26
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c64052e_5e031ee8",
+        "filename": "tools/releasetools/blockimgdiff.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-10T23:40:24Z",
+      "side": 1,
+      "message": "I fixed this one.",
+      "parentUuid": "dd9ae9d1_652e8bee",
       "range": {
         "startLine": 225,
         "startChar": 20,
