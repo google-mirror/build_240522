@@ -383,31 +383,6 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_G
 endif
 
 ##################################
-# Build the oemaid header library when fs config files are present.
-# Intentionally break build if you require generated AIDs
-# header file, but are not using any fs config files.
-ifneq ($(TARGET_FS_CONFIG_GEN),)
-include $(CLEAR_VARS)
-LOCAL_MODULE := oemaids_headers
-
-LOCAL_MODULE_CLASS := ETC
-
-# Generate the "generated_oem_aid.h" file
-oem := $(local-generated-sources-dir)/generated_oem_aid.h
-$(oem): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
-$(oem): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
-$(oem): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
-$(oem): PRIVATE_CUSTOM_TOOL = $(PRIVATE_LOCAL_PATH)/fs_config_generator.py oemaid --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(PRIVATE_TARGET_FS_CONFIG_GEN) > $@
-$(oem): $(TARGET_FS_CONFIG_GEN) $(LOCAL_PATH)/fs_config_generator.py
-	$(transform-generated-source)
-
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(dir $(oem))
-LOCAL_EXPORT_C_INCLUDE_DEPS := $(oem)
-
-include $(BUILD_HEADER_LIBRARY)
-endif
-
-##################################
 # Generate the vendor/etc/passwd text file for the target
 # This file may be empty if no AIDs are defined in
 # TARGET_FS_CONFIG_GEN files.

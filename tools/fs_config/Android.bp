@@ -12,6 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+bootstrap_go_package {
+    name: "soong-fs_config",
+    pkgPath: "android/soong/fs_config",
+    deps: [
+        "soong-android",
+        "soong-genrule",
+    ],
+    srcs: [
+        "fs_config.go"
+    ],
+    pluginFor: ["soong_build"],
+}
+
 cc_binary_host {
     name: "fs_config",
     srcs: ["fs_config.c"],
@@ -20,4 +33,19 @@ cc_binary_host {
         "libselinux",
     ],
     cflags: ["-Werror"],
+}
+
+fs_config_genrule {
+    name: "oemaids_header_gen",
+    tool_files: ["fs_config_generator.py"],
+    cmd: "$(location fs_config_generator.py) oemaid --aid-header=$(location :android_filesystem_config_header) $(call target_fs_config_gen) >$(out)",
+    srcs: [":android_filesystem_config_header"],
+    out: ["generated_oem_aid.h"],
+}
+
+cc_library_headers {
+    name: "oemaids_headers",
+    // TODO: vendor_available?
+    generated_headers: ["oemaids_header_gen"],
+    export_generated_headers: ["oemaids_header_gen"],
 }
