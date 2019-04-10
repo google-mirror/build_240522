@@ -235,6 +235,30 @@
       "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a0df30d_1ac47766",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-04-10T08:02:10Z",
+      "side": 1,
+      "message": "Oh, prior to AVB (vboot 1.0), eng build doesn\u0027t enable verified boot.\n\nHowever, for AVB (a.k.a. vboot 2.0), we enable verified boot regardless of build image variants.\nSo we probably still need the flag 2 for eng build here.",
+      "parentUuid": "a4c2c3de_39389b4a",
+      "range": {
+        "startLine": 46,
+        "startChar": 17,
+        "endLine": 46,
+        "endChar": 20
+      },
+      "revId": "05e0b87c077b41a4e60f4bda4ec06aad2e5df37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
