@@ -187,6 +187,30 @@
     },
     {
       "key": {
+        "uuid": "74936b3d_9daaac8d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-10T23:07:55Z",
+      "side": 1,
+      "message": "Sure; although, this particular line is causing circular dependencies, so I\u0027ll always need to remember that \"import blockimgdiff\" must come after \"import common\". Do you know a way to alleviate this issue, and make it possible to \"import blockimgdiff\" before \"import common\"?",
+      "parentUuid": "59865625_320fdb1b",
+      "range": {
+        "startLine": 2136,
+        "startChar": 0,
+        "endLine": 2136,
+        "endChar": 9
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0d728413_87827124",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 9
