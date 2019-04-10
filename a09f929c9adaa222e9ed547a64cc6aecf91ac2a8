@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3ef6607_61a0c117",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T04:17:56Z",
+      "side": 1,
+      "message": "Not exactly sure if this is the best place for such checks, since these rules seem to be evaluated at lunch time.",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 1
+      },
+      "revId": "a09f929c9adaa222e9ed547a64cc6aecf91ac2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
