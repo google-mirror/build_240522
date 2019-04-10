@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "432daa6b_5fca6321",
+        "filename": "tools/releasetools/test_ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-10T00:13:58Z",
+      "side": 1,
+      "message": "nit: \u0027512\u0027 (with quotes)",
+      "range": {
+        "startLine": 1199,
+        "startChar": 45,
+        "endLine": 1199,
+        "endChar": 48
+      },
+      "revId": "16fdc9e486e56f8f8d14fdfca66573dcc375cb33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
