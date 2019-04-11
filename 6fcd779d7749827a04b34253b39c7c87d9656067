@@ -333,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "7d4bc51c_05aa6c11",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-11T00:32:59Z",
+      "side": 1,
+      "message": "You mean calling from device-specific releasetools, right? The `info` parameter passed to FullOTA_GetBlockDifferences already has those fields, including input_zip and input_tmp:\nhttps://android-review.googlesource.com/c/platform/build/+/940360/9/tools/releasetools/ota_from_target_files.py#811\n\n(Also see the info.input_zip here: https://android-review.googlesource.com/c/device/google/cuttlefish/+/836180/19/shared/releasetools.py#34. I think we don\u0027t even need to unzip there.)\n\nThe allow_shared_blocks part sgtm",
+      "parentUuid": "a2780e1e_1db29f15",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d44081a5_0d3d0285",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 9
