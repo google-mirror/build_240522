@@ -357,6 +357,30 @@
     },
     {
       "key": {
+        "uuid": "fe082740_a4ef4e95",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-11T00:54:58Z",
+      "side": 1,
+      "message": "Got it; it is not documented in https://source.android.com/preview/devices/tech/ota/nonab/device_code#python-module though.\n\nAlso, it looks like https://android-review.googlesource.com/c/platform/build/+/940360/9/tools/releasetools/ota_from_target_files.py#1491 doesn\u0027t have target_info_dict? Should I add source_info and target_info there?",
+      "parentUuid": "7d4bc51c_05aa6c11",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d44081a5_0d3d0285",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 9
