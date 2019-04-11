@@ -285,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "4c6ee65e_57bcca46",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-11T00:00:08Z",
+      "side": 1,
+      "message": "When I try to replace those calls with GetUserImage, I don\u0027t know what to fill in for \"tmpdir\", \"allow_shared_blocks\". Should I just:\n- tmpdir argument is optional. If missing, unzip input_zip\n- allow_shared_blocks defaults to None. When it is none, it is loaded from info_dict (which is OPTIONS.info_dict by default)\n\n?",
+      "parentUuid": "b3240646_0e948f4f",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d44081a5_0d3d0285",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 9
