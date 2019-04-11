@@ -309,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "a2780e1e_1db29f15",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-11T00:01:46Z",
+      "side": 1,
+      "message": "Also, info_dict should be loaded from input_zip by default, not from OPTIONS",
+      "parentUuid": "4c6ee65e_57bcca46",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6fcd779d7749827a04b34253b39c7c87d9656067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d44081a5_0d3d0285",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 9
