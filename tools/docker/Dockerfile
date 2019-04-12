@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 ARG userid
 ARG groupid
 ARG username
+ARG ostype=Linux
 
 RUN apt-get update && apt-get install -y git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip python openjdk-7-jdk
 
@@ -14,12 +15,14 @@ RUN curl -o /usr/local/bin/repo https://storage.googleapis.com/git-repo-download
  && echo "d06f33115aea44e583c8669375b35aad397176a411de3461897444d247b6c220  /usr/local/bin/repo" | sha256sum --strict -c - \
  && chmod a+x /usr/local/bin/repo
 
-RUN groupadd -g $groupid $username \
- && useradd -m -u $userid -g $groupid $username \
+RUN [ "$ostype" = "Darwin" ] && dockergroupid=$userid || dockergroupid=$groupid \
+ && groupadd -g $dockergroupid $username \
+ && useradd -m -u $userid -g $dockergroupid $username \
  && echo $username >/root/username \
  && echo "export USER="$username >>/home/$username/.gitconfig
 COPY gitconfig /home/$username/.gitconfig
-RUN chown $userid:$groupid /home/$username/.gitconfig
+RUN [ "$ostype" = "Darwin" ] && dockergroupid=$userid || dockergroupid=$groupid \
+ && chown $userid:$dockergroupid /home/$username/.gitconfig
 ENV HOME=/home/$username
 ENV USER=$username
 
