@@ -38,3 +38,9 @@ $(boot_profile_jars_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZI
 ifeq ($(PRODUCT_DIST_BOOT_AND_SYSTEM_JARS),true)
 $(call dist-for-goals, droidcore, $(boot_profile_jars_zip))
 endif
+
+boot_zip := $(PRODUCT_OUT)/boot.zip
+$(boot_zip): $(DEXPREOPT_IMAGE_ZIP_boot)
+	cp -f $(DEXPREOPT_IMAGE_ZIP_boot) $(boot_zip)
+
+$(call dist-for-goals, droidcore, $(boot_zip))
