@@ -6,7 +6,7 @@ First, build the image:
 ```
 # Copy your host gitconfig, or create a stripped down version
 $ cp ~/.gitconfig gitconfig
-$ docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-arg username=$(id -un) -t android-build-trusty .
+$ docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-arg username=$(id -un) --build-arg ostype=$(uname -s) -t android-build-trusty .
 ```
 
 Then you can start up new instances with:
