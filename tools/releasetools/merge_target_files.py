@@ -42,7 +42,17 @@ Usage: merge_target_files.py [args]
       contents of default_other_item_list if provided.
 
   --output-target-files output-target-files-package
-      The output merged target files package. Also a zip archive.
+      If provided, the output merged target files package. Also a zip archive.
+
+  --output-dir output-directory
+      If provided, the destination directory for saving merged files. Requires
+      the --output-item-list flag.
+      Can be provided alongside --output-target-files, or by itself.
+
+  --output-item-list output-item-list-file.
+      The optional path to a newline-separated config file that specifies the
+      file patterns to copy into the --output-dir. Required if providing
+      the --output-dir flag.
 
   --rebuild_recovery
       Rebuild the recovery patch used by non-A/B devices and write it to the
@@ -57,6 +67,7 @@ from __future__ import print_function
 import fnmatch
 import logging
 import os
+import shutil
 import sys
 import zipfile
 
@@ -72,6 +83,8 @@ OPTIONS.system_misc_info_keys = None
 OPTIONS.other_target_files = None
 OPTIONS.other_item_list = None
 OPTIONS.output_target_files = None
+OPTIONS.output_dir = None
+OPTIONS.output_item_list = None
 OPTIONS.rebuild_recovery = False
 OPTIONS.keep_tmp = False
 
@@ -193,6 +206,26 @@ def extract_items(target_files, target_files_temp_dir, extract_item_list):
       target_files,
       target_files_temp_dir,
       filtered_extract_item_list)
+
+
+def copy_items(from_dir, to_dir, patterns):
+  """Similar to extract_items() except uses an input dir instead of zip."""
+  file_paths = []
+  for dirpath, _, filenames in os.walk(from_dir):
+    file_paths.extend(os.path.relpath(path=os.path.join(dirpath, filename),
+                                      start=from_dir) for filename in filenames)
+
+  filtered_file_paths = set()
+  for pattern in patterns:
+    filtered_file_paths.update(fnmatch.filter(file_paths, pattern))
+
+  for file_path in filtered_file_paths:
+    original_file_path = os.path.join(from_dir, file_path)
+    copied_file_path = os.path.join(to_dir, file_path)
+    copied_file_dir = os.path.dirname(copied_file_path)
+    if not os.path.exists(copied_file_dir):
+      os.makedirs(copied_file_dir)
+    shutil.copyfile(original_file_path, copied_file_path)
 
 
 def read_config_list(config_file_path):
@@ -546,6 +579,8 @@ def merge_target_files(
     other_target_files,
     other_item_list,
     output_target_files,
+    output_dir,
+    output_item_list,
     rebuild_recovery):
   """Merge two target files packages together.
 
@@ -655,44 +690,49 @@ def merge_target_files(
 
   add_img_to_target_files.main(add_img_args)
 
-  # Finally, create the output target files zip archive.
+  # Finally, create the output target files zip archive and/or copy the
+  # output items to the output target files directory.
 
-  output_zip = os.path.abspath(output_target_files)
-  output_target_files_list = os.path.join(temp_dir, 'output.list')
-  output_target_files_meta_dir = os.path.join(
-      output_target_files_temp_dir, 'META')
+  if output_dir:
+    copy_items(output_target_files_temp_dir, output_dir, output_item_list)
 
-  command = [
-      'find',
-      output_target_files_meta_dir,
-  ]
-  # TODO(bpeckham): sort this to be more like build.
-  meta_content = common.RunAndCheckOutput(command, verbose=False)
-  command = [
-      'find',
-      output_target_files_temp_dir,
-      '-path',
-      output_target_files_meta_dir,
-      '-prune',
-      '-o',
-      '-print'
-  ]
-  # TODO(bpeckham): sort this to be more like build.
-  other_content = common.RunAndCheckOutput(command, verbose=False)
+  if output_target_files:
+    output_zip = os.path.abspath(output_target_files)
+    output_target_files_list = os.path.join(temp_dir, 'output.list')
+    output_target_files_meta_dir = os.path.join(
+        output_target_files_temp_dir, 'META')
 
-  with open(output_target_files_list, 'wb') as f:
-    f.write(meta_content)
-    f.write(other_content)
+    command = [
+        'find',
+        output_target_files_meta_dir,
+    ]
+    # TODO(bpeckham): sort this to be more like build.
+    meta_content = common.RunAndCheckOutput(command, verbose=False)
+    command = [
+        'find',
+        output_target_files_temp_dir,
+        '-path',
+        output_target_files_meta_dir,
+        '-prune',
+        '-o',
+        '-print'
+    ]
+    # TODO(bpeckham): sort this to be more like build.
+    other_content = common.RunAndCheckOutput(command, verbose=False)
 
-  command = [
-      'soong_zip',
-      '-d',
-      '-o', output_zip,
-      '-C', output_target_files_temp_dir,
-      '-l', output_target_files_list,
-  ]
-  logger.info('creating %s', output_target_files)
-  common.RunAndWait(command, verbose=True)
+    with open(output_target_files_list, 'wb') as f:
+      f.write(meta_content)
+      f.write(other_content)
+
+    command = [
+        'soong_zip',
+        '-d',
+        '-o', output_zip,
+        '-C', output_target_files_temp_dir,
+        '-l', output_target_files_list,
+    ]
+    logger.info('creating %s', output_target_files)
+    common.RunAndWait(command, verbose=True)
 
 
 def call_func_with_temp_dir(func, keep_tmp):
@@ -747,6 +787,10 @@ def main():
       OPTIONS.other_item_list = a
     elif o == '--output-target-files':
       OPTIONS.output_target_files = a
+    elif o == '--output-dir':
+      OPTIONS.output_dir = a
+    elif o == '--output-item-list':
+      OPTIONS.output_item_list = a
     elif o == '--rebuild_recovery':
       OPTIONS.rebuild_recovery = True
     elif o == '--keep-tmp':
@@ -764,6 +808,8 @@ def main():
           'other-target-files=',
           'other-item-list=',
           'output-target-files=',
+          'output-dir=',
+          'output-item-list=',
           'rebuild_recovery',
           'keep-tmp',
       ],
@@ -771,8 +817,11 @@ def main():
 
   if (len(args) != 0 or
       OPTIONS.system_target_files is None or
-      OPTIONS.other_target_files is None or
-      OPTIONS.output_target_files is None):
+      OPTIONS.other_target_files is None or (
+        OPTIONS.output_target_files is None and
+        OPTIONS.output_dir is None) or (
+        OPTIONS.output_dir is not None and
+        OPTIONS.output_item_list is None)):
     common.Usage(__doc__)
     sys.exit(1)
 
@@ -791,6 +840,11 @@ def main():
   else:
     other_item_list = default_other_item_list
 
+  if OPTIONS.output_item_list:
+    output_item_list = read_config_list(OPTIONS.output_item_list)
+  else:
+    output_item_list = None
+
   if not validate_config_lists(
       system_item_list=system_item_list,
       system_misc_info_keys=system_misc_info_keys,
@@ -806,6 +860,8 @@ def main():
           other_target_files=OPTIONS.other_target_files,
           other_item_list=other_item_list,
           output_target_files=OPTIONS.output_target_files,
+          output_dir=OPTIONS.output_dir,
+          output_item_list=output_item_list,
           rebuild_recovery=OPTIONS.rebuild_recovery),
       OPTIONS.keep_tmp)
 
