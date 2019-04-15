@@ -22,6 +22,30 @@
       "revId": "f5b3fc854f5ec128c4c78324a2da7c62b26e45bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94af90a4_fe868617",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2019-04-15T16:19:14Z",
+      "side": 1,
+      "message": "There should be a logcat message saying \"Core platform API reporting enabled, enforcing\u003dtrue/false\". Also setting the property to something nonsensical will make ART fail to initialize.",
+      "parentUuid": "2fb14f41_476b8427",
+      "range": {
+        "startLine": 14,
+        "startChar": 14,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "f5b3fc854f5ec128c4c78324a2da7c62b26e45bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
