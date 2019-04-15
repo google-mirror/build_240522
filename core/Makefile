@@ -4438,10 +4438,11 @@ $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_
 
 # supernod uses images in the $(PRODUCT_OUT) directory instead of images from target files package.
 .PHONY: superimage-nodeps supernod
-superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
-superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
+INSTALLED_SUPERIMAGE_NODEP_TARGET := $(PRODUCT_OUT)/super.img
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: intermediates := $(call intermediates-dir-for,PACKAGING,superimage-nodeps)
+$(INSTALLED_SUPERIMAGE_NODEP_TARGET) superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
     $(foreach p, $(BOARD_SUPER_PARTITION_PARTITION_LIST), $(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
-	$(call pretty,"make $(INSTALLED_SUPERIMAGE_TARGET): ignoring dependencies")
+	$(call pretty,"make $(INSTALLED_SUPERIMAGE_NODEP_TARGET): ignoring dependencies")
 	mkdir -p $(intermediates)
 	rm -rf $(intermediates)/misc_info.txt
 	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
@@ -4449,7 +4450,7 @@ superimage-nodeps supernod: | $(LPMAKE) $(BUILD_SUPER_IMAGE) \
 	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(intermediates)/misc_info.txt;)
 	mkdir -p $(dir $(INSTALLED_SUPERIMAGE_TARGET))
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_TARGET)
+	  $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $(INSTALLED_SUPERIMAGE_NODEP_TARGET)
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
 
