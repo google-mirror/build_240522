@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fb14f41_476b8427",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2019-04-15T15:21:03Z",
+      "side": 1,
+      "message": "I guess it\u0027s not easy to confirm your change is actually doing something at this point?\n\nWeeks ago, locally, I put a \"probe\" in the runtime debug service (adb dumpsys runtime) which tries to access a method known to be in the core platform API call via reflection. That I could verify by looking at logcat. Can\u0027t think of any good way to turn that into a repeatable test without intercepting the violation reporting somehow and having \"adb dumpsys runtime\" include something like \"no reporting\", \"reporting\" and \"blocked\" depending on whether the reflection call was logged or rejected.",
+      "range": {
+        "startLine": 14,
+        "startChar": 14,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "f5b3fc854f5ec128c4c78324a2da7c62b26e45bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
