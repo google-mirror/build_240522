@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13f289da_6a8fd342",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-04-15T20:40:24Z",
+      "side": 1,
+      "message": "It seems like a lot of the release tools like to raise ValueError for situations like this. For consistency, follow the same approach?",
+      "range": {
+        "startLine": 671,
+        "startChar": 6,
+        "endLine": 671,
+        "endChar": 17
+      },
+      "revId": "1dce6ec5da1e2af10c9d560ae8d28ae9bb0816dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
