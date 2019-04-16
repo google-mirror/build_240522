@@ -2231,6 +2231,18 @@ $(hide) ( \
   fi; \
 )
 endef
+
+ifdef product_target_FILES
+apex_module_libs := \
+  $(filter $(foreach lib,$(APEX_MODULE_LIBS),%/$(lib)), \
+    $(filter-out $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),$(TARGET_OUT)/$(dir)/%), \
+      $(filter $(TARGET_OUT)/lib/% $(TARGET_OUT)/lib64/%, $(product_target_FILES))))
+ifdef apex_module_libs
+$(error APEX libraries found in system image (see comment in build/make/core/Makefile for details): \
+  $(apex_module_libs))
+endif
+endif
+
 else
 define check-apex-libs-absence
 endef
