@@ -4404,7 +4404,12 @@ define dump-super-image-info
 endef
 
 ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
+ifeq (true,$(PRODUCT_BUILD_SUPER_IMAGE_BY_DEFAULT)
+INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
+droidcore: $(INSTALLED_SUPERIMAGE_TARGET)
+else
 INSTALLED_SUPERIMAGE_TARGET := $(call intermediates-dir-for,PACKAGING,super.img)/super.img
+endif # PRODUCT_BUILD_SUPER_IMAGE_BY_DEFAULT
 $(INSTALLED_SUPERIMAGE_TARGET): extracted_input_target_files := $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))
 $(INSTALLED_SUPERIMAGE_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
 	$(call pretty,"Target super fs image: $@")

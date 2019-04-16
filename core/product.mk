@@ -311,10 +311,13 @@ _product_var_list += PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 
 # Other dynamic partition feature flags.PRODUCT_USE_DYNAMIC_PARTITION_SIZE and
 # PRODUCT_BUILD_SUPER_PARTITION default to the value of PRODUCT_USE_DYNAMIC_PARTITIONS.
+# If PRODUCT_BUILD_SUPER_IMAGE_BY_DEFAULT is true, super image is built to $(PRODUCT_OUT)
+# and is built by default (droidcore).
 _product_var_list += \
     PRODUCT_USE_DYNAMIC_PARTITIONS \
     PRODUCT_USE_DYNAMIC_PARTITION_SIZE \
     PRODUCT_BUILD_SUPER_PARTITION \
+    PRODUCT_BUILD_SUPER_IMAGE_BY_DEFAULT \
 
 # If set, kernel configuration requirements are present in OTA package (and will be enforced
 # during OTA). Otherwise, kernel configuration requirements are enforced in VTS.
