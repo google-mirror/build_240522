@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "868cf14e_ef8e4be3",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2019-04-16T15:08:48Z",
+      "side": 1,
+      "message": "native_bridge",
+      "range": {
+        "startLine": 2190,
+        "startChar": 50,
+        "endLine": 2190,
+        "endChar": 65
+      },
+      "revId": "1750a194f6d74010d448c0d6a22d5bfbe95dcf0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc2146c8_d89af941",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2019-04-16T15:08:48Z",
+      "side": 1,
+      "message": "may contain",
+      "range": {
+        "startLine": 2190,
+        "startChar": 38,
+        "endLine": 2190,
+        "endChar": 39
+      },
+      "revId": "1750a194f6d74010d448c0d6a22d5bfbe95dcf0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09304131_f2d05170",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2019-04-16T15:08:48Z",
+      "side": 1,
+      "message": "native bridge",
+      "range": {
+        "startLine": 2196,
+        "startChar": 7,
+        "endLine": 2196,
+        "endChar": 22
+      },
+      "revId": "1750a194f6d74010d448c0d6a22d5bfbe95dcf0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
