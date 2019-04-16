@@ -2253,6 +2253,23 @@ $(hide) ( \
   fi; \
 )
 endef
+
+# The check above catches files that end up being built through other means than
+# the standard "m droid" targets (possible due to b/129006418). The one below is
+# done at the earlier kati stage, so catches errors in build_test builds. It
+# assumes this Makefile gets included after product_target_FILES is built in
+# main.mk.
+ifdef product_target_FILES
+apex_module_libs := \
+  $(filter $(foreach lib,$(APEX_MODULE_LIBS),%/$(lib)), \
+    $(filter-out $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),$(TARGET_OUT)/$(dir)/%), \
+      $(filter $(TARGET_OUT)/lib/% $(TARGET_OUT)/lib64/%, $(product_target_FILES))))
+ifdef apex_module_libs
+$(error APEX libraries found in system image (see comment in build/make/core/Makefile for details): \
+  $(apex_module_libs))
+endif
+endif
+
 else
 define check-apex-libs-absence
 endef
