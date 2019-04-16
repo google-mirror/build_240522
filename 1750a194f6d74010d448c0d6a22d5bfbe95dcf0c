@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "529b7366_8bd349f1",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2192,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-04-16T15:38:26Z",
+      "side": 1,
+      "message": "Well, the proxy libs can link to both APEX and system libs.",
+      "parentUuid": "e0241bc0_d1cdd361",
+      "range": {
+        "startLine": 2192,
+        "startChar": 27,
+        "endLine": 2192,
+        "endChar": 42
+      },
+      "revId": "1750a194f6d74010d448c0d6a22d5bfbe95dcf0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09304131_f2d05170",
         "filename": "core/Makefile",
         "patchSetId": 3
