@@ -376,6 +376,10 @@ ifndef PRODUCT_BUILD_SUPER_PARTITION
   PRODUCT_BUILD_SUPER_PARTITION := $(PRODUCT_USE_DYNAMIC_PARTITIONS)
 endif
 
+ifndef PRODUCT_USES_ART
+  PRODUCT_USES_ART := false
+endif
+
 define product-overrides-config
 $$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
     $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
