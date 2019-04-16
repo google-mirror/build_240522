@@ -2187,6 +2187,14 @@ APEX_MODULE_LIBS= \
 # still may create these libraries in /system (b/129006418).
 DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
 
+# Exclude lib/arm and lib/arm64 which contain the ndk_translation proxy libs.
+# They are compiled for the guest architecture and used with an entirely
+# different linker config, so they do not violate the linker namespace
+# isolations on the native architecture.
+# TODO(xxx): Introduce variables for these dirs that are set appropriately when
+# ndk_translation is active.
+APEX_LIBS_ABSENCE_CHECK_EXCLUDE=lib/arm lib/arm64
+
 # If the check below fails, some library has ended up in system/lib or
 # system/lib64 that is intended to only go into some APEX package. The likely
 # cause is that a library or binary in /system has grown a dependency that
@@ -2211,8 +2219,11 @@ DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
 ifndef DISABLE_APEX_LIBS_ABSENCE_CHECK
 define check-apex-libs-absence
 $(hide) ( \
-  cd $(TARGET_OUT); \
-  findres=$$(find lib* -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) -print) || exit 1; \
+  cd $(TARGET_OUT) && \
+  findres=$$(find lib* \
+    $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),-path $(dir) -prune -o) \
+    -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) \
+    -print) && \
   if [ -n "$$findres" ]; then \
     echo "APEX libraries found in system image (see comment in build/make/core/Makefile for details):" 1>&2; \
     echo "$$findres" | sort 1>&2; \
