@@ -44,6 +44,10 @@ Usage: merge_target_files.py [args]
   --output-target-files output-target-files-package
       The output merged target files package. Also a zip archive.
 
+  --output-ota output-ota-package
+      The output ota package. This is a zip archive. Use of this flag may
+      require passing the --path common flag; see common.py.
+
   --output-super-empty output-super-empty-image
       If provided, creates a super_empty.img file from the merged target
       files package and saves it at this path.
@@ -67,6 +71,7 @@ import zipfile
 import add_img_to_target_files
 import build_super_image
 import common
+import ota_from_target_files
 
 logger = logging.getLogger(__name__)
 OPTIONS = common.OPTIONS
@@ -77,6 +82,7 @@ OPTIONS.system_misc_info_keys = None
 OPTIONS.other_target_files = None
 OPTIONS.other_item_list = None
 OPTIONS.output_target_files = None
+OPTIONS.output_ota = None
 OPTIONS.output_super_empty = None
 OPTIONS.rebuild_recovery = False
 OPTIONS.keep_tmp = False
@@ -552,6 +558,7 @@ def merge_target_files(
     other_target_files,
     other_item_list,
     output_target_files,
+    output_ota,
     output_super_empty,
     rebuild_recovery):
   """Merge two target files packages together.
@@ -586,6 +593,8 @@ def merge_target_files(
 
     output_target_files: The name of the output zip archive target files
     package created by merging system and other.
+
+    output_ota: The name of the output zip archive ota package.
 
     output_super_empty: If provided, creates a super_empty.img file from the
     merged target files package and saves it at this path.
@@ -725,6 +734,17 @@ def merge_target_files(
   logger.info('creating %s', output_target_files)
   common.RunAndWait(command, verbose=True)
 
+  # Create the OTA package from the merged target files package.
+
+  if output_ota:
+    ota_from_target_files_args = [
+        '--verbose',
+        '--block',
+        output_zip,
+        output_ota,
+    ]
+    ota_from_target_files.main(ota_from_target_files_args)
+
 
 def call_func_with_temp_dir(func, keep_tmp):
   """Manage the creation and cleanup of the temporary directory.
@@ -778,6 +798,8 @@ def main():
       OPTIONS.other_item_list = a
     elif o == '--output-target-files':
       OPTIONS.output_target_files = a
+    elif o == '--output-ota':
+      OPTIONS.output_ota = a
     elif o == '--output-super-empty':
       OPTIONS.output_super_empty = a
     elif o == '--rebuild_recovery':
@@ -797,6 +819,7 @@ def main():
           'other-target-files=',
           'other-item-list=',
           'output-target-files=',
+          'output-ota=',
           'output-super-empty=',
           'rebuild_recovery',
           'keep-tmp',
@@ -840,6 +863,7 @@ def main():
           other_target_files=OPTIONS.other_target_files,
           other_item_list=other_item_list,
           output_target_files=OPTIONS.output_target_files,
+          output_ota=OPTIONS.output_ota,
           output_super_empty=OPTIONS.output_super_empty,
           rebuild_recovery=OPTIONS.rebuild_recovery),
       OPTIONS.keep_tmp)
