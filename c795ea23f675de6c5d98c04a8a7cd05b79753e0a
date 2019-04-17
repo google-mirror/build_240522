@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "de44aa9a_66383f43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-04-17T09:10:54Z",
+      "side": 1,
+      "message": "can we deduce the right behavior automatically somehow instead? also, isn\u0027t it more of a device property than a product one (BoardConfig?)",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "c795ea23f675de6c5d98c04a8a7cd05b79753e0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "922adc47_8b07259b",
         "filename": "core/Makefile",
         "patchSetId": 1
