@@ -23,3 +23,32 @@ ifdef PRODUCT_ADB_KEYS
     include $(BUILD_PREBUILT)
   endif
 endif
+
+#######################################
+# update_engine_payload_key, used by update_engine. We use the same key as otacerts but in RSA
+# public key format.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := update_engine_payload_key
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := update-payload-key.pub.pem
+LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/update_engine
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem
+	rm -f $@
+	mkdir -p $(dir $@)
+	openssl x509 -pubkey -noout -in $< > $@
+
+#######################################
+# update_engine_payload_key for recovery image, used by update_engine.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := update_engine_payload_key.recovery
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := update-payload-key.pub.pem
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/update_engine
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem
+	rm -f $@
+	mkdir -p $(dir $@)
+	openssl x509 -pubkey -noout -in $< > $@
