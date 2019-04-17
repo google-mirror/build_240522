@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "330a1253_ba062b2a",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-17T00:33:38Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s a no-op given L78. ota_from_target_files should be seeing the same common.OPTIONS object.",
+      "range": {
+        "startLine": 741,
+        "startChar": 8,
+        "endLine": 741,
+        "endChar": 19
+      },
+      "revId": "c72599b5aaa8bb129e2b9629f0aae04e54a5c7a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20a8048c_2dd6e6d4",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-17T00:33:38Z",
+      "side": 1,
+      "message": "nit: this flag has been a no-op for both of A/B and non-A/B. It can be safely removed.",
+      "range": {
+        "startLine": 742,
+        "startChar": 8,
+        "endLine": 742,
+        "endChar": 18
+      },
+      "revId": "c72599b5aaa8bb129e2b9629f0aae04e54a5c7a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
