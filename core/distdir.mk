@@ -54,6 +54,7 @@ define dist-write-file
 $(strip \
   $(KATI_obsolete_var dist-for-goals,Cannot be used after dist-write-file) \
   $(foreach goal,$(sort $(_all_dist_goals)), \
+    $(eval .PHONY: $$(goal)) \
     $(eval $$(goal): _dist_$$(goal))) \
   $(shell mkdir -p $(dir $(1))) \
   $(file >$(1).tmp, \
