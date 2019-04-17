@@ -1261,10 +1261,8 @@ $(TARGET_OUT_ETC)/security/otacerts.zip: $(DEFAULT_KEY_CERT_PAIR).x509.pem
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_CERT)) -f $(PRIVATE_CERT)
 
-# Carry the public key for update_engine if it's a non-IoT target that
-# uses the AB updater. We use the same key as otacerts but in RSA public key
+# Carry the public key for update_engine. We use the same key as otacerts but in RSA public key
 # format.
-ifeq ($(AB_OTA_UPDATER),true)
 ifneq ($(PRODUCT_IOT),true)
 ALL_DEFAULT_INSTALLED_MODULES += $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem
 $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem: $(DEFAULT_KEY_CERT_PAIR).x509.pem
@@ -1277,7 +1275,6 @@ ALL_DEFAULT_INSTALLED_MODULES += \
 $(TARGET_RECOVERY_ROOT_OUT)/system/etc/update_engine/update-payload-key.pub.pem: \
 	    $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem
 	$(hide) cp -f $< $@
-endif
 endif
 
 .PHONY: otacerts
