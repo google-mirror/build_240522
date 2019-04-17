@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7b2c673_cc86bea7",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 4449,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-17T21:41:57Z",
+      "side": 1,
+      "message": "The problem now is that there are now two different super images:\n- $PRODUCT_OUT/super.img is built from images from $PRODUCT_OUT\n- ...intermediates/super.img is built from target files\n\ncuttlefish dist builds will build both of them. On my machine, building one of them takes 1m18s, and the output is increased by 6.0G (because super is not sparse).\n\n:(",
+      "range": {
+        "startLine": 4449,
+        "startChar": 0,
+        "endLine": 4449,
+        "endChar": 59
+      },
+      "revId": "2f07b71d502c09440f333910cbc04b3fab35603b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
