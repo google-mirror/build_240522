@@ -35,6 +35,7 @@ import sys
 import zipfile
 
 import common
+from build_super_image import BuildSuperImage
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -76,11 +77,31 @@ def main(argv):
 
   common.InitLogging()
 
-  OPTIONS.input_tmp = common.UnzipTemp(args[0], ["IMAGES/*", "OTA/*"])
+  OPTIONS.input_zip = args[0]
+  OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_zip)
+
+  put_super = OPTIONS.info_dict.get("super_image_in_update_package") == "true"
+  dynamic_partition_list = OPTIONS.info_dct.get("dynamic_partition_list",
+                                                "").strip().split()
+  super_device_list = OPTIONS.info_dict.get("super_block_devices",
+                                            "").strip().split()
+  retrofit_dap = OPTIONS.info_dict.get("dynamic_partition_retrofit") == "true"
+  should_build_super = OPTIONS.info_dict.get("build_super_partition") == "true"
+
+  unzip_pattern = ["IMAGES/*", "OTA/android-info.txt"]
+  if put_super and should_build_super:
+    if retrofit_dap:
+      unzip_pattern.append("OTA/super_*.img")
+    else:
+      unzip_pattern.append("META/*")
+
+  OPTIONS.input_tmp = common.UnzipTemp(OPTIONS.input_zip, unzip_pattern)
   output_zip = zipfile.ZipFile(args[1], "w", compression=zipfile.ZIP_DEFLATED)
   CopyInfo(output_zip)
 
   try:
+    dynamic_images = [p + ".img" for p in dynamic_partition_list]
+
     images_path = os.path.join(OPTIONS.input_tmp, "IMAGES")
     # A target-files zip must contain the images since Lollipop.
     assert os.path.exists(images_path)
@@ -91,7 +112,26 @@ def main(argv):
         continue
       if image == "recovery-two-step.img":
         continue
+      if put_super:
+        if image == "super_empty.img":
+          continue
+        if image in dynamic_images:
+          continue
       common.ZipWrite(output_zip, os.path.join(images_path, image), image)
+
+    if put_super and should_build_super:
+      if retrofit_dap:
+        # retrofit devices already have super split images under OTA/
+        images_path = os.path.join(OPTIONS.input_tmp, "OTA")
+        super_split_images = ["super_" + p + ".img" for p in super_device_list]
+        for image in super_split_images:
+          common.ZipWrite(output_zip, os.path.join(images_path, image), image)
+      else:
+        # super image for non-retrofit devices aren't in target files package,
+        # so build it.
+        super_file = common.MakeTempFile("super", ".img")
+        BuildSuperImage(OPTIONS.input_tmp, super_file)
+        common.ZipWrite(output_zip, super_file, "super.img")
 
   finally:
     logger.info("cleaning up...")
