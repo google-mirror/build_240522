@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e35d069_2ef2f321",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4398,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-17T21:43:05Z",
+      "side": 1,
+      "message": "Note that because of this line, super.img will be uploaded to build servers twice (once as-is, once in -img-.zip). Are we okay with this?",
+      "range": {
+        "startLine": 4398,
+        "startChar": 0,
+        "endLine": 4398,
+        "endChar": 64
+      },
+      "revId": "a0e570b994bee4d1045dc0be7a5a08b708941b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
