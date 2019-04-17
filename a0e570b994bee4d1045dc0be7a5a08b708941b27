@@ -46,6 +46,30 @@
       "revId": "a0e570b994bee4d1045dc0be7a5a08b708941b27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c8c72ae_f9b30944",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4398,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-17T22:09:00Z",
+      "side": 1,
+      "message": "I think we still want the following:\n\n- For real devices:\n   - upload super.img to build servers\n   - img.zip contains system.img etc.\n- For virtual devices:\n   - (optionally) upload super.img to build servers\n   - img.zip contains super.img\n\nMaybe we can add a BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE test around this? IDK...",
+      "parentUuid": "7e389830_6ae17801",
+      "range": {
+        "startLine": 4398,
+        "startChar": 0,
+        "endLine": 4398,
+        "endChar": 64
+      },
+      "revId": "a0e570b994bee4d1045dc0be7a5a08b708941b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
