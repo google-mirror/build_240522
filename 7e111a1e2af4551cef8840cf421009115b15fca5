@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e22c2fbb_a247f72b",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 4531,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T20:47:57Z",
+      "side": 1,
+      "message": "Can we have matching change to build/make/tools/releasetools/img_from_target_files.py?\n\nThere happens to be another CL (https://android-review.googlesource.com/c/platform/build/+/947579/2/tools/releasetools/merge_target_files.py#761) that tries to get the image archive through a merged target_files.zip.",
+      "revId": "7e111a1e2af4551cef8840cf421009115b15fca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
