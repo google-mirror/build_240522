@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "297ccba7_57a2e577",
+        "filename": "Deprecation.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-18T00:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adbd05b9_11078987",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "9b2e5da649ae27014d91bcf69697de46b0b23949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f62a676_0eec5e35",
         "filename": "Deprecation.md",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "72c32fe1_c5ad666d",
+        "filename": "Deprecation.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-18T00:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f62a676_0eec5e35",
+      "range": {
+        "startLine": 52,
+        "startChar": 19,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "9b2e5da649ae27014d91bcf69697de46b0b23949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca120a65_187d7ee0",
         "filename": "core/board_config.mk",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "9b2e5da649ae27014d91bcf69697de46b0b23949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deb929f4_c9c208a0",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-18T00:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca120a65_187d7ee0",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 7
+      },
+      "revId": "9b2e5da649ae27014d91bcf69697de46b0b23949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
