@@ -22,6 +22,30 @@
       "revId": "6abc0c5f4d11921911a27229eab325212679cf65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5334b52f_41f84319",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T19:56:29Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/build/+/947579/2/tools/releasetools/common.py#1386 calls shutil.rmtree with ignore_errors\u003dTrue. I think it should be fine here?\n\n(It seems the shutil.rmtree at L99 should be moved to L112 under the finally there. But it\u0027s not directly related to this CL.)",
+      "parentUuid": "0f060922_7d15b012",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 47
+      },
+      "revId": "6abc0c5f4d11921911a27229eab325212679cf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
