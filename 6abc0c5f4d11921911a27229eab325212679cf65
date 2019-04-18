@@ -46,6 +46,30 @@
       "revId": "6abc0c5f4d11921911a27229eab325212679cf65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9db36e57_5c287d19",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-04-18T20:23:01Z",
+      "side": 1,
+      "message": "It does, but the issue is (before this added line):\n\n1. merge_target_files creates temp_dir. OPTIONS.tmpfiles now contains [temp_dir]\n\n2. img_from_target_files creates input_tmp. OPTIONS.tmpfiles now contains [temp_dir, input_tmp]\n\n3. img_from_target_files deletes input_tmp.\n\n4. merge_target_files calls common.Cleanup(), which tries to delete [temp_dir, input_tmp]. Deleting temp_dir is fine, but deleting input_tmp fails. Because input_Tmp was deleted in step 3, the \"os.path.isdir(i)\" in Cleanup() is false so it calls \"os.remove(i)\".\n\n5. os.remove(i) fails saying that there is no file or directory for input_tmp. \n\n\nAnother solution would be to change the os.remove(i) to be guarded by os.path.exists(i).",
+      "parentUuid": "5334b52f_41f84319",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 47
+      },
+      "revId": "6abc0c5f4d11921911a27229eab325212679cf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
