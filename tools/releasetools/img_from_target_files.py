@@ -97,6 +97,7 @@ def main(argv):
     logger.info("cleaning up...")
     common.ZipClose(output_zip)
     shutil.rmtree(OPTIONS.input_tmp)
+    OPTIONS.tempfiles.remove(OPTIONS.input_tmp)
 
   logger.info("done.")
 
