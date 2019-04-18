@@ -16,6 +16,24 @@
       "revId": "f83b127960636b1469aa11f132c7d284b4192e6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef62ce0_536d684f",
+        "filename": "core/force_aapt2.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-04-18T18:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab4d05c_80e2c9da",
+      "revId": "f83b127960636b1469aa11f132c7d284b4192e6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
