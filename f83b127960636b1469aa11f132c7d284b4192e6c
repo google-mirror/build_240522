@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cab4d05c_80e2c9da",
+        "filename": "core/force_aapt2.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-18T17:33:25Z",
+      "side": 1,
+      "message": "This workaround is now being applied if LOCAL_SDK_VERSION is empty -- that doesn\u0027t seem to be the intent.",
+      "revId": "f83b127960636b1469aa11f132c7d284b4192e6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
