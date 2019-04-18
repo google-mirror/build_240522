@@ -22,6 +22,30 @@
       "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "404cdde1_0c7c457a",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-18T18:33:43Z",
+      "side": 1,
+      "message": "Done.\n\nAlso, `make superimage` points to:\n- this file if not BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT\n- the one in $PRODUCT_OUT if BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT\n\nThis file won\u0027t be built in \"make\".",
+      "parentUuid": "608936a8_325b711d",
+      "range": {
+        "startLine": 4439,
+        "startChar": 0,
+        "endLine": 4439,
+        "endChar": 27
+      },
+      "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
