@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "608936a8_325b711d",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T00:59:26Z",
+      "side": 1,
+      "message": "Do we have to call this one (i.e. the one for dist) INSTALLED_SUPERIMAGE_TARGET? It seems to me it should be named differently (like INTERNAL_SUPERIMAGE_TARGET), which will be dist\u0027d at L4446.\n\nThen INSTALLED_SUPERIMAGE_TARGET should always point to the one at $(PRODUCT_OUT), to replace the INSTALLED_SUPERIMAGE_DEV_TARGET in this CL. The phony target of superimage should also point to this file, which won\u0027t be built with `make` (unless having BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT).",
+      "range": {
+        "startLine": 4439,
+        "startChar": 0,
+        "endLine": 4439,
+        "endChar": 27
+      },
+      "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
