@@ -16,6 +16,24 @@
       "revId": "7e111a1e2af4551cef8840cf421009115b15fca5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf3bc60_c8ce70df",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 4531,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-18T20:52:29Z",
+      "side": 1,
+      "message": "That CL (and all merged_target_files script stuff) deals with target files package. It is not affected by this CL. This CL affects img.zip. I didn\u0027t change target files package at all.\n\nAlso, the build super image step happens after merge_target_files; I think they run build_super_image.py directly on the merged target files package.",
+      "parentUuid": "e22c2fbb_a247f72b",
+      "revId": "7e111a1e2af4551cef8840cf421009115b15fca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
