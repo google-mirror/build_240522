@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4dd0eeb_3d3e1011",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4468,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T21:27:19Z",
+      "side": 1,
+      "message": "remove debug? seems it doesn\u0027t have the same meaning with the other occurrences in Makefile.",
+      "range": {
+        "startLine": 4468,
+        "startChar": 24,
+        "endLine": 4468,
+        "endChar": 29
+      },
+      "revId": "4ff715e4072ed313cd8252632af498bfe0186f99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "813e0ffb_06505a8a",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4480,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T21:27:19Z",
+      "side": 1,
+      "message": "similarly for this \"dev\". INSTALLED_SUPERIMAGE_DEPENDENCIES seems better",
+      "range": {
+        "startLine": 4480,
+        "startChar": 21,
+        "endLine": 4480,
+        "endChar": 25
+      },
+      "revId": "4ff715e4072ed313cd8252632af498bfe0186f99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5777321a_1bbb9f44",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4504,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T21:27:19Z",
+      "side": 1,
+      "message": "should be equivalent to $(INSTALLED_SUPERIMAGE_DEV_DEPENDENCIES) now?",
+      "range": {
+        "startLine": 4503,
+        "startChar": 30,
+        "endLine": 4504,
+        "endChar": 105
+      },
+      "revId": "4ff715e4072ed313cd8252632af498bfe0186f99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

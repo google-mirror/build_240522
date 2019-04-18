@@ -46,6 +46,30 @@
       "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4c91a3_27080ca6",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-18T21:27:19Z",
+      "side": 1,
+      "message": "I would still prefer having `superimage` pointing to $(PRODUCT_OUT)/super.img even for real devices. The images built with `superimage`, `systemimage`, `vbmetaimage` should be consistent with each other.\n\nOtherwise with PS9, the built `superimage` would be only useful when building/using along with `updatepackage` (for devices w/ verity on). And it seems hard for developers to get it right.  For real devices, we can even remove the phony shortcut to this dist version?",
+      "parentUuid": "404cdde1_0c7c457a",
+      "range": {
+        "startLine": 4439,
+        "startChar": 0,
+        "endLine": 4439,
+        "endChar": 27
+      },
+      "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
