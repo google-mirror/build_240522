@@ -70,6 +70,30 @@
       "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf35d727_2e9a5f35",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-04-19T00:44:52Z",
+      "side": 1,
+      "message": "For real devices, I want to discourage them from building super image to PRODUCT_OUT. I would even remove the phony target \"superimage\" for real devices. Let me ask the Keystone team to see if that will affect downstream.",
+      "parentUuid": "8c4c91a3_27080ca6",
+      "range": {
+        "startLine": 4439,
+        "startChar": 0,
+        "endLine": 4439,
+        "endChar": 27
+      },
+      "revId": "27e5f74f39b45e06a07a1edfdb1d802b8d8f6b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
