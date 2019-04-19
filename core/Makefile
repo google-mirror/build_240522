@@ -448,7 +448,6 @@ endif
 	        BUILD_HOSTNAME="$(BUILD_HOSTNAME)" \
 	        BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
 	        BOARD_BUILD_SYSTEM_ROOT_IMAGE="$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)" \
-	        AB_OTA_UPDATER="$(AB_OTA_UPDATER)" \
 	        PLATFORM_VERSION="$(PLATFORM_VERSION)" \
 	        PLATFORM_SECURITY_PATCH="$(PLATFORM_SECURITY_PATCH)" \
 	        PLATFORM_BASE_OS="$(PLATFORM_BASE_OS)" \
@@ -522,6 +521,9 @@ $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(intermediate_sys
 	$(hide) echo ro.vendor.product.cpu.abilist64="$(TARGET_CPU_ABI_LIST_64_BIT)">>$@
 	$(hide) echo ro.product.board="$(TARGET_BOOTLOADER_BOARD_NAME)">>$@
 	$(hide) echo ro.board.platform="$(TARGET_BOARD_PLATFORM)">>$@
+ifeq ($(AB_OTA_UPDATER),true)
+	$(hide) echo ro.build.ab_update="$(AB_OTA_UPDATER)">>$@
+endif
 	$(hide) $(call generate-common-build-props,vendor,$@)
 	$(hide) echo "#" >> $@; \
 	        echo "# BOOTIMAGE_BUILD_PROPERTIES" >> $@; \
