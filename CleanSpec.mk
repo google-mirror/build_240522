@@ -620,6 +620,9 @@ $(call add-clean-step, find $(PRODUCT_OUT) -type f -name "generated_*_image_info
 
 # Clean up libicuuc.so and libicui18n.so
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libicu*)
+
+# Clean up adb_debug.propr
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/adb_debug.prop)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
