@@ -1248,6 +1248,25 @@ $(winpthreads_notice_file): \
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(ACP) $< $@
 
+# Carry the public key for update_engine if it's a non-IoT target that
+# uses the AB updater. We use the same key as otacerts but in RSA public key
+# format.
+ifeq ($(AB_OTA_UPDATER),true)
+ifneq ($(PRODUCT_IOT),true)
+ALL_DEFAULT_INSTALLED_MODULES += $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem
+$(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem: $(DEFAULT_KEY_CERT_PAIR).x509.pem
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@)
+	$(hide) openssl x509 -pubkey -noout -in $< > $@
+
+ALL_DEFAULT_INSTALLED_MODULES += \
+    $(TARGET_RECOVERY_ROOT_OUT)/system/etc/update_engine/update-payload-key.pub.pem
+$(TARGET_RECOVERY_ROOT_OUT)/system/etc/update_engine/update-payload-key.pub.pem: \
+	    $(TARGET_OUT_ETC)/update_engine/update-payload-key.pub.pem
+	$(hide) cp -f $< $@
+endif
+endif
+
 
 # #################################################################
 # Targets for user images
