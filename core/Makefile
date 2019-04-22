@@ -2045,7 +2045,8 @@ $(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
   echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
   exit 1; \
 fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
+$(hide) rm -f $(TARGET_OUT)/vendor
+$(hide) ln -s /vendor $(TARGET_OUT)/vendor
 endef
 else
 define create-system-vendor-symlink
