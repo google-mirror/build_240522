@@ -2045,7 +2045,7 @@ $(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
   echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
   exit 1; \
 fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
+$(hide) ln -sf --no-target-directory /vendor $(TARGET_OUT)/vendor
 endef
 else
 define create-system-vendor-symlink
@@ -2060,7 +2060,7 @@ $(hide) if [ -d $(TARGET_OUT)/product ] && [ ! -h $(TARGET_OUT)/product ]; then 
   echo 'You cannot install files to $(TARGET_OUT)/product while building a separate product.img!' 1>&2; \
   exit 1; \
 fi
-$(hide) ln -sf /product $(TARGET_OUT)/product
+$(hide) ln -sf --no-target-directory /product $(TARGET_OUT)/product
 endef
 else
 define create-system-product-symlink
@@ -2075,7 +2075,7 @@ $(hide) if [ -d $(TARGET_OUT)/product_services ] && [ ! -h $(TARGET_OUT)/product
   echo 'You cannot install files to $(TARGET_OUT)/product_services while building a separate product_services.img!' 1>&2; \
   exit 1; \
 fi
-$(hide) ln -sf /product_services $(TARGET_OUT)/product_services
+$(hide) ln -sf --no-target-directory /product_services $(TARGET_OUT)/product_services
 endef
 else
 define create-system-product_services-symlink
@@ -2090,7 +2090,7 @@ $(hide) if [ -d $(TARGET_OUT_VENDOR)/odm ] && [ ! -h $(TARGET_OUT_VENDOR)/odm ];
   echo 'You cannot install files to $(TARGET_OUT_VENDOR)/odm while building a separate odm.img!' 1>&2; \
   exit 1; \
 fi
-$(hide) ln -sf /odm $(TARGET_OUT_VENDOR)/odm
+$(hide) ln -sf --no-target-directory /odm $(TARGET_OUT_VENDOR)/odm
 endef
 else
 define create-vendor-odm-symlink
