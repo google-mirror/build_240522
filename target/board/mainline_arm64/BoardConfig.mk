@@ -28,7 +28,5 @@ include build/make/target/board/BoardConfigMainlineCommon.mk
 
 TARGET_NO_KERNEL := true
 
-AB_OTA_PARTITIONS := system
-
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
