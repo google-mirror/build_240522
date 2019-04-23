@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c089d04_b687ab92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-04-23T04:59:03Z",
+      "side": 1,
+      "message": "I actually comment the function CheckApkAndApexKeysAvailable().\n\nAssertionError: No key specified for:                                                                                                                                       \n  com.android.apex.cts.shim.apex                                                                                                                                            \nUse \u0027-e \u003capkname\u003e\u003d\u0027 to specify a key (which may be an empty string to not sign this apk).  \n\n\nBecause not sure what\u0027s the right way to specify -e.\n\nUsing \"-e com.android.apex.cts.shim.apex\u003d\" seems not work.\nKeyError: \u0027com.android.apex.cts.shim.apex\u0027",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "78369ebbc199ad4507cc0a67f42ed5d67bcf4e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fc0cca7_5dafb086",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-04-23T04:59:03Z",
+      "side": 1,
+      "message": "This file actually won\u0027t be used. The actual file used is L609.\nBut it seems no harm to check it, too. As /force_debuggable should not appear in any case.\n\nSee L206 and L211.\nhttps://android.googlesource.com/platform/system/core/+/2ddb8df2ef22514f1bf91fe73b99877d19b2a964/init/first_stage_init.cpp#206",
+      "range": {
+        "startLine": 608,
+        "startChar": 7,
+        "endLine": 608,
+        "endChar": 43
+      },
+      "revId": "78369ebbc199ad4507cc0a67f42ed5d67bcf4e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
