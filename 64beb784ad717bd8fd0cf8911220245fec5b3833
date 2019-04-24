@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba15de11_ca84b418",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-24T16:57:02Z",
+      "side": 1,
+      "message": "nit: update",
+      "range": {
+        "startLine": 760,
+        "startChar": 40,
+        "endLine": 760,
+        "endChar": 53
+      },
+      "revId": "64beb784ad717bd8fd0cf8911220245fec5b3833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb9faabb_94c72bf9",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-24T16:57:02Z",
+      "side": 1,
+      "message": "This would always give True on devices that don\u0027t have odm partition (e.g. crosshatch), because we can\u0027t differentiate between not having partition and fingerprint blacklisted. vendor partition doesn\u0027t have this concern, as it\u0027s non-optional in this path (L806).\n\nI think for product and odm, we should use `has_odm and FingerprintChanged`, where has_odm can be inferred similarly to L706.",
+      "range": {
+        "startLine": 829,
+        "startChar": 2,
+        "endLine": 829,
+        "endChar": 34
+      },
+      "revId": "64beb784ad717bd8fd0cf8911220245fec5b3833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
