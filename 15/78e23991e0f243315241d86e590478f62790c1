@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Verified+1: Bowgo Tsai <bowgotsai@google.com>
+Autosubmit+1: Bowgo Tsai <bowgotsai@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 24 Apr 2019 14:48:57 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/950217
+Project: platform/build
+Branch: refs/heads/master
