@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab24071d_7492fa28",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2261,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-04-24T10:51:32Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the best location. The other option is to add it after the include of Makefile in main.mk, but then it gets dislocated from APEX_MODULE_LIBS and the other variables above.",
+      "range": {
+        "startLine": 2259,
+        "startChar": 74,
+        "endLine": 2261,
+        "endChar": 10
+      },
+      "revId": "fc505ff49430e29b4bc08519145b766ca59843dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
