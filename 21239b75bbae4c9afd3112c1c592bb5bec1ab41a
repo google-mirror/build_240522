@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b98a1e6_6ac9588c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2230,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-04-25T14:46:33Z",
+      "side": 1,
+      "message": "This is for the sake of http://r.android.com/945216, since % patterns are more restrictive.",
+      "range": {
+        "startLine": 2230,
+        "startChar": 57,
+        "endLine": 2230,
+        "endChar": 58
+      },
+      "revId": "21239b75bbae4c9afd3112c1c592bb5bec1ab41a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
