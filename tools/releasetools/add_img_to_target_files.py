@@ -117,17 +117,28 @@ def GetCareMap(which, imgname):
   """
   assert which in common.PARTITIONS_WITH_CARE_MAP
 
-  simg = sparse_img.SparseImage(imgname)
-  care_map_ranges = simg.care_map
-  size_key = which + "_image_size"
-  image_size = OPTIONS.info_dict.get(size_key)
-  if image_size:
-    # excludes the verity metadata blocks of the given image. When AVB is enabled,
-    # this size is the max image size returned by the AVB tool
-    image_blocks = int(image_size) / 4096 - 1
-    assert image_blocks > 0, "blocks for {} must be positive".format(which)
-    care_map_ranges = care_map_ranges.intersect(
+  image_size = OPTIONS.info_dict.get(which + "_image_size")
+  # We shouldn't attempt using care_map if there's no image size info. As the
+  # care_map will contain the blocks for verity metadata itself, by reading
+  # which would trigger invalid reads.
+  if not image_size:
+    return []
+
+  # Exclude the verity metadata blocks from the given image file. This is the
+  # size that the actual filesystem image resides.
+  image_blocks = int(image_size) / 4096 - 1
+  assert image_blocks > 0, "blocks for {} must be positive".format(which)
+
+  # For sparse images, we will only check the blocks on care map (i.e. the ones
+  # with meaningful data), minus verity metadata blocks.
+  if "extfs_sparse_flag" in OPTIONS.info_dict:
+    simg = sparse_img.SparseImage(imgname)
+    care_map_ranges = simg.care_map.intersect(
         rangelib.RangeSet("0-{}".format(image_blocks)))
+
+  # Otherwise for non-sparse images, we read the entire filesystem image.
+  else:
+    care_map_ranges = rangelib.RangeSet("0-{}".format(image_blocks))
 
   return [which, care_map_ranges.to_string_raw()]
 
