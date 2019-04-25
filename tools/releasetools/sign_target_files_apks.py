@@ -1086,6 +1086,8 @@ def ReadApexKeysInfo(tf_zip):
     payload_private_key = matches.group("PAYLOAD_PRIVATE_KEY")
 
     def CompareKeys(pubkey, pubkey_suffix, privkey, privkey_suffix):
+      if pubkey == 'PRESIGNED' and privkey == 'PRESIGNED':
+        return True
       pubkey_suffix_len = len(pubkey_suffix)
       privkey_suffix_len = len(privkey_suffix)
       return (pubkey.endswith(pubkey_suffix) and
