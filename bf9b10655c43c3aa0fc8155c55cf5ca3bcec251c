@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e294d302_11ee75f3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-25T14:41:15Z",
+      "side": 1,
+      "message": "can you make the equivalent change here?",
+      "revId": "bf9b10655c43c3aa0fc8155c55cf5ca3bcec251c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85ccad7_d53e9e23",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2079,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-25T14:41:15Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "bf9b10655c43c3aa0fc8155c55cf5ca3bcec251c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "561153f1_e699eb7c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2094,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-04-25T14:41:15Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "bf9b10655c43c3aa0fc8155c55cf5ca3bcec251c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
