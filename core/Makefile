@@ -2185,9 +2185,13 @@ endif
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
 # Runtime APEX libraries
+# TODO(b/124293228): Fix remaining bugs and add these libraries to the list:
+#   libicui18n.so
+#   libicuuc.so
 APEX_MODULE_LIBS := \
   libadbconnection.so \
   libandroidicu.so \
+  libandroidio.so \
   libart-compiler.so \
   libart-dexlayout.so \
   libart.so \
@@ -2197,8 +2201,6 @@ APEX_MODULE_LIBS := \
   libdexfile_external.so \
   libdt_fd_forward.so \
   libdt_socket.so \
-  libicui18n.so \
-  libicuuc.so \
   libjavacore.so \
   libjdwp.so \
   libnativebridge.so \
@@ -2211,6 +2213,10 @@ APEX_MODULE_LIBS := \
   libpac.so \
   libprofile.so \
   libsigchain.so \
+
+# Conscrypt APEX libraries
+APEX_MODULE_LIBS += \
+  libjavacrypto.so \
 
 # An option to disable the check below, for local use since some build targets
 # still may create these libraries in /system (b/129006418).
