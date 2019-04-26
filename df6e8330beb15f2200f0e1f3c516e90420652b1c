@@ -22,6 +22,30 @@
       "revId": "df6e8330beb15f2200f0e1f3c516e90420652b1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95d4e5b1_62ba7109",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-04-26T11:59:04Z",
+      "side": 1,
+      "message": "Yes, exactly. It\u0027ll make more sense with http://r.android.com/945216.",
+      "parentUuid": "de294adc_9008f8a7",
+      "range": {
+        "startLine": 2258,
+        "startChar": 61,
+        "endLine": 2258,
+        "endChar": 69
+      },
+      "revId": "df6e8330beb15f2200f0e1f3c516e90420652b1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
