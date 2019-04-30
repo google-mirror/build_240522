@@ -36,7 +36,6 @@ PRODUCT_PACKAGES += \
     SafetyRegulatoryInfo \
     Stk \
     Tag \
-    TimeZoneUpdater \
 
 # Binaries
 PRODUCT_PACKAGES += llkd

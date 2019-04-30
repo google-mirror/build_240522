@@ -252,7 +252,6 @@ PRODUCT_PACKAGES += \
     traced \
     traced_probes \
     tune2fs \
-    tzdatacheck \
     uiautomator \
     uncrypt \
     usbd \
@@ -294,7 +293,6 @@ PRODUCT_HOST_PACKAGES += \
     sqlite3 \
     tinyplay \
     tune2fs \
-    tzdatacheck \
     unwind_info \
     unwind_reg_info \
     unwind_symbols \
