@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b88ceca_ad95a4fa",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2048,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-04-30T15:59:48Z",
+      "side": 1,
+      "message": "It seems the ln on macOS doesn\u0027t support this flag.",
+      "range": {
+        "startLine": 2048,
+        "startChar": 15,
+        "endLine": 2048,
+        "endChar": 36
+      },
+      "revId": "0900821462238b1686d2c0acf28fe2f19df65a27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
