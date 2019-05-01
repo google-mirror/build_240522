@@ -753,6 +753,7 @@ def RewriteProps(data):
     if line and line[0] != '#' and "=" in line:
       key, value = line.split("=", 1)
       if key in ("ro.build.fingerprint", "ro.build.thumbprint",
+                 "ro.system.build.fingerprint", "ro.system.build.thumbprint",
                  "ro.vendor.build.fingerprint", "ro.vendor.build.thumbprint"):
         pieces = value.split("/")
         pieces[-1] = EditTags(pieces[-1])
@@ -766,7 +767,8 @@ def RewriteProps(data):
         assert len(pieces) == 5
         pieces[-1] = EditTags(pieces[-1])
         value = " ".join(pieces)
-      elif key == "ro.build.tags":
+      elif key in ("ro.build.tags", "ro.bootimage.build.tags",
+                   "ro.system.build.tags", "ro.vendor.build.tags"):
         value = EditTags(value)
       elif key == "ro.build.display.id":
         # change, eg, "JWR66N dev-keys" to "JWR66N"
