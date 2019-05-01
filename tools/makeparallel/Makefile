@@ -37,7 +37,7 @@ MAKEPARALLEL_CXX_OBJS := $(patsubst $(MAKEPARALLEL_SRC_PATH)/%.cpp,$(MAKEPARALLE
 MAKEPARALLEL := $(MAKEPARALLEL_BIN_PATH)/makeparallel
 
 ifeq ($(shell uname),Linux)
-MAKEPARALLEL_LIBS := -lrt -lpthread
+MAKEPARALLEL_LIBS := -lpthread
 endif
 
 # Rule to build makeparallel into MAKEPARALLEL_BIN_PATH

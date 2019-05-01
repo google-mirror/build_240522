@@ -296,12 +296,9 @@ my_ldlib_flags :=
 my_shared_libraries += $(patsubst -l%,lib%,$(filter-out $(my_allowed_ldlibs),$(my_ldlibs)))
 my_ldlibs := $(filter $(my_allowed_ldlibs),$(my_ldlibs))
 else # LOCAL_IS_HOST_MODULE
-  # Add -ldl, -lpthread, -lm and -lrt to host builds to match the default behavior of
+  # Add -ldl, -lpthread, and -lm to host builds to match the default behavior of
   # device builds
   my_ldlibs += -ldl -lpthread -lm
-  ifneq ($(HOST_OS),darwin)
-    my_ldlibs += -lrt
-  endif
 endif
 
 ifneq ($(LOCAL_SDK_VERSION),)
