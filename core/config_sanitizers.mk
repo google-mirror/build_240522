@@ -235,12 +235,14 @@ ifneq ($(filter default-ub,$(my_sanitize)),)
   my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
 endif
 
-ifneq ($(filter coverage,$(my_sanitize)),)
-  ifeq ($(filter address,$(my_sanitize)),)
-    $(error $(LOCAL_PATH): $(LOCAL_MODULE): Use of 'coverage' also requires 'address')
-  endif
-  my_cflags += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
-  my_sanitize := $(filter-out coverage,$(my_sanitize))
+ifneq ($(filter fuzzer,$(my_sanitize)),)
+  my_cflags += -fsanitize=fuzzer-no-link
+  my_ldflags += -fsanitize=fuzzer-no-link
+  # TODO(b/131771163): Disable LTO for fuzzer builds. Note that Cfi causes
+  # dependency on LTO.
+  my_sanitize := $(filter-out cfi,$(my_sanitize))
+  my_cflags += -fno-lto
+  my_ldflags += -fno-lto
 endif
 
 ifneq ($(filter integer_overflow,$(my_sanitize)),)
@@ -276,11 +278,16 @@ ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
 endif
 
 ifneq ($(my_sanitize),)
-  fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize))
+  fsanitize_arg := $(filter-out fuzzer,$(my_sanitize))
+  fsanitize_arg := $(subst $(space),$(comma),$(fsanitize_arg))
   my_cflags += -fsanitize=$(fsanitize_arg)
   my_asflags += -fsanitize=$(fsanitize_arg)
 
-  ifdef LOCAL_IS_HOST_MODULE
+  # When fuzzing, we wish to crash with diagnostics on any bug.
+  ifneq ($(filter fuzzer,$(my_sanitize)),)
+    my_cflags += -fno-sanitize-trap=all
+    my_cflags += -fno-sanitize-recover=all
+  else ifdef LOCAL_IS_HOST_MODULE
     my_cflags += -fno-sanitize-recover=all
     my_ldflags += -fsanitize=$(fsanitize_arg)
   else
