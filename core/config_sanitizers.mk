@@ -235,12 +235,9 @@ ifneq ($(filter default-ub,$(my_sanitize)),)
   my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
 endif
 
-ifneq ($(filter coverage,$(my_sanitize)),)
-  ifeq ($(filter address,$(my_sanitize)),)
-    $(error $(LOCAL_PATH): $(LOCAL_MODULE): Use of 'coverage' also requires 'address')
-  endif
-  my_cflags += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
-  my_sanitize := $(filter-out coverage,$(my_sanitize))
+ifneq ($(filter fuzzer,$(my_sanitize)),)
+  my_cflags += -fsanitize=fuzzer-no-link
+  my_ldflags += -fsanitize=fuzzer-no-link
 endif
 
 ifneq ($(filter integer_overflow,$(my_sanitize)),)
@@ -276,7 +273,8 @@ ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
 endif
 
 ifneq ($(my_sanitize),)
-  fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize))
+  fsanitize_arg := $(filter-out fuzzer,$(my_sanitize))
+  fsanitize_arg := $(subst $(space),$(comma),$(fsanitize_arg))
   my_cflags += -fsanitize=$(fsanitize_arg)
   my_asflags += -fsanitize=$(fsanitize_arg)
 
@@ -284,11 +282,14 @@ ifneq ($(my_sanitize),)
     my_cflags += -fno-sanitize-recover=all
     my_ldflags += -fsanitize=$(fsanitize_arg)
   else
-    my_cflags += -fsanitize-trap=all
-    my_cflags += -ftrap-function=abort
-    ifneq ($(filter address thread,$(my_sanitize)),)
-      my_cflags += -fno-sanitize-trap=address,thread
-      my_shared_libraries += libdl
+    # Ensure that for fuzzer configurations we don't trap.
+    ifeq ($(filter fuzzer,$(my_sanitize)),)
+      my_cflags += -fsanitize-trap=all
+      my_cflags += -ftrap-function=abort
+      ifneq ($(filter address thread,$(my_sanitize)),)
+        my_cflags += -fno-sanitize-trap=address,thread
+        my_shared_libraries += libdl
+      endif
     endif
   endif
 endif
@@ -378,7 +379,7 @@ ifeq ($(LOCAL_IS_HOST_MODULE)$(LOCAL_IS_AUX_MODULE),)
   ifneq ($(filter unsigned-integer-overflow signed-integer-overflow integer,$(my_sanitize)),)
     ifeq ($(filter unsigned-integer-overflow signed-integer-overflow integer,$(my_sanitize_diag)),)
       ifeq ($(filter cfi,$(my_sanitize_diag)),)
-        ifeq ($(filter address hwaddress,$(my_sanitize)),)
+        ifeq ($(filter address hwaddress fuzzer,$(my_sanitize)),)
           my_cflags += -fsanitize-minimal-runtime
           my_cflags += -fno-sanitize-trap=integer
           my_cflags += -fno-sanitize-recover=integer

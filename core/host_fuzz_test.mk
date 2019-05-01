@@ -4,7 +4,8 @@
 ################################################
 $(call record-module-type,HOST_FUZZ_TEST)
 
-LOCAL_CFLAGS += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
+LOCAL_CFLAGS += -fsanitize=fuzzer-no-link
+LOCAL_LDFLAGS += -fsanitize=fuzzer-no-link
 LOCAL_STATIC_LIBRARIES += libLLVMFuzzer
 
 include $(BUILD_HOST_EXECUTABLE)

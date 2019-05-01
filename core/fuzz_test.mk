@@ -15,8 +15,8 @@ else ifdef TARGET_FUZZ_ENGINE
     my_fuzzer:=$(TARGET_FUZZ_ENGINE)
 endif
 
-
-LOCAL_CFLAGS += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
+LOCAL_CFLAGS += -fsanitize=fuzzer-no-link
+LOCAL_LDFLAGS += -fsanitize=fuzzer-no-link
 
 ifeq ($(my_fuzzer),libFuzzer)
 LOCAL_STATIC_LIBRARIES += libFuzzer
