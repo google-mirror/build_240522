@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9c18ee3_1e1cac6b",
+        "filename": "core/soong_cc_prebuilt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-05-02T17:46:05Z",
+      "side": 1,
+      "message": "Use 2 spaces instead of tabs.\n\nCan we rewrite these to .native_bridge in Soong?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 1
+      },
+      "revId": "f817d6a39572bedd10f67c10fb163a6a505bcab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
