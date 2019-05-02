@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "ce0182b4_76757b00",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-02T23:32:31Z",
+      "side": 1,
+      "message": "Does -fno-sanitize-trap\u003daddress,thread even do anything? These sanitizers do not support trap mode.",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a7c8bdd_31e9f3b8",
         "filename": "core/config_sanitizers.mk",
         "patchSetId": 1
