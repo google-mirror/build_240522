@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71ca1269_15f03209",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-05-02T14:23:35Z",
+      "side": 1,
+      "message": "this one was removed recently in http://r.android..com/954560",
+      "range": {
+        "startLine": 770,
+        "startChar": 37,
+        "endLine": 770,
+        "endChar": 62
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
