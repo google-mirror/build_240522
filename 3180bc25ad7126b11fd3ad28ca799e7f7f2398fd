@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea22fc11_2b7af671",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-02T23:25:42Z",
+      "side": 1,
+      "message": "It makes sense to handle \"fuzzer\" value here by appending to fsanitize_arg instead of above.",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a3c36b_f011cfdb",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-02T23:25:42Z",
+      "side": 1,
+      "message": "I\u0027d rather end ifeq(fuzzer) block here (before starting the address thread block).\nI don\u0027t remember why libdl is here, but it should not be affected by fuzzer.",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a7c8bdd_31e9f3b8",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-02T23:25:42Z",
+      "side": 1,
+      "message": "Is this necessary? I don\u0027t think we want minimal runtime when fuzzing (we want full runtime), and trapping should already be disabled above.",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbfe7f2a_8fe81107",
+        "filename": "core/fuzz_test.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-02T23:25:42Z",
+      "side": 1,
+      "message": "why not LOCAL_SANITIZE +\u003d fuzzer ?",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
