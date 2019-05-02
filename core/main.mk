@@ -1206,33 +1206,49 @@ endef
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
 # Runtime APEX libraries
+# TODO: Investigate:
+#   libc_malloc_hooks.so
+#   libc_malloc_debug.so
 APEX_MODULE_LIBS := \
   libadbconnection.so \
+  libadbconnectiond.so \
   libandroidicu.so \
   libandroidio.so \
   libart-compiler.so \
   libart-dexlayout.so \
+  libart-disassembler.so \
   libart.so \
   libartbase.so \
+  libartbased.so \
+  libartd-compiler.so \
+  libartd-dexlayout.so \
+  libartd.so \
   libartpalette.so \
+  libc.so \
   libdexfile.so \
   libdexfile_external.so \
+  libdexfiled.so \
   libdexfiled_external.so \
+  libdl.so \
   libdt_fd_forward.so \
   libdt_socket.so \
   libicui18n.so \
   libicuuc.so \
   libjavacore.so \
   libjdwp.so \
+  libm.so \
   libnativebridge.so \
   libnativehelper.so \
   libnativeloader.so \
   libnpt.so \
   libopenjdk.so \
   libopenjdkjvm.so \
+  libopenjdkjvmd.so \
   libopenjdkjvmti.so \
+  libopenjdkjvmtid.so \
   libpac.so \
   libprofile.so \
+  libprofiled.so \
   libsigchain.so \
 
 # Conscrypt APEX libraries
@@ -1243,6 +1259,15 @@ APEX_MODULE_LIBS += \
 # still may create these libraries in /system (b/129006418).
 DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
 
+# Exclude bootstrap Bionic (% at end to exclude files instead of subdirectories).
+APEX_LIBS_ABSENCE_CHECK_EXCLUDE := \
+  lib/bootstrap/libc.% \
+  lib/bootstrap/libdl.% \
+  lib/bootstrap/libm.% \
+  lib64/bootstrap/libc.% \
+  lib64/bootstrap/libdl.% \
+  lib64/bootstrap/libm.% \
+
 # Exclude lib/arm and lib/arm64 which contain the native bridge proxy libs. They
 # are compiled for the guest architecture and used with an entirely different
 # linker config. The native libs are then linked to as usual via exported
@@ -1250,7 +1275,7 @@ DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
 # native architecture.
 # TODO(b/130630776): Introduce a make variable for the appropriate directory
 # when native bridge is active.
-APEX_LIBS_ABSENCE_CHECK_EXCLUDE := lib/arm lib/arm64
+APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/arm lib/arm64
 
 # Exclude vndk-* subdirectories which contain prebuilts from older releases.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/vndk-% lib64/vndk-%
