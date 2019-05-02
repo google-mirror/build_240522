@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1e88dfdf_aafb60a7",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-02T17:02:00Z",
+      "side": 1,
+      "message": "Can you also add the following to the list?\nPRODUCT/build.prop\nPRODUCT_SERVICES/build.prop\nODM/build.prop",
+      "range": {
+        "startLine": 560,
+        "startChar": 22,
+        "endLine": 560,
+        "endChar": 41
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f853813_5117056b",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-02T17:02:00Z",
+      "side": 1,
+      "message": "I think it\u0027s fine to do partial match, since we have limited the rewrite to build.prop files\n\nkey.startswith(\"ro.\") and key.endswith(\".build.fingerprint\", \".build.thumbprint\")",
+      "range": {
+        "startLine": 755,
+        "startChar": 9,
+        "endLine": 757,
+        "endChar": 77
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71ca1269_15f03209",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 2
@@ -18,6 +64,29 @@
         "startChar": 37,
         "endLine": 770,
         "endChar": 62
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4bb6ffd_d449d3a2",
+        "filename": "tools/releasetools/test_sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-02T17:02:00Z",
+      "side": 1,
+      "message": "It would be great if you can add some sanity check here. The test can be triggered via `atest releasetools_test`, or `python -m unittest test_sign_target_files_apks`, and will be run during presubmit.",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 23
       },
       "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
