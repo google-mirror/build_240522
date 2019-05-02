@@ -1,0 +1,9 @@
+Verified+1: Calin Juravle <calin@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Nicolas Geoffray <ngeoffray@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Submitted-by: Calin Juravle <calin@google.com>
+Submitted-at: Thu, 02 May 2019 17:56:09 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/955258
+Project: platform/build
+Branch: refs/heads/master
