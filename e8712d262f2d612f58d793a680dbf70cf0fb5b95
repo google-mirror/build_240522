@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9909e8f4_5587f608",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-03T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e88dfdf_aafb60a7",
+      "range": {
+        "startLine": 560,
+        "startChar": 22,
+        "endLine": 560,
+        "endChar": 41
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f853813_5117056b",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2275ca88_62926a29",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-03T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f853813_5117056b",
+      "range": {
+        "startLine": 755,
+        "startChar": 9,
+        "endLine": 757,
+        "endChar": 77
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71ca1269_15f03209",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7b4248f_d681d2f7",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-03T17:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71ca1269_15f03209",
+      "range": {
+        "startLine": 770,
+        "startChar": 37,
+        "endLine": 770,
+        "endChar": 62
+      },
+      "revId": "e8712d262f2d612f58d793a680dbf70cf0fb5b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
