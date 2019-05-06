@@ -291,7 +291,7 @@ _product_var_list += PRODUCT_CFI_EXCLUDE_PATHS
 _product_var_list += PRODUCT_DISABLE_SCUDO
 
 # A flag to override PRODUCT_COMPATIBLE_PROPERTY
-_product_var_list += PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE
+_product_var_list += PRODUCT_EXTRA_VNDK_VERSIONS
 
 # Whether the whitelist of actionable compatible properties should be disabled or not
 _product_var_list += PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE
