@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ecf3ea86_1b49f4b8",
+        "filename": "core/soong_cc_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2019-05-06T17:57:53Z",
+      "side": 1,
+      "message": "This (both previously and currently) doesn\u0027t actually package any coverage files.  Static libraries compiled in soong do not create a coverage zip, and thus any Android.mk that includes a soong-built static library is missing the .gcno files from the static library.\n\nSoong-built shared libraries and executables already include the .gcno files from any static libraries in their own coverage zip, so the only missing data is when we cross from a soong-built static library to an Android.mk-built module.",
+      "revId": "c83f93ce271076c03705aafab41e775a15555147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
