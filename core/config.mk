@@ -596,7 +596,8 @@ FAT16COPY := build/make/tools/fat16copy.py
 CHECK_LINK_TYPE := build/make/tools/check_link_type.py
 CHECK_ELF_FILE := build/make/tools/check_elf_file.py
 LPMAKE := $(HOST_OUT_EXECUTABLES)/lpmake$(HOST_EXECUTABLE_SUFFIX)
-BUILD_SUPER_IMAGE := build/make/tools/releasetools/build_super_image.py
+BUILD_IMAGE := $(HOST_OUT_EXECUTABLES)/build_image
+BUILD_SUPER_IMAGE := $(HOST_OUT_EXECUTABLES)/build_super_image
 
 PROGUARD_HOME := external/proguard
 PROGUARD := $(PROGUARD_HOME)/bin/proguard.sh
