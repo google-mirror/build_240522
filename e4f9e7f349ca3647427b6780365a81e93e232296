@@ -16,6 +16,24 @@
       "revId": "e4f9e7f349ca3647427b6780365a81e93e232296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d819c2d1_b4f4509e",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-05-07T16:10:31Z",
+      "side": 1,
+      "message": "Rephrased a bit, although it doesn\u0027t really add any more info. I don\u0027t think this is the place to explain the rationale for bootstrap Bionic and why it\u0027s in there.",
+      "parentUuid": "8d645107_fbb1a7d6",
+      "revId": "e4f9e7f349ca3647427b6780365a81e93e232296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
