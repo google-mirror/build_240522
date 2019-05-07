@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "699e6e70_1b4cb8e8",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-05-07T16:01:48Z",
+      "side": 0,
+      "message": "you need to add a cleanspec too or the next CL is going to break incremental builds",
+      "range": {
+        "startLine": 124,
+        "startChar": 22,
+        "endLine": 126,
+        "endChar": 23
+      },
+      "revId": "c43a3e1103b92fd8f896f36f13c168574023c273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
