@@ -259,8 +259,8 @@ ifndef LOCAL_IS_HOST_MODULE
 
   # When an sdk lib name is listed in LOCAL_JAVA_LIBRARIES, move it to LOCAL_SDK_LIBRARIES, so that
   # it is correctly redirected to the stubs library.
-  LOCAL_SDK_LIBRARIES += $(filter $(JAVA_SDK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
-  LOCAL_JAVA_LIBRARIES := $(filter-out $(JAVA_SDK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
+  LOCAL_SDK_LIBRARIES += $(patsubst %.stubs,%,$(filter $(JAVA_SDK_LIBRARIES) $(addsuffix .stubs,$(JAVA_SDK_LIBRARIES)),$(LOCAL_JAVA_LIBRARIES)))
+  LOCAL_JAVA_LIBRARIES := $(filter-out $(JAVA_SDK_LIBRARIES) $(addsuffix .stubs,$(JAVA_SDK_LIBRARIES)),$(LOCAL_JAVA_LIBRARIES))
 
   ifeq ($(LOCAL_SDK_VERSION),)
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)

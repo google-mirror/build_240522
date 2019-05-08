@@ -672,8 +672,9 @@ endef
 ###########################################################
 
 define module-stubs-files
-$(foreach module,$(1),$(if $(filter $(module),$(JAVA_SDK_LIBRARIES)),\
-$(call java-lib-files,$(module).stubs),$(ALL_MODULES.$(module).STUBS)))
+$(strip $(foreach module,$(patsubst %.stubs,%,$(1)),\
+  $(if $(filter $(module),$(JAVA_SDK_LIBRARIES)),\
+    $(call java-lib-files,$(module).stubs),$(ALL_MODULES.$(module).STUBS))))
 endef
 
 ###########################################################
