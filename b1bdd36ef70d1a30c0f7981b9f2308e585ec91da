@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80c0664d_bc6c3e2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1103203
+      },
+      "writtenOn": "2019-05-08T16:47:50Z",
+      "side": 1,
+      "message": "nit suggestion: \"Replace ... with ...\" -\u003e \"Rename ... -\u003e ....\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "b1bdd36ef70d1a30c0f7981b9f2308e585ec91da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89f0d7ff_97789e4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1103203
+      },
+      "writtenOn": "2019-05-08T16:47:50Z",
+      "side": 1,
+      "message": "nit: \"allowed\" -\u003e \"historically allowed\", \"historically meant\" -\u003e \"meant\"?",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "b1bdd36ef70d1a30c0f7981b9f2308e585ec91da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df8999d_ca996694",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1103203
+      },
+      "writtenOn": "2019-05-08T16:47:50Z",
+      "side": 1,
+      "message": "You probably want to also conduct a full-text search to ensure that no other references to \"EXPERIMENTAL_USE_OPENJDK9\" exist (including in downstream branches), and then note in a Test: line that you have done so?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "b1bdd36ef70d1a30c0f7981b9f2308e585ec91da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
