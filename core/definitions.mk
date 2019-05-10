@@ -1997,6 +1997,7 @@ define dump-words-to-file
         @$(call emit-line,$(wordlist 13001,13500,$(1)),$(2))
         @$(if $(wordlist 13501,13502,$(1)),$(error Too many words ($(words $(1)))))
 endef
+
 # Return jar arguments to compress files in a given directory
 # $(1): directory
 #
