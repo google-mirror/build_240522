@@ -1536,11 +1536,19 @@ recovery_sepolicy := \
     $(TARGET_RECOVERY_ROOT_OUT)/plat_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/vendor_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/plat_property_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/plat_service_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/plat_hwservice_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/vendor_property_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/vendor_service_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/vendor_hwservice_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/odm_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/odm_property_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/odm_service_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/odm_hwservice_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/product_file_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/product_property_contexts
+    $(TARGET_RECOVERY_ROOT_OUT)/product_property_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/product_service_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/product_hwservice_contexts
 
 # Passed into rsync from non-recovery root to recovery root, to avoid overwriting recovery-specific
 # SELinux files
