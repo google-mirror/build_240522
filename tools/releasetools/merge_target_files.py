@@ -160,7 +160,6 @@ default_system_misc_info_keys = [
 
 default_other_item_list = [
     'META/boot_filesystem_config.txt',
-    'META/file_contexts.bin',
     'META/otakeys.txt',
     'META/releasetools.py',
     'META/vendor_filesystem_config.txt',
@@ -483,6 +482,20 @@ def process_misc_info_txt(system_target_files_temp_dir,
         list_suffix='_partition_list')
     merged_info_dict.update(merged_dynamic_partitions_dict)
 
+  # Replace <image>_selinux_fc keys.
+  # selinux_fc properties are replaced with the full path to the file under
+  # META/ when misc_info.txt is loaded from target files for repacking, so
+  # only the file basename is required.
+  for key in merged_info_dict:
+    if key.endswith('_selinux_fc'):
+      merged_info_dict[key] = 'other_file_contexts.bin'
+  for key in system_info_dict:
+    if key.endswith('_selinux_fc'):
+      merged_info_dict[key] = 'system_file_contexts.bin'
+  # Default to other_file_contexts.bin for images without <image>_selinux_fc.
+  if 'selinux_fc' in merged_info_dict:
+    merged_info_dict['selinux_fc'] = 'other_file_contexts.bin'
+
   output_misc_info_txt = os.path.join(output_target_files_temp_dir, 'META',
                                       'misc_info.txt')
   with open(output_misc_info_txt, 'w') as output:
@@ -544,6 +557,16 @@ def process_dynamic_partitions_info_txt(system_target_files_dir,
       output.write('{}={}\n'.format(key, merged_dynamic_partitions_dict[key]))
 
 
+def process_file_contexts(system_target_files_dir, other_target_files_dir,
+                          output_target_files_dir):
+  shutil.copyfile(
+      os.path.join(system_target_files_dir, 'META', 'file_contexts.bin'),
+      os.path.join(output_target_files_dir, 'META', 'system_file_contexts.bin'))
+  shutil.copyfile(
+      os.path.join(other_target_files_dir, 'META', 'file_contexts.bin'),
+      os.path.join(output_target_files_dir, 'META', 'other_file_contexts.bin'))
+
+
 def process_special_cases(system_target_files_temp_dir,
                           other_target_files_temp_dir,
                           output_target_files_temp_dir, system_misc_info_keys,
@@ -576,6 +599,11 @@ def process_special_cases(system_target_files_temp_dir,
   if rebuild_recovery:
     append_recovery_to_filesystem_config(
         output_target_files_temp_dir=output_target_files_temp_dir)
+
+  process_file_contexts(
+      system_target_files_dir=system_target_files_temp_dir,
+      other_target_files_dir=other_target_files_temp_dir,
+      output_target_files_dir=output_target_files_temp_dir)
 
   process_misc_info_txt(
       system_target_files_temp_dir=system_target_files_temp_dir,

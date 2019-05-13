@@ -249,6 +249,15 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
   fs_type = prop_dict.get("fs_type", "")
   run_e2fsck = False
 
+  # Prefer the image-specific selinux_fc property if it exists.
+  image = os.path.basename(out_file).replace('.img', '')
+  if "%s_selinux_fc" % image in prop_dict:
+    selinux_fc = prop_dict["%s_selinux_fc" % image]
+  elif "selinux_fc" in prop_dict:
+    selinux_fc = prop_dict["selinux_fc"]
+  else:
+    selinux_fc = None
+
   if fs_type.startswith("ext"):
     build_command = [prop_dict["ext_mkuserimg"]]
     if "extfs_sparse_flag" in prop_dict:
@@ -288,8 +297,8 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
     if "ext4_share_dup_blocks" in prop_dict:
       build_command.append("-c")
     build_command.extend(["--inode_size", "256"])
-    if "selinux_fc" in prop_dict:
-      build_command.append(prop_dict["selinux_fc"])
+    if selinux_fc:
+      build_command.append(selinux_fc)
   elif fs_type.startswith("squash"):
     build_command = ["mksquashfsimage.sh"]
     build_command.extend([in_dir, out_file])
@@ -300,8 +309,8 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       build_command.extend(["-d", target_out])
     if fs_config:
       build_command.extend(["-C", fs_config])
-    if "selinux_fc" in prop_dict:
-      build_command.extend(["-c", prop_dict["selinux_fc"]])
+    if selinux_fc:
+      build_command.extend(["-c", selinux_fc])
     if "block_list" in prop_dict:
       build_command.extend(["-B", prop_dict["block_list"]])
     if "squashfs_block_size" in prop_dict:
@@ -320,8 +329,8 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
     build_command.extend(["-f", in_dir])
     if target_out:
       build_command.extend(["-D", target_out])
-    if "selinux_fc" in prop_dict:
-      build_command.extend(["-s", prop_dict["selinux_fc"]])
+    if selinux_fc:
+      build_command.extend(["-s", selinux_fc])
     build_command.extend(["-t", prop_dict["mount_point"]])
     if "timestamp" in prop_dict:
       build_command.extend(["-T", str(prop_dict["timestamp"])])
@@ -520,6 +529,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "extfs_sparse_flag",
       "squashfs_sparse_flag",
       "selinux_fc",
+      "%s_selinux_fc" % mount_point,
       "skip_fsck",
       "ext_mkuserimg",
       "verity",
