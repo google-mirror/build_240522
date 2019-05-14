@@ -22,6 +22,30 @@
       "revId": "87c470e127be8a0e37c522bb531b51ea65830fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4d7e1b8_5b25f11b",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-05-14T22:09:28Z",
+      "side": 0,
+      "message": "I removed it here because otherwise validate_config_lists returns an error if your merge config files don\u0027t include it.\n\nYou\u0027re right, it\u0027ll get copied but not used.",
+      "parentUuid": "6a878c77_99fe46cc",
+      "range": {
+        "startLine": 163,
+        "startChar": 5,
+        "endLine": 163,
+        "endChar": 27
+      },
+      "revId": "87c470e127be8a0e37c522bb531b51ea65830fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
