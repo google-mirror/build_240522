@@ -1,0 +1,7 @@
+Code-Review+2: Mikhail Naganov <mnaganov@google.com>
+Build-Cop-Override+1: Andrew Lehmer <alehmer@google.com>
+Submitted-by: Andrew Lehmer <alehmer@google.com>
+Submitted-at: Tue, 14 May 2019 21:19:24 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/961439
+Project: platform/build
+Branch: refs/heads/master
