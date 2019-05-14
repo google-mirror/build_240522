@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e45ecd9c_bb0cc3fd",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-05-14T21:53:30Z",
+      "side": 1,
+      "message": "Should this raise an exception? If there is no file contexts property, we can\u0027t build a proper image. I guess it\u0027s functionally compatible with the code that was there before.",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 21
+      },
+      "revId": "0dce447cf6f35668fc21d6187857c8f1daf2ec71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
