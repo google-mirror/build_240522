@@ -45,6 +45,30 @@
       "revId": "144f41e3e9e95dba064f61d95cbc89ec602d4dcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39da2da3_c36a0722",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-05-14T08:57:24Z",
+      "side": 1,
+      "message": "I was thinking that we can opt out the _OVERRIDE suffix from the product variable,\nbut we already have a product variable that has _OVERRIDE suffix in product.mk.\nLet me update the variable name to OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS instead.",
+      "parentUuid": "6c27c129_643852d1",
+      "range": {
+        "startLine": 733,
+        "startChar": 6,
+        "endLine": 733,
+        "endChar": 42
+      },
+      "revId": "144f41e3e9e95dba064f61d95cbc89ec602d4dcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
