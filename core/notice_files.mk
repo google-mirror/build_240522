@@ -38,6 +38,13 @@ else
 endif
 endif
 
+# If current VNDK is not installed, skip NOTICE files also.
+ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
+  ifeq ($(LOCAL_SOONG_LINK_TYPE),native:vndk)
+    notice_file :=
+  endif
+endif
+
 installed_notice_file :=
 
 ifdef notice_file
