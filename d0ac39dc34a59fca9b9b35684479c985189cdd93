@@ -16,6 +16,24 @@
       "revId": "d0ac39dc34a59fca9b9b35684479c985189cdd93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be186cce_65bc2149",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:52:44Z",
+      "side": 1,
+      "message": "No need for ubsan, libfuzzer provides its own printing/helpers :)",
+      "parentUuid": "1c7256bb_a7d5734a",
+      "revId": "d0ac39dc34a59fca9b9b35684479c985189cdd93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

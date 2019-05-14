@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "c9f7473c_31b4a6b9",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:52:44Z",
+      "side": 1,
+      "message": "my_sanitize is from SANITIZE_TARGET. We use SANITIZE_TARGET\u003d\u0027fuzzer\u0027 to add fuzzer-no-link. It\u0027s a little confusing from the build system rules, but I think it makes sense in the context of users, where they use SANITIZE_TARGET\u003d\u0027fuzzer\u0027 to mean \"build with fuzzer support\", and their fuzzers just need to use core/fuzz_test.mk (or -fsanitize\u003dfuzzer explicitly) in order to link the fuzzer mainfile.\n\nI\u0027ve move the filtering up into the above check, where it transforms my_sanitize\u003dfuzzer to my_sanitize\u003dfuzzer-no-link, which should make it a little easier to parse what happens down here.",
+      "parentUuid": "fd80ba58_92168837",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86a3c36b_f011cfdb",
         "filename": "core/config_sanitizers.mk",
         "patchSetId": 1
