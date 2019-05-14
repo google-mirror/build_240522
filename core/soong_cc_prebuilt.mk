@@ -51,6 +51,15 @@ ifndef LOCAL_UNINSTALLABLE_MODULE
   endif
 endif
 
+ifndef LOCAL_UNINSTALLABLE_MODULE
+  ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
+    # Don't install current VNDK when it is told so
+    ifeq (native:vndk,$(LOCAL_SOONG_LINK_TYPE))
+      LOCAL_UNINSTALLABLE_MODULE := true
+    endif
+  endif
+endif
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################

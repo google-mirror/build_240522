@@ -46,6 +46,8 @@ else ifeq ($(TARGET_BUILD_PDK),true)
 # b/118634643: don't check VNDK lib list when building PDK. Some libs (libandroid_net.so
 # and some render-script related ones) can't be built in PDK due to missing frameworks/base.
 check-vndk-list: ;
+else ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
+check-vndk-list: ;
 else
 check-vndk-list: $(check-vndk-list-timestamp)
 endif
