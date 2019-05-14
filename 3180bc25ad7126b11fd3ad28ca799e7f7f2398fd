@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d93f0cdd_22f64547",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:04:41Z",
+      "side": 1,
+      "message": "Given that the above \"fuzzer\" handling now includes additional operations (disabling CFI, lto) - is this okay with you?",
+      "parentUuid": "ea22fc11_2b7af671",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86a3c36b_f011cfdb",
         "filename": "core/config_sanitizers.mk",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fa98fbd_8c387732",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:04:41Z",
+      "side": 1,
+      "message": "Changed it to be logically consistent with cc.go.",
+      "parentUuid": "86a3c36b_f011cfdb",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "575ba140_8031fb47",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:04:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce0182b4_76757b00",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a7c8bdd_31e9f3b8",
         "filename": "core/config_sanitizers.mk",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "f2c78f1c_e1142a86",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a7c8bdd_31e9f3b8",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbfe7f2a_8fe81107",
         "filename": "core/fuzz_test.mk",
         "patchSetId": 1
@@ -84,6 +156,24 @@
       "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0fdd49_d81908ca",
+        "filename": "core/fuzz_test.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-14T20:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbfe7f2a_8fe81107",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
