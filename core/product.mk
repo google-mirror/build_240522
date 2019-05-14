@@ -519,6 +519,10 @@ _readonly_late_variables += \
   PRODUCT_DEX_PREOPT_NEVER_ALLOW_STRIPPING \
   PRODUCT_DEX_PREOPT_BOOT_FLAGS \
 
+# Overriden by the build command
+_readonly_late_variables += \
+  PRODUCT_EXTRA_VNDK_VERSIONS \
+
 _readonly_early_variables := $(filter-out $(_readonly_late_variables),$(_product_var_list))
 
 #
