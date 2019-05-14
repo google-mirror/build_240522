@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c7256bb_a7d5734a",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-05-14T20:17:57Z",
+      "side": 1,
+      "message": "will it work to add \"undefined\" to my_sanitize_diag instead?\nIt would link ubsan if there is no asan/hwasan.",
+      "revId": "d0ac39dc34a59fca9b9b35684479c985189cdd93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
