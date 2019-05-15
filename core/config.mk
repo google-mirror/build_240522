@@ -1179,6 +1179,13 @@ include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
 endif
 
+# If the tapas is *tradefed-all, enable SKIP_SUITE_XML_CHECK
+ifndef SKIP_SUITE_XML_CHECK
+ifneq (,$(filter %tradefed-all,$(TARGET_BUILD_APPS)))
+SKIP_SUITE_XML_CHECK := true
+endif
+endif
+
 -include external/linux-kselftest/android/kselftest_test_list.mk
 -include external/ltp/android/ltp_package_list.mk
 DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages) $(kselftest_modules)

@@ -2910,8 +2910,11 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $$(COMPATIBILITY.$(suite).MODULES) $$(my_register_name))) \
 $(eval $(my_all_targets) : $(call copy-many-files, \
   $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_$(suite))))) \
-  $(call copy-many-xml-files-checked, \
-    $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite))))))
+  $(if $(SKIP_SUITE_XML_CHECK),\
+    $(call copy-many-files, \
+      $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite))))),\
+    $(call copy-many-xml-files-checked, \
+      $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite)))))))
 endef
 
 ###########################################################
