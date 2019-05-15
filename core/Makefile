@@ -33,12 +33,14 @@ $(foreach cf,$(unique_product_copy_files_pairs), \
         $(eval product_copy_files_ignored += $(cf)), \
         $(eval _fulldest := $(call append-path,$(PRODUCT_OUT),$(_dest))) \
         $(if $(filter %.xml,$(_dest)),\
-            $(eval $(call copy-xml-file-checked,$(_src),$(_fulldest))),\
-            $(if $(and $(filter %.jar,$(_dest)),$(filter $(basename $(notdir $(_dest))),$(PRODUCT_LOADED_BY_PRIVILEGED_MODULES))),\
-                $(eval $(call copy-and-uncompress-dexs,$(_src),$(_fulldest))), \
-                $(if $(filter init%rc,$(notdir $(_dest)))$(filter %/etc/init,$(dir $(_dest))),\
-                    $(eval $(call copy-init-script-file-checked,$(_src),$(_fulldest))),\
-                    $(eval $(call copy-one-file,$(_src),$(_fulldest)))))) \
+            $(if $(SKIP_XML_CHECK)),\
+                $(eval $(call copy-one-file,$(_src),$(_fulldest))),\
+                $(eval $(call copy-xml-file-checked,$(_src),$(_fulldest))),\
+                $(if $(and $(filter %.jar,$(_dest)),$(filter $(basename $(notdir $(_dest))),$(PRODUCT_LOADED_BY_PRIVILEGED_MODULES))),\
+                    $(eval $(call copy-and-uncompress-dexs,$(_src),$(_fulldest))), \
+                    $(if $(filter init%rc,$(notdir $(_dest)))$(filter %/etc/init,$(dir $(_dest))),\
+                        $(eval $(call copy-init-script-file-checked,$(_src),$(_fulldest))),\
+                        $(eval $(call copy-one-file,$(_src),$(_fulldest))))))) \
         $(eval unique_product_copy_files_destinations += $(_dest))))
 
 # Dump a list of overriden (and ignored PRODUCT_COPY_FILES entries)

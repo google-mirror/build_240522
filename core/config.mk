@@ -1179,6 +1179,10 @@ include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
 endif
 
+ifeq ($(TARGET_BUILD_APPS),google-tradefed-all)
+SKIP_XML_CHECK=true
+endif
+
 -include external/linux-kselftest/android/kselftest_test_list.mk
 -include external/ltp/android/ltp_package_list.mk
 DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages) $(kselftest_modules)
