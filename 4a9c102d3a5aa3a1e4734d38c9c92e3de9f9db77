@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e8f606b_7418a64f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-05-15T04:31:14Z",
+      "side": 1,
+      "message": "VNDK",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "4a9c102d3a5aa3a1e4734d38c9c92e3de9f9db77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95129e34_2399d352",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-05-15T04:31:14Z",
+      "side": 1,
+      "message": "native:vndk_private must be skipped as well.",
+      "range": {
+        "startLine": 43,
+        "startChar": 33,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "4a9c102d3a5aa3a1e4734d38c9c92e3de9f9db77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
