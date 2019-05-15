@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "824d92cb_5f5aa0b6",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-15T01:32:37Z",
+      "side": 1,
+      "message": "After cherrypicking this for my own testing, it is necessary. It\u0027s guarding to ensure that we don\u0027t get minimal runtime, which can happen here if you have SANITIZE_TARGET\u003d\u0027fuzzer\u0027 and an Android.mk file with \"LOCAL_SANITIZE :\u003d integer\".",
+      "parentUuid": "f2c78f1c_e1142a86",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbfe7f2a_8fe81107",
         "filename": "core/fuzz_test.mk",
         "patchSetId": 1
