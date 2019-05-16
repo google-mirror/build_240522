@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85f89319_f6c6257c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2019-05-16T03:42:21Z",
+      "side": 1,
+      "message": "t",
+      "range": {
+        "startLine": 11,
+        "startChar": 38,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "d3cde84d5a502c4b2e120def3b84832e60fbe31c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65e6e2a4_f3ce5e12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2019-05-16T03:42:21Z",
+      "side": 1,
+      "message": "s",
+      "range": {
+        "startLine": 12,
+        "startChar": 45,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "d3cde84d5a502c4b2e120def3b84832e60fbe31c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42d1e9e8_5c986522",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2019-05-16T03:42:21Z",
+      "side": 1,
+      "message": "Do you mean,\n\nTherefore, AIDEGen has to build the stubs.jar to the module\u0027s dependencies just as it do for classes.jar.",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 50
+      },
+      "revId": "d3cde84d5a502c4b2e120def3b84832e60fbe31c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b17770d_f957d796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1342378
+      },
+      "writtenOn": "2019-05-16T03:42:21Z",
+      "side": 1,
+      "message": "which is",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "d3cde84d5a502c4b2e120def3b84832e60fbe31c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
