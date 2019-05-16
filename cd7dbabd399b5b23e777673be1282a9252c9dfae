@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4509870c_a92cfba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1348646
+      },
+      "writtenOn": "2019-05-16T06:55:35Z",
+      "side": 1,
+      "message": "for module",
+      "range": {
+        "startLine": 12,
+        "startChar": 70,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "cd7dbabd399b5b23e777673be1282a9252c9dfae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
