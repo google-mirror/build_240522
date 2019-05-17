@@ -227,6 +227,9 @@ ifdef LOCAL_DEX_PREOPT
 
   $(call add_json_bool, NoStripping,                    $(filter nostripping,$(LOCAL_DEX_PREOPT)))
 
+  $(call add_json_bool, UsesNonSdkApis,                 $(filter true,$(LOCAL_PRIVATE_PLATFORM_APIS)))
+  $(call add_json_bool, SignedWithPlatformCertificate,  $(filter platform,$(LOCAL_CERTIFICATE)))
+
   $(call json_end)
 
   my_dexpreopt_config := $(intermediates)/dexpreopt.config
