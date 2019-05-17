@@ -183,6 +183,8 @@ ifdef LOCAL_DEX_PREOPT
     endif  # TARGET_2ND_ARCH
   endif  # LOCAL_MODULE_CLASS
 
+  my_dex_location := $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE))
+
   # Record dex-preopt config.
   DEXPREOPT.$(LOCAL_MODULE).DEX_PREOPT := $(LOCAL_DEX_PREOPT)
   DEXPREOPT.$(LOCAL_MODULE).MULTILIB := $(LOCAL_MULTILIB)
@@ -200,7 +202,7 @@ ifdef LOCAL_DEX_PREOPT
   # be filled in by dexpreopt_gen.
 
   $(call add_json_str,  Name,                           $(LOCAL_MODULE))
-  $(call add_json_str,  DexLocation,                    $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE)))
+  $(call add_json_str,  DexLocation,                    $(my_dex_location))
   $(call add_json_str,  BuildPath,                      $(LOCAL_BUILT_MODULE))
   $(call add_json_str,  ExtrasOutputPath,               $$2)
   $(call add_json_bool, Privileged,                     $(filter true,$(LOCAL_PRIVILEGED_MODULE)))
@@ -226,6 +228,11 @@ ifdef LOCAL_DEX_PREOPT
   $(call add_json_bool, PresignedPrebuilt,              $(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
 
   $(call add_json_bool, NoStripping,                    $(filter nostripping,$(LOCAL_DEX_PREOPT)))
+
+  $(call add_json_bool, UsesNonSdkApis,                 $(filter true,$(LOCAL_PRIVATE_PLATFORM_APIS)))
+  ifneq ($(filter /system/%,$(my_dex_location)),)
+    $(call add_json_bool, IsSystemApp,                  true)
+  endif
 
   $(call json_end)
 
