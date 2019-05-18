@@ -867,6 +867,7 @@ $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_ROOT))
 ifdef BOARD_PREBUILT_DTBIMAGE_DIR
 INSTALLED_DTBIMAGE_TARGET := $(PRODUCT_OUT)/dtb.img
 $(INSTALLED_DTBIMAGE_TARGET) : $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))
+	echo DTB File list : $^ BOARD_PREBUILT_DTBIMAGE_DIR=$(BOARD_PREBUILT_DTBIMAGE_DIR)
 	cat $^ > $@
 endif
 
