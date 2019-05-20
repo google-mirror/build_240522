@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55323e13_aaf69033",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-20T19:28:13Z",
+      "side": 1,
+      "message": "this condition is different from the rest (`ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG`)",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 43
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee3d5736_6fea12c0",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-20T19:28:13Z",
+      "side": 1,
+      "message": "Shall we add some sanity check into core/board_config.mk to assert that BOARD_INCLUDE_DTB_IN_BOOTIMG must be defined ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG?",
+      "range": {
+        "startLine": 862,
+        "startChar": 6,
+        "endLine": 862,
+        "endChar": 33
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec41be40_d1322782",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 3877,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-20T19:28:13Z",
+      "side": 1,
+      "message": "It seems we\u0027re missing the dependency on this file for BUILT_TARGET_FILES_PACKAGE.\n\nL3876 also has a different guarding condition from L3906. Seems we can use ifdef INSTALLED_DTBIMAGE_TARGET for both?",
+      "range": {
+        "startLine": 3877,
+        "startChar": 14,
+        "endLine": 3877,
+        "endChar": 39
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
