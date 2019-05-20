@@ -246,6 +246,24 @@
       "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fba7bd95_fa7f0de6",
+        "filename": "core/fuzz_test.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-20T23:58:57Z",
+      "side": 1,
+      "message": "Sorry, actually done this time.",
+      "parentUuid": "412f177e_df34635b",
+      "revId": "3180bc25ad7126b11fd3ad28ca799e7f7f2398fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
