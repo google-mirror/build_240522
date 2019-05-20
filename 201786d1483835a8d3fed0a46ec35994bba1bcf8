@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b7ce924_d7fabb02",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-20T20:17:35Z",
+      "side": 1,
+      "message": "Fixed in latest PS.",
+      "parentUuid": "55323e13_aaf69033",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 43
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee3d5736_6fea12c0",
         "filename": "core/Makefile",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6c140a13_d3f8df25",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-20T20:17:35Z",
+      "side": 1,
+      "message": "Makes sense, added the check in the latest PS.",
+      "parentUuid": "ee3d5736_6fea12c0",
+      "range": {
+        "startLine": 862,
+        "startChar": 6,
+        "endLine": 862,
+        "endChar": 33
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec41be40_d1322782",
         "filename": "core/Makefile",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43fdfb59_4383e4ff",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 3877,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-20T20:17:35Z",
+      "side": 1,
+      "message": "Added the dependency and used ifdef INSTALLED_DTBIMAGE_TARGET  at L3906.",
+      "parentUuid": "ec41be40_d1322782",
+      "range": {
+        "startLine": 3877,
+        "startChar": 14,
+        "endLine": 3877,
+        "endChar": 39
+      },
+      "revId": "201786d1483835a8d3fed0a46ec35994bba1bcf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
