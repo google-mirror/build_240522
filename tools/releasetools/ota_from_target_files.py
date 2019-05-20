@@ -595,6 +595,14 @@ def HasVendorPartition(target_files_zip):
     return False
 
 
+def HasProductPartition(target_files_zip):
+  try:
+    target_files_zip.getinfo("PRODUCT/")
+    return True
+  except KeyError:
+    return False
+
+
 def HasTrebleEnabled(target_files_zip, target_info):
   return (HasVendorPartition(target_files_zip) and
           target_info.GetBuildProp("ro.treble.enabled") == "true")
@@ -801,7 +809,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   device_specific.FullOTA_InstallBegin()
 
-  system_progress = 0.75
+  system_progress = 0.5
 
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
@@ -834,6 +842,15 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     vendor_tgt.ResetFileMap()
     vendor_diff = common.BlockDifference("vendor", vendor_tgt)
     vendor_diff.WriteScript(script, output_zip)
+
+  if HasProductPartition(input_zip):
+    script.ShowProgress(0.25, 0)
+
+    product_tgt = common.GetSparseImage("product", OPTIONS.input_tmp, input_zip,
+                                       allow_shared_blocks)
+    product_tgt.ResetFileMap()
+    product_diff = common.BlockDifference("product", product_tgt)
+    product_diff.WriteScript(script, output_zip)
 
   AddCompatibilityArchiveIfTrebleEnabled(input_zip, output_zip, target_info)
 
@@ -1417,6 +1434,26 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   else:
     vendor_diff = None
 
+  if HasProductPartition(target_zip):
+    if not HasProductPartition(source_zip):
+      raise RuntimeError("can't generate incremental that adds /product")
+    product_src = common.GetSparseImage("product", OPTIONS.source_tmp, source_zip,
+                                       allow_shared_blocks)
+    product_tgt = common.GetSparseImage("product", OPTIONS.target_tmp, target_zip,
+                                       allow_shared_blocks)
+
+    # Check first block of product partition for remount R/W only if
+    # disk type is ext4
+    product_partition = source_info["fstab"]["/product"]
+    check_first_block = product_partition.fs_type == "ext4"
+    disable_imgdiff = product_partition.fs_type == "squashfs"
+    product_diff = common.BlockDifference("product", product_tgt, product_src,
+                                         check_first_block,
+                                         version=blockimgdiff_version,
+                                         disable_imgdiff=disable_imgdiff)
+  else:
+    product_diff = None
+
   AddCompatibilityArchiveIfTrebleEnabled(
       target_zip, output_zip, target_info, source_info)
 
@@ -1487,6 +1524,8 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
     size.append(system_diff.required_cache)
   if vendor_diff:
     size.append(vendor_diff.required_cache)
+  if product_diff:
+    size.append(product_diff.required_cache)
 
   if updating_boot:
     boot_type, boot_device = common.GetTypeAndDevice("/boot", source_info)
@@ -1531,16 +1570,22 @@ else
   system_diff.WriteVerifyScript(script, touched_blocks_only=True)
   if vendor_diff:
     vendor_diff.WriteVerifyScript(script, touched_blocks_only=True)
+  if product_diff:
+    product_diff.WriteVerifyScript(script, touched_blocks_only=True)
 
   script.Comment("---- start making changes here ----")
 
   device_specific.IncrementalOTA_InstallBegin()
 
+  # TODO tweak the progress of each partition
   system_diff.WriteScript(script, output_zip,
                           progress=0.8 if vendor_diff else 0.9)
 
   if vendor_diff:
     vendor_diff.WriteScript(script, output_zip, progress=0.1)
+
+  if product_diff:
+    product_diff.WriteScript(script, output_zip, progress=0.1)
 
   if OPTIONS.two_step:
     common.ZipWriteStr(output_zip, "boot.img", target_boot.data)
