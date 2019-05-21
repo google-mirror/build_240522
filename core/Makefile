@@ -420,7 +420,6 @@ endif
 	        BUILD_USERNAME="$(BUILD_USERNAME)" \
 	        BUILD_HOSTNAME="$(BUILD_HOSTNAME)" \
 	        BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
-	        BOARD_BUILD_SYSTEM_ROOT_IMAGE="$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)" \
 	        PLATFORM_VERSION="$(PLATFORM_VERSION)" \
 	        PLATFORM_SECURITY_PATCH="$(PLATFORM_SECURITY_PATCH)" \
 	        PLATFORM_BASE_OS="$(PLATFORM_BASE_OS)" \
@@ -488,6 +487,11 @@ $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(intermediate_sys
 	@echo Target vendor buildinfo: $@
 	@mkdir -p $(dir $@)
 	$(hide) echo > $@
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+	$(hide) echo ro.build.system_root_image=true >> $@
+else
+	$(hide) echo ro.build.system_root_image=false >> $@
+endif
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
 	$(hide) echo ro.boot.dynamic_partitions=true >> $@
 endif
