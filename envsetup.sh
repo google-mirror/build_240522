@@ -249,6 +249,10 @@ function setpaths()
     ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_DEV_SCRIPTS:
     export ANDROID_BUILD_PATHS
 
+    # Append llvm binutils prebuilts path to ANDROID_BUILD_PATHS.
+    export ANDROID_LLVM_BINUTILS=$(get_abs_build_var ANDROID_CLANG_PREBUILTS)/llvm-binutils-stable
+    ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_LLVM_BINUTILS:
+
     # If prebuilts/android-emulator/<system>/ exists, prepend it to our PATH
     # to ensure that the corresponding 'emulator' binaries are used.
     case $(uname -s) in
