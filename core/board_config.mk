@@ -81,6 +81,7 @@ _dynamic_partitions_var_list += \
   BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE \
   BOARD_SUPER_PARTITION_SIZE \
   BOARD_SUPER_PARTITION_GROUPS \
+  BOARD_SUPER_PARTITION_WARN_LIMIT \
 
 _board_strip_readonly_list += $(_dynamic_partitions_var_list)
 
