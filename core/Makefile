@@ -3455,6 +3455,8 @@ endif
 # $(1): human-readable max size string
 # $(2): max size expression
 # $(3): list of partition names
+# $(4): human-readable warn size string
+# $(5): warn size expression
 define check-sum-of-partition-sizes
   partition_size_list="$$(for i in $(call read-size-of-partitions,$(3)); do \
     echo $(call round-partition-size,$${i}); \
@@ -3465,6 +3467,12 @@ define check-sum-of-partition-sizes
     echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(2)" '==' $$(( $(2) )); \
     exit 1; \
   else \
+    if [[ ! -z "$5" ]]; then \
+      if [ $$(( $${sum_sizes_expr} )) -gt $$(( $(5) )) ]; then \
+        echo "!!!! WARNING !!!! The sum of sizes of [$(strip $(3))] is larger than $(strip $(4)): "; \
+        echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(5)" '==' $$(( $(5) )); \
+      fi; \
+    fi; \
     echo "The sum of sizes of [$(strip $(3))] is within $(strip $(1)):"; \
     echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' "$(2)" '==' $$(( $(2) )); \
   fi;
@@ -3472,9 +3480,14 @@ endef
 
 define check-all-partition-sizes-target
   # Check sum(all partitions) <= super partition (/ 2 for A/B devices launched with dynamic partitions)
-  $(if $(BOARD_SUPER_PARTITION_SIZE),$(if $(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+  $(if $(BOARD_SUPER_PARTITION_SIZE),$(if $(BOARD_SUPER_PARTITION_PARTITION_LIST),$(if $(BOARD_SUPER_PARTITION_WARN_LIMIT),\
     $(call check-sum-of-partition-sizes,BOARD_SUPER_PARTITION_SIZE$(if $(call super-slot-suffix), / 2), \
-      $(BOARD_SUPER_PARTITION_SIZE)$(if $(call super-slot-suffix), / 2),$(BOARD_SUPER_PARTITION_PARTITION_LIST))))
+      $(BOARD_SUPER_PARTITION_SIZE)$(if $(call super-slot-suffix), / 2),$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+      BOARD_SUPER_PARTITION_WARN_LIMIT$(if $(call super-slot-suffix), / 2), \
+      $(BOARD_SUPER_PARTITION_WARN_LIMIT)$(if $(call super-slot-suffix), / 2)), \
+    $(call check-sum-of-partition-sizes,BOARD_SUPER_PARTITION_SIZE$(if $(call super-slot-suffix), / 2), \
+      $(BOARD_SUPER_PARTITION_SIZE)$(if $(call super-slot-suffix), / 2),$(BOARD_SUPER_PARTITION_PARTITION_LIST)) \
+  )))
 
   # For each group, check sum(partitions in group) <= group size
   $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
