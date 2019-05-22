@@ -123,6 +123,13 @@ class MergeTargetFilesTest(test_utils.ReleaseToolsTestCase):
         validate_config_lists(system_item_list, default_system_misc_info_keys,
                               default_other_item_list))
 
+  def test_validate_config_lists_ReturnsFalseIfSharedExtractedPartition(self):
+    other_item_list = default_other_item_list[:]
+    other_item_list.append('SYSTEM/my_system_file')
+    self.assertFalse(
+        validate_config_lists(default_system_item_list,
+                              default_system_misc_info_keys, other_item_list))
+
   def test_validate_config_lists_ReturnsFalseIfBadSystemMiscInfoKeys(self):
     for bad_key in ['dynamic_partition_list', 'super_partition_groups']:
       system_misc_info_keys = default_system_misc_info_keys[:]

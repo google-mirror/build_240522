@@ -296,6 +296,8 @@ def validate_config_lists(system_item_list, system_misc_info_keys,
   Returns:
     False if a validation fails, otherwise true.
   """
+  has_error = False
+
   default_combined_item_set = set(default_system_item_list)
   default_combined_item_set.update(default_other_item_list)
 
@@ -310,15 +312,38 @@ def validate_config_lists(system_item_list, system_misc_info_keys,
     logger.error('Please ensure missing items are in either the '
                  'system-item-list or other-item-list files provided to '
                  'this script.')
-    return False
+    has_error = True
+
+  # Check that the merge config lists do not attempt to extract items from both
+  # builds for any of the following partitions. These partitions should come
+  # entirely from a single build (either system or other, but not both).
+  single_build_partitions = [
+      'BOOT/',
+      'DATA/',
+      'ODM/',
+      'PRODUCT/',
+      'RADIO/',
+      'ROOT/',
+      'SYSTEM/',
+      'VENDOR/',
+  ]
+  for partition in single_build_partitions:
+    in_system = any(item.startswith(partition) for item in system_item_list)
+    in_other = any(item.startswith(partition) for item in other_item_list)
+    if in_system and in_other:
+      logger.error(
+          'Cannot extract items from {0} for both the system and other builds. '
+          'Please ensure only one merge config item list includes {0}.'.format(
+              partition))
+      has_error = True
 
   if ('dynamic_partition_list' in system_misc_info_keys) or (
       'super_partition_groups' in system_misc_info_keys):
     logger.error('Dynamic partition misc info keys should come from '
                  'the other instance of META/misc_info.txt.')
-    return False
+    has_error = True
 
-  return True
+  return not has_error
 
 
 def process_ab_partitions_txt(system_target_files_temp_dir,
