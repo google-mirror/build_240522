@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06575af0_d83ed5cd",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1453040
+      },
+      "writtenOn": "2019-05-22T03:48:47Z",
+      "side": 1,
+      "message": "Using this method, the m* commands will not show up when the user runs hmm.",
+      "range": {
+        "startLine": 1484,
+        "startChar": 0,
+        "endLine": 1490,
+        "endChar": 1
+      },
+      "revId": "4259916c1606f257e8c1c74a99d194f15404379c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
