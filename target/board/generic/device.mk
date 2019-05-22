@@ -22,3 +22,5 @@
 #   NFC configuration file should be in vendor/etc, instead of system/etc
 PRODUCT_COPY_FILES += \
     device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
+
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true

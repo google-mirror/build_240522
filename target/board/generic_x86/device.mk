@@ -22,3 +22,5 @@ endif
 PRODUCT_HOST_PACKAGES += \
 	bios.bin \
 	vgabios-cirrus.bin \
+
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true

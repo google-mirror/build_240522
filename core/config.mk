@@ -699,6 +699,10 @@ $(foreach req,$(requirements),$(eval $(req)_OVERRIDE ?=))
 $(KATI_obsolete_var $(foreach req,$(requirements),$(req)_OVERRIDE) \
     ,This should be referenced without the _OVERRIDE suffix.)
 
+ifneq (true,$(PRODUCT_ENFORCE_VINTF_MANIFEST))
+  $(error PRODUCT_ENFORCE_VINTF_MANIFEST is being deprecated)
+endif
+
 requirements :=
 
 # BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED can be true only if early-mount of
