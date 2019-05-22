@@ -223,25 +223,37 @@ def RunAndWait(args, verbose=None, **kwargs):
             args, proc.returncode))
 
 
-def RunAndCheckOutput(args, verbose=None, **kwargs):
+def RunAndCheckOutput(args, verbose=None, no_returned_output=False, **kwargs):
   """Runs the given command and returns the output.
 
   Args:
     args: The command represented as a list of strings.
     verbose: Whether the commands should be shown. Default to the global
         verbosity if unspecified.
+    no_returned_output: no need to return the process output which is immediately
+        displayed on stdout if required by verbose argument
     kwargs: Any additional args to be passed to subprocess.Popen(), such as env,
         stdin, etc. stdout and stderr will default to subprocess.PIPE and
         subprocess.STDOUT respectively unless caller specifies any of them.
 
   Returns:
     The output string.
+    Unless if no_returned_output is true, in that case nothing is returned
 
   Raises:
     ExternalError: On non-zero exit from the command.
   """
-  proc = Run(args, verbose=verbose, **kwargs)
+  if no_returned_output == True and verbose != False:
+    # set stdout=None, stderr=None so output logs are
+    # displayed on pipe inherited from parent.
+    # We assume that no kwargs are passed in that case.
+    proc = Run(args, verbose=verbose, stdout=None, stderr=None)
+  else:
+    proc = Run(args, verbose=verbose, **kwargs)
   output, _ = proc.communicate()
+  # if output already displayed, no need to display it again
+  if no_returned_output == True and verbose != False:
+    output = ""
   # Don't log any if caller explicitly says so.
   if verbose != False:
     logger.info("%s", output.rstrip())
@@ -249,6 +261,8 @@ def RunAndCheckOutput(args, verbose=None, **kwargs):
     raise ExternalError(
         "Failed to run command '{}' (exit code {}):\n{}".format(
             args, proc.returncode, output))
+  if no_returned_output == True:
+    return
   return output
 
 
