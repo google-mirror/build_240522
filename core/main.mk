@@ -1260,7 +1260,7 @@ APEX_LIBS_ABSENCE_CHECK_EXCLUDE := lib/bootstrap lib64/bootstrap
 # native architecture.
 # TODO(b/130630776): Introduce a make variable for the appropriate directory
 # when native bridge is active.
-APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/arm lib/arm64
+APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/arm lib64/arm64
 
 # Exclude vndk-* subdirectories which contain prebuilts from older releases.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/vndk-% lib64/vndk-%
