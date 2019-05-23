@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c14819e5_869e9e20",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3477,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-23T22:58:24Z",
+      "side": 1,
+      "message": "nit: it might be helpful to also print the current use%, as the sizes are usually 10-digit numbers",
+      "range": {
+        "startLine": 3477,
+        "startChar": 89,
+        "endLine": 3477,
+        "endChar": 90
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e67d06_95f731b3",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-05-23T22:58:24Z",
+      "side": 1,
+      "message": "Seems less likely one will promptly set an optional flag. Use a default % that\u0027s overridable?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
