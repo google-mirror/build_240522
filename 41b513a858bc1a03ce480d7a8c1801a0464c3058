@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "778ed586_257ea8b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-05-23T13:24:56Z",
+      "side": 1,
+      "message": "If I remember correctly we got a lib/arm64 in the Runtime APEX at some point, but I can no longer reproduce that. If you\u0027re certain it can\u0027t happen anymore then no problem.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "41b513a858bc1a03ce480d7a8c1801a0464c3058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e35ae357_5057b6b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-05-23T13:24:56Z",
+      "side": 1,
+      "message": "Should http://cs/aosp-master/art/build/apex/art_apex_test.py?l\u003d504\u0026rcl\u003df667508a2103cfafd1582df6aeea144490f1d11d be fixed as well?",
+      "range": {
+        "startLine": 9,
+        "startChar": 37,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "41b513a858bc1a03ce480d7a8c1801a0464c3058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5761a75a_24fe5a56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-05-23T13:24:56Z",
+      "side": 1,
+      "message": "What is this? Doesn\u0027t work for me as a lunch or make target.",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "41b513a858bc1a03ce480d7a8c1801a0464c3058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc5f2aad_b44c0227",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-05-23T13:24:56Z",
+      "side": 1,
+      "message": "Another mention.",
+      "range": {
+        "startLine": 1256,
+        "startChar": 22,
+        "endLine": 1256,
+        "endChar": 31
+      },
+      "revId": "41b513a858bc1a03ce480d7a8c1801a0464c3058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
