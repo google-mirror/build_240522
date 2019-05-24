@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b68608a7_735ff70b",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2019-05-24T17:51:11Z",
+      "side": 1,
+      "message": "setup_one_odex.mk is long gone. Point the readers to dexpreopt.go or just remove this comment?",
+      "revId": "ef2d51a1db3cf34aaa3582c21823b32d40e59d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
