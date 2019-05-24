@@ -31,7 +31,7 @@ optional_uses_libraries=$(echo "${badging}" | grep "uses-library-not-required" |
 # Verify that the uses libraries match exactly.
 # Currently we validate the ordering of the libraries since it matters for resolution.
 single_line_libs=$(echo "${uses_libraries}" | tr '\n' ' ' | awk '{$1=$1}1')
-if [[ "${single_line_libs}" != "${uses_library_names}" ]]; then
+if [[ -n "${uses_library_names}" && "${single_line_libs}" != "${uses_library_names}" ]]; then
   echo "LOCAL_USES_LIBRARIES (${uses_library_names})" \
        "do not match (${single_line_libs}) in manifest for ${local_apk}"
   exit 1
@@ -39,7 +39,7 @@ fi
 
 # Verify that the optional uses libraries match exactly.
 single_line_optional_libs=$(echo "${optional_uses_libraries}" | tr '\n' ' ' | awk '{$1=$1}1')
-if [[ "${single_line_optional_libs}" != "${optional_uses_library_names}" ]]; then
+if [[ -n "${optional_uses_library_names}" && "${single_line_optional_libs}" != "${optional_uses_library_names}" ]]; then
   echo "LOCAL_OPTIONAL_USES_LIBRARIES (${optional_uses_library_names}) " \
        "do not match (${single_line_optional_libs}) in manifest for ${local_apk}"
   exit 1
