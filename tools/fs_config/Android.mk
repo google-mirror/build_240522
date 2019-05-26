@@ -93,6 +93,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_PARTITION_LIST := $(fs_config_generate_extra_partition_list)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+ifneq (,$(PRIVATE_PARTITION_LIST))
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
 	@mkdir -p $(dir $@)
 	$< fsconfig \
@@ -103,6 +104,17 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_G
 	   --dirs \
 	   --out_file $@ \
 	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+else
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+endif
 
 ##################################
 # Generate the system/etc/fs_config_files binary file for the target
@@ -118,6 +130,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_PARTITION_LIST := $(fs_config_generate_extra_partition_list)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+ifneq (,$(PRIVATE_PARTITION_LIST))
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
 	@mkdir -p $(dir $@)
 	$< fsconfig \
@@ -128,6 +141,17 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_G
 	   --files \
 	   --out_file $@ \
 	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+else
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+endif
 
 ifneq ($(filter vendor,$(fs_config_generate_extra_partition_list)),)
 ##################################
