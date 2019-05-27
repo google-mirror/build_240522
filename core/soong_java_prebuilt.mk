@@ -20,6 +20,8 @@ full_classes_pre_proguard_jar := $(intermediates.COMMON)/classes-pre-proguard.ja
 full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 common_javalib.jar := $(intermediates.COMMON)/javalib.jar
 
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)
+
 ifdef LOCAL_SOONG_AAR
   LOCAL_ADDITIONAL_CHECKED_MODULE += $(LOCAL_SOONG_AAR)
 endif
