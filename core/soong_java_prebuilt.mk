@@ -172,3 +172,6 @@ $(my_exported_sdk_libs_file):
 		$(hide) touch $@)
 
 SOONG_ALREADY_CONV := $(SOONG_ALREADY_CONV) $(LOCAL_MODULE)
+
+# Add the line in the bottom to make sure the my_register_name is current module.
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)
