@@ -159,6 +159,8 @@ endif
 $(common_classes_jar) : $(my_src_jar)
 	$(transform-prebuilt-to-target)
 
+ALL_MODULES.$(LOCAL_MODULE).CLASSES_JAR := $(common_classes_jar)
+
 ifneq ($(TURBINE_ENABLED),false)
 $(common_header_jar) : $(my_src_jar)
 	$(transform-prebuilt-to-target)
