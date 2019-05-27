@@ -172,3 +172,5 @@ $(my_exported_sdk_libs_file):
 		$(hide) touch $@)
 
 SOONG_ALREADY_CONV := $(SOONG_ALREADY_CONV) $(LOCAL_MODULE)
+
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)

@@ -240,3 +240,4 @@ $(my_exported_sdk_libs_file):
 endif # ! prebuilt_module_is_dex_javalib
 endif # LOCAL_IS_HOST_MODULE is not set
 
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(common_classes_jar)
