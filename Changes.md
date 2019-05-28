@@ -445,6 +445,18 @@ is 26 or 27, you can add `"target-level"="1"` to your device manifest instead.
 Clang is the default and only supported Android compiler, so there is no reason
 for this option to exist.
 
+### Stop using PRODUCT_STATIC_BOOT_CONTROL_HAL {#PRODUCT_STATIC_BOOT_CONTROL_HAL}
+
+`PRODUCT_STATIC_BOOT_CONTROL_HAL` was the workaround to allow sideloading with statically linked
+boot control HAL, before shared library HALs were supported under recovery. Android Q has added such
+support (HALs will be loaded in passthrough mode), and the workarounds are being removed. Targets
+should build and install the recovery variant of boot control HAL modules into recovery image,
+similar to the ones installed for normal boot. See the change to crosshatch for example of this:
+
+* [device/google/crosshatch/bootctrl/Android.bp] for bootctrl.sdm845 building rules
+* [device/google/crosshatch/device.mk] for installing bootctrl.sdm845.recovery and
+  android.hardware.boot@1.0-impl.recovery into recovery image
+
 ### Other envsetup.sh variables  {#other_envsetup_variables}
 
 * ANDROID_TOOLCHAIN
@@ -462,3 +474,5 @@ version.
 [external/fonttools/Lib/fontTools/Android.bp]: https://android.googlesource.com/platform/external/fonttools/+/master/Lib/fontTools/Android.bp
 [frameworks/base/Android.bp]: https://android.googlesource.com/platform/frameworks/base/+/master/Android.bp
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
+[device/google/crosshatch/bootctrl/Android.bp]: https://android.googlesource.com/device/google/crosshatch/+/master/bootctrl/Android.bp
+[device/google/crosshatch/device.mk]: https://android.googlesource.com/device/google/crosshatch/+/master/device.mk
