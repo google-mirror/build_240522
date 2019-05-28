@@ -6,6 +6,10 @@ See [build/make/Deprecation.md](Deprecation.md) for the current status.
 
 ## `PRODUCT_HOST_PACKAGES` split from `PRODUCT_PACKAGES` {#PRODUCT_HOST_PACKAGES}
 
+
+
+
+
 Previously, adding a module to `PRODUCT_PACKAGES` that supported both the host
 and the target (`host_supported` in Android.bp; two modules with the same name
 in Android.mk) would cause both to be built and installed. In many cases you
