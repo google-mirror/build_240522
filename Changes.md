@@ -22,6 +22,8 @@ Functional differences between `PRODUCT_PACKAGES` and `PRODUCT_HOST_PACKAGES`:
 * `PRODUCT_HOST_PACKAGES` requires listed modules to exist, and be host
   modules. (Unless `ALLOW_MISSING_DEPENDENCIES` is set)
 
+nice!!
+
 This is still an active migration, so currently it still uses
 `PRODUCT_PACKAGES` to make installation decisions, but verifies that if we used
 `PRODUCT_HOST_PACKAGES`, it would trigger installation for all of the same host
