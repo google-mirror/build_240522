@@ -15,7 +15,7 @@ just affect target modules, while `PRODUCT_HOST_PACKAGES` is being added for
 host modules.
 
 Functional differences between `PRODUCT_PACKAGES` and `PRODUCT_HOST_PACKAGES`:
-
+ 
 * `PRODUCT_HOST_PACKAGES` does not have `_ENG`/`_DEBUG` variants, as that's a
   property of the target, not the host.
 * `PRODUCT_HOST_PACKAGES` does not support `LOCAL_MODULE_OVERRIDES`.
