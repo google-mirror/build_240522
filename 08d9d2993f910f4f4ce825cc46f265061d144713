@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8de87f44_b1e19c53",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3470,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-05-28T04:12:02Z",
+      "side": 1,
+      "message": "elif [[ ! -z \"$(5)\" ]] \u0026\u0026 [ $$(( $${sum_sizes_expr} )) -gt $$(( $(5) )) ]; then \\",
+      "range": {
+        "startLine": 3469,
+        "startChar": 2,
+        "endLine": 3470,
+        "endChar": 6
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3f04f8b_8e8406e2",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3470,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-05-28T04:12:02Z",
+      "side": 1,
+      "message": "parans",
+      "range": {
+        "startLine": 3470,
+        "startChar": 17,
+        "endLine": 3470,
+        "endChar": 18
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c14819e5_869e9e20",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -18,6 +64,29 @@
         "startChar": 89,
         "endLine": 3477,
         "endChar": 90
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21173973_20d057e2",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3483,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-05-28T04:12:02Z",
+      "side": 1,
+      "message": "nit: Instead of duplicating the call to check-sum-of-partition-sizes, you can just leave the fourth and fifth arguments empty:\n\n$(if $(BOARD_SUPER_PARTITION_SIZE),$(if $(BOARD_SUPER_PARTITION_PARTITION_LIST), \\\n  $(call check-sum-of-partition-sizes, \\\n    BOARD_SUPER_PARTITION_SIZE$(if $(call super-slot-suffix), / 2), \\\n    $(BOARD_SUPER_PARTITION_SIZE)$(if $(call super-slot-suffix), / 2), \\\n    $(BOARD_SUPER_PARTITION_PARTITION_LIST), \\\n    $(if $(BOARD_SUPER_PARTITION_WARN_LIMIT), \\ \n      BOARD_SUPER_PARTITION_WARN_LIMIT$(if $(call super-slot-suffix), / 2)),\\\n    $(if $(BOARD_SUPER_PARTITION_WARN_LIMIT), \\ \n      $(BOARD_SUPER_PARTITION_WARN_LIMIT)$(if $(call super-slot-suffix), / 2))\\\n   )))",
+      "range": {
+        "startLine": 3483,
+        "startChar": 82,
+        "endLine": 3483,
+        "endChar": 122
       },
       "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
