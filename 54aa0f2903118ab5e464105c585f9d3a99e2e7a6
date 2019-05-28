@@ -22,6 +22,30 @@
       "revId": "54aa0f2903118ab5e464105c585f9d3a99e2e7a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1276eef_e7159c32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1308042
+      },
+      "writtenOn": "2019-05-28T01:53:30Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.",
+      "parentUuid": "b36d27f2_b4341fc8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "54aa0f2903118ab5e464105c585f9d3a99e2e7a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
