@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce5d5b69_86a3fda6",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-05-28T21:06:51Z",
+      "side": 1,
+      "message": "Should we include the following as well?\n      \u0027PRODUCT_SERVICES/\u0027,\n      \u0027RECOVERY/\u0027,\n      \u0027SYSTEM_OTHER/\u0027,",
+      "range": {
+        "startLine": 319,
+        "startChar": 2,
+        "endLine": 319,
+        "endChar": 25
+      },
+      "revId": "f11ab087988202726a1ca59a523430a2ffc144b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
