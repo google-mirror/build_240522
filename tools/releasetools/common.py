@@ -47,19 +47,9 @@ logger = logging.getLogger(__name__)
 
 class Options(object):
   def __init__(self):
-    base_out_path = os.getenv('OUT_DIR_COMMON_BASE')
-    if base_out_path is None:
-      base_search_path = "out"
-    else:
-      base_search_path = os.path.join(base_out_path,
-                                      os.path.basename(os.getcwd()))
-
-    platform_search_path = {
-        "linux2": os.path.join(base_search_path, "host/linux-x86"),
-        "darwin": os.path.join(base_search_path, "host/darwin-x86"),
-    }
-
-    self.search_path = platform_search_path.get(sys.platform)
+    # Caller needs to explicitly set the search path via `--path`, if needing to
+    # sign any file (APKs, OTA package etc).
+    self.search_path = None
     self.signapk_path = "framework/signapk.jar"  # Relative to search_path
     self.signapk_shared_library_path = "lib64"   # Relative to search_path
     self.extra_signapk_args = []
@@ -1109,6 +1099,9 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
     codename_to_api_level_map = {}
   if extra_signapk_args is None:
     extra_signapk_args = OPTIONS.extra_signapk_args
+
+  if OPTIONS.search_path is None:
+    raise ValueError("--path must be set in order to sign files")
 
   java_library_path = os.path.join(
       OPTIONS.search_path, OPTIONS.signapk_shared_library_path)
