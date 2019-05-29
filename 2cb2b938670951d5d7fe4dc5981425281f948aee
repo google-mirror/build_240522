@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a16b0324_541a6ecb",
+        "filename": "tools/fs_config/Android.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2019-05-29T15:52:41Z",
+      "side": 1,
+      "message": "Ahh I finally figured out that click gets the comment box. I got so used to the + on github and haven\u0027t visited Gerrit in awhile so forgive me. So my only concern is around what Tom also mentioned. I think I\u0027d like logic out of the Makefile and into the python script. Can we just quote this and handle the empty string in the pythons script?",
+      "revId": "2cb2b938670951d5d7fe4dc5981425281f948aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fcee093d_d6bf82ff",
         "filename": "tools/fs_config/fs_config_generator.py",
         "patchSetId": 7
