@@ -31,14 +31,16 @@ ifneq ($(filter integer_overflow, $(my_global_sanitize)),)
   endif
 endif
 
-# Global integer sanitization doesn't support static modules.
+# Sanitizer libraries are dynamically linked by default on Android, Fuchsia and
+# Darwin (clang/lib/DriverSanitizerArgs:723). This causes an issue with forced
+# static executables, where we try to statically link the dynamic library. When
+# this is the case, we have to specify -static-libsan to force the clang driver
+# to use the static sanitizer library.
 ifeq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
-  my_global_sanitize := $(filter-out integer_overflow,$(my_global_sanitize))
-  my_global_sanitize_diag := $(filter-out integer_overflow,$(my_global_sanitize_diag))
+  my_ldflags += -static-libsan
 endif
 ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
-  my_global_sanitize := $(filter-out integer_overflow,$(my_global_sanitize))
-  my_global_sanitize_diag := $(filter-out integer_overflow,$(my_global_sanitize_diag))
+  my_ldflags += -static-libsan
 endif
 
 # Disable global CFI in excluded paths
@@ -260,16 +262,8 @@ ifneq ($(filter integer_overflow,$(my_sanitize)),)
 
   # Check for diagnostics mode.
   ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
-    ifneq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
-      ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
-        my_sanitize_diag += signed-integer-overflow
-        my_sanitize_diag += unsigned-integer-overflow
-      else
-        $(call pretty-error,Make cannot apply integer overflow diagnostics to static binary.)
-      endif
-    else
-      $(call pretty-error,Make cannot apply integer overflow diagnostics to static library.)
-    endif
+    my_sanitize_diag += signed-integer-overflow
+    my_sanitize_diag += unsigned-integer-overflow
   endif
   my_sanitize := $(filter-out integer_overflow,$(my_sanitize))
 endif
@@ -421,14 +415,17 @@ ifneq ($(strip $(LOCAL_SANITIZE_NO_RECOVER)),)
 endif
 
 ifneq ($(my_sanitize_diag),)
-  # TODO(vishwath): Add diagnostic support for static executables once
-  # we switch to clang-4393122 (which adds the static ubsan runtime
-  # that this depends on)
-  ifneq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
-    notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
-    my_cflags += -fno-sanitize-trap=$(notrap_arg)
-    # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
-    ifeq ($(filter address thread scudo hwaddress,$(my_sanitize)),)
+  notrap_arg := $(subst $(space),$(comma),$(my_sanitize_diag)),
+  my_cflags += -fno-sanitize-trap=$(notrap_arg)
+  # Diagnostic requires a runtime library, unless ASan or TSan are also enabled.
+  ifeq ($(filter address thread scudo hwaddress,$(my_sanitize)),)
+    ifeq ($(filter SHARED_LIBRARIES EXECUTABLES,$(LOCAL_MODULE_CLASS)),)
+      my_static_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_MINIMAL_RUNTIME_LIBRARY)
+      my_ldflags += -Wl,--exclude-libs,$($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_MINIMAL_RUNTIME_LIBRARY).a
+    else ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+      my_static_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_MINIMAL_RUNTIME_LIBRARY)
+      my_ldflags += -Wl,--exclude-libs,$($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_MINIMAL_RUNTIME_LIBRARY).a
+    else
       # Does not have to be the first DT_NEEDED unlike ASan.
       my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
     endif
