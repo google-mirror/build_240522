@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcee093d_d6bf82ff",
+        "filename": "tools/fs_config/fs_config_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-05-29T15:19:31Z",
+      "side": 1,
+      "message": "Is this change correct?  Does it handle the files in rootdir correctly?  The top path, meant for the system partition returns True by default without checking if the path starts with \u0027system\u0027, so it will label things such as init.* in the rootdir.  If there are no other partitions, and this goes into the 2nd path, it will skip these.",
+      "revId": "2cb2b938670951d5d7fe4dc5981425281f948aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
