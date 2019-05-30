@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f9542da_d5e727b2",
+        "filename": "core/verify_uses_libraries.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-05-30T14:12:09Z",
+      "side": 1,
+      "message": "For non bash experts, can you add a comment the line above what this logic is about?",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "aff7d918109cee1884c39d1acfdcd356b412838d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
