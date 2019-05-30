@@ -181,6 +181,9 @@ ifdef LOCAL_DEX_PREOPT
   my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
     $(LOCAL_OPTIONAL_USES_LIBRARIES))
 
+  # Accept both "platform" and "<default-dir>/platform" as the platform certficate.
+  my_platform_cert_filter := platform $(dir $(DEFAULT_SYSTEM_DEV_CERTIFICATE))platform
+
   # dexpreopt needs the paths to the dex jars of these libraries in case
   # construct_context.sh needs to pass them to dex2oat.
   my_extra_dexpreopt_libs := \
@@ -235,6 +238,10 @@ ifdef LOCAL_DEX_PREOPT
   $(call add_json_bool, NoCreateAppImage,               $(filter false,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
   $(call add_json_bool, ForceCreateAppImage,            $(filter true,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
   $(call add_json_bool, PresignedPrebuilt,              $(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
+
+  $(call add_json_bool, IsApp,                          $(filter APPS,$(LOCAL_MODULE_CLASS)))
+  $(call add_json_bool, UsesNonSdkApis,                 $(filter true,$(LOCAL_PRIVATE_PLATFORM_APIS)))
+  $(call add_json_bool, SignedWithPlatformCertificate,  $(filter $(my_platform_cert_filter),$(LOCAL_CERTIFICATE)))
 
   $(call json_end)
 
