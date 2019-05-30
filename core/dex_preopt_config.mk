@@ -143,6 +143,7 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
   $(call add_json_str,  SoongZip,                           $(SOONG_ZIP))
   $(call add_json_str,  Zip2zip,                            $(ZIP2ZIP))
   $(call add_json_str,  ManifestCheck,                      $(SOONG_HOST_OUT_EXECUTABLES)/manifest_check)
+  $(call add_json_str,  HiddenApiPolicy,                    $(SOONG_HOST_OUT_EXECUTABLES)/hiddenapi_policy)
   $(call add_json_str,  ConstructContext,                   $(BUILD_SYSTEM)/construct_context.sh)
   $(call end_json_map)
 
@@ -165,4 +166,6 @@ DEXPREOPT_GEN_DEPS := \
   $(SOONG_HOST_OUT_EXECUTABLES)/aapt \
   $(SOONG_ZIP) \
   $(ZIP2ZIP) \
+  $(SOONG_HOST_OUT_EXECUTABLES)/manifest_check \
+  $(SOONG_HOST_OUT_EXECUTABLES)/hiddenapi_policy \
   $(BUILD_SYSTEM)/construct_context.sh \
