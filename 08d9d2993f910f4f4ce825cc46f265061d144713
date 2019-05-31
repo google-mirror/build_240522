@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "bb54b12c_703e92e4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3470,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-31T23:45:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f04f8b_8e8406e2",
+      "range": {
+        "startLine": 3470,
+        "startChar": 17,
+        "endLine": 3470,
+        "endChar": 18
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c239bd6f_35c84559",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3470,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-31T23:45:27Z",
+      "side": 1,
+      "message": "Modified similarly in the latest PS. PTAL.",
+      "parentUuid": "8de87f44_b1e19c53",
+      "range": {
+        "startLine": 3469,
+        "startChar": 2,
+        "endLine": 3470,
+        "endChar": 6
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c14819e5_869e9e20",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4be7985_791eed3c",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3477,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-31T23:45:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14819e5_869e9e20",
+      "range": {
+        "startLine": 3477,
+        "startChar": 89,
+        "endLine": 3477,
+        "endChar": 90
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "335849e8_3ab082f2",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3483,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-31T23:45:27Z",
+      "side": 1,
+      "message": "Done, taken care of as part of Tao\u0027s suggestion to set a default percentage.",
+      "parentUuid": "21173973_20d057e2",
+      "range": {
+        "startLine": 3483,
+        "startChar": 82,
+        "endLine": 3483,
+        "endChar": 122
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4e67d06_95f731b3",
         "filename": "core/board_config.mk",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2019-05-23T22:58:24Z",
       "side": 1,
       "message": "Seems less likely one will promptly set an optional flag. Use a default % that\u0027s overridable?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "08d9d2993f910f4f4ce825cc46f265061d144713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bc013d9_b9576f10",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2019-05-31T23:45:27Z",
+      "side": 1,
+      "message": "I set it to 95 percent by default in the new PS.",
+      "parentUuid": "e4e67d06_95f731b3",
       "range": {
         "startLine": 84,
         "startChar": 2,
