@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f89e8a2c_43e2f91f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-06-01T05:44:35Z",
+      "side": 1,
+      "message": "what depend on AAR libs? try to use complete sentence.",
+      "range": {
+        "startLine": 9,
+        "startChar": 37,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "bd90132fad807d76abe26c18264f7a4bc6e9320f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc525ea1_65bfa7d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-06-01T05:44:35Z",
+      "side": 1,
+      "message": "limit the lines to 72 chars",
+      "revId": "bd90132fad807d76abe26c18264f7a4bc6e9320f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
