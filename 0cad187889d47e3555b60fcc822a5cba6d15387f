@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc37ef06_3ca0e6a8",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-06-03T10:01:58Z",
+      "side": 1,
+      "message": "Could you fix this one as well? PRODUCT_HOST_PACKAGES support the :32/:64 syntax too",
+      "revId": "0cad187889d47e3555b60fcc822a5cba6d15387f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
