@@ -1645,11 +1645,16 @@ endif # INSTALLED_RECOVERYIMAGE_TARGET
 endif # INSTALLED_BOOTIMAGE_TARGET
 
 $(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH)
+ifneq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
 	@echo "Install system fs image: $@"
 	$(copy-file-to-target)
 	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),\
 		$(call read-image-prop-dictionary,\
 			$(systemimage_intermediates)/generated_system_image_info.txt,system_size))
+else
+	@echo "Install system fs image: $@"
+	$(copy-file-to-target)
+endif
 
 systemimage: $(INSTALLED_SYSTEMIMAGE)
 
