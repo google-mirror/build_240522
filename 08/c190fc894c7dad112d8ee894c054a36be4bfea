@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Tue, 04 Jun 2019 21:23:07 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/976768
+Project: platform/build
+Branch: refs/heads/master
