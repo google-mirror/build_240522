@@ -1645,11 +1645,20 @@ endif # INSTALLED_RECOVERYIMAGE_TARGET
 endif # INSTALLED_BOOTIMAGE_TARGET
 
 $(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH)
+ifneq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
 	@echo "Install system fs image: $@"
 	$(copy-file-to-target)
+<<<<<<< HEAD   (42ae11 Merge "Make change and version bump to PPRL.190505.001 am: 2)
 	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),\
 		$(call read-image-prop-dictionary,\
 			$(systemimage_intermediates)/generated_system_image_info.txt,system_size))
+=======
+	$(hide) $(call assert-max-image-size,$@ $(RECOVERY_FROM_BOOT_PATCH),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+else
+	@echo "Install system fs image: $@"
+	$(copy-file-to-target)
+endif
+>>>>>>> CHANGE (d834ff Support building recovery for non-sparse images.)
 
 systemimage: $(INSTALLED_SYSTEMIMAGE)
 
