@@ -175,6 +175,7 @@ VNDK-core: android.system.net.netd@1.1.so
 VNDK-core: android.system.suspend@1.0.so
 VNDK-core: android.system.wifi.keystore@1.0.so
 VNDK-core: libadf.so
+VNDK-core: libashmemd_hidl_client.so
 VNDK-core: libaudioroute.so
 VNDK-core: libaudioutils.so
 VNDK-core: libbinder.so
