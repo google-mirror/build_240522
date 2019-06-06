@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85db0cb0_a29603ef",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1479653
+      },
+      "writtenOn": "2019-06-06T00:13:55Z",
+      "side": 1,
+      "message": "Thanks!",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 4
+      },
+      "revId": "d5d70ea555a1e9c6972acada8605f31413a97b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
