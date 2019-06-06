@@ -20,6 +20,8 @@
 
     {EXTRA_OPTIONS}
 
+    {EXTRA_PREPARERS}
+
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
         <option name="push" value="{MODULE}->/data/local/tmp/{MODULE}" />
