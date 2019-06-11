@@ -102,6 +102,13 @@ ifneq ($(strip $(ENABLE_XOM)),false)
   endif
 endif
 
+# http://b/131390872
+# Automatically initialize any uninitialized stack variables.
+ifneq (,$(filter 1 y yes on true,$(AUTO_INITIALIZE)))
+  my_cflags += -ftrivial-auto-var-init=zero
+  my_cflags += -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang
+endif
+
 my_allow_undefined_symbols := $(strip $(LOCAL_ALLOW_UNDEFINED_SYMBOLS))
 ifdef SANITIZE_HOST
 ifdef LOCAL_IS_HOST_MODULE
