@@ -18,20 +18,29 @@
 
 .PHONY: test_mapping
 
+define strip_comments_and_copy_to_tmp
+$(foreach source, $(1), \
+    $(shell mkdir -p $(dir $(2)/$(source))) \
+    $(shell sed -e 's/^[ \t]*#.*$$//' -e 's/\/\/.*$$//' -e 's/[ \t]*$$//' -e '/^$$/d' < $(source) > $(2)/$(source)))
+endef
 intermediates := $(call intermediates-dir-for,PACKAGING,test_mapping)
 test_mappings_zip := $(intermediates)/test_mappings.zip
 test_mapping_list := $(OUT_DIR)/.module_paths/TEST_MAPPING.list
 test_mappings := $(file <$(test_mapping_list))
-$(test_mappings_zip) : PRIVATE_test_mappings := $(subst $(newline),\n,$(test_mappings))
+$(test_mappings_zip) : PRIVATE_test_mappings := $(test_mappings)
+$(test_mappings_zip) : PRIVATE_test_mapping_tmp_dir := $(intermediates)/tmp
+$(test_mappings_zip) : PRIVATE_test_mappings_dst := $(addprefix $(PRIVATE_test_mapping_tmp_dir)/,$(test_mappings))
 $(test_mappings_zip) : PRIVATE_all_disabled_presubmit_tests := $(ALL_DISABLED_PRESUBMIT_TESTS)
 
 $(test_mappings_zip) : $(test_mappings) $(SOONG_ZIP)
 	@echo "Building artifact to include TEST_MAPPING files and tests to skip in presubmit check."
 	rm -rf $@ $(dir $@)/disabled-presubmit-tests
 	echo $(sort $(PRIVATE_all_disabled_presubmit_tests)) | tr " " "\n" > $(dir $@)/disabled-presubmit-tests
-	echo -e "$(PRIVATE_test_mappings)" > $@.list
-	$(SOONG_ZIP) -o $@ -C . -l $@.list -C $(dir $@) -f $(dir $@)/disabled-presubmit-tests
+	echo $(PRIVATE_test_mappings_dst) | tr " " "\n" > $@.list
+	$(call strip_comments_and_copy_to_tmp, $(PRIVATE_test_mappings), $(PRIVATE_test_mapping_tmp_dir))
+	$(SOONG_ZIP) -o $@ -C ./$(PRIVATE_test_mapping_tmp_dir) -l $@.list -C $(dir $@) -f $(dir $@)/disabled-presubmit-tests
 	rm -f $@.list $(dir $@)/disabled-presubmit-tests
+	rm -rf $(PRIVATE_test_mapping_tmp_dir)
 
 test_mapping : $(test_mappings_zip)
 
