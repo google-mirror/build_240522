@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8db25c1_c2584d28",
+        "filename": "core/tasks/test_mapping.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-06-11T16:47:31Z",
+      "side": 1,
+      "message": "you need to use PRIVATE_test_mappings here.",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "524b96d3b43bfd24027026daa1d7823a3117bc03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f790216a_b7c2d7d9",
+        "filename": "core/tasks/test_mapping.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-06-11T16:47:31Z",
+      "side": 1,
+      "message": "this needs to be set to a PRIVATE_test_mapping_tmp_dir variable, and use that inside the recipe.",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "524b96d3b43bfd24027026daa1d7823a3117bc03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
