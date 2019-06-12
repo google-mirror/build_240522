@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c7c1e04_035b0551",
+        "filename": "core/binary.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-06-12T22:17:11Z",
+      "side": 1,
+      "message": "do we have a more standard way of doing this?",
+      "range": {
+        "startLine": 108,
+        "startChar": 17,
+        "endLine": 108,
+        "endChar": 32
+      },
+      "revId": "ace2c0f8acdeca8a69994ed703d6e09e0b171699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
