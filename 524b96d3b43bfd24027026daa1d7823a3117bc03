@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96e6e816_bea7cb88",
+        "filename": "core/tasks/test_mapping.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1330217
+      },
+      "writtenOn": "2019-06-12T10:33:12Z",
+      "side": 1,
+      "message": "PRIVATE_test_mappings are modified by appending PRIVATE_test_mapping_tmp_dir to every element in $(test_mappings), so it\u0027s no workable to use PRIVATE_test_mappings.\n\nDoes this make sense? \n\nThank you!",
+      "parentUuid": "c8db25c1_c2584d28",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "524b96d3b43bfd24027026daa1d7823a3117bc03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f790216a_b7c2d7d9",
         "filename": "core/tasks/test_mapping.mk",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "524b96d3b43bfd24027026daa1d7823a3117bc03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "341e5229_702657f6",
+        "filename": "core/tasks/test_mapping.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1330217
+      },
+      "writtenOn": "2019-06-12T10:33:12Z",
+      "side": 1,
+      "message": "Done. THANKS for reminding.",
+      "parentUuid": "f790216a_b7c2d7d9",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "524b96d3b43bfd24027026daa1d7823a3117bc03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
