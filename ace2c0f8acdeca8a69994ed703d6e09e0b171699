@@ -22,6 +22,30 @@
       "revId": "ace2c0f8acdeca8a69994ed703d6e09e0b171699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d38668_d5d46b1b",
+        "filename": "core/binary.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-12T22:19:15Z",
+      "side": 1,
+      "message": "Not that I saw in build/make. I just cloned what IsEnvTrue() did in Soong, so that we don\u0027t get weird skew.",
+      "parentUuid": "6c7c1e04_035b0551",
+      "range": {
+        "startLine": 108,
+        "startChar": 17,
+        "endLine": 108,
+        "endChar": 32
+      },
+      "revId": "ace2c0f8acdeca8a69994ed703d6e09e0b171699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
