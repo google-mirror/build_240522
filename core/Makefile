@@ -1134,8 +1134,9 @@ $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
 $(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
 	build/make/tools/generate-notice-files.py --text-output $(2) \
-	    $(if $(filter $(1),xml_excluded_extra_partitions),-e vendor -e product -e product_services --xml-output, \
-	      $(if $(filter $(1),xml_vendor),-i vendor --xml-output, \
+	    $(if $(filter $(1),xml_excluded_extra_partitions),-e vendor -e product -e product_services \
+	        $(if $(strip $(BOARD_VNDK_VERSION)), -e recovery -e ramdisk) --xml-output, \
+	      $(if $(filter $(1),xml_vendor),-i vendor -i recovery -i ramdisk --xml-output, \
 	        $(if $(filter $(1),xml_product),-i product --xml-output, \
 	          $(if $(filter $(1),xml_product_services),-i product_services --xml-output, \
 	            --html-output)))) $(3) \
@@ -1202,7 +1203,15 @@ license_modules := $(filter-out $(TARGET_OUT_TESTCASES)/%,$(license_modules))
 license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
 license_modules_product := $(filter $(TARGET_OUT_PRODUCT)/%,$(license_modules))
 license_modules_product_services := $(filter $(TARGET_OUT_PRODUCT_SERVICES)/%,$(license_modules))
-license_modules_agg := $(license_modules_vendor) $(license_modules_product) $(license_modules_product_services)
+license_modules_recovery := $(filter $(TARGET_RECOVERY_OUT)/%,$(license_modules))
+license_modules_ramdisk := $(filter $(TARGET_RAMDISK_OUT)/%,$(license_modules))
+license_modules_agg := $(license_modules_vendor) \
+	               $(license_modules_product) \
+	               $(license_modules_product_services)
+ifdef BOARD_VNDK_VERSION
+license_modules_agg += $(license_modules_recovery) \
+                       $(license_modules_ramdisk)
+endif
 license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules))
 
 $(eval $(call combine-notice-files, xml_excluded_extra_partitions, \
