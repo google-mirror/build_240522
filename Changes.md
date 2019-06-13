@@ -1,5 +1,7 @@
 # Build System Changes for Android.mk Writers
 
+444
+
 ## PRODUCT_STATIC_BOOT_CONTROL_HAL is obsolete {#PRODUCT_STATIC_BOOT_CONTROL_HAL}
 
 `PRODUCT_STATIC_BOOT_CONTROL_HAL` was the workaround to allow sideloading with
