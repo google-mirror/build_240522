@@ -1058,7 +1058,7 @@ endif # TARGET_NO_KERNEL
 .PHONY: notice_files
 
 # Create the rule to combine the files into text and html/xml forms
-# $(1) - xml_excluded_vendor_product|xml_vendor|xml_product|html
+# $(1) - xml_excluded_vendor_product|xml_vendor|xml_product|xml_userdata|html
 # $(2) - Plain text output file
 # $(3) - HTML/XML output file
 # $(4) - File title
@@ -1083,11 +1083,13 @@ $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
 $(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
 	build/make/tools/generate-notice-files.py --text-output $(2) \
-	    $(if $(filter $(1),xml_excluded_extra_partitions),-e vendor -e product -e product_services --xml-output, \
-	      $(if $(filter $(1),xml_vendor),-i vendor --xml-output, \
+	    $(if $(filter $(1),xml_excluded_extra_partitions),-e vendor -e product -e product_services \
+	        $(if $(strip $(BOARD_VNDK_VERSION)), -e recovery -e ramdisk) --xml-output, \
+	      $(if $(filter $(1),xml_vendor),-i vendor -i recovery -i ramdisk --xml-output, \
 	        $(if $(filter $(1),xml_product),-i product --xml-output, \
 	          $(if $(filter $(1),xml_product_services),-i product_services --xml-output, \
-	            --html-output)))) $(3) \
+	            $(if $(filter $(1),xml_userdata),-i data --xml-output, \
+	              --html-output))))) $(3) \
 	    -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
 notice_files: $(2) $(3)
 endef
@@ -1140,6 +1142,11 @@ target_product_services_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_PR
 target_product_services_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_PRODUCT_SERVICES.xml.gz
 installed_product_services_notice_xml_gz := $(TARGET_OUT_PRODUCT_SERVICES)/etc/NOTICE.xml.gz
 
+target_userdata_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_DATA.txt
+target_userdata_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_DATA.xml
+target_userdata_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_DATA.xml.gz
+installed_userdata_notice_xml_gz := $(TARGET_OUT_DATA)/etc/NOTICE.xml.gz
+
 # Notice files are copied to TARGET_OUT_NOTICE_FILES as a side-effect of their module
 # being built. A notice xml file must depend on all modules that could potentially
 # install a license file relevant to it.
@@ -1151,7 +1158,17 @@ license_modules := $(filter-out $(TARGET_OUT_TESTCASES)/%,$(license_modules))
 license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
 license_modules_product := $(filter $(TARGET_OUT_PRODUCT)/%,$(license_modules))
 license_modules_product_services := $(filter $(TARGET_OUT_PRODUCT_SERVICES)/%,$(license_modules))
-license_modules_agg := $(license_modules_vendor) $(license_modules_product) $(license_modules_product_services)
+license_modules_userdata := $(filter $(TARGET_OUT_DATA)/%,$(license_modules))
+license_modules_recovery := $(filter $(TARGET_RECOVERY_OUT)/%,$(license_modules))
+license_modules_ramdisk := $(filter $(TARGET_RAMDISK_OUT)/%,$(license_modules))
+license_modules_agg := $(license_modules_vendor) \
+	               $(license_modules_product) \
+	               $(license_modules_product_services) \
+	               $(license_modules_userdata)
+ifdef BOARD_VNDK_VERSION
+license_modules_agg += $(license_modules_recovery) \
+                       $(license_modules_ramdisk)
+endif
 license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules))
 
 $(eval $(call combine-notice-files, xml_excluded_extra_partitions, \
@@ -1178,6 +1195,12 @@ $(eval $(call combine-notice-files, xml_product_services, \
 	        "Notices for files contained in the product_services filesystem image in this directory:", \
 	        $(TARGET_OUT_NOTICE_FILES), \
 	        $(license_modules_product_services)))
+$(eval $(call combine-notice-files, xml_userdata, \
+	        $(target_userdata_notice_file_txt), \
+	        $(target_userdata_notice_file_xml), \
+	        "Notices for files contained in the user data filesystem image in this directory:", \
+	        $(TARGET_OUT_NOTICE_FILES), \
+	        $(license_modules_userdata)))
 
 $(target_notice_file_xml_gz): $(target_notice_file_xml) | $(MINIGZIP)
 	$(hide) $(MINIGZIP) -9 < $< > $@
@@ -1187,11 +1210,15 @@ $(target_product_notice_file_xml_gz): $(target_product_notice_file_xml) | $(MINI
 	$(hide) $(MINIGZIP) -9 < $< > $@
 $(target_product_services_notice_file_xml_gz): $(target_product_services_notice_file_xml) | $(MINIGZIP)
 	$(hide) $(MINIGZIP) -9 < $< > $@
+$(target_userdata_notice_file_xml_gz): $(target_userdata_notice_file_xml) | $(MINIGZIP)
+	$(hide) $(MINIGZIP) -9 < $< > $@
 $(installed_notice_html_or_xml_gz): $(target_notice_file_xml_gz)
 	$(copy-file-to-target)
 $(installed_vendor_notice_xml_gz): $(target_vendor_notice_file_xml_gz)
 	$(copy-file-to-target)
 $(installed_product_notice_xml_gz): $(target_product_notice_file_xml_gz)
+	$(copy-file-to-target)
+$(installed_userdata_notice_xml_gz): $(target_userdata_notice_file_xml_gz)
 	$(copy-file-to-target)
 
 # No notice file for product_services if its contents are merged into /product.
@@ -1207,6 +1234,7 @@ ifeq ($(ONE_SHOT_MAKEFILE),)
   ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
   ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_notice_xml_gz)
   ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_services_notice_xml_gz)
+  ALL_DEFAULT_INSTALLED_MODULES += $(installed_userdata_notice_xml_gz)
 endif
 endif # PRODUCT_NOTICE_SPLIT
 
