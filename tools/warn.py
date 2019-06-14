@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# This file uses the following encoding: utf-8
+# Prefer python3 but work also with python2.
 
 """Grep warnings messages and output HTML tables or warning counts in CSV.
 
@@ -77,6 +77,7 @@ Use option --gencsv to output warning counts in CSV format.
 import argparse
 import cgi
 import csv
+import io
 import multiprocessing
 import os
 import re
@@ -108,6 +109,11 @@ parser.add_argument('--processes',
 parser.add_argument(dest='buildlog', metavar='build.log',
                     help='Path to build.log file')
 args = parser.parse_args()
+
+
+def myprint(text):
+  """Avoid lint warning of using print as a function in python2."""
+  sys.stdout.write(text + '\n')
 
 
 class Severity(object):
@@ -540,7 +546,7 @@ warn_patterns = [
     {'category': 'java',
      'severity': Severity.LOW,
      'description':
-         'Java: Use Java\'s utility functional interfaces instead of Function\u003cA, B> for primitive types.',
+         u'Java: Use Java\'s utility functional interfaces instead of Function\u003cA, B> for primitive types.',
      'patterns': [r".*: warning: \[LambdaFunctionalInterface\] .+"]},
     {'category': 'java',
      'severity': Severity.LOW,
@@ -1270,7 +1276,7 @@ warn_patterns = [
     {'category': 'java',
      'severity': Severity.MEDIUM,
      'description':
-         'Java: Prefer the short-circuiting boolean operators \u0026\u0026 and || to \u0026 and |.',
+         u'Java: Prefer the short-circuiting boolean operators \u0026\u0026 and || to \u0026 and |.',
      'patterns': [r".*: warning: \[ShortCircuitBoolean\] .+"]},
     {'category': 'java',
      'severity': Severity.MEDIUM,
@@ -1535,7 +1541,7 @@ warn_patterns = [
     {'category': 'java',
      'severity': Severity.HIGH,
      'description':
-         'Java:  Implementing \'Comparable\u003cT>\' where T is not compatible with the implementing class.',
+         u'Java:  Implementing \'Comparable\u003cT>\' where T is not compatible with the implementing class.',
      'patterns': [r".*: warning: \[ComparableType\] .+"]},
     {'category': 'java',
      'severity': Severity.HIGH,
@@ -1790,7 +1796,7 @@ warn_patterns = [
     {'category': 'java',
      'severity': Severity.HIGH,
      'description':
-         'Java: Path implements Iterable\u003cPath>; prefer Collection\u003cPath> for clarity',
+         u'Java: Path implements Iterable\u003cPath>; prefer Collection\u003cPath> for clarity',
      'patterns': [r".*: warning: \[IterablePathParameter\] .+"]},
     {'category': 'java',
      'severity': Severity.HIGH,
@@ -2922,17 +2928,17 @@ def html_big(param):
 
 
 def dump_html_prologue(title):
-  print '<html>\n<head>'
-  print '<title>' + title + '</title>'
-  print html_head_scripts
+  myprint('<html>\n<head>')
+  myprint('<title>' + title + '</title>')
+  myprint(html_head_scripts)
   emit_stats_by_project()
-  print '</head>\n<body>'
-  print html_big(title)
-  print '<p>'
+  myprint('</head>\n<body>')
+  myprint(html_big(title))
+  myprint('<p>')
 
 
 def dump_html_epilogue():
-  print '</body>\n</head>\n</html>'
+  myprint('</body>\n</head>\n</html>')
 
 
 def sort_warnings():
@@ -2943,6 +2949,7 @@ def sort_warnings():
 def emit_stats_by_project():
   """Dump a google chart table of warnings per project and severity."""
   # warnings[p][s] is number of warnings in project p of severity s.
+  # pylint:disable=g-complex-comprehension
   warnings = {p: {s: 0 for s in Severity.range} for p in project_names}
   for i in warn_patterns:
     s = i['severity']
@@ -2988,11 +2995,11 @@ def emit_stats_by_project():
       total_all_severities += total_by_severity[s]
   one_row.append(total_all_projects)
   stats_rows.append(one_row)
-  print '<script>'
+  myprint('<script>')
   emit_const_string_array('StatsHeader', stats_header)
   emit_const_object_array('StatsRows', stats_rows)
-  print draw_table_javascript
-  print '</script>'
+  myprint(draw_table_javascript)
+  myprint('</script>')
 
 
 def dump_stats():
@@ -3008,14 +3015,14 @@ def dump_stats():
       skipped += len(i['members'])
     else:
       known += len(i['members'])
-  print 'Number of classified warnings: <b>' + str(known) + '</b><br>'
-  print 'Number of skipped warnings: <b>' + str(skipped) + '</b><br>'
-  print 'Number of unclassified warnings: <b>' + str(unknown) + '</b><br>'
+  myprint('Number of classified warnings: <b>' + str(known) + '</b><br>')
+  myprint('Number of skipped warnings: <b>' + str(skipped) + '</b><br>')
+  myprint('Number of unclassified warnings: <b>' + str(unknown) + '</b><br>')
   total = unknown + known + skipped
   extra_msg = ''
   if total < 1000:
     extra_msg = ' (low count may indicate incremental build)'
-  print 'Total number of warnings: <b>' + str(total) + '</b>' + extra_msg
+  myprint('Total number of warnings: <b>' + str(total) + '</b>' + extra_msg)
 
 
 # New base table of warnings, [severity, warn_id, project, warning_message]
@@ -3029,14 +3036,14 @@ def dump_stats():
 #     id for each warning pattern
 #     sort by project, severity, warn_id, warning_message
 def emit_buttons():
-  print ('<button class="button" onclick="expandCollapse(1);">'
-         'Expand all warnings</button>\n'
-         '<button class="button" onclick="expandCollapse(0);">'
-         'Collapse all warnings</button>\n'
-         '<button class="button" onclick="groupBySeverity();">'
-         'Group warnings by severity</button>\n'
-         '<button class="button" onclick="groupByProject();">'
-         'Group warnings by project</button><br>')
+  myprint('<button class="button" onclick="expandCollapse(1);">'
+          'Expand all warnings</button>\n'
+          '<button class="button" onclick="expandCollapse(0);">'
+          'Collapse all warnings</button>\n'
+          '<button class="button" onclick="groupBySeverity();">'
+          'Group warnings by severity</button>\n'
+          '<button class="button" onclick="groupByProject();">'
+          'Group warnings by project</button><br>')
 
 
 def all_patterns(category):
@@ -3051,14 +3058,14 @@ def dump_fixed():
   """Show which warnings no longer occur."""
   anchor = 'fixed_warnings'
   mark = anchor + '_mark'
-  print ('\n<br><p style="background-color:lightblue"><b>'
-         '<button id="' + mark + '" '
-         'class="bt" onclick="expand(\'' + anchor + '\');">'
-         '&#x2295</button> Fixed warnings. '
-         'No more occurrences. Please consider turning these into '
-         'errors if possible, before they are reintroduced in to the build'
-         ':</b></p>')
-  print '<blockquote>'
+  myprint('\n<br><p style="background-color:lightblue"><b>'
+          '<button id="' + mark + '" '
+          'class="bt" onclick="expand(\'' + anchor + '\');">'
+          '&#x2295</button> Fixed warnings. '
+          'No more occurrences. Please consider turning these into '
+          'errors if possible, before they are reintroduced in to the build'
+          ':</b></p>')
+  myprint('<blockquote>')
   fixed_patterns = []
   for i in warn_patterns:
     if not i['members']:
@@ -3066,16 +3073,16 @@ def dump_fixed():
                             all_patterns(i) + ')')
     if i['option']:
       fixed_patterns.append(' ' + i['option'])
-  fixed_patterns.sort()
-  print '<div id="' + anchor + '" style="display:none;"><table>'
+  fixed_patterns = sorted(fixed_patterns)
+  myprint('<div id="' + anchor + '" style="display:none;"><table>')
   cur_row_class = 0
   for text in fixed_patterns:
     cur_row_class = 1 - cur_row_class
     # remove last '\n'
     t = text[:-1] if text[-1] == '\n' else text
-    print '<tr><td class="c' + str(cur_row_class) + '">' + t + '</td></tr>'
-  print '</table></div>'
-  print '</blockquote>'
+    myprint('<tr><td class="c' + str(cur_row_class) + '">' + t + '</td></tr>')
+  myprint('</table></div>')
+  myprint('</blockquote>')
 
 
 def find_project_index(line):
@@ -3187,8 +3194,9 @@ def normalize_path(path):
 def normalize_warning_line(line):
   """Normalize file path relative to android_root in a warning line."""
   # replace fancy quotes with plain ol' quotes
-  line = line.replace('‘', "'")
-  line = line.replace('’', "'")
+  line = re.sub(u'[\u2018\u2019]', '\'', line)
+  # replace non-ASCII chars to spaces
+  line = re.sub(u'[^\x00-\x7f]', ' ', line)
   line = line.strip()
   first_column = line.find(':')
   if first_column > 0:
@@ -3246,21 +3254,22 @@ def strip_escape_string(s):
 
 
 def emit_warning_array(name):
-  print 'var warning_{} = ['.format(name)
+  myprint('var warning_{} = ['.format(name))
   for i in range(len(warn_patterns)):
-    print '{},'.format(warn_patterns[i][name])
-  print '];'
+    myprint('{},'.format(warn_patterns[i][name]))
+  myprint('];')
 
 
 def emit_warning_arrays():
   emit_warning_array('severity')
-  print 'var warning_description = ['
+  myprint('var warning_description = [')
   for i in range(len(warn_patterns)):
     if warn_patterns[i]['members']:
-      print '"{}",'.format(escape_string(warn_patterns[i]['description']))
+      myprint('"{}",'.format(escape_string(warn_patterns[i]['description'])))
     else:
-      print '"",'  # no such warning
-  print '];'
+      myprint('"",')  # no such warning
+  myprint('];')
+
 
 scripts_for_warning_groups = """
   function compareMessages(x1, x2) { // of the same warning type
@@ -3393,39 +3402,42 @@ scripts_for_warning_groups = """
 
 # Emit a JavaScript const string
 def emit_const_string(name, value):
-  print 'const ' + name + ' = "' + escape_string(value) + '";'
+  myprint('const ' + name + ' = "' + escape_string(value) + '";')
 
 
 # Emit a JavaScript const integer array.
 def emit_const_int_array(name, array):
-  print 'const ' + name + ' = ['
+  myprint('const ' + name + ' = [')
   for n in array:
-    print str(n) + ','
-  print '];'
+    myprint(str(n) + ',')
+  myprint('];')
 
 
 # Emit a JavaScript const string array.
 def emit_const_string_array(name, array):
-  print 'const ' + name + ' = ['
+  myprint('const ' + name + ' = [')
   for s in array:
-    print '"' + strip_escape_string(s) + '",'
-  print '];'
+    myprint('"' + strip_escape_string(s) + '",')
+  myprint('];')
 
 
 # Emit a JavaScript const string array for HTML.
 def emit_const_html_string_array(name, array):
-  print 'const ' + name + ' = ['
+  myprint('const ' + name + ' = [')
   for s in array:
-    print '"' + cgi.escape(strip_escape_string(s)) + '",'
-  print '];'
+    # Not using html.escape yet, to work for both python 2 and 3,
+    # until all users switch to python 3.
+    # pylint:disable=deprecated-method
+    myprint('"' + cgi.escape(strip_escape_string(s)) + '",')
+  myprint('];')
 
 
 # Emit a JavaScript const object array.
 def emit_const_object_array(name, array):
-  print 'const ' + name + ' = ['
+  myprint('const ' + name + ' = [')
   for x in array:
-    print str(x) + ','
-  print '];'
+    myprint(str(x) + ',')
+  myprint('];')
 
 
 def emit_js_data():
@@ -3471,18 +3483,18 @@ def dump_html():
   dump_html_prologue('Warnings for ' + platform_version + ' - ' +
                      target_product + ' - ' + target_variant)
   dump_stats()
-  print '<br><div id="stats_table"></div><br>'
-  print '\n<script>'
+  myprint('<br><div id="stats_table"></div><br>')
+  myprint('\n<script>')
   emit_js_data()
-  print scripts_for_warning_groups
-  print '</script>'
+  myprint(scripts_for_warning_groups)
+  myprint('</script>')
   emit_buttons()
   # Warning messages are grouped by severities or project names.
-  print '<br><div id="warning_groups"></div>'
+  myprint('<br><div id="warning_groups"></div>')
   if args.byproject:
-    print '<script>groupByProject();</script>'
+    myprint('<script>groupByProject();</script>')
   else:
-    print '<script>groupBySeverity();</script>'
+    myprint('<script>groupBySeverity();</script>')
   dump_fixed()
   dump_html_epilogue()
 
@@ -3506,8 +3518,7 @@ def count_severity(writer, sev, kind):
       warning = kind + ': ' + description_for_csv(i)
       writer.writerow([n, '', warning])
       # print number of warnings for each project, ordered by project name.
-      projects = i['projects'].keys()
-      projects.sort()
+      projects = sorted(i['projects'].keys())
       for p in projects:
         writer.writerow([i['projects'][p], p, warning])
   writer.writerow([total, '', kind + ' warnings'])
@@ -3526,7 +3537,9 @@ def dump_csv(writer):
 
 
 def main():
-  warning_lines = parse_input_file(open(args.buildlog, 'r'))
+  # We must use 'utf-8' codec to parse some non-ASCII code in warnings.
+  warning_lines = parse_input_file(
+      io.open(args.buildlog, mode='r', encoding='utf-8'))
   parallel_classify_warnings(warning_lines)
   # If a user pases a csv path, save the fileoutput to the path
   # If the user also passed gencsv write the output to stdout
