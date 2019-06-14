@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddda9fa5_73f39b4a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3433,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-06-14T00:14:12Z",
+      "side": 1,
+      "message": "I suggest to not check it if it is not defined. Or for simplicity, change it to 100% directly. 98% filled should be fine.",
+      "range": {
+        "startLine": 3433,
+        "startChar": 0,
+        "endLine": 3433,
+        "endChar": 33
+      },
+      "revId": "8ee9443dfe774e018f082921ca2b607cb1a0dd72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
