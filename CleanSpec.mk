@@ -641,6 +641,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/odm/build.prop)
 
 $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -path "*/gen/proto" -print0 | xargs -0 rm -rf)
 
+$(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -path "*/gen/aidl" -print0 | xargs -0 rm -rf)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
