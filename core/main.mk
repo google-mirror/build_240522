@@ -1202,6 +1202,7 @@ APEX_MODULE_LIBS := \
   libadbconnection.so \
   libadbconnectiond.so \
   libandroidicu.so \
+  libandroidicuinit.so \
   libandroidio.so \
   libart-compiler.so \
   libart-dexlayout.so \
