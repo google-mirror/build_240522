@@ -776,6 +776,9 @@ endif
 BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
 BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 
+KNOWN_HIDL_INTERFACES := $(TARGET_OUT_INTERMEDIATES)/PACKAGING/known_hidl_interfaces_intermediates/known_hidl_interfaces.txt
+.KATI_READONLY := KNOWN_HIDL_INTERFACES
+
 # SEPolicy versions
 
 # PLATFORM_SEPOLICY_VERSION is a number of the form "NN.m" with "NN" mapping to

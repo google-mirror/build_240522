@@ -2938,6 +2938,11 @@ check_framework_manifest :=
 endif # BUILDING_SYSTEM_IMAGE
 
 # -----------------------------------------------------------------
+# known_hidl_interfaces from all known hidl_interface targets
+$(KNOWN_HIDL_INTERFACES):
+	$(hide) echo "$(HIDL_INTERFACE_LIST)" >> $@
+
+# -----------------------------------------------------------------
 # product_services partition image
 ifdef BUILDING_PRODUCT_SERVICES_IMAGE
 INTERNAL_PRODUCT_SERVICESIMAGE_FILES := \
