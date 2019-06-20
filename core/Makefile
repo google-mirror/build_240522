@@ -5,6 +5,14 @@
 LOCAL_PATH := $(BUILD_SYSTEM)
 
 # -----------------------------------------------------------------
+
+KNOWN_HIDL_INTERFACES := $(call intermediates-dir-for,ETC,known_hidl_interfaces)/known_hidl_interfaces.txt
+$(KNOWN_HIDL_INTERFACES):
+	$(hide) echo "$(HIDL_INTERFACE_LIST)" >> $@
+
+droidcore: $(KNOWN_HIDL_INTERFACES)
+
+# -----------------------------------------------------------------
 # Define rules to copy PRODUCT_COPY_FILES defined by the product.
 # PRODUCT_COPY_FILES contains words like <source file>:<dest file>[:<owner>].
 # <dest file> is relative to $(PRODUCT_OUT), so it should look like,
