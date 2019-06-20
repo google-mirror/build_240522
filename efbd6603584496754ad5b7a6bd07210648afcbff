@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d27804d_905507d2",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-06-20T05:05:44Z",
+      "side": 1,
+      "message": "If this is intended to be set in a product makefile it should be called PRODUCT_*, and be configured in product.mk and product_config.mk.  If it is only going to be set on the command line you don\u0027t need it here at all and can use ctx.Config().IsEnvTrue to read it directly in Soong.",
+      "range": {
+        "startLine": 188,
+        "startChar": 59,
+        "endLine": 188,
+        "endChar": 79
+      },
+      "revId": "efbd6603584496754ad5b7a6bd07210648afcbff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
