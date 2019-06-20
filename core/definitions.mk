@@ -2446,11 +2446,17 @@ endef
 # Copy the file only if it's a well-formed init script file. For use via $(eval).
 # $(1): source file
 # $(2): destination file
+KNOWN_HIDL_INTERFACES := $(call intermediates-dir-for,ETC,known_hidl_interfaces)/known_hidl_interfaces.txt
+.KATI_READONLY := KNOWN_HIDL_INTERFACES
 define copy-init-script-file-checked
 # Host init verifier doesn't exist on darwin.
 ifneq ($(HOST_OS),darwin)
-$(2): $(1) $(HOST_INIT_VERIFIER) $(call intermediates-dir-for,ETC,passwd)/passwd
-	$(hide) $(HOST_INIT_VERIFIER) $$< $(call intermediates-dir-for,ETC,passwd)/passwd
+$(2): \
+	$(1) \
+	$(HOST_INIT_VERIFIER) \
+	$(KNOWN_HIDL_INTERFACES) \
+	$(call intermediates-dir-for,ETC,passwd)/passwd
+	$(hide) $(HOST_INIT_VERIFIER) $$< $(KNOWN_HIDL_INTERFACES) $(call intermediates-dir-for,ETC,passwd)/passwd
 else
 $(2): $(1)
 endif
