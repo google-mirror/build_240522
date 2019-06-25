@@ -22,6 +22,30 @@
       "revId": "633009b659abbbe6aea6bc8981754a4b63158953",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61091e8e_b5c95cc6",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2019-06-25T21:47:27Z",
+      "side": 1,
+      "message": "Hm, maybe leave for a follow-up change until you clean up code in AndroidRuntime.cpp, I guess.",
+      "parentUuid": "5cd8b635_19a990e5",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 67
+      },
+      "revId": "633009b659abbbe6aea6bc8981754a4b63158953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
