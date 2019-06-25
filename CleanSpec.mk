@@ -638,6 +638,11 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libc_malloc*)
 # Move odm build.prop to /odm/etc/.
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/odm/build.prop)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/odm/build.prop)
+
+# Rename product_services to system_ext
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/product_services)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product_services)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
