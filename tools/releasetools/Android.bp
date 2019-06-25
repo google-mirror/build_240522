@@ -25,6 +25,26 @@ python_defaults {
 }
 
 python_library_host {
+    name: "releasetools_build_image",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "build_image.py",
+    ],
+    libs: [
+        "releasetools_common",
+        "releasetools_verity_utils",
+    ],
+}
+
+python_library_host {
+    name: "releasetools_build_super_image",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "build_super_image.py",
+    ],
+}
+
+python_library_host {
     name: "releasetools_common",
     defaults: ["releasetools_library_defaults"],
     srcs: [
@@ -75,6 +95,22 @@ python_defaults {
 }
 
 python_binary_host {
+    name: "add_img_to_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "add_img_to_target_files.py",
+    ],
+    libs: [
+        "releasetools_build_image",
+        "releasetools_build_super_image",
+        "releasetools_common",
+    ],
+    required: [
+        "care_map_generator",
+    ],
+}
+
+python_binary_host {
     name: "build_image",
     defaults: ["releasetools_binary_defaults"],
     srcs: [
@@ -105,13 +141,48 @@ python_binary_host {
     ],
 }
 
+python_binary_host {
+    name: "make_recovery_patch",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "make_recovery_patch.py",
+    ],
+    libs: [
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
+    name: "ota_from_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "edify_generator.py",
+        "ota_from_target_files.py",
+    ],
+    libs: [
+        "releasetools_common",
+        "releasetools_verity_utils",
+    ],
+    required: [
+        "brillo_update_payload",
+    ],
+}
+
+python_binary_host {
+    name: "sparse_img",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "rangelib.py",
+        "sparse_img.py",
+    ],
+    main: "sparse_img.py",
+}
+
 python_defaults {
     name: "releasetools_test_defaults",
     srcs: [
         "add_img_to_target_files.py",
         "apex_utils.py",
-        "build_image.py",
-        "build_super_image.py",
         "check_ota_package_signature.py",
         "check_target_files_signatures.py",
         "edify_generator.py",
@@ -128,6 +199,8 @@ python_defaults {
         "test_*.py",
     ],
     libs: [
+        "releasetools_build_image",
+        "releasetools_build_super_image",
         "releasetools_common",
         "releasetools_verity_utils",
     ],
