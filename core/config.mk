@@ -875,10 +875,10 @@ $(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
 endif
 endif
 
-ifneq ($(BOARD_PRODUCT_SERVICESIMAGE_PARTITION_SIZE),)
-ifneq ($(BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_PRODUCT_SERVICESIMAGE_PARTITION_SIZE and \
-    BOARD_PRODUCT_SERVICESIMAGE_PARTITION_RESERVED_SIZE together)
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
@@ -907,7 +907,7 @@ $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
 # BOARD_*_PARTITION_LIST: a list of the following tokens
-valid_super_partition_list := system vendor product product_services odm
+valid_super_partition_list := system vendor product system_ext odm
 $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
     $(if $(filter-out $(valid_super_partition_list),$(BOARD_$(group)_PARTITION_LIST)), \
         $(error BOARD_$(group)_PARTITION_LIST contains invalid partition name \
@@ -1168,7 +1168,7 @@ dont_bother_goals := out \
     bptimage-nodeps \
     vnod vendorimage-nodeps \
     pnod productimage-nodeps \
-    psnod productservicesimage-nodeps \
+    senod systemextimage-nodeps \
     onod odmimage-nodeps \
     systemotherimage-nodeps \
     ramdisk-nodeps \
