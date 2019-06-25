@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Chih-hung Hsieh <chh@google.com>
+Submitted-at: Tue, 25 Jun 2019 18:32:24 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/984764
+Project: platform/build
+Branch: refs/heads/master
