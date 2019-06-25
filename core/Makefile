@@ -3424,8 +3424,7 @@ ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
 # (1): list of items like "system", "vendor", "product", "product_services"
 # return: map each item into a command ( wrapped in $$() ) that reads the size
 define read-size-of-partitions
-$(foreach image,$(call images-for-partitions,$(1)),$$( \
-    build/make/tools/releasetools/sparse_img.py --get_partition_size $(image)))
+$(foreach image,$(call images-for-partitions,$(1)),$$($(SPARSE_IMG) --get_partition_size $(image)))
 endef
 
 # round result to BOARD_SUPER_PARTITION_ALIGNMENT
@@ -3462,7 +3461,7 @@ check-all-partition-sizes: $(check_all_partition_sizes_file)
 
 # Add image dependencies so that generated_*_image_info.txt are written before checking.
 $(check_all_partition_sizes_file): \
-    build/make/tools/releasetools/sparse_img.py \
+    $(SPARSE_IMG) \
     $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
@@ -3612,6 +3611,7 @@ ifeq ($(build_otatools_package),true)
 
 INTERNAL_OTATOOLS_MODULES := \
   aapt \
+  add_img_to_target_files \
   append2simg \
   avbtool \
   blk_alloc_to_base_fs \
@@ -3647,6 +3647,7 @@ INTERNAL_OTATOOLS_MODULES := \
   mksquashfs \
   mksquashfsimage.sh \
   mkuserimg_mke2fs \
+  ota_from_target_files \
   sefcontext_compile \
   shflags \
   signapk \
@@ -3875,10 +3876,8 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(SOONG_APEX_KEYS_FILE) \
 	    $(SOONG_ZIP) \
 	    $(HOST_OUT_EXECUTABLES)/fs_config \
-	    $(HOST_OUT_EXECUTABLES)/imgdiff \
-	    $(HOST_OUT_EXECUTABLES)/bsdiff \
-	    $(HOST_OUT_EXECUTABLES)/care_map_generator \
-	    $(BUILD_IMAGE_SRCS) \
+	    $(ADD_IMG_TO_TARGET_FILES) \
+	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST) \
 	    $(BUILT_ASSEMBLED_VENDOR_MANIFEST) \
 	    $(BUILT_SYSTEM_MATRIX) \
@@ -4128,7 +4127,7 @@ endif
 ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
 ifdef BUILDING_SYSTEM_IMAGE
 	$(hide) PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
-	    build/make/tools/releasetools/make_recovery_patch $(zip_root) $(zip_root)
+	    $(MAKE_RECOVERY_PATCH) $(zip_root) $(zip_root)
 endif # BUILDING_SYSTEM_IMAGE
 endif
 ifeq ($(AB_OTA_UPDATER),true)
@@ -4250,9 +4249,9 @@ ifneq ($(BOARD_SUPER_PARTITION_GROUPS),)
 	    $(if $(_group_partition_list), \
 	        echo "$(group)_partition_list=$(_group_partition_list)" >> $(zip_root)/META/dynamic_partitions_info.txt;))
 endif # BOARD_SUPER_PARTITION_GROUPS
-	@# TODO(b/134525174): Remove `-r` after addressing the issue with recovery patch generation.
+	@# TODO(b/134525174): Remove `--rebuild_recovery` after addressing the issue with recovery patch generation.
 	$(hide) PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
-	    build/make/tools/releasetools/add_img_to_target_files -a -r -v -p $(HOST_OUT) $(zip_root)
+	    $(ADD_IMG_TO_TARGET_FILES) --add_missing --rebuild_recovery --verbose --path $(HOST_OUT) $(zip_root)
 	@# Zip everything up, preserving symlinks and placing META/ files first to
 	@# help early validation of the .zip file while uploading it.
 	$(hide) find $(zip_root)/META | sort >$@.list
@@ -4283,13 +4282,14 @@ ifeq ($(build_ota_package),true)
 # $(2): additional args
 define build-ota-package-target
 PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
-    build/make/tools/releasetools/ota_from_target_files \
-    --verbose \
-    --extracted_input_target_files $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE)) \
-    --path $(HOST_OUT) \
-    $(if $(OEM_OTA_CONFIG), --oem_settings $(OEM_OTA_CONFIG)) \
-    $(2) \
-    $(BUILT_TARGET_FILES_PACKAGE) $(1)
+    $(OTA_FROM_TARGET_FILES) \
+        --verbose \
+        --extracted_input_target_files $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE)) \
+        --path $(HOST_OUT) \
+        $(if $(OEM_OTA_CONFIG), --oem_settings $(OEM_OTA_CONFIG)) \
+        $(2) \
+        $(BUILT_TARGET_FILES_PACKAGE) \
+        $(1)
 endef
 
 name := $(TARGET_PRODUCT)
@@ -4304,16 +4304,11 @@ INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
-ifeq ($(AB_OTA_UPDATER),true)
-$(INTERNAL_OTA_PACKAGE_TARGET): $(BRILLO_UPDATE_PAYLOAD)
-else
-$(INTERNAL_OTA_PACKAGE_TARGET): $(BROTLI)
-endif
-
 $(INTERNAL_OTA_PACKAGE_TARGET): .KATI_IMPLICIT_OUTPUTS := $(INTERNAL_OTA_METADATA)
 
-$(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
-	    build/make/tools/releasetools/ota_from_target_files
+$(INTERNAL_OTA_PACKAGE_TARGET): \
+	    $(BUILT_TARGET_FILES_PACKAGE) \
+	    $(OTA_FROM_TARGET_FILES)
 	@echo "Package OTA: $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --output_metadata_path $(INTERNAL_OTA_METADATA))
 
@@ -4331,14 +4326,9 @@ INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name
 
 $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
-ifeq ($(AB_OTA_UPDATER),true)
-$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BRILLO_UPDATE_PAYLOAD)
-else
-$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BROTLI)
-endif
-
-$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
-	    build/make/tools/releasetools/ota_from_target_files
+$(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): \
+	    $(BUILT_TARGET_FILES_PACKAGE) \
+	    $(OTA_FROM_TARGET_FILES)
 	@echo "Package OTA (retrofit dynamic partitions): $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --retrofit_dynamic_partitions)
 
