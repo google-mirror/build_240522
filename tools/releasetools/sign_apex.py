@@ -82,6 +82,7 @@ def main(argv):
     apex_data = input_fp.read()
 
   signed_apex = apex_utils.SignApex(
+      'avbtool',
       apex_data,
       payload_key=options['payload_key'],
       container_key=options['container_key'],
