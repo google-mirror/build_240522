@@ -44,3 +44,6 @@ DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Mainline devices support apex
 TARGET_FLATTEN_APEX := false
+
+# Include stats logging code in LMKD
+TARGET_LMKD_STATS_LOG := true
