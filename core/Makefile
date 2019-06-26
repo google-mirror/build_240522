@@ -4245,6 +4245,61 @@ $(call dist-for-goals, target-files-package, $(BUILT_TARGET_FILES_PACKAGE))
 endif
 
 # -----------------------------------------------------------------
+#  misc_info.txt
+
+# $(1): file
+define dump-misc-info
+	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >>  $(1)
+	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $(1)
+	$(if $(BOARD_FLASH_BLOCK_SIZE),
+		$(hide) echo "blocksize=$(BOARD_FLASH_BLOCK_SIZE)" >> $(1))
+	$(if $(BOARD_BOOTIMAGE_PARTITION_SIZE),
+		$(hide) echo "boot_size=$(BOARD_BOOTIMAGE_PARTITION_SIZE)" >> $(1))
+	$(if $(INSTALLED_BOOTIMAGE_TARGET),,
+		$(hide) echo "no_boot=true" >> $(1))
+	$(if $(INSTALLED_RECOVERYIMAGE_TARGET),,
+		$(hide) echo "no_recovery=true" >> $(1))
+	$(if $(BOARD_INCLUDE_RECOVERY_DTBO),
+		$(hide) echo "include_recovery_dtbo=true" >> $(1))
+	$(if $(BOARD_INCLUDE_RECOVERY_ACPIO),
+		$(hide) echo "include_recovery_acpio=true" >> $(1))
+	$(if $(BOARD_RECOVERYIMAGE_PARTITION_SIZE),
+		$(hide) echo "recovery_size=$(BOARD_RECOVERYIMAGE_PARTITION_SIZE)" >> $(1))
+	$(if $(TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS),
+		@# TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS can be empty to indicate that nothing but defaults should be used.
+		$(hide) echo "recovery_mount_options=$(TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS)" >> $(1),
+	        $(hide) echo "recovery_mount_options=$(DEFAULT_TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS)" >> $(1))
+	$(if $(strip $(TARGET_RELEASETOOLS_EXTENSIONS)),
+		$(hide) echo "tool_extensions=$(TARGET_RELEASETOOLS_EXTENSIONS)" >> $(1),
+		$(hide) echo "tool_extensions=$(TARGET_DEVICE_DIR)/../common" >> $(1))
+	$(hide) echo "default_system_dev_certificate=$(DEFAULT_SYSTEM_DEV_CERTIFICATE)" >> $(1)
+	$(if $(PRODUCT_EXTRA_RECOVERY_KEYS),
+		$(hide) echo "extra_recovery_keys=$(PRODUCT_EXTRA_RECOVERY_KEYS)" >> $(1))
+	$(hide) echo 'mkbootimg_args=$(BOARD_MKBOOTIMG_ARGS)' >> $(1)
+	$(hide) echo 'mkbootimg_version_args=$(INTERNAL_MKBOOTIMG_VERSION_ARGS)' >> $(1)
+	$(hide) echo "multistage_support=1" >> $(1)
+	$(hide) echo "blockimgdiff_versions=3,4" >> $(1)
+	$(if $(filter true,$(PRODUCT_BUILD_GENERIC_OTA_PACKAGE)),
+		$(hide) echo "build_generic_ota_package=true" >> $(1))
+	$(if $(strip $(OEM_THUMBPRINT_PROPERTIES)),
+		@# OTA scripts are only interested in fingerprint related properties
+		$(hide) echo "oem_fingerprint_properties=$(OEM_THUMBPRINT_PROPERTIES)" >> $(1))
+
+# TODO: the rest of the misc_info.txt fields...
+
+endef
+
+INSTALLED_MISC_INFO_TARGET := $(PRODUCT_OUT)/misc_info.txt
+
+$(INSTALLED_MISC_INFO_TARGET):
+	rm -rf $@
+	$(call pretty,"Target misc_info.txt: $@")
+	$(call dump-misc-info,$@)
+
+.PHONY: misc_info
+misc_info: $(INSTALLED_MISC_INFO_TARGET)
+
+# -----------------------------------------------------------------
 # NDK Sysroot Package
 NDK_SYSROOT_TARGET := $(PRODUCT_OUT)/ndk_sysroot.tar.bz2
 $(NDK_SYSROOT_TARGET): $(SOONG_OUT_DIR)/ndk.timestamp
