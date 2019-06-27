@@ -1,0 +1,7 @@
+Code-Review+2: Tao Bao <tbao@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Kiyoung Kim <kiyoungkim@google.com>
+Submitted-at: Thu, 27 Jun 2019 00:27:47 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/989347
+Project: platform/build
+Branch: refs/heads/master
