@@ -4250,6 +4250,132 @@ $(call dist-for-goals, target-files-package, $(BUILT_TARGET_FILES_PACKAGE))
 endif
 
 # -----------------------------------------------------------------
+#  misc_info.txt
+
+INSTALLED_MISC_INFO_TARGET := $(PRODUCT_OUT)/misc_info.txt
+
+$(INSTALLED_MISC_INFO_TARGET):
+	rm -rf $@
+	$(call pretty,"Target misc_info.txt: $@")
+	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >>  $@
+	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $@
+ifdef BOARD_FLASH_BLOCK_SIZE
+	$(hide) echo "blocksize=$(BOARD_FLASH_BLOCK_SIZE)" >> $@
+endif
+ifdef BOARD_BOOTIMAGE_PARTITION_SIZE
+	$(hide) echo "boot_size=$(BOARD_BOOTIMAGE_PARTITION_SIZE)" >> $@
+endif
+ifeq ($(INSTALLED_BOOTIMAGE_TARGET),)
+	$(hide) echo "no_boot=true" >> $@
+endif
+ifeq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
+	$(hide) echo "no_recovery=true" >> $@
+endif
+ifdef BOARD_INCLUDE_RECOVERY_DTBO
+	$(hide) echo "include_recovery_dtbo=true" >> $@
+endif
+ifdef BOARD_INCLUDE_RECOVERY_ACPIO
+	$(hide) echo "include_recovery_acpio=true" >> $@
+endif
+ifdef BOARD_RECOVERYIMAGE_PARTITION_SIZE
+	$(hide) echo "recovery_size=$(BOARD_RECOVERYIMAGE_PARTITION_SIZE)" >> $@
+endif
+ifdef TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS
+	@# TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS can be empty to indicate that nothing but defaults should be used.
+	$(hide) echo "recovery_mount_options=$(TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS)" >> $@
+else
+	$(hide) echo "recovery_mount_options=$(DEFAULT_TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS)" >> $@
+endif
+ifeq ($(TARGET_RELEASETOOLS_EXTENSIONS),)
+	@# default to common dir for device vendor
+	$(hide) echo "tool_extensions=$(TARGET_DEVICE_DIR)/../common" >> $@
+else
+	$(hide) echo "tool_extensions=$(TARGET_RELEASETOOLS_EXTENSIONS)" >> $@
+endif
+	$(hide) echo "default_system_dev_certificate=$(DEFAULT_SYSTEM_DEV_CERTIFICATE)" >> $@
+ifdef PRODUCT_EXTRA_RECOVERY_KEYS
+	$(hide) echo "extra_recovery_keys=$(PRODUCT_EXTRA_RECOVERY_KEYS)" >> $@
+endif
+	$(hide) echo 'mkbootimg_args=$(BOARD_MKBOOTIMG_ARGS)' >> $@
+	$(hide) echo 'mkbootimg_version_args=$(INTERNAL_MKBOOTIMG_VERSION_ARGS)' >> $@
+	$(hide) echo "multistage_support=1" >> $@
+	$(hide) echo "blockimgdiff_versions=3,4" >> $@
+ifeq ($(PRODUCT_BUILD_GENERIC_OTA_PACKAGE),true)
+	$(hide) echo "build_generic_ota_package=true" >> $@
+endif
+ifneq (,$(filter address, $(SANITIZE_TARGET)))
+	# We need to create userdata.img with real data because the instrumented libraries are in userdata.img.
+	$(hide) echo "userdata_img_with_data=true" >> $@
+endif
+ifeq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
+	$(hide) echo "full_recovery_image=true" >> $@
+endif
+ifeq ($(BOARD_AVB_ENABLE),true)
+	$(hide) echo "avb_enable=true" >> $@
+	$(hide) echo "avb_vbmeta_key_path=$(BOARD_AVB_KEY_PATH)" >> $@
+	$(hide) echo "avb_vbmeta_algorithm=$(BOARD_AVB_ALGORITHM)" >> $@
+	$(hide) echo "avb_vbmeta_args=$(BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS)" >> $@
+	$(hide) echo "avb_boot_add_hash_footer_args=$(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)" >> $@
+ifdef BOARD_AVB_BOOT_KEY_PATH
+	$(hide) echo "avb_boot_key_path=$(BOARD_AVB_BOOT_KEY_PATH)" >> $@
+	$(hide) echo "avb_boot_algorithm=$(BOARD_AVB_BOOT_ALGORITHM)" >> $@
+	$(hide) echo "avb_boot_rollback_index_location=$(BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION)" >> $@
+endif # BOARD_AVB_BOOT_KEY_PATH
+	$(hide) echo "avb_recovery_add_hash_footer_args=$(BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS)" >> $@
+ifdef BOARD_AVB_RECOVERY_KEY_PATH
+	$(hide) echo "avb_recovery_key_path=$(BOARD_AVB_RECOVERY_KEY_PATH)" >> $@
+	$(hide) echo "avb_recovery_algorithm=$(BOARD_AVB_RECOVERY_ALGORITHM)" >> $@
+	$(hide) echo "avb_recovery_rollback_index_location=$(BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION)" >> $@
+endif # BOARD_AVB_RECOVERY_KEY_PATH
+ifneq (,$(strip $(BOARD_AVB_VBMETA_SYSTEM)))
+	$(hide) echo "avb_vbmeta_system=$(BOARD_AVB_VBMETA_SYSTEM)" >> $@
+	$(hide) echo "avb_vbmeta_system_args=$(BOARD_AVB_MAKE_VBMETA_SYSTEM_IMAGE_ARGS)" >> $@
+	$(hide) echo "avb_vbmeta_system_key_path=$(BOARD_AVB_VBMETA_SYSTEM_KEY_PATH)" >> $@
+	$(hide) echo "avb_vbmeta_system_algorithm=$(BOARD_AVB_VBMETA_SYSTEM_ALGORITHM)" >> $@
+	$(hide) echo "avb_vbmeta_system_rollback_index_location=$(BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION)" >> $@
+endif # BOARD_AVB_VBMETA_SYSTEM
+ifneq (,$(strip $(BOARD_AVB_VBMETA_VENDOR)))
+	$(hide) echo "avb_vbmeta_vendor=$(BOARD_AVB_VBMETA_VENDOR)" >> $@
+	$(hide) echo "avb_vbmeta_vendor_args=$(BOARD_AVB_MAKE_VBMETA_SYSTEM_IMAGE_ARGS)" >> $@
+	$(hide) echo "avb_vbmeta_vendor_key_path=$(BOARD_AVB_VBMETA_VENDOR_KEY_PATH)" >> $@
+	$(hide) echo "avb_vbmeta_vendor_algorithm=$(BOARD_AVB_VBMETA_VENDOR_ALGORITHM)" >> $@
+	$(hide) echo "avb_vbmeta_vendor_rollback_index_location=$(BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION)" >> $@
+endif # BOARD_AVB_VBMETA_VENDOR_KEY_PATH
+endif # BOARD_AVB_ENABLE
+ifdef BOARD_BPT_INPUT_FILES
+	$(hide) echo "board_bpt_enable=true" >> $@
+	$(hide) echo "board_bpt_make_table_args=$(BOARD_BPT_MAKE_TABLE_ARGS)" >> $@
+	$(hide) echo "board_bpt_input_files=$(BOARD_BPT_INPUT_FILES)" >> $@
+endif
+ifdef BOARD_BPT_DISK_SIZE
+	$(hide) echo "board_bpt_disk_size=$(BOARD_BPT_DISK_SIZE)" >> $@
+endif
+	$(call generate-userimage-prop-dictionary, $@)
+ifeq ($(AB_OTA_UPDATER),true)
+	@# Include the build type in META/misc_info.txt so the server can easily differentiate production builds.
+	$(hide) echo "build_type=$(TARGET_BUILD_VARIANT)" >> $@
+	$(hide) echo "ab_update=true" >> $@
+endif
+ifdef BOARD_PREBUILT_DTBOIMAGE
+	$(hide) echo "has_dtbo=true" >> $@
+ifeq ($(BOARD_AVB_ENABLE),true)
+	$(hide) echo "dtbo_size=$(BOARD_DTBOIMG_PARTITION_SIZE)" >> $@
+	$(hide) echo "avb_dtbo_add_hash_footer_args=$(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)" >> $@
+ifdef BOARD_AVB_DTBO_KEY_PATH
+	$(hide) echo "avb_dtbo_key_path=$(BOARD_AVB_DTBO_KEY_PATH)" >> $@
+	$(hide) echo "avb_dtbo_algorithm=$(BOARD_AVB_DTBO_ALGORITHM)" >> $@
+	$(hide) echo "avb_dtbo_rollback_index_location=$(BOARD_AVB_DTBO_ROLLBACK_INDEX_LOCATION)" >> $@
+endif # BOARD_AVB_DTBO_KEY_PATH
+endif # BOARD_AVB_ENABLE
+endif # BOARD_PREBUILT_DTBOIMAGE
+	$(call dump-dynamic-partitions-info,$@)
+
+.PHONY: misc_info
+misc_info: $(INSTALLED_MISC_INFO_TARGET)
+
+droidcore: $(INSTALLED_MISC_INFO_TARGET)
+
+# -----------------------------------------------------------------
 # NDK Sysroot Package
 NDK_SYSROOT_TARGET := $(PRODUCT_OUT)/ndk_sysroot.tar.bz2
 $(NDK_SYSROOT_TARGET): $(SOONG_OUT_DIR)/ndk.timestamp
