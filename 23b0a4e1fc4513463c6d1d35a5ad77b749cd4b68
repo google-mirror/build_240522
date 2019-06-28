@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1412af7_c0df1106",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-06-28T20:07:57Z",
+      "side": 1,
+      "message": "With this I think we should update the comment here:\nhttps://android.googlesource.com/platform/build/+/master/tools/releasetools/merge_target_files.py#529\n\nTo mention its only use is for retrofit / super split images, not super_empty.img. (since super_empty.img now happens from use_dynamic_partitions, not build_super_partition).",
+      "range": {
+        "startLine": 891,
+        "startChar": 28,
+        "endLine": 891,
+        "endChar": 50
+      },
+      "revId": "23b0a4e1fc4513463c6d1d35a5ad77b749cd4b68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
