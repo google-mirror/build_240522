@@ -36,6 +36,7 @@ VNDK-SP: libblas.so
 VNDK-SP: libc++.so
 VNDK-SP: libcompiler_rt.so
 VNDK-SP: libcutils.so
+VNDK-SP: libdexfile_support.so
 VNDK-SP: libhardware.so
 VNDK-SP: libhidlbase.so
 VNDK-SP: libhidlmemory.so
@@ -262,7 +263,6 @@ VNDK-core: libwifi-system-iface.so
 VNDK-core: libxml2.so
 VNDK-core: libyuv.so
 VNDK-core: libziparchive.so
-VNDK-private: libbacktrace.so
 VNDK-private: libbinderthreadstate.so
 VNDK-private: libblas.so
 VNDK-private: libcompiler_rt.so

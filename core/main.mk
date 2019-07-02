@@ -1261,7 +1261,7 @@ APEX_MODULE_LIBS += \
 
 # An option to disable the check below, for local use since some build targets
 # still may create these libraries in /system (b/129006418).
-DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
+DISABLE_APEX_LIBS_ABSENCE_CHECK ?= true
 
 # Bionic should not be in /system, except for the bootstrap instance.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE := lib/bootstrap lib64/bootstrap
