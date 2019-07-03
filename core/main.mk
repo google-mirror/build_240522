@@ -262,6 +262,23 @@ endif
 # mount system_other partition.
 ADDITIONAL_DEFAULT_PROPERTIES += ro.postinstall.fstab.prefix=/system
 
+# Charger properties
+ifdef TARGET_HEALTHD_DRAW_SPLIT_SCREEN
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.charger.draw_split_screen=$(TARGET_HEALTHD_DRAW_SPLIT_SCREEN)
+endif
+ifdef TARGET_HEALTHD_DRAW_SPLIT_OFFSET
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.charger.draw_split_offset=$(TARGET_HEALTHD_DRAW_SPLIT_OFFSET)
+endif
+ifdef BOARD_CHARGER_DISABLE_INIT_BLANK
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.charger.disable_init_blank=$(BOARD_CHARGER_DISABLE_INIT_BLANK)
+endif
+ifdef BOARD_CHARGER_ENABLE_SUSPEND
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.charger.enable_suspend=$(BOARD_CHARGER_ENABLE_SUSPEND)
+endif
+ifdef BOARD_CHARGER_NO_UI
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.charger.no_ui=$(BOARD_CHARGER_NO_UI)
+endif
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
