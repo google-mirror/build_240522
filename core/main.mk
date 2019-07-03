@@ -1337,8 +1337,8 @@ endif
 ifdef FULL_BUILD
   ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
     # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
-    ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
-      _whitelist := $(PRODUCT_ENFORCE_PACKAGES_EXIST_WHITELIST)
+    #ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
+      _whitelist := product_manifest.xml
       _modules := $(PRODUCT_PACKAGES)
       # Strip :32 and :64 suffixes
       _modules := $(patsubst %:32,%,$(_modules))
@@ -1352,7 +1352,7 @@ ifdef FULL_BUILD
         $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
       $(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_whitelist)),\
         $(INTERNAL_PRODUCT) includes redundant whitelist entries for nonexistent PRODUCT_PACKAGES)
-    endif
+    #endif
 
     # Check to ensure that all modules in PRODUCT_HOST_PACKAGES exist
     #
