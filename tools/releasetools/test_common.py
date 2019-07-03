@@ -27,7 +27,7 @@ import test_utils
 import validate_target_files
 from rangelib import RangeSet
 
-from blockimgdiff import EmptyImage, DataImage
+from images import EmptyImage, DataImage
 
 KiB = 1024
 MiB = 1024 * KiB
