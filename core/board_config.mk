@@ -412,6 +412,14 @@ ifdef BOARD_PREBUILT_PRODUCTIMAGE
 endif
 .KATI_READONLY := BUILDING_PRODUCT_IMAGE
 
+ifeq ($(BOARD_USES_PRODUCTIMAGE),true)
+ifneq ($(BOARD_PREBUILT_PRODUCTIMAGE),true)
+ifneq ($(BUILDING_PRODUCT_IMAGE),true)
+    $(error If BOARD_USES_PRODUCTIMAGE, either BOARD_PREBUILT_PRODUCTIMAGE or BUILDING_PRODUCT_IMAGE must be true)
+endif
+endif
+endif
+
 ###########################################
 # TODO(b/135957588) TARGET_COPY_OUT_PRODUCT_SERVICES will be set to
 # TARGET_COPY_OUT_PRODUCT as a workaround.
@@ -456,6 +464,13 @@ ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
 endif
 .KATI_READONLY := BUILDING_SYSTEM_EXT_IMAGE
 
+ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),true)
+ifneq ($(BOARD_PREBUILT_SYSTEM_EXTIMAGE),true)
+ifneq ($(BUILDING_SYSTEM_EXT_IMAGE),true)
+    $(error If BOARD_USES_SYSTEM_EXTIMAGE, either BOARD_PREBUILT_SYSTEM_EXTIMAGE or BUILDING_SYSTEM_EXT_IMAGE must be true)
+endif
+endif
+endif
 ###########################################
 # Now we can substitute with the real value of TARGET_COPY_OUT_ODM
 ifeq ($(TARGET_COPY_OUT_ODM),$(_odm_path_placeholder))
