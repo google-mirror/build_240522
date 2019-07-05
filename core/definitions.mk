@@ -2427,6 +2427,11 @@ define filter-copy-pair
 $(if $(findstring $(2), $(3)),,$(1):$(2))
 endef
 
+# Create copy pair for $(1) $(2)
+define filterout-copy-pair
+$(if $(findstring $(2), $(3)),$(1):$(2),)
+endef
+
 # Copies many files.
 # $(1): The files to copy.  Each entry is a ':' separated src:dst pair
 # $(2): An optional directory to prepend to the destination
@@ -2859,7 +2864,8 @@ define create-suite-dependencies
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval COMPATIBILITY.$(suite).FILES := \
     $$(COMPATIBILITY.$(suite).FILES) $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))) \
-      $$(foreach f,$$(my_compat_dist_config_$(suite)),$$(call word-colon,2,$$(f)))) \
+      $$(foreach f,$$(my_compat_dist_config_$(suite)),$$(call word-colon,2,$$(f))) \
+      $$(foreach f,$$(my_compat_dist2_$(suite)),$$(call word-colon,2,$$(f)))) \
   $(eval COMPATIBILITY.$(suite).MODULES := \
     $$(COMPATIBILITY.$(suite).MODULES) $$(my_register_name))) \
 $(eval $(my_all_targets) : $(call copy-many-files, \
