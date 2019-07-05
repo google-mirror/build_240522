@@ -33,9 +33,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ext \
 
-# Android Runtime APEX module.
+# Bionic APEX module.
 PRODUCT_PACKAGES += com.android.runtime
-PRODUCT_HOST_PACKAGES += com.android.runtime
+
+# Android Runtime APEX module.
+PRODUCT_PACKAGES += com.android.art
+PRODUCT_HOST_PACKAGES += com.android.art
 
 # Certificates.
 PRODUCT_PACKAGES += \
