@@ -624,7 +624,8 @@ endif
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
     $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
-  $(eval my_compat_dist_config_$(suite) := ))
+  $(eval my_compat_dist_config_$(suite) := ) \
+  $(eval my_compat_dist2_$(suite) := ))
 
 
 # Auto-generate build config.
@@ -710,7 +711,6 @@ ifneq (,$(filter $(SOONG_OUT_DIR)%,$(LOCAL_FULL_TEST_CONFIG)))
   endif
 endif
 
-
 ifeq ($(use_testcase_folder),true)
 ifneq ($(my_test_data_file_pairs),)
 $(foreach pair, $(my_test_data_file_pairs), \
@@ -719,7 +719,11 @@ $(foreach pair, $(my_test_data_file_pairs), \
   $(eval file := $(word 2,$(parts))) \
   $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-      $(call filter-copy-pair,$(src_path),$(call append-path,$(dir),$(file)),$(my_installed_test_data))))))
+      $(call filter-copy-pair,$(src_path),$(call append-path,$(dir),$(file)),$(my_installed_test_data)))) \
+    $(eval my_compat_dist2_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
+      $(call filterout-copy-pair,$(src_path),$(call append-path,$(dir),$(file)),$(my_installed_test_data)))) \
+     ))
+
 endif
 else
 ifneq ($(my_test_data_file_pairs),)
@@ -732,8 +736,6 @@ $(foreach pair, $(my_test_data_file_pairs), \
       $(src_path):$(call append-path,$(dir),$(file))))))
 endif
 endif
-
-
 
 arch_dir :=
 is_native :=
