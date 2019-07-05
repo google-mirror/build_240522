@@ -54,6 +54,7 @@ PRODUCT_PACKAGES += \
     charger \
     cmd \
     com.android.conscrypt \
+    com.android.i18n \
     com.android.location.provider \
     com.android.resolv \
     com.android.neuralnetworks \
