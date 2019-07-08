@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e914b8e_8a09b599",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3659,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-08T03:08:39Z",
+      "side": 1,
+      "message": "aapt2",
+      "range": {
+        "startLine": 3659,
+        "startChar": 2,
+        "endLine": 3659,
+        "endChar": 6
+      },
+      "revId": "43691e3aa2c061c0a48837f1821b567b945bbb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca2aaaf1_f87af289",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-08T03:08:39Z",
+      "side": 1,
+      "message": "Also update this one",
+      "range": {
+        "startLine": 216,
+        "startChar": 21,
+        "endLine": 216,
+        "endChar": 25
+      },
+      "revId": "43691e3aa2c061c0a48837f1821b567b945bbb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
