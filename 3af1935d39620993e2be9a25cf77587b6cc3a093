@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96668786_5a5b6ca9",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-09T20:01:11Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t realize that `aapt2 dump xmltree` hasn\u0027t been available in AOSP, until trying to verify the change just now. So for the time being, we have to keep using aapt in this file, and include both of aapt and aapt2 in core/Makefile.\n\nI\u0027ll get a separate change in internal branch, so that upon next AOSP push we can completely move off of aapt.",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
