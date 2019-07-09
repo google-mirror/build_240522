@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56b66d74_8a337463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-09T16:59:54Z",
+      "side": 1,
+      "message": "Add:\nMerged-In: Ic035b3a5c8c80025cb3cede7b0fdcf8a2e5a35fd",
+      "revId": "7b20bd0f42254f6a9481aebc2ef9f92bd5c8f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
