@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (f5c351 Merge "Add libprofile-extras to all link steps when NATIVE_C)
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.190705.004
+>>>>>>> BRANCH (8b4bc5 Make change and version bump to PPRL.190705.004)
