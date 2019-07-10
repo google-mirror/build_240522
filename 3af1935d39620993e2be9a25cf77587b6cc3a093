@@ -22,6 +22,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61fc7d68_2de2b827",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-07-10T02:33:21Z",
+      "side": 1,
+      "message": "Does aapt2 also provide xmltree dump? Seems that only difference between is \u0027aapt2 dump xmltree\u0027 needs additional flag, \u0027--file\u0027.\n\nFor parsing shared uid and package name, \u0027aapt dump xmltree foo.apk AndroidManifest.xml\u0027 and \u0027aapt2 dump xmltree foo.apk --file AndroidManifest.xml\u0027 might have no difference.",
+      "parentUuid": "96668786_5a5b6ca9",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
