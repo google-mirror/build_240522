@@ -22,6 +22,30 @@
       "revId": "845773a1a6d5a2f739d83e5b90e352b43c3294ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccca52c3_08b3abf4",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-07-10T15:39:56Z",
+      "side": 1,
+      "message": "+1, no practical difference in this case, but this is a make pattern we should stay away from where it\u0027s not explicitly warranted. Looks good otherwise :)",
+      "parentUuid": "72a7ad86_f1a6da00",
+      "range": {
+        "startLine": 2318,
+        "startChar": 28,
+        "endLine": 2318,
+        "endChar": 29
+      },
+      "revId": "845773a1a6d5a2f739d83e5b90e352b43c3294ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
