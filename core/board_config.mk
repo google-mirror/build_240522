@@ -390,7 +390,9 @@ ifdef BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE
   BOARD_USES_PRODUCTIMAGE := true
 endif
 ifeq ($(TARGET_COPY_OUT_PRODUCT),product)
-  BOARD_USES_PRODUCTIMAGE := true
+  ifneq ($(BOARD_USES_PRODUCTIMAGE),true)
+    $(error If BOARD_USES_PRODUCTIMAGE is product, either BOARD_PREBUILT_PRODUCTIMAGE or BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE must be set)
+  endif
 else ifdef BOARD_USES_PRODUCTIMAGE
   $(error TARGET_COPY_OUT_PRODUCT must be set to 'product' to use a product image)
 endif
@@ -434,7 +436,9 @@ ifdef BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE
   BOARD_USES_SYSTEM_EXTIMAGE := true
 endif
 ifeq ($(TARGET_COPY_OUT_SYSTEM_EXT),system_ext)
-  BOARD_USES_SYSTEM_EXTIMAGE := true
+  ifneq ($(BOARD_USES_SYSTEM_EXTIMAGE),true)
+    $(error If TARGET_COPY_OUT_SYSTEM_EXT is system_ext, either BOARD_PREBUILT_SYSTEM_EXTIMAGE or BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE must be set)
+  endif
 else ifdef BOARD_USES_SYSTEM_EXTIMAGE
   $(error TARGET_COPY_OUT_SYSTEM_EXT must be set to 'system_ext' to use a system_ext image)
 endif
