@@ -70,6 +70,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79da48f7_537c9d3b",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-07-10T04:47:07Z",
+      "side": 1,
+      "message": "I see. master branch and our internal branch(or Q early access branch) are quite different for frameworks/base/tools/aapt2 repository. Then I had better abandon this right now.",
+      "parentUuid": "bd83e3d6_b96a0f58",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
