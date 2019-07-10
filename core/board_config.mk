@@ -321,6 +321,15 @@ else ifeq ($(PRODUCT_BUILD_BOOT_IMAGE),true)
 endif
 .KATI_READONLY := BUILDING_BOOT_IMAGE
 
+# Are we building a vendor boot image
+BUILDING_VENDOR_BOOT_IMAGE :=
+ifdef BOARD_BOOT_HEADER_VERSION
+  ifneq ($(call math_gt_or_eq,$(BOARD_BOOT_HEADER_VERSION),3),)
+    BUILDING_VENDOR_BOOT_IMAGE := true
+  endif
+endif
+.KATI_READONLY := BUILDING_VENDOR_BOOT_IMAGE
+
 # Are we building a recovery image
 BUILDING_RECOVERY_IMAGE :=
 ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
