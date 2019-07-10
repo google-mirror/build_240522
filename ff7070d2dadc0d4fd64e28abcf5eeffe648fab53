@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1d58f29_6d0b3d59",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-07-10T12:03:28Z",
+      "side": 1,
+      "message": "Single quotation mark?",
+      "range": {
+        "startLine": 394,
+        "startChar": 42,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "ff7070d2dadc0d4fd64e28abcf5eeffe648fab53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba73997_85728b5c",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-07-10T12:03:28Z",
+      "side": 1,
+      "message": "here, too.",
+      "range": {
+        "startLine": 440,
+        "startChar": 45,
+        "endLine": 440,
+        "endChar": 55
+      },
+      "revId": "ff7070d2dadc0d4fd64e28abcf5eeffe648fab53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
