@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "a18a9e65_1b5bb6a0",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-10T16:17:50Z",
+      "side": 1,
+      "message": "TARGET_COPY_OUT_PRODUCT?",
+      "range": {
+        "startLine": 394,
+        "startChar": 15,
+        "endLine": 394,
+        "endChar": 38
+      },
+      "revId": "ff7070d2dadc0d4fd64e28abcf5eeffe648fab53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cba73997_85728b5c",
         "filename": "core/board_config.mk",
         "patchSetId": 2
