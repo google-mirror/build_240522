@@ -46,6 +46,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd83e3d6_b96a0f58",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-10T03:40:35Z",
+      "side": 1,
+      "message": "Correct. `aapt2 dump xmltree` (i.e. the one built from internal branch) requires `--file` parameter, exactly as you mentioned. But it seems the supporting code for dump xmltree is currently not available in AOSP (frameworks/base/tools/aapt2), unless I have missed something like a prebuilt aapt2 somewhere. Or did you actually find that via partner early access program?",
+      "parentUuid": "61fc7d68_2de2b827",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
