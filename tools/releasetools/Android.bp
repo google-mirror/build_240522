@@ -84,11 +84,11 @@ python_defaults {
     name: "releasetools_binary_defaults",
     version: {
         py2: {
-            enabled: true,
+            enabled: false,
             embedded_launcher: true,
         },
         py3: {
-            enabled: false,
+            enabled: true,
             embedded_launcher: false,
         },
     },
