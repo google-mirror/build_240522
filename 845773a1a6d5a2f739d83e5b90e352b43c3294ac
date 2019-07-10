@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72a7ad86_f1a6da00",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-07-10T15:25:02Z",
+      "side": 1,
+      "message": "We usually use the `:\u003d` operator in Android Makefiles.",
+      "range": {
+        "startLine": 2318,
+        "startChar": 28,
+        "endLine": 2318,
+        "endChar": 29
+      },
+      "revId": "845773a1a6d5a2f739d83e5b90e352b43c3294ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
