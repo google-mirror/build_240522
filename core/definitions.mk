@@ -2443,8 +2443,16 @@ $(2): \
 	$(1) \
 	$(HOST_INIT_VERIFIER) \
 	$(KNOWN_HIDL_INTERFACES) \
-	$(call intermediates-dir-for,ETC,passwd)/passwd
-	$(hide) $(HOST_INIT_VERIFIER) -p $(call intermediates-dir-for,ETC,passwd)/passwd -k $(KNOWN_HIDL_INTERFACES) $$<
+	$(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	$(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	$(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	$(call intermediates-dir-for,ETC,passwd_product)/passwd_product
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  -p $(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	  -p $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	  -p $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	  -p $(call intermediates-dir-for,ETC,passwd_product)/passwd_product \
+	  -k $(KNOWN_HIDL_INTERFACES) $$<
 else
 $(2): $(1)
 endif
