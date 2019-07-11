@@ -643,6 +643,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/odm/build.prop)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/product)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/system_ext)
 
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system_ext)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/system_ext)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/*/system_ext)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
