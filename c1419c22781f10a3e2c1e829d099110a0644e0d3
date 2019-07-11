@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed1c4aec_55fd8467",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-11T17:50:18Z",
+      "side": 1,
+      "message": "Can this be removed?",
+      "revId": "c1419c22781f10a3e2c1e829d099110a0644e0d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6584ad6_9de36b60",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-11T17:50:18Z",
+      "side": 1,
+      "message": "Do you expect spaces here?  If not, this would be easier to read as:\nifdef TARGET_NATIVE_BRIDGE_RELATIVE_PATH",
+      "revId": "c1419c22781f10a3e2c1e829d099110a0644e0d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ba99bb5_6b50d553",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-11T17:50:18Z",
+      "side": 1,
+      "message": "If you do expect spaces then you need to strip here too.",
+      "range": {
+        "startLine": 1279,
+        "startChar": 84,
+        "endLine": 1279,
+        "endChar": 121
+      },
+      "revId": "c1419c22781f10a3e2c1e829d099110a0644e0d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
