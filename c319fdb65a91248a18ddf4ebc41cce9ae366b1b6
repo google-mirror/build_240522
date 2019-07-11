@@ -22,6 +22,30 @@
       "revId": "c319fdb65a91248a18ddf4ebc41cce9ae366b1b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50b69670_045ff093",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2019-07-11T12:46:45Z",
+      "side": 1,
+      "message": "It does test the change. I set an invalid path and \"m droid\" failed complaining that a dependency needed by Browser2 was missing.",
+      "parentUuid": "d9dcfdd3_b03be831",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 13
+      },
+      "revId": "c319fdb65a91248a18ddf4ebc41cce9ae366b1b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
