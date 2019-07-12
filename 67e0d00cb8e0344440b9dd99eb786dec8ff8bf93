@@ -70,6 +70,30 @@
       "revId": "67e0d00cb8e0344440b9dd99eb786dec8ff8bf93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46920232_8ff1dce5",
+        "filename": "core/cc_prebuilt_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-07-12T15:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f20ffc_a52f596b",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 40
+      },
+      "revId": "67e0d00cb8e0344440b9dd99eb786dec8ff8bf93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
