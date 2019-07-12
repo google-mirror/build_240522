@@ -53,6 +53,7 @@ PRODUCT_PACKAGES += \
     com.android.conscrypt \
     com.android.location.provider \
     com.android.resolv \
+    com.android.nnapi \
     com.android.tzdata \
     ContactsProvider \
     content \
@@ -153,7 +154,6 @@ PRODUCT_PACKAGES += \
     libnetd_client \
     libnetlink \
     libnetutils \
-    libneuralnetworks \
     libOpenMAXAL \
     libOpenSLES \
     libpdfium \
