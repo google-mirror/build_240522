@@ -1,0 +1,7 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Logan Chien <loganchien@google.com>
+Submitted-at: Sat, 13 Jul 2019 20:56:02 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1014711
+Project: platform/build
+Branch: refs/heads/master
