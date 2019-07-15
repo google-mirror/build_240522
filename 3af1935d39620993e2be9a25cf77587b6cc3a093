@@ -94,6 +94,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1aa189e_8110211f",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-15T23:21:59Z",
+      "side": 1,
+      "message": "yeah, seems aapt2 is mostly developed internally :/\n\ni\u0027ll land this change via internal branch first, so the change will become available once Q\u0027s out.",
+      "parentUuid": "79da48f7_537c9d3b",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
