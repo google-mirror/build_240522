@@ -142,6 +142,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6de4ebdd_7bac8678",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-16T03:40:13Z",
+      "side": 1,
+      "message": "Please feel free to abandon this CL. I\u0027ve re-uploaded it to internal gerrit.",
+      "parentUuid": "a9e694bf_c56e1fe1",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
