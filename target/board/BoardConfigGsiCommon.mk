@@ -38,6 +38,9 @@ BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+# Some resource-restricted device might not enable DM_VERITY_FEC in the kernel.
+# Disabling FEC to allow them to boot GSI.
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS := --do_not_generate_fec
 
 # GSI specific System Properties
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
