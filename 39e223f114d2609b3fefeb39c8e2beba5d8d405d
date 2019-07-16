@@ -16,6 +16,24 @@
       "revId": "39e223f114d2609b3fefeb39c8e2beba5d8d405d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01863cf7_d59097ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2019-07-16T21:58:46Z",
+      "side": 1,
+      "message": "I believe that I\u0027ll only need the \"merged-in\" for the CTS change as that\u0027s the only one that doesn\u0027t merge cleanly.",
+      "parentUuid": "dbffc5a4_2682dedb",
+      "revId": "39e223f114d2609b3fefeb39c8e2beba5d8d405d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
