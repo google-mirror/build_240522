@@ -34,6 +34,24 @@
       "revId": "39e223f114d2609b3fefeb39c8e2beba5d8d405d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0afc7047_81fead84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-07-16T22:44:07Z",
+      "side": 1,
+      "message": "Merged-In is always good to use when you know the downstream change already exists -- it has little to do about whether there were merge conflicts when you made the downstream change.\n\nIt will both skip running treehugger on master, and prevent git merge issues when the patches still apply -- that\u0027s relatively common when you\u0027re adding a chunk with newlines/similar context, it could add it twice.",
+      "parentUuid": "01863cf7_d59097ee",
+      "revId": "39e223f114d2609b3fefeb39c8e2beba5d8d405d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
