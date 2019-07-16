@@ -118,6 +118,30 @@
       "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9e694bf_c56e1fe1",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-07-16T02:38:53Z",
+      "side": 1,
+      "message": "Cool. Will you make CL by yourself in internal branch or cherry-pick this? Otherwise, I\u0027ll abandon this CL.",
+      "parentUuid": "f1aa189e_8110211f",
+      "range": {
+        "startLine": 216,
+        "startChar": 19,
+        "endLine": 217,
+        "endChar": 42
+      },
+      "revId": "3af1935d39620993e2be9a25cf77587b6cc3a093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
