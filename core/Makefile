@@ -1911,6 +1911,13 @@ ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
   INTERNAL_RECOVERYIMAGE_ARGS += --dtb $(INSTALLED_DTBIMAGE_TARGET)
 endif
 
+# Set correct header version for boot image
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+  INTERNAL_RECOVERYIMAGE_ARGS += --header_version 2
+else ifneq ($(or $(BOARD_INCLUDE_RECOVERY_DTBO),$(BOARD_INCLUDE_RECOVERY_ACPIO)),)
+  INTERNAL_RECOVERYIMAGE_ARGS += --header_version 1
+endif
+
 # $(1): output file
 define build-recoveryimage-target
   # Making recovery image
