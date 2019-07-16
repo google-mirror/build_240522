@@ -46,6 +46,30 @@
       "revId": "efd1d1d4641e4572b23ea7372b47cd6a6d6f879e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df53bbc2_f633533c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1131154
+      },
+      "writtenOn": "2019-07-16T23:03:53Z",
+      "side": 1,
+      "message": "Ok, I now see your point about sanity checking. But I think we need to check that:\n  1. header_version \u003e\u003d 1 in case of defined BOARD_INCLUDE_RECOVERY_DTBO or BOARD_INCLUDE_RECOVERY_ACPIO\n  2. header_version \u003e\u003d 2 in case of defined BOARD_INCLUDE_DTB_IN_BOOTIMG\n\nWill send new patch-set tomorrow.",
+      "parentUuid": "fad814e2_c9d43da8",
+      "range": {
+        "startLine": 1914,
+        "startChar": 0,
+        "endLine": 1914,
+        "endChar": 1
+      },
+      "revId": "efd1d1d4641e4572b23ea7372b47cd6a6d6f879e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
