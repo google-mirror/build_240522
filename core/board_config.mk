@@ -518,6 +518,24 @@ ifdef BOARD_PREBUILT_DTBIMAGE_DIR
   endif
 endif
 
+# Figure out the "--header_version" param value for mkbootimg tool
+BOOTIMG_HEADER_VER := $(shell echo $(BOARD_MKBOOTIMG_ARGS) | sed 's/.*--header_version\s*\([0-9]\+\).*/\1/;t;d')
+ifeq ($(BOOTIMG_HEADER_VER),)
+  BOOTIMG_HEADER_VER := 0
+endif
+
+# Check if BOARD_MKBOOTIMG_ARGS has correct header_version set
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+  ifeq ($(shell test $(BOOTIMG_HEADER_VER) -lt 2; echo $$?),0)
+    $(error header_version must be 2 in order to use BOARD_INCLUDE_DTB_IN_BOOTIMG)
+  endif
+endif
+ifneq ($(or $(BOARD_INCLUDE_RECOVERY_DTBO),$(BOARD_INCLUDE_RECOVERY_ACPIO)),)
+  ifeq ($(shell test $(BOOTIMG_HEADER_VER) -lt 1; echo $$?),0)
+    $(error header_version must be 1 or 2 in order to use BOARD_INCLUDE_RECOVERY_DTBO/ACPIO)
+  endif
+endif
+
 # Check BOARD_VNDK_VERSION
 define check_vndk_version
   $(eval vndk_path := prebuilts/vndk/v$(1)) \
