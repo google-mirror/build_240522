@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0730dc8c_1c544c17",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-16T20:56:47Z",
+      "side": 1,
+      "message": "https://source.android.com/devices/bootloader/recovery-image#implementation requires setting `--header_version` via BOARD_MKBOOTIMG_ARGS, which will cover the case of boot.img and recovery.img both (the change here only applies to recovery.img, unless using recovery-as-boot). Also it seems having BOARD_INCLUDE_RECOVERY_DTBO with header_version \u003d\u003d 2 could be also a valid config? If so, we should only add sanity check that tests header_version !\u003d 0.",
+      "range": {
+        "startLine": 1914,
+        "startChar": 0,
+        "endLine": 1914,
+        "endChar": 1
+      },
+      "revId": "efd1d1d4641e4572b23ea7372b47cd6a6d6f879e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
