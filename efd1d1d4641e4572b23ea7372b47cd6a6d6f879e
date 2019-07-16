@@ -22,6 +22,30 @@
       "revId": "efd1d1d4641e4572b23ea7372b47cd6a6d6f879e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fad814e2_c9d43da8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1131154
+      },
+      "writtenOn": "2019-07-16T22:41:32Z",
+      "side": 1,
+      "message": "You\u0027re right, didn\u0027t see BOARD_MKBOOTIMG_ARGS variable, will use it if it\u0027s a recommended way. \nAlso, it\u0027s correct that I mixed up recoveryimage_args vs bootimage_args here, though it\u0027s easy to fix.\n\nStill I don\u0027t understand, why don\u0027t set the header_version automatically here, based on features selected in BoardConfig.mk (as explained in commit message), and spare the vendor from doing that manually? Otherwise it\u0027s possible for a bug described in commit message to happen. The thing is, all 3 versions of boot.img are backward compatible. As can be seen from here: https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/master/include/bootimg/bootimg.h , (answering your question) there is no sense in setting v2 if we don\u0027t include DTB in boot.img, and only include recovery_dtbo (though it\u0027s a valid config, if .dtb_size field is set to 0).\n\nOf course, I agree that the vendor should be able to override the header_version (automatically set otherwise), using BOARD_MKBOOTIMG_ARGS. But that can be done in mkbootimg.py tool, by checking all --header_version parameters and respecting the last one, while corresponding Makefile should add the arguments from BOARD_MKBOOTIMG_ARGS to the end of mkbootimg.py command line.\n\nIf nobody is interested in this change, I will abandon it in a day or so. Using BOARD_MKBOOTIMG_ARGS is fine by me. Thanks for bringing that up!",
+      "parentUuid": "0730dc8c_1c544c17",
+      "range": {
+        "startLine": 1914,
+        "startChar": 0,
+        "endLine": 1914,
+        "endChar": 1
+      },
+      "revId": "efd1d1d4641e4572b23ea7372b47cd6a6d6f879e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
