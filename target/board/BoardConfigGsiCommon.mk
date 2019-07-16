@@ -60,3 +60,10 @@ TARGET_ENABLE_MEDIADRM_64 :=
 # Ordinary (non-flattened) APEX may require kernel changes. For maximum compatibility,
 # use flattened APEX for GSI
 TARGET_FLATTEN_APEX := true
+
+# Ensure that the vendor and boot security patch levels are set to reasonable
+# values, even if GSI won't be booting with the matching vendor and boot images.
+VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += \
+    --prop com.android.build.boot.security_patch:$(BOOT_SECURITY_PATCH)
