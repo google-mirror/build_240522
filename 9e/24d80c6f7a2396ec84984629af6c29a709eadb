@@ -1,0 +1,10 @@
+Autosubmit+1: Greg Hartman <ghartman@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Alistair Delva <adelva@google.com>
+Code-Review+2: Hung-ying Tyan <tyanh@google.com>
+DrNo-Review+1: Hung-ying Tyan <tyanh@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 17 Jul 2019 04:32:11 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1050115
+Project: platform/build
+Branch: refs/heads/pie-gsi
