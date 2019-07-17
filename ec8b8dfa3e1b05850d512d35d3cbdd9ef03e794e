@@ -22,6 +22,30 @@
       "revId": "ec8b8dfa3e1b05850d512d35d3cbdd9ef03e794e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ecf65e4_766f6c4e",
+        "filename": "core/rbe.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2019-07-17T18:46:24Z",
+      "side": 1,
+      "message": "I assumed this is a convention to unset variables (copied from here https://cs.corp.google.com/aosp-master/build/make/core/goma.mk?q\u003dgoma.mk+package:%5Eaosp-master$\u0026dr)",
+      "parentUuid": "3a9f8b36_64803380",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "ec8b8dfa3e1b05850d512d35d3cbdd9ef03e794e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
