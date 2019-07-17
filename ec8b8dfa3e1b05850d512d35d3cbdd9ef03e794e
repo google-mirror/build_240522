@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a9f8b36_64803380",
+        "filename": "core/rbe.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2019-07-17T18:31:25Z",
+      "side": 1,
+      "message": "Not sure why this is empty.",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "ec8b8dfa3e1b05850d512d35d3cbdd9ef03e794e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
