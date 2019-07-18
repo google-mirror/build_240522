@@ -22,6 +22,30 @@
       "revId": "34e90798e59d29689821da402aea6462f9f6fb59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79747fae_1fb13e60",
+        "filename": "tools/releasetools/test_merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-07-18T20:30:42Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "c94dc3a9_c6abd52e",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "revId": "34e90798e59d29689821da402aea6462f9f6fb59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
