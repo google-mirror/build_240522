@@ -22,6 +22,30 @@
       "revId": "784ca209a911f4da76fe576b701a0014fa7f928c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8a789a2_19323ec1",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2019-07-18T18:29:37Z",
+      "side": 1,
+      "message": "As discussed in chat, used a blank # line instead (so that pyformat continues to work without modifications needed).",
+      "parentUuid": "c33908b1_9314235e",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "784ca209a911f4da76fe576b701a0014fa7f928c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
