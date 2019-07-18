@@ -50,6 +50,7 @@ else ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
 check-vndk-list: ;
 else
 check-vndk-list: $(check-vndk-list-timestamp)
+CHECK_VNDK_ABI_DUMP_LIST := true
 endif
 
 _vndk_check_failure_message := " error: VNDK library list has been changed.\n"
@@ -124,5 +125,35 @@ LOCAL_REQUIRED_MODULES := \
     $(foreach vndk_ver,$(PRODUCT_EXTRA_VNDK_VERSIONS),vndk_v$(vndk_ver)_$(TARGET_ARCH)$(_binder32))
 _binder32 :=
 include $(BUILD_PHONY_PACKAGE)
+
+#####################################################################
+# Check that all ABI reference dumps have corresponding NDK/VNDK
+# libraries.
+
+ifneq ($(SKIP_ABI_CHECKS),true)
+
+ifeq ($(CHECK_VNDK_ABI_DUMP_LIST),true)
+ifneq ($(wildcard prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION)),)
+VNDK_ABI_DUMPS := $(call find-files-in-subdirs,prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION),"*.so.lsdump" -and -type f,.)
+
+ADDED_VNDK_ABI_DUMPS := $(sort $(filter-out $(patsubst %,%.so.lsdump,$(VNDK_SAMEPROCESS_LIBRARIES) $(VNDK_CORE_LIBRARIES)),$(notdir $(VNDK_ABI_DUMPS))))
+
+ifneq ($(ADDED_VNDK_ABI_DUMPS),)
+$(error Found ABI reference dumps for non-VNDK libraries. Run `find $${ANDROID_BUILD_TOP}/prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION) '(' -name $(subst $(space), -or -name ,$(strip $(ADDED_VNDK_ABI_DUMPS))) ')' -delete` to delete the dumps)
+endif
+endif # prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION)
+endif # CHECK_VNDK_ABI_DUMP_LIST
+
+ifneq ($(wildcard prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION)),)
+NDK_ABI_DUMPS := $(call find-files-in-subdirs,prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION),"*.so.lsdump" -and -type f,.)
+
+ADDED_NDK_ABI_DUMPS := $(sort $(filter-out $(patsubst %,%.so.lsdump,$(NDK_MIGRATED_LIBS) $(LLNDK_LIBRARIES)),$(notdir $(NDK_ABI_DUMPS))))
+
+ifneq ($(ADDED_NDK_ABI_DUMPS),)
+$(error Found ABI reference dumps for non-NDK libraries. Run `find $${ANDROID_BUILD_TOP}/prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION) '(' -name $(subst $(space), -or -name ,$(strip $(ADDED_NDK_ABI_DUMPS))) ')' -delete` to delete the dumps)
+endif
+endif # prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION)
+
+endif # SKIP_ABI_CHECKS
 
 endif # BOARD_VNDK_VERSION is set
