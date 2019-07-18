@@ -125,4 +125,28 @@ LOCAL_REQUIRED_MODULES := \
 _binder32 :=
 include $(BUILD_PHONY_PACKAGE)
 
+#####################################################################
+# Check that all ABI reference dumps have corresponding NDK/VNDK
+# libraries.
+
+ifneq ($(SKIP_ABI_CHECKS),true)
+
+VNDK_ABI_DUMP_LIST := $(call find-files-in-subdirs,prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION),"*.so.lsdump" -and -type f,.)
+
+ADDED_VNDK_ABI_DUMP_LIST := $(sort $(filter-out $(patsubst %,%.so.lsdump,$(VNDK_SAMEPROCESS_LIBRARIES) $(VNDK_CORE_LIBRARIES)),$(notdir $(VNDK_ABI_DUMP_LIST))))
+
+ifneq ($(ADDED_VNDK_ABI_DUMP_LIST),)
+$(error Found ABI reference dumps for non-VNDK libraries. Run `find $${ANDROID_BUILD_TOP}/prebuilts/abi-dumps/vndk/$(PLATFORM_VNDK_VERSION) '(' -name $(subst $(space), -or -name ,$(strip $(ADDED_VNDK_ABI_DUMP_LIST))) ')' -delete` to delete the dumps)
+endif
+
+NDK_ABI_DUMP_LIST := $(call find-files-in-subdirs,prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION),"*.so.lsdump" -and -type f,.)
+
+ADDED_NDK_ABI_DUMP_LIST := $(sort $(filter-out $(patsubst %,%.so.lsdump,$(NDK_MIGRATED_LIBS) $(LLNDK_LIBRARIES)),$(notdir $(NDK_ABI_DUMP_LIST))))
+
+ifneq ($(ADDED_NDK_ABI_DUMP_LIST),)
+$(error Found ABI reference dumps for non-NDK libraries. Run `find $${ANDROID_BUILD_TOP}/prebuilts/abi-dumps/ndk/$(PLATFORM_VNDK_VERSION) '(' -name $(subst $(space), -or -name ,$(strip $(ADDED_NDK_ABI_DUMP_LIST))) ')' -delete` to delete the dumps)
+endif
+
+endif # SKIP_ABI_CHECKS
+
 endif # BOARD_VNDK_VERSION is set
