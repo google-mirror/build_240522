@@ -1,0 +1,10 @@
+Verified+1: Isaac Chen <ycchen@google.com>
+Code-Review+1: Tao Bao <tbao@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+2: Hsin-Yi Chen <hsinyichen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Isaac Chen <ycchen@google.com>
+Submitted-at: Thu, 18 Jul 2019 06:23:33 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1011929
+Project: platform/build
+Branch: refs/heads/master
