@@ -498,10 +498,20 @@ endif
 # Ensure that only TARGET_RECOVERY_UPDATER_LIBS *or* AB_OTA_UPDATER is set.
 TARGET_RECOVERY_UPDATER_LIBS ?=
 AB_OTA_UPDATER ?=
-.KATI_READONLY := TARGET_RECOVERY_UPDATER_LIBS AB_OTA_UPDATER
+AB_OTA_PARTITIONS ?=
+.KATI_READONLY := TARGET_RECOVERY_UPDATER_LIBS AB_OTA_UPDATER AB_OTA_PARTITIONS
 ifeq ($(AB_OTA_UPDATER),true)
   ifneq ($(strip $(TARGET_RECOVERY_UPDATER_LIBS)),)
     $(error Do not use TARGET_RECOVERY_UPDATER_LIBS when using AB_OTA_UPDATER)
+  endif
+  ifeq ($(AB_OTA_PARTITIONS),)
+    $(error AB_OTA_PARTITIONS must be defined when using AB_OTA_UPDATER)
+  endif
+endif
+
+ifneq ($(AB_OTA_PARTITIONS),)
+  ifneq ($(AB_OTA_UPDATER),true)
+    $(error AB_OTA_UPDATER must be true when defining AB_OTA_PARTITIONS)
   endif
 endif
 
