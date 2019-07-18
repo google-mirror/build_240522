@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3c93e83_7172b6ce",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-18T18:52:28Z",
+      "side": 1,
+      "message": "nit: while you\u0027re here...\n\nseems splitlines() always gives a list (as opposed to generator, even in Python 3). this cast seems a no-op",
+      "range": {
+        "startLine": 468,
+        "startChar": 11,
+        "endLine": 468,
+        "endChar": 15
+      },
+      "revId": "32cfaf055356cfdb98a2ba88d57941b83d0dfd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
