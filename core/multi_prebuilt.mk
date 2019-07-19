@@ -29,7 +29,7 @@ prebuilt_static_java_libraries := $(LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES)
 prebuilt_is_host := $(LOCAL_IS_HOST_MODULE)
 prebuilt_module_tags := $(LOCAL_MODULE_TAGS)
 prebuilt_strip_module := $(LOCAL_STRIP_MODULE)
-
+prebuilt_sdk_version := $(LOCAL_SDK_VERSION)
 
 ifndef multi_prebuilt_once
 multi_prebuilt_once := true
@@ -56,6 +56,7 @@ $(foreach t,$(1), \
   $(eval LOCAL_MODULE_CLASS := $(3)) \
   $(eval LOCAL_MODULE_TAGS := $(4)) \
   $(eval LOCAL_UNINSTALLABLE_MODULE := $(6)) \
+  $(eval LOCAL_SDK_VERSION := $(prebuilt_sdk_version)) \
   $(eval tw := $(subst :, ,$(strip $(t)))) \
   $(if $(word 3,$(tw)),$(error $(LOCAL_PATH): Bad prebuilt filename '$(t)')) \
   $(if $(word 2,$(tw)), \
@@ -132,3 +133,4 @@ prebuilt_java_libraries :=
 prebuilt_static_java_libraries :=
 prebuilt_is_host :=
 prebuilt_module_tags :=
+prebuilt_sdk_version :=
