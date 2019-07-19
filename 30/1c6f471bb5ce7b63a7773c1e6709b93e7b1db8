@@ -1,0 +1,8 @@
+Code-Review+2: Bowgo Tsai <bowgotsai@google.com>
+Code-Review+1: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 19 Jul 2019 13:48:30 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1087226
+Project: platform/build
+Branch: refs/heads/master
