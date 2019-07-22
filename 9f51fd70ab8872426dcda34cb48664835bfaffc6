@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5ffd4aa_3759c48b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-07-22T09:10:37Z",
+      "side": 1,
+      "message": "boot-debug.img cannot be release-signed and is used for VTS when the device is unlocked.\n\nWhen the device is unlocked, there should be no security guaranteed.",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 41
+      },
+      "revId": "9f51fd70ab8872426dcda34cb48664835bfaffc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
