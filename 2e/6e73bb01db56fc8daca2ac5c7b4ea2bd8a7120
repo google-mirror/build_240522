@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Dan Willemsen <dwillemsen@google.com>
+Submitted-by: Elliott Hughes <enh@google.com>
+Submitted-at: Mon, 22 Jul 2019 15:41:20 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1087222
+Project: platform/build
+Branch: refs/heads/master
