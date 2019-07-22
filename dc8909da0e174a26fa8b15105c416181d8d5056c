@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77bba3c0_18e1f72c",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-07-22T10:07:09Z",
+      "side": 1,
+      "message": "let\u0027s use tab in the beginning.",
+      "range": {
+        "startLine": 2169,
+        "startChar": 0,
+        "endLine": 2169,
+        "endChar": 8
+      },
+      "revId": "dc8909da0e174a26fa8b15105c416181d8d5056c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41353c12_8ff7d51e",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2182,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-07-22T10:07:09Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 2182,
+        "startChar": 0,
+        "endLine": 2182,
+        "endChar": 12
+      },
+      "revId": "dc8909da0e174a26fa8b15105c416181d8d5056c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
