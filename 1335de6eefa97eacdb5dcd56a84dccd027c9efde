@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec19492_82e9875e",
+        "filename": "tools/releasetools/merge_builds.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-23T18:09:44Z",
+      "side": 1,
+      "message": "How does it ensure vbmeta.img (from vendor) works with the system.img (from framework)?",
+      "range": {
+        "startLine": 20,
+        "startChar": 50,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "1335de6eefa97eacdb5dcd56a84dccd027c9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
