@@ -361,4 +361,7 @@ $(foreach image, \
 
 product-build-image-config :=
 
+# If retrofitting virtual A/B, set PRODUCT_VIRTUAL_AB_OTA to true as well
+PRODUCT_VIRTUAL_AB_OTA ?= $(PRODUCT_VIRTUAL_AB_OTA_RETROFIT)
+
 $(call readonly-product-vars)

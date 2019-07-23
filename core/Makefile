@@ -495,6 +495,12 @@ endif
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
 	$(hide) echo ro.boot.dynamic_partitions_retrofit=true >> $@
 endif
+ifeq ($(PRODUCT_VIRTUAL_AB_OTA),true)
+	$(hide) echo ro.virtual_ab.enabled=true >> $@
+endif
+ifeq ($(PRODUCT_VIRTUAL_AB_OTA_RETROFIT),true)
+	$(hide) echo ro.virtual_ab.retrofit=true >> $@
+endif
 	$(hide) grep 'ro.product.first_api_level' $(intermediate_system_build_prop) >> $@ || true
 	$(hide) echo ro.vendor.build.security_patch="$(VENDOR_SECURITY_PATCH)">>$@
 	$(hide) echo ro.vendor.product.cpu.abilist="$(TARGET_CPU_ABI_LIST)">>$@
