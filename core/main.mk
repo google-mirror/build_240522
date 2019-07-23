@@ -255,6 +255,14 @@ endif
 # mount system_other partition.
 ADDITIONAL_DEFAULT_PROPERTIES += ro.postinstall.fstab.prefix=/system
 
+# Virtual A/B flags
+ifeq ($(PRODUCT_VIRTUAL_AB_OTA),true)
+  ADDITIONAL_PRODUCT_PROPERTIES += ro.virtual_ab.enabled=true
+endif
+ifeq ($(PRODUCT_VIRTUAL_AB_OTA_RETROFIT),true)
+  ADDITIONAL_PRODUCT_PROPERTIES += ro.virtual_ab.retrofit=true
+endif
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
