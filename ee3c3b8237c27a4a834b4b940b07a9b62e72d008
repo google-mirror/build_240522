@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19595b6b_44a3ee23",
+        "filename": "tools/releasetools/merge_builds.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-07-23T00:32:28Z",
+      "side": 1,
+      "message": "It wasn\u0027t clear to me right away if this if needed to handle the other three cases. Maybe add a comment that explains why we don\u0027t need to generate super empty for the other three cases.",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 4
+      },
+      "revId": "ee3c3b8237c27a4a834b4b940b07a9b62e72d008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
