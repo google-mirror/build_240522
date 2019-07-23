@@ -22,6 +22,30 @@
       "revId": "ee3c3b8237c27a4a834b4b940b07a9b62e72d008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18522ce7_c1eb6b25",
+        "filename": "tools/releasetools/merge_builds.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2019-07-23T17:01:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "parentUuid": "19595b6b_44a3ee23",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 4
+      },
+      "revId": "ee3c3b8237c27a4a834b4b940b07a9b62e72d008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
