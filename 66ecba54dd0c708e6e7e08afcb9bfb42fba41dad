@@ -22,6 +22,30 @@
       "revId": "66ecba54dd0c708e6e7e08afcb9bfb42fba41dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e25f033_8a151a83",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1131154
+      },
+      "writtenOn": "2019-07-24T14:46:04Z",
+      "side": 1,
+      "message": "\u003e It seems BOARD_INCLUDE_DTB_IN_BOOTIMG also applies to boot.img, but current code won\u0027t be exercised unless building recovery image (standalone or using recovery-as-boot).\n\nSo you mean that issue not related to this change? If so, let\u0027s not fix it in context of this patch.\n\n\u003e Also I wonder if these checks should be moved into core/board_config.mk, joining the rest of sanity checks there (e.g. https://android-review.googlesource.com/c/platform/build/+/1052009/2/core/board_config.mk#515).\n\nI\u0027ll do that in next version, thanks for pointing me out. Will send soon.",
+      "parentUuid": "faaad14c_41dded85",
+      "range": {
+        "startLine": 1921,
+        "startChar": 6,
+        "endLine": 1921,
+        "endChar": 34
+      },
+      "revId": "66ecba54dd0c708e6e7e08afcb9bfb42fba41dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
