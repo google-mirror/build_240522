@@ -283,9 +283,18 @@ function setpaths()
     if [ -n $ANDROID_PYTHONPATH ]; then
         export PYTHONPATH=${PYTHONPATH//$ANDROID_PYTHONPATH/}
     fi
+    if [ -n $ASUITE_PYTHONPATH ]; then
+        export PYTHONPATH=${PYTHONPATH//$ASUITE_PYTHONPATH/}
+    fi
     # and in with the new
     export ANDROID_PYTHONPATH=$T/development/python-packages:
     export PYTHONPATH=$ANDROID_PYTHONPATH$PYTHONPATH
+    # Forget $ASUITE_PYTHONPATH when running in aosp.
+    if [[ $ASUITE_PYTHONPATH =~ $T ]]; then
+        export PYTHONPATH=$ASUITE_PYTHONPATH$PYTHONPATH
+    else
+        unset ASUITE_PYTHONPATH
+    fi
 
     export ANDROID_JAVA_HOME=$(get_abs_build_var ANDROID_JAVA_HOME)
     export JAVA_HOME=$ANDROID_JAVA_HOME
