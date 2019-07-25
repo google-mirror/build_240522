@@ -92,6 +92,7 @@ else
   my_process_profile := $(LOCAL_DEX_PREOPT_GENERATE_PROFILE)
   my_profile_is_text_listing := true
   LOCAL_DEX_PREOPT_PROFILE := $(LOCAL_DEX_PREOPT_PROFILE_CLASS_LISTING)
+  LOCAL_DEX_PREOPT_BOOT_PROFILE := $(LOCAL_DEX_PREOPT_PROFILE_CLASS_LISTING)-boot
 endif
 
 ifeq (true,$(my_process_profile))
@@ -220,6 +221,7 @@ ifdef LOCAL_DEX_PREOPT
   $(call add_json_bool, HasApkLibraries,                $(LOCAL_APK_LIBRARIES))
   $(call add_json_list, PreoptFlags,                    $(LOCAL_DEX_PREOPT_FLAGS))
   $(call add_json_str,  ProfileClassListing,            $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE)))
+  $(call add_json_str,  ProfileBootListing,             $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_BOOT_PROFILE)))
   $(call add_json_bool, ProfileIsTextListing,           $(my_profile_is_text_listing))
   $(call add_json_bool, EnforceUsesLibraries,           $(LOCAL_ENFORCE_USES_LIBRARIES))
   $(call add_json_list, OptionalUsesLibraries,          $(my_filtered_optional_uses_libraries))
