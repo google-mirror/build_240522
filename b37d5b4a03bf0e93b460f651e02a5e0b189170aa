@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b36ccb2b_14fea4b6",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-25T15:40:08Z",
+      "side": 1,
+      "message": "I think you need a $(wildcard) somewhere to only set this if it exists.  Also, it needs to get cleared between modules.",
+      "revId": "b37d5b4a03bf0e93b460f651e02a5e0b189170aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
