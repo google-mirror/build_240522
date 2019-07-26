@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "099bd0cf_46f2fd8d",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1074438
+      },
+      "writtenOn": "2019-07-26T13:54:04Z",
+      "side": 1,
+      "message": "looks like in the final list for 64-bit platforms NATIVE_BRIDGE_ABI would be preferred over 2ND_CPU_ABI, so say for x86_64 we\u0027ll get x86_64, arm64, x86, arm.\n\nwhat I think we want is x86_64, x86, arm64, arm.",
+      "revId": "020bfef4329aafee0649c4446cf41b5026291692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
