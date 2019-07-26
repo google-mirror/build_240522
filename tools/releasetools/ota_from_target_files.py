@@ -681,7 +681,7 @@ def _WriteRecoveryImageToBoot(script, output_zip):
 
   recovery_two_step_img_name = "recovery-two-step.img"
   recovery_two_step_img_path = os.path.join(
-      OPTIONS.input_tmp, "IMAGES", recovery_two_step_img_name)
+      OPTIONS.input_tmp, "OTA", recovery_two_step_img_name)
   if os.path.exists(recovery_two_step_img_path):
     recovery_two_step_img = common.GetBootableImage(
         recovery_two_step_img_name, recovery_two_step_img_name,
