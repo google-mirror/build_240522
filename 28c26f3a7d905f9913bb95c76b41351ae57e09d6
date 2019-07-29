@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8db052a2_9155a168",
+        "filename": "tools/generate-self-extracting-archive.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2019-07-29T17:58:55Z",
+      "side": 1,
+      "message": "Can you replace /bin/bash with /bin/sh as the script doesn\u0027t appear to be using anything bash specific?",
+      "range": {
+        "startLine": 41,
+        "startChar": 22,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "28c26f3a7d905f9913bb95c76b41351ae57e09d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c1be61_fc44317b",
+        "filename": "tools/generate-self-extracting-archive.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2019-07-29T17:58:55Z",
+      "side": 1,
+      "message": "Why not 1048576 (pipe-max-size)?",
+      "range": {
+        "startLine": 86,
+        "startChar": 19,
+        "endLine": 86,
+        "endChar": 23
+      },
+      "revId": "28c26f3a7d905f9913bb95c76b41351ae57e09d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
