@@ -1,0 +1,8 @@
+Autosubmit+1: Dan Willemsen <dwillemsen@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Patrice Arruda <patricearruda@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Mon, 29 Jul 2019 16:30:51 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1091750
+Project: platform/build
+Branch: refs/heads/master
