@@ -4658,6 +4658,7 @@ $(INTERNAL_UPDATE_PACKAGE_TARGET):
 	$(hide) $(ZIP2ZIP) -i $(BUILT_TARGET_FILES_PACKAGE) -o $@ \
 	  IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
 	  OTA/android-info.txt:android-info.txt "IMAGES/*.img:."
+	$(if $(INTERNAL_SUPERIMAGE_MISC_INFO), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_MISC_INFO))
 endif # BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE
 
 .PHONY: updatepackage
