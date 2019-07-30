@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59c40daf_c0040578",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-07-30T19:55:44Z",
+      "side": 0,
+      "message": "\\o/!\n\nlooks like you can probably clean up CUSTOM_MODULES now too ?",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 14
+      },
+      "revId": "bb039794d6561794718ddb96c813a4463fcfed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
