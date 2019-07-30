@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce82e004_4d665cc7",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-30T00:09:09Z",
+      "side": 1,
+      "message": "May not work on macOS:\n* \\s is not BRE syntax \u003d\u003e [[:space:]]\n* \\+ is GNU extension \u003d\u003e `sed -E`\n* ;t;d is also not supported (jumping without label). May need `sed -n \u0027.../p\u0027` instead\n\nAlso a minor issue: the \"\\s*\" after --header_version should be \"\\s\\+\"?",
+      "range": {
+        "startLine": 522,
+        "startChar": 65,
+        "endLine": 522,
+        "endChar": 111
+      },
+      "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af86970e_c15ea9ee",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-07-30T00:09:09Z",
+      "side": 1,
+      "message": "ifeq ($(call math_lt,$(BOOTIMG_HEADER_VER),2),true)",
+      "range": {
+        "startLine": 529,
+        "startChar": 2,
+        "endLine": 529,
+        "endChar": 62
+      },
+      "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
