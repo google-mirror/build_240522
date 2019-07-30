@@ -22,6 +22,30 @@
       "revId": "bb039794d6561794718ddb96c813a4463fcfed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0bfc73c_3e124a87",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-07-30T20:08:48Z",
+      "side": 0,
+      "message": "technically that\u0027s supported in the buildspec.mk files too, but I don\u0027t know of anyone using it (external/sl4a has instructions on how to use it).\n\n(I\u0027m not actually planning on submitting this until later this week, to give the warning a bit of time to soak)",
+      "parentUuid": "59c40daf_c0040578",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 14
+      },
+      "revId": "bb039794d6561794718ddb96c813a4463fcfed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
