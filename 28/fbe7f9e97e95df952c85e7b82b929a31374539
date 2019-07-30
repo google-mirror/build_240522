@@ -1,0 +1,8 @@
+Verified+1: Evgeny Eltsin <eaeltsin@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Submitted-by: Evgeny Eltsin <eaeltsin@google.com>
+Submitted-at: Tue, 30 Jul 2019 11:36:25 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1092049
+Project: platform/build
+Branch: refs/heads/master
