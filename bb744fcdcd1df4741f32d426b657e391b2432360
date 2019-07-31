@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fd2d1b9_4cc303e0",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-07-31T10:44:56Z",
+      "side": 1,
+      "message": "is there a problem to include this file unconditionally? Pretty sure it\u0027ll just be unused, which is fine",
+      "range": {
+        "startLine": 64,
+        "startChar": 52,
+        "endLine": 65,
+        "endChar": 78
+      },
+      "revId": "bb744fcdcd1df4741f32d426b657e391b2432360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
