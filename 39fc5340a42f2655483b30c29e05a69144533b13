@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc8e56f4_fbb57806",
+        "filename": "core/soong_app_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-08-01T14:23:15Z",
+      "side": 1,
+      "message": "It looks like the point of this variable is to store the dependencies used by the appcompat macros, so we could add $(AAPT2) there. (though app_prebuilt_internal.mk already has a check on module_run_appcompat and dependency on aapt2 like you\u0027re adding here)",
+      "range": {
+        "startLine": 58,
+        "startChar": 27,
+        "endLine": 58,
+        "endChar": 42
+      },
+      "revId": "39fc5340a42f2655483b30c29e05a69144533b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
