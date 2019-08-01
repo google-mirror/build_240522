@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d75f3a57_d00e4c1c",
+        "filename": "tools/jsonmodify/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-08-01T14:08:52Z",
+      "side": 1,
+      "message": "python3 is not well supported yet. I\u0027d suggest using python2 until we get a python3 prebuilt later this quarter",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 10
+      },
+      "revId": "99b42e36b1c1e5d4a2a0dc1d223511d04c6fba6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
