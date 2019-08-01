@@ -2721,6 +2721,7 @@ $(BUILT_ASSEMBLED_VENDOR_MANIFEST): $(HOST_OUT_EXECUTABLES)/assemble_vintf
 $(BUILT_ASSEMBLED_VENDOR_MANIFEST): $(BUILT_SYSTEM_MATRIX)
 $(BUILT_ASSEMBLED_VENDOR_MANIFEST): $(BUILT_VENDOR_MANIFEST)
 $(BUILT_ASSEMBLED_VENDOR_MANIFEST): $(INTERNAL_VENDORIMAGE_FILES)
+$(BUILT_ASSEMBLED_VENDOR_MANIFEST): $(HIDL_INHERITANCE_HIERARCHY)
 
 $(BUILT_ASSEMBLED_VENDOR_MANIFEST): PRIVATE_FLAGS :=
 
@@ -2788,6 +2789,7 @@ $(BUILT_ASSEMBLED_VENDOR_MANIFEST):
 	    $(PRIVATE_FLAGS) \
 	    -c $(BUILT_SYSTEM_MATRIX) \
 	    -i $(BUILT_VENDOR_MANIFEST) \
+	    -I $(HIDL_INHERITANCE_HIERARCHY) \
 	    $$([ -d $(TARGET_OUT_VENDOR)/etc/vintf/manifest ] && \
 	        find $(TARGET_OUT_VENDOR)/etc/vintf/manifest -type f -name "*.xml" | \
 	        sed "s/^/-i /" | tr '\n' ' ') -o $@
@@ -2940,6 +2942,7 @@ BUILT_ASSEMBLED_FRAMEWORK_MANIFEST := $(PRODUCT_OUT)/verified_assembled_framewor
 $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST): $(HOST_OUT_EXECUTABLES)/assemble_vintf \
                                        $(BUILT_VENDOR_MATRIX) \
                                        $(BUILT_SYSTEM_MANIFEST) \
+				       $(HIDL_INHERITANCE_HIERARCHY) \
                                        $(FULL_SYSTEMIMAGE_DEPS) \
                                        $(BUILT_PRODUCT_MANIFEST) \
                                        $(BUILT_PRODUCTIMAGE_TARGET)
@@ -2949,6 +2952,7 @@ $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST): $(HOST_OUT_EXECUTABLES)/assemble_vintf \
 	    -o $@ \
 	    -c $(BUILT_VENDOR_MATRIX) \
 	    -i $(BUILT_SYSTEM_MANIFEST) \
+	    -I $(HIDL_INHERITANCE_HIERARCHY) \
 	    $(addprefix -i ,\
 	      $(filter $(TARGET_OUT)/etc/vintf/manifest/%.xml,$(FULL_SYSTEMIMAGE_DEPS)) \
 	      $(BUILT_PRODUCT_MANIFEST) \
