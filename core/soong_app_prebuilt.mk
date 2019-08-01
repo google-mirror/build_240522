@@ -57,7 +57,7 @@ endif
 ifeq ($(module_run_appcompat),true)
   $(LOCAL_BUILT_MODULE): $(appcompat-files)
   $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
-  $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
+  $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE) $(AAPT2)
 	@echo "Copy: $@"
 	$(copy-file-to-target)
 	$(appcompat-header)
