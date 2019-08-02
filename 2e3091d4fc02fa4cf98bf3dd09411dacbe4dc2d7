@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2508f549_f3f6dc52",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-08-02T03:03:23Z",
+      "side": 1,
+      "message": "I really don\u0027t know what is the official guideline for these kind of sysprops. Dan?\n\nI thought we are encouraged to have a partial product mk file (under make/target/product/) and do the config there using PRODUCT_PROPERTY_OVERRIDES, etc.",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 5
+      },
+      "revId": "2e3091d4fc02fa4cf98bf3dd09411dacbe4dc2d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
