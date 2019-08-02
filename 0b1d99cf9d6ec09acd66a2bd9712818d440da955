@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8acd5de_dcaaefa7",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-08-02T16:41:43Z",
+      "side": 1,
+      "message": "can this not be \u0027required\u0027 by framework? maybe that would lead to a circular dependency?",
+      "range": {
+        "startLine": 78,
+        "startChar": 15,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "0b1d99cf9d6ec09acd66a2bd9712818d440da955",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
