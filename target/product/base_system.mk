@@ -76,6 +76,7 @@ PRODUCT_PACKAGES += \
     ExtShared \
     flags_health_check \
     framework \
+    framework_platform_compat_config.xml \
     framework-res \
     framework-sysconfig.xml \
     fsck_msdos \
@@ -127,6 +128,7 @@ PRODUCT_PACKAGES += \
     libcamera2ndk \
     libcamera_client \
     libcameraservice \
+    libcore_platform_compat_config.xml \
     libcutils \
     libdl.bootstrap \
     libdrmframework \
