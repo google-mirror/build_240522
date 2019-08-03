@@ -3229,7 +3229,7 @@ def parse_input_file(infile):
       m = re.search('(?<=^TARGET_BUILD_VARIANT=).*', line)
       if m is not None:
         target_variant = m.group(0)
-      m = re.search('.* TOP=([^ ]*) .*', line)
+      m = re.search('(?<=^TOP=).*', line)
       if m is not None:
         android_root = m.group(1)
   return warning_lines
