@@ -22,6 +22,30 @@
       "revId": "2e3091d4fc02fa4cf98bf3dd09411dacbe4dc2d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c581f1b_2e8a4789",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-05T21:34:42Z",
+      "side": 1,
+      "message": "It is not just sysprops; I need to control the OTA generation with these feature flags (i.e. if these flags are defined, the OTA update package will contain some additional fields.\n\nUnless, of course, if you want me to define both PRODUCT_* variables AND PRODUCT_PROPERTY_OVERRIDES +\u003d ... in device.mk.",
+      "parentUuid": "2508f549_f3f6dc52",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 5
+      },
+      "revId": "2e3091d4fc02fa4cf98bf3dd09411dacbe4dc2d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
