@@ -117,7 +117,7 @@ def BuildVBMeta():
   merged_dict = dict(vendor_dict)
   if OPTIONS.framework_misc_info_keys:
     for key in common.LoadListFromFile(OPTIONS.framework_misc_info_keys):
-      merged_dict[key] = framework_dict[key]
+      merged_dict[key] = framework_dict.get(key)
 
   # Build vbmeta.img using partitions in product_out_vendor.
   partitions = {}
