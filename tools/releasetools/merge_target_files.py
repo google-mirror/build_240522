@@ -440,7 +440,7 @@ def process_misc_info_txt(framework_target_files_temp_dir,
   # framework_dict.
 
   for key in framework_misc_info_keys:
-    merged_dict[key] = framework_dict[key]
+    merged_dict[key] = framework_dict.get(key)
 
   # Merge misc info keys used for Dynamic Partitions.
   if (merged_dict.get('use_dynamic_partitions') == 'true') and (
