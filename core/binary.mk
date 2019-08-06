@@ -1702,15 +1702,19 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CC := $(my_cc)
 
 ifeq ($(strip $(my_cxx)),)
   my_cxx := $(my_cxx_wrapper) $(CLANG_CXX)
+  my_cxx_link := $(CLANG_CXX)
 endif
 
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
   my_cxx := CCC_CXX=$(CLANG_CXX) CLANG_CXX=$(CLANG_CXX) \
             $(SYNTAX_TOOLS_PREFIX)/c++-analyzer
+  my_cxx_link := CCC_CXX=$(CLANG_CXX) CLANG_CXX=$(CLANG_CXX) \
+                 $(SYNTAX_TOOLS_PREFIX)/c++-analyzer
 endif
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LINKER := $(my_linker)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CXX := $(my_cxx)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CXX_LINK := $(my_cxx_link)
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
