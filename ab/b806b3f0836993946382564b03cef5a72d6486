@@ -1,0 +1,7 @@
+Code-Review+2: Daniel Norman <danielnorman@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Wed, 07 Aug 2019 02:18:59 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1097551
+Project: platform/build
+Branch: refs/heads/master
