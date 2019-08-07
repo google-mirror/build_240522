@@ -25,6 +25,42 @@ python_defaults {
 }
 
 python_library_host {
+    name: "releasetools_add_img_to_target_files",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "add_img_to_target_files.py",
+    ],
+    libs: [
+        "releasetools_build_image",
+        "releasetools_build_super_image",
+        "releasetools_common",
+    ],
+}
+
+python_library_host {
+    name: "releasetools_apex_utils",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "apex_utils.py",
+    ],
+    libs: [
+        "releasetools_common",
+    ],
+}
+
+python_library_host {
+    name: "releasetools_build_image",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "build_image.py",
+    ],
+    libs: [
+        "releasetools_common",
+        "releasetools_verity_utils",
+    ],
+}
+
+python_library_host {
     name: "releasetools_build_super_image",
     defaults: ["releasetools_library_defaults"],
     srcs: [
@@ -84,6 +120,23 @@ python_defaults {
 }
 
 python_binary_host {
+    name: "add_img_to_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "add_img_to_target_files.py",
+    ],
+    main: "add_img_to_target_files.py",
+    libs: [
+        "releasetools_build_image",
+        "releasetools_build_super_image",
+        "releasetools_common",
+    ],
+    required: [
+        "care_map_generator",
+    ],
+}
+
+python_binary_host {
     name: "build_image",
     defaults: ["releasetools_binary_defaults"],
     srcs: [
@@ -115,11 +168,55 @@ python_binary_host {
 }
 
 python_binary_host {
+    name: "check_ota_package_signature",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "check_ota_package_signature.py",
+    ],
+    main: "check_ota_package_signature.py",
+    libs: [
+        "releasetools_common",
+    ],
+    required: [
+        "delta_generator",
+    ],
+}
+
+python_binary_host {
+    name: "check_target_files_signatures",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "check_target_files_signatures.py",
+    ],
+    main: "check_target_files_signatures.py",
+    libs: [
+        "releasetools_common",
+    ],
+    required: [
+        "aapt",
+    ],
+}
+
+python_binary_host {
+    name: "img_from_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "img_from_target_files.py",
+    ],
+    main: "img_from_target_files.py",
+    libs: [
+        "releasetools_build_super_image",
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
     name: "make_recovery_patch",
     defaults: ["releasetools_binary_defaults"],
     srcs: [
         "make_recovery_patch.py",
     ],
+    main: "make_recovery_patch.py",
     libs: [
         "releasetools_common",
     ],
@@ -133,6 +230,24 @@ python_binary_host {
     ],
     main: "merge_builds.py",
     libs: [
+        "releasetools_build_super_image",
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
+    name: "merge_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "edify_generator.py",
+        "img_from_target_files.py",
+        "merge_target_files.py",
+        "ota_from_target_files.py",
+        "target_files_diff.py",
+    ],
+    main: "merge_target_files.py",
+    libs: [
+        "releasetools_add_img_to_target_files",
         "releasetools_build_super_image",
         "releasetools_common",
     ],
@@ -157,6 +272,16 @@ python_binary_host {
 }
 
 python_binary_host {
+    name: "ota_package_parser",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "ota_package_parser.py",
+        "rangelib.py",
+    ],
+    main: "ota_package_parser.py",
+}
+
+python_binary_host {
     name: "sparse_img",
     defaults: ["releasetools_binary_defaults"],
     srcs: [
@@ -166,12 +291,48 @@ python_binary_host {
     main: "sparse_img.py",
 }
 
+python_binary_host {
+    name: "sign_apex",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "sign_apex.py",
+    ],
+    main: "sign_apex.py",
+    libs: [
+        "releasetools_apex_utils",
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
+    name: "sign_target_files_apks",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "sign_target_files_apks.py",
+    ],
+    main: "sign_target_files_apks.py",
+    libs: [
+        "releasetools_add_img_to_target_files",
+        "releasetools_apex_utils",
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
+    name: "validate_target_files",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "validate_target_files.py",
+    ],
+    main: "validate_target_files.py",
+    libs: [
+        "releasetools_common",
+    ],
+}
+
 python_defaults {
     name: "releasetools_test_defaults",
     srcs: [
-        "add_img_to_target_files.py",
-        "apex_utils.py",
-        "build_image.py",
         "check_ota_package_signature.py",
         "check_target_files_signatures.py",
         "edify_generator.py",
@@ -188,6 +349,9 @@ python_defaults {
         "test_*.py",
     ],
     libs: [
+        "releasetools_add_img_to_target_files",
+        "releasetools_apex_utils",
+        "releasetools_build_image",
         "releasetools_build_super_image",
         "releasetools_common",
         "releasetools_verity_utils",
