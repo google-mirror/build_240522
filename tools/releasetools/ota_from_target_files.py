@@ -72,7 +72,7 @@ Common options that apply to both of non-A/B and A/B OTAs
       --skip_postinstall is implied.
 
   --skip_compatibility_check
-      Skip adding the compatibility package to the generated OTA package.
+      Deprecated; does nothing.
 
   --output_metadata_path
       Write a copy of the metadata to a separate file. Therefore, users can
@@ -233,7 +233,6 @@ OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
 OPTIONS.retrofit_dynamic_partitions = False
-OPTIONS.skip_compatibility_check = False
 OPTIONS.output_metadata_path = None
 
 
@@ -761,105 +760,6 @@ def WriteFingerprintAssertion(script, target_info, source_info):
         source_info.GetBuildProp("ro.build.thumbprint"))
 
 
-def AddCompatibilityArchiveIfTrebleEnabled(target_zip, output_zip, target_info,
-                                           source_info=None):
-  """Adds compatibility info into the output zip if it's Treble-enabled target.
-
-  Metadata used for on-device compatibility verification is retrieved from
-  target_zip then added to compatibility.zip which is added to the output_zip
-  archive.
-
-  Compatibility archive should only be included for devices that have enabled
-  Treble support.
-
-  Args:
-    target_zip: Zip file containing the source files to be included for OTA.
-    output_zip: Zip file that will be sent for OTA.
-    target_info: The BuildInfo instance that holds the target build info.
-    source_info: The BuildInfo instance that holds the source build info, if
-        generating an incremental OTA; None otherwise.
-  """
-
-  def AddCompatibilityArchive(framework_updated, device_updated):
-    """Adds compatibility info based on update status of both sides of Treble
-    boundary.
-
-    Args:
-      framework_updated: If True, the system / product image will be updated
-          and therefore their metadata should be included.
-      device_updated: If True, the vendor / odm image will be updated and
-          therefore their metadata should be included.
-    """
-    # Determine what metadata we need. Files are names relative to META/.
-    compatibility_files = []
-    device_metadata = ("vendor_manifest.xml", "vendor_matrix.xml")
-    framework_metadata = ("system_manifest.xml", "system_matrix.xml")
-    if device_updated:
-      compatibility_files += device_metadata
-    if framework_updated:
-      compatibility_files += framework_metadata
-
-    # Create new archive.
-    compatibility_archive = tempfile.NamedTemporaryFile()
-    compatibility_archive_zip = zipfile.ZipFile(
-        compatibility_archive, "w", compression=zipfile.ZIP_DEFLATED)
-
-    # Add metadata.
-    for file_name in compatibility_files:
-      target_file_name = "META/" + file_name
-
-      if target_file_name in target_zip.namelist():
-        data = target_zip.read(target_file_name)
-        common.ZipWriteStr(compatibility_archive_zip, file_name, data)
-
-    # Ensure files are written before we copy into output_zip.
-    compatibility_archive_zip.close()
-
-    # Only add the archive if we have any compatibility info.
-    if compatibility_archive_zip.namelist():
-      common.ZipWrite(output_zip, compatibility_archive.name,
-                      arcname="compatibility.zip",
-                      compress_type=zipfile.ZIP_STORED)
-
-  def FingerprintChanged(source_fp, target_fp):
-    if source_fp is None or target_fp is None:
-      return True
-    return source_fp != target_fp
-
-  # Will only proceed if the target has enabled the Treble support (as well as
-  # having a /vendor partition).
-  if not HasTrebleEnabled(target_zip, target_info):
-    return
-
-  # Skip adding the compatibility package as a workaround for b/114240221. The
-  # compatibility will always fail on devices without qualified kernels.
-  if OPTIONS.skip_compatibility_check:
-    return
-
-  # Full OTA carries the info for system/vendor/product/odm
-  if source_info is None:
-    AddCompatibilityArchive(True, True)
-    return
-
-  source_fp = source_info.fingerprint
-  target_fp = target_info.fingerprint
-  system_updated = source_fp != target_fp
-
-  # other build fingerprints could be possibly blacklisted at build time. For
-  # such a case, we consider those images being changed.
-  vendor_updated = FingerprintChanged(source_info.vendor_fingerprint,
-                                      target_info.vendor_fingerprint)
-  product_updated = HasProductPartition(target_zip) and \
-                    FingerprintChanged(source_info.product_fingerprint,
-                                       target_info.product_fingerprint)
-  odm_updated = HasOdmPartition(target_zip) and \
-                FingerprintChanged(source_info.odm_fingerprint,
-                                   target_info.odm_fingerprint)
-
-  AddCompatibilityArchive(system_updated or product_updated,
-                          vendor_updated or odm_updated)
-
-
 def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
                         device_specific):
   """Returns a ordered dict of block differences with partition name as key."""
@@ -1067,8 +967,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
       block_diff.WriteScript(script, output_zip,
                              progress=progress_dict.get(block_diff.partition),
                              write_verify_script=OPTIONS.verify)
-
-  AddCompatibilityArchiveIfTrebleEnabled(input_zip, output_zip, target_info)
 
   boot_img = common.GetBootableImage(
       "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
@@ -1643,9 +1541,6 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
                                         source_info=source_info,
                                         device_specific=device_specific)
 
-  AddCompatibilityArchiveIfTrebleEnabled(
-      target_zip, output_zip, target_info, source_info)
-
   # Assertions (e.g. device properties check).
   target_info.WriteDeviceAssertions(script, OPTIONS.oem_no_mount)
   device_specific.IncrementalOTA_Assertions()
@@ -2079,9 +1974,6 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     else:
       logger.warning("Cannot find care map file in target_file package")
 
-  AddCompatibilityArchiveIfTrebleEnabled(
-      target_zip, output_zip, target_info, source_info)
-
   common.ZipClose(target_zip)
 
   # We haven't written the metadata entry yet, which will be handled in
@@ -2222,7 +2114,7 @@ def main(argv):
     elif o == "--retrofit_dynamic_partitions":
       OPTIONS.retrofit_dynamic_partitions = True
     elif o == "--skip_compatibility_check":
-      OPTIONS.skip_compatibility_check = True
+      logger.warning("--skip_compatibility_check is deprecated; ignored")
     elif o == "--output_metadata_path":
       OPTIONS.output_metadata_path = a
     else:
