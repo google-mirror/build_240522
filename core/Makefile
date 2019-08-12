@@ -4025,10 +4025,6 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(HOST_OUT_EXECUTABLES)/fs_config \
 	    $(ADD_IMG_TO_TARGET_FILES) \
 	    $(MAKE_RECOVERY_PATCH) \
-	    $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST) \
-	    $(BUILT_ASSEMBLED_VENDOR_MANIFEST) \
-	    $(BUILT_SYSTEM_MATRIX) \
-	    $(BUILT_VENDOR_MATRIX) \
 	    | $(ACP)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
@@ -4265,17 +4261,6 @@ ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
 endif
 ifdef BUILDING_SYSTEM_OTHER_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/SYSTEM_OTHER,system/) > $(zip_root)/META/system_other_filesystem_config.txt
-endif
-	@# Metadata for compatibility verification.
-	$(hide) cp $(BUILT_SYSTEM_MATRIX) $(zip_root)/META/system_matrix.xml
-ifdef BUILT_ASSEMBLED_FRAMEWORK_MANIFEST
-	$(hide) cp $(BUILT_ASSEMBLED_FRAMEWORK_MANIFEST) $(zip_root)/META/system_manifest.xml
-endif
-ifdef BUILT_ASSEMBLED_VENDOR_MANIFEST
-	$(hide) cp $(BUILT_ASSEMBLED_VENDOR_MANIFEST) $(zip_root)/META/vendor_manifest.xml
-endif
-ifdef BUILT_VENDOR_MATRIX
-	$(hide) cp $(BUILT_VENDOR_MATRIX) $(zip_root)/META/vendor_matrix.xml
 endif
 ifneq ($(BOARD_SUPER_PARTITION_GROUPS),)
 	$(hide) echo "super_partition_groups=$(BOARD_SUPER_PARTITION_GROUPS)" > $(zip_root)/META/dynamic_partitions_info.txt
