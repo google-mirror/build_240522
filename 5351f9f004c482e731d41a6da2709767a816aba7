@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7439adaf_cc5018f8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-12T23:56:12Z",
+      "side": 1,
+      "message": "These can be removed.\n\nNote that removing these from target_files.zip will potentially affect more than \"check during OTA\". It won\u0027t allow server-side checks (assume that happens at some point), since the files for a given build will no longer be available.",
+      "range": {
+        "startLine": 4023,
+        "startChar": 0,
+        "endLine": 4026,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d36e1a6e_66f8275b",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-12T23:56:12Z",
+      "side": 1,
+      "message": "These can be removed.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "719eb728_65b2d443",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-12T23:56:12Z",
+      "side": 1,
+      "message": "And here",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d96a7e_96316db5",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-12T23:56:12Z",
+      "side": 1,
+      "message": "nit: \";\"",
+      "range": {
+        "startLine": 2124,
+        "startChar": 62,
+        "endLine": 2124,
+        "endChar": 63
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
