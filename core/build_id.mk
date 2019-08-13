@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (f51a70 Merge "Add labels to rewrapper cc compile action. Prevent cc)
 BUILD_ID=PI
+=======
+export BUILD_ID=PPRL.190801.002
+>>>>>>> BRANCH (3ca130 Make change and version bump to PPRL.190801.002)
