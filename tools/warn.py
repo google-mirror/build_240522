@@ -93,6 +93,10 @@ parser.add_argument('--gencsv',
                     help='Generate a CSV file with number of various warnings',
                     action='store_true',
                     default=False)
+parser.add_argument('--javaapiusedbymainlinemodules',
+                    help='Generate a CSV file with Java APIs used by modules',
+                    action='store_true',
+                    default=False)
 parser.add_argument('--byproject',
                     help='Separate warnings in HTML output by project names',
                     action='store_true',
@@ -3531,6 +3535,56 @@ def dump_csv(writer):
   writer.writerow([total, '', 'All warnings'])
 
 
+module_list = {
+    'frameworks/base/media':
+        'com.google.android.media',
+    'packages/modules/ExtServices':
+        'com.google.android.ext.services',
+    'packages/modules/NetworkStack':
+        'com.google.android.networkstack',
+    'packages/modules/CaptivePortalLogin':
+        'com.google.android.captiveportal',
+    'packages/apps/PermissionController':
+        'com.google.android.permissioncontroller',
+    'external/conscrypt':
+        'com.google.android.conscrypt',
+    'packages/apps/DocumentsUI':
+        'com.google.android.documentsui',
+}
+
+
+def dump_java_api_used_by_ml_modules(writer, warnings):
+  """Parses input file and collects Java APIs used by mainline modules.
+
+  Warning lines from build log input file are always formatted as:
+  path/to/file.java:# warning: [JavaApiUsedByMainlineModule] API_NAME
+  """
+  api_list = {}
+  for line in warnings:
+    if not 'warning: [JavaApiUsedByMainlineModule]' in line:
+      continue
+    for module_path in module_list:
+      if module_path in line:
+        # Create duple of API and module to condense filepaths for duplicates.
+        # Quotations prevent separation of lists into individual cells.
+        api = line[(line.index(']') + 2):]
+        module = module_list.get(module_path)
+        api_and_module = (api, module)
+    file_path = '\'%s\'' % (line[:(line.index(': '))])
+
+    # Save API to collection of APIs already parsed.
+    api_list.setdefault(api_and_module, []).append(file_path)
+    # if api_and_module in api_list:
+    #   api_list[api_and_module].append(file_path)
+    # else:
+    #   api_list[api_and_module] = [file_path]
+  # Write all APIs to CSV file
+  writer.writerow(['MethodName', 'Module', 'FilePath'])
+  for api in api_list:
+    path_list = '[%s]' % (', '.join(api_list.get(api)))
+    writer.writerow([api[0], api[1], path_list])
+
+
 def main():
   # We must use 'utf-8' codec to parse some non-ASCII code in warnings.
   warning_lines = parse_input_file(
@@ -3544,6 +3598,8 @@ def main():
       dump_csv(csv.writer(f, lineterminator='\n'))
   if args.gencsv:
     dump_csv(csv.writer(sys.stdout, lineterminator='\n'))
+  if args.javaapiusedbymainlinemodules:
+    dump_java_api_used_by_ml_modules(csv.writer(sys.stdout, lineterminator='\n'), warning_lines)
   else:
     dump_html()
 
