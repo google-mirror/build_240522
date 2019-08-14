@@ -4647,6 +4647,15 @@ INTERNAL_UPDATE_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
 $(INTERNAL_UPDATE_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(ZIP2ZIP)
 
+ifeq (true,$(BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT))
+$(PRODUCT_OUT)/super_misc_info.txt:
+	$(call dump-super-image-info,$@)
+	$(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+	  echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $@;)
+
+$(call dist-for-goals,droidcore,$(PRODUCT_OUT)/super_misc_info.txt)
+endif
+
 ifeq (true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE))
 $(INTERNAL_UPDATE_PACKAGE_TARGET): $(INTERNAL_SUPERIMAGE_DIST_TARGET)
 	@echo "Package: $@"
@@ -4666,15 +4675,13 @@ $(INTERNAL_UPDATE_PACKAGE_TARGET): $(INTERNAL_SUPERIMAGE_DIST_TARGET)
 	      OTA/super_$(device).img:super_$(device).img)) \
 	  IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
 	  OTA/android-info.txt:android-info.txt "IMAGES/*.img:."
-	$(if $(INTERNAL_SUPERIMAGE_MISC_INFO), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_MISC_INFO))
 	$(if $(INTERNAL_SUPERIMAGE_DIST_TARGET), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_DIST_TARGET))
 else
-$(INTERNAL_UPDATE_PACKAGE_TARGET): $(INSTALLED_MISC_INFO_TARGET)
+$(INTERNAL_UPDATE_PACKAGE_TARGET):
 	@echo "Package: $@"
 	$(hide) $(ZIP2ZIP) -i $(BUILT_TARGET_FILES_PACKAGE) -o $@ \
 	  IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
 	  OTA/android-info.txt:android-info.txt "IMAGES/*.img:."
-	$(if $(INSTALLED_MISC_INFO_TARGET), zip -q -j -u $@ $(INSTALLED_MISC_INFO_TARGET))
 endif # BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE
 
 .PHONY: updatepackage
