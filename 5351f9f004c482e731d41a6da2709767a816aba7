@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9ea85621_045fd2ea",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-14T20:23:01Z",
+      "side": 1,
+      "message": "So, I think there\u0027s still merit to keep them.",
+      "parentUuid": "7439adaf_cc5018f8",
+      "range": {
+        "startLine": 4023,
+        "startChar": 0,
+        "endLine": 4026,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d36e1a6e_66f8275b",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 1
