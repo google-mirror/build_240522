@@ -2270,9 +2270,9 @@ endef
 # $(1): the package file we are signing.
 define sign-package-arg
 $(hide) mv $(1) $(1).unsigned
-$(hide) $(JAVA) -Djava.library.path=$(SIGNAPK_JNI_LIBRARY_PATH) -jar $(SIGNAPK_JAR) \
-    $(PRIVATE_CERTIFICATE) $(PRIVATE_PRIVATE_KEY) \
-    $(PRIVATE_ADDITIONAL_CERTIFICATES) $(1).unsigned $(1).signed
+$(APKSIGNER) sign --v1-signing-enabled false \
+    --key $(PRIVATE_PRIVATE_KEY) --cert $(PRIVATE_CERTIFICATE) $(1).unsigned
+build/tools/image_tools/apksig_parser.py $(1).unsigned $(patsubst %.x509.pem,%,$(notdir $(PRIVATE_CERTIFICATE)))
 $(hide) mv $(1).signed $(1)
 endef
 
