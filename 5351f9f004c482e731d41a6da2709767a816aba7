@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f49dd725_6e734b10",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-14T21:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d36e1a6e_66f8275b",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "719eb728_65b2d443",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 1
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8d684402_f28cee96",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-14T21:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "719eb728_65b2d443",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 29
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d96a7e_96316db5",
         "filename": "tools/releasetools/ota_from_target_files.py",
         "patchSetId": 1
@@ -115,6 +163,30 @@
       "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4706271f_3db39b26",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-14T21:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d96a7e_96316db5",
+      "range": {
+        "startLine": 2124,
+        "startChar": 62,
+        "endLine": 2124,
+        "endChar": 63
+      },
+      "revId": "5351f9f004c482e731d41a6da2709767a816aba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
