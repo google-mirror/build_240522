@@ -3731,13 +3731,13 @@ $(BUILT_OTATOOLS_PACKAGE): PRIVATE_ZIP_ROOT := $(call intermediates-dir-for,PACK
 $(BUILT_OTATOOLS_PACKAGE): PRIVATE_OTATOOLS_PACKAGE_FILES := $(INTERNAL_OTATOOLS_PACKAGE_FILES)
 $(BUILT_OTATOOLS_PACKAGE): PRIVATE_OTATOOLS_RELEASETOOLS := $(INTERNAL_OTATOOLS_RELEASETOOLS)
 $(BUILT_OTATOOLS_PACKAGE): $(INTERNAL_OTATOOLS_PACKAGE_FILES) $(INTERNAL_OTATOOLS_RELEASETOOLS)
-$(BUILT_OTATOOLS_PACKAGE): $(SOONG_ZIP)
+$(BUILT_OTATOOLS_PACKAGE): $(SOONG_ZIP) $(ZIP2ZIP)
 	@echo "Package OTA tools: $@"
 	rm -rf $@ $(PRIVATE_ZIP_ROOT)
 	mkdir -p $(dir $@)
 	$(call copy-files-with-structure,$(PRIVATE_OTATOOLS_PACKAGE_FILES),$(HOST_OUT)/,$(PRIVATE_ZIP_ROOT))
 	$(call copy-files-with-structure,$(PRIVATE_OTATOOLS_RELEASETOOLS),build/make/tools/,$(PRIVATE_ZIP_ROOT))
-	cp $(SOONG_ZIP) $(PRIVATE_ZIP_ROOT)/bin/
+	cp $(SOONG_ZIP) $(ZIP2ZIP) $(PRIVATE_ZIP_ROOT)/bin/
 	$(SOONG_ZIP) -o $@ -C $(PRIVATE_ZIP_ROOT) -D $(PRIVATE_ZIP_ROOT)
 
 .PHONY: otatools-package
@@ -4546,7 +4546,6 @@ ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
 
 # For real devices and for dist builds, build super image from target files to an intermediate directory.
 INTERNAL_SUPERIMAGE_DIST_TARGET := $(call intermediates-dir-for,PACKAGING,super.img)/super.img
-INTERNAL_SUPERIMAGE_MISC_INFO := $(call intermediates-dir-for,PACKAGING,superimage_debug)/misc_info.txt
 $(INTERNAL_SUPERIMAGE_DIST_TARGET): extracted_input_target_files := $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))
 $(INTERNAL_SUPERIMAGE_DIST_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
 	$(call pretty,"Target super fs image from target files: $@")
@@ -4595,10 +4594,11 @@ INSTALLED_SUPERIMAGE_DEPENDENCIES := $(LPMAKE) $(BUILD_SUPER_IMAGE) \
 # be built for non-dist builds. This is useful for devices that uses super.img directly, e.g.
 # virtual devices.
 ifeq (true,$(BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT))
+INTERNAL_SUPERIMAGE_MISC_INFO := $(call intermediates-dir-for,PACKAGING,superimage_debug)/misc_info.txt
+$(INSTALLED_SUPERIMAGE_TARGET): .KATI_IMPLICIT_OUTPUTS := $(INTERNAL_SUPERIMAGE_MISC_INFO)
 $(INSTALLED_SUPERIMAGE_TARGET): $(INSTALLED_SUPERIMAGE_DEPENDENCIES)
 	$(call pretty,"Target super fs image for debug: $@")
-	$(call build-superimage-target,$(INSTALLED_SUPERIMAGE_TARGET),\
-	  $(INTERNAL_SUPERIMAGE_MISC_INFO))
+	$(call build-superimage-target,$(INSTALLED_SUPERIMAGE_TARGET),$(INTERNAL_SUPERIMAGE_MISC_INFO))
 
 droidcore: $(INSTALLED_SUPERIMAGE_TARGET)
 
@@ -4652,37 +4652,27 @@ name := $(name)-img-$(FILE_NAME_TAG)
 
 INTERNAL_UPDATE_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
-$(INTERNAL_UPDATE_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(ZIP2ZIP)
-
 ifeq (true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE))
 $(INTERNAL_UPDATE_PACKAGE_TARGET): $(INTERNAL_SUPERIMAGE_DIST_TARGET)
-	@echo "Package: $@"
-	# Filter out super_empty and images in BOARD_SUPER_PARTITION_PARTITION_LIST.
-	# Filter out system_other for launch DAP devices because it is in super image.
-	# Include OTA/super_*.img for retrofit devices and super.img for non-retrofit
-	# devices.
-	$(hide) $(ZIP2ZIP) -i $(BUILT_TARGET_FILES_PACKAGE) -o $@ \
-	  -x IMAGES/super_empty.img \
-	  $(foreach partition,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-	    -x IMAGES/$(partition).img) \
-	  $(if $(filter system, $(BOARD_SUPER_PARTITION_PARTITION_LIST)), \
-	    $(if $(filter true, $(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)),, \
-	      -x IMAGES/system_other.img)) \
-	  $(if $(filter true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)), \
-	    $(foreach device,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES), \
-	      OTA/super_$(device).img:super_$(device).img)) \
-	  IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
-	  OTA/android-info.txt:android-info.txt "IMAGES/*.img:."
-	$(if $(INTERNAL_SUPERIMAGE_MISC_INFO), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_MISC_INFO))
-	$(if $(INTERNAL_SUPERIMAGE_DIST_TARGET), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_DIST_TARGET))
 else
 $(INTERNAL_UPDATE_PACKAGE_TARGET): $(INSTALLED_MISC_INFO_TARGET)
-	@echo "Package: $@"
-	$(hide) $(ZIP2ZIP) -i $(BUILT_TARGET_FILES_PACKAGE) -o $@ \
-	  IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
-	  OTA/android-info.txt:android-info.txt "IMAGES/*.img:."
-	$(if $(INSTALLED_MISC_INFO_TARGET), zip -q -j -u $@ $(INSTALLED_MISC_INFO_TARGET))
-endif # BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE
+endif
+
+ifeq (true,$(BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT))
+$(INTERNAL_UPDATE_PACKAGE_TARGET): $(INTERNAL_SUPERIMAGE_MISC_INFO)
+endif
+
+$(INTERNAL_UPDATE_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(IMG_FROM_TARGET_FILES)
+	$(call pretty,"Package: $@")
+	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$(dir $(ZIP2ZIP)):$$PATH \
+	    $(IMG_FROM_TARGET_FILES) \
+	        --additional IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
+	        $(BUILT_TARGET_FILES_PACKAGE) $@
+	$(if $(filter true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE)), \
+	    $(if $(INTERNAL_SUPERIMAGE_DIST_TARGET), zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_DIST_TARGET)), \
+	    $(if $(INSTALLED_MISC_INFO_TARGET), zip -q -j -u $@ $(INSTALLED_MISC_INFO_TARGET)))
+	$(if $(filter true,$(BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT)), \
+	    zip -q -j -u $@ $(INTERNAL_SUPERIMAGE_MISC_INFO))
 
 .PHONY: updatepackage
 updatepackage: $(INTERNAL_UPDATE_PACKAGE_TARGET)
