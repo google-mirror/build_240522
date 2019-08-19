@@ -39,8 +39,6 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
     system/app/WAPPushManager/WAPPushManager.apk \
     system/bin/healthd \
     system/etc/init/healthd.rc \
-    system/etc/seccomp_policy/crash_dump.%.policy \
-    system/etc/seccomp_policy/mediacodec.policy \
     system/etc/vintf/manifest/manifest_healthd.xml \
     system/lib/libframesequence.so \
     system/lib/libgiftranscode.so \
