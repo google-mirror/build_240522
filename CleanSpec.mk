@@ -614,6 +614,10 @@ $(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
 # Clean up old location of system_other.avbpubkey
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/security/avb/)
 
+# Clean up bufferhub files
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/hw/android.frameworks.bufferhub@1.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/android.frameworks.bufferhub@1.0-service.rc)
+
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/super.img)
 
 $(call add-clean-step, find $(PRODUCT_OUT) -type f -name "generated_*_image_info.txt" -print0 | xargs -0 rm -f)
@@ -635,9 +639,16 @@ $(call add-clean-step, rm -rf $(HOST_OUT_EXECUTABLES)/build_verity_metadata.py)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libc_malloc*)
 
+# Clean up old location of soft OMX plugins
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libstagefright_soft*)
+
 # Move odm build.prop to /odm/etc/.
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/odm/build.prop)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/odm/build.prop)
+
+# Remove libcameraservice and libcamera_client from base_system
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libcameraservice.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libcamera_client.so)
 
 # Move product and system_ext to root for emulators
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/product)
@@ -654,6 +665,39 @@ $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*product*)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*system_ext*)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/product)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/system_ext)
+
+# Move GSI-specific files from /system to /system/system_ext
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/init.gsi.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/config/)
+
+# Move fuzz targets from /data/fuzz/* to /data/fuzz/<arch>/* for device, and
+# /fuzz/* to /fuzz/<arch>/* on host.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/fuzz/*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/data/fuzz/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/fuzz/*)
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/host/*/fuzz/*)
+
+# Change file layout of system_other
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system_other)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex)
+
+# Migrate preopt files to system_other for some devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/*/*app/*/oat)
+
+# Remove Android Core Library artifacts from the system partition, now
+# that they live in the ART APEX (b/142944799).
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
+
+# Remove symlinks for VNDK apexes
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
+
+# Switch to symlinks for VNDK libs
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
+
+# Remove Android Core Library artifacts from the system partition
+# again, as the original change removing them was reverted.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
 
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
