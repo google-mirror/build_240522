@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d183207_b437cedf",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-20T23:29:10Z",
+      "side": 1,
+      "message": "This tool needs to be added to\n- tools/releasetools/Android.bp as a required module for `merge_target_files`\n- core/Makefile to be included into otatools.zip",
+      "range": {
+        "startLine": 611,
+        "startChar": 9,
+        "endLine": 611,
+        "endChar": 23
+      },
+      "revId": "cef59dd4a0d7a56f259cd515756db9464052b2e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
