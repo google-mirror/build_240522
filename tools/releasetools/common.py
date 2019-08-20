@@ -320,11 +320,16 @@ def LoadInfoDict(input_file, repacking=False):
     assert isinstance(input_file, str), \
         "input_file must be a path str when doing repacking"
 
-  def read_helper(fn):
+  def read_helper(fn, relative_path=True):
+    """
+    relative_path: True if file path is relative to input_file
+    """
     if isinstance(input_file, zipfile.ZipFile):
       return input_file.read(fn).decode()
     else:
-      path = os.path.join(input_file, *fn.split("/"))
+      path = fn
+      if relative_path:
+        path = os.path.join(input_file, *fn.split("/"))
       try:
         with open(path) as f:
           return f.read()
@@ -393,12 +398,19 @@ def LoadInfoDict(input_file, repacking=False):
   makeint("boot_size")
   makeint("fstab_version")
 
-  # We changed recovery.fstab path in Q, from ../RAMDISK/etc/recovery.fstab to
-  # ../RAMDISK/system/etc/recovery.fstab. LoadInfoDict() has to handle both
-  # cases, since it may load the info_dict from an old build (e.g. when
-  # generating incremental OTAs from that build).
   system_root_image = d.get("system_root_image") == "true"
-  if d.get("no_recovery") != "true":
+
+  if d.get("recovery_fstab"):
+    recovery_fstab_path = d.get("recovery_fstab")
+    d["fstab"] = LoadRecoveryFSTab(
+        lambda f: read_helper(f, False), d["fstab_version"],
+        recovery_fstab_path, system_root_image)
+
+  elif d.get("no_recovery") != "true":
+    # We changed recovery.fstab path in Q, from ../RAMDISK/etc/recovery.fstab to
+    # ../RAMDISK/system/etc/recovery.fstab. LoadInfoDict() has to handle both
+    # cases, since it may load the info_dict from an old build (e.g. when
+    # generating incremental OTAs from that build).
     recovery_fstab_path = "RECOVERY/RAMDISK/system/etc/recovery.fstab"
     if isinstance(input_file, zipfile.ZipFile):
       if recovery_fstab_path not in input_file.namelist():

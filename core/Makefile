@@ -1068,6 +1068,21 @@ INTERNAL_MKBOOTIMG_VERSION_ARGS := \
     --os_version $(PLATFORM_VERSION) \
     --os_patch_level $(PLATFORM_SECURITY_PATCH)
 
+# -----------------------------------------------------------------
+# Recovery (and boot) fstab
+# Also needed for generating ota packages.
+
+ifdef TARGET_RECOVERY_FSTAB
+recovery_fstab := $(TARGET_RECOVERY_FSTAB)
+else
+recovery_fstab := $(strip $(wildcard $(TARGET_DEVICE_DIR)/recovery.fstab))
+endif # TARGET_RECOVERY_FSTAB
+ifdef TARGET_RECOVERY_WIPE
+recovery_wipe := $(TARGET_RECOVERY_WIPE)
+else
+recovery_wipe :=
+endif # TARGET_RECOVERY_WIPE
+
 # Define these only if we are building boot
 ifdef BUILDING_BOOT_IMAGE
 INSTALLED_BOOTIMAGE_TARGET := $(BUILT_BOOTIMAGE_TARGET)
@@ -1829,17 +1844,6 @@ recovery_resource_deps := $(shell find $(recovery_resources_common) \
   $(TARGET_PRIVATE_RES_DIRS) -type f)
 recovery_resource_deps += $(generated_recovery_text_files)
 
-
-ifdef TARGET_RECOVERY_FSTAB
-recovery_fstab := $(TARGET_RECOVERY_FSTAB)
-else
-recovery_fstab := $(strip $(wildcard $(TARGET_DEVICE_DIR)/recovery.fstab))
-endif
-ifdef TARGET_RECOVERY_WIPE
-recovery_wipe := $(TARGET_RECOVERY_WIPE)
-else
-recovery_wipe :=
-endif
 
 # Traditionally with non-A/B OTA we have:
 #   boot.img + recovery-from-boot.p + recovery-resource.dat = recovery.img.
@@ -3761,6 +3765,9 @@ $(INSTALLED_MISC_INFO_TARGET):
 	$(call pretty,"Target misc_info.txt: $@")
 	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >> $@
 	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $@
+ifneq ($(recovery_fstab),)
+	$(hide) echo "recovery_fstab=$(recovery_fstab)" >> $@
+endif
 ifdef BOARD_FLASH_BLOCK_SIZE
 	$(hide) echo "blocksize=$(BOARD_FLASH_BLOCK_SIZE)" >> $@
 endif

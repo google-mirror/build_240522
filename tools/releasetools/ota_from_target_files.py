@@ -890,7 +890,8 @@ def WriteFullOTAPackage(input_zip, output_file):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip)
+  if OPTIONS.two_step:
+    assert HasRecoveryPatch(input_zip)
 
   # Assertions (e.g. downgrade check, device properties check).
   ts = target_info.GetBuildProp("ro.build.date.utc")
@@ -920,9 +921,9 @@ def WriteFullOTAPackage(input_zip, output_file):
   #    complete script normally
   #    (allow recovery to mark itself finished and reboot)
 
-  recovery_img = common.GetBootableImage("recovery.img", "recovery.img",
-                                         OPTIONS.input_tmp, "RECOVERY")
   if OPTIONS.two_step:
+    recovery_img = common.GetBootableImage("recovery.img", "recovery.img",
+                                           OPTIONS.input_tmp, "RECOVERY")
     if not target_info.get("multistage_support"):
       assert False, "two-step packages not supported by this build"
     fs = target_info["fstab"]["/misc"]
@@ -2109,9 +2110,11 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
 def GenerateNonAbOtaPackage(target_file, output_file, source_file=None):
   """Generates a non-A/B OTA package."""
   # Sanity check the loaded info dicts first.
-  if OPTIONS.info_dict.get("no_recovery") == "true":
-    raise common.ExternalError(
-        "--- target build has specified no recovery ---")
+
+  if OPTIONS.two_step:
+    if OPTIONS.info_dict.get("no_recovery") == "true":
+      raise common.ExternalError(
+          "--- target build has specified no recovery ---")
 
   # Non-A/B OTAs rely on /cache partition to store temporary files.
   cache_size = OPTIONS.info_dict.get("cache_size")
