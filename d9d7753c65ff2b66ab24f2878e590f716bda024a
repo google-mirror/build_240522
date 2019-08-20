@@ -22,6 +22,30 @@
       "revId": "d9d7753c65ff2b66ab24f2878e590f716bda024a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d658569d_084c1235",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2019-08-20T11:13:24Z",
+      "side": 1,
+      "message": "https://cs.corp.google.com/search/?q\u003d%22BOARD_USES_METADATA_PARTITION+:%3D+true%22\u0026m\u003d100\u0026sq\u003dpackage:%5Eandroid$\u0026type\u003dcs\nAt least GSI, cuttlefish, and Pixels(after 3) have METADATA_PARTITION :) I think I can call them \"all the target\", but I\u0027m not sure if I miss something or not.",
+      "parentUuid": "bde9a442_bdb777ab",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "d9d7753c65ff2b66ab24f2878e590f716bda024a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
