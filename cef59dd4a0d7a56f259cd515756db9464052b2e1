@@ -22,6 +22,30 @@
       "revId": "cef59dd4a0d7a56f259cd515756db9464052b2e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "844fd0bb_c541e8b4",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-20T23:34:08Z",
+      "side": 1,
+      "message": "I am going to use checkvintf instead (which is in otatools). This is not the correct check as well.",
+      "parentUuid": "9d183207_b437cedf",
+      "range": {
+        "startLine": 611,
+        "startChar": 9,
+        "endLine": 611,
+        "endChar": 23
+      },
+      "revId": "cef59dd4a0d7a56f259cd515756db9464052b2e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
