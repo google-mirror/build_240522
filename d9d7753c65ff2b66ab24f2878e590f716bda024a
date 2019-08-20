@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bde9a442_bdb777ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-08-20T11:01:11Z",
+      "side": 1,
+      "message": "huh? could you be more confident? :)",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "d9d7753c65ff2b66ab24f2878e590f716bda024a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
