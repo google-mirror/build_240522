@@ -14,29 +14,11 @@
 # limitations under the License.
 #
 
-# This makefile contains the product partition contents for
-# a generic phone or tablet device. Only add something here if
-# it definitely doesn't belong on other types of devices (if it
-# does, use base_product.mk).
-$(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+# This makefile contains the system_ext partition contents for
+# media-capable devices (non-wearables). Only add something here
+# if it definitely doesn't belong on wearables. Otherwise, choose
+# base_system_ext.mk.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_system_ext.mk)
 
-# /product packages
+# /system_ext packages
 PRODUCT_PACKAGES += \
-    Browser2 \
-    Calendar \
-    Camera2 \
-    Contacts \
-    DeskClock \
-    Email \
-    Gallery2 \
-    LatinIME \
-    Launcher3QuickStep \
-    Music \
-    OneTimeInitializer \
-    Provision \
-    QuickSearchBox \
-    Settings \
-    SettingsIntelligence \
-    StorageManager \
-    SystemUI \
-    WallpaperCropper \

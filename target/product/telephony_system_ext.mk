@@ -14,29 +14,8 @@
 # limitations under the License.
 #
 
-# This makefile contains the product partition contents for
-# a generic phone or tablet device. Only add something here if
-# it definitely doesn't belong on other types of devices (if it
-# does, use base_product.mk).
-$(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+# This is the list of modules that are specific to products that have telephony
+# hardware, and install to the system_ext partition.
 
-# /product packages
+# /system_ext packages
 PRODUCT_PACKAGES += \
-    Browser2 \
-    Calendar \
-    Camera2 \
-    Contacts \
-    DeskClock \
-    Email \
-    Gallery2 \
-    LatinIME \
-    Launcher3QuickStep \
-    Music \
-    OneTimeInitializer \
-    Provision \
-    QuickSearchBox \
-    Settings \
-    SettingsIntelligence \
-    StorageManager \
-    SystemUI \
-    WallpaperCropper \
