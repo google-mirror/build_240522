@@ -18,7 +18,8 @@ import os.path
 
 import common
 import test_utils
-from merge_target_files import (validate_config_lists,
+from merge_target_files import (check_vintf,
+                                validate_config_lists,
                                 DEFAULT_FRAMEWORK_ITEM_LIST,
                                 DEFAULT_VENDOR_ITEM_LIST,
                                 DEFAULT_FRAMEWORK_MISC_INFO_KEYS, copy_items,
@@ -176,3 +177,29 @@ class MergeTargetFilesTest(test_utils.ReleaseToolsTestCase):
 
     self.assertRaises(ValueError, process_apex_keys_apk_certs_common,
                       framework_dir, conflict_dir, output_dir, 'apexkeys.txt')
+
+  @staticmethod
+  def check_vintf_test(pass_test):
+    output_dir = common.MakeTempDir()
+    os.makedirs(os.path.join(output_dir, 'META'))
+    with open(os.path.join(output_dir, 'META/vendor_manifest.xml'), 'w') as f:
+      f.write('<manifest version="1.0" type="device"/>')
+    with open(os.path.join(output_dir, 'META/system_manifest.xml'), 'w') as f:
+      f.write('<manifest version="1.0" type="framework" />')
+    with open(os.path.join(output_dir, 'META/vendor_matrix.xml'), 'w') as f:
+      f.write('<compatibility-matrix version="1.0" type="device" />')
+    with open(os.path.join(output_dir, 'META/system_matrix.xml'), 'w') as f:
+      f.write("""
+        <compatibility-matrix version="1.0" type="framework">
+        <sepolicy>
+          <sepolicy-version>{}</sepolicy-version>
+          <kernel-sepolicy-version>0</kernel-sepolicy-version>
+        </sepolicy>
+        </compatibility-matrix>""".format("0.0" if pass_test else "1.0"))
+    check_vintf(output_dir)
+
+  def test_check_vintf_Pass(self): # pylint: disable=no-self-use
+    MergeTargetFilesTest.check_vintf_test(True)
+
+  def test_check_vintf_Fail(self):
+    self.assertRaises(ValueError, MergeTargetFilesTest.check_vintf_test, False)

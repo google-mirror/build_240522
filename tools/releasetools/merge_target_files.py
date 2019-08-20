@@ -594,6 +594,34 @@ def copy_file_contexts(framework_target_files_dir, vendor_target_files_dir,
       os.path.join(output_target_files_dir, 'META', 'vendor_file_contexts.bin'))
 
 
+def check_vintf(output_target_files_temp_dir):
+  """
+  Performs VINTF compatibility check on a merged target files structure.
+  Raise an exception if check fails.
+  """
+
+  env = os.environ.copy()
+  # assemble_vintf won't perform checks unless this is set.
+  env["PRODUCT_ENFORCE_VINTF_MANIFEST"] = "true"
+
+  for (manifest, matrix) in [
+      ('META/vendor_manifest.xml', 'META/system_matrix.xml'),
+      ('META/system_manifest.xml', 'META/vendor_matrix.xml')]:
+    command = [
+        'assemble_vintf',
+        '-i',
+        os.path.join(output_target_files_temp_dir, manifest),
+        '-c',
+        os.path.join(output_target_files_temp_dir, matrix),
+        '-o',
+        common.MakeTempFile(suffix='.xml'),
+    ]
+    proc = common.Run(command, verbose=True, env=env)
+    out, _ = proc.communicate()
+    if proc.returncode != 0:
+      raise ValueError("Incompatible VINTF metadata: \n" + out)
+
+
 def process_special_cases(framework_target_files_temp_dir,
                           vendor_target_files_temp_dir,
                           output_target_files_temp_dir,
@@ -655,6 +683,8 @@ def process_special_cases(framework_target_files_temp_dir,
       vendor_target_files_dir=vendor_target_files_temp_dir,
       output_target_files_dir=output_target_files_temp_dir,
       file_name='apexkeys.txt')
+
+  check_vintf(output_target_files_temp_dir)
 
 
 def files_from_path(target_path, extra_args=None):
