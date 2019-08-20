@@ -46,6 +46,30 @@
       "revId": "d9d7753c65ff2b66ab24f2878e590f716bda024a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72ed7357_504c119c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-08-20T12:55:15Z",
+      "side": 1,
+      "message": "The common mk should not necessarily be the kitchen sink of all its current children\u0027s settings. The question to ask is \"should all new devices that inherit this MK have this setting?\". So can you please update the CL description to say why it should have this setting? Why does it matter?",
+      "parentUuid": "d658569d_084c1235",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "d9d7753c65ff2b66ab24f2878e590f716bda024a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
