@@ -14,12 +14,5 @@
 # limitations under the License.
 #
 
-# This makefile contains the product partition contents for
-# media-capable devices (non-wearables). Only add something here
-# if it definitely doesn't belong on wearables. Otherwise, choose
-# base_product.mk.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base_product.mk)
-
-# /product packages
+# Base modules and settings for the system_ext partition.
 PRODUCT_PACKAGES += \
-    webview \
