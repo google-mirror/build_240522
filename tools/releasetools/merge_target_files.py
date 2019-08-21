@@ -87,6 +87,7 @@ import zipfile
 
 import add_img_to_target_files
 import build_super_image
+import check_target_files_vintf
 import common
 import img_from_target_files
 import ota_from_target_files
@@ -651,6 +652,9 @@ def process_special_cases(framework_target_files_temp_dir,
       vendor_target_files_dir=vendor_target_files_temp_dir,
       output_target_files_dir=output_target_files_temp_dir,
       file_name='apexkeys.txt')
+
+  if not check_target_files_vintf.CheckVintf(output_target_files_temp_dir):
+    raise RuntimeError("Incompatible VINTF metadata")
 
 
 def files_from_path(target_path, extra_args=None):
