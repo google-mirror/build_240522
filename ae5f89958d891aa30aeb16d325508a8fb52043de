@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da97df84_d966ca20",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "Add building rule to tools/releasetools/Android.bp.\n\nIt also needs to be added to otatools.zip, if it\u0027s expected to be used as a standalone tool.",
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faf99115_ef57438c",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "nit: remove (we have switched to using tools as binaries)",
+      "range": {
+        "startLine": 20,
+        "startChar": 31,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f71b154_73f82ed4",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "nit: prefer single quote (unless for multi line docstring)",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb4058ab_50aee54c",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "nit: {}",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7adb8e3_20db689f",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "nit: return [] within the if block",
+      "range": {
+        "startLine": 78,
+        "startChar": 64,
+        "endLine": 78,
+        "endChar": 65
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d6fe254_7eb06d46",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings\n\n\"\"\"Checks VINTF ...",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 62
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8396dd0c_05418f67",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "required module",
+      "range": {
+        "startLine": 124,
+        "startChar": 7,
+        "endLine": 124,
+        "endChar": 17
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "826008d8_0a6d75d1",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "Unless this script is intended to be called by build system, there\u0027s no need to support extracted target files",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb5f3a67_0a94ab65",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-08-22T15:52:57Z",
+      "side": 1,
+      "message": "Add unit tests",
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
