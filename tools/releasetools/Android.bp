@@ -403,6 +403,7 @@ python_defaults {
     srcs: [
         "check_ota_package_signature.py",
         "check_target_files_signatures.py",
+        "check_target_files_vintf.py",
         "make_recovery_patch.py",
         "merge_target_files.py",
         "ota_package_parser.py",
@@ -423,7 +424,7 @@ python_defaults {
         "releasetools_verity_utils",
     ],
     data: [
-        "testdata/*",
+        "testdata/**/*",
     ],
     required: [
         "otatools",
