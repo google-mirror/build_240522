@@ -1,0 +1,7 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Jeff Sharkey <jsharkey@google.com>
+Submitted-at: Thu, 22 Aug 2019 00:02:00 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1106574
+Project: platform/build
+Branch: refs/heads/master
