@@ -259,7 +259,7 @@ def RunAndCheckOutput(args, verbose=None, **kwargs):
   if proc.returncode != 0:
     raise ExternalError(
         "Failed to run command '{}' (exit code {}):\n{}".format(
-            args, proc.returncode, output))
+            ' '.join(args), proc.returncode, output))
   return output
 
 
