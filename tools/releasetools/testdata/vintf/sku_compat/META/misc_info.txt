@@ -1,0 +1,4 @@
+recovery_api_version=3
+fstab_version=2
+vintf_enforce=true
+vintf_odm_manifest_skus=sku

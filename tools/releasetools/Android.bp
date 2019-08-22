@@ -423,7 +423,7 @@ python_defaults {
         "releasetools_verity_utils",
     ],
     data: [
-        "testdata/*",
+        "testdata/**/*",
     ],
     required: [
         "otatools",
