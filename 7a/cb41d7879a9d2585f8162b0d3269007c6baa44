@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Dario Freni <dariofreni@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Thu, 22 Aug 2019 12:09:26 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1105453
+Project: platform/build
+Branch: refs/heads/master
