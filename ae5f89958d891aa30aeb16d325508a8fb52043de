@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9c68d3f7_bbd75e8c",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-22T21:12:35Z",
+      "side": 1,
+      "message": "Will do.\n\nI don\u0027t see a need for otatools.zip to have a standalone binary of this though...",
+      "parentUuid": "da97df84_d966ca20",
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "faf99115_ef57438c",
         "filename": "tools/releasetools/check_target_files_vintf.py",
         "patchSetId": 1
@@ -168,6 +186,30 @@
       "writtenOn": "2019-08-22T15:52:57Z",
       "side": 1,
       "message": "Unless this script is intended to be called by build system, there\u0027s no need to support extracted target files",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "ae5f89958d891aa30aeb16d325508a8fb52043de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43f44a90_80b00da7",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-08-22T21:12:35Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll have follow-up CLs to let Makefile invoke this script",
+      "parentUuid": "826008d8_0a6d75d1",
       "range": {
         "startLine": 204,
         "startChar": 2,
