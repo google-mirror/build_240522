@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98579734_2b897369",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-08-23T23:10:51Z",
+      "side": 1,
+      "message": "I remembered seeing ROOT/odm, is the location enforced in Q? https://android-build.googleplex.com/builds/submitted/5803026/atom-userdebug/latest",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 11
+      },
+      "revId": "59a4b9c81942e2121768743e10fcebdabfe0f820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32182cf5_552d182e",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-08-23T23:10:51Z",
+      "side": 1,
+      "message": "regular split is sufficient? And you don\u0027t need L68, the return value will be an empty list.",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 15
+      },
+      "revId": "59a4b9c81942e2121768743e10fcebdabfe0f820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54cac1bc_5fffb3cd",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-08-23T23:10:51Z",
+      "side": 1,
+      "message": "RunAndCheckOutput() and stop at the first error?",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 32
+      },
+      "revId": "59a4b9c81942e2121768743e10fcebdabfe0f820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce69f827_20ed4ecf",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-08-23T23:10:51Z",
+      "side": 1,
+      "message": "just common.RunAndCheckOutput()",
+      "range": {
+        "startLine": 166,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 26
+      },
+      "revId": "59a4b9c81942e2121768743e10fcebdabfe0f820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
