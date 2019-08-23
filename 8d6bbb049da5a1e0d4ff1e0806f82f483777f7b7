@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "497f5803_bb729e05",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-08-23T09:32:23Z",
+      "side": 1,
+      "message": "For consistency, also moved this to a Android.mk",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "8d6bbb049da5a1e0d4ff1e0806f82f483777f7b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8358f9ff_5faefd24",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-08-23T09:32:23Z",
+      "side": 1,
+      "message": "moved to Android.mk because need LOCAL_POST_INSTALL_CMD to create a symlink.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 18
+      },
+      "revId": "8d6bbb049da5a1e0d4ff1e0806f82f483777f7b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
