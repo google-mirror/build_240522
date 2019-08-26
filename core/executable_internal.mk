@@ -52,9 +52,9 @@ my_target_crtbegin_dynamic_o :=
 my_target_crtbegin_static_o :=
 my_target_crtend_o :=
 else ifdef LOCAL_USE_VNDK
-my_target_crtbegin_dynamic_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_dynamic.vendor)
-my_target_crtbegin_static_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_static.vendor)
-my_target_crtend_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtend_android.vendor)
+my_target_crtbegin_dynamic_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_dynamic.$(VENDOR_MODULE_SUFFIX))
+my_target_crtbegin_static_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_static.$(VENDOR_MODULE_SUFFIX))
+my_target_crtend_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtend_android.$(VENDOR_MODULE_SUFFIX))
 else
 my_target_crtbegin_dynamic_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_dynamic)
 my_target_crtbegin_static_o := $(SOONG_$(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJECT_crtbegin_static)

@@ -1041,7 +1041,7 @@ endef
 # Returns modules included automatically as a result of certain BoardConfig
 # variables being set.
 define auto-included-modules
-  $(if $(BOARD_VNDK_VERSION),vndk_package) \
+  $(if $(filter current,$(BOARD_VNDK_VERSION)),vndk_package) \
   $(if $(DEVICE_MANIFEST_FILE),device_manifest.xml) \
   $(if $(ODM_MANIFEST_FILES),odm_manifest.xml) \
   $(if $(ODM_MANIFEST_SKUS),$(foreach sku, $(ODM_MANIFEST_SKUS),odm_manifest_$(sku).xml)) \
@@ -1066,7 +1066,7 @@ endef
 define product-installed-files
   $(eval _mk := $(strip $(1))) \
   $(eval _pif_modules := \
-    $(PRODUCTS.$(_mk).PRODUCT_PACKAGES) \
+    $(patsubst %.vendor,%.$(VENDOR_MODULE_SUFFIX),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES)) \
     $(if $(filter eng,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_ENG)) \
     $(if $(filter debug,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_DEBUG)) \
     $(if $(filter tests,$(tags_to_install)),$(PRODUCTS.$(_mk).PRODUCT_PACKAGES_TESTS)) \
@@ -1280,6 +1280,7 @@ ifdef FULL_BUILD
       # Strip :32 and :64 suffixes
       _modules := $(patsubst %:32,%,$(_modules))
       _modules := $(patsubst %:64,%,$(_modules))
+      _modules := $(patsubst %.vendor,%.$(VENDOR_MODULE_SUFFIX),$(_modules))
       # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
       # existence if either <module> or the <module>_32 variant.
       _nonexistent_modules := $(filter-out $(ALL_MODULES),$(_modules))

@@ -88,7 +88,8 @@ endif
 
 ifdef LOCAL_USE_VNDK
   ifneq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
-    name_without_suffix := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    name_without_suffix := $(patsubst %.vendor.$(PLATFORM_VNDK_VERSION),%,\
+      $(patsubst %.$(VENDOR_MODULE_SUFFIX),%,$(LOCAL_MODULE)))
     ifneq ($(name_without_suffix),$(LOCAL_MODULE)
       SPLIT_VENDOR.$(LOCAL_MODULE_CLASS).$(name_without_suffix) := 1
     endif
@@ -111,7 +112,7 @@ ifdef LOCAL_INSTALLED_MODULE
     my_shared_libraries := $(LOCAL_SHARED_LIBRARIES)
     ifdef LOCAL_USE_VNDK
       my_shared_libraries := $(foreach l,$(my_shared_libraries),\
-        $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+        $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
     endif
     $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
       $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
@@ -123,7 +124,7 @@ ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
   # that the vendor variant will be built and checked against the core variant.
   no_vendor_variant_vndk_check: $(LOCAL_BUILT_MODULE)
 
-  my_core_register_name := $(subst .vendor,,$(my_register_name))
+  my_core_register_name := $(subst .$(VENDOR_MODULE_SUFFIX),,$(my_register_name))
   my_core_variant_files := $(call module-target-built-files,$(my_core_register_name))
   my_core_shared_lib := $(sort $(filter %.so,$(my_core_variant_files)))
   $(LOCAL_BUILT_MODULE): PRIVATE_CORE_VARIANT := $(my_core_shared_lib)

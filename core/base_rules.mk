@@ -816,7 +816,7 @@ ifneq ($(LOCAL_USE_VNDK),)
     # have correct names (with .vendor suffix when necessary) in their
     # LOCAL_*_LIBRARIES.
     my_required_modules := $(foreach l,$(my_required_modules),\
-      $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+      $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
   endif
 endif
 

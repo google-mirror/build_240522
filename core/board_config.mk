@@ -598,3 +598,15 @@ $(foreach m,$(DEFAULT_ERROR_BUILD_MODULE_TYPES),\
   $(if $(filter true,$(BUILD_BROKEN_USES_$(m))),\
     $(KATI_deprecated_var $(m),Please convert to Soong),\
     $(KATI_obsolete_var $(m),Please convert to Soong)))
+
+vendor_vndk_ver := $(BOARD_VNDK_VERSION)
+ifeq ($(vendor_vndk_ver),current)
+  vendor_vndk_ver := $(PLATFORM_VNDK_VERSION)
+endif
+ifeq ($(vendor_vndk_ver),)
+  VENDOR_MODULE_SUFFIX := vendor
+else
+  VENDOR_MODULE_SUFFIX := vendor.$(vendor_vndk_ver)
+endif
+
+vendor_vndk_ver :=

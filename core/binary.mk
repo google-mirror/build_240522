@@ -288,6 +288,8 @@ ifneq ($(LOCAL_USE_VNDK),)
     # If PLATFORM_VNDK_VERSION has a CODENAME, it will return
     # __ANDROID_API_FUTURE__.
     my_api_level := $(call codename-or-sdk-to-sdk,$(PLATFORM_VNDK_VERSION))
+  else ifneq ($(my_vndk_version),)
+    my_api_level := $(call codename-or-sdk-to-sdk,$(BOARD_VNDK_VERSION))
   endif
   my_cflags += -D__ANDROID_VNDK__
 endif
@@ -1134,15 +1136,15 @@ ifneq ($(LOCAL_USE_VNDK),)
   ## variant.
   ####################################################
   my_whole_static_libraries := $(foreach l,$(my_whole_static_libraries),\
-    $(if $(SPLIT_VENDOR.STATIC_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.STATIC_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
   my_static_libraries := $(foreach l,$(my_static_libraries),\
-    $(if $(SPLIT_VENDOR.STATIC_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.STATIC_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
   my_shared_libraries := $(foreach l,$(my_shared_libraries),\
-    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
   my_system_shared_libraries := $(foreach l,$(my_system_shared_libraries),\
-    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
   my_header_libraries := $(foreach l,$(my_header_libraries),\
-    $(if $(SPLIT_VENDOR.HEADER_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.HEADER_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
 endif
 
 # Platform can use vendor public libraries. If a required shared lib is one of
@@ -1188,7 +1190,7 @@ my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
 my_warn_types := $(my_warn_ndk_types)
 my_allowed_types := $(my_allowed_ndk_types)
 else ifdef LOCAL_USE_VNDK
-    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    _name := $(patsubst %.$(VENDOR_MODULE_SUFFIX),%,$(LOCAL_MODULE))
     ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
         ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
             my_link_type := native:vndk

@@ -84,7 +84,7 @@ include $(BUILD_SYSTEM)/allowed_ndk_types.mk
 ifdef LOCAL_SDK_VERSION
 my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
 else ifdef LOCAL_USE_VNDK
-    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    _name := $(patsubst %.$(VENDOR_MODULE_SUFFIX),%,$(LOCAL_MODULE))
     ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
         ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
             my_link_type := native:vndk
@@ -137,7 +137,7 @@ include $(BUILD_SYSTEM)/cxx_stl_setup.mk
 ifdef my_shared_libraries
 ifdef LOCAL_USE_VNDK
   my_shared_libraries := $(foreach l,$(my_shared_libraries),\
-    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).$(VENDOR_MODULE_SUFFIX),$(l)))
 endif
 $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
   $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
