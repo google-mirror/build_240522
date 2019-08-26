@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8b84c94_04cfae67",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-08-26T14:49:58Z",
+      "side": 1,
+      "message": "Can we do this in other place? I am a little bit uncomfortable with doing this here.",
+      "range": {
+        "startLine": 1069,
+        "startChar": 3,
+        "endLine": 1069,
+        "endChar": 88
+      },
+      "revId": "3c161c16dd895735e9b8f9e637bb4eb459e21e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
