@@ -1,0 +1,10 @@
+Autosubmit+1: Xianyuan Jia <xianyuanjia@google.com>
+Code-Review+1: Dan Willemsen <dwillemsen@google.com>
+Code-Review+2: Mark De Ruyter <markdr@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Xianyuan Jia <xianyuanjia@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 27 Aug 2019 23:17:19 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1008446
+Project: platform/build
+Branch: refs/heads/master
