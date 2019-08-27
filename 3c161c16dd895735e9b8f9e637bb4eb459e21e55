@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "df39ef0d_75de4341",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-08-27T05:58:04Z",
+      "side": 1,
+      "message": "\"vendor\" instead of \".vendor\"?",
+      "range": {
+        "startLine": 18,
+        "startChar": 56,
+        "endLine": 18,
+        "endChar": 63
+      },
+      "revId": "3c161c16dd895735e9b8f9e637bb4eb459e21e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a123c397_54e00ca7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-08-27T05:58:04Z",
+      "side": 1,
+      "message": "I think this must be \"{module}.$(VENDOR_MODULE_SUFFIX)\"",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "3c161c16dd895735e9b8f9e637bb4eb459e21e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fc6de80_d46ccc9f",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-08-27T05:58:04Z",
+      "side": 1,
+      "message": "my_api_level?\nBut what does this condition mean? If BOARD_VNDK_VERSION is not empty nor \"current\", my_api_level will be BOARD_VNDK_VERSION already.",
+      "range": {
+        "startLine": 291,
+        "startChar": 16,
+        "endLine": 291,
+        "endChar": 31
+      },
+      "revId": "3c161c16dd895735e9b8f9e637bb4eb459e21e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1062114_01e98378",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-08-27T05:58:04Z",
+      "side": 1,
+      "message": "AFAIK, $(BOARD_VNDK_VERSION) cannot be an input for \"codename-or-sdk-to-sdk\" because it cannot convert \"current\" to api level.",
+      "range": {
+        "startLine": 292,
+        "startChar": 20,
+        "endLine": 292,
+        "endChar": 72
+      },
+      "revId": "3c161c16dd895735e9b8f9e637bb4eb459e21e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8b84c94_04cfae67",
         "filename": "core/main.mk",
         "patchSetId": 1
