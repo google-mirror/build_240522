@@ -177,6 +177,9 @@ A/B OTA specific options
       ones. Should only be used if caller knows it's safe to do so (e.g. all the
       postinstall work is to dexopt apps and a data wipe will happen immediately
       after). Only meaningful when generating A/B OTAs.
+
+  --disable_fec_computation
+      Disable the on device fec data computation for incremental updates.
 """
 
 from __future__ import print_function
@@ -235,6 +238,7 @@ OPTIONS.skip_postinstall = False
 OPTIONS.retrofit_dynamic_partitions = False
 OPTIONS.skip_compatibility_check = False
 OPTIONS.output_metadata_path = None
+OPTIONS.disable_fec_computation = False
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -571,6 +575,8 @@ class Payload(object):
            "--target_image", target_file]
     if source_file is not None:
       cmd.extend(["--source_image", source_file])
+      if OPTIONS.disable_fec_computation:
+        cmd.extend(["--disable_fec_computation", "true"])
     cmd.extend(additional_args)
     self._Run(cmd)
 
@@ -2225,6 +2231,8 @@ def main(argv):
       OPTIONS.skip_compatibility_check = True
     elif o == "--output_metadata_path":
       OPTIONS.output_metadata_path = a
+    elif o == "--disable_fec_computation":
+      OPTIONS.disable_fec_computation = True
     else:
       return False
     return True
@@ -2259,6 +2267,7 @@ def main(argv):
                                  "retrofit_dynamic_partitions",
                                  "skip_compatibility_check",
                                  "output_metadata_path=",
+                                 "disable_fec_computation",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
