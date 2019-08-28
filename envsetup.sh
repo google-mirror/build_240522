@@ -28,6 +28,7 @@ EOF
 # Get the value of a build variable as an absolute path.
 function get_abs_build_var()
 {
+  # oneline comment as a test: rassb@
     T=$(gettop)
     if [ ! "$T" ]; then
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
