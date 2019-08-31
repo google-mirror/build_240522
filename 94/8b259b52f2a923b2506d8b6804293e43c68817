@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Build-Cop-Override+1: Kevin Han <kevhan@google.com>
+Submitted-by: Yifan Hong <elsk@google.com>
+Submitted-at: Sat, 31 Aug 2019 00:22:28 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1112057
+Project: platform/build
+Branch: refs/heads/master
