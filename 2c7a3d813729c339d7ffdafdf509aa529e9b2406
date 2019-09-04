@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5bb44de_fadb5853",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-09-04T21:44:23Z",
+      "side": 1,
+      "message": "As I commented on that CL, I don\u0027t think it works. But you could fix it with a required dependency on lz4, and some way to find the lz4 executable (the built version won\u0027t be on $PATH).",
+      "revId": "2c7a3d813729c339d7ffdafdf509aa529e9b2406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
