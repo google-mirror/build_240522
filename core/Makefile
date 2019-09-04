@@ -2732,11 +2732,19 @@ else
 my_decompress_tools := \
     lz4:$(HOST_OUT_EXECUTABLES)/lz4 \
 
+ifdef BOARD_KERNEL_EXTRACTION_TOOL
+my_installed_kernel := $(intermediates)/preprocessed_kernel
+$(my_installed_kernel): $(HOST_OUT_EXECUTABLES)/$(firstword $(BOARD_KERNEL_EXTRACTION_TOOL)) $(INSTALLED_KERNEL_TARGET)
+	$< $(INSTALLED_KERNEL_TARGET) $@
+else
+my_installed_kernel := $(INSTALLED_KERNEL_TARGET)
+endif
+
 $(BUILT_KERNEL_CONFIGS_FILE): .KATI_IMPLICIT_OUTPUTS := $(BUILT_KERNEL_VERSION_FILE)
 $(BUILT_KERNEL_CONFIGS_FILE): PRIVATE_DECOMPRESS_TOOLS := $(my_decompress_tools)
 $(BUILT_KERNEL_CONFIGS_FILE): $(foreach pair,$(my_decompress_tools),$(call word-colon,2,$(pair)))
-$(BUILT_KERNEL_CONFIGS_FILE): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
-	$< --tools $(PRIVATE_DECOMPRESS_TOOLS) --input $(INSTALLED_KERNEL_TARGET) \
+$(BUILT_KERNEL_CONFIGS_FILE): $(EXTRACT_KERNEL) $(my_installed_kernel)
+	$< --tools $(PRIVATE_DECOMPRESS_TOOLS) --input $(my_installed_kernel) \
 	  --output-configs $@ \
 	  --output-version $(BUILT_KERNEL_VERSION_FILE)
 
