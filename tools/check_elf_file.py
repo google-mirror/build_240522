@@ -507,8 +507,12 @@ def _parse_args():
                       help='Ignore the input file without the ELF magic word')
   parser.add_argument('--skip-unknown-elf-machine', action='store_true',
                       help='Ignore the input file with unknown machine ID')
+  parser.add_argument('--allow-mismatched-soname', action='store_true',
+                      help='Ignore mismatches soname')
   parser.add_argument('--allow-undefined-symbols', action='store_true',
                       help='Ignore unresolved undefined symbols')
+  parser.add_argument('--allow-undeclared-dependencies', action='store_true',
+                      help='Ignore undeclared dependencies')
 
   # Other options
   parser.add_argument('--llvm-readobj',
@@ -532,14 +536,14 @@ def main():
   checker.load_shared_libs(args.shared_lib)
 
   # Run checks
-  if args.soname:
+  if args.soname and not args.allow_mismatched_soname:
     checker.check_dt_soname(args.soname)
 
-  checker.check_dt_needed()
+  if not args.allow_undeclared_dependencies:
+    checker.check_dt_needed()
 
   if not args.allow_undefined_symbols:
     checker.check_symbols()
-
 
 if __name__ == '__main__':
   main()
