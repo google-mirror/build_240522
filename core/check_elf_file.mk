@@ -17,12 +17,10 @@
 
 # These checks are too difficult to bringup everywhere, so they are currently
 # on a per-device basis.
-local_allow_mismatched_soname:=--allow-mismatched-soname
 local_allow_undeclared_dependencies:=--allow-undeclared-dependencies
 local_allow_undefined_symbols:=--allow-undefined-symbols
 ifneq ($(PRODUCT_CHECK_ELF_FILES)$(CHECK_ELF_FILES),)
 ifneq ($(strip $(LOCAL_CHECK_ELF_FILES)),false)
-local_allow_mismatched_soname:=
 local_allow_undeclared_dependencies:=
 local_allow_undefined_symbols:=
 endif  # LOCAL_CHECK_ELF_FILES
@@ -39,8 +37,7 @@ $(check_elf_files_stamp): PRIVATE_ALLOW_UNDEFINED_SYMBOLS := $(LOCAL_ALLOW_UNDEF
 $(check_elf_files_stamp): PRIVATE_SHARED_LIBRARY_FILES := $(my_check_elf_file_shared_lib_files)
 $(check_elf_files_stamp): PRIVATE_ADDITIONAL_OPTIONS := \
     $(local_allow_undeclared_dependencies) \
-    $(local_allow_undefined_symbols) \
-    $(local_allow_mismatched_soname)
+    $(local_allow_undefined_symbols)
 $(check_elf_files_stamp): $(my_prebuilt_src_file) $(my_check_elf_file_shared_lib_files) $(CHECK_ELF_FILE) $(LLVM_READOBJ)
 	@echo Check prebuilt ELF binary: $<
 	$(hide) mkdir -p $(dir $@)
