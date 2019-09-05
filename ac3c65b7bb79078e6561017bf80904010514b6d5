@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1492c15e_3491776e",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-09-05T09:19:36Z",
+      "side": 1,
+      "message": "fixing previous build break...",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 36
+      },
+      "revId": "ac3c65b7bb79078e6561017bf80904010514b6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
