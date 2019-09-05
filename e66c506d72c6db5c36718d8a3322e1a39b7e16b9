@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fa669be_190840d3",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-09-05T21:54:07Z",
+      "side": 1,
+      "message": "oops, I should have removed this first. It was for \u0027no_prebuilts\u0027",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 76
+      },
+      "revId": "e66c506d72c6db5c36718d8a3322e1a39b7e16b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
