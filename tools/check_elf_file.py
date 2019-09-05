@@ -502,13 +502,21 @@ def _parse_args():
   parser.add_argument('--shared-lib', action='append', default=[],
                       help='Path to shared library dependencies')
 
+  # Disallowed library dependencies
+  parser.add_argument('--disallow-shared-libs', action='append', default=[],
+                      help='Path to disallowed shared library dependencies')
+
   # Check options
   parser.add_argument('--skip-bad-elf-magic', action='store_true',
                       help='Ignore the input file without the ELF magic word')
   parser.add_argument('--skip-unknown-elf-machine', action='store_true',
                       help='Ignore the input file with unknown machine ID')
+  parser.add_argument('--allow-mismatched-soname', action='store_true',
+                      help='Ignore mismatches soname')
   parser.add_argument('--allow-undefined-symbols', action='store_true',
                       help='Ignore unresolved undefined symbols')
+  parser.add_argument('--allow-undeclared-dependencies', action='store_true',
+                      help='Ignore undeclared dependencies')
 
   # Other options
   parser.add_argument('--llvm-readobj',
@@ -521,6 +529,20 @@ def main():
   """Main function"""
   args = _parse_args()
 
+  # Calculate checks
+  checks = []
+  if args.soname and not args.allow_mismatched_soname:
+    checks += [lambda checker: checker.check_dt_soname(args.soname)]
+
+  if not args.allow_undeclared_dependencies:
+    checks += [lambda checker: checker.check_dt_needed()]
+
+  if not args.allow_undefined_symbols:
+    checks += [lambda checker: checker.check_symbols()]
+
+  if not checks:
+    return
+
   llvm_readobj = args.llvm_readobj
   if not llvm_readobj:
     llvm_readobj = _get_llvm_readobj()
@@ -531,14 +553,8 @@ def main():
     args.file, args.skip_bad_elf_magic, args.skip_unknown_elf_machine)
   checker.load_shared_libs(args.shared_lib)
 
-  # Run checks
-  if args.soname:
-    checker.check_dt_soname(args.soname)
-
-  checker.check_dt_needed()
-
-  if not args.allow_undefined_symbols:
-    checker.check_symbols()
+  for check in checks:
+    check(checker)
 
 
 if __name__ == '__main__':
