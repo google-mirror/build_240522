@@ -16,6 +16,47 @@
       "revId": "2c7a3d813729c339d7ffdafdf509aa529e9b2406",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09d52207_142fa6ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-09-05T19:18:04Z",
+      "side": 1,
+      "message": "I just use that CL as an example. Vendors have their own kernel preprocess scripts which use their own tools (which we don\u0027t have control on). As for lz4 itself, see other comment.",
+      "parentUuid": "a5bb44de_fadb5853",
+      "revId": "2c7a3d813729c339d7ffdafdf509aa529e9b2406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de3096da_8e4b61a6",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2733,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-09-05T19:18:04Z",
+      "side": 1,
+      "message": "lz4 itself is using this so that it works.",
+      "range": {
+        "startLine": 2733,
+        "startChar": 0,
+        "endLine": 2733,
+        "endChar": 37
+      },
+      "revId": "2c7a3d813729c339d7ffdafdf509aa529e9b2406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
