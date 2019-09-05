@@ -98,6 +98,7 @@ endif
 
 # Check prebuilt ELF binaries.
 ifdef LOCAL_INSTALLED_MODULE
+  # cc_library_shared and cc_binary invoke this but don't fulfill the requirements
   ifneq ($(LOCAL_CHECK_ELF_FILES),)
     my_prebuilt_src_file := $(LOCAL_PREBUILT_MODULE_FILE)
     include $(BUILD_SYSTEM)/check_elf_file.mk
