@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1dea2740_62e27f76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-09-05T19:20:20Z",
+      "side": 1,
+      "message": "If their own tools needs to be built, etc. then they need to add the dependency to the build rule of BOARD_KERNEL_EXTRACTION_TOOL",
+      "parentUuid": "09d52207_142fa6ad",
+      "revId": "2c7a3d813729c339d7ffdafdf509aa529e9b2406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de3096da_8e4b61a6",
         "filename": "core/Makefile",
         "patchSetId": 1
