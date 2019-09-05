@@ -86,6 +86,7 @@ _board_strip_readonly_list += $(_dynamic_partitions_var_list)
 
 _build_broken_var_list := \
   BUILD_BROKEN_DUP_RULES \
+  BUILD_BROKEN_MISMATCHED_PREBUILT_SONAMES \
   BUILD_BROKEN_USES_NETWORK \
 
 _build_broken_var_list += \
