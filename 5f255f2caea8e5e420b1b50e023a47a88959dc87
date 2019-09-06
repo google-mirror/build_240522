@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3bf4313_98fe8f4a",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-09-06T18:00:23Z",
+      "side": 1,
+      "message": "Please mark it as obsolete too, so that any downstream users get an error message instead of something really weird happening.",
+      "revId": "5f255f2caea8e5e420b1b50e023a47a88959dc87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
