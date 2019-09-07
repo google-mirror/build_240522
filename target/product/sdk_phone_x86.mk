@@ -36,6 +36,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 #
 $(call inherit-product-if-exists, device/generic/goldfish/x86-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86/device.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86.mk)
