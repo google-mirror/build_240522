@@ -49,3 +49,11 @@ PRODUCT_BRAND := Android
 PRODUCT_NAME := sdk_phone_x86
 PRODUCT_DEVICE := generic_x86
 PRODUCT_MODEL := Android SDK built for x86
+
+# MultiDisplay
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST := \
+    system/lib/libemulator_multidisplay_jni.so \
+    system/lib64/libemulator_multidisplay_jni.so \
+    system/priv-app/MultiDisplayProvider/MultiDisplayProvider.apk \
+
+PRODUCT_PACKAGES += MultiDisplayProvider
