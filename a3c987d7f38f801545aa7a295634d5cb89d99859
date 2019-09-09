@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73ee2309_558561cc",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-09-09T05:12:14Z",
+      "side": 1,
+      "message": "These files are required to make ld.config.txt and some system libs. Why don\u0027t we move these to base_system instead of vndk package?\nCan linker config generator works without these files when BOARD_VNDK_VERSION is not defined?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "a3c987d7f38f801545aa7a295634d5cb89d99859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
