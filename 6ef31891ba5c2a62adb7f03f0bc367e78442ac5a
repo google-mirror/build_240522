@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "912eac82_07e7aa3e",
+        "filename": "tools/warn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3564,
+      "author": {
+        "id": 1483218
+      },
+      "writtenOn": "2019-09-09T21:00:19Z",
+      "side": 1,
+      "message": "use\nif not \u0027warning: [JavaApiUsedByMainlineModule]\u0027 in line:\n    continue",
+      "range": {
+        "startLine": 3564,
+        "startChar": 4,
+        "endLine": 3564,
+        "endChar": 56
+      },
+      "revId": "6ef31891ba5c2a62adb7f03f0bc367e78442ac5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a950bcc_259e99fa",
+        "filename": "tools/warn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3578,
+      "author": {
+        "id": 1483218
+      },
+      "writtenOn": "2019-09-09T21:00:19Z",
+      "side": 1,
+      "message": "use dict to avoid check.",
+      "range": {
+        "startLine": 3575,
+        "startChar": 6,
+        "endLine": 3578,
+        "endChar": 46
+      },
+      "revId": "6ef31891ba5c2a62adb7f03f0bc367e78442ac5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
