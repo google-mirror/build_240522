@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f007afc_0962e40e",
+        "filename": "tools/fs_config/fs_config_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1365444
+      },
+      "writtenOn": "2019-09-10T09:01:05Z",
+      "side": 1,
+      "message": "The issue here is that this for loop runs once with skip_partition \u003d \"\" when self._all_partitions is itself \"\", causing unwanted skipping",
+      "revId": "5dcbe701cfc917b87c472decb52a0a85971a76a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
