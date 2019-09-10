@@ -44,6 +44,9 @@ test_tools := $(HOST_OUT_JAVA_LIBRARIES)/hosttestlib.jar \
 
 test_tools += $(test_suite_tools)
 
+# The JDK to package into the test suite zip file.  Always package the linux JDK.
+test_suite_jdk := $(ANDROID_JAVA_HOME)/../linux-x86/jdk.zip
+
 # Include host shared libraries
 host_shared_libs := $(call copy-many-files, $(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES))
 
@@ -53,15 +56,20 @@ $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
 $(compatibility_zip): PRIVATE_TOOLS := $(test_tools) $(test_suite_prebuilt_tools)
 $(compatibility_zip): PRIVATE_SUITE_NAME := $(test_suite_name)
 $(compatibility_zip): PRIVATE_DYNAMIC_CONFIG := $(test_suite_dynamic_config)
-$(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tools) $(test_suite_dynamic_config) $(SOONG_ZIP) $(host_shared_libs) | $(ADB) $(ACP)
+$(compatibility_zip): PRIVATE_JDK := $(test_suite_jdk)
+$(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tools) $(test_suite_dynamic_config) $(host_shared_libs) $(test_suite_jdk) $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP) | $(ADB) $(ACP)
 # Make dir structure
-	$(hide) mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
-	$(hide) echo $(BUILD_NUMBER_FROM_FILE) > $(PRIVATE_OUT_DIR)/tools/version.txt
+	mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
+	rm -f $@ $@.tmp $@.jdk
+	echo $(BUILD_NUMBER_FROM_FILE) > $(PRIVATE_OUT_DIR)/tools/version.txt
 # Copy tools
-	$(hide) cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
-	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
-	$(hide) find $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases | sort >$@.list
-	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
+	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
+	$(if $(PRIVATE_DYNAMIC_CONFIG),cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
+	find $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases | sort >$@.list
+	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list
+	$(ZIP2ZIP) -o $@.jdk -i $(PRIVATE_JDK) **/*:jdk/
+	$(MERGE_ZIPS) $@ $@.tmp $@.jdk
+	rm -f $@.tmp $@.jdk
 
 # Reset all input variables
 test_suite_name :=
@@ -70,4 +78,5 @@ test_suite_dynamic_config :=
 test_suite_readme :=
 test_suite_prebuilt_tools :=
 test_suite_tools :=
+test_suite_jdk :=
 host_shared_libs :=
