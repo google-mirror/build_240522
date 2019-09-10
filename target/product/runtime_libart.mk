@@ -75,12 +75,12 @@ endif
 ifeq (true,$(art_target_include_debug_build))
   # Module with both release and debug variants, as well as
   # additional tools.
-  TARGET_ART_APEX := $(DEBUG_ART_APEX)
-  APEX_TEST_MODULE := art-check-debug-apex-gen-fakebin
+  PRODUCT_ART_APEX := $(DEBUG_ART_APEX)
+  ART_APEX_TEST_MODULE := art-check-debug-apex-gen-fakebin
 else
   # Release module (without debug variants nor tools).
-  TARGET_ART_APEX := $(RELEASE_ART_APEX)
-  APEX_TEST_MODULE := art-check-release-apex-gen-fakebin
+  PRODUCT_ART_APEX := $(RELEASE_ART_APEX)
+  ART_APEX_TEST_MODULE := art-check-release-apex-gen-fakebin
 endif
 
 # Clear locally used variable.
