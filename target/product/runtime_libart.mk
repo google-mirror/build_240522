@@ -37,6 +37,56 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += com.android.runtime
 
 # ART APEX module.
+
+# The ART APEX comes in three flavors:
+# - the release module (`com.android.art.release`), containing
+#   only "release" artifacts;
+# - the debug module (`com.android.art.debug`), containing both
+#   "release" and "debug" artifacts, as well as additional tools;
+# - the testing module (`com.android.art.testing`), containing
+#   both "release" and "debug" artifacts, as well as additional tools
+#   and ART gtests).
+
+# Release ART APEX, included by default in "user" builds.
+RELEASE_ART_APEX := com.android.art.release
+# Debug ART APEX, included by default in "userdebug" and "eng"
+# builds and used in ART device benchmarking.
+DEBUG_ART_APEX := com.android.art.debug
+# Testing ART APEX, used in ART device testing.
+TESTING_ART_APEX := com.android.art.testing
+
+# The ART APEX module (`com.android.art`) is an "alias" for either the
+# release or the debug module. By default, "user" build variants contain
+# the release module, while "userdebug" and "eng" build variants contain
+# the debug module. However, if `PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD`
+# is defined, it overrides the previous logic:
+# - if `PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD` is set to `false`, the
+#   build will include the release module (whatever the build
+#   variant);
+# - if `PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD` is set to `true`, the
+#   build will include the debug module (whatever the build variant).
+
+art_target_include_debug_build := $(PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD)
+ifneq (false,$(art_target_include_debug_build))
+  ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+    art_target_include_debug_build := true
+  endif
+endif
+ifeq (true,$(art_target_include_debug_build))
+  # Module with both release and debug variants, as well as
+  # additional tools.
+  TARGET_ART_APEX := $(DEBUG_ART_APEX)
+  APEX_TEST_MODULE := art-check-debug-apex-gen-fakebin
+else
+  # Release module (without debug variants nor tools).
+  TARGET_ART_APEX := $(RELEASE_ART_APEX)
+  APEX_TEST_MODULE := art-check-release-apex-gen-fakebin
+endif
+
+# Clear locally used variable.
+art_target_include_debug_build :=
+
+# See art/Android.mk for the definition of the com.android.art module.
 PRODUCT_PACKAGES += com.android.art
 PRODUCT_HOST_PACKAGES += com.android.art
 

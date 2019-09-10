@@ -275,7 +275,9 @@ _product_single_value_vars += PRODUCT_SHIPPING_API_LEVEL
 _product_list_vars += VENDOR_PRODUCT_RESTRICT_VENDOR_FILES
 _product_list_vars += VENDOR_EXCEPTION_MODULES
 _product_list_vars += VENDOR_EXCEPTION_PATHS
-# Whether the product wants to ship libartd. For rules and meaning, see art/Android.mk.
+
+# Whether the product wants to ship libartd. For rules and meaning, see
+# build/make/target/product/runtime_libart.mk.
 _product_single_value_vars += PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD
 
 # Make this art variable visible to soong_config.mk.
