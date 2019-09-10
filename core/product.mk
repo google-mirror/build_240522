@@ -280,8 +280,11 @@ _product_list_vars += VENDOR_EXCEPTION_PATHS
 # build/make/target/product/runtime_libart.mk.
 _product_single_value_vars += PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD
 
-# Make this art variable visible to soong_config.mk.
+# Make these ART variables visible to soong_config.mk.
 _product_single_value_vars += PRODUCT_ART_USE_READ_BARRIER
+
+# Name of the ART APEX package.
+_product_single_value_vars += PRODUCT_ART_APEX
 
 # Add reserved headroom to a system image.
 _product_single_value_vars += PRODUCT_SYSTEM_HEADROOM
