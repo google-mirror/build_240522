@@ -250,6 +250,7 @@ UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
 TARGET_DIFFING_UNZIP_PATTERN = ['BOOT', 'RECOVERY', 'SYSTEM/*', 'VENDOR/*',
                                 'PRODUCT/*', 'SYSTEM_EXT/*', 'ODM/*']
 RETROFIT_DAP_UNZIP_PATTERN = ['OTA/super_*.img', AB_PARTITIONS]
+SECONDARY_IMAGES_SKIP_PARTITIONS = ['product', 'vendor']
 
 
 class BuildInfo(object):
@@ -1792,6 +1793,24 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
   Returns:
     The filename of the target-files.zip for generating secondary payload.
   """
+
+  def RemovePartitionsFromInfoFile(info_file, list_suffix=""):
+    output_list = []
+    with open(info_file) as f:
+      lines = f.read().splitlines()
+    for line in lines:
+      if not line.startswith("#") and '=' in line:
+        key, value = line.strip().split("=", 1)
+        if key == 'dynamic_partition_list' or key.endswith(list_suffix):
+          partitions = value.split()
+          partitions = [partition for partition in partitions if partition and
+                        partition not in SECONDARY_IMAGES_SKIP_PARTITIONS]
+          output_list.append('{}={}'.format(key, ' '.join(partitions)))
+          continue
+      output_list.append(line)
+    print(output_list)
+    return '\n'.join(output_list)
+
   target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
   target_zip = zipfile.ZipFile(target_file, 'w', allowZip64=True)
 
@@ -1814,7 +1833,22 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
       pass
 
     elif info.filename.startswith(('META/', 'IMAGES/', 'RADIO/')):
-      common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
+      # Remove the unnecessary partitions for secondary images from the
+      # ab_partitions file.
+      if info.filename == AB_PARTITIONS:
+        with open(unzipped_file) as f:
+          partition_list = f.read().splitlines()
+        partition_list = [partition for partition in partition_list if partition
+                          and partition not in SECONDARY_IMAGES_SKIP_PARTITIONS]
+        common.ZipWriteStr(target_zip, info.filename, '\n'.join(partition_list))
+      elif info.filename == 'META/misc_info.txt' or info.filename == \
+              DYNAMIC_PARTITION_INFO:
+        modified_info = RemovePartitionsFromInfoFile(
+            unzipped_file, list_suffix="partition_list")
+        common.ZipWriteStr(target_zip, info.filename, modified_info)
+      elif info.filename not in ['IMAGES/{}.img'.format(partition) for partition
+                                 in SECONDARY_IMAGES_SKIP_PARTITIONS]:
+        common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
 
   common.ZipClose(target_zip)
 
