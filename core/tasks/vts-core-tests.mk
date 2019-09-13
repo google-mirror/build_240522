@@ -14,6 +14,10 @@
 
 .PHONY: vts-core
 
+# Test XMLs, native executables, and packages will be placed in this
+# directory before creating the final VTS-Core distribution.
+#COMPATIBILITY_TESTCASES_OUT_vts-core := $(HOST_OUT)/vts-core/android-vts-core/testcases
+
 vts-core-zip := $(PRODUCT_OUT)/vts-core-tests.zip
 # Create an artifact to include a list of test config files in vts-core.
 vts-core-list-zip := $(PRODUCT_OUT)/vts-core_list.zip
@@ -44,6 +48,13 @@ $(vts-core-zip) : $(COMPATIBILITY.vts-core.FILES) $(my_host_shared_lib_for_vts_c
 	  $(PRIVATE_vts_core_list)
 
 vts-core: $(vts-core-zip)
-$(call dist-for-goals, vts-core, $(vts-core-zip) $(vts-core-list-zip) $(vts-core-configs-zip))
+
+test_suite_name := vts-core
+test_suite_tradefed := vts-core-tradefed
+test_suite_readme := test/suite_harness/tools/vts-core-tradefed/README
+include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
+vts-core: $(compatibility_zip)
+
+$(call dist-for-goals, vts-core, $(vts-core-zip) $(vts-core-list-zip) $(vts-core-configs-zip) $(compatibility_zip))
 
 tests: vts-core
