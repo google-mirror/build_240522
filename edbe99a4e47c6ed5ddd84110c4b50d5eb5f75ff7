@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4863d67_a8d33dc7",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-09-13T13:41:07Z",
+      "side": 1,
+      "message": "Each APEX is described twice here, but in different ways. Maybe join them?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "edbe99a4e47c6ed5ddd84110c4b50d5eb5f75ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
