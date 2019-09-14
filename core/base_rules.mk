@@ -586,7 +586,31 @@ my_test_data_pairs := $(strip $(foreach td,$(LOCAL_TEST_DATA), \
 
 my_installed_test_data := $(call copy-many-files,$(my_test_data_pairs))
 $(LOCAL_INSTALLED_MODULE): $(my_installed_test_data)
+endif
+endif
+endif
 
+###########################################################
+## Fuzzer data (corpus + dictionary).
+###########################################################
+my_fuzz_data_pairs :=
+my_installed_fuzz_data :=
+
+ifneq ($(filter NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
+ifneq ($(strip $(LOCAL_FUZZ_DATA)),)
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+$(call pretty-error,LOCAL_FUZZ_DATA may only be used from Soong (generally via. cc_fuzz))
+endif
+
+my_fuzz_data_pairs := $(strip $(foreach td,$(LOCAL_FUZZ_DATA), \
+    $(eval _file := $(call word-colon,2,$(td))) \
+    $(eval _src_base := $(call word-colon,1,$(td))) \
+    $(call append-path,$(_src_base),$(_file)):$(call append-path,$(my_module_path),$(_file))))
+
+my_installed_fuzz_data := $(call copy-many-files,$(my_fuzz_data_pairs))
+$(LOCAL_INSTALLED_MODULE): $(my_installed_fuzz_data)
 endif
 endif
 endif
@@ -795,11 +819,12 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 ALL_MODULES.$(my_register_name).INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
     $(LOCAL_INSTALLED_MODULE) $(my_init_rc_installed) $(my_installed_symlinks) \
-    $(my_installed_test_data) $(my_vintf_installed))
+    $(my_installed_test_data) $(my_vintf_installed) $(my_installed_fuzz_data))
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
     $(LOCAL_BUILT_MODULE):$(LOCAL_INSTALLED_MODULE) \
-    $(my_init_rc_pairs) $(my_test_data_pairs) $(my_vintf_pairs))
+    $(my_init_rc_pairs) $(my_test_data_pairs) $(my_vintf_pairs) \
+    $(my_fuzz_data_pairs))
 endif
 ifdef LOCAL_PICKUP_FILES
 # Files or directories ready to pick up by the build system
