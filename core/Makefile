@@ -865,6 +865,21 @@ $(WALL_WERROR):
 $(call dist-for-goals,droidcore,$(WALL_WERROR))
 
 # -----------------------------------------------------------------
+# C/C++ flag information for modules
+FLAG_TARGETS := $(addprefix $(PRODUCT_OUT)/module_cflags, \
+	$(addsuffix .txt, \
+	$(subst =,_,$(SOONG_MODULES_CFLAGS_TRACKED))))
+$(FLAG_TARGETS):
+	@rm -f $@
+	$(eval flag := $(patsubst $(PRODUCT_OUT)/module_cflags%.txt,%,$@))
+	echo "# Modules using $(flag)" >> $@
+	for m in $(sort $(SOONG_MODULES_CFLAGS$(flag))); do echo $$m >> $@; done
+	echo "# Modules not using $(flag)" >> $@
+	for m in $(sort $(SOONG_MODULES_CFLAGS_NOT$(flag))); do echo $$m >> $@; done
+
+$(call dist-for-goals,droidcore,$(FLAG_TARGETS))
+
+# -----------------------------------------------------------------
 # Modules missing profile files
 PGO_PROFILE_MISSING := $(PRODUCT_OUT)/pgo_profile_file_missing.txt
 $(PGO_PROFILE_MISSING):
