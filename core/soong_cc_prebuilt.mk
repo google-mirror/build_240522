@@ -205,6 +205,25 @@ ifeq ($(NATIVE_COVERAGE),true)
   endif
 endif
 
+###########################################################
+## Fuzzer data (corpus + dictionary).
+###########################################################
+my_fuzz_data_pairs :=
+my_installed_fuzz_data :=
+
+ifneq ($(strip $(LOCAL_FUZZ_DATA)),)
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+
+my_fuzz_data_pairs := $(strip $(foreach td,$(LOCAL_FUZZ_DATA), \
+    $(eval _file := $(call word-colon,2,$(td))) \
+    $(eval _src_base := $(call word-colon,1,$(td))) \
+    $(call append-path,$(_src_base),$(_file)):$(call append-path,$(my_module_path),$(_file))))
+
+my_installed_fuzz_data := $(call copy-many-files,$(my_fuzz_data_pairs))
+$(LOCAL_INSTALLED_MODULE): $(my_installed_fuzz_data)
+endif
+endif
+
 # A product may be configured to strip everything in some build variants.
 # We do the stripping as a post-install command so that LOCAL_BUILT_MODULE
 # is still with the symbols and we don't need to clean it (and relink) when

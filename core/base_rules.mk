@@ -586,7 +586,6 @@ my_test_data_pairs := $(strip $(foreach td,$(LOCAL_TEST_DATA), \
 
 my_installed_test_data := $(call copy-many-files,$(my_test_data_pairs))
 $(LOCAL_INSTALLED_MODULE): $(my_installed_test_data)
-
 endif
 endif
 endif
