@@ -666,6 +666,10 @@ $(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/system_ext)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/init.gsi.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/config/)
 
+# Clean old fuzz targets up.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/fuzz/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/fuzz/*)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
