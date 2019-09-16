@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d94390e7_91d3be99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-16T22:44:26Z",
+      "side": 1,
+      "message": "The whole point of a checkbuild is that it checks everything, making this conditional on PRODUCT_CHECK_ELF_FILES defeats that.",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "37e237aa712475dc725d3b16c00f5bdf9f838f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
