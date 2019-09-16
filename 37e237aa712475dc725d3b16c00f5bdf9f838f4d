@@ -22,6 +22,30 @@
       "revId": "37e237aa712475dc725d3b16c00f5bdf9f838f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e896433b_c083ddf4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-09-16T23:42:14Z",
+      "side": 1,
+      "message": "I am meeting Logan about this Wed, but hoping to gradually do this (e.g. with http://aosp/1115213). Hopefully some checks will get enabled globally and other checks which are hard to bring up might take a while before we can apply on all devices (if we every decide to do this).\n\nCould you approve this step in the process so we can stop regressions and gradually add checks globally?",
+      "parentUuid": "d94390e7_91d3be99",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "37e237aa712475dc725d3b16c00f5bdf9f838f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
