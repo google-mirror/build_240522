@@ -576,6 +576,22 @@ endif
 endif
 
 ###########################################################
+## Fuzz Targets
+###########################################################
+
+ifeq ($(LOCAL_IS_FUZZ_TARGET),true)
+ALL_FUZZ_TARGETS += $(LOCAL_MODULE)
+
+# Non-system (e.g. vendor) modules are installed to a subdirectory, and thus
+# should not be added as a root directory.
+ifneq ($(non_system_module),true)
+# Drop the trailing slash.
+root_dir := $(subst /ENDPATH,,$(dir $(my_module_path))ENDPATH)
+ALL_FUZZ_TARGET_ROOT_DIRS := $(sort $(ALL_FUZZ_TARGET_ROOT_DIRS) $(root_dir))
+endif
+endif
+
+###########################################################
 ## Compatibility suite files.
 ###########################################################
 ifdef LOCAL_COMPATIBILITY_SUITE

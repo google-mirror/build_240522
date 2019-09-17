@@ -1799,6 +1799,16 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+.PHONY: fuzz
+fuzz: $(ALL_FUZZ_TARGETS) $(SOONG_ZIP)
+	$(if $(call streq,$(SANITIZE_TARGET),), \
+		$(warning "Building device fuzz targets without sanitization (use SANITIZE_TARGET)."))
+	$(if $(call streq,$(SANITIZE_HOST),), \
+		$(warning "Building host fuzz targets without sanitization (use SANITIZE_HOST)."))
+	$(foreach _arch_path, $(ALL_FUZZ_TARGET_ROOT_DIRS), \
+		$(eval _arch := $(notdir $(_arch_path))) \
+		$(SOONG_ZIP) -o $(_arch_path)-package.zip -C $(_arch_path) -D $(_arch_path);)
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
