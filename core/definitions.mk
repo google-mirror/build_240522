@@ -108,6 +108,13 @@ ALL_VINTF_MANIFEST_FRAGMENTS_LIST:=
 # All tests that should be skipped in presubmit check.
 ALL_DISABLED_PRESUBMIT_TESTS :=
 
+# All fuzz targets present in the Android source tree.
+ALL_FUZZ_TARGETS :=
+
+# List of the output root directories for fuzz targets, one for each
+# architecture + (host | device) pair.
+ALL_FUZZ_TARGET_ROOT_DIRS :=
+
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################

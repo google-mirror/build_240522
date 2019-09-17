@@ -1799,6 +1799,25 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+define create-fuzz-package-target
+$(1): $(SOONG_ZIP)
+	$(SOONG_ZIP) -o $(1) -C $(2) -D $(2)
+	$(call dist-for-goals,fuzz,$(1))
+endef
+
+create-fuzz-package-targets := \
+$(if $(call streq,$(SANITIZE_TARGET),), \
+	$(warning "Building device fuzz targets without sanitization (use SANITIZE_TARGET).")) \
+$(if $(call streq,$(SANITIZE_HOST),), \
+	$(warning "Building host fuzz targets without sanitization (use SANITIZE_HOST).")) \
+$(foreach _dir_to_package, $(sort $(ALL_FUZZ_TARGET_ROOT_DIRS)), \
+	$(eval _package := $(_dir_to_package)-package.zip) \
+	$(eval $(call create-fuzz-package-target,$(_package),$(_dir_to_package))) \
+	$(_package))
+
+.PHONY: fuzz
+fuzz: $(ALL_FUZZ_TARGETS) $(create-fuzz-package-targets)
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)

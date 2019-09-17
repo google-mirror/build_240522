@@ -576,6 +576,22 @@ endif
 endif
 
 ###########################################################
+## Fuzz Targets
+###########################################################
+
+ifeq ($(LOCAL_IS_FUZZ_TARGET),true)
+ALL_FUZZ_TARGETS += $(LOCAL_MODULE)
+
+# Vendor modules are installed to a subdirectory, and thus should not be added
+# as a root directory.
+ifeq ($(LOCAL_USE_VNDK),)
+# Drop the trailing slash.
+root_dir := $(patsubst %/,%,$(dir $(my_module_path)))
+ALL_FUZZ_TARGET_ROOT_DIRS += $(root_dir)
+endif
+endif
+
+###########################################################
 ## Compatibility suite files.
 ###########################################################
 ifdef LOCAL_COMPATIBILITY_SUITE
