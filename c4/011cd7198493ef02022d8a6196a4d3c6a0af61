@@ -1,0 +1,7 @@
+Presubmit-Ready+1: Tao Bao <tbao@google.com>
+Code-Review+2: rvrolyk <rvrolyk@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Tue, 17 Sep 2019 18:30:44 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1123437
+Project: platform/build
+Branch: refs/heads/master
