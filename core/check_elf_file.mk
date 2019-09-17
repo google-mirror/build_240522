@@ -38,12 +38,15 @@ $(check_elf_files_stamp): $(my_prebuilt_src_file) $(my_check_elf_file_shared_lib
 	    $<
 	$(hide) touch $@
 
-ifneq ($(PRODUCT_CHECK_ELF_FILES)$(CHECK_ELF_FILES),)
 ifneq ($(strip $(LOCAL_CHECK_ELF_FILES)),false)
+ifneq ($(PRODUCT_CHECK_ELF_FILES)$(CHECK_ELF_FILES),)
+# Check this prebuilt ELF file if this module is installed into this target
 $(LOCAL_BUILT_MODULE): $(check_elf_files_stamp)
+endif  # PRODUCT_CHECK_ELF_FILES or CHECK_ELF_FILES
+
+# Always check this prebuilt ELF file if the make goal is check-elf-files
 check-elf-files: $(check_elf_files_stamp)
 endif  # LOCAL_CHECK_ELF_FILES
-endif  # PRODUCT_CHECK_ELF_FILES or CHECK_ELF_FILES
 
 endif  # SHARED_LIBRARIES, EXECUTABLES, NATIVE_TESTS
 endif  # !LOCAL_IS_HOST_MODULE
