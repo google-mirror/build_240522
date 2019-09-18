@@ -1856,7 +1856,7 @@ endif
 ifeq (,$(filter true, $(BOARD_USES_FULL_RECOVERY_IMAGE) $(BOARD_USES_RECOVERY_AS_BOOT) \
   $(BOARD_BUILD_SYSTEM_ROOT_IMAGE) $(BOARD_INCLUDE_RECOVERY_DTBO) $(BOARD_INCLUDE_RECOVERY_ACPIO)))
 # Named '.dat' so we don't attempt to use imgdiff for patching it.
-RECOVERY_RESOURCE_ZIP := $(TARGET_OUT)/etc/recovery-resource.dat
+RECOVERY_RESOURCE_ZIP := $(TARGET_OUT_VENDOR)/etc/recovery-resource.dat
 else
 RECOVERY_RESOURCE_ZIP :=
 endif
@@ -2217,11 +2217,18 @@ PDK_FUSION_SYSIMG_FILES := \
     $(filter-out $(foreach p,$(overridden_packages),$(p) %/$(p).apk), \
         $(ALL_PDK_FUSION_FILES))
 
+INTERNAL_SYSTEMIMAGE_FILES := $(ALL_GENERATED_SOURCES)
+INTERNAL_SYSTEMIMAGE_FILES += $(ALL_DEFAULT_INSTALLED_MODULES)
+INTERNAL_SYSTEMIMAGE_FILES += $(PDK_FUSION_SYSIMG_FILES)
+# If the board uses a vendor image, the recovery resources will be on the
+# vendor image. Otherwise, they'll be on the system image in the /vendor
+# directory. The following code handles the system image case.
+ifndef BOARD_USES_VENDORIMAGE
+INTERNAL_SYSTEMIMAGE_FILES += $(RECOVERY_RESOURCE_ZIP)
+endif
+
 INTERNAL_SYSTEMIMAGE_FILES := $(sort $(filter $(TARGET_OUT)/%, \
-    $(ALL_GENERATED_SOURCES) \
-    $(ALL_DEFAULT_INSTALLED_MODULES) \
-    $(PDK_FUSION_SYSIMG_FILES) \
-    $(RECOVERY_RESOURCE_ZIP)) \
+    $(INTERNAL_SYSTEMIMAGE_FILES)) \
     $(PDK_FUSION_SYMLINK_STAMP))
 
 FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
@@ -2689,10 +2696,18 @@ endif # BUILDING_SYSTEM_OTHER_IMAGE
 # -----------------------------------------------------------------
 # vendor partition image
 ifdef BUILDING_VENDOR_IMAGE
+
+INTERNAL_VENDORIMAGE_FILES := $(ALL_DEFAULT_INSTALLED_MODULES)
+INTERNAL_VENDORIMAGE_FILES += $(ALL_PDK_FUSION_FILES)
+# If the board uses a vendor image, the recovery resources will be on the
+# vendor image. Otherwise, they'll be on the system image in the /vendor
+# directory. The following code handles the vendor image case.
+ifdef BOARD_USES_VENDORIMAGE
+INTERNAL_VENDORIMAGE_FILES += $(RECOVERY_RESOURCE_ZIP)
+endif
+
 INTERNAL_VENDORIMAGE_FILES := \
-    $(filter $(TARGET_OUT_VENDOR)/%,\
-      $(ALL_DEFAULT_INSTALLED_MODULES)\
-      $(ALL_PDK_FUSION_FILES)) \
+    $(filter $(TARGET_OUT_VENDOR)/%, $(INTERNAL_VENDORIMAGE_FILES)) \
     $(PDK_FUSION_SYMLINK_STAMP)
 
 # Final Vendor VINTF manifest including fragments. This is not assembled
@@ -3806,6 +3821,9 @@ endif
 ifeq ($(BOARD_USES_FULL_RECOVERY_IMAGE),true)
 	$(hide) echo "full_recovery_image=true" >> $@
 endif
+ifdef BOARD_USES_VENDORIMAGE
+	$(hide) echo "board_uses_vendorimage=true" >> $@
+endif
 ifeq ($(BOARD_AVB_ENABLE),true)
 	$(hide) echo "avb_enable=true" >> $@
 	$(hide) echo "avb_vbmeta_key_path=$(BOARD_AVB_KEY_PATH)" >> $@
@@ -4184,10 +4202,8 @@ ifneq ($(PRODUCT_ODM_BASE_FS_PATH),)
 	  $(zip_root)/META/$(notdir $(PRODUCT_ODM_BASE_FS_PATH))
 endif
 ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
-ifdef BUILDING_SYSTEM_IMAGE
 	$(hide) PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    $(MAKE_RECOVERY_PATCH) $(zip_root) $(zip_root)
-endif # BUILDING_SYSTEM_IMAGE
 endif
 ifeq ($(AB_OTA_UPDATER),true)
 	@# When using the A/B updater, include the updater config files in the zip.
