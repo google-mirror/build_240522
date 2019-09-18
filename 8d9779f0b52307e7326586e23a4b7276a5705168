@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a51cc86e_26f644b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-18T02:01:15Z",
+      "side": 1,
+      "message": "nit: applypatch",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 11
+      },
+      "revId": "8d9779f0b52307e7326586e23a4b7276a5705168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef41c4e9_c24c2616",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-18T02:01:15Z",
+      "side": 1,
+      "message": "I think this can be covered automatically.\n\nTARGET_OUT_VENDOR :\u003d $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR), where TARGET_COPY_OUT_VENDOR will be either vendor or system/vendor. INTERNAL_SYSTEMIMAGE_FILES will pick it up correctly.\nhttps://android-review.googlesource.com/c/platform/build/+/1122891/3/core/board_config.mk#369",
+      "range": {
+        "startLine": 2223,
+        "startChar": 0,
+        "endLine": 2225,
+        "endChar": 62
+      },
+      "revId": "8d9779f0b52307e7326586e23a4b7276a5705168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "872c80e6_37367fb3",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 3828,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-18T02:01:15Z",
+      "side": 1,
+      "message": "don\u0027t need to set false explicitly (otherwise we have to check three values)",
+      "range": {
+        "startLine": 3828,
+        "startChar": 1,
+        "endLine": 3828,
+        "endChar": 50
+      },
+      "revId": "8d9779f0b52307e7326586e23a4b7276a5705168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "439de72b_9f941778",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-18T02:01:15Z",
+      "side": 1,
+      "message": "zip entry should always use \u0027/\u0027",
+      "range": {
+        "startLine": 737,
+        "startChar": 10,
+        "endLine": 737,
+        "endChar": 22
+      },
+      "revId": "8d9779f0b52307e7326586e23a4b7276a5705168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77b6429_6215c64a",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-18T02:01:15Z",
+      "side": 1,
+      "message": "Will require matching changes",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 33
+      },
+      "revId": "8d9779f0b52307e7326586e23a4b7276a5705168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
