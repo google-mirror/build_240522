@@ -726,10 +726,19 @@ def _WriteRecoveryImageToBoot(script, output_zip):
     script.WriteRawImage("/boot", "recovery.img")
 
 
-def HasRecoveryPatch(target_files_zip):
+def HasRecoveryPatch(target_files_zip, info_dict):
+  board_uses_vendorimage = info_dict.get("board_uses_vendorimage") == "true"
+
+  if board_uses_vendorimage:
+    target_files_dir = "VENDOR"
+  else:
+    target_files_dir = "SYSTEM/vendor"
+
+  patch = os.path.join(target_files_dir, "recovery-from-boot.p")
+  img = os.path.join(target_files_dir, "etc/recovery.img")
+
   namelist = [name for name in target_files_zip.namelist()]
-  return ("SYSTEM/recovery-from-boot.p" in namelist or
-          "SYSTEM/etc/recovery.img" in namelist)
+  return (patch in namelist or img in namelist)
 
 
 def HasPartition(target_files_zip, partition):
@@ -920,7 +929,7 @@ def WriteFullOTAPackage(input_zip, output_file):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip)
+  assert HasRecoveryPatch(input_zip, info_dict=OPTIONS.info_dict)
 
   # Assertions (e.g. downgrade check, device properties check).
   ts = target_info.GetBuildProp("ro.build.date.utc")
