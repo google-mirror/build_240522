@@ -250,7 +250,12 @@ UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
 TARGET_DIFFING_UNZIP_PATTERN = ['BOOT', 'RECOVERY', 'SYSTEM/*', 'VENDOR/*',
                                 'PRODUCT/*', 'SYSTEM_EXT/*', 'ODM/*']
 RETROFIT_DAP_UNZIP_PATTERN = ['OTA/super_*.img', AB_PARTITIONS]
-SECONDARY_IMAGES_SKIP_PARTITIONS = ['odm', 'product', 'system_ext', 'vendor']
+
+# Images to be excluded from secondary payload. We essentially only keep
+# 'system_other' and bootloader partitions.
+SECONDARY_IMAGES_SKIP_PARTITIONS = [
+    'boot', 'dtbo', 'modem', 'odm', 'product', 'radio', 'recovery',
+    'system_ext', 'vbmeta', 'vbmeta_system', 'vbmeta_vendor', 'vendor']
 
 
 class BuildInfo(object):
@@ -1856,10 +1861,13 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
     elif info.filename in ('IMAGES/system.img',
                            'IMAGES/system.map'):
       pass
-    # Images like vendor and product are not needed in the secondary payload.
-    elif info.filename in ['IMAGES/{}.img'.format(partition) for partition in
-                           SECONDARY_IMAGES_SKIP_PARTITIONS]:
-      pass
+
+    # Copy images that are not in SECONDARY_IMAGES_SKIP_PARTITIONS.
+    elif info.filename.startswith(('IMAGES/', 'RADIO/')):
+      image_name = os.path.basename(info.filename)
+      if image_name not in ['{}.img'.format(partition) for partition in
+                            SECONDARY_IMAGES_SKIP_PARTITIONS]:
+        common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
 
     # Skip copying the postinstall config if requested.
     elif skip_postinstall and info.filename == POSTINSTALL_CONFIG:
@@ -1881,8 +1889,6 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
         common.ZipWriteStr(target_zip, info.filename, modified_info)
       else:
         common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
-    elif info.filename.startswith(('IMAGES/', 'RADIO/')):
-      common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
 
   common.ZipClose(target_zip)
 
