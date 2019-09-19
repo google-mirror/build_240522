@@ -35,7 +35,7 @@ endif
 # Auto generating test config file for native test
 $(autogen_test_config_file): PRIVATE_MODULE_NAME := $(LOCAL_MODULE)
 $(autogen_test_config_file) : $(autogen_test_config_template)
-	@echo "Auto generating test config $(notdir $@)"
+	echo "Auto generating test config $(notdir $@)"
 	sed 's&{MODULE}&$(PRIVATE_MODULE_NAME)&g;s&{EXTRA_CONFIGS}&&g' $< > $@
 my_auto_generate_config := true
 else
@@ -46,8 +46,8 @@ $(autogen_test_config_file): PRIVATE_TEST_CONFIG_ANDROID_MANIFEST := $(full_andr
 $(autogen_test_config_file): PRIVATE_EMPTY_TEST_CONFIG := $(EMPTY_TEST_CONFIG)
 $(autogen_test_config_file): PRIVATE_TEMPLATE := $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE)
 $(autogen_test_config_file) : $(full_android_manifest) $(EMPTY_TEST_CONFIG) $(INSTRUMENTATION_TEST_CONFIG_TEMPLATE) $(AUTOGEN_TEST_CONFIG_SCRIPT)
-	@echo "Auto generating test config $(notdir $@)"
-	@rm -f $@
+	echo "Auto generating test config $(notdir $@)"
+	rm -f $@
 	$(PRIVATE_AUTOGEN_TEST_CONFIG_SCRIPT) $@ $(PRIVATE_TEST_CONFIG_ANDROID_MANIFEST) $(PRIVATE_EMPTY_TEST_CONFIG) $(PRIVATE_TEMPLATE)
 my_auto_generate_config := true
 endif # ifneq (,$(full_android_manifest))

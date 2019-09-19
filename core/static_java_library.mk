@@ -123,7 +123,7 @@ endif
 import_proguard_flag_files := $(strip $(foreach l,$(LOCAL_STATIC_ANDROID_LIBRARIES) $(LOCAL_STATIC_JAVA_AAR_LIBRARIES),\
     $(call intermediates-dir-for,JAVA_LIBRARIES,$(l),,COMMON)/export_proguard_flags))
 $(intermediates.COMMON)/export_proguard_flags: $(import_proguard_flag_files) $(addprefix $(LOCAL_PATH)/,$(LOCAL_EXPORT_PROGUARD_FLAG_FILES))
-	@echo "Export proguard flags: $@"
+	echo "Export proguard flags: $@"
 	rm -f $@
 	touch $@
 	for f in $+; do \
@@ -198,7 +198,7 @@ $(built_aar): PRIVATE_RESOURCE_DIR := $(LOCAL_RESOURCE_DIR)
 $(built_aar): PRIVATE_R_TXT := $(intermediates.COMMON)/R.txt
 $(built_aar): $(JAR_ARGS)
 $(built_aar) : $(aar_classes_jar) $(full_android_manifest) $(intermediates.COMMON)/R.txt
-	@echo "target AAR:  $(PRIVATE_MODULE) ($@)"
+	echo "target AAR:  $(PRIVATE_MODULE) ($@)"
 	rm -rf $(dir $@)aar && mkdir -p $(dir $@)aar/res
 	cp $(PRIVATE_ANDROID_MANIFEST) $(dir $@)aar/AndroidManifest.xml
 	cp $(PRIVATE_CLASSES_JAR) $(dir $@)aar/classes.jar

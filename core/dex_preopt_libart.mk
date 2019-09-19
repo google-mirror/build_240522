@@ -15,8 +15,8 @@ my_built_vdex_dir := $(dir $(call word-colon,1,$(firstword $(my_vdex_copy_pairs)
 my_installed_vdex_dir := $(PRODUCT_OUT)$(dir $(call word-colon,2,$(firstword $(my_vdex_copy_pairs))))
 
 $(my_installed): $(my_installed_vdex_dir)% : $(my_built_vdex_dir)%
-	@echo "Install: $@"
-	@rm -f $@
+	echo "Install: $@"
+	rm -f $@
 	$(copy-file-to-target)
 	mkdir -p $(dir $@)/$(TARGET_ARCH)
 	ln -sfn ../$(notdir $@) $(dir $@)/$(TARGET_ARCH)

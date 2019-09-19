@@ -83,10 +83,10 @@ $(vndk_snapshot_zip): private-copy-intermediates = \
   ))
 
 $(vndk_snapshot_zip): $(SOONG_ZIP)
-	@echo 'Generating VNDK snapshot: $@'
-	@rm -f $@
-	@rm -rf $(PRIVATE_VNDK_SNAPSHOT_OUT)
-	@mkdir -p $(PRIVATE_VNDK_SNAPSHOT_OUT)
+	echo 'Generating VNDK snapshot: $@'
+	rm -f $@
+	rm -rf $(PRIVATE_VNDK_SNAPSHOT_OUT)
+	mkdir -p $(PRIVATE_VNDK_SNAPSHOT_OUT)
 	$(call private-copy-intermediates, \
 		$(PRIVATE_CONFIGS_OUT),$(PRIVATE_CONFIGS_INTERMEDIATES))
 	$(SOONG_ZIP) -o $@ -C $(PRIVATE_VNDK_SNAPSHOT_OUT) -D $(PRIVATE_VNDK_SNAPSHOT_OUT) \

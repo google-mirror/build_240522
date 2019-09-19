@@ -390,7 +390,7 @@ ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS) $(full
 $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS_FILES := $(exported_sdk_libs_files)
 $(my_exported_sdk_libs_file): PRIVATE_SDK_LIBS := $(sort $(LOCAL_SDK_LIBRARIES))
 $(my_exported_sdk_libs_file): $(exported_sdk_libs_files)
-	@echo "Export SDK libs $@"
+	echo "Export SDK libs $@"
 	mkdir -p $(dir $@) && rm -f $@ $@.temp
 	$(if $(PRIVATE_SDK_LIBS),\
 		echo $(PRIVATE_SDK_LIBS) | tr ' ' '\n' > $@.temp,\

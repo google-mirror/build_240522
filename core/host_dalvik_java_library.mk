@@ -122,7 +122,7 @@ $(full_classes_turbine_jar): \
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_header_jarjar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_header_jarjar): $(full_classes_turbine_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo Header JarJar: $@
+	echo Header JarJar: $@
 	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_header_jarjar := $(full_classes_turbine_jar)
@@ -146,7 +146,7 @@ $(full_classes_combined_jar): $(full_classes_compiled_jar) \
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_jarjar_jar): $(full_classes_combined_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo JarJar: $@
+	echo JarJar: $@
 	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_jarjar_jar := $(full_classes_combined_jar)
@@ -158,7 +158,7 @@ ifeq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
 # No dex; all we want are the .class files with resources.
 $(LOCAL_BUILT_MODULE) : $(java_resource_sources)
 $(LOCAL_BUILT_MODULE) : $(full_classes_jar)
-	@echo "host Static Jar: $(PRIVATE_MODULE) ($@)"
+	echo "host Static Jar: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 
 else # !LOCAL_IS_STATIC_JAVA_LIBRARY
@@ -171,7 +171,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE := $(built_dex)
 $(LOCAL_BUILT_MODULE): PRIVATE_SOURCE_ARCHIVE := $(full_classes_jarjar_jar)
 $(LOCAL_BUILT_MODULE): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
 $(LOCAL_BUILT_MODULE): $(built_dex) $(java_resource_sources)
-	@echo "Host Jar: $(PRIVATE_MODULE) ($@)"
+	echo "Host Jar: $(PRIVATE_MODULE) ($@)"
 	rm -rf $@.parts
 	mkdir -p $@.parts
 	$(call create-dex-jar,$@.parts/dex.zip,$(PRIVATE_DEX_FILE))

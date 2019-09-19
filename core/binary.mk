@@ -556,7 +556,7 @@ $(my_generated_sources): PRIVATE_MODULE := $(my_register_name)
 my_gen_sources_copy := $(patsubst $(generated_sources_dir)/%,$(intermediates)/%,$(filter $(generated_sources_dir)/%,$(my_generated_sources)))
 
 $(my_gen_sources_copy): $(intermediates)/% : $(generated_sources_dir)/%
-	@echo "Copy: $@"
+	echo "Copy: $@"
 	$(copy-file-to-target)
 
 my_generated_sources := $(patsubst $(generated_sources_dir)/%,$(intermediates)/%,$(my_generated_sources))
@@ -642,7 +642,7 @@ $(call track-src-file-gen,$(renderscript_sources),$(rs_generated_cpps))
 
 # This is just a dummy rule to make sure gmake doesn't skip updating the dependents.
 $(rs_generated_cpps) : $(RenderScript_file_stamp)
-	@echo "Updated RS generated cpp file $@."
+	echo "Updated RS generated cpp file $@."
 	touch $@
 
 my_c_includes += $(renderscript_intermediate)
@@ -703,7 +703,7 @@ proto_intermediate_dir := $(intermediates)/proto
 proto_intermediate_cpps := $(patsubst $(proto_gen_dir)/%,$(proto_intermediate_dir)/%,\
     $(proto_generated_cpps))
 $(proto_intermediate_cpps) : $(proto_intermediate_dir)/% : $(proto_gen_dir)/%
-	@echo "Copy: $@"
+	echo "Copy: $@"
 	$(copy-file-to-target)
 	cp $(basename $<).h $(basename $@).h
 $(call track-src-file-gen,$(proto_sources),$(proto_intermediate_cpps))

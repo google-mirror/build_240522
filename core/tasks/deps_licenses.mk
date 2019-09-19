@@ -54,6 +54,6 @@ endef
 
 .PHONY: deps-license
 deps-license:
-	@$(call print-deps-license)
+	$(call print-deps-license)
 
 endif

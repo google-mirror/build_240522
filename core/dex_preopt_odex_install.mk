@@ -249,7 +249,7 @@ ifdef LOCAL_DEX_PREOPT
   $(my_dexpreopt_config): PRIVATE_MODULE := $(LOCAL_MODULE)
   $(my_dexpreopt_config): PRIVATE_CONTENTS := $(json_contents)
   $(my_dexpreopt_config):
-	@echo "$(PRIVATE_MODULE) dexpreopt.config"
+	echo "$(PRIVATE_MODULE) dexpreopt.config"
 	echo -e -n '$(subst $(newline),\n,$(subst ','\'',$(subst \,\\,$(PRIVATE_CONTENTS))))' > $@
 
   .KATI_RESTAT: $(my_dexpreopt_script) $(my_strip_script)
@@ -260,7 +260,7 @@ ifdef LOCAL_DEX_PREOPT
   $(my_dexpreopt_script): .KATI_IMPLICIT_OUTPUTS := $(my_strip_script)
   $(my_dexpreopt_script): $(DEXPREOPT_GEN)
   $(my_dexpreopt_script): $(my_dexpreopt_config) $(DEX_PREOPT_CONFIG_FOR_MAKE)
-	@echo "$(PRIVATE_MODULE) dexpreopt gen"
+	echo "$(PRIVATE_MODULE) dexpreopt gen"
 	$(DEXPREOPT_GEN) -global $(PRIVATE_GLOBAL_CONFIG) -module $(PRIVATE_MODULE_CONFIG) \
 	-dexpreopt_script $@ -strip_script $(PRIVATE_STRIP_SCRIPT) \
 	-out_dir $(OUT_DIR)
@@ -280,7 +280,7 @@ ifdef LOCAL_DEX_PREOPT
   $(my_dexpreopt_zip): PRIVATE_DEX := $(my_dex_jar)
   $(my_dexpreopt_zip): PRIVATE_SCRIPT := $(my_dexpreopt_script)
   $(my_dexpreopt_zip): $(my_dexpreopt_script)
-	@echo "$(PRIVATE_MODULE) dexpreopt"
+	echo "$(PRIVATE_MODULE) dexpreopt"
 	bash $(PRIVATE_SCRIPT) $(PRIVATE_DEX) $@
 
   ifdef LOCAL_POST_INSTALL_CMD

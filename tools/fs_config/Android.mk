@@ -94,7 +94,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_PARTITION_LIST := $(fs_config_generate_extra_partition_list)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -119,7 +119,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_PARTITION_LIST := $(fs_config_generate_extra_partition_list)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -145,7 +145,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -169,7 +169,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -196,7 +196,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -220,7 +220,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -247,7 +247,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -271,7 +271,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -298,7 +298,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -322,7 +322,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -348,7 +348,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
@@ -372,7 +372,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
 $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$< fsconfig \
 	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
 	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \

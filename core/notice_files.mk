@@ -96,7 +96,7 @@ installed_notice_file := $($(my_prefix)OUT_NOTICE_FILES)/src/$(module_installed_
 $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filename)
 
 $(installed_notice_file): $(notice_file)
-	@echo Notice file: $< -- $@
+	echo Notice file: $< -- $@
 	mkdir -p $(dir $@)
 	cat $< > $@
 

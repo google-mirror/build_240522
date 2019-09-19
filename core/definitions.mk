@@ -1905,7 +1905,7 @@ endef
 # $(2): the output file
 define aapt2-compile-one-resource-file-rule
 $(2) : $(1) $(AAPT2)
-	@echo "AAPT2 compile $$@ <- $$<"
+	echo "AAPT2 compile $$@ <- $$<"
 	$$(call aapt2-compile-one-resource-file)
 endef
 
@@ -2130,7 +2130,7 @@ ifeq (,$(TARGET_BUILD_APPS))
 define _transform-dex-to-toc
 $1/classes.dex.toc: PRIVATE_INPUT_DEX_FILES := $1/classes*.dex
 $1/classes.dex.toc: $1/classes.dex $(DEXDUMP)
-	@echo Generating TOC: $$@
+	echo Generating TOC: $$@
 	ANDROID_LOG_TAGS="*:e" $(DEXDUMP) -l xml $$(PRIVATE_INPUT_DEX_FILES) > $$@.tmp
 	$$(call commit-change-for-toc,$$@)
 endef
@@ -2389,7 +2389,7 @@ endef
 # $(2): destination header
 define copy-one-header
 $(2): $(1)
-	@echo "Header: $$@"
+	echo "Header: $$@"
 	$$(copy-file-to-new-target-with-cp)
 endef
 
@@ -2398,13 +2398,13 @@ endef
 # $(2): destination file
 define copy-one-file
 $(2): $(1)
-	@echo "Copy: $$@"
+	echo "Copy: $$@"
 	$$(copy-file-to-target)
 endef
 
 define copy-and-uncompress-dexs
 $(2): $(1) $(ZIPALIGN) $(ZIP2ZIP)
-	@echo "Uncompress dexs in: $$@"
+	echo "Uncompress dexs in: $$@"
 	$$(copy-file-to-target)
 	$$(uncompress-dexs)
 	$$(align-package)
@@ -2468,7 +2468,7 @@ $(2): \
 else
 $(2): $(1)
 endif
-	@echo "Copy init script: $$@"
+	echo "Copy init script: $$@"
 	$$(copy-file-to-target)
 endef
 
@@ -2489,7 +2489,7 @@ endef
 # $(2): destination file, must end with .xml.
 define copy-xml-file-checked
 $(2): $(1) $(XMLLINT)
-	@echo "Copy xml: $$@"
+	echo "Copy xml: $$@"
 	$(XMLLINT) $$< >/dev/null  # Don't print the xml file to stdout.
 	$$(copy-file-to-target)
 endef
@@ -2511,7 +2511,7 @@ endef
 # $(2): destination file
 define copy-vintf-manifest-checked
 $(2): $(1) $(HOST_OUT_EXECUTABLES)/assemble_vintf
-	@echo "Copy xml: $$@"
+	echo "Copy xml: $$@"
 	$(HOST_OUT_EXECUTABLES)/assemble_vintf -i $$< >/dev/null  # Don't print the xml file to stdout.
 	$$(copy-file-to-target)
 endef
@@ -2615,9 +2615,9 @@ endef
 # the timestamp, so the file must exist
 define _symlink-file
 $(3): | $(1)
-	@echo "Symlink: $$@ -> $(2)"
-	@mkdir -p $(dir $$@)
-	@rm -rf $$@
+	echo "Symlink: $$@ -> $(2)"
+	mkdir -p $(dir $$@)
+	rm -rf $$@
 	ln -sf $(2) $$@
 endef
 
@@ -2627,7 +2627,7 @@ endef
 # $(3): LOCAL_STRIP_DEX, if non-empty then strip classes*.dex
 define dexpreopt-copy-jar
 $(2): $(1)
-	@echo "Copy: $$@"
+	echo "Copy: $$@"
 	$$(copy-file-to-target)
 	$(if $(3),$$(call dexpreopt-remove-classes.dex,$$@))
 endef
@@ -2763,7 +2763,7 @@ endef
 #    $(9)  additional dependencies
 define check-api
 $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/$(strip $(1))-timestamp: $(2) $(3) $(4) $(APICHECK) $(9)
-	@echo "Checking API:" $(1)
+	echo "Checking API:" $(1)
 	( $(APICHECK_COMMAND) --check-api-files $(6) $(2) $(3) $(4) $(5) || ( $(7) ; exit 38 ) )
 	mkdir -p $$(dir $$@)
 	touch $$@
@@ -3160,7 +3160,7 @@ include $(BUILD_SYSTEM)/distdir.mk
 #SRCS = foo.c bar.c ...
 
 #%.o : %.c
-#	@$(MAKEDEPEND); \
+#	$(MAKEDEPEND); \
 #	  cp $(df).d $(df).P; \
 #	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 #	      -e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P; \
@@ -3172,7 +3172,7 @@ include $(BUILD_SYSTEM)/distdir.mk
 
 #%.o : %.c
 #	$(COMPILE.c) -MD -o $@ $<
-#	@cp $*.d $*.P; \
+#	cp $*.d $*.P; \
 #	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 #	      -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
 #	  rm -f $*.d

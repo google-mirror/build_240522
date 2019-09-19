@@ -4,8 +4,8 @@ LOCAL_PATH:= $(call my-dir)
 # Create the list of vndk libraries from the source code.
 INTERNAL_VNDK_LIB_LIST := $(call intermediates-dir-for,PACKAGING,vndk)/libs.txt
 $(INTERNAL_VNDK_LIB_LIST):
-	@echo "Generate: $@"
-	@mkdir -p $(dir $@)
+	echo "Generate: $@"
+	mkdir -p $(dir $@)
 	echo -n > $@
 	$(foreach lib, $(filter-out libclang_rt.%,$(LLNDK_LIBRARIES)), \
 	  echo LLNDK: $(lib).so >> $@;)
@@ -83,9 +83,9 @@ include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): PRIVATE_INTERNAL_VNDK_LIB_LIST := $(INTERNAL_VNDK_LIB_LIST)
 $(LOCAL_BUILT_MODULE): PRIVATE_LATEST_VNDK_LIB_LIST := $(LATEST_VNDK_LIB_LIST)
 $(LOCAL_BUILT_MODULE):
-	@echo "Generate: $@"
-	@mkdir -p $(dir $@)
-	@rm -f $@
+	echo "Generate: $@"
+	mkdir -p $(dir $@)
+	rm -f $@
 	echo "#!/bin/bash" > $@
 ifeq (REL,$(PLATFORM_VERSION_CODENAME))
 	echo "echo Updating VNDK library list is NOT allowed in API locked branches." >> $@; \
@@ -99,7 +99,7 @@ else
 	        echo "cp $(PRIVATE_INTERNAL_VNDK_LIB_LIST) $(PRIVATE_LATEST_VNDK_LIB_LIST)" >> $@; \
 	        echo "echo $(PRIVATE_LATEST_VNDK_LIB_LIST) updated." >> $@
 endif
-	@chmod a+x $@
+	chmod a+x $@
 
 #####################################################################
 # Check that all ABI reference dumps have corresponding NDK/VNDK

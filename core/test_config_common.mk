@@ -40,7 +40,7 @@ my_test_config_file := $(dir $(LOCAL_BUILT_MODULE))AndroidTest.xml
 
 $(my_test_config_file) : PRIVATE_test_config_options := $(LOCAL_TEST_CONFIG_OPTIONS)
 $(my_test_config_file) : $(my_base_test_config_file)
-	@echo "Create $(notdir $@) with options: $(PRIVATE_test_config_options)."
+	echo "Create $(notdir $@) with options: $(PRIVATE_test_config_options)."
 	$(eval _option_xml := \
 		$(foreach option,$(PRIVATE_test_config_options), \
 			$(eval p := $(subst :,$(space),$(option))) \

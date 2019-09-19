@@ -31,7 +31,7 @@ $(stamp): PRIVATE_BOOT_JARS := $(built_boot_jars)
 $(stamp): PRIVATE_SCRIPT := $(script)
 $(stamp): PRIVATE_WHITELIST := $(whitelist_file)
 $(stamp) : $(built_boot_jars) $(script) $(whitelist_file)
-	@echo "Check package name for $(PRIVATE_BOOT_JARS)"
+	echo "Check package name for $(PRIVATE_BOOT_JARS)"
 	$(PRIVATE_SCRIPT) $(PRIVATE_WHITELIST) $(PRIVATE_BOOT_JARS)
 	mkdir -p $(dir $@) && touch $@
 

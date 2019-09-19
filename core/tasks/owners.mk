@@ -22,7 +22,7 @@ owners := $(file <$(owners_list))
 $(owners_zip) : PRIVATE_owners := $(subst $(newline),\n,$(owners))
 
 $(owners_zip) : $(owners) $(SOONG_ZIP)
-	@echo "Building artifact to include OWNERS files."
+	echo "Building artifact to include OWNERS files."
 	rm -rf $@
 	echo -e "$(PRIVATE_owners)" > $@.list
 	$(SOONG_ZIP) -o $@ -C . -l $@.list

@@ -62,14 +62,14 @@ ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
   my_res_package := $(intermediates.COMMON)/package-res.apk
 
   $(my_res_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
-	@echo "Copy: $@"
+	echo "Copy: $@"
 	$(copy-file-to-target)
 
   $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_res_package))
 
   my_proguard_flags := $(intermediates.COMMON)/export_proguard_flags
   $(my_proguard_flags): $(LOCAL_SOONG_EXPORT_PROGUARD_FLAGS)
-	@echo "Export proguard flags: $@"
+	echo "Export proguard flags: $@"
 	rm -f $@
 	touch $@
 	for f in $+; do \
@@ -166,7 +166,7 @@ endif # !LOCAL_IS_HOST_MODULE
 my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
 $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
 $(my_exported_sdk_libs_file):
-	@echo "Export SDK libs $@"
+	echo "Export SDK libs $@"
 	mkdir -p $(dir $@) && rm -f $@
 	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
 		echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\

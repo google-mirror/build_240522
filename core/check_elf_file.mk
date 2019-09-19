@@ -25,7 +25,7 @@ $(check_elf_files_stamp): PRIVATE_ALLOW_UNDEFINED_SYMBOLS := $(LOCAL_ALLOW_UNDEF
 # added by `resolve-shared-libs-for-elf-file-check` from `core/main.mk`.
 $(check_elf_files_stamp): PRIVATE_SHARED_LIBRARY_FILES := $(my_check_elf_file_shared_lib_files)
 $(check_elf_files_stamp): $(my_prebuilt_src_file) $(my_check_elf_file_shared_lib_files) $(CHECK_ELF_FILE) $(LLVM_READOBJ)
-	@echo Check prebuilt ELF binary: $<
+	echo Check prebuilt ELF binary: $<
 	mkdir -p $(dir $@)
 	rm -f $@
 	$(CHECK_ELF_FILE) \

@@ -42,7 +42,7 @@ ifneq ($(my_generated_res_dirs),)
 my_generated_resources_flata := $(my_compiled_res_base_dir)/gen_res.flata
 $(my_generated_resources_flata): PRIVATE_SOURCE_RES_DIRS := $(my_generated_res_dirs)
 $(my_generated_resources_flata) : $(my_generated_res_dirs_deps) $(AAPT2)
-	@echo "AAPT2 compile $@ <- $(PRIVATE_SOURCE_RES_DIRS)"
+	echo "AAPT2 compile $@ <- $(PRIVATE_SOURCE_RES_DIRS)"
 	$(call aapt2-compile-resource-dirs)
 
 my_resources_flata += $(my_generated_resources_flata)
@@ -53,7 +53,7 @@ ifneq ($(my_generated_res_zips),)
 my_zipped_resources_flata := $(my_compiled_res_base_dir)/zip_res.flata
 $(my_zipped_resources_flata): PRIVATE_SOURCE_RES_ZIPS := $(my_generated_res_zips)
 $(my_zipped_resources_flata) : $(my_generated_res_zips) $(AAPT2) $(ZIPSYNC)
-	@echo "AAPT2 compile $@ <- $(PRIVATE_SOURCE_RES_ZIPS)"
+	echo "AAPT2 compile $@ <- $(PRIVATE_SOURCE_RES_ZIPS)"
 	$(call aapt2-compile-resource-zips)
 
 my_resources_flata += $(my_zipped_resources_flata)
@@ -122,14 +122,14 @@ $(my_res_package): $(my_full_asset_paths)
 $(my_res_package): $(my_res_resources_flat) $(my_overlay_resources_flat) \
   $(my_resources_flata) $(my_static_library_resources) $(my_static_library_extra_packages) \
   $(AAPT2) $(SOONG_ZIP) $(EXTRACT_JAR_PACKAGES)
-	@echo "AAPT2 link $@"
+	echo "AAPT2 link $@"
 	$(call aapt2-link)
 ifdef R_file_stamp
-	@rm -f $(PRIVATE_R_FILE_STAMP)
+	rm -f $(PRIVATE_R_FILE_STAMP)
 	$(call find-generated-R.java,$(PRIVATE_JAVA_GEN_DIR),$(PRIVATE_R_FILE_STAMP))
 endif
 ifdef LOCAL_EXPORT_PACKAGE_RESOURCES
-	@rm -f $(PRIVATE_RESOURCE_EXPORT_PACKAGE)
+	rm -f $(PRIVATE_RESOURCE_EXPORT_PACKAGE)
 
 	cp $@ $(PRIVATE_RESOURCE_EXPORT_PACKAGE)
 endif

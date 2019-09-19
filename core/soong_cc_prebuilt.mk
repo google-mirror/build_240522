@@ -150,8 +150,8 @@ ifndef LOCAL_IS_HOST_MODULE
         my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_symbol_path))
         breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
         $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
-	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
-	@mkdir -p $(dir $@)
+	echo "target breakpad: $(PRIVATE_MODULE) ($@)"
+	mkdir -p $(dir $@)
 	if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
 	  $(BREAKPAD_DUMP_SYMS) -c $< > $@ ; \
 	else \

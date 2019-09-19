@@ -92,7 +92,7 @@ addon_img_source_prop := $(call append-path,$(staging),$(addon_dir_img))/images/
 sdk_addon_deps += $(addon_img_source_prop)
 
 $(addon_img_source_prop): $(PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP)
-	@echo Generate $@
+	echo Generate $@
 	mkdir -p $(dir $@)
 	sed \
 		-e 's/$${PLATFORM_VERSION}/$(PLATFORM_VERSION)/' \
@@ -113,7 +113,7 @@ $(full_target): PRIVATE_DOCS_DIRS := $(addprefix $(OUT_DOCS)/, $(doc_modules))
 $(full_target): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir_leaf))
 
 $(full_target): $(sdk_addon_deps) | $(SOONG_ZIP)
-	@echo Packaging SDK Addon: $@
+	echo Packaging SDK Addon: $@
 	mkdir -p $(PRIVATE_STAGING_DIR)/docs
 	for d in $(PRIVATE_DOCS_DIRS); do \
 	    cp -R $$d $(PRIVATE_STAGING_DIR)/docs ;\
@@ -123,7 +123,7 @@ $(full_target): $(sdk_addon_deps) | $(SOONG_ZIP)
 
 $(full_target_img): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir_img))/images/$(TARGET_CPU_ABI)
 $(full_target_img): $(full_target) $(addon_img_source_prop) | $(SOONG_ZIP)
-	@echo Packaging SDK Addon System-Image: $@
+	echo Packaging SDK Addon System-Image: $@
 	mkdir -p $(dir $@)
 	cp -R $(PRODUCT_OUT)/data $(PRIVATE_STAGING_DIR)/data
 	$(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)

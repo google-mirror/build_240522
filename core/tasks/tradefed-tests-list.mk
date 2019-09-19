@@ -27,7 +27,7 @@ $(tradefed_tests_list_zip) : PRIVATE_tradefed_tests := $(subst .xml,,$(subst $(s
 $(tradefed_tests_list_zip) : PRIVATE_tradefed_tests_list := $(tradefed_tests_list_intermediates)/tradefed-tests_list
 
 $(tradefed_tests_list_zip) : $(tradefed_tests) $(SOONG_ZIP)
-	@echo "Package: $@"
+	echo "Package: $@"
 	rm -rf $(dir $@) && mkdir -p $(dir $@)
 	echo -e "$(PRIVATE_tradefed_tests)" > $(PRIVATE_tradefed_tests_list)
 	$(SOONG_ZIP) -d -o $@ -C $(dir $@) -f $(PRIVATE_tradefed_tests_list)

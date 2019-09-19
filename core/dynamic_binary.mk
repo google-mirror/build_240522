@@ -44,7 +44,7 @@ inject_module := $(intermediates)/INJECT_BSSL_HASH/$(notdir $(my_installed_modul
 LOCAL_INTERMEDIATE_TARGETS += $(inject_module)
 $(inject_module): $(SOONG_HOST_OUT)/bin/bssl_inject_hash
 $(inject_module): $(linked_module)
-	@echo "target inject BSSL hash: $(PRIVATE_MODULE) ($@)"
+	echo "target inject BSSL hash: $(PRIVATE_MODULE) ($@)"
 	$(SOONG_HOST_OUT)/bin/bssl_inject_hash -in-object $< -o $@
 else
 inject_module := $(linked_module)
@@ -61,7 +61,7 @@ endif
 symbolic_input := $(inject_module)
 symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
 $(symbolic_output) : $(symbolic_input)
-	@echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
+	echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 
 ###########################################################
@@ -73,8 +73,8 @@ my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_mo
 breakpad_input := $(inject_module)
 breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
 $(breakpad_output) : $(breakpad_input) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
-	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
-	@mkdir -p $(dir $@)
+	echo "target breakpad: $(PRIVATE_MODULE) ($@)"
+	mkdir -p $(dir $@)
 	if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
 	  $(BREAKPAD_DUMP_SYMS) -c $< > $@ ; \
 	else \
@@ -128,7 +128,7 @@ ifneq (,$(my_strip_module))
   $(strip_output): PRIVATE_STRIP_ARGS := $(my_strip_args)
   $(strip_output): PRIVATE_TOOLS_PREFIX := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)TOOLS_PREFIX)
   $(strip_output): $(strip_input) $(SOONG_STRIP_PATH)
-	@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
+	echo "$($(PRIVATE_PREFIX)DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
 	CLANG_BIN=$(LLVM_PREBUILTS_PATH) \
 	CROSS_COMPILE=$(PRIVATE_TOOLS_PREFIX) \
 	XZ=$(XZ) \
@@ -138,7 +138,7 @@ else
   # Don't strip the binary, just copy it.  We can't skip this step
   # because a copy of the binary must appear at LOCAL_BUILT_MODULE.
   $(strip_output): $(strip_input)
-	@echo "target Unstripped: $(PRIVATE_MODULE) ($@)"
+	echo "target Unstripped: $(PRIVATE_MODULE) ($@)"
 	$(copy-file-to-target)
 endif # my_strip_module
 

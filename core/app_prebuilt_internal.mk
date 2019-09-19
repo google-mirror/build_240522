@@ -78,7 +78,7 @@ my_extracted_apk := $(intermediates)/extracted.apk
 
 $(my_extracted_apk): PRIVATE_EXTRACT := $(my_extract_apk)
 $(my_extracted_apk): $(my_prebuilt_src_file)
-	@echo Extract APK: $@
+	echo Extract APK: $@
 	mkdir -p $(dir $@) && rm -f $@
 	unzip -p $< $(PRIVATE_EXTRACT) >$@
 
@@ -109,7 +109,7 @@ ifdef LOCAL_ENFORCE_USES_LIBRARIES
   $(my_enforced_uses_libraries): PRIVATE_OPTIONAL_USES_LIBRARIES := $(LOCAL_OPTIONAL_USES_LIBRARIES)
   $(my_enforced_uses_libraries): $(BUILD_SYSTEM)/verify_uses_libraries.sh $(AAPT)
   $(my_enforced_uses_libraries): $(my_prebuilt_src_file)
-	@echo Verifying uses-libraries: $<
+	echo Verifying uses-libraries: $<
 	aapt_binary=$(AAPT) \
 	  uses_library_names="$(strip $(PRIVATE_USES_LIBRARIES))" \
 	  optional_uses_library_names="$(strip $(PRIVATE_OPTIONAL_USES_LIBRARIES))" \
@@ -237,12 +237,12 @@ ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
 endif  # LOCAL_UNCOMPRESS_DEX
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
-	@# Keep a copy of apk with classes.dex unstripped
+	# Keep a copy of apk with classes.dex unstripped
 	cp -f $@ $(dir $@)package.dex.apk
 endif  # BUILD_PLATFORM_ZIP
 endif  # LOCAL_DEX_PREOPT
 ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)
-	@# Only strip out files if we can re-sign the package.
+	# Only strip out files if we can re-sign the package.
 # Run appcompat before stripping the classes.dex file.
 ifeq ($(module_run_appcompat),true)
 	$(call appcompat-header, aapt2)
@@ -290,7 +290,7 @@ $(built_apk_splits) : $(intermediates)/%.apk : $(my_src_dir)/%.apk
 
 # Rules to install the split apks.
 $(installed_apk_splits) : $(my_module_path)/%.apk : $(intermediates)/%.apk
-	@echo "Install: $@"
+	echo "Install: $@"
 	$(copy-file-to-new-target)
 
 # Register the additional built and installed files.

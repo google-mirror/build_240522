@@ -70,7 +70,7 @@ $(common_javalib.jar): PRIVATE_DEX_FILE := $(built_dex)
 $(common_javalib.jar): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
 $(common_javalib.jar): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
 $(common_javalib.jar) : $(full_classes_pre_proguard_jar) $(built_dex) $(java_resource_sources) | $(ZIPTIME) $(ZIPALIGN)
-	@echo "target Jar: $(PRIVATE_MODULE) ($@)"
+	echo "target Jar: $(PRIVATE_MODULE) ($@)"
 	rm -rf $@.parts && mkdir -p $@.parts
 	$(call create-dex-jar,$@.parts/dex.zip,$(PRIVATE_DEX_FILE))
 	$(call extract-resources-jar,$@.parts/res.zip,$(PRIVATE_SOURCE_ARCHIVE))

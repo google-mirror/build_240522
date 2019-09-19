@@ -233,7 +233,7 @@ $(built_module) : $(common_javalib_jar)
 my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
 $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
 $(my_exported_sdk_libs_file):
-	@echo "Export SDK libs $@"
+	echo "Export SDK libs $@"
 	mkdir -p $(dir $@) && rm -f $@
 	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
 		echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\

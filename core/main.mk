@@ -82,7 +82,7 @@ clean-dex-files:
 	find $(OUT_DIR) -name "*.dex" | xargs rm -f
 	for i in `find $(OUT_DIR) -name "*.jar" -o -name "*.apk"` ; do ((unzip -l $$i 2> /dev/null | \
 				grep -q "\.dex$$" && rm -f $$i) || continue ) ; done
-	@echo "All dex files and archives containing dex files have been removed."
+	echo "All dex files and archives containing dex files have been removed."
 
 # Include the google-specific config
 -include vendor/google/build/config.mk
@@ -1769,8 +1769,8 @@ findlsdumps: $(LSDUMP_PATHS_FILE) $(foreach p,$(LSDUMP_PATHS),$(call word-colon,
 
 $(LSDUMP_PATHS_FILE): PRIVATE_LSDUMP_PATHS := $(LSDUMP_PATHS)
 $(LSDUMP_PATHS_FILE):
-	@echo "Generate $@"
-	@rm -rf $@ && echo -e "$(subst :,:$(space),$(subst $(space),\n,$(PRIVATE_LSDUMP_PATHS)))" > $@
+	echo "Generate $@"
+	rm -rf $@ && echo -e "$(subst :,:$(space),$(subst $(space),\n,$(PRIVATE_LSDUMP_PATHS)))" > $@
 
 .PHONY: check-elf-files
 check-elf-files:
@@ -1778,23 +1778,23 @@ check-elf-files:
 #xxx scrape this from ALL_MODULE_NAME_TAGS
 .PHONY: modules
 modules:
-	@echo "Available sub-modules:"
-	@echo "$(call module-names-for-tag-list,$(ALL_MODULE_TAGS))" | \
+	echo "Available sub-modules:"
+	echo "$(call module-names-for-tag-list,$(ALL_MODULE_TAGS))" | \
 	      tr -s ' ' '\n' | sort -u
 
 .PHONY: dump-files
 dump-files:
 	$(info product_target_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
 	$(foreach p,$(sort $(product_target_FILES)),$(info :   $(p)))
-	@echo Successfully dumped product file list
+	echo Successfully dumped product file list
 
 .PHONY: nothing
 nothing:
-	@echo Successfully read the makefiles.
+	echo Successfully read the makefiles.
 
 .PHONY: tidy_only
 tidy_only:
-	@echo Successfully make tidy_only.
+	echo Successfully make tidy_only.
 
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk

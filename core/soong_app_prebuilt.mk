@@ -58,7 +58,7 @@ ifeq ($(module_run_appcompat),true)
   $(LOCAL_BUILT_MODULE): $(appcompat-files)
   $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
   $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
-	@echo "Copy: $@"
+	echo "Copy: $@"
 	$(copy-file-to-target)
 	$(appcompat-header)
 	$(run-appcompat)
@@ -87,7 +87,7 @@ resource_export_stamp := $(intermediates.COMMON)/src/R.stamp
 $(resource_export_package): PRIVATE_STAMP := $(resource_export_stamp)
 $(resource_export_package): .KATI_IMPLICIT_OUTPUTS := $(resource_export_stamp)
 $(resource_export_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
-	@echo "Copy: $@"
+	echo "Copy: $@"
 	$(copy-file-to-target)
 	touch $(PRIVATE_STAMP)
 $(call add-dependency,$(LOCAL_BUILT_MODULE),$(resource_export_package))

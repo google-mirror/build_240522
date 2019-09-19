@@ -32,8 +32,8 @@ ifneq (,$(strip $(my_full_libs_manifest_files)))
   $(full_android_manifest): PRIVATE_LIBS_MANIFESTS := $(my_full_libs_manifest_files)
   $(full_android_manifest): $(ANDROID_MANIFEST_MERGER)
   $(full_android_manifest) : $(fixed_android_manifest) $(my_full_libs_manifest_files)
-	@echo "Merge android manifest files: $@ <-- $< $(PRIVATE_LIBS_MANIFESTS)"
-	@mkdir -p $(dir $@)
+	echo "Merge android manifest files: $@ <-- $< $(PRIVATE_LIBS_MANIFESTS)"
+	mkdir -p $(dir $@)
 	$(ANDROID_MANIFEST_MERGER) --main $< \
 	    --libs $(call normalize-path-list,$(PRIVATE_LIBS_MANIFESTS)) \
 	    --out $@
@@ -95,7 +95,7 @@ $(fixed_android_manifest): PRIVATE_OPTIONAL_SDK_LIB_NAMES := android.test.base a
 $(fixed_android_manifest): $(MANIFEST_FIXER)
 $(fixed_android_manifest): $(main_android_manifest)
 	echo $(PRIVATE_OPTIONAL_SDK_LIB_NAMES) | tr ' ' '\n' > $(PRIVATE_EXPORTED_SDK_LIBS_FILE).optional
-	@echo "Fix manifest: $@"
+	echo "Fix manifest: $@"
 	$(MANIFEST_FIXER) \
 	  --minSdkVersion $(PRIVATE_MIN_SDK_VERSION) \
           --targetSdkVersion $(PRIVATE_TARGET_SDK_VERSION) \

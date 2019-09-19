@@ -82,7 +82,7 @@ $(products_graph): PRIVATE_PRODUCTS := $(all_products)
 $(products_graph): PRIVATE_PRODUCTS_FILTER := $(products_list)
 
 $(products_graph): $(this_makefile)
-	@echo Product graph DOT: $@ for $(PRIVATE_PRODUCTS_FILTER)
+	echo Product graph DOT: $@ for $(PRIVATE_PRODUCTS_FILTER)
 	echo 'digraph {' > $@.in
 	echo 'graph [ ratio=.5 ];' >> $@.in
 	$(foreach p,$(PRIVATE_PRODUCTS), \
@@ -101,7 +101,7 @@ endef
 # $(1) product file
 define transform-product-debug
 $(OUT_DIR)/products/$(strip $(1)).txt: $(this_makefile)
-	@echo Product debug info file: $$@
+	echo Product debug info file: $$@
 	rm -f $$@
 	mkdir -p $$(dir $$@)
 	echo 'FILE=$(strip $(1))' >> $$@
@@ -139,7 +139,7 @@ $(call product-debug-filename, $(p)): \
 			$(OUT_DIR)/products/$(strip $(1)).txt \
 			build/make/tools/product_debug.py \
 			$(this_makefile)
-	@echo Product debug html file: $$@
+	echo Product debug html file: $$@
 	mkdir -p $$(dir $$@)
 	cat $$< | build/make/tools/product_debug.py > $$@
 endef
@@ -152,6 +152,6 @@ $(foreach p,$(all_products), \
 
 .PHONY: product-graph
 product-graph: $(products_graph)
-	@echo Product graph .dot file: $(products_graph)
-	@echo Command to convert to pdf: dot -Tpdf -Nshape=box -o $(OUT_DIR)/products.pdf $(products_graph)
-	@echo Command to convert to svg: dot -Tsvg -Nshape=box -o $(OUT_DIR)/products.svg $(products_graph)
+	echo Product graph .dot file: $(products_graph)
+	echo Command to convert to pdf: dot -Tpdf -Nshape=box -o $(OUT_DIR)/products.pdf $(products_graph)
+	echo Command to convert to svg: dot -Tsvg -Nshape=box -o $(OUT_DIR)/products.svg $(products_graph)

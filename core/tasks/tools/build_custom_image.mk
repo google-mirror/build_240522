@@ -110,7 +110,7 @@ ifeq (true,$(CUSTOM_IMAGE_SUPPORT_VERITY_FEC))
 endif
 $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_image_copy_files) $(my_custom_image_modules_dep) \
   $(CUSTOM_IMAGE_DICT_FILE)
-	@echo "Build image $@"
+	echo "Build image $@"
 	rm -rf $(PRIVATE_INTERMEDIATES) && mkdir -p $(PRIVATE_INTERMEDIATES)
 	rm -rf $(PRIVATE_STAGING_DIR) && mkdir -p $(PRIVATE_STAGING_DIR)
 	# Copy all the files.

@@ -29,7 +29,7 @@ $(foreach pair,$(DIST_GOAL_OUTPUT_PAIRS), \
 
 define copy-one-dist-file
 $(2): $(1)
-	@echo "Dist: $$@"
+	echo "Dist: $$@"
 	rm -f $$@
 	cp $$< $$@
 endef

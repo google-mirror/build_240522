@@ -260,11 +260,11 @@ $(call math-expect-error,(call int_divide,1,0),division by zero is not allowed!)
 ifdef RUN_MATH_TESTS
   ifdef MATH_TEST_FAILURE
     math-tests:
-	@echo FAIL
-	@false
+	echo FAIL
+	false
   else
     math-tests:
-	@echo PASS
+	echo PASS
   endif
   .PHONY: math-tests
 endif

@@ -67,8 +67,8 @@ my_package_zip := $(my_staging_dir)/$(my_package_name).zip
 $(my_package_zip): PRIVATE_COPY_PAIRS := $(my_copy_pairs)
 $(my_package_zip): PRIVATE_PICKUP_FILES := $(my_pickup_files)
 $(my_package_zip) : $(my_built_modules)
-	@echo "Package $@"
-	@rm -rf $(dir $@) && mkdir -p $(dir $@)
+	echo "Package $@"
+	rm -rf $(dir $@) && mkdir -p $(dir $@)
 	$(foreach p, $(PRIVATE_COPY_PAIRS),\
 	  $(eval pair := $(subst :,$(space),$(p)))\
 	  mkdir -p $(dir $(word 2,$(pair))) && \

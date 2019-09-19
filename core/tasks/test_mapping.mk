@@ -26,7 +26,7 @@ $(test_mappings_zip) : PRIVATE_test_mappings := $(subst $(newline),\n,$(test_map
 $(test_mappings_zip) : PRIVATE_all_disabled_presubmit_tests := $(ALL_DISABLED_PRESUBMIT_TESTS)
 
 $(test_mappings_zip) : $(test_mappings) $(SOONG_ZIP)
-	@echo "Building artifact to include TEST_MAPPING files and tests to skip in presubmit check."
+	echo "Building artifact to include TEST_MAPPING files and tests to skip in presubmit check."
 	rm -rf $@ $(dir $@)/disabled-presubmit-tests
 	echo $(sort $(PRIVATE_all_disabled_presubmit_tests)) | tr " " "\n" > $(dir $@)/disabled-presubmit-tests
 	echo -e "$(PRIVATE_test_mappings)" > $@.list

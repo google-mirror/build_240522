@@ -31,8 +31,8 @@ INSTALLED_OEMIMAGE_TARGET := $(BUILT_OEMIMAGE_TARGET)
 
 $(INSTALLED_OEMIMAGE_TARGET) : $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_OEMIMAGE_FILES)
 	$(call pretty,"Target oem fs image: $@")
-	@mkdir -p $(TARGET_OUT_OEM)
-	@mkdir -p $(oemimage_intermediates) && rm -rf $(oemimage_intermediates)/oem_image_info.txt
+	mkdir -p $(TARGET_OUT_OEM)
+	mkdir -p $(oemimage_intermediates) && rm -rf $(oemimage_intermediates)/oem_image_info.txt
 	$(call generate-image-prop-dictionary, $(oemimage_intermediates)/oem_image_info.txt,oem,skip_fsck=true)
 	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
 	    $(BUILD_IMAGE) \

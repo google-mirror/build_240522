@@ -482,7 +482,7 @@ ifdef LOCAL_ENFORCE_USES_LIBRARIES
   $(my_manifest_check): PRIVATE_USES_LIBRARIES := $(LOCAL_USES_LIBRARIES)
   $(my_manifest_check): PRIVATE_OPTIONAL_USES_LIBRARIES := $(LOCAL_OPTIONAL_USES_LIBRARIES)
   $(my_manifest_check): $(full_android_manifest)
-	@echo Checking manifest: $<
+	echo Checking manifest: $<
 	$(MANIFEST_CHECK) --enforce-uses-libraries \
 	  $(addprefix --uses-library ,$(PRIVATE_USES_LIBRARIES)) \
 	  $(addprefix --optional-uses-library ,$(PRIVATE_OPTIONAL_USES_LIBRARIES)) \
@@ -549,7 +549,7 @@ $(LOCAL_BUILT_MODULE): .KATI_DEPFILE := $(LOCAL_BUILT_MODULE).d
 endif
 $(LOCAL_BUILT_MODULE): PRIVATE_USE_EMBEDDED_NATIVE_LIBS := $(LOCAL_USE_EMBEDDED_NATIVE_LIBS)
 $(LOCAL_BUILT_MODULE):
-	@echo "target Package: $(PRIVATE_MODULE) ($@)"
+	echo "target Package: $(PRIVATE_MODULE) ($@)"
 	rm -rf $@.parts
 	mkdir -p $@.parts
 	cp -f $(PRIVATE_RES_PACKAGE) $@.parts/apk.zip
@@ -566,7 +566,7 @@ endif  # full_classes_jar
 	$(MERGE_ZIPS) $@ $@.parts/*.zip
 	rm -rf $@.parts
 ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
-	@# No need to align, sign-package below will do it.
+	# No need to align, sign-package below will do it.
 	$(uncompress-dexs)
 endif
 # Run appcompat before stripping the classes.dex file.
@@ -576,7 +576,7 @@ ifeq ($(module_run_appcompat),true)
 endif  # module_run_appcompat
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
-	@# Keep a copy of apk with classes.dex unstripped
+	# Keep a copy of apk with classes.dex unstripped
 	cp -f $@ $(dir $@)package.dex.apk
 endif  # BUILD_PLATFORM_ZIP
 	mv -f $@ $@.tmp
@@ -609,7 +609,7 @@ else
 endif # full_classes_jar
 
 $(my_bundle_module): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
-	@echo "target Bundle: $(PRIVATE_MODULE) ($@)"
+	echo "target Bundle: $(PRIVATE_MODULE) ($@)"
 	rm -rf $@.parts
 	mkdir -p $@.parts
 	$(ZIP2ZIP) -i $(PRIVATE_RES_PACKAGE) -o $@.parts/apk.zip AndroidManifest.xml:manifest/AndroidManifest.xml resources.pb "res/**/*" "assets/**/*"
@@ -670,7 +670,7 @@ $(built_apk_splits) : $(intermediates)/%.apk : $(LOCAL_BUILT_MODULE)
 # Rules to install the splits
 installed_apk_splits := $(foreach s,$(my_split_suffixes),$(my_module_path)/$(LOCAL_MODULE)_$(s).apk)
 $(installed_apk_splits) : $(my_module_path)/$(LOCAL_MODULE)_%.apk : $(intermediates)/package_%.apk
-	@echo "Install: $@"
+	echo "Install: $@"
 	$(copy-file-to-new-target)
 
 # Register the additional built and installed files.

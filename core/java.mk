@@ -264,7 +264,7 @@ $(full_classes_turbine_jar): \
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_header_jarjar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_header_jarjar): $(full_classes_turbine_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo Header JarJar: $@
+	echo Header JarJar: $@
 	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_header_jarjar := $(full_classes_turbine_jar)
@@ -295,7 +295,7 @@ $(full_classes_compiled_jar): \
     $(JAR_ARGS) \
     $(ZIPSYNC) \
     | $(SOONG_JAVAC_WRAPPER)
-	@echo "Target Java: $@
+	echo "Target Java: $@
 	$(call compile-java,$(TARGET_JAVAC),$(PRIVATE_ALL_JAVA_HEADER_LIBRARIES))
 
 javac-check : $(full_classes_compiled_jar)
@@ -328,7 +328,7 @@ in :=
 out :=
 
 $(full_classes_processed_jar): $(full_classes_combined_jar) $(my_jar_processor)
-	@echo Processing $@ with $(PRIVATE_JAR_PROCESSOR)
+	echo Processing $@ with $(PRIVATE_JAR_PROCESSOR)
 	rm -f $@ $(PRIVATE_TMP_OUT)
 	$(JAVA) -jar $(PRIVATE_JAR_PROCESSOR) $(PRIVATE_JAR_PROCESSOR_ARGS)
 	mv $(PRIVATE_TMP_OUT) $@
@@ -342,7 +342,7 @@ endif
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_jarjar_jar): $(full_classes_processed_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo JarJar: $@
+	echo JarJar: $@
 	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_jarjar_jar := $(full_classes_processed_jar)
@@ -506,7 +506,7 @@ ifneq ($(filter $(LOCAL_MODULE),$(PRODUCT_BOOT_JARS)),)
 endif
 
 $(built_dex): $(built_dex_intermediate)
-	@echo Copying: $@
+	echo Copying: $@
 	mkdir -p $(dir $@)
 	rm -f $(dir $@)/classes*.dex
 	cp -fp $(dir $<)/classes*.dex $(dir $@)
@@ -520,7 +520,7 @@ $(findbugs_xml): PRIVATE_AUXCLASSPATH := $(addprefix -auxclasspath ,$(strip \
     $(call normalize-path-list,$(filter %.jar,$(full_java_libs)))))
 $(findbugs_xml): PRIVATE_FINDBUGS_FLAGS := $(LOCAL_FINDBUGS_FLAGS)
 $(findbugs_xml) : $(full_classes_pre_proguard_jar) $(filter %.xml, $(LOCAL_FINDBUGS_FLAGS))
-	@echo Findbugs: $@
+	echo Findbugs: $@
 	$(FINDBUGS) -textui -effort:min -xml:withMessages \
 		$(PRIVATE_AUXCLASSPATH) $(PRIVATE_FINDBUGS_FLAGS) \
 		$< \
@@ -533,8 +533,8 @@ $(findbugs_html) : PRIVATE_XML_FILE := $(findbugs_xml)
 $(LOCAL_MODULE)-findbugs : $(findbugs_html)
 .PHONY: $(LOCAL_MODULE)-findbugs
 $(findbugs_html) : $(findbugs_xml)
-	@mkdir -p $(dir $@)
-	@echo ConvertXmlToText: $@
+	mkdir -p $(dir $@)
+	echo ConvertXmlToText: $@
 	$(FINDBUGS_DIR)/convertXmlToText -html:fancy.xsl $(PRIVATE_XML_FILE) \
 	> $@
 

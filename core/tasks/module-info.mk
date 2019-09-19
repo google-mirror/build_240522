@@ -3,7 +3,7 @@
 MODULE_INFO_JSON := $(PRODUCT_OUT)/module-info.json
 
 $(MODULE_INFO_JSON):
-	@echo Generating $@
+	echo Generating $@
 	echo -ne '{\n ' > $@
 	echo -ne $(foreach m, $(sort $(ALL_MODULES)), \
 		' "$(m)": {' \

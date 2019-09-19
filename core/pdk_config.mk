@@ -96,7 +96,7 @@ ifdef PDK_FUSION_PLATFORM_ZIP
       $(_pdk_fusion_file_list) $(_pdk_fusion_java_file_list))
 
 $(_pdk_fusion_stamp) : $(PDK_FUSION_PLATFORM_ZIP)
-	@echo "Unzip $(dir $@) <- $<"
+	echo "Unzip $(dir $@) <- $<"
 	rm -rf $(dir $@) && mkdir -p $(dir $@)
 	unzip -qo $< -d $(dir $@)
 	$(call split-long-arguments,-touch,$(_pdk_fusion_files))
@@ -120,13 +120,13 @@ endif
 # That's desired by us: we want only absent files from the platform zip package.
 # Copy with the last-modified time preserved, never follow symbolic links.
 $(PRODUCT_OUT)/% : $(_pdk_fusion_intermediates)/% $(_pdk_fusion_stamp)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	rm -rf $@
 	cp -fpPR $< $@
 
 # implicit rules for host java files
 $(HOST_COMMON_OUT_ROOT)/% : $(_pdk_fusion_intermediates)/host/common/% $(_pdk_fusion_stamp)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	cp -fpPR $< $@
 
 ifeq (true,$(TARGET_BUILD_PDK_JAVA_PLATFORM))
@@ -149,7 +149,7 @@ ifeq (true,$(TARGET_BUILD_PDK_JAVA_PLATFORM))
 
 # implicit rules for all other target files
 $(TARGET_COMMON_OUT_ROOT)/% : $(_pdk_fusion_intermediates)/target/common/% $(_pdk_fusion_stamp)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	cp -fpPR $< $@
 endif # TARGET_BUILD_PDK_JAVA_PLATFORM
 
