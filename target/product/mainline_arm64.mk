@@ -14,18 +14,27 @@
 # limitations under the License.
 #
 
+#
+# All components inherited here go to system image
+#
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 whitelist := product_manifest.xml
 $(call enforce-product-packages-exist,$(whitelist))
 
-PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+# Enable mainline checking
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := strict
 
-# Modules that should probably be moved to /product
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
-  system/bin/healthd \
-  system/etc/init/healthd.rc \
-  system/etc/vintf/manifest/manifest_healthd.xml \
+#
+# All components inherited here go to product image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
+
+#
+# All components inherited here go to vendor partition
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
 
 PRODUCT_SHIPPING_API_LEVEL := 29
 
