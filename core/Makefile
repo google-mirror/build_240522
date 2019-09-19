@@ -3206,9 +3206,13 @@ $(if $($(_rollback_index_location)),,$(error $(_rollback_index_location) is not 
 $(eval _signing_args := INTERNAL_AVB_$(PART)_SIGNING_ARGS)
 $(eval $(_signing_args) := \
     --algorithm $($(_signing_algorithm)) --key $($(_key_path)))
-
+# For non-A/B devices with /recovery partition, vbmeta.img should include neither recovery HashDescriptor
+# nor recovery ChainPartitionDescriptor
+$(if $(filter true,$(AB_OTA_UPDATER)), $(eval _use_ab := true), $(eval _use_ab := false))
+$(if $(filter recovery,$(part)), $(eval _has_recovery := true), $(eval _has_recovery := false))
+$(if $(filter false:true, $(_use_ab):$(_has_recovery)),,
 $(eval INTERNAL_AVB_MAKE_VBMETA_IMAGE_ARGS += \
-    --chain_partition $(part):$($(_rollback_index_location)):$(AVB_CHAIN_KEY_DIR)/$(part).avbpubkey)
+    --chain_partition $(part):$($(_rollback_index_location)):$(AVB_CHAIN_KEY_DIR)/$(part).avbpubkey))
 
 # Set rollback_index via footer args for non-chained vbmeta image. Chained vbmeta image will pick up
 # the index via a separate flag (e.g. BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX).
