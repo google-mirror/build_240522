@@ -75,7 +75,7 @@ $(vndk_snapshot_zip): $(vndk_snapshot_soong_files)
 #   $(2): list of files (src:dest) to copy
 $(vndk_snapshot_zip): private-copy-intermediates = \
   $(if $(2),$(strip \
-    @mkdir -p $(1) && \
+    mkdir -p $(1) && \
     $(foreach file,$(2), \
       cp $(call word-colon,1,$(file)) $(call append-path,$(1),$(call word-colon,2,$(file))) && \
     ) \

@@ -1151,7 +1151,7 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-cpp-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C++: $<"
+  echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C++: $<"
   $(clang-tidy-cpp))
 endef
 else
@@ -1197,7 +1197,7 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-c-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C: $<"
+  echo "$($(PRIVATE_PREFIX)DISPLAY) tidy $(PRIVATE_ARM_MODE) C: $<"
   $(clang-tidy-c))
 endef
 else
@@ -1265,7 +1265,7 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-host-cpp-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C++: $<"
+  echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C++: $<"
   $(clang-tidy-host-cpp))
 endef
 else
@@ -1315,7 +1315,7 @@ endef
 ifneq (,$(filter 1 true,$(WITH_TIDY_ONLY)))
 define transform-host-c-to-o
 $(if $(PRIVATE_TIDY_CHECKS),
-  @echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C: $<"
+  echo "tidy $($(PRIVATE_PREFIX)DISPLAY) C: $<"
   $(clang-tidy-host-c))
 endef
 else
@@ -1842,8 +1842,8 @@ endef
 ## Commands for packaging native coverage files
 ###########################################################
 define package-coverage-files
-  @rm -f $@ $@.lst $@.premerged
-  @touch $@.lst
+  rm -f $@ $@.lst $@.premerged
+  touch $@.lst
   $(foreach obj,$(strip $(PRIVATE_ALL_OBJECTS)), echo $(obj) >> $@.lst$(newline))
   $(SOONG_ZIP) -o $@.premerged -C $(OUT_DIR) -l $@.lst
   $(MERGE_ZIPS) -ignore-duplicates $@ $@.premerged $(strip $(PRIVATE_ALL_WHOLE_STATIC_LIBRARIES))
@@ -1976,36 +1976,36 @@ endef
 
 # dump-words-to-file, <word list>, <output file>
 define dump-words-to-file
-        @rm -f $(2)
-        @touch $(2)
-        @$(call emit-line,$(wordlist 1,500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 501,1000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 1001,1500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 1501,2000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 2001,2500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 2501,3000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 3001,3500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 3501,4000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 4001,4500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 4501,5000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 5001,5500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 5501,6000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 6001,6500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 6501,7000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 7001,7500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 7501,8000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 8001,8500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 8501,9000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 9001,9500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 9501,10000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 10001,10500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 10501,11000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 11001,11500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 11501,12000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 12001,12500,$(1)),$(2))
-        @$(call emit-line,$(wordlist 12501,13000,$(1)),$(2))
-        @$(call emit-line,$(wordlist 13001,13500,$(1)),$(2))
-        @$(if $(wordlist 13501,13502,$(1)),$(error Too many words ($(words $(1)))))
+        rm -f $(2)
+        touch $(2)
+        $(call emit-line,$(wordlist 1,500,$(1)),$(2))
+        $(call emit-line,$(wordlist 501,1000,$(1)),$(2))
+        $(call emit-line,$(wordlist 1001,1500,$(1)),$(2))
+        $(call emit-line,$(wordlist 1501,2000,$(1)),$(2))
+        $(call emit-line,$(wordlist 2001,2500,$(1)),$(2))
+        $(call emit-line,$(wordlist 2501,3000,$(1)),$(2))
+        $(call emit-line,$(wordlist 3001,3500,$(1)),$(2))
+        $(call emit-line,$(wordlist 3501,4000,$(1)),$(2))
+        $(call emit-line,$(wordlist 4001,4500,$(1)),$(2))
+        $(call emit-line,$(wordlist 4501,5000,$(1)),$(2))
+        $(call emit-line,$(wordlist 5001,5500,$(1)),$(2))
+        $(call emit-line,$(wordlist 5501,6000,$(1)),$(2))
+        $(call emit-line,$(wordlist 6001,6500,$(1)),$(2))
+        $(call emit-line,$(wordlist 6501,7000,$(1)),$(2))
+        $(call emit-line,$(wordlist 7001,7500,$(1)),$(2))
+        $(call emit-line,$(wordlist 7501,8000,$(1)),$(2))
+        $(call emit-line,$(wordlist 8001,8500,$(1)),$(2))
+        $(call emit-line,$(wordlist 8501,9000,$(1)),$(2))
+        $(call emit-line,$(wordlist 9001,9500,$(1)),$(2))
+        $(call emit-line,$(wordlist 9501,10000,$(1)),$(2))
+        $(call emit-line,$(wordlist 10001,10500,$(1)),$(2))
+        $(call emit-line,$(wordlist 10501,11000,$(1)),$(2))
+        $(call emit-line,$(wordlist 11001,11500,$(1)),$(2))
+        $(call emit-line,$(wordlist 11501,12000,$(1)),$(2))
+        $(call emit-line,$(wordlist 12001,12500,$(1)),$(2))
+        $(call emit-line,$(wordlist 12501,13000,$(1)),$(2))
+        $(call emit-line,$(wordlist 13001,13500,$(1)),$(2))
+        $(if $(wordlist 13501,13502,$(1)),$(error Too many words ($(words $(1)))))
 endef
 # Return jar arguments to compress files in a given directory
 # $(1): directory

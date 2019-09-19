@@ -2310,12 +2310,12 @@ endif
 
 # $(1): output file
 define build-systemimage-target
-  @echo "Target system fs image: $(1)"
+  echo "Target system fs image: $(1)"
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   $(call create-system-system_ext-symlink)
   $(call check-apex-libs-absence-on-disk)
-  @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
+  mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-image-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt,system, \
       skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
@@ -2506,8 +2506,8 @@ BUILT_USERDATAIMAGE_TARGET := $(PRODUCT_OUT)/userdata.img
 
 define build-userdataimage-target
   $(call pretty,"Target userdata fs image: $(INSTALLED_USERDATAIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_DATA)
-  @mkdir -p $(userdataimage_intermediates) && rm -rf $(userdataimage_intermediates)/userdata_image_info.txt
+  mkdir -p $(TARGET_OUT_DATA)
+  mkdir -p $(userdataimage_intermediates) && rm -rf $(userdataimage_intermediates)/userdata_image_info.txt
   $(call generate-image-prop-dictionary, $(userdataimage_intermediates)/userdata_image_info.txt,userdata,skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -2589,8 +2589,8 @@ BUILT_CACHEIMAGE_TARGET := $(PRODUCT_OUT)/cache.img
 
 define build-cacheimage-target
   $(call pretty,"Target cache fs image: $(INSTALLED_CACHEIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_CACHE)
-  @mkdir -p $(cacheimage_intermediates) && rm -rf $(cacheimage_intermediates)/cache_image_info.txt
+  mkdir -p $(TARGET_OUT_CACHE)
+  mkdir -p $(cacheimage_intermediates) && rm -rf $(cacheimage_intermediates)/cache_image_info.txt
   $(call generate-image-prop-dictionary, $(cacheimage_intermediates)/cache_image_info.txt,cache,skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -2661,8 +2661,8 @@ BUILT_SYSTEMOTHERIMAGE_TARGET := $(PRODUCT_OUT)/system_other.img
 # Note that we assert the size is SYSTEMIMAGE_PARTITION_SIZE since this is the 'b' system image.
 define build-systemotherimage-target
   $(call pretty,"Target system_other fs image: $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_SYSTEM_OTHER)
-  @mkdir -p $(systemotherimage_intermediates) && rm -rf $(systemotherimage_intermediates)/system_other_image_info.txt
+  mkdir -p $(TARGET_OUT_SYSTEM_OTHER)
+  mkdir -p $(systemotherimage_intermediates) && rm -rf $(systemotherimage_intermediates)/system_other_image_info.txt
   $(call generate-image-prop-dictionary, $(systemotherimage_intermediates)/system_other_image_info.txt,system,skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -2816,9 +2816,9 @@ vendorimage_intermediates := \
 BUILT_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 define build-vendorimage-target
   $(call pretty,"Target vendor fs image: $(INSTALLED_VENDORIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_VENDOR)
+  mkdir -p $(TARGET_OUT_VENDOR)
   $(call create-vendor-odm-symlink)
-  @mkdir -p $(vendorimage_intermediates) && rm -rf $(vendorimage_intermediates)/vendor_image_info.txt
+  mkdir -p $(vendorimage_intermediates) && rm -rf $(vendorimage_intermediates)/vendor_image_info.txt
   $(call generate-image-prop-dictionary, $(vendorimage_intermediates)/vendor_image_info.txt,vendor,skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -2876,8 +2876,8 @@ productimage_intermediates := \
 BUILT_PRODUCTIMAGE_TARGET := $(PRODUCT_OUT)/product.img
 define build-productimage-target
   $(call pretty,"Target product fs image: $(INSTALLED_PRODUCTIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_PRODUCT)
-  @mkdir -p $(productimage_intermediates) && rm -rf $(productimage_intermediates)/product_image_info.txt
+  mkdir -p $(TARGET_OUT_PRODUCT)
+  mkdir -p $(productimage_intermediates) && rm -rf $(productimage_intermediates)/product_image_info.txt
   $(call generate-image-prop-dictionary, $(productimage_intermediates)/product_image_info.txt,product,skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -2978,8 +2978,8 @@ system_extimage_intermediates := \
 BUILT_SYSTEM_EXTIMAGE_TARGET := $(PRODUCT_OUT)/system_ext.img
 define build-system_extimage-target
   $(call pretty,"Target system_ext fs image: $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_SYSTEM_EXT)
-  @mkdir -p $(system_extimage_intermediates) && rm -rf $(system_extimage_intermediates)/system_ext_image_info.txt
+  mkdir -p $(TARGET_OUT_SYSTEM_EXT)
+  mkdir -p $(system_extimage_intermediates) && rm -rf $(system_extimage_intermediates)/system_ext_image_info.txt
   $(call generate-image-prop-dictionary, $(system_extimage_intermediates)/system_ext_image_info.txt,system_ext, skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
@@ -3035,8 +3035,8 @@ odmimage_intermediates := \
 BUILT_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
 define build-odmimage-target
   $(call pretty,"Target odm fs image: $(INSTALLED_ODMIMAGE_TARGET)")
-  @mkdir -p $(TARGET_OUT_ODM)
-  @mkdir -p $(odmimage_intermediates) && rm -rf $(odmimage_intermediates)/odm_image_info.txt
+  mkdir -p $(TARGET_OUT_ODM)
+  mkdir -p $(odmimage_intermediates) && rm -rf $(odmimage_intermediates)/odm_image_info.txt
   $(call generate-userimage-prop-dictionary, $(odmimage_intermediates)/odm_image_info.txt, skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
