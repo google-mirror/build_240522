@@ -577,7 +577,7 @@ endif  # module_run_appcompat
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped
-	$(hide) cp -f $@ $(dir $@)package.dex.apk
+	cp -f $@ $(dir $@)package.dex.apk
 endif  # BUILD_PLATFORM_ZIP
 	mv -f $@ $@.tmp
 	$(PRIVATE_STRIP_SCRIPT) $@.tmp $@
@@ -646,7 +646,7 @@ endif
 ifdef LOCAL_DEX_PREOPT
   $(my_dex_jar): PRIVATE_DEX_FILE := $(built_dex)
   $(my_dex_jar): $(built_dex) $(SOONG_ZIP)
-	$(hide) mkdir -p $(dir $@) && rm -f $@
+	mkdir -p $(dir $@) && rm -f $@
 	$(call create-dex-jar,$@,$(PRIVATE_DEX_FILE))
 endif
 
@@ -661,7 +661,7 @@ ifdef LOCAL_PACKAGE_SPLITS
 $(built_apk_splits): PRIVATE_PRIVATE_KEY := $(private_key)
 $(built_apk_splits): PRIVATE_CERTIFICATE := $(certificate)
 $(built_apk_splits) : $(intermediates)/%.apk : $(LOCAL_BUILT_MODULE)
-	$(hide) if [ ! -f $@ ]; then \
+	if [ ! -f $@ ]; then \
 	  echo 'No $@ generated, check your apk splitting parameters.' 1>&2; \
 	  rm $<; exit 1; \
 	fi

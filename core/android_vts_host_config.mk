@@ -22,5 +22,5 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE):
 	@echo "VTS host-driven test target: $(PRIVATE_MODULE)"
-	$(hide) touch $@
+	touch $@
 

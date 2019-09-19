@@ -26,7 +26,7 @@ HOST_GLOBAL_ARFLAGS := cqs
 HOST_CUSTOM_LD_COMMAND := true
 
 define transform-host-o-to-shared-lib-inner
-$(hide) $(PRIVATE_CXX) \
+$(PRIVATE_CXX) \
         -dynamiclib -single_module -read_only_relocs suppress \
         $(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),, \
             $(PRIVATE_HOST_GLOBAL_LDFLAGS) \
@@ -44,7 +44,7 @@ $(hide) $(PRIVATE_CXX) \
 endef
 
 define transform-host-o-to-executable-inner
-$(hide) $(PRIVATE_CXX) \
+$(PRIVATE_CXX) \
         $(foreach path,$(PRIVATE_RPATHS), \
           -Wl,-rpath,@loader_path/$(path)) \
         -o $@ \

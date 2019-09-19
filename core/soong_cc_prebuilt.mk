@@ -131,7 +131,7 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
 	$(transform-prebuilt-to-target)
 endif
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
-	$(hide) chmod +x $@
+	chmod +x $@
 endif
 
 ifndef LOCAL_IS_HOST_MODULE
@@ -152,7 +152,7 @@ ifndef LOCAL_IS_HOST_MODULE
         $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
+	if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
 	  $(BREAKPAD_DUMP_SYMS) -c $< > $@ ; \
 	else \
 	  echo "skipped for non-elf file."; \

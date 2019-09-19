@@ -403,7 +403,7 @@ $(cleantarget) : PRIVATE_CLEAN_FILES := \
     $(intermediates)
 $(cleantarget)::
 	@echo "Clean: $(PRIVATE_MODULE)"
-	$(hide) rm -rf $(PRIVATE_CLEAN_FILES)
+	rm -rf $(PRIVATE_CLEAN_FILES)
 
 ###########################################################
 ## Common definitions for module.

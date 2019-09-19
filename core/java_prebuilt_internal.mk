@@ -136,14 +136,14 @@ my_src_android_manifest := $(intermediates.COMMON)/aar/AndroidManifest.xml
 $(my_src_jar) : .KATI_IMPLICIT_OUTPUTS := $(my_src_proguard_options)
 $(my_src_jar) : .KATI_IMPLICIT_OUTPUTS += $(my_src_android_manifest)
 $(my_src_jar) : $(my_src_aar)
-	$(hide) rm -rf $(dir $@) && mkdir -p $(dir $@) $(dir $@)/res
-	$(hide) unzip -qo -d $(dir $@) $<
+	rm -rf $(dir $@) && mkdir -p $(dir $@) $(dir $@)/res
+	unzip -qo -d $(dir $@) $<
 	# Make sure the extracted classes.jar has a new timestamp.
-	$(hide) touch $@
+	touch $@
 	# Make sure the proguard and AndroidManifest.xml files exist
 	# and have a new timestamp.
-	$(hide) touch $(dir $@)/proguard.txt
-	$(hide) touch $(dir $@)/AndroidManifest.xml
+	touch $(dir $@)/proguard.txt
+	touch $(dir $@)/AndroidManifest.xml
 
 my_prebuilt_android_manifest := $(intermediates.COMMON)/manifest/AndroidManifest.xml
 $(eval $(call copy-one-file,$(my_src_android_manifest),$(my_prebuilt_android_manifest)))
@@ -234,10 +234,10 @@ my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
 $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
 $(my_exported_sdk_libs_file):
 	@echo "Export SDK libs $@"
-	$(hide) mkdir -p $(dir $@) && rm -f $@
+	mkdir -p $(dir $@) && rm -f $@
 	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
-		$(hide) echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
-		$(hide) touch $@)
+		echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
+		touch $@)
 
 endif # ! prebuilt_module_is_dex_javalib
 endif # LOCAL_IS_HOST_MODULE is not set

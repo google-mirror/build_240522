@@ -199,13 +199,13 @@ $(built_aar): PRIVATE_R_TXT := $(intermediates.COMMON)/R.txt
 $(built_aar): $(JAR_ARGS)
 $(built_aar) : $(aar_classes_jar) $(full_android_manifest) $(intermediates.COMMON)/R.txt
 	@echo "target AAR:  $(PRIVATE_MODULE) ($@)"
-	$(hide) rm -rf $(dir $@)aar && mkdir -p $(dir $@)aar/res
-	$(hide) cp $(PRIVATE_ANDROID_MANIFEST) $(dir $@)aar/AndroidManifest.xml
-	$(hide) cp $(PRIVATE_CLASSES_JAR) $(dir $@)aar/classes.jar
+	rm -rf $(dir $@)aar && mkdir -p $(dir $@)aar/res
+	cp $(PRIVATE_ANDROID_MANIFEST) $(dir $@)aar/AndroidManifest.xml
+	cp $(PRIVATE_CLASSES_JAR) $(dir $@)aar/classes.jar
 	# Note: Use "cp -n" to honor the resource overlay rules, if multiple res dirs exist.
-	$(hide) $(foreach res,$(PRIVATE_RESOURCE_DIR),cp -Rfn $(res)/* $(dir $@)aar/res;)
-	$(hide) cp $(PRIVATE_R_TXT) $(dir $@)aar/R.txt
-	$(hide) $(JAR) -cMf $@ \
+	$(foreach res,$(PRIVATE_RESOURCE_DIR),cp -Rfn $(res)/* $(dir $@)aar/res;)
+	cp $(PRIVATE_R_TXT) $(dir $@)aar/R.txt
+	$(JAR) -cMf $@ \
 	  $(call jar-args-sorted-files-in-directory,$(dir $@)aar)
 
 # Register the aar file.

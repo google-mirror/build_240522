@@ -97,8 +97,8 @@ $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filenam
 
 $(installed_notice_file): $(notice_file)
 	@echo Notice file: $< -- $@
-	$(hide) mkdir -p $(dir $@)
-	$(hide) cat $< > $@
+	mkdir -p $(dir $@)
+	cat $< > $@
 
 ifdef LOCAL_INSTALLED_MODULE
 # Make LOCAL_INSTALLED_MODULE depend on NOTICE files if they exist

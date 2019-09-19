@@ -6,14 +6,14 @@ INTERNAL_VNDK_LIB_LIST := $(call intermediates-dir-for,PACKAGING,vndk)/libs.txt
 $(INTERNAL_VNDK_LIB_LIST):
 	@echo "Generate: $@"
 	@mkdir -p $(dir $@)
-	$(hide) echo -n > $@
-	$(hide) $(foreach lib, $(filter-out libclang_rt.%,$(LLNDK_LIBRARIES)), \
+	echo -n > $@
+	$(foreach lib, $(filter-out libclang_rt.%,$(LLNDK_LIBRARIES)), \
 	  echo LLNDK: $(lib).so >> $@;)
-	$(hide) $(foreach lib, $(VNDK_SAMEPROCESS_LIBRARIES), \
+	$(foreach lib, $(VNDK_SAMEPROCESS_LIBRARIES), \
 	  echo VNDK-SP: $(lib).so >> $@;)
-	$(hide) $(foreach lib, $(filter-out libclang_rt.%,$(VNDK_CORE_LIBRARIES)), \
+	$(foreach lib, $(filter-out libclang_rt.%,$(VNDK_CORE_LIBRARIES)), \
 	  echo VNDK-core: $(lib).so >> $@;)
-	$(hide) $(foreach lib, $(VNDK_PRIVATE_LIBRARIES), \
+	$(foreach lib, $(VNDK_PRIVATE_LIBRARIES), \
 	  echo VNDK-private: $(lib).so >> $@;)
 
 #####################################################################
@@ -64,13 +64,13 @@ _vndk_check_failure_message += "       Run update-vndk-list.sh to update $(LATES
 endif
 
 $(check-vndk-list-timestamp): $(INTERNAL_VNDK_LIB_LIST) $(LATEST_VNDK_LIB_LIST) $(HOST_OUT_EXECUTABLES)/update-vndk-list.sh
-	$(hide) ( diff --old-line-format="Removed %L" \
+	( diff --old-line-format="Removed %L" \
 	  --new-line-format="Added %L" \
 	  --unchanged-line-format="" \
 	  $(LATEST_VNDK_LIB_LIST) $(INTERNAL_VNDK_LIB_LIST) \
 	  || ( echo -e $(_vndk_check_failure_message); exit 1 ))
-	$(hide) mkdir -p $(dir $@)
-	$(hide) touch $@
+	mkdir -p $(dir $@)
+	touch $@
 
 #####################################################################
 # Script to update the latest VNDK lib list
@@ -86,12 +86,12 @@ $(LOCAL_BUILT_MODULE):
 	@echo "Generate: $@"
 	@mkdir -p $(dir $@)
 	@rm -f $@
-	$(hide) echo "#!/bin/bash" > $@
+	echo "#!/bin/bash" > $@
 ifeq (REL,$(PLATFORM_VERSION_CODENAME))
-	$(hide) echo "echo Updating VNDK library list is NOT allowed in API locked branches." >> $@; \
+	echo "echo Updating VNDK library list is NOT allowed in API locked branches." >> $@; \
 	        echo "exit 1" >> $@
 else
-	$(hide) echo "if [ -z \"\$${ANDROID_BUILD_TOP}\" ]; then" >> $@; \
+	echo "if [ -z \"\$${ANDROID_BUILD_TOP}\" ]; then" >> $@; \
 	        echo "  echo Run lunch or choosecombo first" >> $@; \
 	        echo "  exit 1" >> $@; \
 	        echo "fi" >> $@; \
@@ -132,8 +132,8 @@ $(check-vndk-abi-dump-list-timestamp): $(VNDK_ABI_DUMPS) $(NDK_ABI_DUMPS)
 	  echo -e "Found ABI reference dumps for non-NDK libraries. Run \`find \$${ANDROID_BUILD_TOP}/$(NDK_ABI_DUMP_DIR) '(' -name $(subst $(space), -or -name ,$(added_ndk_abi_dumps)) ')' -delete\` to delete the dumps.")
 
 	$(if $(added_vndk_abi_dumps)$(added_ndk_abi_dumps),exit 1)
-	$(hide) mkdir -p $(dir $@)
-	$(hide) touch $@
+	mkdir -p $(dir $@)
+	touch $@
 
 #####################################################################
 # VNDK package and snapshot.

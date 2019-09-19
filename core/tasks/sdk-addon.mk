@@ -36,7 +36,7 @@ endef
 define stub-addon-jar
 $(call stub-addon-jar-file,$(1)): $(1) | mkstubs
 	$(info Stubbing addon jar using $(PRODUCT_SDK_ADDON_STUB_DEFS))
-	$(hide) $(JAVA) -jar $(call module-installed-files,mkstubs) $(if $(hide),,--v) \
+	$(JAVA) -jar $(call module-installed-files,mkstubs) \
 		"$$<" "$$@" @$(PRODUCT_SDK_ADDON_STUB_DEFS)
 endef
 
@@ -93,8 +93,8 @@ sdk_addon_deps += $(addon_img_source_prop)
 
 $(addon_img_source_prop): $(PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP)
 	@echo Generate $@
-	$(hide) mkdir -p $(dir $@)
-	$(hide) sed \
+	mkdir -p $(dir $@)
+	sed \
 		-e 's/$${PLATFORM_VERSION}/$(PLATFORM_VERSION)/' \
 		-e 's/$${PLATFORM_SDK_VERSION}/$(PLATFORM_SDK_VERSION)/' \
 		-e 's/$${PLATFORM_VERSION_CODENAME}/$(subst REL,,$(PLATFORM_VERSION_CODENAME))/' \
@@ -114,19 +114,19 @@ $(full_target): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir
 
 $(full_target): $(sdk_addon_deps) | $(SOONG_ZIP)
 	@echo Packaging SDK Addon: $@
-	$(hide) mkdir -p $(PRIVATE_STAGING_DIR)/docs
-	$(hide) for d in $(PRIVATE_DOCS_DIRS); do \
+	mkdir -p $(PRIVATE_STAGING_DIR)/docs
+	for d in $(PRIVATE_DOCS_DIRS); do \
 	    cp -R $$d $(PRIVATE_STAGING_DIR)/docs ;\
 	  done
-	$(hide) mkdir -p $(dir $@)
-	$(hide) $(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
+	mkdir -p $(dir $@)
+	$(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
 
 $(full_target_img): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir_img))/images/$(TARGET_CPU_ABI)
 $(full_target_img): $(full_target) $(addon_img_source_prop) | $(SOONG_ZIP)
 	@echo Packaging SDK Addon System-Image: $@
-	$(hide) mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	cp -R $(PRODUCT_OUT)/data $(PRIVATE_STAGING_DIR)/data
-	$(hide) $(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
+	$(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
 
 
 sdk_addon: $(full_target) $(full_target_img)

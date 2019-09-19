@@ -79,8 +79,8 @@ my_extracted_apk := $(intermediates)/extracted.apk
 $(my_extracted_apk): PRIVATE_EXTRACT := $(my_extract_apk)
 $(my_extracted_apk): $(my_prebuilt_src_file)
 	@echo Extract APK: $@
-	$(hide) mkdir -p $(dir $@) && rm -f $@
-	$(hide) unzip -p $< $(PRIVATE_EXTRACT) >$@
+	mkdir -p $(dir $@) && rm -f $@
+	unzip -p $< $(PRIVATE_EXTRACT) >$@
 
 my_prebuilt_src_file := $(my_extracted_apk)
 my_extracted_apk :=
@@ -238,7 +238,7 @@ endif  # LOCAL_UNCOMPRESS_DEX
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped
-	$(hide) cp -f $@ $(dir $@)package.dex.apk
+	cp -f $@ $(dir $@)package.dex.apk
 endif  # BUILD_PLATFORM_ZIP
 endif  # LOCAL_DEX_PREOPT
 ifneq ($(LOCAL_CERTIFICATE),PRESIGNED)

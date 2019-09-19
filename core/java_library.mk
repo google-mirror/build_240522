@@ -76,7 +76,7 @@ $(common_javalib.jar) : $(full_classes_pre_proguard_jar) $(built_dex) $(java_res
 	$(call extract-resources-jar,$@.parts/res.zip,$(PRIVATE_SOURCE_ARCHIVE))
 	$(MERGE_ZIPS) -j $@.tmp $@.parts/dex.zip $@.parts/res.zip
 	rm -rf $@.parts
-	$(hide) $(ZIPTIME) $@.tmp
+	$(ZIPTIME) $@.tmp
 	$(call commit-change-for-toc,$@)
 ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
 	$(uncompress-dexs)

@@ -23,8 +23,8 @@ sdk_font_config :=  $(addprefix $(SDK_FONT_TEMP)/, $(notdir $(sdk_font_config)))
 
 $(sdk_font_config): $(SDK_FONT_TEMP)/%.xml: \
 			frameworks/base/data/fonts/%.xml
-	$(hide) mkdir -p $(dir $@)
-	$(hide) cp -vf $< $@
+	mkdir -p $(dir $@)
+	cp -vf $< $@
 
 # List of fonts on the device that we want to ship. This is all .ttf fonts.
 sdk_fonts_device := $(filter $(TARGET_OUT)/fonts/%.ttf, $(INTERNAL_SYSTEMIMAGE_FILES))
@@ -38,8 +38,8 @@ sdk_rename_font = PYTHONPATH=$$PYTHONPATH:$(fonttools_lib) $(sdk_font_rename_scr
 # target.
 $(sdk_fonts_device): $(SDK_FONT_TEMP)/%.ttf: $(TARGET_OUT)/fonts/%.ttf \
 			$(sdk_font_rename_script)
-	$(hide) mkdir -p $(dir $@)
-	$(hide) $(call sdk_rename_font,$<,$@)
+	mkdir -p $(dir $@)
+	$(call sdk_rename_font,$<,$@)
 
 # List of all dependencies - all fonts and configuration files.
 SDK_FONT_DEPS := $(sdk_fonts_device) $(sdk_font_config)
@@ -53,8 +53,8 @@ fontfullname := $$(SDK_FONT_TEMP)/$1
 ifeq ($$(filter $$(fontfullname),$$(sdk_fonts_device)),)
 SDK_FONT_DEPS += $$(fontfullname)
 $$(fontfullname): $2 $$(sdk_font_rename_script)
-	$$(hide) mkdir -p $$(dir $$@)
-	$$(hide) $$(call sdk_rename_font,$$<,$$@)
+	$mkdir -p $$(dir $$@)
+	$$$(call sdk_rename_font,$$<,$$@)
 endif
 fontfullname :=
 endef

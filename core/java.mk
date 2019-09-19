@@ -265,7 +265,7 @@ ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_header_jarjar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_header_jarjar): $(full_classes_turbine_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
 	@echo Header JarJar: $@
-	$(hide) $(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
+	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_header_jarjar := $(full_classes_turbine_jar)
 endif
@@ -306,7 +306,7 @@ $(full_classes_combined_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_D
 $(full_classes_combined_jar): $(full_classes_compiled_jar) \
                               $(jar_manifest_file) \
                               $(full_static_java_libs) | $(MERGE_ZIPS)
-	$(if $(PRIVATE_JAR_MANIFEST), $(hide) sed -e "s/%BUILD_NUMBER%/$(BUILD_NUMBER_FROM_FILE)/" \
+	$(if $(PRIVATE_JAR_MANIFEST), sed -e "s/%BUILD_NUMBER%/$(BUILD_NUMBER_FROM_FILE)/" \
             $(PRIVATE_JAR_MANIFEST) > $(dir $@)/manifest.mf)
 	$(MERGE_ZIPS) -j --ignore-duplicates $(if $(PRIVATE_JAR_MANIFEST),-m $(dir $@)/manifest.mf) \
             $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,-stripDir META-INF -zipToNotStrip $<) \
@@ -329,9 +329,9 @@ out :=
 
 $(full_classes_processed_jar): $(full_classes_combined_jar) $(my_jar_processor)
 	@echo Processing $@ with $(PRIVATE_JAR_PROCESSOR)
-	$(hide) rm -f $@ $(PRIVATE_TMP_OUT)
-	$(hide) $(JAVA) -jar $(PRIVATE_JAR_PROCESSOR) $(PRIVATE_JAR_PROCESSOR_ARGS)
-	$(hide) mv $(PRIVATE_TMP_OUT) $@
+	rm -f $@ $(PRIVATE_TMP_OUT)
+	$(JAVA) -jar $(PRIVATE_JAR_PROCESSOR) $(PRIVATE_JAR_PROCESSOR_ARGS)
+	mv $(PRIVATE_TMP_OUT) $@
 
 my_jar_processor :=
 else
@@ -343,7 +343,7 @@ ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_jarjar_jar): $(full_classes_processed_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
 	@echo JarJar: $@
-	$(hide) $(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
+	$(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
 else
 full_classes_jarjar_jar := $(full_classes_processed_jar)
 endif
@@ -507,9 +507,9 @@ endif
 
 $(built_dex): $(built_dex_intermediate)
 	@echo Copying: $@
-	$(hide) mkdir -p $(dir $@)
-	$(hide) rm -f $(dir $@)/classes*.dex
-	$(hide) cp -fp $(dir $<)/classes*.dex $(dir $@)
+	mkdir -p $(dir $@)
+	rm -f $(dir $@)/classes*.dex
+	cp -fp $(dir $<)/classes*.dex $(dir $@)
 
 java-dex: $(built_dex)
 
@@ -521,7 +521,7 @@ $(findbugs_xml): PRIVATE_AUXCLASSPATH := $(addprefix -auxclasspath ,$(strip \
 $(findbugs_xml): PRIVATE_FINDBUGS_FLAGS := $(LOCAL_FINDBUGS_FLAGS)
 $(findbugs_xml) : $(full_classes_pre_proguard_jar) $(filter %.xml, $(LOCAL_FINDBUGS_FLAGS))
 	@echo Findbugs: $@
-	$(hide) $(FINDBUGS) -textui -effort:min -xml:withMessages \
+	$(FINDBUGS) -textui -effort:min -xml:withMessages \
 		$(PRIVATE_AUXCLASSPATH) $(PRIVATE_FINDBUGS_FLAGS) \
 		$< \
 		> $@
@@ -535,7 +535,7 @@ $(LOCAL_MODULE)-findbugs : $(findbugs_html)
 $(findbugs_html) : $(findbugs_xml)
 	@mkdir -p $(dir $@)
 	@echo ConvertXmlToText: $@
-	$(hide) $(FINDBUGS_DIR)/convertXmlToText -html:fancy.xsl $(PRIVATE_XML_FILE) \
+	$(FINDBUGS_DIR)/convertXmlToText -html:fancy.xsl $(PRIVATE_XML_FILE) \
 	> $@
 
 $(LOCAL_MODULE)-findbugs : $(findbugs_html)

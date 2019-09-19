@@ -34,7 +34,7 @@ ifneq (,$(strip $(my_full_libs_manifest_files)))
   $(full_android_manifest) : $(fixed_android_manifest) $(my_full_libs_manifest_files)
 	@echo "Merge android manifest files: $@ <-- $< $(PRIVATE_LIBS_MANIFESTS)"
 	@mkdir -p $(dir $@)
-	$(hide) $(ANDROID_MANIFEST_MERGER) --main $< \
+	$(ANDROID_MANIFEST_MERGER) --main $< \
 	    --libs $(call normalize-path-list,$(PRIVATE_LIBS_MANIFESTS)) \
 	    --out $@
 else

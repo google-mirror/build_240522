@@ -391,14 +391,14 @@ $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS_FILES := $(exported_sdk_
 $(my_exported_sdk_libs_file): PRIVATE_SDK_LIBS := $(sort $(LOCAL_SDK_LIBRARIES))
 $(my_exported_sdk_libs_file): $(exported_sdk_libs_files)
 	@echo "Export SDK libs $@"
-	$(hide) mkdir -p $(dir $@) && rm -f $@ $@.temp
+	mkdir -p $(dir $@) && rm -f $@ $@.temp
 	$(if $(PRIVATE_SDK_LIBS),\
 		echo $(PRIVATE_SDK_LIBS) | tr ' ' '\n' > $@.temp,\
 		touch $@.temp)
 	$(if $(PRIVATE_EXPORTED_SDK_LIBS_FILES),\
 		cat $(PRIVATE_EXPORTED_SDK_LIBS_FILES) >> $@.temp)
-	$(hide) cat $@.temp | sort -u > $@
-	$(hide) rm -f $@.temp
+	cat $@.temp | sort -u > $@
+	rm -f $@.temp
 
 ifdef empty_bootclasspath
   ifdef full_java_bootclasspath_libs

@@ -50,13 +50,13 @@ ifdef eclipse_project_goals
 # the mess below with ./src tries to guess whether the src
 $(eclipse_project_goals): .classpath
 .classpath: FORCE
-	$(hide) echo Generating .classpath for eclipse
-	$(hide) echo '<classpath>' > $@
-	$(hide) for p in $(PRIVATE_DIRS) ; do \
+	echo Generating .classpath for eclipse
+	echo '<classpath>' > $@
+	for p in $(PRIVATE_DIRS) ; do \
 		echo -n '  <classpathentry kind="src" path="' >> $@ ; \
 		( if [ -d $$p/src ] ; then echo -n $$p/src ; else echo -n $$p ; fi ) >> $@ ; \
 		echo '"/>' >> $@ ; \
 	done
-	$(hide) echo '</classpath>' >> $@
+	echo '</classpath>' >> $@
 endif
 

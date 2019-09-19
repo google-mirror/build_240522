@@ -39,11 +39,11 @@ include $(BUILD_PREBUILT)
 # Use a touch rule to establish the dependency.
 ifndef PDK_FUSION_PLATFORM_DIR
 $(3) $(11) : $(_pdk_fusion_stamp)
-	$(hide) if [ ! -f $$@ ]; then \
+	if [ ! -f $$@ ]; then \
 	  echo 'Error: $$@ does not exist. Check your platform.zip.' 1>&2; \
 	  exit 1; \
 	fi
-	$(hide) touch $$@
+	touch $$@
 endif
 endef
 

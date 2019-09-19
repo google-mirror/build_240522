@@ -32,8 +32,8 @@ $(stamp): PRIVATE_SCRIPT := $(script)
 $(stamp): PRIVATE_WHITELIST := $(whitelist_file)
 $(stamp) : $(built_boot_jars) $(script) $(whitelist_file)
 	@echo "Check package name for $(PRIVATE_BOOT_JARS)"
-	$(hide) $(PRIVATE_SCRIPT) $(PRIVATE_WHITELIST) $(PRIVATE_BOOT_JARS)
-	$(hide) mkdir -p $(dir $@) && touch $@
+	$(PRIVATE_SCRIPT) $(PRIVATE_WHITELIST) $(PRIVATE_BOOT_JARS)
+	mkdir -p $(dir $@) && touch $@
 
 .PHONY: check-boot-jars
 check-boot-jars : $(stamp)

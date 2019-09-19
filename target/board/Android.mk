@@ -20,12 +20,12 @@ ifndef board_info_txt
 board_info_txt := $(wildcard $(TARGET_DEVICE_DIR)/board-info.txt)
 endif
 $(INSTALLED_ANDROID_INFO_TXT_TARGET): $(board_info_txt) build/make/tools/check_radio_versions.py
-	$(hide) build/make/tools/check_radio_versions.py $< $(BOARD_INFO_CHECK)
+	build/make/tools/check_radio_versions.py $< $(BOARD_INFO_CHECK)
 	$(call pretty,"Generated: ($@)")
 ifdef board_info_txt
-	$(hide) grep -v '#' $< > $@
+	grep -v '#' $< > $@
 else
-	$(hide) echo "board=$(TARGET_BOOTLOADER_BOARD_NAME)" > $@
+	echo "board=$(TARGET_BOOTLOADER_BOARD_NAME)" > $@
 endif
 
 # Copy compatibility metadata to the device.

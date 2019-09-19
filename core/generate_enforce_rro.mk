@@ -20,7 +20,7 @@ $(rro_android_manifest_file): PRIVATE_PARTITION := $(enforce_rro_partition)
 # /product overlays to be higher than /vendor, to at least get deterministic results.
 $(rro_android_manifest_file): PRIVATE_PRIORITY := $(if $(filter product,$(enforce_rro_partition)),1,0)
 $(rro_android_manifest_file): build/make/tools/generate-enforce-rro-android-manifest.py
-	$(hide) build/make/tools/generate-enforce-rro-android-manifest.py \
+	build/make/tools/generate-enforce-rro-android-manifest.py \
 	    --package-info $(PRIVATE_PACKAGE_INFO) \
 	    $(PRIVATE_USE_PACKAGE_NAME) \
 	    --partition $(PRIVATE_PARTITION) \

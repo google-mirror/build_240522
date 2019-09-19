@@ -45,7 +45,7 @@ $(my_test_config_file) : $(my_base_test_config_file)
 		$(foreach option,$(PRIVATE_test_config_options), \
 			$(eval p := $(subst :,$(space),$(option))) \
 			<option name="$(word 1,$(p))" value="$(word 2,$(p))" \/>\n))
-	$(hide) sed 's&</configuration>&$(_option_xml)</configuration>&' $< > $@
+	sed 's&</configuration>&$(_option_xml)</configuration>&' $< > $@
 
 endif # my_test_config_file
 

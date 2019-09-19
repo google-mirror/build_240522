@@ -28,9 +28,9 @@ $(tradefed_tests_list_zip) : PRIVATE_tradefed_tests_list := $(tradefed_tests_lis
 
 $(tradefed_tests_list_zip) : $(tradefed_tests) $(SOONG_ZIP)
 	@echo "Package: $@"
-	$(hide) rm -rf $(dir $@) && mkdir -p $(dir $@)
-	$(hide) echo -e "$(PRIVATE_tradefed_tests)" > $(PRIVATE_tradefed_tests_list)
-	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -f $(PRIVATE_tradefed_tests_list)
+	rm -rf $(dir $@) && mkdir -p $(dir $@)
+	echo -e "$(PRIVATE_tradefed_tests)" > $(PRIVATE_tradefed_tests_list)
+	$(SOONG_ZIP) -d -o $@ -C $(dir $@) -f $(PRIVATE_tradefed_tests_list)
 
 tradefed-tests-list : $(tradefed_tests_list_zip)
 $(call dist-for-goals, tradefed-tests-list, $(tradefed_tests_list_zip))

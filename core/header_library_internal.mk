@@ -18,4 +18,4 @@ $(call pretty-error,Header libraries may not have any sources)
 endif
 
 $(LOCAL_BUILT_MODULE):
-	$(hide) touch $@
+	touch $@

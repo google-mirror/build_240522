@@ -79,8 +79,8 @@ $(shell mkdir -p $(EMPTY_DIRECTORY) && rm -rf $(EMPTY_DIRECTORY)/*)
 # Clean rules
 .PHONY: clean-dex-files
 clean-dex-files:
-	$(hide) find $(OUT_DIR) -name "*.dex" | xargs rm -f
-	$(hide) for i in `find $(OUT_DIR) -name "*.jar" -o -name "*.apk"` ; do ((unzip -l $$i 2> /dev/null | \
+	find $(OUT_DIR) -name "*.dex" | xargs rm -f
+	for i in `find $(OUT_DIR) -name "*.jar" -o -name "*.apk"` ; do ((unzip -l $$i 2> /dev/null | \
 				grep -q "\.dex$$" && rm -f $$i) || continue ) ; done
 	@echo "All dex files and archives containing dex files have been removed."
 
@@ -1240,7 +1240,7 @@ else
   # local work you can also disable the check with the
   # DISABLE_APEX_LIBS_ABSENCE_CHECK environment variable.
   define check-apex-libs-absence-on-disk
-    $(hide) ( \
+    ( \
       cd $(TARGET_OUT) && \
       findres=$$(find lib* \
         $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),-path "$(subst %,*,$(dir))" -prune -o) \
@@ -1713,9 +1713,9 @@ else # TARGET_BUILD_APPS
 
   api_xmls := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/,api.xml system-api.xml test-api.xml)
   $(api_xmls):
-	$(hide) echo "Converting API file to XML: $@"
-	$(hide) mkdir -p $(dir $@)
-	$(hide) $(APICHECK_COMMAND) --input-api-jar $< --api-xml $@
+	echo "Converting API file to XML: $@"
+	mkdir -p $(dir $@)
+	$(APICHECK_COMMAND) --input-api-jar $< --api-xml $@
 
   $(call dist-for-goals, dist_files, $(api_xmls))
   api_xmls :=

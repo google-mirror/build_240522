@@ -643,7 +643,7 @@ $(call track-src-file-gen,$(renderscript_sources),$(rs_generated_cpps))
 # This is just a dummy rule to make sure gmake doesn't skip updating the dependents.
 $(rs_generated_cpps) : $(RenderScript_file_stamp)
 	@echo "Updated RS generated cpp file $@."
-	$(hide) touch $@
+	touch $@
 
 my_c_includes += $(renderscript_intermediate)
 my_generated_sources += $(rs_generated_cpps)
@@ -705,7 +705,7 @@ proto_intermediate_cpps := $(patsubst $(proto_gen_dir)/%,$(proto_intermediate_di
 $(proto_intermediate_cpps) : $(proto_intermediate_dir)/% : $(proto_gen_dir)/%
 	@echo "Copy: $@"
 	$(copy-file-to-target)
-	$(hide) cp $(basename $<).h $(basename $@).h
+	cp $(basename $<).h $(basename $@).h
 $(call track-src-file-gen,$(proto_sources),$(proto_intermediate_cpps))
 
 my_generated_sources += $(proto_intermediate_cpps)

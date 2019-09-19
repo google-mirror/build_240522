@@ -167,9 +167,9 @@ my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
 $(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
 $(my_exported_sdk_libs_file):
 	@echo "Export SDK libs $@"
-	$(hide) mkdir -p $(dir $@) && rm -f $@
+	mkdir -p $(dir $@) && rm -f $@
 	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
-		$(hide) echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
-		$(hide) touch $@)
+		echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
+		touch $@)
 
 SOONG_ALREADY_CONV := $(SOONG_ALREADY_CONV) $(LOCAL_MODULE)

@@ -62,7 +62,7 @@ ifneq ($(LOCAL_CUSTOM_BUILD_STEP_OUTPUT),)
 $(LOCAL_CUSTOM_BUILD_STEP_INPUT): $(aux_output)
 	@echo "$(AUX_DISPLAY) custom copy: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) $(copy-file-to-target)
+	$(copy-file-to-target)
 
 aux_output := $(LOCAL_CUSTOM_BUILD_STEP_OUTPUT)
 
@@ -72,7 +72,7 @@ endif
 $(LOCAL_BUILT_MODULE): $(aux_output)
 	@echo "$(AUX_DISPLAY) final copy: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
-	$(hide) $(copy-file-to-target)
+	$(copy-file-to-target)
 
 INSTALLED_AUX_TARGETS += $(LOCAL_INSTALLED_MODULE)
 

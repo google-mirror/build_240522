@@ -97,10 +97,10 @@ ifdef PDK_FUSION_PLATFORM_ZIP
 
 $(_pdk_fusion_stamp) : $(PDK_FUSION_PLATFORM_ZIP)
 	@echo "Unzip $(dir $@) <- $<"
-	$(hide) rm -rf $(dir $@) && mkdir -p $(dir $@)
-	$(hide) unzip -qo $< -d $(dir $@)
+	rm -rf $(dir $@) && mkdir -p $(dir $@)
+	unzip -qo $< -d $(dir $@)
 	$(call split-long-arguments,-touch,$(_pdk_fusion_files))
-	$(hide) touch $@
+	touch $@
 
 $(_pdk_fusion_files) : $(_pdk_fusion_stamp)
 endif # PDK_FUSION_PLATFORM_ZIP
@@ -121,13 +121,13 @@ endif
 # Copy with the last-modified time preserved, never follow symbolic links.
 $(PRODUCT_OUT)/% : $(_pdk_fusion_intermediates)/% $(_pdk_fusion_stamp)
 	@mkdir -p $(dir $@)
-	$(hide) rm -rf $@
-	$(hide) cp -fpPR $< $@
+	rm -rf $@
+	cp -fpPR $< $@
 
 # implicit rules for host java files
 $(HOST_COMMON_OUT_ROOT)/% : $(_pdk_fusion_intermediates)/host/common/% $(_pdk_fusion_stamp)
 	@mkdir -p $(dir $@)
-	$(hide) cp -fpPR $< $@
+	cp -fpPR $< $@
 
 ifeq (true,$(TARGET_BUILD_PDK_JAVA_PLATFORM))
   PDK_FUSION_OUT_DIR := $(OUT_DIR)
@@ -150,7 +150,7 @@ ifeq (true,$(TARGET_BUILD_PDK_JAVA_PLATFORM))
 # implicit rules for all other target files
 $(TARGET_COMMON_OUT_ROOT)/% : $(_pdk_fusion_intermediates)/target/common/% $(_pdk_fusion_stamp)
 	@mkdir -p $(dir $@)
-	$(hide) cp -fpPR $< $@
+	cp -fpPR $< $@
 endif # TARGET_BUILD_PDK_JAVA_PLATFORM
 
 ALL_PDK_FUSION_FILES := $(addprefix $(PRODUCT_OUT)/, $(_pdk_fusion_file_list))

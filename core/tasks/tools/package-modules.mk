@@ -73,9 +73,9 @@ $(my_package_zip) : $(my_built_modules)
 	  $(eval pair := $(subst :,$(space),$(p)))\
 	  mkdir -p $(dir $(word 2,$(pair))) && \
 	  cp -Rf $(word 1,$(pair)) $(word 2,$(pair)) && ) true
-	$(hide) $(foreach f, $(PRIVATE_PICKUP_FILES),\
+	$(foreach f, $(PRIVATE_PICKUP_FILES),\
 	  cp -RfL $(f) $(dir $@) && ) true
-	$(hide) cd $(dir $@) && zip -rqX $(notdir $@) *
+	cd $(dir $@) && zip -rqX $(notdir $@) *
 
 my_makefile :=
 my_staging_dir :=
