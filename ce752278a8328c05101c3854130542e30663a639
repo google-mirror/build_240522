@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4f1e67d_9b99708d",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T17:08:26Z",
+      "side": 1,
+      "message": "dwillemsen is the expert on the BUILD_BROKEN_* variables, but it looks like there are a bunch more references to BUILD_BROKEN_DUP_RULES that look relevant to BUILD_BROKEN_PREBUILT_ELF_FILES:\nhttp://cs/android/build/soong/ui/build/dumpvars.go?l\u003d201\nhttp://cs/android/build/soong/ui/build/dumpvars.go?l\u003d270\nhttp://cs/android/build/soong/scripts/build_broken_logs.go?l\u003d63",
+      "revId": "ce752278a8328c05101c3854130542e30663a639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
