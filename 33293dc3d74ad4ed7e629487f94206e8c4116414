@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e54e1d3c_719458eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-20T03:11:16Z",
+      "side": 1,
+      "message": "Thanks for the change! I guess you\u0027ve found this flag via https://android-review.googlesource.com/c/platform/external/avb/+/963092, and I do have an open bug to make similar change as yours (but not ready yet).\n\nHere\u0027re the additional items we should make, as part of this change:\n- We shouldn\u0027t allow \"unsigned recovery image\" (i.e. Case 2), per CDD 9.10. Device Integrity.\n- With the change to allow booting recovery with AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION, we need to mandate BOARD_AVB_VBMETA_RECOVERY_{KEY_PATH,ALGORITHM,ROLLBACK_INDEX_LOCATION} to be set. When detecting that violation, we need to prompt developer to build bootloader with the matching change to libavb (i.e. the one above).\n- We\u0027ll need matching changes to build/make/tools/releasetools/validate_target_files.py, to additionally verify recovery.img separately.",
+      "range": {
+        "startLine": 19,
+        "startChar": 37,
+        "endLine": 19,
+        "endChar": 78
+      },
+      "revId": "33293dc3d74ad4ed7e629487f94206e8c4116414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
