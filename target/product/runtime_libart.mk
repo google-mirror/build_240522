@@ -39,21 +39,19 @@ PRODUCT_PACKAGES += com.android.runtime
 # ART APEX module.
 
 # The ART APEX comes in three flavors:
-# - the release module (`com.android.art.release`), containing
-#   only "release" artifacts;
-# - the debug module (`com.android.art.debug`), containing both
-#   "release" and "debug" artifacts, as well as additional tools;
-# - the testing module (`com.android.art.testing`), containing
-#   both "release" and "debug" artifacts, as well as additional tools
-#   and ART gtests).
-
-# Release ART APEX, included by default in "user" builds.
+# - The release module (`com.android.art.release`) containing only
+#   "release" artifacts. Included by default in "user" builds.
 RELEASE_ART_APEX := com.android.art.release
-# Debug ART APEX, included by default in "userdebug" and "eng"
-# builds and used in ART device benchmarking.
+# - The debug module (`com.android.art.debug`), containing both
+#   "release" and "debug" artifacts, as well as additional tools.
+#   Included by default in "userdebug" and "eng" builds and used in
+#   ART device benchmarking.
 DEBUG_ART_APEX := com.android.art.debug
-# Testing ART APEX, used in ART device testing.
+# - The testing module (`com.android.art.testing`), containing both
+#   "release" and "debug" artifacts, as well as additional tools and
+#   ART gtests. Used only for on-device ART testing.
 TESTING_ART_APEX := com.android.art.testing
+# Each package in the above list is a superset of the previous package.
 
 # The ART APEX module (`com.android.art`) is an "alias" for either the
 # release or the debug module. By default, "user" build variants contain
