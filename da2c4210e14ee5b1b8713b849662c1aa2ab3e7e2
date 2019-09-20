@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "768649cf_75923b00",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "If these all come from Soong there is no need to capture this list here, do it in Soong in a Singleton instead.",
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab652a6b_4245f529",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "$(patsubst %/,%,$(dir $(my_module_path)))",
+      "range": {
+        "startLine": 589,
+        "startChar": 12,
+        "endLine": 589,
+        "endChar": 62
+      },
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "796fa06c_379d1fa6",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "sorting every time like this can get expensive as the list gets longer, its better to sort once at the end.",
+      "range": {
+        "startLine": 590,
+        "startChar": 29,
+        "endLine": 590,
+        "endChar": 36
+      },
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee538007_ede71212",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "Don\u0027t create files in phony rules.  Make rules to build each zip, and then make the fuzz phony target depend on them.  Also, you have to call dist-for-goals on the zip file otherwise it won\u0027t be in the build server artifacts.",
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25bbefb1_739e7704",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1809,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "This isn\u0027t used",
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2813810e_6c53aa4b",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T18:08:54Z",
+      "side": 1,
+      "message": "This should go somewhere in $OUT/obj/PACKAGING",
+      "range": {
+        "startLine": 1810,
+        "startChar": 18,
+        "endLine": 1810,
+        "endChar": 43
+      },
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
