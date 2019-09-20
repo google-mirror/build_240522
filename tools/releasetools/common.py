@@ -650,8 +650,11 @@ def GetAvbPartitionArg(partition, image, info_dict = None):
   # Check if chain partition is used.
   key_path = info_dict.get("avb_" + partition + "_key_path")
   if key_path:
-    chained_partition_arg = GetAvbChainedPartitionArg(partition, info_dict)
-    return ["--chain_partition", chained_partition_arg]
+    if OPTIONS.info_dict.get("ab_update") == "true" or partition != "recovery":
+      chained_partition_arg = GetAvbChainedPartitionArg(partition, info_dict)
+      return ["--chain_partition", chained_partition_arg]
+    else:
+      return []
   else:
     return ["--include_descriptors_from_image", image]
 
