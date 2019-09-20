@@ -16,6 +16,24 @@
       "revId": "ce752278a8328c05101c3854130542e30663a639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56c7a686_3b7d2ea2",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2019-09-20T20:03:45Z",
+      "side": 1,
+      "message": "I uploaded aosp/1126261 to dump BUILD_BROKEN_PREBUILT_ELF_FILES to out/soong.log.\n\np.s. I didn\u0027t add http://cs/android/build/soong/ui/build/dumpvars.go?l\u003d270 because soong source code don\u0027t rely on BUILD_BROKEN_PREBUILT_ELF_FILES yet.",
+      "parentUuid": "f4f1e67d_9b99708d",
+      "revId": "ce752278a8328c05101c3854130542e30663a639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
