@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0349a9f5_05706d21",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T22:11:18Z",
+      "side": 1,
+      "message": "All of the fuzz targets that are being collected here are defined as cc_fuzz modules in Soong.  That means that Soong can create the rules to package them, instead of exporting them to make and packaging them here.  See for example https://android-review.googlesource.com/c/platform/build/soong/+/1121926/11/cc/cflag_artifacts.go",
+      "parentUuid": "3cff2b08_d4003515",
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab652a6b_4245f529",
         "filename": "core/base_rules.mk",
         "patchSetId": 1
@@ -236,6 +254,30 @@
       "side": 1,
       "message": "Putting this in the PACKAGING dir (through $(call intermediates-dir-for,PACKAGING,fuzz)) means that the x86_64 host fuzzers package gets placed in $ANDROID_PRODUCT_OUT/\u003csnip\u003e, rather than under $ANDROID_HOST_OUT. Having the zipfile containing all fuzz targets/corpora under $ANDROID_HOST_OUT/fuzz/ is nicer to me IMHO, but I may be misunderstanding your point. WDYT?",
       "parentUuid": "2813810e_6c53aa4b",
+      "range": {
+        "startLine": 1810,
+        "startChar": 18,
+        "endLine": 1810,
+        "endChar": 43
+      },
+      "revId": "da2c4210e14ee5b1b8713b849662c1aa2ab3e7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd84c273_cf1d6968",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-09-20T22:11:18Z",
+      "side": 1,
+      "message": "Target fuzzers shouldn\u0027t go in the host directory either.  intermediates-dir-for takes an argument to select for the host vs device directories.",
+      "parentUuid": "295c9873_80be3be3",
       "range": {
         "startLine": 1810,
         "startChar": 18,
