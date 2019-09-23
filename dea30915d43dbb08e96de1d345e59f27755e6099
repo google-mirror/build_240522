@@ -190,6 +190,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb8aaa06_4c426bbe",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-09-23T13:25:18Z",
+      "side": 1,
+      "message": "\u0027because GSI would have no way to \"undo\" that\u0027 this is why I think setting it in BoardConfigMainlineCommon would be a problem, other than that I don\u0027t see a problem too.\n\nI think letting the build system choose the sysprop automatically is more reasonable.",
+      "parentUuid": "d9f492a0_da199a8a",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
