@@ -214,6 +214,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ab897ca_0092785a",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-09-23T13:29:00Z",
+      "side": 1,
+      "message": "Right, to clarify what I\u0027m suggesting is to:\n- put TARGET_FLATTEN_APEX in BoardConfigMainlineCommon instead of here\n- auto-write the sysprop in the build based on TARGET_FLATTEN_APEX",
+      "parentUuid": "fb8aaa06_4c426bbe",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
