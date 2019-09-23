@@ -22,6 +22,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecda6e9c_f599f119",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-09-23T09:00:07Z",
+      "side": 1,
+      "message": "According to aosp/957100 I believe it\u0027s by default true.\nI modified this file from mainline_arm64/BoardConfig.mk, so I tried to keep the modification minimal. (So that the \"logic\" of this BoardConfig is same as mainline_arm64, only the arch is different)\n\nI think it\u0027s better if we change this line to:\n$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)\n\nthoughts?",
+      "parentUuid": "e3b1613b_93aa30d4",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
