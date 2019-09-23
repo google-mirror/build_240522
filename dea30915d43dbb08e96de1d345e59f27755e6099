@@ -46,6 +46,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "322b5402_f9ef0672",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-09-23T09:23:11Z",
+      "side": 1,
+      "message": "ah sorry, got myself confused.\n\nIt actually was in BoardConfigMainlineCommon in AOSP prior to the Q -\u003e aosp push,. I do believe it needs to be added back there.. I think I originally moved it out of there because of emulator actually, so if that\u0027s no longer true, maybe we can just add it to BoardConfigMainlineCommon directly? GSI can override it to false.\n\nSee http://go/ag/7951568",
+      "parentUuid": "ecda6e9c_f599f119",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
