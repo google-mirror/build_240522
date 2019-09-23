@@ -166,6 +166,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9f492a0_da199a8a",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-09-23T12:19:54Z",
+      "side": 1,
+      "message": "- it would be better to have the build system automatically write the right value of the sysprop based on the value of TARGET_FLATTEN_APEX\n- I don\u0027t see why setting it in BoardConfigMainlineCommon would be a problem. We want to override the default. We can\u0027t set the prop in the board config though, because GSI would have no way to \"undo\" that.",
+      "parentUuid": "dac635df_649b9ad4",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
