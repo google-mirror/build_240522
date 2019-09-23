@@ -118,6 +118,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f58fa07_9476264e",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-09-23T10:58:10Z",
+      "side": 1,
+      "message": "I believe TARGET_FLATTEN_APEX defaults to true and this var is not meant to be set/unset directly?\nOne only override APEX flatness through updatable_apex.mk. It feels contradicted to set TARGET_FLATTEN_APEX to false in BoardConfigMainlineCommon, because\n1. Then the default value introduced in aosp/957100 is overridden\n2. BoardConfigGsiCommon.mk would have to unset TARGET_FLATTEN_APEX and sysprop ro.apex.updatable",
+      "parentUuid": "be51e50a_d1557edd",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
