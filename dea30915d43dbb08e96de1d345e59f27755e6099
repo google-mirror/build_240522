@@ -238,6 +238,30 @@
       "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54eb4589_5a5f68f8",
+        "filename": "target/board/mainline_x86/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-09-23T13:51:26Z",
+      "side": 1,
+      "message": "I agree. Let\u0027s see what +jiyong think. If he agree that it\u0027s better to let the build system auto-choose the sysprop, then I can prepare another CL to move TARGET_FLATTEN_APEX to BoardConfigMainlineCommon and phase out updatable_apex.mk.",
+      "parentUuid": "6ab897ca_0092785a",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "dea30915d43dbb08e96de1d345e59f27755e6099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
