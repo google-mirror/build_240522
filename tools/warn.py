@@ -271,6 +271,9 @@ warn_patterns = [
     {'category': 'C/C++', 'severity': Severity.MEDIUM, 'option': '-Wdate-time',
      'description': 'Expansion of data or time macro',
      'patterns': [r".*: warning: expansion of date or time macro is not reproducible"]},
+    {'category': 'C/C++', 'severity': Severity.MEDIUM, 'option': '-Wexpansion-to-defined',
+     'description': 'Macro expansion has undefined behavior',
+     'patterns': [r".*: warning: macro expansion .* has undefined behavior"]},
     {'category': 'C/C++', 'severity': Severity.MEDIUM, 'option': '-Wformat',
      'description': 'Format string does not match arguments',
      'patterns': [r".*: warning: format '.+' expects type '.+', but argument [0-9]+ has type '.+'",
@@ -484,6 +487,9 @@ warn_patterns = [
     {'category': 'java', 'severity': Severity.MEDIUM,
      'description': '_ used as an identifier',
      'patterns': [r".*: warning: '_' used as an identifier"]},
+    {'category': 'java', 'severity': Severity.MEDIUM,
+     'description': 'Java: hidden superclass',
+     'patterns': [r".*: warning: .* stripped of .* superclass .* \[HiddenSuperclass\]"]},
     {'category': 'java', 'severity': Severity.HIGH,
      'description': 'Use of internal proprietary API',
      'patterns': [r".*: warning: .* is internal proprietary API and may be removed"]},
@@ -2289,7 +2295,7 @@ warn_patterns = [
      'patterns': [r".*: warning: multi-line comment"]},
     {'category': 'C/C++', 'severity': Severity.LOW, 'option': '-Wcomment',
      'description': 'Comment inside comment',
-     'patterns': [r".*: warning: "".+"" within comment"]},
+     'patterns': [r".*: warning: '.+' within block comment .*-Wcomment"]},
     # Warning "value stored is never read" could be from clang-tidy or clang static analyzer.
     {'category': 'C/C++', 'severity': Severity.ANALYZER,
      'description': 'clang-analyzer Value stored is never read',
@@ -2311,7 +2317,8 @@ warn_patterns = [
      'patterns': [r".*: warning: extra tokens at end of #endif directive"]},
     {'category': 'C/C++', 'severity': Severity.MEDIUM, 'option': '-Wenum-compare',
      'description': 'Comparison between different enums',
-     'patterns': [r".*: warning: comparison between '.+' and '.+'.+Wenum-compare"]},
+     'patterns': [r".*: warning: comparison between '.+' and '.+'.+Wenum-compare",
+                  r".*: warning: comparison of .* enumeration types .*-Wenum-compare-switch"]},
     {'category': 'C/C++', 'severity': Severity.MEDIUM, 'option': '-Wconversion',
      'description': 'Conversion may change value',
      'patterns': [r".*: warning: converting negative value '.+' to '.+'",
@@ -2329,8 +2336,9 @@ warn_patterns = [
      'description': 'Zero used as null pointer',
      'patterns': [r".*: warning: expression .* zero treated as a null pointer constant"]},
     {'category': 'C/C++', 'severity': Severity.MEDIUM,
-     'description': 'Implicit conversion changes value',
-     'patterns': [r".*: warning: implicit conversion .* changes value from .* to .*-conversion"]},
+     'description': 'Implicit conversion changes value or loses precision',
+     'patterns': [r".*: warning: implicit conversion .* changes value from .* to .*-conversion",
+                  r".*: warning: implicit conversion loses integer precision:"]},
     {'category': 'C/C++', 'severity': Severity.MEDIUM,
      'description': 'Passing NULL as non-pointer argument',
      'patterns': [r".*: warning: passing NULL to non-pointer argument [0-9]+ of '.+'"]},
@@ -2420,9 +2428,9 @@ warn_patterns = [
     {'category': 'logtags', 'severity': Severity.LOW, 'option': 'overloaded-virtual',
      'description': 'Hides overloaded virtual function',
      'patterns': [r".*: '.+' hides overloaded virtual function"]},
-    {'category': 'logtags', 'severity': Severity.LOW, 'option': 'incompatible-pointer-types',
+    {'category': 'logtags', 'severity': Severity.LOW,
      'description': 'Incompatible pointer types',
-     'patterns': [r".*: warning: incompatible pointer types .+Wincompatible-pointer-types"]},
+     'patterns': [r".*: warning: incompatible .*pointer types .*-Wincompatible-.*pointer-types"]},
     {'category': 'logtags', 'severity': Severity.LOW, 'option': 'asm-operand-widths',
      'description': 'ASM value size does not match register size',
      'patterns': [r".*: warning: value size does not match register size specified by the constraint and modifier"]},
@@ -2560,6 +2568,9 @@ warn_patterns = [
     {'category': 'make', 'severity': Severity.HARMLESS,
      'description': 'unusual tags debug eng',
      'patterns': [r".*: warning: .*: unusual tags debug eng"]},
+    {'category': 'make', 'severity': Severity.MEDIUM,
+     'description': 'make: please convert o soong',
+     'patterns': [r".*: warning: .* has been deprecated. Please convert to Soong."]},
 
     # these next ones are to deal with formatting problems resulting from the log being mixed up by 'make -j'
     {'category': 'C/C++', 'severity': Severity.SKIP,
@@ -2574,6 +2585,7 @@ warn_patterns = [
 
     # warnings from clang-tidy
     group_tidy_warn_pattern('android'),
+    simple_tidy_warn_pattern('abseil-string-find-startswith'),
     simple_tidy_warn_pattern('bugprone-argument-comment'),
     simple_tidy_warn_pattern('bugprone-copy-constructor-init'),
     simple_tidy_warn_pattern('bugprone-fold-init-type'),
@@ -2633,6 +2645,7 @@ warn_patterns = [
     simple_tidy_warn_pattern('performance-type-promotion-in-math-fn'),
     simple_tidy_warn_pattern('performance-unnecessary-copy-initialization'),
     simple_tidy_warn_pattern('performance-unnecessary-value-param'),
+    simple_tidy_warn_pattern('portability-simd-intrinsics'),
     group_tidy_warn_pattern('performance'),
     group_tidy_warn_pattern('readability'),
 
@@ -2683,6 +2696,33 @@ warn_patterns = [
      'description': 'clang-analyzer other',
      'patterns': [r".*: .+\[clang-analyzer-.+\]$",
                   r".*: Call Path : .+$"]},
+
+    # Assembler warnings
+    {'category': 'asm', 'severity': Severity.MEDIUM,
+     'description': 'IT instruction is deprecated',
+     'patterns': [r".*: warning: applying IT instruction .* is deprecated"]},
+
+    # NDK warnings
+    {'category': 'protoc', 'severity': Severity.HIGH,
+     'description': 'Generate guard with empty availability, obsoleted',
+     'patterns': [r".*: warning: .* generate guard with empty availability: obsoleted ="]},
+
+    # Protoc warnings
+    {'category': 'protoc', 'severity': Severity.MEDIUM,
+     'description': 'Enum name colision after strip',
+     'patterns': [r".*: warning: Enum .* has the same name .* ignore case and strip"]},
+
+    # Kotlin warnings
+    {'category': 'kotlin', 'severity': Severity.MEDIUM,
+     'description': 'Never used parameter',
+     'patterns': [r".*: warning: parameter '.*' is never used"]},
+    {'category': 'kotlin', 'severity': Severity.MEDIUM,
+     'description': 'Deprecated in Java',
+     'patterns': [r".*: warning: '.*' is deprecated. Deprecated in Java"]},
+    {'category': 'kotlin', 'severity': Severity.MEDIUM,
+     'description': 'Kotlin: library has Kotlin runtime',
+     'patterns': [r".*: warning: library has Kotlin runtime bundled into it",
+                  r".*: warning: some JAR files .* have the Kotlin Runtime library"]},
 
     # rustc warnings
     {'category': 'rust', 'severity': Severity.HIGH,
