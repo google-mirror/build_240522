@@ -3211,6 +3211,28 @@ def normalize_warning_line(line):
     return line
 
 
+def quick_find_android_root():
+  """Guess android_root from common prefix of file paths."""
+  # Use the longest common prefix of the absolute file paths
+  # of the first 10000 warning messages as the android_root.
+  global android_root
+  warning_lines = set()
+  warning_pattern = re.compile('^/[^ ]*/[^ ]*: warning: .*')
+  count = 0
+  infile = io.open(args.buildlog, mode='r', encoding='utf-8')
+  for line in infile:
+    if warning_pattern.match(line):
+      warning_lines.add(line)
+      count += 1
+      if count > 9999:
+        break
+  if count < 100:
+    return  # do not use common prefix of a small number of paths
+  root_path = os.path.commonprefix(warning_lines)
+  if len(root_path) > 2 and root_path[len(root_path) - 1] == '/':
+    android_root = root_path[:-1]
+
+
 def parse_input_file(infile):
   """Parse input file, collect parameters and warning lines."""
   global android_root
@@ -3569,6 +3591,7 @@ def dump_csv(writer):
 
 
 def main():
+  quick_find_android_root()
   # We must use 'utf-8' codec to parse some non-ASCII code in warnings.
   warning_lines = parse_input_file(
       io.open(args.buildlog, mode='r', encoding='utf-8'))
