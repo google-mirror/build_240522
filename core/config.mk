@@ -653,6 +653,19 @@ endif
 .KATI_READONLY := \
     PRODUCT_COMPATIBLE_PROPERTY
 
+# Boolean variable determining if system property is fully treblized
+PRODUCT_FULL_TREBLE_PROPERTY := false
+ifneq ($(PRODUCT_FULL_TREBLE_PROPERTY_OVERRIDE),)
+  PRODUCT_FULL_TREBLE_PROPERTY := $(PRODUCT_FULL_TREBLE_PROPERTY_OVERRIDE)
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  #$(warning no product shipping level defined)
+else ifneq ($(call math_lt,29,$(PRODUCT_SHIPPING_API_LEVEL)),)
+  PRODUCT_FULL_TREBLE_PROPERTY := true
+endif
+
+.KATI_READONLY := \
+    PRODUCT_FULL_TREBLE_PROPERTY
+
 # Boolean variable determining if Treble is fully enabled
 PRODUCT_FULL_TREBLE := false
 ifneq ($(PRODUCT_FULL_TREBLE_OVERRIDE),)

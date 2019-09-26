@@ -304,6 +304,9 @@ _product_single_value_vars += PRODUCT_DISABLE_SCUDO
 # A flag to override PRODUCT_COMPATIBLE_PROPERTY
 _product_single_value_vars += PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE
 
+# A flag to override PRODUCT_FULL_TREBLE_PROPERTY
+_product_single_value_vars += PRODUCT_FULL_TREBLE_PROPERTY_OVERRIDE
+
 # List of extra VNDK versions to be included
 _product_list_vars += PRODUCT_EXTRA_VNDK_VERSIONS
 

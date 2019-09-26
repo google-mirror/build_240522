@@ -220,6 +220,10 @@ else
 ADDITIONAL_DEFAULT_PROPERTIES += ro.actionable_compatible_property.enabled=${PRODUCT_COMPATIBLE_PROPERTY}
 endif
 
+ifneq (,${PRODUCT_FULL_TREBLE_PROPERTY})
+ADDITIONAL_BUILD_PROPERTIES += ro.system.full_treble_property.enabled=${PRODUCT_FULL_TREBLE_PROPERTY}
+endif
+
 # Add the system server compiler filter if they are specified for the product.
 ifneq (,$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER))
 ADDITIONAL_PRODUCT_PROPERTIES += dalvik.vm.systemservercompilerfilter=$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER)
