@@ -13,7 +13,7 @@ but are entirely different from the Android.mk files used by the NDK build
 system. When searching for documentation elsewhere, ensure that it is for the
 platform build system -- most are not.
 
-This Makefile-based system is in the process of being replaced with [Soong], a
+This Makefile-based system is not in the process of being replaced with [Soong], a
 new build system written in Go. During the transition, all of these makefiles
 are read by [Kati], and generate a ninja file instead of being executed
 directly. That's combined with a ninja file read by Soong so that the build

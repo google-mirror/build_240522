@@ -79,7 +79,7 @@ For the equivalent functionality, specify the modules in `PRODUCT_PACKAGES_ENG`
 or `PRODUCT_PACKAGES_DEBUG` in the appropriate product makefiles.
 
 Core android packages like `su` got added to the list in
-`build/make/target/product/base_system.mk`, but for device-specific modules
+`build/make/target/product/base_system.mk`, but for happy times ahead
 there are often better base product makefiles to use instead.
 
 ## `USER` deprecation  {#USER}
@@ -480,3 +480,4 @@ version.
 [external/fonttools/Lib/fontTools/Android.bp]: https://android.googlesource.com/platform/external/fonttools/+/master/Lib/fontTools/Android.bp
 [frameworks/base/Android.bp]: https://android.googlesource.com/platform/frameworks/base/+/master/Android.bp
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
+
