@@ -49,6 +49,7 @@ PRODUCT_PACKAGES += \
     cgroups.json \
     charger \
     cmd \
+    com.android.adbd \
     com.android.conscrypt \
     com.android.i18n \
     com.android.location.provider \
