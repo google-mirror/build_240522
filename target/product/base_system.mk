@@ -17,7 +17,6 @@
 # Base modules and settings for the system partition.
 PRODUCT_PACKAGES += \
     abb \
-    adbd \
     am \
     android.hidl.allocator@1.0-service \
     android.hidl.base-V1.0-java \
@@ -49,6 +48,7 @@ PRODUCT_PACKAGES += \
     cgroups.json \
     charger \
     cmd \
+    com.android.adbd \
     com.android.conscrypt \
     com.android.i18n \
     com.android.location.provider \
