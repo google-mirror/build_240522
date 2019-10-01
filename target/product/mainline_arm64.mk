@@ -19,6 +19,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline.mk)
 whitelist := product_manifest.xml
 $(call enforce-product-packages-exist,$(whitelist))
 
+# Enable nonflat APEX
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 PRODUCT_NAME := mainline_arm64
 PRODUCT_DEVICE := mainline_arm64
 PRODUCT_BRAND := generic

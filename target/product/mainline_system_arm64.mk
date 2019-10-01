@@ -26,6 +26,9 @@ PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
   root/init.zygote64_32.rc \
 
+# Enable nonflat APEX
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 PRODUCT_BUILD_CACHE_IMAGE := false
 PRODUCT_BUILD_ODM_IMAGE := false
 PRODUCT_BUILD_PRODUCT_IMAGE  := false
