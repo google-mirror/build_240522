@@ -70,6 +70,30 @@
       "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdbeb855_56196e97",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-10-02T08:19:25Z",
+      "side": 1,
+      "message": "*sorry, I meant, \"Adding \u0027*\u0027 will affect other files and I\u0027m not sure if this would have any negative impact on other projects\"",
+      "parentUuid": "49e39a1a_3ed997e7",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 19
+      },
+      "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
