@@ -46,6 +46,30 @@
       "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49e39a1a_3ed997e7",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-10-02T08:17:36Z",
+      "side": 1,
+      "message": "\u0027*\u0027 or \u0027framework-res\u0027 both works for me honestly. I add \u0027framework-res\u0027 because that\u0027s the file we\u0027re interested in b/137727426, and I\u0027m not sure if adding \u0027*\u0027 would affect other projects or not.",
+      "parentUuid": "49f7e528_861329f1",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 19
+      },
+      "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
