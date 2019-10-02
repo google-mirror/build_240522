@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Autosubmit+1: Dongwon Kang <dwkang@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 02 Oct 2019 18:21:39 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1131852
+Project: platform/build
+Branch: refs/heads/master
