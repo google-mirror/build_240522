@@ -94,6 +94,30 @@
       "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c70d36_1d98c650",
+        "filename": "target/product/mainline_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-10-02T11:01:59Z",
+      "side": 1,
+      "message": "More evaluating, \u0027*\u0027 should be safe.\n\nThe only problem is the GSI targets. If any static overlay becomes vendor RRO, GSI could get problem.\n\nIf applying \u0027*\u0027 on aosp_arm64 and there is no vendor RRO, it should safe to apply \u0027*\u0027.\n\nThe left issue is static overlay with private configure, let\u0027s discuss in another bug.",
+      "parentUuid": "fdbeb855_56196e97",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 19
+      },
+      "revId": "ac513cb22181a5d4c16db4a855310bdd3f27736e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
