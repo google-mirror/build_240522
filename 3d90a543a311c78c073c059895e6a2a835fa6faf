@@ -16,6 +16,24 @@
       "revId": "3d90a543a311c78c073c059895e6a2a835fa6faf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f323027_23e40028",
+        "filename": "downstream_issues/2019-10-01-combine-libhwbinder-libhidltransport.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-10-03T19:29:40Z",
+      "side": 1,
+      "message": "See email thread \"bpfix correct place for removing empty shared libs?\". I did consider bpmodify here as well, but \u0027^..$\u0027 means this is pretty safe even though it might miss some cases.",
+      "parentUuid": "eac20620_7fcaf673",
+      "revId": "3d90a543a311c78c073c059895e6a2a835fa6faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
