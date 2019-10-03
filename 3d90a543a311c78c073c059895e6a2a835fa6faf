@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eac20620_7fcaf673",
+        "filename": "downstream_issues/2019-10-01-combine-libhwbinder-libhidltransport.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-10-03T17:52:55Z",
+      "side": 1,
+      "message": "In theory this is what the `bpfix` tool could automatically apply (in a much safer way than via sed), but we haven\u0027t really started using it for this yet.",
+      "revId": "3d90a543a311c78c073c059895e6a2a835fa6faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
