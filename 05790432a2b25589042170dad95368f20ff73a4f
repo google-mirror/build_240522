@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fdd1a76_7d84548f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-04T17:19:58Z",
+      "side": 1,
+      "message": "PRODUCT_* is usually reserved for variables that are set in a product makefile.  Can you make this OVERRIDE_TARGET_FLATTEN_APEX?",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "05790432a2b25589042170dad95368f20ff73a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
