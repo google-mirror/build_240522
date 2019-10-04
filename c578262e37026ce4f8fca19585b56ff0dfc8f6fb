@@ -46,6 +46,30 @@
       "revId": "c578262e37026ce4f8fca19585b56ff0dfc8f6fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b712ab5_44e40133",
+        "filename": "target/product/aosp_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-10-04T11:26:09Z",
+      "side": 0,
+      "message": "aosp_arm64 is okay because the emulator vendor provides a vendor implementation of healthd, thus overriding /system/bin/healthd.\nHowever gsi_arm64 don\u0027t have a vendor so there would be a violating file /system/bin/healthd",
+      "parentUuid": "fef60042_34a2a2f8",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 32,
+        "endChar": 52
+      },
+      "revId": "c578262e37026ce4f8fca19585b56ff0dfc8f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
