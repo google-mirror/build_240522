@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2875102a_6188760d",
+        "filename": "target/product/aosp_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-04T09:56:56Z",
+      "side": 0,
+      "message": "looks like these 3 need to stay after all.",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 32,
+        "endChar": 52
+      },
+      "revId": "c578262e37026ce4f8fca19585b56ff0dfc8f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
