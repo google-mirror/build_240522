@@ -16,6 +16,24 @@
       "revId": "b8205595c078fe317530100a6c276c415332bec5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "240e0808_04f432b6",
+        "filename": "target/board/mainline_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2019-10-04T12:42:03Z",
+      "side": 1,
+      "message": "I don\u0027t know what was the situation back then (I only joined for a month). Right now I see both GSI and emulator uses flattened apex. I\u0027ll send a follow-up CL to clean up this TODO (and the TODOs in aosp/1126583), by explicitly adding \"$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)\" in each of the mainline_system_$arch makefiles.",
+      "parentUuid": "5e76aa4a_b0d23bcb",
+      "revId": "b8205595c078fe317530100a6c276c415332bec5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
