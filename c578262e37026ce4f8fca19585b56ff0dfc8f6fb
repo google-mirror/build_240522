@@ -22,6 +22,30 @@
       "revId": "c578262e37026ce4f8fca19585b56ff0dfc8f6fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef60042_34a2a2f8",
+        "filename": "target/product/aosp_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2019-10-04T10:12:54Z",
+      "side": 0,
+      "message": "It broken on gsi_arm64. Please hold a while.\nhealthd is a weird issue, let me think how to fix it.",
+      "parentUuid": "2875102a_6188760d",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 32,
+        "endChar": 52
+      },
+      "revId": "c578262e37026ce4f8fca19585b56ff0dfc8f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
