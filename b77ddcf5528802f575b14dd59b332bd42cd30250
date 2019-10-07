@@ -93,6 +93,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "befe0322_3ff07f3a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058489
+      },
+      "writtenOn": "2019-10-07T18:29:22Z",
+      "side": 1,
+      "message": "Hm, yeah they can be. I think [maybe] I see where you\u0027re going with this. Adding BOARD_PREBUILT_DTBIMAGE that takes precedence over the current generation mechanism if defined, like BOARD_PREBUILT_VENDORIMAGE?",
+      "parentUuid": "1d85493b_9d320aa7",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
