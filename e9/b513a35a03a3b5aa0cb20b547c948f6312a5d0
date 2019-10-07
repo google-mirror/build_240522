@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Anton Hansson <hansson@google.com>
+Code-Review+2: Po-Chien Hsueh <pchsueh@google.com>
+Code-Review+2: SzuWei Lin <szuweilin@google.com>
+Submitted-by: Yo Chiang <yochiang@google.com>
+Submitted-at: Mon, 07 Oct 2019 10:28:44 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1132322
+Project: platform/build
+Branch: refs/heads/master
