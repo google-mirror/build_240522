@@ -45,6 +45,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cacddf4_b396420b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058489
+      },
+      "writtenOn": "2019-10-07T18:10:18Z",
+      "side": 1,
+      "message": "Our issue with this arose due to our building the kernel and DTBs at build time, vs using prebuilt binaries. So since the DTBs (and their directory) simply don\u0027t exist when the Makefile\u0027s are initially picked up, we needed to do this. I do see how it would break incremental builds when using prebuilt dtbs though.",
+      "parentUuid": "41764f32_c6433785",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
