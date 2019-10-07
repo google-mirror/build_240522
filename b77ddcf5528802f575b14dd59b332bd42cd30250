@@ -141,6 +141,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a91e3d6_88042cc5",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058489
+      },
+      "writtenOn": "2019-10-07T18:31:55Z",
+      "side": 1,
+      "message": "Ah, yeah we can do that instead. Don\u0027t know why that didn\u0027t even occur to me. Thanks for the guidance!",
+      "parentUuid": "aa95c267_418712c0",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
