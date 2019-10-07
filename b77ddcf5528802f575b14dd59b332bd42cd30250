@@ -189,6 +189,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a215e6c_161f392b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058489
+      },
+      "writtenOn": "2019-10-07T18:39:22Z",
+      "side": 1,
+      "message": "Yeah we\u0027ve been defining a rule for the prebuilt directory that just builds the kernel \"dtbs\" recipe separate from the rest of the kernel build and doing the enumeration with this change. Your suggestion sounds better tho.\n\nColin, would you still like me to upload a new patchset here with your empty directory check?",
+      "parentUuid": "6cdeead1_04b14070",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
