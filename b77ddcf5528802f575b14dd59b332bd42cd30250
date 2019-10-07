@@ -117,6 +117,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa95c267_418712c0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-10-07T18:29:58Z",
+      "side": 1,
+      "message": "That\u0027s one of the reasons this is explicitly named \"BOARD_PREBUILT_DTBIMAGE_DIR\" -- if you\u0027re not using prebuilts, you need to create this target on your own.",
+      "parentUuid": "1d85493b_9d320aa7",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
