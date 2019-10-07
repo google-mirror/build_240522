@@ -213,6 +213,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fcc17cc_c9fd04d7",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-07T19:45:35Z",
+      "side": 1,
+      "message": "A better check may be to error on a generated BOARD_PREBUILT_DTBIMAGE_DIR:\n\nifneq (,$(filter $(OUT)/%,$(BOARD_PREBUILT_DTBIMAGE_DIR))\n  $(error BOARD_PREBUILT_DTBIMAGE_DIR must not be in the out directory ($(OUT)).  For generated dtb files, add a rule to write the combined files to $$(PRODUCT_OUT)/dtb.img)\nendif",
+      "parentUuid": "7a215e6c_161f392b",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
