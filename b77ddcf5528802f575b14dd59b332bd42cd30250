@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e040ce5_45e55b8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-07T17:39:53Z",
+      "side": 1,
+      "message": "This inherently means that there are no dependencies on the individual files, which break incremental build accuracy.",
+      "range": {
+        "startLine": 15,
+        "startChar": 58,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41764f32_c6433785",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-07T17:39:53Z",
+      "side": 1,
+      "message": "Depending on a directory generally doesn\u0027t do what you expect.  When a file is updated in the directory, the timestamp of the directory itself may or may not be updated, depending on how the file was written.  Modifying the file in place will not update the timestamp, but writing a new file and moving it over the old file will.\n\nIf you want this to be an error, I\u0027d suggest something like:\n\nmy_prebuilt_dtbimage_dir_files :\u003d $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))\nifndef my_prebuilt_dtbimage_dir_files\n  $(error Must provide at least one dtb file in $(BOARD_PREBUILT_DTBIMAGE_DIR))\nendef\n$(INSTALLED_DTBIMAGE_TARGET): $(my_prebuilt_dtbimage_dir_files)\n\tcat $^ \u003e $@",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
