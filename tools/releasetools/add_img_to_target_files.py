@@ -54,6 +54,7 @@ import shutil
 import sys
 import uuid
 import zipfile
+from hashlib import sha256
 
 import build_image
 import build_super_image
@@ -337,13 +338,8 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
 
   # Use repeatable ext4 FS UUID and hash_seed UUID (based on partition name and
   # build fingerprint).
-  uuid_seed = what + "-"
-  if "build.prop" in info_dict:
-    build_prop = info_dict["build.prop"]
-    if "ro.build.fingerprint" in build_prop:
-      uuid_seed += build_prop["ro.build.fingerprint"]
-    elif "ro.build.thumbprint" in build_prop:
-      uuid_seed += build_prop["ro.build.thumbprint"]
+  build_info = common.BuildInfo(info_dict)
+  uuid_seed = what + "-" + build_info.fingerprint
   image_props["uuid"] = str(uuid.uuid5(uuid.NAMESPACE_URL, uuid_seed))
   hash_seed = "hash_seed-" + uuid_seed
   image_props["hash_seed"] = str(uuid.uuid5(uuid.NAMESPACE_URL, hash_seed))
@@ -683,6 +679,12 @@ def AddImagesToTargetFiles(filename):
 
   OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, repacking=True)
 
+  # Set up the salt (based on fingerprint) that will be used when adding AVB
+  # hash / hashtree footers.
+  if OPTIONS.info_dict.get("avb_enable") == "true":
+    build_info = common.BuildInfo(OPTIONS.info_dict)
+    OPTIONS.info_dict["avb_salt"] = sha256(build_info.fingerprint).hexdigest()
+
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
   has_boot = OPTIONS.info_dict.get("no_boot") != "true"
   has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
@@ -728,7 +730,7 @@ def AddImagesToTargetFiles(filename):
 
   # A map between partition names and their paths, which could be used when
   # generating AVB vbmeta image.
-  partitions = dict()
+  partitions = {}
 
   def banner(s):
     logger.info("\n\n++++ %s  ++++\n\n", s)
