@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcfa9a72_a8d4a67b",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2301,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-10-08T13:37:30Z",
+      "side": 1,
+      "message": "hard-coded additional props here, because I don\u0027t expect we need to add more.\n(ps: it\u0027s better to test something that\u0027s closer to final shipping image).",
+      "range": {
+        "startLine": 2300,
+        "startChar": 0,
+        "endLine": 2301,
+        "endChar": 55
+      },
+      "revId": "5c40c7166f38f0cad12a823ff73289d8a0ac20a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
