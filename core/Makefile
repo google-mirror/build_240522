@@ -985,7 +985,14 @@ $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE_ROOT))
 ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
 INSTALLED_DTBIMAGE_TARGET := $(PRODUCT_OUT)/dtb.img
 ifdef BOARD_PREBUILT_DTBIMAGE_DIR
-$(INSTALLED_DTBIMAGE_TARGET) : $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))
+ifneq (,$(filter $(OUT_DIR)/%,$(BOARD_PREBUILT_DTBIMAGE_DIR)))
+  $(error BOARD_PREBUILT_DTBIMAGE_DIR must not be in the out directory ($(OUT_DIR)). For generated dtb files, add a rule to write the combined files to $$(PRODUCT_OUT)/dtb.img)
+endif
+my_prebuilt_dtbimage_dir_files := $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))
+ifndef my_prebuilt_dtbimage_dir_files
+  $(warning No DTBs found in $(BOARD_PREBUILT_DTBIMAGE_DIR). Generated dtb.img will be empty.)
+endif
+$(INSTALLED_DTBIMAGE_TARGET): $(my_prebuilt_dtbimage_dir_files)
 	cat $^ > $@
 endif
 endif
