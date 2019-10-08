@@ -237,6 +237,30 @@
       "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e60369d_23c612d1",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058489
+      },
+      "writtenOn": "2019-10-08T00:07:38Z",
+      "side": 1,
+      "message": "That works, and maybe a warning if it finds no DTBs?\n\n ifneq (,$(filter $(OUT)/%,$(BOARD_PREBUILT_DTBIMAGE_DIR))\n  $(error BOARD_PREBUILT_DTBIMAGE_DIR must not be in the out directory ($(OUT)).  For generated dtb files, add a rule to write the combined files to $$(PRODUCT_OUT)/dtb.img)\n endif\n my_prebuilt_dtbimage_dir_files :\u003d $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))\n ifndef my_prebuilt_dtbimage_dir_files\n   $(warning No DTBs found in $(BOARD_PREBUILT_DTBIMAGE_DIR). Generated dtb.img will be empty.)\n endef\n $(INSTALLED_DTBIMAGE_TARGET): $(my_prebuilt_dtbimage_dir_files)",
+      "parentUuid": "2fcc17cc_c9fd04d7",
+      "range": {
+        "startLine": 988,
+        "startChar": 30,
+        "endLine": 988,
+        "endChar": 60
+      },
+      "revId": "b77ddcf5528802f575b14dd59b332bd42cd30250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
