@@ -288,35 +288,21 @@ class PayloadSigner(object):
       self.signer = "openssl"
       self.signer_args = ["pkeyutl", "-sign", "-inkey", signing_key,
                           "-pkeyopt", "digest:sha256"]
-      self.key_size = self._GetKeySizeInBytes(signing_key)
+      self.signature_size = self._GetSignatureSizeInBytes(signing_key)
     else:
       self.signer = OPTIONS.payload_signer
       self.signer_args = OPTIONS.payload_signer_args
       if OPTIONS.payload_signer_key_size:
-        self.key_size = int(OPTIONS.payload_signer_key_size)
-        assert self.key_size == 256 or self.key_size == 512, \
-            "Unsupported key size {}".format(OPTIONS.payload_signer_key_size)
+        self.signature_size = int(OPTIONS.payload_signer_key_size)
       else:
-        self.key_size = 256
+        self.signature_size = 256
 
   @staticmethod
-  def _GetKeySizeInBytes(signing_key):
-    modulus_file = common.MakeTempFile(prefix="modulus-")
-    cmd = ["openssl", "rsa", "-inform", "PEM", "-in", signing_key, "-modulus",
-           "-noout", "-out", modulus_file]
-    common.RunAndCheckOutput(cmd, verbose=False)
-
-    with open(modulus_file) as f:
-      modulus_string = f.read()
-    # The modulus string has the format "Modulus=$data", where $data is the
-    # concatenation of hex dump of the modulus.
-    MODULUS_PREFIX = "Modulus="
-    assert modulus_string.startswith(MODULUS_PREFIX)
-    modulus_string = modulus_string[len(MODULUS_PREFIX):]
-    key_size = len(modulus_string) // 2
-    assert key_size == 256 or key_size == 512, \
-        "Unsupported key size {}".format(key_size)
-    return key_size
+  def _GetSignatureSizeInBytes(signing_key):
+    cmd = ["brillo_update_payload", "calculate_signature_size", "--private_key",
+           signing_key]
+    signature_size = common.RunAndCheckOutput(cmd)
+    return int(signature_size)
 
   def Sign(self, in_file):
     """Signs the given input file. Returns the output filename."""
@@ -396,7 +382,7 @@ class Payload(object):
     metadata_sig_file = common.MakeTempFile(prefix="sig-", suffix=".bin")
     cmd = ["brillo_update_payload", "hash",
            "--unsigned_payload", self.payload_file,
-           "--signature_size", str(payload_signer.key_size),
+           "--signature_size", str(payload_signer.signature_size),
            "--metadata_hash_file", metadata_sig_file,
            "--payload_hash_file", payload_sig_file]
     self._Run(cmd)
@@ -411,7 +397,7 @@ class Payload(object):
     cmd = ["brillo_update_payload", "sign",
            "--unsigned_payload", self.payload_file,
            "--payload", signed_payload_file,
-           "--signature_size", str(payload_signer.key_size),
+           "--signature_size", str(payload_signer.signature_size),
            "--metadata_signature_file", signed_metadata_sig_file,
            "--payload_signature_file", signed_payload_sig_file]
     self._Run(cmd)
