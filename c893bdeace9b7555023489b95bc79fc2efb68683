@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb39600c_c0e49868",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2019-10-09T10:03:16Z",
+      "side": 1,
+      "message": "The naming convention is PRIVATE_LLNDK_LIBRARIES.",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 42
+      },
+      "revId": "c893bdeace9b7555023489b95bc79fc2efb68683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
