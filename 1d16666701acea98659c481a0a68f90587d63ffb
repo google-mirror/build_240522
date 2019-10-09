@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "1e817669_adca7611",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3142,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0833034a_e8474759",
+      "range": {
+        "startLine": 3142,
+        "startChar": 0,
+        "endLine": 3142,
+        "endChar": 51
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4fbe1097_c5f1b76a",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -137,6 +161,30 @@
     },
     {
       "key": {
+        "uuid": "19540fd9_7f55347b",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Turns out cuttlefish currently doesn\u0027t use AVB:\nhttps://android.googlesource.com/device/google/cuttlefish/+/refs/heads/master/shared/BoardConfig.mk#27",
+      "parentUuid": "7b725807_b6bffe4e",
+      "range": {
+        "startLine": 3145,
+        "startChar": 0,
+        "endLine": 3145,
+        "endChar": 216
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ed17e4a_79698a23",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -157,6 +205,30 @@
       "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d67da4_ccd2afe7",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3217,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ed17e4a_79698a23",
+      "range": {
+        "startLine": 3216,
+        "startChar": 0,
+        "endLine": 3217,
+        "endChar": 39
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +255,30 @@
     },
     {
       "key": {
+        "uuid": "44dae0cc_7455d4bd",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3220,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c2e3ff0_86a3ac48",
+      "range": {
+        "startLine": 3218,
+        "startChar": 0,
+        "endLine": 3220,
+        "endChar": 56
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b8f1f_45f51c7b",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2
@@ -203,6 +299,30 @@
       "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20871efb_01d4cd62",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b8f1f_45f51c7b",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 54
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +349,30 @@
     },
     {
       "key": {
+        "uuid": "59b16e48_e3bef400",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0082e873_f6b1c33d",
+      "range": {
+        "startLine": 340,
+        "startChar": 25,
+        "endLine": 340,
+        "endChar": 26
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4e05852_17319e61",
         "filename": "tools/releasetools/validate_target_files.py",
         "patchSetId": 2
@@ -249,6 +393,30 @@
       "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1322d77b_80ef63cd",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4e05852_17319e61",
+      "range": {
+        "startLine": 346,
+        "startChar": 8,
+        "endLine": 353,
+        "endChar": 0
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -275,6 +443,30 @@
     },
     {
       "key": {
+        "uuid": "f40a4ebb_d371a048",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b542fc8d_cefb022f",
+      "range": {
+        "startLine": 365,
+        "startChar": 7,
+        "endLine": 365,
+        "endChar": 46
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8b01f28_d190b4e2",
         "filename": "tools/releasetools/validate_target_files.py",
         "patchSetId": 2
@@ -295,6 +487,30 @@
       "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83bac76d_44bbd651",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T18:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8b01f28_d190b4e2",
+      "range": {
+        "startLine": 369,
+        "startChar": 27,
+        "endLine": 369,
+        "endChar": 54
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
