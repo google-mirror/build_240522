@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (17f505 Merge "releasetools: Fix the support for getting reproducibl)
 BUILD_ID=QT
+=======
+BUILD_ID=QP1A.191005.007
+>>>>>>> BRANCH (a37e18 Version bump to QP1A.191005.007 [core/build_id.mk])
