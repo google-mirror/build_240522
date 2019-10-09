@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e39d5af_c5386b97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "Could you add a line that references bug 130351427?\n\nBug: 130351427",
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff6d77fe_8ea6bee1",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3142,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "Not \"must be signed\", but \"must be chained\". Something like\n\n# When building a standalone recovery image for non-A/B devices, recovery image must be configured\n# as a chained partition. See the link below for details.",
+      "range": {
+        "startLine": 3142,
+        "startChar": 0,
+        "endLine": 3142,
+        "endChar": 51
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fbe1097_c5f1b76a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "nit: wrap the line, and replace `, refer to` with `. See`.\n\n$(if $(BOARD_AVB_RECOVERY_KEY_PATH),,\\\n    $(error BOARD_AVB_RECOVERY_KEY_PATH must be defined for non-A/B devices. \\\n            See https://...))",
+      "range": {
+        "startLine": 3145,
+        "startChar": 0,
+        "endLine": 3145,
+        "endChar": 216
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c2e3ff0_86a3ac48",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3220,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "Merge into one line (no needs to define separate vars)\n\n$(if $(or $(filter true,$(AB_OTA_UPDATER)),$(filter-out recovery,$(PART_RECOVERY))),\\\n  ...)",
+      "range": {
+        "startLine": 3218,
+        "startChar": 0,
+        "endLine": 3220,
+        "endChar": 56
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40b8f1f_45f51c7b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "nit: reordering a bit would make it more readable\n\n  if not key_path:\n    return [\"--include_descriptors_from_image\", image]\n\n  # We don\u0027t chain /recovery into vbmeta if it\u0027s a non-A/B device. /recovery\n  # image will be configured on an independent boot chain. See details in     \n  # https://android.googlesource.com/platform/external/avb/+/master/README.md#booting-into-recovery.\n  if OPTIONS.info_dict.get(\"ab_update\") !\u003d \"true\" and partition \u003d\u003d \"recovery\":\n    return []                                                         \n                                                                               \n  # Otherwise set up the partition chain.\n  chained_partition_arg \u003d GetAvbChainedPartitionArg(partition, info_dict)\n  return [\"--chain_partition\", chained_partition_arg]",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 54
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0082e873_f6b1c33d",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "nit: single quote (here and below -- don\u0027t mix the two)",
+      "range": {
+        "startLine": 340,
+        "startChar": 25,
+        "endLine": 340,
+        "endChar": 26
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4e05852_17319e61",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "nit: I would add an early exit instead (to reduce nesting levels)\n\n  # Exclude /recovery for non-A/B devices.\n  if info_dcit.get(\u0027ab_update\u0027) !\u003d \u0027true\u0027 and partition \u003d\u003d \u0027recovery\u0027:\n    continue\n\n  key_file \u003d ...",
+      "range": {
+        "startLine": 346,
+        "startChar": 8,
+        "endLine": 353,
+        "endChar": 0
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b542fc8d_cefb022f",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "Should restrict it to non-A/B:\n\nif (info_dict.get(\u0027ab_update\u0027) !\u003d \u0027true\u0027 and\n    info_dict.get(\u0027no_recovery\u0027) !\u003d \u0027true\u0027):",
+      "range": {
+        "startLine": 365,
+        "startChar": 7,
+        "endLine": 365,
+        "endChar": 46
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8b01f28_d190b4e2",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-10-09T00:00:26Z",
+      "side": 1,
+      "message": "There shouldn\u0027t be any partition that\u0027s chained into recovery.img. Drop this flag",
+      "range": {
+        "startLine": 369,
+        "startChar": 27,
+        "endLine": 369,
+        "endChar": 54
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
