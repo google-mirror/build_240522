@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "0833034a_e8474759",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3142,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-10-09T16:55:40Z",
+      "side": 1,
+      "message": "\u003e recovery image must be configured as a chained partition. \n\nBut at L3220 below, we\u0027ll skip configured recovery as a chain partition when building vbmeta.img.\n\nBefore AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION, chained partition means self-signed.\nBut after AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION is introduced, recovery partition needs self-signed without being chained into vbmeta.img.\n\nHow about:\n# When building a standalone recovery image for non-A/B devices, recovery image must be \n# self-signed to be verified independently, and cannot be chained into vbmeta.img. \n# See the link below for details.",
+      "parentUuid": "ff6d77fe_8ea6bee1",
+      "range": {
+        "startLine": 3142,
+        "startChar": 0,
+        "endLine": 3142,
+        "endChar": 51
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4fbe1097_c5f1b76a",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -58,6 +82,53 @@
         "startChar": 0,
         "endLine": 3145,
         "endChar": 216
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f15cb4b_82ee79a4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-10-09T16:55:40Z",
+      "side": 1,
+      "message": "Should we fallback to $(BOARD_AVB_KEY_PATH) if BOARD_AVB_RECOVERY_KEY_PATH is not set?\n\ne.g.,\nifdef BOARD_AVB_RECOVERY_KEY_PATH\n$(if $(BOARD_AVB_RECOVERY_ALGORITHM),,$(error BOARD_AVB_RECOVERY_ALGORITHM is not defined))\nelse\n# If key path isn\u0027t specified, use the same key as BOARD_AVB_KEY_PATH.\nBOARD_AVB_RECOVERY_KEY_PATH :\u003d $(BOARD_AVB_KEY_PATH)\nBOARD_AVB_RECOVERY_ALGORITHM :\u003d $(BOARD_AVB_ALGORITHM)\nendif\n\nBut the downside is that less people will be aware of this change, that recovery.img should be self-signed.\n\nNote that cuttlefish (aosp_cf_*) is non-A/B, so at least we have to specify BOARD_AVB_RECOVERY_KEY_PATH under \ndevice/google/cuttlefish/shared/BoardConfig.mk, if we want to force a build break.\n\nCuttlefish is the virtual device that heavily used in pre-submit tests.",
+      "parentUuid": "4fbe1097_c5f1b76a",
+      "range": {
+        "startLine": 3145,
+        "startChar": 0,
+        "endLine": 3145,
+        "endChar": 216
+      },
+      "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed17e4a_79698a23",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3217,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-10-09T16:55:40Z",
+      "side": 1,
+      "message": "Since the operation here is to add chain descriptors (not related to add a Hash descriptor).\n\nHow about:\n\n# recovery partition in non-A/B devices should be verified separately.\n# Skip adding the chain partition descriptor for recovery partition into vbmeta.img.",
+      "range": {
+        "startLine": 3216,
+        "startChar": 0,
+        "endLine": 3217,
+        "endChar": 39
       },
       "revId": "1d16666701acea98659c481a0a68f90587d63ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
