@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43e9e63b_5d3cb9ea",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-10-10T03:31:42Z",
+      "side": 1,
+      "message": "how about ro.sanitize.address\u003dtrue, ro.sanitize.fuzzer\u003dtrue, etc ?",
+      "range": {
+        "startLine": 234,
+        "startChar": 25,
+        "endLine": 234,
+        "endChar": 84
+      },
+      "revId": "bf2ea5bf8a080ded242e337e2a3562b69f0c2c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
