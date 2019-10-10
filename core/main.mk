@@ -230,6 +230,19 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 ADDITIONAL_BUILD_PROPERTIES += persist.debug.dalvik.vm.core_platform_api_policy=just-warn
 endif
 
+# We don't want to put the entire SANITIZE_TARGET in the system property, because it may be something
+# like "address fuzzer", and there is no way to match for a substring in *.rc files.
+main_sanitizer :=
+ifneq (,$(filter address,$(SANITIZE_TARGET)))
+  main_sanitizer := address
+else ifneq (,$(filter hwaddress,$(SANITIZE_TARGET)))
+  main_sanitizer := hwaddress
+endif
+
+ifneq (,$(main_sanitizer))
+  ADDITIONAL_BUILD_PROPERTIES += ro.sanitize=$(main_sanitizer)
+endif
+
 # Sets the default value of ro.postinstall.fstab.prefix to /system.
 # Device board config should override the value to /product when needed by:
 #
