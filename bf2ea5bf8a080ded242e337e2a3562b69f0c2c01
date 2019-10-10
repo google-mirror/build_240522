@@ -22,6 +22,30 @@
       "revId": "bf2ea5bf8a080ded242e337e2a3562b69f0c2c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60175cf9_e2b74134",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-10-10T14:00:12Z",
+      "side": 1,
+      "message": "+1 seems like a decent idea.  Unless address and hwaddress sanitizers are the only ones we would ever be concerned with.\n\nHow do you plan to use this property?  It\u0027ll help to see the usage to have a good idea if this makes sense.",
+      "parentUuid": "43e9e63b_5d3cb9ea",
+      "range": {
+        "startLine": 234,
+        "startChar": 25,
+        "endLine": 234,
+        "endChar": 84
+      },
+      "revId": "bf2ea5bf8a080ded242e337e2a3562b69f0c2c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
