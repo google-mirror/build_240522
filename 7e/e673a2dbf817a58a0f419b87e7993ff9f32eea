@@ -1,0 +1,7 @@
+Code-Review+2: Steven Moreland <smoreland@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: David Anderson <dvander@google.com>
+Submitted-at: Thu, 10 Oct 2019 19:19:38 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1109660
+Project: platform/build
+Branch: refs/heads/master
