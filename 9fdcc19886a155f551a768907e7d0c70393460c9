@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dd0284b_c528c6b0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-10T23:28:24Z",
+      "side": 1,
+      "message": "We have historically found that warnings like this are not useful, nobody pays attention and they just clutter the build output.  I\u0027d suggest making it an error or leaving it out.  The error above will catch the main case where this is likely to be unintentional.",
+      "range": {
+        "startLine": 993,
+        "startChar": 4,
+        "endLine": 993,
+        "endChar": 11
+      },
+      "revId": "9fdcc19886a155f551a768907e7d0c70393460c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
