@@ -480,3 +480,10 @@ version.
 [external/fonttools/Lib/fontTools/Android.bp]: https://android.googlesource.com/platform/external/fonttools/+/master/Lib/fontTools/Android.bp
 [frameworks/base/Android.bp]: https://android.googlesource.com/platform/frameworks/base/+/master/Android.bp
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
+
+# BOARD_HAL_STATIC_LIBRARIES is obsolete {#BOARD_HAL_STATIC_LIBRARIES}
+
+Define proper HIDL / Stable AIDL HAL instead.
+
+* For libhealthd, use at least Health HAL 2.1.
+* For libdumpstate, use at least Dumpstate HAL 1.0.
