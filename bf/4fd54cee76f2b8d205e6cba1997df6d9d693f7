@@ -1,0 +1,7 @@
+Code-Review+2: Anton Hansson <hansson@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Steven Moreland <smoreland@google.com>
+Submitted-at: Fri, 11 Oct 2019 20:19:09 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1137663
+Project: platform/build
+Branch: refs/heads/master
