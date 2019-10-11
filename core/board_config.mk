@@ -598,3 +598,9 @@ $(foreach m,$(DEFAULT_ERROR_BUILD_MODULE_TYPES),\
   $(if $(filter true,$(BUILD_BROKEN_USES_$(m))),\
     $(KATI_deprecated_var $(m),Please convert to Soong),\
     $(KATI_obsolete_var $(m),Please convert to Soong)))
+
+###########################################
+# No BOARD_HAL_STATIC_LIBRARIES
+ifdef BOARD_HAL_STATIC_LIBRARIES
+$(error BOARD_HAL_STATIC_LIBRARIES must not be defined. Use HIDL HALs instead.)
+endif
