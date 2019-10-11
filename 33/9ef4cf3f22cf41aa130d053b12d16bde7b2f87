@@ -1,0 +1,11 @@
+Verified+1: dianlujitao <dianlujitao@gmail.com>
+Code-Review+1: dianlujitao <dianlujitao@gmail.com>
+Code-Review+1: Luca Stefani <luca.stefani.ge1@gmail.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Autosubmit+1: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 11 Oct 2019 10:46:40 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1137357
+Project: platform/build
+Branch: refs/heads/master
