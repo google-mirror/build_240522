@@ -46,6 +46,30 @@
       "revId": "bf2ea5bf8a080ded242e337e2a3562b69f0c2c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8a5d04c_43227556",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2019-10-11T23:03:31Z",
+      "side": 1,
+      "message": "This also works, but we would need to define selinux contexts for all those properties, and update them for future sanitizers. Not really a problem. Either way we need to update a list somewhere, but with Jiyong\u0027s approach failing to do that would produce selinux denials in addition to the missing property.\n\nAt this point we see two ways of using this:\n1. a feature is known to misbehave on hwasan, and can be \"fixed\" by turning a knob in /proc/sys/debug/...; the natural way to do it is in a .rc file conditional on a property value.\n2. apexd might need to special case for hwasan in the future (like not update some apexes, or prefer hwasan versions to non-hwasan)",
+      "parentUuid": "60175cf9_e2b74134",
+      "range": {
+        "startLine": 234,
+        "startChar": 25,
+        "endLine": 234,
+        "endChar": 84
+      },
+      "revId": "bf2ea5bf8a080ded242e337e2a3562b69f0c2c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
