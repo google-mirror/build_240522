@@ -113,6 +113,7 @@ PRODUCT_PACKAGES += \
     ld.config.txt \
     ld.mc \
     libaaudio \
+    libadbd_auth \
     libamidi \
     libandroid \
     libandroidfw \
