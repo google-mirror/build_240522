@@ -643,7 +643,7 @@ def LoadBuildProp(read_helper, prop_file):
   except KeyError:
     logger.warning("Failed to read %s", prop_file)
     data = ""
-  return LoadDictionaryFromLines(data.split("\n"))
+  return LoadDictionaryFromLines(data.split("\n"), False)
 
 
 def LoadListFromFile(file_path):
@@ -656,7 +656,7 @@ def LoadDictionaryFromFile(file_path):
   return LoadDictionaryFromLines(lines)
 
 
-def LoadDictionaryFromLines(lines):
+def LoadDictionaryFromLines(lines, override_ro_properties=True):
   d = {}
   for line in lines:
     line = line.strip()
@@ -664,6 +664,8 @@ def LoadDictionaryFromLines(lines):
       continue
     if "=" in line:
       name, value = line.split("=", 1)
+      if not override_ro_properties and name in d and name.startswith("ro."):
+        continue
       d[name] = value
   return d
 
