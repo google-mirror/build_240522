@@ -664,6 +664,8 @@ def LoadDictionaryFromLines(lines):
       continue
     if "=" in line:
       name, value = line.split("=", 1)
+      if name in d and name.startswith("ro."):
+        continue
       d[name] = value
   return d
 
