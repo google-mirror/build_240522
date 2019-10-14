@@ -70,6 +70,30 @@
       "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f2176b_ea4118db",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2019-10-14T14:04:57Z",
+      "side": 1,
+      "message": "When VNDK APEX of older version is being built, the apex will contain \"vndk_prebuilt_shared\" modules which match with current device config (binder32bit,arch,target...) as well as vndk version.\n\nFor example, binder32bit is passed to Soong with \"productVariables.Binder32bit\" and it is checked with vndk_prebuilt_shared module\u0027s binder32 bit. So, even thou there are several \u0027libfoo\u0027 of version 27, only one of them is included in com.android.vndk.v27.",
+      "parentUuid": "89cbcb8e_0d4bc58f",
+      "range": {
+        "startLine": 173,
+        "startChar": 86,
+        "endLine": 173,
+        "endChar": 98
+      },
+      "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
