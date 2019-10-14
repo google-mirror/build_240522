@@ -46,6 +46,30 @@
       "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89cbcb8e_0d4bc58f",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-10-14T13:18:50Z",
+      "side": 1,
+      "message": "As you commented, current VNDK does not have problem on this, but this line is for VNDK snapshots. Android P and Q provide binder 32 bit VNDK snapshots. How they be installed in VNDK apex?",
+      "parentUuid": "684838cf_fc6fb3fb",
+      "range": {
+        "startLine": 173,
+        "startChar": 86,
+        "endLine": 173,
+        "endChar": 98
+      },
+      "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
