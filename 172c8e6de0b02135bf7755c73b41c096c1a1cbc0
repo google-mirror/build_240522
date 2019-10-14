@@ -22,6 +22,30 @@
       "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684838cf_fc6fb3fb",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2019-10-14T05:12:37Z",
+      "side": 1,
+      "message": "For devices which would require \"_binder32\" variations, com.android.vndk.vVER will be packaged accordingly. One thing still missing is that prebuilt apex doesn\u0027t support _binder32 arch type. But iiuc, VNDK APEX is not supposed to be installed via prebuilt one. So it is okay (at least for R)",
+      "parentUuid": "60a36d47_fca97e78",
+      "range": {
+        "startLine": 173,
+        "startChar": 86,
+        "endLine": 173,
+        "endChar": 98
+      },
+      "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
