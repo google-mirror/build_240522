@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Jiyong Park <jiyong@google.com>
+Code-Review+2: Tom Cherry <tomcherry@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Submitted-by: Evgenii Stepanov <eugenis@google.com>
+Submitted-at: Mon, 14 Oct 2019 21:44:07 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1137857
+Project: platform/build
+Branch: refs/heads/master
