@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60a36d47_fca97e78",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-10-14T04:44:27Z",
+      "side": 1,
+      "message": "Don\u0027t we need to support binder 32 variations for older VNDK snapshots (P and Q)?\nOtherwise, we may not use 32bit binder for old vendor partition.",
+      "range": {
+        "startLine": 173,
+        "startChar": 86,
+        "endLine": 173,
+        "endChar": 98
+      },
+      "revId": "172c8e6de0b02135bf7755c73b41c096c1a1cbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
