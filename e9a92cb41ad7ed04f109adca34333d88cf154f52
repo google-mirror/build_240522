@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97e01456_089b08e6",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 4831,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-15T23:45:47Z",
+      "side": 1,
+      "message": "Include system_other here if \"system\" is part of BOARD_SUPER_PARTITION_PARTITION_LIST and INSTALLED_SYSTEMOTHERIMAGE_TARGET is defined",
+      "revId": "e9a92cb41ad7ed04f109adca34333d88cf154f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7dde7e_c7ce312e",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-15T23:45:47Z",
+      "side": 1,
+      "message": "Instead of doing this, why not fix the provided misc_info.txt? This is just a heuristic and will break if we are to change the name of the file in the future.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 72
+      },
+      "revId": "e9a92cb41ad7ed04f109adca34333d88cf154f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
