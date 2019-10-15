@@ -125,7 +125,6 @@ def BuildSuperImageFromDict(info_dict, output):
       other_image = None
       if partition == "system" and "system_other_image" in info_dict:
         other_image = info_dict["system_other_image"]
-        has_image = True
 
       cmd += GetArgumentsForImage(partition + "_b", group + "_b", other_image)
 
