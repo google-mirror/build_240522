@@ -2280,6 +2280,7 @@ endef
 #
 define align-package
 $(hide) if ! $(ZIPALIGN) -c -p 4 $@ >/dev/null ; then \
+  unzip -qz $@ 2>/dev/null > $@.zipcomment; \
   mv $@ $@.unaligned; \
   $(ZIPALIGN) \
     -f \
@@ -2287,6 +2288,10 @@ $(hide) if ! $(ZIPALIGN) -c -p 4 $@ >/dev/null ; then \
     4 \
     $@.unaligned $@.aligned; \
   mv $@.aligned $@; \
+  if [ -s $@.zipcomment ]; then \
+    zip -qz $@ < $@.zipcomment; \
+  fi; \
+  rm -f $@.zipcomment; \
   fi
 endef
 
