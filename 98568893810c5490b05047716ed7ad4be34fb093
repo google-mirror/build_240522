@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a10aaadb_4349089b",
+        "filename": "target/product/full.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-10-15T09:19:06Z",
+      "side": 1,
+      "message": "There are some products (from Auto I guess) who inherits from full.mk.\n\nhttps://cs.corp.google.com/search/?q\u003df:%5C.mk+c:inherit.*%5C/full%5C.mk\u0026m\u003d100\u0026det\u003dmat\u0026sort\u003d1\u0026sq\u003dpackage:%5Eandroid$\u0026type\u003dcs\n\nThis change will affect them.",
+      "revId": "98568893810c5490b05047716ed7ad4be34fb093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
