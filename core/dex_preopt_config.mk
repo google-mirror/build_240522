@@ -4,8 +4,7 @@ DEX_PREOPT_CONFIG := $(SOONG_OUT_DIR)/dexpreopt.config
 DEX_PREOPT_DEFAULT ?= true
 
 # The default filter for which files go into the system_other image (if it is
-# being used). Note that each pattern p here matches both '/<p>' and /system/<p>'.
-# To bundle everything one should set this to '%'.
+# being used). To bundle everything one should set this to '%'
 SYSTEM_OTHER_ODEX_FILTER ?= \
     app/% \
     priv-app/% \
@@ -177,3 +176,4 @@ DEXPREOPT_GEN_DEPS := \
 
 DEXPREOPT_STRIP_DEPS := \
   $(ZIP2ZIP) \
+

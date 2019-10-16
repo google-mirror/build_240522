@@ -684,3 +684,4 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/*/*app/*/oat)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
+
