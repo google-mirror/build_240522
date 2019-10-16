@@ -552,7 +552,7 @@ my_installed_test_data :=
 # Source to relative dst file paths for reuse in LOCAL_COMPATIBILITY_SUITE.
 my_test_data_file_pairs :=
 
-ifneq ($(strip $(filter NATIVE_TESTS,$(LOCAL_MODULE_CLASS)) $(LOCAL_IS_FUZZ_TARGET)),)
+ifneq ($(strip $(filter NATIVE_TESTS,$(LOCAL_MODULE_CLASS))),)
 ifneq ($(strip $(LOCAL_TEST_DATA)),)
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 
@@ -572,6 +572,23 @@ my_installed_test_data := $(call copy-many-files,$(my_test_data_pairs))
 $(LOCAL_INSTALLED_MODULE): $(my_installed_test_data)
 
 endif
+endif
+endif
+
+###########################################################
+## Fuzz Data
+###########################################################
+
+ifneq ($(strip $(LOCAL_FUZZ_DATA)),)
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+
+my_fuzz_data_pairs := $(strip $(foreach pair,$(LOCAL_FUZZ_DATA), \
+    $(eval _src := $(call word-colon,1,$(pair))) \
+    $(eval _dst := $(call word-colon,2,$(pair))) \
+    $(_src):$(call append-path,$(my_module_path),$(_dst))))
+
+$(LOCAL_INSTALLED_MODULE): $(call copy-many-files,$(my_fuzz_data_pairs))
+
 endif
 endif
 
