@@ -16,6 +16,24 @@
       "revId": "efc76a4161427f2f34f81dfc01bbf7751ab5a5f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82ffc69e_3693651f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-10-16T21:51:55Z",
+      "side": 1,
+      "message": "I guess so, but wouldn\u0027t that basically require the same plumbing anyway? We\u0027d require some rule (assumedly the module phony) to copy into the immediates directory, then use LOCAL_TEST_DATA to copy it to the output directory. We also already directly copy from source -\u003e output when making the fuzz-$host-$arch.zip packages.",
+      "parentUuid": "e162ea4a_4e875dc2",
+      "revId": "efc76a4161427f2f34f81dfc01bbf7751ab5a5f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
