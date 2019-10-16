@@ -16,7 +16,7 @@ USE_CAMERA_STUB := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Build OpenGLES emulation guest and host libraries
-BUILD_EMULATOR_OPENGL := true
+BUILD_EMULATOR_OPENGL ?= true
 BUILD_QEMU_IMAGES := true
 
 # Build and enable the OpenGL ES View renderer. When running on the emulator,
