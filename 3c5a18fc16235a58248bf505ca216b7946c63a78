@@ -16,6 +16,24 @@
       "revId": "3c5a18fc16235a58248bf505ca216b7946c63a78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "306f54fb_a4654ff8",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000980
+      },
+      "writtenOn": "2019-10-16T04:51:25Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "9d92852e_2431f1ea",
+      "revId": "3c5a18fc16235a58248bf505ca216b7946c63a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
