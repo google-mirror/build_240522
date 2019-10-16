@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e162ea4a_4e875dc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-16T21:13:27Z",
+      "side": 1,
+      "message": "Can you copy the corpus to something in the soong module intermediates directory with the desired layout and then pass it to LOCAL_TEST_DATA?",
+      "revId": "efc76a4161427f2f34f81dfc01bbf7751ab5a5f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
