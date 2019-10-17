@@ -237,6 +237,7 @@ PRODUCT_PACKAGES += \
     service \
     servicemanager \
     services \
+    set-verity-state \
     settings \
     SettingsProvider \
     sgdisk \
