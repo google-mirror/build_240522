@@ -107,6 +107,7 @@ PRODUCT_PACKAGES += \
     ip6tables \
     iptables \
     ip-up-vpn \
+    InProcessTethering \
     javax.obex \
     keystore \
     ld.config.txt \
