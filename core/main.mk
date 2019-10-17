@@ -1538,7 +1538,9 @@ auxiliary: $(INSTALLED_AUX_TARGETS)
 
 # Build files and then package it into the rom formats
 .PHONY: droidcore
-droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
+droidcore: \
+    $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
+    $(filter $(TARGET_OUT_FAKE)/%,$(modules_to_install)) \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
     $(INSTALLED_BOOTIMAGE_TARGET) \
