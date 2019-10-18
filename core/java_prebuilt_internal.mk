@@ -47,12 +47,8 @@ include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 #######################################
 ifdef LOCAL_DEX_PREOPT
 
-$(built_module): PRIVATE_STRIP_SCRIPT := $(intermediates)/strip.sh
-$(built_module): $(intermediates)/strip.sh
-$(built_module): | $(DEXPREOPT_STRIP_DEPS)
 $(built_module): .KATI_DEPFILE := $(built_module).d
 $(built_module): $(my_prebuilt_src_file)
-	$(PRIVATE_STRIP_SCRIPT) $< $@
 
 else # ! LOCAL_DEX_PREOPT
 $(built_module) : $(my_prebuilt_src_file)
