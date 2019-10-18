@@ -5201,6 +5201,12 @@ endif
 # during make, and such will fail with `writing to readonly
 # directory`, because kati will see 'fuzz' as being a file, not a
 # phony target.
+
+# Add the rules to copy the shared libraries into the installation
+# directories. The installed shared libraries are then depended
+# on by the module build rules.
+FUZZ_SHARED_DEPS := $(call copy-many-files,$(strip $(FUZZ_TARGET_SHARED_DEPS_INSTALL_PAIRS)))
+
 .PHONY: fuzz
-fuzz: $(SOONG_FUZZ_PACKAGING_ARCH_MODULES)
+fuzz: $(SOONG_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_FUZZ_TARGETS)
 $(call dist-for-goals,fuzz,$(SOONG_FUZZ_PACKAGING_ARCH_MODULES))

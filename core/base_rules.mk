@@ -575,6 +575,10 @@ endif
 endif
 endif
 
+ifdef LOCAL_IS_FUZZ_TARGET
+$(LOCAL_INSTALLED_MODULE): $(LOCAL_FUZZ_INSTALLED_SHARED_DEPS)
+endif
+
 ###########################################################
 ## Compatibility suite files.
 ###########################################################
