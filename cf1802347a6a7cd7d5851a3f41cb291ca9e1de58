@@ -16,6 +16,24 @@
       "revId": "cf1802347a6a7cd7d5851a3f41cb291ca9e1de58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79584b79_5d0d8684",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2560,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-18T18:49:18Z",
+      "side": 1,
+      "message": "These files are never used any more, so should be unrelated to the presubmit error.",
+      "parentUuid": "ceb051cf_9c4ef6d0",
+      "revId": "cf1802347a6a7cd7d5851a3f41cb291ca9e1de58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
