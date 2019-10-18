@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb051cf_9c4ef6d0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2560,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2019-10-18T15:43:16Z",
+      "side": 1,
+      "message": "Could the cts/cts_presubmit_pilot_6-cloud-tf test failure be related to dropping of the suffix here? (Nothing else stands out as a change.)\n\n  junit.framework.AssertionFailedError: java.lang.NullPointerException: Attempt to read from field \n  \u0027java.lang.String android.content.pm.PackageInfo.packageName\u0027 on a null object reference",
+      "revId": "cf1802347a6a7cd7d5851a3f41cb291ca9e1de58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
