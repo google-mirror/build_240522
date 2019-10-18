@@ -22,6 +22,52 @@
       "revId": "46cfab96d81b94089f8bcee89d70f7d79bd389fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ee29d42_4b41783e",
+        "filename": "core/java_prebuilt_internal.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-18T19:00:52Z",
+      "side": 0,
+      "message": "Remove all of this",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 25
+      },
+      "revId": "46cfab96d81b94089f8bcee89d70f7d79bd389fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37adf826_f171a876",
+        "filename": "core/java_prebuilt_internal.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-18T19:00:52Z",
+      "side": 0,
+      "message": "And this",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "46cfab96d81b94089f8bcee89d70f7d79bd389fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
