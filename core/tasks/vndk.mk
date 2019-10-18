@@ -41,7 +41,6 @@ $(strip \
 endef
 
 vndk_prebuilt_txts := \
-  ld.config.txt \
   vndksp.libraries.txt \
   llndk.libraries.txt
 
