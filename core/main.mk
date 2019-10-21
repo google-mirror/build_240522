@@ -1113,7 +1113,7 @@ endef
 # art/build/apex/art_apex_test.py.
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
-# Runtime APEX libraries
+# ART APEX (native) libraries.
 APEX_MODULE_LIBS := \
   libadbconnection.so \
   libadbconnectiond.so \
@@ -1160,13 +1160,26 @@ APEX_MODULE_LIBS := \
   libprofiled.so \
   libsigchain.so \
 
-# Conscrypt APEX libraries
+# Conscrypt APEX libraries.
 APEX_MODULE_LIBS += \
   libjavacrypto.so \
 
-# An option to disable the check below, for local use since some build targets
-# still may create these libraries in /system (b/129006418).
+# ART APEX JARs (Java libraries).
+APEX_MODULE_JARS := \
+  apache-xml.jar \
+  bouncycastle.jar \
+  core-icu4j.jar \
+  core-libart.jar \
+  core-oj.jar \
+  okhttp.jar \
+
+# An option to disable the APEX (native) library absence check below, for local
+# use since some build targets still may create these libraries in /system
+# (b/129006418).
 DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
+
+# An option to disable the APEX JAR (Java library) absence check below.
+DISABLE_APEX_JARS_ABSENCE_CHECK ?=
 
 # Bionic should not be in /system, except for the bootstrap instance.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE := lib/bootstrap lib64/bootstrap
@@ -1190,6 +1203,9 @@ endif
 
 # Exclude vndk-* subdirectories which contain prebuilts from older releases.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/vndk-% lib64/vndk-%
+
+# APEX JAR absence check path pattern exclusion list (empty for now).
+APEX_JARS_ABSENCE_CHECK_EXCLUDE :=
 
 ifdef DISABLE_APEX_LIBS_ABSENCE_CHECK
   check-apex-libs-absence :=
@@ -1253,7 +1269,39 @@ else
   endef
 endif
 
-# TODO(b/142944799): Implement Java library absence check for Core Libraries.
+ifdef DISABLE_APEX_JARS_ABSENCE_CHECK
+  check-apex-jars-absence :=
+  check-apex-jars-absence-on-disk :=
+else
+  # Same as `check-apex-libs-absence` above, but for JARs.
+  define check-apex-jars-absence
+    $(call maybe-print-list-and-error, \
+      $(filter $(foreach jar,$(APEX_MODULE_JARS),%/$(jar)), \
+        $(filter-out $(foreach dir,$(APEX_JARS_ABSENCE_CHECK_EXCLUDE), \
+                       $(TARGET_OUT)/$(if $(findstring %,$(dir)),$(dir),$(dir)/%)), \
+          $(filter $(TARGET_OUT)/framework/%,$(1)))), \
+      APEX JARs found in product_target_FILES (see comment for check-apex-jars-absence in \
+      build/make/core/main.mk for details))
+  endef
+
+  # Same as `check-apex-libs-absence-on-disk` above, but for JARs.
+  define check-apex-jars-absence-on-disk
+    $(hide) ( \
+      cd $(TARGET_OUT) && \
+      findres=$$(find framework \
+        $(foreach dir,$(APEX_JARS_ABSENCE_CHECK_EXCLUDE),-path "$(subst %,*,$(dir))" -prune -o) \
+        -type f \( -false $(foreach jar,$(APEX_MODULE_JARS),-o -name $(jar)) \) \
+        -print) && \
+      if [ -n "$$findres" ]; then \
+        echo "APEX JARs found in system image in TARGET_OUT (see comments for" 1>&2; \
+        echo "check-apex-jars-absence and check-apex-jars-absence-on-disk in" 1>&2; \
+        echo "build/make/core/main.mk for details):" 1>&2; \
+        echo "$$findres" | sort 1>&2; \
+        false; \
+      fi; \
+    )
+  endef
+endif
 
 ifdef FULL_BUILD
   ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
@@ -1377,6 +1425,7 @@ $(PRODUCT_OUT)/offending_artifacts.txt:
   endif
 
   $(call check-apex-libs-absence,$(product_target_FILES))
+  $(call check-apex-jars-absence,$(product_target_FILES))
 else
   # We're not doing a full build, and are probably only including
   # a subset of the module makefiles.  Don't try to build any modules
