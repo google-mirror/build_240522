@@ -1109,11 +1109,11 @@ $(if $(strip $(1)), \
 endef
 
 # Check that libraries that should only be in APEXes don't end up in the system
-# image. For the Runtime APEX this complements the checks in
+# image. For the ART APEX this complements the checks in
 # art/build/apex/art_apex_test.py.
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
-# Runtime APEX libraries
+# ART APEX (native) libraries
 APEX_MODULE_LIBS := \
   libadbconnection.so \
   libadbconnectiond.so \
@@ -1163,6 +1163,19 @@ APEX_MODULE_LIBS := \
 # Conscrypt APEX libraries
 APEX_MODULE_LIBS += \
   libjavacrypto.so \
+
+# ART APEX JARs (Java libraries)
+APEX_MODULE_LIBS += \
+  apache-xml.jar \
+  bouncycastle.jar \
+  core-icu4j.jar \
+  core-libart.jar \
+  core-oj.jar \
+  okhttp.jar \
+
+# Conscrypt APEX JARs (Java libraries)
+APEX_MODULE_LIBS += \
+  conscrypt.jar \
 
 # An option to disable the check below, for local use since some build targets
 # still may create these libraries in /system (b/129006418).
@@ -1216,12 +1229,14 @@ else
   # APEX might be misconfigured or something is wrong in the build system.
   # Please reach out to the APEX package owners and/or soong-team@, or
   # android-building@googlegroups.com externally.
+  #
+  # Likewise, we check for the absence of APEX Java libraries (JARs).
   define check-apex-libs-absence
     $(call maybe-print-list-and-error, \
       $(filter $(foreach lib,$(APEX_MODULE_LIBS),%/$(lib)), \
         $(filter-out $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE), \
                        $(TARGET_OUT)/$(if $(findstring %,$(dir)),$(dir),$(dir)/%)), \
-          $(filter $(TARGET_OUT)/lib/% $(TARGET_OUT)/lib64/%,$(1)))), \
+          $(filter $(TARGET_OUT),$(1)))), \
       APEX libraries found in product_target_FILES (see comment for check-apex-libs-absence in \
       build/make/core/main.mk for details))
   endef
@@ -1235,11 +1250,13 @@ else
   # try "m installclean && m systemimage" to get a correct system image. For
   # local work you can also disable the check with the
   # DISABLE_APEX_LIBS_ABSENCE_CHECK environment variable.
+  #
+  # Likewise, we check for the absence of APEX Java libraries (JARs).
   define check-apex-libs-absence-on-disk
     $(hide) ( \
       cd $(TARGET_OUT) && \
-      findres=$$(find lib* \
-        $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),-path "$(subst %,*,$(dir))" -prune -o) \
+      findres=$$(find . \
+        $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),-path "./$(subst %,*,$(dir))" -prune -o) \
         -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) \
         -print) && \
       if [ -n "$$findres" ]; then \
@@ -1252,8 +1269,6 @@ else
     )
   endef
 endif
-
-# TODO(b/142944799): Implement Java library absence check for Core Libraries.
 
 ifdef FULL_BUILD
   ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
