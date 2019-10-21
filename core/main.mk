@@ -1109,11 +1109,16 @@ $(if $(strip $(1)), \
 endef
 
 # Check that libraries that should only be in APEXes don't end up in the system
-# image. For the Runtime APEX this complements the checks in
+# image. For the ART APEX this complements the checks in
 # art/build/apex/art_apex_test.py.
 # TODO(b/128708192): Implement this restriction in Soong instead.
 
-# Runtime APEX libraries
+# An option to disable the APEX files absence check below, for local use since
+# some build targets still may create some native libraries in /system
+# (b/129006418).
+DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
+
+# ART APEX (native) libraries
 APEX_MODULE_LIBS := \
   libadbconnection.so \
   libadbconnectiond.so \
@@ -1164,10 +1169,6 @@ APEX_MODULE_LIBS := \
 APEX_MODULE_LIBS += \
   libjavacrypto.so \
 
-# An option to disable the check below, for local use since some build targets
-# still may create these libraries in /system (b/129006418).
-DISABLE_APEX_LIBS_ABSENCE_CHECK ?=
-
 # Bionic should not be in /system, except for the bootstrap instance.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE := lib/bootstrap lib64/bootstrap
 
@@ -1191,11 +1192,62 @@ endif
 # Exclude vndk-* subdirectories which contain prebuilts from older releases.
 APEX_LIBS_ABSENCE_CHECK_EXCLUDE += lib/vndk-% lib64/vndk-%
 
+
+# ART APEX JARs (Java libraries)
+APEX_MODULE_JARS := \
+  apache-xml.jar \
+  bouncycastle.jar \
+  core-icu4j.jar \
+  core-libart.jar \
+  core-oj.jar \
+  okhttp.jar \
+
+# APEX JAR absence check path pattern exclusion list (empty for now).
+APEX_JARS_ABSENCE_CHECK_EXCLUDE :=
+
+
+# Generic APEX file absence check.
+# Used in `check-apex-libs-absence` below.
+# $(1): List of files whose absence is checked among installed files.
+# $(2): List of paths in $(TARGET_OUT) which are excluded from the checks.
+# $(3): List of files installed on product.
+define generic-check-apex-libs-absence
+  $(call maybe-print-list-and-error, \
+    $(filter $(foreach file,$(1),%/$(file)), \
+      $(filter-out \
+        $(foreach dir,$(2),$(TARGET_OUT)/$(if $(findstring %,$(dir)),$(dir),$(dir)/%)), \
+        $(filter $(TARGET_OUT),$(3)))), \
+    APEX files found in product_target_FILES (see comment for check-apex-libs-absence in \
+    build/make/core/main.mk for details))
+endef
+
+# Generic APEX file absence check on disk.
+# Used in `check-apex-libs-absence-on-disk` below.
+# $(1): List of files whose absence is checked among files installed under
+#       $(TARGET_OUT).
+# $(2): List of paths in $(TARGET_OUT) which are excluded from the checks.
+define generic-check-apex-libs-absence-on-disk
+  ( \
+    cd $(TARGET_OUT) && \
+    findres=$$(find . \
+      $(foreach dir,$(2),-path "./$(subst %,*,$(dir))" -prune -o) \
+      -type f \( -false $(foreach file,$(1),-o -name $(file)) \) \
+      -print) && \
+    if [ -n "$$findres" ]; then \
+      echo "APEX files found in system image in TARGET_OUT (see comments for" 1>&2; \
+      echo "check-apex-libs-absence and check-apex-libs-absence-on-disk in" 1>&2; \
+      echo "build/make/core/main.mk for details):" 1>&2; \
+      echo "$$findres" | sort 1>&2; \
+      false; \
+    fi; \
+  )
+endef
+
 ifdef DISABLE_APEX_LIBS_ABSENCE_CHECK
   check-apex-libs-absence :=
   check-apex-libs-absence-on-disk :=
 else
-  # If the check below fails, some library has ended up in system/lib or
+  # If the first check below fails, some library has ended up in system/lib or
   # system/lib64 that is intended to only go into some APEX package. The likely
   # cause is that a library or binary in /system has grown a dependency that
   # directly or indirectly pulls in the prohibited library.
@@ -1216,14 +1268,13 @@ else
   # APEX might be misconfigured or something is wrong in the build system.
   # Please reach out to the APEX package owners and/or soong-team@, or
   # android-building@googlegroups.com externally.
+  #
+  # Likewise, we check for the absence of APEX Java libraries (JARs).
   define check-apex-libs-absence
-    $(call maybe-print-list-and-error, \
-      $(filter $(foreach lib,$(APEX_MODULE_LIBS),%/$(lib)), \
-        $(filter-out $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE), \
-                       $(TARGET_OUT)/$(if $(findstring %,$(dir)),$(dir),$(dir)/%)), \
-          $(filter $(TARGET_OUT)/lib/% $(TARGET_OUT)/lib64/%,$(1)))), \
-      APEX libraries found in product_target_FILES (see comment for check-apex-libs-absence in \
-      build/make/core/main.mk for details))
+    $(call generic-check-apex-libs-absence, \
+        $(APEX_MODULE_LIBS),$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),$(1)) \
+    $(call generic-check-apex-libs-absence, \
+        $(APEX_MODULE_JARS),$(APEX_JARS_ABSENCE_CHECK_EXCLUDE),$(1))
   endef
 
   # TODO(b/129006418): The check above catches libraries through product
@@ -1235,25 +1286,17 @@ else
   # try "m installclean && m systemimage" to get a correct system image. For
   # local work you can also disable the check with the
   # DISABLE_APEX_LIBS_ABSENCE_CHECK environment variable.
+  #
+  # Likewise, we check for the absence of APEX Java libraries (JARs).
   define check-apex-libs-absence-on-disk
     $(hide) ( \
-      cd $(TARGET_OUT) && \
-      findres=$$(find lib* \
-        $(foreach dir,$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE),-path "$(subst %,*,$(dir))" -prune -o) \
-        -type f \( -false $(foreach lib,$(APEX_MODULE_LIBS),-o -name $(lib)) \) \
-        -print) && \
-      if [ -n "$$findres" ]; then \
-        echo "APEX libraries found in system image in TARGET_OUT (see comments for" 1>&2; \
-        echo "check-apex-libs-absence and check-apex-libs-absence-on-disk in" 1>&2; \
-        echo "build/make/core/main.mk for details):" 1>&2; \
-        echo "$$findres" | sort 1>&2; \
-        false; \
-      fi; \
+      $(call generic-check-apex-libs-absence-on-disk, \
+        $(APEX_MODULE_LIBS),$(APEX_LIBS_ABSENCE_CHECK_EXCLUDE)) \
+      && $(call generic-check-apex-libs-absence-on-disk, \
+           $(APEX_MODULE_JARS),$(APEX_JARS_ABSENCE_CHECK_EXCLUDE)) \
     )
   endef
 endif
-
-# TODO(b/142944799): Implement Java library absence check for Core Libraries.
 
 ifdef FULL_BUILD
   ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
