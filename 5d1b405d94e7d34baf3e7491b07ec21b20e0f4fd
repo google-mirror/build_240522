@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e27393e6_e81541dc",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-22T08:56:23Z",
+      "side": 1,
+      "message": "is there a reason we can\u0027t just extend this to include APEX_MODULE_JARS instead of duplicating it?",
+      "range": {
+        "startLine": 1235,
+        "startChar": 9,
+        "endLine": 1235,
+        "endChar": 32
+      },
+      "revId": "5d1b405d94e7d34baf3e7491b07ec21b20e0f4fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
