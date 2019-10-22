@@ -46,6 +46,30 @@
       "revId": "5d1b405d94e7d34baf3e7491b07ec21b20e0f4fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97151bc7_b48799cf",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-22T10:40:55Z",
+      "side": 1,
+      "message": "I wanted this change to be independent from the existing (native) libs absence check, as I thought both were meant to be removed eventually, but not necessarily at the same time. I think the ART APEX JAR absence check should probably be easier to remove first, when can express that these JARs are only meant for the ART APEX on device -- I wasn\u0027t sure whether this was already possible, so I went for this absence check in Make, as a non-regression test.\n\nMartin, what do you think?",
+      "parentUuid": "4e56ad70_3b2c0d98",
+      "range": {
+        "startLine": 1235,
+        "startChar": 9,
+        "endLine": 1235,
+        "endChar": 32
+      },
+      "revId": "5d1b405d94e7d34baf3e7491b07ec21b20e0f4fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
