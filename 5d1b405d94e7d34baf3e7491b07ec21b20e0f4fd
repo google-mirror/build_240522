@@ -70,6 +70,30 @@
       "revId": "5d1b405d94e7d34baf3e7491b07ec21b20e0f4fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ca889b_517421d7",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-22T12:58:41Z",
+      "side": 1,
+      "message": "I just mean make it more general so it can cope with files outside lib and lib64. When we next decide we want to check some xml files in /system/etc/ don\u0027t get installed, we don\u0027t need a third copy-pasted function",
+      "parentUuid": "97151bc7_b48799cf",
+      "range": {
+        "startLine": 1235,
+        "startChar": 9,
+        "endLine": 1235,
+        "endChar": 32
+      },
+      "revId": "5d1b405d94e7d34baf3e7491b07ec21b20e0f4fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
