@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3ac87c7_04e97e45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-22T19:07:06Z",
+      "side": 1,
+      "message": "worth checking libart and core-oj break individually too",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 63
+      },
+      "revId": "303f3034a66ebbafa3342ce4c2c1f5c21d3c6add",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3667abe_dd620deb",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-22T19:07:06Z",
+      "side": 1,
+      "message": "I had envisioned getting rid of this dir filter and just scanning all of /system (removing the distinction between the two checks), which seemed simple, so sorry this caused you more work. Looks good anyhow. :)",
+      "range": {
+        "startLine": 1224,
+        "startChar": 46,
+        "endLine": 1225,
+        "endChar": 40
+      },
+      "revId": "303f3034a66ebbafa3342ce4c2c1f5c21d3c6add",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "204fcb7f_9fa73d9c",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-22T19:07:06Z",
+      "side": 1,
+      "message": "avoid tabs here and below",
+      "range": {
+        "startLine": 1284,
+        "startChar": 0,
+        "endLine": 1284,
+        "endChar": 1
+      },
+      "revId": "303f3034a66ebbafa3342ce4c2c1f5c21d3c6add",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
