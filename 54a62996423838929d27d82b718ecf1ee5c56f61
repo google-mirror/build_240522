@@ -22,6 +22,30 @@
       "revId": "54a62996423838929d27d82b718ecf1ee5c56f61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d76a7ae0_ab65c30f",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-10-23T09:14:38Z",
+      "side": 1,
+      "message": "I believe this is required for all android devices including different android families than handhelds. Otherwise we may not remove these from core_64_bit*.mk.\n\nLeaving the question for 32_64 to Szuwei.",
+      "parentUuid": "d5f37d0f_29712f26",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 353,
+        "endChar": 68
+      },
+      "revId": "54a62996423838929d27d82b718ecf1ee5c56f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
