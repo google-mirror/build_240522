@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5f37d0f_29712f26",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-23T08:54:50Z",
+      "side": 1,
+      "message": "can we put these in mainline_system instead?\n\nand do we actually need all of them? Maybe 64_32 is sufficient for now? (btw, what versions of GSI use the 32_64 one and why?)",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 353,
+        "endChar": 68
+      },
+      "revId": "54a62996423838929d27d82b718ecf1ee5c56f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
