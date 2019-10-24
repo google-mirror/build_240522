@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6f10a43_aa3e76c6",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-24T01:14:23Z",
+      "side": 0,
+      "message": "Why delete this line?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "ef582f1432bf321ef001d690f5de7cd4e66f316c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e74f1e4_5b3fdd73",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 4833,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-24T01:14:23Z",
+      "side": 1,
+      "message": "Technically you want to filter it here too, but build_super_image.py only looks at images within dynamic_partition_list, so this is okay...",
+      "range": {
+        "startLine": 4832,
+        "startChar": 0,
+        "endLine": 4833,
+        "endChar": 76
+      },
+      "revId": "6b79436426c8055a105fdaeda8c166598fd238f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5fe0b6_f6333494",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 4844,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-24T01:14:23Z",
+      "side": 1,
+      "message": "Only when \"system\" is part of BOARD_SUPER_PARTITION_PARTITION_LIST:\n\nifdef BUILDING_SYSTEM_OTHER_IMAGE\nif $(filter system,$(BOARD_SUPER_PARTITION_PARTITION_LIST))\nINSTALLED_SUPERIMAGE_DEPENDENCIES +\u003d $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)\nendif\nendif",
+      "range": {
+        "startLine": 4844,
+        "startChar": 0,
+        "endLine": 4844,
+        "endChar": 73
+      },
+      "revId": "6b79436426c8055a105fdaeda8c166598fd238f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
