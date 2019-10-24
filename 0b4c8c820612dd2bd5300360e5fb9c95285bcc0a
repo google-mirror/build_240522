@@ -22,6 +22,30 @@
       "revId": "0b4c8c820612dd2bd5300360e5fb9c95285bcc0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5ace538_7f68e204",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2019-10-24T11:21:15Z",
+      "side": 1,
+      "message": "This is used below to compare with LATEST_VNDK_LIB_LIST(e.g. \u0027current.txt\u0027) and update it.",
+      "parentUuid": "9dad0cc8_9dc50695",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "0b4c8c820612dd2bd5300360e5fb9c95285bcc0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
