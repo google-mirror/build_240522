@@ -22,6 +22,30 @@
       "revId": "ef582f1432bf321ef001d690f5de7cd4e66f316c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30ed002e_847938d1",
+        "filename": "tools/releasetools/build_super_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-10-24T07:03:19Z",
+      "side": 0,
+      "message": "I first thought that this flag is turned on at #113 for A/B devices, and we need system_other only for A/B devices, so duplicated. Anyway, I\u0027ll restore this line.",
+      "parentUuid": "b6f10a43_aa3e76c6",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "ef582f1432bf321ef001d690f5de7cd4e66f316c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
