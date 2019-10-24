@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "532540ad_f5a988ae",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 4833,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-10-24T06:57:35Z",
+      "side": 1,
+      "message": "This CL is to build super.img by setting BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT :\u003d true with m build, not with dist build. Since super.img is built with misc_info.txt directly in that case, we need to put an info for system_other_image.",
+      "parentUuid": "0e74f1e4_5b3fdd73",
+      "range": {
+        "startLine": 4832,
+        "startChar": 0,
+        "endLine": 4833,
+        "endChar": 76
+      },
+      "revId": "6b79436426c8055a105fdaeda8c166598fd238f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e5fe0b6_f6333494",
         "filename": "core/Makefile",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-24T01:14:23Z",
       "side": 1,
       "message": "Only when \"system\" is part of BOARD_SUPER_PARTITION_PARTITION_LIST:\n\nifdef BUILDING_SYSTEM_OTHER_IMAGE\nif $(filter system,$(BOARD_SUPER_PARTITION_PARTITION_LIST))\nINSTALLED_SUPERIMAGE_DEPENDENCIES +\u003d $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)\nendif\nendif",
+      "range": {
+        "startLine": 4844,
+        "startChar": 0,
+        "endLine": 4844,
+        "endChar": 73
+      },
+      "revId": "6b79436426c8055a105fdaeda8c166598fd238f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99d19223_f55476ec",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 4844,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2019-10-24T06:57:35Z",
+      "side": 1,
+      "message": "Done. Added same conditional statement in above code, also.",
+      "parentUuid": "9e5fe0b6_f6333494",
       "range": {
         "startLine": 4844,
         "startChar": 0,
