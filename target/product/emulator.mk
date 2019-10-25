@@ -21,7 +21,6 @@
 # Device modules
 PRODUCT_PACKAGES += \
     libGLES_android \
-    vintf \
     CarrierConfig \
 
 # need this for gles libraries to load properly

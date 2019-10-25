@@ -23,7 +23,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
 
 # TODO(b/123495142): these files should be clean up
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST := \
-    system/bin/vintf \
     system/etc/permissions/android.software.verified_boot.xml \
     system/etc/permissions/privapp-permissions-goldfish.xml \
     system/lib/egl/libGLES_android.so \
@@ -34,7 +33,6 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST := \
 # Device modules
 PRODUCT_PACKAGES += \
     libGLES_android \
-    vintf \
 
 # need this for gles libraries to load properly
 # after moving to /vendor/lib/
