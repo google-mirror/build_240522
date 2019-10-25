@@ -46,6 +46,30 @@
       "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ecee86e_a683aa92",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-25T15:23:50Z",
+      "side": 1,
+      "message": "I think the presence of `jacocoagent` in `TARGET_CORE_JARS` was twofold:\n1. make sure it is installed (by being eventually included in `PRODUCT_PACKAGES`);\n2. make sure it is Dex pre-opted (by being eventually included in `PRODUCT_BOOT_JARS`).\n\nPS3 addresses the first point; I\u0027ll address the second point in my next patch set.",
+      "parentUuid": "71ce7581_a9cd6dbd",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 5
+      },
+      "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
