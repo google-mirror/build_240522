@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "189d6350_5fb76376",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-25T17:28:25Z",
+      "side": 1,
+      "message": "So, this does not seem to work… There is no `/system/framework/jacocoagent.jar` file in the generated product in my `cf_x86_phone-userdebug_coverage` build produced by Forrest on PS3 (https://android-build.googleplex.com/builds/forrest/run/L50900000381584108).\n\nI moved the logic back into `target/product/base_system.mk` and `core/envsetup.mk` in PS4.",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 35
+      },
+      "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "51348297_ddbc42cf",
         "filename": "core/product_config.mk",
         "patchSetId": 3
@@ -70,6 +93,30 @@
       "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "895eaf21_72c21eca",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-25T17:28:25Z",
+      "side": 1,
+      "message": "Done in PS4.",
+      "parentUuid": "2ecee86e_a683aa92",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 5
+      },
+      "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
