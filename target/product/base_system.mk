@@ -275,6 +275,10 @@ PRODUCT_PACKAGES += \
     system_manifest.xml \
     system_compatibility_matrix.xml \
 
+# Optional packages.
+PRODUCT_PACKAGES += \
+  $(MAYBE_TARGET_JACOCOAGENT_JARS) \
+
 # Host tools to install
 PRODUCT_HOST_PACKAGES += \
     BugReport \
