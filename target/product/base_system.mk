@@ -269,6 +269,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+    $(MAYBE_TARGET_JACOCOAGENT_JARS) \
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
@@ -323,7 +324,8 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
-    updatable-media
+    updatable-media \
+    $(MAYBE_TARGET_JACOCOAGENT_JARS)
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
