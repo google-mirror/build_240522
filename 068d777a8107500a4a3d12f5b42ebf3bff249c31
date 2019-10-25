@@ -22,6 +22,30 @@
       "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71ce7581_a9cd6dbd",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-25T12:02:31Z",
+      "side": 1,
+      "message": "I\u0027ll try; I need to check wether adding `jacocoagent` to `TARGET_CORE_JARS` is still necessary.",
+      "parentUuid": "51348297_ddbc42cf",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 5
+      },
+      "revId": "068d777a8107500a4a3d12f5b42ebf3bff249c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
