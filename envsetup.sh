@@ -19,6 +19,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - provision:  Flash device with all required partitions. Options will be passed on to fastboot.
 - cgrep:      Greps on all local C/C++ files.
 - ggrep:      Greps on all local Gradle files.
+- gogrep:     Greps on all local Go files.
 - jgrep:      Greps on all local Java files.
 - resgrep:    Greps on all local res/*.xml files.
 - mangrep:    Greps on all local AndroidManifest.xml files.
@@ -965,6 +966,12 @@ function gettargetarch
 function ggrep()
 {
     find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name "*\.gradle" \
+        -exec grep --color -n "$@" {} +
+}
+
+function gogrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name "*\.go" \
         -exec grep --color -n "$@" {} +
 }
 
