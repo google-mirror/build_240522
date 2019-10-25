@@ -22,6 +22,29 @@
       "revId": "fdf8570bd47bd86b3f029ea0bc926fbde3e42646",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec3054a8_18172f45",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-25T09:50:54Z",
+      "side": 1,
+      "message": "this is a strange/roundabout way to get this added to product_packages, given the logic is inside the core of the build system already. Can you just move the logic currently in envsetup.mk around jacoco to product_config.mk instead? Somewhere around where other defaults are set (lines ~200-~300)",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 36
+      },
+      "revId": "fdf8570bd47bd86b3f029ea0bc926fbde3e42646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
