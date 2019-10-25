@@ -269,6 +269,13 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+    $(MAYBE_TARGET_JACOCOAGENT_JARS) \
+
+ifeq ($(PRODUCT_USE_NON_STATIC_INSTRUMENTATION),true)
+  # For instrumented build, if Jacoco is not being included statically in
+  # instrumented packages, add `jacocoagent` to the installed packages.
+  PRODUCT_PACKAGES += jacocoagent
+endif
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
@@ -323,7 +330,8 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
-    updatable-media
+    updatable-media \
+    $(MAYBE_TARGET_JACOCOAGENT_JARS)
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
