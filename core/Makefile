@@ -3466,103 +3466,27 @@ check_all_partition_sizes_file := $(call intermediates-dir-for,PACKAGING,check-a
 
 check-all-partition-sizes: $(check_all_partition_sizes_file)
 
-# Add image dependencies so that generated_*_image_info.txt are written before checking.
 $(check_all_partition_sizes_file): \
     $(SPARSE_IMG) \
     $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
-ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
-# Check sum(super partition block devices) == super partition
-# Non-retrofit devices already defines BOARD_SUPER_PARTITION_SUPER_DEVICE_SIZE = BOARD_SUPER_PARTITION_SIZE
-define check-super-partition-size
-  size_list="$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),$(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))"; \
-  sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${size_list}"); \
-  max_size_expr="$(BOARD_SUPER_PARTITION_SIZE)"; \
-  if [ $$(( $${sum_sizes_expr} )) -ne $$(( $${max_size_expr} )) ]; then \
-    echo "The sum of super partition block device sizes is not equal to BOARD_SUPER_PARTITION_SIZE:"; \
-    echo $${sum_sizes_expr} '!=' $${max_size_expr}; \
-    exit 1; \
-  else \
-    echo "The sum of super partition block device sizes is equal to BOARD_SUPER_PARTITION_SIZE:"; \
-    echo $${sum_sizes_expr} '==' $${max_size_expr}; \
-  fi
-endef
-endif
-
-# $(1): human-readable max size string
-# $(2): max size expression
-# $(3): list of partition names
-# $(4): human-readable warn size string
-# $(5): warn size expression
-# $(6): human readable error size string
-# $(7): error size expression
-define check-sum-of-partition-sizes
-  partition_size_list="$$(for i in $(call read-size-of-partitions,$(3)); do \
-    echo $(call round-partition-size,$${i}); \
-  done)"; \
-  sum_sizes_expr=$$(tr '\n' '+' <<< "$${partition_size_list}" | sed 's/+$$//'); \
-  if [ $$(( $${sum_sizes_expr} )) -gt $$(( $(2) )) ]; then \
-    echo "The sum of sizes of [$(strip $(3))] is larger than $(strip $(1)):"; \
-    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(2)" '==' $$(( $(2) )); \
-    exit 1; \
-  else \
-    if [[ ! -z "$(7)" ]] && [ $$(( $${sum_sizes_expr} )) -gt $$(( $(7) )) ]; then \
-        echo "!!!! ERROR !!!! The sum of sizes of [$(strip $(3))] is larger than $(strip $(6)):"; \
-        echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(7)" '==' $$(( $(7) )); \
-        echo "Super partition is" $$(( $$(( $$(( $${sum_sizes_expr} )) * 100)) / $$(( $(2) )) )) "percent occupied!"; \
-        exit 1; \
-    fi; \
-    if [[ ! -z "$(5)" ]] && [ $$(( $${sum_sizes_expr} )) -gt $$(( $(5) )) ]; then \
-        echo "!!!! WARNING !!!! The sum of sizes of [$(strip $(3))] is larger than $(strip $(4)):"; \
-        echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' "$(5)" '==' $$(( $(5) )); \
-        echo "Super partition is" $$(( $$(( $$(( $${sum_sizes_expr} )) * 100)) / $$(( $(2) )) )) "percent occupied!"; \
-    fi; \
-    echo "The sum of sizes of [$(strip $(3))] is within $(strip $(1)):"; \
-    echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' "$(2)" '==' $$(( $(2) )); \
-  fi;
-endef
-
+# $(1): info_txt
 define check-all-partition-sizes-target
-  # Check sum(all partitions) <= super partition (/ 2 for A/B devices launched with dynamic partitions)
-  $(if $(BOARD_SUPER_PARTITION_SIZE),$(if $(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-    $(call check-sum-of-partition-sizes,BOARD_SUPER_PARTITION_SIZE$(if $(call super-slot-suffix), / 2), \
-      $(BOARD_SUPER_PARTITION_SIZE)$(if $(call super-slot-suffix), / 2),$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
-      BOARD_SUPER_PARTITION_WARN_LIMIT$(if $(call super-slot-suffix), / 2), \
-      $(BOARD_SUPER_PARTITION_WARN_LIMIT)$(if $(call super-slot-suffix), / 2), \
-      BOARD_SUPER_PARTITION_ERROR_LIMIT$(if $(call super-slot-suffix), / 2), \
-      $(BOARD_SUPER_PARTITION_ERROR_LIMIT)$(if $(call super-slot-suffix), / 2)) \
-  ))
-
-  # For each group, check sum(partitions in group) <= group size
-  $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
-    $(if $(BOARD_$(group)_SIZE),$(if $(BOARD_$(group)_PARTITION_LIST), \
-      $(call check-sum-of-partition-sizes,BOARD_$(group)_SIZE,$(BOARD_$(group)_SIZE),$(BOARD_$(group)_PARTITION_LIST)))))
-
-  # Check sum(all group sizes) <= super partition (/ 2 for A/B devices launched with dynamic partitions)
-  if [[ ! -z $(BOARD_SUPER_PARTITION_SIZE) ]]; then \
-    group_size_list="$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)),$(BOARD_$(group)_SIZE))"; \
-    sum_sizes_expr=$$(sed -e 's/ /+/g' <<< "$${group_size_list}"); \
-    max_size_tail=$(if $(call super-slot-suffix)," / 2"); \
-    max_size_expr="$(BOARD_SUPER_PARTITION_SIZE)$${max_size_tail}"; \
-    if [ $$(( $${sum_sizes_expr} )) -gt $$(( $${max_size_expr} )) ]; then \
-      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is larger than BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
-      echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '>' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
-      exit 1; \
-    else \
-      echo "The sum of sizes of [$(strip $(BOARD_SUPER_PARTITION_GROUPS))] is within BOARD_SUPER_PARTITION_SIZE$${max_size_tail}:"; \
-      echo $${sum_sizes_expr} '==' $$(( $${sum_sizes_expr} )) '<=' $${max_size_expr} '==' $$(( $${max_size_expr} )); \
-    fi \
-  fi
+  mkdir -p $(dir $(1))
+  $(call dump-dynamic-partitions-info, $(1))
+  $(foreach partition,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+    echo "$(partition)_image="$(call images-for-partitions,$(partition)) >> $(1);)
+  $(CHECK_PARTITION_SIZES) -v $(1)
 endef
 
 $(check_all_partition_sizes_file):
-	$(call check-all-partition-sizes-target)
-	$(call check-super-partition-size)
+	$(call check-all-partition-sizes-target \
+		 $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes)/dynamic_partition_info.txt)
 	touch $@
 
 check-all-partition-sizes-nodeps:
-	$(call check-all-partition-sizes-target)
-	$(call check-super-partition-size)
+	$(call check-all-partition-sizes-target \
+		 $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes-nodeps)/dynamic_partition_info.txt)
 
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
@@ -3976,6 +3900,8 @@ define dump-dynamic-partitions-info
     echo "build_non_sparse_super_partition=true" >> $(1))
   $(if $(filter true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE)), \
     echo "super_image_in_update_package=true" >> $(1))
+  $(if $(BOARD_SUPER_PARTITION_SIZE), \
+    echo "super_partition_size=$(BOARD_SUPER_PARTITION_SIZE)" >> $(1))
 endef
 
 # By conditionally including the dependency of the target files package on the
