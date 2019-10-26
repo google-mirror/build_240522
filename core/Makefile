@@ -3462,30 +3462,31 @@ droid_targets: check-all-partition-sizes
 
 .PHONY: check-all-partition-sizes check-all-partition-sizes-nodeps
 
-check_all_partition_sizes_file := $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes)/timestamp
+check_all_partition_sizes_log := $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes)/check_all_partition_sizes_log
+$(call dist-for-goals, droid_targets, $(check_all_partition_sizes_log))
 
-check-all-partition-sizes: $(check_all_partition_sizes_file)
+check-all-partition-sizes: $(check_all_partition_sizes_log)
 
-$(check_all_partition_sizes_file): \
+$(check_all_partition_sizes_log): \
     $(SPARSE_IMG) \
     $(call images-for-partitions,$(BOARD_SUPER_PARTITION_PARTITION_LIST))
 
 # $(1): info_txt
 define check-all-partition-sizes-target
   mkdir -p $(dir $(1))
-  $(call dump-dynamic-partitions-info, $(1))
+  $(call dump-super-image-info, $(1))
   $(foreach partition,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
     echo "$(partition)_image="$(call images-for-partitions,$(partition)) >> $(1);)
-  $(CHECK_PARTITION_SIZES) -v $(1)
+  $(CHECK_PARTITION_SIZES) -v $(1) $(if $(2), > $(2))
 endef
 
-$(check_all_partition_sizes_file):
-	$(call check-all-partition-sizes-target \
-		 $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes)/dynamic_partition_info.txt)
-	touch $@
+$(check_all_partition_sizes_log):
+	$(call check-all-partition-sizes-target, \
+		 $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes)/dynamic_partition_info.txt, \
+		 $@)
 
 check-all-partition-sizes-nodeps:
-	$(call check-all-partition-sizes-target \
+	$(call check-all-partition-sizes-target, \
 		 $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes-nodeps)/dynamic_partition_info.txt)
 
 endif # PRODUCT_BUILD_SUPER_PARTITION
