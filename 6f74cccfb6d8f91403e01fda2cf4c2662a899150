@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a33ddce_87da4385",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3465,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-27T07:02:12Z",
+      "side": 1,
+      "message": "check_partition_sizes binary should be a dependency?",
+      "range": {
+        "startLine": 3465,
+        "startChar": 0,
+        "endLine": 3465,
+        "endChar": 30
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba9b0379_b340e51f",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-27T07:02:12Z",
+      "side": 1,
+      "message": "not value",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673f3a8f_e61aa434",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-27T07:02:12Z",
+      "side": 1,
+      "message": "Only a suggestion. Since there are only two ops here. The Operator is unnecessary. You can just implement the __eq__ and __lt__ of the Expression class, and just two more readable helper function like CHECK_LE and CHECK_EQ.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 11
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416e0a10_97c6eaed",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-27T07:02:12Z",
+      "side": 1,
+      "message": "This case is not used? Then we can avoid the isinstance() call here.",
+      "range": {
+        "startLine": 199,
+        "startChar": 5,
+        "endLine": 199,
+        "endChar": 15
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
