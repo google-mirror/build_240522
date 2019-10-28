@@ -16,6 +16,24 @@
       "revId": "21403dc2df7a729db93e0d932a5355a5b96da6e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e67220c_68572503",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-28T17:47:35Z",
+      "side": 0,
+      "message": "I prefer to keep this change as close as possible to the original revert (PS1), which includes removing this comment (I made the change to keep the CleanSpec in PS2 because CleanSpec.mk files are supposed to only grow.)\n\nI\u0027ll put back the comment when I reland the change.",
+      "parentUuid": "36069312_8ec00ac7",
+      "revId": "21403dc2df7a729db93e0d932a5355a5b96da6e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
