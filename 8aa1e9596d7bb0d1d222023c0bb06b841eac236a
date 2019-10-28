@@ -22,6 +22,30 @@
       "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88ab628f_0081bcff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-28T15:12:49Z",
+      "side": 1,
+      "message": "This run failed because of b/143379890:\n\nhttps://android-build.googleplex.com/builds/pending/P10241199/cf_x86_phone-userdebug_coverage/latest/view/logs/build_error.log\n\n  Error code: 128\n  Error when executing: git -c core.longpaths\u003dtrue -c gc.auto\u003d0 fetch googleplex-android master\n  error: RPC failed; HTTP 500 curl 22 The requested URL returned \n  error: 500 Internal Server Error\n  fatal: expected flush after ref listing",
+      "parentUuid": "2f07d22b_3aaa9946",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
