@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3478015_decc3ca5",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-28T15:58:27Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be:\n\n  $(call get-product-var,$(1),$(v))\n\n?",
+      "range": {
+        "startLine": 564,
+        "startChar": 60,
+        "endLine": 564,
+        "endChar": 64
+      },
+      "revId": "c9d2c6f629e178da6d7b3db0d51a6211f526b4dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
