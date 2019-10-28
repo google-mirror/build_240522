@@ -46,6 +46,30 @@
       "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bcd3161_93b3cc06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-10-28T15:13:48Z",
+      "side": 1,
+      "message": "given it\u0027s a revert I\u0027d say it\u0027s fine to skip treehugger/forrest, but your call.",
+      "parentUuid": "2f07d22b_3aaa9946",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
