@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "44c16e98_ffe93e14",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3465,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0bd70ba_9d3b9af3",
+      "range": {
+        "startLine": 3465,
+        "startChar": 0,
+        "endLine": 3465,
+        "endChar": 30
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba9b0379_b340e51f",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 4
@@ -140,6 +164,30 @@
       "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf1d94e8_f48b32f3",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e255ddbb_be33d4dc",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 11
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
