@@ -1,0 +1,9 @@
+Presubmit-Ready+1: Roland Levillain <rpl@google.com>
+Code-Review+2: Anton Hansson <hansson@google.com>
+Code-Review+1: Martin Stjernholm <mast@google.com>
+Verified+1: Roland Levillain <rpl@google.com>
+Submitted-by: Roland Levillain <rpl@google.com>
+Submitted-at: Mon, 28 Oct 2019 17:48:21 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1151463
+Project: platform/build
+Branch: refs/heads/master
