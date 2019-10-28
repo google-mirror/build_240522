@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36069312_8ec00ac7",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-10-28T15:58:27Z",
+      "side": 0,
+      "message": "Consider not removing this comment? Should avoid a conflict with your other change that addresses it.",
+      "revId": "21403dc2df7a729db93e0d932a5355a5b96da6e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
