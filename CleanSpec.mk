@@ -688,6 +688,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/*/*app/*/oat)
 # Remove Android Core Library artifacts from the system partition, now
 # that they live in the ART APEX (b/142944799).
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
+# Remove Android Core Library artifacts from the system partition
+# again, as the original change removing them was reverted.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
 
 # Remove symlinks for VNDK apexes
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
