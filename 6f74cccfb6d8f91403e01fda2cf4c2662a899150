@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0bd70ba_9d3b9af3",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3465,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:16:57Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "1a33ddce_87da4385",
+      "range": {
+        "startLine": 3465,
+        "startChar": 0,
+        "endLine": 3465,
+        "endChar": 30
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba9b0379_b340e51f",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8a70a396_429c30ae",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:16:57Z",
+      "side": 1,
+      "message": "not value returns true if value is 0 or \"\"",
+      "parentUuid": "ba9b0379_b340e51f",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "673f3a8f_e61aa434",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-27T07:02:12Z",
       "side": 1,
       "message": "Only a suggestion. Since there are only two ops here. The Operator is unnecessary. You can just implement the __eq__ and __lt__ of the Expression class, and just two more readable helper function like CHECK_LE and CHECK_EQ.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 11
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e255ddbb_be33d4dc",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:16:57Z",
+      "side": 1,
+      "message": "make sense; will do",
+      "parentUuid": "673f3a8f_e61aa434",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -91,6 +163,30 @@
       "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fee84e69_625e021e",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-28T23:16:57Z",
+      "side": 1,
+      "message": "I put up follow-up PS to include tests. Tests use this.",
+      "parentUuid": "416e0a10_97c6eaed",
+      "range": {
+        "startLine": 199,
+        "startChar": 5,
+        "endLine": 199,
+        "endChar": 15
+      },
+      "revId": "6f74cccfb6d8f91403e01fda2cf4c2662a899150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
