@@ -70,6 +70,30 @@
       "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73f5a20e_f35df70b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2019-10-28T15:14:36Z",
+      "side": 1,
+      "message": "I\u0027ll give it another try:\n\n  https://android-build.googleplex.com/builds/forrest/run/L98400000382521691",
+      "parentUuid": "8bcd3161_93b3cc06",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "8aa1e9596d7bb0d1d222023c0bb06b841eac236a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
