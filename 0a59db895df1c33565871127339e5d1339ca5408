@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6e829a7_3bc684b3",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-10-29T12:03:02Z",
+      "side": 1,
+      "message": "why aren\u0027t JAVA_LIBRARIES checked?",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 33
+      },
+      "revId": "0a59db895df1c33565871127339e5d1339ca5408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
