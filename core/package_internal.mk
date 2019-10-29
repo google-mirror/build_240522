@@ -527,6 +527,30 @@ $(LOCAL_BUILT_MODULE) : $(appcompat-files)
 $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
 endif
 
+# TODO(b/132780927): When every app in product partition and every target doesn't use hidden APIs,
+# move these logic to local_system_sdk.mk. For now, it raises error in ninja, but at that time, it should be error in kati.
+# https://android-review.googlesource.com/q/topic:%22b%252F132780927%22+(status:open%20OR%20status:merged)
+sdk_version_build_error :=
+ifeq ($(LOCAL_PRODUCT_MODULE),true)
+ifeq ($(PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE),true)
+ifeq (,$(filter %__auto_generated_rro_product,$(LOCAL_MODULE)))
+ifeq ($(LOCAL_MODULE_CLASS),APPS)
+ifeq ($(LOCAL_PRIVATE_PLATFORM_APIS),true)
+  sdk_version_build_error := true
+endif
+endif
+endif
+endif
+endif
+
+ifeq ($(sdk_version_build_error),true)
+my_sdk_version_check := $(intermediates)/$(LOCAL_MODULE)-sdk-version-check
+$(my_sdk_version_check):
+	@echo "${PRIVATE_MODULE}: LOCAL_PRIVATE_PLATFORM_APIS must not be true when the module is in product."
+	exit 1
+$(LOCAL_BUILT_MODULE) : $(my_sdk_version_check)
+endif
+
 $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/resources
 $(LOCAL_BUILT_MODULE) : $(jni_shared_libraries)
 $(LOCAL_BUILT_MODULE) : $(JAR_ARGS) $(SOONG_ZIP) $(MERGE_ZIPS) $(ZIP2ZIP)
