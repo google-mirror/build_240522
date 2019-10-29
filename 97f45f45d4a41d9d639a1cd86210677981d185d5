@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "649409bd_516e5ebe",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-29T03:26:17Z",
+      "side": 1,
+      "message": "nit, change the name to something like deviceType... since non-a/b devices actually has one slot.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "97f45f45d4a41d9d639a1cd86210677981d185d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e169b3d_27fa865e",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-10-29T03:26:17Z",
+      "side": 1,
+      "message": "nit, just regular split",
+      "range": {
+        "startLine": 133,
+        "startChar": 26,
+        "endLine": 133,
+        "endChar": 31
+      },
+      "revId": "97f45f45d4a41d9d639a1cd86210677981d185d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
