@@ -71,8 +71,10 @@ else
       # javalib.jar is the default name for the build module (and isn't meaningful)
       # If that's what we have, substitute the module name instead.  These files
       # aren't included on the device, so this name is synthetic anyway.
+      # Extra path "static" is added to try to avoid name conflict with the notice file
+      # for the Java module whose stem is the same as this module's name.
       ifneq ($(filter javalib.jar,$(module_leaf)),)
-        module_leaf := $(LOCAL_MODULE).jar
+        module_leaf := static/$(LOCAL_MODULE).jar
       endif
       module_installed_filename := \
           $(patsubst $(PRODUCT_OUT)/%,%,$($(my_prefix)OUT_JAVA_LIBRARIES))/$(module_leaf)
