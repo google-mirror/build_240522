@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Jack Yu <jackyu@google.com>
+Code-Review+2: Steven Moreland <smoreland@google.com>
+Submitted-by: Xiangyu/Malcolm Chen <refuhoo@google.com>
+Submitted-at: Tue, 29 Oct 2019 22:22:35 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1132956
+Project: platform/build
+Branch: refs/heads/master
