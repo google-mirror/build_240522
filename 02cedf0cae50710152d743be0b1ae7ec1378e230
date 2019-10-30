@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d6e0434_3b9676e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1329611
+      },
+      "writtenOn": "2019-10-30T09:17:57Z",
+      "side": 1,
+      "message": "It needs the precondition\nlunch 22\nIn other lunch target, it may not generic_x86_64.",
+      "revId": "02cedf0cae50710152d743be0b1ae7ec1378e230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
