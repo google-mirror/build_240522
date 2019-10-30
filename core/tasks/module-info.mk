@@ -15,7 +15,7 @@ $(MODULE_INFO_JSON):
 			'"auto_test_config": [$(ALL_MODULES.$(m).auto_test_config)], ' \
 			'"module_name": "$(ALL_MODULES.$(m).MODULE_NAME)", ' \
 			'"test_config": [$(if $(ALL_MODULES.$(m).TEST_CONFIG),"$(ALL_MODULES.$(m).TEST_CONFIG)")], ' \
-			'"dependencies": [$(foreach w,$(sort $(ALL_DEPS.$(m).ALL_DEPS)),"$(w)", )], ' \
+			'"dependencies": [$(foreach w,$(sort $(SOONG_CONV.$(m).DEPS)),"$(w)", )], ' \
 			'"srcs": [$(foreach w,$(sort $(ALL_MODULES.$(m).SRCS)),"$(w)", )], ' \
 			'"srcjars": [$(foreach w,$(sort $(ALL_MODULES.$(m).SRCJARS)),"$(w)", )], ' \
 			'"classes_jar": [$(foreach w,$(sort $(ALL_MODULES.$(m).CLASSES_JAR)),"$(w)", )], ' \
