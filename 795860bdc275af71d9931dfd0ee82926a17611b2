@@ -46,6 +46,30 @@
       "revId": "795860bdc275af71d9931dfd0ee82926a17611b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29d2f4b4_5df7f71d",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1308042
+      },
+      "writtenOn": "2019-10-30T10:59:46Z",
+      "side": 1,
+      "message": "Without removing the space the separator will be 2 spaces.\ne.g.\n\"dependencies\": [\"a\",  \"b\"],  \"srcs\": [\"1.java\",  \"2.java\"],  ...",
+      "parentUuid": "48086e7e_89bd3847",
+      "range": {
+        "startLine": 10,
+        "startChar": 67,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "795860bdc275af71d9931dfd0ee82926a17611b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
