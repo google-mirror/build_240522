@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "edbef6fc_91517929",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5206,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-10-30T19:44:28Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 5206,
+        "startChar": 55,
+        "endLine": 5206,
+        "endChar": 66
+      },
+      "revId": "23110468b073eae35b3e5bba44c66452151f00e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec25befc_a749125b",
         "filename": "core/Makefile",
         "patchSetId": 1
