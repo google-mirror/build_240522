@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9fb46799_b03243c1",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-10-31T00:30:15Z",
+      "side": 1,
+      "message": "Isn\u0027t enum a python 3 thing?",
+      "parentUuid": "0811ad43_641908e1",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "97f45f45d4a41d9d639a1cd86210677981d185d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e169b3d_27fa865e",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 7
