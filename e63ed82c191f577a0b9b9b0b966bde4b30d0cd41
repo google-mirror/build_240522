@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ce09df6_2d321e34",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 3438,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-11-01T01:57:55Z",
+      "side": 1,
+      "message": "This should redirect stdout to the file, but leave stderr in the build error log.",
+      "range": {
+        "startLine": 3438,
+        "startChar": 34,
+        "endLine": 3438,
+        "endChar": 53
+      },
+      "revId": "e63ed82c191f577a0b9b9b0b966bde4b30d0cd41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
