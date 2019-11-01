@@ -411,7 +411,7 @@ root of the source tree, so this can just be replaced with '.' (which is what
 $TOP is hardcoded to), or removed entirely. If you need an absolute path, see
 the instructions above.
 
-### Stop using PATH directly  {#PATH}
+### Stop using PATH directly  {#PATH} sdfsdf
 
 This isn't only set by envsetup.sh, but it is modified by it. Due to that it's
 rather easy for this to change between different shells, and it's not ideal to
@@ -420,7 +420,7 @@ reread the makefiles every time this changes.
 In most cases, you shouldn't need to touch PATH at all. When you need to have a
 rule reference a particular binary that's part of the source tree or outputs,
 it's preferrable to just use the path to the file itself (since you should
-already be adding that as a dependency).
+already be adding that as a dependency). test
 
 Depending on the rule, passing the file path itself may not be feasible due to
 layers of unchangable scripts/binaries. In that case, be sure to add the
@@ -480,3 +480,4 @@ version.
 [external/fonttools/Lib/fontTools/Android.bp]: https://android.googlesource.com/platform/external/fonttools/+/master/Lib/fontTools/Android.bp
 [frameworks/base/Android.bp]: https://android.googlesource.com/platform/frameworks/base/+/master/Android.bp
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
+
