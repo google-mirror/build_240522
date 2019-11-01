@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5704b495_b2746757",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 4429,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-11-01T21:49:19Z",
+      "side": 1,
+      "message": "I guess I need to guard this with PRODUCT_USE_DYNAMIC_PARTITIONS ?",
+      "range": {
+        "startLine": 4429,
+        "startChar": 0,
+        "endLine": 4429,
+        "endChar": 83
+      },
+      "revId": "06a2638d799224d15170bab33d78bcb6f9f50b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
