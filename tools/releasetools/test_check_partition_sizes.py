@@ -77,9 +77,9 @@ class CheckPartitionSizesTest(test_utils.ReleaseToolsTestCase):
     with self.assertRaises(RuntimeError):
       CheckPartitionSizes(self.info_dict)
 
-  def test_no_image(self):
+  def test_no_system(self):
     del self.info_dict["system_image_size"]
-    with self.assertRaises(KeyError):
+    with self.assertRaises(RuntimeError):
       CheckPartitionSizes(self.info_dict)
 
   def test_block_devices_not_match(self):
@@ -92,3 +92,7 @@ class CheckPartitionSizesTest(test_utils.ReleaseToolsTestCase):
         """.split("\n")))
     with self.assertRaises(RuntimeError):
       CheckPartitionSizes(self.info_dict)
+
+  def test_no_vendor(self):
+    del self.info_dict["vendor_image_size"]
+    CheckPartitionSizes(self.info_dict)
