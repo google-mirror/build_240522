@@ -420,7 +420,7 @@ reread the makefiles every time this changes.
 In most cases, you shouldn't need to touch PATH at all. When you need to have a
 rule reference a particular binary that's part of the source tree or outputs,
 it's preferrable to just use the path to the file itself (since you should
-already be adding that as a dependency).
+already be adding that as a dependency). test
 
 Depending on the rule, passing the file path itself may not be feasible due to
 layers of unchangable scripts/binaries. In that case, be sure to add the
