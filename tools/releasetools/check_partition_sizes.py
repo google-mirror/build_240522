@@ -116,8 +116,15 @@ class DynamicPartitionSizeChecker(object):
     # on disk)
     if name + "_image_size" in self.info_dict:
       return int(self.info_dict[name + "_image_size"])
-    return sparse_img.GetImagePartitionSize(self.info_dict[name + "_image"])
+    image = self.info_dict.get(name + "_image", "")
+    if image:
+      return sparse_img.GetImagePartitionSize(image)
+    # No INSTALLED_VENDORIMAGE_TARGET on AOSP targets.
+    if name == "vendor":
+      logger.warning("vendor_image is not specified, skipping...")
+      return 0
 
+    raise RuntimeError("{}_image is not specified.".format(name))
 
   # Round result to BOARD_SUPER_PARTITION_ALIGNMENT
   def _RoundPartitionSize(self, size):
