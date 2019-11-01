@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e419aa20_86158fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2019-11-01T02:34:17Z",
+      "side": 1,
+      "message": "This line is duplicate.",
+      "revId": "c12a924e6cce7633c53b5be4dbfa7243f119e0d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff1469f_6285fdb0",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2019-11-01T02:34:17Z",
+      "side": 1,
+      "message": "I don\u0027t like the idea of arbitrarily changing the installed filename of notice files as it\u0027s the only clue telling which library is covered by a given notice. What about changing the path instead? It\u0027s a made up path anyway.",
+      "revId": "c12a924e6cce7633c53b5be4dbfa7243f119e0d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
