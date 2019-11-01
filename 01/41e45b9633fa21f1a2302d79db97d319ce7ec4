@@ -1,0 +1,9 @@
+Code-Review+2: Raff Tsai <rafftsai@google.com>
+Build-Cop-Override+1: Raff Tsai <rafftsai@google.com>
+Autosubmit+1: Raff Tsai <rafftsai@google.com>
+Presubmit-Ready+1: Andrei-Valentin Onea <andreionea@google.com>
+Submitted-by: Andrei-Valentin Onea <andreionea@google.com>
+Submitted-at: Fri, 01 Nov 2019 15:36:08 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1157103
+Project: platform/build
+Branch: refs/heads/master
