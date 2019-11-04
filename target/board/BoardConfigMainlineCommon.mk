@@ -36,6 +36,11 @@ USE_XML_AUDIO_POLICY_CONF := 1
 # TODO(b/123695868): Remove the need for this
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := build/make/target/board/mainline_arm64/bluetooth
 
+# TODO(b/143732851): This is a SoC specific hack. Remove this hack after
+# replacing /persist with /mnt/vendor/persist from all modules.
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_SEPOLICY_DIRS += build/make/target/board/generic_arm64/sepolicy
+
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 
