@@ -16,6 +16,24 @@
       "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b70b53e6_48ce317a",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-11-06T01:02:24Z",
+      "side": 1,
+      "message": "Hmm, what about just adding /apex/com.android.runtime/${LIB}/bionic to the search paths for the default platform namespace? libc.so et al would occur two times in the search path then, but that shouldn\u0027t matter, right?\n\nThat would also have the benefit of allowing the Runtime APEX to add more libraries that go into the default namespace in the future.",
+      "parentUuid": "79ea1b0c_4fedcb3f",
+      "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
