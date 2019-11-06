@@ -304,8 +304,10 @@ BUILD_KEYS := test-keys
 else
 BUILD_KEYS := dev-keys
 endif
-BUILD_VERSION_TAGS += $(BUILD_KEYS)
+# The BUILD_KEYS must be the last tag.
 BUILD_VERSION_TAGS := $(subst $(space),$(comma),$(sort $(BUILD_VERSION_TAGS)))
+BUILD_VERSION_TAGS += $(BUILD_KEYS)
+BUILD_VERSION_TAGS := $(subst $(space),$(comma),$(BUILD_VERSION_TAGS))
 
 # A human-readable string that descibes this build in detail.
 build_desc := $(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT) $(PLATFORM_VERSION) $(BUILD_ID) $(BUILD_NUMBER_FROM_FILE) $(BUILD_VERSION_TAGS)
