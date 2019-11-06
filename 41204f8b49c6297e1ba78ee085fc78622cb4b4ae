@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79ea1b0c_4fedcb3f",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-11-06T00:41:56Z",
+      "side": 1,
+      "message": "I don\u0027t think we actually need libdl_android.so during bootstrap, but without this we won\u0027t get the symlinks from /system to the Runtime APEX either.\n\nI\u0027m open to suggestions how to solve it in other ways, but it\u0027ll probably require more special cases in cc.go then. With this I opted to keep it consistent with the other Bionic libs.",
+      "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
