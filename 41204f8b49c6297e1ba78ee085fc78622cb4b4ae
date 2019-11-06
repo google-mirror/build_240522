@@ -70,6 +70,24 @@
       "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82940750_cafddaf8",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-11-06T20:37:16Z",
+      "side": 1,
+      "message": "Tried it, but turns out there are plenty of boot time dependencies on libdl_android.so, e.g. from libvulkan.so, libvndksupport.so and libgraphicsenv.so that are used in bootanimation. So we do actually need to treat it as a bootstrap library, and hence this topic stays as-is.\n\nColin, PTAL for owners approval.",
+      "parentUuid": "d8ecd8df_e54d1ffb",
+      "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
