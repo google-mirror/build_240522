@@ -711,7 +711,7 @@ def EditTags(tags):
       tags.discard(ch[1:])
     elif ch[0] == "+":
       tags.add(ch[1:])
-  return ",".join(sorted(tags))
+  return ",".join(tags)
 
 
 def RewriteProps(data):
