@@ -52,6 +52,24 @@
       "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8ecd8df_e54d1ffb",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-11-06T01:41:08Z",
+      "side": 1,
+      "message": "Yes, that would work. note that you shouldn\u0027t add /apex/com.android.runtime/${LIB} to the search paths, because the directory has libraries that are incompatible \nwith the libraries in the default namespace. ${LIB}/bionic should be fine.",
+      "parentUuid": "85396203_43244c3e",
+      "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
