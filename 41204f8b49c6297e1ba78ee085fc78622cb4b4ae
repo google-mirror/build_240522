@@ -34,6 +34,24 @@
       "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85396203_43244c3e",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2019-11-06T01:33:23Z",
+      "side": 1,
+      "message": "I think that will work. AFAIK the linker shouldn\u0027t care that both libc.so DSOs are on the search path. It checks for already-loaded libraries using the soname first and the device/inode numbers second. When it reports a path, it uses soinfo::get_realpath, which will consistently use the /apex/.../libc.so path.",
+      "parentUuid": "b70b53e6_48ce317a",
+      "revId": "41204f8b49c6297e1ba78ee085fc78622cb4b4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
