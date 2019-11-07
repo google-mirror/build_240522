@@ -1,0 +1,8 @@
+Autosubmit+1: Yifan Hong <elsk@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Tianjie Xu <xunchang@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 07 Nov 2019 21:17:42 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1152979
+Project: platform/build
+Branch: refs/heads/master
