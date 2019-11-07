@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33ccc603_1fa7397e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2019-11-07T08:15:04Z",
+      "side": 1,
+      "message": "TARGET_FLATTEN_APEX_TO_SYSTEM_EXT?",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "e426d912cee4c3d808a5d7c4b6920876babfad10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
