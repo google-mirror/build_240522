@@ -1202,6 +1202,7 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
       'fstab_version=2',
       'recovery_as_boot=true',
       'ab_update=true',
+      'building_system_image=true',
   ]
 
   BUILD_PROP = [
@@ -1350,6 +1351,24 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
     self.assertEqual((expected_devices, expected_fingerprints),
                      CalculateRuntimeDevicesAndFingerprints(
                          build_info, boot_variable_values))
+
+  def test_CalculateFingerprint_without_system(self):
+    misc_info = copy.deepcopy(self.MISC_INFO)
+    misc_info = filter(
+        lambda x: x.startswith('building_system_image=') == False,
+        misc_info)
+    self.writeFiles({
+        'META/misc_info.txt': '\n'.join(misc_info),
+        'VENDOR/build.prop': '\n'.join(self.VENDOR_BUILD_PROP),
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    expected = ({'vendor-product-device'}, {
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device')
+    })
+    self.assertEqual(expected,
+                     CalculateRuntimeDevicesAndFingerprints(build_info, {}))
 
   def test_GetPackageMetadata_full_package(self):
     vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
