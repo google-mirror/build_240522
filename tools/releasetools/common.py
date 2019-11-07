@@ -555,15 +555,18 @@ class BuildInfo(object):
       try:
         return self.GetBuildProp("ro.build.fingerprint")
       except ExternalError:
-        return "{}/{}/{}:{}/{}/{}:{}/{}".format(
-            self.GetBuildProp("ro.product.brand"),
-            self.GetBuildProp("ro.product.name"),
-            self.GetBuildProp("ro.product.device"),
-            self.GetBuildProp("ro.build.version.release"),
-            self.GetBuildProp("ro.build.id"),
-            self.GetBuildProp("ro.build.version.incremental"),
-            self.GetBuildProp("ro.build.type"),
-            self.GetBuildProp("ro.build.tags"))
+        if self.info_dict.get("building_system_image") == "true":
+          return "{}/{}/{}:{}/{}/{}:{}/{}".format(
+              self.GetBuildProp("ro.product.brand"),
+              self.GetBuildProp("ro.product.name"),
+              self.GetBuildProp("ro.product.device"),
+              self.GetBuildProp("ro.build.version.release"),
+              self.GetBuildProp("ro.build.id"),
+              self.GetBuildProp("ro.build.version.incremental"),
+              self.GetBuildProp("ro.build.type"),
+              self.GetBuildProp("ro.build.tags"))
+        else:
+          return self.GetPartitionFingerprint("vendor")
     return "%s/%s/%s:%s" % (
         self.GetOemProperty("ro.product.brand"),
         self.GetOemProperty("ro.product.name"),
