@@ -1,0 +1,9 @@
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+2: Ryan Prichard <rprichard@google.com>
+Verified+1: Martin Stjernholm <mast@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Martin Stjernholm <mast@google.com>
+Submitted-at: Thu, 07 Nov 2019 11:01:34 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1158847
+Project: platform/build
+Branch: refs/heads/master
