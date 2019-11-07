@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Steven Moreland <smoreland@google.com>
+Submitted-by: Henry Fang <quxiangfang@google.com>
+Submitted-at: Thu, 07 Nov 2019 19:33:28 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1159563
+Project: platform/build
+Branch: refs/heads/master
