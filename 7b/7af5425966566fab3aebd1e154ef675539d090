@@ -1,0 +1,8 @@
+Code-Review+2: Chalard Jean <jchalard@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Remi NGUYEN VAN <reminv@google.com>
+Submitted-at: Fri, 08 Nov 2019 10:06:32 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1154475
+Project: platform/build
+Branch: refs/heads/master
