@@ -57,6 +57,7 @@ PRODUCT_PACKAGES += \
     com.android.media.swcodec \
     com.android.resolv \
     com.android.neuralnetworks \
+    com.android.tethering.apex \
     com.android.tzdata \
     ContactsProvider \
     content \
@@ -251,8 +252,6 @@ PRODUCT_PACKAGES += \
     tc \
     telecom \
     telephony-common \
-    Tethering \
-    tethering-client \
     tombstoned \
     traced \
     traced_probes \
@@ -331,7 +330,8 @@ PRODUCT_BOOT_JARS := \
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
     com.android.ipsec:ike \
-    com.android.media:updatable-media
+    com.android.media:updatable-media \
+    com.android.tethering.apex:tethering-client
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.usb.rc:system/etc/init/hw/init.usb.rc \
