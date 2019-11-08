@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Eric Laurent <elaurent@google.com>
+Code-Review+1: Steven Moreland <smoreland@google.com>
+Autosubmit+1: Mikhail Naganov <mnaganov@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 08 Nov 2019 17:31:38 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1162102
+Project: platform/build
+Branch: refs/heads/master
