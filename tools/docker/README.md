@@ -1,6 +1,5 @@
-The Dockerfile in this directory sets up an Ubuntu Trusty image ready to build
-a variety of Android branches (>= Lollipop). It's particulary useful to build
-older branches that required 14.04 if you've upgraded to something newer.
+The Dockerfile in this directory sets up an Ubuntu Bionic image ready to build
+a variety of Android branches (>= Pie). 
 
 First, build the image:
 ```
@@ -11,8 +10,8 @@ $ docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-
 
 Then you can start up new instances with:
 ```
-$ docker run -it --rm -v $ANDROID_BUILD_TOP:/src android-build-trusty
+$ docker run -it --rm -v $ANDROID_BUILD_TOP:/src android-build-bionic
 > cd /src; source build/envsetup.sh
 > lunch aosp_arm-eng
-> m -j50
+> m -j
 ```
