@@ -57,6 +57,7 @@ PRODUCT_PACKAGES += \
     com.android.resolv \
     com.android.neuralnetworks \
     com.android.tzdata \
+    com.android.networking \
     ContactsProvider \
     content \
     crash_dump \
@@ -254,8 +255,6 @@ PRODUCT_PACKAGES += \
     traced_probes \
     tune2fs \
     tzdatacheck \
-    tethering-client \
-    Tethering \
     uiautomator \
     uncrypt \
     usbd \
@@ -324,10 +323,11 @@ PRODUCT_BOOT_JARS := \
     ims-common \
     updatable-media \
     tethering-client
-PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
+PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media tethering-client
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
-    /apex/com.android.media/javalib/updatable-media.jar
+    /apex/com.android.media/javalib/updatable-media.jar \
+    /apex/com.android.networking/javalib/tethering-client.jar
 
 
 PRODUCT_COPY_FILES += \
