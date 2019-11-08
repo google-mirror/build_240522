@@ -56,6 +56,7 @@ PRODUCT_PACKAGES += \
     com.android.media.swcodec \
     com.android.resolv \
     com.android.neuralnetworks \
+    com.android.tetheringstack \
     com.android.tzdata \
     ContactsProvider \
     content \
@@ -108,7 +109,6 @@ PRODUCT_PACKAGES += \
     ip6tables \
     iptables \
     ip-up-vpn \
-    InProcessTethering \
     javax.obex \
     keystore \
     ld.config.txt \
@@ -322,11 +322,13 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
-    updatable-media
-PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
+    updatable-media \
+    tethering-client
+PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media tethering-client
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
-    /apex/com.android.media/javalib/updatable-media.jar
+    /apex/com.android.media/javalib/updatable-media.jar \
+    /apex/com.android.tetheringstack/javalib/tethering-client.jar
 
 
 PRODUCT_COPY_FILES += \
