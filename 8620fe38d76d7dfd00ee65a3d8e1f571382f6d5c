@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e18cdf1_c935b9d5",
+        "filename": "tools/generate-self-extracting-archive.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-11-09T03:19:39Z",
+      "side": 1,
+      "message": "This seems specific to a single license",
+      "revId": "8620fe38d76d7dfd00ee65a3d8e1f571382f6d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
