@@ -16,6 +16,24 @@
       "revId": "8620fe38d76d7dfd00ee65a3d8e1f571382f6d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f27e6227_b23076a4",
+        "filename": "tools/generate-self-extracting-archive.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1307230
+      },
+      "writtenOn": "2019-11-09T03:31:51Z",
+      "side": 1,
+      "message": "That was intentional in this case, we\u0027re checking something common across\nthe licenses this is intended to package. It could be changed to an input\nargument to keep it generic. mwills@ thoughts?",
+      "parentUuid": "5e18cdf1_c935b9d5",
+      "revId": "8620fe38d76d7dfd00ee65a3d8e1f571382f6d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
