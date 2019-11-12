@@ -469,8 +469,8 @@ ifneq ($(filter true always, $(LOCAL_FDO_SUPPORT)),)
   endif
   # Disable ccache (or other compiler wrapper) except gomacc, which
   # can handle -fprofile-use properly.
-  my_cc_wrapper := $(filter $(GOMA_CC),$(my_cc_wrapper))
-  my_cxx_wrapper := $(filter $(GOMA_CC),$(my_cxx_wrapper))
+  my_cc_wrapper := $(filter $(GOMA_CC) $(RBE_WRAPPER),$(my_cc_wrapper))
+  my_cxx_wrapper := $(filter $(GOMA_CC) $(RBE_WRAPPER),$(my_cxx_wrapper))
 endif
 
 ###########################################################
@@ -885,6 +885,7 @@ $(dotdot_objects) $(cpp_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(dotdot_objects) $(cpp_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 
 ifneq ($(strip $(cpp_objects)),)
+$(cpp_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(cpp_objects): $(intermediates)/%.o: \
     $(TOPDIR)$(LOCAL_PATH)/%$(LOCAL_CPP_EXTENSION) \
     $(my_additional_dependencies) $(CLANG_CXX)
@@ -904,6 +905,7 @@ $(call track-gen-file-obj,$(gen_cpp_sources),$(gen_cpp_objects))
 
 ifneq ($(strip $(gen_cpp_objects)),)
 # Compile all generated files as thumb.
+$(gen_cpp_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(gen_cpp_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(gen_cpp_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_cpp_objects): $(intermediates)/%.o: \
@@ -922,6 +924,7 @@ gen_S_objects := $(gen_S_sources:%.S=%.o)
 $(call track-gen-file-obj,$(gen_S_sources),$(gen_S_objects))
 
 ifneq ($(strip $(gen_S_sources)),)
+$(gen_S_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(gen_S_objects): $(intermediates)/%.o: $(intermediates)/%.S \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)s-to-o)
@@ -933,6 +936,7 @@ gen_s_objects := $(gen_s_sources:%.s=%.o)
 $(call track-gen-file-obj,$(gen_s_sources),$(gen_s_objects))
 
 ifneq ($(strip $(gen_s_objects)),)
+$(gen_s_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(gen_s_objects): $(intermediates)/%.o: $(intermediates)/%.s \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)s-to-o)
@@ -971,6 +975,7 @@ $(dotdot_objects) $(c_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(dotdot_objects) $(c_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 
 ifneq ($(strip $(c_objects)),)
+$(c_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(c_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.c \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)c-to-o)
@@ -989,6 +994,7 @@ $(call track-gen-file-obj,$(gen_c_sources),$(gen_c_objects))
 
 ifneq ($(strip $(gen_c_objects)),)
 # Compile all generated files as thumb.
+$(gen_c_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(gen_c_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(gen_c_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
 $(gen_c_objects): $(intermediates)/%.o: $(intermediates)/%.c \
@@ -1007,6 +1013,7 @@ $(call track-src-file-obj,$(objc_sources),$(objc_objects))
 
 ifneq ($(strip $(objc_objects)),)
 my_soong_problems += objc
+$(objc_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(objc_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.m \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)m-to-o)
@@ -1022,6 +1029,7 @@ objcpp_objects := $(addprefix $(intermediates)/,$(objcpp_sources:.mm=.o))
 $(call track-src-file-obj,$(objcpp_sources),$(objcpp_objects))
 
 ifneq ($(strip $(objcpp_objects)),)
+$(objcpp_objects): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(objcpp_objects): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.mm \
     $(my_additional_dependencies) $(CLANG_CXX)
 	$(transform-$(PRIVATE_HOST)mm-to-o)
@@ -1046,6 +1054,7 @@ $(foreach s,$(dotdot_sources),\
 $(call track-src-file-obj,$(dotdot_sources),$(dotdot_objects_S))
 
 ifneq ($(strip $(asm_objects_S)),)
+$(asm_objects_S): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(asm_objects_S): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.S \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)s-to-o)
@@ -1066,6 +1075,7 @@ $(foreach s,$(dotdot_sources),\
 $(call track-src-file-obj,$(dotdot_sources),$(dotdot_objects_s))
 
 ifneq ($(strip $(asm_objects_s)),)
+$(asm_objects_s): .KATI_NINJA_POOL := $(GOMA_OR_RBE_POOL)
 $(asm_objects_s): $(intermediates)/%.o: $(TOPDIR)$(LOCAL_PATH)/%.s \
     $(my_additional_dependencies) $(CLANG)
 	$(transform-$(PRIVATE_HOST)s-to-o)
