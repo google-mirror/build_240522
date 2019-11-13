@@ -699,6 +699,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
 # again, as the original change removing them was reverted.
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
 
+# Clean up old location of dexpreopted boot jars (after moving some of them in the ART apex)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_boojars)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars_input)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
