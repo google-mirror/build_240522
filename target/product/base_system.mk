@@ -322,11 +322,13 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
+    ike \
     updatable-media
-PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
+PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
-    /apex/com.android.media/javalib/updatable-media.jar
+    /apex/com.android.ipsec/javalib/ike.jar
+    /apex/com.android.media/javalib/updatable-media.jar \
 
 
 PRODUCT_COPY_FILES += \
