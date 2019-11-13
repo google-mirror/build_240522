@@ -321,6 +321,7 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
+    ike \
     updatable-media
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
