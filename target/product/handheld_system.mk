@@ -34,10 +34,10 @@ $(call inherit-product-if-exists, frameworks/webview/chromium/chromium.mk)
 PRODUCT_PACKAGES += \
     BasicDreams \
     BlockedNumberProvider \
-    Bluetooth \
     BluetoothMidiService \
     BookmarkProvider \
     BuiltInPrintService \
+    com.android.bluetooth \
     CalendarProvider \
     cameraserver \
     CaptivePortalLogin \
