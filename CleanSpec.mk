@@ -713,6 +713,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.apex.cts.sh
 $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_recovery*" -print0 | xargs -0 rm -rf)
 $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_vendor*" -print0 | xargs -0 rm -rf)
 
+# Remove com.android.cellbroadcast apex for Go devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.cellbroadcast.apex)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/apex/com.android.cellbroadcast)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
