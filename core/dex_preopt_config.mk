@@ -35,6 +35,11 @@ ifeq ($(HOST_OS),linux)
       endif
     endif
   endif
+
+  # Aborts the build flow so that lets built-in jar onwers to know dexopt getting the problems.
+  ifneq (user,$(TARGET_BUILD_VARIANT))
+    PRODUCT_DEX_PREOPT_BOOT_FLAGS += --abort-on-soft-verifier-error
+  endif
 endif
 
 # Default to debug version to help find bugs.
