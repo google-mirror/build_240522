@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-current_makefile := $(lastword $(MAKEFILE_LIST))
-
 # BOARD_VNDK_VERSION must be set to 'current' in order to generate a VNDK snapshot.
 ifeq ($(BOARD_VNDK_VERSION),current)
 
@@ -43,8 +41,9 @@ endif # BOARD_VNDK_VERSION
 ifneq (,$(error_msg))
 
 .PHONY: vndk
+vndk: PRIVATE_MAKEFILE := $(lastword $(MAKEFILE_LIST))
 vndk:
-	$(call echo-error,$(current_makefile),$(error_msg))
+	$(call echo-error,$(PRIVATE_MAKEFILE),$(error_msg))
 	exit 1
 
 endif
