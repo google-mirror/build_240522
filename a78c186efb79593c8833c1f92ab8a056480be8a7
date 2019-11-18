@@ -22,6 +22,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39e17122_cab47a52",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1206688
+      },
+      "writtenOn": "2019-11-18T13:12:29Z",
+      "side": 1,
+      "message": "Could we add a flag to mark which jar should be skipped by --abort-on-soft-verifier-error? e.g., LOCAL_DEX_PREOPT_DONT_ABORT_ON_SOFT_VERIFIER_ERROR",
+      "parentUuid": "9b47124e_24038a13",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
