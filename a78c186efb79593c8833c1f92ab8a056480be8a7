@@ -46,6 +46,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c9f3718_fb71b43c",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-11-18T14:35:14Z",
+      "side": 1,
+      "message": "That would mean knowing which jar references code in mainline modules - as it can literally happen to any one at any time I don\u0027t think that\u0027s feasible.",
+      "parentUuid": "39e17122_cab47a52",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
