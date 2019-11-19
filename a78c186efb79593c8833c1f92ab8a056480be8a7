@@ -70,6 +70,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44cff12d_dad37201",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1206688
+      },
+      "writtenOn": "2019-11-19T01:57:11Z",
+      "side": 1,
+      "message": "Could we add a file that saves the skipped methods, and the file is used to input dex2oatd(debug only) for method level skipping? If we enable this function on dex2oatd only, it can avoid affect normal dex2oat.",
+      "parentUuid": "2c9f3718_fb71b43c",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
