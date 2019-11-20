@@ -101,7 +101,6 @@ PRODUCT_PACKAGES += \
     incident_helper \
     init.environ.rc \
     init_system \
-    InProcessTethering \
     input \
     installd \
     iorapd \
@@ -252,6 +251,8 @@ PRODUCT_PACKAGES += \
     tc \
     telecom \
     telephony-common \
+    Tethering \
+    tethering-client \
     tombstoned \
     traced \
     traced_probes \
@@ -324,7 +325,8 @@ PRODUCT_BOOT_JARS := \
     voip-common \
     ims-common \
     ike \
-    updatable-media
+    updatable-media \
+    tethering-client
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
