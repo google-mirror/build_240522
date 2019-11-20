@@ -324,6 +324,9 @@ PRODUCT_BOOT_JARS := \
     ims-common \
     ike \
     updatable-media
+
+# Note: APEX modules should also be added to whitelist in //frameworks/base/core/jni/fd_utils.cpp
+#       Without that change, the module will fail to be loaded, and the system server will crashloop
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
