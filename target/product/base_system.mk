@@ -107,7 +107,6 @@ PRODUCT_PACKAGES += \
     ip6tables \
     iptables \
     ip-up-vpn \
-    InProcessTethering \
     javax.obex \
     keystore \
     ld.config.txt \
@@ -255,6 +254,8 @@ PRODUCT_PACKAGES += \
     traced_probes \
     tune2fs \
     tzdatacheck \
+    tethering-client \
+    Tethering \
     uiautomator \
     uncrypt \
     usbd \
@@ -321,7 +322,8 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
-    updatable-media
+    updatable-media \
+    tethering-client
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
