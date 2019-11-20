@@ -101,7 +101,6 @@ PRODUCT_PACKAGES += \
     incident_helper \
     init.environ.rc \
     init_system \
-    InProcessTethering \
     input \
     installd \
     iorapd \
@@ -257,6 +256,8 @@ PRODUCT_PACKAGES += \
     traced_probes \
     tune2fs \
     tzdatacheck \
+    tethering-client \
+    Tethering \
     uiautomator \
     uncrypt \
     usbd \
@@ -324,7 +325,8 @@ PRODUCT_BOOT_JARS := \
     voip-common \
     ims-common \
     ike \
-    updatable-media
+    updatable-media \
+    tethering-client
 PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
