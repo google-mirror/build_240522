@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6f0cc76_04d447f9",
+        "filename": "core/soong_app_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-11-21T22:37:01Z",
+      "side": 1,
+      "message": "Does this need to be limited to apk files?",
+      "range": {
+        "startLine": 109,
+        "startChar": 34,
+        "endLine": 109,
+        "endChar": 48
+      },
+      "revId": "8bc6908feb810bf9702faef9b04898db9e679e0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
