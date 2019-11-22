@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d6a17f1_5d4ad52b",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-11-22T22:17:06Z",
+      "side": 1,
+      "message": "to \"\"? :) it has been deleted?",
+      "range": {
+        "startLine": 702,
+        "startChar": 45,
+        "endLine": 702,
+        "endChar": 47
+      },
+      "revId": "8bc8eb8ba211d285e6e785203ab9162bbb09bd92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
