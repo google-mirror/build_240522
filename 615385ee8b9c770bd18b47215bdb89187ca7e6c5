@@ -34,6 +34,24 @@
       "revId": "615385ee8b9c770bd18b47215bdb89187ca7e6c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd93bf88_38cae304",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1340374
+      },
+      "writtenOn": "2019-11-22T19:47:20Z",
+      "side": 1,
+      "message": "SGTM, but since danielnorman@ added this function, I\u0027ve filed b/145008064 for him to evaluate the suggestion.",
+      "parentUuid": "10e9eb12_f2dfb068",
+      "revId": "615385ee8b9c770bd18b47215bdb89187ca7e6c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
