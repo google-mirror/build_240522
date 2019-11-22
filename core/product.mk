@@ -228,6 +228,7 @@ _product_list_vars += PRODUCT_SYSTEM_PROPERTY_BLACKLIST
 _product_list_vars += PRODUCT_VENDOR_PROPERTY_BLACKLIST
 _product_list_vars += PRODUCT_SYSTEM_SERVER_APPS
 _product_list_vars += PRODUCT_SYSTEM_SERVER_JARS
+_product_list_vars += PRODUCT_SYSTEM_SERVER_APEX_JARS
 
 # All of the apps that we force preopt, this overrides WITH_DEXPREOPT.
 _product_list_vars += PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK
