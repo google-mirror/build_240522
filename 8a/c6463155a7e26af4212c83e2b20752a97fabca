@@ -1,0 +1,7 @@
+Code-Review+2: Anton Hansson <hansson@google.com>
+Presubmit-Verified-1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Benedict Wong <benedictwong@google.com>
+Submitted-at: Sat, 23 Nov 2019 03:45:47 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1164779
+Project: platform/build
+Branch: refs/heads/master
