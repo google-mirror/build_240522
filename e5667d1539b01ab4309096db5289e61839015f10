@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e19d31ec_8b34cdee",
+        "filename": "core/rust_device_test_config_template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-11-25T03:24:28Z",
+      "side": 1,
+      "message": "add a comment that the config is auto-generated.",
+      "revId": "e5667d1539b01ab4309096db5289e61839015f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
