@@ -16,6 +16,24 @@
       "revId": "e5667d1539b01ab4309096db5289e61839015f10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95fa36c3_cd3fe25d",
+        "filename": "core/rust_device_test_config_template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2019-11-25T06:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e19d31ec_8b34cdee",
+      "revId": "e5667d1539b01ab4309096db5289e61839015f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
