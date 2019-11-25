@@ -118,6 +118,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eede334_80b0de6e",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1206688
+      },
+      "writtenOn": "2019-11-25T02:50:33Z",
+      "side": 1,
+      "message": "My idea is roundabout. I don\u0027t know whether the unresolved issues can be resolved directly.\nCould you give an unresolved class example? Could I know the unresolved cause?",
+      "parentUuid": "724fd81f_159524c2",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
