@@ -781,11 +781,7 @@ def DumpInfoDict(d):
 
 def MergeDynamicPartitionInfoDicts(framework_dict,
                                    vendor_dict,
-                                   include_dynamic_partition_list=True,
-                                   size_prefix="",
-                                   size_suffix="",
-                                   list_prefix="",
-                                   list_suffix=""):
+                                   include_dynamic_partition_list=True):
   """Merges dynamic partition info variables.
 
   Args:
@@ -795,16 +791,6 @@ def MergeDynamicPartitionInfoDicts(framework_dict,
       partial vendor target files.
     include_dynamic_partition_list: If true, merges the dynamic_partition_list
       variable. Not all use cases need this variable merged.
-    size_prefix: The prefix in partition group size variables that precedes the
-      name of the partition group. For example, partition group 'group_a' with
-      corresponding size variable 'super_group_a_group_size' would have the
-      size_prefix 'super_'.
-    size_suffix: Similar to size_prefix but for the variable's suffix. For
-      example, 'super_group_a_group_size' would have size_suffix '_group_size'.
-    list_prefix: Similar to size_prefix but for the partition group's
-      partition_list variable.
-    list_suffix: Similar to size_suffix but for the partition group's
-      partition_list variable.
 
   Returns:
     The merged dynamic partition info dictionary.
@@ -823,14 +809,14 @@ def MergeDynamicPartitionInfoDicts(framework_dict,
                    vendor_dynamic_partition_list)).strip()
   for partition_group in merged_dict["super_partition_groups"].split(" "):
     # Set the partition group's size using the value from the vendor dict.
-    key = "%s%s%s" % (size_prefix, partition_group, size_suffix)
+    key = "super_%s_group_size" % partition_group
     if key not in vendor_dict:
       raise ValueError("Vendor dict does not contain required key %s." % key)
     merged_dict[key] = vendor_dict[key]
 
     # Set the partition group's partition list using a concatenation of the
     # framework and vendor partition lists.
-    key = "%s%s%s" % (list_prefix, partition_group, list_suffix)
+    key = "super_%s_partition_list" % partition_group
     merged_dict[key] = (
         "%s %s" %
         (framework_dict.get(key, ""), vendor_dict.get(key, ""))).strip()
