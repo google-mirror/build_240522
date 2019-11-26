@@ -190,6 +190,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "512cc6e9_94f728ce",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-11-26T10:17:35Z",
+      "side": 1,
+      "message": "It\u0027s not just interface change - you only need to have a private field added to a conscrypt class to mess things up. So we worry of both case 1 and 2 actually.\n\nI\u0027m surprised about the soft verification failures you\u0027re getting. The dex code is supposed to get compiled through javac and d8, which at some point must have had the whole classpath available and therefore have been able to resolve all classes. Isn\u0027t the problem that the jars are dex2oated in isolation?",
+      "parentUuid": "94827daa_3bc21cc1",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
