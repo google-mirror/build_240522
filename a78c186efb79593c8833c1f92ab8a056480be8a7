@@ -166,6 +166,30 @@
       "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94827daa_3bc21cc1",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1371486
+      },
+      "writtenOn": "2019-11-26T05:19:07Z",
+      "side": 1,
+      "message": "I tried to suppose some cases we might face. If I am wrong, please help to correcting me. Thanks.\nCase 1: If the conscrypt module is updated without interface changed, the classes of refer to the conscrypt module is unnecessary to be re-dexopted.\nCase 2: If the conscrypt module is updated with interface changed, the classes of refer to the conscrypt module is necessary to be re-dexopted during booting.\nAre you worry about case 2 will cause a longer boot time so it is not a part of dex2oat?\n\nActually, I am facing about 20,000+ soft verification failures in our internal load. I tried to let these failure module owners to understand that those failures will cause a performance impact, but that is not a efficient method. If we can make a mandatory error to notice module owners, that is the best solution for the scenario.",
+      "parentUuid": "60fc4646_57d9f5db",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "a78c186efb79593c8833c1f92ab8a056480be8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
