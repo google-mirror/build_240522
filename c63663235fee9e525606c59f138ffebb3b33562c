@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2497f4e1_610cd51a",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-11-26T01:47:02Z",
+      "side": 1,
+      "message": "How about vndk_apex_snapshot_package?",
+      "range": {
+        "startLine": 169,
+        "startChar": 16,
+        "endLine": 169,
+        "endChar": 35
+      },
+      "revId": "c63663235fee9e525606c59f138ffebb3b33562c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
