@@ -22,6 +22,30 @@
       "revId": "352f1a9ac5f65880bd0cd80894dea04770f04ce5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feeb9186_e7aa914e",
+        "filename": "target/product/media_system_ext.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2019-11-27T13:18:00Z",
+      "side": 1,
+      "message": "Oops, thanks.",
+      "parentUuid": "df8b3a58_0a24a106",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "352f1a9ac5f65880bd0cd80894dea04770f04ce5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
