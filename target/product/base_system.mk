@@ -315,6 +315,7 @@ $(error TARGET_CORE_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
 endif
 
 # The order matters for runtime class lookup performance.
+# TODO: Why are "ike" & "updatable-media" in both PRODUCT_UPDATABLE_BOOT_JARS & PRODUCT_BOOT_JARS?
 PRODUCT_BOOT_JARS := \
     $(TARGET_CORE_JARS) \
     framework-minus-apex \
@@ -324,12 +325,11 @@ PRODUCT_BOOT_JARS := \
     ims-common \
     ike \
     updatable-media
-PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media
-PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
-    /apex/com.android.conscrypt/javalib/conscrypt.jar \
-    /apex/com.android.ipsec/javalib/ike.jar \
-    /apex/com.android.media/javalib/updatable-media.jar
 
+PRODUCT_UPDATABLE_BOOT_JARS := \
+    com.android.conscrypt:conscrypt \
+    com.android.ipsec:ike \
+    com.android.media:updatable-media
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.usb.rc:system/etc/init/hw/init.usb.rc \
