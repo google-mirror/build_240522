@@ -517,7 +517,8 @@ def CheckAbOtaImages(output_zip, ab_partitions):
       radio_path = os.path.join(OPTIONS.input_tmp, "RADIO", img_name)
       available = os.path.exists(images_path) or os.path.exists(radio_path)
 
-    assert available, "Failed to find " + img_name
+    if not available:
+      logger.warning("Failed to find " + img_name)
 
 
 def AddCareMapForAbOta(output_zip, ab_partitions, image_paths):
@@ -539,6 +540,10 @@ def AddCareMapForAbOta(output_zip, ab_partitions, image_paths):
     avb_hashtree_enable = "avb_{}_hashtree_enable".format(partition)
     if (verity_block_device in OPTIONS.info_dict or
         OPTIONS.info_dict.get(avb_hashtree_enable) == "true"):
+      if partition not in image_paths:
+        logger.warning("%s image does not exist.", partition)
+        continue
+
       image_path = image_paths[partition]
       assert os.path.exists(image_path)
 

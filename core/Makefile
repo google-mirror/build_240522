@@ -4177,6 +4177,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_KERNEL_CONFIGS_FILE) \
 	    $(BUILT_KERNEL_VERSION_FILE) \
+	    $(INSTALLED_BUILD_PROP_TARGET) \
 	    | $(ACP)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
@@ -4447,6 +4448,7 @@ endif
 ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
 	$(call dump-dynamic-partitions-info, $(zip_root)/META/dynamic_partitions_info.txt)
 endif
+	$(hide) cp $(INSTALLED_BUILD_PROP_TARGET) $(zip_root)/META/build.prop
 	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
 	    $(ADD_IMG_TO_TARGET_FILES) -a -v -p $(HOST_OUT) $(zip_root)
 ifeq ($(BUILD_QEMU_IMAGES),true)

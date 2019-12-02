@@ -422,7 +422,6 @@ class BuildInfo(object):
     """Returns the inquired build property."""
     if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
       return self._ResolveRoProductBuildProp(prop)
-
     try:
       return self.info_dict.get("build.prop", {})[prop]
     except KeyError:
@@ -640,7 +639,11 @@ def LoadInfoDict(input_file, repacking=False):
     if not d[partition_prop]:
       d[partition_prop] = LoadBuildProp(
           read_helper, "{}/etc/build.prop".format(partition.upper()))
-  d["build.prop"] = d["system.build.prop"]
+
+  if d["system.build.prop"]:
+    d["build.prop"] = d["system.build.prop"]
+  else:
+    d["build.prop"] = LoadBuildProp(read_helper, "META/build.prop")
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
   # hash / hashtree footers.
