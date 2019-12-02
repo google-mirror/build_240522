@@ -699,6 +699,13 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
 # again, as the original change removing them was reverted.
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
 
+# Remove CtsShim apks from system partition, since the have been moved inside
+# the cts shim apex. Also remove the cts shim apex prebuilt since it has been
+# removed in flattened apexs configurations.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/CtsShimPrivPrebuilt)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/CtsShimPrebuilt)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.apex.cts.shim.apex)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
