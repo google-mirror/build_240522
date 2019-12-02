@@ -57,6 +57,7 @@ PRODUCT_PACKAGES += \
     com.android.media.swcodec \
     com.android.resolv \
     com.android.neuralnetworks \
+    com.android.sdkinfo \
     com.android.tzdata \
     ContactsProvider \
     content \
@@ -323,13 +324,15 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
+    framework-sdkinfo \
     ike \
     updatable-media
-PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media
+PRODUCT_UPDATABLE_BOOT_MODULES := conscrypt ike updatable-media framework-sdkinfo
 PRODUCT_UPDATABLE_BOOT_LOCATIONS := \
     /apex/com.android.conscrypt/javalib/conscrypt.jar \
     /apex/com.android.ipsec/javalib/ike.jar \
-    /apex/com.android.media/javalib/updatable-media.jar
+    /apex/com.android.media/javalib/updatable-media.jar \
+    /apex/com.android.sdkinfo/javalib/framework-sdkinfo.jar \
 
 
 PRODUCT_COPY_FILES += \
