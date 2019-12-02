@@ -1125,10 +1125,6 @@ APEX_MODULE_LIBS += \
 APEX_MODULE_LIBS += \
   libjavacrypto.so \
 
-# Android Neural Network API (NNAPI) APEX (native) libraries
-APEX_MODULE_LIBS += \
-  libneuralnetworks.so \
-
 # Conscrypt APEX JARs (Java libraries)
 APEX_MODULE_LIBS += \
   conscrypt.jar \
