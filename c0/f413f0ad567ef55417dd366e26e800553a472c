@@ -1,0 +1,10 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Daniel Norman <danielnorman@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+2: Tianjie Xu <xunchang@google.com>
+Verified+1: Bill Peckham <bpeckham@google.com>
+Submitted-by: Bill Peckham <bpeckham@google.com>
+Submitted-at: Tue, 03 Dec 2019 00:42:21 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1161602
+Project: platform/build
+Branch: refs/heads/master
