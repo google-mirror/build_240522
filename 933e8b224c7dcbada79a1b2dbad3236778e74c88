@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb4687ea_456d05f8",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-12-05T10:31:33Z",
+      "side": 1,
+      "message": "Do we or will we have multiple GSI-specific build behaviors to use it? Otherwise, it will be better to have more specific name to explain the characteristics of the target. Can PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES work for it?",
+      "range": {
+        "startLine": 385,
+        "startChar": 30,
+        "endLine": 385,
+        "endChar": 44
+      },
+      "revId": "933e8b224c7dcbada79a1b2dbad3236778e74c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
