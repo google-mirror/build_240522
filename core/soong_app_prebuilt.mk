@@ -81,16 +81,24 @@ ifdef LOCAL_SOONG_PROGUARD_DICT
 endif
 
 ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
-resource_export_package := $(intermediates.COMMON)/package-export.apk
-resource_export_stamp := $(intermediates.COMMON)/src/R.stamp
+  resource_export_package := $(intermediates.COMMON)/package-export.apk
+  resource_export_stamp := $(intermediates.COMMON)/src/R.stamp
 
-$(resource_export_package): PRIVATE_STAMP := $(resource_export_stamp)
-$(resource_export_package): .KATI_IMPLICIT_OUTPUTS := $(resource_export_stamp)
-$(resource_export_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
+  $(resource_export_package): PRIVATE_STAMP := $(resource_export_stamp)
+  $(resource_export_package): .KATI_IMPLICIT_OUTPUTS := $(resource_export_stamp)
+  $(resource_export_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
 	@echo "Copy: $@"
 	$(copy-file-to-target)
 	touch $(PRIVATE_STAMP)
-$(call add-dependency,$(LOCAL_BUILT_MODULE),$(resource_export_package))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),$(resource_export_package))
+
+  my_static_library_android_manifest := $(intermediates.COMMON)/manifest/AndroidManifest.xml
+  #$(eval $(call copy-one-file,$(LOCAL_FULL_MANIFEST_FILE),$(my_static_library_android_manifest)))
+  $(my_static_library_android_manifest): $(LOCAL_FULL_MANIFEST_FILE)
+	@echo "COPYMANIFEST: $@"
+	$(copy-file-to-target)
+
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_static_library_android_manifest))
 
 endif # LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 
