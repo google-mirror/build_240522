@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0000874a_10afe944",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-12-07T01:04:27Z",
+      "side": 1,
+      "message": "/bin/sh starts /bin/bash on my install, though it looks like /bin/sh is configurable through /private/var/select/sh.\n\nAre you sure that\u0027s the problem, vs the problem that bash is at version 3.2 on Mac?",
+      "revId": "032de6765b75ec44630dc94c23333a9bc2994b69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
