@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "748a40b8_ae5c98fa",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3598,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-12-09T10:21:21Z",
+      "side": 1,
+      "message": "Without this fix, $(PRIVATE_AVB_VBMETA_SIGNING_ARGS) will be empty when `make vbmetaimage-nodeps`",
+      "range": {
+        "startLine": 3598,
+        "startChar": 6,
+        "endLine": 3598,
+        "endChar": 37
+      },
+      "revId": "f76c848dd9a59abce7dd11b64f66cd222753119e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
