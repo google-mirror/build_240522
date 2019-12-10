@@ -50,6 +50,7 @@ PRODUCT_PACKAGES += \
     com.android.adbd \
     com.android.apex.cts.shim.v1_prebuilt \
     com.android.conscrypt \
+    com.android.cronet \
     com.android.i18n \
     com.android.ipsec \
     com.android.location.provider \
@@ -212,6 +213,7 @@ PRODUCT_PACKAGES += \
     netd \
     NetworkStackNext \
     org.apache.http.legacy \
+    org.chromium.net.cronet \
     otacerts \
     PackageInstaller \
     passwd_system \
