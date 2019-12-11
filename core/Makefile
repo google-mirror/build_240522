@@ -4806,6 +4806,15 @@ $(COVERAGE_ZIP): $(SOONG_ZIP)
 	$(hide) find $(TARGET_OUT_COVERAGE) | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(TARGET_OUT_COVERAGE) -l $(PRIVATE_LIST_FILE)
 
+#------------------------------------------------------------------
+# Export the LLVM profile data tool for Clang coverage
+#
+
+ifeq (true,$(CLANG_COVERAGE))
+  LLVM_PROFDATA := $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/bin/llvm-profdata
+  $(call dist-for-goals,droidcore,$(LLVM_PROFDATA))
+endif
+
 # -----------------------------------------------------------------
 # A zip of the Android Apps. Not keeping full path so that we don't
 # include product names when distributing
