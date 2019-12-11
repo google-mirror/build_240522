@@ -192,6 +192,15 @@ ifeq ($(NATIVE_COVERAGE),true)
   endif
 endif
 
+ifeq ($(CLANG_COVERAGE),true)
+  ifneq (,$(strip $(LOCAL_PREBUILT_COVERAGE_ARCHIVE)))
+    my_coverage_path := $(TARGET_OUT_COVERAGE)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+    my_coverage_path := $(my_coverage_path)/$(patsubst %.so,%,$(my_installed_module_stem)).covmap
+    $(eval $(call copy-one-file,$(LOCAL_PREBUILT_COVERAGE_ARCHIVE),$(my_coverage_path)))
+    $(LOCAL_BUILT_MODULE): $(my_coverage_path)
+  endif
+endif
+
 # A product may be configured to strip everything in some build variants.
 # We do the stripping as a post-install command so that LOCAL_BUILT_MODULE
 # is still with the symbols and we don't need to clean it (and relink) when
