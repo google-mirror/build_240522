@@ -15,6 +15,7 @@ LLNDK: libmediandk.so
 LLNDK: libnativewindow.so
 LLNDK: libneuralnetworks.so
 LLNDK: libsync.so
+LLNDK: libunwind.so
 LLNDK: libvndksupport.so
 LLNDK: libvulkan.so
 VNDK-SP: android.hardware.graphics.common@1.0.so
