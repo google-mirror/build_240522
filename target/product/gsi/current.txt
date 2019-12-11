@@ -46,6 +46,7 @@ VNDK-SP: libion.so
 VNDK-SP: libjsoncpp.so
 VNDK-SP: liblzma.so
 VNDK-SP: libprocessgroup.so
+VNDK-SP: libunwind.so
 VNDK-SP: libunwindstack.so
 VNDK-SP: libutils.so
 VNDK-SP: libutilscallstack.so
