@@ -70,6 +70,8 @@ Flags
   -j                        Autodetect the number of processes to run at once,
                             and run that many
 
+testing
+
 Variables
   Variables can either be set in the surrounding shell environment or can be
     passed as command-line arguments. For example:
@@ -85,4 +87,3 @@ Variables
 
   There is not yet known a convenient method by which to discover the full
   list of supported variables. Please mention it here when there is.
-

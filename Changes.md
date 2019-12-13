@@ -524,4 +524,4 @@ version.
 [frameworks/base/Android.bp]: https://android.googlesource.com/platform/frameworks/base/+/master/Android.bp
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
 [hardware/interfaces/health/1.0/README.md]: https://android.googlesource.com/platform/hardware/interfaces/+/master/health/1.0/README.md
-[hardware/interfaces/health/2.1/README.md]: https://android.googlesource.com/platform/hardware/interfaces/+/master/health/2.1/README.md
+[hardware/interfaces/health/2.1/README.md]: https://android.googlesource.com/platform/hardware/interfaces/+/master/health/2.1/README.m
