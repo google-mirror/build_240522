@@ -10,6 +10,8 @@ There's now a `BUILD_BROKEN_OUTSIDE_INCLUDE_DIRS` variable, that when set, will
 turn these errors into warnings temporarily. I don't expect this to last more
 than a release, since they're fairly easy to clean up.
 
+TARGET_OUT_TESTCASES
+
 Neither of these cases are supported by Soong, and will produce errors when
 converting your module.
 
