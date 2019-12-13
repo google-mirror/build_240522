@@ -23,6 +23,10 @@ TARGET_NATIVE_BRIDGE_ARCH_VARIANT := armv7-a-neon
 TARGET_NATIVE_BRIDGE_CPU_VARIANT := generic
 TARGET_NATIVE_BRIDGE_ABI := armeabi-v7a armeabi
 
+# TODO: x86_arm boards need this to pass the "overriding command error"
+#       Remove this when the build commands are fixed.
+BUILD_BROKEN_DUP_RULES := true
+
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
 TARGET_NO_KERNEL := true
