@@ -1,0 +1,11 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Ram Muthiah <rammuthiah@google.com>
+Code-Review+2: Ram Muthiah <rammuthiah@google.com>
+Code-Review+2: Cody Schuffelen <schuffelen@google.com>
+Autosubmit+1: Ram Muthiah <rammuthiah@google.com>
+DrNo-Review+1: Hung-ying Tyan <tyanh@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 13 Dec 2019 05:29:01 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1188401
+Project: platform/build
+Branch: refs/heads/pie-gsi
