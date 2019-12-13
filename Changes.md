@@ -13,6 +13,8 @@ than a release, since they're fairly easy to clean up.
 Neither of these cases are supported by Soong, and will produce errors when
 converting your module.
 
+nice
+
 ### Absolute paths
 
 This has been checked since Oreo. The common reason to hit this is because a
