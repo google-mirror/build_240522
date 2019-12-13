@@ -1,0 +1,13 @@
+Code-Review+2: Jooyung Han <jooyung@google.com>
+Code-Review+2: Justin Yun <justinyun@google.com>
+Code-Review+2: Yo Chiang <yochiang@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Verified+1: SzuWei Lin <szuweilin@google.com>
+Autosubmit+1: SzuWei Lin <szuweilin@google.com>
+Build-Cop-Override+1: Sam Saccone <samccone@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 13 Dec 2019 23:15:49 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1184291
+Project: platform/build
+Branch: refs/heads/master
