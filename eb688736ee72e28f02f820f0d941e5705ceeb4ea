@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b97cd8dc_17ffee10",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-12-13T17:47:20Z",
+      "side": 1,
+      "message": "We now use a common prebuilt of sed from toybox for both Linux and Mac, so if it works on one it should work on the other.\n\nThat being said, we really don\u0027t like using $(shell), it gets particularly expensive when we need to figure out whether anything has changed in the makefiles. That\u0027s why we\u0027ve implemented the math function Tao pointed out below. Instead of extracting this information, can we instead be building up the BOARD_MKBOOTIMG_ARGS instead? Or take a much stricter approach to parsing this out and do it entirely in make?",
+      "parentUuid": "ce82e004_4d665cc7",
+      "range": {
+        "startLine": 522,
+        "startChar": 65,
+        "endLine": 522,
+        "endChar": 111
+      },
+      "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af86970e_c15ea9ee",
         "filename": "core/board_config.mk",
         "patchSetId": 3
