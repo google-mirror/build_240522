@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b6010ce_37ee7a75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2019-12-14T00:30:41Z",
+      "side": 1,
+      "message": "I think this needs to be:\n\n    -Wl,--execute-only\n    rather than\n    -Wl,-execute-only\n\nFor the -z linker options, we still use -Wl,-z,foo, and there\u0027s no change in the number of dashes.",
+      "revId": "a1ad2b7cedf3f6f4f0495e37aa3c55586029d9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
