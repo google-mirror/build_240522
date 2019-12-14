@@ -1304,6 +1304,12 @@ ifneq ($(my_outside_includes),)
   endif
 endif
 
+ifdef LOCAL_IS_HOST_MODULE
+  ifneq ($(filter $(TARGET_OUT_HEADERS)%,$(my_c_includes)),)
+    $(call pretty-warning,Host modules may not use TARGET_OUT_HEADERS.)
+  endif
+endif
+
 # all_objects includes gen_o_objects which were part of LOCAL_GENERATED_SOURCES;
 # use normal_objects here to avoid creating circular dependencies. This assumes
 # that custom build rules which generate .o files don't consume other generated
