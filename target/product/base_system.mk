@@ -317,15 +317,11 @@ endif
 
 # The order matters for runtime class lookup performance.
 PRODUCT_BOOT_JARS := \
-    $(TARGET_CORE_JARS) \
+    $(filter-out conscrypt,$(TARGET_CORE_JARS)) \
     framework-minus-apex \
     ext \
-    telephony-common \
     voip-common \
-    ims-common \
-    framework-sdkext \
-    ike \
-    updatable-media
+
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
