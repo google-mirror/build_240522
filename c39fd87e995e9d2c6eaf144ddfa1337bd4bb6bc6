@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44d8a2fe_ddb88458",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2019-12-16T11:08:48Z",
+      "side": 1,
+      "message": "Not sure what the intent is with TARGET_CORE_JARS. I\u0027m guessing you want conscrypt to remain there?",
+      "revId": "c39fd87e995e9d2c6eaf144ddfa1337bd4bb6bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
