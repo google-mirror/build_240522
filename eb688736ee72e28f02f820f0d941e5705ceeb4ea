@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b54edb5f_940c05c7",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1131154
+      },
+      "writtenOn": "2019-12-18T16:03:42Z",
+      "side": 1,
+      "message": "Sed usage was fixed. Now it works fine on Linux, MacOS and with toybox sed used for Android build. Also fixed the comparison with \"math_lt\".\n\nAlas, I can\u0027t spend any more time for this patch. Addressed all comments except of $(shell) one. Can we please merge this patch as is, as it fixes actual shortcoming? If you want to do some massive rework (like building up the args), it can be done on top of this patch.",
+      "parentUuid": "b97cd8dc_17ffee10",
+      "range": {
+        "startLine": 522,
+        "startChar": 65,
+        "endLine": 522,
+        "endChar": 111
+      },
+      "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af86970e_c15ea9ee",
         "filename": "core/board_config.mk",
         "patchSetId": 3
@@ -69,6 +93,30 @@
       "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ac8d79f_ee2050fb",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1131154
+      },
+      "writtenOn": "2019-12-18T16:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af86970e_c15ea9ee",
+      "range": {
+        "startLine": 529,
+        "startChar": 2,
+        "endLine": 529,
+        "endChar": 62
+      },
+      "revId": "eb688736ee72e28f02f820f0d941e5705ceeb4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
