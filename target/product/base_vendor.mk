@@ -21,10 +21,10 @@ PRODUCT_PACKAGES += \
     cgroups.recovery.json \
     charger.recovery \
     init_second_stage.recovery \
-    ld.config.recovery.txt \
     linker.recovery \
     otacerts.recovery \
     recovery \
+    recovery_linker_config \
     shell_and_utilities_recovery \
     watchdogd.recovery \
 
