@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Martin Stjernholm <mast@google.com>
+Code-Review+2: Roland Levillain <rpl@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Submitted-by: Jiyong Park <jiyong@google.com>
+Submitted-at: Thu, 19 Dec 2019 00:21:38 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1179882
+Project: platform/build
+Branch: refs/heads/master
