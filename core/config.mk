@@ -714,8 +714,24 @@ else ifeq ($(call math_gt_or_eq,27,$(PRODUCT_SHIPPING_API_LEVEL)),)
 endif
 
 ifeq ($(PRODUCT_USE_VNDK),true)
+# Define PRODUCT_PRODUCT_VNDK_VERSION if PRODUCT_USE_VNDK is true and
+# PRODUCT_SHIPPING_API_LEVEL is greater than 29.
+  PRODUCT_USE_PRODUCT_VNDK := false
+  ifneq ($(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE),)
+    PRODUCT_USE_PRODUCT_VNDK := $(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE)
+  else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+    # No shipping level defined
+  else ifeq ($(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)),)
+    PRODUCT_USE_PRODUCT_VNDK := true
+  endif
+
   ifndef BOARD_VNDK_VERSION
     BOARD_VNDK_VERSION := current
+  endif
+  ifeq ($(PRODUCT_USE_PRODUCT_VNDK),true)
+    ifndef PRODUCT_PRODUCT_VNDK_VERSION
+      PRODUCT_PRODUCT_VNDK_VERSION := current
+    endif
   endif
 endif
 
