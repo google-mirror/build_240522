@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b10bf01_f82bf8ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-12-20T17:28:21Z",
+      "side": 1,
+      "message": "What in the bp file controls this? I thought we\u0027d need apex_available without //apex_available:platform.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 34
+      },
+      "revId": "613be4a46d3534eb79609ed0c590ca9f592579af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8387de9_9dceade6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-12-20T17:28:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t test the failure that the check is supposed to detect. Something like \"m out/product/target/$PRODUCT_TARGET/system/lib/libc.so\" would.",
+      "revId": "613be4a46d3534eb79609ed0c590ca9f592579af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
