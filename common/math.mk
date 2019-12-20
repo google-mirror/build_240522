@@ -134,6 +134,10 @@ define math_gt_or_eq
 $(if $(filter $(1),$(call math_max,$(1),$(2))),true)
 endef
 
+define math_gt
+$(if $(call math_gt_or_eq,$(2),$(1)),,true)
+endef
+
 define math_lt
 $(if $(call math_gt_or_eq,$(1),$(2)),,true)
 endef
