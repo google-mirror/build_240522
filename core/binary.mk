@@ -1204,7 +1204,13 @@ my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
 my_warn_types := $(my_warn_ndk_types)
 my_allowed_types := $(my_allowed_ndk_types)
 else ifdef LOCAL_USE_VNDK
-    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    _name := $(patsubst %.product,%,$(LOCAL_MODULE))
+    ifneq ($(_name),$(LOCAL_MODULE))
+        my_link_type := native:product
+    else
+        _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+        my_link_type := native:vendor
+    endif
     ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
         ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
             my_link_type := native:vndk
@@ -1213,10 +1219,14 @@ else ifdef LOCAL_USE_VNDK
         endif
         my_warn_types :=
         my_allowed_types := native:vndk native:vndk_private
+    else ifeq ($(my_link_type),native:product)
+        # Modules installed to /product cannot directly depend on modules marked
+        # with vendor_available: false
+        my_warn_types :=
+        my_allowed_types := native:product native:vndk native:platform_vndk
     else
         # Modules installed to /vendor cannot directly depend on modules marked
         # with vendor_available: false
-        my_link_type := native:vendor
         my_warn_types :=
         my_allowed_types := native:vendor native:vndk native:platform_vndk
     endif
