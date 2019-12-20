@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6afacbff_a4d0efc2",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2019-12-20T01:50:44Z",
+      "side": 1,
+      "message": "can we de-dupe the logic instead?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "2870d1e3c17c82a14954102922b5eb9b0536786a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
