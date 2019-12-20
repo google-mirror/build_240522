@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
     bugreportz \
     cgroups.json \
     charger \
+    chattr \
     cmd \
     com.android.adbd \
     com.android.apex.cts.shim.v1 \
