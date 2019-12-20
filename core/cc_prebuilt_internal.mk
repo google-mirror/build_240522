@@ -84,15 +84,19 @@ include $(BUILD_SYSTEM)/allowed_ndk_types.mk
 ifdef LOCAL_SDK_VERSION
 my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
 else ifdef LOCAL_USE_VNDK
-    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    _name := $(patsubst %.product,%,$(LOCAL_MODULE))
+    ifneq ($(_name),$(LOCAL_MODULE))
+        my_link_type := native:product
+    else
+        _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+        my_link_type := native:vendor
+    endif
     ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
         ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
             my_link_type := native:vndk
         else
             my_link_type := native:vndk_private
         endif
-    else
-        my_link_type := native:vendor
     endif
 else ifneq ($(filter $(TARGET_RECOVERY_OUT)/%,$(LOCAL_MODULE_PATH)),)
 my_link_type := native:recovery
