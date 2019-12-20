@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15f1c84c_5eba4e9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-12-20T14:55:48Z",
+      "side": 1,
+      "message": "Make sure to test with https://android-review.googlesource.com/c/platform/build/+/1156840",
+      "revId": "11c4ab031a3452addea0f8b17e21e061abbae03c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
