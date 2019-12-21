@@ -16,6 +16,24 @@
       "revId": "11c4ab031a3452addea0f8b17e21e061abbae03c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "649e95f6_178b64d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2019-12-21T14:36:35Z",
+      "side": 1,
+      "message": "Thank you for the information.\nI ran the forrest for the test. We need to clean up more modules for this. (https://android-build.googleplex.com/builds/pending/P11146664/flame-userdebug/latest/view/logs/build_error.log)",
+      "parentUuid": "15f1c84c_5eba4e9c",
+      "revId": "11c4ab031a3452addea0f8b17e21e061abbae03c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
