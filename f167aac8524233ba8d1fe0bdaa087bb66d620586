@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "deca43e5_596fa6bb",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-12-23T01:03:23Z",
+      "side": 1,
+      "message": "shouldn\u0027t we exclude 29?",
+      "range": {
+        "startLine": 724,
+        "startChar": 28,
+        "endLine": 724,
+        "endChar": 33
+      },
+      "revId": "f167aac8524233ba8d1fe0bdaa087bb66d620586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
