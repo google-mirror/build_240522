@@ -22,6 +22,30 @@
       "revId": "2870d1e3c17c82a14954102922b5eb9b0536786a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d443d3d_43600434",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-12-23T19:24:06Z",
+      "side": 1,
+      "message": "That would be some non-trivial amount of refactoring of the build system; I would refrain from doing it now to unblock system_ext VINTF metadata CLs.\n\nAfter all, when we add a new partition (foo), this list doesn\u0027t need to be updated until foo/etc/vintf joins the list (e.g. the follow-up system_ext CL). A partition always have a few backup symlinks, and these possible symlinks are fixed too.",
+      "parentUuid": "6afacbff_a4d0efc2",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "2870d1e3c17c82a14954102922b5eb9b0536786a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
