@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "79363ed7_7f996e1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-12-23T00:07:27Z",
+      "side": 1,
+      "message": "Thanks, that deserves pointing out.\n\nHowever my question wasn\u0027t about why Bionic needs //apex_available:platform, but rather what the logic is for a module to get installed in the system image, besides //apex_available:platform. If there\u0027s something else at play it maybe ought to be documented for go/Android.bp.\n\nI did btw confirm that I get LOCAL_UNINSTALLABLE_MODULE:\u003dtrue for the Bionic libs, which I also thought odd when they do in fact get installed (in the bootstrap subdir). But maybe that variable just doesn\u0027t do what it appears to do.",
+      "parentUuid": "d7a20281_cad1f69b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 34
+      },
+      "revId": "613be4a46d3534eb79609ed0c590ca9f592579af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8387de9_9dceade6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
