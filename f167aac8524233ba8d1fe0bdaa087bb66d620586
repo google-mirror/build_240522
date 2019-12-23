@@ -46,6 +46,30 @@
       "revId": "f167aac8524233ba8d1fe0bdaa087bb66d620586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77778f6a_11e89726",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2019-12-23T02:30:22Z",
+      "side": 1,
+      "message": "Ah, I\u0027ve read this in the opposite direction.\n\nSo, this is `not (29 \u003e\u003d PRODUCT_SHIPPING_API_LEVEL)` which means 29 \u003c PRODUCT_SHIPPING_API_LEVEL. Got it.",
+      "parentUuid": "7609f400_54dc6b45",
+      "range": {
+        "startLine": 724,
+        "startChar": 28,
+        "endLine": 724,
+        "endChar": 33
+      },
+      "revId": "f167aac8524233ba8d1fe0bdaa087bb66d620586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
