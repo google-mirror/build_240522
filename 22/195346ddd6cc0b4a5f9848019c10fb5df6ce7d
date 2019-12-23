@@ -1,0 +1,11 @@
+Verified+1: Jiyong Park <jiyong@google.com>
+Autosubmit+1: Jiyong Park <jiyong@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Mon, 23 Dec 2019 04:50:51 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1178112
+Project: platform/build
+Branch: refs/heads/master
