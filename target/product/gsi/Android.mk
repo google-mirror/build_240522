@@ -144,9 +144,7 @@ LOCAL_REQUIRED_MODULES += \
     vndkcore.libraries.txt \
     vndkprivate.libraries.txt \
     vndkcorevariant.libraries.txt \
-    $(addsuffix .vendor,$(VNDK_CORE_LIBRARIES)) \
-    $(addsuffix .vendor,$(VNDK_SAMEPROCESS_LIBRARIES)) \
-    com.android.vndk.current
+
 endif
 include $(BUILD_PHONY_PACKAGE)
 
@@ -166,8 +164,12 @@ _binder32 :=
 include $(BUILD_PHONY_PACKAGE)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := vndk_apex_snapshot_package
-LOCAL_REQUIRED_MODULES := $(foreach vndk_ver,$(PRODUCT_EXTRA_VNDK_VERSIONS),com.android.vndk.v$(vndk_ver))
+LOCAL_MODULE := vndk_apex_package
+LOCAL_REQUIRED_MODULES :=
+ifneq ($(TARGET_SKIP_CURRENT_VNDK),true)
+LOCAL_REQUIRED_MODULES += com.android.vndk.current
+endif
+LOCAL_REQUIRED_MODULES += $(foreach vndk_ver,$(PRODUCT_EXTRA_VNDK_VERSIONS),com.android.vndk.v$(vndk_ver))
 include $(BUILD_PHONY_PACKAGE)
 
 endif # BOARD_VNDK_VERSION is set
