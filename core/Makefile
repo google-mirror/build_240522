@@ -3636,6 +3636,139 @@ endif # BUILDING_VBMETA_IMAGE
 endif # BOARD_AVB_ENABLE
 
 # -----------------------------------------------------------------
+# Check VINTF of build
+
+# Skip partial builds; only check full builds. Only check if:
+# - PRODUCT_ENFORCE_VINTF_MANIFEST is true
+# - Building system and vendor images
+# - Building vendor / product / system_ext / odm images if board has vendor/ product / system_ext / odm images
+ifeq ($(PRODUCT_ENFORCE_VINTF_MANIFEST),true)
+ifeq ($(BUILDING_SYSTEM_IMAGE),true)
+ifeq ($(BUILDING_VENDOR_IMAGE),true)
+
+ifeq ($(filter true,$(BUILDING_VENDOR_IMAGE)),$(filter true,$(BOARD_USES_VENDORIMAGE)))
+ifeq ($(filter true,$(BUILDING_ODM_IMAGE)),$(filter true,$(BOARD_USES_ODMIMAGE)))
+ifeq ($(filter true,$(BUILDING_PRODUCT_IMAGE)),$(filter true,$(BOARD_USES_PRODUCTIMAGE)))
+ifeq ($(filter true,$(BUILDING_SYSTEM_EXT_IMAGE)),$(filter true,$(BOARD_USES_SYSTEM_EXTIMAGE)))
+
+intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_log)
+check_vintf_log := $(intermediates)/check_vintf_log
+droid_targets: $(check_vintf_log)
+$(call dist-for-goals, droid_targets, $(check_vintf_log))
+
+check_vintf_args :=
+check_vintf_deps :=
+
+# -- Kernel version and configurations.
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
+
+BUILT_KERNEL_CONFIGS_FILE := $(intermediates)/kernel_configs.txt
+BUILT_KERNEL_VERSION_FILE := $(intermediates)/kernel_version.txt
+
+# BOARD_KERNEL_CONFIG_FILE and BOARD_KERNEL_VERSION can be used to override the values extracted
+# from INSTALLED_KERNEL_TARGET.
+ifdef BOARD_KERNEL_CONFIG_FILE
+ifdef BOARD_KERNEL_VERSION
+$(BUILT_KERNEL_CONFIGS_FILE): $(BOARD_KERNEL_CONFIG_FILE)
+	cp $< $@
+$(BUILT_KERNEL_VERSION_FILE):
+	echo $(BOARD_KERNEL_VERSION) > $@
+
+my_board_extracted_kernel := true
+endif # BOARD_KERNEL_VERSION
+endif # BOARD_KERNEL_CONFIG_FILE
+
+ifneq ($(my_board_extracted_kernel),true)
+ifndef INSTALLED_KERNEL_TARGET
+$(warning No INSTALLED_KERNEL_TARGET is defined when PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS \
+    is true. Information about the updated kernel cannot be built into OTA update package. \
+    You can fix this by: (1) setting TARGET_NO_KERNEL to false and installing the built kernel \
+    to $(PRODUCT_OUT)/kernel, so that kernel information will be extracted from the built kernel; \
+    or (2) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
+    BOARD_KERNEL_VERSION manually; or (3) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS \
+    manually.)
+else
+
+# Tools for decompression that is not in PATH.
+# Check $(EXTRACT_KERNEL) for decompression algorithms supported by the script.
+# Algorithms that are in the script but not in this list will be found in PATH.
+my_decompress_tools := \
+    lz4:$(HOST_OUT_EXECUTABLES)/lz4 \
+
+$(BUILT_KERNEL_CONFIGS_FILE): .KATI_IMPLICIT_OUTPUTS := $(BUILT_KERNEL_VERSION_FILE)
+$(BUILT_KERNEL_CONFIGS_FILE): PRIVATE_DECOMPRESS_TOOLS := $(my_decompress_tools)
+$(BUILT_KERNEL_CONFIGS_FILE): $(foreach pair,$(my_decompress_tools),$(call word-colon,2,$(pair)))
+$(BUILT_KERNEL_CONFIGS_FILE): $(EXTRACT_KERNEL) $(INSTALLED_KERNEL_TARGET)
+	$< --tools $(PRIVATE_DECOMPRESS_TOOLS) --input $(INSTALLED_KERNEL_TARGET) \
+	  --output-configs $@ \
+	  --output-version $(BUILT_KERNEL_VERSION_FILE)
+
+my_decompress_tools :=
+
+endif # my_board_extracted_kernel
+my_board_extracted_kernel :=
+
+endif # INSTALLED_KERNEL_TARGET
+
+check_vintf_args += --kernel $$(cat $(BUILT_KERNEL_VERSION_FILE)):$(BUILT_KERNEL_CONFIGS_FILE)
+check_vintf_deps += $(BUILT_KERNEL_CONFIGS_FILE) $(BUILT_KERNEL_VERSION_FILE)
+
+endif # PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+
+# The build system only writes VINTF metadata to */etc/vintf paths. Legacy paths aren't needed here
+# because they are only used for prebuilt images.
+check_vintf_deps += $(sort \
+  $(filter $(TARGET_OUT)/etc/vintf/%, $(INTERNAL_SYSTEMIMAGE_FILES)) \
+  $(filter $(TARGET_OUT_VENDOR)/etc/vintf/%, $(INTERNAL_VENDORIMAGE_FILES)) \
+  $(filter $(TARGET_OUT_ODM)/etc/vintf/%, $(INTERNAL_ODMIMAGE_FILES)) \
+  $(filter $(TARGET_OUT_PRODUCT)/etc/vintf/%, $(INTERNAL_PRODUCTIMAGE_FILES)) \
+  $(filter $(TARGET_OUT_SYSTEM_EXT)/etc/vintf/%, $(INTERNAL_SYSTEM_EXTIMAGE_FILES)) \
+)
+
+check_vintf_args += \
+  --dirmap /system:$(TARGET_OUT) \
+  --dirmap /vendor:$(TARGET_OUT_VENDOR) \
+  --dirmap /odm:$(TARGET_OUT_ODM) \
+  --dirmap /product:$(TARGET_OUT_PRODUCT) \
+  --dirmap /system_ext:$(TARGET_OUT_SYSTEM_EXT) \
+
+ifdef PRODUCT_SHIPPING_API_LEVEL
+check_vintf_args += --property ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
+endif # PRODUCT_SHIPPING_API_LEVEL
+
+$(check_vintf_log): PRIVATE_CHECK_VINTF_ARGS := $(check_vintf_args)
+$(check_vintf_log): PRIVATE_CHECK_VINTF_DEPS := $(check_vintf_deps)
+$(check_vintf_log): $(HOST_OUT_EXECUTABLES)/checkvintf $(check_vintf_deps)
+	@echo -n -e 'Deps: \n  ' > $@
+	@sed 's/ /\n  /g' <<< "$(PRIVATE_CHECK_VINTF_DEPS)" >> $@
+	@echo -n -e 'Args: \n  ' >> $@
+	@echo -n -e 'For empty SKU:' >> $@
+	@cat <<< "$(PRIVATE_CHECK_VINTF_ARGS)" >> $@
+	@( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) >> $@ 2>&1 ) || ( cat $@ && exit 1 )
+	$(foreach sku,$(ODM_MANIFEST_SKUS), \
+	  echo "For SKU = $(sku):" >> $@; \
+	  ( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) \
+	      --property ro.boot.product.hardware.sku=$(sku) >> $@ 2>&1 ) || ( cat $@ && exit 1 ); )
+
+# Helper alias to check VINTF compatibility of current build.
+.PHONY: check-vintf-compatible
+check-vintf-compatible: $(check_vintf_log)
+	cat $<
+
+intermediates :=
+check_vintf_log :=
+check_vintf_args :=
+check_vintf_deps :=
+
+endif # BUILDING_SYSTEM_EXT_IMAGE equals BOARD_USES_SYSTEM_EXTIMAGE
+endif # BUILDING_PRODUCT_IMAGE equals BOARD_USES_PRODUCTIMAGE
+endif # BUILDING_ODM_IMAGE equals BOARD_USES_ODMIMAGE
+endif # BUILDING_VENDOR_IMAGE equals BOARD_USES_VENDORIMAGE
+endif # BUILDING_VENDOR_IMAGE
+endif # BUILDING_SYSTEM_IMAGE
+endif # PRODUCT_ENFORCE_VINTF_MANIFEST
+
+# -----------------------------------------------------------------
 # Check image sizes <= size of super partition
 
 ifeq (,$(TARGET_BUILD_APPS))
