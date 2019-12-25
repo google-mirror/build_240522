@@ -250,7 +250,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (b9b858 Merge "Change all cf_common paths to cuttlefish paths" into )
       PLATFORM_SECURITY_PATCH := 2019-11-05
+=======
+      PLATFORM_SECURITY_PATCH := 2019-12-05
+>>>>>>> BRANCH (e8d7dc Version bump to QQ1A.191205.011 [core/build_id.mk])
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH
 
