@@ -326,13 +326,11 @@ PRODUCT_BOOT_JARS := \
     voip-common \
     ims-common \
     framework-sdkext \
-    ike \
     updatable-media \
     framework-tethering
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
-    com.android.ipsec:ike \
     com.android.media:updatable-media \
     com.android.sdkext:framework-sdkext \
     com.android.telephony:telephony-common \
