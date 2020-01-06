@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "388f07df_fee17222",
+        "filename": "core/install_jni_libs_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-01-06T18:19:46Z",
+      "side": 1,
+      "message": "do you need to depend on the lib? (probably yes, I just forget what the failure modes are :) )",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 41
+      },
+      "revId": "1cc512cc0892c2bd8f706f3bfc9dc657fe9fbec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
