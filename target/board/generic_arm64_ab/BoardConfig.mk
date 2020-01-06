@@ -1,4 +1,5 @@
-# Copyright (C) 2019 The Android Open Source Project
+#
+# Copyright (C) 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,10 +28,11 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
-# TODO(b/111434759, b/111287060) SoC specific hacks
+# TODO(jiyong) These might be SoC specific.
+BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/lib/dsp:/dsp
-BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
-BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/image:/firmware/image
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/verinfo:/firmware/verinfo
 
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.

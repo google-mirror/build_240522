@@ -1,4 +1,5 @@
-# Copyright (C) 2019 The Android Open Source Project
+#
+# Copyright (C) 2017 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,22 +16,20 @@
 
 include build/make/target/board/BoardConfigGsiCommon.mk
 
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
+# Legacy GSI keeps 32 bits binder for 32 bits CPU Arch
+TARGET_USES_64_BIT_BINDER := false
 
-# TODO(b/111434759, b/111287060) SoC specific hacks
+# TODO(jiyong) These might be SoC specific.
+BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
 BOARD_ROOT_EXTRA_SYMLINKS += /vendor/lib/dsp:/dsp
-BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
-BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/image:/firmware/image
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt/verinfo:/firmware/verinfo
 
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.
