@@ -49,6 +49,7 @@ PRODUCT_PACKAGES += \
     cmd \
     com.android.adbd \
     com.android.apex.cts.shim.v1 \
+    com.android.apiextensions \
     com.android.conscrypt \
     com.android.cronet \
     com.android.i18n \
@@ -58,7 +59,6 @@ PRODUCT_PACKAGES += \
     com.android.media.swcodec \
     com.android.resolv \
     com.android.neuralnetworks \
-    com.android.sdkext \
     com.android.telephony \
     com.android.tethering \
     com.android.tzdata \
@@ -321,16 +321,16 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
-    framework-sdkext \
+    framework-apiextensions \
     ike \
     updatable-media \
     framework-tethering
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
+    com.android.apiextensions:framework-apiextensions \
     com.android.conscrypt:conscrypt \
     com.android.ipsec:ike \
     com.android.media:updatable-media \
-    com.android.sdkext:framework-sdkext \
     com.android.telephony:telephony-common \
     com.android.telephony:ims-common \
     com.android.tethering:framework-tethering
