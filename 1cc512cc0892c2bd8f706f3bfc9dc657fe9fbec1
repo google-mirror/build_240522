@@ -22,6 +22,30 @@
       "revId": "1cc512cc0892c2bd8f706f3bfc9dc657fe9fbec1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0219a03_91d5f94b",
+        "filename": "core/install_jni_libs_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-01-06T18:26:55Z",
+      "side": 1,
+      "message": "We generally want `m path/to/file` to install the dependencies, but it\u0027s not strictly necessary in this case, due to that also happening above with line 53. (Which I just removed in the next patchset, since this should be sufficient)",
+      "parentUuid": "388f07df_fee17222",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 41
+      },
+      "revId": "1cc512cc0892c2bd8f706f3bfc9dc657fe9fbec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
