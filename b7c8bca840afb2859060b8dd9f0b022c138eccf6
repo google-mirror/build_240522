@@ -142,6 +142,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74ac1ae0_d9a4bdc9",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-01-08T21:54:19Z",
+      "side": 1,
+      "message": "\u003e So I don\u0027t view this as a very big issue. \n\u003e but it is not likely to happen unless a developer deliberately do something wrong\n\nSure, but in principle, we shouldn\u0027t be losing this functionality. It\u0027s nice to have, and it seems like it shouldn\u0027t be too hard to keep it? Is it a lot of work?\n\n\u003e If you are worried that OEMs do PRODUCT_COPY FILES, I can add an explicit check for PRODUCT_COPY_FILES (that it doesn\u0027t copy to VINTF locations). I can do that in a follow up CL.\n\nPlease do.",
+      "parentUuid": "05aa5729_5d87fd72",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
