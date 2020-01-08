@@ -104,12 +104,20 @@ ifdef LOCAL_INSTALLED_MODULE
   endif
 endif
 
-ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
+my_check_same_vndk_variants :=
+ifeq ($(LOCAL_CHECK_SAME_VNDK_VARIANTS),true)
+  ifneq ($(filter hwaddress, $(SANITIZE_TARGET)),hwaddress)
+	  my_check_same_vndk_variants := true
+  endif
+endif
+
+ifeq ($(my_check_same_vndk_variants),true)
   # Add $(LOCAL_BUILT_MODULE) as a dependency to no_vendor_variant_vndk_check so
   # that the vendor variant will be built and checked against the core variant.
   no_vendor_variant_vndk_check: $(LOCAL_BUILT_MODULE)
 
-  my_core_register_name := $(subst .vendor,,$(my_register_name))
+  my_core_register_name := \
+		$(subst .vendor,,$(subst .product,,$(my_register_name)))
   my_core_variant_files := $(call module-target-built-files,$(my_core_register_name))
   my_core_shared_lib := $(sort $(filter %.so,$(my_core_variant_files)))
   $(LOCAL_BUILT_MODULE): PRIVATE_CORE_VARIANT := $(my_core_shared_lib)
@@ -119,7 +127,7 @@ ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
   $(LOCAL_BUILT_MODULE): $(my_core_shared_lib)
 endif
 
-ifeq ($(LOCAL_VNDK_DEPEND_ON_CORE_VARIANT),true)
+ifeq ($(my_check_same_vndk_variants),true)
 $(LOCAL_BUILT_MODULE): PRIVATE_TOOLS_PREFIX := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)TOOLS_PREFIX)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE) $(LIBRARY_IDENTITY_CHECK_SCRIPT)
 	$(call verify-vndk-libs-identical,\
