@@ -22,6 +22,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e83b04b3_d22dda4d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-01-08T01:54:02Z",
+      "side": 1,
+      "message": "Personally, I think such checks aren\u0027t complete, so I\u0027m deliberately dropping such checks. If you are only building the system image, there is no meaningful VINTF compatibility to check, because there is no VINTF boundary.\n\nHowever, if you are referring to the *consistency* of VINTF metadata in a single image (e.g. one vendor manifest says target FCM version X, and another vendor manifest says target FCM version Y), then I agree that such consistency check is lost. Let me know if this is what you are referring to, and I\u0027ll amend / add new CLs to address this.",
+      "parentUuid": "dd1ac541_0cc5be6d",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
