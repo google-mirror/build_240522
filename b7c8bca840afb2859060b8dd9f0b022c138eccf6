@@ -118,6 +118,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05aa5729_5d87fd72",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-01-08T21:32:55Z",
+      "side": 1,
+      "message": "\u003e We still want to check that all of the files parse correctly\n\nWe already check files being parsed correctly. For DEVICE_MANIFEST_FILE and friends, they are checked in build/make/target/board/Android.mk system/libhidl/vintfdata/Android.mk hardware/interfaces/compatibility_matrices/Android.mk. For vintf_fragments defined in Soong modules, they are also checked. (This does not include PRODUCT_COPY_FILES. See below.)\n\n\u003e that there aren\u0027t conflicts between fragments.\n\nThis is the part that would be missed. However, for HALs with vintf_fragments, if they use \u003cfqname\u003e tags, there will never be a conflict. Only HALs with vintf_fragments that uses the old-style \u003cversion\u003e\u003cinterface\u003e\u003cinstance\u003e tags may cause a conflict. (And if they do, it is very likely due to a dirty intermediate build with 1.0 and 1.1 version of a HAL installed together). So I don\u0027t view this as a very big issue. \n\nOther information may cause a conflict too, but it is not likely to happen unless a developer deliberately do something wrong (e.g. define BOARD_SEPOLICY_VERS as well as declaring a value in the manifest directly).\n\n(This does not include PRODUCT_COPY_FILES. See below.)\n\nAlso see my previous comment: AOSP targets also build a vendor image right now, so they will be checked. For *SSI builds, the problem will also surface when they merge the builds.\n\n\u003e Also, will this break for manifests which are copied with PRODUCT_COPY_FILES?\n\nIf you are worried that OEMs do PRODUCT_COPY FILES, I can add an explicit check for PRODUCT_COPY_FILES (that it doesn\u0027t copy to VINTF locations). I can do that in a follow up CL.",
+      "parentUuid": "64eb14c3_69d53512",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
