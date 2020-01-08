@@ -94,6 +94,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64eb14c3_69d53512",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-01-08T20:44:35Z",
+      "side": 1,
+      "message": "\u003e I\u0027m deliberately dropping such checks. If you are only building the system image, there is no meaningful VINTF compatibility to check, because there is no VINTF boundary.\n\nWe still want to check that all of the files parse correctly and, for instance, that there aren\u0027t conflicts between fragments. So, we don\u0027t need compatibility checks, but we need to build or at least parse the manifest.\n\n\n\nAlso, will this break for manifests which are copied with PRODUCT_COPY_FILES? Is there a way we can make those manifests a build error?",
+      "parentUuid": "725c0e51_4ac7ada4",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
