@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fcf8174_e8c6f3b8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3716,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-01-08T00:49:02Z",
+      "side": 1,
+      "message": "Most of this is copied from L2890; see next CL of deleting duplicated code.",
+      "range": {
+        "startLine": 3662,
+        "startChar": 0,
+        "endLine": 3716,
+        "endChar": 53
+      },
+      "revId": "f3c3b4c0b2fdc7588ea73b66d0e77b19aee99ff1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
