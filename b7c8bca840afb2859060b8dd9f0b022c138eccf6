@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd1ac541_0cc5be6d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-01-08T01:32:00Z",
+      "side": 1,
+      "message": "One of the benefits of the solution I had in https://android-review.googlesource.com/c/platform/build/+/1202895 is that it will check the manifests per partition. So, if we are only building the system image (e.g. I think this is the case for aosp_* on aosp, right?) things still get checked.\n\nIs there a way to preserve that here?",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
