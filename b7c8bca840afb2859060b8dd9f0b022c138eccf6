@@ -46,6 +46,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c147895_e3af192f",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-01-08T02:03:02Z",
+      "side": 1,
+      "message": "Also, I think it makes sense to check consistency in system image for AOSP targets (because we release those GSI images) and probably vendor-only builds (for OEMs), but I don\u0027t think it applies to other images (especially odm / product / system_ext), because libvintf pretty much *requires* system and vendor to exist before reading VINTF metadata in odm / product / system_ext..",
+      "parentUuid": "e83b04b3_d22dda4d",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
