@@ -70,6 +70,30 @@
       "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725c0e51_4ac7ada4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-01-08T02:54:17Z",
+      "side": 1,
+      "message": "I just checked that GSI builds does have a vendor partition because of CL:985304. So it is still checked for AOSP targets.\n\n(I don\u0027t know if this is intended though. GSI builds do seem to have a fake vendor partition. Szuwei, is it intended to have vendor images built for AOSP targets?)",
+      "parentUuid": "1c147895_e3af192f",
+      "range": {
+        "startLine": 3646,
+        "startChar": 0,
+        "endLine": 3647,
+        "endChar": 36
+      },
+      "revId": "b7c8bca840afb2859060b8dd9f0b022c138eccf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
