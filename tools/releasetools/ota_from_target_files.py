@@ -557,18 +557,19 @@ def WriteFingerprintAssertion(script, target_info, source_info):
 
   if source_oem_props is None and target_oem_props is None:
     script.AssertSomeFingerprint(
-        source_info.fingerprint, target_info.fingerprint)
+        source_info.GetPartitionFingerprint("system"),
+        target_info.GetPartitionFingerprint("system"))
   elif source_oem_props is not None and target_oem_props is not None:
     script.AssertSomeThumbprint(
         target_info.GetBuildProp("ro.build.thumbprint"),
         source_info.GetBuildProp("ro.build.thumbprint"))
   elif source_oem_props is None and target_oem_props is not None:
     script.AssertFingerprintOrThumbprint(
-        source_info.fingerprint,
+        source_info.GetPartitionFingerprint("system"),
         target_info.GetBuildProp("ro.build.thumbprint"))
   else:
     script.AssertFingerprintOrThumbprint(
-        target_info.fingerprint,
+        target_info.GetPartitionFingerprint("system"),
         source_info.GetBuildProp("ro.build.thumbprint"))
 
 
@@ -781,7 +782,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Comment("Stage 3/3")
 
   # Dump fingerprints
-  script.Print("Target: {}".format(target_info.fingerprint))
+  script.Print("Target: {}".format(
+      target_info.GetPartitionFingerprint("system")))
 
   device_specific.FullOTA_InstallBegin()
 
@@ -919,7 +921,7 @@ def GetPackageMetadata(target_info, source_info=None):
   assert source_info is None or isinstance(source_info, common.BuildInfo)
 
   metadata = {
-      'post-build' : target_info.fingerprint,
+      'post-build' : target_info.GetPartitionFingerprint('system'),
       'post-build-incremental' : target_info.GetBuildProp(
           'ro.build.version.incremental'),
       'post-sdk-level' : target_info.GetBuildProp(
@@ -942,7 +944,7 @@ def GetPackageMetadata(target_info, source_info=None):
 
   is_incremental = source_info is not None
   if is_incremental:
-    metadata['pre-build'] = source_info.fingerprint
+    metadata['pre-build'] = source_info.GetPartitionFingerprint('system')
     metadata['pre-build-incremental'] = source_info.GetBuildProp(
         'ro.build.version.incremental')
     metadata['pre-device'] = source_info.device
@@ -1437,8 +1439,10 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
     script.Comment("Stage 1/3")
 
   # Dump fingerprints
-  script.Print("Source: {}".format(source_info.fingerprint))
-  script.Print("Target: {}".format(target_info.fingerprint))
+  script.Print("Source: {}".format(
+      source_info.GetPartitionFingerprint("system")))
+  script.Print("Target: {}".format(
+      target_info.GetPartitionFingerprint("system")))
 
   script.Print("Verifying current system...")
 
