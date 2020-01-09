@@ -336,6 +336,7 @@ class BuildInfo(object):
                                "ro.product.name"]
   _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER = ["product", "odm", "vendor",
                                             "system_ext", "system"]
+  _FINGERPRINT_DEFAULT_SOURCE_ORDER = ["system", "vendor"]
 
   def __init__(self, info_dict, oem_dicts=None):
     """Initializes a BuildInfo instance with the given dicts.
@@ -361,16 +362,34 @@ class BuildInfo(object):
     if self._oem_props:
       assert oem_dicts, "OEM source required for this build"
 
-    # These two should be computed only after setting self._oem_props.
-    self._device = self.GetOemProperty("ro.product.device")
-    self._fingerprint = self.CalculateFingerprint()
+    def check_fingerprint(fingerprint):
+      # Sanity check a build fingerprint.
+      if (" " in fingerprint or any(ord(ch) > 127 for ch in fingerprint)):
+        raise ValueError(
+            'Invalid build fingerprint: "{}". See the requirement in Android CDD '
+            "3.2.2. Build Parameters.".format(fingerprint))
 
-    # Sanity check the build fingerprint.
-    if (' ' in self._fingerprint or
-        any(ord(ch) > 127 for ch in self._fingerprint)):
-      raise ValueError(
-          'Invalid build fingerprint: "{}". See the requirement in Android CDD '
-          '3.2.2. Build Parameters.'.format(self._fingerprint))
+    # These should be computed only after setting self._oem_props.
+    self._device = self.GetOemProperty("ro.product.device")
+    self._fingerprint = None
+    self._partition_fingerprints = {}
+    for partition in AVB_PARTITIONS:
+      try:
+        partition_fingerprint = self.CalculateFingerprint(partition)
+        check_fingerprint(partition_fingerprint)
+        self._partition_fingerprints[partition] = partition_fingerprint
+      except ExternalError:
+        logger.warning("Unable to calculate fingerprint for %s" % partition)
+    # Try to set the main fingerprint using the standard build.prop file.
+    try:
+      self._fingerprint = self.CalculateFingerprint()
+      check_fingerprint(self._fingerprint)
+    # If that fails, use one of the partition fingerprints.
+    except ExternalError:
+      for partition in BuildInfo._FINGERPRINT_DEFAULT_SOURCE_ORDER:
+        if partition in self._partition_fingerprints:
+          self._fingerprint = self._partition_fingerprints[partition]
+          break
 
   @property
   def is_ab(self):
@@ -383,28 +402,6 @@ class BuildInfo(object):
   @property
   def fingerprint(self):
     return self._fingerprint
-
-  @property
-  def vendor_fingerprint(self):
-    return self._fingerprint_of("vendor")
-
-  @property
-  def product_fingerprint(self):
-    return self._fingerprint_of("product")
-
-  @property
-  def odm_fingerprint(self):
-    return self._fingerprint_of("odm")
-
-  def _fingerprint_of(self, partition):
-    if partition + ".build.prop" not in self.info_dict:
-      return None
-    build_prop = self.info_dict[partition + ".build.prop"]
-    if "ro." + partition + ".build.fingerprint" in build_prop:
-      return build_prop["ro." + partition + ".build.fingerprint"]
-    if "ro." + partition + ".build.thumbprint" in build_prop:
-      return build_prop["ro." + partition + ".build.thumbprint"]
-    return None
 
   @property
   def oem_props(self):
@@ -422,8 +419,23 @@ class BuildInfo(object):
   def items(self):
     return self.info_dict.items()
 
-  def GetBuildProp(self, prop):
+  def GetBuildProp(self, prop, partition=None):
     """Returns the inquired build property."""
+    # If provided a partition for this property, only look within that
+    # partition's build.prop.
+    if partition:
+      if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+        prop = prop.replace("ro.product", "ro.product.{}".format(partition))
+      else:
+        prop = prop.replace("ro.", "ro.{}.".format(partition))
+      try:
+        return self.info_dict.get("{}.build.prop".format(partition), {})[prop]
+      except KeyError:
+        raise ExternalError("couldn't find %s in %s.build.prop" %
+                            (prop, partition))
+
+    # Otherwise, use the standard build.prop file.
+
     if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
       return self._ResolveRoProductBuildProp(prop)
 
@@ -474,20 +486,23 @@ class BuildInfo(object):
       return self.oem_dicts[0][key]
     return self.GetBuildProp(key)
 
-  def CalculateFingerprint(self):
+  def GetPartitionFingerprint(self, partition):
+    return self._partition_fingerprints.get(partition, self._fingerprint)
+
+  def CalculateFingerprint(self, partition=None):
     if self.oem_props is None:
       try:
         return self.GetBuildProp("ro.build.fingerprint")
       except ExternalError:
         return "{}/{}/{}:{}/{}/{}:{}/{}".format(
-            self.GetBuildProp("ro.product.brand"),
-            self.GetBuildProp("ro.product.name"),
-            self.GetBuildProp("ro.product.device"),
-            self.GetBuildProp("ro.build.version.release"),
-            self.GetBuildProp("ro.build.id"),
-            self.GetBuildProp("ro.build.version.incremental"),
-            self.GetBuildProp("ro.build.type"),
-            self.GetBuildProp("ro.build.tags"))
+            self.GetBuildProp("ro.product.brand", partition),
+            self.GetBuildProp("ro.product.name", partition),
+            self.GetBuildProp("ro.product.device", partition),
+            self.GetBuildProp("ro.build.version.release", partition),
+            self.GetBuildProp("ro.build.id", partition),
+            self.GetBuildProp("ro.build.version.incremental", partition),
+            self.GetBuildProp("ro.build.type", partition),
+            self.GetBuildProp("ro.build.tags", partition))
     return "%s/%s/%s:%s" % (
         self.GetOemProperty("ro.product.brand"),
         self.GetOemProperty("ro.product.name"),
@@ -644,6 +659,9 @@ def LoadInfoDict(input_file, repacking=False):
   if d.get("avb_enable") == "true":
     build_info = BuildInfo(d)
     d["avb_salt"] = sha256(build_info.fingerprint).hexdigest()
+    for partition in AVB_PARTITIONS:
+      d["avb_{}_salt".format(partition)] = sha256(
+          build_info.GetPartitionFingerprint(partition)).hexdigest()
 
   return d
 
