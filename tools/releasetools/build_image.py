@@ -531,7 +531,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "verity_disable",
       "avb_enable",
       "avb_avbtool",
-      "avb_salt",
       "use_dynamic_partition_size",
   )
   for p in common_props:
@@ -544,6 +543,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_system_key_path", "avb_key_path")
     copy_prop("avb_system_algorithm", "avb_algorithm")
+    copy_prop("avb_system_salt", "avb_salt")
     copy_prop("fs_type", "fs_type")
     # Copy the generic system fs type first, override with specific one if
     # available.
@@ -575,6 +575,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_system_other_key_path", "avb_key_path")
     copy_prop("avb_system_other_algorithm", "avb_algorithm")
+    copy_prop("avb_system_other_salt", "avb_salt")
     copy_prop("fs_type", "fs_type")
     copy_prop("system_fs_type", "fs_type")
     copy_prop("system_other_size", "partition_size")
@@ -608,6 +609,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_vendor_key_path", "avb_key_path")
     copy_prop("avb_vendor_algorithm", "avb_algorithm")
+    copy_prop("avb_vendor_salt", "avb_salt")
     copy_prop("vendor_fs_type", "fs_type")
     copy_prop("vendor_size", "partition_size")
     if not copy_prop("vendor_journal_size", "journal_size"):
@@ -630,6 +632,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_product_key_path", "avb_key_path")
     copy_prop("avb_product_algorithm", "avb_algorithm")
+    copy_prop("avb_product_salt", "avb_salt")
     copy_prop("product_fs_type", "fs_type")
     copy_prop("product_size", "partition_size")
     if not copy_prop("product_journal_size", "journal_size"):
@@ -652,6 +655,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_system_ext_key_path", "avb_key_path")
     copy_prop("avb_system_ext_algorithm", "avb_algorithm")
+    copy_prop("avb_system_ext_salt", "avb_salt")
     copy_prop("system_ext_fs_type", "fs_type")
     copy_prop("system_ext_size", "partition_size")
     if not copy_prop("system_ext_journal_size", "journal_size"):
@@ -676,6 +680,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_odm_key_path", "avb_key_path")
     copy_prop("avb_odm_algorithm", "avb_algorithm")
+    copy_prop("avb_odm_salt", "avb_salt")
     copy_prop("odm_fs_type", "fs_type")
     copy_prop("odm_size", "partition_size")
     if not copy_prop("odm_journal_size", "journal_size"):
