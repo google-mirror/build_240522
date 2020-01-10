@@ -245,6 +245,7 @@ PRODUCT_PACKAGES += \
     snapshotctl \
     statsd \
     storaged \
+    stub.libraries.txt \
     surfaceflinger \
     svc \
     task_profiles.json \
