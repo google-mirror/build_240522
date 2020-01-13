@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec722441_b0b30920",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-01-13T02:07:23Z",
+      "side": 1,
+      "message": "How about making this a required module of linkerconfig?",
+      "revId": "08ade33b0f87c20f30c9687b509cbbcbf39f3767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
