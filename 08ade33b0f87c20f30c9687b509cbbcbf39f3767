@@ -16,6 +16,24 @@
       "revId": "08ade33b0f87c20f30c9687b509cbbcbf39f3767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8f9b00d_0fe2fba9",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2020-01-13T02:39:03Z",
+      "side": 1,
+      "message": "Make sense as this is only dependent to linkerconfig for now. I will abandon this CL and raise new CL later for this integration. Thanks.",
+      "parentUuid": "ec722441_b0b30920",
+      "revId": "08ade33b0f87c20f30c9687b509cbbcbf39f3767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
