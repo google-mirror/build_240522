@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Justin Yun <justinyun@google.com>
+Code-Review+1: Logan Chien <loganchien@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Hsin-Yi Chen <hsinyichen@google.com>
+Submitted-at: Fri, 17 Jan 2020 02:09:37 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1205645
+Project: platform/build
+Branch: refs/heads/master
