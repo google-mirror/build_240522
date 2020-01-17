@@ -3,6 +3,7 @@ LLNDK: libGLESv1_CM.so
 LLNDK: libGLESv2.so
 LLNDK: libGLESv3.so
 LLNDK: libRS.so
+LLNDK: libadbd_auth.so
 LLNDK: libandroid_net.so
 LLNDK: libbinder_ndk.so
 LLNDK: libc.so
