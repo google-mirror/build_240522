@@ -1,0 +1,10 @@
+Autosubmit+1: Justin Yun <justinyun@google.com>
+Code-Review+2: Jiyong Park <jiyong@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 22 Jan 2020 00:16:48 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1213064
+Project: platform/build
+Branch: refs/heads/master
