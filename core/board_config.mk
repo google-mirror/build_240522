@@ -52,6 +52,18 @@ _board_strip_readonly_list := \
   TARGET_HARDWARE_3D \
   WITH_DEXPREOPT \
 
+# selinux variables
+_board_strip_readonly_list += \
+  BOARD_ODM_SEPOLICY_DIRS \
+  BOARD_PLAT_PRIVATE_SEPOLICY_DIR \
+  BOARD_PLAT_PUBLIC_SEPOLICY_DIR \
+  BOARD_SEPOLICY_DIRS \
+  BOARD_SEPOLICY_M4DEFS \
+  BOARD_VENDOR_SEPOLICY_DIRS \
+  PRODUCT_PUBLIC_SEPOLICY_DIRS \
+  PRODUCT_PRIVATE_SEPOLICY_DIRS \
+  SELINUX_IGNORE_NEVERALLOWS \
+
 # File system variables
 _board_strip_readonly_list += \
   BOARD_FLASH_BLOCK_SIZE \
@@ -97,7 +109,9 @@ _build_broken_var_list += \
               $(DEFAULT_ERROR_BUILD_MODULE_TYPES), \
     BUILD_BROKEN_USES_$(m))
 
-_board_true_false_vars := $(_build_broken_var_list)
+_board_true_false_vars := $(_build_broken_var_list) \
+  SELINUX_IGNORE_NEVERALLOWS
+
 _board_strip_readonly_list += $(_build_broken_var_list) \
   BUILD_BROKEN_NINJA_USES_ENV_VARS
 
