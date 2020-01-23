@@ -151,6 +151,7 @@ OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
 OPTIONS.avb_extra_args = {}
+OPTIONS.android_jar_path = None
 
 
 AVB_FOOTER_ARGS_BY_PARTITION = {
@@ -492,6 +493,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
             payload_key,
             container_key,
             key_passwords[container_key],
+            apk_keys,
             codename_to_api_level_map,
             no_hashtree=True,
             signing_args=OPTIONS.avb_extra_args.get('apex'))
@@ -1247,6 +1249,8 @@ def main(argv):
   apex_keys_info = ReadApexKeysInfo(input_zip)
   apex_keys = GetApexKeys(apex_keys_info, apk_keys)
 
+  # TODO(xunchang) check for the apks inside the apex files, and abort early if
+  # the keys are not available.
   CheckApkAndApexKeysAvailable(
       input_zip,
       set(apk_keys.keys()) | set(apex_keys.keys()),
