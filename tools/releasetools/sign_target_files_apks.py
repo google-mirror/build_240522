@@ -492,6 +492,8 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
             payload_key,
             container_key,
             key_passwords[container_key],
+            apk_keys,
+            platform_api_level,
             codename_to_api_level_map,
             no_hashtree=True,
             signing_args=OPTIONS.avb_extra_args.get('apex'))

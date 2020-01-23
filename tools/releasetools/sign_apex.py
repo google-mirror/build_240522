@@ -55,6 +55,7 @@ def SignApexFile(avbtool, apex_file, payload_key, container_key,
       payload_key=payload_key,
       container_key=container_key,
       container_pw=None,
+      apk_keys={},
       codename_to_api_level_map=None,
       no_hashtree=no_hashtree,
       signing_args=signing_args)
