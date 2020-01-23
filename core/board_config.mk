@@ -53,6 +53,18 @@ _board_strip_readonly_list := \
   TARGET_HARDWARE_3D \
   WITH_DEXPREOPT \
 
+# selinux variables
+_board_strip_readonly_list += \
+  BOARD_ODM_SEPOLICY_DIRS \
+  BOARD_PLAT_PRIVATE_SEPOLICY_DIR \
+  BOARD_PLAT_PUBLIC_SEPOLICY_DIR \
+  BOARD_SEPOLICY_DIRS \
+  BOARD_SEPOLICY_M4DEFS \
+  BOARD_VENDOR_SEPOLICY_DIRS \
+  PRODUCT_PUBLIC_SEPOLICY_DIRS \
+  PRODUCT_PRIVATE_SEPOLICY_DIRS \
+  SELINUX_IGNORE_NEVERALLOW \
+
 # File system variables
 _board_strip_readonly_list += \
   BOARD_FLASH_BLOCK_SIZE \
@@ -99,7 +111,9 @@ _build_broken_var_list += \
               $(DEFAULT_ERROR_BUILD_MODULE_TYPES), \
     BUILD_BROKEN_USES_$(m))
 
-_board_true_false_vars := $(_build_broken_var_list)
+_board_true_false_vars := $(_build_broken_var_list) \
+  SELINUX_IGNORE_NEVERALLOW
+
 _board_strip_readonly_list += $(_build_broken_var_list) \
   BUILD_BROKEN_NINJA_USES_ENV_VARS
 
@@ -148,6 +162,15 @@ ifneq ($(MALLOC_IMPL),)
   $(error Use `MALLOC_SVELTE := true` to configure jemalloc for low-memory)
 endif
 board_config_mk :=
+
+# BOARD_SEPOLICY_DIRS was used for vendor/odm sepolicy customization before.
+# It has been replaced by BOARD_VENDOR_SEPOLICY_DIRS (mandatory) and
+# BOARD_ODM_SEPOLICY_DIRS (optional). BOARD_SEPOLICY_DIRS is still allowed for
+# backward compatibility, which will be merged into BOARD_VENDOR_SEPOLICY_DIRS.
+ifdef BOARD_SEPOLICY_DIRS
+BOARD_VENDOR_SEPOLICY_DIRS += $(BOARD_SEPOLICY_DIRS)
+BOARD_SEPOLICY_DIRS :=
+endif
 
 # Clean up and verify BoardConfig variables
 $(foreach var,$(_board_strip_readonly_list),$(eval $(var) := $$(strip $$($(var)))))
