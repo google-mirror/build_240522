@@ -3827,6 +3827,12 @@ INTERNAL_OTATOOLS_MODULES := \
   verity_signer \
   verity_verifier \
   zipalign \
+  deapexer \
+  apexer \
+  merge_zips \
+  resize2fs \
+  soong_zip
+
 
 ifeq (true,$(PRODUCT_SUPPORTS_VBOOT))
 INTERNAL_OTATOOLS_MODULES += \
