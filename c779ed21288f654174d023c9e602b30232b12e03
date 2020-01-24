@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47bf65c3_67d5320f",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2020-01-24T22:01:34Z",
+      "side": 1,
+      "message": "probably\n\n  $(filter true,$(LINE_COVERAGE))",
+      "range": {
+        "startLine": 115,
+        "startChar": 57,
+        "endLine": 115,
+        "endChar": 73
+      },
+      "revId": "c779ed21288f654174d023c9e602b30232b12e03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
