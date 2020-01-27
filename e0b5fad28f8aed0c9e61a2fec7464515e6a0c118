@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d8d024be_3afc9859",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-01-27T20:26:52Z",
+      "side": 1,
+      "message": "Unnecessary. Removed.",
+      "parentUuid": "52d89993_2d71d6f0",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "146f2fde_e5264e6b",
         "filename": "core/rbe.mk",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "984383f2_852558f1",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-01-27T20:26:52Z",
+      "side": 1,
+      "message": "It\u0027s used in build/soong/java/config/config.go",
+      "parentUuid": "146f2fde_e5264e6b",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fccc36cd_ec841abd",
         "filename": "core/rbe.mk",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7aeb69c_a97f8f09",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-01-27T20:26:52Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "fccc36cd_ec841abd",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
