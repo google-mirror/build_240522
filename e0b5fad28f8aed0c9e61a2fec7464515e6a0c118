@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52d89993_2d71d6f0",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-01-27T19:46:32Z",
+      "side": 1,
+      "message": "why $(strip)?",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "146f2fde_e5264e6b",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-01-27T19:46:32Z",
+      "side": 1,
+      "message": "This is never referenced",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fccc36cd_ec841abd",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-01-27T19:46:32Z",
+      "side": 1,
+      "message": "This is never referenced",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
