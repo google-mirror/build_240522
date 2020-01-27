@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4fac0b75_48a3fc4a",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-01-27T20:44:48Z",
+      "side": 1,
+      "message": "I see, build/soong/ui/build/dumpvars.go is querying them and then exporting them to Soong.\n\nThey should also be added anywhere $(R8_COMPAT_PROGUARD) or $(DX)/$(DX_COMMAND) are referenced, or exported back to Make as part of DX_COMMAND.",
+      "parentUuid": "984383f2_852558f1",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e0b5fad28f8aed0c9e61a2fec7464515e6a0c118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fccc36cd_ec841abd",
         "filename": "core/rbe.mk",
         "patchSetId": 1
