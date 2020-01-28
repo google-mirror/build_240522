@@ -1278,16 +1278,11 @@ define combine-notice-files
 $(2) $(3): PRIVATE_MESSAGE := $(4)
 $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
-$(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
-	build/make/tools/generate-notice-files.py --text-output $(2) \
-	    $(if $(filter $(1),xml_excluded_vendor_product_odm),-e vendor -e product -e system_ext -e odm --xml-output, \
-	      $(if $(filter $(1),xml_excluded_system_product_odm),-e system -e product -e system_ext -e odm --xml-output, \
-	        $(if $(filter $(1),xml_product),-i product --xml-output, \
-	          $(if $(filter $(1),xml_system_ext),-i system_ext --xml-output, \
-	            $(if $(filter $(1),xml_system),-i system --xml-output, \
-	              $(if $(filter $(1),xml_odm),-i odm --xml-output, \
-	                --html-output)))))) $(3) \
-	    -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
+$(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files2.py
+	build/make/tools/generate-notice-files2.py --text-output $(2) \
+	    $(if $(filter $(1),html), --html-output, --xml-output) $(3) \
+	    -t $$(PRIVATE_MESSAGE) -n $$(PRIVATE_DIR)/src -r $(PRODUCT_OUT) \
+	    $(6)
 notice_files: $(2) $(3)
 endef
 
@@ -1348,6 +1343,8 @@ installed_odm_notice_xml_gz := $(TARGET_OUT_ODM)/etc/NOTICE.xml.gz
 # being built. A notice xml file must depend on all modules that could potentially
 # install a license file relevant to it.
 license_modules := $(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)
+# Only files copied to the product need notices.
+license_modules := $(filter $(PRODUCT_OUT)/%,$(license_modules))
 # Phonys/fakes don't have notice files (though their deps might)
 license_modules := $(filter-out $(TARGET_OUT_FAKE)/%,$(license_modules))
 # testcases are not relevant to the system image.
@@ -1357,11 +1354,14 @@ license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
 license_modules_product := $(filter $(TARGET_OUT_PRODUCT)/%,$(license_modules))
 license_modules_system_ext := $(filter $(TARGET_OUT_SYSTEM_EXT)/%,$(license_modules))
 license_modules_odm := $(filter $(TARGET_OUT_ODM)/%,$(license_modules))
+license_modules_apex := $(filter $(PRODUCT_OUT)/apex/%,$(license_modules))
 license_modules_agg := $(license_modules_system) \
                        $(license_modules_vendor) \
                        $(license_modules_product) \
                        $(license_modules_system_ext) \
-                       $(license_modules_odm)
+                       $(license_modules_odm) \
+                       $(license_modules_apex)
+
 license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules))
 
 # If we are building in a configuration that includes a prebuilt vendor.img, we can't
