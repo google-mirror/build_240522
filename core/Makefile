@@ -1278,16 +1278,11 @@ define combine-notice-files
 $(2) $(3): PRIVATE_MESSAGE := $(4)
 $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
-$(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
-	build/make/tools/generate-notice-files.py --text-output $(2) \
-	    $(if $(filter $(1),xml_excluded_vendor_product_odm),-e vendor -e product -e system_ext -e odm --xml-output, \
-	      $(if $(filter $(1),xml_excluded_system_product_odm),-e system -e product -e system_ext -e odm --xml-output, \
-	        $(if $(filter $(1),xml_product),-i product --xml-output, \
-	          $(if $(filter $(1),xml_system_ext),-i system_ext --xml-output, \
-	            $(if $(filter $(1),xml_system),-i system --xml-output, \
-	              $(if $(filter $(1),xml_odm),-i odm --xml-output, \
-	                --html-output)))))) $(3) \
-	    -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
+$(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files2.py
+	build/make/tools/generate-notice-files2.py --text-output $(2) \
+	    $(if $(filter $(1),html), --html-output, --xml-output) $(3) \
+	    -t $$(PRIVATE_MESSAGE) -n $$(PRIVATE_DIR)/src -r $(PRODUCT_OUT) \
+	    $(6)
 notice_files: $(2) $(3)
 endef
 
@@ -1348,30 +1343,59 @@ installed_odm_notice_xml_gz := $(TARGET_OUT_ODM)/etc/NOTICE.xml.gz
 # being built. A notice xml file must depend on all modules that could potentially
 # install a license file relevant to it.
 license_modules := $(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)
+# The notice files themselves do not need notices as they are essentially self-descriptive.
+license_modules := $(filter-out $(TARGET_OUT_NOTICE_FILES)%,$(license_modules))
+# Only files copied to the product need notices.
+license_modules := $(filter $(PRODUCT_OUT)/%,$(license_modules))
 # Phonys/fakes don't have notice files (though their deps might)
 license_modules := $(filter-out $(TARGET_OUT_FAKE)/%,$(license_modules))
 # testcases are not relevant to the system image.
 license_modules := $(filter-out $(TARGET_OUT_TESTCASES)/%,$(license_modules))
+# filesystem images: system, vendor, product, system_ext, and odm
 license_modules_system := $(filter $(TARGET_OUT)/%,$(license_modules))
 license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
 license_modules_product := $(filter $(TARGET_OUT_PRODUCT)/%,$(license_modules))
 license_modules_system_ext := $(filter $(TARGET_OUT_SYSTEM_EXT)/%,$(license_modules))
 license_modules_odm := $(filter $(TARGET_OUT_ODM)/%,$(license_modules))
+# targets used for debug symbols only and do not get copied to the device
+license_modules_symbols_only := $(filter $(PRODUCT_OUT)/apex/%,$(license_modules))
+# targets copied to the device but are not readable by the UI (e.g. must boot
+# into a different partition to read or don't have an associated /etc
+# directory) must have their notices built somewhere readable.
+license_modules_rehomed := $(filter $(PRODUCT_OUT)/recovery/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/root/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/data/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/ramdisk/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/debug_ramdisk/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/vendor-ramdisk/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/persist/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/persist.img,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/system_other/%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/kernel%,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/%.img,$(license_modules))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/%.bin,$(license_modules))
 license_modules_agg := $(license_modules_system) \
                        $(license_modules_vendor) \
                        $(license_modules_product) \
                        $(license_modules_system_ext) \
                        $(license_modules_odm)
-license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules))
+
+# after removing targets in system images, targets reported in system images, and
+# targets used for debug symbols that do not need notices, nothing must remain.
+license_modules_rest := $(filter-out $(license_modules_rehomed),$(license_modules))
+license_modules_rest := $(filter-out $(license_modules_symbols_only),$(license_modules_rest))
+license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules_rest))
+$(call maybe-print-list-and-error, $(license_modules_rest), \
+        "Targets added under $(PRODUCT_OUT)/ unaccounted for notice handling.")
 
 # If we are building in a configuration that includes a prebuilt vendor.img, we can't
 # update its notice file, so include those notices in the system partition instead
 ifdef BOARD_PREBUILT_VENDORIMAGE
-license_modules_system += $(license_modules_rest)
+license_modules_system += $(license_modules_rehomed)
 system_xml_directories := xml_excluded_vendor_product_odm
 system_notice_file_message := "Notices for files contained in all filesystem images except vendor/system_ext/product/odm in this directory:"
 else
-license_modules_vendor += $(license_modules_rest)
+license_modules_vendor += $(license_modules_rehomed)
 system_xml_directories := xml_system
 system_notice_file_message := "Notices for files contained in the system filesystem image in this directory:"
 endif
