@@ -1,4 +1,7 @@
 ifneq (,$(strip $(LOCAL_COPY_HEADERS)))
+$(if $(filter true,$(BUILD_BROKEN_USES_BUILD_COPY_HEADERS)),,\
+  $(call pretty-error,copy_headers.mk is obsolete. See $(CHANGES_URL)#copy_headers))
+
 ###########################################################
 ## Copy headers to the install tree
 ###########################################################
