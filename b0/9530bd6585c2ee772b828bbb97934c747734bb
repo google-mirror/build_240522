@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Caroline Tice <cmtice@google.com>
+Autosubmit+1: Chih-hung Hsieh <chh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 29 Jan 2020 21:26:00 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1221099
+Project: platform/build
+Branch: refs/heads/master
