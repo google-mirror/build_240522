@@ -27,6 +27,7 @@ PRODUCT_PACKAGES += \
     android.test.base \
     android.test.mock \
     android.test.runner \
+    ANGLE \
     apexd \
     appops \
     app_process \
@@ -349,6 +350,9 @@ PRODUCT_COPY_FILES += system/core/rootdir/init.zygote32.rc:system/etc/init/hw/in
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += debug.atrace.tags.enableflags=0
+
+# ANGLE is always supported
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.gfx.angle.supported=true
 
 # Packages included only for eng or userdebug builds, previously debug tagged
 PRODUCT_PACKAGES_DEBUG := \
