@@ -87,7 +87,6 @@ PRODUCT_PACKAGES += \
     heapprofd \
     heapprofd_client \
     gatekeeperd \
-    gpuservice \
     hid \
     hwservicemanager \
     idmap \
@@ -138,6 +137,7 @@ PRODUCT_PACKAGES += \
     libGLESv1_CM \
     libGLESv2 \
     libGLESv3 \
+    libgpuservice \
     libgui \
     libhardware \
     libhardware_legacy \
