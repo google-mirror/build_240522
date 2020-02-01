@@ -138,6 +138,7 @@ PRODUCT_PACKAGES += \
     libGLESv1_CM \
     libGLESv2 \
     libGLESv3 \
+    libgpuservice \
     libgui \
     libhardware \
     libhardware_legacy \
