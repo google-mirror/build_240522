@@ -114,6 +114,7 @@ PRODUCT_PACKAGES += \
     keystore \
     ld.mc \
     libaaudio \
+    libadbd_auth \
     libamidi \
     libandroid \
     libandroidfw \
