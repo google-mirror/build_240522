@@ -16,6 +16,24 @@
       "revId": "91e37b9db6d42d6b8272ddac53613c470086a040",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f67663_00da419f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2020-02-06T01:42:41Z",
+      "side": 1,
+      "message": "As you commented, PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE may not set to \u0027false\u0027 explicitly, but it can be overridden by OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE and can set to \u0027false\u0027 with it. So I wanted to accept only \u0027true\u0027 and ignore the other values for it. Or we may filter-out false, to mitigate unexpected typos.",
+      "parentUuid": "1998b39c_983c7ac1",
+      "revId": "91e37b9db6d42d6b8272ddac53613c470086a040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
