@@ -1,0 +1,10 @@
+Verified+1: Bill Peckham <bpeckham@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Bill Peckham <bpeckham@google.com>
+Submitted-at: Thu, 06 Feb 2020 03:14:47 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1198504
+Project: platform/build
+Branch: refs/heads/master
