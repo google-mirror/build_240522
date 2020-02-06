@@ -270,6 +270,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi-service \
     wm \
+    InProcessTethering \
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
