@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a3c5dec_45897023",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-07T21:22:11Z",
+      "side": 1,
+      "message": "Can you replace this with a public doc link?",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "faf8f7ecb5a0850286536470ce93edd13957594f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83384b63_d41355be",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-07T21:22:11Z",
+      "side": 1,
+      "message": "This means that you\u0027re forcing all of these libraries to be installed to the device anytime someone adds haiku-line-coverage to the command line (or as a dependency). It\u0027s highly preferred to use the intermediates instead.",
+      "range": {
+        "startLine": 55,
+        "startChar": 34,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "faf8f7ecb5a0850286536470ce93edd13957594f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d66f2bf_64da2c7e",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-07T21:22:11Z",
+      "side": 1,
+      "message": "You can\u0027t dist files created by a .PHONY (which is why treehugger is failing). You need to actually declare the zip files as outputs.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 19
+      },
+      "revId": "faf8f7ecb5a0850286536470ce93edd13957594f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
