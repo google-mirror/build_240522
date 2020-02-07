@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (18513d Merge "Move VAB properties to vendor.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=QQ1A.200205.002
+>>>>>>> BRANCH (385aac Version bump to QQ1A.200205.002 [core/build_id.mk])
