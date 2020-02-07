@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "2a10da8f_568e924c",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-02-07T18:39:06Z",
+      "side": 1,
+      "message": "This seems tightly coupled to haiku, should the target be haiku-line-coverage?",
+      "range": {
+        "startLine": 12,
+        "startChar": 71,
+        "endLine": 12,
+        "endChar": 84
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f7a06833_04faaa2a",
         "filename": "core/line_coverage.mk",
         "patchSetId": 4
@@ -41,6 +64,29 @@
         "startChar": 49,
         "endLine": 16,
         "endChar": 59
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbde6795_1ce940ff",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-02-07T18:39:06Z",
+      "side": 1,
+      "message": "Maybe sort this list?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 10
       },
       "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
