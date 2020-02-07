@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2438af6_18441ab2",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2020-02-07T18:34:00Z",
+      "side": 1,
+      "message": "As a side note - I envisioned NATIVE_LINE_COVERAGE to mean \"turn line coverage on everywhere, all the time\", so you wouldn\u0027t have to use NATIVE_COVERAGE and COVERAGE_PATHS as well. Might be worth making this change, but at a later date.",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 66
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7a06833_04faaa2a",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2020-02-07T18:34:00Z",
+      "side": 1,
+      "message": "nit: blacklist",
+      "range": {
+        "startLine": 16,
+        "startChar": 49,
+        "endLine": 16,
+        "endChar": 59
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d0120a8_4b5826a3",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2020-02-07T18:34:00Z",
+      "side": 1,
+      "message": "This is wrong, your dist-for-goals should be something like\n\n  $(call dist-for-goals,line-coverage,$(PRODUCT_OUT)/line_coverage.zip $(PRODUCT_OUT)/line_coverage_fuzz_targets.zip)\n\n... and you can test by using `make dist line-coverage` and making sure that line_coverage.zip and line_coverage_fuzz_targets.zip are in out/dist.",
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
