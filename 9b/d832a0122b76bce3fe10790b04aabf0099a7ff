@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Bo Hu <bohu@google.com>
+Code-Review+2: Baligh Uddin <baligh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Baligh Uddin <baligh@google.com>
+Submitted-at: Fri, 07 Feb 2020 00:52:43 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1228787
+Project: platform/build
+Branch: refs/heads/master
