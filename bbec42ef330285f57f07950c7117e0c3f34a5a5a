@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "bc8f4b03_17092b55",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2020-02-07T20:50:43Z",
+      "side": 1,
+      "message": "Yes, but take a look at the comment on the NATIVE_LINE_COVERAGE cl: https://android-review.googlesource.com/c/platform/build/soong/+/1217856/2/cc/coverage.go\n\nMy understanding is that we should not enable line coverage all the time...",
+      "parentUuid": "c2438af6_18441ab2",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 66
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452b811b_cc058b46",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2020-02-07T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a10da8f_568e924c",
+      "range": {
+        "startLine": 12,
+        "startChar": 71,
+        "endLine": 12,
+        "endChar": 84
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7a06833_04faaa2a",
         "filename": "core/line_coverage.mk",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6c0105b_db30224d",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2020-02-07T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a06833_04faaa2a",
+      "range": {
+        "startLine": 16,
+        "startChar": 49,
+        "endLine": 16,
+        "endChar": 59
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "3d8a49eb_3307ec10",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2020-02-07T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbde6795_1ce940ff",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 10
+      },
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d0120a8_4b5826a3",
         "filename": "core/line_coverage.mk",
         "patchSetId": 4
@@ -108,6 +204,24 @@
       "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2435d868_7c8a9553",
+        "filename": "core/line_coverage.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2020-02-07T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d0120a8_4b5826a3",
+      "revId": "bbec42ef330285f57f07950c7117e0c3f34a5a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
