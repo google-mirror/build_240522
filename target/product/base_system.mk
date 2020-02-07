@@ -121,6 +121,10 @@ PRODUCT_PACKAGES += \
     libandroid_servers \
     libartpalette-system \
     libaudioeffect_jni \
+    libaudiohal@2.0 \
+    libaudiohal@4.0 \
+    libaudiohal@5.0 \
+    libaudiohal@6.0 \
     libbinder \
     libbinder_ndk \
     libc.bootstrap \
