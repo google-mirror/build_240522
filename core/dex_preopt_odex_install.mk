@@ -113,9 +113,6 @@ my_dexpreopt_images :=
 my_dexpreopt_images_deps :=
 my_dexpreopt_image_locations :=
 my_dexpreopt_infix := boot
-ifeq (true, $(DEXPREOPT_USE_APEX_IMAGE))
-  my_dexpreopt_infix := jitzygote-boot
-endif
 
 ifdef LOCAL_DEX_PREOPT
   ifeq (,$(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
