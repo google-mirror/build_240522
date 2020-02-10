@@ -85,3 +85,11 @@ BOARD_FLASH_BLOCK_SIZE := 512
 DEVICE_MATRIX_FILE   := device/generic/goldfish/compatibility_matrix.xml
 
 BOARD_SEPOLICY_DIRS += device/generic/goldfish/sepolicy/common
+
+ifeq ($(TARGET_ARCH),x86)
+BOARD_VENDOR_KERNEL_MODULES += $(wildcard prebuilts/qemu-kernel/x86_64/5.4/ko/*.ko)
+else ifeq ($(TARGET_ARCH),x86_64)
+BOARD_VENDOR_KERNEL_MODULES += $(wildcard prebuilts/qemu-kernel/x86_64/5.4/ko/*.ko)
+else
+$(error "Unsupported arch, TARGET_ARCH='$(TARGET_ARCH)'")
+endif
