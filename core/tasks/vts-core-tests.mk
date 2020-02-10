@@ -14,6 +14,11 @@
 
 .PHONY: vts-core
 
+# TODO(b/149249068): Clean up after all VTS tests are converted.
+vts_test_artifact_paths :=
+# Some repo may not include vts project.
+-include test/vts/tools/build/tasks/framework/vts_for_core_suite.mk
+
 vts-core-zip := $(PRODUCT_OUT)/vts-core-tests.zip
 # Create an artifact to include a list of test config files in vts-core.
 vts-core-list-zip := $(PRODUCT_OUT)/vts-core_list.zip
@@ -23,7 +28,7 @@ my_host_shared_lib_for_vts_core := $(call copy-many-files,$(COMPATIBILITY.vts-co
 $(vts-core-zip) : .KATI_IMPLICIT_OUTPUTS := $(vts-core-list-zip) $(vts-core-configs-zip)
 $(vts-core-zip) : PRIVATE_vts_core_list := $(PRODUCT_OUT)/vts-core_list
 $(vts-core-zip) : PRIVATE_HOST_SHARED_LIBS := $(my_host_shared_lib_for_vts_core)
-$(vts-core-zip) : $(COMPATIBILITY.vts-core.FILES) $(my_host_shared_lib_for_vts_core) $(SOONG_ZIP)
+$(vts-core-zip) : $(COMPATIBILITY.vts-core.FILES) $(my_host_shared_lib_for_vts_core) $(SOONG_ZIP) $(vts_test_artifact_paths)
 	echo $(sort $(COMPATIBILITY.vts-core.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
 	grep -e .*\\.config$$ $@-host.list > $@-host-test-configs.list || true
@@ -54,3 +59,6 @@ vts-core: $(compatibility_zip)
 $(call dist-for-goals, vts-core, $(vts-core-zip) $(vts-core-list-zip) $(vts-core-configs-zip) $(compatibility_zip))
 
 tests: vts-core
+
+# TODO(b/149249068): Clean up after all VTS tests are converted.
+vts_test_artifact_paths :=
