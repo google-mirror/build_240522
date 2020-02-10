@@ -14,6 +14,17 @@
 
 .PHONY: vts-core
 
+# ==========================================
+# Package vts related artifacts - BEGIN
+# TODO(b/149249068): Clean up after all VTS tests are converted.
+# ==========================================
+test_suite_tools += $(HOST_OUT_JAVA_LIBRARIES)/vts-tradefed.jar \
+    $(HOST_OUT_JAVA_LIBRARIES)/vts-tradefed-tests.jar
+
+# ==========================================
+# Package vts related artifacts - END
+# ==========================================
+
 vts-core-zip := $(PRODUCT_OUT)/vts-core-tests.zip
 # Create an artifact to include a list of test config files in vts-core.
 vts-core-list-zip := $(PRODUCT_OUT)/vts-core_list.zip
