@@ -14,6 +14,50 @@
 
 .PHONY: vts-core
 
+# =====================================================================
+# Package vts related artifacts - BEGIN
+# TODO(b/149249068): Clean up after all VTS tests are converted.
+# =====================================================================
+
+-include external/linux-kselftest/android/kselftest_test_list.mk
+-include external/ltp/android/ltp_package_list.mk
+
+VTS_CORE_OUT_ROOT := $(HOST_OUT)/vts-core
+VTS_CORE_TESTCASES_OUT := $(VTS_CORE_OUT_ROOT)/android-vts-core/testcases
+
+# Package vts-tradefed jars
+test_suite_tools += $(HOST_OUT_JAVA_LIBRARIES)/vts-tradefed.jar \
+    $(HOST_OUT_JAVA_LIBRARIES)/vts-tradefed-tests.jar
+
+# Packaging rule for host-side Python logic, configs, and data files
+host_framework_files := \
+  $(call find-files-in-subdirs,test/vts,"*.py" -and -type f,.) \
+  $(call find-files-in-subdirs,test/vts,"*.runner_conf" -and -type f,.) \
+  $(call find-files-in-subdirs,test/vts,"*.push" -and -type f,.)
+host_framework_copy_pairs := \
+  $(foreach f,$(host_framework_files),\
+    test/vts/$(f):$(VTS_CORE_TESTCASES_OUT)/vts/$(f))
+
+# Packaging rule for android-vts.zip's testcases dir (DATA subdir).
+# TODO(b/149249068): this should be fixed by packaging kernel tests as a standalone module like
+# testcases/ltp and testcases/ltp64. Once such tests are no longer run through the python wrapper,
+# we can stop packaging the kernel tests under testcases/DATA/nativetests(64)
+target_native_modules := \
+    $(kselftest_modules) \
+    ltp \
+    $(ltp_packages) \
+
+target_native_copy_pairs := \
+  $(call target-native-copy-pairs,$(target_native_modules),$(VTS_CORE_TESTCASES_OUT))
+
+vts_copy_pairs := \
+  $(call copy-many-files,$(host_framework_copy_pairs)) \
+  $(call copy-many-files,$(target_native_copy_pairs))
+
+# =====================================================================
+# Package vts related artifacts - END
+# =====================================================================
+
 vts-core-zip := $(PRODUCT_OUT)/vts-core-tests.zip
 # Create an artifact to include a list of test config files in vts-core.
 vts-core-list-zip := $(PRODUCT_OUT)/vts-core_list.zip
@@ -23,7 +67,7 @@ my_host_shared_lib_for_vts_core := $(call copy-many-files,$(COMPATIBILITY.vts-co
 $(vts-core-zip) : .KATI_IMPLICIT_OUTPUTS := $(vts-core-list-zip) $(vts-core-configs-zip)
 $(vts-core-zip) : PRIVATE_vts_core_list := $(PRODUCT_OUT)/vts-core_list
 $(vts-core-zip) : PRIVATE_HOST_SHARED_LIBS := $(my_host_shared_lib_for_vts_core)
-$(vts-core-zip) : $(COMPATIBILITY.vts-core.FILES) $(my_host_shared_lib_for_vts_core) $(SOONG_ZIP)
+$(vts-core-zip) : $(COMPATIBILITY.vts-core.FILES) $(my_host_shared_lib_for_vts_core) $(SOONG_ZIP) $(vts_copy_pairs)
 	echo $(sort $(COMPATIBILITY.vts-core.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
 	grep -e .*\\.config$$ $@-host.list > $@-host-test-configs.list || true
