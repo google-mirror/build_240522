@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "98a036ab_a0f5b113",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-10T19:01:04Z",
+      "side": 1,
+      "message": "But it still knows the list of libraries that it may need, so why isn\u0027t it using `required: [\"libaudiohal@2.0\", ...]`?",
+      "revId": "0c9b448fcd975ddd8f8044c7d3dd2759d0526864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d17885b1_733295e0",
         "filename": "target/product/base_system.mk",
         "patchSetId": 1
