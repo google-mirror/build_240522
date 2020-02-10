@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d17885b1_733295e0",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-02-10T19:00:47Z",
+      "side": 1,
+      "message": "can you add these as `required: [ .. ]` in the android.bp for libaudiohal instead?",
+      "range": {
+        "startLine": 123,
+        "startChar": 24,
+        "endLine": 127,
+        "endChar": 21
+      },
+      "revId": "0c9b448fcd975ddd8f8044c7d3dd2759d0526864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
