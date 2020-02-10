@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fdfb775e_df9d617e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2020-02-10T19:10:46Z",
+      "side": 1,
+      "message": "Thanks for pointing this out! I was looking for such a dependency declaration in Blueprint, but couldn\u0027t find it in documentation.",
+      "parentUuid": "98a036ab_a0f5b113",
+      "revId": "0c9b448fcd975ddd8f8044c7d3dd2759d0526864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d17885b1_733295e0",
         "filename": "target/product/base_system.mk",
         "patchSetId": 1
