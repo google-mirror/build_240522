@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95913897_47c559ae",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-02-11T17:13:04Z",
+      "side": 0,
+      "message": "These are the major flags we care about.  Does anyone have thoughts on whether this should all just be deleted (then reintroduced should be get hardware with PAN+XOM fixes, which I suspect will be years?) vs stay in as dead code? I\u0027m leaning more towards delete it; folks can always reference the CL in the future.",
+      "revId": "e31e093b859555fdf860fa9a1bc6373373648361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
