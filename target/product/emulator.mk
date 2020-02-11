@@ -99,6 +99,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service
 
 PRODUCT_PACKAGES += \
+<<<<<<< HEAD   (3fcf13 Merge "Merge empty history for sparse-6140869-L0940000045777)
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.0-impl
 
@@ -132,6 +133,14 @@ PRODUCT_PACKAGES += \
 	iw \
 	wificond \
 	wpa_supplicant \
+=======
+    android.hardware.power@1.0-service \
+    android.hardware.power@1.0-impl
+
+# camera service treble disable until all backwards compat is complete
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera.disable_treble=1
+>>>>>>> BRANCH (feea86 Merge "Version bump to OCR1.200116.001.A1 [core/build_id.mk])
 
 PRODUCT_COPY_FILES += \
     device/generic/goldfish/data/etc/apns-conf.xml:data/misc/apns/apns-conf.xml \
