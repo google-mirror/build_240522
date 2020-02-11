@@ -16,6 +16,24 @@
       "revId": "e31e093b859555fdf860fa9a1bc6373373648361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b365c2aa_22c8a83e",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-02-11T18:02:31Z",
+      "side": 0,
+      "message": "If nobody is going to use it for years I\u0027d agree with deleting it.",
+      "parentUuid": "95913897_47c559ae",
+      "revId": "e31e093b859555fdf860fa9a1bc6373373648361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
