@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (5cf341 Merge "Merge empty history for sparse-5935223-L9470000038735)
 export BUILD_ID=PVS1.180830.001.A1
+=======
+export BUILD_ID=PCR1.200116.001.A1
+>>>>>>> BRANCH (98f691 Merge "Version bump to PCR1.200116.001.A1 [core/build_id.mk])
