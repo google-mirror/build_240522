@@ -110,12 +110,20 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
   ifdef TARGET_2ND_ARCH
     $(call add_json_str, $(TARGET_2ND_ARCH), $($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT))
   endif
+  $(call add_json_str,  $(HOST_ARCH), default)
+  ifdef HOST_2ND_ARCH
+    $(call add_json_str, $(HOST_2ND_ARCH), default)
+  endif
   $(call end_json_map)
 
   $(call add_json_map,  InstructionSetFeatures)
   $(call add_json_str,  $(TARGET_ARCH), $(DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES))
   ifdef TARGET_2ND_ARCH
     $(call add_json_str, $(TARGET_2ND_ARCH), $($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES))
+  endif
+  $(call add_json_str,  $(HOST_ARCH), default)
+  ifdef HOST_2ND_ARCH
+    $(call add_json_str, $(HOST_2ND_ARCH), default)
   endif
   $(call end_json_map)
 
