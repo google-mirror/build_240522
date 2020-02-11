@@ -34,6 +34,24 @@
       "revId": "e31e093b859555fdf860fa9a1bc6373373648361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f9ca33e_1f999471",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-02-11T19:21:02Z",
+      "side": 0,
+      "message": "Ack, the CLs remove this from both Make and Soong now.",
+      "parentUuid": "b365c2aa_22c8a83e",
+      "revId": "e31e093b859555fdf860fa9a1bc6373373648361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
