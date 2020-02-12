@@ -337,6 +337,7 @@ PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.tethering:framework-tethering
 
 PRODUCT_COPY_FILES += \
+    system/core/rootdir/init.adb.rc:system/etc/init/init.adb.rc \
     system/core/rootdir/init.usb.rc:system/etc/init/hw/init.usb.rc \
     system/core/rootdir/init.usb.configfs.rc:system/etc/init/hw/init.usb.configfs.rc \
     system/core/rootdir/etc/hosts:system/etc/hosts
