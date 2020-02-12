@@ -51,10 +51,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 
 #
-# All components inherited here go to vendor image
+# These are used in the GKI boot.img
 #
-$(call inherit-product-if-exists, device/generic/goldfish/arm64-vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+PRODUCT_PACKAGES += \
+    init_second_stage.recovery \
+    shell_and_utilities_recovery
+
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
 
 #
