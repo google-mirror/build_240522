@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3afcf54c_ed4ace4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-13T22:55:47Z",
+      "side": 1,
+      "message": "Where?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "d199476da7edbe62a15277d16a65096b14d3d380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6081c09_aeba5a32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-13T22:55:47Z",
+      "side": 1,
+      "message": "Is there a matching change for Soong?",
+      "revId": "d199476da7edbe62a15277d16a65096b14d3d380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "143fa911_83341dac",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-02-13T22:55:47Z",
+      "side": 1,
+      "message": "I assume this should probably be wrapped with $(firstword ...), since this is expected to be a single file.",
+      "revId": "d199476da7edbe62a15277d16a65096b14d3d380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
