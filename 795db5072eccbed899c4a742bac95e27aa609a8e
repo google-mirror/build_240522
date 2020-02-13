@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eaf1e1d_49cb5ad9",
+        "filename": "core/dex_preopt_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-02-13T20:37:05Z",
+      "side": 1,
+      "message": "I think this would break on an aosp_x86 build, where $(TARGET_ARCH)\u003d\u003d$(HOST_2ND_ARCH)",
+      "revId": "795db5072eccbed899c4a742bac95e27aa609a8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
