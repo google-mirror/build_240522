@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a734a65_62d83f32",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2020-02-14T15:21:53Z",
+      "side": 1,
+      "message": "Replacing vendor-ramdisk.cpio.gz with vendor-ramdisk-debug.cpio.gz from the vendor_boot.img build args.",
+      "range": {
+        "startLine": 1321,
+        "startChar": 107,
+        "endLine": 1321,
+        "endChar": 164
+      },
+      "revId": "7636199761acd3e3d988c81572ce2e5725534dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
