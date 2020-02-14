@@ -1258,6 +1258,70 @@ $(INSTALLED_VENDOR_BOOTIMAGE_TARGET):
 	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_RAMDISK_TARGET) --vendor_boot $@
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 endif
+
+# -----------------------------------------------------------------
+# vendor debug ramdisk
+INTERNAL_VENDOR_DEBUG_RAMDISK_FILES := $(filter $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)/%, \
+    $(ALL_GENERATED_SOURCES) \
+    $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor-ramdisk.debug.cpio.gz
+# Combines vendor ramdisk files and debug ramdisk files to build the vendor debug ramdisk.
+$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): VENDOR_DEBUG_RAMDISK_SYNC_DIR := $(TARGET_VENDOR_RAMDISK_OUT)
+$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): VENDOR_DEBUG_RAMDISK_ROOT_DIR := $(PRODUCT_OUT)/debug_ramdisk
+$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET)
+$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_DEBUG_RAMDISK_FILES) | $(MINIGZIP)
+	$(call pretty,"Target vendor debug ram disk: $@")
+	mkdir -p $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)
+	touch $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)/force_debuggable
+	rsync -a $(VENDOR_DEBUG_RAMDISK_SYNC_DIR)/ $(VENDOR_DEBUG_RAMDISK_ROOT_DIR)
+	$(MKBOOTFS) -d $(TARGET_OUT) $(VENDOR_DEBUG_RAMDISK_ROOT_DIR) | $(MINIGZIP) > $@
+
+INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK := $(PRODUCT_OUT)/installed-files-vendor-ramdisk-debug.txt
+INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK := $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK:.txt=.json)
+$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK)
+$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): VENDOR_DEBUG_RAMDISK_ROOT_DIR := $(PRODUCT_OUT)/debug_ramdisk
+
+# Cannot just depend on INTERNAL_VENDOR_DEBUG_RAMDISK_FILES like other INSTALLED_FILES_FILE_* rules.
+# Because the vendor debug ramdisk will rsync from $(TARGET_VENDOR_RAMDISK_OUT), so we have to
+# wait for the vendor debug ramdisk to be built before generating the installed file list.
+$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET)
+$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INTERNAL_VENDOR_DEBUG_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(VENDOR_DEBUG_RAMDISK_ROOT_DIR) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+# -----------------------------------------------------------------
+# vendor_boot-debug.img.
+INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_boot-debug.img
+
+# The util to sign vendor_boot-debug.img with a test key.
+BOARD_AVB_VENDOR_BOOT_TEST_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+INTERNAL_AVB_VENDOR_BOOT_TEST_SIGNING_ARGS := --algorithm SHA256_RSA2048 --key $(BOARD_AVB_VENDOR_BOOT_TEST_KEY_PATH)
+# $(1): the vendor bootimage to sign
+define test-key-sign-vendor-bootimage
+$(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)))
+$(AVBTOOL) add_hash_footer \
+  --image $(1) \
+  --partition_size $(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE) \
+  --partition_name boot $(INTERNAL_AVB_VENDOR_BOOT_TEST_SIGNING_ARGS) \
+  $(BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS)
+$(call assert-max-image-size,$(1),$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
+endef
+
+ifneq ($(BOARD_AVB_VENDOR_BOOT_KEY_PATH),)
+$(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_VENDOR_BOOT_TEST_KEY_PATH)
+endif
+
+# Depends on vendor_boot.img and vendor-ramdisk-debug.cpio.gz to build the new vendor_boot-debug.img
+$(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET)
+	$(call pretty,"Target vendor_boot debug image: $@")
+	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET) --vendor_boot $@
+	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
+	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
+
 endif # BUILDING_VENDOR_BOOT_IMAGE
 
 # -----------------------------------------------------------------
@@ -2205,6 +2269,7 @@ $(error MTD device is no longer supported and thus BOARD_NAND_SPARE_SIZE is depr
 endif
 
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
 # -----------------------------------------------------------------
 # the debug ramdisk, which is the original ramdisk plus additional
 # files: force_debuggable, adb_debug.prop and userdebug sepolicy.
@@ -2408,6 +2473,7 @@ bootimage_test_harness-nodeps: $(MKBOOTIMG)
 	$(if $(BOARD_AVB_BOOT_KEY_PATH),$(call test-key-sign-bootimage,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET)))
 
 endif # TARGET_NO_KERNEL
+endif # BUILDING_VENDOR_BOOT_IMAGE is not true
 endif # BOARD_BUILD_SYSTEM_ROOT_IMAGE is not true
 
 # -----------------------------------------------------------------
