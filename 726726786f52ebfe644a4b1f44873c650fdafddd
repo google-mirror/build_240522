@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cca1c719_c65d7806",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-02-17T19:39:16Z",
+      "side": 1,
+      "message": "Maybe also mention Bug 147819342 here?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9833d716_7c9cd74a",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-02-17T19:39:16Z",
+      "side": 1,
+      "message": "Unset this \"local\" variable at the end of this file? (Likewise for other `my_*` variables.)",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bca401b_a890b5b3",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-02-17T19:39:16Z",
+      "side": 1,
+      "message": "Does this directory already exist? I thought host binaries were not stripped.",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 41
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2539daf5_73dcbb22",
+        "filename": "core/dex_preopt_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-02-17T19:39:16Z",
+      "side": 1,
+      "message": "Is there a distinction between stripped and unstripped Dex pre-opted image on host?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 104
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
