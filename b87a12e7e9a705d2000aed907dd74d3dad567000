@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b65a9f22_361385be",
+        "filename": "target/product/gsi/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-02-18T17:28:42Z",
+      "side": 1,
+      "message": "*.txt instead?",
+      "range": {
+        "startLine": 18,
+        "startChar": 9,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "b87a12e7e9a705d2000aed907dd74d3dad567000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
