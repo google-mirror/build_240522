@@ -300,9 +300,17 @@ class BuildInfo(object):
     if self._oem_props:
       assert oem_dicts, "OEM source required for this build"
 
+    self._exclude_system = self.info_dict.get("exclude_system") == "true"
     # These two should be computed only after setting self._oem_props.
     self._device = self.GetOemProperty("ro.product.device")
-    self._fingerprint = self.CalculateFingerprint()
+    if self._exclude_system:
+      self._fingerprint = self._fingerprint_of("vendor")
+    else:
+      self._fingerprint = self.CalculateFingerprint()
+
+  @property
+  def exclude_system(self):
+    return self._exclude_system
 
   @property
   def is_ab(self):
@@ -354,15 +362,23 @@ class BuildInfo(object):
   def items(self):
     return self.info_dict.items()
 
-  def GetBuildProp(self, prop):
+  def GetBuildProp(self, prop, alternate=None):
     """Returns the inquired build property."""
     if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
       return self._ResolveRoProductBuildProp(prop)
 
+    prop_dict = "build.prop"
+    if self.exclude_system:
+      prop_dict = "vendor.build.prop"
+      if prop.startswith("ro.build"):
+        prop = prop.replace("ro.build", "ro.vendor.build", 1)
+      if alternate:
+        prop = alternate
     try:
-      return self.info_dict.get("build.prop", {})[prop]
+      return self.info_dict.get(prop_dict, {})[prop]
     except KeyError:
-      raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+      raise common.ExternalError("couldn't find %s in %s" %
+        (prop, prop_dict))
 
   def _ResolveRoProductBuildProp(self, prop):
     """Resolves the inquired ro.product.* build property"""
@@ -879,7 +895,8 @@ def WriteFullOTAPackage(input_zip, output_file):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip)
+  if not target_info.exclude_system:
+    assert HasRecoveryPatch(input_zip)
 
   # Assertions (e.g. downgrade check, device properties check).
   ts = target_info.GetBuildProp("ro.build.date.utc")
@@ -968,7 +985,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
         "BlockDifference objects"
 
   progress_dict = dict()
-  block_diffs = [GetBlockDifference("system")]
+  block_diffs = []
+  if not target_info.exclude_system:
+    block_diffs.append(GetBlockDifference("system"))
   if HasVendorPartition(input_zip):
     block_diffs.append(GetBlockDifference("vendor"))
     progress_dict["vendor"] = 0.1
