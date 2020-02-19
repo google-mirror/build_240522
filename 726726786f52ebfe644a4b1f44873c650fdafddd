@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dce0f70f_15e174e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2020-02-19T15:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca1c719_c65d7806",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9833d716_7c9cd74a",
         "filename": "core/dex_preopt.mk",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd1cfdb5_940eba4a",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2020-02-19T15:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9833d716_7c9cd74a",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "403a08f3_d50b841a",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2020-02-19T15:38:02Z",
+      "side": 1,
+      "message": "I believe that core.oat is not stripped (regardless of architecture),\nand boot.oat is stripped (regardless of architecture).\nI think that is reasonable for consistency?",
+      "parentUuid": "4bca401b_a890b5b3",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 41
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2539daf5_73dcbb22",
         "filename": "core/dex_preopt_libart.mk",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b591a87_9698df87",
+        "filename": "core/dex_preopt_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2020-02-19T15:38:02Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "2539daf5_73dcbb22",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 104
+      },
+      "revId": "726726786f52ebfe644a4b1f44873c650fdafddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
