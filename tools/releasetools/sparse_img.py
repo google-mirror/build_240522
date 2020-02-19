@@ -251,6 +251,7 @@ class SparseImage(object):
       for line in f:
         fn, ranges_text = line.rstrip().split(None, 1)
         ranges = rangelib.RangeSet.parse(ranges_text)
+        ranges = ranges.subtract(rangelib.RangeSet("0"))
         ranges.extra['text_str'] = ranges_text
 
         if allow_shared_blocks:
