@@ -6,6 +6,10 @@ We've considered `BUILD_COPY_HEADERS`/`LOCAL_COPY_HEADERS` to be deprecated for
 a long time, and the places where it's been able to be used have shrinked over
 the last several releases. Equivalent functionality is not available in Soong.
 
+
+TEST CHANGE
+
+
 See the [build/soong/docs/best_practices.md#headers] for more information about
 how best to handle headers in Android.
 
