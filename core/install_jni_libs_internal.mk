@@ -12,9 +12,18 @@
 #   my_embedded_prebuilt_jni_libs, prebuilt jni libs embedded in prebuilt apk.
 #
 
+my_sdk_variant = $1
+ifneq (,$(and $(my_embed_jni),$(LOCAL_SDK_VERSION)))
+  # Soong produces $(lib).so in $(lib).sdk_intermediates so that the library
+  # has the correct name for embedding in an APK.  Append .sdk to the name
+  # of the intermediates directory, but not the .so name.
+  my_sdk_variant = $(if $(filter $(1),$(SOONG_SDK_VARIANT_MODULES)),$(1).sdk,$(1))
+endif
+
 my_jni_shared_libraries := $(strip \
-    $(foreach lib,$(LOCAL_JNI_SHARED_LIBRARIES), \
-      $(call intermediates-dir-for,SHARED_LIBRARIES,$(lib),,,$(my_2nd_arch_prefix))/$(lib).so))
+  $(foreach lib,$(LOCAL_JNI_SHARED_LIBRARIES), \
+    $(call intermediates-dir-for,SHARED_LIBRARIES,$(call my_sdk_variant,$(lib)),,,$(my_2nd_arch_prefix))/$(lib).so))
+
 
 # App-specific lib path.
 my_app_lib_path := $(dir $(LOCAL_INSTALLED_MODULE))lib/$(TARGET_$(my_2nd_arch_prefix)ARCH)
