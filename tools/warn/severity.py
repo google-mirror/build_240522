@@ -20,16 +20,18 @@ This file stores definition for class Severity that is used in warn_patterns.
 
 
 # pylint:disable=old-style-class
+class SeverityInfo:
+
+  def __init__(self, value, color, column_header, header):
+    self.value = value
+    self.color = color
+    self.column_header = column_header
+    self.header = header
+
+
+# pylint:disable=old-style-class
 class Severity:
   """Class of Severity levels where each level is a SeverityInfo."""
-
-  class SeverityInfo:
-
-    def __init__(self, value, color, column_header, header):
-      self.value = value
-      self.color = color
-      self.column_header = column_header
-      self.header = header
 
   # SEVERITY_UNKNOWN should never occur since every warn_pattern listed has
   # a specified severity. It exists for protobuf, the other values must
