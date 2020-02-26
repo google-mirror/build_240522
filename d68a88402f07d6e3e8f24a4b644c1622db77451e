@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb8297a2_4c856cb3",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2020-02-26T18:02:20Z",
+      "side": 1,
+      "message": "I\u0027ll have to admit I\u0027m being too OCD here, but could we get this string from $(BUILD_NUMBER_FILE) instead? Like, checking it\u0027s prefixed with $(SOONG_OUT_DIR) first and then remove it from the var?",
+      "range": {
+        "startLine": 28,
+        "startChar": 57,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "d68a88402f07d6e3e8f24a4b644c1622db77451e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
