@@ -46,6 +46,30 @@
       "revId": "d68a88402f07d6e3e8f24a4b644c1622db77451e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee728119_1397fa6a",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060667
+      },
+      "writtenOn": "2020-02-26T21:30:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "83093b4d_df29c3c3",
+      "range": {
+        "startLine": 28,
+        "startChar": 57,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "d68a88402f07d6e3e8f24a4b644c1622db77451e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
