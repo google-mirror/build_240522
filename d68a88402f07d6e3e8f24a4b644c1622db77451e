@@ -22,6 +22,30 @@
       "revId": "d68a88402f07d6e3e8f24a4b644c1622db77451e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83093b4d_df29c3c3",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-02-26T21:27:28Z",
+      "side": 1,
+      "message": "$(BUILD_NUMBER_FILE) is deliberately marked .KATI_OBSOLETE_VAR so that it can\u0027t be read.  That prevents random makefiles from incorrectly depending on the file (which they used to do), which would cause them to rebuild on every incremental build.\n\nI used build_number.txt here instead of $(SOONG_OUT_DIR)/build_number.txt because Soong prefers to construct output paths from the name and not the full path.  I would have preferred to use $(patsubst $(SOONG_OUT_DIR)/%,%,$(BUILD_NUMBER_FILE)), but couldn\u0027t because of the .KATI_OBSOLETE_VAR issue.",
+      "parentUuid": "bb8297a2_4c856cb3",
+      "range": {
+        "startLine": 28,
+        "startChar": 57,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "d68a88402f07d6e3e8f24a4b644c1622db77451e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
