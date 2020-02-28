@@ -1,0 +1,8 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Ready+1: Chih-hung Hsieh <chh@google.com>
+Code-Review+2: Caroline Tice <cmtice@google.com>
+Submitted-by: Chih-hung Hsieh <chh@google.com>
+Submitted-at: Fri, 28 Feb 2020 01:30:10 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1245831
+Project: platform/build
+Branch: refs/heads/master
