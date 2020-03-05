@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "b818f78f_24e40cb8",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-03-05T23:25:07Z",
+      "side": 1,
+      "message": "s/FLAG/RBE and retest?",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 42
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "028b332c_81ce8b8c",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-03-05T23:25:07Z",
+      "side": 1,
+      "message": "That\u0027s the default.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "55284593_c81a9554",
         "filename": "rbesetup.sh",
         "patchSetId": 2
@@ -41,6 +87,52 @@
         "startChar": 1,
         "endLine": 15,
         "endChar": 25
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "675abd32_6f5650ac",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-03-05T23:25:07Z",
+      "side": 1,
+      "message": "This is for dumpstats not for running the build.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 30
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f0211bf_684bfbce",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1465028
+      },
+      "writtenOn": "2020-03-05T23:25:07Z",
+      "side": 1,
+      "message": "This won\u0027t work. --exec_strategy will override in the mk file. Use RBE_CXX_EXEC_STRATEGY instead.",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 20
       },
       "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
