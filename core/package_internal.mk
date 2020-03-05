@@ -105,14 +105,12 @@ ifneq (,$(filter *, $(PRODUCT_ENFORCE_RRO_TARGETS)))
   # Note that base_rules.mk has not yet been included, so it's likely that only
   # one of LOCAL_MODULE_PATH and the LOCAL_X_MODULE flags has been set.
   ifeq (,$(LOCAL_MODULE_PATH))
-    non_system_module := $(filter true,\
+    enforce_rro_enabled := $(if $(filter true,\
         $(LOCAL_ODM_MODULE) \
         $(LOCAL_OEM_MODULE) \
         $(LOCAL_PRODUCT_MODULE) \
-        $(LOCAL_SYSTEM_EXT_MODULE) \
         $(LOCAL_PROPRIETARY_MODULE) \
-        $(LOCAL_VENDOR_MODULE))
-    enforce_rro_enabled := $(if $(non_system_module),,true)
+        $(LOCAL_VENDOR_MODULE)),,true)
   else ifneq ($(filter $(TARGET_OUT)/%,$(LOCAL_MODULE_PATH)),)
     enforce_rro_enabled := true
   endif
