@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c05e15a1_1ed74b61",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-03-05T23:15:44Z",
+      "side": 1,
+      "message": "should these be using local?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 2
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55284593_c81a9554",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-03-05T23:15:44Z",
+      "side": 1,
+      "message": "$PWD isn\u0027t necessary the top of the source tree for things like `m`. The envsetup functions use `$(gettop)`",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 25
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
