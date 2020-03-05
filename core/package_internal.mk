@@ -100,24 +100,28 @@ include $(BUILD_SYSTEM)/support_libraries.mk
 # Determine whether auto-RRO is enabled for this package.
 enforce_rro_enabled :=
 ifneq (,$(filter *, $(PRODUCT_ENFORCE_RRO_TARGETS)))
-  # * means all system APKs, so enable conditionally based on module path.
+  # * means all system and system_ext APKs, so enable conditionally based on module path.
 
   # Note that base_rules.mk has not yet been included, so it's likely that only
   # one of LOCAL_MODULE_PATH and the LOCAL_X_MODULE flags has been set.
   ifeq (,$(LOCAL_MODULE_PATH))
-    non_system_module := $(filter true,\
+    enforce_rro_enabled := $(if $(filter true,\
         $(LOCAL_ODM_MODULE) \
         $(LOCAL_OEM_MODULE) \
         $(LOCAL_PRODUCT_MODULE) \
-        $(LOCAL_SYSTEM_EXT_MODULE) \
         $(LOCAL_PROPRIETARY_MODULE) \
-        $(LOCAL_VENDOR_MODULE))
-    enforce_rro_enabled := $(if $(non_system_module),,true)
+        $(LOCAL_VENDOR_MODULE)),,true)
   else ifneq ($(filter $(TARGET_OUT)/%,$(LOCAL_MODULE_PATH)),)
     enforce_rro_enabled := true
   endif
 else ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(PRODUCT_ENFORCE_RRO_TARGETS)))
   enforce_rro_enabled := true
+endif
+# TODO(b/132777202): Settings depends on static overlay mechanism even though it is installed in system_ext
+# Clean it after moving resources in Settings
+_exempted_rro_package := Settings
+ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(_exempted_rro_package)))
+  enforce_rro_enabled :=
 endif
 
 product_package_overlays := $(strip \
