@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "dbed8bc7_81f8c5b0",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453040
+      },
+      "writtenOn": "2020-03-05T23:55:39Z",
+      "side": 1,
+      "message": "Include \"source envsetup.sh\" to eliminate running one command.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c05e15a1_1ed74b61",
         "filename": "rbesetup.sh",
         "patchSetId": 2
