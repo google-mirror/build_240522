@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd919cd4_47866f82",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbed8bc7_81f8c5b0",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c05e15a1_1ed74b61",
         "filename": "rbesetup.sh",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a1113cf_1a3dcdf9",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c05e15a1_1ed74b61",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 2
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5dd4ecec_b63fcee9",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "I think re-wrapper flags don\u0027t work with \"FLAG_\" since its not whitelisted in ninja. I\u0027ve converted rest of the flags to RBE_.",
+      "parentUuid": "b818f78f_24e40cb8",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 42
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "028b332c_81ce8b8c",
         "filename": "rbesetup.sh",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26195597_b5b816e2",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "028b332c_81ce8b8c",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "e8855bfb_749208a2",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55284593_c81a9554",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 25
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "675abd32_6f5650ac",
         "filename": "rbesetup.sh",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "8f22d00e_1312cd3d",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "675abd32_6f5650ac",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 30
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f0211bf_684bfbce",
         "filename": "rbesetup.sh",
         "patchSetId": 2
@@ -160,6 +304,30 @@
       "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3946cb50_bc7643a0",
+        "filename": "rbesetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-03-06T01:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f0211bf_684bfbce",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "a130b11b509f5a58f0039adb98de31b1e623bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
