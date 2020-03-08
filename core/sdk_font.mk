@@ -8,10 +8,7 @@
 
 
 # The script that renames the font.
-sdk_font_rename_script := frameworks/layoutlib/rename_font/build_font_single.py
-
-# Location of the fonttools library that the above script depends on.
-fonttools_lib := external/fonttools/Lib
+sdk_font_rename_script := $(HOST_OUT_EXECUTABLES)/rename_font
 
 # A temporary location to store the renamed fonts. atree picks all files in
 # this directory and bundles it with the SDK.
@@ -30,16 +27,13 @@ $(sdk_font_config): $(SDK_FONT_TEMP)/%.xml: \
 sdk_fonts_device := $(filter $(TARGET_OUT)/fonts/%.ttf, $(INTERNAL_SYSTEMIMAGE_FILES))
 sdk_fonts_device := $(addprefix $(SDK_FONT_TEMP)/, $(notdir $(sdk_fonts_device)))
 
-# Macro to rename the font.
-sdk_rename_font = PYTHONPATH=$$PYTHONPATH:$(fonttools_lib) $(sdk_font_rename_script) \
-	    $1 $2
-
 # TODO: If the font file is a symlink, reuse the font renamed from the symlink
 # target.
+$(sdk_fonts_device): PRIVATE_SCRIPT := $(sdk_font_rename_script)
 $(sdk_fonts_device): $(SDK_FONT_TEMP)/%.ttf: $(TARGET_OUT)/fonts/%.ttf \
 			$(sdk_font_rename_script)
 	$(hide) mkdir -p $(dir $@)
-	$(hide) $(call sdk_rename_font,$<,$@)
+	$(hide) $(PRIVATE_SCRIPT) $< $@
 
 # List of all dependencies - all fonts and configuration files.
 SDK_FONT_DEPS := $(sdk_fonts_device) $(sdk_font_config)
@@ -52,9 +46,10 @@ define sdk-extra-font-rule
 fontfullname := $$(SDK_FONT_TEMP)/$1
 ifeq ($$(filter $$(fontfullname),$$(sdk_fonts_device)),)
 SDK_FONT_DEPS += $$(fontfullname)
+$$(fontfullname): PRIVATE_SCRIPT := $(sdk_font_rename_script)
 $$(fontfullname): $2 $$(sdk_font_rename_script)
 	$$(hide) mkdir -p $$(dir $$@)
-	$$(hide) $$(call sdk_rename_font,$$<,$$@)
+	$$(hide) $$(PRIVATE_SCRIPT) $$< $$@
 endif
 fontfullname :=
 endef
