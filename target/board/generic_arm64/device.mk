@@ -21,8 +21,12 @@ else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
+BOARD_KERNEL_BINARIES := kernel kernel-gz
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    device/google/cuttlefish_kernel/5.4-arm64/kernel:kernel \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-gz:kernel-gz
+
+PRODUCT_BUILD_VBMETA_IMAGE := false
 
 # Adjust the Dalvik heap to be appropriate for a tablet.
 $(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)
