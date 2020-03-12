@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d94754a2_d2762403",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-03-12T07:41:47Z",
+      "side": 1,
+      "message": "should I use the build.incremental from system image here?",
+      "range": {
+        "startLine": 944,
+        "startChar": 40,
+        "endLine": 944,
+        "endChar": 47
+      },
+      "revId": "ca6e27aa3175663fdc89c41eb05eaa691393f314",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecc5d1c8_b793c8e6",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1414,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-03-12T07:41:47Z",
+      "side": 1,
+      "message": "I wonder if the server is always available for testing(e.g. presubmit). Is there any quick indication to skip the test?",
+      "range": {
+        "startLine": 1414,
+        "startChar": 34,
+        "endLine": 1414,
+        "endChar": 72
+      },
+      "revId": "ca6e27aa3175663fdc89c41eb05eaa691393f314",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
