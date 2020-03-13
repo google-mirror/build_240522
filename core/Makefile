@@ -3808,19 +3808,28 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
 check_vintf_compatible_args += --property ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
 endif # PRODUCT_SHIPPING_API_LEVEL
 
+ifneq (,$(filter EMPTY_ODM_SKU_PLACEHOLDER,$(ODM_MANIFEST_SKUS)))
+$(error EMPTY_ODM_SKU_PLACEHOLDER is an internal variable and cannot be used for ODM_MANIFEST_SKUS)
+endif
+ifneq (,$(filter EMPTY_VENDOR_SKU_PLACEHOLDER,$(DEVICE_MANIFEST_SKUS)))
+$(error EMPTY_VENDOR_SKU_PLACEHOLDER is an internal variable and cannot be used for DEIVCE_MANIFEST_SKUS)
+endif
+
 $(check_vintf_compatible_log): PRIVATE_CHECK_VINTF_ARGS := $(check_vintf_compatible_args)
 $(check_vintf_compatible_log): PRIVATE_CHECK_VINTF_DEPS := $(check_vintf_compatible_deps)
+$(check_vintf_compatible_log): PRIVATE_ODM_SKUS := $(ODM_MANIFEST_SKUS) $(if $(ODM_MANIFEST_FILES),EMPTY_ODM_SKU_PLACEHOLDER)
+$(check_vintf_compatible_log): PRIVATE_VENDOR_SKUS := $(DEVICE_MANIFEST_SKUS) $(if $(DEVICE_MANIFEST_FILE),EMPTY_VENDOR_SKU_PLACEHOLDER)
 $(check_vintf_compatible_log): $(HOST_OUT_EXECUTABLES)/checkvintf $(check_vintf_compatible_deps)
 	@echo -n -e 'Deps: \n  ' > $@
 	@sed 's/ /\n  /g' <<< "$(PRIVATE_CHECK_VINTF_DEPS)" >> $@
 	@echo -n -e 'Args: \n  ' >> $@
 	@cat <<< "$(PRIVATE_CHECK_VINTF_ARGS)" >> $@
-	@echo -n -e 'For empty SKU:' >> $@
-	@( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) >> $@ 2>&1 ) || ( cat $@ && exit 1 )
-	$(foreach sku,$(ODM_MANIFEST_SKUS), \
-	  echo "For SKU = $(sku):" >> $@; \
+	$(foreach odm_sku,$(PRIVATE_ODM_SKUS), $(foreach vendor_sku,$(PRIVATE_VENDOR_SKUS), \
+	  echo "For ODM SKU = $(odm_sku), vendor SKU = $(vendor_sku)" >> $@; \
 	  ( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) \
-	      --property ro.boot.product.hardware.sku=$(sku) >> $@ 2>&1 ) || ( cat $@ && exit 1 ); )
+	       --property ro.boot.product.hardware.sku=$(filter-out EMPTY_ODM_SKU_PLACEHOLDER,$(odm_sku)) \
+	       --property ro.boot.product.vendor.sku=$(filter-out EMPTY_VENDOR_SKU_PLACEHOLDER,$(vendor_sku)) \
+	       >> $@ 2>&1 ) || (cat $@ && exit 1); ))
 
 check_vintf_compatible_log :=
 check_vintf_compatible_args :=
@@ -4218,6 +4227,15 @@ ifeq ($(PRODUCT_ENFORCE_VINTF_MANIFEST),true)
 endif
 ifdef ODM_MANIFEST_SKUS
 	$(hide) echo "vintf_odm_manifest_skus=$(ODM_MANIFEST_SKUS)" >> $@
+endif
+ifdef ODM_MANIFEST_FILES
+	$(hide) echo "vintf_include_empty_odm_sku=true" >> $@
+endif
+ifdef DEVICE_MANIFEST_SKUS
+	$(hide) echo "vintf_vendor_manifest_skus=$(DEVICE_MANIFEST_SKUS)" >> $@
+endif
+ifdef DEVICE_MANIFEST_FILE
+	$(hide) echo "vintf_include_empty_vendor_sku=true" >> $@
 endif
 
 .PHONY: misc_info
