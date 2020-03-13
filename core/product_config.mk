@@ -195,7 +195,6 @@ ifeq ($(EMMA_INSTRUMENT),true)
       $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
-
 ############################################################################
 # Strip and assign the PRODUCT_ variables.
 $(call strip-product-vars)
@@ -227,6 +226,9 @@ PRODUCT_AAPT_CONFIG := $(PRODUCT_LOCALES) $(PRODUCT_AAPT_CONFIG)
 # Keep a copy of the space-separated config
 PRODUCT_AAPT_CONFIG_SP := $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG := $(subst $(space),$(comma),$(PRODUCT_AAPT_CONFIG))
+
+# Extra boot jars must be appended at the end after common boot jars.
+PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 
 ifndef PRODUCT_SYSTEM_NAME
   PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
