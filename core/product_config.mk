@@ -196,6 +196,9 @@ ifeq ($(EMMA_INSTRUMENT),true)
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 
+# Extra boot jars must be appended at the end after common boot jars.
+PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BOOT_JARS += $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_APPEND_BOOT_JARS)
+
 ############################################################################
 # Strip and assign the PRODUCT_ variables.
 $(call strip-product-vars)
