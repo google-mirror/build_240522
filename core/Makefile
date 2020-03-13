@@ -3777,9 +3777,19 @@ $(check_vintf_compatible_log): $(HOST_OUT_EXECUTABLES)/checkvintf $(check_vintf_
 	@echo -n -e 'For empty SKU:' >> $@
 	@( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) >> $@ 2>&1 ) || ( cat $@ && exit 1 )
 	$(foreach sku,$(ODM_MANIFEST_SKUS), \
-	  echo "For SKU = $(sku):" >> $@; \
+	  echo "For ODM SKU = $(sku):" >> $@; \
 	  ( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) \
 	      --property ro.boot.product.hardware.sku=$(sku) >> $@ 2>&1 ) || ( cat $@ && exit 1 ); )
+	$(foreach vendor_sku,$(DEVICE_MANIFEST_SKUS), \
+	  echo "For vendor SKU = $(vendor_sku):" >> $@; \
+	  ( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) \
+	      --property ro.boot.product.vendor.sku=$(vendor_sku) >> $@ 2>&1 ) || ( cat $@ && exit 1 ); )
+	$(foreach sku,$(ODM_MANIFEST_SKUS), $(foreach vendor_sku,$(DEVICE_MANIFEST_SKUS), \
+	  echo "For ODM SKU = $(sku), vendor SKU = $(vendor_sku):" >> $@; \
+	  ( $< --check-compat $(PRIVATE_CHECK_VINTF_ARGS) \
+	      --property ro.boot.product.hardware.sku=$(sku) \
+	      --property ro.boot.product.vendor.sku=$(vendor_sku) \
+	      >> $@ 2>&1 ) || ( cat $@ && exit 1 ); ))
 
 check_vintf_compatible_log :=
 check_vintf_compatible_args :=
@@ -4177,6 +4187,9 @@ ifeq ($(PRODUCT_ENFORCE_VINTF_MANIFEST),true)
 endif
 ifdef ODM_MANIFEST_SKUS
 	$(hide) echo "vintf_odm_manifest_skus=$(ODM_MANIFEST_SKUS)" >> $@
+endif
+ifdef DEVICE_MANIFEST_SKUS
+	$(hide) echo "vintf_vendor_manifest_skus=$(DEVICE_MANIFEST_SKUS)" >> $@
 endif
 
 .PHONY: misc_info
