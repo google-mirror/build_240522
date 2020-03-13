@@ -216,6 +216,7 @@ _product_list_vars += PRODUCT_VENDOR_KERNEL_HEADERS
 
 # A list of module names of BOOTCLASSPATH (jar files)
 _product_list_vars += PRODUCT_BOOT_JARS
+_product_list_vars += PRODUCT_APPEND_BOOT_JARS
 _product_list_vars += PRODUCT_SUPPORTS_BOOT_SIGNER
 _product_list_vars += PRODUCT_SUPPORTS_VBOOT
 _product_list_vars += PRODUCT_SUPPORTS_VERITY
