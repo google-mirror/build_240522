@@ -37,6 +37,15 @@ $(if $(filter true,$(BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES)),, \
                 $(TARGET_COPY_OUT_ODM)/etc/manifest%,$(2)), \
     $(error VINTF metadata found in PRODUCT_COPY_FILES: $(1), \
       use ODM_MANIFEST_FILES / vintf_fragments instead!)) \
+) \
+$(if $(filter true,$(BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES)),, \
+  $(if $(filter bin lib lib64, $(subst /, ,$(2))), \
+    $(eval private_src := $(call word-colon,1,$(1))) \
+    $(eval private_is_elf := \
+      $(shell if $(LLVM_READOBJ) -h $(private_src) >/dev/null 2>&1; then echo true; fi)) \
+    $(if $(filter true,$(private_is_elf)), \
+      $(eval product_copy_files_elf_prebuilts += $(1))) \
+  ) \
 )
 endef
 # filter out the duplicate <source file>:<dest file> pairs.
@@ -46,6 +55,7 @@ $(foreach cf,$(PRODUCT_COPY_FILES), \
         $(eval unique_product_copy_files_pairs += $(cf))))
 unique_product_copy_files_destinations :=
 product_copy_files_ignored :=
+product_copy_files_elf_prebuilts :=
 $(foreach cf,$(unique_product_copy_files_pairs), \
     $(eval _src := $(call word-colon,1,$(cf))) \
     $(eval _dest := $(call word-colon,2,$(cf))) \
@@ -70,8 +80,15 @@ $(pcf_ignored_file):
 
 $(call dist-for-goals,droidcore,$(pcf_ignored_file):logs/$(notdir $(pcf_ignored_file)))
 
+# TODO(yochiang): Remove PRODUCT_CHECK_ELF_PREBUILT_PRODUCT_COPY_FILES when there is no error
+ifeq (true,$(filter true,$(PRODUCT_CHECK_ELF_PREBUILT_PRODUCT_COPY_FILES)))
+$(call maybe-print-list-and-error,$(product_copy_files_elf_prebuilts), \
+  ELF prebuilts found in PRODUCT_COPY_FILES)
+endif
+
 pcf_ignored_file :=
 product_copy_files_ignored :=
+product_copy_files_elf_prebuilts :=
 unique_product_copy_files_pairs :=
 unique_product_copy_files_destinations :=
 
