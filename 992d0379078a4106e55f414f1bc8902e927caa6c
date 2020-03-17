@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c55ca09a_20dbd5b3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-03-17T13:36:31Z",
+      "side": 1,
+      "message": "$(space)",
+      "range": {
+        "startLine": 42,
+        "startChar": 41,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "992d0379078a4106e55f414f1bc8902e927caa6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c44a443d_61e56c63",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-03-17T13:36:31Z",
+      "side": 1,
+      "message": "I thought executing a shell program during parsing is not a good practice...\n\nDan could chime in here.",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 88
+      },
+      "revId": "992d0379078a4106e55f414f1bc8902e927caa6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
