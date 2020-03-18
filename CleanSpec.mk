@@ -713,6 +713,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.apex.cts.sh
 $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_recovery*" -print0 | xargs -0 rm -rf)
 $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_vendor*" -print0 | xargs -0 rm -rf)
 
+# Soong prebuilt module definition change, remove obsolete intermediates
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
