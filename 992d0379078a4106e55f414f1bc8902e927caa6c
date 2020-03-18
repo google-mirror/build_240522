@@ -69,6 +69,30 @@
       "revId": "992d0379078a4106e55f414f1bc8902e927caa6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4107e53e_74d472d4",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-03-18T08:28:47Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s what I am seeing now. Most of the current uses of $(shell) seems to be about finding files, not performing a check like this.",
+      "parentUuid": "3ba8865a_7df6bff8",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 88
+      },
+      "revId": "992d0379078a4106e55f414f1bc8902e927caa6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
