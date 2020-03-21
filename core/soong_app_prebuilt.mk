@@ -12,6 +12,9 @@
 # LOCAL_SOONG_JNI_LIBS_$(TARGET_ARCH)
 # LOCAL_SOONG_JNI_LIBS_$(TARGET_2ND_ARCH)
 
+# Input variables:
+#   partition_tag (from base_rules.mk)
+
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   $(call pretty-error,soong_app_prebuilt.mk may only be used from Soong)
 endif
@@ -156,6 +159,9 @@ else ifneq ($(LOCAL_CERTIFICATE),)
 endif
 include $(BUILD_SYSTEM)/app_certificate_validate.mk
 PACKAGES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
+
+# Set a partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(partition_tag)
 
 ifdef LOCAL_SOONG_BUNDLE
   ALL_MODULES.$(LOCAL_MODULE).BUNDLE := $(LOCAL_SOONG_BUNDLE)
