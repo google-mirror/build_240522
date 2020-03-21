@@ -1,0 +1,6 @@
+name="TestSystem1.apk" certificate="build/make/target/product/security/testkey.x509.pem" private_key="build/make/target/product/security/testkey.pk8"
+name="TestSystem2.apk" certificate="build/make/target/product/security/testkey.x509.pem" private_key="build/make/target/product/security/testkey.pk8" partition="_SYSTEM"
+name="TestVendor.apk" certificate="not_selected" private_key="not_selected" partition="_VENDOR"
+name="TestOdm.apk" certificate="not_selected" private_key="not_selected" partition="_ODM"
+name="TestProduct.apk" certificate="build/make/target/product/security/testkey.x509.pem" private_key="build/make/target/product/security/testkey.pk8" partition="_PRODUCT"
+name="TestSystemExt.apk" certificate="build/make/target/product/security/testkey.x509.pem" private_key="build/make/target/product/security/testkey.pk8" partition="_SYSTEM_EXT"
