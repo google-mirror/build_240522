@@ -208,23 +208,31 @@ my_module_path := $(patsubst %/,%,$(my_module_path))
 my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
 ifdef LOCAL_IS_HOST_MODULE
   partition_tag :=
+  actual_partition_tag :=
 else
 ifeq (true,$(strip $(LOCAL_VENDOR_MODULE)))
   partition_tag := _VENDOR
+  actual_partition_tag := $(if $(filter true,$(BOARD_USES_VENDORIMAGE)),$(partition_tag),system)
 else ifeq (true,$(strip $(LOCAL_OEM_MODULE)))
   partition_tag := _OEM
+  actual_partition_tag := $(partition_tag)
 else ifeq (true,$(strip $(LOCAL_ODM_MODULE)))
   partition_tag := _ODM
+  actual_partition_tag := $(partition_tag)
 else ifeq (true,$(strip $(LOCAL_PRODUCT_MODULE)))
   partition_tag := _PRODUCT
+  actual_partition_tag := $(if $(filter true,$(BOARD_USES_PRODUCTIMAGE)),$(partition_tag),system)
 else ifeq (true,$(strip $(LOCAL_SYSTEM_EXT_MODULE)))
   partition_tag := _SYSTEM_EXT
+  actual_partition_tag := $(if $(filter true,$(BOARD_USES_SYSTEM_EXTIMAGE)),$(partition_tag),system)
 else ifeq (NATIVE_TESTS,$(LOCAL_MODULE_CLASS))
   partition_tag := _DATA
+  actual_partition_tag := $(partition_tag)
 else
   # The definition of should-install-to-system will be different depending
   # on which goal (e.g., sdk or just droid) is being built.
   partition_tag := $(if $(call should-install-to-system,$(my_module_tags)),,_DATA)
+  actual_partition_tag := $(partition_tag)
 endif
 endif
 # For test modules that lack a suite tag, set null-suite as the default.
