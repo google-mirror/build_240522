@@ -25,6 +25,9 @@
 ## be set for you.
 ###########################################################
 
+# Input variables:
+#   partition_tag (from base_rules.mk)
+
 LOCAL_PACKAGE_NAME := $(strip $(LOCAL_PACKAGE_NAME))
 ifeq ($(LOCAL_PACKAGE_NAME),)
 $(error $(LOCAL_PATH): Package modules must define LOCAL_PACKAGE_NAME)
@@ -470,6 +473,9 @@ PACKAGES.$(LOCAL_PACKAGE_NAME).CERTIFICATE := $(certificate)
 
 $(LOCAL_BUILT_MODULE): $(additional_certificates)
 $(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_CERTIFICATES := $(additional_certificates)
+
+# Set a partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(partition_tag)
 
 # Verify LOCAL_USES_LIBRARIES/LOCAL_OPTIONAL_USES_LIBRARIES
 # If LOCAL_ENFORCE_USES_LIBRARIES is not set, default to true if either of LOCAL_USES_LIBRARIES or

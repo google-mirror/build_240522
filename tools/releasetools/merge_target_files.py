@@ -79,6 +79,7 @@ from __future__ import print_function
 import fnmatch
 import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -108,6 +109,38 @@ OPTIONS.output_super_empty = None
 # TODO(b/132730255): Remove this option.
 OPTIONS.rebuild_recovery = False
 OPTIONS.keep_tmp = False
+
+# TODO(bpeckham): Decide if this should be configurable. As part of the
+# prototype, hardcode the partitions that fall into the vendor bucket.
+
+# Framework
+# * product
+# * system
+# * system_ext
+
+# Vendor
+# * data
+# * odm
+# * oem
+# * vendor
+
+DEFAULT_VENDOR_PARTITONS = ('data', 'odm', 'oem', 'vendor')
+
+# In an item list (framework or vendor), we may see entries that select whole
+# partitions. Such an entry might look like this 'SYSTEM/*' (e.g., for the
+# system partition). The following regex matches this and extracts the
+# partition name.
+
+PARTITION_ITEM_PATTERN = re.compile('^([A-Z_]+)/\*$')
+
+# In apexkeys.txt or apkcerts.txt, we may find partition tags on the various
+# entries in the file. We use these partition tags to filter the entries in
+# those files from the two different target files packages to produce a merged
+# apexkeys.txt or apkcerts.txt file. A partition tag (e.g., for the product
+# partition) looks like this: 'partition="_PRODUCT"' or 'partition="product".
+# We use the group syntax grab the value of the tag.
+
+PARTITION_TAG_PATTERN = re.compile('partition="(.*)"')
 
 # DEFAULT_FRAMEWORK_ITEM_LIST is a list of items to extract from the partial
 # framework target files package as is, meaning these items will land in the
@@ -484,6 +517,26 @@ def process_dynamic_partitions_info_txt(framework_target_files_dir,
       path=output_dynamic_partitions_info_txt)
 
 
+def extract_partition_tag_from_input(pattern, input, default):
+  match = pattern.search(input)
+
+  if not match:
+    return default
+
+  return match.group(1).strip('_').lower()
+
+
+def item_list_to_partition_list(item_list):
+  partition_list = []
+
+  for item in item_list:
+    partition_tag = extract_partition_tag_from_input(PARTITION_ITEM_PATTERN, item.strip(), None)
+    if partition_tag:
+      partition_list.append(partition_tag)
+
+  return partition_list
+
+
 def process_apex_keys_apk_certs_common(framework_target_files_dir,
                                        vendor_target_files_dir,
                                        output_target_files_dir, file_name):
@@ -517,16 +570,30 @@ def process_apex_keys_apk_certs_common(framework_target_files_dir,
 
   framework_dict = read_helper(framework_target_files_dir)
   vendor_dict = read_helper(vendor_target_files_dir)
+  merged_dict = {}
+
+  def add_to_merged_dict(key, value):
+    if key in merged_dict:
+      raise ValueError('Duplicate key %s' % key)
+    merged_dict[key] = value
 
   for key in framework_dict:
-    if key in vendor_dict and vendor_dict[key] != framework_dict[key]:
-      raise ValueError('Conflicting entries found in %s:\n %s and\n %s' %
-                       (file_name, framework_dict[key], vendor_dict[key]))
-    vendor_dict[key] = framework_dict[key]
+    value = framework_dict[key]
+    partition_tag = extract_partition_tag_from_input(PARTITION_TAG_PATTERN, value, "system")
+
+    if partition_tag not in DEFAULT_VENDOR_PARTITONS:
+      add_to_merged_dict(key, value)
+
+  for key in vendor_dict:
+    value = vendor_dict[key]
+    partition_tag = extract_partition_tag_from_input(PARTITION_TAG_PATTERN, value, "system")
+
+    if partition_tag in DEFAULT_VENDOR_PARTITONS:
+      add_to_merged_dict(key, value)
 
   output_file = os.path.join(output_target_files_dir, 'META', file_name)
 
-  write_sorted_data(data=vendor_dict.values(), path=output_file)
+  write_sorted_data(data=merged_dict.values(), path=output_file)
 
 
 def copy_file_contexts(framework_target_files_dir, vendor_target_files_dir,
@@ -1045,6 +1112,9 @@ def main():
       framework_misc_info_keys=framework_misc_info_keys,
       vendor_item_list=vendor_item_list):
     sys.exit(1)
+
+  framework_partition_list = item_list_to_partition_list(framework_item_list)
+  vendor_partition_list = item_list_to_partition_list(vendor_item_list)
 
   call_func_with_temp_dir(
       lambda temp_dir: merge_target_files(
