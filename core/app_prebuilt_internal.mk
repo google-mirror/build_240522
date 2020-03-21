@@ -18,6 +18,9 @@
 # Internal build rules for APPS prebuilt modules
 ############################################################
 
+# Input variables:
+#   actual_partition_tag (from base_rules.mk)
+
 ifneq (APPS,$(LOCAL_MODULE_CLASS))
 $(call pretty-error,app_prebuilt_internal.mk is for APPS modules only)
 endif
@@ -166,6 +169,9 @@ else
 endif
 
 include $(BUILD_SYSTEM)/app_certificate_validate.mk
+
+# Set a actual_partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(actual_partition_tag)
 
 # Disable dex-preopt of prebuilts to save space, if requested.
 ifndef LOCAL_DEX_PREOPT
