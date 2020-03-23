@@ -143,6 +143,18 @@ class ApexApkSigner(object):
     for filename in arguments_dict.values():
       assert os.path.exists(filename), 'file {} not found'.format(filename)
 
+    package_name_extract_cmd = ['aapt', 'dump', 'badging', self.apex_path]
+    output = common.RunAndCheckOutput(package_name_extract_cmd)
+    for line in output.splitlines():
+      # Sample output from aapt: "package: name='com.google.android.wifi'
+      # versionCode='1' versionName='' platformBuildVersionName='R'
+      # compileSdkVersion='29' compileSdkVersionCodename='R'"
+      match = re.search(r"^package:.* name='([\w|\.]+)'", line, re.IGNORECASE)
+      if match:
+        package_name = match.group(1)
+    assert package_name, 'package name not found in {}'.format(self.apex_path)
+    arguments_dict['override_apk_package_name'] = package_name
+
     # The repack process will add back these files later in the payload image.
     for name in ['apex_manifest.pb', 'apex_manifest.json', 'lost+found']:
       path = os.path.join(payload_dir, name)
