@@ -22,6 +22,30 @@
       "revId": "07c20355acc389316d8f1402266730cd9231d295",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96f5829e_b7f41db4",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-03-23T17:47:10Z",
+      "side": 0,
+      "message": "Thanks for spotting this! See the related CL in ART.",
+      "parentUuid": "f169999a_5c2e09eb",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 14
+      },
+      "revId": "07c20355acc389316d8f1402266730cd9231d295",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
