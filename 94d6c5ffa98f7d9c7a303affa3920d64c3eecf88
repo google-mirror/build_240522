@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002077412",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1264087?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "80cb0497_e1b56df2",
+          "description": "Change to \"tools/releasetools/merge_target_files.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/merge_target_files.py",
+              "range": {
+                "startLine": 508,
+                "startChar": 2,
+                "endLine": 508,
+                "endChar": 11
+              },
+              "replacement": "structured"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "31d4269f_5b8f71dd",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-23T22:11:35Z",
+      "side": 1,
+      "message": "Common typo found: \"strutured\" -- should it be \"structured\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 508,
+        "startChar": 2,
+        "endLine": 508,
+        "endChar": 11
+      },
+      "revId": "94d6c5ffa98f7d9c7a303affa3920d64c3eecf88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
