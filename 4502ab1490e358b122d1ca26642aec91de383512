@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b222d89c_ac4b86cc",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-03-24T10:04:58Z",
+      "side": 1,
+      "message": "I\u0027d rename the new variable to PRODUCT_BOOT_JARS_EXTRA (just to keep the common PRODUCT_BOOT_JARS prefix --- it\u0027s easier to grep).\n\nAlso, please add a comment explaining why we need this variable, something like:\n\n  # A list of extra BOOTCLASSPATH jars (to be appended after common jars).\n  # Products that include device-specific makefiles before AOSP makefiles should use this\n  # instead of PRODUCT_BOOT_JARS, so that device-specific jars go after common jars.",
+      "range": {
+        "startLine": 219,
+        "startChar": 22,
+        "endLine": 219,
+        "endChar": 46
+      },
+      "revId": "4502ab1490e358b122d1ca26642aec91de383512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34964987_7bc68eeb",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-03-24T10:04:58Z",
+      "side": 1,
+      "message": "Please add a newline and a short comment, something like \"Extra boot jars must be appended at the end after common boot jars.\".",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 106
+      },
+      "revId": "4502ab1490e358b122d1ca26642aec91de383512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
