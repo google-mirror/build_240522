@@ -46,6 +46,30 @@
       "revId": "e80c3e9b58ff40207877e9e8650d924d217a2eea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b80fff59_b195c84d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-03-24T12:06:10Z",
+      "side": 1,
+      "message": "No worries!",
+      "parentUuid": "e83e74eb_53b84f99",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "e80c3e9b58ff40207877e9e8650d924d217a2eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
