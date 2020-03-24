@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "798881c9_69572ec6",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-03-24T00:51:45Z",
+      "side": 1,
+      "message": "This approach is too simplistic. It doesn\u0027t account for situations, for example, where a system_ext module is installed on the system partition under /system/system_ext. I\u0027ll improve it.",
+      "range": {
+        "startLine": 478,
+        "startChar": 44,
+        "endLine": 478,
+        "endChar": 60
+      },
+      "revId": "bf2a9931867cc4fe115178fd1badde3c1f6aaa0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
