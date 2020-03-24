@@ -22,6 +22,30 @@
       "revId": "e80c3e9b58ff40207877e9e8650d924d217a2eea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e83e74eb_53b84f99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1282513
+      },
+      "writtenOn": "2020-03-24T12:02:27Z",
+      "side": 1,
+      "message": "update. sorry for my stupid mistake",
+      "parentUuid": "4b90cdc5_ec43d548",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "e80c3e9b58ff40207877e9e8650d924d217a2eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
