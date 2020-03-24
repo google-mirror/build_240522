@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52653dec_381a9217",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-03-24T06:34:47Z",
+      "side": 1,
+      "message": "You\u0027re going to want the Change-Id here. Copy the one from gerrit so that it\u0027s the same change.",
+      "revId": "446d66544630d13d19609a21053ae0904fc481e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "129b68f8_60c00a97",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-03-24T06:34:47Z",
+      "side": 1,
+      "message": "This assumes that OUT_DIR\u003d\u003dout, which is not necessarily true (though it\u0027s going to hurt caching if it isn\u0027t)",
+      "range": {
+        "startLine": 66,
+        "startChar": 156,
+        "endLine": 66,
+        "endChar": 160
+      },
+      "revId": "446d66544630d13d19609a21053ae0904fc481e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
