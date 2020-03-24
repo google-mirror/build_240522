@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f52c1a70_167d3891",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1282513
+      },
+      "writtenOn": "2020-03-24T11:46:59Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, add comments and rename variable done",
+      "parentUuid": "b222d89c_ac4b86cc",
+      "range": {
+        "startLine": 219,
+        "startChar": 22,
+        "endLine": 219,
+        "endChar": 46
+      },
+      "revId": "4502ab1490e358b122d1ca26642aec91de383512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34964987_7bc68eeb",
         "filename": "core/product_config.mk",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4502ab1490e358b122d1ca26642aec91de383512",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a04b80_d3e4e8e3",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1282513
+      },
+      "writtenOn": "2020-03-24T11:46:59Z",
+      "side": 1,
+      "message": "Thanks for your suggestion. add new line comments done.",
+      "parentUuid": "34964987_7bc68eeb",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 106
+      },
+      "revId": "4502ab1490e358b122d1ca26642aec91de383512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
