@@ -16,6 +16,10 @@
 
 # Inherit this when the target supports userspace reboot
 
-PRODUCT_PROPERTY_OVERRIDES := ro.init.userspace_reboot.is_supported=true
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.init.userspace_reboot.is_supported=true \
+	ro.init.userspace_reboot.sigkill_timeout=10000 \ # 10 seconds
+	ro.init.userspace_reboot.sigterm_timeout=5000 \ # 5 seconds
+	ro.init.userspace_reboot.watchdog_timeout=300000 \ # 5 minutes
 
 # TODO(b/135984674): configure userspace reboot related properties
