@@ -94,6 +94,12 @@ $(my_package_zip) : $(my_built_modules)
 	  cp -RfL $(f) $(dir $@) && ) true
 	$(hide) cd $(dir $@) && zip -rqX $(notdir $@) *
 
+# Add this package to ALL_MODULES so that it appears in module-info.json.
+# See base_rules.mk for more info.
+ALL_MODULES += $(my_package_name)
+ALL_MODULES.$(my_package_name).PATH := \
+    $(ALL_MODULES.$(my_package_name).PATH) $(LOCAL_PATH)
+
 my_makefile :=
 my_staging_dir :=
 my_built_modules :=
