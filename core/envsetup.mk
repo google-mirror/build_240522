@@ -232,6 +232,7 @@ TARGET_COPY_OUT_VENDOR_DEBUG_RAMDISK := vendor_debug_ramdisk
 TARGET_COPY_OUT_TEST_HARNESS_RAMDISK := test_harness_ramdisk
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
+TARGET_COPY_OUT_COVERAGE := coverage
 # The directory used for optional partitions depend on the BoardConfig, so
 # they're defined to placeholder values here and swapped after reading the
 # BoardConfig, to be either the partition dir, or a subdir within 'system'.
@@ -804,7 +805,7 @@ TARGET_OUT_SHARED_LIBRARIES_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)/system/lib
 TARGET_OUT_VENDOR_SHARED_LIBRARIES_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)/$(TARGET_COPY_OUT_VENDOR)/lib
 TARGET_ROOT_OUT_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)
 TARGET_ROOT_OUT_BIN_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)/bin
-TARGET_OUT_COVERAGE := $(PRODUCT_OUT)/coverage
+TARGET_OUT_COVERAGE := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_COVERAGE)
 .KATI_READONLY := \
   TARGET_OUT_UNSTRIPPED \
   TARGET_OUT_EXECUTABLES_UNSTRIPPED \

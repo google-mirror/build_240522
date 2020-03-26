@@ -147,5 +147,6 @@ _my_whitelist := $(_base_mk_whitelist)
 _my_paths := \
   $(TARGET_COPY_OUT_ROOT)/ \
   $(TARGET_COPY_OUT_SYSTEM)/ \
+  $(TARGET_COPY_OUT_COVERAGE)/ \
 
 $(call require-artifacts-in-path, $(_my_paths), $(_my_whitelist))
