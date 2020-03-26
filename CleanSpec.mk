@@ -717,6 +717,10 @@ $(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "andro
 $(call add-clean-step, rm -rf $(HOST_OUT)/vts10/*)
 $(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts10-tradefed.jar)
 
+# Cleanup VTS-Core related artifacts.
+$(call add-clean-step, rm -rf $(HOST_OUT)/vts-core/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-core-tradefed.jar)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
