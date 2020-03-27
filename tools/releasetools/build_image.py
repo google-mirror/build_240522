@@ -685,6 +685,31 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["extfs_rsv_pct"] = "0"
     copy_prop("system_ext_reserved_size", "partition_reserved_size")
     copy_prop("system_ext_selinux_fc", "selinux_fc")
+  elif mount_point == "gms":
+    copy_prop("avb_gms_hashtree_enable", "avb_hashtree_enable")
+    copy_prop("avb_gms_add_hashtree_footer_args",
+              "avb_add_hashtree_footer_args")
+    copy_prop("avb_gms_key_path", "avb_key_path")
+    copy_prop("avb_gms_algorithm", "avb_algorithm")
+    copy_prop("avb_gms_salt", "avb_salt")
+    copy_prop("gms_fs_type", "fs_type")
+    copy_prop("gms_size", "partition_size")
+    if not copy_prop("gms_journal_size", "journal_size"):
+      d["journal_size"] = "0"
+    copy_prop("gms_verity_block_device", "verity_block_device")
+    copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
+    copy_prop("gms_squashfs_compressor", "squashfs_compressor")
+    copy_prop("gms_squashfs_compressor_opt",
+              "squashfs_compressor_opt")
+    copy_prop("gms_squashfs_block_size", "squashfs_block_size")
+    copy_prop("gms_squashfs_disable_4k_align",
+              "squashfs_disable_4k_align")
+    copy_prop("gms_base_fs_file", "base_fs_file")
+    copy_prop("gms_extfs_inode_count", "extfs_inode_count")
+    if not copy_prop("gms_extfs_rsv_pct", "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+    copy_prop("gms_reserved_size", "partition_reserved_size")
+    copy_prop("gms_selinux_fc", "selinux_fc")
   elif mount_point == "odm":
     copy_prop("avb_odm_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_odm_add_hashtree_footer_args",
@@ -756,6 +781,8 @@ def GlobalDictFromImageProp(image_prop, mount_point):
     copy_prop("partition_size", "product_size")
   elif mount_point == "system_ext":
     copy_prop("partition_size", "system_ext_size")
+  elif mount_point == "gms":
+    copy_prop("partition_size", "gms_size")
   return d
 
 
@@ -797,6 +824,8 @@ def main(argv):
       mount_point = "product"
     elif image_filename == "system_ext.img":
       mount_point = "system_ext"
+    elif image_filename == "gms.img":
+      mount_point = "gms"
     else:
       logger.error("Unknown image file name %s", image_filename)
       sys.exit(1)
