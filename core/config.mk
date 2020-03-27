@@ -929,6 +929,13 @@ $(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
 endif
 endif
 
+ifneq ($(BOARD_GMSIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_GMSIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_GMSIMAGE_PARTITION_SIZE and \
+    BOARD_GMSIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
 endif # PRODUCT_USE_DYNAMIC_PARTITION_SIZE
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
@@ -950,7 +957,7 @@ $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
 )
 
 # BOARD_*_PARTITION_LIST: a list of the following tokens
-valid_super_partition_list := system vendor product system_ext odm
+valid_super_partition_list := system vendor product system_ext gms odm
 $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
     $(if $(filter-out $(valid_super_partition_list),$(BOARD_$(group)_PARTITION_LIST)), \
         $(error BOARD_$(group)_PARTITION_LIST contains invalid partition name \

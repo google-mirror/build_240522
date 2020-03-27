@@ -264,6 +264,24 @@ def AddSystemExt(output_zip):
   return img.name
 
 
+def AddGms(output_zip):
+  """Turn the contents of GMS into a gms image and store it in
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES",
+                   "gms.img")
+  if os.path.exists(img.name):
+    logger.info("system_ext.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "gms.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "gms", img,
+      block_list=block_list)
+  return img.name
+
+
 def AddOdm(output_zip):
   """Turn the contents of ODM into an odm image and store it in output_zip."""
 
@@ -682,10 +700,10 @@ def AddImagesToTargetFiles(filename):
   has_boot = OPTIONS.info_dict.get("no_boot") != "true"
   has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
 
-  # {vendor,odm,product,system_ext}.img are unlike system.img or
+  # {vendor,odm,product,system_ext,gms}.img are unlike system.img or
   # system_other.img. Because it could be built from source, or dropped into
   # target_files.zip as a prebuilt blob. We consider either of them as
-  # {vendor,product,system_ext}.img being available, which could be
+  # {vendor,product,system_ext,gms}.img being available, which could be
   # used when generating vbmeta.img for AVB.
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
@@ -701,6 +719,8 @@ def AddImagesToTargetFiles(filename):
                     os.path.exists(os.path.join(OPTIONS.input_tmp,
                                                 "IMAGES",
                                                 "system_ext.img")))
+  has_gms = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "GMS")) or
+            os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES", "gms.img")))
   has_system = os.path.isdir(os.path.join(OPTIONS.input_tmp, "SYSTEM"))
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
@@ -798,6 +818,10 @@ def AddImagesToTargetFiles(filename):
   if has_system_ext:
     banner("system_ext")
     partitions['system_ext'] = AddSystemExt(output_zip)
+
+  if has_gms:
+    banner("gms")
+    partitions['gms'] = AddGms(output_zip)
 
   if has_odm:
     banner("odm")

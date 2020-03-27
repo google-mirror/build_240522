@@ -27,6 +27,7 @@ supported_partition_patterns := \
     $(TARGET_OUT_OEM)/% \
     $(TARGET_OUT_PRODUCT)/% \
     $(TARGET_OUT_SYSTEM_EXT)/% \
+    $(TARGET_OUT_GMS)/% \
 
 ifeq ($(filter $(supported_partition_patterns),$(my_module_path)),)
   my_embed_jni := true

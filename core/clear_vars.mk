@@ -110,6 +110,7 @@ LOCAL_FUZZ_ENGINE:=
 LOCAL_FUZZ_INSTALLED_SHARED_DEPS:=
 LOCAL_GCNO_FILES:=
 LOCAL_GENERATED_SOURCES:=
+LOCAL_GMS_MODULE:=
 # Group static libraries with "-Wl,--start-group" and "-Wl,--end-group" when linking.
 LOCAL_GROUP_STATIC_LIBRARIES:=
 LOCAL_GTEST:=true
