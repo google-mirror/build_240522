@@ -418,7 +418,7 @@ endif
 $(intermediate_system_build_prop): $(BUILDINFO_SH) $(BUILDINFO_COMMON_SH) $(INTERNAL_BUILD_ID_MAKEFILE) $(BUILD_SYSTEM)/version_defaults.mk $(system_prop_file) $(INSTALLED_ANDROID_INFO_TXT_TARGET) $(API_FINGERPRINT) $(POST_PROCESS_PROPS)
 	@echo Target buildinfo: $@
 	@mkdir -p $(dir $@)
-	$(hide) echo > $@
+	$(hide) touch $@
 ifneq ($(PRODUCT_OEM_PROPERTIES),)
 	$(hide) echo "#" >> $@; \
 	        echo "# PRODUCT_OEM_PROPERTIES" >> $@; \
