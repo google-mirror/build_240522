@@ -1021,8 +1021,9 @@ define resolve-product-relative-paths
   $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),\
     $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),\
       $(subst $(_system_ext_path_placeholder),$(TARGET_COPY_OUT_SYSTEM_EXT),\
-        $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),\
-          $(foreach p,$(1),$(call append-path,$(PRODUCT_OUT),$(p)$(2)))))))
+        $(subst $(_gms_path_placeholder),$(TARGET_COPY_OUT_GMS),\
+          $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),\
+            $(foreach p,$(1),$(call append-path,$(PRODUCT_OUT),$(p)$(2))))))))
 endef
 
 # Returns modules included automatically as a result of certain BoardConfig
@@ -1411,6 +1412,9 @@ productimage: $(INSTALLED_PRODUCTIMAGE_TARGET)
 .PHONY: systemextimage
 systemextimage: $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
 
+.PHONY: gmsimage
+gmsimage: $(INSTALLED_GMS_TARGET)
+
 .PHONY: odmimage
 odmimage: $(INSTALLED_ODMIMAGE_TARGET)
 
@@ -1467,6 +1471,8 @@ droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_FILES_JSON_PRODUCT) \
     $(INSTALLED_FILES_FILE_SYSTEM_EXT) \
     $(INSTALLED_FILES_JSON_SYSTEM_EXT) \
+    $(INSTALLED_FILES_FILE_GMS) \
+    $(INSTALLED_FILES_JSON_GMS) \
     $(INSTALLED_FILES_FILE_SYSTEMOTHER) \
     $(INSTALLED_FILES_JSON_SYSTEMOTHER) \
     $(INSTALLED_FILES_FILE_RAMDISK) \
@@ -1563,6 +1569,8 @@ else # TARGET_BUILD_APPS
     $(INSTALLED_FILES_JSON_PRODUCT) \
     $(INSTALLED_FILES_FILE_SYSTEM_EXT) \
     $(INSTALLED_FILES_JSON_SYSTEM_EXT) \
+    $(INSTALLED_FILES_FILE_GMS) \
+    $(INSTALLED_FILES_JSON_GMS) \
     $(INSTALLED_FILES_FILE_SYSTEMOTHER) \
     $(INSTALLED_FILES_JSON_SYSTEMOTHER) \
     $(INSTALLED_FILES_FILE_RECOVERY) \
