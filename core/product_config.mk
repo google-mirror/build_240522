@@ -393,6 +393,7 @@ $(foreach image, \
     VENDOR \
     PRODUCT \
     SYSTEM_EXT \
+    GMS \
     ODM \
     CACHE \
     RAMDISK \

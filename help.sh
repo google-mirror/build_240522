@@ -42,6 +42,8 @@ Common goals are:
                             Stands for "Product, NO Dependencies"
     senod                   Quickly rebuild the system_ext image from built packages
                             Stands for "SystemExt, NO Dependencies"
+    gmsnod                  Quickly rebuild the gms image from built packages
+                            Stands for "Gms, NO Dependencies"
     onod                    Quickly rebuild the odm image from built packages
                             Stands for "ODM, NO Dependencies"
 

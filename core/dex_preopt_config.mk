@@ -11,6 +11,8 @@ SYSTEM_OTHER_ODEX_FILTER ?= \
     priv-app/% \
     system_ext/app/% \
     system_ext/priv-app/% \
+    gms/app/% \
+    gms/priv-app/% \
     product/app/% \
     product/priv-app/% \
 
