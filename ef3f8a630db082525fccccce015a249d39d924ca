@@ -16,6 +16,24 @@
       "revId": "ef3f8a630db082525fccccce015a249d39d924ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41a52d52_b564804a",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-03-27T23:11:25Z",
+      "side": 1,
+      "message": "So this is not for cleaning up the builder for old artifacts? `vts` is already cleaned up in line 611.\nI added these 2 lines for cleaning up the new vts10 artifacts.",
+      "parentUuid": "55b9210e_8f6f64b3",
+      "revId": "ef3f8a630db082525fccccce015a249d39d924ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
