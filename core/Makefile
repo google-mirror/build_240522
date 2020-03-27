@@ -685,6 +685,44 @@ $(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(POST_PROCESS
 	    echo "$(line)" >> $@;)
 	$(hide) $(POST_PROCESS_PROPS) $@
 
+# -----------------------------------------------------------------
+# gms build.prop
+INSTALLED_GMS_BUILD_PROP_TARGET := $(TARGET_OUT_GMS)/build.prop
+ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_GMS_BUILD_PROP_TARGET)
+
+ifdef TARGET_GMS_PROP
+gms_prop_files := $(TARGET_GMS_PROP)
+else
+gms_prop_files := $(wildcard $(TARGET_DEVICE_DIR)/gms.prop)
+endif
+
+FINAL_GMS_PROPERTIES += \
+    $(call collapse-pairs, $(PRODUCT_GMS_PROPERTIES))
+FINAL_GMS_PROPERTIES := $(call uniq-pairs-by-first-component, \
+    $(FINAL_GMS_PROPERTIES),=)
+
+$(INSTALLED_GMS_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(POST_PROCESS_PROPS) $(gms_prop_files)
+	@echo Target gms buildinfo: $@
+	@mkdir -p $(dir $@)
+	$(hide) echo > $@
+	$(hide) $(call generate-common-build-props,gms,$@)
+	$(hide) $(foreach file,$(gms_prop_files), \
+	    if [ -f "$(file)" ]; then \
+	        echo Target gms properties from: "$(file)"; \
+	        echo "" >> $@; \
+	        echo "#" >> $@; \
+	        echo "# from $(file)" >> $@; \
+	        echo "#" >> $@; \
+	        cat $(file) >> $@; \
+	        echo "# end of $(file)" >> $@; \
+	    fi;)
+	$(hide) echo "#" >> $@; \
+	        echo "# ADDITIONAL GMS BUILD PROPERTIES" >> $@; \
+	        echo "#" >> $@;
+	$(hide) $(foreach line,$(FINAL_GMS_PROPERTIES), \
+	    echo "$(line)" >> $@;)
+	$(hide) $(POST_PROCESS_PROPS) $@
+
 # ----------------------------------------------------------------
 
 # -----------------------------------------------------------------
@@ -1317,7 +1355,7 @@ endif # BUILDING_VENDOR_BOOT_IMAGE
 
 # Create the rule to combine the files into text and html/xml forms
 # $(1) - xml_excluded_system_product_odm|xml_excluded_vendor_product_odm
-#        xml_product|xml_odm|xml_system_ext|xml_system|html
+#        xml_product|xml_odm|xml_system_ext|xml_gms|xml_system|html
 # $(2) - Plain text output file
 # $(3) - HTML/XML output file
 # $(4) - File title
@@ -1343,13 +1381,14 @@ $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
 $(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
 	build/make/tools/generate-notice-files.py --text-output $(2) $(foreach xdir, $(7), -e $(xdir) )\
-	    $(if $(filter $(1),xml_excluded_vendor_product_odm),-e vendor -e product -e system_ext -e odm --xml-output, \
-	      $(if $(filter $(1),xml_excluded_system_product_odm),-e system -e product -e system_ext -e odm --xml-output, \
+	    $(if $(filter $(1),xml_excluded_vendor_product_odm),-e vendor -e product -e system_ext -e gms -e odm --xml-output, \
+	      $(if $(filter $(1),xml_excluded_system_product_odm),-e system -e product -e system_ext -e gms -e odm --xml-output, \
 	        $(if $(filter $(1),xml_product),-i product --xml-output, \
 	          $(if $(filter $(1),xml_system_ext),-i system_ext --xml-output, \
-	            $(if $(filter $(1),xml_system),-i system --xml-output, \
-	              $(if $(filter $(1),xml_odm),-i odm --xml-output, \
-	                --html-output)))))) $(3) \
+	            $(if $(filter $(1),xml_gms),-i gms --xml-output, \
+	              $(if $(filter $(1),xml_system),-i system --xml-output, \
+	                $(if $(filter $(1),xml_odm),-i odm --xml-output, \
+	                  --html-output))))))) $(3) \
 	    -t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
 notice_files: $(2) $(3)
 endef
@@ -1408,6 +1447,11 @@ target_system_ext_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_E
 target_system_ext_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_EXT.xml.gz
 installed_system_ext_notice_xml_gz := $(TARGET_OUT_SYSTEM_EXT)/etc/NOTICE.xml.gz
 
+target_gms_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_GMS.txt
+target_gms_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_GMS.xml
+target_gms_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_GMS.xml.gz
+installed_gms_notice_xml_gz := $(TARGET_OUT_GMS)/etc/NOTICE.xml.gz
+
 target_odm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.txt
 target_odm_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.xml
 target_odm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.xml.gz
@@ -1428,11 +1472,13 @@ license_modules_system := $(filter $(TARGET_OUT)/%,$(license_modules))
 license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
 license_modules_product := $(filter $(TARGET_OUT_PRODUCT)/%,$(license_modules))
 license_modules_system_ext := $(filter $(TARGET_OUT_SYSTEM_EXT)/%,$(license_modules))
+license_modules_gms := $(filter $(TARGET_OUT_GMS)/%,$(license_modules))
 license_modules_odm := $(filter $(TARGET_OUT_ODM)/%,$(license_modules))
 license_modules_agg := $(license_modules_system) \
                        $(license_modules_vendor) \
                        $(license_modules_product) \
                        $(license_modules_system_ext) \
+                       $(license_modules_gms) \
                        $(license_modules_odm)
 # targets used for debug symbols only and do not get copied to the device
 license_modules_symbols_only := $(filter $(PRODUCT_OUT)/apex/%,$(license_modules))
@@ -1486,7 +1532,7 @@ $(eval $(call combine-notice-files, $(system_xml_directories), \
 $(eval $(call combine-notice-files, xml_excluded_system_product_odm, \
 	        $(target_vendor_notice_file_txt), \
 	        $(target_vendor_notice_file_xml), \
-	        "Notices for files contained in all filesystem images except system/system_ext/product/odm in this directory:", \
+	        "Notices for files contained in all filesystem images except system/system_ext/gms/product/odm in this directory:", \
 	        $(TARGET_OUT_NOTICE_FILES), \
 	        $(license_modules_vendor), \
 	        $(exclude_target_dirs)))
@@ -1504,6 +1550,13 @@ $(eval $(call combine-notice-files, xml_system_ext, \
 	        $(TARGET_OUT_NOTICE_FILES), \
 	        $(license_modules_system_ext), \
 	        $(exclude_target_dirs)))
+$(eval $(call combine-notice-files, xml_gms, \
+	        $(target_gms_notice_file_txt), \
+	        $(target_gms_notice_file_xml), \
+	        "Notices for files contained in the gms filesystem image in this directory:", \
+	        $(TARGET_OUT_NOTICE_FILES), \
+	        $(license_modules_gms), \
+	        $(exclude_target_dirs)))
 $(eval $(call combine-notice-files, xml_odm, \
 	        $(target_odm_notice_file_txt), \
 	        $(target_odm_notice_file_xml), \
@@ -1520,6 +1573,8 @@ $(target_product_notice_file_xml_gz): $(target_product_notice_file_xml) | $(MINI
 	$(hide) $(MINIGZIP) -9 < $< > $@
 $(target_system_ext_notice_file_xml_gz): $(target_system_ext_notice_file_xml) | $(MINIGZIP)
 	$(hide) $(MINIGZIP) -9 < $< > $@
+$(target_gms_notice_file_xml_gz): $(target_gms_notice_file_xml) | $(MINIGZIP)
+	$(hide) $(MINIGZIP) -9 < $< > $@
 $(target_odm_notice_file_xml_gz): $(target_odm_notice_file_xml) | $(MINIGZIP)
 	$(hide) $(MINIGZIP) -9 < $< > $@
 $(installed_notice_html_or_xml_gz): $(target_notice_file_xml_gz)
@@ -1530,6 +1585,8 @@ $(installed_product_notice_xml_gz): $(target_product_notice_file_xml_gz)
 	$(copy-file-to-target)
 $(installed_system_ext_notice_xml_gz): $(target_system_ext_notice_file_xml_gz)
 	$(copy-file-to-target)
+$(installed_gms_notice_xml_gz): $(target_gms_notice_file_xml_gz)
+	$(copy-file-to-target)
 $(installed_odm_notice_xml_gz): $(target_odm_notice_file_xml_gz)
 	$(copy-file-to-target)
 
@@ -1537,6 +1594,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(installed_notice_html_or_xml_gz)
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_notice_xml_gz)
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_ext_notice_xml_gz)
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_gms_notice_xml_gz)
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_notice_xml_gz)
 endif # PRODUCT_NOTICE_SPLIT
 
@@ -1604,7 +1662,7 @@ ifeq ($(TARGET_USERIMAGES_USE_F2FS),true)
 INTERNAL_USERIMAGES_DEPS += $(MKF2FSUSERIMG)
 endif
 
-ifneq ($(filter $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE) $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE) $(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE) $(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE) $(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE),squashfs),)
+ifneq ($(filter $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE) $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE) $(BOARD_GMSIMAGE_FILE_SYSTEM_TYPE) $(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE) $(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE) $(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE),squashfs),)
 INTERNAL_USERIMAGES_DEPS += $(MKSQUASHFSUSERIMG)
 endif
 
@@ -1634,7 +1692,7 @@ endif
 endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 
 # $(1): the path of the output dictionary file
-# $(2): a subset of "system vendor cache userdata product system_ext oem odm"
+# $(2): a subset of "system vendor cache userdata product system_ext gms oem odm"
 # $(3): additional "key=value" pairs to append to the dictionary file.
 define generate-image-prop-dictionary
 $(if $(filter $(2),system),\
@@ -1706,6 +1764,19 @@ $(if $(filter $(2),system_ext),\
     $(if $(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "system_ext_reserved_size=$(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "system_ext_selinux_fc=$(SELINUX_FC)" >> $(1)
 )
+$(if $(filter $(2),gms),\
+    $(if $(BOARD_GMSIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "gms_fs_type=$(BOARD_GMSIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_EXTFS_INODE_COUNT),$(hide) echo "gms_extfs_inode_count=$(BOARD_GMSIMAGE_EXTFS_INODE_COUNT)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_EXTFS_RSV_PCT),$(hide) echo "gms_extfs_rsv_pct=$(BOARD_GMSIMAGE_EXTFS_RSV_PCT)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_PARTITION_SIZE),$(hide) echo "gms_size=$(BOARD_GMSIMAGE_PARTITION_SIZE)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_JOURNAL_SIZE),$(hide) echo "gms_journal_size=$(BOARD_GMSIMAGE_JOURNAL_SIZE)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "gms_squashfs_compressor=$(BOARD_GMSIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "gms_squashfs_compressor_opt=$(BOARD_GMSIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "gms_squashfs_block_size=$(BOARD_GMSIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "gms_squashfs_disable_4k_align=$(BOARD_GMSIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
+    $(if $(BOARD_GMSIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "gms_reserved_size=$(BOARD_GMSIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
+    $(hide) echo "gms_selinux_fc=$(SELINUX_FC)" >> $(1)
+)
 $(if $(filter $(2),odm),\
     $(if $(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "odm_fs_type=$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
     $(if $(BOARD_ODMIMAGE_EXTFS_INODE_COUNT),$(hide) echo "odm_extfs_inode_count=$(BOARD_ODMIMAGE_EXTFS_INODE_COUNT)" >> $(1))
@@ -1746,6 +1817,7 @@ $(if $(PRODUCT_SYSTEM_VERITY_PARTITION),$(hide) echo "system_verity_block_device
 $(if $(PRODUCT_VENDOR_VERITY_PARTITION),$(hide) echo "vendor_verity_block_device=$(PRODUCT_VENDOR_VERITY_PARTITION)" >> $(1))
 $(if $(PRODUCT_PRODUCT_VERITY_PARTITION),$(hide) echo "product_verity_block_device=$(PRODUCT_PRODUCT_VERITY_PARTITION)" >> $(1))
 $(if $(PRODUCT_SYSTEM_EXT_VERITY_PARTITION),$(hide) echo "system_ext_verity_block_device=$(PRODUCT_SYSTEM_EXT_VERITY_PARTITION)" >> $(1))
+$(if $(PRODUCT_GMS_VERITY_PARTITION),$(hide) echo "gms_verity_block_device=$(PRODUCT_GMS_VERITY_PARTITION)" >> $(1))
 $(if $(PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot=$(PRODUCT_SUPPORTS_VBOOT)" >> $(1))
 $(if $(PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_key=$(PRODUCT_VBOOT_SIGNING_KEY)" >> $(1))
 $(if $(PRODUCT_SUPPORTS_VBOOT),$(hide) echo "vboot_subkey=$(PRODUCT_VBOOT_SIGNING_SUBKEY)" >> $(1))
@@ -1787,6 +1859,14 @@ $(if $(BOARD_AVB_ENABLE),\
         $(hide) echo "avb_system_ext_key_path=$(BOARD_AVB_SYSTEM_EXT_KEY_PATH)" >> $(1)
         $(hide) echo "avb_system_ext_algorithm=$(BOARD_AVB_SYSTEM_EXT_ALGORITHM)" >> $(1)
         $(hide) echo "avb_system_ext_rollback_index_location=$(BOARD_AVB_SYSTEM_EXT_ROLLBACK_INDEX_LOCATION)" >> $(1)))
+$(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_gms_hashtree_enable=$(BOARD_AVB_ENABLE)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),\
+    $(hide) echo "avb_gms_add_hashtree_footer_args=$(BOARD_AVB_GMS_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
+$(if $(BOARD_AVB_ENABLE),\
+    $(if $(BOARD_AVB_GMS_KEY_PATH),\
+        $(hide) echo "avb_gms_key_path=$(BOARD_AVB_GMS_KEY_PATH)" >> $(1)
+        $(hide) echo "avb_gms_algorithm=$(BOARD_AVB_GMS_ALGORITHM)" >> $(1)
+        $(hide) echo "avb_gms_rollback_index_location=$(BOARD_AVB_GMS_ROLLBACK_INDEX_LOCATION)" >> $(1)))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_odm_hashtree_enable=$(BOARD_AVB_ENABLE)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),$(hide) echo "avb_odm_add_hashtree_footer_args=$(BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS)" >> $(1))
 $(if $(BOARD_AVB_ENABLE),\
@@ -1824,6 +1904,9 @@ ifdef BUILDING_PRODUCT_IMAGE
 endif
 ifdef BUILDING_SYSTEM_EXT_IMAGE
   PROP_DICTIONARY_IMAGES += system_ext
+endif
+ifdef BUILDING_GMS_IMAGE
+  PROP_DICTIONARY_IMAGES += gms
 endif
 ifdef BUILDING_ODM_IMAGE
   PROP_DICTIONARY_IMAGES += odm
@@ -2676,12 +2759,29 @@ define create-system-system_ext-symlink
 endef
 endif
 
+# Create symlink /system/gms to /gms if necessary.
+ifdef BOARD_USES_GMSIMAGE
+define create-system-gms-symlink
+$(hide) if [ -d $(TARGET_OUT)/gms ] && [ ! -h $(TARGET_OUT)/gms ]; then \
+  echo 'Non-symlink $(TARGET_OUT)/gms detected!' 1>&2; \
+  echo 'You cannot install files to $(TARGET_OUT)/gms while building a separate gms.img!' 1>&2; \
+  exit 1; \
+fi
+$(hide) ln -sf /gms$(TARGET_OUT)/gms
+endef
+else
+define create-system-gms-symlink
+endef
+endif
+
+
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   $(call create-system-system_ext-symlink)
+  $(call create-system-gms-symlink)
   @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
   $(call generate-image-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt,system, \
       skip_fsck=true)
@@ -3237,6 +3337,64 @@ $(eval $(call copy-one-file,$(BOARD_PREBUILT_SYSTEM_EXTIMAGE),$(INSTALLED_SYSTEM
 endif
 
 # -----------------------------------------------------------------
+# gms partition image
+ifdef BUILDING_GMS_IMAGE
+INTERNAL_GMSIMAGE_FILES := \
+    $(filter $(TARGET_OUT_GMS)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES)\
+      $(ALL_PDK_FUSION_FILES)) \
+    $(PDK_FUSION_SYMLINK_STAMP)
+
+# platform.zip depends on $(INTERNAL_GMSIMAGE_FILES).
+$(INSTALLED_PLATFORM_ZIP) : $(INTERNAL_GMSIMAGE_FILES)
+
+INSTALLED_FILES_FILE_GMS := $(PRODUCT_OUT)/installed-files-gms.txt
+INSTALLED_FILES_JSON_GMS := $(INSTALLED_FILES_FILE_GMS:.txt=.json)
+$(INSTALLED_FILES_FILE_GMS): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_GMS)
+$(INSTALLED_FILES_FILE_GMS) : $(INTERNAL_GMSIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	@mkdir -p $(dir $@)
+	@rm -f $@
+	$(hide) $(FILESLIST) $(TARGET_OUT_GMS) > $(@:.txt=.json)
+	$(hide) $(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+gmsimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,gms)
+BUILT_GMSIMAGE_TARGET := $(PRODUCT_OUT)/gms.img
+define build-gmsimage-target
+  $(call pretty,"Target gms fs image: $(INSTALLED_GMSIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_GMS)
+  @mkdir -p $(gmsimage_intermediates) && rm -rf $(gmsimage_intermediates)/gms_image_info.txt
+  $(call generate-image-prop-dictionary, $(gmsimage_intermediates)/gms_image_info.txt,gms, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_GMS) \
+          $(gmsimage_intermediates)/gms_image_info.txt \
+          $(INSTALLED_GMSIMAGE_TARGET) \
+          $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_PRODUCT_SERVICESIMAGE_TARGET),$(BOARD_PRODUCT_SERVICESIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_GMSIMAGE_TARGET := $(BUILT_GMSIMAGE_TARGET)
+$(INSTALLED_GMSIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_GMSIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_GMS)
+	$(build-gmsimage-target)
+
+.PHONY: gmsimage-nodeps gmsnod
+gmsimage-nodeps gmsnod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-gmsimage-target)
+
+sync: $(INTERNAL_GMSIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_GMSIMAGE
+INSTALLED_GMSIMAGE_TARGET := $(PRODUCT_OUT)/gms.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_GMSIMAGE),$(INSTALLED_GMSIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
 # odm partition image
 ifdef BUILDING_ODM_IMAGE
 INTERNAL_ODMIMAGE_FILES := \
@@ -3394,6 +3552,11 @@ BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += \
     --prop com.android.build.system_ext.os_version:$(PLATFORM_VERSION) \
     --prop com.android.build.system_ext.security_patch:$(PLATFORM_SECURITY_PATCH)
 
+BOARD_AVB_GMS_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.gms.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+    --prop com.android.build.gms.os_version:$(PLATFORM_VERSION) \
+    --prop com.android.build.gms.security_patch:$(PLATFORM_SECURITY_PATCH)
+
 BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += \
     --prop com.android.build.boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
     --prop com.android.build.boot.os_version:$(PLATFORM_VERSION)
@@ -3439,6 +3602,7 @@ VENDOR_FOOTER_ARGS := BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS
 RECOVERY_FOOTER_ARGS := BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS
 PRODUCT_FOOTER_ARGS := BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS
 SYSTEM_EXT_FOOTER_ARGS := BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS
+GMS_FOOTER_ARGS := BOARD_AVB_GMS_ADD_HASHTREE_FOOTER_ARGS
 ODM_FOOTER_ARGS := BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS
 
 # Helper function that checks and sets required build variables for an AVB chained partition.
@@ -3510,6 +3674,10 @@ endif
 
 ifdef INSTALLED_SYSTEM_EXTIMAGE_TARGET
 $(eval $(call check-and-set-avb-args,system_ext))
+endif
+
+ifdef INSTALLED_GMSIMAGE_TARGET
+$(eval $(call check-and-set-avb-args,gms))
 endif
 
 ifdef INSTALLED_ODMIMAGE_TARGET
@@ -3588,6 +3756,9 @@ define extract-avb-chain-public-keys
   $(if $(BOARD_AVB_SYSTEM_EXT_KEY_PATH),\
     $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_SYSTEM_EXT_KEY_PATH) \
       --output $(1)/system_ext.avbpubkey)
+  $(if $(BOARD_AVB_GMS_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_GMS_KEY_PATH) \
+      --output $(1)/gms.avbpubkey)
   $(if $(BOARD_AVB_ODM_KEY_PATH),\
     $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_ODM_KEY_PATH) \
       --output $(1)/odm.avbpubkey)
@@ -3668,6 +3839,7 @@ $(INSTALLED_VBMETAIMAGE_TARGET): \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+	    $(INSTALLED_GMSIMAGE_TARGET) \
 	    $(INSTALLED_ODMIMAGE_TARGET) \
 	    $(INSTALLED_DTBOIMAGE_TARGET) \
 	    $(INSTALLED_RECOVERYIMAGE_TARGET) \
@@ -4443,6 +4615,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+	    $(INSTALLED_GMSIMAGE_TARGET) \
 	    $(INSTALLED_VBMETAIMAGE_TARGET) \
 	    $(INSTALLED_ODMIMAGE_TARGET) \
 	    $(INSTALLED_DTBOIMAGE_TARGET) \
@@ -4458,6 +4631,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(PRODUCT_VENDOR_BASE_FS_PATH) \
 	    $(PRODUCT_PRODUCT_BASE_FS_PATH) \
 	    $(PRODUCT_SYSTEM_EXT_BASE_FS_PATH) \
+	    $(PRODUCT_GMS_BASE_FS_PATH) \
 	    $(PRODUCT_ODM_BASE_FS_PATH) \
 	    $(LPMAKE) \
 	    $(SELINUX_FC) \
@@ -4475,6 +4649,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	$(call create-system-vendor-symlink)
 	$(call create-system-product-symlink)
 	$(call create-system-system_ext-symlink)
+	$(call create-system-gms-symlink)
 	$(call create-vendor-odm-symlink)
 	$(hide) rm -rf $@ $@.list $(zip_root)
 	$(hide) mkdir -p $(dir $@) $(zip_root)
@@ -4591,6 +4766,11 @@ ifdef BUILDING_SYSTEM_EXT_IMAGE
 	$(hide) $(call package_files-copy-root, \
 	    $(TARGET_OUT_SYSTEM_EXT),$(zip_root)/SYSTEM_EXT)
 endif
+ifdef BUILDING_GMS_IMAGE
+	@# Contents of the gms image
+	$(hide) $(call package_files-copy-root, \
+	    $(TARGET_OUT_GMS),$(zip_root)/GMS)
+endif
 ifdef BUILDING_ODM_IMAGE
 	@# Contents of the odm image
 	$(hide) $(call package_files-copy-root, \
@@ -4637,6 +4817,10 @@ ifneq ($(PRODUCT_SYSTEM_EXT_BASE_FS_PATH),)
 	$(hide) cp $(PRODUCT_SYSTEM_EXT_BASE_FS_PATH) \
 	  $(zip_root)/META/$(notdir $(PRODUCT_SYSTEM_EXT_BASE_FS_PATH))
 endif
+ifneq ($(PRODUCT_GMS_BASE_FS_PATH),)
+	$(hide) cp $(PRODUCT_GMS_BASE_FS_PATH) \
+	  $(zip_root)/META/$(notdir $(PRODUCT_GMS_BASE_FS_PATH))
+endif
 ifneq ($(PRODUCT_ODM_BASE_FS_PATH),)
 	$(hide) cp $(PRODUCT_ODM_BASE_FS_PATH) \
 	  $(zip_root)/META/$(notdir $(PRODUCT_ODM_BASE_FS_PATH))
@@ -4678,6 +4862,10 @@ ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) $(zip_root)/IMAGES/
 endif
+ifdef BOARD_PREBUILT_GMSIMAGE
+	$(hide) mkdir -p $(zip_root)/IMAGES
+	$(hide) cp $(INSTALLED_GMSIMAGE_TARGET) $(zip_root)/IMAGES/
+endif
 ifdef BOARD_PREBUILT_BOOTIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_BOOTIMAGE_TARGET) $(zip_root)/IMAGES/
@@ -4708,6 +4896,9 @@ ifdef BUILDING_PRODUCT_IMAGE
 endif
 ifdef BUILDING_SYSTEM_EXT_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/SYSTEM_EXT,system_ext/) > $(zip_root)/META/system_ext_filesystem_config.txt
+endif
+ifdef BUILDING_GMS_IMAGE
+	$(hide) $(call fs_config,$(zip_root)/GMS,gms/) > $(zip_root)/META/gms_filesystem_config.txt
 endif
 ifdef BUILDING_ODM_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/ODM,odm/) > $(zip_root)/META/odm_filesystem_config.txt
@@ -4839,7 +5030,8 @@ $(APPCOMPAT_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_USERDATAIMAGE_TARGET) \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
-	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
+	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+	    $(INSTALLED_GMS_TARGET)
 endif
 $(APPCOMPAT_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,appcompat)/filelist
 $(APPCOMPAT_ZIP): $(SOONG_ZIP)
@@ -4869,6 +5061,7 @@ $(SYMBOLS_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+	    $(INSTALLED_GMS_TARGET) \
 	    $(INSTALLED_ODMIMAGE_TARGET) \
 	    $(updater_dep)
 endif
@@ -4895,6 +5088,7 @@ $(COVERAGE_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
 	    $(INSTALLED_PRODUCTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+	    $(INSTALLED_GMS_TARGET) \
 	    $(INSTALLED_ODMIMAGE_TARGET)
 endif
 $(COVERAGE_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,coverage)/filelist
@@ -4958,6 +5152,7 @@ $(PROGUARD_DICT_ZIP): \
     $(INSTALLED_VENDORIMAGE_TARGET) \
     $(INSTALLED_PRODUCTIMAGE_TARGET) \
     $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+    $(INSTALLED_GMS_TARGET) \
     $(INSTALLED_ODMIMAGE_TARGET) \
     $(updater_dep)
 endif
@@ -5169,6 +5364,15 @@ INSTALLED_QEMU_SYSTEM_EXTIMAGE := $(PRODUCT_OUT)/system_ext-qemu.img
 $(INSTALLED_QEMU_SYSTEM_EXTIMAGE): $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG)
 	@echo Create system_ext-qemu.img
 	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); $(MK_QEMU_IMAGE_SH) $(INSTALLED_SYSTEM_EXTIMAGE_TARGET))
+
+systemextimage: $(INSTALLED_QEMU_SYSTEM_EXTIMAGE)
+droidcore: $(INSTALLED_QEMU_SYSTEM_EXTIMAGE)
+endif
+ifdef INSTALLED_GMSIMAGE_TARGET
+INSTALLED_QEMU_GMSIMAGE := $(PRODUCT_OUT)/gms-qemu.img
+$(INSTALLED_QEMU_GMSIMAGE): $(INSTALLED_GMSIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST) $(SIMG2IMG)
+	@echo Create gms-qemu.img
+	(export SGDISK=$(SGDISK_HOST) SIMG2IMG=$(SIMG2IMG); $(MK_QEMU_IMAGE_SH) $(INSTALLED_GMSIMAGE_TARGET))
 
 systemextimage: $(INSTALLED_QEMU_SYSTEM_EXTIMAGE)
 droidcore: $(INSTALLED_QEMU_SYSTEM_EXTIMAGE)

@@ -238,6 +238,7 @@ TARGET_COPY_OUT_RECOVERY := recovery
 _vendor_path_placeholder := ||VENDOR-PATH-PH||
 _product_path_placeholder := ||PRODUCT-PATH-PH||
 _system_ext_path_placeholder := ||SYSTEM_EXT-PATH-PH||
+_gms_path_placeholder := ||GMS-PATH-PH||
 _odm_path_placeholder := ||ODM-PATH-PH||
 TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
 TARGET_COPY_OUT_VENDOR_RAMDISK := vendor-ramdisk
@@ -246,6 +247,7 @@ TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
 # product
 TARGET_COPY_OUT_PRODUCT_SERVICES := $(_product_path_placeholder)
 TARGET_COPY_OUT_SYSTEM_EXT := $(_system_ext_path_placeholder)
+TARGET_COPY_OUT_GMS := $(_gms_path_placeholder)
 TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
 
 # Returns the non-sanitized version of the path provided in $1.
@@ -794,6 +796,26 @@ $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_EXT_APPS_PRIVILEGED := $(TARGET_O
   $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES \
   $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_EXT_APPS \
   $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_EXT_APPS_PRIVILEGED
+
+TARGET_OUT_GMS := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_GMS)
+target_out_gms_shared_libraries_base := $(TARGET_OUT_GMS)
+target_out_gms_app_base := $(TARGET_OUT_GMS)
+
+TARGET_OUT_GMS_JAVA_LIBRARIES := $(TARGET_OUT_GMS)/framework
+TARGET_OUT_GMS_APPS := $(target_out_gms_app_base)/app
+TARGET_OUT_GMS_APPS_PRIVILEGED := $(target_out_gms_app_base)/priv-app
+TARGET_OUT_GMS_ETC := $(TARGET_OUT_GMS)/etc
+.KATI_READONLY := \
+  TARGET_OUT_GMS_JAVA_LIBRARIES \
+  TARGET_OUT_GMS_APPS \
+  TARGET_OUT_GMS_APPS_PRIVILEGED \
+  TARGET_OUT_GMS_ETC
+
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_GMS_APPS := $(TARGET_OUT_GMS_APPS)
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_GMS_APPS_PRIVILEGED := $(TARGET_OUT_GMS_APPS_PRIVILEGED)
+.KATI_READONLY := \
+  $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_GMS_APPS \
+  $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_GMS_APPS_PRIVILEGED
 
 TARGET_OUT_BREAKPAD := $(PRODUCT_OUT)/breakpad
 .KATI_READONLY := TARGET_OUT_BREAKPAD
