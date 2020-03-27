@@ -70,6 +70,8 @@ _board_strip_readonly_list += \
   BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE \
   BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE \
   BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE \
+  BOARD_GMS_PARTITION_SIZE \
+  BOARD_GMSIMAGE_FILE_SYSTEM_TYPE \
   BOARD_ODMIMAGE_PARTITION_SIZE \
   BOARD_ODMIMAGE_FILE_SYSTEM_TYPE \
 
@@ -80,6 +82,7 @@ _dynamic_partitions_var_list += \
   BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE \
   BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE \
   BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE \
+  BOARD_GMS_PARTITION_RESERVED_SIZE \
   BOARD_SUPER_PARTITION_SIZE \
   BOARD_SUPER_PARTITION_GROUPS \
 
@@ -518,6 +521,41 @@ ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
   BUILDING_SYSTEM_EXT_IMAGE :=
 endif
 .KATI_READONLY := BUILDING_SYSTEM_EXT_IMAGE
+
+###########################################
+# Now we can substitute with the real value of TARGET_COPY_OUT_GMS
+ifeq ($(TARGET_COPY_OUT_GMS),$(_gms_path_placeholder))
+TARGET_COPY_OUT_GMS := system/gms
+else ifeq ($(filter gms system/gms,$(TARGET_COPY_OUT_GMS)),)
+$(error TARGET_COPY_OUT_GMS must be either 'gms' or 'system/gms', seeing '$(TARGET_COPY_OUT_GMS)'.)
+endif
+PRODUCT_COPY_FILES := $(subst $(_gms_path_placeholder),$(TARGET_COPY_OUT_GMS),$(PRODUCT_COPY_FILES))
+
+BOARD_USES_GMSIMAGE :=
+ifdef BOARD_PREBUILT_GMSIMAGE
+  BOARD_USES_GMSIMAGE := true
+endif
+ifdef BOARD_GMSIMAGE_FILE_SYSTEM_TYPE
+  BOARD_USES_GMSIMAGE := true
+endif
+$(call check_image_config,gms)
+.KATI_READONLY := BOARD_USES_GMSIMAGE
+
+BUILDING_GMS_IMAGE :=
+ifeq ($(PRODUCT_BUILD_GMS_IMAGE),)
+  ifdef BOARD_GMSIMAGE_FILE_SYSTEM_TYPE
+    BUILDING_GMS_IMAGE := true
+  endif
+else ifeq ($(PRODUCT_BUILD_GMS_IMAGE),true)
+  BUILDING_GMS_IMAGE := true
+  ifndef BOARD_GMSIMAGE_FILE_SYSTEM_TYPE
+    $(error PRODUCT_BUILD_GMS_IMAGE set to true, but BOARD_GMSIMAGE_FILE_SYSTEM_TYPE not defined)
+  endif
+endif
+ifdef BOARD_PREBUILT_GMSIMAGE
+  BUILDING_GMS_IMAGE :=
+endif
+.KATI_READONLY := BUILDING_GMS_IMAGE
 
 ###########################################
 # Now we can substitute with the real value of TARGET_COPY_OUT_ODM
