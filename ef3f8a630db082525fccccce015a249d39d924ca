@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55b9210e_8f6f64b3",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-03-27T22:54:40Z",
+      "side": 1,
+      "message": "Actually, wouldn\u0027t you want to clean up the old vts/ folder here, not the new ones that shouldn\u0027t exist?",
+      "revId": "ef3f8a630db082525fccccce015a249d39d924ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
