@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdba69a9_c5cd3252",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-03-30T13:04:35Z",
+      "side": 1,
+      "message": "is this comment still up-to-date?",
+      "range": {
+        "startLine": 311,
+        "startChar": 19,
+        "endLine": 312,
+        "endChar": 86
+      },
+      "revId": "70fcf897c50b37e6675684836fc154c3da69f7e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
