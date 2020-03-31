@@ -576,19 +576,31 @@ function add_lunch_combo()
 function print_lunch_menu()
 {
     local uname=$(uname)
-    local choices=$(TARGET_BUILD_APPS= get_build_var COMMON_LUNCH_CHOICES)
+    local choices=$(TARGET_BUILD_APPS= get_build_var COMMON_LUNCH_CHOICES 2>/dev/null)
+
     echo
     echo "You're building on" $uname
     echo
-    echo "Lunch menu... pick a combo:"
 
-    local i=1
-    local choice
-    for choice in $(echo $choices)
-    do
-        echo "     $i. $choice"
-        i=$(($i+1))
-    done
+    if [ -z "$choices" ]
+    then
+        echo "Warning: Cannot display lunch menu, as the default selection (aosp_arm-eng)"
+        echo "cannot be used to initialize the build system."
+        echo
+        echo "Note: You can invoke lunch with an explicit target:"
+        echo
+        echo "  usage: lunch [target]" >&2
+    else
+        echo "Lunch menu... pick a combo:"
+
+        local i=1
+        local choice
+        for choice in $(echo $choices)
+        do
+            echo "     $i. $choice"
+            i=$(($i+1))
+        done
+    fi
 
     echo
 }
