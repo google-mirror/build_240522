@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2828d73e_edcff322",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2020-04-01T19:29:26Z",
+      "side": 1,
+      "message": "is there a default here ? may be the aosp one ?",
+      "range": {
+        "startLine": 948,
+        "startChar": 21,
+        "endLine": 948,
+        "endChar": 35
+      },
+      "revId": "0f3074566cb130d831011182e227c8d1e2f37dc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
