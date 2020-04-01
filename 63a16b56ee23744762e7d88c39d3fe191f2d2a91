@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb6ddeb_53975b12",
+        "filename": "common/strings.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2020-04-01T19:32:56Z",
+      "side": 0,
+      "message": "Original implementation transforms \"a\u003db c\u003d d\u003de f\u003d\" first to \"a \u003d b c \u003d d \u003d e f \u003d \" by replacing \"\u003d\" with \" \u003d \" + adding a space at the end, and then to \"a\u003db c\u003dd\u003de f\u003d\" by replacing \" \u003d \" with \"\u003d\".",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "63a16b56ee23744762e7d88c39d3fe191f2d2a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

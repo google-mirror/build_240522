@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d98036c_6951a7a5",
+        "filename": "common/strings.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2020-04-01T19:32:56Z",
+      "side": 1,
+      "message": "New implementation transforms \"a\u003db c\u003d d\u003de f\u003d\" first into \"a \u003d b c \u003d d \u003d e f \u003d\" by replacing \"\u003d\" with \" \u003d \", and then to \"a\u003d b c\u003d d\u003d e f\u003d\" by replacing \" \u003d\" with \"\u003d\".\nPseudocode after that is:\n    LHS \u003c- \"\"\n    ret \u003c- \"\"\n    for each space-splitted word w in \"a\u003d b c\u003d d\u003d e f\u003d\":\n        if the word contains \"\u003d\", then it is the LHS of a property-value pair, so:\n            ret +\u003d LHS (possibly empty); LHS \u003c- w\n        otherwise, it is the RHS of a property-value pair, so:\n            ret +\u003d LHS + w; LHS \u003c- \"\"\n    if LHS is not empty, it is an empty property at the end. so:\n        ret +\u003d LHS\n\nAs a result, it returns \"a\u003db c\u003d d\u003de f\u003d\".",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 5
+      },
+      "revId": "f6652f4f186d11df7b09965e16fc850516962d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
