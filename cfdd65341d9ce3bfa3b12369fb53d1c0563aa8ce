@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4cf7684b_4a9ad56b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1789,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-04-03T22:42:58Z",
+      "side": 1,
+      "message": "This must be non-greedy to avoid consuming the optional `partition\u003d` field.",
+      "range": {
+        "startLine": 1789,
+        "startChar": 73,
+        "endLine": 1789,
+        "endChar": 74
+      },
+      "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58133b36_fae127bc",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-04-03T22:42:58Z",
+      "side": 1,
+      "message": "This is non-greedy to make it easier to add new fields.",
+      "range": {
+        "startLine": 1790,
+        "startChar": 41,
+        "endLine": 1790,
+        "endChar": 42
+      },
+      "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24634a4e_11c8355f",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-04-03T22:42:58Z",
+      "side": 1,
+      "message": "This must be non-greedy to avoid consuming the now-optional `partition\u003d` tag.",
+      "range": {
+        "startLine": 1085,
+        "startChar": 61,
+        "endLine": 1085,
+        "endChar": 62
+      },
+      "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
