@@ -3,3 +3,27 @@ android_app_certificate {
     name: "aosp-testkey",
     certificate: "testkey",
 }
+
+filegroup {
+    name: "fsverity-debug-key",
+    srcs: ["fsverity-debug-key.pem"],
+}
+
+filegroup {
+    name: "fsverity-debug-cert",
+    srcs: ["fsverity-debug.x509.pem"],
+}
+
+prebuilt_etc {
+    name: "fsverity-debug-cert-der",
+    src: "fsverity-debug.x509.der",
+    sub_dir: "security/fsverity",
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "fsverity-release-cert-der",
+    src: "fsverity-release.x509.der",
+    sub_dir: "security/fsverity",
+    filename_from_src: true,
+}

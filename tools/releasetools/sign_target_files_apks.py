@@ -634,6 +634,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         "BOOT/RAMDISK/first_stage_ramdisk/force_debuggable"):
       raise common.ExternalError("debuggable boot.img cannot be signed")
 
+    # Skip the fs-verity debug certificate.
+    elif filename.startswith("SYSTEM/etc/security/fsverity/fsverity-debug"):
+      pass
+
     # A non-APK file; copy it verbatim.
     else:
       common.ZipWriteStr(output_tf_zip, out_info, data)
