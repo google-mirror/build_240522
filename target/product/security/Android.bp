@@ -3,3 +3,10 @@ android_app_certificate {
     name: "aosp-testkey",
     certificate: "testkey",
 }
+
+prebuilt_etc {
+    name: "fsverity-release-cert-der",
+    src: "fsverity-release.x509.der",
+    sub_dir: "security/fsverity",
+    filename_from_src: true,
+}
