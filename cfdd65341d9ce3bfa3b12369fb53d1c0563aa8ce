@@ -115,6 +115,30 @@
       "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0db07726_93e7ed3d",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-04-03T23:10:29Z",
+      "side": 1,
+      "message": "yeah, but if there is a unrecognized field like new_key\u003d\"\", the code would fail",
+      "parentUuid": "24992290_53a87cd2",
+      "range": {
+        "startLine": 1086,
+        "startChar": 46,
+        "endLine": 1086,
+        "endChar": 47
+      },
+      "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
