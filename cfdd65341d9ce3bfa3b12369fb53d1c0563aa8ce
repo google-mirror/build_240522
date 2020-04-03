@@ -91,6 +91,30 @@
       "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24992290_53a87cd2",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-04-03T23:05:11Z",
+      "side": 1,
+      "message": "The non-greedy matching of partition name should solve this.",
+      "parentUuid": "d0448ff0_810baa8d",
+      "range": {
+        "startLine": 1086,
+        "startChar": 46,
+        "endLine": 1086,
+        "endChar": 47
+      },
+      "revId": "cfdd65341d9ce3bfa3b12369fb53d1c0563aa8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
