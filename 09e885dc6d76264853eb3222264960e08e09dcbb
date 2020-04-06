@@ -46,6 +46,30 @@
       "revId": "09e885dc6d76264853eb3222264960e08e09dcbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce148182_6ff095e4",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-06T13:01:20Z",
+      "side": 1,
+      "message": "Ok, understood.",
+      "parentUuid": "bb868fd3_239d547d",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 88
+      },
+      "revId": "09e885dc6d76264853eb3222264960e08e09dcbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
