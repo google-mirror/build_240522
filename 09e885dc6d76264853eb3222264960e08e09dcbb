@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "845b43df_1f570b75",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-06T11:38:27Z",
+      "side": 1,
+      "message": "I take it this is not a \"persistent\" property? Is it possible to override it from adb (you would need to do `adb shell stop` and `adb shell start`, and the property will get reset)?",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 88
+      },
+      "revId": "09e885dc6d76264853eb3222264960e08e09dcbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
