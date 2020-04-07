@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (385c9a Merge "Pass /system/etc/updatable-bcp-packages.txt to dex2oa)
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=QQ2A.200405.005
+>>>>>>> BRANCH (49ceb3 Version bump to QQ2A.200405.005 [core/build_id.mk])
