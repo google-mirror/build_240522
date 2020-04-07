@@ -1430,6 +1430,12 @@ license_modules := $(filter $(PRODUCT_OUT)/%,$(license_modules))
 license_modules := $(filter-out $(TARGET_OUT_FAKE)/%,$(license_modules))
 # testcases are not relevant to the system image.
 license_modules := $(filter-out $(TARGET_OUT_TESTCASES)/%,$(license_modules))
+# apks and jars are relevant to the system image, but odexs in system_other are not.
+ifeq (true,$(BOARD_USES_SYSTEM_OTHER_ODEX))
+  license_modules := $(filter-out $(TARGET_OUT_SYSTEM_OTHER)/%.odex,$(license_modules))
+  license_modules := $(filter-out $(TARGET_OUT_SYSTEM_OTHER)/%.vdex,$(license_modules))
+  license_modules := $(filter-out $(TARGET_OUT_SYSTEM_OTHER)/%.art,$(license_modules))
+endif
 # filesystem images: system, vendor, product, system_ext, and odm
 license_modules_system := $(filter $(TARGET_OUT)/%,$(license_modules))
 license_modules_vendor := $(filter $(TARGET_OUT_VENDOR)/%,$(license_modules))
