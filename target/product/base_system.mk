@@ -319,6 +319,7 @@ endif
 PRODUCT_BOOT_JARS := \
     $(ART_APEX_JARS) \
     framework-minus-apex \
+    com.android.i18n:core-icu4j \
     ext \
     telephony-common \
     voip-common \
