@@ -258,7 +258,7 @@ endef
 # java code with dalvikvm/art.
 # Jars present in the ART apex. These should match exactly the list of
 # Java libraries in the ART apex build rule.
-ART_APEX_JARS := core-oj core-libart core-icu4j okhttp bouncycastle apache-xml
+ART_APEX_JARS := core-oj core-libart okhttp bouncycastle apache-xml
 #################################################################
 
 # Read the product specs so we can get TARGET_DEVICE and other
