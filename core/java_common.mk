@@ -382,7 +382,20 @@ else # LOCAL_IS_HOST_MODULE
   endif # USE_CORE_LIB_BOOTCLASSPATH
 endif # !LOCAL_IS_HOST_MODULE
 
-ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS) $(full_java_bootclasspath_libs)
+ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(sort \
+  $(ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS) \
+  $(LOCAL_STATIC_LIBRARIES) \
+  $(LOCAL_WHOLE_STATIC_LIBRARIES) \
+  $(LOCAL_SHARED_LIBRARIES) \
+  $(LOCAL_DYLIB_LIBRARIES) \
+  $(LOCAL_RLIB_LIBRARIES) \
+  $(LOCAL_PROC_MACRO_LIBRARIES) \
+  $(LOCAL_HEADER_LIBRARIES) \
+  $(LOCAL_STATIC_JAVA_LIBRARIES) \
+  $(LOCAL_JAVA_LIBRARIES) \
+  $(LOCAL_JNI_SHARED_LIBRARIES) \
+  $(LOCAL_STATIC_ANDROID_LIBRARIES) \
+  $(full_java_bootclasspath_libs))
 
 # Export the SDK libs. The sdk library names listed in LOCAL_SDK_LIBRARIES are first exported.
 # Then sdk library names exported from dependencies are all re-exported.
