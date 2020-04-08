@@ -323,6 +323,7 @@ PRODUCT_BOOT_JARS := \
     telephony-common \
     voip-common \
     ims-common \
+    com.android.i18n:core-icu4j \
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
