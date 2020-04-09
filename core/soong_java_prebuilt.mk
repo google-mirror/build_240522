@@ -118,7 +118,12 @@ ifdef LOCAL_SOONG_DEX_JAR
 else  # LOCAL_SOONG_DEX_JAR
   ifndef LOCAL_UNINSTALLABLE_MODULE
     ifndef LOCAL_IS_HOST_MODULE
-      $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+      ifeq ($(findstring true,$(LAZY_MISSING_DEPENDENCIES) $(ALLOW_MISSING_DEPENDENCIES)),true)
+	$(LOCAL_BUILT_MODULE) :
+		@echo "error: Installable device module $(LOCAL_MODULE) must have LOCAL_SOONG_DEX_JAR set." && false
+      else
+        $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+      endif
     endif
   endif
 endif  # LOCAL_SOONG_DEX_JAR

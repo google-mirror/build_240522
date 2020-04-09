@@ -907,13 +907,14 @@ ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
   # $(1): the prefix of the module doing the linking
   # $(2): the prefix of the missing module
   define link-type-missing
-    $(shell $(call echo-error,$($(1).MAKEFILE),"$(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
+    $(shell $(call echo-error,$($(1).MAKEFILE),"Missing dependency: $(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
     $(eval available_variants := $(filter %:$(call link-type-name,$(2)),$(ALL_LINK_TYPES)))\
     $(if $(available_variants),\
       $(info Available variants:)\
       $(foreach v,$(available_variants),$(info $(space)$(space)$(call link-type-name-variant,$(v)))))\
-    $(info You can set ALLOW_MISSING_DEPENDENCIES=true in your environment if this is intentional, but that may defer real problems until later in the build.)\
-    $(eval link_type_error := true)
+    $(if $(filter true,$(LAZY_MISSING_DEPENDENCIES)),,\
+      $(info You can set LAZY_MISSING_DEPENDENCIES=true in your environment if this is intentional, but that may defer real problems until later in the build.)\
+      $(eval link_type_error := true))
   endef
 else
   define link-type-missing
