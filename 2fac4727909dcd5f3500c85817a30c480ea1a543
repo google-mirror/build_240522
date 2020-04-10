@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d67bf8d_faf7ea29",
+        "filename": "core/soong_java_prebuilt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-10T19:22:47Z",
+      "side": 1,
+      "message": "The lack of any check for ALLOW_MISSING_DEPENDENCIES here (before this topic) seems to have slipped through the cracks because no user was hitting this failure. In my testing only `CtsJdwpTestCase` was failing here, because it was the only module in my source tree with no `srcs` but a missing `static_libs` dependency.\n\nAdditionally, after this topic, if this missing LOCAL_SOONG_DEX_JAR is due to an Android.bp missing dependency, then the Ninja failure will instead be created by module.go\u0027s moduleContext.Build() when it calls GetMissingDependencies() which in turn calls m.bp.GetMissingDependencies(), and not by this @echo.",
+      "range": {
+        "startLine": 121,
+        "startChar": 6,
+        "endLine": 123,
+        "endChar": 102
+      },
+      "revId": "2fac4727909dcd5f3500c85817a30c480ea1a543",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
