@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4898052c_34cf21fd",
+        "filename": "target/product/emulated_storage.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-14T11:53:11Z",
+      "side": 1,
+      "message": "I really wish we had better names for these product variables that hinted at where they get put..",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "bf7006e19fab2ab7ca49352b427355fbcfd896e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
