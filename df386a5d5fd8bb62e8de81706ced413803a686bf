@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31bcb027_15e0bdd4",
+        "filename": "target/product/emulated_storage.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-15T09:42:00Z",
+      "side": 1,
+      "message": "typo here?",
+      "range": {
+        "startLine": 21,
+        "startChar": 33,
+        "endLine": 21,
+        "endChar": 41
+      },
+      "revId": "df386a5d5fd8bb62e8de81706ced413803a686bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
