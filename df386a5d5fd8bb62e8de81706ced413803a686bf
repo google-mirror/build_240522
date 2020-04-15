@@ -22,6 +22,30 @@
       "revId": "df386a5d5fd8bb62e8de81706ced413803a686bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "208f359f_5127491e",
+        "filename": "target/product/emulated_storage.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-04-15T09:46:29Z",
+      "side": 1,
+      "message": "Oops, thanks for the catch!",
+      "parentUuid": "31bcb027_15e0bdd4",
+      "range": {
+        "startLine": 21,
+        "startChar": 33,
+        "endLine": 21,
+        "endChar": 41
+      },
+      "revId": "df386a5d5fd8bb62e8de81706ced413803a686bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
