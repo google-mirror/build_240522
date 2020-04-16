@@ -16,6 +16,29 @@
       "revId": "3eac3fa4eec2482ff040b644fb26fa8f3a2e53dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c661b95e_e3109b7c",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2096,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-04-16T21:06:52Z",
+      "side": 1,
+      "message": "Can you point me to how to add this as a dependency to this action? I dont see anything explicitly defined in other actions that use SOONG_ZIP. Should I add the following after the rule?\n\n```\n$(call add-dependency, compile-java, $(SOONG_ZIP))\n```",
+      "range": {
+        "startLine": 2096,
+        "startChar": 10,
+        "endLine": 2096,
+        "endChar": 19
+      },
+      "revId": "3eac3fa4eec2482ff040b644fb26fa8f3a2e53dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
