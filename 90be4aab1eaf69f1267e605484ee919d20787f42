@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af7c278e_98dcc2eb",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2020-04-16T03:48:22Z",
+      "side": 1,
+      "message": "These are hacks for GSI, could be removed.\n\nThe folder target/board/emulator_arm64/sepolicy/* cold be removed also.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 69
+      },
+      "revId": "90be4aab1eaf69f1267e605484ee919d20787f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
