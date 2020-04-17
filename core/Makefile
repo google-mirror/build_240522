@@ -4305,6 +4305,20 @@ misc_info: $(INSTALLED_MISC_INFO_TARGET)
 droidcore: $(INSTALLED_MISC_INFO_TARGET)
 
 # -----------------------------------------------------------------
+#  cross_dir_find_files_pairs.txt
+#    Used to track cross-directory calls to find-files-in-subdirs
+#    (and similar functions) that introduce implicit dependencies
+#    between projects.
+#
+
+CROSS_DIR_FIND_FILES_PAIRS := $(PRODUCT_OUT)/cross_dir_find_files_pairs.txt
+$(CROSS_DIR_FIND_FILES_PAIRS):
+	@echo -e $(subst $(space),"\n",$(sort $(cross_dir_find_files_pairs))) > $@
+
+.PHONY: cross_dir_find_files_pairs
+cross_dir_find_files_pairs : $(CROSS_DIR_FIND_FILES_PAIRS)
+
+# -----------------------------------------------------------------
 # A zip of the directories that map to the target filesystem.
 # This zip can be used to create an OTA package or filesystem image
 # as a post-build step.

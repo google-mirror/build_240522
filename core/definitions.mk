@@ -455,10 +455,14 @@ endef
 ###########################################################
 
 define find-files-in-subdirs
-$(sort $(patsubst ./%,%, \
-  $(shell cd $(1) ; \
-          find -L $(3) -name $(2) -and -not -name ".*") \
- ))
+$(strip \
+  $(if $(filter $(LOCAL_PATH),$(strip $(1))),,
+    $(eval cross_dir_find_files_pairs += $(LOCAL_PATH):$(strip $(1)))) \
+  $(sort $(patsubst ./%,%, \
+    $(shell cd $(1) ; \
+            find -L $(3) -name $(2) -and -not -name ".*") \
+   )) \
+)
 endef
 
 ###########################################################
@@ -488,10 +492,14 @@ endef
 ###########################################################
 
 define find-test-data-in-subdirs
-$(foreach f,$(sort $(patsubst ./%,%, \
-  $(shell cd $(1) ; \
-          find -L $(3) -type f -and -name $(2) -and -not -name ".*") \
-)),$(1):$(f))
+$(strip \
+  $(if $(filter $(LOCAL_PATH),$(strip $(1))),,
+    $(eval cross_dir_find_files_pairs += $(LOCAL_PATH):$(strip $(1)))) \
+  $(foreach f,$(sort $(patsubst ./%,%, \
+    $(shell cd $(1) ; \
+            find -L $(3) -type f -and -name $(2) -and -not -name ".*") \
+  )),$(1):$(f)) \
+)
 endef
 
 ###########################################################
