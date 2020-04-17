@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9af3f003_e24b831f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-17T00:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1d44b9_bc313a65",
+      "range": {
+        "startLine": 734,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 54
+      },
+      "revId": "ce1f8e7231599557f3479f8b506c55281ae81c85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c750b130_b544d681",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-17T00:09:38Z",
       "side": 1,
       "message": "We can just specify a kernel_name and default to \"kernel\"?",
+      "range": {
+        "startLine": 1050,
+        "startChar": 24,
+        "endLine": 1050,
+        "endChar": 34
+      },
+      "revId": "ce1f8e7231599557f3479f8b506c55281ae81c85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcccfef6_e608f39b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-17T00:56:17Z",
+      "side": 1,
+      "message": "I didn\u0027t follow... In the case of the boot image the kernel name is derived from the boot image filename. If I change _BuildBootableImage to take a kernel name, I would have to move the logic at 1066-1070 into GetBootableImage, which works, but seems pretty much the same...",
+      "parentUuid": "c750b130_b544d681",
       "range": {
         "startLine": 1050,
         "startChar": 24,
