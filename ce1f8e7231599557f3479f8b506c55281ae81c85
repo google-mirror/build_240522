@@ -93,6 +93,30 @@
       "revId": "ce1f8e7231599557f3479f8b506c55281ae81c85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e206aa3b_92958573",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-04-17T21:32:40Z",
+      "side": 1,
+      "message": "I thought the logic is a bit fragile when deriving the kernel path. And it would be cleaner if the caller can explicitly specify the path. But yeah, there\u0027s another layer in  GetBootableImage(). So I am okay with this.",
+      "parentUuid": "fcccfef6_e608f39b",
+      "range": {
+        "startLine": 1050,
+        "startChar": 24,
+        "endLine": 1050,
+        "endChar": 34
+      },
+      "revId": "ce1f8e7231599557f3479f8b506c55281ae81c85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
