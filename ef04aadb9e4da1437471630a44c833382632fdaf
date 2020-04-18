@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5d939be_cc90d830",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-18T09:34:32Z",
+      "side": 1,
+      "message": "What about the other \"generic\" devices? Seems like if we dismantle the emulator stuff for generic_arm64 we should do the same with the others.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f99e4263_6067bea0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-18T09:34:32Z",
+      "side": 1,
+      "message": "There are 7 other products in AOSP (and more internal) that use this one. I suspect more of these should be switched over:\n\nbuild/make/target/product/aosp_arm64_ab.mk\nbuild/make/target/product/aosp_arm64.mk\nbuild/make/target/product/sdk_phone_arm64.mk\ndevice/generic/car/aosp_car_arm64.mk\ndevice/generic/qemu/qemu_arm64.mk\ndevice/generic/qemu/ranchu_arm64.mk\ndevice/google/atv/products/aosp_atv_arm64_ab.mk\ndevice/google/atv/products/aosp_atv_arm64.mk",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b61a1cd1_d0f255b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-18T09:34:32Z",
+      "side": 1,
+      "message": "Can you ref this too?\nBug: 111538404",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b89ef2d5_7dc9e132",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-18T09:34:32Z",
+      "side": 1,
+      "message": "do we know that this hack is necessary for sdk_phone_arm64?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
