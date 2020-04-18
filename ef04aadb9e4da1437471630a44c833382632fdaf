@@ -91,6 +91,29 @@
       "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f732116_73cd4357",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-18T09:36:01Z",
+      "side": 1,
+      "message": "There\u0027s a lot of emulator-isms here btw, we should remove these from generic_* if we\u0027re going ahead with this move.",
+      "range": {
+        "startLine": 55,
+        "startChar": 55,
+        "endLine": 77,
+        "endChar": 42
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
