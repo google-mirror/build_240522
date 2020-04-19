@@ -946,12 +946,12 @@ def AddAftlInclusionProof(output_image):
   build_info = BuildInfo(OPTIONS.info_dict)
   version_incremental = build_info.GetBuildProp("ro.build.version.incremental")
   aftltool = OPTIONS.aftl_tool_path
+  server_argument_list = [OPTIONS.aftl_server, OPTIONS.aftl_key_path]
   aftl_cmd = [aftltool, "make_icp_from_vbmeta",
               "--vbmeta_image_path", vbmeta_image,
               "--output", output_image,
               "--version_incremental", version_incremental,
-              "--transparency_log_servers", OPTIONS.aftl_server,
-              "--transparency_log_pub_keys", OPTIONS.aftl_key_path,
+              "--transparency_log_servers", ','.join(server_argument_list),
               "--manufacturer_key", OPTIONS.aftl_manufacturer_key_path,
               "--algorithm", "SHA256_RSA4096",
               "--padding", "4096"]
