@@ -166,6 +166,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e88a677e_a7d023c5",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-20T11:18:07Z",
+      "side": 1,
+      "message": "Right, this comes from a sanity check I recently added. The check assumes that that any apex which is updatable, so I need to investigate how to distinguish between updatable and non-updatable apexes.\n\nVictor, can this CL wait a few days until I do refactoring of PRODUCT_BOOT_JARS?",
+      "parentUuid": "8210f5e2_e6c7535c",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
