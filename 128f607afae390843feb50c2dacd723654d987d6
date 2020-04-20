@@ -22,6 +22,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03ba3766_610f4cfc",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-20T09:01:53Z",
+      "side": 1,
+      "message": "We\u0027ll need to change format of PRODUCT_BOOT_JARS from a list of module names to a list of colon-separated pairs (apex name, module name). For platform modules that are not from apex we can have special apex name \"platform\".\n\nThe change is straightforward, potential problems are only for the products that append to PRODUCT_BOOT_JARS. We\u0027ll need to validate PRODUCT_BOOT_JARS to ensure that all components have the new colon-separated format. Still there will be partners who will be broken by this change (best we can do for them is to emit a clear error message).\n\nPersonally I\u0027d welcome the change as it will make the handling of PRODUCT_BOOT_JARS and PRODUCT_UPDATABLE_BOOT_JARS more uniform. I think it should be done before merging this CL. Should I start working on this immediately to unblock Victor\u0027s change?",
+      "parentUuid": "75439b41_1d2551fa",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
