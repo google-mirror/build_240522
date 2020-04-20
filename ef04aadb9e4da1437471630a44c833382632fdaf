@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "16e1c27c_f2987729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-20T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6b2d3da_2a67ed6b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f99e4263_6067bea0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -93,6 +117,30 @@
       "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6448d5fb_a57c6e3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-20T17:38:32Z",
+      "side": 1,
+      "message": "If other targets should use emulator_arm64 I think that should be done as a separate step.",
+      "parentUuid": "0cab5395_740691c6",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +211,30 @@
       "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53beb66_fede7e79",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-20T17:38:32Z",
+      "side": 1,
+      "message": "Don\u0027t know... I spoke to Bo, he did not know either. My guess is it can be removed but I\u0027d like to investigate that separately.",
+      "parentUuid": "b89ef2d5_7dc9e132",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
