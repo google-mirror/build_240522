@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c6b2d3da_2a67ed6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2020-04-20T02:45:01Z",
+      "side": 1,
+      "message": "Agree. I hope all aosp_$arch could also apply.\n\nI could help for further targets after these arm64 patches merged if we decide to do.",
+      "parentUuid": "b5d939be_cc90d830",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f99e4263_6067bea0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-18T09:34:32Z",
       "side": 1,
       "message": "There are 7 other products in AOSP (and more internal) that use this one. I suspect more of these should be switched over:\n\nbuild/make/target/product/aosp_arm64_ab.mk\nbuild/make/target/product/aosp_arm64.mk\nbuild/make/target/product/sdk_phone_arm64.mk\ndevice/generic/car/aosp_car_arm64.mk\ndevice/generic/qemu/qemu_arm64.mk\ndevice/generic/qemu/ranchu_arm64.mk\ndevice/google/atv/products/aosp_atv_arm64_ab.mk\ndevice/google/atv/products/aosp_atv_arm64.mk",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cab5395_740691c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2020-04-20T02:45:01Z",
+      "side": 1,
+      "message": "\u003e There are 7 other products in AOSP (and more internal) that use this one. I suspect more of these should be switched over:\n\u003e \n\u003e build/make/target/product/aosp_arm64_ab.mk\n\n\u003d\u003d\u003e Uses generic_arm64_ab. Can be excluded.\n\n\u003e build/make/target/product/aosp_arm64.mk\n\u003e build/make/target/product/sdk_phone_arm64.mk\n\n\u003d\u003d\u003e These two we are working.\n\n\u003e device/generic/car/aosp_car_arm64.mk\n\n\u003d\u003d\u003e TBC\n\n\u003e device/generic/qemu/qemu_arm64.mk\n\u003e device/generic/qemu/ranchu_arm64.mk\n\n\u003d\u003d\u003e (TBC) Need to change to emulator_arm64?\nBo, could you confirm for these 2 emulators?\n\n\u003e device/google/atv/products/aosp_atv_arm64_ab.mk\n\u003e device/google/atv/products/aosp_atv_arm64.mk\nWally, are we still using these 2 targets?\nIf yes, do these 2 targets need emulator?\n\n\u003d\u003d\u003e (TBC) Both are removed on internal. Can be excluded?",
+      "parentUuid": "f99e4263_6067bea0",
       "range": {
         "startLine": 11,
         "startChar": 0,
