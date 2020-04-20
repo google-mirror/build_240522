@@ -46,6 +46,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae4b25ec_df244cbb",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2020-04-20T09:09:48Z",
+      "side": 1,
+      "message": "I think Victor can still land this change without your cleanup, but I agree we can work on the cleanup you are suggesting now.",
+      "parentUuid": "03ba3766_610f4cfc",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
