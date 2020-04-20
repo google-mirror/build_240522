@@ -162,6 +162,30 @@
       "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd5de2f_c3254320",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2020-04-20T02:50:58Z",
+      "side": 1,
+      "message": "Emulator-isms are removed in another patch here:\n\nhttps://android-review.googlesource.com/c/platform/build/+/1286896/4/target/board/generic_arm64/BoardConfig.mk#b79\n\nOn the other hand, emulator could modify the file later for more detailed emulator-isms.",
+      "parentUuid": "4f732116_73cd4357",
+      "range": {
+        "startLine": 55,
+        "startChar": 55,
+        "endLine": 77,
+        "endChar": 42
+      },
+      "revId": "ef04aadb9e4da1437471630a44c833382632fdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
