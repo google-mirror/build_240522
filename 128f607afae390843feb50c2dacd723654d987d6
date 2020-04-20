@@ -94,6 +94,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54216b17_7a380aed",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-20T09:21:20Z",
+      "side": 1,
+      "message": "\u003e I think Victor can still land this change without your cleanup, but I agree we can work on the cleanup you are suggesting now.\n\nOne undesirable effect will be that core-icu4j will no longer be in the framework boot image (possible performance regression).\n\n\u003e Actually, Victor could just put core-icu4j in PRODUCT_BOOT_JARS, right?\n\nFor all PRODUCT_BOOT_JARS that are not ART_APEX_JARS we assume on-device location /system/framework: https://source.corp.google.com/aosp-master/build/soong/java/dexpreopt_config.go;l\u003d113. So I think this will result in a boot failure due to not finding core-icu4j in /system/framework. I need to check this.",
+      "parentUuid": "d52d4952_0b08ac5d",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
