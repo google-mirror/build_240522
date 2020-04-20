@@ -118,6 +118,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8210f5e2_e6c7535c",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1047684
+      },
+      "writtenOn": "2020-04-20T10:48:40Z",
+      "side": 1,
+      "message": "Just tried putting core-icu4j in PRODUCT_BOOT_JARS, and I got the following build error from build/soong/java/dexpreopt_bootjars.go.\n\n\u003e internal error: module \u0027core-icu4j\u0027 from updatable apex \u0027com.android.i18n\u0027 is not allowed in the framework boot image",
+      "parentUuid": "54216b17_7a380aed",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
