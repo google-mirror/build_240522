@@ -22,6 +22,30 @@
       "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94ce19d7_bd3af20c",
+        "filename": "target/product/sdk_phone_arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-20T18:19:53Z",
+      "side": 0,
+      "message": "This is a copy of aosp_arm64.mk with the obviously-aosp_arm64 specific stuff removed (there are a couple things there which are ifeq (aosp_arm64,$(TARGET_PRODUCT))).  I can have this just include aosp_arm64.mk if that is preferable. I was just trying to separate the two targets as much as possible so further changes in one will not affect the other.",
+      "parentUuid": "2fc13fa9_558cfd81",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
