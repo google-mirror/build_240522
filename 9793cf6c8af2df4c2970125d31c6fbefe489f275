@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fc13fa9_558cfd81",
+        "filename": "target/product/sdk_phone_arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-20T17:51:55Z",
+      "side": 0,
+      "message": "how come this can\u0027t continue inheriting aosp_arm64 ? hard to tell what you aren\u0027t including from it.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
