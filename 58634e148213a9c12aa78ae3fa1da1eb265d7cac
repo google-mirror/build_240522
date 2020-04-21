@@ -34,6 +34,24 @@
       "revId": "58634e148213a9c12aa78ae3fa1da1eb265d7cac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c75dd8f_b0f7c578",
+        "filename": "Deprecation.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-04-21T22:35:03Z",
+      "side": 1,
+      "message": "They had already been obsoleted last year in https://android-review.googlesource.com/c/platform/build/+/957905 but I had marked them as error instead of obsolete in this table.",
+      "parentUuid": "ee27bc28_5496e972",
+      "revId": "58634e148213a9c12aa78ae3fa1da1eb265d7cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
