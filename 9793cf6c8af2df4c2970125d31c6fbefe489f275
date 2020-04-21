@@ -94,6 +94,30 @@
       "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7062e761_de97e0a5",
+        "filename": "target/product/sdk_phone_arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-21T17:34:20Z",
+      "side": 0,
+      "message": "k, that could probably be worked around, but this is fine too.",
+      "parentUuid": "53b91398_33eb511f",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
