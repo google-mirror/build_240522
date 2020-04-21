@@ -70,6 +70,30 @@
       "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53b91398_33eb511f",
+        "filename": "target/product/sdk_phone_arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-04-21T17:23:00Z",
+      "side": 0,
+      "message": "I missed that I had included $(SRC_TARGET_DIR)/board/emulator_arm64/device.mk instead of $(SRC_TARGET_DIR)/board/generic_arm64/device.mk here. Emulator cannot include the generic_arm64 device.mk, so I think this needs to stay as-is.",
+      "parentUuid": "461bfb31_d59e875b",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
