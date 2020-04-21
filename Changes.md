@@ -2,6 +2,8 @@
 
 ## COPY_HEADERS usage now produces warnings {#copy_headers}
 
+testing, for the ci.android.com/edit documentation
+
 We've considered `BUILD_COPY_HEADERS`/`LOCAL_COPY_HEADERS` to be deprecated for
 a long time, and the places where it's been able to be used have shrinked over
 the last several releases. Equivalent functionality is not available in Soong.
