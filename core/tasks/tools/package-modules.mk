@@ -10,9 +10,13 @@
 #     "true": error out when a module is missing
 #     "false": print a warning when a module is missing
 #     "": defaults to false currently
+#     (Does not apply when ALLOW_MISSING_DEPENDENCIES is "true")
 # Output variables:
 #   my_package_zip: the path to the output zip file.
 #
+# If ALLOW_MISSING_DEPENDENCIES is "true" and a module from my_modules does not exist:
+#   - If STRICT_PACKAGE_MODULES is "true", building this package will produce a build error.
+#   - Otherwise, this package does not produce a build error on missing modules.
 #
 
 my_makefile := $(lastword $(filter-out $(lastword $(MAKEFILE_LIST)),$(MAKEFILE_LIST)))
@@ -29,7 +33,7 @@ my_package_zip := $(LOCAL_BUILT_MODULE)
 my_built_modules := $(foreach p,$(my_copy_pairs),$(call word-colon,1,$(p)))
 my_copy_pairs := $(foreach p,$(my_copy_pairs),$(call word-colon,1,$(p)):$(my_staging_dir)/$(call word-colon,2,$(p)))
 my_pickup_files :=
-my_missing_error :=
+my_missing_files :=
 
 # Iterate over the modules and include their direct dependencies stated in the
 # LOCAL_REQUIRED_MODULES.
@@ -46,14 +50,6 @@ ifneq ($(filter-out true false,$(my_modules_strict)),)
   $(error done)
 endif
 
-my_missing_files = $(shell $(call echo-warning,$(my_makefile),$(my_package_name): Unknown installed file for module '$(1)'))
-ifeq ($(ALLOW_MISSING_DEPENDENCIES),true)
-  # Ignore unknown installed files on partial builds
-  my_missing_files =
-else ifeq ($(my_modules_strict),true)
-  my_missing_files = $(shell $(call echo-error,$(my_makefile),$(my_package_name): Unknown installed file for module '$(1)'))$(eval my_missing_error := true)
-endif
-
 # Iterate over modules' built files and installed files;
 # Calculate the dest files in the output zip file.
 
@@ -65,7 +61,7 @@ $(foreach m,$(my_modules_and_deps),\
   $(eval _module_class_folder := $($(strip MODULE_CLASS_$(word 1, $(strip $(ALL_MODULES.$(m).CLASS)\
     $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).CLASS))))))\
   $(if $(_pickup_files)$(_built_files),,\
-    $(call my_missing_files,$(m)))\
+    $(eval my_missing_files += $(m)))\
   $(eval my_pickup_files += $(_pickup_files))\
   $(foreach i, $(_built_files),\
     $(eval bui_ins := $(subst :,$(space),$(i)))\
@@ -85,10 +81,29 @@ $(foreach m,$(my_modules_and_deps),\
       $(eval my_copy_pairs += $(bui):$(my_staging_dir)/$(my_copy_dest)))\
   ))
 
-ifneq ($(my_missing_error),)
-  $(error done)
+lazy_failure :=
+ifeq ($(ALLOW_MISSING_DEPENDENCIES),true)
+  ifeq ($(STRICT_PACKAGE_MODULES),true)
+    lazy_failure := true
+# Change this module's build rule to a build failure.
+$(my_package_zip) : $(my_built_modules)
+	@echo "$(my_package_name): Unknown installed files: $(my_missing_files)" && false
+
+  endif
+  # Ignore unknown installed files on partial builds
+  my_missing_files =
 endif
 
+
+ifneq ($(my_missing_files),)
+  ifeq ($(my_modules_strict),true)
+    $(call echo-error,$(my_makefile),$(my_package_name): Unknown installed files: $(my_missing_files))
+  else
+    $(call echo-warning,$(my_makefile),$(my_package_name): Unknown installed files: $(my_missing_files))
+  endif
+endif
+
+ifneq ($(lazy_failure),true)
 $(my_package_zip): PRIVATE_COPY_PAIRS := $(my_copy_pairs)
 $(my_package_zip): PRIVATE_PICKUP_FILES := $(my_pickup_files)
 $(my_package_zip) : $(my_built_modules)
@@ -102,6 +117,8 @@ $(my_package_zip) : $(my_built_modules)
 	  cp -RfL $(f) $(dir $@) && ) true
 	$(hide) cd $(dir $@) && zip -rqX $(notdir $@) *
 
+endif
+
 my_makefile :=
 my_staging_dir :=
 my_built_modules :=
@@ -112,3 +129,4 @@ my_missing_files :=
 my_missing_error :=
 my_modules_and_deps :=
 my_modules_strict :=
+lazy_failure :=
