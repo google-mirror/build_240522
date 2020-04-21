@@ -46,6 +46,30 @@
       "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "461bfb31_d59e875b",
+        "filename": "target/product/sdk_phone_arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-21T11:16:19Z",
+      "side": 0,
+      "message": "probably the call of the folks who consume this sdk_phone_arm64. Presumably the intent is that changes in aosp_arm64 *should* be getting the changes in aosp_arm64 to avoid it getting stale, and that\u0027s why it\u0027s set up to inherit it currently\n\nUnless there\u0027s specifically things in aosp_arm64 that you don\u0027t want here and can\u0027t override, it seems like a good idea to keep it as-is (the ifeq seems harmless).",
+      "parentUuid": "94ce19d7_bd3af20c",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9793cf6c8af2df4c2970125d31c6fbefe489f275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
