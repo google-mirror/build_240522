@@ -16,6 +16,24 @@
       "revId": "58634e148213a9c12aa78ae3fa1da1eb265d7cac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee27bc28_5496e972",
+        "filename": "Deprecation.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-04-21T22:28:47Z",
+      "side": 1,
+      "message": "Or were these already obsoleted?",
+      "parentUuid": "30a02c4f_73f1aa9e",
+      "revId": "58634e148213a9c12aa78ae3fa1da1eb265d7cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
