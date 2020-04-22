@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "607dcb67_71a5990f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-22T17:42:16Z",
+      "side": 1,
+      "message": "Do you mean \u0027without\u0027 here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 51,
+        "endLine": 9,
+        "endChar": 55
+      },
+      "revId": "e5ced7cbef97155f4fce3e2f97b2927b5cb4ce10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32d7ddbd_b5c14655",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-22T17:42:16Z",
+      "side": 1,
+      "message": "Is there any problem here with the space? Does \u0027\u0027 !\u003d \u0027 \u0027 in make?\n\n(What I\u0027m asking is... does this block always execute now because there\u0027s always at least a space? Even if not RECORD_ALL_DEPS or deps-license)",
+      "range": {
+        "startLine": 911,
+        "startChar": 40,
+        "endLine": 911,
+        "endChar": 41
+      },
+      "revId": "e5ced7cbef97155f4fce3e2f97b2927b5cb4ce10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
