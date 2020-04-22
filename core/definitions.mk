@@ -454,10 +454,14 @@ endef
 ###########################################################
 
 define find-files-in-subdirs
-$(sort $(patsubst ./%,%, \
-  $(shell cd $(1) ; \
-          find -L $(3) -name $(2) -and -not -name ".*") \
- ))
+$(strip \
+  $(if $(wildcard $(1))$(filter-out $(LAZY_FIND_FILES_ERROR),true),
+    $(sort $(patsubst ./%,%, \
+      $(shell cd $(1) ; \
+              find -L $(3) -name $(2) -and -not -name ".*") \
+     )),\
+    $(1)/base_dir_does_not_exist) \
+)
 endef
 
 ###########################################################
