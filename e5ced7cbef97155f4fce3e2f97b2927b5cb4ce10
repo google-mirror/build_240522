@@ -45,6 +45,30 @@
       "revId": "e5ced7cbef97155f4fce3e2f97b2927b5cb4ce10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f7d6f06_3e1688c7",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-04-22T17:46:25Z",
+      "side": 1,
+      "message": "Yes, the space is a problem. And \"$filter(\" needs to be \"$(filter \"",
+      "parentUuid": "32d7ddbd_b5c14655",
+      "range": {
+        "startLine": 911,
+        "startChar": 40,
+        "endLine": 911,
+        "endChar": 41
+      },
+      "revId": "e5ced7cbef97155f4fce3e2f97b2927b5cb4ce10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
