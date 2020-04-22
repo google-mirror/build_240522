@@ -240,6 +240,10 @@ _product_list_vars += PRODUCT_SYSTEM_SERVER_JARS
 # List of system_server jars delivered via apex. Format = <apex name>:<jar name>.
 _product_list_vars += PRODUCT_UPDATABLE_SYSTEM_SERVER_JARS
 
+# A list of non-AOSP module names.
+# To ensure the non-AOSP jars do not mess up the AOSP jars order.
+_product_list_vars += PRODUCT_SYSTEM_SERVER_JARS_EXTRA
+
 # All of the apps that we force preopt, this overrides WITH_DEXPREOPT.
 _product_list_vars += PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK
 _product_list_vars += PRODUCT_DEXPREOPT_SPEED_APPS
