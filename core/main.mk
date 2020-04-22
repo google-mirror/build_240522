@@ -1108,25 +1108,25 @@ $(if $(strip $(1)), \
 endef
 
 ifdef FULL_BUILD
-  ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
-    # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
-    ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
-      _whitelist := $(PRODUCT_ENFORCE_PACKAGES_EXIST_WHITELIST)
-      _modules := $(PRODUCT_PACKAGES)
-      # Strip :32 and :64 suffixes
-      _modules := $(patsubst %:32,%,$(_modules))
-      _modules := $(patsubst %:64,%,$(_modules))
-      # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
-      # existence if either <module> or the <module>_32 variant.
-      _nonexistent_modules := $(filter-out $(ALL_MODULES),$(_modules))
-      _nonexistent_modules := $(foreach m,$(_nonexistent_modules),\
-        $(if $(call get-32-bit-modules,$(m)),,$(m)))
-      $(call maybe-print-list-and-error,$(filter-out $(_whitelist),$(_nonexistent_modules)),\
-        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
-      $(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_whitelist)),\
-        $(INTERNAL_PRODUCT) includes redundant whitelist entries for nonexistent PRODUCT_PACKAGES)
-    endif
+  # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
+  ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
+    _whitelist := $(PRODUCT_ENFORCE_PACKAGES_EXIST_WHITELIST)
+    _modules := $(PRODUCT_PACKAGES)
+    # Strip :32 and :64 suffixes
+    _modules := $(patsubst %:32,%,$(_modules))
+    _modules := $(patsubst %:64,%,$(_modules))
+    # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
+    # existence if either <module> or the <module>_32 variant.
+    _nonexistent_modules := $(filter-out $(ALL_MODULES),$(_modules))
+    _nonexistent_modules := $(foreach m,$(_nonexistent_modules),\
+      $(if $(call get-32-bit-modules,$(m)),,$(m)))
+    $(call maybe-print-list-and-error,$(filter-out $(_whitelist),$(_nonexistent_modules)),\
+      $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
+    $(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_whitelist)),\
+      $(INTERNAL_PRODUCT) includes redundant whitelist entries for nonexistent PRODUCT_PACKAGES)
+  endif
 
+  ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
     # Check to ensure that all modules in PRODUCT_HOST_PACKAGES exist
     #
     # Many host modules are Linux-only, so skip this check on Mac. If we ever have Mac-only modules,
