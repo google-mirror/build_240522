@@ -453,12 +453,26 @@ endef
 # Returns: a list of paths relative to the base dir.
 ###########################################################
 
+ifndef ALLOW_MISSING_DEPENDENCIES
 define find-files-in-subdirs
 $(sort $(patsubst ./%,%, \
   $(shell cd $(1) ; \
           find -L $(3) -name $(2) -and -not -name ".*") \
  ))
 endef
+else
+define find-files-in-subdirs
+$(strip \
+  $(if $(wildcard $(1)),
+    $(sort $(patsubst ./%,%, \
+      $(shell cd $(1) ; \
+              find -L $(3) -name $(2) -and -not -name ".*") \
+     )),\
+    $(call pretty-warning,Directory $(1) does not exist.)\
+    $(1)/base_dir_does_not_exist) \
+)
+endef
+endif
 
 ###########################################################
 ## Scan through each directory of $(1) looking for files
