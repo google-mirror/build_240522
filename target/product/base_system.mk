@@ -318,11 +318,11 @@ endif
 # The order matters for runtime class lookup performance.
 PRODUCT_BOOT_JARS := \
     $(ART_APEX_JARS) \
-    framework-minus-apex \
-    ext \
-    telephony-common \
-    voip-common \
-    ims-common \
+    platform:framework-minus-apex \
+    platform:ext \
+    platform:telephony-common \
+    platform:voip-common \
+    platform:ims-common \
 
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
@@ -340,9 +340,9 @@ PRODUCT_COPY_FILES += \
 # Default to excluding android.test.base from the bootclasspath.
 ifneq ($(REMOVE_ATB_FROM_BCP),false)
 PRODUCT_PACKAGES += framework-atb-backward-compatibility
-PRODUCT_BOOT_JARS += framework-atb-backward-compatibility
+PRODUCT_BOOT_JARS += platform:framework-atb-backward-compatibility
 else
-PRODUCT_BOOT_JARS += android.test.base
+PRODUCT_BOOT_JARS += platform:android.test.base
 endif
 
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote32.rc:system/etc/init/hw/init.zygote32.rc

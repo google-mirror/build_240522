@@ -192,7 +192,7 @@ ifeq ($(EMMA_INSTRUMENT),true)
     # bootclasspath.
     $(foreach product,$(PRODUCTS),\
       $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
-      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
+      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += platform:jacocoagent))
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 
@@ -268,11 +268,9 @@ ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
 endif
 
 $(foreach pair,$(PRODUCT_UPDATABLE_BOOT_JARS), \
-  $(if $(findstring $(call word-colon,2,$(pair)),$(PRODUCT_BOOT_JARS)), \
-    $(error A jar in PRODUCT_UPDATABLE_BOOT_JARS must not be in PRODUCT_BOOT_JARS, \
-      but $(call word-colon,2,$(pair)) is) \
-  ) \
-)
+  $(eval jar := $(call word-colon,2,$(pair))) \
+  $(if $(findstring $(jar), $(PRODUCT_BOOT_JARS)), \
+    $(error A jar in PRODUCT_UPDATABLE_BOOT_JARS must not be in PRODUCT_BOOT_JARS, but $(jar) is)))
 
 ENFORCE_SYSTEM_CERTIFICATE := $(PRODUCT_ENFORCE_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT)
 ENFORCE_SYSTEM_CERTIFICATE_WHITELIST := $(PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_WHITELIST)
