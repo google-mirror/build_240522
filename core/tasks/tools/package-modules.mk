@@ -9,7 +9,7 @@
 #   my_modules_strict: what happens when a module from my_modules does not exist
 #     "true": error out when a module is missing
 #     "false": print a warning when a module is missing
-#     "": defaults to false currently
+#     "": defaults to true currently
 # Output variables:
 #   my_package_zip: the path to the output zip file.
 #
@@ -50,7 +50,7 @@ my_missing_files = $(shell $(call echo-warning,$(my_makefile),$(my_package_name)
 ifeq ($(ALLOW_MISSING_DEPENDENCIES),true)
   # Ignore unknown installed files on partial builds
   my_missing_files =
-else ifeq ($(my_modules_strict),true)
+else ifneq ($(my_modules_strict),false)
   my_missing_files = $(shell $(call echo-error,$(my_makefile),$(my_package_name): Unknown installed file for module '$(1)'))$(eval my_missing_error := true)
 endif
 
