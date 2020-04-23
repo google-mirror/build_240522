@@ -238,6 +238,30 @@
       "revId": "128f607afae390843feb50c2dacd723654d987d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89356a25_28f7914c",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-04-23T15:39:10Z",
+      "side": 1,
+      "message": "Update on my ongoing refactoring of PRODUCT_BOOT_JARS: the first CL http://ag/11212475 is on the way (still in review and may need some rework and a cherry-pick in AOSP), the second CL https://r.android.com/1292917 is also on the way.\n\nI cherry-picked both above CLs and the current CL, changed it to put core-icu4j on the non-updatable boot jar list, built aosp_walleye-userdebug and booted. Boot takes a long time and dex2oat is recompiling the world.\n\nOne possible problem is that we now have different DEX location for core-icu4j.jar (/apex/com.android.i18n/javalib/core-icu4j.jar), and the actual location of the boot image (/system/framework/arm64/boot-core-icu4j.art ...). I think this is a problem for dex2oat as it derives .art/.oat location from the DEX location. I think that ART supports BCP components of the same boot image in different locations, but even so I need to do more work in Soong to put boot-core-icu4j.{art,oat} in the right location.\n\nAlso, I\u0027m getting there warnings in logcat:\n\n  zygote64: Core platform API violation: Ljava/nio/charset/CharsetEncoder;-\u003e\u003cinit\u003e(Ljava/nio/charset/Charset;FF[BZ)V from /apex/com.android.i18n/javalib/core-icu4j.jar using linking",
+      "parentUuid": "4a8a22d2_30c62fd0",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 33
+      },
+      "revId": "128f607afae390843feb50c2dacd723654d987d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
