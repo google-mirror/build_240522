@@ -52,6 +52,24 @@
       "revId": "d438d701ccd782dbe5dfbe6d61d37c0b2e85ef30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f945fe6f_96d33eb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-24T20:45:32Z",
+      "side": 1,
+      "message": "Good point, with incremental A_M_D\u003dtrue builds, repeating these missing deps in the log every time could be annoying...\n\nWhat about instead we write an out/missing_make_dependencies.log file?\n\nAny link-type-missing pair would be saved in that log, and then the  build prints out a single \"Missing Make dependencies observed, which may cause build failures. Check \u003clog\u003e for more information.\" message.\n\nThat would achieve the same goal of helping debugging failures due to these missing deps, while limiting build log spam to 1 line.",
+      "parentUuid": "1e1094d6_6eb72bf0",
+      "revId": "d438d701ccd782dbe5dfbe6d61d37c0b2e85ef30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
