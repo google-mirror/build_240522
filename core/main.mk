@@ -895,12 +895,13 @@ $(eval link_type_error := true)
 endef
 
 link-type-missing :=
+missing_link_warnings :=
 ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
   # Print an error message if the linked-to module is missing
   # $(1): the prefix of the module doing the linking
   # $(2): the prefix of the missing module
   define link-type-missing
-    $(shell $(call echo-error,$($(1).MAKEFILE),"$(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
+    $(shell $(call echo-error,$($(1).MAKEFILE),"Missing dependency: $(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
     $(eval available_variants := $(filter %:$(call link-type-name,$(2)),$(ALL_LINK_TYPES)))\
     $(if $(available_variants),\
       $(info Available variants:)\
@@ -910,6 +911,7 @@ ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
   endef
 else
   define link-type-missing
+    $(eval missing_link_warnings := $(missing_link_warnings)$($(1).MAKEFILE): $(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))\\n)\
     $(eval $$(1).MISSING := true)
   endef
 endif
@@ -936,6 +938,12 @@ $(foreach lt,$(ALL_LINK_TYPES),\
 
 ifdef link_type_error
   $(error exiting from previous errors)
+endif
+
+ifdef missing_link_warnings
+  $(shell echo -e "$(missing_link_warnings)" > $(OUT_DIR)/missing_make_dependencies.log)
+  $(warning Missing Make dependencies observed, which may cause build failures.\
+	  Check $(OUT_DIR)/missing_make_dependencies.log for more information.)
 endif
 
 # -------------------------------------------------------------------
