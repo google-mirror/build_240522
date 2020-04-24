@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fdbfd17_2ef1ef5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-04-24T20:08:09Z",
+      "side": 1,
+      "message": "Yet when there aren\u0027t failures, this can produce a significant amount of build spam for valid use cases.",
+      "revId": "d438d701ccd782dbe5dfbe6d61d37c0b2e85ef30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
