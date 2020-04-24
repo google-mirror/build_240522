@@ -1192,7 +1192,23 @@ $(CERTIFICATE_VIOLATION_MODULES_FILENAME):
 	$(foreach m,$(sort $(CERTIFICATE_VIOLATION_MODULES)), echo $(m) >> $@;)
 $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
 
-  all_offending_files :=
+  requirement_makefile :=
+  restricted_paths :=
+  $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
+    $(eval restricted_paths += $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
+    $(eval requirement_makefile += $(makefile)($(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS))))
+
+  restricted_patterns := $(call resolve-product-relative-paths,$(restricted_paths),%)
+
+  all_offending_files := $(filter-out $(HOST_OUT)/%,$(product_target_FILES))
+  whitelist := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)
+  whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))
+
+  redundant_whitelist :=
+  $(foreach p,$(whitelist_patterns),\
+    $(if $(filter $(p),$(all_offending_files)),,$(eval redundant_whitelist += $(p))))
+
+  all_offending_files := $(filter $(restricted_patterns),$(filter-out $(whitelist_patterns),$(all_offending_files)))
   $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
     $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
     $(eval ### Verify that the product only produces files inside its path requirements.) \
@@ -1207,22 +1223,37 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
     $(eval unused_whitelist := $(filter-out $(files),$(whitelist_patterns))) \
     $(call maybe-print-list-and-error,$(unused_whitelist),$(makefile) includes redundant whitelist entries in its artifact path requirement.) \
     $(eval ### Optionally verify that nothing else produces files inside this artifact path requirement.) \
-    $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_target_FILES))) \
-    $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
-    $(eval all_offending_files += $(files_in_requirement)) \
-    $(eval whitelist := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
-    $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
-    $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
-    $(eval enforcement := $(PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
-    $(if $(enforcement),\
-      $(call maybe-print-list-and-error,$(offending_files),\
-        $(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement. \
-        $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT)) \
-      $(eval unused_whitelist := $(if $(filter true strict,$(enforcement)),\
-        $(foreach p,$(whitelist_patterns),$(if $(filter $(p),$(extra_files)),,$(p))))) \
-      $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.) \
+    $(eval all_offending_files := $(filter-out $(files),$(all_offending_files))) \
+    $(eval extensible := $(PRODUCTS.$(makefile).ARTIFACT_PATH_EXTENSIBLE)) \
+    $(if $(extensible),, \
+      $(eval ### If ARTIFACT_PATH_EXTENSIBLE isn't set, it checks every makefile.) \
+      $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_target_FILES))) \
+      $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
+      $(eval whitelist := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST)) \
+      $(eval whitelist_patterns := $(call resolve-product-relative-paths,$(whitelist))) \
+      $(eval offending_files := $(filter-out $(whitelist_patterns),$(files_in_requirement))) \
+      $(eval enforcement := $(PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
+      $(if $(enforcement),\
+        $(call maybe-print-list-and-error,$(offending_files),\
+          $(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement. \
+          $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT)) \
+        $(eval unused_whitelist := $(if $(filter true strict,$(enforcement)),\
+          $(foreach p,$(whitelist_patterns),$(if $(filter $(p),$(extra_files)),,$(p))))) \
+        $(call maybe-print-list-and-error,$(unused_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.) \
+      ) \
     ) \
   )
+
+  # Error handling logic for paths of which ARTIFACT_PATH_EXTENSIBLE is set.
+  enforcement := $(PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)
+  $(if $(enforcement),\
+    $(call maybe-print-list-and-error,$(all_offending_files),\
+      $(INTERNAL_PRODUCT) produces files inside one of$(requirement_makefile)'s artifact path requirement. \
+      $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT)))
+
+  $(if $(filter true strict,$(enforcement)),\
+    $(call maybe-print-list-and-error,$(redundant_whitelist),$(INTERNAL_PRODUCT) includes redundant artifact path requirement whitelist entries.))
+
 $(PRODUCT_OUT)/offending_artifacts.txt:
 	rm -f $@
 	$(foreach f,$(sort $(all_offending_files)),echo $(f) >> $@;)

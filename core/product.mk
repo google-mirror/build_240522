@@ -436,6 +436,12 @@ define inherit-product
   $(eval PARENT_PRODUCT_FILES := $(sort $(PARENT_PRODUCT_FILES) $(current_mk)))
 endef
 
+define require-artifacts-in-path-exclusive
+  $(call require-artifacts-in-path,$(1),$(2),)
+endef
+define require-artifacts-in-path-extensible
+  $(call require-artifacts-in-path,$(1),$(2),true)
+endef
 # Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
 # product makefile hierarchy rooted in the current node places its artifacts.
 # Creating artifacts outside the specified paths will cause a build-time error.
@@ -443,6 +449,7 @@ define require-artifacts-in-path
   $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
   $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENTS := $(strip $(1))) \
   $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_WHITELIST := $(strip $(2))) \
+  $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_EXTENSIBLE := $(strip $(3))) \
   $(eval ARTIFACT_PATH_REQUIREMENT_PRODUCTS := \
     $(sort $(ARTIFACT_PATH_REQUIREMENT_PRODUCTS) $(current_mk)))
 endef
