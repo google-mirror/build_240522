@@ -900,7 +900,7 @@ ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
   # $(1): the prefix of the module doing the linking
   # $(2): the prefix of the missing module
   define link-type-missing
-    $(shell $(call echo-error,$($(1).MAKEFILE),"$(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
+    $(shell $(call echo-error,$($(1).MAKEFILE),"Missing dependency: $(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
     $(eval available_variants := $(filter %:$(call link-type-name,$(2)),$(ALL_LINK_TYPES)))\
     $(if $(available_variants),\
       $(info Available variants:)\
@@ -910,6 +910,7 @@ ifneq ($(ALLOW_MISSING_DEPENDENCIES),true)
   endef
 else
   define link-type-missing
+    $(shell $(call echo-warning,$($(1).MAKEFILE),"Missing dependency: $(call link-type-name-variant,$(1)) missing $(call link-type-name-variant,$(2))"))\
     $(eval $$(1).MISSING := true)
   endef
 endif
