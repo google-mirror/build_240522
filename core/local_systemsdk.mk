@@ -15,7 +15,7 @@
 #
 
 ifdef BOARD_SYSTEMSDK_VERSIONS
-  # Apps and jars in vendor or odm partition are forced to build against System SDK.
+  # Apps and jars in vendor, product or odm partition are forced to build against System SDK.
   _cannot_use_platform_apis :=
   ifneq (,$(filter true,$(LOCAL_VENDOR_MODULE) $(LOCAL_ODM_MODULE) $(LOCAL_PROPRIETARY_MODULE)))
     # Note: no need to check LOCAL_MODULE_PATH* since LOCAL_[VENDOR|ODM|OEM]_MODULE is already
@@ -30,9 +30,11 @@ ifdef BOARD_SYSTEMSDK_VERSIONS
     ifndef LOCAL_SDK_VERSION
       ifeq ($(_cannot_use_platform_apis),true)
         ifeq (,$(findstring __auto_generated_rro_,$(LOCAL_MODULE)))
-          # Runtime resource overlays are exempted from building against System SDK.
-          # TODO(b/35859726): remove this exception
-          LOCAL_SDK_VERSION := system_current
+          ifeq (,$(LOCAL_IS_RUNTIME_RESOURCE_OVERLAY))
+            # Runtime resource overlays are exempted from building against System SDK.
+            # TODO(b/155027019): remove this, after no product/vendor apps rely on this behavior.
+            LOCAL_SDK_VERSION := system_current
+          endif
         endif
       endif
     endif
