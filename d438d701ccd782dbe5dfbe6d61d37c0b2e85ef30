@@ -16,6 +16,24 @@
       "revId": "d438d701ccd782dbe5dfbe6d61d37c0b2e85ef30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12992ab_26e1b2dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-24T20:29:20Z",
+      "side": 1,
+      "message": "Right. What if we guard this with a flag? Something like VERBOSE_MISSING_DEPENDENCY_ERRORS\n\nI think partners wouldn\u0027t mind an additional few hundred lines in a \u003e100k line log if it speeds up their debugging.\n\nInternal users could simply avoid ALLOW_MISSING_DEPENDENCIES or avoid the VERBOSE_* flag.",
+      "parentUuid": "1fdbfd17_2ef1ef5a",
+      "revId": "d438d701ccd782dbe5dfbe6d61d37c0b2e85ef30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
