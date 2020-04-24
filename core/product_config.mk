@@ -192,7 +192,7 @@ ifeq ($(EMMA_INSTRUMENT),true)
     # bootclasspath.
     $(foreach product,$(PRODUCTS),\
       $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
-      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
+      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += system:jacocoagent))
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 

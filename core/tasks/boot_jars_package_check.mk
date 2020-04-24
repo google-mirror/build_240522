@@ -29,10 +29,14 @@ updatable_boot_jars := $(foreach pair,$(PRODUCT_UPDATABLE_BOOT_JARS),\
   $(eval jar := $(call word-colon,2,$(pair)))\
   $(jar).$(apex)\
 )
-#TODO(jiyong) merge art_boot_jars into updatable_boot_jars
-art_boot_jars := $(addsuffix .com.android.art.release,$(filter $(ART_APEX_JARS),$(PRODUCT_BOOT_JARS)))
 
-platform_boot_jars := $(filter-out $(ART_APEX_JARS),$(PRODUCT_BOOT_JARS))
+#TODO(jiyong) merge art_boot_jars into updatable_boot_jars
+art_boot_jars := $(addsuffix .com.android.art.release,$(ART_APEX_JARS_TARGETS))
+
+platform_boot_jars := $(foreach pair,$(filter-out $(ART_APEX_JARS),$(PRODUCT_BOOT_JARS)),\
+  $(eval jar := $(call word-colon,2,$(pair)))\
+  $(jar)\
+)
 
 built_boot_jars := $(foreach j, $(updatable_boot_jars) $(art_boot_jars) $(platform_boot_jars), \
   $(call intermediates-dir-for, JAVA_LIBRARIES, $(j),,COMMON)/classes.jar)
