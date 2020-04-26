@@ -221,7 +221,8 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
 
   def test_GetPartitionFingerprint_uses_fingerprint_prop_if_available(self):
     info_dict = copy.deepcopy(self.TEST_INFO_DICT)
-    info_dict['vendor.build.prop']['ro.vendor.build.fingerprint'] = 'vendor:fingerprint'
+    info_dict['vendor.build.prop']['ro.vendor.build.fingerprint'] = \
+        'vendor:fingerprint'
     target_info = common.BuildInfo(info_dict, None)
     self.assertEqual(
         target_info.GetPartitionFingerprint('vendor'),
@@ -1795,3 +1796,48 @@ super_group_foo_group_size={group_foo_size}
 
     lines = self.get_op_list(self.output_path)
     self.assertEqual(lines, ["remove foo"])
+
+
+class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
+  def setUp(self):
+    self.additional_props = {
+        'ro.boot.product.hardware.sku': ['std', 'pro']
+    }
+
+    build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+        'import /odm/etc/build_${ro.boot.product.hardware.sku}.prop'
+    ]
+
+    build_std_prop = [
+        'ro.product.odm.device=coral'
+    ]
+
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro'
+    ]
+
+    self.input_file = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(self.input_file, 'w') as input_zip:
+      input_zip.writestr('ODM/etc/build.prop', '\n'.join(build_prop))
+      input_zip.writestr('ODM/etc/build_std.prop', '\n'.join(build_std_prop))
+      input_zip.writestr('ODM/etc/build_pro.prop', '\n'.join(build_pro_prop))
+
+  def test_parseBuildProps(self):
+    with zipfile.ZipFile(self.input_file, 'r') as input_zip:
+      partition_props = common.PartitionBuildProps(input_zip, 'odm')
+      partition_props.LoadBuildProps(self.additional_props)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coral'
+    }, partition_props.build_props)
+
+    self.assertEqual({
+        'ro.product.odm.device': ['coral', 'coralpro']
+    }, partition_props.prop_overrides)
