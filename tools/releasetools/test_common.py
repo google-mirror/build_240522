@@ -48,63 +48,69 @@ def get_2gb_string():
 class BuildInfoTest(test_utils.ReleaseToolsTestCase):
 
   TEST_INFO_DICT = {
-      'build.prop' : {
-          'ro.product.device' : 'product-device',
-          'ro.product.name' : 'product-name',
-          'ro.build.fingerprint' : 'build-fingerprint',
-          'ro.build.foo' : 'build-foo',
-      },
-      'system.build.prop' : {
-          'ro.product.system.brand' : 'product-brand',
-          'ro.product.system.name' : 'product-name',
-          'ro.product.system.device' : 'product-device',
-          'ro.system.build.version.release' : 'version-release',
-          'ro.system.build.id' : 'build-id',
-          'ro.system.build.version.incremental' : 'version-incremental',
-          'ro.system.build.type' : 'build-type',
-          'ro.system.build.tags' : 'build-tags',
-          'ro.system.build.foo' : 'build-foo',
-      },
-      'vendor.build.prop' : {
-          'ro.product.vendor.brand' : 'vendor-product-brand',
-          'ro.product.vendor.name' : 'vendor-product-name',
-          'ro.product.vendor.device' : 'vendor-product-device',
-          'ro.vendor.build.version.release' : 'vendor-version-release',
-          'ro.vendor.build.id' : 'vendor-build-id',
-          'ro.vendor.build.version.incremental' : 'vendor-version-incremental',
-          'ro.vendor.build.type' : 'vendor-build-type',
-          'ro.vendor.build.tags' : 'vendor-build-tags',
-      },
-      'property1' : 'value1',
-      'property2' : 4096,
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.device': 'product-device',
+              'ro.product.name': 'product-name',
+              'ro.build.fingerprint': 'build-fingerprint',
+              'ro.build.foo': 'build-foo'}
+      ),
+      'system.build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.system.brand': 'product-brand',
+              'ro.product.system.name': 'product-name',
+              'ro.product.system.device': 'product-device',
+              'ro.system.build.version.release': 'version-release',
+              'ro.system.build.id': 'build-id',
+              'ro.system.build.version.incremental': 'version-incremental',
+              'ro.system.build.type': 'build-type',
+              'ro.system.build.tags': 'build-tags',
+              'ro.system.build.foo': 'build-foo'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.product.vendor.brand': 'vendor-product-brand',
+              'ro.product.vendor.name': 'vendor-product-name',
+              'ro.product.vendor.device': 'vendor-product-device',
+              'ro.vendor.build.version.release': 'vendor-version-release',
+              'ro.vendor.build.id': 'vendor-build-id',
+              'ro.vendor.build.version.incremental':
+              'vendor-version-incremental',
+              'ro.vendor.build.type': 'vendor-build-type',
+              'ro.vendor.build.tags': 'vendor-build-tags'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
   }
 
   TEST_INFO_DICT_USES_OEM_PROPS = {
-      'build.prop' : {
-          'ro.product.name' : 'product-name',
-          'ro.build.thumbprint' : 'build-thumbprint',
-          'ro.build.bar' : 'build-bar',
-      },
-      'vendor.build.prop' : {
-          'ro.vendor.build.fingerprint' : 'vendor-build-fingerprint',
-      },
-      'property1' : 'value1',
-      'property2' : 4096,
-      'oem_fingerprint_properties' : 'ro.product.device ro.product.brand',
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.name': 'product-name',
+              'ro.build.thumbprint': 'build-thumbprint',
+              'ro.build.bar': 'build-bar'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.vendor.build.fingerprint': 'vendor-build-fingerprint'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
+      'oem_fingerprint_properties': 'ro.product.device ro.product.brand',
   }
 
   TEST_OEM_DICTS = [
       {
-          'ro.product.brand' : 'brand1',
-          'ro.product.device' : 'device1',
+          'ro.product.brand': 'brand1',
+          'ro.product.device': 'device1',
       },
       {
-          'ro.product.brand' : 'brand2',
-          'ro.product.device' : 'device2',
+          'ro.product.brand': 'brand2',
+          'ro.product.device': 'device2',
       },
       {
-          'ro.product.brand' : 'brand3',
-          'ro.product.device' : 'device3',
+          'ro.product.brand': 'brand3',
+          'ro.product.device': 'device3',
       },
   ]
 
@@ -137,25 +143,27 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
 
   def test_init_badFingerprint(self):
     info_dict = copy.deepcopy(self.TEST_INFO_DICT)
-    info_dict['build.prop']['ro.build.fingerprint'] = 'bad fingerprint'
+    info_dict['build.prop'].build_props[
+        'ro.build.fingerprint'] = 'bad fingerprint'
     self.assertRaises(ValueError, common.BuildInfo, info_dict, None)
 
-    info_dict['build.prop']['ro.build.fingerprint'] = 'bad\x80fingerprint'
+    info_dict['build.prop'].build_props[
+        'ro.build.fingerprint'] = 'bad\x80fingerprint'
     self.assertRaises(ValueError, common.BuildInfo, info_dict, None)
 
   def test___getitem__(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
     self.assertEqual('value1', target_info['property1'])
     self.assertEqual(4096, target_info['property2'])
-    self.assertEqual('build-foo', target_info['build.prop']['ro.build.foo'])
+    self.assertEqual('build-foo',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
 
   def test___getitem__with_oem_props(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
                                    self.TEST_OEM_DICTS)
     self.assertEqual('value1', target_info['property1'])
     self.assertEqual(4096, target_info['property2'])
-    self.assertRaises(KeyError,
-                      lambda: target_info['build.prop']['ro.build.foo'])
+    self.assertIsNone(target_info['build.prop'].GetProp('ro.build.foo'))
 
   def test___setitem__(self):
     target_info = common.BuildInfo(copy.deepcopy(self.TEST_INFO_DICT), None)
@@ -163,9 +171,11 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
     target_info['property1'] = 'value2'
     self.assertEqual('value2', target_info['property1'])
 
-    self.assertEqual('build-foo', target_info['build.prop']['ro.build.foo'])
-    target_info['build.prop']['ro.build.foo'] = 'build-bar'
-    self.assertEqual('build-bar', target_info['build.prop']['ro.build.foo'])
+    self.assertEqual('build-foo',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
+    target_info['build.prop'].build_props['ro.build.foo'] = 'build-bar'
+    self.assertEqual('build-bar',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
 
   def test_get(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
@@ -173,7 +183,8 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
     self.assertEqual(4096, target_info.get('property2'))
     self.assertEqual(4096, target_info.get('property2', 1024))
     self.assertEqual(1024, target_info.get('property-nonexistent', 1024))
-    self.assertEqual('build-foo', target_info.get('build.prop')['ro.build.foo'])
+    self.assertEqual('build-foo',
+                     target_info.get('build.prop').GetProp('ro.build.foo'))
 
   def test_get_with_oem_props(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
@@ -182,9 +193,7 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
     self.assertEqual(4096, target_info.get('property2'))
     self.assertEqual(4096, target_info.get('property2', 1024))
     self.assertEqual(1024, target_info.get('property-nonexistent', 1024))
-    self.assertIsNone(target_info.get('build.prop').get('ro.build.foo'))
-    self.assertRaises(KeyError,
-                      lambda: target_info.get('build.prop')['ro.build.foo'])
+    self.assertIsNone(target_info.get('build.prop').GetProp('ro.build.foo'))
 
   def test_items(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
@@ -221,7 +230,8 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
 
   def test_GetPartitionFingerprint_uses_fingerprint_prop_if_available(self):
     info_dict = copy.deepcopy(self.TEST_INFO_DICT)
-    info_dict['vendor.build.prop']['ro.vendor.build.fingerprint'] = 'vendor:fingerprint'
+    info_dict['vendor.build.prop'].build_props[
+        'ro.vendor.build.fingerprint'] = 'vendor:fingerprint'
     target_info = common.BuildInfo(info_dict, None)
     self.assertEqual(
         target_info.GetPartitionFingerprint('vendor'),
@@ -1437,12 +1447,14 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
     common.OPTIONS.info_dict = {
         'ab_update': 'true',
         'avb_avbtool': 'avbtool',
-        'build.prop': {
-            'ro.build.version.incremental': '6285659',
-            'ro.product.device': 'coral',
-            'ro.build.fingerprint': 'google/coral/coral:R/RP1A.200311.002/'
-                                    '6285659:userdebug/dev-keys'
-        }
+        'build.prop': common.PartitionBuildProps.FromDictionary(
+            'system', {
+                'ro.build.version.incremental': '6285659',
+                'ro.product.device': 'coral',
+                'ro.build.fingerprint':
+                'google/coral/coral:R/RP1A.200311.002/'
+                '6285659:userdebug/dev-keys'}
+        ),
     }
     common.OPTIONS.aftl_tool_path = 'aftltool'
     common.OPTIONS.aftl_server = 'log.endpoints.aftl-dev.cloud.goog:9000'
@@ -1475,12 +1487,14 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
     common.OPTIONS.info_dict = {
         'ab_update': 'true',
         'avb_avbtool': 'avbtool',
-        'build.prop': {
-            'ro.build.version.incremental': '6285659',
-            'ro.product.device': 'coral',
-            'ro.build.fingerprint': 'google/coral/coral:R/RP1A.200311.002/'
-                                    '6285659:userdebug/dev-keys'
-        }
+        'build.prop': common.PartitionBuildProps.FromDictionary(
+            'system', {
+                'ro.build.version.incremental': '6285659',
+                'ro.product.device': 'coral',
+                'ro.build.fingerprint':
+                'google/coral/coral:R/RP1A.200311.002/'
+                '6285659:userdebug/dev-keys'}
+        )
     }
     common.OPTIONS.aftl_tool_path = "aftltool"
     common.OPTIONS.aftl_server = "log.endpoints.aftl-dev.cloud.goog:9000"
@@ -1795,3 +1809,48 @@ super_group_foo_group_size={group_foo_size}
 
     lines = self.get_op_list(self.output_path)
     self.assertEqual(lines, ["remove foo"])
+
+
+class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
+  def setUp(self):
+    self.additional_props = {
+        'ro.boot.product.hardware.sku': ['std', 'pro']
+    }
+
+    build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+        'import /odm/etc/build_${ro.boot.product.hardware.sku}.prop'
+    ]
+
+    build_std_prop = [
+        'ro.product.odm.device=coral'
+    ]
+
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro'
+    ]
+
+    self.input_file = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(self.input_file, 'w') as input_zip:
+      input_zip.writestr('ODM/etc/build.prop', '\n'.join(build_prop))
+      input_zip.writestr('ODM/etc/build_std.prop', '\n'.join(build_std_prop))
+      input_zip.writestr('ODM/etc/build_pro.prop', '\n'.join(build_pro_prop))
+
+  def test_parseBuildProps(self):
+    with zipfile.ZipFile(self.input_file, 'r') as input_zip:
+      partition_props = common.PartitionBuildProps(input_zip, 'odm')
+      partition_props.LoadBuildProps(self.additional_props)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coral'
+    }, partition_props.build_props)
+
+    self.assertEqual({
+        'ro.product.odm.device': ['coral', 'coralpro']
+    }, partition_props.prop_overrides)

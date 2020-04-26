@@ -94,7 +94,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
-
+    self.additional_props = {}
 
 OPTIONS = Options()
 
@@ -417,6 +417,13 @@ class BuildInfo(object):
   def items(self):
     return self.info_dict.items()
 
+  def _GetRawBuildProp(self, prop, partition):
+    key = '{}.build.prop'.format(partition) if partition else 'build.prop'
+    partition_props = self.info_dict.get(key)
+    if not partition_props:
+      return None
+    return partition_props.GetProp(prop)
+
   def GetPartitionBuildProp(self, prop, partition):
     """Returns the inquired build property for the provided partition."""
     # If provided a partition for this property, only look within that
@@ -425,30 +432,28 @@ class BuildInfo(object):
       prop = prop.replace("ro.product", "ro.product.{}".format(partition))
     else:
       prop = prop.replace("ro.", "ro.{}.".format(partition))
-    try:
-      return self.info_dict.get("{}.build.prop".format(partition), {})[prop]
-    except KeyError:
-      raise ExternalError("couldn't find %s in %s.build.prop" %
-                          (prop, partition))
+
+    prop_val = self._GetRawBuildProp(prop, partition)
+    if prop_val:
+      return prop_val
+    raise ExternalError("couldn't find %s in %s.build.prop" %
+                        (prop, partition))
 
   def GetBuildProp(self, prop):
     """Returns the inquired build property from the standard build.prop file."""
-    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
-      return self._ResolveRoProductBuildProp(prop)
-
-    try:
-      return self.info_dict.get("build.prop", {})[prop]
-    except KeyError:
-      raise ExternalError("couldn't find %s in build.prop" % (prop,))
-
-  def _ResolveRoProductBuildProp(self, prop):
-    """Resolves the inquired ro.product.* build property"""
-    prop_val = self.info_dict.get("build.prop", {}).get(prop)
+    prop_val = self._GetRawBuildProp(prop, None)
     if prop_val:
       return prop_val
 
-    source_order_val = self.info_dict.get("build.prop", {}).get(
-        "ro.product.property_source_order")
+    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+      return self._ResolveRoProductBuildProp(prop)
+
+    raise ExternalError("couldn't find %s in build.prop" % (prop,))
+
+  def _ResolveRoProductBuildProp(self, prop):
+    """Resolves the inquired ro.product.* build property"""
+    source_order_val = self._GetRawBuildProp(
+        "ro.product.property_source_order", None)
     if source_order_val:
       source_order = source_order_val.split(",")
     else:
@@ -460,11 +465,10 @@ class BuildInfo(object):
       raise ExternalError(
           "Invalid ro.product.property_source_order '{}'".format(source_order))
 
-    for source in source_order:
+    for source_partition in source_order:
       source_prop = prop.replace(
-          "ro.product", "ro.product.{}".format(source), 1)
-      prop_val = self.info_dict.get(
-          "{}.build.prop".format(source), {}).get(source_prop)
+          "ro.product", "ro.product.{}".format(source_partition), 1)
+      prop_val = self._GetRawBuildProp(source_prop, source_partition)
       if prop_val:
         return prop_val
 
@@ -539,6 +543,20 @@ class BuildInfo(object):
       script.AssertOemProperty(prop, values, oem_no_mount)
 
 
+def ReadHelper(input_file, fn):
+  """Reads the contents of fn from input zipfile or directory."""
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn).decode()
+  else:
+    path = os.path.join(input_file, *fn.split("/"))
+    try:
+      with open(path) as f:
+        return f.read()
+    except IOError as e:
+      if e.errno == errno.ENOENT:
+        raise KeyError(fn)
+
+
 def LoadInfoDict(input_file, repacking=False):
   """Loads the key/value pairs from the given input target_files.
 
@@ -575,20 +593,9 @@ def LoadInfoDict(input_file, repacking=False):
     assert isinstance(input_file, str), \
         "input_file must be a path str when doing repacking"
 
-  def read_helper(fn):
-    if isinstance(input_file, zipfile.ZipFile):
-      return input_file.read(fn).decode()
-    else:
-      path = os.path.join(input_file, *fn.split("/"))
-      try:
-        with open(path) as f:
-          return f.read()
-      except IOError as e:
-        if e.errno == errno.ENOENT:
-          raise KeyError(fn)
-
   try:
-    d = LoadDictionaryFromLines(read_helper("META/misc_info.txt").split("\n"))
+    d = LoadDictionaryFromLines(
+        ReadHelper(input_file, "META/misc_info.txt").split("\n"))
   except KeyError:
     raise ValueError("Failed to find META/misc_info.txt in input target-files")
 
@@ -642,19 +649,14 @@ def LoadInfoDict(input_file, repacking=False):
   makeint("fstab_version")
 
   # Load recovery fstab if applicable.
-  d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, read_helper)
+  d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, lambda f: ReadHelper(input_file, f))
 
   # Tries to load the build props for all partitions with care_map, including
   # system and vendor.
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
-    d[partition_prop] = LoadBuildProp(
-        read_helper, "{}/build.prop".format(partition.upper()))
-    # Some partition might use /<partition>/etc/build.prop as the new path.
-    # TODO: try new path first when majority of them switch to the new path.
-    if not d[partition_prop]:
-      d[partition_prop] = LoadBuildProp(
-          read_helper, "{}/etc/build.prop".format(partition.upper()))
+    d[partition_prop] = PartitionBuildProps(input_file, partition)
+    d[partition_prop].LoadBuildProps(OPTIONS.additional_props)
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
@@ -669,15 +671,6 @@ def LoadInfoDict(input_file, repacking=False):
   return d
 
 
-def LoadBuildProp(read_helper, prop_file):
-  try:
-    data = read_helper(prop_file)
-  except KeyError:
-    logger.warning("Failed to read %s", prop_file)
-    data = ""
-  return LoadDictionaryFromLines(data.split("\n"))
-
-
 def LoadListFromFile(file_path):
   with open(file_path) as f:
     return f.read().splitlines()
@@ -689,7 +682,13 @@ def LoadDictionaryFromFile(file_path):
 
 
 def LoadDictionaryFromLines(lines):
+  d, _ = LoadDictionaryWithImport(lines)
+  return d
+
+
+def LoadDictionaryWithImport(lines, import_parser=None):
   d = {}
+  overrides = {}
   for line in lines:
     line = line.strip()
     if not line or line.startswith("#"):
@@ -697,11 +696,87 @@ def LoadDictionaryFromLines(lines):
     if "=" in line:
       name, value = line.split("=", 1)
       d[name] = value
-  return d
+    if line.startswith("import") and import_parser:
+      for key, val in import_parser(line).items():
+        if key in overrides:
+          raise ValueError("prop {} is overridden multiple times".format(key))
+        overrides[key] = val
+
+  return d, overrides
 
 
-def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
-                      system_root_image=False):
+class PartitionBuildProps(object):
+
+  def __init__(self, input_file, name):
+    self.input_file = input_file
+    self.partition = name
+    self.props_allow_override = [props.format(name) for props in [
+        'ro.product.{}.name', 'ro.product.{}.device']]
+
+    self.build_props = {}
+    self.prop_overrides = {}
+    self.placeholder_values = {}
+
+  @classmethod
+  def FromDictionary(cls, name, build_props):
+    props = PartitionBuildProps("unknown", name)
+    props.build_props = build_props.copy()
+    return props
+
+  def LoadBuildProps(self, placeholder_values):
+    self.placeholder_values = placeholder_values
+    data = ''
+    for prop_file in ['{}/etc/build.prop'.format(self.partition.upper()),
+                      '{}/build.prop'.format(self.partition.upper())]:
+      try:
+        data = ReadHelper(self.input_file, prop_file)
+        break
+      except KeyError:
+        logger.warning('Failed to read %s', prop_file)
+
+    self.build_props, self.prop_overrides = LoadDictionaryWithImport(
+        data.split('\n'), self._ImportParser)
+
+  def _ImportParser(self, line):
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    path_template = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), path_template,
+                    re.IGNORECASE):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    import_paths = set()
+    for prop, values in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop not in path_template:
+        continue
+      for val in values:
+        import_paths.add(path_template.replace(prop_place_holder, val))
+
+    overrides = {}
+    for import_file in import_paths:
+      import_file = import_file.replace('/{}'.format(self.partition),
+                                        self.partition.upper())
+      logger.info('Parsing build props override from %s', import_file)
+
+      lines = ReadHelper(self.input_file, import_file).split('\n')
+      d = LoadDictionaryFromLines(lines)
+      for key, val in d.items():
+        if key not in self.props_allow_override:
+          continue
+        if key not in overrides:
+          overrides[key] = [val]
+        else:
+          overrides[key].append(val)
+    return overrides
+
+  def GetProp(self, prop):
+    return self.build_props.get(prop)
+
+
+def LoadRecoveryFSTab(read_helper, fstab_version,
+                      recovery_fstab_path, system_root_image=False):
   class Partition(object):
     def __init__(self, mount_point, fs_type, device, length, context):
       self.mount_point = mount_point
@@ -786,8 +861,8 @@ def _FindAndLoadRecoveryFstab(info_dict, input_file, read_helper):
       if not os.path.exists(path):
         recovery_fstab_path = 'RECOVERY/RAMDISK/etc/recovery.fstab'
     return LoadRecoveryFSTab(
-        read_helper, info_dict['fstab_version'], recovery_fstab_path,
-        system_root_image)
+        read_helper, info_dict['fstab_version'],
+        recovery_fstab_path, system_root_image)
 
   if info_dict.get('recovery_as_boot') == 'true':
     recovery_fstab_path = 'BOOT/RAMDISK/system/etc/recovery.fstab'
