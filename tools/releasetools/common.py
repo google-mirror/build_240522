@@ -94,6 +94,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
+    self.placeholder_values = None
 
 
 OPTIONS = Options()
@@ -417,6 +418,14 @@ class BuildInfo(object):
   def items(self):
     return self.info_dict.items()
 
+  def _GetRawBuildProp(self, prop, partition):
+    prop_file = '{}.build.prop'.format(
+        partition) if partition else 'build.prop'
+    partition_props = self.info_dict.get(prop_file)
+    if not partition_props:
+      return None
+    return partition_props.GetProp(prop)
+
   def GetPartitionBuildProp(self, prop, partition):
     """Returns the inquired build property for the provided partition."""
     # If provided a partition for this property, only look within that
@@ -425,30 +434,31 @@ class BuildInfo(object):
       prop = prop.replace("ro.product", "ro.product.{}".format(partition))
     else:
       prop = prop.replace("ro.", "ro.{}.".format(partition))
-    try:
-      return self.info_dict.get("{}.build.prop".format(partition), {})[prop]
-    except KeyError:
-      raise ExternalError("couldn't find %s in %s.build.prop" %
-                          (prop, partition))
+
+    prop_val = self._GetRawBuildProp(prop, partition)
+    if prop_val is not None:
+      return prop_val
+    raise ExternalError("couldn't find %s in %s.build.prop" %
+                        (prop, partition))
 
   def GetBuildProp(self, prop):
     """Returns the inquired build property from the standard build.prop file."""
     if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
       return self._ResolveRoProductBuildProp(prop)
 
-    try:
-      return self.info_dict.get("build.prop", {})[prop]
-    except KeyError:
-      raise ExternalError("couldn't find %s in build.prop" % (prop,))
+    prop_val = self._GetRawBuildProp(prop, None)
+    if prop_val is not None:
+      return prop_val
+
+    raise ExternalError("couldn't find %s in build.prop" % (prop,))
 
   def _ResolveRoProductBuildProp(self, prop):
     """Resolves the inquired ro.product.* build property"""
-    prop_val = self.info_dict.get("build.prop", {}).get(prop)
+    prop_val = self._GetRawBuildProp(prop, None)
     if prop_val:
       return prop_val
-
-    source_order_val = self.info_dict.get("build.prop", {}).get(
-        "ro.product.property_source_order")
+    source_order_val = self._GetRawBuildProp(
+        "ro.product.property_source_order", None)
     if source_order_val:
       source_order = source_order_val.split(",")
     else:
@@ -460,11 +470,10 @@ class BuildInfo(object):
       raise ExternalError(
           "Invalid ro.product.property_source_order '{}'".format(source_order))
 
-    for source in source_order:
+    for source_partition in source_order:
       source_prop = prop.replace(
-          "ro.product", "ro.product.{}".format(source), 1)
-      prop_val = self.info_dict.get(
-          "{}.build.prop".format(source), {}).get(source_prop)
+          "ro.product", "ro.product.{}".format(source_partition), 1)
+      prop_val = self._GetRawBuildProp(source_prop, source_partition)
       if prop_val:
         return prop_val
 
@@ -539,6 +548,20 @@ class BuildInfo(object):
       script.AssertOemProperty(prop, values, oem_no_mount)
 
 
+def ReadFromInputFile(input_file, fn):
+  """Reads the contents of fn from input zipfile or directory."""
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn).decode()
+  else:
+    path = os.path.join(input_file, *fn.split("/"))
+    try:
+      with open(path) as f:
+        return f.read()
+    except IOError as e:
+      if e.errno == errno.ENOENT:
+        raise KeyError(fn)
+
+
 def LoadInfoDict(input_file, repacking=False):
   """Loads the key/value pairs from the given input target_files.
 
@@ -576,16 +599,7 @@ def LoadInfoDict(input_file, repacking=False):
         "input_file must be a path str when doing repacking"
 
   def read_helper(fn):
-    if isinstance(input_file, zipfile.ZipFile):
-      return input_file.read(fn).decode()
-    else:
-      path = os.path.join(input_file, *fn.split("/"))
-      try:
-        with open(path) as f:
-          return f.read()
-      except IOError as e:
-        if e.errno == errno.ENOENT:
-          raise KeyError(fn)
+    return ReadFromInputFile(input_file, fn)
 
   try:
     d = LoadDictionaryFromLines(read_helper("META/misc_info.txt").split("\n"))
@@ -648,13 +662,8 @@ def LoadInfoDict(input_file, repacking=False):
   # system and vendor.
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
-    d[partition_prop] = LoadBuildProp(
-        read_helper, "{}/build.prop".format(partition.upper()))
-    # Some partition might use /<partition>/etc/build.prop as the new path.
-    # TODO: try new path first when majority of them switch to the new path.
-    if not d[partition_prop]:
-      d[partition_prop] = LoadBuildProp(
-          read_helper, "{}/etc/build.prop".format(partition.upper()))
+    d[partition_prop] = PartitionBuildProps(input_file, partition)
+    d[partition_prop].LoadBuildProps(OPTIONS.placeholder_values)
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
@@ -667,15 +676,6 @@ def LoadInfoDict(input_file, repacking=False):
         d["avb_{}_salt".format(partition)] = sha256(fingerprint).hexdigest()
 
   return d
-
-
-def LoadBuildProp(read_helper, prop_file):
-  try:
-    data = read_helper(prop_file)
-  except KeyError:
-    logger.warning("Failed to read %s", prop_file)
-    data = ""
-  return LoadDictionaryFromLines(data.split("\n"))
 
 
 def LoadListFromFile(file_path):
@@ -698,6 +698,111 @@ def LoadDictionaryFromLines(lines):
       name, value = line.split("=", 1)
       d[name] = value
   return d
+
+
+class PartitionBuildProps(object):
+  """The class holds the build prop of a particular partition.
+
+  This class loads the build.prop and holds the build properties for a given
+  partition. It also partially recognizes the 'import' statement in the
+  build.prop; and calculates alternative values of some specific build
+  properties during runtime.
+
+  Attributes:
+    input_file: a zipped target-file or an unzipped target-file directory.
+    partition: name of the partition.
+    props_allow_override: a list of build properties to search for the
+        alternative values during runtime.
+    build_props: a dictionary of build properties for the given partition.
+    prop_overrides: a list of dictionaries. And each dictionary holds the
+        overridden values for props_allow_override.
+  """
+
+  def __init__(self, input_file, name):
+    self.input_file = input_file
+    self.partition = name
+    self.props_allow_override = [props.format(name) for props in [
+        'ro.product.{}.name', 'ro.product.{}.device']]
+    self.build_props = {}
+    self.prop_overrides = []
+    self.placeholder_values = {}
+
+  @staticmethod
+  def FromDictionary(name, build_props):
+    """Constructs an instance from a build prop dictionary."""
+
+    props = PartitionBuildProps("unknown", name)
+    props.build_props = build_props.copy()
+    return props
+
+  def LoadBuildProps(self, placeholder_values):
+    """Loads the build.prop file and builds the attributes."""
+    self.placeholder_values = placeholder_values
+    data = ''
+    for prop_file in ['{}/etc/build.prop'.format(self.partition.upper()),
+                      '{}/build.prop'.format(self.partition.upper())]:
+      try:
+        data = ReadFromInputFile(self.input_file, prop_file)
+        break
+      except KeyError:
+        logger.warning('Failed to read %s', prop_file)
+
+    props_with_override = set()
+    for line in data.split('\n'):
+      line = line.strip()
+      if not line or line.startswith("#"):
+        continue
+      if "=" in line:
+        name, value = line.split("=", 1)
+        if name in props_with_override:
+          raise ValueError('prop {} is set again after overridden by import '
+                           'statement'.format(name))
+        self.build_props[name] = value
+      if line.startswith("import"):
+        props, overrides = self._ImportParser(line)
+        print(props, overrides)
+        duplicates = props_with_override.intersection(props)
+        if duplicates:
+          raise ValueError('prop {} is overridden multiple times'.format(
+              ','.join(duplicates)))
+        props_with_override = props_with_override.union(props)
+        self.prop_overrides.extend(overrides)
+
+  def _ImportParser(self, line):
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    path_template = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), path_template,
+                    re.IGNORECASE):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    import_paths = set()
+    for prop, values in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop not in path_template:
+        continue
+      for val in values:
+        import_paths.add(path_template.replace(prop_place_holder, val))
+
+    props_with_override = set()
+    override_values = []
+    for import_file in import_paths:
+      import_file = import_file.replace('/{}'.format(self.partition),
+                                        self.partition.upper())
+      logger.info('Parsing build props override from %s', import_file)
+
+      lines = ReadFromInputFile(self.input_file, import_file).split('\n')
+      d = LoadDictionaryFromLines(lines)
+      d = {key: val for (key, val) in d.items()
+           if key in self.props_allow_override}
+      if d:
+        props_with_override = props_with_override.union(d.keys())
+        override_values.append(d)
+    return props_with_override, override_values
+
+  def GetProp(self, prop):
+    return self.build_props.get(prop)
 
 
 def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
