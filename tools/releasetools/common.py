@@ -94,6 +94,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
+    self.placeholder_values = None
 
 
 OPTIONS = Options()
@@ -418,8 +419,9 @@ class BuildInfo(object):
     return self.info_dict.items()
 
   def _GetRawBuildProp(self, prop, partition):
-    key = '{}.build.prop'.format(partition) if partition else 'build.prop'
-    partition_props = self.info_dict.get(key)
+    prop_file = '{}.build.prop'.format(
+        partition) if partition else 'build.prop'
+    partition_props = self.info_dict.get(prop_file)
     if not partition_props:
       return None
     return partition_props.GetProp(prop)
@@ -658,7 +660,7 @@ def LoadInfoDict(input_file, repacking=False):
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
     d[partition_prop] = PartitionBuildProps(input_file, partition)
-    d[partition_prop].LoadBuildProps()
+    d[partition_prop].LoadBuildProps(OPTIONS.placeholder_values)
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
@@ -720,6 +722,7 @@ class PartitionBuildProps(object):
         'ro.product.{}.name', 'ro.product.{}.device']]
     self.build_props = {}
     self.prop_overrides = []
+    self.placeholder_values = {}
 
   @staticmethod
   def FromDictionary(name, build_props):
@@ -729,9 +732,9 @@ class PartitionBuildProps(object):
     props.build_props = build_props.copy()
     return props
 
-  def LoadBuildProps(self):
+  def LoadBuildProps(self, placeholder_values):
     """Loads the build.prop file and builds the attributes."""
-
+    self.placeholder_values = placeholder_values
     data = ''
     for prop_file in ['{}/etc/build.prop'.format(self.partition.upper()),
                       '{}/build.prop'.format(self.partition.upper())]:
@@ -741,7 +744,59 @@ class PartitionBuildProps(object):
       except KeyError:
         logger.warning('Failed to read %s', prop_file)
 
-    self.build_props = LoadDictionaryFromLines(data.split('\n'))
+    props_with_override = set()
+    for line in data.split('\n'):
+      line = line.strip()
+      if not line or line.startswith("#"):
+        continue
+      if "=" in line:
+        name, value = line.split("=", 1)
+        if name in props_with_override:
+          raise ValueError('prop {} is set again after overridden by import '
+                           'statement'.format(name))
+        self.build_props[name] = value
+      if line.startswith("import"):
+        props, overrides = self._ImportParser(line)
+        print(props, overrides)
+        duplicates = props_with_override.intersection(props)
+        if duplicates:
+          raise ValueError('prop {} is overridden multiple times'.format(
+              ','.join(duplicates)))
+        props_with_override = props_with_override.union(props)
+        self.prop_overrides.extend(overrides)
+
+  def _ImportParser(self, line):
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    path_template = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), path_template,
+                    re.IGNORECASE):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    import_paths = set()
+    for prop, values in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop not in path_template:
+        continue
+      for val in values:
+        import_paths.add(path_template.replace(prop_place_holder, val))
+
+    props_with_override = set()
+    override_values = []
+    for import_file in import_paths:
+      import_file = import_file.replace('/{}'.format(self.partition),
+                                        self.partition.upper())
+      logger.info('Parsing build props override from %s', import_file)
+
+      lines = ReadFromInputFile(self.input_file, import_file).split('\n')
+      d = LoadDictionaryFromLines(lines)
+      d = {key: val for (key, val) in d.items()
+           if key in self.props_allow_override}
+      if d:
+        props_with_override = props_with_override.union(d.keys())
+        override_values.append(d)
+    return props_with_override, override_values
 
   def GetProp(self, prop):
     return self.build_props.get(prop)

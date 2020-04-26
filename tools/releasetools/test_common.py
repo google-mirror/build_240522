@@ -1813,6 +1813,10 @@ super_group_foo_group_size={group_foo_size}
 
 class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
   def setUp(self):
+    self.placeholder_values = {
+        'ro.boot.product.hardware.sku': ['std', 'pro']
+    }
+
     build_prop = [
         'ro.odm.build.date.utc=1578430045',
         'ro.odm.build.fingerprint='
@@ -1838,7 +1842,7 @@ class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
   def test_parseBuildProps(self):
     with zipfile.ZipFile(self.input_file, 'r') as input_zip:
       partition_props = common.PartitionBuildProps(input_zip, 'odm')
-      partition_props.LoadBuildProps()
+      partition_props.LoadBuildProps(self.placeholder_values)
 
     self.assertEqual({
         'ro.odm.build.date.utc': '1578430045',
@@ -1846,3 +1850,10 @@ class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
         'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
         'ro.product.odm.device': 'coral'
     }, partition_props.build_props)
+
+    self.assertEqual(
+        sorted([
+            {'ro.product.odm.device': 'coral'},
+            {'ro.product.odm.device': 'coralpro'}
+        ]), sorted(partition_props.prop_overrides))
+
