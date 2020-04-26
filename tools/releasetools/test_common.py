@@ -1850,3 +1850,7 @@ class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
         'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
         'ro.product.odm.device': 'coral'
     }, partition_props.build_props)
+
+    self.assertEqual({
+        'ro.product.odm.device': ['coral', 'coralpro']
+    }, partition_props.prop_overrides)

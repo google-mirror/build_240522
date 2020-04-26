@@ -94,7 +94,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
-
+    self.additional_props = {}
 
 OPTIONS = Options()
 
@@ -682,7 +682,13 @@ def LoadDictionaryFromFile(file_path):
 
 
 def LoadDictionaryFromLines(lines):
+  d, _ = LoadDictionaryWithImport(lines)
+  return d
+
+
+def LoadDictionaryWithImport(lines, import_parser=None):
   d = {}
+  overrides = {}
   for line in lines:
     line = line.strip()
     if not line or line.startswith("#"):
@@ -690,7 +696,13 @@ def LoadDictionaryFromLines(lines):
     if "=" in line:
       name, value = line.split("=", 1)
       d[name] = value
-  return d
+    if line.startswith("import") and import_parser:
+      for key, val in import_parser(line).items():
+        if key in overrides:
+          raise ValueError("prop {} is overridden multiple times".format(key))
+        overrides[key] = val
+
+  return d, overrides
 
 
 class PartitionBuildProps(object):
@@ -722,8 +734,42 @@ class PartitionBuildProps(object):
       except KeyError:
         logger.warning('Failed to read %s', prop_file)
 
-    self.build_props, self.prop_overrides = LoadDictionaryFromLines(
-        data.split('\n'))
+    self.build_props, self.prop_overrides = LoadDictionaryWithImport(
+        data.split('\n'), self._ImportParser)
+
+  def _ImportParser(self, line):
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    path_template = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), path_template,
+                    re.IGNORECASE):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    import_paths = set()
+    for prop, values in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop not in path_template:
+        continue
+      for val in values:
+        import_paths.add(path_template.replace(prop_place_holder, val))
+
+    overrides = {}
+    for import_file in import_paths:
+      import_file = import_file.replace('/{}'.format(self.partition),
+                                        self.partition.upper())
+      logger.info('Parsing build props override from %s', import_file)
+
+      lines = ReadHelper(self.input_file, import_file).split('\n')
+      d = LoadDictionaryFromLines(lines)
+      for key, val in d.items():
+        if key not in self.props_allow_override:
+          continue
+        if key not in overrides:
+          overrides[key] = [val]
+        else:
+          overrides[key].append(val)
+    return overrides
 
   def GetProp(self, prop):
     return self.build_props.get(prop)
