@@ -23,6 +23,7 @@ import getopt
 import getpass
 import gzip
 import imp
+import itertools
 import json
 import logging
 import logging.config
@@ -94,6 +95,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
+    self.placeholder_values = None
 
 
 OPTIONS = Options()
@@ -386,7 +388,7 @@ class BuildInfo(object):
 
     # These two should be computed only after setting self._oem_props.
     self._device = self.GetOemProperty("ro.product.device")
-    self._fingerprint = self.CalculateFingerprint()
+    self._fingerprint, _ = self.CalculateFingerprint()
     check_fingerprint(self._fingerprint)
 
   @property
@@ -443,7 +445,8 @@ class BuildInfo(object):
   def GetBuildProp(self, prop):
     """Returns the inquired build property from the standard build.prop file."""
     if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
-      return self._ResolveRoProductBuildProp(prop)
+      prop_val, _ = self._ResolveRoProductBuildProp(prop)
+      return prop_val
 
     prop_val = self._GetRawBuildProp(prop, None)
     if prop_val is not None:
@@ -455,7 +458,7 @@ class BuildInfo(object):
     """Resolves the inquired ro.product.* build property"""
     prop_val = self._GetRawBuildProp(prop, None)
     if prop_val:
-      return prop_val
+      return prop_val, None
 
     source_order_val = self._GetRawBuildProp(
         "ro.product.property_source_order", None)
@@ -475,7 +478,7 @@ class BuildInfo(object):
           "ro.product", "ro.product.{}".format(source_partition), 1)
       prop_val = self._GetRawBuildProp(source_prop, source_partition)
       if prop_val:
-        return prop_val
+        return prop_val, source_partition
 
     raise ExternalError("couldn't resolve {}".format(prop))
 
@@ -504,7 +507,7 @@ class BuildInfo(object):
   def CalculateFingerprint(self):
     if self.oem_props is None:
       try:
-        return self.GetBuildProp("ro.build.fingerprint")
+        return self.GetBuildProp("ro.build.fingerprint"), False
       except ExternalError:
         return "{}/{}/{}:{}/{}/{}:{}/{}".format(
             self.GetBuildProp("ro.product.brand"),
@@ -514,12 +517,60 @@ class BuildInfo(object):
             self.GetBuildProp("ro.build.id"),
             self.GetBuildProp("ro.build.version.incremental"),
             self.GetBuildProp("ro.build.type"),
-            self.GetBuildProp("ro.build.tags"))
+            self.GetBuildProp("ro.build.tags")), True
     return "%s/%s/%s:%s" % (
         self.GetOemProperty("ro.product.brand"),
         self.GetOemProperty("ro.product.name"),
         self.GetOemProperty("ro.product.device"),
-        self.GetBuildProp("ro.build.thumbprint"))
+        self.GetBuildProp("ro.build.thumbprint")), False
+
+  def CalculateAlternativeFingerprintPrefixes(self):
+    fingerprint, dynamic = self.CalculateFingerprint()
+    if not dynamic:
+      return set()
+
+    prefix_components = ['brand', 'name', 'device']
+    default_values = {}
+    alternative_values = {component: [] for component in prefix_components}
+    for component in prefix_components:
+      prop_val, source = self._ResolveRoProductBuildProp('ro.product.{}'.format(component))
+      default_values[component] = prop_val
+
+      prop_file = '{}.build.prop'.format(source) if source else 'build.prop'
+      partition_props = self.info_dict.get(prop_file)
+      assert partition_props, 'build props not found for {}'.format(prop_file)
+
+      partition_prop_name = 'ro.product.{}.{}'.format(partition_props.partition, component)
+      if partition_prop_name not in partition_props.prop_overrides:
+        continue
+      for val, condition in partition_props.prop_overrides.get(partition_prop_name):
+        alternative_values[component].append((component, val, condition))
+
+    values_list = [value for value in alternative_values.values() if value]
+    cartesien_product = list(itertools.product(*values_list))
+    possible_prefix = []
+    for entry in cartesien_product:
+      valid = True
+      saved_condition = {}
+      for _, _, condition in entry:
+        if not condition:
+          continue
+        if (condition.name in saved_condition and
+            condition.value != saved_condition[condition.name]):
+          valid = False
+          break
+        saved_condition[condition.name] = condition.value
+
+      if valid:
+        possible_prefix.append({prop: val for prop, val, _ in entry})
+
+    result = set()
+    for d in possible_prefix:
+      value_dict = copy.deepcopy(default_values)
+      value_dict.update(d)
+      result.add('{brand}/{name}/{device}'.format(**value_dict))
+
+    return result
 
   def WriteMountOemScript(self, script):
     assert self.oem_props is not None
@@ -627,7 +678,7 @@ def LoadInfoDict(input_file, repacking=False):
     d["root_fs_config"] = os.path.join(
         input_file, "META", "root_filesystem_config.txt")
 
-    # Redirect {partition}_base_fs_file for each of the named partitions.
+    # Redirect {partition}_base_fs_file for each of the nval, (prop, prop_(val)amed partitions.)
     for part_name in ["system", "vendor", "system_ext", "product", "odm"]:
       key_name = part_name + "_base_fs_file"
       if key_name not in d:
@@ -663,7 +714,7 @@ def LoadInfoDict(input_file, repacking=False):
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
     d[partition_prop] = PartitionBuildProps(input_file, partition)
-    d[partition_prop].LoadBuildProps()
+    d[partition_prop].LoadBuildProps(OPTIONS.placeholder_values)
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
@@ -717,14 +768,17 @@ class PartitionBuildProps(object):
     prop_overrides: a list of dictionaries. And each dictionary holds the
         overridden values for props_allow_override.
   """
+  Condition = collections.namedtuple('Condition', 'name value')
 
   def __init__(self, input_file, name):
     self.input_file = input_file
     self.partition = name
     self.props_allow_override = [props.format(name) for props in [
+        'ro.product.{}.brand',
         'ro.product.{}.name', 'ro.product.{}.device']]
     self.build_props = {}
-    self.prop_overrides = []
+    self.prop_overrides = {}
+    self.placeholder_values = {}
 
   @staticmethod
   def FromDictionary(name, build_props):
@@ -734,9 +788,9 @@ class PartitionBuildProps(object):
     props.build_props = build_props.copy()
     return props
 
-  def LoadBuildProps(self):
+  def LoadBuildProps(self, placeholder_values):
     """Loads the build.prop file and builds the attributes."""
-
+    self.placeholder_values = placeholder_values
     data = ''
     for prop_file in ['{}/etc/build.prop'.format(self.partition.upper()),
                       '{}/build.prop'.format(self.partition.upper())]:
@@ -746,7 +800,57 @@ class PartitionBuildProps(object):
       except KeyError:
         logger.warning('Failed to read %s', prop_file)
 
-    self.build_props = LoadDictionaryFromLines(data.split('\n'))
+    for line in data.split('\n'):
+      line = line.strip()
+      if not line or line.startswith("#"):
+        continue
+      if "=" in line:
+        name, value = line.split("=", 1)
+        if name in self.prop_overrides.keys():
+          raise ValueError('prop {} is set again after overridden by import '
+                           'statement'.format(name))
+        self.build_props[name] = value
+      if line.startswith("import"):
+        overrides = self._ImportParser(line)
+        duplicates = set(overrides.keys()).intersection(self.prop_overrides.keys())
+        if duplicates:
+          raise ValueError('prop {} is overridden multiple times'.format(
+              ','.join(duplicates)))
+        self.prop_overrides.update(overrides)
+
+  def _ImportParser(self, line):
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    path_template = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), path_template,
+                    re.IGNORECASE):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    import_paths = set()
+    for prop, values in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop not in path_template:
+        continue
+      for val in values:
+        import_path = path_template.replace(prop_place_holder, val)
+        import_paths.add((self.Condition(prop, val), import_path))
+
+    overrides = {}
+    for condition, import_file in import_paths:
+      import_file = import_file.replace('/{}'.format(self.partition),
+                                        self.partition.upper())
+      logger.info('Parsing build props override from %s', import_file)
+
+      lines = ReadFromInputFile(self.input_file, import_file).split('\n')
+      d = LoadDictionaryFromLines(lines)
+      for key, val in d.items():
+        if key not in self.props_allow_override:
+          continue
+        if key not in overrides:
+          overrides[key] = set()
+        overrides[key].add((val, condition))
+    return overrides
 
   def GetProp(self, prop):
     return self.build_props.get(prop)
