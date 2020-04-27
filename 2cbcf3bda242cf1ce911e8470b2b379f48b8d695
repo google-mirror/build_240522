@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "587c4f6b_6727451e",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-04-27T18:23:46Z",
+      "side": 0,
+      "message": "This means that we\u0027ll stop remoting these type from Make (which may be reasonable, but just making sure that\u0027s intentional)",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "2cbcf3bda242cf1ce911e8470b2b379f48b8d695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
