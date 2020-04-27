@@ -1315,3 +1315,57 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
             Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
+
+
+class ProductPropertyResolutionTest(test_utils.ReleaseToolsTestCase):
+
+  TEST_CURRENT_INFO_DICT = {
+      'build.prop' : {
+          'ro.product.property_source_order' :
+              'product,odm,vendor,system_ext,system',
+          'ro.build.fingerprint' : 'build-fingerprint',
+      },
+      'system.build.prop' : {
+          'ro.product.system.device' : 'device-system',
+          'ro.product.system.name' : 'name-system',
+      },
+      'vendor.build.prop' : {
+          'ro.product.vendor.device' : 'device-vendor',
+      },
+  }
+
+  TEST_ANDROID_10_INFO_DICT = {
+      'build.prop' : {
+          'ro.build.version.release' : '10',
+          'ro.build.version.codename' : 'REL',
+          'ro.product.property_source_order' :
+              'product,product_services,odm,vendor,system',
+          'ro.build.fingerprint' : 'build-fingerprint',
+      },
+      'product_services.build.prop' : {
+          'ro.product.product_services.device' : 'device-product_services',
+      }
+  }
+
+  def test_ResolveSystemProperty(self):
+    info_dict = copy.deepcopy(self.TEST_CURRENT_INFO_DICT)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('name-system', info.GetBuildProp('ro.product.name'))
+
+  def test_ResolveVendorProperty(self):
+    info_dict = copy.deepcopy(self.TEST_CURRENT_INFO_DICT)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('device-vendor', info.GetBuildProp('ro.product.device'))
+
+  def test_InvalidPropertySearchOrder(self):
+    info_dict = copy.deepcopy(self.TEST_CURRENT_INFO_DICT)
+    info_dict['build.prop']['ro.product.property_source_order'] = 'bad-source'
+    with self.assertRaisesRegex(common.ExternalError,
+        'Invalid ro.product.property_source_order'):
+      info = common.BuildInfo(info_dict, None)
+
+  def test_Android10PropertySearchOrder(self):
+    info_dict = copy.deepcopy(self.TEST_ANDROID_10_INFO_DICT)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('product,product_services,odm,vendor,system',
+                     info.GetBuildProp('ro.product.property_source_order'))
