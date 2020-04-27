@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "828444b9_c5353bf5",
+        "filename": "tools/releasetools/test_ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2020-04-27T23:38:10Z",
+      "side": 1,
+      "message": "test_common.py already tests common.BuildInfo GetBuildProp().\nCan we move any new test case involving product_services there instead? ~line 200",
+      "range": {
+        "startLine": 1350,
+        "startChar": 2,
+        "endLine": 1372,
+        "endChar": 0
+      },
+      "revId": "ac52acaa6b029db371d7cb5f5be895457a718c38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
