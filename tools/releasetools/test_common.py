@@ -108,6 +108,20 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
       },
   ]
 
+  TEST_INFO_DICT_ANDROID_10_PROPERTY_SOURCE_ORDER = {
+      'build.prop' : {
+          'ro.product.device' : 'product-device',
+          'ro.build.fingerprint' : 'build-fingerprint',
+          'ro.product.property_source_order' :
+              'product,product_services,odm,vendor,system',
+          'ro.build.version.release' : '10',
+          'ro.build.version.codename' : 'REL',
+      },
+      'system.build.prop' : {
+          'ro.product.system.brand' : 'product-brand',
+      },
+  }
+
   def test_init(self):
     target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
     self.assertEqual('product-device', target_info.device)
@@ -253,6 +267,34 @@ class BuildInfoTest(test_utils.ReleaseToolsTestCase):
              ['brand1', 'brand2', 'brand3'], False),
         ],
         script_writer.lines)
+
+  def test_ResolveRoProductProperty_FromVendor(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('vendor-product-brand',
+                     info.GetBuildProp('ro.product.brand'))
+
+  def test_ResolveVendorProperty_FromSystem(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    del info_dict['vendor.build.prop']['ro.product.vendor.brand']
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('product-brand',
+                     info.GetBuildProp('ro.product.brand'))
+
+  def test_InvalidPropertySearchOrder(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    info_dict['build.prop']['ro.product.property_source_order'] = 'bad-source'
+    with self.assertRaisesRegexp(common.ExternalError,
+        'Invalid ro.product.property_source_order'):
+      info = common.BuildInfo(info_dict, None)
+      info.GetBuildProp('ro.product.brand')
+
+  def test_Android10PropertySearchOrder(self):
+    info_dict = copy.deepcopy(
+        self.TEST_INFO_DICT_ANDROID_10_PROPERTY_SOURCE_ORDER)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('product-brand',
+                     info.GetBuildProp('ro.product.brand'))
 
 
 class CommonZipTest(test_utils.ReleaseToolsTestCase):
