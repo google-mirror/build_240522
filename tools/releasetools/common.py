@@ -336,8 +336,13 @@ class BuildInfo(object):
   _RO_PRODUCT_RESOLVE_PROPS = ["ro.product.brand", "ro.product.device",
                                "ro.product.manufacturer", "ro.product.model",
                                "ro.product.name"]
+  # NOTE: when removing entries from _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER,
+  # be sure to add them to _RO_PRODUCT_PROPS_ALLOWED_SOURCES. This ensures that
+  # older target-files packages can be used when generating incremental OTAs.
   _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER = ["product", "odm", "vendor",
                                             "system_ext", "system"]
+  _RO_PRODUCT_PROPS_ALLOWED_SOURCES = _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER + [
+      "product_services"]
 
   def __init__(self, info_dict, oem_dicts=None):
     """Initializes a BuildInfo instance with the given dicts.
@@ -455,7 +460,7 @@ class BuildInfo(object):
       source_order = BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
 
     # Check that all sources in ro.product.property_source_order are valid
-    if any([x not in BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
+    if any([x not in BuildInfo._RO_PRODUCT_PROPS_ALLOWED_SOURCES
             for x in source_order]):
       raise ExternalError(
           "Invalid ro.product.property_source_order '{}'".format(source_order))
