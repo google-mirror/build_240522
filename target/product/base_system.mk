@@ -64,6 +64,7 @@ PRODUCT_PACKAGES += \
     com.android.tzdata \
     ContactsProvider \
     content \
+    crash_dump \
     debuggerd\
     device_config \
     dmctl \
@@ -81,7 +82,7 @@ PRODUCT_PACKAGES += \
     framework-res \
     framework-sysconfig.xml \
     fsck_msdos \
-    fsverity-release-cert-der \
+    fstab.postinstall \
     fs_config_files_system \
     fs_config_dirs_system \
     group_system \
@@ -107,6 +108,7 @@ PRODUCT_PACKAGES += \
     installd \
     iorapd \
     ip \
+    ip6tables \
     iptables \
     ip-up-vpn \
     javax.obex \
@@ -311,8 +313,8 @@ PRODUCT_HOST_PACKAGES += \
     tz_version_host \
     tz_version_host_tzdata_apex \
 
-ifeq ($(ART_APEX_JARS),)
-$(error ART_APEX_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
+ifeq ($(TARGET_CORE_JARS),)
+$(error TARGET_CORE_JARS is empty; cannot initialize PRODUCT_BOOT_JARS variable)
 endif
 
 # The order matters for runtime class lookup performance.
