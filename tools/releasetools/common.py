@@ -338,6 +338,8 @@ class BuildInfo(object):
                                "ro.product.name"]
   _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER = ["product", "odm", "vendor",
                                             "system_ext", "system"]
+  _RO_PRODUCT_PROPS_ANDROID_10_SOURCES = ["product", "product_services",
+                                          "odm", "vendor", "system"]
 
   def __init__(self, info_dict, oem_dicts=None):
     """Initializes a BuildInfo instance with the given dicts.
@@ -455,8 +457,8 @@ class BuildInfo(object):
       source_order = BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
 
     # Check that all sources in ro.product.property_source_order are valid
-    if any([x not in BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
-            for x in source_order]):
+    allowed_prop_sources = self._GetAllowedPropSources()
+    if any([x not in allowed_prop_sources for x in source_order]):
       raise ExternalError(
           "Invalid ro.product.property_source_order '{}'".format(source_order))
 
@@ -469,6 +471,15 @@ class BuildInfo(object):
         return prop_val
 
     raise ExternalError("couldn't resolve {}".format(prop))
+
+  def _GetAllowedPropSources(self):
+    android_version = self.info_dict.get("build.prop", {}).get(
+        "ro.build.version.release")
+    android_codename = self.info_dict.get("build.prop", {}).get(
+        "ro.build.version.codename")
+    if android_version == "10" and android_codename == "REL":
+      return BuildInfo._RO_PRODUCT_PROPS_ANDROID_10_SOURCES
+    return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER
 
   def GetOemProperty(self, key):
     if self.oem_props is not None and key in self.oem_props:
