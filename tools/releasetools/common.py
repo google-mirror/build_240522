@@ -108,7 +108,7 @@ SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
 # that system_other is not in the list because we don't want to include its
 # descriptor into vbmeta.img.
 AVB_PARTITIONS = ('boot', 'dtbo', 'odm', 'product', 'recovery', 'system',
-                  'system_ext', 'vendor', 'vendor_boot')
+                  'system_ext', 'vendor', 'vendor_boot', 'custom_images')
 
 # Chained VBMeta partitions.
 AVB_VBMETA_PARTITIONS = ('vbmeta_system', 'vbmeta_vendor')
@@ -958,6 +958,25 @@ def GetAvbChainedPartitionArg(partition, info_dict, key=None):
       "avb_" + partition + "_rollback_index_location"]
   return "{}:{}:{}".format(partition, rollback_index_location, pubkey_path)
 
+def GetAvbChainedCustomPartitionArg(partition, location, info_dict, key=None):
+  """Constructs and returns the arg to build or verify a chained partition.
+
+  Args:
+    partition: The partition name.
+    location: The rollback index location.
+    info_dict: The info dict to look up the key info and rollback index
+        location.
+    key: The key to be used for building or verifying the partition. Defaults to
+        the key listed in info_dict.
+
+  Returns:
+    A string of form "partition:location:key" that can be used to build or verify
+    vbmeta image.
+  """
+  if key is None:
+    key = info_dict["avb_custom_images_key_path"]
+  pubkey_path = ExtractAvbPublicKey(info_dict["avb_avbtool"], key)
+  return "{}:{}:{}".format(partition, location, pubkey_path)
 
 def ConstructAftlMakeImageCommands(output_image):
   """Constructs the command to append the aftl image to vbmeta."""
@@ -1053,6 +1072,12 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
             found = True
             break
         assert found, 'Failed to find {}'.format(chained_image)
+      elif (arg == '--chain_partition' and
+            OPTIONS.info_dict.get("avb_custom_images_key_path")):
+        chained_partition = split_args[index + 1].split(":")[0]
+        location = split_args[index + 1].split(":")[1]
+        split_args[index + 1] = GetAvbChainedCustomPartitionArg(
+            chained_partition, location, OPTIONS.info_dict)
     cmd.extend(split_args)
 
   RunAndCheckOutput(cmd)
