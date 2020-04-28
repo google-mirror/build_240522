@@ -108,7 +108,7 @@ SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
 # that system_other is not in the list because we don't want to include its
 # descriptor into vbmeta.img.
 AVB_PARTITIONS = ('boot', 'dtbo', 'odm', 'product', 'recovery', 'system',
-                  'system_ext', 'vendor', 'vendor_boot')
+                  'system_ext', 'vendor', 'vendor_boot', 'custom_images')
 
 # Chained VBMeta partitions.
 AVB_VBMETA_PARTITIONS = ('vbmeta_system', 'vbmeta_vendor')
@@ -1053,6 +1053,15 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
             found = True
             break
         assert found, 'Failed to find {}'.format(chained_image)
+      elif (arg == '--chain_partition' and
+            OPTIONS.info_dict.get("avb_custom_images_key_path")):
+        chained_partition_name = split_args[index + 1].split(":")[0]
+        rollback_index_location = split_args[index + 1].split(":")[1]
+        new_key_path = ExtractAvbPublicKey(
+            avbtool, OPTIONS.info_dict["avb_custom_images_key_path"])
+        split_args[index + 1] = "{}:{}:{}".format(chained_partition_name,
+                                                  rollback_index_location,
+                                                  new_key_path)
     cmd.extend(split_args)
 
   RunAndCheckOutput(cmd)

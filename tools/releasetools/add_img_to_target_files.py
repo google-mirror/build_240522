@@ -60,6 +60,7 @@ import build_super_image
 import common
 import rangelib
 import sparse_img
+import verity_utils
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -311,6 +312,46 @@ def AddDtbo(output_zip):
 
   img.Write()
   return img.name
+
+def AddPackCustomImages(output_zip, images):
+  """Signs images listed in META/pack_customimages.txt and install them to IMAGES/.
+
+  Args:
+    output_zip: The output zip file (needs to be already open), or None to
+        write images to OPTIONS.input_tmp/.
+    images: A list of image names.
+
+  Raises:
+    AssertionError: If a listed image can't be found.
+  """
+
+  singer = verity_utils.CreateCustomImageSigner(OPTIONS.info_dict)
+
+  for image in images:
+    image = image.strip()
+    img_name = image.split(":")[0]
+    partition_name = image.split(":")[1]
+    partition_size = image.split(":")[2]
+
+    prebuilt_path = os.path.join(OPTIONS.input_tmp, "IMAGES", img_name)
+    if os.path.exists(prebuilt_path):
+      logger.info("%s already exists, no need to overwrite...", img_name)
+      continue
+
+    img_radio_path = os.path.join(OPTIONS.input_tmp, "RADIO", img_name)
+    assert os.path.exists(img_radio_path), \
+        "Failed to find %s at %s" % (img_name, img_radio_path)
+
+    signed_image = common.MakeTempFile(prefix='custom-', suffix='.img')
+    shutil.copy(img_radio_path, signed_image)
+
+    if singer is not None:
+      singer.SignCustomImage(signed_image, partition_name, partition_size)
+
+    if output_zip:
+      common.ZipWrite(output_zip, signed_image, "IMAGES/" + img_name)
+    else:
+      shutil.copy(signed_image, prebuilt_path)
 
 
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
@@ -889,6 +930,13 @@ def AddImagesToTargetFiles(filename):
   if os.path.exists(pack_radioimages_txt):
     with open(pack_radioimages_txt) as f:
       AddPackRadioImages(output_zip, f.readlines())
+
+  # Custom images that need to be packed into IMAGES/, and product-img.zip.
+  pack_customimages_txt = os.path.join(
+      OPTIONS.input_tmp, "META", "pack_customimages.txt")
+  if os.path.exists(pack_customimages_txt):
+    with open(pack_customimages_txt) as f:
+      AddPackCustomImages(output_zip, f.readlines())
 
   if output_zip:
     common.ZipClose(output_zip)

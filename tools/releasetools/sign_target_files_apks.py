@@ -100,20 +100,23 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       set to true.
 
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_algorithm <algorithm>
+         vbmeta_vendor,custom_images}_algorithm <algorithm>
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_key <key>
+         vbmeta_vendor,custom_images}_key <key>
       Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
       the specified image. Otherwise it uses the existing values in info dict.
 
   --avb_{apex,boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_extra_args <args>
+         vbmeta_vendor,custom_images}_extra_args <args>
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
 
   --android_jar_path <path>
       Path to the android.jar to repack the apex file.
+
+  --avb_custom_images <custom1.img>,<custom2.img>,...
+      Specify additional custom images that are needed to AVB-sign the images
 """
 
 from __future__ import print_function
@@ -177,6 +180,7 @@ AVB_FOOTER_ARGS_BY_PARTITION = {
     'vbmeta' : 'avb_vbmeta_args',
     'vbmeta_system' : 'avb_vbmeta_system_args',
     'vbmeta_vendor' : 'avb_vbmeta_vendor_args',
+    'custom_images' : 'avb_custom_images_add_hashtree_footer_args'
 }
 
 
@@ -1208,6 +1212,12 @@ def main(argv):
       OPTIONS.avb_extra_args['vbmeta_vendor'] = a
     elif o == "--avb_apex_extra_args":
       OPTIONS.avb_extra_args['apex'] = a
+    elif o == "--avb_custom_images_key":
+      OPTIONS.avb_keys['custom_images'] = a
+    elif o == "--avb_custom_images_algorithm":
+      OPTIONS.avb_algorithms['custom_images'] = a
+    elif o == "--avb_custom_images_extra_args":
+      OPTIONS.avb_extra_args['custom_images'] = a
     else:
       return False
     return True
@@ -1252,6 +1262,9 @@ def main(argv):
           "avb_vbmeta_vendor_algorithm=",
           "avb_vbmeta_vendor_key=",
           "avb_vbmeta_vendor_extra_args=",
+          "avb_custom_images_algorithm=",
+          "avb_custom_images_key=",
+          "avb_custom_images_extra_args=",
       ],
       extra_option_handler=option_handler)
 

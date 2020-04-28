@@ -4260,6 +4260,11 @@ ifdef BOARD_AVB_RECOVERY_KEY_PATH
 	$(hide) echo "avb_recovery_algorithm=$(BOARD_AVB_RECOVERY_ALGORITHM)" >> $@
 	$(hide) echo "avb_recovery_rollback_index_location=$(BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION)" >> $@
 endif # BOARD_AVB_RECOVERY_KEY_PATH
+ifdef BOARD_AVB_CUSTOM_IMAGES_KEY_PATH
+	$(hide) echo "avb_custom_images_key_path=$(BOARD_AVB_CUSTOM_IMAGES_KEY_PATH)" >> $@
+	$(hide) echo "avb_custom_images_algorithm=$(BOARD_AVB_CUSTOM_IMAGES_ALGORITHM)" >> $@
+	$(hide) echo "avb_custom_images_add_hashtree_footer_args=$(BOARD_AVB_CUSTOM_IMAGES_ADD_HASH_FOOTER_ARGS)" >> $@
+endif
 ifneq (,$(strip $(BOARD_AVB_VBMETA_SYSTEM)))
 	$(hide) echo "avb_vbmeta_system=$(BOARD_AVB_VBMETA_SYSTEM)" >> $@
 	$(hide) echo "avb_vbmeta_system_args=$(BOARD_AVB_MAKE_VBMETA_SYSTEM_IMAGE_ARGS)" >> $@
@@ -4736,6 +4741,13 @@ endif # BOARD_PREBUILT_DTBOIMAGE
 	@# INSTALLED_RADIOIMAGE_TARGET.
 	$(hide) $(foreach part,$(BOARD_PACK_RADIOIMAGES), \
 	    echo $(part) >> $(zip_root)/META/pack_radioimages.txt;)
+	@# The custom images in BOARD_PACK_CUSTOMIMAGES will be additionally signed and installed
+	@# from RADIO/ into IMAGES/, which then will be added into <product>-img.zip. The format of
+	@# one custom image should be image_name:partition_name:partition_size. The partition_name
+	@# and partition_size in it will be used to resign the image. And the image_name must be
+	@# listed in INSTALLED_RADIOIMAGE_TARGET.
+	$(hide) $(foreach part,$(BOARD_PACK_CUSTOMIMAGES), \
+		echo $(part) >> $(zip_root)/META/pack_customimages.txt;)
 	@# Run fs_config on all the system, vendor, boot ramdisk,
 	@# and recovery ramdisk files in the zip, and save the output
 ifdef BUILDING_SYSTEM_IMAGE

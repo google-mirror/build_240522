@@ -36,6 +36,7 @@ import logging
 import os.path
 import re
 import zipfile
+import shlex
 from hashlib import sha1
 
 import common
@@ -355,7 +356,41 @@ def ValidateVerifiedBootImages(input_tmp, info_dict, options):
     # Append the args for chained partitions if any.
     for partition in common.AVB_PARTITIONS + common.AVB_VBMETA_PARTITIONS:
       key_name = 'avb_' + partition + '_key_path'
-      if info_dict.get(key_name) is not None:
+
+      # For custom images, read from avb_vbmeta[_system|_vendor]_args
+      if key_name == 'avb_custom_images_key_path':
+        for vbmeta_partition in ('vbmeta',) + common.AVB_VBMETA_PARTITIONS:
+          avb_args = 'avb_{}_args'.format(vbmeta_partition)
+          if info_dict.get(avb_args) is not None:
+            args = info_dict[avb_args].strip()
+            split_args = shlex.split(args)
+            for index, arg in enumerate(split_args[:-1]):
+              if arg == '--chain_partition':
+                chained_partition_name = split_args[index + 1].split(":")[0]
+                rollback_index_location = split_args[index + 1].split(":")[1]
+
+                # The custom image must exist
+                custom_image = os.path.join(input_tmp, 'IMAGES',
+                                       chained_partition_name + '.img')
+                assert os.path.exists(custom_image)
+
+                if info_dict.get(key_name) is not None:
+                  # Use the key file from command line if specified; otherwise
+                  # fall back to the one in info dict.
+                  key_file = options.get(key_name)
+                  if key_file is None:
+                    key_file = info_dict[key_name]
+                  new_key_path = common.ExtractAvbPublicKey(
+                      info_dict["avb_avbtool"], key_file)
+                  chained_partition_arg = "{}:{}:{}".format(
+                      chained_partition_name,
+                      rollback_index_location,
+                      new_key_path)
+                  cmd.extend(["--expected_chain_partition", chained_partition_arg])
+                else:
+                  cmd.extend(["--expected_chain_partition", split_args[index + 1]])
+
+      elif info_dict.get(key_name) is not None:
         if info_dict.get('ab_update') != 'true' and partition == 'recovery':
           continue
 
