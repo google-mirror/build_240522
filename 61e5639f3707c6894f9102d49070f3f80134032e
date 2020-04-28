@@ -22,6 +22,29 @@
       "revId": "61e5639f3707c6894f9102d49070f3f80134032e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "333078a9_2b3bea75",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-04-28T11:54:42Z",
+      "side": 1,
+      "message": "Another simpler approach I think is to just move this up before the PRIVATE_IMPORTED_INCLUDES processing. The argument order will change more, but it shouldn\u0027t matter since it\u0027s only the order between -isystem args that does.",
+      "range": {
+        "startLine": 1142,
+        "startChar": 7,
+        "endLine": 1144,
+        "endChar": 52
+      },
+      "revId": "61e5639f3707c6894f9102d49070f3f80134032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
