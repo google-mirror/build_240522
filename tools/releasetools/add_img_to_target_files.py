@@ -60,6 +60,7 @@ import build_super_image
 import common
 import rangelib
 import sparse_img
+import verity_utils
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -312,6 +313,56 @@ def AddDtbo(output_zip):
   img.Write()
   return img.name
 
+def AddCustomImages(output_zip, partition_name):
+  """Adds and signs custom images in IMAGES/.
+
+  Args:
+    output_zip: The output zip file (needs to be already open), or None to
+        write images to OPTIONS.input_tmp/.
+
+  Uses the image under IMAGES/ if it already exists. Otherwise looks for the
+  image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.
+
+  Raises:
+    AssertionError: If image can't be found.
+  """
+
+  partition_size = OPTIONS.info_dict.get(
+      "avb_{}_partition_size".format(partition_name))
+  key_path = OPTIONS.info_dict.get("avb_{}_key_path".format(partition_name))
+  algorithm = OPTIONS.info_dict.get("avb_{}_algorithm".format(partition_name))
+  extra_args = OPTIONS.info_dict.get(
+      "avb_{}_add_hashtree_footer_args".format(partition_name))
+  partition_size = OPTIONS.info_dict.get(
+      "avb_{}_partition_size".format(partition_name))
+
+  singer = verity_utils.CreateCustomImageSigner(
+      OPTIONS.info_dict, partition_name, partition_size,
+      key_path, algorithm, extra_args)
+
+  for img_name in OPTIONS.info_dict.get(
+      "avb_{}_image_list".format(partition_name)).split():
+    custom_image = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", img_name)
+    if os.path.exists(custom_image.name):
+      continue
+
+    custom_image_prebuilt_path = os.path.join(
+        OPTIONS.input_tmp, "PREBUILT_IMAGES", img_name)
+    assert os.path.exists(custom_image_prebuilt_path), \
+      "Failed to find %s at %s" % (img_name, custom_image_prebuilt_path)
+
+    shutil.copy(custom_image_prebuilt_path, custom_image.name)
+
+    if singer is not None:
+      singer.SignCustomImage(custom_image.name)
+
+    custom_image.Write()
+
+  default = os.path.join(OPTIONS.input_tmp, "IMAGES", partition_name + ".img")
+  assert os.path.exists(default), \
+      "There should be one %s.img" % (partition_name)
+  return default
+
 
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   logger.info("creating %s.img...", what)
@@ -402,7 +453,8 @@ def AddUserdata(output_zip):
   img.Write()
 
 
-def AddVBMeta(output_zip, partitions, name, needed_partitions):
+def AddVBMeta(output_zip, partitions, name, needed_partitions,
+              custom_partitions=None):
   """Creates a VBMeta image and stores it in output_zip.
 
   It generates the requested VBMeta image. The requested image could be for
@@ -412,10 +464,11 @@ def AddVBMeta(output_zip, partitions, name, needed_partitions):
     output_zip: The output zip file, which needs to be already open.
     partitions: A dict that's keyed by partition names with image paths as
         values. Only valid partition names are accepted, as listed in
-        common.AVB_PARTITIONS.
+        common.AVB_PARTITIONS and custom_partitions.
     name: Name of the VBMeta partition, e.g. 'vbmeta', 'vbmeta_system'.
     needed_partitions: Partitions whose descriptors should be included into the
         generated VBMeta image.
+    custom_partitions: The custom images' mount points.
 
   Returns:
     Path to the created image.
@@ -431,7 +484,8 @@ def AddVBMeta(output_zip, partitions, name, needed_partitions):
     logger.info("%s.img already exists; not rebuilding...", name)
     return img.name
 
-  common.BuildVBMeta(img.name, partitions, name, needed_partitions)
+  common.BuildVBMeta(img.name, partitions, name,
+                     needed_partitions, custom_partitions)
   img.Write()
   return img.name
 
@@ -829,11 +883,18 @@ def AddImagesToTargetFiles(filename):
     banner("dtbo")
     partitions['dtbo'] = AddDtbo(output_zip)
 
+  # Custom images.
+  custom_partitions = OPTIONS.info_dict.get(
+      "avb_custom_images_partition_list", "").strip().split()
+  for partition_name in custom_partitions:
+    partition_name = partition_name.strip()
+    partitions[partition_name] = AddCustomImages(output_zip, partition_name)
+
   if OPTIONS.info_dict.get("avb_enable") == "true":
     # vbmeta_partitions includes the partitions that should be included into
     # top-level vbmeta.img, which are the ones that are not included in any
     # chained VBMeta image plus the chained VBMeta images themselves.
-    vbmeta_partitions = common.AVB_PARTITIONS[:]
+    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
 
     vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
     if vbmeta_system:
@@ -856,7 +917,8 @@ def AddImagesToTargetFiles(filename):
       vbmeta_partitions.append("vbmeta_vendor")
 
     banner("vbmeta")
-    AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
+    AddVBMeta(output_zip, partitions, "vbmeta",
+              vbmeta_partitions, custom_partitions)
 
   if OPTIONS.info_dict.get("use_dynamic_partitions") == "true":
     banner("super_empty")

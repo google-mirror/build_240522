@@ -999,7 +999,8 @@ def AddAftlInclusionProof(output_image):
   RunAndCheckOutput(verify_cmd)
 
 
-def BuildVBMeta(image_path, partitions, name, needed_partitions):
+def BuildVBMeta(image_path, partitions, name, needed_partitions,
+                custom_partitions=None):
   """Creates a VBMeta image.
 
   It generates the requested VBMeta image. The requested image could be for
@@ -1009,10 +1010,11 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
     image_path: The output path for the new VBMeta image.
     partitions: A dict that's keyed by partition names with image paths as
         values. Only valid partition names are accepted, as listed in
-        common.AVB_PARTITIONS.
+        common.AVB_PARTITIONS and custom_partitions
     name: Name of the VBMeta partition, e.g. 'vbmeta', 'vbmeta_system'.
     needed_partitions: Partitions whose descriptors should be included into the
         generated VBMeta image.
+    custom_partitions: The custom images' mount points.
 
   Raises:
     AssertionError: On invalid input args.
@@ -1025,7 +1027,8 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
     if partition not in needed_partitions:
       continue
     assert (partition in AVB_PARTITIONS or
-            partition in AVB_VBMETA_PARTITIONS), \
+            partition in AVB_VBMETA_PARTITIONS or
+            partition in custom_partitions), \
         'Unknown partition: {}'.format(partition)
     assert os.path.exists(path), \
         'Failed to find {} for {}'.format(path, partition)
