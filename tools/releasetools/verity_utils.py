@@ -695,3 +695,20 @@ class VerifiedBootVersion1HashtreeInfoGenerator(HashtreeInfoGenerator):
       raise HashtreeInfoGenerationError("Failed to reconstruct the verity tree")
 
     return self.hashtree_info
+
+
+def CreateCustomImageBuilder(info_dict, partition_name, partition_size,
+                            key_path, algorithm, signing_args):
+  builder = None
+  if info_dict.get("avb_enable") == "true":
+    builder = VerifiedBootVersion2VerityImageBuilder(
+        partition_name,
+        partition_size,
+        VerifiedBootVersion2VerityImageBuilder.AVB_HASHTREE_FOOTER,
+        info_dict.get("avb_avbtool"),
+        key_path,
+        algorithm,
+        None, # salt is None because custom images
+        signing_args)
+
+  return builder
