@@ -145,6 +145,17 @@ python_library_host {
 }
 
 python_library_host {
+    name: "releasetools_custom_utils",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "custom_utils.py",
+    ],
+    libs: [
+        "releasetools_common",
+    ],
+}
+
+python_library_host {
     name: "releasetools_build_image",
     defaults: [
         "releasetools_library_defaults",
@@ -412,6 +423,18 @@ python_binary_host {
 }
 
 python_binary_host {
+    name: "sign_custom_image",
+    defaults: ["releasetools_binary_defaults"],
+    srcs: [
+        "sign_custom_image.py",
+    ],
+    libs: [
+        "releasetools_custom_utils",
+        "releasetools_common",
+    ],
+}
+
+python_binary_host {
     name: "sign_target_files_apks",
     defaults: ["releasetools_binary_defaults"],
     srcs: [
@@ -421,6 +444,7 @@ python_binary_host {
         "releasetools_add_img_to_target_files",
         "releasetools_apex_utils",
         "releasetools_common",
+        "releasetools_custom_utils",
     ],
 }
 
@@ -449,6 +473,7 @@ python_defaults {
         "merge_target_files.py",
         "ota_package_parser.py",
         "sign_apex.py",
+        "sign_custom_image.py",
         "sign_target_files_apks.py",
         "validate_target_files.py",
 
@@ -461,6 +486,7 @@ python_defaults {
         "releasetools_build_super_image",
         "releasetools_check_target_files_vintf",
         "releasetools_common",
+        "releasetools_custom_utils",
         "releasetools_img_from_target_files",
         "releasetools_ota_from_target_files",
         "releasetools_verity_utils",

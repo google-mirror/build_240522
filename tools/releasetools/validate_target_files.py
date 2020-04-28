@@ -36,6 +36,8 @@ import logging
 import os.path
 import re
 import zipfile
+import shutil
+import shlex
 from hashlib import sha1
 
 import common
@@ -355,7 +357,36 @@ def ValidateVerifiedBootImages(input_tmp, info_dict, options):
     # Append the args for chained partitions if any.
     for partition in common.AVB_PARTITIONS + common.AVB_VBMETA_PARTITIONS:
       key_name = 'avb_' + partition + '_key_path'
-      if info_dict.get(key_name) is not None:
+
+      # For custom image, read from avb_vbmeta_args
+      if key_name == 'avb_custom_key_path':
+        args = info_dict['avb_vbmeta_args'].strip()
+        split_args = shlex.split(args)
+        for index, arg in enumerate(split_args[:-1]):
+          if arg == '--chain_partition':
+            chained_partition = split_args[index + 1].split(":")[0]
+            location = split_args[index + 1].split(":")[1]
+
+            # Copy custom image, the device must provide an image whose name
+            # is partition name.
+            src_img = os.path.join(input_tmp, 'RADIO',
+                                   chained_partition + '.img')
+            assert os.path.exists(src_img)
+            dst_img = os.path.join(input_tmp, 'IMAGES',
+                                   chained_partition + '.img')
+            shutil.copy(src_img, dst_img)
+
+            if info_dict.get(key_name) is not None:
+              # Use the key file from command line if specified; otherwise fall back
+              # to the one in info dict.
+              key_file = options.get(key_name, info_dict[key_name])
+              chained_partition_arg = common.GetAvbChainedCustomPartitionArg(
+                  chained_partition, location, info_dict, key_file)
+              cmd.extend(["--expected_chain_partition", chained_partition_arg])
+            else:
+              cmd.extend(["--expected_chain_partition", split_args[index + 1]])
+
+      elif info_dict.get(key_name) is not None:
         if info_dict.get('ab_update') != 'true' and partition == 'recovery':
           continue
 

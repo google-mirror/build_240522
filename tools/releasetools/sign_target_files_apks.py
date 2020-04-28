@@ -100,20 +100,23 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       set to true.
 
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_algorithm <algorithm>
+         vbmeta_vendor,custom}_algorithm <algorithm>
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_key <key>
+         vbmeta_vendor,custom}_key <key>
       Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
       the specified image. Otherwise it uses the existing values in info dict.
 
   --avb_{apex,boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_extra_args <args>
+         vbmeta_vendor,custom}_extra_args <args>
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
 
   --android_jar_path <path>
       Path to the android.jar to repack the apex file.
+
+  --avb_custom_images <custom1.img>,<custom2.img>,...
+      Specify additional custom images that are needed to AVB-sign the images
 """
 
 from __future__ import print_function
@@ -127,6 +130,7 @@ import itertools
 import logging
 import os
 import re
+import shlex
 import shutil
 import stat
 import subprocess
@@ -138,7 +142,7 @@ from xml.etree import ElementTree
 import add_img_to_target_files
 import apex_utils
 import common
-
+import custom_utils
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -164,7 +168,7 @@ OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
 OPTIONS.avb_extra_args = {}
 OPTIONS.android_jar_path = None
-
+OPTIONS.custom_images = None
 
 AVB_FOOTER_ARGS_BY_PARTITION = {
     'boot' : 'avb_boot_add_hash_footer_args',
@@ -177,6 +181,7 @@ AVB_FOOTER_ARGS_BY_PARTITION = {
     'vbmeta' : 'avb_vbmeta_args',
     'vbmeta_system' : 'avb_vbmeta_system_args',
     'vbmeta_vendor' : 'avb_vbmeta_vendor_args',
+    'custom' : 'avb_custom_add_hashtree_footer_args'
 }
 
 
@@ -634,6 +639,24 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         "BOOT/RAMDISK/first_stage_ramdisk/force_debuggable"):
       raise common.ExternalError("debuggable boot.img cannot be signed")
 
+    # Custom images
+    elif (filename.startswith("RADIO") and
+          OPTIONS.custom_images and
+          os.path.basename(filename) in OPTIONS.custom_images):
+      if OPTIONS.avb_keys.get("custom"):
+        image_dir = common.MakeTempDir(prefix='custom-images-')
+        custom_image = input_tf_zip.extract(filename, image_dir)
+        signed_custom_image = custom_utils.SignCustomImage(
+            custom_image, OPTIONS.avb_keys.get("custom"),
+            OPTIONS.avb_algorithms.get("custom"),
+            OPTIONS.avb_extra_args.get("custom"))
+        if signed_custom_image is None:
+          common.ZipWriteStr(output_tf_zip, out_info, data)
+        else:
+          common.ZipWrite(output_tf_zip, signed_custom_image, filename)
+      else:
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+
     # A non-APK file; copy it verbatim.
     else:
       common.ZipWriteStr(output_tf_zip, out_info, data)
@@ -933,6 +956,8 @@ def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
   for key in sorted(misc_info):
     if key in misc_info_old:
       items.append('%s=%s' % (key, misc_info[key]))
+    elif key == "avb_custom_key_path" or key == "avb_custom_algorithm":
+      items.append('%s=%s' % (key, misc_info[key]))
   common.ZipWriteStr(output_zip, "META/misc_info.txt", '\n'.join(items))
 
 
@@ -1208,6 +1233,14 @@ def main(argv):
       OPTIONS.avb_extra_args['vbmeta_vendor'] = a
     elif o == "--avb_apex_extra_args":
       OPTIONS.avb_extra_args['apex'] = a
+    elif o == "--avb_custom_key":
+      OPTIONS.avb_keys['custom'] = a
+    elif o == "--avb_custom_algorithm":
+      OPTIONS.avb_algorithms['custom'] = a
+    elif o == "--avb_custom_extra_args":
+      OPTIONS.avb_extra_args['custom'] = a
+    elif o == "--avb_custom_images":
+      OPTIONS.custom_images = a.split(",")
     else:
       return False
     return True
@@ -1252,6 +1285,10 @@ def main(argv):
           "avb_vbmeta_vendor_algorithm=",
           "avb_vbmeta_vendor_key=",
           "avb_vbmeta_vendor_extra_args=",
+          "avb_custom_algorithm=",
+          "avb_custom_key=",
+          "avb_custom_extra_args=",
+          "avb_custom_images="
       ],
       extra_option_handler=option_handler)
 
