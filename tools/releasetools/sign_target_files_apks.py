@@ -100,14 +100,14 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       set to true.
 
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_algorithm <algorithm>
+         vbmeta_vendor,custom_images}_algorithm <algorithm>
   --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_key <key>
+         vbmeta_vendor,custom_images}_key <key>
       Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
       the specified image. Otherwise it uses the existing values in info dict.
 
   --avb_{apex,boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
-         vbmeta_vendor}_extra_args <args>
+         vbmeta_vendor,custom_images}_extra_args <args>
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
@@ -177,6 +177,7 @@ AVB_FOOTER_ARGS_BY_PARTITION = {
     'vbmeta' : 'avb_vbmeta_args',
     'vbmeta_system' : 'avb_vbmeta_system_args',
     'vbmeta_vendor' : 'avb_vbmeta_vendor_args',
+    'custom_images' : 'avb_custom_images_add_hashtree_footer_args'
 }
 
 
@@ -939,20 +940,20 @@ def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
 def ReplaceAvbSigningKeys(misc_info):
   """Replaces the AVB signing keys."""
 
-  def ReplaceAvbPartitionSigningKey(partition):
-    key = OPTIONS.avb_keys.get(partition)
+  def ReplaceAvbPartitionSigningKey(partition, key_name):
+    key = OPTIONS.avb_keys.get(key_name)
     if not key:
       return
 
-    algorithm = OPTIONS.avb_algorithms.get(partition)
-    assert algorithm, 'Missing AVB signing algorithm for %s' % (partition,)
+    algorithm = OPTIONS.avb_algorithms.get(key_name)
+    assert algorithm, 'Missing AVB signing algorithm for %s' % (key_name,)
 
     print('Replacing AVB signing key for %s with "%s" (%s)' % (
         partition, key, algorithm))
     misc_info['avb_' + partition + '_algorithm'] = algorithm
     misc_info['avb_' + partition + '_key_path'] = key
 
-    extra_args = OPTIONS.avb_extra_args.get(partition)
+    extra_args = OPTIONS.avb_extra_args.get(key_name)
     if extra_args:
       print('Setting extra AVB signing args for %s to "%s"' % (
           partition, extra_args))
@@ -960,7 +961,15 @@ def ReplaceAvbSigningKeys(misc_info):
       misc_info[args_key] = (misc_info.get(args_key, '') + ' ' + extra_args)
 
   for partition in AVB_FOOTER_ARGS_BY_PARTITION:
-    ReplaceAvbPartitionSigningKey(partition)
+    # All custom images will use one key for now.
+    if (partition == "custom_images" and
+        misc_info.get("avb_custom_images_partition_list", "").strip()):
+      custom_paritions = misc_info.get(
+          "avb_custom_images_partition_list", "").strip().split()
+      for cusom_partition in custom_paritions:
+        ReplaceAvbPartitionSigningKey(cusom_partition, "custom_images")
+    else:
+      ReplaceAvbPartitionSigningKey(partition, partition)
 
 
 def RewriteAvbProps(misc_info):
@@ -1208,6 +1217,12 @@ def main(argv):
       OPTIONS.avb_extra_args['vbmeta_vendor'] = a
     elif o == "--avb_apex_extra_args":
       OPTIONS.avb_extra_args['apex'] = a
+    elif o == "--avb_custom_images_key":
+      OPTIONS.avb_keys['custom_images'] = a
+    elif o == "--avb_custom_images_algorithm":
+      OPTIONS.avb_algorithms['custom_images'] = a
+    elif o == "--avb_custom_images_extra_args":
+      OPTIONS.avb_extra_args['custom_images'] = a
     else:
       return False
     return True
@@ -1252,6 +1267,9 @@ def main(argv):
           "avb_vbmeta_vendor_algorithm=",
           "avb_vbmeta_vendor_key=",
           "avb_vbmeta_vendor_extra_args=",
+          "avb_custom_images_algorithm=",
+          "avb_custom_images_key=",
+          "avb_custom_images_extra_args=",
       ],
       extra_option_handler=option_handler)
 
