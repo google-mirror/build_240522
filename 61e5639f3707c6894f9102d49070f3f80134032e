@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a6f16bd_160ab67d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-04-28T01:51:18Z",
+      "side": 1,
+      "message": "For external reference, this is the diff:\n\n$ diff -U7 cppargs.orig.txt cppargs.new.txt\n--- cppargs.orig.txt\t2020-04-28 02:32:13.090406151 +0100\n+++ cppargs.new.txt\t2020-04-28 02:32:25.098297124 +0100\n@@ -1,28 +1,29 @@\n PWD\u003d/proc/self/cwd\n bionic/tests/touch-obj-on-success\n prebuilts/clang/host/linux-x86/clang-r377782d/bin/clang++\n \n+\n -I\n bionic/tests\n -I\n out/target/product/hikey/obj/STATIC_LIBRARIES/bionic-compile-time-tests1-clang++_intermediates\n -I\n out/target/product/hikey/gen/STATIC_LIBRARIES/bionic-compile-time-tests1-clang++_intermediates\n -I\n libnativehelper/include_jni\n -Iexternal/libcxx/include\n -Iexternal/libcxxabi/include\n -D__LIBC_API__\u003d10000\n--Ibionic/libc/include\n -D__LIBM_API__\u003d10000\n -D__LIBM_API__\u003d10000\n -D__LIBDL_API__\u003d10000\n -Iexternal/libcxxabi/include\n \n+\n -I\n system/core/include\n -I\n system/media/audio/include\n -I\n hardware/libhardware/include\n -I\n@@ -38,19 +39,19 @@\n -isystem\n device/linaro/hikey/kernel-headers\n -isystem\n bionic/libc/include\n -isystem\n bionic/libc/kernel/uapi\n -isystem\n-bionic/libc/kernel/uapi/asm-arm64\n--isystem\n bionic/libc/kernel/android/scsi\n -isystem\n bionic/libc/kernel/android/uapi\n+-isystem\n+bionic/libc/kernel/uapi/asm-arm64\n -c\n \n -Werror\u003dimplicit-function-declaration\n -DANDROID\n -fmessage-length\u003d0\n -W\n -Wall",
+      "range": {
+        "startLine": 11,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "61e5639f3707c6894f9102d49070f3f80134032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
