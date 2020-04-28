@@ -1102,16 +1102,46 @@ endef
 ###########################################################
 ## Helper to set include paths form transform-*-to-o
 ###########################################################
+
+# Filter out all "-isystem blah" pairs from $(1).
+define filter-out-isystem
+$(filter-out -isystem=%,\
+    $(subst -isystem ,-isystem=,$(1)))
+endef
+
+# Filter to keep only the "-isystem blah" pairs from $(1).
+define filter-isystem
+$(patsubst -isystem=%,-isystem %,\
+    $(filter -isystem=%,\
+        $(subst -isystem ,-isystem=,$(1))))
+endef
+
+# For compatibility we put -isystem dirs from imported modules after the global
+# system includes. That keeps PROJECT_SYSTEM_INCLUDES before the system includes
+# coming from the Bionic Soong modules, like before when they were added
+# globally to C_SYSTEM_INCLUDES. No other modules should be supplying system
+# includes.
+# $(1): Local flags
+# $(2): Imported flags
+# $(3): Global flags
+define merge-c-includes
+$(1) \
+$(call filter-out-isystem,$(2)) \
+$(3) \
+$(call filter-isystem,$(2))
+endef
+
 define c-includes
-$(addprefix -I , $(PRIVATE_C_INCLUDES)) \
-$(foreach i,$(PRIVATE_IMPORTED_INCLUDES),$(EXPORTS.$(i)))\
-$(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),,\
-    $(addprefix -I ,\
-        $(filter-out $(PRIVATE_C_INCLUDES), \
-            $(PRIVATE_GLOBAL_C_INCLUDES))) \
-    $(addprefix -isystem ,\
-        $(filter-out $(PRIVATE_C_INCLUDES), \
-            $(PRIVATE_GLOBAL_C_SYSTEM_INCLUDES))))
+$(call merge-c-includes,\
+    $(addprefix -I , $(PRIVATE_C_INCLUDES)),\
+    $(foreach i,$(PRIVATE_IMPORTED_INCLUDES),$(EXPORTS.$(i))),\
+    $(if $(PRIVATE_NO_DEFAULT_COMPILER_FLAGS),,\
+        $(addprefix -I ,\
+            $(filter-out $(PRIVATE_C_INCLUDES), \
+                $(PRIVATE_GLOBAL_C_INCLUDES))) \
+        $(addprefix -isystem ,\
+            $(filter-out $(PRIVATE_C_INCLUDES), \
+                $(PRIVATE_GLOBAL_C_SYSTEM_INCLUDES)))))
 endef
 
 ###########################################################
