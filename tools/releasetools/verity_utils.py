@@ -19,6 +19,7 @@ from __future__ import print_function
 import logging
 import os.path
 import shlex
+import shutil
 import struct
 
 import common
@@ -695,3 +696,75 @@ class VerifiedBootVersion1HashtreeInfoGenerator(HashtreeInfoGenerator):
       raise HashtreeInfoGenerationError("Failed to reconstruct the verity tree")
 
     return self.hashtree_info
+
+
+def CreateCustomImageSigner(info_dict, partition_name, partition_size,
+                            key_path, algorithm, extra_args):
+  signer = None
+  if info_dict.get("avb_enable") == "true":
+    avbtool = info_dict.get("avb_avbtool")
+    signer = CustomImageSigner(avbtool, partition_name, partition_size,
+                               key_path, algorithm, extra_args)
+
+  return signer
+
+
+class CustomSigningError(Exception):
+  """An Exception raised during Custom image signing."""
+
+  def __init__(self, message):
+    Exception.__init__(self, message)
+
+
+class CustomImageSigner(object):
+  """A class that signs the custom image."""
+
+  def __init__(self, avbtool, partition_name, partition_size,
+               key_path, algorithm, extra_args):
+    self.partition_name = partition_name
+    self.partition_size = partition_size
+    self.avbtool = avbtool
+    self.key_path = key_path
+    self.algorithm = algorithm
+    self.extra_args = extra_args
+
+  def VerifyCustomImage(self, custom_image, partition_name):
+    """Verifies the Custom image signature with the given key."""
+
+    # To verify the image, image name must be same as partition name
+    verify_dir = common.MakeTempDir(prefix='custom-verify-')
+    verifying_custom_image = os.path.join(verify_dir, partition_name + '.img')
+    shutil.copyfile(custom_image, verifying_custom_image)
+
+    cmd = [self.avbtool, 'verify_image', '--image', verifying_custom_image,
+         '--key', self.key_path]
+    try:
+      common.RunAndCheckOutput(cmd)
+    except common.ExternalError as e:
+      raise CustomSigningError(
+          'Failed to validate Custom signing for {} with {}:\n{}'.format(
+              custom_image, self.key_path, e))
+
+  def SignCustomImage(self, custom_image):
+    """ Sign a custom image."""
+
+    cmd = [self.avbtool, 'add_hashtree_footer',
+         '--do_not_generate_fec',
+         '--partition_name', self.partition_name,
+         '--partition_size', self.partition_size,
+         '--algorithm', self.algorithm,
+         '--key', self.key_path,
+         '--image', custom_image]
+
+    if self.extra_args is not None and self.extra_args.strip():
+      cmd.append(self.extra_args)
+
+    try:
+      common.RunAndCheckOutput(cmd)
+    except common.ExternalError as e:
+      raise CustomSigningError(
+          'Failed to sign Custom Image {} with {}:\n{}'.format(
+              custom_image, self.key_path, e))
+
+    logger.info('Verifying %s', custom_image)
+    self.VerifyCustomImage(custom_image, self.partition_name)
