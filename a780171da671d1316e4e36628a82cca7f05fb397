@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a9299bc_1fc1d6d1",
+        "filename": "target/product/aosp_arm64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-04-29T18:31:50Z",
+      "side": 1,
+      "message": "FYI SzuWei the other way to get this behavior is to set PRODUCT_SHIPPING_API_LEVEL, which this product should perhaps always set to the latest.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "a780171da671d1316e4e36628a82cca7f05fb397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
