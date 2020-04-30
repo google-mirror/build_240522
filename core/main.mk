@@ -1204,7 +1204,7 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
     $(eval offending_files := $(filter-out $(path_patterns) $(whitelist_patterns) $(static_whitelist_patterns),$(files))) \
     $(call maybe-print-list-and-error,$(offending_files),\
       $(makefile) produces files outside its artifact path requirement. \
-      Allowed paths are $(subst $(space),$(comma)$(space),$(addsuffix *,$(requirements)))) \
+      Allowed paths are $(subst $(space),$(comma)$(space),$(addsuffix *,$(call resolve-product-relative-paths,$(requirements))))) \
     $(eval unused_whitelist := $(filter-out $(files),$(whitelist_patterns))) \
     $(call maybe-print-list-and-error,$(unused_whitelist),$(makefile) includes redundant whitelist entries in its artifact path requirement.) \
     $(eval ### Optionally verify that nothing else produces files inside this artifact path requirement.) \
