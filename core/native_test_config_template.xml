@@ -18,6 +18,7 @@
     <option name="test-suite-tag" value="apct" />
     <option name="test-suite-tag" value="apct-native" />
 
+    {MAINLINE_MODULES}
     {EXTRA_CONFIGS}
 
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
