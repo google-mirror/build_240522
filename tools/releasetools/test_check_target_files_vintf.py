@@ -35,8 +35,8 @@ SKELETON_TARGET_FILE_STRUCTURE = {
     'SYSTEM_EXT/etc/build.prop': '',
 
     # Non-empty files
-    'SYSTEM/compatibility_matrix.xml':"""
-        <compatibility-matrix version="1.0" type="framework">
+    'SYSTEM/etc/vintf/compatibility_matrix.1.xml':"""
+        <compatibility-matrix version="1.0" level="legacy" type="framework">
             <sepolicy>
                 <sepolicy-version>0.0</sepolicy-version>
                 <kernel-sepolicy-version>0</kernel-sepolicy-version>
