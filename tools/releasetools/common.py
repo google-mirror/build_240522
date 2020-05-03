@@ -95,6 +95,7 @@ class Options(object):
     self.cache_size = None
     self.stash_threshold = 0.8
     self.logfile = None
+    self.placeholder_file = None
 
 
 OPTIONS = Options()
@@ -577,6 +578,19 @@ class BuildInfo(object):
       if valid:
         yield {prop: val for prop, val, _ in combination}
 
+  def _FindAlternativeComponentValues(self, component):
+    prop_val, source = self._ResolveRoProductBuildProp(
+      'ro.product.{}'.format(component))
+
+    prop_file = '{}.build.prop'.format(source) if source else 'build.prop'
+    partition_props = self.info_dict.get(prop_file)
+    assert partition_props, 'build props not found for {}'.format(prop_file)
+
+    partition_prop_name = 'ro.product.{}.{}'.format(
+      partition_props.partition, component)
+    overrides = partition_props.prop_overrides.get(partition_prop_name)
+    return prop_val, overrides
+
   def CalculateAlternativeFingerprintPrefixes(self):
     """Returns a set of possible fingerprint prefixes in runtime."""
 
@@ -588,17 +602,8 @@ class BuildInfo(object):
     default_values = {}
     alternative_values = {component: [] for component in prefix_components}
     for component in prefix_components:
-      prop_val, source = self._ResolveRoProductBuildProp(
-          'ro.product.{}'.format(component))
+      prop_val, overrides = self._FindAlternativeComponentValues(component)
       default_values[component] = prop_val
-
-      prop_file = '{}.build.prop'.format(source) if source else 'build.prop'
-      partition_props = self.info_dict.get(prop_file)
-      assert partition_props, 'build props not found for {}'.format(prop_file)
-
-      partition_prop_name = 'ro.product.{}.{}'.format(
-          partition_props.partition, component)
-      overrides = partition_props.prop_overrides.get(partition_prop_name)
       if overrides:
         alternative_values[component] = [(component, val, condition) for
                                          val, condition in overrides]
@@ -611,6 +616,28 @@ class BuildInfo(object):
       prefixes.add('{brand}/{name}/{device}'.format(**value_dict))
 
     return prefixes
+
+  def GetRuntimeDevices(self):
+    device_prop = 'ro.product.device'
+    if self.oem_props and device_prop in self.oem_props:
+      return self._device
+
+    prop_val, overrides = self._FindAlternativeComponentValues('device')
+    assert self._device == prop_val
+    return {self._device}.union({val for val, condition in overrides})
+
+  def GetRuntimeFingerprints(self):
+    fingerprints = {self.fingerprint}
+    prefixes = self.CalculateAlternativeFingerprintPrefixes()
+    suffix = ":{}/{}/{}:{}/{}".format(
+            self.GetBuildProp("ro.build.version.release"),
+            self.GetBuildProp("ro.build.id"),
+            self.GetBuildProp("ro.build.version.incremental"),
+            self.GetBuildProp("ro.build.type"),
+            self.GetBuildProp("ro.build.tags"))
+    for prefix in prefixes:
+      fingerprints.add(prefix + suffix)
+    return fingerprints
 
   def WriteMountOemScript(self, script):
     assert self.oem_props is not None
@@ -749,12 +776,18 @@ def LoadInfoDict(input_file, repacking=False):
   # Load recovery fstab if applicable.
   d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, read_helper)
 
+  placeholder_values = {}
+  if OPTIONS.placeholder_file:
+    d = LoadDictionaryFromFile(OPTIONS.placeholder_file)
+    for key, values in d.items():
+      placeholder_values[key] = [val.strip() for val in values.split(',')]
+
   # Tries to load the build props for all partitions with care_map, including
   # system and vendor.
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
     d[partition_prop] = PartitionBuildProps.FromInputFile(
-        input_file, partition)
+        input_file, partition, placeholder_values)
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB

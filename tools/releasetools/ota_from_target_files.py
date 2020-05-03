@@ -182,6 +182,13 @@ A/B OTA specific options
   --payload_signer_key_size <key_size>
       Deprecated. Use the '--payload_signer_maximum_signature_size' instead.
 
+  --placeholder_file <path>
+      A file that contains the possible values of ro.boot.* properties. It's
+      used to calculate the possible runtime fingerprints when some
+      ro.product.* properties are overridden by the 'import' statement.
+      The file expects one property per line, and each line has the following
+      format: 'prop_name=value1,value2'. e.g. 'ro.boot.product.sku=std,pro'
+
   --skip_postinstall
       Skip the postinstall hooks when generating an A/B OTA package (default:
       False). Note that this discards ALL the hooks, including non-optional
@@ -2032,6 +2039,8 @@ def main(argv):
       OPTIONS.output_metadata_path = a
     elif o == "--disable_fec_computation":
       OPTIONS.disable_fec_computation = True
+    elif o == "--placeholder_file":
+      OPTIONS.placeholder_file = a
     else:
       return False
     return True

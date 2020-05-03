@@ -2220,7 +2220,7 @@ class AlternativeFingerprintTest(test_utils.ReleaseToolsTestCase):
         'vendor-product-brand/product-pro/device-pro',
     }, target_info.CalculateAlternativeFingerprintPrefixes())
 
-  def test_CalculatePossibleFingerprints_overrides_different_partitions(self):
+  def test_CalculateRuntimeFingerprints_overrides_different_partitions(self):
     # cases where the ro.product.name comes from vendor, and ro.product.device
     # comes from odm.
     info_dict = copy.deepcopy(self.TEST_INFO_DICT)
@@ -2253,9 +2253,15 @@ class AlternativeFingerprintTest(test_utils.ReleaseToolsTestCase):
 
     target_info = common.BuildInfo(info_dict, None)
     self.assertEqual({
-        'vendor-product-brand/vendor-product-std/odm-device-std',
-        'vendor-product-brand/vendor-product-pro/odm-device-pro',
-    }, target_info.CalculateAlternativeFingerprintPrefixes())
+        'vendor-product-brand/vendor-product-name/odm-product-device:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-std/odm-device-std:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-pro/odm-device-pro:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+    }, target_info.GetRuntimeFingerprints())
+    self.assertEqual({'odm-product-device', 'odm-device-std',
+                      'odm-device-pro'}, target_info.GetRuntimeDevices())
 
     info_dict['odm.build.prop'].prop_overrides = {
         'ro.product.odm.device': [
@@ -2268,8 +2274,37 @@ class AlternativeFingerprintTest(test_utils.ReleaseToolsTestCase):
 
     target_info = common.BuildInfo(info_dict, None)
     self.assertEqual({
-        'vendor-product-brand/vendor-product-std/odm-device-std',
-        'vendor-product-brand/vendor-product-std/odm-device-pro',
-        'vendor-product-brand/vendor-product-pro/odm-device-std',
-        'vendor-product-brand/vendor-product-pro/odm-device-pro',
-    }, target_info.CalculateAlternativeFingerprintPrefixes())
+        'vendor-product-brand/vendor-product-name/odm-product-device:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-std/odm-device-std:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-std/odm-device-pro:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-pro/odm-device-std:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+        'vendor-product-brand/vendor-product-pro/odm-device-pro:'
+        'version-release/build-id/version-incremental:build-type/build-tags',
+    }, target_info.GetRuntimeFingerprints())
+    self.assertEqual({'odm-product-device', 'odm-device-std',
+                      'odm-device-pro'}, target_info.GetRuntimeDevices())
+
+  def test_LoadInfoDict_place_holders(self):
+    placeholders = ['prop_a=val1, val2', 'prop_b=val3,val4']
+    placeholder_file = common.MakeTempFile()
+    with open(placeholder_file, 'w') as f:
+      f.write('\n'.join(placeholders))
+    common.OPTIONS.placeholder_file = placeholder_file
+
+    misc_info = [
+        'recovery_api_version=3',
+        'fstab_version=2',
+    ]
+    target_file = self._BuildZipFile({
+        'META/misc_info.txt': '\n'.join(misc_info),
+        'SYSTEM/etc/build.prop': ''})
+
+    with zipfile.ZipFile(target_file, 'r') as target_zip:
+      loaded_dict = common.LoadInfoDict(target_zip)
+      self.assertEqual(
+          {'prop_a': ['val1', 'val2'], 'prop_b': ['val3', 'val4']},
+          loaded_dict['build.prop'].placeholder_values)
