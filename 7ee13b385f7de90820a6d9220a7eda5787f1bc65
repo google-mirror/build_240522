@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15d08fa2_84e85890",
+        "filename": "core/tasks/boot_jars_package_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-05-04T08:31:57Z",
+      "side": 1,
+      "message": "Please add \u0027or \"system_ext\"\u0027 here.",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "7ee13b385f7de90820a6d9220a7eda5787f1bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
