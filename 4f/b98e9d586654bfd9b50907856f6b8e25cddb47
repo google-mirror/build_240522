@@ -1,0 +1,9 @@
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Svetoslav Ganov <svetoslavganov@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Dan Willemsen <dwillemsen@google.com>
+Submitted-at: Mon, 04 May 2020 06:58:06 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1279111
+Project: platform/build
+Branch: refs/heads/master
