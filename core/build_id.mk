@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (6464ed Merge "Skip _oem_props if oem_dicts is None.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=QQ2A.200501.001.B3
+>>>>>>> BRANCH (0fac13 Version bump to QQ2A.200501.001.B3 [core/build_id.mk])
