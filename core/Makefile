@@ -1840,18 +1840,30 @@ $(INSTALLED_FILES_FILE_RECOVERY): $(INTERNAL_RECOVERYIMAGE_FILES) $(FILESLIST) $
 	$(hide) $(FILESLIST) $(TARGET_RECOVERY_ROOT_OUT) > $(@:.txt=.json)
 	$(hide) $(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+recovery_root_out := $(TARGET_VENDOR_RAMDISK_OUT)
+else
+recovery_root_out := $(TARGET_RECOVERY_ROOT_OUT)
+endif
+
 recovery_sepolicy := \
     $(TARGET_RECOVERY_ROOT_OUT)/sepolicy \
     $(TARGET_RECOVERY_ROOT_OUT)/plat_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/plat_property_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/system_ext_file_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/system_ext_property_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/vendor_file_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/vendor_property_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/odm_file_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/odm_property_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/product_file_contexts \
-    $(TARGET_RECOVERY_ROOT_OUT)/product_property_contexts
+    $(TARGET_RECOVERY_ROOT_OUT)/system_ext_property_contexts
+
+vendor_recovery_sepolicy := \
+    $(recovery_root_out)/vendor_file_contexts \
+    $(recovery_root_out)/vendor_property_contexts \
+    $(recovery_root_out)/odm_file_contexts \
+    $(recovery_root_out)/odm_property_contexts \
+    $(recovery_root_out)/product_file_contexts \
+    $(recovery_root_out)/product_property_contexts
+
+ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+recovery_sepolicy += $(vendor_recovery_sepolicy)
+endif
 
 # Passed into rsync from non-recovery root to recovery root, to avoid overwriting recovery-specific
 # SELinux files
@@ -2037,8 +2049,9 @@ RECOVERY_RESOURCE_ZIP :=
 endif
 
 INSTALLED_RECOVERY_BUILD_PROP_TARGET := $(TARGET_RECOVERY_ROOT_OUT)/prop.default
+INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET := $(recovery_root_out)/prop.vendor
 
-$(INSTALLED_RECOVERY_BUILD_PROP_TARGET): PRIVATE_RECOVERY_UI_PROPERTIES := \
+$(INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET): PRIVATE_RECOVERY_UI_PROPERTIES := \
     TARGET_RECOVERY_UI_ANIMATION_FPS:animation_fps \
     TARGET_RECOVERY_UI_MARGIN_HEIGHT:margin_height \
     TARGET_RECOVERY_UI_MARGIN_WIDTH:margin_width \
@@ -2067,22 +2080,27 @@ endef
 
 $(INSTALLED_RECOVERY_BUILD_PROP_TARGET): \
 	    $(INSTALLED_DEFAULT_PROP_TARGET) \
-	    $(INSTALLED_VENDOR_DEFAULT_PROP_TARGET) \
 	    $(intermediate_system_build_prop) \
-	    $(INSTALLED_VENDOR_BUILD_PROP_TARGET) \
-	    $(INSTALLED_ODM_BUILD_PROP_TARGET) \
-	    $(INSTALLED_PRODUCT_BUILD_PROP_TARGET) \
 	    $(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET)
 	@echo "Target recovery buildinfo: $@"
 	$(hide) mkdir -p $(dir $@)
 	$(hide) rm -f $@
 	$(hide) cat $(INSTALLED_DEFAULT_PROP_TARGET) > $@
-	$(hide) cat $(INSTALLED_VENDOR_DEFAULT_PROP_TARGET) >> $@
 	$(hide) cat $(intermediate_system_build_prop) >> $@
+	$(hide) cat $(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET) >> $@
+
+$(INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET): \
+	    $(INSTALLED_VENDOR_DEFAULT_PROP_TARGET) \
+	    $(INSTALLED_VENDOR_BUILD_PROP_TARGET) \
+	    $(INSTALLED_ODM_BUILD_PROP_TARGET) \
+	    $(INSTALLED_PRODUCT_BUILD_PROP_TARGET)
+	@echo "Target vendor recovery buildinfo: $@"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) rm -f $@
+	$(hide) cat $(INSTALLED_VENDOR_DEFAULT_PROP_TARGET) >> $@
 	$(hide) cat $(INSTALLED_VENDOR_BUILD_PROP_TARGET) >> $@
 	$(hide) cat $(INSTALLED_ODM_BUILD_PROP_TARGET) >> $@
 	$(hide) cat $(INSTALLED_PRODUCT_BUILD_PROP_TARGET) >> $@
-	$(hide) cat $(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET) >> $@
 	$(call append-recovery-ui-properties,$(PRIVATE_RECOVERY_UI_PROPERTIES),$@)
 
 ifeq (truetrue,$(strip $(BUILDING_VENDOR_BOOT_IMAGE))$(strip $(AB_OTA_UPDATER)))
@@ -2122,6 +2140,21 @@ ifndef BOARD_RECOVERY_MKBOOTIMG_ARGS
   BOARD_RECOVERY_MKBOOTIMG_ARGS := $(BOARD_MKBOOTIMG_ARGS)
 endif
 
+define install-device-recovery-assets
+cp -rf $(recovery_resources_common)/* $(1)/res
+$(foreach recovery_text_file,$(generated_recovery_text_files), \
+  cp -rf $(recovery_text_file) $(1)/res/images/ &&) true
+cp -f $(recovery_font) $(1)/res/images/font.png
+$(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
+  cp -rf $(item) $(1)/$(newline))
+mkdir -p $(1)/system/etc
+$(foreach item,$(recovery_fstab), \
+  cp -f $(item) $(1)/system/etc/recovery.fstab)
+$(if $(strip $(recovery_wipe)), \
+  cp -f $(recovery_wipe) $(1)/system/etc/recovery.wipe)
+ln -sf prop.vendor $(1)/vendor.prop
+endef
+
 $(recovery_ramdisk): $(MKBOOTFS) $(MINIGZIP) \
 	    $(INTERNAL_ROOT_FILES) \
 	    $(INSTALLED_RAMDISK_TARGET) \
@@ -2129,6 +2162,7 @@ $(recovery_ramdisk): $(MKBOOTFS) $(MINIGZIP) \
 	    $(recovery_sepolicy) \
 	    $(INSTALLED_2NDBOOTLOADER_TARGET) \
 	    $(INSTALLED_RECOVERY_BUILD_PROP_TARGET) \
+	    $(INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET) \
 	    $(recovery_resource_deps) \
 	    $(recovery_fstab)
 	# Making recovery image
@@ -2145,18 +2179,11 @@ $(recovery_ramdisk): $(MKBOOTFS) $(MINIGZIP) \
 	cp $(TARGET_ROOT_OUT)/init.recovery.*.rc $(TARGET_RECOVERY_ROOT_OUT)/ 2> /dev/null || true # Ignore error when the src file doesn't exist.
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/res
 	rm -rf $(TARGET_RECOVERY_ROOT_OUT)/res/*
-	cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
-	$(foreach recovery_text_file,$(generated_recovery_text_files), \
-	  cp -rf $(recovery_text_file) $(TARGET_RECOVERY_ROOT_OUT)/res/images/ &&) true
-	cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
-	$(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
-	  cp -rf $(item) $(TARGET_RECOVERY_ROOT_OUT)/$(newline))
-	$(foreach item,$(recovery_fstab), \
-	  cp -f $(item) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.fstab)
-	$(if $(strip $(recovery_wipe)), \
-	  cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
+ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+	$(call install-device-recovery-assets,$(TARGET_RECOVERY_ROOT_OUT))
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
+endif
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(MINIGZIP) > $(recovery_ramdisk)
 
 # $(1): output file
@@ -2410,7 +2437,16 @@ INTERNAL_VENDOR_RAMDISK_FILES := $(filter $(TARGET_VENDOR_RAMDISK_OUT)/%, \
     $(ALL_DEFAULT_INSTALLED_MODULES))
 
 INTERNAL_VENDOR_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor-boot)/vendor-ramdisk.cpio.gz
-$(INTERNAL_VENDOR_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_RAMDISK_FILES) | $(MINIGZIP)
+$(INTERNAL_VENDOR_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_RAMDISK_FILES) | $(MINIGZIP) \
+	    $(INTERNAL_VENDOR_RAMDISK_FILES) \
+	    $(vendor_recovery_sepolicy) \
+	    $(INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET) \
+	    $(recovery_resource_deps) \
+	    $(recovery_fstab)
+	mkdir -p $(TARGET_VENDOR_RAMDISK_OUT)/res
+	rm -rf $(TARGET_VENDOR_RAMDISK_OUT)/res/*
+	$(call install-device-recovery-assets,$(TARGET_VENDOR_RAMDISK_OUT))
+	$(BOARD_RECOVERY_IMAGE_PREPARE)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_VENDOR_RAMDISK_OUT) | $(MINIGZIP) > $@
 
 ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
