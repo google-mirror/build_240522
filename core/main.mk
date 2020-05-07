@@ -533,61 +533,73 @@ $(sort $(foreach m,$(1),\
     $(m))))
 endef
 
-# If a module is for a cross host os, the required modules must be for
-# that OS too.
-# If a module is built for 32-bit, the required modules must be 32-bit too;
-# Otherwise if the module is an executable or shared library,
-#   the required modules must be 64-bit;
-#   otherwise we require both 64-bit and 32-bit variant, if one exists.
+# If a module is for cross host OS, the required modules are also for that OS.
+# Required modules explicitly suffixed with :64 or :32 resolve to that bitness.
+# Otherwise if a module is native module, the required modules resolve to the
+# same bitness.
+# Otherwise the required modules resolve to both variants, if they exist.
+# TODO(b/155869107): error if both variants don't exist.
 define target-select-bitness-of-required-modules
-$(foreach m,$(ALL_MODULES),\
-  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET))\
-  $(if $(r),\
-    $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),\
-      $(eval r_r := $(call get-32-bit-modules-if-we-can,$(r))),\
-      $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
-        $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-32-bit-modules,$(r)))\
-       )\
-     )\
-     $(eval ALL_MODULES.$(m).REQUIRED_FROM_TARGET := $(strip $(r_r)))\
-  )\
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET)) \
+  $(if $(r), \
+    $(eval r_r := $(call get-2nd-arch-modules,TARGET,$(patsubst %:32,%,$(filter %:32,$(r))))) \
+    $(eval r_r += $(patsubst %:64,%,$(filter %:64,$(r)))) \
+    $(eval r := $(filter-out %:32 %:64,$(r))) \
+    $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)), \
+      $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH), \
+        $(eval r_r += $(call get-2nd-arch-modules,TARGET,$(r))), \
+        $(eval r_r += $(r)) \
+      ), \
+      $(eval r_r += $(foreach r_m,$(r),$(if $(ALL_MODULES.$(r_m).PATH),$(r_m)))) \
+      $(eval r_r += $(call get-2nd-arch-modules,TARGET,$(r))) \
+    ) \
+    $(eval ALL_MODULES.$(m).REQUIRED_FROM_TARGET := $(sort $(r_r))) \
+  ) \
 )
 endef
 $(call target-select-bitness-of-required-modules)
 
 define host-select-bitness-of-required-modules
-$(foreach m,$(ALL_MODULES),\
-  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_HOST))\
-  $(if $(r),\
-    $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),\
-      $(eval r_r := $(call get-host-32-bit-modules-if-we-can,$(r))),\
-      $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
-        $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-host-32-bit-modules,$(r)))\
-       )\
-     )\
-     $(eval ALL_MODULES.$(m).REQUIRED_FROM_HOST := $(strip $(r_r)))\
-  )\
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_HOST)) \
+  $(if $(r), \
+    $(eval r_r := $(call get-2nd-arch-modules,HOST,$(patsubst %:32,%,$(filter %:32,$(r))))) \
+    $(eval r_r += $(patsubst %:64,%,$(filter %:64,$(r)))) \
+    $(eval r := $(filter-out %:32 %:64,$(r))) \
+    $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)), \
+      $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH), \
+        $(eval r_r += $(call get-2nd-arch-modules,HOST,$(r))), \
+        $(eval r_r += $(r)) \
+      ), \
+      $(eval r_r += $(foreach r_m,$(r),$(if $(ALL_MODULES.$(r_m).PATH),$(r_m)))) \
+      $(eval r_r += $(call get-2nd-arch-modules,HOST,$(r))) \
+    ) \
+    $(eval ALL_MODULES.$(m).REQUIRED_FROM_HOST := $(sort $(r_r))) \
+  ) \
 )
 endef
 $(call host-select-bitness-of-required-modules)
 
 define host-cross-select-bitness-of-required-modules
-$(foreach m,$(ALL_MODULES),\
-  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS))\
-  $(if $(r),\
-    $(if $(ALL_MODULES.$(m).FOR_HOST_CROSS),,$(error Only expected REQUIRED_FROM_HOST_CROSS on FOR_HOST_CROSS modules - $(m)))\
-    $(eval r := $(addprefix host_cross_,$(r)))\
-    $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),\
-      $(eval r_r := $(call get-host-32-bit-modules-if-we-can,$(r))),\
-      $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
-        $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-host-32-bit-modules,$(r)))\
-       )\
-     )\
-     $(eval ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS := $(strip $(r_r)))\
-  )\
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS)) \
+  $(if $(r), \
+    $(if $(ALL_MODULES.$(m).FOR_HOST_CROSS),,$(error Only expected REQUIRED_FROM_HOST_CROSS on FOR_HOST_CROSS modules - $(m))) \
+    $(eval r := $(addprefix host_cross_,$(r))) \
+    $(eval r_r := $(call get-2nd-arch-modules,HOST_CROSS,$(patsubst %:64,%,$(filter %:64,$(r))))) \
+    $(eval r_r += $(patsubst %:32,%,$(filter %:32,$(r)))) \
+    $(eval r := $(filter-out %:32 %:64,$(r))) \
+    $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)), \
+      $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH), \
+        $(eval r_r += $(call get-2nd-arch-modules,HOST_CROSS,$(r))), \
+        $(eval r_r += $(r)) \
+      ), \
+      $(eval r_r += $(foreach r_m,$(r),$(if $(ALL_MODULES.$(r_m).PATH),$(r_m)))) \
+      $(eval r_r += $(call get-2nd-arch-modules,HOST_CROSS,$(r))) \
+    ) \
+    $(eval ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS := $(sort $(r_r))) \
+  ) \
 )
 endef
 $(call host-cross-select-bitness-of-required-modules)
