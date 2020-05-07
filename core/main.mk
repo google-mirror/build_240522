@@ -489,17 +489,9 @@ CUSTOM_MODULES := \
 # Resolve the required module name to 32-bit or 64-bit variant.
 # Get a list of corresponding 32-bit module names, if one exists.
 define get-32-bit-modules
-$(sort $(foreach m,$(1),\
-  $(if $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).CLASS),\
-    $(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX))))
-endef
-# Get a list of corresponding 32-bit module names, if one exists;
-# otherwise return the original module name
-define get-32-bit-modules-if-we-can
-$(sort $(foreach m,$(1),\
-  $(if $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).CLASS),\
-    $(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX), \
-    $(m))))
+$(foreach m,$(1), \
+  $(if $(filter true,$(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).FOR_2ND_ARCH)), \
+    $(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX)))
 endef
 
 # TODO: we can probably check to see if these modules are actually host
@@ -518,25 +510,31 @@ $(sort $(foreach m,$(1),\
     $(m))))
 endef
 
-# If a module is for a cross host os, the required modules must be for
-# that OS too.
-# If a module is built for 32-bit, the required modules must be 32-bit too;
-# Otherwise if the module is an executable or shared library,
-#   the required modules must be 64-bit;
-#   otherwise we require both 64-bit and 32-bit variant, if one exists.
+# - If a module is for cross host OS, the required modules are also for that OS
+# - Required modules explicitly suffixed with :64 or :32 resolve to that bitness
+# - Otherwise if a module is built for 32-bit, the required modules resolve to
+#   the 32-bit variant
+# - Otherwise if a module is native module, the required modules resolve to the
+#   same bitness (64-bit)
+# - Otherwise the required modules resolve to both variants, if they exist
 define target-select-bitness-of-required-modules
-$(foreach m,$(ALL_MODULES),\
-  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET))\
-  $(if $(r),\
-    $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),\
-      $(eval r_r := $(call get-32-bit-modules-if-we-can,$(r))),\
-      $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)),\
-        $(eval r_r := $(r)),\
-        $(eval r_r := $(r) $(call get-32-bit-modules,$(r)))\
-       )\
-     )\
-     $(eval ALL_MODULES.$(m).REQUIRED_FROM_TARGET := $(strip $(r_r)))\
-  )\
+$(foreach m,$(ALL_MODULES), \
+  $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET)) \
+  $(if $(r), \
+    $(eval r_r := $(call get-32-bit-modules $(patsubst %:32,%,$(filter %:32,$(r))))) \
+    $(eval r_r += $(patsubst %:64,%,$(filter %:64,$(r)))) \
+    $(eval r := $(filter-out %:32 %:64,$(r))) \
+    $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(ALL_MODULES.$(m).CLASS)), \
+      $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH), \
+        $(eval r_r += $(call get-32-bit-modules,$(r))), \
+        $(eval r_r += $(r)) \
+      ), \
+      $(eval # TODO: error if neither 32 nor 64 variant exist) \
+      $(eval r_r += $(foreach r_m,$(r),$(if $(ALL_MODULES.$(r_m).PATH),$(r_m)))) \
+      $(eval r_r += $(call get-32-bit-modules,$(r))) \
+    ) \
+    $(eval ALL_MODULES.$(m).REQUIRED_FROM_TARGET := $(sort $(r_r))) \
+  ) \
 )
 endef
 $(call target-select-bitness-of-required-modules)
@@ -1063,11 +1061,14 @@ define product-installed-files
   $(eval _pif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_pif_modules)))) \
   $(eval _pif_modules_rest := $(filter-out %:32 %:64,$(_pif_modules))) \
   $(eval ### Note for 32-bit product, 32 and 64 will be added as their original module names.) \
-  $(eval _pif_modules := $(call get-32-bit-modules-if-we-can, $(_pif_modules_32))) \
+  $(if $(TARGET_2ND_ARCH), \
+    $(eval _pif_modules := $(call get-32-bit-modules, $(_pif_modules_32))), \
+    $(eval _pif_modules := $(_pif_modules_32))) \
   $(eval _pif_modules += $(_pif_modules_64)) \
   $(eval ### For the rest we add both) \
   $(eval _pif_modules += $(call get-32-bit-modules, $(_pif_modules_rest))) \
   $(eval _pif_modules += $(_pif_modules_rest)) \
+  $(eval _pif_modules := $(sort $(_pif_modules))) \
   $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
   $(filter-out $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))) \
   $(call resolve-product-relative-paths,\
@@ -1119,9 +1120,9 @@ ifdef FULL_BUILD
       _modules := $(patsubst %:64,%,$(_modules))
       # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
       # existence if either <module> or the <module>_32 variant.
-      _nonexistent_modules := $(filter-out $(ALL_MODULES),$(_modules))
-      _nonexistent_modules := $(foreach m,$(_nonexistent_modules),\
-        $(if $(call get-32-bit-modules,$(m)),,$(m)))
+      _nonexistent_modules := $(foreach m,$(_modules), \
+        $(if $(or $(ALL_MODULES.$(m).PATH), \
+                  $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).PATH)),,$(m)))
       $(call maybe-print-list-and-error,$(filter-out $(_whitelist),$(_nonexistent_modules)),\
         $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
       $(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_whitelist)),\
