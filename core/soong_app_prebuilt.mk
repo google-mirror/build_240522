@@ -191,7 +191,7 @@ endif # !LOCAL_IS_HOST_MODULE
 
 ifdef LOCAL_SOONG_DEVICE_RRO_DIRS
   $(call append_enforce_rro_sources, \
-      $(my_register_name), \
+      $(LOCAL_PACKAGE_NAME), \
       false, \
       $(LOCAL_FULL_MANIFEST_FILE), \
       $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
@@ -202,7 +202,7 @@ endif
 
 ifdef LOCAL_SOONG_PRODUCT_RRO_DIRS
   $(call append_enforce_rro_sources, \
-      $(my_register_name), \
+      $(LOCAL_PACKAGE_NAME), \
       false, \
       $(LOCAL_FULL_MANIFEST_FILE), \
       $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
