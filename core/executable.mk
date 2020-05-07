@@ -37,7 +37,7 @@ $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_64 or LOCAL_MODULE_PATH_64 is required 
 endif
 endif
 else #!LOCAL_MULTILIB == both
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
+# LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
 endif
 
 # if TARGET_PREFER_32_BIT_EXECUTABLES is set, try to build 32-bit first
