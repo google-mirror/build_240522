@@ -722,7 +722,7 @@ ifneq (,$(runtime_resource_overlays_product)$(runtime_resource_overlays_vendor))
 
   ifdef runtime_resource_overlays_product
     $(call append_enforce_rro_sources, \
-        $(my_register_name), \
+        $(LOCAL_PACKAGE_NAME), \
         $(enforce_rro_is_manifest_package_name), \
         $(enforce_rro_manifest_package_info), \
         $(enforce_rro_use_res_lib), \
@@ -732,7 +732,7 @@ ifneq (,$(runtime_resource_overlays_product)$(runtime_resource_overlays_vendor))
   endif
   ifdef runtime_resource_overlays_vendor
     $(call append_enforce_rro_sources, \
-        $(my_register_name), \
+        $(LOCAL_PACKAGE_NAME), \
         $(enforce_rro_is_manifest_package_name), \
         $(enforce_rro_manifest_package_info), \
         $(enforce_rro_use_res_lib), \
