@@ -15,12 +15,6 @@
 test_suite_name := vts
 test_suite_tradefed := vts-tradefed
 test_suite_readme := test/vts/tools/vts-core-tradefed/README
-
-# TODO(b/149249068): Clean up after all VTS tests are converted.
-vts_test_artifact_paths :=
-# Some repo may not include vts project.
--include test/vts/tools/build/tasks/framework/vts_for_core_suite.mk
-
 include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
 
 .PHONY: vts
