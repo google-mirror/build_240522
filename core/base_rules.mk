@@ -295,9 +295,9 @@ ifeq ($(my_host_cross),true)
   my_register_name := host_cross_$(LOCAL_MODULE)
 endif
 ifdef LOCAL_2ND_ARCH_VAR_PREFIX
-ifndef LOCAL_NO_2ND_ARCH_MODULE_SUFFIX
+# ifndef LOCAL_NO_2ND_ARCH_MODULE_SUFFIX
 my_register_name := $(my_register_name)$($(my_prefix)2ND_ARCH_MODULE_SUFFIX)
-endif
+# endif
 endif
 
 ifeq ($(my_host_cross),true)
