@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abdc2929_caf530aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2020-05-08T06:44:13Z",
+      "side": 1,
+      "message": "The chained partition descriptor in vbmeta.img is:\n\n\navbtool info_image --image out/target/product/generic_arm64/vbmeta.img \nMinimum libavb version:   1.0\nHeader Block:             256 bytes\nAuthentication Block:     576 bytes\nAuxiliary Block:          2752 bytes\nPublic key (sha1):        2597c218aae470a130f61162feaae70afd97f011\nAlgorithm:                SHA256_RSA4096\nRollback Index:           0\nFlags:                    0\nRelease String:           \u0027avbtool 1.1.0\u0027\nDescriptors:\n    Chain Partition descriptor:\n      Partition Name:          boot          \u003c\u003d\u003d\u003d\n      Rollback Index Location: 2\n      Public key (sha1):       cdbb77177f731920bbe0a0f94f84d9038ae0617d\n    Chain Partition descriptor:\n      Partition Name:          system\n      Rollback Index Location: 1\n      Public key (sha1):       cdbb77177f731920bbe0a0f94f84d9038ae0617d",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "9ccffab30645fa75aa1d4c45863aa2c3d56028e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
