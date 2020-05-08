@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0d2b69a_2c1afc68",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2090,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-08T09:40:31Z",
+      "side": 1,
+      "message": "$(hide) cat $(INSTALLED_PRODUCT_BUILD_PROP_TARGET) \u003e\u003e $@\nBring that back\nSee below",
+      "revId": "84e7cd4f949405f71a53f901eb462e09f88fb296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65d6102a_e076c5c8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2103,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-08T09:40:31Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure these product props are meant to go in boot.img\nWe likely need a new variable for vendor_boot props",
+      "range": {
+        "startLine": 2103,
+        "startChar": 0,
+        "endLine": 2103,
+        "endChar": 57
+      },
+      "revId": "84e7cd4f949405f71a53f901eb462e09f88fb296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c72e252f_5d93530b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-08T09:40:31Z",
+      "side": 1,
+      "message": "ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)\n$(recovery_ramdisk): $(INSTALLED_VENDOR_RECOVERY_BUILD_PROP_TARGET) \nendif",
+      "revId": "84e7cd4f949405f71a53f901eb462e09f88fb296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d84a4f9_bf304f52",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-08T09:40:31Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 2165,
+        "startChar": 0,
+        "endLine": 2165,
+        "endChar": 53
+      },
+      "revId": "84e7cd4f949405f71a53f901eb462e09f88fb296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baea3afc_923c8dfe",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2440,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-08T09:40:31Z",
+      "side": 1,
+      "message": "what\u0027s up with this? typo?",
+      "range": {
+        "startLine": 2440,
+        "startChar": 79,
+        "endLine": 2440,
+        "endChar": 82
+      },
+      "revId": "84e7cd4f949405f71a53f901eb462e09f88fb296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
