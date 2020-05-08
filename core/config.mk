@@ -141,6 +141,7 @@ $(KATI_obsolete_var \
   TARGET_PROJECT_SYSTEM_INCLUDES \
   2ND_TARGET_PROJECT_SYSTEM_INCLUDES \
   ,Project include variables have been removed)
+$(KATI_obsolete_var LOCAL_NO_2ND_ARCH_MODULE_SUFFIX)
 
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
