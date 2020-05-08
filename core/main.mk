@@ -628,6 +628,11 @@ define add-all-target-to-target-required-modules-deps
 $(foreach m,$(ALL_MODULES), \
   $(eval r := $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET)) \
   $(if $(r), \
+    $(if $(filter true,$(ALLOW_MISSING_DEPENDENCIES)),, \
+      $(eval r_nonexistent := $(foreach r_m,$(r),$(if $(ALL_MODULES.$(r_m).PATH),$(r_m)))) \
+      $(eval r_nonexistent := $(sort $(r_nonexistent))) \
+      $(if $(r_nonexistent),$(info $(m): Missing required dependencies $(r_nonexistent))) \
+    ) \
     $(eval r := $(call module-installed-files,$(r))) \
     $(eval t_m := $(filter $(TARGET_OUT_ROOT)/%, $(ALL_MODULES.$(m).INSTALLED))) \
     $(eval t_r := $(filter $(TARGET_OUT_ROOT)/%, $(r))) \
