@@ -664,7 +664,6 @@ $(strip \
 )
 endef
 
-# TODO(b/7456955): error if a required module doesn't exist.
 # Resolve the required module names in ALL_MODULES.*.REQUIRED_FROM_TARGET,
 # ALL_MODULES.*.REQUIRED_FROM_HOST and ALL_MODULES.*.REQUIRED_FROM_HOST_CROSS
 # to 32-bit or 64-bit variant.
@@ -694,16 +693,31 @@ $(foreach m,$(ALL_MODULES), \
           $(if $(and $(module_is_native),$(required_is_shared_library_or_native_test)), \
             $(if $(ALL_MODULES.$(m).FOR_2ND_ARCH),$(r_i_2nd),$(r_i)), \
             $(r_i) $(r_i_2nd)))) \
-      $(eval ### TODO(b/7456955): error if r_m is empty / does not exist) \
+      $(eval r_m := $(foreach r_j,$(r_m),$(if $(ALL_MODULES.$(r_j).PATH),$(r_j)))) \
+      $(if $(r_m),,$(eval _nonexistent_required_dependencies += $(1)@:@$(m)@:@$(r_i))) \
       $(r_m))) \
     $(eval ALL_MODULES.$(m).REQUIRED_FROM_$(1) := $(sort $(r_r))) \
   ) \
 )
 endef
 
+_nonexistent_required_dependencies :=
 $(call select-bitness-of-required-modules,TARGET)
 $(call select-bitness-of-required-modules,HOST)
 $(call select-bitness-of-required-modules,HOST_CROSS)
+_nonexistent_required_dependencies := $(sort $(_nonexistent_required_dependencies))
+
+ifeq (,$(filter true,$(ALLOW_MISSING_DEPENDENCIES)))
+ifneq (,$(_nonexistent_required_dependencies))
+  $(warning Missing required dependencies:)
+  $(foreach r_i,$(_nonexistent_required_dependencies), \
+    $(eval r := $(subst @:@,$(space),$(r_i))) \
+    $(info $(word 1,$(r)) module $(word 2,$(r)) requires non-existent: $(word 3,$(r))) \
+  )
+  $(warning Set ALLOW_MISSING_DEPENDENCIES=true to bypass this check if this is intentional)
+  $(error Build failed)
+endif # _nonexistent_required_dependencies != empty
+endif # ALLOW_MISSING_DEPENDENCIES != true
 
 define add-required-deps
 $(1): | $(2)
