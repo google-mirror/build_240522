@@ -40,8 +40,6 @@ else
   endif
 endif
 
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
-
 # if TARGET_PREFER_32_BIT_APPS is set, try to build 32-bit first
 ifdef TARGET_2ND_ARCH
 ifeq ($(TARGET_PREFER_32_BIT_APPS),true)
@@ -73,6 +71,5 @@ endif
 endif # TARGET_2ND_ARCH
 
 LOCAL_2ND_ARCH_VAR_PREFIX :=
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX :=
 
 my_module_arch_supported :=
