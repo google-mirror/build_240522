@@ -36,8 +36,6 @@ ifeq ($(LOCAL_MODULE_PATH_64)$(LOCAL_MODULE_STEM_64),)
 $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_64 or LOCAL_MODULE_PATH_64 is required for LOCAL_MULTILIB := both for module $(LOCAL_MODULE))
 endif
 endif
-else #!LOCAL_MULTILIB == both
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
 endif
 
 # if TARGET_PREFER_32_BIT_EXECUTABLES is set, try to build 32-bit first
@@ -84,7 +82,6 @@ endif
 endif # TARGET_2ND_ARCH
 endif # !my_skip_non_preferred_arch || LOCAL_MULTILIB
 LOCAL_2ND_ARCH_VAR_PREFIX :=
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX :=
 
 my_module_arch_supported :=
 

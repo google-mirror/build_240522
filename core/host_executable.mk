@@ -20,8 +20,6 @@ ifeq ($(LOCAL_MODULE_PATH_64)$(LOCAL_MODULE_STEM_64),)
 $(error $(LOCAL_PATH): LOCAL_MODULE_STEM_64 or LOCAL_MODULE_PATH_64 is required for LOCAL_MULTILIB := both for module $(LOCAL_MODULE))
 endif
 endif
-else #!LOCAL_MULTILIB == both
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX := true
 endif
 
 LOCAL_2ND_ARCH_VAR_PREFIX :=
@@ -45,5 +43,4 @@ endif
 LOCAL_2ND_ARCH_VAR_PREFIX :=
 endif  # HOST_2ND_ARCH
 
-LOCAL_NO_2ND_ARCH_MODULE_SUFFIX :=
 my_module_arch_supported :=
