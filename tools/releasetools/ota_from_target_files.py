@@ -182,6 +182,13 @@ A/B OTA specific options
   --payload_signer_key_size <key_size>
       Deprecated. Use the '--payload_signer_maximum_signature_size' instead.
 
+  --boot_variable_file <path>
+      A file that contains the possible values of ro.boot.* properties. It's
+      used to calculate the possible runtime fingerprints when some
+      ro.product.* properties are overridden by the 'import' statement.
+      The file expects one property per line, and each line has the following
+      format: 'prop_name=value1,value2'. e.g. 'ro.boot.product.sku=std,pro'
+
   --skip_postinstall
       Skip the postinstall hooks when generating an A/B OTA package (default:
       False). Note that this discards ALL the hooks, including non-optional
@@ -250,7 +257,7 @@ OPTIONS.retrofit_dynamic_partitions = False
 OPTIONS.skip_compatibility_check = False
 OPTIONS.output_metadata_path = None
 OPTIONS.disable_fec_computation = False
-OPTIONS.boot_variable_values = None
+OPTIONS.boot_variable_file = None
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -922,13 +929,23 @@ def GetPackageMetadata(target_info, source_info=None):
   assert isinstance(target_info, common.BuildInfo)
   assert source_info is None or isinstance(source_info, common.BuildInfo)
 
+  separator = '|'
+
+  boot_variable_values = {}
+  if OPTIONS.boot_variable_file:
+    d = common.LoadDictionaryFromFile(OPTIONS.boot_variable_file)
+    for key, values in d.items():
+      boot_variable_values[key] = [val.strip() for val in values.split(',')]
+
+  post_build_devices, post_build_fingerprint = \
+      CalculateRuntimeDevicesAndFingerprints(target_info, boot_variable_values)
   metadata = {
-      'post-build' : target_info.fingerprint,
-      'post-build-incremental' : target_info.GetBuildProp(
+      'post-build': separator.join(sorted(post_build_fingerprint)),
+      'post-build-incremental': target_info.GetBuildProp(
           'ro.build.version.incremental'),
-      'post-sdk-level' : target_info.GetBuildProp(
+      'post-sdk-level': target_info.GetBuildProp(
           'ro.build.version.sdk'),
-      'post-security-patch-level' : target_info.GetBuildProp(
+      'post-security-patch-level': target_info.GetBuildProp(
           'ro.build.version.security_patch'),
   }
 
@@ -946,12 +963,15 @@ def GetPackageMetadata(target_info, source_info=None):
 
   is_incremental = source_info is not None
   if is_incremental:
-    metadata['pre-build'] = source_info.fingerprint
+    pre_build_devices, pre_build_fingerprint = \
+        CalculateRuntimeDevicesAndFingerprints(source_info,
+                                               boot_variable_values)
+    metadata['pre-build'] = separator.join(sorted(pre_build_fingerprint))
     metadata['pre-build-incremental'] = source_info.GetBuildProp(
         'ro.build.version.incremental')
-    metadata['pre-device'] = source_info.device
+    metadata['pre-device'] = separator.join(sorted(pre_build_devices))
   else:
-    metadata['pre-device'] = target_info.device
+    metadata['pre-device'] = separator.join(sorted(post_build_devices))
 
   # Use the actual post-timestamp, even for a downgrade case.
   metadata['post-timestamp'] = target_info.GetBuildProp('ro.build.date.utc')
@@ -1963,24 +1983,24 @@ def GenerateNonAbOtaPackage(target_file, output_file, source_file=None):
           output_file)
 
 
-def CalculateRuntimeFingerprints():
+def CalculateRuntimeDevicesAndFingerprints(build_info, boot_variable_values):
   """Returns a set of runtime fingerprints based on the boot variables."""
 
-  build_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
+  device_names = {build_info.device}
   fingerprints = {build_info.fingerprint}
 
-  if not OPTIONS.boot_variable_values:
-    return fingerprints
+  if not boot_variable_values:
+    return device_names, fingerprints
 
   # Calculate all possible combinations of the values for the boot variables.
-  keys = OPTIONS.boot_variable_values.keys()
-  value_list = OPTIONS.boot_variable_values.values()
+  keys = boot_variable_values.keys()
+  value_list = boot_variable_values.values()
   combinations = [dict(zip(keys, values))
                   for values in itertools.product(*value_list)]
   for placeholder_values in combinations:
     # Reload the info_dict as some build properties may change their values
     # based on the value of ro.boot* properties.
-    info_dict = copy.deepcopy(OPTIONS.info_dict)
+    info_dict = copy.deepcopy(build_info.info_dict)
     for partition in common.PARTITIONS_WITH_CARE_MAP:
       partition_prop_key = "{}.build.prop".format(partition)
       old_props = info_dict[partition_prop_key]
@@ -1988,9 +2008,10 @@ def CalculateRuntimeFingerprints():
           old_props.input_file, partition, placeholder_values)
     info_dict["build.prop"] = info_dict["system.build.prop"]
 
-    build_info = common.BuildInfo(info_dict, OPTIONS.oem_dicts)
-    fingerprints.add(build_info.fingerprint)
-  return fingerprints
+    new_build_info = common.BuildInfo(info_dict, build_info.oem_dicts)
+    device_names.add(new_build_info.device)
+    fingerprints.add(new_build_info.fingerprint)
+  return device_names, fingerprints
 
 
 def main(argv):
@@ -2066,6 +2087,8 @@ def main(argv):
       OPTIONS.output_metadata_path = a
     elif o == "--disable_fec_computation":
       OPTIONS.disable_fec_computation = True
+    elif o == "--placeholder_file":
+      OPTIONS.placeholder_file = a
     else:
       return False
     return True
@@ -2102,6 +2125,7 @@ def main(argv):
                                  "skip_compatibility_check",
                                  "output_metadata_path=",
                                  "disable_fec_computation",
+                                 "placeholder_file",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
