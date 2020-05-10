@@ -1078,11 +1078,15 @@ define product-installed-files
   $(eval _pif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_pif_modules)))) \
   $(eval _pif_modules_rest := $(filter-out %:32 %:64,$(_pif_modules))) \
   $(eval ### Note for 32-bit product, 32 and 64 will be added as their original module names.) \
-  $(eval _pif_modules := $(call get-32-bit-modules-if-we-can, $(_pif_modules_32))) \
+  $(if $(TARGET_2ND_ARCH), \
+    $(eval _pif_modules := $(call get-2nd-arch-modules,TARGET,$(_pif_modules_32))), \
+    $(eval _pif_modules := $(_pif_modules_32))) \
   $(eval _pif_modules += $(_pif_modules_64)) \
   $(eval ### For the rest we add both) \
-  $(eval _pif_modules += $(call get-32-bit-modules, $(_pif_modules_rest))) \
+  $(if $(TARGET_2ND_ARCH), \
+    $(eval _pif_modules += $(call get-2nd-arch-modules,TARGET,$(_pif_modules_rest)))) \
   $(eval _pif_modules += $(_pif_modules_rest)) \
+  $(eval _pif_modules := $(sort $(_pif_modules))) \
   $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
   $(filter-out $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))) \
   $(call resolve-product-relative-paths,\
@@ -1093,18 +1097,37 @@ endef
 # This does support the :32 / :64 syntax, but does not support module overrides.
 define host-installed-files
   $(eval _hif_modules := $(call get-product-var,$(1),PRODUCT_HOST_PACKAGES)) \
+  $(eval ### Split host vs host cross modules) \
+  $(eval _hcif_modules := $(filter host_cross_%,$(_hif_modules))) \
+  $(eval _hif_modules := $(filter-out host_cross_%,$(_hif_modules))) \
   $(eval ### Resolve the :32 :64 module name) \
   $(eval _hif_modules_32 := $(patsubst %:32,%,$(filter %:32, $(_hif_modules)))) \
   $(eval _hif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_hif_modules)))) \
   $(eval _hif_modules_rest := $(filter-out %:32 %:64,$(_hif_modules))) \
-  $(eval _hif_modules := $(call get-host-32-bit-modules-if-we-can, $(_hif_modules_32))) \
+  $(eval _hcif_modules_32 := $(patsubst %:32,%,$(filter %:32, $(_hcif_modules)))) \
+  $(eval _hcif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_hcif_modules)))) \
+  $(eval _hcif_modules_rest := $(filter-out %:32 %:64,$(_hcif_modules))) \
+  $(eval ### Note for non-multilib build, 32 and 64 will be added as their original module names) \
+  $(if $(HOST_2ND_ARCH), \
+    $(eval _hif_modules := $(call get-2nd-arch-modules,HOST,$(_hif_modules_32))), \
+    $(eval _hif_modules := $(_hif_modules_32)) \
+  ) \
   $(eval _hif_modules += $(_hif_modules_64)) \
+  $(eval ### For host cross modules, the primary arch is windows x86 and secondary is x86_64) \
+  $(if $(HOST_CROSS_2ND_ARCH), \
+    $(eval _hcif_modules := $(call get-2nd-arch-modules,HOST_CROSS,$(_hcif_modules_64))), \
+    $(eval _hcif_modules := $(_hcif_modules_64)) \
+  ) \
+  $(eval _hcif_modules += $(_hcif_modules_32)) \
   $(eval ### For the rest we add both) \
-  $(eval _hif_modules += $(call get-host-32-bit-modules, $(_hif_modules_rest))) \
+  $(if $(HOST_2ND_ARCH), \
+    $(eval _hif_modules += $(call get-2nd-arch-modules,HOST,$(_hif_modules_rest)))) \
   $(eval _hif_modules += $(_hif_modules_rest)) \
-  $(eval ### Split host vs host cross modules) \
-  $(eval _hcif_modules := $(filter host_cross_%,$(_hif_modules))) \
-  $(eval _hif_modules := $(filter-out host_cross_%,$(_hif_modules))) \
+  $(if $(HOST_CROSS_2ND_ARCH), \
+    $(eval _hcif_modules += $(call get-2nd-arch-modules,HOST_CROSS,$(_hcif_modules_rest)))) \
+  $(eval _hcif_modules += $(_hcif_modules_rest)) \
+  $(eval _hif_modules += $(sort $(_hif_modules))) \
+  $(eval _hcif_modules += $(sort $(_hicf_modules))) \
   $(call expand-required-host-modules,_hif_modules,$(_hif_modules),HOST) \
   $(call expand-required-host-modules,_hcif_modules,$(_hcif_modules),HOST_CROSS) \
   $(filter $(HOST_OUT)/%,$(call module-installed-files, $(_hif_modules))) \
