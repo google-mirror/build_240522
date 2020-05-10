@@ -3091,6 +3091,7 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
 
   try:
     # The following GetTypeAndDevice()s need to use the path in the target
+    t
     # info_dict instead of source_info_dict.
     boot_type, boot_device = GetTypeAndDevice("/boot", info_dict,
                                               check_no_slot=False)
