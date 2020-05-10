@@ -1153,9 +1153,8 @@ ifdef FULL_BUILD
       _modules := $(patsubst %:64,%,$(_modules))
       # Sanity check all modules in PRODUCT_PACKAGES exist. We check for the
       # existence if either <module> or the <module>_32 variant.
-      _nonexistent_modules := $(filter-out $(ALL_MODULES),$(_modules))
-      _nonexistent_modules := $(foreach m,$(_nonexistent_modules),\
-        $(if $(call get-32-bit-modules,$(m)),,$(m)))
+      _nonexistent_modules := $(foreach m,$(_modules), \
+        $(if $(ALL_MODULES.$(m).PATH) $(call get-2nd-arch-modules,TARGET,$(m)),,$(m)))
       $(call maybe-print-list-and-error,$(filter-out $(_whitelist),$(_nonexistent_modules)),\
         $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
       $(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_whitelist)),\
