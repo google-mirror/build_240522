@@ -487,6 +487,21 @@ CUSTOM_MODULES := \
 # brought in as requirements of other modules.
 #
 # Resolve the required module name to 32-bit or 64-bit variant.
+
+# TODO(b/155869107): Replace get-32-bit-modules and get-host-32-bit-modules with get-2nd-arch-modules
+# Get a list of corresponding module names for the second arch, if they exist.
+# $(1): TARGET, HOST or HOST_CROSS
+# $(2): A list of module names
+define get-2nd-arch-modules
+$(strip \
+  $(foreach m,$(2), \
+    $(if $(filter true,$(ALL_MODULES.$(m)$($(1)_2ND_ARCH_MODULE_SUFFIX).FOR_2ND_ARCH)), \
+      $(m)$($(1)_2ND_ARCH_MODULE_SUFFIX) \
+    ) \
+  ) \
+)
+endef
+
 # Get a list of corresponding 32-bit module names, if one exists.
 define get-32-bit-modules
 $(sort $(foreach m,$(1),\
