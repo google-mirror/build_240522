@@ -1694,6 +1694,12 @@ dump-files:
 	$(foreach p,$(sort $(product_target_FILES)),$(info :   $(p)))
 	@echo Successfully dumped product file list
 
+.PHONY: dump-modules
+dump-modules:
+	$(info ALL_MODULES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
+	@echo "$(foreach m,$(sort $(ALL_MODULES)),$(m))" | tr -s ' ' '\n'
+	@echo Successfully dumped module list
+
 .PHONY: nothing
 nothing:
 	@echo Successfully read the makefiles.
