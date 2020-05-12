@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish # for libwifi-hal-emu
+
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
 #   vendor/etc because aosp system image (of aosp_$arch products) is going to
