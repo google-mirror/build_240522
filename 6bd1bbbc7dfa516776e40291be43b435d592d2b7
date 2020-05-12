@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd317505_0ec96bf2",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-05-12T18:49:43Z",
+      "side": 1,
+      "message": "I guess that makes sense, but probably not a problem in practice.",
+      "parentUuid": "22c7f82a_5ef94581",
+      "range": {
+        "startLine": 1059,
+        "startChar": 27,
+        "endLine": 1059,
+        "endChar": 68
+      },
+      "revId": "6bd1bbbc7dfa516776e40291be43b435d592d2b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7e36271_f8ef2c8b",
         "filename": "core/main.mk",
         "patchSetId": 2
