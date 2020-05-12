@@ -136,7 +136,7 @@ class DynamicPartitionSizeChecker(object):
   def _CheckSuperPartitionSize(self):
     info_dict = self.info_dict
     super_block_devices = \
-        info_dict.get("super_block_devices", "").strip().split()
+        info_dict.get("super_block_devices", "").split()
     size_list = [int(info_dict.get("super_{}_device_size".format(b), "0"))
                  for b in super_block_devices]
     sum_size = Expression("sum of super partition block device sizes",
@@ -212,10 +212,10 @@ class DynamicPartitionSizeChecker(object):
           "BOARD_SUPER_PARTITION_ERROR_LIMIT{}".format(size_limit_suffix),
           int(info_dict["super_partition_error_limit"]) // num_slots)
       self._CheckSumOfPartitionSizes(
-          max_size, info_dict["dynamic_partition_list"].strip().split(),
+          max_size, info_dict["dynamic_partition_list"].split(),
           warn_limit, error_limit)
 
-    groups = info_dict.get("super_partition_groups", "").strip().split()
+    groups = info_dict.get("super_partition_groups", "").split()
 
     # For each group, check sum(partitions in group) <= group size
     for group in groups:

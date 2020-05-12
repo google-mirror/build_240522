@@ -910,7 +910,7 @@ def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
       "dynamic_partition_list", "")
   vendor_dynamic_partition_list = vendor_dict.get("dynamic_partition_list", "")
   merged_dict["dynamic_partition_list"] = ("%s %s" % (
-      framework_dynamic_partition_list, vendor_dynamic_partition_list)).strip()
+      framework_dynamic_partition_list, vendor_dynamic_partition_list))
   for partition_group in merged_dict["super_partition_groups"].split(" "):
     # Set the partition group's size using the value from the vendor dict.
     key = "super_%s_group_size" % partition_group
@@ -2598,10 +2598,10 @@ class BlockDifference(object):
       is_dynamic_build = OPTIONS.source_info_dict.get(
           "use_dynamic_partitions") == "true"
       is_dynamic_source = partition in shlex.split(
-          OPTIONS.source_info_dict.get("dynamic_partition_list", "").strip())
+          OPTIONS.source_info_dict.get("dynamic_partition_list", ""))
 
     is_dynamic_target = partition in shlex.split(
-        OPTIONS.info_dict.get("dynamic_partition_list", "").strip())
+        OPTIONS.info_dict.get("dynamic_partition_list", ""))
 
     # For dynamic partitions builds, check partition list in both source
     # and target build because new partitions may be added, and existing
@@ -3104,9 +3104,9 @@ class DynamicPartitionsDifference(object):
         self._partition_updates[p].progress = progress
 
     tgt_groups = shlex.split(info_dict.get(
-        "super_partition_groups", "").strip())
+        "super_partition_groups", ""))
     src_groups = shlex.split(source_info_dict.get(
-        "super_partition_groups", "").strip())
+        "super_partition_groups", ""))
 
     for g in tgt_groups:
       for p in shlex.split(info_dict.get(
@@ -3125,7 +3125,7 @@ class DynamicPartitionsDifference(object):
         self._partition_updates[p].src_group = g
 
     target_dynamic_partitions = set(shlex.split(info_dict.get(
-        "dynamic_partition_list", "").strip()))
+        "dynamic_partition_list", "")))
     block_diffs_with_target = set(p for p, u in self._partition_updates.items()
                                   if u.tgt_size)
     assert block_diffs_with_target == target_dynamic_partitions, \
@@ -3133,7 +3133,7 @@ class DynamicPartitionsDifference(object):
             list(target_dynamic_partitions), list(block_diffs_with_target))
 
     source_dynamic_partitions = set(shlex.split(source_info_dict.get(
-        "dynamic_partition_list", "").strip()))
+        "dynamic_partition_list", "")))
     block_diffs_with_source = set(p for p, u in self._partition_updates.items()
                                   if u.src_size)
     assert block_diffs_with_source == source_dynamic_partitions, \
