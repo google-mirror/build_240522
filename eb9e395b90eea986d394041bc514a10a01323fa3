@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e2ae9c2_ab01ac05",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-05-12T17:27:01Z",
+      "side": 1,
+      "message": "missing \\ at the end",
+      "revId": "eb9e395b90eea986d394041bc514a10a01323fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
