@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b465b226_0376ac8e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-05-12T19:08:05Z",
+      "side": 1,
+      "message": "since gota already use it while we are not using the feature elsewhere.\n\nhttps://source.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/integ/modules/ota/base/src/com/google/android/gms/update/config/PackageMetadatas.java;l\u003d58",
+      "range": {
+        "startLine": 932,
+        "startChar": 0,
+        "endLine": 932,
+        "endChar": 17
+      },
+      "revId": "40dea716962b760d9ab9af5d91473f44fedf41b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
