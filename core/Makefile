@@ -658,6 +658,44 @@ $(INSTALLED_ODM_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(POST_PROCESS_PROPS)
 	    echo "$(line)" >> $@;)
 	$(hide) $(POST_PROCESS_PROPS) $@
 
+# ----------------------------------------------------------------
+# vendor_dlkm build.prop
+INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET := $(TARGET_OUT_VENDOR_DLKM)/etc/build.prop
+ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET)
+
+ifdef TARGET_VENDOR_DLKM_PROP
+vendor_dlkm_prop_files := $(TARGET_VENDOR_DLKM_PROP)
+else
+vendor_dlkm_prop_files := $(wildcard $(TARGET_DEVICE_DIR)/vendor_dlkm.prop)
+endif
+
+FINAL_VENDOR_DLKM_BUILD_PROPERTIES += \
+    $(call collapse-pairs, $(PRODUCT_VENDOR_DLKM_PROPERTIES))
+FINAL_VENDOR_DLKM_BUILD_PROPERTIES := $(call uniq-pairs-by-first-component, \
+    $(FINAL_VENDOR_DLKM_BUILD_PROPERTIES),=)
+
+$(INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET): $(BUILDINFO_COMMON_SH) $(POST_PROCESS_PROPS) $(vendor_dlkm_prop_files)
+	@echo Target vendor_dlkm buildinfo: $@
+	@mkdir -p $(dir $@)
+	$(hide) rm -f $@ && touch $@
+	$(hide) $(call generate-common-build-props,vendor_dlkm,$@)
+	$(hide) $(foreach file,$(vendor_dlkm_prop_files), \
+	    if [ -f "$(file)" ]; then \
+	        echo Target vendor_dlkm properties from: "$(file)"; \
+	        echo "" >> $@; \
+	        echo "#" >> $@; \
+	        echo "# from $(file)" >> $@; \
+	        echo "#" >> $@; \
+	        cat $(file) >> $@; \
+	        echo "# end of $(file)" >> $@; \
+	    fi;)
+	$(hide) echo "#" >> $@; \
+	        echo "# ADDITIONAL VENDOR_DLKM BUILD PROPERTIES" >> $@; \
+	        echo "#" >> $@;
+	$(hide) $(foreach line,$(FINAL_VENDOR_DLKM_BUILD_PROPERTIES), \
+	    echo "$(line)" >> $@;)
+	$(hide) $(POST_PROCESS_PROPS) $@
+
 # -----------------------------------------------------------------
 # system_ext build.prop
 INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET := $(TARGET_OUT_SYSTEM_EXT)/build.prop

@@ -161,9 +161,11 @@ _product_list_vars += PRODUCT_PRODUCT_PROPERTIES
 
 # A list of property assignments, like "key = value", with zero or more
 # whitespace characters on either side of the '='.
-# used for adding properties to build.prop of system_ext and odm partitions
+# used for adding properties to build.prop of system_ext, odm, vendor_dlkm
+# partitions
 _product_list_vars += PRODUCT_SYSTEM_EXT_PROPERTIES
 _product_list_vars += PRODUCT_ODM_PROPERTIES
+_product_list_vars += PRODUCT_VENDOR_DLKM_PROPERTIES
 
 # The characteristics of the product, which among other things is passed to aapt
 _product_single_value_vars += PRODUCT_CHARACTERISTICS

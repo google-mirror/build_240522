@@ -118,6 +118,7 @@ $(OUT_DIR)/products/$(strip $(1)).txt: $(this_makefile)
 	$(hide) echo 'PRODUCT_PRODUCT_PROPERTIES=$(call get-product-var,$(1),PRODUCT_PRODUCT_PROPERTIES)' >> $$@
 	$(hide) echo 'PRODUCT_SYSTEM_EXT_PROPERTIES=$(call get-product-var,$(1),PRODUCT_SYSTEM_EXT_PROPERTIES)' >> $$@
 	$(hide) echo 'PRODUCT_ODM_PROPERTIES=$(call get-product-var,$(1),PRODUCT_ODM_PROPERTIES)' >> $$@
+	$(hide) echo 'PRODUCT_VENDOR_DLKM_PROPERTIES=$(call get-product-var,$(1),PRODUCT_VENDOR_DLKM_PROPERTIES)' >> $$@
 	$(hide) echo 'PRODUCT_CHARACTERISTICS=$(call get-product-var,$(1),PRODUCT_CHARACTERISTICS)' >> $$@
 	$(hide) echo 'PRODUCT_COPY_FILES=$(call get-product-var,$(1),PRODUCT_COPY_FILES)' >> $$@
 	$(hide) echo 'PRODUCT_OTA_PUBLIC_KEYS=$(call get-product-var,$(1),PRODUCT_OTA_PUBLIC_KEYS)' >> $$@
