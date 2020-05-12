@@ -363,7 +363,7 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
 
   use_dynamic_size = (
       info_dict.get("use_dynamic_partition_size") == "true" and
-      what in shlex.split(info_dict.get("dynamic_partition_list", "").strip()))
+      what in shlex.split(info_dict.get("dynamic_partition_list", "")))
   if use_dynamic_size:
     info_dict.update(build_image.GlobalDictFromImageProp(image_props, what))
 
@@ -633,7 +633,7 @@ def AddSuperSplit(output_zip):
   built = build_super_image.BuildSuperImage(OPTIONS.input_tmp, outdir)
 
   if built:
-    for dev in OPTIONS.info_dict['super_block_devices'].strip().split():
+    for dev in OPTIONS.info_dict['super_block_devices'].split():
       img = OutputFile(output_zip, OPTIONS.input_tmp, "OTA",
                        "super_" + dev + ".img")
       img.Write()

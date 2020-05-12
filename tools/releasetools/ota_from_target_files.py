@@ -1824,8 +1824,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
 
   if OPTIONS.retrofit_dynamic_partitions:
     target_file = GetTargetFilesZipForRetrofitDynamicPartitions(
-        target_file, target_info.get("super_block_devices").strip().split(),
-        target_info.get("dynamic_partition_list").strip().split())
+        target_file, target_info.get("super_block_devices").split(),
+        target_info.get("dynamic_partition_list").split())
   elif OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
 

@@ -79,8 +79,8 @@ def BuildSuperImageFromDict(info_dict, output):
   virtual_ab = info_dict.get("virtual_ab") == "true"
   virtual_ab_retrofit = info_dict.get("virtual_ab_retrofit") == "true"
   retrofit = info_dict.get("dynamic_partition_retrofit") == "true"
-  block_devices = shlex.split(info_dict.get("super_block_devices", "").strip())
-  groups = shlex.split(info_dict.get("super_partition_groups", "").strip())
+  block_devices = shlex.split(info_dict.get("super_block_devices", ""))
+  groups = shlex.split(info_dict.get("super_partition_groups", ""))
 
   if ab_update and retrofit:
     cmd += ["--metadata-slots", "2"]
@@ -151,7 +151,7 @@ def BuildSuperImageFromDict(info_dict, output):
 def BuildSuperImageFromExtractedTargetFiles(inp, out):
   info_dict = common.LoadInfoDict(inp)
   partition_list = shlex.split(
-      info_dict.get("dynamic_partition_list", "").strip())
+      info_dict.get("dynamic_partition_list", ""))
 
   if "system" in partition_list:
     image_path = os.path.join(inp, "IMAGES", "system_other.img")
