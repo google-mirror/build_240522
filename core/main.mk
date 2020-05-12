@@ -1144,24 +1144,20 @@ ifdef FULL_BUILD
     endif
   endif
 
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  # WARNING: The product_MODULES variable is depended on by external files.
+  product_MODULES := $(_pif_modules)
+
   # Some modules produce only host installed files when building with TARGET_BUILD_APPS
   ifeq ($(TARGET_BUILD_APPS),)
-    _modules := $(foreach m,$(PRODUCT_PACKAGES) \
-                            $(PRODUCT_PACKAGES_DEBUG) \
-                            $(PRODUCT_PACKAGES_DEBUG_ASAN) \
-                            $(PRODUCT_PACKAGES_ENG) \
-                            $(PRODUCT_PACKAGES_TESTS),\
+    _modules := $(foreach m,$(product_MODULES), \
                   $(if $(ALL_MODULES.$(m).INSTALLED),\
                     $(if $(filter-out $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,\
                       $(m))))
     $(call maybe-print-list-and-error,$(sort $(_modules)),\
       Host modules should be in PRODUCT_HOST_PACKAGES$(comma) not PRODUCT_PACKAGES)
   endif
-
-  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
-  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
-  # WARNING: The product_MODULES variable is depended on by external files.
-  product_MODULES := $(_pif_modules)
 
   # Verify the artifact path requirements made by included products.
   is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
