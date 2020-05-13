@@ -22,6 +22,30 @@
       "revId": "4b0e7719001dc0067afb44565ed9c2e732eaa783",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a22d708_b8f6ca98",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-13T12:31:39Z",
+      "side": 1,
+      "message": "Good catch. Thanks!",
+      "parentUuid": "8696e5f7_89d1798e",
+      "range": {
+        "startLine": 2104,
+        "startChar": 0,
+        "endLine": 2104,
+        "endChar": 52
+      },
+      "revId": "4b0e7719001dc0067afb44565ed9c2e732eaa783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
