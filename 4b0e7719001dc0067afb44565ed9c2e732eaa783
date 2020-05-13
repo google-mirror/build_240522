@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8696e5f7_89d1798e",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-05-13T12:26:43Z",
+      "side": 1,
+      "message": "ifneq (,$(INSTALLED_LEGACY_DEFAULT_PROP_TARGET))?",
+      "range": {
+        "startLine": 2104,
+        "startChar": 0,
+        "endLine": 2104,
+        "endChar": 52
+      },
+      "revId": "4b0e7719001dc0067afb44565ed9c2e732eaa783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
