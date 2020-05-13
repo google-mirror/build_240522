@@ -118,6 +118,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49b757cb_29ce556d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-05-13T18:01:57Z",
+      "side": 1,
+      "message": "For non-Treble:\n\nAre the vendor sysprops otherwise in /default.prop or in /vendor/build.prop?  Or is it conditional based on whether or not there is a vendor partition?\n\nIf we can end up with /system/build.prop + /vendor/build.prop that sounds good to me.  If otherwise we have /system/build.prop (with platform properties) + /default.prop (with vendor properties), then that seems like a worst situation than having /system/build.prop that contains all of these properties.  Especially since /default.prop is on system.img for all platforms as of a few releases ago, so there\u0027s no meaningful difference between root_dir and /system.\n\n\u003e If you are strong about removing /default.prop, I promise I will do that in a follow-up CL, cause I don\u0027t want to increase the extent of this change.\n\nI don\u0027t feel super strongly, and I do appreciate you taking care of this.  I just figure that if we are going to go this far to combine the files, then we might as well combine them in the other cases as well.  I get your point on not increasing the extent of this change, so I\u0027ll +2 here.",
+      "parentUuid": "e9688ab8_b446fb00",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
