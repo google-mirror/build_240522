@@ -70,6 +70,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae2a5436_96fc34eb",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-05-13T17:39:17Z",
+      "side": 1,
+      "message": "Yes, that\u0027s in part why we have /odm/etc/build.prop instead of /odm/build.prop, since the former doesn\u0027t suffer from that problem.\n\n\u003e IMHO, that looks dirtier than keeping /default.prop.\n\nI think we\u0027re thinking of different situations then.\nFor Treble, I think we\u0027re on the same page.\nFor Non-Treble, I think we should merged everything into /system/build.prop, include /default.prop.  What prevents us from merging those two files for non-Treble?",
+      "parentUuid": "18137c36_7dd83b81",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
