@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69d694ac_4d292b4e",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-05-13T14:40:48Z",
+      "side": 1,
+      "message": "it\u0027s a little hard to review this change without reviewing the change it depends on, which adds this macro. What is the state of the dependent change?",
+      "range": {
+        "startLine": 1189,
+        "startChar": 23,
+        "endLine": 1189,
+        "endChar": 50
+      },
+      "revId": "49254e9c829304f5c5e307ec984e02a66ee68771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
