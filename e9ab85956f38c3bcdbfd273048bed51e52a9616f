@@ -46,6 +46,30 @@
       "revId": "e9ab85956f38c3bcdbfd273048bed51e52a9616f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a1dfb21_d53bb2c4",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-05-13T15:16:13Z",
+      "side": 0,
+      "message": "my guess is even if the configuration is wrong, since we didn\u0027t specify bitness for host_cross modules so there was no harm too",
+      "parentUuid": "26519fa8_189a4344",
+      "range": {
+        "startLine": 1091,
+        "startChar": 9,
+        "endLine": 1091,
+        "endChar": 67
+      },
+      "revId": "e9ab85956f38c3bcdbfd273048bed51e52a9616f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
