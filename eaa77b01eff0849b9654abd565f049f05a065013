@@ -22,6 +22,30 @@
       "revId": "eaa77b01eff0849b9654abd565f049f05a065013",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc817c76_02e5f1d3",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-13T12:56:38Z",
+      "side": 1,
+      "message": "It wasn\u0027t intended, but doesn\u0027t cause harm. Anyway, fixed.",
+      "parentUuid": "0fdff811_dc9e901d",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 39
+      },
+      "revId": "eaa77b01eff0849b9654abd565f049f05a065013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
