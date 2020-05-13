@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad467b74_f0ab67ce",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-05-13T16:21:19Z",
+      "side": 1,
+      "message": "Is this true?  I thought that the other CL makes them always install to /default.prop (since that\u0027s the file that init loads).  We should drop the symlink too if it\u0027s still being created.  It was never actually needed since init doesn\u0027t open and files through a symlink.",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
