@@ -94,6 +94,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9688ab8_b446fb00",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-13T17:52:51Z",
+      "side": 1,
+      "message": "\u003e What prevents us from merging those two files for non-Treble?\n\nI was uncomfortable with having vendor sysprops in /system/build.prop. Then we will also have to remove (or empty) /vendor/build.prop. All these seemed more complex and less intuitive than having a legacy prop that is dedicated for non-treble case. Technically, however, nothing prevents us from doing that. \n\nIf you are strong about removing /default.prop, I promise I will do that in a follow-up CL, cause I don\u0027t want to increase the extent of this change.",
+      "parentUuid": "ae2a5436_96fc34eb",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
