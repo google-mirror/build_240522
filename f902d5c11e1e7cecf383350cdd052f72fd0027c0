@@ -22,6 +22,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "504bf452_a294bc9f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-13T16:27:50Z",
+      "side": 1,
+      "message": "This is here because I did the change in two steps... just to make sure I am not making any mistake.\n\nI will try to drop the symlink in a follow-up cl. This change is already scary for me :)",
+      "parentUuid": "ad467b74_f0ab67ce",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
