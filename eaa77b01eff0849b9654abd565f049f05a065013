@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fdff811_dc9e901d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-05-13T12:36:26Z",
+      "side": 1,
+      "message": "If not property_overrides_split_enabled, ADDITIONAL_DEFAULT_PROPERTIES and PRODUCT_SYSTEM_DEFAULT_PROPERTIES will be included in both default.prop and build.prop. Is it intended?",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 39
+      },
+      "revId": "eaa77b01eff0849b9654abd565f049f05a065013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
