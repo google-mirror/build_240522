@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cc959d4_45415dc6",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-05-13T14:41:37Z",
+      "side": 0,
+      "message": "uhh... was this just wrong in the past?",
+      "range": {
+        "startLine": 1091,
+        "startChar": 9,
+        "endLine": 1091,
+        "endChar": 67
+      },
+      "revId": "e9ab85956f38c3bcdbfd273048bed51e52a9616f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
