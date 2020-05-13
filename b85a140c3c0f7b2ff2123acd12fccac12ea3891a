@@ -16,6 +16,24 @@
       "revId": "b85a140c3c0f7b2ff2123acd12fccac12ea3891a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54dad248_78be8ad1",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-05-13T15:13:06Z",
+      "side": 1,
+      "message": "target-select-bitness-of-required-modules and friends still uses it, I plan to replace them too in follow up change and see if I can report error when there is non-existing required",
+      "parentUuid": "34e92530_ea331873",
+      "revId": "b85a140c3c0f7b2ff2123acd12fccac12ea3891a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
