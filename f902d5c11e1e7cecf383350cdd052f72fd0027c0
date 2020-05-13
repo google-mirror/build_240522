@@ -46,6 +46,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18137c36_7dd83b81",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-13T16:32:31Z",
+      "side": 1,
+      "message": "\u003e since init doesn\u0027t open and files through a symlink\n\nI didn\u0027t know that, but if so, that might be a reason to keep this. For the devices that doesn\u0027t have a dedicated vendor partition, /vendor/build.prop is actually a symlink for /system/vendor/build.prop. But since init won\u0027t follow the symlink, we need to put vendor system properties into /system/build.prop. Do you think that\u0027s better? IMHO, that looks dirtier than keeping /default.prop.",
+      "parentUuid": "504bf452_a294bc9f",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
