@@ -1,0 +1,13 @@
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Tianjie Xu <xunchang@google.com>
+Code-Review+2: SzuWei Lin <szuweilin@google.com>
+Code-Review+1: Steve Muckle <smuckle@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Bowgo Tsai <bowgotsai@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Steve Muckle <smuckle@google.com>
+Submitted-at: Wed, 13 May 2020 19:36:53 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1306713
+Project: platform/build
+Branch: refs/heads/master
