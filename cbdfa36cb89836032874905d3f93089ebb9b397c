@@ -46,6 +46,30 @@
       "revId": "cbdfa36cb89836032874905d3f93089ebb9b397c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f8393e7_b282834f",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-05-14T03:02:13Z",
+      "side": 1,
+      "message": "ahh.. thanks. Looks like the 3rd argument is the property name to look for. And it\u0027s not specific to oem.\n\nLet\u0027s just say:\nif tokens[0] !\u003d \u0027import\u0027 or (len(tokens) !\u003d 2 and len(tokens) !\u003d 3) :\n  raise ValueError(\u0027Unrecognized import statement {}\u0027.format(line))\nif len(tokens) \u003d\u003d 3:\n  logger.info(\"some msg\")\n  return {}",
+      "parentUuid": "132f8acb_236f5fcc",
+      "range": {
+        "startLine": 808,
+        "startChar": 0,
+        "endLine": 808,
+        "endChar": 43
+      },
+      "revId": "cbdfa36cb89836032874905d3f93089ebb9b397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
