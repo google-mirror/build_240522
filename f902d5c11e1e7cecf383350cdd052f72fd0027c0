@@ -142,6 +142,30 @@
       "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "164c489a_29c55603",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-05-14T07:31:21Z",
+      "side": 1,
+      "message": "With this topic, vendor props are installed to /default.prop (for the non-Treble case). I\u0027ve fixed the comment in the child change.",
+      "parentUuid": "49b757cb_29ce556d",
+      "range": {
+        "startLine": 175,
+        "startChar": 44,
+        "endLine": 176,
+        "endChar": 65
+      },
+      "revId": "f902d5c11e1e7cecf383350cdd052f72fd0027c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
