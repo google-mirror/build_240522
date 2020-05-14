@@ -81,3 +81,6 @@ PRODUCT_PACKAGES += \
 # /vendor. TODO(b/141648565): Don't install these unless they're needed.
 PRODUCT_PACKAGES += \
     applypatch
+
+PRODUCT_PACKAGES += \
+    com.android.gki \
