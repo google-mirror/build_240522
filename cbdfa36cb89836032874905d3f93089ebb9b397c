@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b89e5eb_b57125df",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-05-14T02:33:41Z",
+      "side": 1,
+      "message": "Interesting. Do you know how it works in runtime, because the init code only supports 2 arguments cases: https://source.corp.google.com/android/system/core/init/import_parser.cpp;l\u003d28\n\nOr maybe oem has its own handlings of build prop? In that case we should probably not calling the parser at all in L787. Right now, the oem props are provided separately by an argument.",
+      "range": {
+        "startLine": 808,
+        "startChar": 0,
+        "endLine": 808,
+        "endChar": 43
+      },
+      "revId": "cbdfa36cb89836032874905d3f93089ebb9b397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
