@@ -1956,6 +1956,8 @@ recovery_sepolicy := \
     $(TARGET_RECOVERY_ROOT_OUT)/vendor_property_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/odm_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/odm_property_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/vendor_dlkm_file_contexts \
+    $(TARGET_RECOVERY_ROOT_OUT)/vendor_dlkm_property_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/product_file_contexts \
     $(TARGET_RECOVERY_ROOT_OUT)/product_property_contexts
 
