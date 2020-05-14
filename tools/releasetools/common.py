@@ -803,6 +803,15 @@ class PartitionBuildProps(object):
     """Parses the build prop in a given import statement."""
 
     tokens = line.split()
+
+    # Import property from oem partition file, like
+    # import /oem/oem.prop ro.product.name.
+    if len(tokens) == 3:
+      import_path = tokens[1]
+      if not re.match(r'^/oem/.*\.prop$', import_path):
+        raise ValueError('Unrecognized import path {}'.format(line))
+      return {}
+
     if len(tokens) != 2 or tokens[0] != 'import':
       raise ValueError('Unrecognized import statement {}'.format(line))
     import_path = tokens[1]
