@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5965aa4f_6bab5de0",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-05-14T05:18:50Z",
+      "side": 0,
+      "message": "Let\u0027s keep this check?",
+      "range": {
+        "startLine": 809,
+        "startChar": 0,
+        "endLine": 809,
+        "endChar": 75
+      },
+      "revId": "7a3cf2c4ba566649c909bde23bcc245d6a1443f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
