@@ -22,6 +22,30 @@
       "revId": "cbdfa36cb89836032874905d3f93089ebb9b397c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "132f8acb_236f5fcc",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2020-05-14T02:47:09Z",
+      "side": 1,
+      "message": "Here is the code logic: https://source.corp.google.com/android/system/core/init/property_service.cpp;l\u003d663.\n\nThe system partition can use it to load some properties form oem partition. By it, the OEMs flash different oem (custom) images to set different properties.\n\nhttps://docs.google.com/document/d/1gFfmIQn1_vbr6gym1r0ZxXEUhBKUpogAApSIgrnMOik/edit.\n\nPlease feel free to share your suggestion about how to improve this code piece. My change is just to make it workable. 😊",
+      "parentUuid": "6b89e5eb_b57125df",
+      "range": {
+        "startLine": 808,
+        "startChar": 0,
+        "endLine": 808,
+        "endChar": 43
+      },
+      "revId": "cbdfa36cb89836032874905d3f93089ebb9b397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
