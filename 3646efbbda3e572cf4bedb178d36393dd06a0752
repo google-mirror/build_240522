@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df46899b_337fc8b6",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-05-15T18:50:46Z",
+      "side": 1,
+      "message": "nit: There is a way to $(subst ${space},${newline},...) instead of expending time to go to the shell to do this. make language is _faster_ than the shell, but we are not really using make here, but our own interpreter. However, I opted to not add that make-magic to generate space and newline until the _idea_ had a chance to be reviewed.",
+      "range": {
+        "startLine": 831,
+        "startChar": 0,
+        "endLine": 832,
+        "endChar": 20
+      },
+      "revId": "3646efbbda3e572cf4bedb178d36393dd06a0752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
