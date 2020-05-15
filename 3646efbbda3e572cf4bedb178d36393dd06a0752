@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cf5aafcb_184b4f80",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-05-15T21:09:49Z",
+      "side": 1,
+      "message": "This is a bit of a mess because with recovery-as-boot, the boot image is known in places here as recovery, and when this was initially written, any installation of kernel modules onto the boot image was for recovery mode.\n\nI agree it would be better to create a new board variable for this so it is clear that it is vendor-specific. Because the ramdisk in vendor_boot is not recovery-specific (it is also used during normal boot), I propose BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD. I think this is a bit clearer than ...VENDOR_RECOVERY_RAMDISK..., which makes it sound like there is a recovery-specific ramdisk.",
+      "parentUuid": "5a7dbebd_c70f6b66",
+      "range": {
+        "startLine": 828,
+        "startChar": 12,
+        "endLine": 828,
+        "endChar": 46
+      },
+      "revId": "3646efbbda3e572cf4bedb178d36393dd06a0752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "df46899b_337fc8b6",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -45,6 +69,23 @@
       "revId": "3646efbbda3e572cf4bedb178d36393dd06a0752",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d1cecd9_1305d867",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-05-15T21:09:49Z",
+      "side": 1,
+      "message": "It\u0027d be good to re-use the module-load-list-copy-paths macro above if possible, instead of 829-834 I think this should work (similar to 817):\n      ALL_DEFAULT_INSTALLED_MODULES +\u003d $(call copy-many-files,$(call module-load-list-copy-paths,$(call intermediates-dir-for,PACKAGING,ramdisk_modules),$(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD),modules.load.recovery,$(TARGET_VENDOR_RAMDISK_OUT)))",
+      "revId": "3646efbbda3e572cf4bedb178d36393dd06a0752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
