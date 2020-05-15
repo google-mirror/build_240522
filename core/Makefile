@@ -2420,17 +2420,22 @@ ifneq ($(BOARD_AVB_BOOT_KEY_PATH),)
 $(INSTALLED_DEBUG_BOOTIMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_BOOT_TEST_KEY_PATH)
 endif
 
+# $1: boot debug image file name
+define get-bootdebugimage-partition-size
+  $(BOARD_$(call to-upper,$(subst .img,,$(subst boot-debug,kernel,$(notdir $(1)))))_BOOTIMAGE_PARTITION_SIZE)
+endef
+
 BOARD_AVB_BOOT_TEST_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 INTERNAL_AVB_BOOT_TEST_SIGNING_ARGS := --algorithm SHA256_RSA2048 --key $(BOARD_AVB_BOOT_TEST_KEY_PATH)
 # $(1): the bootimage to sign
 define test-key-sign-bootimage
-$(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(BOARD_BOOTIMAGE_PARTITION_SIZE)))
+$(call assert-max-image-size,$(1),$(call get-hash-image-max-size,$(call get-bootdebugimage-partition-size,$(1))))
 $(AVBTOOL) add_hash_footer \
   --image $(1) \
-  --partition_size $(BOARD_BOOTIMAGE_PARTITION_SIZE) \
+  --partition_size $(call get-bootdebugimage-partition-size,$(1))\
   --partition_name boot $(INTERNAL_AVB_BOOT_TEST_SIGNING_ARGS) \
   $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
-$(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE))
+$(call assert-max-image-size,$(1),$(call get-bootdebugimage-partition-size,$(1)))
 endef
 
 # $(1): output file
