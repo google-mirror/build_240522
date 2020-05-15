@@ -825,6 +825,14 @@ ifneq ($(strip $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES))$(strip $(BOARD_VENDOR_RAM
     BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES)
   endif
   ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_VENDOR_RAMDISK_KERNEL_MODULES),$(TARGET_VENDOR_RAMDISK_OUT),,$(call intermediates-dir-for,PACKAGING,depmod_vendor_ramdisk),$(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD),modules.load,$(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_ARCHIVE)))
+  ifneq (,$(BOARD_RECOVERY_KERNEL_MODULES_LOAD))
+    $(TARGET_VENDOR_RAMDISK_OUT)/lib/modules/modules.load.recovery:
+	@echo depmod-recovery $(@)
+	@echo $(strip $(notdir $(BOARD_RECOVERY_KERNEL_MODULES_LOAD))) | \
+		tr " " "\n" > $(@)
+    $(call intermediates-dir-for,PACKAGING,depmod_vendor_ramdisk)/$(DEPMOD_STAGING_SUBDIR)/modules.dep: \
+        $(TARGET_VENDOR_RAMDISK_OUT)/lib/modules/modules.load.recovery
+  endif
 endif
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
