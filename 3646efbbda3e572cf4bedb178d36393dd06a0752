@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a7dbebd_c70f6b66",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-05-15T19:08:03Z",
+      "side": 1,
+      "message": "I toyed with the idea that this should not overload this variable, instead introducing BOARD_VENDOR_RECOVERY_RAMDISK_KERNEL_MODULES_LOAD as being more descriptive to the requested functionality, until I expect I realized that BOARD_VENDOR_RAMDISK_KERNEL_MODULES is orthogonal to BOARD_RECOVERY_KERNEL_MODULES.",
+      "range": {
+        "startLine": 828,
+        "startChar": 12,
+        "endLine": 828,
+        "endChar": 46
+      },
+      "revId": "3646efbbda3e572cf4bedb178d36393dd06a0752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df46899b_337fc8b6",
         "filename": "core/Makefile",
         "patchSetId": 1
