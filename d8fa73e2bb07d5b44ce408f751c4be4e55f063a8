@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45d67ec6_6f7b88b3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-05-15T17:06:16Z",
+      "side": 1,
+      "message": "Why not make the define more generic instead of duplicating it?\n\n# $1: partition name\n# $2: image file name\ndefine get-image-partition-size\n  $(BOARD_$(call to-upper,$(subst .img,,$(subst $(1),kernel,$(notdir $(2)))))_BOOTIMAGE_PARTITION_SIZE)\nendef\n\ndefine get-bootimage-partition-size\n   $(call get-image-partition-size,boot,$(1)\nendef\n\ndefine get-bootdebugimage-partition-size\n   $(call get-image-partition-size,boot-debug,$(1)\nendef",
+      "range": {
+        "startLine": 2422,
+        "startChar": 0,
+        "endLine": 2426,
+        "endChar": 5
+      },
+      "revId": "d8fa73e2bb07d5b44ce408f751c4be4e55f063a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
