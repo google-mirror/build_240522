@@ -170,8 +170,8 @@ $(call add_json_list, PgoAdditionalProfileDirs,          $(PGO_ADDITIONAL_PROFIL
 
 $(call add_json_list, BoardVendorSepolicyDirs,           $(BOARD_VENDOR_SEPOLICY_DIRS) $(BOARD_SEPOLICY_DIRS))
 $(call add_json_list, BoardOdmSepolicyDirs,              $(BOARD_ODM_SEPOLICY_DIRS))
-$(call add_json_list, BoardSystemExtPublicSepolicyDirs,  $(BOARD_PLAT_PUBLIC_SEPOLICY_DIR))
-$(call add_json_list, BoardSystemExtPrivateSepolicyDirs, $(BOARD_PLAT_PRIVATE_SEPOLICY_DIR))
+$(call add_json_list, SystemExtPublicSepolicyDirs,       $(BOARD_PLAT_PUBLIC_SEPOLICY_DIR) $(SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS))
+$(call add_json_list, SystemExtPrivateSepolicyDirs,      $(BOARD_PLAT_PRIVATE_SEPOLICY_DIR) $(SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS))
 $(call add_json_list, BoardSepolicyM4Defs,               $(BOARD_SEPOLICY_M4DEFS))
 
 $(call add_json_bool, Flatten_apex,                      $(filter true,$(TARGET_FLATTEN_APEX)))
