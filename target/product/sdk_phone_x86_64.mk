@@ -16,6 +16,11 @@
 QEMU_USE_SYSTEM_EXT_PARTITIONS := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# This is a build configuration for a full-featured build of the
+# Open-Source part of the tree. It's geared toward a US-centric
+# build quite specifically for the emulator, and might not be
+# entirely appropriate to inherit from for on-device configurations.
+
 #
 # All components inherited here go to system image
 #
@@ -43,7 +48,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 #
 $(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_x86_64/device.mk)
 
 # Define the host tools and libs that are parts of the SDK.
 -include sdk/build/product_sdk.mk
@@ -52,5 +57,5 @@ $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
 # Overrides
 PRODUCT_BRAND := Android
 PRODUCT_NAME := sdk_phone_x86_64
-PRODUCT_DEVICE := generic_x86_64
+PRODUCT_DEVICE := emulator_x86_64
 PRODUCT_MODEL := Android SDK built for x86_64
