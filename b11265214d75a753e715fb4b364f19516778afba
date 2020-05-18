@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012057",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c0a73e67_6adea810",
+        "filename": "target/board/emulator_x86_64_arm64/README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T10:08:08Z",
+      "side": 1,
+      "message": "Unrecognized license :\nThird party\n",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "b11265214d75a753e715fb4b364f19516778afba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012057",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "39a32efc_6189e7eb",
+        "filename": "target/board/emulator_x86_arm/README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T10:08:08Z",
+      "side": 1,
+      "message": "Unrecognized license :\nThird party\n",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "b11265214d75a753e715fb4b364f19516778afba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
