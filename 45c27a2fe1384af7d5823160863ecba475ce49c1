@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012009",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "cf997d8b_09586bad",
+          "description": "Change to \"target/board/emulator_x86/BoardConfig.mk\"",
+          "replacements": [
+            {
+              "path": "target/board/emulator_x86/BoardConfig.mk",
+              "range": {
+                "startLine": 26,
+                "startChar": 18,
+                "endLine": 26,
+                "endChar": 28
+              },
+              "replacement": "accommodate"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ccbd0aab_010cc2b6",
+        "filename": "target/board/emulator_x86/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T09:59:50Z",
+      "side": 1,
+      "message": "Common typo found: \"accomodate\" -- should it be \"accommodate\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "45c27a2fe1384af7d5823160863ecba475ce49c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012006",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3c61dc61_a5914aec",
+        "filename": "target/board/emulator_x86_64_arm64/README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T09:59:50Z",
+      "side": 1,
+      "message": "Unrecognized license :\nThird party\n",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "45c27a2fe1384af7d5823160863ecba475ce49c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012009",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "56594413_86d91703",
+          "description": "Change to \"target/board/emulator_x86_arm/BoardConfig.mk\"",
+          "replacements": [
+            {
+              "path": "target/board/emulator_x86_arm/BoardConfig.mk",
+              "range": {
+                "startLine": 38,
+                "startChar": 18,
+                "endLine": 38,
+                "endChar": 28
+              },
+              "replacement": "accommodate"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "94be959e_a0198615",
+        "filename": "target/board/emulator_x86_arm/BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T09:59:50Z",
+      "side": 1,
+      "message": "Common typo found: \"accomodate\" -- should it be \"accommodate\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 38,
+        "startChar": 18,
+        "endLine": 38,
+        "endChar": 28
+      },
+      "revId": "45c27a2fe1384af7d5823160863ecba475ce49c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003012006",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1313720?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "13d80d2d_84fcadce",
+        "filename": "target/board/emulator_x86_arm/README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-18T09:59:50Z",
+      "side": 1,
+      "message": "Unrecognized license :\nThird party\n",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "45c27a2fe1384af7d5823160863ecba475ce49c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
