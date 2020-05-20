@@ -1817,6 +1817,16 @@ dump-files:
 	$(foreach p,$(sort $(product_target_FILES)),$(info :   $(p)))
 	@echo Successfully dumped product file list
 
+.PHONY: dump-modules
+dump-modules:
+	@echo "Dump module info"
+	@echo "$(sort $(product_host_FILES))" | tr -s ' ' '\n' | awk '{print "HOST: " $$0}'
+	@echo "$(sort $(product_target_FILES))" | tr -s ' ' '\n' | awk '{print "TARGET: " $$0}'
+	@echo "$(foreach m,$(sort $(ALL_MODULES)),$(foreach r,$(sort $(ALL_MODULES.$(m).REQUIRED_FROM_HOST)),REQUIRED_HOST:$(m):$(r)))" | tr -s ' ' '\n'
+	@echo "$(foreach m,$(sort $(ALL_MODULES)),$(foreach r,$(sort $(ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS)),REQUIRED_HOST_CROSS:$(m):$(r)))" | tr -s ' ' '\n'
+	@echo "$(foreach m,$(sort $(ALL_MODULES)),$(foreach r,$(sort $(ALL_MODULES.$(m).REQUIRED_FROM_TARGET)),REQUIRED_TARGET:$(m):$(r)))" | tr -s ' ' '\n'
+	@echo Successfully dumped module info
+
 .PHONY: nothing
 nothing:
 	@echo Successfully read the makefiles.
