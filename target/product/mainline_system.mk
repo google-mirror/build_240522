@@ -105,6 +105,7 @@ PRODUCT_PACKAGES_DEBUG += \
     avbctl \
     bootctl \
     tinyplay \
+    tinyhostless \
     tinycap \
     tinymix \
     tinypcminfo \
