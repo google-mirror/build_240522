@@ -1777,6 +1777,18 @@ dump-files:
 	$(foreach p,$(sort $(product_target_FILES)),$(info :   $(p)))
 	@echo Successfully dumped product file list
 
+.PHONY: dump-modules
+dump-modules:
+	@echo "Dump module info"
+	@echo "$(addprefix HOST:%,$(sort $(product_host_FILES)))" | tr -s '% ' ' \n'
+	@echo "$(addprefix TARGET:%,$(sort $(product_target_FILES)))" | tr -s '% ' ' \n'
+	@echo "$(sort $(foreach m,$(sort $(ALL_MODULES)),$(addprefix REQUIRED_FROM_HOST:%$(m)%,$(ALL_MODULES.$(m).REQUIRED_FROM_HOST))))" | tr -s '% ' ' \n'
+	@echo "$(sort $(foreach m,$(sort $(ALL_MODULES)),$(addprefix REQUIRED_FROM_HOST_CROSS:%$(m)%,$(ALL_MODULES.$(m).REQUIRED_FROM_HOST_CROSS))))" | tr -s '% ' ' \n'
+	@echo "$(sort $(foreach m,$(sort $(ALL_MODULES)),$(addprefix REQUIRED_FROM_TARGET:%$(m)%,$(ALL_MODULES.$(m).REQUIRED_FROM_TARGET))))" | tr -s '% ' ' \n'
+	@echo "$(sort $(foreach m,$(sort $(ALL_MODULES)),$(addprefix TARGET_REQUIRED_FROM_HOST:%$(m)%,$(ALL_MODULES.$(m).TARGET_REQUIRED_FROM_HOST))))" | tr -s '% ' ' \n'
+	@echo "$(sort $(foreach m,$(sort $(ALL_MODULES)),$(addprefix HOST_REQUIRED_FROM_TARGET:%$(m)%,$(ALL_MODULES.$(m).HOST_REQUIRED_FROM_TARGET))))" | tr -s '% ' ' \n'
+	@echo Successfully dumped module info
+
 .PHONY: nothing
 nothing:
 	@echo Successfully read the makefiles.
