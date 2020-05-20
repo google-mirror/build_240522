@@ -49,13 +49,25 @@ def validate(prop_list):
   Returns:
     True if nothing is wrong.
   """
+  ok = True
+
+  # Check if the values are too long
   too_long = [p for p in prop_list.get_all()
               if len(p.value) > PROP_VALUE_MAX and not p.name.startswith("ro.")]
+  ok &= len(too_long) == 0
   for p in too_long:
     sys.stderr.write("error: %s cannot exceed %d bytes: " %
                      (p.name, PROP_VALUE_MAX))
     sys.stderr.write("%s (%d)\n" % (p.value, len(p.value)))
-  return len(too_long) == 0
+
+  # Check if there are duplicates
+  names = [p.name for p in prop_list.get_all()]
+  dupes = [n for i, n in enumerate(names) if n in names[:i]]
+  ok &= len(dupes) == 0
+  for name in dupes:
+    sys.stderr.write("duplicate key found: " + name + "\n")
+
+  return ok
 
 class Prop:
 
