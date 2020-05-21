@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58c8887a_4785353b",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-05-21T10:46:41Z",
+      "side": 1,
+      "message": "do we really want space here?",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 52
+      },
+      "revId": "0231a0400be023af0c43a815ddcf03d2008fccbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
