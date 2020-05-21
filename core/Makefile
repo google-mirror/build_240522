@@ -333,7 +333,12 @@ ifneq ($(strip $(BOARD_VENDOR_KERNEL_MODULES)$(strip $(BOARD_VENDOR_KERNEL_MODUL
   ifeq ($(BOARD_VENDOR_KERNEL_MODULES_LOAD),)
     BOARD_VENDOR_KERNEL_MODULES_LOAD := $(BOARD_VENDOR_KERNEL_MODULES)
   endif
-  ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_OUT_VENDOR),vendor,$(call intermediates-dir-for,PACKAGING,depmod_vendor),$(BOARD_VENDOR_KERNEL_MODULES_LOAD),modules.load,$(BOARD_VENDOR_KERNEL_MODULES_ARCHIVE)))
+  ifeq ($(BOARD_USES_VENDOR_DLKMIMAGE),true)
+    # Install to /vendor_dlkm/lib/modules instead
+    ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_OUT_VENDOR_DLKM),vendor_dlkm,$(call intermediates-dir-for,PACKAGING,depmod_vendor_dlkm),$(BOARD_VENDOR_KERNEL_MODULES_LOAD),modules.load,$(BOARD_VENDOR_KERNEL_MODULES_ARCHIVE)))
+  else
+    ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_OUT_VENDOR),vendor,$(call intermediates-dir-for,PACKAGING,depmod_vendor),$(BOARD_VENDOR_KERNEL_MODULES_LOAD),modules.load,$(BOARD_VENDOR_KERNEL_MODULES_ARCHIVE)))
+  endif
 endif
 
 ifneq ($(strip $(BOARD_ODM_KERNEL_MODULES))$(strip $(BOARD_ODM_KERNEL_MODULES_ARCHIVE)),)
@@ -341,13 +346,6 @@ ifneq ($(strip $(BOARD_ODM_KERNEL_MODULES))$(strip $(BOARD_ODM_KERNEL_MODULES_AR
     BOARD_ODM_KERNEL_MODULES_LOAD := $(BOARD_ODM_KERNEL_MODULES)
   endif
   ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_ODM_KERNEL_MODULES),$(TARGET_OUT_ODM),odm,$(call intermediates-dir-for,PACKAGING,depmod_odm),$(BOARD_ODM_KERNEL_MODULES_LOAD),modules.load,$(BOARD_ODM_KERNEL_MODULES_ARCHIVE)))
-endif
-
-ifneq ($(strip $(BOARD_VENDOR_DLKM_KERNEL_MODULES))$(strip $(BOARD_VENDOR_DLKM_KERNEL_MODULES_ARCHIVE)),)
-  ifeq ($(BOARD_RECOVERY_KERNEL_MODULES_LOAD),)
-    BOARD_VENDOR_DLKM_KERNEL_MODULES_LOAD := $(BOARD_VENDOR_DLKM_KERNEL_MODULES)
-  endif
-  ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_VENDOR_DLKM_KERNEL_MODULES),$(TARGET_OUT_VENDOR_DLKM),vendor_dlkm,$(call intermediates-dir-for,PACKAGING,depmod_vendor_dlkm),$(BOARD_VENDOR_DLKM_KERNEL_MODULES_LOAD),modules.load,$(BOARD_VENDOR_DLKM_KERNEL_MODULES_ARCHIVE)))
 endif
 
 # -----------------------------------------------------------------
@@ -2659,7 +2657,9 @@ define create-vendor-odm-symlink
 endef
 endif
 
-# Create symlink /vendor/vendor_dlkm to /vendor_dlkm if necessary.
+# Create symlinks for vendor_dlkm if necessary:
+# /vendor/vendor_dlkm -> /vendor_dlkm
+# /vendor/lib/modules -> /vendor_dlkm/lib/modules
 ifdef BOARD_USES_VENDOR_DLKMIMAGE
 define create-vendor-vendor_dlkm-symlink
 $(hide) if [ -d $(TARGET_OUT_VENDOR)/vendor_dlkm ] && [ ! -h $(TARGET_OUT_VENDOR)/vendor_dlkm ]; then \
@@ -2669,8 +2669,17 @@ $(hide) if [ -d $(TARGET_OUT_VENDOR)/vendor_dlkm ] && [ ! -h $(TARGET_OUT_VENDOR
 fi
 $(hide) ln -sf /vendor_dlkm $(TARGET_OUT_VENDOR)/vendor_dlkm
 endef
+define create-vendor-lib-modules-vendor_dlkm-symlink
+$(hide) if [ -d $(TARGET_OUT_VENDOR)/lib/modules ] && [ ! -h $(TARGET_OUT_VENDOR)/lib/modules ]; then \
+  echo 'Non-symlink $(TARGET_OUT_VENDOR)/lib/modules detected!' 1>&2; \
+  echo 'You cannot install files to $(TARGET_OUT_VENDOR)/lib/modules while building a separate vendor_dlkm.img!' 1>&2; \
+  exit 1;
+fi
+$(hide) ln -sf /vendor_dlkm/lib/modules $(TARGET_OUT_VENDOR)/lib/modules
 else
 define create-vendor-vendor_dlkm-symlink
+endef
+define create-vendor-lib-modules-vendor_dlkm-symlink
 endef
 endif
 
@@ -4226,6 +4235,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	$(call create-system-system_ext-symlink)
 	$(call create-vendor-odm-symlink)
 	$(call create-vendor-vendor_dlkm-symlink)
+	$(call create-vendor-lib-modules-vendor_dlkm-symlink)
 	$(hide) rm -rf $@ $@.list $(zip_root)
 	$(hide) mkdir -p $(dir $@) $(zip_root)
 ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)))
