@@ -1234,7 +1234,7 @@ def main(argv):
       partition, algorithm = a.split("=")
       OPTIONS.avb_algorithms[partition] = algorithm
     elif o == "--avb_extra_custom_image_extra_args":
-      partition, extra_args = a.split("=")
+      partition, extra_args = a.split("=", 1)
       OPTIONS.avb_extra_args[partition] = extra_args
     else:
       return False
