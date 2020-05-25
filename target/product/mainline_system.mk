@@ -111,6 +111,9 @@ PRODUCT_PACKAGES_DEBUG += \
     tinypcminfo \
     update_engine_client \
 
+PRODUCT_PACKAGES += \
+    badblocks  \
+
 PRODUCT_HOST_PACKAGES += \
     tinyplay
 
