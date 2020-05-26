@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
 # The system image of aosp_arm-userdebug is a GSI for the devices with:
 # - ARM 32 bits user space
 # - 64 bits binder interface
@@ -45,13 +43,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
 # All components inherited here go to product image
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
-
-#
-# All components inherited here go to vendor image
-#
-$(call inherit-product-if-exists, build/make/target/product/ramdisk_stub.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86/device.mk)
 
 #
 # Special settings for GSI releasing
