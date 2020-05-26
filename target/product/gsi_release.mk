@@ -28,6 +28,13 @@
 
 BUILDING_GSI := true
 
+# GSI build tagets output the system.img and excludes some images
+PRODUCT_BUILD_PRODUCT_IMAGE  := false
+PRODUCT_BUILD_RAMDISK_IMAGE := false
+PRODUCT_BUILD_SYSTEM_IMAGE := true
+PRODUCT_BUILD_SYSTEM_EXT_IMAGE := false
+PRODUCT_BUILD_SYSTEM_OTHER_IMAGE := false
+
 # Exclude all files under system/product and system/system_ext
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/product/% \
