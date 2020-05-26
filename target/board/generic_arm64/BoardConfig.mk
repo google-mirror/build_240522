@@ -13,6 +13,8 @@
 # limitations under the License.
 #
 
+include build/make/target/board/BoardConfigGsiCommon.mk
+
 # arm64 emulator specific definitions
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -54,8 +56,6 @@ endif
 
 # Include 64-bit mediaserver to support 64-bit only devices
 TARGET_DYNAMIC_64_32_MEDIASERVER := true
-
-include build/make/target/board/BoardConfigGsiCommon.mk
 
 # Some vendors still haven't cleaned up all device specific directories under
 # root!
