@@ -13,8 +13,7 @@
 # limitations under the License.
 #
 
-# arm emulator specific definitions
-TARGET_ARCH := arm
+include build/make/target/board/BoardConfigGsiCommon.mk
 
 # Note: Before P, we built the platform images for ARMv7-A _without_ NEON.
 # Note: Before Q, we built the CTS and SDK images for ARMv7-A _without_ NEON.
@@ -24,23 +23,14 @@ TARGET_ARCH := arm
 # for real devices newly launched for Pi. These devices are usualy not
 # as performant as the mainstream 64-bit devices and the performance
 # provided by NEON is important for them to pass related CTS tests.
+#
+# arm emulator specific definitions
+TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 
-include build/make/target/board/BoardConfigGsiCommon.mk
-include build/make/target/board/BoardConfigEmuCommon.mk
 
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
-
-# Wifi.
-BOARD_WLAN_DEVICE           := emulator
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_simulated
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_simulated
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-WIFI_DRIVER_FW_PATH_PARAM   := "/dev/null"
-WIFI_DRIVER_FW_PATH_STA     := "/dev/null"
-WIFI_DRIVER_FW_PATH_AP      := "/dev/null"
+TARGET_NO_KERNEL := true
+TARGET_NO_VENDOR_BOOT := true
