@@ -13,6 +13,8 @@
 # limitations under the License.
 #
 
+include build/make/target/board/BoardConfigGsiCommon.mk
+
 # riscv64 emulator specific definitions
 TARGET_ARCH := riscv64
 TARGET_ARCH_VARIANT :=
@@ -21,8 +23,6 @@ TARGET_CPU_ABI := riscv64
 
 # Include 64-bit mediaserver to support 64-bit only devices
 TARGET_DYNAMIC_64_32_MEDIASERVER := true
-
-include build/make/target/board/BoardConfigGsiCommon.mk
 
 # Temporary hack while prebuilt modules are missing riscv64.
 ALLOW_MISSING_DEPENDENCIES := true
