@@ -13,6 +13,8 @@
 # limitations under the License.
 #
 
+include build/make/target/board/BoardConfigGsiCommon.mk
+
 # arm64 emulator specific definitions
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -52,21 +54,19 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_VARIANT := generic
 endif
 
-include build/make/target/board/BoardConfigGsiCommon.mk
 
 TARGET_NO_KERNEL := false
 TARGET_NO_VENDOR_BOOT := true
-BOARD_USES_RECOVERY_AS_BOOT := true
 
 BOARD_KERNEL-5.4_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_KERNEL-5.4-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
 BOARD_KERNEL-5.4-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 BOARD_KERNEL_BINARIES := kernel-5.4 kernel-5.4-gz kernel-5.4-lz4
+
 
 # Some vendors still haven't cleaned up all device specific directories under
 # root!

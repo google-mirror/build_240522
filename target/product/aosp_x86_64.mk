@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
 # The system image of aosp_x86_64-userdebug is a GSI for the devices with:
 # - x86 64 bits user space
 # - 64 bits binder interface
@@ -49,13 +47,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
 # All components inherited here go to product image
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
-
-#
-# All components inherited here go to vendor image
-#
-$(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
 
 #
 # Special settings for GSI releasing
