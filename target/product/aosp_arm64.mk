@@ -49,10 +49,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 
 #
-# All components inherited here go to vendor or vendor_boot image
+# Export GKIs
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
+PRODUCT_COPY_FILES += \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4:kernel-5.4 \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-gz:kernel-5.4-gz \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-lz4:kernel-5.4-lz4
 
 #
 # Special settings for GSI releasing
