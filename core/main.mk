@@ -411,10 +411,9 @@ $(error done)
 endef
 
 subdir_makefiles_inc := .
-FULL_BUILD :=
 
 ifneq ($(dont_bother),true)
-FULL_BUILD := true
+FULL_BUILD ?= true
 #
 # Include all of the makefiles in the system
 #
@@ -1146,7 +1145,7 @@ $(if $(strip $(1)), \
 )
 endef
 
-ifdef FULL_BUILD
+ifeq ($(FULL_BUILD),true)
   ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
     # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
     ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
@@ -1285,7 +1284,7 @@ modules_to_install := $(sort \
     $(CUSTOM_MODULES) \
   )
 
-ifdef FULL_BUILD
+ifeq ($(FULL_BUILD),true)
 #
 # Used by the cleanup logic in soong_ui to remove files that should no longer
 # be installed.
