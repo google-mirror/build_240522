@@ -35,6 +35,7 @@ PRODUCT_PACKAGES += \
     atrace \
     audioserver \
     BackupRestoreConfirmation \
+    badblocks \
     bcc \
     blank_screen \
     blkid \
