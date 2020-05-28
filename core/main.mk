@@ -1744,6 +1744,9 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+# Checks that build/soong/apex/allowed_deps.txt remains up to date
+droidcore: ${APEX_ALLOWED_DEPS_CHECK}
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
