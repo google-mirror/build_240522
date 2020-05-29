@@ -49,13 +49,25 @@ def validate(prop_list):
   Returns:
     True if nothing is wrong.
   """
+
   check_pass = True
+
+  # Check if value is too long
   for p in prop_list.get_all():
     if len(p.value) > PROP_VALUE_MAX and not p.name.startswith("ro."):
       check_pass = False
       sys.stderr.write("error: %s cannot exceed %d bytes: " %
                        (p.name, PROP_VALUE_MAX))
       sys.stderr.write("%s (%d)\n" % (p.value, len(p.value)))
+
+  # Check if there are duplicates
+  seen_names = set()
+  for p in prop_list.get_all():
+    if p.name in seen_names:
+      check_pass = False
+      sys.stderr.write("error: duplicated prop name %s" % p.name)
+    seen_names.add(p.name)
+
   return check_pass
 
 class Prop:
