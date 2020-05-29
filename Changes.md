@@ -5,6 +5,8 @@
 ELF prebuilts in PRODUCT_COPY_FILES that are installed into these paths are an
 error:
 
+t2 
+
 * `<partition>/bin/*`
 * `<partition>/lib/*`
 * `<partition>/lib64/*`
