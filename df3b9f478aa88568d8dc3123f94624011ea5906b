@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92809d9d_f8dd38fb",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-05-31T15:58:12Z",
+      "side": 1,
+      "message": "Can move the threading speedup into another CL or drop it entirely",
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d51bc3_54c3f65c",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-05-31T15:58:12Z",
+      "side": 1,
+      "message": "S should be enough time to adjust. Already launched devices are not affected.",
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
