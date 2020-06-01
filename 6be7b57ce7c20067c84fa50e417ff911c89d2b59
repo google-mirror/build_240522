@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9804a90_d5e4d90c",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-06-01T11:00:04Z",
+      "side": 0,
+      "message": "req_files and mod_files mustn\u0027t have common files because one is in HOST_OUT and the other is in TARGET_OUT",
+      "range": {
+        "startLine": 758,
+        "startChar": 4,
+        "endLine": 758,
+        "endChar": 65
+      },
+      "revId": "6be7b57ce7c20067c84fa50e417ff911c89d2b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d44844f_b2c54145",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-06-01T11:00:04Z",
+      "side": 0,
+      "message": "same reasoning",
+      "range": {
+        "startLine": 784,
+        "startChar": 4,
+        "endLine": 784,
+        "endChar": 65
+      },
+      "revId": "6be7b57ce7c20067c84fa50e417ff911c89d2b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
