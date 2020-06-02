@@ -121,6 +121,11 @@ PRODUCT_COPY_FILES += \
     system/core/rootdir/init.zygote32_64.rc:system/etc/init/hw/init.zygote32_64.rc \
     system/core/rootdir/init.zygote64_32.rc:system/etc/init/hw/init.zygote64_32.rc \
 
+# NFC:
+#   Provide default libnfc-nci.conf for devices that does not ship one in /product
+PRODUCT_COPY_FILES += \
+    device/generic/common/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf
+
 # Enable dynamic partition size
 PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 
