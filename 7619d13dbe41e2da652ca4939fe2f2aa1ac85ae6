@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "470ad389_6ead46ad",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-06-02T16:14:45Z",
+      "side": 1,
+      "message": "This is interesting? Was it a bug?",
+      "range": {
+        "startLine": 1350,
+        "startChar": 0,
+        "endLine": 1352,
+        "endChar": 5
+      },
+      "revId": "7619d13dbe41e2da652ca4939fe2f2aa1ac85ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
