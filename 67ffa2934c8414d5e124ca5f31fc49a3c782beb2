@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3301ce1a_024c0280",
+        "filename": "core/shell_test_config_template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-06-03T20:46:23Z",
+      "side": 1,
+      "message": "add a comment here to indicate this config is auto generated.\nrefer to other template.",
+      "revId": "67ffa2934c8414d5e124ca5f31fc49a3c782beb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
