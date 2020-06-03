@@ -1,0 +1,9 @@
+Autosubmit+1: Dan Willemsen <dwillemsen@google.com>
+Code-Review+2: Patrice Arruda <patricearruda@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 03 Jun 2020 21:30:20 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1156840
+Project: platform/build
+Branch: refs/heads/master
