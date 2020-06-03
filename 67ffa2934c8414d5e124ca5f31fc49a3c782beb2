@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d2bced36_5d3241bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2020-06-03T20:48:53Z",
+      "side": 1,
+      "message": "nit:\n\nBug: 148805488\nBug: 151761373",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "67ffa2934c8414d5e124ca5f31fc49a3c782beb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3301ce1a_024c0280",
         "filename": "core/shell_test_config_template.xml",
         "patchSetId": 1
