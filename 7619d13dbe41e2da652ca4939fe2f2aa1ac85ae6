@@ -22,6 +22,30 @@
       "revId": "7619d13dbe41e2da652ca4939fe2f2aa1ac85ae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78dff15b_eeb4090f",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1479653
+      },
+      "writtenOn": "2020-06-04T17:44:50Z",
+      "side": 1,
+      "message": "For system_other? No, this is for symmetry. I think it would be good to have misc_info.txt fully define the set images that are being built. I\u0027m thinking forward to reducing the amount merge configs we maintain telling us which images should come from which partial build(s). \n\nIt also helped with symmetry since we are dumping the flags for all the other images and then using those in add_img_to_targetfiles.py.",
+      "parentUuid": "470ad389_6ead46ad",
+      "range": {
+        "startLine": 1350,
+        "startChar": 0,
+        "endLine": 1352,
+        "endChar": 5
+      },
+      "revId": "7619d13dbe41e2da652ca4939fe2f2aa1ac85ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
