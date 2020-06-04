@@ -130,7 +130,7 @@ $(file >$(PRODUCT_OUT)/.copied_headers_list,$(TARGET_OUT_HEADERS) $(ALL_COPIED_H
 
 # -----------------------------------------------------------------
 # docs/index.html
-ifeq (,$(TARGET_BUILD_APPS))
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 gen := $(OUT_DOCS)/index.html
 ALL_DOCS += $(gen)
 $(gen): frameworks/base/docs/docs-redirect-index.html
@@ -3297,7 +3297,7 @@ endif # BOARD_AVB_ENABLE
 # -----------------------------------------------------------------
 # Check VINTF of build
 
-ifndef TARGET_BUILD_APPS
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
 check_vintf_all_deps :=
 
@@ -3503,13 +3503,12 @@ check_vintf_has_system :=
 check_vintf_common_srcs :=
 check_vintf_all_deps :=
 intermediates :=
-endif # !TARGET_BUILD_APPS
+endif # !TARGET_BUILD_UNBUNDLED
 
 # -----------------------------------------------------------------
 # Check image sizes <= size of super partition
 
-ifeq (,$(TARGET_BUILD_APPS))
-# Do not check for apps-only build
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 
 ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
 
@@ -3545,7 +3544,7 @@ check-all-partition-sizes-nodeps:
 
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
-endif # TARGET_BUILD_APPS
+endif # !TARGET_BUILD_UNBUNDLED
 
 # -----------------------------------------------------------------
 # bring in the installer image generation defines if necessary
@@ -4472,7 +4471,7 @@ endif    # build_ota_package
 # A zip of the appcompat directory containing logs
 APPCOMPAT_ZIP := $(PRODUCT_OUT)/appcompat.zip
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
-ifndef TARGET_BUILD_APPS
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 $(APPCOMPAT_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -4501,7 +4500,7 @@ name := $(name)-symbols-$(FILE_NAME_TAG)
 
 SYMBOLS_ZIP := $(PRODUCT_OUT)/$(name).zip
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
-ifndef TARGET_BUILD_APPS
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 $(SYMBOLS_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -4527,7 +4526,7 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
 name := $(name)_debug
 endif
 COVERAGE_ZIP := $(PRODUCT_OUT)/$(name).zip
-ifndef TARGET_BUILD_APPS
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 $(COVERAGE_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -4602,7 +4601,7 @@ endif # EMMA_INSTRUMENT=true
 #
 PROGUARD_DICT_ZIP := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-dict-$(FILE_NAME_TAG).zip
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
-ifndef TARGET_BUILD_APPS
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 $(PROGUARD_DICT_ZIP): \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
