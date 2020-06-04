@@ -94,10 +94,20 @@ endif
 
 TARGET_BUILD_APPS ?=
 
+# TARGET_BUILD_APPS implies unbundled build, otherwise we default
+# to bundled (i.e. platform targets such as the system image are
+# included).
+ifneq ($(TARGET_BUILD_APPS),)
+  TARGET_BUILD_UNBUNDLED := true
+else
+  TARGET_BUILD_UNBUNDLED ?= true
+endif
+
 .KATI_READONLY := \
   TARGET_PRODUCT \
   TARGET_BUILD_VARIANT \
-  TARGET_BUILD_APPS
+  TARGET_BUILD_APPS \
+  TARGET_BUILD_UNBUNDLED \
 
 # ---------------------------------------------------------------
 # Set up configuration for host machine.  We don't do cross-
