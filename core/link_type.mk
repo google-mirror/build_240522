@@ -14,11 +14,27 @@ my_link_prefix := LINK_TYPE:$(call find-idf-prefix,$(my_kind),$(my_host_cross)):
 link_type := $(my_link_prefix):$(LOCAL_MODULE_CLASS):$(LOCAL_MODULE)
 ALL_LINK_TYPES := $(ALL_LINK_TYPES) $(link_type)
 $(link_type).TYPE := $(my_link_type)
-$(link_type).MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
 $(link_type).WARN := $(my_warn_types)
 $(link_type).ALLOWED := $(my_allowed_types)
 $(link_type).DEPS := $(addprefix $(my_link_prefix):,$(my_link_deps))
 $(link_type).BUILT := $(LOCAL_BUILT_MODULE)
+
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  $(link_type).MAKEFILE := $(LOCAL_PATH)
+
+  ifdef LOCAL_SOONG_VISIBILITY
+    $(link_type).VISIBILITY := $(LOCAL_SOONG_VISIBILITY)
+  endif
+else
+  $(link_type).MAKEFILE := $(LOCAL_MODULE_MAKEFILE)
+
+  $(foreach dep,$($(link_type).DEPS),\
+    $(eval _v := $$($$(dep).VISIBILITY))\
+	$(if $(_v),\
+	  $(if $(filter $(_v),$(dir $(LOCAL_MODULE_MAKEFILE))),,\
+	    $(eval _other := //$$($$(dep).MAKEFILE):$$(word 6,$$(subst :,$$(space),$$(dep))))\
+	    $(call pretty-warning,depends on $(_other) which is not visible to this module))))
+endif
 
 link_type :=
 my_allowed_types :=
