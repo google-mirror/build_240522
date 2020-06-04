@@ -650,6 +650,7 @@ function lunch()
     export TARGET_BUILD_APPS=
 
     local product variant_and_version variant version
+
     product=${selection%%-*} # Trim everything after first dash
     variant_and_version=${selection#*-} # Trim everything up to first dash
     if [ "$variant_and_version" != "$selection" ]; then
@@ -674,6 +675,7 @@ function lunch()
     then
         return 1
     fi
+
     export TARGET_PRODUCT=$(get_build_var TARGET_PRODUCT)
     export TARGET_BUILD_VARIANT=$(get_build_var TARGET_BUILD_VARIANT)
     if [ -n "$version" ]; then
@@ -683,10 +685,10 @@ function lunch()
     fi
     export TARGET_BUILD_TYPE=release
 
-    [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || echo
+    echo
 
     set_stuff_for_environment
-    [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
+    printconfig
     destroy_build_var_cache
 }
 
