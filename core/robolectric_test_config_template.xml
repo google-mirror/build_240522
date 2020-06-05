@@ -15,12 +15,13 @@
 -->
 <!-- This test config file is auto-generated. -->
 <configuration description="Runs {MODULE}">
+    <option name="exclude-paths" value="java" />
     <option name="test-suite-tag" value="apct" />
     <option name="test-suite-tag" value="apct-junit" />
 
     {EXTRA_CONFIGS}
 
-    <test class="com.android.tradefed.testtype.HostTest" >
+    <test class="com.android.tradefed.testtype.IsolatedHostTest" >
         <option name="jar" value="{MODULE}.jar" />
     </test>
 </configuration>
