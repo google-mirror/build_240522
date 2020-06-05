@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "381dd8f0_fed76938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-05T19:04:01Z",
+      "side": 1,
+      "message": "\"rule merging\" would be a better description, \"de-duping\" implies that we fully pick one or the other, where really we only choose commands from one or the other, but use the dependencies and PRIVATE_* arguments from both.",
+      "range": {
+        "startLine": 12,
+        "startChar": 43,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "1a34bbc10a637e17160cac0666d9a74101b079dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
