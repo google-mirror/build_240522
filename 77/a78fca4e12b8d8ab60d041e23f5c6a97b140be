@@ -1,0 +1,10 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Nicolas Geoffray <ngeoffray@google.com>
+Code-Review+2: Paul Duffin <paulduffin@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Ulyana Trafimovich <skvadrik@google.com>
+Submitted-at: Fri, 05 Jun 2020 10:46:01 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1321926
+Project: platform/build
+Branch: refs/heads/master
