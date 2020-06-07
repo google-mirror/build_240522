@@ -518,7 +518,7 @@ my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vin
 
 ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
 
-$(my_all_targets) : $(my_vintf_new_installed)
+$(my_all_targets) : $(my_vintf_installed)
 endif # LOCAL_VINTF_FRAGMENTS
 endif # !LOCAL_IS_HOST_MODULE
 endif # !LOCAL_UNINSTALLABLE_MODULE
