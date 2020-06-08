@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef35d07a_c757c619",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-08T21:55:12Z",
+      "side": 1,
+      "message": "Can we drop LOCAL_ADDITIONAL_CHECKED_MODULE from soong and the soong prebuilt makefiles?",
+      "revId": "c9dd25ba39d134f4e19661dde9f91a71a9a975fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b791efe4_d5fb0a3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-08T21:55:12Z",
+      "side": 1,
+      "message": "Any idea what this does to the size of a checkbuild?",
+      "revId": "c9dd25ba39d134f4e19661dde9f91a71a9a975fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
