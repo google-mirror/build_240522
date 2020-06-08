@@ -33,6 +33,24 @@
       "revId": "c9dd25ba39d134f4e19661dde9f91a71a9a975fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de61b69f_7b6bc0f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-06-08T22:05:17Z",
+      "side": 1,
+      "message": "In AOSP, in increased the number of actions from 374033 to 390630.  It removes a lot of copy actions, but adds in some heavier real actions (for example, Soong checkbuild probably includes R8, which Make\u0027s checkbuild skips, and Soong\u0027s will include 32-bit libraries), so run time is probably increased.  I would be surprised if disk usage is decreased though since all the copies into out/target/product are removed.",
+      "parentUuid": "b791efe4_d5fb0a3f",
+      "revId": "c9dd25ba39d134f4e19661dde9f91a71a9a975fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
