@@ -782,8 +782,13 @@ ALL_MODULES.$(my_register_name).PATH := \
     $(ALL_MODULES.$(my_register_name).PATH) $(LOCAL_PATH)
 ALL_MODULES.$(my_register_name).TAGS := \
     $(ALL_MODULES.$(my_register_name).TAGS) $(my_module_tags)
-ALL_MODULES.$(my_register_name).CHECKED := \
-    $(ALL_MODULES.$(my_register_name).CHECKED) $(my_checked_module)
+# Don't add a checkbuild dependency to Soong modules, they will be checked
+# through the checkbuild-soong dependency, and checkbuilding them in make just
+# causes an unnecessary copy wasting disk space.
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  ALL_MODULES.$(my_register_name).CHECKED := \
+      $(ALL_MODULES.$(my_register_name).CHECKED) $(my_checked_module)
+endif
 ALL_MODULES.$(my_register_name).BUILT := \
     $(ALL_MODULES.$(my_register_name).BUILT) $(LOCAL_BUILT_MODULE)
 ifndef LOCAL_IS_HOST_MODULE
