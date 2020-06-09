@@ -536,6 +536,15 @@ $(strip \
 endef
 
 ###########################################################
+## Convert install path on host to on-device path
+## by stripping PRODUCT_OUT prefix.
+###########################################################
+# $(1): install path on host
+define install-path-to-on-device-path
+$(patsubst $(PRODUCT_OUT)%,%,$(1))
+endef
+
+###########################################################
 ## The intermediates directory.  Where object files go for
 ## a given target.  We could technically get away without
 ## the "_intermediates" suffix on the directory, but it's
