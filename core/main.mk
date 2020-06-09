@@ -63,6 +63,10 @@ endif
 EMPTY_DIRECTORY := $(OUT_DIR)/empty
 $(shell mkdir -p $(EMPTY_DIRECTORY) && rm -rf $(EMPTY_DIRECTORY)/*)
 
+ALL_LINK_TYPES :=
+EXPORTS_LIST :=
+SOONG_ALREADY_CONV :=
+
 # CTS-specific config.
 -include cts/build/config.mk
 # VTS-specific config.
