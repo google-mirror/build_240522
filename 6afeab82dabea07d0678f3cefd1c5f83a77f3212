@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d77675d3_66a27d84",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-06-09T20:58:06Z",
+      "side": 1,
+      "message": "Can we do this as a more phased approach to avoid cluttering logs with warnings:\n1.  Submit the other half of this change.\n2.  Update buildbot rules to pass NATIVE_COVERAGE* variables.\n3.  Add the warning, and then use the `bass` tool to check for instances of the warning on the buildbots.\n4.  Clean up any more cases found.\n5.  Make the warning an error.",
+      "revId": "6afeab82dabea07d0678f3cefd1c5f83a77f3212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
