@@ -271,6 +271,16 @@ PRODUCT_PACKAGES += \
     wifi-service \
     wm \
 
+# Rust core dylib.so should be included,
+# but they are not built for darwin yet.
+ifneq ($(HOST_OS),darwin)
+  PRODUCT_PACKAGES += \
+    libgetopts \
+    libstd \
+    libterm \
+    libtest
+endif
+
 # VINTF data for system image
 PRODUCT_PACKAGES += \
     system_manifest.xml \
