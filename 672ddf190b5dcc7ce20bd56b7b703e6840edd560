@@ -22,6 +22,30 @@
       "revId": "672ddf190b5dcc7ce20bd56b7b703e6840edd560",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9efb88ba_ab950cc8",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2020-06-10T21:36:56Z",
+      "side": 1,
+      "message": "It worked locally, but I imagine that\u0027s probably because None is falsy; still, I\u0027ll make this change.",
+      "parentUuid": "32d5e40d_5586e368",
+      "range": {
+        "startLine": 1249,
+        "startChar": 71,
+        "endLine": 1249,
+        "endChar": 100
+      },
+      "revId": "672ddf190b5dcc7ce20bd56b7b703e6840edd560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
