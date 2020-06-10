@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab779b8f_12eb286d",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-06-10T13:34:56Z",
+      "side": 1,
+      "message": "Nit: If it\u0027s only used below for DisablePreopt, you could make it DISABLE_PREOPT to match Soong.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 13
+      },
+      "revId": "22bc11903645603114af766ebdcb18011e166ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d7cbb8f_3a34ee83",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-06-10T13:34:56Z",
+      "side": 1,
+      "message": "So, with both TARGET_BUILD_APPS true and false dexpreopt should be disabled? Not only with TARGET_BUILD_APPS\u003dtrue?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "22bc11903645603114af766ebdcb18011e166ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
