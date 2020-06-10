@@ -93,6 +93,30 @@
       "revId": "22bc11903645603114af766ebdcb18011e166ad4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "faf40e2b_e898cc61",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-06-10T14:01:23Z",
+      "side": 1,
+      "message": "Ah, I see. Thanks for the explanation.",
+      "parentUuid": "3cdac1f2_2e9d5cb4",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "22bc11903645603114af766ebdcb18011e166ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
