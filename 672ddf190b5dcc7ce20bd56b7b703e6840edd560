@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32d5e40d_5586e368",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-06-10T21:35:13Z",
+      "side": 1,
+      "message": "I believe it gives a string or none, not a boolean as you expect.  The code can be\nlz4_ramdisks \u003d info_dict.get(\"lz4_ramdisks\") \u003d\u003d \u0027true\u0027",
+      "range": {
+        "startLine": 1249,
+        "startChar": 71,
+        "endLine": 1249,
+        "endChar": 100
+      },
+      "revId": "672ddf190b5dcc7ce20bd56b7b703e6840edd560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
