@@ -1315,3 +1315,232 @@ super_group_foo_group_size={group_foo_size}
 
     lines = self.get_op_list(self.output_path)
     self.assertEqual(lines, ["remove foo"])
+
+class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
+  def setUp(self):
+    self.odm_build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+        'import /odm/etc/build_${ro.boot.product.device_name}.prop',
+    ]
+
+  @staticmethod
+  def _BuildZipFile(entries):
+    input_file = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(input_file, 'w') as input_zip:
+      for name, content in entries.items():
+        input_zip.writestr(name, content)
+
+    return input_file
+
+  def test_parseBuildProps_noImportStatement(self):
+    build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+    ]
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': ['std', 'pro']
+      }
+
+      build_props = common.LoadBuildProp('odm', input_zip, placeholder_values)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coral',
+    }, build_props)
+
+  def test_parseBuildProps_singleImportStatement(self):
+    build_std_prop = [
+        'ro.product.odm.device=coral',
+        'ro.product.odm.name=product1',
+    ]
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro',
+        'ro.product.odm.name=product2',
+    ]
+
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(self.odm_build_prop),
+        'ODM/etc/build_std.prop': '\n'.join(build_std_prop),
+        'ODM/etc/build_pro.prop': '\n'.join(build_pro_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'std'
+      }
+
+      build_props = common.LoadBuildProp('odm', input_zip, placeholder_values)
+
+    self.assertEqual({
+      'ro.odm.build.date.utc': '1578430045',
+      'ro.odm.build.fingerprint':
+      'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+      'ro.product.odm.device': 'coral',
+      'ro.product.odm.name': 'product1',
+    }, build_props)
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'pro'
+      }
+      build_props = common.LoadBuildProp('odm', input_zip, placeholder_values)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coralpro',
+        'ro.product.odm.name': 'product2',
+    }, build_props)
+
+  def test_parseBuildProps_noPlaceHolders(self):
+    build_prop = copy.copy(self.odm_build_prop)
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      build_props = common.LoadBuildProp('odm', input_zip)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coral',
+    }, build_props)
+
+  def test_parseBuildProps_multipleImportStatements(self):
+    build_prop = copy.deepcopy(self.odm_build_prop)
+    build_prop.append(
+        'import /odm/etc/build_${ro.boot.product.product_name}.prop')
+
+    build_std_prop = [
+        'ro.product.odm.device=coral',
+    ]
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro',
+    ]
+
+    product1_prop = [
+        'ro.product.odm.name=product1',
+        'ro.product.not_care=not_care',
+    ]
+
+    product2_prop = [
+        'ro.product.odm.name=product2',
+        'ro.product.not_care=not_care',
+    ]
+
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+        'ODM/etc/build_std.prop': '\n'.join(build_std_prop),
+        'ODM/etc/build_pro.prop': '\n'.join(build_pro_prop),
+        'ODM/etc/build_product1.prop': '\n'.join(product1_prop),
+        'ODM/etc/build_product2.prop': '\n'.join(product2_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'std',
+          'ro.boot.product.product_name': 'product1',
+          'ro.boot.product.not_care': 'not_care',
+      }
+      build_props = common.LoadBuildProp('odm', input_zip, placeholder_values)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coral',
+        'ro.product.odm.name': 'product1'
+    }, build_props)
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'pro',
+          'ro.boot.product.product_name': 'product2',
+          'ro.boot.product.not_care': 'not_care',
+      }
+      build_props = common.LoadBuildProp('odm', input_zip, placeholder_values)
+
+    self.assertEqual({
+        'ro.odm.build.date.utc': '1578430045',
+        'ro.odm.build.fingerprint':
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device': 'coralpro',
+        'ro.product.odm.name': 'product2'
+    }, build_props)
+
+  def test_parseBuildProps_defineAfterOverride(self):
+    build_prop = copy.deepcopy(self.odm_build_prop)
+    build_prop.append('ro.product.odm.device=coral')
+
+    build_std_prop = [
+        'ro.product.odm.device=coral',
+    ]
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro',
+    ]
+
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+        'ODM/etc/build_std.prop': '\n'.join(build_std_prop),
+        'ODM/etc/build_pro.prop': '\n'.join(build_pro_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'std',
+      }
+
+      self.assertRaises(ValueError, common.LoadBuildProp, 'odm',
+                        input_zip, placeholder_values)
+
+  def test_parseBuildProps_duplicateOverride(self):
+    build_prop = copy.deepcopy(self.odm_build_prop)
+    build_prop.append(
+        'import /odm/etc/build_${ro.boot.product.product_name}.prop')
+
+    build_std_prop = [
+        'ro.product.odm.device=coral',
+        'ro.product.odm.name=product1',
+    ]
+    build_pro_prop = [
+        'ro.product.odm.device=coralpro',
+    ]
+
+    product1_prop = [
+        'ro.product.odm.name=product1',
+    ]
+
+    product2_prop = [
+        'ro.product.odm.name=product2',
+    ]
+
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+        'ODM/etc/build_std.prop': '\n'.join(build_std_prop),
+        'ODM/etc/build_pro.prop': '\n'.join(build_pro_prop),
+        'ODM/etc/build_product1.prop': '\n'.join(product1_prop),
+        'ODM/etc/build_product2.prop': '\n'.join(product2_prop),
+    })
+
+    with zipfile.ZipFile(input_file, 'r') as input_zip:
+      placeholder_values = {
+          'ro.boot.product.device_name': 'std',
+          'ro.boot.product.product_name': 'product1',
+      }
+      self.assertRaises(ValueError, common.LoadBuildProp, 'odm',
+                        input_zip, placeholder_values)
