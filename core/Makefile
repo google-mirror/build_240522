@@ -624,11 +624,13 @@ ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 # -l enables the legacy format used by the Linux kernel
 COMPRESSION_COMMAND_DEPS := $(LZ4)
 COMPRESSION_COMMAND := $(LZ4) -l -12 --favor-decSpeed
+RELEASETOOLS_LZ4_OPTION := --lz4_ramdisks
 RAMDISK_EXT := .lz4
 else
 COMPRESSION_COMMAND_DEPS := $(MINIGZIP)
 COMPRESSION_COMMAND := $(MINIGZIP)
 RAMDISK_EXT := .gz
+RELEASETOOLS_LZ4_OPTION :=
 endif
 
 # We just build this directly to the install location.
@@ -4392,7 +4394,7 @@ ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
 	$(call dump-dynamic-partitions-info, $(zip_root)/META/dynamic_partitions_info.txt)
 endif
 	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
-	    $(ADD_IMG_TO_TARGET_FILES) -a -v -p $(HOST_OUT) $(zip_root)
+	    $(ADD_IMG_TO_TARGET_FILES) $(RELEASETOOLS_LZ4_OPTION) -a -v -p $(HOST_OUT) $(zip_root)
 ifeq ($(BUILD_QEMU_IMAGES),true)
 	$(hide) AVBTOOL=$(AVBTOOL) $(MK_VBMETA_BOOT_KERNEL_CMDLINE_SH) $(zip_root)/IMAGES/vbmeta.img \
 	    $(zip_root)/IMAGES/system.img $(zip_root)/IMAGES/VerifiedBootParams.textproto

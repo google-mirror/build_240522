@@ -75,6 +75,7 @@ OPTIONS.replace_updated_files_list = []
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
 OPTIONS.is_signing = False
+OPTIONS.lz4_ramdisks = False
 
 # Use a fixed timestamp (01/01/2009 00:00:00 UTC) for files when packaging
 # images. (b/24377993, b/80600931)
@@ -972,6 +973,8 @@ def main(argv):
       OPTIONS.replace_verity_public_key = (True, a)
     elif o == "--is_signing":
       OPTIONS.is_signing = True
+    elif o == "--lz4_ramdisks":
+      OPTIONS.lz4_ramdisks = True
     else:
       return False
     return True
@@ -981,7 +984,7 @@ def main(argv):
       extra_long_opts=["add_missing", "rebuild_recovery",
                        "replace_verity_public_key=",
                        "replace_verity_private_key=",
-                       "is_signing"],
+                       "is_signing", "lz4_ramdisks"],
       extra_option_handler=option_handler)
 
   if len(args) != 1:
