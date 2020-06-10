@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "696af656_29ef0b95",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-10T20:24:05Z",
+      "side": 1,
+      "message": "Doesn\u0027t this configuration need to be in the info dict instead of the command line argument? (So that it persists if we need to regenerate these images later)",
+      "range": {
+        "startLine": 1249,
+        "startChar": 56,
+        "endLine": 1249,
+        "endChar": 91
+      },
+      "revId": "ba4f8d7fe218f619378171329ec858177dec53ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
