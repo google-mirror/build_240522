@@ -16,6 +16,24 @@
       "revId": "6afeab82dabea07d0678f3cefd1c5f83a77f3212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd30edf7_8789c03b",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-06-10T12:22:54Z",
+      "side": 1,
+      "message": "Sure, this sounds indeed better.\n\nI\u0027ve moved this part to another CL (https://android-review.googlesource.com/c/platform/build/+/1328973/) and uploaded a couple more CLs (in the same topic) to rename some more occurrences.\n\nI\u0027ll make changes to the build configuration to use `NATIVE_COVERAGE_PATHS` and `NATIVE_COVERAGE_EXCLUDE_PATHS`.",
+      "parentUuid": "d77675d3_66a27d84",
+      "revId": "6afeab82dabea07d0678f3cefd1c5f83a77f3212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
