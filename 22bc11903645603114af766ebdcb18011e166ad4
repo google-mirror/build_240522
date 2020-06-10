@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "19e22b8e_154166ef",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-06-10T13:55:24Z",
+      "side": 1,
+      "message": "Yes, but I intentionally inverted it to make the logic below easier to follow.",
+      "parentUuid": "ab779b8f_12eb286d",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 13
+      },
+      "revId": "22bc11903645603114af766ebdcb18011e166ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d7cbb8f_3a34ee83",
         "filename": "core/dex_preopt_config.mk",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "22bc11903645603114af766ebdcb18011e166ad4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cdac1f2_2e9d5cb4",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-06-10T13:55:24Z",
+      "side": 1,
+      "message": "TARGET_BUILD_APPS isn\u0027t a boolean, it\u0027s a list of the apps. It\u0027s disabled when the list is empty.\n\nAlso, the convention in mk files seems to be to represent false with \"\", which probably originates from GNU make itself: https://www.gnu.org/software/make/manual/html_node/Conditional-Functions.html#Conditional-Functions E.g. invert_bool below treats \"false\" as true (as I learned from a bug I had with it).",
+      "parentUuid": "5d7cbb8f_3a34ee83",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "22bc11903645603114af766ebdcb18011e166ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
