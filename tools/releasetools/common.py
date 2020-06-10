@@ -271,6 +271,93 @@ def CloseInheritedPipes():
       pass
 
 
+def ReadFromInputFile(input_file, fn):
+  """Reads the contents of fn from input zipfile or directory."""
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn).decode()
+  else:
+    path = os.path.join(input_file, *fn.split("/"))
+    try:
+      with open(path) as f:
+        return f.read()
+    except IOError as e:
+      if e.errno == errno.ENOENT:
+        raise KeyError(fn)
+
+
+def LoadBuildProp(partition, input_file, placeholder_values=None):
+  """Returns a dict of build props for a given partition."""
+
+  props_allow_override = [props.format(partition) for props in [
+      'ro.product.{}.brand', 'ro.product.{}.name', 'ro.product.{}.device']]
+
+  def ImportParser(line):
+    """Parses the build prop in a given import statement."""
+
+    tokens = line.split()
+    if len(tokens) != 2 or tokens[0] != 'import':
+      raise ValueError('Unrecognized import statement {}'.format(line))
+    import_path = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(partition), import_path):
+      raise ValueError('Unrecognized import path {}'.format(line))
+
+    # We only recognize a subset of import statement that the init process
+    # supports. And we can loose the restriction based on how the dynamic
+    # fingerprint is used in practice. The placeholder format should be
+    # ${placeholder}, and its value should be provided by the caller through
+    # the placeholder_values.
+    if placeholder_values:
+      for prop, value in placeholder_values.items():
+        prop_place_holder = '${{{}}}'.format(prop)
+        if prop_place_holder in import_path:
+          import_path = import_path.replace(prop_place_holder, value)
+    if '$' in import_path:
+      logger.info('Unresolved place holder in import path %s', import_path)
+      return {}
+
+    import_path = import_path.replace('/{}'.format(partition),
+                                      partition.upper())
+    logger.info('Parsing build props override from %s', import_path)
+
+    lines = ReadFromInputFile(input_file, import_path).split('\n')
+    d = LoadDictionaryFromLines(lines)
+    return {key: val for key, val in d.items()
+            if key in props_allow_override}
+
+  # Read the content of the property file from default locations.
+  data = ''
+  for prop_file in ['{}/etc/build.prop'.format(partition.upper()),
+                    '{}/build.prop'.format(partition.upper())]:
+    try:
+      data = ReadFromInputFile(input_file, prop_file)
+      break
+    except KeyError:
+      logger.warning('Failed to read %s', prop_file)
+
+  # Parse the property file.
+  build_props = {}
+  prop_overrides = set()
+  for line in data.split('\n'):
+    line = line.strip()
+    if not line or line.startswith("#"):
+      continue
+    if line.startswith("import"):
+      overrides = ImportParser(line)
+      duplicates = prop_overrides.intersection(overrides.keys())
+      if duplicates:
+        raise ValueError('prop {} is overridden multiple times'.format(
+            ','.join(duplicates)))
+      prop_overrides = prop_overrides.union(overrides.keys())
+      build_props.update(overrides)
+    elif "=" in line:
+      name, value = line.split("=", 1)
+      if name in prop_overrides:
+        raise ValueError('prop {} is set again after overridden by import '
+                         'statement'.format(name))
+      build_props[name] = value
+  return build_props
+
+
 def LoadInfoDict(input_file, repacking=False):
   """Loads the key/value pairs from the given input target_files.
 
@@ -308,16 +395,7 @@ def LoadInfoDict(input_file, repacking=False):
         "input_file must be a path str when doing repacking"
 
   def read_helper(fn):
-    if isinstance(input_file, zipfile.ZipFile):
-      return input_file.read(fn)
-    else:
-      path = os.path.join(input_file, *fn.split("/"))
-      try:
-        with open(path) as f:
-          return f.read()
-      except IOError as e:
-        if e.errno == errno.ENOENT:
-          raise KeyError(fn)
+    return ReadFromInputFile(input_file, fn)
 
   try:
     d = LoadDictionaryFromLines(read_helper("META/misc_info.txt").split("\n"))
@@ -416,14 +494,9 @@ def LoadInfoDict(input_file, repacking=False):
   # system and vendor.
   for partition in PARTITIONS_WITH_CARE_MAP:
     partition_prop = "{}.build.prop".format(partition)
-    d[partition_prop] = LoadBuildProp(
-        read_helper, "{}/build.prop".format(partition.upper()))
-    # Some partition might use /<partition>/etc/build.prop as the new path.
-    # TODO: try new path first when majority of them switch to the new path.
-    if not d[partition_prop]:
-      d[partition_prop] = LoadBuildProp(
-          read_helper, "{}/etc/build.prop".format(partition.upper()))
+    d[partition_prop] = LoadBuildProp(partition, input_file)
   d["build.prop"] = d["system.build.prop"]
+  d["input_file"] = input_file
 
   # Set up the salt (based on fingerprint or thumbprint) that will be used when
   # adding AVB footer.
@@ -439,15 +512,6 @@ def LoadInfoDict(input_file, repacking=False):
       d["avb_salt"] = sha256(fp).hexdigest()
 
   return d
-
-
-def LoadBuildProp(read_helper, prop_file):
-  try:
-    data = read_helper(prop_file)
-  except KeyError:
-    logger.warning("Failed to read %s", prop_file)
-    data = ""
-  return LoadDictionaryFromLines(data.split("\n"))
 
 
 def LoadDictionaryFromLines(lines):
