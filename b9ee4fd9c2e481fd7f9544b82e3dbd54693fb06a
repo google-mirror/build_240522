@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3ee8a32_995fa064",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2020-06-11T00:10:11Z",
+      "side": 1,
+      "message": "nit: Can you attach this todo to the bug, ex: TODO(b/158212027), so we don\u0027t lose track of it?",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 6
+      },
+      "revId": "b9ee4fd9c2e481fd7f9544b82e3dbd54693fb06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
