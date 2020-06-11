@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62d5eb43_2b2d060a",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2020-06-11T19:18:16Z",
+      "side": 1,
+      "message": "It looks like most of the other cases have allow_list, should we be consistent?",
+      "range": {
+        "startLine": 1193,
+        "startChar": 6,
+        "endLine": 1193,
+        "endChar": 16
+      },
+      "revId": "2832b32d0d308ad31031dc072efd6638a84c6000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
