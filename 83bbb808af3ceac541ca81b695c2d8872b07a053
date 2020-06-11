@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6129451d_b55acf53",
+        "filename": "core/app_certificate_validate.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-11T19:56:09Z",
+      "side": 1,
+      "message": "Usually I\u0027ve been putting these near the top of config.mk, this is too late",
+      "revId": "83bbb808af3ceac541ca81b695c2d8872b07a053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
