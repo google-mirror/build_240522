@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b02bed98_3d13f555",
+        "filename": "target/product/aosp_arm.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2020-06-12T08:53:51Z",
+      "side": 0,
+      "message": "aosp_product.mk should not be removed.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "c73db784b96a180a6a3f509abdfc003a4ac9edf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
