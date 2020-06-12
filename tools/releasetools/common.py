@@ -1305,7 +1305,7 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
   else:
     cmd.extend(["--output", img.name])
 
-  if partition_name == "recovery":
+  if partition_name == "recovery" or info_dict.get("recovery_as_boot") == "true":
     if info_dict.get("include_recovery_dtbo") == "true":
       fn = os.path.join(sourcedir, "recovery_dtbo")
       cmd.extend(["--recovery_dtbo", fn])
