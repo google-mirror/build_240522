@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d8c0bea8_ef7b5288",
+        "filename": "core/binary.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-06-14T17:21:22Z",
+      "side": 1,
+      "message": "Put the bug on these TODOs too.",
+      "revId": "b9ee4fd9c2e481fd7f9544b82e3dbd54693fb06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3ee8a32_995fa064",
         "filename": "core/soong_config.mk",
         "patchSetId": 4
