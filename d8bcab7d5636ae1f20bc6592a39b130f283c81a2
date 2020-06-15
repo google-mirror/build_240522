@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb5e1e1e_0de1cf21",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-06-15T18:10:57Z",
+      "side": 1,
+      "message": "You can use:\n\n  $(.KATI_deprecated_var $(COVERAGE_PATHS),Please use NATIVE_COVERAGE_PATHS instead.)\n\nIt should also go in the list of other deprecated/obsolete variables in config.mk.",
+      "revId": "d8bcab7d5636ae1f20bc6592a39b130f283c81a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
