@@ -52,7 +52,7 @@ ifneq ($(filter-out false,$(USE_RBE)),)
     d8_exec_strategy := "local"
   endif
 
-  platform := "container-image=docker://gcr.io/androidbuild-re-dockerimage/android-build-remoteexec-image@sha256:582efb38f0c229ea39952fff9e132ccbe183e14869b39888010dacf56b360d62"
+  platform := $(FLAG_platform)
   cxx_platform := $(platform)",Pool=default"
   java_r8_d8_platform := $(platform)",Pool=java16"
 
