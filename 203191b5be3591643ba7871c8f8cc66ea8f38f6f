@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11c01976_28ccbd0a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-06-15T23:18:57Z",
+      "side": 1,
+      "message": "At first I thought \"building_vendor_image\" \u003d\u003d \"true\" should place in the outer layer of logic. But then I realize it doesn\u0027t make a difference, as the current logic does nothing if IMAGE/vendor.img exists.\n\nprobably worth throw a warning \"building_vendor_image\" !\u003d \"true\" and IMAGE/vendor.img exists",
+      "range": {
+        "startLine": 744,
+        "startChar": 15,
+        "endLine": 744,
+        "endChar": 77
+      },
+      "revId": "203191b5be3591643ba7871c8f8cc66ea8f38f6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
