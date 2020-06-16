@@ -1,0 +1,376 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445243",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1aadc843_4d5ff363",
+        "filename": "tools/image_tools/asn1crypto/_elliptic_curve.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 52
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445243",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "824ea27d_9960f8e3",
+        "filename": "tools/image_tools/asn1crypto/_int.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445243",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ebca4b4f_e0be06e6",
+        "filename": "tools/image_tools/asn1crypto/_ordereddict.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "f0342c0d_dbac34f0",
+          "description": "Change to \"tools/image_tools/asn1crypto/core.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/asn1crypto/core.py",
+              "range": {
+                "startLine": 249,
+                "startChar": 37,
+                "endLine": 249,
+                "endChar": 48
+              },
+              "replacement": "constructing"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "78d2978f_3b508b4e",
+        "filename": "tools/image_tools/asn1crypto/core.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"contructing\" -- should it be \"constructing\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 249,
+        "startChar": 37,
+        "endLine": 249,
+        "endChar": 48
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "61854005_b5dd3d12",
+          "description": "Change to \"tools/image_tools/asn1crypto/core.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/asn1crypto/core.py",
+              "range": {
+                "startLine": 1048,
+                "startChar": 69,
+                "endLine": 1048,
+                "endChar": 76
+              },
+              "replacement": "the"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "091987e2_55ed6a3d",
+        "filename": "tools/image_tools/asn1crypto/core.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"the the\" -- should it be \"the\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 1048,
+        "startChar": 69,
+        "endLine": 1048,
+        "endChar": 76
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "a89ebce6_461a78c2",
+          "description": "Change to \"tools/image_tools/asn1crypto/core.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/asn1crypto/core.py",
+              "range": {
+                "startLine": 3502,
+                "startChar": 8,
+                "endLine": 3502,
+                "endChar": 17
+              },
+              "replacement": "Constructs"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "fdb9d2a3_26c29893",
+        "filename": "tools/image_tools/asn1crypto/core.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3502,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"Contructs\" -- should it be \"Constructs\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 3502,
+        "startChar": 8,
+        "endLine": 3502,
+        "endChar": 17
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "6998142b_d32bed3f",
+          "description": "Change to \"tools/image_tools/asn1crypto/core.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/asn1crypto/core.py",
+              "range": {
+                "startLine": 3511,
+                "startChar": 43,
+                "endLine": 3511,
+                "endChar": 47
+              },
+              "replacement": "value"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a1423ed4_6ef117ad",
+        "filename": "tools/image_tools/asn1crypto/core.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3511,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"vaue\" -- should it be \"value\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 3511,
+        "startChar": 43,
+        "endLine": 3511,
+        "endChar": 47
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "a8a38b77_9db2f808",
+          "description": "Change to \"tools/image_tools/asn1crypto/core.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/asn1crypto/core.py",
+              "range": {
+                "startLine": 4919,
+                "startChar": 30,
+                "endLine": 4919,
+                "endChar": 37
+              },
+              "replacement": "the"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "38b27e71_ab6f99c4",
+        "filename": "tools/image_tools/asn1crypto/core.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"the the\" -- should it be \"the\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 4919,
+        "startChar": 30,
+        "endLine": 4919,
+        "endChar": 37
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445243",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "02cb15ec_d25c1f42",
+        "filename": "tools/image_tools/asn1crypto/keys.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Unrecognized license :\npatent\n",
+      "range": {
+        "startLine": 201,
+        "startChar": 16,
+        "endLine": 201,
+        "endChar": 22
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003445248",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1292837?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "926584bf_9101183c",
+          "description": "Change to \"tools/image_tools/resign_apk.py\"",
+          "replacements": [
+            {
+              "path": "tools/image_tools/resign_apk.py",
+              "range": {
+                "startLine": 75,
+                "startChar": 13,
+                "endLine": 75,
+                "endChar": 20
+              },
+              "replacement": "variant"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "7ff52724_81aa149e",
+        "filename": "tools/image_tools/resign_apk.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-16T04:04:58Z",
+      "side": 1,
+      "message": "Common typo found: \"varient\" -- should it be \"variant\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 75,
+        "startChar": 13,
+        "endLine": 75,
+        "endChar": 20
+      },
+      "revId": "1dabd49228111c19ae22a8b3f7f06fc93d2a000b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
