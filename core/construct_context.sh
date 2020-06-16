@@ -27,6 +27,9 @@ if [ -z "${target_sdk_version}" ]; then
     exit 2
 fi
 
+source build/make/core/sdk_version_to_number.sh
+target_sdk_version=$(sdk_version_to_number "${target_sdk_version}")
+
 # The hidl.manager shared library has a dependency on hidl.base. We'll manually
 # add that information to the class loader context if we see those libraries.
 hidl_manager="android.hidl.manager-V1.0-java"
