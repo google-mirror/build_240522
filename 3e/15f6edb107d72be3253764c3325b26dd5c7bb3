@@ -1,0 +1,13 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: David Ng <dave@codeaurora.org>
+Code-Review+2: Tianjie Xu <xunchang@google.com>
+Code-Review+1: Dan Willemsen <dwillemsen@google.com>
+Qualcomm-Review+1: David Ng <dave@codeaurora.org>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Autosubmit+1: Steve Muckle <smuckle@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 16 Jun 2020 00:05:25 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1328118
+Project: platform/build
+Branch: refs/heads/master
