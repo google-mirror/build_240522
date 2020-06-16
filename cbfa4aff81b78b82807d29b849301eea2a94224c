@@ -16,6 +16,24 @@
       "revId": "cbfa4aff81b78b82807d29b849301eea2a94224c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b63cd0b_8e93cdf4",
+        "filename": "core/sdk_version_to_number.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-06-16T16:34:18Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/content/pm/PackageParser.java;l\u003d2655-2710;drc\u003dmaster is the canonical conversion in PackageManager.",
+      "parentUuid": "79c91aa8_49f32228",
+      "revId": "cbfa4aff81b78b82807d29b849301eea2a94224c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
