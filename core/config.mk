@@ -284,6 +284,9 @@ else
 JAVA_TMPDIR_ARG :=
 endif
 
+# Initialize ALL_JACOCO_REPORT_CLASSES_JARS so that it isn't recursive.
+ALL_JACOCO_REPORT_CLASSES_JARS :=
+
 # ###############################################################
 # Include sub-configuration files
 # ###############################################################

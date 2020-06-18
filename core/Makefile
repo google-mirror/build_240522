@@ -4591,10 +4591,11 @@ ifeq (true,$(EMMA_INSTRUMENT))
 # Any dependencies are set up later in build/make/core/main.mk.
 
 JACOCO_REPORT_CLASSES_ALL := $(PRODUCT_OUT)/jacoco-report-classes-all.jar
-$(JACOCO_REPORT_CLASSES_ALL) :
+$(JACOCO_REPORT_CLASSES_ALL) : $(sort $(ALL_JACOCO_REPORT_CLASSES_JARS))
 	@echo "Collecting uninstrumented classes"
-	find $(TARGET_COMMON_OUT_ROOT) $(HOST_COMMON_OUT_ROOT) -name "jacoco-report-classes.jar" 2>/dev/null | sort > $@.list
+	for i in $^; do echo $$i; done > $@.list
 	$(SOONG_ZIP) -o $@ -L 0 -C $(OUT_DIR) -P out -l $@.list
+	rm $@.list
 
 endif # EMMA_INSTRUMENT=true
 

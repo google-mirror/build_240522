@@ -1584,7 +1584,6 @@ ifneq ($(TARGET_BUILD_APPS),)
   $(call dist-for-goals,apps_only, $(apps_only_dist_built_files))
 
   ifeq ($(EMMA_INSTRUMENT),true)
-    $(JACOCO_REPORT_CLASSES_ALL) : $(apps_only_installed_files)
     $(call dist-for-goals,apps_only, $(JACOCO_REPORT_CLASSES_ALL))
   endif
 
@@ -1686,7 +1685,6 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
   endif
 
   ifeq ($(EMMA_INSTRUMENT),true)
-    $(JACOCO_REPORT_CLASSES_ALL) : $(modules_to_install)
     $(call dist-for-goals, dist_files, $(JACOCO_REPORT_CLASSES_ALL))
   endif
 

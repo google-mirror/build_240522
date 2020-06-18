@@ -49,6 +49,7 @@ ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
     $(intermediates.COMMON)/jacoco-report-classes.jar))
   $(call add-dependency,$(common_javalib.jar),\
     $(intermediates.COMMON)/jacoco-report-classes.jar)
+  ALL_JACOCO_REPORT_CLASSES_JARS += $(intermediates.COMMON)/jacoco-report-classes.jar
 endif
 
 ifdef LOCAL_SOONG_PROGUARD_DICT
