@@ -202,6 +202,10 @@ A/B OTA specific options
       ones. Should only be used if caller knows it's safe to do so (e.g. all the
       postinstall work is to dexopt apps and a data wipe will happen immediately
       after). Only meaningful when generating A/B OTAs.
+
+  --partial "<PARTITION> [<PARTITION>[...]]"
+      Generate partial updates, overriding ab_partitions list with the given
+      list.
 """
 
 from __future__ import print_function
@@ -257,6 +261,7 @@ OPTIONS.extracted_input = None
 OPTIONS.skip_postinstall = False
 OPTIONS.skip_compatibility_check = False
 OPTIONS.disable_fec_computation = False
+OPTIONS.partial = []
 
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
@@ -268,6 +273,8 @@ TARGET_DIFFING_UNZIP_PATTERN = ['BOOT', 'RECOVERY', 'SYSTEM/*', 'VENDOR/*',
                                 'PRODUCT/*', 'SYSTEM_EXT/*', 'ODM/*',
                                 'VENDOR_DLKM/*', 'ODM_DLKM/*']
 RETROFIT_DAP_UNZIP_PATTERN = ['OTA/super_*.img', AB_PARTITIONS]
+BOOT_IMAGE_NAME = "IMAGES/boot.img"
+PARTIAL_UPDATE_UNZIP_PATTERN = [BOOT_IMAGE_NAME, "META/*"]
 
 # Images to be excluded from secondary payload. We essentially only keep
 # 'system_other' and bootloader partitions.
@@ -729,6 +736,74 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
   return target_file
 
 
+def GetTargetFilesZipForPartialUpdates(input_file, ab_partitions, skip_postinstall):
+
+  def GetInfoForPartialImages(info_file):
+    output_list = []
+    with open(info_file) as f:
+      lines = f.read().splitlines()
+
+    # The suffix in partition_list variables that follows the name of the
+    # partition group.
+    LIST_SUFFIX = 'partition_list'
+    for line in lines:
+      if line.startswith('#') or '=' not in line:
+        output_list.append(line)
+        continue
+      key, value = line.strip().split('=', 1)
+      if key == 'dynamic_partition_list' or key.endswith(LIST_SUFFIX):
+        partitions = value.split()
+        # TODO Partitions in the same group must be all updated or all omitted
+        partitions = [partition for partition in partitions if partition
+                      in ab_partitions]
+        output_list.append('{}={}'.format(key, ' '.join(partitions)))
+      else:
+        output_list.append(line)
+    return '\n'.join(output_list)
+
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  target_zip = zipfile.ZipFile(target_file, 'w', allowZip64=True)
+
+  with zipfile.ZipFile(input_file, 'r') as input_zip:
+    infolist = input_zip.infolist()
+
+  input_tmp = common.UnzipTemp(input_file, PARTIAL_UPDATE_UNZIP_PATTERN)
+  for info in infolist:
+    unzipped_file = os.path.join(input_tmp, *info.filename.split('/'))
+
+    if info.filename == BOOT_IMAGE_NAME:
+      common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
+
+    elif info.filename.startswith("META/"):
+      # Disable postinstall if necessary
+      if skip_postinstall and info.filename == POSTINSTALL_CONFIG:
+        pass
+
+      # Filter partitions from ab_partitions.txt
+      elif info.filename == AB_PARTITIONS:
+        with open(unzipped_file) as f:
+          partition_list = f.read().splitlines()
+        logger.info("Original AB partition list is %s", partition_list)
+        logger.info("Filtering against %s", ab_partitions)
+        partition_list = [partition for partition in partition_list if partition
+                          and partition in ab_partitions]
+        logger.info("Generating partial updates for %s", partition_list)
+        common.ZipWriteStr(target_zip, info.filename, '\n'.join(partition_list))
+      # Remove the unnecessary partitions from the dynamic partitions list.
+      elif (info.filename == 'META/misc_info.txt' or
+            info.filename == DYNAMIC_PARTITION_INFO):
+        modified_info = GetInfoForPartialImages(unzipped_file)
+        common.ZipWriteStr(target_zip, info.filename, modified_info)
+
+      # Write other META/* files as is
+      else:
+        common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
+
+  common.ZipClose(target_zip)
+
+  return target_file
+
+
 def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
                                                   super_block_devices,
                                                   dynamic_partition_list):
@@ -837,10 +912,15 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     target_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
     source_info = None
 
+  additional_args = []
+
   if OPTIONS.retrofit_dynamic_partitions:
     target_file = GetTargetFilesZipForRetrofitDynamicPartitions(
         target_file, target_info.get("super_block_devices").strip().split(),
         target_info.get("dynamic_partition_list").strip().split())
+  elif OPTIONS.partial:
+    target_file = GetTargetFilesZipForPartialUpdates(target_file, OPTIONS.partial, OPTIONS.skip_postinstall)
+    additional_args += ["--is_partial_update", "true"]
   elif OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
   # Target_file may have been modified, reparse ab_partitions
@@ -862,7 +942,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     partition_timestamps = [
         part.partition_name + ":" + part.version
         for part in metadata.postcondition.partition_state]
-  additional_args = ["--max_timestamp", max_timestamp]
+  additional_args += ["--max_timestamp", max_timestamp]
   if partition_timestamps:
     additional_args.extend(
         ["--partition_timestamps", ",".join(
@@ -1006,6 +1086,8 @@ def main(argv):
       OPTIONS.force_non_ab = True
     elif o == "--boot_variable_file":
       OPTIONS.boot_variable_file = a
+    elif o == "--partial":
+      OPTIONS.partial = shlex.split(a)
     else:
       return False
     return True
@@ -1044,6 +1126,7 @@ def main(argv):
                                  "disable_fec_computation",
                                  "force_non_ab",
                                  "boot_variable_file=",
+                                 "partial=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
