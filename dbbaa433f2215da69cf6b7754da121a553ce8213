@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51a78325_8998212a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-06-19T20:49:47Z",
+      "side": 1,
+      "message": "We should expose $(LLVM_STRIP) that could be used here (since linux-x86 won\u0027t be correct on Mac builders 😊)",
+      "range": {
+        "startLine": 209,
+        "startChar": 7,
+        "endLine": 209,
+        "endChar": 80
+      },
+      "revId": "dbbaa433f2215da69cf6b7754da121a553ce8213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
