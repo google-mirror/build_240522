@@ -5549,12 +5549,20 @@ $(COVERAGE_ZIP): $(SOONG_ZIP)
 # Export the LLVM profile data tool and dependencies for Clang coverage processing
 #
 ifeq (true,$(CLANG_COVERAGE))
+  PROFDATA_ZIP := $(PRODUCT_OUT)/llvm-profdata.zip
+ifeq ($(HOST_ARCH), x86_64)
   LLVM_PROFDATA := $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION)/bin/llvm-profdata
   LIBCXX := $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION)/lib64/libc++.so.1
-  PROFDATA_ZIP := $(PRODUCT_OUT)/llvm-profdata.zip
   $(PROFDATA_ZIP): $(SOONG_ZIP)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION) -f $(LLVM_PROFDATA) -f $(LIBCXX)
-
+else
+ifeq ($(HOST_ARCH), arm64)
+  LLVM_PROFDATA := $(LLVM_PREBUILTS_BASE)/linux-arm/$(LLVM_PREBUILTS_VERSION)/bin/llvm-profdata
+  LIBCXX := $(LLVM_PREBUILTS_BASE)/linux-arm/$(LLVM_PREBUILTS_VERSION)/lib64/libc++.so.1
+  $(PROFDATA_ZIP): $(SOONG_ZIP)
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(LLVM_PREBUILTS_BASE)/linux-arm/$(LLVM_PREBUILTS_VERSION) -f $(LLVM_PROFDATA) -f $(LIBCXX)
+endif
+endif
   $(call dist-for-goals,droidcore-unbundled,$(PROFDATA_ZIP))
 endif
 

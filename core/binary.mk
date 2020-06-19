@@ -1695,8 +1695,13 @@ ifeq ($(strip $(my_cc)),)
   my_cc := $(my_cc_wrapper) $(CLANG)
 endif
 
-SYNTAX_TOOLS_PREFIX := \
-    $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/libexec
+ifeq ($(HOST_ARCH), x86_64)
+  SYNTAX_TOOLS_PREFIX := $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/libexec
+else
+ifeq ($(HOST_ARCH), arm64)
+  SYNTAX_TOOLS_PREFIX := $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-arm/$(LLVM_PREBUILTS_VERSION)/libexec
+endif
+endif
 
 ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
   my_cc := CCC_CC=$(CLANG) CLANG=$(CLANG) \
