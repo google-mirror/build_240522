@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003552582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1344820?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "ddd9754f_0396acd3",
+          "description": "Change to \"tools/post_process_props.py\"",
+          "replacements": [
+            {
+              "path": "tools/post_process_props.py",
+              "range": {
+                "startLine": 99,
+                "startChar": 22,
+                "endLine": 99,
+                "endChar": 29
+              },
+              "replacement": "optional"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e78d6cca_807d6cde",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T08:52:19Z",
+      "side": 1,
+      "message": "Common typo found: \"optinal\" -- should it be \"optional\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 99,
+        "startChar": 22,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "78c2b850d1b3d07aa26e57f0999e96e0e542a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003552582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1344820?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "98f61893_5c863cf6",
+          "description": "Change to \"tools/post_process_props.py\"",
+          "replacements": [
+            {
+              "path": "tools/post_process_props.py",
+              "range": {
+                "startLine": 100,
+                "startChar": 25,
+                "endLine": 100,
+                "endChar": 32
+              },
+              "replacement": "optional"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "15832e8d_623f990b",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T08:52:19Z",
+      "side": 1,
+      "message": "Common typo found: \"optinal\" -- should it be \"optional\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 100,
+        "startChar": 25,
+        "endLine": 100,
+        "endChar": 32
+      },
+      "revId": "78c2b850d1b3d07aa26e57f0999e96e0e542a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003552582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1344820?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "8237d753_e03921e2",
+          "description": "Change to \"tools/post_process_props.py\"",
+          "replacements": [
+            {
+              "path": "tools/post_process_props.py",
+              "range": {
+                "startLine": 173,
+                "startChar": 29,
+                "endLine": 173,
+                "endChar": 36
+              },
+              "replacement": "optional"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "0645805a_6d901c66",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T08:52:19Z",
+      "side": 1,
+      "message": "Common typo found: \"optinal\" -- should it be \"optional\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 173,
+        "startChar": 29,
+        "endLine": 173,
+        "endChar": 36
+      },
+      "revId": "78c2b850d1b3d07aa26e57f0999e96e0e542a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003552582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1344820?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6e1eb1d5_8344512c",
+          "description": "Change to \"tools/post_process_props.py\"",
+          "replacements": [
+            {
+              "path": "tools/post_process_props.py",
+              "range": {
+                "startLine": 175,
+                "startChar": 55,
+                "endLine": 175,
+                "endChar": 64
+              },
+              "replacement": "overridden"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "cc3dfe0b_a3e8b8ae",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T08:52:19Z",
+      "side": 1,
+      "message": "Common typo found: \"overriden\" -- should it be \"overridden\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 175,
+        "startChar": 55,
+        "endLine": 175,
+        "endChar": 64
+      },
+      "revId": "78c2b850d1b3d07aa26e57f0999e96e0e542a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
