@@ -68,6 +68,7 @@ PRODUCT_PACKAGES += \
     debuggerd\
     device_config \
     dmctl \
+    dmuserd \
     dnsmasq \
     DownloadProvider \
     dpm \
