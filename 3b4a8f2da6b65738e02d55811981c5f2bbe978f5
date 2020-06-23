@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "101004e7_09a21d35",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-23T02:00:38Z",
+      "side": 1,
+      "message": "I am not adding any build props (CL:1312395 is abandoned), so I don\u0027t know if line makes sense at all.",
+      "range": {
+        "startLine": 1498,
+        "startChar": 0,
+        "endLine": 1498,
+        "endChar": 63
+      },
+      "revId": "3b4a8f2da6b65738e02d55811981c5f2bbe978f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
