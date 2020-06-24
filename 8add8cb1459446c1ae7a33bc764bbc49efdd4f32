@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2945324a_f22efe87",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-06-24T05:25:59Z",
+      "side": 0,
+      "message": "nit: probably keep the cmt",
+      "range": {
+        "startLine": 973,
+        "startChar": 0,
+        "endLine": 973,
+        "endChar": 26
+      },
+      "revId": "8add8cb1459446c1ae7a33bc764bbc49efdd4f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
