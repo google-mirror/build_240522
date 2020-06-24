@@ -34,4 +34,4 @@ PRODUCT_PACKAGES += \
     ld.config.vndk_lite.txt
 
 # Legacy GSI relax the compatible property checking
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := false
+PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
