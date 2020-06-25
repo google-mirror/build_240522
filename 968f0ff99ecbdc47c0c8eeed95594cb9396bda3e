@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8969dc02_547a782c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-06-25T15:23:13Z",
+      "side": 1,
+      "message": "should this be BOARD_VENDOR_KERNEL_MODULES",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "968f0ff99ecbdc47c0c8eeed95594cb9396bda3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
