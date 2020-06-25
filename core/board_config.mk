@@ -589,7 +589,9 @@ endif
 # Check BOARD_VNDK_VERSION
 define check_vndk_version
   $(eval vndk_path := prebuilts/vndk/v$(1)) \
-  $(if $(wildcard $(vndk_path)/*/Android.bp),,$(error VNDK version $(1) not found))
+  $(if $(wildcard $(vndk_path)/*/Android.bp),,$(error VNDK version $(1) not found)) \
+  $(if $(filter-out $(BOARD_VNDK_VERSION),$(PLATFORM_VNDK_VERSION)),,\
+    $(error BOARD_VNDK_VERSION is equal to PLATFORM_VNDK_VERSION; use BOARD_VNDK_VERSION := current))
 endef
 
 ifdef BOARD_VNDK_VERSION
