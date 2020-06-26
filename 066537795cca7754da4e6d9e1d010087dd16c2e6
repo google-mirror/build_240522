@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "743fd9dd_f8222020",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T01:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbb3e38_857b13be",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 389,
+        "endChar": 54
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccec4318_2d7fec38",
         "filename": "core/sysprop.mk",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "231468fe_5bc8e7a9",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T01:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccec4318_2d7fec38",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 34
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c29f17ca_798b038e",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T01:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "508a1cda_6f25641b",
+      "range": {
+        "startLine": 397,
+        "startChar": 69,
+        "endLine": 397,
+        "endChar": 73
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41e58005_70db1abc",
         "filename": "core/sysprop.mk",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "207f15d8_f6ef8748",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T01:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41e58005_70db1abc",
+      "range": {
+        "startLine": 398,
+        "startChar": 14,
+        "endLine": 398,
+        "endChar": 30
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
