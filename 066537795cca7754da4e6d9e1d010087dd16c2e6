@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "e04db0cf_93f582cc",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T02:23:49Z",
+      "side": 1,
+      "message": "If I do this, wouldn\u0027t I need to symlink the build.prop here as well?\n\nhttps://android-review.googlesource.com/c/platform/system/core/+/1312223/2/rootdir/Android.mk\n\nTom, any suggestions?",
+      "parentUuid": "c29f17ca_798b038e",
+      "range": {
+        "startLine": 397,
+        "startChar": 69,
+        "endLine": 397,
+        "endChar": 73
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e58005_70db1abc",
         "filename": "core/sysprop.mk",
         "patchSetId": 2
