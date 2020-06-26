@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "e191b307_302f4878",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-06-26T02:26:33Z",
+      "side": 1,
+      "message": "Reference: CL:964377",
+      "parentUuid": "e04db0cf_93f582cc",
+      "range": {
+        "startLine": 397,
+        "startChar": 69,
+        "endLine": 397,
+        "endChar": 73
+      },
+      "revId": "066537795cca7754da4e6d9e1d010087dd16c2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e58005_70db1abc",
         "filename": "core/sysprop.mk",
         "patchSetId": 2
