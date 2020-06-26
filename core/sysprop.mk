@@ -381,6 +381,27 @@ $(eval $(call build-properties,\
     $(_prop_vars_),\
     $(empty)))
 
+# ----------------------------------------------------------------
+# vendor_dlkm/build.prop
+#
+_prop_files_ := $(if $(TARGET_VENDOR_DLKM_PROP),\
+    $(TARGET_VENDOR_DLKM_PROP),\
+    $(wildcard $(TARGET_DEVICE_DIR)/vendor_dlkm.prop))
+
+# Order matters here. When there are duplicates, the last one wins.
+# TODO(b/117892318): don't allow duplicates so that the ordering doesn't matter
+_prop_vars_ := \
+    ADDITIONAL_VENDOR_DLKM_PROPERTIES \
+    PRODUCT_VENDOR_DLKM_PROPERTIES
+
+INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET := $(TARGET_OUT_VENDOR_DLKM)/etc/build.prop
+$(eval $(call build-properties,\
+    vendor_dlkm,\
+    $(INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET),\
+    $(_prop_files),\
+    $(_prop_vars_),\
+    $(empty)))
+
 # -----------------------------------------------------------------
 # system_ext/build.prop
 #
