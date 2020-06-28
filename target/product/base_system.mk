@@ -65,6 +65,7 @@ PRODUCT_PACKAGES += \
     com.android.tzdata \
     ContactsProvider \
     content \
+    connectivity-service \
     debuggerd\
     device_config \
     dmctl \
