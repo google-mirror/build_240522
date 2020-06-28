@@ -52,7 +52,8 @@ endif
 PRODUCT_SYSTEM_SERVER_JARS := \
     com.android.location.provider \
     services \
-    ethernet-service
+    ethernet-service \
+    service-connectivity
 
 # system server jars which are updated via apex modules.
 # The values should be of the format <apex name>:<jar name>

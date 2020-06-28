@@ -116,6 +116,7 @@ PRODUCT_PACKAGES += \
     iptables \
     ip-up-vpn \
     javax.obex \
+    service-connectivity \
     service-jobscheduler \
     keystore \
     credstore \
