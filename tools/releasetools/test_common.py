@@ -2133,3 +2133,31 @@ class PartitionBuildPropsTest(test_utils.ReleaseToolsTestCase):
       }
       self.assertRaises(ValueError, common.PartitionBuildProps.FromInputFile,
                         input_zip, 'odm', placeholder_values)
+
+  def test_checkDuplicateProps_noDuplicate(self):
+    build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+    ]
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+    })
+
+    common.PartitionBuildProps.CheckBuildPropDuplicity(input_file)
+
+  def test_checkDuplicateProps_withDuplicate(self):
+    build_prop = [
+        'ro.odm.build.date.utc=1578430045',
+        'ro.odm.build.date.utc=1578430049',
+        'ro.odm.build.fingerprint='
+        'google/coral/coral:10/RP1A.200325.001/6337676:user/dev-keys',
+        'ro.product.odm.device=coral',
+    ]
+    input_file = self._BuildZipFile({
+        'ODM/etc/build.prop': '\n'.join(build_prop),
+    })
+
+    self.assertRaises(ValueError, common.PartitionBuildProps.CheckBuildPropDuplicity,
+                        input_file)

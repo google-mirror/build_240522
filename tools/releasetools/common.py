@@ -703,7 +703,7 @@ def LoadInfoDict(input_file, repacking=False):
     for partition in PARTITIONS_WITH_CARE_MAP:
       fingerprint = build_info.GetPartitionFingerprint(partition)
       if fingerprint:
-        d["avb_{}_salt".format(partition)] = sha256(fingerprint).hexdigest()
+        d["avb_{}_salt".format(partition)] = sha256(fingerprint.encode()).hexdigest()
 
   return d
 
@@ -767,6 +767,48 @@ class PartitionBuildProps(object):
     props = PartitionBuildProps("unknown", name)
     props.build_props = build_props.copy()
     return props
+
+  @staticmethod
+  def CheckDataDuplicity(lines):
+    build_prop = {}
+    for line in lines:
+      if line.startswith("import") or line.startswith("#"):
+        continue
+      key, value = line.split("=", 1)
+      if key in build_prop:
+        return key
+      build_prop[key] = value
+
+  @staticmethod
+  def CheckBuildPropDuplicity(input_tmp):
+    """Check all buld.prop files inside directory input_tmp, raise error
+    if they contain duplicates"""
+
+    if zipfile.is_zipfile(input_tmp):
+      with zipfile.ZipFile(input_tmp) as myzip:
+        for name in myzip.namelist():
+          if name.endswith('build.prop'):
+            logger.info("Checking {}".format(name))
+            dupKey = PartitionBuildProps.CheckDataDuplicity(myzip.read(name).decode().split('\n'))
+            if dupKey:
+              raise ValueError("{} contains duplicate keys for {}", name, dupKey)
+      return
+    if not os.path.isdir(input_tmp):
+      raise ValueError("Expect {} to be a zip file or directory".format(input_tmp))
+    for name in os.listdir(input_tmp):
+      if not name.isupper():
+        continue
+      for prop_file in ['build.prop', 'etc/build.prop']:
+        path = os.path.join(input_tmp, name, prop_file)
+        if not os.path.exists(path):
+          continue
+        logger.info("Checking {}".format(path))
+        with open(path, 'r') as fp:
+          dupKey = PartitionBuildProps.CheckDataDuplicity(fp.readlines())
+          if dupKey:
+            raise ValueError("{} contains duplicate keys for {}", path, dupKey)
+        break
+        
 
   @staticmethod
   def FromInputFile(input_file, name, placeholder_values=None):

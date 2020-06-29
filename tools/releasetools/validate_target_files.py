@@ -436,6 +436,8 @@ def main():
   with zipfile.ZipFile(args.target_files, 'r') as input_zip:
     ValidateFileConsistency(input_zip, input_tmp, info_dict)
 
+  common.PartitionBuildProps.CheckBuildPropDuplicity(input_tmp)
+
   ValidateInstallRecoveryScript(input_tmp, info_dict)
 
   ValidateVerifiedBootImages(input_tmp, info_dict, options)
