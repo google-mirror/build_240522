@@ -21,27 +21,33 @@ ALL_DEFAULT_INSTALLED_MODULES += $(call copy-many-files,$(DEXPREOPT_IMAGE_PROFIL
 my_boot_image_arch := TARGET_ARCH
 my_boot_image_out := $(PRODUCT_OUT)
 my_boot_image_syms := $(TARGET_OUT_UNSTRIPPED)
-my_boot_image_root := DEFAULT_DEX_PREOPT_INSTALLED_IMAGE
-DEFAULT_DEX_PREOPT_INSTALLED_IMAGE :=
+my_boot_image_root := DEFAULT_DEX_PREOPT_INSTALLED_MODULE
+DEFAULT_DEX_PREOPT_INSTALLED_MODULE :=
+my_boot_image_vdex_extra_symlink_arch := $(TARGET_2ND_ARCH)
 $(foreach my_boot_image_name,$(DEXPREOPT_IMAGE_NAMES),$(eval include $(BUILD_SYSTEM)/dex_preopt_libart.mk))
+my_boot_image_vdex_extra_symlink_arch :=
 ifdef TARGET_2ND_ARCH
   my_boot_image_arch := TARGET_2ND_ARCH
-  my_boot_image_root := 2ND_DEFAULT_DEX_PREOPT_INSTALLED_IMAGE
-  2ND_DEFAULT_DEX_PREOPT_INSTALLED_IMAGE :=
+  my_boot_image_root := 2ND_DEFAULT_DEX_PREOPT_INSTALLED_MODULE
+  2ND_DEFAULT_DEX_PREOPT_INSTALLED_MODULE :=
   $(foreach my_boot_image_name,$(DEXPREOPT_IMAGE_NAMES),$(eval include $(BUILD_SYSTEM)/dex_preopt_libart.mk))
 endif
 # Install boot images for testing on host. We exclude framework image as it is not part of art manifest.
 my_boot_image_arch := HOST_ARCH
 my_boot_image_out := $(HOST_OUT)
 my_boot_image_syms := $(HOST_OUT)/symbols
-my_boot_image_root := HOST_BOOT_IMAGE
-HOST_BOOT_IMAGE :=
+my_boot_image_root := HOST_BOOT_MODULE
+HOST_BOOT_MODULE :=
+my_boot_image_vdex_extra_symlink_arch := $(HOST_2ND_ARCH)
 $(foreach my_boot_image_name,art_host,$(eval include $(BUILD_SYSTEM)/dex_preopt_libart.mk))
+HOST_BOOT_IMAGE := $(call module-installed-files,$(HOST_BOOT_MODULE))
+my_boot_image_vdex_extra_symlink_arch :=
 ifdef HOST_2ND_ARCH
   my_boot_image_arch := HOST_2ND_ARCH
-  my_boot_image_root := 2ND_HOST_BOOT_IMAGE
-  2ND_HOST_BOOT_IMAGE :=
+  my_boot_image_root := 2ND_HOST_BOOT_MODULE
+  2ND_HOST_BOOT_MODULE :=
   $(foreach my_boot_image_name,art_host,$(eval include $(BUILD_SYSTEM)/dex_preopt_libart.mk))
+  2ND_HOST_BOOT_IMAGE := $(call module-installed-files,$(2ND_HOST_BOOT_MODULE))
 endif
 my_boot_image_arch :=
 my_boot_image_out :=

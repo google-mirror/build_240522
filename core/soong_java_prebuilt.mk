@@ -94,16 +94,16 @@ ifdef LOCAL_SOONG_DEX_JAR
     boot_jars := $(foreach pair,$(PRODUCT_BOOT_JARS), $(call word-colon,2,$(pair)))
     ifneq ($(filter $(LOCAL_MODULE),$(boot_jars)),) # is_boot_jar
       ifeq (true,$(WITH_DEXPREOPT))
-        # For libart, the boot jars' odex files are replaced by $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE).
-        # We use this installed_odex trick to get boot.art installed.
-        installed_odex := $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
-        # Append the odex for the 2nd arch if we have one.
-        installed_odex += $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_IMAGE)
-        ALL_MODULES.$(my_register_name).INSTALLED += $(installed_odex)
-        # Make sure to install the .odex and .vdex when you run "make <module_name>"
-       $(my_all_targets): $(installed_odex)
-       # Copy $(LOCAL_BUILT_MODULE) and its dependencies when installing boot.art
-       $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE): $(LOCAL_BUILT_MODULE)
+        # $(DEFAULT_DEX_PREOPT_INSTALLED_MODULE) contains phony modules that installs
+        # all of bootjars' dexpreopt files (.art, .odex, .vdex, ...)
+        # Add them to the required list so they are installed alongside the module.
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET += \
+          $(DEFAULT_DEX_PREOPT_INSTALLED_MODULE) \
+          $($(TARGET_2ND_ARCH_VAR_PREFIX)DEFAULT_DEX_PREOPT_INSTALLED_MODULE)
+        # Copy $(LOCAL_BUILT_MODULE) and its dependencies when installing boot.art
+        # so that dependencies of $(LOCAL_BUILT_MODULE) (which may include
+        # jacoco-report-classes.jar) are copied.
+        $(DEFAULT_DEX_PREOPT_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
       endif
     endif # is_boot_jar
 
