@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc034da_b0d58368",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-07-01T19:23:40Z",
+      "side": 1,
+      "message": "I noticed you are using simg2img in https://github.com/hsiangkao/erofs-utils/blob/aosp_work/mkerofsimage.sh, which is pretty inefficient. Do you have plans to add sparse support directly to the tool?",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 25
+      },
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
