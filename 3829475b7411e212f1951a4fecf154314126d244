@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07931627_246e8dcc",
+        "filename": "core/java.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-07-01T12:26:15Z",
+      "side": 1,
+      "message": "This variable doesn\u0027t include all the framework libraries, only ext.jar and framework.jar? What is the qualifying feat of a jar file that makes it suitable to include in this variable?",
+      "range": {
+        "startLine": 396,
+        "startChar": 106,
+        "endLine": 396,
+        "endChar": 125
+      },
+      "revId": "3829475b7411e212f1951a4fecf154314126d244",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
