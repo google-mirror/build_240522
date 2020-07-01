@@ -1,0 +1,11 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Bowgo Tsai <bowgotsai@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Autosubmit+1: Jiyong Park <jiyong@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 01 Jul 2020 01:16:40 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1351282
+Project: platform/build
+Branch: refs/heads/master
