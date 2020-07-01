@@ -22,6 +22,30 @@
       "revId": "3829475b7411e212f1951a4fecf154314126d244",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b55ddec_725dac27",
+        "filename": "core/java.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1203210
+      },
+      "writtenOn": "2020-07-01T12:38:45Z",
+      "side": 1,
+      "message": "These are what the build system gives you set platfrorm_apis: true, and it\u0027s what\u0027s referred to as \"framework libs\" in comment around the build system.\n\nI\u0027m happy to consider another name if you can think of a better one, but I don\u0027t want to make the perfect the enemy of the good, and I think that \"framework\" is a lot more descriptive than \"default\".",
+      "parentUuid": "07931627_246e8dcc",
+      "range": {
+        "startLine": 396,
+        "startChar": 106,
+        "endLine": 396,
+        "endChar": 125
+      },
+      "revId": "3829475b7411e212f1951a4fecf154314126d244",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
