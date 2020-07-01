@@ -5,38 +5,82 @@
 #   my_boot_image_arch: the architecture to install (e.g. TARGET_ARCH, not expanded)
 #   my_boot_image_out:  the install directory (e.g. $(PRODUCT_OUT))
 #   my_boot_image_syms: the symbols director (e.g. $(TARGET_OUT_UNSTRIPPED))
-#   my_boot_image_root: make variable used to store installed image path
+#   my_boot_image_root: make variable used to store installed image module name
+#   my_boot_image_vdex_extra_symlink_arch: list of extra architectures to install vdex symlinks for
+#
+# Install the boot images compiled by Soong.
+# Create a phony package named dexpreopt_bootjar.$(my_boot_image_name)_$($(my_boot_image_arch))
+# that installs all of bootjars' dexpreopt images.
+# The name of the phony module is saved in $(my_boot_image_root).
 #
 ####################################
 
-# Install $(1) to $(2) so that it is shared between architectures.
-define copy-vdex-file
-my_vdex_shared := $$(dir $$(patsubst %/,%,$$(dir $(2))))$$(notdir $(2))  # Remove the arch dir.
-ifneq ($(my_boot_image_arch),$(filter $(my_boot_image_arch), TARGET_2ND_ARCH HOST_2ND_ARCH))
-$$(my_vdex_shared): $(1)  # Copy $(1) to directory one level up (i.e. with the arch dir removed).
-	@echo "Install: $$@"
-	$$(copy-file-to-target)
+LOCAL_PATH := $(BUILD_SYSTEM)
+
+# Define a module for bootjar dexpreopt file.
+# $(1): module name
+# $(2): prebuilt file path
+# $(3): destination path
+# $(4): LOCAL_IS_HOST_MODULE if non-empty
+define dexpreopt-bootjar-module
+include $(CLEAR_VARS)
+LOCAL_MODULE := $(1)
+LOCAL_PREBUILT_MODULE_FILE := $(2)
+LOCAL_MODULE_PATH := $(dir $(3))
+LOCAL_MODULE_STEM := $(notdir $(3))
+ifneq (,$(4))
+  LOCAL_IS_HOST_MODULE := true
 endif
-$(2): $$(my_vdex_shared)  # Create symlink at $(2) which points to the actual physical copy.
-	@echo "Symlink: $$@"
-	mkdir -p $$(dir $$@)
-	ln -sfn ../$$(notdir $$@) $$@
-my_vdex_shared :=
+LOCAL_MODULE_CLASS := ETC
+include $(BUILD_PREBUILT)
 endef
 
-# Same as 'copy-many-files' but it uses the vdex-specific helper above.
-define copy-vdex-files
-$(foreach v,$(1),$(eval $(call copy-vdex-file, $(call word-colon,1,$(v)), $(2)$(call word-colon,2,$(v)))))
-$(foreach v,$(1),$(2)$(call word-colon,2,$(v)))
-endef
+my_suffix := $(my_boot_image_name)_$($(my_boot_image_arch))
+is_host := $(strip $(filter HOST%,$(my_boot_image_arch)))
+is_primary_arch := $(strip $(filter-out %_2ND_ARCH,$(my_boot_image_arch)))
 
-# Install the boot images compiled by Soong.
-# The first file is saved in $(my_boot_image_root) and the rest are added as it's dependencies.
-my_suffix := BUILT_INSTALLED_$(my_boot_image_name)_$($(my_boot_image_arch))
-my_installed := $(call copy-many-files,$(DEXPREOPT_IMAGE_$(my_suffix)),$(my_boot_image_out))
-my_installed += $(call copy-many-files,$(DEXPREOPT_IMAGE_UNSTRIPPED_$(my_suffix)),$(my_boot_image_syms))
-my_installed += $(call copy-vdex-files,$(DEXPREOPT_IMAGE_VDEX_$(my_suffix)),$(my_boot_image_out))
-$(my_boot_image_root) += $(firstword $(my_installed))
-$(firstword $(my_installed)): $(wordlist 2,9999,$(my_installed))
-my_installed :=
-my_suffix :=
+my_bootjar_modules := \
+  $(foreach p,$(DEXPREOPT_IMAGE_BUILT_INSTALLED_$(my_suffix)), \
+    $(eval src := $(call word-colon,1,$(p))) \
+    $(eval dest := $(my_boot_image_out)$(call word-colon,2,$(p))) \
+    $(eval module_name := $(notdir $(dest)).dexpreopt_bootjar.$(my_suffix)) \
+    $(eval $(call dexpreopt-bootjar-module,$(module_name),$(src),$(dest),$(is_host))) \
+    $(module_name) \
+  )
+
+my_bootjar_modules += \
+  $(foreach p,$(DEXPREOPT_IMAGE_VDEX_BUILT_INSTALLED_$(my_suffix)), \
+    $(eval src := $(call word-colon,1,$(p))) \
+    $(eval dest := $(my_boot_image_out)$(call word-colon,2,$(p))) \
+    $(eval shared_vdex_dest := $(dir $(patsubst %/,%,$(dir $(dest))))$(notdir $(dest))) \
+    $(eval shared_vdex_module_name := $(notdir $(dest)).dexpreopt_bootjar.$(my_boot_image_name)) \
+    $(if $(is_primary_arch), \
+      $(eval $(call dexpreopt-bootjar-module,$(shared_vdex_module_name),$(src),$(shared_vdex_dest),$(is_host))) \
+      $(eval ALL_MODULES.$(my_register_name).INSTALLED += $(dest)) \
+      $(eval $(my_all_targets) : $(dest)) \
+      $(call symlink-file,$(LOCAL_INSTALLED_MODULE),../$(notdir $(dest)),$(dest)) \
+      $(foreach arch,$(my_boot_image_vdex_extra_symlink_arch), \
+        $(eval dest := $(dir $(patsubst %/,%,$(dir $(dest))))$(arch)/$(notdir $(dest))) \
+        $(eval ALL_MODULES.$(my_register_name).INSTALLED += $(dest)) \
+        $(eval $(my_all_targets) : $(dest)) \
+        $(call symlink-file,$(LOCAL_INSTALLED_MODULE),../$(notdir $(dest)),$(dest)) \
+      )\
+    ) \
+    $(shared_vdex_module_name) \
+  )
+
+my_bootjar_unstripped := $(call copy-many-files,$(DEXPREOPT_IMAGE_UNSTRIPPED_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_syms))
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := dexpreopt_bootjar.$(my_suffix)
+LOCAL_REQUIRED_MODULES := $(my_bootjar_modules)
+LOCAL_ADDITIONAL_DEPENDENCIES := $(my_bootjar_unstripped)
+ifneq (,$(is_host))
+  LOCAL_IS_HOST_MODULE := true
+  LOCAL_MODULE_PATH := $(HOST_OUT_FAKE)
+else
+  LOCAL_MODULE_PATH := $(TARGET_OUT_FAKE)
+endif
+include $(BUILD_PHONY_PACKAGE)
+
+$(my_boot_image_root) += $(LOCAL_MODULE)
