@@ -25,16 +25,15 @@ endif
 # Modules can override this logic by specifying
 # LOCAL_JAVA_LANGUAGE_VERSION explicitly.
 ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
-  ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_18_SUPPORT)))
+  my_numeric_version := $(call get-numeric-sdk-version,$(LOCAL_SDK_VERSION))
+  ifneq (,$(call numbers_less_than,24,$(my_numeric_version)))
     LOCAL_JAVA_LANGUAGE_VERSION := 1.7
-  else ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT)))
-    LOCAL_JAVA_LANGUAGE_VERSION := 1.8
-  else ifneq (,$(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
-    # TODO(ccross): allow 1.9 for current and unbundled once we have SDK system modules
+  else ifneq (,$(call numbers_less_than,30,$(my_numeric_version)))
     LOCAL_JAVA_LANGUAGE_VERSION := 1.8
   else
     LOCAL_JAVA_LANGUAGE_VERSION := 1.9
   endif
+  my_numeric_version :=
 endif
 LOCAL_JAVACFLAGS += -source $(LOCAL_JAVA_LANGUAGE_VERSION) -target $(LOCAL_JAVA_LANGUAGE_VERSION)
 
@@ -265,13 +264,16 @@ ifndef LOCAL_IS_HOST_MODULE
       # Most users of LOCAL_NO_STANDARD_LIBRARIES really mean no framework libs,
       # and manually add back the core libs.  The ones that don't are in soong
       # now, so just always assume that they want the default system modules
-      my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     else  # LOCAL_NO_STANDARD_LIBRARIES
       full_java_bootclasspath_libs := $(call java-lib-header-files,$(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES) $(FRAMEWORK_LIBRARIES))
       LOCAL_JAVA_LIBRARIES := $(filter-out $(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES) $(FRAMEWORK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
-      my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
 
+	  ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
+	    my_system_modules := sdk_public_current_system_modules
+    else
+      my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
+    endif
     ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
       sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,system_current,$(lib_name)))
     else
@@ -285,6 +287,15 @@ ifndef LOCAL_IS_HOST_MODULE
     ifeq ($(strip $(filter $(LOCAL_SDK_VERSION),$(TARGET_AVAILABLE_SDK_VERSIONS))),)
       $(call pretty-error,Invalid LOCAL_SDK_VERSION '$(LOCAL_SDK_VERSION)' \
              Choices are: $(TARGET_AVAILABLE_SDK_VERSIONS))
+    endif
+    ifneq (,$(filter-out current system_current test_current, $(LOCAL_SDK_VERSION)))
+        my_system_modules := sdk_public_$(call get-numeric-sdk-version,$(LOCAL_SDK_VERSION))_system_modules
+    else
+	ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
+	    my_system_modules := sdk_public_current_system_modules
+        else
+	    my_system_modules := core-current-stubs-system-modules
+	endif
     endif
 
     ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK)$(filter-out %current,$(LOCAL_SDK_VERSION)))
