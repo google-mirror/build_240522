@@ -22,6 +22,30 @@
       "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d2cbce1_a9648776",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1703091
+      },
+      "writtenOn": "2020-07-02T00:50:24Z",
+      "side": 1,
+      "message": "Hi Alistair,\nI\u0027d love to, yet partially due to 3 reasons I didn\u0027t do that...\n\n1) Mainly I\u0027m not sure whether the sparse library supports random write or it just write sequentially... If it just supports writing sequentially, then it may need to add code to keep metadata/data in memory and pass into sparse library, which would take more memory than the current approach (And yeah, there is also a reason that it\u0027s not wise to directly write to flash devices in order to avoid device fragments but rather write to an image file first).\n\n2) currently erofs-utils won\u0027t finally generate any FILL or DONTCARE blocks in practice, so finally img2simg will just add a sparse header to wrap this...\n\n3) I\u0027m not quite familiar with sparse library APIs... It needs some extra free time for me to hand that. So I\u0027d like to upstream first, maybe some other aosp vendor users could also help me on this... The impact for now is just taking a little longer time without runtime influence...\n\nThanks,\nGao Xiang",
+      "parentUuid": "abc034da_b0d58368",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 25
+      },
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
