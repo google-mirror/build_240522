@@ -39,6 +39,7 @@ VNDK-SP: libblas.so
 VNDK-SP: libc++.so
 VNDK-SP: libcompiler_rt.so
 VNDK-SP: libcutils.so
+VNDK-SP: libexpat.so
 VNDK-SP: libhardware.so
 VNDK-SP: libhidlbase.so
 VNDK-SP: libhidlmemory.so
@@ -231,7 +232,6 @@ VNDK-core: libdiskconfig.so
 VNDK-core: libdumpstateutil.so
 VNDK-core: libevent.so
 VNDK-core: libexif.so
-VNDK-core: libexpat.so
 VNDK-core: libfmq.so
 VNDK-core: libgatekeeper.so
 VNDK-core: libgui.so
