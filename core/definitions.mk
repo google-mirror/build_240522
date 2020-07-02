@@ -2065,7 +2065,7 @@ else \
 fi
 endef
 
-ifeq (,$(TARGET_BUILD_APPS))
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 
 ## Rule to create a table of contents from a .dex file.
 ## Must be called with $(eval).
@@ -2091,7 +2091,7 @@ else
 define define-dex-to-toc-rule
 endef
 
-endif  # TARGET_BUILD_APPS
+endif  # TARGET_BUILD_UNBUNDLED
 
 
 # Takes an sdk version that might be PLATFORM_VERSION_CODENAME (for example P),

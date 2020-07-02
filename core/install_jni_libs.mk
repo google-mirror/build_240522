@@ -12,7 +12,7 @@
 #
 
 my_embed_jni :=
-ifneq ($(TARGET_BUILD_APPS),)
+ifneq ($(TARGET_BUILD_UNBUNDLED),)
   my_embed_jni := true
 endif
 ifneq ($(filter tests samples, $(LOCAL_MODULE_TAGS)),)
