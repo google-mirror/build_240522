@@ -283,7 +283,7 @@ LOCAL_PROGUARD_FLAGS_DEPS += $(BUILD_SYSTEM)/proguard.jacoco.flags
 endif # Contains java code
 else
 ifdef LOCAL_SDK_VERSION
-ifdef TARGET_BUILD_APPS
+ifdef TARGET_BUILD_UNBUNDLED
 # In unbundled build, merge the coverage library into the apk.
 ifneq ($(LOCAL_SRC_FILES)$(LOCAL_STATIC_JAVA_LIBRARIES)$(LOCAL_SOURCE_FILES_ALL_GENERATED),)
 # Only add jacocoagent if the package contains some java code
@@ -292,7 +292,7 @@ LOCAL_STATIC_JAVA_LIBRARIES += jacocoagent
 LOCAL_PROGUARD_FLAGS += -include $(BUILD_SYSTEM)/proguard.jacoco.flags
 LOCAL_PROGUARD_FLAGS_DEPS += $(BUILD_SYSTEM)/proguard.jacoco.flags
 endif # Contains java code
-endif # TARGET_BUILD_APPS
+endif # TARGET_BUILD_UNBUNDLED
 endif # LOCAL_SDK_VERSION
 endif # EMMA_INSTRUMENT_STATIC
 endif # LOCAL_EMMA_INSTRUMENT
@@ -509,7 +509,7 @@ endif
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
 # PRIVATE_JNI_SHARED_LIBRARIES_ABI is a list of ABI names.
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
-ifneq ($(TARGET_BUILD_APPS),)
+ifneq ($(TARGET_BUILD_UNBUNDLED),)
     # Include all resources for unbundled apps.
     LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
 endif
@@ -529,7 +529,7 @@ endif
 # We skip it for unbundled app builds where we cannot build veridex.
 module_run_appcompat :=
 ifeq (true,$(non_system_module))
-ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled app build
+ifeq (,$(TARGET_BUILD_UNBUNDLED)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled app build
 ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
   module_run_appcompat := true
 endif
@@ -631,7 +631,7 @@ $(my_bundle_module): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
 	rm -rf $@.parts
 ALL_MODULES.$(my_register_name).BUNDLE := $(my_bundle_module)
 
-ifdef TARGET_BUILD_APPS
+ifdef TARGET_BUILD_UNBUNDLED
   ifdef LOCAL_DPI_VARIANTS
     $(call pretty-error,Building DPI-specific APKs is no longer supported)
   endif
