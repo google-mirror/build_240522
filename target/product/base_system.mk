@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2018 The Android Open Source Project
+# Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
 # limitations under the License.
 #
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/minimal_system.mk)
+
 # Base modules and settings for the system partition.
 PRODUCT_PACKAGES += \
-    adbd_system_api \
     am \
     android.hidl.allocator@1.0-service \
     android.hidl.base-V1.0-java \
@@ -28,7 +29,6 @@ PRODUCT_PACKAGES += \
     android.test.mock \
     android.test.runner \
     ANGLE \
-    apexd \
     appops \
     app_process \
     appwidget \
@@ -41,7 +41,6 @@ PRODUCT_PACKAGES += \
     bmgr \
     bootanimation \
     bootstat \
-    boringssl_self_test \
     bpfloader \
     bu \
     bugreport \
@@ -49,9 +48,7 @@ PRODUCT_PACKAGES += \
     cgroups.json \
     charger \
     cmd \
-    com.android.adbd \
     com.android.apex.cts.shim.v1 \
-    com.android.conscrypt \
     com.android.cronet \
     com.android.i18n \
     com.android.ipsec \
@@ -65,7 +62,6 @@ PRODUCT_PACKAGES += \
     com.android.tzdata \
     ContactsProvider \
     content \
-    debuggerd\
     device_config \
     dmctl \
     dnsmasq \
@@ -102,8 +98,6 @@ PRODUCT_PACKAGES += \
     incident \
     incidentd \
     incident_helper \
-    init.environ.rc \
-    init_system \
     input \
     installd \
     iorapd \
@@ -121,13 +115,9 @@ PRODUCT_PACKAGES += \
     libandroid_servers \
     libartpalette-system \
     libaudioeffect_jni \
-    libbinder \
     libbinder_ndk \
-    libc.bootstrap \
     libcamera2ndk \
     libcutils \
-    libdl.bootstrap \
-    libdl_android.bootstrap \
     libdrmframework \
     libdrmframework_jni \
     libEGL \
@@ -148,7 +138,6 @@ PRODUCT_PACKAGES += \
     libjnigraphics \
     libjpeg \
     liblog \
-    libm.bootstrap \
     libmdnssd \
     libmedia \
     libmedia_jni \
@@ -177,7 +166,6 @@ PRODUCT_PACKAGES += \
     libstagefright \
     libstagefright_foundation \
     libstagefright_omx \
-    libstdc++ \
     libsurfaceflinger \
     libsysutils \
     libui \
@@ -186,13 +174,9 @@ PRODUCT_PACKAGES += \
     libvulkan \
     libwifi-service \
     libwilhelm \
-    linker \
-    linkerconfig \
     lmkd \
     LocalTransport \
     locksettings \
-    logcat \
-    logd \
     lpdump \
     lshal \
     mdnsd \
@@ -226,23 +210,19 @@ PRODUCT_PACKAGES += \
     recovery-persist \
     resize2fs \
     rss_hwm_reset \
-    run-as \
     sanitizer.libraries.txt \
     schedtest \
     screencap \
     sdcard \
     secdiscard \
     SecureElement \
-    selinux_policy_system \
     sensorservice \
     service \
-    servicemanager \
     services \
     settings \
     SettingsProvider \
     sgdisk \
     Shell \
-    shell_and_utilities_system \
     sm \
     snapshotctl \
     statsd \
@@ -253,7 +233,6 @@ PRODUCT_PACKAGES += \
     tc \
     telecom \
     telephony-common \
-    tombstoned \
     traced \
     traced_probes \
     tune2fs \
@@ -264,7 +243,6 @@ PRODUCT_PACKAGES += \
     vdc \
     viewcompiler \
     voip-common \
-    vold \
     WallpaperBackup \
     watchdogd \
     wificond \
@@ -279,7 +257,6 @@ PRODUCT_PACKAGES += \
 # Host tools to install
 PRODUCT_HOST_PACKAGES += \
     BugReport \
-    adb \
     art-tools \
     atest \
     bcc \
@@ -332,11 +309,6 @@ PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.sdkext:framework-sdkextensions \
     com.android.tethering:framework-tethering
 
-PRODUCT_COPY_FILES += \
-    system/core/rootdir/init.usb.rc:system/etc/init/hw/init.usb.rc \
-    system/core/rootdir/init.usb.configfs.rc:system/etc/init/hw/init.usb.configfs.rc \
-    system/core/rootdir/etc/hosts:system/etc/hosts
-
 # Add the compatibility library that is needed when android.test.base
 # is removed from the bootclasspath.
 # Default to excluding android.test.base from the bootclasspath.
@@ -350,10 +322,8 @@ endif
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote32.rc:system/etc/init/hw/init.zygote32.rc
 PRODUCT_SYSTEM_PROPERTIES += ro.zygote?=zygote32
 
-PRODUCT_SYSTEM_PROPERTIES += debug.atrace.tags.enableflags=0
-
 # Packages included only for eng or userdebug builds, previously debug tagged
-PRODUCT_PACKAGES_DEBUG := \
+PRODUCT_PACKAGES_DEBUG += \
     adb_keys \
     arping \
     gdbserver \
@@ -370,8 +340,6 @@ PRODUCT_PACKAGES_DEBUG := \
     sqlite3 \
     ss \
     start_with_lockagent \
-    strace \
-    su \
     sanitizer-status \
     tracepath \
     tracepath6 \
