@@ -170,14 +170,16 @@ endif
 
 # Add implicit tags.
 #
-# If the local directory or one of its parents contains a MODULE_LICENSE_GPL
-# file, tag the module as "gnu".  Search for "*_GPL*", "*_LGPL*" and "*_MPL*"
-# so that we can also find files like MODULE_LICENSE_GPL_AND_AFL
+# If the local directory or one of its parents contains a METADATA file for
+# a RESTRICTED or RECIPROCAL license type, tag the module as "gnu".
 #
-gpl_license_file := $(call find-parent-file,$(LOCAL_PATH),MODULE_LICENSE*_GPL* MODULE_LICENSE*_MPL* MODULE_LICENSE*_LGPL*)
-ifneq ($(gpl_license_file),)
-  my_module_tags += gnu
-  ALL_GPL_MODULE_LICENSE_FILES += $(gpl_license_file)
+metadatafile:=$(call find-parent-file,$(LOCAL_PATH),METADATA)
+ifneq ($(metadatafile),)
+  re_licenses:=$(shell awk '$$1 == "license_type:" && $$2 ~ /^RE/ { print $$2 }' $(metadatafile))
+  ifneq ($(re_licenses),)
+    my_module_tags += gnu
+    ALL_GPL_MODULES += $(LOCAL_PATH)
+  endif
 endif
 
 LOCAL_MODULE_CLASS := $(strip $(LOCAL_MODULE_CLASS))
@@ -968,9 +970,6 @@ ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(sort \
   $(LOCAL_STATIC_JAVA_LIBRARIES) \
   $(LOCAL_JAVA_LIBRARIES) \
   $(LOCAL_JNI_SHARED_LIBRARIES))
-
-license_files := $(call find-parent-file,$(LOCAL_PATH),MODULE_LICENSE*)
-ALL_DEPS.$(LOCAL_MODULE).LICENSE := $(sort $(ALL_DEPS.$(LOCAL_MODULE).LICENSE) $(license_files))
 endif
 
 ###########################################################
