@@ -17,13 +17,12 @@
 # in installclean between incremental builds on build servers.
 gpl_source_tgz := $(call intermediates-dir-for,PACKAGING,gpl_source)/gpl_source.tgz
 
-ALL_GPL_MODULE_LICENSE_FILES := $(sort $(ALL_GPL_MODULE_LICENSE_FILES))
+ALL_GPL_MODULES := $(sort $(ALL_GPL_MODULES))
+ALL_GPL_SOURCE := $(all-files-under $(ALL_GPL_MODULES))
 
-# FORCE since we can't know whether any of the sources changed
-$(gpl_source_tgz): PRIVATE_PATHS := $(sort $(patsubst %/, %, $(dir $(ALL_GPL_MODULE_LICENSE_FILES))))
-$(gpl_source_tgz) : $(ALL_GPL_MODULE_LICENSE_FILES)
+$(gpl_source_tgz) : $(ALL_GPL_SOURCE)
 	@echo Package GPL sources: $@
-	$(hide) tar cfz $@ --exclude ".git*" $(PRIVATE_PATHS)
+	$(hide) tar cfz $@ --exclude ".git*" $(ALL_GPL_MODULES)
 
 # Dist the tgz only if we are doing a full build
 $(call dist-for-goals,droidcore,$(gpl_source_tgz))
