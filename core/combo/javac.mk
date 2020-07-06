@@ -6,11 +6,6 @@
 
 ANDROID_COMPILE_WITH_JACK := false
 
-ifdef TARGET_BUILD_APPS
-  ifndef TURBINE_ENABLED
-    TURBINE_ENABLED := false
-  endif
-endif
 
 ANDROID_JAVA_TOOLCHAIN := $(ANDROID_JAVA_HOME)/bin
 
