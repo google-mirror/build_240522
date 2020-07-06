@@ -74,8 +74,10 @@ INTERNAL_DALVIK_MODULES:=
 # All findbugs xml files
 ALL_FINDBUGS_FILES:=
 
-# GPL module license files
-ALL_GPL_MODULE_LICENSE_FILES:=
+# From METADATA files for restricted and reciprocal license types
+ALL_GPL_MODULES :=
+ALL_GPL_SOURCE :=
+ALL_GPL_MODULE_LICENSE_FILES = $(error ALL_GPL_MODULE_LICENSE_FILES replaced by ALL_GPL_MODULES)
 
 # Packages with certificate violation
 CERTIFICATE_VIOLATION_MODULES :=
@@ -173,6 +175,14 @@ $(strip \
  )
 endef
 
+
+###########################################################
+## Retrieve a list of all dependable files under some directory
+###########################################################
+define all-files-under
+$(sort $(shell find -L $(1) -name .git -prune -o -name '* *' -prune -o -type f\
+        | grep -Ev '\s|[/][.]git'))
+endef
 
 ###########################################################
 ## Retrieve a list of all makefiles immediately below some directory
