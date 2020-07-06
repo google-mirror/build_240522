@@ -74,8 +74,11 @@ INTERNAL_DALVIK_MODULES:=
 # All findbugs xml files
 ALL_FINDBUGS_FILES:=
 
-# GPL module license files
-ALL_GPL_MODULE_LICENSE_FILES:=
+# ALL_GPL_MODULE_LICENSE_FILES no longer supported. Instead of looking at
+# the existence of MODULE_LICENSE_* files, AOSP is moving in the direction
+# of consistency with other Google OS projects. GPL and GPL-like licensed
+# code is identified by METADATA files found relative to the module path.
+$(KATI_obsolete_var ALL_GPL_MODULE_LICENSE_FILES)
 
 # Packages with certificate violation
 CERTIFICATE_VIOLATION_MODULES :=
@@ -173,6 +176,17 @@ $(strip \
  )
 endef
 
+
+###########################################################
+## Retrieve a list of all dependable files under some directory
+##
+## Excludes files under .git directories, and paths with
+## embedded spaces, which don't play well with make.
+###########################################################
+define all-files-under
+$(sort $(shell find -L $(1) -name .git -prune -o -name '* *' -prune -o -type f\
+        | grep -Ev '\s|[/][.]git'))
+endef
 
 ###########################################################
 ## Retrieve a list of all makefiles immediately below some directory
@@ -488,6 +502,43 @@ $(strip \
              $(call find-parent-file,$(patsubst %/,%,$(dir $(1))),$(2)) \
         ) \
    ) \
+)
+endef
+
+###########################################################
+## Scan through the parent directories of each $(1) looking
+## for the governing METADATA file, and return only those
+## paths under a RESTRICTED or RECIPROCAL license_type.
+###########################################################
+
+define filter-restricted-paths
+$(strip \
+  $(foreach p, $(1), \
+    $(eval _mdf := $(call find-parent-file, $(p), METADATA)) \
+    $(if $(_mdf), \
+      $(eval _isgpl := $(strip $(shell \
+           awk '$$1 == "license_type:" && $$2 ~ /^RE/ { print 1 }' $(_mdf))) \
+      ) \
+      $(if $(_isgpl),$(p)) \
+    ) \
+  ) \
+)
+endef
+
+###########################################################
+## Scan through the parent directories of the path for each
+## module looking for the governing METADATA file, and
+## return only those modules licensed under a RESTRICTED or
+## RECIPROCAL license_type.
+###########################################################
+
+define find-restricted-modules
+$(strip \
+  $(eval _allp := $(sort $(foreach m, $(ALL_MODULES), $(ALL_MODULES.$(m).PATH)))) \
+  $(eval _gplp := $(call filter-restricted-paths, $(_allp))) \
+  $(foreach module, $(sort $(ALL_MODULES)), \
+    $(if $(filter $(_gplp), $(ALL_MODULES.$(module).PATH)), $(module)) \
+  ) \
 )
 endef
 
