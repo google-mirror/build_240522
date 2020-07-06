@@ -1398,7 +1398,7 @@ ifdef is_sdk_build
                       $(TARGET_OUT_INTERMEDIATES)/% \
                       $(TARGET_OUT)/% \
                       $(TARGET_OUT_DATA)/%, \
-                              $(sort $(call get-tagged-modules,gnu)))
+                              $(sort $(call module-installed-files, $(call find-restricted-modules))))
   target_gnu_MODULES := $(filter-out $(TARGET_OUT_EXECUTABLES)/%,$(target_gnu_MODULES))
   target_gnu_MODULES := $(filter-out %/libopenjdkjvmti.so,$(target_gnu_MODULES))
   target_gnu_MODULES := $(filter-out %/libopenjdkjvmtid.so,$(target_gnu_MODULES))
