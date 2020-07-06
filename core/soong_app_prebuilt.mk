@@ -118,19 +118,37 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
 $(call create-suite-dependencies)
 endif
 
-# embedded JNI will already have been handled by soong
-my_embed_jni :=
-my_prebuilt_jni_libs :=
-ifdef LOCAL_SOONG_JNI_LIBS_$(TARGET_ARCH)
-  my_2nd_arch_prefix :=
-  LOCAL_JNI_SHARED_LIBRARIES := $(LOCAL_SOONG_JNI_LIBS_$(TARGET_ARCH))
-  include $(BUILD_SYSTEM)/install_jni_libs_internal.mk
-endif
-ifdef TARGET_2ND_ARCH
-  ifdef LOCAL_SOONG_JNI_LIBS_$(TARGET_2ND_ARCH)
-    my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
-    LOCAL_JNI_SHARED_LIBRARIES := $(LOCAL_SOONG_JNI_LIBS_$(TARGET_2ND_ARCH))
+ifdef LOCAL_SOONG_JNI_LIBS_ARE_EMBEDDED
+  # embedded JNI has already been handled by soong, but we still need
+  # to depend their LOCAL_BUILT_MODULEs to cause the symbols to be installed.
+
+  my_sdk_variant = $(1)
+  ifneq (,$(and $(my_embed_jni),$(LOCAL_SDK_VERSION)))
+    # Soong produces $(lib).so in $(lib).sdk_intermediates so that the library
+    # has the correct name for embedding in an APK.  Append .sdk to the name
+    # of the intermediates directory, but not the .so name.
+    my_sdk_variant = $(call use_soong_sdk_libraries,$(1))
+  endif
+
+  jni_built_modules = $(foreach lib,$(LOCAL_SOONG_JNI_LIBS_$(TARGET_$(1)ARCH)),\
+    $(call intermediates-dir-for,SHARED_LIBRARIES,$(call my_sdk_variant,$(lib)),,,$(1))/$(lib).so)
+
+  $(LOCAL_BUILT_MODULE): $(call jni_built_modules)
+  $(LOCAL_BUILT_MODULE): $(call jni_built_modules,$(TARGET_2ND_ARCH_VAR_PREFIX))
+else
+  my_embed_jni :=
+  my_prebuilt_jni_libs :=
+  ifdef LOCAL_SOONG_JNI_LIBS_$(TARGET_ARCH)
+    my_2nd_arch_prefix :=
+    LOCAL_JNI_SHARED_LIBRARIES := $(LOCAL_SOONG_JNI_LIBS_$(TARGET_ARCH))
     include $(BUILD_SYSTEM)/install_jni_libs_internal.mk
+  endif
+  ifdef TARGET_2ND_ARCH
+    ifdef LOCAL_SOONG_JNI_LIBS_$(TARGET_2ND_ARCH)
+      my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
+      LOCAL_JNI_SHARED_LIBRARIES := $(LOCAL_SOONG_JNI_LIBS_$(TARGET_2ND_ARCH))
+      include $(BUILD_SYSTEM)/install_jni_libs_internal.mk
+    endif
   endif
 endif
 LOCAL_SHARED_JNI_LIBRARIES :=
