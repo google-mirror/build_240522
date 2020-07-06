@@ -288,7 +288,7 @@ ifndef LOCAL_IS_HOST_MODULE
     endif
 
     ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK)$(filter-out %current,$(LOCAL_SDK_VERSION)))
-      # TARGET_BUILD_APPS mode or numbered SDK. Use prebuilt modules.
+      # TARGET_BUILD_APPS_USE_PREBUILT_SDK mode or numbered SDK. Use prebuilt modules.
       sdk_module := $(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION))
       sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION),$(lib_name)))
     else
