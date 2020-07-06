@@ -168,18 +168,6 @@ ifneq ($(filter-out tests optional samples,$(my_module_tags)),)
 $(call pretty-error,unusual tags: $(filter-out tests optional samples,$(my_module_tags)))
 endif
 
-# Add implicit tags.
-#
-# If the local directory or one of its parents contains a MODULE_LICENSE_GPL
-# file, tag the module as "gnu".  Search for "*_GPL*", "*_LGPL*" and "*_MPL*"
-# so that we can also find files like MODULE_LICENSE_GPL_AND_AFL
-#
-gpl_license_file := $(call find-parent-file,$(LOCAL_PATH),MODULE_LICENSE*_GPL* MODULE_LICENSE*_MPL* MODULE_LICENSE*_LGPL*)
-ifneq ($(gpl_license_file),)
-  my_module_tags += gnu
-  ALL_GPL_MODULE_LICENSE_FILES += $(gpl_license_file)
-endif
-
 LOCAL_MODULE_CLASS := $(strip $(LOCAL_MODULE_CLASS))
 ifneq ($(words $(LOCAL_MODULE_CLASS)),1)
   $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS must contain exactly one word, not "$(LOCAL_MODULE_CLASS)")
@@ -968,9 +956,9 @@ ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(sort \
   $(LOCAL_STATIC_JAVA_LIBRARIES) \
   $(LOCAL_JAVA_LIBRARIES) \
   $(LOCAL_JNI_SHARED_LIBRARIES))
-
-license_files := $(call find-parent-file,$(LOCAL_PATH),MODULE_LICENSE*)
-ALL_DEPS.$(LOCAL_MODULE).LICENSE := $(sort $(ALL_DEPS.$(LOCAL_MODULE).LICENSE) $(license_files))
+# These keys are no longer used. The MODULE_LICENSE_* files have been replaced
+# by METADATA license_type, which only resolves to broad classes of licenses.
+$(KATI_obsolete_var ALL_DEPS.$(LOCAL_MODULE).LICENSE)
 endif
 
 ###########################################################
