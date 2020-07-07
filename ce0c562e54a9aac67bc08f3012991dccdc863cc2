@@ -51,6 +51,23 @@
       "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51cd7a80_92865eb4",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-07T18:51:21Z",
+      "side": 1,
+      "message": "Scratch my last comment. The symlink is not actually needed. It is created for consistency sake so that you can always assume the content of vendor_dlkm exists in /vendor/vendor_dlkm and /vendor_dlkm directly.",
+      "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
