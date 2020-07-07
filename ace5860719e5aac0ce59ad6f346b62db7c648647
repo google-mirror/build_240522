@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c5378e1_c7bdf7b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2020-07-07T16:13:25Z",
+      "side": 1,
+      "message": "This change should not be submitted before cl/319993696 is merged.\n\nThe idea is to land this change and check for any build breakage, then submit https://android-review.googlesource.com/c/platform/build/+/1356640.",
+      "revId": "ace5860719e5aac0ce59ad6f346b62db7c648647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
