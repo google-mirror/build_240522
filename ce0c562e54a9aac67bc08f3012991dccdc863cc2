@@ -33,6 +33,24 @@
       "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d745cc19_6424fe9f",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-07T18:34:42Z",
+      "side": 1,
+      "message": "See https://android-review.googlesource.com/c/platform/system/core/+/1312223/3/rootdir/Android.mk",
+      "parentUuid": "2d254c23_d60002d1",
+      "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
