@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (3f2e4c Merge "add build.prop for other partitions to the dist out")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=QQ3A.200705.002
+>>>>>>> BRANCH (5eab60 Version bump to QQ3A.200705.002 [core/build_id.mk])
