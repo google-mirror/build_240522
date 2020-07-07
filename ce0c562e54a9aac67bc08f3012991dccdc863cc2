@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77a5e0ea_fe660c63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-07T17:39:03Z",
+      "side": 1,
+      "message": "one question, lgtm otherwise",
+      "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d254c23_d60002d1",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-07T17:39:03Z",
+      "side": 1,
+      "message": "how come we need this symlink",
+      "revId": "ce0c562e54a9aac67bc08f3012991dccdc863cc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
