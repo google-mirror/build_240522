@@ -269,12 +269,12 @@ ifndef LOCAL_IS_HOST_MODULE
       LOCAL_JAVA_LIBRARIES := $(filter-out $(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES) $(FRAMEWORK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
     endif  # LOCAL_NO_STANDARD_LIBRARIES
 
-    ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
+    ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDK))
       my_system_modules := sdk_public_current_system_modules
     else
       my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     endif
-    ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
+    ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDK))
       sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,system_current,$(lib_name)))
     else
       # When SDK libraries are referenced from modules built without SDK, provide the all APIs to them
@@ -291,15 +291,15 @@ ifndef LOCAL_IS_HOST_MODULE
     ifneq (,$(filter-out current system_current test_current core_current, $(LOCAL_SDK_VERSION)))
         my_system_modules := sdk_public_$(call get-numeric-sdk-version,$(LOCAL_SDK_VERSION))_system_modules
     else
-      ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK))
+      ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDK))
         my_system_modules := sdk_public_current_system_modules
       else
         my_system_modules := core-current-stubs-system-modules
       endif
     endif
 
-    ifneq (,$(TARGET_BUILD_APPS_USE_PREBUILT_SDK)$(filter-out %current,$(LOCAL_SDK_VERSION)))
-      # TARGET_BUILD_APPS mode or numbered SDK. Use prebuilt modules.
+    ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDK)$(filter-out %current,$(LOCAL_SDK_VERSION)))
+      # TARGET_BUILD_USE_PREBUILT_SDK mode or numbered SDK. Use prebuilt modules.
       sdk_module := $(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION))
       sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION),$(lib_name)))
     else
@@ -340,7 +340,7 @@ ifndef LOCAL_IS_HOST_MODULE
   # related classes to be present. This change adds stubs needed for
   # javac to compile lambdas.
   ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
-    ifdef TARGET_BUILD_APPS_USE_PREBUILT_SDK
+    ifdef TARGET_BUILD_USE_PREBUILT_SDK
       full_java_bootclasspath_libs += $(call java-lib-header-files,sdk-core-lambda-stubs)
     else
       full_java_bootclasspath_libs += $(call java-lib-header-files,core-lambda-stubs)
