@@ -527,6 +527,7 @@ ifdef TARGET_BUILD_USE_PREBUILT_SDKS
 endif
 
 ifdef TARGET_BUILD_APPS
+  TARGET_BUILD_DISABLE_PREOPT ?= true
   TARGET_BUILD_USE_PREBUILT_SDKS ?= true
   ifeq (true,$(UNBUNDLED_BUILD_SDKS_FROM_SOURCE))
     TARGET_BUILD_USE_PREBUILT_SDKS :=
@@ -535,6 +536,17 @@ endif
 
 TARGET_BUILD_USE_PREBUILT_SDKS := $(filter true,$(TARGET_BUILD_USE_PREBUILT_SDKS))
 .KATI_READONLY := TARGET_BUILD_USE_PREBUILT_SDKS
+
+# Preopt highly depends on the system image and the frameworks.
+# But using prebuilt SDKs implies that we don't want to build the frameworks.
+# So, set TARGET_BUILD_DISABLE_PREOPT, if TARGET_BUILD_USE_PREBUILT_SDKS is true,
+# and TARGET_BUILD_DISABLE_PREOPT isn't explicitly set.
+ifdef TARGET_BUILD_USE_PREBUILT_SDKS
+  TARGET_BUILD_DISABLE_PREOPT ?= true
+endif # TARGET_BUILD_USE_PREBUILT_SDKS
+
+TARGET_BUILD_DISABLE_PREOPT := $(filter true,$(TARGET_BUILD_DISABLE_PREOPT))
+.KATI_READONLY := TARGET_BUILD_DISABLE_PREOPT
 
 prebuilt_sdk_tools := prebuilts/sdk/tools
 prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
