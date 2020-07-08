@@ -93,6 +93,7 @@ TARGET_BUILD_VARIANT := eng
 endif
 
 TARGET_BUILD_APPS ?=
+TARGET_BUILD_UNBUNDLED_PARTITION ?=
 
 # Set to true for an unbundled build, i.e. a build without
 # support for platform targets like the system image. This also
@@ -107,11 +108,19 @@ ifneq ($(TARGET_BUILD_APPS),)
   TARGET_BUILD_UNBUNDLED := true
 endif
 
+# TARGET_BUILD_UNBUNDLED_PARTITION also implies unbundled build.
+# (i.e. it targets to only unbundled partitions, such as the vendor
+# , the product partition)
+ifneq ($(TARGET_BUILD_UNBUNDLED_PARTITION),)
+  TARGET_BUILD_UNBUNDLED := true
+endif
+
 .KATI_READONLY := \
   TARGET_PRODUCT \
   TARGET_BUILD_VARIANT \
   TARGET_BUILD_APPS \
   TARGET_BUILD_UNBUNDLED \
+  TARGET_BUILD_UNBUNDLED_PARTITION \
 
 # ---------------------------------------------------------------
 # Set up configuration for host machine.  We don't do cross-
