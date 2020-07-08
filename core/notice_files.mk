@@ -19,6 +19,11 @@ ifeq ($(LOCAL_MODULE_CLASS),FAKE)
   notice_file :=
 endif
 
+ifeq ($(LOCAL_MODULE_CLASS),RUST_GENERATED_SOURCE)
+  # We ignore NOTICE files for modules of type RUST_GENERATED_SOURCE.
+  notice_file :=
+endif
+
 # Soong generates stub libraries that don't need NOTICE files
 ifdef LOCAL_NO_NOTICE_FILE
   ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
