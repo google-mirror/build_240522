@@ -5,7 +5,7 @@ ifneq (true,$(filter true,$(WITH_DEXPREOPT)))
   ENABLE_PREOPT :=
 else ifneq (true,$(filter true,$(PRODUCT_USES_DEFAULT_ART_CONFIG)))
   ENABLE_PREOPT :=
-else ifneq (,$(TARGET_BUILD_APPS))
+else ifdef TARGET_BUILD_DISABLE_PREOPT
   ENABLE_PREOPT :=
 endif
 
