@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "6acbd2af_d4c044ff",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-08T21:15:40Z",
+      "side": 1,
+      "message": "Ha. I didn\u0027t know I was actually supporting PRODUCT_COPY_FILES here. I was just copy-pasting.\n\nMy concern is that it may be abused. For example, right now we only expect the following:\n\n- Device with vendor_dlkm:\n   - /vendor_dlkm/etc\n   - /vendor_dlkm/lib/modules # shouldn\u0027t be used; /vendor/lib/modules should be used instead.\n   - /vendor/lib/modules -\u003e /vendor_dlkm/lib/modules\n- Device without vendor_dlkm:\n   - /vendor_dlkm/etc -\u003e /vendor/vendor_dlkm/etc\n   - /vendor/lib/modules\n\nWe wouldn\u0027t expect devices that copy stuff to /vendor_dlkm/foo or /vendor_dlkm/lib, for example.",
+      "parentUuid": "fdb3e44b_b062c06f",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
