@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "fdb3e44b_b062c06f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-08T19:46:28Z",
+      "side": 1,
+      "message": "Kernel modules, and the default load list, are installed via those macros. Partners may come up with any number of other lists of modules to be loaded at various stages of init, and they may want to keep those lists with the kernel modules themselves. If it\u0027s just a matter of including this bit here to support PRODUCT_COPY_FILES I think it\u0027s worth having it. I could easily see it being requested.",
+      "parentUuid": "17c2c9da_0c709820",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
