@@ -40,8 +40,8 @@ ifneq (,$(filter $(LOCAL_MODULE),$(DEXPREOPT_DISABLED_MODULES)))
   LOCAL_DEX_PREOPT :=
 endif
 
-# Disable preopt for TARGET_BUILD_APPS
-ifneq (,$(TARGET_BUILD_APPS))
+# Disable preopt for TARGET_BUILD_USE_PREBUILT_SDK
+ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDK))
   LOCAL_DEX_PREOPT :=
 endif
 
