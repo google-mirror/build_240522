@@ -46,6 +46,30 @@
       "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdb964a7_21cc7fb1",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2020-07-08T03:57:39Z",
+      "side": 1,
+      "message": "For (1), I don\u0027t think it does. ext4 images are build with e2fsdroid, which has a sparse IO backend. It looks like it builds the blocks in memory and emits them when the image is done: https://cs.android.com/android/platform/superproject/+/master:external/e2fsprogs/lib/ext2fs/sparse_io.c?q\u003dsparse_io.c",
+      "parentUuid": "0d2cbce1_a9648776",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 25
+      },
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
