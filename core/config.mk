@@ -519,12 +519,20 @@ ALLOW_MISSING_DEPENDENCIES := true
 endif
 .KATI_READONLY := ALLOW_MISSING_DEPENDENCIES
 
-TARGET_BUILD_APPS_USE_PREBUILT_SDK :=
-ifdef TARGET_BUILD_APPS
-  ifndef UNBUNDLED_BUILD_SDKS_FROM_SOURCE
-    TARGET_BUILD_APPS_USE_PREBUILT_SDK := true
+# TODO(b/160390776): remove UNBUNDLED_BUILD_SDKS_FROM_SOURCE
+ifdef TARGET_BUILD_USE_PREBUILT_SDKS
+  ifdef UNBUNDLED_BUILD_SDKS_FROM_SOURCE
+    $(error cannot set both TARGET_BUILD_USE_PREBUILT_SDKS and UNBUNDLED_BUILD_SDKS_FROM_SOURCE.)
   endif
 endif
+
+ifdef TARGET_BUILD_APPS
+  ifeq (true,$(UNBUNDLED_BUILD_SDKS_FROM_SOURCE))
+    TARGET_BUILD_USE_PREBUILT_SDKS := false
+  endif
+  TARGET_BUILD_USE_PREBUILT_SDKS ?= true
+endif
+TARGET_BUILD_USE_PREBUILT_SDKS ?= false
 
 prebuilt_sdk_tools := prebuilts/sdk/tools
 prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
@@ -547,18 +555,18 @@ USE_D8 := true
 .KATI_READONLY := USE_D8
 
 #
-# Tools that are prebuilts for TARGET_BUILD_APPS
+# Tools that are prebuilts for TARGET_BUILD_USE_PREBUILT_SDKS
 #
-ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
+ifeq (,$(filter true,$(TARGET_BUILD_USE_PREBUILT_SDKS))$(filter true,$(TARGET_BUILD_PDK)))
   AAPT := $(HOST_OUT_EXECUTABLES)/aapt
   MAINDEXCLASSES := $(HOST_OUT_EXECUTABLES)/mainDexClasses
 
-else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
+else # TARGET_BUILD_USE_PREBUILT_SDKS || TARGET_BUILD_PDK
   AAPT := $(prebuilt_sdk_tools_bin)/aapt
   MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
-endif # TARGET_BUILD_APPS || TARGET_BUILD_PDK
+endif # TARGET_BUILD_USE_PREBUILT_SDKS || TARGET_BUILD_PDK
 
-ifeq (,$(TARGET_BUILD_APPS))
+ifeq (,$(filter true,$(TARGET_BUILD_USE_PREBUILT_SDKS)))
   # Use RenderScript prebuilts for unbundled builds but not PDK builds
   LLVM_RS_CC := $(HOST_OUT_EXECUTABLES)/llvm-rs-cc
   BCC_COMPAT := $(HOST_OUT_EXECUTABLES)/bcc_compat
@@ -1092,7 +1100,7 @@ HISTORICAL_SDK_VERSIONS_ROOT := $(TOPDIR)prebuilts/sdk
 HISTORICAL_NDK_VERSIONS_ROOT := $(TOPDIR)prebuilts/ndk
 
 # The path where app can reference the support library resources.
-ifdef TARGET_BUILD_APPS
+ifeq (true,$(filter true, $(filter true,$(TARGET_BUILD_USE_PREBUILT_SDKS))))
 SUPPORT_LIBRARY_ROOT := $(HISTORICAL_SDK_VERSIONS_ROOT)/current/support
 else
 SUPPORT_LIBRARY_ROOT := frameworks/support
