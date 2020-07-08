@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0fec88cc_4f15ebe8",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-08T19:15:37Z",
+      "side": 1,
+      "message": "Technically, no 😞\n\nIs there a README for partitions somewhere? I want to say that if I remove this, only the following path is universal on all devices:\n\n/vendor_dlkm/etc\n/vendor/lib/modules",
+      "parentUuid": "d1306e86_6422ab4a",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "517833cd_e4be39d5",
         "filename": "core/board_config.mk",
         "patchSetId": 6
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "17c2c9da_0c709820",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-08T19:15:37Z",
+      "side": 1,
+      "message": "Kernel modules should only be installed via BOARD_VENDOR_KERNEL_MODULES. Why do we want to support PRODUCT_COPY_FILES?",
+      "parentUuid": "c54cf0c7_c6a76aaa",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
@@ -65,6 +101,24 @@
       "writtenOn": "2020-07-08T02:32:44Z",
       "side": 1,
       "message": "Can you combine all of these into a single KATI_obsolete_var call? That should be more readable (I\u0027m thinking of https://cs.android.com/android/platform/superproject/+/master:build/make/core/config.mk;drc\u003dc158e421ec5c6f0cbf80f12073d5a4fa7e93ad0f;l\u003d64 )",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "670d15ef_06b40fa8",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-08T19:15:37Z",
+      "side": 1,
+      "message": "Sure, thanks!",
+      "parentUuid": "2d0804a4_ee315360",
       "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
