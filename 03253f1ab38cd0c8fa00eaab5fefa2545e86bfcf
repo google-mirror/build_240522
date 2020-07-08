@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "4b3d5169_53169cfd",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-08T21:19:01Z",
+      "side": 1,
+      "message": "It can be removed, worst case vendors can always put other module load lists on vendor. It doesn\u0027t have to go into vendor_dlkm (it might just be preferred to keep such lists along with the vendor kernel modules).",
+      "parentUuid": "6acbd2af_d4c044ff",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
