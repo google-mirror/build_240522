@@ -440,6 +440,22 @@ $(GEN): $(intermediates)/<font color=red>%.lut.h</font> : $(LOCAL_PATH)/<font co
 LOCAL_GENERATED_SOURCES += $(GEN)
 </pre>
 
+<h3><a name="unbundled-build"/>Unbundled build</h3>
+<p>Basically, unbundled build means building only a part of Android(e.g. apps, specific modules, and so on).
+Here is a list of flags related to unbundled build.</p>
+
+<h4>TARGET_BUILD_UNBUNDLED</h4>
+<p>Build only a part of Android, and also with this flag, the source tree might not have the full platform sources.
+It is always set if <code>TARGET_BUILD_APPS</code> has a value.</p>
+<h4>TARGET_BUILD_USE_PREBUILT_SDKS</h4>
+<p>If it is <code>true</code>, prebuilt SDKs are used, even though a module's <code>LOCAL_SDK_VERSION</code> is
+<code>current</code>(including <code>system_current</code>, <code>core_current</code>, and so on).
+If it is <code>false</code>, build SDKs, and use them as usual.</p>
+<h4>TARGET_BUILD_APPS</h4>
+<p>Build just for the apps included in the variable without the full system, so it turns on
+<code>TARGET_BUILD_UNBUNDLED</code>. If <code>TARGET_BUILD_USE_PREBUILT_SDKS</code> isn't set,
+it automatically turns on <code>TARGET_BUILD_USE_PREBUILT_SDKS</code> as well.</p>
+
 <h3><a name="platform-specific"/>Platform specific conditionals</h3>
 <p>Sometimes you need to set flags specifically for different platforms.  Here
 is a list of which values the different build-system defined variables will be
