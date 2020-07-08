@@ -440,6 +440,29 @@ $(GEN): $(intermediates)/<font color=red>%.lut.h</font> : $(LOCAL_PATH)/<font co
 LOCAL_GENERATED_SOURCES += $(GEN)
 </pre>
 
+<h3><a name="unbundled-build"/>Unbundled build</h3>
+<p>Unbundled build has several meanings by the context.
+Let me explain the meaning by the flags related to "unbundled build"</p>
+<h4>TARGET_BUILD_UNBUNDLED</h4>
+<p>The build artifact is intended to for distribution separately from the platform, and also,
+the source tree might not have the full platform sources. It is always set if
+<code>TARGET_BUILD_APPS</code> or <code>TARGET_BUILD_UNBUNDLED_PARTITION</code> is set.</p>
+<h4>TARGET_BUILD_USE_PREBUILT_SDKS</h4>
+<p>It is an internal flag. If it is set, prebuilt SDKs are used, even though a module's
+<code>LOCAL_SDK_VERSION</code> is <code>current</code>(including <code>system_current</code>,
+<code>core_current</code>, and so on). If it is <code>unset</code>, build current SDKs,
+and use them as usual.</p>
+<h4>TARGET_BUILD_APPS</h4>
+<p>Build the apps that can be distributed outside the platform, so it turns on
+<code>TARGET_BUILD_UNBUNDLED</code>. Also, it turns on <code>TARGET_BUILD_USE_PREBUILT_SDKS</code>, unless
+<code>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</code> is set.</p>
+<h4>TARGET_BUILD_UNBUNDLED_PARTITION</h4>
+<p>It is similar to <code>TARGET_BUILD_APPS</code>, but its target is the unbundled partition
+(such as the vendor partition). Accordingly, it sets <code>TARGET_BUILD_UNBUNDLED</code>.
+We can call the partition unbundled, because the partition can be distributed outside the platform.
+And also, it turns on <code>TARGET_BUILD_USE_PREBUILT_SDKS</code>, unless
+<code>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</code> is set.</p>
+
 <h3><a name="platform-specific"/>Platform specific conditionals</h3>
 <p>Sometimes you need to set flags specifically for different platforms.  Here
 is a list of which values the different build-system defined variables will be
