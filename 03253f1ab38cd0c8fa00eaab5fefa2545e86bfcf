@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c54cf0c7_c6a76aaa",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-08T17:14:33Z",
+      "side": 1,
+      "message": "Vendors may want to install lists of kernel modules to load in certain scenarios, so I think it would be good to support PRODUCT_COPY_FILES in vendor_dlkm.",
+      "parentUuid": "517833cd_e4be39d5",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
