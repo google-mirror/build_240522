@@ -180,6 +180,24 @@
     },
     {
       "key": {
+        "uuid": "b999fb58_7e69b7d6",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-08T23:59:38Z",
+      "side": 1,
+      "message": "\u003e BOARD_*_KERNEL_MODULES_LOAD\n\nSo they should be using that, not PRODUCT_COPY_FILES. Do you mean vendors may provide other lists with other names?",
+      "parentUuid": "f477dcba_c5b319e0",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
