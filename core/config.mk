@@ -531,8 +531,13 @@ ifdef TARGET_BUILD_APPS
     TARGET_BUILD_USE_PREBUILT_SDKS := false
   endif
   TARGET_BUILD_USE_PREBUILT_SDKS ?= true
+  TARGET_BUILD_DISABLE_PREOPT ?= true
 endif
 TARGET_BUILD_USE_PREBUILT_SDKS ?= false
+
+ifneq (,$(filter true,$(TARGET_BUILD_USE_PREBUILT_SDKS)))
+  TARGET_BUILD_DISABLE_PREOPT ?= true
+endif # TARGET_BUILD_USE_PREBUILT_SDKS == true
 
 prebuilt_sdk_tools := prebuilts/sdk/tools
 prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
