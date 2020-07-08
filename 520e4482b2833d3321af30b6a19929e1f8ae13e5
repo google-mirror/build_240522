@@ -111,6 +111,30 @@
       "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39332bc0_9f5fd5b4",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1703091
+      },
+      "writtenOn": "2020-07-08T07:26:14Z",
+      "side": 1,
+      "message": "(add more words about erofs-utils itself...)\nIn erofs-utils implementation, most metadata is cached since mkfs will seek better compacted places to save all inodes and indexes. OTOH, most data is written immediately such it\u0027s block-aligned.\n\nFinally, the whole filesystem itself is in a well-compacted form which is much different from other general fses. As a result sparse img will only increase its img size... (It\u0027s better if fastboot protocol/tool support writing large RAW files, which can only be supported by sparse now.... Since in my previous company, we have such customized fastboot protocol and the phone device itself has some ringbuf for all RAW/sparse files and USB/flash can work at the same time to maximize the download/flash speed.)",
+      "parentUuid": "1b913a00_a72ea959",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 25
+      },
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
