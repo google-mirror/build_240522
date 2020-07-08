@@ -440,6 +440,21 @@ $(GEN): $(intermediates)/<font color=red>%.lut.h</font> : $(LOCAL_PATH)/<font co
 LOCAL_GENERATED_SOURCES += $(GEN)
 </pre>
 
+<h3><a name="unbundled-build"/>Unbundled build</h3>
+<p>Basically, Unbundled build means building without full platform sources. Meanwhile, it also means building an app against prebuilt SDKs
+ instead of building full platform in the app context. Here is a list of flags related to unbundled build.</p>
+
+<h4>UNBUNDLED_BUILD_USE_PREBUILT_SDK</h4>
+<p>Building java modules against prebuilt SDK. So, it enables building unbundled partitions(or modules) without building the whole system.</p>
+<h4>TARGET_BUILD_APPS</h4>
+<p>Building just for the apps included in the variable without the full system, so it turns on <code>TARGET_BUILD_UNBUNDLED</code>.
+If <code>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</code> isn't set, it automatically turns on <code>UNBUNDLED_BUILD_USE_PREBUILT_SDK</code> as well.
+<h4>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</h4>
+<p>If it is set, apps won't be built against prebuilt SDKs, even though it is <code>TARGET_BUILD_APPS</code> mode. Naturally, only one of
+<code>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</code> and <code>UNBUNDLED_BUILD_USE_PREBUILT_SDK</code> can be set.</p>
+<h4>TARGET_BUILD_UNBUNDLED</h4>
+<p>Building without full platform sources. It is also set if <code>TARGET_BUILD_APPS</code> has a value.</p>
+
 <h3><a name="platform-specific"/>Platform specific conditionals</h3>
 <p>Sometimes you need to set flags specifically for different platforms.  Here
 is a list of which values the different build-system defined variables will be
