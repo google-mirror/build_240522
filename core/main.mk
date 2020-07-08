@@ -1393,6 +1393,7 @@ endif
 # going to be installed on the target (including static libraries).
 
 ifdef is_sdk_build
+  $(error gnu logic for sdk targets removed)
   target_gnu_MODULES := \
               $(filter \
                       $(TARGET_OUT_INTERMEDIATES)/% \
