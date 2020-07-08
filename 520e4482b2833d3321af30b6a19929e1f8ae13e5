@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b483b24f_3d2471fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1703091
+      },
+      "writtenOn": "2020-07-08T06:58:13Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abc034da_b0d58368",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 1
@@ -61,6 +78,30 @@
       "side": 1,
       "message": "For (1), I don\u0027t think it does. ext4 images are build with e2fsdroid, which has a sparse IO backend. It looks like it builds the blocks in memory and emits them when the image is done: https://cs.android.com/android/platform/superproject/+/master:external/e2fsprogs/lib/ext2fs/sparse_io.c?q\u003dsparse_io.c",
       "parentUuid": "0d2cbce1_a9648776",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 25
+      },
+      "revId": "520e4482b2833d3321af30b6a19929e1f8ae13e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b913a00_a72ea959",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1703091
+      },
+      "writtenOn": "2020-07-08T06:58:13Z",
+      "side": 1,
+      "message": "Hi David,\n\nYes, that is why I\u0027m a bit worried about that and since EROFS is a compressed filesystem, sparse img won\u0027t do much since it has rare zero blocks for this filesystem.\n\nFrom its starting point, I think it can be done in the long term, but my current bandwidth is limited due to my recent Red Hat work... And the extra time out of img2simg may be only few seconds... So I think it\u0027s reasonable to keep such priority for now...\n\nAnyway, let me seek some extra time on fixing the EROFS build scripts first...\n\nThanks,\nGao Xiang",
+      "parentUuid": "cdb964a7_21cc7fb1",
       "range": {
         "startLine": 301,
         "startChar": 8,
