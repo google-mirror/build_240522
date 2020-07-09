@@ -198,6 +198,24 @@
     },
     {
       "key": {
+        "uuid": "9983f89f_39839789",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-09T00:15:08Z",
+      "side": 1,
+      "message": "That is only one list. Vendors may come up with other lists of modules to load at various stages of init. salyzyn@\u0027s been experimenting with that.",
+      "parentUuid": "b999fb58_7e69b7d6",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
