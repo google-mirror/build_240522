@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cb891b1c_2126055e",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-07-09T20:56:04Z",
+      "side": 1,
+      "message": "Yeah, the expectation that you\u0027d always refer to files using /vendor_dlkm, even if that\u0027s just a compatibility symlink to /vendor/vendor_dlkm on some devices that don\u0027t have a new partition table that includes vendor_dlkm\n\nAnd no, no readme that I know of 😞",
+      "parentUuid": "0fec88cc_4f15ebe8",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "517833cd_e4be39d5",
         "filename": "core/board_config.mk",
         "patchSetId": 6
