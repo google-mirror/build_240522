@@ -216,6 +216,24 @@
     },
     {
       "key": {
+        "uuid": "0c3b46dc_39347232",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-07-09T00:15:48Z",
+      "side": 1,
+      "message": "Regardless, it doesn\u0027t have to go in the vendor_dlkm partition. Vendors can put it in init if they really want it.",
+      "parentUuid": "9983f89f_39839789",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0804a4_ee315360",
         "filename": "core/envsetup.mk",
         "patchSetId": 6
