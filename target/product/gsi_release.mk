@@ -51,3 +51,5 @@ PRODUCT_PACKAGES += \
 
 # Support additional P and Q VNDK packages
 PRODUCT_EXTRA_VNDK_VERSIONS := 28 29
+
+BUILDING_GSI := true
