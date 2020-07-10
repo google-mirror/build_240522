@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0abb4620_2c94a2e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453040
+      },
+      "writtenOn": "2020-07-10T23:28:28Z",
+      "side": 1,
+      "message": "As suggested by Dan in ag/12131246, the ANDROID_ENABLE_METRICS_UPLOAD is defined in AOSP since aosp-master-with-phones is a Googler version of AOSP.",
+      "revId": "d990f70fa2ef691c3a3c32ee319743847de7e411",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
