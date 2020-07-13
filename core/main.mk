@@ -1357,6 +1357,11 @@ modules_to_install := $(sort \
     $(CUSTOM_MODULES) \
   )
 
+product_target_FILES := $(sort \
+  $(product_target_FILES) \
+  $(filter $(PRODUCT_OUT)/%,$(ALL_DEFAULT_INSTALLED_MODULES)) \
+)
+
 ifdef FULL_BUILD
 #
 # Used by the cleanup logic in soong_ui to remove files that should no longer
@@ -1810,9 +1815,9 @@ modules:
 
 .PHONY: dump-files
 dump-files:
-	$(info product_target_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
-	$(foreach p,$(sort $(product_target_FILES)),$(info :   $(p)))
-	@echo Successfully dumped product file list
+	@echo "Target files for $(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT) ($(INTERNAL_PRODUCT)):"
+	@echo $(patsubst $(PRODUCT_OUT)/%,%,$(filter $(PRODUCT_OUT)/%,$(product_target_FILES))) | tr -s ' ' '\n'
+	@echo Successfully dumped product target file list.
 
 .PHONY: nothing
 nothing:
