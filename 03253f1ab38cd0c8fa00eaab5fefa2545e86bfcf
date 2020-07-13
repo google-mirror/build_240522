@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ac9a2e3a_c9a53c77",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2693,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-13T21:22:10Z",
+      "side": 1,
+      "message": "Deleted this symlink. I added a detailed comment in CL:1316439.",
+      "parentUuid": "cb891b1c_2126055e",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "517833cd_e4be39d5",
         "filename": "core/board_config.mk",
         "patchSetId": 6
@@ -302,6 +320,24 @@
       "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb9591e_6795c547",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-13T21:22:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "670d15ef_06b40fa8",
+      "revId": "03253f1ab38cd0c8fa00eaab5fefa2545e86bfcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
