@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499ab647_f06bd40e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-07-13T15:05:58Z",
+      "side": 1,
+      "message": "Hung-ying, this fixes cppreopt on cuttlefish after a local build, on Q the system_b partition is empty without this change (unless you use \"make dist\" images).",
+      "revId": "e25fdd2fcb6c7035d76d521ab5ac1333f0ed11d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
