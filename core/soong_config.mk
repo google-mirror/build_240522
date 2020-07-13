@@ -75,7 +75,9 @@ $(call add_json_bool, HostStaticBinaries,                $(BUILD_HOST_static))
 
 $(call add_json_str,  CrossHost,                         $(HOST_CROSS_OS))
 $(call add_json_str,  CrossHostArch,                     $(HOST_CROSS_ARCH))
+$(call add_json_str,  CrossHostArchVariant,              $(HOST_CROSS_ARCH_VARIANT))
 $(call add_json_str,  CrossHostSecondaryArch,            $(HOST_CROSS_2ND_ARCH))
+$(call add_json_str,  CrossHostSecondaryArchVariant,     $(HOST_CROSS_2ND_ARCH_VARIANT))
 
 $(call add_json_list, DeviceResourceOverlays,            $(DEVICE_PACKAGE_OVERLAYS))
 $(call add_json_list, ProductResourceOverlays,           $(PRODUCT_PACKAGE_OVERLAYS))

@@ -148,15 +148,25 @@ HOST_OS_EXTRA := $(subst $(space),-,$(HOST_OS_EXTRA))
 # BUILD_OS is the real host doing the build.
 BUILD_OS := $(HOST_OS)
 
-HOST_CROSS_OS :=
-# We can cross-build Windows binaries on Linux
+# We can do the cross-build only on Linux
 ifeq ($(HOST_OS),linux)
-ifeq ($(BUILD_HOST_static),)
-HOST_CROSS_OS := windows
-HOST_CROSS_ARCH := x86
-HOST_CROSS_2ND_ARCH := x86_64
-2ND_HOST_CROSS_IS_64_BIT := true
-endif
+  # Windows has been the default host_cross OS
+  ifeq (,$(filter-out windows,$(HOST_CROSS_OS)))
+    # We can only create static host binaries for Linux, so if static host
+    # binaries are requested, turn off Windows cross-builds.
+    ifeq ($(BUILD_HOST_static),)
+      HOST_CROSS_OS := windows
+      HOST_CROSS_ARCH := x86
+      HOST_CROSS_2ND_ARCH := x86_64
+      2ND_HOST_CROSS_IS_64_BIT := true
+    endif
+  else ifeq ($(HOST_CROSS_OS),linux_bionic)
+    HOST_CROSS_ARCH := arm64
+    HOST_CROSS_ARCH_VARIANT := armv8-a
+    # 32-bit ARM Linux host is explicitly not supported
+  else
+    $(error Unsupported HOST_CROSS_OS $(HOST_CROSS_OS))
+  endif
 endif
 
 ifeq ($(HOST_OS),)
