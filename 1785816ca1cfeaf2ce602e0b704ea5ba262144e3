@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003862008",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1359124?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "88c751de_21c3ebde",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-14T16:05:54Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary\u0027 or \u0027secondary\u0027; see https://developers.google.com/style/inclusive-documentation for more details.",
+      "range": {
+        "startLine": 38,
+        "startChar": 59,
+        "endLine": 38,
+        "endChar": 65
+      },
+      "revId": "1785816ca1cfeaf2ce602e0b704ea5ba262144e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
