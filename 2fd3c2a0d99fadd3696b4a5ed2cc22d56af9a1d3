@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7eb2b2ec_8a87b74d",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-07-14T10:24:01Z",
+      "side": 1,
+      "message": "can we drop this ? can you filter $(modules_to_install) in dump-files instead? It seems weird to redefine this variable (and sort it) just in case we want to dump some stuff below.",
+      "range": {
+        "startLine": 1359,
+        "startChar": 0,
+        "endLine": 1363,
+        "endChar": 1
+      },
+      "revId": "2fd3c2a0d99fadd3696b4a5ed2cc22d56af9a1d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
