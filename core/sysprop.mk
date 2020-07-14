@@ -231,6 +231,8 @@ $(strip $(subst _,-, $(firstword $(1))))
 endef
 
 gen_from_buildinfo_sh := $(call intermediates-dir-for,ETC,system_build_prop)/buildinfo.prop
+# This dependency forces buildinfo.prop to be re-built after `m installclean`
+$(gen_from_buildinfo_sh): $(INSTALLED_ANDROID_INFO_TXT_TARGET)
 $(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT)
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
