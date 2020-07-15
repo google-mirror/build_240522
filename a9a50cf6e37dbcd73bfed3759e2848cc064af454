@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b15af58a_2d0cc4e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-15T00:28:10Z",
+      "side": 1,
+      "message": "I ran the script on signed B5 6676510, and apksigner fails on a few apks\n\nType 1 (fallback works):\n/PRODUCT/priv-app/obdm_stub/obdm_stub.apk\nDOES NOT VERIFY\nERROR: JAR signer CERT.RSA: JAR signature META-INF/CERT.SF indicates the APK is signed using APK Signature Scheme v2 but no such signature was found. Signature stripped?\n.....\n\nType 2 (fallback doesn\u0027t work):\nVENDOR/app/adreno_graphics_driver/adreno_graphics_driver.apk \nException in thread \"main\" java.security.NoSuchAlgorithmException: SHA256withRSA/PSS Signature not available\n\tat java.base/java.security.Signature.getInstance(Signature.java:237)\n\tat com.android.apksig.internal.apk.v3.V3SchemeVerifier.parseSigner(V3SchemeVerifier.java:364)\n\tat com.android.apksig.internal.apk.v3.V3SchemeVerifier.parseSigners(V3SchemeVerifier.java:263)\n\tat com.android.apksig.internal.apk.v3.V3SchemeVerifier.verify(V3SchemeVerifier.java:153)\n\tat com.android.apksig.internal.apk.v3.V3SchemeVerifier.verify(V3SchemeVerifier.java:122)\n        ....\n\n",
+      "revId": "a9a50cf6e37dbcd73bfed3759e2848cc064af454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
