@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15c0fe94_822916fc",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-07-15T21:32:58Z",
+      "side": 1,
+      "message": "if you\u0027re going to want to use this stuff, you\u0027ll also need the CLs that rename them internally to be the same as the package name",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 49
+      },
+      "revId": "4e051d80cb40c4de57130de2d71bdcb72fcd986d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
