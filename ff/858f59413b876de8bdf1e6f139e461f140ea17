@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Thomas Joseph Avila <tavila@google.com>
+Submitted-by: Inna Palant <ipalant@google.com>
+Submitted-at: Wed, 15 Jul 2020 13:59:58 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1362884
+Project: platform/build
+Branch: refs/heads/androidx-security-security-crypto-release
