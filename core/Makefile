@@ -2244,6 +2244,9 @@ endif
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
+  @echo "delete tetheroffload.control so file"
+  rm $(PRODUCT_OUT)/system/lib/vndk-29/android.hardware.tetheroffload.control@1.0.so
+  rm $(PRODUCT_OUT)/system/lib64/vndk-29/android.hardware.tetheroffload.control@1.0.so
   $(call create-system-vendor-symlink)
   $(call create-system-product-symlink)
   $(call create-system-product_services-symlink)
