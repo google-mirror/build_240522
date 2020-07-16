@@ -16,6 +16,23 @@
       "revId": "b17143314ab3ab99de6d2c94507eadb40ed82429",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cd16c41_6e936cc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2020-07-16T11:14:27Z",
+      "side": 1,
+      "message": "We may not modify the VNDK list which was already frozen.\nThe new VNDK libs will be available in the next VNDK after the v30, which was also frozen.\n\nFor now, could you please define the interface without android.* package name so that it can be installed to non-system partition until android.hardware.bluetooth.a2dp@1.1 is available?\n\n",
+      "revId": "b17143314ab3ab99de6d2c94507eadb40ed82429",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
