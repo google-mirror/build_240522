@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Thomas Joseph Avila <tavila@google.com>
+Submitted-by: Inna Palant <ipalant@google.com>
+Submitted-at: Thu, 16 Jul 2020 17:11:18 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1364362
+Project: platform/build
+Branch: refs/heads/androidx-slidingpanelayout-release
