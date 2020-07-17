@@ -22,6 +22,30 @@
       "revId": "f66614f1979e71d73bcb47c3a400c6aa41b24d1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebcfb0c8_975d8ccb",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-07-17T08:54:09Z",
+      "side": 1,
+      "message": "uhh, I guess INSTALLED_VBMETAIMAGE_TARGET would have to depend on them. Perhaps that doesn\u0027t make sense together with what you wrote in the CL description.",
+      "parentUuid": "6d567fa8_452b52fa",
+      "range": {
+        "startLine": 1542,
+        "startChar": 0,
+        "endLine": 1542,
+        "endChar": 11
+      },
+      "revId": "f66614f1979e71d73bcb47c3a400c6aa41b24d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
