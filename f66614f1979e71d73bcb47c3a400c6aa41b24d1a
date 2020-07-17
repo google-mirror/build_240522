@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d567fa8_452b52fa",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-07-17T08:52:42Z",
+      "side": 1,
+      "message": "is there a reason vbmetaimage shouldn\u0027t depend on SYSTEMIMAGE_TARGET and VENDORIMAGE_TARGET instead?",
+      "range": {
+        "startLine": 1542,
+        "startChar": 0,
+        "endLine": 1542,
+        "endChar": 11
+      },
+      "revId": "f66614f1979e71d73bcb47c3a400c6aa41b24d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
