@@ -594,10 +594,18 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 
 ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   define copy_test_data_pairs
+    # Soong LOCAL_TEST_DATA is of the form <from_base>:<file>:<relative_dest_file>.
+    # If the <relative_dest_file> portion is missing, <file> will be used.
     _src_base := $$(call word-colon,1,$$(td))
     _file := $$(call word-colon,2,$$(td))
-    my_test_data_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(call append-path,$$(my_module_path),$$(_file))
-    my_test_data_file_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(_file)
+    _relative_install_path := $$(call word-colon,3,$$(td))
+    ifeq (,$$(_relative_install_path))
+	_relative_dest_file := $$(_file)
+    else
+	_relative_dest_file := $$(call append-path,$$(_relative_install_path),$$(_file))
+    endif
+    my_test_data_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(call append-path,$$(my_module_path),$$(_relative_dest_file))
+    my_test_data_file_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(_relative_dest_file)
   endef
 else
   define copy_test_data_pairs
