@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "617429ae_8bae4895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-07-17T21:50:45Z",
+      "side": 1,
+      "message": "Do you also have changes to add this new file to the reading side?\n\nhttps://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SettingsLib/src/com/android/settingslib/license/LicenseHtmlLoaderCompat.java;l\u003d35\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/apps/Car/Settings/src/com/android/car/settings/system/LicenseHtmlLoader.java;drc\u003da7f06f8066c389a85a385c1806600027ed8d207c;l\u003d34\n\netc",
+      "revId": "c83f9e922b3578266e292a605dae6ad0a881de4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
