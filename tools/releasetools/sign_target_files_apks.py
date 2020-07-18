@@ -879,6 +879,7 @@ def ReplaceAvbSigningKeys(misc_info):
       'vbmeta' : 'avb_vbmeta_args',
       'vbmeta_system' : 'avb_vbmeta_system_args',
       'vbmeta_vendor' : 'avb_vbmeta_vendor_args',
+      'odm' : 'avb_odm_add_hashtree_footer_args',
   }
 
   def ReplaceAvbPartitionSigningKey(partition):
