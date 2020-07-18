@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34c2f9c9_4ba74474",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-18T18:44:33Z",
+      "side": 1,
+      "message": "The custom images change in aosp_master was designed for these cases, probably worth checking them out. https://android-review.googlesource.com/c/platform/build/+/1298342",
+      "revId": "25d679d24b6e4886b970ed9d7fbf9f1ba32fd34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
