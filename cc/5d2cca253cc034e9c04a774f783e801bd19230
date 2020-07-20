@@ -1,0 +1,10 @@
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+2: Suren Baghdasaryan <surenb@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Jing Ji <jji@google.com>
+Submitted-at: Mon, 20 Jul 2020 21:57:43 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1366417
+Project: platform/build
+Branch: refs/heads/master
