@@ -15,9 +15,12 @@
 -->
 <!-- This test config file is auto-generated. -->
 <configuration description="Runs {MODULE}">
-    <option name="exclude-paths" value="java" />
     <option name="test-suite-tag" value="apct" />
     <option name="test-suite-tag" value="apct-junit" />
+
+    <option name="java-folder" value="prebuilts/jdk/jdk9/linux-x86/" />
+    <option name="exclude-paths" value="java" />
+    <option name="use-robolectric-resources" value="true" />
 
     {EXTRA_CONFIGS}
 
