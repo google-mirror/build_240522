@@ -41,6 +41,7 @@ from __future__ import print_function
 
 import logging
 import os
+import re
 import sys
 import zipfile
 
@@ -120,11 +121,12 @@ def EntriesForUserImages(input_file):
   with zipfile.ZipFile(input_file) as input_zip:
     namelist = input_zip.namelist()
 
-  for image_path in [name for name in namelist if name.startswith('IMAGES/')]:
+  for image_path in [name for name in namelist if (
+      name.startswith('IMAGES/') or name.startswith('RADIO'))]:
     image = os.path.basename(image_path)
     if OPTIONS.bootable_only and image not in ('boot.img', 'recovery.img'):
       continue
-    if not image.endswith('.img'):
+    if not image.endswith('.img') and not image.endswith('.map'):
       continue
     # Filter out super_empty and the images that are already in super partition.
     if OPTIONS.put_super:
@@ -132,7 +134,29 @@ def EntriesForUserImages(input_file):
         continue
       if image in dynamic_images:
         continue
-    entries.append('{}:{}'.format(image_path, image))
+
+    if image_path.startswith('RADIO'):
+      entries.append('{}:OTA/{}'.format(image_path, image_path))
+    elif image_path.endswith('.map'):
+      entries.append('{}:OTA/IMAGES/{}'.format(image_path, image))
+    else:
+      entries.append('{}:{}'.format(image_path, image))
+
+  for build_props in [name for name in namelist if re.match(
+      '.*/build.*\.prop', name)]:
+    entries.append('{}:OTA/{}'.format(build_props, build_props))
+
+  OTA_METADATA = [
+      'META/misc_info.txt',
+      'META/ab_partitions.txt',
+      'META/update_engine_config.txt',
+      'META/postinstall_config.txt',
+      'META/dynamic_partitions_info.txt',
+      'META/care_map.pb',
+  ]
+  for meta_path in OTA_METADATA:
+    assert meta_path in namelist
+    entries.append('{}:OTA/{}'.format(meta_path, meta_path))
   return entries
 
 
