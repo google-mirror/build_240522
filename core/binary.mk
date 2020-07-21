@@ -1068,11 +1068,21 @@ define use_soong_cfi_static_libraries
       $(l).cfi,$(l)))
 endef
 
+my_building_with_snapshot := false
+
+ifneq ($(LOCAL_USE_VNDK),)
+  ifneq ($(BOARD_VNDK_VERSION),current)
+    my_building_with_snapshot := true
+  endif
+endif
+
 ifneq ($(filter cfi,$(my_sanitize)),)
-  my_whole_static_libraries := $(call use_soong_cfi_static_libraries,\
-    $(my_whole_static_libraries))
-  my_static_libraries := $(call use_soong_cfi_static_libraries,\
-    $(my_static_libraries))
+  ifneq ($(my_building_with_snapshot),true)
+    my_whole_static_libraries := $(call use_soong_cfi_static_libraries,\
+      $(my_whole_static_libraries))
+    my_static_libraries := $(call use_soong_cfi_static_libraries,\
+      $(my_static_libraries))
+  endif
 endif
 
 ifneq ($(LOCAL_USE_VNDK),)
