@@ -268,6 +268,7 @@ OPTIONS.output_metadata_path = None
 OPTIONS.disable_fec_computation = False
 OPTIONS.force_non_ab = False
 OPTIONS.boot_variable_file = None
+OPTIONS.from_image = False
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -2034,6 +2035,32 @@ def CalculateRuntimeDevicesAndFingerprints(build_info, boot_variable_values):
   return device_names, fingerprints
 
 
+def CopyZipEntries(input_file, output_file, entries):
+  logger.info('Writing %d entries to archive...', len(entries))
+  cmd = ['zip2zip', '-i', input_file, '-o', output_file]
+  cmd.extend(entries)
+  common.RunAndCheckOutput(cmd)
+
+
+def FakeTargetFileFromImagefile(image_file):
+  with zipfile.ZipFile(image_file) as input_zip:
+    names = input_zip.namelist()
+
+  entries = []
+  for name in names:
+    if name.startswith('OTA/'):
+      entries.append('{}:{}'.format(name, name[4:]))
+    elif name.endswith('.img'):
+      entries.append('{}:IMAGES/{}'.format(name, name))
+
+  fake_tf = common.MakeTempFile(suffix='.zip')
+  CopyZipEntries(image_file, fake_tf, entries)
+  with zipfile.ZipFile(fake_tf) as tf:
+    print (tf.namelist())
+
+  return fake_tf
+
+
 def main(argv):
 
   def option_handler(o, a):
@@ -2111,6 +2138,8 @@ def main(argv):
       OPTIONS.force_non_ab = True
     elif o == "--boot_variable_file":
       OPTIONS.boot_variable_file = a
+    elif o == "--from_image":
+      OPTIONS.from_image = True
     else:
       return False
     return True
@@ -2149,6 +2178,7 @@ def main(argv):
                                  "disable_fec_computation",
                                  "force_non_ab",
                                  "boot_variable_file=",
+                                 "from_image",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
@@ -2164,6 +2194,13 @@ def main(argv):
     if OPTIONS.incremental_source is None:
       raise ValueError("Cannot generate downgradable full OTAs")
 
+  target_file = args[0]
+  source_file = OPTIONS.incremental_source
+  if OPTIONS.from_image:
+    target_file = FakeTargetFileFromImagefile(target_file)
+    if source_file:
+      source_file = FakeTargetFileFromImagefile(source_file)
+
   # Load the build info dicts from the zip directly or the extracted input
   # directory. We don't need to unzip the entire target-files zips, because they
   # won't be needed for A/B OTAs (brillo_update_payload does that on its own).
@@ -2174,16 +2211,16 @@ def main(argv):
   if OPTIONS.extracted_input is not None:
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
-    with zipfile.ZipFile(args[0], 'r') as input_zip:
+    with zipfile.ZipFile(target_file, 'r') as input_zip:
       OPTIONS.info_dict = common.LoadInfoDict(input_zip)
 
   logger.info("--- target info ---")
   common.DumpInfoDict(OPTIONS.info_dict)
 
   # Load the source build dict if applicable.
-  if OPTIONS.incremental_source is not None:
+  if source_file is not None:
     OPTIONS.target_info_dict = OPTIONS.info_dict
-    with zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
+    with zipfile.ZipFile(source_file, 'r') as source_zip:
       OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
 
     logger.info("--- source info ---")
@@ -2230,9 +2267,9 @@ def main(argv):
 
   if generate_ab:
     GenerateAbOtaPackage(
-        target_file=args[0],
+        target_file=target_file,
         output_file=args[1],
-        source_file=OPTIONS.incremental_source)
+        source_file=source_file)
 
   else:
     GenerateNonAbOtaPackage(
