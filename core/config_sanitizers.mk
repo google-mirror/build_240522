@@ -128,6 +128,13 @@ ifneq ($(filter arm,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+# Also disable CFI is building against snapshot.
+ifneq ($(LOCAL_USE_VNDK),)
+  ifneq ($(BOARD_VNDK_VERSION),current)
+    my_sanitize := $(filter-out cfi,$(my_sanitize))
+  endif
+endif
+
 # Also disable CFI if ASAN is enabled.
 ifneq ($(filter address,$(my_sanitize)),)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
