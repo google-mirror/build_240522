@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81598500_3acd8eaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-07-22T09:54:02Z",
+      "side": 1,
+      "message": "Abandoning in favor of aosp/1369736",
+      "revId": "4fbf4b453116ddc5fac4033b16727832e79d4037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
