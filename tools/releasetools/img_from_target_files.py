@@ -204,7 +204,6 @@ def ImgFromTargetFiles(input_file, output_file):
 
   # Any additional entries provided by caller.
   entries += OPTIONS.additional_entries
-
   CopyZipEntries(input_file, output_file, entries)
 
   if rebuild_super:
