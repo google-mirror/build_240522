@@ -242,7 +242,9 @@ TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
 TARGET_COPY_OUT_OEM := oem
 TARGET_COPY_OUT_RAMDISK := ramdisk
 TARGET_COPY_OUT_DEBUG_RAMDISK := debug_ramdisk
-TARGET_COPY_OUT_VENDOR_DEBUG_RAMDISK := vendor_debug_ramdisk
+# The vendor debug ramdisk is only used with the GKI which is built as
+# recovery-as-boot.
+TARGET_COPY_OUT_VENDOR_DEBUG_RAMDISK := vendor_debug_ramdisk/first_stage_ramdisk
 TARGET_COPY_OUT_TEST_HARNESS_RAMDISK := test_harness_ramdisk
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
