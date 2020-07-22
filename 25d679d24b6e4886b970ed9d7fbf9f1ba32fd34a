@@ -34,6 +34,24 @@
       "revId": "25d679d24b6e4886b970ed9d7fbf9f1ba32fd34a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffb01699_3a4d7a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-22T22:55:01Z",
+      "side": 1,
+      "message": "It will be available in R not Q. So you need a Q based implementation in your own codebase. android10-dev is no longer maintained.",
+      "parentUuid": "73fa8166_67e8129a",
+      "revId": "25d679d24b6e4886b970ed9d7fbf9f1ba32fd34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
