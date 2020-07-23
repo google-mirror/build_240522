@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8313d0bc_b6c5fee8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-23T00:26:46Z",
+      "side": 1,
+      "message": "respectful..",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "e393d3de2e3e9c41bfce3d886db37822567227f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b7db10_e19eab97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-23T00:26:46Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "e393d3de2e3e9c41bfce3d886db37822567227f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
