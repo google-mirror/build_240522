@@ -60,7 +60,7 @@ break, and the fix may to be to obsolete them. There is no expectation that the
 `BUILD_BROKEN_USES_BUILD_*` workarounds will work in a future release, it's a
 short-term workaround.
 
-Just to be clear, the above process will happen on the AOSP master branch. So
+Just to be clear, the above process will happen on the AOSP primary branch. So
 if you're following Android releases, none of the deprecation steps will be in
 Android Q, and the 2020 release will have jumped directly to the end for many
 module types.
