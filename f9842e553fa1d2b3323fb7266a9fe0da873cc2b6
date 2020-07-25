@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cf9589_3e378d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-07-25T23:14:53Z",
+      "side": 1,
+      "message": "yifan, what do you think about the proposal here. If we are using aosp_arm64 as GKI container, we can just use it to generate the GKI OTA package. Also we might want more general solution to generate other system/product only updates.\n\nWe also need to implement the new OTA metadata format, so the precondition doesn\u0027t rely on system/build.prop. [and we definitely need to clean up the script to separate out the non-A/B stuff]",
+      "revId": "f9842e553fa1d2b3323fb7266a9fe0da873cc2b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
