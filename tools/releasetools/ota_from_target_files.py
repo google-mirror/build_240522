@@ -268,6 +268,7 @@ OPTIONS.output_metadata_path = None
 OPTIONS.disable_fec_computation = False
 OPTIONS.force_non_ab = False
 OPTIONS.boot_variable_file = None
+OPTIONS.gki = False
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -401,6 +402,9 @@ class Payload(object):
       cmd.extend(["--source_image", source_file])
       if OPTIONS.disable_fec_computation:
         cmd.extend(["--disable_fec_computation", "true"])
+
+    if OPTIONS.gki:
+      cmd.extend(["--is_partial_update", "true"])
     cmd.extend(additional_args)
     self._Run(cmd)
 
@@ -2036,6 +2040,39 @@ def CalculateRuntimeDevicesAndFingerprints(build_info, boot_variable_values):
   return device_names, fingerprints
 
 
+def CopyZipEntries(input_file, output_file, entries):
+  logger.info('Writing %d entries to archive...', len(entries))
+  cmd = ['zip2zip', '-i', input_file, '-o', output_file]
+  cmd.extend(entries)
+  common.RunAndCheckOutput(cmd)
+
+
+def FakeTargetFileForGKI(input_tf):
+  with zipfile.ZipFile(input_tf) as input_zip:
+    names = input_zip.namelist()
+
+  entry_dict = {
+      'META/misc_info.txt': 'META/misc_info.txt',
+      'META/update_engine_config.txt': 'META/update_engine_config.txt',
+      'IMAGES/boot-5.4.img': 'IMAGES/boot.img',
+  }
+  # Add a fake prop file
+  props = [prop for prop in ['SYSTEM/build.prop', 'SYSTEM/etc/build.prop']
+           if prop in names]
+  assert props
+  entry_dict.update({props[0]: props[0]})
+
+  fake_tf = common.MakeTempFile(suffix='.zip')
+
+  CopyZipEntries(input_tf, fake_tf, ['{}:{}'.format(key, val)
+                                     for key, val in entry_dict.items()])
+  with zipfile.ZipFile(fake_tf, 'a') as tf:
+    common.ZipWriteStr(tf, 'META/ab_partitions.txt', 'boot')
+    print (tf.namelist())
+
+  return fake_tf
+
+
 def main(argv):
 
   def option_handler(o, a):
@@ -2113,6 +2150,8 @@ def main(argv):
       OPTIONS.force_non_ab = True
     elif o == "--boot_variable_file":
       OPTIONS.boot_variable_file = a
+    elif o == "--gki":
+      OPTIONS.gki = True
     else:
       return False
     return True
@@ -2150,7 +2189,7 @@ def main(argv):
                                  "output_metadata_path=",
                                  "disable_fec_computation",
                                  "force_non_ab",
-                                 "boot_variable_file=",
+                                 "gki",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
@@ -2158,6 +2197,12 @@ def main(argv):
     sys.exit(1)
 
   common.InitLogging()
+
+  target_file = args[0]
+  source_file = OPTIONS.incremental_source
+  if OPTIONS.gki:
+    target_file = FakeTargetFileForGKI(target_file)
+    assert not source_file, 'GKI does not support incremental yet'
 
   if OPTIONS.downgrade:
     # We should only allow downgrading incrementals (as opposed to full).
@@ -2176,7 +2221,7 @@ def main(argv):
   if OPTIONS.extracted_input is not None:
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
-    with zipfile.ZipFile(args[0], 'r') as input_zip:
+    with zipfile.ZipFile(target_file, 'r') as input_zip:
       OPTIONS.info_dict = common.LoadInfoDict(input_zip)
 
   logger.info("--- target info ---")
@@ -2211,7 +2256,7 @@ def main(argv):
   if OPTIONS.retrofit_dynamic_partitions:
     OPTIONS.skip_postinstall = True
 
-  ab_update = OPTIONS.info_dict.get("ab_update") == "true"
+  ab_update = OPTIONS.info_dict.get("ab_update") == "true" or OPTIONS.gki
   allow_non_ab = OPTIONS.info_dict.get("allow_non_ab") == "true"
   if OPTIONS.force_non_ab:
     assert allow_non_ab, "--force_non_ab only allowed on devices that supports non-A/B"
@@ -2232,7 +2277,7 @@ def main(argv):
 
   if generate_ab:
     GenerateAbOtaPackage(
-        target_file=args[0],
+        target_file=target_file,
         output_file=args[1],
         source_file=OPTIONS.incremental_source)
 
