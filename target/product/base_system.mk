@@ -78,6 +78,7 @@ PRODUCT_PACKAGES += \
     ExtServices \
     ExtShared \
     flags_health_check \
+    framework-connectivity \
     framework-minus-apex \
     framework-res \
     framework-sysconfig.xml \
@@ -320,6 +321,7 @@ endif
 PRODUCT_BOOT_JARS := \
     $(ART_APEX_JARS) \
     framework-minus-apex \
+    framework-connectivity \
     ext \
     com.android.i18n:core-icu4j \
     telephony-common \
