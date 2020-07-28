@@ -9,6 +9,8 @@ product config variables.
 
 For system partititon,
 
+blacklist
+
 * `PRODUCT_SYSTEM_PROPERITES`
 * `PRODUCT_SYSTEM_DEFAULT_PROPERTIES` is highly discouraged. Will be deprecated.
 
@@ -57,11 +59,15 @@ To temporarily turn the build-time restriction off, use
 
 `BUILD_BROKEN_DUP_SYSPROP := true`
 
+blind eye
+
 ### Optional assignments
 
 System properties can now be set as optional using the new syntax:
 
 `name ?= value`
+
+dummy
 
 Then the system property named `name` gets the value `value` only when there
 is no other non-optional assignments having the same name. For example, the
