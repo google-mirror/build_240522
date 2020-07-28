@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004072556",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1373506?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ecd36d68_112a4728",
+        "filename": "Changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-28T19:54:04Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "7071f28ae2da9ef88fefaa801f71e05a636260a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004072556",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1373506?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "924df66d_107c163f",
+        "filename": "Changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-28T19:54:04Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "7071f28ae2da9ef88fefaa801f71e05a636260a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004072556",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1373506?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "49122758_25e7d421",
+        "filename": "Changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-28T19:54:04Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 5
+      },
+      "revId": "7071f28ae2da9ef88fefaa801f71e05a636260a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
