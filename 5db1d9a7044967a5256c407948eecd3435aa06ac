@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004099490",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1378776?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "454f9bfb_9a204c43",
+          "description": "Change to \"tools/releasetools/common.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/common.py",
+              "range": {
+                "startLine": 3831,
+                "startChar": 12,
+                "endLine": 3831,
+                "endChar": 22
+              },
+              "replacement": "metadata"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "437f0aae_b518d3d9",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3831,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-29T21:11:03Z",
+      "side": 1,
+      "message": "Common typo found: \"metadadata\" -- should it be \"metadata\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 3831,
+        "startChar": 12,
+        "endLine": 3831,
+        "endChar": 22
+      },
+      "revId": "5db1d9a7044967a5256c407948eecd3435aa06ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
