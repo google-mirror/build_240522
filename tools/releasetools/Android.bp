@@ -93,6 +93,7 @@ python_defaults {
     srcs: [
         "edify_generator.py",
         "ota_from_target_files.py",
+        "non_ab_ota.py",
         "target_files_diff.py",
     ],
     libs: [
