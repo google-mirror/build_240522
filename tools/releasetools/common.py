@@ -24,6 +24,7 @@ import getopt
 import getpass
 import gzip
 import imp
+import itertools
 import json
 import logging
 import logging.config
@@ -46,6 +47,8 @@ from blockimgdiff import BlockImageDiff
 
 logger = logging.getLogger(__name__)
 
+METADATA_NAME = 'META-INF/com/android/metadata'
+UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
 
 class Options(object):
 
@@ -1227,7 +1230,7 @@ def _MakeRamdisk(sourcedir, fs_config_file=None, lz4_ramdisks=False):
     cmd = ["mkbootfs", os.path.join(sourcedir, "RAMDISK")]
   p1 = Run(cmd, stdout=subprocess.PIPE)
   if lz4_ramdisks:
-    p2 = Run(["lz4", "-l", "-12" , "--favor-decSpeed"], stdin=p1.stdout,
+    p2 = Run(["lz4", "-l", "-12", "--favor-decSpeed"], stdin=p1.stdout,
              stdout=ramdisk_img.file.fileno())
   else:
     p2 = Run(["minigzip"], stdin=p1.stdout, stdout=ramdisk_img.file.fileno())
@@ -3406,3 +3409,4 @@ class DynamicPartitionsDifference(object):
         comment('Move partition %s from default to %s' %
                 (p, u.tgt_group))
         append('move %s %s' % (p, u.tgt_group))
+
