@@ -1400,6 +1400,7 @@ ALL_DEFAULT_INSTALLED_MODULES :=
 
 
 $(call fix-notice-deps)
+$(call build-license-metadata)
 
 
 # These are additional goals that we build, in order to make sure that there
