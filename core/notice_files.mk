@@ -107,6 +107,7 @@ ifdef my_register_name
 ALL_MODULES.$(my_register_name).LICENSE_PACKAGE_NAME := $(strip $(license_package_name))
 ALL_MODULES.$(my_register_name).LICENSE_KINDS := $(sort $(ALL_MODULES.$(my_register_name).LICENSE_KINDS) $(license_kinds))
 ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS := $(sort $(ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS) $(license_conditions))
+ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP := $(sort $(ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP) $(install_map))
 ALL_MODULES.$(my_register_name).NOTICE_DEPS := $(sort $(ALL_MODULES.$(my_register_name).NOTICE_DEPS) $(notice_deps))
 ALL_MODULES.$(my_register_name).IS_CONTAINER := $(sort $(ALL_MODULES.$(my_register_name).IS_CONTAINER) $(is_container))
 endif
@@ -159,7 +160,7 @@ else
       module_installed_filename := \
           $(patsubst $(PRODUCT_OUT)/%,%,$($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT_SHARED_LIBRARIES))/$(notdir $(LOCAL_BUILT_MODULE))
     else
-      $(error Cannot determine where to install NOTICE file for $(LOCAL_MODULE))
+      $(warning Cannot determine where to install NOTICE file for $(LOCAL_MODULE))
     endif # JAVA_LIBRARIES
   endif # STATIC_LIBRARIES
 endif
