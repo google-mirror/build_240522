@@ -357,6 +357,14 @@ _prop_files_ := $(if $(TARGET_PRODUCT_PROP),\
     $(TARGET_PRODUCT_PROP),\
     $(wildcard $(TARGET_DEVICE_DIR)/product.prop))
 
+ifeq ($(AB_OTA_UPDATER),true)
+ab_partitions_prop := $(call intermediates-dir-for,ETC,ab_partitions_prop)/ab_partitions.prop
+# AB_OTA_PARTITIONS maybe modified in Android.mk to include the bootloader and radio images.
+$(ab_partitions_prop): $(INSTALLED_RADIOIMAGE_TARGET)
+	echo "ro.product.ab_ota_partitions=$(subst $(space),$(comma),$(AB_OTA_PARTITIONS))" > $@
+_prop_files_ += $(ab_partitions_prop)
+endif
+
 # Order matters here. When there are duplicates, the last one wins.
 # TODO(b/117892318): don't allow duplicates so that the ordering doesn't matter
 _prop_vars_ := \
