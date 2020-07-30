@@ -36,6 +36,7 @@ PRODUCT_PACKAGES += \
     make_f2fs \
     requestsync \
     StatementService \
+    vndk_apex_compatibility_symlinks_package \
 
 PRODUCT_HOST_PACKAGES += \
     fsck.f2fs \

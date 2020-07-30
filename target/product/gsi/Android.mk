@@ -178,6 +178,35 @@ _vndk_versions :=
 endif # BOARD_VNDK_VERSION is set
 
 #####################################################################
+# Symlinks pointing to VNDK snapshots for backwards compatibility.
+
+# TODO(b/142911355): Remove this when all the hard-coded references to
+# /system/lib/vndk are fixed.
+all_vndk_snapshot_versions := 27 28 29
+
+_symlinks :=
+ifeq ($(TARGET_IS_64_BIT),true)
+  $(foreach v,$(all_vndk_snapshot_versions), \
+    $(call symlink-file,,/apex/com.android.vndk.v$(v)/lib64,$(TARGET_OUT)/lib64/vndk-$(v)) \
+    $(call symlink-file,,/apex/com.android.vndk.v$(v)/lib64,$(TARGET_OUT)/lib64/vndk-sp-$(v)) \
+    $(eval _symlinks += $(TARGET_OUT)/lib64/vndk-$(v) $(TARGET_OUT)/lib64/vndk-sp-$(v)) \
+  )
+endif # TARGET_IS_64_BIT == true
+ifneq (,$(filter true,$(if $(filter true,$(TARGET_IS_64_BIT)),,true) $(if $(TARGET_2ND_ARCH),true)))
+  $(foreach v,$(all_vndk_snapshot_versions), \
+    $(call symlink-file,,/apex/com.android.vndk.v$(v)/lib,$(TARGET_OUT)/lib/vndk-$(v)) \
+    $(call symlink-file,,/apex/com.android.vndk.v$(v)/lib,$(TARGET_OUT)/lib/vndk-sp-$(v)) \
+    $(eval _symlinks += $(TARGET_OUT)/lib/vndk-$(v) $(TARGET_OUT)/lib/vndk-sp-$(v)) \
+  )
+endif # TARGET_IS_64_BIT != true || TARGET_2ND_ARCH != empty
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := vndk_apex_compatibility_symlinks_package
+include $(BUILD_PHONY_PACKAGE)
+ALL_MODULES.$(my_register_name).INSTALLED += $(_symlinks)
+$(my_all_targets): | $(_symlinks)
+
+#####################################################################
 # skip_mount.cfg, read by init to skip mounting some partitions when GSI is used.
 
 include $(CLEAR_VARS)
