@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83150aa3_9a417512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071150
+      },
+      "writtenOn": "2020-07-30T14:18:24Z",
+      "side": 1,
+      "message": "TH issues should be fixed when http://go/ag/12271569 lands. Phew!",
+      "revId": "544d9dda44e8c4e7eb9aed20058d8de0b89310ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
