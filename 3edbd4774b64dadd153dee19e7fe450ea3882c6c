@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004145127",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1384276?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d2b54058_0d220b74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-31T20:32:36Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 7,
+        "startChar": 43,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "3edbd4774b64dadd153dee19e7fe450ea3882c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004145127",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1384276?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "623131fe_be626737",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-31T20:32:36Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 148,
+        "startChar": 59,
+        "endLine": 148,
+        "endChar": 68
+      },
+      "revId": "3edbd4774b64dadd153dee19e7fe450ea3882c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
