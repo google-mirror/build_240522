@@ -17,6 +17,7 @@
 # Base modules and settings for the system partition.
 PRODUCT_PACKAGES += \
     adbd_system_api \
+    adpfservice \
     am \
     android.hidl.allocator@1.0-service \
     android.hidl.base-V1.0-java \
@@ -114,6 +115,7 @@ PRODUCT_PACKAGES += \
     keystore \
     ld.mc \
     libaaudio \
+    libAdpf \
     libamidi \
     libandroid \
     libandroidfw \
