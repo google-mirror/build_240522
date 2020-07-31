@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "344af211_61de2d54",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-07-31T20:40:58Z",
+      "side": 1,
+      "message": "Use $(KATI_obsolete_var) in build/make/core/config.mk and then users will get an error on the line they use LOCAL_SANITIZE_BLACKLIST instead of just the module name.",
+      "revId": "3edbd4774b64dadd153dee19e7fe450ea3882c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
