@@ -67,6 +67,7 @@ PRODUCT_PACKAGES += \
     content \
     debuggerd\
     device_config \
+    dmabuf_dump \
     dmctl \
     dnsmasq \
     DownloadProvider \
