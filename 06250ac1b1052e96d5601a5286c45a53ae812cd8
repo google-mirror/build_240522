@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bbe97a0_9601cb54",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-03T19:58:09Z",
+      "side": 1,
+      "message": "Anywhere more central this can go?  If this gets duplicated in too many places its likely one of them will fail to get updated when the partition mapping changes.",
+      "range": {
+        "startLine": 1062,
+        "startChar": 0,
+        "endLine": 1074,
+        "endChar": 5
+      },
+      "revId": "06250ac1b1052e96d5601a5286c45a53ae812cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
