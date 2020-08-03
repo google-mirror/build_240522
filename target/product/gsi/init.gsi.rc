@@ -1,3 +1,5 @@
 #
 # Android init script for GSI required initialization
 #
+
+import /system/system_ext/etc/init/gsi/init.vndk-${ro.vndk.version:-nodef}.rc
