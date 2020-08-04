@@ -22,6 +22,30 @@
       "revId": "06250ac1b1052e96d5601a5286c45a53ae812cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74ff7981_65abdfeb",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-08-04T01:25:59Z",
+      "side": 1,
+      "message": "I moved this to base_rules.mk",
+      "parentUuid": "6bbe97a0_9601cb54",
+      "range": {
+        "startLine": 1062,
+        "startChar": 0,
+        "endLine": 1074,
+        "endChar": 5
+      },
+      "revId": "06250ac1b1052e96d5601a5286c45a53ae812cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
