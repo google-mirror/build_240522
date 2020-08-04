@@ -16,6 +16,24 @@
       "revId": "8b0ccdafbbfc68787bf30fbf5898791924c18ac1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbfeeb78_77abfe7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-08-04T15:17:53Z",
+      "side": 1,
+      "message": "I\u0027ll leave it because building host binaries and libraries is obsolete.",
+      "parentUuid": "e4848b61_c584ac39",
+      "revId": "8b0ccdafbbfc68787bf30fbf5898791924c18ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
