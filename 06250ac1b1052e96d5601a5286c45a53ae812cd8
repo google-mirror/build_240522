@@ -69,6 +69,30 @@
       "revId": "06250ac1b1052e96d5601a5286c45a53ae812cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fa428a4_225e2b80",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-08-04T08:18:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "865cbbde_bf752037",
+      "range": {
+        "startLine": 1083,
+        "startChar": 12,
+        "endLine": 1083,
+        "endChar": 13
+      },
+      "revId": "06250ac1b1052e96d5601a5286c45a53ae812cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
