@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93a5b270_05749854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-05T23:52:55Z",
+      "side": 1,
+      "message": "This doesn\u0027t work any more, OpenJDK11 doesn\u0027t contain the jre.zip that we need.  We\u0027ll need to rezip the whole JDK.",
+      "revId": "f787f63cb5a6d9c62bdeb257f4fcc49f4d846a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
