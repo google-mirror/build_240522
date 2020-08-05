@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78f7f590_a38559c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-05T23:29:46Z",
+      "side": 1,
+      "message": "\u003e Patch Set 3:\n\u003e \n\u003e In view of JDK11 having only JDK by default, perhaps it would make sense to have jdk.zip instead?\n\nDone",
+      "revId": "1c7c5596e1aee2754ba0108f9f5bb115e7f97b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
