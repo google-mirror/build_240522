@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (d9d2df Merge "support make_f2fs with casefolding")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=QQ3A.200805.001
+>>>>>>> BRANCH (4dc6c8 Make change and version bump to QQ3A.200805.001)
