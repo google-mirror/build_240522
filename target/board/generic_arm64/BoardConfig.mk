@@ -72,6 +72,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 BOARD_KERNEL_BINARIES := kernel-5.4 kernel-5.4-gz kernel-5.4-lz4 \
     kernel-mainline kernel-mainline-gz kernel-mainline-lz4
+BOARD_KERNEL_MODULE_INTERFACE_VERSIONS := 5.4-android12-0
 
 # Some vendors still haven't cleaned up all device specific directories under
 # root!
