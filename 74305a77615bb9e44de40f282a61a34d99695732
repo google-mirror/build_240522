@@ -22,6 +22,30 @@
       "revId": "74305a77615bb9e44de40f282a61a34d99695732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c84ddf01_bb1c42a2",
+        "filename": "target/product/gsi/init.vndk-nodef.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2020-08-05T10:10:11Z",
+      "side": 1,
+      "message": "They cannot test VTS and are out of scope of GSI.",
+      "parentUuid": "6191cffb_35f325ba",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 36
+      },
+      "revId": "74305a77615bb9e44de40f282a61a34d99695732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
