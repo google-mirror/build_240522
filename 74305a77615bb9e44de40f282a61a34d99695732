@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7dfec76a_fe2d4e6e",
+        "filename": "target/product/gsi/init.gsi.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-08-05T10:13:01Z",
+      "side": 1,
+      "message": "isn\u0027t this path extra?\nLOCAL_MODULE_RELATIVE_PATH is set to init not init/gsi",
+      "range": {
+        "startLine": 5,
+        "startChar": 35,
+        "endLine": 5,
+        "endChar": 38
+      },
+      "revId": "74305a77615bb9e44de40f282a61a34d99695732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6191cffb_35f325ba",
         "filename": "target/product/gsi/init.vndk-nodef.rc",
         "patchSetId": 1
