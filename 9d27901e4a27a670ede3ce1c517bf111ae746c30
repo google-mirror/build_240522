@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf3bbb1a_5e66b806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-06T21:26:36Z",
+      "side": 1,
+      "message": "Some linefeeds might make the printed error message more readable.",
+      "revId": "9d27901e4a27a670ede3ce1c517bf111ae746c30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
