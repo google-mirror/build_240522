@@ -1859,6 +1859,12 @@ ifneq ($(UNSAFE_DISABLE_APEX_ALLOWED_DEPS_CHECK),true)
   droidcore: ${APEX_ALLOWED_DEPS_CHECK}
 endif
 
+dump-ndk-abi: $(SOONG_OUT_DIR)/ndk_abi_dump.timestamp
+.PHONY: dump-ndk-abi
+
+diff-ndk-abi: $(SOONG_OUT_DIR)/ndk_abi_diff.timestamp
+.PHONY: diff-ndk-abi
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
