@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae8f48fa_35e25a9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-08-07T17:08:18Z",
+      "side": 1,
+      "message": "Pointed here from a bug. To remove a file, we should avoid installing it in the first place.\n\nAlso, I\u0027m not sure the reason this is being removed.",
+      "revId": "199e0a969968287a43ee74cebfb4d7d70877238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
