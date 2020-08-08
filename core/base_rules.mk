@@ -467,28 +467,19 @@ endif
 # Set up phony targets that covers all modules under the given paths.
 # This allows us to build everything in given paths by running mmma/mma.
 define my_path_comp
-parent := $(patsubst %/,%,$(dir $(1)))
-parent_target := MODULES-IN-$$(subst /,-,$$(parent))
-.PHONY: $$(parent_target)
-$$(parent_target): $(2)
-ifndef $$(parent_target)
-  $$(parent_target) := true
-  ifneq (,$$(findstring /,$$(parent)))
-    $$(eval $$(call my_path_comp,$$(parent),$$(parent_target)))
+_local_path := $(patsubst %/,%,$(1))
+_local_path_target := MODULES-IN-$$(subst /,-,$$(_local_path))
+.PHONY: $$(_local_path_target)
+$$(_local_path_target): $(2)
+ifndef $$(_local_path_target)
+  $$(_local_path_target) := true
+  ifneq (,$$(findstring /,$$(_local_path)))
+    $$(eval $$(call my_path_comp,$$(dir $$(_local_path)),$$(_local_path_target)))
   endif
 endif
 endef
 
-_local_path := $(patsubst %/,%,$(LOCAL_PATH))
-_local_path_target := MODULES-IN-$(subst /,-,$(_local_path))
-
-.PHONY: $(_local_path_target)
-$(_local_path_target): $(my_register_name)
-
-ifndef $(_local_path_target)
-  $(_local_path_target) := true
-  $(eval $(call my_path_comp,$(_local_path),$(_local_path_target)))
-endif
+$(eval $(call my_path_comp,$(LOCAL_PATH),$(my_register_name)))
 
 _local_path :=
 _local_path_target :=
