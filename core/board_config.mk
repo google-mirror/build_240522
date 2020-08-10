@@ -621,6 +621,30 @@ endif
 .KATI_READONLY := BUILDING_ODM_DLKM_IMAGE
 
 ###########################################
+# Are we building mainline image
+BOARD_USES_MAINLINEIMAGE :=
+ifdef BOARD_PREBUILT_MAINLINEIMAGE
+  $(error BOARD_PREBUILT_MAINLINEIMAGE must not be set. Prebuilt mainline image is not allowed. Instead, install prebuilt APEXes.)
+endif
+ifdef BOARD_MAINLINEIMAGE_FILE_SYSTEM_TYPE
+  BOARD_USES_MAINLINEIMAGE := true
+endif
+
+BUILDING_MAINLINE_IMAGE :=
+ifeq ($(PRODUCT_BUILD_MAINLINE_IMAGE),)
+  ifdef BOARD_MAINLINEIMAGE_FILE_SYSTEM_TYPE
+    BUILDING_MAINLINE_IMAGE := true
+  endif
+else ifeq ($(PRODUCT_BUILD_MAINLINE_IMAGE),true)
+  BUILDING_MAINLINE_IMAGE := true
+  ifndef BOARD_MAINLINEIMAGE_FILE_SYSTEM_TYPE
+    $(error PRODUCT_BUILD_MAINLINE_IMAGE set to true, but BOARD_MAINLINEIMAGE_FILE_SYSTEM_TYPE not defined)
+  endif
+endif
+# BOARD_PREBUILT_MAINLINEIMAGE is not allowed.
+.KATI_READONLY := BUILDING_MAINLINE_IMAGE
+
+###########################################
 # Ensure consistency among TARGET_RECOVERY_UPDATER_LIBS, AB_OTA_UPDATER, and PRODUCT_OTA_FORCE_NON_AB_PACKAGE.
 TARGET_RECOVERY_UPDATER_LIBS ?=
 AB_OTA_UPDATER ?=

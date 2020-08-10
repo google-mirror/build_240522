@@ -1394,6 +1394,20 @@ $(if $(filter $(2),odm_dlkm),\
     $(hide) echo "odm_dlkm_selinux_fc=$(SELINUX_FC)" >> $(1)
     $(hide) echo "building_odm_dlkm_image=$(BUILDING_ODM_DLKM_IMAGE)" >> $(1)
 )
+$(if $(filter $(2),mainline),\
+    $(if $(BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE),$(hide) echo "mainline_fs_type=$(BOARD_MAINLINEIMAGE_FILE_SYSTEM_TYPE)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_EXTFS_INODE_COUNT),$(hide) echo "mainline_extfs_inode_count=$(BOARD_MAINLINEIMAGE_EXTFS_INODE_COUNT)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_EXTFS_RSV_PCT),$(hide) echo "mainline_extfs_rsv_pct=$(BOARD_MAINLINEIMAGE_EXTFS_RSV_PCT)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_PARTITION_SIZE),$(hide) echo "mainline_size=$(BOARD_MAINLINEIMAGE_PARTITION_SIZE)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_JOURNAL_SIZE),$(hide) echo "mainline_journal_size=$(BOARD_MAINLINEIMAGE_JOURNAL_SIZE)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "mainline_squashfs_compressor=$(BOARD_MAINLINEIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "mainline_squashfs_compressor_opt=$(BOARD_MAINLINEIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "mainline_squashfs_block_size=$(BOARD_MAINLINEIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "mainline_squashfs_disable_4k_align=$(BOARD_MAINLINEIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
+    $(if $(BOARD_MAINLINEIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "mainline_reserved_size=$(BOARD_MAINLINEIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
+    $(hide) echo "mainline_selinux_fc=$(SELINUX_FC)" >> $(1)
+    $(hide) echo "building_mainline_image=$(BUILDING_MAINLINE_IMAGE)" >> $(1)
+)
 $(if $(filter $(2),oem),\
     $(if $(BOARD_OEMIMAGE_PARTITION_SIZE),$(hide) echo "oem_size=$(BOARD_OEMIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_OEMIMAGE_JOURNAL_SIZE),$(hide) echo "oem_journal_size=$(BOARD_OEMIMAGE_JOURNAL_SIZE)" >> $(1))
@@ -1528,6 +1542,9 @@ ifdef BUILDING_VENDOR_DLKM_IMAGE
 endif
 ifdef BUILDING_ODM_DLKM_IMAGE
   PROP_DICTIONARY_IMAGES += odm_dlkm
+endif
+ifdef BUILDING_MAINLINE_IMAGE
+  PROP_DICTIONARY_IMAGES += mainline
 endif
 define generate-userimage-prop-dictionary
   $(call generate-image-prop-dictionary,$(1),$(PROP_DICTIONARY_IMAGES),$(2))
@@ -3163,6 +3180,57 @@ INSTALLED_ODM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/odm_dlkm.img
 $(eval $(call copy-one-file,$(BOARD_PREBUILT_ODM_DLKMIMAGE),$(INSTALLED_ODM_DLKMIMAGE_TARGET)))
 endif
 
+# -----------------------------------------------------------------
+# mainline partition image
+ifdef BUILDING_MAINLINE_IMAGE
+INTERNAL_MAINLINEIMAGE_FILES := \
+    $(filter $(TARGET_OUT_MAINLINE)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES)\
+      $(ALL_PDK_FUSION_FILES)) \
+    $(PDK_FUSION_SYMLINK_STAMP)
+# platform.zip depends on $(INTERNAL_MAINLINEIMAGE_FILES).
+$(INSTALLED_PLATFORM_ZIP) : $(INTERNAL_MAINLINEIMAGE_FILES)
+
+INSTALLED_FILES_FILE_MAINLINE := $(PRODUCT_OUT)/installed-files-mainline.txt
+INSTALLED_FILES_JSON_MAINLINE := $(INSTALLED_FILES_FILE_MAINLINE:.txt=.json)
+$(INSTALLED_FILES_FILE_MAINLINE): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_MAINLINE)
+$(INSTALLED_FILES_FILE_MAINLINE) : $(INTERNAL_MAINLINEIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	@mkdir -p $(dir $@)
+	@rm -f $@
+	$(hide) $(FILESLIST) $(TARGET_OUT_MAINLINE) > $(@:.txt=.json)
+	$(hide) $(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+mainlineimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,mainline)
+BUILT_MAINLINEIMAGE_TARGET := $(PRODUCT_OUT)/mainline.img
+define build-mainlineimage-target
+  $(call pretty,"Target mainline fs image: $(INSTALLED_MAINLINEIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_MAINLINE)
+  @mkdir -p $(mainlineimage_intermediates) && rm -rf $(mainlineimage_intermediates)/mainline_image_info.txt
+  $(call generate-userimage-prop-dictionary, $(mainlineimage_intermediates)/mainline_image_info.txt, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_MAINLINE) $(mainlineimage_intermediates)/mainline_image_info.txt \
+          $(INSTALLED_MAINLINEIMAGE_TARGET) $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_MAINLINEIMAGE_TARGET),$(BOARD_MAINLINEIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_MAINLINEIMAGE_TARGET := $(BUILT_MAINLINEIMAGE_TARGET)
+$(INSTALLED_MAINLINEIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_MAINLINEIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_MAINLINE)
+	$(build-mainlineimage-target)
+
+.PHONY: mainlineimage-nodeps mnod
+mainlineimage-nodeps mnod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-mainlineimage-target)
+
+sync: $(INTERNAL_MAINLINEIMAGE_FILES)
+# BOARD_PREBUILT_MAINLINEIMAGE is not allowed.
+endif
 
 # -----------------------------------------------------------------
 # dtbo image
@@ -3662,7 +3730,10 @@ endif # BOARD_AVB_ENABLE
 # -----------------------------------------------------------------
 # Check VINTF of build
 
-# Note: vendor_dlkm and odm_dlkm does not have VINTF files.
+# Note: the following do not have VINTF files:
+# - vendor_dlkm
+# - odm_dlkm
+# - mainline
 ifeq (,$(TARGET_BUILD_UNBUNDLED))
 
 intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
@@ -4623,6 +4694,11 @@ ifdef BUILDING_SYSTEM_OTHER_IMAGE
 	$(hide) $(call package_files-copy-root, \
 	    $(TARGET_OUT_SYSTEM_OTHER),$(zip_root)/SYSTEM_OTHER)
 endif
+ifdef BUILDING_MAINLINE_IMAGE
+	@# Contents of the mainline image
+	$(hide) $(call package_files-copy-root, \
+	    $(TARGET_OUT_MAINLINE),$(zip_root)/MAINLINE)
+endif
 	@# Extra contents of the OTA package
 	$(hide) mkdir -p $(zip_root)/OTA
 	$(hide) cp $(INSTALLED_ANDROID_INFO_TXT_TARGET) $(zip_root)/OTA/
@@ -4756,6 +4832,9 @@ ifdef BUILDING_VENDOR_DLKM_IMAGE
 endif
 ifdef BUILDING_ODM_DLKM_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/ODM_DLKM,odm_dlkm/) > $(zip_root)/META/odm_dlkm_filesystem_config.txt
+endif
+ifdef BUILDING_MAINLINE_IMAGE
+	$(hide) $(call fs_config,$(zip_root)/MAINLINE,mainline/) > $(zip_root)/META/mainline_filesystem_config.txt
 endif
 	@# ROOT always contains the files for the root under normal boot.
 	$(hide) $(call fs_config,$(zip_root)/ROOT,) > $(zip_root)/META/root_filesystem_config.txt
@@ -5279,6 +5358,16 @@ $(INSTALLED_QEMU_ODM_DLKMIMAGE): $(INSTALLED_ODM_DLKMIMAGE_TARGET) $(MK_QEMU_IMA
 
 odm_dlkmimage: $(INSTALLED_QEMU_ODM_DLKMIMAGE)
 droidcore: $(INSTALLED_QEMU_ODM_DLKMIMAGE)
+endif
+
+ifdef INSTALLED_MAINLINEIMAGE_TARGET
+INSTALLED_QEMU_MAINLINEIMAGE := $(PRODUCT_OUT)/mainline-qemu.img
+$(INSTALLED_QEMU_MAINLINEIMAGE): $(INSTALLED_MAINLINEIMAGE_TARGET) $(MK_QEMU_IMAGE_SH) $(SGDISK_HOST)
+	@echo Create mainline-qemu.img
+	(export SGDISK=$(SGDISK_HOST); $(MK_QEMU_IMAGE_SH) $(INSTALLED_MAINLINEIMAGE_TARGET))
+
+mainlineimage: $(INSTALLED_QEMU_MAINLINEIMAGE)
+droidcore: $(INSTALLED_QEMU_MAINLINEIMAGE)
 endif
 
 QEMU_VERIFIED_BOOT_PARAMS := $(PRODUCT_OUT)/VerifiedBootParams.textproto

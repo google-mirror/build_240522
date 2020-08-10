@@ -48,6 +48,8 @@ Common goals are:
                             Stands for "VendorDlkm, NO Dependencies"
     odnod                   Quickly rebuild the odm_dlkm image from built packages
                             Stands for "OdmDlkm, NO Dependencies"
+    mnod                    Quickly rebuild the mainline image from built packages
+                            Stands for "Mainline, NO Dependencies"
 
 
 So, for example, you could run:

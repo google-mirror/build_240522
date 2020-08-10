@@ -754,6 +754,22 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["extfs_rsv_pct"] = "0"
     copy_prop("odm_dlkm_reserved_size", "partition_reserved_size")
     copy_prop("odm_dlkm_selinux_fc", "selinux_fc")
+  elif mount_point == "mainline":
+    # mainline partition has no AVB.
+    copy_prop("mainline_fs_type", "fs_type")
+    copy_prop("mainline_size", "partition_size")
+    if not copy_prop("mainline_journal_size", "journal_size"):
+      d["journal_size"] = "0"
+    # not setting ext4_share_dup_blocks because mainline partition is writable.
+    copy_prop("mainline_squashfs_compressor", "squashfs_compressor")
+    copy_prop("mainline_squashfs_compressor_opt", "squashfs_compressor_opt")
+    copy_prop("mainline_squashfs_block_size", "squashfs_block_size")
+    copy_prop("mainline_squashfs_disable_4k_align", "squashfs_disable_4k_align")
+    copy_prop("mainline_extfs_inode_count", "extfs_inode_count")
+    if not copy_prop("mainline_extfs_rsv_pct", "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+    copy_prop("mainline_reserved_size", "partition_reserved_size")
+    copy_prop("mainline_selinux_fc", "selinux_fc")
   elif mount_point == "oem":
     copy_prop("fs_type", "fs_type")
     copy_prop("oem_size", "partition_size")
@@ -806,6 +822,8 @@ def GlobalDictFromImageProp(image_prop, mount_point):
     copy_prop("partition_size", "product_size")
   elif mount_point == "system_ext":
     copy_prop("partition_size", "system_ext_size")
+  elif mount_point == "mainline":
+    copy_prop("partition_size", "mainline_size")
   return d
 
 
@@ -851,6 +869,8 @@ def main(argv):
       mount_point = "product"
     elif image_filename == "system_ext.img":
       mount_point = "system_ext"
+    elif image_filename == "mainline.img":
+      mount_point = "mainline"
     else:
       logger.error("Unknown image file name %s", image_filename)
       sys.exit(1)
