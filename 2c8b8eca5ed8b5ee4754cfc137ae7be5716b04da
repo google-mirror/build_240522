@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0d52bc7_0277a70e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-10T08:07:50Z",
+      "side": 1,
+      "message": "Hi, All\n\nNot sure if you are interested having the function of extracting the compiler information from the kernel image, I submitted this change just because I think it would be better to put all the similar things in one place, though it might be not used by the aosp system.\n\nThanks,\nYongqin Liu",
+      "revId": "2c8b8eca5ed8b5ee4754cfc137ae7be5716b04da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
