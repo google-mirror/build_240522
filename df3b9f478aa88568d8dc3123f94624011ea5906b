@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "06da8706_4c7ba395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-10T21:16:24Z",
+      "side": 1,
+      "message": "Ping? Maybe OEMs would like to chime in?",
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92809d9d_f8dd38fb",
         "filename": "core/tasks/find-shareduid-violation.py",
         "patchSetId": 6
