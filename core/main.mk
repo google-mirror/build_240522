@@ -1552,6 +1552,9 @@ vbmetasystemimage: $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET)
 .PHONY: vbmetavendorimage
 vbmetavendorimage: $(INSTALLED_VBMETA_VENDORIMAGE_TARGET)
 
+.PHONY: mainlineimage
+mainlineimage: $(INSTALLED_MAINLINEIMAGE_TARGET)
+
 # Build files and then package it into the rom formats
 .PHONY: droidcore
 droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
