@@ -249,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "f0b5494b_5d94a9e7",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-11T21:28:20Z",
+      "side": 1,
+      "message": "\u003e \u003e Ideally no two apks should share a UID\n\u003e \n\u003e May I ask why? I think they are fine to share UID as long as they are owned by the same entity (or are in the same partition which is usually owned/signed by a single entity).\n\nSee https://developer.android.com/guide/topics/manifest/manifest-element for your colleagues\u0027 reasoning:\n\n\"This constant was deprecated in API level 29.\nShared user IDs cause non-deterministic behavior within the package manager. As such, its use is strongly discouraged and may be removed in a future version of Android. Instead, apps should use proper communication mechanisms, such as services and content providers, to facilitate interoperability between shared components.\"\n\nI agree with that sentiment.\n\n\u003e I thought you will be checking the shared UID only \"across\" partitions.\n\nNo, that is not the goal. For now, sharing UIDs across apps in different partitions is only logged inside the json file - making this an error could be accomplished in another CL.\n\nThe goal for now is to disallow non-AOSP apps to run under the system or phone userIds, which are reserved for a good reason.\n\nNote that OEMs tend to ship telephony-related apps on /system, so exempting non-AOSP apps using uid.phone or uid.system that are nevertheless on /system is not a solution, since those will fall through the cracks. That is the reason an explicit allowlist is needed.",
+      "parentUuid": "adcf13c9_8ef3f791",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1fd07954_fffe251a",
         "filename": "core/tasks/find-shareduid-violation.py",
         "patchSetId": 6
@@ -308,6 +332,30 @@
       "side": 1,
       "message": "I see. But keeping this list is error prone and often subject to merge conflict. Also, once we have this list, people will start to use this to work around the build error that they are hit by.\n\nI think there should a way to easily filter-out test apks without explicitly listing them. For example, android_test modules have LOCAL_MODULE_TAGS set to tests.",
       "parentUuid": "5ddc6b6b_aed2bda4",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 1
+      },
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d670b4c3_4b0cbf01",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-11T21:28:20Z",
+      "side": 1,
+      "message": "\u003e I see. But keeping this list is error prone and often subject to merge conflict.\n\nWell, my hope is that the instances of sharedUserId decrease and not increase.\n\n\u003e Also, once we have this list, people will start to use this to work around the build error that they are hit by.\n\nNot much we can do about that. People will always find ways to not update their stuff and instead monkey-patch the system. But, as with all build errors, it\u0027s a strong indication that the wind is changing and they better change course instead of fighting the current.\n\nMaybe a comment with \"You *must* only add your app as an exemption here if it is a test app\"?\n\n\u003e I think there should a way to easily filter-out test apks without explicitly listing them. For example, android_test modules have LOCAL_MODULE_TAGS set to tests.\n\nThat sounds like a good idea. But do you know of a way to extract those tags with aapt? I don\u0027t think they end up in the final apk, and I\u0027m wary of coupling this python script too tightly into the make-based system.",
+      "parentUuid": "b7067fb0_86fe1c63",
       "range": {
         "startLine": 29,
         "startChar": 0,
