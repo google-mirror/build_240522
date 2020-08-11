@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4483b5a_0f2a790a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-08-11T15:56:34Z",
+      "side": 1,
+      "message": "Let\u0027s just skip checking Darwin host for now. It\u0027s too difficult to triage these without a Darwin presubmit target",
+      "revId": "9ce76bb1c4d56d4650ee8b9024bbba9986ed5f25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
