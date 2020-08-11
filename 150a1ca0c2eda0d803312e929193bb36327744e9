@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66aa867a_d12ddd1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-08-11T10:34:38Z",
+      "side": 1,
+      "message": "aosp/1396207 is reverted due to build break in downstream, seems like some makefiles deliberately set LOCAL_PATH to empty (idk why one would want to do that...)\n\nAnyway I\u0027d like to submit this instead, this one should be safer to land because it won\u0027t introduce any $(error ...).",
+      "revId": "150a1ca0c2eda0d803312e929193bb36327744e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
