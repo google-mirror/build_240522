@@ -39,6 +39,30 @@
       "revId": "c58414b4974468bb9f6217677268887ed1b299a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be166cc9_d3a5f333",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2020-08-11T20:34:41Z",
+      "side": 1,
+      "message": "It\u0027s \"exclude\". It\u0027s to exclude these so from the mainline artifact checking. Same as Line 29.",
+      "parentUuid": "6250ad76_a2f8e8ca",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "c58414b4974468bb9f6217677268887ed1b299a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
