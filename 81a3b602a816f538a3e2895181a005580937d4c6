@@ -16,6 +16,24 @@
       "revId": "81a3b602a816f538a3e2895181a005580937d4c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad4b8631_b1d9f024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409782
+      },
+      "writtenOn": "2020-08-11T01:02:29Z",
+      "side": 1,
+      "message": "The full error text is the following if I move the change to another line to avoid a merge conflict\n\nAdded VNDK-core: android.hardware.powerstats-V1-ndk_platform.so\nRemoved VNDK-core: android.hardware.powerstats-V1-ndk_platform.so\n error: VNDK library list has been changed.\n        Run `update-vndk-list.sh` to update build/make/target/product/gsi/current.txt\n17:57:43 ninja failed with: exit status 1",
+      "parentUuid": "90da08a1_89945e5d",
+      "revId": "81a3b602a816f538a3e2895181a005580937d4c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
