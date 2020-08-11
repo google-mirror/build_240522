@@ -63,6 +63,30 @@
       "revId": "c58414b4974468bb9f6217677268887ed1b299a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be128d1f_ff28609f",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2020-08-11T20:53:37Z",
+      "side": 1,
+      "message": "Ah sorry, I didn\u0027t notice those lines. Thanks for clarification!",
+      "parentUuid": "be166cc9_d3a5f333",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "c58414b4974468bb9f6217677268887ed1b299a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
