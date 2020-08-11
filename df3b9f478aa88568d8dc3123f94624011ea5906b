@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "abf68dd0_2dcbda71",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-11T00:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa9eca58_980161e0",
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5de77df3_3f6be9ca",
         "filename": "core/tasks/find-shareduid-violation.py",
         "patchSetId": 6
@@ -133,6 +151,30 @@
       "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66538f4e_ac4e11d2",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-11T00:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d4702e_726fd681",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
