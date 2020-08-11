@@ -16,6 +16,24 @@
       "revId": "8e35c79dbd416642cad9bee873d71a0064048ff7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19b25667_795b4816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-11T21:55:56Z",
+      "side": 1,
+      "message": "The idea of the partition is explained in the commit message. It is a read-writable partition where APEXes resides so that APEXes won\u0027t need to be stored in /system AND /data. \n\nWithout this partition, we always store two copies of an APEX after the first update, and the copy on /system is useless after the first update until the next factory reset.\n\nWe can\u0027t just rely on APEXes on /data directly because /data is empty when a device is out of factory, and it is wiped after factory reset. This partition is not wiped after factory reset, so at least one copy of the APEX is still on the device.\n\nPlus, the fact that it is not affected by factory reset is beneficial for us pushing the GKI updates project, which requires permanent storage of APEXes. Details will be released in Android Partner help center soon, but since the designs are still changing rapidly, I don\u0027t have anything else to share at this moment. \n\nI am not an owner for the Android build system and GMS, so I can\u0027t review those changes unfortunately. Please add the appropriate owners by using the \"Find Owners\" button (and looks like Luca has already done it in those CLs).",
+      "parentUuid": "1d84c9da_494c488f",
+      "revId": "8e35c79dbd416642cad9bee873d71a0064048ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
