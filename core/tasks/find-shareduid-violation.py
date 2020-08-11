@@ -20,6 +20,9 @@ import os
 import subprocess
 import sys
 
+from multiprocessing import Pool, cpu_count
+from multiprocessing.dummy import Pool as ThreadPool
+
 from collections import defaultdict
 from glob import glob
 
@@ -116,6 +119,10 @@ def execute(cmd):
     return p.returncode == 0, out, err
 
 def main():
+    # Set up multiprocessing
+    threads = (cpu_count() // 2) or 1
+    pool = ThreadPool(threads)
+
     args = parse_args()
 
     shipping_api = int(args.shipping_api)
@@ -128,6 +135,12 @@ def main():
             ("product", args.copy_out_product),
             ("system_ext", args.copy_out_system_ext),
     )
+
+    apks = []
+    for part, location in partitions:
+        # Match only app and priv-app
+        for f in glob(os.path.join(product_out, location, "*app", "**", "*.apk")):
+            apks.append((part, f))
 
     shareduid_app_dict = defaultdict(list)
 
@@ -156,9 +169,9 @@ def main():
             return
         shareduid_app_dict[shared_uid].append((appinfo[0], apk_file))
 
-    for part, location in partitions:
-        for f in glob(os.path.join(product_out, location, "*", "*", "*.apk")):
-            process_apk((part, f))
+    pool.map(process_apk, apks)
+    pool.close()
+    pool.join()
 
     output = defaultdict(lambda: defaultdict(list))
 
