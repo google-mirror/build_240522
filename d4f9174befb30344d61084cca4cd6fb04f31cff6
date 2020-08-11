@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004315403",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1396047?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "877c26b8_89212491",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-11T00:43:16Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "d4f9174befb30344d61084cca4cd6fb04f31cff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
