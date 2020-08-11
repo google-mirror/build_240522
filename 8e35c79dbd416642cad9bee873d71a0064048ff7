@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d84c9da_494c488f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1421169
+      },
+      "writtenOn": "2020-08-11T21:41:34Z",
+      "side": 1,
+      "message": "What problem is this solving? Why does project mainline suddenly necessitate adding ever more partitions? What is preventing you from keeping (APEX) components on /system? Or /data?\n\nIt\u0027s not only the addition of new partitions that baffles me, but rather the increasing velocity of adding them. [^1]\n\nAren\u0027t you worried you\u0027re gonna trip up over all that complexity? Android is already assembled at runtime out of a an excessive number of moving parts, do you want to add even more to the mix?\n\nI know that with DAP you *can* create partitions \"for free\" now, but do you really have to? Your test matrices are going to expand to approach a singularity.\n\nAlso, while you\u0027re at it, mind taking a look at this proposal that will instead actually be beneficial? https://android-review.googlesource.com/q/topic:%2522gms_partition%2522\n\n[^1]: This is getting pretty crazy https://android.googlesource.com/platform/system/core/+/fe991623f0d76677076bbe041b26838cd63ffc2b/fastboot/fastboot.cpp#142",
+      "revId": "8e35c79dbd416642cad9bee873d71a0064048ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
