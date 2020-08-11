@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "adcf13c9_8ef3f791",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-08-11T04:06:21Z",
+      "side": 1,
+      "message": "\u003e Ideally no two apks should share a UID\n\nMay I ask why? I think they are fine to share UID as long as they are owned by the same entity (or are in the same partition which is usually owned/signed by a single entity).\n\nI thought you will be checking the shared UID only \"across\" partitions.",
+      "parentUuid": "a90669f1_e7d50f7c",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1fd07954_fffe251a",
         "filename": "core/tasks/find-shareduid-violation.py",
         "patchSetId": 6
@@ -269,6 +293,30 @@
       "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7067fb0_86fe1c63",
+        "filename": "core/tasks/find-shareduid-violation.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-08-11T04:06:21Z",
+      "side": 1,
+      "message": "I see. But keeping this list is error prone and often subject to merge conflict. Also, once we have this list, people will start to use this to work around the build error that they are hit by.\n\nI think there should a way to easily filter-out test apks without explicitly listing them. For example, android_test modules have LOCAL_MODULE_TAGS set to tests.",
+      "parentUuid": "5ddc6b6b_aed2bda4",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 1
+      },
+      "revId": "df3b9f478aa88568d8dc3123f94624011ea5906b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
       "key": {
