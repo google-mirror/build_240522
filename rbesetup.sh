@@ -33,4 +33,29 @@ function _export_metrics_uploader() {
   fi
 }
 
+# This function sets RBE specific environment variables needed for the build to
+# executed by RBE. This file should be sourced once per checkout of Android code.
+function _set_rbe_vars() {
+  local RBE_LOG_DIR="/tmp"
+  local RBE_BINARIES_DIR="prebuilts/remoteexecution-client/live"
+
+  export USE_RBE="true"
+  export RBE_DIR=${RBE_BINARIES_DIR}
+  export RBE_exec_root="$(gettop)"
+  export RBE_use_application_default_credentials="true"
+  export RBE_log_dir="${RBE_LOG_DIR}"
+  export RBE_reproxy_wait_seconds="20"
+  export RBE_output_dir="${RBE_LOG_DIR}"
+  export RBE_log_path="text://${RBE_LOG_DIR}/reproxy_log.txt"
+  export RBE_re_proxy="${RBE_BINARIES_DIR}/reproxy"
+  export RBE_CXX_EXEC_STRATEGY="remote_local_fallback"
+  export RBE_JAVAC=1
+  export RBE_JAVAC_EXEC_STRATEGY="remote_local_fallback"
+  export RBE_R8=1
+  export RBE_R8_EXEC_STRATEGY="remote_local_fallback"
+  export RBE_D8=1
+  export RBE_D8_EXEC_STRATEGY="remote_local_fallback"
+}
+
 _export_metrics_uploader
+_set_rbe_vars
