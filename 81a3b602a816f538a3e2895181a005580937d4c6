@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90da08a1_89945e5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409782
+      },
+      "writtenOn": "2020-08-11T01:00:03Z",
+      "side": 1,
+      "message": "TH is failing due a merge conflict involving current.txt.\n\nI tried moving the change to a different line in the file but then I get an error\n\n error: VNDK library list has been changed.\n        Run update-vndk-list.sh to update build/make/target/product/gsi/current.txt\n17:57:43 ninja failed with: exit status 1",
+      "revId": "81a3b602a816f538a3e2895181a005580937d4c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
