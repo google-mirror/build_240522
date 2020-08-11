@@ -23,6 +23,74 @@ import sys
 from collections import defaultdict
 from glob import glob
 
+# android.uid.phone
+UID_PHONE_ALLOWLIST = (
+  # Regular apps
+  "MmsService.apk",
+  "ONS.apk",
+  "PresencePolling.apk",
+  "RcsService.apk",
+  "Stk.apk",
+  "TeleService.apk",
+  "TelephonyProvider.apk",
+
+  # Test-only apps
+  "CellBroadcastReceiverTests.apk",
+  "PresencePollingTestHelper.apk",
+)
+
+# android.uid.system
+UID_SYSTEM_ALLOWLIST = (
+  # /system
+  "DynamicSystemInstallationService.apk",
+  "FusedLocation.apk",
+  "InProcessNetworkStack.apk",
+  "InputDevices.apk",
+  "KeyChain.apk",
+  "LocalTransport.apk",
+  "SettingsProvider.apk",
+  "Telecom.apk",
+  "TvQuickSettings.apk",
+  "TvSettings.apk",
+  "WallpaperBackup.apk",
+   # /product
+  "Settings.apk",
+
+  # Test-only apps
+  "com.android.car.obd2.test.apk",
+  "sl4a.apk",
+  "AndroidCarApiTest.apk",
+  "AppLaunch.apk",
+  "AppLaunchWear.apk",
+  "AppSmoke.apk",
+  "AppCompatibilityTest.apk",
+  "CarDeveloperOptions.apk",
+  "CarService.apk",
+  "CarServiceTest.apk",
+  "CarServiceUnitTest.apk",
+  "CarServicesTest.apk",
+  "DataIdleTest.apk",
+  "Development.apk",
+  "DownloadManagerTestApp.apk",
+  "FrameworksCoreFeatureFlagTests.apk",
+  "EmbeddedKitchenSinkApp.apk",
+  "FrameworksCorePackageManagerTests.apk",
+  "FrameworksCoreSystemPropertiesTests.apk",
+  "HdmiCecTests.apk",
+  "StatsdLoadtest.apk",
+  "StatsdDogfood.apk",
+  "GarageModeTestApp.apk",
+  "KeyChainTestsSupport.apk",
+  "NetworkSecurityConfigTests.apk",
+  "SystemUITests.apk",
+  "TelecomUnitTests.apk",
+  "TestablesTests.apk",
+  "UsageReportingTest.apk",
+  "UsageStatsTest.apk",
+  "UxRestrictionsSample.apk",
+  "VehicleHALTest.apk",
+)
+
 def parse_args():
     """Parse commandline arguments."""
     parser = argparse.ArgumentParser(description='Find sharedUserId violators')
@@ -30,6 +98,8 @@ def parse_args():
                         default=os.environ.get("PRODUCT_OUT"))
     parser.add_argument('--aapt', help='Path to aapt or aapt2',
                         default="aapt2")
+    parser.add_argument('--shipping_api', help='PRODUCT_SHIPPING_API_LEVEL',
+                        default=0)
     parser.add_argument('--copy_out_system', help='TARGET_COPY_OUT_SYSTEM',
                         default="system")
     parser.add_argument('--copy_out_vendor', help='TARGET_COPY_OUT_VENDOR',
@@ -45,55 +115,84 @@ def execute(cmd):
     out, err = map(lambda b: b.decode('utf-8'), p.communicate())
     return p.returncode == 0, out, err
 
-def make_aapt_cmds(file):
-    return [aapt + ' dump ' + file + ' --file AndroidManifest.xml',
-            aapt + ' dump xmltree ' + file + ' --file AndroidManifest.xml']
+def main():
+    args = parse_args()
 
-def extract_shared_uid(file):
-    for cmd in make_aapt_cmds(file):
-        success, manifest, error_msg = execute(cmd)
-        if success:
-            break
-    else:
-        print(error_msg, file=sys.stderr)
-        sys.exit()
+    shipping_api = int(args.shipping_api)
+    product_out = args.product_out
+    aapt = args.aapt
 
-    for l in manifest.split('\n'):
-        if "sharedUserId" in l:
-            return l.split('"')[-2]
-    return None
+    partitions = (
+            ("system", args.copy_out_system),
+            ("vendor", args.copy_out_vendor),
+            ("product", args.copy_out_product),
+            ("system_ext", args.copy_out_system_ext),
+    )
 
+    shareduid_app_dict = defaultdict(list)
 
-args = parse_args()
+    def make_aapt_cmds(filename):
+        return [aapt + ' dump ' + filename + ' --file AndroidManifest.xml',
+                aapt + ' dump xmltree ' + filename + ' --file AndroidManifest.xml']
 
-product_out = args.product_out
-aapt = args.aapt
+    def extract_shared_uid(apk_file):
+        for cmd in make_aapt_cmds(apk_file):
+            success, manifest, error_msg = execute(cmd)
+            if success:
+                break
+        else:
+            print(error_msg, file=sys.stderr)
+            sys.exit()
 
-partitions = (
-        ("system", args.copy_out_system),
-        ("vendor", args.copy_out_vendor),
-        ("product", args.copy_out_product),
-        ("system_ext", args.copy_out_system_ext),
-)
+        for l in manifest.split('\n'):
+            if "sharedUserId" in l:
+                return l.split('"')[-2]
+        return None
 
-shareduid_app_dict = defaultdict(list)
-
-for part, location in partitions:
-    for f in glob(os.path.join(product_out, location, "*", "*", "*.apk")):
-        apk_file = os.path.basename(f)
-        shared_uid = extract_shared_uid(f)
-
+    def process_apk(appinfo):
+        apk_file = os.path.basename(appinfo[1])
+        shared_uid = extract_shared_uid(appinfo[1])
         if shared_uid is None:
+            return
+        shareduid_app_dict[shared_uid].append((appinfo[0], apk_file))
+
+    for part, location in partitions:
+        for f in glob(os.path.join(product_out, location, "*", "*", "*.apk")):
+            process_apk((part, f))
+
+    output = defaultdict(lambda: defaultdict(list))
+
+    violators = []
+
+    for uid, app_infos in shareduid_app_dict.items():
+        _partitions = {p for p, _ in app_infos}
+        if len(_partitions) <= 1:
             continue
-        shareduid_app_dict[shared_uid].append((part, apk_file))
+        for part in _partitions:
+            # Sort by apk name
+            for p, a in sorted(app_infos, key=lambda x: x[1]):
+                if p != part:
+                    continue
+                output[uid][part].extend([a])
+                # Collect violators of banned UIDs
+                if uid == "android.uid.phone" and a not in UID_PHONE_ALLOWLIST:
+                    violators.append((a, uid))
+                if uid == "android.uid.system" and a not in UID_SYSTEM_ALLOWLIST:
+                    violators.append((a, uid))
 
+    def errorfmt(err):
+        return '\033[31m%s\033[0m\n' % err
 
-output = defaultdict(lambda: defaultdict(list))
+    if len(violators) > 0 and shipping_api >= 31:
+        sys.stderr.write(errorfmt("Error: The following applications are"
+            " violating the ban on using system-reserved sharedUserIds:"))
+        for _app, _uid in violators:
+            sys.stderr.write("%s for sharedUserId %s\n" % (_app, _uid))
+        sys.stderr.write("\nPlease remove the sharedUserId attribute from the"
+            " offending application's AndroidManifest.xml\n")
+        sys.exit(1)
 
-for uid, app_infos in shareduid_app_dict.items():
-    partitions = {p for p, _ in app_infos}
-    if len(partitions) > 1:
-        for part in partitions:
-            output[uid][part].extend([a for p, a in app_infos if p == part])
+    print(json.dumps(output, indent=2, sort_keys=True))
 
-print(json.dumps(output, indent=2, sort_keys=True))
+if __name__ == '__main__':
+    main()

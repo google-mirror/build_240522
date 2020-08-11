@@ -31,6 +31,7 @@ $(shareduid_violation_modules_filename): $(AAPT2)
 	$(find_shareduid_script) \
 		--product_out $(PRODUCT_OUT) \
 		--aapt $(AAPT2) \
+		--shipping_api $(PRODUCT_SHIPPING_API_LEVEL) \
 		--copy_out_system $(TARGET_COPY_OUT_SYSTEM) \
 		--copy_out_vendor $(TARGET_COPY_OUT_VENDOR) \
 		--copy_out_product $(TARGET_COPY_OUT_PRODUCT) \
