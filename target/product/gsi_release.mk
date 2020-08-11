@@ -31,6 +31,19 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/product/% \
     system/system_ext/%
 
+# GSI enables configurable audio policy
+PRODUCT_PACKAGES += \
+    libaudiopolicyengineconfigurable
+
+# Exclude configurable audio policy files in system
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/lib/libaudiopolicyengineconfigurable.so \
+    system/lib/libparameter.so \
+    system/lib/libremote-processor.so \
+    system/lib64/libaudiopolicyengineconfigurable.so \
+    system/lib64/libparameter.so \
+    system/lib64/libremote-processor.so
+
 # Split selinux policy
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
