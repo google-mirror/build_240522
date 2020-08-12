@@ -19,7 +19,7 @@ ifneq ($(filter-out false,$(USE_RBE)),)
   ifdef RBE_DIR
     rbe_dir := $(RBE_DIR)
   else
-    rbe_dir := $(HOME)/rbe
+    rbe_dir := prebuilts/remoteexecution-client/live/
   endif
 
   ifdef RBE_CXX_EXEC_STRATEGY
