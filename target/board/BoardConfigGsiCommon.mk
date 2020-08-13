@@ -37,6 +37,26 @@ BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+<<<<<<< HEAD   (a17a94 Merge "Build build_super_image as a module" into android10-g)
+=======
+ifdef BUILDING_GSI
+# super.img spec for GSI targets
+BOARD_SUPER_PARTITION_SIZE := 3229614080
+BOARD_SUPER_PARTITION_GROUPS := gsi_dynamic_partitions
+BOARD_GSI_DYNAMIC_PARTITIONS_PARTITION_LIST := system
+BOARD_GSI_DYNAMIC_PARTITIONS_SIZE := 3221225472
+endif
+
+# TODO(b/123695868, b/146149698):
+#     This flag is set by mainline but isn't desired for GSI
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR :=
+
+# Enable chain partition for boot, mainly for GKI images.
+BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_BOOT_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 2
+>>>>>>> CHANGE (33157a Disable BLE_VND_INCLUDED in GSI)
 
 # GSI specific System Properties
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
