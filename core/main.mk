@@ -1666,6 +1666,9 @@ ifneq ($(TARGET_BUILD_APPS),)
   $(PROGUARD_DICT_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP))
 
+  $(PROGUARD_USAGE_ZIP) : $(apps_only_installed_files)
+  $(call dist-for-goals,apps_only, $(PROGUARD_USAGE_ZIP))
+
   $(SYMBOLS_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP))
 
