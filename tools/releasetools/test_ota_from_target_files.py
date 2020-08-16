@@ -20,6 +20,7 @@ import os.path
 import zipfile
 
 import common
+import ota_metadata_pb2
 import test_utils
 from ota_utils import CalculateRuntimeDevicesAndFingerprints
 from ota_from_target_files import (
@@ -28,8 +29,8 @@ from ota_from_target_files import (
     GetTargetFilesZipWithoutPostinstallConfig,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles)
-from non_ab_ota import NonAbOtaPropertyFiles
 from test_utils import PropertyFilesTestCase
+
 
 def construct_target_files(secondary=False):
   """Returns a target-files.zip file for generating OTA packages."""
@@ -1187,10 +1188,29 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
       'ro.build.tags=build-tags',
       'ro.build.version.sdk=30',
       'ro.build.version.security_patch=2020',
-      'ro.build.date.utc=12345678'
+      'ro.build.date.utc=12345678',
+      'ro.system.build.version.release=version-release',
+      'ro.system.build.id=build-id',
+      'ro.system.build.version.incremental=version-incremental',
+      'ro.system.build.type=build-type',
+      'ro.system.build.tags=build-tags',
+      'ro.system.build.version.sdk=30',
+      'ro.system.build.version.security_patch=2020',
+      'ro.system.build.date.utc=12345678',
+      'ro.product.system.brand=generic',
+      'ro.product.system.name=generic',
+      'ro.product.system.device=generic',
   ]
 
   VENDOR_BUILD_PROP = [
+      'ro.vendor.build.version.release=version-release',
+      'ro.vendor.build.id=build-id',
+      'ro.vendor.build.version.incremental=version-incremental',
+      'ro.vendor.build.type=build-type',
+      'ro.vendor.build.tags=build-tags',
+      'ro.vendor.build.version.sdk=30',
+      'ro.vendor.build.version.security_patch=2020',
+      'ro.vendor.build.date.utc=12345678',
       'ro.product.vendor.brand=vendor-product-brand',
       'ro.product.vendor.name=vendor-product-name',
       'ro.product.vendor.device=vendor-product-device'
@@ -1338,6 +1358,35 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
     ]
     self.assertEqual('|'.join(fingerprints), metadata['post-build'])
 
+
+
+  def CheckMetadataEqual(self, metadata_dict, metadata_proto):
+    post_build = metadata_proto.postcondition
+    self.assertEqual('|'.join(post_build.build),
+                     metadata_dict['post-build'])
+    self.assertEqual(post_build.build_incremental,
+                     metadata_dict['post-build-incremental'])
+    self.assertEqual(post_build.sdk_level,
+                     metadata_dict['post-sdk-level'])
+    self.assertEqual(post_build.security_patch_level,
+                     metadata_dict['post-security-patch-level'])
+
+    if metadata_proto.type == ota_metadata_pb2.OtaMetadata.AB:
+      ota_type = 'AB'
+    elif metadata_proto.type == ota_metadata_pb2.OtaMetadata.BLOCK:
+      ota_type = 'BLOCK'
+    else:
+      ota_type = ''
+    self.assertEqual(ota_type, metadata_dict['ota-type'])
+    self.assertEqual(metadata_proto.wipe,
+                     metadata_dict.get('ota-wipe') == 'yes')
+    self.assertEqual(metadata_proto.required_cache,
+                     metadata_dict.get('ota-required-cache', 0))
+    self.assertEqual(metadata_proto.retrofit_dynamic_partitions,
+                     metadata_dict.get(
+                        'ota-retrofit-dynamic-partitions') == 'yes')
+
+
   def test_GetPackageMetadata_incremental_package(self):
     vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
     vendor_build_prop.extend([
@@ -1365,7 +1414,18 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
         'ro.build.tags=build-tags',
         'ro.build.version.sdk=29',
         'ro.build.version.security_patch=2020',
-        'ro.build.date.utc=12340000'
+        'ro.build.date.utc=12340000',
+        'ro.system.build.version.release=source-version-release',
+        'ro.system.build.id=source-build-id',
+        'ro.system.build.version.incremental=source-version-incremental',
+        'ro.system.build.type=build-type',
+        'ro.system.build.tags=build-tags',
+        'ro.system.build.version.sdk=29',
+        'ro.system.build.version.security_patch=2020',
+        'ro.system.build.date.utc=12340000',
+        'ro.product.system.brand=generic',
+        'ro.product.system.name=generic',
+        'ro.product.system.device=generic',
     ]
     self.writeFiles({
         'META/misc_info.txt': '\n'.join(self.MISC_INFO),
@@ -1381,7 +1441,7 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
     target_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
     source_info = common.BuildInfo(common.LoadInfoDict(source_dir))
 
-    metadata = GetPackageMetadata(target_info, source_info)
+    metadata, metadata2 = GetPackageMetadata(target_info, source_info)
     self.assertEqual(
         'vendor-device-pro|vendor-device-std|vendor-product-device',
         metadata['pre-device'])
@@ -1406,3 +1466,5 @@ class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
             'vendor-product-brand/vendor-product-name/vendor-product-device'),
     ]
     self.assertEqual('|'.join(post_fingerprints), metadata['post-build'])
+
+    self.CheckMetadataEqual(metadata, metadata2)

@@ -1,0 +1,1 @@
+/home/xunchang/ssd/aosp/out/soong/.intermediates/build/make/tools/releasetools/ota_metadata_proto/linux_glibc_x86_64_PY2/gen/proto/ota_metadata_pb2.py
