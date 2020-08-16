@@ -2179,6 +2179,7 @@ def MakeTempDir(prefix='tmp', suffix=''):
 
 
 def Cleanup():
+  return
   for i in OPTIONS.tempfiles:
     if os.path.isdir(i):
       shutil.rmtree(i, ignore_errors=True)
