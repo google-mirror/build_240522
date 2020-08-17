@@ -813,6 +813,23 @@ def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
 
   return target_file
 
+def GeneratePartitionTimestamps(target_file, target_info):
+  with zipfile.ZipFile(target_file, "r") as zfp:
+    partitions = zfp.read("META/ab_partitions.txt")
+    if not partitions:
+      return ""
+    partitions = partitions.decode()
+    partitions = partitions.split("\n")
+    timestamps_list = []
+    for part in partitions:
+      try:
+        timestamp = target_info.GetPartitionBuildProp("ro.build.date.utc", part)
+        if timestamp:
+          timestamps_list.append("{}:{}".format(part, timestamp))
+      except common.ExternalError:
+        continue
+    return timestamps_list
+
 
 def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
@@ -844,12 +861,16 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   # Generate payload.
   payload = Payload()
 
+  partition_timestamps = []
   # Enforce a max timestamp this payload can be applied on top of.
   if OPTIONS.downgrade:
     max_timestamp = source_info.GetBuildProp("ro.build.date.utc")
   else:
     max_timestamp = str(metadata.postcondition.timestamp)
+    partition_timestamps = GeneratePartitionTimestamps(target_file, target_info)
   additional_args = ["--max_timestamp", max_timestamp]
+  if partition_timestamps:
+    additional_args.extend(["--partition_timestamps", ",".join(partition_timestamps)])
 
   payload.Generate(target_file, source_file, additional_args)
 
