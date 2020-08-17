@@ -6,3 +6,7 @@
 -keep class org.jacoco.** {
   *;
 }
+# Keep everything for the jacoco interfaces
+-keep interface org.jacoco.** {
+  *;
+}
