@@ -728,3 +728,5 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/prop.default)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
+
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/host $(HOST_OUT))
