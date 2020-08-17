@@ -162,10 +162,11 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
 
   def UpdatePartitionStates(partition_states):
     """Update the per-partition state according to its build.prop"""
-
+    if not build_info.is_ab:
+      return
     build_info_set = ComputeRuntimeBuildInfos(build_info,
                                               boot_variable_values)
-    for partition in PARTITIONS_WITH_CARE_MAP:
+    for partition in set(PARTITIONS_WITH_CARE_MAP) & set(build_info.info_dict["ab_partitions"]):
       partition_prop = build_info.info_dict.get(
           '{}.build.prop'.format(partition))
       # Skip if the partition is missing, or it doesn't have a build.prop
