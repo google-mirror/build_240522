@@ -729,7 +729,10 @@ def LoadInfoDict(input_file, repacking=False):
       fingerprint = build_info.GetPartitionFingerprint(partition)
       if fingerprint:
         d["avb_{}_salt".format(partition)] = sha256(fingerprint.encode()).hexdigest()
-
+  try:
+    d["ab_partitions"] = read_helper("META/ab_partitions.txt").split("\n")
+  except KeyError as e:
+    logger.error("Can't find META/ab_partitions.txt")
   return d
 
 
