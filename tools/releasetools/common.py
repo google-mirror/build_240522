@@ -118,7 +118,7 @@ AVB_PARTITIONS = ('boot', 'dtbo', 'odm', 'product', 'recovery', 'system',
 AVB_VBMETA_PARTITIONS = ('vbmeta_system', 'vbmeta_vendor')
 
 # Partitions that should have their care_map added to META/care_map.pb
-PARTITIONS_WITH_CARE_MAP = (
+PARTITIONS_WITH_CARE_MAP = [
     'system',
     'vendor',
     'product',
@@ -126,7 +126,7 @@ PARTITIONS_WITH_CARE_MAP = (
     'odm',
     'vendor_dlkm',
     'odm_dlkm',
-)
+]
 
 
 class ErrorCode(object):
@@ -385,6 +385,9 @@ class BuildInfo(object):
     self.oem_dicts = oem_dicts
 
     self._is_ab = info_dict.get("ab_update") == "true"
+    if (self._is_ab):
+      assert "ab_partitions" in info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
 
     # Skip _oem_props if oem_dicts is None to use BuildInfo in
     # sign_target_files_apks
@@ -729,7 +732,10 @@ def LoadInfoDict(input_file, repacking=False):
       fingerprint = build_info.GetPartitionFingerprint(partition)
       if fingerprint:
         d["avb_{}_salt".format(partition)] = sha256(fingerprint.encode()).hexdigest()
-
+  try:
+    d["ab_partitions"] = read_helper("META/ab_partitions.txt").split("\n")
+  except KeyError as e:
+    logger.error("Can't find META/ab_partitions.txt")
   return d
 
 
