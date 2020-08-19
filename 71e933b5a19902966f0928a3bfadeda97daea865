@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9dfcb731_c5901a8e",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-08-19T19:48:27Z",
+      "side": 1,
+      "message": "nit: line too long",
+      "range": {
+        "startLine": 71,
+        "startChar": 71,
+        "endLine": 71,
+        "endChar": 100
+      },
+      "revId": "71e933b5a19902966f0928a3bfadeda97daea865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
