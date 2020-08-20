@@ -124,7 +124,7 @@ def EntriesForUserImages(input_file):
     image = os.path.basename(image_path)
     if OPTIONS.bootable_only and image not in ('boot.img', 'recovery.img'):
       continue
-    if not image.endswith('.img'):
+    if not image.endswith('.img') and image != 'bootloader':
       continue
     # Filter out super_empty and the images that are already in super partition.
     if OPTIONS.put_super:
