@@ -224,13 +224,19 @@ class PropertyFilesTestCase(ReleaseToolsTestCase):
         input_fp.seek(offset)
         if entry == 'metadata':
           expected = b'META-INF/COM/ANDROID/METADATA'
+        elif entry == 'metadata.pb':
+          expected = b'META-INF/COM/ANDROID/METADATA-PB'
         else:
           expected = entry.replace('.', '-').upper().encode()
         self.assertEqual(expected, input_fp.read(size))
 
 
 if __name__ == '__main__':
+  # TODO(xunchang), this exclude the "google/protobuf/internal/test_util.py"
+  # from the unittest. Unfortunately the pattern, internally using fnmatch,
+  # doesn't provide a good API to select the test files. We can probably do an
+  # os walk and call loadTestsFromNames.
   testsuite = unittest.TestLoader().discover(
-      os.path.dirname(os.path.realpath(__file__)))
+      os.path.dirname(os.path.realpath(__file__)), pattern='test_[!u]*.py')
   # atest needs a verbosity level of >= 2 to correctly parse the result.
   unittest.TextTestRunner(verbosity=2).run(testsuite)
