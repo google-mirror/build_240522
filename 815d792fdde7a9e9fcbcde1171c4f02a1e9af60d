@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad440d75_3b61910c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409782
+      },
+      "writtenOn": "2020-08-20T04:00:32Z",
+      "side": 1,
+      "message": "seeing merge conflicts with git_rvc-dev involving this file. These are very hard to resolve since I cannot make any changes to this file.\n\nsmoreland@ any advice on how to resolve this? This is a new interface for S so I don\u0027t even care about git_rvc-dev branch.",
+      "revId": "815d792fdde7a9e9fcbcde1171c4f02a1e9af60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
