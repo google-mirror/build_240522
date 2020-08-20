@@ -207,7 +207,6 @@ A/B OTA specific options
 from __future__ import print_function
 
 import logging
-import multiprocessing
 import os.path
 import shlex
 import shutil
@@ -230,33 +229,19 @@ if sys.hexversion < 0x02070000:
 logger = logging.getLogger(__name__)
 
 OPTIONS = ota_utils.OPTIONS
-OPTIONS.verify = False
-OPTIONS.patch_threshold = 0.95
-OPTIONS.wipe_user_data = False
-OPTIONS.extra_script = None
-OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
-if OPTIONS.worker_threads == 0:
-  OPTIONS.worker_threads = 1
-OPTIONS.two_step = False
+
+OPTIONS.disable_fec_computation = False
+OPTIONS.extracted_input = None
 OPTIONS.include_secondary = False
-OPTIONS.block_based = True
-OPTIONS.updater_binary = None
+OPTIONS.log_diff = None
 OPTIONS.oem_dicts = None
 OPTIONS.oem_source = None
-OPTIONS.oem_no_mount = False
-OPTIONS.full_radio = False
-OPTIONS.full_bootloader = False
-# Stash size cannot exceed cache_size * threshold.
-OPTIONS.cache_size = None
-OPTIONS.stash_threshold = 0.8
-OPTIONS.log_diff = None
-OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
 OPTIONS.payload_signer_maximum_signature_size = None
-OPTIONS.extracted_input = None
-OPTIONS.skip_postinstall = False
+OPTIONS.payload_signer = None
 OPTIONS.skip_compatibility_check = False
-OPTIONS.disable_fec_computation = False
+OPTIONS.skip_postinstall = False
+OPTIONS.wipe_user_data = False
 
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
