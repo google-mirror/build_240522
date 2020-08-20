@@ -224,6 +224,8 @@ class PropertyFilesTestCase(ReleaseToolsTestCase):
         input_fp.seek(offset)
         if entry == 'metadata':
           expected = b'META-INF/COM/ANDROID/METADATA'
+        elif entry == 'metadata.pb':
+          expected = b'META-INF/COM/ANDROID/METADATA-PB'
         else:
           expected = entry.replace('.', '-').upper().encode()
         self.assertEqual(expected, input_fp.read(size))
