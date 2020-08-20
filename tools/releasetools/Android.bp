@@ -91,9 +91,7 @@ python_defaults {
 python_defaults {
     name: "releasetools_ota_from_target_files_defaults",
     srcs: [
-        "edify_generator.py",
         "ota_from_target_files.py",
-        "non_ab_ota.py",
         "target_files_diff.py",
         "ota_utils.py",
     ],
@@ -179,6 +177,11 @@ python_library_host {
     srcs: [
         "blockimgdiff.py",
         "common.py",
+        "edify_generator.py",
+        // TODO(zhangkelvin) remove non_ab_ota.py once non-ab is deprecated
+        // Once that's removed, edify_generator.py can probably be removed
+        // as well
+        "non_ab_ota.py",
         "images.py",
         "rangelib.py",
         "sparse_img.py",
