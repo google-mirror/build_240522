@@ -240,7 +240,6 @@ if OPTIONS.worker_threads == 0:
 OPTIONS.two_step = False
 OPTIONS.include_secondary = False
 OPTIONS.block_based = True
-OPTIONS.updater_binary = None
 OPTIONS.oem_dicts = None
 OPTIONS.oem_source = None
 OPTIONS.oem_no_mount = False
