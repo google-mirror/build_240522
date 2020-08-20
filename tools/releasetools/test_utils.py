@@ -30,6 +30,10 @@ import zipfile
 
 import common
 
+KiB = 1024
+MiB = 1024 * KiB
+GiB = 1024 * MiB
+
 # Some test runner doesn't like outputs from stderr.
 logging.basicConfig(stream=sys.stdout)
 
