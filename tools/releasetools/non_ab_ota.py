@@ -11,20 +11,724 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 
 import collections
+import imp
 import logging
+import multiprocessing
 import os
+import shlex
 import zipfile
+from hashlib import sha1
 
 import common
 import edify_generator
+import images
 import verity_utils
+from blockimgdiff import BlockImageDiff
 from check_target_files_vintf import CheckVintfIfTrebleEnabled, HasPartition
-from common import OPTIONS
-from ota_utils import UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata, PropertyFiles
+from common import (OPTIONS, PARTITION_TYPES, ErrorCode, GetSparseImage,
+                    LoadInfoDict, MakeTempDir, MakeTempFile, RunAndCheckOutput,
+                    ZipWrite)
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PropertyFiles)
 
 logger = logging.getLogger(__name__)
+
+# non-AB specific stuff
+OPTIONS.block_based = True
+# Stash size cannot exceed cache_size * threshold.
+OPTIONS.cache_size = None
+OPTIONS.extra_script = None
+OPTIONS.full_bootloader = False
+OPTIONS.full_radio = False
+OPTIONS.oem_no_mount = False
+OPTIONS.patch_threshold = 0.95
+OPTIONS.stash_threshold = 0.8
+OPTIONS.two_step = False
+OPTIONS.updater_binary = None
+OPTIONS.verify = False
+OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
+if OPTIONS.worker_threads == 0:
+  OPTIONS.worker_threads = 1
+
+class DeviceSpecificParams(object):
+  module = None
+
+  def __init__(self, **kwargs):
+    """Keyword arguments to the constructor become attributes of this
+    object, which is passed to all functions in the device-specific
+    module."""
+    for k, v in kwargs.items():
+      setattr(self, k, v)
+    self.extras = OPTIONS.extras
+
+    if self.module is None:
+      path = OPTIONS.device_specific
+      if not path:
+        return
+      try:
+        if os.path.isdir(path):
+          info = imp.find_module("releasetools", [path])
+        else:
+          d, f = os.path.split(path)
+          b, x = os.path.splitext(f)
+          if x == ".py":
+            f = b
+          info = imp.find_module(f, [d])
+        logger.info("loaded device-specific extensions from %s", path)
+        self.module = imp.load_module("device_specific", *info)
+      except ImportError:
+        logger.info("unable to load device-specific module; assuming none")
+
+  def _DoCall(self, function_name, *args, **kwargs):
+    """Call the named function in the device-specific module, passing
+    the given args and kwargs.  The first argument to the call will be
+    the DeviceSpecific object itself.  If there is no module, or the
+    module does not define the function, return the value of the
+    'default' kwarg (which itself defaults to None)."""
+    if self.module is None or not hasattr(self.module, function_name):
+      return kwargs.get("default")
+    return getattr(self.module, function_name)(*((self,) + args), **kwargs)
+
+  def FullOTA_Assertions(self):
+    """Called after emitting the block of assertions at the top of a
+    full OTA package.  Implementations can add whatever additional
+    assertions they like."""
+    return self._DoCall("FullOTA_Assertions")
+
+  def FullOTA_InstallBegin(self):
+    """Called at the start of full OTA installation."""
+    return self._DoCall("FullOTA_InstallBegin")
+
+  def FullOTA_GetBlockDifferences(self):
+    """Called during full OTA installation and verification.
+    Implementation should return a list of BlockDifference objects describing
+    the update on each additional partitions.
+    """
+    return self._DoCall("FullOTA_GetBlockDifferences")
+
+  def FullOTA_InstallEnd(self):
+    """Called at the end of full OTA installation; typically this is
+    used to install the image for the device's baseband processor."""
+    return self._DoCall("FullOTA_InstallEnd")
+
+  def IncrementalOTA_Assertions(self):
+    """Called after emitting the block of assertions at the top of an
+    incremental OTA package.  Implementations can add whatever
+    additional assertions they like."""
+    return self._DoCall("IncrementalOTA_Assertions")
+
+  def IncrementalOTA_VerifyBegin(self):
+    """Called at the start of the verification phase of incremental
+    OTA installation; additional checks can be placed here to abort
+    the script before any changes are made."""
+    return self._DoCall("IncrementalOTA_VerifyBegin")
+
+  def IncrementalOTA_VerifyEnd(self):
+    """Called at the end of the verification phase of incremental OTA
+    installation; additional checks can be placed here to abort the
+    script before any changes are made."""
+    return self._DoCall("IncrementalOTA_VerifyEnd")
+
+  def IncrementalOTA_InstallBegin(self):
+    """Called at the start of incremental OTA installation (after
+    verification is complete)."""
+    return self._DoCall("IncrementalOTA_InstallBegin")
+
+  def IncrementalOTA_GetBlockDifferences(self):
+    """Called during incremental OTA installation and verification.
+    Implementation should return a list of BlockDifference objects describing
+    the update on each additional partitions.
+    """
+    return self._DoCall("IncrementalOTA_GetBlockDifferences")
+
+  def IncrementalOTA_InstallEnd(self):
+    """Called at the end of incremental OTA installation; typically
+    this is used to install the image for the device's baseband
+    processor."""
+    return self._DoCall("IncrementalOTA_InstallEnd")
+
+  def VerifyOTA_Assertions(self):
+    return self._DoCall("VerifyOTA_Assertions")
+
+
+def GetNonSparseImage(which, tmpdir, hashtree_info_generator=None):
+  """Returns a Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified non-sparse image from the given path.
+
+  Args:
+    which: The partition name.
+    tmpdir: The directory that contains the prebuilt image and block map file.
+  Returns:
+    A Image object.
+  """
+  path = os.path.join(tmpdir, "IMAGES", which + ".img")
+  mappath = os.path.join(tmpdir, "IMAGES", which + ".map")
+
+  # The image and map files must have been created prior to calling
+  # ota_from_target_files.py (since LMP).
+  assert os.path.exists(path) and os.path.exists(mappath)
+
+  return images.FileImage(path, hashtree_info_generator=hashtree_info_generator)
+
+
+def GetUserImage(which, tmpdir, input_zip,
+                 info_dict=None,
+                 allow_shared_blocks=None,
+                 hashtree_info_generator=None,
+                 reset_file_map=False):
+  """Returns an Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified image from the given path. If the specified
+  image is sparse, it also performs additional processing for OTA purpose. For
+  example, it always adds block 0 to clobbered blocks list. It also detects
+  files that cannot be reconstructed from the block list, for whom we should
+  avoid applying imgdiff.
+
+  Args:
+    which: The partition name.
+    tmpdir: The directory that contains the prebuilt image and block map file.
+    input_zip: The target-files ZIP archive.
+    info_dict: The dict to be looked up for relevant info.
+    allow_shared_blocks: If image is sparse, whether having shared blocks is
+        allowed. If none, it is looked up from info_dict.
+    hashtree_info_generator: If present and image is sparse, generates the
+        hashtree_info for this sparse image.
+    reset_file_map: If true and image is sparse, reset file map before returning
+        the image.
+  Returns:
+    A Image object. If it is a sparse image and reset_file_map is False, the
+    image will have file_map info loaded.
+  """
+  if info_dict is None:
+    info_dict = LoadInfoDict(input_zip)
+
+  is_sparse = info_dict.get("extfs_sparse_flag")
+
+  # When target uses 'BOARD_EXT4_SHARE_DUP_BLOCKS := true', images may contain
+  # shared blocks (i.e. some blocks will show up in multiple files' block
+  # list). We can only allocate such shared blocks to the first "owner", and
+  # disable imgdiff for all later occurrences.
+  if allow_shared_blocks is None:
+    allow_shared_blocks = info_dict.get("ext4_share_dup_blocks") == "true"
+
+  if is_sparse:
+    img = GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks,
+                         hashtree_info_generator)
+    if reset_file_map:
+      img.ResetFileMap()
+    return img
+  return GetNonSparseImage(which, tmpdir, hashtree_info_generator)
+
+
+def GetTypeAndDeviceExpr(mount_point, info):
+  """
+  Return the filesystem of the partition, and an edify expression that evaluates
+  to the device at runtime.
+  """
+  fstab = info["fstab"]
+  if fstab:
+    p = fstab[mount_point]
+    device_expr = '"%s"' % fstab[mount_point].device
+    if p.slotselect:
+      device_expr = 'add_slot_suffix(%s)' % device_expr
+    return (PARTITION_TYPES[fstab[mount_point].fs_type], device_expr)
+  raise KeyError
+
+
+class BlockDifference(object):
+  def __init__(self, partition, tgt, src=None, check_first_block=False,
+               version=None, disable_imgdiff=False):
+    self.tgt = tgt
+    self.src = src
+    self.partition = partition
+    self.check_first_block = check_first_block
+    self.disable_imgdiff = disable_imgdiff
+
+    if version is None:
+      version = max(
+          int(i) for i in
+          OPTIONS.info_dict.get("blockimgdiff_versions", "1").split(","))
+    assert version >= 3
+    self.version = version
+
+    b = BlockImageDiff(tgt, src, threads=OPTIONS.worker_threads,
+                       version=self.version,
+                       disable_imgdiff=self.disable_imgdiff)
+    self.path = os.path.join(MakeTempDir(), partition)
+    b.Compute(self.path)
+    self._required_cache = b.max_stashed_size
+    self.touched_src_ranges = b.touched_src_ranges
+    self.touched_src_sha1 = b.touched_src_sha1
+
+    # On devices with dynamic partitions, for new partitions,
+    # src is None but OPTIONS.source_info_dict is not.
+    if OPTIONS.source_info_dict is None:
+      is_dynamic_build = OPTIONS.info_dict.get(
+          "use_dynamic_partitions") == "true"
+      is_dynamic_source = False
+    else:
+      is_dynamic_build = OPTIONS.source_info_dict.get(
+          "use_dynamic_partitions") == "true"
+      is_dynamic_source = partition in shlex.split(
+          OPTIONS.source_info_dict.get("dynamic_partition_list", "").strip())
+
+    is_dynamic_target = partition in shlex.split(
+        OPTIONS.info_dict.get("dynamic_partition_list", "").strip())
+
+    # For dynamic partitions builds, check partition list in both source
+    # and target build because new partitions may be added, and existing
+    # partitions may be removed.
+    is_dynamic = is_dynamic_build and (is_dynamic_source or is_dynamic_target)
+
+    if is_dynamic:
+      self.device = 'map_partition("%s")' % partition
+    else:
+      if OPTIONS.source_info_dict is None:
+        _, device_expr = GetTypeAndDeviceExpr("/" + partition,
+                                              OPTIONS.info_dict)
+      else:
+        _, device_expr = GetTypeAndDeviceExpr("/" + partition,
+                                              OPTIONS.source_info_dict)
+      self.device = device_expr
+
+  @property
+  def required_cache(self):
+    return self._required_cache
+
+  def WriteScript(self, script, output_zip, progress=None,
+                  write_verify_script=False):
+    if not self.src:
+      # write the output unconditionally
+      script.Print("Patching %s image unconditionally..." % (self.partition,))
+    else:
+      script.Print("Patching %s image after verification." % (self.partition,))
+
+    if progress:
+      script.ShowProgress(progress, 0)
+    self._WriteUpdate(script, output_zip)
+
+    if write_verify_script:
+      self.WritePostInstallVerifyScript(script)
+
+  def WriteStrictVerifyScript(self, script):
+    """Verify all the blocks in the care_map, including clobbered blocks.
+
+    This differs from the WriteVerifyScript() function: a) it prints different
+    error messages; b) it doesn't allow half-way updated images to pass the
+    verification."""
+
+    partition = self.partition
+    script.Print("Verifying %s..." % (partition,))
+    ranges = self.tgt.care_map
+    ranges_str = ranges.to_string_raw()
+    script.AppendExtra(
+        'range_sha1(%s, "%s") == "%s" && ui_print("    Verified.") || '
+        'ui_print("%s has unexpected contents.");' % (
+            self.device, ranges_str,
+            self.tgt.TotalSha1(include_clobbered_blocks=True),
+            self.partition))
+    script.AppendExtra("")
+
+  def WriteVerifyScript(self, script, touched_blocks_only=False):
+    partition = self.partition
+
+    # full OTA
+    if not self.src:
+      script.Print("Image %s will be patched unconditionally." % (partition,))
+
+    # incremental OTA
+    else:
+      if touched_blocks_only:
+        ranges = self.touched_src_ranges
+        expected_sha1 = self.touched_src_sha1
+      else:
+        ranges = self.src.care_map.subtract(self.src.clobbered_blocks)
+        expected_sha1 = self.src.TotalSha1()
+
+      # No blocks to be checked, skipping.
+      if not ranges:
+        return
+
+      ranges_str = ranges.to_string_raw()
+      script.AppendExtra(
+          'if (range_sha1(%s, "%s") == "%s" || block_image_verify(%s, '
+          'package_extract_file("%s.transfer.list"), "%s.new.dat", '
+          '"%s.patch.dat")) then' % (
+              self.device, ranges_str, expected_sha1,
+              self.device, partition, partition, partition))
+      script.Print('Verified %s image...' % (partition,))
+      script.AppendExtra('else')
+
+      if self.version >= 4:
+
+        # Bug: 21124327
+        # When generating incrementals for the system and vendor partitions in
+        # version 4 or newer, explicitly check the first block (which contains
+        # the superblock) of the partition to see if it's what we expect. If
+        # this check fails, give an explicit log message about the partition
+        # having been remounted R/W (the most likely explanation).
+        if self.check_first_block:
+          script.AppendExtra('check_first_block(%s);' % (self.device,))
+
+        # If version >= 4, try block recovery before abort update
+        if partition == "system":
+          code = ErrorCode.SYSTEM_RECOVER_FAILURE
+        else:
+          code = ErrorCode.VENDOR_RECOVER_FAILURE
+        script.AppendExtra((
+            'ifelse (block_image_recover({device}, "{ranges}") && '
+            'block_image_verify({device}, '
+            'package_extract_file("{partition}.transfer.list"), '
+            '"{partition}.new.dat", "{partition}.patch.dat"), '
+            'ui_print("{partition} recovered successfully."), '
+            'abort("E{code}: {partition} partition fails to recover"));\n'
+            'endif;').format(device=self.device, ranges=ranges_str,
+                             partition=partition, code=code))
+
+      # Abort the OTA update. Note that the incremental OTA cannot be applied
+      # even if it may match the checksum of the target partition.
+      # a) If version < 3, operations like move and erase will make changes
+      #    unconditionally and damage the partition.
+      # b) If version >= 3, it won't even reach here.
+      else:
+        if partition == "system":
+          code = ErrorCode.SYSTEM_VERIFICATION_FAILURE
+        else:
+          code = ErrorCode.VENDOR_VERIFICATION_FAILURE
+        script.AppendExtra((
+            'abort("E%d: %s partition has unexpected contents");\n'
+            'endif;') % (code, partition))
+
+  def WritePostInstallVerifyScript(self, script):
+    partition = self.partition
+    script.Print('Verifying the updated %s image...' % (partition,))
+    # Unlike pre-install verification, clobbered_blocks should not be ignored.
+    ranges = self.tgt.care_map
+    ranges_str = ranges.to_string_raw()
+    script.AppendExtra(
+        'if range_sha1(%s, "%s") == "%s" then' % (
+            self.device, ranges_str,
+            self.tgt.TotalSha1(include_clobbered_blocks=True)))
+
+    # Bug: 20881595
+    # Verify that extended blocks are really zeroed out.
+    if self.tgt.extended:
+      ranges_str = self.tgt.extended.to_string_raw()
+      script.AppendExtra(
+          'if range_sha1(%s, "%s") == "%s" then' % (
+              self.device, ranges_str,
+              self._HashZeroBlocks(self.tgt.extended.size())))
+      script.Print('Verified the updated %s image.' % (partition,))
+      if partition == "system":
+        code = ErrorCode.SYSTEM_NONZERO_CONTENTS
+      else:
+        code = ErrorCode.VENDOR_NONZERO_CONTENTS
+      script.AppendExtra(
+          'else\n'
+          '  abort("E%d: %s partition has unexpected non-zero contents after '
+          'OTA update");\n'
+          'endif;' % (code, partition))
+    else:
+      script.Print('Verified the updated %s image.' % (partition,))
+
+    if partition == "system":
+      code = ErrorCode.SYSTEM_UNEXPECTED_CONTENTS
+    else:
+      code = ErrorCode.VENDOR_UNEXPECTED_CONTENTS
+
+    script.AppendExtra(
+        'else\n'
+        '  abort("E%d: %s partition has unexpected contents after OTA '
+        'update");\n'
+        'endif;' % (code, partition))
+
+  def _WriteUpdate(self, script, output_zip):
+    ZipWrite(output_zip,
+             '{}.transfer.list'.format(self.path),
+             '{}.transfer.list'.format(self.partition))
+
+    # For full OTA, compress the new.dat with brotli with quality 6 to reduce
+    # its size. Quailty 9 almost triples the compression time but doesn't
+    # further reduce the size too much. For a typical 1.8G system.new.dat
+    #                       zip  | brotli(quality 6)  | brotli(quality 9)
+    #   compressed_size:    942M | 869M (~8% reduced) | 854M
+    #   compression_time:   75s  | 265s               | 719s
+    #   decompression_time: 15s  | 25s                | 25s
+
+    if not self.src:
+      brotli_cmd = ['brotli', '--quality=6',
+                    '--output={}.new.dat.br'.format(self.path),
+                    '{}.new.dat'.format(self.path)]
+      print("Compressing {}.new.dat with brotli".format(self.partition))
+      RunAndCheckOutput(brotli_cmd)
+
+      new_data_name = '{}.new.dat.br'.format(self.partition)
+      ZipWrite(output_zip,
+               '{}.new.dat.br'.format(self.path),
+               new_data_name,
+               compress_type=zipfile.ZIP_STORED)
+    else:
+      new_data_name = '{}.new.dat'.format(self.partition)
+      ZipWrite(output_zip, '{}.new.dat'.format(self.path), new_data_name)
+
+    ZipWrite(output_zip,
+             '{}.patch.dat'.format(self.path),
+             '{}.patch.dat'.format(self.partition),
+             compress_type=zipfile.ZIP_STORED)
+
+    if self.partition == "system":
+      code = ErrorCode.SYSTEM_UPDATE_FAILURE
+    else:
+      code = ErrorCode.VENDOR_UPDATE_FAILURE
+
+    call = ('block_image_update({device}, '
+            'package_extract_file("{partition}.transfer.list"), '
+            '"{new_data_name}", "{partition}.patch.dat") ||\n'
+            '  abort("E{code}: Failed to update {partition} image.");'.format(
+                device=self.device, partition=self.partition,
+                new_data_name=new_data_name, code=code))
+    script.AppendExtra(script.WordWrap(call))
+
+  def _HashBlocks(self, source, ranges):  # pylint: disable=no-self-use
+    data = source.ReadRangeSet(ranges)
+    ctx = sha1()
+
+    for p in data:
+      ctx.update(p)
+
+    return ctx.hexdigest()
+
+  def _HashZeroBlocks(self, num_blocks):  # pylint: disable=no-self-use
+    """Return the hash value for all zero blocks."""
+    zero_block = '\x00' * 4096
+    ctx = sha1()
+    for _ in range(num_blocks):
+      ctx.update(zero_block)
+
+    return ctx.hexdigest()
+
+
+class DynamicGroupUpdate(object):
+  def __init__(self, src_size=None, tgt_size=None):
+    # None: group does not exist. 0: no size limits.
+    self.src_size = src_size
+    self.tgt_size = tgt_size
+
+
+class DynamicPartitionsDifference(object):
+  def __init__(self, info_dict, block_diffs, progress_dict=None,
+               source_info_dict=None):
+    if progress_dict is None:
+      progress_dict = {}
+
+    self._remove_all_before_apply = False
+    if source_info_dict is None:
+      self._remove_all_before_apply = True
+      source_info_dict = {}
+
+    block_diff_dict = collections.OrderedDict(
+        [(e.partition, e) for e in block_diffs])
+
+    assert len(block_diff_dict) == len(block_diffs), \
+        "Duplicated BlockDifference object for {}".format(
+            [partition for partition, count in
+             collections.Counter(e.partition for e in block_diffs).items()
+             if count > 1])
+
+    self._partition_updates = collections.OrderedDict()
+
+    for p, block_diff in block_diff_dict.items():
+      self._partition_updates[p] = DynamicPartitionUpdate()
+      self._partition_updates[p].block_difference = block_diff
+
+    for p, progress in progress_dict.items():
+      if p in self._partition_updates:
+        self._partition_updates[p].progress = progress
+
+    tgt_groups = shlex.split(info_dict.get(
+        "super_partition_groups", "").strip())
+    src_groups = shlex.split(source_info_dict.get(
+        "super_partition_groups", "").strip())
+
+    for g in tgt_groups:
+      for p in shlex.split(info_dict.get(
+          "super_%s_partition_list" % g, "").strip()):
+        assert p in self._partition_updates, \
+            "{} is in target super_{}_partition_list but no BlockDifference " \
+            "object is provided.".format(p, g)
+        self._partition_updates[p].tgt_group = g
+
+    for g in src_groups:
+      for p in shlex.split(source_info_dict.get(
+          "super_%s_partition_list" % g, "").strip()):
+        assert p in self._partition_updates, \
+            "{} is in source super_{}_partition_list but no BlockDifference " \
+            "object is provided.".format(p, g)
+        self._partition_updates[p].src_group = g
+
+    target_dynamic_partitions = set(shlex.split(info_dict.get(
+        "dynamic_partition_list", "").strip()))
+    block_diffs_with_target = set(p for p, u in self._partition_updates.items()
+                                  if u.tgt_size)
+    assert block_diffs_with_target == target_dynamic_partitions, \
+        "Target Dynamic partitions: {}, BlockDifference with target: {}".format(
+            list(target_dynamic_partitions), list(block_diffs_with_target))
+
+    source_dynamic_partitions = set(shlex.split(source_info_dict.get(
+        "dynamic_partition_list", "").strip()))
+    block_diffs_with_source = set(p for p, u in self._partition_updates.items()
+                                  if u.src_size)
+    assert block_diffs_with_source == source_dynamic_partitions, \
+        "Source Dynamic partitions: {}, BlockDifference with source: {}".format(
+            list(source_dynamic_partitions), list(block_diffs_with_source))
+
+    if self._partition_updates:
+      logger.info("Updating dynamic partitions %s",
+                  self._partition_updates.keys())
+
+    self._group_updates = collections.OrderedDict()
+
+    for g in tgt_groups:
+      self._group_updates[g] = DynamicGroupUpdate()
+      self._group_updates[g].tgt_size = int(info_dict.get(
+          "super_%s_group_size" % g, "0").strip())
+
+    for g in src_groups:
+      if g not in self._group_updates:
+        self._group_updates[g] = DynamicGroupUpdate()
+      self._group_updates[g].src_size = int(source_info_dict.get(
+          "super_%s_group_size" % g, "0").strip())
+
+    self._Compute()
+
+  def WriteScript(self, script, output_zip, write_verify_script=False):
+    script.Comment('--- Start patching dynamic partitions ---')
+    for p, u in self._partition_updates.items():
+      if u.src_size and u.tgt_size and u.src_size > u.tgt_size:
+        script.Comment('Patch partition %s' % p)
+        u.block_difference.WriteScript(script, output_zip, progress=u.progress,
+                                       write_verify_script=False)
+
+    op_list_path = MakeTempFile()
+    with open(op_list_path, 'w') as f:
+      for line in self._op_list:
+        f.write('{}\n'.format(line))
+
+    ZipWrite(output_zip, op_list_path, "dynamic_partitions_op_list")
+
+    script.Comment('Update dynamic partition metadata')
+    script.AppendExtra('assert(update_dynamic_partitions('
+                       'package_extract_file("dynamic_partitions_op_list")));')
+
+    if write_verify_script:
+      for p, u in self._partition_updates.items():
+        if u.src_size and u.tgt_size and u.src_size > u.tgt_size:
+          u.block_difference.WritePostInstallVerifyScript(script)
+          script.AppendExtra('unmap_partition("%s");' % p)  # ignore errors
+
+    for p, u in self._partition_updates.items():
+      if u.tgt_size and u.src_size <= u.tgt_size:
+        script.Comment('Patch partition %s' % p)
+        u.block_difference.WriteScript(script, output_zip, progress=u.progress,
+                                       write_verify_script=write_verify_script)
+        if write_verify_script:
+          script.AppendExtra('unmap_partition("%s");' % p)  # ignore errors
+
+    script.Comment('--- End patching dynamic partitions ---')
+
+  def _Compute(self):
+    self._op_list = list()
+
+    def append(line):
+      self._op_list.append(line)
+
+    def comment(line):
+      self._op_list.append("# %s" % line)
+
+    if self._remove_all_before_apply:
+      comment('Remove all existing dynamic partitions and groups before '
+              'applying full OTA')
+      append('remove_all_groups')
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and not u.tgt_group:
+        append('remove %s' % p)
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and u.tgt_group and u.src_group != u.tgt_group:
+        comment('Move partition %s from %s to default' % (p, u.src_group))
+        append('move %s default' % p)
+
+    for p, u in self._partition_updates.items():
+      if u.src_size and u.tgt_size and u.src_size > u.tgt_size:
+        comment('Shrink partition %s from %d to %d' %
+                (p, u.src_size, u.tgt_size))
+        append('resize %s %s' % (p, u.tgt_size))
+
+    for g, u in self._group_updates.items():
+      if u.src_size is not None and u.tgt_size is None:
+        append('remove_group %s' % g)
+      if (u.src_size is not None and u.tgt_size is not None and
+          u.src_size > u.tgt_size):
+        comment('Shrink group %s from %d to %d' % (g, u.src_size, u.tgt_size))
+        append('resize_group %s %d' % (g, u.tgt_size))
+
+    for g, u in self._group_updates.items():
+      if u.src_size is None and u.tgt_size is not None:
+        comment('Add group %s with maximum size %d' % (g, u.tgt_size))
+        append('add_group %s %d' % (g, u.tgt_size))
+      if (u.src_size is not None and u.tgt_size is not None and
+          u.src_size < u.tgt_size):
+        comment('Grow group %s from %d to %d' % (g, u.src_size, u.tgt_size))
+        append('resize_group %s %d' % (g, u.tgt_size))
+
+    for p, u in self._partition_updates.items():
+      if u.tgt_group and not u.src_group:
+        comment('Add partition %s to group %s' % (p, u.tgt_group))
+        append('add %s %s' % (p, u.tgt_group))
+
+    for p, u in self._partition_updates.items():
+      if u.tgt_size and u.src_size < u.tgt_size:
+        comment('Grow partition %s from %d to %d' %
+                (p, u.src_size, u.tgt_size))
+        append('resize %s %d' % (p, u.tgt_size))
+
+    for p, u in self._partition_updates.items():
+      if u.src_group and u.tgt_group and u.src_group != u.tgt_group:
+        comment('Move partition %s from default to %s' %
+                (p, u.tgt_group))
+        append('move %s %s' % (p, u.tgt_group))
+
+
+class DynamicPartitionUpdate(object):
+  def __init__(self, src_group=None, tgt_group=None, progress=None,
+               block_difference=None):
+    self.src_group = src_group
+    self.tgt_group = tgt_group
+    self.progress = progress
+    self.block_difference = block_difference
+
+  @property
+  def src_size(self):
+    if not self.block_difference:
+      return 0
+    return DynamicPartitionUpdate._GetSparseImageSize(self.block_difference.src)
+
+  @property
+  def tgt_size(self):
+    if not self.block_difference:
+      return 0
+    return DynamicPartitionUpdate._GetSparseImageSize(self.block_difference.tgt)
+
+  @staticmethod
+  def _GetSparseImageSize(img):
+    if not img:
+      return 0
+    return img.blocksize * img.total_blocks
 
 
 def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
@@ -36,16 +740,16 @@ def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
       raise RuntimeError(
           "can't generate incremental that adds {}".format(name))
 
-    partition_src = common.GetUserImage(name, OPTIONS.source_tmp, source_zip,
-                                        info_dict=source_info,
-                                        allow_shared_blocks=allow_shared_blocks)
+    partition_src = GetUserImage(name, OPTIONS.source_tmp, source_zip,
+                                 info_dict=source_info,
+                                 allow_shared_blocks=allow_shared_blocks)
 
     hashtree_info_generator = verity_utils.CreateHashtreeInfoGenerator(
         name, 4096, target_info)
-    partition_tgt = common.GetUserImage(name, OPTIONS.target_tmp, target_zip,
-                                        info_dict=target_info,
-                                        allow_shared_blocks=allow_shared_blocks,
-                                        hashtree_info_generator=hashtree_info_generator)
+    partition_tgt = GetUserImage(name, OPTIONS.target_tmp, target_zip,
+                                 info_dict=target_info,
+                                 allow_shared_blocks=allow_shared_blocks,
+                                 hashtree_info_generator=hashtree_info_generator)
 
     # Check the first block of the source system partition for remount R/W only
     # if the filesystem is ext4.
@@ -58,13 +762,13 @@ def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
     partition_target_info = target_info["fstab"]["/" + name]
     disable_imgdiff = (partition_source_info.fs_type == "squashfs" or
                        partition_target_info.fs_type == "squashfs")
-    return common.BlockDifference(name, partition_tgt, partition_src,
-                                  check_first_block,
-                                  version=blockimgdiff_version,
-                                  disable_imgdiff=disable_imgdiff)
+    return BlockDifference(name, partition_tgt, partition_src,
+                           check_first_block,
+                           version=blockimgdiff_version,
+                           disable_imgdiff=disable_imgdiff)
 
   if source_zip:
-    # See notes in common.GetUserImage()
+    # See notes in GetUserImage()
     allow_shared_blocks = (source_info.get('ext4_share_dup_blocks') == "true" or
                            target_info.get('ext4_share_dup_blocks') == "true")
     blockimgdiff_version = max(
@@ -80,11 +784,11 @@ def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
       continue
     # Full OTA update.
     if not source_zip:
-      tgt = common.GetUserImage(partition, OPTIONS.input_tmp, target_zip,
-                                info_dict=target_info,
-                                reset_file_map=True)
-      block_diff_dict[partition] = common.BlockDifference(partition, tgt,
-                                                          src=None)
+      tgt = GetUserImage(partition, OPTIONS.input_tmp, target_zip,
+                         info_dict=target_info,
+                         reset_file_map=True)
+      block_diff_dict[partition] = BlockDifference(partition, tgt,
+                                                   src=None)
     # Incremental OTA update.
     else:
       block_diff_dict[partition] = GetIncrementalBlockDifferenceForPartition(
@@ -102,7 +806,7 @@ def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
     function_name = "FullOTA_GetBlockDifferences"
 
   if device_specific_diffs:
-    assert all(isinstance(diff, common.BlockDifference)
+    assert all(isinstance(diff, BlockDifference)
                for diff in device_specific_diffs), \
         "{} is not returning a list of BlockDifference objects".format(
             function_name)
@@ -138,7 +842,7 @@ def WriteFullOTAPackage(input_zip, output_file):
   output_zip = zipfile.ZipFile(
       staging_file, "w", compression=zipfile.ZIP_DEFLATED)
 
-  device_specific = common.DeviceSpecificParams(
+  device_specific = DeviceSpecificParams(
       input_zip=input_zip,
       input_version=target_api_version,
       output_zip=output_zip,
@@ -224,7 +928,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if target_info.get('use_dynamic_partitions') == "true":
     # Use empty source_info_dict to indicate that all partitions / groups must
     # be re-added.
-    dynamic_partitions_diff = common.DynamicPartitionsDifference(
+    dynamic_partitions_diff = DynamicPartitionsDifference(
         info_dict=OPTIONS.info_dict,
         block_diffs=block_diff_dict.values(),
         progress_dict=progress_dict)
@@ -315,7 +1019,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
   output_zip = zipfile.ZipFile(
       staging_file, "w", compression=zipfile.ZIP_DEFLATED)
 
-  device_specific = common.DeviceSpecificParams(
+  device_specific = DeviceSpecificParams(
       source_zip=source_zip,
       source_version=source_api_version,
       source_tmp=OPTIONS.source_tmp,
@@ -410,8 +1114,8 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
   required_cache_sizes = [diff.required_cache for diff in
                           block_diff_dict.values()]
   if updating_boot:
-    boot_type, boot_device_expr = common.GetTypeAndDeviceExpr("/boot",
-                                                              source_info)
+    boot_type, boot_device_expr = GetTypeAndDeviceExpr("/boot",
+                                                       source_info)
     d = common.Difference(target_boot, source_boot)
     _, _, d = d.ComputePatch()
     if d is None:
@@ -467,7 +1171,7 @@ else
     if OPTIONS.target_info_dict.get("use_dynamic_partitions") != "true":
       raise RuntimeError(
           "can't generate incremental that disables dynamic partitions")
-    dynamic_partitions_diff = common.DynamicPartitionsDifference(
+    dynamic_partitions_diff = DynamicPartitionsDifference(
         info_dict=OPTIONS.target_info_dict,
         source_info_dict=OPTIONS.source_info_dict,
         block_diffs=block_diff_dict.values(),
