@@ -812,6 +812,8 @@ def AddImagesToTargetFiles(filename):
       OPTIONS.info_dict.get("building_system_other_image") == "true")
   has_userdata = OPTIONS.info_dict.get("building_userdata_image") == "true"
   has_cache = OPTIONS.info_dict.get("building_cache_image") == "true"
+  has_bootloader = os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                      "bootloader"))
 
   # Set up the output destination. It writes to the given directory for dir
   # mode; otherwise appends to the given ZIP.
@@ -944,6 +946,11 @@ def AddImagesToTargetFiles(filename):
   if OPTIONS.info_dict.get("has_dtbo") == "true":
     banner("dtbo")
     partitions['dtbo'] = AddDtbo(output_zip)
+
+  if has_bootloader:
+    banner("bootloader")
+    partitions['bootloader'] = os.path.join(
+        OPTIONS.input_tmp, "IMAGES", "bootloader")
 
   # Custom images.
   custom_partitions = OPTIONS.info_dict.get(
