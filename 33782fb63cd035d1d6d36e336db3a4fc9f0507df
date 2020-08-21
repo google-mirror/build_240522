@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a2dff5db_6a4f6846",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-08-21T22:39:24Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "dd8fd786_315fdb1e",
+      "revId": "33782fb63cd035d1d6d36e336db3a4fc9f0507df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86c2292b_39d8f37e",
         "filename": "tools/releasetools/img_from_target_files.py",
         "patchSetId": 5
@@ -30,6 +48,30 @@
       "writtenOn": "2020-08-21T19:15:51Z",
       "side": 1,
       "message": "This means IMAGES/bootloader will be included in the updatepackage unconditionally. Do we want to do this for regular devices, like Pixel?",
+      "range": {
+        "startLine": 127,
+        "startChar": 33,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "33782fb63cd035d1d6d36e336db3a4fc9f0507df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "461be2c2_ee5c783e",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-08-21T22:39:24Z",
+      "side": 1,
+      "message": "Good point. I added a flag bootloader_in_update_package like super_image_in_update_package which can be set via a boardconfig variable to shield pixel devices from this change.",
+      "parentUuid": "86c2292b_39d8f37e",
       "range": {
         "startLine": 127,
         "startChar": 33,
