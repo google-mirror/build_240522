@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36ec1011_e5e10102",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-08-21T23:01:55Z",
+      "side": 1,
+      "message": "The symlinking doesn\u0027t matter for any of the binaries, and they are all from Soong modules:\n\n\u003e out/host/linux-x86/bin/art-check-debug-apex-gen-fakebin\n\u003e out/host/linux-x86/bin/brillo_update_payload\n\u003e out/host/linux-x86/bin/insertkeys.py\n\u003e out/host/linux-x86/bin/lib/shflags/shflags\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_crosvm_intermediates/crosvm\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_libepoxy.so.0_for_crosvm_intermediates/libepoxy.so.0\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_libgbm.so.1_for_crosvm_intermediates/libgbm.so.1\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_libminijail.so_for_crosvm_intermediates/libminijail.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_libvirglrenderer.so.0_for_crosvm_intermediates/libvirglrenderer.so.0\n\u003e out/host/linux-x86/obj/EXECUTABLES/aarch64_linux_gnu_libvirglrenderer.so.1_for_crosvm_intermediates/libvirglrenderer.so.1\n\u003e out/host/linux-x86/obj/EXECUTABLES/adb-remount-test.sh_intermediates/adb-remount-test.sh\n\u003e out/host/linux-x86/obj/EXECUTABLES/art-check-debug-apex-gen-fakebin_intermediates/art-check-debug-apex-gen-fakebin\n\u003e out/host/linux-x86/obj/EXECUTABLES/art-check-release-apex-gen-fakebin_intermediates/art-check-release-apex-gen-fakebin\n\u003e out/host/linux-x86/obj/EXECUTABLES/art-check-testing-apex-gen-fakebin_intermediates/art-check-testing-apex-gen-fakebin\n\u003e out/host/linux-x86/obj/EXECUTABLES/brillo_update_payload_intermediates/brillo_update_payload\n\u003e out/host/linux-x86/obj/EXECUTABLES/common_crosvm_intermediates/crosvm\n\u003e out/host/linux-x86/obj/EXECUTABLES/domainGenerator.sh_intermediates/domainGenerator.sh\n\u003e out/host/linux-x86/obj/EXECUTABLES/extract-vmlinux_intermediates/extract-vmlinux\n\u003e out/host/linux-x86/obj/EXECUTABLES/insertkeys.py_intermediates/insertkeys.py\n\u003e out/host/linux-x86/obj/EXECUTABLES/lightRoutingUpdate.sh_intermediates/lightRoutingUpdate.sh\n\u003e out/host/linux-x86/obj/EXECUTABLES/perfetto_trace_processor_shell_prebuilt_intermediates/perfetto_trace_processor_shell_prebuilt\n\u003e out/host/linux-x86/obj/EXECUTABLES/shflags_intermediates/shflags\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_crosvm_intermediates/crosvm\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libandroid_emu_shared.so_for_crosvm_intermediates/libandroid-emu-shared.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libc++.so.1_for_crosvm_intermediates/libc++.so.1\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libemugl_common.so_for_crosvm_intermediates/libemugl_common.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libepoxy.so.0_for_crosvm_intermediates/libepoxy.so.0\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libgbm.so.1_for_crosvm_intermediates/libgbm.so.1\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libgfxstream_backend.so_for_crosvm_intermediates/libgfxstream_backend.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libminijail.so_for_crosvm_intermediates/libminijail.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libOpenglRender.so_for_crosvm_intermediates/libOpenglRender.so\n\u003e out/host/linux-x86/obj/EXECUTABLES/x86_64_linux_gnu_libvirglrenderer.so.1_for_crosvm_intermediates/libvirglrenderer.so.1",
+      "range": {
+        "startLine": 15,
+        "startChar": 44,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "ce99708b75003b341f189af06fb48631c430118b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92d76656_8358e589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-08-21T23:01:55Z",
+      "side": 1,
+      "message": "This CL doesn\u0027t target Soong prebuilts as narrowly as possible - I\u0027m hoping to avoid extra conditionals.",
+      "revId": "ce99708b75003b341f189af06fb48631c430118b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
