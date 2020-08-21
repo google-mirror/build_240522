@@ -57,7 +57,7 @@ ifdef LOCAL_INSTALLED_MODULE
 endif
 
 $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
-	$(transform-prebuilt-to-target)
+	$(soong-transform-prebuilt-to-target)
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@
 endif
