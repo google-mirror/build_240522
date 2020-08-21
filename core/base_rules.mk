@@ -515,7 +515,7 @@ ifneq ($(LOCAL_INSTALLED_MODULE),$(my_default_test_module))
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
-	$(copy-file-to-new-target)
+	$(copy-file-or-link-to-new-target)
 	$(PRIVATE_POST_INSTALL_CMD)
 endif
 
