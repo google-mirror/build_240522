@@ -2551,10 +2551,18 @@ $(hide) rm -f $@
 $(hide) cp $< $@
 endef
 
-# Copy a prebuilt file to a target location.
+# The same as copy-file-to-new-target, but preserve symlinks.
+define copy-or-link-file-to-new-target
+@mkdir -p $(dir $@)
+$(hide) rm -f $@
+$(hide) cp -d $< $@
+endef
+
+# Copy a prebuilt file to a target location. Symlinks are copied rather than
+# dereferenced, to make prebuilt binaries run from their source location.
 define transform-prebuilt-to-target
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
-$(copy-file-to-target)
+$(copy-or-link-file-to-new-target)
 endef
 
 # Copy a prebuilt file to a target location, stripping "# comment" comments.
