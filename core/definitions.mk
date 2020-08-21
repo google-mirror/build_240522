@@ -2551,10 +2551,26 @@ $(hide) rm -f $@
 $(hide) cp $< $@
 endef
 
+# The same as copy-file-to-new-target, but preserve symlinks.
+define copy-file-or-link-to-new-target
+@mkdir -p $(dir $@)
+$(hide) rm -f $@
+$(hide) cp -d $< $@
+endef
+
 # Copy a prebuilt file to a target location.
 define transform-prebuilt-to-target
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
-$(copy-file-to-target)
+$(copy-file-to-new-target)
+endef
+
+# Copy a prebuilt file to a target location, but preserve symlinks rather than
+# dereference them. That allows prebuilt binaries to run from their source
+# location. This is for use from Soong modules, which always create absolute
+# symlinks.
+define soong-transform-prebuilt-to-target
+@echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
+$(copy-file-or-link-to-new-target)
 endef
 
 # Copy a prebuilt file to a target location, stripping "# comment" comments.
