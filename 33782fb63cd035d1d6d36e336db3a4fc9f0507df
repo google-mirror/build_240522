@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd8fd786_315fdb1e",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-21T19:15:51Z",
+      "side": 1,
+      "message": "maybe put bootloader here as well? The bootloader seems to fit in the definition of contents of --bootable_zip (See L26)",
+      "revId": "33782fb63cd035d1d6d36e336db3a4fc9f0507df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86c2292b_39d8f37e",
+        "filename": "tools/releasetools/img_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-21T19:15:51Z",
+      "side": 1,
+      "message": "This means IMAGES/bootloader will be included in the updatepackage unconditionally. Do we want to do this for regular devices, like Pixel?",
+      "range": {
+        "startLine": 127,
+        "startChar": 33,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "33782fb63cd035d1d6d36e336db3a4fc9f0507df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
