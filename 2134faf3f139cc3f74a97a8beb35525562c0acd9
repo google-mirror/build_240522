@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8b38a9e_27aac0e4",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-21T22:59:35Z",
+      "side": 1,
+      "message": "e.g. move it here",
+      "revId": "2134faf3f139cc3f74a97a8beb35525562c0acd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf33cb93_ddc041bc",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4276,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-21T22:59:35Z",
+      "side": 1,
+      "message": "This is unrelated to dynamic partitions. Move it to somewhere like L4145 please.",
+      "range": {
+        "startLine": 4275,
+        "startChar": 0,
+        "endLine": 4276,
+        "endChar": 53
+      },
+      "revId": "2134faf3f139cc3f74a97a8beb35525562c0acd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b9c6bd4_758f71bc",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-21T22:59:35Z",
+      "side": 1,
+      "message": "Add BOARD_BOOTLOADER_IN_UPDATE_PACKAGE to this list",
+      "revId": "2134faf3f139cc3f74a97a8beb35525562c0acd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
