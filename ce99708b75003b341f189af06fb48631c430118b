@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "e7ab8e38_671f2b02",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-22T00:18:54Z",
+      "side": 1,
+      "message": "I think this does need to target just Soong modules, it will never make sense for a Make module.  Soong modules create an absolute symlink from the out directory to the source tree that can be copied, but a Make prebuilt will always be copying from the source tree.  The source tree can\u0027t know the correct path to the out directory, so any symlinks in the source tree must be relative.  Copying a relative symlink to the out directory will result in a broken symlink.",
+      "revId": "ce99708b75003b341f189af06fb48631c430118b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8a995bd8_53853587",
         "filename": "core/definitions.mk",
         "patchSetId": 1
