@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1eecd04a_7e1cc954",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-08-22T00:07:53Z",
+      "side": 0,
+      "message": "I think this is the important part of the change, the $(if) doesn\u0027t do anything",
+      "range": {
+        "startLine": 17,
+        "startChar": 111,
+        "endLine": 17,
+        "endChar": 123
+      },
+      "revId": "67c930a320180683425fd87c152222001a39a94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
