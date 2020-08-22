@@ -22,6 +22,30 @@
       "revId": "67c930a320180683425fd87c152222001a39a94c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e2ca8c_12df591e",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-08-22T00:18:04Z",
+      "side": 0,
+      "message": "I made a mistake by appending .TEST_CONFIG after the value. The json entry becomes:\nf1.config.TEST_CONFIG.",
+      "parentUuid": "1eecd04a_7e1cc954",
+      "range": {
+        "startLine": 17,
+        "startChar": 111,
+        "endLine": 17,
+        "endChar": 123
+      },
+      "revId": "67c930a320180683425fd87c152222001a39a94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

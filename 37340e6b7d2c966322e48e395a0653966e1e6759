@@ -22,6 +22,30 @@
       "revId": "37340e6b7d2c966322e48e395a0653966e1e6759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03789d3e_dcecd96b",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-08-22T00:18:04Z",
+      "side": 1,
+      "message": "right, I can remove the if.",
+      "parentUuid": "8f5170c7_260bf2a8",
+      "range": {
+        "startLine": 17,
+        "startChar": 40,
+        "endLine": 17,
+        "endChar": 109
+      },
+      "revId": "37340e6b7d2c966322e48e395a0653966e1e6759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
