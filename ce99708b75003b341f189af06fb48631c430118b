@@ -39,6 +39,29 @@
       "revId": "ce99708b75003b341f189af06fb48631c430118b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a995bd8_53853587",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2555,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-22T00:16:14Z",
+      "side": 1,
+      "message": "This makes it sound like it might run ln -s, maybe copy-file-or-link-to-new-target?",
+      "range": {
+        "startLine": 2555,
+        "startChar": 7,
+        "endLine": 2555,
+        "endChar": 38
+      },
+      "revId": "ce99708b75003b341f189af06fb48631c430118b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
