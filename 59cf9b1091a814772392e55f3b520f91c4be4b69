@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38834dc2_b23c0071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2020-08-25T10:29:50Z",
+      "side": 1,
+      "message": "Dan, would you mind to take a look if this approach is OK to you?\nThanks.",
+      "revId": "59cf9b1091a814772392e55f3b520f91c4be4b69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
