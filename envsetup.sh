@@ -1613,6 +1613,32 @@ function source_vendorsetup() {
     done
 }
 
+function showcommands() {
+    local T=$(gettop)
+    if [[ -z "$TARGET_PRODUCT" ]]; then
+        >&2 echo "TARGET_PRODUCT not set. Run lunch."
+        return
+    fi
+    case $(uname -s) in
+        Darwin)
+            PREBUILT_NAME=darwin-x86
+            ;;
+        Linux)
+            PREBUILT_NAME=linux-x86
+            ;;
+        *)
+            >&2 echo Unknown host $(uname -s)
+            return
+            ;;
+    esac
+    if [[ -z "$OUT_DIR" ]]; then
+        OUT_DIR=out
+    fi
+    (cd $T && prebuilts/build-tools/$PREBUILT_NAME/bin/ninja \
+        -f $OUT_DIR/combined-${TARGET_PRODUCT}.ninja \
+        -t commands "$@")
+}
+
 validate_current_shell
 source_vendorsetup
 addcompletions
