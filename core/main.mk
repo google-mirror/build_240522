@@ -1406,6 +1406,9 @@ $(file >$(HOST_OUT)/.installable_test_files,$(sort \
 test_files :=
 endif
 
+# Dedpulicate compatibility suite dist files across modules and packages before
+# copying them to their requested locations.
+$(call copy-many-files-rules-only, $(sort $(ALL_COMPATIBILITY_DIST_FILES)))
 
 # Don't include any GNU General Public License shared objects or static
 # libraries in SDK images.  GPL executables (not static/dynamic libraries)

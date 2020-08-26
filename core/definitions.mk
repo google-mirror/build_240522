@@ -110,6 +110,9 @@ ALL_DISABLED_PRESUBMIT_TESTS :=
 # All compatibility suites mentioned in LOCAL_COMPATIBILITY_SUITES
 ALL_COMPATIBILITY_SUITES :=
 
+# All compatibility suite files to dist.
+ALL_COMPATIBILITY_DIST_FILES :=
+
 # All LINK_TYPE entries
 ALL_LINK_TYPES :=
 
@@ -2391,6 +2394,21 @@ $(foreach f, $(1), $(strip \
     $(_cmf_dest)))
 endef
 
+# Copies many files. Unlike copy-many-files above, this only provides copy
+# rules and doesn't evaluate to any values.
+# $(1): The files to copy.  Each entry is a ':' separated src:dst pair
+# $(2): An optional directory to prepend to the destination
+define copy-many-files-rules-only
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(if $(strip $(2)), \
+      $(eval _cmf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_cmf_dest)))) \
+    $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
+      $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest))))))
+endef
+
 # Copy the file only if it's a well-formed init script file. For use via $(eval).
 # $(1): source file
 # $(2): destination file
@@ -2812,6 +2830,7 @@ endef
 # 2. Add all the files to each suite's dependent files list.
 # 3. Do the dependency addition to my_all_targets.
 # 4. Save the module name to COMPATIBILITY.$(suite).MODULES for each suite.
+# 5. Collect files to dist to ALL_COMPATIBILITY_DIST_FILES.
 # Requires for each suite: use my_compat_dist_config_$(suite) to define the test config.
 #    and use my_compat_dist_$(suite) to define the others.
 define create-suite-dependencies
@@ -2824,9 +2843,11 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))) \
     $$(foreach f,$$(my_compat_dist_config_$(suite)),$$(call word-colon,2,$$(f))) \
     $$(my_compat_dist_test_data_$(suite))) \
+  $(eval ALL_COMPATIBILITY_DIST_FILES += $$(my_compat_dist_$(suite))) \
   $(eval COMPATIBILITY.$(suite).MODULES += $$(my_register_name))) \
-$(eval $(my_all_targets) : $(call copy-many-files, \
-  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_$(suite))))) \
+$(eval $(my_all_targets) : \
+  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE), \
+    $(foreach f,$(my_compat_dist_$(suite)), $(call word-colon,2,$(f))))) \
   $(call copy-many-xml-files-checked, \
     $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite))))))
 endef
