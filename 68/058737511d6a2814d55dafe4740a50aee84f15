@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Ankit Goyal <layog@google.com>
+Code-Review+2: Rick Yiu <rickyiu@google.com>
+Build-Cop-Override+1: Rick Yiu <rickyiu@google.com>
+Submitted-by: Ankit Goyal <layog@google.com>
+Submitted-at: Wed, 26 Aug 2020 06:54:32 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1411607
+Project: platform/build
+Branch: refs/heads/master
