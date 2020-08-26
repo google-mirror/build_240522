@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004633740",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1401993?revision\u003d9",
+      "fixSuggestions": [
+        {
+          "fixId": "9ce15a76_71899d5e",
+          "description": "Change to \"tools/releasetools/ota_utils.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/ota_utils.py",
+              "range": {
+                "startLine": 205,
+                "startChar": 24,
+                "endLine": 205,
+                "endChar": 30
+              },
+              "replacement": "fields"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9e53b2c4_c73a091e",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T23:07:31Z",
+      "side": 1,
+      "message": "Common typo found: \"fileds\" -- should it be \"fields\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 205,
+        "startChar": 24,
+        "endLine": 205,
+        "endChar": 30
+      },
+      "revId": "e0b475b10a9425d3f4361d2ba742b261a43c2b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
