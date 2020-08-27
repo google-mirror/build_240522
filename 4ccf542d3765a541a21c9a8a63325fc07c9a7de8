@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e06c7b1_79f5d2e4",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2398,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-27T18:31:54Z",
+      "side": 1,
+      "message": "Is this necessary?  Why not use copy-many-files and ignore the result?",
+      "revId": "4ccf542d3765a541a21c9a8a63325fc07c9a7de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
