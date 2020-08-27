@@ -16,6 +16,24 @@
       "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64c07c90_6152a7ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-08-27T01:12:42Z",
+      "side": 1,
+      "message": "TARGET_NO_BOOTLOADER is now required to be set for all configurations. This is handled by the fact that it is defined in the generic BoardConfig.mk\u0027s (i.e. https://android.googlesource.com/device/generic/arm64/+/refs/heads/master/BoardConfig.mk, https://android.googlesource.com/device/generic/x86_64/+/refs/heads/master/BoardConfig.mk are the most relevant, and a few others).\nAssuming partners inherit from those generic BoardConfigs, they\u0027ll be fine. \n\nIn the case of the breakages, a partner did not inherit from those BoardConfigs in the interest of reducing their memory footprints and I updated their board config \nto define TARGET_NO_BOOTLOADER to true.\n\nWRT your second question, no they don\u0027t know. I would expect all partners to be inheriting from the generic BoardConfig.mk. I can follow up with partner eng to include this in documentation if you\u0027d prefer.",
+      "parentUuid": "084536ef_d48b8d75",
+      "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
