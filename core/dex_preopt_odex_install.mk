@@ -229,9 +229,21 @@ ifdef LOCAL_DEX_PREOPT
   $(call add_json_list, PreoptFlags,                    $(LOCAL_DEX_PREOPT_FLAGS))
   $(call add_json_str,  ProfileClassListing,            $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE)))
   $(call add_json_bool, ProfileIsTextListing,           $(my_profile_is_text_listing))
-  $(call add_json_bool, EnforceUsesLibraries,           $(LOCAL_ENFORCE_USES_LIBRARIES))
-  $(call add_json_list, OptionalUsesLibraries,          $(my_filtered_optional_uses_libraries))
-  $(call add_json_list, UsesLibraries,                  $(LOCAL_USES_LIBRARIES))
+  $(call add_json_bool, EnforceUsesLibs,                $(LOCAL_ENFORCE_USES_LIBRARIES))
+
+  $(call add_json_map,  UsesLibs)
+  $(foreach lib,$(LOCAL_USES_LIBRARIES),\
+    $(call add_json_map, $(lib)) \
+    $(call add_json_str, Name,     $(lib)) \
+    $(call add_json_str, Optional, false) \
+    $(call end_json_map))
+  $(foreach lib,$(my_filtered_optional_uses_libraries),\
+    $(call add_json_map, $(lib)) \
+    $(call add_json_str, Name,     $(lib)) \
+    $(call add_json_str, Optional, true) \
+    $(call end_json_map))
+  $(call end_json_map)
+
   $(call add_json_map,  LibraryPaths)
   $(foreach lib,$(my_dexpreopt_libs),\
     $(call add_json_map, $(lib)) \
@@ -240,6 +252,7 @@ ifdef LOCAL_DEX_PREOPT
     $(call add_json_str, Device, $(call install-path-to-on-device-path,$(file))) \
     $(call end_json_map))
   $(call end_json_map)
+
   $(call add_json_list, Archs,                          $(my_dexpreopt_archs))
   $(call add_json_list, DexPreoptImages,                $(my_dexpreopt_images))
   $(call add_json_list, DexPreoptImageLocations,        $(my_dexpreopt_image_locations))
