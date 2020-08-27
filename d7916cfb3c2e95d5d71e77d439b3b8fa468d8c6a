@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "084536ef_d48b8d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-27T00:58:02Z",
+      "side": 1,
+      "message": "Under what configurations is TARGET_NO_BOOTLOADER now required where it wasn\u0027t previously required?  Is this going to break partner builds unless they know to add TARGET_NO_BOOTLOADER?",
+      "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
