@@ -34,6 +34,41 @@
       "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81c53910_7359edb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-27T01:19:17Z",
+      "side": 1,
+      "message": "It\u0027s normal not to inherit the BoardConfigs, in fact I\u0027m pretty sure nothing inherits from them: https://cs.android.com/search?q\u003dgeneric%2Farm64%2FBoardConfig.mk\u0026ssfr\u003d1.  Product makefiles are inherited, BoardConfig.mk is not.",
+      "parentUuid": "64c07c90_6152a7ce",
+      "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77418e75_388ab088",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4327,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-08-27T01:19:17Z",
+      "side": 1,
+      "message": "If you make this conditional on BOARD_PREBUILT_BOOTLOADER it won\u0027t matter if TARGET_NO_BOOTLOADER is not set.",
+      "revId": "d7916cfb3c2e95d5d71e77d439b3b8fa468d8c6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
