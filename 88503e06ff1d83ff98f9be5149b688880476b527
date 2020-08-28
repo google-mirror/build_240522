@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a799dce_dd3bfe8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-08-28T23:36:54Z",
+      "side": 1,
+      "message": "I believe we can directly use the partition versions in the ota_metadata proto to generate the payload",
+      "revId": "88503e06ff1d83ff98f9be5149b688880476b527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
