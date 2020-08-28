@@ -250,7 +250,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (d7d9dd Merge "Include system_other.img in super.img by default" int)
       PLATFORM_SECURITY_PATCH := 2020-04-05
+=======
+      PLATFORM_SECURITY_PATCH := 2020-08-05
+>>>>>>> BRANCH (4dc6c8 Make change and version bump to QQ3A.200805.001)
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH
 

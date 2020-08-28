@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (d7d9dd Merge "Include system_other.img in super.img by default" int)
 BUILD_ID=QQ2A.200405.005
+=======
+BUILD_ID=QQ3A.200805.001
+>>>>>>> BRANCH (4dc6c8 Make change and version bump to QQ3A.200805.001)
