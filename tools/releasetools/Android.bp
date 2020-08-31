@@ -100,11 +100,8 @@ python_library_host {
         },
     },
     srcs: [
-       "ota_metadata.proto",
+       "ota_metadata_pb2.py",
     ],
-    proto: {
-        canonical_path_from_root: false,
-    },
 }
 
 python_defaults {
