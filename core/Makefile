@@ -3906,6 +3906,7 @@ INTERNAL_OTATOOLS_MODULES := \
   verity_signer \
   verity_verifier \
   zipalign \
+  ota_metadata_proto \
 
 # Additional tools to unpack and repack the apex file.
 INTERNAL_OTATOOLS_MODULES += \
