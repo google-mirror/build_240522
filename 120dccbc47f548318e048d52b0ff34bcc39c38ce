@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7e9b818_add3e1e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2020-09-02T09:46:15Z",
+      "side": 1,
+      "message": "Apply aosp/1418212\natest -b hello_world_test\nCheck module-info.json for hello_world_test HelloWorldTests and \nHelloWorldHostTest",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "120dccbc47f548318e048d52b0ff34bcc39c38ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
