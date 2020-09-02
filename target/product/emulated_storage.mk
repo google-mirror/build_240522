@@ -19,3 +19,5 @@ PRODUCT_VENDOR_PROPERTIES += external_storage.projid.enabled=1
 
 PRODUCT_FS_CASEFOLD := 1
 PRODUCT_VENDOR_PROPERTIES += external_storage.casefold.enabled=1
+
+PRODUCT_VENDOR_PROPERTIES += external_storage.cross_user.enabled=0
