@@ -16,6 +16,24 @@
       "revId": "2f727c05e80dc60027b25aeb6d836494d0caf6cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ae7754e_f836f977",
+        "filename": "core/product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1006010
+      },
+      "writtenOn": "2020-09-04T06:09:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "363d2780_a43f58db",
+      "revId": "2f727c05e80dc60027b25aeb6d836494d0caf6cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
