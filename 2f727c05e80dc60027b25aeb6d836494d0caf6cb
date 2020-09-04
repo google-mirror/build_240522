@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "363d2780_a43f58db",
+        "filename": "core/product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-09-04T06:07:12Z",
+      "side": 1,
+      "message": "Can you leave this as one #?",
+      "revId": "2f727c05e80dc60027b25aeb6d836494d0caf6cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
