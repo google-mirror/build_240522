@@ -22,6 +22,30 @@
       "revId": "346d195c6b534309342d25d4d561b2d8e637d3f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "434644d9_320d5637",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-09-08T08:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7f5816e_3520152d",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "346d195c6b534309342d25d4d561b2d8e637d3f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
