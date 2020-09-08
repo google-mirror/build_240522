@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Code-Review+2: Suren Baghdasaryan <surenb@google.com>
+Autosubmit+1: Mark Salyzyn <salyzyn@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 08 Sep 2020 18:26:05 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1421668
+Project: platform/build
+Branch: refs/heads/master
