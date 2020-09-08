@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9186d84_4c7bf888",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-09-08T21:14:56Z",
+      "side": 1,
+      "message": "Another place where HOST_CROSS is assumed to be windows:\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/main.mk;drc\u003de0dbbd4e9e98f9b58cec285739ac63afbfac7c9d;l\u003d609 (a valid fix for this may be to remove the 32/64 inversion for windows, we\u0027ve talked about that)",
+      "revId": "ddb4c4c5b4d3723730daef91abdf11359d6f265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "547712f2_ee54f9d7",
+        "filename": "core/combo/HOST_CROSS_linux_bionic-arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-09-08T21:14:56Z",
+      "side": 1,
+      "message": "That\u0027s unlikely to be required, we don\u0027t do that for other host targets, and the device-side ones just set some questionable make variables. (Plus, most everything host should be getting built in Soong at this point)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "ddb4c4c5b4d3723730daef91abdf11359d6f265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
