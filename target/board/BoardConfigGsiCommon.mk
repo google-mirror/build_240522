@@ -12,6 +12,8 @@ TARGET_NO_KERNEL := true
 BOARD_USES_SYSTEM_OTHER_ODEX :=
 
 # system.img is always ext4 with sparse option
+TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+
 # GSI also includes make_f2fs to support userdata parition in f2fs
 # for some devices
 TARGET_USERIMAGES_USE_F2FS := true
