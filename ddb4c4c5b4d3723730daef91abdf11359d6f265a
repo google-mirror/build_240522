@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3979f29f_0641ce48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-09T06:36:15Z",
+      "side": 1,
+      "message": "Thanks for letting me know the place. Inversion seems to be a rather big task. I modified the place to make use of 2ND_HOST_CROSS_IS_64_BIT which is set to true only for Windows.",
+      "parentUuid": "c9186d84_4c7bf888",
+      "revId": "ddb4c4c5b4d3723730daef91abdf11359d6f265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "547712f2_ee54f9d7",
         "filename": "core/combo/HOST_CROSS_linux_bionic-arm64.mk",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "ddb4c4c5b4d3723730daef91abdf11359d6f265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2635c2eb_69d29288",
+        "filename": "core/combo/HOST_CROSS_linux_bionic-arm64.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-09T06:36:15Z",
+      "side": 1,
+      "message": "Ok. Dropping this comment.",
+      "parentUuid": "547712f2_ee54f9d7",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "ddb4c4c5b4d3723730daef91abdf11359d6f265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
