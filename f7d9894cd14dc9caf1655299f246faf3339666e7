@@ -22,6 +22,30 @@
       "revId": "f7d9894cd14dc9caf1655299f246faf3339666e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04cbc505_10ba15b1",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-09-10T21:08:53Z",
+      "side": 1,
+      "message": "This was discussed in the bug.",
+      "parentUuid": "9ccd9c43_2fcdbcc3",
+      "range": {
+        "startLine": 866,
+        "startChar": 10,
+        "endLine": 866,
+        "endChar": 44
+      },
+      "revId": "f7d9894cd14dc9caf1655299f246faf3339666e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
