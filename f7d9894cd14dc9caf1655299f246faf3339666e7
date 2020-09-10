@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ccd9c43_2fcdbcc3",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-09-10T09:01:54Z",
+      "side": 1,
+      "message": "looks brittle. maybe disable-verity could be given a -R flag like `adb remount` has to reboot if necessary?",
+      "range": {
+        "startLine": 866,
+        "startChar": 10,
+        "endLine": 866,
+        "endChar": 44
+      },
+      "revId": "f7d9894cd14dc9caf1655299f246faf3339666e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
