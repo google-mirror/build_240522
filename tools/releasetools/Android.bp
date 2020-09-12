@@ -273,6 +273,7 @@ python_defaults {
         "imgdiff",
         "minigzip",
         "mkbootfs",
+        "signapk",
     ],
 }
 
