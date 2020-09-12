@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33ed3f78_8e307945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-12T05:13:52Z",
+      "side": 1,
+      "message": "This CL was somehow lost for rvc, you forked really early apparently there.",
+      "revId": "117f848d1191625cde6ed73bb3d4283c2ab43bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
