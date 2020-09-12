@@ -675,7 +675,7 @@ def HasRecoveryPatch(target_files_zip, info_dict):
   if board_uses_vendorimage:
     target_files_dir = "VENDOR"
   else:
-    target_files_dir = "SYSTEM/vendor"
+    target_files_dir = "SYSTEM"
 
   patch = "%s/recovery-from-boot.p" % target_files_dir
   img = "%s/etc/recovery.img" % target_files_dir
