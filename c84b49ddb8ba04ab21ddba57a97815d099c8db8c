@@ -16,6 +16,24 @@
       "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f5f3b55_dc0d11df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120300
+      },
+      "writtenOn": "2020-09-13T10:39:57Z",
+      "side": 1,
+      "message": "\"SYSTEM/vendor\" is symlink so that won\u0027t be really possible",
+      "parentUuid": "ece0e92f_c4a12022",
+      "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
