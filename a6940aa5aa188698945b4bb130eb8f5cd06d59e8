@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eacdb558_82dff3ce",
+        "filename": "tools/releasetools/non_ab_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-13T10:17:57Z",
+      "side": 0,
+      "message": "if board_uses_vendorimage and board_builds_vendorimage and keep to old logic",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 675,
+        "endChar": 28
+      },
+      "revId": "a6940aa5aa188698945b4bb130eb8f5cd06d59e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
