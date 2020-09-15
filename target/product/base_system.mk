@@ -25,6 +25,7 @@ PRODUCT_PACKAGES += \
     android.hidl.memory@1.0-impl \
     android.hidl.memory@1.0-impl.vendor \
     android.system.suspend@1.0-service \
+    android.hardware.camera.provider@2.4-external-service \
     android.test.base \
     android.test.mock \
     android.test.runner \
