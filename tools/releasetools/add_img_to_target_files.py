@@ -829,8 +829,10 @@ def AddImagesToTargetFiles(filename):
       os.path.exists(
           os.path.join(OPTIONS.input_tmp, "IMAGES", "system_ext.img")))
   has_system = (
-      os.path.isdir(os.path.join(OPTIONS.input_tmp, "SYSTEM")) and
-      OPTIONS.info_dict.get("building_system_image") == "true")
+      (os.path.isdir(os.path.join(OPTIONS.input_tmp, "SYSTEM")) and
+       OPTIONS.info_dict.get("building_system_image") == "true") or
+      os.path.exists(
+          os.path.join(OPTIONS.input_tmp, "IMAGES", "system.img")))
 
   has_system_other = (
       os.path.isdir(os.path.join(OPTIONS.input_tmp, "SYSTEM_OTHER")) and
