@@ -52,6 +52,24 @@
       "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b687d0d_80212590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120300
+      },
+      "writtenOn": "2020-09-15T06:49:54Z",
+      "side": 1,
+      "message": "this patch is for treble device that uses prebuilt vendor and doesn\u0027t effects any other usecase \n\n1) Treble devices building vendor.img will have it installed in vendor\n2) Treble devices using prebuilt vendor.img will skip installing it\n3) Non-Treble devices will end up installing it in system",
+      "parentUuid": "fe6d0a07_abdd3bea",
+      "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
