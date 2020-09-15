@@ -34,6 +34,24 @@
       "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe6d0a07_abdd3bea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-15T05:48:57Z",
+      "side": 1,
+      "message": "why don\u0027t you leave the location of recovery-from-boot.p in /system for non treble devices.. Probably just fix the assertion.",
+      "parentUuid": "7f5f3b55_dc0d11df",
+      "revId": "c84b49ddb8ba04ab21ddba57a97815d099c8db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
