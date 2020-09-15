@@ -16,13 +16,14 @@ To temporarily relax missing required modules check, use:
 
 System properties for each of the partition is supposed to be set via following
 product config variables.
-
+testing a change
 For system partititon,
 
 * `PRODUCT_SYSTEM_PROPERITES`
 * `PRODUCT_SYSTEM_DEFAULT_PROPERTIES` is highly discouraged. Will be deprecated.
 
 For vendor partition,
+just a test
 
 * `PRODUCT_VENDOR_PROPERTIES`
 * `PRODUCT_PROPERTY_OVERRIDES` is highly discouraged. Will be deprecated.
