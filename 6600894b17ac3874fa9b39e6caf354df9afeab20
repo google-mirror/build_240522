@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba624e6e_964f32e1",
+        "filename": "tools/fs_config/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-09-16T22:56:41Z",
+      "side": 1,
+      "message": "This whole section is a duplicate of https://source.android.com/devices/tech/config/filesystem#configuring-aids, which has even more content and examples.  Better to just link provide a link?",
+      "revId": "6600894b17ac3874fa9b39e6caf354df9afeab20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
