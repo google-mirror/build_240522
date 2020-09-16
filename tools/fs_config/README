@@ -59,8 +59,8 @@ group:
 
 caps:
   The name as declared in
-  system/core/include/private/android_filesystem_capability.h without the
-  leading CAP_. Mixed case is allowed. Caps can also be the raw:
+  bionic/libc/kernel/uapi/linux/capability.h without the leading CAP_.
+  Mixed case is allowed. Caps can also be the raw:
    * binary (0b0101)
    * octal (0455)
    * int (42)
