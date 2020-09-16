@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfade8_8342dc3b",
+        "filename": "tools/fs_config/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-09-16T20:17:36Z",
+      "side": 1,
+      "message": "switch to .md and make this a link?",
+      "revId": "afc8f29d1cb9afbf8225e6261ee4c376c0ab82b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
