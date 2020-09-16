@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87be8ea5_ef488225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-09-16T18:21:38Z",
+      "side": 1,
+      "message": "Thanks for the fix. One minor comment.",
+      "revId": "a6940aa5aa188698945b4bb130eb8f5cd06d59e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26f6ec63_e2ad56de",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3102,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2020-09-16T18:21:38Z",
+      "side": 1,
+      "message": "Nit: this comment should now read SYSTEM/vendor.",
+      "range": {
+        "startLine": 3102,
+        "startChar": 48,
+        "endLine": 3102,
+        "endChar": 54
+      },
+      "revId": "a6940aa5aa188698945b4bb130eb8f5cd06d59e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
