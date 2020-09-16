@@ -39,6 +39,30 @@
       "revId": "a6940aa5aa188698945b4bb130eb8f5cd06d59e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09f5c526_e4786349",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3102,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-16T19:07:09Z",
+      "side": 1,
+      "message": "The call to MakeRecoveryPatch in add_img_to_target_files.py needs update as well? Currently, the out_sink writes to SYSTEM\n\n  def output_sink(fn, data):\n    output_file \u003d os.path.join(OPTIONS.input_tmp, \"SYSTEM\", fn)",
+      "parentUuid": "26f6ec63_e2ad56de",
+      "range": {
+        "startLine": 3102,
+        "startChar": 48,
+        "endLine": 3102,
+        "endChar": 54
+      },
+      "revId": "a6940aa5aa188698945b4bb130eb8f5cd06d59e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
