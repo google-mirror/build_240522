@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50abf56c_437d7999",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1728522
+      },
+      "writtenOn": "2020-09-16T14:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66a025cd_b677d062",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 41
+      },
+      "revId": "ee7da4b098d44395c12044024c0d059ab737d0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "402b1342_f4344cbc",
         "filename": "core/combo/arch/arm64/armv8-2a-dotprod.mk",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "ee7da4b098d44395c12044024c0d059ab737d0da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3701a71c_02796063",
+        "filename": "core/combo/arch/arm64/armv8-2a-dotprod.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728522
+      },
+      "writtenOn": "2020-09-16T14:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "402b1342_f4344cbc",
+      "revId": "ee7da4b098d44395c12044024c0d059ab737d0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
