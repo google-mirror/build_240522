@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b018c860_fbc4e8bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-09-17T01:42:24Z",
+      "side": 1,
+      "message": "Dan/Anton, would you be okay with this temporarily? If Josh adds \u0027-R\u0027, then the only change would be to add that option here as well. We would still want the grep to support older devices, I would think",
+      "revId": "f7d9894cd14dc9caf1655299f246faf3339666e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ccd9c43_2fcdbcc3",
         "filename": "envsetup.sh",
         "patchSetId": 1
