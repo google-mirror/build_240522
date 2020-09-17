@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbe5b8fc_2644c466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1455398
+      },
+      "writtenOn": "2020-09-17T22:16:48Z",
+      "side": 1,
+      "message": "Hi Anton \u0026 Sam\n\nThese target builds fine on build server, let\u0027s land them in AOSP, \n\nThanks!",
+      "revId": "c728249b88db2a687e6685d2704a07c64e62e604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
