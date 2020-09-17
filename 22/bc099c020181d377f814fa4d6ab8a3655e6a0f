@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Verified+1: Dan Shi <dshi@google.com>
+Code-Review+2: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Submitted-by: Dan Shi <dshi@google.com>
+Submitted-at: Thu, 17 Sep 2020 03:23:28 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1429097
+Project: platform/build
+Branch: refs/heads/master
