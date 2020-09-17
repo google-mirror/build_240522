@@ -164,6 +164,13 @@ ifneq ($(MALLOC_IMPL),)
 endif
 board_config_mk :=
 
+# Because system.img is skipped when WITHOUT_SYSTEM_IMAGE=true, exclude it from
+# META/ab_partitions.txt at the situation to prevent add_img_to_target_files.py
+# from trying to find non-exist system.img when building radio.img.
+ifeq ($(WITHOUT_SYSTEM_IMAGE),true)
+  AB_OTA_PARTITIONS := $(filter-out system,$(AB_OTA_PARTITIONS))
+endif
+
 # Clean up and verify BoardConfig variables
 $(foreach var,$(_board_strip_readonly_list),$(eval $(var) := $$(strip $$($(var)))))
 $(foreach var,$(_board_true_false_vars), \
