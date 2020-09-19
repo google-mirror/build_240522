@@ -55,10 +55,12 @@ ifneq ($(filter STATIC_LIBRARIES SHARED_LIBRARIES HEADER_LIBRARIES,$(LOCAL_MODUL
   EXPORTS.$(intermediates).FLAGS := $(LOCAL_EXPORT_CFLAGS)
   EXPORTS.$(intermediates).DEPS := $(LOCAL_EXPORT_C_INCLUDE_DEPS)
 
+  ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
   ifdef LOCAL_SOONG_TOC
     $(eval $(call copy-one-file,$(LOCAL_SOONG_TOC),$(LOCAL_BUILT_MODULE).toc))
     $(call add-dependency,$(LOCAL_BUILT_MODULE).toc,$(LOCAL_BUILT_MODULE))
     $(my_all_targets): $(LOCAL_BUILT_MODULE).toc
+  endif
   endif
 
   SOONG_ALREADY_CONV += $(LOCAL_MODULE)
@@ -142,6 +144,7 @@ ifeq ($(my_check_same_vndk_variants),true)
   $(LOCAL_BUILT_MODULE): $(same_vndk_variants_stamp)
 endif
 
+ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
 # Use copy-or-link-prebuilt-to-target for host executables and shared libraries,
 # to preserve symlinks to the source trees. They can then run directly from the
 # prebuilt directories where the linker can load their dependencies using
@@ -154,6 +157,7 @@ else
 endif
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@
+endif
 endif
 
 ifndef LOCAL_IS_HOST_MODULE
