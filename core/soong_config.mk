@@ -159,7 +159,7 @@ $(call add_json_str,  ProductPath,                       $(TARGET_COPY_OUT_PRODU
 $(call add_json_str,  SystemExtPath,                     $(TARGET_COPY_OUT_SYSTEM_EXT))
 $(call add_json_bool, MinimizeJavaDebugInfo,             $(filter true,$(PRODUCT_MINIMIZE_JAVA_DEBUG_INFO)))
 
-$(call add_json_bool, UseGoma,                           $(filter-out false,$(USE_GOMA)))
+$(call add_json_bool, UseGoma,                           $(filter-out false,$(FORCE_USE_GOMA)))
 $(call add_json_bool, UseRBE,                            $(filter-out false,$(USE_RBE)))
 $(call add_json_bool, UseRBEJAVAC,                       $(filter-out false,$(RBE_JAVAC)))
 $(call add_json_bool, UseRBER8,                          $(filter-out false,$(RBE_R8)))

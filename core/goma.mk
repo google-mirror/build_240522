@@ -15,7 +15,7 @@
 #
 
 # Notice: this works only with Google's Goma build infrastructure.
-ifneq ($(filter-out false,$(USE_GOMA)),)
+ifneq ($(filter-out false,$(FORCE_USE_GOMA)),)
   ifdef GOMA_DIR
     goma_dir := $(GOMA_DIR)
   else

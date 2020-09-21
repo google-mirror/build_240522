@@ -37,6 +37,7 @@ function _export_metrics_uploader() {
 # executed by RBE. This file should be sourced once per checkout of Android code.
 function _set_rbe_vars() {
   unset USE_GOMA
+  unset FORCE_USE_GOMA
   export USE_RBE="true"
   export RBE_CXX_EXEC_STRATEGY="remote_local_fallback"
   export RBE_JAVAC=1

@@ -1131,7 +1131,7 @@ GOMA_OR_RBE_POOL :=
 # When goma or RBE are enabled, kati will be passed --default_pool=local_pool to put
 # most rules into the local pool.  Explicitly set the pool to "none" for rules that
 # should be run outside the local pool, i.e. with -j500.
-ifneq (,$(filter-out false,$(USE_GOMA)))
+ifneq (,$(filter-out false,$(FORCE_USE_GOMA)))
   GOMA_POOL := none
   GOMA_OR_RBE_POOL := none
 else ifneq (,$(filter-out false,$(USE_RBE)))
