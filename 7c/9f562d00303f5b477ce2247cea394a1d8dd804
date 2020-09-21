@@ -1,0 +1,10 @@
+Code-Review+2: Anton Hansson <hansson@google.com>
+Code-Review+2: Sam Lin <samlin@google.com>
+Autosubmit+1: Calvin Huang <calhuang@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Mon, 21 Sep 2020 17:48:33 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1430099
+Project: platform/build
+Branch: refs/heads/master
