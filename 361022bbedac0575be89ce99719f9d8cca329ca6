@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "785c8eaf_b4c5c4ce",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3535,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-22T22:34:31Z",
+      "side": 1,
+      "message": "Is it more concise to append my_extract_kernel_args in the else clause. And check the emptiness of my_extract_kernel_args below instead of all_kernel_info_predefined?",
+      "range": {
+        "startLine": 3535,
+        "startChar": 0,
+        "endLine": 3535,
+        "endChar": 28
+      },
+      "revId": "361022bbedac0575be89ce99719f9d8cca329ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
