@@ -70,6 +70,29 @@
       "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87fa88ac_2648fc14",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-22T19:48:04Z",
+      "side": 1,
+      "message": "Should only set if a certain PRODUCT variable is set.",
+      "range": {
+        "startLine": 851,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 88
+      },
+      "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
