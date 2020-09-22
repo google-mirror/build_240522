@@ -22,7 +22,7 @@ import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
                     SignFile, PARTITIONS_WITH_CARE_MAP, PartitionBuildProps,
-                    RunAndCheckOutput, ExternalError)
+                    RunAndCheckOutput, ExternalError, UnzipTemp)
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,7 @@ OPTIONS.boot_variable_file = None
 METADATA_NAME = 'META-INF/com/android/metadata'
 METADATA_PROTO_NAME = 'META-INF/com/android/metadata.pb'
 UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
+KERNEL_RELEASE_PATTERN = 'META/kernel_release.txt'
 
 
 def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
@@ -174,34 +175,52 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
     ab_partitions = set(build_info.info_dict.get("ab_partitions"))
 
     # delta_generator will error out on unused timestamps,
-    # so only generate timestamps for dynamic partitions
+    # so only generate timestamps for dynamic partitions + boot
     # used in OTA update.
-    for partition in sorted(set(PARTITIONS_WITH_CARE_MAP) & ab_partitions):
-      partition_prop = build_info.info_dict.get(
-          '{}.build.prop'.format(partition))
-      # Skip if the partition is missing, or it doesn't have a build.prop
-      if not partition_prop or not partition_prop.build_props:
-        continue
+    timestamp_partitions = set(PARTITIONS_WITH_CARE_MAP)
+    timestamp_partitions.add("boot")
+    timestamp_partitions = timestamp_partitions & ab_partitions
 
-      partition_state = partition_states.add()
-      partition_state.partition_name = partition
-      # Update the partition's runtime device names and fingerprints
-      partition_devices = set()
-      partition_fingerprints = set()
-      for runtime_build_info in build_info_set:
-        partition_devices.add(
-            runtime_build_info.GetPartitionBuildProp('ro.product.device',
-                                                     partition))
-        partition_fingerprints.add(
-            runtime_build_info.GetPartitionFingerprint(partition))
+    for partition in sorted(timestamp_partitions):
+      if partition == "boot":
+        UpdateBootPartitionState(partition_states, partition)
+      else:
+        UpdatePartitionState(build_info_set, partition_states, partition)
 
-      partition_state.device.extend(sorted(partition_devices))
-      partition_state.build.extend(sorted(partition_fingerprints))
+  def UpdateBootPartitionState(partition_states, partition):
+    kernel_release = build_info.info_dict.get('kernel_release')
+    if kernel_release is None:
+      return
+    partition_state = partition_states.add()
+    partition_state.partition_name = partition
+    partition_state.version = kernel_release
 
-      # TODO(xunchang) set the boot image's version with kmi. Note the boot
-      # image doesn't have a file map.
-      partition_state.version = build_info.GetPartitionBuildProp(
-          'ro.build.date.utc', partition)
+  def UpdatePartitionState(build_info_set, partition_states, partition):
+    partition_prop = build_info.info_dict.get(
+        '{}.build.prop'.format(partition))
+    # Skip if the partition is missing, or it doesn't have a build.prop
+    if not partition_prop or not partition_prop.build_props:
+      return
+
+    partition_state = partition_states.add()
+    partition_state.partition_name = partition
+    # Update the partition's runtime device names and fingerprints
+    partition_devices = set()
+    partition_fingerprints = set()
+    for runtime_build_info in build_info_set:
+      partition_devices.add(
+          runtime_build_info.GetPartitionBuildProp('ro.product.device',
+                                                   partition))
+      partition_fingerprints.add(
+          runtime_build_info.GetPartitionFingerprint(partition))
+
+    partition_state.device.extend(sorted(partition_devices))
+    partition_state.build.extend(sorted(partition_fingerprints))
+
+    # TODO(xunchang) set the boot image's version with kmi. Note the boot
+    # image doesn't have a file map.
+    partition_state.version = build_info.GetPartitionBuildProp(
+        'ro.build.date.utc', partition)
 
   # TODO(xunchang), we can save a call to ComputeRuntimeBuildInfos.
   build_devices, build_fingerprints = \
@@ -594,3 +613,28 @@ def GetGkiKernelRelease(kernel_release,
   logger.info("Setting boot version in OTA metadata to " + kernel_release)
 
   return kernel_release
+
+
+def GetGkiKernelReleaseFromTargetFiles(input_zip):
+  """
+  If GKI is enabled in this build, return the kernel release extracted from
+  input_zip.
+
+  Args:
+    input_zip: The input zip file.
+
+  Returns:
+    The kernel release if GKI is enabled in this build, or None otherwise.
+  """
+  input_tmp = UnzipTemp(input_zip, [KERNEL_RELEASE_PATTERN])
+  kernel_release_file = os.path.join(input_tmp, KERNEL_RELEASE_PATTERN)
+
+  if not os.path.isfile(kernel_release_file):
+    logger.info("No kernel_release.txt, skip setting boot version in OTA "
+                "metadata")
+    return None
+
+  with open(kernel_release_file) as f:
+    kernel_release = f.read().strip()
+
+  return GetGkiKernelRelease(kernel_release, allow_suffix=True)
