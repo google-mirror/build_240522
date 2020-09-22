@@ -34,6 +34,24 @@
       "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e75a50_1b764cec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-22T18:55:37Z",
+      "side": 1,
+      "message": "\u003e\u003e\u003e Do brillo_update_payload not generate the diff for boot partition if they have the same \"version\" field?\n\nthey do actually. Even if the image is the same, there will be a bunch of copy commands",
+      "parentUuid": "699a1a03_8814017c",
+      "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
