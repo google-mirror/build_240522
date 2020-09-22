@@ -192,7 +192,6 @@ class ReleaseToolsTestCase(unittest.TestCase):
   def tearDown(self):
     common.Cleanup()
 
-
 if __name__ == '__main__':
   testsuite = unittest.TestLoader().discover(
       os.path.dirname(os.path.realpath(__file__)))

@@ -219,7 +219,6 @@ def CheckVintf(inp, info_dict=None):
 
   raise ValueError('{} is not a valid directory or zip file'.format(inp))
 
-
 def main(argv):
   args = common.ParseOptions(argv, __doc__)
   if len(args) != 1:
