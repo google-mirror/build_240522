@@ -221,7 +221,7 @@ import target_files_diff
 from check_target_files_vintf import CheckVintfIfTrebleEnabled
 from non_ab_ota import GenerateNonAbOtaPackage
 from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
-                       PropertyFiles)
+                       PropertyFiles, GetGkiKernelReleaseFromTargetFiles)
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -847,6 +847,10 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   with zipfile.ZipFile(target_file, allowZip64=True) as zfp:
     target_info.info_dict['ab_partitions'] = zfp.read(
         AB_PARTITIONS).strip().split("\n")
+
+  target_info.info_dict['kernel_release'] = GetGkiKernelReleaseFromTargetFiles(target_file)
+  if source_file is not None:
+    source_info.info_dict['kernel_release'] = GetGkiKernelReleaseFromTargetFiles(source_file)
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
