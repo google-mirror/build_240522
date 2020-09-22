@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (3bede4 Merge "Make change and version bump to PCR1.200915.001" into)
 export BUILD_ID=PCR1.200915.001
+=======
+export BUILD_ID=PI-CTS
+>>>>>>> BRANCH (8f0e65 Merge "Enable TARGET_2ND_ARCH_VARIANT := armv7-a for vts bui)
