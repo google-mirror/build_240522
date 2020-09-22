@@ -561,3 +561,27 @@ def SignOutput(temp_zip_name, output_zip_name):
 
   SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
            whole_file=True)
+
+
+def GetKernelReleaseFromTargetFiles(input_zip):
+  """
+  Return the kernel release extracted from input_zip.
+
+  Args:
+    input_zip: The input zip file.
+
+  Returns:
+    The kernel release if included this build, or None otherwise.
+  """
+  input_tmp = UnzipTemp(input_zip, [KERNEL_RELEASE_PATTERN])
+  kernel_release_file = os.path.join(input_tmp, KERNEL_RELEASE_PATTERN)
+
+  if not os.path.isfile(kernel_release_file):
+    logger.info("No kernel_release.txt, skip setting boot version in OTA "
+                "metadata")
+    return None
+
+  with open(kernel_release_file) as f:
+    kernel_release = f.read().strip()
+
+  return kernel_release
