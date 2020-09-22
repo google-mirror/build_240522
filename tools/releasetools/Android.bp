@@ -125,6 +125,7 @@ python_defaults {
     required: [
         "brillo_update_payload",
         "checkvintf",
+        "enforce_gki_kernel_release",
     ],
     target: {
         darwin: {

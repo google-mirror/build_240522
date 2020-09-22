@@ -14,14 +14,17 @@
 
 import copy
 import itertools
+import logging
 import os
 import zipfile
 
 import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
-                    SignFile, PARTITIONS_WITH_CARE_MAP, PartitionBuildProps)
+                    SignFile, PARTITIONS_WITH_CARE_MAP, PartitionBuildProps,
+                    RunAndCheckOutput, ExternalError)
 
+logger = logging.getLogger(__name__)
 
 OPTIONS.no_signing = False
 OPTIONS.force_non_ab = False
@@ -561,3 +564,33 @@ def SignOutput(temp_zip_name, output_zip_name):
 
   SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
            whole_file=True)
+
+
+def GetGkiKernelRelease(kernel_release,
+                        allow_suffix=False):
+  """
+  Sanitize kernel_release as a GKI kernel release string. Depends on
+  enforce_gki_kernel_release tool.
+
+  Args:
+    kernel_release: input string, e.g. "5.4.42-android12-0"
+    allow_suffix: whether to allow suffix in input string. If true, strings like
+      "5.4.42-android12-0-foo" are also accepted.
+    verbose: Log
+
+  Return:
+    Sanitized string if it is a valid GKI kernel release, e.g.
+    "5.4.42-android12-0". None otherwise.
+  """
+  args = ["enforce_gki_kernel_release", "--kernel_release", kernel_release]
+  if allow_suffix:
+    args.append("--allow-suffix")
+  try:
+    kernel_release = RunAndCheckOutput(args, verbose=OPTIONS.verbose).strip()
+  except ExternalError as e:
+    logger.info("Skip setting boot version in OTA metadata. " + e.message)
+    return None
+
+  logger.info("Setting boot version in OTA metadata to " + kernel_release)
+
+  return kernel_release
