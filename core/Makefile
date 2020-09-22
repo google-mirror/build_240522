@@ -1915,6 +1915,7 @@ $(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(COMPRESSION_COMMAND) > $(recovery_ramdisk)
+$(recovery_ramdisk): .KATI_SYMLINK_OUTPUTS := $(TARGET_RECOVERY_ROOT_OUT)/init $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 
 # $(1): output file
 # $(2): kernel file
@@ -2318,6 +2319,7 @@ $1:
 	  exit 1; \
 	fi
 	ln -sfn $2 $1
+$1: .KATI_SYMLINK_OUTPUTS := $1
 )
 $1
 endef
