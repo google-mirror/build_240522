@@ -16,6 +16,24 @@
       "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "699a1a03_8814017c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-22T18:43:09Z",
+      "side": 1,
+      "message": "Do brillo_update_payload not generate the diff for boot partition if they have the same \"version\" field?\n\nRegardless, you are right about that the kernel version isn\u0027t comprehensive. I\u0027ll discuss this in the doc, and fix this + update_engine together.",
+      "parentUuid": "2e9eed64_437ee74d",
+      "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
