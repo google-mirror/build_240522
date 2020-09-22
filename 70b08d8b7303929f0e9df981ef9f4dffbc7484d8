@@ -52,6 +52,24 @@
       "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c48517e_d9dbfd9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-22T19:33:50Z",
+      "side": 1,
+      "message": "I think that reduces the risk. If I don\u0027t fix this (see doc for ways to fix this), the OTA client will just fail to detect downgrade between two boot images with the same kernel binary but maybe built differently (e.g. they have different ramdisks, and one is newer than the other). However:\n\n- For OTAs, there are other indicators of downgrade detection (e.g. the global build timestamp)\n- For APEXes, the OTA payload will be wrapped in the APEX with a decoupled APEX version, so downgrades should be detected earlier.",
+      "parentUuid": "d6e75a50_1b764cec",
+      "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
