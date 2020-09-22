@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9eed64_437ee74d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-22T04:54:36Z",
+      "side": 1,
+      "message": "Does the kernel version work for OTA though. I guess it\u0027s possible to have two different boot images with the same kernel version? So incremental OTA cannot rely on the kernel version alone",
+      "revId": "70b08d8b7303929f0e9df981ef9f4dffbc7484d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
