@@ -192,6 +192,46 @@ class ReleaseToolsTestCase(unittest.TestCase):
   def tearDown(self):
     common.Cleanup()
 
+<<<<<<< HEAD   (0071b0 Merge "Use apksigner in check_target_files_signatures" into )
+=======
+class PropertyFilesTestCase(ReleaseToolsTestCase):
+
+  @staticmethod
+  def construct_zip_package(entries):
+    zip_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(zip_file, 'w', allowZip64=True) as zip_fp:
+      for entry in entries:
+        zip_fp.writestr(
+            entry,
+            entry.replace('.', '-').upper(),
+            zipfile.ZIP_STORED)
+    return zip_file
+
+  @staticmethod
+  def _parse_property_files_string(data):
+    result = {}
+    for token in data.split(','):
+      name, info = token.split(':', 1)
+      result[name] = info
+    return result
+
+  def setUp(self):
+    common.OPTIONS.no_signing = False
+
+  def _verify_entries(self, input_file, tokens, entries):
+    for entry in entries:
+      offset, size = map(int, tokens[entry].split(':'))
+      with open(input_file, 'rb') as input_fp:
+        input_fp.seek(offset)
+        if entry == 'metadata':
+          expected = b'META-INF/COM/ANDROID/METADATA'
+        elif entry == 'metadata.pb':
+          expected = b'META-INF/COM/ANDROID/METADATA-PB'
+        else:
+          expected = entry.replace('.', '-').upper().encode()
+        self.assertEqual(expected, input_fp.read(size))
+
+>>>>>>> CHANGE (928c23 Allow zip64 support when opening zip files)
 
 if __name__ == '__main__':
   testsuite = unittest.TestLoader().discover(
