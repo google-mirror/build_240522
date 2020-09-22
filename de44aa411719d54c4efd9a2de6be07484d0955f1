@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e196f18_17e2e040",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-22T21:52:13Z",
+      "side": 1,
+      "message": "vaguely remember it\u0027s banned due to the inclusive language...",
+      "range": {
+        "startLine": 572,
+        "startChar": 2,
+        "endLine": 572,
+        "endChar": 10
+      },
+      "revId": "de44aa411719d54c4efd9a2de6be07484d0955f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d951298_78982f81",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-22T21:52:13Z",
+      "side": 1,
+      "message": "it hasn\u0027t set the metadata yet?",
+      "range": {
+        "startLine": 591,
+        "startChar": 29,
+        "endLine": 591,
+        "endChar": 58
+      },
+      "revId": "de44aa411719d54c4efd9a2de6be07484d0955f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
