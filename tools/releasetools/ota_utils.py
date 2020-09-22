@@ -22,7 +22,7 @@ import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
                     SignFile, PARTITIONS_WITH_CARE_MAP, PartitionBuildProps,
-                    RunAndCheckOutput, ExternalError)
+                    RunAndCheckOutput, ExternalError, UnzipTemp)
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,7 @@ OPTIONS.boot_variable_file = None
 METADATA_NAME = 'META-INF/com/android/metadata'
 METADATA_PROTO_NAME = 'META-INF/com/android/metadata.pb'
 UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
+KERNEL_RELEASE_PATTERN = 'META/kernel_release.txt'
 
 
 def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
@@ -594,3 +595,28 @@ def GetGkiKernelRelease(kernel_release,
   logger.info("Setting boot version in OTA metadata to " + kernel_release)
 
   return kernel_release
+
+
+def GetGkiKernelReleaseFromTargetFiles(input_zip):
+  """
+  If GKI is enabled in this build, return the kernel release extracted from
+  input_zip.
+
+  Args:
+    input_zip: The input zip file.
+
+  Returns:
+    The kernel release if GKI is enabled in this build, or None otherwise.
+  """
+  input_tmp = UnzipTemp(input_zip, [KERNEL_RELEASE_PATTERN])
+  kernel_release_file = os.path.join(input_tmp, KERNEL_RELEASE_PATTERN)
+
+  if not os.path.isfile(kernel_release_file):
+    logger.info("No kernel_release.txt, skip setting boot version in OTA "
+                "metadata")
+    return None
+
+  with open(kernel_release_file) as f:
+    kernel_release = f.read().strip()
+
+  return GetGkiKernelRelease(kernel_release, allow_suffix=True)
