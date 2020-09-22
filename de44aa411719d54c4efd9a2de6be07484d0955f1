@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "41ddaacc_f250955d",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-22T23:17:19Z",
+      "side": 1,
+      "message": "Confirmed with android-community that this is acceptable to use for now.",
+      "parentUuid": "1d4dc9a5_d3e1c3bf",
+      "range": {
+        "startLine": 572,
+        "startChar": 2,
+        "endLine": 572,
+        "endChar": 10
+      },
+      "revId": "de44aa411719d54c4efd9a2de6be07484d0955f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d951298_78982f81",
         "filename": "tools/releasetools/ota_utils.py",
         "patchSetId": 1
