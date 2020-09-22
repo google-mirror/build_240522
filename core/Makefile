@@ -3497,6 +3497,101 @@ endif # BUILDING_VBMETA_IMAGE
 endif # BOARD_AVB_ENABLE
 
 # -----------------------------------------------------------------
+# Kernel information.
+
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+
+intermediates := $(call intermediates-dir-for,PACKAGING,kernel_info)
+
+BUILT_KERNEL_CONFIGS_FILE := $(intermediates)/kernel_configs.txt
+BUILT_KERNEL_VERSION_FILE := $(intermediates)/kernel_version.txt
+BUILT_KERNEL_RELEASE_FILE := $(intermediates)/kernel_release.txt
+
+# Alias to build all kernel info files
+.PHONY: kernel_info
+kernel_info: \
+  $(BUILT_KERNEL_CONFIGS_FILE) \
+  $(BUILT_KERNEL_VERSION_FILE) \
+  $(BUILT_KERNEL_RELEASE_FILE) \
+
+# The following can be used to override the values extracted
+# from INSTALLED_KERNEL_TARGET.
+# - BOARD_KERNEL_CONFIG_FILE
+# - BOARD_KERNEL_VERSION
+# - BOARD_KERNEL_RELEASE
+ifdef BOARD_KERNEL_CONFIG_FILE
+$(BUILT_KERNEL_CONFIGS_FILE): $(BOARD_KERNEL_CONFIG_FILE)
+	cp $< $@
+endif # BOARD_KERNEL_CONFIG_FILE
+
+ifdef BOARD_KERNEL_VERSION
+$(BUILT_KERNEL_VERSION_FILE):
+	echo $(BOARD_KERNEL_VERSION) > $@
+endif # BOARD_KERNEL_VERSION
+
+ifdef BOARD_KERNEL_RELEASE
+$(BUILT_KERNEL_RELEASE_FILE):
+	echo $(BOARD_KERNEL_RELEASE) > $@
+endif # BOARD_KERNEL_RELEASE
+
+# Don't have to extract if all of them are predefined.
+all_kernel_info_predefined :=
+ifdef BOARD_KERNEL_CONFIG_FILE
+ifdef BOARD_KERNEL_VERSION
+ifdef BOARD_KERNEL_RELEASE
+all_kernel_info_predefined := true
+endif # BOARD_KERNEL_RELEASE
+endif # BOARD_KERNEL_VERSION
+endif # BOARD_KERNEL_CONFIG_FILE
+
+# If any of the board variables is undefined, try extracting from the kernel binary.
+ifneq ($(all_kernel_info_predefined),true)
+
+ifdef INSTALLED_KERNEL_TARGET
+
+# Tools for decompression that is not in PATH.
+# Check $(EXTRACT_KERNEL) for decompression algorithms supported by the script.
+# Algorithms that are in the script but not in this list will be found in PATH.
+my_decompress_tools := \
+    lz4:$(HOST_OUT_EXECUTABLES)/lz4 \
+
+my_extract_kernel_info_timestamp := $(intermediates)/extract_kernel_info-timestamp
+my_extract_kernel_args :=
+
+ifndef BOARD_KERNEL_CONFIG_FILE
+$(BUILT_KERNEL_CONFIGS_FILE): $(my_extract_kernel_info_timestamp)
+my_extract_kernel_args += --output-configs $(BUILT_KERNEL_CONFIGS_FILE)
+endif # !BOARD_KERNEL_CONFIG_FILE
+
+ifndef BOARD_KERNEL_VERSION
+$(BUILT_KERNEL_VERSION_FILE): $(my_extract_kernel_info_timestamp)
+my_extract_kernel_args += --output-version $(BUILT_KERNEL_VERSION_FILE)
+endif # !BOARD_KERNEL_VERSION
+
+ifndef BOARD_KERNEL_RELEASE
+$(BUILT_KERNEL_RELEASE_FILE): $(my_extract_kernel_info_timestamp)
+my_extract_kernel_args += --output-release $(BUILT_KERNEL_RELEASE_FILE)
+endif # !BOARD_KERNEL_RELEASE
+
+$(my_extract_kernel_info_timestamp): PRIVATE_DECOMPRESS_TOOLS := $(my_decompress_tools)
+$(my_extract_kernel_info_timestamp): PRIVATE_EXTRACT_KERNEL_ARGS := $(my_extract_kernel_args)
+$(my_extract_kernel_info_timestamp): $(foreach pair,$(my_decompress_tools),$(call word-colon,2,$(pair)))
+$(my_extract_kernel_info_timestamp): $(EXTRACT_KERNEL) $(firstword $(INSTALLED_KERNEL_TARGET))
+	$< --tools $(PRIVATE_DECOMPRESS_TOOLS) --input $(firstword $(INSTALLED_KERNEL_TARGET)) \
+	  $(PRIVATE_EXTRACT_KERNEL_ARGS) && touch $@
+
+my_extract_kernel_args :=
+my_extract_kernel_info_timestamp :=
+my_decompress_tools :=
+
+endif # INSTALLED_KERNEL_TARGET
+endif # all_kernel_info_predefined
+all_kernel_info_predefined :=
+
+intermediates :=
+endif # !TARGET_BUILD_UNBUNDLED
+
+# -----------------------------------------------------------------
 # Check VINTF of build
 
 # Note: vendor_dlkm and odm_dlkm does not have VINTF files.
@@ -3588,25 +3683,13 @@ check_vintf_compatible_deps := $(check_vintf_common_srcs)
 # -- Kernel version and configurations.
 ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
 
-BUILT_KERNEL_CONFIGS_FILE := $(intermediates)/kernel_configs.txt
-BUILT_KERNEL_VERSION_FILE := $(intermediates)/kernel_version.txt
-
-my_board_extracted_kernel :=
-
-# BOARD_KERNEL_CONFIG_FILE and BOARD_KERNEL_VERSION can be used to override the values extracted
-# from INSTALLED_KERNEL_TARGET.
 ifdef BOARD_KERNEL_CONFIG_FILE
 ifdef BOARD_KERNEL_VERSION
-$(BUILT_KERNEL_CONFIGS_FILE): $(BOARD_KERNEL_CONFIG_FILE)
-	cp $< $@
-$(BUILT_KERNEL_VERSION_FILE):
-	echo $(BOARD_KERNEL_VERSION) > $@
-
-my_board_extracted_kernel := true
+all_vintf_kernel_info_predefined := true
 endif # BOARD_KERNEL_VERSION
 endif # BOARD_KERNEL_CONFIG_FILE
 
-ifneq ($(my_board_extracted_kernel),true)
+ifneq ($(all_vintf_kernel_info_predefined),true)
 ifndef INSTALLED_KERNEL_TARGET
 $(warning No INSTALLED_KERNEL_TARGET is defined when PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS \
     is true. Information about the updated kernel cannot be built into OTA update package. \
@@ -3615,28 +3698,9 @@ $(warning No INSTALLED_KERNEL_TARGET is defined when PRODUCT_OTA_ENFORCE_VINTF_K
     or (2) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
     BOARD_KERNEL_VERSION manually; or (3) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS \
     manually.)
-else
-
-# Tools for decompression that is not in PATH.
-# Check $(EXTRACT_KERNEL) for decompression algorithms supported by the script.
-# Algorithms that are in the script but not in this list will be found in PATH.
-my_decompress_tools := \
-    lz4:$(HOST_OUT_EXECUTABLES)/lz4 \
-
-$(BUILT_KERNEL_CONFIGS_FILE): .KATI_IMPLICIT_OUTPUTS := $(BUILT_KERNEL_VERSION_FILE)
-$(BUILT_KERNEL_CONFIGS_FILE): PRIVATE_DECOMPRESS_TOOLS := $(my_decompress_tools)
-$(BUILT_KERNEL_CONFIGS_FILE): $(foreach pair,$(my_decompress_tools),$(call word-colon,2,$(pair)))
-$(BUILT_KERNEL_CONFIGS_FILE): $(EXTRACT_KERNEL) $(firstword $(INSTALLED_KERNEL_TARGET))
-	$< --tools $(PRIVATE_DECOMPRESS_TOOLS) --input $(firstword $(INSTALLED_KERNEL_TARGET)) \
-	  --output-configs $@ \
-	  --output-version $(BUILT_KERNEL_VERSION_FILE)
-
-my_decompress_tools :=
-
-endif # my_board_extracted_kernel
-my_board_extracted_kernel :=
-
 endif # INSTALLED_KERNEL_TARGET
+endif # all_vintf_kernel_info_predefined
+all_vintf_kernel_info_predefined :=
 
 check_vintf_compatible_args += --kernel $$(cat $(BUILT_KERNEL_VERSION_FILE)):$(BUILT_KERNEL_CONFIGS_FILE)
 check_vintf_compatible_deps += $(BUILT_KERNEL_CONFIGS_FILE) $(BUILT_KERNEL_VERSION_FILE)
@@ -4381,6 +4445,7 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_KERNEL_CONFIGS_FILE) \
 	    $(BUILT_KERNEL_VERSION_FILE) \
+	    $(BUILT_KERNEL_RELEASE_FILE) \
 	    | $(ACP)
 	@echo "Package target files: $@"
 	$(hide) rm -rf $@ $@.list $(zip_root)
@@ -4689,6 +4754,9 @@ ifdef BUILT_KERNEL_CONFIGS_FILE
 endif
 ifdef BUILT_KERNEL_VERSION_FILE
 	$(hide) cp $(BUILT_KERNEL_VERSION_FILE) $(zip_root)/META/kernel_version.txt
+endif
+ifdef BUILT_KERNEL_RELEASE_FILE
+	$(hide) cp $(BUILT_KERNEL_RELEASE_FILE) $(zip_root)/META/kernel_release.txt
 endif
 	rm -rf $(zip_root)/META/dynamic_partitions_info.txt
 ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
