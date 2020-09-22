@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4089df28_daaf1ec0",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2020-09-22T16:07:49Z",
+      "side": 1,
+      "message": "Would this work in soong_cc_prebuilt.mk?",
+      "range": {
+        "startLine": 511,
+        "startChar": 62,
+        "endLine": 511,
+        "endChar": 72
+      },
+      "revId": "751a987bccc252b5b8855124d8a37cb660ead463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
