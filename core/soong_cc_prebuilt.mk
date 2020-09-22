@@ -87,6 +87,16 @@ ifdef LOCAL_USE_VNDK
   endif
 endif
 
+ifeq ($(LOCAL_SYSTEM_SHARED_LIBRARIES),none)
+  ifdef LOCAL_IS_HOST_MODULE
+    my_system_shared_libraries :=
+  else
+    my_system_shared_libraries := libc libm libdl
+  endif
+else
+  my_system_shared_libraries := $(LOCAL_SYSTEM_SHARED_LIBRARIES)
+endif
+
 # Check prebuilt ELF binaries.
 ifdef LOCAL_INSTALLED_MODULE
   ifneq ($(LOCAL_CHECK_ELF_FILES),)
