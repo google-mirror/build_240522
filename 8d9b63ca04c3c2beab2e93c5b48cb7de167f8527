@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e6c4399_a2f89d17",
+        "filename": "core/soong_cc_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-09-23T17:50:21Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary, Soong should know exactly which libraries it used as system shared libs.",
+      "revId": "8d9b63ca04c3c2beab2e93c5b48cb7de167f8527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
