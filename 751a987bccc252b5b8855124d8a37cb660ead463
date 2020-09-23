@@ -22,6 +22,30 @@
       "revId": "751a987bccc252b5b8855124d8a37cb660ead463",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b30641_138d7dd7",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-09-23T02:48:59Z",
+      "side": 1,
+      "message": "No this CL only handles the Android.mk case, for Android.bp case (soong) we need these follow-up changes http://aosp/q/topic:exclude-system-shared-libs-from-elfcheck-suggestions",
+      "parentUuid": "4089df28_daaf1ec0",
+      "range": {
+        "startLine": 511,
+        "startChar": 62,
+        "endLine": 511,
+        "endChar": 72
+      },
+      "revId": "751a987bccc252b5b8855124d8a37cb660ead463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
