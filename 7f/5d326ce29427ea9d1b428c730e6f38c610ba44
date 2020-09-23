@@ -1,0 +1,11 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Autosubmit+1: Stephen Hines <srhines@google.com>
+Code-Review+2: Xiao Ma <xiaom@google.com>
+Code-Review+1: Logan Chien <loganchien@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 23 Sep 2020 08:54:19 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1434526
+Project: platform/build
+Branch: refs/heads/master
