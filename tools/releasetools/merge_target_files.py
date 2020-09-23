@@ -500,8 +500,12 @@ def process_dynamic_partitions_info_txt(framework_target_files_dir,
 
   dynamic_partitions_info_path = ['META', 'dynamic_partitions_info.txt']
 
-  framework_dynamic_partitions_dict = common.LoadDictionaryFromFile(
-      os.path.join(framework_target_files_dir, *dynamic_partitions_info_path))
+  framework_dynamic_partitions_dict = {}
+
+  if os.path.exists(
+      os.path.join(framework_target_files_dir, *dynamic_partitions_info_path)):
+    framework_dynamic_partitions_dict = common.LoadDictionaryFromFile(
+        os.path.join(framework_target_files_dir, *dynamic_partitions_info_path))
   vendor_dynamic_partitions_dict = common.LoadDictionaryFromFile(
       os.path.join(vendor_target_files_dir, *dynamic_partitions_info_path))
 
