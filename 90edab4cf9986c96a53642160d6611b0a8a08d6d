@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5ee066c_4fcf616e",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-09-23T23:29:14Z",
+      "side": 1,
+      "message": "should this line be removed",
+      "revId": "90edab4cf9986c96a53642160d6611b0a8a08d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
