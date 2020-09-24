@@ -16,6 +16,24 @@
       "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dba8930_f347cb38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-09-24T05:17:57Z",
+      "side": 1,
+      "message": "Hi Jiyong,\n\nThe library libdmabufheap is going to be needed to build the shared library libcodec2_vndk(https://android.googlesource.com/platform/frameworks/av/+/master/media/codec2/vndk/Android.bp#16) Here is the bug number b/168333162.\nIn order to get it to build, we were following the example of libion(also marked VNDK-SP) which this library is supposed to deprecate/replace eventually. Would marking the library as double_loadable:true be more appropriate? Thank you!\n\nRegards,\nHridya",
+      "parentUuid": "656c45e7_e81fc9ec",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
