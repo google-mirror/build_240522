@@ -44,10 +44,9 @@ else
     not_installable_file := $(patsubst $(OUT_DIR)/%,$(OUT_DIR)/NOT_AVAILABLE_FOR_PLATFORM/%,$(1)))
     $(1): $$(not_installable_file)
     $$(not_installable_file):
-	$(call echo-error,$(2),Module is requested to be installed but is not \
+	$(call echo-warning,$(2),Module is requested to be installed but is not \
 available for platform because it does not have "//apex_available:platform" or \
 it depends on other modules that are not available for platform.)
-	exit 1
   endef
 
   $(foreach m,$(_modules_not_available_for_platform),\

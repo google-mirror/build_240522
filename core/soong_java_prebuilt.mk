@@ -129,7 +129,7 @@ ifdef LOCAL_SOONG_DEX_JAR
 else  # LOCAL_SOONG_DEX_JAR
   ifndef LOCAL_UNINSTALLABLE_MODULE
     ifndef LOCAL_IS_HOST_MODULE
-      $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+      $(call pretty-warning,Installable device module must have LOCAL_SOONG_DEX_JAR set)
     endif
   endif
 endif  # LOCAL_SOONG_DEX_JAR
