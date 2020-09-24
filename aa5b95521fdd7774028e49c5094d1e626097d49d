@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "656c45e7_e81fc9ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-24T05:00:01Z",
+      "side": 1,
+      "message": "Could you provide more information for this? (e.g. a bug or something)\n\nWithout knowing any context, this doesn\u0027t seem right because VNDK-SP is for Same-process HALs and Codec2 is NOT a same-process HAL.",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
