@@ -16,6 +16,24 @@
       "revId": "8d9b63ca04c3c2beab2e93c5b48cb7de167f8527",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82511fd2_516b636e",
+        "filename": "core/soong_cc_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2020-09-24T05:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6c4399_a2f89d17",
+      "revId": "8d9b63ca04c3c2beab2e93c5b48cb7de167f8527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
