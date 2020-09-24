@@ -39,6 +39,30 @@
       "revId": "cba5eab2b4d486a36b372ba7bc4fc2ee57634b9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73cbedc1_614c5551",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1452040
+      },
+      "writtenOn": "2020-09-24T21:45:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2000bfe_7b8cbe0f",
+      "range": {
+        "startLine": 359,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 14
+      },
+      "revId": "cba5eab2b4d486a36b372ba7bc4fc2ee57634b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
