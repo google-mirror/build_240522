@@ -34,6 +34,24 @@
       "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e39f871_b275e5f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-24T05:22:10Z",
+      "side": 1,
+      "message": "Thanks.\n\nWas \"support_system_process: true,\" in the other CL necessary? What happens when you drop it (while keeping vndk.enabled as true)?\n\nlibion is a little bit different because it\u0027s meant to be used by GPU devices which are SP-HALs. Codec2 isn\u0027t an SP-HAL.",
+      "parentUuid": "7dba8930_f347cb38",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
