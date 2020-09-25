@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6266a083_56cde8b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-25T06:52:47Z",
+      "side": 1,
+      "message": "I suddenly realize jiyong removes some reference to ro.bootimage* in https://android-review.googlesource.com/q/topic:%22remove_bootimage_sysprops%22 Though we have a valid use case now?",
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
