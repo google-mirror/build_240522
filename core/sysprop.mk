@@ -429,3 +429,19 @@ $(eval $(call build-properties,\
     $(_prop_files_),\
     $(_prop_vars_),\
     $(empty)))
+
+# ----------------------------------------------------------------
+# ramdisk/first_stage_ramdisk/boot/etc/build.prop
+# ramdisk/boot/etc/build.prop -> ramdisk/first_stage_ramdisk/boot/etc/build.prop
+#
+
+RAMDISK_BUILD_PROP_SYMLINK_REL_PATH := boot/etc/build.prop
+RAMDISK_BUILD_PROP_REL_PATH := first_stage_ramdisk/$(RAMDISK_BUILD_PROP_SYMLINK_REL_PATH)
+INSTALLED_RAMDISK_BUILD_PROP_TARGET := $(TARGET_RAMDISK_OUT)/$(RAMDISK_BUILD_PROP_REL_PATH)
+$(eval $(call build-properties,\
+    bootimage,\
+    $(INSTALLED_RAMDISK_BUILD_PROP_TARGET)))
+INSTALLED_RAMDISK_BUILD_PROP_SYMLINK := $(TARGET_RAMDISK_OUT)/$(RAMDISK_BUILD_PROP_SYMLINK_REL_PATH)
+$(INSTALLED_RAMDISK_BUILD_PROP_SYMLINK):
+	ln -sf $(RAMDISK_BUILD_PROP_REL_PATH) $@
+
