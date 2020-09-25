@@ -33,6 +33,24 @@
       "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e10ea20_e4165cde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-25T18:07:00Z",
+      "side": 1,
+      "message": "ro[.product].vendor.* are properties built into the vendor image. ro[.product].bootimage.* are properties built into the boot image. They do not necessary equal to each other once b/169169031 is fixed. That is, boot image may be built separately from vendor image in some next CLs.",
+      "parentUuid": "42ef4097_2b13a965",
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
