@@ -74,6 +74,30 @@
       "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79f030b_9be5d4aa",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-25T23:31:55Z",
+      "side": 1,
+      "message": "Actually, the boot image uses the recovery_ramdisk in the recovery_as_boot case   https://source.corp.google.com/aosp-master/build/make/core/Makefile;l\u003d2097\n\nNot sure how this ramdisk relates to the first stage ramdisk",
+      "parentUuid": "b971437f_448a80bb",
+      "range": {
+        "startLine": 437,
+        "startChar": 39,
+        "endLine": 437,
+        "endChar": 75
+      },
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
