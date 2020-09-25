@@ -51,6 +51,29 @@
       "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b971437f_448a80bb",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-25T22:40:13Z",
+      "side": 1,
+      "message": "I might not fully understand the consequence of installing to this location. It appears that $PRODUCT_OUT/ramdisk/ would be built to $PRODUCT_OUT/ramdisk.img, but this has nothing to do with the first stage ramdisk on the device, if the device enables recovery_as_boot. I also don\u0027t know if installing to this location installs to the first stage ramdisk on a device with a dedicated recovery partition.",
+      "range": {
+        "startLine": 437,
+        "startChar": 39,
+        "endLine": 437,
+        "endChar": 75
+      },
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
