@@ -16,6 +16,23 @@
       "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ef4097_2b13a965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-25T07:26:44Z",
+      "side": 1,
+      "message": "Thanks for inviting me here Tianjie.\n\nLooking at the next change, it seems like Yifan will be extracting these properties when building the OTA package. Then I wonder why he can\u0027t use the existing properties like ro[.product].vendor.* which are guaranteed to be the same as ro[.product].bootimage.*. \n\nAdding a new set of system properties just for build-time parsing doesn\u0027t look okay to me.",
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
