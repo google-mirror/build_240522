@@ -429,3 +429,12 @@ $(eval $(call build-properties,\
     $(_prop_files_),\
     $(_prop_vars_),\
     $(empty)))
+
+# ----------------------------------------------------------------
+# ramdisk/prop.default
+#
+
+INSTALLED_RAMDISK_BUILD_PROP_TARGET := $(TARGET_RAMDISK_OUT)/build.prop
+$(eval $(call build-properties,\
+    bootimage,\
+    $(INSTALLED_RAMDISK_BUILD_PROP_TARGET)))
