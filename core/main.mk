@@ -1679,6 +1679,9 @@ ifneq ($(TARGET_BUILD_APPS),)
   ifeq ($(EMMA_INSTRUMENT),true)
     $(JACOCO_REPORT_CLASSES_ALL) : $(apps_only_installed_files)
     $(call dist-for-goals,apps_only, $(JACOCO_REPORT_CLASSES_ALL))
+    ifeq ($(SOONG_COLLECT_JAVA_DEPS), true)
+      $(call dist-for-goals, dist_files, $(SOONG_OUT_DIR)/module_bp_java_deps.json)
+    endif
   endif
 
   $(PROGUARD_DICT_ZIP) : $(apps_only_installed_files)
@@ -1791,6 +1794,9 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
   ifeq ($(EMMA_INSTRUMENT),true)
     $(JACOCO_REPORT_CLASSES_ALL) : $(modules_to_install)
     $(call dist-for-goals, dist_files, $(JACOCO_REPORT_CLASSES_ALL))
+    ifeq ($(SOONG_COLLECT_JAVA_DEPS), true)
+      $(call dist-for-goals, dist_files, $(SOONG_OUT_DIR)/module_bp_java_deps.json)
+    endif
   endif
 
   # Put XML formatted API files in the dist dir.
