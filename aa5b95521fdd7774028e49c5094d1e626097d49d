@@ -52,6 +52,24 @@
       "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65084eae_1dd7a555",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-26T06:11:12Z",
+      "side": 1,
+      "message": "If we drop \"support_system_process:true\" we see:\nerror: frameworks/av/media/codec2/vndk/Android.bp:16:1: module \"libcodec2_vndk\" variant \"android_vendor.S_arm_armv8-a_cortex-a73_shared\": links a library \"libdmabufheap\" which is not LL-NDK, VNDK-SP, or explicitly marked as \u0027double_loadable:true\u0027. (dependency: libcodec2_vndk -\u003e libdmabufheap)\n06:07:38 soong bootstrap failed with: exit status 1\n\nIs double_loadable:true a better fix then?\n\nAlso, its likely that DMABUF Heaps will be used by GPU devices as a replacement for ION in the future. So we may see grallocs making use of  libdmabufheap soon.",
+      "parentUuid": "3e39f871_b275e5f7",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
