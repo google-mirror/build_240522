@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41904e0f_cbf7b4ac",
+        "filename": "rbesetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-09-28T22:17:07Z",
+      "side": 1,
+      "message": "Since we know rbesetup.sh is next to envsetup.sh, can this just be $(dirname $0)?",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "96a3f9df330eb600b647ba9898dfea9fe1a9da09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
