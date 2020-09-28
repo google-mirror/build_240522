@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 The Android Open-Source Project
+# Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,11 @@
 # limitations under the License.
 #
 
-PRODUCT_QUOTA_PROJID := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.projid.enabled=1
+ifdef NET_ETH0_STARTONBOOT
+  PRODUCT_PROPERTY_OVERRIDES += net.eth0.startonboot=1
+endif
 
-PRODUCT_FS_CASEFOLD := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.casefold.enabled=1
-
-PRODUCT_VENDOR_PROPERTIES += external_storage.sdcardfs.enabled=0
+# Ensure we package the BIOS files too.
+PRODUCT_HOST_PACKAGES += \
+    bios.bin \
+    vgabios-cirrus.bin \

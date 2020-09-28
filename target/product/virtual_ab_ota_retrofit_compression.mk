@@ -14,10 +14,9 @@
 # limitations under the License.
 #
 
-PRODUCT_QUOTA_PROJID := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.projid.enabled=1
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota_retrofit.mk)
 
-PRODUCT_FS_CASEFOLD := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.casefold.enabled=1
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.enabled=true
 
-PRODUCT_VENDOR_PROPERTIES += external_storage.sdcardfs.enabled=0
+PRODUCT_PACKAGES += snapuserd_ramdisk
+
