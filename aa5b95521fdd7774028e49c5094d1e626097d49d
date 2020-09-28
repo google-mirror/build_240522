@@ -70,6 +70,24 @@
       "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48a0ebbb_952010b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-09-28T21:08:58Z",
+      "side": 1,
+      "message": "Yeah, much better to load it as double_loadable. This acknowledges that it may have multiple copies of itself loaded in the same process (so, for instance, it shouldn\u0027t naively take control of a process-wide lock), but it would avoid exposing it in this API surface. If you expose it in the VNDK, it\u0027s a strong signal to vendors that they can and should use it, and also this being the VNDK-SP, it means that it can be used by in-process HALs. Of course, if these things are needed, vndk-sp makes sense, but I definitely think double_loadable seems to make sense at first glance.",
+      "parentUuid": "65084eae_1dd7a555",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
