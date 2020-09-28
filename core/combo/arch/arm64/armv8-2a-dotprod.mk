@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 The Android Open-Source Project
+# Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-PRODUCT_QUOTA_PROJID := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.projid.enabled=1
-
-PRODUCT_FS_CASEFOLD := 1
-PRODUCT_VENDOR_PROPERTIES += external_storage.casefold.enabled=1
-
-PRODUCT_VENDOR_PROPERTIES += external_storage.sdcardfs.enabled=0
+# .mk file required to support build for the new armv8-2a-dotprod Arm64 arch
+# variant. The file just needs to be present but does not require to contain
+# anything
