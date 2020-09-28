@@ -116,6 +116,30 @@
       "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ad6689e_d328eaf6",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-28T17:25:46Z",
+      "side": 1,
+      "message": "As this CL stands right now, this is loaded in recovery in both recovery_as_root and dedicated recovery partition case, because the contents are concatenated to recovery prop.default. See change to core/Makefile.\n\nHowever, once recovery boot props are split, it should load etc/build.prop from boot image.",
+      "parentUuid": "b79f030b_9be5d4aa",
+      "range": {
+        "startLine": 437,
+        "startChar": 39,
+        "endLine": 437,
+        "endChar": 75
+      },
+      "revId": "6ae124a2b60d889ce73dce1b76769216bfe0fdbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
