@@ -22,6 +22,30 @@
       "revId": "96a3f9df330eb600b647ba9898dfea9fe1a9da09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1afc5ab5_04416257",
+        "filename": "rbesetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453040
+      },
+      "writtenOn": "2020-09-28T22:40:29Z",
+      "side": 1,
+      "message": "$0 returns \"bash\" as the calling arguments since we are sourcing the script. If we run dirname, it\u0027s going to return \".\".\n\nWe can use $BASH_SOURCE which returns the relative path of rbesetup.sh script then run \"readlink -f\" to get the absolute path. Unfortunately, $BASH_SOURCE is not available for zsh.",
+      "parentUuid": "41904e0f_cbf7b4ac",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "96a3f9df330eb600b647ba9898dfea9fe1a9da09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
