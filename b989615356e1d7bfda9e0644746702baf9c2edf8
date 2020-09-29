@@ -34,6 +34,24 @@
       "revId": "b989615356e1d7bfda9e0644746702baf9c2edf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5232650_b7637ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-29T21:20:13Z",
+      "side": 1,
+      "message": "Tianjie, can I package symlinks to OTA tools package ZIP? How does that work?\n\nMaybe I\u0027ll just package a `cpio -\u003e toybox` ramdisk inside OTA tools?",
+      "parentUuid": "e6b25eb3_80c78d51",
+      "revId": "b989615356e1d7bfda9e0644746702baf9c2edf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
