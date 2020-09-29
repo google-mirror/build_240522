@@ -3852,6 +3852,7 @@ INTERNAL_OTATOOLS_MODULES := \
   signapk \
   simg2img \
   sload_f2fs \
+  toybox \
   tune2fs \
   unpack_bootimg \
   update_host_simulator \
@@ -3875,8 +3876,12 @@ INTERNAL_OTATOOLS_MODULES += \
   vboot_signer
 endif
 
+INTERNAL_OTATOOLS_SYMLINKS := \
+    cpio \
+
 INTERNAL_OTATOOLS_FILES := \
-  $(filter $(HOST_OUT)/%,$(call module-installed-files,$(INTERNAL_OTATOOLS_MODULES)))
+  $(filter $(HOST_OUT)/%,$(call module-installed-files,$(INTERNAL_OTATOOLS_MODULES))) \
+  $(addprefix $(HOST_OUT_EXECUTABLES)/,$(INTERNAL_OTATOOLS_SYMLINKS))
 
 .PHONY: otatools
 otatools: $(INTERNAL_OTATOOLS_FILES)
@@ -3889,6 +3894,9 @@ INTERNAL_OTATOOLS_MODULES_WITH_DEPS := \
 
 INTERNAL_OTATOOLS_PACKAGE_FILES := \
   $(filter $(HOST_OUT)/%,$(call module-installed-files,$(INTERNAL_OTATOOLS_MODULES_WITH_DEPS)))
+
+INTERNAL_OTATOOLS_PACKAGE_FILES += \
+  $(addprefix $(HOST_OUT_EXECUTABLES)/,$(INTERNAL_OTATOOLS_SYMLINKS))
 
 INTERNAL_OTATOOLS_PACKAGE_FILES += \
   $(sort $(shell find build/make/target/product/security -type f -name "*.x509.pem" -o \
