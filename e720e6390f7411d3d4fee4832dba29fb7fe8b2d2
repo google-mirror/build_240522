@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6125a48_aa616d57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-29T20:36:26Z",
+      "side": 1,
+      "message": "I updated this CL according to the internal doc. tl;dr is in commit message. ",
+      "revId": "e720e6390f7411d3d4fee4832dba29fb7fe8b2d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
