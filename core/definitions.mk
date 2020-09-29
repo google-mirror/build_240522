@@ -2587,13 +2587,14 @@ endef
 
 # Copy a list of files/directories to target location, with sub dir structure preserved.
 # For example $(HOST_OUT_EXECUTABLES)/aapt -> $(staging)/bin/aapt .
+# Symlinks are preserved.
 # $(1): the source list of files/directories.
 # $(2): the path prefix to strip. In the above example it would be $(HOST_OUT).
 # $(3): the target location.
 define copy-files-with-structure
 $(foreach t,$(1),\
   $(eval s := $(patsubst $(2)%,%,$(t)))\
-  $(hide) mkdir -p $(dir $(3)/$(s)); cp -Rf $(t) $(3)/$(s)$(newline))
+  $(hide) mkdir -p $(dir $(3)/$(s)); cp -dRf $(t) $(3)/$(s)$(newline))
 endef
 
 # Define a rule to create a symlink to a file.
