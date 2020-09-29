@@ -16,6 +16,24 @@
       "revId": "b989615356e1d7bfda9e0644746702baf9c2edf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6b25eb3_80c78d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-09-29T20:56:34Z",
+      "side": 1,
+      "message": "sgtm, but this is the wrong way to do it :-)\n\nyou\u0027ll want to add cpio symlinks to prebuilts/build-tools/path/darwin-x86 and linux-x86 instead.",
+      "parentUuid": "21f42473_451188ce",
+      "revId": "b989615356e1d7bfda9e0644746702baf9c2edf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
