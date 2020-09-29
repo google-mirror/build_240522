@@ -88,6 +88,24 @@
       "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a84acdc_b1c9097f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-09-29T00:32:37Z",
+      "side": 1,
+      "message": "(Sorry that I was late here) +1 to what Steven said. double_loadable: true is not ideal, but is definitely better than support_system_process: true. \n\nThe reason that it has to be \u0027double_loadable: true\u0027 is simply because libcodec2_vndk is marked as such. I see that there\u0027s bugs (b/147147883, b/147147992) for that. When the team can drop double_loadable from libcodec2_vndk, we could drop the same from this lib. So, adding a TODO comment referencing one of the bugs would be good.",
+      "parentUuid": "48a0ebbb_952010b3",
+      "revId": "aa5b95521fdd7774028e49c5094d1e626097d49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
