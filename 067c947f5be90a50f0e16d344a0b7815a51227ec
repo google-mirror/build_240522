@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7a02bd_09927fb8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3950,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-29T23:25:27Z",
+      "side": 1,
+      "message": "Note that this won\u0027t copy the symlink, but will copy toybox binary to cpio.\n\nDan / Colin, since copy-files-with-structure is only used here, can I add --preserve\u003dlinks to this procedure for Linux builds?",
+      "range": {
+        "startLine": 3950,
+        "startChar": 8,
+        "endLine": 3950,
+        "endChar": 33
+      },
+      "revId": "067c947f5be90a50f0e16d344a0b7815a51227ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
