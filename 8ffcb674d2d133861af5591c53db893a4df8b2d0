@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4dcfabe_8595b5e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T04:40:40Z",
+      "side": 1,
+      "message": "This CL does work around the issue, just not very cleanly because each boot image depends on too much things.\n\nI\u0027ll leave Colin and Dan comment on whether this is the proper solution or not.",
+      "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83e96281_53385f44",
         "filename": "core/Makefile",
         "patchSetId": 2
