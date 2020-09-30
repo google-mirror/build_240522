@@ -760,6 +760,15 @@ INTERNAL_MKBOOTIMG_VERSION_ARGS := \
 ifdef BUILDING_BOOT_IMAGE
 INSTALLED_BOOTIMAGE_TARGET := $(BUILT_BOOTIMAGE_TARGET)
 
+# $(1): boot image target
+# $(2): additional deps
+# $(3): build rule name
+define add_boot_img_rule
+$(1): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(call bootimage-to-kernel,$@) $(2)
+	$(call pretty,"Target boot image: $@")
+	$(call $(3),$@)
+endef
+
 ifeq ($(TARGET_BOOTIMAGE_USE_EXT2),true)
 $(error TARGET_BOOTIMAGE_USE_EXT2 is not supported anymore)
 
@@ -776,9 +785,9 @@ define build_boot_board_avb_enabled
           $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH) $(call bootimage-to-kernel,$@)
-	$(call pretty,"Target boot image: $@")
-	$(call build_boot_board_avb_enabled,$@)
+$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(call add_boot_img_rule, $(b), \
+  $(AVBTOOL) $(BOARD_AVB_BOOT_KEY_PATH), \
+  build_boot_board_avb_enabled))
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL) $(BOARD_AVB_BOOT_KEY_PATH)
@@ -794,9 +803,9 @@ define build_boot_supports_boot_signer
   $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOT_SIGNER) $(call bootimage-to-kernel,$@)
-	$(call pretty,"Target boot image: $@")
-	$(call build_boot_supports_boot_signer,$@)
+$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(call add_boot_img_rule, $(b), \
+  $(BOOT_SIGNER), \
+  build_boot_supports_boot_signer))
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(BOOT_SIGNER)
@@ -812,9 +821,9 @@ define build_boot_supports_vboot
   $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_SIGNER) $(FUTILITY) $(call bootimage-to-kernel,$@)
-	$(call pretty,"Target boot image: $@")
-	$(call build_boot_supports_vboot,$@)
+$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(call add_boot_img_rule, $(b), \
+ $(VBOOT_SIGNER) $(FUTILITY), \
+ build_boot_supports_vboot))
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(VBOOT_SIGNER) $(FUTILITY)
@@ -829,9 +838,7 @@ define build_boot_novboot
   $(call assert-max-image-size,$1,$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(call bootimage-to-kernel,$@)
-	$(call pretty,"Target boot image: $@")
-	$(call build_boot_novboot,$@)
+$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(call add_boot_img_rule, $(b),,build_boot_novboot))
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG)
