@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83e96281_53385f44",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T04:33:20Z",
+      "side": 1,
+      "message": "I think this can be multiple files. But it looks like build_boot_board_avb_enabled does not support multiple files. Steve, does this intend to support multiple files in INSTALLED_BOOTIMAGE_TARGET?\n\n\nFor now, these files are always built together.\n\nI can\u0027t find a good way to split these files into their own rules; in particular, I can\u0027t find a way to do something like \n\n  define foo\n  $(1): deps\n      rules\n  endef\n  $(foreach e,$(list),$(call foo,$(e))\n\nDan / Colin, if you know the proper way to split this, please comment. Thanks!",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 779,
+        "endChar": 29
+      },
+      "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
