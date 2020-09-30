@@ -16,6 +16,24 @@
       "revId": "5dd846bd155cd9278b86440fcf58c4164ea6d7e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62720932_a0985ce0",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T18:41:23Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I put the first line in L1958. It fails with the following on aosp_arm64 (locally it is L1988):\n\nbuild/make/core/Makefile:1988: warning: target `out/target/product/generic_arm64/boot-4.19-gz.img\u0027 doesn\u0027t match the target pattern\nbuild/make/core/Makefile:1988: warning: target `out/target/product/generic_arm64/boot-4.19-gz.img\u0027 doesn\u0027t match the target pattern\nbuild/make/core/Makefile:1988: error: multiple target patterns",
+      "parentUuid": "7fe9327c_be54e505",
+      "revId": "5dd846bd155cd9278b86440fcf58c4164ea6d7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
