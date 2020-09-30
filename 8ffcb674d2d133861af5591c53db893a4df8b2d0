@@ -39,6 +39,30 @@
       "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80257f33_e95469b0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T04:41:34Z",
+      "side": 1,
+      "message": "build_boot_board_avb_enabled doesn\u0027t support multiple files, but $@ should only be one target. So the only remaining problem is that it depends on too much stuff.",
+      "parentUuid": "83e96281_53385f44",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 779,
+        "endChar": 29
+      },
+      "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
