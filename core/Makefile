@@ -696,7 +696,7 @@ endif
 # returns the kernel used to make the bootimage
 define bootimage-to-kernel
   $(if $(BOARD_KERNEL_BINARIES),\
-    $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $(1)))),\
+    $(addprefix $(PRODUCT_OUT)/,$(subst .img,,$(subst boot,kernel,$(notdir $(1))))),\
     $(INSTALLED_KERNEL_TARGET))
 endef
 
@@ -776,7 +776,7 @@ define build_boot_board_avb_enabled
           $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH) $(call bootimage-to-kernel,$@)
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH) $(call bootimage-to-kernel,$(INSTALLED_BOOTIMAGE_TARGET))
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_board_avb_enabled,$@)
 
@@ -794,7 +794,7 @@ define build_boot_supports_boot_signer
   $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOT_SIGNER) $(call bootimage-to-kernel,$@)
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOT_SIGNER) $(call bootimage-to-kernel,$(INSTALLED_BOOTIMAGE_TARGET))
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_supports_boot_signer,$@)
 
@@ -812,7 +812,7 @@ define build_boot_supports_vboot
   $(call assert-max-image-size,$(1),$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_SIGNER) $(FUTILITY) $(call bootimage-to-kernel,$@)
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_SIGNER) $(FUTILITY) $(call bootimage-to-kernel,$(INSTALLED_BOOTIMAGE_TARGET))
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_supports_vboot,$@)
 
@@ -829,7 +829,7 @@ define build_boot_novboot
   $(call assert-max-image-size,$1,$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 endef
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(call bootimage-to-kernel,$@)
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(call bootimage-to-kernel,$(INSTALLED_BOOTIMAGE_TARGET))
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_novboot,$@)
 
@@ -1955,7 +1955,7 @@ ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
 endif
 
 ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
-$(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps)
+$(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps) $(call bootimage-to-kernel, $(INSTALLED_BOOTIMAGE_TARGET))
 	$(call pretty,"Target boot image from recovery: $@")
 	$(call build-recoveryimage-target, $@, $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $@))))
 endif # BOARD_USES_RECOVERY_AS_BOOT
