@@ -87,6 +87,30 @@
       "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5db0e5cf_7f47d6ce",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T18:08:10Z",
+      "side": 1,
+      "message": "IIUC, if \n  \n  BOARD_KERNEL_BINARIES :\u003d kernel-a kernel-b\n\nthen this rule becomes:\n\n  $PRODUCT_OUT/boot-a.img $PRODUCT_OUT/boot-b.img: $PRODUCT_OUT/kernel-a $PRODUCT_OUT/kernel-b\n    $(call build_boot_board_avb_enabled,$@)\n\nwhich is essentially:\n\n  $PRODUCT_OUT/boot-a.img: $PRODUCT_OUT/kernel-a $PRODUCT_OUT/kernel-b\n    $(call build_boot_board_avb_enabled,$PRODUCT_OUT/boot-a.img)\n\n  $PRODUCT_OUT/boot-b.img: $PRODUCT_OUT/kernel-a $PRODUCT_OUT/kernel-b\n    $(call build_boot_board_avb_enabled,$PRODUCT_OUT/boot-b.img)\n\n... even though kernel-b is not useful when building boot-a.img, right?",
+      "parentUuid": "c791e363_c272ee43",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 779,
+        "endChar": 29
+      },
+      "revId": "8ffcb674d2d133861af5591c53db893a4df8b2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
