@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fe9327c_be54e505",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-09-30T18:34:51Z",
+      "side": 1,
+      "message": "Try something like:\n\n $(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),$(call add-dependency,$(b),$(call bootimage-to-kernel,$(b))))\n $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILES) $(BOARD_AVB_BOOT_KEY_PATH)\n\t$(call pretty,\"Target boot image: $@\")\n\t$(call build_boot_board_avb_enabled,$@)",
+      "revId": "5dd846bd155cd9278b86440fcf58c4164ea6d7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
