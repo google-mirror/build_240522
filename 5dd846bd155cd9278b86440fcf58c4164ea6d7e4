@@ -34,6 +34,24 @@
       "revId": "5dd846bd155cd9278b86440fcf58c4164ea6d7e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf73888_ac9626b6",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T18:44:56Z",
+      "side": 1,
+      "message": "This works:\n\n  $(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(eval $(call add-dependency,$(b),$(call bootimage-to-kernel,$(b)))))",
+      "parentUuid": "62720932_a0985ce0",
+      "revId": "5dd846bd155cd9278b86440fcf58c4164ea6d7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
