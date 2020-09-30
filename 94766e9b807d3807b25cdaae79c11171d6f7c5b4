@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a386315_6ca8d742",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T03:25:31Z",
+      "side": 1,
+      "message": "I could potentially collapse these too. Colin / Dan, should I do that?",
+      "range": {
+        "startLine": 792,
+        "startChar": 0,
+        "endLine": 795,
+        "endChar": 85
+      },
+      "revId": "94766e9b807d3807b25cdaae79c11171d6f7c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
