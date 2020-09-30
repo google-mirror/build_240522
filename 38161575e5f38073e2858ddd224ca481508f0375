@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "249e2cb2_370c794c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-30T05:01:10Z",
+      "side": 1,
+      "message": "I should use cpio from prebuilt/build-tools instead. Should prebuilts from there be added to otatools?",
+      "revId": "38161575e5f38073e2858ddd224ca481508f0375",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
