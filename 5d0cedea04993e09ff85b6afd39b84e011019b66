@@ -34,6 +34,24 @@
       "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ceb0932_197d56fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-02T19:55:39Z",
+      "side": 1,
+      "message": "(1) install to both locations\n(2) Only install to /first_stage_ramdisk/boot/etc/build.prop, but in init, try /first_stage_ramdisk/boot/etc/build.prop; if that failed, try /boot/etc/build.prop\n(3) Only install to /boot/etc/build.prop, but store the file to tmpfs before switching root to /first_stage_ramdisk",
+      "parentUuid": "bb685852_066a8ffa",
+      "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
