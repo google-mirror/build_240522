@@ -16,6 +16,24 @@
       "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb685852_066a8ffa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-02T19:53:11Z",
+      "side": 1,
+      "message": "For GKI, we can\u0027t distinguish the build based on recovery-as-ramdisk or dedicated ramdisk, because we don\u0027t know what device this GKI will install to. If init doesn\u0027t read symlinks for security reasons, there are two ways I can think of to get around this:\n\n(1) install to both locations\n(2) Only install to /first_stage_ramdisk/boot/etc/build.prop, but:\n(2a) in init, try /first_stage_ramdisk/boot/etc/build.prop; if that failed, try /boot/etc/build.prop\n(2b) store the file to tmpfs before switching root to /first_stage_ramdisk\n\nWDYT?",
+      "parentUuid": "5223d624_0a28db34",
+      "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
