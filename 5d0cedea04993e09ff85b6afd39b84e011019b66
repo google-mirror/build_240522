@@ -52,6 +52,24 @@
       "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efcfda1a_416126cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-10-02T20:02:12Z",
+      "side": 1,
+      "message": "How is GKI built that it cannot distinguish between recovery-as-ramdisk or dedicated ramdisk?  The build process and contents for those partitions is totally different.  \n\nDon\u0027t you need to distribute GKI in both forms?  Otherwise how do you go from a single GKI to either form?",
+      "parentUuid": "bb685852_066a8ffa",
+      "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
