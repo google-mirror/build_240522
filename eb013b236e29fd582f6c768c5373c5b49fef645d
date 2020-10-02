@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1dbbeec_68657944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-10-02T08:06:11Z",
+      "side": 1,
+      "message": "Looks like this might be breaking aosp_cf_x86_pasan-userdebug:\n\nBuildbot Version: androidbuild_buildbot_20200914.00_RC02\nMachine: abfarm-east4-091\nbuild/soong/soong_ui.bash --make-mode TARGET_PRODUCT\u003daosp_cf_x86_pasan TARGET_BUILD_VARIANT\u003duserdebug dist DIST_DIR\u003d/buildbot/dist_dirs/aosp-master-throttled-copped-linux-aosp_cf_x86_pasan-userdebug/6878794 \u0026\u0026 build/soong/soong_ui.bash --make-mode TARGET_PRODUCT\u003daosp_cf_x86_pasan TARGET_BUILD_VARIANT\u003duserdebug dist DIST_DIR\u003d/buildbot/dist_dirs/aosp-master-throttled-copped-linux-aosp_cf_x86_pasan-userdebug/6878794 continuous_instrumentation_tests continuous_instrumentation_tests_api_coverage continuous_native_tests device-tests platform_tests userdataimage SANITIZE_TARGET\u003d\u0027address\u0027 \nFAILED: out/soong/build.ninja\nout/soong/.bootstrap/bin/soong_build -t -l out/.module_paths/Android.bp.list -b out/soong -n out -d out/soong/build.ninja.d -globFile out/soong/.bootstrap/build-globs.ninja -o out/soong/build.ninja Android.bp\nerror: prebuilts/clang/host/linux-x86/Android.bp:170:1: module \"libclang_rt.asan-i686-android\" variant \"android_x86_shared_10000\": not found a version(\u003c\u003d29) in versionList: [10000]\nninja: build stopped: subcommand failed.\n04:57:17 soong bootstrap failed with: exit status 1\nReturn Code: 1\n\n\nSee\nhttps://android-build.googleplex.com/builds/quarterdeck?branch\u003daosp-master-throttled-copped\u0026target\u003daosp_cf_x86_pasan-userdebug\u0026lkgb\u003d6878414\u0026lkbb\u003d6879029\u0026fkbb\u003d6878794",
+      "revId": "eb013b236e29fd582f6c768c5373c5b49fef645d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
