@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5223d624_0a28db34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-10-02T18:57:20Z",
+      "side": 1,
+      "message": "Why is there a symlink?  Init doesn\u0027t read files through a symlink for security reasons, so it won\u0027t help init loading the file, and I don\u0027t believe there are any other readers.  \n\nCan we pick one location that works well for both targets?  The purpose of having a /first_stage_ramdisk directory in the recovery image is that after 1st stage init switches root to that directory, that it should be identical to the dedicated ramdisk partition devices.  \n\nCould we install the file to\nrecovery-as-ramdisk: /first_stage_ramdisk/etc/build.prop\ndedicated-ramdisk: /etc/build.prop\n?",
+      "revId": "5d0cedea04993e09ff85b6afd39b84e011019b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
