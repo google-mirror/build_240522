@@ -22,6 +22,30 @@
       },
       "revId": "4ad3ee3d3bc752839fbc6f0fa328e4d5b2f5e036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6044a5_0f3b37ca",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2020-10-07T16:45:48Z",
+      "side": 1,
+      "message": "Hmm... no actual reason, just leftovers from the old code. Removed.",
+      "parentUuid": "9e76451f_337892c5",
+      "range": {
+        "startLine": 206,
+        "startChar": 32,
+        "endLine": 206,
+        "endChar": 36
+      },
+      "revId": "4ad3ee3d3bc752839fbc6f0fa328e4d5b2f5e036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
