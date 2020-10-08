@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8920b99_273c8ee1",
+        "filename": "core/tasks/tools/vts_package_utils.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-10-08T17:15:48Z",
+      "side": 1,
+      "message": "copied from\nhttps://android-review.googlesource.com/c/platform/test/framework/+/1454158/1/build/utils/vtslab_package_utils.mk",
+      "revId": "ab42cd0eb9f8530b9e18c47b398acfdc52f61e6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70090200_45c6b619",
+        "filename": "core/tasks/vts-core-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-10-08T17:15:48Z",
+      "side": 1,
+      "message": "It\u0027s used here.",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 33
+      },
+      "revId": "ab42cd0eb9f8530b9e18c47b398acfdc52f61e6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
