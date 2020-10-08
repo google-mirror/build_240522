@@ -16,6 +16,23 @@
       "message": "Hi Colin, can you please review this change addressing various PRODUCT_BUILD_\u003cIMAGE\u003e variables?\n\nI created it while working on a system-only build of a device, after realizing I couldn\u0027t turn off certain partitions as I had hoped.\n\nPlease let me know if you\u0027d like more context over chat! Thanks.",
       "revId": "73ba4ba8e097bbdfdbdf740a2caac882327cec6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727f0b20_54406e32",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-10-08T00:35:26Z",
+      "side": 1,
+      "message": ".KATI_deprecated_var would print a warning at the site that writes TARGET_NO_VENDOR_BOOT.",
+      "revId": "73ba4ba8e097bbdfdbdf740a2caac882327cec6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
