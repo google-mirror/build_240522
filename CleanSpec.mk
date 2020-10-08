@@ -751,6 +751,9 @@ $(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/default.prop)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/prop.default)
 
+# Workaround for Soong not being able to rebuild the host binary if its
+# JNI dependencies change: b/170389375
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
