@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e249dcc9_e8e7fafb",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-08T22:31:40Z",
+      "side": 1,
+      "message": "Note: path is changed here.",
+      "range": {
+        "startLine": 437,
+        "startChar": 31,
+        "endLine": 437,
+        "endChar": 60
+      },
+      "revId": "5b06b60c6f5f89c55c8378e7e797e6442a87d47e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
