@@ -22,6 +22,30 @@
       },
       "revId": "5b06b60c6f5f89c55c8378e7e797e6442a87d47e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fc6471_67cdb0de",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2020-10-09T00:44:50Z",
+      "side": 1,
+      "message": "Why the new path?  I don\u0027t see anything on the bugs.",
+      "parentUuid": "e249dcc9_e8e7fafb",
+      "range": {
+        "startLine": 437,
+        "startChar": 31,
+        "endLine": 437,
+        "endChar": 60
+      },
+      "revId": "5b06b60c6f5f89c55c8378e7e797e6442a87d47e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
