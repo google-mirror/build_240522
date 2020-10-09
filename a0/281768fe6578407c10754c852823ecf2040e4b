@@ -1,0 +1,8 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Build-Cop-Override+1: Xiao Ma <xiaom@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Xiao Ma <xiaom@google.com>
+Submitted-at: Fri, 09 Oct 2020 07:35:29 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1455939
+Project: platform/build
+Branch: refs/heads/master
