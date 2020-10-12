@@ -769,7 +769,7 @@ function gettop
     local TOPFILE=build/make/core/envsetup.mk
     if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ] ; then
         # The following circumlocution ensures we remove symlinks from TOP.
-        (cd $TOP; PWD= /bin/pwd)
+        (cd "$TOP"; PWD= /bin/pwd)
     else
         if [ -f $TOPFILE ] ; then
             # The following circumlocution (repeated below as well) ensures
@@ -779,13 +779,13 @@ function gettop
         else
             local HERE=$PWD
             local T=
-            while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
+            while [ \( ! \( -f $TOPFILE \) \) -a \( "$PWD" != "/" \) ]; do
                 \cd ..
                 T=`PWD= /bin/pwd -P`
             done
-            \cd $HERE
+            \cd "$HERE"
             if [ -f "$T/$TOPFILE" ]; then
-                echo $T
+                echo "$T"
             fi
         fi
     fi
@@ -1600,29 +1600,38 @@ function validate_current_shell() {
 # This allows loading only approved vendorsetup.sh files
 function source_vendorsetup() {
     unset VENDOR_PYTHONPATH
-    allowed=
-    for f in $(find -L device vendor product -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null | sort); do
-        if [ -n "$allowed" ]; then
+    local T="$(gettop)"
+    local -a dirs=("$T/device" "$T/vendor" "$T/product")
+
+    local allowed=
+    while read f; do
+        if [[ -n "${allowed}" ]]; then
             echo "More than one 'allowed_vendorsetup_sh-files' file found, not including any vendorsetup.sh files:"
-            echo "  $allowed"
+            echo "  ${allowed}"
             echo "  $f"
             return
         fi
         allowed="$f"
-    done
+    done <<<$(find -L "${dirs[@]}" -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null)
 
-    allowed_files=
-    [ -n "$allowed" ] && allowed_files=$(cat "$allowed")
-    for dir in device vendor product; do
-        for f in $(test -d $dir && \
-            find -L $dir -maxdepth 4 -name 'vendorsetup.sh' 2>/dev/null | sort); do
+    local allowed_files=
+    if [[ -n "${allowed}" ]]; then
+        while read f; do
+            allowed_files+="$T/$f "
+        done < "${allowed}"
+    fi
 
-            if [[ -z "$allowed" || "$allowed_files" =~ $f ]]; then
+    for d in "${dirs[@]}"; do
+        while read f; do
+            if [[ -z "$f" ]]; then
+                continue
+            fi
+            if [[ -z "${allowed}" || "${allowed_files}" =~ "$f" ]]; then
                 echo "including $f"; . "$f"
             else
-                echo "ignoring $f, not in $allowed"
+                echo "ignoring $f, not in ${allowed}"
             fi
-        done
+        done <<<$(find -L "$d" -maxdepth 4 -name 'vendorsetup.sh' 2>/dev/null)
     done
 }
 
