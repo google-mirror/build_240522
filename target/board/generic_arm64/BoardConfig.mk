@@ -55,7 +55,7 @@ endif
 include build/make/target/board/BoardConfigGsiCommon.mk
 
 TARGET_NO_KERNEL := false
-TARGET_NO_VENDOR_BOOT := true
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := true
 
 BOARD_KERNEL-4.19-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
