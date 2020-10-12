@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9181945b_5db8768b",
+        "filename": "envsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2020-10-12T17:16:01Z",
+      "side": 1,
+      "message": "We\u0027ve had many discussions about why this is inappropriate to be exposed to general users at this stage in the project -- the latest being b/160564433",
+      "revId": "7ba0f579155449e99fb1960a1ba10e5277237af4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
