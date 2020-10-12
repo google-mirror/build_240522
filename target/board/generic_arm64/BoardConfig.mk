@@ -54,9 +54,6 @@ endif
 
 include build/make/target/board/BoardConfigGsiCommon.mk
 
-TARGET_NO_KERNEL := false
-TARGET_NO_VENDOR_BOOT := true
-BOARD_USES_RECOVERY_AS_BOOT := true
 
 BOARD_KERNEL-4.19-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
 BOARD_KERNEL-5.4_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -80,7 +77,22 @@ BOARD_KERNEL_BINARIES := kernel-4.19-gz kernel-5.4 kernel-5.4-gz kernel-5.4-lz4 
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 BOARD_KERNEL_BINARIES += kernel-5.4-allsyms kernel-5.4-gz-allsyms kernel-5.4-lz4-allsyms
 endif
+
+# Boot image
+BOARD_USES_RECOVERY_AS_BOOT := false
+TARGET_NO_KERNEL := false
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_KERNEL_MODULE_INTERFACE_VERSIONS := 5.4-android12-0
+# 64 MiB
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+
+# No vendor_boot
+TARGET_NO_VENDOR_BOOT := true
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := false
+
+# No recovery
+TARGET_NO_RECOVERY := true
+BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := false
 
 # Some vendors still haven't cleaned up all device specific directories under
 # root!
