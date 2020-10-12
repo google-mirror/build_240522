@@ -29,3 +29,5 @@ PRODUCT_COPY_FILES += \
     device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-gz:kernel-5.4-gz-allsyms \
     device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-lz4:kernel-5.4-lz4-allsyms
 endif
+
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
