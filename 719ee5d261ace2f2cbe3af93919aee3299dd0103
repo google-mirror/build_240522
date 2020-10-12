@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c816ea_120e8ff6",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-10-12T22:28:34Z",
+      "side": 1,
+      "message": "I don\u0027t see these listed as outputs of the rule, does this nee .KATI_IMPLICIT_OUTPUTS too?  I thought referring to something as a symlink output that wasn\u0027t also an output was an error.",
+      "revId": "719ee5d261ace2f2cbe3af93919aee3299dd0103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
