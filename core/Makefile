@@ -2104,7 +2104,6 @@ endif # BUILDING_RAMDISK_IMAGE
 #
 # Note: it's intentional to skip signing for boot-debug.img, because it
 # can only be used if the device is unlocked with verification error.
-ifdef BUILDING_BOOT_IMAGE
 ifneq ($(strip $(TARGET_NO_KERNEL)),true)
 ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
   INSTALLED_DEBUG_BOOTIMAGE_TARGET := $(foreach k,$(subst kernel,boot-debug,$(BOARD_KERNEL_BINARIES)), \
@@ -2120,6 +2119,7 @@ else
 INTERNAL_DEBUG_BOOTIMAGE_ARGS := $(subst $(INSTALLED_RAMDISK_TARGET),$(INSTALLED_DEBUG_RAMDISK_TARGET), $(INTERNAL_BOOTIMAGE_ARGS))
 endif
 
+ifdef BUILDING_BOOT_IMAGE
 # If boot.img is chained but boot-debug.img is not signed, libavb in bootloader
 # will fail to find valid AVB metadata from the end of /boot, thus stop booting.
 # Using a test key to sign boot-debug.img to continue booting with the mismatched
@@ -2158,8 +2158,8 @@ bootimage_debug-nodeps: $(MKBOOTIMG)
 	echo "make $@: ignoring dependencies"
 	$(foreach b,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(call build-debug-bootimage-target,$b))
 
-endif # TARGET_NO_KERNEL
 endif # BUILDING_BOOT_IMAGE
+endif # TARGET_NO_KERNEL
 
 ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
 ifeq ($(BUILDING_RAMDISK_IMAGE),true)
