@@ -27,3 +27,10 @@ $(call add_soong_config_namespace,ANDROID)
 # Add variables to the namespace below:
 
 $(call add_soong_config_var,ANDROID,TARGET_ENABLE_MEDIADRM_64)
+
+ifdef MODULE_DOGFOOD
+$(call add_soong_config_var_value,ANDROID,module_version,dev)
+else
+$(call add_soong_config_var_value,ANDROID,module_version,release)
+endif
+
