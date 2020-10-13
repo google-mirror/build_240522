@@ -1147,6 +1147,7 @@ dont_bother_goals := out \
 
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/android_soong_config_vars.mk
+include $(BUILD_SYSTEM)/mainline_soong_config_vars.mk
 include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
 endif
