@@ -46,6 +46,30 @@
       },
       "revId": "bff6c0a5930268659144a833672a6a21e375d1b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5ea211_21670499",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2161,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2020-10-13T20:48:27Z",
+      "side": 1,
+      "message": "Doesn\u0027t work... FAILED: ninja: \u0027out/target/product/vsoc_x86/boot-debug.img\u0027, needed by \u0027droidcore\u0027, missing and no known rule to make it. Presumably there\u0027s a dependency on INSTALLED_DEBUG_BOOTIMAGE_TARGET which does not line up with BUILDING_BOOT_IMAGE?\n\nI suggest we get the simpler fix in to fix the build, and clean this up after.",
+      "parentUuid": "51fccad4_71e535e2",
+      "range": {
+        "startLine": 2122,
+        "startChar": 0,
+        "endLine": 2161,
+        "endChar": 0
+      },
+      "revId": "bff6c0a5930268659144a833672a6a21e375d1b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
