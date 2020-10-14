@@ -39,6 +39,30 @@
       },
       "revId": "a4cf23b5853d89b210d5891cadbbb981179bdc1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88aa571_51df0aff",
+        "filename": "core/mainline_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2020-10-14T18:09:48Z",
+      "side": 1,
+      "message": "Ah, I hadn\u0027t realized that, thanks. renamed, but will think about whether we could define it in /vendor or something instead",
+      "parentUuid": "d98581c9_a60c9f3d",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "a4cf23b5853d89b210d5891cadbbb981179bdc1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
