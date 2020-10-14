@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd4e460_515cf9c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-10-14T10:29:25Z",
+      "side": 1,
+      "message": "(you didn\u0027t ask, but I subscribe to platform/build CLs and the title made me curious)",
+      "revId": "a4cf23b5853d89b210d5891cadbbb981179bdc1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98581c9_a60c9f3d",
+        "filename": "core/mainline_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-10-14T10:29:25Z",
+      "side": 1,
+      "message": "we try to keep aosp free of google-isms, which mainline is an example of. maybe module_dogfood or something? or defining this stuff in /vendor somehow.",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "a4cf23b5853d89b210d5891cadbbb981179bdc1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
