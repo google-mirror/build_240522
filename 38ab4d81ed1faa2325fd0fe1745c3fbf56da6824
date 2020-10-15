@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6ab6cb_8ed29152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-10-15T23:38:08Z",
+      "side": 1,
+      "message": "Looks like I cannot get the original cl out of WIP, so uploading a new one",
+      "revId": "38ab4d81ed1faa2325fd0fe1745c3fbf56da6824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
