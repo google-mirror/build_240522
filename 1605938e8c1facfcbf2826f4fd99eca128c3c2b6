@@ -16,6 +16,24 @@
       "message": "Hi, All\npossible to include ramdisk-debug.img as well?\njust thought of the case when try to run tests with gsi image, which needs the help of ramdisk-debug.img\n\nThanks,\nYongqin Liu",
       "revId": "1605938e8c1facfcbf2826f4fd99eca128c3c2b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65e2008_e8a101ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133963
+      },
+      "writtenOn": "2020-10-16T16:56:55Z",
+      "side": 1,
+      "message": "Would it be OK to do the -debug work as a separate CL? This is a straight cherry-pick from internal master \u0026 may make the most sense kept as-is",
+      "parentUuid": "e6f43740_54780804",
+      "revId": "1605938e8c1facfcbf2826f4fd99eca128c3c2b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
