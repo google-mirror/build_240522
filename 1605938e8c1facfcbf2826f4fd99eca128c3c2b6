@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f43740_54780804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-10-16T16:11:33Z",
+      "side": 1,
+      "message": "Hi, All\npossible to include ramdisk-debug.img as well?\njust thought of the case when try to run tests with gsi image, which needs the help of ramdisk-debug.img\n\nThanks,\nYongqin Liu",
+      "revId": "1605938e8c1facfcbf2826f4fd99eca128c3c2b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
