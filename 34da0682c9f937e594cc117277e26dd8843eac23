@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56cb1eb3_0148112f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-10-16T04:55:27Z",
+      "side": 1,
+      "message": "interestingly, some build like aosp_coral 6677242 don\u0027t set ro.build.version.release_or_codename. So we need the fallback in this case.",
+      "revId": "34da0682c9f937e594cc117277e26dd8843eac23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
