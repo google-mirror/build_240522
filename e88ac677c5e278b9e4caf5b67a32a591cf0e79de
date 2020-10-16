@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c03f60_910a1096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-10-16T01:41:04Z",
+      "side": 1,
+      "message": "Also did a quick search on the system property: https://source.corp.google.com/search?q\u003dro.system.build.fingerprint%7Cro.system.build.version.release\u0026sq\u003dp:%5Eandroid\n\nSeems the only reference is DSULoader, and its code already handles release|code.",
+      "revId": "e88ac677c5e278b9e4caf5b67a32a591cf0e79de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
