@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d6d8f7_76c6b8c6",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-10-19T23:58:51Z",
+      "side": 1,
+      "message": "Can you mention this in Changes.md too?",
+      "revId": "9d281d927144fa2a39f2452adaf7085cf412e5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
