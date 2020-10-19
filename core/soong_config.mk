@@ -213,6 +213,9 @@ $(call end_json_map)
 $(call add_json_bool, EnforceProductPartitionInterface,  $(PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE))
 $(call add_json_str,  DeviceCurrentApiLevelForVendorModules,  $(BOARD_CURRENT_API_LEVEL_FOR_VENDOR_MODULES))
 
+$(call add_json_bool, EnforceJavaSdkLibraryInterPartition, $(PRODUCT_ENFORCE_JAVA_SDK_LIBRARY_INTER_PARTITION))
+$(call add_json_list, InterPartitionJavaLibraryAllowList, $(PRODUCT_JAVA_LIBRARY_INTER_PARTITION_ALLOWED))
+
 $(call add_json_bool, InstallExtraFlattenedApexes, $(PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES))
 
 $(call add_json_bool, BoardUsesRecoveryAsBoot, $(BOARD_USES_RECOVERY_AS_BOOT))
