@@ -1301,6 +1301,40 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
       self.assertIn('/', loaded_dict['fstab'])
       self.assertIn('/system', loaded_dict['fstab'])
 
+  def test_LoadInfoDictForReleaseTools(self):
+    dict1 = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a',
+        'dynamic_partition_list': 'system',
+        'super_group_a_partition_list': 'system',
+        'ab_partitions': 'system',
+    }
+    dict2 = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'vendor product',
+        'super_block_devices': 'super',
+        'super_super_device_size': '3000',
+        'super_group_a_partition_list': 'vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+        'ab_partitions': 'product vendor',
+    }
+    dict1.update(self.INFO_DICT_DEFAULT)
+    dict2.update(self.INFO_DICT_DEFAULT)
+    target_files1 = self._test_LoadInfoDict_createTargetFiles(
+        dict1,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    target_files2 = self._test_LoadInfoDict_createTargetFiles(
+        dict2,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files1, 'r', allowZip64=True) as target_files_zip1, zipfile.ZipFile(target_files2, 'r', allowZip64=True) as target_files_zip2:
+      loaded_dict = common.LoadInfoDictsForReleaseTools([target_files_zip1, target_files_zip2])
+      self.assertEqual('product system vendor', loaded_dict['dynamic_partition_list'])
+      self.assertEqual('group_a group_b', loaded_dict['super_partition_groups'])
+      self.assertEqual('product system vendor', loaded_dict['ab_partitions'])
+
   def test_LoadInfoDict_legacyRecoveryFstabPath(self):
     target_files = self._test_LoadInfoDict_createTargetFiles(
         self.INFO_DICT_DEFAULT,
@@ -1435,8 +1469,7 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
         'super_group_b_group_size': '2000',
     }
     merged_dict = common.MergeDynamicPartitionInfoDicts(
-        framework_dict=framework_dict,
-        vendor_dict=vendor_dict)
+        [framework_dict, vendor_dict])
     expected_merged_dict = {
         'use_dynamic_partitions': 'true',
         'super_partition_groups': 'group_a group_b',
@@ -1450,7 +1483,7 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
     }
     self.assertEqual(merged_dict, expected_merged_dict)
 
-  def test_MergeDynamicPartitionInfoDicts_IgnoringFrameworkGroupSize(self):
+  def test_MergeDynamicPartitionInfoDicts_RaiseOnInconsistentGroupSize(self):
     framework_dict = {
         'use_dynamic_partitions': 'true',
         'super_partition_groups': 'group_a',
@@ -1467,19 +1500,10 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
         'super_group_b_partition_list': 'product',
         'super_group_b_group_size': '2000',
     }
-    merged_dict = common.MergeDynamicPartitionInfoDicts(
-        framework_dict=framework_dict,
-        vendor_dict=vendor_dict)
-    expected_merged_dict = {
-        'use_dynamic_partitions': 'true',
-        'super_partition_groups': 'group_a group_b',
-        'dynamic_partition_list': 'product system vendor',
-        'super_group_a_partition_list': 'system vendor',
-        'super_group_a_group_size': '1000',
-        'super_group_b_partition_list': 'product',
-        'super_group_b_group_size': '2000',
-    }
-    self.assertEqual(merged_dict, expected_merged_dict)
+    with self.assertRaisesRegex(ValueError,
+                                'super_group_a_group_size is not consistent'):
+      merged_dict = common.MergeDynamicPartitionInfoDicts(
+        [framework_dict, vendor_dict])
 
   def test_GetAvbPartitionArg(self):
     info_dict = {}
