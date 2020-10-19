@@ -4835,7 +4835,7 @@ ifeq ($(build_ota_package),true)
 # $(1): output file
 # $(2): additional args
 define build-ota-package-target
-PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$(dir $(ZIP2ZIP)):$$PATH \
     $(OTA_FROM_TARGET_FILES) \
         --verbose \
         --extracted_input_target_files $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE)) \
