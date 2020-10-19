@@ -95,8 +95,7 @@ def BuildSuperEmpty():
     logger.info("Building super_empty.img.")
     merged_dict = dict(vendor_dict)
     merged_dict.update(
-        common.MergeDynamicPartitionInfoDicts(
-            framework_dict=framework_dict, vendor_dict=vendor_dict))
+        common.MergeDynamicPartitionInfoDicts([framework_dict, vendor_dict]))
     output_super_empty_path = os.path.join(OPTIONS.product_out_vendor,
                                            "super_empty.img")
     build_super_image.BuildSuperImage(merged_dict, output_super_empty_path)
