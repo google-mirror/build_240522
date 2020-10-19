@@ -5097,7 +5097,7 @@ $(INTERNAL_SUPERIMAGE_DIST_TARGET): extracted_input_target_files := $(patsubst %
 $(INTERNAL_SUPERIMAGE_DIST_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
 	$(call pretty,"Target super fs image from target files: $@")
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	    $(BUILD_SUPER_IMAGE) -v $(extracted_input_target_files) $@
+	    $(BUILD_SUPER_IMAGE) -v --input_file $(extracted_input_target_files) --output $@
 
 # Skip packing it in dist package because it is in update package.
 ifneq (true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE))
@@ -5131,7 +5131,7 @@ define build-superimage-target
     echo "system_other_image=$(INSTALLED_SYSTEMOTHERIMAGE_TARGET)" >> $(2);))
   mkdir -p $(dir $(1))
   PATH=$(dir $(LPMAKE)):$$PATH \
-    $(BUILD_SUPER_IMAGE) -v $(2) $(1)
+    $(BUILD_SUPER_IMAGE) -v --input_file $(2) --output $(1)
 endef
 
 INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
@@ -5189,7 +5189,7 @@ $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE) $(BUILD_SUPER_IMAGE)
 	rm -rf $(intermediates)/misc_info.txt
 	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
 	PATH=$(dir $(LPMAKE)):$$PATH \
-	    $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $@
+	    $(BUILD_SUPER_IMAGE) -v --input_file $(intermediates)/misc_info.txt --output $@
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
@@ -5213,7 +5213,7 @@ $(INTERNAL_UPDATE_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(IMG_FROM_TARG
 	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$(dir $(ZIP2ZIP)):$$PATH \
 	    $(IMG_FROM_TARGET_FILES) \
 	        --additional IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
-	        $(BUILT_TARGET_FILES_PACKAGE) $@
+	        --input_file $(BUILT_TARGET_FILES_PACKAGE) --output $@
 
 .PHONY: updatepackage
 updatepackage: $(INTERNAL_UPDATE_PACKAGE_TARGET)

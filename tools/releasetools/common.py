@@ -632,6 +632,54 @@ def ReadFromInputFile(input_file, fn):
         raise KeyError(fn)
 
 
+def MergeInfoDictsForReleaseTools(input_files):
+  """Loads and merges the key/value pairs from the given list of input target_files.
+
+  It reads `META/misc_info.txt` file in the target_files input, does validation
+  checks and returns the parsed key/value pairs for to the given builds. It's
+  usually called early when working on multiple partial input target_files files,
+  e.g. when generating OTAs. Note that the function may be called against an old
+  target_files file (i.e. from past dessert releases). So the property parsing
+  needs to be backward compatible.
+
+  Args:
+    input_files: The input target_files file, which could be an open
+        zipfile.ZipFile instance, or a str for the dir that contains the files
+        unzipped from a target_files file.
+
+  Returns:
+    A dict that contains the parsed key/value pairs suitable to call the following
+    tools: build_super_image.py, img_from_target_files.py, and ota_from_target_files.py.
+
+  Raises:
+    AssertionError: On invalid input arguments.
+    ValueError: On malformed input values.
+  """
+  info_dicts = []
+  for input_file in input_files:
+    if isinstance(input_file, dict):
+      info_dicts.append(input_file)
+    else:
+      info_dicts.append(LoadInfoDict(input_file))
+
+  if len(info_dicts) == 1:
+    return info_dicts[0]
+
+  merged_dict = MergeDynamicPartitionInfoDicts(info_dicts)
+
+  ab_partitions = uniq_concat([d.get('ab_partitions', '') for d in info_dicts])
+  if ab_partitions:
+    merged_dict['ab_partitions'] = ab_partitions
+
+  # Add misc keys need for release tools
+  for key in ('super_image_in_update_package', 'bootloader_in_update_package', 'dynamic_partition_retrofit', 'build_super_partition', 'extfs_sparse_flag'):
+    is_consistent, value = is_value_consistent(info_dicts, key)
+    if is_consistent:
+      merged_dict[key] = value
+
+  return merged_dict
+
+
 def LoadInfoDict(input_file, repacking=False):
   """Loads the key/value pairs from the given input target_files.
 
@@ -755,7 +803,6 @@ def LoadInfoDict(input_file, repacking=False):
   except KeyError:
     logger.warning("Can't find META/ab_partitions.txt")
   return d
-
 
 
 def LoadListFromFile(file_path):
@@ -1021,66 +1068,80 @@ def DumpInfoDict(d):
     logger.info("%-25s = (%s) %s", k, type(v).__name__, v)
 
 
-def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
+def uniq_concat(values_to_concat):
+  combined = set()
+  for value in values_to_concat:
+    combined.update(set(value.split(" ")))
+  combined = [item.strip() for item in combined if item.strip()]
+  return " ".join(sorted(combined))
+
+
+def is_value_consistent(info_dicts, key):
+  current_value = ""
+  for dict in info_dicts:
+    if key in dict:
+      if dict[key] != current_value and current_value != "":
+        return (False, "")
+      current_value = dict[key]
+  return ((True and current_value != ""), current_value)
+
+
+def MergeDynamicPartitionInfoDicts(info_dicts):
   """Merges dynamic partition info variables.
 
+  Merges all dynamic partition related variables from all dictionaries.
+  Ensures that all keys are either uniquely concated or that all key/value
+  pairs are consistent across all dictionaries.
+
   Args:
-    framework_dict: The dictionary of dynamic partition info variables from the
-      partial framework target files.
-    vendor_dict: The dictionary of dynamic partition info variables from the
-      partial vendor target files.
+    info_dicts: The dictionaries of dynamic partition info variables to merge.
 
   Returns:
     The merged dynamic partition info dictionary.
   """
 
-  def uniq_concat(a, b):
-    combined = set(a.split(" "))
-    combined.update(set(b.split(" ")))
-    combined = [item.strip() for item in combined if item.strip()]
-    return " ".join(sorted(combined))
-
-  if (framework_dict.get("use_dynamic_partitions") !=
-      "true") or (vendor_dict.get("use_dynamic_partitions") != "true"):
+  consistent, _ = is_value_consistent(info_dicts, "use_dynamic_partitions")
+  if not consistent:
     raise ValueError("Both dictionaries must have use_dynamic_partitions=true")
 
   merged_dict = {"use_dynamic_partitions": "true"}
 
-  merged_dict["dynamic_partition_list"] = uniq_concat(
-      framework_dict.get("dynamic_partition_list", ""),
-      vendor_dict.get("dynamic_partition_list", ""))
+  merged_dict["dynamic_partition_list"] = uniq_concat([d.get("dynamic_partition_list", "") for d in info_dicts])
 
   # Super block devices are defined by the vendor dict.
-  if "super_block_devices" in vendor_dict:
-    merged_dict["super_block_devices"] = vendor_dict["super_block_devices"]
+  consistent, value = is_value_consistent(info_dicts, "super_block_devices")
+  if consistent:
+    merged_dict["super_block_devices"] = value
     for block_device in merged_dict["super_block_devices"].split(" "):
       key = "super_%s_device_size" % block_device
-      if key not in vendor_dict:
-        raise ValueError("Vendor dict does not contain required key %s." % key)
-      merged_dict[key] = vendor_dict[key]
+      consistent, value = is_value_consistent(info_dicts, key)
+      if not consistent:
+        raise ValueError("Required key %s is not consistent across dictionaries." % key)
+      merged_dict[key] = value
 
-  # Partition groups and group sizes are defined by the vendor dict because
-  # these values may vary for each board that uses a shared system image.
-  merged_dict["super_partition_groups"] = vendor_dict["super_partition_groups"]
+  # Partition groups and group sizes should be consistent acros dictionaries
+  merged_dict["super_partition_groups"] = uniq_concat([d.get("super_partition_groups","") for d in info_dicts])
   for partition_group in merged_dict["super_partition_groups"].split(" "):
-    # Set the partition group's size using the value from the vendor dict.
+    # Set the partition group's size using a consistent value across all the
+    # dictionaries.
     key = "super_%s_group_size" % partition_group
-    if key not in vendor_dict:
-      raise ValueError("Vendor dict does not contain required key %s." % key)
-    merged_dict[key] = vendor_dict[key]
+    consistent, value = is_value_consistent(info_dicts, key)
+    if not consistent:
+      raise ValueError("super_%s_group_size is not consistent" % partition_group)
+    merged_dict[key] = value
 
     # Set the partition group's partition list using a concatenation of the
-    # framework and vendor partition lists.
+    # all the super partition lists.
     key = "super_%s_partition_list" % partition_group
-    merged_dict[key] = uniq_concat(
-        framework_dict.get(key, ""), vendor_dict.get(key, ""))
+    merged_dict[key] = uniq_concat([d.get(key, "") for d in info_dicts])
 
-  # Various other flags should be copied from the vendor dict, if defined.
+  # Various other flags should be the same across all dictionaries, if defined.
   for key in ("virtual_ab", "virtual_ab_retrofit", "lpmake",
               "super_metadata_device", "super_partition_error_limit",
               "super_partition_size"):
-    if key in vendor_dict.keys():
-      merged_dict[key] = vendor_dict[key]
+    consistent, value = is_value_consistent(info_dicts, key)
+    if consistent:
+      merged_dict[key] = value
 
   return merged_dict
 
