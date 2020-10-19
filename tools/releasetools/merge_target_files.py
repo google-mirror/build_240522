@@ -452,7 +452,7 @@ def process_misc_info_txt(framework_target_files_temp_dir,
   if (merged_dict.get('use_dynamic_partitions') == 'true') and (
       framework_dict.get('use_dynamic_partitions') == 'true'):
     merged_dynamic_partitions_dict = common.MergeDynamicPartitionInfoDicts(
-        framework_dict=framework_dict, vendor_dict=merged_dict)
+        [framework_dict, merged_dict])
     merged_dict.update(merged_dynamic_partitions_dict)
     # Ensure that add_img_to_target_files rebuilds super split images for
     # devices that retrofit dynamic partitions. This flag may have been set to
@@ -510,8 +510,7 @@ def process_dynamic_partitions_info_txt(framework_target_files_dir,
       os.path.join(vendor_target_files_dir, *dynamic_partitions_info_path))
 
   merged_dynamic_partitions_dict = common.MergeDynamicPartitionInfoDicts(
-      framework_dict=framework_dynamic_partitions_dict,
-      vendor_dict=vendor_dynamic_partitions_dict)
+      [framework_dynamic_partitions_dict, vendor_dynamic_partitions_dict])
 
   output_dynamic_partitions_info_txt = os.path.join(
       output_target_files_dir, 'META', 'dynamic_partitions_info.txt')
