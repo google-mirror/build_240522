@@ -16,6 +16,24 @@
       "message": "Can you mention this in Changes.md too?",
       "revId": "9d281d927144fa2a39f2452adaf7085cf412e5ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c79df9_6c337367",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2020-10-20T09:12:48Z",
+      "side": 1,
+      "message": "It seems that Changes.md contains Android.mk related changes, while this is only specific for sepolicy rules. Also system/sepolicy/public/te_macros contains more detailed information. So I\u0027d like to skip mentioning this in Changes.md. Does it make sense?",
+      "parentUuid": "17d6d8f7_76c6b8c6",
+      "revId": "9d281d927144fa2a39f2452adaf7085cf412e5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
