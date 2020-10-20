@@ -502,6 +502,20 @@ bail:
     return result;
 }
 
+status_t ZipFile::alignEntry(android::ZipEntry* pEntry, uint32_t alignTo){
+  if (alignTo == 0 || alignTo == 1)
+    return OK;
+
+  uint64_t expectedPayloadOffset = ftell(mZipFp) + android::ZipEntry::LocalFileHeader::kLFHLen + pEntry->mLFH.mFileNameLength +
+                pEntry->mLFH.mExtraFieldLength;
+
+  uint64_t alignDiff = (alignTo - (expectedPayloadOffset % alignTo)) % alignTo;
+  if (alignDiff == 0)
+    return OK;
+
+  return pEntry->addPadding(alignDiff);
+}
+
 /*
  * Add an entry by copying it from another zip file.  If "padding" is
  * nonzero, the specified number of bytes will be added to the "extra"
@@ -510,11 +524,12 @@ bail:
  * If "ppEntry" is non-NULL, a pointer to the new entry will be returned.
  */
 status_t ZipFile::add(const ZipFile* pSourceZip, const ZipEntry* pSourceEntry,
-    int padding, ZipEntry** ppEntry)
+    int alignTo, ZipEntry** ppEntry)
 {
     ZipEntry* pEntry = NULL;
     status_t result;
     long lfhPosn, endPosn;
+
 
     if (mReadOnly)
         return INVALID_OPERATION;
@@ -537,11 +552,10 @@ status_t ZipFile::add(const ZipFile* pSourceZip, const ZipEntry* pSourceEntry,
     result = pEntry->initFromExternal(pSourceEntry);
     if (result != OK)
         goto bail;
-    if (padding != 0) {
-        result = pEntry->addPadding(padding);
-        if (result != OK)
-            goto bail;
-    }
+
+    result = alignEntry(pEntry, alignTo);
+    if (result != OK)
+      goto bail;
 
     /*
      * From here on out, failures are more interesting.
