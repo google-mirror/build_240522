@@ -1,0 +1,99 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005624366",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1467030?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "9e0f1c76_2f814db8",
+          "description": "Change to \"tools/product_config/src/com/android/build/config/Errors.java\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/src/com/android/build/config/Errors.java",
+              "range": {
+                "startLine": 196,
+                "startChar": 46,
+                "endLine": 196,
+                "endChar": 53
+              },
+              "replacement": "the"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "01e3bbff_44c06631",
+        "filename": "tools/product_config/src/com/android/build/config/Errors.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-20T06:30:44Z",
+      "side": 1,
+      "message": "Common typo found: \"the the\" -- should it be \"the\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 196,
+        "startChar": 46,
+        "endLine": 196,
+        "endChar": 53
+      },
+      "revId": "89299f16b872c2e5acaa9fdd121ec40a566e37ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005624367",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1467030?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "236cdfa2_9f923def",
+        "filename": "tools/product_config/src/com/android/build/config/Main.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-20T06:30:44Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 31,
+        "startChar": 77,
+        "endLine": 31,
+        "endChar": 81
+      },
+      "revId": "89299f16b872c2e5acaa9fdd121ec40a566e37ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005624367",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1467030?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1b14dc89_fd7554b9",
+        "filename": "tools/product_config/test/com/android/build/config/ErrorsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-20T06:30:44Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 8
+      },
+      "revId": "89299f16b872c2e5acaa9fdd121ec40a566e37ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
