@@ -34,6 +34,24 @@
       "parentUuid": "76151f5d_2a06b26b",
       "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8382f3_82f0e108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-10-20T23:22:50Z",
+      "side": 1,
+      "message": "That is true for Make modules, we try to be more clear about what is and is not expected to work in Soong by supporting it directly with something like vendor_ramdisk: true.  sh is built in Soong, so it can\u0027t set LOCAL_MODULE_PATH directly.",
+      "parentUuid": "91e55c96_219eb0dc",
+      "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
