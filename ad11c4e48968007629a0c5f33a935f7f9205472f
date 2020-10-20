@@ -52,6 +52,24 @@
       "parentUuid": "91e55c96_219eb0dc",
       "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd8bb8f0_d51bf100",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-20T23:27:22Z",
+      "side": 1,
+      "message": "We don\u0027t have \"vendor_ramdisk\" in Soong, though, so they might have to use make for the first stage console feature?",
+      "parentUuid": "4c8382f3_82f0e108",
+      "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
