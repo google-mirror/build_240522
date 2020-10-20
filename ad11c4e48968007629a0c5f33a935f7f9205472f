@@ -70,6 +70,24 @@
       "parentUuid": "4c8382f3_82f0e108",
       "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f1e145_1551d42e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-20T23:41:00Z",
+      "side": 1,
+      "message": "Steve, how do OEMs install sh in the boot image right now? The `sh` module is marked as recovery_available, not ramdisk_available, so they can\u0027t be using that module. Do they build another sh module? Or do they use PRODUCT_COPY_FILES?",
+      "parentUuid": "cd8bb8f0_d51bf100",
+      "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
