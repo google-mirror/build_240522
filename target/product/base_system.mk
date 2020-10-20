@@ -208,6 +208,7 @@ PRODUCT_PACKAGES += \
     media_profiles_V1_0.dtd \
     MediaProviderLegacy \
     mediaserver \
+    memory_reclaimerd \
     mke2fs \
     monkey \
     mtpd \
