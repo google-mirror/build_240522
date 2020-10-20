@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure we can remove recovery items from GKI before we have the build support to add arbitrary modules to vendor-ramdisk... The first stage console feature relies on /system/bin/sh being present in the ramdisk.",
       "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e55c96_219eb0dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-10-20T17:39:38Z",
+      "side": 1,
+      "message": "A vendor can install whatever they want to vendor ramdisk using the following:\n\n  LOCAL_MODULE_PATH :\u003d $(TARGET_VENDOR_RAMDISK_OUT)/system/bin\n\nccross please CMIIW.",
+      "parentUuid": "76151f5d_2a06b26b",
+      "revId": "ad11c4e48968007629a0c5f33a935f7f9205472f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
