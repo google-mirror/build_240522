@@ -34,6 +34,24 @@
       "parentUuid": "17d6d8f7_76c6b8c6",
       "revId": "9d281d927144fa2a39f2452adaf7085cf412e5ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196f0566_8a8facb5",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-10-20T20:09:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b4c79df9_6c337367",
+      "revId": "9d281d927144fa2a39f2452adaf7085cf412e5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
