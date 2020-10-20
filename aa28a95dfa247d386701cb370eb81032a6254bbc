@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8c752a_a053fcb6",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-10-20T23:49:41Z",
+      "side": 1,
+      "message": "(the rest of the file is 4-space.)",
+      "revId": "aa28a95dfa247d386701cb370eb81032a6254bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
