@@ -705,7 +705,7 @@ def AddSuperEmpty(output_zip):
   """Create a super_empty.img and store it in output_zip."""
 
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "super_empty.img")
-  build_super_image.BuildSuperImage(OPTIONS.info_dict, img.name)
+  build_super_image.BuildSuperImage([OPTIONS.info_dict], img.name)
   img.Write()
 
 
@@ -713,7 +713,7 @@ def AddSuperSplit(output_zip):
   """Create split super_*.img and store it in output_zip."""
 
   outdir = os.path.join(OPTIONS.input_tmp, "OTA")
-  built = build_super_image.BuildSuperImage(OPTIONS.input_tmp, outdir)
+  built = build_super_image.BuildSuperImage([OPTIONS.input_tmp], outdir)
 
   if built:
     for dev in OPTIONS.info_dict['super_block_devices'].strip().split():

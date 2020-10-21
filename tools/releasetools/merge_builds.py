@@ -98,7 +98,7 @@ def BuildSuperEmpty():
         common.MergeDynamicPartitionInfoDicts([framework_dict, vendor_dict]))
     output_super_empty_path = os.path.join(OPTIONS.product_out_vendor,
                                            "super_empty.img")
-    build_super_image.BuildSuperImage(merged_dict, output_super_empty_path)
+    build_super_image.BuildSuperImage([merged_dict], output_super_empty_path)
 
 
 def BuildVBMeta():

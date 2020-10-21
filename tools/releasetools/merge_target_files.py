@@ -875,11 +875,7 @@ def generate_super_empty_image(target_dir, output_super_empty):
         'Building super_empty.img requires use_dynamic_partitions=true.')
   elif use_dynamic_partitions == 'true':
     super_empty_img = os.path.join(target_dir, 'IMAGES', 'super_empty.img')
-    build_super_image_args = [
-        misc_info_txt,
-        super_empty_img,
-    ]
-    build_super_image.main(build_super_image_args)
+    build_super_image.BuildSuperImage([misc_info_txt], super_empty_img)
 
     # Copy super_empty.img to the user-provided output_super_empty location.
     if output_super_empty:
