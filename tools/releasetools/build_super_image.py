@@ -148,7 +148,7 @@ def BuildSuperImageFromDict(info_dict, output):
   return True
 
 
-def BuildSuperImageFromExtractedTargetFiles(inp, out):
+def GetInfoDictFromExtractedTargetFiles(inp):
   info_dict = common.LoadInfoDict(inp)
   partition_list = shlex.split(
       info_dict.get("dynamic_partition_list", "").strip())
@@ -166,40 +166,37 @@ def BuildSuperImageFromExtractedTargetFiles(inp, out):
     else:
       info_dict["{}_image".format(partition)] = image_path
   if missing_images:
-    logger.warning("Skip building super image because the following "
-                   "images are missing from target files:\n%s",
-                   "\n".join(missing_images))
-    return False
-  return BuildSuperImageFromDict(info_dict, out)
+    raise ValueError("Skip building super image because the following "
+                     "images are missing from target files:\n%s",
+                     "\n".join(missing_images))
+  return info_dict
 
 
-def BuildSuperImageFromTargetFiles(inp, out):
+def GetInfoDictFromTargetFiles(inp):
   input_tmp = common.UnzipTemp(inp, UNZIP_PATTERN)
-  return BuildSuperImageFromExtractedTargetFiles(input_tmp, out)
+  return GetInfoDictFromExtractedTargetFiles(input_tmp)
 
 
 def BuildSuperImage(inp, out):
 
-  if isinstance(inp, dict):
-    logger.info("Building super image from info dict...")
-    return BuildSuperImageFromDict(inp, out)
+  info_dicts = {}
+  for input_file in inp:
+    if isinstance(input_file, dict):
+      info_dicts.append(input_file)
 
-  if isinstance(inp, str):
-    if os.path.isdir(inp):
-      logger.info("Building super image from extracted target files...")
-      return BuildSuperImageFromExtractedTargetFiles(inp, out)
+    if isinstance(input_file, str):
+      if os.path.isdir(input_file):
+        info_dicts.append(GetInfoDictFromExtractedTargetFiles(input_file))
 
-    if zipfile.is_zipfile(inp):
-      logger.info("Building super image from target files...")
-      return BuildSuperImageFromTargetFiles(inp, out)
+      if zipfile.is_zipfile(input_file):
+        info_dicts.append(GetInfoDictFromTargetFiles(input_file))
 
-    if os.path.isfile(inp):
-      with open(inp) as f:
-        lines = f.read()
-      logger.info("Building super image from info dict...")
-      return BuildSuperImageFromDict(common.LoadDictionaryFromLines(lines.split("\n")), out)
+      if os.path.isfile(input_file):
+        with open(input_file) as f:
+          info_dict.append(f.read())
+    raise ValueError("{} is not a dictionary or a valid path".format(inp))
 
-  raise ValueError("{} is not a dictionary or a valid path".format(inp))
+  BuildSuperImageFromDict(common.LoadInfoDictsForReleaseTools(info_dicts), out)
 
 
 def main(argv):
@@ -212,7 +209,7 @@ def main(argv):
 
   common.InitLogging()
 
-  BuildSuperImage(args[0], args[1])
+  BuildSuperImage(args[0], args[1:])
 
 
 if __name__ == "__main__":

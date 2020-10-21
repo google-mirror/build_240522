@@ -665,6 +665,14 @@ def MergeInfoDictsForReleaseTools(input_files):
   if ab_partitions:
     merged_dict['ab_partitions'] = ab_partitions
 
+  for dict in info_dicts:
+    for key in dict:
+      if key.endswith('_image'):
+        if key not in merged_dict:
+          merged_dict[key] = dict[key]
+        else:
+          raise ValueError("Conflicting entries for %s" % key)
+
   return merged_dict
 
 
