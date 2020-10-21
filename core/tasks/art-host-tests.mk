@@ -16,9 +16,15 @@
 
 intermediates_dir := $(call intermediates-dir-for,PACKAGING,art-host-tests)
 art_host_tests_zip := $(PRODUCT_OUT)/art-host-tests.zip
-$(art_host_tests_zip) : $(COMPATIBILITY.art-host-tests.FILES) $(SOONG_ZIP)
+my_host_shared_lib_for_art_host_tests := $(call copy-many-files,$(COMPATIBILITY.art-host-tests.HOST_SHARED_LIBRARY.FILES))
+$(art_host_tests_zip) : PRIVATE_HOST_SHARED_LIBS := $(my_host_shared_lib_for_art_host_tests_zip)
+
+$(art_host_tests_zip) : $(COMPATIBILITY.art-host-tests.FILES) $(my_host_shared_lib_for_art_host_tests) $(SOONG_ZIP)
 	echo $(sort $(COMPATIBILITY.art-host-tests.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
+	$(hide) for shared_lib in $(PRIVATE_HOST_SHARED_LIBS); do \
+	  echo $$shared_lib >> $@-host.list; \
+	done
 	grep $(TARGET_OUT_TESTCASES) $@.list > $@-target.list || true
 	$(hide) $(SOONG_ZIP) -d -o $@ -P host -C $(HOST_OUT) -l $@-host.list -P target -C $(PRODUCT_OUT) -l $@-target.list
 	rm -f $@.list $@-host.list $@-target.list
