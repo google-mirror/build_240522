@@ -20,6 +20,7 @@ include $(BUILD_SYSTEM)/tasks/tools/vts_package_utils.mk
 test_suite_name := vts
 test_suite_tradefed := vts-tradefed
 test_suite_readme := test/vts/tools/vts-core-tradefed/README
+include_test_suite_notice := true
 
 # Copy kernel test modules to testcases directories
 kernel_test_host_out := $(HOST_OUT_TESTCASES)/vts_kernel_tests
