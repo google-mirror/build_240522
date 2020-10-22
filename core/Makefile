@@ -715,6 +715,22 @@ endif
 GENERIC_KERNEL_CMDLINE := rw
 .KATI_READONLY := GENERIC_KERNEL_CMDLINE
 
+my_installed_prebuilt_gki_apex := $(strip $(foreach package,$(PRODUCT_PACKAGES),$(if $(ALL_MODULES.$(package).EXTRACTED_BOOT_IMAGE),$(package))))
+ifneq (,$(word 2,$(my_installed_prebuilt_gki_apex))) # len(my_installed_prebuilt_gki_apex) > 1
+  $(error More than one prebuilt GKI APEXes are installed: $(my_installed_prebuilt_gki_apex))
+endif # len(my_installed_prebuilt_gki_apex) > 1
+
+my_apex_extracted_boot_image := $(strip $(foreach package,$(my_installed_prebuilt_gki_apex),$(ALL_MODULES.$(package).EXTRACTED_BOOT_IMAGE)))
+
+ifdef my_apex_extracted_boot_image
+  ifdef BOARD_PREBUILT_BOOTIMAGE
+    $(error Must not define BOARD_PREBUILT_BOOTIMAGE because a prebuilt GKI APEX is installed: $(my_installed_prebuilt_gki_apex))
+  endif # BOARD_PREBUILT_BOOTIMAGE defined
+  INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
+$(eval $(call copy-one-file,$(my_apex_extracted_boot_image),$(INSTALLED_BOOTIMAGE_TARGET)))
+
+else # my_apex_extracted_boot_image not defined
+
 # $1: boot image target
 # returns the kernel used to make the bootimage
 define bootimage-to-kernel
@@ -884,6 +900,12 @@ else # BOARD_PREBUILT_BOOTIMAGE not defined
 INSTALLED_BOOTIMAGE_TARGET :=
 endif # BOARD_PREBUILT_BOOTIMAGE
 endif # TARGET_NO_KERNEL
+endif # my_apex_extracted_boot_image defined
+
+INTERNAL_PREBUILT_BOOTIMAGE := $(strip $(my_apex_extracted_boot_image) $(BOARD_PREBUILT_BOOTIMAGE))
+
+my_apex_extracted_boot_image :=
+my_installed_prebuilt_gki_apex :=
 
 # -----------------------------------------------------------------
 # declare recovery ramdisk files
@@ -4421,7 +4443,7 @@ endif
 
 ifdef BUILDING_BOOT_IMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_RAMDISK_FILES)
-else ifdef BOARD_PREBUILT_BOOTIMAGE
+else ifdef INTERNAL_PREBUILT_BOOTIMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTIMAGE_TARGET)
 endif
 
@@ -4720,7 +4742,7 @@ ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) $(zip_root)/IMAGES/
 endif
-ifdef BOARD_PREBUILT_BOOTIMAGE
+ifdef INTERNAL_PREBUILT_BOOTIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_BOOTIMAGE_TARGET) $(zip_root)/IMAGES/
 endif
