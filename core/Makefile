@@ -872,16 +872,36 @@ endif # BOARD_AVB_ENABLE
 endif # BUILDING_BOOT_IMAGE
 
 else # TARGET_NO_KERNEL == "true"
+
+my_installed_prebuilt_gki_apex := $(strip $(foreach package,$(PRODUCT_PACKAGES),$(if $(ALL_MODULES.$(package).EXTRACTED_BOOT_IMAGE),$(package))))
+ifeq (true,$(call math_gt,$(words $(my_installed_prebuilt_gki_apex)),1))
+$(error More than one prebuilt GKI APEXes are installed: $(my_installed_prebuilt_gki_apex))
+endif # len(my_installed_prebuilt_gki_apex) > 1
+
+my_extracted_boot_image_from_apex := $(strip $(foreach package,$(my_installed_prebuilt_gki_apex),$(ALL_MODULES.$(package).EXTRACTED_BOOT_IMAGE)))
+ifdef my_extracted_boot_image_from_apex
 ifdef BOARD_PREBUILT_BOOTIMAGE
+$(error Must not define BOARD_PREBUILT_BOOTIMAGE because a prebuilt GKI APEX is installed: $(my_installed_prebuilt_gki_apex))
+endif # BOARD_PREBUILT_BOOTIMAGE defined
+endif # my_extracted_boot_image_from_apex defined
+
+my_prebuilt_boot_image := $(or $(my_extracted_boot_image_from_apex),$(BOARD_PREBUILT_BOOTIMAGE))
+
+ifdef my_prebuilt_boot_image
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
 # Remove when b/63676296 is resolved.
 $(error Prebuilt bootimage is only supported for AB targets)
 endif
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
-$(eval $(call copy-one-file,$(BOARD_PREBUILT_BOOTIMAGE),$(INSTALLED_BOOTIMAGE_TARGET)))
-else # BOARD_PREBUILT_BOOTIMAGE not defined
+$(eval $(call copy-one-file,$(my_prebuilt_boot_image),$(INSTALLED_BOOTIMAGE_TARGET)))
+else # my_prebuilt_boot_image not defined
 INSTALLED_BOOTIMAGE_TARGET :=
-endif # BOARD_PREBUILT_BOOTIMAGE
+endif # my_prebuilt_boot_image
+
+my_prebuilt_boot_image :=
+my_extracted_boot_image_from_apex :=
+my_installed_prebuilt_gki_apex :=
+
 endif # TARGET_NO_KERNEL
 
 # -----------------------------------------------------------------
