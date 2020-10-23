@@ -1,0 +1,12 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Verified+1: Daniel Norman <danielnorman@google.com>
+Code-Review+2: Bill Peckham <bpeckham@google.com>
+Code-Review+2: Tianjie Xu <xunchang@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Autosubmit+1: Daniel Norman <danielnorman@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 23 Oct 2020 21:04:19 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1471259
+Project: platform/build
+Branch: refs/heads/master
