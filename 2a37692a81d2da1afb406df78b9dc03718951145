@@ -16,6 +16,24 @@
       "message": "Is there any reason not to turn this on everywhere instead of requiring each test suite to opt into it?",
       "revId": "2a37692a81d2da1afb406df78b9dc03718951145",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a4d40b_f0c765af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2020-10-23T00:55:23Z",
+      "side": 1,
+      "message": "I think that\u0027s a good thing to do, shouldn\u0027t cause any side effect anyway.\n+fdeng to confirm.",
+      "parentUuid": "30835e13_dfad6177",
+      "revId": "2a37692a81d2da1afb406df78b9dc03718951145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
