@@ -69,6 +69,7 @@ PRODUCT_PACKAGES += \
     com.android.wifi \
     ContactsProvider \
     content \
+    crosvm \
     CtsShimPrebuilt \
     CtsShimPrivPrebuilt \
     debuggerd\
@@ -372,6 +373,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.gfx.angle.supported=true
 PRODUCT_PACKAGES_DEBUG := \
     adb_keys \
     arping \
+    crosvm \
     gdbserver \
     idlcli \
     init-debug.rc \
