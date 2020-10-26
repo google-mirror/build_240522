@@ -45,7 +45,8 @@ _vendor_owner_allowed_list := \
         trusted_logic \
         verizon \
         waves \
-        widevine
+        widevine \
+        owenwen
 
 
 _restrictions := $(PRODUCT_RESTRICT_VENDOR_FILES)
