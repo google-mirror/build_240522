@@ -1,0 +1,15 @@
+blueprint_go_binary {
+    name: "product_config_go",
+    srcs: ["cmd/starrun/starrun.go"],
+    deps: ["product_config_go_context"],
+}
+
+bootstrap_go_package {
+    name: "product_config_go_context",
+    srcs: ["context/context.go"],
+    pkgPath: "product_config_go/context",
+    deps: [
+        "go-starlark-starlark",
+        "go-starlark-starlarkstruct",
+    ],
+}
