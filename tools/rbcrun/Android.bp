@@ -1,0 +1,19 @@
+blueprint_go_binary {
+    name: "rbcrun",
+    srcs: ["cmd/rbcrun.go"],
+    deps: ["rbcrun-module"],
+}
+
+bootstrap_go_package {
+    name: "rbcrun-module",
+    srcs: [
+        "host.go",
+        "propset.go",
+        "queue.go",
+    ],
+    pkgPath: "rbcrun",
+    deps: [
+        "go-starlark-starlark",
+        "go-starlark-starlarkstruct",
+    ],
+}
