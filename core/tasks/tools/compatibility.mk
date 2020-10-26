@@ -79,8 +79,10 @@ $(eval $(call combine-notice-files, html, \
          $(HOST_OUT_NOTICE_FILES) $(TARGET_OUT_NOTICE_FILES), \
          $(compatibility_zip_deps)))
 
-compatibility_zip_deps += $(test_suite_notice_txt)
-compatibility_zip_resources += $(test_suite_notice_txt)
+ifeq ($(include_test_suite_notice),true)
+  compatibility_zip_deps += $(test_suite_notice_txt)
+  compatibility_zip_resources += $(test_suite_notice_txt)
+endif
 
 compatibility_zip := $(out_dir).zip
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
@@ -103,6 +105,7 @@ $(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
 	rm -f $@.tmp
 
 # Reset all input variables
+include_test_suite_notice :=
 test_suite_name :=
 test_suite_tradefed :=
 test_suite_dynamic_config :=
