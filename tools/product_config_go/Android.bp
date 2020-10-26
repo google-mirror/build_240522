@@ -1,0 +1,18 @@
+blueprint_go_binary {
+    name: "rbcrun",
+    srcs: ["cmd/rbcrun.go"],
+    deps: ["product_config_go_rbcrun"],
+}
+
+bootstrap_go_package {
+    name: "product_config_go_rbcrun",
+    srcs: [
+        "rbcrun/host.go",
+        "rbcrun/propset.go",
+    ],
+    pkgPath: "product_config_go/rbcrun",
+    deps: [
+        "go-starlark-starlark",
+        "go-starlark-starlarkstruct",
+    ],
+}
