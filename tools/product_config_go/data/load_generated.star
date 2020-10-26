@@ -1,0 +1,1 @@
+loadGenerated("/bin/cat", ['example1.star'])
