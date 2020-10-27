@@ -65,6 +65,7 @@ PRODUCT_PACKAGES += \
     com.android.neuralnetworks \
     com.android.sdkext \
     com.android.tethering \
+    com.android.tethering.connectivity \
     com.android.tzdata \
     com.android.wifi \
     ContactsProvider \
