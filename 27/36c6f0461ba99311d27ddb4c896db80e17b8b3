@@ -1,0 +1,11 @@
+Autosubmit+1: Joanne Chung <joannechung@google.com>
+Build-Cop-Override+1: Joanne Chung <joannechung@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+1: Joanne Chung <joannechung@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Presubmit-Ready+1: Joanne Chung <joannechung@google.com>
+Submitted-by: Joanne Chung <joannechung@google.com>
+Submitted-at: Tue, 27 Oct 2020 04:32:41 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1475757
+Project: platform/build
+Branch: refs/heads/master
