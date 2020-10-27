@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb04c65c_f177ead3",
+        "filename": "tools/product_config_go/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2020-10-27T08:35:00Z",
+      "side": 1,
+      "message": "What will this be used for? \n\nThis is relevant because one can\u0027t implement this in the general case within Bazel; we can do some trickery with external repositories, if need be, but I\u0027d like to know the use case before committing to that approach.",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "32f491c056921c14a31d2aaa3169fe93b9584df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
