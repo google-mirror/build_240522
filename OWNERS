@@ -1,11 +1,21 @@
 ccross@android.com
 dwillemsen@google.com
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 nanzhang@google.com
+=======
+asmundak@google.com
+jungjw@google.com
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 per-file * = ccross@android.com
 per-file * = dwillemsen@google.com
 per-file * = nanzhang@google.com
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # for version updates
 per-file version_defaults.mk = aseaton@google.com
 per-file version_defaults.mk = elisapascual@google.com
+=======
+# For version updates
+per-file version_defaults.mk = aseaton@google.com,elisapascual@google.com,lubomir@google.com,pscovanner@google.com
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

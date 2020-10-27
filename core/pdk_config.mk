@@ -22,10 +22,14 @@ PDK_PLATFORM_JAVA_ZIP_JAVA_TARGET_LIB_DIR += \
   target/common/obj/JAVA_LIBRARIES/conscrypt_intermediates \
   target/common/obj/JAVA_LIBRARIES/core-oj_intermediates \
   target/common/obj/JAVA_LIBRARIES/core-libart_intermediates \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   target/common/obj/JAVA_LIBRARIES/legacy-test_intermediates \
   target/common/obj/JAVA_LIBRARIES/legacy-android-test_intermediates \
+=======
+  target/common/obj/JAVA_LIBRARIES/core-icu4j_intermediates \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   target/common/obj/JAVA_LIBRARIES/ext_intermediates \
-  target/common/obj/JAVA_LIBRARIES/framework_intermediates \
+  target/common/obj/JAVA_LIBRARIES/framework-minus-apex_intermediates \
   target/common/obj/JAVA_LIBRARIES/hwbinder_intermediates \
   target/common/obj/JAVA_LIBRARIES/ims-common_intermediates \
   target/common/obj/JAVA_LIBRARIES/okhttp_intermediates \

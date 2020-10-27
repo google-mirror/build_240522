@@ -259,13 +259,12 @@ class AIDHeaderParser(object):
         re.compile(r'%sAPP' % AID.PREFIX), re.compile(r'%sUSER' % AID.PREFIX)
     ]
     _AID_DEFINE = re.compile(r'\s*#define\s+%s.*' % AID.PREFIX)
-    _OEM_START_KW = 'START'
-    _OEM_END_KW = 'END'
-    _OEM_RANGE = re.compile('%sOEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
-                            (AID.PREFIX, _OEM_START_KW, _OEM_END_KW))
+    _RESERVED_RANGE = re.compile(
+        r'#define AID_(.+)_RESERVED_\d*_*(START|END)\s+(\d+)')
+
     # AID lines cannot end with _START or _END, ie AID_FOO is OK
     # but AID_FOO_START is skiped. Note that AID_FOOSTART is NOT skipped.
-    _AID_SKIP_RANGE = ['_' + _OEM_START_KW, '_' + _OEM_END_KW]
+    _AID_SKIP_RANGE = ['_START', '_END']
     _COLLISION_OK = ['AID_APP', 'AID_APP_START', 'AID_USER', 'AID_USER_OFFSET']
 
     def __init__(self, aid_header):
@@ -277,7 +276,7 @@ class AIDHeaderParser(object):
         self._aid_header = aid_header
         self._aid_name_to_value = {}
         self._aid_value_to_name = {}
-        self._oem_ranges = {}
+        self._ranges = {}
 
         with open(aid_header) as open_file:
             self._parse(open_file)
@@ -302,6 +301,23 @@ class AIDHeaderParser(object):
                 return 'Error "{}" in file: "{}" on line: {}'.format(
                     msg, self._aid_header, str(lineno))
 
+            range_match = self._RESERVED_RANGE.match(line)
+            if range_match:
+                partition = range_match.group(1).lower()
+                value = int(range_match.group(3), 0)
+
+                if partition == 'oem':
+                    partition = 'vendor'
+
+                if partition in self._ranges:
+                    if isinstance(self._ranges[partition][-1], int):
+                        self._ranges[partition][-1] = (
+                            self._ranges[partition][-1], value)
+                    else:
+                        self._ranges[partition].append(value)
+                else:
+                    self._ranges[partition] = [value]
+
             if AIDHeaderParser._AID_DEFINE.match(line):
                 chunks = line.split()
                 identifier = chunks[1]
@@ -311,9 +327,7 @@ class AIDHeaderParser(object):
                     continue
 
                 try:
-                    if AIDHeaderParser._is_oem_range(identifier):
-                        self._handle_oem_range(identifier, value)
-                    elif not any(
+                    if not any(
                             identifier.endswith(x)
                             for x in AIDHeaderParser._AID_SKIP_RANGE):
                         self._handle_aid(identifier, value)
@@ -349,6 +363,7 @@ class AIDHeaderParser(object):
         self._aid_name_to_value[aid.friendly] = aid
         self._aid_value_to_name[value] = aid.friendly
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     def _handle_oem_range(self, identifier, value):
         """Handle an OEM range C #define.
 
@@ -410,6 +425,8 @@ class AIDHeaderParser(object):
         else:
             self._oem_ranges[strip].append(int_value)
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     def _process_and_check(self):
         """Process, check and populate internal data structures.
 
@@ -420,36 +437,32 @@ class AIDHeaderParser(object):
             ValueError: With the message set to indicate the specific error.
         """
 
-        # tuplefy the lists since range() does not like them mutable.
-        self._oem_ranges = [
-            AIDHeaderParser._convert_lst_to_tup(k, v)
-            for k, v in self._oem_ranges.iteritems()
-        ]
-
         # Check for overlapping ranges
-        for i, range1 in enumerate(self._oem_ranges):
-            for range2 in self._oem_ranges[i + 1:]:
-                if AIDHeaderParser._is_overlap(range1, range2):
-                    raise ValueError("Overlapping OEM Ranges found %s and %s" %
-                                     (str(range1), str(range2)))
+        for ranges in self._ranges.values():
+            for i, range1 in enumerate(ranges):
+                for range2 in ranges[i + 1:]:
+                    if AIDHeaderParser._is_overlap(range1, range2):
+                        raise ValueError(
+                            "Overlapping OEM Ranges found %s and %s" %
+                            (str(range1), str(range2)))
 
         # No core AIDs should be within any oem range.
         for aid in self._aid_value_to_name:
-
-            if Utils.in_any_range(aid, self._oem_ranges):
-                name = self._aid_value_to_name[aid]
-                raise ValueError(
-                    'AID "%s" value: %u within reserved OEM Range: "%s"' %
-                    (name, aid, str(self._oem_ranges)))
+            for ranges in self._ranges.values():
+                if Utils.in_any_range(aid, ranges):
+                    name = self._aid_value_to_name[aid]
+                    raise ValueError(
+                        'AID "%s" value: %u within reserved OEM Range: "%s"' %
+                        (name, aid, str(ranges)))
 
     @property
-    def oem_ranges(self):
+    def ranges(self):
         """Retrieves the OEM closed ranges as a list of tuples.
 
         Returns:
             A list of closed range tuples: [ (0, 42), (50, 105) ... ]
         """
-        return self._oem_ranges
+        return self._ranges
 
     @property
     def aids(self):
@@ -459,39 +472,6 @@ class AIDHeaderParser(object):
             A list of AID() objects.
         """
         return self._aid_name_to_value.values()
-
-    @staticmethod
-    def _convert_lst_to_tup(name, lst):
-        """Converts a mutable list to a non-mutable tuple.
-
-        Used ONLY for ranges and thus enforces a length of 2.
-
-        Args:
-            lst (List): list that should be "tuplefied".
-
-        Raises:
-            ValueError if lst is not a list or len is not 2.
-
-        Returns:
-            Tuple(lst)
-        """
-        if not lst or len(lst) != 2:
-            raise ValueError('Mismatched range for "%s"' % name)
-
-        return tuple(lst)
-
-    @staticmethod
-    def _is_oem_range(aid):
-        """Detects if a given aid is within the reserved OEM range.
-
-        Args:
-            aid (int): The aid to test
-
-        Returns:
-            True if it is within the range, False otherwise.
-        """
-
-        return AIDHeaderParser._OEM_RANGE.match(aid)
 
     @staticmethod
     def _is_overlap(range_a, range_b):
@@ -533,12 +513,12 @@ class FSConfigFileParser(object):
     _SECTIONS = [('_handle_aid', ('value',)),
                  ('_handle_path', ('mode', 'user', 'group', 'caps'))]
 
-    def __init__(self, config_files, oem_ranges):
+    def __init__(self, config_files, ranges):
         """
         Args:
             config_files ([str]): The list of config.fs files to parse.
                 Note the filename is not important.
-            oem_ranges ([(),()]): range tuples indicating reserved OEM ranges.
+            ranges ({str,[()]): Dictionary of partitions and a list of tuples that correspond to their ranges
         """
 
         self._files = []
@@ -549,7 +529,7 @@ class FSConfigFileParser(object):
         # (name to file, value to aid)
         self._seen_aids = ({}, {})
 
-        self._oem_ranges = oem_ranges
+        self._ranges = ranges
 
         self._config_files = config_files
 
@@ -614,6 +594,27 @@ class FSConfigFileParser(object):
             # within the generated file.
             self._aids.sort(key=lambda item: item.normalized_value)
 
+    def _verify_valid_range(self, aid):
+        """Verified an AID entry is in a valid range"""
+
+        ranges = None
+
+        partitions = self._ranges.keys()
+        partitions.sort(key=len, reverse=True)
+        for partition in partitions:
+            if aid.friendly.startswith(partition):
+                ranges = self._ranges[partition]
+                break
+
+        if ranges is None:
+            sys.exit('AID "%s" must be prefixed with a partition name' %
+                     aid.friendly)
+
+        if not Utils.in_any_range(int(aid.value, 0), ranges):
+            emsg = '"value" for aid "%s" not in valid range %s, got: %s'
+            emsg = emsg % (aid.friendly, str(ranges), aid.value)
+            sys.exit(emsg)
+
     def _handle_aid(self, file_name, section_name, config):
         """Verifies an AID entry and adds it to the aid list.
 
@@ -647,15 +648,15 @@ class FSConfigFileParser(object):
             sys.exit(error_message('Found specified but unset "value"'))
 
         try:
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
             aid = AID(section_name, value, file_name)
+=======
+            aid = AID(section_name, value, file_name, '/bin/sh')
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         except ValueError as exception:
             sys.exit(error_message(exception))
 
-        # Values must be within OEM range
-        if not Utils.in_any_range(int(aid.value, 0), self._oem_ranges):
-            emsg = '"value" not in valid range %s, got: %s'
-            emsg = emsg % (str(self._oem_ranges), value)
-            sys.exit(error_message(emsg))
+        self._verify_valid_range(aid)
 
         # use the normalized int value in the dict and detect
         # duplicate definitions of the same value
@@ -956,7 +957,26 @@ class FSConfigGen(BaseGenerator):
 
         self._base_parser = AIDHeaderParser(args['aid_header'])
         self._oem_parser = FSConfigFileParser(args['fsconfig'],
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
                                               self._base_parser.oem_ranges)
+=======
+                                              self._base_parser.ranges)
+
+        self._partition = args['partition']
+        self._all_partitions = args['all_partitions']
+
+        self._out_file = args['out_file']
+
+        self._generate_files = args['files']
+        self._generate_dirs = args['dirs']
+
+        if self._generate_files and self._generate_dirs:
+            sys.exit('Only one of --files or --dirs can be provided')
+
+        if not self._generate_files and not self._generate_dirs:
+            sys.exit('One of --files or --dirs must be provided')
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         base_aids = self._base_parser.aids
         oem_aids = self._oem_parser.aids
 
@@ -1025,14 +1045,68 @@ class FSConfigGen(BaseGenerator):
 
         expanded = fmt % (mode, user, group, caps, path)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
         print FSConfigGen._FILE_COMMENT % fname
         print '    ' + expanded
+=======
+        try:
+            # test if caps is an int
+            caps_value = int(caps, 0)
+        except ValueError:
+            caps_split = caps.split(',')
+            for cap in caps_split:
+                if cap not in caps_dict:
+                    sys.exit('Unknown cap "%s" found!' % cap)
+                caps_value += 1 << caps_dict[cap]
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     @staticmethod
     def _gen_inc():
         """Generate the include header lines and print to stdout."""
         for include in FSConfigGen._INCLUDES:
             print '#include %s' % include
+=======
+        path_length_with_null = len(path) + 1
+        path_length_aligned_64 = (path_length_with_null + 7) & ~7
+        # 16 bytes of header plus the path length with alignment
+        length = 16 + path_length_aligned_64
+
+        length_binary = bytearray(ctypes.c_uint16(length))
+        mode_binary = bytearray(ctypes.c_uint16(mode))
+        user_binary = bytearray(ctypes.c_uint16(int(user, 0)))
+        group_binary = bytearray(ctypes.c_uint16(int(group, 0)))
+        caps_binary = bytearray(ctypes.c_uint64(caps_value))
+        path_binary = ctypes.create_string_buffer(path,
+                                                  path_length_aligned_64).raw
+
+        out_file.write(length_binary)
+        out_file.write(mode_binary)
+        out_file.write(user_binary)
+        out_file.write(group_binary)
+        out_file.write(caps_binary)
+        out_file.write(path_binary)
+
+    def _emit_entry(self, fs_config):
+        """Returns a boolean whether or not to emit the input fs_config"""
+
+        path = fs_config.path
+
+        if self._partition == 'system':
+            if not self._all_partitions:
+                return True
+            for skip_partition in self._all_partitions.split(','):
+                if path.startswith(skip_partition) or path.startswith(
+                        'system/' + skip_partition):
+                    return False
+            return True
+        else:
+            if path.startswith(
+                    self._partition) or path.startswith('system/' +
+                                                        self._partition):
+                return True
+            return False
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
     def _generate(self):
         """Generates an OEM android_filesystem_config.h header file to stdout.
@@ -1184,7 +1258,7 @@ class OEMAidGen(BaseGenerator):
 
         hdr_parser = AIDHeaderParser(args['aid_header'])
 
-        parser = FSConfigFileParser(args['fsconfig'], hdr_parser.oem_ranges)
+        parser = FSConfigFileParser(args['fsconfig'], hdr_parser.ranges)
 
         print OEMAidGen._GENERATED
 
@@ -1232,17 +1306,19 @@ class PasswdGen(BaseGenerator):
             'to parse AIDs and OEM Ranges from')
 
         opt_group.add_argument(
-            '--required-prefix',
-            required=False,
-            help='A prefix that the names are required to contain.')
+            '--partition',
+            required=True,
+            help=
+            'Filter the input file and only output entries for the given partition.'
+        )
 
     def __call__(self, args):
 
         hdr_parser = AIDHeaderParser(args['aid_header'])
 
-        parser = FSConfigFileParser(args['fsconfig'], hdr_parser.oem_ranges)
+        parser = FSConfigFileParser(args['fsconfig'], hdr_parser.ranges)
 
-        required_prefix = args['required_prefix']
+        filter_partition = args['partition']
 
         aids = parser.aids
 
@@ -1250,12 +1326,26 @@ class PasswdGen(BaseGenerator):
         if len(aids) == 0:
             return
 
+        aids_by_partition = {}
+        partitions = hdr_parser.ranges.keys()
+        partitions.sort(key=len, reverse=True)
+
         for aid in aids:
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
             if required_prefix is None or aid.friendly.startswith(required_prefix):
+=======
+            for partition in partitions:
+                if aid.friendly.startswith(partition):
+                    if partition in aids_by_partition:
+                        aids_by_partition[partition].append(aid)
+                    else:
+                        aids_by_partition[partition] = [aid]
+                    break
+
+        if filter_partition in aids_by_partition:
+            for aid in aids_by_partition[filter_partition]:
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
                 self._print_formatted_line(aid)
-            else:
-                sys.exit("%s: AID '%s' must start with '%s'" %
-                         (args['fsconfig'], aid.friendly, required_prefix))
 
     def _print_formatted_line(self, aid):
         """Prints the aid to stdout in the passwd format. Internal use only.

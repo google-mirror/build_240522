@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+QEMU_USE_SYSTEM_EXT_PARTITIONS := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/vendor/lib/libreference-ril.so

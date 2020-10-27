@@ -19,8 +19,13 @@ from __future__ import print_function
 import unittest
 
 import common
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 from blockimgdiff import (BlockImageDiff, EmptyImage, HeapItem, ImgdiffStats,
                           Transfer)
+=======
+from blockimgdiff import BlockImageDiff, HeapItem, ImgdiffStats, Transfer
+from images import DataImage, EmptyImage, FileImage
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 from rangelib import RangeSet
 
 
@@ -272,3 +277,50 @@ class ImgdiffStatsTest(unittest.TestCase):
 
     self.assertRaises(AssertionError, imgdiff_stats.Log, "/system/app/app1.apk",
                       "invalid reason")
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+
+class DataImageTest(ReleaseToolsTestCase):
+
+  def test_read_range_set(self):
+    data = "file" + ('\0' * 4092)
+    image = DataImage(data)
+    self.assertEqual(data, "".join(image.ReadRangeSet(image.care_map)))
+
+
+class FileImageTest(ReleaseToolsTestCase):
+
+  def setUp(self):
+    self.file_path = common.MakeTempFile()
+    self.data = os.urandom(4096 * 4)
+    with open(self.file_path, 'wb') as f:
+      f.write(self.data)
+    self.file = FileImage(self.file_path)
+
+  def test_totalsha1(self):
+    self.assertEqual(sha1(self.data).hexdigest(), self.file.TotalSha1())
+
+  def test_ranges(self):
+    blocksize = self.file.blocksize
+    for s in range(4):
+      for e in range(s, 4):
+        expected_data = self.data[s * blocksize : e * blocksize]
+
+        rs = RangeSet([s, e])
+        data = b''.join(self.file.ReadRangeSet(rs))
+        self.assertEqual(expected_data, data)
+
+        sha1sum = self.file.RangeSha1(rs)
+        self.assertEqual(sha1(expected_data).hexdigest(), sha1sum)
+
+        tmpfile = common.MakeTempFile()
+        with open(tmpfile, 'wb') as f:
+          self.file.WriteRangeDataToFd(rs, f)
+        with open(tmpfile, 'rb') as f:
+          self.assertEqual(expected_data, f.read())
+
+  def test_read_all(self):
+    data = b''.join(self.file.ReadRangeSet(self.file.care_map))
+    self.assertEqual(self.data, data)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

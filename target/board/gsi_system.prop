@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # GSI always generate dex pre-opt in system image
 ro.cp_system_other_odex=0
 
@@ -6,3 +7,5 @@ ro.adb.secure=0
 
 # TODO(b/78105955): disable privapp_permissions checking before the bug solved
 ro.control_privapp_permissions=disable
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

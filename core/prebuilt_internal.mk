@@ -21,22 +21,23 @@ my_32_64_bit_suffix := $(if $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)IS_64_BIT)
 ifdef LOCAL_PREBUILT_MODULE_FILE
   my_prebuilt_src_file := $(LOCAL_PREBUILT_MODULE_FILE)
 else ifdef LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
-  my_prebuilt_src_file := $(LOCAL_PATH)/$(LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))
+  my_prebuilt_src_file := $(call clean-path,$(LOCAL_PATH)/$(LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)))
   LOCAL_SRC_FILES_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH) :=
 else ifdef LOCAL_SRC_FILES_$(my_32_64_bit_suffix)
-  my_prebuilt_src_file := $(LOCAL_PATH)/$(LOCAL_SRC_FILES_$(my_32_64_bit_suffix))
+  my_prebuilt_src_file := $(call clean-path,$(LOCAL_PATH)/$(LOCAL_SRC_FILES_$(my_32_64_bit_suffix)))
   LOCAL_SRC_FILES_$(my_32_64_bit_suffix) :=
 else ifdef LOCAL_SRC_FILES
-  my_prebuilt_src_file := $(LOCAL_PATH)/$(LOCAL_SRC_FILES)
+  my_prebuilt_src_file := $(call clean-path,$(LOCAL_PATH)/$(LOCAL_SRC_FILES))
   LOCAL_SRC_FILES :=
 else ifdef LOCAL_REPLACE_PREBUILT_APK_INSTALLED
-  # This is handled specially below
+  # This is handled specially in app_prebuilt_internal.mk
 else
   $(call pretty-error,No source files specified)
 endif
 
 LOCAL_CHECKED_MODULE := $(my_prebuilt_src_file)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 my_strip_module := $(firstword \
   $(LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
   $(LOCAL_STRIP_MODULE))
@@ -105,6 +106,9 @@ else
   prebuilt_module_is_dex_javalib :=
 endif
 
+=======
+ifneq (APPS,$(LOCAL_MODULE_CLASS))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifdef LOCAL_COMPRESSED_MODULE
 ifneq (true,$(LOCAL_COMPRESSED_MODULE))
 $(call pretty-error, Unknown value for LOCAL_COMPRESSED_MODULE $(LOCAL_COMPRESSED_MODULE))
@@ -117,7 +121,9 @@ LOCAL_BUILT_MODULE_STEM := package.apk.gz
 else
 LOCAL_BUILT_MODULE_STEM := package.apk
 endif  # LOCAL_COMPRESSED_MODULE
+endif  # APPS
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifndef LOCAL_INSTALLED_MODULE_STEM
 ifdef LOCAL_COMPRESSED_MODULE
 PACKAGES.$(LOCAL_MODULE).COMPRESSED := gz
@@ -168,9 +174,20 @@ $(export_includes): $(LOCAL_EXPORT_C_INCLUDE_DEPS)
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 ifdef export_cflags
 	$(hide) echo "$(PRIVATE_EXPORT_CFLAGS)" >$@
+=======
+ifeq (APPS,$(LOCAL_MODULE_CLASS))
+  include $(BUILD_SYSTEM)/app_prebuilt_internal.mk
+else ifeq (JAVA_LIBRARIES,$(LOCAL_MODULE_CLASS))
+  include $(BUILD_SYSTEM)/java_prebuilt_internal.mk
+else ifneq ($(filter STATIC_LIBRARIES SHARED_LIBRARIES EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
+  include $(BUILD_SYSTEM)/cc_prebuilt_internal.mk
+else ifneq ($(filter SCRIPT ETC DATA RENDERSCRIPT_BITCODE,$(LOCAL_MODULE_CLASS)),)
+  include $(BUILD_SYSTEM)/misc_prebuilt_internal.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 else
-	$(hide) touch $@
+  $(error $(LOCAL_MODULE) : unexpected LOCAL_MODULE_CLASS for prebuilts: $(LOCAL_MODULE_CLASS))
 endif
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 export_cflags :=
 
 include $(BUILD_SYSTEM)/allowed_ndk_types.mk
@@ -675,6 +692,8 @@ endif # ! prebuilt_module_is_dex_javalib
 endif # LOCAL_IS_HOST_MODULE is not set
 
 endif # JAVA_LIBRARIES
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 $(built_module) : $(LOCAL_ADDITIONAL_DEPENDENCIES)
 

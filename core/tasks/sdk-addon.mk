@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+.PHONY: sdk_addon
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # If they didn't define PRODUCT_SDK_ADDON_NAME, then we won't define
 # any of these rules.
@@ -65,7 +69,7 @@ endif
 files_to_copy += \
 	$(addon_dir_img):$(INSTALLED_QEMU_SYSTEMIMAGE):images/$(TARGET_CPU_ABI)/system.img \
 	$(addon_dir_img):$(INSTALLED_QEMU_VENDORIMAGE):images/$(TARGET_CPU_ABI)/vendor.img \
-	$(addon_dir_img):$(BUILT_RAMDISK_TARGET):images/$(TARGET_CPU_ABI)/ramdisk.img \
+	$(addon_dir_img):$(INSTALLED_QEMU_RAMDISKIMAGE):images/$(TARGET_CPU_ABI)/ramdisk.img \
 	$(addon_dir_img):$(PRODUCT_OUT)/system/build.prop:images/$(TARGET_CPU_ABI)/build.prop \
 	$(addon_dir_img):$(target_notice_file_txt):images/$(TARGET_CPU_ABI)/NOTICE.txt \
 	$(addon_dir_img):$(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP):images/source.properties
@@ -104,20 +108,20 @@ $(full_target): PRIVATE_DOCS_DIRS := $(addprefix $(OUT_DOCS)/, $(doc_modules))
 
 $(full_target): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir_leaf))
 
-$(full_target): $(sdk_addon_deps) | $(ACP) $(SOONG_ZIP)
+$(full_target): $(sdk_addon_deps) | $(SOONG_ZIP)
 	@echo Packaging SDK Addon: $@
 	$(hide) mkdir -p $(PRIVATE_STAGING_DIR)/docs
 	$(hide) for d in $(PRIVATE_DOCS_DIRS); do \
-	    $(ACP) -r $$d $(PRIVATE_STAGING_DIR)/docs ;\
+	    cp -R $$d $(PRIVATE_STAGING_DIR)/docs ;\
 	  done
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
 
 $(full_target_img): PRIVATE_STAGING_DIR := $(call append-path,$(staging),$(addon_dir_img))/images/$(TARGET_CPU_ABI)
-$(full_target_img): $(full_target) $(addon_img_source_prop) | $(ACP) $(SOONG_ZIP)
+$(full_target_img): $(full_target) $(addon_img_source_prop) | $(SOONG_ZIP)
 	@echo Packaging SDK Addon System-Image: $@
 	$(hide) mkdir -p $(dir $@)
-	$(ACP) -r $(PRODUCT_OUT)/data $(PRIVATE_STAGING_DIR)/data
+	cp -R $(PRODUCT_OUT)/data $(PRIVATE_STAGING_DIR)/data
 	$(hide) $(SOONG_ZIP) -o $@ -C $(dir $(PRIVATE_STAGING_DIR)) -D $(PRIVATE_STAGING_DIR)
 
 

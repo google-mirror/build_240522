@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
 
@@ -32,6 +33,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml \
+=======
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish # for libwifi-hal-emu
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish-opengl # for goldfish deps.
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in

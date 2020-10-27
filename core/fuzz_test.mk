@@ -15,8 +15,7 @@ else ifdef TARGET_FUZZ_ENGINE
     my_fuzzer:=$(TARGET_FUZZ_ENGINE)
 endif
 
-
-LOCAL_CFLAGS += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
+LOCAL_SANITIZE += fuzzer
 
 ifeq ($(my_fuzzer),libFuzzer)
 LOCAL_STATIC_LIBRARIES += libFuzzer
@@ -68,12 +67,15 @@ endif
 LOCAL_MODULE_PATH_64 := $(TARGET_OUT_DATA_NATIVE_TESTS)/fuzzers/$(LOCAL_MODULE)
 LOCAL_MODULE_PATH_32 := $($(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_DATA_NATIVE_TESTS)/fuzzers/$(LOCAL_MODULE)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifndef LOCAL_MULTILIB
 ifndef LOCAL_32_BIT_ONLY
 LOCAL_MULTILIB := both
 endif
 endif
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifndef LOCAL_STRIP_MODULE
 LOCAL_STRIP_MODULE := keep_symbols
 endif

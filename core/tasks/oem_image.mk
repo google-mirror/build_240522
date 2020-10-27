@@ -33,11 +33,19 @@ $(INSTALLED_OEMIMAGE_TARGET) : $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_OEMIMAGE_F
 	$(call pretty,"Target oem fs image: $@")
 	@mkdir -p $(TARGET_OUT_OEM)
 	@mkdir -p $(oemimage_intermediates) && rm -rf $(oemimage_intermediates)/oem_image_info.txt
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$(call generate-userimage-prop-dictionary, $(oemimage_intermediates)/oem_image_info.txt, skip_fsck=true)
 	$(hide) PATH=$(foreach p,$(INTERNAL_USERIMAGES_BINARY_PATHS),$(p):)$$PATH \
 	  build/make/tools/releasetools/build_image.py \
 	  $(TARGET_OUT_OEM) $(oemimage_intermediates)/oem_image_info.txt $@ $(TARGET_OUT)
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_OEMIMAGE_PARTITION_SIZE))
+=======
+	$(call generate-image-prop-dictionary, $(oemimage_intermediates)/oem_image_info.txt,oem,skip_fsck=true)
+	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+	    $(BUILD_IMAGE) \
+	        $(TARGET_OUT_OEM) $(oemimage_intermediates)/oem_image_info.txt $@ $(TARGET_OUT)
+	$(call assert-max-image-size,$@,$(BOARD_OEMIMAGE_PARTITION_SIZE))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 .PHONY: oem_image
 oem_image : $(INSTALLED_OEMIMAGE_TARGET)

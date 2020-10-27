@@ -7,7 +7,11 @@ endif
 KATI_OUTPUT_PATTERNS := $(OUT_DIR)/build%.ninja $(OUT_DIR)/ninja%.sh
 
 # Modifier goals we don't need to pass to Ninja.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 NINJA_EXCLUDE_GOALS := all dist APP-% PRODUCT-%
+=======
+NINJA_EXCLUDE_GOALS := all
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # A list of goals which affect parsing of makefiles and we need to pass to Kati.
 PARSE_TIME_MAKE_GOALS := \
@@ -16,7 +20,6 @@ PARSE_TIME_MAKE_GOALS := \
 	all \
 	ECLIPSE-% \
 	AUX-% \
-	boottarball-nodeps \
 	brillo_tests \
 	btnod \
 	build-art% \
@@ -45,21 +48,24 @@ PARSE_TIME_MAKE_GOALS := \
 	snod \
 	stnod \
 	systemimage-nodeps \
-	systemtarball-nodeps \
 	target-files-package \
 	test-art% \
 	user \
 	userdataimage \
 	userdebug \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	valgrind-test-art% \
 	vts \
+=======
+	vts10 \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	win_sdk \
 	winsdk-tools
 
 include $(wildcard vendor/*/build/ninja_config.mk)
 
 # Any Android goals that need to be built.
-ANDROID_GOALS := $(filter-out $(KATI_OUTPUT_PATTERNS) $(CKATI) $(MAKEPARALLEL),\
+ANDROID_GOALS := $(filter-out $(KATI_OUTPUT_PATTERNS),\
     $(sort $(ORIGINAL_MAKECMDGOALS) $(MAKECMDGOALS)))
 # Goals we need to pass to Ninja.
 NINJA_GOALS := $(filter-out $(NINJA_EXCLUDE_GOALS), $(ANDROID_GOALS))

@@ -26,7 +26,11 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifneq ($(TARGET_BUILD_APPS)$(filter cts sdk,$(MAKECMDGOALS)),)
+=======
+ifneq ($(TARGET_BUILD_APPS)$(filter cts sdk vts10,$(MAKECMDGOALS)),)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # DO NOT USE
 # DO NOT USE
 #
@@ -55,7 +59,12 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_VARIANT := generic
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+include build/make/target/board/BoardConfigGsiCommon.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 TARGET_USES_64_BIT_BINDER := true
 
 # no hardware camera
@@ -75,6 +84,16 @@ USE_OPENGL_RENDERER := true
 TARGET_USERIMAGES_USE_EXT4 := true
 # Partition size is default 1.5GB (1536MB) for 64 bits projects
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
+=======
+TARGET_NO_KERNEL := false
+TARGET_NO_VENDOR_BOOT := true
+BOARD_USES_RECOVERY_AS_BOOT := true
+
+BOARD_KERNEL-4.19-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.4_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.4-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.4-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 TARGET_COPY_OUT_VENDOR := vendor
 # ~100 MB vendor image. Please adjust system image / vendor image sizes
@@ -113,8 +132,14 @@ TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
 endif
 BOARD_VNDK_VERSION := current
 
-# Emulator system image is going to be used as GSI and some vendor still hasn't
-# cleaned up all device specific directories under root!
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_BOOT_HEADER_VERSION := 3
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+
+BOARD_KERNEL_BINARIES := kernel-4.19-gz kernel-5.4 kernel-5.4-gz kernel-5.4-lz4
+
+# Some vendors still haven't cleaned up all device specific directories under
+# root!
 
 # TODO(jiyong) These might be SoC specific.
 BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
@@ -122,6 +147,7 @@ BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 BOARD_SEPOLICY_DIRS += build/target/board/generic_arm64_ab/sepolicy
 
 # Wifi.
@@ -138,3 +164,6 @@ WIFI_DRIVER_FW_PATH_AP      := "/dev/null"
 # Enable A/B update
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+=======
+BOARD_SEPOLICY_DIRS += build/make/target/board/generic_arm64/sepolicy
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

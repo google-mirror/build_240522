@@ -48,6 +48,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/core.mk \
     $(LOCAL_DIR)/generic.mk \
     $(LOCAL_DIR)/generic_x86.mk \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     $(LOCAL_DIR)/generic_mips.mk \
     $(LOCAL_DIR)/aosp_arm.mk \
     $(LOCAL_DIR)/aosp_arm_a.mk \
@@ -67,6 +68,17 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk \
     $(LOCAL_DIR)/aosp_x86_64_a.mk \
     $(LOCAL_DIR)/aosp_x86_64_ab.mk \
+=======
+    $(LOCAL_DIR)/gsi_arm64.mk \
+    $(LOCAL_DIR)/mainline_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_x86.mk \
+    $(LOCAL_DIR)/mainline_system_x86_arm.mk \
+    $(LOCAL_DIR)/mainline_system_x86_64.mk \
+    $(LOCAL_DIR)/sdk_arm64.mk \
+    $(LOCAL_DIR)/sdk.mk \
+    $(LOCAL_DIR)/sdk_phone_arm64.mk \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     $(LOCAL_DIR)/sdk_phone_armv7.mk \
     $(LOCAL_DIR)/sdk_phone_x86.mk \
     $(LOCAL_DIR)/sdk_phone_mips.mk \

@@ -44,6 +44,7 @@ ifeq (true,$(EMMA_INSTRUMENT_STATIC))
 LOCAL_STATIC_JAVA_LIBRARIES += jacocoagent
 # Exclude jacoco classes from proguard
 LOCAL_PROGUARD_FLAGS += -include $(BUILD_SYSTEM)/proguard.jacoco.flags
+LOCAL_PROGUARD_FLAGS_DEPS += $(BUILD_SYSTEM)/proguard.jacoco.flags
 endif # LOCAL_EMMA_INSTRUMENT
 endif # EMMA_INSTRUMENT_STATIC
 else
@@ -65,8 +66,13 @@ else # !LOCAL_IS_STATIC_JAVA_LIBRARY
 
 $(common_javalib.jar): PRIVATE_DEX_FILE := $(built_dex)
 $(common_javalib.jar): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(common_javalib.jar): PRIVATE_DONT_DELETE_JAR_DIRS := $(LOCAL_DONT_DELETE_JAR_DIRS)
 $(common_javalib.jar) : $(built_dex) $(java_resource_sources) | $(ZIPTIME) $(ZIPALIGN)
+=======
+$(common_javalib.jar): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
+$(common_javalib.jar) : $(full_classes_pre_proguard_jar) $(built_dex) $(java_resource_sources) | $(ZIPTIME) $(ZIPALIGN)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	@echo "target Jar: $(PRIVATE_MODULE) ($@)"
 	$(call initialize-package-file,$(PRIVATE_SOURCE_ARCHIVE),$@.tmp)
 	$(call add-dex-to-package-arg,$@.tmp)
@@ -79,6 +85,7 @@ endif  # LOCAL_UNCOMPRESS_DEX
 
 .KATI_RESTAT: $(common_javalib.jar)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(dexpreopt_boot_jar_module),) # boot jar
 # boot jar's rules are defined in dex_preopt.mk
@@ -98,7 +105,8 @@ $(eval $(call dexpreopt-copy-jar,$(common_javalib.jar),$(LOCAL_BUILT_MODULE),$(L
 endif # ! boot jar
 
 else # LOCAL_DEX_PREOPT
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 $(eval $(call copy-one-file,$(common_javalib.jar),$(LOCAL_BUILT_MODULE)))
 
-endif # LOCAL_DEX_PREOPT
 endif # !LOCAL_IS_STATIC_JAVA_LIBRARY

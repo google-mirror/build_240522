@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Set up rules to build dpi-specific apk, with whatever else from the base apk.
 # Input variable: my_dpi, and all other variables set up in package_internal.mk.
 #
@@ -75,3 +76,5 @@ PACKAGES.$(dpi_apk_name).CERTIFICATE := $(certificate)
 # Phony targets used by "apps_only".
 .PHONY: $(dpi_apk_name)
 $(dpi_apk_name) : $(built_dpi_apk)
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

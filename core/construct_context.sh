@@ -32,8 +32,20 @@ set -e
 # class_loader_context_arg: final class loader conext arg
 # stored_class_loader_context_arg: final stored class loader context arg
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 my_conditional_host_libs=$1
 my_conditional_target_libs=$2
+=======
+if [ -z "${target_sdk_version}" ]; then
+    echo "ERROR: target_sdk_version not set"
+    exit 2
+fi
+
+# The hidl.manager shared library has a dependency on hidl.base. We'll manually
+# add that information to the class loader context if we see those libraries.
+hidl_manager="android.hidl.manager-V1.0-java"
+hidl_base="android.hidl.base-V1.0-java"
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Note that SDK 28 is P.
 if [[ "${target_sdk_version}" -lt "28" ]]; then

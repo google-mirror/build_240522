@@ -36,9 +36,15 @@ import org.conscrypt.OpenSSLProvider;
 
 import com.android.apksig.ApkSignerEngine;
 import com.android.apksig.DefaultApkSignerEngine;
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+import com.android.apksig.SigningCertificateLineage;
+import com.android.apksig.Hints;
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 import com.android.apksig.apk.ApkUtils;
 import com.android.apksig.apk.MinSdkVersionException;
 import com.android.apksig.util.DataSink;
+import com.android.apksig.util.DataSource;
 import com.android.apksig.util.DataSources;
 import com.android.apksig.zip.ZipFormatException;
 
@@ -55,6 +61,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Constructor;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -377,6 +384,12 @@ class SignApk {
         byte[] buffer = new byte[4096];
         int num;
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+        List<Hints.PatternWithRange> pinPatterns = extractPinPatterns(in);
+        ArrayList<Hints.ByteRange> pinByteRanges = pinPatterns == null ? null : new ArrayList<>();
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         ArrayList<String> names = new ArrayList<String>();
         for (Enumeration<JarEntry> e = in.entries(); e.hasMoreElements();) {
             JarEntry entry = e.nextElement();
@@ -388,6 +401,12 @@ class SignApk {
                     && (ignoredFilenamePattern.matcher(entryName).matches())) {
                 continue;
             }
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+            if (Hints.PIN_BYTE_RANGE_ZIP_ENTRY_NAME.equals(entryName)) {
+                continue;  // We regenerate it below.
+            }
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
             names.add(entryName);
         }
         Collections.sort(names);
@@ -466,6 +485,7 @@ class SignApk {
             DataSink entryDataSink =
                     (inspectEntryRequest != null) ? inspectEntryRequest.getDataSink() : null;
 
+            long entryDataStart = outCounter.getWrittenBytes();
             try (InputStream data = in.getInputStream(inEntry)) {
                 while ((num = data.read(buffer)) > 0) {
                     out.write(buffer, 0, num);
@@ -479,6 +499,32 @@ class SignApk {
             if (inspectEntryRequest != null) {
                 inspectEntryRequest.done();
             }
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+            if (pinPatterns != null) {
+                boolean pinFileHeader = false;
+                for (Hints.PatternWithRange pinPattern : pinPatterns) {
+                    if (!pinPattern.matcher(name).matches()) {
+                        continue;
+                    }
+                    Hints.ByteRange dataRange =
+                        new Hints.ByteRange(
+                            entryDataStart,
+                            outCounter.getWrittenBytes());
+                    Hints.ByteRange pinRange =
+                        pinPattern.ClampToAbsoluteByteRange(dataRange);
+                    if (pinRange != null) {
+                        pinFileHeader = true;
+                        pinByteRanges.add(pinRange);
+                    }
+                }
+                if (pinFileHeader) {
+                    pinByteRanges.add(new Hints.ByteRange(entryHeaderStart,
+                                                          entryDataStart));
+                }
+            }
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         }
 
         // Copy all the non-STORED entries.  We don't attempt to
@@ -500,6 +546,7 @@ class SignApk {
             DataSink entryDataSink =
                     (inspectEntryRequest != null) ? inspectEntryRequest.getDataSink() : null;
 
+            long entryDataStart = outCounter.getWrittenBytes();
             InputStream data = in.getInputStream(inEntry);
             while ((num = data.read(buffer)) > 0) {
                 out.write(buffer, 0, num);
@@ -511,7 +558,64 @@ class SignApk {
             if (inspectEntryRequest != null) {
                 inspectEntryRequest.done();
             }
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+            if (pinPatterns != null) {
+                boolean pinFileHeader = false;
+                for (Hints.PatternWithRange pinPattern : pinPatterns) {
+                    if (!pinPattern.matcher(name).matches()) {
+                        continue;
+                    }
+                    Hints.ByteRange dataRange =
+                        new Hints.ByteRange(
+                            entryDataStart,
+                            outCounter.getWrittenBytes());
+                    Hints.ByteRange pinRange =
+                        pinPattern.ClampToAbsoluteByteRange(dataRange);
+                    if (pinRange != null) {
+                        pinFileHeader = true;
+                        pinByteRanges.add(pinRange);
+                    }
+                }
+                if (pinFileHeader) {
+                    pinByteRanges.add(new Hints.ByteRange(entryHeaderStart,
+                                                          entryDataStart));
+                }
+            }
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         }
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+        if (pinByteRanges != null) {
+            // Cover central directory
+            pinByteRanges.add(
+                new Hints.ByteRange(outCounter.getWrittenBytes(),
+                                    Long.MAX_VALUE));
+            addPinByteRanges(out, pinByteRanges, timestamp);
+        }
+    }
+
+    private static List<Hints.PatternWithRange> extractPinPatterns(JarFile in) throws IOException {
+        ZipEntry pinMetaEntry = in.getEntry(Hints.PIN_HINT_ASSET_ZIP_ENTRY_NAME);
+        if (pinMetaEntry == null) {
+            return null;
+        }
+        InputStream pinMetaStream = in.getInputStream(pinMetaEntry);
+        byte[] patternBlob = new byte[(int) pinMetaEntry.getSize()];
+        pinMetaStream.read(patternBlob);
+        return Hints.parsePinPatterns(patternBlob);
+    }
+
+    private static void addPinByteRanges(JarOutputStream outputJar,
+                                         ArrayList<Hints.ByteRange> pinByteRanges,
+                                         long timestamp) throws IOException {
+        JarEntry je = new JarEntry(Hints.PIN_BYTE_RANGE_ZIP_ENTRY_NAME);
+        je.setTime(timestamp);
+        outputJar.putNextEntry(je);
+        outputJar.write(Hints.encodeByteRangeList(pinByteRanges));
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     }
 
     private static boolean shouldOutputApkEntry(
@@ -928,9 +1032,10 @@ class SignApk {
                            "[-providerClass <className>] " +
                            "[--min-sdk-version <n>] " +
                            "[--disable-v2] " +
+                           "[--enable-v4] " +
                            "publickey.x509[.pem] privatekey.pk8 " +
                            "[publickey2.x509[.pem] privatekey2.pk8 ...] " +
-                           "input.jar output.jar");
+                           "input.jar output.jar [output-v4-file]");
         System.exit(2);
     }
 
@@ -950,6 +1055,8 @@ class SignApk {
         int alignment = 4;
         Integer minSdkVersionOverride = null;
         boolean signUsingApkSignatureSchemeV2 = true;
+        boolean signUsingApkSignatureSchemeV4 = false;
+        SigningCertificateLineage certLineage = null;
 
         int argstart = 0;
         while (argstart < args.length && args[argstart].startsWith("-")) {
@@ -977,13 +1084,31 @@ class SignApk {
             } else if ("--disable-v2".equals(args[argstart])) {
                 signUsingApkSignatureSchemeV2 = false;
                 ++argstart;
+            } else if ("--enable-v4".equals(args[argstart])) {
+                signUsingApkSignatureSchemeV4 = true;
+                ++argstart;
+            } else if ("--lineage".equals(args[argstart])) {
+                File lineageFile = new File(args[++argstart]);
+                try {
+                    certLineage = SigningCertificateLineage.readFromFile(lineageFile);
+                } catch (Exception e) {
+                    throw new IllegalArgumentException(
+                            "Error reading lineage file: " + e.getMessage());
+                }
+                ++argstart;
             } else {
                 usage();
             }
         }
 
-        if ((args.length - argstart) % 2 == 1) usage();
-        int numKeys = ((args.length - argstart) / 2) - 1;
+        int numArgsExcludeV4FilePath;
+        if (signUsingApkSignatureSchemeV4) {
+            numArgsExcludeV4FilePath = args.length - 1;
+        } else {
+            numArgsExcludeV4FilePath = args.length;
+        }
+        if ((numArgsExcludeV4FilePath - argstart) % 2 == 1) usage();
+        int numKeys = ((numArgsExcludeV4FilePath - argstart) / 2) - 1;
         if (signWholeFile && numKeys > 1) {
             System.err.println("Only one key may be used with -w.");
             System.exit(2);
@@ -991,8 +1116,12 @@ class SignApk {
 
         loadProviderIfNecessary(providerClass);
 
-        String inputFilename = args[args.length-2];
-        String outputFilename = args[args.length-1];
+        String inputFilename = args[numArgsExcludeV4FilePath - 2];
+        String outputFilename = args[numArgsExcludeV4FilePath - 1];
+        String outputV4Filename = "";
+        if (signUsingApkSignatureSchemeV4) {
+            outputV4Filename = args[args.length - 1];
+        }
 
         JarFile inputJar = null;
         FileOutputStream outputFile = null;
@@ -1057,6 +1186,7 @@ class SignApk {
                                 .setV2SigningEnabled(signUsingApkSignatureSchemeV2)
                                 .setOtherSignersSignaturesPreserved(false)
                                 .setCreatedBy("1.0 (Android SignApk)")
+                                .setSigningCertificateLineage(certLineage)
                                 .build()) {
                     // We don't preserve the input APK's APK Signing Block (which contains v2
                     // signatures)
@@ -1126,6 +1256,13 @@ class SignApk {
                     outputFile.close();
                     outputFile = null;
                     apkSigner.outputDone();
+
+                    if (signUsingApkSignatureSchemeV4) {
+                        final DataSource outputApkIn = DataSources.asDataSource(
+                                new RandomAccessFile(new File(outputFilename), "r"));
+                        final File outputV4File =  new File(outputV4Filename);
+                        apkSigner.signV4(outputApkIn, outputV4File, false /* ignore failures */);
+                    }
                 }
 
                 return;

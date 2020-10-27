@@ -24,11 +24,12 @@ import zipfile
 import common
 import test_utils
 from ota_from_target_files import (
-    _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
+    _LoadOemDicts, AbOtaPropertyFiles, FinalizeMetadata,
     GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
-    StreamingPropertyFiles, WriteFingerprintAssertion)
+    StreamingPropertyFiles, WriteFingerprintAssertion,
+    CalculateRuntimeDevicesAndFingerprints)
 
 
 def construct_target_files(secondary=False):
@@ -68,6 +69,7 @@ def construct_target_files(secondary=False):
   return target_files
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 class MockScriptWriter(object):
   """A class that mocks edify_generator.EdifyGenerator.
 
@@ -316,6 +318,9 @@ class LoadOemDictsTest(unittest.TestCase):
 
   def tearDown(self):
     common.Cleanup()
+=======
+class LoadOemDictsTest(test_utils.ReleaseToolsTestCase):
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   def test_NoneDict(self):
     self.assertIsNone(_LoadOemDicts(None))
@@ -348,29 +353,66 @@ class LoadOemDictsTest(unittest.TestCase):
       self.assertEqual('{}'.format(i), oem_dict['ro.build.index'])
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 class OtaFromTargetFilesTest(unittest.TestCase):
 
+=======
+class OtaFromTargetFilesTest(test_utils.ReleaseToolsTestCase):
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   TEST_TARGET_INFO_DICT = {
-      'build.prop' : {
-          'ro.product.device' : 'product-device',
-          'ro.build.fingerprint' : 'build-fingerprint-target',
-          'ro.build.version.incremental' : 'build-version-incremental-target',
-          'ro.build.version.sdk' : '27',
-          'ro.build.version.security_patch' : '2017-12-01',
-          'ro.build.date.utc' : '1500000000',
-      },
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.device': 'product-device',
+              'ro.build.fingerprint': 'build-fingerprint-target',
+              'ro.build.version.incremental': 'build-version-incremental-target',
+              'ro.build.version.sdk': '27',
+              'ro.build.version.security_patch': '2017-12-01',
+              'ro.build.date.utc': '1500000000'}
+      )
   }
 
   TEST_SOURCE_INFO_DICT = {
-      'build.prop' : {
-          'ro.product.device' : 'product-device',
-          'ro.build.fingerprint' : 'build-fingerprint-source',
-          'ro.build.version.incremental' : 'build-version-incremental-source',
-          'ro.build.version.sdk' : '25',
-          'ro.build.version.security_patch' : '2016-12-01',
-          'ro.build.date.utc' : '1400000000',
-      },
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.device': 'product-device',
+              'ro.build.fingerprint': 'build-fingerprint-source',
+              'ro.build.version.incremental': 'build-version-incremental-source',
+              'ro.build.version.sdk': '25',
+              'ro.build.version.security_patch': '2016-12-01',
+              'ro.build.date.utc': '1400000000'}
+      )
   }
+
+  TEST_INFO_DICT_USES_OEM_PROPS = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.name': 'product-name',
+              'ro.build.thumbprint': 'build-thumbprint',
+              'ro.build.bar': 'build-bar'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+               'ro.vendor.build.fingerprint': 'vendor-build-fingerprint'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
+      'oem_fingerprint_properties': 'ro.product.device ro.product.brand',
+  }
+
+  TEST_OEM_DICTS = [
+      {
+          'ro.product.brand': 'brand1',
+          'ro.product.device': 'device1',
+      },
+      {
+          'ro.product.brand': 'brand2',
+          'ro.product.device': 'device2',
+      },
+      {
+          'ro.product.brand': 'brand3',
+          'ro.product.device': 'device3',
+      },
+  ]
 
   def setUp(self):
     self.testdata_dir = test_utils.get_testdata_dir()
@@ -388,7 +430,6 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     }
 
     common.OPTIONS.search_path = test_utils.get_search_path()
-    self.assertIsNotNone(common.OPTIONS.search_path)
 
   def tearDown(self):
     common.Cleanup()
@@ -396,7 +437,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
   def test_GetPackageMetadata_abOta_full(self):
     target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
     target_info_dict['ab_update'] = 'true'
-    target_info = BuildInfo(target_info_dict, None)
+    target_info = common.BuildInfo(target_info_dict, None)
     metadata = GetPackageMetadata(target_info)
     self.assertDictEqual(
         {
@@ -414,8 +455,8 @@ class OtaFromTargetFilesTest(unittest.TestCase):
   def test_GetPackageMetadata_abOta_incremental(self):
     target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
     target_info_dict['ab_update'] = 'true'
-    target_info = BuildInfo(target_info_dict, None)
-    source_info = BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
+    target_info = common.BuildInfo(target_info_dict, None)
+    source_info = common.BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
     common.OPTIONS.incremental_source = ''
     metadata = GetPackageMetadata(target_info, source_info)
     self.assertDictEqual(
@@ -434,7 +475,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         metadata)
 
   def test_GetPackageMetadata_nonAbOta_full(self):
-    target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     metadata = GetPackageMetadata(target_info)
     self.assertDictEqual(
         {
@@ -449,8 +490,8 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         metadata)
 
   def test_GetPackageMetadata_nonAbOta_incremental(self):
-    target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
-    source_info = BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    source_info = common.BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
     common.OPTIONS.incremental_source = ''
     metadata = GetPackageMetadata(target_info, source_info)
     self.assertDictEqual(
@@ -468,7 +509,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         metadata)
 
   def test_GetPackageMetadata_wipe(self):
-    target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     common.OPTIONS.wipe_user_data = True
     metadata = GetPackageMetadata(target_info)
     self.assertDictEqual(
@@ -484,12 +525,32 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         },
         metadata)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+  def test_GetPackageMetadata_retrofitDynamicPartitions(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    common.OPTIONS.retrofit_dynamic_partitions = True
+    metadata = GetPackageMetadata(target_info)
+    self.assertDictEqual(
+        {
+            'ota-retrofit-dynamic-partitions' : 'yes',
+            'ota-type' : 'BLOCK',
+            'post-build' : 'build-fingerprint-target',
+            'post-build-incremental' : 'build-version-incremental-target',
+            'post-sdk-level' : '27',
+            'post-security-patch-level' : '2017-12-01',
+            'post-timestamp' : '1500000000',
+            'pre-device' : 'product-device',
+        },
+        metadata)
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   @staticmethod
   def _test_GetPackageMetadata_swapBuildTimestamps(target_info, source_info):
-    (target_info['build.prop']['ro.build.date.utc'],
-     source_info['build.prop']['ro.build.date.utc']) = (
-         source_info['build.prop']['ro.build.date.utc'],
-         target_info['build.prop']['ro.build.date.utc'])
+    (target_info['build.prop'].build_props['ro.build.date.utc'],
+     source_info['build.prop'].build_props['ro.build.date.utc']) = (
+         source_info['build.prop'].build_props['ro.build.date.utc'],
+         target_info['build.prop'].build_props['ro.build.date.utc'])
 
   def test_GetPackageMetadata_unintentionalDowngradeDetected(self):
     target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
@@ -497,8 +558,8 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     self._test_GetPackageMetadata_swapBuildTimestamps(
         target_info_dict, source_info_dict)
 
-    target_info = BuildInfo(target_info_dict, None)
-    source_info = BuildInfo(source_info_dict, None)
+    target_info = common.BuildInfo(target_info_dict, None)
+    source_info = common.BuildInfo(source_info_dict, None)
     common.OPTIONS.incremental_source = ''
     self.assertRaises(RuntimeError, GetPackageMetadata, target_info,
                       source_info)
@@ -509,8 +570,8 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     self._test_GetPackageMetadata_swapBuildTimestamps(
         target_info_dict, source_info_dict)
 
-    target_info = BuildInfo(target_info_dict, None)
-    source_info = BuildInfo(source_info_dict, None)
+    target_info = common.BuildInfo(target_info_dict, None)
+    source_info = common.BuildInfo(source_info_dict, None)
     common.OPTIONS.incremental_source = ''
     common.OPTIONS.downgrade = True
     common.OPTIONS.wipe_user_data = True
@@ -531,22 +592,33 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         },
         metadata)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_GetTargetFilesZipForSecondaryImages(self):
     input_file = construct_target_files(secondary=True)
     target_file = GetTargetFilesZipForSecondaryImages(input_file)
 
     with zipfile.ZipFile(target_file) as verify_zip:
       namelist = verify_zip.namelist()
+      ab_partitions = verify_zip.read('META/ab_partitions.txt').decode()
 
     self.assertIn('META/ab_partitions.txt', namelist)
-    self.assertIn('IMAGES/boot.img', namelist)
     self.assertIn('IMAGES/system.img', namelist)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     self.assertIn('IMAGES/vendor.img', namelist)
+=======
+    self.assertIn('RADIO/bootloader.img', namelist)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     self.assertIn(POSTINSTALL_CONFIG, namelist)
 
+    self.assertNotIn('IMAGES/boot.img', namelist)
     self.assertNotIn('IMAGES/system_other.img', namelist)
     self.assertNotIn('IMAGES/system.map', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
 
+    expected_ab_partitions = ['system', 'bootloader']
+    self.assertEqual('\n'.join(expected_ab_partitions), ab_partitions)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_GetTargetFilesZipForSecondaryImages_skipPostinstall(self):
     input_file = construct_target_files(secondary=True)
     target_file = GetTargetFilesZipForSecondaryImages(
@@ -556,20 +628,99 @@ class OtaFromTargetFilesTest(unittest.TestCase):
       namelist = verify_zip.namelist()
 
     self.assertIn('META/ab_partitions.txt', namelist)
-    self.assertIn('IMAGES/boot.img', namelist)
     self.assertIn('IMAGES/system.img', namelist)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     self.assertIn('IMAGES/vendor.img', namelist)
+=======
+    self.assertIn('RADIO/bootloader.img', namelist)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+    self.assertNotIn('IMAGES/boot.img', namelist)
     self.assertNotIn('IMAGES/system_other.img', namelist)
     self.assertNotIn('IMAGES/system.map', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
     self.assertNotIn(POSTINSTALL_CONFIG, namelist)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForSecondaryImages_withoutRadioImages(self):
+    input_file = construct_target_files(secondary=True)
+    common.ZipDelete(input_file, 'RADIO/bootloader.img')
+    common.ZipDelete(input_file, 'RADIO/modem.img')
+    target_file = GetTargetFilesZipForSecondaryImages(input_file)
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn(POSTINSTALL_CONFIG, namelist)
+
+    self.assertNotIn('IMAGES/boot.img', namelist)
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('IMAGES/system.map', namelist)
+    self.assertNotIn('RADIO/bootloader.img', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForSecondaryImages_dynamicPartitions(self):
+    input_file = construct_target_files(secondary=True)
+    misc_info = '\n'.join([
+        'use_dynamic_partition_size=true',
+        'use_dynamic_partitions=true',
+        'dynamic_partition_list=system vendor product',
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+    dynamic_partitions_info = '\n'.join([
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+
+    with zipfile.ZipFile(input_file, 'a') as append_zip:
+      common.ZipWriteStr(append_zip, 'META/misc_info.txt', misc_info)
+      common.ZipWriteStr(append_zip, 'META/dynamic_partitions_info.txt',
+                         dynamic_partitions_info)
+
+    target_file = GetTargetFilesZipForSecondaryImages(input_file)
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      updated_misc_info = verify_zip.read('META/misc_info.txt').decode()
+      updated_dynamic_partitions_info = verify_zip.read(
+          'META/dynamic_partitions_info.txt').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn(POSTINSTALL_CONFIG, namelist)
+    self.assertIn('META/misc_info.txt', namelist)
+    self.assertIn('META/dynamic_partitions_info.txt', namelist)
+
+    self.assertNotIn('IMAGES/boot.img', namelist)
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('IMAGES/system.map', namelist)
+
+    # Check the vendor & product are removed from the partitions list.
+    expected_misc_info = misc_info.replace('system vendor product',
+                                           'system')
+    expected_dynamic_partitions_info = dynamic_partitions_info.replace(
+        'system vendor product', 'system')
+    self.assertEqual(expected_misc_info, updated_misc_info)
+    self.assertEqual(expected_dynamic_partitions_info,
+                     updated_dynamic_partitions_info)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   def test_GetTargetFilesZipWithoutPostinstallConfig(self):
     input_file = construct_target_files()
     target_file = GetTargetFilesZipWithoutPostinstallConfig(input_file)
     with zipfile.ZipFile(target_file) as verify_zip:
       self.assertNotIn(POSTINSTALL_CONFIG, verify_zip.namelist())
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_GetTargetFilesZipWithoutPostinstallConfig_missingEntry(self):
     input_file = construct_target_files()
     common.ZipDelete(input_file, POSTINSTALL_CONFIG)
@@ -600,20 +751,25 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     FinalizeMetadata(metadata, zip_file, output_file, needed_property_files)
     self.assertIn('ota-test-property-files', metadata)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_FinalizeMetadata(self):
     self._test_FinalizeMetadata()
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_FinalizeMetadata_withNoSigning(self):
     common.OPTIONS.no_signing = True
     self._test_FinalizeMetadata()
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_FinalizeMetadata_largeEntry(self):
     self._test_FinalizeMetadata(large_entry=True)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_FinalizeMetadata_largeEntry_withNoSigning(self):
     common.OPTIONS.no_signing = True
     self._test_FinalizeMetadata(large_entry=True)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_FinalizeMetadata_insufficientSpace(self):
     entries = [
         'required-entry1',
@@ -638,6 +794,59 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     output_file = common.MakeTempFile(suffix='.zip')
     FinalizeMetadata(metadata, zip_file, output_file, needed_property_files)
     self.assertIn('ota-test-property-files', metadata)
+
+  def test_WriteFingerprintAssertion_without_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    source_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
+    source_info_dict['build.prop'].build_props['ro.build.fingerprint'] = (
+        'source-build-fingerprint')
+    source_info = common.BuildInfo(source_info_dict, None)
+
+    script_writer = test_utils.MockScriptWriter()
+    WriteFingerprintAssertion(script_writer, target_info, source_info)
+    self.assertEqual(
+        [('AssertSomeFingerprint', 'source-build-fingerprint',
+          'build-fingerprint-target')],
+        script_writer.lines)
+
+  def test_WriteFingerprintAssertion_with_source_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    source_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+
+    script_writer = test_utils.MockScriptWriter()
+    WriteFingerprintAssertion(script_writer, target_info, source_info)
+    self.assertEqual(
+        [('AssertFingerprintOrThumbprint', 'build-fingerprint-target',
+          'build-thumbprint')],
+        script_writer.lines)
+
+  def test_WriteFingerprintAssertion_with_target_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    source_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+
+    script_writer = test_utils.MockScriptWriter()
+    WriteFingerprintAssertion(script_writer, target_info, source_info)
+    self.assertEqual(
+        [('AssertFingerprintOrThumbprint', 'build-fingerprint-target',
+          'build-thumbprint')],
+        script_writer.lines)
+
+  def test_WriteFingerprintAssertion_with_both_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    source_info_dict = copy.deepcopy(self.TEST_INFO_DICT_USES_OEM_PROPS)
+    source_info_dict['build.prop'].build_props['ro.build.thumbprint'] = (
+        'source-build-thumbprint')
+    source_info = common.BuildInfo(source_info_dict, self.TEST_OEM_DICTS)
+
+    script_writer = test_utils.MockScriptWriter()
+    WriteFingerprintAssertion(script_writer, target_info, source_info)
+    self.assertEqual(
+        [('AssertSomeThumbprint', 'build-thumbprint',
+          'source-build-thumbprint')],
+        script_writer.lines)
 
 
 class TestPropertyFiles(PropertyFiles):
@@ -694,6 +903,7 @@ class PropertyFilesTest(unittest.TestCase):
           expected = entry.replace('.', '-').upper().encode()
         self.assertEqual(expected, input_fp.read(size))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Compute(self):
     entries = (
         'required-entry1',
@@ -733,6 +943,7 @@ class PropertyFilesTest(unittest.TestCase):
     with zipfile.ZipFile(zip_file, 'r') as zip_fp:
       self.assertRaises(KeyError, property_files.Compute, zip_fp)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Finalize(self):
     entries = [
         'required-entry1',
@@ -754,6 +965,7 @@ class PropertyFilesTest(unittest.TestCase):
     entries[2] = 'metadata'
     self._verify_entries(zip_file, tokens, entries)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Finalize_assertReservedLength(self):
     entries = (
         'required-entry1',
@@ -929,6 +1141,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
         ),
         property_files.optional)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_GetPayloadMetadataOffsetAndSize(self):
     target_file = construct_target_files()
     payload = Payload()
@@ -948,10 +1161,28 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
       payload_offset, metadata_total = (
           property_files._GetPayloadMetadataOffsetAndSize(input_zip))
 
-    # Read in the metadata signature directly.
+    # The signature proto has the following format (details in
+    #  /platform/system/update_engine/update_metadata.proto):
+    #  message Signature {
+    #    optional uint32 version = 1;
+    #    optional bytes data = 2;
+    #    optional fixed32 unpadded_signature_size = 3;
+    #  }
+    #
+    # According to the protobuf encoding, the tail of the signature message will
+    # be [signature string(256 bytes) + encoding of the fixed32 number 256]. And
+    # 256 is encoded as 'x1d\x00\x01\x00\x00':
+    # [3 (field number) << 3 | 5 (type) + byte reverse of 0x100 (256)].
+    # Details in (https://developers.google.com/protocol-buffers/docs/encoding)
+    signature_tail_length = self.SIGNATURE_SIZE + 5
+    self.assertGreater(metadata_total, signature_tail_length)
     with open(output_file, 'rb') as verify_fp:
-      verify_fp.seek(payload_offset + metadata_total - self.SIGNATURE_SIZE)
-      metadata_signature = verify_fp.read(self.SIGNATURE_SIZE)
+      verify_fp.seek(payload_offset + metadata_total - signature_tail_length)
+      metadata_signature_proto_tail = verify_fp.read(signature_tail_length)
+
+    self.assertEqual(b'\x1d\x00\x01\x00\x00',
+                     metadata_signature_proto_tail[-5:])
+    metadata_signature = metadata_signature_proto_tail[:-5]
 
     # Now we extract the metadata hash via brillo_update_payload script, which
     # will serve as the oracle result.
@@ -1002,6 +1233,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
 
     return zip_file
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Compute(self):
     zip_file = self.construct_zip_package_withValidPayload()
     property_files = AbOtaPropertyFiles()
@@ -1015,6 +1247,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
     self._verify_entries(
         zip_file, tokens, ('care_map.txt', 'compatibility.zip'))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Finalize(self):
     zip_file = self.construct_zip_package_withValidPayload(with_metadata=True)
     property_files = AbOtaPropertyFiles()
@@ -1031,6 +1264,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
     self._verify_entries(
         zip_file, tokens, ('care_map.txt', 'compatibility.zip'))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Verify(self):
     zip_file = self.construct_zip_package_withValidPayload(with_metadata=True)
     property_files = AbOtaPropertyFiles()
@@ -1117,10 +1351,16 @@ class PayloadSignerTest(unittest.TestCase):
     with open(file1, 'rb') as fp1, open(file2, 'rb') as fp2:
       self.assertEqual(fp1.read(), fp2.read())
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_init(self):
     payload_signer = PayloadSigner()
     self.assertEqual('openssl', payload_signer.signer)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    self.assertEqual(256, payload_signer.maximum_signature_size)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_init_withPassword(self):
     common.OPTIONS.package_key = os.path.join(
         self.testdata_dir, 'testkey_with_passwd')
@@ -1133,10 +1373,33 @@ class PayloadSignerTest(unittest.TestCase):
   def test_init_withExternalSigner(self):
     common.OPTIONS.payload_signer = 'abc'
     common.OPTIONS.payload_signer_args = ['arg1', 'arg2']
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    common.OPTIONS.payload_signer_maximum_signature_size = '512'
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     payload_signer = PayloadSigner()
     self.assertEqual('abc', payload_signer.signer)
     self.assertEqual(['arg1', 'arg2'], payload_signer.signer_args)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    self.assertEqual(512, payload_signer.maximum_signature_size)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetMaximumSignatureSizeInBytes_512Bytes(self):
+    signing_key = os.path.join(self.testdata_dir, 'testkey_RSA4096.key')
+    # pylint: disable=protected-access
+    signature_size = PayloadSigner._GetMaximumSignatureSizeInBytes(signing_key)
+    self.assertEqual(512, signature_size)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetMaximumSignatureSizeInBytes_ECKey(self):
+    signing_key = os.path.join(self.testdata_dir, 'testkey_EC.key')
+    # pylint: disable=protected-access
+    signature_size = PayloadSigner._GetMaximumSignatureSizeInBytes(signing_key)
+    self.assertEqual(72, signature_size)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign(self):
     payload_signer = PayloadSigner()
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
@@ -1163,6 +1426,7 @@ class PayloadSignerTest(unittest.TestCase):
     """Uses testdata/payload_signer.sh as the external payload signer."""
     common.OPTIONS.payload_signer = os.path.join(
         self.testdata_dir, 'payload_signer.sh')
+    os.chmod(common.OPTIONS.payload_signer, 0o700)
     common.OPTIONS.payload_signer_args = [
         os.path.join(self.testdata_dir, 'testkey.pk8')]
     payload_signer = PayloadSigner()
@@ -1205,14 +1469,17 @@ class PayloadTest(unittest.TestCase):
     payload.Generate(target_file, source_file)
     return payload
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Generate_full(self):
     payload = self._create_payload_full()
     self.assertTrue(os.path.exists(payload.payload_file))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Generate_incremental(self):
     payload = self._create_payload_incremental()
     self.assertTrue(os.path.exists(payload.payload_file))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Generate_additionalArgs(self):
     target_file = construct_target_files()
     source_file = construct_target_files()
@@ -1223,12 +1490,14 @@ class PayloadTest(unittest.TestCase):
         target_file, additional_args=["--source_image", source_file])
     self.assertTrue(os.path.exists(payload.payload_file))
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Generate_invalidInput(self):
     target_file = construct_target_files()
     common.ZipDelete(target_file, 'IMAGES/vendor.img')
     payload = Payload()
     self.assertRaises(AssertionError, payload.Generate, target_file)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign_full(self):
     payload = self._create_payload_full()
     payload.Sign(PayloadSigner())
@@ -1242,6 +1511,7 @@ class PayloadTest(unittest.TestCase):
         os.path.join(self.testdata_dir, 'testkey.x509.pem'),
         output_file)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign_incremental(self):
     payload = self._create_payload_incremental()
     payload.Sign(PayloadSigner())
@@ -1255,6 +1525,7 @@ class PayloadTest(unittest.TestCase):
         os.path.join(self.testdata_dir, 'testkey.x509.pem'),
         output_file)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign_withDataWipe(self):
     common.OPTIONS.wipe_user_data = True
     payload = self._create_payload_full()
@@ -1263,6 +1534,7 @@ class PayloadTest(unittest.TestCase):
     with open(payload.payload_properties) as properties_fp:
       self.assertIn("POWERWASH=1", properties_fp.read())
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign_secondary(self):
     payload = self._create_payload_full(secondary=True)
     payload.Sign(PayloadSigner())
@@ -1270,6 +1542,7 @@ class PayloadTest(unittest.TestCase):
     with open(payload.payload_properties) as properties_fp:
       self.assertIn("SWITCH_SLOT_ON_REBOOT=0", properties_fp.read())
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_Sign_badSigner(self):
     """Tests that signing failure can be captured."""
     payload = self._create_payload_full()
@@ -1277,6 +1550,7 @@ class PayloadTest(unittest.TestCase):
     payload_signer.signer_args.append('bad-option')
     self.assertRaises(AssertionError, payload.Sign, payload_signer)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_WriteToZip(self):
     payload = self._create_payload_full()
     payload.Sign(PayloadSigner())
@@ -1298,6 +1572,7 @@ class PayloadTest(unittest.TestCase):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_WriteToZip_unsignedPayload(self):
     """Unsigned payloads should not be allowed to be written to zip."""
     payload = self._create_payload_full()
@@ -1313,6 +1588,7 @@ class PayloadTest(unittest.TestCase):
     with zipfile.ZipFile(output_file, 'w') as output_zip:
       self.assertRaises(AssertionError, payload.WriteToZip, output_zip)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
   def test_WriteToZip_secondary(self):
     payload = self._create_payload_full(secondary=True)
     payload.Sign(PayloadSigner())
@@ -1334,3 +1610,239 @@ class PayloadTest(unittest.TestCase):
             Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
+
+
+class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
+  MISC_INFO = [
+      'recovery_api_version=3',
+      'fstab_version=2',
+      'recovery_as_boot=true',
+  ]
+
+  BUILD_PROP = [
+      'ro.build.version.release=version-release',
+      'ro.build.id=build-id',
+      'ro.build.version.incremental=version-incremental',
+      'ro.build.type=build-type',
+      'ro.build.tags=build-tags',
+      'ro.build.version.sdk=30',
+      'ro.build.version.security_patch=2020',
+      'ro.build.date.utc=12345678'
+  ]
+
+  VENDOR_BUILD_PROP = [
+      'ro.product.vendor.brand=vendor-product-brand',
+      'ro.product.vendor.name=vendor-product-name',
+      'ro.product.vendor.device=vendor-product-device'
+  ]
+
+  def setUp(self):
+    common.OPTIONS.oem_dicts = None
+    self.test_dir = common.MakeTempDir()
+    self.writeFiles({'META/misc_info.txt': '\n'.join(self.MISC_INFO)},
+                    self.test_dir)
+
+  def writeFiles(self, contents_dict, out_dir):
+    for path, content in contents_dict.items():
+      abs_path = os.path.join(out_dir, path)
+      dir_name = os.path.dirname(abs_path)
+      if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+      with open(abs_path, 'w') as f:
+        f.write(content)
+
+  @staticmethod
+  def constructFingerprint(prefix):
+    return '{}:version-release/build-id/version-incremental:' \
+           'build-type/build-tags'.format(prefix)
+
+  def test_CalculatePossibleFingerprints_no_dynamic_fingerprint(self):
+    build_prop = copy.deepcopy(self.BUILD_PROP)
+    build_prop.extend([
+        'ro.product.brand=product-brand',
+        'ro.product.name=product-name',
+        'ro.product.device=product-device',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(build_prop),
+        'VENDOR/build.prop': '\n'.join(self.VENDOR_BUILD_PROP),
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    expected = ({'product-device'},
+                {self.constructFingerprint(
+                    'product-brand/product-name/product-device')})
+    self.assertEqual(expected,
+                     CalculateRuntimeDevicesAndFingerprints(build_info, {}))
+
+  def test_CalculatePossibleFingerprints_single_override(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    boot_variable_values = {'ro.boot.sku_name': ['std', 'pro']}
+
+    expected = ({'vendor-product-device'}, {
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-product-device'),
+    })
+    self.assertEqual(
+        expected, CalculateRuntimeDevicesAndFingerprints(
+            build_info, boot_variable_values))
+
+  def test_CalculatePossibleFingerprints_multiple_overrides(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+        'import /vendor/etc/build_${ro.boot.device_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_product1.prop':
+        'ro.product.vendor.device=vendor-device-product1',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+        'VENDOR/etc/build_product2.prop':
+        'ro.product.vendor.device=vendor-device-product2',
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    boot_variable_values = {
+        'ro.boot.sku_name': ['std', 'pro'],
+        'ro.boot.device_name': ['product1', 'product2'],
+    }
+
+    expected_devices = {'vendor-product-device', 'vendor-device-product1',
+                        'vendor-device-product2'}
+    expected_fingerprints = {
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-device-product1'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-device-product1'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-device-product2'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-device-product2')
+    }
+    self.assertEqual((expected_devices, expected_fingerprints),
+                     CalculateRuntimeDevicesAndFingerprints(
+                         build_info, boot_variable_values))
+
+  def test_GetPackageMetadata_full_package(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+    }, self.test_dir)
+
+    common.OPTIONS.boot_variable_file = common.MakeTempFile()
+    with open(common.OPTIONS.boot_variable_file, 'w') as f:
+      f.write('ro.boot.sku_name=std,pro')
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    metadata = GetPackageMetadata(build_info)
+    self.assertEqual('vendor-product-device', metadata['pre-device'])
+    fingerprints = [
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-product-device'),
+    ]
+    self.assertEqual('|'.join(fingerprints), metadata['post-build'])
+
+  def test_GetPackageMetadata_incremental_package(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.device=vendor-device-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.device=vendor-device-pro',
+    }, self.test_dir)
+
+    common.OPTIONS.boot_variable_file = common.MakeTempFile()
+    with open(common.OPTIONS.boot_variable_file, 'w') as f:
+      f.write('ro.boot.sku_name=std,pro')
+
+    source_dir = common.MakeTempDir()
+    source_build_prop = [
+        'ro.build.version.release=source-version-release',
+        'ro.build.id=source-build-id',
+        'ro.build.version.incremental=source-version-incremental',
+        'ro.build.type=build-type',
+        'ro.build.tags=build-tags',
+        'ro.build.version.sdk=29',
+        'ro.build.version.security_patch=2020',
+        'ro.build.date.utc=12340000'
+    ]
+    self.writeFiles({
+        'META/misc_info.txt': '\n'.join(self.MISC_INFO),
+        'SYSTEM/build.prop': '\n'.join(source_build_prop),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.device=vendor-device-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.device=vendor-device-pro',
+    }, source_dir)
+    common.OPTIONS.incremental_source = source_dir
+
+    target_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    source_info = common.BuildInfo(common.LoadInfoDict(source_dir))
+
+    metadata = GetPackageMetadata(target_info, source_info)
+    self.assertEqual(
+        'vendor-device-pro|vendor-device-std|vendor-product-device',
+        metadata['pre-device'])
+    suffix = ':source-version-release/source-build-id/' \
+             'source-version-incremental:build-type/build-tags'
+    pre_fingerprints = [
+        'vendor-product-brand/vendor-product-name/vendor-device-pro'
+        '{}'.format(suffix),
+        'vendor-product-brand/vendor-product-name/vendor-device-std'
+        '{}'.format(suffix),
+        'vendor-product-brand/vendor-product-name/vendor-product-device'
+        '{}'.format(suffix),
+    ]
+    self.assertEqual('|'.join(pre_fingerprints), metadata['pre-build'])
+
+    post_fingerprints = [
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-device-pro'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-device-std'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+    ]
+    self.assertEqual('|'.join(post_fingerprints), metadata['post-build'])

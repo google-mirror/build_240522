@@ -58,6 +58,7 @@ import build_image
 import common
 import rangelib
 import sparse_img
+import verity_utils
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -104,10 +105,11 @@ def GetCareMap(which, imgname):
 
   Returns:
     (which, care_map_ranges): care_map_ranges is the raw string of the care_map
-    RangeSet.
+    RangeSet; or None.
   """
   assert which in PARTITIONS_WITH_CARE_MAP
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   simg = sparse_img.SparseImage(imgname)
   care_map_ranges = simg.care_map
   key = which + "_adjusted_partition_size"
@@ -116,6 +118,30 @@ def GetCareMap(which, imgname):
     assert adjusted_blocks > 0, "blocks should be positive for " + which
     care_map_ranges = care_map_ranges.intersect(rangelib.RangeSet(
         "0-%d" % (adjusted_blocks,)))
+=======
+  # which + "_image_size" contains the size that the actual filesystem image
+  # resides in, which is all that needs to be verified. The additional blocks in
+  # the image file contain verity metadata, by reading which would trigger
+  # invalid reads.
+  image_size = OPTIONS.info_dict.get(which + "_image_size")
+  if not image_size:
+    return None
+
+  image_blocks = int(image_size) // 4096 - 1
+  assert image_blocks > 0, "blocks for {} must be positive".format(which)
+
+  # For sparse images, we will only check the blocks that are listed in the care
+  # map, i.e. the ones with meaningful data.
+  if "extfs_sparse_flag" in OPTIONS.info_dict:
+    simg = sparse_img.SparseImage(imgname)
+    care_map_ranges = simg.care_map.intersect(
+        rangelib.RangeSet("0-{}".format(image_blocks)))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
+
+  # Otherwise for non-sparse images, we read all the blocks in the filesystem
+  # image.
+  else:
+    care_map_ranges = rangelib.RangeSet("0-{}".format(image_blocks))
 
   return [which, care_map_ranges.to_string_raw()]
 
@@ -130,18 +156,36 @@ def AddSystem(output_zip, recovery_img=None, boot_img=None):
     return img.input_name
 
   def output_sink(fn, data):
-    ofile = open(os.path.join(OPTIONS.input_tmp, "SYSTEM", fn), "w")
-    ofile.write(data)
-    ofile.close()
+    output_file = os.path.join(OPTIONS.input_tmp, "SYSTEM", fn)
+    with open(output_file, "wb") as ofile:
+      ofile.write(data)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     arc_name = "SYSTEM/" + fn
     if arc_name in output_zip.namelist():
       OPTIONS.replace_updated_files_list.append(arc_name)
     else:
       common.ZipWrite(output_zip, ofile.name, arc_name)
+=======
+    if output_zip:
+      arc_name = "SYSTEM/" + fn
+      if arc_name in output_zip.namelist():
+        OPTIONS.replace_updated_files_list.append(arc_name)
+      else:
+        common.ZipWrite(output_zip, output_file, arc_name)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   if OPTIONS.rebuild_recovery:
     print("Building new recovery patch")
+=======
+  board_uses_vendorimage = OPTIONS.info_dict.get(
+      "board_uses_vendorimage") == "true"
+
+  if (OPTIONS.rebuild_recovery and not board_uses_vendorimage and
+      recovery_img is not None and boot_img is not None):
+    logger.info("Building new recovery patch on system at system/vendor")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     common.MakeRecoveryPatch(OPTIONS.input_tmp, output_sink, recovery_img,
                              boot_img, info_dict=OPTIONS.info_dict)
 
@@ -164,7 +208,7 @@ def AddSystemOther(output_zip):
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system_other", img)
 
 
-def AddVendor(output_zip):
+def AddVendor(output_zip, recovery_img=None, boot_img=None):
   """Turn the contents of VENDOR into a vendor image and store in it
   output_zip."""
 
@@ -172,6 +216,27 @@ def AddVendor(output_zip):
   if os.path.exists(img.input_name):
     print("vendor.img already exists; no need to rebuild...")
     return img.input_name
+
+  def output_sink(fn, data):
+    ofile = open(os.path.join(OPTIONS.input_tmp, "VENDOR", fn), "w")
+    ofile.write(data)
+    ofile.close()
+
+    if output_zip:
+      arc_name = "VENDOR/" + fn
+      if arc_name in output_zip.namelist():
+        OPTIONS.replace_updated_files_list.append(arc_name)
+      else:
+        common.ZipWrite(output_zip, ofile.name, arc_name)
+
+  board_uses_vendorimage = OPTIONS.info_dict.get(
+      "board_uses_vendorimage") == "true"
+
+  if (OPTIONS.rebuild_recovery and board_uses_vendorimage and
+      recovery_img is not None and boot_img is not None):
+    logger.info("Building new recovery patch on vendor")
+    common.MakeRecoveryPatch(OPTIONS.input_tmp, output_sink, recovery_img,
+                             boot_img, info_dict=OPTIONS.info_dict)
 
   block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "vendor", img,
@@ -196,6 +261,43 @@ def AddProduct(output_zip):
   return img.name
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+def AddSystemExt(output_zip):
+  """Turn the contents of SYSTEM_EXT into a system_ext image and store it in
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES",
+                   "system_ext.img")
+  if os.path.exists(img.name):
+    logger.info("system_ext.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_ext.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_ext", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdm(output_zip):
+  """Turn the contents of ODM into an odm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm.img")
+  if os.path.exists(img.name):
+    logger.info("odm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
+      block_list=block_list)
+  return img.name
+
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 def AddDtbo(output_zip):
   """Adds the DTBO image.
 
@@ -231,11 +333,66 @@ def AddDtbo(output_zip):
   img.Write()
   return img.name
 
+def AddCustomImages(output_zip, partition_name):
+  """Adds and signs custom images in IMAGES/.
+
+  Args:
+    output_zip: The output zip file (needs to be already open), or None to
+        write images to OPTIONS.input_tmp/.
+
+  Uses the image under IMAGES/ if it already exists. Otherwise looks for the
+  image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.
+
+  Raises:
+    AssertionError: If image can't be found.
+  """
+
+  partition_size = OPTIONS.info_dict.get(
+      "avb_{}_partition_size".format(partition_name))
+  key_path = OPTIONS.info_dict.get("avb_{}_key_path".format(partition_name))
+  algorithm = OPTIONS.info_dict.get("avb_{}_algorithm".format(partition_name))
+  extra_args = OPTIONS.info_dict.get(
+      "avb_{}_add_hashtree_footer_args".format(partition_name))
+  partition_size = OPTIONS.info_dict.get(
+      "avb_{}_partition_size".format(partition_name))
+
+  builder = verity_utils.CreateCustomImageBuilder(
+      OPTIONS.info_dict, partition_name, partition_size,
+      key_path, algorithm, extra_args)
+
+  for img_name in OPTIONS.info_dict.get(
+      "avb_{}_image_list".format(partition_name)).split():
+    custom_image = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", img_name)
+    if os.path.exists(custom_image.name):
+      continue
+
+    custom_image_prebuilt_path = os.path.join(
+        OPTIONS.input_tmp, "PREBUILT_IMAGES", img_name)
+    assert os.path.exists(custom_image_prebuilt_path), \
+      "Failed to find %s at %s" % (img_name, custom_image_prebuilt_path)
+
+    shutil.copy(custom_image_prebuilt_path, custom_image.name)
+
+    if builder is not None:
+      builder.Build(custom_image.name)
+
+    custom_image.Write()
+
+  default = os.path.join(OPTIONS.input_tmp, "IMAGES", partition_name + ".img")
+  assert os.path.exists(default), \
+      "There should be one %s.img" % (partition_name)
+  return default
+
 
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   print("creating " + what + ".img...")
+=======
+  logger.info("creating %s.img...", what)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   image_props = build_image.ImagePropFromGlobalDict(info_dict, what)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   fstab = info_dict["fstab"]
   mount_point = "/" + what
   if fstab and mount_point in fstab:
@@ -246,6 +403,9 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   epoch = datetime.datetime.fromtimestamp(0)
   timestamp = (datetime.datetime(2009, 1, 1) - epoch).total_seconds()
   image_props["timestamp"] = int(timestamp)
+=======
+  image_props["timestamp"] = FIXED_FILE_TIMESTAMP
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   if what == "system":
     fs_config_prefix = ""
@@ -265,13 +425,8 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
 
   # Use repeatable ext4 FS UUID and hash_seed UUID (based on partition name and
   # build fingerprint).
-  uuid_seed = what + "-"
-  if "build.prop" in info_dict:
-    build_prop = info_dict["build.prop"]
-    if "ro.build.fingerprint" in build_prop:
-      uuid_seed += build_prop["ro.build.fingerprint"]
-    elif "ro.build.thumbprint" in build_prop:
-      uuid_seed += build_prop["ro.build.thumbprint"]
+  build_info = common.BuildInfo(info_dict)
+  uuid_seed = what + "-" + build_info.GetPartitionFingerprint(what)
   image_props["uuid"] = str(uuid.uuid5(uuid.NAMESPACE_URL, uuid_seed))
   hash_seed = "hash_seed-" + uuid_seed
   image_props["hash_seed"] = str(uuid.uuid5(uuid.NAMESPACE_URL, hash_seed))
@@ -330,16 +485,21 @@ def AddUserdata(output_zip):
   else:
     user_dir = common.MakeTempDir()
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   fstab = OPTIONS.info_dict["fstab"]
   if fstab:
     image_props["fs_type"] = fstab["/data"].fs_type
   succ = build_image.BuildImage(user_dir, image_props, img.name)
   assert succ, "build userdata.img image failed"
+=======
+  build_image.BuildImage(user_dir, image_props, img.name)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   common.CheckSize(img.name, "userdata.img", OPTIONS.info_dict)
   img.Write()
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
   if not img_path:
     return
@@ -367,18 +527,41 @@ def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
 
 def AddVBMeta(output_zip, partitions):
   """Creates a VBMeta image and store it in output_zip.
+=======
+def AddVBMeta(output_zip, partitions, name, needed_partitions):
+  """Creates a VBMeta image and stores it in output_zip.
+
+  It generates the requested VBMeta image. The requested image could be for
+  top-level or chained VBMeta image, which is determined based on the name.
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   Args:
     output_zip: The output zip file, which needs to be already open.
     partitions: A dict that's keyed by partition names with image paths as
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
         values. Only valid partition names are accepted, which include 'boot',
         'recovery', 'system', 'vendor', 'dtbo'.
+=======
+        values. Only valid partition names are accepted, as partitions listed
+        in common.AVB_PARTITIONS and custom partitions listed in
+        OPTIONS.info_dict.get("avb_custom_images_partition_list")
+    name: Name of the VBMeta partition, e.g. 'vbmeta', 'vbmeta_system'.
+    needed_partitions: Partitions whose descriptors should be included into the
+        generated VBMeta image.
+
+  Returns:
+    Path to the created image.
+
+  Raises:
+    AssertionError: On invalid input args.
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   """
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vbmeta.img")
   if os.path.exists(img.input_name):
     print("vbmeta.img already exists; not rebuilding...")
     return img.input_name
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
   cmd = [avbtool, "make_vbmeta_image", "--output", img.name]
   common.AppendAVBSigningArgs(cmd, "vbmeta")
@@ -418,6 +601,15 @@ def AddVBMeta(output_zip, partitions):
   p = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   p.communicate()
   assert p.returncode == 0, "avbtool make_vbmeta_image failed"
+=======
+  img = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "{}.img".format(name))
+  if os.path.exists(img.name):
+    logger.info("%s.img already exists; not rebuilding...", name)
+    return img.name
+
+  common.BuildVBMeta(img.name, partitions, name, needed_partitions)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   img.Write()
 
 
@@ -474,12 +666,16 @@ def AddCache(output_zip):
   image_props["timestamp"] = int(timestamp)
 
   user_dir = common.MakeTempDir()
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 
   fstab = OPTIONS.info_dict["fstab"]
   if fstab:
     image_props["fs_type"] = fstab["/cache"].fs_type
   succ = build_image.BuildImage(user_dir, image_props, img.name)
   assert succ, "build cache.img image failed"
+=======
+  build_image.BuildImage(user_dir, image_props, img.name)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   common.CheckSize(img.name, "cache.img", OPTIONS.info_dict)
   img.Write()
@@ -560,8 +756,13 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
         OPTIONS.info_dict.get(avb_hashtree_enable) == "true"):
       image_path = image_paths[partition]
       assert os.path.exists(image_path)
-      care_map_list += GetCareMap(partition, image_path)
 
+      care_map = GetCareMap(partition, image_path)
+      if not care_map:
+        continue
+      care_map_list += care_map
+
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   if care_map_list:
     care_map_path = "META/care_map.txt"
     if output_zip and care_map_path not in output_zip.namelist():
@@ -571,6 +772,45 @@ def AddCareMapTxtForAbOta(output_zip, ab_partitions, image_paths):
         fp.write('\n'.join(care_map_list))
       if output_zip:
         OPTIONS.replace_updated_files_list.append(care_map_path)
+=======
+      # adds fingerprint field to the care_map
+      # TODO(xunchang) revisit the fingerprint calculation for care_map.
+      partition_props = OPTIONS.info_dict.get(partition + ".build.prop")
+      prop_name_list = ["ro.{}.build.fingerprint".format(partition),
+                        "ro.{}.build.thumbprint".format(partition)]
+
+      present_props = [x for x in prop_name_list if
+                       partition_props and partition_props.GetProp(x)]
+      if not present_props:
+        logger.warning("fingerprint is not present for partition %s", partition)
+        property_id, fingerprint = "unknown", "unknown"
+      else:
+        property_id = present_props[0]
+        fingerprint = partition_props.GetProp(property_id)
+      care_map_list += [property_id, fingerprint]
+
+  if not care_map_list:
+    return
+
+  # Converts the list into proto buf message by calling care_map_generator; and
+  # writes the result to a temp file.
+  temp_care_map_text = common.MakeTempFile(prefix="caremap_text-",
+                                           suffix=".txt")
+  with open(temp_care_map_text, 'w') as text_file:
+    text_file.write('\n'.join(care_map_list))
+
+  temp_care_map = common.MakeTempFile(prefix="caremap-", suffix=".pb")
+  care_map_gen_cmd = ["care_map_generator", temp_care_map_text, temp_care_map]
+  common.RunAndCheckOutput(care_map_gen_cmd)
+
+  care_map_path = "META/care_map.pb"
+  if output_zip and care_map_path not in output_zip.namelist():
+    common.ZipWrite(output_zip, temp_care_map, arcname=care_map_path)
+  else:
+    shutil.copy(temp_care_map, os.path.join(OPTIONS.input_tmp, care_map_path))
+    if output_zip:
+      OPTIONS.replace_updated_files_list.append(care_map_path)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 
 def AddPackRadioImages(output_zip, images):
@@ -647,17 +887,36 @@ def AddImagesToTargetFiles(filename):
   OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
+  has_boot = OPTIONS.info_dict.get("no_boot") != "true"
+  has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   # {vendor,product}.img is unlike system.img or system_other.img. Because it
   # could be built from source, or dropped into target_files.zip as a prebuilt
   # blob. We consider either of them as {vendor,product}.img being available,
   # which could be used when generating vbmeta.img for AVB.
+=======
+  # {vendor,odm,product,system_ext}.img are unlike system.img or
+  # system_other.img. Because it could be built from source, or dropped into
+  # target_files.zip as a prebuilt blob. We consider either of them as
+  # {vendor,product,system_ext}.img being available, which could be
+  # used when generating vbmeta.img for AVB.
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   has_vendor = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "VENDOR")) or
                 os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                             "vendor.img")))
   has_product = (os.path.isdir(os.path.join(OPTIONS.input_tmp, "PRODUCT")) or
                  os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES",
                                              "product.img")))
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+  has_system_ext = (os.path.isdir(os.path.join(OPTIONS.input_tmp,
+                                               "SYSTEM_EXT")) or
+                    os.path.exists(os.path.join(OPTIONS.input_tmp,
+                                                "IMAGES",
+                                                "system_ext.img")))
+  has_system = os.path.isdir(os.path.join(OPTIONS.input_tmp, "SYSTEM"))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
 
@@ -679,22 +938,49 @@ def AddImagesToTargetFiles(filename):
 
   # A map between partition names and their paths, which could be used when
   # generating AVB vbmeta image.
-  partitions = dict()
+  partitions = {}
 
   def banner(s):
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     print("\n\n++++ " + s + " ++++\n\n")
+=======
+    logger.info("\n\n++++ %s  ++++\n\n", s)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
-  banner("boot")
-  # common.GetBootableImage() returns the image directly if present.
-  boot_image = common.GetBootableImage(
-      "IMAGES/boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
-  # boot.img may be unavailable in some targets (e.g. aosp_arm64).
-  if boot_image:
-    partitions['boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES", "boot.img")
-    if not os.path.exists(partitions['boot']):
-      boot_image.WriteToDir(OPTIONS.input_tmp)
-      if output_zip:
-        boot_image.AddToZip(output_zip)
+  boot_image = None
+  if has_boot:
+    banner("boot")
+    boot_images = OPTIONS.info_dict.get("boot_images")
+    if boot_images is None:
+      boot_images = "boot.img"
+    for index,b in enumerate(boot_images.split()):
+      # common.GetBootableImage() returns the image directly if present.
+      boot_image = common.GetBootableImage(
+          "IMAGES/" + b, b, OPTIONS.input_tmp, "BOOT")
+      # boot.img may be unavailable in some targets (e.g. aosp_arm64).
+      if boot_image:
+        boot_image_path = os.path.join(OPTIONS.input_tmp, "IMAGES", b)
+        # Although multiple boot images can be generated, include the image
+        # descriptor of only the first boot image in vbmeta
+        if index == 0:
+          partitions['boot'] = boot_image_path
+        if not os.path.exists(boot_image_path):
+          boot_image.WriteToDir(OPTIONS.input_tmp)
+          if output_zip:
+            boot_image.AddToZip(output_zip)
+
+  if has_vendor_boot:
+    banner("vendor_boot")
+    vendor_boot_image = common.GetVendorBootImage(
+        "IMAGES/vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
+        "VENDOR_BOOT")
+    if vendor_boot_image:
+      partitions['vendor_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_boot.img")
+      if not os.path.exists(partitions['vendor_boot']):
+        vendor_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_boot_image.AddToZip(output_zip)
 
   recovery_image = None
   if has_recovery:
@@ -712,11 +998,11 @@ def AddImagesToTargetFiles(filename):
       banner("recovery (two-step image)")
       # The special recovery.img for two-step package use.
       recovery_two_step_image = common.GetBootableImage(
-          "IMAGES/recovery-two-step.img", "recovery-two-step.img",
+          "OTA/recovery-two-step.img", "recovery-two-step.img",
           OPTIONS.input_tmp, "RECOVERY", two_step_image=True)
       assert recovery_two_step_image, "Failed to create recovery-two-step.img."
       recovery_two_step_image_path = os.path.join(
-          OPTIONS.input_tmp, "IMAGES", "recovery-two-step.img")
+          OPTIONS.input_tmp, "OTA", "recovery-two-step.img")
       if not os.path.exists(recovery_two_step_image_path):
         recovery_two_step_image.WriteToDir(OPTIONS.input_tmp)
         if output_zip:
@@ -728,12 +1014,24 @@ def AddImagesToTargetFiles(filename):
 
   if has_vendor:
     banner("vendor")
-    partitions['vendor'] = AddVendor(output_zip)
+    partitions['vendor'] = AddVendor(
+        output_zip, recovery_img=recovery_image, boot_img=boot_image)
 
   if has_product:
     banner("product")
     partitions['product'] = AddProduct(output_zip)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+  if has_system_ext:
+    banner("system_ext")
+    partitions['system_ext'] = AddSystemExt(output_zip)
+
+  if has_odm:
+    banner("odm")
+    partitions['odm'] = AddOdm(output_zip)
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
@@ -752,15 +1050,66 @@ def AddImagesToTargetFiles(filename):
     banner("dtbo")
     partitions['dtbo'] = AddDtbo(output_zip)
 
+  # Custom images.
+  custom_partitions = OPTIONS.info_dict.get(
+      "avb_custom_images_partition_list", "").strip().split()
+  for partition_name in custom_partitions:
+    partition_name = partition_name.strip()
+    banner("custom images for " + partition_name)
+    partitions[partition_name] = AddCustomImages(output_zip, partition_name)
+
   if OPTIONS.info_dict.get("avb_enable") == "true":
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    # vbmeta_partitions includes the partitions that should be included into
+    # top-level vbmeta.img, which are the ones that are not included in any
+    # chained VBMeta image plus the chained VBMeta images themselves.
+    # Currently custom_partitions are all chained to VBMeta image.
+    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
+
+    vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
+    if vbmeta_system:
+      banner("vbmeta_system")
+      partitions["vbmeta_system"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_system", vbmeta_system.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_system.split()]
+      vbmeta_partitions.append("vbmeta_system")
+
+    vbmeta_vendor = OPTIONS.info_dict.get("avb_vbmeta_vendor", "").strip()
+    if vbmeta_vendor:
+      banner("vbmeta_vendor")
+      partitions["vbmeta_vendor"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_vendor", vbmeta_vendor.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_vendor.split()]
+      vbmeta_partitions.append("vbmeta_vendor")
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     banner("vbmeta")
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     AddVBMeta(output_zip, partitions)
+=======
+    AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
+
+  if OPTIONS.info_dict.get("use_dynamic_partitions") == "true":
+    banner("super_empty")
+    AddSuperEmpty(output_zip)
+
+  if OPTIONS.info_dict.get("build_super_partition") == "true":
+    if OPTIONS.info_dict.get(
+        "build_retrofit_dynamic_partitions_ota_package") == "true":
+      banner("super split images")
+      AddSuperSplit(output_zip)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
                                    "ab_partitions.txt")
   if os.path.exists(ab_partitions_txt):
-    with open(ab_partitions_txt, 'r') as f:
+    with open(ab_partitions_txt) as f:
       ab_partitions = f.readlines()
 
     # For devices using A/B update, copy over images from RADIO/ and/or
@@ -776,7 +1125,7 @@ def AddImagesToTargetFiles(filename):
   pack_radioimages_txt = os.path.join(
       OPTIONS.input_tmp, "META", "pack_radioimages.txt")
   if os.path.exists(pack_radioimages_txt):
-    with open(pack_radioimages_txt, 'r') as f:
+    with open(pack_radioimages_txt) as f:
       AddPackRadioImages(output_zip, f.readlines())
 
   if output_zip:

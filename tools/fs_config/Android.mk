@@ -46,6 +46,7 @@ $(error Multiple fs_config files specified, \
  see "$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)".)
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifeq ($(filter %/$(ANDROID_FS_CONFIG_H),$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),)
 $(error TARGET_ANDROID_FILESYSTEM_CONFIG_H file name must be $(ANDROID_FS_CONFIG_H), \
  see "$(notdir $(TARGET_ANDROID_FILESYSTEM_CONFIG_H))".)
@@ -105,10 +106,63 @@ LOCAL_C_INCLUDES := $(dir $(my_fs_config_h)) $(dir $(my_gen_oem_aid))
 include $(BUILD_HOST_EXECUTABLE)
 fs_config_generate_bin := $(LOCAL_INSTALLED_MODULE)
 # List of all supported vendor, oem and odm Partitions
+=======
+# List of supported vendor, oem, odm, product and system_ext Partitions
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 fs_config_generate_extra_partition_list := $(strip \
   $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),vendor) \
   $(if $(BOARD_USES_OEMIMAGE)$(BOARD_OEMIMAGE_FILE_SYSTEM_TYPE),oem) \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm))
+=======
+  $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm) \
+  $(if $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),product) \
+  $(if $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),system_ext) \
+)
+
+##################################
+# Generate the <p>/etc/fs_config_dirs binary files for each partition.
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs
+LOCAL_REQUIRED_MODULES := \
+	fs_config_dirs_system \
+	$(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+
+##################################
+# Generate the <p>/etc/fs_config_files binary files for each partition.
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files
+LOCAL_REQUIRED_MODULES := \
+  fs_config_files_system \
+  $(foreach t,$(fs_config_generate_extra_partition_list),$(LOCAL_MODULE)_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/fs_config_dirs binary files for all enabled partitions
+# excluding /system. Add fs_config_dirs_nonsystem to PRODUCT_PACKAGES in the
+# device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs_nonsystem
+LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list),fs_config_dirs_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/fs_config_files binary files for all enabled partitions
+# excluding /system. Add fs_config_files_nonsystem to PRODUCT_PACKAGES in the
+# device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files_nonsystem
+LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list),fs_config_files_$(t))
+include $(BUILD_PHONY_PACKAGE)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ##################################
 # Generate the system/etc/fs_config_dirs binary file for the target
@@ -121,9 +175,20 @@ LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list)
 include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$< -D $(if $(fs_config_generate_extra_partition_list), \
 	   -P '$(subst $(space),$(comma),$(addprefix -,$(fs_config_generate_extra_partition_list)))') \
 	   -o $@
+=======
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system \
+	   --all-partitions "$(subst $(space),$(comma),$(PRIVATE_PARTITION_LIST))" \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ##################################
 # Generate the system/etc/fs_config_files binary file for the target
@@ -136,9 +201,20 @@ LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list)
 include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 	@mkdir -p $(dir $@)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$< -F $(if $(fs_config_generate_extra_partition_list), \
 	   -P '$(subst $(space),$(comma),$(addprefix -,$(fs_config_generate_extra_partition_list)))') \
 	   -o $@
+=======
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system \
+	   --all-partitions "$(subst $(space),$(comma),$(PRIVATE_PARTITION_LIST))" \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ifneq ($(filter vendor,$(fs_config_generate_extra_partition_list)),)
 ##################################
@@ -248,21 +324,83 @@ ifneq ($(TARGET_FS_CONFIG_GEN),)
 # Intentionally break build if you require generated AIDs
 # header file, but are not using any fs config files.
 include $(CLEAR_VARS)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 LOCAL_MODULE := oemaids_headers
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(dir $(my_gen_oem_aid))
 LOCAL_EXPORT_C_INCLUDE_DEPS := $(my_gen_oem_aid)
 include $(BUILD_HEADER_LIBRARY)
+=======
+
+LOCAL_MODULE := fs_config_files_product
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_files
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition product \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+endif
+
+ifneq ($(filter system_ext,$(fs_config_generate_extra_partition_list)),)
+##################################
+# Generate the system_ext/etc/fs_config_dirs binary file for the target
+# Add fs_config_dirs or fs_config_dirs_system_ext to PRODUCT_PACKAGES in
+# the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs_system_ext
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system_ext \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ##################################
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Generate the vendor/etc/passwd text file for the target
 # This file may be empty if no AIDs are defined in
 # TARGET_FS_CONFIG_GEN files.
+=======
+# Generate the system_ext/etc/fs_config_files binary file for the target
+# Add fs_config_files of fs_config_files_system_ext to PRODUCT_PACKAGES in
+# the device make file to enable
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 include $(CLEAR_VARS)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 LOCAL_MODULE := passwd
+=======
+LOCAL_MODULE := fs_config_files_system_ext
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 LOCAL_MODULE_CLASS := ETC
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 LOCAL_VENDOR_MODULE := true
 
+=======
+LOCAL_INSTALLED_MODULE_STEM := fs_config_files
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT)/etc
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): PRIVATE_LOCAL_PATH := $(LOCAL_PATH)
@@ -270,6 +408,7 @@ $(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
 $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
 	@mkdir -p $(dir $@)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$(hide) $< passwd --required-prefix=vendor_ --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(PRIVATE_TARGET_FS_CONFIG_GEN) > $@
 
 ##################################
@@ -290,6 +429,16 @@ $(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_con
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config)
 	@mkdir -p $(dir $@)
 	$(hide) $< group --required-prefix=vendor_ --aid-header=$(PRIVATE_ANDROID_FS_HDR) $(PRIVATE_TARGET_FS_CONFIG_GEN) > $@
+=======
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system_ext \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+endif
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 system_android_filesystem_config :=
 endif

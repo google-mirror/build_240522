@@ -40,6 +40,13 @@ Common goals are:
                             Stands for "Vendor, NO Dependencies"
     pnod                    Quickly rebuild the product image from built packages
                             Stands for "Product, NO Dependencies"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    senod                   Quickly rebuild the system_ext image from built packages
+                            Stands for "SystemExt, NO Dependencies"
+    onod                    Quickly rebuild the odm image from built packages
+                            Stands for "ODM, NO Dependencies"
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 
 So, for example, you could run:

@@ -17,6 +17,7 @@
 from __future__ import print_function
 
 import base64
+import io
 import os.path
 import unittest
 import zipfile
@@ -24,7 +25,13 @@ import zipfile
 import common
 import test_utils
 from sign_target_files_apks import (
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     EditTags, ReplaceCerts, ReplaceVerityKeyId, RewriteProps)
+=======
+    CheckApkAndApexKeysAvailable, EditTags, GetApkFileInfo, ReadApexKeysInfo,
+    ReplaceCerts, ReplaceVerityKeyId, RewriteAvbProps, RewriteProps,
+    WriteOtacerts)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 
 class SignTargetFilesApksTest(unittest.TestCase):
@@ -35,6 +42,18 @@ class SignTargetFilesApksTest(unittest.TestCase):
   <signer signature="{}"><seinfo value="media"/></signer>
 </policy>"""
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+  # Note that we test one apex with the partition tag, and another without to
+  # make sure that new OTA tools can process an older target files package that
+  # does not include the partition tag.
+
+  # pylint: disable=line-too-long
+  APEX_KEYS_TXT = """name="apex.apexd_test.apex" public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package.avbpubkey" private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem" container_certificate="build/make/target/product/security/testkey.x509.pem" container_private_key="build/make/target/product/security/testkey.pk8" partition="system"
+name="apex.apexd_test_different_app.apex" public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.avbpubkey" private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem" container_certificate="build/make/target/product/security/testkey.x509.pem" container_private_key="build/make/target/product/security/testkey.pk8"
+"""
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   def setUp(self):
     self.testdata_dir = test_utils.get_testdata_dir()
 
@@ -51,6 +70,40 @@ class SignTargetFilesApksTest(unittest.TestCase):
     # Tags are sorted.
     self.assertEqual(EditTags('xyz,abc,dev-keys,xyz'), ('abc,release-keys,xyz'))
 
+  def test_RewriteAvbProps(self):
+    misc_info = {
+      'avb_boot_add_hash_footer_args':
+          ('--prop com.android.build.boot.os_version:R '
+           '--prop com.android.build.boot.security_patch:2019-09-05'),
+      'avb_system_add_hashtree_footer_args':
+          ('--prop com.android.build.system.os_version:R '
+           '--prop com.android.build.system.security_patch:2019-09-05 '
+           '--prop com.android.build.system.fingerprint:'
+           'Android/aosp_taimen/taimen:R/QT/foo:userdebug/test-keys'),
+      'avb_vendor_add_hashtree_footer_args':
+          ('--prop com.android.build.vendor.os_version:R '
+           '--prop com.android.build.vendor.security_patch:2019-09-05 '
+           '--prop com.android.build.vendor.fingerprint:'
+           'Android/aosp_taimen/taimen:R/QT/foo:userdebug/dev-keys'),
+    }
+    expected_dict = {
+      'avb_boot_add_hash_footer_args':
+          ('--prop com.android.build.boot.os_version:R '
+           '--prop com.android.build.boot.security_patch:2019-09-05'),
+      'avb_system_add_hashtree_footer_args':
+          ('--prop com.android.build.system.os_version:R '
+           '--prop com.android.build.system.security_patch:2019-09-05 '
+           '--prop com.android.build.system.fingerprint:'
+           'Android/aosp_taimen/taimen:R/QT/foo:userdebug/release-keys'),
+      'avb_vendor_add_hashtree_footer_args':
+          ('--prop com.android.build.vendor.os_version:R '
+           '--prop com.android.build.vendor.security_patch:2019-09-05 '
+           '--prop com.android.build.vendor.fingerprint:'
+           'Android/aosp_taimen/taimen:R/QT/foo:userdebug/release-keys'),
+    }
+    RewriteAvbProps(misc_info)
+    self.assertDictEqual(expected_dict, misc_info)
+
   def test_RewriteProps(self):
     props = (
         ('', '\n'),
@@ -61,16 +114,50 @@ class SignTargetFilesApksTest(unittest.TestCase):
         ('ro.vendor.build.fingerprint=foo/bar/dev-keys',
          'ro.vendor.build.fingerprint=foo/bar/release-keys\n'),
         ('ro.vendor.build.thumbprint=foo/bar/dev-keys',
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
          'ro.vendor.build.thumbprint=foo/bar/release-keys\n'),
         ('# comment line 1', '# comment line 1\n'),
+=======
+         'ro.vendor.build.thumbprint=foo/bar/release-keys'),
+        ('ro.odm.build.fingerprint=foo/bar/test-keys',
+         'ro.odm.build.fingerprint=foo/bar/release-keys'),
+        ('ro.odm.build.thumbprint=foo/bar/test-keys',
+         'ro.odm.build.thumbprint=foo/bar/release-keys'),
+        ('ro.product.build.fingerprint=foo/bar/dev-keys',
+         'ro.product.build.fingerprint=foo/bar/release-keys'),
+        ('ro.product.build.thumbprint=foo/bar/dev-keys',
+         'ro.product.build.thumbprint=foo/bar/release-keys'),
+        ('ro.system_ext.build.fingerprint=foo/bar/test-keys',
+         'ro.system_ext.build.fingerprint=foo/bar/release-keys'),
+        ('ro.system_ext.build.thumbprint=foo/bar/test-keys',
+         'ro.system_ext.build.thumbprint=foo/bar/release-keys'),
+        ('# comment line 1', '# comment line 1'),
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         ('ro.bootimage.build.fingerprint=foo/bar/dev-keys',
          'ro.bootimage.build.fingerprint=foo/bar/release-keys\n'),
         ('ro.build.description='
          'sailfish-user 8.0.0 OPR6.170623.012 4283428 dev-keys',
          'ro.build.description='
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
          'sailfish-user 8.0.0 OPR6.170623.012 4283428 release-keys\n'),
         ('ro.build.tags=dev-keys', 'ro.build.tags=release-keys\n'),
         ('# comment line 2', '# comment line 2\n'),
+=======
+         'sailfish-user 8.0.0 OPR6.170623.012 4283428 release-keys'),
+        ('ro.build.tags=dev-keys', 'ro.build.tags=release-keys'),
+        ('ro.build.tags=test-keys', 'ro.build.tags=release-keys'),
+        ('ro.system.build.tags=dev-keys',
+         'ro.system.build.tags=release-keys'),
+        ('ro.vendor.build.tags=dev-keys',
+         'ro.vendor.build.tags=release-keys'),
+        ('ro.odm.build.tags=dev-keys',
+         'ro.odm.build.tags=release-keys'),
+        ('ro.product.build.tags=dev-keys',
+         'ro.product.build.tags=release-keys'),
+        ('ro.system_ext.build.tags=dev-keys',
+         'ro.system_ext.build.tags=release-keys'),
+        ('# comment line 2', '# comment line 2'),
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
         ('ro.build.display.id=OPR6.170623.012 dev-keys',
          'ro.build.display.id=OPR6.170623.012\n'),
         ('# comment line 3', '# comment line 3\n'),
@@ -112,7 +199,7 @@ class SignTargetFilesApksTest(unittest.TestCase):
       ReplaceVerityKeyId(input_zip, output_zip, cert_file)
 
     with zipfile.ZipFile(output_file) as output_zip:
-      self.assertEqual(BOOT_CMDLINE1, output_zip.read('BOOT/cmdline'))
+      self.assertEqual(BOOT_CMDLINE1, output_zip.read('BOOT/cmdline').decode())
 
     # Test with the second certificate.
     cert_file = os.path.join(self.testdata_dir, 'testkey.x509.pem')
@@ -122,7 +209,7 @@ class SignTargetFilesApksTest(unittest.TestCase):
       ReplaceVerityKeyId(input_zip, output_zip, cert_file)
 
     with zipfile.ZipFile(output_file) as output_zip:
-      self.assertEqual(BOOT_CMDLINE2, output_zip.read('BOOT/cmdline'))
+      self.assertEqual(BOOT_CMDLINE2, output_zip.read('BOOT/cmdline').decode())
 
   def test_ReplaceVerityKeyId_no_veritykeyid(self):
     BOOT_CMDLINE = (
@@ -140,7 +227,7 @@ class SignTargetFilesApksTest(unittest.TestCase):
       ReplaceVerityKeyId(input_zip, output_zip, None)
 
     with zipfile.ZipFile(output_file) as output_zip:
-      self.assertEqual(BOOT_CMDLINE, output_zip.read('BOOT/cmdline'))
+      self.assertEqual(BOOT_CMDLINE, output_zip.read('BOOT/cmdline').decode())
 
   def test_ReplaceCerts(self):
     cert1_path = os.path.join(self.testdata_dir, 'platform.x509.pem')
@@ -211,3 +298,319 @@ class SignTargetFilesApksTest(unittest.TestCase):
         cert2_path[:-9] : 'non-existent',
     }
     self.assertEqual(output_xml, ReplaceCerts(input_xml))
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+  def test_WriteOtacerts(self):
+    certs = [
+        os.path.join(self.testdata_dir, 'platform.x509.pem'),
+        os.path.join(self.testdata_dir, 'media.x509.pem'),
+        os.path.join(self.testdata_dir, 'testkey.x509.pem'),
+    ]
+    entry_name = 'SYSTEM/etc/security/otacerts.zip'
+    output_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(output_file, 'w') as output_zip:
+      WriteOtacerts(output_zip, entry_name, certs)
+    with zipfile.ZipFile(output_file) as input_zip:
+      self.assertIn(entry_name, input_zip.namelist())
+      otacerts_file = io.BytesIO(input_zip.read(entry_name))
+      with zipfile.ZipFile(otacerts_file) as otacerts_zip:
+        self.assertEqual(3, len(otacerts_zip.namelist()))
+
+  def test_CheckApkAndApexKeysAvailable(self):
+    input_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(input_file, 'w') as input_zip:
+      input_zip.writestr('SYSTEM/app/App1.apk', "App1-content")
+      input_zip.writestr('SYSTEM/app/App2.apk.gz', "App2-content")
+
+    apk_key_map = {
+        'App1.apk' : 'key1',
+        'App2.apk' : 'key2',
+        'App3.apk' : 'key3',
+    }
+    with zipfile.ZipFile(input_file) as input_zip:
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, {})
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, '.gz', {})
+
+      # 'App2.apk.gz' won't be considered as an APK.
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, {})
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, '.xz', {})
+
+      del apk_key_map['App2.apk']
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          '.gz', {})
+
+  def test_CheckApkAndApexKeysAvailable_invalidApexKeys(self):
+    input_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(input_file, 'w') as input_zip:
+      input_zip.writestr('SYSTEM/apex/Apex1.apex', "Apex1-content")
+      input_zip.writestr('SYSTEM/apex/Apex2.apex', "Apex2-content")
+
+    apk_key_map = {
+        'Apex1.apex' : 'key1',
+        'Apex2.apex' : 'key2',
+        'Apex3.apex' : 'key3',
+    }
+    apex_keys = {
+        'Apex1.apex' : ('payload-key1', 'container-key1'),
+        'Apex2.apex' : ('payload-key2', 'container-key2'),
+    }
+    with zipfile.ZipFile(input_file) as input_zip:
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, apex_keys)
+
+      # Fine to have both keys as PRESIGNED.
+      apex_keys['Apex2.apex'] = ('PRESIGNED', 'PRESIGNED')
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, apex_keys)
+
+      # Having only one of them as PRESIGNED is not allowed.
+      apex_keys['Apex2.apex'] = ('payload-key2', 'PRESIGNED')
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          None, apex_keys)
+
+      apex_keys['Apex2.apex'] = ('PRESIGNED', 'container-key1')
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          None, apex_keys)
+
+  def test_GetApkFileInfo(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk", None, [])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk", None, [])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.dat", None, [])
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+  def test_GetApkFileInfo_withCompressedApks(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk.gz", ".gz", [])
+    self.assertTrue(is_apk)
+    self.assertTrue(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk.gz", ".xz", [])
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "PRODUCT/apps/Chats.apk", "", [])
+
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "PRODUCT/apps/Chats.apk", "apk", [])
+
+  def test_GetApkFileInfo_withSkippedPrefixes(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/preloads/apps/Chats.apk", None, set())
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/preloads/apps/Chats.apk",
+        None,
+        set(["PRODUCT/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        set(["SYSTEM/preloads/", "SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk.gz",
+        ".gz",
+        set(["PRODUCT/prebuilts/", "SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertTrue(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.dat",
+        None,
+        set(["SYSTEM_OTHER/preloads/"]))
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+  def test_GetApkFileInfo_checkSkippedPrefixesInput(self):
+    # set
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        set(["SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # tuple
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        ("SYSTEM_OTHER/preloads/",))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # list
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        ["SYSTEM_OTHER/preloads/"])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # str is invalid.
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None, "SYSTEM_OTHER/preloads/")
+
+    # None is invalid.
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None, None)
+
+  def test_ReadApexKeysInfo(self):
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', self.APEX_KEYS_TXT)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_mismatchingContainerKeys(self):
+    # Mismatching payload public / private keys.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.avbpubkey" '
+        'private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey2.pk8" '
+        'partition="system"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      self.assertRaises(ValueError, ReadApexKeysInfo, target_files_zip)
+
+  def test_ReadApexKeysInfo_missingPayloadPrivateKey(self):
+    # Invalid lines will be skipped.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.avbpubkey" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey.pk8"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_missingPayloadPublicKey(self):
+    # Invalid lines will be skipped.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey.pk8"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_presignedKeys(self):
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="PRESIGNED" '
+        'public_key="PRESIGNED" '
+        'container_certificate="PRESIGNED" '
+        'container_private_key="PRESIGNED"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_presignedKeys(self):
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="PRESIGNED" '
+        'public_key="PRESIGNED" '
+        'container_certificate="PRESIGNED" '
+        'container_private_key="PRESIGNED"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

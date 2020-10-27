@@ -23,6 +23,7 @@ ifneq (,$(PLATFORM_VNDK_VERSION))
 # BOARD_VNDK_RUNTIME_DISABLE must not be set to 'true'.
 ifneq ($(BOARD_VNDK_RUNTIME_DISABLE),true)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Returns arch-specific libclang_rt.ubsan* library name.
 # Because VNDK_CORE_LIBRARIES includes all arch variants for libclang_rt.ubsan*
 # libs, the arch-specific libs are selected separately.
@@ -219,9 +220,12 @@ ifdef TARGET_2ND_ARCH
 endif
 	$(hide) $(SOONG_ZIP) -o $@ -C $(PRIVATE_VNDK_SNAPSHOT_OUT) -D $(PRIVATE_VNDK_SNAPSHOT_OUT)
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 .PHONY: vndk
-vndk: $(vndk_snapshot_zip)
+vndk: $(SOONG_VNDK_SNAPSHOT_ZIP)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(call dist-for-goals, vndk, $(vndk_snapshot_zip))
 
 # clear global vars
@@ -241,6 +245,9 @@ binder :=
 vndk_lib_dir :=
 vndk_lib_dir_2nd :=
 vndk_snapshot_dependencies :=
+=======
+$(call dist-for-goals, vndk, $(SOONG_VNDK_SNAPSHOT_ZIP))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 else # BOARD_VNDK_RUNTIME_DISABLE is set to 'true'
 error_msg := "CANNOT generate VNDK snapshot. BOARD_VNDK_RUNTIME_DISABLE must not be set to 'true'."
@@ -257,8 +264,9 @@ endif # BOARD_VNDK_VERSION
 ifneq (,$(error_msg))
 
 .PHONY: vndk
+vndk: PRIVATE_MAKEFILE := $(current_makefile)
 vndk:
-	$(call echo-error,$(current_makefile),$(error_msg))
+	$(call echo-error,$(PRIVATE_MAKEFILE),$(error_msg))
 	exit 1
 
 endif

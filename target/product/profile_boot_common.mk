@@ -19,27 +19,19 @@
 # remove classes that are no longer in use.
 # Ideally we would just generate an empty boot.art but we don't have the build
 # support to separate the image from the compile code.
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := build/target/product/empty-profile
-PRODUCT_DEX_PREOPT_BOOT_FLAGS := --count-hotness-in-compiled-code
+PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := build/make/target/product/empty-profile
 DEX_PREOPT_DEFAULT := nostripping
-
-# Disable uncompressing priv apps so that there is enough space to build the system partition.
-DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
-
-# Use an empty preloaded-classes list.
-PRODUCT_COPY_FILES += \
-    build/target/product/empty-preloaded-classes:system/etc/preloaded-classes
 
 # Boot image property overrides.
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.jitinitialsize=32m \
-    dalvik.vm.jitmaxsize=32m \
-    dalvik.vm.usejitprofiles=true \
-    dalvik.vm.hot-startup-method-samples=256 \
     dalvik.vm.profilesystemserver=true \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     dalvik.vm.profilebootimage=true
 
 # Use speed compiler filter since system server doesn't have JIT.
 PRODUCT_DEX_PREOPT_BOOT_FLAGS += --compiler-filter=speed
+=======
+    dalvik.vm.profilebootclasspath=true
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 PRODUCT_DIST_BOOT_AND_SYSTEM_JARS := true

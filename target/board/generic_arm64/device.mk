@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
 
@@ -40,6 +41,13 @@ PRODUCT_COPY_FILES += \
 #   NFC configuration file should be in vendor/etc, instead of system/etc
 PRODUCT_COPY_FILES += \
     device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
+=======
+PRODUCT_COPY_FILES += \
+    kernel/prebuilts/4.19/arm64/Image.gz:kernel-4.19-gz \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4:kernel-5.4 \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-gz:kernel-5.4-gz \
+    device/google/cuttlefish_kernel/5.4-arm64/kernel-5.4-lz4:kernel-5.4-lz4
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Adjust the Dalvik heap to be appropriate for a tablet.
 $(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)

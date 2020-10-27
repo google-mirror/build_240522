@@ -22,7 +22,6 @@ LOCAL_RES_LIBRARIES := $(enforce_rro_source_module)
 endif
 
 LOCAL_FULL_MANIFEST_FILE := $(rro_android_manifest_file)
-LOCAL_CERTIFICATE := platform
 
 LOCAL_AAPT_FLAGS += --auto-add-overlay
 LOCAL_RESOURCE_DIR := $(enforce_rro_source_overlays)

@@ -22,6 +22,7 @@ TARGET_CPU_ABI := x86
 TARGET_ARCH := x86
 TARGET_ARCH_VARIANT := x86
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 TARGET_2ND_ARCH := arm
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
@@ -30,10 +31,17 @@ TARGET_2ND_CPU_VARIANT := generic
 
 # Tell the build system this isn't a typical 64bit+32bit multilib configuration.
 TARGET_TRANSLATE_2ND_ARCH := true
+=======
+TARGET_NATIVE_BRIDGE_ARCH := arm
+TARGET_NATIVE_BRIDGE_ARCH_VARIANT := armv7-a-neon
+TARGET_NATIVE_BRIDGE_CPU_VARIANT := generic
+TARGET_NATIVE_BRIDGE_ABI := armeabi-v7a armeabi
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # no hardware camera
 USE_CAMERA_STUB := true
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Enable dex-preoptimization to speed up the first boot sequence
 # of an SDK AVD. Note that this operation only works on Linux for now
 ifeq ($(HOST_OS),linux)
@@ -45,9 +53,25 @@ endif
 
 TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+=======
+#
+# The inclusion order below is important.
+# The settings in latter makefiles overwrite those in the former.
+#
+include build/make/target/board/BoardConfigMainlineCommon.mk
+include build/make/target/board/BoardConfigEmuCommon.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Build OpenGLES emulation host and guest libraries
 BUILD_EMULATOR_OPENGL := true
+=======
+# the settings differ from BoardConfigMainlineCommon.mk
+BOARD_USES_SYSTEM_OTHER_ODEX :=
+
+# Resize to 4G to accomodate ASAN and CTS
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 4294967296
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Build and enable the OpenGL ES View renderer. When running on the emulator,
 # the GLES renderer disables itself if host GL acceleration isn't available.

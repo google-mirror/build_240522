@@ -38,6 +38,17 @@ LOCAL_INTERMEDIATE_TARGETS := $(linked_module)
 include $(BUILD_SYSTEM)/binary.mk
 ###################################
 
+ifdef LOCAL_INJECT_BSSL_HASH
+inject_module := $(intermediates)/INJECT_BSSL_HASH/$(notdir $(my_installed_module_stem))
+LOCAL_INTERMEDIATE_TARGETS += $(inject_module)
+$(inject_module): $(SOONG_HOST_OUT)/bin/bssl_inject_hash
+$(inject_module): $(linked_module)
+	@echo "target inject BSSL hash: $(PRIVATE_MODULE) ($@)"
+	$(SOONG_HOST_OUT)/bin/bssl_inject_hash -in-object $< -o $@
+else
+inject_module := $(linked_module)
+endif
+
 ###########################################################
 ## Pack relocation tables
 ###########################################################
@@ -85,7 +96,11 @@ my_unstripped_path := $(TARGET_OUT_UNSTRIPPED)/$(patsubst $(PRODUCT_OUT)/%,%,$(m
 else
 my_unstripped_path := $(LOCAL_UNSTRIPPED_PATH)
 endif
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 symbolic_input := $(relocation_packer_output)
+=======
+symbolic_input := $(inject_module)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
 $(symbolic_output) : $(symbolic_input)
 	@echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
@@ -97,7 +112,11 @@ $(symbolic_output) : $(symbolic_input)
 
 ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
 my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 breakpad_input := $(relocation_packer_output)
+=======
+breakpad_input := $(inject_module)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
 $(breakpad_output) : $(breakpad_input) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
@@ -133,12 +152,41 @@ ifneq ($(filter mips mips64,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
 endif
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(strip_output): PRIVATE_STRIP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
 $(strip_output): PRIVATE_OBJCOPY := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJCOPY)
 $(strip_output): PRIVATE_NM := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NM)
 $(strip_output): PRIVATE_READELF := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_READELF)
 ifeq ($(my_strip_module),no_debuglink)
 $(strip_output): PRIVATE_NO_DEBUGLINK := true
+=======
+ifeq (,$(filter no_debuglink mini-debug-info,$(my_strip_module)))
+  ifneq ($(TARGET_BUILD_VARIANT),user)
+    my_strip_args += --add-gnu-debuglink
+  endif
+endif
+
+ifeq ($($(my_prefix)OS),darwin)
+  # llvm-strip does not support Darwin Mach-O yet.
+  my_strip_args += --use-gnu-strip
+endif
+
+valid_strip := mini-debug-info keep_symbols true no_debuglink
+ifneq (,$(filter-out $(valid_strip),$(my_strip_module)))
+  $(call pretty-error,Invalid strip value $(my_strip_module), only one of $(valid_strip) allowed)
+endif
+
+ifneq (,$(my_strip_module))
+  $(strip_output): PRIVATE_STRIP_ARGS := $(my_strip_args)
+  $(strip_output): PRIVATE_TOOLS_PREFIX := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)TOOLS_PREFIX)
+  $(strip_output): $(strip_input) $(SOONG_STRIP_PATH)
+	@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
+	CLANG_BIN=$(LLVM_PREBUILTS_PATH) \
+	CROSS_COMPILE=$(PRIVATE_TOOLS_PREFIX) \
+	XZ=$(XZ) \
+	$(SOONG_STRIP_PATH) -i $< -o $@ -d $@.strip.d $(PRIVATE_STRIP_ARGS)
+  $(call include-depfile,$(strip_output).strip.d,$(strip_output))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 else
 $(strip_output): PRIVATE_NO_DEBUGLINK :=
 endif
@@ -174,6 +222,7 @@ endif # my_strip_module
 
 $(cleantarget): PRIVATE_CLEAN_FILES += \
     $(linked_module) \
+    $(inject_module) \
     $(breakpad_output) \
     $(symbolic_output) \
     $(strip_output)

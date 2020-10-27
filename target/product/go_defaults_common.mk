@@ -19,6 +19,7 @@
 # Set lowram options
 PRODUCT_PROPERTY_OVERRIDES += \
      ro.config.low_ram=true \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
      ro.lmk.critical_upgrade=true \
      ro.lmk.upgrade_pressure=40 \
      ro.lmk.downgrade_pressure=60 \
@@ -29,6 +30,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
      pm.dexopt.downgrade_after_inactive_days=10
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Speed profile services and wifi-service to reduce RAM and storage.
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
@@ -61,7 +64,35 @@ PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.heapsize=256m
 # Do not generate libartd.
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+# Do not spin up a separate process for the network stack on go devices, use an in-process APK.
+PRODUCT_PACKAGES += InProcessNetworkStack
+PRODUCT_PACKAGES += CellBroadcastAppPlatform
+PRODUCT_PACKAGES += CellBroadcastServiceModulePlatform
+PRODUCT_PACKAGES += com.android.tethering.inprocess
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # Strip the local variable table and the local variable type table to reduce
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+# Disable Scudo outside of eng builds to save RAM.
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+  PRODUCT_DISABLE_SCUDO := true
+endif
+
+# Add the system properties.
+TARGET_SYSTEM_PROP += \
+    build/make/target/board/go_defaults_common.prop
+
+# use the go specific handheld_core_hardware.xml from frameworks
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/go_handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

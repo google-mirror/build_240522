@@ -3,6 +3,7 @@
 #
 ####################################
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Default to debug version to help find bugs.
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifeq ($(USE_DEX2OAT_DEBUG),false)
@@ -11,6 +12,26 @@ PATCHOAT := $(HOST_OUT_EXECUTABLES)/patchoat$(HOST_EXECUTABLE_SUFFIX)
 else
 DEX2OAT := $(HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
 PATCHOAT := $(HOST_OUT_EXECUTABLES)/patchoatd$(HOST_EXECUTABLE_SUFFIX)
+=======
+# Install primary arch vdex files into a shared location, and then symlink them to both the primary
+# and secondary arch directories.
+my_vdex_copy_pairs := $(DEXPREOPT_IMAGE_VDEX_BUILT_INSTALLED_$(my_boot_image_name)_$(TARGET_ARCH))
+my_installed := $(foreach v,$(my_vdex_copy_pairs),$(PRODUCT_OUT)$(call word-colon,2,$(v)))
+$(firstword $(my_installed)): $(wordlist 2,9999,$(my_installed))
+
+my_built_vdex_dir := $(dir $(call word-colon,1,$(firstword $(my_vdex_copy_pairs))))
+my_installed_vdex_dir := $(PRODUCT_OUT)$(dir $(call word-colon,2,$(firstword $(my_vdex_copy_pairs))))
+
+$(my_installed): $(my_installed_vdex_dir)% : $(my_built_vdex_dir)%
+	@echo "Install: $@"
+	@rm -f $@
+	$(copy-file-to-target)
+	mkdir -p $(dir $@)/$(TARGET_ARCH)
+	ln -sfn ../$(notdir $@) $(dir $@)/$(TARGET_ARCH)
+ifdef TARGET_2ND_ARCH
+	mkdir -p $(dir $@)/$(TARGET_2ND_ARCH)
+	ln -sfn ../$(notdir $@) $(dir $@)/$(TARGET_2ND_ARCH)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
@@ -141,8 +162,13 @@ include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
 
 ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
 ifdef TARGET_2ND_ARCH
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
+=======
+  my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
+  include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 endif
 

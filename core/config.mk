@@ -77,8 +77,83 @@ $(KATI_obsolete_var \
   ,See $(CHANGES_URL)#other_envsetup_variables)
 $(KATI_obsolete_var PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE,Set FCM Version in device manifest instead. See $(CHANGES_URL)#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE)
 $(KATI_obsolete_var USE_CLANG_PLATFORM_BUILD,Clang is the only supported Android compiler. See $(CHANGES_URL)#USE_CLANG_PLATFORM_BUILD)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 
 CHANGES_URL :=
+=======
+$(KATI_obsolete_var BUILD_DROIDDOC,Droiddoc is only supported in Soong. See details on build/soong/java/droiddoc.go)
+$(KATI_obsolete_var BUILD_APIDIFF,Apidiff is only supported in Soong. See details on build/soong/java/droiddoc.go)
+$(KATI_obsolete_var \
+  DEFAULT_GCC_CPP_STD_VERSION \
+  HOST_GLOBAL_CFLAGS 2ND_HOST_GLOBAL_CFLAGS \
+  HOST_GLOBAL_CONLYFLAGS 2ND_HOST_GLOBAL_CONLYFLAGS \
+  HOST_GLOBAL_CPPFLAGS 2ND_HOST_GLOBAL_CPPFLAGS \
+  HOST_GLOBAL_LDFLAGS 2ND_HOST_GLOBAL_LDFLAGS \
+  HOST_GLOBAL_LLDFLAGS 2ND_HOST_GLOBAL_LLDFLAGS \
+  HOST_CLANG_SUPPORTED 2ND_HOST_CLANG_SUPPORTED \
+  HOST_CC 2ND_HOST_CC \
+  HOST_CXX 2ND_HOST_CXX \
+  HOST_CROSS_GLOBAL_CFLAGS 2ND_HOST_CROSS_GLOBAL_CFLAGS \
+  HOST_CROSS_GLOBAL_CONLYFLAGS 2ND_HOST_CROSS_GLOBAL_CONLYFLAGS \
+  HOST_CROSS_GLOBAL_CPPFLAGS 2ND_HOST_CROSS_GLOBAL_CPPFLAGS \
+  HOST_CROSS_GLOBAL_LDFLAGS 2ND_HOST_CROSS_GLOBAL_LDFLAGS \
+  HOST_CROSS_GLOBAL_LLDFLAGS 2ND_HOST_CROSS_GLOBAL_LLDFLAGS \
+  HOST_CROSS_CLANG_SUPPORTED 2ND_HOST_CROSS_CLANG_SUPPORTED \
+  HOST_CROSS_CC 2ND_HOST_CROSS_CC \
+  HOST_CROSS_CXX 2ND_HOST_CROSS_CXX \
+  TARGET_GLOBAL_CFLAGS 2ND_TARGET_GLOBAL_CFLAGS \
+  TARGET_GLOBAL_CONLYFLAGS 2ND_TARGET_GLOBAL_CONLYFLAGS \
+  TARGET_GLOBAL_CPPFLAGS 2ND_TARGET_GLOBAL_CPPFLAGS \
+  TARGET_GLOBAL_LDFLAGS 2ND_TARGET_GLOBAL_LDFLAGS \
+  TARGET_GLOBAL_LLDFLAGS 2ND_TARGET_GLOBAL_LLDFLAGS \
+  TARGET_CLANG_SUPPORTED 2ND_TARGET_CLANG_SUPPORTED \
+  TARGET_CC 2ND_TARGET_CC \
+  TARGET_CXX 2ND_TARGET_CXX \
+  TARGET_TOOLCHAIN_ROOT 2ND_TARGET_TOOLCHAIN_ROOT \
+  HOST_TOOLCHAIN_ROOT 2ND_HOST_TOOLCHAIN_ROOT \
+  HOST_CROSS_TOOLCHAIN_ROOT 2ND_HOST_CROSS_TOOLCHAIN_ROOT \
+  HOST_TOOLS_PREFIX 2ND_HOST_TOOLS_PREFIX \
+  HOST_CROSS_TOOLS_PREFIX 2ND_HOST_CROSS_TOOLS_PREFIX \
+  HOST_GCC_VERSION 2ND_HOST_GCC_VERSION \
+  HOST_CROSS_GCC_VERSION 2ND_HOST_CROSS_GCC_VERSION \
+  TARGET_NDK_GCC_VERSION 2ND_TARGET_NDK_GCC_VERSION \
+  GLOBAL_CFLAGS_NO_OVERRIDE GLOBAL_CPPFLAGS_NO_OVERRIDE \
+  ,GCC support has been removed. Use Clang instead)
+$(KATI_obsolete_var DIST_DIR dist_goal,Use dist-for-goals instead. See $(CHANGES_URL)#dist)
+$(KATI_obsolete_var TARGET_ANDROID_FILESYSTEM_CONFIG_H,Use TARGET_FS_CONFIG_GEN instead)
+$(KATI_deprecated_var USER,Use BUILD_USERNAME instead. See $(CHANGES_URL)#USER)
+$(KATI_obsolete_var TARGET_ROOT_OUT_SBIN,/sbin has been removed, use /system/bin instead)
+$(KATI_obsolete_var TARGET_ROOT_OUT_SBIN_UNSTRIPPED,/sbin has been removed, use /system/bin instead)
+$(KATI_obsolete_var BUILD_BROKEN_PHONY_TARGETS)
+$(KATI_obsolete_var BUILD_BROKEN_DUP_COPY_HEADERS)
+$(KATI_obsolete_var BUILD_BROKEN_ENG_DEBUG_TAGS)
+$(KATI_obsolete_export It is a global setting. See $(CHANGES_URL)#export_keyword)
+$(KATI_obsolete_var BUILD_BROKEN_ANDROIDMK_EXPORTS)
+$(KATI_obsolete_var PRODUCT_STATIC_BOOT_CONTROL_HAL,Use shared library module instead. See $(CHANGES_URL)#PRODUCT_STATIC_BOOT_CONTROL_HAL)
+$(KATI_obsolete_var \
+  ARCH_ARM_HAVE_ARMV7A \
+  ARCH_DSP_REV \
+  ARCH_HAVE_ALIGNED_DOUBLES \
+  ARCH_MIPS_HAS_DSP \
+  ARCH_MIPS_HAS_FPU \
+  ARCH_MIPS_REV6 \
+  ARCH_X86_HAVE_AES_NI \
+  ARCH_X86_HAVE_AVX \
+  ARCH_X86_HAVE_AVX2 \
+  ARCH_X86_HAVE_AVX512 \
+  ARCH_X86_HAVE_MOVBE \
+  ARCH_X86_HAVE_POPCNT \
+  ARCH_X86_HAVE_SSE4 \
+  ARCH_X86_HAVE_SSE4_2 \
+  ARCH_X86_HAVE_SSSE3 \
+)
+$(KATI_obsolete_var PRODUCT_IOT)
+$(KATI_obsolete_var MD5SUM)
+$(KATI_obsolete_var BOARD_HAL_STATIC_LIBRARIES, See $(CHANGES_URL)#BOARD_HAL_STATIC_LIBRARIES)
+$(KATI_obsolete_var LOCAL_HAL_STATIC_LIBRARIES, See $(CHANGES_URL)#BOARD_HAL_STATIC_LIBRARIES)
+$(KATI_obsolete_var PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_WHITELIST,Use PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_ALLOW_LIST.)
+$(KATI_obsolete_var PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST,Use PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST.)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
@@ -91,14 +166,29 @@ MAKECMDGOALS := $(strip $(filter-out dist,$(MAKECMDGOALS)))
 
 UNAME := $(shell uname -sm)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 SRC_TARGET_DIR := $(TOPDIR)build/target
 SRC_API_DIR := $(TOPDIR)prebuilts/sdk/api
 SRC_SYSTEM_API_DIR := $(TOPDIR)prebuilts/sdk/system-api
 SRC_TEST_API_DIR := $(TOPDIR)prebuilts/sdk/test-api
+=======
+SRC_TARGET_DIR := $(TOPDIR)build/make/target
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Some specific paths to tools
 SRC_DROIDDOC_DIR := $(TOPDIR)build/make/tools/droiddoc
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+# Mark some inputs as readonly
+ifdef TARGET_DEVICE_DIR
+  .KATI_READONLY := TARGET_DEVICE_DIR
+endif
+
+ONE_SHOT_MAKEFILE :=
+.KATI_READONLY := ONE_SHOT_MAKEFILE
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # Set up efficient math functions which are used in make.
 # Here since this file is included by envsetup as well as during build.
 include $(BUILD_SYSTEM)/math.mk
@@ -113,8 +203,9 @@ include $(BUILD_SYSTEM)/project_definitions.mk
 # Build system internal files
 # ###############################################################
 
-BUILD_COMBOS:= $(BUILD_SYSTEM)/combo
+BUILD_COMBOS :=$= $(BUILD_SYSTEM)/combo
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 CLEAR_VARS:= $(BUILD_SYSTEM)/clear_vars.mk
 BUILD_HOST_STATIC_LIBRARY:= $(BUILD_SYSTEM)/host_static_library.mk
 BUILD_HOST_SHARED_LIBRARY:= $(BUILD_SYSTEM)/host_shared_library.mk
@@ -142,18 +233,48 @@ BUILD_NATIVE_BENCHMARK := $(BUILD_SYSTEM)/native_benchmark.mk
 BUILD_HOST_NATIVE_TEST := $(BUILD_SYSTEM)/host_native_test.mk
 BUILD_FUZZ_TEST := $(BUILD_SYSTEM)/fuzz_test.mk
 BUILD_HOST_FUZZ_TEST := $(BUILD_SYSTEM)/host_fuzz_test.mk
+=======
+CLEAR_VARS :=$= $(BUILD_SYSTEM)/clear_vars.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
-BUILD_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/shared_test_lib.mk
-BUILD_HOST_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/host_shared_test_lib.mk
-BUILD_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/static_test_lib.mk
-BUILD_HOST_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/host_static_test_lib.mk
+BUILD_HOST_STATIC_LIBRARY :=$= $(BUILD_SYSTEM)/host_static_library.mk
+BUILD_HOST_SHARED_LIBRARY :=$= $(BUILD_SYSTEM)/host_shared_library.mk
+BUILD_STATIC_LIBRARY :=$= $(BUILD_SYSTEM)/static_library.mk
+BUILD_HEADER_LIBRARY :=$= $(BUILD_SYSTEM)/header_library.mk
+BUILD_AUX_STATIC_LIBRARY :=$= $(BUILD_SYSTEM)/aux_static_library.mk
+BUILD_AUX_EXECUTABLE :=$= $(BUILD_SYSTEM)/aux_executable.mk
+BUILD_SHARED_LIBRARY :=$= $(BUILD_SYSTEM)/shared_library.mk
+BUILD_EXECUTABLE :=$= $(BUILD_SYSTEM)/executable.mk
+BUILD_HOST_EXECUTABLE :=$= $(BUILD_SYSTEM)/host_executable.mk
+BUILD_PACKAGE :=$= $(BUILD_SYSTEM)/package.mk
+BUILD_PHONY_PACKAGE :=$= $(BUILD_SYSTEM)/phony_package.mk
+BUILD_RRO_PACKAGE :=$= $(BUILD_SYSTEM)/build_rro_package.mk
+BUILD_HOST_PREBUILT :=$= $(BUILD_SYSTEM)/host_prebuilt.mk
+BUILD_PREBUILT :=$= $(BUILD_SYSTEM)/prebuilt.mk
+BUILD_MULTI_PREBUILT :=$= $(BUILD_SYSTEM)/multi_prebuilt.mk
+BUILD_JAVA_LIBRARY :=$= $(BUILD_SYSTEM)/java_library.mk
+BUILD_STATIC_JAVA_LIBRARY :=$= $(BUILD_SYSTEM)/static_java_library.mk
+BUILD_HOST_JAVA_LIBRARY :=$= $(BUILD_SYSTEM)/host_java_library.mk
+BUILD_COPY_HEADERS :=$= $(BUILD_SYSTEM)/copy_headers.mk
+BUILD_NATIVE_TEST :=$= $(BUILD_SYSTEM)/native_test.mk
+BUILD_NATIVE_BENCHMARK :=$= $(BUILD_SYSTEM)/native_benchmark.mk
+BUILD_HOST_NATIVE_TEST :=$= $(BUILD_SYSTEM)/host_native_test.mk
+BUILD_FUZZ_TEST :=$= $(BUILD_SYSTEM)/fuzz_test.mk
+BUILD_HOST_FUZZ_TEST :=$= $(BUILD_SYSTEM)/host_fuzz_test.mk
 
-BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk
-BUILD_HOST_DALVIK_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_java_library.mk
-BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_static_java_library.mk
+BUILD_SHARED_TEST_LIBRARY :=$= $(BUILD_SYSTEM)/shared_test_lib.mk
+BUILD_HOST_SHARED_TEST_LIBRARY :=$= $(BUILD_SYSTEM)/host_shared_test_lib.mk
+BUILD_STATIC_TEST_LIBRARY :=$= $(BUILD_SYSTEM)/static_test_lib.mk
+BUILD_HOST_STATIC_TEST_LIBRARY :=$= $(BUILD_SYSTEM)/host_static_test_lib.mk
 
-BUILD_HOST_TEST_CONFIG := $(BUILD_SYSTEM)/host_test_config.mk
-BUILD_TARGET_TEST_CONFIG := $(BUILD_SYSTEM)/target_test_config.mk
+BUILD_NOTICE_FILE :=$= $(BUILD_SYSTEM)/notice_files.mk
+BUILD_HOST_DALVIK_JAVA_LIBRARY :=$= $(BUILD_SYSTEM)/host_dalvik_java_library.mk
+BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY :=$= $(BUILD_SYSTEM)/host_dalvik_static_java_library.mk
+
+BUILD_HOST_TEST_CONFIG :=$= $(BUILD_SYSTEM)/host_test_config.mk
+BUILD_TARGET_TEST_CONFIG :=$= $(BUILD_SYSTEM)/target_test_config.mk
+
+include $(BUILD_SYSTEM)/deprecation.mk
 
 INSTRUMENTATION_TEST_CONFIG_TEMPLATE := $(BUILD_SYSTEM)/instrumentation_test_config_template.xml
 NATIVE_TEST_CONFIG_TEMPLATE := $(BUILD_SYSTEM)/native_test_config_template.xml
@@ -184,6 +305,36 @@ endef
 
 # Initialize SOONG_CONFIG_NAMESPACES so that it isn't recursive.
 SOONG_CONFIG_NAMESPACES :=
+
+# The add_soong_config_namespace function adds a namespace and initializes it
+# to be empty.
+# $1 is the namespace.
+# Ex: $(call add_soong_config_namespace,acme)
+
+define add_soong_config_namespace
+$(eval SOONG_CONFIG_NAMESPACES += $1) \
+$(eval SOONG_CONFIG_$1 :=)
+endef
+
+# The add_soong_config_var function adds a a list of soong config variables to
+# SOONG_CONFIG_*. The variables and their values are then available to a
+# soong_config_module_type in an Android.bp file.
+# $1 is the namespace. $2 is the list of variables.
+# Ex: $(call add_soong_config_var,acme,COOL_FEATURE_A COOL_FEATURE_B)
+define add_soong_config_var
+$(eval SOONG_CONFIG_$1 += $2) \
+$(foreach v,$2,$(eval SOONG_CONFIG_$1_$v := $($v)))
+endef
+
+# The add_soong_config_var_value function defines a make variable and also adds
+# the variable to SOONG_CONFIG_*.
+# $1 is the namespace. $2 is the variable name. $3 is the variable value.
+# Ex: $(call add_soong_config_var_value,acme,COOL_FEATURE,true)
+
+define add_soong_config_var_value
+$(eval $2 := $3) \
+$(call add_soong_config_var,$1,$2)
+endef
 
 # Set the extensions used for various packages
 COMMON_PACKAGE_SUFFIX := .zip
@@ -346,10 +497,14 @@ endif
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ccache.mk
 include $(BUILD_SYSTEM)/goma.mk
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 
 export CC_WRAPPER
 export CXX_WRAPPER
 export JAVAC_WRAPPER
+=======
+include $(BUILD_SYSTEM)/rbe.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 
 ifdef TARGET_PREFER_32_BIT
@@ -537,15 +692,11 @@ endif
 ifneq ($(filter true,$(SOONG_ALLOW_MISSING_DEPENDENCIES)),)
 ALLOW_MISSING_DEPENDENCIES := true
 endif
-ifneq ($(ONE_SHOT_MAKEFILE),)
-ALLOW_MISSING_DEPENDENCIES := true
-endif
 .KATI_READONLY := ALLOW_MISSING_DEPENDENCIES
 
 prebuilt_sdk_tools := prebuilts/sdk/tools
 prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
 
-# Always use prebuilts for ckati and makeparallel
 prebuilt_build_tools := prebuilts/build-tools
 prebuilt_build_tools_wrappers := prebuilts/build-tools/common/bin
 prebuilt_build_tools_jars := prebuilts/build-tools/common/framework
@@ -572,24 +723,22 @@ endif
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
 ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
-  AIDL := $(HOST_OUT_EXECUTABLES)/aidl
   AAPT := $(HOST_OUT_EXECUTABLES)/aapt
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   AAPT2 := $(HOST_OUT_EXECUTABLES)/aapt2
   DESUGAR := $(HOST_OUT_JAVA_LIBRARIES)/desugar.jar
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   MAINDEXCLASSES := $(HOST_OUT_EXECUTABLES)/mainDexClasses
-  SIGNAPK_JAR := $(HOST_OUT_JAVA_LIBRARIES)/signapk$(COMMON_JAVA_PACKAGE_SUFFIX)
-  SIGNAPK_JNI_LIBRARY_PATH := $(HOST_OUT_SHARED_LIBRARIES)
-  ZIPALIGN := $(HOST_OUT_EXECUTABLES)/zipalign
 
 else # TARGET_BUILD_APPS || TARGET_BUILD_PDK
-  AIDL := $(prebuilt_build_tools_bin)/aidl
   AAPT := $(prebuilt_sdk_tools_bin)/aapt
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   AAPT2 := $(prebuilt_sdk_tools_bin)/aapt2
   DESUGAR := $(prebuilt_build_tools_jars)/desugar.jar
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   MAINDEXCLASSES := $(prebuilt_sdk_tools)/mainDexClasses
-  SIGNAPK_JAR := $(prebuilt_sdk_tools)/lib/signapk$(COMMON_JAVA_PACKAGE_SUFFIX)
-  SIGNAPK_JNI_LIBRARY_PATH := $(prebuilt_sdk_tools)/$(HOST_OS)/lib64
-  ZIPALIGN := $(prebuilt_build_tools_bin)/zipalign
 endif # TARGET_BUILD_APPS || TARGET_BUILD_PDK
 
 ifeq (,$(TARGET_BUILD_APPS))
@@ -608,13 +757,20 @@ ACP := $(prebuilt_build_tools_bin)/acp
 CKATI := $(prebuilt_build_tools_bin)/ckati
 DEPMOD := $(HOST_OUT_EXECUTABLES)/depmod
 FILESLIST := $(SOONG_HOST_OUT_EXECUTABLES)/fileslist
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 MAKEPARALLEL := $(prebuilt_build_tools_bin)/makeparallel
 SOONG_JAVAC_WRAPPER := $(SOONG_HOST_OUT_EXECUTABLES)/soong_javac_wrapper
 SOONG_ZIP := $(SOONG_HOST_OUT_EXECUTABLES)/soong_zip
 MERGE_ZIPS := $(SOONG_HOST_OUT_EXECUTABLES)/merge_zips
+=======
+FILESLIST_UTIL :=$= build/make/tools/fileslist_util.py
+HOST_INIT_VERIFIER := $(HOST_OUT_EXECUTABLES)/host_init_verifier
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 XMLLINT := $(SOONG_HOST_OUT_EXECUTABLES)/xmllint
-ZIP2ZIP := $(SOONG_HOST_OUT_EXECUTABLES)/zip2zip
-ZIPTIME := $(prebuilt_build_tools_bin)/ziptime
+
+# SOONG_ZIP is exported by Soong, but needs to be defined early for
+# $OUT/dexpreopt.global.  It will be verified against the Soong version.
+SOONG_ZIP := $(SOONG_HOST_OUT_EXECUTABLES)/soong_zip
 
 # ---------------------------------------------------------------
 # Generic tools.
@@ -628,6 +784,7 @@ BISON_PKGDATADIR := $(PWD)/prebuilts/build-tools/common/bison
 BISON := prebuilts/build-tools/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/bin/bison
 YACC := $(BISON) -d
 BISON_DATA := $(wildcard $(BISON_PKGDATADIR)/* $(BISON_PKGDATADIR)/*/*)
+M4 :=$= $(prebuilt_build_tools_bin_noasan)/m4
 
 YASM := prebuilts/misc/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/yasm/yasm
 
@@ -646,7 +803,7 @@ NANOPB_SRCS := external/nanopb-c/generator/protoc-gen-nanopb \
 VTSC := $(HOST_OUT_EXECUTABLES)/vtsc$(HOST_EXECUTABLE_SUFFIX)
 MKBOOTFS := $(HOST_OUT_EXECUTABLES)/mkbootfs$(HOST_EXECUTABLE_SUFFIX)
 MINIGZIP := $(HOST_OUT_EXECUTABLES)/minigzip$(HOST_EXECUTABLE_SUFFIX)
-BROTLI := $(HOST_OUT_EXECUTABLES)/brotli$(HOST_EXECUTABLE_SUFFIX)
+LZ4 := $(HOST_OUT_EXECUTABLES)/lz4$(HOST_EXECUTABLE_SUFFIX)
 ifeq (,$(strip $(BOARD_CUSTOM_MKBOOTIMG)))
 MKBOOTIMG := $(HOST_OUT_EXECUTABLES)/mkbootimg$(HOST_EXECUTABLE_SUFFIX)
 else
@@ -664,38 +821,52 @@ AVBTOOL := $(BOARD_CUSTOM_AVBTOOL)
 endif
 APICHECK := $(HOST_OUT_EXECUTABLES)/apicheck$(HOST_EXECUTABLE_SUFFIX)
 FS_GET_STATS := $(HOST_OUT_EXECUTABLES)/fs_get_stats$(HOST_EXECUTABLE_SUFFIX)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 MAKE_EXT4FS := $(HOST_OUT_EXECUTABLES)/mke2fs$(HOST_EXECUTABLE_SUFFIX)
 MKEXTUSERIMG := $(HOST_OUT_EXECUTABLES)/mkuserimg_mke2fs.sh
+=======
+MKEXTUSERIMG := $(HOST_OUT_EXECUTABLES)/mkuserimg_mke2fs
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 MKE2FS_CONF := system/extras/ext4_utils/mke2fs.conf
-BLK_ALLOC_TO_BASE_FS := $(HOST_OUT_EXECUTABLES)/blk_alloc_to_base_fs$(HOST_EXECUTABLE_SUFFIX)
-MAKE_SQUASHFS := $(HOST_OUT_EXECUTABLES)/mksquashfs$(HOST_EXECUTABLE_SUFFIX)
 MKSQUASHFSUSERIMG := $(HOST_OUT_EXECUTABLES)/mksquashfsimage.sh
-MAKE_F2FS := $(HOST_OUT_EXECUTABLES)/make_f2fs$(HOST_EXECUTABLE_SUFFIX)
 MKF2FSUSERIMG := $(HOST_OUT_EXECUTABLES)/mkf2fsuserimg.sh
 SIMG2IMG := $(HOST_OUT_EXECUTABLES)/simg2img$(HOST_EXECUTABLE_SUFFIX)
-IMG2SIMG := $(HOST_OUT_EXECUTABLES)/img2simg$(HOST_EXECUTABLE_SUFFIX)
 E2FSCK := $(HOST_OUT_EXECUTABLES)/e2fsck$(HOST_EXECUTABLE_SUFFIX)
-MKTARBALL := build/make/tools/mktarball.sh
 TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
 JARJAR := $(HOST_OUT_JAVA_LIBRARIES)/jarjar.jar
 DATA_BINDING_COMPILER := $(HOST_OUT_JAVA_LIBRARIES)/databinding-compiler.jar
 FAT16COPY := build/make/tools/fat16copy.py
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 CHECK_LINK_TYPE := build/make/tools/check_link_type.py
+=======
+CHECK_ELF_FILE := build/make/tools/check_elf_file.py
+LPMAKE := $(HOST_OUT_EXECUTABLES)/lpmake$(HOST_EXECUTABLE_SUFFIX)
+ADD_IMG_TO_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/add_img_to_target_files$(HOST_EXECUTABLE_SUFFIX)
+BUILD_IMAGE := $(HOST_OUT_EXECUTABLES)/build_image$(HOST_EXECUTABLE_SUFFIX)
+BUILD_SUPER_IMAGE := $(HOST_OUT_EXECUTABLES)/build_super_image$(HOST_EXECUTABLE_SUFFIX)
+IMG_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/img_from_target_files$(HOST_EXECUTABLE_SUFFIX)
+MAKE_RECOVERY_PATCH := $(HOST_OUT_EXECUTABLES)/make_recovery_patch$(HOST_EXECUTABLE_SUFFIX)
+OTA_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/ota_from_target_files$(HOST_EXECUTABLE_SUFFIX)
+SPARSE_IMG := $(HOST_OUT_EXECUTABLES)/sparse_img$(HOST_EXECUTABLE_SUFFIX)
+CHECK_PARTITION_SIZES := $(HOST_OUT_EXECUTABLES)/check_partition_sizes$(HOST_EXECUTABLE_SUFFIX)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/make/tools/java-event-log-tags.py
 MERGETAGS := build/make/tools/merge-event-log-tags.py
-BUILD_IMAGE_SRCS := $(wildcard build/make/tools/releasetools/*.py)
 APPEND2SIMG := $(HOST_OUT_EXECUTABLES)/append2simg
 VERITY_SIGNER := $(HOST_OUT_EXECUTABLES)/verity_signer
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+BUILD_VERITY_METADATA := $(HOST_OUT_EXECUTABLES)/build_verity_metadata
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 BUILD_VERITY_TREE := $(HOST_OUT_EXECUTABLES)/build_verity_tree
 BOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/boot_signer
 FUTILITY := $(HOST_OUT_EXECUTABLES)/futility-host
-VBOOT_SIGNER := prebuilts/misc/scripts/vboot_signer/vboot_signer.sh
+VBOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/vboot_signer
 FEC := $(HOST_OUT_EXECUTABLES)/fec
-BRILLO_UPDATE_PAYLOAD := $(HOST_OUT_EXECUTABLES)/brillo_update_payload
 
-DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump2$(BUILD_EXECUTABLE_SUFFIX)
+DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump$(BUILD_EXECUTABLE_SUFFIX)
 PROFMAN := $(HOST_OUT_EXECUTABLES)/profman
 HIDDENAPI := $(HOST_OUT_EXECUTABLES)/hiddenapi
 
@@ -717,6 +888,7 @@ ANDROID_MANIFEST_MERGER := $(JAVA) \
     -classpath $(subst $(space),:,$(strip $(ANDROID_MANIFEST_MERGER_CLASSPATH))) \
     com.android.manifmerger.Merger
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 COLUMN:= column
 
 ifeq ($(EXPERIMENTAL_USE_OPENJDK9),)
@@ -737,9 +909,12 @@ USE_OPENJDK9 := true
 TARGET_OPENJDK9 := true
 endif
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # Path to tools.jar
 HOST_JDK_TOOLS_JAR := $(ANDROID_JAVA8_HOME)/lib/tools.jar
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # It's called md5 on Mac OS and md5sum on Linux
 ifeq ($(HOST_OS),darwin)
 MD5SUM:=md5 -q
@@ -755,8 +930,11 @@ APICHECK_CLASSPATH_ENTRIES := \
 APICHECK_CLASSPATH := $(subst $(space),:,$(strip $(APICHECK_CLASSPATH_ENTRIES)))
 
 APICHECK_COMMAND := $(APICHECK) -JXmx1024m -J"classpath $(APICHECK_CLASSPATH)"
+=======
+APICHECK_COMMAND := $(JAVA) -Xmx4g -jar $(APICHECK) --no-banner --compatible-output=yes
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
-# Boolean variable determining if the whitelist for compatible properties is enabled
+# Boolean variable determining if the allow list for compatible properties is enabled
 PRODUCT_COMPATIBLE_PROPERTY := false
 ifneq ($(PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE),)
   PRODUCT_COMPATIBLE_PROPERTY := $(PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE)
@@ -826,19 +1004,37 @@ ifneq ($(PRODUCT_USE_VNDK_OVERRIDE),)
   PRODUCT_USE_VNDK := $(PRODUCT_USE_VNDK_OVERRIDE)
 else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
   # No shipping level defined
-else ifeq ($(call math_gt_or_eq,27,$(PRODUCT_SHIPPING_API_LEVEL)),)
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),27),true)
   PRODUCT_USE_VNDK := $(PRODUCT_FULL_TREBLE)
 endif
 
+# Define PRODUCT_PRODUCT_VNDK_VERSION if PRODUCT_USE_VNDK is true and
+# PRODUCT_SHIPPING_API_LEVEL is greater than 29.
+PRODUCT_USE_PRODUCT_VNDK := false
 ifeq ($(PRODUCT_USE_VNDK),true)
+  ifneq ($(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE),)
+    PRODUCT_USE_PRODUCT_VNDK := $(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE)
+  else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+    # No shipping level defined
+  else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+    PRODUCT_USE_PRODUCT_VNDK := true
+  endif
+
   ifndef BOARD_VNDK_VERSION
     BOARD_VNDK_VERSION := current
   endif
+
+  ifeq ($(PRODUCT_USE_PRODUCT_VNDK),true)
+    ifndef PRODUCT_PRODUCT_VNDK_VERSION
+      PRODUCT_PRODUCT_VNDK_VERSION := current
+    endif
+  endif
 endif
 
-$(KATI_obsolete_var PRODUCT_USE_VNDK_OVERRIDE,Use PRODUCT_USE_VNDK instead)
-.KATI_READONLY := \
-    PRODUCT_USE_VNDK
+$(KATI_obsolete_var PRODUCT_USE_VNDK,Use BOARD_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_VNDK_OVERRIDE,Use BOARD_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK_OVERRIDE,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
 
 # Set BOARD_SYSTEMSDK_VERSIONS to the latest SystemSDK version starting from P-launching
 # devices if unset.
@@ -882,10 +1078,17 @@ endif
 ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
   DEFAULT_SYSTEM_DEV_CERTIFICATE := $(PRODUCT_DEFAULT_DEV_CERTIFICATE)
 else
-  DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
+  DEFAULT_SYSTEM_DEV_CERTIFICATE := build/make/target/product/security/testkey
 endif
 
-BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
+# Certificate for the NetworkStack sepolicy context
+ifdef PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES
+  MAINLINE_SEPOLICY_DEV_CERTIFICATES := $(PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES)
+else
+  MAINLINE_SEPOLICY_DEV_CERTIFICATES := $(dir $(DEFAULT_SYSTEM_DEV_CERTIFICATE))
+endif
+
+BUILD_NUMBER_FROM_FILE := $$(cat $(SOONG_OUT_DIR)/build_number.txt)
 BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 
 # SEPolicy versions
@@ -900,7 +1103,11 @@ BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 # is made which breaks compatibility with the previous platform sepolicy version,
 # not just on every increase in PLATFORM_SDK_VERSION.  The minor version should
 # be reset to 0 on every bump of the PLATFORM_SDK_VERSION.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 sepolicy_major_vers := 28
+=======
+sepolicy_major_vers := 30
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 sepolicy_minor_vers := 0
 
 ifneq ($(sepolicy_major_vers), $(PLATFORM_SDK_VERSION))
@@ -919,13 +1126,203 @@ sepolicy_minor_vers :=
 # A list of SEPolicy versions, besides PLATFORM_SEPOLICY_VERSION, that the framework supports.
 PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     26.0 \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     27.0
+=======
+    27.0 \
+    28.0 \
+    29.0 \
+    30.0 \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 .KATI_READONLY := \
     PLATFORM_SEPOLICY_COMPAT_VERSIONS \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+  ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    $(error PRODUCT_USE_DYNAMIC_PARTITIONS must be true when PRODUCT_RETROFIT_DYNAMIC_PARTITIONS \
+        is set)
+  endif
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      $(error Devices with shipping API level $(PRODUCT_SHIPPING_API_LEVEL) must not set \
+          PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
+    endif
+  endif
+endif
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+        $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE cannot be true for devices with dynamic partitions)
+    endif
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+        $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
+    endif
+endif
+
+ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+        $(error Can only build super partition for devices with dynamic partitions)
+    endif
+endif
+
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_VENDORIMAGE_PARTITION_SIZE and \
+    BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_ODMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_ODMIMAGE_PARTITION_SIZE and \
+    BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
+    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+endif # PRODUCT_USE_DYNAMIC_PARTITION_SIZE
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+
+# BOARD_SUPER_PARTITION_GROUPS defines a list of "updatable groups". Each updatable group is a
+# group of partitions that share the same pool of free spaces.
+# For each group in BOARD_SUPER_PARTITION_GROUPS, a BOARD_{GROUP}_SIZE and
+# BOARD_{GROUP}_PARTITION_PARTITION_LIST may be defined.
+#     - BOARD_{GROUP}_SIZE: The maximum sum of sizes of all partitions in the group.
+#       Must not be empty.
+#     - BOARD_{GROUP}_PARTITION_PARTITION_LIST: the list of partitions that belongs to this group.
+#       If empty, no partitions belong to this group, and the sum of sizes is effectively 0.
+$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
+    $(eval BOARD_$(group)_SIZE := $(strip $(BOARD_$(group)_SIZE))) \
+    $(if $(BOARD_$(group)_SIZE),,$(error BOARD_$(group)_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_$(group)_SIZE) \
+    $(eval BOARD_$(group)_PARTITION_LIST ?=) \
+    $(eval .KATI_READONLY := BOARD_$(group)_PARTITION_LIST) \
+)
+
+# BOARD_*_PARTITION_LIST: a list of the following tokens
+valid_super_partition_list := system vendor product system_ext odm
+$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
+    $(if $(filter-out $(valid_super_partition_list),$(BOARD_$(group)_PARTITION_LIST)), \
+        $(error BOARD_$(group)_PARTITION_LIST contains invalid partition name \
+            $(filter-out $(valid_super_partition_list),$(BOARD_$(group)_PARTITION_LIST)). \
+            Valid names are $(valid_super_partition_list))))
+valid_super_partition_list :=
+
+
+# Define BOARD_SUPER_PARTITION_PARTITION_LIST, the sum of all BOARD_*_PARTITION_LIST
+ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
+$(error BOARD_SUPER_PARTITION_PARTITION_LIST should not be defined, but computed from \
+    BOARD_SUPER_PARTITION_GROUPS and BOARD_*_PARTITION_LIST)
+endif
+BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
+        $(BOARD_$(group)_PARTITION_LIST))
+.KATI_READONLY := BOARD_SUPER_PARTITION_PARTITION_LIST
+
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+
+# The metadata device must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+$(error Must specify BOARD_SUPER_PARTITION_METADATA_DEVICE if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The super partition block device list must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+$(error Must specify BOARD_SUPER_PARTITION_BLOCK_DEVICES if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The metadata device must be included in the super partition block device list.
+ifeq (,$(filter $(BOARD_SUPER_PARTITION_METADATA_DEVICE),$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))
+$(error BOARD_SUPER_PARTITION_METADATA_DEVICE is not listed in BOARD_SUPER_PARTITION_BLOCK_DEVICES.)
+endif
+
+# The metadata device must be supplied to init via the kernel command-line.
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := true
+
+# If "vendor" is listed as one of the dynamic partitions but without its image available (e.g. an
+# AOSP target built without vendor image), don't build the retrofit full OTA package. Because we
+# won't be able to build meaningful super_* images for retrofitting purpose.
+ifneq (,$(filter vendor,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+ifndef BUILDING_VENDOR_IMAGE
+ifndef BOARD_PREBUILT_VENDORIMAGE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+endif # BOARD_PREBUILT_VENDORIMAGE
+endif # BUILDING_VENDOR_IMAGE
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
+else # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+
+# For normal devices, we populate BOARD_SUPER_PARTITION_BLOCK_DEVICES so the
+# build can handle both cases consistently.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+BOARD_SUPER_PARTITION_METADATA_DEVICE := super
+endif
+
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+BOARD_SUPER_PARTITION_BLOCK_DEVICES := $(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+
+# If only one super block device, default to super partition size.
+ifeq ($(word 2,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
+BOARD_SUPER_PARTITION_$(call to-upper,$(strip $(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))_DEVICE_SIZE ?= \
+    $(BOARD_SUPER_PARTITION_SIZE)
+endif
+
+ifneq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),super)
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+endif # BOARD_SUPER_PARTITION_SIZE
+BOARD_SUPER_PARTITION_BLOCK_DEVICES ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_BLOCK_DEVICES
+BOARD_SUPER_PARTITION_METADATA_DEVICE ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_METADATA_DEVICE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE ?=
+.KATI_READONLY := BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE
+
+$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)), \
+    $(eval BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE := $(strip $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))) \
+    $(if $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE),, \
+        $(error BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))
+
+endif # PRODUCT_USE_DYNAMIC_PARTITIONS
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # ###############################################################
 # Set up final options.
 # ###############################################################
@@ -1006,6 +1403,7 @@ TARGET_AVAILABLE_SDK_VERSIONS := $(addprefix system_,$(call numerically_sort,\
 TARGET_AVAILABLE_SDK_VERSIONS := test_current core_current $(TARGET_AVAILABLE_SDK_VERSIONS)
 
 TARGET_SDK_VERSIONS_WITHOUT_JAVA_18_SUPPORT := $(call numbers_less_than,24,$(TARGET_AVAILABLE_SDK_VERSIONS))
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT := $(call numbers_less_than,27,$(TARGET_AVAILABLE_SDK_VERSIONS))
 
 INTERNAL_PLATFORM_API_FILE := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/public_api.txt
@@ -1026,10 +1424,16 @@ INTERNAL_PLATFORM_TEST_EXACT_API_FILE := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACK
 INTERNAL_PLATFORM_HIDDENAPI_LIGHT_GREYLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-light-greylist.txt
 INTERNAL_PLATFORM_HIDDENAPI_DARK_GREYLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-dark-greylist.txt
 INTERNAL_PLATFORM_HIDDENAPI_BLACKLIST := $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi-blacklist.txt
+=======
+TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT := $(call numbers_less_than,30,$(TARGET_AVAILABLE_SDK_VERSIONS))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Missing optional uses-libraries so that the platform doesn't create build rules that depend on
-# them. See setup_one_odex.mk.
-INTERNAL_PLATFORM_MISSING_USES_LIBRARIES := com.google.android.ble com.google.android.wearable
+# them.
+INTERNAL_PLATFORM_MISSING_USES_LIBRARIES := \
+  com.google.android.ble \
+  com.google.android.media.effects \
+  com.google.android.wearable \
 
 # This is the standard way to name a directory containing prebuilt target
 # objects. E.g., prebuilt/$(TARGET_PREBUILT_TAG)/libc.so
@@ -1063,19 +1467,48 @@ define find_warning_allowed_projects
     $(filter $(ANDROID_WARNING_ALLOWED_PROJECTS),$(1)/)
 endef
 
+GOMA_POOL :=
+RBE_POOL :=
+GOMA_OR_RBE_POOL :=
+# When goma or RBE are enabled, kati will be passed --default_pool=local_pool to put
+# most rules into the local pool.  Explicitly set the pool to "none" for rules that
+# should be run outside the local pool, i.e. with -j500.
+ifneq (,$(filter-out false,$(USE_GOMA)))
+  GOMA_POOL := none
+  GOMA_OR_RBE_POOL := none
+else ifneq (,$(filter-out false,$(USE_RBE)))
+  RBE_POOL := none
+  GOMA_OR_RBE_POOL := none
+endif
+.KATI_READONLY := GOMA_POOL RBE_POOL GOMA_OR_RBE_POOL
+
 # These goals don't need to collect and include Android.mks/CleanSpec.mks
 # in the source tree.
 dont_bother_goals := out \
     snod systemimage-nodeps \
-    stnod systemtarball-nodeps \
-    userdataimage-nodeps userdatatarball-nodeps \
+    userdataimage-nodeps \
     cacheimage-nodeps \
     bptimage-nodeps \
     vnod vendorimage-nodeps \
     pnod productimage-nodeps \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    senod systemextimage-nodeps \
+    onod odmimage-nodeps \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     systemotherimage-nodeps \
     ramdisk-nodeps \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    ramdisk_debug-nodeps \
+    ramdisk_test_harness-nodeps \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     bootimage-nodeps \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    bootimage_debug-nodeps \
+    bootimage_test_harness-nodeps \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     recoveryimage-nodeps \
     vbmetaimage-nodeps \
     product-graph dump-products

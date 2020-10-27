@@ -61,8 +61,8 @@ endif
 
 # Always set --pseudo-localize, it will be stripped out later for release
 # builds that don't want it.
-$(my_res_resources_flat) $(my_overlay_resources_flat) $(my_resources_flata): \
-  PRIVATE_AAPT2_CFLAGS := --pseudo-localize
+$(my_res_resources_flat) $(my_overlay_resources_flat) $(my_resources_flata) $(my_generated_resources_flata) $(my_zippped_resources_flata): \
+  PRIVATE_AAPT2_CFLAGS := --pseudo-localize $(filter --legacy,$(LOCAL_AAPT_FLAGS))
 
 my_static_library_resources := $(foreach l, $(call reverse-list,$(LOCAL_STATIC_ANDROID_LIBRARIES)),\
   $(call intermediates-dir-for,JAVA_LIBRARIES,$(l),,COMMON)/package-res.apk)

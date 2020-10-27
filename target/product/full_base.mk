@@ -28,10 +28,15 @@ PRODUCT_PACKAGES += \
     HoloSpiralWallpaper \
     LiveWallpapers \
     LiveWallpapersPicker \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     MagicSmokeWallpapers \
     NoiseField \
     PhaseBeam \
     PhotoTable
+=======
+    PhotoTable \
+    preinstalled-packages-platform-full-base.xml
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Bluetooth:
 #   audio.a2dp.default is a system module. Generic system image includes

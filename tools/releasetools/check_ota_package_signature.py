@@ -37,8 +37,7 @@ def CertUsesSha256(cert):
   """Check if the cert uses SHA-256 hashing algorithm."""
 
   cmd = ['openssl', 'x509', '-text', '-noout', '-in', cert]
-  p1 = common.Run(cmd, stdout=subprocess.PIPE)
-  cert_dump, _ = p1.communicate()
+  cert_dump = common.RunAndCheckOutput(cmd, stdout=subprocess.PIPE)
 
   algorithm = re.search(r'Signature Algorithm: ([a-zA-Z0-9]+)', cert_dump)
   assert algorithm, "Failed to identify the signature algorithm."
@@ -68,13 +67,13 @@ def VerifyPackage(cert, package):
   print('Certificate: %s' % (cert,))
 
   # Read in the package.
-  with open(package) as package_file:
+  with open(package, 'rb') as package_file:
     package_bytes = package_file.read()
 
   length = len(package_bytes)
   assert length >= 6, "Not big enough to contain footer."
 
-  footer = [ord(x) for x in package_bytes[-6:]]
+  footer = bytearray(package_bytes[-6:])
   assert footer[2] == 0xff and footer[3] == 0xff, "Footer is wrong."
 
   signature_start_from_end = (footer[1] << 8) + footer[0]
@@ -110,31 +109,25 @@ def VerifyPackage(cert, package):
 
   # Parse the signature and get the hash.
   cmd = ['openssl', 'asn1parse', '-inform', 'DER', '-in', sig_file]
-  p1 = common.Run(cmd, stdout=subprocess.PIPE)
-  sig, _ = p1.communicate()
-  assert p1.returncode == 0, "Failed to parse the signature."
+  sig = common.RunAndCheckOutput(cmd, stdout=subprocess.PIPE)
 
-  digest_line = sig.strip().split('\n')[-1]
+  digest_line = sig.rstrip().split('\n')[-1]
   digest_string = digest_line.split(':')[3]
   digest_file = common.MakeTempFile(prefix='digest-')
   with open(digest_file, 'wb') as f:
-    f.write(digest_string.decode('hex'))
+    f.write(bytearray.fromhex(digest_string))
 
   # Verify the digest by outputing the decrypted result in ASN.1 structure.
   decrypted_file = common.MakeTempFile(prefix='decrypted-')
   cmd = ['openssl', 'rsautl', '-verify', '-certin', '-inkey', cert,
          '-in', digest_file, '-out', decrypted_file]
-  p1 = common.Run(cmd, stdout=subprocess.PIPE)
-  p1.communicate()
-  assert p1.returncode == 0, "Failed to run openssl rsautl -verify."
+  common.RunAndCheckOutput(cmd, stdout=subprocess.PIPE)
 
   # Parse the output ASN.1 structure.
   cmd = ['openssl', 'asn1parse', '-inform', 'DER', '-in', decrypted_file]
-  p1 = common.Run(cmd, stdout=subprocess.PIPE)
-  decrypted_output, _ = p1.communicate()
-  assert p1.returncode == 0, "Failed to parse the output."
+  decrypted_output = common.RunAndCheckOutput(cmd, stdout=subprocess.PIPE)
 
-  digest_line = decrypted_output.strip().split('\n')[-1]
+  digest_line = decrypted_output.rstrip().split('\n')[-1]
   digest_string = digest_line.split(':')[3].lower()
 
   # Verify that the two digest strings match.
@@ -155,7 +148,7 @@ def VerifyAbOtaPayload(cert, package):
 
   # Dump pubkey from the certificate.
   pubkey = common.MakeTempFile(prefix="key-", suffix=".pem")
-  with open(pubkey, 'wb') as pubkey_fp:
+  with open(pubkey, 'w') as pubkey_fp:
     pubkey_fp.write(common.ExtractPublicKey(cert))
 
   package_dir = common.MakeTempDir(prefix='package-')
@@ -165,11 +158,15 @@ def VerifyAbOtaPayload(cert, package):
   cmd = ['delta_generator',
          '--in_file=' + payload_file,
          '--public_key=' + pubkey]
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   proc = common.Run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
   stdoutdata, _ = proc.communicate()
   assert proc.returncode == 0, \
       'Failed to verify payload with delta_generator: %s\n%s' % (package,
                                                                  stdoutdata)
+=======
+  common.RunAndCheckOutput(cmd)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   common.ZipClose(package_zip)
 
   # Verified successfully upon reaching here.

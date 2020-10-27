@@ -17,6 +17,7 @@
 # This is a generic phone product that isn't specialized for a specific device.
 # It includes the base Android platform.
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 PRODUCT_PACKAGES := \
     Bluetooth \
     BluetoothMidiService \
@@ -34,6 +35,12 @@ PRODUCT_PACKAGES := \
     DisplayCutoutEmulationTallOverlay \
     EasterEgg \
     WallpaperCropper
+=======
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_product.mk)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 PRODUCT_PACKAGES += \
     clatd \

@@ -58,10 +58,19 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 GLOBAL_DEXPREOPT_FLAGS :=
+=======
+# Build the boot.zip which contains the boot jars and their compilation output
+# We can do this only if preopt is enabled and if the product uses libart config (which sets the
+# default properties for preopting).
+ifeq ($(WITH_DEXPREOPT), true)
+ifeq ($(PRODUCT_USES_DEFAULT_ART_CONFIG), true)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Special rules for building stripped boot jars that override java_library.mk rules
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # $(1): boot jar module name
 define _dexpreopt-boot-jar-remove-classes.dex
 _dbj_jar_no_dex := $(DEXPREOPT_BOOT_JAR_DIR_FULL_PATH)/$(1)_nodex.jar
@@ -99,10 +108,29 @@ all_boot_jars := \
 $(boot_profile_jars_zip): PRIVATE_JARS := $(all_boot_jars)
 $(boot_profile_jars_zip): $(all_boot_jars) $(SOONG_ZIP)
 	echo "Create boot profiles package: $@"
+=======
+$(boot_zip): PRIVATE_BOOTCLASSPATH_JARS := $(bootclasspath_jars)
+$(boot_zip): PRIVATE_SYSTEM_SERVER_JARS := $(system_server_jars)
+$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+	@echo "Create boot package: $@"
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	rm -f $@
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$(SOONG_ZIP) -o $@ -C $(PRODUCT_OUT) $(PRIVATE_JARS)
+=======
+	$(SOONG_ZIP) -o $@.tmp \
+	  -C $(dir $(firstword $(PRIVATE_BOOTCLASSPATH_JARS)))/.. $(addprefix -f ,$(PRIVATE_BOOTCLASSPATH_JARS)) \
+	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_SYSTEM_SERVER_JARS))
+	$(MERGE_ZIPS) $@ $@.tmp $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+	rm -f $@.tmp
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 droidcore: $(boot_profile_jars_zip)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(call dist-for-goals, droidcore, $(boot_profile_jars_zip))
 endif
+=======
+endif  #PRODUCT_USES_DEFAULT_ART_CONFIG
+endif  #WITH_DEXPREOPT
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

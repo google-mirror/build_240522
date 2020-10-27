@@ -78,85 +78,17 @@ $(sort $(shell find $(2) -name "$(1)" -type f | $(SED_EXTENDED) "s:($(2)/?(.*)):
 endef
 
 # ---------------------------------------------------------------
-
-# These are the valid values of TARGET_BUILD_VARIANT.  Also, if anything else is passed
-# as the variant in the PRODUCT-$TARGET_BUILD_PRODUCT-$TARGET_BUILD_VARIANT form,
-# it will be treated as a goal, and the eng variant will be used.
-INTERNAL_VALID_VARIANTS := user userdebug eng
-
-# ---------------------------------------------------------------
-# Provide "PRODUCT-<prodname>-<goal>" targets, which lets you build
-# a particular configuration without needing to set up the environment.
-#
+# Check for obsolete PRODUCT- and APP- goals
 ifeq ($(CALLED_FROM_SETUP),true)
 product_goals := $(strip $(filter PRODUCT-%,$(MAKECMDGOALS)))
 ifdef product_goals
-  # Scrape the product and build names out of the goal,
-  # which should be of the form PRODUCT-<productname>-<buildname>.
-  #
-  ifneq ($(words $(product_goals)),1)
-    $(error Only one PRODUCT-* goal may be specified; saw "$(product_goals)")
-  endif
-  goal_name := $(product_goals)
-  product_goals := $(patsubst PRODUCT-%,%,$(product_goals))
-  product_goals := $(subst -, ,$(product_goals))
-  ifneq ($(words $(product_goals)),2)
-    $(error Bad PRODUCT-* goal "$(goal_name)")
-  endif
-
-  # The product they want
-  TARGET_PRODUCT := $(word 1,$(product_goals))
-
-  # The variant they want
-  TARGET_BUILD_VARIANT := $(word 2,$(product_goals))
-
-  ifeq ($(TARGET_BUILD_VARIANT),tests)
-    $(error "tests" has been deprecated as a build variant. Use it as a build goal instead.)
-  endif
-
-  # The build server wants to do make PRODUCT-dream-sdk
-  # which really means TARGET_PRODUCT=dream make sdk.
-  ifneq ($(filter-out $(INTERNAL_VALID_VARIANTS),$(TARGET_BUILD_VARIANT)),)
-    override MAKECMDGOALS := $(MAKECMDGOALS) $(TARGET_BUILD_VARIANT)
-    TARGET_BUILD_VARIANT := userdebug
-    default_goal_substitution :=
-  else
-    default_goal_substitution := droid
-  endif
-
-  # Replace the PRODUCT-* goal with the build goal that it refers to.
-  # Note that this will ensure that it appears in the same relative
-  # position, in case it matters.
-  override MAKECMDGOALS := $(patsubst $(goal_name),$(default_goal_substitution),$(MAKECMDGOALS))
+  $(error The PRODUCT-* goal is no longer supported. Use `TARGET_PRODUCT=<product> m droid` instead)
 endif
-endif # CALLED_FROM_SETUP
-# else: Use the value set in the environment or buildspec.mk.
-
-# ---------------------------------------------------------------
-# Provide "APP-<appname>" targets, which lets you build
-# an unbundled app.
-#
-ifeq ($(CALLED_FROM_SETUP),true)
 unbundled_goals := $(strip $(filter APP-%,$(MAKECMDGOALS)))
 ifdef unbundled_goals
-  ifneq ($(words $(unbundled_goals)),1)
-    $(error Only one APP-* goal may be specified; saw "$(unbundled_goals)")
-  endif
-  TARGET_BUILD_APPS := $(strip $(subst -, ,$(patsubst APP-%,%,$(unbundled_goals))))
-  ifneq ($(filter droid,$(MAKECMDGOALS)),)
-    override MAKECMDGOALS := $(patsubst $(unbundled_goals),,$(MAKECMDGOALS))
-  else
-    override MAKECMDGOALS := $(patsubst $(unbundled_goals),droid,$(MAKECMDGOALS))
-  endif
+  $(error The APP-* goal is no longer supported. Use `TARGET_BUILD_APPS="<app>" m droid` instead)
 endif # unbundled_goals
 endif
-
-# Now that we've parsed APP-* and PRODUCT-*, mark these as readonly
-TARGET_BUILD_APPS ?=
-.KATI_READONLY := \
-  TARGET_PRODUCT \
-  TARGET_BUILD_VARIANT \
-  TARGET_BUILD_APPS
 
 # Default to building dalvikvm on hosts that support it...
 ifeq ($(HOST_OS),linux)
@@ -258,6 +190,24 @@ current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+# Jacoco agent JARS to be built and installed, if any.
+ifeq ($(EMMA_INSTRUMENT),true)
+  ifneq ($(EMMA_INSTRUMENT_STATIC),true)
+    # For instrumented build, if Jacoco is not being included statically
+    # in instrumented packages then include Jacoco classes into the
+    # bootclasspath.
+    $(foreach product,$(PRODUCTS),\
+      $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
+      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
+  endif # EMMA_INSTRUMENT_STATIC
+endif # EMMA_INSTRUMENT
+
+############################################################################
+# Strip and assign the PRODUCT_ variables.
+$(call strip-product-vars)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 #############################################################################
 
@@ -299,6 +249,7 @@ PRODUCT_AAPT_PREBUILT_DPI := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_AAPT
 # Keep a copy of the space-separated config
 PRODUCT_AAPT_CONFIG_SP := $(PRODUCT_AAPT_CONFIG)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Convert spaces to commas.
 PRODUCT_AAPT_CONFIG := \
     $(subst $(space),$(comma),$(strip $(PRODUCT_AAPT_CONFIG)))
@@ -306,6 +257,23 @@ PRODUCT_AAPT_CONFIG := \
 PRODUCT_BRAND := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BRAND))
 
 PRODUCT_MODEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_MODEL))
+=======
+# Extra boot jars must be appended at the end after common boot jars.
+PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
+
+# The extra system server jars must be appended at the end after common system server jars.
+PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
+
+ifndef PRODUCT_SYSTEM_NAME
+  PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
+endif
+ifndef PRODUCT_SYSTEM_DEVICE
+  PRODUCT_SYSTEM_DEVICE := $(PRODUCT_DEVICE)
+endif
+ifndef PRODUCT_SYSTEM_BRAND
+  PRODUCT_SYSTEM_BRAND := $(PRODUCT_BRAND)
+endif
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifndef PRODUCT_MODEL
   PRODUCT_MODEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_NAME))
 endif
@@ -334,6 +302,7 @@ ifneq (1,$(words $(PRODUCT_DEFAULT_DEV_CERTIFICATE)))
 endif
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # A list of words like <source path>:<destination path>[:<owner>].
 # The file at the source path should be copied to the destination path
 # when building  this product.  <destination path> is relative to
@@ -342,6 +311,17 @@ endif
 # The optional :<owner> is used to indicate the owner of a vendor file.
 PRODUCT_COPY_FILES := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COPY_FILES))
+=======
+$(foreach pair,$(PRODUCT_UPDATABLE_BOOT_JARS), \
+  $(if $(findstring $(call word-colon,2,$(pair)),$(PRODUCT_BOOT_JARS)), \
+    $(error A jar in PRODUCT_UPDATABLE_BOOT_JARS must not be in PRODUCT_BOOT_JARS, \
+      but $(call word-colon,2,$(pair)) is) \
+  ) \
+)
+
+ENFORCE_SYSTEM_CERTIFICATE := $(PRODUCT_ENFORCE_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT)
+ENFORCE_SYSTEM_CERTIFICATE_ALLOW_LIST := $(PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_ALLOW_LIST)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # A list of property assignments, like "key = value", with zero or more
 # whitespace characters on either side of the '='.
@@ -502,6 +482,75 @@ PRODUCT_SOONG_NAMESPACES := \
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE))
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Whether the whitelist of actionable compatible properties should be disabled or not
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE))
+=======
+ifdef PRODUCT_SHIPPING_API_LEVEL
+  ifneq (,$(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)))
+    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)
+  endif
+endif
+
+# If build command defines OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS,
+# override PRODUCT_EXTRA_VNDK_VERSIONS with it.
+ifdef OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS
+  PRODUCT_EXTRA_VNDK_VERSIONS := $(OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS)
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS \
+    ,Use PRODUCT_EXTRA_VNDK_VERSIONS instead)
+
+ifdef OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+  ifeq (false,$(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE))
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE :=
+  else
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := $(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)
+  endif
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,Use PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE instead)
+
+define product-overrides-config
+$$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
+    $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
+        $$(error Rule "$$(rule)" in PRODUCT_$(1)_OVERRIDE is not <module_name>:<new_value>)))
+endef
+
+$(foreach var, \
+    MANIFEST_PACKAGE_NAME \
+    PACKAGE_NAME \
+    CERTIFICATE, \
+  $(eval $(call product-overrides-config,$(var))))
+
+# Macro to use below. $(1) is the name of the partition
+define product-build-image-config
+ifneq ($$(filter-out true false,$$(PRODUCT_BUILD_$(1)_IMAGE)),)
+    $$(error Invalid PRODUCT_BUILD_$(1)_IMAGE: $$(PRODUCT_BUILD_$(1)_IMAGE) -- true false and empty are supported)
+endif
+endef
+
+# Copy and check the value of each PRODUCT_BUILD_*_IMAGE variable
+$(foreach image, \
+    SYSTEM \
+    SYSTEM_OTHER \
+    VENDOR \
+    PRODUCT \
+    SYSTEM_EXT \
+    ODM \
+    CACHE \
+    RAMDISK \
+    USERDATA \
+    BOOT \
+    RECOVERY, \
+  $(eval $(call product-build-image-config,$(image))))
+
+product-build-image-config :=
+
+$(call readonly-product-vars)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

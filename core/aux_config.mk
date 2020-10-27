@@ -32,7 +32,7 @@ endif
 
 # setup AUX globals
 AUX_SHLIB_SUFFIX := .so
-AUX_GLOBAL_ARFLAGS := cqsD
+AUX_GLOBAL_ARFLAGS := crsPD
 AUX_STATIC_LIB_SUFFIX := .a
 
 # Load ever-lasting "indexed" version of AUX variant environment; it is treated as READ-ONLY from this
@@ -151,6 +151,8 @@ AUX_ALL_SUBARCHS :=
 variant_sfx :=_aux_variant_config.mk
 os_sfx :=_aux_os_config.mk
 
+ifdef AUX_OS_VARIANT_LIST
+
 config_roots := $(wildcard device vendor)
 all_configs :=
 ifdef config_roots
@@ -181,6 +183,8 @@ $(foreach v,$(AUX_ALL_VARIANTS),\
   $(call aux-variant-validate,$(v)) \
 )
 endif
+
+endif # AUX_OS_VARIANT_LIST
 
 INSTALLED_AUX_TARGETS :=
 

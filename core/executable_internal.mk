@@ -36,10 +36,17 @@ endif
 endif
 
 # Define PRIVATE_ variables from global vars
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifeq ($(LOCAL_NO_LIBGCC),true)
 my_target_libgcc :=
 else
 my_target_libgcc := $(call intermediates-dir-for,STATIC_LIBRARIES,libgcc,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libgcc.a
+=======
+ifeq ($(LOCAL_NO_LIBCRT_BUILTINS),true)
+my_target_libcrt_builtins :=
+else
+my_target_libcrt_builtins := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LIBCRT_BUILTINS)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 my_target_libatomic := $(call intermediates-dir-for,STATIC_LIBRARIES,libatomic,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libatomic.a
 ifeq ($(LOCAL_NO_CRT),true)
@@ -60,7 +67,11 @@ my_target_crtbegin_dynamic_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_dynami
 my_target_crtbegin_static_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_static.o)
 my_target_crtend_o := $(wildcard $(my_ndk_sysroot_lib)/crtend_android.o)
 endif
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(linked_module): PRIVATE_TARGET_LIBGCC := $(my_target_libgcc)
+=======
+$(linked_module): PRIVATE_TARGET_LIBCRT_BUILTINS := $(my_target_libcrt_builtins)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 $(linked_module): PRIVATE_TARGET_LIBATOMIC := $(my_target_libatomic)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_DYNAMIC_O := $(my_target_crtbegin_dynamic_o)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_STATIC_O := $(my_target_crtbegin_static_o)
@@ -69,17 +80,25 @@ $(linked_module): PRIVATE_TARGET_OUT_INTERMEDIATE_LIBRARIES := $($(LOCAL_2ND_ARC
 $(linked_module): PRIVATE_POST_LINK_CMD := $(LOCAL_POST_LINK_CMD)
 
 ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(linked_module): $(my_target_crtbegin_static_o) $(all_objects) $(all_libraries) $(my_target_crtend_o) $(my_target_libgcc) $(my_target_libatomic)
+=======
+$(linked_module): $(my_target_crtbegin_static_o) $(all_objects) $(all_libraries) $(my_target_crtend_o) $(my_target_libcrt_builtins) $(my_target_libatomic) $(CLANG_CXX)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	$(transform-o-to-static-executable)
 	$(PRIVATE_POST_LINK_CMD)
 else
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(linked_module): $(my_target_crtbegin_dynamic_o) $(all_objects) $(all_libraries) $(my_target_crtend_o) $(my_target_libgcc) $(my_target_libatomic)
+=======
+$(linked_module): $(my_target_crtbegin_dynamic_o) $(all_objects) $(all_libraries) $(my_target_crtend_o) $(my_target_libcrt_builtins) $(my_target_libatomic) $(CLANG_CXX)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	$(transform-o-to-executable)
 	$(PRIVATE_POST_LINK_CMD)
 endif
 
 ifeq ($(my_native_coverage),true)
-gcno_suffix := .gcnodir
+gcno_suffix := .zip
 
 built_whole_gcno_libraries := \
     $(foreach lib,$(my_whole_static_libraries), \
@@ -101,11 +120,11 @@ endif
 
 GCNO_ARCHIVE := $(my_installed_module_stem)$(gcno_suffix)
 
+$(intermediates)/$(GCNO_ARCHIVE) : $(SOONG_ZIP) $(MERGE_ZIPS)
 $(intermediates)/$(GCNO_ARCHIVE) : PRIVATE_ALL_OBJECTS := $(strip $(LOCAL_GCNO_FILES))
 $(intermediates)/$(GCNO_ARCHIVE) : PRIVATE_ALL_WHOLE_STATIC_LIBRARIES := $(strip $(built_whole_gcno_libraries)) $(strip $(built_static_gcno_libraries))
-$(intermediates)/$(GCNO_ARCHIVE) : PRIVATE_INTERMEDIATES_DIR := $(intermediates)
 $(intermediates)/$(GCNO_ARCHIVE) : $(LOCAL_GCNO_FILES) $(built_whole_gcno_libraries) $(built_static_gcno_libraries)
-	$(transform-o-to-static-lib)
+	$(package-coverage-files)
 
 $(my_coverage_path)/$(GCNO_ARCHIVE) : $(intermediates)/$(GCNO_ARCHIVE)
 	$(copy-file-to-target)

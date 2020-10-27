@@ -24,6 +24,7 @@ PRODUCT_PACKAGES += \
 
 # Device modules
 PRODUCT_PACKAGES += \
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     egl.cfg \
     gralloc.goldfish \
     gralloc.goldfish.default \
@@ -70,6 +71,8 @@ PRODUCT_PACKAGES += \
     sh_vendor \
     vintf \
     toybox_vendor \
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     CarrierConfig \
     audio.primary.goldfish \
     audio.r_submix.default \
@@ -178,15 +181,11 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 #config.disable_location=true
 
-# Enable Perfetto traced
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.traced.enable=1
-
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.com.google.locationfeatures=1
 
 # disable setupwizard
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.setupwizard.mode=DISABLED

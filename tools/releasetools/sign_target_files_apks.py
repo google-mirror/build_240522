@@ -44,7 +44,7 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
 
       where $devkey is the directory part of the value of
       default_system_dev_certificate from the input target-files's
-      META/misc_info.txt.  (Defaulting to "build/target/product/security"
+      META/misc_info.txt.  (Defaulting to "build/make/target/product/security"
       if the value is not present in misc_info.
 
       -d and -k options are added to the set of mappings in the order
@@ -79,8 +79,23 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       Replace the veritykeyid in BOOT/cmdline of input_target_file_zip
       with keyid of the cert pointed by <path_to_X509_PEM_cert_file>.
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   --avb_{boot,system,vendor,dtbo,vbmeta}_algorithm <algorithm>
   --avb_{boot,system,vendor,dtbo,vbmeta}_key <key>
+=======
+  --remove_avb_public_keys <key1>,<key2>,...
+      Remove AVB public keys from the first-stage ramdisk. The key file to
+      remove is located at either of the following dirs:
+        - BOOT/RAMDISK/avb/ or
+        - BOOT/RAMDISK/first_stage_ramdisk/avb/
+      The second dir will be used for lookup if BOARD_USES_RECOVERY_AS_BOOT is
+      set to true.
+
+  --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
+         vbmeta_vendor}_algorithm <algorithm>
+  --avb_{boot,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
+         vbmeta_vendor}_key <key>
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
       the specified image. Otherwise it uses the existing values in info dict.
 
@@ -88,6 +103,20 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
+
+  --avb_extra_custom_image_key <partition=key>
+  --avb_extra_custom_image_algorithm <partition=algorithm>
+      Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
+      the specified custom images mounted on the partition. Otherwise it uses
+      the existing values in info dict.
+
+  --avb_extra_custom_image_extra_args <partition=extra_args>
+      Specify any additional args that are needed to AVB-sign the custom images
+      mounted on the partition (e.g. "--signing_helper /path/to/helper"). The
+      args will be appended to the existing ones in info dict.
+
+  --android_jar_path <path>
+      Path to the android.jar to repack the apex file.
 """
 
 from __future__ import print_function
@@ -96,6 +125,12 @@ import base64
 import copy
 import errno
 import gzip
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+import io
+import itertools
+import logging
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 import os
 import re
 import shutil
@@ -124,19 +159,35 @@ OPTIONS.replace_ota_keys = False
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
 OPTIONS.replace_verity_keyid = False
+OPTIONS.remove_avb_public_keys = None
 OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
 OPTIONS.avb_extra_args = {}
+OPTIONS.android_jar_path = None
+
+
+AVB_FOOTER_ARGS_BY_PARTITION = {
+    'boot' : 'avb_boot_add_hash_footer_args',
+    'dtbo' : 'avb_dtbo_add_hash_footer_args',
+    'recovery' : 'avb_recovery_add_hash_footer_args',
+    'system' : 'avb_system_add_hashtree_footer_args',
+    'system_other' : 'avb_system_other_add_hashtree_footer_args',
+    'vendor' : 'avb_vendor_add_hashtree_footer_args',
+    'vendor_boot' : 'avb_vendor_boot_add_hash_footer_args',
+    'vbmeta' : 'avb_vbmeta_args',
+    'vbmeta_system' : 'avb_vbmeta_system_args',
+    'vbmeta_vendor' : 'avb_vbmeta_vendor_args',
+}
 
 
 def GetApkCerts(certmap):
   # apply the key remapping to the contents of the file
-  for apk, cert in certmap.iteritems():
+  for apk, cert in certmap.items():
     certmap[apk] = OPTIONS.key_map.get(cert, cert)
 
   # apply all the -e options, overriding anything in the file
-  for apk, cert in OPTIONS.extra_apks.iteritems():
+  for apk, cert in OPTIONS.extra_apks.items():
     if not cert:
       cert = "PRESIGNED"
     certmap[apk] = OPTIONS.key_map.get(cert, cert)
@@ -144,6 +195,7 @@ def GetApkCerts(certmap):
   return certmap
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
   """Check that all the APKs we want to sign have keys specified, and
   error out if they don't."""
@@ -151,11 +203,137 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
   compressed_apk_extension = None
   if compressed_extension:
     compressed_apk_extension = ".apk" + compressed_extension
+=======
+def GetApexKeys(keys_info, key_map):
+  """Gets APEX payload and container signing keys by applying the mapping rules.
+
+  Presigned payload / container keys will be set accordingly.
+
+  Args:
+    keys_info: A dict that maps from APEX filenames to a tuple of (payload_key,
+        container_key).
+    key_map: A dict that overrides the keys, specified via command-line input.
+
+  Returns:
+    A dict that contains the updated APEX key mapping, which should be used for
+    the current signing.
+
+  Raises:
+    AssertionError: On invalid container / payload key overrides.
+  """
+  # Apply all the --extra_apex_payload_key options to override the payload
+  # signing keys in the given keys_info.
+  for apex, key in OPTIONS.extra_apex_payload_keys.items():
+    if not key:
+      key = 'PRESIGNED'
+    if apex not in keys_info:
+      logger.warning('Failed to find %s in target_files; Ignored', apex)
+      continue
+    keys_info[apex] = (key, keys_info[apex][1])
+
+  # Apply the key remapping to container keys.
+  for apex, (payload_key, container_key) in keys_info.items():
+    keys_info[apex] = (payload_key, key_map.get(container_key, container_key))
+
+  # Apply all the --extra_apks options to override the container keys.
+  for apex, key in OPTIONS.extra_apks.items():
+    # Skip non-APEX containers.
+    if apex not in keys_info:
+      continue
+    if not key:
+      key = 'PRESIGNED'
+    keys_info[apex] = (keys_info[apex][0], key_map.get(key, key))
+
+  # A PRESIGNED container entails a PRESIGNED payload. Apply this to all the
+  # APEX key pairs. However, a PRESIGNED container with non-PRESIGNED payload
+  # (overridden via commandline) indicates a config error, which should not be
+  # allowed.
+  for apex, (payload_key, container_key) in keys_info.items():
+    if container_key != 'PRESIGNED':
+      continue
+    if apex in OPTIONS.extra_apex_payload_keys:
+      payload_override = OPTIONS.extra_apex_payload_keys[apex]
+      assert payload_override == '', \
+          ("Invalid APEX key overrides: {} has PRESIGNED container but "
+           "non-PRESIGNED payload key {}").format(apex, payload_override)
+    if payload_key != 'PRESIGNED':
+      print(
+          "Setting {} payload as PRESIGNED due to PRESIGNED container".format(
+              apex))
+    keys_info[apex] = ('PRESIGNED', 'PRESIGNED')
+
+  return keys_info
+
+
+def GetApkFileInfo(filename, compressed_extension, skipped_prefixes):
+  """Returns the APK info based on the given filename.
+
+  Checks if the given filename (with path) looks like an APK file, by taking the
+  compressed extension into consideration. If it appears to be an APK file,
+  further checks if the APK file should be skipped when signing, based on the
+  given path prefixes.
+
+  Args:
+    filename: Path to the file.
+    compressed_extension: The extension string of compressed APKs (e.g. ".gz"),
+        or None if there's no compressed APKs.
+    skipped_prefixes: A set/list/tuple of the path prefixes to be skipped.
+
+  Returns:
+    (is_apk, is_compressed, should_be_skipped): is_apk indicates whether the
+    given filename is an APK file. is_compressed indicates whether the APK file
+    is compressed (only meaningful when is_apk is True). should_be_skipped
+    indicates whether the filename matches any of the given prefixes to be
+    skipped.
+
+  Raises:
+    AssertionError: On invalid compressed_extension or skipped_prefixes inputs.
+  """
+  assert compressed_extension is None or compressed_extension.startswith('.'), \
+      "Invalid compressed_extension arg: '{}'".format(compressed_extension)
+
+  # skipped_prefixes should be one of set/list/tuple types. Other types such as
+  # str shouldn't be accepted.
+  assert isinstance(skipped_prefixes, (set, list, tuple)), \
+      "Invalid skipped_prefixes input type: {}".format(type(skipped_prefixes))
+
+  compressed_apk_extension = (
+      ".apk" + compressed_extension if compressed_extension else None)
+  is_apk = (filename.endswith(".apk") or
+            (compressed_apk_extension and
+             filename.endswith(compressed_apk_extension)))
+  if not is_apk:
+    return (False, False, False)
+
+  is_compressed = (compressed_apk_extension and
+                   filename.endswith(compressed_apk_extension))
+  should_be_skipped = filename.startswith(tuple(skipped_prefixes))
+  return (True, is_compressed, should_be_skipped)
+
+
+def CheckApkAndApexKeysAvailable(input_tf_zip, known_keys,
+                                 compressed_extension, apex_keys):
+  """Checks that all the APKs and APEXes have keys specified.
+
+  Args:
+    input_tf_zip: An open target_files zip file.
+    known_keys: A set of APKs and APEXes that have known signing keys.
+    compressed_extension: The extension string of compressed APKs, such as
+        '.gz', or None if there's no compressed APKs.
+    apex_keys: A dict that contains the key mapping from APEX name to
+        (payload_key, container_key).
+
+  Raises:
+    AssertionError: On finding unknown APKs and APEXes.
+  """
+  unknown_files = []
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   for info in input_tf_zip.infolist():
     if (info.filename.endswith(".apk") or
         (compressed_apk_extension and
          info.filename.endswith(compressed_apk_extension))):
       name = os.path.basename(info.filename)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
       if compressed_apk_extension and name.endswith(compressed_apk_extension):
         name = name[:-len(compressed_extension)]
       if name not in apk_key_map:
@@ -166,6 +344,55 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
     print("\nUse '-e <apkname>=' to specify a key (which may be an empty "
           "string to not sign this apk).")
     sys.exit(1)
+=======
+      if name not in known_keys:
+        unknown_files.append(name)
+      continue
+
+    # And APKs.
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        info.filename, compressed_extension, OPTIONS.skip_apks_with_path_prefix)
+    if not is_apk or should_be_skipped:
+      continue
+
+    name = os.path.basename(info.filename)
+    if is_compressed:
+      name = name[:-len(compressed_extension)]
+    if name not in known_keys:
+      unknown_files.append(name)
+
+  assert not unknown_files, \
+      ("No key specified for:\n  {}\n"
+       "Use '-e <apkname>=' to specify a key (which may be an empty string to "
+       "not sign this apk).".format("\n  ".join(unknown_files)))
+
+  # For all the APEXes, double check that we won't have an APEX that has only
+  # one of the payload / container keys set. Note that non-PRESIGNED container
+  # with PRESIGNED payload could be allowed but currently unsupported. It would
+  # require changing SignApex implementation.
+  if not apex_keys:
+    return
+
+  invalid_apexes = []
+  for info in input_tf_zip.infolist():
+    if (not info.filename.startswith('SYSTEM/apex') or
+        not info.filename.endswith('.apex')):
+      continue
+
+    name = os.path.basename(info.filename)
+    (payload_key, container_key) = apex_keys[name]
+    if ((payload_key in common.SPECIAL_CERT_STRINGS and
+         container_key not in common.SPECIAL_CERT_STRINGS) or
+        (payload_key not in common.SPECIAL_CERT_STRINGS and
+         container_key in common.SPECIAL_CERT_STRINGS)):
+      invalid_apexes.append(
+          "{}: payload_key {}, container_key {}".format(
+              name, payload_key, container_key))
+
+  assert not invalid_apexes, \
+      "Invalid APEX keys specified:\n  {}\n".format(
+          "\n  ".join(invalid_apexes))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 
 def SignApk(data, keyname, pw, platform_api_level, codename_to_api_level_map,
@@ -251,7 +478,16 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     if info.filename.startswith("IMAGES/"):
       continue
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     data = input_tf_zip.read(info.filename)
+=======
+    # Skip OTA-specific images (e.g. split super images), which will be
+    # re-generated during signing.
+    if filename.startswith("OTA/") and filename.endswith(".img"):
+      continue
+
+    data = input_tf_zip.read(filename)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     out_info = copy.copy(info)
 
     # Sign APKs.
@@ -275,7 +511,47 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         print("NOT signing: %s" % (name,))
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    # Sign bundled APEX files.
+    elif filename.startswith("SYSTEM/apex") and filename.endswith(".apex"):
+      name = os.path.basename(filename)
+      payload_key, container_key = apex_keys[name]
+
+      # We've asserted not having a case with only one of them PRESIGNED.
+      if (payload_key not in common.SPECIAL_CERT_STRINGS and
+          container_key not in common.SPECIAL_CERT_STRINGS):
+        print("    signing: %-*s container (%s)" % (
+            maxsize, name, container_key))
+        print("           : %-*s payload   (%s)" % (
+            maxsize, name, payload_key))
+
+        signed_apex = apex_utils.SignApex(
+            misc_info['avb_avbtool'],
+            data,
+            payload_key,
+            container_key,
+            key_passwords[container_key],
+            apk_keys,
+            codename_to_api_level_map,
+            no_hashtree=True,
+            signing_args=OPTIONS.avb_extra_args.get('apex'))
+        common.ZipWrite(output_tf_zip, signed_apex, filename)
+
+      else:
+        print(
+            "NOT signing: %s\n"
+            "        (skipped due to special cert string)" % (name,))
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+
+    # AVB public keys for the installed APEXes, which will be updated later.
+    elif (os.path.dirname(filename) == 'SYSTEM/etc/security/apex' and
+          filename != 'SYSTEM/etc/security/apex/'):
+      continue
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     # System properties.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     elif info.filename in ("SYSTEM/build.prop",
                            "VENDOR/build.prop",
                            "SYSTEM/etc/prop.default",
@@ -285,25 +561,73 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
                            "RECOVERY/RAMDISK/prop.default",
                            "RECOVERY/RAMDISK/default.prop"):  # legacy
       print("Rewriting %s:" % (info.filename,))
+=======
+    elif filename in (
+        "SYSTEM/build.prop",
+
+        "VENDOR/build.prop",
+        "SYSTEM/vendor/build.prop",
+
+        "ODM/etc/build.prop",
+        "VENDOR/odm/etc/build.prop",
+
+        "PRODUCT/build.prop",
+        "SYSTEM/product/build.prop",
+
+        "SYSTEM_EXT/build.prop",
+        "SYSTEM/system_ext/build.prop",
+
+        "SYSTEM/etc/prop.default",
+        "BOOT/RAMDISK/prop.default",
+        "RECOVERY/RAMDISK/prop.default",
+
+        # ROOT/default.prop is a legacy path, but may still exist for upgrading
+        # devices that don't support `property_overrides_split_enabled`.
+        "ROOT/default.prop",
+
+        # RECOVERY/RAMDISK/default.prop is a legacy path, but will always exist
+        # as a symlink in the current code. So it's a no-op here. Keeping the
+        # path here for clarity.
+        "RECOVERY/RAMDISK/default.prop"):
+      print("Rewriting %s:" % (filename,))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       if stat.S_ISLNK(info.external_attr >> 16):
         new_data = data
       else:
-        new_data = RewriteProps(data)
+        new_data = RewriteProps(data.decode())
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
     # Replace the certs in *mac_permissions.xml (there could be multiple, such
     # as {system,vendor}/etc/selinux/{plat,nonplat}_mac_permissions.xml).
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     elif info.filename.endswith("mac_permissions.xml"):
       print("Rewriting %s with new keys." % (info.filename,))
       new_data = ReplaceCerts(data)
+=======
+    elif filename.endswith("mac_permissions.xml"):
+      print("Rewriting %s with new keys." % (filename,))
+      new_data = ReplaceCerts(data.decode())
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
     # Ask add_img_to_target_files to rebuild the recovery patch if needed.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     elif info.filename in ("SYSTEM/recovery-from-boot.p",
                            "SYSTEM/etc/recovery.img",
                            "SYSTEM/bin/install-recovery.sh"):
+=======
+    elif filename in ("SYSTEM/recovery-from-boot.p",
+                      "VENDOR/recovery-from-boot.p",
+
+                      "SYSTEM/etc/recovery.img",
+                      "VENDOR/etc/recovery.img",
+
+                      "SYSTEM/bin/install-recovery.sh",
+                      "VENDOR/bin/install-recovery.sh"):
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       OPTIONS.rebuild_recovery = True
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     # Don't copy OTA keys if we're replacing them.
     elif (OPTIONS.replace_ota_keys and
           info.filename in (
@@ -312,6 +636,16 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
               "RECOVERY/RAMDISK/res/keys",
               "SYSTEM/etc/security/otacerts.zip",
               "SYSTEM/etc/update_engine/update-payload-key.pub.pem")):
+=======
+    # Don't copy OTA certs if we're replacing them.
+    # Replacement of update-payload-key.pub.pem was removed in b/116660991.
+    elif (
+        OPTIONS.replace_ota_keys and
+        filename in (
+            "BOOT/RAMDISK/system/etc/security/otacerts.zip",
+            "RECOVERY/RAMDISK/system/etc/security/otacerts.zip",
+            "SYSTEM/etc/security/otacerts.zip")):
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       pass
 
     # Skip META/misc_info.txt since we will write back the new values later.
@@ -323,6 +657,18 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
           info.filename in ("BOOT/RAMDISK/verity_key",
                             "ROOT/verity_key")):
       pass
+    elif (OPTIONS.remove_avb_public_keys and
+          (filename.startswith("BOOT/RAMDISK/avb/") or
+           filename.startswith("BOOT/RAMDISK/first_stage_ramdisk/avb/"))):
+        matched_removal = False
+        for key_to_remove in OPTIONS.remove_avb_public_keys:
+          if filename.endswith(key_to_remove):
+            matched_removal = True
+            print("Removing AVB public key from ramdisk: %s" % filename)
+            break
+        if not matched_removal:
+          # Copy it verbatim if we don't want to remove it.
+          common.ZipWriteStr(output_tf_zip, out_info, data)
 
     # Skip verity keyid (for system_root_image use) if we will replace it.
     elif (OPTIONS.replace_verity_keyid and
@@ -333,6 +679,28 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     elif info.filename == "META/care_map.txt":
       pass
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    # Updates system_other.avbpubkey in /product/etc/.
+    elif filename in (
+        "PRODUCT/etc/security/avb/system_other.avbpubkey",
+        "SYSTEM/product/etc/security/avb/system_other.avbpubkey"):
+      # Only update system_other's public key, if the corresponding signing
+      # key is specified via --avb_system_other_key.
+      signing_key = OPTIONS.avb_keys.get("system_other")
+      if signing_key:
+        public_key = common.ExtractAvbPublicKey(
+            misc_info['avb_avbtool'], signing_key)
+        print("    Rewriting AVB public key of system_other in /product")
+        common.ZipWrite(output_tf_zip, public_key, filename)
+
+    # Should NOT sign boot-debug.img.
+    elif filename in (
+        "BOOT/RAMDISK/force_debuggable",
+        "BOOT/RAMDISK/first_stage_ramdisk/force_debuggable"):
+      raise common.ExternalError("debuggable boot.img cannot be signed")
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     # A non-APK file; copy it verbatim.
     else:
       common.ZipWriteStr(output_tf_zip, out_info, data)
@@ -345,11 +713,16 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     ReplaceVerityPrivateKey(misc_info, OPTIONS.replace_verity_private_key[1])
 
   if OPTIONS.replace_verity_public_key:
-    dest = "ROOT/verity_key" if system_root_image else "BOOT/RAMDISK/verity_key"
-    # We are replacing the one in boot image only, since the one under
-    # recovery won't ever be needed.
+    # Replace the one in root dir in system.img.
     ReplaceVerityPublicKey(
-        output_tf_zip, dest, OPTIONS.replace_verity_public_key[1])
+        output_tf_zip, 'ROOT/verity_key', OPTIONS.replace_verity_public_key[1])
+
+    if not system_root_image:
+      # Additionally replace the copy in ramdisk if not using system-as-root.
+      ReplaceVerityPublicKey(
+          output_tf_zip,
+          'BOOT/RAMDISK/verity_key',
+          OPTIONS.replace_verity_public_key[1])
 
   # Replace the keyid string in BOOT/cmdline.
   if OPTIONS.replace_verity_keyid:
@@ -358,6 +731,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
   # Replace the AVB signing keys, if any.
   ReplaceAvbSigningKeys(misc_info)
+
+  # Rewrite the props in AVB signing args.
+  if misc_info.get('avb_enable') == 'true':
+    RewriteAvbProps(misc_info)
 
   # Write back misc_info with the latest values.
   ReplaceMiscInfoTxt(input_tf_zip, output_tf_zip, misc_info)
@@ -380,17 +757,17 @@ def ReplaceCerts(data):
   Raises:
     AssertionError: On finding duplicate entries.
   """
-  for old, new in OPTIONS.key_map.iteritems():
+  for old, new in OPTIONS.key_map.items():
     if OPTIONS.verbose:
       print("    Replacing %s.x509.pem with %s.x509.pem" % (old, new))
 
     try:
       with open(old + ".x509.pem") as old_fp:
         old_cert16 = base64.b16encode(
-            common.ParseCertificate(old_fp.read())).lower()
+            common.ParseCertificate(old_fp.read())).decode().lower()
       with open(new + ".x509.pem") as new_fp:
         new_cert16 = base64.b16encode(
-            common.ParseCertificate(new_fp.read())).lower()
+            common.ParseCertificate(new_fp.read())).decode().lower()
     except IOError as e:
       if OPTIONS.verbose or e.errno != errno.ENOENT:
         print("    Error accessing %s: %s.\nSkip replacing %s.x509.pem with "
@@ -483,6 +860,25 @@ def RewriteProps(data):
   return "\n".join(output) + "\n"
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+def WriteOtacerts(output_zip, filename, keys):
+  """Constructs a zipfile from given keys; and writes it to output_zip.
+
+  Args:
+    output_zip: The output target_files zip.
+    filename: The archive name in the output zip.
+    keys: A list of public keys to use during OTA package verification.
+  """
+  temp_file = io.BytesIO()
+  certs_zip = zipfile.ZipFile(temp_file, "w")
+  for k in keys:
+    common.ZipWrite(certs_zip, k)
+  common.ZipClose(certs_zip)
+  common.ZipWriteStr(output_zip, filename, temp_file.getvalue())
+
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   try:
     keylist = input_tf_zip.read("META/otakeys.txt").split()
@@ -512,7 +908,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
     print("for OTA package verification")
   else:
     devkey = misc_info.get("default_system_dev_certificate",
-                           "build/target/product/security/testkey")
+                           "build/make/target/product/security/testkey")
     mapped_devkey = OPTIONS.key_map.get(devkey, devkey)
     if mapped_devkey != devkey:
       misc_info["default_system_dev_certificate"] = mapped_devkey
@@ -555,6 +951,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   common.ZipWriteStr(output_tf_zip, "SYSTEM/etc/security/otacerts.zip",
                      temp_file.getvalue())
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   # For A/B devices, update the payload verification key.
   if misc_info.get("ab_update") == "true":
     # Unlike otacerts.zip that may contain multiple keys, we can only specify
@@ -573,6 +970,8 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
         output_tf_zip,
         "BOOT/RAMDISK/etc/update_engine/update-payload-key.pub.pem",
         pubkey)
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
   return new_recovery_keys
 
@@ -609,7 +1008,7 @@ def ReplaceVerityKeyId(input_zip, output_zip, key_path):
         writable.
     key_path: The path to the PEM encoded X.509 certificate.
   """
-  in_cmdline = input_zip.read("BOOT/cmdline")
+  in_cmdline = input_zip.read("BOOT/cmdline").decode()
   # Copy in_cmdline to output_zip if veritykeyid is not present.
   if "veritykeyid" not in in_cmdline:
     common.ZipWriteStr(output_zip, "BOOT/cmdline", in_cmdline)
@@ -642,7 +1041,7 @@ def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
   current in-memory dict contains additional items computed at runtime.
   """
   misc_info_old = common.LoadDictionaryFromLines(
-      input_zip.read('META/misc_info.txt').split('\n'))
+      input_zip.read('META/misc_info.txt').decode().split('\n'))
   items = []
   for key in sorted(misc_info):
     if key in misc_info_old:
@@ -653,6 +1052,7 @@ def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
 def ReplaceAvbSigningKeys(misc_info):
   """Replaces the AVB signing keys."""
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   AVB_FOOTER_ARGS_BY_PARTITION = {
       'boot' : 'avb_boot_add_hash_footer_args',
       'dtbo' : 'avb_dtbo_add_hash_footer_args',
@@ -662,6 +1062,8 @@ def ReplaceAvbSigningKeys(misc_info):
       'vbmeta' : 'avb_vbmeta_args',
   }
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   def ReplaceAvbPartitionSigningKey(partition):
     key = OPTIONS.avb_keys.get(partition)
     if not key:
@@ -679,18 +1081,52 @@ def ReplaceAvbSigningKeys(misc_info):
     if extra_args:
       print('Setting extra AVB signing args for %s to "%s"' % (
           partition, extra_args))
-      args_key = AVB_FOOTER_ARGS_BY_PARTITION[partition]
+      if partition in AVB_FOOTER_ARGS_BY_PARTITION:
+        args_key = AVB_FOOTER_ARGS_BY_PARTITION[partition]
+      else:
+        # custom partition
+        args_key = "avb_{}_add_hashtree_footer_args".format(partition)
       misc_info[args_key] = (misc_info.get(args_key, '') + ' ' + extra_args)
 
   for partition in AVB_FOOTER_ARGS_BY_PARTITION:
     ReplaceAvbPartitionSigningKey(partition)
+
+  for custom_partition in misc_info.get(
+      "avb_custom_images_partition_list", "").strip().split():
+    ReplaceAvbPartitionSigningKey(custom_partition)
+
+
+def RewriteAvbProps(misc_info):
+  """Rewrites the props in AVB signing args."""
+  for partition, args_key in AVB_FOOTER_ARGS_BY_PARTITION.items():
+    args = misc_info.get(args_key)
+    if not args:
+      continue
+
+    tokens = []
+    changed = False
+    for token in args.split(' '):
+      fingerprint_key = 'com.android.build.{}.fingerprint'.format(partition)
+      if not token.startswith(fingerprint_key):
+        tokens.append(token)
+        continue
+      prefix, tag = token.rsplit('/', 1)
+      tokens.append('{}/{}'.format(prefix, EditTags(tag)))
+      changed = True
+
+    if changed:
+      result = ' '.join(tokens)
+      print('Rewriting AVB prop for {}:\n'.format(partition))
+      print('  replace: {}'.format(args))
+      print('     with: {}'.format(result))
+      misc_info[args_key] = result
 
 
 def BuildKeyMap(misc_info, key_mapping_options):
   for s, d in key_mapping_options:
     if s is None:   # -d option
       devkey = misc_info.get("default_system_dev_certificate",
-                             "build/target/product/security/testkey")
+                             "build/make/target/product/security/testkey")
       devkeydir = os.path.dirname(devkey)
 
       OPTIONS.key_map.update({
@@ -699,13 +1135,14 @@ def BuildKeyMap(misc_info, key_mapping_options):
           devkeydir + "/media":    d + "/media",
           devkeydir + "/shared":   d + "/shared",
           devkeydir + "/platform": d + "/platform",
+          devkeydir + "/networkstack": d + "/networkstack",
           })
     else:
       OPTIONS.key_map[s] = d
 
 
 def GetApiLevelAndCodename(input_tf_zip):
-  data = input_tf_zip.read("SYSTEM/build.prop")
+  data = input_tf_zip.read("SYSTEM/build.prop").decode()
   api_level = None
   codename = None
   for line in data.split("\n"):
@@ -727,7 +1164,7 @@ def GetApiLevelAndCodename(input_tf_zip):
 
 
 def GetCodenameToApiLevelMap(input_tf_zip):
-  data = input_tf_zip.read("SYSTEM/build.prop")
+  data = input_tf_zip.read("SYSTEM/build.prop").decode()
   api_level = None
   codenames = None
   for line in data.split("\n"):
@@ -745,7 +1182,7 @@ def GetCodenameToApiLevelMap(input_tf_zip):
   if codenames is None:
     raise ValueError("No ro.build.version.all_codenames in SYSTEM/build.prop")
 
-  result = dict()
+  result = {}
   for codename in codenames:
     codename = codename.strip()
     if len(codename) > 0:
@@ -753,6 +1190,69 @@ def GetCodenameToApiLevelMap(input_tf_zip):
   return result
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+def ReadApexKeysInfo(tf_zip):
+  """Parses the APEX keys info from a given target-files zip.
+
+  Given a target-files ZipFile, parses the META/apexkeys.txt entry and returns a
+  dict that contains the mapping from APEX names (e.g. com.android.tzdata) to a
+  tuple of (payload_key, container_key).
+
+  Args:
+    tf_zip: The input target_files ZipFile (already open).
+
+  Returns:
+    (payload_key, container_key): payload_key contains the path to the payload
+        signing key; container_key contains the path to the container signing
+        key.
+  """
+  keys = {}
+  for line in tf_zip.read('META/apexkeys.txt').decode().split('\n'):
+    line = line.strip()
+    if not line:
+      continue
+    matches = re.match(
+        r'^name="(?P<NAME>.*)"\s+'
+        r'public_key="(?P<PAYLOAD_PUBLIC_KEY>.*)"\s+'
+        r'private_key="(?P<PAYLOAD_PRIVATE_KEY>.*)"\s+'
+        r'container_certificate="(?P<CONTAINER_CERT>.*)"\s+'
+        r'container_private_key="(?P<CONTAINER_PRIVATE_KEY>.*?)"'
+        r'(\s+partition="(?P<PARTITION>.*?)")?$',
+        line)
+    if not matches:
+      continue
+
+    name = matches.group('NAME')
+    payload_private_key = matches.group("PAYLOAD_PRIVATE_KEY")
+
+    def CompareKeys(pubkey, pubkey_suffix, privkey, privkey_suffix):
+      pubkey_suffix_len = len(pubkey_suffix)
+      privkey_suffix_len = len(privkey_suffix)
+      return (pubkey.endswith(pubkey_suffix) and
+              privkey.endswith(privkey_suffix) and
+              pubkey[:-pubkey_suffix_len] == privkey[:-privkey_suffix_len])
+
+    # Sanity check on the container key names, as we'll carry them without the
+    # extensions. This doesn't apply to payload keys though, which we will use
+    # full names only.
+    container_cert = matches.group("CONTAINER_CERT")
+    container_private_key = matches.group("CONTAINER_PRIVATE_KEY")
+    if container_cert == 'PRESIGNED' and container_private_key == 'PRESIGNED':
+      container_key = 'PRESIGNED'
+    elif CompareKeys(
+        container_cert, OPTIONS.public_key_suffix,
+        container_private_key, OPTIONS.private_key_suffix):
+      container_key = container_cert[:-len(OPTIONS.public_key_suffix)]
+    else:
+      raise ValueError("Failed to parse container keys: \n{}".format(line))
+
+    keys[name] = (payload_private_key, container_key)
+
+  return keys
+
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 def main(argv):
 
   key_mapping_options = []
@@ -783,6 +1283,8 @@ def main(argv):
       OPTIONS.replace_verity_private_key = (True, a)
     elif o == "--replace_verity_keyid":
       OPTIONS.replace_verity_keyid = (True, a)
+    elif o == "--remove_avb_public_keys":
+      OPTIONS.remove_avb_public_keys = a.split(",")
     elif o == "--avb_vbmeta_key":
       OPTIONS.avb_keys['vbmeta'] = a
     elif o == "--avb_vbmeta_algorithm":
@@ -813,6 +1315,35 @@ def main(argv):
       OPTIONS.avb_algorithms['vendor'] = a
     elif o == "--avb_vendor_extra_args":
       OPTIONS.avb_extra_args['vendor'] = a
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    elif o == "--avb_vbmeta_system_key":
+      OPTIONS.avb_keys['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_system_algorithm":
+      OPTIONS.avb_algorithms['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_system_extra_args":
+      OPTIONS.avb_extra_args['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_vendor_key":
+      OPTIONS.avb_keys['vbmeta_vendor'] = a
+    elif o == "--avb_vbmeta_vendor_algorithm":
+      OPTIONS.avb_algorithms['vbmeta_vendor'] = a
+    elif o == "--avb_vbmeta_vendor_extra_args":
+      OPTIONS.avb_extra_args['vbmeta_vendor'] = a
+    elif o == "--avb_apex_extra_args":
+      OPTIONS.avb_extra_args['apex'] = a
+    elif o == "--avb_extra_custom_image_key":
+      partition, key = a.split("=")
+      OPTIONS.avb_keys[partition] = key
+    elif o == "--avb_extra_custom_image_algorithm":
+      partition, algorithm = a.split("=")
+      OPTIONS.avb_algorithms[partition] = algorithm
+    elif o == "--avb_extra_custom_image_extra_args":
+      # Setting the maxsplit parameter to one, which will return a list with
+      # two elements. e.g., the second '=' should not be splitted for
+      # 'oem=--signing_helper_with_files=/tmp/avbsigner.sh'.
+      partition, extra_args = a.split("=", 1)
+      OPTIONS.avb_extra_args[partition] = extra_args
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     else:
       return False
     return True
@@ -829,6 +1360,11 @@ def main(argv):
           "replace_verity_public_key=",
           "replace_verity_private_key=",
           "replace_verity_keyid=",
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+          "remove_avb_public_keys=",
+          "avb_apex_extra_args=",
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
           "avb_vbmeta_algorithm=",
           "avb_vbmeta_key=",
           "avb_vbmeta_extra_args=",
@@ -844,6 +1380,18 @@ def main(argv):
           "avb_vendor_algorithm=",
           "avb_vendor_key=",
           "avb_vendor_extra_args=",
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+          "avb_vbmeta_system_algorithm=",
+          "avb_vbmeta_system_key=",
+          "avb_vbmeta_system_extra_args=",
+          "avb_vbmeta_vendor_algorithm=",
+          "avb_vbmeta_vendor_key=",
+          "avb_vbmeta_vendor_extra_args=",
+          "avb_extra_custom_image_key=",
+          "avb_extra_custom_image_algorithm=",
+          "avb_extra_custom_image_extra_args=",
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
       ],
       extra_option_handler=option_handler)
 
@@ -864,7 +1412,23 @@ def main(argv):
   apk_key_map = GetApkCerts(certmap)
   CheckAllApksSigned(input_zip, apk_key_map, compressed_extension)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   key_passwords = common.GetKeyPasswords(set(apk_key_map.values()))
+=======
+  apex_keys_info = ReadApexKeysInfo(input_zip)
+  apex_keys = GetApexKeys(apex_keys_info, apk_keys)
+
+  # TODO(xunchang) check for the apks inside the apex files, and abort early if
+  # the keys are not available.
+  CheckApkAndApexKeysAvailable(
+      input_zip,
+      set(apk_keys.keys()) | set(apex_keys.keys()),
+      compressed_extension,
+      apex_keys)
+
+  key_passwords = common.GetKeyPasswords(
+      set(apk_keys.values()) | set(itertools.chain(*apex_keys.values())))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   platform_api_level, _ = GetApiLevelAndCodename(input_zip)
   codename_to_api_level_map = GetCodenameToApiLevelMap(input_zip)
 

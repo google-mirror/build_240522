@@ -26,14 +26,24 @@ import re
 import subprocess
 import sys
 import threading
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 from collections import deque, OrderedDict
 from hashlib import sha1
+=======
+import zlib
+from collections import deque, namedtuple, OrderedDict
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 import common
+from images import EmptyImage
 from rangelib import RangeSet
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 
 __all__ = ["EmptyImage", "DataImage", "BlockImageDiff"]
+=======
+__all__ = ["BlockImageDiff"]
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 
 def compute_patch(srcfile, tgtfile, imgdiff=False):
@@ -55,6 +65,7 @@ def compute_patch(srcfile, tgtfile, imgdiff=False):
     return f.read()
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 class Image(object):
   def RangeSha1(self, ranges):
     raise NotImplementedError
@@ -181,6 +192,8 @@ class DataImage(Image):
       fd.write(data)
 
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 class Transfer(object):
   def __init__(self, tgt_name, src_name, tgt_ranges, src_ranges, tgt_sha1,
                src_sha1, style, by_id):
@@ -309,8 +322,13 @@ class ImgdiffStats(object):
     """Prints a report of the collected imgdiff stats."""
 
     def print_header(header, separator):
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
       print(header)
       print(separator * len(header) + '\n')
+=======
+      logger.info(header)
+      logger.info('%s\n', separator * len(header))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
     print_header('  Imgdiff Stats Report  ', '=')
     for key in self.REASONS:
@@ -686,7 +704,7 @@ class BlockImageDiff(object):
     out.insert(2, "0\n")
     out.insert(3, str(max_stashed_blocks) + "\n")
 
-    with open(prefix + ".transfer.list", "wb") as f:
+    with open(prefix + ".transfer.list", "w") as f:
       for i in out:
         f.write(i)
 
@@ -974,7 +992,7 @@ class BlockImageDiff(object):
     # - we write every block we care about exactly once.
 
     # Start with no blocks having been touched yet.
-    touched = array.array("B", "\0" * self.tgt.total_blocks)
+    touched = array.array("B", b"\0" * self.tgt.total_blocks)
 
     # Imagine processing the transfers in order.
     for xf in self.transfers:
@@ -1470,8 +1488,8 @@ class BlockImageDiff(object):
 
         split_tgt_size = int(info[1])
         assert split_tgt_size % 4096 == 0
-        assert split_tgt_size / 4096 <= tgt_remain.size()
-        split_tgt_ranges = tgt_remain.first(split_tgt_size / 4096)
+        assert split_tgt_size // 4096 <= tgt_remain.size()
+        split_tgt_ranges = tgt_remain.first(split_tgt_size // 4096)
         tgt_remain = tgt_remain.subtract(split_tgt_ranges)
 
         # Find the split_src_ranges within the image file from its relative
@@ -1543,7 +1561,7 @@ class BlockImageDiff(object):
                                                     lines)
         for index, (patch_start, patch_length, split_tgt_ranges,
                     split_src_ranges) in enumerate(split_info_list):
-          with open(patch_file) as f:
+          with open(patch_file, 'rb') as f:
             f.seek(patch_start)
             patch_content = f.read(patch_length)
 
@@ -1561,6 +1579,7 @@ class BlockImageDiff(object):
     split_large_apks = []
     cache_size = common.OPTIONS.cache_size
     split_threshold = 0.125
+    assert cache_size is not None
     max_blocks_per_transfer = int(cache_size * split_threshold /
                                   self.tgt.blocksize)
     empty = RangeSet()

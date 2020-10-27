@@ -18,7 +18,7 @@
 Builds output_image from the given input_directory, properties_file,
 and writes the image to target_output_directory.
 
-Usage:  build_image.py input_directory properties_file output_image \\
+Usage:  build_image input_directory properties_file output_image \\
             target_output_directory
 """
 
@@ -479,6 +479,8 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   build_command = []
   fs_type = prop_dict.get("fs_type", "")
   run_e2fsck = False
+  needs_projid = prop_dict.get("needs_projid", 0)
+  needs_casefold = prop_dict.get("needs_casefold", 0)
 
   fs_spans_partition = True
   if fs_type.startswith("squash"):
@@ -557,8 +559,15 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
         build_command.extend(["-U", prop_dict["uuid"]])
       if "hash_seed" in prop_dict:
         build_command.extend(["-S", prop_dict["hash_seed"]])
-    if "ext4_share_dup_blocks" in prop_dict:
+    if prop_dict.get("ext4_share_dup_blocks") == "true":
       build_command.append("-c")
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    if (needs_projid):
+      build_command.extend(["--inode_size", "512"])
+    else:
+      build_command.extend(["--inode_size", "256"])
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     if "selinux_fc" in prop_dict:
       build_command.append(prop_dict["selinux_fc"])
   elif fs_type.startswith("squash"):
@@ -585,7 +594,13 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       build_command.extend(["-a"])
   elif fs_type.startswith("f2fs"):
     build_command = ["mkf2fsuserimg.sh"]
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     build_command.extend([out_file, prop_dict["partition_size"]])
+=======
+    build_command.extend([out_file, prop_dict["image_size"]])
+    if "f2fs_sparse_flag" in prop_dict:
+      build_command.extend([prop_dict["f2fs_sparse_flag"]])
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     if fs_config:
       build_command.extend(["-C", fs_config])
     build_command.extend(["-f", in_dir])
@@ -597,6 +612,10 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     if "timestamp" in prop_dict:
       build_command.extend(["-T", str(prop_dict["timestamp"])])
     build_command.extend(["-L", prop_dict["mount_point"]])
+    if (needs_projid):
+      build_command.append("--prjquota")
+    if (needs_casefold):
+      build_command.append("--casefold")
   else:
     print("Error: unknown filesystem type '%s'" % (fs_type))
     return False
@@ -683,9 +702,9 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   d = {}
 
   if "build.prop" in glob_dict:
-    bp = glob_dict["build.prop"]
-    if "ro.build.date.utc" in bp:
-      d["timestamp"] = bp["ro.build.date.utc"]
+    timestamp = glob_dict["build.prop"].GetProp("ro.build.date.utc")
+    if timestamp:
+      d["timestamp"] = timestamp
 
   def copy_prop(src_p, dest_p):
     """Copy a property from the global dictionary.
@@ -704,7 +723,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   common_props = (
       "extfs_sparse_flag",
       "squashfs_sparse_flag",
-      "selinux_fc",
+      "f2fs_sparse_flag",
       "skip_fsck",
       "ext_mkuserimg",
       "verity",
@@ -714,7 +733,11 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "verity_disable",
       "avb_enable",
       "avb_avbtool",
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
       "avb_salt",
+=======
+      "use_dynamic_partition_size",
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   )
   for p in common_props:
     copy_prop(p, p)
@@ -726,6 +749,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
               "avb_add_hashtree_footer_args")
     copy_prop("avb_system_key_path", "avb_key_path")
     copy_prop("avb_system_algorithm", "avb_algorithm")
+    copy_prop("avb_system_salt", "avb_salt")
     copy_prop("fs_type", "fs_type")
     # Copy the generic system fs type first, override with specific one if
     # available.
@@ -747,6 +771,11 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    copy_prop("system_reserved_size", "partition_reserved_size")
+    copy_prop("system_selinux_fc", "selinux_fc")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its
     # files.
@@ -754,8 +783,14 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("avb_system_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_system_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
     copy_prop("avb_system_key_path", "avb_key_path")
     copy_prop("avb_system_algorithm", "avb_algorithm")
+=======
+    copy_prop("avb_system_other_key_path", "avb_key_path")
+    copy_prop("avb_system_other_algorithm", "avb_algorithm")
+    copy_prop("avb_system_other_salt", "avb_salt")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     copy_prop("fs_type", "fs_type")
     copy_prop("system_fs_type", "fs_type")
     copy_prop("system_size", "partition_size")
@@ -765,10 +800,14 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_squashfs_compressor", "squashfs_compressor")
     copy_prop("system_squashfs_compressor_opt", "squashfs_compressor_opt")
     copy_prop("system_squashfs_block_size", "squashfs_block_size")
-    copy_prop("system_base_fs_file", "base_fs_file")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    copy_prop("system_reserved_size", "partition_reserved_size")
+    copy_prop("system_selinux_fc", "selinux_fc")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
     copy_prop("fs_type", "fs_type")
@@ -776,15 +815,20 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("userdata_size", "partition_size")
     copy_prop("flash_logical_block_size", "flash_logical_block_size")
     copy_prop("flash_erase_block_size", "flash_erase_block_size")
+    copy_prop("userdata_selinux_fc", "selinux_fc")
+    copy_prop("needs_casefold", "needs_casefold")
+    copy_prop("needs_projid", "needs_projid")
   elif mount_point == "cache":
     copy_prop("cache_fs_type", "fs_type")
     copy_prop("cache_size", "partition_size")
+    copy_prop("cache_selinux_fc", "selinux_fc")
   elif mount_point == "vendor":
     copy_prop("avb_vendor_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_vendor_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
     copy_prop("avb_vendor_key_path", "avb_key_path")
     copy_prop("avb_vendor_algorithm", "avb_algorithm")
+    copy_prop("avb_vendor_salt", "avb_salt")
     copy_prop("vendor_fs_type", "fs_type")
     copy_prop("vendor_size", "partition_size")
     if not copy_prop("vendor_journal_size", "journal_size"):
@@ -799,12 +843,18 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("vendor_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    copy_prop("vendor_reserved_size", "partition_reserved_size")
+    copy_prop("vendor_selinux_fc", "selinux_fc")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   elif mount_point == "product":
     copy_prop("avb_product_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_product_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
     copy_prop("avb_product_key_path", "avb_key_path")
     copy_prop("avb_product_algorithm", "avb_algorithm")
+    copy_prop("avb_product_salt", "avb_salt")
     copy_prop("product_fs_type", "fs_type")
     copy_prop("product_size", "partition_size")
     if not copy_prop("product_journal_size", "journal_size"):
@@ -818,6 +868,59 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("product_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("product_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    copy_prop("product_reserved_size", "partition_reserved_size")
+    copy_prop("product_selinux_fc", "selinux_fc")
+  elif mount_point == "system_ext":
+    copy_prop("avb_system_ext_hashtree_enable", "avb_hashtree_enable")
+    copy_prop("avb_system_ext_add_hashtree_footer_args",
+              "avb_add_hashtree_footer_args")
+    copy_prop("avb_system_ext_key_path", "avb_key_path")
+    copy_prop("avb_system_ext_algorithm", "avb_algorithm")
+    copy_prop("avb_system_ext_salt", "avb_salt")
+    copy_prop("system_ext_fs_type", "fs_type")
+    copy_prop("system_ext_size", "partition_size")
+    if not copy_prop("system_ext_journal_size", "journal_size"):
+      d["journal_size"] = "0"
+    copy_prop("system_ext_verity_block_device", "verity_block_device")
+    copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
+    copy_prop("system_ext_squashfs_compressor", "squashfs_compressor")
+    copy_prop("system_ext_squashfs_compressor_opt",
+              "squashfs_compressor_opt")
+    copy_prop("system_ext_squashfs_block_size", "squashfs_block_size")
+    copy_prop("system_ext_squashfs_disable_4k_align",
+              "squashfs_disable_4k_align")
+    copy_prop("system_ext_base_fs_file", "base_fs_file")
+    copy_prop("system_ext_extfs_inode_count", "extfs_inode_count")
+    if not copy_prop("system_ext_extfs_rsv_pct", "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+    copy_prop("system_ext_reserved_size", "partition_reserved_size")
+    copy_prop("system_ext_selinux_fc", "selinux_fc")
+  elif mount_point == "odm":
+    copy_prop("avb_odm_hashtree_enable", "avb_hashtree_enable")
+    copy_prop("avb_odm_add_hashtree_footer_args",
+              "avb_add_hashtree_footer_args")
+    copy_prop("avb_odm_key_path", "avb_key_path")
+    copy_prop("avb_odm_algorithm", "avb_algorithm")
+    copy_prop("avb_odm_salt", "avb_salt")
+    copy_prop("odm_fs_type", "fs_type")
+    copy_prop("odm_size", "partition_size")
+    if not copy_prop("odm_journal_size", "journal_size"):
+      d["journal_size"] = "0"
+    copy_prop("odm_verity_block_device", "verity_block_device")
+    copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
+    copy_prop("odm_squashfs_compressor", "squashfs_compressor")
+    copy_prop("odm_squashfs_compressor_opt", "squashfs_compressor_opt")
+    copy_prop("odm_squashfs_block_size", "squashfs_block_size")
+    copy_prop("odm_squashfs_disable_4k_align", "squashfs_disable_4k_align")
+    copy_prop("odm_base_fs_file", "base_fs_file")
+    copy_prop("odm_extfs_inode_count", "extfs_inode_count")
+    if not copy_prop("odm_extfs_rsv_pct", "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+    copy_prop("odm_reserved_size", "partition_reserved_size")
+    copy_prop("odm_selinux_fc", "selinux_fc")
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
   elif mount_point == "oem":
     copy_prop("fs_type", "fs_type")
     copy_prop("oem_size", "partition_size")
@@ -826,6 +929,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("oem_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("oem_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+    copy_prop("oem_selinux_fc", "selinux_fc")
   d["partition_name"] = mount_point
   return d
 
@@ -844,6 +948,32 @@ def LoadGlobalDict(filename):
   return d
 
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+def GlobalDictFromImageProp(image_prop, mount_point):
+  d = {}
+  def copy_prop(src_p, dest_p):
+    if src_p in image_prop:
+      d[dest_p] = image_prop[src_p]
+      return True
+    return False
+
+  if mount_point == "system":
+    copy_prop("partition_size", "system_size")
+  elif mount_point == "system_other":
+    copy_prop("partition_size", "system_other_size")
+  elif mount_point == "vendor":
+    copy_prop("partition_size", "vendor_size")
+  elif mount_point == "odm":
+    copy_prop("partition_size", "odm_size")
+  elif mount_point == "product":
+    copy_prop("partition_size", "product_size")
+  elif mount_point == "system_ext":
+    copy_prop("partition_size", "system_ext_size")
+  return d
+
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 def main(argv):
   if len(argv) != 4:
     print(__doc__)
@@ -876,6 +1006,11 @@ def main(argv):
       mount_point = "oem"
     elif image_filename == "product.img":
       mount_point = "product"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+    elif image_filename == "system_ext.img":
+      mount_point = "system_ext"
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     else:
       print("error: unknown image file name ", image_filename, file=sys.stderr)
       sys.exit(1)

@@ -25,18 +25,6 @@
 ## be set for you.
 ###########################################################
 
-# If this makefile is being read from within an inheritance,
-# use the new values.
-skip_definition:=
-ifdef LOCAL_PACKAGE_OVERRIDES
-  package_overridden := $(call set-inherited-package-variables)
-  ifeq ($(strip $(package_overridden)),)
-    skip_definition := true
-  endif
-endif
-
-ifndef skip_definition
-
 LOCAL_PACKAGE_NAME := $(strip $(LOCAL_PACKAGE_NAME))
 ifeq ($(LOCAL_PACKAGE_NAME),)
 $(error $(LOCAL_PATH): Package modules must define LOCAL_PACKAGE_NAME)
@@ -87,7 +75,62 @@ else
   LOCAL_RESOURCE_DIR := $(foreach d,$(LOCAL_RESOURCE_DIR),$(call clean-path,$(d)))
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 package_resource_overlays := $(strip \
+=======
+# If LOCAL_MODULE matches a rule in PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES,
+# override the manifest package name by the (first) rule matched
+override_manifest_name := $(strip $(word 1,\
+  $(foreach rule,$(PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES),\
+    $(eval _pkg_name_pat := $(call word-colon,1,$(rule)))\
+    $(eval _manifest_name_pat := $(call word-colon,2,$(rule)))\
+    $(if $(filter $(_pkg_name_pat),$(LOCAL_MODULE)),\
+      $(patsubst $(_pkg_name_pat),$(_manifest_name_pat),$(LOCAL_MODULE))\
+     )\
+   )\
+))
+
+ifneq (,$(override_manifest_name))
+# Note: this can override LOCAL_MANIFEST_PACKAGE_NAME value set in Android.mk
+LOCAL_MANIFEST_PACKAGE_NAME := $(override_manifest_name)
+endif
+
+include $(BUILD_SYSTEM)/force_aapt2.mk
+
+# Process Support Library dependencies.
+include $(BUILD_SYSTEM)/support_libraries.mk
+
+# Determine whether auto-RRO is enabled for this package.
+enforce_rro_enabled :=
+ifneq (,$(filter *, $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  # * means all system and system_ext APKs, so enable conditionally based on module path.
+  # Note that modules in PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS are excluded even if it is '*'
+
+  # Note that base_rules.mk has not yet been included, so it's likely that only
+  # one of LOCAL_MODULE_PATH and the LOCAL_X_MODULE flags has been set.
+  ifeq (,$(LOCAL_MODULE_PATH))
+    non_rro_target_module := $(filter true,\
+        $(LOCAL_ODM_MODULE) \
+        $(LOCAL_OEM_MODULE) \
+        $(LOCAL_PRODUCT_MODULE) \
+        $(LOCAL_PROPRIETARY_MODULE) \
+        $(LOCAL_VENDOR_MODULE))
+    enforce_rro_enabled := $(if $(non_rro_target_module),,true)
+  else ifneq ($(filter $(TARGET_OUT)/%,$(LOCAL_MODULE_PATH)),)
+    enforce_rro_enabled := true
+  endif
+else ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  enforce_rro_enabled := true
+endif
+
+# TODO(b/150820813) Some modules depend on static overlay, remove this after eliminating the dependency.
+ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS)))
+  enforce_rro_enabled :=
+endif
+
+
+product_package_overlays := $(strip \
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     $(wildcard $(foreach dir, $(PRODUCT_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))) \
     $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \
@@ -148,12 +191,11 @@ ifneq ($(all_assets),)
 need_compile_asset := true
 endif
 
-ifdef LOCAL_AAPT2_ONLY
-LOCAL_USE_AAPT2 := true
-endif
-
 my_res_package :=
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_USE_AAPT2
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # In aapt2 the last takes precedence.
 my_resource_dirs := $(call reverse-list,$(LOCAL_RESOURCE_DIR))
 my_res_dir :=
@@ -187,24 +229,14 @@ all_resources := $(strip $(my_res_resources) $(my_overlay_resources))
 my_res_package := $(intermediates)/package-res.apk
 LOCAL_INTERMEDIATE_TARGETS += $(my_res_package)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+my_bundle_module := $(intermediates)/base.zip
+LOCAL_INTERMEDIATE_TARGETS += $(my_bundle_module)
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # Always run aapt2, because we need to at least compile the AndroidManifest.xml.
 need_compile_res := true
-
-else  # LOCAL_USE_AAPT2
-all_resources := $(strip \
-    $(foreach dir, $(LOCAL_RESOURCE_DIR), \
-      $(addprefix $(dir)/, \
-        $(patsubst res/%,%, \
-          $(call find-subdir-assets,$(dir)) \
-         ) \
-       ) \
-     ))
-
-ifdef LOCAL_PACKAGE_SPLITS
-LOCAL_AAPT_FLAGS += $(addprefix --split ,$(LOCAL_PACKAGE_SPLITS))
-endif
-
-endif  # LOCAL_USE_AAPT2
 
 ifneq ($(all_resources),)
   need_compile_res := true
@@ -260,6 +292,7 @@ ifeq ($(need_compile_res),true)
 endif # need_compile_res
 endif # !custom
 LOCAL_PROGUARD_FLAGS := $(addprefix -include ,$(proguard_options_file)) $(LOCAL_PROGUARD_FLAGS)
+LOCAL_PROGUARD_FLAGS_DEPS += $(proguard_options_file)
 
 ifeq (true,$(EMMA_INSTRUMENT))
 ifndef LOCAL_EMMA_INSTRUMENT
@@ -279,6 +312,7 @@ ifneq ($(LOCAL_SRC_FILES)$(LOCAL_SRCJARS)$(LOCAL_STATIC_JAVA_LIBRARIES)$(LOCAL_S
 LOCAL_STATIC_JAVA_LIBRARIES += jacocoagent
 # Exclude jacoco classes from proguard
 LOCAL_PROGUARD_FLAGS += -include $(BUILD_SYSTEM)/proguard.jacoco.flags
+LOCAL_PROGUARD_FLAGS_DEPS += $(BUILD_SYSTEM)/proguard.jacoco.flags
 endif # Contains java code
 else
 ifdef LOCAL_SDK_VERSION
@@ -289,6 +323,7 @@ ifneq ($(LOCAL_SRC_FILES)$(LOCAL_STATIC_JAVA_LIBRARIES)$(LOCAL_SOURCE_FILES_ALL_
 LOCAL_STATIC_JAVA_LIBRARIES += jacocoagent
 # Exclude jacoco classes from proguard
 LOCAL_PROGUARD_FLAGS += -include $(BUILD_SYSTEM)/proguard.jacoco.flags
+LOCAL_PROGUARD_FLAGS_DEPS += $(BUILD_SYSTEM)/proguard.jacoco.flags
 endif # Contains java code
 endif # TARGET_BUILD_APPS
 endif # LOCAL_SDK_VERSION
@@ -349,14 +384,15 @@ my_split_suffixes := $(subst $(comma),_,$(my_apk_split_configs))
 built_apk_splits := $(foreach s,$(my_split_suffixes),$(intermediates)/package_$(s).apk)
 endif
 
-$(R_file_stamp) $(my_res_package): PRIVATE_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS)
+$(R_file_stamp) $(my_res_package): PRIVATE_AAPT_FLAGS := $(filter-out --legacy,$(LOCAL_AAPT_FLAGS))
 $(R_file_stamp) $(my_res_package): PRIVATE_TARGET_AAPT_CHARACTERISTICS := $(TARGET_AAPT_CHARACTERISTICS)
 $(R_file_stamp) $(my_res_package): PRIVATE_MANIFEST_PACKAGE_NAME := $(LOCAL_MANIFEST_PACKAGE_NAME)
 $(R_file_stamp) $(my_res_package): PRIVATE_MANIFEST_INSTRUMENTATION_FOR := $(LOCAL_MANIFEST_INSTRUMENTATION_FOR)
 
 ###############################
-## AAPT/AAPT2
+## AAPT2
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_USE_AAPT2
   my_compiled_res_base_dir := $(intermediates.COMMON)/flat-res
   ifneq (,$(renderscript_target_api))
@@ -366,13 +402,23 @@ ifdef LOCAL_USE_AAPT2
   endif  # renderscript_target_api is set
   my_asset_dirs := $(LOCAL_ASSET_DIR)
   my_full_asset_paths := $(all_assets)
+=======
+my_compiled_res_base_dir := $(intermediates.COMMON)/flat-res
+ifneq (,$(filter-out current,$(renderscript_target_api)))
+  ifneq ($(call math_gt_or_eq,$(renderscript_target_api),21),true)
+    my_generated_res_zips := $(rs_generated_res_zip)
+  endif  # renderscript_target_api < 21
+endif  # renderscript_target_api is set
+my_asset_dirs := $(LOCAL_ASSET_DIR)
+my_full_asset_paths := $(all_assets)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
-  # Add AAPT2 link specific flags.
-  $(my_res_package): PRIVATE_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS)
-  ifndef LOCAL_AAPT_NAMESPACES
-    $(my_res_package): PRIVATE_AAPT_FLAGS += --no-static-lib-packages
-  endif
+# Add AAPT2 link specific flags.
+ifndef LOCAL_AAPT_NAMESPACES
+  $(my_res_package): PRIVATE_AAPT_FLAGS += --no-static-lib-packages
+endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   include $(BUILD_SYSTEM)/aapt2.mk
 else  # LOCAL_USE_AAPT2
 
@@ -421,6 +467,9 @@ else  # LOCAL_USE_AAPT2
   endif
 
 endif  # LOCAL_USE_AAPT2
+=======
+include $(BUILD_SYSTEM)/aapt2.mk
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 endif  # need_compile_res
 
@@ -509,23 +558,17 @@ $(resource_export_package) $(R_file_stamp) $(LOCAL_BUILT_MODULE): $(all_library_
 $(LOCAL_INTERMEDIATE_TARGETS): \
     PRIVATE_AAPT_INCLUDES := $(all_library_res_package_exports)
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_USE_AAPT2
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 $(my_res_package) : $(all_library_res_package_export_deps)
-endif
-
-# These four are set above for $(R_stamp_file) and $(my_res_package), but
-# $(LOCAL_BUILT_MODULE) is not set before java.mk, so they have to be set again
-# here.
-$(LOCAL_BUILT_MODULE): PRIVATE_AAPT_FLAGS := $(LOCAL_AAPT_FLAGS)
-$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_AAPT_CHARACTERISTICS := $(TARGET_AAPT_CHARACTERISTICS)
-$(LOCAL_BUILT_MODULE): PRIVATE_MANIFEST_PACKAGE_NAME := $(LOCAL_MANIFEST_PACKAGE_NAME)
-$(LOCAL_BUILT_MODULE): PRIVATE_MANIFEST_INSTRUMENTATION_FOR := $(LOCAL_MANIFEST_INSTRUMENTATION_FOR)
 
 ifneq ($(full_classes_jar),)
 $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE := $(built_dex)
 # Use the jarjar processed arhive as the initial package file.
 $(LOCAL_BUILT_MODULE): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
-$(LOCAL_BUILT_MODULE): $(built_dex)
+$(LOCAL_BUILT_MODULE): $(built_dex) $(full_classes_pre_proguard_jar)
 else
 $(LOCAL_BUILT_MODULE): PRIVATE_DEX_FILE :=
 $(LOCAL_BUILT_MODULE): PRIVATE_SOURCE_ARCHIVE :=
@@ -557,7 +600,7 @@ private_key := $(LOCAL_CERTIFICATE).pk8
 certificate := $(LOCAL_CERTIFICATE).x509.pem
 additional_certificates := $(foreach c,$(LOCAL_ADDITIONAL_CERTIFICATES), $(c).x509.pem $(c).pk8)
 
-$(LOCAL_BUILT_MODULE): $(private_key) $(certificate) $(SIGNAPK_JAR)
+$(LOCAL_BUILT_MODULE): $(private_key) $(certificate) $(SIGNAPK_JAR) $(SIGNAPK_JNI_LIBRARY_PATH)
 $(LOCAL_BUILT_MODULE): PRIVATE_PRIVATE_KEY := $(private_key)
 $(LOCAL_BUILT_MODULE): PRIVATE_CERTIFICATE := $(certificate)
 
@@ -566,6 +609,37 @@ PACKAGES.$(LOCAL_PACKAGE_NAME).CERTIFICATE := $(certificate)
 
 $(LOCAL_BUILT_MODULE): $(additional_certificates)
 $(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_CERTIFICATES := $(additional_certificates)
+
+$(LOCAL_BUILT_MODULE): $(LOCAL_CERTIFICATE_LINEAGE)
+$(LOCAL_BUILT_MODULE): PRIVATE_CERTIFICATE_LINEAGE := $(LOCAL_CERTIFICATE_LINEAGE)
+
+# Set a actual_partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(actual_partition_tag)
+
+# Verify LOCAL_USES_LIBRARIES/LOCAL_OPTIONAL_USES_LIBRARIES
+# If LOCAL_ENFORCE_USES_LIBRARIES is not set, default to true if either of LOCAL_USES_LIBRARIES or
+# LOCAL_OPTIONAL_USES_LIBRARIES are specified.
+# Will change the default to true unconditionally in the future.
+ifndef LOCAL_ENFORCE_USES_LIBRARIES
+  ifneq (,$(strip $(LOCAL_USES_LIBRARIES)$(LOCAL_OPTIONAL_USES_LIBRARIES)))
+    LOCAL_ENFORCE_USES_LIBRARIES := true
+  endif
+endif
+
+my_enforced_uses_libraries :=
+ifdef LOCAL_ENFORCE_USES_LIBRARIES
+  my_manifest_check := $(intermediates.COMMON)/manifest/AndroidManifest.xml.check
+  $(my_manifest_check): $(MANIFEST_CHECK)
+  $(my_manifest_check): PRIVATE_USES_LIBRARIES := $(LOCAL_USES_LIBRARIES)
+  $(my_manifest_check): PRIVATE_OPTIONAL_USES_LIBRARIES := $(LOCAL_OPTIONAL_USES_LIBRARIES)
+  $(my_manifest_check): $(full_android_manifest)
+	@echo Checking manifest: $<
+	$(MANIFEST_CHECK) --enforce-uses-libraries \
+	  $(addprefix --uses-library ,$(PRIVATE_USES_LIBRARIES)) \
+	  $(addprefix --optional-uses-library ,$(PRIVATE_OPTIONAL_USES_LIBRARIES)) \
+	  $< -o $@
+  $(LOCAL_BUILT_MODULE): $(my_manifest_check)
+endif
 
 # Define the rule to build the actual package.
 # PRIVATE_JNI_SHARED_LIBRARIES is a list of <abi>:<path_of_built_lib>.
@@ -588,22 +662,50 @@ else
 endif
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(LOCAL_BUILT_MODULE): PRIVATE_DONT_DELETE_JAR_DIRS := $(LOCAL_DONT_DELETE_JAR_DIRS)
+=======
+# Run veridex on product, system_ext and vendor modules.
+# We skip it for unbundled app builds where we cannot build veridex.
+module_run_appcompat :=
+ifeq (true,$(non_system_module))
+ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))  # ! unbundled app build
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
+  module_run_appcompat := true
+endif
+endif
+endif
+
+ifeq ($(module_run_appcompat),true)
+$(LOCAL_BUILT_MODULE) : $(appcompat-files)
+$(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
+endif
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/resources
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
 $(LOCAL_BUILT_MODULE) : $(jni_shared_libraries)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(LOCAL_BUILT_MODULE) : $(JAR_ARGS)
 ifdef LOCAL_USE_AAPT2
+=======
+$(LOCAL_BUILT_MODULE) : $(JAR_ARGS) $(SOONG_ZIP) $(MERGE_ZIPS) $(ZIP2ZIP)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 $(LOCAL_BUILT_MODULE): PRIVATE_RES_PACKAGE := $(my_res_package)
-$(LOCAL_BUILT_MODULE) : $(my_res_package) $(AAPT2) | $(ACP)
-else
-$(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_LIST := $(all_res_assets)
-$(LOCAL_BUILT_MODULE) : $(all_res_assets) $(full_android_manifest) $(AAPT) $(ZIPALIGN)
-endif  # LOCAL_USE_AAPT2
+$(LOCAL_BUILT_MODULE) : $(my_res_package) $(AAPT2)
 ifdef LOCAL_COMPRESSED_MODULE
 $(LOCAL_BUILT_MODULE) : $(MINIGZIP)
 endif
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
+$(LOCAL_BUILT_MODULE) : $(ZIP2ZIP)
+endif
+$(LOCAL_BUILT_MODULE): PRIVATE_USE_EMBEDDED_NATIVE_LIBS := $(LOCAL_USE_EMBEDDED_NATIVE_LIBS)
+$(LOCAL_BUILT_MODULE):
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	@echo "target Package: $(PRIVATE_MODULE) ($@)"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_USE_AAPT2
 	$(call copy-file-to-new-target)
 else  # ! LOCAL_USE_AAPT2
@@ -612,6 +714,11 @@ else  # ! LOCAL_USE_AAPT2
 	  $(create-empty-package))
 	$(add-assets-to-package)
 endif  # LOCAL_USE_AAPT2
+=======
+	rm -rf $@.parts
+	mkdir -p $@.parts
+	cp -f $(PRIVATE_RES_PACKAGE) $@.parts/apk.zip
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifneq ($(jni_shared_libraries),)
 	$(add-jni-shared-libs-to-package)
 endif
@@ -628,6 +735,7 @@ ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
 	@# No need to align, sign-package below will do it.
 	$(uncompress-dexs)
 endif
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifdef LOCAL_DEX_PREOPT
 ifneq ($(BUILD_PLATFORM_ZIP),)
 	@# Keep a copy of apk with classes.dex unstripped
@@ -637,27 +745,87 @@ ifneq (nostripping,$(LOCAL_DEX_PREOPT))
 	$(call dexpreopt-remove-classes.dex,$@)
 endif
 endif  # LOCAL_DEX_PREOPT
+=======
+# Run appcompat before signing.
+ifeq ($(module_run_appcompat),true)
+	$(appcompat-header)
+	$(run-appcompat)
+endif  # module_run_appcompat
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	$(sign-package)
 ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ###############################
 ## Build dpi-specific apks, if it's apps_only build.
+=======
+my_package_res_pb := $(intermediates)/package-res.pb.apk
+$(my_package_res_pb): $(my_res_package) $(AAPT2)
+	$(AAPT2) convert --output-format proto $< -o $@
+
+$(my_bundle_module): $(my_package_res_pb)
+$(my_bundle_module): PRIVATE_RES_PACKAGE := $(my_package_res_pb)
+
+$(my_bundle_module): $(jni_shared_libraries)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
+
+ifneq ($(full_classes_jar),)
+  $(my_bundle_module): PRIVATE_DEX_FILE := $(built_dex)
+  # Use the jarjar processed archive as the initial package file.
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
+  $(my_bundle_module): $(built_dex)
+else
+  $(my_bundle_module): PRIVATE_DEX_FILE :=
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE :=
+endif # full_classes_jar
+
+$(my_bundle_module): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
+	@echo "target Bundle: $(PRIVATE_MODULE) ($@)"
+	rm -rf $@.parts
+	mkdir -p $@.parts
+	$(ZIP2ZIP) -i $(PRIVATE_RES_PACKAGE) -o $@.parts/apk.zip AndroidManifest.xml:manifest/AndroidManifest.xml resources.pb "res/**/*" "assets/**/*"
+      ifneq ($(jni_shared_libraries),)
+	  $(call create-jni-shared-libs-package,$@.parts/jni.zip)
+      endif
+      ifeq ($(full_classes_jar),)
+      # We don't build jar, need to add the Java resources here.
+	  $(if $(PRIVATE_EXTRA_JAR_ARGS),\
+	    $(call create-java-resources-jar,$@.parts/res.zip) && \
+	    $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/" && \
+	    mv -f $@.parts/res.zip.tmp $@.parts/res.zip)
+      else  # full_classes_jar
+	  $(call create-dex-jar,$@.parts/dex.zip,$(PRIVATE_DEX_FILE))
+	  $(ZIP2ZIP) -i $@.parts/dex.zip -o $@.parts/dex.zip.tmp "classes*.dex:dex/"
+	  mv -f $@.parts/dex.zip.tmp $@.parts/dex.zip
+	  $(call extract-resources-jar,$@.parts/res.zip,$(PRIVATE_SOURCE_ARCHIVE))
+	  $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/"
+	  mv -f $@.parts/res.zip.tmp $@.parts/res.zip
+      endif  # full_classes_jar
+	$(MERGE_ZIPS) $@ $@.parts/*.zip
+	rm -rf $@.parts
+ALL_MODULES.$(LOCAL_MODULE).BUNDLE := $(my_bundle_module)
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifdef TARGET_BUILD_APPS
-ifdef LOCAL_DPI_VARIANTS
-$(foreach d, $(LOCAL_DPI_VARIANTS), \
-  $(eval my_dpi := $(d)) \
-  $(eval include $(BUILD_SYSTEM)/dpi_specific_apk.mk))
-endif
+  ifdef LOCAL_DPI_VARIANTS
+    $(call pretty-error,Building DPI-specific APKs is no longer supported)
+  endif
 endif
 
 ###############################
 ## Rule to build the odex file
 ifdef LOCAL_DEX_PREOPT
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 $(built_odex): PRIVATE_DEX_FILE := $(built_dex)
 # Use pattern rule - we may have multiple built odex files.
 $(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(built_dex)
+=======
+  $(my_dex_jar): PRIVATE_DEX_FILE := $(built_dex)
+  $(my_dex_jar): $(built_dex) $(SOONG_ZIP)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	$(hide) mkdir -p $(dir $@) && rm -f $@
 	$(add-dex-to-package)
 ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
@@ -716,9 +884,13 @@ endif # LOCAL_PACKAGE_SPLITS
 PACKAGES.$(LOCAL_PACKAGE_NAME).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
 PACKAGES.$(LOCAL_PACKAGE_NAME).RESOURCE_FILES := $(all_resources)
 
-PACKAGES := $(PACKAGES) $(LOCAL_PACKAGE_NAME)
+ifneq ($(LOCAL_MODULE_STEM),)
+  PACKAGES.$(LOCAL_MODULE).STEM := $(LOCAL_MODULE_STEM)
+else
+  PACKAGES.$(LOCAL_MODULE).STEM := $(LOCAL_MODULE)
+endif
 
-endif # skip_definition
+PACKAGES := $(PACKAGES) $(LOCAL_PACKAGE_NAME)
 
 # Reset internal variables.
 all_res_assets :=

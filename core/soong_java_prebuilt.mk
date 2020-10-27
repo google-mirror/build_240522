@@ -39,6 +39,13 @@ ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
     $(intermediates.COMMON)/jacoco-report-classes.jar)
 endif
 
+ifdef LOCAL_SOONG_PROGUARD_DICT
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
+    $(intermediates.COMMON)/proguard_dictionary))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),\
+    $(intermediates.COMMON)/proguard_dictionary)
+endif
+
 ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
   my_res_package := $(intermediates.COMMON)/package-res.apk
 
@@ -114,8 +121,29 @@ $(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(common_javalib.jar)
   endif
 
   java-dex : $(LOCAL_BUILT_MODULE)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 else
   $(eval $(call copy-one-file,$(full_classes_jar),$(LOCAL_BUILT_MODULE)))
+=======
+else  # LOCAL_SOONG_DEX_JAR
+  ifndef LOCAL_UNINSTALLABLE_MODULE
+    ifndef LOCAL_IS_HOST_MODULE
+      $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+    endif
+  endif
+endif  # LOCAL_SOONG_DEX_JAR
+
+my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
+  $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
+my_installed := $(call copy-many-files, $(my_built_installed))
+ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(my_built_installed)
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)
+$(my_register_name): $(my_installed)
+
+ifdef LOCAL_SOONG_AAR
+  ALL_MODULES.$(LOCAL_MODULE).AAR := $(LOCAL_SOONG_AAR)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 
 javac-check : $(full_classes_jar)
@@ -143,3 +171,18 @@ my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
 my_common := COMMON
 include $(BUILD_SYSTEM)/link_type.mk
 endif # !LOCAL_IS_HOST_MODULE
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+# LOCAL_EXPORT_SDK_LIBRARIES set by soong is written to exported-sdk-libs file
+my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
+$(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
+$(my_exported_sdk_libs_file):
+	@echo "Export SDK libs $@"
+	$(hide) mkdir -p $(dir $@) && rm -f $@
+	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
+		$(hide) echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
+		$(hide) touch $@)
+
+SOONG_ALREADY_CONV += $(LOCAL_MODULE)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

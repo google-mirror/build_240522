@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish # for libwifi-hal-emu
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish-opengl # for goldfish deps.
+
 # This is a generic phone product that isn't specialized for a specific device.
 # It includes the base Android platform.
 
@@ -24,3 +27,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
 PRODUCT_NAME := generic
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+allowed_list := product_manifest.xml
+$(call enforce-product-packages-exist,$(allowed_list))
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

@@ -7,12 +7,15 @@ $(call record-module-type,PACKAGE)
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifeq ($(TARGET_TRANSLATE_2ND_ARCH),true)
   ifneq ($(TARGET_SUPPORTS_64_BIT_APPS)|$(my_module_multilib),|64)
     my_module_multilib := first
   endif
 endif
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifeq ($(TARGET_SUPPORTS_32_BIT_APPS)|$(TARGET_SUPPORTS_64_BIT_APPS),true|true)
   # packages default to building for either architecture,
   # the preferred if its supported, otherwise the non-preferred.

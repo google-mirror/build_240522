@@ -23,8 +23,11 @@ endef
 
 ############################################################
 ## Macros after this line are shared by the 64-bit config.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 
 # $(1): The file to check
 define get-file-size
 stat --format "%s" "$(1)" | tr -d '\n'
 endef
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

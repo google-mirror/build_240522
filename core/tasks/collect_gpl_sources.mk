@@ -19,6 +19,8 @@ ifdef dist_goal
 # wiped between dist builds.
 gpl_source_tgz := $(DIST_DIR)/gpl_source.tgz
 
+ALL_GPL_MODULE_LICENSE_FILES := $(sort $(ALL_GPL_MODULE_LICENSE_FILES))
+
 # FORCE since we can't know whether any of the sources changed
 $(gpl_source_tgz): PRIVATE_PATHS := $(sort $(patsubst %/, %, $(dir $(ALL_GPL_MODULE_LICENSE_FILES))))
 $(gpl_source_tgz) : $(ALL_GPL_MODULE_LICENSE_FILES)

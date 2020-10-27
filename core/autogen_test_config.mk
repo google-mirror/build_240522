@@ -27,7 +27,11 @@ ifeq (true,$(is_native))
 # Auto generating test config file for native test
 $(autogen_test_config_file) : $(NATIVE_TEST_CONFIG_TEMPLATE)
 	@echo "Auto generating test config $(notdir $@)"
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE)&g' $^ > $@
+=======
+	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE_NAME)&g;s&{EXTRA_CONFIGS}&&g' $< > $@
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 my_auto_generate_config := true
 else
 # Auto generating test config file for instrumentation test

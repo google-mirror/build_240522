@@ -22,18 +22,49 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # build quite specifically for the emulator, and might not be
 # entirely appropriate to inherit from for on-device configurations.
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 PRODUCT_COPY_FILES += \
     development/sys-img/advancedFeatures.ini:advancedFeatures.ini \
     device/generic/goldfish/data/etc/encryptionkey.img:encryptionkey.img \
     prebuilts/qemu-kernel/x86_64/4.9/kernel-qemu2:kernel-ranchu
+=======
+#
+# All components inherited here go to system image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 
-# Copy different zygote settings for vendor.img to select by setting property
-# ro.zygote=zygote64_32 or ro.zygote=zygote32_64:
-#   1. 64-bit primary, 32-bit secondary OR
-#   2. 32-bit primary, 64-bit secondary
-# init.zygote64_32.rc is in the core_64_bit.mk below
-PRODUCT_COPY_FILES += \
-    system/core/rootdir/init.zygote32_64.rc:root/init.zygote32_64.rc
+# Enable mainline checking for excat this product name
+ifeq (aosp_x86_64,$(TARGET_PRODUCT))
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+endif
+
+#
+# All components inherited here go to system_ext image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
+
+#
+# All components inherited here go to product image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
+
+#
+# All components inherited here go to vendor image
+#
+$(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+
+#
+# Special settings for GSI releasing
+#
+ifeq (aosp_x86_64,$(TARGET_PRODUCT))
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_release.mk)
+endif
+
 
 # TODO(b/78308559): includes vr_hwc into GSI before vr_hwc move to vendor
 PRODUCT_PACKAGES += \

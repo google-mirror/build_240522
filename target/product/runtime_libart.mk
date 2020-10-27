@@ -16,15 +16,6 @@
 
 # Provides a functioning ART environment without Android frameworks
 
-ifeq ($(TARGET_CORE_JARS),)
-$(error TARGET_CORE_JARS is empty; cannot update PRODUCT_PACKAGES variable)
-endif
-
-# Minimal boot classpath. This should be a subset of PRODUCT_BOOT_JARS, and equivalent to
-# TARGET_CORE_JARS.
-PRODUCT_PACKAGES += \
-    $(TARGET_CORE_JARS)
-
 # Additional mixins to the boot classpath.
 PRODUCT_PACKAGES += \
     android.test.base \
@@ -33,6 +24,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ext \
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Why are we pulling in expat, which is used in frameworks, only, it seem?
 PRODUCT_PACKAGES += \
     libexpat \
@@ -51,6 +43,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
+=======
+# Runtime (Bionic) APEX module.
+PRODUCT_PACKAGES += com.android.runtime
+
+# ART APEX module.
+# Note that this package includes the minimal boot classpath JARs (listed in
+# ART_APEX_JARS), which should no longer be added directly to PRODUCT_PACKAGES.
+PRODUCT_PACKAGES += com.android.art
+PRODUCT_HOST_PACKAGES += com.android.art
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Certificates.
 PRODUCT_PACKAGES += \
@@ -94,6 +96,30 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     pm.dexopt.inactive=verify \
     pm.dexopt.shared=speed
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+# Pass file with the list of updatable boot class path packages to dex2oat.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-updatable-bcp-packages-file=/system/etc/updatable-bcp-packages.txt
+
+# Enable resolution of startup const strings.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-resolve-startup-strings=true
+
+# Specify default block size of 512K to enable parallel image decompression.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-max-image-block-size=524288
+
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 # Enable minidebuginfo generation unless overridden.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=true
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
+=======
+
+# Enable iorapd by default
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.iorapd.enable=true
+
+PRODUCT_USES_DEFAULT_ART_CONFIG := true
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

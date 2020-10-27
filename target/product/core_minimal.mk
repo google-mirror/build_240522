@@ -14,9 +14,23 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Base configuration for most consumer android devices.  Do not put
 # things that are specific to communication devices (phones, tables,
 # etc.) here -- for that, use core.mk.
+=======
+# This product is the base of a generic media-capable device, which
+# means most android products, but excludes wearables.
+#
+# Note: Do not add any contents directly to this file. Choose either
+# media_<x> depending on partition also consider base_<x>.mk or
+# handheld_<x>.mk.
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/media_system.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/media_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/media_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic

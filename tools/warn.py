@@ -1,13 +1,27 @@
 #!/usr/bin/python
-# This file uses the following encoding: utf-8
+#
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-"""Grep warnings messages and output HTML tables or warning counts in CSV.
+"""Call -m warn.warn to process warning messages.
 
-Default is to output warnings in HTML tables grouped by warning severity.
-Use option --byproject to output tables grouped by source file projects.
-Use option --gencsv to output warning counts in CSV format.
+This script is used by Android continuous build bots for all branches.
+Old frozen branches will continue to use the old warn.py, and active
+branches will use this new version to call -m warn.warn.
 """
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # List of important data structures and functions in this script.
 #
 # To parse and keep warning message in the input file:
@@ -77,11 +91,13 @@ Use option --gencsv to output warning counts in CSV format.
 import argparse
 import csv
 import multiprocessing
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 import os
-import re
-import signal
+import subprocess
 import sys
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 parser = argparse.ArgumentParser(description='Convert a build log into HTML')
 parser.add_argument('--csvpath',
                     help='Save CSV warning file to the passed absolute path',
@@ -3435,22 +3451,13 @@ def dump_csv(writer):
     total += count_severity(writer, s, Severity.column_headers[s])
   writer.writerow([total, '', 'All warnings'])
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 def main():
-  warning_lines = parse_input_file(open(args.buildlog, 'r'))
-  parallel_classify_warnings(warning_lines)
-  # If a user pases a csv path, save the fileoutput to the path
-  # If the user also passed gencsv write the output to stdout
-  # If the user did not pass gencsv flag dump the html report to stdout.
-  if args.csvpath:
-    with open(args.csvpath, 'w') as f:
-      dump_csv(csv.writer(f, lineterminator='\n'))
-  if args.gencsv:
-    dump_csv(csv.writer(sys.stdout, lineterminator='\n'))
-  else:
-    dump_html()
+  os.environ['PYTHONPATH'] = os.path.dirname(os.path.abspath(__file__))
+  subprocess.check_call(['/usr/bin/python', '-m', 'warn.warn'] + sys.argv[1:])
 
 
-# Run main function if warn.py is the main program.
 if __name__ == '__main__':
   main()

@@ -243,18 +243,18 @@ endif
 java_sources_deps := \
     $(java_sources) \
     $(java_resource_sources) \
-    $(proto_java_sources_file_stamp) \
     $(LOCAL_SRCJARS) \
     $(LOCAL_ADDITIONAL_DEPENDENCIES)
 
-$(java_source_list_file): $(java_sources_deps)
+$(java_source_list_file): $(java_sources_deps) $(NORMALIZE_PATH)
 	$(write-java-source-list)
+
+ALL_MODULES.$(my_register_name).SRCJARS := $(LOCAL_SRCJARS)
 
 ifneq ($(TURBINE_ENABLED),false)
 
 $(full_classes_turbine_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
 $(full_classes_turbine_jar): PRIVATE_SRCJARS := $(LOCAL_SRCJARS)
-$(full_classes_turbine_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_turbine_jar): \
     $(java_source_list_file) \
     $(java_sources_deps) \
@@ -284,11 +284,11 @@ $(eval $(call copy-one-file,$(full_classes_header_jarjar),$(full_classes_header_
 
 endif # TURBINE_ENABLED != false
 
+$(full_classes_compiled_jar): .KATI_NINJA_POOL := $(GOMA_POOL)
 $(full_classes_compiled_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_FILES)
 $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_PACKAGES := $(LOCAL_JAR_EXCLUDE_PACKAGES)
-$(full_classes_compiled_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_compiled_jar): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_file)
 $(full_classes_compiled_jar): PRIVATE_ALL_JAVA_HEADER_LIBRARIES := $(full_java_header_libs)
 $(full_classes_compiled_jar): PRIVATE_SRCJARS := $(LOCAL_SRCJARS)
@@ -320,7 +320,7 @@ $(full_classes_combined_jar): $(full_classes_compiled_jar) \
             $(PRIVATE_JAR_MANIFEST) > $(dir $@)/manifest.mf)
 	$(MERGE_ZIPS) -j --ignore-duplicates $(if $(PRIVATE_JAR_MANIFEST),-m $(dir $@)/manifest.mf) \
             $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,-stripDir META-INF -zipToNotStrip $<) \
-            $@ $< $(call reverse-list,$(PRIVATE_STATIC_JAVA_LIBRARIES))
+            $@ $< $(PRIVATE_STATIC_JAVA_LIBRARIES)
 
 ifdef LOCAL_JAR_PROCESSOR
 # LOCAL_JAR_PROCESSOR_ARGS must be evaluated here to set up the rule-local
@@ -368,9 +368,7 @@ include $(BUILD_SYSTEM)/jacoco.mk
 
 # Temporarily enable --multi-dex until proguard supports v53 class files
 # ( http://b/67673860 ) or we move away from proguard altogether.
-ifdef TARGET_OPENJDK9
 LOCAL_DX_FLAGS := $(filter-out --multi-dex,$(LOCAL_DX_FLAGS)) --multi-dex
-endif
 
 ifneq ($(USE_D8_DESUGAR),true)
 my_desugaring :=
@@ -432,21 +430,25 @@ legacy_proguard_flags := $(addprefix $(proguard_jars_prefix) ,$(my_proguard_sdk_
     $(full_shared_java_header_libs)))
 
 legacy_proguard_lib_deps := $(my_proguard_sdk_raise) \
-  $(filter-out $(my_proguard_sdk_raise),$(full_shared_java_header_libs))
+  $(filter-out $(my_proguard_sdk_raise),$(full_java_bootclasspath_libs) $(full_shared_java_header_libs))
 
 legacy_proguard_flags += -printmapping $(proguard_dictionary)
 
-common_proguard_flags := -forceprocessing
-
+common_proguard_flags :=
 common_proguard_flag_files := $(BUILD_SYSTEM)/proguard.flags
 ifneq ($(LOCAL_INSTRUMENTATION_FOR)$(filter tests,$(LOCAL_MODULE_TAGS)),)
 common_proguard_flags += -dontshrink # don't shrink tests by default
 endif # test package
 ifneq ($(LOCAL_PROGUARD_ENABLED),custom)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   ifdef LOCAL_USE_AAPT2
     common_proguard_flag_files += $(foreach l,$(LOCAL_STATIC_ANDROID_LIBRARIES),\
         $(call intermediates-dir-for,JAVA_LIBRARIES,$(l),,COMMON)/export_proguard_flags)
   endif
+=======
+  common_proguard_flag_files += $(foreach l,$(LOCAL_STATIC_ANDROID_LIBRARIES),\
+      $(call intermediates-dir-for,JAVA_LIBRARIES,$(l),,COMMON)/export_proguard_flags)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 ifneq ($(common_proguard_flag_files),)
 common_proguard_flags += $(addprefix -include , $(common_proguard_flag_files))
@@ -495,6 +497,8 @@ ifeq ($(USE_R8),true)
 proguard_flag_files += $(addprefix $(LOCAL_PATH)/, $(LOCAL_R8_FLAG_FILES))
 endif # USE_R8
 LOCAL_PROGUARD_FLAGS += $(addprefix -include , $(proguard_flag_files))
+LOCAL_PROGUARD_FLAGS_DEPS += $(proguard_flag_files)
+proguard_flag_files :=
 
 ifdef LOCAL_TEST_MODULE_TO_PROGUARD_WITH
 extra_input_jar := $(call intermediates-dir-for,APPS,$(LOCAL_TEST_MODULE_TO_PROGUARD_WITH),,COMMON)/classes.jar
@@ -523,9 +527,12 @@ else # !USE_R8
 full_classes_proguard_jar := $(full_classes_pre_proguard_jar)
 endif # !USE_R8
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 else  # LOCAL_PROGUARD_ENABLED not defined
 proguard_flag_files :=
 full_classes_proguard_jar := $(full_classes_pre_proguard_jar)
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif # LOCAL_PROGUARD_ENABLED defined
 
 ifneq ($(LOCAL_IS_STATIC_JAVA_LIBRARY),true)
@@ -533,6 +540,7 @@ $(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 
 my_r8 :=
 ifdef LOCAL_PROGUARD_ENABLED
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifeq ($(USE_R8),true)
 # These are the dependencies for the proguarded jar when running
 # Proguard + dx. They are used for the generated dex when using R8, as
@@ -541,6 +549,12 @@ my_r8 := true
 $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
 $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
 $(built_dex_intermediate) : $(full_classes_proguard_jar) $(extra_input_jar) $(my_support_library_sdk_raise) $(common_proguard_flag_files) $(proguard_flag_files) $(legacy_proguard_lib_deps) $(R8_COMPAT_PROGUARD)
+=======
+  $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_DICTIONARY := $(proguard_dictionary)
+  $(built_dex_intermediate) : $(full_classes_pre_proguard_jar) $(extra_input_jar) $(my_proguard_sdk_raise) $(common_proguard_flag_files) $(legacy_proguard_lib_deps) $(R8_COMPAT_PROGUARD) $(LOCAL_PROGUARD_FLAGS_DEPS)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 	$(transform-jar-to-dex-r8)
 endif # USE_R8
 endif # LOCAL_PROGUARD_ENABLED

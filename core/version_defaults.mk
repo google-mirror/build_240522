@@ -39,9 +39,15 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 DEFAULT_PLATFORM_VERSION := PPR1
 MIN_PLATFORM_VERSION := PPR1
 MAX_PLATFORM_VERSION := PPR1
+=======
+DEFAULT_PLATFORM_VERSION := RP1A
+MIN_PLATFORM_VERSION := RP1A
+MAX_PLATFORM_VERSION := RP1A
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ALLOWED_VERSIONS := $(call allowed-platform-versions,\
   $(MIN_PLATFORM_VERSION),\
@@ -75,17 +81,71 @@ endif
 # please add that PLATFORM_VERSION as well as clean up obsolete PLATFORM_VERSION's
 # in the following text file:
 # cts/tests/tests/os/assets/platform_versions.txt
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 PLATFORM_VERSION.PPR1 := 9
+=======
+
+# Note that there should be one PLATFORM_VERSION and PLATFORM_VERSION_CODENAME
+# entry for each unreleased API level, regardless of
+# MIN_PLATFORM_VERSION/MAX_PLATFORM_VERSION. PLATFORM_VERSION is used to
+# generate the range of allowed SDK versions, so it must have an entry for every
+# unreleased API level targetable by this branch, not just those that are valid
+# lunch targets for this branch.
+
+# The last stable version name of the platform that was released.  During
+# development, this stays at that previous version, while the codename indicates
+# further work based on the previous version.
+PLATFORM_VERSION_LAST_STABLE := 11
+.KATI_READONLY := PLATFORM_VERSION_LAST_STABLE
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 PLATFORM_VERSION_CODENAME.PPR1 := REL
+=======
+PLATFORM_VERSION_CODENAME.RP1A := REL
+
+ifndef PLATFORM_VERSION_CODENAME
+  PLATFORM_VERSION_CODENAME := $(PLATFORM_VERSION_CODENAME.$(TARGET_PLATFORM_VERSION))
+  ifndef PLATFORM_VERSION_CODENAME
+    # PLATFORM_VERSION_CODENAME falls back to TARGET_PLATFORM_VERSION
+    PLATFORM_VERSION_CODENAME := $(TARGET_PLATFORM_VERSION)
+  endif
+
+  # This is all of the *active* development codenames.
+  # This confusing name is needed because
+  # all_codenames has been baked into build.prop for ages.
+  #
+  # Should be either the same as PLATFORM_VERSION_CODENAME or a comma-separated
+  # list of additional codenames after PLATFORM_VERSION_CODENAME.
+  PLATFORM_VERSION_ALL_CODENAMES :=
+
+  # Build a list of all active code names. Avoid duplicates, and stop when we
+  # reach a codename that matches PLATFORM_VERSION_CODENAME (anything beyond
+  # that is not included in our build).
+  _versions_in_target := \
+    $(call find_and_earlier,$(ALL_VERSIONS),$(TARGET_PLATFORM_VERSION))
+  $(foreach version,$(_versions_in_target),\
+    $(eval _codename := $(PLATFORM_VERSION_CODENAME.$(version)))\
+    $(if $(filter $(_codename),$(PLATFORM_VERSION_ALL_CODENAMES)),,\
+      $(eval PLATFORM_VERSION_ALL_CODENAMES += $(_codename))))
+
+  # And convert from space separated to comma separated.
+  PLATFORM_VERSION_ALL_CODENAMES := \
+    $(subst $(space),$(comma),$(strip $(PLATFORM_VERSION_ALL_CODENAMES)))
+
+endif
+.KATI_READONLY := \
+  PLATFORM_VERSION_CODENAME \
+  PLATFORM_VERSION_ALL_CODENAMES
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 ifndef PLATFORM_VERSION
-  PLATFORM_VERSION := $(PLATFORM_VERSION.$(TARGET_PLATFORM_VERSION))
-  ifndef PLATFORM_VERSION
-    # PLATFORM_VERSION falls back to TARGET_PLATFORM_VERSION
-    PLATFORM_VERSION := $(TARGET_PLATFORM_VERSION)
+  ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+      PLATFORM_VERSION := $(PLATFORM_VERSION_LAST_STABLE)
+  else
+      PLATFORM_VERSION := $(PLATFORM_VERSION_CODENAME)
   endif
 endif
 
@@ -106,9 +166,14 @@ ifndef PLATFORM_SDK_VERSION
   # When you increment the PLATFORM_SDK_VERSION please ensure you also
   # clear out the following text file of all older PLATFORM_VERSION's:
   # cts/tests/tests/os/assets/platform_versions.txt
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
   PLATFORM_SDK_VERSION := 28
+=======
+  PLATFORM_SDK_VERSION := 30
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ifndef PLATFORM_VERSION_CODENAME
   PLATFORM_VERSION_CODENAME := $(PLATFORM_VERSION_CODENAME.$(TARGET_PLATFORM_VERSION))
   ifndef PLATFORM_VERSION_CODENAME
@@ -154,6 +219,8 @@ ifndef PLATFORM_VERSION_CODENAME
 
 endif
 
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 ifeq (REL,$(PLATFORM_VERSION_CODENAME))
   PLATFORM_PREVIEW_SDK_VERSION := 0
 else
@@ -231,16 +298,16 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+      PLATFORM_SECURITY_PATCH := 2020-10-05
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP
   # Used to indicate the matching timestamp for the security patch string in PLATFORM_SECURITY_PATCH.
-  ifneq (,$(findstring Darwin,$(UNAME)))
-    PLATFORM_SECURITY_PATCH_TIMESTAMP := $(shell date -jf '%Y-%m-%d %T %Z' '$(PLATFORM_SECURITY_PATCH) 00:00:00 GMT' +%s)
-  else
-    PLATFORM_SECURITY_PATCH_TIMESTAMP := $(shell date -d 'TZ="GMT" $(PLATFORM_SECURITY_PATCH)' +%s)
-  endif
+  PLATFORM_SECURITY_PATCH_TIMESTAMP := $(shell date -d 'TZ="GMT" $(PLATFORM_SECURITY_PATCH)' +%s)
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH_TIMESTAMP
 
@@ -267,11 +334,12 @@ ifndef BUILD_DATETIME
   BUILD_DATETIME := $(shell date +%s)
 endif
 
-ifneq (,$(findstring Darwin,$(UNAME)))
-DATE := date -r $(BUILD_DATETIME)
-else
 DATE := date -d @$(BUILD_DATETIME)
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 endif
+=======
+.KATI_READONLY := DATE
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 # Everything should be using BUILD_DATETIME_FROM_FILE instead.
 # BUILD_DATETIME and DATE can be removed once BUILD_NUMBER moves

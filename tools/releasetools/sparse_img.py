@@ -223,8 +223,19 @@ class SparseImage(object):
 
     with open(fn) as f:
       for line in f:
-        fn, ranges = line.split(None, 1)
-        ranges = rangelib.RangeSet.parse(ranges)
+        fn, ranges_text = line.rstrip().split(None, 1)
+        raw_ranges = rangelib.RangeSet.parse(ranges_text)
+
+        # Note: e2fsdroid records holes in the extent tree as "0" blocks.
+        # This causes confusion because clobbered_blocks always includes
+        # the superblock (physical block #0). Since the 0 blocks here do
+        # not represent actual physical blocks, remove them from the set.
+        ranges = raw_ranges.subtract(rangelib.RangeSet("0"))
+        # b/150334561 we need to perserve the monotonic property of the raw
+        # range. Otherwise, the validation script will read the blocks with
+        # wrong order when pulling files from the image.
+        ranges.monotonic = raw_ranges.monotonic
+        ranges.extra['text_str'] = ranges_text
 
         if allow_shared_blocks:
           # Find the shared blocks that have been claimed by others.
@@ -234,8 +245,15 @@ class SparseImage(object):
             if not ranges:
               continue
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
             # Tag the entry so that we can skip applying imgdiff on this file.
             ranges.extra['uses_shared_blocks'] = True
+=======
+            # Put the non-shared RangeSet as the value in the block map, which
+            # has a copy of the original RangeSet.
+            non_shared.extra['uses_shared_blocks'] = ranges
+            ranges = non_shared
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
         out[fn] = ranges
         assert ranges.size() == ranges.intersect(remaining).size()

@@ -14,8 +14,17 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
+=======
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish # for libwifi-hal-emu
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish-opengl # for goldfish deps.
+
+ifdef NET_ETH0_STARTONBOOT
+  PRODUCT_PROPERTY_OVERRIDES += net.eth0.startonboot=1
+endif
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
 
 PRODUCT_COPY_FILES := \
     device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \

@@ -8,6 +8,9 @@
 # These features are optional and shall not be included in the base platform
 # Otherwise, sdk_x86-eng system images might fail to run on some
 # developer machines.
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 ARCH_X86_HAVE_SSSE3 := false
 ARCH_X86_HAVE_MOVBE := false
 ARCH_X86_HAVE_POPCNT := false
+=======
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])

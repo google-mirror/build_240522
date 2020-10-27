@@ -22,9 +22,15 @@ java_library_host {
     manifest: "SignApk.mf",
     static_libs: [
         "apksig",
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
         "bouncycastle",
         "bouncycastle-bcpkix",
         "conscrypt",
+=======
+        "bouncycastle-unbundled",
+        "bouncycastle-bcpkix-unbundled",
+        "conscrypt-unbundled",
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
     ],
 
     required: ["libconscrypt_openjdk_jni"],

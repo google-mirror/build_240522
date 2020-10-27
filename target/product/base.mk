@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5c8d84 Merge "Merge empty history for sparse-6676661-L8360000065797)
 # Base modules (will move elsewhere, previously user tagged)
 PRODUCT_PACKAGES += \
     20-dns.conf \
@@ -186,3 +187,11 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
+=======
+# This makefile is suitable to inherit by products that don't need to be split
+# up by partition.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_system.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base_product.mk)
+>>>>>>> BRANCH (a10c18 Merge "Version bump to RT11.201014.001.A1 [core/build_id.mk])
