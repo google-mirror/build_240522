@@ -1,0 +1,10 @@
+Autosubmit+1: Rupert Shuttleworth <ruperts@google.com>
+Code-Review+2: Jingwen Chen <jingwen@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 27 Oct 2020 01:09:46 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1473018
+Project: platform/build
+Branch: refs/heads/master
