@@ -24,6 +24,10 @@ ifdef LOCAL_SOONG_AAR
   LOCAL_ADDITIONAL_CHECKED_MODULE += $(LOCAL_SOONG_AAR)
 endif
 
+ifndef LOCAL_MODULE_LANGUAGE
+LOCAL_MODULE_LANGUAGE += java
+endif
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################

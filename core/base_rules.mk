@@ -902,6 +902,10 @@ ifeq (true,$(LOCAL_NOT_AVAILABLE_FOR_PLATFORM))
     endif
   endif
 endif
+ifdef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).LANGUAGE := \
+    $(ALL_MODULES.$(my_register_name).LANGUAGE) $(LOCAL_MODULE_LANGUAGE)
+endif
 
 my_required_modules := $(LOCAL_REQUIRED_MODULES) \
     $(LOCAL_REQUIRED_MODULES_$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH))

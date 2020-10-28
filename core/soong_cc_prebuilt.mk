@@ -45,6 +45,10 @@ ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
   endif
 endif
 
+ifndef LOCAL_MODULE_LANGUAGE
+LOCAL_MODULE_LANGUAGE += cc
+endif
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################

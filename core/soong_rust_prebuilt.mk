@@ -35,6 +35,9 @@ ifndef LOCAL_UNINSTALLABLE_MODULE
   endif
 endif
 
+ifndef LOCAL_MODULE_LANGUAGE
+LOCAL_MODULE_LANGUAGE += rust
+endif
 
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk

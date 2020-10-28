@@ -8,6 +8,7 @@ $(MODULE_INFO_JSON):
 	$(hide) echo -ne $(foreach m, $(sort $(ALL_MODULES)), \
 		' "$(m)": {' \
 			'"class": [$(foreach w,$(sort $(ALL_MODULES.$(m).CLASS)),"$(w)", )], ' \
+			'"language": "$(sort $(ALL_MODULES.$(m).LANGUAGE))", ' \
 			'"path": [$(foreach w,$(sort $(ALL_MODULES.$(m).PATH)),"$(w)", )], ' \
 			'"tags": [$(foreach w,$(sort $(ALL_MODULES.$(m).TAGS)),"$(w)", )], ' \
 			'"installed": [$(foreach w,$(sort $(ALL_MODULES.$(m).INSTALLED)),"$(w)", )], ' \
