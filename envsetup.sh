@@ -23,6 +23,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - ggrep:      Greps on all local Gradle files.
 - gogrep:     Greps on all local Go files.
 - jgrep:      Greps on all local Java files.
+- kgrep:      Greps on all local Kotlin files.
 - resgrep:    Greps on all local res/*.xml files.
 - mangrep:    Greps on all local AndroidManifest.xml files.
 - mgrep:      Greps on all local Makefiles and *.bp files.
@@ -1026,6 +1027,12 @@ function gogrep()
 function jgrep()
 {
     find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name "*\.java" \
+        -exec grep --color -n "$@" {} +
+}
+
+function kgrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name "*\.kt" \
         -exec grep --color -n "$@" {} +
 }
 
