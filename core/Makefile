@@ -1893,11 +1893,16 @@ endif
 ifeq (truetrue,$(strip $(BUILDING_VENDOR_BOOT_IMAGE))$(strip $(AB_OTA_UPDATER)))
   INTERNAL_RECOVERYIMAGE_ARGS := --ramdisk $(recovery_ramdisk)
 
+# In the rare case where the device uses GKI / generic boot image, has a dedicated recovery
+# partition, and includes a kernel in the recovery partition, also put GENERIC_KERNEL_CMDLINE
+# in the recovery kernel cmdline.
+ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
 ifneq (true,$(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE))
 ifdef GENERIC_KERNEL_CMDLINE
   INTERNAL_RECOVERYIMAGE_ARGS += --cmdline "$(GENERIC_KERNEL_CMDLINE)"
 endif # GENERIC_KERNEL_CMDLINE != ""
 endif # BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE != true
+endif # BOARD_USES_GENERIC_KERNEL_IMAGE == true
 
 else # not (BUILDING_VENDOR_BOOT_IMAGE and AB_OTA_UPDATER)
   INTERNAL_RECOVERYIMAGE_ARGS := \
@@ -4491,9 +4496,11 @@ else ifneq (true,$(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE))
 endif
 endif
 ifeq (truetrue,$(strip $(BUILDING_VENDOR_BOOT_IMAGE))$(strip $(AB_OTA_UPDATER)))
+ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
 ifneq (true,$(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE))
 	echo "$(GENERIC_KERNEL_CMDLINE)" > $(zip_root)/$(PRIVATE_RECOVERY_OUT)/cmdline
 endif # BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE != true
+endif # BOARD_USES_GENERIC_KERNEL_IMAGE == true
 else # not (BUILDING_VENDOR_BOOT_IMAGE and AB_OTA_UPDATER)
 ifdef INSTALLED_2NDBOOTLOADER_TARGET
 	cp $(INSTALLED_2NDBOOTLOADER_TARGET) $(zip_root)/$(PRIVATE_RECOVERY_OUT)/second
