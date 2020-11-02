@@ -201,7 +201,6 @@ PRODUCT_PACKAGES += \
     lpdump \
     lshal \
     mdnsd \
-    mediacodec.policy \
     mediaextractor \
     mediametrics \
     media_profiles_V1_0.dtd \

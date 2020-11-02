@@ -62,6 +62,7 @@ PRODUCT_PACKAGES += \
     libreverbwrapper \
     libril \
     libvisualizer \
+    mediacodec.policy \
     passwd_odm \
     passwd_vendor \
     selinux_policy_nonsystem \
