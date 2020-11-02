@@ -315,6 +315,9 @@ _product_list_vars += PRODUCT_CFI_EXCLUDE_PATHS
 # Whether the Scudo hardened allocator is disabled platform-wide
 _product_single_value_vars += PRODUCT_DISABLE_SCUDO
 
+# Whether sepolicy has Treble split for seccomp
+_product_single_value_vars += PRODUCT_SEPOLICY_SPLIT_SECCOMP_OVERRIDE
+
 # A flag to override PRODUCT_COMPATIBLE_PROPERTY
 _product_single_value_vars += PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE
 
