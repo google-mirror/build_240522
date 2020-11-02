@@ -19,7 +19,14 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Enable dynamic system image size and reserved 64MB in it.
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 67108864
+# BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 67108864
+
+# Reserve 300MiB of free space for `adb remount`.
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 314572800
+
+# Override ext4 dedup setting to revert to pre-overlayFS remount behavior.
+# This also bloats the image size.
+BOARD_EXT4_SHARE_DUP_BLOCKS :=
 
 # GSI forces product and system_ext packages to /system for now.
 TARGET_COPY_OUT_PRODUCT := system/product
