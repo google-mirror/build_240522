@@ -603,6 +603,18 @@ HOST_JDK_TOOLS_JAR := $(ANDROID_JAVA8_HOME)/lib/tools.jar
 
 APICHECK_COMMAND := $(JAVA) -Xmx4g -jar $(APICHECK) --no-banner --compatible-output=no
 
+# Boolean variable determining if seccomp is split between vendor/system
+PRODUCT_SEPOLICY_SPLIT_SECCOMP := false
+ifneq ($(PRODUCT_SEPOLICY_SPLIT_SECCOMP_OVERRIDE),)
+  PRODUCT_SEPOLICY_SPLIT_SECCOMP := $(PRODUCT_SEPOLICY_SPLIT_SECCOMP_OVERRIDE)
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  #$(warning no product shipping level defined)
+else ifneq ($(call math_lt,30,$(PRODUCT_SHIPPING_API_LEVEL)),)
+  PRODUCT_SEPOLICY_SPLIT_SECCOMP := true
+endif
+
+.KATI_READONLY := PRODUCT_SEPOLICY_SPLIT_SECCOMP
+
 # Boolean variable determining if the allow list for compatible properties is enabled
 PRODUCT_COMPATIBLE_PROPERTY := false
 ifneq ($(PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE),)
