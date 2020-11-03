@@ -217,7 +217,9 @@ from __future__ import print_function
 
 import logging
 import multiprocessing
+import os
 import os.path
+import re
 import shlex
 import shutil
 import struct
@@ -268,6 +270,7 @@ OPTIONS.skip_compatibility_check = False
 OPTIONS.disable_fec_computation = False
 OPTIONS.partial = None
 OPTIONS.custom_images = {}
+OPTIONS.full_boot = False
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
 DYNAMIC_PARTITION_INFO = 'META/dynamic_partitions_info.txt'
@@ -955,6 +958,42 @@ def GeneratePartitionTimestampFlags(partition_state):
       for part in partition_state]
   return ["--partition_timestamps", ",".join(partition_timestamps)]
 
+def SupportsMainlineGKIUpdates(target_file):
+  """Return True if the build supports MainlineGKIUpdates.
+
+  This function scans the map files in IMAGES/ directory for
+  pattern |*/apex/com.android.gki.*.apex|. If there are files
+  matching this pattern, conclude that build supports mainline
+  GKI and return True
+
+  Args:
+    target_file: Path to a target_file.zip
+  Return:
+    True if thisb uild supports Mainline GKI Updates.
+  """
+  if target_file is None:
+    return False
+  pattern = re.compile(r"apex/com\.android\.gki\..*\.apex")
+  if os.path.isfile(target_file):
+    with zipfile.ZipFile(target_file, "r", allowZip64=True) as zfp:
+      map_files = filter(lambda info: info.filename.endswith(".map"), zfp.infolist())
+      for info in map_files:
+        files = zfp.read(info).decode().split("\n")
+        logger.info("apex files: {}", [x for x in files if "apex" in x])
+        if any(pattern.search(x) for x in files):
+          return True
+  elif os.path.isdir(target_file):
+    image_dir = os.path.join(target_file, "IMAGES")
+    map_files = filter(os.listdir(image_dir), lambda x: x.endswith(".map"))
+    for filename in map_files:
+      filepath = os.path.join(image_dir, filename)
+      with open(filepath, "r") as fp:
+        files = fp.readlines()
+        if any(pattern.search(x) for x in files):
+          return True
+
+  return False
+
 def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
@@ -1021,6 +1060,10 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         metadata.postcondition.partition_state)
 
   additional_args += ["--max_timestamp", max_timestamp]
+
+  if SupportsMainlineGKIUpdates(source_file):
+    logger.info("Detected build with mainline GKI, include full boot image.")
+    additional_args.extend(["--full_boot", "true"])
 
   payload.Generate(
       target_file,
