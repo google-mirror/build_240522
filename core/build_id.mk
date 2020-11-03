@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (a5f322 Merge "Update aosp_arm64 kernel 4.19 prebuilt name" into and)
 BUILD_ID=RPM1.200923.001
+=======
+BUILD_ID=RPM1.201020.001
+>>>>>>> BRANCH (4f70fb Make change and version bump to RPM1.201020.001)
