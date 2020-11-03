@@ -980,6 +980,11 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     source_info = None
 
   additional_args = []
+  vendor_prop = source_info.info_dict.get("vendor.build.prop")
+  if vendor_prop and vendor_prop.GetProp("ro.virtual_ab.compression.enabled"):
+    # TODO(zhangkelvin) Remove this once FEC on VABC is supported
+    logger.info("Virtual AB Compression enabled, disabling FEC")
+    OPTIONS.disable_fec_computation = True
 
   # Prepare custom images.
   if OPTIONS.custom_images:
@@ -999,7 +1004,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   # Target_file may have been modified, reparse ab_partitions
   with zipfile.ZipFile(target_file, allowZip64=True) as zfp:
     target_info.info_dict['ab_partitions'] = zfp.read(
-        AB_PARTITIONS).encode().strip().split("\n")
+        AB_PARTITIONS).decode().strip().split("\n")
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
