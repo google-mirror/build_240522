@@ -268,6 +268,7 @@ OPTIONS.skip_compatibility_check = False
 OPTIONS.disable_fec_computation = False
 OPTIONS.partial = None
 OPTIONS.custom_images = {}
+OPTIONS.full_boot = True
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
 DYNAMIC_PARTITION_INFO = 'META/dynamic_partitions_info.txt'
@@ -1016,6 +1017,9 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
 
   additional_args += ["--max_timestamp", max_timestamp]
 
+  if OPTIONS.full_boot:
+    additional_args.extend(["--full_boot", "true"])
+
   payload.Generate(
       target_file,
       source_file,
@@ -1172,6 +1176,8 @@ def main(argv):
     elif o == "--custom_image":
       custom_partition, custom_image = a.split("=")
       OPTIONS.custom_images[custom_partition] = custom_image
+    elif o == "--full_boot":
+      OPTIONS.full_boot = True
     else:
       return False
     return True
@@ -1212,6 +1218,7 @@ def main(argv):
                                  "boot_variable_file=",
                                  "partial=",
                                  "custom_image=",
+                                 "full_boot",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
