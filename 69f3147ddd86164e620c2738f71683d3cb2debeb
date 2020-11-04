@@ -25,6 +25,32 @@
       },
       "revId": "69f3147ddd86164e620c2738f71683d3cb2debeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005924713",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1486492?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4b31127b_4b1589df",
+        "filename": "target/product/product_config.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-04T08:21:39Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 13
+      },
+      "revId": "69f3147ddd86164e620c2738f71683d3cb2debeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
