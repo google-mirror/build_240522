@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (50c0f9 Merge "Finds APK shared UID violations when merging target f)
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RP1A.201105.002
+>>>>>>> BRANCH (ea883a Version bump to RP1A.201105.002 [core/build_id.mk])
