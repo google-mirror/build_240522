@@ -180,6 +180,8 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
     # so only generate timestamps for dynamic partitions
     # used in OTA update.
     for partition in sorted(set(PARTITIONS_WITH_CARE_MAP) & ab_partitions):
+      if OPTIONS.partial and partition not in OPTIONS.partial:
+        continue
       partition_prop = build_info.info_dict.get(
           '{}.build.prop'.format(partition))
       # Skip if the partition is missing, or it doesn't have a build.prop
