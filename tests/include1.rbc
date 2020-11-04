@@ -1,0 +1,10 @@
+# Included file (not inherited)
+# Converted from makefile
+### PRODUCT_PACKAGES += inc
+
+load("//build/make/core:product_config.rbc", "rblf")
+
+def init(g, handle):
+  cfg = rblf.cfg(handle)
+  rblf.setdefault(handle, "PRODUCT_PACKAGES")
+  cfg.PRODUCT_PACKAGES += ["inc"]
