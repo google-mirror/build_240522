@@ -1,0 +1,13 @@
+# Part configuration
+# Converted from
+### PRODUCT_COPY_FILES += part_from:part_to
+### PRODUCT_PRODUCT_PROPERTIES += part_properties
+
+load("//build/make/core:product_config.rbc", "rblf")
+
+def init(g, handle):
+  cfg = rblf.cfg(handle)
+  rblf.setdefault(handle, "PRODUCT_COPY_FILES")
+  cfg.PRODUCT_COPY_FILES += ["part_from:part_to"]
+  rblf.setdefault(handle, "PRODUCT_PRODUCT_PROPERTIES")
+  cfg.PRODUCT_PRODUCT_PROPERTIES += ["part_properties"]
