@@ -1093,6 +1093,14 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
 
 
+def IsCuttleFish(info_dict):
+  """Return True if the target is a cuttlefish taregt"""
+  system_build_prop = info_dict.get("system.build.prop")
+  if system_build_prop is None:
+    return False
+  return "cf_x86" in system_build_prop.GetProp("ro.build.display.id")
+
+
 def main(argv):
 
   def option_handler(o, a):
@@ -1226,15 +1234,6 @@ def main(argv):
 
   common.InitLogging()
 
-  if OPTIONS.downgrade:
-    # We should only allow downgrading incrementals (as opposed to full).
-    # Otherwise the device may go back from arbitrary build with this full
-    # OTA package.
-    if OPTIONS.incremental_source is None:
-      raise ValueError("Cannot generate downgradable full OTAs")
-    if OPTIONS.partial:
-      raise ValueError("Cannot generate downgradable partial OTAs")
-
   # Load the build info dicts from the zip directly or the extracted input
   # directory. We don't need to unzip the entire target-files zips, because they
   # won't be needed for A/B OTAs (brillo_update_payload does that on its own).
@@ -1246,6 +1245,18 @@ def main(argv):
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
     OPTIONS.info_dict = ParseInfoDict(args[0])
+
+  if OPTIONS.downgrade:
+    # We should only allow downgrading incrementals (as opposed to full).
+    # Otherwise the device may go back from arbitrary build with this full
+    # OTA package.
+    if OPTIONS.incremental_source is None:
+      raise ValueError("Cannot generate downgradable full OTAs")
+    # b/171999375 need to allow downgradable partial OTA on cuttlefish
+    if OPTIONS.partial and not IsCuttleFish(OPTIONS.info_dict):
+      raise ValueError("Cannot generate downgradable partial OTA on non "
+        "cuttlefish target")
+
 
   # TODO(xunchang) for retrofit and partial updates, maybe we should rebuild the
   # target-file and reload the info_dict. So the info will be consistent with
