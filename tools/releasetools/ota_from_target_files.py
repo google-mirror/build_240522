@@ -217,6 +217,7 @@ from __future__ import print_function
 
 import logging
 import multiprocessing
+from os import system
 import os.path
 import shlex
 import shutil
@@ -998,7 +999,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   # Target_file may have been modified, reparse ab_partitions
   with zipfile.ZipFile(target_file, allowZip64=True) as zfp:
     target_info.info_dict['ab_partitions'] = zfp.read(
-        AB_PARTITIONS).encode().strip().split("\n")
+        AB_PARTITIONS).decode().strip().split("\n")
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
@@ -1086,6 +1087,12 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   )
   FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
 
+def IsCuttleFish(info_dict):
+  """Return True if the target is a cuttlefish taregt"""
+  system_build_prop = info_dict.get("system.build.prop")
+  if system_build_prop is None:
+    return False
+  return "cf_x86" in system_build_prop.GetProp("ro.build.display.id") 
 
 def main(argv):
 
@@ -1240,6 +1247,17 @@ def main(argv):
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
     OPTIONS.info_dict = ParseInfoDict(args[0])
+  
+  if IsCuttleFish(OPTIONS.info_dict) and not OPTIONS.partial:
+    # b/171999375
+    logger.info("Detected a cuttlefish target. Cuttlefish doesn't support "
+      "Updating the vendor partition, forcing a partial update which "
+      "excludes the vendor partition.")
+    OPTIONS.partial = OPTIONS.info_dict.get("partial_ota_update_partitions_list", "").split()
+    if len(OPTIONS.partial) == 0:
+      OPTIONS.partial = ["product", "system", "system_ext", "vbmeta_system"]
+    logger.info("Partial OTA partitions: %s", OPTIONS.partial)
+
 
   # TODO(xunchang) for retrofit and partial updates, maybe we should rebuild the
   # target-file and reload the info_dict. So the info will be consistent with
