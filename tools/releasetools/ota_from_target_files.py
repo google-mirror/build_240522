@@ -955,6 +955,20 @@ def GeneratePartitionTimestampFlags(partition_state):
       for part in partition_state]
   return ["--partition_timestamps", ",".join(partition_timestamps)]
 
+def GeneratePartitionTimestampFlagsDowngrade(pre_partition_state, post_partition_state):
+  if pre_partition_state is None:
+    return GeneratePartitionTimestampFlags(post_partition_state)
+  partition_timestamps = {}
+  for part in pre_partition_state:
+    partition_timestamps[part.partition_name] = part.version
+  for part in post_partition_state:
+    partition_timestamps[part.partition_name] = \
+      max(part.version, partition_timestamps[part.partition_name])
+  return [
+    "--partition_timestamps",
+    ",".join([key + ":" + val for (key, val) in partition_timestamps.items()])
+    ]
+
 def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
@@ -1015,10 +1029,15 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   # Enforce a max timestamp this payload can be applied on top of.
   if OPTIONS.downgrade:
     max_timestamp = source_info.GetBuildProp("ro.build.date.utc")
+    partition_timestamps_flags = GeneratePartitionTimestampFlagsDowngrade(
+      metadata.precondition.partition_state,
+      metadata.postcondition.partition_state
+      )
   else:
     max_timestamp = str(metadata.postcondition.timestamp)
-    partition_timestamps_flags = GeneratePartitionTimestampFlags(
-        metadata.postcondition.partition_state)
+    if OPTIONS.partial:
+      partition_timestamps_flags = GeneratePartitionTimestampFlags(
+          metadata.postcondition.partition_state)
 
   additional_args += ["--max_timestamp", max_timestamp]
 
@@ -1226,15 +1245,6 @@ def main(argv):
 
   common.InitLogging()
 
-  if OPTIONS.downgrade:
-    # We should only allow downgrading incrementals (as opposed to full).
-    # Otherwise the device may go back from arbitrary build with this full
-    # OTA package.
-    if OPTIONS.incremental_source is None:
-      raise ValueError("Cannot generate downgradable full OTAs")
-    if OPTIONS.partial:
-      raise ValueError("Cannot generate downgradable partial OTAs")
-
   # Load the build info dicts from the zip directly or the extracted input
   # directory. We don't need to unzip the entire target-files zips, because they
   # won't be needed for A/B OTAs (brillo_update_payload does that on its own).
@@ -1246,6 +1256,14 @@ def main(argv):
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
     OPTIONS.info_dict = ParseInfoDict(args[0])
+
+  if OPTIONS.downgrade:
+    # We should only allow downgrading incrementals (as opposed to full).
+    # Otherwise the device may go back from arbitrary build with this full
+    # OTA package.
+    if OPTIONS.incremental_source is None:
+      raise ValueError("Cannot generate downgradable full OTAs")
+
 
   # TODO(xunchang) for retrofit and partial updates, maybe we should rebuild the
   # target-file and reload the info_dict. So the info will be consistent with
