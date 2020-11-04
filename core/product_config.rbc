@@ -1,0 +1,225 @@
+load("//build/make/core:envsetup.rbc", _envsetup_init="init")
+"""Runtime functions."""
+
+def _merge(dest, src):
+    """Merges source propset into the destination one
+
+    The rules for merging propset src into propset dest are as follows;
+    * if there is no "X" in dest, dest.X is set to src.X
+    * if "X" is in dest but is not a list, src.X replaces dest.X
+    * finally, if the value of "X" in dest is a list, src.X
+      is appended to it unless it is already present
+
+    Args:
+      dest: configuration propset
+      src: module's config to be merged
+    """
+    for p in dir(src):
+        __update_property(dest, p, getattr(src, p))
+
+
+def __update_property(ps, attr, new_value):
+    old_value = getattr(ps, attr) if hasattr(ps, attr) else None
+    if old_value == None or type(old_value) != 'list':
+        ps[attr] = new_value
+    elif type(new_value) == 'list':
+        ret = old_value
+        for v in new_value:
+            if v not in old_value:
+                ret += [v]
+        ps[attr] = ret
+    else:
+        ps[attr] = old_value + [new_value] if new_value not in old_value else old_value
+
+
+def _printvars(mod, dedup=True):
+    """Prints known configuration variables"""
+    if dedup:
+        for attr in sorted(dir(mod)):
+            v = getattr(mod, attr)
+            if type(v) == "list":
+                seen = dict()
+                for item in v:
+                    seen[item] = 0
+                v = seen.keys()
+            print(attr, "=", repr(v))
+    else:
+        for attr in sorted(dir(mod)):
+            print(attr, "=", getattr(mod, attr))
+
+
+def _addprefix(prefix, string_or_list):
+    """Adds prefix and returns a list.
+
+    If string_or_list is a list, prepends prefix to each element.
+    Otherwise, string_or_list is considered to be a string which
+    is split into words and then prefix is prepended to each one.
+
+    Args:
+        prefix
+        string_or_list
+
+    """
+    return [ prefix + x for x in __words(string_or_list)]
+
+
+def _addsuffix(suffix, string_or_list):
+    """Adds suffix and returns a list.
+
+    If string_or_list is a list, appends suffix to each element.
+    Otherwise, string_or_list is considered to be a string which
+    is split into words and then suffix is appended to each one.
+
+    Args:
+      suffix
+      string_or_list
+    """
+    return [ x + suffix for x in __words(string_or_list)]
+
+
+def __words(string_or_list):
+    if type(string_or_list) == "list":
+        return string_or_list
+    return string_or_list.split()
+
+
+def _copy_if_exists(path_pair):
+    """If from file exists, returns [from:to] pair."""
+    l = path_pair.split(":", 2)
+    # Check that l[0] exists
+    return [":".join(l)] if rblf_file_exists(l[0]) else []
+
+def _enforce_product_packages_exist(pkg_string_or_list):
+    """Makes including non-existent modules in PRODUCT_PACKAGES an error."""
+    #TODO(asmundak)
+    pass
+
+
+def _file_wildcard_exists(file_pattern):
+    """Return True if there are files matching given bash pattern."""
+    return len(rblf_wildcard(file_pattern)) > 0
+
+
+def _find_and_copy(pattern, from_dir, to_dir):
+    """Return a copy list for the files matching the pattern."""
+    return ["%s/%s:%s/%s" % (from_dir, f, to_dir, f) for f in rblf_wildcard(pattern, from_dir)]
+
+
+def _filter_out(pattern, text):
+    """Return all the words from `text' that do not match any word in `pattern'.
+
+    Args:
+        pattern: string or list of words. '%' stands for wildcard (in regex terms, '.*')
+        text: string or list of words
+    Return:
+        list of words
+    """
+    rex = __mk2regex(__words(pattern))
+    res = []
+    for w in __words(text):
+        if not _regex_match(rex, w):
+            res.append(w)
+    return res
+
+
+def _filter(pattern, text):
+    """Return all the words in `text` that match `pattern`.
+
+    Args:
+        pattern: strings of words or a list. A word can contain '%',
+         which stands for any sequence of characters.
+        text: string or list of words.
+    """
+    rex = __mk2regex(__words(pattern))
+    res = []
+    for w in __words(text):
+        if _regex_match(rex, w):
+            res.append(w)
+    return res
+
+
+def __mk2regex(words):
+    """Returns regular expression equivalent to Make pattern."""
+
+    # TODO(asmundak): this will mishandle '\%'
+    return "^(" + "|".join([w.replace("%", ".*", 1) for w in words]) + ")"
+
+
+def _regex_match(regex, w):
+    return rblf_regex(regex, w)
+
+
+def _global_init():
+    """Returns PropSet created from the runtime environment."""
+    globals = propset()
+
+    # Environment variables
+    for k in dir(rblf_env):
+        globals[k] = getattr(rblf_env, k)
+
+    # Variables set as var=value command line arguments
+    for k in dir(rblf_cli):
+        globals[k] = getattr(rblf_cli, k)
+
+    globals.PRODUCT_SOONG_NAMESPACES = []
+    _envsetup_init(globals)
+
+    # Variables that should be defined.
+    mandatory_vars = [
+        "PLATFORM_VERSION_CODENAME", "PLATFORM_VERSION",
+        "PRODUCT_SOONG_NAMESPACES",
+        "TARGET_ARCH", "TARGET_BUILD_TYPE", "TARGET_BUILD_VARIANT", "TARGET_PRODUCT",
+    ]
+    for bv in mandatory_vars:
+        if not hasattr(globals, bv):
+            fail(bv, " is not defined")
+
+    return globals
+
+
+def _require_artifacts_in_path(paths, allowed_paths):
+    """TODO."""
+    #print("require_artifacts_in_path(", __words(paths), ",", __words(allowed_paths), ")")
+
+
+def _expand_wildcard(pattern):
+    """Expands shell wildcard pattern."""
+    return rblf_wildcard(pattern)
+
+
+def _mkerror(file, message=""):
+    """Prints error and stops."""
+    fail("%s: %s. Stop" % (file, message))
+
+
+def _mkwarning(file, message=""):
+    """Prints warning."""
+    print("%s: warning: %s" % (file, message))
+
+
+def _mkinfo(file, message=""):
+    """Prints info."""
+    print(message)
+
+
+rblf = module("rblf",
+              addprefix=_addprefix,
+              addsuffix=_addsuffix,
+              copy_if_exists=_copy_if_exists,
+              enforce_product_packages_exist=_enforce_product_packages_exist,
+              expand_wildcard=_expand_wildcard,
+              file_exists=rblf_file_exists,
+              file_wildcard_exists=_file_wildcard_exists,
+              filter=_filter,
+              filter_out=_filter_out,
+              find_and_copy=_find_and_copy,
+              global_init=_global_init,
+              merge=_merge,
+              mkinfo=_mkinfo,
+              mkerror=_mkerror,
+              mkwarning=_mkwarning,
+              printvars=_printvars,
+              require_artifacts_in_path=_require_artifacts_in_path,
+              warning=_mkwarning,
+              )
+
