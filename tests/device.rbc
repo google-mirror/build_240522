@@ -1,0 +1,27 @@
+# Top-level test configuration.
+# Converted from the following makefile
+### PRODUCT_PACKAGES += dev
+### PRODUCT_HOST_PACKAGES += host
+### $(call inherit-product, $(LOCAL_PATH)/part1.mk)
+### PRODUCT_COPY_FILES += device_from:device_to
+### include $(LOCAL_PATH)/include1.mk
+### PRODUCT_PACKAGES += dev_after
+### PRODUCT_COPY_FILES += $(call find-copy-subdir-files,audio_platform_info*.xml,device/google/redfin/audio,$(TARGET_COPY_OUT_VENDOR)/etc) xyz
+
+load("//build/make/core:product_config.rbc", "rblf")
+load(":part1.rbc", _part1_init = "init")
+load(":include1.rbc", _include1_init = "init")
+
+def init(g, handle):
+  cfg = rblf.cfg(handle)
+  rblf.setdefault(handle, "PRODUCT_PACKAGES")
+  cfg["PRODUCT_PACKAGES"] += ["dev"]
+  rblf.setdefault(handle, "PRODUCT_HOST_PACKAGES")
+  cfg["PRODUCT_HOST_PACKAGES"] += ["host"]
+  rblf.inherit(handle, "test/part1", _part1_init)
+  rblf.setdefault(handle, "PRODUCT_COPY_FILES")
+  cfg["PRODUCT_COPY_FILES"] += ["device_from:device_to"]
+  _include1_init(g, handle)
+  cfg["PRODUCT_PACKAGES"] += ["dev_after"]
+  cfg["PRODUCT_COPY_FILES"] += (rblf.find_and_copy("audio_platform_info*.xml", "device/google/redfin/audio", "||VENDOR-PATH-PH||/etc") +
+      ["xyz"])
