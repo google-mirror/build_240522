@@ -223,6 +223,9 @@ $(call add_json_list, BoardKernelModuleInterfaceVersions, $(BOARD_KERNEL_MODULE_
 
 $(call add_json_bool, BoardMoveRecoveryResourcesToVendorBoot, $(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT))
 
+$(call add_json_str,  CvdCustomActionConfig, $(CVD_CUSTOM_ACTION_CONFIG))
+$(call add_json_list, CvdCustomActionServers, $(CVD_CUSTOM_ACTION_SERVERS))
+
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
