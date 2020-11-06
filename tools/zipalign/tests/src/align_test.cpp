@@ -10,6 +10,10 @@ using namespace android;
 TEST(Align, Unaligned) {
   const char* src = "tests/data/unaligned.zip";
   const char* dst = "tests/data/unaligned_out.zip";
-  int result = process(src, dst, 4, true, false, 4096);
-  ASSERT_EQ(0, result);
+
+  int processed = process(src, dst, 4, true, false, 4096);
+  ASSERT_EQ(0, processed);
+
+  int verified = verify(dst, 4, true, false);
+  ASSERT_EQ(0, verified);
 }
