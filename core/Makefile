@@ -874,10 +874,19 @@ $(2) $(3): PRIVATE_DIR := $(5)
 $(2) : $(3)
 $(3) : $(6) $(BUILD_SYSTEM)/Makefile build/make/tools/generate-notice-files.py
 	build/make/tools/generate-notice-files.py --text-output $(2) \
+<<<<<<< HEAD   (124130 Merge "Merge empty history for sparse-6887559-L6990000073449)
 		$(if $(filter $(1),xml_excluded_vendor),-e vendor --xml-output, \
 		  $(if $(filter $(1),xml_vendor),-i vendor --xml-output, \
 		    --html-output)) $(3) \
 		-t $$(PRIVATE_MESSAGE) -s $$(PRIVATE_DIR)/src
+=======
+	    $(if $(filter $(1),xml_excluded_extra_partitions),-e vendor -e product -e product_services --xml-output, \
+	      $(if $(filter $(1),xml_vendor),-i vendor --xml-output, \
+	        $(if $(filter $(1),xml_product),-i product --xml-output, \
+	          $(if $(filter $(1),xml_product_services),-i product_services --xml-output, \
+	            --html-output)))) $(3) \
+	    -t $$(PRIVATE_MESSAGE) $$(foreach dir,$$(sort $$(PRIVATE_DIR)), -s $$(dir)/src)
+>>>>>>> BRANCH (d63e15 Merge "Version bump to QTR1.201015.001.A1 [core/build_id.mk])
 notice_files: $(2) $(3)
 endef
 
