@@ -4903,6 +4903,23 @@ endif # BOARD_PARTIAL_OTA_UPDATE_PARTITIONS_LIST
 endif    # build_ota_package
 
 # -----------------------------------------------------------------
+# boot images, but from target files. These are the boot images for release.
+
+ifdef BUILDING_BOOT_IMAGE
+
+ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
+  BUILT_BOOTIMAGE_TF_TARGET := $(foreach k,$(subst kernel,boot,$(BOARD_KERNEL_BINARIES)), $(PRODUCT_OUT)/$(k).tf.img)
+else
+  BUILT_BOOTIMAGE_TF_TARGET := $(PRODUCT_OUT)/boot.tf.img
+endif
+
+$(BUILT_BOOTIMAGE_TF_TARGET): $(BUILT_TARGET_FILES_PACKAGE)
+	@echo "Boot image from target files: $@"
+	cp $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))/IMAGES/$(patsubst %.tf.img,%.img,$(notdir $@)) $@
+
+endif # BUILDING_BOOT_IMAGE
+
+# -----------------------------------------------------------------
 # A zip of the appcompat directory containing logs
 APPCOMPAT_ZIP := $(PRODUCT_OUT)/appcompat.zip
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
