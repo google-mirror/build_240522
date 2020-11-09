@@ -4419,7 +4419,9 @@ else ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
 endif
 
-ifdef BUILDING_BOOT_IMAGE
+ifeq (true,$(BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES))
+  $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTIMAGE_TARGET)
+else ifdef BUILDING_BOOT_IMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_RAMDISK_FILES)
 else ifdef BOARD_PREBUILT_BOOTIMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTIMAGE_TARGET)
@@ -4534,6 +4536,10 @@ endif
 endif # not (BUILDING_VENDOR_BOOT_IMAGE and BOARD_USES_RECOVERY_AS_BOOT)
 endif # INSTALLED_RECOVERYIMAGE_TARGET defined or BOARD_USES_RECOVERY_AS_BOOT is true
 	@# Components of the boot image
+ifeq (true,$(BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES))
+	mkdir -p $(zip_root)/IMAGES
+	cp $(INSTALLED_BOOTIMAGE_TARGET) $(zip_root)/IMAGES
+else # BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES != true
 	$(hide) mkdir -p $(zip_root)/BOOT
 	$(hide) mkdir -p $(zip_root)/ROOT
 	$(hide) $(call package_files-copy-root, \
@@ -4565,6 +4571,7 @@ ifdef BOARD_KERNEL_PAGESIZE
 endif
 endif # INSTALLED_VENDOR_BOOTIMAGE_TARGET == "" && BOARD_USES_GENERIC_KERNEL_IMAGE != true
 endif # BOARD_USES_RECOVERY_AS_BOOT not true
+endif # BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES == true
 	$(hide) $(foreach t,$(INSTALLED_RADIOIMAGE_TARGET),\
 	            mkdir -p $(zip_root)/RADIO; \
 	            cp $(t) $(zip_root)/RADIO/$(notdir $(t));)
