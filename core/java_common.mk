@@ -530,6 +530,30 @@ my_link_deps += $(addprefix APPS:,$(apk_libraries))
 my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
 my_common := COMMON
 include $(BUILD_SYSTEM)/link_type.mk
+
+ifeq ($(PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY),true)
+ifeq ($(LOCAL_ODM_MODULE),true)
+my_link_type := partition:vendor
+else ifeq ($(LOCAL_VENDOR_MODULE),true)
+my_link_type := partition:vendor
+else ifeq ($(LOCAL_PRODUCT_MODULE),true)
+my_link_type := partition:product
+else ifeq ($(LOCAL_SYSTEM_EXT_MODULE),true)
+my_link_type := partition:system
+else
+my_link_type := partition:system
+endif
+my_warn_types :=
+my_allowed_types :=
+
+my_link_deps := $(addprefix JAVA_LIBRARIES:,$(filter-out $(PRODUCT_INTER_PARTITION_JAVA_LIBRARY_ALLOWLIST),$(LOCAL_JAVA_LIBRARIES)))
+
+my_allowed_types := $(my_link_type)
+
+my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
+my_common := CHECK
+include $(BUILD_SYSTEM)/link_type.mk
+endif  # PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY
 endif  # !LOCAL_IS_HOST_MODULE
 
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
