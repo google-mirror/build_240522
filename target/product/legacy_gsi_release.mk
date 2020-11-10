@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-include $(SRC_TARGET_DIR)/product/gsi_release.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_release.mk)
 
 # Legacy GSI support additional O-MR1 interface
 PRODUCT_EXTRA_VNDK_VERSIONS += 27
