@@ -102,6 +102,27 @@ my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
 my_common := COMMON
 include $(BUILD_SYSTEM)/link_type.mk
 
+ifeq ($(PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY),true)
+ifeq ($(LOCAL_ODM_MODULE),true)
+my_link_type := partition:vendor
+else ifeq ($(LOCAL_VENDOR_MODULE),true)
+my_link_type := partition:vendor
+else ifeq ($(LOCAL_PRODUCT_MODULE),true)
+my_link_type := partition:product
+else ifeq ($(LOCAL_SYSTEM_EXT_MODULE),true)
+my_link_type := partition:system
+else
+my_link_type := partition:system
+endif
+my_warn_types :=
+my_allowed_types :=
+
+my_link_deps :=
+my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
+my_link_check_class := interpartitiondep
+include $(BUILD_SYSTEM)/link_type.mk
+endif  # PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY
+
 ifeq ($(prebuilt_module_is_dex_javalib),true)
 # For prebuilt shared Java library we don't have classes.jar.
 $(common_javalib_jar) : $(my_src_jar)
