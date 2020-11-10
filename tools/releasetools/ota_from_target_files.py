@@ -1060,7 +1060,6 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     secondary_target_file = GetTargetFilesZipForSecondaryImages(
         target_file, OPTIONS.skip_postinstall)
     secondary_payload = Payload(secondary=True)
-    assert not OPTIONS.downgrade
     partition_timestamps_flags = GeneratePartitionTimestampFlags(
       [part
        for part in metadata.postcondition.partition_state
