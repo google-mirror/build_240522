@@ -12,24 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+define mts_test_suite
+test_suite_name := $(1)
+test_suite_tradefed := mts-tradefed
+test_suite_readme := test/mts/README.md
+
+include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
+
+.PHONY: $(1)
+$(1): $(compatibility_zip)
+$(call dist-for-goals, $(1), $(compatibility_zip))
+endef
+
 ifneq ($(wildcard test/mts/README.md),)
-test_suite_name := mts
-test_suite_tradefed := mts-tradefed
-test_suite_readme := test/mts/README.md
 
-include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
+$(eval $(call mts_test_suite, mts))
 
-.PHONY: mts
-mts: $(compatibility_zip)
-$(call dist-for-goals, mts, $(compatibility_zip))
+$(foreach module, $(mts_modules), $(eval $(call mts_test_suite, mts-$(module))))
+
 endif
-
-test_suite_name := mts-tzdata
-test_suite_tradefed := mts-tradefed
-test_suite_readme := test/mts/README.md
-
-include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
-
-.PHONY: mts-tzdata
-mts-tzdata: $(compatibility_zip)
-$(call dist-for-goals, mts-tzdata, $(compatibility_zip))
