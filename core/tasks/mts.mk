@@ -23,3 +23,13 @@ include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
 mts: $(compatibility_zip)
 $(call dist-for-goals, mts, $(compatibility_zip))
 endif
+
+test_suite_name := mts-tzdata
+test_suite_tradefed := mts-tradefed
+test_suite_readme := test/mts/README.md
+
+include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
+
+.PHONY: mts-tzdata
+mts-tzdata: $(compatibility_zip)
+$(call dist-for-goals, mts-tzdata, $(compatibility_zip))
