@@ -68,7 +68,9 @@ endef
 #       emitted to the output
 # $(4): list of variable names each of which contains name=value pairs
 # $(5): optional list of prop names to force remove from the output. Properties from both
-#       $(3) and (4) are affected.
+#       $(3) and (4) are affected
+# $(6): optional list of files to append at the end. The content of each file is emitted
+#       to the output
 define build-properties
 ALL_DEFAULT_INSTALLED_MODULES += $(2)
 
@@ -90,7 +92,7 @@ $(if $(filter true,$(BUILD_BROKEN_DUP_SYSPROP)),\
     $(eval _option := --allow-dup)\
 )
 
-$(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(3)
+$(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(3) $(6)
 	$(hide) echo Building $$@
 	$(hide) mkdir -p $$(dir $$@)
 	$(hide) rm -f $$@ && touch $$@
@@ -113,6 +115,10 @@ $(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(3
 	    )\
 	)
 	$(hide) $(POST_PROCESS_PROPS) $$(_option) $$@ $(5)
+	$(hide) $(foreach file,$(strip $(6)),\
+	    if [ -f "$(file)" ]; then\
+	        cat $(file) >> $$@;\
+	    fi;)
 	$(hide) echo "# end of file" >> $$@
 endef
 
@@ -265,19 +271,6 @@ $(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT)
 	        TARGET_CPU_ABI2="$(TARGET_CPU_ABI2)" \
 	        bash $(BUILDINFO_SH) > $@
 
-ifneq ($(PRODUCT_OEM_PROPERTIES),)
-import_oem_prop := $(call intermediates-dir-for,ETC,system_build_prop)/oem.prop
-
-$(import_oem_prop):
-	$(hide) echo "#" >> $@; \
-	        echo "# PRODUCT_OEM_PROPERTIES" >> $@; \
-	        echo "#" >> $@;
-	$(hide) $(foreach prop,$(PRODUCT_OEM_PROPERTIES), \
-	    echo "import /oem/oem.prop $(prop)" >> $@;)
-else
-import_oem_prop :=
-endif
-
 ifdef TARGET_SYSTEM_PROP
 system_prop_file := $(TARGET_SYSTEM_PROP)
 else
@@ -285,7 +278,6 @@ system_prop_file := $(wildcard $(TARGET_DEVICE_DIR)/system.prop)
 endif
 
 _prop_files_ := \
-  $(import_oem_prop) \
   $(gen_from_buildinfo_sh) \
   $(system_prop_file)
 
@@ -366,12 +358,29 @@ _prop_vars_ := \
     PRODUCT_PRODUCT_PROPERTIES
 
 INSTALLED_PRODUCT_BUILD_PROP_TARGET := $(TARGET_OUT_PRODUCT)/etc/build.prop
+
+ifdef PRODUCT_OEM_PROPERTIES
+import_oem_prop := $(call intermediates-dir-for,ETC,import_oem_prop)/oem.prop
+
+$(import_oem_prop):
+	$(hide) echo "####################################" >> $@; \
+	        echo "# PRODUCT_OEM_PROPERTIES" >> $@; \
+	        echo "####################################" >> $@;
+	$(hide) $(foreach prop,$(PRODUCT_OEM_PROPERTIES), \
+	    echo "import /oem/oem.prop $(prop)" >> $@;)
+
+_footers_ := $(import_oem_prop)
+else
+_footers_ :=
+endif
+
 $(eval $(call build-properties,\
     product,\
     $(INSTALLED_PRODUCT_BUILD_PROP_TARGET),\
     $(_prop_files_),\
     $(_prop_vars_),\
-    $(empty)))
+    $(empty),\
+    $(_footers_)))
 
 # ----------------------------------------------------------------
 # odm/etc/build.prop
