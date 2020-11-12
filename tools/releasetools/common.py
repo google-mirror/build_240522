@@ -1117,6 +1117,18 @@ def SharedUidPartitionViolations(uid_dict, partition_groups):
   return errors
 
 
+def RunHostInitVerifier(passwd_files, property_contexts_files, partition_map):
+  """TODO"""
+  cmd = ['host_init_verifier']
+  for passwd in passwd_files:
+    cmd.append('-p %s' % passwd)
+  for property_contexts in property_contexts_files:
+    cmd.append('--property-contexts=%s' % property_contexts)
+  for partition, path in partition_map.items:
+    cmd.append('--out_%s %s' % (partition, path))
+  return RunAndCheckOutput(cmd)
+
+
 def AppendAVBSigningArgs(cmd, partition):
   """Append signing arguments for avbtool."""
   # e.g., "--key path/to/signing_key --algorithm SHA256_RSA4096"

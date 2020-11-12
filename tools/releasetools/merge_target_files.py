@@ -945,17 +945,18 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
   if not check_target_files_vintf.CheckVintf(output_target_files_temp_dir):
     raise RuntimeError('Incompatible VINTF metadata')
 
+  framework_partitions = item_list_to_partition_set(framework_item_list)
+  vendor_partitions = item_list_to_partition_set(vendor_item_list)
+  all_partitions = framework_partitions.union(vendor_partitions)
+
   # Generate and check for cross-partition violations of sharedUserId
   # values in APKs. This requires the input target-files packages to contain
   # *.apk files.
   shareduid_violation_modules = os.path.join(
       output_target_files_temp_dir, 'META', 'shareduid_violation_modules.json')
   with open(shareduid_violation_modules, 'w') as f:
-    framework_partitions = item_list_to_partition_set(framework_item_list)
-    vendor_partitions = item_list_to_partition_set(vendor_item_list)
-
     partition_map = {}
-    for partition in (framework_partitions.union(vendor_partitions)):
+    for partition in all_partitions:
       partition_map[partition.lower()] = partition.upper()
     violation = find_shareduid_violation.FindShareduidViolation(
         output_target_files_temp_dir, partition_map)
@@ -971,6 +972,16 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
         logger.error(error)
       raise ValueError('sharedUserId APK error. See %s' %
                        shareduid_violation_modules)
+
+  # Run host_init_verifier on the combined init rc files.
+  partition_map = {}
+  # Not all partitions are eligible for being checked.
+  for partition in ['system', 'system_ext', 'product', 'vendor', 'odm']:
+    if partition in all_partitions:
+      partition_map[partition.lower()] = os.path.join(
+          output_target_files_temp_dir, partition.upper())
+  common.RunHostInitVerifier(
+      passwd_files=[], property_contexts_files=[], partition_map=partition_map)
 
   generate_images(output_target_files_temp_dir, rebuild_recovery)
 
