@@ -1695,6 +1695,11 @@ ifneq ($(TARGET_BUILD_APPS),)
   $(COVERAGE_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(COVERAGE_ZIP))
 
+  ifdef CLANG_COVERAGE
+    $(foreach f,$(SOONG_NDK_API_APEX_TXT), \
+        $(call dist-for-goals,droidcore apps_only,$(f):ndk_apis_usedby_apex/$(notdir $(f))))
+  endif
+
 apps_only: $(unbundled_build_modules)
 
 droid_targets: apps_only
