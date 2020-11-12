@@ -833,6 +833,9 @@ def main(argv):
 
   common.InitLogging()
 
+  os.environ["PATH"] = (os.path.join(OPTIONS.search_path, "bin") +
+                          os.pathsep + os.environ["PATH"])
+
   in_dir = argv[0]
   glob_dict_file = argv[1]
   out_file = argv[2]
