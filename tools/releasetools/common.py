@@ -1085,6 +1085,25 @@ def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
   return merged_dict
 
 
+def PartitionMapFromTargetFiles(target_files_dir):
+  """Builds a map from partition -> path within an extracted target files directory."""
+  # Keep possible_subdirs in sync with build/make/core/board_config.mk.
+  possible_subdirs = {
+      'system': ['SYSTEM'],
+      'vendor': ['VENDOR', 'SYSTEM/vendor'],
+      'product': ['PRODUCT', 'SYSTEM/product'],
+      'system_ext': ['SYSTEM_EXT', 'SYSTEM/system_ext'],
+      'odm': ['ODM', 'VENDOR/odm', 'SYSTEM/vendor/odm'],
+  }
+  partition_map = {}
+  for partition, subdirs in possible_subdirs.items():
+    for subdir in subdirs:
+      if os.path.exists(os.path.join(target_files_dir, subdir)):
+        partition_map[partition] = subdir
+        continue
+  return partition_map
+
+
 def SharedUidPartitionViolations(uid_dict, partition_groups):
   """Checks for APK sharedUserIds that cross partition group boundaries.
 
@@ -1115,6 +1134,18 @@ def SharedUidPartitionViolations(uid_dict, partition_groups):
           "APK sharedUserId \"%s\" found across partition groups in partitions \"%s\""
           % (uid, ",".join(sorted(partitions.keys()))))
   return errors
+
+
+def RunHostInitVerifier(product_out, partition_map, passwd_files, property_contexts_files):
+  """TODO"""
+  cmd = ['host_init_verifier']
+  for partition, path in partition_map.items():
+    cmd.append('--out_%s %s' % (partition, os.path.join(product_out, path)))
+  for passwd in passwd_files:
+    cmd.append('-p %s' % passwd)
+  for property_contexts in property_contexts_files:
+    cmd.append('--property-contexts=%s' % property_contexts)
+  return RunAndCheckOutput(cmd)
 
 
 def AppendAVBSigningArgs(cmd, partition):
