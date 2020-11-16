@@ -4390,6 +4390,17 @@ define dump-dynamic-partitions-info
     echo "virtual_ab_retrofit=true" >> $(1))
 endef
 
+# Check if libraries in SYSTEM_STUB_LIBRARIES are installed in system image and update linker.config.pb if so
+define system_providing_libs
+  $(foreach lib,$(strip $(SYSTEM_STUB_LIBRARIES)),\
+    lib_path="$(SYSTEMIMAGE_SOURCE_DIR)/lib/$(lib)" && \
+    lib64_path="$(SYSTEMIMAGE_SOURCE_DIR)/lib64/$(lib)" && \
+    if [ -f "$$lib_path" ] || [ -L "$$lib_path" ] || [ -f "$$lib64_path" ] || [ -L "$$lib64_path" ] ; then \
+      $(HOST_OUT_EXECUTABLES)/conv_linker_config append --source $(SYSTEMIMAGE_SOURCE_DIR)/etc/linker.config.pb --name provideLibs --value $(lib);\
+    fi;
+  )
+endef
+
 # By conditionally including the dependency of the target files package on the
 # full system image deps, we speed up builds that do not build the system
 # image.
@@ -4609,6 +4620,9 @@ ifdef BOARD_KERNEL_PAGESIZE
 endif
 	echo "$(INTERNAL_KERNEL_CMDLINE)" > $(zip_root)/VENDOR_BOOT/vendor_cmdline
 endif # INSTALLED_VENDOR_BOOTIMAGE_TARGET
+ifdef BUILDING_SYSTEM_IMAGE
+	$(hide) $(call system_providing_libs)
+endif
 ifdef BUILDING_SYSTEM_IMAGE
 	@# Contents of the system image
 	$(hide) $(call package_files-copy-root, \
