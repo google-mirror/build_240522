@@ -2456,6 +2456,13 @@ FULL_SYSTEMIMAGE_DEPS += $(INTERNAL_ROOT_FILES) $(INSTALLED_FILES_FILE_ROOT)
 # -----------------------------------------------------------------
 ifdef BUILDING_SYSTEM_IMAGE
 
+# Install system linker configuration
+# Collect all available stub libraries installed in system and install with predefined linker configuration
+SYSTEM_LINKER_CONFIG := $(TARGET_OUT)/etc/linker.config.pb
+$(SYSTEM_LINKER_CONFIG) : $(FULL_SYSTEMIMAGE_DEPS) $(LINKER_CONFIG_PATH_SYSTEM_LINKER_CONFIG) | conv_linker_config
+	$(HOST_OUT_EXECUTABLES)/conv_linker_config systemprovide --source $(LINKER_CONFIG_PATH_SYSTEM_LINKER_CONFIG)\
+  --output $@ --value "$(STUB_LIBRARIES)" --system "$(TARGET_OUT)"
+
 # installed file list
 # Depending on anything that $(BUILT_SYSTEMIMAGE) depends on.
 # We put installed-files.txt ahead of image itself in the dependency graph
@@ -2464,7 +2471,7 @@ ifdef BUILDING_SYSTEM_IMAGE
 INSTALLED_FILES_FILE := $(PRODUCT_OUT)/installed-files.txt
 INSTALLED_FILES_JSON := $(INSTALLED_FILES_FILE:.txt=.json)
 $(INSTALLED_FILES_FILE): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON)
-$(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST) $(FILESLIST_UTIL)
+$(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST) $(FILESLIST_UTIL) $(SYSTEM_LINKER_CONFIG)
 	@echo Installed file list: $@
 	@mkdir -p $(dir $@)
 	@rm -f $@
