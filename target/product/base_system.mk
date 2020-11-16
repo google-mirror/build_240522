@@ -295,6 +295,7 @@ PRODUCT_HOST_PACKAGES += \
     atest \
     bcc \
     bit \
+    conv_linker_config \
     e2fsck \
     fastboot \
     flags_health_check \

@@ -2484,6 +2484,16 @@ systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
 
+define system_providing_libs
+  $(foreach lib,$(strip $(SYSTEM_STUB_LIBRARIES)),\
+    lib_path="$(SYSTEMIMAGE_SOURCE_DIR)/lib/$(lib)" && \
+    lib64_path="$(SYSTEMIMAGE_SOURCE_DIR)/lib64/$(lib)" && \
+    if [ -f "$$lib_path" ] || [ -L "$$lib_path" ] || [ -f "$$lib64_path" ] || [ -L "$$lib64_path" ] ; then \
+      $(HOST_OUT_EXECUTABLES)/conv_linker_config append --source $(SYSTEMIMAGE_SOURCE_DIR)/etc/linker.config.pb --name provideLibs --value $(lib);\
+    fi;
+  )
+endef
+
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
@@ -2502,6 +2512,7 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 $(BUILT_SYSTEMIMAGE): $(BOARD_AVB_SYSTEM_KEY_PATH)
 endif
 $(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
+	$(call system_providing_libs)
 	$(call build-systemimage-target,$@)
 
 INSTALLED_SYSTEMIMAGE_TARGET := $(PRODUCT_OUT)/system.img
