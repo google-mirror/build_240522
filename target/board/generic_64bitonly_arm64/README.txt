@@ -1,4 +1,4 @@
-The "generic_64bitonly_x86_64" product defines a non-hardware-specific IA target
+The "generic_64bitonly_arm64" product defines a non-hardware-specific arm64 target
 without a kernel or bootloader.
 
 It can be used to build the entire user-level system, and
