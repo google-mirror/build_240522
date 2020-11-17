@@ -1,0 +1,12 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+1: Jaegeuk Kim <jaegeuk@google.com>
+Code-Review+2: David Anderson <dvander@google.com>
+Verified+1: Jaegeuk Kim <jaegeuk@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Submitted-at: Tue, 17 Nov 2020 03:45:47 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1482957
+Project: platform/build
+Branch: refs/heads/master
