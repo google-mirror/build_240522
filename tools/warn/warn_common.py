@@ -579,5 +579,9 @@ def common_main(use_google3, create_launch_subprocs_fn, classify_warnings_fn,
                             warning_links, warning_records, header_str,
                             project_names)
 
+  html_writer.write_out_csv(flags, warn_patterns, warning_messages,
+                            warning_links, warning_records, header_str,
+                            project_names, True)
+
   # Return these values, so that caller can use them, if desired.
   return flags, warning_messages, warning_records, warn_patterns
