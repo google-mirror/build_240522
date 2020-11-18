@@ -77,6 +77,8 @@ def parse_args(use_google3):
                       help='Save CSV warning file to the passed path')
   parser.add_argument('--gencsv', action='store_true',
                       help='Generate CSV file with number of various warnings')
+  parser.add_argument('--csvwithdescriptionpath', default='',
+                      help='Save CSV warning file to the passed path')
   parser.add_argument('--byproject', action='store_true',
                       help='Separate warnings in HTML output by project names')
   parser.add_argument('--url', default='',

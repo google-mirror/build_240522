@@ -359,6 +359,17 @@ def dump_csv(csvwriter, warn_patterns):
   csvwriter.writerow([total, '', 'All warnings'])
 
 
+def dump_csv_with_description(csvwriter, warn_patterns, warning_messages, warning_records):
+  """Outputs all the warning messages by project"""
+  for pattern in warn_patterns:
+    projects = pattern['projects'].keys()
+    for project in projects:
+      for member in pattern['members']:
+        if warning_records[member][1] == project:
+          csvwriter.writerow([project, pattern['description'],
+                            warning_messages[warning_records[member][2]]])
+
+
 # Return s with escaped backslash and quotation characters.
 def escape_string(s):
   return s.replace('\\', '\\\\').replace('"', '\\"')
@@ -665,6 +676,11 @@ def write_out_csv(flags, warn_patterns, warning_messages, warning_links,
   if flags.csvpath:
     with open(flags.csvpath, 'w') as f:
       dump_csv(csv.writer(f, lineterminator='\n'), warn_patterns)
+
+  if flags.csvwithdescriptionpath:
+    with open(flags.csvwithdescriptionpath, 'w') as f:
+      dump_csv_with_description(csv.writer(f, lineterminator='\n'), warn_patterns,
+                                warning_messages, warning_records)
 
   if flags.gencsv:
     dump_csv(csv.writer(sys.stdout, lineterminator='\n'), warn_patterns)
