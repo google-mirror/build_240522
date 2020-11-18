@@ -122,21 +122,7 @@ def BuildVBMeta():
     if os.path.exists(partition_path):
       partitions[partition] = partition_path
 
-  # vbmeta_partitions includes the partitions that should be included into
-  # top-level vbmeta.img, which are the ones that are not included in any
-  # chained VBMeta image plus the chained VBMeta images themselves.
-  vbmeta_partitions = common.AVB_PARTITIONS[:]
-  for partition in common.AVB_VBMETA_PARTITIONS:
-    chained_partitions = merged_dict.get("avb_%s" % partition, "").strip()
-    if chained_partitions:
-      partitions[partition] = os.path.join(OPTIONS.product_out_vendor,
-                                           "%s.img" % partition)
-      vbmeta_partitions = [
-          item for item in vbmeta_partitions
-          if item not in chained_partitions.split()
-      ]
-      vbmeta_partitions.append(partition)
-
+  vbmeta_partitions = common.GetVBMetaPartitions(merged_dict)
   output_vbmeta_path = os.path.join(OPTIONS.product_out_vendor, "vbmeta.img")
   OPTIONS.info_dict = merged_dict
   common.BuildVBMeta(output_vbmeta_path, partitions, "vbmeta",
