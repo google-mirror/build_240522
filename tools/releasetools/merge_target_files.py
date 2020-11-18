@@ -226,24 +226,6 @@ SINGLE_BUILD_PARTITIONS = (
 )
 
 
-def write_sorted_data(data, path):
-  """Writes the sorted contents of either a list or dict to file.
-
-  This function sorts the contents of the list or dict and then writes the
-  resulting sorted contents to a file specified by path.
-
-  Args:
-    data: The list or dict to sort and write.
-    path: Path to the file to write the sorted values to. The file at path will
-      be overridden if it exists.
-  """
-  with open(path, 'w') as output:
-    for entry in sorted(data):
-      out_str = '{}={}\n'.format(entry, data[entry]) if isinstance(
-          data, dict) else '{}\n'.format(entry)
-      output.write(out_str)
-
-
 def extract_items(target_files, target_files_temp_dir, extract_item_list):
   """Extracts items from target files to temporary directory.
 
@@ -363,48 +345,6 @@ def validate_config_lists(framework_item_list, framework_misc_info_keys,
   return not has_error
 
 
-def process_ab_partitions_txt(framework_target_files_temp_dir,
-                              vendor_target_files_temp_dir,
-                              output_target_files_temp_dir):
-  """Performs special processing for META/ab_partitions.txt.
-
-  This function merges the contents of the META/ab_partitions.txt files from the
-  framework directory and the vendor directory, placing the merged result in the
-  output directory. The precondition in that the files are already extracted.
-  The post condition is that the output META/ab_partitions.txt contains the
-  merged content. The format for each ab_partitions.txt is one partition name
-  per line. The output file contains the union of the partition names.
-
-  Args:
-    framework_target_files_temp_dir: The name of a directory containing the
-      special items extracted from the framework target files package.
-    vendor_target_files_temp_dir: The name of a directory containing the special
-      items extracted from the vendor target files package.
-    output_target_files_temp_dir: The name of a directory that will be used to
-      create the output target files package after all the special cases are
-      processed.
-  """
-
-  framework_ab_partitions_txt = os.path.join(framework_target_files_temp_dir,
-                                             'META', 'ab_partitions.txt')
-
-  vendor_ab_partitions_txt = os.path.join(vendor_target_files_temp_dir, 'META',
-                                          'ab_partitions.txt')
-
-  with open(framework_ab_partitions_txt) as f:
-    framework_ab_partitions = f.read().splitlines()
-
-  with open(vendor_ab_partitions_txt) as f:
-    vendor_ab_partitions = f.read().splitlines()
-
-  output_ab_partitions = set(framework_ab_partitions + vendor_ab_partitions)
-
-  output_ab_partitions_txt = os.path.join(output_target_files_temp_dir, 'META',
-                                          'ab_partitions.txt')
-
-  write_sorted_data(data=output_ab_partitions, path=output_ab_partitions_txt)
-
-
 def process_misc_info_txt(framework_target_files_temp_dir,
                           vendor_target_files_temp_dir,
                           output_target_files_temp_dir,
@@ -449,7 +389,7 @@ def process_misc_info_txt(framework_target_files_temp_dir,
   if (merged_dict.get('use_dynamic_partitions') == 'true') and (
       framework_dict.get('use_dynamic_partitions') == 'true'):
     merged_dynamic_partitions_dict = common.MergeDynamicPartitionInfoDicts(
-        framework_dict=framework_dict, vendor_dict=merged_dict)
+        [framework_dict, merged_dict])
     merged_dict.update(merged_dynamic_partitions_dict)
     # Ensure that add_img_to_target_files rebuilds super split images for
     # devices that retrofit dynamic partitions. This flag may have been set to
@@ -470,51 +410,7 @@ def process_misc_info_txt(framework_target_files_temp_dir,
 
   output_misc_info_txt = os.path.join(output_target_files_temp_dir, 'META',
                                       'misc_info.txt')
-  write_sorted_data(data=merged_dict, path=output_misc_info_txt)
-
-
-def process_dynamic_partitions_info_txt(framework_target_files_dir,
-                                        vendor_target_files_dir,
-                                        output_target_files_dir):
-  """Performs special processing for META/dynamic_partitions_info.txt.
-
-  This function merges the contents of the META/dynamic_partitions_info.txt
-  files from the framework directory and the vendor directory, placing the
-  merged result in the output directory.
-
-  This function does nothing if META/dynamic_partitions_info.txt from the vendor
-  directory does not exist.
-
-  Args:
-    framework_target_files_dir: The name of a directory containing the special
-      items extracted from the framework target files package.
-    vendor_target_files_dir: The name of a directory containing the special
-      items extracted from the vendor target files package.
-    output_target_files_dir: The name of a directory that will be used to create
-      the output target files package after all the special cases are processed.
-  """
-
-  if not os.path.exists(
-      os.path.join(vendor_target_files_dir, 'META',
-                   'dynamic_partitions_info.txt')):
-    return
-
-  dynamic_partitions_info_path = ['META', 'dynamic_partitions_info.txt']
-
-  framework_dynamic_partitions_dict = common.LoadDictionaryFromFile(
-      os.path.join(framework_target_files_dir, *dynamic_partitions_info_path))
-  vendor_dynamic_partitions_dict = common.LoadDictionaryFromFile(
-      os.path.join(vendor_target_files_dir, *dynamic_partitions_info_path))
-
-  merged_dynamic_partitions_dict = common.MergeDynamicPartitionInfoDicts(
-      framework_dict=framework_dynamic_partitions_dict,
-      vendor_dict=vendor_dynamic_partitions_dict)
-
-  output_dynamic_partitions_info_txt = os.path.join(
-      output_target_files_dir, 'META', 'dynamic_partitions_info.txt')
-  write_sorted_data(
-      data=merged_dynamic_partitions_dict,
-      path=output_dynamic_partitions_info_txt)
+  common.WriteSortedData(data=merged_dict, path=output_misc_info_txt)
 
 
 def item_list_to_partition_set(item_list):
@@ -680,9 +576,9 @@ def process_special_cases(framework_target_files_temp_dir,
   """
 
   if 'ab_update' in framework_misc_info_keys:
-    process_ab_partitions_txt(
-        framework_target_files_temp_dir=framework_target_files_temp_dir,
-        vendor_target_files_temp_dir=vendor_target_files_temp_dir,
+    common.MergeABPartitionsTxt(
+        target_files_temp_dirs=[framework_target_files_temp_dir,
+                                vendor_target_files_temp_dir],
         output_target_files_temp_dir=output_target_files_temp_dir)
 
   copy_file_contexts(
@@ -696,9 +592,8 @@ def process_special_cases(framework_target_files_temp_dir,
       output_target_files_temp_dir=output_target_files_temp_dir,
       framework_misc_info_keys=framework_misc_info_keys)
 
-  process_dynamic_partitions_info_txt(
-      framework_target_files_dir=framework_target_files_temp_dir,
-      vendor_target_files_dir=vendor_target_files_temp_dir,
+  common.MergeDynamicPartitionsInfoTxt(
+      target_files_dirs=[framework_target_files_temp_dir, vendor_target_files_temp_dir],
       output_target_files_dir=output_target_files_temp_dir)
 
   process_apex_keys_apk_certs_common(
@@ -844,54 +739,6 @@ def generate_super_empty_image(target_dir, output_super_empty):
       shutil.copyfile(super_empty_img, output_super_empty)
 
 
-def create_target_files_archive(output_file, source_dir, temp_dir):
-  """Creates archive from target package.
-
-  Args:
-    output_file: The name of the zip archive target files package.
-    source_dir: The target directory contains package to be archived.
-    temp_dir: Path to temporary directory for any intermediate files.
-  """
-  output_target_files_list = os.path.join(temp_dir, 'output.list')
-  output_zip = os.path.abspath(output_file)
-  output_target_files_meta_dir = os.path.join(source_dir, 'META')
-
-  def files_from_path(target_path, extra_args=None):
-    """Gets files under the given path and return a sorted list."""
-    find_command = ['find', target_path] + (extra_args or [])
-    find_process = common.Run(
-        find_command, stdout=subprocess.PIPE, verbose=False)
-    return common.RunAndCheckOutput(['sort'],
-                                    stdin=find_process.stdout,
-                                    verbose=False)
-
-  meta_content = files_from_path(output_target_files_meta_dir)
-  other_content = files_from_path(
-      source_dir,
-      ['-path', output_target_files_meta_dir, '-prune', '-o', '-print'])
-
-  with open(output_target_files_list, 'w') as f:
-    f.write(meta_content)
-    f.write(other_content)
-
-  command = [
-      'soong_zip',
-      '-d',
-      '-o',
-      output_zip,
-      '-C',
-      source_dir,
-      '-l',
-      output_target_files_list,
-  ]
-
-  logger.info('creating %s', output_file)
-  common.RunAndWait(command, verbose=True)
-  logger.info('finished creating %s', output_file)
-
-  return output_zip
-
-
 def merge_target_files(temp_dir, framework_target_files, framework_item_list,
                        framework_misc_info_keys, vendor_target_files,
                        vendor_item_list, output_target_files, output_dir,
@@ -985,7 +832,7 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
   if not output_target_files:
     return
 
-  output_zip = create_target_files_archive(output_target_files,
+  output_zip = common.CreateTargetFilesArchive(output_target_files,
                                            output_target_files_temp_dir,
                                            temp_dir)
 
