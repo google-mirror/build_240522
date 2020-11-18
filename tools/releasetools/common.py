@@ -43,6 +43,7 @@ from hashlib import sha1, sha256
 import images
 import sparse_img
 from blockimgdiff import BlockImageDiff
+import build_super_image
 
 logger = logging.getLogger(__name__)
 
@@ -631,6 +632,147 @@ def ReadFromInputFile(input_file, fn):
       if e.errno == errno.ENOENT:
         raise KeyError(fn)
 
+def MergeABPartitionsTxt(target_files_dirs, output_target_files_dir):
+  """Merges META/ab_partitions.txt from a set of input target files.
+
+  Args:
+    target_files_dirs: The names of the directories containing the
+      special items extracted from the framework target files package.
+    output_target_files_dir: The name of a directory that will be used to
+      create the output target files package after all the special cases are
+      processed.
+  """
+
+  output_ab_partitions = set()
+  for target_file in target_files_dirs:
+    ab_partitions_txt = os.path.join(target_file,
+                                     'META', 'ab_partitions.txt')
+
+    with open(ab_partitions_txt) as f:
+      ab_partitions = set(f.read().splitlines())
+
+    output_ab_partitions.update(ab_partitions)
+
+  output_ab_partitions_txt = os.path.join(output_target_files_dir, 'META',
+                                          'ab_partitions.txt')
+
+  WriteSortedData(data=output_ab_partitions, path=output_ab_partitions_txt)
+
+
+def MergeDynamicPartitionsInfoTxt(target_files_dirs, output_target_files_dir):
+  """Merges META/dynamic_partitions_info.txt from a set of input target files.
+
+  Args:
+    target_files_dirs: The name of the directories containing the special
+      items extracted from each target files package.
+    output_target_files_dir: The name of a directory that will be used to create
+      the output target files package after all the special cases are processed.
+  """
+
+  dynamic_partitions_info_path = ['META', 'dynamic_partitions_info.txt']
+  dynamic_partitions_dicts = []
+  for target_file in target_files_dirs:
+    dynamic_partitions_dicts.append(LoadDictionaryFromFile(
+      os.path.join(target_file, *dynamic_partitions_info_path)))
+
+  merged_dynamic_partitions_dict = MergeDynamicPartitionInfoDicts(dynamic_partitions_dicts)
+
+  output_dynamic_partitions_info_txt = os.path.join(
+      output_target_files_dir, 'META', 'dynamic_partitions_info.txt')
+  WriteSortedData(
+      data=merged_dynamic_partitions_dict,
+      path=output_dynamic_partitions_info_txt)
+
+
+def WriteSortedData(data, path):
+  """Writes the sorted contents of either a list or dict to file.
+
+  This function sorts the contents of the list or dict and then writes the
+  resulting sorted contents to a file specified by path.
+
+  Args:
+    data: The list or dict to sort and write.
+    path: Path to the file to write the sorted values to. The file at path will
+      be overridden if it exists.
+  """
+  with open(path, 'w') as output:
+    for entry in sorted(data):
+      out_str = '{}={}\n'.format(entry, data[entry]) if isinstance(
+          data, dict) else '{}\n'.format(entry)
+      output.write(out_str)
+
+
+def GetVBMetaPartitions(info_dict):
+  """Determines which partitions should be included in the top-level vbmeta image..
+
+  Args:
+    info_dict: dictionary containing any chained vbmeta partitions.
+  """
+
+  # vbmeta_partitions includes the partitions that should be included into
+  # top-level vbmeta.img, which are the ones that are not included in any
+  # chained VBMeta image plus the chained VBMeta images themselves.
+  vbmeta_partitions = AVB_PARTITIONS[:]
+  for partition in AVB_VBMETA_PARTITIONS:
+    chained_partitions = info_dict.get("avb_%s" % partition, "").strip()
+    if chained_partitions:
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in chained_partitions.split()
+      ]
+      vbmeta_partitions.append(partition)
+
+  return vbmeta_partitions
+
+def CreateTargetFilesArchive(output_file, source_dir, temp_dir):
+  """Creates archive from target package.
+
+  Args:
+    output_file: The name of the zip archive target files package.
+    source_dir: The target directory contains package to be archived.
+    temp_dir: Path to temporary directory for any intermediate files.
+  """
+  output_target_files_list = os.path.join(temp_dir, 'output.list')
+  output_zip = os.path.abspath(output_file)
+  output_target_files_meta_dir = os.path.join(source_dir, 'META')
+
+  def files_from_path(target_path, extra_args=None):
+    """Gets files under the given path and return a sorted list."""
+    find_command = ['find', target_path] + (extra_args or [])
+    find_process = Run(
+        find_command, stdout=subprocess.PIPE, verbose=False)
+    return RunAndCheckOutput(['sort'],
+                             stdin=find_process.stdout,
+                             verbose=False)
+
+  # Similar build/make/core/Makefile, preserve the META/ first nature
+  # of populating a target files archive.
+  meta_content = files_from_path(output_target_files_meta_dir)
+  other_content = files_from_path(
+      source_dir,
+      ['-path', output_target_files_meta_dir, '-prune', '-o', '-print'])
+
+  with open(output_target_files_list, 'w') as f:
+    f.write(meta_content)
+    f.write(other_content)
+
+  command = [
+      'soong_zip',
+      '-d',
+      '-o',
+      output_zip,
+      '-C',
+      source_dir,
+      '-l',
+      output_target_files_list,
+  ]
+
+  logger.info('creating %s', output_file)
+  RunAndWait(command, verbose=True)
+  logger.info('finished creating %s', output_file)
+
+  return output_zip
+
 
 def LoadInfoDict(input_file, repacking=False):
   """Loads the key/value pairs from the given input target_files.
@@ -755,7 +897,6 @@ def LoadInfoDict(input_file, repacking=False):
   except KeyError:
     logger.warning("Can't find META/ab_partitions.txt")
   return d
-
 
 
 def LoadListFromFile(file_path):
@@ -1021,66 +1162,80 @@ def DumpInfoDict(d):
     logger.info("%-25s = (%s) %s", k, type(v).__name__, v)
 
 
-def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
+def UniqConcat(values_to_concat):
+  combined = set()
+  for value in values_to_concat:
+    combined.update(set(value.split(" ")))
+  combined = [item.strip() for item in combined if item.strip()]
+  return " ".join(sorted(combined))
+
+
+def IsValueConsistent(info_dicts, key):
+  current_value = ""
+  for dict in info_dicts:
+    if key in dict:
+      if dict[key] != current_value and current_value != "":
+        return (False, "")
+      current_value = dict[key]
+  return ((True and current_value != ""), current_value)
+
+
+def MergeDynamicPartitionInfoDicts(info_dicts):
   """Merges dynamic partition info variables.
 
+  Merges all dynamic partition related variables from all dictionaries.
+  Ensures that all keys are either uniquely concated or that all key/value
+  pairs are consistent across all dictionaries.
+
   Args:
-    framework_dict: The dictionary of dynamic partition info variables from the
-      partial framework target files.
-    vendor_dict: The dictionary of dynamic partition info variables from the
-      partial vendor target files.
+    info_dicts: The dictionaries of dynamic partition info variables to merge.
 
   Returns:
     The merged dynamic partition info dictionary.
   """
 
-  def uniq_concat(a, b):
-    combined = set(a.split(" "))
-    combined.update(set(b.split(" ")))
-    combined = [item.strip() for item in combined if item.strip()]
-    return " ".join(sorted(combined))
-
-  if (framework_dict.get("use_dynamic_partitions") !=
-      "true") or (vendor_dict.get("use_dynamic_partitions") != "true"):
+  consistent, _ = IsValueConsistent(info_dicts, "use_dynamic_partitions")
+  if not consistent:
     raise ValueError("Both dictionaries must have use_dynamic_partitions=true")
 
   merged_dict = {"use_dynamic_partitions": "true"}
 
-  merged_dict["dynamic_partition_list"] = uniq_concat(
-      framework_dict.get("dynamic_partition_list", ""),
-      vendor_dict.get("dynamic_partition_list", ""))
+  merged_dict["dynamic_partition_list"] = UniqConcat([d.get("dynamic_partition_list", "") for d in info_dicts])
 
   # Super block devices are defined by the vendor dict.
-  if "super_block_devices" in vendor_dict:
-    merged_dict["super_block_devices"] = vendor_dict["super_block_devices"]
+  consistent, value = IsValueConsistent(info_dicts, "super_block_devices")
+  if consistent:
+    merged_dict["super_block_devices"] = value
     for block_device in merged_dict["super_block_devices"].split(" "):
       key = "super_%s_device_size" % block_device
-      if key not in vendor_dict:
-        raise ValueError("Vendor dict does not contain required key %s." % key)
-      merged_dict[key] = vendor_dict[key]
+      consistent, value = IsValueConsistent(info_dicts, key)
+      if not consistent:
+        raise ValueError("Required key %s is not consistent across dictionaries." % key)
+      merged_dict[key] = value
 
-  # Partition groups and group sizes are defined by the vendor dict because
-  # these values may vary for each board that uses a shared system image.
-  merged_dict["super_partition_groups"] = vendor_dict["super_partition_groups"]
+  # Partition groups and group sizes should be consistent across dictionaries
+  merged_dict["super_partition_groups"] = UniqConcat([d.get("super_partition_groups","") for d in info_dicts])
   for partition_group in merged_dict["super_partition_groups"].split(" "):
-    # Set the partition group's size using the value from the vendor dict.
+    # Set the partition group's size using a consistent value across all the
+    # dictionaries.
     key = "super_%s_group_size" % partition_group
-    if key not in vendor_dict:
-      raise ValueError("Vendor dict does not contain required key %s." % key)
-    merged_dict[key] = vendor_dict[key]
+    consistent, value = IsValueConsistent(info_dicts, key)
+    if not consistent:
+      raise ValueError("super_%s_group_size is not consistent" % partition_group)
+    merged_dict[key] = value
 
     # Set the partition group's partition list using a concatenation of the
-    # framework and vendor partition lists.
+    # all the super partition lists.
     key = "super_%s_partition_list" % partition_group
-    merged_dict[key] = uniq_concat(
-        framework_dict.get(key, ""), vendor_dict.get(key, ""))
+    merged_dict[key] = UniqConcat([d.get(key, "") for d in info_dicts])
 
-  # Various other flags should be copied from the vendor dict, if defined.
+  # Various other flags should be the same across all dictionaries, if defined.
   for key in ("virtual_ab", "virtual_ab_retrofit", "lpmake",
               "super_metadata_device", "super_partition_error_limit",
               "super_partition_size"):
-    if key in vendor_dict.keys():
-      merged_dict[key] = vendor_dict[key]
+    consistent, value = IsValueConsistent(info_dicts, key)
+    if consistent:
+      merged_dict[key] = value
 
   return merged_dict
 
