@@ -341,22 +341,34 @@ def write_severity(csvwriter, sev, kind, warn_patterns):
       n = len(pattern['members'])
       total += n
       warning = kind + ': ' + (pattern['description'] or '?')
-      csvwriter.writerow([n, '', warning])
+      csvwriter.writerow([n, '', warning, ''])
       # print number of warnings for each project, ordered by project name
       projects = sorted(pattern['projects'].keys())
       for project in projects:
-        csvwriter.writerow([pattern['projects'][project], project, warning])
-  csvwriter.writerow([total, '', kind + ' warnings'])
+        csvwriter.writerow([pattern['projects'][project], project, warning, ''])
+  csvwriter.writerow([total, '', kind + ' warnings', ''])
   return total
 
 
 def dump_csv(csvwriter, warn_patterns):
-  """Dump number of warnings in CSV format to writer."""
+  """Dump number of warnings [plus warning descriptions] in CSV format to writer."""
   sort_warnings(warn_patterns)
   total = 0
   for s in Severity.levels:
     total += write_severity(csvwriter, s, s.column_header, warn_patterns)
   csvwriter.writerow([total, '', 'All warnings'])
+
+
+def dump_csv_with_description(csvwriter, warn_patterns, warning_messages, warning_records):
+  """Outputs all the warning messages sorted by project"""
+  for pattern in warn_patterns:
+    if pattern['members']:
+      projects = sorted(pattern['projects'].keys())
+      for project in projects:
+        for member in pattern['members']:
+          if warning_records[member][1] == project:
+            csvwriter.writerow([project, pattern['description'],
+                              warning_messages[warning_records[member][2]]])
 
 
 # Return s with escaped backslash and quotation characters.
@@ -665,6 +677,11 @@ def write_out_csv(flags, warn_patterns, warning_messages, warning_links,
   if flags.csvpath:
     with open(flags.csvpath, 'w') as f:
       dump_csv(csv.writer(f, lineterminator='\n'), warn_patterns)
+
+  if flags.csvwithdescriptionpath:
+    with open(flags.csvwithdescriptionpath, 'w') as f:
+      dump_csv_with_description(csv.writer(f, lineterminator='\n'), warn_patterns,
+                                warning_messages, warning_records)
 
   if flags.gencsv:
     dump_csv(csv.writer(sys.stdout, lineterminator='\n'), warn_patterns)
