@@ -333,7 +333,7 @@ def dump_fixed(writer, warn_patterns):
   writer('</blockquote>')
 
 
-def write_severity(csvwriter, sev, kind, warn_patterns):
+def write_severity(csvwriter, sev, kind, warn_patterns, add_description):
   """Count warnings of given severity and write CSV entries to writer."""
   total = 0
   for pattern in warn_patterns:
@@ -341,12 +341,23 @@ def write_severity(csvwriter, sev, kind, warn_patterns):
       n = len(pattern['members'])
       total += n
       warning = kind + ': ' + (pattern['description'] or '?')
-      csvwriter.writerow([n, '', warning])
+      csvwriter.writerow([n, '', warning, ''])
       # print number of warnings for each project, ordered by project name
       projects = sorted(pattern['projects'].keys())
       for project in projects:
-        csvwriter.writerow([pattern['projects'][project], project, warning])
-  csvwriter.writerow([total, '', kind + ' warnings'])
+        csvwriter.writerow([pattern['projects'][project], project, warning, ''])
+      if add_description:
+        # print description of warnings for each project, ordered by project name
+        fixed_patterns = []
+        for i in warn_patterns:
+          if not i['members']:
+            fixed_patterns.append(i['description'] + ' (' + all_patterns(i) + ')')
+        fixed_patterns = sorted(fixed_patterns)
+        for text in fixed_patterns:
+          # remove last '\n'
+          t = text[:-1] if text[-1] == '\n' else text
+          csvwriter.writerow([pattern['projects'][project], project, warning, t])
+  csvwriter.writerow([total, '', kind + ' warnings', ''])
   return total
 
 
@@ -355,7 +366,16 @@ def dump_csv(csvwriter, warn_patterns):
   sort_warnings(warn_patterns)
   total = 0
   for s in Severity.levels:
-    total += write_severity(csvwriter, s, s.column_header, warn_patterns)
+    total += write_severity(csvwriter, s, s.column_header, warn_patterns, False)
+  csvwriter.writerow([total, '', 'All warnings'])
+
+
+def dump_detailed_csv(csvwriter, warn_patterns):
+  """Dump number of warnings plus warning descriptions in CSV format to writer."""
+  sort_warnings(warn_patterns)
+  total = 0
+  for s in Severity.levels:
+    total += write_severity(csvwriter, s, s.column_header, warn_patterns, True)
   csvwriter.writerow([total, '', 'All warnings'])
 
 
