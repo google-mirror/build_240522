@@ -333,7 +333,8 @@ def dump_fixed(writer, warn_patterns):
   writer('</blockquote>')
 
 
-def write_severity(csvwriter, sev, kind, warn_patterns):
+def write_severity(csvwriter, sev, kind, warn_patterns, warning_messages, warning_records,
+                  project_names, add_description=False):
   """Count warnings of given severity and write CSV entries to writer."""
   total = 0
   for pattern in warn_patterns:
@@ -341,23 +342,29 @@ def write_severity(csvwriter, sev, kind, warn_patterns):
       n = len(pattern['members'])
       total += n
       warning = kind + ': ' + (pattern['description'] or '?')
-      csvwriter.writerow([n, '', warning])
+      csvwriter.writerow([n, '', warning, ''])
       # print number of warnings for each project, ordered by project name
       projects = sorted(pattern['projects'].keys())
       for project in projects:
-        csvwriter.writerow([pattern['projects'][project], project, warning])
-  csvwriter.writerow([total, '', kind + ' warnings'])
+        csvwriter.writerow([pattern['projects'][project], project, warning, ''])
+        if add_description:
+          # print description of warnings for each project, ordered by project name
+          for member in pattern['members']:
+            if warning_records[member][1] == project:
+              csvwriter.writerow(['1', project, warning, ''])
+  csvwriter.writerow([total, '', kind + ' warnings', ''])
   return total
 
 
-def dump_csv(csvwriter, warn_patterns):
-  """Dump number of warnings in CSV format to writer."""
+def dump_csv(csvwriter, warn_patterns, warning_messages, warning_records, project_names,
+            add_description=False):
+  """Dump number of warnings [plus warning descriptions] in CSV format to writer."""
   sort_warnings(warn_patterns)
   total = 0
   for s in Severity.levels:
-    total += write_severity(csvwriter, s, s.column_header, warn_patterns)
+    total += write_severity(csvwriter, s, s.column_header, warn_patterns, warning_messages,
+                            warning_records, project_names, add_description)
   csvwriter.writerow([total, '', 'All warnings'])
-
 
 # Return s with escaped backslash and quotation characters.
 def escape_string(s):
@@ -660,14 +667,16 @@ def write_html(flags, project_names, warn_patterns, html_path, warning_messages,
 
 
 def write_out_csv(flags, warn_patterns, warning_messages, warning_links,
-                  warning_records, header_str, project_names):
+                  warning_records, header_str, project_names, add_description=False):
   """Write warnings csv file."""
   if flags.csvpath:
     with open(flags.csvpath, 'w') as f:
-      dump_csv(csv.writer(f, lineterminator='\n'), warn_patterns)
+      dump_csv(csv.writer(f, lineterminator='\n'), warn_patterns, warning_messages,
+              warning_records, project_names, add_description)
 
   if flags.gencsv:
-    dump_csv(csv.writer(sys.stdout, lineterminator='\n'), warn_patterns)
+    dump_csv(csv.writer(sys.stdout, lineterminator='\n'), warn_patterns, warning_messages,
+            warning_records, project_names, add_description)
   else:
     dump_html(flags, sys.stdout, warning_messages, warning_links,
               warning_records, header_str, warn_patterns, project_names)
