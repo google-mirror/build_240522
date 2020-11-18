@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Will Osborn <willosborn@google.com>
+Autosubmit+1: Will Osborn <willosborn@google.com>
+Build-Cop-Override+1: Will Osborn <willosborn@google.com>
+Submitted-by: Will Osborn <willosborn@google.com>
+Submitted-at: Wed, 18 Nov 2020 11:13:57 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1502413
+Project: platform/build
+Branch: refs/heads/master
