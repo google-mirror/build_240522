@@ -9,5 +9,7 @@ launch.mk
   |- retrofit.mk
   |    |- compression_retrofit.mk
   |- plus_non_ab.mk
+
+launch_with_vendor_ramdisk.mk
   |- compression.mk
 ```
