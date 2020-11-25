@@ -134,6 +134,18 @@ ifneq ($(filter address,$(my_sanitize)),)
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+# Disable return_address sanitizer on architectures other than AArch64.
+ifneq ($(filter arm64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
+  my_sanitize := $(filter-out return_address,$(my_sanitize))
+  my_sanitize_diag := $(filter-out return_address,$(my_sanitize_diag))
+endif
+
+# Disable indirect_branch sanitizer on architectures other than AArch64.
+ifneq ($(filter arm64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
+  my_sanitize := $(filter-out indirect_branch,$(my_sanitize))
+  my_sanitize_diag := $(filter-out indirect_branch,$(my_sanitize_diag))
+endif
+
 # Disable sanitizers which need the UBSan runtime for host targets.
 ifdef LOCAL_IS_HOST_MODULE
   my_sanitize := $(filter-out cfi,$(my_sanitize))
@@ -279,8 +291,13 @@ ifneq ($(filter integer_overflow,$(my_sanitize_diag)),)
   my_sanitize_diag := $(filter-out integer_overflow,$(my_sanitize_diag))
 endif
 
-ifneq ($(my_sanitize),)
-  fsanitize_arg := $(subst $(space),$(comma),$(my_sanitize))
+# Not all sanitizer has -fsanitize flag.
+fsanitize := $(my_sanitize)
+fsanitize := $(filter-out armv8_only_return_pac,$(fsanitize))
+fsanitize := $(filter-out armv8_only_bti,$(fsanitize))
+
+ifneq ($(fsanitize),)
+  fsanitize_arg := $(subst $(space),$(comma),$(fsanitize))
   my_cflags += -fsanitize=$(fsanitize_arg)
   my_asflags += -fsanitize=$(fsanitize_arg)
 
@@ -357,6 +374,22 @@ ifneq ($(filter address,$(my_global_sanitize) $(my_sanitize)),)
   endif
 endif
 
+ifneq ($(filter armv8_only_return_pac,$(my_sanitize)),)
+  ifneq ($(filter armv8_only_bti,$(my_sanitize)),)
+    my_asflags += $(ARMV8_ONLY_RETURN_PAC_AND_BTI_SANITIZER_EXTRA_CFLAGS)
+    my_cflags += $(ARMV8_ONLY_RETURN_PAC_AND_BTI_SANITIZER_EXTRA_CFLAGS)
+    my_linker += $(ARMV8_ONLY_BTI_SANITIZER_EXTRA_LDFLAGS)
+  else
+    my_asflags += $(ARMV8_ONLY_RETURN_PAC_SANITIZER_EXTRA_CFLAGS)
+    my_cflags += $(ARMV8_ONLY_RETURN_PAC_SANITIZER_EXTRA_CFLAGS)
+  endif
+else
+  ifneq ($(filter armv8_only_bti,$(my_sanitize)),)
+    my_asflags += $(ARMV8_ONLY_BTI_SANITIZER_EXTRA_CFLAGS)
+    my_cflags += $(ARMV8_ONLY_BTI_SANITIZER_EXTRA_CFLAGS)
+    my_linker += $(ARMV8_ONLY_BTI_SANITIZER_EXTRA_LDFLAGS)
+  endif
+endif
 # If local module needs ASAN, add compiler flags.
 ifneq ($(filter address,$(my_sanitize)),)
   # Frame pointer based unwinder in ASan requires ARM frame setup.
