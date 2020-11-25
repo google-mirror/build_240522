@@ -1,0 +1,133 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006392055",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1511690?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "a7020a46_c1f7d16e",
+          "description": "Change to \"tools/releasetools/common.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/common.py",
+              "range": {
+                "startLine": 643,
+                "startChar": 9,
+                "endLine": 643,
+                "endChar": 17
+              },
+              "replacement": "partition"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "62261314_e097651b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-25T19:37:45Z",
+      "side": 1,
+      "message": "Common typo found: \"parition\" -- should it be \"partition\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 643,
+        "startChar": 9,
+        "endLine": 643,
+        "endChar": 17
+      },
+      "revId": "e5eba24f37d25c8ba77c5e3d70ec467634563382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006392055",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1511690?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "9d050a7f_66051758",
+          "description": "Change to \"tools/releasetools/merge_partial_builds.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/merge_partial_builds.py",
+              "range": {
+                "startLine": 189,
+                "startChar": 40,
+                "endLine": 189,
+                "endChar": 46
+              },
+              "replacement": "release"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "def715d5_847d149d",
+        "filename": "tools/releasetools/merge_partial_builds.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-25T19:37:45Z",
+      "side": 1,
+      "message": "Common typo found: \"relase\" -- should it be \"release\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 189,
+        "startChar": 40,
+        "endLine": 189,
+        "endChar": 46
+      },
+      "revId": "e5eba24f37d25c8ba77c5e3d70ec467634563382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006392055",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1511690?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6dd7a894_0fdc00be",
+          "description": "Change to \"tools/releasetools/merge_partial_builds.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/merge_partial_builds.py",
+              "range": {
+                "startLine": 262,
+                "startChar": 40,
+                "endLine": 262,
+                "endChar": 46
+              },
+              "replacement": "release"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "cc5438af_adb59216",
+        "filename": "tools/releasetools/merge_partial_builds.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-25T19:37:45Z",
+      "side": 1,
+      "message": "Common typo found: \"relase\" -- should it be \"release\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 262,
+        "startChar": 40,
+        "endLine": 262,
+        "endChar": 46
+      },
+      "revId": "e5eba24f37d25c8ba77c5e3d70ec467634563382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
