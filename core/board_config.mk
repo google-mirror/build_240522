@@ -736,6 +736,16 @@ else
   endif
 endif
 
+###########################################
+# APEXes are by default not compressed
+#
+# APEX compression can be forcibly enabled (resp. disabled) by
+# setting OVERRIDE_TARGET_COMPRESSED_APEX to true (resp. false), e.g. by
+# setting the OVERRIDE_TARGET_COMPRESSED_APEX environment variable.
+ifdef OVERRIDE_TARGET_COMPRESSED_APEX
+  TARGET_COMPRESSED_APEX := $(OVERRIDE_TARGET_COMPRESSED_APEX)
+endif
+
 ifeq (,$(TARGET_BUILD_UNBUNDLED))
 ifdef PRODUCT_EXTRA_VNDK_VERSIONS
   $(foreach v,$(PRODUCT_EXTRA_VNDK_VERSIONS),$(call check_vndk_version,$(v)))
