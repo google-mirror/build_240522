@@ -43,6 +43,12 @@ _board_strip_readonly_list := \
   TARGET_2ND_CPU_ABI2 \
   TARGET_2ND_CPU_VARIANT \
   TARGET_2ND_CPU_VARIANT_RUNTIME \
+
+# TARGET_ARCH_SUITE is an alternative arch configuration to TARGET_ARCH (and related variables),
+# that can be used for soong-only builds to build for several architectures at once.
+# Allowed values currently are "ndk" and "mainline-sdk".
+_board_strip_readonly_list += TARGET_MULTI_ARCH
+_board_strip_readonly_list += \
   TARGET_BOARD_PLATFORM \
   TARGET_BOARD_PLATFORM_GPU \
   TARGET_BOOTLOADER_BOARD_NAME \
