@@ -73,6 +73,8 @@ PRODUCT_MAKEFILES := \
 
 endif
 
+PRODUCT_MAKEFILES += $(LOCAL_DIR)/unbundled_all.mk
+
 COMMON_LUNCH_CHOICES := \
     aosp_arm64-eng \
     aosp_arm-eng \
