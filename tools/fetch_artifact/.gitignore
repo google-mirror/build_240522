@@ -1,0 +1,4 @@
+bazel-bin
+bazel-fetch_artifact
+bazel-out
+bazel-testlogs
