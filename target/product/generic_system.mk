@@ -47,6 +47,15 @@ PRODUCT_PACKAGES += \
 # Wrapped net utils for /vendor access.
 PRODUCT_PACKAGES += netutils-wrapper-1.0
 
+# The network stack is required on all devices
+PRODUCT_PACKAGES += \
+    InProcessNetworkStack \
+    PlatformCaptivePortalLogin \
+    PlatformNetworkPermissionConfig \
+    CellBroadcastAppPlatform \
+    CellBroadcastServiceModulePlatform \
+    com.android.tethering.inprocess
+
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
