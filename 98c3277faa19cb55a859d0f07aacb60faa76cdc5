@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006458601",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1377718?revision\u003d15",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "32be43e9_135ba826",
+        "filename": "tools/build-license-metadata.sh",
+        "patchSetId": 15
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-01T02:08:39Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicense...license...license\n",
+      "range": {
+        "startLine": 139,
+        "startChar": 70,
+        "endLine": 146,
+        "endChar": 73
+      },
+      "revId": "98c3277faa19cb55a859d0f07aacb60faa76cdc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
