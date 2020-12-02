@@ -405,6 +405,19 @@ _product_single_value_vars += PRODUCT_OTA_FORCE_NON_AB_PACKAGE
 # If set, Java module in product partition cannot use hidden APIs.
 _product_single_value_vars += PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
 
+# If set, only java_sdk_library can be used at inter-partition dependency.
+# Note: When BOARD_VNDK_VERSION is not set, this option doesn't enforce anything,
+#       in other words, setting BOARD_VNDK_VERSION is precondition of enabling
+#       this option.
+# Note: When PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE is not set, there are
+#       no restrictions between system and product partition dependency.
+_product_single_value_vars += PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY
+
+# Allowlist for PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY option
+# listed modules are allowed at inter-partition dependency even if it isn't
+# a java_sdk_library module.
+_product_list_vars += PRODUCT_INTER_PARTITION_JAVA_LIBRARY_ALLOWLIST
+
 _product_single_value_vars += PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES
 
 .KATI_READONLY := _product_single_value_vars _product_list_vars
