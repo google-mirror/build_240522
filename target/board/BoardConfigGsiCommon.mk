@@ -70,5 +70,8 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 # Setup a vendor image to let PRODUCT_VENDOR_PROPERTIES does not affect GSI
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
+# b/172696594: /postinstall mount dir is required for update_engine_unittests.
+BOARD_ROOT_EXTRA_FOLDERS += postinstall
+
 # Disable 64 bit mediadrmserver
 TARGET_ENABLE_MEDIADRM_64 :=
