@@ -1334,28 +1334,32 @@ $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
   $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
     $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
     $(eval ### Verify that the product only produces files inside its path requirements.) \
-    $(eval allowed := $(PRODUCTS.$(makefile).ARTIFACT_PATH_ALLOWED_LIST)) \
+    $(eval all_allowed := $(PRODUCTS.$(makefile).ARTIFACT_PATH_ALLOWED_LIST) $(PRODUCTS.$(makefile).ARTIFACT_PATH_RELAXED_ALLOWED_LIST)) \
     $(eval path_patterns := $(call resolve-product-relative-paths,$(requirements),%)) \
-    $(eval allowed_patterns := $(call resolve-product-relative-paths,$(allowed))) \
+    $(eval all_allowed_patterns := $(call resolve-product-relative-paths,$(all_allowed))) \
     $(eval files := $(call product-installed-files, $(makefile))) \
-    $(eval offending_files := $(filter-out $(path_patterns) $(allowed_patterns) $(static_allowed_patterns),$(files))) \
+    $(eval offending_files := $(filter-out $(path_patterns) $(all_allowed_patterns) $(static_allowed_patterns),$(files))) \
     $(call maybe-print-list-and-error,$(offending_files),\
       $(makefile) produces files outside its artifact path requirement. \
       Allowed paths are $(subst $(space),$(comma)$(space),$(addsuffix *,$(requirements)))) \
+    $(eval allowed := $(PRODUCTS.$(makefile).ARTIFACT_PATH_ALLOWED_LIST)) \
+    $(eval allowed_patterns := $(call resolve-product-relative-paths,$(allowed))) \
     $(eval unused_allowed := $(filter-out $(files),$(allowed_patterns))) \
     $(call maybe-print-list-and-error,$(unused_allowed),$(makefile) includes redundant allowed entries in its artifact path requirement.) \
     $(eval ### Optionally verify that nothing else produces files inside this artifact path requirement.) \
     $(eval extra_files := $(filter-out $(files) $(HOST_OUT)/%,$(product_target_FILES))) \
     $(eval files_in_requirement := $(filter $(path_patterns),$(extra_files))) \
     $(eval all_offending_files += $(files_in_requirement)) \
-    $(eval allowed := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST)) \
-    $(eval allowed_patterns := $(call resolve-product-relative-paths,$(allowed))) \
-    $(eval offending_files := $(filter-out $(allowed_patterns),$(files_in_requirement))) \
+    $(eval all_allowed := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST) $(PRODUCTS.$(makefile).ARTIFACT_PATH_RELAXED_ALLOWED_LIST)) \
+    $(eval all_allowed_patterns := $(call resolve-product-relative-paths,$(all_allowed))) \
+    $(eval offending_files := $(filter-out $(all_allowed_patterns),$(files_in_requirement))) \
     $(eval enforcement := $(PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
     $(if $(enforcement),\
       $(call maybe-print-list-and-error,$(offending_files),\
         $(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement. \
         $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT)) \
+      $(eval allowed := $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST)) \
+      $(eval allowed_patterns := $(call resolve-product-relative-paths,$(allowed))) \
       $(eval unused_allowed := $(if $(filter true strict,$(enforcement)),\
         $(foreach p,$(allowed_patterns),$(if $(filter $(p),$(extra_files)),,$(p))))) \
       $(call maybe-print-list-and-error,$(unused_allowed),$(INTERNAL_PRODUCT) includes redundant artifact path requirement allowed list entries.) \
