@@ -427,7 +427,17 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   if (prop_dict.get("use_dynamic_partition_size") == "true" and
       "partition_size" not in prop_dict):
     # If partition_size is not defined, use output of `du' + reserved_size.
-    size = GetDiskUsage(in_dir)
+    if fs_type.startswith("erofs"):
+      BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+      if "erofs_sparse_flag" in prop_dict:
+        image_path = UnsparseImage(out_file, replace=False)
+        size = GetDiskUsage(image_path)
+        os.remove(image_path)
+      else:
+        size = GetDiskUsage(out_file)
+      os.remove(out_file)
+    else:
+      size = GetDiskUsage(in_dir)
     logger.info(
         "The tree size of %s is %d MB.", in_dir, size // BYTES_IN_MB)
     # If not specified, give us 16MB margin for GetDiskUsage error ...
