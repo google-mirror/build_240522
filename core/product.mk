@@ -456,6 +456,7 @@ define require-artifacts-in-path
   $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
   $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENTS := $(strip $(1))) \
   $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_ALLOWED_LIST := $(strip $(2))) \
+  $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_RELAXED_ALLOWED_LIST := $(strip $(3))) \
   $(eval ARTIFACT_PATH_REQUIREMENT_PRODUCTS := \
     $(sort $(ARTIFACT_PATH_REQUIREMENT_PRODUCTS) $(current_mk)))
 endef
