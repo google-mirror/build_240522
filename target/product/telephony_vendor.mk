@@ -22,3 +22,8 @@ PRODUCT_PACKAGES := \
     rild \
 
 PRODUCT_COPY_FILES := \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+PRODUCT_VENDOR_PROPERTIES := \
+    keyguard.no_require_sim?=true \
+    ro.com.android.dataroaming?=true

@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-PRODUCT_PACKAGES += \
-    messaging
+PRODUCT_COPY_FILES := \
+    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
