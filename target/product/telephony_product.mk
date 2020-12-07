@@ -20,3 +20,8 @@
 # /product packages
 PRODUCT_PACKAGES += \
     Dialer \
+    messaging
+
+PRODUCT_PRODUCT_PROPERTIES := \
+    keyguard.no_require_sim?=true \
+    ro.com.android.dataroaming?=true
