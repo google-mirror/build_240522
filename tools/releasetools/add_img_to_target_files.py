@@ -330,6 +330,7 @@ def AddDtbo(output_zip):
 
   # AVB-sign the image as needed.
   if OPTIONS.info_dict.get("avb_enable") == "true":
+    os.chmod(img.name, 0777)  # Signing requires +w
     avbtool = OPTIONS.info_dict["avb_avbtool"]
     part_size = OPTIONS.info_dict["dtbo_size"]
     # The AVB hash footer will be replaced if already present.
