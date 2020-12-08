@@ -1,0 +1,10 @@
+Code-Review+2: David Anderson <dvander@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified-Together+1: Treehugger Robot <treehugger-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Yifan Hong <elsk@google.com>
+Submitted-at: Tue, 08 Dec 2020 18:43:26 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1518222
+Project: platform/build
+Branch: refs/heads/master
