@@ -1195,7 +1195,9 @@ endef
 # Name resolution for LOCAL_REQUIRED_MODULES:
 #   See the select-bitness-of-required-modules definition.
 # $(1): product makefile
+# $(2): whether to include auto-included modules unrelated to the product makefile
 define product-installed-files
+  $(if $(filter true false,$(2)),,$(error arg 2 must be true or false)) \
   $(eval _pif_modules := \
     $(call get-product-var,$(1),PRODUCT_PACKAGES) \
     $(if $(filter eng,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_ENG)) \
@@ -1203,7 +1205,7 @@ define product-installed-files
     $(if $(filter tests,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_TESTS)) \
     $(if $(filter asan,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_DEBUG_ASAN)) \
     $(if $(filter java_coverage,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE)) \
-    $(call auto-included-modules) \
+    $(if $(filter true,$(2)),$(call auto-included-modules)) \
   ) \
   $(eval ### Filter out the overridden packages and executables before doing expansion) \
   $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
@@ -1296,7 +1298,7 @@ ifdef FULL_BUILD
   endif
 
   product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
-  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT), true)
   # WARNING: The product_MODULES variable is depended on by external files.
   product_MODULES := $(_pif_modules)
 

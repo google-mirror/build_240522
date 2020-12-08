@@ -6,8 +6,6 @@ static_allowed_patterns := $(TARGET_OUT_FAKE)/% $(SOONG_OUT_DIR)/ndk/%
 # RROs become REQUIRED by the source module, but are always placed on the vendor partition.
 static_allowed_patterns += %__auto_generated_rro_product.apk
 static_allowed_patterns += %__auto_generated_rro_vendor.apk
-# Auto-included targets are not considered
-static_allowed_patterns += $(call product-installed-files,)
 # $(PRODUCT_OUT)/apex is where shared libraries in APEXes get installed.
 # The path can be considered as a fake path, as the shared libraries
 # are installed there just to have symbols files for them under
@@ -22,6 +20,7 @@ ifeq (true,$(BOARD_USES_SYSTEM_OTHER_ODEX))
     $(TARGET_OUT_SYSTEM_OTHER)/%.art
 endif
 
+built_product_files := $(call product-installed-files, $(INTERNAL_PRODUCT), false)
 all_offending_files :=
 $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
   $(eval requirements := $(PRODUCTS.$(makefile).ARTIFACT_PATH_REQUIREMENTS)) \
@@ -29,7 +28,7 @@ $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
   $(eval allowed := $(PRODUCTS.$(makefile).ARTIFACT_PATH_ALLOWED_LIST)) \
   $(eval path_patterns := $(call resolve-product-relative-paths,$(requirements),%)) \
   $(eval allowed_patterns := $(call resolve-product-relative-paths,$(allowed))) \
-  $(eval files := $(call product-installed-files, $(makefile))) \
+  $(eval files := $(call product-installed-files, $(makefile), false)) \
   $(eval offending_files := $(filter-out $(path_patterns) $(allowed_patterns) $(static_allowed_patterns),$(files))) \
   $(call maybe-print-list-and-error,$(offending_files),\
     $(makefile) produces files outside its artifact path requirement. \
