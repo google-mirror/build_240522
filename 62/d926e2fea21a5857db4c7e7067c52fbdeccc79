@@ -1,0 +1,16 @@
+Verified+1: Jianan Huang <huangjianan@oppo.com>
+Code-Review+1: Jianan Huang <huangjianan@oppo.com>
+Code-Review+1: mailonghua <mailonghua@oppo.com>
+Code-Review+1: Weichao Guo <guoweichao@oppo.corp-partner.google.com>
+Code-Review+1: Jason Tang <jason.tang@oppo.corp-partner.google.com>
+Code-Review+1: Xiang Gao <hsiangkao@redhat.com>
+Code-Review+2: David Anderson <dvander@google.com>
+Code-Review+1: Tianjie Xu <xunchang@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified-Together+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 09 Dec 2020 06:50:55 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1517620
+Project: platform/build
+Branch: refs/heads/master
