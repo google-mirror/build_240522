@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006654123",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/97012?revision\u003d7",
+      "fixSuggestions": [
+        {
+          "fixId": "7662198c_b1469598",
+          "description": "Change to \"tools/signapk/SignApk.java\"",
+          "replacements": [
+            {
+              "path": "tools/signapk/SignApk.java",
+              "range": {
+                "startLine": 886,
+                "startChar": 113,
+                "endLine": 886,
+                "endChar": 121
+              },
+              "replacement": "its own"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "79a871cc_fc7a56cf",
+        "filename": "tools/signapk/SignApk.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-09T17:10:21Z",
+      "side": 1,
+      "message": "Common typo found: \"it\u0027s own\" -- should it be \"its own\"?\nor alternatively, it\u0027s a(n) ...\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 886,
+        "startChar": 113,
+        "endLine": 886,
+        "endChar": 121
+      },
+      "revId": "2417548d23b3d2f507a6ede668deab58418b94dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
