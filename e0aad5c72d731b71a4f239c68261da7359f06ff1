@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006654125",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/97012?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a53cc755_5a819bbe",
+        "filename": "tools/signapk/SignApk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-09T17:10:20Z",
+      "side": 1,
+      "message": "Wrong casing for \"pattern\". static final variables should be ALL_UPPERCASE.",
+      "range": {
+        "startLine": 111,
+        "startChar": 12,
+        "endLine": 111,
+        "endChar": 39
+      },
+      "revId": "e0aad5c72d731b71a4f239c68261da7359f06ff1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
