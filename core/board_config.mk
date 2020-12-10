@@ -115,6 +115,7 @@ _board_strip_readonly_list += \
   BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT \
   BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT \
   BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES \
+  BOARD_VENDOR_RAMDISK_FRAGMENTS \
 
 _build_broken_var_list := \
   BUILD_BROKEN_DUP_RULES \
@@ -779,6 +780,13 @@ ifndef BUILDING_VENDOR_BOOT_IMAGE
   ifeq (true,$(BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT))
     $(error Should not set BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT if not building vendor_boot image)
   endif
+  ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
+    $(error Should not set BOARD_VENDOR_RAMDISK_FRAGMENTS if not building vendor_boot image)
+  endif
+endif
+
+ifneq ($(words $(BOARD_VENDOR_RAMDISK_FRAGMENTS)),$(words $(sort $(BOARD_VENDOR_RAMDISK_FRAGMENTS))))
+  $(error BOARD_VENDOR_RAMDISK_FRAGMENTS has duplicate entries: $(BOARD_VENDOR_RAMDISK_FRAGMENTS))
 endif
 
 # If BOARD_USES_GENERIC_KERNEL_IMAGE is set, BOARD_USES_RECOVERY_AS_BOOT must not be set.
