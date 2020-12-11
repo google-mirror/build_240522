@@ -34,3 +34,8 @@ ifeq (,$(filter art_module,$(SOONG_CONFIG_NAMESPACES)))
   SOONG_CONFIG_art_module += source_build
 endif
 SOONG_CONFIG_art_module_source_build ?= true
+
+# Common Apex variables
+ifdef COMMON_APEX_UNAVAILABLE
+$(call add_soong_config_var_value,ANDROID,common_apex,unavailable)
+endif
