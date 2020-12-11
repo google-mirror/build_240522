@@ -27,3 +27,11 @@ $(call add_soong_config_namespace,ANDROID)
 # Add variables to the namespace below:
 
 $(call add_soong_config_var,ANDROID,TARGET_ENABLE_MEDIADRM_64)
+
+# Common Apex variables
+ifdef COMMON_APEX_UNAVAILABLE
+$(call add_soong_config_var_value,ANDROID,common_apex,unavailable)
+else
+$(call add_soong_config_var_value,ANDROID,common_apex,available)
+endif
+
