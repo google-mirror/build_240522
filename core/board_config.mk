@@ -778,7 +778,7 @@ ifndef BUILDING_VENDOR_BOOT_IMAGE
     $(error Should not set BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT if not building vendor_boot image)
   endif
   ifeq (true,$(BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT))
-    $(error Should not set BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT if not building vendor_boot image)
+    $(warning BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT set to true, but not building vendor_boot image)
   endif
 endif
 
