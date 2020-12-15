@@ -191,8 +191,15 @@ ifeq ($(EMMA_INSTRUMENT),true)
     # in instrumented packages then include Jacoco classes into the
     # bootclasspath.
     $(foreach product,$(PRODUCTS),\
-      $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
-      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
+      $(if $(PRODUCTS.$(product).ARTIFACT_PATH_REQUIREMENTS), \
+        $(if $(filter $(TARGET_COPY_OUT_SYSTEM)/% $(TARGET_COPY_OUT_ROOT)/%,$(PRODUCTS.$(product).ARTIFACT_PATH_REQUIREMENTS)), \
+          $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
+          $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent)\
+        ), \
+        $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
+        $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent)\
+      ) \
+    )
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 
