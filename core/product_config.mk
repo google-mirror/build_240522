@@ -190,9 +190,21 @@ ifeq ($(EMMA_INSTRUMENT),true)
     # For instrumented build, if Jacoco is not being included statically
     # in instrumented packages then include Jacoco classes into the
     # bootclasspath.
+    #
+    # Only adds Jacoco if makefile does not specifies artifact path requirements, or artifact
+    # path requirements includes $(TARGET_COPY_OUT_SYSTEM)/ or $(TARGET_COPY_OUT_ROOT)/. This
+    # is not a perfect predicate for generic system makefiles, but it is good enough to exclude
+    # other generic makefiles like generic_ramdisk.mk.
     $(foreach product,$(PRODUCTS),\
-      $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
-      $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent))
+      $(if $(PRODUCTS.$(product).ARTIFACT_PATH_REQUIREMENTS), \
+        $(if $(filter $(TARGET_COPY_OUT_SYSTEM)/ $(TARGET_COPY_OUT_ROOT)/,$(PRODUCTS.$(product).ARTIFACT_PATH_REQUIREMENTS)), \
+          $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
+          $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent)\
+        ), \
+        $(eval PRODUCTS.$(product).PRODUCT_PACKAGES += jacocoagent)\
+        $(eval PRODUCTS.$(product).PRODUCT_BOOT_JARS += jacocoagent)\
+      ) \
+    )
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 
