@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b8d521_369c77e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-12-15T20:53:59Z",
+      "side": 1,
+      "message": "This still fails with:\n\nFAILED: \nbuild/make/core/main.mk:1334: warning:  vendor/google/products/cf_x86_64_phone.mk produces files inside build/make/target/product/generic_system.mks artifact path requirement. Consider adding this file to the system_ext or product partition instead. Confused? Check out go/artifact-\nerror.\nOffending entries:\nsystem/framework/jacocoagent.jar\nbuild/make/core/main.mk:1334: error: Build failed.",
+      "revId": "942128bed8029c3f44f74a702213846ab2c9ee37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
