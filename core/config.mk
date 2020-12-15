@@ -756,6 +756,13 @@ endif
 BUILD_NUMBER_FROM_FILE := $$(cat $(SOONG_OUT_DIR)/build_number.txt)
 BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 
+# TODO(b/172480615): Remove when platform uses ART Module prebuilts by default.
+ifeq (,$(filter art_module,$(SOONG_CONFIG_NAMESPACES)))
+  SOONG_CONFIG_NAMESPACES += art_module
+  SOONG_CONFIG_art_module += source_build
+endif
+SOONG_CONFIG_art_module_source_build ?= true
+
 # SEPolicy versions
 
 # PLATFORM_SEPOLICY_VERSION is a number of the form "NN.m" with "NN" mapping to
