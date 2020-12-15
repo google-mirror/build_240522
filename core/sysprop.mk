@@ -96,7 +96,9 @@ $(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(3
 	$(hide) echo Building $$@
 	$(hide) mkdir -p $$(dir $$@)
 	$(hide) rm -f $$@ && touch $$@
+ifneq (product--true, $(strip $(1))-$(BOARD_USES_PRODUCTIMAGE)-$(call math_lt,$(if $(PRODUCT_SHIPPING_API_LEVEL),$(PRODUCT_SHIPPING_API_LEVEL),31),30))
 	$(hide) $$(call generate-common-build-props,$(call to-lower,$(strip $(1))),$$@)
+endif
 	$(hide) $(foreach file,$(strip $(3)),\
 	    if [ -f "$(file)" ]; then\
 	        echo "" >> $$@;\
