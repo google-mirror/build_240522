@@ -39,4 +39,4 @@ _my_paths := \
 # We use the "relaxed" version here because tzdata / tz_version is only produced
 # by this makefile on a subset of devices.
 # TODO: remove this
-$(call require-artifacts-in-path-relaxed, $(_my_paths), )
+# $(call require-artifacts-in-path-relaxed, $(_my_paths), )
