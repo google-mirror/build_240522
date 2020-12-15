@@ -35,6 +35,7 @@ _my_paths := \
     $(TARGET_COPY_OUT_DEBUG_RAMDISK) \
     system/usr/share/zoneinfo/tz_version \
     system/usr/share/zoneinfo/tzdata \
+    system/framework \
 
 # We use the "relaxed" version here because tzdata / tz_version is only produced
 # by this makefile on a subset of devices.
