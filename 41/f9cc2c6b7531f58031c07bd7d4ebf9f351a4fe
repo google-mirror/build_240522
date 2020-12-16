@@ -1,0 +1,11 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Code-Review+2: Ulyana Trafimovich <skvadrik@google.com>
+Code-Review+1: Martin Stjernholm <mast@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Anton Hansson <hansson@google.com>
+Submitted-at: Wed, 16 Dec 2020 11:48:04 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1512776
+Project: platform/build
+Branch: refs/heads/master
