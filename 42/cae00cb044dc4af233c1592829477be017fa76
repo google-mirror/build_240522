@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Anton Hansson <hansson@google.com>
+Code-Review+2: allenhair <allenhair@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 17 Dec 2020 00:25:48 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1532100
+Project: platform/build
+Branch: refs/heads/master
