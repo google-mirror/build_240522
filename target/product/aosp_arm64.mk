@@ -26,15 +26,38 @@
 # build quite specifically for the emulator, and might not be
 # entirely appropriate to inherit from for on-device configurations.
 
+<<<<<<< HEAD   (ce285d Merge "Change all cf_common paths to cuttlefish paths" into )
 -include device/generic/goldfish/arm64-vendor.mk
+=======
+# GSI for system/product
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_common.mk)
+
+# Emulator for vendor
+$(call inherit-product-if-exists, device/generic/goldfish/arm64-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
+
+# Enable mainline checking for excat this product name
+ifeq (aosp_arm64,$(TARGET_PRODUCT))
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+endif
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST += \
+    root/init.zygote64.rc \
+    root/init.zygote32_64.rc \
+    root/init.zygote64_32.rc \
+>>>>>>> CHANGE (51b977 Add init.zygote64.rc into GSI)
 
 # Copy different zygote settings for vendor.img to select by setting property
-# ro.zygote=zygote64_32 or ro.zygote=zygote32_64:
-#   1. 64-bit primary, 32-bit secondary OR
-#   2. 32-bit primary, 64-bit secondary
+# ro.zygote=zygote64, ro.zygote=zygote64_32 or ro.zygote=zygote32_64:
+#   1. 64-bit only OR
+#   2. 64-bit primary, 32-bit secondary OR
+#   3. 32-bit primary, 64-bit secondary
 # init.zygote64_32.rc is in the core_64_bit.mk below
 PRODUCT_COPY_FILES += \
-    system/core/rootdir/init.zygote32_64.rc:root/init.zygote32_64.rc
+    system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc \
+    system/core/rootdir/init.zygote32_64.rc:root/init.zygote32_64.rc \
 
 # Force both build odex for zygote32_64
 DEX_PREOPT_SYSTEM_SERVER_BOTH := true
