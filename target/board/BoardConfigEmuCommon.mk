@@ -56,8 +56,8 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
         vendor
   endif
 
-  # 3G
-  BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE := 3221225472
+  # 4G
+  BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE := 4294967296
 
   # in build environment to speed up make -j
   ifeq ($(QEMU_DISABLE_AVB),true)
