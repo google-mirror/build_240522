@@ -1,0 +1,12 @@
+Verified+1: Isaac Chen <ycchen@google.com>
+Code-Review+1: Hsin-Yi Chen <hsinyichen@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Code-Review+2: Bo Hu <bohu@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Isaac Chen <ycchen@google.com>
+Submitted-at: Wed, 30 Dec 2020 02:29:27 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1535670
+Project: platform/build
+Branch: refs/heads/master
