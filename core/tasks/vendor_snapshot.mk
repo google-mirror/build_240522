@@ -22,6 +22,11 @@ vendor-snapshot: $(SOONG_VENDOR_SNAPSHOT_ZIP)
 
 $(call dist-for-goals, vendor-snapshot, $(SOONG_VENDOR_SNAPSHOT_ZIP))
 
+.PHONY: vendor-fake-snapshot
+vendor-fake-snapshot: $(SOONG_VENDOR_FAKE_SNAPSHOT_ZIP)
+
+$(call dist-for-goals, vendor-fake-snapshot, $(SOONG_VENDOR_FAKE_SNAPSHOT_ZIP):fake/$(notdir $(SOONG_VENDOR_FAKE_SNAPSHOT_ZIP)))
+
 else # BOARD_VNDK_VERSION is NOT set to 'current'
 
 .PHONY: vendor-snapshot
@@ -30,5 +35,8 @@ vendor-snapshot:
 	$(call echo-error,$(PRIVATE_MAKEFILE),\
 		"CANNOT generate Vendor snapshot. BOARD_VNDK_VERSION must be set to 'current'.")
 	exit 1
+
+.PHONY: vendor-fake-snapshot
+vendor-fake-snapshot: vendor-snapshot
 
 endif # BOARD_VNDK_VERSION
