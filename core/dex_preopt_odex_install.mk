@@ -189,24 +189,28 @@ ifdef LOCAL_DEX_PREOPT
   my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
     $(LOCAL_OPTIONAL_USES_LIBRARIES))
 
-  # compatibility libraries are added to class loader context of an app only if
-  # targetSdkVersion in the app's manifest is lower than the given SDK version
+  ifeq ($(LOCAL_MODULE_CLASS),APPS)
+    # compatibility libraries are added to class loader context of an app only if
+    # targetSdkVersion in the app's manifest is lower than the given SDK version
 
-  my_dexpreopt_libs_compat_28 := \
-    org.apache.http.legacy
+    my_dexpreopt_libs_compat_28 := \
+      org.apache.http.legacy
 
-  my_dexpreopt_libs_compat_29 := \
-    android.hidl.base-V1.0-java \
-    android.hidl.manager-V1.0-java
+    my_dexpreopt_libs_compat_29 := \
+      android.hidl.base-V1.0-java \
+      android.hidl.manager-V1.0-java
 
-  my_dexpreopt_libs_compat_30 := \
-    android.test.base \
-    android.test.mock
+    my_dexpreopt_libs_compat_30 := \
+      android.test.base \
+      android.test.mock
 
-  my_dexpreopt_libs_compat := \
-    $(my_dexpreopt_libs_compat_28) \
-    $(my_dexpreopt_libs_compat_29) \
-    $(my_dexpreopt_libs_compat_30)
+    my_dexpreopt_libs_compat := \
+      $(my_dexpreopt_libs_compat_28) \
+      $(my_dexpreopt_libs_compat_29) \
+      $(my_dexpreopt_libs_compat_30)
+  else
+    my_extra_dexpreopt_libs :=
+  endif
 
   my_dexpreopt_libs := $(sort \
     $(LOCAL_USES_LIBRARIES) \
@@ -219,9 +223,8 @@ ifdef LOCAL_DEX_PREOPT
     $(call add_json_map, $(1)) \
     $(foreach lib, $(2),\
       $(call add_json_map, $(lib)) \
-      $(eval file := $(filter %/$(lib).jar, $(call module-installed-files,$(lib)))) \
-      $(call add_json_str, Host,        $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar) \
-      $(call add_json_str, Device,      $(call install-path-to-on-device-path,$(file))) \
+      $(call add_json_str, Host, $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar) \
+      $(call add_json_str, Device, /system/framework/$(lib).jar) \
       $(call add_json_map, Subcontexts, ${$}) $(call end_json_map) \
       $(call end_json_map)) \
     $(call end_json_map)
@@ -275,12 +278,20 @@ ifdef LOCAL_DEX_PREOPT
   my_dexpreopt_config := $(intermediates)/dexpreopt.config
   my_dexpreopt_script := $(intermediates)/dexpreopt.sh
   my_dexpreopt_zip := $(intermediates)/dexpreopt.zip
+  my_dexpreopt_config_merger := $(BUILD_SYSTEM)/dex_preopt_config_merger.py
+  my_dexpreopt_dep_configs := $(foreach lib, \
+    $(filter-out $(my_dexpreopt_libs_compat),$(LOCAL_USES_LIBRARIES) $(my_filtered_optional_uses_libraries)), \
+    $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,)/dexpreopt.config)
 
+  $(my_dexpreopt_config): $(my_dexpreopt_dep_configs) $(my_dexpreopt_config_merger)
   $(my_dexpreopt_config): PRIVATE_MODULE := $(LOCAL_MODULE)
   $(my_dexpreopt_config): PRIVATE_CONTENTS := $(json_contents)
+  $(my_dexpreopt_config): PRIVATE_DEP_CONFIGS := $(my_dexpreopt_dep_configs)
+  $(my_dexpreopt_config): PRIVATE_CONFIG_MERGER := $(my_dexpreopt_config_merger)
   $(my_dexpreopt_config):
 	@echo "$(PRIVATE_MODULE) dexpreopt.config"
 	echo -e -n '$(subst $(newline),\n,$(subst ','\'',$(subst \,\\,$(PRIVATE_CONTENTS))))' > $@
+	$(PRIVATE_CONFIG_MERGER) $@ $(PRIVATE_DEP_CONFIGS)
 
   .KATI_RESTAT: $(my_dexpreopt_script)
   $(my_dexpreopt_script): PRIVATE_MODULE := $(LOCAL_MODULE)
