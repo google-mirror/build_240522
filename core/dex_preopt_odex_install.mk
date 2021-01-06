@@ -242,6 +242,7 @@ ifdef LOCAL_DEX_PREOPT
   # DexPath is not set: it will be filled in by dexpreopt_gen.
 
   $(call add_json_str,  Name,                           $(LOCAL_MODULE))
+  $(call add_json_str,  ProvidesUsesLib,                $(firsword $(LOCAL_PROVIDES_USES_LIBRARY) $(LOCAL_MODULE)))
   $(call add_json_str,  DexLocation,                    $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE)))
   $(call add_json_str,  BuildPath,                      $(LOCAL_BUILT_MODULE))
   $(call add_json_str,  ManifestPath,                   $(full_android_manifest))
