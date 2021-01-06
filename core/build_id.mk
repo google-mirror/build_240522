@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (bc86b7 Merge "Add TARGET_FORCE_APEX_SYMLINK_OPTIMIZATION")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ1A.210105.003
+>>>>>>> BRANCH (e9f73e Version bump to RQ1A.210105.003 [core/build_id.mk])
