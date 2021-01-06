@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007068218",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1541369?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "48ad6bb5_d46e1ca6",
+        "filename": "tools/releasetools/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-06T13:34:16Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 8
+      },
+      "revId": "746ebf70a15ed37877a41d8392f2dd0f25b1e160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007068218",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1541369?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c8636f8e_6e25f117",
+        "filename": "tools/releasetools/test_ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-06T13:34:16Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 83,
+        "startChar": 70,
+        "endLine": 83,
+        "endChar": 75
+      },
+      "revId": "746ebf70a15ed37877a41d8392f2dd0f25b1e160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
