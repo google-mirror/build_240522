@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (4a6323 Merge "Include snapuserd in recovery for VABC builds.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ1A.210105.003
+>>>>>>> BRANCH (e9f73e Version bump to RQ1A.210105.003 [core/build_id.mk])
