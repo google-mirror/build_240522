@@ -241,7 +241,7 @@ if __name__ == '__main__':
   base_path = os.path.dirname(os.path.realpath(__file__))
   for dirpath, _, files in os.walk(base_path):
     for fn in files:
-      if dirpath == base_path and re.match('test_.*\\.py$', fn):
+      if dirpath == base_path and re.match('test_ota.*\\.py$', fn):
         test_modules.append(fn[:-3])
 
   test_suite = unittest.TestLoader().loadTestsFromNames(test_modules)

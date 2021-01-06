@@ -33,10 +33,11 @@ from ota_from_target_files import (
     GetTargetFilesZipWithoutPostinstallConfig,
     Payload, PayloadSigner, POSTINSTALL_CONFIG,
     StreamingPropertyFiles, AB_PARTITIONS)
+from ota_utils import GetApexInfoFromTargetFiles
 from test_utils import PropertyFilesTestCase
 
 
-def construct_target_files(secondary=False):
+def construct_target_files(secondary=False, compressedApex=False):
   """Returns a target-files.zip file for generating OTA packages."""
   target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
   with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
@@ -77,6 +78,9 @@ def construct_target_files(secondary=False):
     if secondary:
       target_files_zip.writestr('IMAGES/system_other.img',
                                 os.urandom(len("system_other")))
+
+    if compressedApex:
+      target_files_zip.writestr('SYSTEM/apex/com.android.test.apex', 'dummy')
 
   return target_files
 
@@ -273,6 +277,18 @@ class OtaFromTargetFilesTest(test_utils.ReleaseToolsTestCase):
             'pre-device': 'product-device',
         },
         metadata)
+
+  def test_GetPackageMetadata_compressedApex(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    metadata_proto = GetPackageMetadata(target_info)
+    apex_infos = metadata_proto.apex_info
+    # apex_info in metadata is not populated during its creation
+    self.assertEqual(len(apex_infos), 0)
+    target_files = construct_target_files(compressedApex=True)
+    apex_infos.extend(GetApexInfoFromTargetFiles(target_files))
+    self.assertEqual(len(apex_infos), 1)
+    self.assertEqual(apex_infos[0].package_name, "SYSTEM/apex/com.android.test.apex")
+
 
   def test_GetPackageMetadata_retrofitDynamicPartitions(self):
     target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)

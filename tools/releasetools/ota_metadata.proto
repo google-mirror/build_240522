@@ -65,6 +65,13 @@ message DeviceState {
   repeated PartitionState partition_state = 7;
 }
 
+message ApexInfo {
+  string package_name = 1;
+  int64 version = 2;
+  bool is_compressed = 3;
+  int64 decompressed_size = 4;
+}
+
 // The metadata of an OTA package. It contains the information of the package
 // and prerequisite to install the update correctly.
 message OtaMetadata {
@@ -92,4 +99,7 @@ message OtaMetadata {
   bool retrofit_dynamic_partitions = 7;
   // The required size of the cache partition, only valid for non-A/B update.
   int64 required_cache = 8;
+  // Information on compressed APEX to figure out how much space is required for
+  // their decompression
+  repeated ApexInfo apex_info = 9;
 }

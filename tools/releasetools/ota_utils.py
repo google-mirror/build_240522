@@ -619,3 +619,18 @@ def GetBootImageTimestamp(boot_img):
   except ExternalError as e:
     logger.warning('Unable to get boot image timestamp: %s', e)
     return None
+
+def GetApexInfoFromTargetFiles(input_file):
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    apex_files = [ filepath for filepath in input_zip.namelist() if filepath.startswith("SYSTEM/apex") ]
+
+  apex_infos = []
+  for apex_file in apex_files:
+    # For now, use the file path to guess the information.
+    # TODO(samiul): extract the APEX and pass it to ApexCompressionTool to
+    #  accurately determine stats
+    apex_info = ota_metadata_pb2.ApexInfo()
+    apex_info.package_name = apex_file
+    apex_infos.append(apex_info)
+
+  return apex_infos
