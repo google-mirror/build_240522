@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import apex_manifest
 import copy
 import itertools
 import logging
@@ -22,7 +23,7 @@ import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
                     SignFile, PARTITIONS_WITH_CARE_MAP, PartitionBuildProps,
-                    MakeTempDir, RunAndCheckOutput, ExternalError)
+                    MakeTempDir, RunAndCheckOutput, ExternalError, UnzipTemp)
 
 logger = logging.getLogger(__name__)
 
@@ -619,3 +620,47 @@ def GetBootImageTimestamp(boot_img):
   except ExternalError as e:
     logger.warning('Unable to get boot image timestamp: %s', e)
     return None
+
+
+def GetApexInfoFromTargetFiles(input_file):
+  """
+  Get information about system APEX stored in the input_file zip
+
+  Args:
+    input_file: The filename of the target build target-files zip..
+
+  Return:
+    A list of ota_metadata_pb2.ApexInfo() populated using the APEX stored in
+    /system partition of the input_file
+  """
+
+  # Extract the apex files so that we can run checks on them
+  tmp_dir = UnzipTemp(input_file, ["SYSTEM/apex/*"])
+  target_dir = os.path.join(tmp_dir, "SYSTEM/apex/")
+
+  apex_infos = []
+  for apex_filename in os.listdir(target_dir):
+    apex_filepath = os.path.join(target_dir, apex_filename)
+    apex_info = ota_metadata_pb2.ApexInfo()
+    # Open the apex file to retrieve information
+    manifest = apex_manifest.fromApex(apex_filepath)
+    apex_info.package_name = manifest.name
+    apex_info.version = manifest.version
+    # Use filename to determine if apex is compressed
+    # TODO(b/172911822): Using filename might be too fragile. We should use a
+    #  tool to verify the type here.
+    if apex_filename.endswith(".capex"):
+      apex_info.is_compressed = True
+    else:
+      apex_info.is_compressed = False
+    # Decompress compressed APEX to determine it's size
+    if apex_info.is_compressed:
+      decompressed_file_path = MakeTempFile(prefix="decompressed-", suffix=".apex")
+      # Decompression target path should not exist
+      os.remove(decompressed_file_path)
+      RunAndCheckOutput(['deapexer', 'decompress', '--input', apex_filepath, '--output', decompressed_file_path])
+      apex_info.decompressed_size = os.path.getsize(decompressed_file_path)
+
+    apex_infos.append(apex_info)
+
+  return apex_infos
