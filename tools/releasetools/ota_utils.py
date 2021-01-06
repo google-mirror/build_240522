@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import apex_manifest
 import copy
 import itertools
 import logging
@@ -21,7 +22,8 @@ import zipfile
 import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
-                    SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps)
+                    SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps,
+                    RunAndCheckOutput, UnzipTemp)
 
 logger = logging.getLogger(__name__)
 
@@ -562,3 +564,61 @@ def SignOutput(temp_zip_name, output_zip_name):
 
   SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
            whole_file=True)
+
+
+def GetApexInfoFromTargetFiles(input_file):
+  """
+  Get information about system APEX stored in the input_file zip
+
+  Args:
+    input_file: The filename of the target build target-files zip or directory.
+
+  Return:
+    A list of ota_metadata_pb2.ApexInfo() populated using the APEX stored in
+    /system partition of the input_file
+  """
+
+  # Extract the apex files so that we can run checks on them
+  if not isinstance(input_file, str):
+    raise RuntimeError("must pass filepath to target-files zip or directory")
+
+  if os.path.isdir(input_file):
+    tmp_dir = input_file
+  else:
+    tmp_dir = UnzipTemp(input_file, ["SYSTEM/apex/*"])
+  target_dir = os.path.join(tmp_dir, "SYSTEM/apex/")
+
+  apex_infos = []
+  for root, _, files in os.walk(target_dir):
+    for apex_filename in files:
+      apex_filepath = os.path.join(root, apex_filename)
+      apex_info = ota_metadata_pb2.ApexInfo()
+      # Open the apex file to retrieve information
+      manifest = apex_manifest.fromApex(apex_filepath)
+      apex_info.package_name = manifest.name
+      apex_info.version = manifest.version
+      # Check if the file is compressed or not
+      debugfs_path = "debugfs"
+      if OPTIONS.search_path:
+        debugfs_path = os.path.join(OPTIONS.search_path, "bin", "debugfs_static")
+      apex_type = RunAndCheckOutput(['deapexer', "--debugfs_path", debugfs_path, 'info', '--print-type', apex_filepath]).rstrip()
+      if apex_type == 'COMPRESSED':
+        apex_info.is_compressed = True
+      elif apex_type == 'UNCOMPRESSED':
+        apex_info.is_compressed = False
+      else:
+        raise RuntimeError('Not an APEX file: ' + apex_type)
+
+      # Decompress compressed APEX to determine its size
+      if apex_info.is_compressed:
+        decompressed_file_path = MakeTempFile(prefix="decompressed-",
+                                              suffix=".apex")
+        # Decompression target path should not exist
+        os.remove(decompressed_file_path)
+        RunAndCheckOutput(['deapexer', 'decompress', '--input', apex_filepath,
+                          '--output', decompressed_file_path])
+        apex_info.decompressed_size = os.path.getsize(decompressed_file_path)
+
+      apex_infos.append(apex_info)
+
+  return apex_infos
