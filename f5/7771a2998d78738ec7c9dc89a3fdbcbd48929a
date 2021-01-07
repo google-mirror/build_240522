@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+1: Colin Cross <ccross@android.com>
+Code-Review+2: Steve Muckle <smuckle@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Yifan Hong <elsk@google.com>
+Submitted-at: Thu, 07 Jan 2021 21:23:10 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1531942
+Project: platform/build
+Branch: refs/heads/master
