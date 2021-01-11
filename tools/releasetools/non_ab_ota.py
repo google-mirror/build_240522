@@ -22,7 +22,7 @@ import edify_generator
 import verity_utils
 from check_target_files_vintf import CheckVintfIfTrebleEnabled, HasPartition
 from common import OPTIONS
-from ota_utils import UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata, PropertyFiles
+from ota_utils import UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata, PropertyFiles, GetApexInfoFromTargetFiles
 
 logger = logging.getLogger(__name__)
 
@@ -129,6 +129,7 @@ def WriteFullOTAPackage(input_zip, output_file):
     target_info.WriteMountOemScript(script)
 
   metadata = GetPackageMetadata(target_info)
+  metadata.apex_info.extend(GetApexInfoFromTargetFiles(input_zip.filename))
 
   if not OPTIONS.no_signing:
     staging_file = common.MakeTempFile(suffix='.zip')
@@ -306,6 +307,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
       source_info.WriteMountOemScript(script)
 
   metadata = GetPackageMetadata(target_info, source_info)
+  metadata.apex_info.extend(GetApexInfoFromTargetFiles(target_zip.filename))
 
   if not OPTIONS.no_signing:
     staging_file = common.MakeTempFile(suffix='.zip')

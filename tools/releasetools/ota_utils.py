@@ -627,7 +627,7 @@ def GetApexInfoFromTargetFiles(input_file):
   Get information about system APEX stored in the input_file zip
 
   Args:
-    input_file: The filename of the target build target-files zip..
+    input_file: The filename of the target build target-files zip
 
   Return:
     A list of ota_metadata_pb2.ApexInfo() populated using the APEX stored in
@@ -635,8 +635,14 @@ def GetApexInfoFromTargetFiles(input_file):
   """
 
   # Extract the apex files so that we can run checks on them
+  if not isinstance(input_file, str):
+    raise RuntimeError("must pass filepath target-files")
+
   tmp_dir = UnzipTemp(input_file, ["SYSTEM/apex/*"])
   target_dir = os.path.join(tmp_dir, "SYSTEM/apex/")
+
+  if not os.path.exists(target_dir):
+    return []
 
   apex_infos = []
   for apex_filename in os.listdir(target_dir):

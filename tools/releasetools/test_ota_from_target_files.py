@@ -298,7 +298,6 @@ class OtaFromTargetFilesTest(test_utils.ReleaseToolsTestCase):
     uncompressed_apex_size = os.path.getsize(original_apex_filepath)
     self.assertEqual(apex_infos[0].decompressed_size, uncompressed_apex_size)
 
-
   def test_GetPackageMetadata_retrofitDynamicPartitions(self):
     target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     common.OPTIONS.retrofit_dynamic_partitions = True

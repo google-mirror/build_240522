@@ -233,7 +233,7 @@ import target_files_diff
 from check_target_files_vintf import CheckVintfIfTrebleEnabled
 from non_ab_ota import GenerateNonAbOtaPackage
 from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
-                       PropertyFiles)
+                       GetApexInfoFromTargetFiles, PropertyFiles)
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -1020,6 +1020,9 @@ def SupportsMainlineGkiUpdates(target_file):
 
 def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
+
+  apex_info = GetApexInfoFromTargetFiles(target_file)
+
   # Stage the output zip package for package signing.
   if not OPTIONS.no_signing:
     staging_file = common.MakeTempFile(suffix='.zip')
@@ -1072,6 +1075,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
+  # Add information about APEX packages inside the target_file
+  metadata.apex_info.extend(apex_info)
   # Generate payload.
   payload = Payload()
 
