@@ -21,7 +21,8 @@ import zipfile
 import ota_metadata_pb2
 from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
-                    SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps)
+                    SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps,
+                    ExternalError)
 
 logger = logging.getLogger(__name__)
 
@@ -186,12 +187,16 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
       # Update the partition's runtime device names and fingerprints
       partition_devices = set()
       partition_fingerprints = set()
-      for runtime_build_info in build_info_set:
-        partition_devices.add(
-            runtime_build_info.GetPartitionBuildProp('ro.product.device',
-                                                     partition))
-        partition_fingerprints.add(
-            runtime_build_info.GetPartitionFingerprint(partition))
+      try:
+        for runtime_build_info in build_info_set:
+          partition_devices.add(
+              runtime_build_info.GetPartitionBuildProp('ro.product.device',
+                                                       partition))
+          partition_fingerprints.add(
+              runtime_build_info.GetPartitionFingerprint(partition))
+      except ExternalError as e:
+        logger.warning('Unable to get %s partition device or fingerprint: %s',
+                       partition, e)
 
       partition_state.device.extend(sorted(partition_devices))
       partition_state.build.extend(sorted(partition_fingerprints))

@@ -133,7 +133,10 @@ PARTITIONS_WITH_BUILD_PROP = PARTITIONS_WITH_CARE_MAP + ['boot']
 
 # See sysprop.mk. If file is moved, add new search paths here; don't remove
 # existing search paths.
-RAMDISK_BUILD_PROP_REL_PATHS = ['system/etc/ramdisk/build.prop']
+RAMDISK_BUILD_PROP_REL_PATHS = [
+    'system/etc/ramdisk/build.prop',
+    'default.prop', # default location for Android 11
+]
 
 class ErrorCode(object):
   """Define error_codes for failures that happen during the actual
@@ -3660,7 +3663,7 @@ def GetBootImageBuildProp(boot_img):
     RunAndCheckOutput(['unpack_bootimg', '--boot_img', boot_img, '--out', tmp_dir])
     ramdisk = os.path.join(tmp_dir, 'ramdisk')
     if not os.path.isfile(ramdisk):
-      logger.warning('Unable to get boot image timestamp: no ramdisk in boot')
+      logger.warning('Unable to get boot image build props: no ramdisk in boot')
       return None
     uncompressed_ramdisk = os.path.join(tmp_dir, 'uncompressed_ramdisk')
     RunAndCheckOutput(['lz4', '-d', ramdisk, uncompressed_ramdisk])
@@ -3672,14 +3675,13 @@ def GetBootImageBuildProp(boot_img):
     RunAndCheckOutput(['toybox', 'cpio', '-F', abs_uncompressed_ramdisk, '-i'],
                cwd=extracted_ramdisk)
 
-    prop_file = None
     for search_path in RAMDISK_BUILD_PROP_REL_PATHS:
       prop_file = os.path.join(extracted_ramdisk, search_path)
       if os.path.isfile(prop_file):
-        break
-      logger.warning('Unable to get boot image timestamp: no %s in ramdisk', search_path)
+        return prop_file
+      logger.warning('Unable to get boot image build props: no %s in ramdisk', search_path)
 
-    return prop_file
+    return None
 
   except ExternalError as e:
     logger.warning('Unable to get boot image build props: %s', e)
