@@ -24,3 +24,14 @@ PRODUCT_PACKAGES += \
     product_compatibility_matrix.xml \
     product_manifest.xml \
     selinux_policy_product \
+
+# System server should not contain compiled code.
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := verify
+
+# Use the apex image for preopting.
+DEXPREOPT_USE_ART_IMAGE := true
+
+# Have the runtime pick up the JIT-zygote image.
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.boot-image=boot.art:/nonx/boot-framework.art!/system/etc/boot-image.prof \
+    dalvik.vm.image-dex2oat-filter=assume-verified
