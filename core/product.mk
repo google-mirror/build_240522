@@ -318,6 +318,10 @@ _product_single_value_vars += PRODUCT_DISABLE_SCUDO
 # List of extra VNDK versions to be included
 _product_list_vars += PRODUCT_EXTRA_VNDK_VERSIONS
 
+# List of extra compatible VNDK versions when assembling and checking
+# the VINTF.
+_product_list_vars += PRODUCT_VINTF_COMPATIBLE_VNDK_VERSIONS
+
 # Whether APEX should be compressed or not
 _product_single_value_vars += PRODUCT_COMPRESSED_APEX
 
