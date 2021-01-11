@@ -1071,7 +1071,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         AB_PARTITIONS).decode().strip().split("\n")
 
   # Metadata to comply with Android OTA package format.
-  metadata = GetPackageMetadata(target_info, source_info)
+  metadata = GetPackageMetadata(target_info, source_info, target_file)
   # Generate payload.
   payload = Payload()
 

@@ -128,7 +128,7 @@ def WriteFullOTAPackage(input_zip, output_file):
   if target_info.oem_props and not OPTIONS.oem_no_mount:
     target_info.WriteMountOemScript(script)
 
-  metadata = GetPackageMetadata(target_info)
+  metadata = GetPackageMetadata(target_info, target_file=input_zip.filename)
 
   if not OPTIONS.no_signing:
     staging_file = common.MakeTempFile(suffix='.zip')
@@ -305,7 +305,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_file):
     if not OPTIONS.oem_no_mount:
       source_info.WriteMountOemScript(script)
 
-  metadata = GetPackageMetadata(target_info, source_info)
+  metadata = GetPackageMetadata(target_info, source_info, target_zip.filename)
 
   if not OPTIONS.no_signing:
     staging_file = common.MakeTempFile(suffix='.zip')

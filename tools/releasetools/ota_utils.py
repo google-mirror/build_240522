@@ -222,7 +222,7 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
     device_state.timestamp = int(build_info.GetBuildProp('ro.build.date.utc'))
 
 
-def GetPackageMetadata(target_info, source_info=None):
+def GetPackageMetadata(target_info, source_info=None, target_file=None):
   """Generates and returns the metadata proto.
 
   It generates a ota_metadata protobuf that contains the info to be written
@@ -233,6 +233,7 @@ def GetPackageMetadata(target_info, source_info=None):
     target_info: The BuildInfo instance that holds the target build info.
     source_info: The BuildInfo instance that holds the source build info, or
         None if generating full OTA.
+    target_file: The filename of the target build target-files zip
 
   Returns:
     A protobuf to be written into package metadata entry.
@@ -276,6 +277,9 @@ def GetPackageMetadata(target_info, source_info=None):
   # Detect downgrades and set up downgrade flags accordingly.
   if is_incremental:
     HandleDowngradeMetadata(metadata_proto, target_info, source_info)
+
+  if target_file:
+    metadata_proto.apex_info.extend(GetApexInfoFromTargetFiles(target_file))
 
   return metadata_proto
 
@@ -571,7 +575,7 @@ def GetApexInfoFromTargetFiles(input_file):
   Get information about system APEX stored in the input_file zip
 
   Args:
-    input_file: The filename of the target build target-files zip..
+    input_file: The filename of the target build target-files zip
 
   Return:
     A list of ota_metadata_pb2.ApexInfo() populated using the APEX stored in
@@ -579,8 +583,14 @@ def GetApexInfoFromTargetFiles(input_file):
   """
 
   # Extract the apex files so that we can run checks on them
+  if not isinstance(input_file, str):
+    raise RuntimeError("must pass filepath target-files")
+
   tmp_dir = UnzipTemp(input_file, ["SYSTEM/apex/*"])
   target_dir = os.path.join(tmp_dir, "SYSTEM/apex/")
+
+  if not os.path.exists(target_dir):
+    return []
 
   apex_infos = []
   for apex_filename in os.listdir(target_dir):

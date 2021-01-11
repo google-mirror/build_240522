@@ -293,6 +293,19 @@ class OtaFromTargetFilesTest(test_utils.ReleaseToolsTestCase):
     uncompressed_apex_size = os.path.getsize(original_apex_filepath)
     self.assertEqual(apex_infos[0].decompressed_size, uncompressed_apex_size)
 
+  def test_GetPackageMetadata_compressedApex(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    target_files = construct_target_files(compressedApex=True)
+    apex_infos = GetPackageMetadata(target_info, target_file=target_files).apex_info
+    self.assertEqual(len(apex_infos), 1)
+    self.assertEqual(apex_infos[0].package_name, "com.android.apex.compressed")
+    self.assertEqual(apex_infos[0].version, 1)
+    self.assertEqual(apex_infos[0].is_compressed, True)
+    # Compare the decompressed APEX size with the original uncompressed APEX
+    original_apex_name = 'com.android.apex.compressed.v1_original.apex'
+    original_apex_filepath = os.path.join(test_utils.get_current_dir(), original_apex_name)
+    uncompressed_apex_size = os.path.getsize(original_apex_filepath)
+    self.assertEqual(apex_infos[0].decompressed_size, uncompressed_apex_size)
 
   def test_GetPackageMetadata_retrofitDynamicPartitions(self):
     target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
