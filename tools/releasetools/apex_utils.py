@@ -382,6 +382,71 @@ def SignUncompressedApex(avbtool, apex_data, payload_key, container_key,
   return signed_apex
 
 
+def SignCompressedApex(avbtool, apex_file, payload_key, container_key,
+                       container_pw, apk_keys, codename_to_api_level_map,
+                       no_hashtree, signing_args=None):
+  """Signs the current compressed APEX with the given payload/container keys.
+
+  Args:
+    apex_file: APEX compressed file.
+    payload_key: The path to payload signing key (w/ extension).
+    container_key: The path to container signing key (w/o extension).
+    container_pw: The matching password of the container_key, or None.
+    apk_keys: A dict that holds the signing keys for apk files.
+    codename_to_api_level_map: A dict that maps from codename to API level.
+    no_hashtree: Don't include hashtree in the signed APEX.
+    signing_args: Additional args to be passed to the payload signer.
+
+  Returns:
+    The path to the signed compressed APEX file.
+  """
+
+  # 1. Extract the original uncompressed apex.
+  uncompressed_apex_file = common.MakeTempFile(prefix='apex-', suffix='.apex')
+  common.RunAndCheckOutput(['deapexer', '--input', apex_file, '--output',
+                            uncompressed_apex_file])
+  with open(uncompressed_apex_file, 'rb') as input_fp:
+        uncompressed_apex_data = input_fp.read()
+
+  # 2. Sign uncompressed apex.
+  signed_uncompressed_apex_file = SignUncompressedApex(
+      avbtool,
+      uncompressed_apex_data,
+      payload_key=payload_key,
+      container_key=container_key,
+      container_pw=None,
+      codename_to_api_level_map=codename_to_api_level_map,
+      no_hashtree=no_hashtree,
+      apk_keys=apk_keys,
+      signing_args=signing_args)
+
+  # 3. Compress the signed apex.
+  compressed_apex = common.MakeTempFile(prefix='capex-container-', suffix='.capex')
+  common.RunAndCheckOutput(['apex_compression_tool',
+                            '--apex_compression_tool_path', os.getenv('PATH'),
+                            '--input', signed_uncompressed_apex_file,
+                            '--output', compressed_apex])
+
+  # 4. Sign the APEX container with container_key.
+  signed_compressed_apex = common.MakeTempFile(prefix='capex-container-',
+                                               suffix='.capex')
+
+  # Specify the 4K alignment when calling SignApk.
+  extra_signapk_args = OPTIONS.extra_signapk_args[:]
+  extra_signapk_args.extend(['-a', '4096'])
+
+  password = container_pw.get(container_key) if container_pw else None
+  common.SignFile(
+      aligned_apex,
+      signed_compressed_apex,
+      container_key,
+      password,
+      codename_to_api_level_map=codename_to_api_level_map,
+      extra_signapk_args=extra_signapk_args)
+
+  return signed_compressed_apex
+
+
 def SignApex(avbtool, apex_file, payload_key, container_key, container_pw,
              apk_keys, codename_to_api_level_map,
              no_hashtree, signing_args=None):
@@ -412,6 +477,17 @@ def SignApex(avbtool, apex_file, payload_key, container_key, container_pw,
       return SignUncompressedApex(
           avbtool,
           apex_data,
+          payload_key=payload_key,
+          container_key=container_key,
+          container_pw=None,
+          codename_to_api_level_map=codename_to_api_level_map,
+          no_hashtree=no_hashtree,
+          apk_keys=apk_keys,
+          signing_args=signing_args)
+    elif apex_type == 'COMPRESSED':
+      return SignCompressedApex(
+          avbtool,
+          apex_file,
           payload_key=payload_key,
           container_key=container_key,
           container_pw=None,
