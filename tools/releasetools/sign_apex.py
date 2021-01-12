@@ -54,12 +54,9 @@ logger = logging.getLogger(__name__)
 def SignApexFile(avbtool, apex_file, payload_key, container_key, no_hashtree,
                  apk_keys=None, signing_args=None, codename_to_api_level_map=None):
   """Signs the given apex file."""
-  with open(apex_file, 'rb') as input_fp:
-    apex_data = input_fp.read()
-
   return apex_utils.SignApex(
       avbtool,
-      apex_data,
+      apex_file,
       payload_key=payload_key,
       container_key=container_key,
       container_pw=None,
