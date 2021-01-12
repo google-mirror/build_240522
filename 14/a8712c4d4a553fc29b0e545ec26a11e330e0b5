@@ -1,0 +1,11 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Autosubmit+1: Yifan Hong <elsk@google.com>
+Code-Review+2: Victor Liu <victorliu@google.com>
+Code-Review+2: Tianjie Xu <xunchang@google.com>
+Verified+1: Victor Liu <victorliu@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 12 Jan 2021 23:58:54 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1548834
+Project: platform/build
+Branch: refs/heads/master
