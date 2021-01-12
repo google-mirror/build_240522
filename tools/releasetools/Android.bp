@@ -219,6 +219,8 @@ python_library_host {
         "lz4",
         "mkbootfs",
         "signapk",
+        "toybox",
+        "unpack_bootimg",
     ],
 }
 
