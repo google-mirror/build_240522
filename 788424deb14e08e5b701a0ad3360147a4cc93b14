@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007218249",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1541369?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "8ef73527_4a0e4983",
+          "description": "Change to \"tools/releasetools/ota_utils.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/ota_utils.py",
+              "range": {
+                "startLine": 656,
+                "startChar": 46,
+                "endLine": 656,
+                "endChar": 55
+              },
+              "replacement": "its size"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "250ab653_9e29b122",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-12T10:53:24Z",
+      "side": 1,
+      "message": "Common typo found: \"it\u0027s size\" -- should it be \"its size\"?\nor alternatively, it\u0027s a(n) ...\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 656,
+        "startChar": 46,
+        "endLine": 656,
+        "endChar": 55
+      },
+      "revId": "788424deb14e08e5b701a0ad3360147a4cc93b14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
