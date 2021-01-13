@@ -147,7 +147,7 @@ def WriteFullOTAPackage(input_zip, output_file):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  assert HasRecoveryPatch(input_zip, info_dict=OPTIONS.info_dict)
+  #assert HasRecoveryPatch(input_zip, info_dict=OPTIONS.info_dict)
 
   # Assertions (e.g. downgrade check, device properties check).
   ts = target_info.GetBuildProp("ro.build.date.utc")
@@ -240,10 +240,10 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   boot_img = common.GetBootableImage(
       "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
-  common.CheckSize(boot_img.data, "boot.img", target_info)
-  common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
+  #common.CheckSize(boot_img.data, "boot.img", target_info)
+  #common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
-  script.WriteRawImage("/boot", "boot.img")
+  #script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 10)
   device_specific.FullOTA_InstallEnd()
