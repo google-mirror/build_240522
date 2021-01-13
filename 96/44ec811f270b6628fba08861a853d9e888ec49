@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Autosubmit+1: Colin Cross <ccross@android.com>
+Code-Review+2: Jaewoong Jung <jungjw@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 13 Jan 2021 00:57:06 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1549235
+Project: platform/build
+Branch: refs/heads/master
