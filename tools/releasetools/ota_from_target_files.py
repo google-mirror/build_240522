@@ -272,6 +272,7 @@ OPTIONS.disable_fec_computation = False
 OPTIONS.disable_verity_computation = False
 OPTIONS.partial = None
 OPTIONS.custom_images = {}
+OPTIONS.disable_vabc = False
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
 DYNAMIC_PARTITION_INFO = 'META/dynamic_partitions_info.txt'
@@ -1018,6 +1019,10 @@ def SupportsMainlineGkiUpdates(target_file):
   pattern = re.compile(r"com\.android\.gki\..*\.apex")
   return pattern.search(output) is not None
 
+def IsVABCSupported(build_info):
+  vendor_prop = build_info.info_dict.get("vendor.build.prop")
+  return vendor_prop and vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true"
+
 def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
@@ -1035,9 +1040,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         "META/ab_partitions.txt is required for ab_update."
     target_info = common.BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
     source_info = common.BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
-    vendor_prop = source_info.info_dict.get("vendor.build.prop")
-    if vendor_prop and \
-        vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true":
+    if IsVABCSupported(source_info):
       # TODO(zhangkelvin) Remove this once FEC on VABC is supported
       logger.info("Virtual AB Compression enabled, disabling FEC")
       OPTIONS.disable_fec_computation = True
@@ -1047,7 +1050,9 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         "META/ab_partitions.txt is required for ab_update."
     target_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
     source_info = None
-
+  if not IsVABCSupported(target_info):
+    logger.warning("Virtual AB Compression not supported on target build, disable.")
+    OPTIONS.disable_vabc = True
   additional_args = []
 
   # Prepare custom images.
@@ -1093,6 +1098,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   if SupportsMainlineGkiUpdates(source_file):
     logger.warn("Detected build with mainline GKI, include full boot image.")
     additional_args.extend(["--full_boot", "true"])
+  if OPTIONS.disable_vabc:
+    additional_args.extend(["--disable_vabc", "true"])
 
   payload.Generate(
       target_file,
