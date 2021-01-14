@@ -1,0 +1,9 @@
+Code-Review+2: Steven Moreland <smoreland@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Janis Danisevskis <jdanis@google.com>
+Submitted-at: Thu, 14 Jan 2021 18:03:58 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1541312
+Project: platform/build
+Branch: refs/heads/master
