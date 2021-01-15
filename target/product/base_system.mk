@@ -347,6 +347,7 @@ PRODUCT_SYSTEM_PROPERTIES += debug.atrace.tags.enableflags=0
 PRODUCT_SYSTEM_PROPERTIES += persist.traced.enable=1
 
 PRODUCT_PROPERTY_OVERRIDES += ro.gfx.angle.supported=true
+PRODUCT_PROPERTY_OVERRIDES += ro.gfx.angle.builtin.name="libGLESv2_angle.so"
 
 # Packages included only for eng or userdebug builds, previously debug tagged
 PRODUCT_PACKAGES_DEBUG := \
