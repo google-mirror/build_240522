@@ -302,7 +302,6 @@ endif # EMMA_INSTRUMENT
 PRODUCT_HOST_PACKAGES += \
     BugReport \
     adb \
-    art-tools \
     atest \
     bcc \
     bit \
