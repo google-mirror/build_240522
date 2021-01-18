@@ -31,8 +31,13 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/product/% \
     system/system_ext/%
 
-# Split selinux policy
-PRODUCT_FULL_TREBLE_OVERRIDE := true
+# GSI should always support up-to-date platform features and built with the
+# latest build system defaults.
+# 100 is a pseudo API number that means "latest".
+PRODUCT_SHIPPING_API_LEVEL := 100
+
+# Don't check kernel VINTF for GSI.
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
 # Enable dynamic partitions to facilitate mixing onto Cuttlefish
 PRODUCT_USE_DYNAMIC_PARTITIONS := true

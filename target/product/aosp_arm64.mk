@@ -59,6 +59,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
 #
 ifeq (aosp_arm64,$(TARGET_PRODUCT))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_release.mk)
+
+# gsi_release.mk sets this flag to false.
+# Clear this flag so that vintf check is enforced on GKI.
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS :=
 endif
 
 
