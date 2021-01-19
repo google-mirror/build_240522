@@ -136,6 +136,7 @@ import gzip
 import io
 import itertools
 import logging
+import ota_metadata_pb2
 import os
 import re
 import shutil
@@ -148,6 +149,7 @@ from xml.etree import ElementTree
 
 import add_img_to_target_files
 import apex_utils
+from apex_utils import GetApexInfoFromTargetFiles
 import common
 
 
@@ -624,6 +626,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
     # Skip the care_map as we will regenerate the system/vendor images.
     elif filename in ["META/care_map.pb", "META/care_map.txt"]:
+      pass
+
+    # Skip apex_info.pb because we sign/modify apexes
+    elif filename == "META/apex_info.pb":
       pass
 
     # Updates system_other.avbpubkey in /product/etc/.
