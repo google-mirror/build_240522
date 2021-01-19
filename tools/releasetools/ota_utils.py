@@ -597,7 +597,10 @@ def GetApexInfoFromTargetFiles(input_file):
     apex_info.package_name = manifest.name
     apex_info.version = manifest.version
     # Check if the file is compressed or not
-    apex_type = RunAndCheckOutput(['deapexer', 'info', '--print-type', apex_filepath]).rstrip()
+    debugfs_path = "debugfs"
+    if OPTIONS.search_path:
+      debugfs_path = os.path.join(OPTIONS.search_path, "bin", "debugfs_static")
+    apex_type = RunAndCheckOutput(['deapexer', "--debugfs_path", debugfs_path, 'info', '--print-type', apex_filepath]).rstrip()
     if apex_type == 'COMPRESSED':
       apex_info.is_compressed = True
     elif apex_type == 'UNCOMPRESSED':
