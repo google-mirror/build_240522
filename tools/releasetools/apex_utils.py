@@ -489,7 +489,12 @@ def GetApexInfoFromTargetFiles(input_file):
                                             suffix=".apex")
       # Decompression target path should not exist
       os.remove(decompressed_file_path)
-      RunAndCheckOutput(['deapexer', 'decompress', '--input', apex_filepath,
+      deapexer = 'deapexer'
+      if OPTIONS.search_path:
+        deapexer_path = os.path.join(OPTIONS.search_path, "deapexer")
+        if os.path.isfile(deapexer_path):
+          deapexer = deapexer_path
+      RunAndCheckOutput([deapexer, 'decompress', '--input', apex_filepath,
                          '--output', decompressed_file_path])
       apex_info.decompressed_size = os.path.getsize(decompressed_file_path)
 
