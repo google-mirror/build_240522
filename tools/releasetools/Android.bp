@@ -22,6 +22,27 @@
 //    `releasetools_X_defaults` in their defaults.
 //
 
+
+python_library_host {
+    name: "ota_utils",
+    srcs: [
+        "ota_utils.py",
+    ],
+    libs: [
+        "ota_metadata_proto",
+        "apex_manifest",
+        "releasetools_common",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: true,
+        },
+    },
+}
+
 python_defaults {
     name: "releasetools_add_img_to_target_files_defaults",
     srcs: [
@@ -31,6 +52,8 @@ python_defaults {
         "releasetools_build_image",
         "releasetools_build_super_image",
         "releasetools_common",
+        "releasetools_apex_utils",
+        "ota_metadata_proto",
     ],
     required: [
         "care_map_generator",
@@ -114,7 +137,6 @@ python_defaults {
         "edify_generator.py",
         "non_ab_ota.py",
         "ota_from_target_files.py",
-        "ota_utils.py",
         "target_files_diff.py",
     ],
     libs: [
@@ -123,6 +145,7 @@ python_defaults {
         "releasetools_common",
         "releasetools_verity_utils",
         "apex_manifest",
+        "ota_utils",
     ],
     required: [
         "brillo_update_payload",

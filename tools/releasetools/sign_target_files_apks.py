@@ -136,6 +136,7 @@ import gzip
 import io
 import itertools
 import logging
+import ota_metadata_pb2
 import os
 import re
 import shutil
@@ -148,6 +149,7 @@ from xml.etree import ElementTree
 
 import add_img_to_target_files
 import apex_utils
+from apex_utils import GetApexInfoFromTargetFiles
 import common
 
 
@@ -626,6 +628,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     elif filename in ["META/care_map.pb", "META/care_map.txt"]:
       pass
 
+    # Skip apex_info.pb because we sign/modify apexes
+    elif filename == "META/apex_info.pb":
+      pass
+
     # Updates system_other.avbpubkey in /product/etc/.
     elif filename in (
         "PRODUCT/etc/security/avb/system_other.avbpubkey",
@@ -683,6 +689,21 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   # Write back misc_info with the latest values.
   ReplaceMiscInfoTxt(input_tf_zip, output_tf_zip, misc_info)
 
+  # Re-generate META/apex_info.pb
+  ReplaceApexMeta(output_tf_zip)
+
+def ReplaceApexMeta(output_tf_zip):
+  apex_infos = GetApexInfoFromTargetFiles(output_tf_zip)
+  apex_metadata_proto = ota_metadata_pb2.ApexMetadata()
+  apex_metadata_proto.apex_info.extend(apex_infos)
+  apex_info_bytes = apex_metadata_proto.SerializeToString()
+
+  output_file = os.path.join(OPTIONS.input_tmp, "META", "apex_info.pb")
+  arc_name = "META/apex_info.pb"
+  if arc_name in output_tf_zip.namelist():
+    OPTIONS.replace_updated_files_list.append(arc_name)
+  else:
+    common.ZipWrite(output_tf_zip, output_file, arc_name)
 
 def ReplaceCerts(data):
   """Replaces all the occurences of X.509 certs with the new ones.
