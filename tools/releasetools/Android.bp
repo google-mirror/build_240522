@@ -31,6 +31,8 @@ python_defaults {
         "releasetools_build_image",
         "releasetools_build_super_image",
         "releasetools_common",
+        "releasetools_apex_utils",
+        "ota_metadata_proto",
     ],
     required: [
         "care_map_generator",
@@ -114,8 +116,8 @@ python_defaults {
         "edify_generator.py",
         "non_ab_ota.py",
         "ota_from_target_files.py",
-        "ota_utils.py",
         "target_files_diff.py",
+        "ota_utils.py",
     ],
     libs: [
         "ota_metadata_proto",
