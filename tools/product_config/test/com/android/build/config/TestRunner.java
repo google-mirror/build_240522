@@ -39,7 +39,7 @@ public class TestRunner {
                         System.out.println(failure.getTrace());
                     }
                 });
-        Result result = junit.run(//CsvParserTest.class,
+        Result result = junit.run(CsvParserTest.class,
 //                                  DumpConfigParserTest.class,
                                   ErrorReporterTest.class,
 //                                  KatiTest.class,
