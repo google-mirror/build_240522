@@ -266,11 +266,10 @@ ifneq ($(LOCAL_SDK_VERSION),)
       endif
     endif
 
-    ifneq (,$(filter armeabi armeabi-v7a,$(my_cpu_variant)))
-      my_ndk_stl_static_lib += $(my_libcxx_libdir)/libunwind.a
-    endif
-
-    my_ldlibs += -ldl
+    # TODO: --exclude-libs can be removed once all symbols in libunwind.a are
+    # hidden.
+    my_static_libraries += libunwind
+    my_ldflags += -Wl,--exclude-libs,libunwind.a
   else # LOCAL_NDK_STL_VARIANT must be none
     # Do nothing.
   endif
