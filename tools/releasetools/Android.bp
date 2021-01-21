@@ -108,6 +108,21 @@ python_library_host {
     },
 }
 
+cc_library_static {
+    name: "ota_metadata_proto_cc",
+    host_supported: true,
+    recovery_available: true,
+    srcs: ["ota_metadata.proto"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    proto: {
+        canonical_path_from_root: false,
+        export_proto_headers: true,
+    },
+}
+
 python_defaults {
     name: "releasetools_ota_from_target_files_defaults",
     srcs: [
