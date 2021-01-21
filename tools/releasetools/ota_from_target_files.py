@@ -1142,6 +1142,13 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     else:
       logger.warning("Cannot find care map file in target_file package")
 
+  # Copy apex_info.pb over to generated OTA package.
+  with zipfile.ZipFile(target_file) as target_file_zip:
+    apex_info_entry = target_file_zip.getinfo("META/apex_info.pb")
+    if apex_info_entry:
+      with target_file_zip.open(apex_info_entry, "r") as zfp:
+        common.ZipWriteStr(output_zip, "apex_info.pb", zfp.read(),
+                          compress_type=zipfile.ZIP_STORED)
   common.ZipClose(target_zip)
 
   CheckVintfIfTrebleEnabled(target_file, target_info)
