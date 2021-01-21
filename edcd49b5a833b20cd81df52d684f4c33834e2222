@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484891",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e4c6d7ab_a2dff568",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:48:21Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "edcd49b5a833b20cd81df52d684f4c33834e2222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484891",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f7f2ba46_69623bfc",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:48:21Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 180,
+        "startChar": 89,
+        "endLine": 180,
+        "endChar": 90
+      },
+      "revId": "edcd49b5a833b20cd81df52d684f4c33834e2222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484891",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "31d7cf79_f3895090",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:48:21Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 16
+      },
+      "revId": "edcd49b5a833b20cd81df52d684f4c33834e2222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484891",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "fa0cbb60_d2a63672",
+        "filename": "tools/product_config/src/com/android/build/config/Path.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:48:21Z",
+      "side": 1,
+      "message": "Wrong casing for \"join\". static final variables should be ALL_UPPERCASE.",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "edcd49b5a833b20cd81df52d684f4c33834e2222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
