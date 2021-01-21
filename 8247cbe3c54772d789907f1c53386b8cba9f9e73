@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484853",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554919?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e511f000_403228fe",
+        "filename": "tools/product_config/src/com/android/build/config/KatiCommandImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:48:17Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 4
+      },
+      "revId": "8247cbe3c54772d789907f1c53386b8cba9f9e73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
