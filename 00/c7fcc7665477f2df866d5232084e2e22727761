@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Jiyong Park <jiyong@google.com>
+Submitted-by: Elliott Hughes <enh@google.com>
+Submitted-at: Fri, 22 Jan 2021 23:37:46 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1556841
+Project: platform/build
+Branch: refs/heads/master
