@@ -1,0 +1,9 @@
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Joe Onorato <joeo@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Joe Onorato <joeo@google.com>
+Submitted-at: Fri, 22 Jan 2021 18:15:35 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1467030
+Project: platform/build
+Branch: refs/heads/master
