@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007499144",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "95f8d691_2bf1cb91",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-22T03:56:09Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "c837e79b00b26bf80b0222f54ccedb7dd39991df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007499144",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "815955b8_6fe30bf7",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-22T03:56:09Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 180,
+        "startChar": 89,
+        "endLine": 180,
+        "endChar": 90
+      },
+      "revId": "c837e79b00b26bf80b0222f54ccedb7dd39991df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007499144",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1554920?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a4ccdbd1_afb3fd47",
+        "filename": "tools/product_config/src/com/android/build/config/DumpConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-22T03:56:09Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 16
+      },
+      "revId": "c837e79b00b26bf80b0222f54ccedb7dd39991df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
