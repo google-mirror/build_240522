@@ -59,8 +59,8 @@ ifeq (eng,$(TARGET_BUILD_VARIANT))
         pm.dexopt.boot?=extract
 else
     PRODUCT_SYSTEM_PROPERTIES += \
-        pm.dexopt.first-boot?=quicken \
-        pm.dexopt.boot?=verify
+        pm.dexopt.first-boot?=verify \
+        pm.dexopt.boot?=extract
 endif
 
 # The install filter is speed-profile in order to enable the use of
