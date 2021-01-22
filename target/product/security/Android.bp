@@ -1,4 +1,14 @@
 // AOSP test certificate
+package {
+    default_applicable_licenses: ["build_make_target_product_security_license"],
+}
+
+license {
+    name: "build_make_target_product_security_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0","SPDX-license-identifier-MIT","SPDX-license-identifier-BSD","SPDX-license-identifier-GPL"],
+}
+
 android_app_certificate {
     name: "aosp-testkey",
     certificate: "testkey",

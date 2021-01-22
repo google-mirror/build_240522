@@ -12,6 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+package {
+    default_applicable_licenses: ["build_make_target_product_gsi_license"],
+}
+
+license {
+    name: "build_make_target_product_gsi_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0","SPDX-license-identifier-MIT","SPDX-license-identifier-BSD","SPDX-license-identifier-GPL"],
+}
+
 filegroup {
     name: "vndk_lib_lists",
     srcs: [

@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["build_make_tools_fs_get_stats_license"],
+}
+
+license {
+    name: "build_make_tools_fs_get_stats_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0","SPDX-license-identifier-MIT","SPDX-license-identifier-BSD","SPDX-license-identifier-GPL"],
+}
+
 cc_binary_host {
     name: "fs_get_stats",
     srcs: ["fs_get_stats.c"],

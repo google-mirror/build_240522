@@ -22,6 +22,16 @@
 //    `releasetools_X_defaults` in their defaults.
 //
 
+package {
+    default_applicable_licenses: ["build_make_tools_releasetools_license"],
+}
+
+license {
+    name: "build_make_tools_releasetools_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0","legacy_unencumbered"],
+}
+
 python_defaults {
     name: "releasetools_add_img_to_target_files_defaults",
     srcs: [
