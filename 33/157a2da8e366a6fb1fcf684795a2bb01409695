@@ -1,0 +1,14 @@
+Verified+1: SzuWei Lin <szuweilin@google.com>
+Autosubmit+1: SzuWei Lin <szuweilin@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Alistair Delva <adelva@google.com>
+Code-Review+2: Hung-ying Tyan <tyanh@google.com>
+Code-Review+1: Anton Hansson <hansson@google.com>
+Code-Review+2: SzuWei Lin <szuweilin@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 26 Jan 2021 09:18:49 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1398276
+Project: platform/build
+Branch: refs/heads/master
