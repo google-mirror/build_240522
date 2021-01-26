@@ -859,6 +859,7 @@ def main(argv):
   target_out = argv[3]
 
   glob_dict = LoadGlobalDict(glob_dict_file)
+  print(glob_dict)
   if "mount_point" in glob_dict:
     # The caller knows the mount point and provides a dictionary needed by
     # BuildImage().
