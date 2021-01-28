@@ -63,6 +63,10 @@ public class ConfigBase {
         mProductVars.put(name, type);
     }
 
+    public TreeMap<String, VarType> getProductVars() {
+        return mProductVars;
+    }
+
     public VarType getVarType(String name) {
         final VarType t = mProductVars.get(name);
         if (t != null) {
