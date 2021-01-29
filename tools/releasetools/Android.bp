@@ -177,6 +177,9 @@ python_library_host {
         "ota_metadata_proto",
         "releasetools_common",
     ],
+    required: [
+        "deapexer",
+    ],
 }
 
 python_library_host {
