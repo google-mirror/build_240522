@@ -1,0 +1,12 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Autosubmit+1: Kelvin Zhang <zhangkelvin@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Mohammad Islam <samiul@google.com>
+Code-Review+1: Tianjie Xu <xunchang@google.com>
+Presubmit-Verified-Together+1: Treehugger Robot <treehugger-gerrit@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 29 Jan 2021 10:34:19 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1562632
+Project: platform/build
+Branch: refs/heads/master
