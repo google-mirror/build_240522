@@ -36,6 +36,7 @@ python_defaults {
     ],
     required: [
         "care_map_generator",
+        "deapexer",
     ],
 }
 
@@ -176,6 +177,9 @@ python_library_host {
         "apex_manifest",
         "ota_metadata_proto",
         "releasetools_common",
+    ],
+    required: [
+        "deapexer",
     ],
 }
 
@@ -491,6 +495,9 @@ python_binary_host {
         "releasetools_apex_utils",
         "releasetools_common",
     ],
+    required: [
+        "deapexer",
+    ],
 }
 
 python_binary_host {
@@ -503,6 +510,9 @@ python_binary_host {
         "releasetools_add_img_to_target_files",
         "releasetools_apex_utils",
         "releasetools_common",
+    ],
+    required: [
+        "deapexer",
     ],
 }
 
