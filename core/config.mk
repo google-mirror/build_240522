@@ -996,6 +996,10 @@ endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 # hiddenapi-index.csv.
 BOARD_PREBUILT_HIDDENAPI_DIR ?=
 .KATI_READONLY := BOARD_PREBUILT_HIDDENAPI_DIR
+# By default, we use the frameworks/base/config/boot-image-profile.txt to
+# profile boot jars. However, you can use an alternate file
+BOARD_ALT_BOOT_IMAGE_PROF ?=
+.KATI_READONLY := BOARD_ALT_BOOT_IMAGE_PROF
 
 # ###############################################################
 # Set up final options.
