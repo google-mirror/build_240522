@@ -231,7 +231,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (3311c2 Merge "Merge empty history for sparse-6719730-L6660000077115)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+      PLATFORM_SECURITY_PATCH := 2020-11-05
+>>>>>>> BRANCH (52a76c Merge "Version bump to RT11.210113.002.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP
