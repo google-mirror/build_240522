@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd33a394_1ddfd97a",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-02T20:55:37Z",
+      "side": 1,
+      "message": "Do you want to update the `sgrep` definitions too? These are source files.",
+      "revId": "1431ab8cf9701641e01f2bab3b3f298a5287d436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
