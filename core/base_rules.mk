@@ -508,6 +508,7 @@ my_path_comp :=
 ###########################################################
 
 my_init_rc_installed :=
+my_init_rc_path :=
 my_init_rc_pairs :=
 my_installed_symlinks :=
 my_default_test_module :=
@@ -534,7 +535,8 @@ ifndef LOCAL_IS_HOST_MODULE
 # Rule to install the module's companion init.rc.
 my_init_rc := $(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC)
 ifneq ($(strip $(my_init_rc)),)
-my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(LOCAL_PATH)/$(rc):$(TARGET_OUT$(partition_tag)_ETC)/init/$(notdir $(rc)))
+my_init_rc_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
+my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(LOCAL_PATH)/$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
 my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
 
 # Make sure we only set up the copy rules once, even if another arch variant
