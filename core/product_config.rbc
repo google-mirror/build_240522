@@ -16,7 +16,12 @@ def _merge(dest, src):
     """
     for p in dir(src):
         __update_property(dest, p, getattr(src, p))
+#        __trace(src, p, ["PRODUCT_DEFAULT_PROPERTY_OVERRIDES", "PRODUCT_VENDOR_PROPERTIES", "PRODUCT_PACKAGES_DEBUG"])
 
+def __trace(ps, attr, match):
+    if attr in match:
+        print(getattr(ps, "__name", "???") + ":", attr, "=", getattr(ps, attr))
+ 
 
 def __update_property(ps, attr, new_value):
     old_value = getattr(ps, attr) if hasattr(ps, attr) else None
@@ -32,20 +37,176 @@ def __update_property(ps, attr, new_value):
         ps[attr] = old_value + [new_value] if new_value not in old_value else old_value
 
 
-def _printvars(mod, dedup=True):
+def _printvars(mod):
     """Prints known configuration variables"""
-    if dedup:
+    if not (_dedup_printed_vars or _sort_printed_vars):
         for attr in sorted(dir(mod)):
-            v = getattr(mod, attr)
-            if type(v) == "list":
-                seen = dict()
-                for item in v:
-                    seen[item] = 0
-                v = seen.keys()
-            print(attr, "=", repr(v))
-    else:
-        for attr in sorted(dir(mod)):
-            print(attr, "=", getattr(mod, attr))
+            print(attr, "=", repr(getattr(mod, attr)))
+        return
+
+    for attr in sorted(dir(mod)):
+        v = getattr(mod, attr)
+        if type(v) == "list":
+            seen = dict()
+            for item in v:
+                seen[item] = 0
+            v = sorted(seen.keys()) if _sort_printed_vars else seen.keys()
+        print(attr, "=", repr(v))
+
+
+def _product_configuration(top_pcm_name, top_pcm):
+    """Creates configuration."""
+    globals = _global_init()
+
+    # PCM means "Product Configuration Module", i.e., a Starlark
+    # file whose body consists of a single init function.
+    # Creating product configuration consists of two steps.
+    #
+    # First, a top level PCM is executed. The execution updates the
+    # global state and returns the configuration settings and the set 
+    # of child PCMs. The chidren are sorted alphabetically by name
+    # (i.e., their path in the source tree) and executed in turn. 
+    # Overall, the PCMs are executed in prefix order, but each PCM
+    # is executed only the first time.
+    # The child PCMs set is built during the PCM execution as a result
+    # of the inherit-product statement execution. Besides adding the
+    # referenced PCM to the child PCMs set, it also appends the reference
+    # to this PCM to all the configuration settings which are lists. 
+    # Note that the PCM code sets the initial value of each configuration
+    # settings which is a list to the list of reference to the PCMs defined
+    # so far.
+    # 
+    # The second step traverses the PCM tree in the postfix order evaluating
+    # to evaluate the references to the child PCMs.
+
+    config_postfix = []     # Configs in postfix order
+    # Each PCM is represented by a quadruple of function, config, children names
+    # and readyness (that is, the configurations from inherited PCMs have been
+    # substituted).
+    configs = { top_pcm_name: (top_pcm, None, [], False)}  # All known PCMs
+
+    stash = []              # Configs to push once their descendants are done
+
+    # Use queue data type to traverse the PCM. An item in the queue
+    # is used to process a single module and contains PCM's name
+    # and its height in the product configuration tree.
+    pcm_queue = queue()
+    pcm_queue.write(module("node", name=top_pcm_name, height = 0))
+    pcm_count = 0
+    for n in pcm_queue:
+        pcm_queue.read()    # It's the same as 'n'
+
+        pcm, cfg, c, _ = configs[n.name][0]
+        # each PCM is executed once
+        if cfg != None:
+            continue
+        # Push ancestors until we reach this node's height
+        config_postfix.extend([stash.pop() for i in range(len(stash) - n.height)])
+
+        # Run this one, obtaining its configuration and child PCMs.
+        if _trace_pcm_execution:
+            print("%s:", n.name)
+        cfg, children = pcm(globals)
+        if _trace_pcm_execution:
+            print("   ", children.join("  "))
+        configs[n.name] = (pcm, cfg, children.keys(), False)
+        pcm_count = pcm_count+1
+
+        if len(children) == 0:
+            # Leaf PCM goes straight to the config_postfix
+            config_postfix.append(cfg)
+            continue
+
+        # Stash this PCM, process children in the sorted order
+        stash.append(n.name)
+        for child_name in sorted(children, reverse=true):
+            configs[child_name] = (chidren[child_name], None, [], False)
+            pcm_queue.unread(module("node", name=child_name, height=len(stash)))
+        
+    # Flush the stash
+    config_postfix.extend([stash.pop() for i in range(len(stash))])
+    if len(config_postfix) != pcm_count:
+        fail("Ran %d modules but postfix tree has only %d entries" % (pcm_count, len(config_postfix)))
+
+
+    # Traverse the tree from the bottom, evaluating inherited values
+    for pcm_name in config_postfix:
+        pcm, cfg, children_names, ready = configs[pcm_name]
+        # Asserts:
+        if cfg == None:
+            fail("%s: has not been run" % pcm_name)
+        if ready:
+            fail("%s: is already ready" % pcm_name)
+        for child_name in child_names:
+            if not configs[child_name][3]:
+                fail("%s: child is not ready" % child_name)
+
+        _substitute_inherited(configs, pcm_name, cfg)
+        _percolate_inherited(configs, pcm_name, children_names)
+        configs[pcm_name] = pcm, cfg, children_names, True
+    
+    return configs[top_pcm_name]
+
+
+def _substitute_inherited(configs, pcm_name, cfg):
+    """Substitutes inherited values in all the configuration settings."""
+    for attr in dir(cfg):
+        val = cfg[attr]
+        # TODO(asmundak): should we handle single vars?
+        if type(val) != "list":
+            continue
+
+        cfg[attr] = _value_expand(configs, val)
+
+
+
+def _value_expand(configs, values_list)
+    """Expands references to inherited values in a given list."""
+    l = []
+    for item in values_list:
+        # Inherited values are 1-tuples
+        if type(item) != "tuple":
+            l.append(item)
+            continue
+        child_name = item[0]
+        child = configs[child_name]
+        if not child[3]:
+            fail("%s should be ready" % child_name)
+        child_cfg = child[1]
+        if hasattr(child_cfg, attr):
+            l.extend(getattr(child_cfg, attr))
+    return l
+
+
+def _percolate_inherited(configs, cfg, children_names)
+    """Percolates the settings that are present only PCM's children."""
+    percolated_attrs = {}
+    for child_name in children_names:
+        child_cfg = configs[child_name][1]
+        for attr in dir(child_cfg):
+            # TODO(asmundak): handle single variables, too.
+            value = child_cfg[attr]
+            if type(value) != "list":
+                continue
+            if attr in percolated_attrs:
+                # We already are percolating this one, just add this list
+                cfg[attr].extend(child_cfg[attr])
+            elif hasattr(cfg, attr):
+                fail("%s already exists", attr)
+            else:
+                l = child_cfg[attr]
+                percolated_attrs[attr] = True
+                cfg[attr] = child_cfg[attr]
+    
+
+def _inherit_pcm(cfg, pcm_name):
+    """Adds the reference to the inherited module."""
+    for attr in dir(cfg):
+        val = getattr(cfg, attr)
+        if type(val) != "list":
+            continue
+        # Append is as a 1-tuple, to distinguish from regular value
+        cfg[attr].append((pcm_name,))
 
 
 def _addprefix(prefix, string_or_list):
@@ -202,6 +363,9 @@ def _mkinfo(file, message=""):
     print(message)
 
 
+_dedup_printed_vars = True
+_sort_printed_vars = True
+
 rblf = module("rblf",
               addprefix=_addprefix,
               addsuffix=_addsuffix,
@@ -219,6 +383,7 @@ rblf = module("rblf",
               mkerror=_mkerror,
               mkwarning=_mkwarning,
               printvars=_printvars,
+              product_configuration=_product_configuration,
               require_artifacts_in_path=_require_artifacts_in_path,
               warning=_mkwarning,
               )
