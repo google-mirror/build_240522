@@ -229,11 +229,12 @@ endef
 # $(6): module load list filename
 # $(7): module archive
 # $(8): staging dir for stripped modules
-# $(9): module directory name
-# Returns the a list of src:dest pairs to install the modules using copy-many-files.
+# $(9): module blocklist file
+# $(10): module directory name
+# Returns a list of src:dest pairs to install the modules using copy-many-files.
 define build-image-kernel-modules
-  $(if $(9), \
-    $(eval _dir := $(9)/), \
+  $(if $(10), \
+    $(eval _dir := $(10)/), \
     $(eval _dir :=)) \
   $(foreach module,$(1), \
     $(eval _src := $(module)) \
@@ -241,11 +242,14 @@ define build-image-kernel-modules
       $(eval _src := $(8)/$(notdir $(module))) \
       $(eval $(call copy-and-strip-kernel-module,$(module),$(_src)))) \
     $(_src):$(2)/lib/modules/$(_dir)$(notdir $(module))) \
-  $(eval $(call build-image-kernel-modules-depmod,$(1),$(3),$(4),$(5),$(6),$(7),$(2),$(9))) \
+  $(eval $(call build-image-kernel-modules-depmod,$(1),$(3),$(4),$(5),$(6),$(7),$(2),$(10))) \
   $(4)/$(DEPMOD_STAGING_SUBDIR)/modules.dep:$(2)/lib/modules/$(_dir)modules.dep \
   $(4)/$(DEPMOD_STAGING_SUBDIR)/modules.alias:$(2)/lib/modules/$(_dir)modules.alias \
   $(4)/$(DEPMOD_STAGING_SUBDIR)/modules.softdep:$(2)/lib/modules/$(_dir)modules.softdep \
-  $(4)/$(DEPMOD_STAGING_SUBDIR)/$(6):$(2)/lib/modules/$(_dir)$(6)
+  $(4)/$(DEPMOD_STAGING_SUBDIR)/$(6):$(2)/lib/modules/$(_dir)$(6) \
+  $(if $(9), \
+    $(eval $(call build-image-kernel-modules-blocklist-file,$(4)/modules.blocklist,$(9))) \
+    $(4)/modules.blocklist:$(2)/lib/modules/$(_dir)modules.blocklist)
 endef
 
 # $(1): modules list
@@ -294,6 +298,20 @@ $(3)/$(DEPMOD_STAGING_SUBDIR)/modules.dep: $(1) $(6)
 	touch $$(PRIVATE_LOAD_FILE)
 endef
 
+# $(1): destination pathname
+# $(2): source blocklist file
+# Returns a build rule that checks the syntax of and installs a kernel modules
+# blocklist file. For use via $(eval).
+define build-image-kernel-modules-blocklist-file
+$(1): $(2)
+	@echo "modprobe blocklist $$(@)"
+	$(hide) grep -vE '^$$$$|^#' <"$$<" | \
+	  awk 'NF != 2 || $$$$1 != "blocklist" \
+	         { print "Invalid blocklist line: " $$$$0 >"/dev/stderr"; exit_status = 1 } \
+	       END { exit exit_status }'
+	$$(copy-file-to-target)
+endef
+
 # $(1): staging dir
 # $(2): modules list
 # $(3): module load list
@@ -331,7 +349,7 @@ $(if $(5),\
 $(if $(strip $(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver))$(BOARD_$(1)_KERNEL_MODULES_ARCHIVE$(_sep)$(_kver))),\
   $(if $(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver)),,\
     $(eval BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver) := $(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)))) \
-  $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)),$(2),$(3),$(call intermediates-dir-for,PACKAGING,depmod_$(1)$(_sep)$(_kver)),$(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver)),$(4),$(BOARD_$(1)_KERNEL_MODULES_ARCHIVE$(_sep)$(_kver)),$(_stripped_staging_dir),$(_kver))))
+  $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)),$(2),$(3),$(call intermediates-dir-for,PACKAGING,depmod_$(1)$(_sep)$(_kver)),$(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver)),$(4),$(BOARD_$(1)_KERNEL_MODULES_ARCHIVE$(_sep)$(_kver)),$(_stripped_staging_dir),$(BOARD_$(1)_KERNEL_MODULES_BLOCKLIST_FILE$(_sep)$(_kver)),$(_kver))))
 endef
 
 # $(1): kernel module directory name (top is an out of band value for no directory)
