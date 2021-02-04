@@ -20,6 +20,7 @@ $(MODULE_INFO_JSON):
 			'"srcjars": [$(foreach w,$(sort $(ALL_MODULES.$(m).SRCJARS)),"$(w)", )], ' \
 			'"classes_jar": [$(foreach w,$(sort $(ALL_MODULES.$(m).CLASSES_JAR)),"$(w)", )], ' \
 			'"test_mainline_modules": [$(foreach w,$(sort $(ALL_MODULES.$(m).TEST_MAINLINE_MODULES)),"$(w)", )], ' \
+			'"test_executable": [$(foreach w,$(sort $(ALL_MODULES.$(m).TEST_EXECUTABLE)),"$(w)", )], ' \
 			'"is_unit_test": "$(ALL_MODULES.$(m).IS_UNIT_TEST)", ' \
 			'},\n' \
 	 ) | sed -e 's/, *\]/]/g' -e 's/, *\}/ }/g' -e '$$s/,$$//' >> $@
