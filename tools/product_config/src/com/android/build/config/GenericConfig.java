@@ -26,6 +26,7 @@ import java.util.TreeMap;
  * Language-agnostic representation of a configuration statement.
  */
 public class GenericConfig extends ConfigBase {
+
     /**
      * The config files that were imported in this config pass.
      */
