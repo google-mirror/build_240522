@@ -22,6 +22,7 @@ import argparse
 import subprocess
 import sys
 import re
+import io
 
 CONFIG_PREFIX = b'IKCFG_ST'
 GZIP_HEADER = b'\037\213\010'
@@ -39,12 +40,12 @@ COMPRESSION_ALGO = (
 # "Linux version " UTS_RELEASE " (" LINUX_COMPILE_BY "@"
 # LINUX_COMPILE_HOST ") (" LINUX_COMPILER ") " UTS_VERSION "\n";
 LINUX_BANNER_PREFIX = b'Linux version '
-LINUX_BANNER_REGEX = LINUX_BANNER_PREFIX + \
+LINUX_BANNER_REGEX = LINUX_BANNER_PREFIX.decode() + \
     r'(?P<release>(?P<version>[0-9]+[.][0-9]+[.][0-9]+).*) \(.*@.*\) \((?P<compiler>.*)\) .*\n'
 
 
 def get_from_release(input_bytes, start_idx, key):
-  null_idx = input_bytes.find('\x00', start_idx)
+  null_idx = input_bytes.find(b'\x00', start_idx)
   if null_idx < 0:
     return None
   try:
@@ -140,7 +141,7 @@ def try_decompress(cmd, search_bytes, input_bytes):
   while True:
     idx = input_bytes.find(search_bytes, idx)
     if idx < 0:
-      raise StopIteration()
+      return
 
     yield try_decompress_bytes(cmd, input_bytes[idx:])
     idx += 1
@@ -176,7 +177,12 @@ def dump_to_file(f, dump_fn, input_bytes, desc):
   if f is not None:
     o = decompress_dump(dump_fn, input_bytes)
     if o:
-      f.write(o)
+      if (isinstance(f, io.TextIOWrapper) and isinstance(o, bytes)):
+        f.write(o.decode())
+      elif (isinstance(f, io.BufferedWriter) and isinstance(o, str)):
+        f.write(o.encode())
+      else:
+        f.write(o)
     else:
       sys.stderr.write(
           "Cannot extract kernel {}".format(desc))
@@ -194,7 +200,7 @@ def main():
                       help='Input kernel image. If not specified, use stdin',
                       metavar='FILE',
                       type=argparse.FileType('rb'),
-                      default=sys.stdin)
+                      default=sys.stdin.buffer if sys.version_info.major == 3 else sys.stdin)
   parser.add_argument('--output-configs',
                       help='If specified, write configs. Use stdout if no file '
                            'is specified.',
