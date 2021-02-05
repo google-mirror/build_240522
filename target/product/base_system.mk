@@ -346,6 +346,8 @@ PRODUCT_VENDOR_PROPERTIES += ro.zygote?=zygote32
 PRODUCT_SYSTEM_PROPERTIES += debug.atrace.tags.enableflags=0
 PRODUCT_SYSTEM_PROPERTIES += persist.traced.enable=1
 
+PRODUCT_SYSTEM_PROPERTIES += persist.android.security.keystore2.enable=false
+
 PRODUCT_PROPERTY_OVERRIDES += ro.gfx.angle.supported=true
 
 # Packages included only for eng or userdebug builds, previously debug tagged
