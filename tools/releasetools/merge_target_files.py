@@ -977,16 +977,27 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
       raise ValueError('sharedUserId APK error. See %s' %
                        shareduid_violation_modules)
 
-  # Run host_init_verifier on the combined init rc files.
+  # host_init_verifier and secilc check only the following partitions:
   filtered_partitions = {
       partition: path
       for partition, path in partition_map.items()
-      # host_init_verifier checks only the following partitions:
       if partition in ['system', 'system_ext', 'product', 'vendor', 'odm']
   }
+
+  # Run host_init_verifier on the combined init rc files.
   common.RunHostInitVerifier(
       product_out=output_target_files_temp_dir,
       partition_map=filtered_partitions)
+
+  # Check that the split sepolicy from the multiple builds can compile.
+  split_sepolicy_cmd = common.CompileSplitSEPolicy(
+      product_out=output_target_files_temp_dir,
+      partition_map=filtered_partitions,
+      output_policy=os.path.join(output_target_files_temp_dir,
+                                 'META/combined.policy'))
+  logger.info('Compiling split sepolicy: %s', ' '.join(split_sepolicy_cmd))
+  common.RunAndWait(split_sepolicy_cmd)
+  # TODO(b/178864050): Run tests on the combined.policy file.
 
   generate_images(output_target_files_temp_dir, rebuild_recovery)
 
