@@ -1045,6 +1045,46 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
         ('APK sharedUserId "android.uid.phone" found across partition groups '
          'in partitions "system,vendor"'), errors)
 
+  def test_CompileSplitSEPolicy(self):
+    product_out_dir = common.MakeTempDir()
+
+    def write_temp_file(path, data=''):
+      full_path = os.path.join(product_out_dir, path)
+      if not os.path.exists(os.path.dirname(full_path)):
+        os.makedirs(os.path.dirname(full_path))
+      with open(full_path, 'w') as f:
+        f.write(data)
+
+    write_temp_file(
+        'system/etc/vintf/compatibility_matrix.device.xml', """
+      <compatibility-matrix>
+        <sepolicy>
+          <kernel-sepolicy-version>30</kernel-sepolicy-version>
+        </sepolicy>
+      </compatibility-matrix>""")
+    write_temp_file('vendor/etc/selinux/plat_sepolicy_vers.txt', '30.0')
+
+    write_temp_file('system/etc/selinux/plat_sepolicy.cil')
+    write_temp_file('system/etc/selinux/mapping/30.0.cil')
+    write_temp_file('product/etc/selinux/mapping/30.0.cil')
+    write_temp_file('vendor/etc/selinux/vendor_sepolicy.cil')
+    write_temp_file('vendor/etc/selinux/plat_pub_versioned.cil')
+
+    cmd = common.CompileSplitSEPolicy(product_out_dir, {
+        'system': 'system',
+        'product': 'product',
+        'vendor': 'vendor',
+    }, os.path.join(product_out_dir, 'policy'))
+    self.assertEqual(' '.join(cmd),
+                     ('secilc -m -M true -G -N -c 30 '
+                      '-o OTP/policy -f /dev/null '
+                      'OTP/system/etc/selinux/plat_sepolicy.cil '
+                      'OTP/system/etc/selinux/mapping/30.0.cil '
+                      'OTP/vendor/etc/selinux/vendor_sepolicy.cil '
+                      'OTP/vendor/etc/selinux/plat_pub_versioned.cil '
+                      'OTP/product/etc/selinux/mapping/30.0.cil').replace(
+                          'OTP', product_out_dir))
+
   def test_GetSparseImage_missingImageFile(self):
     self.assertRaises(
         AssertionError, common.GetSparseImage, 'system2', self.testdata_dir,
