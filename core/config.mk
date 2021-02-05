@@ -158,6 +158,8 @@ $(KATI_obsolete_var LOCAL_SANITIZE_BLACKLIST,Use LOCAL_SANITIZE_BLOCKLIST instea
 $(KATI_deprecated_var BOARD_PLAT_PUBLIC_SEPOLICY_DIR,Use SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS instead.)
 $(KATI_deprecated_var BOARD_PLAT_PRIVATE_SEPOLICY_DIR,Use SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS instead.)
 $(KATI_obsolete_var TARGET_NO_VENDOR_BOOT,Use PRODUCT_BUILD_VENDOR_BOOT_IMAGE instead)
+# TODO(b/179534693) change to obsolete after S release
+$(KATI_deprecated_var SOONG_CONFIG_cts_uicc_carrierapi_use_legacy_certificate,This config will be unsupported in a future Android platform release and use of the 2021 CTS UICC will be required at that time.)
 
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE

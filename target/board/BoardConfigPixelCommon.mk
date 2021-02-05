@@ -16,3 +16,10 @@ BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 # vendor_dlkm and odm_dlkm.
 BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+
+# Temporarily opt Pixel out of requiring the CTS 2021 UICCs until we have the
+# hardware distributed widely enough (device labs, international offices, etc.).
+# TODO(b/179534691) remove this opt-out before the S release
+SOONG_CONFIG_NAMESPACES += cts_uicc
+SOONG_CONFIG_cts_uicc += carrierapi_use_legacy_certificate
+SOONG_CONFIG_cts_uicc_carrierapi_use_legacy_certificate := true
