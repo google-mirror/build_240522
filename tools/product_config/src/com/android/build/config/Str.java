@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A String and a Position, where it came from in source code.
  */
-public class Str {
+public class Str implements Comparable<Str> {
     private String mValue;
     private Position mPosition;
 
@@ -66,6 +66,11 @@ public class Str {
     @Override
     public int hashCode() {
         return mValue.hashCode();
+    }
+
+    @Override
+    public int compareTo(Str that) {
+        return this.mValue.compareTo(that.mValue);
     }
 
     public static ArrayList<Str> toList(Position pos, List<String> list) {
