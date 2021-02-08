@@ -30,15 +30,20 @@ public class MakeWriter {
     private final boolean mWriteAnnotations;
 
     public static void write(PrintStream out, GenericConfig config, int flags) {
-        (new MakeWriter(flags)).write(out, config);
+        (new MakeWriter(flags)).writeGeneric(out, config);
     }
+
+    public static void write(PrintStream out, FlatConfig config, int flags) {
+        (new MakeWriter(flags)).writeFlat(out, config);
+    }
+
 
     private MakeWriter(int flags) {
         mWriteHeader = (flags & FLAG_WRITE_HEADER) != 0;
         mWriteAnnotations = (flags & FLAG_WRITE_ANNOTATIONS) != 0;
     }
 
-    private void write(PrintStream out, GenericConfig config) {
+    private void writeGeneric(PrintStream out, GenericConfig config) {
         for (GenericConfig.ConfigFile file: config.getFiles().values()) {
             out.println("---------------------------------------------------------");
             out.println("FILE: " + file.getFilename());
@@ -150,6 +155,29 @@ public class MakeWriter {
         // Print it
         for (Var var: sorted.values()) {
             out.println(var.val.getPosition() + var.name + " := " + var.val);
+        }
+    }
+
+    private void writeFlat(PrintStream out, FlatConfig config) {
+        // TODO: Print positions.
+        for (Map.Entry<String, FlatConfig.Value> entry: config.getValues().entrySet()) {
+            out.print(entry.getKey());
+            out.print(" := ");
+
+            final FlatConfig.Value value = entry.getValue();
+            if (value.getVarType() == ConfigBase.VarType.LIST) {
+                final List<Str> list = value.getList();
+                final int size = list.size();
+                for (int i = 0; i < size; i++) {
+                    out.print(list.get(i).toString());
+                    if (i != size - 1) {
+                        out.print(" \\\n        ");
+                    }
+                }
+            } else {
+                out.print(value.getStr().toString());
+            }
+            out.println();
         }
     }
 }

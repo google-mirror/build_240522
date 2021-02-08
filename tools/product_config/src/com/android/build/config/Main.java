@@ -47,13 +47,20 @@ public class Main {
         System.out.println("====================");
         makeConfig.printToStream(System.out);
 
-        ConvertMakeToGenericConfig m2g = new ConvertMakeToGenericConfig(mErrors);
-        GenericConfig generic = m2g.convert(makeConfig);
-
         System.out.println("======================");
         System.out.println("REGENERATED MAKE FILES");
         System.out.println("======================");
+        ConvertMakeToGenericConfig m2g = new ConvertMakeToGenericConfig(mErrors);
+        GenericConfig generic = m2g.convert(makeConfig);
         MakeWriter.write(System.out, generic, 0);
+
+        System.out.println("=======================");
+        System.out.println("FLATTENED VARIABLE LIST");
+        System.out.println("=======================");
+        // TODO: Lookup shortened name as used in PRODUCT_NAME / TARGET_PRODUCT
+        FlatConfig flat = FlattenConfig.flatten(mErrors, generic,
+                new Str("device/google/coral/aosp_coral.mk"));
+        MakeWriter.write(System.out, flat, 0);
 
         // TODO: Run kati and extract the variables and convert all that into starlark files.
 
