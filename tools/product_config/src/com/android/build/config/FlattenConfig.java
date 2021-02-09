@@ -31,14 +31,13 @@ public class FlattenConfig {
     private final GenericConfig mGenericConfig;
     private final Map<String, GenericConfig.ConfigFile> mGenericConfigs;
     private final FlatConfig mResult = new FlatConfig();
-    private final TreeMap<String, FlatConfig.Value> mVariables;
+    private final TreeMap<String, Value> mVariables;
     /**
      * Files that have been visited, to prevent infinite recursion. There are no
      * conditionals at this point in the processing, so we don't need a stack, just
      * a single set.
      */
     private final Set<String> mVisitedFiles = new HashSet();
-
 
     private FlattenConfig(Errors errors, GenericConfig genericConfig) {
         mErrors = errors;
@@ -84,7 +83,7 @@ public class FlattenConfig {
      * in the given file.  For Assignments, the callback is only called for variables
      * matching varType.
      */
-    private void forEachStatement(Str filename, ConfigBase.VarType varType,
+    private void forEachStatement(Str filename, VarType varType,
             AssignCallback assigner, InheritCallback inheriter) {
         if (mVisitedFiles.contains(filename.toString())) {
             mErrors.ERROR_INFINITE_RECURSION.add(filename.getPosition(),
@@ -132,7 +131,7 @@ public class FlattenConfig {
      * Traverse the inheritance hierarchy, setting list-value product config variables.
      */
     private void flattenListVars(final Str filename) {
-        forEachStatement(filename, ConfigBase.VarType.LIST,
+        forEachStatement(filename, VarType.LIST,
                 (assign) -> {
                     // Append to the list
                     appendToListVar(assign.getName(), assign.getValue());
@@ -152,12 +151,12 @@ public class FlattenConfig {
         // to fill in values that weren't defined in this file.  The first appearance of
         // the variable is the one that wins.
 
-        forEachStatement(filename, ConfigBase.VarType.SINGLE,
+        forEachStatement(filename, VarType.SINGLE,
                 (assign) -> {
                     final String varName = assign.getName();
-                    FlatConfig.Value v = mVariables.get(varName);
+                    Value v = mVariables.get(varName);
                     // Only take the first value that we see for single variables.
-                    FlatConfig.Value value = mVariables.get(varName);
+                    Value value = mVariables.get(varName);
                     if (!mVariables.containsKey(varName)) {
                         final List<Str> valueList = assign.getValue();
                         // There should never be more than one item in this list, because
@@ -173,12 +172,11 @@ public class FlattenConfig {
                                     + "positions=" + positions.toString());
                         }
                         mVariables.put(varName,
-                                new FlatConfig.Value(ConfigBase.VarType.SINGLE,
-                                    valueList.get(0)));
+                                new Value(VarType.SINGLE, valueList.get(0)));
                     }
                 }, null);
 
-        forEachStatement(filename, ConfigBase.VarType.SINGLE, null,
+        forEachStatement(filename, VarType.SINGLE, null,
                 (inherit) -> {
                     flattenSingleVars(inherit.getFilename());
                 });
@@ -193,15 +191,15 @@ public class FlattenConfig {
         // but it matches the order the files are included in node_fns.mk. The last appearance
         // of the value is the one that wins.
 
-        forEachStatement(filename, ConfigBase.VarType.UNKNOWN,
+        forEachStatement(filename, VarType.UNKNOWN,
                 (assign) -> {
                     // Overwrite the current value with whatever is now in the file.
                     mVariables.put(assign.getName(),
-                            new FlatConfig.Value(ConfigBase.VarType.UNKNOWN,
+                            new Value(VarType.UNKNOWN,
                                 flattenAssignList(assign, new Str(""))));
                 }, null);
 
-        forEachStatement(filename, ConfigBase.VarType.UNKNOWN, null,
+        forEachStatement(filename, VarType.UNKNOWN, null,
                 (inherit) -> {
                     flattenUnknownVars(inherit.getFilename());
                 });
@@ -211,10 +209,10 @@ public class FlattenConfig {
      * Throw an exception if there's an existing variable with a different type.
      */
     private void assertVarType(String filename, String varName) {
-        if (mGenericConfig.getVarType(varName) == ConfigBase.VarType.UNKNOWN) {
-            final FlatConfig.Value prevValue = mVariables.get(varName);
+        if (mGenericConfig.getVarType(varName) == VarType.UNKNOWN) {
+            final Value prevValue = mVariables.get(varName);
             if (prevValue != null
-                    && prevValue.getVarType() != ConfigBase.VarType.UNKNOWN) {
+                    && prevValue.getVarType() != VarType.UNKNOWN) {
                 throw new RuntimeException("Mismatched var types:"
                         + " filename=" + filename
                         + " varType=" + mGenericConfig.getVarType(varName)
@@ -229,9 +227,9 @@ public class FlattenConfig {
      * creating one if necessary.
      */
     private void appendToListVar(String varName, List<Str> items) {
-        FlatConfig.Value value = mVariables.get(varName);
+        Value value = mVariables.get(varName);
         if (value == null) {
-            value = new FlatConfig.Value(new ArrayList());
+            value = new Value(new ArrayList());
             mVariables.put(varName, value);
         }
         final List<Str> out = value.getList();
