@@ -65,4 +65,10 @@ public class Errors extends ErrorReporter {
 
     public final Category ERROR_INFINITE_RECURSION = new Category(9, true, Level.ERROR,
             "A file tries to inherit-product from itself or its own inherited products.");
+
+    // TODO: This will become obsolete when it is possible to have starlark-based product
+    // config files.
+    public final Category WARNING_DIFFERENT_FROM_KATI = new Category(1000, true, Level.WARNING,
+            "The cross-check with the original kati implementation failed.");
+
 }
