@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008032600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1564512?revision\u003d4",
+      "fixSuggestions": [
+        {
+          "fixId": "fddd5904_b3d4c79b",
+          "description": "Change to \"tools/product_config/src/com/android/build/config/ConvertMakeToGenericConfig.java\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/src/com/android/build/config/ConvertMakeToGenericConfig.java",
+              "range": {
+                "startLine": 107,
+                "startChar": 7,
+                "endLine": 107,
+                "endChar": 14
+              },
+              "replacement": "Converts"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ff4629c5_9152eab6",
+        "filename": "tools/product_config/src/com/android/build/config/ConvertMakeToGenericConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-09T04:45:38Z",
+      "side": 1,
+      "message": "Common typo found: \"Convets\" -- should it be \"Converts\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 14
+      },
+      "revId": "4bc8189de933e61b939557e697c6570f9ea73b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
