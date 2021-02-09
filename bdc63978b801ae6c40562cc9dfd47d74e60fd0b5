@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008030226",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580998?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "163d791b_c415739e",
+          "description": "Change to \"tools/product_config/src/com/android/build/config/ConfigBase.java\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/src/com/android/build/config/ConfigBase.java",
+              "range": {
+                "startLine": 34,
+                "startChar": 34,
+                "endLine": 34,
+                "endChar": 44
+              },
+              "replacement": "environment"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c366aa2e_063c6497",
+        "filename": "tools/product_config/src/com/android/build/config/ConfigBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-09T02:53:17Z",
+      "side": 1,
+      "message": "Common typo found: \"enviroment\" -- should it be \"environment\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 34,
+        "startChar": 34,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "bdc63978b801ae6c40562cc9dfd47d74e60fd0b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008030226",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580998?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "d3002e3e_1c8c5010",
+          "description": "Change to \"tools/product_config/src/com/android/build/config/ConfigBase.java\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/src/com/android/build/config/ConfigBase.java",
+              "range": {
+                "startLine": 39,
+                "startChar": 34,
+                "endLine": 39,
+                "endChar": 44
+              },
+              "replacement": "environment"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "27ac8d0a_ce5a52f1",
+        "filename": "tools/product_config/src/com/android/build/config/ConfigBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-09T02:53:17Z",
+      "side": 1,
+      "message": "Common typo found: \"enviroment\" -- should it be \"environment\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "bdc63978b801ae6c40562cc9dfd47d74e60fd0b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008030209",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580998?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4299f413_4e90dece",
+        "filename": "tools/product_config/src/com/android/build/config/MakeWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-09T02:53:17Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 124,
+        "startChar": 67,
+        "endLine": 124,
+        "endChar": 69
+      },
+      "revId": "bdc63978b801ae6c40562cc9dfd47d74e60fd0b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
