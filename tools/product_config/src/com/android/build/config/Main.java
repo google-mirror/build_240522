@@ -62,6 +62,9 @@ public class Main {
                 new Str("device/google/coral/aosp_coral.mk"));
         MakeWriter.write(System.out, flat, 0);
 
+        OutputChecker checker = new OutputChecker(flat);
+        checker.reportErrors(mErrors);
+
         // TODO: Run kati and extract the variables and convert all that into starlark files.
 
         // TODO: Run starlark with all the generated ones and the hand written ones.

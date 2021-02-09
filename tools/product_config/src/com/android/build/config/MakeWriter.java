@@ -54,7 +54,7 @@ public class MakeWriter {
         out.println("---------------------------------------------------------");
         out.println("VARIABLES TOUCHED BY MAKE BASED CONFIG:");
         out.println("---------------------------------------------------------");
-        writeStrVars(out, getModifiedVars(config.getInitialVariables(),
+        writeStrVars(out, OutputChecker.getModifiedVars(config.getInitialVariables(),
                                           config.getFinalVariables()), config);
     }
 
@@ -112,28 +112,6 @@ public class MakeWriter {
             out.print("  # " + filename.getPosition());
         }
         out.println();
-    }
-
-    private static Map<String, Str> getModifiedVars(Map<String, Str> before,
-            Map<String, Str> after) {
-        final HashMap<String, Str> result = new HashMap();
-        // Entries that were added or changed.
-        for (Map.Entry<String, Str> afterEntry: after.entrySet()) {
-            final String varName = afterEntry.getKey();
-            final Str afterValue = afterEntry.getValue();
-            final Str beforeValue = before.get(varName);
-            if (beforeValue == null || !beforeValue.equals(afterValue)) {
-                result.put(varName, afterValue);
-            }
-        }
-        // removed Entries that were removed, we just treat them as  
-        for (Map.Entry<String, Str> beforeEntry: before.entrySet()) {
-            final String varName = beforeEntry.getKey();
-            if (!after.containsKey(varName)) {
-                result.put(varName, new Str(""));
-            }
-        }
-        return result;
     }
 
     private static class Var {

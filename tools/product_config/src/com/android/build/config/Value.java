@@ -18,11 +18,14 @@ package com.android.build.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Class to hold the two types of variables we support, strings and lists of strings.
  */
 public class Value {
+    private static final Pattern SPACES = Pattern.compile("\\s+");
+
     private final VarType mVarType;
     private final Str mStr;
     private final ArrayList<Str> mList;
@@ -49,6 +52,67 @@ public class Value {
 
     public List<Str> getList() {
         return mList;
+    }
+
+    /**
+     * Normalize a string that is behaving as a list.
+     */
+    public static String normalize(String str) {
+        if (str == null) {
+            return null;
+        }
+        return SPACES.matcher(str.toString()).replaceAll(" ").trim();
+    }
+
+    /**
+     * Normalize a string that is behaving as a list.
+     */
+    public static Str normalize(Str str) {
+        if (str == null) {
+            return null;
+        }
+        return new Str(str.getPosition(), normalize(str.toString()));
+    }
+
+    /**
+     * Normalize a this Value into the same format as normalize(Str).
+     */
+    public Str normalize() {
+        if (mStr != null) {
+            return normalize(mStr);
+        }
+
+        if (mList.size() == 0) {
+            return new Str("");
+        }
+
+        StringBuilder result = new StringBuilder();
+        final int size = mList.size();
+        boolean first = true;
+        for (int i = 0; i < size; i++) {
+            String s = mList.get(i).toString().trim();
+            if (s.length() > 0) {
+                if (!first) {
+                    result.append(" ");
+                } else {
+                    first = false;
+                }
+                result.append(s);
+            }
+        }
+
+        // Just use the first item's position.
+        return new Str(mList.get(0).getPosition(), result.toString());
+    }
+
+    /**
+     * Normalize a this Value into the same format as normalize(Str).
+     */
+    public static Str normalize(Value val) {
+        if (val == null) {
+            return null;
+        }
+        return val.normalize();
     }
 
     public String debugString() {
