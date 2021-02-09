@@ -16,17 +16,26 @@
 
 package com.android.build.config;
 
-import java.util.TreeMap;
-
 /**
- * Flattened configuration -- set of variables after all assignments and inherits have
- * been executed.
+ * Whether a product config variable is a list or single-value variable.
  */
-public class FlatConfig extends ConfigBase {
+public enum VarType {
+    /**
+     * A product config variable that is a list of space separated strings.
+     * These are defined by _product_single_value_vars in product.mk.
+     */
+    LIST,
 
-    private final TreeMap<String, Value> mValues = new TreeMap();
+    /**
+     * A product config varaible that is a single string.
+     * These are defined by _product_list_vars in product.mk.
+     */
+    SINGLE,
 
-    public TreeMap<String, Value> getValues() {
-        return mValues;
-    }
+    /**
+     * A variable that is given the special product config handling but is
+     * nonetheless defined by product config makefiles.
+     */
+    UNKNOWN
 }
+

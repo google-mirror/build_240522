@@ -160,12 +160,12 @@ public class MakeWriter {
 
     private void writeFlat(PrintStream out, FlatConfig config) {
         // TODO: Print positions.
-        for (Map.Entry<String, FlatConfig.Value> entry: config.getValues().entrySet()) {
+        for (Map.Entry<String, Value> entry: config.getValues().entrySet()) {
             out.print(entry.getKey());
             out.print(" := ");
 
-            final FlatConfig.Value value = entry.getValue();
-            if (value.getVarType() == ConfigBase.VarType.LIST) {
+            final Value value = entry.getValue();
+            if (value.getVarType() == VarType.LIST) {
                 final List<Str> list = value.getList();
                 final int size = list.size();
                 for (int i = 0; i < size; i++) {
