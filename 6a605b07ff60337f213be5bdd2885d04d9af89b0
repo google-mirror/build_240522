@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a393444d_5ffacee0",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-02-10T18:36:43Z",
+      "side": 1,
+      "message": "let\u0027s separate out this one from the build.prop change, is there a separate bug for the apex signing issue?\n\nNote the build.prop has other edge cases, like VENDOR/odm_dlkm/etc/build.prop, VENDOR/vendor_dlkm/etc/build.prop\n\nI wonder if it makes sense to rewrite all files with the name build.prop, or construct a list with $PARTITION/build.prop \u0026  $PARTITION/etc/build.prop.",
+      "range": {
+        "startLine": 501,
+        "startChar": 29,
+        "endLine": 501,
+        "endChar": 33
+      },
+      "revId": "6a605b07ff60337f213be5bdd2885d04d9af89b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
