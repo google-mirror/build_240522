@@ -535,20 +535,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
     # System properties.
     elif filename in (
-        "SYSTEM/build.prop",
-
-        "VENDOR/build.prop",
-        "SYSTEM/vendor/build.prop",
-
-        "ODM/etc/build.prop",
-        "VENDOR/odm/etc/build.prop",
-
-        "PRODUCT/build.prop",
-        "SYSTEM/product/build.prop",
-
-        "SYSTEM_EXT/build.prop",
-        "SYSTEM/system_ext/build.prop",
-
         "SYSTEM/etc/prop.default",
         "BOOT/RAMDISK/prop.default",
         "RECOVERY/RAMDISK/prop.default",
@@ -560,7 +546,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         # RECOVERY/RAMDISK/default.prop is a legacy path, but will always exist
         # as a symlink in the current code. So it's a no-op here. Keeping the
         # path here for clarity.
-        "RECOVERY/RAMDISK/default.prop"):
+        "RECOVERY/RAMDISK/default.prop") or filename.endswith("build.prop"):
       print("Rewriting %s:" % (filename,))
       if stat.S_ISLNK(info.external_attr >> 16):
         new_data = data
@@ -585,16 +571,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
                       "SYSTEM/bin/install-recovery.sh",
                       "VENDOR/bin/install-recovery.sh"):
       OPTIONS.rebuild_recovery = True
-
-    # Don't copy OTA certs if we're replacing them.
-    # Replacement of update-payload-key.pub.pem was removed in b/116660991.
-    elif (
-        OPTIONS.replace_ota_keys and
-        filename in (
-            "BOOT/RAMDISK/system/etc/security/otacerts.zip",
-            "RECOVERY/RAMDISK/system/etc/security/otacerts.zip",
-            "SYSTEM/etc/security/otacerts.zip")):
-      pass
 
     # Skip META/misc_info.txt since we will write back the new values later.
     elif filename == "META/misc_info.txt":
@@ -876,6 +852,9 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   # We DO NOT include the extra_recovery_keys (if any) here.
   WriteOtacerts(output_tf_zip, "SYSTEM/etc/security/otacerts.zip", mapped_keys)
 
+  for info in output_tf_zip.infolist():
+    if info.filename.endswith("otacerts.zip"):
+      WriteOtacerts(output_tf_zip, info.filename, mapped_keys)
 
 
 def ReplaceVerityPublicKey(output_zip, filename, key_path):
