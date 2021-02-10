@@ -39,6 +39,7 @@ OPTIONS.boot_variable_file = None
 METADATA_NAME = 'META-INF/com/android/metadata'
 METADATA_PROTO_NAME = 'META-INF/com/android/metadata.pb'
 UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
+SECURITY_PATCH_LEVEL_PROP_NAME = "ro.build.version.security_patch"
 
 def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
   """Finalizes the metadata and signs an A/B OTA package.
@@ -317,6 +318,7 @@ def BuildLegacyOtaMetadata(metadata_proto):
     metadata_dict['pre-build'] = separator.join(pre_build.build)
     metadata_dict['pre-build-incremental'] = pre_build.build_incremental
 
+  metadata_dict['spl-downgrade'] = metadata_proto.spl_downgrade
   metadata_dict.update(metadata_proto.property_files)
 
   return metadata_dict
@@ -329,6 +331,10 @@ def HandleDowngradeMetadata(metadata_proto, target_info, source_info):
   post_timestamp = target_info.GetBuildProp("ro.build.date.utc")
   pre_timestamp = source_info.GetBuildProp("ro.build.date.utc")
   is_downgrade = int(post_timestamp) < int(pre_timestamp)
+
+  if OPTIONS.spl_downgrade:
+    metadata_proto.spl_downgrade = True
+
 
   if OPTIONS.downgrade:
     if not is_downgrade:
