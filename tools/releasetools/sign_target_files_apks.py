@@ -498,7 +498,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
     # Sign bundled APEX files.
-    elif filename.startswith("SYSTEM/apex") and filename.endswith(".apex"):
+    elif filename.endswith(".apex"):
       name = os.path.basename(filename)
       payload_key, container_key = apex_keys[name]
 
@@ -544,9 +544,11 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         "VENDOR/odm/etc/build.prop",
 
         "PRODUCT/build.prop",
+        "PRODUCT/etc/build.prop",
         "SYSTEM/product/build.prop",
 
         "SYSTEM_EXT/build.prop",
+        "SYSTEM_EXT/etc/build.prop",
         "SYSTEM/system_ext/build.prop",
 
         "SYSTEM/etc/prop.default",
