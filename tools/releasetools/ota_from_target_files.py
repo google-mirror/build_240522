@@ -230,7 +230,7 @@ import zipfile
 import common
 import ota_utils
 from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
-                       PropertyFiles)
+                       PropertyFiles, SECURITY_PATCH_LEVEL_PROP_NAME)
 import target_files_diff
 from check_target_files_vintf import CheckVintfIfTrebleEnabled
 from non_ab_ota import GenerateNonAbOtaPackage
@@ -292,7 +292,7 @@ SECONDARY_PAYLOAD_SKIPPED_IMAGES = [
     'system_ext', 'vbmeta', 'vbmeta_system', 'vbmeta_vendor', 'vendor',
     'vendor_boot']
 
-SECURITY_PATCH_LEVEL_PROP_NAME = "ro.build.version.security_patch"
+
 
 
 class PayloadSigner(object):
