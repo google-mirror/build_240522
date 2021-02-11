@@ -28,7 +28,6 @@ import java.util.TreeMap;
  */
 public class OutputChecker {
     private final FlatConfig mConfig;
-
     private final TreeMap<String, Variable> mVariables;
 
     /**
@@ -39,11 +38,9 @@ public class OutputChecker {
         public final VarType type;
         public final Str original;
         public final Value updated;
-        public final Str normalizedOriginal;
-        public final Str normalizedUpdated;
 
         public Variable(String name, VarType type, Str original) {
-            this(name, type, null, null);
+            this(name, type, original, null);
         }
 
         public Variable(String name, VarType type, Str original, Value updated) {
@@ -51,8 +48,6 @@ public class OutputChecker {
             this.type = type;
             this.original = original;
             this.updated = updated;
-            this.normalizedOriginal = Value.normalize(original);
-            this.normalizedUpdated = Value.normalize(updated);
         }
 
         /**
@@ -66,6 +61,8 @@ public class OutputChecker {
          * Return whether normalizedOriginal and normalizedUpdate are equal.
          */
         public boolean isSame() {
+            final Str normalizedOriginal = Value.normalize(original);
+            final Str normalizedUpdated = Value.normalize(updated);
             if (normalizedOriginal == normalizedUpdated) {
                 return true;
             } else if (normalizedOriginal != null) {
@@ -90,19 +87,11 @@ public class OutputChecker {
     public void reportErrors(Errors errors) {
         for (Variable var: getDifferences()) {
             errors.WARNING_DIFFERENT_FROM_KATI.add("product_config processing differs from"
-                    + " kati processing for " + var.type + " variable " + var.name + ": ");
-            if (var.normalizedOriginal != null) {
-                errors.WARNING_DIFFERENT_FROM_KATI.add(var.normalizedOriginal.getPosition(),
-                        "original: \"" + var.normalizedOriginal + "\"");
-            } else {
-                errors.WARNING_DIFFERENT_FROM_KATI.add("original: null");
-            }
-            if (var.normalizedUpdated != null) {
-                errors.WARNING_DIFFERENT_FROM_KATI.add(var.normalizedUpdated.getPosition(),
-                        "updated: \"" + var.normalizedUpdated + "\"");
-            } else {
-                errors.WARNING_DIFFERENT_FROM_KATI.add("updated: null");
-            }
+                    + " kati processing for " + var.type + " variable " + var.name + ".\n"
+                    + "original: "
+                    + Value.oneLinePerWord(var.original, "<null>") + "\n"
+                    + "updated: "
+                    + Value.oneLinePerWord(var.updated, "<null>"));
         }
     }
 

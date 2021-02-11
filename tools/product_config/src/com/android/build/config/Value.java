@@ -19,6 +19,7 @@ package com.android.build.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Class to hold the two types of variables we support, strings and lists of strings.
@@ -29,6 +30,21 @@ public class Value {
     private final VarType mVarType;
     private final Str mStr;
     private final ArrayList<Str> mList;
+
+    /**
+     * Construct an appropriately typed empty value.
+     */
+    public Value(VarType varType) {
+        mVarType = varType;
+        if (varType == VarType.LIST) {
+            mStr = null;
+            mList = new ArrayList();
+            mList.add(new Str(""));
+        } else {
+            mStr = new Str("");
+            mList = null;
+        }
+    }
 
     public Value(VarType varType, Str str) {
         mVarType = varType;
@@ -61,7 +77,7 @@ public class Value {
         if (str == null) {
             return null;
         }
-        return SPACES.matcher(str.toString()).replaceAll(" ").trim();
+        return SPACES.matcher(str.toString().trim()).replaceAll(" ").trim();
     }
 
     /**
@@ -115,6 +131,44 @@ public class Value {
         return val.normalize();
     }
 
+    /**
+     * Put each word in 'str' on its own line in make format. If 'str' is null,
+     * nullValue is returned.
+     */
+    public static String oneLinePerWord(Value val, String nullValue) {
+        if (val == null) {
+            return nullValue;
+        }
+        final String s = val.normalize().toString();
+        final Matcher m = SPACES.matcher(s);
+        final StringBuilder result = new StringBuilder();
+        if (s.length() > 0 && (val.mVarType == VarType.LIST || m.find())) {
+            result.append("\\\n  ");
+        }
+        result.append(m.replaceAll(" \\\\\n  "));
+        return result.toString();
+    }
+
+    /**
+     * Put each word in 'str' on its own line in make format. If 'str' is null,
+     * nullValue is returned.
+     */
+    public static String oneLinePerWord(Str str, String nullValue) {
+        if (str == null) {
+            return nullValue;
+        }
+        final Matcher m = SPACES.matcher(normalize(str.toString()));
+        final StringBuilder result = new StringBuilder();
+        if (m.find()) {
+            result.append("\\\n  ");
+        }
+        result.append(m.replaceAll(" \\\\\n  "));
+        return result.toString();
+    }
+
+    /**
+     * Return a string representing this value with detailed debugging information.
+     */
     public String debugString() {
         final StringBuilder str = new StringBuilder("Value(type=");
         str.append(mVarType.toString());
