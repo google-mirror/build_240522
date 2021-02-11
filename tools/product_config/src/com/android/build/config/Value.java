@@ -30,6 +30,21 @@ public class Value {
     private final Str mStr;
     private final ArrayList<Str> mList;
 
+    /**
+     * Construct an appropriately typed empty value.
+     */
+    public Value(VarType varType) {
+        mVarType = varType;
+        if (varType == VarType.LIST) {
+            mStr = null;
+            mList = new ArrayList();
+            mList.add(new Str(""));
+        } else {
+            mStr = new Str("");
+            mList = null;
+        }
+    }
+
     public Value(VarType varType, Str str) {
         mVarType = varType;
         mStr = str;
@@ -61,7 +76,7 @@ public class Value {
         if (str == null) {
             return null;
         }
-        return SPACES.matcher(str.toString()).replaceAll(" ").trim();
+        return SPACES.matcher(str.toString().trim()).replaceAll(" ");
     }
 
     /**
@@ -115,6 +130,42 @@ public class Value {
         return val.normalize();
     }
 
+    /**
+     * Put each word in 'str' on its own line in make format. If 'str' is null,
+     * "<null>" is returned.
+     */
+    public static String oneLinePerWord(String str) {
+        if (str == null) {
+            return "<null>";
+        }
+        return SPACES.matcher(str.toString().trim()).replaceAll(" \\\n  ");
+    }
+
+    /**
+     * Put each word in 'str' on its own line in make format. If 'str' is null,
+     * "<null>" is returned.
+     */
+    public static Str oneLinePerWord(Str str) {
+        if (str == null) {
+            return new Str("<null>");
+        }
+        return new Str(str.getPosition(), oneLinePerWord(str.toString()));
+    }
+
+    /**
+     * Put each word in 'str' on its own line in make format. If 'str' is null,
+     * "<null>" is returned.
+     */
+    public static Str oneLinePerWord(Value val) {
+        if (val == null) {
+            return new Str("<null>");
+        }
+        return oneLinePerWord(val.normalize());
+    }
+
+    /**
+     * Return a string representing this value with detailed debugging information.
+     */
     public String debugString() {
         final StringBuilder str = new StringBuilder("Value(type=");
         str.append(mVarType.toString());

@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 public class FlattenConfig {
     private static final Pattern RE_SPACE = Pattern.compile("\\p{Space}+");
+    private static final String PRODUCTS_PREFIX = "PRODUCTS";
 
     private final Errors mErrors;
     private final GenericConfig mGenericConfig;
@@ -37,7 +39,7 @@ public class FlattenConfig {
      * conditionals at this point in the processing, so we don't need a stack, just
      * a single set.
      */
-    private final Set<String> mVisitedFiles = new HashSet();
+    private final Set<String> mStack = new HashSet();
 
     private FlattenConfig(Errors errors, GenericConfig genericConfig) {
         mErrors = errors;
@@ -59,15 +61,25 @@ public class FlattenConfig {
      */
     public static FlatConfig flatten(Errors errors, GenericConfig genericConfig, Str root) {
         final FlattenConfig flattener = new FlattenConfig(errors, genericConfig);
+        return flattener.flattenImpl(root);
+    }
 
+    private FlatConfig flattenImpl(Str root) {
         // TODO: Do we need to worry about the initial state of variables? Anything
         // that from the product config
 
-        flattener.flattenListVars(root);
-        flattener.flattenSingleVars(root);
-        flattener.flattenUnknownVars(root);
+        flattenListVars(root);
+        flattenSingleVars(root);
+        flattenUnknownVars(root);
+        flattenInheritsFrom(root);
 
-        return flattener.mResult;
+        setDefaultKnownVars();
+
+        // TODO: This only supports the single product mode of import-nodes, which is all the
+        // real build does. m product-graph and friends will have to be rewritten.
+        mVariables.put("PRODUCTS", new Value(VarType.UNKNOWN, root));
+
+        return mResult;
     }
 
     interface AssignCallback {
@@ -82,16 +94,19 @@ public class FlattenConfig {
      * Do a bunch of validity checks, and then iterate through each of the statements
      * in the given file.  For Assignments, the callback is only called for variables
      * matching varType.
+     *
+     * Adds makefiles which have been traversed to the 'seen' set, and will not traverse
+     * into an inherit statement if its makefile has already been seen.
      */
-    private void forEachStatement(Str filename, VarType varType,
+    private void forEachStatement(Str filename, VarType varType, Set<String> seen,
             AssignCallback assigner, InheritCallback inheriter) {
-        if (mVisitedFiles.contains(filename.toString())) {
+        if (mStack.contains(filename.toString())) {
             mErrors.ERROR_INFINITE_RECURSION.add(filename.getPosition(),
                     "File is already in the inherit-product stack: " + filename);
             return;
         }
 
-        mVisitedFiles.add(filename.toString());
+        mStack.add(filename.toString());
         try {
             final GenericConfig.ConfigFile genericFile = mGenericConfigs.get(filename.toString());
 
@@ -117,13 +132,20 @@ public class FlattenConfig {
                     }
                 } else if (statement instanceof GenericConfig.Inherit) {
                     if (inheriter != null) {
-                        inheriter.onInheritStatement((GenericConfig.Inherit)statement);
+                        final GenericConfig.Inherit inherit = (GenericConfig.Inherit)statement;
+                        if (seen != null) {
+                            if (seen.contains(inherit.getFilename().toString())) {
+                                continue;
+                            }
+                            seen.add(inherit.getFilename().toString());
+                        }
+                        inheriter.onInheritStatement(inherit);
                     }
                 }
             }
         } finally {
             // Also executes after return statements, so we always remove this.
-            mVisitedFiles.remove(filename);
+            mStack.remove(filename);
         }
     }
 
@@ -131,14 +153,16 @@ public class FlattenConfig {
      * Traverse the inheritance hierarchy, setting list-value product config variables.
      */
     private void flattenListVars(final Str filename) {
-        forEachStatement(filename, VarType.LIST,
+        flattenListVars(filename, new HashSet());
+    }
+
+    private void flattenListVars(final Str filename, Set<String> seen) {
+        forEachStatement(filename, VarType.LIST, seen,
                 (assign) -> {
-                    // Append to the list
                     appendToListVar(assign.getName(), assign.getValue());
-                    // TODO: Drop 2nd ones for diamond inheritance
                 },
                 (inherit) -> {
-                    flattenListVars(inherit.getFilename());
+                    flattenListVars(inherit.getFilename(), seen);
                 });
     }
 
@@ -146,12 +170,16 @@ public class FlattenConfig {
      * Traverse the inheritance hierarchy, setting single-value product config variables.
      */
     private void flattenSingleVars(final Str filename) {
+        flattenSingleVars(filename, new HashSet(), new HashSet());
+    }
+
+    private void flattenSingleVars(final Str filename, Set<String> seen1, Set<String> seen2) {
         // flattenSingleVars has two loops.  The first sets all variables that are
         // defined for *this* file.  The second traverses through the inheritance,
         // to fill in values that weren't defined in this file.  The first appearance of
         // the variable is the one that wins.
 
-        forEachStatement(filename, VarType.SINGLE,
+        forEachStatement(filename, VarType.SINGLE, seen1,
                 (assign) -> {
                     final String varName = assign.getName();
                     Value v = mVariables.get(varName);
@@ -176,22 +204,26 @@ public class FlattenConfig {
                     }
                 }, null);
 
-        forEachStatement(filename, VarType.SINGLE, null,
+        forEachStatement(filename, VarType.SINGLE, seen2, null,
                 (inherit) -> {
-                    flattenSingleVars(inherit.getFilename());
+                    flattenSingleVars(inherit.getFilename(), seen1, seen2);
                 });
     }
 
     /**
-     * Traverse the inheritance hierarchy and flatten the values 
+     * Traverse the inheritance hierarchy and flatten the values
      */
     private void flattenUnknownVars(Str filename) {
+        flattenUnknownVars(filename, new HashSet(), new HashSet());
+    }
+
+    private void flattenUnknownVars(final Str filename, Set<String> seen1, Set<String> seen2) {
         // flattenUnknownVars has two loops: First to attempt to set the variable from
         // this file, and then a second loop to handle the inheritance.  This is odd
         // but it matches the order the files are included in node_fns.mk. The last appearance
         // of the value is the one that wins.
 
-        forEachStatement(filename, VarType.UNKNOWN,
+        forEachStatement(filename, VarType.UNKNOWN, seen1,
                 (assign) -> {
                     // Overwrite the current value with whatever is now in the file.
                     mVariables.put(assign.getName(),
@@ -199,10 +231,47 @@ public class FlattenConfig {
                                 flattenAssignList(assign, new Str(""))));
                 }, null);
 
-        forEachStatement(filename, VarType.UNKNOWN, null,
+        forEachStatement(filename, VarType.UNKNOWN, seen2, null,
                 (inherit) -> {
-                    flattenUnknownVars(inherit.getFilename());
+                    flattenUnknownVars(inherit.getFilename(), seen1, seen2);
                 });
+    }
+
+    String prefix = "";
+
+    /**
+     * Sets the PRODUCTS.<filename>.INHERITS_FROM variables.
+     *
+     * This flatten function, unlike the others visits all of the nodes regardless
+     * of whether they have been seen before, because that's what the make code does.
+     */
+    private void flattenInheritsFrom(final Str filename) {
+        // Recurse, and gather the list our chlidren
+        final TreeSet<Str> children = new TreeSet();
+        forEachStatement(filename, VarType.LIST, null, null,
+                (inherit) -> {
+                    children.add(inherit.getFilename());
+                    flattenInheritsFrom(inherit.getFilename());
+                });
+
+        final String varName = "PRODUCTS." + filename + ".INHERITS_FROM";
+        if (children.size() > 0) {
+            // Build the space separated list.
+            boolean first = true;
+            final StringBuilder val = new StringBuilder();
+            for (Str child: children) {
+                if (first) {
+                    first = false;
+                } else {
+                    val.append(' ');
+                }
+                val.append(child);
+            }
+            mVariables.put(varName, new Value(VarType.UNKNOWN, new Str(val.toString())));
+        } else {
+            // Clear whatever flattenUnknownVars happened to have put in.
+            mVariables.remove(varName);
+        }
     }
 
     /**
@@ -263,5 +332,30 @@ public class FlattenConfig {
             }
         }
         return new Str(position, result.toString());
+    }
+
+    /**
+     * Make sure that each of the product config variables has a default value.
+     */
+    private void setDefaultKnownVars() {
+        for (Map.Entry<String, VarType> entry: mGenericConfig.getProductVars().entrySet()) {
+            final String varName = entry.getKey();
+            final VarType varType = entry.getValue();
+
+            final Value val = mVariables.get(varName);
+            if (val == null) {
+                mVariables.put(varName, new Value(varType));
+            }
+        }
+
+
+        // TODO: These two for now as well, until we can rewrite the enforce packages exist
+        // handling.
+        if (!mVariables.containsKey("PRODUCT_ENFORCE_PACKAGES_EXIST")) {
+            mVariables.put("PRODUCT_ENFORCE_PACKAGES_EXIST", new Value(VarType.UNKNOWN));
+        }
+        if (!mVariables.containsKey("PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST")) {
+            mVariables.put("PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST", new Value(VarType.UNKNOWN));
+        }
     }
 }
