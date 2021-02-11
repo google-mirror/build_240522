@@ -59,8 +59,7 @@ public class Main {
         }
 
         // TODO: Lookup shortened name as used in PRODUCT_NAME / TARGET_PRODUCT
-        FlatConfig flat = FlattenConfig.flatten(mErrors, generic,
-                new Str("device/google/coral/aosp_coral.mk"));
+        FlatConfig flat = FlattenConfig.flatten(mErrors, generic);
         if (false) {
             System.out.println("=======================");
             System.out.println("FLATTENED VARIABLE LIST");

@@ -39,7 +39,7 @@ public class FlattenConfig {
      * conditionals at this point in the processing, so we don't need a stack, just
      * a single set.
      */
-    private final Set<String> mStack = new HashSet();
+    private final Set<Str> mStack = new HashSet();
 
     private FlattenConfig(Errors errors, GenericConfig genericConfig) {
         mErrors = errors;
@@ -52,19 +52,33 @@ public class FlattenConfig {
     }
 
     /**
-     * Flatten a GenericConfig to a FlatConfig, with 'root' as the top-level file
-     * where PRODUCT_NAME is TARGET_PRODUCT.
+     * Flatten a GenericConfig to a FlatConfig.
      *
      * Makes three passes through the genericConfig, one to flatten the single variables,
      * one to flatten the list variables, and one to flatten the unknown variables. Each
      * has a slightly different algorithm.
      */
-    public static FlatConfig flatten(Errors errors, GenericConfig genericConfig, Str root) {
+    public static FlatConfig flatten(Errors errors, GenericConfig genericConfig) {
         final FlattenConfig flattener = new FlattenConfig(errors, genericConfig);
-        return flattener.flattenImpl(root);
+        return flattener.flattenImpl();
     }
 
-    private FlatConfig flattenImpl(Str root) {
+    private FlatConfig flattenImpl() {
+        final List<String> rootNodes = mGenericConfig.getRootNodes();
+        if (rootNodes.size() == 0) {
+            mErrors.ERROR_DUMPCONFIG.add("No root nodes in PRODUCTS phase.");
+            return null;
+        } else if (rootNodes.size() != 1) {
+            final StringBuilder msg = new StringBuilder(
+                    "Ignoring extra root nodes in PRODUCTS phase. All nodes are:");
+            for (final String rn: rootNodes) {
+                msg.append(' ');
+                msg.append(rn);
+            }
+            mErrors.WARNING_DUMPCONFIG.add(msg.toString());
+        }
+        final String root = rootNodes.get(0);
+
         // TODO: Do we need to worry about the initial state of variables? Anything
         // that from the product config
 
@@ -77,7 +91,7 @@ public class FlattenConfig {
 
         // TODO: This only supports the single product mode of import-nodes, which is all the
         // real build does. m product-graph and friends will have to be rewritten.
-        mVariables.put("PRODUCTS", new Value(VarType.UNKNOWN, root));
+        mVariables.put("PRODUCTS", new Value(VarType.UNKNOWN, new Str(root)));
 
         return mResult;
     }
@@ -100,13 +114,13 @@ public class FlattenConfig {
      */
     private void forEachStatement(Str filename, VarType varType, Set<String> seen,
             AssignCallback assigner, InheritCallback inheriter) {
-        if (mStack.contains(filename.toString())) {
+        if (mStack.contains(filename)) {
             mErrors.ERROR_INFINITE_RECURSION.add(filename.getPosition(),
                     "File is already in the inherit-product stack: " + filename);
             return;
         }
 
-        mStack.add(filename.toString());
+        mStack.add(filename);
         try {
             final GenericConfig.ConfigFile genericFile = mGenericConfigs.get(filename.toString());
 
@@ -124,7 +138,7 @@ public class FlattenConfig {
 
                         // Assert that we're not stomping on another variable, which
                         // really should be impossible at this point.
-                        assertVarType(filename.toString(), varName);
+                        assertVarType(filename, varName);
 
                         if (mGenericConfig.getVarType(varName) == varType) {
                             assigner.onAssignStatement(assign);
@@ -152,8 +166,8 @@ public class FlattenConfig {
     /**
      * Traverse the inheritance hierarchy, setting list-value product config variables.
      */
-    private void flattenListVars(final Str filename) {
-        flattenListVars(filename, new HashSet());
+    private void flattenListVars(final String filename) {
+        flattenListVars(new Str(filename), new HashSet());
     }
 
     private void flattenListVars(final Str filename, Set<String> seen) {
@@ -169,8 +183,8 @@ public class FlattenConfig {
     /**
      * Traverse the inheritance hierarchy, setting single-value product config variables.
      */
-    private void flattenSingleVars(final Str filename) {
-        flattenSingleVars(filename, new HashSet(), new HashSet());
+    private void flattenSingleVars(final String filename) {
+        flattenSingleVars(new Str(filename), new HashSet(), new HashSet());
     }
 
     private void flattenSingleVars(final Str filename, Set<String> seen1, Set<String> seen2) {
@@ -213,8 +227,8 @@ public class FlattenConfig {
     /**
      * Traverse the inheritance hierarchy and flatten the values
      */
-    private void flattenUnknownVars(Str filename) {
-        flattenUnknownVars(filename, new HashSet(), new HashSet());
+    private void flattenUnknownVars(String filename) {
+        flattenUnknownVars(new Str(filename), new HashSet(), new HashSet());
     }
 
     private void flattenUnknownVars(final Str filename, Set<String> seen1, Set<String> seen2) {
@@ -241,7 +255,12 @@ public class FlattenConfig {
 
     /**
      * Sets the PRODUCTS.<filename>.INHERITS_FROM variables.
-     *
+     */
+    private void flattenInheritsFrom(final String filename) {
+        flattenInheritsFrom(new Str(filename));
+    }
+
+    /**
      * This flatten function, unlike the others visits all of the nodes regardless
      * of whether they have been seen before, because that's what the make code does.
      */
@@ -277,7 +296,7 @@ public class FlattenConfig {
     /**
      * Throw an exception if there's an existing variable with a different type.
      */
-    private void assertVarType(String filename, String varName) {
+    private void assertVarType(Str filename, String varName) {
         if (mGenericConfig.getVarType(varName) == VarType.UNKNOWN) {
             final Value prevValue = mVariables.get(varName);
             if (prevValue != null
