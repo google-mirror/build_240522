@@ -310,6 +310,7 @@ else
   # This sets the default for building ART APEXes from source rather than
   # prebuilts (in packages/modules/ArtPrebuilt and prebuilt/module_sdk/art) in
   # all other platform builds.
+  # TODO: Switch to false
   SOONG_CONFIG_art_module_source_build ?= true
 endif
 
