@@ -30,6 +30,21 @@ public class Value {
     private final Str mStr;
     private final ArrayList<Str> mList;
 
+    /**
+     * Construct an appropriately typed empty value.
+     */
+    public Value(VarType varType) {
+        mVarType = varType;
+        if (varType == VarType.LIST) {
+            mStr = null;
+            mList = new ArrayList();
+            mList.add(new Str(""));
+        } else {
+            mStr = new Str("");
+            mList = null;
+        }
+    }
+
     public Value(VarType varType, Str str) {
         mVarType = varType;
         mStr = str;

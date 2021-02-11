@@ -43,7 +43,7 @@ public class OutputChecker {
         public final Str normalizedUpdated;
 
         public Variable(String name, VarType type, Str original) {
-            this(name, type, null, null);
+            this(name, type, original, null);
         }
 
         public Variable(String name, VarType type, Str original, Value updated) {
@@ -89,6 +89,17 @@ public class OutputChecker {
      */
     public void reportErrors(Errors errors) {
         for (Variable var: getDifferences()) {
+            if (true) {
+                System.out.println("----------------------------------------");
+                System.out.println(var.name);
+                System.out.println(var.type);
+                if (var.original != null) {
+                    System.out.println(var.original.getPosition());
+                }
+                System.out.println("original: " + var.normalizedOriginal);
+                System.out.println("updated:  " + var.normalizedUpdated);
+                System.out.println("----------------------------------------");
+            }
             errors.WARNING_DIFFERENT_FROM_KATI.add("product_config processing differs from"
                     + " kati processing for " + var.type + " variable " + var.name + ": ");
             if (var.normalizedOriginal != null) {
