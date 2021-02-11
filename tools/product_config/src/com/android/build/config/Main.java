@@ -31,8 +31,6 @@ public class Main {
     }
 
     void run() {
-        System.out.println("Hello World");
-
         // TODO: Check the build environment to make sure we're running in a real
         // build environment, e.g. actually inside a source tree, with TARGET_PRODUCT
         // and TARGET_BUILD_VARIANT defined, etc.

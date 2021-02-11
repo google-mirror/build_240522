@@ -66,7 +66,6 @@ public class KatiImpl implements Kati {
                 return null; // TODO: throw exception?
             }
 
-            System.out.println("running kati");
             String out = mCommand.run(new String[] {
                     "-f", "build/make/core/dumpconfig.mk",
                     "DUMPCONFIG_FILE=" + csvPath
@@ -89,7 +88,6 @@ public class KatiImpl implements Kati {
         }
 
         try (FileReader reader = new FileReader(csvPath)) {
-            System.out.println("csvPath=" + csvPath);
             Map<String, MakeConfig> makeConfigs = DumpConfigParser.parse(mErrors, csvPath, reader);
 
             if (makeConfigs.size() == 0) {

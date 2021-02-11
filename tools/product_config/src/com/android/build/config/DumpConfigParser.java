@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
  *          4       The location of the variable, as best tracked by kati
  */
 public class DumpConfigParser {
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private final Errors mErrors;
     private final String mFilename;
