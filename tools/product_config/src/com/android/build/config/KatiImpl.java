@@ -35,7 +35,7 @@ public class KatiImpl implements Kati {
     // TODO: Do we need to consider the whole or a greater subset of the
     // environment (or a hash of it?). In theory product-variant is enough, but we know
     // people use stuff from the environment, even though we're trying to get rid of that.
-    private String getWorkDirPath() {
+    public String getWorkDirPath() {
         return Paths.get(mOptions.getOutDir(), CONFIG_SUBDIR,
                 mOptions.getProduct() + '-' + mOptions.getVariant()).toString();
     }
