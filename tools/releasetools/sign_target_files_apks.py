@@ -574,16 +574,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
                       "VENDOR/bin/install-recovery.sh"):
       OPTIONS.rebuild_recovery = True
 
-    # Don't copy OTA certs if we're replacing them.
-    # Replacement of update-payload-key.pub.pem was removed in b/116660991.
-    elif (
-        OPTIONS.replace_ota_keys and
-        filename in (
-            "BOOT/RAMDISK/system/etc/security/otacerts.zip",
-            "RECOVERY/RAMDISK/system/etc/security/otacerts.zip",
-            "SYSTEM/etc/security/otacerts.zip")):
-      pass
-
     # Skip META/misc_info.txt since we will write back the new values later.
     elif filename == "META/misc_info.txt":
       pass
@@ -804,6 +794,7 @@ def WriteOtacerts(output_zip, filename, keys):
     filename: The archive name in the output zip.
     keys: A list of public keys to use during OTA package verification.
   """
+  print("Rewriting OTA key:", filename, keys)
   temp_file = io.BytesIO()
   certs_zip = zipfile.ZipFile(temp_file, "w", allowZip64=True)
   for k in keys:
@@ -863,6 +854,10 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   # put into a zipfile system/etc/security/otacerts.zip.
   # We DO NOT include the extra_recovery_keys (if any) here.
   WriteOtacerts(output_tf_zip, "SYSTEM/etc/security/otacerts.zip", mapped_keys)
+
+  for info in output_tf_zip.infolist():
+    if info.filename.endswith("otacerts.zip"):
+      WriteOtacerts(output_tf_zip, info.filename, mapped_keys)
 
 
 def ReplaceVerityPublicKey(output_zip, filename, key_path):
