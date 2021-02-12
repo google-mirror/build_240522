@@ -16,6 +16,7 @@
 
 package com.android.build.config;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,9 +32,7 @@ public class Main {
     }
 
     void run() {
-        // TODO: Check the build environment to make sure we're running in a real
-        // build environment, e.g. actually inside a source tree, with TARGET_PRODUCT
-        // and TARGET_BUILD_VARIANT defined, etc.
+        // Load the make configs from kati.
         Kati kati = new KatiImpl(mErrors, mOptions);
         Map<String, MakeConfig> makeConfigs = kati.loadProductConfig();
         if (makeConfigs == null || mErrors.hadError()) {
@@ -49,8 +48,12 @@ public class Main {
             }
         }
 
+        // Convert the make configs to generic configs.
         ConvertMakeToGenericConfig m2g = new ConvertMakeToGenericConfig(mErrors);
         GenericConfig generic = m2g.convert(makeConfigs);
+        if (generic == null || mErrors.hadError()) {
+            return;
+        }
         if (false) {
             System.out.println("======================");
             System.out.println("REGENERATED MAKE FILES");
@@ -58,8 +61,13 @@ public class Main {
             MakeWriter.write(System.out, generic, 0);
         }
 
-        // TODO: Lookup shortened name as used in PRODUCT_NAME / TARGET_PRODUCT
+        // TODO: Parse starlark configs.
+
+        // Flatten all of the configs into one final set of variables.
         FlatConfig flat = FlattenConfig.flatten(mErrors, generic);
+        if (flat == null || mErrors.hadError()) {
+            return;
+        }
         if (false) {
             System.out.println("=======================");
             System.out.println("FLATTENED VARIABLE LIST");
@@ -67,15 +75,29 @@ public class Main {
             MakeWriter.write(System.out, flat, 0);
         }
 
+        // Check that the flat config is internally consistent.
+        // TODO: Right now this compares against the original make based ones. When
+        // we introduce starlark ones we should still check the make ones, even
+        // though the results won't be 1:1.
         OutputChecker checker = new OutputChecker(flat);
         checker.reportErrors(mErrors);
+        if (mErrors.hadError()) {
+            return;
+        }
 
-        // TODO: Run kati and extract the variables and convert all that into starlark files.
+        // Output the confiugration file for make.
+        final String makeOutputFilename = kati.getWorkDirPath() + "/configuration.mk";
+        try {
+            MakeWriter.writeToFile(makeOutputFilename, flat,
+                    MakeWriter.FLAG_WRITE_HEADER | MakeWriter.FLAG_WRITE_ANNOTATIONS);
+        } catch (IOException ex) {
+            mErrors.ERROR_OUTPUT.add("Error writing to file " + makeOutputFilename + ": "
+                    + ex.getMessage());
+        }
 
-        // TODO: Run starlark with all the generated ones and the hand written ones.
-
-        // TODO: Get the variables that were defined in starlark and use that to write
-        // out the make, soong and bazel input files.
+        // TODO: Output a soong configuration file so it doesn't have to use dumpvar, maybe
+        // the same format as bazel?
+        // TODO: Output a bazel configuration file.
     }
 
     public static void main(String[] args) {
