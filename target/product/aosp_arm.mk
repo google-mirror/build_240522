@@ -16,6 +16,9 @@
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# No kernel
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
 # The system image of aosp_arm-userdebug is a GSI for the devices with:
 # - ARM 32 bits user space
 # - 64 bits binder interface
