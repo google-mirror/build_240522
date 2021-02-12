@@ -579,12 +579,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
     # Don't copy OTA certs if we're replacing them.
     # Replacement of update-payload-key.pub.pem was removed in b/116660991.
-    elif (
-        OPTIONS.replace_ota_keys and
-        filename in (
-            "BOOT/RAMDISK/system/etc/security/otacerts.zip",
-            "RECOVERY/RAMDISK/system/etc/security/otacerts.zip",
-            "SYSTEM/etc/security/otacerts.zip")):
+    elif OPTIONS.replace_ota_keys and filename.endswith("/otacerts.zip"):
       pass
 
     # Skip META/misc_info.txt since we will write back the new values later.
@@ -807,6 +802,7 @@ def WriteOtacerts(output_zip, filename, keys):
     filename: The archive name in the output zip.
     keys: A list of public keys to use during OTA package verification.
   """
+  print("Rewriting OTA key:", filename, keys)
   temp_file = io.BytesIO()
   certs_zip = zipfile.ZipFile(temp_file, "w", allowZip64=True)
   for k in keys:
@@ -852,20 +848,13 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
     print("META/otakeys.txt has no keys; using %s for OTA package"
           " verification." % (mapped_keys[0],))
 
-  # recovery now uses the same x509.pem version of the keys.
-  # extra_recovery_keys are used only in recovery.
-  if misc_info.get("recovery_as_boot") == "true":
-    recovery_keys_location = "BOOT/RAMDISK/system/etc/security/otacerts.zip"
-  else:
-    recovery_keys_location = "RECOVERY/RAMDISK/system/etc/security/otacerts.zip"
-
-  WriteOtacerts(output_tf_zip, recovery_keys_location,
-                mapped_keys + extra_recovery_keys)
-
-  # SystemUpdateActivity uses the x509.pem version of the keys, but
-  # put into a zipfile system/etc/security/otacerts.zip.
-  # We DO NOT include the extra_recovery_keys (if any) here.
-  WriteOtacerts(output_tf_zip, "SYSTEM/etc/security/otacerts.zip", mapped_keys)
+  otacerts = [info
+              for info in input_tf_zip.infolist()
+              if info.filename.endswith("/otacerts.zip")]
+  print("Replacing otacerts in {} locations".format(len(otacerts)))
+  for info in otacerts:
+    if info.filename.endswith("otacerts.zip"):
+      WriteOtacerts(output_tf_zip, info.filename, mapped_keys)
 
 
 def ReplaceVerityPublicKey(output_zip, filename, key_path):
