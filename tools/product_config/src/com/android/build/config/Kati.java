@@ -23,4 +23,5 @@ import java.util.Map;
  */
 public interface Kati {
     public Map<String, MakeConfig> loadProductConfig();
+    public String getWorkDirPath();
 }
