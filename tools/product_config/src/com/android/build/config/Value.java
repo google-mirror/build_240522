@@ -200,5 +200,21 @@ public class Value {
         str.append(")");
         return str.toString();
     }
+
+    /**
+     * Get the Positions of all of the parts of this Value.
+     */
+    public List<Position> getPositions() {
+        List<Position> result = new ArrayList();
+        if (mStr != null) {
+            result.add(mStr.getPosition());
+        }
+        if (mList != null) {
+            for (Str str: mList) {
+                result.add(str.getPosition());
+            }
+        }
+        return result;
+    }
 }
 
