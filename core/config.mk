@@ -20,6 +20,16 @@ endif
 BUILD_SYSTEM :=$= build/make/core
 BUILD_SYSTEM_COMMON :=$= build/make/common
 
+# For debugging. Dump the entire kati variable list to a file 
+define dump-kati-state
+$(eval $(file > $(strip $(1)),position,name,value)) \
+$(warning dump-kati-state $(strip $(1))) \
+$(foreach var,$(sort $(filter-out .VARIABLES .KATI_SYMBOLS,$(.KATI_SYMBOLS))),\
+  $(eval $(file >> $(strip $(1)),$(KATI_variable_location $(var)),$(var),$($(var)))) \
+)
+endef
+
+
 include $(BUILD_SYSTEM_COMMON)/core.mk
 
 # -----------------------------------------------------------------
