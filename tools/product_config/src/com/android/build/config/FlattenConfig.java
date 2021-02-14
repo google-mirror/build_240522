@@ -93,6 +93,10 @@ public class FlattenConfig {
         // real build does. m product-graph and friends will have to be rewritten.
         mVariables.put("PRODUCTS", new Value(VarType.UNKNOWN, new Str(root)));
 
+        // The various make-based consistency checks and packaging rules use this.
+        // TODO: Remove once they have been rewritten into starlark.
+        mVariables.put("INTERNAL_PRODUCT", new Value(VarType.UNKNOWN, new Str(root)));
+
         return mResult;
     }
 
