@@ -107,6 +107,17 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
+$(warning USE_EXTERNAL_PRODUCT_CONFIG=$(USE_EXTERNAL_PRODUCT_CONFIG))
+ifeq ($(USE_EXTERNAL_PRODUCT_CONFIG),true)
+config_mk := $(OUT_DIR)/config/$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)/configuration.mk
+$(warning USE_EXTERNAL_PRODUCT_CONFIG=$(USE_EXTERNAL_PRODUCT_CONFIG) config_mk=$(config_mk))
+ifeq ($(wildcard $(config_mk)),)
+$(error Can't find $(config_mk) but USE_EXTERNAL_PRODUCT_CONFIG=$(USE_EXTERNAL_PRODUCT_CONFIG).)
+endif
+include $(OUT_DIR)/config/$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)/configuration.mk
+
+else # USE_EXTERNAL_PRODUCT_CONFIG
+
 # Read in all of the product definitions specified by the AndroidProducts.mk
 # files in the tree.
 all_product_configs := $(get-all-product-makefiles)
@@ -184,14 +195,14 @@ ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
 $(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
 endif
 
-
-############################################################################
 # Strip and assign the PRODUCT_ variables.
 $(call strip-product-vars)
 
 current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=
+
+endif # USE_EXTERNAL_PRODUCT_CONFIG
 
 #############################################################################
 # Quick check and assign default values
@@ -308,38 +319,10 @@ _psmc_modules :=
 
 # Reset ADB keys for non-debuggable builds
 ifeq (,$(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
-  PRODUCT_ADB_KEYS :=
-endif
-ifneq ($(filter-out 0 1,$(words $(PRODUCT_ADB_KEYS))),)
-  $(error Only one file may be in PRODUCT_ADB_KEYS: $(PRODUCT_ADB_KEYS))
-endif
+func (c *configImpl) UseRemoteBuild() bool {
+	return c.UseGoma() || c.UseRBE()
+}
 
-ifndef PRODUCT_USE_DYNAMIC_PARTITIONS
-  PRODUCT_USE_DYNAMIC_PARTITIONS := $(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
-endif
-
-# All requirements of PRODUCT_USE_DYNAMIC_PARTITIONS falls back to
-# PRODUCT_USE_DYNAMIC_PARTITIONS if not defined.
-ifndef PRODUCT_USE_DYNAMIC_PARTITION_SIZE
-  PRODUCT_USE_DYNAMIC_PARTITION_SIZE := $(PRODUCT_USE_DYNAMIC_PARTITIONS)
-endif
-
-ifndef PRODUCT_BUILD_SUPER_PARTITION
-  PRODUCT_BUILD_SUPER_PARTITION := $(PRODUCT_USE_DYNAMIC_PARTITIONS)
-endif
-
-ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),)
-  ifdef PRODUCT_SHIPPING_API_LEVEL
-    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
-      PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := true
-    endif
-  endif
-endif
-
-ifdef PRODUCT_SHIPPING_API_LEVEL
-  ifneq (,$(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)))
-    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)
-  endif
 endif
 
 # If build command defines OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS,
