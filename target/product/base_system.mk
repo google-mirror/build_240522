@@ -80,6 +80,7 @@ PRODUCT_PACKAGES += \
     dumpstate \
     dumpsys \
     DynamicSystemInstallationService \
+    etc_classpath \
     e2fsck \
     ExtShared \
     flags_health_check \
