@@ -290,6 +290,29 @@ define get_non_asan_path
 $(patsubst $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/%,$(PRODUCT_OUT)/%,$1)
 endef
 
+# TODO(b/172480615): Remove when platform uses ART Module prebuilts by default.
+ifeq (,$(filter art_module,$(SOONG_CONFIG_NAMESPACES)))
+  $(call add_soong_config_namespace,art_module)
+  SOONG_CONFIG_art_module += source_build
+endif
+ifneq (,$(findstring .android.art,$(TARGET_BUILD_APPS)))
+  # Build ART modules from source if they are listed in TARGET_BUILD_APPS.
+  SOONG_CONFIG_art_module_source_build := true
+else ifneq (,$(filter true,$(NATIVE_COVERAGE) $(CLANG_COVERAGE)))
+  # Always build ART APEXes from source in coverage builds since the prebuilts
+  # aren't built with instrumentation.
+  # TODO(b/172480617): Find another solution for this.
+  SOONG_CONFIG_art_module_source_build := true
+else ifneq (,$(SANITIZE_TARGET)$(SANITIZE_HOST))
+  # Prebuilts aren't built with sanitizers either.
+  SOONG_CONFIG_art_module_source_build := true
+else
+  # This sets the default for building ART APEXes from source rather than
+  # prebuilts (in packages/modules/ArtPrebuilt and prebuilt/module_sdk/art) in
+  # all other platform builds.
+  SOONG_CONFIG_art_module_source_build ?= true
+endif
+
 #################################################################
 # Set up minimal BOOTCLASSPATH list of jars to build/execute
 # java code with dalvikvm/art.
