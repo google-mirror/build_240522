@@ -224,6 +224,17 @@ PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 PRODUCT_BOOT_JARS := $(foreach pair,$(PRODUCT_BOOT_JARS), \
   $(if $(findstring :,$(pair)),,platform:)$(pair))
 
+# TODO(b/180325915): When building with prebuilts of the ART module, boot jar
+# dex files are extracted from the ART module APEX.If the Google-signed variant
+# of it is in the product, replace references to the AOSP module with that to
+# make sure boot jars are extracted from the right APEX.
+ifneq (true,$(SOONG_CONFIG_art_module_source_build))
+ifneq (,$(filter com.google.android.art,$(PRODUCT_PACKAGES)))
+ART_APEX_JARS := $(subst com.android.art:,com.google.android.art:,$(ART_APEX_JARS))
+PRODUCT_BOOT_JARS := $(subst com.android.art:,com.google.android.art:,$(PRODUCT_BOOT_JARS))
+endif
+endif
+
 # The extra system server jars must be appended at the end after common system server jars.
 PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
 
