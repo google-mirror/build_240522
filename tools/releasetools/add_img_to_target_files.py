@@ -902,6 +902,7 @@ def AddImagesToTargetFiles(filename):
     banner("system")
     partitions['system'] = AddSystem(
         output_zip, recovery_img=recovery_image, boot_img=boot_image)
+    AddApexInfo(output_zip)
 
   if has_vendor:
     banner("vendor")
@@ -931,8 +932,6 @@ def AddImagesToTargetFiles(filename):
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
-
-  AddApexInfo(output_zip)
 
   if not OPTIONS.is_signing:
     banner("userdata")
