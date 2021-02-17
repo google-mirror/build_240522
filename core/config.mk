@@ -479,6 +479,11 @@ USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
 USE_D8 := true
 .KATI_READONLY := USE_D8
 
+# Whether to fail immediately if verify_uses_libraries check fails, or to keep
+# going and restrict dexpreopt to not compile any code for the failed module.
+RELAX_USES_LIBRARY_CHECK ?= false
+.KATI_READONLY := RELAX_USES_LIBRARY_CHECK
+
 #
 # Tools that are prebuilts for TARGET_BUILD_USE_PREBUILT_SDKS
 #
