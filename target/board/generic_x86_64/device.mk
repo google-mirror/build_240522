@@ -17,12 +17,18 @@
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_COPY_FILES := \
     device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml
+=======
+ifdef NET_ETH0_STARTONBOOT
+  PRODUCT_VENDOR_PROPERTIES += net.eth0.startonboot=1
+endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # minimal configuration for audio policy.
 PRODUCT_COPY_FILES += \

@@ -92,13 +92,39 @@ ANDROID_RESOURCE_GENERATED_CLASSES := 'R.class' 'R$$*.class' 'Manifest.class' 'M
 
 # Display names for various build targets
 TARGET_DISPLAY := target
-AUX_DISPLAY := aux
 HOST_DISPLAY := host
 HOST_CROSS_DISPLAY := host cross
 
 # All installed initrc files
 ALL_INIT_RC_INSTALLED_PAIRS :=
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# All installed vintf manifest fragments for a partition at
+ALL_VINTF_MANIFEST_FRAGMENTS_LIST:=
+
+# All tests that should be skipped in presubmit check.
+ALL_DISABLED_PRESUBMIT_TESTS :=
+
+# All compatibility suites mentioned in LOCAL_COMPATIBILITY_SUITE
+ALL_COMPATIBILITY_SUITES :=
+
+# All compatibility suite files to dist.
+ALL_COMPATIBILITY_DIST_FILES :=
+
+# All LINK_TYPE entries
+ALL_LINK_TYPES :=
+
+# All exported/imported include entries
+EXPORTS_LIST :=
+
+# All modules already converted to Soong
+SOONG_ALREADY_CONV :=
+
+# ALL_DEPS.*.ALL_DEPS keys
+ALL_DEPS.MODULES :=
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################
@@ -498,26 +524,119 @@ define reverse-list
 $(if $(1),$(call reverse-list,$(wordlist 2,$(words $(1)),$(1)))) $(firstword $(1))
 endef
 
-define def-host-aux-target
-$(eval _idf_val_:=$(if $(strip $(LOCAL_IS_HOST_MODULE)),HOST,$(if $(strip $(LOCAL_IS_AUX_MODULE)),AUX,))) \
-$(_idf_val_)
+###########################################################
+## Sometimes a notice dependency will reference an unadorned
+## module name that only appears in ALL_MODULES adorned with
+## an ARCH suffix or a `host_cross_` prefix.
+##
+## After all of the modules are processed in base_rules.mk,
+## replace all such dependencies with every matching adorned
+## module name.
+###########################################################
+
+define fix-notice-deps
+$(strip \
+  $(eval _all_module_refs := \
+    $(sort \
+      $(foreach m,$(sort $(ALL_MODULES)), \
+        $(ALL_MODULES.$(m).NOTICE_DEPS) \
+      ) \
+    ) \
+  ) \
+  $(foreach m, $(_all_module_refs), \
+    $(eval _lookup.$(m) := \
+      $(sort \
+        $(if $(strip $(ALL_MODULES.$(m).PATH)), \
+          $(m), \
+          $(filter $(m)_32 $(m)_64 host_cross_$(m) host_cross_$(m)_32 host_cross_$(m)_64, $(ALL_MODULES)) \
+        ) \
+      ) \
+    ) \
+  ) \
+  $(foreach m, $(ALL_MODULES), \
+    $(eval ALL_MODULES.$(m).NOTICE_DEPS := \
+      $(sort \
+         $(foreach d,$(ALL_MODULES.$(m).NOTICE_DEPS), \
+           $(_lookup.$(d)) \
+        ) \
+      ) \
+    ) \
+  ) \
+)
+endef
+
+###########################################################
+## Target directory for license metadata files.
+###########################################################
+define license-metadata-dir
+$(call generated-sources-dir-for,META,lic,)
+endef
+
+###########################################################
+## License metadata build rule for my_register_name $1
+###########################################################
+define license-metadata-rule
+$(strip $(eval _dir := $(call license-metadata-dir)))
+$(strip $(eval _deps := $(sort $(filter-out $(_dir)/$(1).meta_lic,$(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS), $(_dir)/$(d).meta_lic)))))
+$(foreach b,$(sort $(ALL_MODULES.$(1).BUILT) $(ALL_MODULES.$(1).INSTALLED)),
+$(_dir)/$(b).meta_module ::
+	mkdir -p $$(dir $$@)
+	echo $(_dir)/$(1).meta_lic >> $$@
+	sort -u $$@ -o $$@
+
+)
+$(_dir)/$(1).meta_lic: PRIVATE_KINDS := $(sort $(ALL_MODULES.$(1).LICENSE_KINDS))
+$(_dir)/$(1).meta_lic: PRIVATE_CONDITIONS := $(sort $(ALL_MODULES.$(1).LICENSE_CONDITIONS))
+$(_dir)/$(1).meta_lic: PRIVATE_NOTICES := $(sort $(ALL_MODULES.$(1).NOTICES))
+$(_dir)/$(1).meta_lic: PRIVATE_NOTICE_DEPS := $(_deps)
+$(_dir)/$(1).meta_lic: PRIVATE_TARGETS := $(sort $(ALL_MODULES.$(1).BUILT) $(ALL_MODULES.$(1).INSTALLED))
+$(_dir)/$(1).meta_lic: PRIVATE_IS_CONTAINER := $(sort $(ALL_MODULES.$(1).IS_CONTAINER))
+$(_dir)/$(1).meta_lic: PRIVATE_PACKAGE_NAME := $(ALL_MODULES.$(1).LICENSE_PACKAGE_NAME)
+$(_dir)/$(1).meta_lic: PRIVATE_INSTALL_MAP := $(sort $(ALL_MODULES.$(1).LICENSE_INSTALL_MAP))
+$(_dir)/$(1).meta_lic : $(_deps) $(ALL_MODULES.$(1).NOTICES) $(foreach b,$(sort $(ALL_MODULES.$(1).BUILT) $(ALL_MODULES.$(1).INSTALLED)), $(_dir)/$(b).meta_module) build/make/tools/build-license-metadata.sh
+	rm -f $$@
+	mkdir -p $$(dir $$@)
+	build/make/tools/build-license-metadata.sh -k $$(PRIVATE_KINDS) -c $$(PRIVATE_CONDITIONS) -n $$(PRIVATE_NOTICES) -d $$(PRIVATE_NOTICE_DEPS) -m $$(PRIVATE_INSTALL_MAP) -t $$(PRIVATE_TARGETS) $$(if $$(filter-out false,$$(PRIVATE_IS_CONTAINER)),-is_container) -p $$(PRIVATE_PACKAGE_NAME) -o $$@
+
+$(1) : $(_dir)/$(1).meta_lic
+
+$(if $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE),$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE) : $(_dir)/$(1).meta_lic)
+
+.PHONY: $(1).meta_lic
+$(1).meta_lic : $(_dir)/$(1).meta_lic
+
+endef
+
+###########################################################
+## Declares a license metadata build rule for ALL_MODULES
+###########################################################
+define build-license-metadata
+$(foreach m,$(ALL_MODULES),$(eval $(call license-metadata-rule,$(m))))
 endef
 
 ###########################################################
 ## Returns correct _idfPrefix from the list:
-##   { HOST, HOST_CROSS, AUX, TARGET }
+##   { HOST, HOST_CROSS, TARGET }
 ###########################################################
 # the following rules checked in order:
-# ($1 is in {AUX, HOST_CROSS} => $1;
+# ($1 is in {HOST_CROSS} => $1;
 # ($1 is empty) => TARGET;
 # ($2 is not empty) => HOST_CROSS;
 # => HOST;
 define find-idf-prefix
 $(strip \
-    $(eval _idf_pfx_:=$(strip $(filter AUX HOST_CROSS,$(1)))) \
+    $(eval _idf_pfx_:=$(strip $(filter HOST_CROSS,$(1)))) \
     $(eval _idf_pfx_:=$(if $(strip $(1)),$(if $(_idf_pfx_),$(_idf_pfx_),$(if $(strip $(2)),HOST_CROSS,HOST)),TARGET)) \
     $(_idf_pfx_)
 )
+endef
+
+###########################################################
+## Convert install path to on-device path.
+###########################################################
+# $(1): install path
+define install-path-to-on-device-path
+$(patsubst $(PRODUCT_OUT)%,%,$(1))
 endef
 
 ###########################################################
@@ -530,7 +649,7 @@ endef
 
 # $(1): target class, like "APPS"
 # $(2): target name, like "NotePad"
-# $(3): { HOST, HOST_CROSS, AUX, <empty (TARGET)>, <other non-empty (HOST)> }
+# $(3): { HOST, HOST_CROSS, <empty (TARGET)>, <other non-empty (HOST)> }
 # $(4): if non-empty, force the intermediates to be COMMON
 # $(5): if non-empty, force the intermediates to be for the 2nd arch
 # $(6): if non-empty, force the intermediates to be for the host cross os
@@ -567,7 +686,7 @@ $(strip \
         $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS not defined before call to local-intermediates-dir)) \
     $(if $(strip $(LOCAL_MODULE)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE not defined before call to local-intermediates-dir)) \
-    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(call def-host-aux-target),$(1),$(2),$(3)) \
+    $(call intermediates-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(if $(strip $(LOCAL_IS_HOST_MODULE)),HOST),$(1),$(2),$(3)) \
 )
 endef
 
@@ -582,7 +701,7 @@ endef
 
 # $(1): target class, like "APPS"
 # $(2): target name, like "NotePad"
-# $(3): { HOST, HOST_CROSS, AUX, <empty (TARGET)>, <other non-empty (HOST)> }
+# $(3): { HOST, HOST_CROSS, <empty (TARGET)>, <other non-empty (HOST)> }
 # $(4): if non-empty, force the generated sources to be COMMON
 define generated-sources-dir-for
 $(strip \
@@ -612,7 +731,7 @@ $(strip \
         $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS not defined before call to local-generated-sources-dir)) \
     $(if $(strip $(LOCAL_MODULE)),, \
         $(error $(LOCAL_PATH): LOCAL_MODULE not defined before call to local-generated-sources-dir)) \
-    $(call generated-sources-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(call def-host-aux-target),$(1)) \
+    $(call generated-sources-dir-for,$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(if $(strip $(LOCAL_IS_HOST_MODULE)),HOST),$(1)) \
 )
 endef
 
@@ -1588,6 +1707,7 @@ $(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) \
 $(hide) mv -f $@.tmp $@
 endef
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # $(1): the full path of the source static library.
 # $(2): the full path of the destination static library.
 define _extract-and-include-single-aux-whole-static-lib
@@ -1671,6 +1791,8 @@ define transform-o-to-aux-static-executable
 $(transform-o-to-aux-static-executable-inner)
 endef
 
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ###########################################################
 ## Commands for running host ar
 ###########################################################
@@ -2282,7 +2404,7 @@ $(if $(PRIVATE_JAR_PACKAGES), \
 $(if $(PRIVATE_JAR_EXCLUDE_PACKAGES), $(hide) rm -rf \
     $(foreach pkg, $(PRIVATE_JAR_EXCLUDE_PACKAGES), \
         $(PRIVATE_CLASS_INTERMEDIATES_DIR)/$(subst .,/,$(pkg))))
-$(hide) $(JAR) -cf $@ $(call jar-args-sorted-files-in-directory,$(PRIVATE_CLASS_INTERMEDIATES_DIR))
+$(hide) $(SOONG_ZIP) -jar -o $@ -C $(PRIVATE_CLASS_INTERMEDIATES_DIR) -D $(PRIVATE_CLASS_INTERMEDIATES_DIR)
 $(if $(PRIVATE_EXTRA_JAR_ARGS),$(call add-java-resources-to,$@))
 endef
 
@@ -2654,7 +2776,64 @@ $(foreach f, $(1), $(strip \
     $(eval _cmf_tuple := $(subst :, ,$(f))) \
     $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
     $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest))) \
+=======
+    $(if $(strip $(2)), \
+      $(eval _cmf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_cmf_dest)))) \
+    $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
+      $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest)))) \
+    $(_cmf_dest)))
+endef
+
+# Copy the file only if it's a well-formed init script file. For use via $(eval).
+# $(1): source file
+# $(2): destination file
+define copy-init-script-file-checked
+# Host init verifier doesn't exist on darwin.
+ifneq ($(HOST_OS),darwin)
+$(2): \
+	$(1) \
+	$(HOST_INIT_VERIFIER) \
+	$(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	$(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext \
+	$(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	$(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	$(call intermediates-dir-for,ETC,passwd_product)/passwd_product \
+	$(call intermediates-dir-for,ETC,plat_property_contexts)/plat_property_contexts \
+	$(call intermediates-dir-for,ETC,system_ext_property_contexts)/system_ext_property_contexts \
+	$(call intermediates-dir-for,ETC,product_property_contexts)/product_property_contexts \
+	$(call intermediates-dir-for,ETC,vendor_property_contexts)/vendor_property_contexts \
+	$(call intermediates-dir-for,ETC,odm_property_contexts)/odm_property_contexts
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  -p $(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	  -p $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext \
+	  -p $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	  -p $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	  -p $(call intermediates-dir-for,ETC,passwd_product)/passwd_product \
+	  --property-contexts=$(call intermediates-dir-for,ETC,plat_property_contexts)/plat_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,system_ext_property_contexts)/system_ext_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,product_property_contexts)/product_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,vendor_property_contexts)/vendor_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,odm_property_contexts)/odm_property_contexts \
+	  $$<
+else
+$(2): $(1)
+endif
+	@echo "Copy init script: $$@"
+	$$(copy-file-to-target)
+endef
+
+# Copies many init script files and check they are well-formed.
+# $(1): The init script files to copy.  Each entry is a ':' separated src:dst pair.
+# Evaluates to the list of the dst files. (ie suitable for a dependency list.)
+define copy-many-init-script-files-checked
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(eval $(call copy-init-script-file-checked,$(_cmf_src),$(_cmf_dest))) \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     $(_cmf_dest)))
 endef
 
@@ -2668,6 +2847,69 @@ $(2): $(1) $(XMLLINT)
 	$$(copy-file-to-target)
 endef
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# Copies many xml files and check they are well-formed.
+# $(1): The xml files to copy.  Each entry is a ':' separated src:dst pair.
+# Evaluates to the list of the dst files. (ie suitable for a dependency list.)
+define copy-many-xml-files-checked
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(eval $(call copy-xml-file-checked,$(_cmf_src),$(_cmf_dest))) \
+    $(_cmf_dest)))
+endef
+
+# Copy the file only if it is a well-formed manifest file. For use viea $(eval)
+# $(1): source file
+# $(2): destination file
+define copy-vintf-manifest-checked
+$(2): $(1) $(HOST_OUT_EXECUTABLES)/assemble_vintf
+	@echo "Copy xml: $$@"
+	$(hide) $(HOST_OUT_EXECUTABLES)/assemble_vintf -i $$< >/dev/null  # Don't print the xml file to stdout.
+	$$(copy-file-to-target)
+endef
+
+# Copies many vintf manifest files checked.
+# $(1): The files to copy.  Each entry is a ':' separated src:dst pair
+# Evaluates to the list of the dst files (ie suitable for a dependency list)
+define copy-many-vintf-manifest-files-checked
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(eval $(call copy-vintf-manifest-checked,$(_cmf_src),$(_cmf_dest))) \
+    $(_cmf_dest)))
+endef
+
+# Copy the file only if it's not an ELF file. For use via $(eval).
+# $(1): source file
+# $(2): destination file
+# $(3): message to print on error
+define copy-non-elf-file-checked
+$(eval check_non_elf_file_timestamp := \
+    $(call intermediates-dir-for,FAKE,check-non-elf-file-timestamps)/$(2).timestamp)
+$(check_non_elf_file_timestamp): $(1) $(LLVM_READOBJ)
+	@echo "Check non-ELF: $$<"
+	$(hide) mkdir -p "$$(dir $$@)"
+	$(hide) rm -f "$$@"
+	$(hide) \
+	    if $(LLVM_READOBJ) -h "$$<" >/dev/null 2>&1; then \
+	        $(call echo-error,$(2),$(3)); \
+	        $(call echo-error,$(2),found ELF file: $$<); \
+	        false; \
+	    fi
+	$(hide) touch "$$@"
+
+$(2): $(1) $(check_non_elf_file_timestamp)
+	@echo "Copy non-ELF: $$@"
+	$$(copy-file-to-target)
+
+check-elf-prebuilt-product-copy-files: $(check_non_elf_file_timestamp)
+endef
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # The -t option to acp and the -p option to cp is
 # required for OSX.  OSX has a ridiculous restriction
 # where it's an error for a .a file's modification time
@@ -2720,6 +2962,18 @@ $(hide) rm -f $@
 $(hide) cp $< $@
 endef
 
+# The same as copy-file-to-new-target, but preserve symlinks. Symlinks are
+# converted to absolute to not break.
+define copy-file-or-link-to-new-target
+@mkdir -p $(dir $@)
+$(hide) rm -f $@
+$(hide) if [ -h $< ]; then \
+  ln -s $$(realpath $<) $@; \
+else \
+  cp $< $@; \
+fi
+endef
+
 # Copy a prebuilt file to a target location.
 define transform-prebuilt-to-target
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
@@ -2730,6 +2984,13 @@ endef
 define transform-prebuilt-to-target-strip-comments
 @echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-strip-comments)
+endef
+
+# Copy a prebuilt file to a target location, but preserve symlinks rather than
+# dereference them.
+define copy-or-link-prebuilt-to-target
+@echo "$($(PRIVATE_PREFIX)DISPLAY) Prebuilt: $(PRIVATE_MODULE) ($@)"
+$(copy-file-or-link-to-new-target)
 endef
 
 # Copy a list of files/directories to target location, with sub dir structure preserved.
@@ -2759,6 +3020,7 @@ $(3): | $(1)
 	@mkdir -p $(dir $$@)
 	@rm -rf $$@
 	$(hide) ln -sf $(2) $$@
+$(3): .KATI_SYMLINK_OUTPUTS := $(3)
 endef
 
 # Copy an apk to a target location while removing classes*.dex
@@ -2918,6 +3180,7 @@ $$(PRODUCT_OUT)/$(2) : $$(LOCAL_PATH)/$(1)
 	$$(transform-prebuilt-to-target)
 endef
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 
 ###########################################################
 # Override the package defined in $(1), setting the
@@ -2996,6 +3259,8 @@ $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/$(strip $(1))-timestamp: $(2) $(3) 
 $(8): $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/$(strip $(1))-timestamp
 endef
 
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ## Whether to build from source if prebuilt alternative exists
 ###########################################################
 # $(1): module name
@@ -3090,14 +3355,40 @@ endef
 # For each suite:
 # 1. Copy the files to the many suite output directories.
 # 2. Add all the files to each suite's dependent files list.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # 3. Do the dependency addition to my_all_targets
 # Requires for each suite: my_compat_dist_$(suite) to be defined.
+=======
+# 3. Do the dependency addition to my_all_targets.
+# 4. Save the module name to COMPATIBILITY.$(suite).MODULES for each suite.
+# 5. Collect files to dist to ALL_COMPATIBILITY_DIST_FILES.
+# Requires for each suite: use my_compat_dist_config_$(suite) to define the test config.
+#    and use my_compat_dist_$(suite) to define the others.
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 define create-suite-dependencies
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   $(eval COMPATIBILITY.$(suite).FILES := \
     $$(COMPATIBILITY.$(suite).FILES) $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))))) \
 $(eval $(my_all_targets) : $(call copy-many-files, \
   $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_$(suite))))))
+=======
+  $(if $(filter $(suite),$(ALL_COMPATIBILITY_SUITES)),,\
+    $(eval ALL_COMPATIBILITY_SUITES += $(suite)) \
+    $(eval COMPATIBILITY.$(suite).FILES :=) \
+    $(eval COMPATIBILITY.$(suite).MODULES :=)) \
+  $(eval COMPATIBILITY.$(suite).FILES += \
+    $$(foreach f,$$(my_compat_dist_$(suite)),$$(call word-colon,2,$$(f))) \
+    $$(foreach f,$$(my_compat_dist_config_$(suite)),$$(call word-colon,2,$$(f))) \
+    $$(my_compat_dist_test_data_$(suite))) \
+  $(eval ALL_COMPATIBILITY_DIST_FILES += $$(my_compat_dist_$(suite))) \
+  $(eval COMPATIBILITY.$(suite).MODULES += $$(my_register_name))) \
+$(eval $(my_all_targets) : \
+  $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE), \
+    $(foreach f,$(my_compat_dist_$(suite)), $(call word-colon,2,$(f))))) \
+  $(call copy-many-xml-files-checked, \
+    $(sort $(foreach suite,$(LOCAL_COMPATIBILITY_SUITE),$(my_compat_dist_config_$(suite))))))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 endef
 
 ###########################################################
@@ -3354,11 +3645,6 @@ endef
 ###########################################################
 ## Other includes
 ###########################################################
-
-# -----------------------------------------------------------------
-# Rules and functions to help copy important files to DIST_DIR
-# when requested.
-include $(BUILD_SYSTEM)/distdir.mk
 
 # Include any vendor specific definitions.mk file
 -include $(TOPDIR)vendor/*/build/core/definitions.mk

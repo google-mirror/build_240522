@@ -33,7 +33,6 @@ ifeq ($(LOCAL_MODULE),)
 endif
 
 LOCAL_IS_HOST_MODULE := $(strip $(LOCAL_IS_HOST_MODULE))
-LOCAL_IS_AUX_MODULE := $(strip $(LOCAL_IS_AUX_MODULE))
 ifdef LOCAL_IS_HOST_MODULE
   ifneq ($(LOCAL_IS_HOST_MODULE),true)
     $(error $(LOCAL_PATH): LOCAL_IS_HOST_MODULE must be "true" or empty, not "$(LOCAL_IS_HOST_MODULE)")
@@ -46,16 +45,8 @@ ifdef LOCAL_IS_HOST_MODULE
   my_host := host-
   my_kind := HOST
 else
-  ifdef LOCAL_IS_AUX_MODULE
-    ifneq ($(LOCAL_IS_AUX_MODULE),true)
-      $(error $(LOCAL_PATH): LOCAL_IS_AUX_MODULE must be "true" or empty, not "$(LOCAL_IS_AUX_MODULE)")
-    endif
-    my_prefix := AUX_
-    my_kind := AUX
-  else
-    my_prefix := TARGET_
-    my_kind :=
-  endif
+  my_prefix := TARGET_
+  my_kind :=
   my_host :=
 endif
 
@@ -87,8 +78,32 @@ ifneq ($(filter-out $(LOCAL_PROPRIETARY_MODULE),$(LOCAL_VENDOR_MODULE))$(filter-
 $(call pretty-error,Only one of LOCAL_PROPRIETARY_MODULE[$(LOCAL_PROPRIETARY_MODULE)] and LOCAL_VENDOR_MODULE[$(LOCAL_VENDOR_MODULE)] may be set, or they must be equal)
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+ifeq ($(LOCAL_HOST_MODULE),true)
+my_image_variant := host
+else ifeq ($(LOCAL_VENDOR_MODULE),true)
+my_image_variant := vendor
+else ifeq ($(LOCAL_OEM_MODULE),true)
+my_image_variant := vendor
+else ifeq ($(LOCAL_ODM_MODULE),true)
+my_image_variant := vendor
+else ifeq ($(LOCAL_PRODUCT_MODULE),true)
+my_image_variant := product
+else
+my_image_variant := core
+endif
+
+non_system_module := $(filter true, \
+   $(LOCAL_PRODUCT_MODULE) \
+   $(LOCAL_SYSTEM_EXT_MODULE) \
+   $(LOCAL_VENDOR_MODULE) \
+   $(LOCAL_PROPRIETARY_MODULE))
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 include $(BUILD_SYSTEM)/local_vndk.mk
 include $(BUILD_SYSTEM)/local_systemsdk.mk
+include $(BUILD_SYSTEM)/local_current_sdk.mk
 
 my_module_tags := $(LOCAL_MODULE_TAGS)
 ifeq ($(my_host_cross),true)
@@ -193,6 +208,7 @@ my_module_path := $(strip $(LOCAL_MODULE_PATH))
 endif
 my_module_path := $(patsubst %/,%,$(my_module_path))
 my_module_relative_path := $(strip $(LOCAL_MODULE_RELATIVE_PATH))
+
 ifdef LOCAL_IS_HOST_MODULE
   partition_tag :=
 else
@@ -212,6 +228,40 @@ else
   partition_tag := $(if $(call should-install-to-system,$(my_module_tags)),,_DATA)
 endif
 endif
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# For test modules that lack a suite tag, set null-suite as the default.
+# We only support adding a default suite to native tests, native benchmarks, and instrumentation tests.
+# This is because they are the only tests we currently auto-generate test configs for.
+ifndef LOCAL_COMPATIBILITY_SUITE
+  ifneq ($(filter NATIVE_TESTS NATIVE_BENCHMARK, $(LOCAL_MODULE_CLASS)),)
+    LOCAL_COMPATIBILITY_SUITE := null-suite
+  endif
+  ifneq ($(filter APPS, $(LOCAL_MODULE_CLASS)),)
+    ifneq ($(filter $(my_module_tags),tests),)
+      LOCAL_COMPATIBILITY_SUITE := null-suite
+    endif
+  endif
+endif
+
+use_testcase_folder :=
+ifeq ($(my_module_path),)
+  ifneq ($(LOCAL_MODULE),$(filter $(LOCAL_MODULE),$(DEFAULT_DATA_OUT_MODULES)))
+    ifdef LOCAL_COMPATIBILITY_SUITE
+      ifneq (true, $(LOCAL_IS_HOST_MODULE))
+        use_testcase_folder := true
+      endif
+    endif
+  endif
+endif
+
+ifeq ($(LOCAL_IS_UNIT_TEST),true)
+  ifeq ($(LOCAL_IS_HOST_MODULE),true)
+    LOCAL_COMPATIBILITY_SUITE += host-unit-tests
+  endif
+endif
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifeq ($(my_module_path),)
   install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
   ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
@@ -250,12 +300,9 @@ else
   my_all_targets := device_$(my_register_name)_all_targets
 endif
 
-# variant is enough to make nano class unique; it serves as a key to lookup (OS,ARCH) tuple
-aux_class := $($(my_prefix)OS_VARIANT)
 # Make sure that this IS_HOST/CLASS/MODULE combination is unique.
 module_id := MODULE.$(if \
-    $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),$(if \
-    $(LOCAL_IS_AUX_MODULE),$(aux_class),TARGET)).$(LOCAL_MODULE_CLASS).$(my_register_name)
+    $(LOCAL_IS_HOST_MODULE),$($(my_prefix)OS),TARGET).$(LOCAL_MODULE_CLASS).$(my_register_name)
 ifdef $(module_id)
 $(error $(LOCAL_PATH): $(module_id) already defined by $($(module_id)))
 endif
@@ -297,13 +344,24 @@ endif
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   # Apk and its attachments reside in its own subdir.
   ifeq ($(LOCAL_MODULE_CLASS),APPS)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   # framework-res.apk doesn't like the additional layer.
   ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
   # Neither do Runtime Resource Overlay apks, which contain just the overlaid resources.
   else ifeq ($(LOCAL_IS_RUNTIME_RESOURCE_OVERLAY),true)
   else
     my_module_path := $(my_module_path)/$(LOCAL_MODULE)
-  endif
+=======
+    # framework-res.apk doesn't like the additional layer.
+    ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+      # Neither do Runtime Resource Overlay apks, which contain just the overlaid resources.
+    else ifeq ($(LOCAL_IS_RUNTIME_RESOURCE_OVERLAY),true)
+    else
+      ifneq ($(use_testcase_folder),true)
+        my_module_path := $(my_module_path)/$(LOCAL_MODULE)
+      endif
+    endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   endif
   LOCAL_INSTALLED_MODULE := $(my_module_path)/$(my_installed_module_stem)
 endif
@@ -365,7 +423,6 @@ $(cleantarget)::
 ###########################################################
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_PATH:=$(LOCAL_PATH)
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_IS_HOST_MODULE := $(LOCAL_IS_HOST_MODULE)
-$(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_IS_AUX_MODULE := $(LOCAL_IS_AUX_MODULE)
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_HOST:= $(my_host)
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_PREFIX := $(my_prefix)
 
@@ -392,12 +449,35 @@ endif
 
 # Set up phony targets that covers all modules under the given paths.
 # This allows us to build everything in given paths by running mmma/mma.
-my_path_components := $(subst /,$(space),$(LOCAL_PATH))
-my_path_prefix := MODULES-IN
-$(foreach c, $(my_path_components),\
-  $(eval my_path_prefix := $(my_path_prefix)-$(c))\
-  $(eval .PHONY : $(my_path_prefix))\
-  $(eval $(my_path_prefix) : $(my_all_targets)))
+define my_path_comp
+parent := $(patsubst %/,%,$(dir $(1)))
+parent_target := MODULES-IN-$$(subst /,-,$$(parent))
+.PHONY: $$(parent_target)
+$$(parent_target): $(2)
+ifndef $$(parent_target)
+  $$(parent_target) := true
+  ifneq (,$$(findstring /,$$(parent)))
+    $$(eval $$(call my_path_comp,$$(parent),$$(parent_target)))
+  endif
+endif
+endef
+
+_local_path := $(patsubst %/,%,$(LOCAL_PATH))
+_local_path_target := MODULES-IN-$(subst /,-,$(_local_path))
+
+.PHONY: $(_local_path_target)
+$(_local_path_target): $(my_register_name)
+
+ifndef $(_local_path_target)
+  $(_local_path_target) := true
+  ifneq (,$(findstring /,$(_local_path)))
+    $(eval $(call my_path_comp,$(_local_path),$(_local_path_target)))
+  endif
+endif
+
+_local_path :=
+_local_path_target :=
+my_path_comp :=
 
 ###########################################################
 ## Module installation rule
@@ -410,7 +490,11 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+	$(copy-file-or-link-to-new-target)
+else
 	$(copy-file-to-new-target)
+endif
 	$(PRIVATE_POST_INSTALL_CMD)
 
 ifndef LOCAL_IS_HOST_MODULE
@@ -476,6 +560,7 @@ ifneq ($(filter NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 ifneq ($(strip $(LOCAL_TEST_DATA)),)
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 my_test_data_pairs := $(strip $(foreach td,$(LOCAL_TEST_DATA), \
     $(eval _file := $(call word-colon,2,$(td))) \
     $(if $(_file), \
@@ -486,6 +571,47 @@ my_test_data_pairs := $(strip $(foreach td,$(LOCAL_TEST_DATA), \
     $(if $(filter /%,$(_src_base) $(_file)),$(error $(LOCAL_MODULE_MAKEFILE): LOCAL_TEST_DATA may not include absolute paths: $(_src_base) $(_file))) \
     $(eval my_test_data_file_pairs := $(my_test_data_file_pairs) $(call append-path,$(_src_base),$(_file)):$(_file)) \
     $(call append-path,$(_src_base),$(_file)):$(call append-path,$(my_module_path),$(_file))))
+=======
+# Soong LOCAL_TEST_DATA is of the form <from_base>:<file>:<relative_install_path>
+# or <from_base>:<file>, to be installed to
+# <install_root>/<relative_install_path>/<file> or <install_root>/<file>,
+# respectively.
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  define copy_test_data_pairs
+    _src_base := $$(call word-colon,1,$$(td))
+    _file := $$(call word-colon,2,$$(td))
+    _relative_install_path := $$(call word-colon,3,$$(td))
+    ifeq (,$$(_relative_install_path))
+        _relative_dest_file := $$(_file)
+    else
+        _relative_dest_file := $$(call append-path,$$(_relative_install_path),$$(_file))
+    endif
+    my_test_data_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(call append-path,$$(my_module_path),$$(_relative_dest_file))
+    my_test_data_file_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(_relative_dest_file)
+  endef
+else
+  define copy_test_data_pairs
+    _src_base := $$(call word-colon,1,$$(td))
+    _file := $$(call word-colon,2,$$(td))
+    ifndef _file
+      _file := $$(_src_base)
+      _src_base := $$(LOCAL_PATH)
+    endif
+    ifneq (,$$(findstring ..,$$(_file)))
+      $$(call pretty-error,LOCAL_TEST_DATA may not include '..': $$(_file))
+    endif
+    ifneq (,$$(filter/%,$$(_src_base) $$(_file)))
+      $$(call pretty-error,LOCAL_TEST_DATA may not include absolute paths: $$(_src_base) $$(_file))
+    endif
+    my_test_data_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(call append-path,$$(my_module_path),$$(_file))
+    my_test_data_file_pairs += $$(call append-path,$$(_src_base),$$(_file)):$$(_file)
+  endef
+endif
+
+$(foreach td,$(LOCAL_TEST_DATA),$(eval $(copy_test_data_pairs)))
+
+copy_test_data_pairs :=
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 my_installed_test_data := $(call copy-many-files,$(my_test_data_pairs))
 $(LOCAL_INSTALLED_MODULE): $(my_installed_test_data)
@@ -599,11 +725,77 @@ endif
 ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
 $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
   $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(extra_config):$(dir)/$(notdir $(extra_config))))))
 endif
+=======
+    $(eval my_compat_dist_$(suite) += $(foreach f, $(LOCAL_COMPATIBILITY_SUPPORT_FILES), \
+      $(eval p := $(subst :,$(space),$(f))) \
+      $(eval s := $(word 1,$(p))) \
+      $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
+      $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+        $(s):$(dir)/$(n)))))
+
+  ifneq (,$(test_config))
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+        $(test_config):$(dir)/$(LOCAL_MODULE).config)))
+  endif
+
+  ifneq (,$(LOCAL_EXTRA_FULL_TEST_CONFIGS))
+    $(foreach test_config_file, $(LOCAL_EXTRA_FULL_TEST_CONFIGS), \
+      $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+        $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+          $(test_config_file):$(dir)/$(basename $(notdir $(test_config_file))).config))))
+  endif
+
+  ifneq (,$(wildcard $(LOCAL_PATH)/DynamicConfig.xml))
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+        $(LOCAL_PATH)/DynamicConfig.xml:$(dir)/$(LOCAL_MODULE).dynamic)))
+  endif
+
+  ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
+  $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+        $(extra_config):$(dir)/$(notdir $(extra_config))))))
+  endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# HACK: pretend a soong LOCAL_FULL_TEST_CONFIG is autogenerated by setting the flag in
+# module-info.json
+# TODO: (b/113029686) Add explicit flag from Soong to determine if a test was
+# autogenerated.
+ifneq (,$(filter $(SOONG_OUT_DIR)%,$(LOCAL_FULL_TEST_CONFIG)))
+  ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    ALL_MODULES.$(my_register_name).auto_test_config := true
+  endif
+endif
+
+
+ifeq ($(use_testcase_folder),true)
+ifneq ($(my_test_data_file_pairs),)
+# Filter out existng installed test data paths when collecting test data files to be installed and
+# indexed as they cause build rule conflicts. Instead put them in a separate list which is only
+# used for indexing.
+$(foreach pair, $(my_test_data_file_pairs), \
+  $(eval parts := $(subst :,$(space),$(pair))) \
+  $(eval src_path := $(word 1,$(parts))) \
+  $(eval file := $(word 2,$(parts))) \
+  $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+    $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
+      $(call filter-copy-pair,$(src_path),$(call append-path,$(dir),$(file)),$(my_installed_test_data)))) \
+    $(eval my_compat_dist_test_data_$(suite) += \
+      $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
+        $(filter $(my_installed_test_data),$(call append-path,$(dir),$(file)))))))
+endif
+else
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifneq ($(my_test_data_file_pairs),)
 $(foreach pair, $(my_test_data_file_pairs), \
   $(eval parts := $(subst :,$(space),$(pair))) \
@@ -618,6 +810,12 @@ arch_dir :=
 is_native :=
 
 $(call create-suite-dependencies)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_config_$(suite) := ) \
+  $(eval my_compat_dist_test_data_$(suite) := ))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 endif  # LOCAL_COMPATIBILITY_SUITE
 
@@ -684,13 +882,28 @@ ALL_MODULES.$(my_register_name).FOR_2ND_ARCH := true
 endif
 ALL_MODULES.$(my_register_name).FOR_HOST_CROSS := $(my_host_cross)
 ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+ALL_MODULES.$(my_register_name).TEST_CONFIG := $(test_config)
+ALL_MODULES.$(my_register_name).EXTRA_TEST_CONFIGS := $(LOCAL_EXTRA_FULL_TEST_CONFIGS)
+ALL_MODULES.$(my_register_name).TEST_MAINLINE_MODULES := $(LOCAL_TEST_MAINLINE_MODULES)
+ifndef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).FILE_CONTEXTS := $(LOCAL_FILE_CONTEXTS)
+endif
+test_config :=
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 
 ##########################################################
 # Track module-level dependencies.
 # Use $(LOCAL_MODULE) instead of $(my_register_name) to ignore module's bitness.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ALL_DEPS.MODULES := $(sort $(ALL_DEPS.MODULES) $(LOCAL_MODULE))
+=======
+ifdef RECORD_ALL_DEPS
+ALL_DEPS.MODULES += $(LOCAL_MODULE)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(sort \
   $(ALL_MODULES.$(LOCAL_MODULE).ALL_DEPS) \
   $(LOCAL_STATIC_LIBRARIES) \

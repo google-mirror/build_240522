@@ -4,6 +4,7 @@ cat <<EOF
 Run "m help" for help with the build system itself.
 
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 - lunch:     lunch <product_name>-<build_variant>
              Selects <product_name> as the product to build, and <build_variant> as the variant to
              build, and stores those selections in the environment to be read by subsequent
@@ -26,6 +27,39 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+=======
+- lunch:      lunch <product_name>-<build_variant>
+              Selects <product_name> as the product to build, and <build_variant> as the variant to
+              build, and stores those selections in the environment to be read by subsequent
+              invocations of 'm' etc.
+- tapas:      tapas [<App1> <App2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
+- croot:      Changes directory to the top of the tree, or a subdirectory thereof.
+- m:          Makes from the top of the tree.
+- mm:         Builds and installs all of the modules in the current directory, and their
+              dependencies.
+- mmm:        Builds and installs all of the modules in the supplied directories, and their
+              dependencies.
+              To limit the modules being built use the syntax: mmm dir/:target1,target2.
+- mma:        Same as 'mm'
+- mmma:       Same as 'mmm'
+- provision:  Flash device with all required partitions. Options will be passed on to fastboot.
+- cgrep:      Greps on all local C/C++ files.
+- ggrep:      Greps on all local Gradle files.
+- gogrep:     Greps on all local Go files.
+- jgrep:      Greps on all local Java files.
+- resgrep:    Greps on all local res/*.xml files.
+- mangrep:    Greps on all local AndroidManifest.xml files.
+- mgrep:      Greps on all local Makefiles and *.bp files.
+- owngrep:    Greps on all local OWNERS files.
+- sepgrep:    Greps on all local sepolicy files.
+- sgrep:      Greps on all local source files.
+- godir:      Go to the directory containing a file.
+- allmod:     List all modules.
+- gomod:      Go to the directory containing a module.
+- pathmod:    Get the directory containing a module.
+- refreshmod: Refresh list of modules for allmod/gomod/pathmod.
+- syswrite:   Remount partitions (e.g. system.img) as writable, rebooting if necessary.
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -112,13 +146,13 @@ function get_build_var()
     if [ "$BUILD_VAR_CACHE_READY" = "true" ]
     then
         eval "echo \"\${var_cache_$1}\""
-    return
+        return 0
     fi
 
     local T=$(gettop)
     if [ ! "$T" ]; then
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
-        return
+        return 1
     fi
     (\cd $T; build/soong/soong_ui.bash --dumpvar-mode $1)
 }
@@ -211,8 +245,6 @@ function setpaths()
         arm64) toolchaindir=aarch64/aarch64-linux-android-$targetgccversion/bin;
                toolchaindir2=arm/arm-linux-androideabi-$targetgccversion2/bin
             ;;
-        mips|mips64) toolchaindir=mips/mips64el-linux-android-$targetgccversion/bin
-            ;;
         *)
             echo "Can't find toolchain for unknown architecture: $ARCH"
             toolchaindir=xxxxxxxxx
@@ -278,6 +310,9 @@ function setpaths()
     unset ANDROID_HOST_OUT
     export ANDROID_HOST_OUT=$(get_abs_build_var HOST_OUT)
 
+    unset ANDROID_SOONG_HOST_OUT
+    export ANDROID_SOONG_HOST_OUT=$(get_abs_build_var SOONG_HOST_OUT)
+
     unset ANDROID_HOST_OUT_TESTCASES
     export ANDROID_HOST_OUT_TESTCASES=$(get_abs_build_var HOST_OUT_TESTCASES)
 
@@ -287,6 +322,22 @@ function setpaths()
     # needed for building linux on MacOS
     # TODO: fix the path
     #export HOST_EXTRACFLAGS="-I "$T/system/kernel_headers/host_include
+}
+
+function bazel()
+{
+    local T="$(gettop)"
+    if [ ! "$T" ]; then
+        echo "Couldn't locate the top of the tree.  Try setting TOP."
+        return
+    fi
+
+    if which bazel &>/dev/null; then
+        >&2 echo "NOTE: bazel() function sourced from envsetup.sh is being used instead of $(which bazel)"
+        >&2 echo
+    fi
+
+    "$T/tools/bazel" "$@"
 }
 
 function printconfig()
@@ -338,7 +389,7 @@ function settitle()
 
 function addcompletions()
 {
-    local T dir f
+    local f=
 
     # Keep us from trying to run in something that isn't bash.
     if [ -z "${BASH_VERSION}" ]; then
@@ -555,9 +606,28 @@ add_lunch_combo aosp_x86_64-eng
 function print_lunch_menu()
 {
     local uname=$(uname)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    local choices
+    choices=$(TARGET_BUILD_APPS= get_build_var COMMON_LUNCH_CHOICES 2>/dev/null)
+    local ret=$?
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     echo
     echo "You're building on" $uname
     echo
+
+    if [ $ret -ne 0 ]
+    then
+        echo "Warning: Cannot display lunch menu."
+        echo
+        echo "Note: You can invoke lunch with an explicit target:"
+        echo
+        echo "  usage: lunch [target]" >&2
+        echo
+        return
+    fi
+
     echo "Lunch menu... pick a combo:"
 
     local i=1
@@ -575,7 +645,12 @@ function lunch()
 {
     local answer
 
-    if [ "$1" ] ; then
+    if [[ $# -gt 1 ]]; then
+        echo "usage: lunch [target]" >&2
+        return 1
+    fi
+
+    if [ "$1" ]; then
         answer=$1
     else
         print_lunch_menu
@@ -601,7 +676,6 @@ function lunch()
     export TARGET_BUILD_APPS=
 
     local product variant_and_version variant version
-
     product=${selection%%-*} # Trim everything after first dash
     variant_and_version=${selection#*-} # Trim everything up to first dash
     if [ "$variant_and_version" != "$selection" ]; then
@@ -626,7 +700,6 @@ function lunch()
     then
         return 1
     fi
-
     export TARGET_PRODUCT=$(get_build_var TARGET_PRODUCT)
     export TARGET_BUILD_VARIANT=$(get_build_var TARGET_BUILD_VARIANT)
     if [ -n "$version" ]; then
@@ -636,10 +709,10 @@ function lunch()
     fi
     export TARGET_BUILD_TYPE=release
 
-    echo
+    [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || echo
 
     set_stuff_for_environment
-    printconfig
+    [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
     destroy_build_var_cache
 }
 
@@ -661,10 +734,10 @@ complete -F _lunch lunch
 function tapas()
 {
     local showHelp="$(echo $* | xargs -n 1 echo | \grep -E '^(help)$' | xargs)"
-    local arch="$(echo $* | xargs -n 1 echo | \grep -E '^(arm|x86|mips|arm64|x86_64|mips64)$' | xargs)"
+    local arch="$(echo $* | xargs -n 1 echo | \grep -E '^(arm|x86|arm64|x86_64)$' | xargs)"
     local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
     local density="$(echo $* | xargs -n 1 echo | \grep -E '^(ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi)$' | xargs)"
-    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|arm|x86|mips|arm64|x86_64|mips64|ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi)$' | xargs)"
+    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|arm|x86|arm64|x86_64|ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi)$' | xargs)"
 
     if [ "$showHelp" != "" ]; then
       $(gettop)/build/make/tapasHelp.sh
@@ -687,10 +760,8 @@ function tapas()
     local product=aosp_arm
     case $arch in
       x86)    product=aosp_x86;;
-      mips)   product=aosp_mips;;
       arm64)  product=aosp_arm64;;
       x86_64) product=aosp_x86_64;;
-      mips64)  product=aosp_mips64;;
     esac
     if [ -z "$variant" ]; then
         variant=eng
@@ -719,7 +790,7 @@ function gettop
     local TOPFILE=build/make/core/envsetup.mk
     if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ] ; then
         # The following circumlocution ensures we remove symlinks from TOP.
-        (cd $TOP; PWD= /bin/pwd)
+        (cd "$TOP"; PWD= /bin/pwd)
     else
         if [ -f $TOPFILE ] ; then
             # The following circumlocution (repeated below as well) ensures
@@ -729,13 +800,13 @@ function gettop
         else
             local HERE=$PWD
             local T=
-            while [ \( ! \( -f $TOPFILE \) \) -a \( $PWD != "/" \) ]; do
+            while [ \( ! \( -f $TOPFILE \) \) -a \( "$PWD" != "/" \) ]; do
                 \cd ..
                 T=`PWD= /bin/pwd -P`
             done
-            \cd $HERE
+            \cd "$HERE"
             if [ -f "$T/$TOPFILE" ]; then
-                echo $T
+                echo "$T"
             fi
         fi
     fi
@@ -999,6 +1070,7 @@ function qpid() {
     fi
 }
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 function pid()
 {
     local prepend=''
@@ -1019,6 +1091,18 @@ function pid()
         echo "usage: pid [--exact] <process name>"
         return 255
     fi
+=======
+# syswrite - disable verity, reboot if needed, and remount image
+#
+# Easy way to make system.img/etc writable
+function syswrite() {
+  adb wait-for-device && adb root || return 1
+  if [[ $(adb disable-verity | grep "reboot") ]]; then
+      echo "rebooting"
+      adb reboot && adb wait-for-device && adb root || return 1
+  fi
+  adb wait-for-device && adb remount || return 1
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 }
 
 # coredump_setup - enable core dumps globally for any process
@@ -1174,7 +1258,11 @@ case `uname -s` in
     Darwin)
         function sgrep()
         {
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
             find -E . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.(c|h|cc|cpp|S|java|xml|sh|mk|aidl|vts)' \
+=======
+            find -E . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.(c|h|cc|cpp|hpp|S|java|xml|sh|mk|aidl|vts|proto)' \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
                 -exec grep --color -n "$@" {} +
         }
 
@@ -1182,7 +1270,11 @@ case `uname -s` in
     *)
         function sgrep()
         {
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
             find . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.\(c\|h\|cc\|cpp\|S\|java\|xml\|sh\|mk\|aidl\|vts\)' \
+=======
+            find . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.\(c\|h\|cc\|cpp\|hpp\|S\|java\|xml\|sh\|mk\|aidl\|vts\|proto\)' \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
                 -exec grep --color -n "$@" {} +
         }
         ;;
@@ -1528,6 +1620,95 @@ function godir () {
     \cd $T/$pathname
 }
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# Update module-info.json in out.
+function refreshmod() {
+    if [ ! "$ANDROID_PRODUCT_OUT" ]; then
+        echo "No ANDROID_PRODUCT_OUT. Try running 'lunch' first." >&2
+        return 1
+    fi
+
+    echo "Refreshing modules (building module-info.json). Log at $ANDROID_PRODUCT_OUT/module-info.json.build.log." >&2
+
+    # for the output of the next command
+    mkdir -p $ANDROID_PRODUCT_OUT || return 1
+
+    # Note, can't use absolute path because of the way make works.
+    m $(get_build_var PRODUCT_OUT)/module-info.json \
+        > $ANDROID_PRODUCT_OUT/module-info.json.build.log 2>&1
+}
+
+# List all modules for the current device, as cached in module-info.json. If any build change is
+# made and it should be reflected in the output, you should run 'refreshmod' first.
+function allmod() {
+    if [ ! "$ANDROID_PRODUCT_OUT" ]; then
+        echo "No ANDROID_PRODUCT_OUT. Try running 'lunch' first." >&2
+        return 1
+    fi
+
+    if [ ! -f "$ANDROID_PRODUCT_OUT/module-info.json" ]; then
+        echo "Could not find module-info.json. It will only be built once, and it can be updated with 'refreshmod'" >&2
+        refreshmod || return 1
+    fi
+
+    python -c "import json; print('\n'.join(sorted(json.load(open('$ANDROID_PRODUCT_OUT/module-info.json')).keys())))"
+}
+
+# Get the path of a specific module in the android tree, as cached in module-info.json. If any build change
+# is made, and it should be reflected in the output, you should run 'refreshmod' first.
+function pathmod() {
+    if [ ! "$ANDROID_PRODUCT_OUT" ]; then
+        echo "No ANDROID_PRODUCT_OUT. Try running 'lunch' first." >&2
+        return 1
+    fi
+
+    if [[ $# -ne 1 ]]; then
+        echo "usage: pathmod <module>" >&2
+        return 1
+    fi
+
+    if [ ! -f "$ANDROID_PRODUCT_OUT/module-info.json" ]; then
+        echo "Could not find module-info.json. It will only be built once, and it can be updated with 'refreshmod'" >&2
+        refreshmod || return 1
+    fi
+
+    local relpath=$(python -c "import json, os
+module = '$1'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+if module not in module_info:
+    exit(1)
+print(module_info[module]['path'][0])" 2>/dev/null)
+
+    if [ -z "$relpath" ]; then
+        echo "Could not find module '$1' (try 'refreshmod' if there have been build changes?)." >&2
+        return 1
+    else
+        echo "$ANDROID_BUILD_TOP/$relpath"
+    fi
+}
+
+# Go to a specific module in the android tree, as cached in module-info.json. If any build change
+# is made, and it should be reflected in the output, you should run 'refreshmod' first.
+function gomod() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: gomod <module>" >&2
+        return 1
+    fi
+
+    local path="$(pathmod $@)"
+    if [ -z "$path" ]; then
+        return 1
+    fi
+    cd $path
+}
+
+function _complete_android_module_names() {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(allmod | grep -E "^$word") )
+}
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # Print colored exit condition
 function pez {
     "$@"
@@ -1649,6 +1830,7 @@ if [ "x$SHELL" != "x/bin/bash" ]; then
 fi
 
 # Execute the contents of any vendorsetup.sh files we can find.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 for f in `test -d device && find -L device -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort` \
          `test -d vendor && find -L vendor -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort` \
          `test -d product && find -L product -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort`
@@ -1657,5 +1839,79 @@ do
     . $f
 done
 unset f
+=======
+# Unless we find an allowed-vendorsetup_sh-files file, in which case we'll only
+# load those.
+#
+# This allows loading only approved vendorsetup.sh files
+function source_vendorsetup() {
+    unset VENDOR_PYTHONPATH
+    local T="$(gettop)"
+    allowed=
+    for f in $(cd "$T" && find -L device vendor product -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null | sort); do
+        if [ -n "$allowed" ]; then
+            echo "More than one 'allowed_vendorsetup_sh-files' file found, not including any vendorsetup.sh files:"
+            echo "  $allowed"
+            echo "  $f"
+            return
+        fi
+        allowed="$T/$f"
+    done
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    allowed_files=
+    [ -n "$allowed" ] && allowed_files=$(cat "$allowed")
+    for dir in device vendor product; do
+        for f in $(cd "$T" && test -d $dir && \
+            find -L $dir -maxdepth 4 -name 'vendorsetup.sh' 2>/dev/null | sort); do
+
+            if [[ -z "$allowed" || "$allowed_files" =~ $f ]]; then
+                echo "including $f"; . "$T/$f"
+            else
+                echo "ignoring $f, not in $allowed"
+            fi
+        done
+    done
+}
+
+function showcommands() {
+    local T=$(gettop)
+    if [[ -z "$TARGET_PRODUCT" ]]; then
+        >&2 echo "TARGET_PRODUCT not set. Run lunch."
+        return
+    fi
+    case $(uname -s) in
+        Darwin)
+            PREBUILT_NAME=darwin-x86
+            ;;
+        Linux)
+            PREBUILT_NAME=linux-x86
+            ;;
+        *)
+            >&2 echo Unknown host $(uname -s)
+            return
+            ;;
+    esac
+    if [[ -z "$OUT_DIR" ]]; then
+      if [[ -z "$OUT_DIR_COMMON_BASE" ]]; then
+        OUT_DIR=out
+      else
+        OUT_DIR=${OUT_DIR_COMMON_BASE}/${PWD##*/}
+      fi
+    fi
+    if [[ "$1" == "--regenerate" ]]; then
+      shift 1
+      NINJA_ARGS="-t commands $@" m
+    else
+      (cd $T && prebuilts/build-tools/$PREBUILT_NAME/bin/ninja \
+          -f $OUT_DIR/combined-${TARGET_PRODUCT}.ninja \
+          -t commands "$@")
+    fi
+}
+
+validate_current_shell
+source_vendorsetup
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 addcompletions

@@ -436,9 +436,11 @@ ifeq ($(need_compile_res),true)
 # they want to use this module's R.java file.
 $(LOCAL_BUILT_MODULE): $(R_file_stamp)
 
+ifneq ($(full_classes_jar),)
 # The R.java file must exist by the time the java source
 # list is generated
 $(java_source_list_file): $(R_file_stamp)
+endif
 
 endif # need_compile_res
 
@@ -486,7 +488,11 @@ ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
 # resources.
 ifeq ($(LOCAL_SDK_RES_VERSION),core_current)
 # core_current doesn't contain any framework resources.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 else ifneq ($(filter-out current system_current test_current,$(LOCAL_SDK_RES_VERSION))$(if $(TARGET_BUILD_APPS),$(filter current system_current test_current,$(LOCAL_SDK_RES_VERSION))),)
+=======
+else ifneq ($(filter-out current system_current test_current,$(LOCAL_SDK_RES_VERSION))$(if $(TARGET_BUILD_USE_PREBUILT_SDKS),$(filter current system_current test_current,$(LOCAL_SDK_RES_VERSION))),)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # for released sdk versions, the platform resources were built into android.jar.
 framework_res_package_export := \
     $(HISTORICAL_SDK_VERSIONS_ROOT)/$(LOCAL_SDK_RES_VERSION)/android.jar
@@ -588,7 +594,26 @@ else
 endif
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 $(LOCAL_BUILT_MODULE): PRIVATE_DONT_DELETE_JAR_DIRS := $(LOCAL_DONT_DELETE_JAR_DIRS)
+=======
+# Run veridex on product, system_ext and vendor modules.
+# We skip it for unbundled app builds where we cannot build veridex.
+module_run_appcompat :=
+ifeq (true,$(non_system_module))
+ifeq (,$(TARGET_BUILD_APPS))  # ! unbundled app build
+ifneq ($(UNSAFE_DISABLE_HIDDENAPI_FLAGS),true)
+  module_run_appcompat := true
+endif
+endif
+endif
+
+ifeq ($(module_run_appcompat),true)
+$(LOCAL_BUILT_MODULE) : $(appcompat-files)
+$(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
+endif
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 $(LOCAL_BUILT_MODULE): PRIVATE_RESOURCE_INTERMEDIATES_DIR := $(intermediates.COMMON)/resources
 $(LOCAL_BUILT_MODULE): PRIVATE_FULL_CLASSES_JAR := $(full_classes_jar)
 $(LOCAL_BUILT_MODULE) : $(jni_shared_libraries)
@@ -642,8 +667,58 @@ ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ###############################
 ## Build dpi-specific apks, if it's apps_only build.
+=======
+my_package_res_pb := $(intermediates)/package-res.pb.apk
+$(my_package_res_pb): $(my_res_package) $(AAPT2)
+	$(AAPT2) convert --output-format proto $< -o $@
+
+$(my_bundle_module): $(my_package_res_pb)
+$(my_bundle_module): PRIVATE_RES_PACKAGE := $(my_package_res_pb)
+
+$(my_bundle_module): $(jni_shared_libraries)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
+
+ifneq ($(full_classes_jar),)
+  $(my_bundle_module): PRIVATE_DEX_FILE := $(built_dex)
+  # Use the jarjar processed archive as the initial package file.
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
+  $(my_bundle_module): $(built_dex)
+else
+  $(my_bundle_module): PRIVATE_DEX_FILE :=
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE :=
+endif # full_classes_jar
+
+$(my_bundle_module): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
+	@echo "target Bundle: $(PRIVATE_MODULE) ($@)"
+	rm -rf $@.parts
+	mkdir -p $@.parts
+	$(ZIP2ZIP) -i $(PRIVATE_RES_PACKAGE) -o $@.parts/apk.zip AndroidManifest.xml:manifest/AndroidManifest.xml resources.pb "res/**/*" "assets/**/*"
+      ifneq ($(jni_shared_libraries),)
+	  $(call create-jni-shared-libs-package,$@.parts/jni.zip)
+      endif
+      ifeq ($(full_classes_jar),)
+      # We don't build jar, need to add the Java resources here.
+	  $(if $(PRIVATE_EXTRA_JAR_ARGS),\
+	    $(call create-java-resources-jar,$@.parts/res.zip) && \
+	    $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/" && \
+	    mv -f $@.parts/res.zip.tmp $@.parts/res.zip)
+      else  # full_classes_jar
+	  $(call create-dex-jar,$@.parts/dex.zip,$(PRIVATE_DEX_FILE))
+	  $(ZIP2ZIP) -i $@.parts/dex.zip -o $@.parts/dex.zip.tmp "classes*.dex:dex/"
+	  mv -f $@.parts/dex.zip.tmp $@.parts/dex.zip
+	  $(call extract-resources-jar,$@.parts/res.zip,$(PRIVATE_SOURCE_ARCHIVE))
+	  $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/"
+	  mv -f $@.parts/res.zip.tmp $@.parts/res.zip
+      endif  # full_classes_jar
+	$(MERGE_ZIPS) $@ $@.parts/*.zip
+	rm -rf $@.parts
+ALL_MODULES.$(my_register_name).BUNDLE := $(my_bundle_module)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifdef TARGET_BUILD_APPS
 ifdef LOCAL_DPI_VARIANTS
 $(foreach d, $(LOCAL_DPI_VARIANTS), \

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # caller might have included aux_toolchain, e.g. if custom build steps are defined
 ifeq ($(LOCAL_IS_AUX_MODULE),)
 include $(BUILD_SYSTEM)/aux_toolchain.mk
@@ -94,3 +95,5 @@ $(linked_module): $(all_objects) $(all_libraries) $(LOCAL_ADDITIONAL_DEPENDENCIE
 endif
 
 endif # AUX_BUILD_NOT_COMPATIBLE
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

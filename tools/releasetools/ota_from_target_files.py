@@ -89,9 +89,92 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       based on timestamp) with the same "ota-downgrade=yes" flag, with the
       difference being whether "ota-wipe=yes" is set.
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   -e  (--extra_script)  <file>
+=======
+  --wipe_user_data
+      Generate an OTA package that will wipe the user data partition when
+      installed.
+
+  --retrofit_dynamic_partitions
+      Generates an OTA package that updates a device to support dynamic
+      partitions (default False). This flag is implied when generating
+      an incremental OTA where the base build does not support dynamic
+      partitions but the target build does. For A/B, when this flag is set,
+      --skip_postinstall is implied.
+
+  --skip_compatibility_check
+      Skip checking compatibility of the input target files package.
+
+  --output_metadata_path
+      Write a copy of the metadata to a separate file. Therefore, users can
+      read the post build fingerprint without extracting the OTA package.
+
+  --force_non_ab
+      This flag can only be set on an A/B device that also supports non-A/B
+      updates. Implies --two_step.
+      If set, generate that non-A/B update package.
+      If not set, generates A/B package for A/B device and non-A/B package for
+      non-A/B device.
+
+  -o  (--oem_settings) <main_file[,additional_files...]>
+      Comma separated list of files used to specify the expected OEM-specific
+      properties on the OEM partition of the intended device. Multiple expected
+      values can be used by providing multiple files. Only the first dict will
+      be used to compute fingerprint, while the rest will be used to assert
+      OEM-specific properties.
+
+Non-A/B OTA specific options
+
+  -b  (--binary) <file>
+      Use the given binary as the update-binary in the output package, instead
+      of the binary in the build's target_files. Use for development only.
+
+  --block
+      Generate a block-based OTA for non-A/B device. We have deprecated the
+      support for file-based OTA since O. Block-based OTA will be used by
+      default for all non-A/B devices. Keeping this flag here to not break
+      existing callers.
+
+  -e  (--extra_script) <file>
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
       Insert the contents of file at the end of the update script.
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  --full_bootloader
+      Similar to --full_radio. When generating an incremental OTA, always
+      include a full copy of bootloader image.
+
+  --full_radio
+      When generating an incremental OTA, always include a full copy of radio
+      image. This option is only meaningful when -i is specified, because a full
+      radio is always included in a full OTA if applicable.
+
+  --log_diff <file>
+      Generate a log file that shows the differences in the source and target
+      builds for an incremental package. This option is only meaningful when -i
+      is specified.
+
+  --oem_no_mount
+      For devices with OEM-specific properties but without an OEM partition, do
+      not mount the OEM partition in the updater-script. This should be very
+      rarely used, since it's expected to have a dedicated OEM partition for
+      OEM-specific properties. Only meaningful when -o is specified.
+
+  --stash_threshold <float>
+      Specify the threshold that will be used to compute the maximum allowed
+      stash size (defaults to 0.8).
+
+  -t  (--worker_threads) <int>
+      Specify the number of worker-threads that will be used when generating
+      patches for incremental updates (defaults to 3).
+
+  --verify
+      Verify the checksums of the updated system and vendor (if any) partitions.
+      Non-A/B incremental OTAs only.
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   -2  (--two_step)
       Generate a 'two-step' OTA package, where recovery is updated
       first, so that any changes made to the system partition are done
@@ -156,12 +239,27 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       ones. Should only be used if caller knows it's safe to do so (e.g. all the
       postinstall work is to dexopt apps and a data wipe will happen immediately
       after). Only meaningful when generating A/B OTAs.
+
+  --partial "<PARTITION> [<PARTITION>[...]]"
+      Generate partial updates, overriding ab_partitions list with the given
+      list.
+
+  --custom_image <custom_partition=custom_image>
+      Use the specified custom_image to update custom_partition when generating
+      an A/B OTA package. e.g. "--custom_image oem=oem.img --custom_image
+      cus=cus_test.img"
 """
 
 from __future__ import print_function
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+import logging
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 import multiprocessing
+import os
 import os.path
+import re
 import shlex
 import shutil
 import struct
@@ -171,27 +269,32 @@ import tempfile
 import zipfile
 
 import common
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 import edify_generator
+=======
+import ota_utils
+import target_files_diff
+from check_target_files_vintf import CheckVintfIfTrebleEnabled
+from non_ab_ota import GenerateNonAbOtaPackage
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PropertyFiles)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
   sys.exit(1)
 
 
-OPTIONS = common.OPTIONS
-OPTIONS.package_key = None
-OPTIONS.incremental_source = None
+OPTIONS = ota_utils.OPTIONS
 OPTIONS.verify = False
 OPTIONS.patch_threshold = 0.95
 OPTIONS.wipe_user_data = False
-OPTIONS.downgrade = False
 OPTIONS.extra_script = None
 OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
 if OPTIONS.worker_threads == 0:
   OPTIONS.worker_threads = 1
 OPTIONS.two_step = False
 OPTIONS.include_secondary = False
-OPTIONS.no_signing = False
 OPTIONS.block_based = True
 OPTIONS.updater_binary = None
 OPTIONS.oem_source = None
@@ -205,14 +308,31 @@ OPTIONS.log_diff = None
 OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
-OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+OPTIONS.skip_compatibility_check = False
+OPTIONS.disable_fec_computation = False
+OPTIONS.disable_verity_computation = False
+OPTIONS.partial = None
+OPTIONS.custom_images = {}
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
-
-METADATA_NAME = 'META-INF/com/android/metadata'
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 UNZIP_PATTERN = ['IMAGES/*', 'META/*']
+=======
+DYNAMIC_PARTITION_INFO = 'META/dynamic_partitions_info.txt'
+AB_PARTITIONS = 'META/ab_partitions.txt'
 
+# Files to be unzipped for target diffing purpose.
+TARGET_DIFFING_UNZIP_PATTERN = ['BOOT', 'RECOVERY', 'SYSTEM/*', 'VENDOR/*',
+                                'PRODUCT/*', 'SYSTEM_EXT/*', 'ODM/*',
+                                'VENDOR_DLKM/*', 'ODM_DLKM/*']
+RETROFIT_DAP_UNZIP_PATTERN = ['OTA/super_*.img', AB_PARTITIONS]
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 
 class BuildInfo(object):
   """A class that holds the information for a given build.
@@ -342,6 +462,14 @@ class BuildInfo(object):
         raise common.ExternalError(
             "The OEM file is missing the property %s" % (prop,))
       script.AssertOemProperty(prop, values, oem_no_mount)
+=======
+# Images to be excluded from secondary payload. We essentially only keep
+# 'system_other' and bootloader partitions.
+SECONDARY_PAYLOAD_SKIPPED_IMAGES = [
+    'boot', 'dtbo', 'modem', 'odm', 'odm_dlkm', 'product', 'radio', 'recovery',
+    'system_ext', 'vbmeta', 'vbmeta_system', 'vbmeta_vendor', 'vendor',
+    'vendor_boot']
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 
 class PayloadSigner(object):
@@ -433,6 +561,13 @@ class Payload(object):
            "--target_image", target_file]
     if source_file is not None:
       cmd.extend(["--source_image", source_file])
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+      if OPTIONS.disable_fec_computation:
+        cmd.extend(["--disable_fec_computation", "true"])
+      if OPTIONS.disable_verity_computation:
+        cmd.extend(["--disable_verity_computation", "true"])
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     cmd.extend(additional_args)
     p = common.Run(cmd, stdout=self._log_file, stderr=subprocess.STDOUT)
     stdoutdata, _ = p.communicate()
@@ -529,13 +664,6 @@ class Payload(object):
                     compress_type=zipfile.ZIP_STORED)
 
 
-def SignOutput(temp_zip_name, output_zip_name):
-  pw = OPTIONS.key_passwords[OPTIONS.package_key]
-
-  common.SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
-                  whole_file=True)
-
-
 def _LoadOemDicts(oem_source):
   """Returns the list of loaded OEM properties dict."""
   if not oem_source:
@@ -548,6 +676,7 @@ def _LoadOemDicts(oem_source):
   return oem_dicts
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 def _WriteRecoveryImageToBoot(script, output_zip):
   """Find and write recovery image to /boot in two-step OTA.
 
@@ -1121,6 +1250,8 @@ class PropertyFiles(object):
     return []
 
 
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 class StreamingPropertyFiles(PropertyFiles):
   """A subclass for computing the property-files for streaming A/B OTAs."""
 
@@ -1223,47 +1354,36 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
     return (payload_offset, metadata_total)
 
 
-class NonAbOtaPropertyFiles(PropertyFiles):
-  """The property-files for non-A/B OTA.
+def UpdatesInfoForSpecialUpdates(content, partitions_filter,
+                                 delete_keys=None):
+  """ Updates info file for secondary payload generation, partial update, etc.
 
-  For non-A/B OTA, the property-files string contains the info for METADATA
-  entry, with which a system updater can be fetched the package metadata prior
-  to downloading the entire package.
-  """
-
-  def __init__(self):
-    super(NonAbOtaPropertyFiles, self).__init__()
-    self.name = 'ota-property-files'
-
-
-def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
-  """Finalizes the metadata and signs an A/B OTA package.
-
-  In order to stream an A/B OTA package, we need 'ota-streaming-property-files'
-  that contains the offsets and sizes for the ZIP entries. An example
-  property-files string is as follows.
-
-    "payload.bin:679:343,payload_properties.txt:378:45,metadata:69:379"
-
-  OTA server can pass down this string, in addition to the package URL, to the
-  system update client. System update client can then fetch individual ZIP
-  entries (ZIP_STORED) directly at the given offset of the URL.
+    Scan each line in the info file, and remove the unwanted partitions from
+    the dynamic partition list in the related properties. e.g.
+    "super_google_dynamic_partitions_partition_list=system vendor product"
+    will become "super_google_dynamic_partitions_partition_list=system".
 
   Args:
-    metadata: The metadata dict for the package.
-    input_file: The input ZIP filename that doesn't contain the package METADATA
-        entry yet.
-    output_file: The final output ZIP filename.
-    needed_property_files: The list of PropertyFiles' to be generated.
+    content: The content of the input info file. e.g. misc_info.txt.
+    partitions_filter: A function to filter the desired partitions from a given
+      list
+    delete_keys: A list of keys to delete in the info file
+
+  Returns:
+    A string of the updated info content.
   """
 
-  def ComputeAllPropertyFiles(input_file, needed_property_files):
-    # Write the current metadata entry with placeholders.
-    with zipfile.ZipFile(input_file) as input_zip:
-      for property_files in needed_property_files:
-        metadata[property_files.name] = property_files.Compute(input_zip)
-      namelist = input_zip.namelist()
+  output_list = []
+  # The suffix in partition_list variables that follows the name of the
+  # partition group.
+  list_suffix = 'partition_list'
+  for line in content.splitlines():
+    if line.startswith('#') or '=' not in line:
+      output_list.append(line)
+      continue
+    key, value = line.strip().split('=', 1)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     if METADATA_NAME in namelist:
       common.ZipDelete(input_file, METADATA_NAME)
     output_zip = zipfile.ZipFile(input_file, 'a')
@@ -1495,7 +1615,18 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
     if d is None:
       include_full_boot = True
       common.ZipWriteStr(output_zip, "boot.img", target_boot.data)
+=======
+    if delete_keys and key in delete_keys:
+      pass
+    elif key.endswith(list_suffix):
+      partitions = value.split()
+      # TODO for partial update, partitions in the same group must be all
+      # updated or all omitted
+      partitions = filter(partitions_filter, partitions)
+      output_list.append('{}={}'.format(key, ' '.join(partitions)))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     else:
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
       include_full_boot = False
 
       print("boot      target: %d  source: %d  diff: %d" % (
@@ -1605,6 +1736,10 @@ endif;
       NonAbOtaPropertyFiles(),
   )
   FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
+=======
+      output_list.append(line)
+  return '\n'.join(output_list)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 
 def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
@@ -1626,11 +1761,30 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
   Returns:
     The filename of the target-files.zip for generating secondary payload.
   """
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+  def GetInfoForSecondaryImages(info_file):
+    """Updates info file for secondary payload generation."""
+    with open(info_file) as f:
+      content = f.read()
+    # Remove virtual_ab flag from secondary payload so that OTA client
+    # don't use snapshots for secondary update
+    delete_keys = ['virtual_ab', "virtual_ab_retrofit"]
+    return UpdatesInfoForSpecialUpdates(
+        content, lambda p: p not in SECONDARY_PAYLOAD_SKIPPED_IMAGES,
+        delete_keys)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
   target_zip = zipfile.ZipFile(target_file, 'w', allowZip64=True)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   input_tmp = common.UnzipTemp(input_file, UNZIP_PATTERN)
   with zipfile.ZipFile(input_file, 'r') as input_zip:
+=======
+  with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip:
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     infolist = input_zip.infolist()
 
   for info in infolist:
@@ -1647,8 +1801,28 @@ def GetTargetFilesZipForSecondaryImages(input_file, skip_postinstall=False):
     elif skip_postinstall and info.filename == POSTINSTALL_CONFIG:
       pass
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     elif info.filename.startswith(('META/', 'IMAGES/')):
       common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
+=======
+    elif info.filename.startswith('META/'):
+      # Remove the unnecessary partitions for secondary images from the
+      # ab_partitions file.
+      if info.filename == AB_PARTITIONS:
+        with open(unzipped_file) as f:
+          partition_list = f.read().splitlines()
+        partition_list = [partition for partition in partition_list if partition
+                          and partition not in SECONDARY_PAYLOAD_SKIPPED_IMAGES]
+        common.ZipWriteStr(target_zip, info.filename,
+                           '\n'.join(partition_list))
+      # Remove the unnecessary partitions from the dynamic partitions list.
+      elif (info.filename == 'META/misc_info.txt' or
+            info.filename == DYNAMIC_PARTITION_INFO):
+        modified_info = GetInfoForSecondaryImages(unzipped_file)
+        common.ZipWriteStr(target_zip, info.filename, modified_info)
+      else:
+        common.ZipWrite(target_zip, unzipped_file, arcname=info.filename)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   common.ZipClose(target_zip)
 
@@ -1670,7 +1844,7 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
     The filename of target-files.zip that doesn't contain postinstall config.
   """
   # We should only make a copy if postinstall_config entry exists.
-  with zipfile.ZipFile(input_file, 'r') as input_zip:
+  with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip:
     if POSTINSTALL_CONFIG not in input_zip.namelist():
       return input_file
 
@@ -1679,9 +1853,273 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
   common.ZipDelete(target_file, POSTINSTALL_CONFIG)
   return target_file
 
+def ParseInfoDict(target_file_path):
+  with zipfile.ZipFile(target_file_path, 'r', allowZip64=True) as zfp:
+    return common.LoadInfoDict(zfp)
 
+def GetTargetFilesZipForPartialUpdates(input_file, ab_partitions):
+  """Returns a target-files.zip for partial ota update package generation.
+
+  This function modifies ab_partitions list with the desired partitions before
+  calling the brillo_update_payload script. It also cleans up the reference to
+  the excluded partitions in the info file, e.g misc_info.txt.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    ab_partitions: A list of partitions to include in the partial update
+
+  Returns:
+    The filename of target-files.zip used for partial ota update.
+  """
+
+  def AddImageForPartition(partition_name):
+    """Add the archive name for a given partition to the copy list."""
+    for prefix in ['IMAGES', 'RADIO']:
+      image_path = '{}/{}.img'.format(prefix, partition_name)
+      if image_path in namelist:
+        copy_entries.append(image_path)
+        map_path = '{}/{}.map'.format(prefix, partition_name)
+        if map_path in namelist:
+          copy_entries.append(map_path)
+        return
+
+    raise ValueError("Cannot find {} in input zipfile".format(partition_name))
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    original_ab_partitions = input_zip.read(
+        AB_PARTITIONS).decode().splitlines()
+    namelist = input_zip.namelist()
+
+  unrecognized_partitions = [partition for partition in ab_partitions if
+                             partition not in original_ab_partitions]
+  if unrecognized_partitions:
+    raise ValueError("Unrecognized partitions when generating partial updates",
+                     unrecognized_partitions)
+
+  logger.info("Generating partial updates for %s", ab_partitions)
+
+  copy_entries = ['META/update_engine_config.txt']
+  for partition_name in ab_partitions:
+    AddImageForPartition(partition_name)
+
+  # Use zip2zip to avoid extracting the zipfile.
+  partial_target_file = common.MakeTempFile(suffix='.zip')
+  cmd = ['zip2zip', '-i', input_file, '-o', partial_target_file]
+  cmd.extend(['{}:{}'.format(name, name) for name in copy_entries])
+  common.RunAndCheckOutput(cmd)
+
+  partial_target_zip = zipfile.ZipFile(partial_target_file, 'a',
+                                       allowZip64=True)
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    common.ZipWriteStr(partial_target_zip, 'META/ab_partitions.txt',
+                       '\n'.join(ab_partitions))
+    for info_file in ['META/misc_info.txt', DYNAMIC_PARTITION_INFO]:
+      if info_file not in input_zip.namelist():
+        logger.warning('Cannot find %s in input zipfile', info_file)
+        continue
+      content = input_zip.read(info_file).decode()
+      modified_info = UpdatesInfoForSpecialUpdates(
+          content, lambda p: p in ab_partitions)
+      common.ZipWriteStr(partial_target_zip, info_file, modified_info)
+
+    # TODO(xunchang) handle 'META/care_map.pb', 'META/postinstall_config.txt'
+  common.ZipClose(partial_target_zip)
+
+  return partial_target_file
+
+
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 def WriteABOTAPackageWithBrilloScript(target_file, output_file,
                                       source_file=None):
+=======
+def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
+                                                  super_block_devices,
+                                                  dynamic_partition_list):
+  """Returns a target-files.zip for retrofitting dynamic partitions.
+
+  This allows brillo_update_payload to generate an OTA based on the exact
+  bits on the block devices. Postinstall is disabled.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    super_block_devices: The list of super block devices
+    dynamic_partition_list: The list of dynamic partitions
+
+  Returns:
+    The filename of target-files.zip with *.img replaced with super_*.img for
+    each block device in super_block_devices.
+  """
+  assert super_block_devices, "No super_block_devices are specified."
+
+  replace = {'OTA/super_{}.img'.format(dev): 'IMAGES/{}.img'.format(dev)
+             for dev in super_block_devices}
+
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  shutil.copyfile(input_file, target_file)
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  input_tmp = common.UnzipTemp(input_file, RETROFIT_DAP_UNZIP_PATTERN)
+
+  # Remove partitions from META/ab_partitions.txt that is in
+  # dynamic_partition_list but not in super_block_devices so that
+  # brillo_update_payload won't generate update for those logical partitions.
+  ab_partitions_file = os.path.join(input_tmp, *AB_PARTITIONS.split('/'))
+  with open(ab_partitions_file) as f:
+    ab_partitions_lines = f.readlines()
+    ab_partitions = [line.strip() for line in ab_partitions_lines]
+  # Assert that all super_block_devices are in ab_partitions
+  super_device_not_updated = [partition for partition in super_block_devices
+                              if partition not in ab_partitions]
+  assert not super_device_not_updated, \
+      "{} is in super_block_devices but not in {}".format(
+          super_device_not_updated, AB_PARTITIONS)
+  # ab_partitions -= (dynamic_partition_list - super_block_devices)
+  new_ab_partitions = common.MakeTempFile(
+      prefix="ab_partitions", suffix=".txt")
+  with open(new_ab_partitions, 'w') as f:
+    for partition in ab_partitions:
+      if (partition in dynamic_partition_list and
+          partition not in super_block_devices):
+        logger.info("Dropping %s from ab_partitions.txt", partition)
+        continue
+      f.write(partition + "\n")
+  to_delete = [AB_PARTITIONS]
+
+  # Always skip postinstall for a retrofit update.
+  to_delete += [POSTINSTALL_CONFIG]
+
+  # Delete dynamic_partitions_info.txt so that brillo_update_payload thinks this
+  # is a regular update on devices without dynamic partitions support.
+  to_delete += [DYNAMIC_PARTITION_INFO]
+
+  # Remove the existing partition images as well as the map files.
+  to_delete += list(replace.values())
+  to_delete += ['IMAGES/{}.map'.format(dev) for dev in super_block_devices]
+
+  common.ZipDelete(target_file, to_delete)
+
+  target_zip = zipfile.ZipFile(target_file, 'a', allowZip64=True)
+
+  # Write super_{foo}.img as {foo}.img.
+  for src, dst in replace.items():
+    assert src in namelist, \
+        'Missing {} in {}; {} cannot be written'.format(src, input_file, dst)
+    unzipped_file = os.path.join(input_tmp, *src.split('/'))
+    common.ZipWrite(target_zip, unzipped_file, arcname=dst)
+
+  # Write new ab_partitions.txt file
+  common.ZipWrite(target_zip, new_ab_partitions, arcname=AB_PARTITIONS)
+
+  common.ZipClose(target_zip)
+
+  return target_file
+
+
+def GetTargetFilesZipForCustomImagesUpdates(input_file, custom_images):
+  """Returns a target-files.zip for custom partitions update.
+
+  This function modifies ab_partitions list with the desired custom partitions
+  and puts the custom images into the target target-files.zip.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    custom_images: A map of custom partitions and custom images.
+
+  Returns:
+    The filename of a target-files.zip which has renamed the custom images in
+    the IMAGS/ to their partition names.
+  """
+  # Use zip2zip to avoid extracting the zipfile.
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  cmd = ['zip2zip', '-i', input_file, '-o', target_file]
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  # Write {custom_image}.img as {custom_partition}.img.
+  for custom_partition, custom_image in custom_images.items():
+    default_custom_image = '{}.img'.format(custom_partition)
+    if default_custom_image != custom_image:
+      logger.info("Update custom partition '%s' with '%s'",
+                  custom_partition, custom_image)
+      # Default custom image need to be deleted first.
+      namelist.remove('IMAGES/{}'.format(default_custom_image))
+      # IMAGES/{custom_image}.img:IMAGES/{custom_partition}.img.
+      cmd.extend(['IMAGES/{}:IMAGES/{}'.format(custom_image,
+                                               default_custom_image)])
+
+  cmd.extend(['{}:{}'.format(name, name) for name in namelist])
+  common.RunAndCheckOutput(cmd)
+
+  return target_file
+
+def GeneratePartitionTimestampFlags(partition_state):
+  partition_timestamps = [
+      part.partition_name + ":" + part.version
+      for part in partition_state]
+  return ["--partition_timestamps", ",".join(partition_timestamps)]
+
+def GeneratePartitionTimestampFlagsDowngrade(pre_partition_state, post_partition_state):
+  assert pre_partition_state is not None
+  partition_timestamps = {}
+  for part in pre_partition_state:
+    partition_timestamps[part.partition_name] = part.version
+  for part in post_partition_state:
+    partition_timestamps[part.partition_name] = \
+      max(part.version, partition_timestamps[part.partition_name])
+  return [
+    "--partition_timestamps",
+    ",".join([key + ":" + val for (key, val) in partition_timestamps.items()])
+    ]
+
+def IsSparseImage(filepath):
+  with open(filepath, 'rb') as fp:
+    # Magic for android sparse image format
+    # https://source.android.com/devices/bootloader/images
+    return fp.read(4) == b'\x3A\xFF\x26\xED'
+
+def SupportsMainlineGkiUpdates(target_file):
+  """Return True if the build supports MainlineGKIUpdates.
+
+  This function scans the product.img file in IMAGES/ directory for
+  pattern |*/apex/com.android.gki.*.apex|. If there are files
+  matching this pattern, conclude that build supports mainline
+  GKI and return True
+
+  Args:
+    target_file: Path to a target_file.zip, or an extracted directory
+  Return:
+    True if thisb uild supports Mainline GKI Updates.
+  """
+  if target_file is None:
+    return False
+  if os.path.isfile(target_file):
+    target_file = common.UnzipTemp(target_file, ["IMAGES/product.img"])
+  if not os.path.isdir(target_file):
+    assert os.path.isdir(target_file), \
+        "{} must be a path to zip archive or dir containing extracted"\
+        " target_files".format(target_file)
+  image_file = os.path.join(target_file, "IMAGES", "product.img")
+
+  if not os.path.isfile(image_file):
+    return False
+
+  if IsSparseImage(image_file):
+    # Unsparse the image
+    tmp_img = common.MakeTempFile(suffix=".img")
+    subprocess.check_output(["simg2img", image_file, tmp_img])
+    image_file = tmp_img
+
+  cmd = ["debugfs_static", "-R", "ls -p /apex", image_file]
+  output = subprocess.check_output(cmd).decode()
+
+  pattern = re.compile(r"com\.android\.gki\..*\.apex")
+  return pattern.search(output) is not None
+
+def GenerateAbOtaPackage(target_file, output_file, source_file=None):
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
   if not OPTIONS.no_signing:
@@ -1689,32 +2127,92 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   else:
     staging_file = output_file
   output_zip = zipfile.ZipFile(staging_file, "w",
-                               compression=zipfile.ZIP_DEFLATED)
+                               compression=zipfile.ZIP_DEFLATED, allowZip64=True)
 
   if source_file is not None:
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     target_info = BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
     source_info = BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
+=======
+    assert "ab_partitions" in OPTIONS.source_info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
+    assert "ab_partitions" in OPTIONS.target_info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
+    target_info = common.BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
+    source_info = common.BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
+    vendor_prop = source_info.info_dict.get("vendor.build.prop")
+    if vendor_prop and \
+        vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true":
+      # TODO(zhangkelvin) Remove this once FEC on VABC is supported
+      logger.info("Virtual AB Compression enabled, disabling FEC")
+      OPTIONS.disable_fec_computation = True
+      OPTIONS.disable_verity_computation = True
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   else:
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     target_info = BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
+=======
+    assert "ab_partitions" in OPTIONS.info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
+    target_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     source_info = None
+
+  additional_args = []
+
+  # Prepare custom images.
+  if OPTIONS.custom_images:
+    target_file = GetTargetFilesZipForCustomImagesUpdates(
+        target_file, OPTIONS.custom_images)
+
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+  if OPTIONS.skip_postinstall:
+=======
+  if OPTIONS.retrofit_dynamic_partitions:
+    target_file = GetTargetFilesZipForRetrofitDynamicPartitions(
+        target_file, target_info.get("super_block_devices").strip().split(),
+        target_info.get("dynamic_partition_list").strip().split())
+  elif OPTIONS.partial:
+    target_file = GetTargetFilesZipForPartialUpdates(target_file,
+                                                     OPTIONS.partial)
+    additional_args += ["--is_partial_update", "true"]
+  elif OPTIONS.skip_postinstall:
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
+    target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
+  # Target_file may have been modified, reparse ab_partitions
+  with zipfile.ZipFile(target_file, allowZip64=True) as zfp:
+    target_info.info_dict['ab_partitions'] = zfp.read(
+        AB_PARTITIONS).decode().strip().split("\n")
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
-
-  if OPTIONS.skip_postinstall:
-    target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
-
   # Generate payload.
   payload = Payload()
 
+  partition_timestamps_flags = []
   # Enforce a max timestamp this payload can be applied on top of.
   if OPTIONS.downgrade:
     max_timestamp = source_info.GetBuildProp("ro.build.date.utc")
+    partition_timestamps_flags = GeneratePartitionTimestampFlagsDowngrade(
+      metadata.precondition.partition_state,
+      metadata.postcondition.partition_state
+      )
   else:
-    max_timestamp = metadata["post-timestamp"]
-  additional_args = ["--max_timestamp", max_timestamp]
+    max_timestamp = str(metadata.postcondition.timestamp)
+    partition_timestamps_flags = GeneratePartitionTimestampFlags(
+        metadata.postcondition.partition_state)
 
-  payload.Generate(target_file, source_file, additional_args)
+  additional_args += ["--max_timestamp", max_timestamp]
+
+  if SupportsMainlineGkiUpdates(source_file):
+    logger.warn("Detected build with mainline GKI, include full boot image.")
+    additional_args.extend(["--full_boot", "true"])
+
+  payload.Generate(
+      target_file,
+      source_file,
+      additional_args + partition_timestamps_flags
+   )
 
   # Sign the payload.
   payload_signer = PayloadSigner()
@@ -1732,20 +2230,33 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
         target_file, OPTIONS.skip_postinstall)
     secondary_payload = Payload(secondary=True)
     secondary_payload.Generate(secondary_target_file,
-                               additional_args=additional_args)
+                               additional_args=["--max_timestamp",
+                               max_timestamp])
     secondary_payload.Sign(payload_signer)
     secondary_payload.WriteToZip(output_zip)
 
   # If dm-verity is supported for the device, copy contents of care_map
   # into A/B OTA package.
-  target_zip = zipfile.ZipFile(target_file, "r")
+  target_zip = zipfile.ZipFile(target_file, "r", allowZip64=True)
   if (target_info.get("verity") == "true" or
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
       target_info.get("avb_enable") == "true"):
     care_map_path = "META/care_map.txt"
     namelist = target_zip.namelist()
     if care_map_path in namelist:
       care_map_data = target_zip.read(care_map_path)
       # In order to support streaming, care_map.txt needs to be packed as
+=======
+          target_info.get("avb_enable") == "true"):
+    care_map_list = [x for x in ["care_map.pb", "care_map.txt"] if
+                     "META/" + x in target_zip.namelist()]
+
+    # Adds care_map if either the protobuf format or the plain text one exists.
+    if care_map_list:
+      care_map_name = care_map_list[0]
+      care_map_data = target_zip.read("META/" + care_map_name)
+      # In order to support streaming, care_map needs to be packed as
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
       # ZIP_STORED.
       common.ZipWriteStr(output_zip, "care_map.txt", care_map_data,
                          compress_type=zipfile.ZIP_STORED)
@@ -1830,6 +2341,31 @@ def main(argv):
       OPTIONS.extracted_input = a
     elif o == "--skip_postinstall":
       OPTIONS.skip_postinstall = True
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    elif o == "--retrofit_dynamic_partitions":
+      OPTIONS.retrofit_dynamic_partitions = True
+    elif o == "--skip_compatibility_check":
+      OPTIONS.skip_compatibility_check = True
+    elif o == "--output_metadata_path":
+      OPTIONS.output_metadata_path = a
+    elif o == "--disable_fec_computation":
+      OPTIONS.disable_fec_computation = True
+    elif o == "--disable_verity_computation":
+      OPTIONS.disable_verity_computation = True
+    elif o == "--force_non_ab":
+      OPTIONS.force_non_ab = True
+    elif o == "--boot_variable_file":
+      OPTIONS.boot_variable_file = a
+    elif o == "--partial":
+      partitions = a.split()
+      if not partitions:
+        raise ValueError("Cannot parse partitions in {}".format(a))
+      OPTIONS.partial = partitions
+    elif o == "--custom_image":
+      custom_partition, custom_image = a.split("=")
+      OPTIONS.custom_images[custom_partition] = custom_image
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     else:
       return False
     return True
@@ -1860,18 +2396,34 @@ def main(argv):
                                  "payload_signer_args=",
                                  "extracted_input_target_files=",
                                  "skip_postinstall",
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+                                 "retrofit_dynamic_partitions",
+                                 "skip_compatibility_check",
+                                 "output_metadata_path=",
+                                 "disable_fec_computation",
+                                 "disable_verity_computation",
+                                 "force_non_ab",
+                                 "boot_variable_file=",
+                                 "partial=",
+                                 "custom_image=",
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
     common.Usage(__doc__)
     sys.exit(1)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   if OPTIONS.downgrade:
     # We should only allow downgrading incrementals (as opposed to full).
     # Otherwise the device may go back from arbitrary build with this full
     # OTA package.
     if OPTIONS.incremental_source is None:
       raise ValueError("Cannot generate downgradable full OTAs")
+=======
+  common.InitLogging()
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   # Load the build info dicts from the zip directly or the extracted input
   # directory. We don't need to unzip the entire target-files zips, because they
@@ -1883,26 +2435,68 @@ def main(argv):
   if OPTIONS.extracted_input is not None:
     OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.extracted_input)
   else:
-    with zipfile.ZipFile(args[0], 'r') as input_zip:
-      OPTIONS.info_dict = common.LoadInfoDict(input_zip)
+    OPTIONS.info_dict = ParseInfoDict(args[0])
+
+  if OPTIONS.downgrade:
+    # We should only allow downgrading incrementals (as opposed to full).
+    # Otherwise the device may go back from arbitrary build with this full
+    # OTA package.
+    if OPTIONS.incremental_source is None:
+      raise ValueError("Cannot generate downgradable full OTAs")
+
+
+  # TODO(xunchang) for retrofit and partial updates, maybe we should rebuild the
+  # target-file and reload the info_dict. So the info will be consistent with
+  # the modified target-file.
 
   if OPTIONS.verbose:
     print("--- target info ---")
     common.DumpInfoDict(OPTIONS.info_dict)
 
+
   # Load the source build dict if applicable.
   if OPTIONS.incremental_source is not None:
     OPTIONS.target_info_dict = OPTIONS.info_dict
-    with zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
-      OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
+    OPTIONS.source_info_dict = ParseInfoDict(OPTIONS.incremental_source)
 
     if OPTIONS.verbose:
       print("--- source info ---")
       common.DumpInfoDict(OPTIONS.source_info_dict)
 
+  if OPTIONS.partial:
+    OPTIONS.info_dict['ab_partitions'] = \
+      list(
+        set(OPTIONS.info_dict['ab_partitions']) & set(OPTIONS.partial)
+        )
+    if OPTIONS.source_info_dict:
+      OPTIONS.source_info_dict['ab_partitions'] = \
+        list(
+          set(OPTIONS.source_info_dict['ab_partitions']) & set(OPTIONS.partial)
+          )
+
   # Load OEM dicts if provided.
   OPTIONS.oem_dicts = _LoadOemDicts(OPTIONS.oem_source)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  # Assume retrofitting dynamic partitions when base build does not set
+  # use_dynamic_partitions but target build does.
+  if (OPTIONS.source_info_dict and
+      OPTIONS.source_info_dict.get("use_dynamic_partitions") != "true" and
+          OPTIONS.target_info_dict.get("use_dynamic_partitions") == "true"):
+    if OPTIONS.target_info_dict.get("dynamic_partition_retrofit") != "true":
+      raise common.ExternalError(
+          "Expect to generate incremental OTA for retrofitting dynamic "
+          "partitions, but dynamic_partition_retrofit is not set in target "
+          "build.")
+    logger.info("Implicitly generating retrofit incremental OTA.")
+    OPTIONS.retrofit_dynamic_partitions = True
+
+  # Skip postinstall for retrofitting dynamic partitions.
+  if OPTIONS.retrofit_dynamic_partitions:
+    OPTIONS.skip_postinstall = True
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   ab_update = OPTIONS.info_dict.get("ab_update") == "true"
 
   # Use the default key to sign the package if not specified with package_key.
@@ -1959,8 +2553,14 @@ def main(argv):
     else:
       OPTIONS.device_specific = OPTIONS.info_dict.get("tool_extensions")
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   if OPTIONS.device_specific is not None:
     OPTIONS.device_specific = os.path.abspath(OPTIONS.device_specific)
+=======
+    with open(OPTIONS.log_diff, 'w') as out_file:
+      target_files_diff.recursiveDiff(
+          '', source_dir, target_dir, out_file)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   # Generate a full OTA.
   if OPTIONS.incremental_source is None:

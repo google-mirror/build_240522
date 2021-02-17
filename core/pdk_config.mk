@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # This file defines the rule to fuse the platform.zip into the current PDK build.
 PDK_PLATFORM_JAVA_ZIP_JAVA_TARGET_LIB_DIR :=
 PDK_PLATFORM_JAVA_ZIP_JAVA_HOST_LIB_DIR := \
@@ -187,3 +188,5 @@ ifneq (,$(filter platform platform-java, $(MAKECMDGOALS))$(filter true,$(TARGET_
       $(eval $(call add-dependency,$(PRODUCT_OUT)/$(f),$(PRODUCT_OUT)/symbols/$(f))))
   endif # PLATFORM_ZIP || PLATFORM_DIR
 endif # platform.zip/dir build or PDK
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

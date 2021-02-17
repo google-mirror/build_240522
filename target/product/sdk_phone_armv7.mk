@@ -13,9 +13,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+QEMU_USE_SYSTEM_EXT_PARTITIONS := true
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/vendor/lib/libreference-ril.so
+=======
+# This is a build configuration for a full-featured build of the
+# Open-Source part of the tree. It's geared toward a US-centric
+# build quite specifically for the emulator, and might not be
+# entirely appropriate to inherit from for on-device configurations.
+
+# Enable mainline checking for exact this product name
+ifeq (sdk_phone_armv7,$(TARGET_PRODUCT))
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+endif
+
+#
+# All components inherited here go to system image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
+
+#
+# All components inherited here go to system_ext image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
+
+#
+# All components inherited here go to product image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
+
+#
+# All components inherited here go to vendor image
+#
+$(call inherit-product-if-exists, device/generic/goldfish/arm32-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_arm/device.mk)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Note: the following lines need to stay at the beginning so that it can
 # take priority  and override the rules it inherit from other mk files
@@ -36,4 +76,5 @@ PRODUCT_PACKAGES += \
 # Overrides
 PRODUCT_BRAND := Android
 PRODUCT_NAME := sdk_phone_armv7
-PRODUCT_DEVICE := generic
+PRODUCT_DEVICE := emulator_arm
+PRODUCT_MODEL := Android SDK built for arm

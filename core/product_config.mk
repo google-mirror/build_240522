@@ -239,8 +239,20 @@ endif
 $(call import-products, $(current_product_makefile))
 endif  # Import all or just the current product makefile
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Sanity check
 $(check-all-products)
+=======
+# Quick check
+$(check-all-products)
+
+# Import all the products that have made artifact path requirements, so that we can verify
+# the artifacts they produce.
+# These are imported after check-all-products because some of them might not be real products.
+$(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
+  $(if $(filter-out $(makefile),$(PRODUCTS)),$(eval $(call import-products,$(makefile))))\
+)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ifneq ($(filter dump-products, $(MAKECMDGOALS)),)
 $(dump-products)
@@ -258,8 +270,18 @@ current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+############################################################################
+# Strip and assign the PRODUCT_ variables.
+$(call strip-product-vars)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 #############################################################################
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# Quick check and assign default values
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # A list of module names of BOOTCLASSPATH (jar files)
 PRODUCT_BOOT_JARS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BOOT_JARS))
@@ -303,7 +325,16 @@ PRODUCT_AAPT_CONFIG_SP := $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG := \
     $(subst $(space),$(comma),$(strip $(PRODUCT_AAPT_CONFIG)))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_BRAND := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BRAND))
+=======
+# Add 'platform:' prefix to unqualified boot jars
+PRODUCT_BOOT_JARS := $(foreach pair,$(PRODUCT_BOOT_JARS), \
+  $(if $(findstring :,$(pair)),,platform:)$(pair))
+
+# The extra system server jars must be appended at the end after common system server jars.
+PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 PRODUCT_MODEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_MODEL))
 ifndef PRODUCT_MODEL
@@ -334,6 +365,7 @@ ifneq (1,$(words $(PRODUCT_DEFAULT_DEV_CERTIFICATE)))
 endif
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # A list of words like <source path>:<destination path>[:<owner>].
 # The file at the source path should be copied to the destination path
 # when building  this product.  <destination path> is relative to
@@ -342,6 +374,12 @@ endif
 # The optional :<owner> is used to indicate the owner of a vendor file.
 PRODUCT_COPY_FILES := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COPY_FILES))
+=======
+$(foreach pair,$(PRODUCT_UPDATABLE_BOOT_JARS), \
+  $(eval jar := $(call word-colon,2,$(pair))) \
+  $(if $(findstring $(jar), $(PRODUCT_BOOT_JARS)), \
+    $(error A jar in PRODUCT_UPDATABLE_BOOT_JARS must not be in PRODUCT_BOOT_JARS, but $(jar) is)))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # A list of property assignments, like "key = value", with zero or more
 # whitespace characters on either side of the '='.
@@ -502,6 +540,117 @@ PRODUCT_SOONG_NAMESPACES := \
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Whether the whitelist of actionable compatible properties should be disabled or not
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE))
+=======
+ifdef PRODUCT_SHIPPING_API_LEVEL
+  ifneq (,$(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)))
+    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)
+  endif
+endif
+
+# If build command defines OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS,
+# override PRODUCT_EXTRA_VNDK_VERSIONS with it.
+ifdef OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS
+  PRODUCT_EXTRA_VNDK_VERSIONS := $(OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS)
+endif
+
+###########################################
+# APEXes are by default not compressed
+#
+# APEX compression can be forcibly enabled (resp. disabled) by
+# setting OVERRIDE_PRODUCT_COMPRESSED_APEX to true (resp. false), e.g. by
+# setting the OVERRIDE_PRODUCT_COMPRESSED_APEX environment variable.
+ifdef OVERRIDE_PRODUCT_COMPRESSED_APEX
+  PRODUCT_COMPRESSED_APEX := $(OVERRIDE_PRODUCT_COMPRESSED_APEX)
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS \
+    ,Use PRODUCT_EXTRA_VNDK_VERSIONS instead)
+
+# If build command defines OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,
+# override PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE with it unless it is
+# defined as `false`. If the value is `false` clear
+# PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+# OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE can be used for
+# testing only.
+ifdef OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+  ifeq (false,$(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE))
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE :=
+  else
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := $(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)
+  endif
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface if PRODUCT_SHIPPING_API_LEVEL is greater than 29.
+  PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,Use PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE instead)
+
+# If build command defines PRODUCT_USE_PRODUCT_VNDK_OVERRIDE as `false`,
+# PRODUCT_PRODUCT_VNDK_VERSION will not be defined automatically.
+# PRODUCT_USE_PRODUCT_VNDK_OVERRIDE can be used for testing only.
+PRODUCT_USE_PRODUCT_VNDK := false
+ifneq ($(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE),)
+  PRODUCT_USE_PRODUCT_VNDK := $(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE)
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface for VNDK if PRODUCT_SHIPPING_API_LEVEL is greater
+  # than 29.
+  PRODUCT_USE_PRODUCT_VNDK := true
+endif
+
+ifeq ($(PRODUCT_USE_PRODUCT_VNDK),true)
+  ifndef PRODUCT_PRODUCT_VNDK_VERSION
+    PRODUCT_PRODUCT_VNDK_VERSION := current
+  endif
+endif
+
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK_OVERRIDE,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+
+define product-overrides-config
+$$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
+    $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
+        $$(error Rule "$$(rule)" in PRODUCT_$(1)_OVERRIDE is not <module_name>:<new_value>)))
+endef
+
+$(foreach var, \
+    MANIFEST_PACKAGE_NAME \
+    PACKAGE_NAME \
+    CERTIFICATE, \
+  $(eval $(call product-overrides-config,$(var))))
+
+# Macro to use below. $(1) is the name of the partition
+define product-build-image-config
+ifneq ($$(filter-out true false,$$(PRODUCT_BUILD_$(1)_IMAGE)),)
+    $$(error Invalid PRODUCT_BUILD_$(1)_IMAGE: $$(PRODUCT_BUILD_$(1)_IMAGE) -- true false and empty are supported)
+endif
+endef
+
+# Copy and check the value of each PRODUCT_BUILD_*_IMAGE variable
+$(foreach image, \
+    SYSTEM \
+    SYSTEM_OTHER \
+    VENDOR \
+    PRODUCT \
+    SYSTEM_EXT \
+    ODM \
+    VENDOR_DLKM \
+    ODM_DLKM \
+    CACHE \
+    RAMDISK \
+    USERDATA \
+    BOOT \
+    RECOVERY, \
+  $(eval $(call product-build-image-config,$(image))))
+
+product-build-image-config :=
+
+$(call readonly-product-vars)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

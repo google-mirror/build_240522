@@ -128,6 +128,7 @@ ifneq ($(filter address,$(my_sanitize)),)
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # CFI needs gold linker, and mips toolchain does not have one.
 ifneq ($(filter mips mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
@@ -135,6 +136,9 @@ ifneq ($(filter mips mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
 endif
 
 # Disable CFI for host targets
+=======
+# Disable sanitizers which need the UBSan runtime for host targets.
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifdef LOCAL_IS_HOST_MODULE
   my_sanitize := $(filter-out cfi,$(my_sanitize))
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
@@ -142,8 +146,8 @@ endif
 
 # Support for local sanitize blacklist paths.
 ifneq ($(my_sanitize)$(my_global_sanitize),)
-  ifneq ($(LOCAL_SANITIZE_BLACKLIST),)
-    my_cflags += -fsanitize-blacklist=$(LOCAL_PATH)/$(LOCAL_SANITIZE_BLACKLIST)
+  ifneq ($(LOCAL_SANITIZE_BLOCKLIST),)
+    my_cflags += -fsanitize-blacklist=$(LOCAL_PATH)/$(LOCAL_SANITIZE_BLOCKLIST)
   endif
 endif
 
@@ -326,8 +330,18 @@ ifneq ($(filter address,$(my_sanitize)),)
   endif
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Use minimal diagnostics when integer overflow is enabled; never do it for HOST or AUX modules
 ifeq ($(LOCAL_IS_HOST_MODULE)$(LOCAL_IS_AUX_MODULE),)
+=======
+# If local module needs HWASAN, add compiler flags.
+ifneq ($(filter hwaddress,$(my_sanitize)),)
+  my_cflags += $(HWADDRESS_SANITIZER_CONFIG_EXTRA_CFLAGS)
+endif
+
+# Use minimal diagnostics when integer overflow is enabled; never do it for HOST modules
+ifeq ($(LOCAL_IS_HOST_MODULE),)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   # Pre-emptively add UBSAN minimal runtime incase a static library dependency requires it
   ifeq ($(filter STATIC_LIBRARIES,$(LOCAL_MODULE_CLASS)),)
     ifndef LOCAL_SDK_VERSION

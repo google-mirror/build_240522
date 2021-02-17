@@ -275,6 +275,7 @@ class EdifyGenerator(object):
   def ApplyPatch(self, srcfile, tgtfile, tgtsize, tgtsha1, *patchpairs):
     """Apply binary patches (in *patchpairs) to the given srcfile to
     produce tgtfile (which may be "-" to indicate overwriting the
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     source file."""
     if len(patchpairs) % 2 != 0 or len(patchpairs) == 0:
       raise ValueError("bad patches given to ApplyPatch")
@@ -286,6 +287,98 @@ class EdifyGenerator(object):
         common.ErrorCode.APPLY_PATCH_FAILURE, srcfile))
     cmd = "".join(cmd)
     self.script.append(self.WordWrap(cmd))
+=======
+    source file.
+
+    This edify function is being deprecated in favor of PatchPartition(). It
+    will try to redirect calls to PatchPartition() if possible. On unknown /
+    invalid inputs, raises an exception.
+    """
+    tokens = srcfile.split(':')
+    assert (len(tokens) == 6 and tokens[0] == 'EMMC' and tgtfile == '-' and
+            len(patchpairs) == 2), \
+        "Failed to handle unknown format. Use PatchPartition() instead."
+
+    # Also validity check the args.
+    assert tokens[3] == patchpairs[0], \
+        "Found mismatching values for source SHA-1: {} vs {}".format(
+            tokens[3], patchpairs[0])
+    assert int(tokens[4]) == tgtsize, \
+        "Found mismatching values for target size: {} vs {}".format(
+            tokens[4], tgtsize)
+    assert tokens[5] == tgtsha1, \
+        "Found mismatching values for target SHA-1: {} vs {}".format(
+            tokens[5], tgtsha1)
+
+    source = '{}:{}:{}:{}'.format(tokens[0], tokens[1], tokens[2], tokens[3])
+    target = '{}:{}:{}:{}'.format(tokens[0], tokens[1], tokens[4], tokens[5])
+    patch = patchpairs[1]
+    self.PatchPartition(target, source, patch)
+
+  def PatchPartition(self, target, source, patch):
+    """
+    Applies the patch to the source partition and writes it to target.
+
+    Args:
+      target: the target arg to patch_partition. Must be in the form of
+        foo:bar:baz:quux
+      source: the source arg to patch_partition. Must be in the form of
+        foo:bar:baz:quux
+      patch: the patch arg to patch_partition. Must be an unquoted string.
+    """
+    self._CheckSecondTokenNotSlotSuffixed(target, "PatchPartitionExpr")
+    self._CheckSecondTokenNotSlotSuffixed(source, "PatchPartitionExpr")
+    self.PatchPartitionExpr('"%s"' % target, '"%s"' % source, '"%s"' % patch)
+
+  def PatchPartitionExpr(self, target_expr, source_expr, patch_expr):
+    """
+    Applies the patch to the source partition and writes it to target.
+
+    Args:
+      target_expr: an Edify expression that serves as the target arg to
+        patch_partition. Must be evaluated to a string in the form of
+        foo:bar:baz:quux
+      source_expr: an Edify expression that serves as the source arg to
+        patch_partition. Must be evaluated to a string in the form of
+        foo:bar:baz:quux
+      patch_expr: an Edify expression that serves as the patch arg to
+        patch_partition. Must be evaluated to a string.
+    """
+    self.script.append(self.WordWrap((
+        'patch_partition({target},\0{source},\0'
+        'package_extract_file({patch})) ||\n'
+        '    abort(concat('
+        '        "E{code}: Failed to apply patch to ",{source}));').format(
+            target=target_expr,
+            source=source_expr,
+            patch=patch_expr,
+            code=common.ErrorCode.APPLY_PATCH_FAILURE)))
+
+  def _GetSlotSuffixDeviceForEntry(self, entry=None):
+    """
+    Args:
+      entry: the fstab entry of device "foo"
+    Returns:
+      An edify expression. Caller must not quote result.
+      If foo is slot suffixed, it returns
+        'add_slot_suffix("foo")'
+      Otherwise it returns
+        '"foo"' (quoted)
+    """
+    assert entry is not None
+    if entry.slotselect:
+      return 'add_slot_suffix("%s")' % entry.device
+    return '"%s"' % entry.device
+
+  def _CheckSecondTokenNotSlotSuffixed(self, s, fn):
+    lst = s.split(':')
+    assert(len(lst) == 4), "{} does not contain 4 tokens".format(s)
+    if self.fstab:
+      entry = common.GetEntryForDevice(self.fstab, lst[1])
+      if entry is not None:
+        assert not entry.slotselect, \
+          "Use %s because %s is slot suffixed" % (fn, lst[1])
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   def WriteRawImage(self, mount_point, fn, mapfn=None):
     """Write the given package file into the partition for the given

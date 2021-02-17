@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES := \
 
 # minimal configuration for audio policy.
 PRODUCT_COPY_FILES += \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
@@ -40,7 +41,31 @@ PRODUCT_COPY_FILES += \
 #   NFC configuration file should be in vendor/etc, instead of system/etc
 PRODUCT_COPY_FILES += \
     device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
+=======
+    kernel/prebuilts/4.19/arm64/kernel-4.19-gz:kernel-4.19-gz \
+    kernel/prebuilts/5.4/arm64/kernel-5.4:kernel-5.4 \
+    kernel/prebuilts/5.4/arm64/kernel-5.4-gz:kernel-5.4-gz \
+    kernel/prebuilts/5.4/arm64/kernel-5.4-lz4:kernel-5.4-lz4 \
+    kernel/prebuilts/5.10/arm64/kernel-5.10:kernel-5.10 \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-gz:kernel-5.10-gz \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4:kernel-5.10-lz4 \
+    kernel/prebuilts/mainline/arm64/kernel-mainline-allsyms:kernel-mainline \
+    kernel/prebuilts/mainline/arm64/kernel-mainline-gz-allsyms:kernel-mainline-gz \
+    kernel/prebuilts/mainline/arm64/kernel-mainline-lz4-allsyms:kernel-mainline-lz4
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
-# Adjust the Dalvik heap to be appropriate for a tablet.
-$(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)
-$(call inherit-product-if-exists, frameworks/native/build/tablet-dalvik-heap.mk)
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_COPY_FILES += \
+    kernel/prebuilts/5.4/arm64/kernel-5.4:kernel-5.4-allsyms \
+    kernel/prebuilts/5.4/arm64/kernel-5.4-gz:kernel-5.4-gz-allsyms \
+    kernel/prebuilts/5.4/arm64/kernel-5.4-lz4:kernel-5.4-lz4-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10:kernel-5.10-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-gz:kernel-5.10-gz-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4:kernel-5.10-lz4-allsyms \
+
+endif
+
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
+PRODUCT_BUILD_RECOVERY_IMAGE := false
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)

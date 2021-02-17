@@ -14,9 +14,14 @@
 
 test_suite_name := cts
 test_suite_tradefed := cts-tradefed
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # TODO: Fix the following two lines after harness is moved to its own repo
 test_suite_dynamic_config := test/suite_harness/tools/cts-tradefed/DynamicConfig.xml
 test_suite_readme := test/suite_harness/tools/cts-tradefed/README
+=======
+test_suite_dynamic_config := cts/tools/cts-tradefed/DynamicConfig.xml
+test_suite_readme := cts/tools/cts-tradefed/README
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
 

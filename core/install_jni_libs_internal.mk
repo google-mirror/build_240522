@@ -44,6 +44,7 @@ endif
 
 else  # not my_embed_jni
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 my_jni_shared_libraries := $(strip $(my_jni_shared_libraries))
 ifneq ($(my_jni_shared_libraries),)
 # The jni libaries will be installed to the system.img.
@@ -53,7 +54,15 @@ my_shared_library_path := $(call get_non_asan_path,\
   $($(my_2nd_arch_prefix)TARGET_OUT$(partition_tag)_SHARED_LIBRARIES))
 # Do not use order-only dependency, because we want to rebuild the image if an jni is updated.
 $(LOCAL_INSTALLED_MODULE) : $(addprefix $(my_shared_library_path)/, $(my_jni_filenames))
+=======
+  # The jni libaries will be installed to the system.img.
+  my_jni_filenames := $(notdir $(my_jni_shared_libraries))
+  # Make sure the JNI libraries get installed
+  my_shared_library_path := $(call get_non_asan_path,\
+      $($(my_2nd_arch_prefix)TARGET_OUT$(partition_tag)_SHARED_LIBRARIES))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Create symlink in the app specific lib path
 # Skip creating this symlink when running the second part of a target sanitization build.
 ifndef SANITIZE_TARGET
@@ -61,7 +70,12 @@ ifdef LOCAL_POST_INSTALL_CMD
 # Add a shell command separator
 LOCAL_POST_INSTALL_CMD += ;
 endif
+=======
+  bit_suffix := $(if $(filter %64,$(TARGET_$(my_2nd_arch_prefix)ARCH)),:64,:32)
+  ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET += $(addsuffix $(bit_suffix),$(LOCAL_JNI_SHARED_LIBRARIES))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 my_symlink_target_dir := $(patsubst $(PRODUCT_OUT)%,%,\
     $(my_shared_library_path))
 LOCAL_POST_INSTALL_CMD += \
@@ -73,6 +87,21 @@ ifdef LOCAL_POST_INSTALL_CMD
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
 endif
 endif
+=======
+  # Create symlink in the app specific lib path
+  # Skip creating this symlink when running the second part of a target sanitization build.
+  ifeq ($(filter address,$(SANITIZE_TARGET)),)
+    my_symlink_target_dir := $(patsubst $(PRODUCT_OUT)%,%,\
+      $(my_shared_library_path))
+    $(foreach lib,$(my_jni_filenames),\
+      $(call symlink-file, \
+        $(my_shared_library_path)/$(lib), \
+        $(my_symlink_target_dir)/$(lib), \
+        $(my_app_lib_path)/$(lib)) \
+      $(eval $$(LOCAL_INSTALLED_MODULE) : $$(my_app_lib_path)/$$(lib)) \
+      $(eval ALL_MODULES.$(my_register_name).INSTALLED += $$(my_app_lib_path)/$$(lib)))
+  endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Clear jni_shared_libraries to not embed it into the apk.
 my_jni_shared_libraries :=
@@ -97,9 +126,18 @@ else # not my_embed_jni
 $(foreach lib, $(my_prebuilt_jni_libs), \
     $(eval $(call copy-one-file, $(lib), $(my_app_lib_path)/$(notdir $(lib)))))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 $(LOCAL_INSTALLED_MODULE) : $(addprefix $(my_app_lib_path)/, $(notdir $(my_prebuilt_jni_libs)))
 endif  # my_embed_jni
 endif  # inner my_prebuilt_jni_libs
+=======
+      my_installed_library := $(addprefix $(my_app_lib_path)/, $(notdir $(my_prebuilt_jni_libs)))
+      $(LOCAL_INSTALLED_MODULE) : $(my_installed_library)
+
+      ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed_library)
+    endif  # my_embed_jni
+  endif  # inner my_prebuilt_jni_libs
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 endif  # outer my_prebuilt_jni_libs
 
 # Verify that all included libraries are built against the NDK

@@ -15,7 +15,14 @@
 #
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # aosp_x86 with arm libraries needed by binary translation.
+=======
+#
+# All components inherited here go to system image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 include $(SRC_TARGET_DIR)/product/full_x86.mk
 

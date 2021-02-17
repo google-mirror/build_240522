@@ -1,8 +1,27 @@
 ####################################
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # dexpreopt support for ART
+=======
+# ART boot image installation
+# Input variables:
+#   my_boot_image_name: the boot image to install
+#   my_boot_image_arch: the architecture to install (e.g. TARGET_ARCH, not expanded)
+#   my_boot_image_out:  the install directory (e.g. $(PRODUCT_OUT))
+#   my_boot_image_syms: the symbols director (e.g. $(TARGET_OUT_UNSTRIPPED))
+#
+# Output variables:
+#   my_boot_image_module: the created module name. Empty if no module is created.
+#
+# Install the boot images compiled by Soong.
+# Create a module named dexpreopt_bootjar.$(my_boot_image_name)_$($(my_boot_image_arch))
+# that installs all of boot image files.
+# If there is no file to install for $(my_boot_image_name), for example when
+# building an unbundled build, then no module is created.
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 #
 ####################################
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Default to debug version to help find bugs.
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifeq ($(USE_DEX2OAT_DEBUG),false)
@@ -12,7 +31,32 @@ else
 DEX2OAT := $(HOST_OUT_EXECUTABLES)/dex2oatd$(HOST_EXECUTABLE_SUFFIX)
 PATCHOAT := $(HOST_OUT_EXECUTABLES)/patchoatd$(HOST_EXECUTABLE_SUFFIX)
 endif
+=======
+# Install $(1) to $(2) so that it is shared between architectures.
+# Returns the target path of the shared vdex file and installed symlink.
+define copy-vdex-file
+$(strip \
+  $(eval # Remove the arch dir) \
+  $(eval my_vdex_shared := $(dir $(patsubst %/,%,$(dir $(2))))$(notdir $(2))) \
+  $(if $(filter-out %_2ND_ARCH,$(my_boot_image_arch)), \
+    $(eval # Copy $(1) to directory one level up (i.e. with the arch dir removed).) \
+    $(eval $(call copy-one-file,$(1),$(my_vdex_shared))) \
+  ) \
+  $(eval # Create symlink at $(2) which points to the actual physical copy.) \
+  $(call symlink-file,$(my_vdex_shared),../$(notdir $(2)),$(2)) \
+  $(my_vdex_shared) $(2) \
+)
+endef
 
+# Same as 'copy-many-files' but it uses the vdex-specific helper above.
+define copy-vdex-files
+$(foreach v,$(1),$(call copy-vdex-file,$(call word-colon,1,$(v)),$(2)$(call word-colon,2,$(v))))
+endef
+
+my_boot_image_module :=
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 DEX2OAT_DEPENDENCY += $(DEX2OAT)
 PATCHOAT_DEPENDENCY += $(PATCHOAT)
 
@@ -135,10 +179,17 @@ ALL_DEFAULT_INSTALLED_MODULES += $(my_installed_profile)
 endif
 
 LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES := $(addprefix $(PRODUCT_OUT)/$(DEXPREOPT_BOOT_JAR_DIR)/,$(LIBART_TARGET_BOOT_ART_VDEX_FILES))
+=======
+my_suffix := $(my_boot_image_name)_$($(my_boot_image_arch))
+my_copy_pairs := $(strip $(DEXPREOPT_IMAGE_BUILT_INSTALLED_$(my_suffix)))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
-my_2nd_arch_prefix :=
-include $(BUILD_SYSTEM)/dex_preopt_libart_boot.mk
+# Generate the boot image module only if there is any file to install.
+ifneq (,$(my_copy_pairs))
+  my_first_pair := $(firstword $(my_copy_pairs))
+  my_rest_pairs := $(wordlist 2,$(words $(my_copy_pairs)),$(my_copy_pairs))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
 ifdef TARGET_2ND_ARCH
 my_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
@@ -159,12 +210,24 @@ $(LIBART_TARGET_BOOT_ART_VDEX_INSTALLED_SHARED_FILES) : $(DEFAULT_DEX_PREOPT_BUI
 	$(hide) ln -sf /$(DEXPREOPT_BOOT_JAR_DIR)/$(notdir $@) $(PRIMARY_ARCH_DIR)$(notdir $@)
 	@mkdir -p $(SECOND_ARCH_DIR)
 	$(hide) ln -sf /$(DEXPREOPT_BOOT_JAR_DIR)/$(notdir $@) $(SECOND_ARCH_DIR)$(notdir $@)
+=======
+  my_first_src := $(call word-colon,1,$(my_first_pair))
+  my_first_dest := $(my_boot_image_out)$(call word-colon,2,$(my_first_pair))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
-my_2nd_arch_prefix :=
+  my_installed := $(call copy-many-files,$(my_rest_pairs),$(my_boot_image_out))
+  my_installed += $(call copy-vdex-files,$(DEXPREOPT_IMAGE_VDEX_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_out))
+  my_unstripped_installed := $(call copy-many-files,$(DEXPREOPT_IMAGE_UNSTRIPPED_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_syms))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ########################################################################
 # For a single jar or APK
+=======
+  # We don't have a LOCAL_PATH for the auto-generated modules, so let it be the $(BUILD_SYSTEM).
+  LOCAL_PATH := $(BUILD_SYSTEM)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # $(1): the input .jar or .apk file
 # $(2): the output .odex file
 # In the case where LOCAL_ENFORCE_USES_LIBRARIES is true, PRIVATE_DEX2OAT_CLASS_LOADER_CONTEXT
@@ -205,3 +268,24 @@ ANDROID_LOG_TAGS="*:e" $(DEX2OAT) \
 	$(PRIVATE_PROFILE_PREOPT_FLAGS) \
 	$(GLOBAL_DEXPREOPT_FLAGS)
 endef
+=======
+  include $(CLEAR_VARS)
+  LOCAL_MODULE := dexpreopt_bootjar.$(my_suffix)
+  LOCAL_PREBUILT_MODULE_FILE := $(my_first_src)
+  LOCAL_MODULE_PATH := $(dir $(my_first_dest))
+  LOCAL_MODULE_STEM := $(notdir $(my_first_dest))
+  ifneq (,$(strip $(filter HOST_%,$(my_boot_image_arch))))
+    LOCAL_IS_HOST_MODULE := true
+  endif
+  LOCAL_MODULE_CLASS := ETC
+  include $(BUILD_PREBUILT)
+  $(LOCAL_BUILT_MODULE): $(my_unstripped_installed)
+  # Installing boot.art causes all boot image bits to be installed.
+  # Keep this old behavior in case anyone still needs it.
+  $(LOCAL_INSTALLED_MODULE): $(my_installed)
+  ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+  $(my_all_targets): $(my_installed)
+
+  my_boot_image_module := $(LOCAL_MODULE)
+endif  # my_copy_pairs != empty
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

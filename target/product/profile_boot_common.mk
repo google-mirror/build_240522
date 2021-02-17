@@ -31,11 +31,15 @@ PRODUCT_COPY_FILES += \
     build/target/product/empty-preloaded-classes:system/etc/preloaded-classes
 
 # Boot image property overrides.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jitinitialsize=32m \
     dalvik.vm.jitmaxsize=32m \
     dalvik.vm.usejitprofiles=true \
     dalvik.vm.hot-startup-method-samples=256 \
+=======
+PRODUCT_VENDOR_PROPERTIES += \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     dalvik.vm.profilesystemserver=true \
     dalvik.vm.profilebootimage=true
 

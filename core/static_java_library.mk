@@ -108,7 +108,11 @@ endif
 framework_res_package_export :=
 # Please refer to package.mk
 ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ifneq ($(filter-out current system_current test_current,$(LOCAL_SDK_RES_VERSION))$(if $(TARGET_BUILD_APPS),$(filter current system_current test_current,$(LOCAL_SDK_RES_VERSION))),)
+=======
+ifneq ($(filter-out current system_current test_current,$(LOCAL_SDK_RES_VERSION))$(if $(TARGET_BUILD_USE_PREBUILT_SDKS),$(filter current system_current test_current,$(LOCAL_SDK_RES_VERSION))),)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 framework_res_package_export := \
     $(HISTORICAL_SDK_VERSIONS_ROOT)/$(LOCAL_SDK_RES_VERSION)/android.jar
 else
@@ -228,7 +232,7 @@ $(built_aar) : $(aar_classes_jar) $(full_android_manifest) $(intermediates.COMMO
 	  $(call jar-args-sorted-files-in-directory,$(dir $@)aar)
 
 # Register the aar file.
-ALL_MODULES.$(LOCAL_MODULE).AAR := $(built_aar)
+ALL_MODULES.$(my_register_name).AAR := $(built_aar)
 endif  # need_compile_res
 
 # Reset internal variables.

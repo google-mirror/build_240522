@@ -33,6 +33,7 @@ ifeq ($(strip $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT)),)
 TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT := generic
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 KNOWN_ARMv8_CORES := cortex-a53 cortex-a53.a57 cortex-a55 cortex-a73 cortex-a75
 KNOWN_ARMv8_CORES += kryo denver64 exynos-m1 exynos-m2
 
@@ -45,6 +46,17 @@ ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT), $(KNOWN_ARMv8_CO
       $(warning TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT, $(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT), ignored! Use armv8-a instead.)
     endif
     # Overwrite TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT
+=======
+# This quickly checks TARGET_2ND_ARCH_VARIANT against the lists above.
+ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT), $(KNOWN_ARMv82a_CORES)))
+  ifeq (,$(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT))
+    TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv8-2a
+  else ifneq (armv8-2a,$(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT))
+    $(error Incorrect TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT, $(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT). Use armv8-2a instead.)
+  endif
+else ifneq (,$(filter $(TARGET_$(combo_2nd_arch_prefix)CPU_VARIANT), $(KNOWN_ARMv8_CORES)))
+  ifeq (,$(TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     TARGET_$(combo_2nd_arch_prefix)ARCH_VARIANT := armv8-a
   endif
 endif

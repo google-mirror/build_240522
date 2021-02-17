@@ -25,7 +25,11 @@ ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
     LOCAL_JAVA_LANGUAGE_VERSION := 1.7
   else ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT)))
     LOCAL_JAVA_LANGUAGE_VERSION := 1.8
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   else ifneq (,$(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS))
+=======
+  else ifneq (,$(LOCAL_SDK_VERSION)$(TARGET_BUILD_USE_PREBUILT_SDKS))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     # TODO(ccross): allow 1.9 for current and unbundled once we have SDK system modules
     LOCAL_JAVA_LANGUAGE_VERSION := 1.8
   else
@@ -225,6 +229,18 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_JAVA_SOURCE_LIST := $(java_source_list_fi
 
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_RMTYPEDEFS := $(LOCAL_RMTYPEDEFS)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# Quickly check class path vars.
+disallowed_deps := $(foreach sdk,$(TARGET_AVAILABLE_SDK_VERSIONS),$(call resolve-prebuilt-sdk-module,$(sdk)))
+disallowed_deps += $(foreach sdk,$(TARGET_AVAILABLE_SDK_VERSIONS),\
+  $(foreach sdk_lib,$(JAVA_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,$(sdk),$(sdk_lib))))
+bad_deps := $(filter $(disallowed_deps),$(LOCAL_JAVA_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES))
+ifneq (,$(bad_deps))
+  $(call pretty-error,SDK modules should not be depended on directly. Please use LOCAL_SDK_VERSION for $(bad_deps))
+endif
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 full_java_bootclasspath_libs :=
 empty_bootclasspath :=
 my_system_modules :=
@@ -237,12 +253,22 @@ ifndef LOCAL_IS_HOST_MODULE
       # Most users of LOCAL_NO_STANDARD_LIBRARIES really mean no framework libs,
       # and manually add back the core libs.  The ones that don't are in soong
       # now, so just always assume that they want the default system modules
-      my_system_modules := $(DEFAULT_SYSTEM_MODULES)
+      my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     else  # LOCAL_NO_STANDARD_LIBRARIES
-      full_java_bootclasspath_libs := $(call java-lib-header-files,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES))
-      LOCAL_JAVA_LIBRARIES := $(filter-out $(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES) $(TARGET_DEFAULT_JAVA_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
-      my_system_modules := $(DEFAULT_SYSTEM_MODULES)
+      full_java_bootclasspath_libs := $(call java-lib-header-files,$(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES) $(FRAMEWORK_LIBRARIES))
+      LOCAL_JAVA_LIBRARIES := $(filter-out $(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES) $(FRAMEWORK_LIBRARIES),$(LOCAL_JAVA_LIBRARIES))
+      my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     endif  # LOCAL_NO_STANDARD_LIBRARIES
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+    ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDKS))
+      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,system_current,$(lib_name)))
+    else
+      # When SDK libraries are referenced from modules built without SDK, provide the all APIs to them
+      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(lib_name))
+    endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   else
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       $(call pretty-error,Must not define both LOCAL_NO_STANDARD_LIBRARIES and LOCAL_SDK_VERSION)
@@ -251,6 +277,7 @@ ifndef LOCAL_IS_HOST_MODULE
       $(call pretty-error,Invalid LOCAL_SDK_VERSION '$(LOCAL_SDK_VERSION)' \
              Choices are: $(TARGET_AVAILABLE_SDK_VERSIONS))
     endif
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),current)
       # LOCAL_SDK_VERSION is current and no TARGET_BUILD_APPS.
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_stubs_current)
@@ -260,6 +287,13 @@ ifndef LOCAL_IS_HOST_MODULE
       full_java_bootclasspath_libs := $(call java-lib-header-files,android_test_stubs_current)
     else ifeq ($(LOCAL_SDK_VERSION)$(TARGET_BUILD_APPS),core_current)
       full_java_bootclasspath_libs := $(call java-lib-header-files,core.current.stubs)
+=======
+
+    ifneq (,$(TARGET_BUILD_USE_PREBUILT_SDKS)$(filter-out %current,$(LOCAL_SDK_VERSION)))
+      # TARGET_BUILD_USE_PREBUILT_SDKS mode or numbered SDK. Use prebuilt modules.
+      sdk_module := $(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION))
+      sdk_libs := $(foreach lib_name,$(LOCAL_SDK_LIBRARIES),$(call resolve-prebuilt-sdk-module,$(LOCAL_SDK_VERSION),$(lib_name)))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     else
       # core_<ver> is subset of <ver>. Instead of defining a prebuilt lib for core_<ver>,
       # use the stub for <ver> when building for apps.
@@ -286,7 +320,11 @@ ifndef LOCAL_IS_HOST_MODULE
   # related classes to be present. This change adds stubs needed for
   # javac to compile lambdas.
   ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     ifdef TARGET_BUILD_APPS
+=======
+    ifdef TARGET_BUILD_USE_PREBUILT_SDKS
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
       full_java_bootclasspath_libs += $(call java-lib-header-files,sdk-core-lambda-stubs)
     else
       full_java_bootclasspath_libs += $(call java-lib-header-files,core-lambda-stubs)
@@ -302,10 +340,10 @@ else # LOCAL_IS_HOST_MODULE
     ifeq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
       empty_bootclasspath := ""
     else
-      full_java_bootclasspath_libs := $(call java-lib-header-files,$(addsuffix -hostdex,$(TARGET_DEFAULT_BOOTCLASSPATH_LIBRARIES)),true)
+      full_java_bootclasspath_libs := $(call java-lib-header-files,$(addsuffix -hostdex,$(LEGACY_CORE_PLATFORM_BOOTCLASSPATH_LIBRARIES)),true)
     endif
 
-    my_system_modules := $(DEFAULT_SYSTEM_MODULES)
+    my_system_modules := $(LEGACY_CORE_PLATFORM_SYSTEM_MODULES)
     full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES),true)
     full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES),true)
   else # !USE_CORE_LIB_BOOTCLASSPATH
@@ -332,6 +370,28 @@ else # LOCAL_IS_HOST_MODULE
   endif # USE_CORE_LIB_BOOTCLASSPATH
 endif # !LOCAL_IS_HOST_MODULE
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+ifdef RECORD_ALL_DEPS
+ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS) $(full_java_bootclasspath_libs)
+endif
+
+# Export the SDK libs. The sdk library names listed in LOCAL_SDK_LIBRARIES are first exported.
+# Then sdk library names exported from dependencies are all re-exported.
+$(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS_FILES := $(exported_sdk_libs_files)
+$(my_exported_sdk_libs_file): PRIVATE_SDK_LIBS := $(sort $(LOCAL_SDK_LIBRARIES))
+$(my_exported_sdk_libs_file): $(exported_sdk_libs_files)
+	@echo "Export SDK libs $@"
+	$(hide) mkdir -p $(dir $@) && rm -f $@ $@.temp
+	$(if $(PRIVATE_SDK_LIBS),\
+		echo $(PRIVATE_SDK_LIBS) | tr ' ' '\n' > $@.temp,\
+		touch $@.temp)
+	$(if $(PRIVATE_EXPORTED_SDK_LIBS_FILES),\
+		cat $(PRIVATE_EXPORTED_SDK_LIBS_FILES) >> $@.temp)
+	$(hide) cat $@.temp | sort -u > $@
+	$(hide) rm -f $@.temp
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifdef empty_bootclasspath
   ifdef full_java_bootclasspath_libs
     $(call pretty-error,internal error: empty_bootclasspath and full_java_bootclasspath_libs should not both be set)
@@ -473,6 +533,10 @@ SOONG_CONV.$(LOCAL_MODULE).DEPS := \
     $(LOCAL_JAVA_LIBRARIES) \
     $(LOCAL_JNI_SHARED_LIBRARIES)
 SOONG_CONV.$(LOCAL_MODULE).TYPE := java
+SOONG_CONV.$(LOCAL_MODULE).MAKEFILES := \
+    $(SOONG_CONV.$(LOCAL_MODULE).MAKEFILES) $(LOCAL_MODULE_MAKEFILE)
+SOONG_CONV.$(LOCAL_MODULE).INSTALLED := \
+    $(SOONG_CONV.$(LOCAL_MODULE).INSTALLED) $(LOCAL_INSTALLED_MODULE)
 SOONG_CONV := $(SOONG_CONV) $(LOCAL_MODULE)
 
 endif

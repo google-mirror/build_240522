@@ -92,9 +92,42 @@ ifeq ($(strip $(TARGET_BUILD_VARIANT)),)
 TARGET_BUILD_VARIANT := eng
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+TARGET_BUILD_APPS ?=
+TARGET_BUILD_UNBUNDLED_IMAGE ?=
+
+# Set to true for an unbundled build, i.e. a build without
+# support for platform targets like the system image. This also
+# disables consistency checks that only apply to full platform
+# builds.
+TARGET_BUILD_UNBUNDLED ?=
+
+# TARGET_BUILD_APPS implies unbundled build, otherwise we default
+# to bundled (i.e. platform targets such as the system image are
+# included).
+ifneq ($(TARGET_BUILD_APPS),)
+  TARGET_BUILD_UNBUNDLED := true
+endif
+
+# TARGET_BUILD_UNBUNDLED_IMAGE also implies unbundled build.
+# (i.e. it targets to only unbundled image, such as the vendor image,
+# ,or the product image). 
+ifneq ($(TARGET_BUILD_UNBUNDLED_IMAGE),)
+  TARGET_BUILD_UNBUNDLED := true
+endif
+
+.KATI_READONLY := \
+  TARGET_PRODUCT \
+  TARGET_BUILD_VARIANT \
+  TARGET_BUILD_APPS \
+  TARGET_BUILD_UNBUNDLED \
+  TARGET_BUILD_UNBUNDLED_IMAGE \
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # ---------------------------------------------------------------
 # Set up configuration for host machine.  We don't do cross-
-# compiles except for arm/mips, so the HOST is whatever we are
+# compiles except for arm, so the HOST is whatever we are
 # running on
 
 # HOST_OS
@@ -121,15 +154,25 @@ HOST_OS_EXTRA := $(subst $(space),-,$(HOST_OS_EXTRA))
 # BUILD_OS is the real host doing the build.
 BUILD_OS := $(HOST_OS)
 
-HOST_CROSS_OS :=
-# We can cross-build Windows binaries on Linux
+# We can do the cross-build only on Linux
 ifeq ($(HOST_OS),linux)
-ifeq ($(BUILD_HOST_static),)
-HOST_CROSS_OS := windows
-HOST_CROSS_ARCH := x86
-HOST_CROSS_2ND_ARCH := x86_64
-2ND_HOST_CROSS_IS_64_BIT := true
-endif
+  # Windows has been the default host_cross OS
+  ifeq (,$(filter-out windows,$(HOST_CROSS_OS)))
+    # We can only create static host binaries for Linux, so if static host
+    # binaries are requested, turn off Windows cross-builds.
+    ifeq ($(BUILD_HOST_static),)
+      HOST_CROSS_OS := windows
+      HOST_CROSS_ARCH := x86
+      HOST_CROSS_2ND_ARCH := x86_64
+      2ND_HOST_CROSS_IS_64_BIT := true
+    endif
+  else ifeq ($(HOST_CROSS_OS),linux_bionic)
+    ifeq (,$(HOST_CROSS_ARCH))
+      $(error HOST_CROSS_ARCH missing.)
+    endif
+  else
+    $(error Unsupported HOST_CROSS_OS $(HOST_CROSS_OS))
+  endif
 endif
 
 ifeq ($(HOST_OS),)
@@ -182,6 +225,28 @@ TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# The directory used for optional partitions depend on the BoardConfig, so
+# they're defined to placeholder values here and swapped after reading the
+# BoardConfig, to be either the partition dir, or a subdir within 'system'.
+_vendor_path_placeholder := ||VENDOR-PATH-PH||
+_product_path_placeholder := ||PRODUCT-PATH-PH||
+_system_ext_path_placeholder := ||SYSTEM_EXT-PATH-PH||
+_odm_path_placeholder := ||ODM-PATH-PH||
+_vendor_dlkm_path_placeholder := ||VENDOR_DLKM-PATH-PH||
+_odm_dlkm_path_placeholder := ||ODM_DLKM-PATH-PH||
+TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+TARGET_COPY_OUT_VENDOR_RAMDISK := vendor-ramdisk
+TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
+# TODO(b/135957588) TARGET_COPY_OUT_PRODUCT_SERVICES will copy the target to
+# product
+TARGET_COPY_OUT_PRODUCT_SERVICES := $(_product_path_placeholder)
+TARGET_COPY_OUT_SYSTEM_EXT := $(_system_ext_path_placeholder)
+TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
+TARGET_COPY_OUT_VENDOR_DLKM := $(_vendor_dlkm_path_placeholder)
+TARGET_COPY_OUT_ODM_DLKM := $(_odm_dlkm_path_placeholder)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Returns the non-sanitized version of the path provided in $1.
 define get_non_asan_path
@@ -213,6 +278,7 @@ TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
 #################################################################
 # Set up minimal BOOTCLASSPATH list of jars to build/execute
 # java code with dalvikvm/art.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 TARGET_CORE_JARS := core-oj core-libart conscrypt okhttp bouncycastle apache-xml
 ifeq ($(EMMA_INSTRUMENT),true)
   ifneq ($(EMMA_INSTRUMENT_STATIC),true)
@@ -223,6 +289,16 @@ ifeq ($(EMMA_INSTRUMENT),true)
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 HOST_CORE_JARS := $(addsuffix -hostdex,$(TARGET_CORE_JARS))
+=======
+# Jars present in the ART apex. These should match exactly the list of
+# Java libraries in the ART apex build rule.
+ART_APEX_JARS := \
+    com.android.art:core-oj \
+    com.android.art:core-libart \
+    com.android.art:okhttp \
+    com.android.art:bouncycastle \
+    com.android.art:apache-xml
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 #################################################################
 
 # Read the product specs so we can get TARGET_DEVICE and other
@@ -386,7 +462,7 @@ SOONG_HOST_OUT := $(SOONG_OUT_DIR)/host/$(HOST_OS)-$(HOST_PREBUILT_ARCH)
 # TODO: remove
 BUILD_OUT := $(HOST_OUT)
 
-HOST_CROSS_OUT := $(HOST_OUT_ROOT)/windows-$(HOST_PREBUILT_ARCH)
+HOST_CROSS_OUT := $(HOST_OUT_ROOT)/$(HOST_CROSS_OS)-$(HOST_CROSS_ARCH)
 
 TARGET_PRODUCT_OUT_ROOT := $(TARGET_OUT_ROOT)/product
 
@@ -422,9 +498,6 @@ HOST_OUT_NOTICE_FILES := $(HOST_OUT_INTERMEDIATES)/NOTICE_FILES
 HOST_OUT_COMMON_INTERMEDIATES := $(HOST_COMMON_OUT_ROOT)/obj
 HOST_OUT_FAKE := $(HOST_OUT)/fake_packages
 
-# Nano environment config
-include $(BUILD_SYSTEM)/aux_config.mk
-
 HOST_CROSS_OUT_INTERMEDIATES := $(HOST_CROSS_OUT)/obj
 HOST_CROSS_OUT_INTERMEDIATE_LIBRARIES := $(HOST_CROSS_OUT_INTERMEDIATES)/lib
 HOST_CROSS_OUT_NOTICE_FILES := $(HOST_CROSS_OUT_INTERMEDIATES)/NOTICE_FILES
@@ -434,8 +507,11 @@ HOST_OUT_COMMON_GEN := $(HOST_COMMON_OUT_ROOT)/gen
 
 HOST_CROSS_OUT_GEN := $(HOST_CROSS_OUT)/gen
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 HOST_OUT_TEST_CONFIG := $(HOST_OUT)/test_config
 
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # Out for HOST_2ND_ARCH
 HOST_2ND_ARCH_VAR_PREFIX := 2ND_
 HOST_2ND_ARCH_MODULE_SUFFIX := _32
@@ -511,7 +587,24 @@ TARGET_OUT_ETC := $(TARGET_OUT)/etc
 TARGET_OUT_NOTICE_FILES := $(TARGET_OUT_INTERMEDIATES)/NOTICE_FILES
 TARGET_OUT_FAKE := $(PRODUCT_OUT)/fake_packages
 TARGET_OUT_TESTCASES := $(PRODUCT_OUT)/testcases
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 TARGET_OUT_TEST_CONFIG := $(PRODUCT_OUT)/test_config
+=======
+.KATI_READONLY := \
+  TARGET_OUT_EXECUTABLES \
+  TARGET_OUT_OPTIONAL_EXECUTABLES \
+  TARGET_OUT_SHARED_LIBRARIES \
+  TARGET_OUT_RENDERSCRIPT_BITCODE \
+  TARGET_OUT_JAVA_LIBRARIES \
+  TARGET_OUT_APPS \
+  TARGET_OUT_APPS_PRIVILEGED \
+  TARGET_OUT_KEYLAYOUT \
+  TARGET_OUT_KEYCHARS \
+  TARGET_OUT_ETC \
+  TARGET_OUT_NOTICE_FILES \
+  TARGET_OUT_FAKE \
+  TARGET_OUT_TESTCASES
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ifeq ($(SANITIZE_LITE),true)
 # When using SANITIZE_LITE, APKs must not be packaged with sanitized libraries, as they will not
@@ -660,6 +753,74 @@ else
 $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_SHARED_LIBRARIES := $(TARGET_OUT_ODM)/lib
 endif
 $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_APPS := $(TARGET_OUT_ODM_APPS)
+
+TARGET_OUT_VENDOR_DLKM := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR_DLKM)
+
+TARGET_OUT_VENDOR_DLKM_ETC := $(TARGET_OUT_VENDOR_DLKM)/etc
+.KATI_READONLY := \
+  TARGET_OUT_VENDOR_DLKM_ETC
+
+# Unlike other partitions, vendor_dlkm should only contain kernel modules.
+TARGET_OUT_VENDOR_DLKM_EXECUTABLES :=
+TARGET_OUT_VENDOR_DLKM_OPTIONAL_EXECUTABLES :=
+TARGET_OUT_VENDOR_DLKM_SHARED_LIBRARIES :=
+TARGET_OUT_VENDOR_DLKM_RENDERSCRIPT_BITCODE :=
+TARGET_OUT_VENDOR_DLKM_JAVA_LIBRARIES :=
+TARGET_OUT_VENDOR_DLKM_APPS :=
+TARGET_OUT_VENDOR_DLKM_APPS_PRIVILEGED :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_EXECUTABLES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_SHARED_LIBRARIES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_RENDERSCRIPT_BITCODE :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_APPS :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_APPS_PRIVILEGED :=
+$(KATI_obsolete_var \
+    TARGET_OUT_VENDOR_DLKM_EXECUTABLES \
+    TARGET_OUT_VENDOR_DLKM_OPTIONAL_EXECUTABLES \
+    TARGET_OUT_VENDOR_DLKM_SHARED_LIBRARIES \
+    TARGET_OUT_VENDOR_DLKM_RENDERSCRIPT_BITCODE \
+    TARGET_OUT_VENDOR_DLKM_JAVA_LIBRARIES \
+    TARGET_OUT_VENDOR_DLKM_APPS \
+    TARGET_OUT_VENDOR_DLKM_APPS_PRIVILEGED \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_EXECUTABLES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_SHARED_LIBRARIES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_RENDERSCRIPT_BITCODE \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_APPS \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_VENDOR_DLKM_APPS_PRIVILEGED \
+    , vendor_dlkm should not contain any executables, libraries, or apps)
+
+TARGET_OUT_ODM_DLKM := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ODM_DLKM)
+
+TARGET_OUT_ODM_DLKM_ETC := $(TARGET_OUT_ODM_DLKM)/etc
+.KATI_READONLY := \
+  TARGET_OUT_ODM_DLKM_ETC
+
+# Unlike other partitions, odm_dlkm should only contain kernel modules.
+TARGET_OUT_ODM_DLKM_EXECUTABLES :=
+TARGET_OUT_ODM_DLKM_OPTIONAL_EXECUTABLES :=
+TARGET_OUT_ODM_DLKM_SHARED_LIBRARIES :=
+TARGET_OUT_ODM_DLKM_RENDERSCRIPT_BITCODE :=
+TARGET_OUT_ODM_DLKM_JAVA_LIBRARIES :=
+TARGET_OUT_ODM_DLKM_APPS :=
+TARGET_OUT_ODM_DLKM_APPS_PRIVILEGED :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_EXECUTABLES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_SHARED_LIBRARIES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_RENDERSCRIPT_BITCODE :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_APPS :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_APPS_PRIVILEGED :=
+$(KATI_obsolete_var \
+    TARGET_OUT_ODM_DLKM_EXECUTABLES \
+    TARGET_OUT_ODM_DLKM_OPTIONAL_EXECUTABLES \
+    TARGET_OUT_ODM_DLKM_SHARED_LIBRARIES \
+    TARGET_OUT_ODM_DLKM_RENDERSCRIPT_BITCODE \
+    TARGET_OUT_ODM_DLKM_JAVA_LIBRARIES \
+    TARGET_OUT_ODM_DLKM_APPS \
+    TARGET_OUT_ODM_DLKM_APPS_PRIVILEGED \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_EXECUTABLES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_SHARED_LIBRARIES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_RENDERSCRIPT_BITCODE \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_APPS \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_DLKM_APPS_PRIVILEGED \
+    , odm_dlkm should not contain any executables, libraries, or apps)
 
 TARGET_OUT_PRODUCT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_PRODUCT)
 ifneq ($(filter address,$(SANITIZE_TARGET)),)

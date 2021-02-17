@@ -56,6 +56,7 @@ TARGET_2ND_CPU_VARIANT := generic
 endif
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 TARGET_USES_64_BIT_BINDER := true
 
 # no hardware camera
@@ -75,6 +76,25 @@ USE_OPENGL_RENDERER := true
 TARGET_USERIMAGES_USE_EXT4 := true
 # Partition size is default 1.5GB (1536MB) for 64 bits projects
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
+=======
+BOARD_KERNEL-4.19-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.4_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.4-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.4-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.4-GZ-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.4-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
+BOARD_KERNEL-5.4-LZ4-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 53477376
+BOARD_KERNEL-5.10_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.10-GZ-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.10-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
+BOARD_KERNEL-5.10-LZ4-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 53477376
+BOARD_KERNEL-MAINLINE_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-MAINLINE-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-MAINLINE-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
 TARGET_COPY_OUT_VENDOR := vendor
 # ~100 MB vendor image. Please adjust system image / vendor image sizes
@@ -88,10 +108,43 @@ DEVICE_MATRIX_FILE   := device/generic/goldfish/compatibility_matrix.xml
 # Android generic system image always create metadata partition
 BOARD_USES_METADATA_PARTITION := true
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Set this to create /cache mount point for non-A/B devices that mounts /cache.
 # The partition size doesn't matter, just to make build pass.
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
+=======
+BOARD_KERNEL_BINARIES := \
+    kernel-4.19-gz \
+    kernel-5.4 kernel-5.4-gz kernel-5.4-lz4 \
+    kernel-5.10 kernel-5.10-gz kernel-5.10-lz4 \
+    kernel-mainline kernel-mainline-gz kernel-mainline-lz4 \
+
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+BOARD_KERNEL_BINARIES += \
+    kernel-5.4-allsyms kernel-5.4-gz-allsyms kernel-5.4-lz4-allsyms \
+    kernel-5.10-allsyms kernel-5.10-gz-allsyms kernel-5.10-lz4-allsyms \
+
+endif
+
+# Boot image
+BOARD_USES_RECOVERY_AS_BOOT :=
+TARGET_NO_KERNEL := false
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+BOARD_KERNEL_MODULE_INTERFACE_VERSIONS := \
+    5.4-android12-0 \
+    5.10-android12-0 \
+
+# Copy boot image in $OUT to target files. This is defined for targets where
+# the installed GKI APEXes are built from source.
+BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES := true
+
+# No vendor_boot
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT :=
+
+# No recovery
+BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE :=
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_SEPOLICY_DIRS += build/target/board/generic/sepolicy

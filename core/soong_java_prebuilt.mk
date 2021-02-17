@@ -39,6 +39,24 @@ ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
     $(intermediates.COMMON)/jacoco-report-classes.jar)
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+ifdef LOCAL_SOONG_PROGUARD_DICT
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
+    $(intermediates.COMMON)/proguard_dictionary))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),\
+    $(intermediates.COMMON)/proguard_dictionary)
+endif
+
+ifdef LOCAL_SOONG_PROGUARD_USAGE
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_USAGE_ZIP),\
+    $(intermediates.COMMON)/proguard_usage.zip))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),\
+    $(intermediates.COMMON)/proguard_usage.zip)
+endif
+
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
   my_res_package := $(intermediates.COMMON)/package-res.apk
 
@@ -75,10 +93,29 @@ endif # TURBINE_ENABLED != false
 
 ifdef LOCAL_SOONG_DEX_JAR
   ifndef LOCAL_IS_HOST_MODULE
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     ifneq ($(filter $(LOCAL_MODULE),$(PRODUCT_BOOT_JARS)),)  # is_boot_jar
       $(eval $(call hiddenapi-copy-soong-jar,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
     else # !is_boot_jar
       $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
+=======
+    boot_jars := $(foreach pair,$(PRODUCT_BOOT_JARS), $(call word-colon,2,$(pair)))
+    ifneq ($(filter $(LOCAL_MODULE),$(boot_jars)),) # is_boot_jar
+      ifeq (true,$(WITH_DEXPREOPT))
+        # $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE_MODULE) contains modules that installs
+        # all of bootjars' dexpreopt files (.art, .oat, .vdex, ...)
+        # Add them to the required list so they are installed alongside this module.
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET += \
+          $(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE_MODULE) \
+          $(2ND_DEFAULT_DEX_PREOPT_INSTALLED_IMAGE_MODULE)
+        # Copy $(LOCAL_BUILT_MODULE) and its dependencies when installing boot.art
+        # so that dependencies of $(LOCAL_BUILT_MODULE) (which may include
+        # jacoco-report-classes.jar) are copied for every build.
+        $(foreach m,$(DEFAULT_DEX_PREOPT_INSTALLED_IMAGE_MODULE) $(2ND_DEFAULT_DEX_PREOPT_INSTALLED_IMAGE_MODULE), \
+          $(eval $(call add-dependency,$(firstword $(call module-installed-files,$(m))),$(LOCAL_BUILT_MODULE))) \
+        )
+      endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     endif # is_boot_jar
     $(eval $(call add-dependency,$(common_javalib.jar),$(full_classes_jar) $(full_classes_header_jar)))
 
@@ -114,8 +151,29 @@ $(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(common_javalib.jar)
   endif
 
   java-dex : $(LOCAL_BUILT_MODULE)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 else
   $(eval $(call copy-one-file,$(full_classes_jar),$(LOCAL_BUILT_MODULE)))
+=======
+else  # LOCAL_SOONG_DEX_JAR
+  ifndef LOCAL_UNINSTALLABLE_MODULE
+    ifndef LOCAL_IS_HOST_MODULE
+      $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+    endif
+  endif
+endif  # LOCAL_SOONG_DEX_JAR
+
+my_built_installed := $(foreach f,$(LOCAL_SOONG_BUILT_INSTALLED),\
+  $(call word-colon,1,$(f)):$(PRODUCT_OUT)$(call word-colon,2,$(f)))
+my_installed := $(call copy-many-files, $(my_built_installed))
+ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+ALL_MODULES.$(my_register_name).BUILT_INSTALLED += $(my_built_installed)
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)
+$(my_register_name): $(my_installed)
+
+ifdef LOCAL_SOONG_AAR
+  ALL_MODULES.$(my_register_name).AAR := $(LOCAL_SOONG_AAR)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 endif
 
 javac-check : $(full_classes_jar)

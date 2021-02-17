@@ -41,6 +41,30 @@ endif # WITH_DEXPREOPT=true
 ifeq (false,$(LOCAL_DEX_PREOPT))
   LOCAL_DEX_PREOPT :=
 endif
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+# Only enable preopt for non tests.
+ifneq (,$(filter $(LOCAL_MODULE_TAGS),tests))
+  LOCAL_DEX_PREOPT :=
+endif
+
+# If we have product-specific config for this module?
+ifneq (,$(filter $(LOCAL_MODULE),$(DEXPREOPT_DISABLED_MODULES)))
+  LOCAL_DEX_PREOPT :=
+endif
+
+# Disable preopt for DISABLE_PREOPT
+ifeq (true,$(DISABLE_PREOPT))
+  LOCAL_DEX_PREOPT :=
+endif
+
+# Disable preopt if not WITH_DEXPREOPT
+ifneq (true,$(WITH_DEXPREOPT))
+  LOCAL_DEX_PREOPT :=
+endif
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifdef LOCAL_UNINSTALLABLE_MODULE
 LOCAL_DEX_PREOPT :=
 endif
@@ -280,6 +304,185 @@ ifeq (,$(filter --compiler-filter=%, $(LOCAL_DEX_PREOPT_FLAGS)))
         LOCAL_DEX_PREOPT_FLAGS += --compiler-filter=$(my_default_compiler_filter)
       endif
     endif
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+    # Only preopt primary arch for translated arch since there is only an image there.
+    ifeq ($(TARGET_TRANSLATE_2ND_ARCH),true)
+      my_module_multilib := first
+    endif
+
+    # #################################################
+    # Odex for the 1st arch
+    my_dexpreopt_archs += $(TARGET_ARCH)
+    my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_ARCH))
+    my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_ARCH))
+    # Odex for the 2nd arch
+    ifdef TARGET_2ND_ARCH
+      ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
+        ifneq (first,$(my_module_multilib))
+          my_dexpreopt_archs += $(TARGET_2ND_ARCH)
+          my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_2ND_ARCH))
+          my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_2ND_ARCH))
+        endif  # my_module_multilib is not first.
+      endif  # TARGET_TRANSLATE_2ND_ARCH not true
+    endif  # TARGET_2ND_ARCH
+    # #################################################
+  else  # must be APPS
+    # The preferred arch
+    # Save the module multilib since setup_one_odex modifies it.
+    my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
+    my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
+    my_dexpreopt_images += \
+        $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+    my_dexpreopt_images_deps += \
+        $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+    ifdef TARGET_2ND_ARCH
+      ifeq ($(my_module_multilib),both)
+        # The non-preferred arch
+        my_2nd_arch_prefix := $(if $(LOCAL_2ND_ARCH_VAR_PREFIX),,$(TARGET_2ND_ARCH_VAR_PREFIX))
+        my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
+        my_dexpreopt_images += \
+            $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+        my_dexpreopt_images_deps += \
+            $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+      endif  # LOCAL_MULTILIB is both
+    endif  # TARGET_2ND_ARCH
+  endif  # LOCAL_MODULE_CLASS
+
+  my_dexpreopt_image_locations += $(DEXPREOPT_IMAGE_LOCATIONS_$(my_dexpreopt_infix))
+
+  my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
+    $(LOCAL_OPTIONAL_USES_LIBRARIES))
+
+  # compatibility libraries are added to class loader context of an app only if
+  # targetSdkVersion in the app's manifest is lower than the given SDK version
+
+  my_dexpreopt_libs_compat_28 := \
+    org.apache.http.legacy
+
+  my_dexpreopt_libs_compat_29 := \
+    android.hidl.base-V1.0-java \
+    android.hidl.manager-V1.0-java
+
+  my_dexpreopt_libs_compat_30 := \
+    android.test.base \
+    android.test.mock
+
+  my_dexpreopt_libs_compat := \
+    $(my_dexpreopt_libs_compat_28) \
+    $(my_dexpreopt_libs_compat_29) \
+    $(my_dexpreopt_libs_compat_30)
+
+  my_dexpreopt_libs := $(sort \
+    $(LOCAL_USES_LIBRARIES) \
+    $(my_filtered_optional_uses_libraries) \
+  )
+
+  # 1: SDK version
+  # 2: list of libraries
+  add_json_class_loader_context = \
+    $(call add_json_map, $(1)) \
+    $(foreach lib, $(2),\
+      $(call add_json_map, $(lib)) \
+      $(eval file := $(filter %/$(lib).jar, $(call module-installed-files,$(lib)))) \
+      $(call add_json_str, Host,       $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar) \
+      $(call add_json_str, Device,     $(call install-path-to-on-device-path,$(file))) \
+      $(call end_json_map)) \
+    $(call end_json_map)
+
+  # Record dex-preopt config.
+  DEXPREOPT.$(LOCAL_MODULE).DEX_PREOPT := $(LOCAL_DEX_PREOPT)
+  DEXPREOPT.$(LOCAL_MODULE).MULTILIB := $(LOCAL_MULTILIB)
+  DEXPREOPT.$(LOCAL_MODULE).DEX_PREOPT_FLAGS := $(LOCAL_DEX_PREOPT_FLAGS)
+  DEXPREOPT.$(LOCAL_MODULE).PRIVILEGED_MODULE := $(LOCAL_PRIVILEGED_MODULE)
+  DEXPREOPT.$(LOCAL_MODULE).VENDOR_MODULE := $(LOCAL_VENDOR_MODULE)
+  DEXPREOPT.$(LOCAL_MODULE).TARGET_ARCH := $(LOCAL_MODULE_TARGET_ARCH)
+  DEXPREOPT.$(LOCAL_MODULE).INSTALLED_STRIPPED := $(LOCAL_INSTALLED_MODULE)
+  DEXPREOPT.MODULES.$(LOCAL_MODULE_CLASS) := $(sort \
+    $(DEXPREOPT.MODULES.$(LOCAL_MODULE_CLASS)) $(LOCAL_MODULE))
+
+  $(call json_start)
+
+  # DexPath is not set: it will be filled in by dexpreopt_gen.
+
+  $(call add_json_str,  Name,                           $(LOCAL_MODULE))
+  $(call add_json_str,  DexLocation,                    $(patsubst $(PRODUCT_OUT)%,%,$(LOCAL_INSTALLED_MODULE)))
+  $(call add_json_str,  BuildPath,                      $(LOCAL_BUILT_MODULE))
+  $(call add_json_str,  ManifestPath,                   $(full_android_manifest))
+  $(call add_json_str,  ExtrasOutputPath,               $$2)
+  $(call add_json_bool, Privileged,                     $(filter true,$(LOCAL_PRIVILEGED_MODULE)))
+  $(call add_json_bool, UncompressedDex,                $(filter true,$(LOCAL_UNCOMPRESS_DEX)))
+  $(call add_json_bool, HasApkLibraries,                $(LOCAL_APK_LIBRARIES))
+  $(call add_json_list, PreoptFlags,                    $(LOCAL_DEX_PREOPT_FLAGS))
+  $(call add_json_str,  ProfileClassListing,            $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE)))
+  $(call add_json_bool, ProfileIsTextListing,           $(my_profile_is_text_listing))
+  $(call add_json_bool, EnforceUsesLibraries,           $(LOCAL_ENFORCE_USES_LIBRARIES))
+  $(call add_json_map,  ClassLoaderContexts)
+  $(call add_json_class_loader_context, any, $(my_dexpreopt_libs))
+  $(call add_json_class_loader_context,  28, $(my_dexpreopt_libs_compat_28))
+  $(call add_json_class_loader_context,  29, $(my_dexpreopt_libs_compat_29))
+  $(call add_json_class_loader_context,  30, $(my_dexpreopt_libs_compat_30))
+  $(call end_json_map)
+  $(call add_json_list, Archs,                          $(my_dexpreopt_archs))
+  $(call add_json_list, DexPreoptImages,                $(my_dexpreopt_images))
+  $(call add_json_list, DexPreoptImageLocations,        $(my_dexpreopt_image_locations))
+  $(call add_json_list, PreoptBootClassPathDexFiles,    $(DEXPREOPT_BOOTCLASSPATH_DEX_FILES))
+  $(call add_json_list, PreoptBootClassPathDexLocations,$(DEXPREOPT_BOOTCLASSPATH_DEX_LOCATIONS))
+  $(call add_json_bool, PreoptExtractedApk,             $(my_preopt_for_extracted_apk))
+  $(call add_json_bool, NoCreateAppImage,               $(filter false,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
+  $(call add_json_bool, ForceCreateAppImage,            $(filter true,$(LOCAL_DEX_PREOPT_APP_IMAGE)))
+  $(call add_json_bool, PresignedPrebuilt,              $(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
+
+  $(call json_end)
+
+  my_dexpreopt_config := $(intermediates)/dexpreopt.config
+  my_dexpreopt_script := $(intermediates)/dexpreopt.sh
+  my_dexpreopt_zip := $(intermediates)/dexpreopt.zip
+
+  $(my_dexpreopt_config): PRIVATE_MODULE := $(LOCAL_MODULE)
+  $(my_dexpreopt_config): PRIVATE_CONTENTS := $(json_contents)
+  $(my_dexpreopt_config):
+	@echo "$(PRIVATE_MODULE) dexpreopt.config"
+	echo -e -n '$(subst $(newline),\n,$(subst ','\'',$(subst \,\\,$(PRIVATE_CONTENTS))))' > $@
+
+  .KATI_RESTAT: $(my_dexpreopt_script)
+  $(my_dexpreopt_script): PRIVATE_MODULE := $(LOCAL_MODULE)
+  $(my_dexpreopt_script): PRIVATE_GLOBAL_SOONG_CONFIG := $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE)
+  $(my_dexpreopt_script): PRIVATE_GLOBAL_CONFIG := $(DEX_PREOPT_CONFIG_FOR_MAKE)
+  $(my_dexpreopt_script): PRIVATE_MODULE_CONFIG := $(my_dexpreopt_config)
+  $(my_dexpreopt_script): $(DEXPREOPT_GEN)
+  $(my_dexpreopt_script): $(my_dexpreopt_config) $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE) $(DEX_PREOPT_CONFIG_FOR_MAKE)
+	@echo "$(PRIVATE_MODULE) dexpreopt gen"
+	$(DEXPREOPT_GEN) \
+	-global_soong $(PRIVATE_GLOBAL_SOONG_CONFIG) \
+	-global $(PRIVATE_GLOBAL_CONFIG) \
+	-module $(PRIVATE_MODULE_CONFIG) \
+	-dexpreopt_script $@ \
+	-out_dir $(OUT_DIR)
+
+  my_dexpreopt_deps := $(my_dex_jar)
+  my_dexpreopt_deps += $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE))
+  my_dexpreopt_deps += \
+    $(foreach lib, $(my_dexpreopt_libs) $(my_dexpreopt_libs_compat), \
+      $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar)
+  my_dexpreopt_deps += $(my_dexpreopt_images_deps)
+  my_dexpreopt_deps += $(DEXPREOPT_BOOTCLASSPATH_DEX_FILES)
+
+  $(my_dexpreopt_zip): PRIVATE_MODULE := $(LOCAL_MODULE)
+  $(my_dexpreopt_zip): $(my_dexpreopt_deps)
+  $(my_dexpreopt_zip): | $(DEXPREOPT_GEN_DEPS)
+  $(my_dexpreopt_zip): .KATI_DEPFILE := $(my_dexpreopt_zip).d
+  $(my_dexpreopt_zip): PRIVATE_DEX := $(my_dex_jar)
+  $(my_dexpreopt_zip): PRIVATE_SCRIPT := $(my_dexpreopt_script)
+  $(my_dexpreopt_zip): $(my_dexpreopt_script)
+	@echo "$(PRIVATE_MODULE) dexpreopt"
+	bash $(PRIVATE_SCRIPT) $(PRIVATE_DEX) $@
+
+  ifdef LOCAL_POST_INSTALL_CMD
+    # Add a shell command separator
+    LOCAL_POST_INSTALL_CMD += &&
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   endif
 endif
 

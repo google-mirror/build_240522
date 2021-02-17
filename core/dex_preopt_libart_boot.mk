@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Rules to build boot.art
 # Input variables:
 #   my_2nd_arch_prefix: indicates if this is to build for the 2nd arch.
@@ -129,3 +130,5 @@ $($(my_2nd_arch_prefix)DEFAULT_DEX_PREOPT_BUILT_IMAGE_FILENAME) : $(LIBART_TARGE
 		--base-offset-delta=0x10000000
 
 endif
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

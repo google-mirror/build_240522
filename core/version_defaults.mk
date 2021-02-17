@@ -39,9 +39,15 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 DEFAULT_PLATFORM_VERSION := PPR1
 MIN_PLATFORM_VERSION := PPR1
 MAX_PLATFORM_VERSION := PPR1
+=======
+DEFAULT_PLATFORM_VERSION := SP1A
+MIN_PLATFORM_VERSION := SP1A
+MAX_PLATFORM_VERSION := SP1A
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ALLOWED_VERSIONS := $(call allowed-platform-versions,\
   $(MIN_PLATFORM_VERSION),\
@@ -79,6 +85,7 @@ PLATFORM_VERSION.PPR1 := 9
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PLATFORM_VERSION_CODENAME.PPR1 := REL
 
 ifndef PLATFORM_VERSION
@@ -108,6 +115,9 @@ ifndef PLATFORM_SDK_VERSION
   # cts/tests/tests/os/assets/platform_versions.txt
   PLATFORM_SDK_VERSION := 28
 endif
+=======
+PLATFORM_VERSION_CODENAME.SP1A := S
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ifndef PLATFORM_VERSION_CODENAME
   PLATFORM_VERSION_CODENAME := $(PLATFORM_VERSION_CODENAME.$(TARGET_PLATFORM_VERSION))
@@ -231,7 +241,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+      PLATFORM_SECURITY_PATCH := 2021-01-05
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP

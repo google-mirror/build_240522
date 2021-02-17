@@ -22,19 +22,34 @@ import unittest
 import zipfile
 
 import common
+import ota_metadata_pb2
 import test_utils
+from ota_utils import (
+    BuildLegacyOtaMetadata, CalculateRuntimeDevicesAndFingerprints,
+    FinalizeMetadata, GetPackageMetadata, PropertyFiles)
 from ota_from_target_files import (
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
     GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
+=======
+    _LoadOemDicts, AbOtaPropertyFiles,
+    GetTargetFilesZipForCustomImagesUpdates,
+    GetTargetFilesZipForPartialUpdates,
+    GetTargetFilesZipForSecondaryImages,
+    GetTargetFilesZipWithoutPostinstallConfig,
+    Payload, PayloadSigner, POSTINSTALL_CONFIG,
+    StreamingPropertyFiles, AB_PARTITIONS)
+from test_utils import PropertyFilesTestCase
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 
 def construct_target_files(secondary=False):
   """Returns a target-files.zip file for generating OTA packages."""
   target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
-  with zipfile.ZipFile(target_files, 'w') as target_files_zip:
+  with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
     # META/update_engine_config.txt
     target_files_zip.writestr(
         'META/update_engine_config.txt',
@@ -56,10 +71,18 @@ def construct_target_files(secondary=False):
         'META/ab_partitions.txt',
         '\n'.join(ab_partitions))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     # Create dummy images for each of them.
     for partition in ab_partitions:
       target_files_zip.writestr('IMAGES/' + partition + '.img',
                                 os.urandom(len(partition)))
+=======
+    # Create fake images for each of them.
+    for path, partition in ab_partitions:
+      target_files_zip.writestr(
+          '{}/{}.img'.format(path, partition),
+          os.urandom(len(partition)))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
     if secondary:
       target_files_zip.writestr('IMAGES/system_other.img',
@@ -372,6 +395,25 @@ class OtaFromTargetFilesTest(unittest.TestCase):
       },
   }
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  TEST_INFO_DICT_USES_OEM_PROPS = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.name': 'product-name',
+              'ro.build.thumbprint': 'build-thumbprint',
+              'ro.build.bar': 'build-bar'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.vendor.build.fingerprint': 'vendor-build-fingerprint'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
+      'oem_fingerprint_properties': 'ro.product.device ro.product.brand',
+  }
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   def setUp(self):
     self.testdata_dir = test_utils.get_testdata_dir()
     self.assertTrue(os.path.exists(self.testdata_dir))
@@ -384,7 +426,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     common.OPTIONS.no_signing = False
     common.OPTIONS.package_key = os.path.join(self.testdata_dir, 'testkey')
     common.OPTIONS.key_passwords = {
-        common.OPTIONS.package_key : None,
+        common.OPTIONS.package_key: None,
     }
 
     common.OPTIONS.search_path = test_utils.get_search_path()
@@ -393,58 +435,81 @@ class OtaFromTargetFilesTest(unittest.TestCase):
   def tearDown(self):
     common.Cleanup()
 
+  @staticmethod
+  def GetLegacyOtaMetadata(target_info, source_info=None):
+    metadata_proto = GetPackageMetadata(target_info, source_info)
+    return BuildLegacyOtaMetadata(metadata_proto)
+
   def test_GetPackageMetadata_abOta_full(self):
     target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
     target_info_dict['ab_update'] = 'true'
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     target_info = BuildInfo(target_info_dict, None)
     metadata = GetPackageMetadata(target_info)
+=======
+    target_info_dict['ab_partitions'] = []
+    target_info = common.BuildInfo(target_info_dict, None)
+    metadata = self.GetLegacyOtaMetadata(target_info)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     self.assertDictEqual(
         {
-            'ota-type' : 'AB',
-            'ota-required-cache' : '0',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000000',
-            'pre-device' : 'product-device',
+            'ota-type': 'AB',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
         },
         metadata)
 
   def test_GetPackageMetadata_abOta_incremental(self):
     target_info_dict = copy.deepcopy(self.TEST_TARGET_INFO_DICT)
     target_info_dict['ab_update'] = 'true'
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     target_info = BuildInfo(target_info_dict, None)
     source_info = BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
+=======
+    target_info_dict['ab_partitions'] = []
+    target_info = common.BuildInfo(target_info_dict, None)
+    source_info = common.BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     common.OPTIONS.incremental_source = ''
-    metadata = GetPackageMetadata(target_info, source_info)
+    metadata = self.GetLegacyOtaMetadata(target_info, source_info)
     self.assertDictEqual(
         {
-            'ota-type' : 'AB',
-            'ota-required-cache' : '0',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000000',
-            'pre-device' : 'product-device',
-            'pre-build' : 'build-fingerprint-source',
-            'pre-build-incremental' : 'build-version-incremental-source',
+            'ota-type': 'AB',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
+            'pre-build': 'build-fingerprint-source',
+            'pre-build-incremental': 'build-version-incremental-source',
         },
         metadata)
 
   def test_GetPackageMetadata_nonAbOta_full(self):
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     metadata = GetPackageMetadata(target_info)
+=======
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    metadata = self.GetLegacyOtaMetadata(target_info)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     self.assertDictEqual(
         {
-            'ota-type' : 'BLOCK',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000000',
-            'pre-device' : 'product-device',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
         },
         metadata)
 
@@ -452,38 +517,61 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     source_info = BuildInfo(self.TEST_SOURCE_INFO_DICT, None)
     common.OPTIONS.incremental_source = ''
-    metadata = GetPackageMetadata(target_info, source_info)
+    metadata = self.GetLegacyOtaMetadata(target_info, source_info)
     self.assertDictEqual(
         {
-            'ota-type' : 'BLOCK',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000000',
-            'pre-device' : 'product-device',
-            'pre-build' : 'build-fingerprint-source',
-            'pre-build-incremental' : 'build-version-incremental-source',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
+            'pre-build': 'build-fingerprint-source',
+            'pre-build-incremental': 'build-version-incremental-source',
         },
         metadata)
 
   def test_GetPackageMetadata_wipe(self):
     target_info = BuildInfo(self.TEST_TARGET_INFO_DICT, None)
     common.OPTIONS.wipe_user_data = True
-    metadata = GetPackageMetadata(target_info)
+    metadata = self.GetLegacyOtaMetadata(target_info)
     self.assertDictEqual(
         {
-            'ota-type' : 'BLOCK',
-            'ota-wipe' : 'yes',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1500000000',
-            'pre-device' : 'product-device',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'ota-wipe': 'yes',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
         },
         metadata)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  def test_GetPackageMetadata_retrofitDynamicPartitions(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    common.OPTIONS.retrofit_dynamic_partitions = True
+    metadata = self.GetLegacyOtaMetadata(target_info)
+    self.assertDictEqual(
+        {
+            'ota-retrofit-dynamic-partitions': 'yes',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
+        },
+        metadata)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   @staticmethod
   def _test_GetPackageMetadata_swapBuildTimestamps(target_info, source_info):
     (target_info['build.prop']['ro.build.date.utc'],
@@ -500,7 +588,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     target_info = BuildInfo(target_info_dict, None)
     source_info = BuildInfo(source_info_dict, None)
     common.OPTIONS.incremental_source = ''
-    self.assertRaises(RuntimeError, GetPackageMetadata, target_info,
+    self.assertRaises(RuntimeError, self.GetLegacyOtaMetadata, target_info,
                       source_info)
 
   def test_GetPackageMetadata_downgrade(self):
@@ -514,20 +602,22 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     common.OPTIONS.incremental_source = ''
     common.OPTIONS.downgrade = True
     common.OPTIONS.wipe_user_data = True
-    metadata = GetPackageMetadata(target_info, source_info)
+    metadata = self.GetLegacyOtaMetadata(target_info, source_info)
+
     self.assertDictEqual(
         {
-            'ota-downgrade' : 'yes',
-            'ota-type' : 'BLOCK',
-            'ota-wipe' : 'yes',
-            'post-build' : 'build-fingerprint-target',
-            'post-build-incremental' : 'build-version-incremental-target',
-            'post-sdk-level' : '27',
-            'post-security-patch-level' : '2017-12-01',
-            'post-timestamp' : '1400000000',
-            'pre-device' : 'product-device',
-            'pre-build' : 'build-fingerprint-source',
-            'pre-build-incremental' : 'build-version-incremental-source',
+            'ota-downgrade': 'yes',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'ota-wipe': 'yes',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1400000000',
+            'pre-device': 'product-device',
+            'pre-build': 'build-fingerprint-source',
+            'pre-build-incremental': 'build-version-incremental-source',
         },
         metadata)
 
@@ -564,6 +654,159 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     self.assertNotIn('IMAGES/system.map', namelist)
     self.assertNotIn(POSTINSTALL_CONFIG, namelist)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForSecondaryImages_withoutRadioImages(self):
+    input_file = construct_target_files(secondary=True)
+    common.ZipDelete(input_file, 'RADIO/bootloader.img')
+    common.ZipDelete(input_file, 'RADIO/modem.img')
+    target_file = GetTargetFilesZipForSecondaryImages(input_file)
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn(POSTINSTALL_CONFIG, namelist)
+
+    self.assertNotIn('IMAGES/boot.img', namelist)
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('IMAGES/system.map', namelist)
+    self.assertNotIn('RADIO/bootloader.img', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForSecondaryImages_dynamicPartitions(self):
+    input_file = construct_target_files(secondary=True)
+    misc_info = '\n'.join([
+        'use_dynamic_partition_size=true',
+        'use_dynamic_partitions=true',
+        'dynamic_partition_list=system vendor product',
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+    dynamic_partitions_info = '\n'.join([
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+
+    with zipfile.ZipFile(input_file, 'a', allowZip64=True) as append_zip:
+      common.ZipWriteStr(append_zip, 'META/misc_info.txt', misc_info)
+      common.ZipWriteStr(append_zip, 'META/dynamic_partitions_info.txt',
+                         dynamic_partitions_info)
+
+    target_file = GetTargetFilesZipForSecondaryImages(input_file)
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      updated_misc_info = verify_zip.read('META/misc_info.txt').decode()
+      updated_dynamic_partitions_info = verify_zip.read(
+          'META/dynamic_partitions_info.txt').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn(POSTINSTALL_CONFIG, namelist)
+    self.assertIn('META/misc_info.txt', namelist)
+    self.assertIn('META/dynamic_partitions_info.txt', namelist)
+
+    self.assertNotIn('IMAGES/boot.img', namelist)
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('IMAGES/system.map', namelist)
+
+    # Check the vendor & product are removed from the partitions list.
+    expected_misc_info = misc_info.replace('system vendor product',
+                                           'system')
+    expected_dynamic_partitions_info = dynamic_partitions_info.replace(
+        'system vendor product', 'system')
+    self.assertEqual(expected_misc_info, updated_misc_info)
+    self.assertEqual(expected_dynamic_partitions_info,
+                     updated_dynamic_partitions_info)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForPartialUpdates_singlePartition(self):
+    input_file = construct_target_files()
+    with zipfile.ZipFile(input_file, 'a', allowZip64=True) as append_zip:
+      common.ZipWriteStr(append_zip, 'IMAGES/system.map', 'fake map')
+
+    target_file = GetTargetFilesZipForPartialUpdates(input_file, ['system'])
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      ab_partitions = verify_zip.read('META/ab_partitions.txt').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('META/update_engine_config.txt', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn('IMAGES/system.map', namelist)
+
+    self.assertNotIn('IMAGES/boot.img', namelist)
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('RADIO/bootloader.img', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
+
+    self.assertEqual('system', ab_partitions)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForPartialUpdates_unrecognizedPartition(self):
+    input_file = construct_target_files()
+    self.assertRaises(ValueError, GetTargetFilesZipForPartialUpdates,
+                      input_file, ['product'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForPartialUpdates_dynamicPartitions(self):
+    input_file = construct_target_files(secondary=True)
+    misc_info = '\n'.join([
+        'use_dynamic_partition_size=true',
+        'use_dynamic_partitions=true',
+        'dynamic_partition_list=system vendor product',
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+    dynamic_partitions_info = '\n'.join([
+        'super_partition_groups=google_dynamic_partitions',
+        'super_google_dynamic_partitions_group_size=4873781248',
+        'super_google_dynamic_partitions_partition_list=system vendor product',
+    ])
+
+    with zipfile.ZipFile(input_file, 'a', allowZip64=True) as append_zip:
+      common.ZipWriteStr(append_zip, 'META/misc_info.txt', misc_info)
+      common.ZipWriteStr(append_zip, 'META/dynamic_partitions_info.txt',
+                         dynamic_partitions_info)
+
+    target_file = GetTargetFilesZipForPartialUpdates(input_file,
+                                                     ['boot', 'system'])
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      ab_partitions = verify_zip.read('META/ab_partitions.txt').decode()
+      updated_misc_info = verify_zip.read('META/misc_info.txt').decode()
+      updated_dynamic_partitions_info = verify_zip.read(
+          'META/dynamic_partitions_info.txt').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertIn('IMAGES/boot.img', namelist)
+    self.assertIn('IMAGES/system.img', namelist)
+    self.assertIn('META/misc_info.txt', namelist)
+    self.assertIn('META/dynamic_partitions_info.txt', namelist)
+
+    self.assertNotIn('IMAGES/system_other.img', namelist)
+    self.assertNotIn('RADIO/bootloader.img', namelist)
+    self.assertNotIn('RADIO/modem.img', namelist)
+
+    # Check the vendor & product are removed from the partitions list.
+    expected_misc_info = misc_info.replace('system vendor product',
+                                           'system')
+    expected_dynamic_partitions_info = dynamic_partitions_info.replace(
+        'system vendor product', 'system')
+    self.assertEqual(expected_misc_info, updated_misc_info)
+    self.assertEqual(expected_dynamic_partitions_info,
+                     updated_dynamic_partitions_info)
+    self.assertEqual('boot\nsystem', ab_partitions)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   def test_GetTargetFilesZipWithoutPostinstallConfig(self):
     input_file = construct_target_files()
     target_file = GetTargetFilesZipWithoutPostinstallConfig(input_file)
@@ -577,6 +820,46 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     with zipfile.ZipFile(target_file) as verify_zip:
       self.assertNotIn(POSTINSTALL_CONFIG, verify_zip.namelist())
 
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForCustomImagesUpdates_oemDefaultImage(self):
+    input_file = construct_target_files()
+    with zipfile.ZipFile(input_file, 'a', allowZip64=True) as append_zip:
+      common.ZipWriteStr(append_zip, 'IMAGES/oem.img', 'oem')
+      common.ZipWriteStr(append_zip, 'IMAGES/oem_test.img', 'oem_test')
+
+    target_file = GetTargetFilesZipForCustomImagesUpdates(
+        input_file, {'oem': 'oem.img'})
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      ab_partitions = verify_zip.read('META/ab_partitions.txt').decode()
+      oem_image = verify_zip.read('IMAGES/oem.img').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertEqual('boot\nsystem\nvendor\nbootloader\nmodem', ab_partitions)
+    self.assertIn('IMAGES/oem.img', namelist)
+    self.assertEqual('oem', oem_image)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetTargetFilesZipForCustomImagesUpdates_oemTestImage(self):
+    input_file = construct_target_files()
+    with zipfile.ZipFile(input_file, 'a', allowZip64=True) as append_zip:
+      common.ZipWriteStr(append_zip, 'IMAGES/oem.img', 'oem')
+      common.ZipWriteStr(append_zip, 'IMAGES/oem_test.img', 'oem_test')
+
+    target_file = GetTargetFilesZipForCustomImagesUpdates(
+        input_file, {'oem': 'oem_test.img'})
+
+    with zipfile.ZipFile(target_file) as verify_zip:
+      namelist = verify_zip.namelist()
+      ab_partitions = verify_zip.read('META/ab_partitions.txt').decode()
+      oem_image = verify_zip.read('IMAGES/oem.img').decode()
+
+    self.assertIn('META/ab_partitions.txt', namelist)
+    self.assertEqual('boot\nsystem\nvendor\nbootloader\nmodem', ab_partitions)
+    self.assertIn('IMAGES/oem.img', namelist)
+    self.assertEqual('oem_test', oem_image)
+
   def _test_FinalizeMetadata(self, large_entry=False):
     entries = [
         'required-entry1',
@@ -585,20 +868,20 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     zip_file = PropertyFilesTest.construct_zip_package(entries)
     # Add a large entry of 1 GiB if requested.
     if large_entry:
-      with zipfile.ZipFile(zip_file, 'a') as zip_fp:
+      with zipfile.ZipFile(zip_file, 'a', allowZip64=True) as zip_fp:
         zip_fp.writestr(
             # Using 'zoo' so that the entry stays behind others after signing.
             'zoo',
             'A' * 1024 * 1024 * 1024,
             zipfile.ZIP_STORED)
 
-    metadata = {}
+    metadata = ota_metadata_pb2.OtaMetadata()
     output_file = common.MakeTempFile(suffix='.zip')
     needed_property_files = (
         TestPropertyFiles(),
     )
     FinalizeMetadata(metadata, zip_file, output_file, needed_property_files)
-    self.assertIn('ota-test-property-files', metadata)
+    self.assertIn('ota-test-property-files', metadata.property_files)
 
   def test_FinalizeMetadata(self):
     self._test_FinalizeMetadata()
@@ -622,7 +905,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
         'optional-entry2',
     ]
     zip_file = PropertyFilesTest.construct_zip_package(entries)
-    with zipfile.ZipFile(zip_file, 'a') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'a', allowZip64=True) as zip_fp:
       zip_fp.writestr(
           # 'foo-entry1' will appear ahead of all other entries (in alphabetical
           # order) after the signing, which will in turn trigger the
@@ -631,13 +914,17 @@ class OtaFromTargetFilesTest(unittest.TestCase):
           'A' * 1024 * 1024,
           zipfile.ZIP_STORED)
 
-    metadata = {}
+    metadata = ota_metadata_pb2.OtaMetadata()
     needed_property_files = (
         TestPropertyFiles(),
     )
     output_file = common.MakeTempFile(suffix='.zip')
     FinalizeMetadata(metadata, zip_file, output_file, needed_property_files)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     self.assertIn('ota-test-property-files', metadata)
+=======
+    self.assertIn('ota-test-property-files', metadata.property_files)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 
 class TestPropertyFiles(PropertyFiles):
@@ -656,6 +943,7 @@ class TestPropertyFiles(PropertyFiles):
     )
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 class PropertyFilesTest(unittest.TestCase):
 
   def setUp(self):
@@ -693,6 +981,9 @@ class PropertyFilesTest(unittest.TestCase):
         else:
           expected = entry.replace('.', '-').upper().encode()
         self.assertEqual(expected, input_fp.read(size))
+=======
+class PropertyFilesTest(PropertyFilesTestCase):
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   def test_Compute(self):
     entries = (
@@ -701,11 +992,11 @@ class PropertyFilesTest(unittest.TestCase):
     )
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       property_files_string = property_files.Compute(zip_fp)
 
     tokens = self._parse_property_files_string(property_files_string)
-    self.assertEqual(3, len(tokens))
+    self.assertEqual(4, len(tokens))
     self._verify_entries(zip_file, tokens, entries)
 
   def test_Compute_withOptionalEntries(self):
@@ -717,11 +1008,11 @@ class PropertyFilesTest(unittest.TestCase):
     )
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       property_files_string = property_files.Compute(zip_fp)
 
     tokens = self._parse_property_files_string(property_files_string)
-    self.assertEqual(5, len(tokens))
+    self.assertEqual(6, len(tokens))
     self._verify_entries(zip_file, tokens, entries)
 
   def test_Compute_missingRequiredEntry(self):
@@ -730,7 +1021,7 @@ class PropertyFilesTest(unittest.TestCase):
     )
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       self.assertRaises(KeyError, property_files.Compute, zip_fp)
 
   def test_Finalize(self):
@@ -738,20 +1029,27 @@ class PropertyFilesTest(unittest.TestCase):
         'required-entry1',
         'required-entry2',
         'META-INF/com/android/metadata',
+        'META-INF/com/android/metadata.pb',
     ]
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(zip_file, 'r') as zip_fp:
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
+=======
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
+      raw_metadata = property_files.GetPropertyFilesString(
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
           zip_fp, reserve_space=False)
       streaming_metadata = property_files.Finalize(zip_fp, len(raw_metadata))
     tokens = self._parse_property_files_string(streaming_metadata)
 
-    self.assertEqual(3, len(tokens))
+    self.assertEqual(4, len(tokens))
     # 'META-INF/com/android/metadata' will be key'd as 'metadata' in the
     # streaming metadata.
     entries[2] = 'metadata'
+    entries[3] = 'metadata.pb'
     self._verify_entries(zip_file, tokens, entries)
 
   def test_Finalize_assertReservedLength(self):
@@ -761,10 +1059,11 @@ class PropertyFilesTest(unittest.TestCase):
         'optional-entry1',
         'optional-entry2',
         'META-INF/com/android/metadata',
+        'META-INF/com/android/metadata.pb',
     )
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       # First get the raw metadata string (i.e. without padding space).
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
@@ -796,10 +1095,11 @@ class PropertyFilesTest(unittest.TestCase):
         'optional-entry1',
         'optional-entry2',
         'META-INF/com/android/metadata',
+        'META-INF/com/android/metadata.pb',
     )
     zip_file = self.construct_zip_package(entries)
     property_files = TestPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       # First get the raw metadata string (i.e. without padding space).
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
@@ -813,8 +1113,8 @@ class PropertyFilesTest(unittest.TestCase):
           AssertionError, property_files.Verify, zip_fp, raw_metadata + 'x')
 
 
-class StreamingPropertyFilesTest(PropertyFilesTest):
-  """Additional sanity checks specialized for StreamingPropertyFiles."""
+class StreamingPropertyFilesTest(PropertyFilesTestCase):
+  """Additional validity checks specialized for StreamingPropertyFiles."""
 
   def test_init(self):
     property_files = StreamingPropertyFiles()
@@ -841,11 +1141,11 @@ class StreamingPropertyFilesTest(PropertyFilesTest):
     )
     zip_file = self.construct_zip_package(entries)
     property_files = StreamingPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       property_files_string = property_files.Compute(zip_fp)
 
     tokens = self._parse_property_files_string(property_files_string)
-    self.assertEqual(5, len(tokens))
+    self.assertEqual(6, len(tokens))
     self._verify_entries(zip_file, tokens, entries)
 
   def test_Finalize(self):
@@ -855,20 +1155,27 @@ class StreamingPropertyFilesTest(PropertyFilesTest):
         'care_map.txt',
         'compatibility.zip',
         'META-INF/com/android/metadata',
+        'META-INF/com/android/metadata.pb',
     ]
     zip_file = self.construct_zip_package(entries)
     property_files = StreamingPropertyFiles()
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(zip_file, 'r') as zip_fp:
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
+=======
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
+      raw_metadata = property_files.GetPropertyFilesString(
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
           zip_fp, reserve_space=False)
       streaming_metadata = property_files.Finalize(zip_fp, len(raw_metadata))
     tokens = self._parse_property_files_string(streaming_metadata)
 
-    self.assertEqual(5, len(tokens))
+    self.assertEqual(6, len(tokens))
     # 'META-INF/com/android/metadata' will be key'd as 'metadata' in the
     # streaming metadata.
     entries[4] = 'metadata'
+    entries[5] = 'metadata.pb'
     self._verify_entries(zip_file, tokens, entries)
 
   def test_Verify(self):
@@ -878,10 +1185,11 @@ class StreamingPropertyFilesTest(PropertyFilesTest):
         'care_map.txt',
         'compatibility.zip',
         'META-INF/com/android/metadata',
+        'META-INF/com/android/metadata.pb',
     )
     zip_file = self.construct_zip_package(entries)
     property_files = StreamingPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       # First get the raw metadata string (i.e. without padding space).
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
@@ -895,8 +1203,8 @@ class StreamingPropertyFilesTest(PropertyFilesTest):
           AssertionError, property_files.Verify, zip_fp, raw_metadata + 'x')
 
 
-class AbOtaPropertyFilesTest(PropertyFilesTest):
-  """Additional sanity checks specialized for AbOtaPropertyFiles."""
+class AbOtaPropertyFilesTest(PropertyFilesTestCase):
+  """Additional validity checks specialized for AbOtaPropertyFiles."""
 
   # The size for payload and metadata signature size.
   SIGNATURE_SIZE = 256
@@ -910,7 +1218,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
     common.OPTIONS.payload_signer_args = None
     common.OPTIONS.package_key = os.path.join(self.testdata_dir, 'testkey')
     common.OPTIONS.key_passwords = {
-        common.OPTIONS.package_key : None,
+        common.OPTIONS.package_key: None,
     }
 
   def test_init(self):
@@ -938,7 +1246,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
     payload.Sign(payload_signer)
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       payload.WriteToZip(output_zip)
 
     # Find out the payload metadata offset and size.
@@ -985,7 +1293,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
     payload.Sign(payload_signer)
 
     zip_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(zip_file, 'w') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'w', allowZip64=True) as zip_fp:
       # 'payload.bin',
       payload.WriteToZip(zip_fp)
 
@@ -995,6 +1303,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
       # Put META-INF/com/android/metadata if needed.
       if with_metadata:
         entries.append('META-INF/com/android/metadata')
+        entries.append('META-INF/com/android/metadata.pb')
 
       for entry in entries:
         zip_fp.writestr(
@@ -1005,35 +1314,42 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
   def test_Compute(self):
     zip_file = self.construct_zip_package_withValidPayload()
     property_files = AbOtaPropertyFiles()
-    with zipfile.ZipFile(zip_file, 'r') as zip_fp:
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
       property_files_string = property_files.Compute(zip_fp)
 
     tokens = self._parse_property_files_string(property_files_string)
-    # "6" indcludes the four entries above, one metadata entry, and one entry
+    # "7" indcludes the four entries above, two metadata entries, and one entry
     # for payload-metadata.bin.
-    self.assertEqual(6, len(tokens))
+    self.assertEqual(7, len(tokens))
     self._verify_entries(
         zip_file, tokens, ('care_map.txt', 'compatibility.zip'))
 
   def test_Finalize(self):
     zip_file = self.construct_zip_package_withValidPayload(with_metadata=True)
     property_files = AbOtaPropertyFiles()
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(zip_file, 'r') as zip_fp:
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
+=======
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
+      raw_metadata = property_files.GetPropertyFilesString(
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
           zip_fp, reserve_space=False)
-      property_files_string = property_files.Finalize(zip_fp, len(raw_metadata))
+      property_files_string = property_files.Finalize(
+          zip_fp, len(raw_metadata))
 
     tokens = self._parse_property_files_string(property_files_string)
-    # "6" indcludes the four entries above, one metadata entry, and one entry
+    # "7" includes the four entries above, two metadata entries, and one entry
     # for payload-metadata.bin.
-    self.assertEqual(6, len(tokens))
+    self.assertEqual(7, len(tokens))
     self._verify_entries(
         zip_file, tokens, ('care_map.txt', 'compatibility.zip'))
 
   def test_Verify(self):
     zip_file = self.construct_zip_package_withValidPayload(with_metadata=True)
     property_files = AbOtaPropertyFiles()
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(zip_file, 'r') as zip_fp:
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
@@ -1089,6 +1405,10 @@ class NonAbOtaPropertyFilesTest(PropertyFilesTest):
     with zipfile.ZipFile(zip_file) as zip_fp:
       # pylint: disable=protected-access
       raw_metadata = property_files._GetPropertyFilesString(
+=======
+    with zipfile.ZipFile(zip_file, 'r', allowZip64=True) as zip_fp:
+      raw_metadata = property_files.GetPropertyFilesString(
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
           zip_fp, reserve_space=False)
 
       property_files.Verify(zip_fp, raw_metadata)
@@ -1107,7 +1427,7 @@ class PayloadSignerTest(unittest.TestCase):
     common.OPTIONS.payload_signer_args = []
     common.OPTIONS.package_key = os.path.join(self.testdata_dir, 'testkey')
     common.OPTIONS.key_passwords = {
-        common.OPTIONS.package_key : None,
+        common.OPTIONS.package_key: None,
     }
 
   def tearDown(self):
@@ -1125,7 +1445,7 @@ class PayloadSignerTest(unittest.TestCase):
     common.OPTIONS.package_key = os.path.join(
         self.testdata_dir, 'testkey_with_passwd')
     common.OPTIONS.key_passwords = {
-        common.OPTIONS.package_key : 'foo',
+        common.OPTIONS.package_key: 'foo',
     }
     payload_signer = PayloadSigner()
     self.assertEqual('openssl', payload_signer.signer)
@@ -1184,7 +1504,7 @@ class PayloadTest(unittest.TestCase):
     common.OPTIONS.payload_signer_args = None
     common.OPTIONS.package_key = os.path.join(self.testdata_dir, 'testkey')
     common.OPTIONS.key_passwords = {
-        common.OPTIONS.package_key : None,
+        common.OPTIONS.package_key: None,
     }
 
   def tearDown(self):
@@ -1234,7 +1554,7 @@ class PayloadTest(unittest.TestCase):
     payload.Sign(PayloadSigner())
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       payload.WriteToZip(output_zip)
 
     import check_ota_package_signature
@@ -1247,7 +1567,7 @@ class PayloadTest(unittest.TestCase):
     payload.Sign(PayloadSigner())
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       payload.WriteToZip(output_zip)
 
     import check_ota_package_signature
@@ -1282,7 +1602,7 @@ class PayloadTest(unittest.TestCase):
     payload.Sign(PayloadSigner())
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       payload.WriteToZip(output_zip)
 
     with zipfile.ZipFile(output_file) as verify_zip:
@@ -1303,14 +1623,14 @@ class PayloadTest(unittest.TestCase):
     payload = self._create_payload_full()
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       self.assertRaises(AssertionError, payload.WriteToZip, output_zip)
 
     # Also test with incremental payload.
     payload = self._create_payload_incremental()
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       self.assertRaises(AssertionError, payload.WriteToZip, output_zip)
 
   def test_WriteToZip_secondary(self):
@@ -1318,7 +1638,7 @@ class PayloadTest(unittest.TestCase):
     payload.Sign(PayloadSigner())
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       payload.WriteToZip(output_zip)
 
     with zipfile.ZipFile(output_file) as verify_zip:
@@ -1330,7 +1650,336 @@ class PayloadTest(unittest.TestCase):
       # Then assert these entries are stored.
       for entry_info in verify_zip.infolist():
         if entry_info.filename not in (
-            Payload.SECONDARY_PAYLOAD_BIN,
-            Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
+                Payload.SECONDARY_PAYLOAD_BIN,
+                Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+
+class RuntimeFingerprintTest(test_utils.ReleaseToolsTestCase):
+  MISC_INFO = [
+      'recovery_api_version=3',
+      'fstab_version=2',
+      'recovery_as_boot=true',
+      'ab_update=true',
+  ]
+
+  BUILD_PROP = [
+      'ro.build.id=build-id',
+      'ro.build.version.incremental=version-incremental',
+      'ro.build.type=build-type',
+      'ro.build.tags=build-tags',
+      'ro.build.version.release=version-release',
+      'ro.build.version.release_or_codename=version-release',
+      'ro.build.version.sdk=30',
+      'ro.build.version.security_patch=2020',
+      'ro.build.date.utc=12345678',
+      'ro.system.build.version.release=version-release',
+      'ro.system.build.id=build-id',
+      'ro.system.build.version.incremental=version-incremental',
+      'ro.system.build.type=build-type',
+      'ro.system.build.tags=build-tags',
+      'ro.system.build.version.sdk=30',
+      'ro.system.build.version.security_patch=2020',
+      'ro.system.build.date.utc=12345678',
+      'ro.product.system.brand=generic',
+      'ro.product.system.name=generic',
+      'ro.product.system.device=generic',
+  ]
+
+  VENDOR_BUILD_PROP = [
+      'ro.vendor.build.version.release=version-release',
+      'ro.vendor.build.id=build-id',
+      'ro.vendor.build.version.incremental=version-incremental',
+      'ro.vendor.build.type=build-type',
+      'ro.vendor.build.tags=build-tags',
+      'ro.vendor.build.version.sdk=30',
+      'ro.vendor.build.version.security_patch=2020',
+      'ro.vendor.build.date.utc=12345678',
+      'ro.product.vendor.brand=vendor-product-brand',
+      'ro.product.vendor.name=vendor-product-name',
+      'ro.product.vendor.device=vendor-product-device'
+  ]
+
+  def setUp(self):
+    common.OPTIONS.oem_dicts = None
+    self.test_dir = common.MakeTempDir()
+    self.writeFiles({'META/misc_info.txt': '\n'.join(self.MISC_INFO)},
+                    self.test_dir)
+
+  def writeFiles(self, contents_dict, out_dir):
+    for path, content in contents_dict.items():
+      abs_path = os.path.join(out_dir, path)
+      dir_name = os.path.dirname(abs_path)
+      if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+      with open(abs_path, 'w') as f:
+        f.write(content)
+
+  @staticmethod
+  def constructFingerprint(prefix):
+    return '{}:version-release/build-id/version-incremental:' \
+           'build-type/build-tags'.format(prefix)
+
+  def test_CalculatePossibleFingerprints_no_dynamic_fingerprint(self):
+    build_prop = copy.deepcopy(self.BUILD_PROP)
+    build_prop.extend([
+        'ro.product.brand=product-brand',
+        'ro.product.name=product-name',
+        'ro.product.device=product-device',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(build_prop),
+        'VENDOR/build.prop': '\n'.join(self.VENDOR_BUILD_PROP),
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    expected = ({'product-device'},
+                {self.constructFingerprint(
+                    'product-brand/product-name/product-device')})
+    self.assertEqual(expected,
+                     CalculateRuntimeDevicesAndFingerprints(build_info, {}))
+
+  def test_CalculatePossibleFingerprints_single_override(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    boot_variable_values = {'ro.boot.sku_name': ['std', 'pro']}
+
+    expected = ({'vendor-product-device'}, {
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-product-device'),
+    })
+    self.assertEqual(
+        expected, CalculateRuntimeDevicesAndFingerprints(
+            build_info, boot_variable_values))
+
+  def test_CalculatePossibleFingerprints_multiple_overrides(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+        'import /vendor/etc/build_${ro.boot.device_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_product1.prop':
+        'ro.product.vendor.device=vendor-device-product1',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+        'VENDOR/etc/build_product2.prop':
+        'ro.product.vendor.device=vendor-device-product2',
+    }, self.test_dir)
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    boot_variable_values = {
+        'ro.boot.sku_name': ['std', 'pro'],
+        'ro.boot.device_name': ['product1', 'product2'],
+    }
+
+    expected_devices = {'vendor-product-device', 'vendor-device-product1',
+                        'vendor-device-product2'}
+    expected_fingerprints = {
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-device-product1'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-device-product1'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-device-product2'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-device-product2')
+    }
+    self.assertEqual((expected_devices, expected_fingerprints),
+                     CalculateRuntimeDevicesAndFingerprints(
+                         build_info, boot_variable_values))
+
+  def test_GetPackageMetadata_full_package(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.name=vendor-product-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.name=vendor-product-pro',
+        AB_PARTITIONS: '\n'.join(['system', 'vendor']),
+    }, self.test_dir)
+
+    common.OPTIONS.boot_variable_file = common.MakeTempFile()
+    with open(common.OPTIONS.boot_variable_file, 'w') as f:
+      f.write('ro.boot.sku_name=std,pro')
+
+    build_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    metadata_dict = BuildLegacyOtaMetadata(GetPackageMetadata(build_info))
+    self.assertEqual('vendor-product-device', metadata_dict['pre-device'])
+    fingerprints = [
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-pro/vendor-product-device'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-std/vendor-product-device'),
+    ]
+    self.assertEqual('|'.join(fingerprints), metadata_dict['post-build'])
+
+  def CheckMetadataEqual(self, metadata_dict, metadata_proto):
+    post_build = metadata_proto.postcondition
+    self.assertEqual('|'.join(post_build.build),
+                     metadata_dict['post-build'])
+    self.assertEqual(post_build.build_incremental,
+                     metadata_dict['post-build-incremental'])
+    self.assertEqual(post_build.sdk_level,
+                     metadata_dict['post-sdk-level'])
+    self.assertEqual(post_build.security_patch_level,
+                     metadata_dict['post-security-patch-level'])
+
+    if metadata_proto.type == ota_metadata_pb2.OtaMetadata.AB:
+      ota_type = 'AB'
+    elif metadata_proto.type == ota_metadata_pb2.OtaMetadata.BLOCK:
+      ota_type = 'BLOCK'
+    else:
+      ota_type = ''
+    self.assertEqual(ota_type, metadata_dict['ota-type'])
+    self.assertEqual(metadata_proto.wipe,
+                     metadata_dict.get('ota-wipe') == 'yes')
+    self.assertEqual(metadata_proto.required_cache,
+                     int(metadata_dict.get('ota-required-cache', 0)))
+    self.assertEqual(metadata_proto.retrofit_dynamic_partitions,
+                     metadata_dict.get(
+                         'ota-retrofit-dynamic-partitions') == 'yes')
+
+  def test_GetPackageMetadata_incremental_package(self):
+    vendor_build_prop = copy.deepcopy(self.VENDOR_BUILD_PROP)
+    vendor_build_prop.extend([
+        'import /vendor/etc/build_${ro.boot.sku_name}.prop',
+    ])
+    self.writeFiles({
+        'META/misc_info.txt': '\n'.join(self.MISC_INFO),
+        'META/ab_partitions.txt': '\n'.join(['system', 'vendor', 'product']),
+        'SYSTEM/build.prop': '\n'.join(self.BUILD_PROP),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.device=vendor-device-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.device=vendor-device-pro',
+    }, self.test_dir)
+
+    common.OPTIONS.boot_variable_file = common.MakeTempFile()
+    with open(common.OPTIONS.boot_variable_file, 'w') as f:
+      f.write('ro.boot.sku_name=std,pro')
+
+    source_dir = common.MakeTempDir()
+    source_build_prop = [
+        'ro.build.version.release=source-version-release',
+        'ro.build.id=source-build-id',
+        'ro.build.version.incremental=source-version-incremental',
+        'ro.build.type=build-type',
+        'ro.build.tags=build-tags',
+        'ro.build.version.sdk=29',
+        'ro.build.version.security_patch=2020',
+        'ro.build.date.utc=12340000',
+        'ro.system.build.version.release=source-version-release',
+        'ro.system.build.id=source-build-id',
+        'ro.system.build.version.incremental=source-version-incremental',
+        'ro.system.build.type=build-type',
+        'ro.system.build.tags=build-tags',
+        'ro.system.build.version.sdk=29',
+        'ro.system.build.version.security_patch=2020',
+        'ro.system.build.date.utc=12340000',
+        'ro.product.system.brand=generic',
+        'ro.product.system.name=generic',
+        'ro.product.system.device=generic',
+    ]
+    self.writeFiles({
+        'META/misc_info.txt': '\n'.join(self.MISC_INFO),
+        'META/ab_partitions.txt': '\n'.join(['system', 'vendor', 'product']),
+        'SYSTEM/build.prop': '\n'.join(source_build_prop),
+        'VENDOR/build.prop': '\n'.join(vendor_build_prop),
+        'VENDOR/etc/build_std.prop':
+        'ro.product.vendor.device=vendor-device-std',
+        'VENDOR/etc/build_pro.prop':
+        'ro.product.vendor.device=vendor-device-pro',
+    }, source_dir)
+    common.OPTIONS.incremental_source = source_dir
+
+    target_info = common.BuildInfo(common.LoadInfoDict(self.test_dir))
+    source_info = common.BuildInfo(common.LoadInfoDict(source_dir))
+
+    metadata_proto = GetPackageMetadata(target_info, source_info)
+    metadata_dict = BuildLegacyOtaMetadata(metadata_proto)
+    self.assertEqual(
+        'vendor-device-pro|vendor-device-std|vendor-product-device',
+        metadata_dict['pre-device'])
+    source_suffix = ':source-version-release/source-build-id/' \
+                    'source-version-incremental:build-type/build-tags'
+    pre_fingerprints = [
+        'vendor-product-brand/vendor-product-name/vendor-device-pro'
+        '{}'.format(source_suffix),
+        'vendor-product-brand/vendor-product-name/vendor-device-std'
+        '{}'.format(source_suffix),
+        'vendor-product-brand/vendor-product-name/vendor-product-device'
+        '{}'.format(source_suffix),
+    ]
+    self.assertEqual('|'.join(pre_fingerprints), metadata_dict['pre-build'])
+
+    post_fingerprints = [
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-device-pro'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-device-std'),
+        self.constructFingerprint(
+            'vendor-product-brand/vendor-product-name/vendor-product-device'),
+    ]
+    self.assertEqual('|'.join(post_fingerprints), metadata_dict['post-build'])
+
+    self.CheckMetadataEqual(metadata_dict, metadata_proto)
+
+    pre_partition_states = metadata_proto.precondition.partition_state
+    self.assertEqual(2, len(pre_partition_states))
+    self.assertEqual('system', pre_partition_states[0].partition_name)
+    self.assertEqual(['generic'], pre_partition_states[0].device)
+    self.assertEqual(['generic/generic/generic{}'.format(source_suffix)],
+                     pre_partition_states[0].build)
+
+    self.assertEqual('vendor', pre_partition_states[1].partition_name)
+    self.assertEqual(['vendor-device-pro', 'vendor-device-std',
+                      'vendor-product-device'], pre_partition_states[1].device)
+    vendor_fingerprints = post_fingerprints
+    self.assertEqual(vendor_fingerprints, pre_partition_states[1].build)
+
+    post_partition_states = metadata_proto.postcondition.partition_state
+    self.assertEqual(2, len(post_partition_states))
+    self.assertEqual('system', post_partition_states[0].partition_name)
+    self.assertEqual(['generic'], post_partition_states[0].device)
+    self.assertEqual([self.constructFingerprint('generic/generic/generic')],
+                     post_partition_states[0].build)
+
+    self.assertEqual('vendor', post_partition_states[1].partition_name)
+    self.assertEqual(['vendor-device-pro', 'vendor-device-std',
+                      'vendor-product-device'], post_partition_states[1].device)
+    self.assertEqual(vendor_fingerprints, post_partition_states[1].build)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

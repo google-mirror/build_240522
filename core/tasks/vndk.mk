@@ -20,6 +20,7 @@ ifeq ($(BOARD_VNDK_VERSION),current)
 # PLATFORM_VNDK_VERSION must be set.
 ifneq (,$(PLATFORM_VNDK_VERSION))
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # BOARD_VNDK_RUNTIME_DISABLE must not be set to 'true'.
 ifneq ($(BOARD_VNDK_RUNTIME_DISABLE),true)
 
@@ -35,6 +36,10 @@ $(strip \
   $(addsuffix .vendor,$($(addprefix $(prefix),UBSAN_RUNTIME_LIBRARY))) \
 )
 endef
+=======
+.PHONY: vndk
+vndk: $(SOONG_VNDK_SNAPSHOT_ZIP)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Returns list of file paths of the intermediate objs
 #
@@ -241,10 +246,6 @@ binder :=
 vndk_lib_dir :=
 vndk_lib_dir_2nd :=
 vndk_snapshot_dependencies :=
-
-else # BOARD_VNDK_RUNTIME_DISABLE is set to 'true'
-error_msg := "CANNOT generate VNDK snapshot. BOARD_VNDK_RUNTIME_DISABLE must not be set to 'true'."
-endif # BOARD_VNDK_RUNTIME_DISABLE
 
 else # PLATFORM_VNDK_VERSION is NOT set
 error_msg := "CANNOT generate VNDK snapshot. PLATFORM_VNDK_VERSION must be set."

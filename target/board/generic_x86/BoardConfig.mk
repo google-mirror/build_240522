@@ -12,9 +12,15 @@ TARGET_ARCH_VARIANT := x86
 TARGET_PRELINK_MODULE := false
 TARGET_BOOTLOADER_BOARD_NAME := goldfish_$(TARGET_ARCH)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 #emulator now uses 64bit kernel to run 32bit x86 image
 #
 TARGET_USES_64_BIT_BINDER := true
+=======
+include build/make/target/board/BoardConfigGsiCommon.mk
+ifndef BUILDING_GSI
+include build/make/target/board/BoardConfigEmuCommon.mk
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # The IA emulator (qemu) uses the Goldfish devices
 HAVE_HTC_AUDIO_DRIVER := true
@@ -101,3 +107,4 @@ WPA_SUPPLICANT_VERSION      := VER_0_8_X
 WIFI_DRIVER_FW_PATH_PARAM   := "/dev/null"
 WIFI_DRIVER_FW_PATH_STA     := "/dev/null"
 WIFI_DRIVER_FW_PATH_AP      := "/dev/null"
+endif

@@ -37,6 +37,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libexpat \
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Libcore.
 PRODUCT_PACKAGES += \
     libjavacore \
@@ -51,6 +52,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
+=======
+# ART APEX module.
+# Note that this package includes the minimal boot classpath JARs (listed in
+# ART_APEX_JARS), which should no longer be added directly to PRODUCT_PACKAGES.
+PRODUCT_PACKAGES += com.android.art-autoselect
+PRODUCT_HOST_PACKAGES += com.android.art-autoselect
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Certificates.
 PRODUCT_PACKAGES += \
@@ -59,7 +67,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hiddenapi-package-whitelist.xml \
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.image-dex2oat-Xms=64m \
     dalvik.vm.image-dex2oat-Xmx=64m \
     dalvik.vm.dex2oat-Xms=64m \
@@ -69,31 +77,65 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.dexopt.secondary=true \
     dalvik.vm.appimageformat=lz4
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_PROPERTY_OVERRIDES += \
+=======
+PRODUCT_SYSTEM_PROPERTIES += \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     ro.dalvik.vm.native.bridge=0
 
 # Different dexopt types for different package update/install times.
 # On eng builds, make "boot" reasons only extract for faster turnaround.
 ifeq (eng,$(TARGET_BUILD_VARIANT))
-    PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-        pm.dexopt.first-boot=extract \
-        pm.dexopt.boot=extract
+    PRODUCT_SYSTEM_PROPERTIES += \
+        pm.dexopt.first-boot?=extract \
+        pm.dexopt.boot?=extract
 else
-    PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-        pm.dexopt.first-boot=quicken \
-        pm.dexopt.boot=verify
+    PRODUCT_SYSTEM_PROPERTIES += \
+        pm.dexopt.first-boot?=quicken \
+        pm.dexopt.boot?=verify
 endif
 
 # The install filter is speed-profile in order to enable the use of
 # profiles from the dex metadata files. Note that if a profile is not provided
 # or if it is empty speed-profile is equivalent to (quicken + empty app image).
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    pm.dexopt.install=speed-profile \
-    pm.dexopt.bg-dexopt=speed-profile \
-    pm.dexopt.ab-ota=speed-profile \
-    pm.dexopt.inactive=verify \
-    pm.dexopt.shared=speed
+PRODUCT_SYSTEM_PROPERTIES += \
+    pm.dexopt.install?=speed-profile \
+    pm.dexopt.install-fast?=skip \
+    pm.dexopt.install-bulk?=speed-profile \
+    pm.dexopt.install-bulk-secondary?=verify \
+    pm.dexopt.install-bulk-downgraded?=verify \
+    pm.dexopt.install-bulk-secondary-downgraded?=extract \
+    pm.dexopt.bg-dexopt?=speed-profile \
+    pm.dexopt.ab-ota?=speed-profile \
+    pm.dexopt.inactive?=verify \
+    pm.dexopt.shared?=speed
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+# Pass file with the list of updatable boot class path packages to dex2oat.
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.dex2oat-updatable-bcp-packages-file=/system/etc/updatable-bcp-packages.txt
+
+# Enable resolution of startup const strings.
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.dex2oat-resolve-startup-strings=true
+
+# Specify default block size of 512K to enable parallel image decompression.
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.dex2oat-max-image-block-size=524288
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # Enable minidebuginfo generation unless overridden.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+=======
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.minidebuginfo=true \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     dalvik.vm.dex2oat-minidebuginfo=true
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+PRODUCT_USES_DEFAULT_ART_CONFIG := true
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

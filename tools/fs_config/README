@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
  _____  _____  _____  _____  __  __  _____
 /  _  \/   __\/  _  \|  _  \/  \/  \/   __\
 |  _  <|   __||  _  ||  |  ||  \/  ||   __|
@@ -181,3 +182,5 @@ minus blacklist. Partitions are identified as path references to
 <partition>/ or system/<partition>
 
 Usage: fs_config_generate -D|-F [-P list] [-o output-file]
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

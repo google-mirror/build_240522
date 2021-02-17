@@ -39,7 +39,11 @@ _all_dist_src_dst_pairs :=
 # certain files with certain goals.  When those goals are built
 # and "dist" is specified, the marked files will be copied to DIST_DIR.
 #
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # $(1): a list of goals  (e.g. droid, sdk, pdk, ndk)
+=======
+# $(1): a list of goals  (e.g. droid, sdk, ndk). These must be PHONY
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # $(2): the dist files to add to those goals.  If the file contains ':',
 #       the text following the colon is the name that the file is copied
 #       to under the dist directory.  Subdirs are ok, and will be created

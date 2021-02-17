@@ -100,15 +100,15 @@ class SignTargetFilesApksTest(unittest.TestCase):
         "veritykeyid=id:d24f2590e9abab5cff5f59da4c4f0366e3f43e94\n")
 
     input_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(input_file, 'w') as input_zip:
+    with zipfile.ZipFile(input_file, 'w', allowZip64=True) as input_zip:
       input_zip.writestr('BOOT/cmdline', BOOT_CMDLINE1)
 
     # Test with the first certificate.
     cert_file = os.path.join(self.testdata_dir, 'verity.x509.pem')
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(input_file, 'r') as input_zip, \
-         zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip, \
+         zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       ReplaceVerityKeyId(input_zip, output_zip, cert_file)
 
     with zipfile.ZipFile(output_file) as output_zip:
@@ -117,8 +117,8 @@ class SignTargetFilesApksTest(unittest.TestCase):
     # Test with the second certificate.
     cert_file = os.path.join(self.testdata_dir, 'testkey.x509.pem')
 
-    with zipfile.ZipFile(input_file, 'r') as input_zip, \
-         zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip, \
+         zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       ReplaceVerityKeyId(input_zip, output_zip, cert_file)
 
     with zipfile.ZipFile(output_file) as output_zip:
@@ -131,12 +131,12 @@ class SignTargetFilesApksTest(unittest.TestCase):
         "loop.max_part=7\n")
 
     input_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(input_file, 'w') as input_zip:
+    with zipfile.ZipFile(input_file, 'w', allowZip64=True) as input_zip:
       input_zip.writestr('BOOT/cmdline', BOOT_CMDLINE)
 
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(input_file, 'r') as input_zip, \
-         zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip, \
+         zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       ReplaceVerityKeyId(input_zip, output_zip, None)
 
     with zipfile.ZipFile(output_file) as output_zip:
@@ -211,3 +211,319 @@ class SignTargetFilesApksTest(unittest.TestCase):
         cert2_path[:-9] : 'non-existent',
     }
     self.assertEqual(output_xml, ReplaceCerts(input_xml))
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+  def test_WriteOtacerts(self):
+    certs = [
+        os.path.join(self.testdata_dir, 'platform.x509.pem'),
+        os.path.join(self.testdata_dir, 'media.x509.pem'),
+        os.path.join(self.testdata_dir, 'testkey.x509.pem'),
+    ]
+    entry_name = 'SYSTEM/etc/security/otacerts.zip'
+    output_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
+      WriteOtacerts(output_zip, entry_name, certs)
+    with zipfile.ZipFile(output_file) as input_zip:
+      self.assertIn(entry_name, input_zip.namelist())
+      otacerts_file = io.BytesIO(input_zip.read(entry_name))
+      with zipfile.ZipFile(otacerts_file) as otacerts_zip:
+        self.assertEqual(3, len(otacerts_zip.namelist()))
+
+  def test_CheckApkAndApexKeysAvailable(self):
+    input_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(input_file, 'w', allowZip64=True) as input_zip:
+      input_zip.writestr('SYSTEM/app/App1.apk', "App1-content")
+      input_zip.writestr('SYSTEM/app/App2.apk.gz', "App2-content")
+
+    apk_key_map = {
+        'App1.apk' : 'key1',
+        'App2.apk' : 'key2',
+        'App3.apk' : 'key3',
+    }
+    with zipfile.ZipFile(input_file) as input_zip:
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, {})
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, '.gz', {})
+
+      # 'App2.apk.gz' won't be considered as an APK.
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, {})
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, '.xz', {})
+
+      del apk_key_map['App2.apk']
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          '.gz', {})
+
+  def test_CheckApkAndApexKeysAvailable_invalidApexKeys(self):
+    input_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(input_file, 'w', allowZip64=True) as input_zip:
+      input_zip.writestr('SYSTEM/apex/Apex1.apex', "Apex1-content")
+      input_zip.writestr('SYSTEM/apex/Apex2.apex', "Apex2-content")
+
+    apk_key_map = {
+        'Apex1.apex' : 'key1',
+        'Apex2.apex' : 'key2',
+        'Apex3.apex' : 'key3',
+    }
+    apex_keys = {
+        'Apex1.apex' : ('payload-key1', 'container-key1'),
+        'Apex2.apex' : ('payload-key2', 'container-key2'),
+    }
+    with zipfile.ZipFile(input_file) as input_zip:
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, apex_keys)
+
+      # Fine to have both keys as PRESIGNED.
+      apex_keys['Apex2.apex'] = ('PRESIGNED', 'PRESIGNED')
+      CheckApkAndApexKeysAvailable(input_zip, apk_key_map, None, apex_keys)
+
+      # Having only one of them as PRESIGNED is not allowed.
+      apex_keys['Apex2.apex'] = ('payload-key2', 'PRESIGNED')
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          None, apex_keys)
+
+      apex_keys['Apex2.apex'] = ('PRESIGNED', 'container-key1')
+      self.assertRaises(
+          AssertionError, CheckApkAndApexKeysAvailable, input_zip, apk_key_map,
+          None, apex_keys)
+
+  def test_GetApkFileInfo(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk", None, [])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk", None, [])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.dat", None, [])
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+  def test_GetApkFileInfo_withCompressedApks(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk.gz", ".gz", [])
+    self.assertTrue(is_apk)
+    self.assertTrue(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/apps/Chats.apk.gz", ".xz", [])
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "PRODUCT/apps/Chats.apk", "", [])
+
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "PRODUCT/apps/Chats.apk", "apk", [])
+
+  def test_GetApkFileInfo_withSkippedPrefixes(self):
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/preloads/apps/Chats.apk", None, set())
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "PRODUCT/preloads/apps/Chats.apk",
+        None,
+        set(["PRODUCT/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        set(["SYSTEM/preloads/", "SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk.gz",
+        ".gz",
+        set(["PRODUCT/prebuilts/", "SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertTrue(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.dat",
+        None,
+        set(["SYSTEM_OTHER/preloads/"]))
+    self.assertFalse(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertFalse(should_be_skipped)
+
+  def test_GetApkFileInfo_checkSkippedPrefixesInput(self):
+    # set
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        set(["SYSTEM_OTHER/preloads/"]))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # tuple
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        ("SYSTEM_OTHER/preloads/",))
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # list
+    (is_apk, is_compressed, should_be_skipped) = GetApkFileInfo(
+        "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None,
+        ["SYSTEM_OTHER/preloads/"])
+    self.assertTrue(is_apk)
+    self.assertFalse(is_compressed)
+    self.assertTrue(should_be_skipped)
+
+    # str is invalid.
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None, "SYSTEM_OTHER/preloads/")
+
+    # None is invalid.
+    self.assertRaises(
+        AssertionError, GetApkFileInfo, "SYSTEM_OTHER/preloads/apps/Chats.apk",
+        None, None)
+
+  def test_ReadApexKeysInfo(self):
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', self.APEX_KEYS_TXT)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_mismatchingContainerKeys(self):
+    # Mismatching payload public / private keys.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.avbpubkey" '
+        'private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey2.pk8" '
+        'partition="system"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      self.assertRaises(ValueError, ReadApexKeysInfo, target_files_zip)
+
+  def test_ReadApexKeysInfo_missingPayloadPrivateKey(self):
+    # Invalid lines will be skipped.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'public_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.avbpubkey" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey.pk8"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_missingPayloadPublicKey(self):
+    # Invalid lines will be skipped.
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem" '
+        'container_certificate="build/make/target/product/security/testkey.x509.pem" '
+        'container_private_key="build/make/target/product/security/testkey.pk8"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_presignedKeys(self):
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="PRESIGNED" '
+        'public_key="PRESIGNED" '
+        'container_certificate="PRESIGNED" '
+        'container_private_key="PRESIGNED"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+
+  def test_ReadApexKeysInfo_presignedKeys(self):
+    apex_keys = self.APEX_KEYS_TXT + (
+        'name="apex.apexd_test_different_app2.apex" '
+        'private_key="PRESIGNED" '
+        'public_key="PRESIGNED" '
+        'container_certificate="PRESIGNED" '
+        'container_private_key="PRESIGNED"')
+    target_files = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.writestr('META/apexkeys.txt', apex_keys)
+
+    with zipfile.ZipFile(target_files, allowZip64=True) as target_files_zip:
+      keys_info = ReadApexKeysInfo(target_files_zip)
+
+    self.assertEqual({
+        'apex.apexd_test.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package.pem',
+            'build/make/target/product/security/testkey'),
+        'apex.apexd_test_different_app.apex': (
+            'system/apex/apexd/apexd_testdata/com.android.apex.test_package_2.pem',
+            'build/make/target/product/security/testkey'),
+        }, keys_info)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

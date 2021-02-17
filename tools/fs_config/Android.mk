@@ -40,12 +40,18 @@ ifneq ($(TARGET_FS_CONFIG_GEN),)
 $(error Cannot set TARGET_ANDROID_FILESYSTEM_CONFIG_H and TARGET_FS_CONFIG_GEN simultaneously)
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # One and only one file can be specified.
 ifneq ($(words $(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),1)
 $(error Multiple fs_config files specified, \
  see "$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)".)
 endif
+=======
+system_android_filesystem_config := system/core/libcutils/include/private/android_filesystem_config.h
+system_capability_header := bionic/libc/kernel/uapi/linux/capability.h
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ifeq ($(filter %/$(ANDROID_FS_CONFIG_H),$(TARGET_ANDROID_FILESYSTEM_CONFIG_H)),)
 $(error TARGET_ANDROID_FILESYSTEM_CONFIG_H file name must be $(ANDROID_FS_CONFIG_H), \
  see "$(notdir $(TARGET_ANDROID_FILESYSTEM_CONFIG_H))".)
@@ -105,10 +111,106 @@ LOCAL_C_INCLUDES := $(dir $(my_fs_config_h)) $(dir $(my_gen_oem_aid))
 include $(BUILD_HOST_EXECUTABLE)
 fs_config_generate_bin := $(LOCAL_INSTALLED_MODULE)
 # List of all supported vendor, oem and odm Partitions
+=======
+# List of supported vendor, oem, odm, vendor_dlkm, odm_dlkm, product and system_ext Partitions
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 fs_config_generate_extra_partition_list := $(strip \
   $(if $(BOARD_USES_VENDORIMAGE)$(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE),vendor) \
   $(if $(BOARD_USES_OEMIMAGE)$(BOARD_OEMIMAGE_FILE_SYSTEM_TYPE),oem) \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm))
+=======
+  $(if $(BOARD_USES_ODMIMAGE)$(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE),odm) \
+  $(if $(BOARD_USES_VENDOR_DLKMIMAGE)$(BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE),vendor_dlkm) \
+  $(if $(BOARD_USES_ODM_DLKMIMAGE)$(BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE),odm_dlkm) \
+)
+
+##################################
+# Generate the <p>/etc/fs_config_dirs binary files for each partition.
+# Add fs_config_dirs to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs
+LOCAL_REQUIRED_MODULES := \
+  fs_config_dirs_system \
+  fs_config_dirs_system_ext \
+  fs_config_dirs_product \
+  fs_config_dirs_nonsystem
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/fs_config_files binary files for each partition.
+# Add fs_config_files to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files
+LOCAL_REQUIRED_MODULES := \
+  fs_config_files_system \
+  fs_config_files_system_ext \
+  fs_config_files_product \
+  fs_config_files_nonsystem
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the system_ext/etc/fs_config_dirs binary file for the target if the
+# system_ext partition is generated. Add fs_config_dirs or fs_config_dirs_system_ext
+# to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs_system_ext
+LOCAL_REQUIRED_MODULES := $(if $(BOARD_USES_SYSTEM_EXTIMAGE)$(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),_fs_config_dirs_system_ext)
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the system_ext/etc/fs_config_files binary file for the target if the
+# system_ext partition is generated. Add fs_config_files or fs_config_files_system_ext
+# to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files_system_ext
+LOCAL_REQUIRED_MODULES := $(if $(BOARD_USES_SYSTEM_EXTIMAGE)$(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),_fs_config_files_system_ext)
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the product/etc/fs_config_dirs binary file for the target if the
+# product partition is generated. Add fs_config_dirs or fs_config_dirs_product
+# to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs_product
+LOCAL_REQUIRED_MODULES := $(if $(BOARD_USES_PRODUCTIMAGE)$(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),_fs_config_dirs_product)
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the product/etc/fs_config_files binary file for the target if the
+# product partition is generated. Add fs_config_files or fs_config_files_product
+# to PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files_product
+LOCAL_REQUIRED_MODULES := $(if $(BOARD_USES_PRODUCTIMAGE)$(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),_fs_config_files_product)
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/fs_config_dirs binary files for all enabled partitions
+# excluding /system, /system_ext and /product. Add fs_config_dirs_nonsystem to
+# PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_dirs_nonsystem
+LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list),_fs_config_dirs_$(t))
+include $(BUILD_PHONY_PACKAGE)
+
+##################################
+# Generate the <p>/etc/fs_config_files binary files for all enabled partitions
+# excluding /system, /system_ext and /product. Add fs_config_files_nonsystem to
+# PRODUCT_PACKAGES in the device make file to enable.
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fs_config_files_nonsystem
+LOCAL_REQUIRED_MODULES := $(foreach t,$(fs_config_generate_extra_partition_list),_fs_config_files_$(t))
+include $(BUILD_PHONY_PACKAGE)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ##################################
 # Generate the system/etc/fs_config_dirs binary file for the target
@@ -143,11 +245,11 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 ifneq ($(filter vendor,$(fs_config_generate_extra_partition_list)),)
 ##################################
 # Generate the vendor/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_vendor to PRODUCT_PACKAGES in
-# the device make file to enable.
+# Add fs_config_dirs or fs_config_dirs_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_dirs_vendor
+LOCAL_MODULE := _fs_config_dirs_vendor
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
@@ -158,11 +260,11 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 
 ##################################
 # Generate the vendor/etc/fs_config_files binary file for the target
-# Add fs_config_files or fs_config_files_vendor to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add fs_config_files or fs_config_files_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_files_vendor
+LOCAL_MODULE := _fs_config_files_vendor
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_files
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc
@@ -176,11 +278,11 @@ endif
 ifneq ($(filter oem,$(fs_config_generate_extra_partition_list)),)
 ##################################
 # Generate the oem/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_oem to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add fs_config_dirs or fs_config_dirs_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_dirs_oem
+LOCAL_MODULE := _fs_config_dirs_oem
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
 LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
@@ -191,11 +293,11 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 
 ##################################
 # Generate the oem/etc/fs_config_files binary file for the target
-# Add fs_config_files or fs_config_files_oem to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add fs_config_files or fs_config_files_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_files_oem
+LOCAL_MODULE := _fs_config_files_oem
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_files
 LOCAL_MODULE_PATH := $(TARGET_OUT_OEM)/etc
@@ -209,11 +311,11 @@ endif
 ifneq ($(filter odm,$(fs_config_generate_extra_partition_list)),)
 ##################################
 # Generate the odm/etc/fs_config_dirs binary file for the target
-# Add fs_config_dirs or fs_config_dirs_odm to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add fs_config_dirs or fs_config_dirs_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_dirs_odm
+LOCAL_MODULE := _fs_config_dirs_odm
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
 LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
@@ -224,11 +326,11 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 
 ##################################
 # Generate the odm/etc/fs_config_files binary file for the target
-# Add fs_config_files of fs_config_files_odm to PRODUCT_PACKAGES in
-# the device make file to enable
+# Add fs_config_files or fs_config_files_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := fs_config_files_odm
+LOCAL_MODULE := _fs_config_files_odm
 LOCAL_MODULE_CLASS := ETC
 LOCAL_INSTALLED_MODULE_STEM := fs_config_files
 LOCAL_MODULE_PATH := $(TARGET_OUT_ODM)/etc
@@ -239,27 +341,219 @@ $(LOCAL_BUILT_MODULE): $(fs_config_generate_bin)
 
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # The newer passwd/group targets are only generated if you
 # use the new TARGET_FS_CONFIG_GEN method.
 ifneq ($(TARGET_FS_CONFIG_GEN),)
+=======
+ifneq ($(filter vendor_dlkm,$(fs_config_generate_extra_partition_list)),)
+##################################
+# Generate the vendor_dlkm/etc/fs_config_dirs binary file for the target
+# Add fs_config_dirs or fs_config_dirs_nonsystem to PRODUCT_PACKAGES in
+# the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_dirs_vendor_dlkm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_DLKM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition vendor_dlkm \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
 
 ##################################
+# Generate the vendor_dlkm/etc/fs_config_files binary file for the target
+# Add fs_config_files or fs_config_files_nonsystem to PRODUCT_PACKAGES in
+# the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_files_vendor_dlkm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_files
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_DLKM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition vendor_dlkm \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+
+endif
+
+ifneq ($(filter odm_dlkm,$(fs_config_generate_extra_partition_list)),)
+##################################
+# Generate the odm_dlkm/etc/fs_config_dirs binary file for the target
+# Add fs_config_dirs or fs_config_dirs_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_dirs_odm_dlkm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM_DLKM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition odm_dlkm \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+
+##################################
+# Generate the odm_dlkm/etc/fs_config_files binary file for the target
+# Add fs_config_files or fs_config_files_nonsystem to PRODUCT_PACKAGES
+# in the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_files_odm_dlkm
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_files
+LOCAL_MODULE_PATH := $(TARGET_OUT_ODM_DLKM)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition odm_dlkm \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+
+endif
+
+ifneq ($(BOARD_USES_PRODUCTIMAGE)$(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE),)
+##################################
+# Generate the product/etc/fs_config_dirs binary file for the target
+# Add fs_config_dirs or fs_config_dirs_product to PRODUCT_PACKAGES in
+# the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_dirs_product
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition product \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
+
+##################################
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Build the oemaid header library when fs config files are present.
 # Intentionally break build if you require generated AIDs
 # header file, but are not using any fs config files.
+=======
+# Generate the product/etc/fs_config_files binary file for the target
+# Add fs_config_files or fs_config_files_product to PRODUCT_PACKAGES in
+# the device make file to enable
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 include $(CLEAR_VARS)
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 LOCAL_MODULE := oemaids_headers
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(dir $(my_gen_oem_aid))
 LOCAL_EXPORT_C_INCLUDE_DEPS := $(my_gen_oem_aid)
 include $(BUILD_HEADER_LIBRARY)
+=======
+
+LOCAL_MODULE := _fs_config_files_product
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_files
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition product \
+	   --files \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+endif
+
+ifneq ($(BOARD_USES_SYSTEM_EXTIMAGE)$(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE),)
+##################################
+# Generate the system_ext/etc/fs_config_dirs binary file for the target
+# Add fs_config_dirs or fs_config_dirs_system_ext to PRODUCT_PACKAGES in
+# the device make file to enable
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := _fs_config_dirs_system_ext
+LOCAL_MODULE_CLASS := ETC
+LOCAL_INSTALLED_MODULE_STEM := fs_config_dirs
+LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT)/etc
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_FS_HDR := $(system_android_filesystem_config)
+$(LOCAL_BUILT_MODULE): PRIVATE_ANDROID_CAP_HDR := $(system_capability_header)
+$(LOCAL_BUILT_MODULE): PRIVATE_TARGET_FS_CONFIG_GEN := $(TARGET_FS_CONFIG_GEN)
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/fs_config_generator.py $(TARGET_FS_CONFIG_GEN) $(system_android_filesystem_config) $(system_capability_header)
+	@mkdir -p $(dir $@)
+	$< fsconfig \
+	   --aid-header $(PRIVATE_ANDROID_FS_HDR) \
+	   --capability-header $(PRIVATE_ANDROID_CAP_HDR) \
+	   --partition system_ext \
+	   --dirs \
+	   --out_file $@ \
+	   $(or $(PRIVATE_TARGET_FS_CONFIG_GEN),/dev/null)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 ##################################
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Generate the vendor/etc/passwd text file for the target
 # This file may be empty if no AIDs are defined in
 # TARGET_FS_CONFIG_GEN files.
+=======
+# Generate the system_ext/etc/fs_config_files binary file for the target
+# Add fs_config_files or fs_config_files_system_ext to PRODUCT_PACKAGES in
+# the device make file to enable
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 include $(CLEAR_VARS)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 LOCAL_MODULE := passwd
+=======
+LOCAL_MODULE := _fs_config_files_system_ext
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 LOCAL_MODULE_CLASS := ETC
 LOCAL_VENDOR_MODULE := true
 

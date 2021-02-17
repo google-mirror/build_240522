@@ -49,7 +49,11 @@ import datetime
 import os
 import shlex
 import shutil
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 import subprocess
+=======
+import stat
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 import sys
 import uuid
 import zipfile
@@ -196,6 +200,74 @@ def AddProduct(output_zip):
   return img.name
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+def AddSystemExt(output_zip):
+  """Turn the contents of SYSTEM_EXT into a system_ext image and store it in
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES",
+                   "system_ext.img")
+  if os.path.exists(img.name):
+    logger.info("system_ext.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_ext.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_ext", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdm(output_zip):
+  """Turn the contents of ODM into an odm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm.img")
+  if os.path.exists(img.name):
+    logger.info("odm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddVendorDlkm(output_zip):
+  """Turn the contents of VENDOR_DLKM into an vendor_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("vendor_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "vendor_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+def AddOdmDlkm(output_zip):
+  """Turn the contents of OdmDlkm into an odm_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("odm_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 def AddDtbo(output_zip):
   """Adds the DTBO image.
 
@@ -214,7 +286,14 @@ def AddDtbo(output_zip):
 
   # AVB-sign the image as needed.
   if OPTIONS.info_dict.get("avb_enable") == "true":
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     avbtool = os.getenv('AVBTOOL') or OPTIONS.info_dict["avb_avbtool"]
+=======
+    # Signing requires +w
+    os.chmod(img.name, os.stat(img.name).st_mode | stat.S_IWUSR)
+
+    avbtool = OPTIONS.info_dict["avb_avbtool"]
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     part_size = OPTIONS.info_dict["dtbo_size"]
     # The AVB hash footer will be replaced if already present.
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
@@ -622,6 +701,18 @@ def ReplaceUpdatedFiles(zip_filename, files_list):
   common.ZipClose(output_zip)
 
 
+def HasPartition(partition_name):
+  """Determines if the target files archive should build a given partition."""
+
+  return ((os.path.isdir(
+      os.path.join(OPTIONS.input_tmp, partition_name.upper())) and
+           OPTIONS.info_dict.get(
+               "building_{}_image".format(partition_name)) == "true") or
+          os.path.exists(
+              os.path.join(OPTIONS.input_tmp, "IMAGES",
+                           "{}.img".format(partition_name))))
+
+
 def AddImagesToTargetFiles(filename):
   """Creates and adds images (boot/recovery/system/...) to a target_files.zip.
 
@@ -648,6 +739,7 @@ def AddImagesToTargetFiles(filename):
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   # {vendor,product}.img is unlike system.img or system_other.img. Because it
   # could be built from source, or dropped into target_files.zip as a prebuilt
   # blob. We consider either of them as {vendor,product}.img being available,
@@ -660,6 +752,20 @@ def AddImagesToTargetFiles(filename):
                                              "product.img")))
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
+=======
+  # {vendor,odm,product,system_ext,vendor_dlkm,odm_dlkm, system, system_other}.img
+  # can be built from source, or  dropped into target_files.zip as a prebuilt blob.
+  has_vendor = HasPartition("vendor")
+  has_odm = HasPartition("odm")
+  has_vendor_dlkm = HasPartition("vendor_dlkm")
+  has_odm_dlkm = HasPartition("odm_dlkm")
+  has_product = HasPartition("product")
+  has_system_ext = HasPartition("system_ext")
+  has_system = HasPartition("system")
+  has_system_other = HasPartition("system_other")
+  has_userdata = OPTIONS.info_dict.get("building_userdata_image") == "true"
+  has_cache = OPTIONS.info_dict.get("building_cache_image") == "true"
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   # Set up the output destination. It writes to the given directory for dir
   # mode; otherwise appends to the given ZIP.
@@ -734,6 +840,25 @@ def AddImagesToTargetFiles(filename):
     banner("product")
     partitions['product'] = AddProduct(output_zip)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+  if has_system_ext:
+    banner("system_ext")
+    partitions['system_ext'] = AddSystemExt(output_zip)
+
+  if has_odm:
+    banner("odm")
+    partitions['odm'] = AddOdm(output_zip)
+
+  if has_vendor_dlkm:
+    banner("vendor_dlkm")
+    partitions['vendor_dlkm'] = AddVendorDlkm(output_zip)
+
+  if has_odm_dlkm:
+    banner("odm_dlkm")
+    partitions['odm_dlkm'] = AddOdmDlkm(output_zip)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   if has_system_other:
     banner("system_other")
     AddSystemOther(output_zip)
@@ -753,8 +878,50 @@ def AddImagesToTargetFiles(filename):
     partitions['dtbo'] = AddDtbo(output_zip)
 
   if OPTIONS.info_dict.get("avb_enable") == "true":
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     banner("vbmeta")
     AddVBMeta(output_zip, partitions)
+=======
+    # vbmeta_partitions includes the partitions that should be included into
+    # top-level vbmeta.img, which are the ones that are not included in any
+    # chained VBMeta image plus the chained VBMeta images themselves.
+    # Currently custom_partitions are all chained to VBMeta image.
+    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
+
+    vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
+    if vbmeta_system:
+      banner("vbmeta_system")
+      partitions["vbmeta_system"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_system", vbmeta_system.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_system.split()]
+      vbmeta_partitions.append("vbmeta_system")
+
+    vbmeta_vendor = OPTIONS.info_dict.get("avb_vbmeta_vendor", "").strip()
+    if vbmeta_vendor:
+      banner("vbmeta_vendor")
+      partitions["vbmeta_vendor"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_vendor", vbmeta_vendor.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_vendor.split()]
+      vbmeta_partitions.append("vbmeta_vendor")
+
+    if OPTIONS.info_dict.get("avb_building_vbmeta_image") == "true":
+      banner("vbmeta")
+      AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
+
+  if OPTIONS.info_dict.get("use_dynamic_partitions") == "true":
+    banner("super_empty")
+    AddSuperEmpty(output_zip)
+
+  if OPTIONS.info_dict.get("build_super_partition") == "true":
+    if OPTIONS.info_dict.get(
+        "build_retrofit_dynamic_partitions_ota_package") == "true":
+      banner("super split images")
+      AddSuperSplit(output_zip)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",

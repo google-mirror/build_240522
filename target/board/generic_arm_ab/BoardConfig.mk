@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 #
 # Copyright (C) 2017 The Android Open-Source Project
 #
@@ -41,3 +42,5 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 16777216
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.
 BOARD_SEPOLICY_DIRS += build/target/board/generic_arm64_ab/sepolicy
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 #
 # Copyright (C) 2017 The Android Open-Source Project
 #
@@ -25,3 +26,5 @@ PRODUCT_NAME := aosp_arm_ab
 PRODUCT_DEVICE := generic_arm_ab
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on ARM32
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

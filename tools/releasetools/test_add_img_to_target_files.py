@@ -145,10 +145,10 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
 
     # Set up the output zip.
     output_file = common.MakeTempFile(suffix='.zip')
-    with zipfile.ZipFile(output_file, 'w') as output_zip:
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
       AddPackRadioImages(output_zip, images)
 
-    with zipfile.ZipFile(output_file, 'r') as verify_zip:
+    with zipfile.ZipFile(output_file, 'r', allowZip64=True) as verify_zip:
       for image in images:
         self.assertIn('IMAGES/' + image + '.img', verify_zip.namelist())
 
@@ -273,11 +273,24 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     image_paths = self._test_AddCareMapTxtForAbOta()
 
     output_file = common.MakeTempFile(suffix='.zip')
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(output_file, 'w') as output_zip:
       AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)
+=======
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
+      AddCareMapForAbOta(output_zip, ['system', 'vendor'], image_paths)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(output_file, 'r') as verify_zip:
       care_map = verify_zip.read('META/care_map.txt').decode('ascii')
+=======
+    care_map_name = "META/care_map.pb"
+    temp_dir = common.MakeTempDir()
+    with zipfile.ZipFile(output_file, 'r', allowZip64=True) as verify_zip:
+      self.assertTrue(care_map_name in verify_zip.namelist())
+      verify_zip.extract(care_map_name, path=temp_dir)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
     lines = care_map.split('\n')
     self.assertEqual(4, len(lines))
@@ -291,9 +304,16 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     image_paths = self._test_AddCareMapTxtForAbOta()
 
     output_file = common.MakeTempFile(suffix='.zip')
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     with zipfile.ZipFile(output_file, 'w') as output_zip:
       # Create an existing META/care_map.txt entry.
       common.ZipWriteStr(output_zip, 'META/care_map.txt', 'dummy care_map.txt')
+=======
+    with zipfile.ZipFile(output_file, 'w', allowZip64=True) as output_zip:
+      # Create an existing META/care_map.pb entry.
+      common.ZipWriteStr(output_zip, 'META/care_map.pb',
+                         'fake care_map.pb')
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
       # Request to add META/care_map.txt again.
       AddCareMapTxtForAbOta(output_zip, ['system', 'vendor'], image_paths)

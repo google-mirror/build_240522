@@ -35,7 +35,7 @@
 #include <assert.h>
 #include <inttypes.h>
 
-using namespace android;
+namespace android {
 
 /*
  * Some environments require the "b", some choke on it.
@@ -134,7 +134,7 @@ status_t ZipFile::open(const char* zipFileName, int flags)
 /*
  * Return the Nth entry in the archive.
  */
-android::ZipEntry* ZipFile::getEntryByIndex(int idx) const
+ZipEntry* ZipFile::getEntryByIndex(int idx) const
 {
     if (idx < 0 || idx >= (int) mEntries.size())
         return NULL;
@@ -145,7 +145,7 @@ android::ZipEntry* ZipFile::getEntryByIndex(int idx) const
 /*
  * Find an entry by name.
  */
-android::ZipEntry* ZipFile::getEntryByName(const char* fileName) const
+ZipEntry* ZipFile::getEntryByName(const char* fileName) const
 {
     /*
      * Do a stupid linear string-compare search.
@@ -503,6 +503,32 @@ bail:
 }
 
 /*
+ * Based on the current position in the output zip, assess where the entry
+ * payload will end up if written as-is. If alignment is not satisfactory,
+ * add some padding in the extra field.
+ *
+ */
+status_t ZipFile::alignEntry(android::ZipEntry* pEntry, uint32_t alignTo){
+    if (alignTo == 0 || alignTo == 1)
+        return OK;
+
+    // Calculate where the entry payload offset will end up if we were to write
+    // it as-is.
+    uint64_t expectedPayloadOffset = ftell(mZipFp) +
+        android::ZipEntry::LocalFileHeader::kLFHLen +
+        pEntry->mLFH.mFileNameLength +
+        pEntry->mLFH.mExtraFieldLength;
+
+    // If the alignment is not what was requested, add some padding in the extra
+    // so the payload ends up where is requested.
+    uint64_t alignDiff = alignTo - (expectedPayloadOffset % alignTo);
+    if (alignDiff == 0)
+        return OK;
+
+    return pEntry->addPadding(alignDiff);
+}
+
+/*
  * Add an entry by copying it from another zip file.  If "padding" is
  * nonzero, the specified number of bytes will be added to the "extra"
  * field in the header.
@@ -510,7 +536,7 @@ bail:
  * If "ppEntry" is non-NULL, a pointer to the new entry will be returned.
  */
 status_t ZipFile::add(const ZipFile* pSourceZip, const ZipEntry* pSourceEntry,
-    int padding, ZipEntry** ppEntry)
+    int alignTo, ZipEntry** ppEntry)
 {
     ZipEntry* pEntry = NULL;
     status_t result;
@@ -537,11 +563,18 @@ status_t ZipFile::add(const ZipFile* pSourceZip, const ZipEntry* pSourceEntry,
     result = pEntry->initFromExternal(pSourceEntry);
     if (result != NO_ERROR)
         goto bail;
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     if (padding != 0) {
         result = pEntry->addPadding(padding);
         if (result != NO_ERROR)
             goto bail;
     }
+=======
+
+    result = alignEntry(pEntry, alignTo);
+    if (result != OK)
+      goto bail;
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
     /*
      * From here on out, failures are more interesting.
@@ -1221,7 +1254,7 @@ class FileReader : public zip_archive::Reader {
     FileReader(FILE* fp) : Reader(), fp_(fp), current_offset_(0) {
     }
 
-    bool ReadAtOffset(uint8_t* buf, size_t len, uint32_t offset) const {
+    bool ReadAtOffset(uint8_t* buf, size_t len, off64_t offset) const {
         // Data is usually requested sequentially, so this helps avoid pointless
         // fseeks every time we perform a read. There's an impedence mismatch
         // here because the original API was designed around pread and pwrite.
@@ -1244,7 +1277,7 @@ class FileReader : public zip_archive::Reader {
 
   private:
     FILE* fp_;
-    mutable uint32_t current_offset_;
+    mutable off64_t current_offset_;
 };
 
 // free the memory when you're done
@@ -1397,3 +1430,4 @@ void ZipFile::EndOfCentralDir::dump(void) const
         mCentralDirSize, mCentralDirOffset, mCommentLen);
 }
 
+} // namespace android

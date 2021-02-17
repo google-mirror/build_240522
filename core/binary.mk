@@ -62,8 +62,74 @@ my_export_c_include_dirs := $(LOCAL_EXPORT_C_INCLUDE_DIRS)
 my_export_c_include_deps := $(LOCAL_EXPORT_C_INCLUDE_DEPS)
 my_arflags :=
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 ifneq (,$(strip $(foreach dir,$(COVERAGE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
 ifeq (,$(strip $(foreach dir,$(COVERAGE_EXCLUDE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
+=======
+# Disable clang-tidy if it is not found.
+ifeq ($(PATH_TO_CLANG_TIDY),)
+  my_tidy_enabled := false
+else
+  # If LOCAL_TIDY is not defined, use global WITH_TIDY
+  my_tidy_enabled := $(LOCAL_TIDY)
+  ifeq ($(my_tidy_enabled),)
+    my_tidy_enabled := $(WITH_TIDY)
+  endif
+endif
+
+# my_tidy_checks is empty if clang-tidy is disabled.
+my_tidy_checks :=
+my_tidy_flags :=
+ifneq (,$(filter 1 true,$(my_tidy_enabled)))
+  # Set up global default checks
+  my_tidy_checks := $(WITH_TIDY_CHECKS)
+  ifeq ($(my_tidy_checks),)
+    my_tidy_checks := $(call default_global_tidy_checks,$(LOCAL_PATH))
+  endif
+  # Append local clang-tidy checks.
+  ifneq ($(LOCAL_TIDY_CHECKS),)
+    my_tidy_checks := $(my_tidy_checks),$(LOCAL_TIDY_CHECKS)
+  endif
+  my_tidy_flags := $(strip $(WITH_TIDY_FLAGS) $(LOCAL_TIDY_FLAGS))
+  # If tidy flags are not specified, default to check all header files.
+  ifeq ($(my_tidy_flags),)
+    my_tidy_flags := $(call default_tidy_header_filter,$(LOCAL_PATH))
+  endif
+  # If clang-tidy is not enabled globally, add the -quiet flag.
+  ifeq (,$(filter 1 true,$(WITH_TIDY)))
+    my_tidy_flags += -quiet -extra-arg-before=-fno-caret-diagnostics
+  endif
+
+  ifneq ($(my_tidy_checks),)
+    # We might be using the static analyzer through clang-tidy.
+    # https://bugs.llvm.org/show_bug.cgi?id=32914
+    my_tidy_flags += -extra-arg-before=-D__clang_analyzer__
+
+    # A recent change in clang-tidy (r328258) enabled destructor inlining,
+    # which appears to cause a number of false positives. Until that's
+    # resolved, this turns off the effects of r328258.
+    # https://bugs.llvm.org/show_bug.cgi?id=37459
+    my_tidy_flags += -extra-arg-before=-Xclang
+    my_tidy_flags += -extra-arg-before=-analyzer-config
+    my_tidy_flags += -extra-arg-before=-Xclang
+    my_tidy_flags += -extra-arg-before=c++-temp-dtor-inlining=false
+  endif
+endif
+
+my_tidy_checks := $(subst $(space),,$(my_tidy_checks))
+
+# Configure the pool to use for clang rules.
+# If LOCAL_CC or LOCAL_CXX is set don't use goma or RBE.
+# If clang-tidy is being used, don't use the RBE pool (as clang-tidy runs in
+# the same action, and is not remoted)
+my_pool :=
+ifeq (,$(strip $(my_cc))$(strip $(my_cxx))$(strip $(my_tidy_checks)))
+  my_pool := $(GOMA_OR_RBE_POOL)
+endif
+
+ifneq (,$(strip $(foreach dir,$(NATIVE_COVERAGE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
+ifeq (,$(strip $(foreach dir,$(NATIVE_COVERAGE_EXCLUDE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   my_native_coverage := true
 else
   my_native_coverage := false
@@ -82,6 +148,13 @@ endif
 my_ndk_sysroot :=
 my_ndk_sysroot_include :=
 my_ndk_sysroot_lib :=
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+my_api_level := 10000
+
+my_arch := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ifneq ($(LOCAL_SDK_VERSION),)
   ifdef LOCAL_IS_HOST_MODULE
     $(error $(LOCAL_PATH): LOCAL_SDK_VERSION cannot be used in host module)
@@ -90,19 +163,7 @@ ifneq ($(LOCAL_SDK_VERSION),)
   # Make sure we've built the NDK.
   my_additional_dependencies += $(SOONG_OUT_DIR)/ndk_base.timestamp
 
-  # mips32r6 is not supported by the NDK. No released NDK contains these
-  # libraries, but the r10 in prebuilts/ndk had a local hack to add them :(
-  #
-  # We need to find a real solution to this problem, but until we do just drop
-  # mips32r6 things back to r10 to get the tree building again.
-  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
-    ifeq ($(LOCAL_NDK_VERSION), current)
-      LOCAL_NDK_VERSION := r10
-    endif
-  endif
-
-  my_arch := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
-  ifneq (,$(filter arm64 mips64 x86_64,$(my_arch)))
+  ifneq (,$(filter arm64 x86_64,$(my_arch)))
     my_min_sdk_version := 21
   else
     my_min_sdk_version := $(MIN_SUPPORTED_SDK_VERSION)
@@ -117,7 +178,12 @@ ifneq ($(LOCAL_SDK_VERSION),)
     my_ndk_api := $(call math_max,$(my_ndk_api),$(my_min_sdk_version))
   endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   my_ndk_api_def := $(my_ndk_api)
+=======
+  my_ndk_crt_version := $(my_ndk_api)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   my_ndk_hist_api := $(my_ndk_api)
   ifeq ($(my_ndk_api),current)
     my_ndk_api_def := __ANDROID_API_FUTURE__
@@ -142,17 +208,11 @@ ifneq ($(LOCAL_SDK_VERSION),)
       $(my_built_ndk)/sysroot/usr/include/$(my_ndk_triple) \
       $(my_ndk_sysroot)/usr/include \
 
-  # x86_64 and and mips64 are both multilib toolchains, so their libraries are
+  # x86_64 is a multilib toolchain, so their libraries are
   # installed in /usr/lib64. Aarch64, on the other hand, is not a multilib
   # compiler, so its libraries are in /usr/lib.
-  #
-  # Mips32r6 is yet another variation, with libraries installed in libr6.
-  #
-  # For the rest, the libraries are installed simply to /usr/lib.
-  ifneq (,$(filter x86_64 mips64,$(my_arch)))
+  ifneq (,$(filter x86_64,$(my_arch)))
     my_ndk_libdir_name := lib64
-  else ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
-    my_ndk_libdir_name := libr6
   else
     my_ndk_libdir_name := lib
   endif
@@ -166,11 +226,7 @@ ifneq ($(LOCAL_SDK_VERSION),)
   # hashes (which are much faster!), but shipping to older devices requires
   # the old style hash. Fortunately, we can build with both and it'll work
   # anywhere.
-  #
-  # This is not currently supported on MIPS architectures.
-  ifeq (,$(filter mips mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)))
-    my_ldflags += -Wl,--hash-style=both
-  endif
+  my_ldflags += -Wl,--hash-style=both
 
   # We don't want to expose the relocation packer to the NDK just yet.
   LOCAL_PACK_MODULE_RELOCATIONS := false
@@ -181,9 +237,6 @@ ifneq ($(LOCAL_SDK_VERSION),)
   my_ndk_stl_shared_lib_fullpath :=
   my_ndk_stl_static_lib :=
   my_cpu_variant := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)CPU_ABI)
-  ifeq (mips32r6,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH_VARIANT))
-    my_cpu_variant := mips32r6
-  endif
   LOCAL_NDK_STL_VARIANT := $(strip $(LOCAL_NDK_STL_VARIANT))
   ifeq (,$(LOCAL_NDK_STL_VARIANT))
     LOCAL_NDK_STL_VARIANT := system
@@ -264,8 +317,7 @@ else # LOCAL_IS_HOST_MODULE
 endif
 
 ifneq ($(LOCAL_SDK_VERSION),)
-  my_all_ndk_libraries := \
-      $(NDK_MIGRATED_LIBS) $(addprefix lib,$(NDK_PREBUILT_SHARED_LIBRARIES))
+  my_all_ndk_libraries := $(NDK_KNOWN_LIBS)
   my_ndk_shared_libraries := \
       $(filter $(my_all_ndk_libraries),\
         $(my_shared_libraries) $(my_system_shared_libraries))
@@ -811,7 +863,7 @@ rs_generated_cpps := $(addprefix \
 
 $(call track-src-file-gen,$(renderscript_sources),$(rs_generated_cpps))
 
-# This is just a dummy rule to make sure gmake doesn't skip updating the dependents.
+# This is just a no-op rule to make sure gmake doesn't skip updating the dependents.
 $(rs_generated_cpps) : $(RenderScript_file_stamp)
 	@echo "Updated RS generated cpp file $@."
 	$(hide) touch $@
@@ -1289,21 +1341,44 @@ asm_objects += $(asm_objects_asm)
 endif
 
 ###################################################################
+## Convert to sanitized names where they exist.
+## These lists come from sanitizerStaticLibsMap; see
+## build/soong/cc/sanitize.go
+##
+## $(1): list of static dependencies
+## $(2): name of sanitizer (e.g. cfi, hwasan)
+##################################################################
+define use_soong_sanitized_static_libraries
+  $(foreach lib,$(1),$(if $(filter $(lib),\
+      $(SOONG_$(2)_$(my_image_variant)_$(my_arch)_STATIC_LIBRARIES)),\
+      $(lib).$(2),$(lib)))
+endef
+
+###################################################################
 ## When compiling a CFI enabled target, use the .cfi variant of any
 ## static dependencies (where they exist).
 ##################################################################
-define use_soong_cfi_static_libraries
-  $(foreach l,$(1),$(if $(filter $(l),$(SOONG_CFI_STATIC_LIBRARIES)),\
-      $(l).cfi,$(l)))
-endef
-
 ifneq ($(filter cfi,$(my_sanitize)),)
-  my_whole_static_libraries := $(call use_soong_cfi_static_libraries,\
-    $(my_whole_static_libraries))
-  my_static_libraries := $(call use_soong_cfi_static_libraries,\
-    $(my_static_libraries))
+  my_whole_static_libraries := $(call use_soong_sanitized_static_libraries,\
+    $(my_whole_static_libraries),cfi)
+  my_static_libraries := $(call use_soong_sanitized_static_libraries,\
+    $(my_static_libraries),cfi)
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+###################################################################
+## When compiling a hwasan enabled target, use the .hwasan variant
+## of any static dependencies (where they exist).
+##################################################################
+ifneq ($(filter hwaddress,$(my_sanitize)),)
+  my_whole_static_libraries := $(call use_soong_sanitized_static_libraries,\
+    $(my_whole_static_libraries),hwasan)
+  my_static_libraries := $(call use_soong_sanitized_static_libraries,\
+    $(my_static_libraries),hwasan)
+endif
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 ###########################################################
 ## When compiling against the VNDK, use LL-NDK libraries
 ###########################################################
@@ -1547,7 +1622,7 @@ my_system_shared_libraries_fullpath := \
 # lists and use addprefix.
 my_ndk_shared_libraries_fullpath := \
     $(foreach _lib,$(my_ndk_shared_libraries),\
-        $(if $(filter $(NDK_MIGRATED_LIBS),$(_lib)),\
+        $(if $(filter $(NDK_KNOWN_LIBS),$(_lib)),\
             $(my_built_ndk_libs)/$(_lib)$(so_suffix),\
             $(my_ndk_sysroot_lib)/$(_lib)$(so_suffix)))
 
@@ -1676,6 +1751,7 @@ ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   endif
 endif
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Disable clang-tidy if it is not found.
 ifeq ($(PATH_TO_CLANG_TIDY),)
   my_tidy_enabled := false
@@ -1724,6 +1800,24 @@ ifneq (,$(filter 1 true,$(my_tidy_enabled)))
 endif
 
 my_tidy_checks := $(subst $(space),,$(my_tidy_checks))
+=======
+ifneq (,$(filter -Weverything,$(my_all_cflags)))
+  ifeq (,$(ANDROID_TEMPORARILY_ALLOW_WEVERYTHING))
+    $(call pretty-error, -Weverything is not allowed in Android.mk files.\
+      Build with `m ANDROID_TEMPORARILY_ALLOW_WEVERYTHING=true` to experiment locally with -Weverything.)
+  endif
+endif
+
+ifneq ($(my_tidy_checks),)
+  tidy_only: $(cpp_objects) $(c_objects) $(gen_c_objects) $(gen_cpp_objects)
+
+  # Add dependency of clang-tidy and clang-tidy.sh
+  $(cpp_objects): $(intermediates)/%.o: $(PATH_TO_CLANG_TIDY)
+  $(c_objects): $(intermediates)/%.o: $(PATH_TO_CLANG_TIDY)
+  $(gen_cpp_objects): $(intermediates)/%.o: $(PATH_TO_CLANG_TIDY)
+  $(gen_c_objects): $(intermediates)/%.o: $(PATH_TO_CLANG_TIDY)
+endif
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
 # Move -l* entries from ldflags to ldlibs, and everything else to ldflags
 my_ldlib_flags := $(my_ldflags) $(my_ldlibs)
@@ -1734,7 +1828,7 @@ my_ldflags := $(filter-out -l%,$(my_ldlib_flags))
 my_allowed_ldlibs :=
 ifndef LOCAL_IS_HOST_MODULE
   ifneq ($(LOCAL_SDK_VERSION),)
-    my_allowed_ldlibs := $(addprefix -l,$(NDK_PREBUILT_SHARED_LIBRARIES))
+    my_allowed_ldlibs := $(NDK_KNOWN_LIBS:lib%=-l%)
   endif
 else
   my_allowed_ldlibs := $($(my_prefix)AVAILABLE_LIBRARIES)
@@ -1749,6 +1843,186 @@ endif
 # (start-group/end-group), so append after the check above.
 my_ldlibs += $(my_cxx_ldlibs)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+###########################################################
+## Define PRIVATE_ variables from global vars
+###########################################################
+ifndef LOCAL_IS_HOST_MODULE
+
+ifdef LOCAL_USE_VNDK
+  my_target_global_c_includes :=
+  my_target_global_c_system_includes := $(TARGET_OUT_HEADERS)
+else ifdef LOCAL_SDK_VERSION
+  my_target_global_c_includes :=
+  my_target_global_c_system_includes := $(my_ndk_stl_include_path) $(my_ndk_sysroot_include)
+else ifdef BOARD_VNDK_VERSION
+  my_target_global_c_includes := $(SRC_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
+  my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
+else
+  my_target_global_c_includes := $(SRC_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
+  my_target_global_c_system_includes := $(SRC_SYSTEM_HEADERS) $(TARGET_OUT_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
+endif
+
+my_target_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CFLAGS)
+my_target_global_conlyflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CONLYFLAGS) $(my_c_std_conlyflags)
+my_target_global_cppflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CPPFLAGS) $(my_cpp_std_cppflags)
+ifeq ($(my_use_clang_lld),true)
+  my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_LLDFLAGS)
+  include $(BUILD_SYSTEM)/pack_dyn_relocs_setup.mk
+  ifeq ($(my_pack_module_relocations),true)
+    my_target_global_ldflags += -Wl,--pack-dyn-relocs=android+relr -Wl,--use-android-relr-tags
+  else
+    my_target_global_ldflags += -Wl,--pack-dyn-relocs=none
+  endif
+else
+  my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_LDFLAGS)
+endif # my_use_clang_lld
+
+my_target_triple := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)TRIPLE)
+ifndef LOCAL_IS_HOST_MODULE
+  my_target_triple_flag := -target $(my_target_triple)$(my_api_level)
+else
+  my_target_triple_flag := -target $(my_target_triple)
+endif
+my_asflags += $(my_target_triple_flag)
+my_cflags += $(my_target_triple_flag)
+my_ldflags += $(my_target_triple_flag)
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_GLOBAL_C_INCLUDES := $(my_target_global_c_includes)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_GLOBAL_C_SYSTEM_INCLUDES := $(my_target_global_c_system_includes)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CFLAGS := $(my_target_global_cflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CONLYFLAGS := $(my_target_global_conlyflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_CPPFLAGS := $(my_target_global_cppflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_GLOBAL_LDFLAGS := $(my_target_global_ldflags)
+
+else # LOCAL_IS_HOST_MODULE
+
+my_host_global_c_includes := $(SRC_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_INCLUDES)
+my_host_global_c_system_includes := $(SRC_SYSTEM_HEADERS) \
+    $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)C_SYSTEM_INCLUDES)
+
+my_host_global_cflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CFLAGS)
+my_host_global_conlyflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CONLYFLAGS) $(my_c_std_conlyflags)
+my_host_global_cppflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_CPPFLAGS) $(my_cpp_std_cppflags)
+ifeq ($(my_use_clang_lld),true)
+  my_host_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_LLDFLAGS)
+else
+  my_host_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOBAL_LDFLAGS)
+endif # my_use_clang_lld
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_GLOBAL_C_INCLUDES := $(my_host_global_c_includes)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_GLOBAL_C_SYSTEM_INCLUDES := $(my_host_global_c_system_includes)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HOST_GLOBAL_CFLAGS := $(my_host_global_cflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HOST_GLOBAL_CONLYFLAGS := $(my_host_global_conlyflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HOST_GLOBAL_CPPFLAGS := $(my_host_global_cppflags)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_HOST_GLOBAL_LDFLAGS := $(my_host_global_ldflags)
+endif # LOCAL_IS_HOST_MODULE
+
+# To enable coverage for a given module, set LOCAL_NATIVE_COVERAGE=true and
+# build with NATIVE_COVERAGE=true in your enviornment.
+ifeq ($(NATIVE_COVERAGE),true)
+    ifeq ($(my_native_coverage),true)
+        # Note that clang coverage doesn't play nicely with acov out of the box.
+        # Clang apparently generates .gcno files that aren't compatible with
+        # gcov-4.8.  This can be solved by installing gcc-4.6 and invoking lcov
+        # with `--gcov-tool /usr/bin/gcov-4.6`.
+        #
+        # http://stackoverflow.com/questions/17758126/clang-code-coverage-invalid-output
+        my_cflags += --coverage -O0
+        my_ldflags += --coverage
+    endif
+
+    my_coverage_lib := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)LIBPROFILE_RT)
+
+    $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_TARGET_COVERAGE_LIB := $(my_coverage_lib)
+    $(LOCAL_INTERMEDIATE_TARGETS): $(my_coverage_lib)
+endif
+
+####################################################
+## Import includes
+####################################################
+imported_includes :=
+
+ifdef LOCAL_USE_VNDK
+  imported_includes += $(call intermediates-dir-for,HEADER_LIBRARIES,device_kernel_headers,$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))
+else ifdef LOCAL_SDK_VERSION
+  # Apps shouldn't need device-specific kernel headers
+else ifdef BOARD_VNDK_VERSION
+  # For devices building with the VNDK, only the VNDK gets device-specific kernel headers by default
+  # In soong, it's entirely opt-in
+else
+  # For older non-VNDK builds, continue adding in kernel headers to everything like we used to
+  imported_includes += $(call intermediates-dir-for,HEADER_LIBRARIES,device_kernel_headers,$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))
+endif
+
+imported_includes := $(strip \
+    $(imported_includes) \
+    $(foreach l, $(installed_shared_library_module_names), \
+      $(call intermediates-dir-for,SHARED_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))) \
+    $(foreach l, $(my_static_libraries) $(my_whole_static_libraries), \
+      $(call intermediates-dir-for,STATIC_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))) \
+    $(foreach l, $(my_header_libraries), \
+      $(call intermediates-dir-for,HEADER_LIBRARIES,$(l),$(my_kind),,$(LOCAL_2ND_ARCH_VAR_PREFIX),$(my_host_cross))))
+
+$(foreach dep,$(imported_includes),\
+  $(eval EXPORTS.$$(dep).USERS := $$(EXPORTS.$$(dep).USERS) $$(all_objects)))
+
+###########################################################
+## Define PRIVATE_ variables used by multiple module types
+###########################################################
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_NO_DEFAULT_COMPILER_FLAGS := \
+    $(strip $(LOCAL_NO_DEFAULT_COMPILER_FLAGS))
+
+ifeq ($(strip $(WITH_STATIC_ANALYZER)),)
+  LOCAL_NO_STATIC_ANALYZER := true
+endif
+
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),)
+  my_syntax_arch := host
+else
+  my_syntax_arch := $($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+endif
+
+ifeq ($(strip $(my_cc)),)
+  my_cc := $(my_cc_wrapper) $(CLANG)
+endif
+
+SYNTAX_TOOLS_PREFIX := \
+    $(LLVM_PREBUILTS_BASE)/$(BUILD_OS)-x86/$(LLVM_PREBUILTS_VERSION)/libexec
+
+ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
+  my_cc := CCC_CC=$(CLANG) CLANG=$(CLANG) \
+           $(SYNTAX_TOOLS_PREFIX)/ccc-analyzer
+endif
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CC := $(my_cc)
+
+ifeq ($(strip $(my_cxx)),)
+  my_cxx := $(my_cxx_wrapper) $(CLANG_CXX)
+endif
+
+ifeq ($(strip $(my_cxx_link)),)
+  my_cxx_link := $(CLANG_CXX)
+endif
+
+ifneq ($(LOCAL_NO_STATIC_ANALYZER),true)
+  my_cxx := CCC_CXX=$(CLANG_CXX) CLANG_CXX=$(CLANG_CXX) \
+            $(SYNTAX_TOOLS_PREFIX)/c++-analyzer
+  my_cxx_link := CCC_CXX=$(CLANG_CXX) CLANG_CXX=$(CLANG_CXX) \
+                 $(SYNTAX_TOOLS_PREFIX)/c++-analyzer
+endif
+
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_LINKER := $(my_linker)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CXX := $(my_cxx)
+$(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CXX_LINK := $(my_cxx_link)
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
 $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
@@ -1858,6 +2132,10 @@ SOONG_CONV.$(LOCAL_MODULE).DEPS := \
         $(my_shared_libraries) \
         $(my_system_shared_libraries))
 SOONG_CONV.$(LOCAL_MODULE).TYPE := native
+SOONG_CONV.$(LOCAL_MODULE).MAKEFILES := \
+    $(SOONG_CONV.$(LOCAL_MODULE).MAKEFILES) $(LOCAL_MODULE_MAKEFILE)
+SOONG_CONV.$(LOCAL_MODULE).INSTALLED:= \
+    $(SOONG_CONV.$(LOCAL_MODULE).INSTALLED) $(LOCAL_INSTALLED_MODULE)
 SOONG_CONV := $(SOONG_CONV) $(LOCAL_MODULE)
 endif
 

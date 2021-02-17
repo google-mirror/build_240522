@@ -169,8 +169,8 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
 
 
 def SignApk(data, keyname, pw, platform_api_level, codename_to_api_level_map,
-            is_compressed):
-  unsigned = tempfile.NamedTemporaryFile()
+            is_compressed, apk_name):
+  unsigned = tempfile.NamedTemporaryFile(suffix='_' + apk_name)
   unsigned.write(data)
   unsigned.flush()
 
@@ -188,7 +188,7 @@ def SignApk(data, keyname, pw, platform_api_level, codename_to_api_level_map,
     unsigned.close()
     unsigned = uncompressed
 
-  signed = tempfile.NamedTemporaryFile()
+  signed = tempfile.NamedTemporaryFile(suffix='_' + apk_name)
 
   # For pre-N builds, don't upgrade to SHA-256 JAR signatures based on the APK's
   # minSdkVersion to avoid increasing incremental OTA update sizes. If an APK
@@ -268,13 +268,52 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       if key not in common.SPECIAL_CERT_STRINGS:
         print("    signing: %-*s (%s)" % (maxsize, name, key))
         signed_data = SignApk(data, key, key_passwords[key], platform_api_level,
-                              codename_to_api_level_map, is_compressed)
+                              codename_to_api_level_map, is_compressed, name)
         common.ZipWriteStr(output_tf_zip, out_info, signed_data)
       else:
         # an APK we're not supposed to sign.
         print("NOT signing: %s" % (name,))
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    # Sign bundled APEX files.
+    elif filename.startswith("SYSTEM/apex") and filename.endswith(".apex"):
+      name = os.path.basename(filename)
+      payload_key, container_key = apex_keys[name]
+
+      # We've asserted not having a case with only one of them PRESIGNED.
+      if (payload_key not in common.SPECIAL_CERT_STRINGS and
+          container_key not in common.SPECIAL_CERT_STRINGS):
+        print("    signing: %-*s container (%s)" % (
+            maxsize, name, container_key))
+        print("           : %-*s payload   (%s)" % (
+            maxsize, name, payload_key))
+
+        signed_apex = apex_utils.SignApex(
+            misc_info['avb_avbtool'],
+            data,
+            payload_key,
+            container_key,
+            key_passwords,
+            apk_keys,
+            codename_to_api_level_map,
+            no_hashtree=True,
+            signing_args=OPTIONS.avb_extra_args.get('apex'))
+        common.ZipWrite(output_tf_zip, signed_apex, filename)
+
+      else:
+        print(
+            "NOT signing: %s\n"
+            "        (skipped due to special cert string)" % (name,))
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+
+    # AVB public keys for the installed APEXes, which will be updated later.
+    elif (os.path.dirname(filename) == 'SYSTEM/etc/security/apex' and
+          filename != 'SYSTEM/etc/security/apex/'):
+      continue
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     # System properties.
     elif info.filename in ("SYSTEM/build.prop",
                            "VENDOR/build.prop",
@@ -323,6 +362,21 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
           info.filename in ("BOOT/RAMDISK/verity_key",
                             "ROOT/verity_key")):
       pass
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    elif (OPTIONS.remove_avb_public_keys and
+          (filename.startswith("BOOT/RAMDISK/avb/") or
+           filename.startswith("BOOT/RAMDISK/first_stage_ramdisk/avb/"))):
+      matched_removal = False
+      for key_to_remove in OPTIONS.remove_avb_public_keys:
+        if filename.endswith(key_to_remove):
+          matched_removal = True
+          print("Removing AVB public key from ramdisk: %s" % filename)
+          break
+      if not matched_removal:
+        # Copy it verbatim if we don't want to remove it.
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 
     # Skip verity keyid (for system_root_image use) if we will replace it.
     elif (OPTIONS.replace_verity_keyid and
@@ -330,7 +384,11 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       pass
 
     # Skip the care_map as we will regenerate the system/vendor images.
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     elif info.filename == "META/care_map.txt":
+=======
+    elif filename in ["META/care_map.pb", "META/care_map.txt"]:
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
       pass
 
     # A non-APK file; copy it verbatim.
@@ -483,6 +541,25 @@ def RewriteProps(data):
   return "\n".join(output) + "\n"
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+def WriteOtacerts(output_zip, filename, keys):
+  """Constructs a zipfile from given keys; and writes it to output_zip.
+
+  Args:
+    output_zip: The output target_files zip.
+    filename: The archive name in the output zip.
+    keys: A list of public keys to use during OTA package verification.
+  """
+  temp_file = io.BytesIO()
+  certs_zip = zipfile.ZipFile(temp_file, "w", allowZip64=True)
+  for k in keys:
+    common.ZipWrite(certs_zip, k)
+  common.ZipClose(certs_zip)
+  common.ZipWriteStr(output_zip, filename, temp_file.getvalue())
+
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   try:
     keylist = input_tf_zip.read("META/otakeys.txt").split()
@@ -679,7 +756,14 @@ def ReplaceAvbSigningKeys(misc_info):
     if extra_args:
       print('Setting extra AVB signing args for %s to "%s"' % (
           partition, extra_args))
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
       args_key = AVB_FOOTER_ARGS_BY_PARTITION[partition]
+=======
+      args_key = AVB_FOOTER_ARGS_BY_PARTITION.get(
+          partition,
+          # custom partition
+          "avb_{}_add_hashtree_footer_args".format(partition))
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
       misc_info[args_key] = (misc_info.get(args_key, '') + ' ' + extra_args)
 
   for partition in AVB_FOOTER_ARGS_BY_PARTITION:
@@ -753,6 +837,69 @@ def GetCodenameToApiLevelMap(input_tf_zip):
   return result
 
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+def ReadApexKeysInfo(tf_zip):
+  """Parses the APEX keys info from a given target-files zip.
+
+  Given a target-files ZipFile, parses the META/apexkeys.txt entry and returns a
+  dict that contains the mapping from APEX names (e.g. com.android.tzdata) to a
+  tuple of (payload_key, container_key).
+
+  Args:
+    tf_zip: The input target_files ZipFile (already open).
+
+  Returns:
+    (payload_key, container_key): payload_key contains the path to the payload
+        signing key; container_key contains the path to the container signing
+        key.
+  """
+  keys = {}
+  for line in tf_zip.read('META/apexkeys.txt').decode().split('\n'):
+    line = line.strip()
+    if not line:
+      continue
+    matches = re.match(
+        r'^name="(?P<NAME>.*)"\s+'
+        r'public_key="(?P<PAYLOAD_PUBLIC_KEY>.*)"\s+'
+        r'private_key="(?P<PAYLOAD_PRIVATE_KEY>.*)"\s+'
+        r'container_certificate="(?P<CONTAINER_CERT>.*)"\s+'
+        r'container_private_key="(?P<CONTAINER_PRIVATE_KEY>.*?)"'
+        r'(\s+partition="(?P<PARTITION>.*?)")?$',
+        line)
+    if not matches:
+      continue
+
+    name = matches.group('NAME')
+    payload_private_key = matches.group("PAYLOAD_PRIVATE_KEY")
+
+    def CompareKeys(pubkey, pubkey_suffix, privkey, privkey_suffix):
+      pubkey_suffix_len = len(pubkey_suffix)
+      privkey_suffix_len = len(privkey_suffix)
+      return (pubkey.endswith(pubkey_suffix) and
+              privkey.endswith(privkey_suffix) and
+              pubkey[:-pubkey_suffix_len] == privkey[:-privkey_suffix_len])
+
+    # Check the container key names, as we'll carry them without the
+    # extensions. This doesn't apply to payload keys though, which we will use
+    # full names only.
+    container_cert = matches.group("CONTAINER_CERT")
+    container_private_key = matches.group("CONTAINER_PRIVATE_KEY")
+    if container_cert == 'PRESIGNED' and container_private_key == 'PRESIGNED':
+      container_key = 'PRESIGNED'
+    elif CompareKeys(
+        container_cert, OPTIONS.public_key_suffix,
+        container_private_key, OPTIONS.private_key_suffix):
+      container_key = container_cert[:-len(OPTIONS.public_key_suffix)]
+    else:
+      raise ValueError("Failed to parse container keys: \n{}".format(line))
+
+    keys[name] = (payload_private_key, container_key)
+
+  return keys
+
+
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 def main(argv):
 
   key_mapping_options = []
@@ -763,6 +910,18 @@ def main(argv):
       names = names.split(",")
       for n in names:
         OPTIONS.extra_apks[n] = key
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+    elif o == "--extra_apex_payload_key":
+      apex_name, key = a.split("=")
+      OPTIONS.extra_apex_payload_keys[apex_name] = key
+    elif o == "--skip_apks_with_path_prefix":
+      # Check the prefix, which must be in all upper case.
+      prefix = a.split('/')[0]
+      if not prefix or prefix != prefix.upper():
+        raise ValueError("Invalid path prefix '%s'" % (a,))
+      OPTIONS.skip_apks_with_path_prefix.add(a)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     elif o in ("-d", "--default_key_mappings"):
       key_mapping_options.append((None, a))
     elif o in ("-k", "--key_mapping"):
@@ -851,7 +1010,13 @@ def main(argv):
     common.Usage(__doc__)
     sys.exit(1)
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
   input_zip = zipfile.ZipFile(args[0], "r")
+=======
+  common.InitLogging()
+
+  input_zip = zipfile.ZipFile(args[0], "r", allowZip64=True)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
   output_zip = zipfile.ZipFile(args[1], "w",
                                compression=zipfile.ZIP_DEFLATED,
                                allowZip64=True)

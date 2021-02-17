@@ -17,8 +17,13 @@
 # This is a set of common components to enable CFI for (across
 # compatible product configs)
 PRODUCT_CFI_INCLUDE_PATHS :=  \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     device/google/cuttlefish_common/guest/libs/wpa_supplicant_8_lib \
     device/google/wahoo/wifi_offload \
+=======
+    device/generic/goldfish/wifi/wpa_supplicant_8_lib \
+    device/google/cuttlefish/guest/libs/wpa_supplicant_8_lib \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     external/tinyxml2 \
     external/wpa_supplicant_8 \
     frameworks/av/camera \
@@ -28,7 +33,8 @@ PRODUCT_CFI_INCLUDE_PATHS :=  \
     hardware/broadcom/wlan/bcmdhd/wpa_supplicant_8_lib \
     hardware/interfaces/nfc \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
-    harware/interfaces/keymaster \
+    hardware/interfaces/keymaster \
+    hardware/interfaces/security \
     system/bt \
     system/chre \
     system/core/libnetutils \

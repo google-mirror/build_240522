@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 # Auto-generate module defitions from platform.zip.
 # We use these rules to rebuild .odex files of the .jar/.apk inside the platform.zip.
 #
@@ -82,3 +83,5 @@ $(foreach a,$(pdk_prebuilt_apps), $(eval \
     $(PDK.DEXPREOPT.$(a).TARGET_ARCH),\
     $(_pdk_fusion_intermediates)/$(PDK.DEXPREOPT.$(a).STRIPPED_SRC),\
     )))
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

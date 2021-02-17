@@ -15,8 +15,11 @@ PARSE_TIME_MAKE_GOALS := \
 	$(dont_bother_goals) \
 	all \
 	ECLIPSE-% \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 	AUX-% \
 	boottarball-nodeps \
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 	brillo_tests \
 	btnod \
 	build-art% \
@@ -26,33 +29,33 @@ PARSE_TIME_MAKE_GOALS := \
 	continuous_native_tests \
 	cts \
 	custom_images \
-	deps-license \
 	dicttool_aosp \
 	dist \
 	dump-products \
 	eng \
-	fusion \
 	oem_image \
 	online-system-api-sdk-docs \
-	pdk \
-	platform \
-	platform-java \
 	product-graph \
 	samplecode \
 	sdk \
 	sdk_addon \
 	sdk_repo \
-	snod \
 	stnod \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 	systemimage-nodeps \
 	systemtarball-nodeps \
 	target-files-package \
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 	test-art% \
 	user \
 	userdataimage \
 	userdebug \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 	valgrind-test-art% \
 	vts \
+=======
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 	win_sdk \
 	winsdk-tools
 

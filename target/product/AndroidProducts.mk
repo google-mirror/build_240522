@@ -45,9 +45,25 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk
 else
 PRODUCT_MAKEFILES := \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     $(LOCAL_DIR)/core.mk \
+=======
+    $(LOCAL_DIR)/aosp_64bitonly_x86_64.mk \
+    $(LOCAL_DIR)/aosp_arm64.mk \
+    $(LOCAL_DIR)/aosp_arm.mk \
+    $(LOCAL_DIR)/aosp_x86_64.mk \
+    $(LOCAL_DIR)/aosp_x86_arm.mk \
+    $(LOCAL_DIR)/aosp_x86.mk \
+    $(LOCAL_DIR)/full.mk \
+    $(LOCAL_DIR)/full_x86.mk \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     $(LOCAL_DIR)/generic.mk \
+    $(LOCAL_DIR)/generic_system_arm64.mk \
+    $(LOCAL_DIR)/generic_system_x86.mk \
+    $(LOCAL_DIR)/generic_system_x86_64.mk \
+    $(LOCAL_DIR)/generic_system_x86_arm.mk \
     $(LOCAL_DIR)/generic_x86.mk \
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
     $(LOCAL_DIR)/generic_mips.mk \
     $(LOCAL_DIR)/aosp_arm.mk \
     $(LOCAL_DIR)/aosp_arm_a.mk \
@@ -67,6 +83,16 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk \
     $(LOCAL_DIR)/aosp_x86_64_a.mk \
     $(LOCAL_DIR)/aosp_x86_64_ab.mk \
+=======
+    $(LOCAL_DIR)/gsi_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_x86.mk \
+    $(LOCAL_DIR)/mainline_system_x86_64.mk \
+    $(LOCAL_DIR)/mainline_system_x86_arm.mk \
+    $(LOCAL_DIR)/sdk_arm64.mk \
+    $(LOCAL_DIR)/sdk.mk \
+    $(LOCAL_DIR)/sdk_phone_arm64.mk \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
     $(LOCAL_DIR)/sdk_phone_armv7.mk \
     $(LOCAL_DIR)/sdk_phone_x86.mk \
     $(LOCAL_DIR)/sdk_phone_mips.mk \
@@ -79,3 +105,14 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/sdk_arm64.mk \
     $(LOCAL_DIR)/sdk_x86_64.mk
 endif
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
+=======
+
+PRODUCT_MAKEFILES += $(LOCAL_DIR)/mainline_sdk.mk
+
+COMMON_LUNCH_CHOICES := \
+    aosp_arm64-eng \
+    aosp_arm-eng \
+    aosp_x86_64-eng \
+    aosp_x86-eng \
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])

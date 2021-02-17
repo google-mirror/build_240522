@@ -14,7 +14,17 @@
 
 .PHONY: general-tests
 
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 general-tests-zip := $(PRODUCT_OUT)/general-tests.zip
+=======
+general_tests_tools := \
+    $(HOST_OUT_JAVA_LIBRARIES)/cts-tradefed.jar \
+    $(HOST_OUT_JAVA_LIBRARIES)/compatibility-host-util.jar \
+    $(HOST_OUT_JAVA_LIBRARIES)/vts-tradefed.jar \
+
+intermediates_dir := $(call intermediates-dir-for,PACKAGING,general-tests)
+general_tests_zip := $(PRODUCT_OUT)/general-tests.zip
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 # Create an artifact to include a list of test config files in general-tests.
 general-tests-list-zip := $(PRODUCT_OUT)/general-tests_list.zip
 $(general-tests-zip) : .KATI_IMPLICIT_OUTPUTS := $(general-tests-list-zip)

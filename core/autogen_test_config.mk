@@ -23,11 +23,32 @@
 #   autogen_test_config_file: Path to the test config file generated.
 
 autogen_test_config_file := $(dir $(LOCAL_BUILT_MODULE))$(LOCAL_MODULE).config
+# TODO: (b/167308193) Switch to /data/local/tests/unrestricted as the default install base.
+autogen_test_install_base := /data/local/tmp
+# Automatically setup test root for native test.
+ifeq (true,$(is_native))
+  ifeq (true,$(LOCAL_VENDOR_MODULE))
+    autogen_test_install_base = /data/local/tests/vendor
+  endif
+  ifeq (true,$(LOCAL_USE_VNDK))
+    autogen_test_install_base = /data/local/tests/vendor
+  endif
+endif
 ifeq (true,$(is_native))
 # Auto generating test config file for native test
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 $(autogen_test_config_file) : $(NATIVE_TEST_CONFIG_TEMPLATE)
+=======
+$(autogen_test_config_file): PRIVATE_TEST_INSTALL_BASE := $(autogen_test_install_base)
+$(autogen_test_config_file): PRIVATE_MODULE_NAME := $(LOCAL_MODULE)
+$(autogen_test_config_file) : $(autogen_test_config_template)
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 	@echo "Auto generating test config $(notdir $@)"
+<<<<<<< HEAD   (4be654 Merge "Merge empty history for sparse-7121469-L4290000080720)
 	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE)&g' $^ > $@
+=======
+	$(hide) sed 's&{MODULE}&$(PRIVATE_MODULE_NAME)&g;s&{TEST_INSTALL_BASE}&$(PRIVATE_TEST_INSTALL_BASE)&g;s&{EXTRA_CONFIGS}&&g' $< > $@
+>>>>>>> BRANCH (fe6ad7 Merge "Version bump to RBT1.210107.001.A1 [core/build_id.mk])
 my_auto_generate_config := true
 else
 # Auto generating test config file for instrumentation test
