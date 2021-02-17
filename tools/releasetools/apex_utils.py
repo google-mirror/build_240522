@@ -538,6 +538,9 @@ def GetApexInfoFromTargetFiles(input_file):
     tmp_dir = UnzipTemp(input_file, ["SYSTEM/apex/*"])
   target_dir = os.path.join(tmp_dir, "SYSTEM/apex/")
 
+  if not os.path.exists(target_dir):
+    return []
+
   apex_infos = []
 
   debugfs_path = "debugfs"
