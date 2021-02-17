@@ -1,0 +1,11 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Verified+1: Alexander Smundak <asmundak@google.com>
+Autosubmit+1: Alexander Smundak <asmundak@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Anton Hansson <hansson@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 17 Feb 2021 10:28:49 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/build/+/1584369
+Project: platform/build
+Branch: refs/heads/master
