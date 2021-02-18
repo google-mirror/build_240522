@@ -548,38 +548,39 @@ def GetApexInfoFromTargetFiles(input_file):
     deapexer_path = os.path.join(OPTIONS.search_path, "bin", "deapexer")
     if os.path.isfile(deapexer_path):
       deapexer = deapexer_path
-  for apex_filename in os.listdir(target_dir):
-    apex_filepath = os.path.join(target_dir, apex_filename)
-    if not os.path.isfile(apex_filepath) or \
-        not zipfile.is_zipfile(apex_filepath):
-      logger.info("Skipping %s because it's not a zipfile", apex_filepath)
-      continue
-    apex_info = ota_metadata_pb2.ApexInfo()
-    # Open the apex file to retrieve information
-    manifest = apex_manifest.fromApex(apex_filepath)
-    apex_info.package_name = manifest.name
-    apex_info.version = manifest.version
-    # Check if the file is compressed or not
-    apex_type = RunAndCheckOutput([
-        deapexer, "--debugfs_path", debugfs_path,
-        'info', '--print-type', apex_filepath]).rstrip()
-    if apex_type == 'COMPRESSED':
-      apex_info.is_compressed = True
-    elif apex_type == 'UNCOMPRESSED':
-      apex_info.is_compressed = False
-    else:
-      raise RuntimeError('Not an APEX file: ' + apex_type)
+  if os.path.exists(target_dir):
+    for apex_filename in os.listdir(target_dir):
+      apex_filepath = os.path.join(target_dir, apex_filename)
+      if not os.path.isfile(apex_filepath) or \
+          not zipfile.is_zipfile(apex_filepath):
+        logger.info("Skipping %s because it's not a zipfile", apex_filepath)
+        continue
+      apex_info = ota_metadata_pb2.ApexInfo()
+      # Open the apex file to retrieve information
+      manifest = apex_manifest.fromApex(apex_filepath)
+      apex_info.package_name = manifest.name
+      apex_info.version = manifest.version
+      # Check if the file is compressed or not
+      apex_type = RunAndCheckOutput([
+          deapexer, "--debugfs_path", debugfs_path,
+          'info', '--print-type', apex_filepath]).rstrip()
+      if apex_type == 'COMPRESSED':
+        apex_info.is_compressed = True
+      elif apex_type == 'UNCOMPRESSED':
+        apex_info.is_compressed = False
+      else:
+        raise RuntimeError('Not an APEX file: ' + apex_type)
 
-    # Decompress compressed APEX to determine its size
-    if apex_info.is_compressed:
-      decompressed_file_path = MakeTempFile(prefix="decompressed-",
-                                            suffix=".apex")
-      # Decompression target path should not exist
-      os.remove(decompressed_file_path)
-      RunAndCheckOutput([deapexer, 'decompress', '--input', apex_filepath,
-                         '--output', decompressed_file_path])
-      apex_info.decompressed_size = os.path.getsize(decompressed_file_path)
+      # Decompress compressed APEX to determine its size
+      if apex_info.is_compressed:
+        decompressed_file_path = MakeTempFile(prefix="decompressed-",
+                                              suffix=".apex")
+        # Decompression target path should not exist
+        os.remove(decompressed_file_path)
+        RunAndCheckOutput([deapexer, 'decompress', '--input', apex_filepath,
+                          '--output', decompressed_file_path])
+        apex_info.decompressed_size = os.path.getsize(decompressed_file_path)
 
-      apex_infos.append(apex_info)
+        apex_infos.append(apex_info)
 
   return apex_infos
