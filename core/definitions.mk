@@ -37,6 +37,13 @@ ALL_DOCS:=
 # sub-variables.
 ALL_MODULES:=
 
+# Relative paths to installed module filenames for modules with
+# an installed notice file whose rule has not been emitted.
+# The list is built in notice_fils.mk as installed files are
+# encountered, and erased as rules are emitted alongside the license
+# metadata.
+ALL_MODULE_INSTALLED_FILENAMES:=
+
 # Full paths to targets that should be added to the "make droid"
 # set of installed targets.
 ALL_DEFAULT_INSTALLED_MODULES:=
@@ -605,13 +612,27 @@ $(if $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE),$(ALL_MODULES.$(1).INSTALLED_NOTI
 .PHONY: $(1).meta_lic
 $(1).meta_lic : $(_dir)/$(1).meta_lic
 
+# Emit installed notice file if module has one, and if it has not yet been emitted.
+$(if $(strip $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAME)),$(if $(filter $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAME),$(ALL_MODULE_INSTALLED_FILENAMES)),
+
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE): PRIVATE_INSTALLED_MODULE := $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAME)
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE) : PRIVATE_NOTICES := $(sort $(ALL_MODULES.$(1).NOTICES))
+
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE): $(sort $(ALL_MODULES.$(1).NOTICES))
+	@echo Notice file: $$< -- $$@
+	mkdir -p $$(dir $$@)
+	awk 'FNR==1 && NR > 1 {print "\n"} {print}' $$(PRIVATE_NOTICES) > $$@
+
+$(strip $(eval ALL_MODULE_INSTALLED_FILENAMES := $(filter-out $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAME),$(ALL_MODULE_INSTALLED_FILENAMES))))
+))
+
 endef
 
 ###########################################################
 ## Declares a license metadata build rule for ALL_MODULES
 ###########################################################
 define build-license-metadata
-$(foreach m,$(ALL_MODULES),$(eval $(call license-metadata-rule,$(m))))
+$(strip $(eval ALL_INSTALLED_NOTICE_FILES := $(sort $(ALL_INSTALLED_NOTICE_FILES))))$(foreach m,$(sort $(ALL_MODULES)),$(eval $(call license-metadata-rule,$(m))))
 endef
 
 ###########################################################
