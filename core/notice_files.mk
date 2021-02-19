@@ -181,8 +181,8 @@ installed_notice_file := $($(my_prefix)OUT_NOTICE_FILES)/src/$(module_installed_
 
 ifdef my_register_name
 ALL_MODULES.$(my_register_name).INSTALLED_NOTICE_FILE := $(installed_notice_file)
-endif
-
+ALL_MODULES.$(my_register_name).MODULE_INSTALLED_FILENAME := $(module_installed_filename)
+else
 $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filename)
 $(installed_notice_file) : PRIVATE_NOTICES := $(notice_file)
 
@@ -190,6 +190,8 @@ $(installed_notice_file): $(notice_file)
 	@echo Notice file: $< -- $@
 	$(hide) mkdir -p $(dir $@)
 	$(hide) awk 'FNR==1 && NR > 1 {print "\n"} {print}' $(PRIVATE_NOTICES) > $@
+endif
+ALL_INSTALLED_NOTICE_FILES = $(sort ALL_INSTALLED_NOTICE_FILES $(installed_notice_file))
 
 ifdef LOCAL_INSTALLED_MODULE
 # Make LOCAL_INSTALLED_MODULE depend on NOTICE files if they exist

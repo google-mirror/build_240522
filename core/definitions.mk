@@ -605,13 +605,25 @@ $(if $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE),$(ALL_MODULES.$(1).INSTALLED_NOTI
 .PHONY: $(1).meta_lic
 $(1).meta_lic : $(_dir)/$(1).meta_lic
 
+$(if $(strip $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE)),$(if $(filter $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE),$(ALL_INSTALLED_NOTICE_FILES)),
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE): PRIVATE_INSTALLED_MODULE := $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAME)
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE) : PRIVATE_NOTICES := $(sort $(ALL_MODULES.$(1).NOTICES))
+
+$(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE): $(sort $(ALL_MODULES.$(1).NOTICES))
+	@echo Notice file: $$< -- $$@
+	mkdir -p $$(dir $$@)
+	awk 'FNR==1 && NR > 1 {print "\n"} {print}' $$(PRIVATE_NOTICES) > $$@
+
+$(strip $(eval ALL_INSTALLED_NOTICE_FILES := $(filter-out $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE),$(ALL_INSTALLED_NOTICE_FILES))))
+))
+
 endef
 
 ###########################################################
 ## Declares a license metadata build rule for ALL_MODULES
 ###########################################################
 define build-license-metadata
-$(foreach m,$(ALL_MODULES),$(eval $(call license-metadata-rule,$(m))))
+$(foreach m,$(sort $(ALL_MODULES)),$(eval $(call license-metadata-rule,$(m))))
 endef
 
 ###########################################################
