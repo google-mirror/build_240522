@@ -189,14 +189,16 @@ _product_list_vars += PRODUCT_EXTRA_RECOVERY_KEYS
 _product_list_vars += PRODUCT_PACKAGE_OVERLAYS
 _product_list_vars += DEVICE_PACKAGE_OVERLAYS
 
+ifdef PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS
+    $(error PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS is deprecated, consider using RRO for \
+      $(PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS))
+endif
+
 # Resource overlay list which must be excluded from enforcing RRO.
 _product_list_vars += PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS
 
 # Package list to apply enforcing RRO.
 _product_list_vars += PRODUCT_ENFORCE_RRO_TARGETS
-
-# Packages to skip auto-generating RROs for when PRODUCT_ENFORCE_RRO_TARGETS is set to *.
-_product_list_vars += PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS
 
 _product_list_vars += PRODUCT_SDK_ATREE_FILES
 _product_list_vars += PRODUCT_SDK_ADDON_NAME
