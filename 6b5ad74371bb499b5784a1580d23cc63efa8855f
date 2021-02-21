@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008338058",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580999?revision\u003d6",
+      "fixSuggestions": [
+        {
+          "fixId": "8788174a_991a1b0a",
+          "description": "Change to \"tools/product_config/inherit_tree.py\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/inherit_tree.py",
+              "range": {
+                "startLine": 32,
+                "startChar": 10,
+                "endLine": 32,
+                "endChar": 20
+              },
+              "replacement": "Everything"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "12670e53_80eb7d95",
+        "filename": "tools/product_config/inherit_tree.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-21T22:19:17Z",
+      "side": 1,
+      "message": "Common typo found: \"Everythign\" -- should it be \"Everything\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "6b5ad74371bb499b5784a1580d23cc63efa8855f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008338060",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580999?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e9736b38_15b0c830",
+        "filename": "tools/product_config/src/com/android/build/config/FlattenConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-21T22:19:17Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 220,
+        "startChar": 57,
+        "endLine": 220,
+        "endChar": 58
+      },
+      "revId": "6b5ad74371bb499b5784a1580d23cc63efa8855f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008338058",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580999?revision\u003d6",
+      "fixSuggestions": [
+        {
+          "fixId": "2c89e823_1cb249c6",
+          "description": "Change to \"tools/product_config/test.sh\"",
+          "replacements": [
+            {
+              "path": "tools/product_config/test.sh",
+              "range": {
+                "startLine": 15,
+                "startChar": 68,
+                "endLine": 15,
+                "endChar": 78
+              },
+              "replacement": "environment"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "65e3793b_99c93c3c",
+        "filename": "tools/product_config/test.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-21T22:19:17Z",
+      "side": 1,
+      "message": "Common typo found: \"enviroment\" -- should it be \"environment\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 15,
+        "startChar": 68,
+        "endLine": 15,
+        "endChar": 78
+      },
+      "revId": "6b5ad74371bb499b5784a1580d23cc63efa8855f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
