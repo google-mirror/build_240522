@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008338133",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1595378?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a6fffd2d_6f72c94e",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-21T22:33:39Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 23,
+        "startChar": 61,
+        "endLine": 23,
+        "endChar": 62
+      },
+      "revId": "27793957ba00f21386fa57d7b09e49196cc5a7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
