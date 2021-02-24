@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008408513",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1602475?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "3c2dd0e6_567e0bf0",
+          "description": "Change to \"tools/releasetools/common.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/common.py",
+              "range": {
+                "startLine": 1937,
+                "startChar": 17,
+                "endLine": 1937,
+                "endChar": 24
+              },
+              "replacement": "special"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "6675cfd1_410b3249",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-24T03:32:56Z",
+      "side": 1,
+      "message": "Common typo found: \"speical\" -- should it be \"special\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 1937,
+        "startChar": 17,
+        "endLine": 1937,
+        "endChar": 24
+      },
+      "revId": "c659c020412427342833931b928325798f8bb86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
