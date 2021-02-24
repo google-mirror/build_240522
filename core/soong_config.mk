@@ -158,6 +158,20 @@ $(foreach module,$(RECOVERY_SNAPSHOT_MODULES),\
   $(call add_json_bool,$(module),true))
 $(call end_json_map)
 
+$(call add_json_map,  VendorSnapshotDirsIncludedMap)
+  $(foreach module,$(VENDOR_SNAPSHOT_DIRS_INCLUDE),\
+  $(call add_json_val,$(module),0))
+  $(foreach module,$(VENDOR_SNAPSHOT_DIRS_EXCLUDE),\
+  $(call add_json_val,$(module),1))
+$(call end_json_map)
+
+$(call add_json_map,  RecoverySnapshotDirsIncludedMap)
+  $(foreach module,$(RECOVERY_SNAPSHOT_DIRS_INCLUDE),\
+  $(call add_json_val,$(module),0))
+  $(foreach module,$(RECOVERY_SNAPSHOT_DIRS_EXCLUDE),\
+  $(call add_json_val,$(module),1))
+$(call end_json_map)
+
 $(call add_json_bool, Treble_linker_namespaces,          $(filter true,$(PRODUCT_TREBLE_LINKER_NAMESPACES)))
 $(call add_json_bool, Enforce_vintf_manifest,            $(filter true,$(PRODUCT_ENFORCE_VINTF_MANIFEST)))
 
