@@ -16,11 +16,11 @@
 
 package com.android.build.config;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Wrapper for invoking kati.
  */
 public interface Kati {
-    public Map<String, MakeConfig> loadProductConfig();
+    public MakeConfig loadProductConfig();
 }

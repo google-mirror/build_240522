@@ -171,7 +171,7 @@ public class ErrorReporter {
     /**
      * An instance of an error happening.
      */
-    public static class Entry {
+    public class Entry {
         private final Category mCategory;
         private final Position mPosition;
         private final String mMessage;

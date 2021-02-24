@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A String and a Position, where it came from in source code.
  */
-public class Str implements Comparable<Str> {
+public class Str {
     private String mValue;
     private Position mPosition;
 
@@ -34,10 +34,6 @@ public class Str implements Comparable<Str> {
     public Str(Position pos, String s) {
         mValue = s;
         mPosition = pos;
-    }
-
-    public int length() {
-        return mValue.length();
     }
 
     @Override
@@ -55,21 +51,21 @@ public class Str implements Comparable<Str> {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Str)) {
+        if (o == null) {
+            return false;
+        } else if (o instanceof String) {
+            return mValue.equals(o);
+        } else if (o instanceof Str) {
+            final Str that = (Str)o;
+            return mValue.equals(that.mValue);
+        } else {
             return false;
         }
-        final Str that = (Str)o;
-        return mValue.equals(that.mValue);
     }
 
     @Override
     public int hashCode() {
         return mValue.hashCode();
-    }
-
-    @Override
-    public int compareTo(Str that) {
-        return this.mValue.compareTo(that.mValue);
     }
 
     public static ArrayList<Str> toList(Position pos, List<String> list) {
