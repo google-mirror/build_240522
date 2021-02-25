@@ -81,7 +81,6 @@ PRODUCT_PACKAGES += \
     dumpsys \
     DynamicSystemInstallationService \
     e2fsck \
-    ExtShared \
     flags_health_check \
     framework-minus-apex \
     framework-res \
@@ -217,7 +216,6 @@ PRODUCT_PACKAGES += \
     odsign \
     org.apache.http.legacy \
     otacerts \
-    PackageInstaller \
     passwd_system \
     perfetto \
     ping \
