@@ -28,3 +28,6 @@ PRODUCT_PACKAGES += \
     StorageManager \
     SystemUI \
     WallpaperCropper \
+    ManagedProvisioning \
+    ExtShared \
+    PackageInstaller \

@@ -51,7 +51,6 @@ PRODUCT_PACKAGES += \
     InputDevices \
     KeyChain \
     librs_jni \
-    ManagedProvisioning \
     MmsService \
     MtpService \
     MusicFX \
