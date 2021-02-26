@@ -1436,6 +1436,36 @@ print(module_info[module]['path'][0])" 2>/dev/null)
     fi
 }
 
+# Get the path of a specific module in the android tree, as cached in module-info.json.
+# If any build change is made, and it should be reflected in the output, you should run
+# 'refreshmod' first.
+function dirmods() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: dirmods <path>" >&2
+        return 1
+    fi
+
+    verifymodinfo || return 1
+
+    python -c "import json, os
+dir = '$1'
+while dir.endswith('/'):
+    dir = dir[:-1]
+prefix = dir + '/'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+results = set()
+for m in module_info.values():
+    for path in m.get(u'path', []):
+        if path == dir or path.startswith(prefix):
+            name = m.get(u'module_name')
+            if name:
+                results.add(name)
+for name in sorted(results):
+    print(name)
+"
+}
+
+
 # Go to a specific module in the android tree, as cached in module-info.json. If any build change
 # is made, and it should be reflected in the output, you should run 'refreshmod' first.
 function gomod() {
