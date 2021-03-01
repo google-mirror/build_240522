@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c771d760_45abbd1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1736307
+      },
+      "writtenOn": "2021-03-01T05:02:58Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2: Code-Review+2\n\u003e \n\u003e Auto Code-Review +2 from release submitter.\n\n",
+      "revId": "6e7d0e1d4a08b369976e428cb8cfb1b36bba70a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
