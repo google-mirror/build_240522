@@ -10,6 +10,13 @@ $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS must be NATIVE_TESTS with BUILD_HOST_N
 endif
 endif
 
+# Implicitly run this test under MTE SYNC for aarch64 binaries. This is a no-op
+# on non-MTE hardware.
+my_arch := $(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+ifneq (,$(filter arm64,$(my_arch)))
+	LOCAL_WHOLE_STATIC_LIBRARIES += note_memtag_heap_sync
+endif
+
 LOCAL_MODULE_CLASS := NATIVE_TESTS
 
 include $(BUILD_SYSTEM)/target_test_internal.mk
