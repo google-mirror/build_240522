@@ -277,6 +277,19 @@ ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
   endif
 endif
 
+# Replaces references to overridden boot jars in a boot jars variable.
+# $(1): Name of a boot jars variable with <apex>:<jar> pairs.
+define replace-boot-jar-module-overrides
+  $(foreach pair,$(PRODUCT_BOOT_JAR_MODULE_OVERRIDES),\
+    $(eval _rbjo_from := $(call word-colon,1,$(pair)))\
+    $(eval _rbjo_to := $(call word-colon,2,$(pair)))\
+    $(eval $(1) := $(patsubst $(_rbjo_from):%,$(_rbjo_to):%,$($(1)))))
+endef
+
+$(call replace-boot-jar-module-overrides,PRODUCT_BOOT_JARS)
+$(call replace-boot-jar-module-overrides,PRODUCT_UPDATABLE_BOOT_JARS)
+$(call replace-boot-jar-module-overrides,ART_APEX_JARS)
+
 $(foreach pair,$(PRODUCT_UPDATABLE_BOOT_JARS), \
   $(eval jar := $(call word-colon,2,$(pair))) \
   $(if $(findstring $(jar), $(PRODUCT_BOOT_JARS)), \
