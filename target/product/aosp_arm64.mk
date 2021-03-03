@@ -14,8 +14,10 @@
 # limitations under the License.
 #
 
-# The system image of aosp_arm64-userdebug is a GSI for the devices with:
-# - ARM 64 bits user space
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# The system image of aosp_x86_64-userdebug is a GSI for the devices with:
+# - x86 64 bits user space
 # - 64 bits binder interface
 # - system-as-root
 # - VNDK enforcement
@@ -51,9 +53,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 #
 # All components inherited here go to vendor or vendor_boot image
 #
+$(call inherit-product-if-exists, device/generic/goldfish/arm64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
-
+$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_arm64/device.mk)
 #
 # Special settings for GSI releasing
 #

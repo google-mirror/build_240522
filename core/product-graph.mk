@@ -72,7 +72,7 @@ define emit-product-node-props
 $(hide) echo \"$(1)\" [ \
 label=\"$(dir $(1))\\n$(notdir $(1))\\n\\n$(subst $(close_parenthesis),,$(subst $(open_parethesis),,$(call get-product-var,$(1),PRODUCT_MODEL)))\\n$(call get-product-var,$(1),PRODUCT_DEVICE)\" \
 style=\"filled\" fillcolor=\"$(strip $(call node-color,$(1)))\" \
-colorscheme=\"svg\" fontcolor=\"darkblue\" href=\"products/$(1).html\" \
+colorscheme=\"svg\" fontcolor=\"darkblue\" href=\"./$(1)\" \
 ] >> $(2)
 
 endef
