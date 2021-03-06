@@ -48,6 +48,11 @@ else ifneq (,$(PRODUCT_FUCHSIA))
   # Fuchsia picks out ART internal packages that aren't available in the
   # prebuilt.
   SOONG_CONFIG_art_module_source_build := true
+else ifeq (generic,$(PRODUCT_NAME))
+  # TODO(b/182105280): The `generic` product enables the
+  # PRODUCT_ENFORCE_PACKAGES_EXIST check, but the prebuilt ART APEX packages
+  # don't appear in out/soong/Android-generic.mk there.
+  SOONG_CONFIG_art_module_source_build := true
 else
   # This sets the default for building ART APEXes from source rather than
   # prebuilts (in packages/modules/ArtPrebuilt and prebuilt/module_sdk/art) in
