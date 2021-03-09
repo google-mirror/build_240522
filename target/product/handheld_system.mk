@@ -61,7 +61,6 @@ PRODUCT_PACKAGES += \
     PrintSpooler \
     ProxyHandler \
     screenrecord \
-    SecureElement \
     SharedStorageBackup \
     SimAppDialog \
     Telecom \
