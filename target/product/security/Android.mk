@@ -63,9 +63,11 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_STEM := otacerts.zip
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/security
 include $(BUILD_SYSTEM)/base_rules.mk
+OTACERTS_PRIVATE_CERT := $(intermediates)/$(notdir $(DEFAULT_SYSTEM_DEV_CERTIFICATE)).x509.pem
 $(LOCAL_BUILT_MODULE): PRIVATE_CERT := $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem
 $(LOCAL_BUILT_MODULE): $(SOONG_ZIP) $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem
-	$(SOONG_ZIP) -o $@ -j -f $(PRIVATE_CERT)
+	@cp -fp $(PRIVATE_CERT) $(OTACERTS_PRIVATE_CERT)
+	$(SOONG_ZIP) -o $@ -j -f $(OTACERTS_PRIVATE_CERT)
 
 
 #######################################
@@ -79,6 +81,7 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_STEM := otacerts.zip
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/system/etc/security
 include $(BUILD_SYSTEM)/base_rules.mk
+OTACERTS_RECOVERY_INTERMEDIATES := $(intermediates)
 
 extra_recovery_keys := $(patsubst %,%.x509.pem,$(PRODUCT_EXTRA_RECOVERY_KEYS))
 
@@ -88,5 +91,9 @@ $(LOCAL_BUILT_MODULE): \
 	    $(SOONG_ZIP) \
 	    $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem \
 	    $(extra_recovery_keys)
+	for key_file in $(PRIVATE_CERT) $(PRIVATE_EXTRA_RECOVERY_KEYS); do \
+	    cp -fp "$${key_file}" $(OTACERTS_RECOVERY_INTERMEDIATES) ;\
+	done
 	$(SOONG_ZIP) -o $@ -j \
-	    $(foreach key_file, $(PRIVATE_CERT) $(PRIVATE_EXTRA_RECOVERY_KEYS), -f $(key_file))
+	    $(foreach key_file, $(PRIVATE_CERT) $(PRIVATE_EXTRA_RECOVERY_KEYS), \
+	      -f $(OTACERTS_RECOVERY_INTERMEDIATES)/$(notdir $(key_file)))
