@@ -10,6 +10,7 @@ endif
 endif
 
 include $(BUILD_SYSTEM)/dex_preopt_config.mk
+include $(BUILD_SYSTEM)/bp2build_config.mk
 
 ifeq ($(WRITE_SOONG_VARIABLES),true)
 
@@ -246,6 +247,9 @@ $(call add_json_str,  PrebuiltHiddenApiDir, $(BOARD_PREBUILT_HIDDENAPI_DIR))
 $(call add_json_str,  ShippingApiLevel, $(PRODUCT_SHIPPING_API_LEVEL))
 
 $(call add_json_bool, BuildBrokenVendorPropertyNamespace, $(BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE))
+
+$(call add_json_list, Bp2BuildConvertSubtree, $(BP2BUILD_CONVERT_SUBTREE))
+$(call add_json_list, Bp2BuildConvertOptInModules, $(BP2BUILD_CONVERT_OPT_IN_MODULES))
 
 $(call json_end)
 
