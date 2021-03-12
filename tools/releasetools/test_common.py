@@ -1670,6 +1670,56 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
                   common.OPTIONS.aftl_key_path]
     common.RunAndCheckOutput(verify_cmd)
 
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey.pubkey.pem')
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_extra_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+
+    expected_cmd = [
+      'mkbootimg', '--header_version', '4',
+      '--gki_signing_key', pubkey,
+      '--gki_signing_algorithm', 'SHA256_RSA4096',
+      '--gki_signing_extra_args', '--prop foo:bar'
+    ]
+    self.assertEqual(cmd, expected_cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs_with_search_path(self):
+    pubkey = 'testkey.pubkey.pem'
+    self.assertFalse(os.path.exists(pubkey))
+
+    # Tests it should replace the pubkey with an existed key under
+    # OPTIONS.search_path, i.e., os.path.join(OPTIONS.search_path, pubkey).
+    search_path_dir = common.MakeTempDir()
+    common.OPTIONS.search_path = search_path_dir
+
+    search_pubkey = os.path.join(search_path_dir, pubkey)
+    with open(search_pubkey, 'wb') as f:
+      f.write(b'\x00' * 100)
+    self.assertTrue(os.path.exists(search_pubkey))
+
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_extra_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+
+    expected_cmd = [
+      'mkbootimg', '--header_version', '4',
+      '--gki_signing_key', search_pubkey,
+      '--gki_signing_algorithm', 'SHA256_RSA4096',
+      '--gki_signing_extra_args', '--prop foo:bar'
+    ]
+    self.assertEqual(cmd, expected_cmd)
+
 
 class InstallRecoveryScriptFormatTest(test_utils.ReleaseToolsTestCase):
   """Checks the format of install-recovery.sh.
