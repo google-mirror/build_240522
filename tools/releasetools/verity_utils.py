@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Signs a given image using avbtool
+
+Usage:  verity_utils properties_file output_image
+"""
+
 from __future__ import print_function
 
 import logging
@@ -714,3 +720,54 @@ def CreateCustomImageBuilder(info_dict, partition_name, partition_size,
         signing_args)
 
   return builder
+
+
+def GetDiskUsage(path):
+  """Returns the number of bytes that "path" occupies on host.
+
+  Args:
+    path: The directory or file to calculate size on.
+
+  Returns:
+    The number of bytes based on a 1K block_size.
+  """
+  cmd = ["du", "-b", "-k", "-s", path]
+  output = common.RunAndCheckOutput(cmd, verbose=False)
+  return int(output.split()[0]) * 1024
+
+
+def main(argv):
+  if len(argv) != 2:
+    print(__doc__)
+    sys.exit(1)
+
+  common.InitLogging()
+
+  dict_file = argv[0]
+  out_file = argv[1]
+
+  prop_dict = {}
+  f = open(dict_file)
+  for line in f:
+    line = line.strip()
+    if not line or line.startswith("#"):
+      continue
+    k, v = line.split("=", 1)
+    prop_dict[k] = v
+  f.close()
+
+  builder = CreateVerityImageBuilder(prop_dict)
+
+  if "partition_size" not in prop_dict:
+    image_size = GetDiskUsage(out_file)
+    size = builder.CalculateDynamicPartitionSize(image_size)
+    prop_dict["partition_size"] = size
+
+  builder.Build(out_file)
+
+
+if __name__ == '__main__':
+  try:
+    main(sys.argv[1:])
+  finally:
+    common.Cleanup()
