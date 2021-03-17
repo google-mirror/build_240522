@@ -759,7 +759,7 @@ def LoadInfoDict(input_file, repacking=False):
   for partition in PARTITIONS_WITH_BUILD_PROP:
     partition_prop = "{}.build.prop".format(partition)
     d[partition_prop] = PartitionBuildProps.FromInputFile(
-        input_file, partition)
+        input_file, partition, use_lz4=d.get('lz4_ramdisks') == 'true')
   d["build.prop"] = d["system.build.prop"]
 
   # Set up the salt (based on fingerprint) that will be used when adding AVB
@@ -840,11 +840,11 @@ class PartitionBuildProps(object):
     return props
 
   @staticmethod
-  def FromInputFile(input_file, name, placeholder_values=None):
+  def FromInputFile(input_file, name, placeholder_values=None, use_lz4=False):
     """Loads the build.prop file and builds the attributes."""
 
     if name == "boot":
-      data = PartitionBuildProps._ReadBootPropFile(input_file)
+      data = PartitionBuildProps._ReadBootPropFile(input_file, use_lz4=False)
     else:
       data = PartitionBuildProps._ReadPartitionPropFile(input_file, name)
 
@@ -853,7 +853,7 @@ class PartitionBuildProps(object):
     return props
 
   @staticmethod
-  def _ReadBootPropFile(input_file):
+  def _ReadBootPropFile(input_file, use_lz4=False):
     """
     Read build.prop for boot image from input_file.
     Return empty string if not found.
@@ -863,7 +863,7 @@ class PartitionBuildProps(object):
     except KeyError:
       logger.warning('Failed to read IMAGES/boot.img')
       return ''
-    prop_file = GetBootImageBuildProp(boot_img)
+    prop_file = GetBootImageBuildProp(boot_img, use_lz4=use_lz4)
     if prop_file is None:
       return ''
     with open(prop_file, "r") as f:
@@ -3630,12 +3630,12 @@ class DynamicPartitionsDifference(object):
         append('move %s %s' % (p, u.tgt_group))
 
 
-def GetBootImageBuildProp(boot_img):
+def GetBootImageBuildProp(boot_img, use_lz4=False):
   """
   Get build.prop from ramdisk within the boot image
 
   Args:
-    boot_img: the boot image file. Ramdisk must be compressed with lz4 format.
+    boot_img: the boot image file. Ramdisk must be compressed with lz4 or gzip format.
 
   Return:
     An extracted file that stores properties in the boot image.
@@ -3648,7 +3648,10 @@ def GetBootImageBuildProp(boot_img):
       logger.warning('Unable to get boot image timestamp: no ramdisk in boot')
       return None
     uncompressed_ramdisk = os.path.join(tmp_dir, 'uncompressed_ramdisk')
-    RunAndCheckOutput(['lz4', '-d', ramdisk, uncompressed_ramdisk])
+    if use_lz4:
+        RunAndCheckOutput(['lz4', '-d', ramdisk, uncompressed_ramdisk])
+    else:
+        RunAndCheckOutput(['minigzip', '-d', ramdisk, uncompressed_ramdisk])
 
     abs_uncompressed_ramdisk = os.path.abspath(uncompressed_ramdisk)
     extracted_ramdisk = MakeTempDir('extracted_ramdisk')
