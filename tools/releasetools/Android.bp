@@ -133,6 +133,7 @@ python_defaults {
     required: [
         "brillo_update_payload",
         "checkvintf",
+        "minigzip",
         "lz4",
         "toybox",
         "unpack_bootimg",
@@ -272,12 +273,12 @@ python_defaults {
     name: "releasetools_binary_defaults",
     version: {
         py2: {
-            enabled: true,
-            embedded_launcher: true,
-        },
-        py3: {
             enabled: false,
             embedded_launcher: false,
+        },
+        py3: {
+            enabled: true,
+            embedded_launcher: true,
         },
     },
     // TODO (b/140144201) Build imgdiff from releasetools_common
