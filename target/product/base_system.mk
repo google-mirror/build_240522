@@ -342,6 +342,7 @@ PRODUCT_COPY_FILES += \
     system/core/rootdir/etc/hosts:system/etc/hosts
 
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote32.rc:system/etc/init/hw/init.zygote32.rc
+
 PRODUCT_VENDOR_PROPERTIES += ro.zygote?=zygote32
 
 PRODUCT_SYSTEM_PROPERTIES += debug.atrace.tags.enableflags=0
@@ -404,5 +405,8 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 # This property allows enabling Keystore 2.0 selectively for testing.
 # TODO Remove when Keystore 2.0 migration is complete. b/171563717
 PRODUCT_SYSTEM_PROPERTIES += persist.android.security.keystore2.enable=true
+
+# Copy arm-mm_events.sh to /system/bin/
+PRODUCT_COPY_FILES += external/perfetto/tools/arm-mm_events.sh:/system/bin/arm-mm_events.sh
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
