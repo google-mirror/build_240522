@@ -1053,7 +1053,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     source_info = common.BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
     vendor_prop = source_info.info_dict.get("vendor.build.prop")
     if vendor_prop and \
-            vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true":
+       vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true" and \
+       not OPTIONS.disable_vabc:
       # TODO(zhangkelvin) Remove this once FEC on VABC is supported
       logger.info("Virtual AB Compression enabled, disabling FEC")
       OPTIONS.disable_fec_computation = True
