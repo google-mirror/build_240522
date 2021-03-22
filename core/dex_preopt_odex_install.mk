@@ -27,6 +27,10 @@ ifndef LOCAL_DEX_PREOPT # LOCAL_DEX_PREOPT undefined
   LOCAL_DEX_PREOPT := $(DEX_PREOPT_DEFAULT)
 endif
 
+ifneq (,$(filter true,$(PRODUCT_BROKEN_VERIFY_USES_LIBRARIES)))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+endif
+
 ifeq (false,$(LOCAL_DEX_PREOPT))
   LOCAL_DEX_PREOPT :=
 endif

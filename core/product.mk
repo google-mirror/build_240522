@@ -221,6 +221,9 @@ _product_list_vars += PRODUCT_BOOT_JARS
 # instead of PRODUCT_BOOT_JARS, so that device-specific jars go after common jars.
 _product_list_vars += PRODUCT_BOOT_JARS_EXTRA
 
+# Set to true to disable <uses-library> checks for a product.
+_product_list_vars += PRODUCT_BROKEN_VERIFY_USES_LIBRARIES
+
 _product_single_value_vars += PRODUCT_SUPPORTS_BOOT_SIGNER
 _product_single_value_vars += PRODUCT_SUPPORTS_VBOOT
 _product_single_value_vars += PRODUCT_SUPPORTS_VERITY
