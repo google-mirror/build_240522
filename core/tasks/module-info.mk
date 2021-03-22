@@ -29,3 +29,4 @@ $(MODULE_INFO_JSON):
 droidcore: $(MODULE_INFO_JSON)
 
 $(call dist-for-goals, general-tests, $(MODULE_INFO_JSON))
+$(call dist-for-goals, droid, $(MODULE_INFO_JSON))
