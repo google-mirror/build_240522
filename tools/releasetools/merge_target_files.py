@@ -103,6 +103,8 @@ import img_from_target_files
 import find_shareduid_violation
 import ota_from_target_files
 
+from common import AddCareMapForAbOta, ExternalError, PARTITIONS_WITH_CARE_MAP
+
 logger = logging.getLogger(__name__)
 
 OPTIONS = common.OPTIONS
@@ -355,8 +357,9 @@ def validate_config_lists(framework_item_list, framework_misc_info_keys,
           ' includes %s.', partition, partition)
       has_error = True
 
-  if ('dynamic_partition_list' in framework_misc_info_keys) or (
-      'super_partition_groups' in framework_misc_info_keys):
+  if ('dynamic_partition_list'
+      in framework_misc_info_keys) or ('super_partition_groups'
+                                       in framework_misc_info_keys):
     logger.error('Dynamic partition misc info keys should come from '
                  'the vendor instance of META/misc_info.txt.')
     has_error = True
@@ -447,8 +450,8 @@ def process_misc_info_txt(framework_target_files_temp_dir,
     merged_dict[key] = framework_dict[key]
 
   # Merge misc info keys used for Dynamic Partitions.
-  if (merged_dict.get('use_dynamic_partitions') == 'true') and (
-      framework_dict.get('use_dynamic_partitions') == 'true'):
+  if (merged_dict.get('use_dynamic_partitions')
+      == 'true') and (framework_dict.get('use_dynamic_partitions') == 'true'):
     merged_dynamic_partitions_dict = common.MergeDynamicPartitionInfoDicts(
         framework_dict=framework_dict, vendor_dict=merged_dict)
     merged_dict.update(merged_dynamic_partitions_dict)
@@ -1091,8 +1094,14 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
                                            output_target_files_temp_dir,
                                            temp_dir)
 
-  # Create the IMG package from the merged target files package.
+  with zipfile.ZipFile(output_zip, allowZip64=True) as zfp:
+    partition_image_map = {
+        partition: 'IMAGES/{}.img'.format(partition)
+        for partition in partition_map
+    }
+    AddCareMapForAbOta(zfp, PARTITIONS_WITH_CARE_MAP, partition_image_map)
 
+  # Create the IMG package from the merged target files package.
   if output_img:
     img_from_target_files.main([output_zip, output_img])
 
