@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c81e76c_193037cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1474387
+      },
+      "writtenOn": "2021-03-23T19:11:16Z",
+      "side": 1,
+      "message": "Confirmed with OnePlus 8T by running:\n\nsign_target_files_apks -o -d ~/.android-certs out/dist/lineage_kebab-target_files-eng.xstefen.zip __upload/signed-target_files.zip\n\nafter a:\n\nm dist\n\nResulting in no assertion error, and out/dist/build.prop shows:\n\nro.build.description\u003dOnePlus8T-user 11 release-keys\n\nas expected.",
+      "revId": "af9f0014c08bb490efcf638458234ebe1b7ff839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
