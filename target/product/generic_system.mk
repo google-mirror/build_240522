@@ -130,6 +130,9 @@ PRODUCT_SYSTEM_MANUFACTURER := Android
 PRODUCT_SYSTEM_MODEL := mainline
 PRODUCT_SYSTEM_DEVICE := generic
 
+# Use compressed apexes in /system partition.
+PRODUCT_COMPRESSED_APEX := true
+
 _base_mk_allowed_list :=
 
 _my_allowed_list := $(_base_mk_allowed_list)
