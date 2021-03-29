@@ -49,7 +49,7 @@ SYSTEM_OTHER_ODEX_FILTER ?= \
 
 # Global switch control if updatable boot jars are included in dexpreopt.
 # Currently unconditionally set to true, this may change in the future.
-DEX_PREOPT_WITH_UPDATABLE_BCP := false
+DEX_PREOPT_WITH_UPDATABLE_BCP := true
 
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
