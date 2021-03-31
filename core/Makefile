@@ -4205,7 +4205,7 @@ INTERNAL_OTATOOLS_FILES := \
   $(filter $(HOST_OUT)/%,$(call module-installed-files,$(INTERNAL_OTATOOLS_MODULES)))
 
 .PHONY: otatools
-otatools: $(INTERNAL_OTATOOLS_FILES)
+otatools: $(INTERNAL_OTATOOLS_FILES) $(SOONG_APEX_KEYS_FILE) $(APKCERTS_FILE)
 
 # For each module, recursively resolve its host shared library dependencies. Then we have a full
 # list of modules whose installed files need to be packed.
@@ -4219,6 +4219,29 @@ INTERNAL_OTATOOLS_PACKAGE_FILES := \
 INTERNAL_OTATOOLS_PACKAGE_FILES += \
   $(sort $(shell find build/make/target/product/security -type f -name "*.x509.pem" -o \
       -name "*.pk8" -o -name verity_key))
+
+# Find all public keys
+# META/apexkeys.txt contains information about all apex keys,
+# that file is also accessible via $(SOONG_APEX_KEYS_FILE)
+# Format: 
+# name="com.android.wifi.apex" public_key="packages/modules/some_key.pubkey" private_key="packages/modules/some_key.pk8" container_certificate="packages/modules/Wifi/apex/cert.x509.pem" container_private_key="packages/modules/Wifi/apex/some_key.pk8" partition="system_ext"
+SIGNING_KEY_REGEX := "[[:alnum:]/._-]+"
+APEX_PUBLIC_KEYS := $(shell cat $(SOONG_APEX_KEYS_FILE) | egrep -o "public_key=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+APEX_PRIVATE_KEYS := $(shell cat $(SOONG_APEX_KEYS_FILE) | egrep -o "private_key=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+APEX_CONTAINER_CERTIFICATES := $(shell cat $(SOONG_APEX_KEYS_FILE) | egrep -o "container_certificate=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+APEX_CONTAINER_PRIVATE_KEY := $(shell cat $(SOONG_APEX_KEYS_FILE) | egrep -o "container_private_key=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+
+# Find all the APK certificates
+APK_CERTIFICATES := $(shell cat $(APKCERTS_FILE) | egrep -o "certificate=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+APK_PRIVATE_KEY := $(shell cat $(APKCERTS_FILE) | egrep -o "private_key=\"$(SIGNING_KEY_REGEX)" | cut -d \" -f 2 | grep -v "^PRESIGNED" | sort)
+
+
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APEX_PUBLIC_KEYS)
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APEX_PRIVATE_KEYS)
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APEX_CONTAINER_CERTIFICATES)
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APEX_CONTAINER_PRIVATE_KEY)
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APK_CERTIFICATES)
+INTERNAL_OTATOOLS_PACKAGE_FILES += $(APK_PRIVATE_KEY)
 
 ifneq (,$(wildcard device))
 INTERNAL_OTATOOLS_PACKAGE_FILES += \
