@@ -75,7 +75,7 @@ def GetInodeUsage(path):
   output = common.RunAndCheckOutput(cmd, verbose=False)
   # increase by > 4% as number of files and directories is not whole picture.
   inodes = output.count('\n')
-  spare_inodes = inodes * 4 // 100
+  spare_inodes = inodes * 6 // 100
   min_spare_inodes = 12
   if spare_inodes < min_spare_inodes:
     spare_inodes = min_spare_inodes
