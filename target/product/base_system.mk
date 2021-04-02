@@ -388,7 +388,6 @@ PRODUCT_SYSTEM_SERVER_APPS += \
 # Packages included only for eng/userdebug builds, when building with SANITIZE_TARGET=address
 PRODUCT_PACKAGES_DEBUG_ASAN := \
     fuzz \
-    honggfuzz
 
 PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE := \
     libdumpcoverage
