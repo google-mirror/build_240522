@@ -290,11 +290,46 @@ ADDITIONAL_VENDOR_PROPERTIES += \
     ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
 endif
 
+# calculates the required vendor api level for a GRF device
+# $(1): Current platform API level (_api_level)
+# $(2): First shipping vendor API level (_grf_api_level)
+# returns _grf_api_level + _grf_window * ((_api_level - _grf_api_level) / _grf_window)
+define calculate_required_api_level
+  $(eval _api_level := $(1)) \
+  $(eval _grf_api_level := $(2)) \
+  $(eval _grf_window := 4) \
+  $(if $(call math_gt, $(_grf_api_level), $(_api_level)),\
+    $(error The GRF api level must be less than or eqaul to the platform api level)) \
+  $(call int_plus, $(_grf_api_level), $(call int_multiply, $(_grf_window),\
+    $(call int_divide, $(call int_subtract, $(_api_level), $(_grf_api_level)), $(_grf_window))))
+endef
+
 # Vendors with GRF must define BOARD_SHIPPING_API_LEVEL for the vendor API level.
 # This must not be defined for the non-GRF devices.
 ifdef BOARD_SHIPPING_API_LEVEL
+$(if $(call math_gt, $(BOARD_SHIPPING_API_LEVEL), $(PLATFORM_SDK_VERSION)),\
+    $(error BOARD_SHIPPING_API_LEVEL($(BOARD_SHIPPING_API_LEVEL)) must be less than or eqaul to PLATFORM_SDK_VERSION($(PLATFORM_SDK_VERSION))))
 ADDITIONAL_VENDOR_PROPERTIES += \
     ro.board.first_api_level=$(BOARD_SHIPPING_API_LEVEL)
+_grf_required_api_level := $(strip $(call calculate_required_api_level, $(PLATFORM_SDK_VERSION), $(BOARD_SHIPPING_API_LEVEL)))
+
+# To manually set the vendor API level of the vendor modules, BOARD_API_LEVEL can be used.
+# The vendor API level must be upgraded every fourth update of platform api level.
+ifdef BOARD_API_LEVEL
+$(if $(call math_lt, $(BOARD_API_LEVEL), $(_grf_required_api_level)),\
+    $(error BOARD_API_LEVEL($(BOARD_API_LEVEL)) must be greater than or equal to $(_grf_required_api_level) based on GRF policy))
+$(if $(call math_gt, $(BOARD_API_LEVEL), $(PLATFORM_SDK_VERSION)),\
+    $(error BOARD_API_LEVEL($(BOARD_API_LEVEL)) must be less than or eqaul to PLATFORM_SDK_VERSION($(PLATFORM_SDK_VERSION))))
+_board_api_level := $(BOARD_API_LEVEL)
+else
+_board_api_level := $(_grf_required_api_level)
+endif
+
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.board.api_level=$(_board_api_level)
+
+_board_api_level :=
+_grf_required_api_level :=
 endif
 
 ADDITIONAL_VENDOR_PROPERTIES += \
