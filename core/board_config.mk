@@ -25,6 +25,7 @@ _board_strip_readonly_list += BOARD_EGL_CFG
 _board_strip_readonly_list += BOARD_HAVE_BLUETOOTH
 _board_strip_readonly_list += BOARD_INSTALLER_CMDLINE
 _board_strip_readonly_list += BOARD_KERNEL_CMDLINE
+_board_strip_readonly_list += BOARD_BOOT_HEADER_VERSION
 _board_strip_readonly_list += BOARD_BOOTCONFIG
 _board_strip_readonly_list += BOARD_KERNEL_BASE
 _board_strip_readonly_list += BOARD_USES_GENERIC_AUDIO
@@ -827,6 +828,13 @@ ifndef BUILDING_VENDOR_BOOT_IMAGE
   endif
   ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
     $(error Should not set BOARD_VENDOR_RAMDISK_FRAGMENTS if not building vendor_boot image)
+  endif
+endif
+
+ifneq (,$(call math_lt,$(BOARD_BOOT_HEADER_VERSION),4))
+  ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
+    $(error Should not set BOARD_VENDOR_RAMDISK_FRAGMENTS if \
+      BOARD_BOOT_HEADER_VERSION is less than 4)
   endif
 endif
 

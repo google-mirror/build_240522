@@ -211,6 +211,40 @@ $(INSTALLED_SDK_BUILD_PROP_TARGET): $(INSTALLED_BUILD_PROP_TARGET)
 	$(hide) mv $@.tmp $@
 
 # -----------------------------------------------------------------
+# Declare vendor ramdisk fragments
+INTERNAL_VENDOR_RAMDISK_FRAGMENTS :=
+
+# Validation check and assign default --ramdisk_type.
+$(foreach vendor_ramdisk_fragment,$(BOARD_VENDOR_RAMDISK_FRAGMENTS), \
+  $(if $(and $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS), \
+             $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)), \
+    $(error Must not specify KERNEL_MODULE_DIRS for prebuilt vendor ramdisk fragment "$(vendor_ramdisk_fragment)": $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS))) \
+  $(eval VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR := $(call intermediates-dir-for,PACKAGING,vendor_ramdisk_fragment-stage-$(vendor_ramdisk_fragment))) \
+  $(eval VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).FILES :=) \
+  $(if $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS), \
+    $(if $(filter --ramdisk_type,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)),, \
+      $(eval BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS += --ramdisk_type DLKM))) \
+)
+
+# Create the "kernel module directory" to "vendor ramdisk fragment" inverse mapping.
+$(foreach vendor_ramdisk_fragment,$(BOARD_VENDOR_RAMDISK_FRAGMENTS), \
+  $(foreach dir,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS), \
+    $(eval kmd_vrf := KERNEL_MODULE_DIR_VENDOR_RAMDISK_FRAGMENT_$(dir)) \
+    $(if $($(kmd_vrf)),$(error Kernel module directory "$(dir)" belongs to multiple vendor ramdisk fragments: "$($(kmd_vrf))" "$(vendor_ramdisk_fragment)", each kernel module directory should belong to exactly one or none vendor ramdisk fragment)) \
+    $(eval $(kmd_vrf) := $(vendor_ramdisk_fragment)) \
+  ) \
+)
+INTERNAL_VENDOR_RAMDISK_FRAGMENTS += $(BOARD_VENDOR_RAMDISK_FRAGMENTS)
+
+# Assign --ramdisk_name for each vendor ramdisk fragment.
+$(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
+  $(if $(filter --ramdisk_name,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)), \
+    $(error Must not specify --ramdisk_name for vendor ramdisk fragment: $(vendor_ramdisk_fragment))) \
+  $(eval BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS += --ramdisk_name $(vendor_ramdisk_fragment)) \
+  $(eval .KATI_READONLY := BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS) \
+)
+
+# -----------------------------------------------------------------
 # kernel modules
 
 # Depmod requires a well-formed kernel version so 0.0 is used as a placeholder.
@@ -414,20 +448,6 @@ ifneq ($(BOARD_DO_NOT_STRIP_VENDOR_RAMDISK_MODULES),true)
 else
   VENDOR_RAMDISK_STRIPPED_MODULE_STAGING_DIR :=
 endif
-
-# Create the "kernel module directory" to "vendor ramdisk fragment" inverse mapping.
-$(foreach vendor_ramdisk_fragment,$(BOARD_VENDOR_RAMDISK_FRAGMENTS), \
-  $(if $(and $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS), \
-             $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)), \
-    $(error Must not specify KERNEL_MODULE_DIRS for prebuilt vendor ramdisk fragment "$(vendor_ramdisk_fragment)": $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS))) \
-  $(eval VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR := $(call intermediates-dir-for,PACKAGING,vendor_ramdisk_fragment-dlkm-$(vendor_ramdisk_fragment))) \
-  $(eval VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).FILES :=) \
-  $(foreach dir,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).KERNEL_MODULE_DIRS), \
-    $(eval kmd_vrf := KERNEL_MODULE_DIR_VENDOR_RAMDISK_FRAGMENT_$(dir)) \
-    $(if $($(kmd_vrf)),$(error Kernel module directory "$(dir)" belongs to multiple vendor ramdisk fragments: "$($(kmd_vrf))" "$(vendor_ramdisk_fragment)", each kernel module directory should belong to exactly one or none vendor ramdisk fragment)) \
-    $(eval $(kmd_vrf) := $(vendor_ramdisk_fragment)) \
-  ) \
-)
 
 BOARD_KERNEL_MODULE_DIRS += top
 $(foreach dir,$(BOARD_KERNEL_MODULE_DIRS), \
@@ -1083,17 +1103,12 @@ endef
 INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS :=
 INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS :=
 
-$(foreach vendor_ramdisk_fragment,$(BOARD_VENDOR_RAMDISK_FRAGMENTS), \
+$(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
   $(eval prebuilt_vendor_ramdisk_fragment_file := $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)) \
   $(if $(prebuilt_vendor_ramdisk_fragment_file), \
     $(eval vendor_ramdisk_fragment_target := $(call build-prebuilt-vendor-ramdisk-fragment,$(vendor_ramdisk_fragment),$(prebuilt_vendor_ramdisk_fragment_file))) \
     $(eval ### else ###), \
-    $(eval vendor_ramdisk_fragment_target := $(call build-vendor-ramdisk-fragment,$(vendor_ramdisk_fragment))) \
-    $(if $(filter --ramdisk_type,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)),, \
-      $(eval BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS += --ramdisk_type DLKM))) \
-  $(if $(filter --ramdisk_name,$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)), \
-    $(error Must not specify --ramdisk_name for vendor ramdisk fragment: $(vendor_ramdisk_fragment))) \
-  $(eval BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS += --ramdisk_name $(vendor_ramdisk_fragment)) \
+    $(eval vendor_ramdisk_fragment_target := $(call build-vendor-ramdisk-fragment,$(vendor_ramdisk_fragment)))) \
   $(eval INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS += $(vendor_ramdisk_fragment_target)) \
   $(eval INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS += $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS) --vendor_ramdisk_fragment $(vendor_ramdisk_fragment_target)) \
 )
@@ -4887,9 +4902,9 @@ ifdef BOARD_KERNEL_PAGESIZE
 	echo "$(BOARD_KERNEL_PAGESIZE)" > $(zip_root)/VENDOR_BOOT/pagesize
 endif
 	echo "$(INTERNAL_KERNEL_CMDLINE)" > $(zip_root)/VENDOR_BOOT/vendor_cmdline
-ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
-	echo "$(BOARD_VENDOR_RAMDISK_FRAGMENTS)" > "$(zip_root)/VENDOR_BOOT/vendor_ramdisk_fragments"
-	$(foreach vendor_ramdisk_fragment,$(BOARD_VENDOR_RAMDISK_FRAGMENTS), \
+ifdef INTERNAL_VENDOR_RAMDISK_FRAGMENTS
+	echo "$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS)" > "$(zip_root)/VENDOR_BOOT/vendor_ramdisk_fragments"
+	$(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
 	  mkdir -p $(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment); \
 	  echo "$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)" > "$(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/mkbootimg_args"; \
 	  $(eval prebuilt_ramdisk := $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)) \
@@ -4899,7 +4914,7 @@ ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
 	      $(VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR), \
 	      $(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/RAMDISK); \
 	  ))
-endif # BOARD_VENDOR_RAMDISK_FRAGMENTS != ""
+endif # INTERNAL_VENDOR_RAMDISK_FRAGMENTS != ""
 endif # INSTALLED_VENDOR_BOOTIMAGE_TARGET
 ifdef BUILDING_SYSTEM_IMAGE
 	@# Contents of the system image
