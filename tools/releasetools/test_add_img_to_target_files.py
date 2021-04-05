@@ -22,9 +22,9 @@ import common
 import test_utils
 from add_img_to_target_files import (
     AddPackRadioImages,
-    CheckAbOtaImages, GetCareMap)
+    CheckAbOtaImages)
 from rangelib import RangeSet
-from common import AddCareMapForAbOta
+from common import AddCareMapForAbOta, GetCareMap
 
 
 OPTIONS = common.OPTIONS
