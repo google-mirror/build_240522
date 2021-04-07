@@ -2,6 +2,8 @@
 #
 # Copyright (C) 2014 The Android Open Source Project
 #
+# Copyright (c) 2021  Qualcomm Innovation Center, Inc. All rights reserved.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -45,8 +47,8 @@ class SparseImage(object):
                hashtree_info_generator=None):
     self.simg_f = f = open(simg_fn, mode)
 
-    header_bin = f.read(28)
-    header = struct.unpack("<I4H4I", header_bin)
+    header_bin = f.read(32)
+    header = struct.unpack("<I4H5I", header_bin)
 
     magic = header[0]
     major_version = header[1]
@@ -62,10 +64,10 @@ class SparseImage(object):
     if major_version != 1 or minor_version != 0:
       raise ValueError("I know about version 1.0, but this is version %u.%u" %
                        (major_version, minor_version))
-    if file_hdr_sz != 28:
+    if file_hdr_sz != 32:
       raise ValueError("File header size was expected to be 28, but is %u." %
                        (file_hdr_sz,))
-    if chunk_hdr_sz != 12:
+    if chunk_hdr_sz != 16:
       raise ValueError("Chunk header size was expected to be 12, but is %u." %
                        (chunk_hdr_sz,))
 
@@ -84,12 +86,12 @@ class SparseImage(object):
     self.clobbered_blocks = rangelib.RangeSet(data=clobbered_blocks)
 
     for i in range(total_chunks):
-      header_bin = f.read(12)
-      header = struct.unpack("<2H2I", header_bin)
+      header_bin = f.read(16)
+      header = struct.unpack("<2H3I", header_bin)
       chunk_type = header[0]
       chunk_sz = header[2]
       total_sz = header[3]
-      data_sz = total_sz - 12
+      data_sz = total_sz - 16
 
       if chunk_type == 0xCAC1:
         if data_sz != (chunk_sz * blk_sz):
@@ -104,7 +106,7 @@ class SparseImage(object):
           f.seek(data_sz, os.SEEK_CUR)
 
       elif chunk_type == 0xCAC2:
-        fill_data = f.read(4)
+        fill_data = f.read(8)
         care_data.append(pos)
         care_data.append(pos + chunk_sz)
         offset_map.append((pos, chunk_sz, None, fill_data))
@@ -165,13 +167,13 @@ class SparseImage(object):
 
     # Append a fill chunk
     f.seek(0, os.SEEK_END)
-    f.write(struct.pack("<2H3I", 0xCAC2, 0, blocks, 16, data))
+    f.write(struct.pack("<2H3I", 0xCAC2, 0, blocks, 24, 0, data))
 
     # Update the sparse header
     self.total_blocks += blocks
     self.total_chunks += 1
 
-    f.seek(16, os.SEEK_SET)
+    f.seek(24, os.SEEK_SET)
     f.write(struct.pack("<2I", self.total_blocks, self.total_chunks))
 
   def RangeSha1(self, ranges):
@@ -320,7 +322,7 @@ class SparseImage(object):
           f.seek(filepos, os.SEEK_SET)
           data = f.read(self.blocksize)
         else:
-          if fill_data == reference[:4]:   # fill with all zeros
+          if fill_data == reference[:8]:   # fill with all zeros
             data = reference
           else:
             data = None
