@@ -6,6 +6,7 @@
 # LOCAL_SOONG_DEX_JAR
 # LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
 # LOCAL_SOONG_DEXPREOPT_CONFIG
+# LOCAL_SOONG_FULL_DEXPREOPT_CONFIG
 
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   $(call pretty-error,soong_java_prebuilt.mk may only be used from Soong)
@@ -152,6 +153,13 @@ endif
 ifdef LOCAL_SOONG_DEXPREOPT_CONFIG
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(call local-intermediates-dir,)/dexpreopt.config))
 endif
+
+ifdef LOCAL_SOONG_FULL_DEXPREOPT_CONFIG
+  my_dexpreopt_config := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_FULL_DEXPREOPT_CONFIG), $(my_dexpreopt_config)))
+  $(LOCAL_BUILT_MODULE): $(my_dexpreopt_config)
+endif
+ 
 
 javac-check : $(full_classes_jar)
 javac-check-$(LOCAL_MODULE) : $(full_classes_jar)
