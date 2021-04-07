@@ -232,9 +232,9 @@ endif
 # LOCAL_OPTIONAL_USES_LIBRARIES are specified.
 # Will change the default to true unconditionally in the future.
 ifndef LOCAL_ENFORCE_USES_LIBRARIES
-  ifneq (,$(strip $(LOCAL_USES_LIBRARIES)$(LOCAL_OPTIONAL_USES_LIBRARIES)))
+#  ifneq (,$(strip $(LOCAL_USES_LIBRARIES)$(LOCAL_OPTIONAL_USES_LIBRARIES)))
     LOCAL_ENFORCE_USES_LIBRARIES := true
-  endif
+#  endif
 endif
 
 my_enforced_uses_libraries :=
