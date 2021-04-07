@@ -116,8 +116,8 @@ def construct_sparse_image(chunks):
     Filename of the created sparse image.
   """
   SPARSE_HEADER_MAGIC = 0xED26FF3A
-  SPARSE_HEADER_FORMAT = "<I4H4I"
-  CHUNK_HEADER_FORMAT = "<2H2I"
+  SPARSE_HEADER_FORMAT = "<I4H5I"
+  CHUNK_HEADER_FORMAT = "<2H3I"
 
   sparse_image = common.MakeTempFile(prefix='sparse-', suffix='.img')
   with open(sparse_image, 'wb') as fp:
@@ -131,14 +131,14 @@ def construct_sparse_image(chunks):
       if chunk[0] == 0xCAC1:
         data_size = 4096 * chunk[1]
       elif chunk[0] == 0xCAC2:
-        data_size = 4
+        data_size = 8
       elif chunk[0] == 0xCAC3:
         pass
       else:
         assert False, "Unsupported chunk type: {}".format(chunk[0])
 
       fp.write(struct.pack(
-          CHUNK_HEADER_FORMAT, chunk[0], 0, chunk[1], data_size + 12))
+          CHUNK_HEADER_FORMAT, chunk[0], 0, chunk[1], data_size + 16,0))
       if data_size != 0:
         fp.write(os.urandom(data_size))
 
