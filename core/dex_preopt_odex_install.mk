@@ -208,6 +208,18 @@ add_json_class_loader_context = \
 # Verify <uses-library> coherence between the build system and the manifest.
 ################################################################################
 
+# Some libraries do not have a manifest, so there is nothing to check against.
+# Handle it as if the manifest had zero <uses-library> tags: it is ok unless the
+# module has non-empty LOCAL_USES_LIBRARIES or LOCAL_OPTIONAL_USES_LIBRARIES.
+ifndef my_manifest_or_apk
+  ifneq (,$(strip $(LOCAL_USES_LIBRARIES)$(LOCAL_OPTIONAL_USES_LIBRARIES)))
+    $(error $(LOCAL_MODULE) has non-empty LOCAL_USES_LIBRARIES or \
+      LOCAL_OPTIONAL_USES_LIBRARIES, but no manifest)
+  else
+    LOCAL_ENFORCE_USES_LIBRARIES := false
+  endif
+endif
+
 # Verify LOCAL_USES_LIBRARIES/LOCAL_OPTIONAL_USES_LIBRARIES
 # If LOCAL_ENFORCE_USES_LIBRARIES is not set, default to true if either of LOCAL_USES_LIBRARIES or
 # LOCAL_OPTIONAL_USES_LIBRARIES are specified.
