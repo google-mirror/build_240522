@@ -760,3 +760,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor-ramdisk)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
+
+# Nuke, see https://android-review.googlesource.com/c/platform/bionic/+/869388
+$(call add-clean-step, rm -f $(OUT_DIR)/.ninja_log)
