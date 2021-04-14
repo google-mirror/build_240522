@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (f7e9c4 Merge "Fix bug: include all dirs not just the last one.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ2A.210405.006
+>>>>>>> BRANCH (3de8fd Version bump to RQ2A.210405.006 [core/build_id.mk])
