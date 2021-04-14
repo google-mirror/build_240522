@@ -153,7 +153,7 @@ ifeq ($(LOCAL_IS_HOST_MODULE) $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_
   ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	[ -x $@ ] || ( $(call echo-error,$@,Target of symlink is not executable); false )
   endif
-else
+else ifeq ($(filter HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS)),)
 	$(transform-prebuilt-to-target)
   ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@
