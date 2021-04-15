@@ -111,6 +111,8 @@ else
 notice_deps := $(strip $(notice_deps) $(LOCAL_TARGET_REQUIRED_MODULES))
 endif
 
+local_path := $(LOCAL_PATH)
+
 ifdef my_register_name
 ALL_MODULES.$(my_register_name).LICENSE_PACKAGE_NAME := $(strip $(license_package_name))
 ALL_MODULES.$(my_register_name).LICENSE_KINDS := $(ALL_MODULES.$(my_register_name).LICENSE_KINDS) $(license_kinds)
@@ -118,6 +120,7 @@ ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS := $(ALL_MODULES.$(my_registe
 ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP := $(ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP) $(install_map)
 ALL_MODULES.$(my_register_name).NOTICE_DEPS := $(ALL_MODULES.$(my_register_name).NOTICE_DEPS) $(notice_deps)
 ALL_MODULES.$(my_register_name).IS_CONTAINER := $(strip $(filter-out false,$(ALL_MODULES.$(my_register_name).IS_CONTAINER) $(is_container)))
+ALL_MODULES.$(my_register_name).PATH := $(strip $(ALL_MODULES.$(my_register_name).PATH) $(local_path))
 endif
 
 ifdef notice_file
@@ -185,9 +188,9 @@ ALL_MODULES.$(my_register_name).MODULE_INSTALLED_FILENAMES := $(ALL_MODULES.$(my
 INSTALLED_NOTICE_FILES.$(installed_notice_file).MODULE := $(my_register_name)
 else
 $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filename)
-$(installed_notice_file) : PRIVATE_NOTICES := $(notice_file)
+$(installed_notice_file) : PRIVATE_NOTICES := $(sort $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n))))
 
-$(installed_notice_file): $(notice_file)
+$(installed_notice_file): $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n)))
 	@echo Notice file: $< -- $@
 	$(hide) mkdir -p $(dir $@)
 	$(hide) awk 'FNR==1 && NR > 1 {print "\n"} {print}' $(PRIVATE_NOTICES) > $@
