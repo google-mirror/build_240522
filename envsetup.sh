@@ -304,21 +304,11 @@ function setpaths()
     export ANDROID_JAVA_TOOLCHAIN=$(get_abs_build_var ANDROID_JAVA_TOOLCHAIN)
     export ANDROID_PRE_BUILD_PATHS=$ANDROID_JAVA_TOOLCHAIN:
     export PATH=$ANDROID_PRE_BUILD_PATHS$PATH
-
-    unset ANDROID_PRODUCT_OUT
     export ANDROID_PRODUCT_OUT=$(get_abs_build_var PRODUCT_OUT)
     export OUT=$ANDROID_PRODUCT_OUT
-
-    unset ANDROID_HOST_OUT
     export ANDROID_HOST_OUT=$(get_abs_build_var HOST_OUT)
-
-    unset ANDROID_SOONG_HOST_OUT
     export ANDROID_SOONG_HOST_OUT=$(get_abs_build_var SOONG_HOST_OUT)
-
-    unset ANDROID_HOST_OUT_TESTCASES
     export ANDROID_HOST_OUT_TESTCASES=$(get_abs_build_var HOST_OUT_TESTCASES)
-
-    unset ANDROID_TARGET_OUT_TESTCASES
     export ANDROID_TARGET_OUT_TESTCASES=$(get_abs_build_var TARGET_OUT_TESTCASES)
 
     # needed for building linux on MacOS
