@@ -185,9 +185,9 @@ ALL_MODULES.$(my_register_name).MODULE_INSTALLED_FILENAMES := $(ALL_MODULES.$(my
 INSTALLED_NOTICE_FILES.$(installed_notice_file).MODULE := $(my_register_name)
 else
 $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filename)
-$(installed_notice_file) : PRIVATE_NOTICES := $(notice_file)
+$(installed_notice_file) : PRIVATE_NOTICES := $(sort $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n))))
 
-$(installed_notice_file): $(notice_file)
+$(installed_notice_file): $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n)))
 	@echo Notice file: $< -- $@
 	$(hide) mkdir -p $(dir $@)
 	$(hide) awk 'FNR==1 && NR > 1 {print "\n"} {print}' $(PRIVATE_NOTICES) > $@

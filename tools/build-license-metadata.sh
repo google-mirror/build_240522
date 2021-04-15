@@ -15,7 +15,9 @@ The available options are:
 -p package...           license package name
 -n notice...            license notice file
 -d dependency...        license metadata file dependency
--t target...            targets
+-s dependency...        source (input) dependency
+-t target...            built targets
+-i target...            installed targets
 -m target:installed...  map dependent targets to their installed names
 -is_container           preserved dependent target name when given
 -o outfile              output file
@@ -27,7 +29,9 @@ license_conditions=
 license_package_name=
 license_notice=
 license_deps=
+source_deps=
 targets=
+installed=
 installmap=
 is_container=false
 ofile=
@@ -82,8 +86,14 @@ process_args() {
       -d)
         lcurr_flag=dependency
         ;;
+      -s)
+        lcurr_flag=source
+        ;;
       -t)
         lcurr_flag=target
+        ;;
+      -i)
+        lcurr_flag=install
         ;;
       -m)
         lcurr_flag=installmap
@@ -115,8 +125,14 @@ process_args() {
           dependency)
             license_deps="${license_deps}${license_deps:+ }${1}"
             ;;
+          source)
+            source_deps="${source_deps}${source_deps:+ }${1}"
+            ;;
           target)
             targets="${targets}${targets:+ }${1}"
+            ;;
+          install)
+            installed="${installed}${installed:+ }${1}"
             ;;
           installmap)
             installmap="${installmap}${installmap:+ }${1}"
@@ -137,56 +153,13 @@ process_args() {
   done
 }
 
-# Reads a license metadata file from stdin, and outputs the named dependencies.
-#
-# No parameters.
-extract_deps() {
-  awk '$1 == "dep_name:" { sub(/^"/, "", $2); sub(/"$/, "", $2); print $2; }'
-}
-
 # Populates the depfiles variable identifying dependency files.
 #
-# Starting with the dependencies enumerated in license_deps, calculates the
-# transitive closure of all dependencies.
-#
-# Dependency names ending in .meta_module indirectly reference license
-# metadata with 1 license metadata filename per line.
+# Reads the unique dependencies enumerated in license_deps.
 #
 # No parameters; no output.
 read_deps() {
-  lnewdeps=
-  for d in ${license_deps}; do
-    case "${d}" in
-      *.meta_module)
-        lnewdeps="${lnewdeps}${lnewdeps:+ }"$(cat "${d}") ;;
-      *)
-        lnewdeps="${lnewdeps}${lnewdeps:+ }${d}" ;;
-    esac
-  done
-  lnewdeps=$(echo "${lnewdeps}" | tr ' ' '\n' | sort -u)
-  lalldeps=
-  ldeps=
-  lmod=
-  ldep=
-  while [ "${#lnewdeps}" -gt '0' ]; do
-    ldeps="${lnewdeps}"
-    lnewdeps=
-    for ldep in ${ldeps}; do
-      depfiles="${depfiles}${ldep} "
-      lalldeps="${lalldeps}${lalldeps:+ }"$(cat "${ldep}" | extract_deps)
-    done
-    lalldeps=$(for d in ${lalldeps}; do echo "${d}"; done | sort -u)
-    for d in ${lalldeps}; do
-      ldeps="${d}"
-      case "${d}" in *.meta_module) ldeps=$(cat "${d}") ;; esac
-      for lmod in ${ldeps}; do
-        if ! expr "${depfiles}" : ".* ${lmod} .*" >/dev/null 2>&1; then
-          lnewdeps="${lnewdeps}${lnewdeps:+ }${lmod}"
-        fi
-      done
-    done
-    lalldeps=
-  done
+  depfiles=$(echo $(echo ${license_deps} | tr ' ' '\n' | sort -u))
 }
 
 # Returns the effective license conditions for the current license metadata.
@@ -207,6 +180,32 @@ calculate_effective_conditions() {
      ;;
   esac
   echo "${lconditions}"
+}
+
+
+# Returns the effective license conditions for the current license metadata.
+#
+# If a module is restricted or links in a restricted module, the effective
+# license has a restricted condition.
+calculate_effective_license_text() {
+  ltexts=$(( \
+      echo ${license_notice} | tr ' ' '\n'
+      if ! ${is_container}; then
+        for d in ${depfiles}; do
+          cat "${d}" | awk '
+            $1 == "license_text:" {
+              gsub(/^"|"$/, "", $2)
+              print $2
+            }
+            $1 == "effective_license_text:" {
+              gsub(/^"|"$/, "", $2)
+              print $2
+            }
+          '
+        done
+      fi
+  ) | sort -u)
+  echo "${ltexts}"
 }
 
 
@@ -235,14 +234,24 @@ fi
   for t in ${targets}; do
     echo 'target: "'${t}'"'
   done
+  for i in ${installed}; do
+    echo 'installed: "'${i}'"'
+  done
   for m in ${installmap}; do
     echo 'install_map: "'${m}'"'
+  done
+  for s in ${source_deps}; do
+    echo 'source: "'${s}'"'
   done
 ) >>"${ofile}"
 read_deps
 effective_conditions=$(calculate_effective_conditions)
 for condition in ${effective_conditions}; do
   echo 'effective_condition: "'${condition}'"'
+done >>"${ofile}"
+effective_license_text=$(calculate_effective_license_text)
+for text in ${effective_license_text}; do
+  echo 'effective_license_text: "'${text}'"'
 done >>"${ofile}"
 for dep in ${depfiles}; do
   echo 'dep {'
@@ -259,9 +268,6 @@ for dep in ${depfiles}; do
         strip_type()
         print "  dep_package_name: "$0
       }
-      $1 == "dep_name:" {
-        print "  dep_sub_dep: "$2
-      }
       $1 == "license_kind:" {
         print "  dep_license_kind: "$2
       }
@@ -275,11 +281,24 @@ for dep in ${depfiles}; do
         strip_type()
         print "  dep_license_text: "$0
       }
+      $1 == "effective_license_text:" {
+        strip_type()
+        print "  dep_effective_license_text: "$0
+      }
       $1 == "target:" {
         print "  dep_target: "$2
       }
+      $1 == "installed:" {
+        print "  dep_installed: "$2
+      }
       $1 == "install_map:" {
         print "  dep_install_map: "$2
+      }
+      $1 == "source:" {
+        print "  dep_source: "$2
+      }
+      $1 == "dep_name:" {
+        print "  dep_sub_dep: "$2
       }
   '
   # The restricted license kind is contagious to all linked dependencies.
