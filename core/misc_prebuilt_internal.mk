@@ -25,7 +25,16 @@ endif
 
 include $(BUILD_SYSTEM)/base_rules.mk
 
-ifneq ($(filter init%rc,$(notdir $(LOCAL_INSTALLED_MODULE)))$(filter %/etc/init,$(dir $(LOCAL_INSTALLED_MODULE))),)
+# TODO (b/185624993): Remove the chck on TARGET_BUILD_UNBUNDLED when host_init_verifier can run
+# without requiring the HIDL interface map.
+check_init_file := false
+ifndef TARGET_BUILD_UNBUNDLED
+	ifneq ($(filter init%rc,$(notdir $(LOCAL_INSTALLED_MODULE)))$(filter %/etc/init,$(dir $(LOCAL_INSTALLED_MODULE))),)
+		check_init_file := true
+	endif
+endif
+
+ifeq (check_init_file,true)
   $(eval $(call copy-init-script-file-checked,$(my_prebuilt_src_file),$(LOCAL_BUILT_MODULE)))
 else ifneq ($(LOCAL_PREBUILT_STRIP_COMMENTS),)
 $(LOCAL_BUILT_MODULE) : $(my_prebuilt_src_file)
