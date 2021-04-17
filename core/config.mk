@@ -106,8 +106,8 @@ TARGET_COMPRESS_MODULE_SYMBOLS := false
 # Default is to prelink modules.
 TARGET_PRELINK_MODULE := true
 
-# Default shell is mksh. Other possible value is ash.
-TARGET_SHELL := mksh
+# Default shell is ash. Other possible value is mksh.
+TARGET_SHELL := ash
 
 # ###############################################################
 # Include sub-configuration files
@@ -360,3 +360,5 @@ else
 endif
 
 include $(BUILD_SYSTEM)/dumpvar.mk
+
+repo download platform/build 23823
