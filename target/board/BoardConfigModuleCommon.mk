@@ -4,3 +4,5 @@
 
 # Required for all module devices.
 TARGET_USES_64_BIT_BINDER := true
+
+BOARD_VNDK_VERSION := current
