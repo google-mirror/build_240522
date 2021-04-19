@@ -17,6 +17,10 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/default_art_config.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
 
+# Enables treble, which enabled certain -D compilation flags. In particular, libhidlbase
+# uses -DENFORCE_VINTF_MANIFEST. See b/185759877
+PRODUCT_SHIPPING_API_LEVEL := 29
+
 # Enables CFI for media
 PRODUCT_CFI_INCLUDE_PATHS :=  \
 	frameworks/av/media \
