@@ -2544,8 +2544,10 @@ endef
 # $(1): source file
 # $(2): destination file
 define copy-init-script-file-checked
+ifndef TARGET_BUILD_UNBUNDLED
+$(2): $(1)
+else ifneq ($(HOST_OS),darwin)
 # Host init verifier doesn't exist on darwin.
-ifneq ($(HOST_OS),darwin)
 $(2): \
 	$(1) \
 	$(HOST_INIT_VERIFIER) \
