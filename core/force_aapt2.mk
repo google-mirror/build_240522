@@ -38,12 +38,6 @@ ifneq (,$(filter --extra-packages,$(LOCAL_AAPT_FLAGS)))
     endif
 endif
 
-# AAPT2 is pickier about missing resources.  Support library may have references to resources
-# added in current, so always treat LOCAL_SDK_VERSION := <number> as LOCAL_SDK_RES_VERSION := current.
-ifneq (,$(filter-out current system_current test_current core_current,$(LOCAL_SDK_VERSION)))
-  LOCAL_SDK_RES_VERSION := current
-endif
-
 ifeq (,$(strip $(LOCAL_MANIFEST_FILE)$(LOCAL_FULL_MANIFEST_FILE)))
   ifeq (,$(wildcard $(LOCAL_PATH)/AndroidManifest.xml))
     # work around missing manifests by creating a default one
