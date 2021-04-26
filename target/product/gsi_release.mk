@@ -42,6 +42,8 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Enable dynamic partition size
 PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+
 # GSI targets should install "unflattened" APEXes in /system
 TARGET_FLATTEN_APEX := false
 
