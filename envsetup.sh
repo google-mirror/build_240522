@@ -312,8 +312,16 @@ function setpaths()
     export ANDROID_PRODUCT_OUT=$(get_abs_build_var PRODUCT_OUT)
     export OUT=$ANDROID_PRODUCT_OUT
 
+    unset MODULE_INFO_FILE
+    export MODULE_INFO_FILE=$ANDROID_PRODUCT_OUT/module-info.json
+
     unset ANDROID_HOST_OUT
     export ANDROID_HOST_OUT=$(get_abs_build_var HOST_OUT)
+
+    unset PESTO_LIB
+    export PESTO_LIB=pesto_lib
+    unset PESTO_LIB_FILE
+    export PESTO_LIB_FILE=$ANDROID_HOST_OUT/bin/$PESTO_LIB
 
     unset ANDROID_SOONG_HOST_OUT
     export ANDROID_SOONG_HOST_OUT=$(get_abs_build_var SOONG_HOST_OUT)
@@ -1684,6 +1692,17 @@ function _trigger_build()
       _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
     else
       echo "Couldn't locate the top of the tree. Try setting TOP."
+    fi
+)
+
+function test()
+(
+    if [ ! -f $MODULE_INFO_FILE ] ; then
+        _trigger_build "modules-in-a-dir" ${MODULE_INFO_FILE/"$ANDROID_BUILD_TOP/"/''}
+    fi
+    if [ ! -f $PESTO_LIB_FILE ] ; then
+        echo "trigger Build $PESTO_LIB"
+        _trigger_build "all-modules" "$PESTO_LIB"
     fi
 )
 
