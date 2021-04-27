@@ -5319,6 +5319,14 @@ $(APPCOMPAT_ZIP): $(SOONG_ZIP)
 	$(hide) find $(PRODUCT_OUT)/appcompat | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(PRODUCT_OUT)/appcompat -l $(PRIVATE_LIST_FILE)
 
+DEXPREOPT_TOOLS_DEPS := $(DEXPREOPT_GEN_DEPS) $(DEXPREOPT_GEN) $(AAPT2)
+DEXPREOPT_TOOLS_ZIP := $(PRODUCT_OUT)/dexpreopt_tools.zip
+$(DEXPREOPT_TOOLS_ZIP): $(DEXPREOPT_TOOLS_DEPS)
+$(DEXPREOPT_TOOLS_ZIP): $(SOONG_ZIP)
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(SOONG_ZIP) -d -o $@ -j $(addprefix -f ,$(DEXPREOPT_TOOLS_DEPS)) -f $$(realpath $(DEX2OAT))
+
+
 DEXPREOPT_CONFIG_ZIP := $(PRODUCT_OUT)/dexpreopt_config.zip
 $(DEXPREOPT_CONFIG_ZIP): $(FULL_SYSTEMIMAGE_DEPS) \
 	    $(INTERNAL_RAMDISK_FILES) \
