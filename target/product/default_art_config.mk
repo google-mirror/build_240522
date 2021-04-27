@@ -28,16 +28,19 @@ PRODUCT_BOOT_JARS := \
     voip-common \
     ims-common
 
+# The actual runtime ordering of updatable jars is determined by derive_classpath service.
+# See packages/modules/SdkExtensions/README.md
+# Keep the list sorted.
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
+    com.android.ipsec:android.net.ipsec.ike \
     com.android.media:updatable-media \
     com.android.mediaprovider:framework-mediaprovider \
     com.android.os.statsd:framework-statsd \
     com.android.permission:framework-permission \
     com.android.sdkext:framework-sdkextensions \
-    com.android.wifi:framework-wifi \
     com.android.tethering:framework-tethering \
-    com.android.ipsec:android.net.ipsec.ike
+    com.android.wifi:framework-wifi
 
 # Minimal configuration for running dex2oat (default argument values).
 # PRODUCT_USES_DEFAULT_ART_CONFIG must be true to enable boot image compilation.
