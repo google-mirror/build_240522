@@ -1051,15 +1051,20 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         "META/ab_partitions.txt is required for ab_update."
     target_info = common.BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
     source_info = common.BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
-    vendor_prop = source_info.info_dict.get("vendor.build.prop")
-    vabc_used = vendor_prop and \
-        vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true" and \
+    vabc_used = target_info.is_vabc and source_info.is_vabc and \
         not OPTIONS.disable_vabc
     if vabc_used:
       # TODO(zhangkelvin) Remove this once FEC on VABC is supported
       logger.info("Virtual AB Compression enabled, disabling FEC")
       OPTIONS.disable_fec_computation = True
       OPTIONS.disable_verity_computation = True
+
+    # If source supports VABC, delta_generator/update_engine will attempt to
+    # use VABC. This dangerous, as the target build won't have snapuserd to
+    # serve I/O request when device boots. Therefore, disable VABC if source
+    # build doesn't supports it.
+    if not vabc_used and source_info.is_vabc:
+      OPTIONS.disable_vabc = True
   else:
     assert "ab_partitions" in OPTIONS.info_dict, \
         "META/ab_partitions.txt is required for ab_update."
