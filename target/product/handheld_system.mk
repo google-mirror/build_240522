@@ -52,6 +52,7 @@ PRODUCT_PACKAGES += \
     KeyChain \
     librs_jni \
     ManagedProvisioning \
+    Mars \
     MmsService \
     MtpService \
     MusicFX \
