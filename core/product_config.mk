@@ -231,12 +231,26 @@ PRODUCT_AAPT_CONFIG := $(PRODUCT_LOCALES) $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG_SP := $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG := $(subst $(space),$(comma),$(PRODUCT_AAPT_CONFIG))
 
+###########################################################
+## Add 'platform:' prefix if the parameter is not in <apex>:<module> format.
+##
+## This makes sure that a jar corresponds to ConfigureJarList format of <apex> and <module> pairs
+## where needed.
+##
+## $(1): a value either in <module> or <apex>:<module> format
+## $(2): value of the form a:b:c...
+###########################################################
+
+define qualify-platform-jars
+$(if $(findstring :,$(1)),,platform:)$(1))
+endef
+
 # Extra boot jars must be appended at the end after common boot jars.
 PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 
 # Add 'platform:' prefix to unqualified boot jars
 PRODUCT_BOOT_JARS := $(foreach pair,$(PRODUCT_BOOT_JARS), \
-  $(if $(findstring :,$(pair)),,platform:)$(pair))
+  $(call qualify-platform-jars $(pair)))
 
 # Replaces references to overridden boot jar modules in a boot jars variable.
 # $(1): Name of a boot jars variable with <apex>:<jar> pairs.
@@ -253,6 +267,10 @@ $(call replace-boot-jar-module-overrides,ART_APEX_JARS)
 
 # The extra system server jars must be appended at the end after common system server jars.
 PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
+
+# Add 'platform:' prefix to unqualified system server jars
+PRODUCT_SYSTEM_SERVER_JARS := $(foreach pair,$(PRODUCT_SYSTEM_SERVER_JARS), \
+  $(call qualify-platform-jars $(pair)))
 
 ifndef PRODUCT_SYSTEM_NAME
   PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
