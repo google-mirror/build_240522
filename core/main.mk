@@ -1206,6 +1206,22 @@ define auto-included-modules
 
 endef
 
+# TODO(asmundak):
+# `product-installed-files` and `host-installed-files` macros call
+# `get-product-var` to obtain per-file configuration variable values
+# (the value of variable FOO is fetched from PRODUCT.<product-makefile>.FOO).
+# Starlark-based configuration does not maintain per-file variable variable
+# values. To work around this problem, we utilize the fact that
+# `product-installed-files` and `host-installed-files` are called only in
+# two places:
+# 1. For the top-level product makefile (in this file). In this case 
+#    $(call get-product-var <product>, FOO) is the same as $(FOO) as the
+#    product configuration has been run already.
+# 2. To check the the path requirements (in artifact_path_requirements.mk).
+#    Starlark-based configuration does not perform this check at the moment.
+# In the longer run most of the logic of this file will be moved to the
+# Starlark.
+ifndef RBC_PRODUCT_CONFIG
 # Lists most of the files a particular product installs, including:
 # - PRODUCT_PACKAGES, and their LOCAL_REQUIRED_MODULES
 # - PRODUCT_COPY_FILES
@@ -1256,6 +1272,43 @@ define host-installed-files
   $(filter $(HOST_OUT)/%,$(call module-installed-files, $(_hif_modules))) \
   $(filter $(HOST_CROSS_OUT)/%,$(call module-installed-files, $(_hcif_modules)))
 endef
+else
+define product-installed-files
+  $(eval _pif_modules := $(PRODUCT_PACKAGES) \
+    $(if $(filter eng,$(tags_to_install)),$(PRODUCT_PACKAGES_ENG)) \
+    $(if $(filter debug,$(tags_to_install)),$(PRODUCT_PACKAGES_DEBUG)) \
+    $(if $(filter tests,$(tags_to_install)),$(PRODUCT_PACKAGES_TESTS)) \
+    $(if $(filter asan,$(tags_to_install)),$(PRODUCT_PACKAGES_DEBUG_ASAN)) \
+    $(if $(filter java_coverage,$(tags_to_install)),$(PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE)) \
+    $(call auto-included-modules) \
+  ) \
+  $(eval ### Filter out the overridden packages and executables before doing expansion) \
+  $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
+  $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _pif_modules := $(sort $(call resolve-bitness-for-modules,TARGET,$(_pif_modules)))) \
+  $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
+  $(filter-out $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))) \
+  $(call resolve-product-relative-paths,\
+    $(foreach cf,$(PRODUCT_COPY_FILES),$(call word-colon,2,$(cf))))
+endef
+
+# Similar to product-installed-files above, but handles PRODUCT_HOST_PACKAGES instead
+# This does support the :32 / :64 syntax, but does not support module overrides.
+define host-installed-files
+  $(eval _hif_modules := $(PRODUCT_HOST_PACKAGES)) \
+  $(eval ### Split host vs host cross modules) \
+  $(eval _hcif_modules := $(filter host_cross_%,$(_hif_modules))) \
+  $(eval _hif_modules := $(filter-out host_cross_%,$(_hif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _hif_modules := $(sort $(call resolve-bitness-for-modules,HOST,$(_hif_modules)))) \
+  $(eval _hcif_modules := $(sort $(call resolve-bitness-for-modules,HOST_CROSS,$(_hcif_modules)))) \
+  $(call expand-required-host-modules,_hif_modules,$(_hif_modules),HOST) \
+  $(call expand-required-host-modules,_hcif_modules,$(_hcif_modules),HOST_CROSS) \
+  $(filter $(HOST_OUT)/%,$(call module-installed-files, $(_hif_modules))) \
+  $(filter $(HOST_CROSS_OUT)/%,$(call module-installed-files, $(_hcif_modules)))
+endef
+endif
 
 # Fails the build if the given list is non-empty, and prints it entries (stripping PRODUCT_OUT).
 # $(1): list of files to print
@@ -1329,7 +1382,7 @@ ifdef FULL_BUILD
 
   # Verify the artifact path requirements made by included products.
   is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
-  ifneq (true,$(or $(is_asan),$(DISABLE_ARTIFACT_PATH_REQUIREMENTS)))
+  ifneq (true,$(or $(is_asan),$(DISABLE_ARTIFACT_PATH_REQUIREMENTS),$(RBC_PRODUCT_CONFIG)))
     include $(BUILD_SYSTEM)/artifact_path_requirements.mk
   endif
 else
