@@ -162,11 +162,24 @@ endif
 ifneq (1,$(words $(current_product_makefile)))
 $(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
 endif
+
+ifndef RBC_PRODUCT_CONFIG
 $(call import-products, $(current_product_makefile))
+else
+  rbcscript=prebuilts/build-tools/$(HOST_PREBUILT_TAG)/bin/rbc-run
+  rc := $(shell $(rbcscript) $(TARGET_PRODUCT) $(TARGET_BUILD_VARIANT) >$(OUT_DIR)/rbctemp.mk || echo $$?)
+  ifneq (,$(rc))
+    $(error product configuration converter failed: $(rc))
+  endif
+  include $(OUT_DIR)/rbctemp.mk
+  PRODUCTS += $(current_product_makefile)
+endif
 endif  # Import all or just the current product makefile
 
+ifndef RBC_PRODUCT_CONFIG
 # Quick check
 $(check-all-products)
+endif
 
 ifeq ($(SKIP_ARTIFACT_PATH_REQUIREMENT_PRODUCTS_CHECK),)
 # Import all the products that have made artifact path requirements, so that we can verify
@@ -186,6 +199,7 @@ ifneq ($(filter dump-products, $(MAKECMDGOALS)),)
 $(dump-products)
 endif
 
+ifndef RBC_PRODUCT_CONFIG
 # Convert a short name like "sooner" into the path to the product
 # file defining that product.
 #
@@ -198,6 +212,9 @@ endif
 ############################################################################
 # Strip and assign the PRODUCT_ variables.
 $(call strip-product-vars)
+else
+INTERNAL_PRODUCT := $(current_product_makefile)
+endif
 
 current_product_makefile :=
 all_product_makefiles :=
