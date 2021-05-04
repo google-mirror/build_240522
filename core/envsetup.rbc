@@ -92,7 +92,7 @@ def _versions_default(g, all_versions):
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
-    g.setdefault("PLATFORM_SECURITY_PATCH", "2021-03-05")
+    g.setdefault("PLATFORM_SECURITY_PATCH", "2021-04-05")
     dt = 'TZ="GMT" %s' % g["PLATFORM_SECURITY_PATCH"]
     g.setdefault("PLATFORM_SECURITY_PATCH_TIMESTAMP", rblf_shell("date -d '%s' +%%s" % dt))
 
