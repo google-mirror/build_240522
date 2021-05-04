@@ -70,9 +70,10 @@ endif
 # /data. If we don't do this they will need to be extracted which is not favorable for RAM usage
 # or performance. If my_preopt_for_extracted_apk is true, we ignore the only preopt boot image
 # options.
+system_server_jars := $(subst platform:,,$(PRODUCT_SYSTEM_SERVER_JARS))
 ifneq (true,$(my_preopt_for_extracted_apk))
   ifeq (true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
-    ifeq ($(filter $(PRODUCT_SYSTEM_SERVER_JARS) $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE)),)
+    ifeq ($(filter $(system_server_jars) $(DEXPREOPT_BOOT_JARS_MODULES),$(LOCAL_MODULE)),)
       LOCAL_DEX_PREOPT :=
     endif
   endif
