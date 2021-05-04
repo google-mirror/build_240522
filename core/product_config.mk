@@ -254,6 +254,10 @@ $(call replace-boot-jar-module-overrides,ART_APEX_JARS)
 # The extra system server jars must be appended at the end after common system server jars.
 PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
 
+# Add 'platform:' prefix to unqualified system server jars
+PRODUCT_SYSTEM_SERVER_JARS := $(foreach pair,$(PRODUCT_SYSTEM_SERVER_JARS), \
+  $(if $(findstring :,$(pair)),,platform:)$(pair))
+
 ifndef PRODUCT_SYSTEM_NAME
   PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
 endif
