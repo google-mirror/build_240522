@@ -14,9 +14,15 @@
 
 test_suite_name := cts
 test_suite_tradefed := cts-tradefed
+<<<<<<< HEAD   (b287fb Merge "Merge empty history for sparse-7272141-L5900000087866)
 # TODO: Fix the following two lines after harness is moved to its own repo
 test_suite_dynamic_config := test/suite_harness/tools/cts-tradefed/DynamicConfig.xml
 test_suite_readme := test/suite_harness/tools/cts-tradefed/README
+=======
+test_suite_dynamic_config := cts/tools/cts-tradefed/DynamicConfig.xml
+test_suite_readme := cts/tools/cts-tradefed/README
+include_test_suite_notice := true
+>>>>>>> BRANCH (3b272b Merge "Merge cherrypicks of [1698073, 1698074, 1698075] into)
 
 include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
 
