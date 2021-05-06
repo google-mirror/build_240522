@@ -1,0 +1,264 @@
+#!/usr/bin/env python3
+
+# Before running this script, run:
+#   RECORD_ALL_DEPS=true m $(get_build_var PRODUCT_OUT)/module-info.json
+#
+#
+#
+#   import json; print('\n'.join(sorted))
+
+import csv
+import json
+import os
+import subprocess
+import sys
+
+def get_build_var(var):
+  proc = subprocess.run(["build/soong/soong_ui.bash", "--dumpvar-mode", var],
+      capture_output=True, text=True)
+  return proc.stdout.strip()
+
+def get_git_projects():
+  """Find all of the directories under pwd containing a .git entry."""
+  top = os.getcwd()
+  def recurse(path):
+    for entry in os.scandir(path):
+        if entry.name == ".git":
+          yield entry.path[len(top)+1:-(len("/.git"))]
+        if entry.name[0] == ".":
+          continue
+        if entry.is_dir(follow_symlinks=False):
+          yield from recurse(entry.path)  # see below for Python 2.x
+  return [x for x in recurse(top)]
+
+def get_partitions_for(product_out, module):
+  """For the given module, return a map of partitions to files in that partition
+  for each of the partitions the module will be installed on."""
+  def check(module):
+    for path in module["installed"]:
+      if path.startswith(product_out):
+        path = path[len(product_out)+1:]
+        pos = path.find("/")
+        yield (path[:pos], path[pos+1:])
+  result = {}
+  for partition, path in set([x for x in check(module)]):
+    result.setdefault(partition, []).append(path)
+  return result
+
+def get_git_project_for(git_projects, path):
+  """Return the git projects for the given path"""
+  for project in git_projects:
+    path = path + "/"
+    if path.startswith(project):
+      return project
+  return ""
+
+def build_transitive_dependencies(modules):
+  """Fill in the transitive_dependencies field on each module in modules."""
+  def recurse(module, spaces):
+    if "transitive_dependencies" not in module:
+      module["transitive_dependencies"] = set(module["dependencies"])
+      for dependency_name in module["dependencies"]:
+        dependency_module = modules.get(dependency_name)
+        if not dependency_module:
+          continue
+        recurse(dependency_module, spaces=spaces + "  ")
+        module["transitive_dependencies"] |= dependency_module["transitive_dependencies"]
+  # Find roots (modules where nobody depends on them)
+  all_dependencies = set()
+  for module in modules.values():
+    for dependency in module["dependencies"]:
+      all_dependencies.add(dependency)
+  roots = [name for name, module in modules.items() if name not in all_dependencies]
+  # Recurse, starting at the roots
+  for name in roots:
+    recurse(modules[name], "")
+
+def write_csv(filename, rows, fields):
+  """Write csv data."""
+  with open(filename, "w", newline="") as modules_csv:
+    writer = csv.DictWriter(modules_csv, fieldnames=fields)
+    writer.writeheader()
+    for row in rows:
+      writer.writerow(row)
+
+def get_dependency_chains(all_modules, module, visited=[]):
+  """Get all of the dependency chains for a module recursively."""
+  prefix = ""
+  for _ in visited:
+    prefix += "  "
+  visited = visited + [module["name"],]
+  chains = []
+  for dependency_name in module["dependencies"]:
+    if dependency_name in visited:
+      continue
+    dependency_module = all_modules.get(dependency_name)
+    if not dependency_module:
+      continue
+    for chain in get_dependency_chains(all_modules, dependency_module, visited):
+      newchain = [(module["name"], set(module["class"])),] + chain
+      chains.append(newchain)
+
+      
+  if chains:
+    return chains
+  return [[(module["name"], set(module["class"])),],]
+  
+def main():
+  # Assert that we're at the top of the tree
+  if not os.path.exists("build/make/envsetup.sh"):
+    sys.stderr.write("This script should be run from the top of the tree\n")
+    sys.exit(1)
+
+  # Figure out the out directory
+  product_out = get_build_var("PRODUCT_OUT")
+
+  # Load module-info.json into a list of dicts
+  with open(os.path.sep.join((product_out, "module-info.json"))) as f:
+    all_modules = json.load(f)
+  for name, module in all_modules.items():
+    module["name"] = name
+
+  # Get git projects, with trailing '/' and sorted by descending length,
+  # so substring matches will work.
+  git_projects = get_git_projects()
+  git_projects = [project + "/" for project in git_projects]
+  git_projects.sort(key=lambda project: -len(project))
+
+  # Add partitions
+  for module in all_modules.values():
+    module["partitions"] = get_partitions_for(product_out, module)
+
+  # Map partitions to API domains
+      # TODO: Pull api_domain transitively from dependencies for unknown modules?
+      # TODO: Maybe base it on API level and vendor_available?
+  API_DOMAINS = {
+    "system": "SYSTEM",
+    "fake_packages": "TESTS",
+    "data": "TESTS",
+    "testcases": "TESTS",
+    "product": "SYSTEM",
+    "system_ext": "SYSTEM",
+    "vendor": "VENDOR",
+    "apex": "APEX",
+    "debug_ramdisk": "VENDOR",
+    "recovery": "VENDOR",
+    "vendor_ramdisk": "VENDOR",
+    "root": "VENDOR",
+    "ramdisk": "VENDOR",
+  }
+  for module in all_modules.values():
+    module["api_domains"] = set([API_DOMAINS[partition] for partition
+        in module["partitions"].keys()])
+
+  # Fill in the transitive_dependencies field
+  build_transitive_dependencies(all_modules)
+
+  # Dependencies that cross api domain boundaries
+  for name, module in all_modules.items():
+    module["cross_api_domain_dependencies"] = []
+    for dependency_name in module["dependencies"]:
+      dependency_module = all_modules.get(dependency_name)
+      if not dependency_module:
+        continue
+      if module["api_domains"] - dependency_module["api_domains"]:
+        module["cross_api_domain_dependencies"].append(dependency_name)
+
+  # Dependencies that are used across api domain boundaries
+  # module_name --> set(dependent_module_names)
+  used_across_boundaries = {}
+  for name, module in all_modules.items():
+    for dependency_name in module["cross_api_domain_dependencies"]:
+      used_across_boundaries.setdefault(dependency_name, set()).add(name)
+  if False:
+    print("\nModules used across api boundaries\n----------------------------------")
+    for name, dependents in used_across_boundaries.items():
+      print("%-40s %-40s %s" % (name, all_modules[name]["class"],
+                                list(all_modules[name]["partitions"].keys()), ))
+      for dependent in dependents:
+        print("    %-40s %-40s %s" % (dependent, all_modules[dependent]["class"],
+                                  list(all_modules[dependent]["partitions"].keys()), ))
+
+
+  # Dependency chains starting with vendor installed modules
+  for name, module in all_modules.items():
+    if "VENDOR" not in module["api_domains"]:
+      continue
+    # Shortcut for performance / testing
+    if not module["cross_api_domain_dependencies"]:
+      continue
+    print()
+    print(module)
+    for chain in get_dependency_chains(all_modules, module):
+      print("-----> %s" % (chain, ))
+    return
+
+  # Add git projects
+  for module in all_modules.values():
+    module["git_projects"] = [get_git_project_for(git_projects, path) for path in module["path"]]
+
+  # Output the modules, grouped by partition
+  if True:
+    # Group by partition
+    modules_by_partition = {}
+    for module in all_modules.values():
+      for partition in module["partitions"]:
+        modules_by_partition.setdefault(partition, []).append(module)
+
+    # Prepare the output
+    output = []
+    for partition in sorted(modules_by_partition.keys()):
+      modules = modules_by_partition[partition]
+      modules.sort(key=lambda m: m["name"])
+      output.append({"partitions": partition})
+      for module in modules:
+        output.append({
+          "name": module["name"],
+          "git_projects": " ".join(module["git_projects"])
+        })
+      output.append({})
+
+    # Write the output
+    write_csv("modules.csv", output, ["partitions", "name", "git_projects"])
+    
+  # Output the git projects and which partitions their modules appear in
+  if True:
+    # Group by project
+    modules_by_project = {}
+    for project in git_projects:
+      modules_by_project[project] = [module for name, module in all_modules.items()
+          if project in module["git_projects"]]
+
+    # Prepare the output
+    output = []
+    for project in sorted(modules_by_project.keys()):
+      modules = modules_by_project[project]
+      modules.sort(key=lambda m: m["name"])
+      output.append({"git_project": project})
+      for module in modules:
+        # Skip tests for now
+        if module["api_domains"] == set(["TESTS"]):
+          continue
+        output.append({
+          "name": module["name"],
+          "class": " ".join(module["class"]),
+          "partitions": " ".join(module["partitions"]),
+          "api_domains": " ".join(module["api_domains"]),
+          "cross_api_domain_dependencies": " ".join(module["cross_api_domain_dependencies"])
+        })
+      output.append({})
+
+    # Write the output
+    write_csv("projects.csv", output, [
+          "git_project",
+          "name",
+          "class",
+          "partitions",
+          "api_domains",
+          "cross_api_domain_dependencies",
+        ])
+
+if __name__ == "__main__":
+  main()
+
+# vim: ts=2 sw=2 nocindent
