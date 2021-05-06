@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010553912",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1695271?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e472942b_a8c9c68d",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-05-06T20:09:47Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 1217,
+        "startChar": 68,
+        "endLine": 1217,
+        "endChar": 69
+      },
+      "revId": "8bdf4e22dfc1cc57c32e17672f294790597caa3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010553916",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1695271?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "c0994592_cf259294",
+          "description": "Change to \"core/main.mk\"",
+          "replacements": [
+            {
+              "path": "core/main.mk",
+              "range": {
+                "startLine": 1220,
+                "startChar": 14,
+                "endLine": 1220,
+                "endChar": 21
+              },
+              "replacement": "the"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "59d9d8d2_2dc87dc3",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-05-06T20:09:47Z",
+      "side": 1,
+      "message": "Common typo found: \"the the\" -- should it be \"the\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 1220,
+        "startChar": 14,
+        "endLine": 1220,
+        "endChar": 21
+      },
+      "revId": "8bdf4e22dfc1cc57c32e17672f294790597caa3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
