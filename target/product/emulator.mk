@@ -20,6 +20,7 @@
 
 # Device modules
 PRODUCT_PACKAGES += \
+    ANGLE \
     CarrierConfig \
 
 # need this for gles libraries to load properly
@@ -58,3 +59,6 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 # disable setupwizard
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.setupwizard.mode=DISABLED
+
+PRODUCT_PROPERTY_OVERRIDES += ro.gfx.angle.supported=true
+
