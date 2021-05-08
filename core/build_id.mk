@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (27ec57 Merge "Fix the KMI version mismatch")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ2A.210505.003
+>>>>>>> BRANCH (638a6c Version bump to RQ2A.210505.003 [core/build_id.mk])
