@@ -36,3 +36,14 @@ json_start =$= $(eval _json_contents := {$$(newline))$(eval _json_indent := $$(4
 json_end =$= $(eval _json_contents := $$(subst $$(comma)$$(newline)__SV_END,$$(newline),$$(_json_contents)__SV_END}$$(newline)))
 
 json_contents =$= $(_json_contents)
+
+# only want to substitute json values, but patsubst removes all newlines, making the file difficult to use
+# change to use patsubst instead once buildifier is checked in
+# $1 from
+# $2 to
+# $3 text
+_substituteValue =$= $(subst ": $1,": $2,$3)
+
+# add_json_* does not do any escaping,
+# to make the json contents compatible with Starlark, we change the casing of true/false
+starlark_contents =$= $(call _substituteValue,true,True,$(call _substituteValue,false,False,$(_json_contents)))
