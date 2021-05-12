@@ -268,6 +268,17 @@ $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
 
+ifeq ($(WRITE_BAZEL_VARIABLES),true)
+bazel_warning = $(pound) GENERATED FOR BAZEL FROM PRODUCT CONFIG. DO NOT EDIT$(newline)$(newline)
+bazel_contents =$= $(bazel_warning)_product_vars$(space)=$(space)$(starlark_contents)$(newline)$(newline)product_vars$(space)=$(space)_product_vars$(newline)
+bazel_dir =$= $(SOONG_OUT_DIR)/soong_injection/product_config
+bazel_variables := $(bazel_dir)/product_variables.bzl
+$(shell mkdir -p $(bazel_dir))
+$(file >$(bazel_variables),$(bazel_contents))
+$(file >$(bazel_dir)/BUILD,$(bazel_warning))
+endif
+
+# only update if the contents changed or SOONG_VARIABLES did not exist
 $(shell if ! cmp -s $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES); then \
 	  mv $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES); \
 	else \
