@@ -165,7 +165,7 @@ class DynamicPartitionSizeChecker(object):
     sum_size = Expression("sum of sizes of {}".format(partition_names),
                           "+".join(str(size) for size in partition_size_list),
                           sum(partition_size_list))
-    sum_size.CheckLe(max_size)
+    sum_size.CheckLt(max_size)
     if error_size:
       sum_size.CheckLe(error_size)
     if warn_size:
