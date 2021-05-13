@@ -206,7 +206,7 @@ $(INSTALLED_SDK_BUILD_PROP_TARGET): $(INSTALLED_BUILD_PROP_TARGET)
 	@mkdir -p $(dir $@)
 	$(hide) grep -v "$(subst $(space),\|,$(strip \
 	            $(sdk_build_prop_remove)))" $< > $@.tmp
-	$(hide) for x in $(sdk_build_prop_remove); do \
+	$(hide) for x in $(strip $(sdk_build_prop_remove)); do \
 	            echo "$$x"generic >> $@.tmp; done
 	$(hide) mv $@.tmp $@
 
@@ -339,8 +339,8 @@ $(3)/$(DEPMOD_STAGING_SUBDIR)/modules.dep: $(1) $(6)
 	  find $$(PRIVATE_MODULE_DIR) -type f -name *.ko | xargs basename -a > $$(PRIVATE_LOAD_FILE); \
 	)
 	$(if $(1),\
-	  cp $$(PRIVATE_MODULES) $$(PRIVATE_MODULE_DIR)/; \
-	  for MODULE in $$(PRIVATE_LOAD_MODULES); do \
+	  cp $(strip $$(PRIVATE_MODULES)) $$(PRIVATE_MODULE_DIR)/; \
+	  for MODULE in $(strip $$(PRIVATE_LOAD_MODULES)); do \
 	    basename $$$$MODULE >> $$(PRIVATE_LOAD_FILE); \
 	  done; \
 	)
@@ -659,7 +659,7 @@ PGO_PROFILE_MISSING := $(PRODUCT_OUT)/pgo_profile_file_missing.txt
 $(PGO_PROFILE_MISSING):
 	@rm -f $@
 	echo "# Modules missing PGO profile files" >> $@
-	for m in $(SOONG_MODULES_MISSING_PGO_PROFILE_FILE); do echo $$m >> $@; done
+	for m in $(strip $(SOONG_MODULES_MISSING_PGO_PROFILE_FILE)); do echo $$m >> $@; done
 
 $(call dist-for-goals,droidcore,$(PGO_PROFILE_MISSING))
 
@@ -5079,10 +5079,10 @@ endif
 ifeq ($(AB_OTA_UPDATER),true)
 	@# When using the A/B updater, include the updater config files in the zip.
 	$(hide) cp $(TOPDIR)system/update_engine/update_engine.conf $(zip_root)/META/update_engine_config.txt
-	$(hide) for part in $(AB_OTA_PARTITIONS); do \
+	$(hide) for part in $(strip $(AB_OTA_PARTITIONS)); do \
 	  echo "$${part}" >> $(zip_root)/META/ab_partitions.txt; \
 	done
-	$(hide) for conf in $(AB_OTA_POSTINSTALL_CONFIG); do \
+	$(hide) for conf in $(strip $(AB_OTA_POSTINSTALL_CONFIG)); do \
 	  echo "$${conf}" >> $(zip_root)/META/postinstall_config.txt; \
 	done
 ifdef OSRELEASED_DIRECTORY
@@ -5865,7 +5865,7 @@ $(INTERNAL_SDK_TARGET): PRIVATE_INPUT_FILES := $(sdk_atree_files)
 $(INTERNAL_SDK_TARGET): $(deps)
 	@echo "Package SDK: $@"
 	$(hide) rm -rf $(PRIVATE_DIR) $@
-	$(hide) for f in $(target_gnu_MODULES); do \
+	$(hide) for f in $(strip $(target_gnu_MODULES)); do \
 	  if [ -f $$f ]; then \
 	    echo SDK: $(if $(SDK_GNU_ERROR),ERROR:,warning:) \
 	        including GNU target $$f >&2; \
