@@ -75,10 +75,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hiddenapi-package-whitelist.xml \
 
+# Thermal cutoff value set to THERMAL_STATUS_MODERATE
 PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.usejit=true \
     dalvik.vm.usejitprofiles=true \
     dalvik.vm.dexopt.secondary=true \
+    dalvik.vm.dexopt.thermal-cutoff=2 \
     dalvik.vm.appimageformat=lz4
 
 PRODUCT_SYSTEM_PROPERTIES += \
