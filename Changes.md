@@ -3,7 +3,7 @@
 ## Dexpreopt starts enforcing `<uses-library>` checks (for Java modules)
 
 In order to construct correct class loader context for dexpreopt, build system
-needs to know about the shared library dependencies of Java modules listed in
+needs to know about ttestinghe shared library dependencies of Java modules listed in
 the `<uses-library>` tags in the manifest. Since the build system does not have
 access to the manifest contents, that information must be present in the build
 files. In simple cases Soong is able to infer it from its knowledge of Java SDK
