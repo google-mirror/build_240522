@@ -1691,6 +1691,14 @@ function _trigger_build()
     fi
 )
 
+function b()
+(
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    m nothing GENERATE_BAZEL_FILES=true
+    # Run Bazel using the synthetic workspace as the --package_path.
+    "$(gettop)/tools/bazel" "$@" --config=bp2build
+)
+
 function m()
 (
     _trigger_build "all-modules" "$@"
