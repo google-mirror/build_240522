@@ -125,6 +125,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
     pm.dexopt.ab-ota?=speed-profile \
     pm.dexopt.inactive?=verify \
     pm.dexopt.cmdline?=verify \
+    pm.dexopt.dm-no-profile?=verify \
     pm.dexopt.shared?=speed
 
 # Pass file with the list of updatable boot class path packages to dex2oat.
