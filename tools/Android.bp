@@ -89,3 +89,17 @@ genrule_defaults {
   out: ["kernel_release.txt"],
   cmd: "$(location) --tools lz4:$(location lz4) --input $(in) --output-release > $(out)"
 }
+
+python_binary_host {
+  name: "api_versions_trimmer",
+  srcs: ["api_versions_trimmer.py"],
+  version: {
+    py2: {
+      enabled: false,
+    },
+    py3: {
+      enabled: true,
+    },
+  },
+}
+
