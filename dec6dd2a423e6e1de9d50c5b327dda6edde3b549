@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "664c052b_774506d6",
+        "filename": "tools/api_versions_trimmer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1787007
+      },
+      "writtenOn": "2021-05-26T16:18:50Z",
+      "side": 1,
+      "message": "this file still needs a clean up, tests, etc",
+      "revId": "dec6dd2a423e6e1de9d50c5b327dda6edde3b549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
