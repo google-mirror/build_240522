@@ -1,3 +1,4 @@
+test
 # Build System Changes for Android.mk Writers
 
 ## Dexpreopt starts enforcing `<uses-library>` checks (for Java modules)
