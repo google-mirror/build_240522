@@ -1567,9 +1567,8 @@ vbmetasystemimage: $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET)
 .PHONY: vbmetavendorimage
 vbmetavendorimage: $(INSTALLED_VBMETA_VENDORIMAGE_TARGET)
 
-# Build files and then package it into the rom formats
-.PHONY: droidcore
-droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
+DROIDCORE_DEPS := \
+    $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
     $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -1626,6 +1625,15 @@ droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_FILES_JSON_RECOVERY) \
     $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
     soong_docs
+
+# Build files and then package it into the rom formats
+.PHONY: droidcore
+droidcore: $(DROIDCORE_DEPS)
+
+# The droidcore-unbundled target is like droidcore, but it avoids a lot of the
+# dist associated with droidcore.
+.PHONY: droidcore-unbundled
+droidcore-unbundled: $(DROIDCORE_DEPS)
 
 # dist_files only for putting your library into the dist directory with a full build.
 .PHONY: dist_files
@@ -1702,8 +1710,32 @@ $(eval $(call combine-notice-files, html, \
     $(apps_only_installed_files)))
 
 
-else ifeq (,$(TARGET_BUILD_UNBUNDLED))
+else ifeq ($(TARGET_BUILD_UNBUNDLED),$(TARGET_BUILD_UNBUNDLED_IMAGE))
+
+  # Truth table for entering this block of code:
+  # TARGET_BUILD_UNBUNDLED | TARGET_BUILD_UNBUNDLED_IMAGE | Action
+  # -----------------------|------------------------------|-------------------------
+  # not set                | not set                      | droidcore path
+  # not set                | true                         | invalid
+  # true                   | not set                      | skip
+  # true                   | true                         | droidcore-unbundled path
+
+  # We dist the following targets only for droidcore full build. These items
+  # can include java-related targets that would cause building framework java
+  # sources in a droidcore full build.
+
   $(call dist-for-goals, droidcore, \
+    $(APPCOMPAT_ZIP) \
+    $(DEXPREOPT_CONFIG_ZIP) \
+    $(DEXPREOPT_TOOLS_ZIP) \
+  )
+
+  # We dist the following targets for either droidcore or droidcore-unbundled.
+  # The droidcore-unbundled target is like droidcore, but it's used only for an
+  # unbundled build, so we want to avoid disting targets that would cause
+  # building java sources.
+
+  $(call dist-for-goals, droidcore droidcore-unbundled, \
     $(INTERNAL_UPDATE_PACKAGE_TARGET) \
     $(INTERNAL_OTA_PACKAGE_TARGET) \
     $(INTERNAL_OTA_METADATA) \
@@ -1714,9 +1746,6 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
     $(PROGUARD_DICT_ZIP) \
     $(PROGUARD_USAGE_ZIP) \
     $(COVERAGE_ZIP) \
-    $(APPCOMPAT_ZIP) \
-    $(DEXPREOPT_CONFIG_ZIP) \
-    $(DEXPREOPT_TOOLS_ZIP) \
     $(INSTALLED_FILES_FILE) \
     $(INSTALLED_FILES_JSON) \
     $(INSTALLED_FILES_FILE_VENDOR) \
@@ -1745,11 +1774,11 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
     $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
     $(INSTALLED_MISC_INFO_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
-   )
+  )
 
   # Put a copy of the radio/bootloader files in the dist dir.
   $(foreach f,$(INSTALLED_RADIOIMAGE_TARGET), \
-    $(call dist-for-goals, droidcore, $(f)))
+    $(call dist-for-goals, droidcore droidcore-unbundled, $(f)))
 
   ifneq ($(ANDROID_BUILD_EMBEDDED),true)
     $(call dist-for-goals, droidcore, \
@@ -1758,13 +1787,13 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
     )
   endif
 
-  $(call dist-for-goals, droidcore, \
+  $(call dist-for-goals, droidcore droidcore-unbundled, \
     $(INSTALLED_FILES_FILE_ROOT) \
     $(INSTALLED_FILES_JSON_ROOT) \
   )
 
   ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
-    $(call dist-for-goals, droidcore, \
+    $(call dist-for-goals, droidcore droidcore-unbundled, \
       $(INSTALLED_FILES_FILE_RAMDISK) \
       $(INSTALLED_FILES_JSON_RAMDISK) \
       $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
@@ -1784,40 +1813,49 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
   endif
 
   ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
-    $(call dist-for-goals, droidcore, \
+    $(call dist-for-goals, droidcore droidcore-unbundled, \
       $(recovery_ramdisk) \
     )
   endif
 
-  ifeq ($(EMMA_INSTRUMENT),true)
-    $(call dist-for-goals, dist_files, $(JACOCO_REPORT_CLASSES_ALL))
-  endif
+  ifeq (,$(TARGET_BUILD_UNBUNDLED_IMAGE))
 
-  # Put XML formatted API files in the dist dir.
-  $(TARGET_OUT_COMMON_INTERMEDIATES)/api.xml: $(call java-lib-files,android_stubs_current) $(APICHECK)
-  $(TARGET_OUT_COMMON_INTERMEDIATES)/system-api.xml: $(call java-lib-files,android_system_stubs_current) $(APICHECK)
-  $(TARGET_OUT_COMMON_INTERMEDIATES)/module-lib-api.xml: $(call java-lib-files,android_module_lib_stubs_current) $(APICHECK)
-  $(TARGET_OUT_COMMON_INTERMEDIATES)/system-server-api.xml: $(call java-lib-files,android_system_server_stubs_current) $(APICHECK)
-  $(TARGET_OUT_COMMON_INTERMEDIATES)/test-api.xml: $(call java-lib-files,android_test_stubs_current) $(APICHECK)
+    ifeq ($(EMMA_INSTRUMENT),true)
+      $(call dist-for-goals, dist_files, $(JACOCO_REPORT_CLASSES_ALL))
+    endif
 
-  api_xmls := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/,api.xml system-api.xml module-lib-api.xml system-server-api.xml test-api.xml)
-  $(api_xmls):
+    # Put XML formatted API files in the dist dir.
+    $(TARGET_OUT_COMMON_INTERMEDIATES)/api.xml: $(call java-lib-files,android_stubs_current) $(APICHECK)
+    $(TARGET_OUT_COMMON_INTERMEDIATES)/system-api.xml: $(call java-lib-files,android_system_stubs_current) $(APICHECK)
+    $(TARGET_OUT_COMMON_INTERMEDIATES)/module-lib-api.xml: $(call java-lib-files,android_module_lib_stubs_current) $(APICHECK)
+    $(TARGET_OUT_COMMON_INTERMEDIATES)/system-server-api.xml: $(call java-lib-files,android_system_server_stubs_current) $(APICHECK)
+    $(TARGET_OUT_COMMON_INTERMEDIATES)/test-api.xml: $(call java-lib-files,android_test_stubs_current) $(APICHECK)
+
+    api_xmls := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/,api.xml system-api.xml module-lib-api.xml system-server-api.xml test-api.xml)
+    $(api_xmls):
 	$(hide) echo "Converting API file to XML: $@"
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(APICHECK_COMMAND) --input-api-jar $< --api-xml $@
 
-  $(call dist-for-goals, dist_files, $(api_xmls))
-  api_xmls :=
+    $(call dist-for-goals, dist_files, $(api_xmls))
+    api_xmls :=
 
-  ifdef CLANG_COVERAGE
-    $(foreach f,$(SOONG_NDK_API_XML), \
-        $(call dist-for-goals,droidcore,$(f):ndk_apis/$(notdir $(f))))
+    ifdef CLANG_COVERAGE
+      $(foreach f,$(SOONG_NDK_API_XML), \
+          $(call dist-for-goals,droidcore,$(f):ndk_apis/$(notdir $(f))))
+    endif
+
+    # Building a full system-- the default is to build droidcore
+    droid_targets: droidcore dist_files
+
+  else
+
+    # Building an unbundled system-- the default is to build droidcore-unbundled
+    droid_targets: droidcore-unbundled
+
   endif
 
-# Building a full system-- the default is to build droidcore
-droid_targets: droidcore dist_files
-
-endif # !TARGET_BUILD_UNBUNDLED
+endif # TARGET_BUILD_UNBUNDLED == TARGET_BUILD_UNBUNDLED
 
 .PHONY: docs
 docs: $(ALL_DOCS)
