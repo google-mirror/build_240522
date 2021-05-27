@@ -1567,9 +1567,8 @@ vbmetasystemimage: $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET)
 .PHONY: vbmetavendorimage
 vbmetavendorimage: $(INSTALLED_VBMETA_VENDORIMAGE_TARGET)
 
-# Build files and then package it into the rom formats
-.PHONY: droidcore
-droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
+DROIDCORE_DEPS := \
+    $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
     $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -1626,6 +1625,15 @@ droidcore: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
     $(INSTALLED_FILES_JSON_RECOVERY) \
     $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
     soong_docs
+
+# Build files and then package it into the rom formats
+.PHONY: droidcore
+droidcore: $(DROIDCORE_DEPS)
+
+# The droidcore-unbundled target is like droidcore, but it avoids a lot of the
+# dist associated with droidcore.
+.PHONY: droidcore-unbundled
+droidcore-unbundled: $(DROIDCORE_DEPS)
 
 # dist_files only for putting your library into the dist directory with a full build.
 .PHONY: dist_files
@@ -1816,6 +1824,87 @@ else ifeq (,$(TARGET_BUILD_UNBUNDLED))
 
 # Building a full system-- the default is to build droidcore
 droid_targets: droidcore dist_files
+
+else ifneq (,$(TARGET_BUILD_UNBUNDLED_IMAGE))
+
+  $(call dist-for-goals, droidcore-unbundled, \
+    $(INTERNAL_UPDATE_PACKAGE_TARGET) \
+    $(INTERNAL_OTA_PACKAGE_TARGET) \
+    $(INTERNAL_OTA_METADATA) \
+    $(INTERNAL_OTA_PARTIAL_PACKAGE_TARGET) \
+    $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET) \
+    $(BUILT_OTATOOLS_PACKAGE) \
+    $(SYMBOLS_ZIP) \
+    $(PROGUARD_DICT_ZIP) \
+    $(PROGUARD_USAGE_ZIP) \
+    $(COVERAGE_ZIP) \
+    $(INSTALLED_FILES_FILE) \
+    $(INSTALLED_FILES_JSON) \
+    $(INSTALLED_FILES_FILE_VENDOR) \
+    $(INSTALLED_FILES_JSON_VENDOR) \
+    $(INSTALLED_FILES_FILE_ODM) \
+    $(INSTALLED_FILES_JSON_ODM) \
+    $(INSTALLED_FILES_FILE_VENDOR_DLKM) \
+    $(INSTALLED_FILES_JSON_VENDOR_DLKM) \
+    $(INSTALLED_FILES_FILE_ODM_DLKM) \
+    $(INSTALLED_FILES_JSON_ODM_DLKM) \
+    $(INSTALLED_FILES_FILE_PRODUCT) \
+    $(INSTALLED_FILES_JSON_PRODUCT) \
+    $(INSTALLED_FILES_FILE_SYSTEM_EXT) \
+    $(INSTALLED_FILES_JSON_SYSTEM_EXT) \
+    $(INSTALLED_FILES_FILE_SYSTEMOTHER) \
+    $(INSTALLED_FILES_JSON_SYSTEMOTHER) \
+    $(INSTALLED_FILES_FILE_RECOVERY) \
+    $(INSTALLED_FILES_JSON_RECOVERY) \
+    $(INSTALLED_BUILD_PROP_TARGET):build.prop \
+    $(INSTALLED_VENDOR_BUILD_PROP_TARGET):build.prop-vendor \
+    $(INSTALLED_PRODUCT_BUILD_PROP_TARGET):build.prop-product \
+    $(INSTALLED_ODM_BUILD_PROP_TARGET):build.prop-odm \
+    $(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET):build.prop-system_ext \
+    $(INSTALLED_RAMDISK_BUILD_PROP_TARGET):build.prop-ramdisk \
+    $(BUILT_TARGET_FILES_PACKAGE) \
+    $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
+    $(INSTALLED_MISC_INFO_TARGET) \
+    $(INSTALLED_RAMDISK_TARGET) \
+   )
+
+  # Put a copy of the radio/bootloader files in the dist dir.
+  $(foreach f,$(INSTALLED_RADIOIMAGE_TARGET), \
+    $(call dist-for-goals, droidcore-unbundled, $(f)))
+
+  $(call dist-for-goals, droidcore-unbundled, \
+    $(INSTALLED_FILES_FILE_ROOT) \
+    $(INSTALLED_FILES_JSON_ROOT) \
+  )
+
+  ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(call dist-for-goals, droidcore-unbundled, \
+      $(INSTALLED_FILES_FILE_RAMDISK) \
+      $(INSTALLED_FILES_JSON_RAMDISK) \
+      $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_JSON_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_FILE_VENDOR_RAMDISK) \
+      $(INSTALLED_FILES_JSON_VENDOR_RAMDISK) \
+      $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK) \
+      $(INSTALLED_DEBUG_RAMDISK_TARGET) \
+      $(INSTALLED_DEBUG_BOOTIMAGE_TARGET) \
+      $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET) \
+      $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET) \
+      $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET) \
+      $(INSTALLED_VENDOR_RAMDISK_TARGET) \
+      $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET) \
+    )
+  endif
+
+  ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+    $(call dist-for-goals, droidcore-unbundled, \
+      $(recovery_ramdisk) \
+    )
+  endif
+
+# Building an unbuned system-- the default is to build droidcore-unbundled
+droid_targets: droidcore-unbundled
 
 endif # !TARGET_BUILD_UNBUNDLED
 
