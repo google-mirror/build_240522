@@ -2515,6 +2515,15 @@ $(2): $(1)
 	$$(copy-file-to-target)
 endef
 
+# Define a rule to symlink a file. For use via $(eval).
+# $(1): target
+# $(2): symlink destination
+define symlink-one-file
+$(2): $(1)
+	@echo "Symlink: $$@"
+	$$(symlink-file-to-target)
+endef
+
 define copy-and-uncompress-dexs
 $(2): $(1) $(ZIPALIGN) $(ZIP2ZIP)
 	@echo "Uncompress dexs in: $$@"
@@ -2556,6 +2565,22 @@ $(foreach f, $(1), $(strip \
     $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
       $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest)))) \
     $(_cmf_dest)))
+endef
+
+# Symlink many files.
+# $(1): The files to copy.  Each entry is a ':' separated src:dst pair
+# $(2): An optional directory to prepend to the destination
+# Evaluates to the list of the dst files (ie suitable for a dependency list)
+define symlink-many-files
+$(foreach f, $(1), $(strip \
+		$(eval _smf_tuple := $(subst :, ,$(f))) \
+		$(eval _smf_src := $(word 1,$(_smf_tuple))) \
+		$(eval _smf_dest := $(word 2,$(_smf_tuple))) \
+		$(if $(strip $(2)), \
+		  $(eval _smf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_smf_dest)))) \
+		$(if $(filter-out $(_smf_src), $(_smf_dest)), \
+			$(eval $(call symlink-one-file,$(_smf_src),$(_smf_dest)))) \
+		$(_smf_dest)))
 endef
 
 # Copy the file only if it's a well-formed init script file. For use via $(eval).
@@ -2700,6 +2725,13 @@ define copy-file-to-target
 @mkdir -p $(dir $@)
 $(hide) rm -f $@
 $(hide) cp "$<" "$@"
+endef
+
+# Symlink a single file from one place to another.
+define symlink-file-to-target
+@mkdir -p $(dir $@)
+$(hide) rm -f $@
+$(hide) ln -s "$(abspath "$<")" "$@"
 endef
 
 # The same as copy-file-to-target, but use the local

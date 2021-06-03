@@ -862,6 +862,163 @@ endif  # LOCAL_UNINSTALLABLE_MODULE
 endif  # LOCAL_COMPATIBILITY_SUITE
 
 ###########################################################
+## Pesto: Import the built target into a Bazel workspace.
+###########################################################
+ifdef LOCAL_GENERATE_SYNTHETIC_BAZEL_TARGET
+
+# Provide a shorthand for generating the prebuilts workspace.
+my_bazel_target := $(LOCAL_MODULE)-prebuilts_workspace
+.PHONY: $(my_bazel_target)
+
+ifeq ($(my_host_cross),true)
+  my_bazel_target_dir := /host_cross
+else ifneq ($(LOCAL_IS_HOST_MODULE),)
+  my_bazel_target_dir := /host
+else
+  my_bazel_target_dir := /device
+endif
+
+arch_dir :=
+multi_arch :=
+ifeq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)
+  multi_arch := true
+endif
+ifdef LOCAL_MULTILIB
+  multi_arch := true
+endif
+
+ifdef multi_arch
+arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+else
+ifeq ($(use_testcase_folder),true)
+  arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+endif
+endif
+
+my_bazel_base_install_path := $(SOONG_OUT_DIR)/workspace-prebuilts/$(LOCAL_PATH)/$(LOCAL_MODULE)
+
+# Install the module.
+my_bazel_install_path := $(my_bazel_base_install_path)$(my_bazel_target_dir)$(arch_dir)/$(my_installed_module_stem)
+
+$(my_bazel_install_path) : $(LOCAL_BUILT_MODULE)
+	@echo "Install to Bazel Prebuilts Workspace: $@"
+	$(symlink-file-to-target)
+
+$(my_bazel_target) : $(my_bazel_install_path)
+
+# If this corresponds to a test, then install the configuration files, test data, and lib/lib64 directories.
+ifdef LOCAL_COMPATIBILITY_SUITE
+
+# Install Test Data
+my_bazel_test_data :=
+
+# COMPATIBILITY_SUPPORT_FILES are already in the required format to symlink.
+my_bazel_test_data += $(LOCAL_COMPATIBILITY_SUPPORT_FILES)
+
+# LOCAL_TEST_DATA requires some modification.
+# Soong LOCAL_TEST_DATA is of the form <from_base>:<file>:<relative_install_path>
+# or <from_base>:<file>, to be installed to
+# <install_root>/<relative_install_path>/<file> or <install_root>/<file>,
+# respectively.
+ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  define prepare_bazel_test_data
+    _src_base := $$(call word-colon,1,$$(td))
+    _file := $$(call word-colon,2,$$(td))
+    _relative_install_path := $$(call word-colon,3,$$(td))
+    ifeq (,$$(_relative_install_path))
+        _relative_dest_file := $$(_file)
+    else
+        _relative_dest_file := $$(call append-path,$$(_relative_install_path),$$(_file))
+    endif
+    my_bazel_test_data += $$(call append-path,$$(_src_base),$$(_file)):$$(_relative_dest_file)
+  endef
+else
+  define prepare_bazel_test_data
+    _src_base := $$(call word-colon,1,$$(td))
+    _file := $$(call word-colon,2,$$(td))
+    ifndef _file
+      _file := $$(_src_base)
+      _src_base := $$(LOCAL_PATH)
+    endif
+    ifneq (,$$(findstring ..,$$(_file)))
+      $$(call pretty-error,LOCAL_TEST_DATA may not include '..': $$(_file))
+    endif
+    ifneq (,$$(filter/%,$$(_src_base) $$(_file)))
+      $$(call pretty-error,LOCAL_TEST_DATA may not include absolute paths: $$(_src_base) $$(_file))
+    endif
+    my_bazel_test_data += $$(call append-path,$$(_src_base),$$(_file)):$$(_file)
+  endef
+endif
+
+$(foreach td,$(LOCAL_TEST_DATA),$(eval $(prepare_bazel_test_data)))
+
+my_bazel_test_data := $(call symlink-many-files,$(my_bazel_test_data),$(my_bazel_base_install_path)$(my_bazel_target_dir)$(arch_dir))
+
+$(my_bazel_target) : $(my_bazel_test_data)
+
+# Install the Test Config files
+# Ensure that for multilib targets, we only install the configuration file once per target.
+ifndef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_test_configs_installed
+$(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_test_configs_installed := true
+
+ifneq (,$(LOCAL_FULL_TEST_CONFIG))
+  test_config := $(LOCAL_FULL_TEST_CONFIG)
+else ifneq (,$(LOCAL_TEST_CONFIG))
+  test_config := $(LOCAL_PATH)/$(LOCAL_TEST_CONFIG)
+else
+  test_config := $(wildcard $(LOCAL_PATH)/AndroidTest.xml)
+endif
+
+my_bazel_test_config_pairs :=
+my_bazel_test_config_pairs += $(test_config):$(LOCAL_MODULE).config
+
+ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
+$(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
+  $(eval my_bazel_test_config_pairs += $(extra_config):$(notdir $(extra_config))))
+endif
+
+my_bazel_installed_test_configs := $(call symlink-many-files,$(my_bazel_test_config_pairs),$(my_bazel_base_install_path)$(my_bazel_target_dir))
+$(my_bazel_target) : $(my_bazel_installed_test_configs)
+endif # $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_test_configs_installed
+
+# Install links to the lib/lib64 directories, unsure if this is actually needed or not, but
+# this is inline with what ATest currently does for tests, so leaving this as is for now with the
+# below TODO.
+#
+# This may result in dangling links, however this should be OK since it is only used for setting
+# LD_LIBRARY_PATH during test execution and will be cleaned up under normal clean actions.
+#
+# TODO(karlshaffer): Investigate what is _actually_ needed from these directories.
+#
+# Ensure that for multilib targets, we only install lib/lib64 a single time.
+ifndef $(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_lib_installed
+$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_lib_installed := true
+
+my_bazel_lib_path = $(my_bazel_base_install_path)/lib
+my_bazel_lib64_path = $(my_bazel_base_install_path)/lib64
+
+$(my_bazel_lib_path) :
+	@mkdir -p $(dir $@)
+	$(hide) rm -f $@
+	$(hide) ln -s "$(abspath "$(HOST_OUT)/lib")" "$@"
+
+$(my_bazel_lib64_path) :
+	@mkdir -p $(dir $@)
+	$(hide) rm -f $@
+	$(hide) ln -s "$(abspath "$(HOST_OUT)/lib64")" "$@"
+
+$(my_bazel_target) : $(my_bazel_lib_path) $(my_bazel_lib64_path)
+endif # $(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_bazel_lib_installed
+endif # LOCAL_COMPATIBILITY_SUITE
+
+arch_dir :=
+multi_arch :=
+
+# Ensure that building the module will build the prebuilts_workspace as well.
+$(LOCAL_MODULE) : $(my_bazel_target)
+endif # LOCAL_GENERATE_SYNTHETIC_BAZEL_TARGET
+
+###########################################################
 ## Add test module to ALL_DISABLED_PRESUBMIT_TESTS if LOCAL_PRESUBMIT_DISABLED is set to true.
 ###########################################################
 ifeq ($(LOCAL_PRESUBMIT_DISABLED),true)
