@@ -1,3 +1,5 @@
+$(error exit early)
+
 ifndef KATI
 $(warning Calling make directly is no longer supported.)
 $(warning Either use 'envsetup.sh; m' or 'build/soong/soong_ui.bash --make-mode')
