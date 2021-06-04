@@ -74,45 +74,6 @@ else  # my_strip_module not true
   include $(BUILD_SYSTEM)/base_rules.mk
   built_module := $(LOCAL_BUILT_MODULE)
 
-ifdef prebuilt_module_is_a_library
-EXPORTS_LIST += $(intermediates)
-EXPORTS.$(intermediates).FLAGS := $(foreach d,$(LOCAL_EXPORT_C_INCLUDE_DIRS),-I $(d))
-EXPORTS.$(intermediates).DEPS := $(LOCAL_EXPORT_C_INCLUDE_DEPS)
-
-include $(BUILD_SYSTEM)/allowed_ndk_types.mk
-
-ifdef LOCAL_SDK_VERSION
-my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
-else ifdef LOCAL_USE_VNDK
-    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
-    _name := $(patsubst %.product,%,$(LOCAL_MODULE))
-    ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
-        ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
-            my_link_type := native:vndk
-        else
-            my_link_type := native:vndk_private
-        endif
-    else
-        ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
-            my_link_type := native:product
-        else
-            my_link_type := native:vendor
-        endif
-    endif
-else ifneq ($(filter $(TARGET_RECOVERY_OUT)/%,$(LOCAL_MODULE_PATH)),)
-my_link_type := native:recovery
-else
-my_link_type := native:platform
-endif
-
-# TODO: check dependencies of prebuilt files
-my_link_deps :=
-
-my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
-my_common :=
-include $(BUILD_SYSTEM)/link_type.mk
-endif  # prebuilt_module_is_a_library
-
 # The real dependency will be added after all Android.mks are loaded and the install paths
 # of the shared libraries are determined.
 ifdef LOCAL_INSTALLED_MODULE
@@ -153,6 +114,57 @@ $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)DEPENDENCIES_ON_SHARED_LIBRARIES += \
   $(my_register_name):$(LOCAL_INSTALLED_MODULE):$(subst $(space),$(comma),$(my_shared_libraries))
 endif  # my_shared_libraries
 endif  # LOCAL_INSTALLED_MODULE
+
+ifdef prebuilt_module_is_a_library
+EXPORTS_LIST += $(intermediates)
+EXPORTS.$(intermediates).FLAGS := $(foreach d,$(LOCAL_EXPORT_C_INCLUDE_DIRS),-I $(d))
+EXPORTS.$(intermediates).DEPS := $(LOCAL_EXPORT_C_INCLUDE_DEPS)
+
+include $(BUILD_SYSTEM)/allowed_ndk_types.mk
+
+ifdef LOCAL_SDK_VERSION
+my_link_type := native:ndk:$(my_ndk_stl_family):$(my_ndk_stl_link_type)
+my_warn_types := $(my_warn_ndk_types)
+my_allowed_types := $(my_allowed_ndk_types)
+else ifdef LOCAL_USE_VNDK
+    _name := $(patsubst %.vendor,%,$(LOCAL_MODULE))
+    _name := $(patsubst %.product,%,$(LOCAL_MODULE))
+    ifneq ($(filter $(_name),$(VNDK_CORE_LIBRARIES) $(VNDK_SAMEPROCESS_LIBRARIES) $(LLNDK_LIBRARIES)),)
+        ifeq ($(filter $(_name),$(VNDK_PRIVATE_LIBRARIES)),)
+            my_link_type := native:vndk
+        else
+            my_link_type := native:vndk_private
+        endif
+        my_warn_types :=
+        my_allowed_types := native:vndk native:vndk_private
+    else
+        ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+            my_link_type := native:product
+            my_warn_types :=
+            my_allowed_types := native:product native:vndk native:platform_vndk
+        else
+            my_link_type := native:vendor
+            my_warn_types :=
+            my_allowed_types := native:vendor native:vndk native:platform_vndk
+        endif
+    endif
+else ifneq ($(filter $(TARGET_RECOVERY_OUT)/%,$(LOCAL_MODULE_PATH)),)
+my_link_type := native:recovery
+my_warn_types :=
+# TODO(b/113303515) remove native:platform and my_allowed_ndk_types
+my_allowed_types := native:recovery native:platform native:platform_vndk $(my_allowed_ndk_types)
+else
+my_link_type := native:platform
+my_warn_types := $(my_warn_ndk_types)
+my_allowed_types := $(my_allowed_ndk_types) native:platform native:platform_vndk
+endif # LOCAL_SDK_VERSION
+
+my_link_deps := $(addprefix SHARED_LIBRARIES:,$(my_shared_libraries))
+
+my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
+my_common :=
+include $(BUILD_SYSTEM)/link_type.mk
+endif  # prebuilt_module_is_a_library
 
 # We need to enclose the above export_includes and my_built_shared_libraries in
 # "my_strip_module not true" because otherwise the rules are defined in dynamic_binary.mk.
