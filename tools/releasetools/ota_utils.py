@@ -35,6 +35,7 @@ OPTIONS.incremental_source = None
 OPTIONS.retrofit_dynamic_partitions = False
 OPTIONS.output_metadata_path = None
 OPTIONS.boot_variable_file = None
+OPTIONS.merge_target = False
 
 METADATA_NAME = 'META-INF/com/android/metadata'
 METADATA_PROTO_NAME = 'META-INF/com/android/metadata.pb'
@@ -333,6 +334,8 @@ def HandleDowngradeMetadata(metadata_proto, target_info, source_info):
   post_timestamp = target_info.GetBuildProp("ro.build.date.utc")
   pre_timestamp = source_info.GetBuildProp("ro.build.date.utc")
   is_downgrade = int(post_timestamp) < int(pre_timestamp)
+  if OPTIONS.merge_target:
+    is_downgrade = OPTIONS.downgrade
 
   if OPTIONS.spl_downgrade:
     metadata_proto.spl_downgrade = True
@@ -397,6 +400,54 @@ def CalculateRuntimeDevicesAndFingerprints(default_build_info,
     device_names.add(runtime_build_info.device)
     fingerprints.add(runtime_build_info.fingerprint)
   return device_names, fingerprints
+
+
+def CalculateMergeTimestamp(target_info, source_info):
+  if not OPTIONS.merge_target:
+    return
+
+  target_boot_timestamp = 0
+  source_boot_timestamp = 0
+  if target_info:
+    partition_prop = target_info.get("boot.build.prop")
+    if partition_prop:
+      boot_timestamp = partition_prop.GetProp("ro.bootimage.build.date.utc")
+      if boot_timestamp:
+        target_boot_timestamp = int(boot_timestamp)
+  if source_info:
+    partition_prop = source_info.get("boot.build.prop")
+    if partition_prop:
+      boot_timestamp = partition_prop.GetProp("ro.bootimage.build.date.utc")
+      if boot_timestamp:
+        source_boot_timestamp = int(boot_timestamp)
+  target_max_timestamp = max(target_boot_timestamp, source_boot_timestamp)
+  source_max_timestamp = source_boot_timestamp
+  for partition in PARTITIONS_WITH_BUILD_PROP:
+    partition_prop_key = "{}.build.prop".format(partition)
+    if partition == "boot":
+      partition_utc_key = "ro.bootimage.build.date.utc"
+    else:
+      partition_utc_key = "ro.{}.build.date.utc".format(partition)
+    if target_info:
+      partition_prop = target_info.get(partition_prop_key)
+      if partition_prop:
+        partition_timestamp = partition_prop.GetProp(partition_utc_key)
+        if partition_timestamp:
+          target_info[partition_prop_key].build_props[partition_utc_key] = str(target_max_timestamp)
+          logger.info("target %s %s %d -> %d", partition_prop_key, partition_utc_key, int(partition_timestamp), target_max_timestamp)
+    if source_info:
+      partition_prop = source_info.get(partition_prop_key)
+      if partition_prop:
+        partition_timestamp = partition_prop.GetProp(partition_utc_key)
+        if partition_timestamp:
+          source_partition_timestamp = int(partition_timestamp)
+          logger.info("source %s %s %d -> %d", partition_prop_key, partition_utc_key, int(partition_timestamp), source_max_timestamp)
+  if target_info:
+    target_info["build.prop"].build_props["ro.build.date.utc"] = str(target_max_timestamp)
+    logger.info("target %s %s %d -> %d", "build.prop", "ro.build.date.utc", int(target_boot_timestamp), target_max_timestamp)
+  if source_info:
+    source_info["build.prop"].build_props["ro.build.date.utc"] = str(source_max_timestamp)
+    logger.info("source %s %s %d -> %d", "build.prop", "ro.build.date.utc", int(source_boot_timestamp), source_max_timestamp)
 
 
 class PropertyFiles(object):

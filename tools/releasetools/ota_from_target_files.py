@@ -1084,6 +1084,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     target_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
     source_info = None
 
+  ota_utils.CalculateMergeTimestamp(target_info, source_info)
+
   additional_args = []
 
   # Prepare custom images.
@@ -1299,6 +1301,8 @@ def main(argv):
       OPTIONS.wipe_user_data = True
     elif o == "--vabc_downgrade":
       OPTIONS.vabc_downgrade = True
+    elif o == "--merge_target":
+      OPTIONS.merge_target = True
     else:
       return False
     return True
@@ -1343,6 +1347,7 @@ def main(argv):
                                  "disable_vabc",
                                  "spl_downgrade",
                                  "vabc_downgrade",
+                                 "merge_target",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
