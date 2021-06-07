@@ -43,7 +43,7 @@ PRODUCT_HOST_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml
 
-ifneq (REL,$(PLATFORM_VERSION_CODENAME))
+ifneq (true,$(PLATFORM_SDK_FINAL))
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.preview_sdk.xml:system/etc/permissions/android.software.preview_sdk.xml
 endif

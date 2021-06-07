@@ -130,8 +130,21 @@ endif
   PLATFORM_VERSION_CODENAME \
   PLATFORM_VERSION_ALL_CODENAMES
 
+# PLATFORM_SDK_FINAL is true if the SDK has been finalized.  This used
+# to be implied by PLATFORM_VERSION_CODENAME := REL, but has been split
+# out to faciliate finalizing the SDK in two steps.  First,
+# PLATFORM_SDK_FINAL is set to true and PLATFORM_SDK_VERSION is increased,
+# which will cause the build system to treat "current" as the new SDK
+# number rather than the PLATFORM_VERSION_CODENAME.  Later once all
+# prebuilt APKs with targetSdkVersion=$(PLATFORM_VERSION_CODENAME) have
+# been replaced with ones that use the new PLATFORM_SDK_VERSION the
+# PLATFORM_VERSION_CODENAME can be changed to REL.
+PLATFORM_SDK_FINAL :=
+.KATI_READONLY := \
+  PLATFORM_SDK_FINAL
+
 ifndef PLATFORM_VERSION
-  ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+  ifeq (true,$(PLATFORM_SDK_FINAL))
       PLATFORM_VERSION := $(PLATFORM_VERSION_LAST_STABLE)
   else
       PLATFORM_VERSION := $(PLATFORM_VERSION_CODENAME)
@@ -156,7 +169,7 @@ ifndef PLATFORM_SDK_VERSION
 endif
 .KATI_READONLY := PLATFORM_SDK_VERSION
 
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+ifeq (true,$(PLATFORM_SDK_FINAL))
   PLATFORM_PREVIEW_SDK_VERSION := 0
 else
   ifndef PLATFORM_PREVIEW_SDK_VERSION
@@ -183,7 +196,7 @@ ifndef DEFAULT_APP_TARGET_SDK
   # setting these in the .apk's AndroidManifest.xml.  It is either the code
   # name of the development build or, if this is a release build, the official
   # SDK version of this release.
-  ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+  ifeq (true,$(PLATFORM_SDK_FINAL))
     DEFAULT_APP_TARGET_SDK := $(PLATFORM_SDK_VERSION)
   else
     DEFAULT_APP_TARGET_SDK := $(PLATFORM_VERSION_CODENAME)
@@ -202,7 +215,7 @@ ifndef PLATFORM_VNDK_VERSION
   # After that the snapshot of the VNDK with this version will be generated.
   #
   # The VNDK version follows PLATFORM_SDK_VERSION.
-  ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+  ifeq (true,$(PLATFORM_SDK_FINAL))
     PLATFORM_VNDK_VERSION := $(PLATFORM_SDK_VERSION)
   else
     PLATFORM_VNDK_VERSION := $(PLATFORM_VERSION_CODENAME)

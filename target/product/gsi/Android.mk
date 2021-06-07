@@ -8,7 +8,7 @@ INTERNAL_VNDK_LIB_LIST := $(SOONG_VNDK_LIBRARIES_FILE)
 # This is the up-to-date list of vndk libs.
 # TODO(b/62012285): the lib list should be stored somewhere under
 # /prebuilts/vndk
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+ifeq (true,$(PLATFORM_SDK_FINAL))
 LATEST_VNDK_LIB_LIST := $(LOCAL_PATH)/$(PLATFORM_VNDK_VERSION).txt
 ifeq ($(wildcard $(LATEST_VNDK_LIB_LIST)),)
 $(error $(LATEST_VNDK_LIB_LIST) file not found. Please copy "$(LOCAL_PATH)/current.txt" to "$(LATEST_VNDK_LIB_LIST)" and commit a CL for release branch)
@@ -44,7 +44,7 @@ endif
 endif
 
 _vndk_check_failure_message := " error: VNDK library list has been changed.\n"
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+ifeq (true,$(PLATFORM_SDK_FINAL))
 _vndk_check_failure_message += "       Changing the VNDK library list is not allowed in API locked branches."
 else
 _vndk_check_failure_message += "       Run \`update-vndk-list.sh\` to update $(LATEST_VNDK_LIB_LIST)"
@@ -76,7 +76,7 @@ $(LOCAL_BUILT_MODULE):
 	@mkdir -p $(dir $@)
 	@rm -f $@
 	$(hide) echo "#!/bin/bash" > $@
-ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+ifeq (true,$(PLATFORM_SDK_FINAL))
 	$(hide) echo "echo Updating VNDK library list is NOT allowed in API locked branches." >> $@; \
 	        echo "exit 1" >> $@
 else

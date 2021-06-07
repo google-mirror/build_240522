@@ -97,7 +97,7 @@ $(addon_img_source_prop): $(PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP)
 	$(hide) sed \
 		-e 's/$${PLATFORM_VERSION}/$(PLATFORM_VERSION)/' \
 		-e 's/$${PLATFORM_SDK_VERSION}/$(PLATFORM_SDK_VERSION)/' \
-		-e 's/$${PLATFORM_VERSION_CODENAME}/$(subst REL,,$(PLATFORM_VERSION_CODENAME))/' \
+		-e 's/$${PLATFORM_VERSION_CODENAME}/$(if $(PLATFORM_SDK_FINAL),,$(PLATFORM_VERSION_CODENAME))/' \
 		-e 's/$${TARGET_ARCH}/$(TARGET_ARCH)/' \
 		-e 's/$${TARGET_CPU_ABI}/$(TARGET_CPU_ABI)/' \
 		$< > $@ && sed -i -e '/^AndroidVersion.CodeName=\s*$$/d' $@
