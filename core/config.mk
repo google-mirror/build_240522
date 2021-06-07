@@ -701,7 +701,7 @@ endif
 ifndef BOARD_SYSTEMSDK_VERSIONS
   ifdef PRODUCT_SHIPPING_API_LEVEL
   ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),28),)
-    ifeq (REL,$(PLATFORM_VERSION_CODENAME))
+    ifeq (true,$(PLATFORM_SDK_FINAL))
       BOARD_SYSTEMSDK_VERSIONS := $(PLATFORM_SDK_VERSION)
     else
       BOARD_SYSTEMSDK_VERSIONS := $(PLATFORM_VERSION_CODENAME)
@@ -777,7 +777,7 @@ $(error sepolicy_major_version does not match PLATFORM_SDK_VERSION, please updat
 endif
 
 TOT_SEPOLICY_VERSION := 10000.0
-ifneq (REL,$(PLATFORM_VERSION_CODENAME))
+ifneq (true,$(PLATFORM_SDK_FINAL))
     PLATFORM_SEPOLICY_VERSION := $(TOT_SEPOLICY_VERSION)
 else
     PLATFORM_SEPOLICY_VERSION := $(join $(addsuffix .,$(sepolicy_major_vers)), $(sepolicy_minor_vers))
