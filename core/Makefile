@@ -5362,6 +5362,7 @@ endif # DEX2OAT is set
 endif # BUILD_OS == linux
 
 DEXPREOPT_CONFIG_ZIP := $(PRODUCT_OUT)/dexpreopt_config.zip
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
 $(DEXPREOPT_CONFIG_ZIP): $(FULL_SYSTEMIMAGE_DEPS) \
 	    $(INTERNAL_RAMDISK_FILES) \
 	    $(INTERNAL_USERDATAIMAGE_FILES) \
@@ -5370,6 +5371,7 @@ $(DEXPREOPT_CONFIG_ZIP): $(FULL_SYSTEMIMAGE_DEPS) \
 	    $(INTERNAL_SYSTEM_EXTIMAGE_FILES) \
 	    $(DEX_PREOPT_CONFIG_FOR_MAKE) \
 	    $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE)
+endif
 
 $(DEXPREOPT_CONFIG_ZIP): $(SOONG_ZIP)
 	$(hide) mkdir -p $(dir $@) $(PRODUCT_OUT)/dexpreopt_config
@@ -5380,6 +5382,9 @@ ifneq (,$(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE))
 	$(hide) cp $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE) $(PRODUCT_OUT)/dexpreopt_config
 endif
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(PRODUCT_OUT)/dexpreopt_config -D $(PRODUCT_OUT)/dexpreopt_config
+
+.PHONY: dexpreopt_config_zip
+dexpreopt_config_zip: $(DEXPREOPT_CONFIG_ZIP)
 
 # -----------------------------------------------------------------
 # A zip of the symbols directory.  Keep the full paths to make it
