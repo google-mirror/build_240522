@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a6baf4_0d661ca9",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1395887
+      },
+      "writtenOn": "2021-06-09T23:53:43Z",
+      "side": 1,
+      "message": "This list has some commonalities with a similar list in the added code. Another idea would be to factor the list and  use `droidcore droidcore-unbundled` for common dists. It would also mean sprinkling ifs throughout this clause for things we don\u0027t want to do when `TARGET_BUILD_UNBUNDLED_IMAGE\u003dtrue`.",
+      "range": {
+        "startLine": 1715,
+        "startChar": 0,
+        "endLine": 1755,
+        "endChar": 33
+      },
+      "revId": "d0a66e4cc01b21e6013e9f74a44acaecc718d283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
