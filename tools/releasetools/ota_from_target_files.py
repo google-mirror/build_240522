@@ -1084,6 +1084,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     target_info = common.BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
     source_info = None
 
+  if target_info.vendor_suppressed_vabc:
+    OPTIONS.disable_vabc = True
   additional_args = []
 
   # Prepare custom images.
