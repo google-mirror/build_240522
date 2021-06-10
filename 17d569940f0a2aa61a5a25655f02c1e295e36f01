@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9987a8c9_e969737c",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2021-06-10T08:18:50Z",
+      "side": 1,
+      "message": "Moved this above gettop error for potentially fewer confusions on where bazel is defined.",
+      "range": {
+        "startLine": 334,
+        "startChar": 4,
+        "endLine": 337,
+        "endChar": 6
+      },
+      "revId": "17d569940f0a2aa61a5a25655f02c1e295e36f01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
