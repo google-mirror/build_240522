@@ -44,13 +44,10 @@ PRODUCT_BOOT_JARS += \
     voip-common \
     ims-common
 
-# Non-updatable APEX jars. Keep the list sorted.
-PRODUCT_BOOT_JARS += \
-    com.android.i18n:core-icu4j
-
-# Updatable APEX boot jars. Keep the list sorted by module names and then library names.
+# APEX boot jars. Keep the list sorted by module names and then library names.
 PRODUCT_UPDATABLE_BOOT_JARS := \
     com.android.conscrypt:conscrypt \
+    com.android.i18n:core-icu4j \
     com.android.ipsec:android.net.ipsec.ike \
     com.android.media:updatable-media \
     com.android.mediaprovider:framework-mediaprovider \
