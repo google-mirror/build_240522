@@ -83,7 +83,7 @@ $(pcf_ignored_file): PRIVATE_IGNORED := $(sort $(product_copy_files_ignored))
 $(pcf_ignored_file):
 	echo "$(PRIVATE_IGNORED)" | tr " " "\n" >$@
 
-$(call dist-for-goals,droidcore,$(pcf_ignored_file):logs/$(notdir $(pcf_ignored_file)))
+$(call dist-for-goals,droidcore-unbundled,$(pcf_ignored_file):logs/$(notdir $(pcf_ignored_file)))
 
 pcf_ignored_file :=
 product_copy_files_ignored :=
@@ -586,7 +586,7 @@ $(BUILD_SYSTEM_STATS):
 	@rm -f $@
 	@$(foreach s,$(STATS.MODULE_TYPE),echo "modules_type_make,$(s),$(words $(STATS.MODULE_TYPE.$(s)))" >>$@;)
 	@$(foreach s,$(STATS.SOONG_MODULE_TYPE),echo "modules_type_soong,$(s),$(STATS.SOONG_MODULE_TYPE.$(s))" >>$@;)
-$(call dist-for-goals,droidcore,$(BUILD_SYSTEM_STATS))
+$(call dist-for-goals,droidcore-unbundled,$(BUILD_SYSTEM_STATS))
 
 # -----------------------------------------------------------------
 # build /product/etc/security/avb/system_other.avbpubkey if needed
@@ -611,7 +611,7 @@ SOONG_TO_CONVERT := $(PRODUCT_OUT)/soong_to_convert.txt
 $(SOONG_TO_CONVERT): $(SOONG_CONV_DATA) $(SOONG_TO_CONVERT_SCRIPT)
 	@rm -f $@
 	$(hide) $(SOONG_TO_CONVERT_SCRIPT) $< >$@
-$(call dist-for-goals,droidcore,$(SOONG_TO_CONVERT))
+$(call dist-for-goals,droidcore-unbundled,$(SOONG_TO_CONVERT))
 
 MK2BP_CATALOG_SCRIPT := build/make/tools/mk2bp_catalog.py
 MK2BP_REMAINING_HTML := $(PRODUCT_OUT)/mk2bp_remaining.html
@@ -625,7 +625,7 @@ $(MK2BP_REMAINING_HTML): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT)
 		--out_dir="$(OUT_DIR)" \
 		--mode=html \
 		> $@
-$(call dist-for-goals,droidcore,$(MK2BP_REMAINING_HTML))
+$(call dist-for-goals,droidcore-unbundled,$(MK2BP_REMAINING_HTML))
 
 MK2BP_REMAINING_CSV := $(PRODUCT_OUT)/mk2bp_remaining.csv
 $(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT)
@@ -635,7 +635,7 @@ $(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT)
 		--out_dir="$(OUT_DIR)" \
 		--mode=csv \
 		> $@
-$(call dist-for-goals,droidcore,$(MK2BP_REMAINING_CSV))
+$(call dist-for-goals,droidcore-unbundled,$(MK2BP_REMAINING_CSV))
 
 # -----------------------------------------------------------------
 # Modules use -Wno-error, or added default -Wall -Werror
@@ -647,11 +647,11 @@ $(WALL_WERROR):
 	echo "# Modules added default -Wall" >> $@
 	for m in $(sort $(SOONG_MODULES_ADDED_WALL) $(MODULES_ADDED_WALL)); do echo $$m >> $@; done
 
-$(call dist-for-goals,droidcore,$(WALL_WERROR))
+$(call dist-for-goals,droidcore-unbundled,$(WALL_WERROR))
 
 # -----------------------------------------------------------------
 # C/C++ flag information for modules
-$(call dist-for-goals,droidcore,$(SOONG_MODULES_CFLAG_ARTIFACTS))
+$(call dist-for-goals,droidcore-unbundled,$(SOONG_MODULES_CFLAG_ARTIFACTS))
 
 # -----------------------------------------------------------------
 # Modules missing profile files
@@ -5434,7 +5434,7 @@ ifeq (true,$(CLANG_COVERAGE))
   $(PROFDATA_ZIP): $(SOONG_ZIP)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION) -f $(LLVM_PROFDATA) -f $(LIBCXX)
 
-  $(call dist-for-goals,droidcore,$(PROFDATA_ZIP))
+  $(call dist-for-goals,droidcore-unbundeld,$(PROFDATA_ZIP))
 endif
 
 # -----------------------------------------------------------------
