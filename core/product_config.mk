@@ -249,6 +249,13 @@ PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 
 PRODUCT_BOOT_JARS := $(call qualify-platform-jars,$(PRODUCT_BOOT_JARS))
 
+# b/191127295: force core-icu4j onto boot image. It comes from a non-updatable APEX jar, but has
+# historically been part of the boot image; even though APEX jars are not meant to be part of the
+# boot image.
+PRODUCT_UPDATABLE_BOOT_JARS := $(filter-out com.android.i18n:core-icu4j,$(PRODUCT_UPDATABLE_BOOT_JARS))
+# All APEX jars come after /system and /system_ext jars, so adding core-icu4j at the end of the list
+PRODUCT_BOOT_JARS += com.android.i18n:core-icu4j
+
 # Replaces references to overridden boot jar modules in a boot jars variable.
 # $(1): Name of a boot jars variable with <apex>:<jar> pairs.
 define replace-boot-jar-module-overrides
