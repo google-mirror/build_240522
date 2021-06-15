@@ -26,3 +26,5 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
+
+PRODUCT_BUILD_BOOT_IMAGE := false

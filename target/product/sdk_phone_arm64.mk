@@ -50,6 +50,8 @@ $(call inherit-product-if-exists, device/generic/goldfish/arm64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_arm64/device.mk)
 
+$(warning INHERITED!!!!)
+
 # Define the host tools and libs that are parts of the SDK.
 $(call inherit-product, sdk/build/product_sdk.mk)
 $(call inherit-product, development/build/product_sdk.mk)
