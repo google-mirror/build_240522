@@ -416,9 +416,11 @@ endif
 .KATI_READONLY := BUILDING_RECOVERY_IMAGE
 
 # Are we building a vendor boot image
+BOARD_USES_VENDOR_BOOT_IMAGE :=
 BUILDING_VENDOR_BOOT_IMAGE :=
 ifdef BOARD_BOOT_HEADER_VERSION
   ifneq ($(call math_gt_or_eq,$(BOARD_BOOT_HEADER_VERSION),3),)
+    BOARD_USES_VENDOR_BOOT_IMAGE := true
     ifeq ($(PRODUCT_BUILD_VENDOR_BOOT_IMAGE),)
       BUILDING_VENDOR_BOOT_IMAGE := true
     else ifeq ($(PRODUCT_BUILD_VENDOR_BOOT_IMAGE),true)
@@ -817,14 +819,14 @@ ifndef BUILDING_RECOVERY_IMAGE
   endif
 endif
 
-ifndef BUILDING_VENDOR_BOOT_IMAGE
+ifndef BOARD_USES_VENDOR_BOOT_IMAGE
   ifeq (true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT))
     $(error Should not set BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT if not building vendor_boot image)
   endif
   ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
     $(error Should not set BOARD_VENDOR_RAMDISK_FRAGMENTS if not building vendor_boot image)
   endif
-else # BUILDING_VENDOR_BOOT_IMAGE
+else # BOARD_USES_VENDOR_BOOT_IMAGE
   ifneq (,$(call math_lt,$(BOARD_BOOT_HEADER_VERSION),4))
     ifdef BOARD_VENDOR_RAMDISK_FRAGMENTS
       $(error Should not set BOARD_VENDOR_RAMDISK_FRAGMENTS if \

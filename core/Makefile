@@ -1061,7 +1061,7 @@ my_installed_prebuilt_gki_apex :=
 
 # -----------------------------------------------------------------
 # vendor boot image
-ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+ifeq ($(BOARD_USES_VENDOR_BOOT_IMAGE),true)
 
 ifeq ($(PRODUCT_SUPPORTS_VERITY),true)
   $(error vboot 1.0 does not support vendor_boot partition)
@@ -1100,6 +1100,7 @@ $(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_FILES) $(FILES
 	@echo Installed file list: $@
 	mkdir -p $(dir $@)
 	rm -f $@
+	mkdir -p $(TARGET_VENDOR_RAMDISK_OUT)
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
@@ -1128,6 +1129,8 @@ ifdef INTERNAL_BOOTCONFIG
 	$(foreach param,$(INTERNAL_BOOTCONFIG), \
 	 printf "%s\n" $(param) >> $@;)
   INTERNAL_VENDOR_BOOTIMAGE_ARGS += --vendor_bootconfig $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
+
+INSTALLED_VENDOR_BOOTCONFIG_TARGET := $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
 endif
 
 # $(1): Build target name
@@ -1170,6 +1173,8 @@ $(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
   $(eval INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS += $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS) --vendor_ramdisk_fragment $(vendor_ramdisk_fragment_target)) \
 )
 
+ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+
 INSTALLED_VENDOR_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_boot.img
 $(INSTALLED_VENDOR_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DTBIMAGE_TARGET)
 $(INSTALLED_VENDOR_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS) $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
@@ -1190,6 +1195,7 @@ $(INSTALLED_VENDOR_BOOTIMAGE_TARGET):
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 endif
 endif # BUILDING_VENDOR_BOOT_IMAGE
+endif # BOARD_USES_VENDOR_BOOT_IMAGE
 
 # -----------------------------------------------------------------
 # NOTICE files
@@ -2462,7 +2468,7 @@ bootimage_debug-nodeps: $(MKBOOTIMG) $(BOARD_GKI_SIGNING_KEY_PATH) $(AVBTOOL)
 endif # TARGET_NO_KERNEL
 endif # INSTALLED_BOOTIMAGE_TARGET
 
-ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+ifeq ($(BOARD_USES_VENDOR_BOOT_IMAGE),true)
 ifeq ($(BUILDING_RAMDISK_IMAGE),true)
 # -----------------------------------------------------------------
 # vendor debug ramdisk
@@ -2483,7 +2489,6 @@ $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INTERNAL_VENDOR_DEBUG_RAMDISK_FI
 	mkdir -p $(TARGET_VENDOR_DEBUG_RAMDISK_OUT) # The dir might not be created if no modules are installed here.
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) $(TARGET_DEBUG_RAMDISK_OUT) $(TARGET_VENDOR_DEBUG_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
-
 INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_boot-debug)/vendor_ramdisk-debug.cpio$(RAMDISK_EXT)
 
 # Exclude recovery files in the default vendor ramdisk if including a standalone
@@ -2508,7 +2513,10 @@ $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET
 	$(call pretty,"Target vendor debug ramdisk: $@")
 	$(copy-file-to-target)
 endif
+endif # BUILDING_RAMDISK_IMAGE
+endif # BOARD_USES_VENDOR_BOOT_IMAGE
 
+ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
 # -----------------------------------------------------------------
 # vendor_boot-debug.img.
 INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_boot-debug.img
@@ -2539,7 +2547,6 @@ $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_T
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
 
-endif # BUILDING_RAMDISK_IMAGE
 endif # BUILDING_VENDOR_BOOT_IMAGE
 
 # -----------------------------------------------------------------
@@ -4402,9 +4409,13 @@ $(INSTALLED_MISC_INFO_TARGET):
 ifdef BOARD_FLASH_BLOCK_SIZE
 	$(hide) echo "blocksize=$(BOARD_FLASH_BLOCK_SIZE)" >> $@
 endif
-ifneq ($(strip $(BOARD_BOOTIMAGE_PARTITION_SIZE))$(strip $(BOARD_KERNEL_BINARIES)),)
+ifdef $(BOARD_BOOTIMAGE_PARTITION_SIZE)
+ifdef $(BOARD_KERNEL_BINARIES)
 	$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),\
 		echo "$(call misc_boot_size,$(notdir $(b)))" >> $@;)
+else
+	echo "boot_size=$(BOARD_BOOTIMAGE_PARTITION_SIZE)" >> $@
+endif
 endif
 ifeq ($(INSTALLED_BOOTIMAGE_TARGET),)
 	$(hide) echo "no_boot=true" >> $@
@@ -4416,6 +4427,8 @@ ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 endif
 ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
 	echo "vendor_boot=true" >> $@
+endif
+ifneq ($(BOARD_USES_VENDOR_BOOT_IMAGE),)
 	echo "vendor_boot_size=$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)" >> $@
 endif
 ifeq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
@@ -4949,7 +4962,7 @@ ifdef INSTALLED_KERNEL_TARGET
 endif
 ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
 	echo "$(GENERIC_KERNEL_CMDLINE)" > $(zip_root)/BOOT/cmdline
-else ifndef INSTALLED_VENDOR_BOOTIMAGE_TARGET # && BOARD_USES_GENERIC_KERNEL_IMAGE != true
+else ifndef BOARD_USES_VENDOR_BOOT_IMAGE # && BOARD_USES_GENERIC_KERNEL_IMAGE != true
 	echo "$(INTERNAL_KERNEL_CMDLINE)" > $(zip_root)/BOOT/cmdline
 ifdef INSTALLED_2NDBOOTLOADER_TARGET
 	cp $(INSTALLED_2NDBOOTLOADER_TARGET) $(zip_root)/BOOT/second
@@ -4963,12 +4976,12 @@ endif
 ifdef BOARD_KERNEL_PAGESIZE
 	echo "$(BOARD_KERNEL_PAGESIZE)" > $(zip_root)/BOOT/pagesize
 endif
-endif # INSTALLED_VENDOR_BOOTIMAGE_TARGET == "" && BOARD_USES_GENERIC_KERNEL_IMAGE != true
+endif # BOARD_USES_VENDOR_BOOT_IMAGE == "" && BOARD_USES_GENERIC_KERNEL_IMAGE != true
 endif # BOARD_USES_RECOVERY_AS_BOOT not true
 	$(hide) $(foreach t,$(INSTALLED_RADIOIMAGE_TARGET),\
 	            mkdir -p $(zip_root)/RADIO; \
 	            cp $(t) $(zip_root)/RADIO/$(notdir $(t));)
-ifdef INSTALLED_VENDOR_BOOTIMAGE_TARGET
+ifdef BOARD_USES_VENDOR_BOOT_IMAGE
 	mkdir -p $(zip_root)/VENDOR_BOOT
 	$(call package_files-copy-root, \
 	    $(TARGET_VENDOR_RAMDISK_OUT),$(zip_root)/VENDOR_BOOT/RAMDISK)
@@ -4998,7 +5011,7 @@ ifdef INTERNAL_VENDOR_RAMDISK_FRAGMENTS
 	      $(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/RAMDISK); \
 	  ))
 endif # INTERNAL_VENDOR_RAMDISK_FRAGMENTS != ""
-endif # INSTALLED_VENDOR_BOOTIMAGE_TARGET
+endif # BOARD_USES_VENDORBOOT_IMAGE
 ifdef BUILDING_SYSTEM_IMAGE
 	@# Contents of the system image
 	$(hide) $(call package_files-copy-root, \
@@ -5210,7 +5223,7 @@ ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
 	@# BOOT/RAMDISK exists and contains the ramdisk for recovery if using BOARD_USES_RECOVERY_AS_BOOT.
 	$(hide) $(call fs_config,$(zip_root)/BOOT/RAMDISK,) > $(zip_root)/META/boot_filesystem_config.txt
 endif
-ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
+ifneq ($(BOARD_USES_VENDOR_BOOT_IMAGE),)
 	$(call fs_config,$(zip_root)/VENDOR_BOOT/RAMDISK,) > $(zip_root)/META/vendor_boot_filesystem_config.txt
 endif
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
