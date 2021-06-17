@@ -60,3 +60,8 @@ endif
 ifdef APEX_BUILD_FOR_PRE_S_DEVICES
 $(call add_soong_config_var_value,ANDROID,library_linking_strategy,prefer_static)
 endif
+
+#TARGET_RECOVERY_UI_LIB for librecovery_ui_ext
+ifdef TARGET_RECOVERY_UI_LIB
+$(call add_soong_config_var,ANDROID,TARGET_RECOVERY_UI_LIB)
+endif
