@@ -365,6 +365,8 @@ will copy `bar/baz` into `$DIST_DIR/baz` when `m foo dist` is run.
 
 #### Renames during copy
 
+test add 
+
 Instead of specifying just a file, a destination name can be specified,
 including subdirectories:
 
