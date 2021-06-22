@@ -538,6 +538,35 @@ class StreamingPropertyFiles(PropertyFiles):
     )
 
 
+def GetZipEntryOffset(fp, entry_info):
+  """Get offset to a beginning of a particular zip entry
+  Args:
+    fp: zipfile.ZipFile
+    entry_info: zipfile.ZipInfo
+
+  Returns:
+    (offset, size) tuple
+  """
+  # Don't use len(payload_info.extra). Because that returns size of extra
+  # fields in central directory. We need to look at local file directory,
+  # as these two might have different sizes.
+
+  # We cannot work with zipfile.ZipFile instances, we need a |fp| for the underlying file.
+  fp = fp.fp
+  fp.seek(entry_info.header_offset)
+  data = fp.read(zipfile.sizeFileHeader)
+  fheader = struct.unpack(zipfile.structFileHeader, data)
+  # Last two fields of local file header are filename length and
+  # extra length
+  filename_len = fheader[-2]
+  extra_len = fheader[-1]
+  offset = entry_info.header_offset
+  offset += zipfile.sizeFileHeader
+  offset += filename_len + extra_len
+  size = entry_info.file_size
+  return (offset, size)
+
+
 class AbOtaPropertyFiles(StreamingPropertyFiles):
   """The property-files for A/B OTA that includes payload_metadata.bin info.
 
@@ -561,7 +590,7 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
     return ['payload_metadata.bin:{}:{}'.format(offset, size)]
 
   @staticmethod
-  def _GetPayloadMetadataOffsetAndSize(input_zip):
+  def _GetPayloadMetadataOffsetAndSize(input_zip: zipfile.ZipFile):
     """Computes the offset and size of the payload metadata for a given package.
 
     (From system/update_engine/update_metadata.proto)
@@ -600,10 +629,7 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
     payload, till the end of 'medatada_signature_message'.
     """
     payload_info = input_zip.getinfo('payload.bin')
-    payload_offset = payload_info.header_offset
-    payload_offset += zipfile.sizeFileHeader
-    payload_offset += len(payload_info.extra) + len(payload_info.filename)
-    payload_size = payload_info.file_size
+    (payload_offset, payload_size) = GetZipEntryOffset(input_zip, payload_info)
 
     with input_zip.open('payload.bin') as payload_fp:
       header_bin = payload_fp.read(24)
