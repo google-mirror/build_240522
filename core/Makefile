@@ -5866,7 +5866,6 @@ include $(BUILD_SYSTEM)/sdk_font.mk
 
 deps := \
 	$(target_notice_file_txt) \
-	$(tools_notice_file_txt) \
 	$(OUT_DOCS)/offline-sdk-timestamp \
 	$(SDK_METADATA_FILES) \
 	$(SYMBOLS_ZIP) \
@@ -5928,7 +5927,6 @@ $(INTERNAL_SDK_TARGET): $(deps)
 	        -o $(PRIVATE_DIR) && \
 	    cp -f $(target_notice_file_txt) \
 	            $(PRIVATE_DIR)/system-images/android-$(PLATFORM_VERSION)/$(TARGET_CPU_ABI)/NOTICE.txt && \
-	    cp -f $(tools_notice_file_txt) $(PRIVATE_DIR)/platform-tools/NOTICE.txt && \
 	    HOST_OUT_EXECUTABLES=$(HOST_OUT_EXECUTABLES) HOST_OS=$(HOST_OS) \
 	        development/build/tools/sdk_clean.sh $(PRIVATE_DIR) && \
 	    chmod -R ug+rwX $(PRIVATE_DIR) && \
@@ -5982,9 +5980,8 @@ include $(BUILD_SYSTEM)/product-graph.mk
 # -----------------------------------------------------------------
 # Create SDK repository packages. Must be done after tasks/* since
 # we need the addon rules defined.
-ifneq ($(sdk_repo_goal),)
+# TODO
 include $(TOPDIR)development/build/tools/sdk_repo.mk
-endif
 
 # -----------------------------------------------------------------
 # Soong generates the list of all shared libraries that are depended on by fuzz
