@@ -23,6 +23,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
 
 # Legacy GSI support additional O-MR1 interface
 PRODUCT_EXTRA_VNDK_VERSIONS += 27
+PLATFORM_SYSTEMSDK_MIN_VERSION := 27  # default is 28
 
 # Support for the O-MR1 devices
 PRODUCT_COPY_FILES += \
