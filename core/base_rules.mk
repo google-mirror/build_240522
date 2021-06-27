@@ -1020,6 +1020,9 @@ ifdef LOCAL_IS_UNIT_TEST
 ALL_MODULES.$(my_register_name).IS_UNIT_TEST := $(LOCAL_IS_UNIT_TEST)
 endif
 test_config :=
+ifdef LOCAL_IS_APEX
+ALL_MODULES.$(my_register_name).IS_APEX := $(LOCAL_IS_APEX)
+endif
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 
