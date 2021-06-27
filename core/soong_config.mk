@@ -203,6 +203,15 @@ $(call add_json_str,  BoardSepolicyVers,                 $(BOARD_SEPOLICY_VERS))
 
 $(call add_json_str,  PlatformSepolicyVersion,           $(PLATFORM_SEPOLICY_VERSION))
 
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+  $(call add_json_list, InstallApexes,                   $(PRODUCT_INSTALL_APEXES))
+else
+  # For unbundled builds PRODUCT_INSTALL_APEXES isn't applicable since no system
+  # image is built that they'd get installed to. Let's instead add the apps
+  # getting built, some of which may be APEXes, so that they get install rules.
+  $(call add_json_list, InstallApexes,                   $(TARGET_BUILD_APPS))
+endif
+
 $(call add_json_bool, Flatten_apex,                      $(filter true,$(TARGET_FLATTEN_APEX)))
 $(call add_json_bool, ForceApexSymlinkOptimization,      $(filter true,$(TARGET_FORCE_APEX_SYMLINK_OPTIMIZATION)))
 
