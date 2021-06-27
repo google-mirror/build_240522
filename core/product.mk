@@ -372,6 +372,16 @@ _product_list_vars += PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES
 _product_list_vars += PRODUCT_PACKAGE_NAME_OVERRIDES
 _product_list_vars += PRODUCT_CERTIFICATE_OVERRIDES
 
+# The list of APEX packages to install. This configures the default for the
+# "installable" properties in Soong. Must be a subset of PRODUCT_PACKAGES.
+# However it always lists APEXes by their base name, even when PRODUCT_PACKAGES
+# references the .flattened variants.
+_product_list_vars += PRODUCT_INSTALL_APEXES
+
+# A list of <overridden-apex>:<override-apex> pairs that is applied to
+# PRODUCT_INSTALL_APEXES before it is sent to Soong.
+_product_list_vars += PRODUCT_INSTALL_APEXES_OVERRIDES
+
 # Controls for whether different partitions are built for the current product.
 _product_single_value_vars += PRODUCT_BUILD_SYSTEM_IMAGE
 _product_single_value_vars += PRODUCT_BUILD_SYSTEM_OTHER_IMAGE
