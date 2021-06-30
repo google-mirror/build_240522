@@ -77,6 +77,10 @@ Expands *glob*. If *top* is supplied, expands "*top*/*glob*", then removes
 
 Returns *True* if *text* matches *pattern*.
 
+#### rblf_regex_subst(*pattern*, *subst*, *text*)
+
+Replaces all occurencens of *pattern* in *text* with *subst*.
+
 #### rblf_shell(*command*)
 
 Runs `sh -c "`*command*`"`, reads its output, converts all newlines into spaces, chops trailing newline returns this
