@@ -1,5 +1,23 @@
 # Build System Changes for Android.mk Writers
 
+## Builds run with a Read-only source tree
+
+Android source tree will be Read-only during builds, and this will be enforced
+using nsjail. Rules that write to the source tree during builds will fail after
+this change.
+
+To fix such failing rules, three solutions are available
+* Generate files directly to out/. This is the recommended solution. See
+  [genrule](https://cs.android.com/android/platform/superproject/+/master:external/elfutils/libcpu/Android.bp;l=60)
+  for a trivial example
+* `BUILD_BROKEN_SRC_DIR_RW_ALLOWLIST := <my/path/1> <my/path/2> ...`. This is
+  discouraged since subset of source tree will be ReadWrite. See [redbull device
+  config](https://cs.android.com/android/platform/superproject/+/master:device/google/redbull/device-common.mk;l=29?q=BUILD_BROKEN_SRC_DIR_RW&ss=android%2Fplatform%2Fsuperproject)
+  for an example
+* `BUILD_BROKEN_SRC_DIR_IS_WRITABLE := true`. This is highly discouraged, since
+  the entire source tree will be ReadWrite, which can have an impact on
+  incremental build times.
+
 ## Dexpreopt starts enforcing `<uses-library>` checks (for Java modules)
 
 In order to construct correct class loader context for dexpreopt, build system
