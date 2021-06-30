@@ -141,6 +141,16 @@ func regexMatch(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
 	return starlark.False, nil
 }
 
+// regexReplace(pattern, subst, s) replaces substrings in s that match pattern with subst.
+func regexSubst(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
+	kwargs []starlark.Tuple) (starlark.Value, error) {
+	var pattern, subst, s string
+	if err := starlark.UnpackPositionalArgs(b.Name(), args, kwargs, 3, &pattern, &subst, &s); err != nil {
+		return starlark.None, err
+	}
+	return starlark.String(regexp.MustCompile(pattern).ReplaceAllString(s, subst)), nil
+}
+
 // wildcard(pattern, top=None) expands shell's glob pattern. If 'top' is present,
 // the 'top/pattern' is globbed and then 'top/' prefix is removed.
 func wildcard(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
@@ -228,6 +238,8 @@ func setup(env []string) {
 		"rblf_file_exists": starlark.NewBuiltin("rblf_file_exists", fileExists),
 		// To convert makefile's $(filter ...)/$(filter-out)
 		"rblf_regex": starlark.NewBuiltin("rblf_regex", regexMatch),
+		// To convert makefile's $(patsubst pattern, replacement, text)
+		"rblf_regex_subst": starlark.NewBuiltin("rblf_regex_subst", regexSubst),
 		// To convert makefile's $(shell cmd)
 		"rblf_shell": starlark.NewBuiltin("rblf_shell", shell),
 		// To convert makefile's $(wildcard foo*)
@@ -242,7 +254,7 @@ func setup(env []string) {
 	}
 }
 
-// Parses, resolves, and executes a Starlark file.
+// Run parses, resolves, and executes a Starlark file.
 // filename and src parameters are as for starlark.ExecFile:
 // * filename is the name of the file to execute,
 //   and the name that appears in error messages;
