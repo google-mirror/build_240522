@@ -1798,6 +1798,12 @@ else ifeq ($(TARGET_BUILD_UNBUNDLED),$(TARGET_BUILD_UNBUNDLED_IMAGE))
     $(INSTALLED_FILES_JSON_ROOT) \
   )
 
+  ifeq ($(BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES),true)
+    $(call dist-for-goals, droidcore-unbundled, \
+      $(INSTALLED_BOOTIMAGE_TARGET) \
+    )
+  endif
+
   ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
     $(call dist-for-goals, droidcore-unbundled, \
       $(INSTALLED_FILES_FILE_RAMDISK) \
