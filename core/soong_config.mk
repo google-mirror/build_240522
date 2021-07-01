@@ -152,6 +152,8 @@ $(foreach module,$(VENDOR_SNAPSHOT_MODULES),\
   $(call add_json_bool,$(module),true))
 $(call end_json_map)
 
+$(call add_json_list, HostSnapshotModules,               $(HOST_SNAPSHOT_MODULES))
+
 $(call add_json_bool, DirectedRecoverySnapshot,          $(DIRECTED_RECOVERY_SNAPSHOT))
 $(call add_json_map,  RecoverySnapshotModules)
 $(foreach module,$(RECOVERY_SNAPSHOT_MODULES),\
