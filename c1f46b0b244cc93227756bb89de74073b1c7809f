@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c284b3c_04e7f4eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1877755
+      },
+      "writtenOn": "2021-07-02T09:01:58Z",
+      "side": 1,
+      "message": "This is needed for building the widevine qt-widevine-release branch on Android 10, otherwise this error occurs because LOCAL_VINTF_FRAGMENTS with the same file is declared in both the normal and the lazy service modules.\n```\nbuild/make/core/base_rules.mk:528: error: overriding commands for target `out/target/product/FOO/system/vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.2-service.widevine.xml\u0027, previously defined at build/make/core/base_rules.mk:528\n```",
+      "revId": "c1f46b0b244cc93227756bb89de74073b1c7809f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
