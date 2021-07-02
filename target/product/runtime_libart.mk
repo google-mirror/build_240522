@@ -164,3 +164,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.madvise.vdexfile.size=104857600 \
     dalvik.vm.madvise.odexfile.size=104857600 \
     dalvik.vm.madvise.artfile.size=4294967295
+
+# System properties for the ART Service.
+PRODUCT_SYSTEM_PROPERTIES += \
+    art.service.enabled?=false
