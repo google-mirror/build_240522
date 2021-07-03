@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1f7a59_f27b93bc",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1714996
+      },
+      "writtenOn": "2021-07-03T01:10:16Z",
+      "side": 1,
+      "message": "In the productionized version of this prototype, this should most likely be \u0027target\u0027 instead of \u0027device\u0027.",
+      "revId": "2b47c0dd0ba00b34c24646c33e74b76ab5c44e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
