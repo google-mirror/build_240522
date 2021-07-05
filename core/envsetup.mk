@@ -296,7 +296,8 @@ endef
 # Jars present in the ART apex. These should match exactly the list of Java
 # libraries in art-bootclasspath-fragment. The APEX variant name
 # (com.android.art) is the same regardless which Soong module provides the ART
-# APEX.
+# APEX. See the long comment in build/soong/java/dexprepopt_bootjars.go for
+# details.
 ART_APEX_JARS := \
     com.android.art:core-oj \
     com.android.art:core-libart \
