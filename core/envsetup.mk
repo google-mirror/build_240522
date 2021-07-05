@@ -293,8 +293,10 @@ endef
 #################################################################
 # Set up minimal BOOTCLASSPATH list of jars to build/execute
 # java code with dalvikvm/art.
-# Jars present in the ART apex. These should match exactly the list of
-# Java libraries in the ART apex build rule.
+# Jars present in the ART apex. These should match exactly the list of Java
+# libraries in art-bootclasspath-fragment. The APEX variant name
+# (com.android.art) is the same regardless which Soong module provides the ART
+# APEX.
 ART_APEX_JARS := \
     com.android.art:core-oj \
     com.android.art:core-libart \
