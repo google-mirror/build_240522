@@ -1008,11 +1008,22 @@ def rebuild_image_with_sepolicy(target_files_dir,
   copy_selinux_file('META/combined_sepolicy', 'precompiled_sepolicy')
   copy_selinux_file('SYSTEM/etc/selinux/plat_sepolicy_and_mapping.sha256',
                     'precompiled_sepolicy.plat_sepolicy_and_mapping.sha256')
-  copy_selinux_file(
-      'SYSTEM_EXT/etc/selinux/system_ext_sepolicy_and_mapping.sha256',
-      'precompiled_sepolicy.system_ext_sepolicy_and_mapping.sha256')
-  copy_selinux_file('PRODUCT/etc/selinux/product_sepolicy_and_mapping.sha256',
-                    'precompiled_sepolicy.product_sepolicy_and_mapping.sha256')
+  system_ext_sepolicy_file = 'SYSTEM_EXT/etc/selinux/system_ext_sepolicy_and_mapping.sha256'
+  if not os.path.exists(os.path.join(target_files_dir, system_ext_sepolicy_file)):
+    system_ext_sepolicy_file = 'SYSTEM/system_ext/etc/selinux/system_ext_sepolicy_and_mapping.sha256'
+  if not os.path.exists(os.path.join(target_files_dir, system_ext_sepolicy_file)):
+    logger.info('skip copy_selinux_file for %s', system_ext_sepolicy_file)
+  else:
+    copy_selinux_file(system_ext_sepolicy_file,
+                      'precompiled_sepolicy.system_ext_sepolicy_and_mapping.sha256')
+  product_sepolicy_file = 'PRODUCT/etc/selinux/product_sepolicy_and_mapping.sha256'
+  if not os.path.exists(os.path.join(target_files_dir, product_sepolicy_file)):
+    product_sepolicy_file = 'SYSTEM/product/etc/selinux/product_sepolicy_and_mapping.sha256'
+  if not os.path.exists(os.path.join(target_files_dir, product_sepolicy_file)):
+    logger.info('skip copy_selinux_file for %s', product_sepolicy_file)
+  else:
+    copy_selinux_file(product_sepolicy_file,
+                      'precompiled_sepolicy.product_sepolicy_and_mapping.sha256')
 
   if not vendor_otatools:
     # Remove the partition from the merged target-files archive. It will be
@@ -1041,7 +1052,8 @@ def rebuild_image_with_sepolicy(target_files_dir,
     shutil.rmtree(os.path.join(vendor_target_files_dir, partition.upper()))
     shutil.copytree(
         os.path.join(target_files_dir, partition.upper()),
-        os.path.join(vendor_target_files_dir, partition.upper()))
+        os.path.join(vendor_target_files_dir, partition.upper()),
+        symlinks=True)
 
     # Delete then rebuild the partition.
     os.remove(os.path.join(vendor_target_files_dir, 'IMAGES', partition_img))
@@ -1056,6 +1068,8 @@ def rebuild_image_with_sepolicy(target_files_dir,
     common.RunAndCheckOutput(rebuild_partition_command, verbose=True)
 
     # Move the newly-created image to the merged target files dir.
+    if not os.path.exists(os.path.join(target_files_dir, 'IMAGES')):
+        os.makedirs(os.path.join(target_files_dir, 'IMAGES'))
     shutil.move(
         os.path.join(vendor_target_files_dir, 'IMAGES', partition_img),
         os.path.join(target_files_dir, 'IMAGES', partition_img))
