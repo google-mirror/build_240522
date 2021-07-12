@@ -34,13 +34,14 @@ void usage(void)
     fprintf(stderr, "Zip alignment utility\n");
     fprintf(stderr, "Copyright (C) 2009 The Android Open Source Project\n\n");
     fprintf(stderr,
-        "Usage: zipalign [-f] [-p] [-v] [-z] <align> infile.zip outfile.zip\n"
-        "       zipalign -c [-p] [-v] <align> infile.zip\n\n" );
+        "Usage: zipalign [-f] [-p] [-s <padTo>] [-v] [-z] <align> infile.zip outfile.zip\n"
+        "       zipalign -c [-p] [-s <padTo>] [-v] <align> infile.zip\n\n" );
     fprintf(stderr,
         "  <align>: alignment in bytes, e.g. '4' provides 32-bit alignment\n");
     fprintf(stderr, "  -c: check alignment only (does not modify file)\n");
     fprintf(stderr, "  -f: overwrite existing outfile.zip\n");
     fprintf(stderr, "  -p: page-align uncompressed .so files\n");
+    fprintf(stderr, "  -s padTo: pad file to be sized as mulitples of <padTo>\n");
     fprintf(stderr, "  -v: verbose output\n");
     fprintf(stderr, "  -z: recompress using Zopfli\n");
 }
@@ -59,10 +60,11 @@ int main(int argc, char* const argv[])
     bool pageAlignSharedLibs = false;
     int result = 1;
     int alignment;
+    int padTo = 1;
     char* endp;
 
     int opt;
-    while ((opt = getopt(argc, argv, "fcpvz")) != -1) {
+    while ((opt = getopt(argc, argv, "fcpvzs:")) != -1) {
         switch (opt) {
         case 'c':
             check = true;
@@ -78,6 +80,14 @@ int main(int argc, char* const argv[])
             break;
         case 'p':
             pageAlignSharedLibs = true;
+            break;
+        case 's':
+            padTo = strtol(optarg, &endp, 10);
+            if (*endp != '\0' || padTo <= 0) {
+                fprintf(stderr, "Invalid value for padTo: %s\n", optarg);
+                wantUsage = true;
+                goto bail;
+            }
             break;
         default:
             fprintf(stderr, "ERROR: unknown flag -%c\n", opt);
@@ -100,14 +110,14 @@ int main(int argc, char* const argv[])
 
     if (check) {
         /* check existing archive for correct alignment */
-        result = verify(argv[optind + 1], alignment, verbose, pageAlignSharedLibs);
+        result = verify(argv[optind + 1], alignment, padTo, verbose, pageAlignSharedLibs);
     } else {
         /* create the new archive */
-        result = process(argv[optind + 1], argv[optind + 2], alignment, force, zopfli, pageAlignSharedLibs);
+        result = process(argv[optind + 1], argv[optind + 2], alignment, force, padTo, zopfli, pageAlignSharedLibs);
 
         /* trust, but verify */
         if (result == 0) {
-            result = verify(argv[optind + 2], alignment, verbose, pageAlignSharedLibs);
+            result = verify(argv[optind + 2], alignment, padTo, verbose, pageAlignSharedLibs);
         }
     }
 
