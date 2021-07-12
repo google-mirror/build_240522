@@ -23,6 +23,7 @@ namespace android {
  * Generate a new, aligned, zip "output" from an "input" zip.
  * - alignTo: Alignment (in bytes) for uncompressed entries.
  * - force  : Overwrite output if it exists, fail otherwise.
+ * - alignFileSize: Align file size as well.
  * - zopfli : Recompress compressed entries with more efficient algorithm.
  *            Copy compressed entries as-is, and unaligned, otherwise.
  * - pageAlignSharedLibs: Align .so files to 4096 and other files to
@@ -31,17 +32,18 @@ namespace android {
  * Returns 0 on success.
  */
 int process(const char* input, const char* output, int alignTo, bool force,
-    bool zopfli, bool pageAlignSharedLibs);
+    bool alignFileSize, bool zopfli, bool pageAlignSharedLibs);
 
 /*
  * Verify the alignment of a zip archive.
  * - alignTo: Alignment (in bytes) for uncompressed entries.
+ * - alignFileSize: Align file size as well.
  * - pageAlignSharedLibs: Align .so files to 4096 and other files to
  *   alignTo, or all files to alignTo if false..
  *
  * Returns 0 on success.
  */
-int verify(const char* fileName, int alignTo, bool verbose,
+int verify(const char* fileName, int alignTo, bool alignFileSize, bool verbose,
     bool pageAlignSharedLibs);
 
 } // namespace android

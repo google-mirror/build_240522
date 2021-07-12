@@ -94,9 +94,9 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
  * output file exists and "force" wasn't specified.
  */
 int process(const char* inFileName, const char* outFileName,
-    int alignment, bool force, bool zopfli, bool pageAlignSharedLibs)
+    int alignment, bool force, bool alignFileSize, bool zopfli, bool pageAlignSharedLibs)
 {
-    ZipFile zin, zout;
+    ZipFile zin, zout(alignFileSize, alignment);
 
     //printf("PROCESS: align=%d in='%s' out='%s' force=%d\n",
     //    alignment, inFileName, outFileName, force);
@@ -136,7 +136,7 @@ int process(const char* inFileName, const char* outFileName,
 /*
  * Verify the alignment of a zip archive.
  */
-int verify(const char* fileName, int alignment, bool verbose,
+int verify(const char* fileName, int alignment, bool alignFileSize, bool verbose,
     bool pageAlignSharedLibs)
 {
     ZipFile zipFile;
@@ -175,6 +175,25 @@ int verify(const char* fileName, int alignment, bool verbose,
                     printf("%8jd %s (OK)\n",
                         (intmax_t) offset, pEntry->getFileName());
                 }
+            }
+        }
+    }
+
+    if (alignFileSize && alignment > 1) {
+        off_t fileSize;
+        if (zipFile.size(&fileSize) != OK) {
+            return 1;
+        }
+        if ((fileSize % alignment) != 0) {
+            if (verbose) {
+                printf("%8jd %s (BAD - %jd)\n",
+                        (intmax_t) fileSize, fileName,
+                        (intmax_t) (fileSize % alignment));
+            }
+            foundBad = true;
+        } else {
+            if (verbose) {
+                printf("%8jd %s (OK)\n", (intmax_t) fileSize, fileName);
             }
         }
     }

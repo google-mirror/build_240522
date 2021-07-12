@@ -44,8 +44,17 @@ namespace android {
 class ZipFile {
 public:
     ZipFile(void)
-      : mZipFp(NULL), mReadOnly(false), mNeedCDRewrite(false)
-      {}
+      : mZipFp(NULL),
+        mReadOnly(false),
+        mNeedCDRewrite(false),
+        mAlignFileSize(false),
+        mFileSizeAlignment(0) {}
+    ZipFile(bool alignFileSize, int alignment)
+      : mZipFp(NULL),
+        mReadOnly(false),
+        mNeedCDRewrite(false),
+        mAlignFileSize(alignFileSize),
+        mFileSizeAlignment(alignment) {}
     ~ZipFile(void) {
         if (!mReadOnly)
             flush();
@@ -133,6 +142,11 @@ public:
     status_t flush(void);
 
     /*
+     * File size
+     */
+    status_t size(off_t* size) const;
+
+    /*
      * Expand the data into the buffer provided.  The buffer must hold
      * at least <uncompressed len> bytes.  Variation expands directly
      * to a file.
@@ -164,6 +178,7 @@ private:
     ZipFile& operator=(const ZipFile& src);
 
     status_t alignEntry(android::ZipEntry* pEntry, uint32_t alignTo);
+    void addEocdCommentPadding(size_t commentLen);
 
     class EndOfCentralDir {
     public:
@@ -183,6 +198,8 @@ private:
 
         status_t readBuf(const uint8_t* buf, int len);
         status_t write(FILE* fp);
+        off_t size() const;
+        void addComment(const uint8_t* buf, size_t len);
 
         //uint32_t mSignature;
         uint16_t mDiskNumber;
@@ -251,6 +268,12 @@ private:
 
     /* set this when we trash the central dir */
     bool            mNeedCDRewrite;
+
+    /* when flushing, file size should be aligned */
+    bool            mAlignFileSize;
+
+    /* use this alignment when aligning file size */
+    int             mFileSizeAlignment;
 
     /*
      * One ZipEntry per entry in the zip file.  I'm using pointers instead
