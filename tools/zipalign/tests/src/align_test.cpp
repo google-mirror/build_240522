@@ -19,10 +19,10 @@ TEST(Align, Unaligned) {
   const std::string src = GetTestPath("unaligned.zip");
   const std::string dst = GetTestPath("unaligned_out.zip");
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
+  int processed = process(src.c_str(), dst.c_str(), /*alignment=*/4, /*force=*/true, /*alignFileSize=*/false, /*zopfli=*/false, /*pageAlignSharedLibs=*/true);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, false);
+  int verified = verify(dst.c_str(), /*alignment=*/4, /*alignFileSize=*/false, /*verbose=*/false, /*pageAlignSharedLibs=*/false);
   ASSERT_EQ(0, verified);
 }
 
@@ -33,10 +33,10 @@ TEST(Align, Holes) {
   const std::string src = GetTestPath("holes.zip");
   const std::string dst = GetTestPath("holes_out.zip");
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
+  int processed = process(src.c_str(), dst.c_str(), /*alignment=*/4, /*force=*/true, /*alignFileSize=*/false, /*zopfli=*/false, /*pageAlignSharedLibs=*/true);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, false, true);
+  int verified = verify(dst.c_str(), /*alignment=*/4, /*alignFileSize=*/false,  /*verbose=*/false, /*pageAlignSharedLibs=*/true);
   ASSERT_EQ(0, verified);
 }
 
@@ -45,9 +45,24 @@ TEST(Align, DifferenteOrders) {
   const std::string src = GetTestPath("diffOrders.zip");
   const std::string dst = GetTestPath("diffOrders_out.zip");
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
+  int processed = process(src.c_str(), dst.c_str(),  /*alignment=*/4, /*force=*/true, /*alignFileSize=*/false,  /*zopfli=*/false, /*pageAlignSharedLibs=*/true);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, false, true);
+  int verified = verify(dst.c_str(), /*alignment=*/4, /*alignFileSize=*/false, /*verbose=*/false, /*pageAlignSharedLibs=*/true);
   ASSERT_EQ(0, verified);
+}
+
+TEST(Align, FileSize) {
+  const std::string src = GetTestPath("unaligned.zip");
+  const std::string dst = GetTestPath("unaligned_out.zip");
+
+  int processed = process(src.c_str(), dst.c_str(), /*alignment=*/4096, /*force=*/true, /*alignFileSize=*/true, /*zopfli=*/false, /*pageAlignSharedLibs=*/true);
+  ASSERT_EQ(0, processed);
+
+  int verified = verify(dst.c_str(), /*alignment=*/4096, /*alignFileSize=*/true, /*verbose=*/false, /*pageAlignSharedLibs=*/false);
+  ASSERT_EQ(0, verified);
+
+  struct stat s;
+  ASSERT_EQ(0, stat(dst.c_str(), &s));
+  ASSERT_EQ(0, s.st_size % 4096);
 }

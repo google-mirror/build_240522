@@ -299,6 +299,7 @@ private:
 
         status_t read(FILE* fp);
         status_t write(FILE* fp);
+        size_t size() const;
 
         // uint32_t mSignature;
         uint16_t mVersionMadeBy;

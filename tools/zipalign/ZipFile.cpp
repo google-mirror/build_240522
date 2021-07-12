@@ -1029,6 +1029,34 @@ status_t ZipFile::flush(void)
 }
 
 /*
+ * Get the file size
+ */
+status_t ZipFile::size(off_t* size) const
+{
+    struct stat s;
+    if (fstat(fileno(mZipFp), &s) == -1) {
+       ALOGW("fstat failed: %s\n", strerror(errno));
+        return UNKNOWN_ERROR;
+    }
+    *size = s.st_size;
+    return OK;
+}
+
+/*
+ * Calculate the estimated file size
+ */
+off_t ZipFile::estimatedSize() const
+{
+    off_t centralDirSize = 0;
+    int i, count = mEntries.size();
+    for (i = 0; i < count; i++) {
+        ZipEntry* pEntry = mEntries[i];
+        centralDirSize += pEntry->mCDE.size();
+    }
+    return mEOCD.mCentralDirOffset + centralDirSize + mEOCD.size();
+}
+
+/*
  * Crunch deleted files out of an archive by shifting the later files down.
  *
  * Because we're not using a temp file, we do the operation inside the
@@ -1426,7 +1454,7 @@ status_t ZipFile::EndOfCentralDir::write(FILE* fp)
     }
     if (mCommentLen > 0) {
         assert(mComment != NULL);
-        if (fwrite(mComment, mCommentLen, 1, fp) != mCommentLen) {
+        if (fwrite(mComment, 1, mCommentLen, fp) != mCommentLen) {
             ALOGW("fwrite %d bytes failed, %s",
                 (int) mCommentLen, strerror(errno));
             return UNKNOWN_ERROR;
@@ -1434,6 +1462,41 @@ status_t ZipFile::EndOfCentralDir::write(FILE* fp)
     }
 
     return OK;
+}
+
+/*
+ * The current EOCD size including its comment
+ */
+off_t ZipFile::EndOfCentralDir::size() const {
+    return kEOCDLen + mCommentLen;
+}
+
+/*
+ * Add EOCD comment at the end of current
+ */
+void ZipFile::EndOfCentralDir::addComment(uint8_t* buf, size_t len) {
+    if (mComment == NULL) {
+        mCommentLen = len;
+        mComment = new uint8_t[mCommentLen];
+        memcpy(mComment, buf + kEOCDLen, mCommentLen);
+    } else {
+        auto newComment = new uint8_t[mCommentLen + len];
+        memcpy(newComment, mComment, mCommentLen);
+        memcpy(newComment + mCommentLen, buf, len);
+        delete[] mComment;
+        mComment = newComment;
+        mCommentLen += len;
+    }
+}
+
+/*
+ * Add EOCD comment of '\0' with a given length.
+ */
+void ZipFile::addEocdCommentPadding(size_t commentLen) {
+    auto padding = new uint8_t[commentLen];
+    memset(padding, 0, commentLen);
+    mEOCD.addComment(padding, commentLen);
+    delete[] padding;
 }
 
 /*

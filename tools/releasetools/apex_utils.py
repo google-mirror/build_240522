@@ -363,7 +363,7 @@ def SignUncompressedApex(avbtool, apex_file, payload_key, container_key,
 
   # 3. Align the files at page boundary (same as in apexer).
   aligned_apex = common.MakeTempFile(prefix='apex-container-', suffix='.apex')
-  common.RunAndCheckOutput(['zipalign', '-f', '4096', apex_file, aligned_apex])
+  common.RunAndCheckOutput(['zipalign', '-f', '-s', '4096', apex_file, aligned_apex])
 
   # 4. Sign the APEX container with container_key.
   signed_apex = common.MakeTempFile(prefix='apex-container-', suffix='.apex')

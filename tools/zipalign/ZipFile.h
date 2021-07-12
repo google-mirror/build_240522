@@ -133,6 +133,21 @@ public:
     status_t flush(void);
 
     /*
+     * File size
+     */
+    status_t size(off_t* size) const;
+
+    /*
+     * Calculate the estimated file size.
+     */
+    off_t estimatedSize(void) const;
+
+    /*
+     * Add EOCD comment of '\0' with a given length.
+     */
+    void addEocdCommentPadding(size_t commentLen);
+
+    /*
      * Expand the data into the buffer provided.  The buffer must hold
      * at least <uncompressed len> bytes.  Variation expands directly
      * to a file.
@@ -183,6 +198,8 @@ private:
 
         status_t readBuf(const uint8_t* buf, int len);
         status_t write(FILE* fp);
+        off_t size() const;
+        void addComment(uint8_t* buf, size_t len);
 
         //uint32_t mSignature;
         uint16_t mDiskNumber;

@@ -673,6 +673,13 @@ status_t ZipEntry::CentralDirEntry::write(FILE* fp)
 }
 
 /*
+ * Size of this CD entry.
+ */
+size_t ZipEntry::CentralDirEntry::size() const {
+    return kCDELen + mFileNameLength + mExtraFieldLength + mFileCommentLength;
+}
+
+/*
  * Dump the contents of a CentralDirEntry object.
  */
 void ZipEntry::CentralDirEntry::dump(void) const
