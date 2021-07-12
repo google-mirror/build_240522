@@ -433,6 +433,39 @@ def _mkinfo(file, message = ""):
     """Prints info."""
     print(message)
 
+
+def __mkpatsubst_word(parsed_pattern,parsed_subst, word):
+    (before, after) = parsed_pattern
+    if not word.startswith(before):
+        return word
+    if not word.endswith(after):
+        return word
+    if len(parsed_subst) < 2:
+        return parsed_subst[0]
+    return parsed_subst[0] + word[len(before):len(word) - len(after)] + parsed_subst[1]
+
+
+def _mkpatsubst(pattern, replacement, s):
+    """Emulates Make's patsubst.
+
+    Tokenizes `s` (unless it is already a list), and then performs a simple
+    wildcard substitution (in other words, `foo%bar` pattern is equivalent to
+    the regular expression `^foo(.*)bar$, and the first `%` in replacement is
+    $1 in regex terms). Escaping % is not supported
+    """
+    if pattern.find("\\") >= 0:
+        fail("'\\' in pattern is not allowed")
+    parsed_pattern = pattern.split("%", 1)
+    if len(parsed_pattern) == 1:
+        return _mksubst(pattern, replacement, s)
+
+    parsed_replacement = replacement.split("%", 1)
+    if type(s) == "list":
+        return [__mkpatsubst_word(parsed_pattern, parsed_replacement, x) for x in s]
+
+    return " ".join([__mkpatsubst_word(parsed_pattern, parsed_replacement, x) for x in _mkstrip(s).split(" ")])
+
+
 def _mkstrip(s):
     """Emulates Make's strip.
 
@@ -507,6 +540,7 @@ rblf = struct(
     indirect = _indirect,
     mkinfo = _mkinfo,
     mkerror = _mkerror,
+    mkpatsubst = _mkpatsubst,
     mkwarning = _mkwarning,
     mkstrip = _mkstrip,
     mksubst = _mksubst,
