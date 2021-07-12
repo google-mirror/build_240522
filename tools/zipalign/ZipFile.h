@@ -44,8 +44,15 @@ namespace android {
 class ZipFile {
 public:
     ZipFile(void)
-      : mZipFp(NULL), mReadOnly(false), mNeedCDRewrite(false)
-      {}
+      : mZipFp(NULL),
+        mReadOnly(false),
+        mNeedCDRewrite(false),
+        mPadTo(1) {}
+    ZipFile(int padTo)
+      : mZipFp(NULL),
+        mReadOnly(false),
+        mNeedCDRewrite(false),
+        mPadTo(padTo) {}
     ~ZipFile(void) {
         if (!mReadOnly)
             flush();
@@ -133,6 +140,11 @@ public:
     status_t flush(void);
 
     /*
+     * File size
+     */
+    status_t size(off_t* size) const;
+
+    /*
      * Expand the data into the buffer provided.  The buffer must hold
      * at least <uncompressed len> bytes.  Variation expands directly
      * to a file.
@@ -183,6 +195,7 @@ private:
 
         status_t readBuf(const uint8_t* buf, int len);
         status_t write(FILE* fp);
+        void setComment(uint8_t* buf, size_t len);
 
         //uint32_t mSignature;
         uint16_t mDiskNumber;
@@ -251,6 +264,9 @@ private:
 
     /* set this when we trash the central dir */
     bool            mNeedCDRewrite;
+
+    /* pad output file to be sized as multiples of mPadTo */
+    int             mPadTo;
 
     /*
      * One ZipEntry per entry in the zip file.  I'm using pointers instead
