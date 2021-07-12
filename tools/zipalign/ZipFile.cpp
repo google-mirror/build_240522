@@ -1010,6 +1010,16 @@ status_t ZipFile::flush(void)
     eocdPosn = ftell(mZipFp);
     mEOCD.mCentralDirSize = eocdPosn - mEOCD.mCentralDirOffset;
 
+    if (mPadTo > 1) {
+        auto estimatedSize = eocdPosn + EndOfCentralDir::kEOCDLen;
+        auto padding = mPadTo - (estimatedSize % mPadTo);
+        if (padding > 0) {
+            uint8_t *comments = new uint8_t[padding];
+            memset(comments, 0, padding);
+            mEOCD.setComment(comments, padding);  // transfer ownership
+        }
+    }
+
     mEOCD.write(mZipFp);
 
     /*
@@ -1025,6 +1035,20 @@ status_t ZipFile::flush(void)
     /* should we clear the "newly added" flag in all entries now? */
 
     mNeedCDRewrite = false;
+    return OK;
+}
+
+/*
+ * Get the file size
+ */
+status_t ZipFile::size(off_t* size) const
+{
+    struct stat s;
+    if (fstat(fileno(mZipFp), &s) == -1) {
+        ALOGW("fstat failed: %s\n", strerror(errno));
+        return UNKNOWN_ERROR;
+    }
+    *size = s.st_size;
     return OK;
 }
 
@@ -1426,7 +1450,7 @@ status_t ZipFile::EndOfCentralDir::write(FILE* fp)
     }
     if (mCommentLen > 0) {
         assert(mComment != NULL);
-        if (fwrite(mComment, mCommentLen, 1, fp) != mCommentLen) {
+        if (fwrite(mComment, 1, mCommentLen, fp) != mCommentLen) {
             ALOGW("fwrite %d bytes failed, %s",
                 (int) mCommentLen, strerror(errno));
             return UNKNOWN_ERROR;
@@ -1434,6 +1458,15 @@ status_t ZipFile::EndOfCentralDir::write(FILE* fp)
     }
 
     return OK;
+}
+
+/*
+ * Set EOCD comment. ownership of buf is moved.
+ */
+void ZipFile::EndOfCentralDir::setComment(uint8_t* buf, size_t len) {
+    delete[] mComment;
+    mComment = buf;
+    mCommentLen = len;
 }
 
 /*
