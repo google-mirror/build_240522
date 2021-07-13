@@ -1809,6 +1809,7 @@ function validate_current_shell() {
 # This allows loading only approved vendorsetup.sh files
 function source_vendorsetup() {
     unset VENDOR_PYTHONPATH
+    unset ANDROID_ENABLE_METRICS_UPLOAD
     local T="$(gettop)"
     allowed=
     for f in $(cd "$T" && find -L device vendor product -maxdepth 4 -name 'allowed-vendorsetup_sh-files' 2>/dev/null | sort); do
