@@ -23,11 +23,6 @@
 PRODUCT_PACKAGES += \
     init_first_stage \
 
-# Debug ramdisk
-PRODUCT_PACKAGES += \
-    adb_debug.prop \
-    userdebug_plat_sepolicy.cil \
-
 _my_paths := \
     $(TARGET_COPY_OUT_RAMDISK)/ \
     $(TARGET_COPY_OUT_DEBUG_RAMDISK)/ \
