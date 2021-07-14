@@ -864,3 +864,10 @@ ifeq (true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT))
       both true. Recovery resources should be installed to either boot or vendor_boot, but not both)
   endif
 endif
+
+ifeq (true,$(PRODUCT_BUILD_OTA_PACKAGE))
+  ifneq ($(filter generic%,$(TARGET_DEVICE)),)
+    $(error PRODUCT_BUILD_OTA_PACKAGE is not for generic target $(TARGET_DEVICE). \
+            Use $(PRODUCT_BUILD_GENERIC_OTA_PACKAGE) instead.)
+  endif
+endif
