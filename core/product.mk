@@ -408,6 +408,14 @@ _product_single_value_vars += PRODUCT_VIRTUAL_AB_OTA_RETROFIT
 # TARGET_OTA_ALLOW_NON_AB takes the value of AB_OTA_UPDATER into account.
 _product_single_value_vars += PRODUCT_OTA_FORCE_NON_AB_PACKAGE
 
+# If set to true, generate OTA package even when
+# - TARGET_NO_KERNEL is set, or
+# - there is no recovery fstab, or
+# This variable has the similar sementics as PRODUCT_BUILD_GENERIC_OTA_PACKAGE,
+# except that PRODUCT_BUILD_GENERIC_OTA_PACKAGE is intended for generic targets,
+# and PRODUCT_BUILD_OTA_PACKAGE is for real device targets.
+_product_single_value_vars += PRODUCT_BUILD_OTA_PACKAGE
+
 # If set, Java module in product partition cannot use hidden APIs.
 _product_single_value_vars += PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
 
