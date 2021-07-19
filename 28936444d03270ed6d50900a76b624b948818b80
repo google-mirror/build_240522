@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cd9c8a_96124685",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-07-19T20:36:15Z",
+      "side": 1,
+      "message": "Should this be bounded to avoid a potential infinite loop during signing, and if the signed APK is not aligned after the bounded number of attempts a failure can be reported? Although the signing block produced by apksig should always contain a verity padding block to align the full signing block to 4K, so this may not be an issue.",
+      "range": {
+        "startLine": 1222,
+        "startChar": 20,
+        "endLine": 1222,
+        "endChar": 32
+      },
+      "revId": "28936444d03270ed6d50900a76b624b948818b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
