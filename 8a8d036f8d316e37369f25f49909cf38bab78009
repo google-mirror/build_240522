@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013475892",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1762579?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "fb727587_e00c694e",
+          "description": "Change to \"tools/zipalign/ZipAlignMain.cpp\"",
+          "replacements": [
+            {
+              "path": "tools/zipalign/ZipAlignMain.cpp",
+              "range": {
+                "startLine": 44,
+                "startChar": 54,
+                "endLine": 44,
+                "endChar": 62
+              },
+              "replacement": "multiple"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "b4755c74_bdbc872a",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-19T23:43:05Z",
+      "side": 1,
+      "message": "Common typo found: \"mulitple\" -- should it be \"multiple\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 44,
+        "startChar": 54,
+        "endLine": 44,
+        "endChar": 62
+      },
+      "revId": "8a8d036f8d316e37369f25f49909cf38bab78009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
