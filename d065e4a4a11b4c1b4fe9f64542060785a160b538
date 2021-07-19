@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55179e5c_a467304b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-19T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90c6c30c_e5c6a51b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcde9327_0103f06a",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-07-19T21:10:32Z",
       "side": 1,
       "message": "i\u0027m assuming we actually need to do this: if the \"size\" field for the EOCD comment is 0, we can\u0027t have trailing 0 bytes?\n\nah, bummer:\n```\n  /*\n   * Verify that there\u0027s no trailing space at the end of the central directory\n   * and its comment.\n   */\n  const off64_t calculated_length \u003d eocd_offset + sizeof(EocdRecord) + eocd-\u003ecomment_length;\n  if (calculated_length !\u003d file_length) {\n    ALOGW(\"Zip: %\" PRId64 \" extraneous bytes at the end of the central directory\",\n          static_cast\u003cint64_t\u003e(file_length - calculated_length));\n    return kInvalidFile;\n  }\n```\n\ni have to say i\u0027m still pretty tempted to make this a tiny separate program that edits the last two bytes and calls ftruncate() though, rather than add this weird ability here...",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696d4fe2_1a0a7f01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-19T23:47:27Z",
+      "side": 1,
+      "message": "Yeah, agreed. In fact this new flag is for apexer (a tool for apex packaging). And apexer can benefit from that tiny program because the current zipalign produces bigger outputs than necessary. A APEX file needs to have a single entry(\"apex_payload.img\" to be 4k-aligned) and the file itself to be sized 4K multiples. We probably need zipalign-for-apex kind of program for this specific requirements.\n\nCan I do it in b/193362313?",
+      "parentUuid": "dcde9327_0103f06a",
       "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f90e051_a5775d57",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-19T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07ab8d1_afe5acb2",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9edfac7e_f4820008",
@@ -71,6 +131,24 @@
       "writtenOn": "2021-07-19T21:10:32Z",
       "side": 1,
       "message": "this is unnecessary: delete[] and delete are defined to be no-ops on null pointers.",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d2f6f5_c7401641",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-19T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9edfac7e_f4820008",
       "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
