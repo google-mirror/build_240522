@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c6c30c_e5c6a51b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T21:10:32Z",
+      "side": 1,
+      "message": "this is sufficiently niche that i\u0027m tempted to explicitly say something in the --help output to make it clearer that 99.9% of users don\u0027t want this option...",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcde9327_0103f06a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T21:10:32Z",
+      "side": 1,
+      "message": "i\u0027m assuming we actually need to do this: if the \"size\" field for the EOCD comment is 0, we can\u0027t have trailing 0 bytes?\n\nah, bummer:\n```\n  /*\n   * Verify that there\u0027s no trailing space at the end of the central directory\n   * and its comment.\n   */\n  const off64_t calculated_length \u003d eocd_offset + sizeof(EocdRecord) + eocd-\u003ecomment_length;\n  if (calculated_length !\u003d file_length) {\n    ALOGW(\"Zip: %\" PRId64 \" extraneous bytes at the end of the central directory\",\n          static_cast\u003cint64_t\u003e(file_length - calculated_length));\n    return kInvalidFile;\n  }\n```\n\ni have to say i\u0027m still pretty tempted to make this a tiny separate program that edits the last two bytes and calls ftruncate() though, rather than add this weird ability here...",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07ab8d1_afe5acb2",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T21:10:32Z",
+      "side": 1,
+      "message": "\"pad file size to a multiple of \u003cpadto\u003e\"\n\n(i\u0027d probably rename \u003cpadto\u003e to \u003cbytes\u003e in the help text.)",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9edfac7e_f4820008",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T21:10:32Z",
+      "side": 1,
+      "message": "this is unnecessary: delete[] and delete are defined to be no-ops on null pointers.",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
