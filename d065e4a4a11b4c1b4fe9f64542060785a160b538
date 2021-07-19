@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15a7faa0_b133598f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T23:55:18Z",
+      "side": 1,
+      "message": "aren\u0027t you better off just doing everything in apexer and not calling zipalign at all then? i don\u0027t think zipalign is adding much value to that path at all?",
+      "parentUuid": "696d4fe2_1a0a7f01",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c07ab8d1_afe5acb2",
         "filename": "tools/zipalign/ZipAlignMain.cpp",
         "patchSetId": 4
