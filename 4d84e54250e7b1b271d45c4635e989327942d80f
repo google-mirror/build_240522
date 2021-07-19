@@ -16,6 +16,24 @@
       "message": "This fixes hikey build.",
       "revId": "4d84e54250e7b1b271d45c4635e989327942d80f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7504d1e9_c178fc8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-07-19T17:26:32Z",
+      "side": 1,
+      "message": "I mean, the revert fixes hikey build, and this shouldn\u0027t break hikey build any more.",
+      "parentUuid": "ccacecf6_87af6ef1",
+      "revId": "4d84e54250e7b1b271d45c4635e989327942d80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
