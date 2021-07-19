@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8839330_0c1c2ac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-19T20:51:48Z",
+      "side": 1,
+      "message": "huh, i didn\u0027t know we had getopt() on Windows...",
+      "revId": "b72009a8e966e95f0279818e7c7dec9000f84688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
