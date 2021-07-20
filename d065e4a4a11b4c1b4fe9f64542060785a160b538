@@ -101,6 +101,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4032c9_9ce48d52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-20T00:39:56Z",
+      "side": 1,
+      "message": "Ack. Because apexer output is supposed to be processed by signapk always and signapk\u0027s output is actually used, we probably don\u0027t need this change. In theory, apexer should generate apex files as described above but it doesn\u0027t have to be done right now. I\u0027ll fix it with b/193362313.\n\nAbandoning. Thank you, Elliott.",
+      "parentUuid": "15a7faa0_b133598f",
+      "revId": "d065e4a4a11b4c1b4fe9f64542060785a160b538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c07ab8d1_afe5acb2",
