@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c10d538_45ad2b76",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "nit: what about an indentation here, so that it\u0027s obvious these messages belong to the above \u0027extracting APEX\u0027 log? Also maybe combine into one message per apex\n\nmaybe something like:\n\n\n  extracting APEX\n    extracting name1 (apex1): info1\n      running command ...\n    extracting name2 (apex2): info2\n      running command ...",
+      "range": {
+        "startLine": 1043,
+        "startChar": 5,
+        "endLine": 1043,
+        "endChar": 18
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727899fd_3d2ea8dd",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "nit: could you place this under the `with open()` so that it\u0027s clear it\u0027s only used for this one json.dump statement?",
+      "range": {
+        "startLine": 1074,
+        "startChar": 2,
+        "endLine": 1074,
+        "endChar": 24
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1dd927_c5ecd5cc",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "Please tie all TODOs to a bug rather than a person",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 51
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2265e93d_740d9683",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "At the moment this is always False. Did you mean to delete line 1089 after testing or something?",
+      "range": {
+        "startLine": 1089,
+        "startChar": 2,
+        "endLine": 1091,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46777c93_76525fa3",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "If we\u0027re never modifying this var, could we hardcode it here to \u0027.\u0027?",
+      "range": {
+        "startLine": 1135,
+        "startChar": 8,
+        "endLine": 1135,
+        "endChar": 22
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661c0d1a_94766eff",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "For any commands like mkdir/cp/cat/etc. can you try to use Python functions instead?\ne.g.\nos.makedirs(), shutil.copy(), shutil.copyfileobj()\n\nThat way we only need subprocess for actual binaries that don\u0027t have python standard library equivalents.",
+      "range": {
+        "startLine": 1171,
+        "startChar": 5,
+        "endLine": 1172,
+        "endChar": 50
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4531b8fb_745c3258",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "Is there any way to not hardcode the architecture here? Can we look up this arch in the misc_info or otherwise infer it?\n\nJust in case down the road someone wants to merge_target_files with x86_64, etc.",
+      "range": {
+        "startLine": 1202,
+        "startChar": 32,
+        "endLine": 1202,
+        "endChar": 37
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3f00f2_479b88a8",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "In rebuild_image_with_sepolicy() I had to take special care to regenerate vendor.img using old otatools, for the case of R+S merged builds.\n\nIf dexopt will only run for S+S (or other non-vendor freeze builds) we can ignore that.\n\nHowever, if we want dexopt to support R+S merged builds then let me know and I think we can combine some of that special regen logic between rebuild_image_with_sepolicy() and this function.",
+      "range": {
+        "startLine": 1218,
+        "startChar": 4,
+        "endLine": 1222,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4470aeb1_0a88e5dc",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "Sweeping suggestion here:\n\nI think this function and its parameters, as well as other local variables around here, could benefit from being more explicit. I think if we update both this old code + your new code it would be more clear the purpose of each piece.\n\nWhat do you think about:\n- process_special_cases -\u003e process_meta\n- framework_target_files_temp_dir (Line 1280 temp var, as well as function arg name) -\u003e framework_meta_dir\n- vendor_target_files_temp_dir (Line 1281 temp var, as well as function arg name) -\u003e vendor_meta_dir\n- output_target_files_temp_dir -\u003e output_target_files_dir (the process_special_cases function doesn\u0027t care that its \"temp\" or not, it just uses it as an output location)\n\nMaybe we could even update lines 1280/1281 to include \"META\" in their paths directly, so that the sub functions within process_special_cases don\u0027t have to keep appending \"META\" before using them?",
+      "range": {
+        "startLine": 1290,
+        "startChar": 2,
+        "endLine": 1290,
+        "endChar": 23
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052564cc_a5a019c7",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-21T20:18:17Z",
+      "side": 1,
+      "message": "Does this temp_dir in this function rely on temp_dir having existing contents, or could it be a blank dir?\n\nIf it could be blank, what do you think about removing it as a parameter here and just creating a fresh blank temp_dir directly within process_dexopt?\nIf it needs certain existing contents, can you explicitly mention what must be there already before calling process_dexopt by including it in the function docstring?",
+      "range": {
+        "startLine": 1291,
+        "startChar": 0,
+        "endLine": 1291,
+        "endChar": 24
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
