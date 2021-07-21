@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b77b01_82852a8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2021-07-21T17:46:51Z",
+      "side": 1,
+      "message": "The duplication is a little concerning but outside the scope of this change.",
+      "revId": "8bc189e39f4ed041a2fe15d68b5f3d023db4a18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
