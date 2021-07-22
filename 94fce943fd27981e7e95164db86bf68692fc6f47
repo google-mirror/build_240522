@@ -22,6 +22,30 @@
       },
       "revId": "94fce943fd27981e7e95164db86bf68692fc6f47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "129e2070_c3ad3c3d",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-07-22T04:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f120c4c_213f812a",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 48
+      },
+      "revId": "94fce943fd27981e7e95164db86bf68692fc6f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
