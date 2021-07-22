@@ -34,6 +34,24 @@
       "parentUuid": "89b77b01_82852a8d",
       "revId": "8bc189e39f4ed041a2fe15d68b5f3d023db4a18b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7204a60a_f8e34813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-07-22T14:50:17Z",
+      "side": 1,
+      "message": "dexpreopt.config is needed also for dexpreopt_gen (when we dexpreopt Android.mk modules, we compile a bit of Soong into a standalone executable dexpreopt_gen, and we generate a script dexpreopt.sh for each dexpreopted module in Android.mk, then during the build we run dexpreopt_gen that actually generates the build rule, and  and pass dexpreotp.config to it).",
+      "parentUuid": "c300f01e_034b86ef",
+      "revId": "8bc189e39f4ed041a2fe15d68b5f3d023db4a18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
