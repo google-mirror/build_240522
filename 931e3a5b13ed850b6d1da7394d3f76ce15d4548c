@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5aa835_ca5122dd",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c10d538_45ad2b76",
+      "range": {
+        "startLine": 1043,
+        "startChar": 5,
+        "endLine": 1043,
+        "endChar": 18
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "727899fd_3d2ea8dd",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf0dd7d5_27fe282f",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "727899fd_3d2ea8dd",
+      "range": {
+        "startLine": 1074,
+        "startChar": 2,
+        "endLine": 1074,
+        "endChar": 24
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c1dd927_c5ecd5cc",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-21T20:18:17Z",
       "side": 1,
       "message": "Please tie all TODOs to a bug rather than a person",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 51
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9327f84e_5bda03ee",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c1dd927_c5ecd5cc",
       "range": {
         "startLine": 1088,
         "startChar": 0,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ab185ec_d5a08393",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "That\u0027s the item that should become configurable (perhaps as an argument to the script) to select vendor or system_other as the destination of the *dex files. I extended the comment above to make it clearer.",
+      "parentUuid": "2265e93d_740d9683",
+      "range": {
+        "startLine": 1089,
+        "startChar": 2,
+        "endLine": 1091,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46777c93_76525fa3",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 2
@@ -106,6 +202,30 @@
       "writtenOn": "2021-07-21T20:18:17Z",
       "side": 1,
       "message": "If we\u0027re never modifying this var, could we hardcode it here to \u0027.\u0027?",
+      "range": {
+        "startLine": 1135,
+        "startChar": 8,
+        "endLine": 1135,
+        "endChar": 22
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d89868_302a1c14",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46777c93_76525fa3",
       "range": {
         "startLine": 1135,
         "startChar": 8,
@@ -129,6 +249,30 @@
       "writtenOn": "2021-07-21T20:18:17Z",
       "side": 1,
       "message": "For any commands like mkdir/cp/cat/etc. can you try to use Python functions instead?\ne.g.\nos.makedirs(), shutil.copy(), shutil.copyfileobj()\n\nThat way we only need subprocess for actual binaries that don\u0027t have python standard library equivalents.",
+      "range": {
+        "startLine": 1171,
+        "startChar": 5,
+        "endLine": 1172,
+        "endChar": 50
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f32b77_568973a2",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "661c0d1a_94766eff",
       "range": {
         "startLine": 1171,
         "startChar": 5,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f0b606d_fff61f12",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "I added a TODO for now, I\u0027m not sure if this dexopt mechanism will work with say, x86_64, and what\u0027s a reliable way to find out the architecture at this stage in the build.",
+      "parentUuid": "4531b8fb_745c3258",
+      "range": {
+        "startLine": 1202,
+        "startChar": 32,
+        "endLine": 1202,
+        "endChar": 37
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3f00f2_479b88a8",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 2
@@ -175,6 +343,30 @@
       "writtenOn": "2021-07-21T20:18:17Z",
       "side": 1,
       "message": "In rebuild_image_with_sepolicy() I had to take special care to regenerate vendor.img using old otatools, for the case of R+S merged builds.\n\nIf dexopt will only run for S+S (or other non-vendor freeze builds) we can ignore that.\n\nHowever, if we want dexopt to support R+S merged builds then let me know and I think we can combine some of that special regen logic between rebuild_image_with_sepolicy() and this function.",
+      "range": {
+        "startLine": 1218,
+        "startChar": 4,
+        "endLine": 1222,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed57bcdf_54faa502",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Added TODO",
+      "parentUuid": "6e3f00f2_479b88a8",
       "range": {
         "startLine": 1218,
         "startChar": 4,
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b92b9c8_6ddecdfd",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "I\u0027ve done some of the cleanup. I left process_special_cases, because I\u0027m not sure dexopt can be considered \"process_meta\", even though it depends on META items. I renamed the *_temp_dir variables to *_meta.\n\nI like the idea of including META in the path, but it\u0027s all over the place, and I was afraid of breaking the code (it\u0027s not just renaming variables but an actual behavior change). I\u0027ll leave that for a future cleanup.",
+      "parentUuid": "4470aeb1_0a88e5dc",
+      "range": {
+        "startLine": 1290,
+        "startChar": 2,
+        "endLine": 1290,
+        "endChar": 23
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "052564cc_a5a019c7",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 2
@@ -221,6 +437,30 @@
       "writtenOn": "2021-07-21T20:18:17Z",
       "side": 1,
       "message": "Does this temp_dir in this function rely on temp_dir having existing contents, or could it be a blank dir?\n\nIf it could be blank, what do you think about removing it as a parameter here and just creating a fresh blank temp_dir directly within process_dexopt?\nIf it needs certain existing contents, can you explicitly mention what must be there already before calling process_dexopt by including it in the function docstring?",
+      "range": {
+        "startLine": 1291,
+        "startChar": 0,
+        "endLine": 1291,
+        "endChar": 24
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399ba891_824bc962",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-07-22T00:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "052564cc_a5a019c7",
       "range": {
         "startLine": 1291,
         "startChar": 0,
