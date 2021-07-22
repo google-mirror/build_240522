@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f32ee40_0b5d33fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-22T09:39:32Z",
+      "side": 1,
+      "message": "When I ran the test locally, the result were:\n\n  x86_64 releasetools_test: Passed: 302, Failed: 26, Ignored: 0, Assumption Failed: 0,\n\n\nIs this expected?",
+      "range": {
+        "startLine": 15,
+        "startChar": 19,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "f9be5eeb4442b90b17e737dcb57c8cdfaadf4d79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
