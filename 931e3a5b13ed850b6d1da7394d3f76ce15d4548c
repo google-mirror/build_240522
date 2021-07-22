@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfcb593_09756a43",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "Understood, thanks!",
+      "parentUuid": "8ab185ec_d5a08393",
+      "range": {
+        "startLine": 1089,
+        "startChar": 2,
+        "endLine": 1091,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46777c93_76525fa3",
@@ -330,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40e6495_573d6fcc",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9f0b606d_fff61f12",
+      "range": {
+        "startLine": 1202,
+        "startChar": 32,
+        "endLine": 1202,
+        "endChar": 37
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e3f00f2_479b88a8",
@@ -377,6 +425,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb846740_81310287",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ed57bcdf_54faa502",
+      "range": {
+        "startLine": 1218,
+        "startChar": 4,
+        "endLine": 1222,
+        "endChar": 27
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4470aeb1_0a88e5dc",
@@ -414,6 +486,30 @@
       "side": 1,
       "message": "I\u0027ve done some of the cleanup. I left process_special_cases, because I\u0027m not sure dexopt can be considered \"process_meta\", even though it depends on META items. I renamed the *_temp_dir variables to *_meta.\n\nI like the idea of including META in the path, but it\u0027s all over the place, and I was afraid of breaking the code (it\u0027s not just renaming variables but an actual behavior change). I\u0027ll leave that for a future cleanup.",
       "parentUuid": "4470aeb1_0a88e5dc",
+      "range": {
+        "startLine": 1290,
+        "startChar": 2,
+        "endLine": 1290,
+        "endChar": 23
+      },
+      "revId": "931e3a5b13ed850b6d1da7394d3f76ce15d4548c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1554b2a4_39057786",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b92b9c8_6ddecdfd",
       "range": {
         "startLine": 1290,
         "startChar": 2,

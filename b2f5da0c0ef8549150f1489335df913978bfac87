@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4e2b1c_c2c5134d",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "nit: extra \u0027where\u0027. How about something like:\n\nLocation containing an \u0027output\u0027 directory where target files have been extracted, e.g. \u003ctemp_dir\u003e/output/SYSTEM, \u003ctemp_dir\u003e/output/IMAGES, etc.\n\n(Here \u0026 process_dexopt)",
+      "range": {
+        "startLine": 844,
+        "startChar": 14,
+        "endLine": 845,
+        "endChar": 25
+      },
+      "revId": "b2f5da0c0ef8549150f1489335df913978bfac87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "48a7bf74_16062740",
@@ -36,6 +59,29 @@
         "startChar": 4,
         "endLine": 1108,
         "endChar": 11
+      },
+      "revId": "b2f5da0c0ef8549150f1489335df913978bfac87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d799db9_1c04ee2a",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-07-22T18:59:58Z",
+      "side": 1,
+      "message": "nit:similar",
+      "range": {
+        "startLine": 1204,
+        "startChar": 57,
+        "endLine": 1204,
+        "endChar": 65
       },
       "revId": "b2f5da0c0ef8549150f1489335df913978bfac87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
