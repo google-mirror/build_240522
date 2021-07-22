@@ -16,6 +16,29 @@
       "message": "Thanks for the great comments, PTAL.",
       "revId": "b2f5da0c0ef8549150f1489335df913978bfac87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a7bf74_16062740",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2021-07-22T15:21:05Z",
+      "side": 1,
+      "message": "it looks like there hasn\u0027t been such as a case, but vendor/framework/*.jar could be candidate for postdexpreopting in the future..",
+      "range": {
+        "startLine": 1108,
+        "startChar": 4,
+        "endLine": 1108,
+        "endChar": 11
+      },
+      "revId": "b2f5da0c0ef8549150f1489335df913978bfac87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
