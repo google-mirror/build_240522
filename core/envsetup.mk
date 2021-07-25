@@ -78,7 +78,7 @@ $(foreach v,$(ENABLED_VERSIONS), \
 # people who haven't re-run those will have to do so before they
 # can build.  Make sure to also update the corresponding value in
 # buildspec.mk.default and envsetup.sh.
-CORRECT_BUILD_ENV_SEQUENCE_NUMBER := 13
+CORRECT_BUILD_ENV_SEQUENCE_NUMBER := 14
 
 # ---------------------------------------------------------------
 # The product defaults to generic on hardware
