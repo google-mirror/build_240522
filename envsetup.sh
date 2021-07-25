@@ -240,7 +240,7 @@ function setpaths()
         export ANDROID_TOOLCHAIN_2ND_ARCH=$gccprebuiltdir/$toolchaindir2
     fi
 
-    export ANDROID_DEV_SCRIPTS=$T/development/scripts:$T/prebuilts/devtools/tools:$T/external/selinux/prebuilts/bin
+    export ANDROID_DEV_SCRIPTS=$T/development/scripts:$T/prebuilts/devtools/tools:$T/external/selinux/prebuilts/bin:$T/build/make/tools/scripts
 
     # add kernel specific binaries
     case $(uname -s) in
@@ -367,7 +367,7 @@ function set_stuff_for_environment()
 
 function set_sequence_number()
 {
-    export BUILD_ENV_SEQUENCE_NUMBER=13
+    export BUILD_ENV_SEQUENCE_NUMBER=14
 }
 
 # Takes a command name, and check if it's in ENVSETUP_NO_COMPLETION or not.
