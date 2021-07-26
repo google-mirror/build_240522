@@ -22,6 +22,30 @@
       },
       "revId": "d17b9ed1066421006692976d074d82d4df290c19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "247933cb_f7fc4a58",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-07-26T18:29:03Z",
+      "side": 1,
+      "message": "Maybe change it to vbmeta_partition !\u003d vbmeta ? This only affects validation after signing. I think we always use signing tools from the same build? Which means this change only affects T.",
+      "parentUuid": "ace93ae4_dbfbf65d",
+      "range": {
+        "startLine": 265,
+        "startChar": 34,
+        "endLine": 265,
+        "endChar": 47
+      },
+      "revId": "d17b9ed1066421006692976d074d82d4df290c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
