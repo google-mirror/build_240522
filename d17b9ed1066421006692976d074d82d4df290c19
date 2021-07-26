@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace93ae4_dbfbf65d",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-07-26T18:26:15Z",
+      "side": 1,
+      "message": "note now vbmeta_vendor is a thing.... b/194637203\n\ndoes the vbmeta_system here affect S build signing?",
+      "range": {
+        "startLine": 265,
+        "startChar": 34,
+        "endLine": 265,
+        "endChar": 47
+      },
+      "revId": "d17b9ed1066421006692976d074d82d4df290c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
