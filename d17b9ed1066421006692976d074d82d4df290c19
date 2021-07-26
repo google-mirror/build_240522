@@ -46,6 +46,30 @@
       },
       "revId": "d17b9ed1066421006692976d074d82d4df290c19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f11ee5_d91d7b89",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-07-26T18:35:13Z",
+      "side": 1,
+      "message": "yeah sure. So this fingerprint check logic isn\u0027t in S?",
+      "parentUuid": "247933cb_f7fc4a58",
+      "range": {
+        "startLine": 265,
+        "startChar": 34,
+        "endLine": 265,
+        "endChar": 47
+      },
+      "revId": "d17b9ed1066421006692976d074d82d4df290c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
