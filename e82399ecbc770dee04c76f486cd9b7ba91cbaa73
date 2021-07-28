@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e11db6_9a0423bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-07-28T00:01:23Z",
+      "side": 1,
+      "message": "Add the bug#, a brief description of what\u0027s wrong, and probably a test case :)",
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d8d239_4935a06f",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-07-28T00:01:23Z",
+      "side": 1,
+      "message": "rename?",
+      "range": {
+        "startLine": 403,
+        "startChar": 22,
+        "endLine": 403,
+        "endChar": 24
+      },
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eaf6a15_b70d18fe",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-07-28T00:01:23Z",
+      "side": 1,
+      "message": "This code is gone after you make the change... I guess just say don\u0027t use the extra length from central directory",
+      "range": {
+        "startLine": 412,
+        "startChar": 14,
+        "endLine": 412,
+        "endChar": 37
+      },
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
