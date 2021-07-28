@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013934584",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742854?revision\u003d9",
+      "fixSuggestions": [
+        {
+          "fixId": "d2dba876_4e43f209",
+          "description": "Change to \"tools/releasetools/test_ota_utils.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/test_ota_utils.py",
+              "range": {
+                "startLine": 27,
+                "startChar": 8,
+                "endLine": 27,
+                "endChar": 13
+              },
+              "replacement": "length"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c0bdce89_1493a8c8",
+        "filename": "tools/releasetools/test_ota_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-28T15:38:46Z",
+      "side": 1,
+      "message": "Common typo found: \"lenth\" -- should it be \"length\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "ef138a3a867374f04892d50e2f7de9926e940c5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013934584",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742854?revision\u003d9",
+      "fixSuggestions": [
+        {
+          "fixId": "89efb50f_78130eba",
+          "description": "Change to \"tools/releasetools/test_ota_utils.py\"",
+          "replacements": [
+            {
+              "path": "tools/releasetools/test_ota_utils.py",
+              "range": {
+                "startLine": 30,
+                "startChar": 60,
+                "endLine": 30,
+                "endChar": 66
+              },
+              "replacement": "offset"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "b03605f4_127c8a74",
+        "filename": "tools/releasetools/test_ota_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-28T15:38:46Z",
+      "side": 1,
+      "message": "Common typo found: \"offest\" -- should it be \"offset\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 30,
+        "startChar": 60,
+        "endLine": 30,
+        "endChar": 66
+      },
+      "revId": "ef138a3a867374f04892d50e2f7de9926e940c5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
