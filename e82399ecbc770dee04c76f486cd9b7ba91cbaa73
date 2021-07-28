@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e39062_a466336f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-07-28T15:40:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53e11db6_9a0423bd",
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43d8d239_4935a06f",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47688572_7edb35c3",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-07-28T15:40:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d8d239_4935a06f",
+      "range": {
+        "startLine": 403,
+        "startChar": 22,
+        "endLine": 403,
+        "endChar": 24
+      },
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eaf6a15_b70d18fe",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-07-28T00:01:23Z",
       "side": 1,
       "message": "This code is gone after you make the change... I guess just say don\u0027t use the extra length from central directory",
+      "range": {
+        "startLine": 412,
+        "startChar": 14,
+        "endLine": 412,
+        "endChar": 37
+      },
+      "revId": "e82399ecbc770dee04c76f486cd9b7ba91cbaa73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84413052_e115e212",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-07-28T15:40:35Z",
+      "side": 1,
+      "message": "How would reader know what code gives extra length from central directory and what code gives extra length from local file directory? I think this comment serves some clarification purposes.",
+      "parentUuid": "6eaf6a15_b70d18fe",
       "range": {
         "startLine": 412,
         "startChar": 14,
