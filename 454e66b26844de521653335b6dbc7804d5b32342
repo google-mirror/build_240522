@@ -49,6 +49,102 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d71adaec_a1614318",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-07-29T18:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad8e1c80_647d7952",
+      "range": {
+        "startLine": 374,
+        "startChar": 42,
+        "endLine": 374,
+        "endChar": 49
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f625055b_5f7ed10b",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-07-29T18:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c252e90e_ec98b902",
+      "range": {
+        "startLine": 374,
+        "startChar": 38,
+        "endLine": 374,
+        "endChar": 42
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359ac92c_01781fc0",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-07-29T18:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c252e90e_ec98b902",
+      "range": {
+        "startLine": 374,
+        "startChar": 38,
+        "endLine": 374,
+        "endChar": 42
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b2fb0c4_73f5786e",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-07-29T18:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad8e1c80_647d7952",
+      "range": {
+        "startLine": 374,
+        "startChar": 42,
+        "endLine": 374,
+        "endChar": 49
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0d38622e_1cd40a3d",
         "filename": "core/product_config.rbc",
         "patchSetId": 1
@@ -60,6 +156,30 @@
       "writtenOn": "2021-07-29T12:41:41Z",
       "side": 1,
       "message": "Once we get all the config in starlark, this looks like a great opportunity to take advantage of starlark\u0027s more structured data.",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 22
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19d9f9a_93aa2754",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-07-29T18:52:09Z",
+      "side": 1,
+      "message": "Yes. The plan is to generate semantically meaningful Starlark rules instead of dictionary entries assignments, once the converter handles all Make features it encounters in the vendors product configuration makefiles.",
+      "parentUuid": "0d38622e_1cd40a3d",
       "range": {
         "startLine": 375,
         "startChar": 12,
