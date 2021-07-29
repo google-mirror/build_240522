@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8e1c80_647d7952",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-07-29T12:41:41Z",
+      "side": 1,
+      "message": "given that words will return the list or split if necessary, can we just call words instead of having the if/else here?",
+      "range": {
+        "startLine": 374,
+        "startChar": 42,
+        "endLine": 374,
+        "endChar": 49
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c252e90e_ec98b902",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-07-29T12:41:41Z",
+      "side": 1,
+      "message": "it doesn\u0027t look like words is a method on string -- other places just call __words(\u003cparam\u003e)",
+      "range": {
+        "startLine": 374,
+        "startChar": 38,
+        "endLine": 374,
+        "endChar": 42
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d38622e_1cd40a3d",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-07-29T12:41:41Z",
+      "side": 1,
+      "message": "Once we get all the config in starlark, this looks like a great opportunity to take advantage of starlark\u0027s more structured data.",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 22
+      },
+      "revId": "454e66b26844de521653335b6dbc7804d5b32342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
