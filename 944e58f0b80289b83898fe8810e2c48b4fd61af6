@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206312a2_22af6e54",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-07-29T12:37:05Z",
+      "side": 1,
+      "message": "can we use a more name than ns? config_vars?",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "944e58f0b80289b83898fe8810e2c48b4fd61af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194f80f0_52ca9bee",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-07-29T12:37:05Z",
+      "side": 1,
+      "message": "note a blocker for this CL, but some mk files are setting SOONG_CONFIG_NAMESPACES directly (e.g. https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/shared/device.mk;l\u003d167;drc\u003d475a2dc504e47ac615e18ffae3f5b288865879d5), have we tested the interaction between the two methods of specifying soong config variables?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "revId": "944e58f0b80289b83898fe8810e2c48b4fd61af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
