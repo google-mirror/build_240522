@@ -42,6 +42,10 @@ Usage:  add_img_to_target_files [flag] target_files
   --is_signing
       Skip building & adding the images for "userdata" and "cache" if we
       are signing the target files.
+
+  --skip_list <partitions>
+      Optional comma-separated list of partitions to skip when
+      processing the zipfile.
 """
 
 from __future__ import print_function
@@ -78,6 +82,7 @@ OPTIONS.replace_updated_files_list = []
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
 OPTIONS.is_signing = False
+OPTIONS.skip_list = []
 
 # Use a fixed timestamp (01/01/2009 00:00:00 UTC) for files when packaging
 # images. (b/24377993, b/80600931)
@@ -589,7 +594,7 @@ def CheckAbOtaImages(output_zip, ab_partitions):
     AssertionError: If it can't find an image.
   """
   for partition in ab_partitions:
-    img_name = partition.strip() + ".img"
+    img_name = partition + ".img"
 
     # Assert that the image is present under IMAGES/ now.
     if output_zip:
@@ -796,7 +801,7 @@ def AddImagesToTargetFiles(filename):
     logger.info("\n\n++++ %s  ++++\n\n", s)
 
   boot_image = None
-  if has_boot:
+  if has_boot and 'boot' not in OPTIONS.skip_list:
     banner("boot")
     boot_images = OPTIONS.info_dict.get("boot_images")
     if boot_images is None:
@@ -817,7 +822,7 @@ def AddImagesToTargetFiles(filename):
           if output_zip:
             boot_image.AddToZip(output_zip)
 
-  if has_vendor_boot:
+  if has_vendor_boot and 'vendor_boot' not in OPTIONS.skip_list:
     banner("vendor_boot")
     vendor_boot_image = common.GetVendorBootImage(
         "IMAGES/vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
@@ -831,7 +836,7 @@ def AddImagesToTargetFiles(filename):
           vendor_boot_image.AddToZip(output_zip)
 
   recovery_image = None
-  if has_recovery:
+  if has_recovery and 'recovery' not in OPTIONS.skip_list:
     banner("recovery")
     recovery_image = common.GetBootableImage(
         "IMAGES/recovery.img", "recovery.img", OPTIONS.input_tmp, "RECOVERY")
@@ -856,57 +861,59 @@ def AddImagesToTargetFiles(filename):
         if output_zip:
           recovery_two_step_image.AddToZip(output_zip)
 
-  if has_system:
+  if has_system and 'system' not in OPTIONS.skip_list:
     banner("system")
     partitions['system'] = AddSystem(
         output_zip, recovery_img=recovery_image, boot_img=boot_image)
 
-  if has_vendor:
+  if has_vendor and 'vendor' not in OPTIONS.skip_list:
     banner("vendor")
     partitions['vendor'] = AddVendor(
         output_zip, recovery_img=recovery_image, boot_img=boot_image)
 
-  if has_product:
+  if has_product and 'product' not in OPTIONS.skip_list:
     banner("product")
     partitions['product'] = AddProduct(output_zip)
 
-  if has_system_ext:
+  if has_system_ext and 'system_ext' not in OPTIONS.skip_list:
     banner("system_ext")
     partitions['system_ext'] = AddSystemExt(output_zip)
 
-  if has_odm:
+  if has_odm and 'odm' not in OPTIONS.skip_list:
     banner("odm")
     partitions['odm'] = AddOdm(output_zip)
 
-  if has_vendor_dlkm:
+  if has_vendor_dlkm and 'vendor_dlkm' not in OPTIONS.skip_list:
     banner("vendor_dlkm")
     partitions['vendor_dlkm'] = AddVendorDlkm(output_zip)
 
-  if has_odm_dlkm:
+  if has_odm_dlkm and 'odm_dlkm' not in OPTIONS.skip_list:
     banner("odm_dlkm")
     partitions['odm_dlkm'] = AddOdmDlkm(output_zip)
 
-  if has_system_other:
+  if has_system_other and 'system_other' not in OPTIONS.skip_list:
     banner("system_other")
     AddSystemOther(output_zip)
 
   AddApexInfo(output_zip)
 
   if not OPTIONS.is_signing:
-    banner("userdata")
-    AddUserdata(output_zip)
-    banner("cache")
-    AddCache(output_zip)
+    if 'userdata' not in OPTIONS.skip_list:
+      banner("userdata")
+      AddUserdata(output_zip)
+    if 'cache' not in OPTIONS.skip_list:
+      banner("cache")
+      AddCache(output_zip)
 
   if OPTIONS.info_dict.get("board_bpt_enable") == "true":
     banner("partition-table")
     AddPartitionTable(output_zip)
 
-  if OPTIONS.info_dict.get("has_dtbo") == "true":
+  if OPTIONS.info_dict.get("has_dtbo") == "true" and 'dtbo' not in OPTIONS.skip_list:
     banner("dtbo")
     partitions['dtbo'] = AddDtbo(output_zip)
 
-  if OPTIONS.info_dict.get("has_pvmfw") == "true":
+  if OPTIONS.info_dict.get("has_pvmfw") == "true" and 'pvmfw' not in OPTIONS.skip_list:
     banner("pvmfw")
     partitions['pvmfw'] = AddPvmfw(output_zip)
 
@@ -926,7 +933,7 @@ def AddImagesToTargetFiles(filename):
     vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
 
     vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
-    if vbmeta_system:
+    if vbmeta_system and 'vbmeta_system' not in OPTIONS.skip_list:
       banner("vbmeta_system")
       partitions["vbmeta_system"] = AddVBMeta(
           output_zip, partitions, "vbmeta_system", vbmeta_system.split())
@@ -936,7 +943,7 @@ def AddImagesToTargetFiles(filename):
       vbmeta_partitions.append("vbmeta_system")
 
     vbmeta_vendor = OPTIONS.info_dict.get("avb_vbmeta_vendor", "").strip()
-    if vbmeta_vendor:
+    if vbmeta_vendor and 'vbmeta_vendor' not in OPTIONS.skip_list:
       banner("vbmeta_vendor")
       partitions["vbmeta_vendor"] = AddVBMeta(
           output_zip, partitions, "vbmeta_vendor", vbmeta_vendor.split())
@@ -945,12 +952,12 @@ def AddImagesToTargetFiles(filename):
           if item not in vbmeta_vendor.split()]
       vbmeta_partitions.append("vbmeta_vendor")
 
-    if OPTIONS.info_dict.get("avb_building_vbmeta_image") == "true":
+    if OPTIONS.info_dict.get("avb_building_vbmeta_image") == "true" and 'vbmeta' not in OPTIONS.skip_list:
       banner("vbmeta")
       AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
 
   if OPTIONS.info_dict.get("use_dynamic_partitions") == "true":
-    if OPTIONS.info_dict.get("build_super_empty_partition") == "true":
+    if OPTIONS.info_dict.get("build_super_empty_partition") == "true" and 'super_empty' not in OPTIONS.skip_list:
       banner("super_empty")
       AddSuperEmpty(output_zip)
 
@@ -965,17 +972,20 @@ def AddImagesToTargetFiles(filename):
                                    "ab_partitions.txt")
   if os.path.exists(ab_partitions_txt):
     with open(ab_partitions_txt) as f:
-      ab_partitions = f.readlines()
+      ab_partitions = f.read().splitlines()
 
-    # For devices using A/B update, make sure we have all the needed images
-    # ready under IMAGES/ or RADIO/.
-    CheckAbOtaImages(output_zip, ab_partitions)
+    # Skip care_map generation if any A/B partitions are in the skip list,
+    # since this file cannot be generated without those partitions.
+    if not set(ab_partitions).intersection(set(OPTIONS.skip_list)):
+      # For devices using A/B update, make sure we have all the needed images
+      # ready under IMAGES/ or RADIO/.
+      CheckAbOtaImages(output_zip, ab_partitions)
 
-    # Generate care_map.pb for ab_partitions, then write this file to
-    # target_files package.
-    output_care_map = os.path.join(OPTIONS.input_tmp, "META", "care_map.pb")
-    AddCareMapForAbOta(output_zip if output_zip else output_care_map,
-                       ab_partitions, partitions)
+      # Generate care_map.pb for ab_partitions, then write this file to
+      # target_files package.
+      output_care_map = os.path.join(OPTIONS.input_tmp, "META", "care_map.pb")
+      AddCareMapForAbOta(output_zip if output_zip else output_care_map,
+                         ab_partitions, partitions)
 
   # Radio images that need to be packed into IMAGES/, and product-img.zip.
   pack_radioimages_txt = os.path.join(
@@ -984,7 +994,8 @@ def AddImagesToTargetFiles(filename):
     with open(pack_radioimages_txt) as f:
       AddPackRadioImages(output_zip, f.readlines())
 
-  AddVbmetaDigest(output_zip)
+  if 'vbmeta' not in OPTIONS.skip_list:
+    AddVbmetaDigest(output_zip)
 
   if output_zip:
     common.ZipClose(output_zip)
@@ -1005,6 +1016,8 @@ def main(argv):
       OPTIONS.replace_verity_public_key = (True, a)
     elif o == "--is_signing":
       OPTIONS.is_signing = True
+    elif o == "--skip_list":
+      OPTIONS.skip_list = a.split(',')
     else:
       return False
     return True
@@ -1014,7 +1027,7 @@ def main(argv):
       extra_long_opts=["add_missing", "rebuild_recovery",
                        "replace_verity_public_key=",
                        "replace_verity_private_key=",
-                       "is_signing"],
+                       "is_signing","skip_list="],
       extra_option_handler=option_handler)
 
   if len(args) != 1:
