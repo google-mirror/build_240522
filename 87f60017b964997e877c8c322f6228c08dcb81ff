@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb727f5_9b7d3c73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-08-02T13:10:57Z",
+      "side": 1,
+      "message": "Hi Colin,\nCan you help for the owner vote?\nThanks,",
+      "revId": "87f60017b964997e877c8c322f6228c08dcb81ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
