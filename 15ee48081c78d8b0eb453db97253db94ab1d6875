@@ -16,6 +16,24 @@
       "message": "nit: main (master) would be easier to search later.",
       "revId": "15ee48081c78d8b0eb453db97253db94ab1d6875",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45aacb7_41ea6b1d",
+        "filename": "target/product/emulator_vendor.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1879482
+      },
+      "writtenOn": "2021-08-02T12:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfb9c3ce_254bbdf0",
+      "revId": "15ee48081c78d8b0eb453db97253db94ab1d6875",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
