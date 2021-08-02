@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5778f8_b770e969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010681
+      },
+      "writtenOn": "2021-08-02T12:29:12Z",
+      "side": 1,
+      "message": "CP from sc-dev to keep build rules in sync.",
+      "revId": "945184174ccaa308ddff7e7ed0f61e7819e385e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
