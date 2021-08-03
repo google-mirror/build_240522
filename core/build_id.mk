@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (0361b6 Merge "Fix typo.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ3A.210805.001.A1
+>>>>>>> BRANCH (7ef04b Version bump to RQ3A.210805.001.A1 [core/build_id.mk])
