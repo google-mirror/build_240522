@@ -117,6 +117,7 @@ VNDK-core: android.system.suspend@1.0.so
 VNDK-core: libaudioroute.so
 VNDK-core: libaudioutils.so
 VNDK-core: libbinder.so
+VNDK-core: libbinder_tls.so
 VNDK-core: libbufferqueueconverter.so
 VNDK-core: libcamera_metadata.so
 VNDK-core: libcap.so
