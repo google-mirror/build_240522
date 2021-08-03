@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdfbb66b_32c51fde",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1362121
+      },
+      "writtenOn": "2021-08-03T05:54:14Z",
+      "side": 1,
+      "message": "Why not use \n common.ZipDelete(args[1], [\"IMAGES/{}.img\".format(p) for p in OPTIONS.vendor_partitions])",
+      "range": {
+        "startLine": 1419,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 47
+      },
+      "revId": "ea039203c8502581e5371eb649d099006f1064c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
