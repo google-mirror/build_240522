@@ -22,6 +22,30 @@
       },
       "revId": "ea039203c8502581e5371eb649d099006f1064c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857ab5e8_7207365f",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-08-03T18:33:52Z",
+      "side": 1,
+      "message": "Didn\u0027t realize this function existed! Swapped it out, thank you.",
+      "parentUuid": "bdfbb66b_32c51fde",
+      "range": {
+        "startLine": 1419,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 47
+      },
+      "revId": "ea039203c8502581e5371eb649d099006f1064c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
