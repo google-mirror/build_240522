@@ -16,6 +16,24 @@
       "message": "Double checking ... images_to_delete is not used to add_img_to_target_files, does add_img_to_target_files know which missing images to add?",
       "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52cec187_06efcc3a",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-08-04T16:46:48Z",
+      "side": 1,
+      "message": "Yes, it adds anything it calculates as missing.\n\nSee https://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/add_img_to_target_files.py;drc\u003d25ab998d82581bd4f21a2181637b102bafb9fb22;l\u003d24\n\nand the various `HasPartition` calls in\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/add_img_to_target_files.py;drc\u003d25ab998d82581bd4f21a2181637b102bafb9fb22;l\u003d758\n\nIn Android R, HasPartition checks for the presence of `PARTITION/` in the target files. In Android S, HasPartition also checks for the `building_\u003cpartition\u003e_image` field in the misc_info.txt.",
+      "parentUuid": "8baa055c_45c1fa92",
+      "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
