@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d5ab88_35d5902b",
+        "filename": "target/product/virtual_ab_ota/compression_with_xor.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-08-04T15:39:55Z",
+      "side": 1,
+      "message": "Copyright header missing",
+      "revId": "e56e9ee0a4ac8d4acd0cfb0707547aaa3e0e63a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
