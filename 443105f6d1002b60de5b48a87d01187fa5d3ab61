@@ -69,6 +69,23 @@
       "parentUuid": "a214258e_a7e2fcae",
       "revId": "443105f6d1002b60de5b48a87d01187fa5d3ab61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd3d89a_04d31513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2021-08-04T03:52:56Z",
+      "side": 1,
+      "message": "Requires a blob change which can not be verified by TreeHugger.",
+      "revId": "443105f6d1002b60de5b48a87d01187fa5d3ab61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
