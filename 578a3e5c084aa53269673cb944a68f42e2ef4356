@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8baa055c_45c1fa92",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2021-08-04T16:41:07Z",
+      "side": 1,
+      "message": "Double checking ... images_to_delete is not used to add_img_to_target_files, does add_img_to_target_files know which missing images to add?",
+      "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
