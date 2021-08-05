@@ -16,6 +16,41 @@
       "message": "does this need to be vendor_available even now?",
       "revId": "3446a283b30d4018049913aa1060e69224a046b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49314243_3b39b098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-08-05T18:04:54Z",
+      "side": 1,
+      "message": "-1 for visibility (it\u0027s a perfect change - you could keep it around for if/when we need this in the VNDK)",
+      "revId": "3446a283b30d4018049913aa1060e69224a046b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a302666c_b14073fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-08-05T18:04:54Z",
+      "side": 1,
+      "message": "Meaning, please avoid adding this to the VNDK for now and maybe even only have a core variant for now. We want to retain flexibility as long as possible.",
+      "parentUuid": "5a284915_71229790",
+      "revId": "3446a283b30d4018049913aa1060e69224a046b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
