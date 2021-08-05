@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ebe058e_62136b8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2021-08-05T08:42:16Z",
+      "side": 1,
+      "message": "com.android.art?",
+      "range": {
+        "startLine": 16,
+        "startChar": 16,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "1fc92613c59c46ab730f06e8d1c2766062a5ff81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
