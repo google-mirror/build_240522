@@ -230,6 +230,7 @@ def main(argv):
         excluded_subdirs = args.excluded_subdirs
 
     # Find all the notice files and md5 them
+<<<<<<< HEAD   (427344 Merge "Merge empty history for sparse-7482561-L7560000095032)
     input_dir = os.path.normpath(args.source_dir)
     files_with_same_hash = defaultdict(list)
     for root, dir, files in os.walk(input_dir):
@@ -250,10 +251,38 @@ def main(argv):
                 filename = os.path.join(root, file)
                 file_md5sum = md5sum(filename)
                 files_with_same_hash[file_md5sum].append(filename)
+=======
+    files_with_same_hash = defaultdict(list)
+    for input_dir in input_dirs:
+        for root, dir, files in os.walk(input_dir):
+            for file in files:
+                matched = True
+                if len(included_subdirs) > 0:
+                    matched = False
+                    for subdir in included_subdirs:
+                        if (root == (input_dir + '/' + subdir) or
+                            root.startswith(input_dir + '/' + subdir + '/')):
+                            matched = True
+                            break
+                elif len(excluded_subdirs) > 0:
+                    for subdir in excluded_subdirs:
+                        if (root == (input_dir + '/' + subdir) or
+                            root.startswith(input_dir + '/' + subdir + '/')):
+                            matched = False
+                            break
+                if matched and file.endswith(".txt"):
+                    filename = os.path.join(root, file)
+                    file_md5sum = md5sum(filename)
+                    files_with_same_hash[file_md5sum].append(filename)
+>>>>>>> BRANCH (745fb1 Merge "Version bump to RT11.210712.001.A1 [core/build_id.mk])
 
     filesets = [sorted(files_with_same_hash[md5]) for md5 in sorted(files_with_same_hash.keys())]
+<<<<<<< HEAD   (427344 Merge "Merge empty history for sparse-7482561-L7560000095032)
 
     combine_notice_files_text(filesets, input_dir, txt_output_file, file_title)
+=======
+    combine_notice_files_text(filesets, input_dirs, txt_output_file, file_title)
+>>>>>>> BRANCH (745fb1 Merge "Version bump to RT11.210712.001.A1 [core/build_id.mk])
 
     if html_output_file is not None:
         combine_notice_files_html(filesets, input_dir, html_output_file)
