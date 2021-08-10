@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "813bddce_c107fcc0",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-08-10T20:19:30Z",
+      "side": 1,
+      "message": "ah...I C. In this case, is it better to pass the vendor_partitions (as a skip list) to add_img_to_target_files to skip generate them? So you don\u0027t need to copy the images over initially; and you don\u0027t need to delete the unused images after the first run as well.",
+      "parentUuid": "b8b3564e_4e8dfa4e",
+      "range": {
+        "startLine": 522,
+        "startChar": 28,
+        "endLine": 522,
+        "endChar": 47
+      },
+      "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad0cafc0_bf45bd4d",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 3
