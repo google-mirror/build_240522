@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8b3564e_4e8dfa4e",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-08-10T20:09:23Z",
+      "side": 1,
+      "message": "I expanded on this comment.\n\nThey are copied at first so that add_img_from_target_files (from the system build\u0027s otatools.zip) does not attempt to regenerate them. This cross-release image regeneration fails (b/192253131) so this is how we skip it. This is also why we need --add_missing below. Without --add_missing, the first call to add_img_from_target_files will exit immediately without doing anything once it sees some images in the `IMAGES/*` folder.\n\nThen add_img_from_target_files from the system build\u0027s otatools.zip regenerates all non-vendor images (line 1411).\n\nThen all vendor images are deleted (line 1423).\n\nThen add_img_from_target_files from the vendor build\u0027s otatools.zip regenerates the vendor images (line 1430).",
+      "parentUuid": "9472634e_058da5e6",
+      "range": {
+        "startLine": 522,
+        "startChar": 28,
+        "endLine": 522,
+        "endChar": 47
+      },
+      "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad0cafc0_bf45bd4d",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 3
