@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20e4f113_5633ca92",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-08-10T20:10:21Z",
+      "side": 1,
+      "message": "Added a comment above about why this is needed.\n\nIn short, this first call to add_img_to_target_files is regenerating only \"system\" images, since vendor images already exist in the `IMAGES/` folder. It will exit immediately without doing any work if this flag is not provided.",
+      "parentUuid": "ad0cafc0_bf45bd4d",
+      "range": {
+        "startLine": 1404,
+        "startChar": 33,
+        "endLine": 1404,
+        "endChar": 44
+      },
+      "revId": "578a3e5c084aa53269673cb944a68f42e2ef4356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8baa055c_45c1fa92",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 3
