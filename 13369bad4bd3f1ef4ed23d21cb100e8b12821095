@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b59a4413_8cdb7341",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-08-13T00:46:37Z",
+      "side": 1,
+      "message": "XOR?",
+      "range": {
+        "startLine": 1095,
+        "startChar": 22,
+        "endLine": 1095,
+        "endChar": 25
+      },
+      "revId": "13369bad4bd3f1ef4ed23d21cb100e8b12821095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
