@@ -10,6 +10,7 @@ files. In simple cases Soong is able to infer it from its knowledge of Java SDK
 libraries and the `libs` property in Android.bp, but in more complex cases it is
 necessary to add the missing information in Android.bp/Android.mk manually.
 
+
 To specify a list of libraries for a given modules, use:
 
 * Android.bp properties: `uses_libs`, `optional_uses_libs`
