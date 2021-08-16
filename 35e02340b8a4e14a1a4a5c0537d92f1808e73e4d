@@ -16,6 +16,24 @@
       "message": "needs rebase I think? Looks good in principle",
       "revId": "35e02340b8a4e14a1a4a5c0537d92f1808e73e4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9fe8e8b_640d79d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-08-16T21:04:50Z",
+      "side": 1,
+      "message": "Merge conflict fixed, PTAL.",
+      "parentUuid": "46415ec9_440c5754",
+      "revId": "35e02340b8a4e14a1a4a5c0537d92f1808e73e4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
