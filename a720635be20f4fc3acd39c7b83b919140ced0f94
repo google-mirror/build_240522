@@ -16,6 +16,24 @@
       "message": "Just noticed that the latest version of zipalign is adding 4 bytes of padding rather than 0 when entries are already aligned. I think this might be the issue.\n\nalignDiff can never be 0 here since it\u0027s \"alignTo - (something_less_than_alignTo)\"\n\nE.g.:\nalignDiff \u003d 4 - (some_multiple_of_four % 4)\n\nI think this should be:\n  if (alignDiff \u003d\u003d alignTo)",
       "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20d9150_8c4687cd",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-08-17T21:13:08Z",
+      "side": 1,
+      "message": "yeah, that makes sense. want to upload a patch? (ideally with the missing test that would have caught this :-( )",
+      "parentUuid": "ee5b96f0_e00234db",
+      "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
