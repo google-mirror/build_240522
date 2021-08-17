@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44361e2a_6076caa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-08-17T19:24:53Z",
+      "side": 1,
+      "message": "That was fast!",
+      "revId": "8b796f2626c5e552983bb7ce7572179fabb62522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfb7f69_53ec4ede",
+        "filename": "core/tasks/module-info.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-08-17T19:24:53Z",
+      "side": 1,
+      "message": "This is a pretty good start. I was thinking that instead of just pushing conditional logic into Bazel (if test, if host unit test, etc...) we would have typed rules that represent the result of some evaluation (tradefed_host_unit_test, soong_module_import, etc...).\n\nThe advantages of this approach are:\n\n1) The rules would be usable in hand-crafted BUILD files.\n2) Bazel queries reveal more information that otherwise need runtime evaluation unless in a macro.\n2) Evaluation is done at generation time and therefore less often.\n\nThis implies that we need a generator that takes module-info as input to generate the BUILD files.\n\nWDYT?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 11
+      },
+      "revId": "8b796f2626c5e552983bb7ce7572179fabb62522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993aa739_04d88879",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-08-17T19:24:53Z",
+      "side": 1,
+      "message": "Is there some way for us to have this only rebuild when build files change? I figure Soong might write some file with a timestamp for us to depend on but I\u0027m not sure how we would do this for Make file changes.\n\nThoughts?\n\nThis way Atest would alway run m .../BUILD and the build system ensures that it doesn\u0027t always rebuild.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "8b796f2626c5e552983bb7ce7572179fabb62522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
