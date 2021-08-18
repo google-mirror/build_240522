@@ -34,6 +34,24 @@
       "parentUuid": "ee5b96f0_e00234db",
       "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fecb280_d21bcbdb",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1087574
+      },
+      "writtenOn": "2021-08-18T01:48:41Z",
+      "side": 1,
+      "message": "I think such a test would make a lot of sense for zipalign, but I don\u0027t have any experience with an Android checkout, so I\u0027m guessing it\u0027ll be 1000% faster for someone that\u0027s worked on the tool before to take on.",
+      "parentUuid": "c20d9150_8c4687cd",
+      "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
