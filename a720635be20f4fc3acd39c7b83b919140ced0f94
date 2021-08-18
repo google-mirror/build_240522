@@ -52,6 +52,24 @@
       "parentUuid": "c20d9150_8c4687cd",
       "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ddd7d2_81341e81",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-08-18T17:39:05Z",
+      "side": 1,
+      "message": "oh, weird, i vaguely recognized your name and assumed that meant you were Android :-) \n\nif i find time to look at this this week i\u0027ll comment here before i start, so if sanglardf does the same we should avoid duplicating effort...",
+      "parentUuid": "5fecb280_d21bcbdb",
+      "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
