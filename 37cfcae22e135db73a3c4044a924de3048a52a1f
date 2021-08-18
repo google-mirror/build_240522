@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97cbd523_ac535b1b",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-08-18T13:49:17Z",
+      "side": 1,
+      "message": "stray debugging statement",
+      "range": {
+        "startLine": 485,
+        "startChar": 3,
+        "endLine": 485,
+        "endChar": 32
+      },
+      "revId": "37cfcae22e135db73a3c4044a924de3048a52a1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
