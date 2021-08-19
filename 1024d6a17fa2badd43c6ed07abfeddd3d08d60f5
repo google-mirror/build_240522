@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1354a10c_4b4024b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2021-08-19T02:54:20Z",
+      "side": 1,
+      "message": "Hi, All\n\nSorry, where can I find any description about this custom_image concept?\nwant to see if we need to build this custom_image or could make use of this custom_image for the lkft test.\n\nThanks,\nYongqin Liu ",
+      "revId": "1024d6a17fa2badd43c6ed07abfeddd3d08d60f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
