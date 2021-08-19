@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17af3c7c_600ceba8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-08-19T09:47:43Z",
+      "side": 1,
+      "message": "PRODUCT_PACKAGES is meant to be the list of modules to install. Shouldn\u0027t it be an error to list a non-installable apex in PRODUCT_PACKAGES?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "1034df61b75a96444da57eb3fbc74a2b4b03290e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
