@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5593a2cd_7f9d24e0",
+        "filename": "tools/rbcrun/host.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-19T20:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad4b9a03_360886a1",
+      "range": {
+        "startLine": 176,
+        "startChar": 50,
+        "endLine": 176,
+        "endChar": 54
+      },
+      "revId": "2ca010665bc5d0a77163df3738839dce40905799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0906ed9_c1594565",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-19T17:50:41Z",
       "side": 1,
       "message": "Do we have somewhere we\u0027re tracking these builtins (outside of the codebase)? This (and some of the others) seem incompatible with Bazel, it\u0027d be good for us to brainstorm Bazel solutions over time.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 51
+      },
+      "revId": "2ca010665bc5d0a77163df3738839dce40905799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82404e0f_be851319",
+        "filename": "tools/rbcrun/host.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-19T20:50:45Z",
+      "side": 1,
+      "message": "Thank you for reminding me to update README.md",
+      "parentUuid": "e0906ed9_c1594565",
       "range": {
         "startLine": 178,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ed23d2_abdb132a",
+        "filename": "tools/rbcrun/host.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-19T20:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a98553cf_31470761",
+      "range": {
+        "startLine": 182,
+        "startChar": 85,
+        "endLine": 182,
+        "endChar": 94
+      },
+      "revId": "2ca010665bc5d0a77163df3738839dce40905799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e33b2dfb_ae03aa3d",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e35b543_f77d56c7",
+        "filename": "tools/rbcrun/testdata/file_ops.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-19T20:50:45Z",
+      "side": 1,
+      "message": "We do not. I\u0027ve verified manually that it\u0027s true.",
+      "parentUuid": "e33b2dfb_ae03aa3d",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 111
+      },
+      "revId": "2ca010665bc5d0a77163df3738839dce40905799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeda6629_10c98b51",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-08-19T17:50:41Z",
       "side": 1,
       "message": "these tests are little hard to parse and verifying multiple behaviors at once, can you restructure this to separate the check that directory is (not) found from the expectation that files are found? or compare that the two expected lists match?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 120
+      },
+      "revId": "2ca010665bc5d0a77163df3738839dce40905799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edea4052_51f54d49",
+        "filename": "tools/rbcrun/testdata/file_ops.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-19T20:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeda6629_10c98b51",
       "range": {
         "startLine": 21,
         "startChar": 16,
