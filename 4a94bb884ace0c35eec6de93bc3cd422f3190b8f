@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8c9c9f_cd55dd34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-08-23T18:46:11Z",
+      "side": 1,
+      "message": "Can you file a kati bug too?",
+      "revId": "4a94bb884ace0c35eec6de93bc3cd422f3190b8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
