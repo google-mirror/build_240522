@@ -16,6 +16,24 @@
       "message": "Can you file a kati bug too?",
       "revId": "4a94bb884ace0c35eec6de93bc3cd422f3190b8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae38a44_6506d42a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-24T16:03:40Z",
+      "side": 1,
+      "message": "https://github.com/google/kati/issues/235",
+      "parentUuid": "cd8c9c9f_cd55dd34",
+      "revId": "4a94bb884ace0c35eec6de93bc3cd422f3190b8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
