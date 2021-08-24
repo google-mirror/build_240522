@@ -251,24 +251,6 @@ class VerifiedBootVersion1VerityImageBuilderTest(ReleaseToolsTestCase):
         prop_dict,
         os.path.join(get_testdata_dir(), 'testkey_mincrypt'))
 
-  @SkipIfExternalToolsUnavailable()
-  def test_Build_SquashFs(self):
-    verity_image_builder = CreateVerityImageBuilder(self.DEFAULT_PROP_DICT)
-    verity_image_builder.CalculateMaxImageSize()
-
-    # Build the sparse image with verity metadata.
-    input_dir = common.MakeTempDir()
-    image = common.MakeTempFile(suffix='.img')
-    cmd = ['mksquashfsimage.sh', input_dir, image, '-s']
-    common.RunAndCheckOutput(cmd)
-    verity_image_builder.PadSparseImage(image)
-    verity_image_builder.Build(image)
-
-    # Verify the verity metadata.
-    cmd = ["verity_verifier", image, '-mincrypt',
-           os.path.join(get_testdata_dir(), 'testkey_mincrypt')]
-    common.RunAndCheckOutput(cmd)
-
 
 class VerifiedBootVersion2VerityImageBuilderTest(ReleaseToolsTestCase):
 

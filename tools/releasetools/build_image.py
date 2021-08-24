@@ -316,28 +316,6 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       build_command.extend(["-T", str(prop_dict["timestamp"])])
     if "uuid" in prop_dict:
       build_command.extend(["-U", prop_dict["uuid"]])
-  elif fs_type.startswith("squash"):
-    build_command = ["mksquashfsimage.sh"]
-    build_command.extend([in_dir, out_file])
-    if "squashfs_sparse_flag" in prop_dict:
-      build_command.extend([prop_dict["squashfs_sparse_flag"]])
-    build_command.extend(["-m", prop_dict["mount_point"]])
-    if target_out:
-      build_command.extend(["-d", target_out])
-    if fs_config:
-      build_command.extend(["-C", fs_config])
-    if "selinux_fc" in prop_dict:
-      build_command.extend(["-c", prop_dict["selinux_fc"]])
-    if "block_list" in prop_dict:
-      build_command.extend(["-B", prop_dict["block_list"]])
-    if "squashfs_block_size" in prop_dict:
-      build_command.extend(["-b", prop_dict["squashfs_block_size"]])
-    if "squashfs_compressor" in prop_dict:
-      build_command.extend(["-z", prop_dict["squashfs_compressor"]])
-    if "squashfs_compressor_opt" in prop_dict:
-      build_command.extend(["-zo", prop_dict["squashfs_compressor_opt"]])
-    if prop_dict.get("squashfs_disable_4k_align") == "true":
-      build_command.extend(["-a"])
   elif fs_type.startswith("f2fs"):
     build_command = ["mkf2fsuserimg.sh"]
     build_command.extend([out_file, prop_dict["image_size"]])
@@ -591,7 +569,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   common_props = (
       "extfs_sparse_flag",
       "erofs_sparse_flag",
-      "squashfs_sparse_flag",
       "system_f2fs_compress",
       "system_f2fs_sldc_flags",
       "f2fs_sparse_flag",
@@ -632,10 +609,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
     copy_prop("system_f2fs_compress", "f2fs_compress")
     copy_prop("system_f2fs_sldc_flags", "f2fs_sldc_flags")
-    copy_prop("system_squashfs_compressor", "squashfs_compressor")
-    copy_prop("system_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("system_squashfs_block_size", "squashfs_block_size")
-    copy_prop("system_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("system_base_fs_file", "base_fs_file")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -660,9 +633,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
     copy_prop("system_f2fs_compress", "f2fs_compress")
     copy_prop("system_f2fs_sldc_flags", "f2fs_sldc_flags")
-    copy_prop("system_squashfs_compressor", "squashfs_compressor")
-    copy_prop("system_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("system_squashfs_block_size", "squashfs_block_size")
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
@@ -698,10 +668,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
     copy_prop("vendor_f2fs_compress", "f2fs_compress")
     copy_prop("vendor_f2fs_sldc_flags", "f2fs_sldc_flags")
-    copy_prop("vendor_squashfs_compressor", "squashfs_compressor")
-    copy_prop("vendor_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("vendor_squashfs_block_size", "squashfs_block_size")
-    copy_prop("vendor_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("vendor_base_fs_file", "base_fs_file")
     copy_prop("vendor_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("vendor_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -723,10 +689,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
     copy_prop("product_f2fs_compress", "f2fs_compress")
     copy_prop("product_f2fs_sldc_flags", "f2fs_sldc_flags")
-    copy_prop("product_squashfs_compressor", "squashfs_compressor")
-    copy_prop("product_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("product_squashfs_block_size", "squashfs_block_size")
-    copy_prop("product_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("product_base_fs_file", "base_fs_file")
     copy_prop("product_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("product_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -748,12 +710,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
     copy_prop("system_ext_f2fs_compress", "f2fs_compress")
     copy_prop("system_ext_f2fs_sldc_flags", "f2fs_sldc_flags")
-    copy_prop("system_ext_squashfs_compressor", "squashfs_compressor")
-    copy_prop("system_ext_squashfs_compressor_opt",
-              "squashfs_compressor_opt")
-    copy_prop("system_ext_squashfs_block_size", "squashfs_block_size")
-    copy_prop("system_ext_squashfs_disable_4k_align",
-              "squashfs_disable_4k_align")
     copy_prop("system_ext_base_fs_file", "base_fs_file")
     copy_prop("system_ext_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_ext_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -773,10 +729,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["journal_size"] = "0"
     copy_prop("odm_verity_block_device", "verity_block_device")
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
-    copy_prop("odm_squashfs_compressor", "squashfs_compressor")
-    copy_prop("odm_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("odm_squashfs_block_size", "squashfs_block_size")
-    copy_prop("odm_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("odm_base_fs_file", "base_fs_file")
     copy_prop("odm_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("odm_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -798,10 +750,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["journal_size"] = "0"
     copy_prop("vendor_dlkm_verity_block_device", "verity_block_device")
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
-    copy_prop("vendor_dlkm_squashfs_compressor", "squashfs_compressor")
-    copy_prop("vendor_dlkm_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("vendor_dlkm_squashfs_block_size", "squashfs_block_size")
-    copy_prop("vendor_dlkm_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("vendor_dlkm_base_fs_file", "base_fs_file")
     copy_prop("vendor_dlkm_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("vendor_dlkm_extfs_rsv_pct", "extfs_rsv_pct"):
@@ -821,10 +769,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       d["journal_size"] = "0"
     copy_prop("odm_dlkm_verity_block_device", "verity_block_device")
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
-    copy_prop("odm_dlkm_squashfs_compressor", "squashfs_compressor")
-    copy_prop("odm_dlkm_squashfs_compressor_opt", "squashfs_compressor_opt")
-    copy_prop("odm_dlkm_squashfs_block_size", "squashfs_block_size")
-    copy_prop("odm_dlkm_squashfs_disable_4k_align", "squashfs_disable_4k_align")
     copy_prop("odm_dlkm_base_fs_file", "base_fs_file")
     copy_prop("odm_dlkm_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("odm_dlkm_extfs_rsv_pct", "extfs_rsv_pct"):

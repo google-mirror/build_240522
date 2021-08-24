@@ -1524,9 +1524,6 @@ endif
 ifneq (true,$(TARGET_USERIMAGES_SPARSE_EROFS_DISABLED))
   INTERNAL_USERIMAGES_SPARSE_EROFS_FLAG := -s
 endif
-ifneq (true,$(TARGET_USERIMAGES_SPARSE_SQUASHFS_DISABLED))
-  INTERNAL_USERIMAGES_SPARSE_SQUASHFS_FLAG := -s
-endif
 ifneq (true,$(TARGET_USERIMAGES_SPARSE_F2FS_DISABLED))
   INTERNAL_USERIMAGES_SPARSE_F2FS_FLAG := -S
 endif
@@ -1550,18 +1547,6 @@ ifneq ($(filter \
     $(BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE) \
   ,erofs),)
 INTERNAL_USERIMAGES_DEPS += $(MKEROFSUSERIMG)
-endif
-
-ifneq ($(filter \
-    $(BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE) \
-    $(BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE) \
-  ,squashfs),)
-INTERNAL_USERIMAGES_DEPS += $(MKSQUASHFSUSERIMG)
 endif
 
 ifeq (true,$(PRODUCT_SUPPORTS_VERITY))
@@ -1608,10 +1593,6 @@ $(if $(filter $(2),system),\
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT),$(hide) echo "system_extfs_inode_count=$(BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT),$(hide) echo "system_extfs_rsv_pct=$(BOARD_SYSTEMIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_JOURNAL_SIZE),$(hide) echo "system_journal_size=$(BOARD_SYSTEMIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_SYSTEMIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "system_squashfs_compressor=$(BOARD_SYSTEMIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_SYSTEMIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "system_squashfs_compressor_opt=$(BOARD_SYSTEMIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_SYSTEMIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "system_squashfs_block_size=$(BOARD_SYSTEMIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_SYSTEMIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "system_squashfs_disable_4k_align=$(BOARD_SYSTEMIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(PRODUCT_SYSTEM_BASE_FS_PATH),$(hide) echo "system_base_fs_file=$(PRODUCT_SYSTEM_BASE_FS_PATH)" >> $(1))
     $(if $(PRODUCT_SYSTEM_HEADROOM),$(hide) echo "system_headroom=$(PRODUCT_SYSTEM_HEADROOM)" >> $(1))
     $(if $(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "system_reserved_size=$(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
@@ -1644,10 +1625,6 @@ $(if $(filter $(2),vendor),\
     $(if $(BOARD_VENDORIMAGE_EXTFS_RSV_PCT),$(hide) echo "vendor_extfs_rsv_pct=$(BOARD_VENDORIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_PARTITION_SIZE),$(hide) echo "vendor_size=$(BOARD_VENDORIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_JOURNAL_SIZE),$(hide) echo "vendor_journal_size=$(BOARD_VENDORIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "vendor_squashfs_compressor=$(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "vendor_squashfs_compressor_opt=$(BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_VENDORIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "vendor_squashfs_block_size=$(BOARD_VENDORIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_VENDORIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "vendor_squashfs_disable_4k_align=$(BOARD_VENDORIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(PRODUCT_VENDOR_BASE_FS_PATH),$(hide) echo "vendor_base_fs_file=$(PRODUCT_VENDOR_BASE_FS_PATH)" >> $(1))
     $(if $(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "vendor_reserved_size=$(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "vendor_selinux_fc=$(SELINUX_FC)" >> $(1)
@@ -1661,10 +1638,6 @@ $(if $(filter $(2),product),\
     $(if $(BOARD_PRODUCTIMAGE_EXTFS_RSV_PCT),$(hide) echo "product_extfs_rsv_pct=$(BOARD_PRODUCTIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_PRODUCTIMAGE_PARTITION_SIZE),$(hide) echo "product_size=$(BOARD_PRODUCTIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_PRODUCTIMAGE_JOURNAL_SIZE),$(hide) echo "product_journal_size=$(BOARD_PRODUCTIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_PRODUCTIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "product_squashfs_compressor=$(BOARD_PRODUCTIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_PRODUCTIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "product_squashfs_compressor_opt=$(BOARD_PRODUCTIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_PRODUCTIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "product_squashfs_block_size=$(BOARD_PRODUCTIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_PRODUCTIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "product_squashfs_disable_4k_align=$(BOARD_PRODUCTIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(PRODUCT_PRODUCT_BASE_FS_PATH),$(hide) echo "product_base_fs_file=$(PRODUCT_PRODUCT_BASE_FS_PATH)" >> $(1))
     $(if $(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "product_reserved_size=$(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "product_selinux_fc=$(SELINUX_FC)" >> $(1)
@@ -1678,10 +1651,6 @@ $(if $(filter $(2),system_ext),\
     $(if $(BOARD_SYSTEM_EXTIMAGE_EXTFS_RSV_PCT),$(hide) echo "system_ext_extfs_rsv_pct=$(BOARD_SYSTEM_EXTIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),$(hide) echo "system_ext_size=$(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_SYSTEM_EXTIMAGE_JOURNAL_SIZE),$(hide) echo "system_ext_journal_size=$(BOARD_SYSTEM_EXTIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "system_ext_squashfs_compressor=$(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "system_ext_squashfs_compressor_opt=$(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "system_ext_squashfs_block_size=$(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "system_ext_squashfs_disable_4k_align=$(BOARD_SYSTEM_EXTIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "system_ext_reserved_size=$(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "system_ext_selinux_fc=$(SELINUX_FC)" >> $(1)
     $(hide) echo "building_system_ext_image=$(BUILDING_SYSTEM_EXT_IMAGE)" >> $(1)
@@ -1692,10 +1661,6 @@ $(if $(filter $(2),odm),\
     $(if $(BOARD_ODMIMAGE_EXTFS_RSV_PCT),$(hide) echo "odm_extfs_rsv_pct=$(BOARD_ODMIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_ODMIMAGE_PARTITION_SIZE),$(hide) echo "odm_size=$(BOARD_ODMIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_ODMIMAGE_JOURNAL_SIZE),$(hide) echo "odm_journal_size=$(BOARD_ODMIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_ODMIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "odm_squashfs_compressor=$(BOARD_ODMIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_ODMIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "odm_squashfs_compressor_opt=$(BOARD_ODMIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_ODMIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "odm_squashfs_block_size=$(BOARD_ODMIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_ODMIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "odm_squashfs_disable_4k_align=$(BOARD_ODMIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(PRODUCT_ODM_BASE_FS_PATH),$(hide) echo "odm_base_fs_file=$(PRODUCT_ODM_BASE_FS_PATH)" >> $(1))
     $(if $(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "odm_reserved_size=$(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "odm_selinux_fc=$(SELINUX_FC)" >> $(1)
@@ -1709,10 +1674,6 @@ $(if $(filter $(2),vendor_dlkm),\
     $(if $(BOARD_VENDOR_DLKMIMAGE_EXTFS_RSV_PCT),$(hide) echo "vendor_dlkm_extfs_rsv_pct=$(BOARD_VENDOR_DLKMIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE),$(hide) echo "vendor_dlkm_size=$(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_VENDOR_DLKMIMAGE_JOURNAL_SIZE),$(hide) echo "vendor_dlkm_journal_size=$(BOARD_VENDOR_DLKMIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "vendor_dlkm_squashfs_compressor=$(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "vendor_dlkm_squashfs_compressor_opt=$(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "vendor_dlkm_squashfs_block_size=$(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "vendor_dlkm_squashfs_disable_4k_align=$(BOARD_VENDOR_DLKMIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "vendor_dlkm_reserved_size=$(BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "vendor_dlkm_selinux_fc=$(SELINUX_FC)" >> $(1)
     $(hide) echo "building_vendor_dlkm_image=$(BUILDING_VENDOR_DLKM_IMAGE)" >> $(1)
@@ -1723,10 +1684,6 @@ $(if $(filter $(2),odm_dlkm),\
     $(if $(BOARD_ODM_DLKMIMAGE_EXTFS_RSV_PCT),$(hide) echo "odm_dlkm_extfs_rsv_pct=$(BOARD_ODM_DLKMIMAGE_EXTFS_RSV_PCT)" >> $(1))
     $(if $(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE),$(hide) echo "odm_dlkm_size=$(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE)" >> $(1))
     $(if $(BOARD_ODM_DLKMIMAGE_JOURNAL_SIZE),$(hide) echo "odm_dlkm_journal_size=$(BOARD_ODM_DLKMIMAGE_JOURNAL_SIZE)" >> $(1))
-    $(if $(BOARD_ODM_DLKMIMAGE_SQUASHFS_COMPRESSOR),$(hide) echo "odm_dlkm_squashfs_compressor=$(BOARD_ODM_DLKMIMAGE_SQUASHFS_COMPRESSOR)" >> $(1))
-    $(if $(BOARD_ODM_DLKMIMAGE_SQUASHFS_COMPRESSOR_OPT),$(hide) echo "odm_dlkm_squashfs_compressor_opt=$(BOARD_ODM_DLKMIMAGE_SQUASHFS_COMPRESSOR_OPT)" >> $(1))
-    $(if $(BOARD_ODM_DLKMIMAGE_SQUASHFS_BLOCK_SIZE),$(hide) echo "odm_dlkm_squashfs_block_size=$(BOARD_ODM_DLKMIMAGE_SQUASHFS_BLOCK_SIZE)" >> $(1))
-    $(if $(BOARD_ODM_DLKMIMAGE_SQUASHFS_DISABLE_4K_ALIGN),$(hide) echo "odm_dlkm_squashfs_disable_4k_align=$(BOARD_ODM_DLKMIMAGE_SQUASHFS_DISABLE_4K_ALIGN)" >> $(1))
     $(if $(BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE),$(hide) echo "odm_dlkm_reserved_size=$(BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE)" >> $(1))
     $(hide) echo "odm_dlkm_selinux_fc=$(SELINUX_FC)" >> $(1)
     $(hide) echo "building_odm_dlkm_image=$(BUILDING_ODM_DLKM_IMAGE)" >> $(1)
@@ -1743,7 +1700,6 @@ $(hide) echo "ext_mkuserimg=$(notdir $(MKEXTUSERIMG))" >> $(1)
 $(if $(INTERNAL_USERIMAGES_EXT_VARIANT),$(hide) echo "fs_type=$(INTERNAL_USERIMAGES_EXT_VARIANT)" >> $(1))
 $(if $(INTERNAL_USERIMAGES_SPARSE_EXT_FLAG),$(hide) echo "extfs_sparse_flag=$(INTERNAL_USERIMAGES_SPARSE_EXT_FLAG)" >> $(1))
 $(if $(INTERNAL_USERIMAGES_SPARSE_EROFS_FLAG),$(hide) echo "erofs_sparse_flag=$(INTERNAL_USERIMAGES_SPARSE_EROFS_FLAG)" >> $(1))
-$(if $(INTERNAL_USERIMAGES_SPARSE_SQUASHFS_FLAG),$(hide) echo "squashfs_sparse_flag=$(INTERNAL_USERIMAGES_SPARSE_SQUASHFS_FLAG)" >> $(1))
 $(if $(INTERNAL_USERIMAGES_SPARSE_F2FS_FLAG),$(hide) echo "f2fs_sparse_flag=$(INTERNAL_USERIMAGES_SPARSE_F2FS_FLAG)" >> $(1))
 $(if $(BOARD_EXT4_SHARE_DUP_BLOCKS),$(hide) echo "ext4_share_dup_blocks=$(BOARD_EXT4_SHARE_DUP_BLOCKS)" >> $(1))
 $(if $(BOARD_FLASH_LOGICAL_BLOCK_SIZE), $(hide) echo "flash_logical_block_size=$(BOARD_FLASH_LOGICAL_BLOCK_SIZE)" >> $(1))
@@ -4355,8 +4311,6 @@ INTERNAL_OTATOOLS_MODULES := \
   mkfs.erofs \
   mkerofsimage.sh \
   mkf2fsuserimg.sh \
-  mksquashfs \
-  mksquashfsimage.sh \
   mkuserimg_mke2fs \
   ota_from_target_files \
   repack_bootimg \
