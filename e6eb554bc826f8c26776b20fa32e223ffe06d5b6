@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4680ec3f_31b52ebf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-08-25T21:25:45Z",
+      "side": 1,
+      "message": "Should we forbid the combination of USE_HOST_MUSL and BUILD_BROKEN_USES_BUILD_HOST_...?",
+      "range": {
+        "startLine": 10,
+        "startChar": 51,
+        "endLine": 10,
+        "endChar": 57
+      },
+      "revId": "e6eb554bc826f8c26776b20fa32e223ffe06d5b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
