@@ -27,7 +27,7 @@ PRODUCT_PACKAGES += \
     ext \
 
 # Runtime (Bionic) APEX module.
-PRODUCT_PACKAGES += com.android.runtime
+PRODUCT_INSTALL_APEXES += com.android.runtime
 
 # ART APEX module.
 #
@@ -54,10 +54,10 @@ ifneq (false,$(art_target_include_debug_build))
 endif
 
 ifeq (true,$(art_target_include_debug_build))
-  PRODUCT_PACKAGES += com.android.art.debug
+  PRODUCT_INSTALL_APEXES += com.android.art.debug
   apex_test_module := art-check-debug-apex-gen-fakebin
 else
-  PRODUCT_PACKAGES += com.android.art
+  PRODUCT_INSTALL_APEXES += com.android.art
   apex_test_module := art-check-release-apex-gen-fakebin
 endif
 
