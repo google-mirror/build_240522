@@ -54,18 +54,22 @@ ifneq (false,$(art_target_include_debug_build))
 endif
 
 ifeq (true,$(art_target_include_debug_build))
-  PRODUCT_PACKAGES += com.android.art.debug
+  apex_module := com.android.art.debug
   apex_test_module := art-check-debug-apex-gen-fakebin
 else
-  PRODUCT_PACKAGES += com.android.art
+  apex_module := com.android.art
   apex_test_module := art-check-release-apex-gen-fakebin
 endif
+
+PRODUCT_PACKAGES += $(apex_module)
+PRODUCT_INSTALL_APEXES += $(apex_module)
 
 ifeq (true,$(SOONG_CONFIG_art_module_source_build)
   PRODUCT_HOST_PACKAGES += $(apex_test_module)
 endif
 
 art_target_include_debug_build :=
+apex_module :=
 apex_test_module :=
 
 # Certificates.
