@@ -16,6 +16,24 @@
       "message": "just curious, does this cl break any targets?",
       "revId": "f9baf788fb547a71379c883055eb2053a7dcaf36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57e6bc63_5ec02833",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1347177
+      },
+      "writtenOn": "2021-08-26T03:07:27Z",
+      "side": 1,
+      "message": "No, but it doesn\u0027t work for devices with AB_OTA_UPDATER is false. I\u0027m still looking for a place where AB_OTA_UPDATER and PRODUCT_PACKAGES are both available.",
+      "parentUuid": "a6b1c24a_25f1349f",
+      "revId": "f9baf788fb547a71379c883055eb2053a7dcaf36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
