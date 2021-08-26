@@ -48,24 +48,7 @@ PRODUCT_PACKAGES += \
     cgroups.json \
     charger \
     cmd \
-    com.android.adbd \
-    com.android.conscrypt \
-    com.android.cronet \
-    com.android.extservices \
-    com.android.i18n \
-    com.android.ipsec \
     com.android.location.provider \
-    com.android.media \
-    com.android.media.swcodec \
-    com.android.mediaprovider \
-    com.android.os.statsd \
-    com.android.permission \
-    com.android.resolv \
-    com.android.neuralnetworks \
-    com.android.sdkext \
-    com.android.tethering \
-    com.android.tzdata \
-    com.android.wifi \
     ContactsProvider \
     content \
     CtsShimPrebuilt \
@@ -275,6 +258,29 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi.rc \
     wm \
+
+apexes := \
+    com.android.adbd \
+    com.android.conscrypt \
+    com.android.cronet \
+    com.android.extservices \
+    com.android.i18n \
+    com.android.ipsec \
+    com.android.media \
+    com.android.media.swcodec \
+    com.android.mediaprovider \
+    com.android.os.statsd \
+    com.android.permission \
+    com.android.resolv \
+    com.android.neuralnetworks \
+    com.android.sdkext \
+    com.android.tethering \
+    com.android.tzdata \
+    com.android.wifi \
+
+PRODUCT_PACKAGES += $(apexes)
+PRODUCT_INSTALL_APEXES += $(apexes)
+apexes :=
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
