@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96903585_6f769cac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-08-26T22:21:51Z",
+      "side": 1,
+      "message": "This file is effectively owned by QC, we have multiple copies because we import one copy per QC device.",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b4dec4_0b836040",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-08-26T22:21:51Z",
+      "side": 1,
+      "message": "TARGET_BOARD_PLATFORM isn\u0027t set until the BoardConfig.mk phase, so it\u0027s not safe to be used during product configuration.",
+      "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
