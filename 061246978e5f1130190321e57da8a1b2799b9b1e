@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa879cf8_d79b5953",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-26T20:52:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "989428ad_8cb561bf",
+      "range": {
+        "startLine": 442,
+        "startChar": 78,
+        "endLine": 442,
+        "endChar": 79
+      },
+      "revId": "061246978e5f1130190321e57da8a1b2799b9b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5daefcc8_077060f9",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-26T19:50:05Z",
       "side": 1,
       "message": "this change also impacts filter_out -- should we add test for that also?",
+      "range": {
+        "startLine": 50,
+        "startChar": 19,
+        "endLine": 50,
+        "endChar": 25
+      },
+      "revId": "061246978e5f1130190321e57da8a1b2799b9b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ffc646_ee0b8c51",
+        "filename": "tests/run.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-26T20:52:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5daefcc8_077060f9",
       "range": {
         "startLine": 50,
         "startChar": 19,
