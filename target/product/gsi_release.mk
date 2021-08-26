@@ -55,6 +55,7 @@ PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES := true
 # because the shim apex is prebuilt one and PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES is not
 # supported for prebuilt_apex modules yet.
 PRODUCT_PACKAGES += com.android.apex.cts.shim.v1_with_prebuilts.flattened
+PRODUCT_INSTALL_APEXES += com.android.apex.cts.shim.v1_with_prebuilts
 
 # GSI specific tasks on boot
 PRODUCT_PACKAGES += \
