@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93451719_4aa8100c",
+        "filename": "core/tasks/cts.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-08-27T21:24:19Z",
+      "side": 1,
+      "message": "None of this is a recipe (the lines don\u0027t start with tabs), it\u0027s just code being executed while parsing the Android.mk file.  That means the cts-platform-version-check phony isn\u0027t doing anything.\n\nYou can keep it like this, drop the phony, and put ifneq(,$(wildcard cts/)) to make it only run if the cts directory is present, or you can convert it back to a rule instead like it was in cts/tests/tests/os/Android.mk.  That way it will only fail the build if you tried to run the check, which wouldn\u0027t happen on the partial art manifest builds.\n\nIf you want it to be rule, you\u0027ll need an output file for it, which can be something like:\n\n cts_platform_version_check_stamp :\u003d $(call intermediates-dir-for,ETC,cts-platform-version-check,,COMMON)/cts-platform-version-check.stamp\n\nThen you can depend on that from the cts zip file to make it run when you build cts:\n\n $(compatibility_zip): $(cts_platform_version_check_stamp)",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 7
+      },
+      "revId": "39c07f3fd3df69fec14f2157a64fe5ed69a8cbf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
