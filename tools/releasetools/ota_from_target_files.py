@@ -221,6 +221,10 @@ A/B OTA specific options
       For VABC downgrades, we must finish merging before doing data wipe, and
       since data wipe is required for downgrading OTA, this might cause long
       wait time in recovery.
+
+  --enable_vabc_xor
+      Enable the VABC xor feature. Will reduce space requirements for OTA
+
 """
 
 from __future__ import print_function
@@ -1312,7 +1316,7 @@ def main(argv):
     elif o == "--vabc_downgrade":
       OPTIONS.vabc_downgrade = True
     elif o == "--enable_vabc_xor":
-      OPTIONS.enable_vabc_xor = True
+      OPTIONS.enable_vabc_xor = a.lower() != "false"
     else:
       return False
     return True
@@ -1357,7 +1361,7 @@ def main(argv):
                                  "disable_vabc",
                                  "spl_downgrade",
                                  "vabc_downgrade",
-                                 "enable_vabc_xor",
+                                 "enable_vabc_xor=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
