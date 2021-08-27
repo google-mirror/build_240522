@@ -463,19 +463,28 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       size = GetDiskUsage(in_dir)
     logger.info(
         "The tree size of %s is %d MB.", in_dir, size // BYTES_IN_MB)
+
     # If not specified, give us 16MB margin for GetDiskUsage error ...
-    reserved_size = int(prop_dict.get("partition_reserved_size", BYTES_IN_MB * 16))
+    MIN_RESERVED_SIZE = BYTES_IN_MB * 16
+    reserved_size = int(prop_dict.get("partition_reserved_size", MIN_RESERVED_SIZE))
     partition_headroom = int(prop_dict.get("partition_headroom", 0))
     if fs_type.startswith("ext4") and partition_headroom > reserved_size:
       reserved_size = partition_headroom
     size += reserved_size
     # Round this up to a multiple of 4K so that avbtool works
     size = common.RoundUpTo4K(size)
+
+    should_sparse = False
+    if "partition_size" in prop_dict or reserved_size > MIN_RESERVED_SIZE:
+      should_sparse = True
+
     if fs_type.startswith("ext"):
       prop_dict["partition_size"] = str(size)
       prop_dict["image_size"] = str(size)
       if "extfs_inode_count" not in prop_dict:
         prop_dict["extfs_inode_count"] = str(GetInodeUsage(in_dir))
+      if "extfs_sparse_flag" in prop_dict and not should_sparse:
+        prop_dict.pop("extfs_sparse_flag")
       logger.info(
           "First Pass based on estimates of %d MB and %s inodes.",
           size // BYTES_IN_MB, prop_dict["extfs_inode_count"])
@@ -533,6 +542,9 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       log_blocksize = int(fs_dict.get("log_blocksize", "12"))
       size = block_count << log_blocksize
       prop_dict["partition_size"] = str(size)
+    elif fs_type.startswith("erofs"):
+      if "erofs_sparse_flag" in prop_dict and not should_sparse:
+        prop_dict.pop("erofs_sparse_flag")
     if verity_image_builder:
       size = verity_image_builder.CalculateDynamicPartitionSize(size)
     prop_dict["partition_size"] = str(size)
