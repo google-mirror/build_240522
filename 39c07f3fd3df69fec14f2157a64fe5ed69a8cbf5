@@ -22,6 +22,30 @@
       },
       "revId": "39c07f3fd3df69fec14f2157a64fe5ed69a8cbf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f6214c_ab8e0f90",
+        "filename": "core/tasks/cts.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2021-08-27T22:12:47Z",
+      "side": 1,
+      "message": "Thanks a lot Colin! This is something that I do not have a good understanding about. Will update this soon based on your suggestions.",
+      "parentUuid": "93451719_4aa8100c",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 7
+      },
+      "revId": "39c07f3fd3df69fec14f2157a64fe5ed69a8cbf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
