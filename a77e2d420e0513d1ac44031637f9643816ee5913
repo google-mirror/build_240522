@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859f2b37_47c19dd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2021-08-27T05:41:03Z",
+      "side": 1,
+      "message": "Hi David,\n\nAnother thing is that... Could we bump up lz4 version to 1.9.3?\n1.9.2 has some issue when doing fixed-sized output compression for zeroed data.\n1.9.3 has fixed this, and it has already been deployed to many Linux distributions...\n\nThanks,\nGao Xiang",
+      "revId": "a77e2d420e0513d1ac44031637f9643816ee5913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
