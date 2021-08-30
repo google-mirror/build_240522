@@ -52,6 +52,24 @@
       "parentUuid": "937b7bd3_e44325de",
       "revId": "a77e2d420e0513d1ac44031637f9643816ee5913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c48bcf83_319de70f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2021-08-30T06:56:44Z",
+      "side": 1,
+      "message": "Yeah, it will make long zeroed data handled much better.\n\n[Also big pcluster feature (and later upcoming LZMA support) should be friendly to some kind of data....]",
+      "parentUuid": "c1297909_87184ef0",
+      "revId": "a77e2d420e0513d1ac44031637f9643816ee5913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
