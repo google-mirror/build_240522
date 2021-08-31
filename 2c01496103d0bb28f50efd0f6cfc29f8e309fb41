@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4002d42_7493b0f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-31T00:42:40Z",
+      "side": 1,
+      "message": "The history of the file\u0027s changes shows numerous changes made by Google engineers (including yours :-)",
+      "parentUuid": "96903585_6f769cac",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39b4dec4_0b836040",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-08-26T22:21:51Z",
       "side": 1,
       "message": "TARGET_BOARD_PLATFORM isn\u0027t set until the BoardConfig.mk phase, so it\u0027s not safe to be used during product configuration.",
+      "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5e46d1_7b31dd7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-08-31T00:42:40Z",
+      "side": 1,
+      "message": "This is true. However, I don\u0027t understand why this is important. Some of the product configuration makefiles pull in utils.mk containing is-board-config_xxx macros having exactly the same problem (which this CL it trying to address).",
+      "parentUuid": "39b4dec4_0b836040",
       "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
