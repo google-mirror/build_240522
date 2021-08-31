@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56d69cb7_b7b6ae87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-08-31T01:15:36Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve removed two lines from 2 of the 6 copies on AOSP, and nobody else from Google has made any changes to them (they\u0027re only imports and file movements).\n\nThe same (obvious) change was made a couple weeks later in the code aurora codebase: https://source.codeaurora.org/quic/la/device/qcom/common/commit/utils.mk?h\u003dqcom-devices.lnx.6.1.r1-rel\u0026id\u003d4e8316961f0bdfce5f106e56907ddca3231dc4e4\n\nUnless you\u0027re working with them to move these functions into the core android code (where they should not be available for product makefiles due to their unsafe nature), this is just going to create more pain on the people importing code (in both directions).",
+      "parentUuid": "f4002d42_7493b0f9",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "2c01496103d0bb28f50efd0f6cfc29f8e309fb41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39b4dec4_0b836040",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
