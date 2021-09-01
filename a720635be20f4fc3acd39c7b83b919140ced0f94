@@ -70,6 +70,24 @@
       "parentUuid": "5fecb280_d21bcbdb",
       "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63f4c397_77d5943d",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2021-09-01T19:46:15Z",
+      "side": 1,
+      "message": "I will take care of it.",
+      "parentUuid": "14ddd7d2_81341e81",
+      "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
