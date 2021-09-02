@@ -16,6 +16,24 @@
       "message": "hmm, is there a reason not to modify `TARGET_USERIMAGES_SPARSE_EXT_DISABLED` here.\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d1527\n\nseems the GSI image uses that to generate non-sparse images already https://cs.android.com/android/platform/superproject/+/master:build/make/target/board/BoardConfigGsiCommon.mk;l\u003d15",
       "revId": "9e95a02a87ebd8c0e14edc4904facdc8e0352fcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a7459f6_2ba1bd2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-02T22:47:12Z",
+      "side": 1,
+      "message": "My thinking there is that it would affect all partitions, whereas my intent was to only affect partitions that don\u0027t have \"fill\" blocks.",
+      "parentUuid": "6de285b3_8a6be8f5",
+      "revId": "9e95a02a87ebd8c0e14edc4904facdc8e0352fcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
