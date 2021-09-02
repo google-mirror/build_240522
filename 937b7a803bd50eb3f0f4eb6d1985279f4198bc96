@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f05edc6_a131385d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-09-02T15:37:31Z",
+      "side": 1,
+      "message": "I have a somewhat less intrusive CL for this here: https://r.android.com/1801147",
+      "revId": "937b7a803bd50eb3f0f4eb6d1985279f4198bc96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
