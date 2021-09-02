@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aee8eb9_c613e3bf",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-02T18:26:23Z",
+      "side": 1,
+      "message": "sigh, I guess I should refactor it into a loop.",
+      "range": {
+        "startLine": 864,
+        "startChar": 5,
+        "endLine": 864,
+        "endChar": 15
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3205897_187512db",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-02T18:26:23Z",
+      "side": 1,
+      "message": "should we have a hard coded list to restrict what partitions can be skipped? I imagine the skip list can only apply to boot, product, system, vendor, etc; and the userdata/cache/bootloader/vbmeta/super_empty should always be rebuilt.",
+      "range": {
+        "startLine": 901,
+        "startChar": 24,
+        "endLine": 901,
+        "endChar": 42
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f8257c_4297d82b",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-02T18:26:23Z",
+      "side": 1,
+      "message": "nit: wrap the line",
+      "range": {
+        "startLine": 955,
+        "startChar": 82,
+        "endLine": 955,
+        "endChar": 99
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633a43eb_2748a495",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-02T18:26:23Z",
+      "side": 1,
+      "message": "beware of this option, I think building super will fail if we skip the vendor partitions. (Though it might not be fatal)",
+      "range": {
+        "startLine": 968,
+        "startChar": 6,
+        "endLine": 968,
+        "endChar": 19
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
