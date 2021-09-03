@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb73940_c75a06a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-03T02:53:30Z",
+      "side": 1,
+      "message": "Looks like there are some merge conflicts. Maybe you need to land it on the downstream branch first.",
+      "revId": "cd66602027d99efa78059fd58e426e6ea0dee154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4614cc5c_cabe03b6",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-03T02:53:30Z",
+      "side": 1,
+      "message": "Change this line to ifeq (true,$(MODULE_BUILD_FROM_SOURCE))?\n\nOtherwise, SOONG_CONFIG_art_module_source_build will be set to true if MODULE_BUILD_FROM_SOURCE is explicitly set to false. I encountered this problem.",
+      "range": {
+        "startLine": 48,
+        "startChar": 5,
+        "endLine": 48,
+        "endChar": 35
+      },
+      "revId": "cd66602027d99efa78059fd58e426e6ea0dee154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
