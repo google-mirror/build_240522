@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d5e5cd4_b5e3ff84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T04:25:46Z",
+      "side": 1,
+      "message": "Thanks for rapidly picking this up. I only have some nitpicky comments about Python style, so I\u0027m going to sticky +2 for when you fix it.",
+      "revId": "890cf96c08275b795b7271a8f1621bc4c96f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b64004_31782c6c",
+        "filename": "tools/warn/warn_common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T04:25:46Z",
+      "side": 1,
+      "message": "`\u0027/b/f/w/\u0027 not in line` is preferred according to https://docs.python.org/3/library/stdtypes.html#str.find.",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 32
+      },
+      "revId": "890cf96c08275b795b7271a8f1621bc4c96f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dacf76a5_3271989f",
+        "filename": "tools/warn/warn_common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T04:25:46Z",
+      "side": 1,
+      "message": "`not line.startswith(\u0027/tmp/\u0027)` is more clear.",
+      "range": {
+        "startLine": 243,
+        "startChar": 37,
+        "endLine": 243,
+        "endChar": 60
+      },
+      "revId": "890cf96c08275b795b7271a8f1621bc4c96f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63fad68f_2b6749a3",
+        "filename": "tools/warn/warn_common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T04:25:46Z",
+      "side": 1,
+      "message": "Maybe just mark this a `Bug: http://198657613` instead, so it\u0027s easier to search for than a username?",
+      "range": {
+        "startLine": 307,
+        "startChar": 9,
+        "endLine": 307,
+        "endChar": 12
+      },
+      "revId": "890cf96c08275b795b7271a8f1621bc4c96f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771b4553_aecffcf9",
+        "filename": "tools/warn/warn_common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T04:25:46Z",
+      "side": 1,
+      "message": "\"containing\" is better since they technically have the \u0027/b/f/w\u0027 after some other string.",
+      "range": {
+        "startLine": 378,
+        "startChar": 46,
+        "endLine": 378,
+        "endChar": 59
+      },
+      "revId": "890cf96c08275b795b7271a8f1621bc4c96f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
