@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4673aa9e_666d04e1",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1710,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2021-09-07T02:01:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this change be in the `m bp2build` CL?",
+      "range": {
+        "startLine": 1710,
+        "startChar": 33,
+        "endLine": 1710,
+        "endChar": 41
+      },
+      "revId": "168a13f0b776ea442270c7eab67b129ebf022ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
