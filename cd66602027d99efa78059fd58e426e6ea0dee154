@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "904d07b6_476e4936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-07T06:16:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8d6399db_7c0a336d",
+      "revId": "cd66602027d99efa78059fd58e426e6ea0dee154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4614cc5c_cabe03b6",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "This condition is the same as the one on line 85, so this variable is supposed to be either true or undefined.\n\nStill I agree your suggestion would be better. It\u0027s being changed in http://ag/15692182 so I don\u0027t want to conflict with that.",
       "parentUuid": "4614cc5c_cabe03b6",
+      "range": {
+        "startLine": 48,
+        "startChar": 5,
+        "endLine": 48,
+        "endChar": 35
+      },
+      "revId": "cd66602027d99efa78059fd58e426e6ea0dee154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9c38aa_e469d665",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-07T06:16:44Z",
+      "side": 1,
+      "message": "Nice. Let\u0027s wait for it to be cherry picked.",
+      "parentUuid": "968b44c1_f3bedc3d",
       "range": {
         "startLine": 48,
         "startChar": 5,
