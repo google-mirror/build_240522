@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2122b5_6d4be7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-09-07T14:01:45Z",
+      "side": 1,
+      "message": "That worked. Paul, can you please +2 this too now?",
+      "parentUuid": "904d07b6_476e4936",
+      "revId": "cd66602027d99efa78059fd58e426e6ea0dee154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4614cc5c_cabe03b6",
