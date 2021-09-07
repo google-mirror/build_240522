@@ -16,6 +16,23 @@
       "message": "Ping. This issue gates a lot of changes. Would it make sense to have a meeting to discuss it?",
       "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8319e40_148815a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-09-07T17:29:06Z",
+      "side": 1,
+      "message": "Is the \"2\" suffix necessary?  It\u0027s not an error to redefine a function in Make, could we just define is-board-platform here and then let it be overwritten by the utils.mk ones until those are removed?",
+      "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
