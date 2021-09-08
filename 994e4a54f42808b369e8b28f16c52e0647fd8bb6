@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10cfeb9_0d0f2c8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-08T05:24:34Z",
+      "side": 1,
+      "message": "External users cannot access the bug. Could you provide a brief description about why we need the patch and what\u0027s the effect?",
+      "revId": "994e4a54f42808b369e8b28f16c52e0647fd8bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
