@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78e757e0_26acf6e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-08T10:43:19Z",
+      "side": 1,
+      "message": "Hi, I guess 0.3% and 256K are based on the size of the hash footer? But I don\u0027t understand what is 16MB calculated based on?",
+      "revId": "a96e802630a1bbe6dabd10c8e99165c4675ec5b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
