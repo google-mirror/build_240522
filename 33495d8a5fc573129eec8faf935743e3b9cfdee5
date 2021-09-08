@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99136353_dfb6bac6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2021-09-08T21:01:33Z",
+      "side": 1,
+      "message": "I made the exact same changes as in the other script changes.",
+      "revId": "33495d8a5fc573129eec8faf935743e3b9cfdee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
