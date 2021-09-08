@@ -31,7 +31,15 @@ def _global_init():
 
     globals.setdefault("PRODUCT_SOONG_NAMESPACES", [])
     globals.setdefault(_soong_config_namespaces_key, {})
-    _envsetup_init(globals)
+    return globals
+
+
+_globals_base = _global_init()
+
+
+def _finish_init(g, v):
+    '''Finish initialization by adding version-specific settings.'''
+    _envsetup_init(g, v)
 
     # Variables that should be defined.
     mandatory_vars = [
@@ -44,12 +52,8 @@ def _global_init():
         "TARGET_PRODUCT",
     ]
     for bv in mandatory_vars:
-        if not bv in globals:
+        if not bv in g:
             fail(bv, " is not defined")
-
-    return globals
-
-_globals_base = _global_init()
 
 def __print_attr(attr, value):
     if not value:
@@ -93,7 +97,7 @@ def __printvars_rearrange_list(value_list):
     seen = {item: 0 for item in value_list}
     return sorted(seen.keys()) if _options.rearrange == "sort" else seen.keys()
 
-def _product_configuration(top_pcm_name, top_pcm):
+def _product_configuration(top_pcm_name, top_pcm, version_info):
     """Creates configuration."""
 
     # Product configuration is created by traversing product's inheritance
@@ -108,6 +112,7 @@ def _product_configuration(top_pcm_name, top_pcm):
     # whose body consists of a single init function.
 
     globals = dict(**_globals_base)
+    _finish_init(globals, version_info)
 
     config_postfix = []  # Configs in postfix order
 

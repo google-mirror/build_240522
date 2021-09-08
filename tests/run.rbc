@@ -21,6 +21,7 @@
 #  * all runtime functions (wildcard, regex, etc.) work
 
 load("//build/make/core:product_config.rbc", "rblf")
+load(":version_defaults.rbc", "version_defaults")
 load(":device.rbc", "init")
 
 def assert_eq(expected, actual):
@@ -50,7 +51,7 @@ assert_eq(["from/a:to/a", "from/b:to/b"], rblf.product_copy_files_by_pattern("fr
 assert_eq([], rblf.filter(["a", "", "b"], "f"))
 assert_eq(["", "b"], rblf.filter_out(["a", "" ], ["a", "", "b"] ))
 
-globals, config = rblf.product_configuration("test/device", init)
+globals, config = rblf.product_configuration("test/device", init, version_defaults)
 assert_eq(
     {
       "PRODUCT_COPY_FILES": [
@@ -89,3 +90,6 @@ assert_eq(
     },
     {k:v for k, v in sorted(ns.items()) }
 )
+
+assert_eq("S", globals["PLATFORM_VERSION"])
+assert_eq(30, globals["PLATFORM_SDK_VERSION"])
