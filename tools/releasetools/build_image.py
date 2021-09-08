@@ -471,10 +471,14 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
         "The tree size of %s is %d MB.", in_dir, size // BYTES_IN_MB)
     # If not specified, give us 16MB margin for GetDiskUsage error ...
     reserved_size = int(prop_dict.get("partition_reserved_size", BYTES_IN_MB * 16))
+    reserved_size_origin = int(prop_dict.get("partition_reserved_size", 0))
     partition_headroom = int(prop_dict.get("partition_headroom", 0))
     if fs_type.startswith("ext4") and partition_headroom > reserved_size:
       reserved_size = partition_headroom
-    size += reserved_size
+    if fs_type.startswith("erofs") and reserved_size_origin ==0:
+      size = common.RoundUpTo4K(max(size * 1003 // 1000, 256 * 1024))
+    else:
+      size += reserved_size
     # Round this up to a multiple of 4K so that avbtool works
     size = common.RoundUpTo4K(size)
     if fs_type.startswith("ext"):
