@@ -16,6 +16,24 @@
       "message": "This name is a bit confusing, can you rename it to something like \"need_final_mkfs\"?",
       "revId": "231d532ae03d0b2962b855e116c0a9f9d5fdff34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a6d046_816a0842",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1882667
+      },
+      "writtenOn": "2021-09-09T03:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61fe14ae_72134093",
+      "revId": "231d532ae03d0b2962b855e116c0a9f9d5fdff34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
