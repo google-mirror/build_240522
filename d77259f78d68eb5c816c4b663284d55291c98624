@@ -68,6 +68,52 @@
       },
       "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898a93e7_4e47cd22",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-09T02:11:51Z",
+      "side": 1,
+      "message": "nit: Could be dropped because L480",
+      "range": {
+        "startLine": 476,
+        "startChar": 13,
+        "endLine": 476,
+        "endChar": 31
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e8d59a_b89a54e6",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-09T02:11:51Z",
+      "side": 1,
+      "message": "I would recommend moving this to a new function. Maybe something like this:\n\n```\ndef CalculateSizeAndReserved(prop_dict, size): # Feel free to rename this function\n  partition_headroom \u003d int(prop_dict.get(\"partition_headroom\", 0))\n  if fs_type \u003d\u003d \"erofs\":\n    reserved_size \u003d int(get(\"partition_reserved_size\", 0))\n    if reserved_size \u003d\u003d 0:\n       return common.RoundUpTo4K(max(size * 1003 // 1000, 256 * 1024))\n    return size + reserved_size\n    \n  # If not specified, give us 16MB margin for GetDiskUsage error ...\n  reserved_size \u003d int(prop_dict.get(\"partition_reserved_size\", BYTES_IN_MB * 16))\n    \n  if fs_type.startswith(\"ext4\") and partition_headroom \u003e reserved_size:\n    reserved_size \u003d partition_headroom\n  return size + reserved_size\n  \n# Then here, call\n  size \u003d CalculateSizeWithReservedSize(prop_dict, size)\n  # L480\n  # Round this up to a multiple of 4K so that avbtool works\n  size \u003d common.RoundUpTo4K(size)\n```\n\nTianjie, WDYT?",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 27
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
