@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9873ad1_418cddd5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-09T02:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41079c55_0a1ba941",
+      "range": {
+        "startLine": 475,
+        "startChar": 62,
+        "endLine": 475,
+        "endChar": 63
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f44fc7_d7ffbdd9",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-09T02:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514bc11c_2003d008",
+      "range": {
+        "startLine": 475,
+        "startChar": 15,
+        "endLine": 475,
+        "endChar": 34
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "accfa004_c810dac7",
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2716076c_0728e9f6",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-09T02:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "accfa004_c810dac7",
+      "range": {
+        "startLine": 476,
+        "startChar": 31,
+        "endLine": 476,
+        "endChar": 69
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "459e3fbc_bfe5c95a",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-09T02:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "898a93e7_4e47cd22",
+      "range": {
+        "startLine": 476,
+        "startChar": 13,
+        "endLine": 476,
+        "endChar": 31
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65e8d59a_b89a54e6",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-09-09T02:11:51Z",
       "side": 1,
       "message": "I would recommend moving this to a new function. Maybe something like this:\n\n```\ndef CalculateSizeAndReserved(prop_dict, size): # Feel free to rename this function\n  partition_headroom \u003d int(prop_dict.get(\"partition_headroom\", 0))\n  if fs_type \u003d\u003d \"erofs\":\n    reserved_size \u003d int(get(\"partition_reserved_size\", 0))\n    if reserved_size \u003d\u003d 0:\n       return common.RoundUpTo4K(max(size * 1003 // 1000, 256 * 1024))\n    return size + reserved_size\n    \n  # If not specified, give us 16MB margin for GetDiskUsage error ...\n  reserved_size \u003d int(prop_dict.get(\"partition_reserved_size\", BYTES_IN_MB * 16))\n    \n  if fs_type.startswith(\"ext4\") and partition_headroom \u003e reserved_size:\n    reserved_size \u003d partition_headroom\n  return size + reserved_size\n  \n# Then here, call\n  size \u003d CalculateSizeWithReservedSize(prop_dict, size)\n  # L480\n  # Round this up to a multiple of 4K so that avbtool works\n  size \u003d common.RoundUpTo4K(size)\n```\n\nTianjie, WDYT?",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 27
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be852499_efcd50f9",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-09T02:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65e8d59a_b89a54e6",
       "range": {
         "startLine": 470,
         "startChar": 0,
