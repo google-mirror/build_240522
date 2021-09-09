@@ -16,6 +16,29 @@
       "message": "I guess the change won\u0027t affect the normal build flow...",
       "revId": "a1094e9f0c9ef4694104b849de4ed98fbecee1ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e14dc38_477ad47a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-09T18:14:51Z",
+      "side": 1,
+      "message": "just pass the parameters directly? no need to pass a tuple and then unpack",
+      "range": {
+        "startLine": 864,
+        "startChar": 20,
+        "endLine": 864,
+        "endChar": 24
+      },
+      "revId": "a1094e9f0c9ef4694104b849de4ed98fbecee1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
