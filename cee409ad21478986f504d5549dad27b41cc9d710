@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c4a43b_c6186a65",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-09T17:29:09Z",
+      "side": 1,
+      "message": "I tried to reduce some duplicated code, what do you think?",
+      "parentUuid": "6aee8eb9_c613e3bf",
+      "range": {
+        "startLine": 864,
+        "startChar": 5,
+        "endLine": 864,
+        "endChar": 15
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3205897_187512db",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-02T18:26:23Z",
       "side": 1,
       "message": "should we have a hard coded list to restrict what partitions can be skipped? I imagine the skip list can only apply to boot, product, system, vendor, etc; and the userdata/cache/bootloader/vbmeta/super_empty should always be rebuilt.",
+      "range": {
+        "startLine": 901,
+        "startChar": 24,
+        "endLine": 901,
+        "endChar": 42
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3159664_7b7fcba6",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-09T17:29:09Z",
+      "side": 1,
+      "message": "We do need the ability to skip some of these other images when they depend on another skipped image.\n\nFor example, if a user is skipping vendor (e.g. in b/188491126) and they don\u0027t use a vbmeta_vendor, then since the regular vbmeta.img needs vendor.img available to regenerate itself, it would fail unable to find that vendor.img.\nSo, this user would skip both vbmeta.img and vendor.img, then use the older otatools.zip package to regenerate those two images.\n\nDo you think we should add those images to an allowlist of skippable partitions? Or not enforce the skippable list at all? I\u0027m fine either way.",
+      "parentUuid": "d3205897_187512db",
       "range": {
         "startLine": 901,
         "startChar": 24,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc90d04_0ce48a68",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-09T17:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1f8257c_4297d82b",
+      "range": {
+        "startLine": 955,
+        "startChar": 82,
+        "endLine": 955,
+        "endChar": 99
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "633a43eb_2748a495",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-09-02T18:26:23Z",
       "side": 1,
       "message": "beware of this option, I think building super will fail if we skip the vendor partitions. (Though it might not be fatal)",
+      "range": {
+        "startLine": 968,
+        "startChar": 6,
+        "endLine": 968,
+        "endChar": 19
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a971af_0bf7ca5b",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-09T17:29:09Z",
+      "side": 1,
+      "message": "Done, added check on skip list for \u0027super\u0027",
+      "parentUuid": "633a43eb_2748a495",
       "range": {
         "startLine": 968,
         "startChar": 6,

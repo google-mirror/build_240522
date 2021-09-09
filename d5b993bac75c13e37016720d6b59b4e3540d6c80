@@ -22,6 +22,30 @@
       },
       "revId": "d5b993bac75c13e37016720d6b59b4e3540d6c80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c5a6c8_0b7b71f1",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-09T17:29:09Z",
+      "side": 0,
+      "message": "This was intentional. I updated the only caller of this function, down below when we read \"ab_partitions.txt\", to strip lines while reading the file (via f.read().splitlines() ) instead of doing the whitespace-stripping here.",
+      "parentUuid": "4cc08867_c44e1174",
+      "range": {
+        "startLine": 592,
+        "startChar": 25,
+        "endLine": 592,
+        "endChar": 30
+      },
+      "revId": "d5b993bac75c13e37016720d6b59b4e3540d6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
