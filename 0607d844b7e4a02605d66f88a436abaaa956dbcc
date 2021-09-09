@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df39dd13_e714d8f8",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-09T04:14:27Z",
+      "side": 1,
+      "message": "looks like the output of BuildImageMkfs is used here, so you also need to assign |mkfs_output| a value in L460?\n\nI guess the logic could be \n```\nmkfs_output \u003d None\nif fs_type.startswith(\"erofs\"):\n  mkfs_output \u003d BuildImageMkfs()\n...  \n(L555)\nif not mkfs_output:\n  mkfs_output \u003d BuildImageMkfs()\n```",
+      "range": {
+        "startLine": 560,
+        "startChar": 18,
+        "endLine": 560,
+        "endChar": 29
+      },
+      "revId": "0607d844b7e4a02605d66f88a436abaaa956dbcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
