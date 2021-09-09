@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4b68dda_d858161f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-09T18:08:46Z",
+      "side": 1,
+      "message": "Hmm, that would rely on the caller to pass the partitions correctly. Is it better to keep the skip list simple as [boot, vendor, product, odm]\n\nAll of a sudden I think we should just skip building super_empty, vbmeta, caremap etc if skip_list is not empty... Because all of them rely on files in skip_list. While the vbmeta_system|vendor reply on if \"avb_vbmeta_system|vendor\" intersects with skip_list\n\n\nyikes, now I believe we should do the other way around. i.e. we want to build the vendor images first, then build the normal images with add_missing. Therefore, we always use the latest logic to build files like super, caremap. \n\nMaybe instead of a skip_list, we have a build_list for vendor partitions, and return early in L905. What do you think?",
+      "parentUuid": "b3159664_7b7fcba6",
+      "range": {
+        "startLine": 901,
+        "startChar": 24,
+        "endLine": 901,
+        "endChar": 42
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1f8257c_4297d82b",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 6
