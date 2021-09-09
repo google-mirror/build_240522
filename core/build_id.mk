@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (c01c34 Merge "Don't sparse right-sized ext4 and erofs images.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=RQ3A.210905.001
+>>>>>>> BRANCH (90705d Make change and version bump to RQ3A.210905.001)
