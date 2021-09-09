@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514bc11c_2003d008",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-09T02:00:35Z",
+      "side": 1,
+      "message": "can this be erofs_some_suffix? Otherwise, maybe just fs_type \u003d\u003d erofs?",
+      "range": {
+        "startLine": 475,
+        "startChar": 15,
+        "endLine": 475,
+        "endChar": 34
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41079c55_0a1ba941",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-09T02:00:35Z",
+      "side": 1,
+      "message": "formatting\n\nAdd space around `\u003d\u003d`",
+      "range": {
+        "startLine": 475,
+        "startChar": 62,
+        "endLine": 475,
+        "endChar": 63
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "accfa004_c810dac7",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-09T02:00:35Z",
+      "side": 1,
+      "message": "Add comments about this expression?",
+      "range": {
+        "startLine": 476,
+        "startChar": 31,
+        "endLine": 476,
+        "endChar": 69
+      },
+      "revId": "d77259f78d68eb5c816c4b663284d55291c98624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
