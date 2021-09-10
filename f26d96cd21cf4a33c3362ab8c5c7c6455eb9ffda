@@ -1,0 +1,190 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa64ed7_6e2597ad",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "\u003e Please remove the trailing whitespace.\n\nPlease fix.",
+      "parentUuid": "b07255b1_a3eeb000",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38cf25d5_52196eab",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "\u003e Please remove the trailing whitespace.\n\nPlease fix.",
+      "parentUuid": "1db8f134_b994a810",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 4
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5307efd_8ed0f4e8",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "This rule is good, however, because it generates java source files, it will require the user to add the rule to the srcs of the android_binary. What would be more natural is to create a wrapper macro that puts these sources into a java_library, and then the user adds the library to the deps of the android_binary:\n\n  _event_log_tags \u003d rule(...)\n\n  def event_log_tags(name, src):\n    _event_log_tags(\n      name \u003d name + \"_gen_logtags\",\n      src \u003d src\n    )\n    \n    java_library(\n      name \u003d name,\n      srcs \u003d [name + \"_gen_logtags\"],\n    )\n\n\nthen in the BUILD file the user does:\n\n  event_log_tags(\n    name \u003d \"logtags\",\n    src \u003d \"Foo.logtags\",\n  )\n\n  android_binary(\n    name \u003d \"app\",\n    ...\n    deps \u003d [\n      ...,\n      \":logtags\",\n    ]\n  )\n \n (it is also possible for the starlark rule to generate a jar directly using java_common.compile(), however that\u0027s maybe more complicated than it\u0027s worth)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77705b77_684afc44",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "can there be more than one logtag file, or just one?",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2658b8_1d0b4dd3",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "might be good to enforce the \".logtags\" file extension with\n\n  allow_files \u003d [\".logtags\"]\n\n(and the suggested code below will rely on the files ending in \".logtags\")",
+      "range": {
+        "startLine": 20,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5564953f_9b1b80ae",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "rather than use attr.output, which requires the user to specify the full output path name, we can use ctx.action.declare_file and the DefaultInfo provider:\n\n  out_filename \u003d ctx.files.src[0].basename[:-len(\".logtags\")] + \".java\"\n  out_file \u003d ctx.actions.declare_file(out_filename)\n  ctx.actions.run(...)\n  return [DefaultInfo(files \u003d depset([out_file]))]",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c77b751_ddbcc773",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "make this a private attribute by adding and underscore to the beginning (and then update the code reference)",
+      "range": {
+        "startLine": 22,
+        "startChar": 9,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9819cb5f_1a94b2bd",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:48:03Z",
+      "side": 1,
+      "message": "let\u0027s delete, can be added later",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
