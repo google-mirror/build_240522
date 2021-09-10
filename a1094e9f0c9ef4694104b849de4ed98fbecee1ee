@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d97552_05378ddb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2021-09-10T06:05:15Z",
+      "side": 1,
+      "message": "Worked for me.\nsign_target_files_apks \\\n        --vendor_otatools\u003d\u003cotatools.zip from R\u003e \\\n\t--vendor_partitions\u003dvendor,odm,vbmeta,vbmeta_vendor \\\n\tmerged-target_files.zip \\\n\tsigned-target_files.zip",
+      "revId": "a1094e9f0c9ef4694104b849de4ed98fbecee1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e14dc38_477ad47a",
