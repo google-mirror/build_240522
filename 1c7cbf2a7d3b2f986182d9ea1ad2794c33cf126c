@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5838b88_5ba5d456",
+        "filename": "core/tasks/host_fake_snapshot.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-09-10T23:10:18Z",
+      "side": 1,
+      "message": "You can call ctx.DistForGoal in the singleton",
+      "revId": "1c7cbf2a7d3b2f986182d9ea1ad2794c33cf126c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
