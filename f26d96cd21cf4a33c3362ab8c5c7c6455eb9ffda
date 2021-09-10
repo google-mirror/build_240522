@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00859e44_38750248",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-10T22:50:01Z",
+      "side": 1,
+      "message": "Also, per the comment on https://android-review.googlesource.com/c/platform/build/bazel/+/1822093\n\nhaving the java_library in the macro allows the javacopts can go specifically on this java_library:\n\n  javacopts \u003d [\"-Xep:ArrayToString:OFF\"]",
+      "parentUuid": "a5307efd_8ed0f4e8",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77705b77_684afc44",
         "filename": "tools/event_log_tags.bzl",
         "patchSetId": 1
