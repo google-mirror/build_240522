@@ -61,6 +61,7 @@ PRODUCT_PACKAGES += \
     gsi_skip_mount.cfg \
     init.gsi.rc \
     init.vndk-nodef.rc \
+    system_ext_userdebug_plat_sepolicy.cil \
 
 # Support additional P, Q and R VNDK packages
 PRODUCT_EXTRA_VNDK_VERSIONS := 28 29 30

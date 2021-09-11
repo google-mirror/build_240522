@@ -6,6 +6,12 @@
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
+$(call add_soong_config_namespace,GSI)
+
+# Install a copy of the debug policy in GSI.
+BOARD_INSTALL_SYSTEM_EXT_DEBUG_POLICY := true
+$(call add_soong_config_var,GSI,BOARD_INSTALL_SYSTEM_EXT_DEBUG_POLICY)
+
 TARGET_NO_KERNEL := true
 
 # This flag is set by mainline but isn't desired for GSI.
