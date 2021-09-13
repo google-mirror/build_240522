@@ -16,6 +16,29 @@
       "message": "ping..any more advice?",
       "revId": "6552727e03622ed04b4943bd0859e7343a8cc985",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea397344_4eea1d15",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-13T18:15:27Z",
+      "side": 1,
+      "message": "should we still round to 4K for the 0.3% margin case?",
+      "range": {
+        "startLine": 244,
+        "startChar": 13,
+        "endLine": 244,
+        "endChar": 16
+      },
+      "revId": "6552727e03622ed04b4943bd0859e7343a8cc985",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
