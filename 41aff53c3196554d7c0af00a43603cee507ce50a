@@ -16,6 +16,24 @@
       "message": "FYI, the value of this is 1 in internal branches atm. Not sure if it matters.",
       "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90205bf9_446da4d4",
+        "filename": "tests/version_defaults.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-09-13T00:31:19Z",
+      "side": 1,
+      "message": "Should I make it 1?",
+      "parentUuid": "f59b74e8_9e7894b6",
+      "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
