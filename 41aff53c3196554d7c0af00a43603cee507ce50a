@@ -34,6 +34,24 @@
       "parentUuid": "f59b74e8_9e7894b6",
       "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dca134e_cf445249",
+        "filename": "tests/version_defaults.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-09-13T08:43:07Z",
+      "side": 1,
+      "message": "Do the test versions need to be correct? If so, they should match what is in version_defaults.mk. If they\u0027re just mock values, I don\u0027t think it matters.",
+      "parentUuid": "90205bf9_446da4d4",
+      "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
