@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39ae048_4a890553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-09-13T09:10:25Z",
+      "side": 1,
+      "message": "ping..any more advice?",
+      "revId": "6552727e03622ed04b4943bd0859e7343a8cc985",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
