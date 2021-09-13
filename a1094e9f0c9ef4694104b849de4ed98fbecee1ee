@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2064eb6_b24fec4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-13T20:12:02Z",
+      "side": 1,
+      "message": "Sure thing. I\u0027ll merge so that partners can take this as a stopgap, then address the comments this week.",
+      "parentUuid": "78dd7385_e12f25b4",
+      "revId": "a1094e9f0c9ef4694104b849de4ed98fbecee1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e14dc38_477ad47a",
