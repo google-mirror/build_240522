@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ad0d2a_72e4d18d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-09-13T16:44:32Z",
+      "side": 1,
+      "message": "This patch causes conflict because version_defaults.mk on git_sc-dev-plus-aosp/git_sc-v2-dev-plus-aosp deviated from aosp. I guess I have to make the changes on those branches first -- are the changes there accepted at the moment? ",
+      "revId": "1335903d4e15351e28fa144c6fb53ce43a0157ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
