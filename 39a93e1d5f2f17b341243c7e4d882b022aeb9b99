@@ -69,6 +69,24 @@
       "parentUuid": "2f5dcb2d_fb70e091",
       "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de32160f_e900a3a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-09-13T00:42:50Z",
+      "side": 1,
+      "message": "It returns \u0027true\u0027, and then the calls have to compare to it (ideally, all the comparisons to \u0027true\u0027, \u0027false\u0027, \u0027y\u0027 or \u0027n\u0027 should be replaced with idiomatic empty/non-empty).",
+      "parentUuid": "8e9ebc7d_77687f9c",
+      "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
