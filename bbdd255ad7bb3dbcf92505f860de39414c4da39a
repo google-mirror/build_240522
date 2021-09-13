@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f241b8_2f529235",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1714053
+      },
+      "writtenOn": "2021-09-13T19:57:26Z",
+      "side": 1,
+      "message": "I guess with android_library the \u0027javacopts \u003d [\"-Xep:ArrayToString:OFF\"]\u0027 isn\u0027t needed? I guess because errorprone and/or android lint isn\u0027t being run yet",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 19
+      },
+      "revId": "bbdd255ad7bb3dbcf92505f860de39414c4da39a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
