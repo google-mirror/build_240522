@@ -87,6 +87,24 @@
       "parentUuid": "8e9ebc7d_77687f9c",
       "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c09695b_dcb5e0aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-09-13T20:52:48Z",
+      "side": 1,
+      "message": "It seems like the problem is not the return value of the function, because it is \"true\" when true and empty when false, but with the callers who assume the value is true.  It seems easiest to just keep that behavior, and try to shift the callers to not explicitly look for \"true\".",
+      "parentUuid": "de32160f_e900a3a1",
+      "revId": "39a93e1d5f2f17b341243c7e4d882b022aeb9b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
