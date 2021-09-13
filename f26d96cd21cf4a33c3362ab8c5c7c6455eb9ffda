@@ -25,6 +25,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c146b67_823607cf",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa64ed7_6e2597ad",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38cf25d5_52196eab",
@@ -39,6 +63,30 @@
       "side": 1,
       "message": "\u003e Please remove the trailing whitespace.\n\nPlease fix.",
       "parentUuid": "1db8f134_b994a810",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 4
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e72ab4c_8c833243",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38cf25d5_52196eab",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -96,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dad971f5_b7e059b9",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "~Done, looking much better thanks! The output java file uses the android API so I made it an android_library instead, and the javacopt is needed for a different file in the QuickSearchBox app, so I added the option to the android_binary rule, not the android_library rule.",
+      "parentUuid": "00859e44_38750248",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77705b77_684afc44",
@@ -142,6 +214,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d6f1ed_8bac2c32",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e2658b8_1d0b4dd3",
+      "range": {
+        "startLine": 20,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f670397_652c766b",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "I think there can be more than one, I\u0027ve modified the code to allow for this.",
+      "parentUuid": "77705b77_684afc44",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5564953f_9b1b80ae",
@@ -155,6 +275,30 @@
       "writtenOn": "2021-09-10T22:48:03Z",
       "side": 1,
       "message": "rather than use attr.output, which requires the user to specify the full output path name, we can use ctx.action.declare_file and the DefaultInfo provider:\n\n  out_filename \u003d ctx.files.src[0].basename[:-len(\".logtags\")] + \".java\"\n  out_file \u003d ctx.actions.declare_file(out_filename)\n  ctx.actions.run(...)\n  return [DefaultInfo(files \u003d depset([out_file]))]",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b5acd5a_ef434fde",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5564953f_9b1b80ae",
       "range": {
         "startLine": 21,
         "startChar": 8,
@@ -188,6 +332,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3142c4_4c6e629f",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c77b751_ddbcc773",
+      "range": {
+        "startLine": 22,
+        "startChar": 9,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9819cb5f_1a94b2bd",
@@ -201,6 +369,30 @@
       "writtenOn": "2021-09-10T22:48:03Z",
       "side": 1,
       "message": "let\u0027s delete, can be added later",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "f26d96cd21cf4a33c3362ab8c5c7c6455eb9ffda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd411a1_a88975f1",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2021-09-13T14:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9819cb5f_1a94b2bd",
       "range": {
         "startLine": 28,
         "startChar": 11,
