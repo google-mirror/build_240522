@@ -106,6 +106,24 @@
       "parentUuid": "63f4c397_77d5943d",
       "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cbb4967_685249ba",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2021-09-14T21:24:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4925fe12_1874037e",
+      "revId": "a720635be20f4fc3acd39c7b83b919140ced0f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
