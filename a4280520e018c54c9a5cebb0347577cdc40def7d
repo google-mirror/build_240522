@@ -33,6 +33,24 @@
       "message": "just link against libbase and use android::base::ReadFileToString() instead.",
       "revId": "a4280520e018c54c9a5cebb0347577cdc40def7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa974564_2960dc69",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2021-09-14T21:41:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ab96b7_d7eaa15b",
+      "revId": "a4280520e018c54c9a5cebb0347577cdc40def7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
