@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8455d0_2e2feeb7",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-14T20:08:13Z",
+      "side": 1,
+      "message": "Addressed in https://r.android.com/1826615",
+      "parentUuid": "f4b68dda_d858161f",
+      "range": {
+        "startLine": 901,
+        "startChar": 24,
+        "endLine": 901,
+        "endChar": 42
+      },
+      "revId": "cee409ad21478986f504d5549dad27b41cc9d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1f8257c_4297d82b",
