@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "280fedcf_15bf45fc",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-09-14T20:40:46Z",
+      "side": 1,
+      "message": "rather than having to extract so many values from a tuple, could this be a struct instead? or go back to parameters?",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 40
+      },
+      "revId": "99577d09a4596edebfcc1d7bbb1db60e37229937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

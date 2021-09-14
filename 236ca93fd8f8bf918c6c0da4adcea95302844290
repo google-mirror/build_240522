@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b7acc5_02c9de35",
+        "filename": "tests/run.rbc",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-09-14T20:40:46Z",
+      "side": 1,
+      "message": "similarly here, can we use a struct rather than a tuple? this is getting unwieldy",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "236ca93fd8f8bf918c6c0da4adcea95302844290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
