@@ -16,6 +16,23 @@
       "message": "Bypassing presumbit to reduce the number of dummy builds we have for at least one target internally.\n\nThis is a pure revert, so should be minimal risk.",
       "revId": "e086f7222e6d4016c7f16122e257c00740c44e0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e78fc5_f9a280f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2021-09-14T23:19:10Z",
+      "side": 1,
+      "message": "2 tests failed the skipped presubmit.  Both failures are test harness failures, and these tests seem to have been getting this same failure for a while before this CL.",
+      "revId": "e086f7222e6d4016c7f16122e257c00740c44e0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
