@@ -123,8 +123,7 @@ endif
 endif
 
 ifdef TARGET_ARCH_SUITE
-  # TODO(b/175577370): Enable this error.
-  # $(error TARGET_ARCH_SUITE is not supported in kati/make builds)
+  $(error TARGET_ARCH_SUITE is not supported in kati/make builds)
 endif
 
 # ADDITIONAL_<partition>_PROPERTIES are properties that are determined by the
