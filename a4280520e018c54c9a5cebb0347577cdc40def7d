@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2bb683f_f3f6d281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-09-14T21:30:53Z",
+      "side": 1,
+      "message": "otherwise lgtm, thanks!",
+      "revId": "a4280520e018c54c9a5cebb0347577cdc40def7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ab96b7_d7eaa15b",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-09-14T21:30:53Z",
+      "side": 1,
+      "message": "just link against libbase and use android::base::ReadFileToString() instead.",
+      "revId": "a4280520e018c54c9a5cebb0347577cdc40def7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
