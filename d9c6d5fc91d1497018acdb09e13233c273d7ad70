@@ -45,6 +45,30 @@
       },
       "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9261dc41_c8812cef",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T16:52:21Z",
+      "side": 0,
+      "message": "read().splitlines() automatically strips whitespace.\n\nI think it\u0027s more clear to strip whitespace when creating the variable ab_partitions in the first place, rather than expecting its users (CheckAbOtaImages and AddCareMapForAbOta) to handle whitespace stripping.",
+      "parentUuid": "07204570_bd5c9dcd",
+      "range": {
+        "startLine": 968,
+        "startChar": 24,
+        "endLine": 968,
+        "endChar": 33
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
