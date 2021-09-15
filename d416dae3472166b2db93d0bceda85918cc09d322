@@ -22,6 +22,30 @@
       },
       "revId": "d416dae3472166b2db93d0bceda85918cc09d322",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558623b6_8fe6e07a",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-15T22:57:55Z",
+      "side": 1,
+      "message": "It\u0027s not set in our internal tree, because it\u0027s for sepolicy extension of downstreams (partners).",
+      "parentUuid": "2fba2d8a_5c1de0ac",
+      "range": {
+        "startLine": 272,
+        "startChar": 61,
+        "endLine": 272,
+        "endChar": 92
+      },
+      "revId": "d416dae3472166b2db93d0bceda85918cc09d322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
