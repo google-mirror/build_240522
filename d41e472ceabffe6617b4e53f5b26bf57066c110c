@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "431db211_5c8c58e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T22:00:00Z",
+      "side": 1,
+      "message": "That sounds like a good idea! Could even be a set of isolated \"rebuild partition\" functions that other scripts can directly call if they want to.\n\nThe main thing to keep in mind is retaining backwards compatibility with older versions of this script.\n\nUntil backwards-compatible image regeneration is fixed (there\u0027s an issue parsing sepolicy files from older version of selinux, http://b/192253131), partners with a vendor frozen at release N will need to continue using N\u0027s otatools.zip to regenerate N\u0027s vendor images.\n\nSo, tools like sign_target_files_apks and merge_target_files that potentially regenerate images from multiple releases (e.g. N vendor half and N+k system half) will continue needing to use multiple otatools packages together.\n\nAgain, all this cross-otatools-compilation can be removed when b/192253131 is fixed, but we are having trouble finding the right owners who know how to fix that issue.",
+      "parentUuid": "d420817a_b35f44ab",
+      "revId": "d41e472ceabffe6617b4e53f5b26bf57066c110c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec575d82_1bc6d610",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75dff8bb_ca53aba2",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T22:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec575d82_1bc6d610",
+      "range": {
+        "startLine": 891,
+        "startChar": 17,
+        "endLine": 891,
+        "endChar": 22
+      },
+      "revId": "d41e472ceabffe6617b4e53f5b26bf57066c110c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5aff0833_a53329f9",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-09-15T20:45:58Z",
       "side": 1,
       "message": "and remove this one",
+      "range": {
+        "startLine": 896,
+        "startChar": 7,
+        "endLine": 896,
+        "endChar": 39
+      },
+      "revId": "d41e472ceabffe6617b4e53f5b26bf57066c110c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b8747c2_5d1f084f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T22:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aff0833_a53329f9",
       "range": {
         "startLine": 896,
         "startChar": 7,
