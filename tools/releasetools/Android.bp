@@ -28,6 +28,7 @@ package {
 
 python_defaults {
     name: "releasetools_add_img_to_target_files_defaults",
+    defaults: ["releasetools_disable_py2"],
     srcs: [
         "add_img_to_target_files.py",
     ],
@@ -44,7 +45,20 @@ python_defaults {
 }
 
 python_defaults {
+    name: "releasetools_disable_py2",
+    version: {
+        py2: {
+            enabled: false,
+        },
+        py3: {
+            enabled: true,
+        },
+    }
+}
+
+python_defaults {
     name: "releasetools_build_image_defaults",
+    defaults: ["releasetools_disable_py2"],
     srcs: [
         "build_image.py",
     ],
@@ -66,6 +80,7 @@ python_defaults {
 
 python_defaults {
     name: "releasetools_build_super_image_defaults",
+    defaults: ["releasetools_disable_py2"],
     srcs: [
         "build_super_image.py",
     ],
@@ -76,6 +91,7 @@ python_defaults {
 
 python_defaults {
     name: "releasetools_img_from_target_files_defaults",
+    defaults: ["releasetools_disable_py2"],
     srcs: [
         "img_from_target_files.py",
     ],
@@ -87,6 +103,7 @@ python_defaults {
 
 python_defaults {
     name: "releasetools_check_target_files_vintf_defaults",
+    defaults: ["releasetools_disable_py2"],
     srcs: [
         "check_target_files_vintf.py",
     ],
@@ -100,14 +117,7 @@ python_defaults {
 
 python_library_host {
     name: "ota_metadata_proto",
-    version: {
-        py2: {
-            enabled: true,
-        },
-        py3: {
-            enabled: true,
-        },
-    },
+    defaults: ["releasetools_library_defaults"],
     srcs: [
        "ota_metadata.proto",
     ],
@@ -190,9 +200,6 @@ python_defaults {
 python_defaults {
     name: "releasetools_library_defaults",
     version: {
-        py2: {
-            enabled: true,
-        },
         py3: {
             enabled: true,
         },
@@ -308,13 +315,9 @@ python_library_host {
 python_defaults {
     name: "releasetools_binary_defaults",
     version: {
-        py2: {
+        py3: {
             enabled: true,
             embedded_launcher: true,
-        },
-        py3: {
-            enabled: false,
-            embedded_launcher: false,
         },
     },
     // TODO (b/140144201) Build imgdiff from releasetools_common
@@ -368,12 +371,13 @@ python_binary_host {
     ],
     defaults: [
         "releasetools_binary_defaults",
+        "releasetools_disable_py2",
     ],
 }
 
 python_binary_host {
     name: "check_ota_package_signature",
-    defaults: ["releasetools_binary_defaults"],
+    defaults: ["releasetools_binary_defaults", "releasetools_disable_py2"],
     srcs: [
         "check_ota_package_signature.py",
     ],
@@ -393,7 +397,7 @@ python_binary_host {
 
 python_binary_host {
     name: "check_target_files_signatures",
-    defaults: ["releasetools_binary_defaults"],
+    defaults: ["releasetools_binary_defaults", "releasetools_disable_py2"],
     srcs: [
         "check_target_files_signatures.py",
     ],
@@ -562,7 +566,7 @@ python_binary_host {
 
 python_binary_host {
     name: "verity_utils",
-    defaults: ["releasetools_binary_defaults"],
+    defaults: ["releasetools_binary_defaults", "releasetools_disable_py2"],
     srcs: [
         "verity_utils.py",
     ],
@@ -625,37 +629,11 @@ python_defaults {
 }
 
 python_test_host {
-    name: "releasetools_test",
-    defaults: ["releasetools_test_defaults"],
-    main: "test_utils.py",
-    version: {
-        py2: {
-            enabled: true,
-            // When using embedded launcher, atest will try (but may fail) to load libc++.so from
-            // host, because the test executable won't be able to find the needed libs via its
-            // runpath.
-            embedded_launcher: false,
-        },
-        py3: {
-            enabled: false,
-            embedded_launcher: false,
-        },
-    },
-    test_options: {
-        unit_test: true,
-    },
-}
-
-python_test_host {
     name: "releasetools_py3_test",
     defaults: ["releasetools_test_defaults"],
     main: "test_utils.py",
     test_suites: ["general-tests"],
     version: {
-        py2: {
-            enabled: false,
-            embedded_launcher: false,
-        },
         py3: {
             enabled: true,
             embedded_launcher: false,
