@@ -24,6 +24,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3610d12_e0b47ec1",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T18:45:41Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "40b4ec5a_5c60986e",
+      "range": {
+        "startLine": 592,
+        "startChar": 25,
+        "endLine": 592,
+        "endChar": 32
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d5bf66_36ac5646",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T18:45:41Z",
+      "side": 0,
+      "message": "Discussed in other comment, this is no longer necessary with splitlines()",
+      "parentUuid": "40b4ec5a_5c60986e",
+      "range": {
+        "startLine": 592,
+        "startChar": 25,
+        "endLine": 592,
+        "endChar": 32
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07204570_bd5c9dcd",
@@ -109,6 +157,30 @@
       "side": 0,
       "message": "(Strips the newline, not all whitespace)",
       "parentUuid": "9261dc41_c8812cef",
+      "range": {
+        "startLine": 968,
+        "startChar": 24,
+        "endLine": 968,
+        "endChar": 33
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953546b8_05bb68ec",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-15T18:45:41Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "337c5809_55347151",
       "range": {
         "startLine": 968,
         "startChar": 24,
