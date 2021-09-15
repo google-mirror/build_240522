@@ -22,6 +22,30 @@
       },
       "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8fb98ea_3da3c15c",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-09-15T20:23:19Z",
+      "side": 1,
+      "message": "As of now it is expected to be used by Vendors and is not expected to be modified by them.",
+      "parentUuid": "2a024cc5_33d81df9",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
