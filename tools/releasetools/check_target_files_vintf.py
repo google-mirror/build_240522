@@ -27,8 +27,8 @@ import subprocess
 import sys
 import os
 import zipfile
-
 import common
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +74,7 @@ def GetArgsForSkus(info_dict):
 
   vendor_skus = info_dict.get('vintf_vendor_manifest_skus', '').strip().split()
   if info_dict.get('vintf_include_empty_vendor_sku', '') == "true" or \
-      not vendor_skus:
+          not vendor_skus:
     vendor_skus += ['']
 
   return [['--property', 'ro.boot.product.hardware.sku=' + odm_sku,
@@ -120,7 +120,8 @@ def CheckVintfFromExtractedTargetFiles(input_tmp, info_dict=None):
     info_dict = common.LoadInfoDict(input_tmp)
 
   if info_dict.get('vintf_enforce') != 'true':
-    logger.warning('PRODUCT_ENFORCE_VINTF_MANIFEST is not set, skipping checks')
+    logger.warning(
+        'PRODUCT_ENFORCE_VINTF_MANIFEST is not set, skipping checks')
     return True
 
   dirmap = GetDirmap(input_tmp)
@@ -162,13 +163,16 @@ def GetVintfFileList():
   Returns a list of VINTF metadata files that should be read from a target files
   package before executing checkvintf.
   """
+
   def PathToPatterns(path):
     if path[-1] == '/':
       path += '*'
+    path = Path(path)
     for device_path, target_files_rel_paths in DIR_SEARCH_PATHS.items():
-      if path.startswith(device_path):
-        suffix = path[len(device_path):]
-        return [rel_path + suffix for rel_path in target_files_rel_paths]
+      device_path = Path(device_path)
+      if path.is_relative_to(device_path):
+        suffix = path.relative_to(device_path)
+        return [os.path.join(rel_path, suffix) for rel_path in target_files_rel_paths]
     raise RuntimeError('Unrecognized path from checkvintf --dump-file-list: ' +
                        path)
 
@@ -217,6 +221,7 @@ def CheckVintf(inp, info_dict=None):
 
   raise ValueError('{} is not a valid directory or zip file'.format(inp))
 
+
 def CheckVintfIfTrebleEnabled(target_files, target_info):
   """Checks compatibility info of the input target files.
 
@@ -243,6 +248,7 @@ def CheckVintfIfTrebleEnabled(target_files, target_info):
 
   if not CheckVintf(target_files, target_info):
     raise RuntimeError("VINTF compatibility check failed")
+
 
 def HasTrebleEnabled(target_files, target_info):
   def HasVendorPartition(target_files):
