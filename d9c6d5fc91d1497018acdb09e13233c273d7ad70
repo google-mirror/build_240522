@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b4ec5a_5c60986e",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-15T03:21:09Z",
+      "side": 0,
+      "message": "keep the strip?",
+      "range": {
+        "startLine": 592,
+        "startChar": 25,
+        "endLine": 592,
+        "endChar": 32
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07204570_bd5c9dcd",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-15T03:21:09Z",
+      "side": 0,
+      "message": "What\u0027s the difference?",
+      "range": {
+        "startLine": 968,
+        "startChar": 24,
+        "endLine": 968,
+        "endChar": 33
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
