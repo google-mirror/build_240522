@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fba2d8a_5c1de0ac",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-09-15T21:32:27Z",
+      "side": 1,
+      "message": "These don\u0027t ever appear to be set in a makefile, are they environment variables?  If so, you can get them with ctx.Config().Getenv.",
+      "range": {
+        "startLine": 272,
+        "startChar": 61,
+        "endLine": 272,
+        "endChar": 92
+      },
+      "revId": "d416dae3472166b2db93d0bceda85918cc09d322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
