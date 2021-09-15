@@ -69,6 +69,30 @@
       },
       "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069c67b2_97fc9c4f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-15T16:54:05Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "9261dc41_c8812cef",
+      "range": {
+        "startLine": 968,
+        "startChar": 24,
+        "endLine": 968,
+        "endChar": 33
+      },
+      "revId": "d9c6d5fc91d1497018acdb09e13233c273d7ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
