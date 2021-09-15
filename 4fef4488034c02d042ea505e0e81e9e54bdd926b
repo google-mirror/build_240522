@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a024cc5_33d81df9",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-09-15T02:12:13Z",
+      "side": 1,
+      "message": "do we expect most vendors to use this? We can also leave it out of the VNDK (vendor_available but not vndk enabled) if we only expect some devices to use it",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
