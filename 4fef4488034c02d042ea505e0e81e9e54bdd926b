@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ad2c63_3918d904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-09-16T17:56:53Z",
+      "side": 1,
+      "message": "Tested without these changes and removing vndk-enable from aidl on Pixel4a device. Able to run VTS successfully. Will abandon this CL.",
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a024cc5_33d81df9",
@@ -110,6 +127,30 @@
       "side": 1,
       "message": "Libraries are automatically added to devices that use them indirectly via product packages. We don\u0027t need to do anything here.",
       "parentUuid": "6240fd3e_c5e0a4ed",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4771975f_2c533d9e",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-09-16T17:56:53Z",
+      "side": 1,
+      "message": "Ok, since it is not going to be used by many vendors, as of now will abandon this change of adding these libs to VNDK and also removed vndk-enabled from aidl build rules.",
+      "parentUuid": "e87e7dac_d8a0c1fc",
       "range": {
         "startLine": 116,
         "startChar": 0,
