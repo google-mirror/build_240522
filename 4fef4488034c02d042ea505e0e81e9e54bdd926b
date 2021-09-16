@@ -46,6 +46,30 @@
       },
       "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7323dea2_477d37ef",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-09-16T00:53:27Z",
+      "side": 1,
+      "message": "There is a separate mechanism (in the build system and also interface hashes) that prevents this interface from being changed (it is an API surface after all!).\n\nBeing in the VNDK is different from being available to vendors.\n\nThe idea is, by being here, it\u0027ll be installed on all devices by default. If there are some devices that don\u0027t use this interface, we can save a bit of space on those devices.",
+      "parentUuid": "d8fb98ea_3da3c15c",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
