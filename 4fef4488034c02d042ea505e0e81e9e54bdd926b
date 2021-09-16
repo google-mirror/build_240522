@@ -94,6 +94,30 @@
       },
       "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87e7dac_d8a0c1fc",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-09-16T16:47:05Z",
+      "side": 1,
+      "message": "Libraries are automatically added to devices that use them indirectly via product packages. We don\u0027t need to do anything here.",
+      "parentUuid": "6240fd3e_c5e0a4ed",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "4fef4488034c02d042ea505e0e81e9e54bdd926b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
