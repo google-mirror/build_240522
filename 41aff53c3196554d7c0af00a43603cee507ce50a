@@ -52,6 +52,24 @@
       "parentUuid": "90205bf9_446da4d4",
       "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f01127c8_7cdca74c",
+        "filename": "tests/version_defaults.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-09-16T04:54:35Z",
+      "side": 1,
+      "message": "These are just test settings.",
+      "parentUuid": "4dca134e_cf445249",
+      "revId": "41aff53c3196554d7c0af00a43603cee507ce50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
