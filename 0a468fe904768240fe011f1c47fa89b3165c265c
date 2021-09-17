@@ -16,6 +16,29 @@
       "message": "Hi Colin, I\u0027d like to add this build flag / switch that toggles the behavior of `init` in GSI products (gsi_arm gsi_arm64 gsi_x86 gsi_x86_64).\n\nI added a simple, foolproof gating mechanism in product_config.mk, so only GSI product makefiles can set this flag. (The GSI product names are relatively stable, so I just open coded they inline)",
       "revId": "0a468fe904768240fe011f1c47fa89b3165c265c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede0d02f_38975884",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-09-17T22:57:02Z",
+      "side": 1,
+      "message": "You could use gsi_% here",
+      "range": {
+        "startLine": 390,
+        "startChar": 18,
+        "endLine": 390,
+        "endChar": 54
+      },
+      "revId": "0a468fe904768240fe011f1c47fa89b3165c265c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
