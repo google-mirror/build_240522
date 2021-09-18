@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb365ed_774a0487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-18T12:47:12Z",
+      "side": 1,
+      "message": "thanks for the prompt review!",
+      "revId": "0a468fe904768240fe011f1c47fa89b3165c265c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ede0d02f_38975884",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-09-17T22:57:02Z",
       "side": 1,
       "message": "You could use gsi_% here",
+      "range": {
+        "startLine": 390,
+        "startChar": 18,
+        "endLine": 390,
+        "endChar": 54
+      },
+      "revId": "0a468fe904768240fe011f1c47fa89b3165c265c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca02eab1_1714be07",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-18T12:47:12Z",
+      "side": 1,
+      "message": "I\u0027d rather open code the exact list of names here, as I don\u0027t want to allow any products prefixed with \"gsi_\", such as \"gsi_gms_arm64\".",
+      "parentUuid": "ede0d02f_38975884",
       "range": {
         "startLine": 390,
         "startChar": 18,
