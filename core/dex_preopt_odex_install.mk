@@ -60,6 +60,7 @@ ifeq (,$(strip $(built_dex)$(my_prebuilt_src_file)$(LOCAL_SOONG_DEX_JAR)))
   LOCAL_DEX_PREOPT :=
 endif
 
+# TODO (b/194150908): deprecate this when the bug is fixed.
 # Don't preopt system server jars that are updatable.
 ifneq (,$(filter %:$(LOCAL_MODULE), $(PRODUCT_APEX_SYSTEM_SERVER_JARS)))
   LOCAL_DEX_PREOPT :=
@@ -429,6 +430,13 @@ $(eval $(call copy-one-file,$(my_dexpreopt_config),$(my_dexpreopt_config_for_pos
 $(LOCAL_INSTALLED_MODULE): $(my_dexpreopt_config_for_postprocessing)
 
 ifdef LOCAL_DEX_PREOPT
+  ifneq (,$(filter %:$(LOCAL_MODULE), $(PRODUCT_SYSTEM_SERVER_JARS)))
+    my_dexpreopt_jar_copy := out/soong/system_server_dexjars/$(LOCAL_MODULE).jar
+    $(my_dexpreopt_jar_copy): PRIVATE_BUILT_MODULE := $(LOCAL_BUILT_MODULE)
+    $(my_dexpreopt_jar_copy): $(LOCAL_BUILT_MODULE)
+	  @cp $(PRIVATE_BUILT_MODULE) $@
+  endif
+
   my_dexpreopt_script := $(intermediates)/dexpreopt.sh
   my_dexpreopt_zip := $(intermediates)/dexpreopt.zip
   .KATI_RESTAT: $(my_dexpreopt_script)
@@ -437,6 +445,7 @@ ifdef LOCAL_DEX_PREOPT
   $(my_dexpreopt_script): PRIVATE_GLOBAL_CONFIG := $(DEX_PREOPT_CONFIG_FOR_MAKE)
   $(my_dexpreopt_script): PRIVATE_MODULE_CONFIG := $(my_dexpreopt_config)
   $(my_dexpreopt_script): $(DEXPREOPT_GEN)
+  $(my_dexpreopt_script): $(my_dexpreopt_jar_copy)
   $(my_dexpreopt_script): $(my_dexpreopt_config) $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE) $(DEX_PREOPT_CONFIG_FOR_MAKE)
 	@echo "$(PRIVATE_MODULE) dexpreopt gen"
 	$(DEXPREOPT_GEN) \
