@@ -3477,8 +3477,9 @@ endif # BOARD_PREBUILT_DTBOIMAGE
 
 # -----------------------------------------------------------------
 # Protected VM firmware image
-ifdef BOARD_PREBUILT_PVMFWIMAGE
+ifeq ($(TARGET_PKVM_ENABLED),true)
 INSTALLED_PVMFWIMAGE_TARGET := $(PRODUCT_OUT)/pvmfw.img
+BOARD_PREBUILT_PVMFWIMAGE ?= packages/modules/Virtualization/pvmfw/pvmfw.img
 
 ifeq ($(BOARD_AVB_ENABLE),true)
 $(INSTALLED_PVMFWIMAGE_TARGET): $(BOARD_PREBUILT_PVMFWIMAGE) $(AVBTOOL) $(BOARD_AVB_PVMFW_KEY_PATH)
@@ -3493,7 +3494,7 @@ $(INSTALLED_PVMFWIMAGE_TARGET): $(BOARD_PREBUILT_PVMFWIMAGE)
 	cp $(BOARD_PREBUILT_PVMFWIMAGE) $@
 endif
 
-endif # BOARD_PREBUILT_PVMFWIMAGE
+endif # TARGET_PKVM_ENABLED
 
 # Returns a list of image targets corresponding to the given list of partitions. For example, it
 # returns "$(INSTALLED_PRODUCTIMAGE_TARGET)" for "product", or "$(INSTALLED_SYSTEMIMAGE_TARGET)
