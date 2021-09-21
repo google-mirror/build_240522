@@ -16,6 +16,23 @@
       "message": "Can you describe how to reproduce this issue? I don\u0027t see any assertion when testing with erofs.",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f97bf07_ab41dcca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1895975
+      },
+      "writtenOn": "2021-09-21T14:21:08Z",
+      "side": 1,
+      "message": "This issue occurred when I backported EROFS to a non-A/B device running Android 11. (didn\u0027t encounter this on A/B variant)\nAfter all, the reason in commitmsg should be enough justification.",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
