@@ -139,6 +139,24 @@
       "parentUuid": "e77162ef_02e26eca",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7832768f_f76f8306",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-22T03:16:42Z",
+      "side": 1,
+      "message": "AOSP\u0027s imgdiff and puffdiff will decompress input bytes, perform diffing, and re-compress back. Not sure if you\u0027ve tried those.",
+      "parentUuid": "9d1bab07_44793ec8",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
