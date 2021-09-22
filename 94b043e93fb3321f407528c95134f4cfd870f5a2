@@ -68,6 +68,30 @@
       },
       "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da011b63_6901386d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T18:26:22Z",
+      "side": 1,
+      "message": "Maybe they can be in another macro? userdata / cache also needs these two.",
+      "parentUuid": "ae9fc8b3_efee8dae",
+      "range": {
+        "startLine": 1650,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 73
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
