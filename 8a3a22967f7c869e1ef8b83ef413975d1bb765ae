@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "613ad902_9316372f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-09-22T10:40:14Z",
+      "side": 1,
+      "message": "I think it\u0027s unrelated because I saw the same error on ab/. I\u0027ll rerun presubmit.",
+      "parentUuid": "6a9a1be3_30abf1f0",
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2961d4e7_6459de12",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-09-22T04:27:24Z",
       "side": 1,
       "message": "I missed this when I was making changes. You can safely deprecate this now. The remaining works of b/194150908 are just some cleanups about prebuilt apexes.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5643a98_17e18930",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-09-22T10:40:14Z",
+      "side": 1,
+      "message": "Ok, thanks. It\u0027ll do that in a follow up to avoid making unrelated funcitonal changes in this CL.",
+      "parentUuid": "2961d4e7_6459de12",
       "range": {
         "startLine": 63,
         "startChar": 0,
