@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34229fa6_b2ed14b9",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-22T21:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b85cc0f1_29bbe454",
+      "range": {
+        "startLine": 1621,
+        "startChar": 0,
+        "endLine": 1623,
+        "endChar": 53
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36eb4011_a9623b3a",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-22T18:25:42Z",
       "side": 1,
       "message": "nit: since you are refactoring, sort?",
+      "range": {
+        "startLine": 1626,
+        "startChar": 0,
+        "endLine": 1638,
+        "endChar": 104
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845a4a53_b9d95eb8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-22T21:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36eb4011_a9623b3a",
       "range": {
         "startLine": 1626,
         "startChar": 0,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "Maybe they can be in another macro? userdata / cache also needs these two.",
       "parentUuid": "ae9fc8b3_efee8dae",
+      "range": {
+        "startLine": 1650,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 73
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3b1188_189e20c0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-22T21:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da011b63_6901386d",
       "range": {
         "startLine": 1650,
         "startChar": 0,
