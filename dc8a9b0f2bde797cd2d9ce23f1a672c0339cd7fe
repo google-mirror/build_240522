@@ -157,6 +157,24 @@
       "parentUuid": "9d1bab07_44793ec8",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "360c54d1_fabb354a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2021-09-22T03:20:35Z",
+      "side": 1,
+      "message": "nope, I don\u0027t have any expertise in the Android OTA field, it was developed my another team at that time.\n\nFor the full OTA package, since EROFS is lz4 compressed, so recompressing again with XZ format (the AOSP way, but my previous company does\u0027t use XZ since it impacts total upgrading time without A/B) would not get much gain compared with XZ with plain data directly.\n\nOne final solution of this might be support generating target EROFS images from XZ tarball with a fs tree directly in the device, plus mkfs fully supports reproducable builds. I don\u0027t have enough extra time working on this, mainly working on container use cases for now, but it\u0027s still on my TODO list.",
+      "parentUuid": "7832768f_f76f8306",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
