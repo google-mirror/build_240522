@@ -16,6 +16,23 @@
       "message": "Thanks, was able to remove a bit more duplication.",
       "revId": "707e6f5ac85ab02adc62a1168eb7ec90fdb88d25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71912d9_b52aef71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T21:55:21Z",
+      "side": 1,
+      "message": "+2\n",
+      "revId": "707e6f5ac85ab02adc62a1168eb7ec90fdb88d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
