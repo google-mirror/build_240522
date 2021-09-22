@@ -912,6 +912,13 @@ ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
     $(LOCAL_BUILT_MODULE):$(LOCAL_INSTALLED_MODULE) \
     $(my_init_rc_pairs) $(my_test_data_pairs) $(my_vintf_pairs))
 endif
+ALL_MODULES.$(my_register_name).MANIFEST_FILE := $(LOCAL_MANIFEST_FILE)$(LOCAL_FULL_MANIFEST_FILE)
+ifneq (,$(filter %.apk,$(LOCAL_CHECKED_MODULE)))
+    ALL_MODULES.$(my_register_name).IS_IMPORT := true
+endif
+ifneq (,$(filter %.apk,$(LOCAL_PREBUILT_MODULE_FILE)))
+    ALL_MODULES.$(my_register_name).IS_IMPORT := true
+endif
 ifdef LOCAL_PICKUP_FILES
 # Files or directories ready to pick up by the build system
 # when $(LOCAL_BUILT_MODULE) is done.
