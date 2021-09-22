@@ -50,6 +50,24 @@
       "message": "I\u0027d prefer to keep the assert (or to make it non-AB only), since a missing block map would be pretty serious for an AB update. erofs-utils has blockmap support upstream which we\u0027ll pull in when 1.4 is ready. But I\u0027ll defer to OTA folks.",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bded1ec5_72d0def1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T01:03:50Z",
+      "side": 1,
+      "message": "+1.\n\nSome alternatives I\u0027d suggest:\n- Add system.map for erofs / squashfs\n- As David suggests, allow it to be missing only for non-A/B\n- Allow them to be missing only for non-A/B and (erofs or squashfs)",
+      "parentUuid": "f8f002cf_6ec1785d",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
