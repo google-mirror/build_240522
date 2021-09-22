@@ -121,6 +121,24 @@
       "message": "Thanks for your kind reply, and I agree with all the points above. This patch should be abandoned.",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1bab07_44793ec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2021-09-22T03:06:24Z",
+      "side": 1,
+      "message": "btw, once (2 years before) we had some in-house optimization for OTA size (including optimization for full and difference), using some recompress way to reduce diff amplification.\n\nYet my previous employer would like to avoid sharing this due to that is unrelated to the EROFS filesystem core and a separated runtime program, hmmm....",
+      "parentUuid": "e77162ef_02e26eca",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
