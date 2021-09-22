@@ -68,6 +68,24 @@
       "parentUuid": "f8f002cf_6ec1785d",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed501eb_2c5145ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-22T01:04:25Z",
+      "side": 1,
+      "message": "have you tested the OTA sizes with this patch? Missing block map + using compressed filesystem is probably going to increase OTA size by 2x or 3x. Are you sure you want this?",
+      "parentUuid": "3f97bf07_ab41dcca",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
