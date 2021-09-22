@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b85cc0f1_29bbe454",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T18:25:42Z",
+      "side": 1,
+      "message": "nit: I think you can use $(uppercase). The good thing is that when a new partition is added, we ensure they have $(1) \u003d\u003d uppercase($(2)) too",
+      "range": {
+        "startLine": 1621,
+        "startChar": 0,
+        "endLine": 1623,
+        "endChar": 53
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36eb4011_a9623b3a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T18:25:42Z",
+      "side": 1,
+      "message": "nit: since you are refactoring, sort?",
+      "range": {
+        "startLine": 1626,
+        "startChar": 0,
+        "endLine": 1638,
+        "endChar": 104
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae9fc8b3_efee8dae",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-22T18:25:42Z",
+      "side": 1,
+      "message": "what about these two?",
+      "range": {
+        "startLine": 1650,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 73
+      },
+      "revId": "94b043e93fb3321f407528c95134f4cfd870f5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
