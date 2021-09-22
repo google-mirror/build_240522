@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9a1be3_30abf1f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-22T04:27:24Z",
+      "side": 1,
+      "message": "The presubmit failure is related.",
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2961d4e7_6459de12",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-09-22T04:27:24Z",
+      "side": 1,
+      "message": "I missed this when I was making changes. You can safely deprecate this now. The remaining works of b/194150908 are just some cleanups about prebuilt apexes.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
