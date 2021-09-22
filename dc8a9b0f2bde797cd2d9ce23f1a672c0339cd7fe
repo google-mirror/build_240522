@@ -104,6 +104,23 @@
       "parentUuid": "bded1ec5_72d0def1",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "424b2038_aa72fba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1895975
+      },
+      "writtenOn": "2021-09-22T02:43:52Z",
+      "side": 1,
+      "message": "Thanks for your kind reply, and I agree with all the points above. This patch should be abandoned.",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
