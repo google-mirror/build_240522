@@ -86,6 +86,24 @@
       "parentUuid": "3f97bf07_ab41dcca",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77162ef_02e26eca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-09-22T01:14:36Z",
+      "side": 1,
+      "message": "These two functions are only executed for non-AB, so no impact on AB devices.\n\nBut this CL feels like it\u0027s attacking the symptom rather than the problem. We did some experiments running erofs on AB devices, and even with proper block map support there\u0027s still a significant impact on OTA sizes(David can you share the numbers if possible?). Running EROFS w/o block map is just going to kill OTA size(2x-3x I remember?). I don\u0027t think silencing missing block map errors is a good solution.",
+      "parentUuid": "bded1ec5_72d0def1",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
