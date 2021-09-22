@@ -33,6 +33,23 @@
       "message": "This issue occurred when I backported EROFS to a non-A/B device running Android 11. (didn\u0027t encounter this on A/B variant)\nAfter all, the reason in commitmsg should be enough justification.",
       "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f002cf_6ec1785d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-22T00:32:09Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep the assert (or to make it non-AB only), since a missing block map would be pretty serious for an AB update. erofs-utils has blockmap support upstream which we\u0027ll pull in when 1.4 is ready. But I\u0027ll defer to OTA folks.",
+      "revId": "dc8a9b0f2bde797cd2d9ce23f1a672c0339cd7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
