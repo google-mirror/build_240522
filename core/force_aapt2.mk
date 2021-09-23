@@ -46,8 +46,14 @@ endif
 
 ifeq (,$(strip $(LOCAL_MANIFEST_FILE)$(LOCAL_FULL_MANIFEST_FILE)))
   ifeq (,$(wildcard $(LOCAL_PATH)/AndroidManifest.xml))
-    # work around missing manifests by creating a default one
-    LOCAL_FULL_MANIFEST_FILE := $(call local-intermediates-dir,COMMON)/DefaultManifest.xml
-    $(call create-default-manifest-file,$(LOCAL_FULL_MANIFEST_FILE),$(call module-min-sdk-version))
+    ifeq (APPS,$(LOCAL_MODULE_CLASS))
+      # work around missing manifests by creating a default one
+      $(warning $(LOCAL_MODULE) missing manifest file. Generating DefaultManifest.xml)
+      LOCAL_FULL_MANIFEST_FILE := $(call local-intermediates-dir,COMMON)/DefaultManifest.xml
+      $(call create-default-manifest-file,$(LOCAL_FULL_MANIFEST_FILE),$(call module-min-sdk-version))
+
+      # intialize and append
+      AAPT2_APPS_MISSING_MANIFEST := $(AAPT2_APPS_MISSING_MANIFEST) $(LOCAL_MODULE)
+    endif
   endif
 endif

@@ -1525,6 +1525,20 @@ files: $(modules_to_install) \
 
 # -------------------------------------------------------------------
 
+.PHONY: check-aapt2-files
+check-aapt2-files:
+	if [ ! -z "$(AAPT2_APPS_MISSING_MANIFEST)" ]; then \
+		echo -e "These apps do not contain a manifest file which is required by aapt2: $(AAPT2_APPS_MISSING_MANIFEST).\n\
+Provide a manifest file by either\n\
+1. Using LOCAL_MANIFEST_FILE in .mk\n\
+2. Using manifest in .bp\n\
+3. Creating a AndroidManifest.xml file in the directory\n" && exit 1;\
+	fi
+
+ifneq (true,$(BUILD_BROKEN_AAPT2_ALLOW_MISSING_MANIFEST))
+droid: check-aapt2-files
+endif
+
 .PHONY: checkbuild
 checkbuild: $(modules_to_check) droid_targets check-elf-files
 
