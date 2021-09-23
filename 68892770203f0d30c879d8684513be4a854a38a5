@@ -22,6 +22,30 @@
       },
       "revId": "68892770203f0d30c879d8684513be4a854a38a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe27529_e1726d9f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-23T14:24:03Z",
+      "side": 1,
+      "message": "Oh, thanks for the catch.\n\nWish list: it will be great if this can cause a build failure or warning as a reminder.",
+      "parentUuid": "cad517a7_6ff5a218",
+      "range": {
+        "startLine": 401,
+        "startChar": 9,
+        "endLine": 401,
+        "endChar": 46
+      },
+      "revId": "68892770203f0d30c879d8684513be4a854a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
