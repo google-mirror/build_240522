@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9295fb_46ffb4ae",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-09-23T21:33:43Z",
+      "side": 1,
+      "message": "nit: prefixed?\n\nAlso, we probably should clean up L645~L872 to use this mechanism",
+      "range": {
+        "startLine": 637,
+        "startChar": 1,
+        "endLine": 637,
+        "endChar": 10
+      },
+      "revId": "40a821f600b0381cb6b3b2c8795c5a09b83edbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
