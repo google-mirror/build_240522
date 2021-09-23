@@ -14,16 +14,12 @@
 # limitations under the License.
 #
 
-PRODUCT_COPY_FILES += \
-    kernel/prebuilts/5.10/x86_64/kernel-5.10:kernel-5.10 \
+# Build GKI boot images
+GKI_KERNEL_DIST_PAIRS := \
+  kernel/prebuilts/5.10/x86_64:kernel/5.10 \
 
-$(call dist-for-goals, dist_files, kernel/prebuilts/5.10/x86_64/prebuilt-info.txt:kernel/5.10/prebuilt-info.txt)
+include $(SRC_TARGET_DIR)/product/generic_kernel.mk
 
-ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-PRODUCT_COPY_FILES += \
-    kernel/prebuilts/5.10/x86_64/kernel-5.10-allsyms:kernel-5.10-allsyms \
-
-endif
 
 PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
 PRODUCT_BUILD_RECOVERY_IMAGE := false
