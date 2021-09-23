@@ -22,6 +22,30 @@
       },
       "revId": "40a821f600b0381cb6b3b2c8795c5a09b83edbec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911fc469_33f95a6a",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-09-23T21:40:26Z",
+      "side": 1,
+      "message": "Ack, I\u0027ll do this in a follow-up.",
+      "parentUuid": "9d9295fb_46ffb4ae",
+      "range": {
+        "startLine": 637,
+        "startChar": 1,
+        "endLine": 637,
+        "endChar": 10
+      },
+      "revId": "40a821f600b0381cb6b3b2c8795c5a09b83edbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
