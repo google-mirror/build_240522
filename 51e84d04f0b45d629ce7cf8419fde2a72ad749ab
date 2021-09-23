@@ -93,6 +93,30 @@
       },
       "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b15120_f11f8ca7",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-23T09:07:18Z",
+      "side": 1,
+      "message": "Also, in the future, there might be completely no boot-debug-*.img in GSI targets.\n\nGiven:\n\n + https://android-review.googlesource.com/q/topic:gsi_debug_policy\n + b/197262350\n \n so I think this is just a transient solution for the current GSI/GKI target (i.e., gsi_arm64).\n \n Does that make sense?",
+      "parentUuid": "8fd3c415_9ef9b004",
+      "range": {
+        "startLine": 2358,
+        "startChar": 38,
+        "endLine": 2358,
+        "endChar": 48
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
