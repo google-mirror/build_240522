@@ -14,27 +14,14 @@
 # limitations under the License.
 #
 
-PRODUCT_COPY_FILES += \
-    kernel/prebuilts/4.19/arm64/kernel-4.19-gz:kernel-4.19-gz \
-    kernel/prebuilts/5.10/arm64/kernel-5.10:kernel-5.10 \
-    kernel/prebuilts/5.10/arm64/kernel-5.10-gz:kernel-5.10-gz \
-    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4:kernel-5.10-lz4 \
-    kernel/prebuilts/mainline/arm64/kernel-mainline-allsyms:kernel-mainline \
-    kernel/prebuilts/mainline/arm64/kernel-mainline-gz-allsyms:kernel-mainline-gz \
-    kernel/prebuilts/mainline/arm64/kernel-mainline-lz4-allsyms:kernel-mainline-lz4 \
+# Build GKI boot images
+GKI_KERNEL_DIST_PAIRS := \
+  kernel/prebuilts/4.19/arm64:kernel/4.19 \
+  kernel/prebuilts/5.10/arm64:kernel/5.10 \
+  kernel/prebuilts/mainline/arm64:kernel/mainline \
 
-$(call dist-for-goals, dist_files, kernel/prebuilts/4.19/arm64/prebuilt-info.txt:kernel/4.19/prebuilt-info.txt)
-$(call dist-for-goals, dist_files, kernel/prebuilts/5.10/arm64/prebuilt-info.txt:kernel/5.10/prebuilt-info.txt)
-$(call dist-for-goals, dist_files, kernel/prebuilts/mainline/arm64/prebuilt-info.txt:kernel/mainline/prebuilt-info.txt)
+include $(SRC_TARGET_DIR)/product/generic_kernel.mk
 
-ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-PRODUCT_COPY_FILES += \
-    kernel/prebuilts/4.19/arm64/kernel-4.19-gz-allsyms:kernel-4.19-gz-allsyms \
-    kernel/prebuilts/5.10/arm64/kernel-5.10-allsyms:kernel-5.10-allsyms \
-    kernel/prebuilts/5.10/arm64/kernel-5.10-gz-allsyms:kernel-5.10-gz-allsyms \
-    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4-allsyms:kernel-5.10-lz4-allsyms \
-
-endif
 
 PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
 PRODUCT_BUILD_RECOVERY_IMAGE := false
