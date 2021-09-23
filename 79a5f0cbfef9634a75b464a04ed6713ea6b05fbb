@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c423ddd_61e34060",
+        "filename": "target/board/generic_arm64/device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T09:56:21Z",
+      "side": 1,
+      "message": "Instead of calling a macro defined in generic_kernel.mk, how about passing this list into generic_kernel.mk?\n\ndevice.mk:\n```\nGKI_KERNEL_DIST_PAIRS :\u003d \\\n  kernel/prebuilts/4.19/arm64:kernel/4.19 \\\n  kernel/prebuilts/5.10/arm64:kernel/5.10 \\\n  kernel/prebuilts/mainline/arm64:kernel/mainline \\\n  \ninclude $(SRC_TARGET_DIR)/product/generic_kernel.mk\n```\n\ngeneric_kernel.mk:\n```\n# input variable: GKI_KERNEL_DIST_PAIRS\n\n$(for p,$(GKI_KERNEL_DIST_PAIRS),$(call _output-kernel,$(call word-colon,1,$(p),$(call word-colon,2,$(p))))\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "832c7c16_f7470f99",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T09:56:21Z",
+      "side": 1,
+      "message": "this convention looks odd, I think we usually use \"_foo\" (leading underscore) for *local* temporary, and function/macro usually don\u0027t start with a underscore.\n\nSince all Makefile symbols are global, you also need to manually clear any *local* variables.\n\nso something like...\n\n```\n_output-kernel-info-files :\u003d ...\n\ndefine output-kernel-user\nendef\n\n# do somestuff\n\n# clear the \"local\" vars\n\n_output-kernel-info-files :\u003d\n\n# undefine macros if you don\u0027t want other people to use them\noutput-kernel-user :\u003d\n\n```",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68f41c4c_0b237ad5",
         "filename": "target/product/generic_kernel.mk",
         "patchSetId": 1
