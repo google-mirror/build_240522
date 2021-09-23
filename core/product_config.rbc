@@ -307,6 +307,11 @@ def _soong_config_append(g, nsname, var, value):
         ns[var] += " " + value
 
 
+def _abspath(path):
+    """Provided for compatibility, to be removed later."""
+    return path
+
+
 def _addprefix(prefix, string_or_list):
     """Adds prefix and returns a list.
 
@@ -613,6 +618,7 @@ rblf = struct(
     soong_config_namespace = _soong_config_namespace,
     soong_config_append = _soong_config_append,
     soong_config_assign = _soong_config_assign,
+    abspath = _abspath,
     addprefix = _addprefix,
     addsuffix = _addsuffix,
     copy_files = _copy_files,
