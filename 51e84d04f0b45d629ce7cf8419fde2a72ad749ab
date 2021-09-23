@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381e9dc8_e651c7b7",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2021-09-23T08:52:43Z",
+      "side": 1,
+      "message": "Any concern on changing the default name to \"boot-with-debug-ramdisk\"?",
+      "range": {
+        "startLine": 2358,
+        "startChar": 38,
+        "endLine": 2358,
+        "endChar": 48
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
