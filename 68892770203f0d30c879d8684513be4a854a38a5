@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad517a7_6ff5a218",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T14:03:53Z",
+      "side": 1,
+      "message": "this should also be added to _product_single_value_vars of build/make/core/product.mk",
+      "range": {
+        "startLine": 401,
+        "startChar": 9,
+        "endLine": 401,
+        "endChar": 46
+      },
+      "revId": "68892770203f0d30c879d8684513be4a854a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
