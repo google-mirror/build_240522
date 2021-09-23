@@ -22,6 +22,30 @@
       },
       "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063fdcf8_b2af935d",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T08:54:47Z",
+      "side": 1,
+      "message": "that would break (at least) Flashstation\u0027s force_debuggable option. It looks for file names of boot-debug.img or vendor_boot-debug.img",
+      "parentUuid": "381e9dc8_e651c7b7",
+      "range": {
+        "startLine": 2358,
+        "startChar": 38,
+        "endLine": 2358,
+        "endChar": 48
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
