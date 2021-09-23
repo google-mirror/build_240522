@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3a75fb_0deed0e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-09-23T13:21:19Z",
+      "side": 1,
+      "message": "The problem fixed in PS3: I changed hard-coded out directory to $(OUT_DIR).",
+      "parentUuid": "a4a1d8cf_af35b7eb",
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2961d4e7_6459de12",
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "Ok, thanks. It\u0027ll do that in a follow up to avoid making unrelated funcitonal changes in this CL.",
       "parentUuid": "2961d4e7_6459de12",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "8a3a22967f7c869e1ef8b83ef413975d1bb765ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d73e3d3_93f8dc9d",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-09-23T13:21:19Z",
+      "side": 1,
+      "message": "Done in PS3.",
+      "parentUuid": "e5643a98_17e18930",
       "range": {
         "startLine": 63,
         "startChar": 0,
