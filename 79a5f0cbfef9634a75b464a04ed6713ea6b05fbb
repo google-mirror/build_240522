@@ -16,6 +16,29 @@
       "message": "Hi Yi-Yo,\n\nCould you help me to review my makefile style?\n\nThank you!",
       "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f41c4c_0b237ad5",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T09:45:34Z",
+      "side": 1,
+      "message": "why do we need this? when would RHS and LHS be different?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
