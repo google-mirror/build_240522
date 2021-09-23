@@ -68,6 +68,29 @@
       },
       "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db73828f_1a8bd294",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T14:50:34Z",
+      "side": 1,
+      "message": "we usually put this at the beginning of the file\n\n```\n#\n# blah blah license\n#\n\n# \n# blah blah optional file header explaining purpose of this makefile\n#\n# input variables: ...\n# output variables: ...\n#\n\ndefine actual-makefile-logic\nendef\n```",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 39
+      },
+      "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
