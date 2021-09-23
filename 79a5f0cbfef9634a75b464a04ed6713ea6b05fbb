@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91764196_24cbb7c8",
+        "filename": "target/board/generic_arm64/device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-23T10:44:48Z",
+      "side": 1,
+      "message": "Using a list is much clear to me. Updated to this style.",
+      "parentUuid": "1c423ddd_61e34060",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "832c7c16_f7470f99",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57debd1_75271528",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-23T10:44:48Z",
+      "side": 1,
+      "message": "Thanks for the detailed comment. Learned.",
+      "parentUuid": "832c7c16_f7470f99",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68f41c4c_0b237ad5",
@@ -77,6 +125,54 @@
       "writtenOn": "2021-09-23T09:45:34Z",
       "side": 1,
       "message": "why do we need this? when would RHS and LHS be different?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6748d92_50d238ae",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-23T10:44:48Z",
+      "side": 1,
+      "message": "We need to rename for debug binaries originally. There is no this requirement now.\nIt\u0027s good time to remove it.",
+      "parentUuid": "68f41c4c_0b237ad5",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "79a5f0cbfef9634a75b464a04ed6713ea6b05fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b899f5_161cd18a",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-23T10:44:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68f41c4c_0b237ad5",
       "range": {
         "startLine": 40,
         "startChar": 4,
