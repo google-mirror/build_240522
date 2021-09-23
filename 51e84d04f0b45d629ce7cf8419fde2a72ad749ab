@@ -46,6 +46,30 @@
       },
       "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd3c415_9ef9b004",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-23T09:03:26Z",
+      "side": 1,
+      "message": "The current confusion is from GKI/GSI targets, when partners tries to search a GKI boot.img from \"gsi_arm64\".\n\nThe naming should have no confusion in other device targets.\n\nThat\u0027s why I\u0027d like to limit the change only to GSI targets, as boot-debug.img already have some users, e.g., like Yi-yo mentioned, FlashStation, EngProd\u0027s test automation.",
+      "parentUuid": "063fdcf8_b2af935d",
+      "range": {
+        "startLine": 2358,
+        "startChar": 38,
+        "endLine": 2358,
+        "endChar": 48
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
