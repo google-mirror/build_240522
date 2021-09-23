@@ -141,6 +141,30 @@
       },
       "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c57eeb2_14a41cb4",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-23T09:18:37Z",
+      "side": 1,
+      "message": "I do this to align with the following targets that have GKI boot.img:\nhttps://cs.android.com/search?q\u003dBOARD_KERNEL-\u0026sq\u003d\n\ngsi_release.mk is referenced by more targets. \n\ne.g., some of them are under vendor/* ...\nhttps://source.corp.google.com/search?q\u003dgsi_release.mk\u0026sq\u003dp:%5EAndroid$\u0026start\u003d1\n\nI\u0027m not sure if they have boot-debug-*.img or not and I don\u0027t want to rename them by accident.\n\nThought?",
+      "parentUuid": "aae319cc_1d51b960",
+      "range": {
+        "startLine": 2358,
+        "startChar": 0,
+        "endLine": 2358,
+        "endChar": 34
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
