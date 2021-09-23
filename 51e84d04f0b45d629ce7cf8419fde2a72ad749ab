@@ -70,6 +70,29 @@
       },
       "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae319cc_1d51b960",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2358,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-23T09:06:07Z",
+      "side": 1,
+      "message": "how about make this a PRODUCT_ var instead (PRODUCT_OVERRIDE_DEBUG_BOOT_IMAGE_NAME), and we can set this only one time in gsi_release.mk",
+      "range": {
+        "startLine": 2358,
+        "startChar": 0,
+        "endLine": 2358,
+        "endChar": 34
+      },
+      "revId": "51e84d04f0b45d629ce7cf8419fde2a72ad749ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
