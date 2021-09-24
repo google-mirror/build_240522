@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4239d094_56e33d3b",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-24T09:18:03Z",
+      "side": 1,
+      "message": "We should get rid of the duplicates in _output-kernel-info-files and _output-kernel-info-files-debug.\n\nMaybe something like\n\n```\ndefine _output-kernel\n$(call _output-kernel-user,$(1),$(2))\n$(eval _output-kernel-info-files :\u003d $(_output-kernel-info-files-user))\n$(if $(filter userdebug eng,$(TARGET_BUILD_VARIANT)), \\\n  $(call _output-kernel-debug,$(1),$(2)) \\\n  $(eval _output-kernel-info-files +\u003d $(_output-kernel-info-files-debug)))\n$(eval _output-kernel-info-files :\u003d $(sort $(_output-kernel-info-files)))\n$(call _output_kernel_files,$(_output-kernel-info-files),$(1),$(2))\nendef\n```",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
