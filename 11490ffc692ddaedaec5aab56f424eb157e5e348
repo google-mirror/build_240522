@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b969f031_70e5dd41",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-24T08:23:54Z",
+      "side": 1,
+      "message": "Good point. I moved the common code to the independent function `_output_kernel_files`. However, we could have different file list soon, so I left separated lists.",
+      "parentUuid": "fe47298b_198e28ca",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 65
+      },
+      "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cca96d4_cfe1438a",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5631c0d0_3dfe2119",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-24T08:23:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c4d8ba2_7b9f3a24",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4735178f_f53b502c",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-24T08:23:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0cca96d4_cfe1438a",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db73828f_1a8bd294",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-09-23T14:50:34Z",
       "side": 1,
       "message": "we usually put this at the beginning of the file\n\n```\n#\n# blah blah license\n#\n\n# \n# blah blah optional file header explaining purpose of this makefile\n#\n# input variables: ...\n# output variables: ...\n#\n\ndefine actual-makefile-logic\nendef\n```",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 39
+      },
+      "revId": "11490ffc692ddaedaec5aab56f424eb157e5e348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a8584e_58e45f02",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-24T08:23:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db73828f_1a8bd294",
       "range": {
         "startLine": 70,
         "startChar": 0,
