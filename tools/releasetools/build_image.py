@@ -635,6 +635,7 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop(p, p)
 
   ro_mount_points = set([
+      "odm",
       "odm_dlkm",
       "oem",
       "product",
