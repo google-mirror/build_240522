@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dcc4f74_7c193dff",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-24T00:28:43Z",
+      "side": 0,
+      "message": "I guess we still need cache (for non a/b)",
+      "range": {
+        "startLine": 715,
+        "startChar": 0,
+        "endLine": 715,
+        "endChar": 30
+      },
+      "revId": "40a821f600b0381cb6b3b2c8795c5a09b83edbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cd091e_3da19b50",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-24T00:28:43Z",
+      "side": 0,
+      "message": "weird, this is only enabled for vendor",
+      "range": {
+        "startLine": 744,
+        "startChar": 40,
+        "endLine": 744,
+        "endChar": 54
+      },
+      "revId": "40a821f600b0381cb6b3b2c8795c5a09b83edbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
