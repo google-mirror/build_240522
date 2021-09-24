@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8420553_7da49fa5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-24T22:19:09Z",
+      "side": 1,
+      "message": "nit: you can combine this with the prefix logic below",
+      "range": {
+        "startLine": 681,
+        "startChar": 33,
+        "endLine": 681,
+        "endChar": 39
+      },
+      "revId": "6ec388ede685172318d92bc66aa3dec4232336d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
