@@ -22,7 +22,6 @@ PARSE_TIME_MAKE_GOALS := \
 	clean-oat% \
 	continuous_instrumentation_tests \
 	continuous_native_tests \
-	cts \
 	custom_images \
 	dicttool_aosp \
 	dump-products \
