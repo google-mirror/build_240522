@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e73151ed_bd9d348b",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-24T09:44:16Z",
+      "side": 1,
+      "message": "if you didn\u0027t expand the variable here, you would be looking for a file named \"_output-kernel-info-files\", instead of \"prebuilt-info.txt \u0026 manifest.xml\"",
+      "parentUuid": "d9ea9615_cd508c6e",
+      "range": {
+        "startLine": 56,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 53
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4239d094_56e33d3b",
         "filename": "target/product/generic_kernel.mk",
         "patchSetId": 6
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "How about\n\n```\n_output-kernel-info-files-common :\u003d \\\n    prebuilt-info.txt \\\n    manifest.xml \\\n    \n_output-kernel-info-files-user \u003d \\\n    $(_output-kernel-info-files-common) \\\n    ...\n\n_output-kernel-info-files-debug \u003d \\\n    $(_output-kernel-info-files-common) \\\n    ...\n\n```",
       "parentUuid": "4239d094_56e33d3b",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f468eb36_9eed3d4c",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-24T09:44:16Z",
+      "side": 1,
+      "message": "i mean the common files are dist-ed twice, L56 and L73 are calling dist-for-goals on exact same paths",
+      "parentUuid": "c4a4148f_2b87443b",
       "range": {
         "startLine": 59,
         "startChar": 0,
