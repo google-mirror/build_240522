@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "770b8116_0b3b26ca",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-24T09:18:21Z",
+      "side": 1,
+      "message": "missing $()",
+      "range": {
+        "startLine": 56,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 53
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4239d094_56e33d3b",
         "filename": "target/product/generic_kernel.mk",
         "patchSetId": 6
