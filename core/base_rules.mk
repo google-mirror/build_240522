@@ -373,7 +373,13 @@ include $(BUILD_SYSTEM)/configure_module_stem.mk
 
 LOCAL_BUILT_MODULE := $(intermediates)/$(my_built_module_stem)
 
-ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    $(call pretty-error, LOCAL_SOONG_INSTALLED_MODULE can only be used from $(SOONG_ANDROID_MK))
+  endif
+  # Use the install path requested by Soong.
+  LOCAL_INSTALLED_MODULE := $(LOCAL_SOONG_INSTALLED_MODULE)
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   # Apk and its attachments reside in its own subdir.
   ifeq ($(LOCAL_MODULE_CLASS),APPS)
     # framework-res.apk doesn't like the additional layer.
@@ -518,50 +524,55 @@ my_default_test_module := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)/$(arch_di
 arch_dir :=
 endif
 
-ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
-ifneq ($(LOCAL_INSTALLED_MODULE),$(my_default_test_module))
-$(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
-$(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  # Soong already generated the copy rule, but make the installed location depend on the Make
+  # copy of the intermediates for now, as some rules that collect intermediates may expect
+  # them to exist.
+  $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+  ifneq ($(LOCAL_INSTALLED_MODULE),$(my_default_test_module))
+    $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
+    $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 	@echo "Install: $@"
-ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
 	$(copy-file-or-link-to-new-target)
-else
+    else
 	$(copy-file-to-new-target)
-endif
+    endif
 	$(PRIVATE_POST_INSTALL_CMD)
-endif
+  endif
 
-ifndef LOCAL_IS_HOST_MODULE
-# Rule to install the module's companion init.rc.
-ifneq ($(strip $(LOCAL_FULL_INIT_RC)),)
-my_init_rc := $(LOCAL_FULL_INIT_RC)
-else
-my_init_rc := $(foreach rc,$(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC),$(LOCAL_PATH)/$(rc))
-endif
-ifneq ($(strip $(my_init_rc)),)
-# Make doesn't support recovery as an output partition, but some Soong modules installed in recovery
-# have init.rc files that need to be installed alongside them. Manually handle the case where the
-# output file is in the recovery partition.
-my_init_rc_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
-my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
-my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
+  ifndef LOCAL_IS_HOST_MODULE
+    # Rule to install the module's companion init.rc.
+    ifneq ($(strip $(LOCAL_FULL_INIT_RC)),)
+      my_init_rc := $(LOCAL_FULL_INIT_RC)
+    else
+      my_init_rc := $(foreach rc,$(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC),$(LOCAL_PATH)/$(rc))
+    endif
+    ifneq ($(strip $(my_init_rc)),)
+      # Make doesn't support recovery as an output partition, but some Soong modules installed in recovery
+      # have init.rc files that need to be installed alongside them. Manually handle the case where the
+      # output file is in the recovery partition.
+      my_init_rc_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
+      my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
+      my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
 
-# Make sure we only set up the copy rules once, even if another arch variant
-# shares a common LOCAL_INIT_RC.
-my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
-my_init_rc_new_installed := $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
-ALL_INIT_RC_INSTALLED_PAIRS += $(my_init_rc_new_pairs)
+      # Make sure we only set up the copy rules once, even if another arch variant
+      # shares a common LOCAL_INIT_RC.
+      my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
+      my_init_rc_new_installed := $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
+      ALL_INIT_RC_INSTALLED_PAIRS += $(my_init_rc_new_pairs)
 
-$(my_all_targets) : $(my_init_rc_installed)
-endif # my_init_rc
-endif # !LOCAL_IS_HOST_MODULE
+      $(my_all_targets) : $(my_init_rc_installed)
+    endif # my_init_rc
+  endif # !LOCAL_IS_HOST_MODULE
 
-# Rule to install the module's companion symlinks
-my_installed_symlinks := $(addprefix $(my_module_path)/,$(LOCAL_MODULE_SYMLINKS) $(LOCAL_MODULE_SYMLINKS_$(my_32_64_bit_suffix)))
-$(foreach symlink,$(my_installed_symlinks),\
-    $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink)))
+  # Rule to install the module's companion symlinks
+  my_installed_symlinks := $(addprefix $(my_module_path)/,$(LOCAL_MODULE_SYMLINKS) $(LOCAL_MODULE_SYMLINKS_$(my_32_64_bit_suffix)))
+  $(foreach symlink,$(my_installed_symlinks),\
+      $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink)))
 
-$(my_all_targets) : | $(my_installed_symlinks)
+  $(my_all_targets) : | $(my_installed_symlinks)
 
 endif # !LOCAL_UNINSTALLABLE_MODULE
 
@@ -572,26 +583,28 @@ endif # !LOCAL_UNINSTALLABLE_MODULE
 my_vintf_installed:=
 my_vintf_pairs:=
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
-ifndef LOCAL_IS_HOST_MODULE
-ifneq ($(strip $(LOCAL_FULL_VINTF_FRAGMENTS)),)
-my_vintf_fragments := $(LOCAL_FULL_VINTF_FRAGMENTS)
-else
-my_vintf_fragments := $(foreach xml,$(LOCAL_VINTF_FRAGMENTS),$(LOCAL_PATH)/$(xml))
-endif
-ifneq ($(strip $(my_vintf_fragments)),)
+  ifndef LOCAL_IS_HOST_MODULE
+    ifeq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+      ifneq ($(strip $(LOCAL_FULL_VINTF_FRAGMENTS)),)
+        my_vintf_fragments := $(LOCAL_FULL_VINTF_FRAGMENTS)
+      else
+        my_vintf_fragments := $(foreach xml,$(LOCAL_VINTF_FRAGMENTS),$(LOCAL_PATH)/$(xml))
+      endif
+      ifneq ($(strip $(my_vintf_fragments)),)
 
-my_vintf_pairs := $(foreach xml,$(my_vintf_fragments),$(xml):$(TARGET_OUT$(partition_tag)_ETC)/vintf/manifest/$(notdir $(xml)))
-my_vintf_installed := $(foreach xml,$(my_vintf_pairs),$(call word-colon,2,$(xml)))
+        my_vintf_pairs := $(foreach xml,$(my_vintf_fragments),$(xml):$(TARGET_OUT$(partition_tag)_ETC)/vintf/manifest/$(notdir $(xml)))
+        my_vintf_installed := $(foreach xml,$(my_vintf_pairs),$(call word-colon,2,$(xml)))
 
-# Only set up copy rules once, even if another arch variant shares it
-my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS_LIST),$(my_vintf_pairs))
-my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
+        # Only set up copy rules once, even if another arch variant shares it
+        my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS_LIST),$(my_vintf_pairs))
+        my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
 
-ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
+        ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
 
-$(my_all_targets) : $(my_vintf_new_installed)
-endif # LOCAL_VINTF_FRAGMENTS
-endif # !LOCAL_IS_HOST_MODULE
+        $(my_all_targets) : $(my_vintf_new_installed)
+      endif # LOCAL_VINTF_FRAGMENTS
+    endif # !LOCAL_SOONG_INSTALLED_MODULE
+  endif # !LOCAL_IS_HOST_MODULE
 endif # !LOCAL_UNINSTALLABLE_MODULE
 
 ###########################################################
@@ -902,7 +915,16 @@ ifndef LOCAL_IS_HOST_MODULE
 ALL_MODULES.$(my_register_name).TARGET_BUILT := \
     $(ALL_MODULES.$(my_register_name).TARGET_BUILT) $(LOCAL_BUILT_MODULE)
 endif
-ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+ALL_MODULES.$(my_register_name).INSTALLED := \
+    $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
+      $(foreach f, $(LOCAL_SOONG_INSTALL_PAIRS),\
+        $(word 2,$(subst :,$(space),$(f)))) \
+      $(LOCAL_SOONG_INSTALL_SYMLINKS))
+ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
+    $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
+      $(LOCAL_SOONG_INSTALL_PAIRS))
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 ALL_MODULES.$(my_register_name).INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
     $(LOCAL_INSTALLED_MODULE) $(my_init_rc_installed) $(my_installed_symlinks) \
