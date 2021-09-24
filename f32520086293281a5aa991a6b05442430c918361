@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24118c17_9e5478f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-24T08:24:18Z",
+      "side": 1,
+      "message": "Looks like we need to merge the patch to internal branch first.",
+      "revId": "f32520086293281a5aa991a6b05442430c918361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
