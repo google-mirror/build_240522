@@ -16,6 +16,23 @@
       "message": "Would it be feasible to rename this everywhere instead of just for GSI?",
       "revId": "a2a5db44663a8dff93f0456034e17848155613f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4df4253c_cf191dcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-25T02:35:24Z",
+      "side": 1,
+      "message": "There are already some dependencies for `boot-debug.img` in ​device builds (not GSI build), and I\u0027m not sure if the gain worth the efforts.\n\ne.g.,\n go/flash supports flashing a boot-debug.img by clicking an option \"force_debuggable\", etc.\n\nCurrently the issue is that for GKI users, when they wanted to download a boot.img from a GSI target (GKI/GSI are built in \"gsi_arm64-user\" together for now), boot-debug.img might cause some confusions.\n\nBut it has no problem in \"device builds\".\n\nBasically this is just a transient solution in GSI targets (to fix the confusion for GKI boot.img download).\n\nWe have more discussions about GKI release in the future.\ne.g., \n\nb/197262350, b/200945738\n\nHope that clarifies.",
+      "revId": "a2a5db44663a8dff93f0456034e17848155613f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
