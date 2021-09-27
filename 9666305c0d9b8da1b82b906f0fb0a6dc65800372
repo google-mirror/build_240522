@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabe8685_4e4ee183",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-27T11:08:08Z",
+      "side": 1,
+      "message": "Ah~ you are right. Fixed.",
+      "parentUuid": "e73151ed_bd9d348b",
+      "range": {
+        "startLine": 56,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 53
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4239d094_56e33d3b",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "i mean the common files are dist-ed twice, L56 and L73 are calling dist-for-goals on exact same paths",
       "parentUuid": "c4a4148f_2b87443b",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "9666305c0d9b8da1b82b906f0fb0a6dc65800372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd8adf3_82da6695",
+        "filename": "target/product/generic_kernel.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2021-09-27T11:08:08Z",
+      "side": 1,
+      "message": "Thanks for good catching. There is no different between user and debug now. Let me just merge them.",
+      "parentUuid": "f468eb36_9eed3d4c",
       "range": {
         "startLine": 59,
         "startChar": 0,
