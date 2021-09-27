@@ -22,6 +22,30 @@
       },
       "revId": "aba5c9eacd54e9b0cf5fbeaa1157ca8ec1d00786",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca388c3a_ac5096c4",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-27T09:52:04Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.\n\nNot sure if it\u0027s possible that \u0027boot_images\u0027 becomes \u0027boot-5.4.img boot.img\u0027 in some special case in the future or not.\n\nIn this case, it\u0027s still a boot_container but using [not boot_images.endswith(\"boot.img\")] is not accurate.",
+      "parentUuid": "f139c63e_5233391d",
+      "range": {
+        "startLine": 718,
+        "startChar": 6,
+        "endLine": 718,
+        "endChar": 76
+      },
+      "revId": "aba5c9eacd54e9b0cf5fbeaa1157ca8ec1d00786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
