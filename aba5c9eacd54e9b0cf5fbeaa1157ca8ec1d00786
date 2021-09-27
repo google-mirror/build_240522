@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f139c63e_5233391d",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-27T06:23:03Z",
+      "side": 1,
+      "message": "could be safer to say (not boot_images.endswith(\"boot.img\"))",
+      "range": {
+        "startLine": 718,
+        "startChar": 6,
+        "endLine": 718,
+        "endChar": 76
+      },
+      "revId": "aba5c9eacd54e9b0cf5fbeaa1157ca8ec1d00786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
