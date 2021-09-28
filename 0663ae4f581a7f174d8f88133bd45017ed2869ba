@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01ff59d6_83a88655",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-09-28T20:35:06Z",
+      "side": 1,
+      "message": "okay.. I guess the other solution is to provide the oem_props; so fingerprints are calculated from them. Up to your real users...",
+      "parentUuid": "5572ed40_4cc6d875",
+      "range": {
+        "startLine": 1223,
+        "startChar": 0,
+        "endLine": 1224,
+        "endChar": 38
+      },
+      "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25220236_5fed52f7",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 2
