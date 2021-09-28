@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5572ed40_4cc6d875",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-28T20:26:27Z",
+      "side": 1,
+      "message": "Note to Tianjie:\n\nInteresting, I think I wasn\u0027t catching this in the version of this file I was using for testing because CalculateFingerprint had been modified to default to GetPartitionFingerprint(\u0027vendor\u0027) if regular fingerprint calculation fails: https://source.corp.google.com/keystone-qcom/build/make/tools/releasetools/common.py;l\u003d652\n\nEven if we updated the AOSP version of CalculateFingerprint to have a similar fallback to GetPartitionFingerprint, it would require partners like Po to rebuild their old R-based otatools.zip to include that fix.\n\nOtherwise, Po\u0027s solution here seems necessary.",
+      "range": {
+        "startLine": 1223,
+        "startChar": 0,
+        "endLine": 1224,
+        "endChar": 38
+      },
+      "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25220236_5fed52f7",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2021-09-28T20:26:27Z",
+      "side": 1,
+      "message": "nit: can also do just\n\nos.makedirs(vendor_images_path, exist_ok\u003dTrue)",
+      "range": {
+        "startLine": 1230,
+        "startChar": 2,
+        "endLine": 1231,
+        "endChar": 35
+      },
+      "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
