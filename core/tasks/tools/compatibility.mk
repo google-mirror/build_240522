@@ -80,14 +80,25 @@ $(eval $(call combine-notice-files, html, \
 compatibility_zip_deps += $(test_suite_notice_txt)
 compatibility_zip_resources += $(test_suite_notice_txt)
 
+# Copy tools
+$(foreach tool,$(test_tools) $(test_suite_prebuilt_tools),\
+  $(eval copied_tool := $(out_dir)/tools/$(notdir $(tool))) \
+  $(eval $(call copy-one-file,$(tool),$(copied_tool))) \
+  $(eval compatibility_zip_deps += $(copied_tool)))
+
+# Copy dynamic config
+ifdef test_suite_dynamic_config
+  copied_test_suite_dynamic_config := $(out_dir)/testcases/$(PRIVATE_SUITE_NAME).dynamic
+  $(eval $(call copy-one-file,$(test_suite_dynamic_config),$(copied_test_suite_dynamic_config)))
+  compatibility_zip_deps += $(copied_test_suite_dynamic_config)
+endif
+
 compatibility_tests_list_zip := $(out_dir)-tests_list.zip
 
 compatibility_zip := $(out_dir).zip
 $(compatibility_zip) : .KATI_IMPLICIT_OUTPUTS := $(compatibility_tests_list_zip)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
-$(compatibility_zip): PRIVATE_TOOLS := $(test_tools) $(test_suite_prebuilt_tools)
 $(compatibility_zip): PRIVATE_SUITE_NAME := $(test_suite_name)
-$(compatibility_zip): PRIVATE_DYNAMIC_CONFIG := $(test_suite_dynamic_config)
 $(compatibility_zip): PRIVATE_RESOURCES := $(compatibility_zip_resources)
 $(compatibility_zip): PRIVATE_JDK := $(test_suite_jdk)
 $(compatibility_zip): PRIVATE_tests_list := $(out_dir)-tests_list
@@ -97,9 +108,6 @@ $(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
 	mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
 	rm -f $@ $@.tmp $@.jdk
 	echo $(BUILD_NUMBER_FROM_FILE) > $(PRIVATE_OUT_DIR)/tools/version.txt
-# Copy tools
-	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
-	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
 	find $(PRIVATE_RESOURCES) | sort >$@.list
 	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list
 	$(MERGE_ZIPS) $@ $@.tmp $(PRIVATE_JDK)
@@ -109,6 +117,9 @@ $(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
 	$(hide) grep -e .*\\.config$$ $@.list | sed s%$(PRIVATE_OUT_DIR)/testcases/%%g > $(PRIVATE_tests_list)
 	$(SOONG_ZIP) -d -o $(PRIVATE_tests_list_zip) -j -f $(PRIVATE_tests_list)
 	rm -f $(PRIVATE_tests_list)
+
+.PHONY: $(test_suite_name)-deps
+$(test_suite_name)-deps: $(compatibility_zip_deps)
 
 # Reset all input variables
 test_suite_name :=
