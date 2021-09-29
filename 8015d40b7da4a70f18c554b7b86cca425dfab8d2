@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3625fc_303d12df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-09-29T03:20:55Z",
+      "side": 1,
+      "message": "Using IS_AT_LEAST_* is the recommendation here, as relying on the SDK version already breaks Google trees. If we\u0027re getting them to change at all it would be good to get it entirely fixed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0863b9f_86597be2",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-09-29T03:20:55Z",
+      "side": 1,
+      "message": "We have math functions in math.mk that already work up to 100 (and have tests)",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 77
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
