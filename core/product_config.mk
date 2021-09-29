@@ -285,6 +285,17 @@ PRODUCT_AAPT_CONFIG := $(PRODUCT_LOCALES) $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG_SP := $(PRODUCT_AAPT_CONFIG)
 PRODUCT_AAPT_CONFIG := $(subst $(space),$(comma),$(PRODUCT_AAPT_CONFIG))
 
+# Process PRODUCT_INSTALL_APEXES_OVERRIDES. Note that this does not handle
+# APEXes whose flattened variants are referenced directly, i.e. with the
+# ".flattened" suffix.
+$(foreach pair,$(PRODUCT_INSTALL_APEXES_OVERRIDES),\
+  $(eval _piao_from := $(call word-colon,1,$(pair)))\
+  $(eval _piao_to := $(call word-colon,2,$(pair)))\
+  $(if $(filter $(_piao_from),$(PRODUCT_INSTALL_APEXES)),\
+    $(eval PRODUCT_INSTALL_APEXES := $(filter-out $(_piao_from),$(PRODUCT_INSTALL_APEXES)))\
+    $(if $(filter $(_piao_to),$(PRODUCT_INSTALL_APEXES)),,\
+      $(eval PRODUCT_INSTALL_APEXES += $(_piao_to)))))
+
 ###########################################################
 ## Add 'platform:' prefix to jars not in <apex>:<module> format.
 ##

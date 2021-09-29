@@ -1271,6 +1271,7 @@ endif
 define product-installed-files
   $(eval _pif_modules := \
     $(call _product-var,$(1),PRODUCT_PACKAGES) \
+    $(call _product-var,$(1),PRODUCT_INSTALL_APEXES) \
     $(if $(filter eng,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_ENG)) \
     $(if $(filter debug,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_DEBUG)) \
     $(if $(filter tests,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_TESTS)) \
@@ -1322,7 +1323,7 @@ ifdef FULL_BUILD
     # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
     ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
       _allow_list := $(PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST)
-      _modules := $(PRODUCT_PACKAGES)
+      _modules := $(PRODUCT_PACKAGES) $(PRODUCT_INSTALL_APEXES)
       # Strip :32 and :64 suffixes
       _modules := $(patsubst %:32,%,$(_modules))
       _modules := $(patsubst %:64,%,$(_modules))
@@ -1331,7 +1332,7 @@ ifdef FULL_BUILD
       _nonexistent_modules := $(foreach m,$(_modules), \
         $(if $(or $(ALL_MODULES.$(m).PATH),$(call get-modules-for-2nd-arch,TARGET,$(m))),,$(m)))
       $(call maybe-print-list-and-error,$(filter-out $(_allow_list),$(_nonexistent_modules)),\
-        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES or PRODUCT_INSTALL_APEXES)
       # TODO(b/182105280): Consider re-enabling this check when the ART modules
       # have been cleaned up from the allowed_list in target/product/generic.mk.
       #$(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_allow_list)),\
@@ -1358,6 +1359,7 @@ ifdef FULL_BUILD
   ifeq (,$(TARGET_BUILD_UNBUNDLED))
     _modules := $(call resolve-bitness-for-modules,TARGET, \
       $(PRODUCT_PACKAGES) \
+      $(PRODUCT_INSTALL_APEXES) \
       $(PRODUCT_PACKAGES_DEBUG) \
       $(PRODUCT_PACKAGES_DEBUG_ASAN) \
       $(PRODUCT_PACKAGES_ENG) \
@@ -1367,7 +1369,7 @@ ifdef FULL_BUILD
                     $(if $(filter-out $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,\
                       $(m))))
     $(call maybe-print-list-and-error,$(sort $(_host_modules)),\
-      Host modules should be in PRODUCT_HOST_PACKAGES$(comma) not PRODUCT_PACKAGES)
+      Host modules should be in PRODUCT_HOST_PACKAGES$(comma) not PRODUCT_PACKAGES or PRODUCT_INSTALL_APEXES)
   endif
 
   product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
@@ -1451,7 +1453,7 @@ ifdef is_sdk_build
   # Ensure every module listed in PRODUCT_PACKAGES* gets something installed
   # TODO: Should we do this for all builds and not just the sdk?
   dangling_modules :=
-  $(foreach m, $(PRODUCT_PACKAGES), \
+  $(foreach m, $(PRODUCT_PACKAGES) $(PRODUCT_INSTALL_APEXES), \
     $(if $(strip $(ALL_MODULES.$(m).INSTALLED) $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).INSTALLED)),,\
       $(eval dangling_modules += $(m))))
   ifneq ($(dangling_modules),)
