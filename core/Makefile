@@ -2355,9 +2355,8 @@ endif # BUILDING_RAMDISK_IMAGE
 #
 # Note: it's intentional to skip signing for boot-debug.img, because it
 # can only be used if the device is unlocked with verification error.
-ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
-ifneq ($(INSTALLED_BOOTIMAGE_TARGET),)
-ifneq ($(strip $(TARGET_NO_KERNEL)),true)
+ifdef BUILDING_DEBUG_BOOT_IMAGE
+
 ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
   INSTALLED_DEBUG_BOOTIMAGE_TARGET := $(foreach k,$(subst kernel,boot-debug,$(BOARD_KERNEL_BINARIES)), \
          $(PRODUCT_OUT)/$(k).img)
@@ -2412,16 +2411,13 @@ bootimage_debug-nodeps: $(MKBOOTIMG) $(BOARD_GKI_SIGNING_KEY_PATH) $(AVBTOOL)
 	echo "make $@: ignoring dependencies"
 	$(foreach b,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(call build-debug-bootimage-target,$b))
 
-endif # TARGET_NO_KERNEL
-endif # INSTALLED_BOOTIMAGE_TARGET
-endif # BUILDING_VENDOR_BOOT_IMAGE is not true
+endif # BUILDING_DEBUG_BOOT_IMAGE
 
-ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
-ifeq ($(BUILDING_RAMDISK_IMAGE),true)
 # -----------------------------------------------------------------
 # vendor debug ramdisk
 # Combines vendor ramdisk files and debug ramdisk files to build the vendor debug ramdisk.
-#
+ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+
 INTERNAL_VENDOR_DEBUG_RAMDISK_FILES := $(filter $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)/%, \
     $(ALL_GENERATED_SOURCES) \
     $(ALL_DEFAULT_INSTALLED_MODULES))
@@ -2493,8 +2489,7 @@ $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_T
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
 
-endif # BUILDING_RAMDISK_IMAGE
-endif # BUILDING_VENDOR_BOOT_IMAGE
+endif # BUILDING_DEBUG_VENDOR_BOOT_IMAGE
 
 # -----------------------------------------------------------------
 # The test harness ramdisk, which is based off debug_ramdisk, plus a
@@ -2560,9 +2555,7 @@ endif # BUILDING_RAMDISK_IMAGE
 #
 # Note: it's intentional to skip signing for boot-test-harness.img, because it
 # can only be used if the device is unlocked with verification error.
-ifneq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
-ifneq ($(INSTALLED_BOOTIMAGE_TARGET),)
-ifneq ($(strip $(TARGET_NO_KERNEL)),true)
+ifdef BUILDING_DEBUG_BOOT_IMAGE
 
 ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
   INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET := $(foreach k,$(subst kernel,boot-test-harness,$(BOARD_KERNEL_BINARIES)), \
@@ -2601,16 +2594,12 @@ bootimage_test_harness-nodeps: $(MKBOOTIMG) $(BOARD_GKI_SIGNING_KEY_PATH) $(AVBT
 	echo "make $@: ignoring dependencies"
 	$(foreach b,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),$(call build-boot-test-harness-target,$b))
 
-endif # TARGET_NO_KERNEL
-endif # INSTALLED_BOOTIMAGE_TARGET
-endif # BUILDING_VENDOR_BOOT_IMAGE is not true
-endif # BOARD_BUILD_SYSTEM_ROOT_IMAGE is not true
+endif # BUILDING_DEBUG_BOOT_IMAGE
 
-ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
-ifeq ($(BUILDING_RAMDISK_IMAGE),true)
 # -----------------------------------------------------------------
 # vendor test harness ramdisk, which is a vendor ramdisk combined with
 # a test harness ramdisk.
+ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE
 
 INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_boot-test-harness)/vendor_ramdisk-test-harness.cpio$(RAMDISK_EXT)
 
@@ -2645,8 +2634,9 @@ $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRA
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
 
-endif # BUILDING_RAMDISK_IMAGE
-endif # BUILDING_VENDOR_BOOT_IMAGE
+endif # BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+
+endif # BOARD_BUILD_SYSTEM_ROOT_IMAGE is not true
 
 # Creates a compatibility symlink between two partitions, e.g. /system/vendor to /vendor
 # $1: from location (e.g $(TARGET_OUT)/vendor)

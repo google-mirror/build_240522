@@ -439,6 +439,49 @@ else ifeq ($(PRODUCT_BUILD_RAMDISK_IMAGE),false)
 endif
 .KATI_READONLY := BUILDING_RAMDISK_IMAGE
 
+# Are we building a debug vendor_boot image
+BUILDING_DEBUG_VENDOR_BOOT_IMAGE :=
+ifeq ($(PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE),)
+  # Build vendor_boot-debug.img if we are also building vendor_boot.img.
+  ifdef BUILDING_VENDOR_BOOT_IMAGE
+    BUILDING_DEBUG_VENDOR_BOOT_IMAGE := true
+  endif
+  # Can't build the debug vendor_boot image if we're not building a ramdisk.
+  ifndef BUILDING_RAMDISK_IMAGE
+    BUILDING_DEBUG_VENDOR_BOOT_IMAGE :=
+  endif
+else ifeq ($(PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE),true)
+  BUILDING_DEBUG_VENDOR_BOOT_IMAGE := true
+endif
+.KATI_READONLY := BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+
+# Are we building a debug boot image
+BUILDING_DEBUG_BOOT_IMAGE :=
+ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),)
+  # Build boot-debug.img if we are building boot.img or recovery-as-boot.img.
+  ifneq ($(strip $(TARGET_NO_KERNEL)),true)
+    ifdef BUILDING_BOOT_IMAGE
+      BUILDING_DEBUG_BOOT_IMAGE := true
+    endif
+    ifdef BUILDING_RECOVERY_IMAGE
+      ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+        BUILDING_DEBUG_BOOT_IMAGE := true
+      endif
+    endif
+  endif
+  # Can't build the debug boot image if we're not building a ramdisk.
+  ifndef BUILDING_RAMDISK_IMAGE
+    BUILDING_DEBUG_BOOT_IMAGE :=
+  endif
+  # Don't build boot-debug.img if we're already building vendor_boot-debug.img.
+  ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+    BUILDING_DEBUG_BOOT_IMAGE :=
+  endif
+else ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)
+  BUILDING_DEBUG_BOOT_IMAGE := true
+endif
+.KATI_READONLY := BUILDING_DEBUG_BOOT_IMAGE
+
 # Are we building a userdata image
 BUILDING_USERDATA_IMAGE :=
 ifeq ($(PRODUCT_BUILD_USERDATA_IMAGE),)
