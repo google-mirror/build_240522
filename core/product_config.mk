@@ -110,6 +110,16 @@ define is-board-platform-in-list2
 $(filter $(1),$(TARGET_BOARD_PLATFORM))
 endef
 
+# Return empty unless the board is QCOM
+define is-vendor-board-qcom
+$(filter $(TARGET_BOARD_PLATFORM),$(QCOM_BOARD_PLATFORMS))
+endef
+
+# Returns non-empty value if SDK version is at least the given value
+define is-platform-sdk-recent
+$(call math_gt_or_eq,$(PLATFORM_SDK_VERSION),$(1))
+endef
+
 # ---------------------------------------------------------------
 # Check for obsolete PRODUCT- and APP- goals
 ifeq ($(CALLED_FROM_SETUP),true)
