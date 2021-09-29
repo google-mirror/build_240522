@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa56007b_5e3dbf4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-09-29T05:47:26Z",
+      "side": 1,
+      "message": "How do you propose to change those usages to this new macro? How would that be different from changing them to use the existing variables? (keep in mind that your new macro also wouldn\u0027t be defined when this macro is most useful, while the IS_AT_LEAST_* macros have been supported for several years)\n\nIn reality you\u0027ve got X places in Y copies of the QC BSP in our tree (exact numbers are both non-important, and shouldn\u0027t be on AOSP). If you only cared about Google\u0027s master branch, the right answer would be to always return true -- it\u0027s always going to be as new or newer than what anyone is expecting. To a lesser degree this would also work on the major development branches, as we don\u0027t often get new drops after the new version has much activity.\n\nThese macros are most useful to others outside Google and the products inside Google working on side branches of older Android versions. It\u0027s largely to solve the case where the BSP supports a newer Android version than what you\u0027re currently using. These also tend not to be cleaned up when the BSP minimum version changes -- I suspect that\u0027s the majority of the cases today (28/29 I\u0027d believe, but over half appear to be \u003c\u003d20).",
+      "parentUuid": "f1ec668d_b41611e8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0863b9f_86597be2",
         "filename": "core/product_config.mk",
         "patchSetId": 4
