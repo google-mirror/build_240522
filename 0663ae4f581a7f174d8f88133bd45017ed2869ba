@@ -69,6 +69,30 @@
       },
       "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098cd38a_75ad9a73",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2021-09-29T02:02:30Z",
+      "side": 1,
+      "message": "exist_ok is available since Python 3.2\nI prefer to check exists in case someone are still using Python 2.7",
+      "parentUuid": "25220236_5fed52f7",
+      "range": {
+        "startLine": 1230,
+        "startChar": 2,
+        "endLine": 1231,
+        "endChar": 35
+      },
+      "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
