@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d535f20_0d75deef",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-29T11:04:45Z",
+      "side": 1,
+      "message": "This PRODUCT_* variable need to be added into ./core/product.mk as well (learned from Yi-yo).\n\nhttps://android-review.googlesource.com/c/platform/build/+/1833559/5/core/product.mk",
+      "range": {
+        "startLine": 1599,
+        "startChar": 14,
+        "endLine": 1599,
+        "endChar": 47
+      },
+      "revId": "ec2eb76f58312c53c091b1062f01ebd7cd18dc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
