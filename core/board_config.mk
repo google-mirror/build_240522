@@ -439,6 +439,74 @@ else ifeq ($(PRODUCT_BUILD_RAMDISK_IMAGE),false)
 endif
 .KATI_READONLY := BUILDING_RAMDISK_IMAGE
 
+# Are we building a debug vendor_boot image
+BUILDING_DEBUG_VENDOR_BOOT_IMAGE :=
+ifeq ($(PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE),)
+  # BOARD_BUILD_SYSTEM_ROOT_IMAGE devices don't use ramdisk.
+  ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    # Build vendor_boot-debug.img if we are also building vendor_boot.img.
+    ifdef BUILDING_VENDOR_BOOT_IMAGE
+      BUILDING_DEBUG_VENDOR_BOOT_IMAGE := true
+    endif
+    # Can't build the debug vendor_boot image if we're not building a ramdisk.
+    ifndef BUILDING_RAMDISK_IMAGE
+      BUILDING_DEBUG_VENDOR_BOOT_IMAGE :=
+    endif
+  endif
+else ifeq ($(PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE),true)
+  ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(warning PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE is true, but so is BOARD_BUILD_SYSTEM_ROOT_IMAGE. \
+      Skip building the debug vendor_boot image.)
+  else ifndef BUILDING_RAMDISK_IMAGE
+    $(warning PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE is true, but we're not building the ramdisk image. \
+      Skip building the debug vendor_boot image.)
+  else
+    BUILDING_DEBUG_VENDOR_BOOT_IMAGE := true
+  endif
+endif
+.KATI_READONLY := BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+
+# Are we building a debug boot image
+BUILDING_DEBUG_BOOT_IMAGE :=
+ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),)
+  # BOARD_BUILD_SYSTEM_ROOT_IMAGE devices don't use ramdisk.
+  ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    ifneq ($(strip $(TARGET_NO_KERNEL)),true)
+      # Build boot-debug.img is we are also building boot.img.
+      ifdef BUILDING_BOOT_IMAGE
+        BUILDING_DEBUG_BOOT_IMAGE := true
+      endif
+      # BUILDING_RECOVERY_IMAGE && BOARD_USES_RECOVERY_AS_BOOT implies that
+      # recovery is being built with the file name boot.img, which still counts
+      # as "building boot.img", so build boot-debug.img as well.
+      ifdef BUILDING_RECOVERY_IMAGE
+        ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+          BUILDING_DEBUG_BOOT_IMAGE := true
+        endif
+      endif
+    endif
+    # Can't build the debug boot image if we're not building a ramdisk.
+    ifndef BUILDING_RAMDISK_IMAGE
+      BUILDING_DEBUG_BOOT_IMAGE :=
+    endif
+    # Don't build boot-debug.img if we're already building vendor_boot-debug.img.
+    ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+      BUILDING_DEBUG_BOOT_IMAGE :=
+    endif
+  endif
+else ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)
+  ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(warning PRODUCT_BUILD_DEBUG_BOOT_IMAGE is true, but so is BOARD_BUILD_SYSTEM_ROOT_IMAGE. \
+      Skip building the debug boot image.)
+  else ifndef BUILDING_RAMDISK_IMAGE
+    $(warning PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE is true, but we're not building the ramdisk image. \
+      Skip building the debug boot image.)
+  else
+    BUILDING_DEBUG_BOOT_IMAGE := true
+  endif
+endif
+.KATI_READONLY := BUILDING_DEBUG_BOOT_IMAGE
+
 # Are we building a userdata image
 BUILDING_USERDATA_IMAGE :=
 ifeq ($(PRODUCT_BUILD_USERDATA_IMAGE),)
