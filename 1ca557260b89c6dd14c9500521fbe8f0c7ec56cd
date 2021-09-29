@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd93ec2_890f3969",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-29T15:50:17Z",
+      "side": 1,
+      "message": "Whether to build boot-debug.img isn\u0027t related to BOARD_USES_RECOVERY_AS_BOOT.\n\ne.g., we still boot-debug.img if BOARD_USES_RECOVERY_AS_BOOT is false, which means devices with a dedicated /recovery partition might still need a boot-debug.img.\n\nhttp://cs/android/build/make/core/Makefile;l\u003d2371;rcl\u003db8bdd8627bcf952205ff8538a6a0fccf02869100\n\nIt\u0027s more related to BOARD_BUILD_SYSTEM_ROOT_IMAGE, which means there is no ramdisk used in normal boot. The kernel will mount the system.img as root directly (and let init mount /vendor, /product, etc).\n\nhttps://source.android.com/compatibility/vts/vts-on-gsi#prerequisites_for_using_a_debug_ramdisk\n\nhttps://source.android.com/devices/tech/ota/ab/ab_implement#kernel (legacy info for Android P).\n\nhttps://source.android.com/devices/tech/ota/dynamic_partitions/implement#system-as-root-changes\n\nps: Thanks for cleaning it up!",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
