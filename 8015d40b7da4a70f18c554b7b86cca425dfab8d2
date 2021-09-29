@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99f03bd1_4c8cff7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-09-29T21:41:40Z",
+      "side": 1,
+      "message": "Have you provided that script to QC? It doesn\u0027t do much to change our tree, they\u0027ll just keep coming back.\n\nFor the mapping, IS_AT_LEAST became available during Oreo (SDK 26), and https://en.wikipedia.org/wiki/Android_version_history is my normal reference to map the different versions together (though mapping to the exact names requires a little more work, since we changed the format once):\n\n 16-20: These are old enough (J-K, released 2012-2014) that they should just always be true.\n 23-24: Also old enough to be true (M-N, released 2015-2016)\n 26: IS_AT_LEAST_OPR1\n 27: IS_AT_LEAST_OPM1\n 28: IS_AT_LEAST_PPR1\n 29: IS_AT_LEAST_QP1A\n 30: IS_AT_LEAST_RP1A\n 31: IS_AT_LEAST_SP1A",
+      "parentUuid": "c5689dad_b64f28fa",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0863b9f_86597be2",
         "filename": "core/product_config.mk",
         "patchSetId": 4
