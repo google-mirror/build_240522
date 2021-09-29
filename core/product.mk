@@ -277,6 +277,7 @@ _product_single_value_vars += \
     PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE \
     PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION \
     PRODUCT_USES_DEFAULT_ART_CONFIG \
+    PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST
 
 # The file name for the boot image with a debug ramdisk.
 _product_single_value_vars += PRODUCT_DEBUG_RAMDISK_BOOT_IMAGE_NAME
