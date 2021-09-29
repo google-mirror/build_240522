@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5689dad_b64f28fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-09-29T21:21:06Z",
+      "side": 1,
+      "message": "The change to is-platfrom-sdk-recent is fully scripted, so although it touches 221 file in a source tree, it\u0027s not too tedious. If you can tell me how SDK versions map to IS_AT_LEAST_ variables, I\u0027ll to the scripted change. The referenced versions are 16-20,23-24,26-29.",
+      "parentUuid": "aa56007b_5e3dbf4a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0863b9f_86597be2",
         "filename": "core/product_config.mk",
         "patchSetId": 4
