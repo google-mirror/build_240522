@@ -110,6 +110,18 @@ define is-board-platform-in-list2
 $(filter $(1),$(TARGET_BOARD_PLATFORM))
 endef
 
+# Return empty unless the board is QCOM
+define is-vendor-board-qcom
+$(filter $(TARGET_BOARD_PLATFORM),$(QCOM_BOARD_PLATFORMS))
+endef
+
+# Returns non-empty value if SDK version is at least the given value
+# NOTE: If Android builds are still using Make by the time it is necessary
+# to check that SDK version is at least 50, update wordlist's third argument.
+define is-platform-sdk-recent
+$(wordlist $(1),$(PLATFORM_SDK_VERSION),| | | | + | | | | 10 | | | | + | | | | 20 | | | | + | | | | 30 | | | | + | | | | 40 | | | | + | | | | 50)
+endef
+
 # ---------------------------------------------------------------
 # Check for obsolete PRODUCT- and APP- goals
 ifeq ($(CALLED_FROM_SETUP),true)
