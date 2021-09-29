@@ -22,6 +22,29 @@
       },
       "revId": "ec2eb76f58312c53c091b1062f01ebd7cd18dc36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566906d5_dec5df82",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-29T12:41:58Z",
+      "side": 1,
+      "message": "also refrain from inserting any extra spaces in conditions, as this may cause weird results",
+      "range": {
+        "startLine": 1599,
+        "startChar": 11,
+        "endLine": 1599,
+        "endChar": 12
+      },
+      "revId": "ec2eb76f58312c53c091b1062f01ebd7cd18dc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
