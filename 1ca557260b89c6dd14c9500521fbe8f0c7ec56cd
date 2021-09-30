@@ -46,6 +46,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f69fea_1bdb1b1a",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T06:26:47Z",
+      "side": 1,
+      "message": "Is there any specific line you want to mention for the above link?\n\nBOARD_USES_RECOVERY_AS_ROOT controls whether normal boot ramdisk and recovery ramdisk should co-exist in the /boot partition.\n\nBut it seems not relevant to whether a boot-debug.img should be generated?\n\ne.g.,\n1. no-ramdisk (\u0027skip_initramfs\u0027 in the kernel cmdline during normal boot) devices does not need boot-debug.img, even if BOARD_USES_RECOVERY_AS_ROOT is true.\n\n2. Ramdisk devices still need a boot-debug.img, even if BOARD_USES_RECOVERY_AS_ROOT is false (means they put the recovery kernel + ramdisk in the /recovery partition).",
+      "parentUuid": "12d16786_8a79ad46",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
