@@ -22,6 +22,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d16786_8a79ad46",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T06:15:06Z",
+      "side": 1,
+      "message": "thanks for pointing that out (BOARD_BUILD_SYSTEM_ROOT_IMAGE), I\u0027ll change that.\n\nOTOH, BOARD_USES_RECOVERY_AS_ROOT is needed due to (https://cs.android.com/android/_/android/platform/build/+/64bc620d8c8fb3c1c3908997d1ecc5f3f15504d4:core/Makefile)",
+      "parentUuid": "9bd93ec2_890f3969",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
