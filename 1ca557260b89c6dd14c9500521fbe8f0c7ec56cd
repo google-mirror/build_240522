@@ -166,6 +166,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd0536b_c57d7bc8",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T07:47:41Z",
+      "side": 1,
+      "message": "yeah so the logic handles both cases, building plain boot.img or building recovery.img-as-boot.img, ?\n\nI think I failed to understand your point, maybe we should just talk f2f?\n(plus I\u0027d like to keep this change a strict refactor (no-op), and changes that change the existing logic can go in a follow-up)",
+      "parentUuid": "f063f363_bca61db7",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
