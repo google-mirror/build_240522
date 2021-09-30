@@ -94,6 +94,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bc0a990_f2214baf",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T06:50:44Z",
+      "side": 1,
+      "message": "\u003e  BUILDING_RECOVERY_IMAGE \u0026\u0026 BOARD_USES_RECOVERY_AS_BOOT \u003d\u003e boot.img and boot-debug.img is built\n?\n\nIt seems to me that the following is enough:\n\n   if BOARD_BUILD_SYSTEM_ROOT_IMAGE is not true \u003d\u003e build boot-debug.img\n\nFor Android Pie launched devices, they have:\n 1. BOARD_BUILD_SYSTEM_ROOT_IMAGE is false --\u003e means \"no ramdisk\" is used in normal boot.\n 2. BOARD_USES_RECOVERY_AS_BOOT is true\n    2.1 Recovery mode uses boot.img \u003d\u003d kernel + recovery ramdisk\n    2.2 Normal boot: only the kernel from /boot is loaded (no ramdisk is used), and the kernel mounts system.img as root directly.  With CLs: https://android-review.googlesource.com/q/status:merged+project:kernel/common+branch:android-3.18+topic:A_B_Changes_3.18\n    \nBOARD_USES_RECOVERY_AS_BOOT only means if boot.img should be used in the recovery mode.\n\nBut BOARD_USES_RECOVERY_AS_BOOT doesn\u0027t not control whether a ramdisk is used in normal boot or not.\n\nIf no ramdisk will be used in normal boot, then there is no need to build boot-debug.img (because the debug ramdisk will not be loaded as well).\n\nhttps://source.android.com/devices/tech/ota/dynamic_partitions/implement#system-as-root-changes\n\nIn Android 10, the BOARD_BUILD_SYSTEM_ROOT_IMAGE flag is only used to differentiate whether the system is mounted by the kernel or by the first-stage init in ramdisk.    \n\n\nDoes that sound reasonable?",
+      "parentUuid": "a7f5a107_c87a023a",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
