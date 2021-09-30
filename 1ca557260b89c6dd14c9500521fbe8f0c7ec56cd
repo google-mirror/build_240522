@@ -70,6 +70,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f5a107_c87a023a",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T06:30:31Z",
+      "side": 1,
+      "message": "oh right I missed copying the line number, here (https://cs.android.com/android/_/android/platform/build/+/64bc620d8c8fb3c1c3908997d1ecc5f3f15504d4:core/Makefile;l\u003d1847;drc\u003db7aced88d6ee1cbf9b9bd19756bb0616e88aa3c7)\n\nI think this means\n  BUILDING_RECOVERY_IMAGE \u0026\u0026 BOARD_USES_RECOVERY_AS_BOOT \u003d\u003e boot.img and boot-debug.img is built\n?",
+      "parentUuid": "31f69fea_1bdb1b1a",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
