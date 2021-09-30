@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c2c997_7bdec018",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T10:52:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8bae7bf4_d45433ce",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 28
+      },
+      "revId": "18d7dcdd9d379a3167403a4b2a63b17b7b776c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e05bf525_32cde73e",

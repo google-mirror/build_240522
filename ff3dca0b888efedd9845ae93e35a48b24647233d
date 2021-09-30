@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b73d212_ce5e7f18",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T10:52:56Z",
+      "side": 1,
+      "message": "Should we add ifdef BUILDING_DEBUG_BOOT_IMAGE here?\n\nOr is it intentional to build ramdisk-debug.img unconditionally.",
+      "revId": "ff3dca0b888efedd9845ae93e35a48b24647233d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc318ea_a0fd3353",
+        "filename": "core/board_config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T10:52:56Z",
+      "side": 1,
+      "message": "Thanks, it\u0027s much clear.",
+      "range": {
+        "startLine": 477,
+        "startChar": 2,
+        "endLine": 479,
+        "endChar": 27
+      },
+      "revId": "ff3dca0b888efedd9845ae93e35a48b24647233d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
