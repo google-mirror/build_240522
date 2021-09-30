@@ -45,6 +45,30 @@
       },
       "revId": "18d7dcdd9d379a3167403a4b2a63b17b7b776c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "184e7eaa_1ee4ef11",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T10:06:01Z",
+      "side": 1,
+      "message": "(patch updated, please see latest comment of `_has_boot_img_artifact`)",
+      "parentUuid": "e05bf525_32cde73e",
+      "range": {
+        "startLine": 471,
+        "startChar": 6,
+        "endLine": 475,
+        "endChar": 11
+      },
+      "revId": "18d7dcdd9d379a3167403a4b2a63b17b7b776c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
