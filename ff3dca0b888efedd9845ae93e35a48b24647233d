@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7a0d0efb_8b05ec23",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T12:08:34Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "0b73d212_ce5e7f18",
+      "revId": "ff3dca0b888efedd9845ae93e35a48b24647233d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3bc318ea_a0fd3353",
         "filename": "core/board_config.mk",
         "patchSetId": 6
