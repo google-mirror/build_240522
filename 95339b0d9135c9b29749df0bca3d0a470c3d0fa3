@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb29f78_f0006187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T07:58:08Z",
+      "side": 1,
+      "message": "thanks for catching this, no wonder `make dist bootimage` isn\u0027t working 😂",
+      "revId": "95339b0d9135c9b29749df0bca3d0a470c3d0fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
