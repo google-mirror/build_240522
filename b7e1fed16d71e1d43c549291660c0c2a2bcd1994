@@ -33,6 +33,24 @@
       "message": "nit: maybe follow the original convention to add a \\ at the end.\n\n    PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST \\\n    \nSo the author of the future change just needs to take care of the new added line.\n(git blame is also clear).",
       "revId": "b7e1fed16d71e1d43c549291660c0c2a2bcd1994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a6e2a3_8b3854d0",
+        "filename": "core/product.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-09-30T07:10:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "42356d65_84d874b3",
+      "revId": "b7e1fed16d71e1d43c549291660c0c2a2bcd1994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
