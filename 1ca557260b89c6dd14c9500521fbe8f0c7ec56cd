@@ -214,6 +214,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed1ec730_a04fbd64",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T10:00:24Z",
+      "side": 1,
+      "message": "Just to be clear, I wasn\u0027t aware that INSTALLED_BOOTIMAGE_TARGET will be set if BUILDING_BOOT_IMAGE or BOARD_USES_RECOVERY_AS_BOOT is true.\n\nAnd I wasn\u0027t aware that when BOARD_USES_RECOVERY_AS_BOOT is true, BUILDING_BOOT_IMAGE needs to be false.",
+      "parentUuid": "b7909367_0c26259e",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
