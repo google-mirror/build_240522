@@ -142,6 +142,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f063f363_bca61db7",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T07:09:48Z",
+      "side": 1,
+      "message": "Right, but Android 10 devices without BOARD_USES_RECOVERY_AS_BOOT also uses the boot ramdisk for normal boot.\n\nI just felt odd for:\n\n  if BUILDING_RECOVERY_IMAGE \u0026\u0026 BOARD_USES_RECOVERY_AS_BOOT \u003d\u003e build boot-debug.img",
+      "parentUuid": "2203fc4f_ae57a12b",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

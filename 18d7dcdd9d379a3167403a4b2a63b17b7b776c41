@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05bf525_32cde73e",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T07:09:48Z",
+      "side": 1,
+      "message": "maybe we can just remove this section?",
+      "range": {
+        "startLine": 471,
+        "startChar": 6,
+        "endLine": 475,
+        "endChar": 11
+      },
+      "revId": "18d7dcdd9d379a3167403a4b2a63b17b7b776c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
