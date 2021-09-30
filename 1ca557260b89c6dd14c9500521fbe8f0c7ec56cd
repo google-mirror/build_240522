@@ -190,6 +190,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7909367_0c26259e",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T09:07:31Z",
+      "side": 1,
+      "message": "\u003e  and changes that change the existing logic can go in a follow-up)\n\nOK, agree with that.",
+      "parentUuid": "cfd0536b_c57d7bc8",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
