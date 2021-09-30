@@ -118,6 +118,30 @@
       },
       "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2203fc4f_ae57a12b",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T06:57:21Z",
+      "side": 1,
+      "message": "but from the same page you referenced (https://source.android.com/devices/tech/ota/dynamic_partitions/implement#system-as-root-changes):\n\n\u003e When BOARD_USES_RECOVERY_AS_BOOT is set to true, the recovery image is built as boot.img, containing the recovery\u0027s ramdisk. Previously, bootloader used the skip_initramfs kernel command line parameter to decide which mode to boot into. For Android 10 devices, the bootloader MUST NOT pass skip_initramfs to the kernel command-line. Instead, bootloader should pass androidboot.force_normal_boot\u003d1 to skip recovery and boot normal Android.\n\nDoesn\u0027t this mean Android 10 devices with BOARD_USES_RECOVERY_AS_BOOT do uses the boot ramdisk for normal and recovery boot?",
+      "parentUuid": "9bc0a990_f2214baf",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 467,
+        "endChar": 41
+      },
+      "revId": "1ca557260b89c6dd14c9500521fbe8f0c7ec56cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
