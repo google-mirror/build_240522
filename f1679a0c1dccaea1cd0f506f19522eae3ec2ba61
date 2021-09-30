@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2171db_1fce2432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-09-30T13:44:46Z",
+      "side": 1,
+      "message": "WANT_LGTM\u003dszuweilin",
+      "revId": "f1679a0c1dccaea1cd0f506f19522eae3ec2ba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
