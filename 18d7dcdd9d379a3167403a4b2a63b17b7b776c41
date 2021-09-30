@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bae7bf4_d45433ce",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-09-30T07:23:06Z",
+      "side": 1,
+      "message": "Or should we consider set this to true by default?\n\nGiven devices after Android 10 now uses the boot ramdisk in normal boot.\n\ne.g.,\n\n  # Are we building a debug boot image\n  BUILDING_DEBUG_BOOT_IMAGE :\u003d true\n  ifneq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)\n    # BOARD_BUILD_SYSTEM_ROOT_IMAGE devices don\u0027t use ramdisk.\n    ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)\n      BUILDING_DEBUG_BOOT_IMAGE :\u003d\n    endif\n    ifeq ($(strip $(TARGET_NO_KERNEL)),true)\n      BUILDING_DEBUG_BOOT_IMAGE :\u003d\n    endif\n    # Can\u0027t build the debug boot image if we\u0027re not building a ramdisk.\n    ifndef BUILDING_RAMDISK_IMAGE\n      BUILDING_DEBUG_BOOT_IMAGE :\u003d\n    endif\n    # Don\u0027t build boot-debug.img if we\u0027re already building vendor_boot-debug.img.\n    ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE\n      BUILDING_DEBUG_BOOT_IMAGE :\u003d\n    endif\n  endif\n  .KATI_READONLY :\u003d BUILDING_DEBUG_BOOT_IMAGE",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 28
+      },
+      "revId": "18d7dcdd9d379a3167403a4b2a63b17b7b776c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e05bf525_32cde73e",
         "filename": "core/board_config.mk",
         "patchSetId": 2
