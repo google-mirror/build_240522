@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3096826d_d9170985",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T17:39:04Z",
+      "side": 1,
+      "message": "Please wrap it in a script just like for the product config.",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffeb49ad_343f5df9",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T17:39:04Z",
+      "side": 1,
+      "message": "Hmm, how many more variables will we need to export eventually?",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d4980b_64b2cca7",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T17:39:04Z",
+      "side": 1,
+      "message": "Is this to reduce the amount of output?",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
