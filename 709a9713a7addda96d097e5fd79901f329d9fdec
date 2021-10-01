@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a18b391_071715cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-01T12:26:44Z",
+      "side": 1,
+      "message": "nit: It\u0027s actually not unconditionally? (only for devices with /vendor_boot?)\n\nHow about add a comment in the commit message?\n\n\ne.g., Unconditionally build vendor_ramdisk.img \u0026 vendor_ramdisk-debug.img if BUILDING_VENDOR_BOOT_IMAGE is true.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "709a9713a7addda96d097e5fd79901f329d9fdec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
