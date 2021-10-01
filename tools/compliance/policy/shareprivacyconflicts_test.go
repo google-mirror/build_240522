@@ -91,7 +91,6 @@ func TestConflictingSharedPrivateSource(t *testing.T) {
 			},
 			expectedConflicts: []confl{
 				{"gplBin.meta_lic", "gplBin.meta_lic:restricted", "proprietary.meta_lic:proprietary"},
-				{"proprietary.meta_lic", "gplBin.meta_lic:restricted", "proprietary.meta_lic:proprietary"},
 			},
 		},
 	}
