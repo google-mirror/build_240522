@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db76f83_297618f2",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2333,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-01T11:04:07Z",
+      "side": 1,
+      "message": "I don\u0027t know why we need this, but i\u0027m also too afraid to remove.",
+      "range": {
+        "startLine": 2333,
+        "startChar": 8,
+        "endLine": 2333,
+        "endChar": 13
+      },
+      "revId": "396cd8fa20725bdec80bb2aad3eba2f280ccc90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
