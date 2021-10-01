@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a978f6_cb78ca36",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1224979
+      },
+      "writtenOn": "2021-10-01T17:10:34Z",
+      "side": 1,
+      "message": "Why does this need to be changed from $(call pretty ...) to @echo?\n\nAlmost all \"Target ...\" output in this file uses $(call pretty ...)",
+      "range": {
+        "startLine": 1107,
+        "startChar": 1,
+        "endLine": 1107,
+        "endChar": 6
+      },
+      "revId": "870ea163c2cde8701b84e2f643b0e41f5a5cd325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f3aa17_cb213a4a",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2457,
+      "author": {
+        "id": 1224979
+      },
+      "writtenOn": "2021-10-01T17:10:34Z",
+      "side": 1,
+      "message": "Same comment here. Why @echo?",
+      "range": {
+        "startLine": 2457,
+        "startChar": 1,
+        "endLine": 2457,
+        "endChar": 6
+      },
+      "revId": "870ea163c2cde8701b84e2f643b0e41f5a5cd325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
