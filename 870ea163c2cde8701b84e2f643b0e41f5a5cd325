@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af18a2a_5bfb91a2",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-01T17:50:34Z",
+      "side": 1,
+      "message": "Cause I thought the \"@echo ...\" style looks more concise than the $(call pretty, ...) style, and this line gives me the impression that the $(pretty) syntax is legacy command (https://cs.android.com/android/_/android/platform/build/+/894e9be3f7ab232e9b004fb2c186a682fc2020ad:core/definitions.mk;l\u003d983;drc\u003df4017412e2617bf25d8a961cc953e99ed8e83b5b), plus codesearch shows @echo has significantly more users than $(call pretty,)\n\npretty: https://cs.android.com/search?q\u003df:%5Ebuild%2Fmake%20%22call%20pretty,%22\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject\n@echo: https://cs.android.com/search?q\u003d%22@echo%20%22%20f:%5Ebuild%2Fmake\u0026ss\u003dandroid%2Fplatform%2Fsuperproject",
+      "parentUuid": "31a11ad0_3da86861",
+      "range": {
+        "startLine": 1107,
+        "startChar": 1,
+        "endLine": 1107,
+        "endChar": 6
+      },
+      "revId": "870ea163c2cde8701b84e2f643b0e41f5a5cd325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31f3aa17_cb213a4a",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Also, I think \"vendor debug ramdisk\" was just fine.",
       "parentUuid": "31f3aa17_cb213a4a",
+      "range": {
+        "startLine": 2457,
+        "startChar": 1,
+        "endLine": 2457,
+        "endChar": 6
+      },
+      "revId": "870ea163c2cde8701b84e2f643b0e41f5a5cd325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e37eb4_f03a908b",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2457,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-01T17:50:34Z",
+      "side": 1,
+      "message": "Right now there are three styles of wording, and I\u0027m trying to make the wording here (debug/test-harness-related rules) more consistent, (boot/ramdisk is interchangeable here)\n1. \u003cflavor\u003e \u003cimage\u003e: \"debug boot image\" / \"debug vendor boot image\"\n2. \u003cimage\u003e \u003cflavor\u003e: \"boot debug image\" / \"vendor boot debug image\"\n3. \u003cimage_part1\u003e \u003cflavor\u003e \u003cimage_part2\u003e: \"vendor debug boot image\"\n\n(1) makes the more sense as it is describing a \"debug\"-flavored boot/ramdisk image. \n(2) sorta makes sense as it is describing the output file name (boot debug image \u003d\u003e boot-debug.img)\n(3) doesn\u0027t make sense, why is the name of the partition / image (i.e. vendor_boot) split in half by the word \"debug\"?\n\nI understand it\u0027s nit-picking, but I just like to take the chance to refactor/reword/rewrite all the stuff here, as it has been sprawling organically since boot-debug.img was introduced two years ago, and the code here is getting quite unmaintainable",
+      "parentUuid": "4a622450_a30af38a",
       "range": {
         "startLine": 2457,
         "startChar": 1,
