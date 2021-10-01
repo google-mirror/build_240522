@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "745b5db0_6d7610b7",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T23:28:33Z",
+      "side": 1,
+      "message": "\u003e I disagree with the style of breaking arbitrary commands out into a different script. If the script is only ever going to be used in one place it may as well be inlined here. Plus it\u0027s only two commands, the script would not give us much benefit.\nIt\u0027s not about stylistic.\nFirst, it\u0027s a semantically meaningful action. BTW, during the debugging I run the product config counterpart of this script standalone, bypassing all Soong/make/Kati convolutions.\nSecondly, quite a few lines added added to a large file. It\u0027s much easier to review small, focused file.",
+      "parentUuid": "030f84c4_c4152d3d",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffeb49ad_343f5df9",
         "filename": "core/board_config.mk",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yeah I was thinking we should make a way for rbcrun to import all the make variables. But I figured that could be a followup cl.",
       "parentUuid": "ffeb49ad_343f5df9",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd0a36e_c6bbae47",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T23:28:33Z",
+      "side": 1,
+      "message": "\u003e Yeah I was thinking we should make a way for rbcrun to import all the make variables. But I figured that could be a followup cl.\n\nYet another reason to have a separate script.",
+      "parentUuid": "9f042cae_656072dd",
       "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "This increases the amount of output. I assumed you had put the `elif attr not in globals_base` to reduce output initially, but I hit some cases where the board config changed a preexisting global variable and I needed that new value reflected in the output.",
       "parentUuid": "89d4980b_64b2cca7",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "220a345c_cb59573a",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-01T23:28:33Z",
+      "side": 1,
+      "message": "Oops, sorry, it\u0027s \u0027or\u0027",
+      "parentUuid": "0a83e30e_84f1f46f",
       "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
