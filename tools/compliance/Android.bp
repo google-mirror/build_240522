@@ -17,6 +17,31 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+blueprint_go_binary {
+    name: "checkshare",
+    srcs: ["cmd/checkshare.go"],
+    deps: ["compliance-module"],
+    testSrcs: ["cmd/checkshare_test.go"],
+}
+
+blueprint_go_binary {
+    name: "listshare",
+    srcs: ["cmd/listshare.go"],
+    deps: ["compliance-module"],
+}
+
+blueprint_go_binary {
+    name: "dumpgraph",
+    srcs: ["cmd/dumpgraph.go"],
+    deps: ["compliance-module"],
+}
+
+blueprint_go_binary {
+    name: "dumpresolutions",
+    srcs: ["cmd/dumpresolutions.go"],
+    deps: ["compliance-module"],
+}
+
 bootstrap_go_package {
     name: "compliance-module",
     srcs: [
