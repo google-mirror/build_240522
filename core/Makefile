@@ -2301,13 +2301,6 @@ else  # BOARD_USES_RECOVERY_AS_BOOT == true
   INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DEP := $(INSTALLED_RAMDISK_TARGET)
 endif # BOARD_USES_RECOVERY_AS_BOOT != true
 
-# -----------------------------------------------------------------
-# the debug ramdisk, which is the original ramdisk plus additional
-# files: force_debuggable, adb_debug.prop and userdebug sepolicy.
-# When /force_debuggable is present, /init will load userdebug sepolicy
-# and property files to allow adb root, if the device is unlocked.
-INSTALLED_DEBUG_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk-debug.img
-
 INTERNAL_DEBUG_RAMDISK_FILES := $(filter $(TARGET_DEBUG_RAMDISK_OUT)/%, \
     $(ALL_GENERATED_SOURCES) \
     $(ALL_DEFAULT_INSTALLED_MODULES))
@@ -2317,26 +2310,36 @@ INSTALLED_FILES_FILE_DEBUG_RAMDISK := $(PRODUCT_OUT)/installed-files-ramdisk-deb
 INSTALLED_FILES_JSON_DEBUG_RAMDISK := $(INSTALLED_FILES_FILE_DEBUG_RAMDISK:.txt=.json)
 $(INSTALLED_FILES_FILE_DEBUG_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_DEBUG_RAMDISK)
 $(INSTALLED_FILES_FILE_DEBUG_RAMDISK): $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DEP)
-$(INSTALLED_FILES_FILE_DEBUG_RAMDISK) : $(INTERNAL_DEBUG_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
-	@echo Installed file list: $@
-	mkdir -p $(dir $@)
-	rm -f $@
+$(INSTALLED_FILES_FILE_DEBUG_RAMDISK): $(INTERNAL_DEBUG_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo "Installed file list: $@"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@) $(TARGET_DEBUG_RAMDISK_OUT)
+	touch $(TARGET_DEBUG_RAMDISK_OUT)/force_debuggable
 	$(FILESLIST) $(TARGET_DEBUG_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+ifdef BUILDING_DEBUG_BOOT_IMAGE
+
+# -----------------------------------------------------------------
+# the debug ramdisk, which is the original ramdisk plus additional
+# files: force_debuggable, adb_debug.prop and userdebug sepolicy.
+# When /force_debuggable is present, /init will load userdebug sepolicy
+# and property files to allow adb root, if the device is unlocked.
+INSTALLED_DEBUG_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk-debug.img
 
 $(INSTALLED_DEBUG_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_DEBUG_RAMDISK)
 $(INSTALLED_DEBUG_RAMDISK_TARGET): $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DEP)
 $(INSTALLED_DEBUG_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_DEBUG_RAMDISK_FILES) | $(COMPRESSION_COMMAND_DEPS)
-	$(call pretty,"Target debug ramdisk: $@")
-	mkdir -p $(TARGET_DEBUG_RAMDISK_OUT)
-	touch $(TARGET_DEBUG_RAMDISK_OUT)/force_debuggable
+	@echo "Target debug ramdisk: $@"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_DEBUG_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $@
 
 .PHONY: ramdisk_debug-nodeps
 ramdisk_debug-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
-	echo "make $@: ignoring dependencies"
-	mkdir -p $(TARGET_DEBUG_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR)
-	touch $(TARGET_DEBUG_RAMDISK_OUT)/force_debuggable
+	@echo "make $@: ignoring dependencies"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@) $(TARGET_DEBUG_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_DEBUG_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $(INSTALLED_DEBUG_RAMDISK_TARGET)
 
 # -----------------------------------------------------------------
@@ -2344,8 +2347,6 @@ ramdisk_debug-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
 #
 # Note: it's intentional to skip signing for boot-debug.img, because it
 # can only be used if the device is unlocked with verification error.
-ifdef BUILDING_DEBUG_BOOT_IMAGE
-
 ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
   INSTALLED_DEBUG_BOOTIMAGE_TARGET := $(foreach k,$(subst kernel,$(DEBUG_RAMDISK_BOOT_IMAGE_NAME),$(BOARD_KERNEL_BINARIES)), \
          $(PRODUCT_OUT)/$(k).img)
@@ -2412,15 +2413,15 @@ INTERNAL_VENDOR_DEBUG_RAMDISK_FILES := $(filter $(TARGET_VENDOR_DEBUG_RAMDISK_OU
     $(ALL_GENERATED_SOURCES) \
     $(ALL_DEFAULT_INSTALLED_MODULES))
 
+# INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK would ensure TARGET_VENDOR_DEBUG_RAMDISK_OUT is created.
 INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK := $(PRODUCT_OUT)/installed-files-vendor-ramdisk-debug.txt
 INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK := $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK:.txt=.json)
 $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK)
-$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DEBUG_RAMDISK_TARGET)
+$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_FILES_FILE_DEBUG_RAMDISK)
 $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(INTERNAL_VENDOR_DEBUG_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
-	@echo Installed file list: $@
-	mkdir -p $(dir $@)
-	rm -f $@
-	mkdir -p $(TARGET_VENDOR_DEBUG_RAMDISK_OUT) # The dir might not be created if no modules are installed here.
+	@echo "Installed file list: $@"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@) $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) $(TARGET_DEBUG_RAMDISK_OUT) $(TARGET_VENDOR_DEBUG_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
@@ -2436,15 +2437,17 @@ endif
 endif
 
 # The vendor debug ramdisk combines vendor ramdisk and debug ramdisk.
-$(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DEBUG_RAMDISK_TARGET)
+$(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET)
 $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK)
+$(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_DEBUG_RAMDISK)
 $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_DEBUG_RAMDISK_FILES) | $(COMPRESSION_COMMAND_DEPS)
-	mkdir -p $(TARGET_VENDOR_DEBUG_RAMDISK_OUT)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_VENDOR_RAMDISK_OUT) $(TARGET_DEBUG_RAMDISK_OUT) $(TARGET_VENDOR_DEBUG_RAMDISK_OUT) $(PRIVATE_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $@
 
 INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor_ramdisk-debug.img
 $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET)
-	$(call pretty,"Target vendor debug ramdisk: $@")
+	@echo "Target debug vendor ramdisk: $@"
 	$(copy-file-to-target)
 
 # -----------------------------------------------------------------
@@ -2479,44 +2482,46 @@ $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_T
 
 endif # BUILDING_DEBUG_VENDOR_BOOT_IMAGE
 
-# -----------------------------------------------------------------
-# The test harness ramdisk, which is based off debug_ramdisk, plus a
-# few additional test-harness-specific properties in adb_debug.prop.
-INSTALLED_TEST_HARNESS_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk-test-harness.img
-
 # Appends a few test harness specific properties into the adb_debug.prop.
 TEST_HARNESS_PROP_TARGET := $(TARGET_TEST_HARNESS_RAMDISK_OUT)/adb_debug.prop
 ADDITIONAL_TEST_HARNESS_PROPERTIES := ro.audio.silent=1
 ADDITIONAL_TEST_HARNESS_PROPERTIES += ro.test_harness=1
 
-# $(1): a list of key=value pairs for additional property assignments
-# $(2): the target .prop file to append the properties from $(1)
-define append-test-harness-props
-  echo "#" >> $(2); \
-  echo "# ADDITIONAL TEST HARNESS_PROPERTIES" >> $(2); \
-  echo "#" >> $(2);
-  $(foreach line,$(1), echo "$(line)" >> $(2);)
+define build-test-harness-ramdisk-out
+  rsync --chmod=u+w -a $(TARGET_DEBUG_RAMDISK_OUT)/ $(TARGET_TEST_HARNESS_RAMDISK_OUT); \
+  echo "#" >> $(TEST_HARNESS_PROP_TARGET); \
+  echo "# ADDITIONAL TEST HARNESS PROPERTIES" >> $(TEST_HARNESS_PROP_TARGET); \
+  echo "#" >> $(TEST_HARNESS_PROP_TARGET); \
+  $(foreach line,$(ADDITIONAL_TEST_HARNESS_PROPERTIES), \
+    echo "$(line)" >> $(TEST_HARNESS_PROP_TARGET);)
 endef
 
 INTERNAL_TEST_HARNESS_RAMDISK_FILES := $(filter $(TARGET_TEST_HARNESS_RAMDISK_OUT)/%, \
     $(ALL_GENERATED_SOURCES) \
     $(ALL_DEFAULT_INSTALLED_MODULES))
 
+ifdef BUILDING_DEBUG_BOOT_IMAGE
+
+# -----------------------------------------------------------------
+# The test harness ramdisk, which is based off debug_ramdisk, plus a
+# few additional test-harness-specific properties in adb_debug.prop.
+INSTALLED_TEST_HARNESS_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk-test-harness.img
+
 # The test harness ramdisk will rsync the files from the debug ramdisk, then appends some props.
-$(INSTALLED_TEST_HARNESS_RAMDISK_TARGET): $(INSTALLED_DEBUG_RAMDISK_TARGET)
+$(INSTALLED_TEST_HARNESS_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_DEBUG_RAMDISK)
 $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET): $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DEP)
 $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_TEST_HARNESS_RAMDISK_FILES) | $(COMPRESSION_COMMAND_DEPS)
-	$(call pretty,"Target test harness ramdisk: $@")
-	rsync --chmod=u+w -a $(TARGET_DEBUG_RAMDISK_OUT)/ $(TARGET_TEST_HARNESS_RAMDISK_OUT)
-	$(call append-test-harness-props,$(ADDITIONAL_TEST_HARNESS_PROPERTIES),$(TEST_HARNESS_PROP_TARGET))
+	@echo "Target test harness ramdisk: $@"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(call build-test-harness-ramdisk-out)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_TEST_HARNESS_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $@
 
 .PHONY: ramdisk_test_harness-nodeps
 ramdisk_test_harness-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
-	echo "make $@: ignoring dependencies"
-	rsync --chmod=u+w -a $(TARGET_DEBUG_RAMDISK_OUT)/ $(TARGET_TEST_HARNESS_RAMDISK_OUT)
-	$(call append-test-harness-props,$(ADDITIONAL_TEST_HARNESS_PROPERTIES),$(TEST_HARNESS_PROP_TARGET))
-	mkdir -p $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR)
+	@echo "make $@: ignoring dependencies"
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@) $(TARGET_TEST_HARNESS_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_TEST_HARNESS_RAMDISK_OUT) $(INTERNAL_DEBUG_RAMDISK_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
 
 # -----------------------------------------------------------------
@@ -2524,8 +2529,6 @@ ramdisk_test_harness-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
 #
 # Note: it's intentional to skip signing for boot-test-harness.img, because it
 # can only be used if the device is unlocked with verification error.
-ifdef BUILDING_DEBUG_BOOT_IMAGE
-
 ifneq ($(strip $(BOARD_KERNEL_BINARIES)),)
   INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET := $(foreach k,$(subst kernel,boot-test-harness,$(BOARD_KERNEL_BINARIES)), \
     $(PRODUCT_OUT)/$(k).img)
@@ -2582,8 +2585,13 @@ endif
 endif
 
 # The vendor test harness ramdisk combines vendor ramdisk and test harness ramdisk.
-$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
+$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET)
+$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_DEBUG_RAMDISK)
+$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(INTERNAL_TEST_HARNESS_RAMDISK_FILES)
 $(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(call build-test-harness-ramdisk-out)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_VENDOR_RAMDISK_OUT) $(TARGET_TEST_HARNESS_RAMDISK_OUT) $(PRIVATE_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $@
 
 INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor_ramdisk-test-harness.img
