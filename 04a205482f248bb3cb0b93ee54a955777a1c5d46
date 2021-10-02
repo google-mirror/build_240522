@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f37e7c5d_b8af9923",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-02T00:55:39Z",
+      "side": 1,
+      "message": "I\u0027m ok with using a script if it can be the same script as what product config is using. This requires some changes to rbc-run. Let me know what you think about them.",
+      "parentUuid": "745b5db0_6d7610b7",
+      "revId": "04a205482f248bb3cb0b93ee54a955777a1c5d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffeb49ad_343f5df9",
         "filename": "core/board_config.mk",
         "patchSetId": 1
