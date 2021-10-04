@@ -22,6 +22,30 @@
       },
       "revId": "fa8193c0e9e3bb3f22a2078744eb95182ebcfd13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "876c1489_f54d0a1c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2021-10-04T13:24:38Z",
+      "side": 1,
+      "message": "There actually is one: copy-one-file (see core/definitions.mk) defines that rule for us.",
+      "parentUuid": "adb13456_1219c8ef",
+      "range": {
+        "startLine": 3496,
+        "startChar": 55,
+        "endLine": 3496,
+        "endChar": 85
+      },
+      "revId": "fa8193c0e9e3bb3f22a2078744eb95182ebcfd13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
