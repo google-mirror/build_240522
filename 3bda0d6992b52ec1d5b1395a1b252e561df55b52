@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34b6872_31ebc24d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3487,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-10-04T13:12:30Z",
+      "side": 1,
+      "message": "I assume this is a placeholder before kleaf is hooked up?",
+      "revId": "3bda0d6992b52ec1d5b1395a1b252e561df55b52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
