@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d304ebb_698c19b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2021-10-04T12:25:14Z",
+      "side": 1,
+      "message": "This CL will come out of WIP state once all commits introducing BOARD_PVMFWIMAGE_PARTITION_SIZE for internal products have been merged i.e. once we\u0027re sure this commit won\u0027t break the build for those products.",
+      "revId": "592a3ca91b69ad72ddb27bd0fc463d24436a7404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
