@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb13456_1219c8ef",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-10-04T13:09:59Z",
+      "side": 1,
+      "message": "Does it matter that there isn\u0027t a build rule for this target in this branch?",
+      "range": {
+        "startLine": 3496,
+        "startChar": 55,
+        "endLine": 3496,
+        "endChar": 85
+      },
+      "revId": "fa8193c0e9e3bb3f22a2078744eb95182ebcfd13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
