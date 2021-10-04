@@ -16,6 +16,24 @@
       "message": "What\u0027s the reason for the removal of the stderr output?",
       "revId": "e5e7a2d531d1fde683cc6a5afb9a2ade71d9954d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3b9647_19dee8d1",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-04T18:25:25Z",
+      "side": 1,
+      "message": "While testing this I learned that stderr will automatically show up in the build output, so I removed the special handling here for simplicity. It just displays as raw lines of text now instead of having the pink \"warning:\" message, but since you used to be using $(info) instead of $(warning) I figured that\u0027s probably ok.",
+      "parentUuid": "bd602d9d_38e915c8",
+      "revId": "e5e7a2d531d1fde683cc6a5afb9a2ade71d9954d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
