@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd602d9d_38e915c8",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-04T16:18:44Z",
+      "side": 1,
+      "message": "What\u0027s the reason for the removal of the stderr output?",
+      "revId": "e5e7a2d531d1fde683cc6a5afb9a2ade71d9954d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
