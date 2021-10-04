@@ -22,6 +22,30 @@
       },
       "revId": "68ba0c3f9993c4b02836cbf53165767b9944ee38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2aedb0b_b803afb6",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3480,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2021-10-04T11:54:49Z",
+      "side": 1,
+      "message": "This CL now only introduces support for using the default pre-built but it is up to the product to enable it through PRODUCT_BUILD_PVMFW_IMAGE.",
+      "parentUuid": "d9ee9c96_a3e2806a",
+      "range": {
+        "startLine": 3480,
+        "startChar": 8,
+        "endLine": 3480,
+        "endChar": 27
+      },
+      "revId": "68ba0c3f9993c4b02836cbf53165767b9944ee38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
