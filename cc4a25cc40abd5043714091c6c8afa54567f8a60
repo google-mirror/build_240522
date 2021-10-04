@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dceead19_60547d3c",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2021-10-04T18:41:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b74fa679_b2a77342",
+      "range": {
+        "startLine": 110,
+        "startChar": 46,
+        "endLine": 110,
+        "endChar": 58
+      },
+      "revId": "cc4a25cc40abd5043714091c6c8afa54567f8a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f65a44_3eb76887",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-10-04T18:35:04Z",
       "side": 1,
       "message": "Remove",
+      "revId": "cc4a25cc40abd5043714091c6c8afa54567f8a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a595fe1_049db1e4",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2021-10-04T18:41:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28f65a44_3eb76887",
       "revId": "cc4a25cc40abd5043714091c6c8afa54567f8a60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
