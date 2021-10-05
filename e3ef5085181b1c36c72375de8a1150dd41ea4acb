@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16495376_51db86d0",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-05T17:57:48Z",
+      "side": 1,
+      "message": "It would be great to not use rsync, but historically these directories have had files that were created as side-effects of other installation rules, so recreating a new directory with the same contents is not trivial.  We\u0027ve made some improvements there, so maybe it wouldn\u0027t be hard now.",
+      "parentUuid": "0301e2e3_3f742748",
+      "range": {
+        "startLine": 2502,
+        "startChar": 2,
+        "endLine": 2502,
+        "endChar": 89
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "abf59a25_053c6914",
         "filename": "core/Makefile",
         "patchSetId": 6
