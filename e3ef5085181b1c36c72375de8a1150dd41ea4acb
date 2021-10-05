@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf59a25_053c6914",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-05T10:49:10Z",
+      "side": 1,
+      "message": "nit: This seems not so obvious for why we need to do the substitution here.\n\n\nHow about add a comment above?\ne.g.,\n\n# We\u0027ll rsync $(TARGET_DEBUG_RAMDISK_OUT) to $(TARGET_TEST_HARNESS_RAMDISK_OUT) in $(call build-test-harness-ramdisk-out) first,\n# then replaces the debug ramdisk paths to the test harness ramdisk paths here to\n# pack the vendor test harness ramdisk.",
+      "range": {
+        "startLine": 2592,
+        "startChar": 48,
+        "endLine": 2592,
+        "endChar": 119
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
