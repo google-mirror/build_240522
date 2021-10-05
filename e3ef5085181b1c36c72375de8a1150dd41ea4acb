@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0301e2e3_3f742748",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-05T11:36:40Z",
+      "side": 1,
+      "message": "+ccross,\n\nWhat\u0027s the build team\u0027s stance on having this kind of build rule? As a reader I find it really difficult to trace what exactly is copied as-is, and what is changed.\n\nIs it better we rewrite this to not use rsync? I can do that in a follow-up if you want.",
+      "range": {
+        "startLine": 2502,
+        "startChar": 2,
+        "endLine": 2502,
+        "endChar": 89
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "abf59a25_053c6914",
         "filename": "core/Makefile",
         "patchSetId": 6
