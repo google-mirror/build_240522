@@ -22,6 +22,30 @@
       },
       "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c593a3e0_021b6a74",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-05T11:31:45Z",
+      "side": 1,
+      "message": "I\u0027d rather not repeat this as L2500, L2521 and L2586 already explained this.",
+      "parentUuid": "abf59a25_053c6914",
+      "range": {
+        "startLine": 2592,
+        "startChar": 48,
+        "endLine": 2592,
+        "endChar": 119
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
