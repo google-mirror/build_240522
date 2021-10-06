@@ -274,9 +274,21 @@ $(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
 # Depmod requires a well-formed kernel version so 0.0 is used as a placeholder.
 DEPMOD_STAGING_SUBDIR :=$= lib/modules/0.0
 
+#
+# Copy and strip a kernel module.
+#
+# Stripping is skipped for fips140 modules because in order to implement the
+# FIPS integrity check, such modules contain RELA sections with the SHF_ALLOC
+# flag set, but llvm-strip version 13 and older have a bug where it errors out
+# when processing such files.  Fixed by https://reviews.llvm.org/D111181
+#
 define copy-and-strip-kernel-module
 $(2): $(1)
-	$(LLVM_STRIP) -o $(2) --strip-debug $(1)
+	if [ -n "$(filter fips140.ko %-fips140.ko,$(notdir $(1)))" ]; then \
+		cp $(1) $(2); \
+	else \
+		$(LLVM_STRIP) -o $(2) --strip-debug $(1); \
+	fi
 endef
 
 # $(1): modules list
