@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa7618c_7f4de210",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-06T08:30:11Z",
+      "side": 1,
+      "message": "No worries, I\u0027ve already cleaned up many of these \"directory as side-effect\" build rules in boot-debug/boot-test-harness, so it\u0027s actually very simple to rewrite it without rsync now. In a way, all my previous refactors are laying the preparations for removing this rsync line.",
+      "parentUuid": "16495376_51db86d0",
+      "range": {
+        "startLine": 2502,
+        "startChar": 2,
+        "endLine": 2502,
+        "endChar": 89
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abf59a25_053c6914",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I\u0027d rather not repeat this as L2500, L2521 and L2586 already explained this.",
       "parentUuid": "abf59a25_053c6914",
+      "range": {
+        "startLine": 2592,
+        "startChar": 48,
+        "endLine": 2592,
+        "endChar": 119
+      },
+      "revId": "e3ef5085181b1c36c72375de8a1150dd41ea4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "874cdd92_5455a33c",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-06T08:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c593a3e0_021b6a74",
       "range": {
         "startLine": 2592,
         "startChar": 48,
