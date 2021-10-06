@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f309781e_2985afea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-06T18:07:40Z",
+      "side": 1,
+      "message": "is-platform-sdk-version-at-least is on its way out, please take a look at the remaining one.",
+      "parentUuid": "99f03bd1_4c8cff7d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "8015d40b7da4a70f18c554b7b86cca425dfab8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0863b9f_86597be2",
