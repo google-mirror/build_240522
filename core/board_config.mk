@@ -190,10 +190,25 @@ endif
 ifndef RBC_BOARD_CONFIG
 include $(board_config_mk)
 else
-  rc := $(shell build/soong/scripts/rbc-run $(board_config_mk) \
-      BUILDING_GSI=$(BUILDING_GSI) >$(OUT_DIR)/rbcboardtemp.mk || echo $$?)
+  $(call dump-product-rbc, $(OUT_DIR)/product_cfg.rbc)
+
+  rc := $(shell $(OUT_DIR)/soong/.bootstrap/bin/mk2rbc \
+    -mode=write -r --outdir $(OUT_DIR) \
+    --boardlauncher=$(OUT_DIR)/launchers/board.rbc \
+    $(board_config_mk) || echo $$?)
   ifneq (,$(rc))
     $(error board configuration converter failed: $(rc))
+  endif
+
+  rc := $(shell $(OUT_DIR)/soong/.bootstrap/bin/rbcrun \
+    RBC_OUT="make,global" \
+    BUILDING_GSI=$(BUILDING_GSI) \
+    QEMU_USE_SYSTEM_EXT_PARTITIONS=$(QEMU_USE_SYSTEM_EXT_PARTITIONS) \
+    QEMU_DISABLE_AVB=$(QEMU_DISABLE_AVB) \
+    $(OUT_DIR)/launchers/board.rbc \
+    >$(OUT_DIR)/rbcboardtemp.mk || echo $$?)
+  ifneq (,$(rc))
+    $(error board configuration runner failed: $(rc))
   endif
 
   include $(OUT_DIR)/rbcboardtemp.mk
