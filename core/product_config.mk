@@ -30,9 +30,11 @@
 ###########################################################
 
 _ici_digits := 0 1 2 3 4 5 6 7 8 9
+_ici_uppercasealphaunderscore := \
+    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _
 _ici_alphaunderscore := \
     a b c d e f g h i j k l m n o p q r s t u v w x y z \
-    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _
+    $(_ici_uppercasealphaunderscore)
 define is-c-identifier
 $(strip \
   $(if $(1), \
@@ -47,6 +49,32 @@ $(strip \
      ) \
    ) \
  )
+endef
+
+# This checks if a variable name from $(1) matches [A-Z][A-Z0-9_]*
+# It is used to determine if a variable is likely to be used in
+# the board configuration.
+define is-public-variable
+$(strip \
+  $(if $(1), \
+    $(if $(filter $(addsuffix %,$(_ici_digits) _),$(1)), \
+     , \
+      $(eval w := $(1)) \
+      $(foreach c,$(_ici_digits) $(_ici_uppercasealphaunderscore), \
+        $(eval w := $(subst $(c),,$(w))) \
+       ) \
+      $(if $(w),,TRUE) \
+      $(eval w :=) \
+    ) \
+   ) \
+ )
+endef
+
+# Dumps all variables that is-public-variable returns true for to the file at $(1)
+define dump-public-variables
+$(file >$(1),)\
+$(foreach v, $(foreach x, $(.VARIABLES), $(if $(call is-public-variable, $(x)),$(x))),\
+$(file >>$(1),$(v) := $(strip $($(v)))))
 endef
 
 # TODO: push this into the combo files; unfortunately, we don't even

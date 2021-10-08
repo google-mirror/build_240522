@@ -17,7 +17,7 @@ load("//build/make/core:envsetup.rbc", _envsetup_init = "init")
 """Runtime functions."""
 
 _soong_config_namespaces_key = "$SOONG_CONFIG_NAMESPACES"
-def _global_init(version_info):
+def _init_globals(version_info):
     """Returns dict created from the runtime environment."""
     globals = dict()
 
@@ -50,7 +50,8 @@ def _global_init(version_info):
 
 
 def __print_attr(attr, value):
-    if not value:
+    # not "if not value" because we want to be able to clear variables to empty strings
+    if value == None:
         return
     if type(value) == "list":
         if _options.rearrange:
@@ -70,10 +71,12 @@ def __print_attr(attr, value):
 def _printvars(state):
     """Prints configuration and global variables."""
     (globals, cfg, globals_base) = state
-    for attr, val in sorted(cfg.items()):
-        __print_attr(attr, val)
+    if cfg:
+        for attr, val in sorted(cfg.items()):
+            __print_attr(attr, val)
     if _options.print_globals:
-        print()
+        if cfg:
+            print()
         for attr, val in sorted(globals.items()):
             if attr == _soong_config_namespaces_key:
                 __print_attr("SOONG_CONFIG_NAMESPACES", val.keys())
@@ -106,7 +109,7 @@ def _product_configuration(top_pcm_name, top_pcm, version_info):
     # PCM means "Product Configuration Module", i.e., a Starlark file
     # whose body consists of a single init function.
 
-    globals_base = _global_init(version_info)
+    globals_base = _init_globals(version_info)
     globals = dict(**globals_base)
 
     config_postfix = []  # Configs in postfix order
@@ -333,6 +336,10 @@ def __words(string_or_list):
 def __h_new():
     """Constructs a handle which is passed to PCM."""
     return (dict(), dict(), list())
+
+def __h_new_with_cfg(cfg):
+    """Constructs a handle which is passed to PCM."""
+    return (cfg, dict(), list())
 
 def __h_inherited_modules(handle):
     """Returns PCM's inherited modules dict."""
@@ -603,6 +610,7 @@ rblf = struct(
     copy_files = _copy_files,
     copy_if_exists = _copy_if_exists,
     cfg = __h_cfg,
+    new_handle_with_cfg = __h_new_with_cfg,
     enforce_product_packages_exist = _enforce_product_packages_exist,
     expand_wildcard = _expand_wildcard,
     file_exists = rblf_file_exists,
@@ -610,7 +618,7 @@ rblf = struct(
     filter = _filter,
     filter_out = _filter_out,
     find_and_copy = _find_and_copy,
-    global_init = _global_init,
+    init_globals = _init_globals,
     inherit = _inherit,
     indirect = _indirect,
     mkinfo = _mkinfo,

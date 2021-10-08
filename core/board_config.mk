@@ -191,13 +191,35 @@ endif
 ifndef RBC_BOARD_CONFIG
 include $(board_config_mk)
 else
-  rc := $(shell build/soong/scripts/rbc-run $(board_config_mk) \
-      BUILDING_GSI=$(BUILDING_GSI) >$(OUT_DIR)/rbcboardtemp.mk || echo $$?)
+  $(shell mkdir -p $(OUT_DIR)/rbc)
+
+  $(call dump-public-variables, $(OUT_DIR)/rbc/make_vars_pre_board_config.mk)
+
+  rc := $(shell $(OUT_DIR)/soong/.bootstrap/bin/mkvars2rbc \
+    <$(OUT_DIR)/rbc/make_vars_pre_board_config.mk \
+    >$(OUT_DIR)/rbc/make_vars_pre_board_config.rbc || echo $$?)
+  ifneq (,$(rc))
+    $(error Global variable converter failed: $(rc))
+  endif
+
+  rc := $(shell $(OUT_DIR)/soong/.bootstrap/bin/mk2rbc \
+    --mode=write -r --outdir $(OUT_DIR)/rbc \
+    --boardlauncher=$(OUT_DIR)/rbc/boardlauncher.rbc \
+    --input_variables=$(OUT_DIR)/rbc/make_vars_pre_board_config.rbc \
+    $(board_config_mk) || echo $$?)
   ifneq (,$(rc))
     $(error board configuration converter failed: $(rc))
   endif
 
-  include $(OUT_DIR)/rbcboardtemp.mk
+  rc := $(shell $(OUT_DIR)/soong/.bootstrap/bin/rbcrun \
+    RBC_OUT="make,global" \
+    $(OUT_DIR)/rbc/boardlauncher.rbc \
+    >$(OUT_DIR)/rbc/rbc_board_config_results.mk || echo $$?)
+  ifneq (,$(rc))
+    $(error board configuration runner failed: $(rc))
+  endif
+
+  include $(OUT_DIR)/rbc/rbc_board_config_results.mk
 endif
 
 ifneq (,$(and $(TARGET_ARCH),$(TARGET_ARCH_SUITE)))
