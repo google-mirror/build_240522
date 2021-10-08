@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8ba747_a238adac",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-08T00:39:23Z",
+      "side": 1,
+      "message": "Since I know you\u0027re going to ask why I stopped using the rbc-run script, it\u0027s because of this new --boardlauncher command. I don\u0027t think continuously updating the script to accept new arguments just to pass them on is the way to go.",
+      "revId": "3656750f8dcd21ff17a69d87913a3feeb3a20323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
