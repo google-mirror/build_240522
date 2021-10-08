@@ -455,6 +455,18 @@ define dump-products
 $(foreach p,$(PRODUCTS),$(call dump-product,$(p)))
 endef
 
+# Creates a starlark file at $(1) that just contains
+# one dict named "cfg" that has all of the product
+# variables
+define dump-product-rbc
+$(file >$(1),cfg = {)\
+$(foreach v,$(_product_single_value_vars),\
+$(file >>$(1), "$(v)": "$($(v))",))\
+$(foreach v,$(_product_list_vars),\
+$(file >>$(1), "$(v)": [$(foreach i,$($(v)),"$(i)", )],))\
+$(file >>$(1),})
+endef
+
 #
 # Functions for including product makefiles
 #
