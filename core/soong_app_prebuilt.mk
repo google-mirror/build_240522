@@ -28,6 +28,11 @@ full_classes_jar := $(intermediates.COMMON)/classes.jar
 full_classes_pre_proguard_jar := $(intermediates.COMMON)/classes-pre-proguard.jar
 full_classes_header_jar := $(intermediates.COMMON)/classes-header.jar
 
+
+# Use the Soong output as the checkbuild target instead of LOCAL_BUILT_MODULE
+# to avoid checkbuilds making an extra copy of every module.
+LOCAL_CHECKED_MODULE := $(LOCAL_PREBUILT_MODULE_FILE)
+
 #######################################
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################
