@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c67360e_2083f479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-11T14:00:03Z",
+      "side": 1,
+      "message": "master-art is failing because it does not include framework. I think you\u0027ll need to check that dexpreopt files are installed only in case if the corresponding jar files are installed, or filter DEXPREOPT_SYSTEMSERVER_ARTIFACTS by that criterion.",
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cf1754_3e2c108f",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-11T14:00:03Z",
+      "side": 1,
+      "message": "Is it necessary to add a new file? This can probably go in core/dex_preopt.mk.",
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281fb697_58d93517",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-11T14:00:03Z",
+      "side": 1,
+      "message": "Nit: rename to `dexpreopt-install-check`?",
+      "range": {
+        "startLine": 3,
+        "startChar": 7,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e161908c_25cf6035",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-11T14:00:03Z",
+      "side": 1,
+      "message": "I think you can achieve the same effect with just:\n\n  system.img: $(DEXPREOPT_SYSTEMSERVER_ARTIFACTS)\n\n(I\u0027m not sure how to refer to system.img correctly.)",
+      "range": {
+        "startLine": 1464,
+        "startChar": 0,
+        "endLine": 1465,
+        "endChar": 46
+      },
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
