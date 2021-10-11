@@ -1461,6 +1461,9 @@ ifdef is_sdk_build
       $(warning $(ALL_MODULES.$(m).MAKEFILE): Module '$(m)' in PRODUCT_PACKAGES_TESTS has nothing to install!)))
 endif
 
+include $(BUILD_SYSTEM)/dex_preopt_check.mk
+$(call dexpreopt-install-check,$(modules_to_install))
+
 # build/make/core/Makefile contains extra stuff that we don't want to pollute this
 # top-level makefile with.  It expects that ALL_DEFAULT_INSTALLED_MODULES
 # contains everything that's built during the current make, but it also further
