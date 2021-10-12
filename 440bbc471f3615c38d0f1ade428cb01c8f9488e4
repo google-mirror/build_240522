@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bcebd7_63de766a",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-10-12T17:45:40Z",
+      "side": 1,
+      "message": "A common place for consistency checks like this is build/make/core/tasks. Does it work to move it there instead? ALL_DEFAULT_INSTALLED_MODULES should be available there with the same value as modules_to_install here.",
+      "revId": "440bbc471f3615c38d0f1ade428cb01c8f9488e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b544028_e2a6c9b7",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-10-12T17:45:40Z",
+      "side": 1,
+      "message": "It\u0027d be useful to have a bit more commentary on which variables are involved and maybe the likely reasons the error below, to help users who get the error. If you describe it in some more detail in the Soong file then feel free to point to it here.",
+      "revId": "440bbc471f3615c38d0f1ade428cb01c8f9488e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
