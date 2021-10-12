@@ -24,6 +24,7 @@ Usage:  build_image input_directory properties_file output_image \\
 
 from __future__ import print_function
 
+import glob
 import logging
 import os
 import os.path
@@ -33,6 +34,8 @@ import sys
 
 import common
 import verity_utils
+
+from fsverity_signer import FSVeritySigner
 
 logger = logging.getLogger(__name__)
 
@@ -471,6 +474,19 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   elif fs_type.startswith("f2fs") and prop_dict.get("f2fs_compress") == "true":
     fs_spans_partition = False
 
+  if "fsverity_sign_files" in prop_dict:
+    patterns = prop_dict["fsverity_sign_files"].split()
+    files = []
+    for pattern in patterns:
+      files += glob.glob(os.path.join(in_dir, pattern))
+
+    signer = FSVeritySigner(prop_dict["fsverity"])
+    signer.set_key(prop_dict["fsverity_sign_key"])
+    signer.set_cert(prop_dict["fsverity_sign_cert"])
+
+    for f in files:
+      signer.sign(f)
+
   # Get a builder for creating an image that's to be verified by Verified Boot,
   # or None if not applicable.
   verity_image_builder = verity_utils.CreateVerityImageBuilder(prop_dict)
@@ -584,7 +600,6 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   # Create the verified image if this is to be verified.
   if verity_image_builder:
     verity_image_builder.Build(out_file)
-
 
 def ImagePropFromGlobalDict(glob_dict, mount_point):
   """Build an image property dictionary from the global dictionary.
@@ -717,6 +732,10 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_root_image", "system_root_image")
     copy_prop("root_dir", "root_dir")
     copy_prop("root_fs_config", "root_fs_config")
+    copy_prop("fsverity", "fsverity")
+    copy_prop("fsverity_sign_files", "fsverity_sign_files")
+    copy_prop("fsverity_sign_key", "fsverity_sign_key")
+    copy_prop("fsverity_sign_cert", "fsverity_sign_cert")
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
     copy_prop("flash_logical_block_size", "flash_logical_block_size")
