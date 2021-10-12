@@ -24,6 +24,7 @@ Usage:  build_image input_directory properties_file output_image \\
 
 from __future__ import print_function
 
+import glob
 import logging
 import os
 import os.path
@@ -33,6 +34,8 @@ import sys
 
 import common
 import verity_utils
+
+from fsverity_signer import FSVeritySigner
 
 logger = logging.getLogger(__name__)
 
@@ -469,6 +472,19 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   elif fs_type.startswith("f2fs") and prop_dict.get("f2fs_compress") == "true":
     fs_spans_partition = False
 
+  if "fsverity_sign_files" in prop_dict:
+    patterns = prop_dict["fsverity_sign_files"].split()
+    files = []
+    for pattern in patterns:
+      files += glob.glob(os.path.join(in_dir, pattern))
+
+    signer = FSVeritySigner(prop_dict["fsverity"])
+    signer.setKey(prop_dict["fsverity_sign_key"])
+    signer.setCert(prop_dict["fsverity_sign_cert"])
+
+    for f in files:
+      signer.sign(f)
+
   # Get a builder for creating an image that's to be verified by Verified Boot,
   # or None if not applicable.
   verity_image_builder = verity_utils.CreateVerityImageBuilder(prop_dict)
@@ -583,7 +599,6 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   if verity_image_builder:
     verity_image_builder.Build(out_file)
 
-
 def ImagePropFromGlobalDict(glob_dict, mount_point):
   """Build an image property dictionary from the global dictionary.
 
@@ -674,6 +689,10 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_reserved_size", "partition_reserved_size")
     copy_prop("system_selinux_fc", "selinux_fc")
     copy_prop("system_disable_sparse", "disable_sparse")
+    copy_prop("fsverity", "fsverity")
+    copy_prop("fsverity_sign_files", "fsverity_sign_files")
+    copy_prop("fsverity_sign_key", "fsverity_sign_key")
+    copy_prop("fsverity_sign_cert", "fsverity_sign_cert")
   elif mount_point == "system_other":
     # We inherit the selinux policies of /system since we contain some of its
     # files.
