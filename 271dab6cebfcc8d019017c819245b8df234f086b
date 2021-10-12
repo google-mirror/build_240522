@@ -70,6 +70,23 @@
       "parentUuid": "a02fe584_c55360ac",
       "revId": "271dab6cebfcc8d019017c819245b8df234f086b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34cf810_d6dac178",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-10-12T18:34:50Z",
+      "side": 1,
+      "message": "Right here.",
+      "revId": "271dab6cebfcc8d019017c819245b8df234f086b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
