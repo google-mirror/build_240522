@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d353b55d_de9852c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-12T08:28:32Z",
+      "side": 1,
+      "message": "Changed in the other CL.",
+      "parentUuid": "9c67360e_2083f479",
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15cf1754_3e2c108f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-11T14:00:03Z",
       "side": 1,
       "message": "Is it necessary to add a new file? This can probably go in core/dex_preopt.mk.",
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b4549c_188d016c",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-12T08:28:32Z",
+      "side": 1,
+      "message": "It is necessary to add a new file. core/dex_preopt.mk runs at an early stage, where the full list of modules going to be installed is not complete.",
+      "parentUuid": "15cf1754_3e2c108f",
       "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6920d65_1fa65589",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-12T08:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "281fb697_58d93517",
+      "range": {
+        "startLine": 3,
+        "startChar": 7,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e161908c_25cf6035",
@@ -71,6 +131,30 @@
       "writtenOn": "2021-10-11T14:00:03Z",
       "side": 1,
       "message": "I think you can achieve the same effect with just:\n\n  system.img: $(DEXPREOPT_SYSTEMSERVER_ARTIFACTS)\n\n(I\u0027m not sure how to refer to system.img correctly.)",
+      "range": {
+        "startLine": 1464,
+        "startChar": 0,
+        "endLine": 1465,
+        "endChar": 46
+      },
+      "revId": "352d9b9ce1b5038c68953ed85db2d4055f209f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3abdc03_b56d2ad4",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-12T08:28:32Z",
+      "side": 1,
+      "message": "As I mentioned in the other CL, new direct dependencies will just be duplicates, which IMO do not provide much value when everything is good, and will conceal real problems. Besides, the custom check allows us to print a better error message than \"some files are missing\".",
+      "parentUuid": "e161908c_25cf6035",
       "range": {
         "startLine": 1464,
         "startChar": 0,
