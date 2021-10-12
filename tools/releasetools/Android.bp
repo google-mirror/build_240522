@@ -50,6 +50,7 @@ python_defaults {
     ],
     libs: [
         "releasetools_common",
+        "releasetools_fsverity_signer",
         "releasetools_verity_utils",
     ],
     required: [
@@ -284,6 +285,17 @@ python_library_host {
     defaults: [
         "releasetools_library_defaults",
         "releasetools_ota_from_target_files_defaults",
+    ],
+}
+
+python_library_host {
+    name: "releasetools_fsverity_signer",
+    defaults: ["releasetools_library_defaults"],
+    srcs: [
+        "fsverity_signer.py",
+    ],
+    required: [
+        "fsverity",
     ],
 }
 
