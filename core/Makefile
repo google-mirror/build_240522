@@ -1647,6 +1647,10 @@ define generate-image-prop-dictionary
 $(if $(filter $(2),system),\
     $(if $(INTERNAL_SYSTEM_OTHER_PARTITION_SIZE),$(hide) echo "system_other_size=$(INTERNAL_SYSTEM_OTHER_PARTITION_SIZE)" >> $(1))
     $(if $(PRODUCT_SYSTEM_HEADROOM),$(hide) echo "system_headroom=$(PRODUCT_SYSTEM_HEADROOM)" >> $(1))
+    $(if $(PRODUCT_SYSTEM_FSVERITY_SIGN_FILES),$(hide) echo "fsverity=$(HOST_OUT_EXECUTABLES)/fsverity" >> $(1))
+    $(if $(PRODUCT_SYSTEM_FSVERITY_SIGN_FILES),$(hide) echo "fsverity_sign_files=true" >> $(1))
+    $(if $(PRODUCT_SYSTEM_FSVERITY_SIGN_FILES),$(hide) echo "fsverity_sign_key=$(PRODUCT_SYSTEM_FSVERITY_SIGN_KEY)" >> $(1))
+    $(if $(PRODUCT_SYSTEM_FSVERITY_SIGN_FILES),$(hide) echo "fsverity_sign_cert=$(PRODUCT_SYSTEM_FSVERITY_SIGN_CERT)" >> $(1))
     $(call add-common-ro-flags-to-image-props,system,$(1))
 )
 $(if $(filter $(2),system_other),\

@@ -438,6 +438,27 @@ _product_single_value_vars += PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES
 # This option is only meant to be set by GSI products.
 _product_single_value_vars += PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
 
+# If set, following artifacts will be signed.
+# - system/framework/*.jar
+# - system/framework/oat/<arch>/*.{oat,vdex,art}
+# - system/etc/boot-image.prof
+# - system/etc/dirty-image-objects
+# - system/etc/updatable-bcp-packages.txt
+# One fsverity metadata container file per one input file will be generated in
+# system.img, with a suffix ".fsv_meta". e.g. a container file for
+# "/system/framework/foo.jar" will be "system/framework/foo.jar.fsv_meta".
+# Note: PRODUCT_SYSTEM_FSVERITY_SIGN_KEY and PRODUCT_SYSTEM_FSVERITY_SIGN_CERT
+#       must be set.
+_product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_SIGN_FILES
+
+# This is a path to a PKCS8 private key, in DER format. A test key for
+# development is in build/make/target/product/security/fsverity.pk8.
+_product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_SIGN_KEY
+
+# This is a path to a certificate, in PEM format. A test cert for development is
+# in build/make/target/product/security/fsverity.x509.pem.
+_product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_SIGN_CERT
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
