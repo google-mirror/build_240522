@@ -16,6 +16,23 @@
       "message": "ping @ccross for owner review",
       "revId": "9942f4e51eab8d51df8573e5ce96c56b906bcf0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d5a2e4_62a31b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-12T09:08:44Z",
+      "side": 1,
+      "message": "gentle ping again for owner code review. ",
+      "revId": "9942f4e51eab8d51df8573e5ce96c56b906bcf0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
