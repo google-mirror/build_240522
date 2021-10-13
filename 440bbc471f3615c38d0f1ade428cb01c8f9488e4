@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93822bb8_d036f14d",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-13T05:43:37Z",
+      "side": 1,
+      "message": "Done. Good to know.",
+      "parentUuid": "38bcebd7_63de766a",
+      "revId": "440bbc471f3615c38d0f1ade428cb01c8f9488e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b544028_e2a6c9b7",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-12T17:45:40Z",
       "side": 1,
       "message": "It\u0027d be useful to have a bit more commentary on which variables are involved and maybe the likely reasons the error below, to help users who get the error. If you describe it in some more detail in the Soong file then feel free to point to it here.",
+      "revId": "440bbc471f3615c38d0f1ade428cb01c8f9488e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c34e0ab_0dc45c58",
+        "filename": "core/dex_preopt_check.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-13T05:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b544028_e2a6c9b7",
       "revId": "440bbc471f3615c38d0f1ade428cb01c8f9488e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
