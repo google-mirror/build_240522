@@ -902,6 +902,7 @@ ifndef LOCAL_IS_HOST_MODULE
 ALL_MODULES.$(my_register_name).TARGET_BUILT := \
     $(ALL_MODULES.$(my_register_name).TARGET_BUILT) $(LOCAL_BUILT_MODULE)
 endif
+ALL_MODULES.$(my_register_name).PYTHON_VERSION := $(LOCAL_PYTHON_VERSION)
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 ALL_MODULES.$(my_register_name).INSTALLED := \
     $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
