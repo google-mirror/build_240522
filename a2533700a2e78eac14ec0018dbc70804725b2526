@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc99ee1_5c3cb36a",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T18:36:22Z",
+      "side": 1,
+      "message": "I think this is fine.  I don\u0027t see a use case (or really, benefit) to use different keys.",
+      "parentUuid": "f25349a7_9c933c90",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 446,
+        "endChar": 63
+      },
+      "revId": "a2533700a2e78eac14ec0018dbc70804725b2526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa0c4e24_8fa09983",
@@ -462,6 +486,30 @@
       "side": 1,
       "message": "I once heard that someone is working on to make a page 64KB.",
       "parentUuid": "015c37ac_c889ccb6",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 54
+      },
+      "revId": "a2533700a2e78eac14ec0018dbc70804725b2526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196b24c9_6c1bbf44",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T18:36:22Z",
+      "side": 1,
+      "message": "Memory page or filesystem block?  For block size other than 4096 to work, besides supporting it in fs-verity, each filesystem also needs to support non-4096 in the first place (or figuring out a way to convert between sizes).  We can easily add this when it\u0027s actually supported, but I doubt it will be in foreseeable future.\n\nBTW, since 4096 is the only possible value, it\u0027s the default value and can be omitted.",
+      "parentUuid": "bd09b289_cf6eb470",
       "range": {
         "startLine": 132,
         "startChar": 0,
