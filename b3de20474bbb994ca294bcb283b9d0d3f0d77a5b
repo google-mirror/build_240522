@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcf5e875_e529debe",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T19:03:47Z",
+      "side": 1,
+      "message": "BTW, I\u0027m not sure this is the best place, since we also need to reference to the proto from other projects (e.g. possibly system/security/ if you\u0027d later add a library that other clients can use).",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e38f900d_3a1ce5f2",
         "filename": "tools/releasetools/fsverity_digests.proto",
         "patchSetId": 1
