@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d78bce0_1b6291b2",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-13T02:37:36Z",
+      "side": 1,
+      "message": "argparse is used only when users separately invoke fsverity_signer.py. This default values are for build_image.py script which uses this class without argparse.",
+      "parentUuid": "8741a206_f690d398",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "a2533700a2e78eac14ec0018dbc70804725b2526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ff91079_33d7f4dd",
