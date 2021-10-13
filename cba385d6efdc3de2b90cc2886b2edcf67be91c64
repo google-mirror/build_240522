@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9846431a_10eb2112",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-10-13T15:20:28Z",
+      "side": 1,
+      "message": "A comment on this condition could be useful. (I reckon it\u0027s a more accurate alternative to `ifeq (,$(TARGET_BUILD_UNBUNDLED))`, but I\u0027m not sure.)",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "cba385d6efdc3de2b90cc2886b2edcf67be91c64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82206232_13cf9122",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-10-13T15:20:28Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t point this out earlier, but there\u0027s a convenient function maybe-print-list-and-error that prints an error and a nicely formatted list if it isn\u0027t empty. You could use that with `$(filter-out $(ALL_DEFAULT_INSTALLED_MODULES),$(DEXPREOPT_SYSTEMSERVER_ARTIFACTS))`.",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 68
+      },
+      "revId": "cba385d6efdc3de2b90cc2886b2edcf67be91c64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
