@@ -292,11 +292,15 @@ python_library_host {
     name: "releasetools_fsverity_signer",
     defaults: ["releasetools_library_defaults"],
     srcs: [
+        "fsverity_digests.proto",
         "fsverity_signer.py",
     ],
     required: [
         "fsverity",
     ],
+    proto: {
+        canonical_path_from_root: false,
+    },
 }
 
 python_library_host {

@@ -93,6 +93,12 @@ class FSVeritySigner:
       f.seek(offset + header_len)
       return f.read(size)
 
+  def digest(self, input_file):
+    cmd = [self._fsverity_path, 'digest', input_file]
+    cmd.extend(['--compact'])
+    cmd.extend(['--hash-alg', self._hash_alg])
+    return subprocess.check_output(cmd, universal_newlines=True).strip()
+
   def sign(self, input_file, output_file=None):
     if not self._key:
       raise RuntimeError("key must be specified.")
