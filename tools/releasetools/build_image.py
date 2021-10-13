@@ -35,6 +35,7 @@ import sys
 import common
 import verity_utils
 
+from fsverity_digests_pb2 import FSVerityDigests
 from fsverity_signer import FSVeritySigner
 
 logger = logging.getLogger(__name__)
@@ -450,6 +451,81 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
 
   return mkfs_output
 
+def SignFSVerityFiles(in_dir, fsverity_path, key_path, cert_path, apk_key_path, apk_manifest_path, apk_out_path):
+  """Signs files globbed by patterns, and generates fsverity metadata files.
+
+  By setting PRODUCT_SYSTEM_FSVERITY_SIGN_FILES := true, the following files
+  under the system partition will be signed with given key and given cert.
+
+  - system/framework/*.jar
+  - system/framework/oat/*/*.oat
+  - system/framework/oat/*/*.vdex
+  - system/framework/oat/*/*.art
+  - system/etc/boot-image.prof
+  - system/etc/dirty-image-objects
+  - system/etc/updatable-bcp-packages.txt
+
+  One metadata file per one input file will be generated with the suffix
+  .fsv_meta. e.g. system/framework/foo.jar -> system/framework/foo.jar.fsv_meta
+  Also a mapping file containing fsverity digests will be generated to
+  system/etc/security/fsverity/BuildManifest.apk.
+
+  Args:
+    in_dir: temporary working directory (same as BuildImage)
+    fsverity_path: path to host tool fsverity
+    key_path: path to private key file, in DER format
+    cert_path: path to certificate file, in PEM format
+    apk_key_path: path to key (e.g. build/make/target/product/security/platform)
+    apk_manifest_path: path to AndroidManifest.xml for APK
+    apk_out_path: path to the output APK
+
+  Returns:
+    None. The files are generated directly under in_dir.
+  """
+
+  patterns = [
+    "system/framework/*.jar",
+    "system/framework/oat/*/*.oat",
+    "system/framework/oat/*/*.vdex",
+    "system/framework/oat/*/*.art",
+    "system/etc/boot-image.prof",
+    "system/etc/dirty-image-objects",
+    "system/etc/updatable-bcp-packages.txt",
+  ]
+  files = []
+  for pattern in patterns:
+    files += glob.glob(os.path.join(in_dir, pattern))
+  files = sorted(set(files))
+
+  signer = FSVeritySigner(fsverity_path)
+  signer.set_key(key_path)
+  signer.set_cert(cert_path)
+  signer.set_hash_alg("sha256")
+
+  digests = FSVerityDigests()
+  for f in files:
+    signer.sign(f)
+    # f is a full path for now; make it relative so it starts with {mount_point}/
+    digest = digests.digests[os.path.relpath(f, in_dir)]
+    digest.digest = signer.digest(f)
+    digest.hash_alg = "sha256"
+
+  temp_dir = common.MakeTempDir()
+
+  os.mkdir(os.path.join(temp_dir, "assets"))
+  metadata_path = os.path.join(temp_dir, "assets", "build_manifest")
+  with open(metadata_path, "wb") as f:
+    f.write(digests.SerializeToString())
+
+  apk_path = os.path.join(in_dir, apk_out_path)
+
+  common.RunAndCheckOutput(["aapt2", "link",
+      "-A", os.path.join(temp_dir, "assets"),
+      "-o", apk_path,
+      "--manifest", apk_manifest_path])
+  common.RunAndCheckOutput(["apksigner", "sign", "--in", apk_path,
+      "--cert", apk_key_path + ".x509.pem",
+      "--key", apk_key_path + ".pk8"])
 
 def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   """Builds an image for the files under in_dir and writes it to out_file.
@@ -479,26 +555,13 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     fs_spans_partition = False
 
   if "fsverity_sign_files" in prop_dict:
-    patterns = [
-      "system/framework/*.jar",
-      "system/framework/oat/*/*.oat",
-      "system/framework/oat/*/*.vdex",
-      "system/framework/oat/*/*.art",
-      "system/etc/boot-image.prof",
-      "system/etc/dirty-image-objects",
-      "system/etc/updatable-bcp-packages.txt",
-    ]
-    files = []
-    for pattern in patterns:
-      files += glob.glob(os.path.join(in_dir, pattern))
-    files = sorted(set(files))
-
-    signer = FSVeritySigner(prop_dict["fsverity"])
-    signer.set_key(prop_dict["fsverity_sign_key"])
-    signer.set_cert(prop_dict["fsverity_sign_cert"])
-
-    for f in files:
-      signer.sign(f)
+    SignFSVerityFiles(in_dir,
+        fsverity_path=prop_dict["fsverity"],
+        key_path=prop_dict["fsverity_sign_key"],
+        cert_path=prop_dict["fsverity_sign_cert"],
+        apk_key_path=prop_dict["fsverity_apk_key"],
+        apk_manifest_path=prop_dict["fsverity_apk_manifest"],
+        apk_out_path=prop_dict["fsverity_apk_out"])
 
   # Get a builder for creating an image that's to be verified by Verified Boot,
   # or None if not applicable.
@@ -753,6 +816,9 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("fsverity_sign_files", "fsverity_sign_files")
     copy_prop("fsverity_sign_key", "fsverity_sign_key")
     copy_prop("fsverity_sign_cert", "fsverity_sign_cert")
+    copy_prop("fsverity_apk_key","fsverity_apk_key")
+    copy_prop("fsverity_apk_manifest","fsverity_apk_manifest")
+    copy_prop("fsverity_apk_out","fsverity_apk_out")
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
     copy_prop("flash_logical_block_size", "flash_logical_block_size")
