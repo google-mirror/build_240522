@@ -2778,7 +2778,7 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 $(BUILT_SYSTEMIMAGE): $(BOARD_AVB_SYSTEM_KEY_PATH)
 endif
 ifeq ($(PRODUCT_SYSTEM_FSVERITY_SIGN_FILES),true)
-$(BUILT_SYSTEMIMAGE): $(HOST_OUT_EXECUTABLES)/fsverity
+$(BUILT_SYSTEMIMAGE): $(HOST_OUT_EXECUTABLES)/fsverity $(HOST_OUT_EXECUTABLES)/aapt2 system/security/fsverity/AndroidManifest.xml
 endif
 $(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
 	$(call build-systemimage-target,$@)

@@ -35,6 +35,7 @@ import sys
 import common
 import verity_utils
 
+from fsverity_digests_pb2 import FSVerityDigests
 from fsverity_signer import FSVeritySigner
 
 logger = logging.getLogger(__name__)
@@ -496,9 +497,33 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     signer = FSVeritySigner(prop_dict["fsverity"])
     signer.set_key(prop_dict["fsverity_sign_key"])
     signer.set_cert(prop_dict["fsverity_sign_cert"])
+    signer.set_hash_alg("sha256")
 
+    digests = FSVerityDigests()
     for f in files:
       signer.sign(f)
+      # f is a full path for now; make it relative so it starts with {mount_point}/
+      digest = digests.digests[os.path.relpath(f, in_dir)]
+      digest.digest = signer.digest(f)
+      digest.hash_alg = "sha256"
+
+    temp_dir = common.MakeTempDir()
+
+    os.mkdir(os.path.join(temp_dir, "assets"))
+    metadata_path = os.path.join(temp_dir, "assets", "build_manifest")
+    with open(metadata_path, "wb") as f:
+      f.write(digests.SerializeToString())
+
+    fsverity_dir = os.path.join(in_dir, "system/etc/security/fsverity")
+    if not os.path.isdir(fsverity_dir):
+      os.makedirs(fsverity_dir)
+    apk_path = os.path.join(fsverity_dir, "BuildManifest.apk")
+    manifest_path = "system/security/fsverity/AndroidManifest.xml"
+
+    common.RunAndCheckOutput(["aapt2", "link", "-A", os.path.join(temp_dir, "assets"), "-o", apk_path, "--manifest", manifest_path])
+    common.RunAndCheckOutput(["apksigner", "sign", "--in", apk_path,
+        "--cert", "build/make/target/product/security/platform.x509.pem",
+        "--key", "build/make/target/product/security/platform.pk8"])
 
   # Get a builder for creating an image that's to be verified by Verified Boot,
   # or None if not applicable.
