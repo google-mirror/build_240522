@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ac9236_44cf40c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-13T06:06:19Z",
+      "side": 1,
+      "message": "For python2/python3 compatibility, I found that I have to use universal_newlines, instead of encoding, when using subprocess.check_output. ",
+      "revId": "fb28810aee7256ceabee0b58ddb35fdabe1e8f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
