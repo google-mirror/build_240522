@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f25349a7_9c933c90",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-13T02:27:26Z",
+      "side": 1,
+      "message": "It\u0027s a question that Victor can answer.",
+      "parentUuid": "0c599a22_0fd74f27",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 446,
+        "endChar": 63
+      },
+      "revId": "a2533700a2e78eac14ec0018dbc70804725b2526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa0c4e24_8fa09983",
         "filename": "tools/releasetools/fsverity_signer.py",
         "patchSetId": 1
@@ -390,6 +414,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "23264067_40731927",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 54
+      },
+      "revId": "a2533700a2e78eac14ec0018dbc70804725b2526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd09b289_cf6eb470",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-13T02:27:26Z",
+      "side": 1,
+      "message": "I once heard that someone is working on to make a page 64KB.",
+      "parentUuid": "015c37ac_c889ccb6",
       "range": {
         "startLine": 132,
         "startChar": 0,
