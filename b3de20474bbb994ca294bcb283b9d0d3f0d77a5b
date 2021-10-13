@@ -22,6 +22,76 @@
       },
       "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb243c90_ecb4abf1",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T18:49:35Z",
+      "side": 1,
+      "message": "CompOS will use it.  Technically other VMs could also use it if they don\u0027t trust the client, and happens to need to access files in the list.  I think it only makes sense to use in VMs since otherwise files in /system are simply considered legitimate.",
+      "parentUuid": "688196a1_b030abf8",
+      "range": {
+        "startLine": 495,
+        "startChar": 36,
+        "endLine": 495,
+        "endChar": 79
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38f900d_3a1ce5f2",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T18:49:35Z",
+      "side": 1,
+      "message": "Can this be `bytes` (with some decoding)?  Most likely, the client needs to compare a byte array with this.",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22377a2a_6312d8d3",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-13T18:49:35Z",
+      "side": 1,
+      "message": "Could this be `map\u003cstring, Digest\u003e file_digests`? It\u0027s just easier to access from the client.",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
