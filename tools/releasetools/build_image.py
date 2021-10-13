@@ -35,6 +35,7 @@ import sys
 import common
 import verity_utils
 
+from fsverity_digests_pb2 import FSVerityDigests
 from fsverity_signer import FSVeritySigner
 
 logger = logging.getLogger(__name__)
@@ -496,9 +497,18 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     signer = FSVeritySigner(prop_dict["fsverity"])
     signer.set_key(prop_dict["fsverity_sign_key"])
     signer.set_cert(prop_dict["fsverity_sign_cert"])
+    signer.set_hash_alg("sha256")
 
+    digests = FSVerityDigests()
     for f in files:
       signer.sign(f)
+      # f is a full path for now; make it relative so it starts with {mount_point}/
+      digest = digests.digests[os.path.relpath(f, in_dir)]
+      digest.digest = signer.digest(f)
+      digest.hash_alg = "sha256"
+
+    with open(os.path.join(in_dir, "system/etc/security/fsverity/build_manifest"), "w") as f:
+      f.write(digests.SerializeToString())
 
   # Get a builder for creating an image that's to be verified by Verified Boot,
   # or None if not applicable.
