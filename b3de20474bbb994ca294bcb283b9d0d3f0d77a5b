@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688196a1_b030abf8",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-13T06:38:14Z",
+      "side": 1,
+      "message": "Why is this needed? Who will be using this?",
+      "range": {
+        "startLine": 495,
+        "startChar": 36,
+        "endLine": 495,
+        "endChar": 79
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
