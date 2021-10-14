@@ -22,6 +22,30 @@
       },
       "revId": "9dca09b4a0468080d61db1206f424cfce8ca9b75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffea7cf6_8338b689",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-14T09:01:38Z",
+      "side": 1,
+      "message": "Let me fix that, I also feel weird about that.",
+      "parentUuid": "07f1a8b4_62e2d5bb",
+      "range": {
+        "startLine": 692,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 12
+      },
+      "revId": "9dca09b4a0468080d61db1206f424cfce8ca9b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
