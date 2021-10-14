@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f1a8b4_62e2d5bb",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-14T08:28:42Z",
+      "side": 1,
+      "message": "This indentation looks VERY weird to me, but since this is the norm in this file...",
+      "range": {
+        "startLine": 692,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 12
+      },
+      "revId": "9dca09b4a0468080d61db1206f424cfce8ca9b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
