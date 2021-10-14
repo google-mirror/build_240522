@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb23e4d3_705a8975",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-14T05:12:43Z",
+      "side": 1,
+      "message": "Added a comment.\n\nChecking PRODUCT_PACKAGES and checking TARGET_BUILD_UNBUNDLED are orthogonal. TARGET_BUILD_UNBUNDLED is determined by the user (or the script that the user uses), while PRODUCT_PACKAGES is determined by the product. There is a build_test that tests `m nothing` on `module_arm` without `TARGET_BUILD_UNBUNDLED`, so `ifneq (,$(filter services,$(PRODUCT_PACKAGES)))` is necessary to prevent the test from failing.\n\nChecking TARGET_BUILD_UNBUNDLED is already done in the Soong phase (please see the other CL), but checking PRODUCT_PACKAGES can only be done here because PRODUCT_PACKAGES isn\u0027t known to Soong.",
+      "parentUuid": "9846431a_10eb2112",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "cba385d6efdc3de2b90cc2886b2edcf67be91c64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82206232_13cf9122",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-13T15:20:28Z",
       "side": 1,
       "message": "Sorry I didn\u0027t point this out earlier, but there\u0027s a convenient function maybe-print-list-and-error that prints an error and a nicely formatted list if it isn\u0027t empty. You could use that with `$(filter-out $(ALL_DEFAULT_INSTALLED_MODULES),$(DEXPREOPT_SYSTEMSERVER_ARTIFACTS))`.",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 68
+      },
+      "revId": "cba385d6efdc3de2b90cc2886b2edcf67be91c64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7c5b50_3a975b17",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-14T05:12:43Z",
+      "side": 1,
+      "message": "Good to know. Thanks!",
+      "parentUuid": "82206232_13cf9122",
       "range": {
         "startLine": 11,
         "startChar": 4,
