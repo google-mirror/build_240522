@@ -46,6 +46,30 @@
       },
       "revId": "9dca09b4a0468080d61db1206f424cfce8ca9b75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b086f7a_1303a030",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-14T09:03:12Z",
+      "side": 1,
+      "message": "I think it\u0027s fine(?) RN, as it fits the style of this file. Changing the indent on this line only would still look weird because other lines still have this hanging indent",
+      "parentUuid": "ffea7cf6_8338b689",
+      "range": {
+        "startLine": 692,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 12
+      },
+      "revId": "9dca09b4a0468080d61db1206f424cfce8ca9b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
