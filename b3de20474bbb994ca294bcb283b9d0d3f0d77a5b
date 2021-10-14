@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ad2132e_498774ef",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-14T00:54:29Z",
+      "side": 1,
+      "message": "Do you mean that this file (or its content) will be sent to the VM, and VM will use it to check the integrity of the files listed? Then how VM can be sure about integrity of the digests themselves?",
+      "parentUuid": "cb243c90_ecb4abf1",
+      "range": {
+        "startLine": 495,
+        "startChar": 36,
+        "endLine": 495,
+        "endChar": 79
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcf5e875_e529debe",
         "filename": "tools/releasetools/fsverity_digests.proto",
         "patchSetId": 1
