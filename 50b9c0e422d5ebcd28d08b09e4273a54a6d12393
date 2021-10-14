@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c53be9_3d387cfa",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-14T06:58:26Z",
+      "side": 1,
+      "message": "Should not sign userdebug sepolicy file.",
+      "range": {
+        "startLine": 689,
+        "startChar": 6,
+        "endLine": 689,
+        "endChar": 37
+      },
+      "revId": "50b9c0e422d5ebcd28d08b09e4273a54a6d12393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ee3b5b_f0d72eba",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-14T06:58:26Z",
+      "side": 1,
+      "message": "is this extra? Other file names don\u0027t have this leading slash?",
+      "range": {
+        "startLine": 691,
+        "startChar": 9,
+        "endLine": 691,
+        "endChar": 10
+      },
+      "revId": "50b9c0e422d5ebcd28d08b09e4273a54a6d12393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
