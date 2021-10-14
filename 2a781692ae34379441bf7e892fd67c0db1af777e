@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b899bd_03c7222c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-10-14T23:43:27Z",
+      "side": 1,
+      "message": "I assume it won\u0027t affect normal signing, as their target-files cannot be userdebug..",
+      "revId": "2a781692ae34379441bf7e892fd67c0db1af777e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
