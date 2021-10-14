@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "591463d6_58c5d5b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-10-14T10:19:20Z",
+      "side": 1,
+      "message": "Nice, guess the S push made this redundant. Can you please cp to sc-mainline-prod too?",
+      "revId": "83ac8b74819c42b6f5a6fc555fc10d623f5aa79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
