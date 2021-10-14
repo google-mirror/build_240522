@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f30bced3_5b4c6a40",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-10-14T11:37:41Z",
+      "side": 1,
+      "message": "Yes, module_arm is a product for building modules only, so it should probably set TARGET_BUILD_UNBUNDLED.",
+      "parentUuid": "eb23e4d3_705a8975",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "cba385d6efdc3de2b90cc2886b2edcf67be91c64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82206232_13cf9122",
