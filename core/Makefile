@@ -2286,6 +2286,19 @@ endif
 
 
 # -----------------------------------------------------------------
+# Export userdebug_plat_sepolicy.cil to facilitate VTS testing.
+INTERNAL_USERDEBUG_PLAT_SEPOLICY_CIL_FILE := $(strip \
+  $(filter $(TARGET_DEBUG_RAMDISK_OUT)/userdebug_plat_sepolicy.cil, \
+    $(ALL_DEFAULT_INSTALLED_MODULES)))
+
+ifdef INTERNAL_USERDEBUG_PLAT_SEPOLICY_CIL_FILE
+  INSTALLED_USERDEBUG_PLAT_SEPOLICY_CIL_FILE := $(PRODUCT_OUT)/userdebug_plat_sepolicy.cil
+  $(INSTALLED_USERDEBUG_PLAT_SEPOLICY_CIL_FILE): $(INTERNAL_USERDEBUG_PLAT_SEPOLICY_CIL_FILE)
+	$(copy-file-to-target)
+endif # INTERNAL_USERDEBUG_PLAT_SEPOLICY_CIL_FILE
+
+
+# -----------------------------------------------------------------
 # Build debug ramdisk and debug boot image.
 ifneq ($(BUILDING_DEBUG_BOOT_IMAGE)$(BUILDING_DEBUG_VENDOR_BOOT_IMAGE),)
 
