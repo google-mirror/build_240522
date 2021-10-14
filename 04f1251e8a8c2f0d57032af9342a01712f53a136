@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7185a0a_2c4271b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-14T10:45:34Z",
+      "side": 1,
+      "message": "to keep this in sync with rvc-gsi-dev",
+      "revId": "04f1251e8a8c2f0d57032af9342a01712f53a136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
