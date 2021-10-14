@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed207ee5_a4b5c557",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-14T04:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "859edfd2_68d79c69",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 491,
+        "endChar": 26
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "688196a1_b030abf8",
@@ -118,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e042298_e9535fc6",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-14T04:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcf5e875_e529debe",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e38f900d_3a1ce5f2",
@@ -141,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe9523a0_3cab1e6d",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-14T04:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e38f900d_3a1ce5f2",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22377a2a_6312d8d3",
@@ -154,6 +226,30 @@
       "writtenOn": "2021-10-13T18:49:35Z",
       "side": 1,
       "message": "Could this be `map\u003cstring, Digest\u003e file_digests`? It\u0027s just easier to access from the client.",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b16cd114_d92f3364",
+        "filename": "tools/releasetools/fsverity_digests.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-14T04:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22377a2a_6312d8d3",
       "range": {
         "startLine": 27,
         "startChar": 2,
