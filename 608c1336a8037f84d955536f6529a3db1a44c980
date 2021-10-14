@@ -39,6 +39,30 @@
       },
       "revId": "608c1336a8037f84d955536f6529a3db1a44c980",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc8bd62_6786f4ca",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-14T16:45:05Z",
+      "side": 1,
+      "message": "The total number of assignments to SOONG_CONFIG_xxx in the internal source tree is 18, plus there are 13 calls to add_soong_config_var_value, and none of them are inside foreach, so the list to be sorted aren\u0027t that long. Perhaps it\u0027s the confusion with the similarly named PRODUCT_SOONG_NAMESPACES?",
+      "parentUuid": "47114fe0_51e90c57",
+      "range": {
+        "startLine": 293,
+        "startChar": 34,
+        "endLine": 293,
+        "endChar": 40
+      },
+      "revId": "608c1336a8037f84d955536f6529a3db1a44c980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
