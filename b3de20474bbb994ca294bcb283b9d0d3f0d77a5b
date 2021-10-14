@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6679e7_b2f9a9fb",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-14T23:19:14Z",
+      "side": 1,
+      "message": "This file needs to be signed by OEM\u0027s key, which should be part of CompOS VM\u0027s CDI.  It\u0027d be easier if microdroid can deal with this (and arguably it\u0027s the right place than the app layer), but we can discuss the details offline.",
+      "parentUuid": "8ad2132e_498774ef",
+      "range": {
+        "startLine": 495,
+        "startChar": 36,
+        "endLine": 495,
+        "endChar": 79
+      },
+      "revId": "b3de20474bbb994ca294bcb283b9d0d3f0d77a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcf5e875_e529debe",
