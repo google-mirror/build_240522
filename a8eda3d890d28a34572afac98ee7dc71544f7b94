@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71369f5_d069a992",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-15T19:22:05Z",
+      "side": 1,
+      "message": "Thanks I think the method you propose works better, I\u0027ll abandon this.",
+      "parentUuid": "cb17bc85_41b37e36",
+      "revId": "a8eda3d890d28a34572afac98ee7dc71544f7b94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd44d474_985cdaa8",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-15T18:47:43Z",
       "side": 1,
       "message": "This will force this file to be built and installed on all builds, is that what you want?",
+      "revId": "a8eda3d890d28a34572afac98ee7dc71544f7b94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae9ea4b_65a1f4ef",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1622,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-15T19:22:05Z",
+      "side": 1,
+      "message": "Yes, just like boot-debug/vendor_boot-debug is build whenever possible, I\u0027d like to install this file unconditionally (in order to keep the logic simple, no extra lever and switches to control this).\nThe file is just a plain text file (~1.9M uncompressed), so I think the overhead for regular device build is not much, if not unnoticeable, (the build artifacts must be somehow compressed in our blob storage, right?)\nFor GSI build, this change would be a net gain due to there\u0027s no need to build boot-debug-*.img on GSI anymore, yay.",
+      "parentUuid": "cd44d474_985cdaa8",
       "revId": "a8eda3d890d28a34572afac98ee7dc71544f7b94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
