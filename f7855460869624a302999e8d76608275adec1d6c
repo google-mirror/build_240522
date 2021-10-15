@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edb958a_435d770d",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-15T23:08:27Z",
+      "side": 1,
+      "message": "True but a shell script that\u0027s only does one thing and is only used in one place isn\u0027t very useful. I\u0027d like to just keep the mk2rbc/rbcrun calls here if it\u0027s ok with you.",
+      "parentUuid": "c7c9dae9_156e5cad",
+      "revId": "f7855460869624a302999e8d76608275adec1d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39923539_4c64a2ac",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-15T22:17:22Z",
       "side": 1,
       "message": "Perhaps in addition to _product_single_value_vars we can have _board_vars, write  name\u003dvalue pairs to a file and then the script will convert them to the rbcrun arguments. This way a variable to be passed can be set as such where it\u0027s defined rather than having all of them piled up here.",
+      "revId": "f7855460869624a302999e8d76608275adec1d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d067b316_686dffde",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-15T23:08:27Z",
+      "side": 1,
+      "message": "I\u0027m working on a followup cl to this one that passes all global variables (that match [A-Z][A-Z0-9_]*) to the board config. The additional variables in this cl are just so we have an example product that this cl makes work, I\u0027ll remove them after the followup cl is done.",
+      "parentUuid": "39923539_4c64a2ac",
       "revId": "f7855460869624a302999e8d76608275adec1d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
