@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c9dae9_156e5cad",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-15T22:17:22Z",
+      "side": 1,
+      "message": "I wasn\u0027t proposing to have _the same_ script both for the product config and board config, I am just not very fond of multiple shell invocations.",
+      "revId": "f7855460869624a302999e8d76608275adec1d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39923539_4c64a2ac",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-15T22:17:22Z",
+      "side": 1,
+      "message": "Perhaps in addition to _product_single_value_vars we can have _board_vars, write  name\u003dvalue pairs to a file and then the script will convert them to the rbcrun arguments. This way a variable to be passed can be set as such where it\u0027s defined rather than having all of them piled up here.",
+      "revId": "f7855460869624a302999e8d76608275adec1d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
