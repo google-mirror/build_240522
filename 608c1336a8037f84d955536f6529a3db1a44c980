@@ -63,6 +63,30 @@
       },
       "revId": "608c1336a8037f84d955536f6529a3db1a44c980",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddfe8ce3_7c5c0aaf",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-10-15T10:14:28Z",
+      "side": 1,
+      "message": "it\u0027s a pattern that\u0027s caused performance bottlenecks in the past, in general it seems like a good idea to stay from (I know of some plans to start using soong config namespaces for more things than they are used for currently).",
+      "parentUuid": "9bc8bd62_6786f4ca",
+      "range": {
+        "startLine": 293,
+        "startChar": 34,
+        "endLine": 293,
+        "endChar": 40
+      },
+      "revId": "608c1336a8037f84d955536f6529a3db1a44c980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
