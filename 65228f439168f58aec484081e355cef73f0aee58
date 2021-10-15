@@ -16,6 +16,24 @@
       "message": "This is going to require product files to list a bunch of implementation details like where oat files are stored.  Can we make this something higher level instead, like PRODUCT_SYSTEM_FSVERITY_SIGN_OAT_FILES :\u003d true, which the build system can translate to the appropriate globs?",
       "revId": "65228f439168f58aec484081e355cef73f0aee58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d03f171_cea5c68d",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-15T19:23:44Z",
+      "side": 1,
+      "message": "Or rather, how about keeping this private in the build system, i.e. make it not customizable by products?  We\u0027re only interested in specific files (b/193113311#comment11).  If there is demand in the longer term, we could introduce PRODUCT_SYSTEM_FSVERITY_SIGN_ADDITIONA_FILES.  WDYT?",
+      "parentUuid": "83d25964_7b959097",
+      "revId": "65228f439168f58aec484081e355cef73f0aee58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
