@@ -16,6 +16,24 @@
       "message": "I assume it won\u0027t affect normal signing, as their target-files cannot be userdebug..",
       "revId": "2a781692ae34379441bf7e892fd67c0db1af777e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6baa63b_da5674aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-15T02:51:43Z",
+      "side": 1,
+      "message": "Right, the target-files won\u0027t be userdebug.\n\nBut we did add /system/system_ext/etc/selinux/userdebug_plat_sepolicy.cil into gsi_* user build.\n\nhttps://android-review.googlesource.com/c/platform/build/+/1825193/3/core/product_config.mk \n Note: although the above CL is reverted, but it was also relanded later.\n \nThis CL adds a check that no other targets (except gsi_arm gsi_arm64 gsi_x86 gsi_x86_64) should include \u0027/system/system_ext/etc/selinux/userdebug_plat_sepolicy.cil\u0027 in the user build.\n\nHope that clarifies.",
+      "parentUuid": "37b899bd_03c7222c",
+      "revId": "2a781692ae34379441bf7e892fd67c0db1af777e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
