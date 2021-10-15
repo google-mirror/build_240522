@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e50e42ba_5804e986",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-15T23:58:24Z",
+      "side": 0,
+      "message": "On a second thought, how about change this to gsi_*?\n\nSo if someone accidentally set PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT for a non-GSI target, they will get the build break in the first place?\n\nNote that sign_target_files_apks from https://r.android.com/1856274 is a reference signing tool in AOSP. Partners might not use it and might have their own signing tools.",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 54
+      },
+      "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
