@@ -70,6 +70,30 @@
       },
       "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a845e02e_07d3d411",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-16T18:07:42Z",
+      "side": 0,
+      "message": "\u003e I think many of the targets will finally get release signed, no?\n\nI was thinking about -userdebug builds actually, it might be valuable for non-GSI userdebug targets to use PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT and it\u0027s harmless for them to do so as they are never release signed.\n\n\u003e Build break looks a direct and clear message to me. \n(Or do we have other method to remind or check this programmatically?)\n\nYeah I agree build break conveys the message best, as warnings get ignored 11 out of 10 times ...\n\n\u003e Not really, we still can prevent, e.g., our internal aosp_arm64 from including /system/system_ext/etc/selinux/userdebug_plat_sepolicy.cil\n\nThis leads to my next point. what if we do want to add them to other products? we already have on-going conversation to do this eventually (the email). I also plan to add this to aosp_arm64-*userdebug* for convenience of development. Everytime we add new target we need to add to this list, and create more potential merge conflict across branches. I just feel like this check cripples our productivity, while people outside of Google could just edit out and ignore that check. that doesn\u0027t sound very useful right?\n\n\u003e What we can do is only to prevent 1) but not 2)\n\nMy point is preventing (1) with build break is annoying; OTOH sign_target_files_apk also prevents (1), albeit less direct, and I think this is good tradeoff as this check right now is annoying and doesn\u0027t scale.\n\nOr we should just turn this from error to warning, since we only want to inform unintentional usage? (though it\u0027s likely ignored anyway)😔",
+      "parentUuid": "0c599187_46316cb2",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 54
+      },
+      "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
