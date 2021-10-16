@@ -46,6 +46,30 @@
       },
       "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c599187_46316cb2",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-10-16T16:40:44Z",
+      "side": 0,
+      "message": "\u003e setting this shouldn\u0027t be a breakage, as long as the image is not release signed.\n\nI think many of the targets will finally get release signed, no?\n(e.g., at leat \u003e 50%?).\n\nMy main intention here is to notify someone, if they accidentally set PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT, without really know what\u0027s the implication behind. Build break looks a direct and clear message to me. \n(Or do we have other method to remind or check this programmatically?)\n\n\u003e them there\u0027s no point for us implementing this check, \n\nNot really, we still can prevent, e.g., our internal aosp_arm64 from including /system/system_ext/etc/selinux/userdebug_plat_sepolicy.cil. Or other gsi targets that if they don\u0027t want to up-in PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT.\n\n\u003e because they can just remove this line in their local tree\n\nI think we have to separate two cases: \n  1) they accidentally do this or\n  2) they intentionally do this. \n  \n  What we can do is only to prevent 1) but not 2).\n  \n  Thoughts?",
+      "parentUuid": "d2f546be_e6de648a",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 54
+      },
+      "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
