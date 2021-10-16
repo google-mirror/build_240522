@@ -22,6 +22,30 @@
       },
       "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f546be_e6de648a",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-10-16T07:45:07Z",
+      "side": 0,
+      "message": "Globbing gsi_* could also include non-phone-GSI products in downstream branches, which contains god-knows-what product names.\n\nI think the problem with the current check is that people could get a build break whether this is set intentionally or not.\n\nThe main take of this change is, whether intentionally or not, setting this shouldn\u0027t be a breakage, as long as the image is not release signed. (in fact this  already is a redundant check, because for \nPRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT to work, the device need to be unlocked or AVB disabled anyway, because vendor_boot-debug mustn\u0027t be signed)\n\n------\n\nIf they could be using their own signing tool, them there\u0027s no point for us implementing this check, because they can just remove this line in their local tree",
+      "parentUuid": "e50e42ba_5804e986",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 54
+      },
+      "revId": "88cceca4c52255d283644b9a135b8092d73e3214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
