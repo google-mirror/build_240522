@@ -27,6 +27,11 @@ combo_os_arch := $($(combo_target)OS)-$($(combo_target)$(combo_2nd_arch_prefix)A
 combo_var_prefix := $(combo_2nd_arch_prefix)$(combo_target)
 
 # Set reasonable defaults for the various variables
+ifeq ($(combo_target),HOST_CROSS_)
+$(combo_var_prefix)GLOBAL_ARFLAGS = $(error HOST_CROSS builds are not supported in Make)
+$(combo_var_prefix)STATIC_LIB_SUFFIX = $(error HOST_CROSS builds are not supported in Make)
+$(combo_var_prefix)transform-shared-lib-to-toc = $(error HOST_CROSS builds are not supported in Make)
+else
 
 $(combo_var_prefix)GLOBAL_ARFLAGS := crsPD -format=gnu
 
@@ -34,3 +39,5 @@ $(combo_var_prefix)STATIC_LIB_SUFFIX := .a
 
 # Now include the combo for this specific target.
 include $(BUILD_COMBOS)/$(combo_target)$(combo_os_arch).mk
+
+endif
