@@ -1050,6 +1050,7 @@ class SignApk {
         boolean signUsingApkSignatureSchemeV2 = true;
         boolean signUsingApkSignatureSchemeV4 = false;
         SigningCertificateLineage certLineage = null;
+        Integer rotationMinSdkVersion = null;
 
         int argstart = 0;
         while (argstart < args.length && args[argstart].startsWith("-")) {
@@ -1090,6 +1091,15 @@ class SignApk {
                 } catch (Exception e) {
                     throw new IllegalArgumentException(
                             "Error reading lineage file: " + e.getMessage());
+                }
+                ++argstart;
+            } else if ("--rotation-min-sdk-version".equals(args[argstart])) {
+                String rotationMinSdkVersionString = args[++argstart];
+                try {
+                    rotationMinSdkVersion = Integer.parseInt(rotationMinSdkVersionString);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException(
+                            "--rotation-min-sdk-version must be a decimal number: " + rotationMinSdkVersionString);
                 }
                 ++argstart;
             } else {
@@ -1175,6 +1185,11 @@ class SignApk {
                     }
                 }
 
+                if (rotationMinSdkVersion == null) {
+                  // Default to minSdkVersion if --rotation-min-sdk-version is not specified
+                  rotationMinSdkVersion = minSdkVersion;
+                }
+
                 try (ApkSignerEngine apkSigner =
                         new DefaultApkSignerEngine.Builder(
                                 createSignerConfigs(privateKey, publicKey), minSdkVersion)
@@ -1183,6 +1198,7 @@ class SignApk {
                                 .setOtherSignersSignaturesPreserved(false)
                                 .setCreatedBy("1.0 (Android SignApk)")
                                 .setSigningCertificateLineage(certLineage)
+                                .setMinSdkVersionForRotation(rotationMinSdkVersion)
                                 .build()) {
                     // We don't preserve the input APK's APK Signing Block (which contains v2
                     // signatures)
