@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ef9b3e_76ba2746",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T15:52:30Z",
+      "side": 1,
+      "message": "(Oh, I\u0027m sorry.  I thought PRODUCT_SYSTEM_FSVERITY_SIGN_FILES defines the patterns, but it looks like a boolean.  But anyway.)\n\nDo we still need this condition / should we remove PRODUCT_SYSTEM_FSVERITY_SIGN_FILES?  Or is this a temporary flag?",
+      "range": {
+        "startLine": 481,
+        "startChar": 2,
+        "endLine": 481,
+        "endChar": 40
+      },
+      "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
