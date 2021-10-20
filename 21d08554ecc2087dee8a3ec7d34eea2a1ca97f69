@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f08c64cd_a910ab77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-20T17:05:29Z",
+      "side": 1,
+      "message": "Is there a use case for this?  I worry it will get used to add glob patterns locally to specific products when they should really be added to the default list.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde26b62_08a12d49",
+        "filename": "core/product.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-20T17:05:29Z",
+      "side": 1,
+      "message": "Can you copy the documentation from the commit message here?",
+      "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12ef9b3e_76ba2746",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 6
