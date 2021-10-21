@@ -86,6 +86,29 @@
       },
       "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea428413_5ed4875f",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T18:37:17Z",
+      "side": 1,
+      "message": "BTW, this file is deprecated (b/200241946).  I\u0027m not familiar with Soong. How hard would it be to generate these files in build time?  It seems easier to catch problems.\n\n(It\u0027ll also make it possible to put the mapping file in an (non-updatable) APEX. I\u0027m working on a doc to explain this idea.)",
+      "range": {
+        "startLine": 489,
+        "startChar": 7,
+        "endLine": 489,
+        "endChar": 44
+      },
+      "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
