@@ -87,6 +87,24 @@
       "parentUuid": "d067b316_686dffde",
       "revId": "f7855460869624a302999e8d76608275adec1d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2e508f_ec1dbecf",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-22T01:15:22Z",
+      "side": 1,
+      "message": "Done. I updated these cls to include the changes necessary to pass both the product and global variables.",
+      "parentUuid": "14f25df2_43a004e4",
+      "revId": "f7855460869624a302999e8d76608275adec1d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
