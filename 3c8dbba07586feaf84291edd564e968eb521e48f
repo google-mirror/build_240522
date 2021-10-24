@@ -1,0 +1,125 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483033",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d12",
+      "fixSuggestions": [
+        {
+          "fixId": "53480253_21d23fc3",
+          "description": "Change to \"tools/compliance/cmd/listshare.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/cmd/listshare.go",
+              "range": {
+                "startLine": 91,
+                "startChar": 74,
+                "endLine": 91,
+                "endChar": 82
+              },
+              "replacement": "condition"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "82db04df_ba3f8373",
+        "filename": "tools/compliance/cmd/listshare.go",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T01:37:20Z",
+      "side": 1,
+      "message": "Common typo found: \"conditon\" -- should it be \"condition\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 91,
+        "startChar": 74,
+        "endLine": 91,
+        "endChar": 82
+      },
+      "revId": "3c8dbba07586feaf84291edd564e968eb521e48f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483026",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d12",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e92873f7_fa2f63c3",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T01:37:20Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT license\n",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "3c8dbba07586feaf84291edd564e968eb521e48f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483026",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d12",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "615b45a1_92920a2d",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T01:37:20Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "3c8dbba07586feaf84291edd564e968eb521e48f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483031",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d12",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "59c8bdfd_7640f41b",
+        "filename": "tools/compliance/resolve.go",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T01:37:20Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 131,
+        "startChar": 72,
+        "endLine": 131,
+        "endChar": 73
+      },
+      "revId": "3c8dbba07586feaf84291edd564e968eb521e48f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
