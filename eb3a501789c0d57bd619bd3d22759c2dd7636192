@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483092",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d13",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ab64c86b_2301b3ca",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T02:24:30Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT license\n",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "eb3a501789c0d57bd619bd3d22759c2dd7636192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483092",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d13",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e275d302_84f97830",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T02:24:30Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "eb3a501789c0d57bd619bd3d22759c2dd7636192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016483098",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d13",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5a4d33b7_8f038844",
+        "filename": "tools/compliance/resolve.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-24T02:24:30Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 131,
+        "startChar": 72,
+        "endLine": 131,
+        "endChar": 73
+      },
+      "revId": "eb3a501789c0d57bd619bd3d22759c2dd7636192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
