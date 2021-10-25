@@ -34,6 +34,14 @@ type LicenseCondition interface {
 // ConditionList implements introspection methods to arrays of LicenseCondition.
 type ConditionList []LicenseCondition
 
+// ConditionList orders arrays of LicenseCondition by Origin and Name.
+func (l ConditionList) Len() int      { return len(l) }
+func (l ConditionList) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l ConditionList) Less(i, j int) bool {
+        return l[i].Origin().Name() < l[j].Origin().Name() || (l[i].Origin().Name() == l[j].Origin().Name() && l[i].Name() < l[j].Name())
+}
+
+
 // HasByName returns true if the list contains any condition matching `name`.
 func (cl ConditionList) HasByName(name ConditionNames) bool {
 	for _, c := range cl {
