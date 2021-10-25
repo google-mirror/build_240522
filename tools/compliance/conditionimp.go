@@ -1,5 +1,4 @@
-//
-// Copyright (C) 2021 The Android Open Source Project
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,26 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package {
-    default_applicable_licenses: ["Android-Apache-2.0"],
+package compliance
+
+// licenseConditionImp implements LicenseCondition.
+type licenseConditionImp struct {
+	name string
+	origin targetNodeImp
 }
 
-bootstrap_go_package {
-    name: "compliance-module",
-    srcs: [
-        "condition.go",
-        "conditionimp.go",
-        "csimp.go",
-        "graph.go",
-        "graphimp.go",
-        "readgraph.go",
-        "resolutions.go",
-        "rsimp.go",
-    ],
-    testSrcs: [
-        "condition_test.go",
-        "graph_test.go",
-        "resolutions_test.go",
-    ],
-    pkgPath: "compliance",
+// Name returns the name of the condition. e.g. "restricted" or "notice"
+func (c licenseConditionImp) Name() string {
+	return c.name
+}
+
+// Origin identifies the TargetNode where the condition originates.
+func (c licenseConditionImp) Origin() TargetNode {
+	return c.origin
 }

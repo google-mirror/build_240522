@@ -1,5 +1,4 @@
-//
-// Copyright (C) 2021 The Android Open Source Project
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,26 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package {
-    default_applicable_licenses: ["Android-Apache-2.0"],
+package compliance
+
+import (
+//	"fmt"
+//	"os"
+//	"path/filepath"
+//	"runtime"
+	"testing"
+)
+
+
+func init() {
 }
 
-bootstrap_go_package {
-    name: "compliance-module",
-    srcs: [
-        "condition.go",
-        "conditionimp.go",
-        "csimp.go",
-        "graph.go",
-        "graphimp.go",
-        "readgraph.go",
-        "resolutions.go",
-        "rsimp.go",
-    ],
-    testSrcs: [
-        "condition_test.go",
-        "graph_test.go",
-        "resolutions_test.go",
-    ],
-    pkgPath: "compliance",
+func TestCondition(_ *testing.T) {
 }
