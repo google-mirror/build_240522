@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016531762",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d16",
+      "fixSuggestions": [
+        {
+          "fixId": "cb6d30c4_96fe0e3e",
+          "description": "Change to \"tools/compliance/condition.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/condition.go",
+              "range": {
+                "startLine": 115,
+                "startChar": 38,
+                "endLine": 115,
+                "endChar": 47
+              },
+              "replacement": "conditions"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a6136229_e7fc9fc2",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-25T22:46:07Z",
+      "side": 1,
+      "message": "Common typo found: \"conditons\" -- should it be \"conditions\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 115,
+        "startChar": 38,
+        "endLine": 115,
+        "endChar": 47
+      },
+      "revId": "32926221117eefbae7d72d3cce2987a8757c096f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016531762",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d16",
+      "fixSuggestions": [
+        {
+          "fixId": "5cf26b83_278c5d28",
+          "description": "Change to \"tools/compliance/condition.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/condition.go",
+              "range": {
+                "startLine": 123,
+                "startChar": 40,
+                "endLine": 123,
+                "endChar": 49
+              },
+              "replacement": "conditions"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "85b6e5d7_3734a04c",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-25T22:46:07Z",
+      "side": 1,
+      "message": "Common typo found: \"conditons\" -- should it be \"conditions\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 123,
+        "startChar": 40,
+        "endLine": 123,
+        "endChar": 49
+      },
+      "revId": "32926221117eefbae7d72d3cce2987a8757c096f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016531755",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d16",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "324fbced_811be44f",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-25T22:46:07Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT license\n",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "32926221117eefbae7d72d3cce2987a8757c096f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016531755",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d16",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "43fafc87_074df050",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-25T22:46:07Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "32926221117eefbae7d72d3cce2987a8757c096f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
