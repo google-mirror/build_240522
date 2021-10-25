@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ac612b_e0358cd5",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-25T15:29:24Z",
+      "side": 1,
+      "message": "Build sometimes fails due to missing $(HOST_OUT_EXECUTABLES)/fsverity. I\u0027m now looking for a way to add dependency from system.img to fsverity. required field in Android.bp wasn\u0027t enough.",
+      "range": {
+        "startLine": 1650,
+        "startChar": 0,
+        "endLine": 1650,
+        "endChar": 112
+      },
+      "revId": "f61fb1c7148362c5896001f54aa8c425f5c7f4d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
