@@ -100,9 +100,9 @@ type ResolutionSet interface {
 
 	// AnyByNameAttachToTarget returns true if the set contains conditions
 	// matching `names` that attach to `attachesTo`.
-	AnyByNameApplyToTarget(attachesTo TargetNode, names ...ConditionNames) bool
+	AnyByNameAttachToTarget(attachesTo TargetNode, names ...ConditionNames) bool
 
 	// AllByNameAttachTo returns true if the set contains at least one
 	// condition matching each element of `names` for `attachesTo`.
-	AllByNameApplyToTarget(attachesTo TargetNode, names ...ConditionNames) bool
+	AllByNameAttachToTarget(attachesTo TargetNode, names ...ConditionNames) bool
 }
