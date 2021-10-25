@@ -227,7 +227,7 @@ func (as actionSet) String() string {
 	for actsOn, cs := range as {
 		cl := cs.AsList()
 		sort.Sort(cl)
-		fmt.Fprintf(&sb, "%s%s -> %s", osep, actsOn, strings.Join(cl.asStringList(":"), ", "))
+		fmt.Fprintf(&sb, "%s%s -> [%s]", osep, actsOn, cl.String())
 		osep = ", "
 	}
 	fmt.Fprintf(&sb, "}")
