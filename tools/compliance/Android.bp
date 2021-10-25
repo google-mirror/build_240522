@@ -21,11 +21,23 @@ bootstrap_go_package {
     name: "compliance-module",
     srcs: [
         "condition.go",
+        "conditionimp.go",
+        "csimp.go",
         "graph.go",
+        "graphimp.go",
+        "readgraph.go",
         "resolutions.go",
+        "rsimp.go",
     ],
     testSrcs: [
         "condition_test.go",
+        "graph_test.go",
+        "resolutions_test.go",
+    ],
+    deps: [
+        "golang-protobuf-proto",
+        "golang-protobuf-encoding-prototext",
+        "license_metadata_proto",
     ],
     pkgPath: "compliance",
 }
