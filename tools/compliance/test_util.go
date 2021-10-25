@@ -30,7 +30,87 @@ const (
 license_kinds: "SPDX-license-identifier-Apache-2.0"
 license_conditions: "notice"
 `
+
+	// GPL starts a test metadata file for GPL 2.0 licensing.
+	GPL = `` +
+`package_name: "Free Software"
+license_kinds: "SPDX-license-identifier-GPL-2.0"
+license_conditions: "restricted"
+`
+
+	// Classpath starts a test metadata file for GPL 2.0 with classpath exeption licensing.
+	Classpath = `` +
+`package_name: "Free Software"
+license_kinds: "SPDX-license-identifier-GPL-2.0-with-classpath-exception"
+license_conditions: "restricted"
+`
+
+	// DependentModule starts a test metadata file for a module in the same package as `Classpath`.
+	DependentModule = `` +
+`package_name: "Free Software"
+license_kinds: "SPDX-license-identifier-MIT"
+license_conditions: "notice"
+`
+
+	// LGPL starts a test metadata file for a module with LGPL 2.0 licensing.
+	LGPL = `` +
+`package_name: "Free Library"
+license_kinds: "SPDX-license-identifier-LGPL-2.0"
+license_conditions: "restricted"
+`
+
+	// MPL starts a test metadata file for a module with MPL 2.0 reciprical licensing.
+	MPL = `` +
+`package_name: "Reciprocal"
+license_kinds: "SPDX-license-identifier-MPL-2.0"
+license_conditions: "reciprocal"
+`
+
+	// MIT starts a test metadata file for a module with generic notice (MIT) licensing.
+	MIT = `` +
+`package_name: "Android"
+license_kinds: "SPDX-license-identifier-MIT"
+license_conditions: "notice"
+`
+
+	// Proprietary starts a test metadata file for a module with proprietary licensing.
+	Proprietary = `` +
+`package_name: "Android"
+license_kinds: "legacy_proprietary"
+license_conditions: "proprietary"
+`
+
+	// ByException starts a test metadata file for a module with by_exception_only licensing.
+	ByException = `` +
+`package_name: "Special"
+license_kinds: "legacy_by_exception_only"
+license_conditions: "by_exception_only"
+`
+
 )
+
+var (
+	// meta maps test file names to metadata file content without dependencies.
+	meta = map[string]string{
+		"apacheBin.meta_lic": AOSP,
+		"apacheLib.meta_lic": AOSP,
+		"apacheContainer.meta_lic": AOSP + "is_container: true\n",
+		"dependentModule.meta_lic": DependentModule,
+		"gplWithClasspathException.meta_lic": Classpath,
+		"gplBin.meta_lic": GPL,
+		"gplLib.meta_lic": GPL,
+		"gplContainer.meta_lic": GPL + "is_container: true\n",
+		"lgplBin.meta_lic": LGPL,
+		"lgplLib.meta_lic": LGPL,
+		"mitBin.meta_lic": MIT,
+		"mitLib.meta_lic": MIT,
+		"mplBin.meta_lic": MPL,
+		"mplLib.meta_lic": MPL,
+		"proprietary.meta_lic": Proprietary,
+		"by_exception.meta_lic": ByException,
+	}
+)
+
 
 
 // toConditionList converts a test data map of condition name to origin names into a ConditionList.
@@ -47,7 +127,9 @@ func toConditionList(lg *licenseGraphImp, conditions map[string][]string) Condit
 
 // newTestNode constructs a test node in the license graph.
 func newTestNode(lg *licenseGraphImp, targetName string) TargetNode {
-	lg.targets[targetName] = &targetNode{name: targetName}
+	if _, ok := lg.targets[targetName]; !ok {
+		lg.targets[targetName] = &targetNode{name: targetName}
+	}
 	return targetNodeImp{lg, targetName}
 }
 
@@ -120,6 +202,97 @@ func (l byEdge) Less(i, j int) bool {
 }
 
 
+// annotated describes annotated test data edges to define test graphs.
+type annotated struct {
+	target, dep string
+	annotations []string
+}
+
+func (e annotated) String() string {
+	if e.annotations != nil {
+		return e.target + " -> " + e.dep + " [" + strings.Join(e.annotations, ", ") + "]"
+	}
+	return e.target + " -> " + e.dep
+}
+
+func (e annotated) IsEqualTo(other annotated) bool {
+	if e.target != other.target {
+		return false
+	}
+	if e.dep != other.dep {
+		return false
+	}
+        if len(e.annotations) != len(other.annotations) {
+		return false
+	}
+	a1 := append([]string{}, e.annotations...)
+	a2 := append([]string{}, other.annotations...)
+	for i := 0; i < len(a1); i++ {
+		if a1[i] != a2[i] {
+			return false
+		}
+	}
+	return true
+}
+
+// toGraph converts a list of roots and a list of annotated edges into a test license graph.
+func toGraph(stderr io.Writer, roots []string, edges []annotated) (LicenseGraph, error) {
+	deps := make(map[string][]annotated)
+	for _, root := range roots {
+		deps[root] = []annotated{}
+	}
+	for _, edge := range edges {
+		if prev, ok := deps[edge.target]; ok {
+			deps[edge.target] = append(prev, edge)
+		} else {
+			deps[edge.target] = []annotated{edge}
+		}
+		if _, ok := deps[edge.dep]; !ok {
+			deps[edge.dep] = []annotated{}
+		}
+	}
+	fs := make(testFS)
+	for file, edges := range deps {
+		body := meta[file]
+		for _, edge := range edges {
+			body += fmt.Sprintf("deps: {\n  file: %q\n", edge.dep)
+			for _, ann := range edge.annotations {
+				body += fmt.Sprintf("  annotations: %q\n", ann)
+			}
+			body += "}\n"
+		}
+		fs[file] = []byte(body)
+	}
+
+	return ReadLicenseGraph(&fs, stderr, roots)
+}
+
+
+// byAnnotatedEdge orders edges by target then dep name then annotations.
+type byAnnotatedEdge []annotated
+
+func (l byAnnotatedEdge) Len() int      { return len(l) }
+func (l byAnnotatedEdge) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l byAnnotatedEdge) Less(i, j int) bool {
+	if l[i].target == l[j].target {
+		if l[i].dep == l[j].dep {
+			ai := append([]string{}, l[i].annotations...)
+			aj := append([]string{}, l[j].annotations...)
+			sort.Strings(ai)
+			sort.Strings(aj)
+			for k := 0; k < len(ai) && k < len(aj); k++ {
+				if ai[k] == aj[k] {
+					continue
+				}
+				return ai[k] < aj[k]
+			}
+			return len(ai) < len(aj)
+		}
+		return l[i].dep < l[j].dep
+	}
+	return l[i].target < l[j].target
+}
+
 // res describes test data resolutions to define test resolution sets.
 type res struct {
 	appliesTo, origin, condition string
@@ -166,15 +339,16 @@ func checkSame(rsActual, rsExpected ResolutionSet, t *testing.T) {
 		}
 		for i := 0; i < len(expectedConditions); i++ {
 			if expectedConditions[i] != actualConditions[i] {
-				t.Errorf("unexpected condition applies to %q at index %d: got %s, want %s",
-					target.Name(), i, actualConditions[i].(licenseConditionImp).asString(":"),
-					expectedConditions[i].(licenseConditionImp).asString(":"))
+				t.Errorf("unexpected condition applies to %q at index %d: got %s in %v, want %s in %v",
+					target.Name(), i, actualConditions[i].(licenseConditionImp).asString(":"), actualConditions,
+					expectedConditions[i].(licenseConditionImp).asString(":"), expectedConditions)
 			}
 		}
 	}
-	for _, target := range rsActual.AppliesTo() {
+	for i, target := range rsActual.AppliesTo() {
 		if !rsExpected.AppliesToTarget(target) {
-			t.Errorf("unexpected target: %q in AppliesTo(), want not in AppliesTo()", target.Name())
+			t.Errorf("unexpected target: got %q element %d in AppliesTo() %v with %d elements, want %v with %d elements",
+				target.Name(), i, rsActual.AppliesTo(), len(rsActual.AppliesTo()), rsExpected.AppliesTo(), len(rsExpected.AppliesTo()))
 		}
 	}
 }
