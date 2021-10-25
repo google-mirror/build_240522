@@ -25,14 +25,18 @@ bootstrap_go_package {
         "csimp.go",
         "graph.go",
         "graphimp.go",
+        "policy.go",
         "readgraph.go",
         "resolutions.go",
+        "resolve.go",
         "rsimp.go",
     ],
     testSrcs: [
         "condition_test.go",
         "graph_test.go",
+        "policy_test.go",
         "resolutions_test.go",
+        "resolve_test.go",
     ],
     pkgPath: "compliance",
 }
