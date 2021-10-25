@@ -47,6 +47,7 @@ bootstrap_go_package {
         "condition.go",
         "conditionimp.go",
         "csimp.go",
+        "doc.go",
         "graph.go",
         "graphimp.go",
         "policy.go",
