@@ -120,6 +120,65 @@ func (l byEdge) Less(i, j int) bool {
 }
 
 
+// annotated describes annotated test data edges to define test graphs.
+type annotated struct {
+	target, dep string
+	annotations []string
+}
+
+func (e annotated) String() string {
+	if e.annotations != nil {
+		return e.target + " -> " + e.dep + " [" + strings.Join(e.annotations, ", ") + "]"
+	}
+	return e.target + " -> " + e.dep
+}
+
+func (e annotated) IsEqualTo(other annotated) bool {
+	if e.target != other.target {
+		return false
+	}
+	if e.dep != other.dep {
+		return false
+	}
+        if len(e.annotations) != len(other.annotations) {
+		return false
+	}
+	a1 := append([]string{}, e.annotations...)
+	a2 := append([]string{}, other.annotations...)
+	for i := 0; i < len(a1); i++ {
+		if a1[i] != a2[i] {
+			return false
+		}
+	}
+	return true
+}
+
+
+// byAnnotatedEdge orders edges by target then dep name then annotations.
+type byAnnotatedEdge []annotated
+
+func (l byAnnotatedEdge) Len() int      { return len(l) }
+func (l byAnnotatedEdge) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l byAnnotatedEdge) Less(i, j int) bool {
+	if l[i].target == l[j].target {
+		if l[i].dep == l[j].dep {
+			ai := append([]string{}, l[i].annotations...)
+			aj := append([]string{}, l[j].annotations...)
+			sort.Strings(ai)
+			sort.Strings(aj)
+			for k := 0; k < len(ai) && k < len(aj); k++ {
+				if ai[k] == aj[k] {
+					continue
+				}
+				return ai[k] < aj[k]
+			}
+			return len(ai) < len(aj)
+		}
+		return l[i].dep < l[j].dep
+	}
+	return l[i].target < l[j].target
+}
+
 // res describes test data resolutions to define test resolution sets.
 type res struct {
 	appliesTo, origin, condition string
