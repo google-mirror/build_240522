@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 /*
+
 Package compliance provides an approved means for reading, consuming, and
 analyzing license metadata graphs.
 
@@ -25,6 +25,7 @@ ResolutionSet.
 
 LicenseGraph
 ------------
+
 A LicenseGraph is an immutable graph of the targets and dependencies reachable
 from a specific set of root targets. In general, the root targets will be the
 artifacts in a release or distribution. While conceptually immutable, parts of
@@ -32,6 +33,7 @@ the graph may be loaded or evaluated lazily.
 
 LicenseCondition
 ----------------
+
 A LicenseCondition is an immutable tuple pairing a condition name with an
 originating target. e.g. Per current policy, a static library licensed under an
 MIT license would pair a "notice" condition with the static library target, and
@@ -40,6 +42,7 @@ the dynamic library target.
 
 ResolutionSet
 -------------
+
 A ResolutionSet is an immutable set of targets and the license conditions which
 apply to each of those targets in a given context. Remember: Each license
 condition pairs a condition name with an originating target so each resolution
@@ -52,6 +55,5 @@ target that links the library, and the ResolutionSet will attach conditions to
 each of those targets. However, no matter how many targets the condition applies
 to, only the source-code for the originating library needs to be shared to
 satisfy the policy.
-
 */
 package compliance
