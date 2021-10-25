@@ -1603,9 +1603,18 @@ function installmod() {
         echo "Module '$1' does not produce a file ending with .apk (try 'refreshmod' if there have been build changes?)" >&2
         return 1
     fi
+    local serial_device=""
+    if [[ "$1" == "-s" ]]; then
+        if [[ $# -le 2 ]]; then
+            echo "-s requires an argument" >&2
+            return 1
+        fi
+        serial_device="-s $2"
+        shift 2
+    fi
     local length=$(( $# - 1 ))
-    echo adb install ${@:1:$length} $_path
-    adb install ${@:1:$length} $_path
+    echo adb $serial_device install ${@:1:$length} $_path
+    adb $serial_device install ${@:1:$length} $_path
 }
 
 function _complete_android_module_names() {
