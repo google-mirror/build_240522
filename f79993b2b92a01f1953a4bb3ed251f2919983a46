@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5296f7ed_224c14a3",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-10-26T16:01:16Z",
+      "side": 1,
+      "message": "Nit: Please limit the line length to 100 characters.",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 121
+      },
+      "revId": "f79993b2b92a01f1953a4bb3ed251f2919983a46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb5564e1_6524e9b9",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-10-26T16:01:16Z",
+      "side": 1,
+      "message": "I see these are accepted as valid parameters below, but I don\u0027t see them being used. Can these be removed from this commit? There is another CL that will be merged soon that will add the providerArg option (https://android-review.googlesource.com/c/platform/build/+/1760832)",
+      "range": {
+        "startLine": 1084,
+        "startChar": 0,
+        "endLine": 1085,
+        "endChar": 28
+      },
+      "revId": "f79993b2b92a01f1953a4bb3ed251f2919983a46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
