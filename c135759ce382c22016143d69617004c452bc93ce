@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e0ab1f_f44ab131",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-26T13:37:26Z",
+      "side": 1,
+      "message": "We probably don\u0027t need this in Soong. If this is for the build-time check, then it\u0027s not necessary because the check runs in the Make phase. The build-time check must be either entirely enabled or entirely disabled. Skipping the check for some jars is not useful because odrefresh will re-compile all jars if any artifact is missing.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 116
+      },
+      "revId": "c135759ce382c22016143d69617004c452bc93ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
