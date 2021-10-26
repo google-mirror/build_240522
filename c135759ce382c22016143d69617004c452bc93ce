@@ -22,6 +22,30 @@
       },
       "revId": "c135759ce382c22016143d69617004c452bc93ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32244cf_295d8281",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-26T13:48:04Z",
+      "side": 1,
+      "message": "Right, I hesitated whether to export it or not, but this is pointless without a CL in Soong that adds BrokenDeprecatedMkSystemServerJars to the config. Removed in PS2.",
+      "parentUuid": "b1e0ab1f_f44ab131",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 116
+      },
+      "revId": "c135759ce382c22016143d69617004c452bc93ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
