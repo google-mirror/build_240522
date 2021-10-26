@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016539656",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870079?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c50e20fb_f6a00f2b",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-26T04:23:59Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT license\n",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "547d064bfbca731a1ec8a449dabb730bbbae31f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016539656",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870079?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f7171cd4_0fafc994",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-26T04:23:59Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 40,
+        "startChar": 19,
+        "endLine": 40,
+        "endChar": 37
+      },
+      "revId": "547d064bfbca731a1ec8a449dabb730bbbae31f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
