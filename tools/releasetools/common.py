@@ -2107,10 +2107,9 @@ def GetKeyPasswords(keylist):
   devnull = open("/dev/null", "w+b")
   for k in sorted(keylist):
     # We don't need a password for things that aren't really keys.
-    if k in SPECIAL_CERT_STRINGS:
+    if k in SPECIAL_CERT_STRINGS or k is None:
       no_passwords.append(k)
       continue
-
     p = Run(["openssl", "pkcs8", "-in", k+OPTIONS.private_key_suffix,
              "-inform", "DER", "-nocrypt"],
             stdin=devnull.fileno(),
