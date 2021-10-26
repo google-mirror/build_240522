@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a59f3c0_f76b1e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-10-26T00:17:42Z",
+      "side": 1,
+      "message": "I need to resolve the FIXME notes before merge. PTAL",
+      "revId": "fa87cda1563346ab14d750c8d3ee846ce9eff871",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
