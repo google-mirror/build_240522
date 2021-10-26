@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016539711",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870077?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "6fe50afd_d5e7f4b2",
+          "description": "Change to \"tools/compliance/readgraph.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/readgraph.go",
+              "range": {
+                "startLine": 190,
+                "startChar": 40,
+                "endLine": 190,
+                "endChar": 47
+              },
+              "replacement": "metadata"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8bd8bd7d_876865a9",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-26T04:23:59Z",
+      "side": 1,
+      "message": "Common typo found: \"metdata\" -- should it be \"metadata\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 190,
+        "startChar": 40,
+        "endLine": 190,
+        "endChar": 47
+      },
+      "revId": "90787f315e1d786291b1bca3f3664215aa6a9728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
