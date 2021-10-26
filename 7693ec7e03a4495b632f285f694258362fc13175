@@ -16,6 +16,23 @@
       "message": "Thank you for working on this!",
       "revId": "7693ec7e03a4495b632f285f694258362fc13175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2dc868_2c989e66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-26T13:51:46Z",
+      "side": 1,
+      "message": "Anton: I reached out to keystone to notify partners about potential breakage and how to fix.",
+      "revId": "7693ec7e03a4495b632f285f694258362fc13175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
