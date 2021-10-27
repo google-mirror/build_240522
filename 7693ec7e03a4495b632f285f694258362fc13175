@@ -50,6 +50,24 @@
       "message": "LGTM, but looks like there are some existing problems to fix first. +joeo FYI as well",
       "revId": "7693ec7e03a4495b632f285f694258362fc13175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a41008c_67d80a0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-10-27T10:00:51Z",
+      "side": 1,
+      "message": "The presubmit failure means that this change is exactly working as intended. The failure will go away once ag/16117798 is submitted.",
+      "parentUuid": "3b578cad_ed07952b",
+      "revId": "7693ec7e03a4495b632f285f694258362fc13175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
