@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998f9b27_87bd247a",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-10-27T05:06:45Z",
+      "side": 1,
+      "message": "better rename this, e.g. has_signed_content?\n\nAlso add a smoke test in test_apex_utils.py to make sure the flow works..",
+      "range": {
+        "startLine": 104,
+        "startChar": 17,
+        "endLine": 104,
+        "endChar": 31
+      },
+      "revId": "3e809c55ebe1210bff2782b4463421aa66a1cc5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
