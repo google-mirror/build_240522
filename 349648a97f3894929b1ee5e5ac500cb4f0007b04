@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f5a99c_61ed62d5",
+        "filename": "tools/compliance/policy.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1006257
+      },
+      "writtenOn": "2021-10-27T18:47:13Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this one is different",
+      "revId": "349648a97f3894929b1ee5e5ac500cb4f0007b04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90c37e0_ab283295",
+        "filename": "tools/compliance/policy.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1006257
+      },
+      "writtenOn": "2021-10-27T18:47:13Z",
+      "side": 1,
+      "message": "Should this error instead?",
+      "revId": "349648a97f3894929b1ee5e5ac500cb4f0007b04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
