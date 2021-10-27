@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffdb164_e4eada1b",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-10-27T01:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5296f7ed_224c14a3",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 121
+      },
+      "revId": "f79993b2b92a01f1953a4bb3ed251f2919983a46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb5564e1_6524e9b9",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-26T16:01:16Z",
       "side": 1,
       "message": "I see these are accepted as valid parameters below, but I don\u0027t see them being used. Can these be removed from this commit? There is another CL that will be merged soon that will add the providerArg option (https://android-review.googlesource.com/c/platform/build/+/1760832)",
+      "range": {
+        "startLine": 1084,
+        "startChar": 0,
+        "endLine": 1085,
+        "endChar": 28
+      },
+      "revId": "f79993b2b92a01f1953a4bb3ed251f2919983a46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "425b6c23_481cc7dc",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-10-27T01:46:39Z",
+      "side": 1,
+      "message": "Done. Yeah. I used to add both dynamic loading and static loading of the providers in the same diff, and later discovered that static loading of the provider is an easier way to go, given the PKCS11 provider constructor code changes multiple time from Java8 to Java11. I didn\u0027t clean up all the code for the dynamic loading completely.",
+      "parentUuid": "fb5564e1_6524e9b9",
       "range": {
         "startLine": 1084,
         "startChar": 0,
