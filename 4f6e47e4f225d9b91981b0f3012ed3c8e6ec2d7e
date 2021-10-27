@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81914fa6_04b3af12",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-27T19:00:00Z",
+      "side": 1,
+      "message": "Changed this logic to a $(shell) invocation that does regex checking, which should be faster. \n\nI\u0027m not that opposed to have a list of variables to be passed, just don\u0027t want to maintain such a list. The current behavior in makefile is passing literally every variable, so I thought it would be good to have the starlark version match that behavior for now.",
+      "parentUuid": "f100672f_9a7538b9",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f226ba_978a1e00",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09f973a_c4ea3ca2",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-27T19:00:00Z",
+      "side": 1,
+      "message": "Reworded.",
+      "parentUuid": "23f226ba_978a1e00",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e2746bc_a17be687",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-10-27T17:24:29Z",
       "side": 1,
       "message": "Instead of relying on board config not having cfg set, IMHO it would be better to have two separate exported functions, one the prints all variables and another to print only globals, and call the latter from board config launcher.",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d8599f_d443d604",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-10-27T19:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e2746bc_a17be687",
       "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
