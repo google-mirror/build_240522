@@ -68,6 +68,24 @@
       "parentUuid": "3b578cad_ed07952b",
       "revId": "7693ec7e03a4495b632f285f694258362fc13175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b3d091_3645b7ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-10-27T10:32:28Z",
+      "side": 1,
+      "message": "Right, we\u0027ll wait for ag/16117798 to be merged then rerun presubmit.",
+      "parentUuid": "1a41008c_67d80a0c",
+      "revId": "7693ec7e03a4495b632f285f694258362fc13175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
