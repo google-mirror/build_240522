@@ -158,6 +158,30 @@
       },
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3359d58_506177b8",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-27T07:35:18Z",
+      "side": 1,
+      "message": "For now, sign_virt_apex is very specific to the virt apex and it\u0027s highly coupled with the contents of the apex. For now I don\u0027t have candidates other than the virt apex, but there might be the case. For example, CompOS apex has several ideas regarding how to handle oemcerts and one of ideas could require post-processing I guess.",
+      "parentUuid": "1eb57300_e642475b",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
