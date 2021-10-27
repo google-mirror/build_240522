@@ -16,6 +16,52 @@
       "message": "These are changes in otatools and need xunchang@ review.",
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73cf0b20_0678840e",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-10-27T05:24:57Z",
+      "side": 1,
+      "message": "can you give an example why this needs change? Seems the caller only supply a sign_tool and won\u0027t mess up with the keys.",
+      "range": {
+        "startLine": 2110,
+        "startChar": 36,
+        "endLine": 2110,
+        "endChar": 45
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24fa07de_3dbe98c6",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-10-27T05:24:57Z",
+      "side": 1,
+      "message": "Is this SIGN_TOOL specific to one apex; or all apex files use the same SIGN_TOOL in otatools?\n\nIf it\u0027s apex specific, then I wonder where do you get different versions of the SIGN_TOOL?",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
