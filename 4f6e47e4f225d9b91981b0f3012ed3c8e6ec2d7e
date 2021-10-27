@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f100672f_9a7538b9",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-27T17:24:29Z",
+      "side": 1,
+      "message": "The number of variables is large, and the calculations here are slow. Perhaps it\u0027s worth devising a faster way to determine possible candidates. Isn\u0027t checking the first character not sufficient? What are your reservations against explicitly listing the variables to be passed?",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f226ba_978a1e00",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-27T17:24:29Z",
+      "side": 1,
+      "message": "IMHO this comment will be confusing in the future.",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2746bc_a17be687",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-10-27T17:24:29Z",
+      "side": 1,
+      "message": "Instead of relying on board config not having cfg set, IMHO it would be better to have two separate exported functions, one the prints all variables and another to print only globals, and call the latter from board config launcher.",
+      "revId": "4f6e47e4f225d9b91981b0f3012ed3c8e6ec2d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
