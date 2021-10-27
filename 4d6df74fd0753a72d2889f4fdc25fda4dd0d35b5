@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016615531",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870078?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "0cdf4d6d_6b3c5785",
+          "description": "Change to \"tools/compliance/resolve.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/resolve.go",
+              "range": {
+                "startLine": 76,
+                "startChar": 26,
+                "endLine": 76,
+                "endChar": 35
+              },
+              "replacement": "conditions"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ff3f89c4_bddc6f9a",
+        "filename": "tools/compliance/resolve.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-27T20:27:26Z",
+      "side": 1,
+      "message": "Common typo found: \"conditons\" -- should it be \"conditions\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 76,
+        "startChar": 26,
+        "endLine": 76,
+        "endChar": 35
+      },
+      "revId": "4d6df74fd0753a72d2889f4fdc25fda4dd0d35b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
