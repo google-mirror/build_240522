@@ -230,6 +230,30 @@
       },
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64acbf5_cb17f070",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-10-28T00:50:13Z",
+      "side": 1,
+      "message": "Does it make more sense to have a central sign_foo tool that act differently on foo.apex and bar.apex? Or it\u0027s impossible because the ownership isn\u0027t clear.",
+      "parentUuid": "5065afd3_c97387b3",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
