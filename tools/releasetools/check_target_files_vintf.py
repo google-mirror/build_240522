@@ -132,7 +132,7 @@ def CheckVintfFromExtractedTargetFiles(input_tmp, info_dict=None):
       'checkvintf',
       '--check-compat',
   ]
-  for device_path, real_path in dirmap.items():
+  for device_path, real_path in sorted(dirmap.items()):
     common_command += ['--dirmap', '{}:{}'.format(device_path, real_path)]
   common_command += kernel_args
   common_command += shipping_api_level_args
@@ -165,7 +165,10 @@ def GetVintfFileList():
   def PathToPatterns(path):
     if path[-1] == '/':
       path += '*'
-    for device_path, target_files_rel_paths in DIR_SEARCH_PATHS.items():
+
+    # Sort the dir search paths by descending lengths, in order to check longer
+    # paths like /system_ext before substrings like /system
+    for device_path, target_files_rel_paths in sorted(DIR_SEARCH_PATHS.items(), key=lambda i: len(i[0]), reverse=True):
       if path.startswith(device_path):
         suffix = path[len(device_path):]
         return [rel_path + suffix for rel_path in target_files_rel_paths]
