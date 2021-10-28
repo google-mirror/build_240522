@@ -206,6 +206,30 @@
       },
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5065afd3_c97387b3",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-28T00:31:24Z",
+      "side": 1,
+      "message": "\u003e is it better to have one tool that does all the post-processing,\n\nI don\u0027t get it. The intention here is to associate a custom post-processing tool (sign_tool) to an apex. For example, apexkeys.txt will have something like following:\n\n  name\u003dcom.android.foo.apex .... sign_tool\u003dsign_foo\n  name\u003dcom.android.bar.apex ... sign_tool\u003dsign_bar\n  name\u003dcom.android.baz.apex .. (no sign tool)\n\nsign_foo and sign_bar are specific to foo.apex and bar.apex respectively. foo.apex and bar.apex may have different owners.",
+      "parentUuid": "861a0fa0_cc194090",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
