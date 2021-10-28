@@ -278,6 +278,30 @@
       },
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d3eba7_522376e5",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-28T01:44:41Z",
+      "side": 1,
+      "message": "Please consider this as a mechanism for an apex to customize the signing process for the very apex. Having a central tool that does the post processing over all apexes doesn\u0027t seem to make sense because each apex will definitely have different requirements about the signing.",
+      "parentUuid": "01f7167f_486b77fa",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
