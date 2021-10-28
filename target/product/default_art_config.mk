@@ -69,6 +69,13 @@ PRODUCT_APEX_SYSTEM_SERVER_JARS := \
     com.android.media:service-media-s \
     com.android.permission:service-permission \
 
+# List of jars that system_server loads dynamically using separate classloaders.
+PRODUCT_STANDALONE_SYSTEM_SERVER_JARS := \
+    com.android.os.statsd:service-statsd \
+    com.android.scheduling:service-scheduling \
+    com.android.tethering:service-connectivity \
+    com.android.wifi:service-wifi \
+
 # Minimal configuration for running dex2oat (default argument values).
 # PRODUCT_USES_DEFAULT_ART_CONFIG must be true to enable boot image compilation.
 PRODUCT_USES_DEFAULT_ART_CONFIG := true
