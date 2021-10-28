@@ -22,6 +22,30 @@
       },
       "revId": "1010fff193519427379f2d4909ac45e41dba887a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0849ecf9_fad23598",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-28T14:10:43Z",
+      "side": 1,
+      "message": "This is supposed to be set in product mk files. I don\u0027t think it should be added to any of the two mk files, as this is a fairly independent switch and will eventually be removed.",
+      "parentUuid": "40ea1bc7_69178e13",
+      "range": {
+        "startLine": 274,
+        "startChar": 70,
+        "endLine": 274,
+        "endChar": 100
+      },
+      "revId": "1010fff193519427379f2d4909ac45e41dba887a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
