@@ -254,6 +254,30 @@
       },
       "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f7167f_486b77fa",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-28T00:59:42Z",
+      "side": 1,
+      "message": "That\u0027s the point of this change. If a central sign_foo tool can handle all kind of apexes, we might not need a separate tool. Just modifying apex_util would be enough, I guess.",
+      "parentUuid": "d64acbf5_cb17f070",
+      "range": {
+        "startLine": 1203,
+        "startChar": 31,
+        "endLine": 1203,
+        "endChar": 40
+      },
+      "revId": "6b799cb60074c4a99d061b2a16f0ae6382070496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
