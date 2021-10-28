@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "161b1448_a444e918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-10-28T12:43:49Z",
+      "side": 1,
+      "message": "Hi Colin,\n\nThis CL is due to for current Pesto project we will need the share lib information in module-info for preparing the sandbox environment for host side tests.\n\nWould you mind to code review for this change?\nThanks.",
+      "revId": "6eb486ba57d525c000576a45e4a8bc0427eacb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
