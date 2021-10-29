@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59bc6935_e8cb7ae0",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-29T22:44:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f39a5d5_35e7d18d",
+      "range": {
+        "startLine": 920,
+        "startChar": 6,
+        "endLine": 921,
+        "endChar": 45
+      },
+      "revId": "6f981308c5667501ed6eb46a4ecb9c00b084efb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "627be13a_a42681ab",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-29T21:33:38Z",
       "side": 1,
       "message": "does the order here need to match that below? if so, these two appear to be transposed",
+      "range": {
+        "startLine": 922,
+        "startChar": 6,
+        "endLine": 923,
+        "endChar": 31
+      },
+      "revId": "6f981308c5667501ed6eb46a4ecb9c00b084efb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fa2899_10ada9fc",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-29T22:44:17Z",
+      "side": 1,
+      "message": "The order doesn\u0027t matter here, these will be used as a list of dependencies.",
+      "parentUuid": "627be13a_a42681ab",
       "range": {
         "startLine": 922,
         "startChar": 6,
