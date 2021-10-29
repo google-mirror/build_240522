@@ -16,6 +16,24 @@
       "message": "What is LOCAL_MODULE_TYPE?  I only see it set to \"unknown\", and the name is very generic.",
       "revId": "1312df479e4b4c445d4940536f6441b00324c863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d3793a_4645b7ac",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 21
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-10-29T22:36:46Z",
+      "side": 1,
+      "message": "It is a mechanism by which we can indicate the module type like soong_cc_binary or soong_cc_prebuilt or blueprint_go_binary etc.\n\nOf course, to actually use it, we first have to either set it from Soong\u0027s mk interface, or update the various included files to set it before including base_rules.mk\n\nI figured we could defer that work until we need to write a policy that requires knowing certain module types, and we could start by setting it for those types first.",
+      "parentUuid": "fa2878cb_5dffb83e",
+      "revId": "1312df479e4b4c445d4940536f6441b00324c863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
