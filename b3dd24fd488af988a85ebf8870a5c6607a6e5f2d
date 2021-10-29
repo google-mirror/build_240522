@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4608c557_ee80f10e",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-29T23:38:37Z",
+      "side": 1,
+      "message": "we use all capitals for the other ALL_MODULES.$(my_register_name).* variables",
+      "range": {
+        "startLine": 938,
+        "startChar": 32,
+        "endLine": 938,
+        "endChar": 43
+      },
+      "revId": "b3dd24fd488af988a85ebf8870a5c6607a6e5f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
