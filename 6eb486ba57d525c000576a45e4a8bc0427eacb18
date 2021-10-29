@@ -63,6 +63,30 @@
       },
       "revId": "6eb486ba57d525c000576a45e4a8bc0427eacb18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d546f4_0b0555d2",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2021-10-29T03:44:02Z",
+      "side": 1,
+      "message": "Please also update ALL_MODULES.\u003c..\u003e.share_libs and system_share_libs to “shared” everywhere, and also in the commit description.",
+      "parentUuid": "e97d957b_aa525d4d",
+      "range": {
+        "startLine": 938,
+        "startChar": 32,
+        "endLine": 938,
+        "endChar": 42
+      },
+      "revId": "6eb486ba57d525c000576a45e4a8bc0427eacb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
