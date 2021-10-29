@@ -52,6 +52,24 @@
       "parentUuid": "05d3793a_4645b7ac",
       "revId": "1312df479e4b4c445d4940536f6441b00324c863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85034831_cd815f41",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 21
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-10-29T23:04:27Z",
+      "side": 1,
+      "message": "I left it named LOCAL_MODULE_TYPE to parallel the name LOCAL_MODULE, but I changed this file to leave it blank.",
+      "parentUuid": "06e3d3ac_93e6a51c",
+      "revId": "1312df479e4b4c445d4940536f6441b00324c863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
