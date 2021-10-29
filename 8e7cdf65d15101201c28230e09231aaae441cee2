@@ -16,6 +16,24 @@
       "message": "Changes look good to me; thanks!",
       "revId": "8e7cdf65d15101201c28230e09231aaae441cee2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab996b9_67c4ac45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-10-29T18:23:48Z",
+      "side": 1,
+      "message": "Thanks for helping me review the diff. Is there any action items needed from my side?",
+      "parentUuid": "5fb9bb31_2cb71914",
+      "revId": "8e7cdf65d15101201c28230e09231aaae441cee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
