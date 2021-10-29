@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f39a5d5_35e7d18d",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-10-29T21:33:38Z",
+      "side": 1,
+      "message": "can you add a comment of why this is different for the .INSTALLED vs .BUILT_INSTALLED since the non-soong case doesn\u0027t really call out the distinction either?",
+      "range": {
+        "startLine": 920,
+        "startChar": 6,
+        "endLine": 921,
+        "endChar": 45
+      },
+      "revId": "6f981308c5667501ed6eb46a4ecb9c00b084efb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "627be13a_a42681ab",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-10-29T21:33:38Z",
+      "side": 1,
+      "message": "does the order here need to match that below? if so, these two appear to be transposed",
+      "range": {
+        "startLine": 922,
+        "startChar": 6,
+        "endLine": 923,
+        "endChar": 31
+      },
+      "revId": "6f981308c5667501ed6eb46a4ecb9c00b084efb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
