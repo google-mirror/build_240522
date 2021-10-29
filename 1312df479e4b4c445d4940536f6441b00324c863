@@ -34,6 +34,24 @@
       "parentUuid": "fa2878cb_5dffb83e",
       "revId": "1312df479e4b4c445d4940536f6441b00324c863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e3d3ac_93e6a51c",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 21
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-10-29T22:47:57Z",
+      "side": 1,
+      "message": "Can we call it LOCAL_SOONG_MODULE_TYPE?  I\u0027d also suggest leaving it empty if unknown, it will be easier than having to manually handle the \"unknown\" string downstream.\n\nYou could also leave it out completely for now until there is a policy that needs it.",
+      "parentUuid": "05d3793a_4645b7ac",
+      "revId": "1312df479e4b4c445d4940536f6441b00324c863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
