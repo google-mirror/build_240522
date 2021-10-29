@@ -87,6 +87,30 @@
       },
       "revId": "6eb486ba57d525c000576a45e4a8bc0427eacb18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b9b506_5b5dd019",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-10-29T07:28:45Z",
+      "side": 1,
+      "message": "Really sorry about misunderstanding that the care part is share/shared.\n\nJust update again, thanks.",
+      "parentUuid": "21d546f4_0b0555d2",
+      "range": {
+        "startLine": 938,
+        "startChar": 32,
+        "endLine": 938,
+        "endChar": 42
+      },
+      "revId": "6eb486ba57d525c000576a45e4a8bc0427eacb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
