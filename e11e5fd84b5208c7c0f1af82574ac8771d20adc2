@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665e8be9_31131463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2021-11-01T15:45:57Z",
+      "side": 1,
+      "message": "This is not a design I expected from the discussions on the bug. is there a design doc I missed perhaps?\n\n- This is not necessarily classpath related information, so I am not sure it should go into derive_classpath.\n- We are trying to go away from make where possible, instead of adding new entry points from there. Why does it have to be in make?\n- When do you need this information? Is this something that we could introduce a java system api to call at runtime?\n- Note that SystemServer is going to be parsing AndroidManifest.xml files for the standalone system jars. Now we are duplicating the information in many different places.",
+      "revId": "e11e5fd84b5208c7c0f1af82574ac8771d20adc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
