@@ -34,6 +34,24 @@
       "parentUuid": "665e8be9_31131463",
       "revId": "e11e5fd84b5208c7c0f1af82574ac8771d20adc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8cb6a0a_004dfebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2021-11-01T18:32:28Z",
+      "side": 1,
+      "message": "\u003e Thank you for the reply. I don\u0027t have a design doc because I regard this as a relatively small change. I\u0027m trying to explain the change here. If you still think things are unclear to you, please let me know and I can create a design doc.\n\u003e \n\u003e We are going to preopt the standalone system server jars both at build-time and on early boot on the user\u0027s device.\n\u003e \n\u003e We need to preopt on the user\u0027s device because these jars are updatable, and this has to be done on early boot to ensure that the artifacts are securely generated (note that system_server is a privileged process, where security is important).\n\u003e \n\u003e We also need to preopt these jars at build-time to avoid regression on the first boot time. Otherwise, the compilation has to be done on the first boot, which is the time a user unboxes a new phone / a developer starts a new emulator or flashes a new system image / a TradeFed test starts.\n\u003e \n\u003e Therefore, both the build system and odrefresh (on-device compilation) needs the information about these standalone jars.\n\u003e \n\u003e This information cannot be a java system api because we are compiling on early boot, where there is no java code running.\n\u003e \n\u003e AndroidManifest.xml won\u0027t help because we are also compiling at build-time, and the build system is not allowed to read an xml file.\n\u003e \n\u003e We are not duplicating the information in many different places. We only duplicate it once, just for the build system and odrefresh. This approach is similar to how we preopt apps at build-time, where we duplicate apps\u0027 dependencies in Android.bp files.\n\u003e \n\u003e \u003e We are trying to go away from make where possible, instead of adding new entry points from there. Why does it have to be in make?\n\u003e \n\u003e Yes, we are trying to go away from make where possible, but this goal doesn\u0027t conflict with what I\u0027m doing here. This change does not add any new modules to Make. It only adds a product variable, which is later passed to Soong. IIUC, Makefile is still the primary place to hold product variables, at least for now.\n\u003e \n\u003e \u003e This is not necessarily classpath related information, so I am not sure it should go into derive_classpath.\n\u003e \n\u003e No, this is not classpath related information, so I was hesitating. However, odrefresh already depends on derive_classpath to get the information it needs, and derive_classpath has all the code that we can reuse to provide odrefresh with the information that needs to be available on early boot. I\u0027m not sure we should duplicate the logic instead of reusing derive_classpath just because the name \"derive_classpath\" suggests that it should only do things related to classpath.\n\n\nThis is long enough that it should probably just be copy-pasted into a doc verbatim for easier commenting.\n\nLet\u0027s separate this into two parts:\n1. Runtime. Does it really need to be in classpaths.proto? If it was in a manifest, would odrefresh be able to read those xml files?\n2. Build time. Less opinionated here, but the xml files can be generated from soong. For example, classpaths config information is available to soong and still lives in a config file on device.",
+      "parentUuid": "b664e554_1a38d154",
+      "revId": "e11e5fd84b5208c7c0f1af82574ac8771d20adc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
