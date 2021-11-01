@@ -93,6 +93,30 @@
       },
       "revId": "b3dd24fd488af988a85ebf8870a5c6607a6e5f2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69cc2be7_be35f085",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-01T23:16:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aea3e7c8_2b46a555",
+      "range": {
+        "startLine": 938,
+        "startChar": 32,
+        "endLine": 938,
+        "endChar": 43
+      },
+      "revId": "b3dd24fd488af988a85ebf8870a5c6607a6e5f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
