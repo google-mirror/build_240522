@@ -46,6 +46,30 @@
       },
       "revId": "1010fff193519427379f2d4909ac45e41dba887a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cd7c41_b9f5e51e",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-01T23:14:13Z",
+      "side": 1,
+      "message": "If it is intended to be set in product mk files it should usually have a PRODUCT_ prefix and be listed in _product_single_value_vars in product.mk",
+      "parentUuid": "0849ecf9_fad23598",
+      "range": {
+        "startLine": 274,
+        "startChar": 70,
+        "endLine": 274,
+        "endChar": 100
+      },
+      "revId": "1010fff193519427379f2d4909ac45e41dba887a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
