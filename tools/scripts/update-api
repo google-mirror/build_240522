@@ -1,0 +1,76 @@
+#!/bin/bash
+set -euo pipefail
+
+cmd_line_args=$@
+DEFAULT_TARGET=update-api
+
+function _print_update_api_help_msg() {
+  printf \
+"Utility function to update API in source tree
+Usage:
+    update-api [options] [targets...]
+Options:
+    -j N  run N jobs in parallel
+Examples:
+    update-api # update-api is default
+    update-api -j8 # update-api with 8 parallel jobs
+    update-api update-api # update all APIs
+    update-api android.car-stubs-docs-update-current-api android.net.ipsec.ike.stubs.source-update-current-api # update subset of APIs
+"
+}
+
+# Converts the *update-current-api phony target to *update-current-api.sh
+# *update_current_api.sh contains commands to cp the updated API to the source tree
+# input: space separated list of phony targets
+function _get_update_api_script_names() {
+  echo $@ | tr ' ' '\n' | sed 's#^.*$#out/soong/metalava/&.sh#'
+}
+
+# Uses getopt to split $cmd_line_args into $options and $targets
+# $options: -j flag for soong_ui.bash
+# $targets: ninja targets
+function _get_options_and_targets() {
+  cmd_line_args=$(getopt -l "help" -o "h,j:" -- ${cmd_line_args})
+  eval set -- "${cmd_line_args}"
+
+  options=""
+  targets=""
+
+  while true; do
+    case $1 in
+      -h|--help)
+        _print_update_api_help_msg
+        exit 0
+        ;;
+      -j)
+        shift;
+        options=-j$1
+        shift;
+        ;;
+      --)
+        shift;
+        targets=${@:-${DEFAULT_TARGET}}
+        break;
+        ;;
+    esac
+  done
+}
+
+function update_api() {
+  # get top of source tree. Changing the location of this script might require
+  # updating the assignment below
+  top="${BASH_SOURCE%/*}/../../../.."
+  # extract targets and options from $cmd_line_args
+  _get_options_and_targets
+  # get update api script names to build
+  update_api_scripts=$(_get_update_api_script_names ${targets})
+  # generate update_api scripts
+  ${top}/build/soong/soong_ui.bash --build-mode --all-modules --dir=$(pwd) ${options} ${update_api_scripts}
+  # Run update_api scripts to update source tree
+  for update_api_script in ${update_api_scripts}; do
+    echo Running script ${update_api_script}
+    (cd ${top} && ${update_api_script})
+  done
+}
+
+update_api
