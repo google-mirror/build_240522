@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000016790756",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1835800?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "21cd5f60_95a2259e",
+          "description": "Change to \"core/force_aapt2.mk\"",
+          "replacements": [
+            {
+              "path": "core/force_aapt2.mk",
+              "range": {
+                "startLine": 56,
+                "startChar": 15,
+                "endLine": 56,
+                "endChar": 21
+              },
+              "replacement": "error"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4a802209_7cf08cf1",
+        "filename": "core/force_aapt2.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-11-02T03:55:13Z",
+      "side": 1,
+      "message": "Common typo found: \"errror\" -- should it be \"error\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 21
+      },
+      "revId": "f45680b601282c4bcd7bc88de21f68080baa25cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
