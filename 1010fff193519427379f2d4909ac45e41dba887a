@@ -70,6 +70,30 @@
       },
       "revId": "1010fff193519427379f2d4909ac45e41dba887a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24b08ff_bdc4a0ca",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-02T01:15:54Z",
+      "side": 1,
+      "message": "Yes, I think I know that, but I didn\u0027t went down that path because (1) this switch is a temporary one which should be deprecated very soon (\u003c 1y) and (2) this doesn\u0027t need the inheritance behavior.\n\nGiven that this is a temporary switch to work-around the absence of the ndk_platform libraries, it\u0027s fine to set this outside of the product mk file (e.g. set as an environment variable when invoking `m` ).",
+      "parentUuid": "37cd7c41_b9f5e51e",
+      "range": {
+        "startLine": 274,
+        "startChar": 70,
+        "endLine": 274,
+        "endChar": 100
+      },
+      "revId": "1010fff193519427379f2d4909ac45e41dba887a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
