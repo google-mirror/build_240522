@@ -43,11 +43,3 @@ endif
 ifneq (,$(filter-out current system_current test_current core_current,$(LOCAL_SDK_VERSION)))
   LOCAL_SDK_RES_VERSION := current
 endif
-
-ifeq (,$(strip $(LOCAL_MANIFEST_FILE)$(LOCAL_FULL_MANIFEST_FILE)))
-  ifeq (,$(wildcard $(LOCAL_PATH)/AndroidManifest.xml))
-    # work around missing manifests by creating a default one
-    LOCAL_FULL_MANIFEST_FILE := $(call local-intermediates-dir,COMMON)/DefaultManifest.xml
-    $(call create-default-manifest-file,$(LOCAL_FULL_MANIFEST_FILE),$(call module-min-sdk-version))
-  endif
-endif
