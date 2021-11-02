@@ -26,5 +26,5 @@ PRODUCT_PACKAGES += \
     Provision \
     Settings \
     StorageManager \
-    SystemUI \
+    com.android.sysui \
     WallpaperCropper \
