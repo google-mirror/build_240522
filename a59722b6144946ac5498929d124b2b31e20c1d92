@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2c0612_0d5f528a",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-11-03T08:59:39Z",
+      "side": 1,
+      "message": "Why we need this if statement?",
+      "range": {
+        "startLine": 1069,
+        "startChar": 0,
+        "endLine": 1069,
+        "endChar": 47
+      },
+      "revId": "a59722b6144946ac5498929d124b2b31e20c1d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70540d28_6f1f11fd",
+        "filename": "core/java_common.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-11-03T08:59:39Z",
+      "side": 1,
+      "message": "Maybe describe more that the time consumption is acceptable?",
+      "range": {
+        "startLine": 381,
+        "startChar": 42,
+        "endLine": 381,
+        "endChar": 43
+      },
+      "revId": "a59722b6144946ac5498929d124b2b31e20c1d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
