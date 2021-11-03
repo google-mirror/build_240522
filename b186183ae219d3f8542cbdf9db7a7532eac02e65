@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39543a5_c3cd17c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-03T09:30:31Z",
+      "side": 1,
+      "message": "Removing myself, so the core build team (joeo et al) reviews it instead",
+      "revId": "b186183ae219d3f8542cbdf9db7a7532eac02e65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
