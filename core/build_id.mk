@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (dcb0e4 Merge "Add share_libs and system_share_libs to module-info")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SP1A.211105.004
+>>>>>>> BRANCH (53d8aa Version bump to SP1A.211105.004 [core/build_id.mk])
