@@ -37,6 +37,7 @@ ALL_DOCS:=
 # sub-variables.
 ALL_MODULES:=
 
+
 # Full paths to targets that should be added to the "make droid"
 # set of installed targets.
 ALL_DEFAULT_INSTALLED_MODULES:=

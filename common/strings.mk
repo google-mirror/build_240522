@@ -87,6 +87,8 @@ define word-colon
 $(word $(1),$(subst :,$(space),$(2)))
 endef
 
+
+
 ###########################################################
 ## Convert "a=b c= d e = f = g h=" into "a=b c=d e= f=g h="
 ##

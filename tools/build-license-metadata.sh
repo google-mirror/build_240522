@@ -32,6 +32,7 @@ installmap=
 is_container=false
 ofile=
 
+
 # Global variables
 depfiles=" "
 effective_conditions=

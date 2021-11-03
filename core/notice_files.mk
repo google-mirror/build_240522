@@ -105,6 +105,7 @@ notice_deps := \
         $(LOCAL_STATIC_JAVA_LIBRARIES) \
     )
 endif
+
 ifeq ($(LOCAL_IS_HOST_MODULE),true)
 notice_deps := $(strip $(notice_deps) $(LOCAL_HOST_REQUIRED_MODULES))
 else

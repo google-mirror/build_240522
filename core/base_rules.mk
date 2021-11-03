@@ -544,6 +544,7 @@ else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   $(foreach symlink,$(my_installed_symlinks),\
       $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink)))
 
+
   $(my_all_targets) : | $(my_installed_symlinks)
 
 endif # !LOCAL_UNINSTALLABLE_MODULE
