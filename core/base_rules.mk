@@ -731,7 +731,7 @@ endif
 # The module itself.
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite),$(arch_dir)), \
-    $(LOCAL_BUILT_MODULE):$(dir)/$(my_installed_module_stem))) \
+    $(addprefix $(LOCAL_BUILT_MODULE):,$(filter-out $(LOCAL_INSTALLED_MODULE),$(dir)/$(my_installed_module_stem))))) \
   $(eval my_compat_dist_config_$(suite) := ))
 
 
