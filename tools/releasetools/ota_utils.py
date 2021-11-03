@@ -569,7 +569,10 @@ class PropertyFiles(object):
       tokens.append('metadata.pb:' + ' ' * 15)
     else:
       tokens.append(ComputeEntryOffsetSize(METADATA_NAME))
-      tokens.append(ComputeEntryOffsetSize(METADATA_PROTO_NAME))
+      try:
+          tokens.append(ComputeEntryOffsetSize(METADATA_PROTO_NAME))
+      except KeyError:
+          pass
 
     return ','.join(tokens)
 
