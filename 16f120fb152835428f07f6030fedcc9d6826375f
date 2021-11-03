@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8186a20c_2491b618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2021-11-03T16:16:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is needed by anything _real_ out there ( aside me ), but I was trying the updater_sample with an OTA from R and hit this issue.\nIs this fine by you?",
+      "revId": "16f120fb152835428f07f6030fedcc9d6826375f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
