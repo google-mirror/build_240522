@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed6473aa_f8981179",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-11-03T09:19:16Z",
+      "side": 1,
+      "message": "I have some kind of feeling that we don\u0027t this if statement.\n\nIf you keep this statement, these part will only be applied when deps-license be set as an input target.",
+      "parentUuid": "6644a822_7cf58da9",
+      "range": {
+        "startLine": 1069,
+        "startChar": 0,
+        "endLine": 1069,
+        "endChar": 47
+      },
+      "revId": "a59722b6144946ac5498929d124b2b31e20c1d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70540d28_6f1f11fd",
         "filename": "core/java_common.mk",
         "patchSetId": 1
