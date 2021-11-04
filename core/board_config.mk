@@ -411,6 +411,15 @@ else ifeq ($(PRODUCT_BUILD_BOOT_IMAGE),true)
 endif
 .KATI_READONLY := BUILDING_BOOT_IMAGE
 
+# Are we building an init boot image
+BUILDING_INIT_BOOT_IMAGE :=
+ifneq ($(PRODUCT_BUILD_INIT_BOOT_IMAGE),false)
+  # TODO more cases?
+  BUILDING_INIT_BOOT_IMAGE := true
+endif
+
+.KATI_READONLY := BUILDING_INIT_BOOT_IMAGE
+
 # Are we building a recovery image
 BUILDING_RECOVERY_IMAGE :=
 ifeq ($(PRODUCT_BUILD_RECOVERY_IMAGE),)

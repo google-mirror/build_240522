@@ -897,7 +897,11 @@ INTERNAL_BOOTIMAGE_ARGS := \
 	$(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET))
 
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+ifneq ($(BUILDING_INIT_BOOT_IMAGE),true)
 INTERNAL_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+else
+INTERNAL_INIT_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+endif
 endif
 
 ifndef BUILDING_VENDOR_BOOT_IMAGE
@@ -1075,6 +1079,32 @@ endif # my_installed_prebuilt_gki_apex not defined
 
 my_apex_extracted_boot_image :=
 my_installed_prebuilt_gki_apex :=
+
+# -----------------------------------------------------------------
+#  init boot image
+ifeq ($(BUILDING_INIT_BOOT_IMAGE),true)
+
+INSTALLED_INIT_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/init_boot.img
+$(INSTALLED_INIT_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_RAMDISK_TARGET)
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(INSTALLED_INIT_BOOTIMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_INIT_BOOTIMAGE_KEY_PATH)
+	$(call pretty,"Target init_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_INIT_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
+	$(call assert-max-image-size,$@,$(BOARD_INIT_BOOTIMAGE_PARTITION_SIZE))
+	$(AVBTOOL) add_hash_footer \
+           --image $@ \
+	   --partition_size $(BOARD_INIT_BOOTIMAGE_PARTITION_SIZE) \
+	   --partition_name init_boot $(INTERNAL_AVB_INIT_BOOT_SIGNING_ARGS) \
+	   $(BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS)
+else
+$(INSTALLED_INIT_BOOTIMAGE_TARGET):
+	$(call pretty,"Target init_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_INIT_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_INIT_ARGS) --ramdisk $(INSTALLED_RAMDISK_TARGET) --output $@
+	$(call assert-max-image-size,$@,$(BOARD_INIT_BOOTIMAGE_PARTITION_SIZE))
+endif
+
+endif # BUILDING_INIT_BOOT_IMAGE
 
 # -----------------------------------------------------------------
 # vendor boot image
@@ -3675,6 +3705,10 @@ ifdef INSTALLED_BOOTIMAGE_TARGET
 $(eval $(call check-and-set-avb-args,boot))
 endif
 
+ifdef INSTALLED_INIT_BOOTIMAGE_TARGET
+$(eval $(call check-and-set-avb-args,init_boot))
+endif
+
 ifdef INSTALLED_VENDOR_BOOTIMAGE_TARGET
 $(eval $(call check-and-set-avb-args,vendor_boot))
 endif
@@ -3874,6 +3908,7 @@ $(INSTALLED_VBMETAIMAGE_TARGET): PRIVATE_AVB_VBMETA_SIGNING_ARGS := \
 $(INSTALLED_VBMETAIMAGE_TARGET): \
 	    $(AVBTOOL) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
+		$(INDTALLED_INIT_BOOTIMAGE_TARGET) \
 	    $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
@@ -5564,6 +5599,7 @@ $(PROGUARD_USAGE_ZIP): \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
     $(INSTALLED_BOOTIMAGE_TARGET) \
+	$(INSTALLED_INIT_BOOTIMAGE_TARGET) \
     $(INSTALLED_USERDATAIMAGE_TARGET) \
     $(INSTALLED_VENDORIMAGE_TARGET) \
     $(INSTALLED_PRODUCTIMAGE_TARGET) \
