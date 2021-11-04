@@ -908,8 +908,14 @@ ifneq ($(strip $(TARGET_NO_KERNEL)),true)
 INTERNAL_BOOTIMAGE_ARGS := \
 	$(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET))
 
+INTERNAL_INIT_BOOT_IMAGE_ARGS :=
+
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
-INTERNAL_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+  ifneq ($(BUILDING_INIT_BOOT_IMAGE),true)
+    INTERNAL_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+  else
+    INTERNAL_INIT_BOOT_IMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+  endif
 endif
 
 ifndef BUILDING_VENDOR_BOOT_IMAGE
@@ -1087,6 +1093,37 @@ endif # my_installed_prebuilt_gki_apex not defined
 
 my_apex_extracted_boot_image :=
 my_installed_prebuilt_gki_apex :=
+
+# -----------------------------------------------------------------
+#  init boot image
+ifeq ($(BUILDING_INIT_BOOT_IMAGE),true)
+
+INSTALLED_INIT_BOOT_IMAGE_TARGET := $(PRODUCT_OUT)/init_boot.img
+$(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_RAMDISK_TARGET)
+
+ifdef BOARD_KERNEL_PAGESIZE
+  INTERNAL_INIT_BOOT_IMAGE_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+  $(hide) echo "$(BOARD_KERNEL_PAGESIZE)" > $(zip_root)/INIT_BOOT/pagesize
+endif
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_INIT_BOOT_IMAGE_KEY_PATH)
+	$(call pretty,"Target init_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_INIT_BOOT_IMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_INIT_ARGS) --output $@
+	$(call assert-max-image-size,$@,$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE))
+	$(AVBTOOL) add_hash_footer \
+           --image $@ \
+	   --partition_size $(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE) \
+	   --partition_name init_boot $(INTERNAL_AVB_INIT_BOOT_SIGNING_ARGS) \
+	   $(BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS)
+else
+$(INSTALLED_INIT_BOOT_IMAGE_TARGET):
+	$(call pretty,"Target init_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_INIT_BOOT_IMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_INIT_ARGS) --output $@
+	$(call assert-max-image-size,$@,$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE))
+endif
+
+endif # BUILDING_INIT_BOOT_IMAGE
 
 # -----------------------------------------------------------------
 # vendor boot image
@@ -3620,9 +3657,13 @@ BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS += \
     --prop com.android.build.pvmfw.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
 
 # The following vendor- and odm-specific images needs explicit SPL set per board.
+# TODO(b/210875415) Is this security_patch property used? Should it be removed from
+# boot.img when there is no platform ramdisk included in it?
 ifdef BOOT_SECURITY_PATCH
 BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += \
     --prop com.android.build.boot.security_patch:$(BOOT_SECURITY_PATCH)
+BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.init_boot.security_patch:$(BOOT_SECURITY_PATCH)
 endif
 
 ifdef VENDOR_SECURITY_PATCH
@@ -3651,6 +3692,7 @@ BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS += \
 endif
 
 BOOT_FOOTER_ARGS := BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS
+INIT_BOOT_FOOTER_ARGS := BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS
 VENDOR_BOOT_FOOTER_ARGS := BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS
 DTBO_FOOTER_ARGS := BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS
 PVMFW_FOOTER_ARGS := BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS
@@ -3732,6 +3774,10 @@ endef
 
 ifdef INSTALLED_BOOTIMAGE_TARGET
 $(eval $(call check-and-set-avb-args,boot))
+endif
+
+ifdef INSTALLED_INIT_BOOT_IMAGE_TARGET
+$(eval $(call check-and-set-avb-args,init_boot))
 endif
 
 ifdef INSTALLED_VENDOR_BOOTIMAGE_TARGET
@@ -3830,6 +3876,9 @@ define extract-avb-chain-public-keys
   $(if $(BOARD_AVB_BOOT_KEY_PATH),\
     $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_BOOT_KEY_PATH) \
       --output $(1)/boot.avbpubkey)
+  $(if $(BOARD_AVB_INIT_BOOT_KEY_PATH),\
+    $(hide) $(AVBTOOL) extract_public_key --key $(BOARD_AVB_INIT_BOOT_KEY_PATH) \
+      --output $(1)/init_boot.avbpubkey)
   $(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),\
     $(AVBTOOL) extract_public_key --key $(BOARD_AVB_VENDOR_BOOT_KEY_PATH) \
       --output $(1)/vendor_boot.avbpubkey)
@@ -3933,6 +3982,7 @@ $(INSTALLED_VBMETAIMAGE_TARGET): PRIVATE_AVB_VBMETA_SIGNING_ARGS := \
 $(INSTALLED_VBMETAIMAGE_TARGET): \
 	    $(AVBTOOL) \
 	    $(INSTALLED_BOOTIMAGE_TARGET) \
+	    $(INSTALLED_INIT_BOOT_IMAGE_TARGET) \
 	    $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) \
 	    $(INSTALLED_SYSTEMIMAGE_TARGET) \
 	    $(INSTALLED_VENDORIMAGE_TARGET) \
@@ -4504,6 +4554,10 @@ ifeq ($(INSTALLED_BOOTIMAGE_TARGET),)
 else
 	echo "boot_images=$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),$(notdir $(b)))" >> $@
 endif
+ifneq ($(INSTALLED_INIT_BOOT_IMAGE_TARGET),)
+	$(hide) echo "init_boot=true" >> $@
+	$(hide) echo "init_boot_size=$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE)" >> $@
+endif
 ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 	echo "lz4_ramdisks=true" >> $@
 endif
@@ -4537,6 +4591,7 @@ endif
 	$(hide) echo 'mkbootimg_args=$(BOARD_MKBOOTIMG_ARGS)' >> $@
 	$(hide) echo 'recovery_mkbootimg_args=$(BOARD_RECOVERY_MKBOOTIMG_ARGS)' >> $@
 	$(hide) echo 'mkbootimg_version_args=$(INTERNAL_MKBOOTIMG_VERSION_ARGS)' >> $@
+	$(hide) echo 'mkbootimg_init_args=$(BOARD_MKBOOTIMG_INIT_ARGS)' >> $@
 ifdef BOARD_GKI_SIGNING_KEY_PATH
 	$(hide) echo 'gki_signing_key_path=$(BOARD_GKI_SIGNING_KEY_PATH)' >> $@
 	$(hide) echo 'gki_signing_algorithm=$(BOARD_GKI_SIGNING_ALGORITHM)' >> $@
@@ -4913,9 +4968,10 @@ else ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
   $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
 endif
 
-ifdef BUILDING_BOOT_IMAGE
+ifneq (,$(BUILDING_BOOT_IMAGE)$(BUILDING_INIT_BOOT_IMAGE))
   $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_RAMDISK_FILES)
-endif
+endif  # BUILDING_BOOT_IMAGE != "" || BUILDING_INIT_BOOT_IMAGE != ""
+
 ifneq (,$(INTERNAL_PREBUILT_BOOTIMAGE) $(filter true,$(BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES)))
   $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTIMAGE_TARGET)
 endif
@@ -5313,6 +5369,10 @@ ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
 	@# BOOT/RAMDISK exists and contains the ramdisk for recovery if using BOARD_USES_RECOVERY_AS_BOOT.
 	$(hide) $(call fs_config,$(zip_root)/BOOT/RAMDISK,) > $(zip_root)/META/boot_filesystem_config.txt
 endif
+ifdef BUILDING_INIT_BOOT_IMAGE
+	$(hide) $(call package_files-copy-root, $(TARGET_RAMDISK_OUT),$(zip_root)/INIT_BOOT/RAMDISK)
+	$(hide) $(call fs_config,$(zip_root)/INIT_BOOT/RAMDISK,) > $(zip_root)/META/init_boot_filesystem_config.txt
+endif
 ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
 	$(call fs_config,$(zip_root)/VENDOR_BOOT/RAMDISK,) > $(zip_root)/META/vendor_boot_filesystem_config.txt
 endif
@@ -5626,6 +5686,7 @@ $(PROGUARD_USAGE_ZIP): \
     $(INSTALLED_SYSTEMIMAGE_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
     $(INSTALLED_BOOTIMAGE_TARGET) \
+    $(INSTALLED_INIT_BOOT_IMAGE_TARGET) \
     $(INSTALLED_USERDATAIMAGE_TARGET) \
     $(INSTALLED_VENDORIMAGE_TARGET) \
     $(INSTALLED_PRODUCTIMAGE_TARGET) \
