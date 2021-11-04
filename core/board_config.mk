@@ -434,6 +434,25 @@ else ifeq ($(PRODUCT_BUILD_BOOT_IMAGE),true)
 endif
 .KATI_READONLY := BUILDING_BOOT_IMAGE
 
+# Are we building an init boot image
+BUILDING_INIT_BOOT_IMAGE :=
+ifeq ($(PRODUCT_BUILD_INIT_BOOT_IMAGE),)
+  ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+    BUILDING_INIT_BOOT_IMAGE :=
+  else ifdef BOARD_PREBUILT_INIT_BOOT_IMAGE
+    BUILDING_INIT_BOOT_IMAGE :=
+  else ifdef BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE
+    BUILDING_INIT_BOOT_IMAGE := true
+  endif
+else ifeq ($(PRODUCT_BUILD_INIT_BOOT_IMAGE),true)
+  ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+    $(error PRODUCT_BUILD_INIT_BOOT_IMAGE is true, but so is BOARD_USES_RECOVERY_AS_BOOT. Use only one option.)
+  else
+    BUILDING_INIT_BOOT_IMAGE := true
+  endif
+endif
+.KATI_READONLY := BUILDING_INIT_BOOT_IMAGE
+
 # Are we building a recovery image
 BUILDING_RECOVERY_IMAGE :=
 ifeq ($(PRODUCT_BUILD_RECOVERY_IMAGE),)
@@ -540,6 +559,11 @@ else ifndef BUILDING_RAMDISK_IMAGE
 else ifndef _has_boot_img_artifact
   ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)
     $(warning PRODUCT_BUILD_DEBUG_BOOT_IMAGE is true, but we're not building a boot image. \
+      Skip building the debug boot image.)
+  endif
+else ifdef BUILDING_INIT_BOOT_IMAGE
+  ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)
+    $(warning PRODUCT_BUILD_DEBUG_BOOT_IMAGE is true, but we don't have a ramdisk in the boot image. \
       Skip building the debug boot image.)
   endif
 else
