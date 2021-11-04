@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be2d5c8_d152d518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-04T23:15:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "4a68b9da_dbd459cd",
+      "revId": "36b2cc5eb8c9771419674826ef5554818d105388",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da82be8e_20fde19d",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-11-04T22:52:38Z",
       "side": 1,
       "message": "Please see me comment for the accompanying build/soong change: instead of exproting this, IMHO it\u0027s better to export board initialization.",
+      "revId": "36b2cc5eb8c9771419674826ef5554818d105388",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae90565f_8289b45b",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 8
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-04T23:15:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "da82be8e_20fde19d",
       "revId": "36b2cc5eb8c9771419674826ef5554818d105388",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
