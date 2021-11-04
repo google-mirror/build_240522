@@ -111,7 +111,7 @@ SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
 # descriptor into vbmeta.img. When adding a new entry here, the
 # AVB_FOOTER_ARGS_BY_PARTITION in sign_target_files_apks need to be updated
 # accordingly.
-AVB_PARTITIONS = ('boot', 'dtbo', 'odm', 'product', 'pvmfw', 'recovery',
+AVB_PARTITIONS = ('boot', 'init_boot', 'dtbo', 'odm', 'product', 'pvmfw', 'recovery',
                   'system', 'system_ext', 'vendor', 'vendor_boot',
                   'vendor_dlkm', 'odm_dlkm')
 
@@ -130,7 +130,7 @@ PARTITIONS_WITH_CARE_MAP = [
 ]
 
 # Partitions with a build.prop file
-PARTITIONS_WITH_BUILD_PROP = PARTITIONS_WITH_CARE_MAP + ['boot']
+PARTITIONS_WITH_BUILD_PROP = PARTITIONS_WITH_CARE_MAP + ['boot', 'init_boot']
 
 # See sysprop.mk. If file is moved, add new search paths here; don't remove
 # existing search paths.
@@ -935,9 +935,9 @@ class PartitionBuildProps(object):
   def FromInputFile(input_file, name, placeholder_values=None, ramdisk_format=RamdiskFormat.LZ4):
     """Loads the build.prop file and builds the attributes."""
 
-    if name == "boot":
+    if name == "boot" or name == "init_boot":
       data = PartitionBuildProps._ReadBootPropFile(
-          input_file, ramdisk_format=ramdisk_format)
+          input_file, name, ramdisk_format=ramdisk_format)
     else:
       data = PartitionBuildProps._ReadPartitionPropFile(input_file, name)
 
@@ -946,15 +946,16 @@ class PartitionBuildProps(object):
     return props
 
   @staticmethod
-  def _ReadBootPropFile(input_file, ramdisk_format):
+  def _ReadBootPropFile(input_file, partition_name, ramdisk_format):
     """
     Read build.prop for boot image from input_file.
     Return empty string if not found.
     """
+    image_path = 'IMAGES/' + partition_name + '.img'
     try:
-      boot_img = ExtractFromInputFile(input_file, 'IMAGES/boot.img')
+      boot_img = ExtractFromInputFile(input_file, image_path)
     except KeyError:
-      logger.warning('Failed to read IMAGES/boot.img')
+      logger.warning('Failed to read %s', image_path)
       return ''
     prop_file = GetBootImageBuildProp(boot_img, ramdisk_format=ramdisk_format)
     if prop_file is None:
