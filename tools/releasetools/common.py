@@ -949,10 +949,14 @@ class PartitionBuildProps(object):
     Return empty string if not found.
     """
     try:
-      boot_img = ExtractFromInputFile(input_file, 'IMAGES/boot.img')
+      boot_img = ExtractFromInputFile(input_file, 'IMAGES/init_boot.img')
     except KeyError:
-      logger.warning('Failed to read IMAGES/boot.img')
-      return ''
+      logger.warning('Failed to read IMAGES/init_boot.img')
+      try:
+        boot_img = ExtractFromInputFile(input_file, 'IMAGES/boot.img')
+      except KeyError:
+        logger.warning('Failed to read IMAGES/boot.img')
+        return ''
     prop_file = GetBootImageBuildProp(boot_img, ramdisk_format=ramdisk_format)
     if prop_file is None:
       return ''
@@ -3760,6 +3764,7 @@ def GetBootImageBuildProp(boot_img, ramdisk_format=RamdiskFormat.LZ4):
     An extracted file that stores properties in the boot image.
   """
   tmp_dir = MakeTempDir('boot_', suffix='.img')
+  # This needs to also check the init_boot image.
   try:
     RunAndCheckOutput(['unpack_bootimg', '--boot_img',
                       boot_img, '--out', tmp_dir])
