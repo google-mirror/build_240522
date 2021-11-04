@@ -759,8 +759,14 @@ def AddImagesToTargetFiles(filename):
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
   has_boot = OPTIONS.info_dict.get("no_boot") != "true"
+  has_init_boot = OPTIONS.info_dict.get("init_boot") == "true"
   has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
-
+  # FIXME remove this, figure out where this dict is coming from and why no
+  # init_boot
+  if has_init_boot:
+    logger.warning("has init_boot!!")
+  else:
+    logger.warning("no init_boot...")
   # {vendor,odm,product,system_ext,vendor_dlkm,odm_dlkm, system, system_other}.img
   # can be built from source, or  dropped into target_files.zip as a prebuilt blob.
   has_vendor = HasPartition("vendor")
@@ -818,6 +824,17 @@ def AddImagesToTargetFiles(filename):
           boot_image.WriteToDir(OPTIONS.input_tmp)
           if output_zip:
             boot_image.AddToZip(output_zip)
+
+  if has_init_boot:
+    banner("init_boot")
+    init_boot_image = common.GetBootableImage(
+        "IMAGES/init_boot.img", "init_boot.img", OPTIONS.input_tmp, "INIT_BOOT")
+    if init_boot_image:
+      partitions['init_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES", "init_boot.img")
+      if not os.path.exists(partitions['init_boot']):
+        init_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          init_boot_image.AddToZip(output_zip)
 
   if has_vendor_boot:
     banner("vendor_boot")
