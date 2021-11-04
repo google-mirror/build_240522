@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3781ce_7170079d",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-11-04T04:14:29Z",
+      "side": 1,
+      "message": "GetNonSparseImage?",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "0f137b77e9946441973732747c52f4549a598a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
