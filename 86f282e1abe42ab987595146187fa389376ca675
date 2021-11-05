@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95043085_544b7ce0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-05T16:43:53Z",
+      "side": 1,
+      "message": "For release signing, we basically need to repeat L497-526, with `files` collected from the FsVerityDigests that we\u0027re generating here.  Right?\n\nDo you know if we could reuse fsverity_signer.py in the actual release signing?  It might be better to move some of these code there.",
+      "range": {
+        "startLine": 503,
+        "startChar": 13,
+        "endLine": 503,
+        "endChar": 18
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d67c6fd_5f4f2399",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 6
