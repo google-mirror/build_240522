@@ -16,6 +16,24 @@
       "message": "Nit: remove this extra empty line?",
       "revId": "7412377033c6b69035db7ba2734e3369c43449b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62dc3a7e_f64c5269",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-05T16:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c23339cd_69d6cc05",
+      "revId": "7412377033c6b69035db7ba2734e3369c43449b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
