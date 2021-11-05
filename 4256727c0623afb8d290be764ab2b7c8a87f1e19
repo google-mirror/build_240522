@@ -22,6 +22,30 @@
       },
       "revId": "4256727c0623afb8d290be764ab2b7c8a87f1e19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ebae6e_fc196c92",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-05T21:26:14Z",
+      "side": 1,
+      "message": "That\u0027s intentional, cleanspec entries get run exactly once on the next incremental build, and I need to clean out $(SOONG_HOST_OUT) for anyone who built after the previous lines were added.",
+      "parentUuid": "ea3562fd_be8e2351",
+      "range": {
+        "startLine": 765,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 48
+      },
+      "revId": "4256727c0623afb8d290be764ab2b7c8a87f1e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
