@@ -16,6 +16,98 @@
       "message": "This is WIP; I\u0027ve hard coded some values. But, in the meantime, PTAL.",
       "revId": "86f282e1abe42ab987595146187fa389376ca675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451eb446_768cd460",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 2781,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-05T02:51:17Z",
+      "side": 1,
+      "message": "wrap this into a variable.",
+      "range": {
+        "startLine": 2781,
+        "startChar": 85,
+        "endLine": 2781,
+        "endChar": 129
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d67c6fd_5f4f2399",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-05T02:51:17Z",
+      "side": 1,
+      "message": "add this to apkcerts.txt.",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 62
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5acef8_9d1294c8",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-05T02:51:17Z",
+      "side": 1,
+      "message": "pass this via prop_dict.",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 66
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a24253_0c195693",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-05T02:51:17Z",
+      "side": 1,
+      "message": "do not hard-code but receive the platform key from Makefile.",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 66
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
