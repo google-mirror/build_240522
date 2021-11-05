@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b0a631_d0306050",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-05T16:20:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4446ed04_7bf840fe",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68c098d8_c732d52d",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-05T16:06:25Z",
       "side": 1,
       "message": "Spello - drop.",
+      "range": {
+        "startLine": 44,
+        "startChar": 54,
+        "endLine": 44,
+        "endChar": 55
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93add40a_b23ec062",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-05T16:20:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68c098d8_c732d52d",
       "range": {
         "startLine": 44,
         "startChar": 54,
@@ -83,6 +131,48 @@
       "writtenOn": "2021-11-05T16:06:25Z",
       "side": 1,
       "message": "I suggest putting this if condition before the one aboe, i.e:\n\n  ifneq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)))\n    ...\n  else ifeq (,$(filter com.google.android.conscrypt,$(PRODUCT_PACKAGES)))\n    ...\n  endif\n\nIt makes the flow less convoluted by not (potentially) undoing the true assignment above.",
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "334e667f_6e4e2efb",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-05T16:20:14Z",
+      "side": 1,
+      "message": "I need it in a branch that doesn\u0027t have aosp/1870248, but I guess I could cp aosp/1870248 to that branch as well, perhaps that\u0027s better. Done",
+      "parentUuid": "d1513ebe_3c098a4a",
+      "range": {
+        "startLine": 47,
+        "startChar": 27,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73de3b67_2addb9f3",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-05T16:20:14Z",
+      "side": 1,
+      "message": "mmmh unclear to me which is easiest to understand. I guess it\u0027s pretty hairy either way. Another alternative:\n\n  ifeq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS))$(filter com.google.android.conscrypt,$(PRODUCT_PACKAGES)))\n    MODULE_BUILD_FROM_SOURCE :\u003d true\n  endif\n\nDone as you suggested for now.",
+      "parentUuid": "e99ff0a8_646cf61c",
       "revId": "422f4240682f461e107a63a52f83234850dfed14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
