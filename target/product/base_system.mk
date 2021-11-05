@@ -405,4 +405,12 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+  # Don't depend on the framework boot image profile in unbundled builds where
+  # frameworks/base may not be present.
+  # TODO(b/179900989): We may not need this check once we stop using full
+  # platform products on the thin ART manifest branch.
+  PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION += frameworks/base/boot/boot-image-profile.txt
+endif
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
