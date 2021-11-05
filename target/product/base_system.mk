@@ -405,4 +405,6 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
+PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION += frameworks/base/boot/boot-image-profile.txt
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
