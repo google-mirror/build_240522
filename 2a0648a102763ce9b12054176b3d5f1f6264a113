@@ -33,6 +33,24 @@
       "message": "nit: convert 2111-2114 to a one-liner?\n```\nfor k in sorted(keylist, key\u003dlambda x: x if x is not None else \"\"): \n```\nThis will place all None elements at the beginning of the array",
       "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "923a0517_c244687b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-05T00:50:24Z",
+      "side": 1,
+      "message": "keylist can also probably contain empty strings (\"\"), in which case the lambda becomes a little messier and probably not worth it\n```\nNULL_CMP_PREFIX \u003d \"_null\"\nfor k in sorted(keylist, key\u003dlambda x: NULL_CMP_PREFIX + x if x is not None else \"\"): \n```",
+      "parentUuid": "2c097a17_35e24b12",
+      "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
