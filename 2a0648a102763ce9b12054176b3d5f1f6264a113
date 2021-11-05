@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d38d7fc_b7c3bf86",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-05T01:58:41Z",
+      "side": 1,
+      "message": "This makes sense to me now, thanks for clarifying!",
+      "parentUuid": "5de28460_1b02ef11",
+      "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c097a17_35e24b12",
