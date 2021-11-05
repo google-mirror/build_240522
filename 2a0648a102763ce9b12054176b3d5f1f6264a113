@@ -18,6 +18,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5de28460_1b02ef11",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-05T01:03:20Z",
+      "side": 1,
+      "message": "I updated the comment, let me know if this answers your questions. I think the intent of this is just to find the DIR_SEARCH_PATHS entry that corresponds with a particular path, so we should match against the longest prefix possible.",
+      "parentUuid": "f77275b5_9d15df52",
+      "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039ab147_c10d618d",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-05T01:03:20Z",
+      "side": 1,
+      "message": "I updated the comment, let me know if this answers your questions. I think the intent of this is just to find the DIR_SEARCH_PATHS entry that corresponds with a particular path, so we should match against the longest prefix possible.",
+      "parentUuid": "f77275b5_9d15df52",
+      "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c097a17_35e24b12",
@@ -49,6 +85,24 @@
       "side": 1,
       "message": "keylist can also probably contain empty strings (\"\"), in which case the lambda becomes a little messier and probably not worth it\n```\nNULL_CMP_PREFIX \u003d \"_null\"\nfor k in sorted(keylist, key\u003dlambda x: NULL_CMP_PREFIX + x if x is not None else \"\"): \n```",
       "parentUuid": "2c097a17_35e24b12",
+      "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bdf4522_c3461523",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-05T01:03:20Z",
+      "side": 1,
+      "message": "Oh that\u0027s a good idea, done.\n\nEmpty strings shouldn\u0027t be an issue, because the \"if k is None: continue\" part filters out the Nones anyways, and so any empty strings will continue to be processed in the same way as before.",
+      "parentUuid": "923a0517_c244687b",
       "revId": "2a0648a102763ce9b12054176b3d5f1f6264a113",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
