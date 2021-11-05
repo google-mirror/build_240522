@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea3562fd_be8e2351",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2021-11-05T16:45:27Z",
+      "side": 1,
+      "message": "this looks like a dupe of a few lines above?",
+      "range": {
+        "startLine": 765,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 48
+      },
+      "revId": "4256727c0623afb8d290be764ab2b7c8a87f1e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
