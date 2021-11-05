@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a1322d_ec3ff23b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-11-05T16:21:25Z",
+      "side": 1,
+      "message": "THANK YOU SO MUCH FOR DOING THIS!\nPython2 is abandoned software, I\u0027m glad we are moving away from it. ",
+      "revId": "b820bcd8291fd1c6870d0f8d5fb20d3b71d25da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
