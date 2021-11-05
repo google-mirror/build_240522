@@ -175,6 +175,24 @@
       "parentUuid": "e99ff0a8_646cf61c",
       "revId": "422f4240682f461e107a63a52f83234850dfed14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24adb08d_b213a321",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-05T16:32:23Z",
+      "side": 1,
+      "message": "Thanks. I think trying to stick to single assignments as much as possible keeps things simpler. This also avoids the risk that things get added between the two conditionals which complicates the flow further.\n\n\u003e Another alternative: /.../\n\nYes, but it\u0027s easier to read if it\u0027s broken up and each bit has its own commentary.",
+      "parentUuid": "73de3b67_2addb9f3",
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
