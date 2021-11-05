@@ -40,6 +40,13 @@ ifeq (,$(filter com.google.android.conscrypt,$(PRODUCT_PACKAGES)))
   MODULE_BUILD_FROM_SOURCE := true
 endif
 
+ifneq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)))
+  # The artifacts in the SDK zip are OK to build with a prebuilt stubs enabled,
+  # even if prebuilt apexes are not enabled, because the system images in the
+  # SDK stub are not currently used (and will be removed: b/205008975).
+  MODULE_BUILD_FROM_SOURCE :=
+endif
+
 # TODO(b/172480615): Remove when platform uses ART Module prebuilts by default.
 ifeq (,$(filter art_module,$(SOONG_CONFIG_NAMESPACES)))
   $(call add_soong_config_namespace,art_module)
