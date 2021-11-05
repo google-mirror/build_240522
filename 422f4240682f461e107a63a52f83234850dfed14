@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4446ed04_7bf840fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-05T16:06:25Z",
+      "side": 1,
+      "message": "This is a bit old - please rebase past https://r.android.com/1870248, which changed MODULE_BUILD_FROM_SOURCE to take \"true\"/\"false\" values.",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68c098d8_c732d52d",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-05T16:06:25Z",
+      "side": 1,
+      "message": "Spello - drop.",
+      "range": {
+        "startLine": 44,
+        "startChar": 54,
+        "endLine": 44,
+        "endChar": 55
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1513ebe_3c098a4a",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-05T16:06:25Z",
+      "side": 1,
+      "message": "Suggest \"?\u003d false\" (after the rebase) so that an explicit MODULE_BUILD_FROM_SOURCE assignment on the command line is honoured. (Same goes for the true assignment in the if clause above, but that\u0027s perhaps out of scope here.)",
+      "range": {
+        "startLine": 47,
+        "startChar": 27,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e99ff0a8_646cf61c",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-05T16:06:25Z",
+      "side": 1,
+      "message": "I suggest putting this if condition before the one aboe, i.e:\n\n  ifneq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)))\n    ...\n  else ifeq (,$(filter com.google.android.conscrypt,$(PRODUCT_PACKAGES)))\n    ...\n  endif\n\nIt makes the flow less convoluted by not (potentially) undoing the true assignment above.",
+      "revId": "422f4240682f461e107a63a52f83234850dfed14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
