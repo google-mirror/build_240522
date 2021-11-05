@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da4c8a8_33a05086",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-05T16:43:49Z",
+      "side": 1,
+      "message": "A nit related to the other comment. Since signing is optional, it might be less confusing to rename this (or even the class name?).  Maybe something like... `class FSVerityMetadataGenerator` and `def generate(...)`?",
+      "range": {
+        "startLine": 96,
+        "startChar": 6,
+        "endLine": 96,
+        "endChar": 10
+      },
+      "revId": "17678439d7fde377e41334e9e4d09edb5ebc9154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302994e3_9416336d",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-05T16:43:49Z",
+      "side": 1,
+      "message": "Since we\u0027re now using the trusted hash in the mapping file in the VM to authenticate, the signature here is no longer required.  Although to make the format more usable, instead of removing it, I\u0027d suggest to make this optional field.  How about adding SIG_TYPE_NONE \u003d 0?",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 22
+      },
+      "revId": "17678439d7fde377e41334e9e4d09edb5ebc9154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e899a541_351e0515",
+        "filename": "tools/releasetools/fsverity_signer.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-05T16:43:49Z",
+      "side": 1,
+      "message": "this function has been renamed to _raw_signature, and it\u0027s conflicting with the variable name",
+      "range": {
+        "startLine": 149,
+        "startChar": 19,
+        "endLine": 149,
+        "endChar": 32
+      },
+      "revId": "17678439d7fde377e41334e9e4d09edb5ebc9154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
