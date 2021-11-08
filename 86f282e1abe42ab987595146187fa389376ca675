@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6b26b06_b353a8f7",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-08T01:09:23Z",
+      "side": 1,
+      "message": "If would be nice if this block is made as a new function.",
+      "range": {
+        "startLine": 482,
+        "startChar": 0,
+        "endLine": 482,
+        "endChar": 40
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95043085_544b7ce0",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 6
