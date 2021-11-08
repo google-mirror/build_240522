@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc15f4b1_9cc9e05b",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-08T17:10:28Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be installed.  Is it possible to point to the source location?  This is a file that we\u0027ll check in to git, right?  But I can\u0027t find it in the changes.",
+      "range": {
+        "startLine": 544,
+        "startChar": 30,
+        "endLine": 544,
+        "endChar": 74
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77339c74_79611e89",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-08T17:10:28Z",
+      "side": 1,
+      "message": "It may be better to avoid duplicating the list in the comment. Maybe just leave a pointer to the actual pattern (e.g. \"see \u0027patterns\u0027 in the implementation\").",
+      "range": {
+        "startLine": 457,
+        "startChar": 57,
+        "endLine": 466,
+        "endChar": 41
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f674cff_19e1e62d",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-08T17:10:28Z",
+      "side": 1,
+      "message": "This is recently deprecated. Let\u0027s remove it.",
+      "range": {
+        "startLine": 493,
+        "startChar": 4,
+        "endLine": 493,
+        "endChar": 43
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

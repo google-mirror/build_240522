@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "007ae099_5304e3a0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-08T17:10:28Z",
+      "side": 1,
+      "message": "It looks like both APK and APEX signing are done in sign_target_files_apks.py. For APEX, the script import apex_util.py.  I didn\u0027t look deeper, but I\u0027m thinking something like... moving these into fsverity_util.py, so that you can use it both here and later in the release signing.  But if it turns out to be non-trivial, a TODO is fine to me to unblock other tasks.  We will need to solve the signing part sooner than later though.  WDYT?",
+      "parentUuid": "fe548b08_b63d1f7c",
+      "range": {
+        "startLine": 503,
+        "startChar": 13,
+        "endLine": 503,
+        "endChar": 18
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d67c6fd_5f4f2399",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 6
