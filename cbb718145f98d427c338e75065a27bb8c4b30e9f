@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4932a8e_2bfedd6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-08T18:01:14Z",
+      "side": 1,
+      "message": "Yan may be the best one to answer this question.",
+      "parentUuid": "5d6ebd77_2dc480dc",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afb74904_746d9f41",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 2
