@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe548b08_b63d1f7c",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-08T02:18:32Z",
+      "side": 1,
+      "message": "Hmm. I\u0027m not sure as I\u0027m not familiar with release key signing.\n\nOr, can we leave this as TODO and proceed further to unblock other tasks?",
+      "parentUuid": "95043085_544b7ce0",
+      "range": {
+        "startLine": 503,
+        "startChar": 13,
+        "endLine": 503,
+        "endChar": 18
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d67c6fd_5f4f2399",
         "filename": "tools/releasetools/build_image.py",
         "patchSetId": 6
