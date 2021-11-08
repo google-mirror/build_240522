@@ -94,3 +94,8 @@ assert_eq(
 
 assert_eq("S", globals["PLATFORM_VERSION"])
 assert_eq(30, globals["PLATFORM_SDK_VERSION"])
+
+globals_for_namespaces = {"$SOONG_CONFIG_NAMESPACES": {}}
+rblf.soong_config_set(globals_for_namespaces, "mynamespace", "myvar", "foo")
+assert_eq("foo", rblf.soong_config_get(globals_for_namespaces, "mynamespace", "myvar"))
+assert_eq("", rblf.soong_config_get(globals_for_namespaces, "mynamespace", "myvar2"))
