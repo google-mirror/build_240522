@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b01818a7_2451854a",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-08T12:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76551a1d_3ce0b017",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "a1d2efb9d8608145349b77ae96d3f5eee0a879ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee482e47_81710422",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39652fb_51169573",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-08T12:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee482e47_81710422",
+      "range": {
+        "startLine": 601,
+        "startChar": 6,
+        "endLine": 601,
+        "endChar": 43
+      },
+      "revId": "a1d2efb9d8608145349b77ae96d3f5eee0a879ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3547706_ea114a6b",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-08T11:52:48Z",
       "side": 1,
       "message": "add $(FSVERITY_APK_KEY_PATH).x509.pem and $(FSVERITY_APK_KEY_PATH).pk8 ?",
+      "range": {
+        "startLine": 2809,
+        "startChar": 113,
+        "endLine": 2809,
+        "endChar": 114
+      },
+      "revId": "a1d2efb9d8608145349b77ae96d3f5eee0a879ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22201d4a_9e65af41",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 2809,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-08T12:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3547706_ea114a6b",
       "range": {
         "startLine": 2809,
         "startChar": 113,
