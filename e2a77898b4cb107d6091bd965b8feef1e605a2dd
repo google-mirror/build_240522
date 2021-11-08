@@ -16,6 +16,23 @@
       "message": "Tested with build https://android-build.googleplex.com/builds/abtd/run/L75900000951849038, and verified both oatdump and dexdump are present in dexpreopt_tools.zip",
       "revId": "e2a77898b4cb107d6091bd965b8feef1e605a2dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6c81e6e_7ceff676",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-11-08T22:06:58Z",
+      "side": 1,
+      "message": "Unless you need to expose this to Android.mk files, I\u0027d just embed the path in the Makefile at use time (And $(BUILD_EXECUTABLE_SUFFIX) is always empty for this path -- it\u0027s only different for Windows, and we always cross-compile for that, so it HOST_OUT_EXECUTABLES will never be Windows).",
+      "revId": "e2a77898b4cb107d6091bd965b8feef1e605a2dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
