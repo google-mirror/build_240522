@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8098e28d_0321ad20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-08T18:39:02Z",
+      "side": 1,
+      "message": "All three profiles are updated in unison, so this CL doesn\u0027t change anything in that regard. Here\u0027s an example: http://ag/q/topic:M5C5P90S0PP-sc-dev\n\nBtw, as I mentioned in the message above, I hope to be able to retire the combined profile in config/boot-image-profile.txt. Yan, is it used for anything else?",
+      "parentUuid": "4894cf63_8e54cfca",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afb74904_746d9f41",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "writtenOn": "2021-11-08T17:42:32Z",
       "side": 1,
       "message": "Can we assume that the ART source code always exists? Or should we add `ifeq (true,$(TARGET_BUILD_UNBUNDLED))` here?",
+      "range": {
+        "startLine": 75,
+        "startChar": 50,
+        "endLine": 75,
+        "endChar": 87
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b98e2bc_848db7c6",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-08T18:39:02Z",
+      "side": 1,
+      "message": "The condition would rather be something like\n\n  ifeq (true,$(SOONG_CONFIG_art_module_source_build))\n\nbut since there\u0027s no longer any concrete plan to build without ART sources I think it\u0027s better to dispense with it until it\u0027s an observable issue.",
+      "parentUuid": "afb74904_746d9f41",
       "range": {
         "startLine": 75,
         "startChar": 50,
