@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb74904_746d9f41",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-08T17:42:32Z",
+      "side": 1,
+      "message": "Can we assume that the ART source code always exists? Or should we add `ifeq (true,$(TARGET_BUILD_UNBUNDLED))` here?",
+      "range": {
+        "startLine": 75,
+        "startChar": 50,
+        "endLine": 75,
+        "endChar": 87
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
