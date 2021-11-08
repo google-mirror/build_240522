@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4dac87_448f26d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-08T22:59:40Z",
+      "side": 1,
+      "message": "Please add the test to build/make/tests/run.rbc (tu run manually via `rbcrun build/make/tests/run.rbc`",
+      "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3555cdee_bd70808c",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-08T22:59:40Z",
+      "side": 1,
+      "message": "Perhaps return None instead of empty string?",
+      "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
