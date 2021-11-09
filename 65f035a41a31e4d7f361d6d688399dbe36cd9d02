@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5302e036_6c524a67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2021-11-09T14:21:31Z",
+      "side": 1,
+      "message": "This is the fix for the cl aosp/1843156 which caused b/204964200.\nAs in the commit message, the it must read the minimum of product and board api levels instead of choosing the first value of them.",
+      "revId": "65f035a41a31e4d7f361d6d688399dbe36cd9d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
