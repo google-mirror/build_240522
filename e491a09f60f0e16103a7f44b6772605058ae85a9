@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb0ae0a_0d99cdf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-09T22:52:00Z",
+      "side": 1,
+      "message": "ALL_DEPS",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "e491a09f60f0e16103a7f44b6772605058ae85a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69a64aa3_1c974095",
+        "filename": "core/java_common.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-09T22:52:00Z",
+      "side": 1,
+      "message": "ALL_DEPS",
+      "range": {
+        "startLine": 381,
+        "startChar": 23,
+        "endLine": 381,
+        "endChar": 31
+      },
+      "revId": "e491a09f60f0e16103a7f44b6772605058ae85a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
