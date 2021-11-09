@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3116b1a1_b5f3f30c",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2021-11-09T00:11:10Z",
+      "side": 1,
+      "message": "This line is that same as line 764, may I ask why do we need two same line here? It seems, to me, one clean up should be enough?",
+      "revId": "cf5c18aa8e10fed28a99c603d5611aa07dc0888f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
