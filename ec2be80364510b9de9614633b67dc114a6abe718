@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "005d863a_dda1e15a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-09T12:02:20Z",
+      "side": 1,
+      "message": "In Joe\u0027s absence, I\u0027ll try review this.",
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9841ccc3_bb6725f5",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-09T12:02:20Z",
+      "side": 1,
+      "message": "This requires the Ninja files to be present, doesn\u0027t it? (i.e. it doesn\u0027t work on a clean checkout)\n\nIIUC that this does is to call \"m \u003ctargets on the command line\u003e\" then digs out the names of the update API scripts those targets create, then executes them. Would it be possible to instead standardize on the path names of the update API scripts so that the Ninja invocation in line 29 is not required and do this here:\n\nm \"$@\"\nfor target in \"$@\"; do \n  update_script\u003d$(update_script_from_target $target)\n  \"$update_script\"\ndone\n\nfunction update_script_from_target() {\n  echo $1 | sed \u0027s/.../.../\u0027  # Some simple regular expression\n}\n\nOr, even better: if you can come up with an algorithm to convert the target names to input/output API file names, you can dispense with the helper scripts altogether and let the Ninja files call this script with the appropriate arguments directly, something like this (excuse my Make):\n\n\nfoo-update-current-api: new-api-file.txt\n  echo \"Dumping current API to new-api-file.txt\"\n  \nlegacy-foo-update-current-api: foo-update-current-api\n  echo \"This will go away, run build/make/tools/scripts/update-api.sh $^ instead\"\n  build/make/tools/scripts/update-api.sh --do-not-run-m $^\n  \n  \nthen in update-api.sh:\n\ntarget\u003d$1\noutput_api_file \u003d $(new_api_file $target)\nsource_api_fie \u003d $(source_api_file $target)\ncp -f $soutput_api_file $source_api_file\n\n(--do-not-run-m is so that update-api.sh does not call \"m\" thus resulting in an infinite loop)",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
