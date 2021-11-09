@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53c2dd9_90a34cc2",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T05:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77339c74_79611e89",
+      "range": {
+        "startLine": 457,
+        "startChar": 57,
+        "endLine": 466,
+        "endChar": 41
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f674cff_19e1e62d",
@@ -84,6 +108,30 @@
       "writtenOn": "2021-11-08T17:10:28Z",
       "side": 1,
       "message": "This is recently deprecated. Let\u0027s remove it.",
+      "range": {
+        "startLine": 493,
+        "startChar": 4,
+        "endLine": 493,
+        "endChar": 43
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "849bc467_71164a4a",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T05:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f674cff_19e1e62d",
       "range": {
         "startLine": 493,
         "startChar": 4,

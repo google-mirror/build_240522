@@ -183,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e7772e_874c00a4",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T05:20:26Z",
+      "side": 1,
+      "message": "Told offline that we\u0027re going to file a bug for ART team. let me resolve this.",
+      "parentUuid": "007ae099_5304e3a0",
+      "range": {
+        "startLine": 503,
+        "startChar": 13,
+        "endLine": 503,
+        "endChar": 18
+      },
+      "revId": "86f282e1abe42ab987595146187fa389376ca675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d67c6fd_5f4f2399",
