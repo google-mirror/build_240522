@@ -16,6 +16,24 @@
       "message": "This line is that same as line 764, may I ask why do we need two same line here? It seems, to me, one clean up should be enough?",
       "revId": "cf5c18aa8e10fed28a99c603d5611aa07dc0888f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd89a421_3eb4b05f",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-09T00:16:11Z",
+      "side": 1,
+      "message": "Entries in Cleanspec.mk files are executed exactly once on an incremental build.  The one on line 764 will already have been executed on the first incremental builds after it was submitted, but we need to execute a new one now to clean up rust and sh files in out/soong/host/linux-x86/bin.",
+      "parentUuid": "3116b1a1_b5f3f30c",
+      "revId": "cf5c18aa8e10fed28a99c603d5611aa07dc0888f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
