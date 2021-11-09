@@ -43,20 +43,89 @@ test_tools := $(HOST_OUT_JAVA_LIBRARIES)/hosttestlib.jar \
 
 test_tools += $(test_suite_tools)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+# The JDK to package into the test suite zip file.  Always package the linux JDK.
+test_suite_jdk_dir := $(ANDROID_JAVA_HOME)/../linux-x86
+test_suite_jdk := $(call intermediates-dir-for,PACKAGING,$(test_suite_name)_jdk,HOST)/jdk.zip
+$(test_suite_jdk): PRIVATE_JDK_DIR := $(test_suite_jdk_dir)
+$(test_suite_jdk): PRIVATE_SUBDIR := $(test_suite_subdir)
+$(test_suite_jdk): $(shell find $(test_suite_jdk_dir) -type f | sort)
+$(test_suite_jdk): $(SOONG_ZIP)
+	$(SOONG_ZIP) -o $@ -P $(PRIVATE_SUBDIR)/jdk -C $(PRIVATE_JDK_DIR) -D $(PRIVATE_JDK_DIR)
+
+# Include host shared libraries
+host_shared_libs := $(call copy-many-files, $(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES))
+
+compatibility_zip_deps := \
+  $(test_artifacts) \
+  $(test_tools) \
+  $(test_suite_prebuilt_tools) \
+  $(test_suite_dynamic_config) \
+  $(test_suite_jdk) \
+  $(MERGE_ZIPS) \
+  $(SOONG_ZIP) \
+  $(host_shared_libs) \
+
+compatibility_zip_resources := $(out_dir)/tools $(out_dir)/testcases $(out_dir)/lib $(out_dir)/lib64
+
+# Test Suite NOTICE files
+test_suite_notice_txt := $(out_dir)/NOTICE.txt
+test_suite_notice_html := $(out_dir)/NOTICE.html
+
+$(eval $(call combine-notice-files, html, \
+         $(test_suite_notice_txt), \
+         $(test_suite_notice_html), \
+         "Notices for files contained in the test suites filesystem image in this directory:", \
+         $(HOST_OUT_NOTICE_FILES) $(TARGET_OUT_NOTICE_FILES), \
+         $(compatibility_zip_deps)))
+
+compatibility_zip_deps += $(test_suite_notice_txt)
+compatibility_zip_resources += $(test_suite_notice_txt)
+
+compatibility_tests_list_zip := $(out_dir)-tests_list.zip
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 compatibility_zip := $(out_dir).zip
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(compatibility_zip): PRIVATE_NAME := android-$(test_suite_name)
+=======
+$(compatibility_zip) : .KATI_IMPLICIT_OUTPUTS := $(compatibility_tests_list_zip)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
 $(compatibility_zip): PRIVATE_TOOLS := $(test_tools) $(test_suite_prebuilt_tools)
 $(compatibility_zip): PRIVATE_SUITE_NAME := $(test_suite_name)
 $(compatibility_zip): PRIVATE_DYNAMIC_CONFIG := $(test_suite_dynamic_config)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tools) $(test_suite_dynamic_config) $(SOONG_ZIP) | $(ADB) $(ACP)
+=======
+$(compatibility_zip): PRIVATE_RESOURCES := $(compatibility_zip_resources)
+$(compatibility_zip): PRIVATE_JDK := $(test_suite_jdk)
+$(compatibility_zip): PRIVATE_tests_list := $(out_dir)-tests_list
+$(compatibility_zip): PRIVATE_tests_list_zip := $(compatibility_tests_list_zip)
+$(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 # Make dir structure
 	$(hide) mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
 # Copy tools
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 	$(hide) $(ACP) -fp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
 	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) $(ACP) -fp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
 	$(hide) find $(dir $@)/$(PRIVATE_NAME) | sort >$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
+=======
+	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
+	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
+	find $(PRIVATE_RESOURCES) | sort >$@.list
+	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list
+	$(MERGE_ZIPS) $@ $@.tmp $(PRIVATE_JDK)
+	rm -f $@.tmp
+# Build a list of tests
+	rm -f $(PRIVATE_tests_list)
+	$(hide) grep -e .*\\.config$$ $@.list | sed s%$(PRIVATE_OUT_DIR)/testcases/%%g > $(PRIVATE_tests_list)
+	$(SOONG_ZIP) -d -o $(PRIVATE_tests_list_zip) -j -f $(PRIVATE_tests_list)
+	rm -f $(PRIVATE_tests_list)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # Reset all input variables
 test_suite_name :=

@@ -128,6 +128,7 @@ def AVBCalcMaxImageSize(avbtool, footer_type, partition_size, additional_args):
   Returns:
     The maximum image size or 0 if an error occurred.
   """
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   cmd = [avbtool, "add_%s_footer" % footer_type,
          "--partition_size", partition_size, "--calc_max_image_size"]
   cmd.extend(shlex.split(additional_args))
@@ -137,12 +138,28 @@ def AVBCalcMaxImageSize(avbtool, footer_type, partition_size, additional_args):
     return 0
   else:
     return int(output)
+=======
+  cmd = ["find", path, "-print"]
+  output = common.RunAndCheckOutput(cmd, verbose=False)
+  # increase by > 6% as number of files and directories is not whole picture.
+  inodes = output.count('\n')
+  spare_inodes = inodes * 6 // 100
+  min_spare_inodes = 12
+  if spare_inodes < min_spare_inodes:
+    spare_inodes = min_spare_inodes
+  return inodes + spare_inodes
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
                  partition_name, key_path, algorithm, salt,
                  additional_args):
   """Adds dm-verity hashtree and AVB metadata to an image.
+=======
+def GetFilesystemCharacteristics(fs_type, image_path, sparse_image=True):
+  """Returns various filesystem characteristics of "image_path".
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   Args:
     image_path: Path to image to modify.
@@ -164,6 +181,7 @@ def AVBAddFooter(image_path, avbtool, footer_type, partition_size,
          "--partition_name", partition_name,
          "--image", image_path]
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   if key_path and algorithm:
     cmd.extend(["--key", key_path, "--algorithm", algorithm])
   if salt:
@@ -283,6 +301,13 @@ def Append2Simg(sparse_image_path, unsparse_image_path, error_message):
 
 def Append(target, file_to_append, error_message):
   """Appends file_to_append to target."""
+=======
+  if fs_type.startswith("ext"):
+    cmd = ["tune2fs", "-l", unsparse_image_path]
+  elif fs_type.startswith("f2fs"):
+    cmd = ["fsck.f2fs", "-l", unsparse_image_path]
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   try:
     with open(target, "a") as out_file, open(file_to_append, "r") as input_file:
       for line in input_file:
@@ -441,6 +466,22 @@ def CheckHeadroom(ext4fs_output, prop_dict):
     return False
   return True
 
+def CalculateSizeAndReserved(prop_dict, size):
+  fs_type = prop_dict.get("fs_type", "")
+  partition_headroom = int(prop_dict.get("partition_headroom", 0))
+  # If not specified, give us 16MB margin for GetDiskUsage error ...
+  reserved_size = int(prop_dict.get("partition_reserved_size", BYTES_IN_MB * 16))
+
+  if fs_type == "erofs":
+    reserved_size = int(prop_dict.get("partition_reserved_size", 0))
+    if reserved_size == 0:
+      # give .3% margin or a minimum size for AVB footer
+      return max(size * 1003 // 1000, 256 * 1024)
+
+  if fs_type.startswith("ext4") and partition_headroom > reserved_size:
+    reserved_size = partition_headroom
+
+  return size + reserved_size
 
 def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   """Build an image to out_file from in_dir with property prop_dict.
@@ -519,9 +560,11 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     prop_dict["partition_size"] = str(max_image_size)
     prop_dict["original_partition_size"] = partition_size
 
+  disable_sparse = "disable_sparse" in prop_dict
+
   if fs_type.startswith("ext"):
     build_command = [prop_dict["ext_mkuserimg"]]
-    if "extfs_sparse_flag" in prop_dict:
+    if "extfs_sparse_flag" in prop_dict and not disable_sparse:
       build_command.append(prop_dict["extfs_sparse_flag"])
       run_e2fsck = True
     build_command.extend([in_dir, out_file, fs_type,
@@ -552,7 +595,11 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     if "flash_logical_block_size" in prop_dict:
       build_command.extend(["-o", prop_dict["flash_logical_block_size"]])
     # Specify UUID and hash_seed if using mke2fs.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     if prop_dict["ext_mkuserimg"] == "mkuserimg_mke2fs.sh":
+=======
+    if os.path.basename(prop_dict["ext_mkuserimg"]) == "mkuserimg_mke2fs":
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
       if "uuid" in prop_dict:
         build_command.extend(["-U", prop_dict["uuid"]])
       if "hash_seed" in prop_dict:
@@ -561,10 +608,42 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       build_command.append("-c")
     if "selinux_fc" in prop_dict:
       build_command.append(prop_dict["selinux_fc"])
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+  elif fs_type.startswith("erofs"):
+    build_command = ["mkerofsimage.sh"]
+    build_command.extend([in_dir, out_file])
+    if "erofs_sparse_flag" in prop_dict and not disable_sparse:
+      build_command.extend([prop_dict["erofs_sparse_flag"]])
+    build_command.extend(["-m", prop_dict["mount_point"]])
+    if target_out:
+      build_command.extend(["-d", target_out])
+    if fs_config:
+      build_command.extend(["-C", fs_config])
+    if "selinux_fc" in prop_dict:
+      build_command.extend(["-c", prop_dict["selinux_fc"]])
+    compressor = None
+    if "erofs_default_compressor" in prop_dict:
+      compressor = prop_dict["erofs_default_compressor"]
+    if "erofs_compressor" in prop_dict:
+      compressor = prop_dict["erofs_compressor"]
+    if compressor:
+      build_command.extend(["-z", compressor])
+    if "timestamp" in prop_dict:
+      build_command.extend(["-T", str(prop_dict["timestamp"])])
+    if "uuid" in prop_dict:
+      build_command.extend(["-U", prop_dict["uuid"]])
+    if "block_list" in prop_dict:
+      build_command.extend(["-B", prop_dict["block_list"]])
+    if "erofs_pcluster_size" in prop_dict:
+      build_command.extend(["-P", prop_dict["erofs_pcluster_size"]])
+    if "erofs_share_dup_blocks" in prop_dict:
+      build_command.extend(["-k", "4096"])
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   elif fs_type.startswith("squash"):
     build_command = ["mksquashfsimage.sh"]
     build_command.extend([in_dir, out_file])
-    if "squashfs_sparse_flag" in prop_dict:
+    if "squashfs_sparse_flag" in prop_dict and not disable_sparse:
       build_command.extend([prop_dict["squashfs_sparse_flag"]])
     build_command.extend(["-m", prop_dict["mount_point"]])
     if target_out:
@@ -585,7 +664,13 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       build_command.extend(["-a"])
   elif fs_type.startswith("f2fs"):
     build_command = ["mkf2fsuserimg.sh"]
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     build_command.extend([out_file, prop_dict["partition_size"]])
+=======
+    build_command.extend([out_file, prop_dict["image_size"]])
+    if "f2fs_sparse_flag" in prop_dict and not disable_sparse:
+      build_command.extend([prop_dict["f2fs_sparse_flag"]])
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     if fs_config:
       build_command.extend(["-C", fs_config])
     build_command.extend(["-f", in_dir])
@@ -596,11 +681,34 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     build_command.extend(["-t", prop_dict["mount_point"]])
     if "timestamp" in prop_dict:
       build_command.extend(["-T", str(prop_dict["timestamp"])])
+    if "block_list" in prop_dict:
+      build_command.extend(["-B", prop_dict["block_list"]])
     build_command.extend(["-L", prop_dict["mount_point"]])
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+    if (needs_projid):
+      build_command.append("--prjquota")
+    if (needs_casefold):
+      build_command.append("--casefold")
+    if (needs_compress or prop_dict.get("f2fs_compress") == "true"):
+      build_command.append("--compression")
+    if (prop_dict.get("mount_point") != "data"):
+      build_command.append("--readonly")
+    if (prop_dict.get("f2fs_compress") == "true"):
+      build_command.append("--sldc")
+      if (prop_dict.get("f2fs_sldc_flags") == None):
+        build_command.append(str(0))
+      else:
+        sldc_flags_str = prop_dict.get("f2fs_sldc_flags")
+        sldc_flags = sldc_flags_str.split()
+        build_command.append(str(len(sldc_flags)))
+        build_command.extend(sldc_flags)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   else:
     print("Error: unknown filesystem type '%s'" % (fs_type))
     return False
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   if in_dir != origin_in:
     # Construct a staging directory of the root file system.
     ramdisk_dir = prop_dict.get("ramdisk_dir")
@@ -610,12 +718,185 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     staging_system = os.path.join(in_dir, "system")
     shutil.rmtree(staging_system, ignore_errors=True)
     shutil.copytree(origin_in, staging_system, symlinks=True)
+=======
+  try:
+    mkfs_output = common.RunAndCheckOutput(build_command)
+  except:
+    try:
+      du = GetDiskUsage(in_dir)
+      du_str = "{} bytes ({} MB)".format(du, du // BYTES_IN_MB)
+    # Suppress any errors from GetDiskUsage() to avoid hiding the real errors
+    # from common.RunAndCheckOutput().
+    except Exception:  # pylint: disable=broad-except
+      logger.exception("Failed to compute disk usage with du")
+      du_str = "unknown"
+    print(
+        "Out of space? Out of inodes? The tree size of {} is {}, "
+        "with reserved space of {} bytes ({} MB).".format(
+            in_dir, du_str,
+            int(prop_dict.get("partition_reserved_size", 0)),
+            int(prop_dict.get("partition_reserved_size", 0)) // BYTES_IN_MB))
+    if ("image_size" in prop_dict and "partition_size" in prop_dict):
+      print(
+          "The max image size for filesystem files is {} bytes ({} MB), "
+          "out of a total partition size of {} bytes ({} MB).".format(
+              int(prop_dict["image_size"]),
+              int(prop_dict["image_size"]) // BYTES_IN_MB,
+              int(prop_dict["partition_size"]),
+              int(prop_dict["partition_size"]) // BYTES_IN_MB))
+    raise
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   (mkfs_output, exit_code) = RunCommand(build_command)
   if exit_code != 0:
     print("Error: '%s' failed with exit code %d:\n%s" % (
         build_command, exit_code, mkfs_output))
     return False
+=======
+  if run_e2fsck and prop_dict.get("skip_fsck") != "true":
+    unsparse_image = UnsparseImage(out_file, replace=False)
+
+    # Run e2fsck on the inflated image file
+    e2fsck_command = ["e2fsck", "-f", "-n", unsparse_image]
+    try:
+      common.RunAndCheckOutput(e2fsck_command)
+    finally:
+      os.remove(unsparse_image)
+
+  return mkfs_output
+
+
+def BuildImage(in_dir, prop_dict, out_file, target_out=None):
+  """Builds an image for the files under in_dir and writes it to out_file.
+
+  Args:
+    in_dir: Path to input directory.
+    prop_dict: A property dict that contains info like partition size. Values
+        will be updated with computed values.
+    out_file: The output image file.
+    target_out: Path to the TARGET_OUT directory as in Makefile. It actually
+        points to the /system directory under PRODUCT_OUT. fs_config (the one
+        under system/core/libcutils) reads device specific FS config files from
+        there.
+
+  Raises:
+    BuildImageError: On build image failures.
+  """
+  in_dir, fs_config = SetUpInDirAndFsConfig(in_dir, prop_dict)
+
+  build_command = []
+  fs_type = prop_dict.get("fs_type", "")
+
+  fs_spans_partition = True
+  if fs_type.startswith("squash") or fs_type.startswith("erofs"):
+    fs_spans_partition = False
+  elif fs_type.startswith("f2fs") and prop_dict.get("f2fs_compress") == "true":
+    fs_spans_partition = False
+
+  # Get a builder for creating an image that's to be verified by Verified Boot,
+  # or None if not applicable.
+  verity_image_builder = verity_utils.CreateVerityImageBuilder(prop_dict)
+
+  disable_sparse = "disable_sparse" in prop_dict
+  mkfs_output = None
+  if (prop_dict.get("use_dynamic_partition_size") == "true" and
+      "partition_size" not in prop_dict):
+    # If partition_size is not defined, use output of `du' + reserved_size.
+    # For compressed file system, it's better to use the compressed size to avoid wasting space.
+    if fs_type.startswith("erofs"):
+      mkfs_output = BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+      if "erofs_sparse_flag" in prop_dict and not disable_sparse:
+        image_path = UnsparseImage(out_file, replace=False)
+        size = GetDiskUsage(image_path)
+        os.remove(image_path)
+      else:
+        size = GetDiskUsage(out_file)
+    else:
+      size = GetDiskUsage(in_dir)
+    logger.info(
+        "The tree size of %s is %d MB.", in_dir, size // BYTES_IN_MB)
+    size = CalculateSizeAndReserved(prop_dict, size)
+    # Round this up to a multiple of 4K so that avbtool works
+    size = common.RoundUpTo4K(size)
+    if fs_type.startswith("ext"):
+      prop_dict["partition_size"] = str(size)
+      prop_dict["image_size"] = str(size)
+      if "extfs_inode_count" not in prop_dict:
+        prop_dict["extfs_inode_count"] = str(GetInodeUsage(in_dir))
+      logger.info(
+          "First Pass based on estimates of %d MB and %s inodes.",
+          size // BYTES_IN_MB, prop_dict["extfs_inode_count"])
+      BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+      sparse_image = False
+      if "extfs_sparse_flag" in prop_dict and not disable_sparse:
+        sparse_image = True
+      fs_dict = GetFilesystemCharacteristics(fs_type, out_file, sparse_image)
+      os.remove(out_file)
+      block_size = int(fs_dict.get("Block size", "4096"))
+      free_size = int(fs_dict.get("Free blocks", "0")) * block_size
+      reserved_size = int(prop_dict.get("partition_reserved_size", 0))
+      partition_headroom = int(fs_dict.get("partition_headroom", 0))
+      if fs_type.startswith("ext4") and partition_headroom > reserved_size:
+        reserved_size = partition_headroom
+      if free_size <= reserved_size:
+        logger.info(
+            "Not worth reducing image %d <= %d.", free_size, reserved_size)
+      else:
+        size -= free_size
+        size += reserved_size
+        if reserved_size == 0:
+          # add .3% margin
+          size = size * 1003 // 1000
+        # Use a minimum size, otherwise we will fail to calculate an AVB footer
+        # or fail to construct an ext4 image.
+        size = max(size, 256 * 1024)
+        if block_size <= 4096:
+          size = common.RoundUpTo4K(size)
+        else:
+          size = ((size + block_size - 1) // block_size) * block_size
+      extfs_inode_count = prop_dict["extfs_inode_count"]
+      inodes = int(fs_dict.get("Inode count", extfs_inode_count))
+      inodes -= int(fs_dict.get("Free inodes", "0"))
+      # add .2% margin or 1 inode, whichever is greater
+      spare_inodes = inodes * 2 // 1000
+      min_spare_inodes = 1
+      if spare_inodes < min_spare_inodes:
+        spare_inodes = min_spare_inodes
+      inodes += spare_inodes
+      prop_dict["extfs_inode_count"] = str(inodes)
+      prop_dict["partition_size"] = str(size)
+      logger.info(
+          "Allocating %d Inodes for %s.", inodes, out_file)
+    elif fs_type.startswith("f2fs") and prop_dict.get("f2fs_compress") == "true":
+      prop_dict["partition_size"] = str(size)
+      prop_dict["image_size"] = str(size)
+      BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+      sparse_image = False
+      if "f2fs_sparse_flag" in prop_dict and not disable_sparse:
+        sparse_image = True
+      fs_dict = GetFilesystemCharacteristics(fs_type, out_file, sparse_image)
+      os.remove(out_file)
+      block_count = int(fs_dict.get("block_count", "0"))
+      log_blocksize = int(fs_dict.get("log_blocksize", "12"))
+      size = block_count << log_blocksize
+      prop_dict["partition_size"] = str(size)
+    if verity_image_builder:
+      size = verity_image_builder.CalculateDynamicPartitionSize(size)
+    prop_dict["partition_size"] = str(size)
+    logger.info(
+        "Allocating %d MB for %s.", size // BYTES_IN_MB, out_file)
+
+  prop_dict["image_size"] = prop_dict["partition_size"]
+
+  # Adjust the image size to make room for the hashes if this is to be verified.
+  if verity_image_builder:
+    max_image_size = verity_image_builder.CalculateMaxImageSize()
+    prop_dict["image_size"] = str(max_image_size)
+
+  if not mkfs_output:
+    mkfs_output = BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Check if there's enough headroom space available for ext4 image.
   if "partition_headroom" in prop_dict and fs_type.startswith("ext4"):
@@ -703,8 +984,21 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
 
   common_props = (
       "extfs_sparse_flag",
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+      "erofs_default_compressor",
+      "erofs_pcluster_size",
+      "erofs_share_dup_blocks",
+      "erofs_sparse_flag",
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
       "squashfs_sparse_flag",
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
       "selinux_fc",
+=======
+      "system_f2fs_compress",
+      "system_f2fs_sldc_flags",
+      "f2fs_sparse_flag",
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
       "skip_fsck",
       "ext_mkuserimg",
       "verity",
@@ -719,8 +1013,86 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   for p in common_props:
     copy_prop(p, p)
 
+  ro_mount_points = set([
+      "odm",
+      "odm_dlkm",
+      "oem",
+      "product",
+      "system",
+      "system_ext",
+      "system_other",
+      "vendor",
+      "vendor_dlkm",
+  ])
+
+  # Tuple layout: (readonly, specific prop, general prop)
+  fmt_props = (
+      # Generic first, then specific file type.
+      (False, "fs_type", "fs_type"),
+      (False, "{}_fs_type", "fs_type"),
+
+      # Ordering for these doesn't matter.
+      (False, "{}_selinux_fc", "selinux_fc"),
+      (False, "{}_size", "partition_size"),
+      (True, "avb_{}_add_hashtree_footer_args", "avb_add_hashtree_footer_args"),
+      (True, "avb_{}_algorithm", "avb_algorithm"),
+      (True, "avb_{}_hashtree_enable", "avb_hashtree_enable"),
+      (True, "avb_{}_key_path", "avb_key_path"),
+      (True, "avb_{}_salt", "avb_salt"),
+      (True, "ext4_share_dup_blocks", "ext4_share_dup_blocks"),
+      (True, "{}_base_fs_file", "base_fs_file"),
+      (True, "{}_disable_sparse", "disable_sparse"),
+      (True, "{}_erofs_compressor", "erofs_compressor"),
+      (True, "{}_erofs_pcluster_size", "erofs_pcluster_size"),
+      (True, "{}_erofs_share_dup_blocks", "erofs_share_dup_blocks"),
+      (True, "{}_extfs_inode_count", "extfs_inode_count"),
+      (True, "{}_f2fs_compress", "f2fs_compress"),
+      (True, "{}_f2fs_sldc_flags", "f2fs_sldc_flags"),
+      (True, "{}_reserved_size", "partition_reserved_size"),
+      (True, "{}_squashfs_block_size", "squashfs_block_size"),
+      (True, "{}_squashfs_compressor", "squashfs_compressor"),
+      (True, "{}_squashfs_compressor_opt", "squashfs_compressor_opt"),
+      (True, "{}_squashfs_disable_4k_align", "squashfs_disable_4k_align"),
+      (True, "{}_verity_block_device", "verity_block_device"),
+  )
+
+  # Translate prefixed properties into generic ones.
+  if mount_point == "data":
+    prefix = "userdata"
+  else:
+    prefix = mount_point
+
+  for readonly, src_prop, dest_prop in fmt_props:
+    if readonly and mount_point not in ro_mount_points:
+      continue
+
+    if src_prop == "fs_type":
+      # This property is legacy and only used on a few partitions. b/202600377
+      allowed_partitions = set(["system", "system_other", "data", "oem"])
+      if mount_point not in allowed_partitions:
+          continue
+
+    if mount_point == "system_other":
+      # Propagate system properties to system_other. They'll get overridden
+      # after as needed.
+      copy_prop(src_prop.format("system"), dest_prop)
+
+    copy_prop(src_prop.format(prefix), dest_prop)
+
+  # Set prefixed properties that need a default value.
+  if mount_point in ro_mount_points:
+    prop = "{}_journal_size".format(prefix)
+    if not copy_prop(prop, "journal_size"):
+      d["journal_size"] = "0"
+
+    prop = "{}_extfs_rsv_pct".format(prefix)
+    if not copy_prop(prop, "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+
+  # Copy partition-specific properties.
   d["mount_point"] = mount_point
   if mount_point == "system":
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     copy_prop("avb_system_hashtree_enable", "avb_hashtree_enable")
     copy_prop("avb_system_add_hashtree_footer_args",
               "avb_add_hashtree_footer_args")
@@ -730,12 +1102,11 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     # Copy the generic system fs type first, override with specific one if
     # available.
     copy_prop("system_fs_type", "fs_type")
+=======
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     copy_prop("system_headroom", "partition_headroom")
-    copy_prop("system_size", "partition_size")
-    if not copy_prop("system_journal_size", "journal_size"):
-      d["journal_size"] = "0"
-    copy_prop("system_verity_block_device", "verity_block_device")
     copy_prop("system_root_image", "system_root_image")
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     copy_prop("ramdisk_dir", "ramdisk_dir")
     copy_prop("ramdisk_fs_config", "ramdisk_fs_config")
     copy_prop("ext4_share_dup_blocks", "ext4_share_dup_blocks")
@@ -769,13 +1140,15 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("system_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("system_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+=======
+    copy_prop("root_dir", "root_dir")
+    copy_prop("root_fs_config", "root_fs_config")
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   elif mount_point == "data":
     # Copy the generic fs type first, override with specific one if available.
-    copy_prop("fs_type", "fs_type")
-    copy_prop("userdata_fs_type", "fs_type")
-    copy_prop("userdata_size", "partition_size")
     copy_prop("flash_logical_block_size", "flash_logical_block_size")
     copy_prop("flash_erase_block_size", "flash_erase_block_size")
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   elif mount_point == "cache":
     copy_prop("cache_fs_type", "fs_type")
     copy_prop("cache_size", "partition_size")
@@ -826,6 +1199,11 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("oem_extfs_inode_count", "extfs_inode_count")
     if not copy_prop("oem_extfs_rsv_pct", "extfs_rsv_pct"):
       d["extfs_rsv_pct"] = "0"
+=======
+    copy_prop("needs_casefold", "needs_casefold")
+    copy_prop("needs_projid", "needs_projid")
+    copy_prop("needs_compress", "needs_compress")
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   d["partition_name"] = mount_point
   return d
 

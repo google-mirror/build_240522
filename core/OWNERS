@@ -1,0 +1,9 @@
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+per-file dex_preopt*.mk = ngeoffray@google.com,calin@google.com,mathewi@google.com,skvadrik@google.com
+per-file verify_uses_libraries.sh = ngeoffray@google.com,calin@google.com,skvadrik@google.com
+
+# For version updates
+per-file version_defaults.mk = aseaton@google.com,elisapascual@google.com,lubomir@google.com,pscovanner@google.com
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

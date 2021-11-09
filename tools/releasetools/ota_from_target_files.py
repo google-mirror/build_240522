@@ -156,6 +156,37 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       ones. Should only be used if caller knows it's safe to do so (e.g. all the
       postinstall work is to dexopt apps and a data wipe will happen immediately
       after). Only meaningful when generating A/B OTAs.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+  --partial "<PARTITION> [<PARTITION>[...]]"
+      Generate partial updates, overriding ab_partitions list with the given
+      list.
+
+  --custom_image <custom_partition=custom_image>
+      Use the specified custom_image to update custom_partition when generating
+      an A/B OTA package. e.g. "--custom_image oem=oem.img --custom_image
+      cus=cus_test.img"
+
+  --disable_vabc
+      Disable Virtual A/B Compression, for builds that have compression enabled
+      by default.
+
+  --vabc_downgrade
+      Don't disable Virtual A/B Compression for downgrading OTAs.
+      For VABC downgrades, we must finish merging before doing data wipe, and
+      since data wipe is required for downgrading OTA, this might cause long
+      wait time in recovery.
+
+  --enable_vabc_xor
+      Enable the VABC xor feature. Will reduce space requirements for OTA
+
+  --force_minor_version
+      Override the update_engine minor version for delta generation.
+
+  --compressor_types
+      A colon ':' separated list of compressors. Allowed values are bz2 and brotli.
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 """
 
 from __future__ import print_function
@@ -170,8 +201,19 @@ import sys
 import tempfile
 import zipfile
 
+import care_map_pb2
 import common
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 import edify_generator
+=======
+import ota_utils
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PropertyFiles, SECURITY_PATCH_LEVEL_PROP_NAME, GetZipEntryOffset)
+from common import IsSparseImage
+import target_files_diff
+from check_target_files_vintf import CheckVintfIfTrebleEnabled
+from non_ab_ota import GenerateNonAbOtaPackage
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -207,6 +249,20 @@ OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+OPTIONS.skip_compatibility_check = False
+OPTIONS.disable_fec_computation = False
+OPTIONS.disable_verity_computation = False
+OPTIONS.partial = None
+OPTIONS.custom_images = {}
+OPTIONS.disable_vabc = False
+OPTIONS.spl_downgrade = False
+OPTIONS.vabc_downgrade = False
+OPTIONS.enable_vabc_xor = True
+OPTIONS.force_minor_version = None
+OPTIONS.compressor_types = None
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -1133,7 +1189,14 @@ class StreamingPropertyFiles(PropertyFiles):
         'payload_properties.txt',
     )
     self.optional = (
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
         # care_map.txt is available only if dm-verity is enabled.
+=======
+        # apex_info.pb isn't directly used in the update flow
+        'apex_info.pb',
+        # care_map is available only if dm-verity is enabled.
+        'care_map.pb',
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
         'care_map.txt',
         # compatibility.zip is available only if target supports Treble.
         'compatibility.zip',
@@ -1202,18 +1265,30 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
     payload, till the end of 'medatada_signature_message'.
     """
     payload_info = input_zip.getinfo('payload.bin')
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     payload_offset = payload_info.header_offset + len(payload_info.FileHeader())
     payload_size = payload_info.file_size
+=======
+    (payload_offset, payload_size) = GetZipEntryOffset(input_zip, payload_info)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     with input_zip.open('payload.bin', 'r') as payload_fp:
       header_bin = payload_fp.read(24)
+=======
+    # Read the underlying raw zipfile at specified offset
+    payload_fp = input_zip.fp
+    payload_fp.seek(payload_offset)
+    header_bin = payload_fp.read(24)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
     # network byte order (big-endian)
     header = struct.unpack("!IQQL", header_bin)
 
     # 'CrAU'
     magic = header[0]
-    assert magic == 0x43724155, "Invalid magic: {:x}".format(magic)
+    assert magic == 0x43724155, "Invalid magic: {:x}, computed offset {}" \
+        .format(magic, payload_offset)
 
     manifest_size = header[2]
     metadata_signature_size = header[3]
@@ -1679,9 +1754,290 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
   common.ZipDelete(target_file, POSTINSTALL_CONFIG)
   return target_file
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
 
+def ParseInfoDict(target_file_path):
+  with zipfile.ZipFile(target_file_path, 'r', allowZip64=True) as zfp:
+    return common.LoadInfoDict(zfp)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 def WriteABOTAPackageWithBrilloScript(target_file, output_file,
                                       source_file=None):
+=======
+
+def GetTargetFilesZipForPartialUpdates(input_file, ab_partitions):
+  """Returns a target-files.zip for partial ota update package generation.
+
+  This function modifies ab_partitions list with the desired partitions before
+  calling the brillo_update_payload script. It also cleans up the reference to
+  the excluded partitions in the info file, e.g misc_info.txt.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    ab_partitions: A list of partitions to include in the partial update
+
+  Returns:
+    The filename of target-files.zip used for partial ota update.
+  """
+
+  def AddImageForPartition(partition_name):
+    """Add the archive name for a given partition to the copy list."""
+    for prefix in ['IMAGES', 'RADIO']:
+      image_path = '{}/{}.img'.format(prefix, partition_name)
+      if image_path in namelist:
+        copy_entries.append(image_path)
+        map_path = '{}/{}.map'.format(prefix, partition_name)
+        if map_path in namelist:
+          copy_entries.append(map_path)
+        return
+
+    raise ValueError("Cannot find {} in input zipfile".format(partition_name))
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    original_ab_partitions = input_zip.read(
+        AB_PARTITIONS).decode().splitlines()
+    namelist = input_zip.namelist()
+
+  unrecognized_partitions = [partition for partition in ab_partitions if
+                             partition not in original_ab_partitions]
+  if unrecognized_partitions:
+    raise ValueError("Unrecognized partitions when generating partial updates",
+                     unrecognized_partitions)
+
+  logger.info("Generating partial updates for %s", ab_partitions)
+
+  copy_entries = ['META/update_engine_config.txt']
+  for partition_name in ab_partitions:
+    AddImageForPartition(partition_name)
+
+  # Use zip2zip to avoid extracting the zipfile.
+  partial_target_file = common.MakeTempFile(suffix='.zip')
+  cmd = ['zip2zip', '-i', input_file, '-o', partial_target_file]
+  cmd.extend(['{}:{}'.format(name, name) for name in copy_entries])
+  common.RunAndCheckOutput(cmd)
+
+  partial_target_zip = zipfile.ZipFile(partial_target_file, 'a',
+                                       allowZip64=True)
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    common.ZipWriteStr(partial_target_zip, 'META/ab_partitions.txt',
+                       '\n'.join(ab_partitions))
+    CARE_MAP_ENTRY = "META/care_map.pb"
+    if CARE_MAP_ENTRY in input_zip.namelist():
+      caremap = care_map_pb2.CareMap()
+      caremap.ParseFromString(input_zip.read(CARE_MAP_ENTRY))
+      filtered = [
+          part for part in caremap.partitions if part.name in ab_partitions]
+      del caremap.partitions[:]
+      caremap.partitions.extend(filtered)
+      common.ZipWriteStr(partial_target_zip, CARE_MAP_ENTRY,
+                         caremap.SerializeToString())
+
+    for info_file in ['META/misc_info.txt', DYNAMIC_PARTITION_INFO]:
+      if info_file not in input_zip.namelist():
+        logger.warning('Cannot find %s in input zipfile', info_file)
+        continue
+      content = input_zip.read(info_file).decode()
+      modified_info = UpdatesInfoForSpecialUpdates(
+          content, lambda p: p in ab_partitions)
+      common.ZipWriteStr(partial_target_zip, info_file, modified_info)
+
+    # TODO(xunchang) handle META/postinstall_config.txt'
+
+  common.ZipClose(partial_target_zip)
+
+  return partial_target_file
+
+
+def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
+                                                  super_block_devices,
+                                                  dynamic_partition_list):
+  """Returns a target-files.zip for retrofitting dynamic partitions.
+
+  This allows brillo_update_payload to generate an OTA based on the exact
+  bits on the block devices. Postinstall is disabled.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    super_block_devices: The list of super block devices
+    dynamic_partition_list: The list of dynamic partitions
+
+  Returns:
+    The filename of target-files.zip with *.img replaced with super_*.img for
+    each block device in super_block_devices.
+  """
+  assert super_block_devices, "No super_block_devices are specified."
+
+  replace = {'OTA/super_{}.img'.format(dev): 'IMAGES/{}.img'.format(dev)
+             for dev in super_block_devices}
+
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  shutil.copyfile(input_file, target_file)
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  input_tmp = common.UnzipTemp(input_file, RETROFIT_DAP_UNZIP_PATTERN)
+
+  # Remove partitions from META/ab_partitions.txt that is in
+  # dynamic_partition_list but not in super_block_devices so that
+  # brillo_update_payload won't generate update for those logical partitions.
+  ab_partitions_file = os.path.join(input_tmp, *AB_PARTITIONS.split('/'))
+  with open(ab_partitions_file) as f:
+    ab_partitions_lines = f.readlines()
+    ab_partitions = [line.strip() for line in ab_partitions_lines]
+  # Assert that all super_block_devices are in ab_partitions
+  super_device_not_updated = [partition for partition in super_block_devices
+                              if partition not in ab_partitions]
+  assert not super_device_not_updated, \
+      "{} is in super_block_devices but not in {}".format(
+          super_device_not_updated, AB_PARTITIONS)
+  # ab_partitions -= (dynamic_partition_list - super_block_devices)
+  new_ab_partitions = common.MakeTempFile(
+      prefix="ab_partitions", suffix=".txt")
+  with open(new_ab_partitions, 'w') as f:
+    for partition in ab_partitions:
+      if (partition in dynamic_partition_list and
+              partition not in super_block_devices):
+        logger.info("Dropping %s from ab_partitions.txt", partition)
+        continue
+      f.write(partition + "\n")
+  to_delete = [AB_PARTITIONS]
+
+  # Always skip postinstall for a retrofit update.
+  to_delete += [POSTINSTALL_CONFIG]
+
+  # Delete dynamic_partitions_info.txt so that brillo_update_payload thinks this
+  # is a regular update on devices without dynamic partitions support.
+  to_delete += [DYNAMIC_PARTITION_INFO]
+
+  # Remove the existing partition images as well as the map files.
+  to_delete += list(replace.values())
+  to_delete += ['IMAGES/{}.map'.format(dev) for dev in super_block_devices]
+
+  common.ZipDelete(target_file, to_delete)
+
+  target_zip = zipfile.ZipFile(target_file, 'a', allowZip64=True)
+
+  # Write super_{foo}.img as {foo}.img.
+  for src, dst in replace.items():
+    assert src in namelist, \
+        'Missing {} in {}; {} cannot be written'.format(src, input_file, dst)
+    unzipped_file = os.path.join(input_tmp, *src.split('/'))
+    common.ZipWrite(target_zip, unzipped_file, arcname=dst)
+
+  # Write new ab_partitions.txt file
+  common.ZipWrite(target_zip, new_ab_partitions, arcname=AB_PARTITIONS)
+
+  common.ZipClose(target_zip)
+
+  return target_file
+
+
+def GetTargetFilesZipForCustomImagesUpdates(input_file, custom_images):
+  """Returns a target-files.zip for custom partitions update.
+
+  This function modifies ab_partitions list with the desired custom partitions
+  and puts the custom images into the target target-files.zip.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    custom_images: A map of custom partitions and custom images.
+
+  Returns:
+    The filename of a target-files.zip which has renamed the custom images in
+    the IMAGS/ to their partition names.
+  """
+  # Use zip2zip to avoid extracting the zipfile.
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  cmd = ['zip2zip', '-i', input_file, '-o', target_file]
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  # Write {custom_image}.img as {custom_partition}.img.
+  for custom_partition, custom_image in custom_images.items():
+    default_custom_image = '{}.img'.format(custom_partition)
+    if default_custom_image != custom_image:
+      logger.info("Update custom partition '%s' with '%s'",
+                  custom_partition, custom_image)
+      # Default custom image need to be deleted first.
+      namelist.remove('IMAGES/{}'.format(default_custom_image))
+      # IMAGES/{custom_image}.img:IMAGES/{custom_partition}.img.
+      cmd.extend(['IMAGES/{}:IMAGES/{}'.format(custom_image,
+                                               default_custom_image)])
+
+  cmd.extend(['{}:{}'.format(name, name) for name in namelist])
+  common.RunAndCheckOutput(cmd)
+
+  return target_file
+
+
+def GeneratePartitionTimestampFlags(partition_state):
+  partition_timestamps = [
+      part.partition_name + ":" + part.version
+      for part in partition_state]
+  return ["--partition_timestamps", ",".join(partition_timestamps)]
+
+
+def GeneratePartitionTimestampFlagsDowngrade(
+        pre_partition_state, post_partition_state):
+  assert pre_partition_state is not None
+  partition_timestamps = {}
+  for part in pre_partition_state:
+    partition_timestamps[part.partition_name] = part.version
+  for part in post_partition_state:
+    partition_timestamps[part.partition_name] = \
+        max(part.version, partition_timestamps[part.partition_name])
+  return [
+      "--partition_timestamps",
+      ",".join([key + ":" + val for (key, val)
+                in partition_timestamps.items()])
+  ]
+
+
+def SupportsMainlineGkiUpdates(target_file):
+  """Return True if the build supports MainlineGKIUpdates.
+
+  This function scans the product.img file in IMAGES/ directory for
+  pattern |*/apex/com.android.gki.*.apex|. If there are files
+  matching this pattern, conclude that build supports mainline
+  GKI and return True
+
+  Args:
+    target_file: Path to a target_file.zip, or an extracted directory
+  Return:
+    True if thisb uild supports Mainline GKI Updates.
+  """
+  if target_file is None:
+    return False
+  if os.path.isfile(target_file):
+    target_file = common.UnzipTemp(target_file, ["IMAGES/product.img"])
+  if not os.path.isdir(target_file):
+    assert os.path.isdir(target_file), \
+        "{} must be a path to zip archive or dir containing extracted"\
+        " target_files".format(target_file)
+  image_file = os.path.join(target_file, "IMAGES", "product.img")
+
+  if not os.path.isfile(image_file):
+    return False
+
+  if IsSparseImage(image_file):
+    # Unsparse the image
+    tmp_img = common.MakeTempFile(suffix=".img")
+    subprocess.check_output(["simg2img", image_file, tmp_img])
+    image_file = tmp_img
+
+  cmd = ["debugfs_static", "-R", "ls -p /apex", image_file]
+  output = subprocess.check_output(cmd).decode()
+
+  pattern = re.compile(r"com\.android\.gki\..*\.apex")
+  return pattern.search(output) is not None
+
+
+def GenerateAbOtaPackage(target_file, output_file, source_file=None):
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
   if not OPTIONS.no_signing:
@@ -1689,15 +2045,70 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   else:
     staging_file = output_file
   output_zip = zipfile.ZipFile(staging_file, "w",
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
                                compression=zipfile.ZIP_DEFLATED)
+=======
+                               compression=zipfile.ZIP_DEFLATED,
+                               allowZip64=True)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   if source_file is not None:
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     target_info = BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
     source_info = BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
+=======
+    assert "ab_partitions" in OPTIONS.source_info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
+    assert "ab_partitions" in OPTIONS.target_info_dict, \
+        "META/ab_partitions.txt is required for ab_update."
+    target_info = common.BuildInfo(OPTIONS.target_info_dict, OPTIONS.oem_dicts)
+    source_info = common.BuildInfo(OPTIONS.source_info_dict, OPTIONS.oem_dicts)
+    # If source supports VABC, delta_generator/update_engine will attempt to
+    # use VABC. This dangerous, as the target build won't have snapuserd to
+    # serve I/O request when device boots. Therefore, disable VABC if source
+    # build doesn't supports it.
+    if not source_info.is_vabc or not target_info.is_vabc:
+      logger.info("Either source or target does not support VABC, disabling.")
+      OPTIONS.disable_vabc = True
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   else:
     target_info = BuildInfo(OPTIONS.info_dict, OPTIONS.oem_dicts)
     source_info = None
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+  if target_info.vendor_suppressed_vabc:
+    logger.info("Vendor suppressed VABC. Disabling")
+    OPTIONS.disable_vabc = True
+  if not target_info.is_vabc_xor or OPTIONS.disable_vabc:
+    logger.info("VABC XOR Not supported, disabling")
+    OPTIONS.enable_vabc_xor = False
+  additional_args = []
+
+  # Prepare custom images.
+  if OPTIONS.custom_images:
+    target_file = GetTargetFilesZipForCustomImagesUpdates(
+        target_file, OPTIONS.custom_images)
+
+  if OPTIONS.retrofit_dynamic_partitions:
+    target_file = GetTargetFilesZipForRetrofitDynamicPartitions(
+        target_file, target_info.get("super_block_devices").strip().split(),
+        target_info.get("dynamic_partition_list").strip().split())
+  elif OPTIONS.partial:
+    target_file = GetTargetFilesZipForPartialUpdates(target_file,
+                                                     OPTIONS.partial)
+    additional_args += ["--is_partial_update", "true"]
+  elif OPTIONS.skip_postinstall:
+    target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
+  # Target_file may have been modified, reparse ab_partitions
+  with zipfile.ZipFile(target_file, allowZip64=True) as zfp:
+    target_info.info_dict['ab_partitions'] = zfp.read(
+        AB_PARTITIONS).decode().strip().split("\n")
+
+  CheckVintfIfTrebleEnabled(target_file, target_info)
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
 
@@ -1710,11 +2121,41 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   # Enforce a max timestamp this payload can be applied on top of.
   if OPTIONS.downgrade:
     max_timestamp = source_info.GetBuildProp("ro.build.date.utc")
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+    partition_timestamps_flags = GeneratePartitionTimestampFlagsDowngrade(
+        metadata.precondition.partition_state,
+        metadata.postcondition.partition_state
+    )
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   else:
     max_timestamp = metadata["post-timestamp"]
   additional_args = ["--max_timestamp", max_timestamp]
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   payload.Generate(target_file, source_file, additional_args)
+=======
+  if OPTIONS.disable_vabc:
+    additional_args += ["--disable_vabc", "true"]
+  if OPTIONS.enable_vabc_xor:
+    additional_args += ["--enable_vabc_xor", "true"]
+  if OPTIONS.force_minor_version:
+    additional_args += ["--force_minor_version", OPTIONS.force_minor_version]
+  if OPTIONS.compressor_types:
+    additional_args += ["--compressor_types", OPTIONS.compressor_types]
+  additional_args += ["--max_timestamp", max_timestamp]
+
+  if SupportsMainlineGkiUpdates(source_file):
+    logger.warning(
+        "Detected build with mainline GKI, include full boot image.")
+    additional_args.extend(["--full_boot", "true"])
+
+  payload.Generate(
+      target_file,
+      source_file,
+      additional_args + partition_timestamps_flags
+  )
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Sign the payload.
   payload_signer = PayloadSigner()
@@ -1732,7 +2173,12 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
         target_file, OPTIONS.skip_postinstall)
     secondary_payload = Payload(secondary=True)
     secondary_payload.Generate(secondary_target_file,
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
                                additional_args=additional_args)
+=======
+                               additional_args=["--max_timestamp",
+                                                max_timestamp])
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     secondary_payload.Sign(payload_signer)
     secondary_payload.WriteToZip(output_zip)
 
@@ -1755,8 +2201,18 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   AddCompatibilityArchiveIfTrebleEnabled(
       target_zip, output_zip, target_info, source_info)
 
+  # Add the source apex version for incremental ota updates, and write the
+  # result apex info to the ota package.
+  ota_apex_info = ota_utils.ConstructOtaApexInfo(target_zip, source_file)
+  if ota_apex_info is not None:
+    common.ZipWriteStr(output_zip, "apex_info.pb", ota_apex_info,
+                       compress_type=zipfile.ZIP_STORED)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
   common.ZipClose(target_zip)
 
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   # We haven't written the metadata entry yet, which will be handled in
   # FinalizeMetadata().
   common.ZipClose(output_zip)
@@ -1830,11 +2286,50 @@ def main(argv):
       OPTIONS.extracted_input = a
     elif o == "--skip_postinstall":
       OPTIONS.skip_postinstall = True
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+    elif o == "--retrofit_dynamic_partitions":
+      OPTIONS.retrofit_dynamic_partitions = True
+    elif o == "--skip_compatibility_check":
+      OPTIONS.skip_compatibility_check = True
+    elif o == "--output_metadata_path":
+      OPTIONS.output_metadata_path = a
+    elif o == "--disable_fec_computation":
+      OPTIONS.disable_fec_computation = True
+    elif o == "--disable_verity_computation":
+      OPTIONS.disable_verity_computation = True
+    elif o == "--force_non_ab":
+      OPTIONS.force_non_ab = True
+    elif o == "--boot_variable_file":
+      OPTIONS.boot_variable_file = a
+    elif o == "--partial":
+      partitions = a.split()
+      if not partitions:
+        raise ValueError("Cannot parse partitions in {}".format(a))
+      OPTIONS.partial = partitions
+    elif o == "--custom_image":
+      custom_partition, custom_image = a.split("=")
+      OPTIONS.custom_images[custom_partition] = custom_image
+    elif o == "--disable_vabc":
+      OPTIONS.disable_vabc = True
+    elif o == "--spl_downgrade":
+      OPTIONS.spl_downgrade = True
+      OPTIONS.wipe_user_data = True
+    elif o == "--vabc_downgrade":
+      OPTIONS.vabc_downgrade = True
+    elif o == "--enable_vabc_xor":
+      OPTIONS.enable_vabc_xor = a.lower() != "false"
+    elif o == "--force_minor_version":
+      OPTIONS.force_minor_version = a
+    elif o == "--compressor_types":
+      OPTIONS.compressor_types = a
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     else:
       return False
     return True
 
   args = common.ParseOptions(argv, __doc__,
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
                              extra_opts="b:k:i:d:e:t:2o:",
                              extra_long_opts=[
                                  "package_key=",
@@ -1861,6 +2356,51 @@ def main(argv):
                                  "extracted_input_target_files=",
                                  "skip_postinstall",
                              ], extra_option_handler=option_handler)
+=======
+                                             extra_opts="b:k:i:d:e:t:2o:",
+                                             extra_long_opts=[
+                                                 "package_key=",
+                                                 "incremental_from=",
+                                                 "full_radio",
+                                                 "full_bootloader",
+                                                 "wipe_user_data",
+                                                 "downgrade",
+                                                 "override_timestamp",
+                                                 "extra_script=",
+                                                 "worker_threads=",
+                                                 "two_step",
+                                                 "include_secondary",
+                                                 "no_signing",
+                                                 "block",
+                                                 "binary=",
+                                                 "oem_settings=",
+                                                 "oem_no_mount",
+                                                 "verify",
+                                                 "stash_threshold=",
+                                                 "log_diff=",
+                                                 "payload_signer=",
+                                                 "payload_signer_args=",
+                                                 "payload_signer_maximum_signature_size=",
+                                                 "payload_signer_key_size=",
+                                                 "extracted_input_target_files=",
+                                                 "skip_postinstall",
+                                                 "retrofit_dynamic_partitions",
+                                                 "skip_compatibility_check",
+                                                 "output_metadata_path=",
+                                                 "disable_fec_computation",
+                                                 "disable_verity_computation",
+                                                 "force_non_ab",
+                                                 "boot_variable_file=",
+                                                 "partial=",
+                                                 "custom_image=",
+                                                 "disable_vabc",
+                                                 "spl_downgrade",
+                                                 "vabc_downgrade",
+                                                 "enable_vabc_xor=",
+                                                 "force_minor_version=",
+                                                 "compressor_types=",
+                                             ], extra_option_handler=option_handler)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   if len(args) != 2:
     common.Usage(__doc__)
@@ -1886,9 +2426,32 @@ def main(argv):
     with zipfile.ZipFile(args[0], 'r') as input_zip:
       OPTIONS.info_dict = common.LoadInfoDict(input_zip)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   if OPTIONS.verbose:
     print("--- target info ---")
     common.DumpInfoDict(OPTIONS.info_dict)
+=======
+  if OPTIONS.wipe_user_data:
+    if not OPTIONS.vabc_downgrade:
+      logger.info("Detected downgrade/datawipe OTA."
+                  "When wiping userdata, VABC OTA makes the user "
+                  "wait in recovery mode for merge to finish. Disable VABC by "
+                  "default. If you really want to do VABC downgrade, pass "
+                  "--vabc_downgrade")
+      OPTIONS.disable_vabc = True
+    # We should only allow downgrading incrementals (as opposed to full).
+    # Otherwise the device may go back from arbitrary build with this full
+    # OTA package.
+  if OPTIONS.incremental_source is None and OPTIONS.downgrade:
+    raise ValueError("Cannot generate downgradable full OTAs")
+
+  # TODO(xunchang) for retrofit and partial updates, maybe we should rebuild the
+  # target-file and reload the info_dict. So the info will be consistent with
+  # the modified target-file.
+
+  logger.info("--- target info ---")
+  common.DumpInfoDict(OPTIONS.info_dict)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Load the source build dict if applicable.
   if OPTIONS.incremental_source is not None:
@@ -1896,14 +2459,41 @@ def main(argv):
     with zipfile.ZipFile(OPTIONS.incremental_source, 'r') as source_zip:
       OPTIONS.source_info_dict = common.LoadInfoDict(source_zip)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     if OPTIONS.verbose:
       print("--- source info ---")
       common.DumpInfoDict(OPTIONS.source_info_dict)
+=======
+    logger.info("--- source info ---")
+    common.DumpInfoDict(OPTIONS.source_info_dict)
+
+  if OPTIONS.partial:
+    OPTIONS.info_dict['ab_partitions'] = \
+        list(
+        set(OPTIONS.info_dict['ab_partitions']) & set(OPTIONS.partial)
+    )
+    if OPTIONS.source_info_dict:
+      OPTIONS.source_info_dict['ab_partitions'] = \
+          list(
+          set(OPTIONS.source_info_dict['ab_partitions']) &
+          set(OPTIONS.partial)
+      )
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Load OEM dicts if provided.
   OPTIONS.oem_dicts = _LoadOemDicts(OPTIONS.oem_source)
 
   ab_update = OPTIONS.info_dict.get("ab_update") == "true"
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+  allow_non_ab = OPTIONS.info_dict.get("allow_non_ab") == "true"
+  if OPTIONS.force_non_ab:
+    assert allow_non_ab,\
+        "--force_non_ab only allowed on devices that supports non-A/B"
+    assert ab_update, "--force_non_ab only allowed on A/B devices"
+
+  generate_ab = not OPTIONS.force_non_ab and ab_update
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Use the default key to sign the package if not specified with package_key.
   # package_keys are needed on ab_updates, so always define them if an
@@ -1915,9 +2505,40 @@ def main(argv):
           "build/target/product/security/testkey")
     # Get signing keys
     OPTIONS.key_passwords = common.GetKeyPasswords([OPTIONS.package_key])
+    private_key_path = OPTIONS.package_key + OPTIONS.private_key_suffix
+    if not os.path.exists(private_key_path):
+      raise common.ExternalError(
+          "Private key {} doesn't exist. Make sure you passed the"
+          " correct key path through -k option".format(
+              private_key_path)
+      )
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   if ab_update:
     WriteABOTAPackageWithBrilloScript(
+=======
+  if OPTIONS.source_info_dict:
+    source_build_prop = OPTIONS.source_info_dict["build.prop"]
+    target_build_prop = OPTIONS.target_info_dict["build.prop"]
+    source_spl = source_build_prop.GetProp(SECURITY_PATCH_LEVEL_PROP_NAME)
+    target_spl = target_build_prop.GetProp(SECURITY_PATCH_LEVEL_PROP_NAME)
+    is_spl_downgrade = target_spl < source_spl
+    if is_spl_downgrade and not OPTIONS.spl_downgrade and not OPTIONS.downgrade:
+      raise common.ExternalError(
+          "Target security patch level {} is older than source SPL {} applying "
+          "such OTA will likely cause device fail to boot. Pass --spl_downgrade "
+          "to override this check. This script expects security patch level to "
+          "be in format yyyy-mm-dd (e.x. 2021-02-05). It's possible to use "
+          "separators other than -, so as long as it's used consistenly across "
+          "all SPL dates".format(target_spl, source_spl))
+    elif not is_spl_downgrade and OPTIONS.spl_downgrade:
+      raise ValueError("--spl_downgrade specified but no actual SPL downgrade"
+                       " detected. Please only pass in this flag if you want a"
+                       " SPL downgrade. Target SPL: {} Source SPL: {}"
+                       .format(target_spl, source_spl))
+  if generate_ab:
+    GenerateAbOtaPackage(
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
         target_file=args[0],
         output_file=args[1],
         source_file=OPTIONS.incremental_source)

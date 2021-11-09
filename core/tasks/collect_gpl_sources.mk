@@ -26,8 +26,12 @@ $(gpl_source_tgz) : $(ALL_GPL_MODULE_LICENSE_FILES)
 	$(hide) tar cfz $@ --exclude ".git*" $(PRIVATE_PATHS)
 
 # Dist the tgz only if we are doing a full build
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifeq (,$(TARGET_BUILD_APPS))
 droidcore: $(gpl_source_tgz)
 endif
 
 endif # dist_goal
+=======
+$(call dist-for-goals,droidcore-unbundled,$(gpl_source_tgz))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

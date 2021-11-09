@@ -48,6 +48,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/core.mk \
     $(LOCAL_DIR)/generic.mk \
     $(LOCAL_DIR)/generic_x86.mk \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     $(LOCAL_DIR)/generic_mips.mk \
     $(LOCAL_DIR)/aosp_arm.mk \
     $(LOCAL_DIR)/aosp_arm_a.mk \
@@ -67,6 +68,15 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk \
     $(LOCAL_DIR)/aosp_x86_64_a.mk \
     $(LOCAL_DIR)/aosp_x86_64_ab.mk \
+=======
+    $(LOCAL_DIR)/mainline_system_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_x86.mk \
+    $(LOCAL_DIR)/mainline_system_x86_64.mk \
+    $(LOCAL_DIR)/mainline_system_x86_arm.mk \
+    $(LOCAL_DIR)/sdk_arm64.mk \
+    $(LOCAL_DIR)/sdk.mk \
+    $(LOCAL_DIR)/sdk_phone_arm64.mk \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(LOCAL_DIR)/sdk_phone_armv7.mk \
     $(LOCAL_DIR)/sdk_phone_x86.mk \
     $(LOCAL_DIR)/sdk_phone_mips.mk \
@@ -79,3 +89,19 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/sdk_arm64.mk \
     $(LOCAL_DIR)/sdk_x86_64.mk
 endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+PRODUCT_MAKEFILES += \
+    $(LOCAL_DIR)/mainline_sdk.mk \
+    $(LOCAL_DIR)/module_arm.mk \
+    $(LOCAL_DIR)/module_arm64.mk \
+    $(LOCAL_DIR)/module_x86.mk \
+    $(LOCAL_DIR)/module_x86_64.mk \
+
+COMMON_LUNCH_CHOICES := \
+    aosp_arm64-eng \
+    aosp_arm-eng \
+    aosp_x86_64-eng \
+    aosp_x86-eng \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

@@ -213,11 +213,22 @@ ifneq ($(LOCAL_SDK_VERSION),)
       my_ndk_stl_shared_lib_fullpath := $(my_libcxx_libdir)/libc++_shared.so
     endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     my_ndk_stl_static_lib += $(my_libcxx_libdir)/libandroid_support.a
     ifneq (,$(filter armeabi armeabi-v7a,$(my_cpu_variant)))
       my_ndk_stl_static_lib += $(my_libcxx_libdir)/libunwind.a
     endif
 
+=======
+    ifneq ($(my_ndk_api),current)
+      ifeq ($(call math_lt,$(my_ndk_api),21),true)
+        my_ndk_stl_include_path += $(my_ndk_source_root)/android/support/include
+        my_ndk_stl_static_lib += $(my_libcxx_libdir)/libandroid_support.a
+      endif
+    endif
+
+    my_ndk_stl_static_lib += $(my_libcxx_libdir)/libunwind.a
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     my_ldlibs += -ldl
   else # LOCAL_NDK_STL_VARIANT must be none
     # Do nothing.
@@ -233,7 +244,20 @@ ifneq ($(LOCAL_USE_VNDK),)
     # __ANDROID_API_FUTURE__.
     my_vndk_version := $(call codename-or-sdk-to-sdk,$(PLATFORM_VNDK_VERSION))
   endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   my_cflags += -D__ANDROID_API__=$(my_vndk_version) -D__ANDROID_VNDK__
+=======
+  my_cflags += -D__ANDROID_VNDK__
+  ifneq ($(LOCAL_USE_VNDK_VENDOR),)
+    # Vendor modules have LOCAL_USE_VNDK_VENDOR when
+    # BOARD_VNDK_VERSION is defined.
+    my_cflags += -D__ANDROID_VENDOR__
+  else ifneq ($(LOCAL_USE_VNDK_PRODUCT),)
+    # Product modules have LOCAL_USE_VNDK_PRODUCT when
+    # PRODUCT_PRODUCT_VNDK_VERSION is defined.
+    my_cflags += -D__ANDROID_PRODUCT__
+  endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 
 ifndef LOCAL_IS_HOST_MODULE
@@ -456,6 +480,7 @@ ifneq ($(filter %.arm,$(my_src_files)),)
 my_soong_problems += srcs_dotarm
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ####################################################
 ## Add FDO flags if FDO is turned on and supported
 ## Please note that we will do option filtering during FDO build.
@@ -477,6 +502,8 @@ ifneq ($(filter true always, $(LOCAL_FDO_SUPPORT)),)
   my_cxx_wrapper := $(filter $(GOMA_CC),$(my_cxx_wrapper))
 endif
 
+=======
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ###########################################################
 ## Explicitly declare assembly-only __ASSEMBLY__ macro for
 ## assembly source
@@ -1477,12 +1504,18 @@ my_tracked_src_files :=
 
 my_c_includes += $(TOPDIR)$(LOCAL_PATH) $(intermediates) $(generated_sources_dir)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # The platform JNI header is for platform modules only.
 ifeq ($(LOCAL_SDK_VERSION)$(LOCAL_USE_VNDK),)
   my_c_includes += $(JNI_H_INCLUDE)
 endif
 
 my_outside_includes := $(filter-out $(OUT_DIR)/%,$(filter /%,$(my_c_includes)))
+=======
+my_c_includes := $(foreach inc,$(my_c_includes),$(call clean-path,$(inc)))
+
+my_outside_includes := $(filter-out $(OUT_DIR)/%,$(filter /%,$(my_c_includes)) $(filter ../%,$(my_c_includes)))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ifneq ($(my_outside_includes),)
 $(error $(LOCAL_MODULE_MAKEFILE): $(LOCAL_MODULE): C_INCLUDES must be under the source or output directories: $(my_outside_includes))
 endif
@@ -1617,12 +1650,6 @@ else
 # gcc does not handle hidden functions in a manner compatible with LLVM libcxx
 # see b/27908145
 my_cflags += -Wno-attributes
-endif
-
-ifeq ($(my_fdo_build), true)
-  my_cflags := $(patsubst -Os,-O2,$(my_cflags))
-  fdo_incompatible_flags := -fno-early-inlining -finline-limit=%
-  my_cflags := $(filter-out $(fdo_incompatible_flags),$(my_cflags))
 endif
 
 # No one should ever use this flag. On GCC it's mere presence will disable all

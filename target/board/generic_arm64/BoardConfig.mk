@@ -55,8 +55,24 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_VARIANT := generic
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+include build/make/target/board/BoardConfigGsiCommon.mk
+include build/make/target/board/BoardConfigGkiCommon.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 TARGET_USES_64_BIT_BINDER := true
+=======
+BOARD_KERNEL-4.19-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-4.19-GZ-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.10_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10-GZ_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.10-GZ-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 47185920
+BOARD_KERNEL-5.10-LZ4_BOOTIMAGE_PARTITION_SIZE := 53477376
+BOARD_KERNEL-5.10-LZ4-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 53477376
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # no hardware camera
 USE_CAMERA_STUB := true
@@ -85,6 +101,7 @@ BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 DEVICE_MATRIX_FILE   := device/generic/goldfish/compatibility_matrix.xml
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Android generic system image always create metadata partition
 BOARD_USES_METADATA_PARTITION := true
 
@@ -105,20 +122,42 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 $(error BOARD_AVB_ENABLE cannot be set for GSI)
 endif
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+=======
+BOARD_KERNEL_BINARIES := \
+    kernel-4.19-gz \
+    kernel-5.10 kernel-5.10-gz kernel-5.10-lz4 \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # GSI is always userdebug and needs a couple of properties taking precedence
 # over those set by the vendor.
 TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
+=======
+BOARD_KERNEL_BINARIES += \
+    kernel-4.19-gz-allsyms \
+    kernel-5.10-allsyms kernel-5.10-gz-allsyms kernel-5.10-lz4-allsyms \
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 BOARD_VNDK_VERSION := current
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Emulator system image is going to be used as GSI and some vendor still hasn't
 # cleaned up all device specific directories under root!
 
 # TODO(jiyong) These might be SoC specific.
 BOARD_ROOT_EXTRA_FOLDERS += firmware firmware/radio persist
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
+=======
+# Some vendors still haven't cleaned up all device specific directories under
+# root!
+
+# TODO(b/111434759, b/111287060) SoC specific hacks
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.

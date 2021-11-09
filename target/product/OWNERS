@@ -1,0 +1,8 @@
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+per-file runtime_libart.mk = calin@google.com, mast@google.com, ngeoffray@google.com, oth@google.com, rpl@google.com, vmarko@google.com
+
+# GSI
+per-file gsi_release.mk = file:/target/product/gsi/OWNERS
+per-file gsi_keys.mk = file:/target/product/gsi/OWNERS
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

@@ -63,9 +63,24 @@ include $(BUILD_SYSTEM)/clang/config.mk
 # Write the build number to a file so it can be read back in
 # without changing the command line every time.  Avoids rebuilds
 # when using ninja.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(shell mkdir -p $(OUT_DIR) && \
     echo -n $(BUILD_NUMBER) > $(OUT_DIR)/build_number.txt)
 BUILD_NUMBER_FILE := $(OUT_DIR)/build_number.txt
+=======
+$(shell mkdir -p $(SOONG_OUT_DIR) && \
+    echo -n $(BUILD_NUMBER) > $(SOONG_OUT_DIR)/build_number.tmp; \
+    if ! cmp -s $(SOONG_OUT_DIR)/build_number.tmp $(SOONG_OUT_DIR)/build_number.txt; then \
+        mv $(SOONG_OUT_DIR)/build_number.tmp $(SOONG_OUT_DIR)/build_number.txt; \
+    else \
+        rm $(SOONG_OUT_DIR)/build_number.tmp; \
+    fi)
+BUILD_NUMBER_FILE := $(SOONG_OUT_DIR)/build_number.txt
+.KATI_READONLY := BUILD_NUMBER_FILE
+$(KATI_obsolete_var BUILD_NUMBER,See https://android.googlesource.com/platform/build/+/master/Changes.md#BUILD_NUMBER)
+$(BUILD_NUMBER_FILE):
+	touch $@
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 ifeq ($(HOST_OS),darwin)
 DATE_FROM_FILE := date -r $(BUILD_DATETIME_FROM_FILE)
@@ -98,6 +113,19 @@ $(shell mkdir -p $(EMPTY_DIRECTORY) && rm -rf $(EMPTY_DIRECTORY)/*)
 -include test/sts/tools/sts-tradefed/build/config.mk
 # CTS-Instant-specific config
 -include test/suite_harness/tools/cts-instant-tradefed/build/config.mk
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+# MTS-specific config.
+-include test/mts/tools/build/config.mk
+# VTS-Core-specific config.
+-include test/vts/tools/vts-core-tradefed/build/config.mk
+# CSUITE-specific config.
+-include test/app_compat/csuite/tools/build/config.mk
+# CATBox-specific config.
+-include test/catbox/tools/build/config.mk
+# CTS-Root-specific config.
+-include test/cts-root/tools/build/config.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # Clean rules
 .PHONY: clean-dex-files
@@ -121,6 +149,7 @@ ifeq (true,$(EMMA_INSTRUMENT_STATIC))
 EMMA_INSTRUMENT := true
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifeq (true,$(EMMA_INSTRUMENT))
 # Adding the jacoco library can cause the inclusion of
 # some typically banned classes
@@ -135,6 +164,11 @@ endif
 # Validate ADDITIONAL_DEFAULT_PROPERTIES.
 ifneq ($(ADDITIONAL_DEFAULT_PROPERTIES),)
 $(error ADDITIONAL_DEFAULT_PROPERTIES must not be set before here: $(ADDITIONAL_DEFAULT_PROPERTIES))
+=======
+ifdef TARGET_ARCH_SUITE
+  # TODO(b/175577370): Enable this error.
+  # $(error TARGET_ARCH_SUITE is not supported in kati/make builds)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 
 #
@@ -225,12 +259,170 @@ $(KATI_obsolete_var PRODUCT_FULL_TREBLE,\
 	variables like PRODUCT_SEPOLICY_SPLIT should be used until that is \
 	possible.)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Sets ro.actionable_compatible_property.enabled to know on runtime whether the whitelist
 # of actionable compatible properties is enabled or not.
 ifeq ($(PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE),true)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.actionable_compatible_property.enabled=false
+=======
+# Sets ro.actionable_compatible_property.enabled to know on runtime whether the
+# allowed list of actionable compatible properties is enabled or not.
+ADDITIONAL_SYSTEM_PROPERTIES += ro.actionable_compatible_property.enabled=true
+
+# Add the system server compiler filter if they are specified for the product.
+ifneq (,$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER))
+ADDITIONAL_PRODUCT_PROPERTIES += dalvik.vm.systemservercompilerfilter=$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER)
+endif
+
+# Enable core platform API violation warnings on userdebug and eng builds.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+ADDITIONAL_SYSTEM_PROPERTIES += persist.debug.dalvik.vm.core_platform_api_policy=just-warn
+endif
+
+# Define ro.sanitize.<name> properties for all global sanitizers.
+ADDITIONAL_SYSTEM_PROPERTIES += $(foreach s,$(SANITIZE_TARGET),ro.sanitize.$(s)=true)
+
+# Sets the default value of ro.postinstall.fstab.prefix to /system.
+# Device board config should override the value to /product when needed by:
+#
+#     PRODUCT_PRODUCT_PROPERTIES += ro.postinstall.fstab.prefix=/product
+#
+# It then uses ${ro.postinstall.fstab.prefix}/etc/fstab.postinstall to
+# mount system_other partition.
+ADDITIONAL_SYSTEM_PROPERTIES += ro.postinstall.fstab.prefix=/system
+
+# -----------------------------------------------------------------
+# ADDITIONAL_VENDOR_PROPERTIES will be installed in vendor/build.prop if
+# property_overrides_split_enabled is true. Otherwise it will be installed in
+# /system/build.prop
+ifdef BOARD_VNDK_VERSION
+  ifeq ($(BOARD_VNDK_VERSION),current)
+    ADDITIONAL_VENDOR_PROPERTIES := ro.vndk.version=$(PLATFORM_VNDK_VERSION)
+  else
+    ADDITIONAL_VENDOR_PROPERTIES := ro.vndk.version=$(BOARD_VNDK_VERSION)
+  endif
+endif
+
+# Add cpu properties for bionic and ART.
+ADDITIONAL_VENDOR_PROPERTIES += ro.bionic.arch=$(TARGET_ARCH)
+ADDITIONAL_VENDOR_PROPERTIES += ro.bionic.cpu_variant=$(TARGET_CPU_VARIANT_RUNTIME)
+ADDITIONAL_VENDOR_PROPERTIES += ro.bionic.2nd_arch=$(TARGET_2ND_ARCH)
+ADDITIONAL_VENDOR_PROPERTIES += ro.bionic.2nd_cpu_variant=$(TARGET_2ND_CPU_VARIANT_RUNTIME)
+
+ADDITIONAL_VENDOR_PROPERTIES += persist.sys.dalvik.vm.lib.2=libart.so
+ADDITIONAL_VENDOR_PROPERTIES += dalvik.vm.isa.$(TARGET_ARCH).variant=$(DEX2OAT_TARGET_CPU_VARIANT_RUNTIME)
+ifneq ($(DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES),)
+  ADDITIONAL_VENDOR_PROPERTIES += dalvik.vm.isa.$(TARGET_ARCH).features=$(DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES)
+endif
+
+ifdef TARGET_2ND_ARCH
+  ADDITIONAL_VENDOR_PROPERTIES += dalvik.vm.isa.$(TARGET_2ND_ARCH).variant=$($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT_RUNTIME)
+  ifneq ($($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES),)
+    ADDITIONAL_VENDOR_PROPERTIES += dalvik.vm.isa.$(TARGET_2ND_ARCH).features=$($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES)
+  endif
+endif
+
+# Although these variables are prefixed with TARGET_RECOVERY_, they are also needed under charger
+# mode (via libminui).
+ifdef TARGET_RECOVERY_DEFAULT_ROTATION
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.minui.default_rotation=$(TARGET_RECOVERY_DEFAULT_ROTATION)
+endif
+ifdef TARGET_RECOVERY_OVERSCAN_PERCENT
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.minui.overscan_percent=$(TARGET_RECOVERY_OVERSCAN_PERCENT)
+endif
+ifdef TARGET_RECOVERY_PIXEL_FORMAT
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.minui.pixel_format=$(TARGET_RECOVERY_PIXEL_FORMAT)
+endif
+
+ifdef PRODUCT_USE_DYNAMIC_PARTITIONS
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.boot.dynamic_partitions=$(PRODUCT_USE_DYNAMIC_PARTITIONS)
+endif
+
+ifdef PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.boot.dynamic_partitions_retrofit=$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
+endif
+
+ifdef PRODUCT_SHIPPING_API_LEVEL
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
+endif
+
+ifneq ($(TARGET_BUILD_VARIANT),user)
+  ifdef PRODUCT_SET_DEBUGFS_RESTRICTIONS
+    ADDITIONAL_VENDOR_PROPERTIES += \
+      ro.product.debugfs_restrictions.enabled=$(PRODUCT_SET_DEBUGFS_RESTRICTIONS)
+  endif
+endif
+
+# Vendors with GRF must define BOARD_SHIPPING_API_LEVEL for the vendor API level.
+# This must not be defined for the non-GRF devices.
+ifdef BOARD_SHIPPING_API_LEVEL
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.board.first_api_level=$(BOARD_SHIPPING_API_LEVEL)
+
+# To manually set the vendor API level of the vendor modules, BOARD_API_LEVEL can be used.
+# The values of the GRF properties will be verified by post_process_props.py
+ifdef BOARD_API_LEVEL
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.board.api_level=$(BOARD_API_LEVEL)
+endif
+endif
+
+# Set build prop. This prop is read by ota_from_target_files when generating OTA,
+# to decide if VABC should be disabled.
+ifeq ($(BOARD_DONT_USE_VABC_OTA),true)
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.vendor.build.dont_use_vabc=true
+endif
+
+# Set the flag in vendor. So VTS would know if the new fingerprint format is in use when
+# the system images are replaced by GSI.
+ifeq ($(BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT),true)
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.vendor.build.fingerprint_has_digest=1
+endif
+
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.vendor.build.security_patch=$(VENDOR_SECURITY_PATCH) \
+    ro.product.board=$(TARGET_BOOTLOADER_BOARD_NAME) \
+    ro.board.platform=$(TARGET_BOARD_PLATFORM) \
+    ro.hwui.use_vulkan=$(TARGET_USES_VULKAN)
+
+ifdef TARGET_SCREEN_DENSITY
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.sf.lcd_density=$(TARGET_SCREEN_DENSITY)
+endif
+
+ifdef AB_OTA_UPDATER
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.build.ab_update=$(AB_OTA_UPDATER)
+endif
+
+# Set ro.product.vndk.version to know the VNDK version required by product
+# modules. It uses the version in PRODUCT_PRODUCT_VNDK_VERSION. If the value
+# is "current", use PLATFORM_VNDK_VERSION.
+ifdef PRODUCT_PRODUCT_VNDK_VERSION
+ifeq ($(PRODUCT_PRODUCT_VNDK_VERSION),current)
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.vndk.version=$(PLATFORM_VNDK_VERSION)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 else
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.actionable_compatible_property.enabled=${PRODUCT_COMPATIBLE_PROPERTY}
+=======
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.vndk.version=$(PRODUCT_PRODUCT_VNDK_VERSION)
+endif
+endif
+
+ADDITIONAL_PRODUCT_PROPERTIES += ro.build.characteristics=$(TARGET_AAPT_CHARACTERISTICS)
+
+ifeq ($(AB_OTA_UPDATER),true)
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.ab_ota_partitions=$(subst $(space),$(comma),$(strip $(AB_OTA_PARTITIONS)))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 
 # -----------------------------------------------------------------
@@ -241,7 +433,7 @@ endif
 
 is_sdk_build :=
 
-ifneq ($(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)),)
+ifneq ($(filter sdk sdk_addon,$(MAKECMDGOALS)),)
 is_sdk_build := true
 endif
 
@@ -449,18 +641,36 @@ ifneq ($(dont_bother),true)
 # Include all of the makefiles in the system
 #
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 subdir_makefiles := $(SOONG_ANDROID_MK) $(file <$(OUT_DIR)/.module_paths/Android.mk.list)
 subdir_makefiles_total := $(words $(subdir_makefiles))
+=======
+subdir_makefiles := $(SOONG_OUT_DIR)/installs-$(TARGET_PRODUCT).mk $(SOONG_ANDROID_MK)
+# Android.mk files are only used on Linux builds, Mac only supports Android.bp
+ifeq ($(HOST_OS),linux)
+  subdir_makefiles += $(file <$(OUT_DIR)/.module_paths/Android.mk.list)
+endif
+subdir_makefiles += $(SOONG_OUT_DIR)/late-$(TARGET_PRODUCT).mk
+subdir_makefiles_total := $(words int $(subdir_makefiles) post finish)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 .KATI_READONLY := subdir_makefiles_total
 
 $(foreach mk,$(subdir_makefiles),$(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] including $(mk) ...)$(eval include $(mk)))
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq (,$(PDK_FUSION_PLATFORM_ZIP)$(PDK_FUSION_PLATFORM_DIR))
 # Bring in the PDK platform.zip modules.
 include $(BUILD_SYSTEM)/pdk_fusion_modules.mk
 endif # PDK_FUSION_PLATFORM_ZIP || PDK_FUSION_PLATFORM_DIR
 
+=======
+# For an unbundled image, we can skip blueprint_tools because unbundled image
+# aims to remove a large number framework projects from the manifest, the
+# sources or dependencies for these tools may be missing from the tree.
+ifeq (,$(TARGET_BUILD_UNBUNDLED_IMAGE))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 droid_targets : blueprint_tools
+endif
 
 endif # dont_bother
 
@@ -680,7 +890,45 @@ $(foreach m,$($(if $(2),$($(1)2ND_ARCH_VAR_PREFIX))$(1)DEPENDENCIES_ON_SHARED_LI
   $(if $(filter $(1),HOST_),\
     $(eval $(call add-required-host-so-deps,$(word 2,$(p)),$(r))),\
     $(eval $(call add-required-deps,$(word 2,$(p)),$(r))))\
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   $(eval ALL_MODULES.$(mod).REQUIRED += $(deps)))
+=======
+  $(eval ALL_MODULES.$(mod).REQUIRED_FROM_$(patsubst %_,%,$(1)) += $(deps)))
+endef
+
+# Recursively resolve host shared library dependency for a given module.
+# $(1): module name
+# Returns all dependencies of shared library.
+define get-all-shared-libs-deps
+$(if $(_all_deps_for_$(1)_set_),$(_all_deps_for_$(1)_),\
+  $(eval _all_deps_for_$(1)_ :=) \
+  $(foreach dep,$(ALL_MODULES.$(1).HOST_SHARED_LIBRARIES),\
+    $(foreach m,$(call get-all-shared-libs-deps,$(dep)),\
+      $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(m))\
+      $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_))))\
+    $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(dep))\
+    $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_) $(dep)))\
+    $(eval _all_deps_for_$(1)_set_ := true))\
+$(_all_deps_for_$(1)_))
+endef
+
+# Scan all modules in general-tests, device-tests and other selected suites and
+# flatten the shared library dependencies.
+define update-host-shared-libs-deps-for-suites
+$(foreach suite,general-tests device-tests vts tvts art-host-tests host-unit-tests,\
+  $(foreach m,$(COMPATIBILITY.$(suite).MODULES),\
+    $(eval my_deps := $(call get-all-shared-libs-deps,$(m)))\
+    $(foreach dep,$(my_deps),\
+      $(foreach f,$(ALL_MODULES.$(dep).HOST_SHARED_LIBRARY_FILES),\
+        $(if $(filter $(suite),device-tests general-tests),\
+          $(eval my_testcases := $(HOST_OUT_TESTCASES)),\
+          $(eval my_testcases := $$(COMPATIBILITY_TESTCASES_OUT_$(suite))))\
+        $(eval target := $(my_testcases)/$(lastword $(subst /, ,$(dir $(f))))/$(notdir $(f)))\
+        $(eval COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES := \
+          $$(COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES) $(f):$(target))\
+        $(eval COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES := \
+          $(sort $(COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES)))))))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endef
 
 $(call resolve-shared-libs-depes,TARGET_)
@@ -878,6 +1126,20 @@ $(foreach lt,$(ALL_LINK_TYPES),\
 # Of the modules defined by the component makefiles,
 # determine what we actually want to build.
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+# Expand a list of modules to the modules that they override (if any)
+# $(1): The list of modules.
+define module-overrides
+$(foreach m,$(1),\
+  $(eval _mo_overrides := $(PACKAGES.$(m).OVERRIDES) $(EXECUTABLES.$(m).OVERRIDES) $(SHARED_LIBRARIES.$(m).OVERRIDES) $(ETC.$(m).OVERRIDES))\
+  $(if $(filter $(m),$(_mo_overrides)),\
+    $(error Module $(m) cannot override itself),\
+    $(_mo_overrides)))
+endef
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ###########################################################
 ## Expand a module name list with REQUIRED modules
 ###########################################################
@@ -886,12 +1148,156 @@ $(foreach lt,$(ALL_LINK_TYPES),\
 # $(2): The initial module name list.
 # Returns empty string (maybe with some whitespaces).
 define expand-required-modules
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(eval _erm_new_modules := $(sort $(filter-out $($(1)),\
   $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED)))))\
 $(if $(_erm_new_modules),$(eval $(1) += $(_erm_new_modules))\
   $(call expand-required-modules,$(1),$(_erm_new_modules)))
+=======
+$(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED_FROM_TARGET))) \
+$(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
+$(eval _erm_new_overrides := $(call module-overrides,$(_erm_new_modules))) \
+$(eval _erm_all_overrides := $(3) $(_erm_new_overrides)) \
+$(eval _erm_new_modules := $(filter-out $(_erm_all_overrides), $(_erm_new_modules))) \
+$(eval $(1) := $(filter-out $(_erm_new_overrides),$($(1)))) \
+$(eval $(1) += $(_erm_new_modules)) \
+$(if $(_erm_new_modules),\
+  $(call expand-required-modules,$(1),$(_erm_new_modules),$(_erm_all_overrides)))
 endef
 
+# Same as expand-required-modules above, but does not handle module overrides, as
+# we don't intend to support them on the host.
+# $(1): The variable name that holds the initial module name list.
+#       the variable will be modified to hold the expanded results.
+# $(2): The initial module name list.
+# $(3): HOST or HOST_CROSS depending on whether we're expanding host or host cross modules
+# Returns empty string (maybe with some whitespaces).
+define expand-required-host-modules
+$(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED_FROM_$(3)))) \
+$(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
+$(eval $(1) += $(_erm_new_modules)) \
+$(if $(_erm_new_modules),\
+  $(call expand-required-host-modules,$(1),$(_erm_new_modules),$(3)))
+endef
+
+# Transforms paths relative to PRODUCT_OUT to absolute paths.
+# $(1): list of relative paths
+# $(2): optional suffix to append to paths
+define resolve-product-relative-paths
+  $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),\
+    $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),\
+      $(subst $(_system_ext_path_placeholder),$(TARGET_COPY_OUT_SYSTEM_EXT),\
+        $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),\
+          $(subst $(_vendor_dlkm_path_placeholder),$(TARGET_COPY_OUT_VENDOR_DLKM),\
+            $(subst $(_odm_dlkm_path_placeholder),$(TARGET_COPY_OUT_ODM_DLKM),\
+              $(foreach p,$(1),$(call append-path,$(PRODUCT_OUT),$(p)$(2)))))))))
+endef
+
+# Returns modules included automatically as a result of certain BoardConfig
+# variables being set.
+define auto-included-modules
+  $(if $(BOARD_VNDK_VERSION),vndk_package) \
+  $(if $(DEVICE_MANIFEST_FILE),vendor_manifest.xml) \
+  $(if $(DEVICE_MANIFEST_SKUS),$(foreach sku, $(DEVICE_MANIFEST_SKUS),vendor_manifest_$(sku).xml)) \
+  $(if $(ODM_MANIFEST_FILES),odm_manifest.xml) \
+  $(if $(ODM_MANIFEST_SKUS),$(foreach sku, $(ODM_MANIFEST_SKUS),odm_manifest_$(sku).xml)) \
+
+endef
+
+# Lists most of the files a particular product installs, including:
+# - PRODUCT_PACKAGES, and their LOCAL_REQUIRED_MODULES
+# - PRODUCT_COPY_FILES
+# The base list of modules to build for this product is specified
+# by the appropriate product definition file, which was included
+# by product_config.mk.
+# Name resolution for PRODUCT_PACKAGES:
+#   foo:32 resolves to foo_32;
+#   foo:64 resolves to foo;
+#   foo resolves to both foo and foo_32 (if foo_32 is defined).
+#
+# Name resolution for LOCAL_REQUIRED_MODULES:
+#   See the select-bitness-of-required-modules definition.
+# $(1): product makefile
+
+# TODO(asmundak):
+# `product-installed-files` and `host-installed-files` macros below used to
+# call `get-product-var` directly to obtain per-file configuration variable
+# values (the value of variable FOO is fetched from PRODUCT.<product-makefile>.FOO).
+# Starlark-based configuration does not maintain per-file variable variable
+# values. To work around this problem, we utilize the fact that
+# `product-installed-files` and `host-installed-files` are called only in
+# two places:
+# 1. For the top-level product makefile (in this file). In this case
+#    $(call get-product-var <product>, FOO) is the same as $(FOO) as the
+#    product configuration has been run already. Therefore we define
+#    _product-var macro to pick the values directly from product config
+#    variables when using Starlark-based configuration.
+# 2. To check the path requirements (in artifact_path_requirements.mk).
+#    Starlark-based configuration does not perform this check at the moment.
+# In the longer run most of the logic of this file will be moved to the
+# Starlark.
+
+ifndef RBC_PRODUCT_CONFIG
+define _product-var
+  $(call get-product-var,$(1),$(2))
+endef
+else
+define _product-var
+  $(call $(2))
+endef
+endif
+
+define product-installed-files
+  $(eval _pif_modules := \
+    $(call _product-var,$(1),PRODUCT_PACKAGES) \
+    $(if $(filter eng,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_ENG)) \
+    $(if $(filter debug,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_DEBUG)) \
+    $(if $(filter tests,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_TESTS)) \
+    $(if $(filter asan,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_DEBUG_ASAN)) \
+    $(if $(filter java_coverage,$(tags_to_install)),$(call _product-var,$(1),PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE)) \
+    $(call auto-included-modules) \
+  ) \
+  $(eval ### Filter out the overridden packages and executables before doing expansion) \
+  $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
+  $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _pif_modules := $(sort $(call resolve-bitness-for-modules,TARGET,$(_pif_modules)))) \
+  $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
+  $(filter-out $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))) \
+  $(call resolve-product-relative-paths,\
+    $(foreach cf,$(call _product-var,$(1),PRODUCT_COPY_FILES),$(call word-colon,2,$(cf))))
+endef
+
+# Similar to product-installed-files above, but handles PRODUCT_HOST_PACKAGES instead
+# This does support the :32 / :64 syntax, but does not support module overrides.
+define host-installed-files
+  $(eval _hif_modules := $(call _product-var,$(1),PRODUCT_HOST_PACKAGES)) \
+  $(eval ### Split host vs host cross modules) \
+  $(eval _hcif_modules := $(filter host_cross_%,$(_hif_modules))) \
+  $(eval _hif_modules := $(filter-out host_cross_%,$(_hif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _hif_modules := $(sort $(call resolve-bitness-for-modules,HOST,$(_hif_modules)))) \
+  $(eval _hcif_modules := $(sort $(call resolve-bitness-for-modules,HOST_CROSS,$(_hcif_modules)))) \
+  $(call expand-required-host-modules,_hif_modules,$(_hif_modules),HOST) \
+  $(call expand-required-host-modules,_hcif_modules,$(_hcif_modules),HOST_CROSS) \
+  $(filter $(HOST_OUT)/%,$(call module-installed-files, $(_hif_modules))) \
+  $(filter $(HOST_CROSS_OUT)/%,$(call module-installed-files, $(_hcif_modules)))
+endef
+
+# Fails the build if the given list is non-empty, and prints it entries (stripping PRODUCT_OUT).
+# $(1): list of files to print
+# $(2): heading to print on failure
+define maybe-print-list-and-error
+$(if $(strip $(1)), \
+  $(warning $(2)) \
+  $(info Offending entries:) \
+  $(foreach e,$(sort $(1)),$(info    $(patsubst $(PRODUCT_OUT)/%,%,$(e)))) \
+  $(error Build failed) \
+)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+endef
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifdef FULL_BUILD
   # The base list of modules to build for this product is specified
   # by the appropriate product definition file, which was included
@@ -906,6 +1312,32 @@ endif
   # Filter out executables as well
   product_MODULES := $(filter-out $(foreach m, $(product_MODULES), \
       $(EXECUTABLES.$(m).OVERRIDES)), $(product_MODULES))
+=======
+ifeq ($(HOST_OS),darwin)
+  # Target builds are not supported on Mac
+  product_target_FILES :=
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+else ifdef FULL_BUILD
+  ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
+    # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
+    ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
+      _allow_list := $(PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST)
+      _modules := $(PRODUCT_PACKAGES)
+      # Strip :32 and :64 suffixes
+      _modules := $(patsubst %:32,%,$(_modules))
+      _modules := $(patsubst %:64,%,$(_modules))
+      # Quickly check all modules in PRODUCT_PACKAGES exist. We check for the
+      # existence if either <module> or the <module>_32 variant.
+      _nonexistent_modules := $(foreach m,$(_modules), \
+        $(if $(or $(ALL_MODULES.$(m).PATH),$(call get-modules-for-2nd-arch,TARGET,$(m))),,$(m)))
+      $(call maybe-print-list-and-error,$(filter-out $(_allow_list),$(_nonexistent_modules)),\
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
+      # TODO(b/182105280): Consider re-enabling this check when the ART modules
+      # have been cleaned up from the allowed_list in target/product/generic.mk.
+      #$(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_allow_list)),\
+      #  $(INTERNAL_PRODUCT) includes redundant allow list entries for non-existent PRODUCT_PACKAGES)
+    endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   # Resolve the :32 :64 module name
   modules_32 := $(patsubst %:32,%,$(filter %:32, $(product_MODULES)))
@@ -921,11 +1353,23 @@ endif
 
   $(call expand-required-modules,product_MODULES,$(product_MODULES))
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   product_FILES := $(call module-installed-files, $(product_MODULES))
   ifeq (0,1)
     $(info product_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
     $(foreach p,$(product_FILES),$(info :   $(p)))
     $(error done)
+=======
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  # WARNING: The product_MODULES variable is depended on by external files.
+  product_MODULES := $(_pif_modules)
+
+  # Verify the artifact path requirements made by included products.
+  is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
+  ifeq (,$(or $(is_asan),$(DISABLE_ARTIFACT_PATH_REQUIREMENTS),$(RBC_PRODUCT_CONFIG),$(RBC_BOARD_CONFIG)))
+    include $(BUILD_SYSTEM)/artifact_path_requirements.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   endif
 else
   # We're not doing a full build, and are probably only including
@@ -1016,7 +1460,9 @@ endif
 # contains everything that's built during the current make, but it also further
 # extends ALL_DEFAULT_INSTALLED_MODULES.
 ALL_DEFAULT_INSTALLED_MODULES := $(modules_to_install)
-include $(BUILD_SYSTEM)/Makefile
+ifeq ($(HOST_OS),linux)
+  include $(BUILD_SYSTEM)/Makefile
+endif
 modules_to_install := $(sort $(ALL_DEFAULT_INSTALLED_MODULES))
 ALL_DEFAULT_INSTALLED_MODULES :=
 
@@ -1067,8 +1513,13 @@ ramdisk: $(INSTALLED_RAMDISK_TARGET)
 .PHONY: systemtarball
 systemtarball: $(INSTALLED_SYSTEMTARBALL_TARGET)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 .PHONY: boottarball
 boottarball: $(INSTALLED_BOOTTARBALL_TARGET)
+=======
+.PHONY: ramdisk_test_harness
+ramdisk_test_harness: $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 .PHONY: userdataimage
 userdataimage: $(INSTALLED_USERDATAIMAGE_TARGET)
@@ -1089,6 +1540,27 @@ bptimage: $(INSTALLED_BPTIMAGE_TARGET)
 .PHONY: vendorimage
 vendorimage: $(INSTALLED_VENDORIMAGE_TARGET)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+.PHONY: vendorbootimage
+vendorbootimage: $(INSTALLED_VENDOR_BOOTIMAGE_TARGET)
+
+.PHONY: vendorbootimage_debug
+vendorbootimage_debug: $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET)
+
+.PHONY: vendorbootimage_test_harness
+vendorbootimage_test_harness: $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET)
+
+.PHONY: vendorramdisk
+vendorramdisk: $(INSTALLED_VENDOR_RAMDISK_TARGET)
+
+.PHONY: vendorramdisk_debug
+vendorramdisk_debug: $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET)
+
+.PHONY: vendorramdisk_test_harness
+vendorramdisk_test_harness: $(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET)
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 .PHONY: productimage
 productimage: $(INSTALLED_PRODUCTIMAGE_TARGET)
 
@@ -1098,12 +1570,26 @@ systemotherimage: $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
 .PHONY: bootimage
 bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+ifeq (true,$(PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST))
+$(call dist-for-goals, bootimage, $(INSTALLED_BOOTIMAGE_TARGET))
+endif
+
+.PHONY: bootimage_debug
+bootimage_debug: $(INSTALLED_DEBUG_BOOTIMAGE_TARGET)
+
+.PHONY: bootimage_test_harness
+bootimage_test_harness: $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET)
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 .PHONY: vbmetaimage
 vbmetaimage: $(INSTALLED_VBMETAIMAGE_TARGET)
 
 .PHONY: auxiliary
 auxiliary: $(INSTALLED_AUX_TARGETS)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Build files and then package it into the rom formats
 .PHONY: droidcore
 droidcore: files \
@@ -1122,11 +1608,93 @@ droidcore: files \
 	$(INSTALLED_FILES_FILE_PRODUCT) \
 	$(INSTALLED_FILES_FILE_SYSTEMOTHER) \
 	soong_docs
+=======
+# The droidcore-unbundled target depends on the subset of targets necessary to
+# perform a full system build (either unbundled or not).
+.PHONY: droidcore-unbundled
+droidcore-unbundled: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) \
+    $(INSTALLED_SYSTEMIMAGE_TARGET) \
+    $(INSTALLED_RAMDISK_TARGET) \
+    $(INSTALLED_BOOTIMAGE_TARGET) \
+    $(INSTALLED_RADIOIMAGE_TARGET) \
+    $(INSTALLED_DEBUG_RAMDISK_TARGET) \
+    $(INSTALLED_DEBUG_BOOTIMAGE_TARGET) \
+    $(INSTALLED_RECOVERYIMAGE_TARGET) \
+    $(INSTALLED_VBMETAIMAGE_TARGET) \
+    $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET) \
+    $(INSTALLED_VBMETA_VENDORIMAGE_TARGET) \
+    $(INSTALLED_USERDATAIMAGE_TARGET) \
+    $(INSTALLED_CACHEIMAGE_TARGET) \
+    $(INSTALLED_BPTIMAGE_TARGET) \
+    $(INSTALLED_VENDORIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET) \
+    $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_RAMDISK_TARGET) \
+    $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET) \
+    $(INSTALLED_ODMIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_DLKMIMAGE_TARGET) \
+    $(INSTALLED_ODM_DLKMIMAGE_TARGET) \
+    $(INSTALLED_SUPERIMAGE_EMPTY_TARGET) \
+    $(INSTALLED_PRODUCTIMAGE_TARGET) \
+    $(INSTALLED_SYSTEMOTHERIMAGE_TARGET) \
+    $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET) \
+    $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET) \
+    $(INSTALLED_FILES_FILE) \
+    $(INSTALLED_FILES_JSON) \
+    $(INSTALLED_FILES_FILE_VENDOR) \
+    $(INSTALLED_FILES_JSON_VENDOR) \
+    $(INSTALLED_FILES_FILE_ODM) \
+    $(INSTALLED_FILES_JSON_ODM) \
+    $(INSTALLED_FILES_FILE_VENDOR_DLKM) \
+    $(INSTALLED_FILES_JSON_VENDOR_DLKM) \
+    $(INSTALLED_FILES_FILE_ODM_DLKM) \
+    $(INSTALLED_FILES_JSON_ODM_DLKM) \
+    $(INSTALLED_FILES_FILE_PRODUCT) \
+    $(INSTALLED_FILES_JSON_PRODUCT) \
+    $(INSTALLED_FILES_FILE_SYSTEM_EXT) \
+    $(INSTALLED_FILES_JSON_SYSTEM_EXT) \
+    $(INSTALLED_FILES_FILE_SYSTEMOTHER) \
+    $(INSTALLED_FILES_JSON_SYSTEMOTHER) \
+    $(INSTALLED_FILES_FILE_RAMDISK) \
+    $(INSTALLED_FILES_JSON_RAMDISK) \
+    $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
+    $(INSTALLED_FILES_JSON_DEBUG_RAMDISK) \
+    $(INSTALLED_FILES_FILE_VENDOR_RAMDISK) \
+    $(INSTALLED_FILES_JSON_VENDOR_RAMDISK) \
+    $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK) \
+    $(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK) \
+    $(INSTALLED_FILES_FILE_ROOT) \
+    $(INSTALLED_FILES_JSON_ROOT) \
+    $(INSTALLED_FILES_FILE_RECOVERY) \
+    $(INSTALLED_FILES_JSON_RECOVERY) \
+    $(INSTALLED_ANDROID_INFO_TXT_TARGET)
+
+# The droidcore target depends on the droidcore-unbundled subset and any other
+# targets for a non-unbundled (full source) full system build.
+.PHONY: droidcore
+droidcore: droidcore-unbundled
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # dist_files only for putting your library into the dist directory with a full build.
 .PHONY: dist_files
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq ($(TARGET_BUILD_APPS),)
+=======
+ifeq ($(SOONG_COLLECT_JAVA_DEPS), true)
+  $(call dist-for-goals, dist_files, $(SOONG_OUT_DIR)/module_bp_java_deps.json)
+  $(call dist-for-goals, dist_files, $(PRODUCT_OUT)/module-info.json)
+endif
+
+.PHONY: apps_only
+ifeq ($(HOST_OS),darwin)
+  # Mac only supports building host modules
+  droid_targets: $(filter $(HOST_OUT_ROOT)/%,$(modules_to_install)) dist_files
+
+else ifneq ($(TARGET_BUILD_APPS),)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   # If this build is just for apps, only build apps and not the full system by default.
 
   unbundled_build_modules :=
@@ -1176,11 +1744,46 @@ $(eval $(call combine-notice-files, html, \
     $(apps_only_installed_files)))
 
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 else # TARGET_BUILD_APPS
+=======
+else ifeq ($(TARGET_BUILD_UNBUNDLED),$(TARGET_BUILD_UNBUNDLED_IMAGE))
+
+  # Truth table for entering this block of code:
+  # TARGET_BUILD_UNBUNDLED | TARGET_BUILD_UNBUNDLED_IMAGE | Action
+  # -----------------------|------------------------------|-------------------------
+  # not set                | not set                      | droidcore path
+  # not set                | true                         | invalid
+  # true                   | not set                      | skip
+  # true                   | true                         | droidcore-unbundled path
+
+  # We dist the following targets only for droidcore full build. These items
+  # can include java-related targets that would cause building framework java
+  # sources in a droidcore full build.
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   $(call dist-for-goals, droidcore, \
+    $(BUILT_OTATOOLS_PACKAGE) \
+    $(APPCOMPAT_ZIP) \
+    $(DEXPREOPT_TOOLS_ZIP) \
+  )
+
+  # We dist the following targets for droidcore-unbundled (and droidcore since
+  # droidcore depends on droidcore-unbundled). The droidcore-unbundled target
+  # is a subset of droidcore. It can be used used for an unbundled build to
+  # avoid disting targets that would cause building framework java sources,
+  # which we want to avoid in an unbundled build.
+
+  $(call dist-for-goals, droidcore-unbundled, \
     $(INTERNAL_UPDATE_PACKAGE_TARGET) \
     $(INTERNAL_OTA_PACKAGE_TARGET) \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     $(BUILT_OTATOOLS_PACKAGE) \
+=======
+    $(INTERNAL_OTA_METADATA) \
+    $(INTERNAL_OTA_PARTIAL_PACKAGE_TARGET) \
+    $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET) \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(SYMBOLS_ZIP) \
     $(COVERAGE_ZIP) \
     $(INSTALLED_FILES_FILE) \
@@ -1191,11 +1794,12 @@ else # TARGET_BUILD_APPS
     $(BUILT_TARGET_FILES_PACKAGE) \
     $(INSTALLED_ANDROID_INFO_TXT_TARGET) \
     $(INSTALLED_RAMDISK_TARGET) \
-   )
+    $(DEXPREOPT_CONFIG_ZIP) \
+  )
 
   # Put a copy of the radio/bootloader files in the dist dir.
   $(foreach f,$(INSTALLED_RADIOIMAGE_TARGET), \
-    $(call dist-for-goals, droidcore, $(f)))
+    $(call dist-for-goals, droidcore-unbundled, $(f)))
 
   ifneq ($(ANDROID_BUILD_EMBEDDED),true)
   ifneq ($(TARGET_BUILD_PDK),true)
@@ -1205,30 +1809,121 @@ else # TARGET_BUILD_APPS
       $(PACKAGE_STATS_FILE) \
     )
   endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+  $(call dist-for-goals, droidcore-unbundled, \
+    $(INSTALLED_FILES_FILE_ROOT) \
+    $(INSTALLED_FILES_JSON_ROOT) \
+  )
+
+  ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(call dist-for-goals, droidcore-unbundled, \
+      $(INSTALLED_FILES_FILE_RAMDISK) \
+      $(INSTALLED_FILES_JSON_RAMDISK) \
+      $(INSTALLED_FILES_FILE_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_JSON_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_FILE_VENDOR_RAMDISK) \
+      $(INSTALLED_FILES_JSON_VENDOR_RAMDISK) \
+      $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK) \
+      $(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK) \
+      $(INSTALLED_DEBUG_RAMDISK_TARGET) \
+      $(INSTALLED_DEBUG_BOOTIMAGE_TARGET) \
+      $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET) \
+      $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET) \
+      $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET) \
+      $(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET) \
+      $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET) \
+      $(INSTALLED_VENDOR_RAMDISK_TARGET) \
+      $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET) \
+    )
+  endif
+
+  ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+    $(call dist-for-goals, droidcore-unbundled, \
+      $(recovery_ramdisk) \
+    )
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   endif
 
   ifeq ($(EMMA_INSTRUMENT),true)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     $(JACOCO_REPORT_CLASSES_ALL) : $(INSTALLED_SYSTEMIMAGE)
+=======
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(call dist-for-goals, dist_files, $(JACOCO_REPORT_CLASSES_ALL))
   endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Building a full system-- the default is to build droidcore
 droid_targets: droidcore dist_files
+=======
+  # Put XML formatted API files in the dist dir.
+  $(TARGET_OUT_COMMON_INTERMEDIATES)/api.xml: $(call java-lib-files,android_stubs_current) $(APICHECK)
+  $(TARGET_OUT_COMMON_INTERMEDIATES)/system-api.xml: $(call java-lib-files,android_system_stubs_current) $(APICHECK)
+  $(TARGET_OUT_COMMON_INTERMEDIATES)/module-lib-api.xml: $(call java-lib-files,android_module_lib_stubs_current) $(APICHECK)
+  $(TARGET_OUT_COMMON_INTERMEDIATES)/system-server-api.xml: $(call java-lib-files,android_system_server_stubs_current) $(APICHECK)
+  $(TARGET_OUT_COMMON_INTERMEDIATES)/test-api.xml: $(call java-lib-files,android_test_stubs_current) $(APICHECK)
 
+  api_xmls := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/,api.xml system-api.xml module-lib-api.xml system-server-api.xml test-api.xml)
+  $(api_xmls):
+	$(hide) echo "Converting API file to XML: $@"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(APICHECK_COMMAND) --input-api-jar $< --api-xml $@
+
+  $(call dist-for-goals, dist_files, $(api_xmls))
+  api_xmls :=
+
+  ifdef CLANG_COVERAGE
+    $(foreach f,$(SOONG_NDK_API_XML), \
+        $(call dist-for-goals,droidcore,$(f):ndk_apis/$(notdir $(f))))
+    $(foreach f,$(SOONG_CC_API_XML), \
+        $(call dist-for-goals,droidcore,$(f):cc_apis/$(notdir $(f))))
+  endif
+
+  # For full system build (whether unbundled or not), we configure
+  # droid_targets to depend on droidcore-unbundled, which will set up the full
+  # system dependencies and also dist the subset of targets that correspond to
+  # an unbundled build (exclude building some framework sources).
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 endif # TARGET_BUILD_APPS
+=======
+  droid_targets: droidcore-unbundled
+
+  ifeq (,$(TARGET_BUILD_UNBUNDLED_IMAGE))
+
+    # If we're building a full system (including the framework sources excluded
+    # by droidcore-unbundled), we configure droid_targets also to depend on
+    # droidcore, which includes all dist for droidcore, and will build the
+    # necessary framework sources.
+
+    droid_targets: droidcore dist_files
+
+  endif
+
+endif # TARGET_BUILD_UNBUNDLED == TARGET_BUILD_UNBUNDLED_IMAGE
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 .PHONY: docs
 docs: $(ALL_DOCS)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 .PHONY: sdk
+=======
+.PHONY: sdk sdk_addon
+ifeq ($(HOST_OS),linux)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ALL_SDK_TARGETS := $(INTERNAL_SDK_TARGET)
 sdk: $(ALL_SDK_TARGETS)
-$(call dist-for-goals,sdk win_sdk, \
+$(call dist-for-goals,sdk, \
     $(ALL_SDK_TARGETS) \
     $(SYMBOLS_ZIP) \
     $(COVERAGE_ZIP) \
     $(INSTALLED_BUILD_PROP_TARGET) \
 )
+endif
 
 # umbrella targets to assit engineers in verifying builds
 .PHONY: java native target host java-host java-target native-host native-target \
@@ -1288,4 +1983,15 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 endif # KATI
+=======
+# Checks that allowed_deps.txt remains up to date
+ifneq ($(UNSAFE_DISABLE_APEX_ALLOWED_DEPS_CHECK),true)
+  droidcore: ${APEX_ALLOWED_DEPS_CHECK}
+endif
+
+$(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
+
+$(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

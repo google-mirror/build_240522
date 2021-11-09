@@ -28,6 +28,12 @@ import os.path
 import re
 import sys
 import zipfile
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+from hashlib import sha1
+from common import IsSparseImage
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 import common
 
@@ -62,10 +68,16 @@ def ValidateFileConsistency(input_zip, input_tmp, info_dict):
 
   def CheckAllFiles(which):
     logging.info('Checking %s image.', which)
-    # Allow having shared blocks when loading the sparse image, because allowing
-    # that doesn't affect the checks below (we will have all the blocks on file,
-    # unless it's skipped due to the holes).
-    image = common.GetSparseImage(which, input_tmp, input_zip, True)
+    path = os.path.join(input_tmp, "IMAGES", which + ".img")
+    if not IsSparseImage(path):
+      logging.info("%s is non-sparse image", which)
+      image = common.GetNonSparseImage(which, input_tmp)
+    else:
+      logging.info("%s is sparse image", which)
+      # Allow having shared blocks when loading the sparse image, because allowing
+      # that doesn't affect the checks below (we will have all the blocks on file,
+      # unless it's skipped due to the holes).
+      image = common.GetSparseImage(which, input_tmp, input_zip, True)
     prefix = '/' + which
     for entry in image.file_map:
       # Skip entries like '__NONZERO-0'.
@@ -155,6 +167,7 @@ def ValidateInstallRecoveryScript(input_tmp, info_dict):
 
   full_recovery_image = info_dict.get("full_recovery_image") == "true"
   if full_recovery_image:
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     assert len(applypatch_argv) == 5
     # Check we have the same expected SHA-1 of recovery.img in both check mode
     # and patch mode.
@@ -162,6 +175,25 @@ def ValidateInstallRecoveryScript(input_tmp, info_dict):
     assert expected_recovery_check_sha1 == expected_recovery_sha1
     ValidateFileAgainstSha1(input_tmp, 'recovery.img',
                             'SYSTEM/etc/recovery.img', expected_recovery_sha1)
+=======
+    assert len(lines) == 10, "Invalid line count: {}".format(lines)
+
+    # Expect something like "EMMC:/dev/block/recovery:28:5f9c..62e3".
+    target = re.search(r'--target (.+) &&', lines[4].strip())
+    assert target is not None, \
+        "Failed to parse target line \"{}\"".format(lines[4])
+    flash_partition = target.group(1)
+
+    # Check we have the same recovery target in the check and flash commands.
+    assert check_partition == flash_partition, \
+        "Mismatching targets: {} vs {}".format(
+            check_partition, flash_partition)
+
+    # Validate the SHA-1 of the recovery image.
+    recovery_sha1 = flash_partition.split(':')[3]
+    ValidateFileAgainstSha1(
+        input_tmp, 'recovery.img', recovery_img, recovery_sha1)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   else:
     # We're patching boot.img to get recovery.img where bonus_args is optional
     if applypatch_argv[1] == "-b":
@@ -187,19 +219,311 @@ def ValidateInstallRecoveryScript(input_tmp, info_dict):
 
   logging.info('Done checking %s', script_path)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
 
+# Symlink files in `src` to `dst`, if the files do not
+# already exists in `dst` directory.
+def symlinkIfNotExists(src, dst):
+  if not os.path.isdir(src):
+    return
+  for filename in os.listdir(src):
+    if os.path.exists(os.path.join(dst, filename)):
+      continue
+    os.symlink(os.path.join(src, filename), os.path.join(dst, filename))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 def main(argv):
   def option_handler():
     return True
+=======
+
+def ValidatePartitionFingerprints(input_tmp, info_dict):
+  build_info = common.BuildInfo(info_dict)
+  if not build_info.avb_enabled:
+    logging.info("AVB not enabled, skipping partition fingerprint checks")
+    return
+  # Expected format:
+  #  Prop: com.android.build.vendor.fingerprint -> 'generic/aosp_cf_x86_64_phone/vsoc_x86_64:S/AOSP.MASTER/7335886:userdebug/test-keys'
+  #  Prop: com.android.build.vendor_boot.fingerprint -> 'generic/aosp_cf_x86_64_phone/vsoc_x86_64:S/AOSP.MASTER/7335886:userdebug/test-keys'
+  p = re.compile(
+      r"Prop: com.android.build.(?P<partition>\w+).fingerprint -> '(?P<fingerprint>[\w\/:\.-]+)'")
+  for vbmeta_partition in ["vbmeta", "vbmeta_system"]:
+    image = os.path.join(input_tmp, "IMAGES", vbmeta_partition + ".img")
+    if not os.path.exists(image):
+      assert vbmeta_partition != "vbmeta",\
+          "{} is a required partition for AVB.".format(
+              vbmeta_partition)
+      logging.info("vb partition %s not present, skipping", vbmeta_partition)
+      continue
+
+    output = common.RunAndCheckOutput(
+        [info_dict["avb_avbtool"], "info_image", "--image", image])
+    matches = p.findall(output)
+    for (partition, fingerprint) in matches:
+      actual_fingerprint = build_info.GetPartitionFingerprint(
+          partition)
+      if actual_fingerprint is None:
+        logging.warning(
+            "Failed to get fingerprint for partition %s", partition)
+        continue
+      assert fingerprint == actual_fingerprint, "Fingerprint mismatch for partition {}, expected: {} actual: {}".format(
+          partition, fingerprint, actual_fingerprint)
+
+
+def ValidateVerifiedBootImages(input_tmp, info_dict, options):
+  """Validates the Verified Boot related images.
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   args = common.ParseOptions(
       argv, __doc__, extra_opts="",
       extra_long_opts=[],
       extra_option_handler=option_handler)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   if len(args) != 1:
     common.Usage(__doc__)
     sys.exit(1)
+=======
+  Args:
+    input_tmp: The top-level directory of unpacked target-files.zip.
+    info_dict: The loaded info dict.
+    options: A dict that contains the user-supplied public keys to be used for
+        image verification. In particular, 'verity_key' is used to verify the
+        bootable images in VB 1.0, and the vbmeta image in VB 2.0, where
+        applicable. 'verity_key_mincrypt' will be used to verify the system
+        images in VB 1.0.
+
+  Raises:
+    AssertionError: On any verification failure.
+  """
+  # See bug 159299583
+  # After commit 5277d1015, some images (e.g. acpio.img and tos.img) are no
+  # longer copied from RADIO to the IMAGES folder. But avbtool assumes that
+  # images are in IMAGES folder. So we symlink them.
+  symlinkIfNotExists(os.path.join(input_tmp, "RADIO"),
+                     os.path.join(input_tmp, "IMAGES"))
+  # Verified boot 1.0 (images signed with boot_signer and verity_signer).
+  if info_dict.get('boot_signer') == 'true':
+    logging.info('Verifying Verified Boot images...')
+
+    # Verify the boot/recovery images (signed with boot_signer), against the
+    # given X.509 encoded pubkey (or falling back to the one in the info_dict if
+    # none given).
+    verity_key = options['verity_key']
+    if verity_key is None:
+      verity_key = info_dict['verity_key'] + '.x509.pem'
+    for image in ('boot.img', 'recovery.img', 'recovery-two-step.img'):
+      if image == 'recovery-two-step.img':
+        image_path = os.path.join(input_tmp, 'OTA', image)
+      else:
+        image_path = os.path.join(input_tmp, 'IMAGES', image)
+      if not os.path.exists(image_path):
+        continue
+
+      cmd = ['boot_signer', '-verify', image_path, '-certificate', verity_key]
+      proc = common.Run(cmd)
+      stdoutdata, _ = proc.communicate()
+      assert proc.returncode == 0, \
+          'Failed to verify {} with boot_signer:\n{}'.format(image, stdoutdata)
+      logging.info(
+          'Verified %s with boot_signer (key: %s):\n%s', image, verity_key,
+          stdoutdata.rstrip())
+
+  # Verify verity signed system images in Verified Boot 1.0. Note that not using
+  # 'elif' here, since 'boot_signer' and 'verity' are not bundled in VB 1.0.
+  if info_dict.get('verity') == 'true':
+    # First verify that the verity key is built into the root image (regardless
+    # of system-as-root).
+    verity_key_mincrypt = os.path.join(input_tmp, 'ROOT', 'verity_key')
+    assert os.path.exists(verity_key_mincrypt), 'Missing verity_key'
+
+    # Verify /verity_key matches the one given via command line, if any.
+    if options['verity_key_mincrypt'] is None:
+      logging.warn(
+          'Skipped checking the content of /verity_key, as the key file not '
+          'provided. Use --verity_key_mincrypt to specify.')
+    else:
+      expected_key = options['verity_key_mincrypt']
+      assert filecmp.cmp(expected_key, verity_key_mincrypt, shallow=False), \
+          "Mismatching mincrypt verity key files"
+      logging.info('Verified the content of /verity_key')
+
+    # For devices with a separate ramdisk (i.e. non-system-as-root), there must
+    # be a copy in ramdisk.
+    if info_dict.get("system_root_image") != "true":
+      verity_key_ramdisk = os.path.join(
+          input_tmp, 'BOOT', 'RAMDISK', 'verity_key')
+      assert os.path.exists(
+          verity_key_ramdisk), 'Missing verity_key in ramdisk'
+
+      assert filecmp.cmp(
+          verity_key_mincrypt, verity_key_ramdisk, shallow=False), \
+          'Mismatching verity_key files in root and ramdisk'
+      logging.info('Verified the content of /verity_key in ramdisk')
+
+    # Then verify the verity signed system/vendor/product images, against the
+    # verity pubkey in mincrypt format.
+    for image in ('system.img', 'vendor.img', 'product.img'):
+      image_path = os.path.join(input_tmp, 'IMAGES', image)
+
+      # We are not checking if the image is actually enabled via info_dict (e.g.
+      # 'system_verity_block_device=...'). Because it's most likely a bug that
+      # skips signing some of the images in signed target-files.zip, while
+      # having the top-level verity flag enabled.
+      if not os.path.exists(image_path):
+        continue
+
+      cmd = ['verity_verifier', image_path, '-mincrypt', verity_key_mincrypt]
+      proc = common.Run(cmd)
+      stdoutdata, _ = proc.communicate()
+      assert proc.returncode == 0, \
+          'Failed to verify {} with verity_verifier (key: {}):\n{}'.format(
+              image, verity_key_mincrypt, stdoutdata)
+      logging.info(
+          'Verified %s with verity_verifier (key: %s):\n%s', image,
+          verity_key_mincrypt, stdoutdata.rstrip())
+
+  # Handle the case of Verified Boot 2.0 (AVB).
+  if info_dict.get("avb_enable") == "true":
+    logging.info('Verifying Verified Boot 2.0 (AVB) images...')
+
+    key = options['verity_key']
+    if key is None:
+      key = info_dict['avb_vbmeta_key_path']
+
+    ValidatePartitionFingerprints(input_tmp, info_dict)
+
+    # avbtool verifies all the images that have descriptors listed in vbmeta.
+    # Using `--follow_chain_partitions` so it would additionally verify chained
+    # vbmeta partitions (e.g. vbmeta_system).
+    image = os.path.join(input_tmp, 'IMAGES', 'vbmeta.img')
+    cmd = [info_dict['avb_avbtool'], 'verify_image', '--image', image,
+           '--follow_chain_partitions']
+
+    # Custom images.
+    custom_partitions = info_dict.get(
+        "avb_custom_images_partition_list", "").strip().split()
+
+    # Append the args for chained partitions if any.
+    for partition in (common.AVB_PARTITIONS + common.AVB_VBMETA_PARTITIONS +
+                      tuple(custom_partitions)):
+      key_name = 'avb_' + partition + '_key_path'
+      if info_dict.get(key_name) is not None:
+        if info_dict.get('ab_update') != 'true' and partition == 'recovery':
+          continue
+
+        # Use the key file from command line if specified; otherwise fall back
+        # to the one in info dict.
+        key_file = options.get(key_name, info_dict[key_name])
+        chained_partition_arg = common.GetAvbChainedPartitionArg(
+            partition, info_dict, key_file)
+        cmd.extend(['--expected_chain_partition', chained_partition_arg])
+
+    # Handle the boot image with a non-default name, e.g. boot-5.4.img
+    boot_images = info_dict.get("boot_images")
+    if boot_images:
+      # we used the 1st boot image to generate the vbmeta. Rename the filename
+      # to boot.img so that avbtool can find it correctly.
+      first_image_name = boot_images.split()[0]
+      first_image_path = os.path.join(input_tmp, 'IMAGES', first_image_name)
+      assert os.path.isfile(first_image_path)
+      renamed_boot_image_path = os.path.join(input_tmp, 'IMAGES', 'boot.img')
+      os.rename(first_image_path, renamed_boot_image_path)
+
+    proc = common.Run(cmd)
+    stdoutdata, _ = proc.communicate()
+    assert proc.returncode == 0, \
+        'Failed to verify {} with avbtool (key: {}):\n{}'.format(
+            image, key, stdoutdata)
+
+    logging.info(
+        'Verified %s with avbtool (key: %s):\n%s', image, key,
+        stdoutdata.rstrip())
+
+    # avbtool verifies recovery image for non-A/B devices.
+    if (info_dict.get('ab_update') != 'true' and
+            info_dict.get('no_recovery') != 'true'):
+      image = os.path.join(input_tmp, 'IMAGES', 'recovery.img')
+      key = info_dict['avb_recovery_key_path']
+      cmd = [info_dict['avb_avbtool'], 'verify_image', '--image', image,
+             '--key', key]
+      proc = common.Run(cmd)
+      stdoutdata, _ = proc.communicate()
+      assert proc.returncode == 0, \
+          'Failed to verify {} with avbtool (key: {}):\n{}'.format(
+              image, key, stdoutdata)
+      logging.info(
+          'Verified %s with avbtool (key: %s):\n%s', image, key,
+          stdoutdata.rstrip())
+
+
+def CheckDataInconsistency(lines):
+  build_prop = {}
+  for line in lines:
+    if line.startswith("import") or line.startswith("#"):
+      continue
+    if "=" not in line:
+      continue
+
+    key, value = line.rstrip().split("=", 1)
+    if key in build_prop:
+      logging.info("Duplicated key found for {}".format(key))
+      if value != build_prop[key]:
+        logging.error("Key {} is defined twice with different values {} vs {}"
+                      .format(key, value, build_prop[key]))
+        return key
+    build_prop[key] = value
+
+
+def CheckBuildPropDuplicity(input_tmp):
+  """Check all buld.prop files inside directory input_tmp, raise error
+  if they contain duplicates"""
+
+  if not os.path.isdir(input_tmp):
+    raise ValueError("Expect {} to be a directory".format(input_tmp))
+  for name in os.listdir(input_tmp):
+    if not name.isupper():
+      continue
+    for prop_file in ['build.prop', 'etc/build.prop']:
+      path = os.path.join(input_tmp, name, prop_file)
+      if not os.path.exists(path):
+        continue
+      logging.info("Checking {}".format(path))
+      with open(path, 'r') as fp:
+        dupKey = CheckDataInconsistency(fp.readlines())
+        if dupKey:
+          raise ValueError("{} contains duplicate keys for {}".format(
+              path, dupKey))
+
+
+def main():
+  parser = argparse.ArgumentParser(
+      description=__doc__,
+      formatter_class=argparse.RawDescriptionHelpFormatter)
+  parser.add_argument(
+      'target_files',
+      help='the input target_files.zip to be validated')
+  parser.add_argument(
+      '--verity_key',
+      help='the verity public key to verify the bootable images (Verified '
+           'Boot 1.0), or the vbmeta image (Verified Boot 2.0, aka AVB), where '
+           'applicable')
+  for partition in common.AVB_PARTITIONS + common.AVB_VBMETA_PARTITIONS:
+    parser.add_argument(
+        '--avb_' + partition + '_key_path',
+        help='the public or private key in PEM format to verify AVB chained '
+             'partition of {}'.format(partition))
+  parser.add_argument(
+      '--verity_key_mincrypt',
+      help='the verity public key in mincrypt format to verify the system '
+           'images, if target using Verified Boot 1.0')
+  args = parser.parse_args()
+
+  # Unprovided args will have 'None' as the value.
+  options = vars(args)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
   logging_format = '%(asctime)s - %(filename)s - %(levelname)-8s: %(message)s'
   date_format = '%Y/%m/%d %H:%M:%S'

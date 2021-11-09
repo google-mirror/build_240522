@@ -96,9 +96,22 @@ all_boot_jars := \
   $(foreach m,$(DEXPREOPT_BOOT_JARS_MODULES),$(PRODUCT_OUT)/system/framework/$(m).jar) \
   $(foreach m,$(PRODUCT_SYSTEM_SERVER_JARS),$(PRODUCT_OUT)/system/framework/$(m).jar)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(boot_profile_jars_zip): PRIVATE_JARS := $(all_boot_jars)
 $(boot_profile_jars_zip): $(all_boot_jars) $(SOONG_ZIP)
 	echo "Create boot profiles package: $@"
+=======
+boot_zip := $(PRODUCT_OUT)/boot.zip
+bootclasspath_jars := $(DEXPREOPT_BOOTCLASSPATH_DEX_FILES)
+system_server_jars := \
+  $(foreach m,$(PRODUCT_SYSTEM_SERVER_JARS),\
+    $(PRODUCT_OUT)/system/framework/$(call word-colon,2,$(m)).jar)
+
+$(boot_zip): PRIVATE_BOOTCLASSPATH_JARS := $(bootclasspath_jars)
+$(boot_zip): PRIVATE_SYSTEM_SERVER_JARS := $(system_server_jars)
+$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+	@echo "Create boot package: $@"
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	rm -f $@
 	$(SOONG_ZIP) -o $@ -C $(PRODUCT_OUT) $(PRIVATE_JARS)
 

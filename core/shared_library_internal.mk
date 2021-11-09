@@ -46,7 +46,6 @@ my_target_libgcc :=
 else
 my_target_libgcc := $(call intermediates-dir-for,STATIC_LIBRARIES,libgcc,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libgcc.a
 endif
-my_target_libatomic := $(call intermediates-dir-for,STATIC_LIBRARIES,libatomic,,,$(LOCAL_2ND_ARCH_VAR_PREFIX))/libatomic.a
 ifeq ($(LOCAL_NO_CRT),true)
 my_target_crtbegin_so_o :=
 my_target_crtend_so_o :=
@@ -61,8 +60,12 @@ ifneq ($(LOCAL_SDK_VERSION),)
 my_target_crtbegin_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtbegin_so.o)
 my_target_crtend_so_o := $(wildcard $(my_ndk_sysroot_lib)/crtend_so.o)
 endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(linked_module): PRIVATE_TARGET_LIBGCC := $(my_target_libgcc)
 $(linked_module): PRIVATE_TARGET_LIBATOMIC := $(my_target_libatomic)
+=======
+$(linked_module): PRIVATE_TARGET_LIBCRT_BUILTINS := $(my_target_libcrt_builtins)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 $(linked_module): PRIVATE_TARGET_CRTBEGIN_SO_O := $(my_target_crtbegin_so_o)
 $(linked_module): PRIVATE_TARGET_CRTEND_SO_O := $(my_target_crtend_so_o)
 
@@ -71,9 +74,14 @@ $(linked_module): \
         $(all_libraries) \
         $(my_target_crtbegin_so_o) \
         $(my_target_crtend_so_o) \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
         $(my_target_libgcc) \
         $(my_target_libatomic) \
         $(LOCAL_ADDITIONAL_DEPENDENCIES)
+=======
+        $(my_target_libcrt_builtins) \
+        $(LOCAL_ADDITIONAL_DEPENDENCIES) $(CLANG_CXX)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	$(transform-o-to-shared-lib)
 
 ifeq ($(my_native_coverage),true)

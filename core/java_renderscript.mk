@@ -107,7 +107,11 @@ renderscript_intermediate := $(intermediates)/renderscript
 # Prevent these from showing up on the device
 # One exception is librsjni.so, which is needed for
 # both native path and compat path.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 rs_jni_lib := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)/librsjni.so
+=======
+rs_jni_lib := $(call intermediates-dir-for,SHARED_LIBRARIES,librsjni)/librsjni.so
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 LOCAL_JNI_SHARED_LIBRARIES += librsjni
 
 ifneq (,$(TARGET_BUILD_APPS)$(FORCE_BUILD_RS_COMPAT))

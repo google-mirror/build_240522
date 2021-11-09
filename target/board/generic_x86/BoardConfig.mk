@@ -9,12 +9,20 @@ TARGET_NO_KERNEL := true
 TARGET_CPU_ABI := x86
 TARGET_ARCH := x86
 TARGET_ARCH_VARIANT := x86
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 TARGET_PRELINK_MODULE := false
 TARGET_BOOTLOADER_BOARD_NAME := goldfish_$(TARGET_ARCH)
 
 #emulator now uses 64bit kernel to run 32bit x86 image
 #
 TARGET_USES_64_BIT_BINDER := true
+=======
+
+include build/make/target/board/BoardConfigGsiCommon.mk
+
+ifndef BUILDING_GSI
+include build/make/target/board/BoardConfigEmuCommon.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # The IA emulator (qemu) uses the Goldfish devices
 HAVE_HTC_AUDIO_DRIVER := true

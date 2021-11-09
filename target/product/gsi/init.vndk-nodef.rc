@@ -1,0 +1,6 @@
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+on early-init
+    # Reboot if BOARD_VNDK_VERSION is not defined
+    exec - root -- /system/bin/reboot bootloader
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

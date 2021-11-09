@@ -114,8 +114,13 @@ endif
 ###########################################################
 ## Strip
 ###########################################################
-strip_input := $(symbolic_output)
+strip_input := $(inject_module)
 strip_output := $(LOCAL_BUILT_MODULE)
+
+# Use an order-only dependency to ensure the unstripped file in the symbols
+# directory is copied when the module is built, but does not force the
+# module to be rebuilt when the symbols directory is cleaned by installclean.
+$(strip_output): | $(symbolic_output)
 
 my_strip_module := $(firstword \
   $(LOCAL_STRIP_MODULE_$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)) \
@@ -133,12 +138,45 @@ ifneq ($(filter mips mips64,$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
 endif
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 $(strip_output): PRIVATE_STRIP := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_STRIP)
 $(strip_output): PRIVATE_OBJCOPY := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_OBJCOPY)
 $(strip_output): PRIVATE_NM := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_NM)
 $(strip_output): PRIVATE_READELF := $($(LOCAL_2ND_ARCH_VAR_PREFIX)TARGET_READELF)
 ifeq ($(my_strip_module),no_debuglink)
 $(strip_output): PRIVATE_NO_DEBUGLINK := true
+=======
+ifeq (,$(filter no_debuglink mini-debug-info,$(my_strip_module)))
+  ifneq ($(TARGET_BUILD_VARIANT),user)
+    my_strip_args += --add-gnu-debuglink
+  endif
+endif
+
+ifeq ($($(my_prefix)OS),darwin)
+  # llvm-strip does not support Darwin Mach-O yet.
+  my_strip_args += --use-gnu-strip
+endif
+
+valid_strip := mini-debug-info keep_symbols true no_debuglink
+ifneq (,$(filter-out $(valid_strip),$(my_strip_module)))
+  $(call pretty-error,Invalid strip value $(my_strip_module), only one of $(valid_strip) allowed)
+endif
+
+ifneq (,$(my_strip_module))
+  $(strip_output): PRIVATE_STRIP_ARGS := $(my_strip_args)
+  $(strip_output): PRIVATE_TOOLS_PREFIX := $($(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)TOOLS_PREFIX)
+  $(strip_output): $(strip_input) $(SOONG_STRIP_PATH) $(XZ)
+	@echo "$($(PRIVATE_PREFIX)DISPLAY) Strip: $(PRIVATE_MODULE) ($@)"
+	CLANG_BIN=$(LLVM_PREBUILTS_PATH) \
+	CROSS_COMPILE=$(PRIVATE_TOOLS_PREFIX) \
+	XZ=$(XZ) \
+	CREATE_MINIDEBUGINFO=${CREATE_MINIDEBUGINFO} \
+	$(SOONG_STRIP_PATH) -i $< -o $@ -d $@.strip.d $(PRIVATE_STRIP_ARGS)
+  ifneq ($(HOST_OS),darwin)
+    $(strip_output): $(CREATE_MINIDEBUGINFO)
+  endif
+  $(call include-depfile,$(strip_output).strip.d,$(strip_output))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 else
 $(strip_output): PRIVATE_NO_DEBUGLINK :=
 endif

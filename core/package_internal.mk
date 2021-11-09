@@ -87,7 +87,55 @@ else
   LOCAL_RESOURCE_DIR := $(foreach d,$(LOCAL_RESOURCE_DIR),$(call clean-path,$(d)))
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 package_resource_overlays := $(strip \
+=======
+# If LOCAL_MODULE matches a rule in PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES,
+# override the manifest package name by the (first) rule matched
+override_manifest_name := $(strip $(word 1,\
+  $(foreach rule,$(PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES),\
+    $(eval _pkg_name_pat := $(call word-colon,1,$(rule)))\
+    $(eval _manifest_name_pat := $(call word-colon,2,$(rule)))\
+    $(if $(filter $(_pkg_name_pat),$(LOCAL_MODULE)),\
+      $(patsubst $(_pkg_name_pat),$(_manifest_name_pat),$(LOCAL_MODULE))\
+     )\
+   )\
+))
+
+ifneq (,$(override_manifest_name))
+# Note: this can override LOCAL_MANIFEST_PACKAGE_NAME value set in Android.mk
+LOCAL_MANIFEST_PACKAGE_NAME := $(override_manifest_name)
+endif
+
+include $(BUILD_SYSTEM)/force_aapt2.mk
+
+# Process Support Library dependencies.
+include $(BUILD_SYSTEM)/support_libraries.mk
+
+# Determine whether auto-RRO is enabled for this package.
+enforce_rro_enabled :=
+ifneq (,$(filter *, $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  # * means all system and system_ext APKs, so enable conditionally based on module path.
+
+  # Note that base_rules.mk has not yet been included, so it's likely that only
+  # one of LOCAL_MODULE_PATH and the LOCAL_X_MODULE flags has been set.
+  ifeq (,$(LOCAL_MODULE_PATH))
+    non_rro_target_module := $(filter true,\
+        $(LOCAL_ODM_MODULE) \
+        $(LOCAL_OEM_MODULE) \
+        $(LOCAL_PRODUCT_MODULE) \
+        $(LOCAL_PROPRIETARY_MODULE) \
+        $(LOCAL_VENDOR_MODULE))
+    enforce_rro_enabled := $(if $(non_rro_target_module),,true)
+  else ifneq ($(filter $(TARGET_OUT)/%,$(LOCAL_MODULE_PATH)),)
+    enforce_rro_enabled := true
+  endif
+else ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  enforce_rro_enabled := true
+endif
+
+product_package_overlays := $(strip \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(wildcard $(foreach dir, $(PRODUCT_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))) \
     $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \
@@ -567,6 +615,15 @@ PACKAGES.$(LOCAL_PACKAGE_NAME).CERTIFICATE := $(certificate)
 $(LOCAL_BUILT_MODULE): $(additional_certificates)
 $(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_CERTIFICATES := $(additional_certificates)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+$(LOCAL_BUILT_MODULE): $(LOCAL_CERTIFICATE_LINEAGE)
+$(LOCAL_BUILT_MODULE): PRIVATE_CERTIFICATE_LINEAGE := $(LOCAL_CERTIFICATE_LINEAGE)
+
+# Set a actual_partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(actual_partition_tag)
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 # Define the rule to build the actual package.
 # PRIVATE_JNI_SHARED_LIBRARIES is a list of <abi>:<path_of_built_lib>.
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
@@ -603,6 +660,18 @@ endif  # LOCAL_USE_AAPT2
 ifdef LOCAL_COMPRESSED_MODULE
 $(LOCAL_BUILT_MODULE) : $(MINIGZIP)
 endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+ifeq (true, $(LOCAL_UNCOMPRESS_DEX))
+$(LOCAL_BUILT_MODULE) : $(ZIP2ZIP)
+endif
+ifeq ($(full_classes_jar),)
+  # We don't build jar, need to add the Java resources here.
+  $(LOCAL_BUILT_MODULE): $(java_resource_sources)
+endif
+$(LOCAL_BUILT_MODULE): PRIVATE_USE_EMBEDDED_NATIVE_LIBS := $(LOCAL_USE_EMBEDDED_NATIVE_LIBS)
+$(LOCAL_BUILT_MODULE):
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	@echo "target Package: $(PRIVATE_MODULE) ($@)"
 ifdef LOCAL_USE_AAPT2
 	$(call copy-file-to-new-target)
@@ -642,8 +711,60 @@ ifdef LOCAL_COMPRESSED_MODULE
 	$(compress-package)
 endif  # LOCAL_COMPRESSED_MODULE
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ###############################
 ## Build dpi-specific apks, if it's apps_only build.
+=======
+my_package_res_pb := $(intermediates)/package-res.pb.apk
+$(my_package_res_pb): $(my_res_package) $(AAPT2)
+	$(AAPT2) convert --output-format proto $< -o $@
+
+$(my_bundle_module): $(my_package_res_pb)
+$(my_bundle_module): PRIVATE_RES_PACKAGE := $(my_package_res_pb)
+
+$(my_bundle_module): $(jni_shared_libraries)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)
+$(my_bundle_module): PRIVATE_JNI_SHARED_LIBRARIES_ABI := $(jni_shared_libraries_abis)
+
+ifneq ($(full_classes_jar),)
+  $(my_bundle_module): PRIVATE_DEX_FILE := $(built_dex)
+  # Use the jarjar processed archive as the initial package file.
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE := $(full_classes_pre_proguard_jar)
+  $(my_bundle_module): $(built_dex)
+else
+  $(my_bundle_module): PRIVATE_DEX_FILE :=
+  $(my_bundle_module): PRIVATE_SOURCE_ARCHIVE :=
+  # We don't build jar, need to add the Java resources here.
+  $(my_bundle_module): $(java_resource_sources)
+endif # full_classes_jar
+
+$(my_bundle_module): $(MERGE_ZIPS) $(SOONG_ZIP) $(ZIP2ZIP)
+	@echo "target Bundle: $(PRIVATE_MODULE) ($@)"
+	rm -rf $@.parts
+	mkdir -p $@.parts
+	$(ZIP2ZIP) -i $(PRIVATE_RES_PACKAGE) -o $@.parts/apk.zip AndroidManifest.xml:manifest/AndroidManifest.xml resources.pb "res/**/*" "assets/**/*"
+      ifneq ($(jni_shared_libraries),)
+	  $(call create-jni-shared-libs-package,$@.parts/jni.zip)
+      endif
+      ifeq ($(full_classes_jar),)
+      # We don't build jar, need to add the Java resources here.
+	  $(if $(PRIVATE_EXTRA_JAR_ARGS),\
+	    $(call create-java-resources-jar,$@.parts/res.zip) && \
+	    $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/" && \
+	    mv -f $@.parts/res.zip.tmp $@.parts/res.zip)
+      else  # full_classes_jar
+	  $(call create-dex-jar,$@.parts/dex.zip,$(PRIVATE_DEX_FILE))
+	  $(ZIP2ZIP) -i $@.parts/dex.zip -o $@.parts/dex.zip.tmp "classes*.dex:dex/"
+	  mv -f $@.parts/dex.zip.tmp $@.parts/dex.zip
+	  $(call extract-resources-jar,$@.parts/res.zip,$(PRIVATE_SOURCE_ARCHIVE))
+	  $(ZIP2ZIP) -i $@.parts/res.zip -o $@.parts/res.zip.tmp "**/*:root/"
+	  mv -f $@.parts/res.zip.tmp $@.parts/res.zip
+      endif  # full_classes_jar
+	$(MERGE_ZIPS) $@ $@.parts/*.zip
+	rm -rf $@.parts
+ALL_MODULES.$(my_register_name).BUNDLE := $(my_bundle_module)
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ifdef TARGET_BUILD_APPS
 ifdef LOCAL_DPI_VARIANTS
 $(foreach d, $(LOCAL_DPI_VARIANTS), \

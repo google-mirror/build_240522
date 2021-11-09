@@ -107,7 +107,11 @@ ifneq ($(filter $(my_cxx_stl),libc++ libc++_static),)
         endif
 
         ifeq ($(my_link_type),static)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
             my_static_libraries += libm libc libdl
+=======
+            my_static_libraries += libm libc libunwind
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
         endif
     endif
 else ifeq ($(my_cxx_stl),ndk)

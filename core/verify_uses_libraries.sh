@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 #!/bin/bash
 #
 # Copyright (C) 2018 The Android Open Source Project
@@ -43,3 +44,5 @@ if [[ "${single_line_optional_libs}" != "${optional_uses_library_names}" ]]; the
   exit 1
 fi
 
+=======
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

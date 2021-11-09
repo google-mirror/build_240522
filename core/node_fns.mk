@@ -187,7 +187,11 @@ define _import-node
   $(call clear-var-list, $(3))
   $(eval LOCAL_PATH := $(patsubst %/,%,$(dir $(2))))
   $(eval MAKEFILE_LIST :=)
+  $(call dump-import-start,$(_include_stack))
+  $(call dump-config-vals,$(2),before)
   $(eval include $(2))
+  $(call dump-import-done,$(_include_stack))
+  $(call dump-config-vals,$(2),after)
   $(eval _included := $(filter-out $(2),$(MAKEFILE_LIST)))
   $(eval MAKEFILE_LIST :=)
   $(eval LOCAL_PATH :=)
@@ -239,6 +243,7 @@ endef
 # $(3): list of node variable names
 #
 define import-nodes
+$(call dump-phase-start,$(1),$(2),$(3),$(4),build/make/core/node_fns.mk) \
 $(if \
   $(foreach _in,$(2), \
     $(eval _node_import_context := _nic.$(1).[[$(_in)]]) \
@@ -252,5 +257,6 @@ $(if \
     $(if $(_include_stack),$(eval $(error ASSERTION FAILED: _include_stack \
                 should be empty here: $(_include_stack))),) \
    ) \
-,)
+,) \
+$(call dump-phase-end,build/make/core/node_fns.mk)
 endef

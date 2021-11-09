@@ -284,6 +284,7 @@ include $(BUILD_SYSTEM)/configure_module_stem.mk
 
 LOCAL_BUILT_MODULE := $(intermediates)/$(my_built_module_stem)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # OVERRIDE_BUILT_MODULE_PATH is only allowed to be used by the
 # internal SHARED_LIBRARIES build files.
 OVERRIDE_BUILT_MODULE_PATH := $(strip $(OVERRIDE_BUILT_MODULE_PATH))
@@ -295,6 +296,15 @@ ifdef OVERRIDE_BUILT_MODULE_PATH
 endif
 
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+=======
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    $(call pretty-error, LOCAL_SOONG_INSTALLED_MODULE can only be used from $(SOONG_ANDROID_MK))
+  endif
+  # Use the install path requested by Soong.
+  LOCAL_INSTALLED_MODULE := $(LOCAL_SOONG_INSTALLED_MODULE)
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   # Apk and its attachments reside in its own subdir.
   ifeq ($(LOCAL_MODULE_CLASS),APPS)
   # framework-res.apk doesn't like the additional layer.
@@ -403,23 +413,54 @@ $(foreach c, $(my_path_components),\
 ## Module installation rule
 ###########################################################
 
-my_init_rc_installed :=
-my_init_rc_pairs :=
 my_installed_symlinks :=
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
 $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+=======
+my_default_test_module :=
+ifeq ($(use_testcase_folder),true)
+arch_dir := $($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)
+my_default_test_module := $($(my_prefix)OUT_TESTCASES)/$(LOCAL_MODULE)/$(arch_dir)/$(my_installed_module_stem)
+arch_dir :=
+endif
+
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  # Soong already generated the copy rule, but make the installed location depend on the Make
+  # copy of the intermediates for now, as some rules that collect intermediates may expect
+  # them to exist.
+  $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+  ifneq ($(LOCAL_INSTALLED_MODULE),$(my_default_test_module))
+    $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
+    $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	@echo "Install: $@"
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+    ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+	$(copy-file-or-link-to-new-target)
+    else
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	$(copy-file-to-new-target)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+    endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 	$(PRIVATE_POST_INSTALL_CMD)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+  endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
-ifndef LOCAL_IS_HOST_MODULE
-# Rule to install the module's companion init.rc.
-my_init_rc := $(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC)
-ifneq ($(strip $(my_init_rc)),)
-my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(LOCAL_PATH)/$(rc):$(TARGET_OUT$(partition_tag)_ETC)/init/$(notdir $(rc)))
-my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
+  # Rule to install the module's companion symlinks
+  my_installed_symlinks := $(addprefix $(my_module_path)/,$(LOCAL_MODULE_SYMLINKS) $(LOCAL_MODULE_SYMLINKS_$(my_32_64_bit_suffix)))
+  $(foreach symlink,$(my_installed_symlinks),\
+      $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink))\
+      $(call declare-0p-target,$(symlink)))
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Make sure we only set up the copy rules once, even if another arch variant
 # shares a common LOCAL_INIT_RC.
 my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
@@ -436,10 +477,78 @@ $(foreach symlink,$(my_installed_symlinks),\
     $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink)))
 
 $(my_all_targets) : | $(my_installed_symlinks)
+=======
+  $(my_all_targets) : | $(my_installed_symlinks)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 endif # !LOCAL_UNINSTALLABLE_MODULE
 
 ###########################################################
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+## VINTF manifest fragment and init.rc goals
+###########################################################
+
+my_vintf_installed:=
+my_vintf_path:=
+my_vintf_pairs:=
+my_init_rc_installed :=
+my_init_rc_path :=
+my_init_rc_pairs :=
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+  ifndef LOCAL_IS_HOST_MODULE
+    # Rule to install the module's companion vintf fragments.
+    ifneq ($(strip $(LOCAL_FULL_VINTF_FRAGMENTS)),)
+      my_vintf_fragments := $(LOCAL_FULL_VINTF_FRAGMENTS)
+    else
+      my_vintf_fragments := $(foreach xml,$(LOCAL_VINTF_FRAGMENTS),$(LOCAL_PATH)/$(xml))
+    endif
+    ifneq ($(strip $(my_vintf_fragments)),)
+      # Make doesn't support recovery as an output partition, but some Soong modules installed in recovery
+      # have init.rc files that need to be installed alongside them. Manually handle the case where the
+      # output file is in the recovery partition.
+      my_vintf_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
+      my_vintf_pairs := $(foreach xml,$(my_vintf_fragments),$(xml):$(my_vintf_path)/vintf/manifest/$(notdir $(xml)))
+      my_vintf_installed := $(foreach xml,$(my_vintf_pairs),$(call word-colon,2,$(xml)))
+
+      # Only set up copy rules once, even if another arch variant shares it
+      my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS_LIST),$(my_vintf_pairs))
+      my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
+
+      ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
+
+      $(my_all_targets) : $(my_vintf_new_installed)
+    endif # my_vintf_fragments
+
+    # Rule to install the module's companion init.rc.
+    ifneq ($(strip $(LOCAL_FULL_INIT_RC)),)
+      my_init_rc := $(LOCAL_FULL_INIT_RC)
+    else
+      my_init_rc := $(foreach rc,$(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC),$(LOCAL_PATH)/$(rc))
+    endif
+    ifneq ($(strip $(my_init_rc)),)
+      # Make doesn't support recovery as an output partition, but some Soong modules installed in recovery
+      # have init.rc files that need to be installed alongside them. Manually handle the case where the
+      # output file is in the recovery partition.
+      my_init_rc_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
+      my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
+      my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
+
+      # Make sure we only set up the copy rules once, even if another arch variant
+      # shares a common LOCAL_INIT_RC.
+      my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
+      my_init_rc_new_installed := $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
+
+      ALL_INIT_RC_INSTALLED_PAIRS += $(my_init_rc_new_pairs)
+
+      $(my_all_targets) : $(my_init_rc_installed)
+    endif # my_init_rc
+
+  endif # !LOCAL_IS_HOST_MODULE
+endif # !LOCAL_UNINSTALLABLE_MODULE
+
+###########################################################
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ## CHECK_BUILD goals
 ###########################################################
 my_checked_module :=
@@ -582,6 +691,7 @@ endif
 
 is_instrumentation_test :=
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq (,$(test_config))
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
@@ -598,6 +708,23 @@ endif
 
 ifneq (,$(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config))
 $(foreach extra_config, $(wildcard $(LOCAL_PATH)/$(LOCAL_MODULE)_*.config), \
+=======
+# Currently this flag variable is true only for the `android_test_helper_app` type module
+# which should not have any .config file
+ifeq (true, $(LOCAL_DISABLE_TEST_CONFIG))
+  test_config :=
+endif
+
+# Make sure we only add the files once for multilib modules.
+ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files
+  # Sync the auto_test_config value for multilib modules.
+  ifdef $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_autogen
+    ALL_MODULES.$(my_register_name).auto_test_config := true
+  endif
+else
+  $(my_prefix)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_compat_files := true
+  # LOCAL_COMPATIBILITY_SUPPORT_FILES is a list of <src>[:<dest>].
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
     $(eval my_compat_dist_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
       $(extra_config):$(dir)/$(notdir $(extra_config))))))
@@ -639,12 +766,48 @@ ALL_MODULES.$(my_register_name).CHECKED := \
     $(ALL_MODULES.$(my_register_name).CHECKED) $(my_checked_module)
 ALL_MODULES.$(my_register_name).BUILT := \
     $(ALL_MODULES.$(my_register_name).BUILT) $(LOCAL_BUILT_MODULE)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 ALL_MODULES.$(my_register_name).INSTALLED := \
+=======
+ifndef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).TARGET_BUILT := \
+    $(ALL_MODULES.$(my_register_name).TARGET_BUILT) $(LOCAL_BUILT_MODULE)
+endif
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  # Store the list of paths to installed locations of files provided by this
+  # module.  Used as dependencies of the image packaging rules when the module
+  # is installed by the current product.
+  ALL_MODULES.$(my_register_name).INSTALLED := \
+    $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
+      $(foreach f, $(LOCAL_SOONG_INSTALL_PAIRS),\
+        $(word 2,$(subst :,$(space),$(f)))) \
+      $(LOCAL_SOONG_INSTALL_SYMLINKS) \
+      $(my_init_rc_installed) \
+      $(my_installed_test_data) \
+      $(my_vintf_installed))
+  # Store the list of colon-separated pairs of the built and installed locations
+  # of files provided by this module.  Used by custom packaging rules like
+  # package-modules.mk that need to copy the built files to a custom install
+  # location during packaging.
+  ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
+    $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
+      $(LOCAL_SOONG_INSTALL_PAIRS) \
+      $(my_init_rc_pairs) \
+      $(my_test_data_pairs) \
+      $(my_vintf_pairs))
+else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+  ALL_MODULES.$(my_register_name).INSTALLED := \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(strip $(ALL_MODULES.$(my_register_name).INSTALLED) \
     $(LOCAL_INSTALLED_MODULE) $(my_init_rc_installed) $(my_installed_symlinks) \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     $(my_installed_test_data))
 ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
+=======
+    $(my_installed_test_data) $(my_vintf_installed))
+  ALL_MODULES.$(my_register_name).BUILT_INSTALLED := \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     $(strip $(ALL_MODULES.$(my_register_name).BUILT_INSTALLED) \
     $(LOCAL_BUILT_MODULE):$(LOCAL_INSTALLED_MODULE) \
     $(my_init_rc_pairs) $(my_test_data_pairs))
@@ -660,6 +823,7 @@ my_required_modules := $(LOCAL_REQUIRED_MODULES) \
 ifdef LOCAL_IS_HOST_MODULE
 my_required_modules += $(LOCAL_REQUIRED_MODULES_$($(my_prefix)OS))
 endif
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ALL_MODULES.$(my_register_name).REQUIRED := \
     $(strip $(ALL_MODULES.$(my_register_name).REQUIRED) $(my_required_modules))
 ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED := \
@@ -671,6 +835,76 @@ ALL_MODULES.$(my_register_name).TARGET_REQUIRED := \
 ALL_MODULES.$(my_register_name).HOST_REQUIRED := \
     $(strip $(ALL_MODULES.$(my_register_name).HOST_REQUIRED)\
         $(LOCAL_HOST_REQUIRED_MODULES))
+=======
+
+ALL_MODULES.$(my_register_name).SHARED_LIBS := \
+    $(ALL_MODULES.$(my_register_name).SHARED_LIBS) $(LOCAL_SHARED_LIBRARIES)
+
+ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS := \
+    $(ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS) $(LOCAL_SYSTEM_SHARED_LIBRARIES)
+
+##########################################################################
+## When compiling against the VNDK, add the .vendor or .product suffix to
+## required modules.
+##########################################################################
+ifneq ($(LOCAL_USE_VNDK),)
+  #####################################################
+  ## Soong modules may be built three times, once for
+  ## /system, once for /vendor and once for /product.
+  ## If we're using the VNDK, switch all soong
+  ## libraries over to the /vendor or /product variant.
+  #####################################################
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    # We don't do this renaming for soong-defined modules since they already
+    # have correct names (with .vendor or .product suffix when necessary) in
+    # their LOCAL_*_LIBRARIES.
+    ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+      my_required_modules := $(foreach l,$(my_required_modules),\
+        $(if $(SPLIT_PRODUCT.SHARED_LIBRARIES.$(l)),$(l).product,$(l)))
+    else
+      my_required_modules := $(foreach l,$(my_required_modules),\
+        $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    endif
+  endif
+endif
+
+ifdef LOCAL_IS_HOST_MODULE
+    ifneq ($(my_host_cross),true)
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST) $(my_required_modules))
+        ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST)\
+                $(my_required_modules))
+        ALL_MODULES.$(my_register_name).TARGET_REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).TARGET_REQUIRED_FROM_HOST)\
+                $(LOCAL_TARGET_REQUIRED_MODULES))
+    else
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST_CROSS := \
+            $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST_CROSS) $(my_required_modules))
+        ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST_CROSS := \
+            $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST_CROSS)\
+                $(my_required_modules))
+        ifdef LOCAL_TARGET_REQUIRED_MODULES
+            $(call pretty-error,LOCAL_TARGET_REQUIRED_MODULES may not be used from host_cross modules)
+        endif
+    endif
+    ifdef LOCAL_HOST_REQUIRED_MODULES
+        $(call pretty-error,LOCAL_HOST_REQUIRED_MODULES may not be used from host modules. Use LOCAL_REQUIRED_MODULES instead)
+    endif
+else
+    ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET) $(my_required_modules))
+    ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_TARGET)\
+            $(my_required_modules))
+    ALL_MODULES.$(my_register_name).HOST_REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).HOST_REQUIRED_FROM_TARGET)\
+            $(LOCAL_HOST_REQUIRED_MODULES))
+    ifdef LOCAL_TARGET_REQUIRED_MODULES
+        $(call pretty-error,LOCAL_TARGET_REQUIRED_MODULES may not be used from target modules. Use LOCAL_REQUIRED_MODULES instead)
+    endif
+endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS := \
     $(ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS) $(event_log_tags)
 ALL_MODULES.$(my_register_name).MAKEFILE := \
@@ -684,6 +918,19 @@ ALL_MODULES.$(my_register_name).FOR_2ND_ARCH := true
 endif
 ALL_MODULES.$(my_register_name).FOR_HOST_CROSS := $(my_host_cross)
 ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+ALL_MODULES.$(my_register_name).TEST_CONFIG := $(test_config)
+ALL_MODULES.$(my_register_name).EXTRA_TEST_CONFIGS := $(LOCAL_EXTRA_FULL_TEST_CONFIGS)
+ALL_MODULES.$(my_register_name).TEST_MAINLINE_MODULES := $(LOCAL_TEST_MAINLINE_MODULES)
+ifndef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).FILE_CONTEXTS := $(LOCAL_FILE_CONTEXTS)
+endif
+ifdef LOCAL_IS_UNIT_TEST
+ALL_MODULES.$(my_register_name).IS_UNIT_TEST := $(LOCAL_IS_UNIT_TEST)
+endif
+test_config :=
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 

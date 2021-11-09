@@ -107,12 +107,31 @@ endif
 
 ifeq (true,$(my_use_profile_for_boot_image))
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Location of text based profile for the boot image.
 my_boot_image_profile_location := $(PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION)
 ifeq (,$(my_boot_image_profile_location))
 # If not set, use the default.
 my_boot_image_profile_location := frameworks/base/config/boot-image-profile.txt
 endif
+=======
+  include $(CLEAR_VARS)
+  LOCAL_MODULE := dexpreopt_bootjar.$(my_suffix)
+  LOCAL_PREBUILT_MODULE_FILE := $(my_first_src)
+  LOCAL_MODULE_PATH := $(dir $(my_first_dest))
+  LOCAL_MODULE_STEM := $(notdir $(my_first_dest))
+  ifneq (,$(strip $(filter HOST_%,$(my_boot_image_arch))))
+    LOCAL_IS_HOST_MODULE := true
+  endif
+  LOCAL_MODULE_CLASS := ETC
+  include $(BUILD_PREBUILT)
+  $(LOCAL_BUILT_MODULE): | $(my_unstripped_installed)
+  # Installing boot.art causes all boot image bits to be installed.
+  # Keep this old behavior in case anyone still needs it.
+  $(LOCAL_INSTALLED_MODULE): $(my_installed)
+  ALL_MODULES.$(my_register_name).INSTALLED += $(my_installed)
+  $(my_all_targets): $(my_installed)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # Code to create the boot image profile, not in dex_preopt_libart_boot.mk since the profile is the same for all archs.
 my_out_boot_image_profile_location := $(DEXPREOPT_BOOT_JAR_DIR_FULL_PATH)/boot.prof

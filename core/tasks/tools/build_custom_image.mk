@@ -54,6 +54,18 @@ $(foreach m,$(CUSTOM_IMAGE_MODULES),\
       $(eval my_copy_pairs += $(bui):$(my_staging_dir)/$(my_copy_dest)))\
   ))
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+my_kernel_module_copy_files :=
+my_custom_image_modules_var := BOARD_$(strip $(call to-upper,$(my_custom_image_name)))_KERNEL_MODULES
+ifdef $(my_custom_image_modules_var)
+$(foreach kmod,\
+  $(call build-image-kernel-modules,$($(my_custom_image_modules_var)),$(my_staging_dir),$(CUSTOM_IMAGE_MOUNT_POINT),$(call intermediates-dir-for,PACKAGING,depmod_$(my_custom_image_name)),$($(my_custom_image_modules_var)),modules.load,,$(call intermediates-dir-for,PACKAGING,depmod_$(my_custom_image_name)_stripped)),\
+  $(eval pair := $(subst :,$(space),$(kmod)))\
+  $(eval my_kernel_module_copy_files += $(word 1,$(pair)):$(subst $(my_staging_dir)/,,$(word 2,$(pair)))))
+endif
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 # Collect CUSTOM_IMAGE_COPY_FILES.
 my_image_copy_files :=
 $(foreach f,$(CUSTOM_IMAGE_COPY_FILES),\

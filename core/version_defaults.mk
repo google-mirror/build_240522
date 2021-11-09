@@ -39,6 +39,7 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 DEFAULT_PLATFORM_VERSION := PPR1
 MIN_PLATFORM_VERSION := PPR1
 MAX_PLATFORM_VERSION := PPR1
@@ -76,9 +77,22 @@ endif
 # in the following text file:
 # cts/tests/tests/os/assets/platform_versions.txt
 PLATFORM_VERSION.PPR1 := 9
+=======
+DEFAULT_PLATFORM_VERSION := TP1A
+.KATI_READONLY := DEFAULT_PLATFORM_VERSION
+MIN_PLATFORM_VERSION := TP1A
+MAX_PLATFORM_VERSION := TP1A
+
+# The last stable version name of the platform that was released.  During
+# development, this stays at that previous version, while the codename indicates
+# further work based on the previous version.
+PLATFORM_VERSION_LAST_STABLE := 12
+.KATI_READONLY := PLATFORM_VERSION_LAST_STABLE
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 PLATFORM_VERSION_CODENAME.PPR1 := REL
 
 ifndef PLATFORM_VERSION
@@ -153,7 +167,28 @@ ifndef PLATFORM_VERSION_CODENAME
     $(subst $(space),$(comma),$(strip $(PLATFORM_VERSION_FUTURE_CODENAMES)))
 
 endif
+=======
+PLATFORM_VERSION_CODENAME.TP1A := Tiramisu
 
+ifndef PLATFORM_SDK_VERSION
+  # This is the canonical definition of the SDK version, which defines
+  # the set of APIs and functionality available in the platform.  It
+  # is a single integer that increases monotonically as updates to
+  # the SDK are released.  It should only be incremented when the APIs for
+  # the new release are frozen (so that developers don't write apps against
+  # intermediate builds).  During development, this number remains at the
+  # SDK version the branch is based on and PLATFORM_VERSION_CODENAME holds
+  # the code-name of the new development work.
+
+  # When you increment the PLATFORM_SDK_VERSION please ensure you also
+  # clear out the following text file of all older PLATFORM_VERSION's:
+  # cts/tests/tests/os/assets/platform_versions.txt
+  PLATFORM_SDK_VERSION := 31
+endif
+.KATI_READONLY := PLATFORM_SDK_VERSION
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifeq (REL,$(PLATFORM_VERSION_CODENAME))
   PLATFORM_PREVIEW_SDK_VERSION := 0
 else
@@ -170,7 +205,13 @@ else
     PLATFORM_PREVIEW_SDK_VERSION := 0
   endif
 endif
+=======
+# This is the sdk extension version of this tree.
+PLATFORM_SDK_EXTENSION_VERSION := 1
+.KATI_READONLY := PLATFORM_SDK_EXTENSION_VERSION
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifndef DEFAULT_APP_TARGET_SDK
   # This is the default minSdkVersion and targetSdkVersion to use for
   # all .apks created by the build system.  It can be overridden by explicitly
@@ -224,6 +265,11 @@ else
   PLATFORM_SYSTEMSDK_VERSIONS += $(PLATFORM_VERSION_CODENAME)
 endif
 PLATFORM_SYSTEMSDK_VERSIONS := $(strip $(sort $(PLATFORM_SYSTEMSDK_VERSIONS)))
+=======
+# This is the sdk extension version that PLATFORM_SDK_VERSION ships with.
+PLATFORM_BASE_SDK_EXTENSION_VERSION := 1
+.KATI_READONLY := PLATFORM_BASE_SDK_EXTENSION_VERSION
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 ifndef PLATFORM_SECURITY_PATCH
     #  Used to indicate the security patch that has been applied to the device.
@@ -231,9 +277,14 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+      PLATFORM_SECURITY_PATCH := 2021-11-05
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP
   # Used to indicate the matching timestamp for the security patch string in PLATFORM_SECURITY_PATCH.
   ifneq (,$(findstring Darwin,$(UNAME)))
@@ -243,7 +294,11 @@ ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP
   endif
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH_TIMESTAMP
+=======
+include $(BUILD_SYSTEM)/version_util.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifndef PLATFORM_BASE_OS
   # Used to indicate the base os applied to the device.
   # Can be an arbitrary string, but must be a single word.
@@ -299,3 +354,5 @@ ifndef PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION
   # device.
   PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION := 17
 endif
+=======
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

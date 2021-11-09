@@ -43,7 +43,361 @@ def get_2gb_string():
     yield '\0' * (step_size - block_size)
 
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 class CommonZipTest(unittest.TestCase):
+=======
+class BuildInfoTest(test_utils.ReleaseToolsTestCase):
+
+  TEST_INFO_FINGERPRINT_DICT = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.brand': 'product-brand',
+              'ro.product.name': 'product-name',
+              'ro.product.device': 'product-device',
+              'ro.build.version.release': 'version-release',
+              'ro.build.id': 'build-id',
+              'ro.build.version.incremental': 'version-incremental',
+              'ro.build.type': 'build-type',
+              'ro.build.tags': 'build-tags',
+              'ro.build.version.sdk': 30,
+          }
+      ),
+  }
+
+  TEST_INFO_DICT = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.device': 'product-device',
+              'ro.product.name': 'product-name',
+              'ro.build.fingerprint': 'build-fingerprint',
+              'ro.build.foo': 'build-foo'}
+      ),
+      'system.build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.system.brand': 'product-brand',
+              'ro.product.system.name': 'product-name',
+              'ro.product.system.device': 'product-device',
+              'ro.system.build.version.release': 'version-release',
+              'ro.system.build.id': 'build-id',
+              'ro.system.build.version.incremental': 'version-incremental',
+              'ro.system.build.type': 'build-type',
+              'ro.system.build.tags': 'build-tags',
+              'ro.system.build.foo': 'build-foo'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.product.vendor.brand': 'vendor-product-brand',
+              'ro.product.vendor.name': 'vendor-product-name',
+              'ro.product.vendor.device': 'vendor-product-device',
+              'ro.vendor.build.version.release': 'vendor-version-release',
+              'ro.vendor.build.id': 'vendor-build-id',
+              'ro.vendor.build.version.incremental':
+              'vendor-version-incremental',
+              'ro.vendor.build.type': 'vendor-build-type',
+              'ro.vendor.build.tags': 'vendor-build-tags'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
+  }
+
+  TEST_INFO_DICT_USES_OEM_PROPS = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.name': 'product-name',
+              'ro.build.thumbprint': 'build-thumbprint',
+              'ro.build.bar': 'build-bar'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.vendor.build.fingerprint': 'vendor-build-fingerprint'}
+      ),
+      'property1': 'value1',
+      'property2': 4096,
+      'oem_fingerprint_properties': 'ro.product.device ro.product.brand',
+  }
+
+  TEST_OEM_DICTS = [
+      {
+          'ro.product.brand': 'brand1',
+          'ro.product.device': 'device1',
+      },
+      {
+          'ro.product.brand': 'brand2',
+          'ro.product.device': 'device2',
+      },
+      {
+          'ro.product.brand': 'brand3',
+          'ro.product.device': 'device3',
+      },
+  ]
+
+  TEST_INFO_DICT_PROPERTY_SOURCE_ORDER = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.build.fingerprint': 'build-fingerprint',
+              'ro.product.property_source_order':
+                  'product,odm,vendor,system_ext,system'}
+      ),
+      'system.build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.system.device': 'system-product-device'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.product.vendor.device': 'vendor-product-device'}
+      ),
+  }
+
+  TEST_INFO_DICT_PROPERTY_SOURCE_ORDER_ANDROID_10 = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.build.fingerprint': 'build-fingerprint',
+              'ro.product.property_source_order':
+                  'product,product_services,odm,vendor,system',
+              'ro.build.version.release': '10',
+              'ro.build.version.codename': 'REL'}
+      ),
+      'system.build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.system.device': 'system-product-device'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.product.vendor.device': 'vendor-product-device'}
+      ),
+  }
+
+  TEST_INFO_DICT_PROPERTY_SOURCE_ORDER_ANDROID_9 = {
+      'build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.device': 'product-device',
+              'ro.build.fingerprint': 'build-fingerprint',
+              'ro.build.version.release': '9',
+              'ro.build.version.codename': 'REL'}
+      ),
+      'system.build.prop': common.PartitionBuildProps.FromDictionary(
+          'system', {
+              'ro.product.system.device': 'system-product-device'}
+      ),
+      'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+          'vendor', {
+              'ro.product.vendor.device': 'vendor-product-device'}
+      ),
+  }
+
+  def test_init(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual('product-device', target_info.device)
+    self.assertEqual('build-fingerprint', target_info.fingerprint)
+    self.assertFalse(target_info.is_ab)
+    self.assertIsNone(target_info.oem_props)
+
+  def test_init_with_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    self.assertEqual('device1', target_info.device)
+    self.assertEqual('brand1/product-name/device1:build-thumbprint',
+                     target_info.fingerprint)
+
+    # Swap the order in oem_dicts, which would lead to different BuildInfo.
+    oem_dicts = copy.copy(self.TEST_OEM_DICTS)
+    oem_dicts[0], oem_dicts[2] = oem_dicts[2], oem_dicts[0]
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   oem_dicts)
+    self.assertEqual('device3', target_info.device)
+    self.assertEqual('brand3/product-name/device3:build-thumbprint',
+                     target_info.fingerprint)
+
+  def test_init_badFingerprint(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    info_dict['build.prop'].build_props[
+        'ro.build.fingerprint'] = 'bad fingerprint'
+    self.assertRaises(ValueError, common.BuildInfo, info_dict, None)
+
+    info_dict['build.prop'].build_props[
+        'ro.build.fingerprint'] = 'bad\x80fingerprint'
+    self.assertRaises(ValueError, common.BuildInfo, info_dict, None)
+
+  def test_init_goodFingerprint(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_FINGERPRINT_DICT)
+    build_info = common.BuildInfo(info_dict)
+    self.assertEqual(
+      'product-brand/product-name/product-device:version-release/build-id/'
+      'version-incremental:build-type/build-tags', build_info.fingerprint)
+
+    build_props = info_dict['build.prop'].build_props
+    del build_props['ro.build.id']
+    build_props['ro.build.legacy.id'] = 'legacy-build-id'
+    build_info = common.BuildInfo(info_dict, use_legacy_id=True)
+    self.assertEqual(
+      'product-brand/product-name/product-device:version-release/'
+      'legacy-build-id/version-incremental:build-type/build-tags',
+      build_info.fingerprint)
+
+    self.assertRaises(common.ExternalError, common.BuildInfo, info_dict, None,
+                      False)
+
+    info_dict['avb_enable'] = 'true'
+    info_dict['vbmeta_digest'] = 'abcde12345'
+    build_info = common.BuildInfo(info_dict, use_legacy_id=False)
+    self.assertEqual(
+      'product-brand/product-name/product-device:version-release/'
+      'legacy-build-id.abcde123/version-incremental:build-type/build-tags',
+      build_info.fingerprint)
+
+  def test___getitem__(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual('value1', target_info['property1'])
+    self.assertEqual(4096, target_info['property2'])
+    self.assertEqual('build-foo',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
+
+  def test___getitem__with_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    self.assertEqual('value1', target_info['property1'])
+    self.assertEqual(4096, target_info['property2'])
+    self.assertIsNone(target_info['build.prop'].GetProp('ro.build.foo'))
+
+  def test___setitem__(self):
+    target_info = common.BuildInfo(copy.deepcopy(self.TEST_INFO_DICT), None)
+    self.assertEqual('value1', target_info['property1'])
+    target_info['property1'] = 'value2'
+    self.assertEqual('value2', target_info['property1'])
+
+    self.assertEqual('build-foo',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
+    target_info['build.prop'].build_props['ro.build.foo'] = 'build-bar'
+    self.assertEqual('build-bar',
+                     target_info['build.prop'].GetProp('ro.build.foo'))
+
+  def test_get(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual('value1', target_info.get('property1'))
+    self.assertEqual(4096, target_info.get('property2'))
+    self.assertEqual(4096, target_info.get('property2', 1024))
+    self.assertEqual(1024, target_info.get('property-nonexistent', 1024))
+    self.assertEqual('build-foo',
+                     target_info.get('build.prop').GetProp('ro.build.foo'))
+
+  def test_get_with_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    self.assertEqual('value1', target_info.get('property1'))
+    self.assertEqual(4096, target_info.get('property2'))
+    self.assertEqual(4096, target_info.get('property2', 1024))
+    self.assertEqual(1024, target_info.get('property-nonexistent', 1024))
+    self.assertIsNone(target_info.get('build.prop').GetProp('ro.build.foo'))
+
+  def test_items(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    items = target_info.items()
+    self.assertIn(('property1', 'value1'), items)
+    self.assertIn(('property2', 4096), items)
+
+  def test_GetBuildProp(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual('build-foo', target_info.GetBuildProp('ro.build.foo'))
+    self.assertRaises(common.ExternalError, target_info.GetBuildProp,
+                      'ro.build.nonexistent')
+
+  def test_GetBuildProp_with_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    self.assertEqual('build-bar', target_info.GetBuildProp('ro.build.bar'))
+    self.assertRaises(common.ExternalError, target_info.GetBuildProp,
+                      'ro.build.nonexistent')
+
+  def test_GetPartitionFingerprint(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual(
+        target_info.GetPartitionFingerprint('vendor'),
+        'vendor-product-brand/vendor-product-name/vendor-product-device'
+        ':vendor-version-release/vendor-build-id/vendor-version-incremental'
+        ':vendor-build-type/vendor-build-tags')
+
+  def test_GetPartitionFingerprint_system_other_uses_system(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    self.assertEqual(
+        target_info.GetPartitionFingerprint('system_other'),
+        target_info.GetPartitionFingerprint('system'))
+
+  def test_GetPartitionFingerprint_uses_fingerprint_prop_if_available(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT)
+    info_dict['vendor.build.prop'].build_props[
+        'ro.vendor.build.fingerprint'] = 'vendor:fingerprint'
+    target_info = common.BuildInfo(info_dict, None)
+    self.assertEqual(
+        target_info.GetPartitionFingerprint('vendor'),
+        'vendor:fingerprint')
+
+  def test_WriteMountOemScript(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    script_writer = test_utils.MockScriptWriter()
+    target_info.WriteMountOemScript(script_writer)
+    self.assertEqual([('Mount', '/oem', None)], script_writer.lines)
+
+  def test_WriteDeviceAssertions(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT, None)
+    script_writer = test_utils.MockScriptWriter()
+    target_info.WriteDeviceAssertions(script_writer, False)
+    self.assertEqual([('AssertDevice', 'product-device')], script_writer.lines)
+
+  def test_WriteDeviceAssertions_with_oem_props(self):
+    target_info = common.BuildInfo(self.TEST_INFO_DICT_USES_OEM_PROPS,
+                                   self.TEST_OEM_DICTS)
+    script_writer = test_utils.MockScriptWriter()
+    target_info.WriteDeviceAssertions(script_writer, False)
+    self.assertEqual(
+        [
+            ('AssertOemProperty', 'ro.product.device',
+             ['device1', 'device2', 'device3'], False),
+            ('AssertOemProperty', 'ro.product.brand',
+             ['brand1', 'brand2', 'brand3'], False),
+        ],
+        script_writer.lines)
+
+  def test_ResolveRoProductProperty_FromVendor(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT_PROPERTY_SOURCE_ORDER)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('vendor-product-device',
+                     info.GetBuildProp('ro.product.device'))
+
+  def test_ResolveRoProductProperty_FromSystem(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT_PROPERTY_SOURCE_ORDER)
+    del info_dict['vendor.build.prop'].build_props['ro.product.vendor.device']
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('system-product-device',
+                     info.GetBuildProp('ro.product.device'))
+
+  def test_ResolveRoProductProperty_InvalidPropertySearchOrder(self):
+    info_dict = copy.deepcopy(self.TEST_INFO_DICT_PROPERTY_SOURCE_ORDER)
+    info_dict['build.prop'].build_props[
+        'ro.product.property_source_order'] = 'bad-source'
+    with self.assertRaisesRegexp(common.ExternalError,
+        'Invalid ro.product.property_source_order'):
+      info = common.BuildInfo(info_dict, None)
+      info.GetBuildProp('ro.product.device')
+
+  def test_ResolveRoProductProperty_Android10PropertySearchOrder(self):
+    info_dict = copy.deepcopy(
+        self.TEST_INFO_DICT_PROPERTY_SOURCE_ORDER_ANDROID_10)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('vendor-product-device',
+                     info.GetBuildProp('ro.product.device'))
+
+  def test_ResolveRoProductProperty_Android9PropertySearchOrder(self):
+    info_dict = copy.deepcopy(
+        self.TEST_INFO_DICT_PROPERTY_SOURCE_ORDER_ANDROID_9)
+    info = common.BuildInfo(info_dict, None)
+    self.assertEqual('product-device',
+                     info.GetBuildProp('ro.product.device'))
+
+
+class CommonZipTest(test_utils.ReleaseToolsTestCase):
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   def _verify(self, zip_file, zip_file_name, arcname, expected_hash,
               test_file_name=None, expected_stat=None, expected_mode=0o644,
               expected_compress_type=zipfile.ZIP_STORED):
@@ -646,7 +1000,536 @@ class CommonUtilsTest(unittest.TestCase):
     self.assertTrue(sparse_image.file_map['/system/file2'].extra['incomplete'])
 
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 class InstallRecoveryScriptFormatTest(unittest.TestCase):
+=======
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      sparse_image = common.GetSparseImage('system', tempdir, input_zip, False)
+
+    self.assertEqual(
+        '1-5 9-10',
+        sparse_image.file_map['//system/file1'].extra['text_str'])
+    self.assertTrue(sparse_image.file_map['//system/file2'].extra['incomplete'])
+    self.assertTrue(
+        sparse_image.file_map['/system/app/file3'].extra['incomplete'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetSparseImage_systemRootImage_nonSystemFiles(self):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.write(
+          test_utils.construct_sparse_image([(0xCAC2, 16)]),
+          arcname='IMAGES/system.img')
+      target_files_zip.writestr(
+          'IMAGES/system.map',
+          '\n'.join([
+              '//system/file1 1-5 9-10',
+              '//init.rc 13-15']))
+      target_files_zip.writestr('SYSTEM/file1', os.urandom(4096 * 7))
+      # '/init.rc' has less blocks listed (3) than actual (4).
+      target_files_zip.writestr('ROOT/init.rc', os.urandom(4096 * 4))
+
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      sparse_image = common.GetSparseImage('system', tempdir, input_zip, False)
+
+    self.assertEqual(
+        '1-5 9-10',
+        sparse_image.file_map['//system/file1'].extra['text_str'])
+    self.assertTrue(sparse_image.file_map['//init.rc'].extra['incomplete'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetSparseImage_fileNotFound(self):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.write(
+          test_utils.construct_sparse_image([(0xCAC2, 16)]),
+          arcname='IMAGES/system.img')
+      target_files_zip.writestr(
+          'IMAGES/system.map',
+          '\n'.join([
+              '//system/file1 1-5 9-10',
+              '//system/file2 11-12']))
+      target_files_zip.writestr('SYSTEM/file1', os.urandom(4096 * 7))
+
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      self.assertRaises(
+          AssertionError, common.GetSparseImage, 'system', tempdir, input_zip,
+          False)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': pubkey,
+        'avb_system_rollback_index_location': 2,
+    }
+    args = common.GetAvbChainedPartitionArg('system', info_dict).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('system', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_withPrivateKey(self):
+    key = os.path.join(self.testdata_dir, 'testkey.key')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_product_key_path': key,
+        'avb_product_rollback_index_location': 2,
+    }
+    args = common.GetAvbChainedPartitionArg('product', info_dict).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('product', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_withSpecifiedKey(self):
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': 'does-not-exist',
+        'avb_system_rollback_index_location': 2,
+    }
+    pubkey = os.path.join(self.testdata_dir, 'testkey.pubkey.pem')
+    args = common.GetAvbChainedPartitionArg(
+        'system', info_dict, pubkey).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('system', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_invalidKey(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey_with_passwd.x509.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': pubkey,
+        'avb_system_rollback_index_location': 2,
+    }
+    self.assertRaises(
+        common.ExternalError, common.GetAvbChainedPartitionArg, 'system',
+        info_dict)
+
+  INFO_DICT_DEFAULT = {
+      'recovery_api_version': 3,
+      'fstab_version': 2,
+      'system_root_image': 'true',
+      'no_recovery' : 'true',
+      'recovery_as_boot': 'true',
+  }
+
+  def test_LoadListFromFile(self):
+    file_path = os.path.join(self.testdata_dir,
+                             'merge_config_framework_item_list')
+    contents = common.LoadListFromFile(file_path)
+    expected_contents = [
+        'META/apkcerts.txt',
+        'META/filesystem_config.txt',
+        'META/root_filesystem_config.txt',
+        'META/system_manifest.xml',
+        'META/system_matrix.xml',
+        'META/update_engine_config.txt',
+        'PRODUCT/*',
+        'ROOT/*',
+        'SYSTEM/*',
+    ]
+    self.assertEqual(sorted(contents), sorted(expected_contents))
+
+  @staticmethod
+  def _test_LoadInfoDict_createTargetFiles(info_dict, fstab_path):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      info_values = ''.join(
+          ['{}={}\n'.format(k, v) for k, v in sorted(info_dict.items())])
+      common.ZipWriteStr(target_files_zip, 'META/misc_info.txt', info_values)
+
+      FSTAB_TEMPLATE = "/dev/block/system {} ext4 ro,barrier=1 defaults"
+      if info_dict.get('system_root_image') == 'true':
+        fstab_values = FSTAB_TEMPLATE.format('/')
+      else:
+        fstab_values = FSTAB_TEMPLATE.format('/system')
+      common.ZipWriteStr(target_files_zip, fstab_path, fstab_values)
+
+      common.ZipWriteStr(
+          target_files_zip, 'META/file_contexts', 'file-contexts')
+    return target_files
+
+  def test_LoadInfoDict(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_legacyRecoveryFstabPath(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_dirInput(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_dirInput_legacyRecoveryFstabPath(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_systemRootImageFalse(self):
+    # Devices not using system-as-root nor recovery-as-boot. Non-A/B devices
+    # launched prior to P will likely have this config.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['no_recovery']
+    del info_dict['system_root_image']
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertNotIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_recoveryAsBootFalse(self):
+    # Devices using system-as-root, but with standalone recovery image. Non-A/B
+    # devices launched since P will likely have this config.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['no_recovery']
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_noRecoveryTrue(self):
+    # Device doesn't have a recovery partition at all.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIsNone(loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_missingMetaMiscInfoTxt(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    common.ZipDelete(target_files, 'META/misc_info.txt')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      self.assertRaises(ValueError, common.LoadInfoDict, target_files_zip)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_repacking(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped, True)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+    self.assertEqual(
+        os.path.join(unzipped, 'ROOT'), loaded_dict['root_dir'])
+    self.assertEqual(
+        os.path.join(unzipped, 'META', 'root_filesystem_config.txt'),
+        loaded_dict['root_fs_config'])
+
+  def test_LoadInfoDict_repackingWithZipFileInput(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      self.assertRaises(
+          AssertionError, common.LoadInfoDict, target_files_zip, True)
+
+  def test_MergeDynamicPartitionInfoDicts_ReturnsMergedDict(self):
+    framework_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a',
+        'dynamic_partition_list': 'system',
+        'super_group_a_partition_list': 'system',
+    }
+    vendor_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'vendor product',
+        'super_block_devices': 'super',
+        'super_super_device_size': '3000',
+        'super_group_a_partition_list': 'vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    merged_dict = common.MergeDynamicPartitionInfoDicts(
+        framework_dict=framework_dict,
+        vendor_dict=vendor_dict)
+    expected_merged_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'product system vendor',
+        'super_block_devices': 'super',
+        'super_super_device_size': '3000',
+        'super_group_a_partition_list': 'system vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    self.assertEqual(merged_dict, expected_merged_dict)
+
+  def test_MergeDynamicPartitionInfoDicts_IgnoringFrameworkGroupSize(self):
+    framework_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a',
+        'dynamic_partition_list': 'system',
+        'super_group_a_partition_list': 'system',
+        'super_group_a_group_size': '5000',
+    }
+    vendor_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'vendor product',
+        'super_group_a_partition_list': 'vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    merged_dict = common.MergeDynamicPartitionInfoDicts(
+        framework_dict=framework_dict,
+        vendor_dict=vendor_dict)
+    expected_merged_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'product system vendor',
+        'super_group_a_partition_list': 'system vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    self.assertEqual(merged_dict, expected_merged_dict)
+
+  def test_GetAvbPartitionArg(self):
+    info_dict = {}
+    cmd = common.GetAvbPartitionArg('system', '/path/to/system.img', info_dict)
+    self.assertEqual(
+        ['--include_descriptors_from_image', '/path/to/system.img'], cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_vendorAsChainedPartition(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_vendor_key_path': pubkey,
+        'avb_vendor_rollback_index_location': 5,
+    }
+    cmd = common.GetAvbPartitionArg('vendor', '/path/to/vendor.img', info_dict)
+    self.assertEqual(2, len(cmd))
+    self.assertEqual('--chain_partition', cmd[0])
+    chained_partition_args = cmd[1].split(':')
+    self.assertEqual(3, len(chained_partition_args))
+    self.assertEqual('vendor', chained_partition_args[0])
+    self.assertEqual('5', chained_partition_args[1])
+    self.assertTrue(os.path.exists(chained_partition_args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_recoveryAsChainedPartition_nonAb(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_recovery_key_path': pubkey,
+        'avb_recovery_rollback_index_location': 3,
+    }
+    cmd = common.GetAvbPartitionArg(
+        'recovery', '/path/to/recovery.img', info_dict)
+    self.assertFalse(cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_recoveryAsChainedPartition_ab(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'ab_update': 'true',
+        'avb_avbtool': 'avbtool',
+        'avb_recovery_key_path': pubkey,
+        'avb_recovery_rollback_index_location': 3,
+    }
+    cmd = common.GetAvbPartitionArg(
+        'recovery', '/path/to/recovery.img', info_dict)
+    self.assertEqual(2, len(cmd))
+    self.assertEqual('--chain_partition', cmd[0])
+    chained_partition_args = cmd[1].split(':')
+    self.assertEqual(3, len(chained_partition_args))
+    self.assertEqual('recovery', chained_partition_args[0])
+    self.assertEqual('3', chained_partition_args[1])
+    self.assertTrue(os.path.exists(chained_partition_args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs_NoSigningKeyPath(self):
+    # A non-GKI boot.img has no gki_signing_key_path.
+    common.OPTIONS.info_dict = {
+        # 'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+
+    # Tests no --gki_signing_* args are appended if there is no
+    # gki_signing_key_path.
+    cmd = ['mkbootimg', '--header_version', '4']
+    expected_cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+    self.assertEqual(cmd, expected_cmd)
+
+  def test_AppendGkiSigningArgs_NoSigningAlgorithm(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey_gki.pem')
+    with open(pubkey, 'wb') as f:
+      f.write(b'\x00' * 100)
+    self.assertTrue(os.path.exists(pubkey))
+
+    # Tests no --gki_signing_* args are appended if there is no
+    # gki_signing_algorithm.
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        # 'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+
+    cmd = ['mkbootimg', '--header_version', '4']
+    expected_cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+    self.assertEqual(cmd, expected_cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey_gki.pem')
+    with open(pubkey, 'wb') as f:
+      f.write(b'\x00' * 100)
+    self.assertTrue(os.path.exists(pubkey))
+
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+
+    expected_cmd = [
+      'mkbootimg', '--header_version', '4',
+      '--gki_signing_key', pubkey,
+      '--gki_signing_algorithm', 'SHA256_RSA4096',
+      '--gki_signing_signature_args', '--prop foo:bar'
+    ]
+    self.assertEqual(cmd, expected_cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs_KeyPathNotFound(self):
+    pubkey = os.path.join(self.testdata_dir, 'no_testkey_gki.pem')
+    self.assertFalse(os.path.exists(pubkey))
+
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    self.assertRaises(common.ExternalError, common.AppendGkiSigningArgs, cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs_SearchKeyPath(self):
+    pubkey = 'testkey_gki.pem'
+    self.assertFalse(os.path.exists(pubkey))
+
+    # Tests it should replace the pubkey with an existed key under
+    # OPTIONS.search_path, i.e., os.path.join(OPTIONS.search_path, pubkey).
+    search_path_dir = common.MakeTempDir()
+    search_pubkey = os.path.join(search_path_dir, pubkey)
+    with open(search_pubkey, 'wb') as f:
+      f.write(b'\x00' * 100)
+    self.assertTrue(os.path.exists(search_pubkey))
+
+    common.OPTIONS.search_path = search_path_dir
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    common.AppendGkiSigningArgs(cmd)
+
+    expected_cmd = [
+      'mkbootimg', '--header_version', '4',
+      '--gki_signing_key', search_pubkey,
+      '--gki_signing_algorithm', 'SHA256_RSA4096',
+      '--gki_signing_signature_args', '--prop foo:bar'
+    ]
+    self.assertEqual(cmd, expected_cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendGkiSigningArgs_SearchKeyPathNotFound(self):
+    pubkey = 'no_testkey_gki.pem'
+    self.assertFalse(os.path.exists(pubkey))
+
+    # Tests it should raise ExternalError if no key found under
+    # OPTIONS.search_path.
+    search_path_dir = common.MakeTempDir()
+    search_pubkey = os.path.join(search_path_dir, pubkey)
+    self.assertFalse(os.path.exists(search_pubkey))
+
+    common.OPTIONS.search_path = search_path_dir
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    cmd = ['mkbootimg', '--header_version', '4']
+    self.assertRaises(common.ExternalError, common.AppendGkiSigningArgs, cmd)
+
+
+class InstallRecoveryScriptFormatTest(test_utils.ReleaseToolsTestCase):
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
   """Checks the format of install-recovery.sh.
 
   Its format should match between common.py and validate_target_files.py.

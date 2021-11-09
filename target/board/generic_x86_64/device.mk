@@ -14,16 +14,32 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
+=======
+PRODUCT_COPY_FILES += \
+    kernel/prebuilts/5.10/x86_64/kernel-5.10:kernel-5.10 \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 PRODUCT_COPY_FILES := \
     device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml
+=======
+$(call dist-for-goals, dist_files, kernel/prebuilts/5.10/x86_64/prebuilt-info.txt:kernel/5.10/prebuilt-info.txt)
 
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_COPY_FILES += \
+    kernel/prebuilts/5.10/x86_64/kernel-5.10-allsyms:kernel-5.10-allsyms \
+
+endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
+
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # minimal configuration for audio policy.
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
@@ -44,3 +60,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES := \
     audio.primary.goldfish \
     vibrator.goldfish
+=======
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
+PRODUCT_BUILD_RECOVERY_IMAGE := false
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

@@ -16,7 +16,15 @@
 
 // the signapk tool (a .jar application used to sign packages)
 // ============================================================
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 java_library_host {
+=======
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_binary_host {
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     name: "signapk",
     srcs: ["src/**/*.java"],
     manifest: "SignApk.mf",

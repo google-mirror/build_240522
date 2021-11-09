@@ -26,11 +26,21 @@ PRODUCT_COPY_FILES := \
 
 # minimal configuration for audio policy.
 PRODUCT_COPY_FILES += \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml \
+=======
+    kernel/prebuilts/4.19/arm64/kernel-4.19-gz:kernel-4.19-gz \
+    kernel/prebuilts/5.10/arm64/kernel-5.10:kernel-5.10 \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-gz:kernel-5.10-gz \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4:kernel-5.10-lz4 \
+
+$(call dist-for-goals, dist_files, kernel/prebuilts/4.19/arm64/prebuilt-info.txt:kernel/4.19/prebuilt-info.txt)
+$(call dist-for-goals, dist_files, kernel/prebuilts/5.10/arm64/prebuilt-info.txt:kernel/5.10/prebuilt-info.txt)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
@@ -39,7 +49,14 @@ PRODUCT_COPY_FILES += \
 #   May need to remove the following for newly launched devices in P since this
 #   NFC configuration file should be in vendor/etc, instead of system/etc
 PRODUCT_COPY_FILES += \
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
+=======
+    kernel/prebuilts/4.19/arm64/kernel-4.19-gz-allsyms:kernel-4.19-gz-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-allsyms:kernel-5.10-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-gz-allsyms:kernel-5.10-gz-allsyms \
+    kernel/prebuilts/5.10/arm64/kernel-5.10-lz4-allsyms:kernel-5.10-lz4-allsyms \
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # Adjust the Dalvik heap to be appropriate for a tablet.
 $(call inherit-product-if-exists, frameworks/base/build/tablet-dalvik-heap.mk)

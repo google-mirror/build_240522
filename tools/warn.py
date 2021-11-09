@@ -1,5 +1,23 @@
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 #!/usr/bin/python
 # This file uses the following encoding: utf-8
+=======
+#!/usr/bin/env python3
+#
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 """Grep warnings messages and output HTML tables or warning counts in CSV.
 
@@ -3437,6 +3455,7 @@ def dump_csv(writer):
 
 
 def main():
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
   warning_lines = parse_input_file(open(args.buildlog, 'r'))
   parallel_classify_warnings(warning_lines)
   # If a user pases a csv path, save the fileoutput to the path
@@ -3449,6 +3468,11 @@ def main():
     dump_csv(csv.writer(sys.stdout, lineterminator='\n'))
   else:
     dump_html()
+=======
+  """Old main() calls warn.warn."""
+  os.environ['PYTHONPATH'] = os.path.dirname(os.path.abspath(__file__))
+  subprocess.check_call(['/usr/bin/python3', '-m', 'warn.warn'] + sys.argv[1:])
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 
 # Run main function if warn.py is the main program.

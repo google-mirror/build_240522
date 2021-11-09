@@ -33,8 +33,91 @@ else
 endif
 endif
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+installed_notice_file :=
+
+is_container:=$(strip $(LOCAL_MODULE_IS_CONTAINER))
+ifeq (,$(is_container))
+ifneq (,$(strip $(filter %.zip %.tar %.tgz %.tar.gz %.apk %.img %.srcszip %.apex, $(LOCAL_BUILT_MODULE))))
+is_container:=true
+else
+is_container:=false
+endif
+else ifneq (,$(strip $(filter-out true false,$(is_container))))
+$(error Unrecognized value '$(is_container)' for LOCAL_MODULE_IS_CONTAINER)
+endif
+
+ifeq (true,$(is_container))
+# Include shared libraries' notices for "container" types, but not for binaries etc.
+notice_deps := \
+    $(strip \
+        $(foreach d, \
+            $(LOCAL_REQUIRED_MODULES) \
+            $(LOCAL_STATIC_LIBRARIES) \
+            $(LOCAL_WHOLE_STATIC_LIBRARIES) \
+            $(LOCAL_SHARED_LIBRARIES) \
+            $(LOCAL_DYLIB_LIBRARIES) \
+            $(LOCAL_RLIB_LIBRARIES) \
+            $(LOCAL_PROC_MACRO_LIBRARIES) \
+            $(LOCAL_HEADER_LIBRARIES) \
+            $(LOCAL_STATIC_JAVA_LIBRARIES) \
+            $(LOCAL_JAVA_LIBRARIES) \
+            $(LOCAL_JNI_SHARED_LIBRARIES) \
+            ,$(subst :,_,$(d)):static \
+        ) \
+    )
+else
+notice_deps := \
+    $(strip \
+        $(foreach d, \
+            $(LOCAL_REQUIRED_MODULES) \
+            $(LOCAL_STATIC_LIBRARIES) \
+            $(LOCAL_WHOLE_STATIC_LIBRARIES) \
+            $(LOCAL_RLIB_LIBRARIES) \
+            $(LOCAL_PROC_MACRO_LIBRARIES) \
+            $(LOCAL_HEADER_LIBRARIES) \
+            $(LOCAL_STATIC_JAVA_LIBRARIES) \
+            ,$(subst :,_,$(d)):static \
+        )$(foreach d, \
+            $(LOCAL_SHARED_LIBRARIES) \
+            $(LOCAL_DYLIB_LIBRARIES) \
+            $(LOCAL_JAVA_LIBRARIES) \
+            $(LOCAL_JNI_SHARED_LIBRARIES) \
+            ,$(subst :,_,$(d)):dynamic \
+        ) \
+    )
+endif
+ifeq ($(LOCAL_IS_HOST_MODULE),true)
+notice_deps := $(strip $(notice_deps) $(foreach d,$(LOCAL_HOST_REQUIRED_MODULES),$(subst :,_,$(d)):static))
+else
+notice_deps := $(strip $(notice_deps) $(foreach d,$(LOCAL_TARGET_REQUIRED_MODULES),$(subst :,_,$(d)):static))
+endif
+
+local_path := $(LOCAL_PATH)
+
+ifdef my_register_name
+ALL_MODULES.$(my_register_name).LICENSE_PACKAGE_NAME := $(strip $(license_package_name))
+ALL_MODULES.$(my_register_name).MODULE_TYPE := $(strip $(ALL_MODULES.$(my_register_name).MODULE_TYPE) $(LOCAL_MODULE_TYPE))
+ALL_MODULES.$(my_register_name).MODULE_CLASS := $(strip $(ALL_MODULES.$(my_register_name).MODULE_CLASS) $(LOCAL_MODULE_CLASS))
+ALL_MODULES.$(my_register_name).LICENSE_KINDS := $(ALL_MODULES.$(my_register_name).LICENSE_KINDS) $(license_kinds)
+ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS := $(ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS) $(license_conditions)
+ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP := $(ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP) $(install_map)
+ALL_MODULES.$(my_register_name).NOTICE_DEPS := $(ALL_MODULES.$(my_register_name).NOTICE_DEPS) $(notice_deps)
+ALL_MODULES.$(my_register_name).IS_CONTAINER := $(strip $(filter-out false,$(ALL_MODULES.$(my_register_name).IS_CONTAINER) $(is_container)))
+ALL_MODULES.$(my_register_name).PATH := $(strip $(ALL_MODULES.$(my_register_name).PATH) $(local_path))
+endif
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 ifdef notice_file
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+ifdef my_register_name
+ALL_MODULES.$(my_register_name).NOTICES := $(ALL_MODULES.$(my_register_name).NOTICES) $(notice_file)
+endif
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 # This relies on the name of the directory in PRODUCT_OUT matching where
 # it's installed on the target - i.e. system, data, etc.  This does
 # not work for root and isn't exact, but it's probably good enough for
@@ -74,12 +157,29 @@ module_installed_filename := $(patsubst $(HOST_CROSS_OUT)/%,%,$(module_installed
 
 installed_notice_file := $($(my_prefix)OUT_NOTICE_FILES)/src/$(module_installed_filename).txt
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+ifdef my_register_name
+ALL_MODULES.$(my_register_name).INSTALLED_NOTICE_FILE := $(ALL_MODULES.$(my_register_name).INSTALLED_NOTICE_FILE) $(installed_notice_file)
+ALL_MODULES.$(my_register_name).MODULE_INSTALLED_FILENAMES := $(ALL_MODULES.$(my_register_name).MODULE_INSTALLED_FILENAMES) $(module_installed_filename)
+INSTALLED_NOTICE_FILES.$(installed_notice_file).MODULE := $(my_register_name)
+else
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 $(installed_notice_file): PRIVATE_INSTALLED_MODULE := $(module_installed_filename)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+$(installed_notice_file) : PRIVATE_NOTICES := $(sort $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n))))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
-$(installed_notice_file): $(notice_file)
+$(installed_notice_file): $(foreach n,$(notice_file),$(if $(filter %:%,$(n)), $(call word-colon,1,$(n)), $(n)))
 	@echo Notice file: $< -- $@
 	$(hide) mkdir -p $(dir $@)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 	$(hide) cat $< > $@
+=======
+	$(hide) awk 'FNR==1 && NR > 1 {print "\n"} {print}' $(PRIVATE_NOTICES) > $@
+endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 ifdef LOCAL_INSTALLED_MODULE
 # Make LOCAL_INSTALLED_MODULE depend on NOTICE files if they exist

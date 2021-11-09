@@ -488,6 +488,284 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/Launcher3)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/Launcher3)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/Launcher3_intermediates)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+# Remove old merged AndroidManifest.xml location
+$(call add-clean-step, rm -rf $(TARGET_OUT_COMMON_INTERMEDIATES)/APPS/*_intermediates/AndroidManifest.xml)
+
+$(call add-clean-step, find $(PRODUCT_OUT) -type f -name "vr_hwc*" -print0 | xargs -0 rm -f)
+
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates/system/vold)
+
+# Remove product-services related files / images
+$(call add-clean-step, find $(PRODUCT_OUT) -type f -name "*product-services*" -print0 | xargs -0 rm -rf)
+$(call add-clean-step, find $(PRODUCT_OUT) -type d -name "*product-services*" -print0 | xargs -0 rm -rf)
+$(call add-clean-step, find $(PRODUCT_OUT) -type l -name "*product-services*" -print0 | xargs -0 rm -rf)
+
+# Remove obsolete recovery etc files
+$(call add-clean-step, rm -rf $(TARGET_RECOVERY_ROOT_OUT)/etc)
+
+# Remove *_OUT_INTERMEDIATE_LIBRARIES
+$(call add-clean-step, rm -rf $(addsuffix /lib,\
+$(HOST_OUT_INTERMEDIATES) $(2ND_HOST_OUT_INTERMEDIATES) \
+$(HOST_CROSS_OUT_INTERMEDIATES) $(2ND_HOST_CROSS_OUT_INTERMEDIATES) \
+$(TARGET_OUT_INTERMEDIATES) $(2ND_TARGET_OUT_INTERMEDIATES)))
+
+# Remove strip.sh intermediates to save space
+$(call add-clean-step, find $(OUT_DIR) \( -name "*.so.debug" -o -name "*.so.dynsyms" -o -name "*.so.funcsyms" -o -name "*.so.keep_symbols" -o -name "*.so.mini_debuginfo.xz" \) -print0 | xargs -0 rm -f)
+
+# Clean up old ninja files
+$(call add-clean-step, rm -f $(OUT_DIR)/build-*-dist*.ninja)
+
+$(call add-clean-step, rm -f $(HOST_OUT)/*ts/host-libprotobuf-java-*.jar)
+
+$(call add-clean-step, find $(OUT_DIR)/target/product/mainline_arm64/system -type f -name "*.*dex" -print0 | xargs -0 rm -f)
+
+# Clean up aidegen
+$(call add-clean-step, rm -f $(HOST_OUT)/bin/aidegen)
+
+# Remove perfprofd
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/perfprofd)
+
+# Remove incorrectly created directories in the source tree
+$(call add-clean-step, find system/app system/priv-app system/framework system_other -depth -type d -print0 | xargs -0 rmdir)
+$(call add-clean-step, rm -f .d)
+
+# Remove obsolete apps
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/*)
+
+# Remove corrupt generated rule due to using toybox's sed
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/.intermediates/system/core/init/generated_stub_builtin_function_map)
+
+# Clean up core JNI libraries moved to runtime apex
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libjavacore.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libopenjdk.so)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/system/lib*/libexpat.so)
+
+# Merge product_services into product
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/product_services)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product_services)
+
+# Clean up old location of hiddenapi files
+$(call add-clean-step, rm -f $(TARGET_OUT_COMMON_INTERMEDIATES)/PACKAGING/hiddenapi*)
+
+# Clean up previous default location of RROs
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/overlay)
+
+# Remove ART artifacts installed only by modules `art-runtime` and
+# `art-tools` in /system on target.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dalvikvm)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dalvikvm32)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dalvikvm64)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dex2oat)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dex2oatd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dexdiag)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dexdump)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dexlist)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dexoptanalyzer)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/dexoptanalyzerd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/oatdump)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/profman)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/profmand)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libadbconnection.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libadbconnectiond.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libart-compiler.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libartd-compiler.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libart-dexlayout.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libartd-dexlayout.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libart-disassembler.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libart.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libartd.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libartbase.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libartbased.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdexfile.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdexfiled.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdexfile_external.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdexfile_support.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdt_fd_forward.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libdt_socket.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libjdwp.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libnpt.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libopenjdkd.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libopenjdkjvm.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libopenjdkjvmd.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libopenjdkjvmti.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libopenjdkjvmtid.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libprofile.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libprofiled.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libtombstoned_client.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libvixl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libvixld.so)
+
+# Clean up old location of dexpreopted boot jars
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/dex_bootjars_input)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libnpt.so)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*)
+
+# Clean up old testcase files
+$(call add-clean-step, rm -rf $(TARGET_OUT_TESTCASES)/*)
+$(call add-clean-step, rm -rf $(HOST_OUT_TESTCASES)/*)
+$(call add-clean-step, rm -rf $(HOST_CROSS_OUT_TESTCASES)/*)
+$(call add-clean-step, rm -rf $(TARGET_OUT_DATA)/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/vts/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
+
+# Clean up old location of system_other.avbpubkey
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/security/avb/)
+
+# Clean up bufferhub files
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/hw/android.frameworks.bufferhub@1.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/android.frameworks.bufferhub@1.0-service.rc)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/super.img)
+
+$(call add-clean-step, find $(PRODUCT_OUT) -type f -name "generated_*_image_info.txt" -print0 | xargs -0 rm -f)
+
+# Clean up libicuuc.so and libicui18n.so
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libicu*)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/target/common/obj/framework.aidl)
+
+# Clean up adb_debug.propr
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/adb_debug.prop)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libjavacrypto.so)
+
+# Clean up old verity tools.
+$(call add-clean-step, rm -rf $(HOST_OUT_JAVA_LIBRARIES)/BootSignature.jar)
+$(call add-clean-step, rm -rf $(HOST_OUT_JAVA_LIBRARIES)/VeritySigner.jar)
+$(call add-clean-step, rm -rf $(HOST_OUT_EXECUTABLES)/build_verity_metadata.py)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libc_malloc*)
+
+# Clean up old location of soft OMX plugins
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libstagefright_soft*)
+
+# Move odm build.prop to /odm/etc/.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/odm/build.prop)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/odm/build.prop)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex)
+
+# Remove libcameraservice and libcamera_client from base_system
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libcameraservice.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/libcamera_client.so)
+
+# Move product and system_ext to root for emulators
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/product)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/system_ext)
+
+# link_type and jni_link_type files are no longer needed
+$(call add-clean-step, find $(OUT_DIR) -type f -name "*link_type" -print0 | xargs -0 rm -f)
+
+# import_includes and export_includes files are no longer needed
+$(call add-clean-step, find $(OUT_DIR) -type f -name "import_includes" -o -name "export_includes" -print0 | xargs -0 rm -f)
+
+# Recreate product and system_ext partitions for emulator
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*product*)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*system_ext*)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/product)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/generic*/*/system_ext)
+
+# Move GSI-specific files from /system to /system/system_ext
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/init.gsi.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/config/)
+
+# Move fuzz targets from /data/fuzz/* to /data/fuzz/<arch>/* for device, and
+# /fuzz/* to /fuzz/<arch>/* on host.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/data/fuzz/*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/data/fuzz/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/fuzz/*)
+$(call add-clean-step, rm -rf $(SOONG_OUT_DIR)/host/*/fuzz/*)
+
+# Change file layout of system_other
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system_other)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex)
+
+# Migrate preopt files to system_other for some devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/*/*app/*/oat)
+
+# Migrate preopt files from system_other for some devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system_other)
+
+# Remove Android Core Library artifacts from the system partition, now
+# that they live in the ART APEX (b/142944799).
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
+
+# Remove symlinks for VNDK apexes
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
+
+# Switch to symlinks for VNDK libs
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib*/vndk-*)
+
+# Remove Android Core Library artifacts from the system partition
+# again, as the original change removing them was reverted.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/*.jar)
+
+# Remove cas@1.1 from the vendor partition
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.cas@1.1*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.cas@1.1*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.cas@1.1*)
+
+# Remove com.android.cellbroadcast apex for Go devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.cellbroadcast.apex)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/apex/com.android.cellbroadcast)
+
+# Remove CellBroadcastLegacyApp for Go devices
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/CellBroadcastLegacyApp)
+
+# Remove MediaProvider after moving into APEX
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/MediaProvider)
+
+# The core image variant has been renamed to ""
+$(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_core*" -print0 | xargs -0 rm -rf)
+
+# Remove 'media' command
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/media)
+
+# Remove CtsShim apks from system partition, since the have been moved inside
+# the cts shim apex. Also remove the cts shim apex prebuilt since it has been
+# removed in flattened apexs configurations.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/CtsShimPrivPrebuilt)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/CtsShimPrebuilt)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/apex/com.android.apex.cts.shim.apex)
+
+# Remove vendor and recovery variants, the directory name has changed.
+$(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_recovery*" -print0 | xargs -0 rm -rf)
+$(call add-clean-step, find $(SOONG_OUT_DIR)/.intermediates -type d -name "android_*_vendor*" -print0 | xargs -0 rm -rf)
+
+# Remove PermissionController after moving into APEX
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/*PermissionController)
+
+# Clean up VTS-Core and VTS10 related artifacts.
+$(call add-clean-step, rm -rf $(HOST_OUT)/vts-core/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-core-tradefed.jar)
+$(call add-clean-step, rm -rf $(HOST_OUT)/vts10/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts10-tradefed.jar)
+# Clean up VTS again as VTS-Core will be renamed to VTS 
+$(call add-clean-step, rm -rf $(HOST_OUT)/vts/*)
+$(call add-clean-step, rm -rf $(HOST_OUT)/framework/vts-tradefed.jar)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/default.prop)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/prop.default)
+
+# Workaround for Soong not being able to rebuild the host binary if its
+# JNI dependencies change: b/170389375
+$(call add-clean-step, rm -rf $(OUT_DIR)/soong/host/*/lib*/libconscrypt_openjdk_jni.so)
+# vendor-ramdisk renamed to vendor_ramdisk
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor-ramdisk)
+
+# Common R directory has been removed.
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/common/R)
+
+# Most of SOONG_HOST_OUT_EXECUTABLES has been moved to HOST_OUT_EXECUTABLES
+$(call add-clean-step, rm -rf $(SOONG_HOST_OUT))
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************

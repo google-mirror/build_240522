@@ -24,3 +24,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
 PRODUCT_NAME := generic
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+
+allowed_list := product_manifest.xml
+
+# TODO(b/182105280): When ART prebuilts are used in this product, Soong doesn't
+# produce any Android.mk entries for them. Exclude them until that problem is
+# fixed.
+allowed_list += com.android.art com.android.art.debug
+
+$(call enforce-product-packages-exist,$(allowed_list))
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

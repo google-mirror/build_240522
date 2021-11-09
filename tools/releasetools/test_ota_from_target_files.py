@@ -23,15 +23,33 @@ import zipfile
 
 import common
 import test_utils
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+from ota_utils import (
+    BuildLegacyOtaMetadata, CalculateRuntimeDevicesAndFingerprints,
+    ConstructOtaApexInfo, FinalizeMetadata, GetPackageMetadata, PropertyFiles)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 from ota_from_target_files import (
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
     GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
+=======
+    _LoadOemDicts, AbOtaPropertyFiles,
+    GetTargetFilesZipForCustomImagesUpdates,
+    GetTargetFilesZipForPartialUpdates,
+    GetTargetFilesZipForSecondaryImages,
+    GetTargetFilesZipWithoutPostinstallConfig,
+    Payload, PayloadSigner, POSTINSTALL_CONFIG,
+    StreamingPropertyFiles, AB_PARTITIONS)
+from apex_utils import GetApexInfoFromTargetFiles
+from test_utils import PropertyFilesTestCase
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 
-def construct_target_files(secondary=False):
+def construct_target_files(secondary=False, compressedApex=False):
   """Returns a target-files.zip file for generating OTA packages."""
   target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
   with zipfile.ZipFile(target_files, 'w') as target_files_zip:
@@ -64,6 +82,11 @@ def construct_target_files(secondary=False):
     if secondary:
       target_files_zip.writestr('IMAGES/system_other.img',
                                 os.urandom(len("system_other")))
+
+    if compressedApex:
+      apex_file_name = 'com.android.apex.compressed.v1.capex'
+      apex_file = os.path.join(test_utils.get_current_dir(), apex_file_name)
+      target_files_zip.write(apex_file, 'SYSTEM/apex/' + apex_file_name)
 
   return target_files
 
@@ -473,6 +496,7 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     metadata = GetPackageMetadata(target_info)
     self.assertDictEqual(
         {
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
             'ota-type' : 'BLOCK',
             'ota-wipe' : 'yes',
             'post-build' : 'build-fingerprint-target',
@@ -481,6 +505,79 @@ class OtaFromTargetFilesTest(unittest.TestCase):
             'post-security-patch-level' : '2017-12-01',
             'post-timestamp' : '1500000000',
             'pre-device' : 'product-device',
+=======
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'ota-wipe': 'yes',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
+        },
+        metadata)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetApexInfoFromTargetFiles(self):
+    target_files = construct_target_files(compressedApex=True)
+    apex_infos = GetApexInfoFromTargetFiles(target_files, 'system')
+    self.assertEqual(len(apex_infos), 1)
+    self.assertEqual(apex_infos[0].package_name, "com.android.apex.compressed")
+    self.assertEqual(apex_infos[0].version, 1)
+    self.assertEqual(apex_infos[0].is_compressed, True)
+    # Compare the decompressed APEX size with the original uncompressed APEX
+    original_apex_name = 'com.android.apex.compressed.v1_original.apex'
+    original_apex_filepath = os.path.join(
+        test_utils.get_current_dir(), original_apex_name)
+    uncompressed_apex_size = os.path.getsize(original_apex_filepath)
+    self.assertEqual(apex_infos[0].decompressed_size, uncompressed_apex_size)
+
+  @staticmethod
+  def construct_tf_with_apex_info(infos):
+    apex_metadata_proto = ota_metadata_pb2.ApexMetadata()
+    apex_metadata_proto.apex_info.extend(infos)
+
+    output = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(output, 'w') as zfp:
+      common.ZipWriteStr(zfp, "META/apex_info.pb",
+                         apex_metadata_proto.SerializeToString())
+    return output
+
+  def test_ConstructOtaApexInfo_incremental_package(self):
+    infos = [ota_metadata_pb2.ApexInfo(package_name='com.android.apex.1',
+                                       version=1000, is_compressed=False),
+             ota_metadata_pb2.ApexInfo(package_name='com.android.apex.2',
+                                       version=2000, is_compressed=True)]
+    target_file = self.construct_tf_with_apex_info(infos)
+
+    with zipfile.ZipFile(target_file) as target_zip:
+      info_bytes = ConstructOtaApexInfo(target_zip, source_file=target_file)
+    apex_metadata_proto = ota_metadata_pb2.ApexMetadata()
+    apex_metadata_proto.ParseFromString(info_bytes)
+
+    info_list = apex_metadata_proto.apex_info
+    self.assertEqual(2, len(info_list))
+    self.assertEqual('com.android.apex.1', info_list[0].package_name)
+    self.assertEqual(1000, info_list[0].version)
+    self.assertEqual(1000, info_list[0].source_version)
+
+  def test_GetPackageMetadata_retrofitDynamicPartitions(self):
+    target_info = common.BuildInfo(self.TEST_TARGET_INFO_DICT, None)
+    common.OPTIONS.retrofit_dynamic_partitions = True
+    metadata = self.GetLegacyOtaMetadata(target_info)
+    self.assertDictEqual(
+        {
+            'ota-retrofit-dynamic-partitions': 'yes',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1500000000',
+            'pre-device': 'product-device',
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
         },
         metadata)
 
@@ -514,9 +611,18 @@ class OtaFromTargetFilesTest(unittest.TestCase):
     common.OPTIONS.incremental_source = ''
     common.OPTIONS.downgrade = True
     common.OPTIONS.wipe_user_data = True
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
     metadata = GetPackageMetadata(target_info, source_info)
+=======
+    common.OPTIONS.spl_downgrade = True
+    metadata = self.GetLegacyOtaMetadata(target_info, source_info)
+    # Reset spl_downgrade so other tests are unaffected
+    common.OPTIONS.spl_downgrade = False
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
     self.assertDictEqual(
         {
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
             'ota-downgrade' : 'yes',
             'ota-type' : 'BLOCK',
             'ota-wipe' : 'yes',
@@ -528,6 +634,21 @@ class OtaFromTargetFilesTest(unittest.TestCase):
             'pre-device' : 'product-device',
             'pre-build' : 'build-fingerprint-source',
             'pre-build-incremental' : 'build-version-incremental-source',
+=======
+            'ota-downgrade': 'yes',
+            'ota-type': 'BLOCK',
+            'ota-required-cache': '0',
+            'ota-wipe': 'yes',
+            'post-build': 'build-fingerprint-target',
+            'post-build-incremental': 'build-version-incremental-target',
+            'post-sdk-level': '27',
+            'post-security-patch-level': '2017-12-01',
+            'post-timestamp': '1400000000',
+            'pre-device': 'product-device',
+            'pre-build': 'build-fingerprint-source',
+            'pre-build-incremental': 'build-version-incremental-source',
+            'spl-downgrade': 'yes',
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
         },
         metadata)
 
@@ -827,6 +948,11 @@ class StreamingPropertyFilesTest(PropertyFilesTest):
         property_files.required)
     self.assertEqual(
         (
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+            'apex_info.pb',
+            'care_map.pb',
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
             'care_map.txt',
             'compatibility.zip',
         ),
@@ -924,6 +1050,11 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
         property_files.required)
     self.assertEqual(
         (
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+            'apex_info.pb',
+            'care_map.pb',
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
             'care_map.txt',
             'compatibility.zip',
         ),

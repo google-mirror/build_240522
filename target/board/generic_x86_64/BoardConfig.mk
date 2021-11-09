@@ -16,7 +16,32 @@ TARGET_2ND_CPU_ABI := x86
 TARGET_2ND_ARCH := x86
 TARGET_2ND_ARCH_VARIANT := x86_64
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 TARGET_USES_64_BIT_BINDER := true
+=======
+include build/make/target/board/BoardConfigGsiCommon.mk
+
+ifdef BUILDING_GSI
+include build/make/target/board/BoardConfigGkiCommon.mk
+
+BOARD_KERNEL-5.4_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_KERNEL-5.10-ALLSYMS_BOOTIMAGE_PARTITION_SIZE := 67108864
+
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
+
+BOARD_KERNEL_BINARIES := \
+    kernel-5.10 \
+
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+BOARD_KERNEL_BINARIES += \
+    kernel-5.10-allsyms \
+
+endif
+
+else # BUILDING_GSI
+include build/make/target/board/BoardConfigEmuCommon.mk
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # The IA emulator (qemu) uses the Goldfish devices
 HAVE_HTC_AUDIO_DRIVER := true
@@ -96,6 +121,10 @@ WIFI_DRIVER_FW_PATH_PARAM   := "/dev/null"
 WIFI_DRIVER_FW_PATH_STA     := "/dev/null"
 WIFI_DRIVER_FW_PATH_AP      := "/dev/null"
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # Enable A/B update
 TARGET_NO_RECOVERY := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+=======
+endif # BUILDING_GSI
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)

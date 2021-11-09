@@ -182,6 +182,28 @@ TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+# The directory used for optional partitions depend on the BoardConfig, so
+# they're defined to placeholder values here and swapped after reading the
+# BoardConfig, to be either the partition dir, or a subdir within 'system'.
+_vendor_path_placeholder := ||VENDOR-PATH-PH||
+_product_path_placeholder := ||PRODUCT-PATH-PH||
+_system_ext_path_placeholder := ||SYSTEM_EXT-PATH-PH||
+_odm_path_placeholder := ||ODM-PATH-PH||
+_vendor_dlkm_path_placeholder := ||VENDOR_DLKM-PATH-PH||
+_odm_dlkm_path_placeholder := ||ODM_DLKM-PATH-PH||
+TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+TARGET_COPY_OUT_VENDOR_RAMDISK := vendor_ramdisk
+TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
+# TODO(b/135957588) TARGET_COPY_OUT_PRODUCT_SERVICES will copy the target to
+# product
+TARGET_COPY_OUT_PRODUCT_SERVICES := $(_product_path_placeholder)
+TARGET_COPY_OUT_SYSTEM_EXT := $(_system_ext_path_placeholder)
+TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
+TARGET_COPY_OUT_VENDOR_DLKM := $(_vendor_dlkm_path_placeholder)
+TARGET_COPY_OUT_ODM_DLKM := $(_odm_dlkm_path_placeholder)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
 # Returns the non-sanitized version of the path provided in $1.
 define get_non_asan_path
@@ -213,6 +235,7 @@ TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
 #################################################################
 # Set up minimal BOOTCLASSPATH list of jars to build/execute
 # java code with dalvikvm/art.
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 TARGET_CORE_JARS := core-oj core-libart conscrypt okhttp bouncycastle apache-xml
 ifeq ($(EMMA_INSTRUMENT),true)
   ifneq ($(EMMA_INSTRUMENT_STATIC),true)
@@ -223,6 +246,23 @@ ifeq ($(EMMA_INSTRUMENT),true)
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 HOST_CORE_JARS := $(addsuffix -hostdex,$(TARGET_CORE_JARS))
+=======
+# Jars present in the ART apex. These should match exactly the list of Java
+# libraries in art-bootclasspath-fragment. The APEX variant name
+# (com.android.art) is the same regardless which Soong module provides the ART
+# APEX. See the long comment in build/soong/java/dexprepopt_bootjars.go for
+# details.
+ART_APEX_JARS := \
+    com.android.art:core-oj \
+    com.android.art:core-libart \
+    com.android.art:okhttp \
+    com.android.art:bouncycastle \
+    com.android.art:apache-xml
+# With EMMA_INSTRUMENT_FRAMEWORK=true the Core libraries depend on jacoco.
+ifeq (true,$(EMMA_INSTRUMENT_FRAMEWORK))
+  ART_APEX_JARS += com.android.art:jacocoagent
+endif
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 #################################################################
 
 # Read the product specs so we can get TARGET_DEVICE and other

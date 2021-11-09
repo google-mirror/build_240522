@@ -4,8 +4,24 @@
 // Zip alignment tool
 //
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 cc_binary_host {
     name: "zipalign",
+=======
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_defaults {
+    name: "zipalign_defaults",
+    target: {
+        windows: {
+            host_ldlibs: ["-lpthread"],
+            enabled: true,
+        },
+    },
+}
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 
     srcs: [
         "ZipAlign.cpp",

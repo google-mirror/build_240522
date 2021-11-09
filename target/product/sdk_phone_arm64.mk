@@ -34,9 +34,31 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk_base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_arm64/device.mk)
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 # AOSP emulator images build the AOSP messaging app.
 # Google API images override with the Google API app.
 # See vendor/google/products/sdk_google_phone_*.mk
+=======
+#
+# All components inherited here go to system_ext image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
+
+#
+# All components inherited here go to product image
+#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
+
+#
+# All components inherited here go to vendor or vendor_boot image
+#
+$(call inherit-product-if-exists, device/generic/goldfish/arm64-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_arm64/device.mk)
+
+# keep this apk for sdk targets for now
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 PRODUCT_PACKAGES += \
     messaging
 
@@ -45,5 +67,9 @@ PRODUCT_BRAND := Android
 PRODUCT_NAME := sdk_phone_arm64
 PRODUCT_DEVICE := generic_arm64
 PRODUCT_MODEL := Android SDK built for arm64
+# Disable <uses-library> checks for SDK product. It lacks some libraries (e.g.
+# RadioConfigLib), which makes it impossible to translate their module names to
+# library name, so the check fails.
+PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 

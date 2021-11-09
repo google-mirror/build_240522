@@ -192,7 +192,9 @@ endif
 
 #######################################
 # defines built_odex along with rule to install odex
+my_manifest_or_apk := $(full_android_manifest)
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
+my_manifest_or_apk :=
 #######################################
 
 # Make sure there's something to build.
@@ -274,8 +276,7 @@ $(full_classes_turbine_jar): \
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_header_jarjar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_header_jarjar): $(full_classes_turbine_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo Header JarJar: $@
-	$(hide) $(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
+	$(call transform-jarjar)
 else
 full_classes_header_jarjar := $(full_classes_turbine_jar)
 endif
@@ -352,8 +353,7 @@ endif
 ifneq ($(strip $(LOCAL_JARJAR_RULES)),)
 $(full_classes_jarjar_jar): PRIVATE_JARJAR_RULES := $(LOCAL_JARJAR_RULES)
 $(full_classes_jarjar_jar): $(full_classes_processed_jar) $(LOCAL_JARJAR_RULES) | $(JARJAR)
-	@echo JarJar: $@
-	$(hide) $(JAVA) -jar $(JARJAR) process $(PRIVATE_JARJAR_RULES) $< $@
+	$(call transform-jarjar)
 else
 full_classes_jarjar_jar := $(full_classes_processed_jar)
 endif
@@ -503,11 +503,26 @@ extra_input_jar :=
 endif
 
 ifneq ($(filter obfuscation,$(LOCAL_PROGUARD_ENABLED)),)
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
 ifneq ($(USE_R8),true)
   $(full_classes_proguard_jar): .KATI_IMPLICIT_OUTPUTS := $(proguard_dictionary)
 else
   $(built_dex_intermediate): .KATI_IMPLICIT_OUTPUTS := $(proguard_dictionary)
 endif
+=======
+  $(built_dex_intermediate): .KATI_IMPLICIT_OUTPUTS := $(proguard_dictionary) $(proguard_configuration)
+
+  # Make a rule to copy the proguard_dictionary to a packaging directory.
+  $(eval $(call copy-one-file,$(proguard_dictionary),\
+    $(call local-packaging-dir,proguard_dictionary)/proguard_dictionary))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),\
+    $(call local-packaging-dir,proguard_dictionary)/proguard_dictionary)
+
+  $(eval $(call copy-one-file,$(full_classes_pre_proguard_jar),\
+    $(call local-packaging-dir,proguard_dictionary)/classes.jar))
+  $(call add-dependency,$(LOCAL_BUILT_MODULE),\
+    $(call local-packaging-dir,proguard_dictionary)/classes.jar)
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 endif
 
 # If R8 is not enabled run Proguard.

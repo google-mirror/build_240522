@@ -12,6 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+<<<<<<< HEAD   (3619c8 Merge "Merge empty history for sparse-7625297-L4670000095071)
+=======
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "build_make_license"
+    // to get the below license kinds:
+    //   legacy_restricted
+    default_applicable_licenses: ["build_make_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-fs_config",
+    pkgPath: "android/soong/fs_config",
+    deps: [
+        "soong-android",
+        "soong-genrule",
+    ],
+    srcs: [
+        "fs_config.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+>>>>>>> BRANCH (77b382 Merge "Version bump to AAQ4.211109.001 [core/build_id.mk]" i)
 cc_binary_host {
     name: "fs_config",
     srcs: ["fs_config.c"],
