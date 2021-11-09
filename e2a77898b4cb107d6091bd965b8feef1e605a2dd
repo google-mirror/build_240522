@@ -33,6 +33,24 @@
       "message": "Unless you need to expose this to Android.mk files, I\u0027d just embed the path in the Makefile at use time (And $(BUILD_EXECUTABLE_SUFFIX) is always empty for this path -- it\u0027s only different for Windows, and we always cross-compile for that, so it HOST_OUT_EXECUTABLES will never be Windows).",
       "revId": "e2a77898b4cb107d6091bd965b8feef1e605a2dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44dead7a_33c187cb",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1850729
+      },
+      "writtenOn": "2021-11-09T18:59:11Z",
+      "side": 1,
+      "message": "Thanks Dan, I moved this to Makefile, can you help review again?",
+      "parentUuid": "e6c81e6e_7ceff676",
+      "revId": "e2a77898b4cb107d6091bd965b8feef1e605a2dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
