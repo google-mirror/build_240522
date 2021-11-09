@@ -146,6 +146,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dbd5af6f_6c1b111d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-09T17:21:22Z",
+      "side": 1,
+      "message": "Thanks for the explanation!",
+      "parentUuid": "0c98978b_751eff69",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f6342d3_709837a9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
