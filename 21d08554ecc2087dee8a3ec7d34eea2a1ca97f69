@@ -175,6 +175,30 @@
       },
       "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8497220_eb6cea4a",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T05:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea428413_5ed4875f",
+      "range": {
+        "startLine": 489,
+        "startChar": 7,
+        "endLine": 489,
+        "endChar": 44
+      },
+      "revId": "21d08554ecc2087dee8a3ec7d34eea2a1ca97f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
