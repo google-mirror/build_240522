@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000761ad_3463c2f8",
+        "filename": "core/node_fns.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1092759
+      },
+      "writtenOn": "2021-11-09T02:05:13Z",
+      "side": 1,
+      "message": "Missing last parameter could cause product single value variables failed issue",
+      "revId": "c851317faa7f4fc4f9e3293c8c08e57683a59a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
