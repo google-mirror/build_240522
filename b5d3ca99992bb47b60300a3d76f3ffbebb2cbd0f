@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197c935d_04dcc37d",
+        "filename": "target/product/virtual_ab_ota/compression_with_user_snapshots.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-11-09T22:22:04Z",
+      "side": 1,
+      "message": "Do we plan on removing this file once the old snapuserd is gone? It seems like we\u0027d have to merge this property into compression.mk and compression_with_xor.mk for those to continue working, and then we wouldn\u0027t need this file anymore.\n\nIf so, you could also look into enabling dogfood by adding this property directly to the device configs instead. I don\u0027t have a strong opinion though.",
+      "revId": "b5d3ca99992bb47b60300a3d76f3ffbebb2cbd0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
