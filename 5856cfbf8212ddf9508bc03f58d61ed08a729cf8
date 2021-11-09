@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa11ef90_93ee1cac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-11-09T19:02:09Z",
+      "side": 1,
+      "message": "Here is the workaround cl in case we need to unblock droidfood",
+      "revId": "5856cfbf8212ddf9508bc03f58d61ed08a729cf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
