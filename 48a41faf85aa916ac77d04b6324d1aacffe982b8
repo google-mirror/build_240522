@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aab4366_018dbcab",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T00:08:51Z",
+      "side": 1,
+      "message": "It\u0027s a source location, included in the change aosp/1856221.",
+      "parentUuid": "cc15f4b1_9cc9e05b",
+      "range": {
+        "startLine": 544,
+        "startChar": 30,
+        "endLine": 544,
+        "endChar": 74
+      },
+      "revId": "48a41faf85aa916ac77d04b6324d1aacffe982b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77339c74_79611e89",
