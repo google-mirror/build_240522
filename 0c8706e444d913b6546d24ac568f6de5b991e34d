@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9b85f6_2a29e5d0",
+        "filename": "tests/run.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-10T01:06:08Z",
+      "side": 1,
+      "message": "instead of all this, can\u0027t you just have\nassert_eq(\"xyz\", rblf.soong_config_get(\"NS2\", \"v3\")\nand also a check for non-existent Soong namespace variable.",
+      "revId": "0c8706e444d913b6546d24ac568f6de5b991e34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
