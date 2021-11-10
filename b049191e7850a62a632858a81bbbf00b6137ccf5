@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200f8010_de1172f8",
+        "filename": "tools/releasetools/target_files_diff.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-10T18:30:09Z",
+      "side": 1,
+      "message": "Thanks for doing this! An alternative would\u0027ve been to use `mode\u003d\u0027w\u0027` here to be consistent with oldfp and the usages of strings instead of bytes elsewhere, but this is fine.",
+      "revId": "b049191e7850a62a632858a81bbbf00b6137ccf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
