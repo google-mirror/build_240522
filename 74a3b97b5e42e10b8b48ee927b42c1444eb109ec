@@ -69,6 +69,24 @@
       "parentUuid": "3555cdee_bd70808c",
       "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08df3515_a73a2ee6",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-10T00:59:37Z",
+      "side": 1,
+      "message": "The code generated for \nifeq (,expr)\n\nis\nif not expr:",
+      "parentUuid": "d8c50dc7_1cfb9e0a",
+      "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
