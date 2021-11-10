@@ -39,6 +39,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c0382e_266499ed",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-10T22:58:13Z",
+      "side": 1,
+      "message": "\u003e This requires the Ninja files to be present, doesn\u0027t it? (i.e. it doesn\u0027t work on a clean checkout)\nThats a great catch, I had not realized about this circular dependency on clean checkouts.\n\n\n\u003e Would it be possible to instead standardize on the path names of the update API scripts so that the Ninja invocation in line 29 is\nI was thinking about that, but felt that this might the implementation a little fragile. As an example, if we refactor the update-api stuff in build/soong, it might affect update-api.sh in build/make \n\n\n\u003e m \"$@\"\nRunning the phony update-api targets directly would print the warning message to use tool/scripts/update-api.sh (even though you are running tools/scripts/update-api.sh!). Hence I thought I would build the underlying `update_script_from_target` instead.\nAs you mentioned, this will not work in a clean checkout as of now\n\n\n\u003e let the Ninja files call this script with the appropriate arguments directly\nI really like this idea. This provides continuity between updating the API from within the build and from outside the build, using the same entrypoint.\n\n\n\u003e if you can come up with an algorithm to convert the target names to input/output API file names\nIs this idea different from the mapping of *update-api --\u003e *update-api-script via something like this which you suggested previously\n```\nfunction update_script_from_target() {\n  echo $1 | sed \u0027s/.../.../\u0027  # Some simple regular expression\n}\n```",
+      "parentUuid": "9841ccc3_bb6725f5",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
