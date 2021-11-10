@@ -75,6 +75,7 @@ PRODUCT_PACKAGES += \
     CtsShimPrivPrebuilt \
     debuggerd\
     device_config \
+    diced \
     dmctl \
     dnsmasq \
     DownloadProvider \
