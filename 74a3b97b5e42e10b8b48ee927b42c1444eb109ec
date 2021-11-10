@@ -87,6 +87,24 @@
       "parentUuid": "d8c50dc7_1cfb9e0a",
       "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbfcdcd7_404a74f2",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-10T01:02:13Z",
+      "side": 1,
+      "message": "Ok, done.",
+      "parentUuid": "08df3515_a73a2ee6",
+      "revId": "74a3b97b5e42e10b8b48ee927b42c1444eb109ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
