@@ -16,6 +16,24 @@
       "message": "check_target_files_vintf uses \"UnzipTemp\" which calls `unzip`. Where does unzip come from? Is it a prebuilt or is it from the environment?\n\n",
       "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49bc68db_26c7279b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-11-11T21:08:53Z",
+      "side": 1,
+      "message": "Unresolving for better visibility.",
+      "parentUuid": "0e41b2c9_32ae2df6",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
