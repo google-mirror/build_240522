@@ -63,6 +63,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd157965_cd5cc0ec",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-11T08:16:58Z",
+      "side": 1,
+      "message": "\u003e \u003e This requires the Ninja files to be present, doesn\u0027t it? (i.e. it doesn\u0027t work on a clean checkout)\n\u003e Thats a great catch, I had not realized about this circular dependency on clean checkouts.\n\u003e \n\u003e \n\u003e \u003e Would it be possible to instead standardize on the path names of the update API scripts so that the Ninja invocation in line 29 is\n\u003e I was thinking about that, but felt that this might the implementation a little fragile. As an example, if we refactor the update-api stuff in build/soong, it might affect update-api.sh in build/make \nYeah, that\u0027s the ugly part of it. Weigh that against the complexity of transmitting the information in a \"principled\" way. In google3, we have this thingy where you can have comments that make the linter complain if you change one line of code but not another.\n\n\n\u003e \n\u003e \n\u003e \u003e m \"$@\"\n\u003e Running the phony update-api targets directly would print the warning message to use tool/scripts/update-api.sh (even though you are running tools/scripts/update-api.sh!). Hence I thought I would build the underlying `update_script_from_target` instead.\n\u003e As you mentioned, this will not work in a clean checkout as of now\n\u003e \n\u003e \n\u003e \u003e let the Ninja files call this script with the appropriate arguments directly\n\u003e I really like this idea. This provides continuity between updating the API from within the build and from outside the build, using the same entrypoint.\n:thumbs up\n\n\u003e \n\u003e \n\u003e \u003e if you can come up with an algorithm to convert the target names to input/output API file names\n\u003e Is this idea different from the mapping of *update-api --\u003e *update-api-script via something like this which you suggested previously\n\u003e ```\n\u003e function update_script_from_target() {\n\u003e   echo $1 | sed \u0027s/.../.../\u0027  # Some simple regular expression\n\u003e }\n\u003e ```\nIt\u0027s mostly the same, except that one is about the public API .txt files under $OUT_DIR that are copied to the source tree and the other is about the update scripts.\n\nI think there are two options:\n\nA. Put the .txt files under $OUT_DIR at some very simple path (if Soong/Make can do that), e.g. out/soong/apitxts/\u003cfile\u003e and put in scary comments to both places where that is specified and a test case\n\nB. Use the trick to call \"ninja -t query\" above tot determine them. Then it would look like this:\n\n1. User calls \"update_api.sh foobar\"\n2. update_api.sh calls \"m foobar-txt-files\"\n3. update_api.sh calls \"ninja -t query foobar-txt-files\" and digs the name of the .txt file under $OUT_DIR by shell hackery and under the source tree... dunno, either by transforming the path of the .txt file under $OUT_DIR or by reading a file that Ninja conveniently writes somewhere in a dependency of foobar-txt-files?\n4. update_api.sh copies the files to the source tree\n\nOr, with the legacy method:\n1. User calls \"m foobar-update-current-api\"\n2. foobar-update-current-api has a dependency on foobar-txt-files\n3. foobar-update-current-api calls update_api.sh --do_not_run_m foobar\n4. update_api.sh emits a big fat warning about being called the wrong way\n5. update_api.sh does the same thing as when called directly except without the \"m\" call (i.e. steps (3) and (4) above). This implies that \"ninja -t query -f \u003cfile\u003e\" works also when called from \"ninja -f \u003cthe same file\u003e\", but I hope it does?\n\n...or just make the legacy method error out and print a command for the user to execute. That\u0027s way less headache.",
+      "parentUuid": "e2c0382e_266499ed",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
