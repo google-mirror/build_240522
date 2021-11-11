@@ -225,6 +225,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec076fd8_68435bdb",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-11T16:14:15Z",
+      "side": 1,
+      "message": "\u003e Why isn\u0027t this in runtime_libart or default_art_config ?\n\nI reasoned it\u0027s a setting for framework more than ART, but it\u0027s not really clear since it\u0027s in the intersection of both. Moved to runtime_libart.mk.\n\n\u003e Under what conditions should this be in the list vs not?\n\nEssentially it needs to be present if a system image is built (and assuming frameworks/base exists). The comment above isn\u0027t clear enough?",
+      "parentUuid": "3b0d1b8f_59aff1fc",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 5
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afb74904_746d9f41",
@@ -286,6 +310,30 @@
       "side": 1,
       "message": "is this file something that should be part of the ART SDK?",
       "parentUuid": "5b98e2bc_848db7c6",
+      "range": {
+        "startLine": 75,
+        "startChar": 50,
+        "endLine": 75,
+        "endChar": 87
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0817235_e26c01d9",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-11T16:14:15Z",
+      "side": 1,
+      "message": "If we do full source separation then yes, this and maybe other ART-specific settings like the dex2oat properties below ought to move to a product mk file in the SDK.",
+      "parentUuid": "d2683fb5_a549a038",
       "range": {
         "startLine": 75,
         "startChar": 50,
