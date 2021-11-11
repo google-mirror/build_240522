@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee73fc33_3d45a216",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:29:51Z",
+      "side": 1,
+      "message": "We may need it again for other purposes, but sounds good to revert until then.",
+      "revId": "b73f8dcc05b64f1dd993279d00fcf07025dac37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
