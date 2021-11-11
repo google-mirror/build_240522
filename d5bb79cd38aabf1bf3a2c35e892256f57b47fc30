@@ -16,6 +16,23 @@
       "message": "I no longer work on this project. Please use the \"Suggest owners\" button to find the up-to-date owners/reviewers.",
       "revId": "d5bb79cd38aabf1bf3a2c35e892256f57b47fc30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58933a25_a8697e8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-11-11T21:12:40Z",
+      "side": 1,
+      "message": "Do we support signing recovery?",
+      "revId": "d5bb79cd38aabf1bf3a2c35e892256f57b47fc30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
