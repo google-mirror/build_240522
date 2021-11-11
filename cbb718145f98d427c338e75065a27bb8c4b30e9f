@@ -204,6 +204,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b0d1b8f_59aff1fc",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-11T15:41:39Z",
+      "side": 1,
+      "message": "Why isn\u0027t this in runtime_libart or default_art_config ? Under what conditions should this be in the list vs not?",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 5
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afb74904_746d9f41",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 2
@@ -239,6 +262,30 @@
       "side": 1,
       "message": "The condition would rather be something like\n\n  ifeq (true,$(SOONG_CONFIG_art_module_source_build))\n\nbut since there\u0027s no longer any concrete plan to build without ART sources I think it\u0027s better to dispense with it until it\u0027s an observable issue.",
       "parentUuid": "afb74904_746d9f41",
+      "range": {
+        "startLine": 75,
+        "startChar": 50,
+        "endLine": 75,
+        "endChar": 87
+      },
+      "revId": "cbb718145f98d427c338e75065a27bb8c4b30e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2683fb5_a549a038",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-11T15:41:39Z",
+      "side": 1,
+      "message": "is this file something that should be part of the ART SDK?",
+      "parentUuid": "5b98e2bc_848db7c6",
       "range": {
         "startLine": 75,
         "startChar": 50,
