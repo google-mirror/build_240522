@@ -33,6 +33,24 @@
       "message": "Do we support signing recovery?",
       "revId": "d5bb79cd38aabf1bf3a2c35e892256f57b47fc30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294e3f3d_161c89cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-11-11T21:13:06Z",
+      "side": 1,
+      "message": "Unresolving for better visibility. This is a question to xunchang@",
+      "parentUuid": "58933a25_a8697e8d",
+      "revId": "d5bb79cd38aabf1bf3a2c35e892256f57b47fc30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
