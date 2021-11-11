@@ -16,6 +16,24 @@
       "message": "Should I CP this CL to sc-gsi-dev or android12-gsi?",
       "revId": "c03658ee6a946b802df7fb16d0bf2f50612ce0fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c636d8c4_858e91bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2021-11-11T03:33:07Z",
+      "side": 1,
+      "message": "android12-gsi",
+      "parentUuid": "f94d963e_d93dce80",
+      "revId": "c03658ee6a946b802df7fb16d0bf2f50612ce0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
