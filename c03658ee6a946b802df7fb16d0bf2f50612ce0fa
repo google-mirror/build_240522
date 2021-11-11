@@ -34,6 +34,24 @@
       "parentUuid": "f94d963e_d93dce80",
       "revId": "c03658ee6a946b802df7fb16d0bf2f50612ce0fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6e029d_67ca3a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2021-11-11T03:57:13Z",
+      "side": 1,
+      "message": "Thanks. Let me CP this to android12-gsi, too.",
+      "parentUuid": "c636d8c4_858e91bb",
+      "revId": "c03658ee6a946b802df7fb16d0bf2f50612ce0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
