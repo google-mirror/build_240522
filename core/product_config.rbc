@@ -514,6 +514,18 @@ def _mkwarning(file, message = ""):
     """Prints warning."""
     rblf_log(file, "warning", message, sep = ':')
 
+def _mkconversion(loc, message):
+    """Prints a message about conversion error and stops.
+
+    If RBC_MK2RBC_CONTINUE environment variable is set,
+    the execution will continue after the message is printed.
+    """
+    if _options.mk2rbc_continue:
+        rblf_log(loc, message, sep = ':')
+    else:
+        _mkerror(loc, message)
+
+
 def _mkinfo(file, message = ""):
     """Prints info."""
     rblf_log(message)
@@ -624,6 +636,7 @@ def __get_options():
         rearrange = "",
         trace_modules = False,
         trace_variables = [],
+        mk2rbc_continue = False,
     )
     for x in getattr(rblf_cli, "RBC_OUT", "").split(","):
         if x == "sort" or x == "unique":
@@ -641,6 +654,8 @@ def __get_options():
             settings["trace_modules"] = True
         elif x != "":
             settings["trace_variables"].append(x)
+    if getattr(rblf_cli, "RBC_MK2RBC_CONTINUE", ""):
+        settings["mk2rbc_continue"] = True
     return struct(**settings)
 
 # Settings used during debugging.
@@ -668,6 +683,7 @@ rblf = struct(
     init_globals = _init_globals,
     inherit = _inherit,
     indirect = _indirect,
+    mkconversion = _mkconversion,
     mkinfo = _mkinfo,
     mkerror = _mkerror,
     mkpatsubst = _mkpatsubst,
