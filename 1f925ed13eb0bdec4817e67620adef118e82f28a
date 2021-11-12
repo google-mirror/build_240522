@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b311bc38_3e9c82cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2021-11-12T16:43:00Z",
+      "side": 1,
+      "message": "+2\u0027d because you need it.\n\nI\u0027m not sure why it is being done this way though. We have separate module types for the art primary image (bootclasspath_fragment) and the framework extension image (platform_bootclasspath) so ideally they should be being provided separately to each of them and the latter should include the former if necessary.",
+      "revId": "1f925ed13eb0bdec4817e67620adef118e82f28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
