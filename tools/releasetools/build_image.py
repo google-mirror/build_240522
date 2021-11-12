@@ -577,6 +577,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
 
   if not mkfs_output:
     mkfs_output = BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+    prop_dict["image_size"] = GetDiskUsage(out_file)
 
   # Check if there's enough headroom space available for ext4 image.
   if "partition_headroom" in prop_dict and fs_type.startswith("ext4"):
