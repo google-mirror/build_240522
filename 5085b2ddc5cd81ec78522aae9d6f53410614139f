@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba582d76_839e1967",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-11-12T05:50:25Z",
+      "side": 1,
+      "message": "This diff is a minor modification to https://android-review.googlesource.com/c/platform/build/+/1849654, I\u0027m open to amend to that diff as well, if that helps. Keeping it as separate diff for now, to make it easier for the reviewers",
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
