@@ -206,7 +206,8 @@ endif
 ifndef RBC_PRODUCT_CONFIG
 $(call import-products, $(current_product_makefile))
 else
-  $(shell build/soong/scripts/rbc-run $(current_product_makefile) \
+  # TODO(asmundak): remove RBC_MK2RBC_CONTINUE=t once everything converts.
+  $(shell build/soong/scripts/rbc-run $(current_product_makefile) RBC_MK2RBC_CONTINUE=t \
       >$(OUT_DIR)/rbctemp.mk)
   ifneq ($(.SHELLSTATUS),0)
     $(error product configuration converter failed: $(.SHELLSTATUS))
