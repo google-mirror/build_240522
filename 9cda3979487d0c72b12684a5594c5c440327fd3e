@@ -16,6 +16,24 @@
       "message": "Doing this inside build_image.py means the files will never be in $OUT/system, which means adb sync will not be able to update them.  Is that going to be a problem?",
       "revId": "9cda3979487d0c72b12684a5594c5c440327fd3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8136b970_25fa5a23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-12T06:26:07Z",
+      "side": 1,
+      "message": "I think it\u0027s intended: b/193113311#comment4 I\u0027m not sure if we need to support adb sync. I think we can revisit this later.",
+      "parentUuid": "ff241442_060cc455",
+      "revId": "9cda3979487d0c72b12684a5594c5c440327fd3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
