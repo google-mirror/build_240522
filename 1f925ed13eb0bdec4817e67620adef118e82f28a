@@ -16,6 +16,24 @@
       "message": "+2\u0027d because you need it.\n\nI\u0027m not sure why it is being done this way though. We have separate module types for the art primary image (bootclasspath_fragment) and the framework extension image (platform_bootclasspath) so ideally they should be being provided separately to each of them and the latter should include the former if necessary.",
       "revId": "1f925ed13eb0bdec4817e67620adef118e82f28a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f951678f_3da423c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-12T16:50:34Z",
+      "side": 1,
+      "message": "You mean this logic should move from this product variable in make to the BCP fragment modules in Soong? Perhaps, but that\u0027s a different cup of tea.\n\n\u003e the latter should include the former if necessary\n\nWell, even if the framework boot image depends on the primary one, it doesn\u0027t need the ART boot image profile. It\u0027s an implementation detail.",
+      "parentUuid": "b311bc38_3e9c82cb",
+      "revId": "1f925ed13eb0bdec4817e67620adef118e82f28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
