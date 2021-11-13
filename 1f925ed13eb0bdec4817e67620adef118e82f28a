@@ -52,6 +52,24 @@
       "parentUuid": "f951678f_3da423c9",
       "revId": "1f925ed13eb0bdec4817e67620adef118e82f28a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faea7b19_91723aa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-13T00:36:41Z",
+      "side": 1,
+      "message": "Yeah, it would be a bit cleaner if they are split so one specifies the boot image profile separately for each boot image. In that case wouldn\u0027t it be better to specify them in the corresponding Soong module? In make it\u0027d either have to be a separate ad-hoc product variable for each image, or else a mapping structure in a single variable, which is doable but a bit messy.\n\nI don\u0027t know of a strong reason to configure this in a product config. If it were to be necessary in some odd case then it could be done through Soong config variables.",
+      "parentUuid": "4166a27f_03185b74",
+      "revId": "1f925ed13eb0bdec4817e67620adef118e82f28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
