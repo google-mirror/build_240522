@@ -16,6 +16,24 @@
       "message": "Why are we adding the flag here? I thought the whole point of the cl was so that we would actually hit the errors.",
       "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92384645_868ac53c",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-15T17:16:28Z",
+      "side": 1,
+      "message": "Until ifeq (,$(call soong_config_get ...)) is handled, almost all configurations will fail.",
+      "parentUuid": "aac09efc_814d0bcf",
+      "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
