@@ -51,6 +51,24 @@
       "message": "\u003e Where does unzip come from? Is it a prebuilt or is it from the environment?\n\nUnless it changed between master and 11_r46/12_r12 it\u0027s coming from the environment.",
       "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a74575a_a8f5734d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-11-15T18:19:32Z",
+      "side": 1,
+      "message": "otatools.zip does not include unzip, so it has to come from environment.",
+      "parentUuid": "49bc68db_26c7279b",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
