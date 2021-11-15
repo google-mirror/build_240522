@@ -34,6 +34,42 @@
       "parentUuid": "aac09efc_814d0bcf",
       "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b0aff8_94b8d721",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-15T18:26:30Z",
+      "side": 1,
+      "message": "I think that\u0027s desirable. And the cl fixing that case is waiting for your review: aosp/1889720",
+      "parentUuid": "92384645_868ac53c",
+      "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38614a4d_c0fa6e27",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-15T18:26:30Z",
+      "side": 1,
+      "message": "I think that\u0027s desirable. And the cl fixing that case is waiting for your review: aosp/1889720",
+      "parentUuid": "92384645_868ac53c",
+      "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
