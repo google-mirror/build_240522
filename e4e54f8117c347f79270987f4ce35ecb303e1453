@@ -16,6 +16,24 @@
       "message": "__base already does this .",
       "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f75734_18fb29a5",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-15T23:31:02Z",
+      "side": 1,
+      "message": "Removed __base because it was only used internally.",
+      "parentUuid": "de49484a_656ffdaa",
+      "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
