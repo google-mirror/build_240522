@@ -16,6 +16,24 @@
       "message": "I\u0027m curious about:\n1. why frameworks/base/config/boot-image-profile.txt is not the union of the other two while it is supposed to be so according to Yan, and\n2. why compiling more methods has a negative impact on boot time, and why the impact is this much.\n\nI\u0027m fine with reverting the change if the policy is to revert first. Please keep me updated.",
       "revId": "a7e1611118bc498ff2ecc49d911a3415f269f7df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5f1805_26e590e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-15T18:21:29Z",
+      "side": 1,
+      "message": "Exactly the same questions I had on the ticket: http://b/206152027#comment3 ff",
+      "parentUuid": "e778b172_4ced701f",
+      "revId": "a7e1611118bc498ff2ecc49d911a3415f269f7df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
