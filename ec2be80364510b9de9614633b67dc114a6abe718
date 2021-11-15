@@ -87,6 +87,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754fd813_094e93c2",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-15T04:56:34Z",
+      "side": 1,
+      "message": "\u003e I think there are two options:\n\u003e A. Put the .txt files under $OUT_DIR at some very simple path (if Soong/Make can \u003e do that), e.g. out/soong/apitxts/\u003cfile\u003e and put in scary comments to both places \u003e where that is specified and a test case\n\u003e B. Use the trick to call \"ninja -t query\" above tot determine them. Then it would \u003e look like this: \n\nI am leaning towards Option A, albeit using a generated shell script as the interface between the build system and update-api.sh, instead of the txt files themselves. A generated script will look something like below, and extracting out the path of 1 .sh script is less complex that extracting the paths of 4 .txt file\n```\ncp out/soong/\u003c\u003e/current.txt pacakges/\u003c\u003e/current.txt\ncp out/soong/\u003c\u003e/removed.txt pacakges/\u003c\u003e/removed.txt\n```\n\nThen we can run the script directly during the build without using build/tools/scripts/update-api.sh\n```\nlegacy-foo-update-current-api: foo-update-current-api.sh\n  /bin/bash $^ \u0026\u0026 echo warning\n```\n\n\n\u003e ..or just make the legacy method error out and print a command for the user to\n\u003e execute. That\u0027s way less headache.\nI think that\u0027s the end goal. For the initial rollout, we want to retain the same workflow for devs. The only difference being a warning message gets printed to the screen",
+      "parentUuid": "fd157965_cd5cc0ec",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
