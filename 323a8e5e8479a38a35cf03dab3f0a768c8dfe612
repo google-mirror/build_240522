@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc24116a_2ed3a6f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-15T23:30:00Z",
+      "side": 1,
+      "message": "Why __soong_config_namespaces_key cannot be added to board config initialization?",
+      "revId": "323a8e5e8479a38a35cf03dab3f0a768c8dfe612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
