@@ -485,6 +485,17 @@ def _filter(pattern, text):
             res.append(w)
     return res
 
+def _notdir(paths):
+    """Equivalent to the GNU make function $(notdir).
+
+    Returns the name of the file at the end of each path in paths.
+    """
+    res = []
+    for w in __words(paths):
+        res.append(w[w.rfind("/")+1:])
+    return " ".join(res)
+
+
 def __mk2regex(words):
     """Returns regular expression equivalent to Make pattern."""
 
@@ -674,6 +685,7 @@ rblf = struct(
     mkwarning = _mkwarning,
     mkstrip = _mkstrip,
     mksubst = _mksubst,
+    notdir = _notdir,
     printvars = _printvars,
     printglobals = _printglobals,
     product_configuration = _product_configuration,
