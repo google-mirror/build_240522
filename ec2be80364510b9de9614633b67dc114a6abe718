@@ -111,6 +111,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d162e67_21d4cf3a",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-15T09:46:22Z",
+      "side": 1,
+      "message": "\u003e \u003e I think there are two options:\n\u003e \u003e A. Put the .txt files under $OUT_DIR at some very simple path (if Soong/Make can \u003e do that), e.g. out/soong/apitxts/\u003cfile\u003e and put in scary comments to both places \u003e where that is specified and a test case\n\u003e \u003e B. Use the trick to call \"ninja -t query\" above tot determine them. Then it would \u003e look like this: \n\u003e \n\u003e I am leaning towards Option A, albeit using a generated shell script as the interface between the build system and update-api.sh, instead of the txt files themselves. A generated script will look something like below, and extracting out the path of 1 .sh script is less complex that extracting the paths of 4 .txt file\n\u003e ```\n\u003e cp out/soong/\u003c\u003e/current.txt pacakges/\u003c\u003e/current.txt\n\u003e cp out/soong/\u003c\u003e/removed.txt pacakges/\u003c\u003e/removed.txt\n\u003e ```\nI\u0027m fine with this, but why is the shell script needed in this case? Soong can just as well generate the .txt files with the simple path and then you avoid the Shell-quoted-in-Ninja-quoted-in-Soong issue and have one fewer step to understand. IOW, in the process:\n\n1. update_api.sh calls m\n2. m results in the .txt file being at a \"guessable\" location\n3. update_api.sh copies the .txt file from the \"guessable\" location to the source tree\n\nthe shell script isn\u0027t needed, is it?\n\n\u003e \n\u003e Then we can run the script directly during the build without using build/tools/scripts/update-api.sh\n\u003e ```\n\u003e legacy-foo-update-current-api: foo-update-current-api.sh\n\u003e   /bin/bash $^ \u0026\u0026 echo warning\n\u003e ```\n\u003e \n\u003e \n\u003e \u003e ..or just make the legacy method error out and print a command for the user to\n\u003e \u003e execute. That\u0027s way less headache.\n\u003e I think that\u0027s the end goal. For the initial rollout, we want to retain the same workflow for devs. The only difference being a warning message gets printed to the screen\nYeah, the hidden assumption behind the \"error message\" plan was we don\u0027t need this step. I don\u0027t know how politically feasible that is, though.",
+      "parentUuid": "754fd813_094e93c2",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
