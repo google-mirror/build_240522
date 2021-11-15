@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee8e4e9_d5fc1a6d",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-15T23:47:47Z",
+      "side": 1,
+      "message": "This should either be repeated in _board_configuration, or make _mkdist_for_goals handle when it\u0027s not present. (I would prefer the latter)",
+      "revId": "ed9b46732843497b00abc74fa274536789bd1c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b875e428_00497240",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-15T23:47:47Z",
+      "side": 1,
+      "message": "Use __words instead of .split().",
+      "revId": "ed9b46732843497b00abc74fa274536789bd1c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
