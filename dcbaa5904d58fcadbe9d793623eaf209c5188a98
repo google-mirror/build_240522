@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62887118_cb8fb105",
+        "filename": "envsetup.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2021-11-16T17:20:19Z",
+      "side": 1,
+      "message": "Since we\u0027re adding the script to the path, instead of having it be a shell function (which I think makes sense), we should rename the script from update-api.sh to just update-api.",
+      "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935097f9_e4e7d296",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2021-11-16T17:20:19Z",
+      "side": 1,
+      "message": "This could be my inability to read bash, but where is this being the default implemented?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 41
+      },
+      "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
