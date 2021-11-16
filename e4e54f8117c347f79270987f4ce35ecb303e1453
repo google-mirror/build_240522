@@ -52,6 +52,24 @@
       "parentUuid": "53f75734_18fb29a5",
       "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61035ac1_6fcb9a41",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-16T23:13:21Z",
+      "side": 1,
+      "message": "Done.\n\nAlthough in my opinion it was better the other way.",
+      "parentUuid": "bea75390_08dd9e51",
+      "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
