@@ -34,6 +34,24 @@
       "parentUuid": "cc24116a_2ed3a6f8",
       "revId": "323a8e5e8479a38a35cf03dab3f0a768c8dfe612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "822a98cf_7ff78aee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-16T00:05:24Z",
+      "side": 1,
+      "message": "Removed soong_config_namespaces from the product configuration as well for consistency.",
+      "parentUuid": "2d0062c7_35f54776",
+      "revId": "323a8e5e8479a38a35cf03dab3f0a768c8dfe612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
