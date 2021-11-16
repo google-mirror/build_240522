@@ -70,6 +70,24 @@
       "parentUuid": "92384645_868ac53c",
       "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "738d75a0_4e932b2a",
+        "filename": "core/product_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-16T03:39:58Z",
+      "side": 1,
+      "message": "Now reverted it.",
+      "parentUuid": "92b0aff8_94b8d721",
+      "revId": "a7cffcffc3197fee376dec590e9a47816bb4281c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
