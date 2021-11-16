@@ -34,6 +34,24 @@
       "parentUuid": "de49484a_656ffdaa",
       "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea75390_08dd9e51",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-16T22:19:14Z",
+      "side": 1,
+      "message": "This looks to me backwards: __base receives a basename from path, and where it is used (including the upcoming _mkdist_for_goals) there is no need to call _notdir which make a fruitless attempt to split it argument into words. It\u0027s _notdir which should call __base.",
+      "parentUuid": "53f75734_18fb29a5",
+      "revId": "e4e54f8117c347f79270987f4ce35ecb303e1453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
