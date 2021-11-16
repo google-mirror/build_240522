@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "301c1cd1_49511de9",
+        "filename": "envsetup.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-16T19:12:14Z",
+      "side": 1,
+      "message": "Makes sense. Renaming scripts/update-api.sh to scripts/update-api",
+      "parentUuid": "62887118_cb8fb105",
+      "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "935097f9_e4e7d296",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-16T17:20:19Z",
       "side": 1,
       "message": "This could be my inability to read bash, but where is this being the default implemented?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 41
+      },
+      "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb86f0a_56ddc6ce",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-16T19:12:14Z",
+      "side": 1,
+      "message": "It is in line #4\n```\nTARGETS\u003d${@:-update-api}\n```",
+      "parentUuid": "935097f9_e4e7d296",
       "range": {
         "startLine": 12,
         "startChar": 0,

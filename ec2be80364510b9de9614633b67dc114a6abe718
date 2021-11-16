@@ -183,6 +183,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd83385_474e18c6",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-16T19:12:14Z",
+      "side": 1,
+      "message": "\u003e If update_api.sh knows the location of the shell script (it must, if I understand correctly), why can\u0027t it also know the location of the .txt files? \nI think update_api.sh knows the location of the generated .txt files in out/, but it does not know the location of the target .txt files in the source tree for the cp operation. This information is available to Soong (https://cs.android.com/android/platform/superproject/+/master:build/soong/java/droidstubs.go;l\u003d728?q\u003dupdateCurrentApiTime), and it can dump that information to the generated script\n```\n$ cat out/soong/metalava/android.car-stubs-docs/update_current_api.sh \ncp -f out/soong/.../current.txt packages/services/Car/car-lib/api/current.txt\ncp -f out/soong/.../removed.txt packages/services/Car/car-lib/api/removed.txt\n```\nSpecifically, update-api.sh can know the location of (via sed and some careful refactor)\n1. out/soong/.../current.txt\n2. out/soong/.../removed.txt\n\nBut, it does not know the location of (unless we add this to module-info?)\n1. packages/services/Car/car-lib/api/current.txt\n2. packages/services/Car/car-lib/api/removed.txt",
+      "parentUuid": "96b3b9bc_8564e75a",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
