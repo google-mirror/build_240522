@@ -159,6 +159,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b3b9bc_8564e75a",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-16T10:18:38Z",
+      "side": 1,
+      "message": "If update_api.sh knows the location of the shell script (it must, if I understand correctly), why can\u0027t it also know the location of the .txt files? \n\nI guess what you have here it works, but I don\u0027t understand why the extra layer of abstraction is needed here.\n\nIn particular: you have the sed invocation that converts target names to the names of the shell scripts. In what way is the .txt file different so that this conversion is not feasible? Or if it really is not, why not have a simple list of .txt files in place of the .sh file?",
+      "parentUuid": "955d7d18_c778c949",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
