@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd9be9d_b0e3f054",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-11-16T18:41:11Z",
+      "side": 1,
+      "message": "Thanks for writing the cl..  \nThe current variable naming is indeed confusing, as the care_map generation code actually cares about the total blocks of that partition on device. https://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/common.py?l\u003d3860\n\nSo we want to save the partition size on device here. And this output size is inaccurate for non-raw images (e.g. sparse image). For raw images, will there be a difference between the blocks occupation of this file on host VS the image size flashed on device? (I am not familiar with the difference between du -k vs ls, maybe it\u0027s the same if the size is aligned)",
+      "range": {
+        "startLine": 580,
+        "startChar": 30,
+        "endLine": 580,
+        "endChar": 42
+      },
+      "revId": "8eaf39badde666cf1046471c66c6913cebe35a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
