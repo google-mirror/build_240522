@@ -207,6 +207,30 @@
       },
       "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fdfba0_6fa353fe",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2021-11-16T19:31:31Z",
+      "side": 1,
+      "message": "Let\u0027s not make this script depend on module-info...",
+      "parentUuid": "9bd83385_474e18c6",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "ec2be80364510b9de9614633b67dc114a6abe718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
