@@ -81,6 +81,30 @@
       },
       "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9009da89_52ed340d",
+        "filename": "tools/scripts/update-api.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2021-11-16T19:29:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8bb86f0a_56ddc6ce",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 41
+      },
+      "revId": "dcbaa5904d58fcadbe9d793623eaf209c5188a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
