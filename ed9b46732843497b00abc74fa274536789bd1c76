@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fedeb0_018ecd84",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-16T02:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ee8e4e9_d5fc1a6d",
+      "revId": "ed9b46732843497b00abc74fa274536789bd1c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b875e428_00497240",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-11-15T23:47:47Z",
       "side": 1,
       "message": "Use __words instead of .split().",
+      "revId": "ed9b46732843497b00abc74fa274536789bd1c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91eedf2_8ab9f0b2",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-16T02:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b875e428_00497240",
       "revId": "ed9b46732843497b00abc74fa274536789bd1c76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
