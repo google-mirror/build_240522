@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb95069_fd4f260f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-17T15:26:07Z",
+      "side": 1,
+      "message": "adding Artur to review as he had quite a lot of comments on the doc. Did you have a meeting to discuss this in the end ?",
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
