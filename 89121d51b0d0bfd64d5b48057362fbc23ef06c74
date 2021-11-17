@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c0b0e6_3a95b5e3",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "nit: add -u (to catch typos in variable names)",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "319fdf7b_e982ea63",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "TIL about printf in shell. I would have used cat \u003c\u003cEOF\nUsage:\n...\nEOF\n\nbut this one is just as good.",
+      "range": {
+        "startLine": 7,
+        "startChar": 2,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494f4baf_dc152453",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b9c1cd_4f3f6b20",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "nit: the \"correct\" shell idiom is \"$@\" but here you are losing the spaces in arguments anyway in the \u0027tr\u0027 call after, so it doesn\u0027t really matter",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d8cc82_9308266f",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "TIL about \u0026 (I have only ever seen \\0)",
+      "range": {
+        "startLine": 22,
+        "startChar": 55,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3508c2a_3684918f",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-17T17:54:48Z",
+      "side": 1,
+      "message": "opt: anchoring this (^.*$) is a bit more obvious",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
