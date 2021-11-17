@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650df544_250dd960",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 4
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-17T05:48:22Z",
+      "side": 1,
+      "message": "Optional: this can be a one-liner:\nreturn \" \".join([__base(w) for w in __words(paths)]",
+      "revId": "a0fcb18b0c4be71aeaa5212075d42ec77b24c824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
