@@ -16,6 +16,24 @@
       "message": "Optional: this can be a one-liner:\nreturn \" \".join([__base(w) for w in __words(paths)]",
       "revId": "a0fcb18b0c4be71aeaa5212075d42ec77b24c824",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05fa7ab1_cb391b10",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 4
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-17T18:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650df544_250dd960",
+      "revId": "a0fcb18b0c4be71aeaa5212075d42ec77b24c824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
