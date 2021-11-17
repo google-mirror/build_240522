@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e124735_969bc1a3",
+        "filename": "tools/compliance/graphimp.go",
+        "patchSetId": 27
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-17T02:04:34Z",
+      "side": 1,
+      "message": "s/name/GetPackageName()/",
+      "revId": "e94344c4ff34a0a7a37799c349962537b24f88b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
