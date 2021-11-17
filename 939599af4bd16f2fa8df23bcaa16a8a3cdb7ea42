@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c890240a_628bab5d",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-11-17T18:30:13Z",
+      "side": 1,
+      "message": "Devin mentioned how to remove this over email - seems like it\u0027s necessary for merge conflicts?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 56
+      },
+      "revId": "939599af4bd16f2fa8df23bcaa16a8a3cdb7ea42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
