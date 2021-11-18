@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069a10f3_24f8e65a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-11-18T19:08:04Z",
+      "side": 1,
+      "message": "You\u0027re going to need to rebase the dist-for-goals cl off of this cl and submit it first for presubmit to pass. Or presubmit-ready the dist-for-goals cl and then submit it and this cl at the same time with the presubmit-verified-together vote.",
+      "revId": "103c455bc5d12c7332d5dd13c8632adc14b677b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
