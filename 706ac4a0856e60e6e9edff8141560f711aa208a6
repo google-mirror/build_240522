@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d95d904_3d810e41",
+        "filename": "target/product/isolated_compilation.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-18T13:47:37Z",
+      "side": 1,
+      "message": "We shouldn\u0027t be adding things to this allow list. If it belongs on /system, it needs to go in generic_system or one of its parents. Otherwise, it should go off /system.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 46
+      },
+      "revId": "706ac4a0856e60e6e9edff8141560f711aa208a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
