@@ -16,6 +16,24 @@
       "message": "adding Artur to review as he had quite a lot of comments on the doc. Did you have a meeting to discuss this in the end ?",
       "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2e31c4_89d88a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-18T10:19:18Z",
+      "side": 1,
+      "message": "Yes, we discussed it in a meeting and agreed on the solution.",
+      "parentUuid": "6fb95069_fd4f260f",
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
