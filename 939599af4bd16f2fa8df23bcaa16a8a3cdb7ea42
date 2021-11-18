@@ -22,6 +22,30 @@
       },
       "revId": "939599af4bd16f2fa8df23bcaa16a8a3cdb7ea42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5019e4_e6d86e22",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1900005
+      },
+      "writtenOn": "2021-11-18T07:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c890240a_628bab5d",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 56
+      },
+      "revId": "939599af4bd16f2fa8df23bcaa16a8a3cdb7ea42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
