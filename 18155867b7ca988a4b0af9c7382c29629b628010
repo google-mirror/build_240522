@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017442634",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870078?revision\u003d34",
+      "fixSuggestions": [
+        {
+          "fixId": "ae3343a1_e8bfc82d",
+          "description": "Change to \"tools/compliance/test_util.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/test_util.go",
+              "range": {
+                "startLine": 41,
+                "startChar": 69,
+                "endLine": 41,
+                "endChar": 77
+              },
+              "replacement": "exception"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "60481b9f_8f11e8b2",
+        "filename": "tools/compliance/test_util.go",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-11-18T20:36:01Z",
+      "side": 1,
+      "message": "Common typo found: \"exeption\" -- should it be \"exception\"?\nor, alternatively, \u0027exempt(ion)\u0027\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 41,
+        "startChar": 69,
+        "endLine": 41,
+        "endChar": 77
+      },
+      "revId": "18155867b7ca988a4b0af9c7382c29629b628010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
