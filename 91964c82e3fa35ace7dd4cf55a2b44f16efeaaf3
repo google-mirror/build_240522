@@ -51,6 +51,24 @@
       "parentUuid": "f9612ab1_9663ef28",
       "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6928f4_280358db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-19T16:53:44Z",
+      "side": 1,
+      "message": "Ah, I usually click \"Revert\" in Gerrit, makes it easier to not forget.",
+      "parentUuid": "ef9ef7ab_608b18a9",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
