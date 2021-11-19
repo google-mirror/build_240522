@@ -69,6 +69,59 @@
       "parentUuid": "ef9ef7ab_608b18a9",
       "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f72922_f1e449e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-19T18:07:49Z",
+      "side": 1,
+      "message": "I don\u0027t like using that for relands because it produces bad commit messages and adds reviewers too early, but that detail is indeed a good one.",
+      "parentUuid": "fe6928f4_280358db",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f893b17a_1152da3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-19T18:07:49Z",
+      "side": 1,
+      "message": "Thanks for reviews; I\u0027ll submit after the weekend.",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1e34c4_553ee972",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-19T18:07:49Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t get any data on boot time\n\nyawanng@ informs there\u0027s been some bit rot in the boot time parsing code, but here are the results from the log:\n\nThis CL:\n\nTOTAL_BOOT_TIME-min:11807.00\nTOTAL_BOOT_TIME-max:13374.00\nTOTAL_BOOT_TIME-mean:12412.30\nTOTAL_BOOT_TIME-var:308030.61\nTOTAL_BOOT_TIME-stdev:555.01\nTOTAL_BOOT_TIME-median:12202.50\nTOTAL_BOOT_TIME-total:124123.00\nTOTAL_BOOT_TIME-metric-count:10.00\n\nControl:\n\nTOTAL_BOOT_TIME-min:12242.00\nTOTAL_BOOT_TIME-max:14109.00\nTOTAL_BOOT_TIME-mean:12980.90\nTOTAL_BOOT_TIME-var:416007.89\nTOTAL_BOOT_TIME-stdev:644.99\nTOTAL_BOOT_TIME-median:12967.50\nTOTAL_BOOT_TIME-total:129809.00\nTOTAL_BOOT_TIME-metric-count:10.00\n\nSo I think the regression in b/206152027 shouldn\u0027t reoccur.",
+      "parentUuid": "e0a43b18_074842a9",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
