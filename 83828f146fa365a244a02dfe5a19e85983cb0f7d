@@ -16,6 +16,24 @@
       "message": "Could you do this for the conversions in board_config.mk too please?",
       "revId": "83828f146fa365a244a02dfe5a19e85983cb0f7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b35c16_6de0b24a",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-19T00:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77657380_30cfd792",
+      "revId": "83828f146fa365a244a02dfe5a19e85983cb0f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
