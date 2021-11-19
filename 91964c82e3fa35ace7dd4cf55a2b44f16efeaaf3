@@ -33,6 +33,24 @@
       "message": "I\u0027m confused: when I look at the diff between PS1 (which should be just a revert without any changes yet) and the latest PS3, I don\u0027t see any change in the code. Where is the fix?",
       "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9ef7ab_608b18a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-19T16:41:39Z",
+      "side": 1,
+      "message": "Sorry, I forgot to upload before the fix. It\u0027s in core/product.mk.",
+      "parentUuid": "f9612ab1_9663ef28",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
