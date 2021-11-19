@@ -16,6 +16,23 @@
       "message": "Benchmarks here: http://dashboards/_f31ff276_6cb2_4ed6_973b_9640c4fb0df4?fb\u003dBootImageProfileId:eq:5246 Doesn\u0027t look like any wild differences to me, but I don\u0027t get any data on boot time, which would be the most interesting one.",
       "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9612ab1_9663ef28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-19T16:39:29Z",
+      "side": 1,
+      "message": "I\u0027m confused: when I look at the diff between PS1 (which should be just a revert without any changes yet) and the latest PS3, I don\u0027t see any change in the code. Where is the fix?",
+      "revId": "91964c82e3fa35ace7dd4cf55a2b44f16efeaaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
