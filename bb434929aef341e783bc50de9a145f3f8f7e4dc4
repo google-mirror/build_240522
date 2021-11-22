@@ -51,6 +51,52 @@
       "message": "Friendly ping.",
       "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b01e8a4f_28321fe1",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-22T11:02:44Z",
+      "side": 1,
+      "message": "How can we guarantee that new additions of these standalone ss-jars actually get added to this list? Seems easy to forget if things will work fine without doing so?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3519d72_f1c61bd9",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-22T11:02:44Z",
+      "side": 1,
+      "message": "This list may be different in the internal branch. Could you double-check that and if so follow up with an internal change to correct it?",
+      "range": {
+        "startLine": 78,
+        "startChar": 28,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
