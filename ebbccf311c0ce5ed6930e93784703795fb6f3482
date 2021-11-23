@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c19ec9a_b8487e77",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-23T18:11:54Z",
+      "side": 1,
+      "message": "The purpose of these interfaces is to create a hard abstraction boundary between the code reflecting compliance policy and the rest of the world.\n\nTo the rest of the world, license graphs and resolution sets are immutable values reflecting compliance policy applied to specific inputs.\n\nFrom the compliance perspective, the interfaces limit the surface that compliance needs to take responsibility for and prevent other developers from injecting bugs/altering state.",
+      "parentUuid": "da34db3d_11ca5780",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ffc47f6_15f00e6a",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-23T06:37:47Z",
       "side": 1,
       "message": "If these are predefined then maybe a string enum would make sense everywhere it is used?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b0c3688_d52cc117",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-23T18:11:54Z",
+      "side": 1,
+      "message": "They are strings. The build system imposes no restrictions on custom license kinds or on custom conditions.",
+      "parentUuid": "3ffc47f6_15f00e6a",
       "range": {
         "startLine": 24,
         "startChar": 8,
