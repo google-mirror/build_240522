@@ -79,6 +79,30 @@
       },
       "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77a21bf_78205a1a",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-11-23T19:47:14Z",
+      "side": 1,
+      "message": "Yeah, the only existing usage was added by me in the last diff. I thought about amending this into the last one, but thought this might be easier for review.",
+      "parentUuid": "731c750d_8d0b481e",
+      "range": {
+        "startLine": 1205,
+        "startChar": 20,
+        "endLine": 1206,
+        "endChar": 83
+      },
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
