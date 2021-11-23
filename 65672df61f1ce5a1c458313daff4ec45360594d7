@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5118ff2c_f35aaa54",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1112425
+      },
+      "writtenOn": "2021-11-23T22:01:08Z",
+      "side": 1,
+      "message": "isn\u0027t the best practice to keep sensitive info in Java as bytes array (since it won\u0027t be visible in case of a memory dump)?\n\njust checking here, I\u0027m sure  you know more in that field",
+      "range": {
+        "startLine": 250,
+        "startChar": 14,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
