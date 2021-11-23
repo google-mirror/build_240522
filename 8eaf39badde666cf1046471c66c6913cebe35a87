@@ -22,6 +22,30 @@
       },
       "revId": "8eaf39badde666cf1046471c66c6913cebe35a87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82693c4c_fe86d73e",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-11-23T03:28:50Z",
+      "side": 1,
+      "message": "Yeah, there would be a difference (necessarily, if the change to eliminate sparsing is what caused this in the first place).\n\nI can make a change to set this only for non-sparse images, but, I\u0027m a little confused by the other part of the comment. Is \"image_size\" the right key and is GetDiskUsage in the correct units? (It looked like VerityImageBuilder does use \"image_size\").",
+      "parentUuid": "6fd9be9d_b0e3f054",
+      "range": {
+        "startLine": 580,
+        "startChar": 30,
+        "endLine": 580,
+        "endChar": 42
+      },
+      "revId": "8eaf39badde666cf1046471c66c6913cebe35a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
