@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5103360_2eae5753",
+        "filename": "tools/compliance/graphimp.go",
+        "patchSetId": 28
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:38Z",
+      "side": 1,
+      "message": "This seems unused?",
+      "revId": "8cbe33ac32856918f3c9e262fb0b60423a2ff7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b580d95a_5c5d71b1",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 28
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:38Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing something, but this is a freshly created unbuffered channel with no other goroutines created yet.  A write to an unbuffered channel blocks until a matching reader is available, and there are no readers yet, so won\u0027t this block forever?",
+      "revId": "8cbe33ac32856918f3c9e262fb0b60423a2ff7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf28243_efc401c9",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 28
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:38Z",
+      "side": 1,
+      "message": "This pattern is repeated, would it make sense to put it in a separate method, or to put starting the goroutine inside readFile?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "8cbe33ac32856918f3c9e262fb0b60423a2ff7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cb4613_05a364c2",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 28
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:38Z",
+      "side": 1,
+      "message": "io.Writer is not documented to be safe for concurrent writes.  I\u0027d suggest wrapping err with fmt.Errorf and sending that as a result, and then letting the receiver write it to stderr.",
+      "revId": "8cbe33ac32856918f3c9e262fb0b60423a2ff7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
