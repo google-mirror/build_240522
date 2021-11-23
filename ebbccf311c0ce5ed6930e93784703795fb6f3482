@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da34db3d_11ca5780",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:47Z",
+      "side": 1,
+      "message": "What is the purpose of these interfaces?  Interfaces in Go are generally only used if there will be multiple implementations.  There\u0027s not much difference between a struct with a set of exported methods and a struct that implements an interface that lists the same set of methods, except that the interface requires duplicated definitions of each method signature.",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ffc47f6_15f00e6a",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T06:37:47Z",
+      "side": 1,
+      "message": "If these are predefined then maybe a string enum would make sense everywhere it is used?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
