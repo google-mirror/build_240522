@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a3b92db_d1e07500",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-23T20:59:24Z",
+      "side": 1,
+      "message": "No, it would not be the same public interface because nobody else would be able to implement it with a different policy or for test.\n\nWhile we might get a tiny savings for LicenseCondition, none of the indirection from TargetNode or TargetEdge etc. would go away. They don\u0027t exist to transport data around. They exist to provide views into different sub-parts of an immutable license graph.\n\nThere are 3 files defining the interfaces in the final product with 31 .go files and 82 files total. Those counts might change slightly before I am done, but that\u0027s a tenth of the files at best. I am not sure how you come up with \"a third of the files\".",
+      "parentUuid": "4892adb3_c2657f83",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ffc47f6_15f00e6a",
         "filename": "tools/compliance/condition.go",
         "patchSetId": 17
