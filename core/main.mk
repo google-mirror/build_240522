@@ -1490,7 +1490,7 @@ $(call fix-notice-deps)
 # Create a license metadata rule per module. Could happen in base_rules.mk or
 # notice_files.mk; except, it has to happen after fix-notice-deps to avoid
 # missing dependency errors.
-$(call build-license-metadata)
+$(info $(call build-license-metadata))
 
 
 # These are additional goals that we build, in order to make sure that there
