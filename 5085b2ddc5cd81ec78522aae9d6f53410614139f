@@ -16,6 +16,69 @@
       "message": "This diff is a minor modification to https://android-review.googlesource.com/c/platform/build/+/1849654, I\u0027m open to amend to that diff as well, if that helps. Keeping it as separate diff for now, to make it easier for the reviewers",
       "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e2272b_5383d41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-11-23T00:20:35Z",
+      "side": 1,
+      "message": "Hi Oleg, are you familiar with clients of this class using the keyAlias:password pair parameters? Thanks!",
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67884efd_77e28815",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-11-23T00:20:35Z",
+      "side": 1,
+      "message": "Nit: Here and below, please limit line length to 100 characters.",
+      "range": {
+        "startLine": 213,
+        "startChar": 12,
+        "endLine": 213,
+        "endChar": 103
+      },
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731c750d_8d0b481e",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-11-23T00:20:35Z",
+      "side": 1,
+      "message": "If I am reading this right, won\u0027t this break any existing users of this class that currently provide the keyAlias:password pair? I am ok with this approach as long as there\u0027s some way to maintain the existing behavior without any client side changes. +erkfel@ to confirm the potential impact on other clients of this class.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 20,
+        "endLine": 1206,
+        "endChar": 83
+      },
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
