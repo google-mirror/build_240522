@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4892adb3_c2657f83",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T19:35:52Z",
+      "side": 1,
+      "message": "\"Contract with the outside world\" in Go is handled with exported vs. unexported identifiers (https://go.dev/ref/spec#Exported_identifiers).  Interfaces are better used for polymorphism.\n\nUsing the structs directly (deleting the LicenseCondition interface and renaming licenseConditionImp to LicenseCondition) will provide the exact same public interface and immutability protections via Go\u0027s package access rules.  It also removes a third of the files in your CLs and a layer of indirection that makes understanding the code and navigating it with an IDE harder.\n\nIf you don\u0027t have a concrete plan for multiple implementations of an interface I\u0027d suggest removing it.  You can always add it back later if there is a use case, but until then YAGNI.",
+      "parentUuid": "03228212_88bbacfb",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ffc47f6_15f00e6a",
         "filename": "tools/compliance/condition.go",
         "patchSetId": 17
@@ -157,6 +175,30 @@
       "side": 1,
       "message": "We have to be able to content with third parties inventing their own conditions for their own uses so it cannot really happen here. Eventually, I expect audit reports and lint tools to handle things like typos.\n\nWe also have to leave ourselves room for potentially migrating from one condition scheme to another.",
       "parentUuid": "c0688136_6d86e129",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f7705f_2e96cd25",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T19:35:52Z",
+      "side": 1,
+      "message": "It may still be helpful to use a typed string, maybe with constants for the known cases and a helper function to create custom ones.  In practice I expect the complexity of all of this to be way too high for third parties to extend, and they will come to us with feature requests if there is something that is not already covered.",
+      "parentUuid": "df095b29_2f9838c3",
       "range": {
         "startLine": 24,
         "startChar": 8,
