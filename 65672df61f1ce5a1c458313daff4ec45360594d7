@@ -46,6 +46,30 @@
       },
       "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40724dcf_ebcf9470",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1112425
+      },
+      "writtenOn": "2021-11-23T22:24:26Z",
+      "side": 1,
+      "message": "Sure, my thought are better described in the answers to https://stackoverflow.com/questions/8881291/why-is-char-preferred-over-string-for-passwords, basically:\n\n - password in the plain text may appear in the memory dump \n - it increases the chances of accidental logging \n \nHowever, I don\u0027t know if any of that is a real concern, but when I saw that something named \"password\" is kept as \"String\" I felt I should at least bring this discussion.",
+      "parentUuid": "8dee34c0_8baa6b2e",
+      "range": {
+        "startLine": 250,
+        "startChar": 14,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
