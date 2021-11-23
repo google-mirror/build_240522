@@ -16,6 +16,23 @@
       "message": "Hey Colin, this is paired with aosp/1897075. Let me know if there\u0027s a better way to declare this, or a more suitable location. Also, if there are any additional naming conventions for these flags (e.g., SYSTEM_ENABLE_JAVA_OPTIMIZATIONS or ENABLE_SYSTEM_JAVA_OPTIMIZATIONS), happy to tweak.",
       "revId": "fed40efc1968aa53c20990fca2b56e9d9ae76d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13078960_11b92ddb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2021-11-23T19:15:00Z",
+      "side": 1,
+      "message": "Friendly ping, Colin any thoughts (along with aosp/1897075)?",
+      "revId": "fed40efc1968aa53c20990fca2b56e9d9ae76d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
