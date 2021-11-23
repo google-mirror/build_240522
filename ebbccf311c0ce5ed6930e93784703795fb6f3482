@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03228212_88bbacfb",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-23T19:22:48Z",
+      "side": 1,
+      "message": "I am not following your argument here. These interfaces define compliance\u0027s contract with the outside world.\n\nI have no objection to another organization implementing these interfaces to reflect a different policy, and I strongly doubt anyone else has an objection. I have no objection to implementing test versions of these interfaces.\n\nThe principal restriction is one cannot expect to mix and match implementations or even data from different graphs with the same implementation. Compliance at Google will generally treat it as an error if someone tries to use another organization\u0027s implementation or a test implementation as if it were ours.",
+      "parentUuid": "c140d536_8f007d52",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ffc47f6_15f00e6a",
         "filename": "tools/compliance/condition.go",
         "patchSetId": 17
@@ -115,6 +133,30 @@
       "side": 1,
       "message": "Should it impose restrictions?  An unknown license condition, e.g. via a typo somewhere, will never be resolved.  Does that get caught somewhere else?",
       "parentUuid": "5b0c3688_d52cc117",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df095b29_2f9838c3",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-11-23T19:22:48Z",
+      "side": 1,
+      "message": "We have to be able to content with third parties inventing their own conditions for their own uses so it cannot really happen here. Eventually, I expect audit reports and lint tools to handle things like typos.\n\nWe also have to leave ourselves room for potentially migrating from one condition scheme to another.",
+      "parentUuid": "c0688136_6d86e129",
       "range": {
         "startLine": 24,
         "startChar": 8,
