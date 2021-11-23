@@ -581,6 +581,14 @@ endef
 ###########################################################
 define license-metadata-rule
 $(strip $(eval _dir := $(call license-metadata-dir)))
+$(if $(ALL_MODULES.$(1).LICENSE_METADATA),\
+  $(call copy-one-file, $(ALL_MODULES.$(1).LICENSE_METADATA), $(_dir)/$(1).meta_lic),\
+  $(call _license-metadata-rule,$(1)))
+$(call notice-rule,$(1))
+endef
+
+define _license-metadata-rule
+$(strip $(eval _dir := $(call license-metadata-dir)))
 $(strip $(eval _srcs := $(strip $(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED)), $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT)), $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT), $(call word-colon,1,$d)))))))
 $(strip $(eval _deps := $(sort $(filter-out $(_dir)/$(1).meta_lic%,$(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS), $(_dir)/$(call word-colon,1,$(d)).meta_lic:$(call wordlist-colon,2,9999,$d))))))
 $(strip $(eval _notices := $(sort $(ALL_MODULES.$(1).NOTICES))))
@@ -627,7 +635,9 @@ $(_dir)/$(1).meta_lic : $(foreach d,$(_deps),$(call word-colon,1,$(d))) $(foreac
 	  -p '$$(PRIVATE_PACKAGE_NAME)' \
 	  $$(addprefix -r ,$$(PRIVATE_PATH)) \
 	  -o $$@
+endef
 
+define notice-rule
 $(strip $(eval _mifs := $(sort $(ALL_MODULES.$(1).MODULE_INSTALLED_FILENAMES))))
 $(strip $(eval _infs := $(sort $(ALL_MODULES.$(1).INSTALLED_NOTICE_FILE))))
 
@@ -836,9 +846,9 @@ $(strip \
       $(eval ALL_TARGETS.$(d).META_LIC := $(_dir)/$(m).meta_lic) \
     ) \
   ) \
-)$(foreach t,$(sort $(ALL_NON_MODULES)),$(eval $(call non-module-license-metadata-rule,$(t))))$(strip \
-)$(foreach m,$(sort $(ALL_MODULES)),$(eval $(call license-metadata-rule,$(m))))$(strip \
-)$(eval $(call report-missing-licenses-rule))
+  $(foreach t,$(sort $(ALL_NON_MODULES)),$(eval $(call non-module-license-metadata-rule,$(t)))) \
+  $(foreach m,$(sort $(ALL_MODULES)),$(eval $(call license-metadata-rule,$(m)))) \
+  $(eval $(call report-missing-licenses-rule)))
 endef
 
 ###########################################################
