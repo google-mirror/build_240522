@@ -22,6 +22,30 @@
       },
       "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dee34c0_8baa6b2e",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-11-23T22:16:42Z",
+      "side": 1,
+      "message": "I think the preview code missed a null check, that\u0027s what this line is about.\n\nI\u0027m not sure about the specific workflow that may cause the password to leak this way though. Please let me know if you have a more specific example.\n\nMy feeling is the security boundary shouldn\u0027t be affected by the type of the variable. If there\u0027s a way to see strings in a certain scenario, there should be ways to see other types as well. And, if someone is able to dump the strings out of memory of SignApk, simply change the type here likely won\u0027t provide any extra protection. (As the String variable does also exist in memory, when returned from readPassword.",
+      "parentUuid": "5118ff2c_f35aaa54",
+      "range": {
+        "startLine": 250,
+        "startChar": 14,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
