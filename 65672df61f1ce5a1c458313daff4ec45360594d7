@@ -70,6 +70,30 @@
       },
       "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a83ee9_6a21650e",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-11-23T22:55:52Z",
+      "side": 1,
+      "message": "I see, thank for explaining this to me.\n\nTotally agree that readPassword should not return a String, it should return byte[] instead, which is more conventional for password handling. However, the immutable copy was made on Line 224, when String.valueOf was called, and it seems to be to support input password from stdin and file through the same function interface. In the memdump scenario, the variable on this line shouldn\u0027t affect memory dump as long as line 224 exist. It may worth a different diff to change the signature of that function though. \n\nFor the null check added here and line 254, I agree with you, it probably increased the possibility of accidental logging if widely used, but since it\u0027s only used once here, it\u0027s probably not a real concern for now. And the proper way to fix is should probably be changing the signature of readPassword as well. (And this line will be done when that is fixed as well)",
+      "parentUuid": "40724dcf_ebcf9470",
+      "range": {
+        "startLine": 250,
+        "startChar": 14,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
