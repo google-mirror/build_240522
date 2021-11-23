@@ -103,6 +103,30 @@
       },
       "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadc7e88_98e805c0",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-11-23T19:53:11Z",
+      "side": 1,
+      "message": "Apologies, I should have refreshed myself on the previous patch for reference. If you\u0027re the only user, and you\u0027ve already updated your client code, then I see no issues with this change 😊",
+      "parentUuid": "d77a21bf_78205a1a",
+      "range": {
+        "startLine": 1205,
+        "startChar": 20,
+        "endLine": 1206,
+        "endChar": 83
+      },
+      "revId": "5085b2ddc5cd81ec78522aae9d6f53410614139f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
