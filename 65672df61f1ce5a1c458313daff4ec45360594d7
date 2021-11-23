@@ -142,6 +142,30 @@
       },
       "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062759dd_dc59044e",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1896816
+      },
+      "writtenOn": "2021-11-23T23:54:18Z",
+      "side": 1,
+      "message": "I\u0027ve put up https://android-review.googlesource.com/c/platform/build/+/1900893/2 for this",
+      "parentUuid": "6085401f_8cf0c38b",
+      "range": {
+        "startLine": 250,
+        "startChar": 14,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
