@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c140d536_8f007d52",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T18:19:21Z",
+      "side": 1,
+      "message": "That\u0027s what Go packages do, you make the methods you want available outside the abstraction boundary exported, and you leave the immutable values unexported, and then nothing outside the package can modify them.",
+      "parentUuid": "2c19ec9a_b8487e77",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ffc47f6_15f00e6a",
         "filename": "tools/compliance/condition.go",
         "patchSetId": 17
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "They are strings. The build system imposes no restrictions on custom license kinds or on custom conditions.",
       "parentUuid": "3ffc47f6_15f00e6a",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0688136_6d86e129",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T18:19:21Z",
+      "side": 1,
+      "message": "Should it impose restrictions?  An unknown license condition, e.g. via a typo somewhere, will never be resolved.  Does that get caught somewhere else?",
+      "parentUuid": "5b0c3688_d52cc117",
       "range": {
         "startLine": 24,
         "startChar": 8,
