@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23826d9e_b875d7a1",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-23T21:47:52Z",
+      "side": 1,
+      "message": "It doesn\u0027t change the public interface if there is only a single implementation.  If you have a concrete plan for multiple implementations, then fine, keep the interface, but if it\u0027s just a \"maybe someone will use it later\" then remove it for now and add it back later when it has value.  Otherwise you\u0027re increasing the maintenance burden now for a possible use later.\n\nThe third of the files was referring to the first few CLs, where you have *.go, *_test.go, and *imp.go for each file.",
+      "parentUuid": "9a3b92db_d1e07500",
+      "revId": "ebbccf311c0ce5ed6930e93784703795fb6f3482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ffc47f6_15f00e6a",
         "filename": "tools/compliance/condition.go",
         "patchSetId": 17
