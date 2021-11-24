@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6300e8_4a573bc8",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-24T15:04:47Z",
+      "side": 1,
+      "message": "This one is empty for me.",
+      "range": {
+        "startLine": 254,
+        "startChar": 61,
+        "endLine": 254,
+        "endChar": 79
+      },
+      "revId": "6a012266a18cdf89d4e94a3ce7aa15a9c462a448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
