@@ -104,6 +104,24 @@
       "parentUuid": "25874d44_91e0f196",
       "revId": "00496c1683bb6ee2070e2633c52e23043c7644ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d44b9e_18810804",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-24T16:54:09Z",
+      "side": 1,
+      "message": "Resolving for now so I can autosubmit.",
+      "parentUuid": "940bc735_a6c274de",
+      "revId": "00496c1683bb6ee2070e2633c52e23043c7644ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
