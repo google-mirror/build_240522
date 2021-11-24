@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d5ec80_c70e0f6b",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2021-11-24T16:10:30Z",
+      "side": 0,
+      "message": "keep this comment. It doesn\u0027t necessarily mean that runtime order is going to be the same, but helps with structuring this file.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 87
+      },
+      "revId": "9680501cc8324109dc40e4fb1c0aa032e5503bb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
