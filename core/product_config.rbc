@@ -16,19 +16,32 @@ load("//build/make/core:envsetup.rbc", _envsetup_init = "init")
 
 """Runtime functions."""
 
+def _get_typed_attr(type_info, d, k):
+    v = getattr(d, k)
+    if type(v) == "string":
+        t = type_info.get(k)
+        if t == "list":
+            v = __words(v)
+        elif t == "bool":
+            v = True if v else False
+        elif t == "int":
+            v = int(v)
+    return v
+
+
 _soong_config_namespaces_key = "$SOONG_CONFIG_NAMESPACES"
 _dist_for_goals_key = "$dist_for_goals"
-def _init_globals(version_info):
+def _init_globals(version_info, type_info):
     """Returns dict created from the runtime environment."""
     globals = dict()
 
     # Environment variables
     for k in dir(rblf_env):
-        globals[k] = getattr(rblf_env, k)
+        globals[k] = _get_typed_attr(type_info, rblf_env, k)
 
     # Variables set as var=value command line arguments
     for k in dir(rblf_cli):
-        globals[k] = getattr(rblf_cli, k)
+        globals[k] = _get_typed_attr(type_info, rblf_cli, k)
 
     globals.setdefault("PRODUCT_SOONG_NAMESPACES", [])
     _envsetup_init(globals, version_info)
@@ -111,7 +124,7 @@ def __printvars_rearrange_list(value_list):
     seen = {item: 0 for item in value_list}
     return sorted(seen.keys()) if _options.rearrange == "sort" else seen.keys()
 
-def _product_configuration(top_pcm_name, top_pcm, version_info):
+def _product_configuration(top_pcm_name, top_pcm, version_info, type_info):
     """Creates configuration."""
 
     # Product configuration is created by traversing product's inheritance
@@ -125,7 +138,7 @@ def _product_configuration(top_pcm_name, top_pcm, version_info):
     # PCM means "Product Configuration Module", i.e., a Starlark file
     # whose body consists of a single init function.
 
-    globals_base = _init_globals(version_info)
+    globals_base = _init_globals(version_info, type_info)
     globals = dict(**globals_base)
 
     config_postfix = []  # Configs in postfix order
@@ -723,7 +736,6 @@ rblf = struct(
     filter = _filter,
     filter_out = _filter_out,
     find_and_copy = _find_and_copy,
-    init_globals = _init_globals,
     inherit = _inherit,
     indirect = _indirect,
     mk2rbc_error = _mk2rbc_error,
@@ -736,7 +748,6 @@ rblf = struct(
     mksubst = _mksubst,
     notdir = _notdir,
     printvars = _printvars,
-    printglobals = _printglobals,
     product_configuration = _product_configuration,
     board_configuration = _board_configuration,
     product_copy_files_by_pattern = _product_copy_files_by_pattern,
