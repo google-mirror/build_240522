@@ -22,6 +22,30 @@
       },
       "revId": "9680501cc8324109dc40e4fb1c0aa032e5503bb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50625f0d_2669f4de",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-24T16:17:30Z",
+      "side": 0,
+      "message": "Do you mind if I fix it back in a follow up CL for PRODUCT_APEX_BOOT_JARS? I started presubmit and forrest runs for this one, and I\u0027d rather submit it soon if it fixes b/207474880. (\"If\" because I\u0027m unsure if I tested it correctly locally with atest.)",
+      "parentUuid": "d2d5ec80_c70e0f6b",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 87
+      },
+      "revId": "9680501cc8324109dc40e4fb1c0aa032e5503bb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

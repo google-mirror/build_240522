@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75f01cf9_3849690a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-24T16:17:30Z",
+      "side": 1,
+      "message": "Not me, Alan did. :)\n\nhttps://b.corp.google.com/issues/207474880",
+      "parentUuid": "83e6ee1e_ea35ce2e",
+      "revId": "00496c1683bb6ee2070e2633c52e23043c7644ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25874d44_91e0f196",
@@ -66,6 +84,24 @@
       "writtenOn": "2021-11-24T16:10:30Z",
       "side": 1,
       "message": "we should also sort PRODUCT_APEX_BOOT_JARS for the same reason, right?",
+      "revId": "00496c1683bb6ee2070e2633c52e23043c7644ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940bc735_a6c274de",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-24T16:17:30Z",
+      "side": 1,
+      "message": "Yes, but I\u0027m in a hurry to unblock Alan so trying to make it quick. I will follow up with a fix for PRODUCT_APEX_BOOT_JARS if this goes well.",
+      "parentUuid": "25874d44_91e0f196",
       "revId": "00496c1683bb6ee2070e2633c52e23043c7644ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
