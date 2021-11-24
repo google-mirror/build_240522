@@ -46,6 +46,30 @@
       },
       "revId": "6a012266a18cdf89d4e94a3ce7aa15a9c462a448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00990d95_e906f00c",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-11-24T19:39:18Z",
+      "side": 1,
+      "message": "Though on second look, we can submit this now and clean up ANDROID_TOOLCHAIN in a followup",
+      "parentUuid": "b9bd0a1b_185f0595",
+      "range": {
+        "startLine": 254,
+        "startChar": 61,
+        "endLine": 254,
+        "endChar": 79
+      },
+      "revId": "6a012266a18cdf89d4e94a3ce7aa15a9c462a448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
