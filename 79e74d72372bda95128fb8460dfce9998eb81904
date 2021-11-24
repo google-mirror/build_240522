@@ -16,6 +16,24 @@
       "message": "It seems that 4.19 is still in use according to b/206157999.\nAs this CL will affect the internal branches, we\u0027d better confirm 4.19 support with the systems team.",
       "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3121cf05_6913b669",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-11-24T18:23:21Z",
+      "side": 1,
+      "message": "I believe Pixel 5 is still using this. Last I talked to Aaron about this, he was still wanting to keep Pixel 5 GKI compatible. I\u0027ll add him to the bug to confirm.",
+      "parentUuid": "ae2baad1_8507d39c",
+      "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
