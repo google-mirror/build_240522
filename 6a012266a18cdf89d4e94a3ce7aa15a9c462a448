@@ -22,6 +22,30 @@
       },
       "revId": "6a012266a18cdf89d4e94a3ce7aa15a9c462a448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bd0a1b_185f0595",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-11-24T19:35:22Z",
+      "side": 1,
+      "message": "+Nick, I think this will always be empty now, as the target gcc prebuilts have been removed, and we should likely remove the whole $ANDROID_TOOLCHAIN[_2ND_ARCH] logic",
+      "parentUuid": "4e6300e8_4a573bc8",
+      "range": {
+        "startLine": 254,
+        "startChar": 61,
+        "endLine": 254,
+        "endChar": 79
+      },
+      "revId": "6a012266a18cdf89d4e94a3ce7aa15a9c462a448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
