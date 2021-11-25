@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad2a4d2_2bb2dd5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T14:22:49Z",
+      "side": 1,
+      "message": "This is intentional because some intermediate branches (e.g. sc-qpr1-plus-aosp-without-vendor, etc.) are not ready yet. I will cp this topic to there when the branches are ready.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
