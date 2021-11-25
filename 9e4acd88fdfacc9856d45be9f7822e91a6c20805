@@ -64,6 +64,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da7e7282_9bd1c3cf",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-25T16:13:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da054046_64ed2633",
+      "range": {
+        "startLine": 324,
+        "startChar": 71,
+        "endLine": 324,
+        "endChar": 79
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5789012_2704babf",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-25T16:13:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1d9b81d_d0b50c05",
+      "range": {
+        "startLine": 324,
+        "startChar": 20,
+        "endLine": 324,
+        "endChar": 41
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd982759_eb1f15d8",
@@ -111,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e356818c_50806053",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-25T16:13:45Z",
+      "side": 1,
+      "message": "Ok, I made it almost the same as before with a little clarification why it has to be sorted this way.\n\nI agree with Jiakai that the order here technically does not matter, but it does no harm to enforce sorting here as well and it would help if (unlikely) someone uses this file but not product_config.mk.",
+      "parentUuid": "ef5c05db_cfb1141c",
+      "range": {
+        "startLine": 51,
+        "startChar": 68,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23035e1d_e1bd1efe",
@@ -124,6 +196,30 @@
       "writtenOn": "2021-11-25T15:52:34Z",
       "side": 1,
       "message": "nit: sorted",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 7
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4d3757b_39a30333",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-25T16:13:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "23035e1d_e1bd1efe",
       "range": {
         "startLine": 53,
         "startChar": 2,
