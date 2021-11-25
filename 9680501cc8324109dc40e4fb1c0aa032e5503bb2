@@ -94,6 +94,30 @@
       },
       "revId": "9680501cc8324109dc40e4fb1c0aa032e5503bb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f333d12_614849d0",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-25T12:12:09Z",
+      "side": 0,
+      "message": "I\u0027ll take care of the comment as I\u0027m updating the comment in aosp/1874113 anyway.",
+      "parentUuid": "9c66d48d_222029c8",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 87
+      },
+      "revId": "9680501cc8324109dc40e4fb1c0aa032e5503bb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
