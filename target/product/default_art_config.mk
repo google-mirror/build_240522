@@ -47,8 +47,11 @@ PRODUCT_BOOT_JARS += \
     voip-common \
     ims-common
 
-# APEX boot jars. Keep the list sorted by module names and then library names.
-# Note: core-icu4j is moved back to PRODUCT_BOOT_JARS in product_config.mk at a later stage.
+# APEX boot jars.
+# The list should be sorted by module names and then library names: this order
+# is used when constructing BOOTCLASSPATH on device. The list is additionally
+# sortd automatically after merging variable definitions from other product
+# makefiles, and core-icu4j is moved back to PRODUCT_BOOT_JARS.
 PRODUCT_APEX_BOOT_JARS := \
     com.android.appsearch:framework-appsearch \
     com.android.conscrypt:conscrypt \
@@ -65,7 +68,11 @@ PRODUCT_APEX_BOOT_JARS := \
     com.android.tethering:framework-tethering \
     com.android.wifi:framework-wifi
 
-# APEX system server jars. The list will be sorted automatically.
+# APEX system server jars.
+# The list should be sorted by module names and then library names: this order
+# is used when constructing SYSTEMSERVERCLASSPATH on device. The list is
+# additionally sorted automatically after merging variable definitions from
+# other product makefiles.
 PRODUCT_APEX_SYSTEM_SERVER_JARS := \
     com.android.appsearch:service-appsearch \
     com.android.art:service-art \
