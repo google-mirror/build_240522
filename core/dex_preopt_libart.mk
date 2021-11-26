@@ -55,6 +55,10 @@ ifneq (,$(my_copy_pairs))
   my_installed += $(call copy-vdex-files,$(DEXPREOPT_IMAGE_VDEX_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_out))
   my_unstripped_installed := $(call copy-many-files,$(DEXPREOPT_IMAGE_UNSTRIPPED_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_syms))
 
+  ifneq (,$(DEXPREOPT_IMAGE_PROFILE_BUILT_INSTALLED_$(my_suffix)))
+    my_installed += $(call copy-many-files,$(DEXPREOPT_IMAGE_PROFILE_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_out))
+  endif
+
   # We don't have a LOCAL_PATH for the auto-generated modules, so let it be the $(BUILD_SYSTEM).
   LOCAL_PATH := $(BUILD_SYSTEM)
 
