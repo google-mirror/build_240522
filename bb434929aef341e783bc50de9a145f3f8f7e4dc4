@@ -194,6 +194,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7168555e_cbdcbf31",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-26T14:06:41Z",
+      "side": 1,
+      "message": "Great, that sounds good",
+      "parentUuid": "d723e61a_67b8d03e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3519d72_f1c61bd9",
