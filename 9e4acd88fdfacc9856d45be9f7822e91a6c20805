@@ -305,6 +305,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5678538_65ce304e",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T15:59:29Z",
+      "side": 1,
+      "message": "Hmm... I still don\u0027t see any changes in PS4 for same reason.",
+      "parentUuid": "67f66c0f_3745964e",
+      "range": {
+        "startLine": 51,
+        "startChar": 68,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23035e1d_e1bd1efe",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 1
