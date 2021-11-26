@@ -257,6 +257,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4804bd31_5cf6ae71",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T15:50:59Z",
+      "side": 1,
+      "message": "Thank you for the discussion. Did you upload the change?",
+      "parentUuid": "db5d3165_27f20616",
+      "range": {
+        "startLine": 51,
+        "startChar": 68,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23035e1d_e1bd1efe",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 1
