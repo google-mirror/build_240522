@@ -329,6 +329,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0caec8aa_5736b995",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-26T16:06:10Z",
+      "side": 1,
+      "message": "My bad, now I forgot -a option to amend. Thanks for a very attentive review!",
+      "parentUuid": "d5678538_65ce304e",
+      "range": {
+        "startLine": 51,
+        "startChar": 68,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "9e4acd88fdfacc9856d45be9f7822e91a6c20805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23035e1d_e1bd1efe",
         "filename": "target/product/default_art_config.mk",
         "patchSetId": 1
