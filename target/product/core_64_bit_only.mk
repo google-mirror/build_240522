@@ -24,7 +24,14 @@ PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64.rc:system/etc/init/hw/in
 
 # Set the zygote property to select the 64-bit script.
 # This line must be parsed before the one in core_minimal.mk
+<<<<<<< HEAD   (238412 Disable OMX for 64b_only devices.)
 PRODUCT_VENDOR_PROPERTIES += ro.zygote=zygote64
+=======
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64
+# A 64-bit-only platform does not have dex2oat32, so make sure dex2oat64 is
+# used for dexopt.
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += dalvik.vm.dex2oat64.enabled=true
+>>>>>>> CHANGE (53e78e Use dex2oat64 on 64-bit-only builds)
 
 TARGET_SUPPORTS_32_BIT_APPS := false
 TARGET_SUPPORTS_64_BIT_APPS := true
