@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d878d15_5d13d5cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-11-26T18:50:00Z",
+      "side": 1,
+      "message": "Can you please also test that the boot image profile remains unaffected in a platform build?",
+      "revId": "b37dd04c30ab092ba922dbd23ea5e38ef364b6db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
