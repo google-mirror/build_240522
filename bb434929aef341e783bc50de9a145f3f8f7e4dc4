@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "112456e4_b4179f71",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T14:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b35f9bc4_cd3b6e82",
+      "range": {
+        "startLine": 73,
+        "startChar": 97,
+        "endLine": 74,
+        "endChar": 24
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac12e6b1_3740c8ae",
@@ -89,6 +113,30 @@
       "writtenOn": "2021-11-23T18:16:12Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120a5de3_b1057506",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T14:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac12e6b1_3740c8ae",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -122,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d723e61a_67b8d03e",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T14:04:24Z",
+      "side": 1,
+      "message": "We can\u0027t guarantee that at build-time because the build system doesn\u0027t know what system_server does. We will add runtime tests to make sure that the jars that system_server dynamically loads are all AOT compiled.",
+      "parentUuid": "b01e8a4f_28321fe1",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3519d72_f1c61bd9",
@@ -135,6 +207,30 @@
       "writtenOn": "2021-11-22T11:02:44Z",
       "side": 1,
       "message": "This list may be different in the internal branch. Could you double-check that and if so follow up with an internal change to correct it?",
+      "range": {
+        "startLine": 78,
+        "startChar": 28,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "bb434929aef341e783bc50de9a145f3f8f7e4dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef6a37df_6da4bc40",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-11-26T14:04:24Z",
+      "side": 1,
+      "message": "Yes, I\u0027m aware of that there are additional standalone system server jars on internal master. I plan to create a follow-up CL once this CL is merged into internal.",
+      "parentUuid": "e3519d72_f1c61bd9",
       "range": {
         "startLine": 78,
         "startChar": 28,
