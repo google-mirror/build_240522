@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "217d918a_50717308",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-29T19:00:45Z",
+      "side": 1,
+      "message": "While trying to set -u, I ran into issues because this script \"source\"s `envsetup.sh`, which might contain unbound variables",
+      "parentUuid": "93c0b0e6_3a95b5e3",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "319fdf7b_e982ea63",
@@ -60,6 +84,30 @@
       "writtenOn": "2021-11-17T17:54:48Z",
       "side": 1,
       "message": "nit: typo",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949337b8_452918b5",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-29T19:00:45Z",
+      "side": 1,
+      "message": "Thanks for catching this error",
+      "parentUuid": "494f4baf_dc152453",
       "range": {
         "startLine": 8,
         "startChar": 1,
@@ -129,6 +177,30 @@
       "writtenOn": "2021-11-17T17:54:48Z",
       "side": 1,
       "message": "opt: anchoring this (^.*$) is a bit more obvious",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f62baf_19ee390c",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-11-29T19:00:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3508c2a_3684918f",
       "range": {
         "startLine": 22,
         "startChar": 33,
