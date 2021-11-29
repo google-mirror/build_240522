@@ -22,6 +22,30 @@
       },
       "revId": "c9ec59c72a1fe9a0b1ee0d5b064f298dca1da150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f37e0f6_9f794775",
+        "filename": "core/product_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-11-29T11:24:25Z",
+      "side": 1,
+      "message": "I will work on that as a follow-up, there is a bug: https://b.corp.google.com/issues/207775278",
+      "parentUuid": "9720ee3d_d749c2d1",
+      "range": {
+        "startLine": 325,
+        "startChar": 19,
+        "endLine": 326,
+        "endChar": 55
+      },
+      "revId": "c9ec59c72a1fe9a0b1ee0d5b064f298dca1da150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
