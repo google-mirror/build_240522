@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbcf7b12_dfbc2158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-29T12:38:42Z",
+      "side": 1,
+      "message": "I wonder why ART relies on the system property for this.\n\nI see that /system/bin/dex2oat is a symlink to /apex/com.android.art/bin/dex2oat64 on builds where 64-bit is the primary arch (including 64-bit-only builds). The symlink of course points to the 32-bit variant on 32-bit builds. So, if ART used /system/bin/dex2oat, then we wouldn\u0027t need the system property and the selection logic [1] as well.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:frameworks/native/cmds/installd/dexopt.cpp;drc\u003d54481db5d5d3b36761c5ae453d1905ba16823353;l\u003d1946",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "1917e4e047641c8166b77e898568429a773ec364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
