@@ -22,6 +22,30 @@
       },
       "revId": "1917e4e047641c8166b77e898568429a773ec364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a471917_07d21839",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2021-11-29T14:01:02Z",
+      "side": 1,
+      "message": "This won\u0027t work if we want to use debug variant of dex2oat (eg  kDex2oatDebug64Path). We could inspect the symlink to infer, looks like the original author didn\u0027t want / consider it.\n\nOne other benefit of a sysprop is that we can do A/B experiment and disable/enable if there\u0027s any issue. Maybe that\u0027s something the original author had in mind.",
+      "parentUuid": "fbcf7b12_dfbc2158",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "1917e4e047641c8166b77e898568429a773ec364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
