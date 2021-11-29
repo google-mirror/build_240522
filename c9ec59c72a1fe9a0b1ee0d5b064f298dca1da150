@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9720ee3d_d749c2d1",
+        "filename": "core/product_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-29T10:37:10Z",
+      "side": 1,
+      "message": "Can we add some assertion/test that this remains true (there is no mismatch)?",
+      "range": {
+        "startLine": 325,
+        "startChar": 19,
+        "endLine": 326,
+        "endChar": 55
+      },
+      "revId": "c9ec59c72a1fe9a0b1ee0d5b064f298dca1da150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
