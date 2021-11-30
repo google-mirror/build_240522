@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6f1c26_62724597",
+        "filename": "tools/compliance/policy/resolve.go",
+        "patchSetId": 41
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-30T23:41:06Z",
+      "side": 1,
+      "message": "Should this return lg.rsBU instead of rs if lg.rsBU was set by another call?",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 2
+      },
+      "revId": "f9a919653f1979d5820145c9370b6e11f608cf23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeae54b7_72d2f70c",
+        "filename": "tools/compliance/policy/resolve.go",
+        "patchSetId": 41
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-30T23:41:06Z",
+      "side": 1,
+      "message": "I don\u0027t see lg.rsTD set anywhere",
+      "revId": "f9a919653f1979d5820145c9370b6e11f608cf23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b41e19ce_752e9310",
+        "filename": "tools/compliance/policy/resolvenotices.go",
+        "patchSetId": 41
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-30T23:41:06Z",
+      "side": 1,
+      "message": "These assertions from interfaces to concrete types are another sign that this isn\u0027t an appropriate place to use an interface.  You can\u0027t pass a LicenseGraph that is not a licenseGraphImp, so you might as well make LicenseGraph the implementation.",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 39,
+        "endChar": 37
+      },
+      "revId": "f9a919653f1979d5820145c9370b6e11f608cf23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
