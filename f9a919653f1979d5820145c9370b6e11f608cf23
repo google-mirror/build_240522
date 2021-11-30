@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017797615",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870078?revision\u003d41",
+      "fixSuggestions": [
+        {
+          "fixId": "c4891cfc_b3ef7c06",
+          "description": "Change to \"tools/compliance/policy/resolvenotices.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/policy/resolvenotices.go",
+              "range": {
+                "startLine": 66,
+                "startChar": 28,
+                "endLine": 66,
+                "endChar": 33
+              },
+              "replacement": "Origin"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c52e25bf_6934120e",
+        "filename": "tools/compliance/policy/resolvenotices.go",
+        "patchSetId": 41
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-11-30T02:36:27Z",
+      "side": 1,
+      "message": "Common typo found: \"Orgin\" -- should it be \"Origin\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 66,
+        "startChar": 28,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "f9a919653f1979d5820145c9370b6e11f608cf23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
