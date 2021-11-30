@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a764e351_2caf3dd7",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-11-30T11:43:14Z",
+      "side": 1,
+      "message": "Oof, that, I didn\u0027t expect. It looks like updating envsetup.sh is a big too much work as a \"side project\" and copy-pasting gettop isn\u0027t a great alternative, either. \"m\" could be in theory substituted with calling soong_ui.bash directly without much fuss, but that doesn\u0027t bring us a lot of we still need gettop. \n\nActually: how about replacing gettop with\n\n\"$(dirname \"$0\")/../..\" and calling soong_ui.bash instead? (or else replace $0 with $BASH_SOURCE?) Then you\u0027d cut the dependency on envsetup.sh which is a win and it appears you are using the same idiom to find envsetup.sh anyway so the $BASH_SOURCE method gives the wrong answer, this script is already broken anyway.",
+      "parentUuid": "217d918a_50717308",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "319fdf7b_e982ea63",
