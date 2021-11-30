@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ef5093_aa4cc8e8",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-11-30T19:00:14Z",
+      "side": 1,
+      "message": "seems the logic need to put outside of if clause, e.g. erofs in L562 calls mkfs upfront.",
+      "range": {
+        "startLine": 653,
+        "startChar": 4,
+        "endLine": 653,
+        "endChar": 13
+      },
+      "revId": "1e053ff4af8acdc40cda66b396223f0d0774fec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
