@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c283eb9_744370c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-11-30T20:14:30Z",
+      "side": 1,
+      "message": "There are no changes from this CL to the shipped notice files for any device image built during presubmit.",
+      "revId": "e87c5b50a3df63bd075e1d41271a3e9fb769c751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
