@@ -16,6 +16,23 @@
       "message": "I\u0027m surprised this did not trigger build failure errors earlier. (I discovered this today while trying to understand why `gdbserver` had disappeared from the Android source tree.)",
       "revId": "3fed5bbbabae4676eac0190369d6b47a85b369f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60bb5e0b_65545bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2021-11-30T09:19:03Z",
+      "side": 1,
+      "message": "Thanks Dan and Colin.",
+      "revId": "3fed5bbbabae4676eac0190369d6b47a85b369f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
