@@ -70,6 +70,30 @@
       },
       "revId": "1917e4e047641c8166b77e898568429a773ec364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62de4089_804aef0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-30T00:23:57Z",
+      "side": 1,
+      "message": "Thanks for the answers Nicolas and Kevin. I don\u0027t have a strong opinion here. I just wondered because using sysprop to select 32/64 variant of a binary is quite unusual, and wanted to know if there\u0027s a reason behind it or you didn\u0027t know about the symlink. It looks like you have some reasons like A/B experiment, etc. Then I am fine with leaving this as it is.",
+      "parentUuid": "262cfdb9_ba24fb7e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "1917e4e047641c8166b77e898568429a773ec364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
