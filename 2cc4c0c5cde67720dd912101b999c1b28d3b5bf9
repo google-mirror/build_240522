@@ -22,6 +22,23 @@
       },
       "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "270dde73_4477ced0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-30T00:49:45Z",
+      "side": 1,
+      "message": "Ping for review",
+      "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
