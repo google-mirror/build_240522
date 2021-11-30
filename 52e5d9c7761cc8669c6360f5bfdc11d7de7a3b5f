@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d769b1d_8293f923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-11-30T21:45:19Z",
+      "side": 1,
+      "message": "LGTM, but IMHO it\u0027s worth passing this by ccross@/dwillemsen@/hansson@ ",
+      "revId": "52e5d9c7761cc8669c6360f5bfdc11d7de7a3b5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
