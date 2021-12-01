@@ -16,6 +16,24 @@
       "message": "In similar cases elsewhere $(strip) is called where the variable is used. That works even if a variable is changed after line 280 is executed.",
       "revId": "29bb6132c825ff8de41f50cbb58379fd4858dbba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c6169e_c30a5879",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-01T23:30:12Z",
+      "side": 1,
+      "message": "hmmm good point. I guess I didn\u0027t want to have to spam $(strip) a bunch of times in the code, but I\u0027ll keep that in mind for the future.",
+      "parentUuid": "e15e3a08_43d2e3c3",
+      "revId": "29bb6132c825ff8de41f50cbb58379fd4858dbba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
