@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4576d2ad_626d0da7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-01T18:57:39Z",
+      "side": 1,
+      "message": "Please also have a command to run standalone test.",
+      "revId": "76b2b7f7dd04e31e1137cde44f141535431537f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672e8be6_26755195",
+        "filename": "tests/run.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-01T18:57:39Z",
+      "side": 1,
+      "message": "I\u0027d rather place these lines at the end of the function.\n(or, have a separate top-level function for board config testing)",
+      "revId": "76b2b7f7dd04e31e1137cde44f141535431537f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
