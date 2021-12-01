@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e15e3a08_43d2e3c3",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-01T23:18:53Z",
+      "side": 1,
+      "message": "In similar cases elsewhere $(strip) is called where the variable is used. That works even if a variable is changed after line 280 is executed.",
+      "revId": "29bb6132c825ff8de41f50cbb58379fd4858dbba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
