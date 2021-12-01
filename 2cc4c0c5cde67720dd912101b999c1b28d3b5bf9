@@ -39,6 +39,23 @@
       "message": "Ping for review",
       "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f14083_fd89c98e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-01T02:49:23Z",
+      "side": 1,
+      "message": "Friendly ping. I am relanding.",
+      "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
