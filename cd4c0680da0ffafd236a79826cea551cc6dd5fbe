@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18dc8a8c_3248e5f0",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-01T18:30:48Z",
+      "side": 1,
+      "message": "Not sure why the call is repeated here. Is there a reason not to use _dir from line 838 ?\n\nIf there is a reason not to use _dir, is there a reason not to delete line 838?",
+      "revId": "cd4c0680da0ffafd236a79826cea551cc6dd5fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038bde53_1e60b863",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-01T18:30:48Z",
+      "side": 1,
+      "message": "I am not sure this is true. It will likely go away sooner than later, but isn\u0027t the installed_notice_file just the notice for the current module copied where it later gets grouped into system versus vendor etc. NOTICE.xmlgz ?\n\nIn that case, it would have no reason to depend on the license metadata.",
+      "revId": "cd4c0680da0ffafd236a79826cea551cc6dd5fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
