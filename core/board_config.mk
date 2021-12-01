@@ -203,7 +203,7 @@ include $(board_config_mk)
 else
   $(shell mkdir -p $(OUT_DIR)/rbc)
 
-  $(call dump-public-variables, $(OUT_DIR)/rbc/make_vars_pre_board_config.mk)
+  $(call dump-variables-for-product-and-board-config, $(OUT_DIR)/rbc/make_vars_pre_board_config.mk)
 
   $(shell $(OUT_DIR)/soong/mk2rbc \
     --mode=write -r --outdir $(OUT_DIR)/rbc \
