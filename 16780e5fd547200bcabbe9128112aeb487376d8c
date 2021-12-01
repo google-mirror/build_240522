@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017859198",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1906558?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5a0dfbe2_fa7e17cf",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-01T06:26:13Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "16780e5fd547200bcabbe9128112aeb487376d8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017859205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1906558?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "98e37744_95d49edd",
+          "description": "Change to \"tools/compliance/condition.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/condition.go",
+              "range": {
+                "startLine": 41,
+                "startChar": 57,
+                "endLine": 41,
+                "endChar": 65
+              },
+              "replacement": "condition"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "bb6f6fa4_219503b3",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-01T06:26:13Z",
+      "side": 1,
+      "message": "Common typo found: \"conditon\" -- should it be \"condition\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 41,
+        "startChar": 57,
+        "endLine": 41,
+        "endChar": 65
+      },
+      "revId": "16780e5fd547200bcabbe9128112aeb487376d8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
