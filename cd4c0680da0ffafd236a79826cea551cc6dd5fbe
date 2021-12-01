@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3c08e8_65e04677",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-01T20:54:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "487b6418_4d9751c6",
+      "revId": "cd4c0680da0ffafd236a79826cea551cc6dd5fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "038bde53_1e60b863",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "This is moved from definitions.mk line 639, where it made $(inf) (which came from ALL_MODULES.$(my_register_name).INSTALLED_NOTICE_FILE) depend on $(my_register_name).meta_lic.  That made both the host and device notice files depend on the same .meta_lic, so I moved it here so the module\u0027s notice file depends only on the module\u0027s .meta_lic file.\n\nI don\u0027t know why the notice file depends on the .meta_lic file at all, since it is not used, I assumed it was to make sure the .meta_lic files were generated, and would later be used for the notice file rule.",
       "parentUuid": "038bde53_1e60b863",
+      "revId": "cd4c0680da0ffafd236a79826cea551cc6dd5fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "614a1a85_f139c586",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-01T20:54:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "171cee21_1215b736",
       "revId": "cd4c0680da0ffafd236a79826cea551cc6dd5fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
