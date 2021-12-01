@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e600e6c2_139b0782",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-01T19:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4576d2ad_626d0da7",
+      "revId": "76b2b7f7dd04e31e1137cde44f141535431537f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "672e8be6_26755195",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-12-01T18:57:39Z",
       "side": 1,
       "message": "I\u0027d rather place these lines at the end of the function.\n(or, have a separate top-level function for board config testing)",
+      "revId": "76b2b7f7dd04e31e1137cde44f141535431537f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90aedd1c_327818e8",
+        "filename": "tests/run.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-01T19:08:26Z",
+      "side": 1,
+      "message": "Moved to the end of the file. There\u0027s no top-level function in this file, I\u0027ll make a separate cl that creates top-level functions for all the individual tests",
+      "parentUuid": "672e8be6_26755195",
       "revId": "76b2b7f7dd04e31e1137cde44f141535431537f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
