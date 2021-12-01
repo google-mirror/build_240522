@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c303aeb_8f9243d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-12-01T06:29:46Z",
+      "side": 1,
+      "message": "Tested with a sunfish target-file, and the range in the care_map matches the original image size.\n\nImage Size:    836222976 bytes  \u003d 204156 * 4096\ncare map:      2,0,204156  \n\n",
+      "revId": "2f76f90616e81f241c03ac8da098376a5a482a9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
