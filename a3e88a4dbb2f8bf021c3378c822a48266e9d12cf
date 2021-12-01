@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f98542_0c1d4125",
+        "filename": "core/definitions.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-01T20:56:41Z",
+      "side": 1,
+      "message": "I don\u0027t think this _dir is used any more. Is it?",
+      "revId": "a3e88a4dbb2f8bf021c3378c822a48266e9d12cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
