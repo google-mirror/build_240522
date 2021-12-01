@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d026a3dc_1428712a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-01T22:26:45Z",
+      "side": 1,
+      "message": "This is a dangerous approach, as it is easy to leave intermediate branches without this change, especially as the automerger graph changes over time.  Would it be better to submit this to internal master, and then walk it back as the intermediate branches are working, and then finally land in AOSP?  That way if you get stuck anywhere along the way everything will resolve back to a consistent state once the intermediate branches get pushed to AOSP.",
+      "parentUuid": "1ad2a4d2_2bb2dd5a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "270dde73_4477ced0",
