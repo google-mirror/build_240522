@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017896203",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1906558?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e88f2184_8e4f62a0",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-02T03:52:57Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL\n",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "9624db1505d73179a78bb114c6796131dcd8a210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
