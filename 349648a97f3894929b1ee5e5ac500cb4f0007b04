@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f00e4e1_a12e88e3",
+        "filename": "tools/compliance/policy.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-02T12:23:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "867a14db_517f3aea",
+      "revId": "349648a97f3894929b1ee5e5ac500cb4f0007b04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f90c37e0_ab283295",
