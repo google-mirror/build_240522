@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04396fc_71d85574",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-02T04:19:07Z",
+      "side": 1,
+      "message": "Ack. \n\nLet me replace DO NOT MERGE with Merge-In pointing to the CL that automerger created on the sc-v2-dev-plus-aosp branch `-s ours`.",
+      "parentUuid": "d026a3dc_1428712a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "2cc4c0c5cde67720dd912101b999c1b28d3b5bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "270dde73_4477ced0",
