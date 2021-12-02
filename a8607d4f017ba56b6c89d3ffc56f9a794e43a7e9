@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d112c2ad_b5871f29",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7feb501c_8aa31bcc",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5686e79_1bab17d6",
@@ -52,6 +70,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e4a2b0_0cb66c4d",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5686e79_1bab17d6",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "446ab9db_6774245c",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93330756_23301559",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21417f49_cc096f23",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-12-02T18:29:06Z",
       "side": 1,
       "message": "Same as above, IMHO too much whitespace.",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fbdc2c_92f4363d",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21417f49_cc096f23",
       "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08f66170_f33897a9",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done. Sorry, I had deleted this function initially but changed my mind and brought it back, messing it up in the process.",
+      "parentUuid": "bcf2cfab_1f4c9972",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0938121b_bab783a2",
@@ -105,6 +201,24 @@
       "writtenOn": "2021-12-02T18:29:06Z",
       "side": 1,
       "message": "Please add a comment explaining why we cannot simply copy globals_base to globals. And IMHO this initialization can be factored out into a function.",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2eb46d9_3e37e294",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-02T20:30:34Z",
+      "side": 1,
+      "message": "Done. I was kindof thinking this was too small for a separate function, (especially considering this is already a helper function) but I reduced it to just 2 lines to make the new function even less necessary. Let me know if you still want it though.",
+      "parentUuid": "0938121b_bab783a2",
       "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
