@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017892413",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d64",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "22634008_dca43b10",
+        "filename": "tools/compliance/cmd/dumpresolutions_test.go",
+        "patchSetId": 64
+      },
+      "lineNbr": 4450,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-02T01:30:05Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 4450,
+        "startChar": 49,
+        "endLine": 4450,
+        "endChar": 50
+      },
+      "revId": "91037a7b69c304415314d048b70f7da46ecdcd00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017892395",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d64",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6a0aa7b4_e9543d96",
+        "filename": "tools/compliance/cmd/testdata/notice/lib/liba.so.meta_lic",
+        "patchSetId": 64
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-02T01:30:05Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD\" license\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "91037a7b69c304415314d048b70f7da46ecdcd00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
