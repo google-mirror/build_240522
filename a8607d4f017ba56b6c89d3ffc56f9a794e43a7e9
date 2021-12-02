@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7feb501c_8aa31bcc",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "IMHO there is no need to have empty line after every line.",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5686e79_1bab17d6",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "Is there a reason to have such a long name?",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93330756_23301559",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "Same question: why such long names?",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21417f49_cc096f23",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "Same as above, IMHO too much whitespace.",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf2cfab_1f4c9972",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "1. Please add the doc for this function. The name of argument is not self-explanatory, and the return value needs explaining, too.\n2. Why it has been renamed? AFAIK, it\u0027s not used outside this file.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0938121b_bab783a2",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-12-02T18:29:06Z",
+      "side": 1,
+      "message": "Please add a comment explaining why we cannot simply copy globals_base to globals. And IMHO this initialization can be factored out into a function.",
+      "revId": "a8607d4f017ba56b6c89d3ffc56f9a794e43a7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
