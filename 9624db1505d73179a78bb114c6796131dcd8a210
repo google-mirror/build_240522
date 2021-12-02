@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4723fa00_eb87a99e",
+        "filename": "tools/compliance/graph.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-02T12:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60040d14_30a09806",
+      "range": {
+        "startLine": 255,
+        "startChar": 22,
+        "endLine": 255,
+        "endChar": 25
+      },
+      "revId": "9624db1505d73179a78bb114c6796131dcd8a210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "383633cd_0bd1e211",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-12-02T12:04:43Z",
       "side": 1,
       "message": "AsList() method would be useful.",
+      "revId": "9624db1505d73179a78bb114c6796131dcd8a210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71425ec2_899fb4b5",
+        "filename": "tools/compliance/graph.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-02T12:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383633cd_0bd1e211",
       "revId": "9624db1505d73179a78bb114c6796131dcd8a210",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
