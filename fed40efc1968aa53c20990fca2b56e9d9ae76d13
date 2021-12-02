@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f28daa1_3f406755",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T18:44:50Z",
+      "side": 1,
+      "message": "This is an implementation detail of the soong config variables, if you want to set it in Make it should be done through $(call add_soong_config_var_value)",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 61
+      },
+      "revId": "fed40efc1968aa53c20990fca2b56e9d9ae76d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3eea04eb_a09b820a",
@@ -31,6 +54,23 @@
       "writtenOn": "2021-11-23T19:15:00Z",
       "side": 1,
       "message": "Friendly ping, Colin any thoughts (along with aosp/1897075)?",
+      "revId": "fed40efc1968aa53c20990fca2b56e9d9ae76d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b193d80_f6819f42",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T18:44:50Z",
+      "side": 1,
+      "message": "What propagates the SYSTEM_OPTIMIZE_JAVA environment variable to the SOONG_CONFIG_ANDROID_SYSTEM_OPTIMIZE_JAVA config variable?",
       "revId": "fed40efc1968aa53c20990fca2b56e9d9ae76d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
