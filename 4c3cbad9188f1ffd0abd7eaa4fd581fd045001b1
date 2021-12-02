@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6ad3ec_b1e1d32f",
+        "filename": "tools/compliance/cmd/checkshare.go",
+        "patchSetId": 66
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T21:38:46Z",
+      "side": 1,
+      "message": "I would normally return this as a fmt.Errorf, and then have the main function print the error and exit.",
+      "revId": "4c3cbad9188f1ffd0abd7eaa4fd581fd045001b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79a3f24_097586e3",
+        "filename": "tools/compliance/cmd/checkshare_test.go",
+        "patchSetId": 66
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T21:38:46Z",
+      "side": 1,
+      "message": "It\u0027s usually better to make this either a constant error:\nvar ErrConflicts \u003d fmt.Errorf(\"conflicts\")\n\nOr if you need the error message to be dynamic, make it a type that implements the error interface and add an IsConflictsErr method that can determine if an error is of the right type using a type assertion.",
+      "range": {
+        "startLine": 252,
+        "startChar": 35,
+        "endLine": 252,
+        "endChar": 46
+      },
+      "revId": "4c3cbad9188f1ffd0abd7eaa4fd581fd045001b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
