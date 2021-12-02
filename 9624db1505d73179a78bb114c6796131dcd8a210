@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d62b08a_f0b30393",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-02T10:24:52Z",
+      "side": 1,
+      "message": "PTAL the lowest-level (without the interfaces) is ready for review",
+      "revId": "9624db1505d73179a78bb114c6796131dcd8a210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
