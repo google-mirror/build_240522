@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edfacd58_3500f59d",
+        "filename": "tools/compliance/conditionset.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T21:30:34Z",
+      "side": 1,
+      "message": "Consider the empty struct (struct{}) as a value type for a map used as a set.  The syntax can be a little ugly (struct{} is the empty struct type, and struct{}{} an instance  of the empty struct type).\n\nIf you don\u0027t like that syntax I\u0027d suggest making the type bool and putting true in it.  It\u0027s a little less conceptually confusing, and bool is smaller than an interface{} anyways.",
+      "range": {
+        "startLine": 32,
+        "startChar": 39,
+        "endLine": 32,
+        "endChar": 50
+      },
+      "revId": "f7f89be5069939af6c4da8b1aa2d6255abc469bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef914e33_900a500b",
+        "filename": "tools/compliance/resolution.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-02T21:30:34Z",
+      "side": 1,
+      "message": "Exported methods should have godoc",
+      "revId": "f7f89be5069939af6c4da8b1aa2d6255abc469bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
