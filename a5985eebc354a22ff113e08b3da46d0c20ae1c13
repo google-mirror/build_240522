@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d6b31a_0fc64c6e",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-03T23:56:55Z",
+      "side": 1,
+      "message": "It looks like this BOOT_SECURITY_PATCH is for the platform code?\nSo boot.img would no longer need it if it DOESN\u0027T contain the ramdisk, and init_boot.img DOES need it?",
+      "range": {
+        "startLine": 3653,
+        "startChar": 0,
+        "endLine": 3658,
+        "endChar": 73
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
