@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017973293",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1848182?revision\u003d68",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cbceb155_eee8a435",
+        "filename": "tools/compliance/cmd/testdata/notice/lib/liba.so.meta_lic",
+        "patchSetId": 68
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-03T21:01:35Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD\" license\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "d5c683a880288de32172b06513c51a2b50da5286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
