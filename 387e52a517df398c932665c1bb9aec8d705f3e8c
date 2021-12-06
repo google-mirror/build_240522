@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74a4151_cadba0bc",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-12-06T01:19:08Z",
+      "side": 1,
+      "message": "lberki@google.com, Sorry but I realized that this helper script was missing the important -j flag *after* getting a +2 from you (It used Soong\u0027s default parallelism rather than allowing the user to provide this).\n\nCould I please have your review on this updated patchset?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
