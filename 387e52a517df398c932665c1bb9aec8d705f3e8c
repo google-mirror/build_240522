@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1683486_07e68459",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-12-06T17:59:58Z",
+      "side": 1,
+      "message": "In the context of the current script, it should be ok since the update-api build targets do not contain a space.\n\nSlightly related to this edge case is something like the user provided flags in cmd_line_args (e.g. `-j8` vs `-j 8`), and getopt should be able to handle it\n```\n$ getopt -o \"j:\" -- -j8\n -j \u00278\u0027 --\n\n$ getopt -o \"j:\" -- -j 8\n -j \u00278\u0027 --\n\n```",
+      "parentUuid": "0514b4d1_8550962f",
+      "range": {
+        "startLine": 4,
+        "startChar": 14,
+        "endLine": 4,
+        "endChar": 16
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c74a4151_cadba0bc",
         "filename": "tools/scripts/update-api",
         "patchSetId": 12
@@ -88,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f10d9c_250dfb95",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-12-06T17:59:58Z",
+      "side": 1,
+      "message": "`m -jN \u003ctarget\u003e` gets passed to `build/soong/soong_ui.bash -jN \u003ctarget\u003e`, and eventually to the Ninja invocation https://cs.android.com/android/platform/superproject/+/master:build/soong/ui/build/ninja.go;l\u003d58-60;drc\u003dmaster;bpv\u003d1;bpt\u003d1\n\nThe -j flag allows the user to set the parallelism of the update-api ninja build targets, rather than relying on the default parallelism https://cs.android.com/android/platform/superproject/+/master:build/soong/ui/build/config.go;l\u003d138",
+      "parentUuid": "4c08e24e_7d4148ed",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b87abd48_7782baa4",
@@ -101,6 +149,30 @@
       "writtenOn": "2021-12-06T08:59:44Z",
       "side": 1,
       "message": "I have never used getopt so I\u0027ll have to take these two lines of code at face value.\n\nI\u0027m somewhat surprised that this is so elaborate; I would have either done something like \"if $1 \u003d\u003d --help; then \u003cprint help\u003e; exit\" or used the builtin getopts.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3177c6d_c04e521f",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2021-12-06T17:59:58Z",
+      "side": 1,
+      "message": "I think one of the advantages of getopt over getopts is that it supports long arguments (e.g. `-l \"help\" -o \"h\"`).\n\nOTOH, getopts has better portability on a wide variety of unix platforms.",
+      "parentUuid": "b87abd48_7782baa4",
       "range": {
         "startLine": 33,
         "startChar": 2,
