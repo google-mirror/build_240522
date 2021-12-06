@@ -98,6 +98,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9dea10f7_c4308316",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-12-06T08:59:44Z",
+      "side": 1,
+      "message": "re: 1, I don\u0027t think this matters much since you won\u0027t be moving the script around much.\n\nre: 2, sgtm",
+      "parentUuid": "4a5e5b48_520f076d",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "89121d51b0d0bfd64d5b48057362fbc23ef06c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "319fdf7b_e982ea63",
         "filename": "tools/scripts/update-api",
         "patchSetId": 10

@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ed5396_181fdd49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-12-06T08:59:44Z",
+      "side": 1,
+      "message": "Still looks good; all the comments I have left open are only about polish.",
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0514b4d1_8550962f",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-12-06T08:59:44Z",
+      "side": 1,
+      "message": "this doesn\u0027t work when one of the command line arguments contains a space (then it will be split into multiple arguments). I\u0027m not sure if it matters here, though.",
+      "range": {
+        "startLine": 4,
+        "startChar": 14,
+        "endLine": 4,
+        "endChar": 16
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c74a4151_cadba0bc",
@@ -19,6 +59,53 @@
         "startChar": 0,
         "endLine": 32,
         "endChar": 35
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c08e24e_7d4148ed",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-12-06T08:59:44Z",
+      "side": 1,
+      "message": "I\u0027m confused. Why does the -j flag matter? I don\u0027t think I have ever set this on a Soong invocation manually.",
+      "parentUuid": "c74a4151_cadba0bc",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b87abd48_7782baa4",
+        "filename": "tools/scripts/update-api",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2021-12-06T08:59:44Z",
+      "side": 1,
+      "message": "I have never used getopt so I\u0027ll have to take these two lines of code at face value.\n\nI\u0027m somewhat surprised that this is so elaborate; I would have either done something like \"if $1 \u003d\u003d --help; then \u003cprint help\u003e; exit\" or used the builtin getopts.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 32
       },
       "revId": "387e52a517df398c932665c1bb9aec8d705f3e8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
