@@ -1,0 +1,99 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018089101",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870079?revision\u003d57",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "aa168e9f_c4e58d95",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 57
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-06T23:29:19Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT license\n",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "e8199bbe970e4e12729f59776caba4c5fc805a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018089112",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870079?revision\u003d57",
+      "fixSuggestions": [
+        {
+          "fixId": "a497cd7e_7f0e7f22",
+          "description": "Change to \"tools/compliance/doc.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/doc.go",
+              "range": {
+                "startLine": 61,
+                "startChar": 30,
+                "endLine": 61,
+                "endChar": 38
+              },
+              "replacement": "condition"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c6717037_d528528a",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 57
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-06T23:29:19Z",
+      "side": 1,
+      "message": "Common typo found: \"conditon\" -- should it be \"condition\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 61,
+        "startChar": 30,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "e8199bbe970e4e12729f59776caba4c5fc805a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018089101",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1870079?revision\u003d57",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "79b949f9_02efd65d",
+        "filename": "tools/compliance/doc.go",
+        "patchSetId": 57
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-06T23:29:19Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nlicensed under GPL...GPL\n",
+      "range": {
+        "startLine": 40,
+        "startChar": 19,
+        "endLine": 68,
+        "endChar": 4
+      },
+      "revId": "e8199bbe970e4e12729f59776caba4c5fc805a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
