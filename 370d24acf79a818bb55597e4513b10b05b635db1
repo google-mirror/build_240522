@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7269371_1a391649",
+        "filename": "tools/compliance/cmd/checkshare.go",
+        "patchSetId": 73
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-06T23:46:45Z",
+      "side": 1,
+      "message": "The \"error\" type is just an interface, and follows the same comparison rules as the rest of Go.  Interfaces are identical if they hold the same concrete type and value.  fmt.Errorf() returns an interface that contains some internal concrete type (defined here https://cs.android.com/android/platform/superproject/+/master:prebuilts/go/linux-x86/src/errors/errors.go;l\u003d63;drc\u003d846c316dd40a5b611f4f0d9cc9349f2424bcfc69), and a pointer to that type.  The pointer comparison compares only the address, not the contents.  That means that two calls to fmt.Errorf() will never compare equal, but reusing the same output of fmt.Errorf will always be equal.\n\nYou can create your own error types, and then the comparison rules will be based on your type.  For example if you make a type MyError string, and then implement Error() on MyError instead of *MyError, then the interface will contain the string and not a pointer to the string, and comparisons between errors will become string comparisons.  That\u0027s not a good idea though.\n\nThe short version is: if you want your errors comparable, make them a pointer type (like fmt.Errorf() does), and create them exactly once.",
+      "parentUuid": "74eae364_fc53aafb",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "370d24acf79a818bb55597e4513b10b05b635db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c786adf_77ac943f",
         "filename": "tools/compliance/cmd/checkshare.go",
         "patchSetId": 73
