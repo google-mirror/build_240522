@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74eae364_fc53aafb",
+        "filename": "tools/compliance/cmd/checkshare.go",
+        "patchSetId": 73
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-06T23:36:56Z",
+      "side": 1,
+      "message": "For reasons unknown to me, I found that unreliable. \u003d\u003d and !\u003d did not behave the way I thought they might for errors.",
+      "parentUuid": "f3fe54f5_43a3850e",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "370d24acf79a818bb55597e4513b10b05b635db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c786adf_77ac943f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbecc79_b639be15",
+        "filename": "tools/compliance/cmd/checkshare.go",
+        "patchSetId": 73
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-06T23:36:56Z",
+      "side": 1,
+      "message": "For reasons unknown to me, I found that unreliable. \u003d\u003d and !\u003d did not behave the way I thought they might for errors.",
+      "parentUuid": "6c786adf_77ac943f",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 46
+      },
+      "revId": "370d24acf79a818bb55597e4513b10b05b635db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c50e6f7_cdb1376b",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-12-06T23:10:02Z",
       "side": 1,
       "message": "err !\u003d failConflicts",
+      "range": {
+        "startLine": 252,
+        "startChar": 20,
+        "endLine": 252,
+        "endChar": 47
+      },
+      "revId": "370d24acf79a818bb55597e4513b10b05b635db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da96278_7c461478",
+        "filename": "tools/compliance/cmd/checkshare_test.go",
+        "patchSetId": 73
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-12-06T23:36:56Z",
+      "side": 1,
+      "message": "For reasons unknown to me, I found that unreliable. \u003d\u003d and !\u003d did not behave the way I thought they might for errors.",
+      "parentUuid": "1c50e6f7_cdb1376b",
       "range": {
         "startLine": 252,
         "startChar": 20,
