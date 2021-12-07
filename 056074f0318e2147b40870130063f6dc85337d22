@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018090456",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1911223?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a3ec18c5_1920c023",
+        "filename": "tools/compliance/cmd/testdata/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-07T00:12:29Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicenses\n",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "056074f0318e2147b40870130063f6dc85337d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018090456",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1911223?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "aea90ff0_294f63aa",
+        "filename": "tools/compliance/cmd/testdata/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-07T00:12:29Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicensing\n",
+      "range": {
+        "startLine": 153,
+        "startChar": 54,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "056074f0318e2147b40870130063f6dc85337d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018090456",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1911223?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "db76c94f_8ededa14",
+        "filename": "tools/compliance/cmd/testdata/notice/lib/liba.so.meta_lic",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-07T00:12:29Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD\" license\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "056074f0318e2147b40870130063f6dc85337d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
