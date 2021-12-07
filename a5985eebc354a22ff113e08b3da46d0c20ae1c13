@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fc27baf_b8925630",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "nit: \n    Test: atest releasetools_test\n    Test: atest releasetools_py3_test\n    \n    To reduce the test time, you may modify the pattern in re.match(\u0027test_.*\\\\.py$\u0027, fn) to include specific test_* files to test. e.g., test_sign_target_files_apks.py\n    http://cs/android/build/make/tools/releasetools/test_utils.py;l\u003d249;rcl\u003d6967d922988226d1318c4d060c0f444c780b0333",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922fb3b7_b6a7d6d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "Hi,\n\nAdding some comments first.\n\nYou may want to include smuckle@ (has experiences in adding multiple boot.img) and xunchang@ (for release tools) to review as well.",
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522fe06d_095639cd",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "Should this be BOARD_MKBOOTIMG_INIT_ARGS (to match line 1115 below)?\n\nOr reusing BOARD_MKBOOTIMG_ARGS here and L-1115.",
+      "range": {
+        "startLine": 1105,
+        "startChar": 84,
+        "endLine": 1105,
+        "endChar": 104
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2d6b31a_0fc64c6e",
         "filename": "core/Makefile",
         "patchSetId": 10
@@ -19,6 +82,191 @@
         "startChar": 0,
         "endLine": 3658,
         "endChar": 73
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a005049_4fae4d16",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "\u003e So boot.img would no longer need it if it DOESN\u0027T contain the ramdisk,\n\nFor now, we probably have to keep \"boot.security_patch\" as the bootloader might still read it.\n  https://source.android.com/security/keystore/version-binding\n\nFor the future, we might have to think about how to define \"boot.security_patch\" in the kernel-only boot.img.  \n\nWe\u0027ll need to add \"init_boot.security_patch\" to the above doc\nLet\u0027s discuss this with swillden@ for that.",
+      "parentUuid": "d2d6b31a_0fc64c6e",
+      "range": {
+        "startLine": 3653,
+        "startChar": 0,
+        "endLine": 3658,
+        "endChar": 73
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bcd0987_981f3255",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3977,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "Remove the second tab? (just align with other lines).",
+      "range": {
+        "startLine": 3977,
+        "startChar": 1,
+        "endLine": 3977,
+        "endChar": 2
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12cb7bd_288eaf78",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4550,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "Why not just using init_boot\u003dtrue in L4552, so we don\u0027t need an \u0027else\u0027 in L4551?",
+      "range": {
+        "startLine": 4550,
+        "startChar": 15,
+        "endLine": 4550,
+        "endChar": 32
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb43b11_66768113",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4552,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "Just curious, why do we have to support multiple init_boot.img?\n\nIIRC, we add multiple boot.img just to pack boot.img with different kernel versions, b/151094943. But there seems to be no need for multiple init_boot.img?",
+      "range": {
+        "startLine": 4552,
+        "startChar": 25,
+        "endLine": 4552,
+        "endChar": 32
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f669284f_c3e9d3a2",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 5683,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "using spaces instead for alignment?",
+      "range": {
+        "startLine": 5683,
+        "startChar": 0,
+        "endLine": 5683,
+        "endChar": 1
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5132d5e6_ac4dc90e",
+        "filename": "core/main.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "uses space here",
+      "range": {
+        "startLine": 1635,
+        "startChar": 0,
+        "endLine": 1635,
+        "endChar": 1
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7dafbec_2bd4d441",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "how about using init_boot \u003d\u003d true?  (just like vendor_boot in L763)\n\nIt\u0027s more intuitive",
+      "range": {
+        "startLine": 762,
+        "startChar": 41,
+        "endLine": 762,
+        "endChar": 65
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "848d9c02_75ab9e55",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-07T10:01:43Z",
+      "side": 1,
+      "message": "How about passing partition_name (either \"boot\" or \"init_boot\" from the caller), so we can remove the nested try/except here?\n\ne.g.,\n\n  def _ReadBootPropFile(input_file, partition_name, ramdisk_format):\n    ...\n    image_path \u003d \u0027IMAGES/\u0027 + partition_name + \u0027.img\u0027\n    try:\n      boot_img \u003d ExtractFromInputFile(input_file, image_path)\n    except KeyError:\n      logger.warning(\u0027Failed to read %s\u0027, image_path)\n      return \u0027\u0027",
+      "range": {
+        "startLine": 954,
+        "startChar": 3,
+        "endLine": 959,
+        "endChar": 70
       },
       "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
