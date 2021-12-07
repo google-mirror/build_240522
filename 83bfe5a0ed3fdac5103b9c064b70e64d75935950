@@ -86,6 +86,41 @@
       "message": "any remaining merge stoppers I\u0027d need to take care of here?",
       "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cafbde_1fc30185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1093291
+      },
+      "writtenOn": "2021-12-07T14:02:02Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "7a74575a_a8f5734d",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60bd4095_c9e66f7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1093291
+      },
+      "writtenOn": "2021-12-07T14:02:02Z",
+      "side": 1,
+      "message": "Given this remains an issue and all open issues are resolved, are there any updates on merging this?",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
