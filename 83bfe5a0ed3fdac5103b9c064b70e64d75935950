@@ -121,6 +121,23 @@
       "message": "Given this remains an issue and all open issues are resolved, are there any updates on merging this?",
       "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0694fc9_08183e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-12-08T00:46:30Z",
+      "side": 1,
+      "message": "Friendly ping on remaining reviewers",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
