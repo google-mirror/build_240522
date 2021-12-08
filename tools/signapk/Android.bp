@@ -24,6 +24,7 @@ java_binary_host {
     name: "signapk",
     srcs: ["src/**/*.java"],
     manifest: "SignApk.mf",
+    java_version: "1.8",
     static_libs: [
         "apksig",
         "bouncycastle-unbundled",
