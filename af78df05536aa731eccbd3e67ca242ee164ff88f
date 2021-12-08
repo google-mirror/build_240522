@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1895b8b6_18b36445",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4881,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 0,
+      "message": "add this newline back? (this looks like an accidental remove)",
+      "range": {
+        "startLine": 4880,
+        "startChar": 0,
+        "endLine": 4881,
+        "endChar": 1
+      },
+      "revId": "af78df05536aa731eccbd3e67ca242ee164ff88f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

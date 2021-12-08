@@ -41,6 +41,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc8ed6c_37f3bb8d",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "Add a \"INTERNAL_INIT_BOOT_IMAGE_ARGS :\u003d\" line to reset the variable before appending anything to it, so it\u0027s clear what is the *scope* of INTERNAL_INIT_BOOT_IMAGE_ARGS, since Makefile variables are all global 😞.",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 29
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "522fe06d_095639cd",
@@ -59,6 +82,53 @@
         "startChar": 84,
         "endLine": 1105,
         "endChar": 104
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7345d00_1de84666",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "same question",
+      "parentUuid": "522fe06d_095639cd",
+      "range": {
+        "startLine": 1105,
+        "startChar": 84,
+        "endLine": 1105,
+        "endChar": 104
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3071646_c3e2f8fa",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "is this the same as saying $(INTERNAL_INIT_BOOT_IMAGE_ARGS) ?",
+      "range": {
+        "startLine": 1115,
+        "startChar": 76,
+        "endLine": 1115,
+        "endChar": 113
       },
       "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -101,6 +171,53 @@
       "side": 1,
       "message": "\u003e So boot.img would no longer need it if it DOESN\u0027T contain the ramdisk,\n\nFor now, we probably have to keep \"boot.security_patch\" as the bootloader might still read it.\n  https://source.android.com/security/keystore/version-binding\n\nFor the future, we might have to think about how to define \"boot.security_patch\" in the kernel-only boot.img.  \n\nWe\u0027ll need to add \"init_boot.security_patch\" to the above doc\nLet\u0027s discuss this with swillden@ for that.",
       "parentUuid": "d2d6b31a_0fc64c6e",
+      "range": {
+        "startLine": 3653,
+        "startChar": 0,
+        "endLine": 3658,
+        "endChar": 73
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24ea989_818d2bc3",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "space, don\u0027t use tab, tab has special meaning in the Makefile grammar, using tab here causes confusion.",
+      "range": {
+        "startLine": 3658,
+        "startChar": 0,
+        "endLine": 3658,
+        "endChar": 1
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f54d5a_b7fd4e78",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "Yes the security patch level only makes sense when talking about *platform* code, which is what init_boot.img is. So I agree the *correct* thing to do is to set SPL in the init_boot.img, and clear the SPL value in boot.img, since boot.img now contains only kernel stuff.\nBut like Bowgo said, we don\u0027t really know if there is any other partys that depend on the boot.img SPL value right now, so we need to be very careful about this.",
+      "parentUuid": "3a005049_4fae4d16",
       "range": {
         "startLine": 3653,
         "startChar": 0,
@@ -198,6 +315,52 @@
         "startChar": 0,
         "endLine": 5683,
         "endChar": 1
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29cd5780_f729e260",
+        "filename": "core/board_config.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "Is it possible to make this fatal? In other words, don\u0027t break current product, but prevent future products from setting BOARD_USES_RECOVERY_AS_BOOT \u0026\u0026 PRODUCT_BUILD_INIT_BOOT_IMAGE together.\n\nI\u0027m asking this because 99% of the time warnings are ignored.",
+      "range": {
+        "startLine": 449,
+        "startChar": 6,
+        "endLine": 449,
+        "endChar": 13
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7998cf6d_571bb80d",
+        "filename": "core/board_config.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-08T11:55:02Z",
+      "side": 1,
+      "message": "Could you also update L565 to *not* build boot-debug.img if ramdisk is moved to init_boot.img?\nAdd something like\n```\nelse ifdef BUILDING_INIT_BOOT_IMAGE\n  ifeq ($(PRODUCT_BUILD_DEBUG_BOOT_IMAGE),true)\n    $(warning PRODUCT_BUILD_DEBUG_BOOT_IMAGE is true, but boot image doesn\u0027t contain any ramdisk. \\\n      Skip building the debug boot image.)\n  endif\n```\nso the build logic is consistent, thanks!",
+      "range": {
+        "startLine": 453,
+        "startChar": 4,
+        "endLine": 453,
+        "endChar": 28
       },
       "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
