@@ -142,32 +142,59 @@ func regexMatch(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
 	return starlark.False, nil
 }
 
+type listOrString []string
+
+func (ls *listOrString) Unpack(v starlark.Value) error {
+	if l, ok := v.(*starlark.List); ok {
+		for i := 0; i<l.Len(); i++ {
+			if s, ok := l.Index(i).(starlark.String); ok {
+				*ls = append(*ls, s.GoString())
+			} else {
+				return fmt.Errorf("got list of %s, want list of strings", l.Index(i).Type())
+			}
+		}
+		return nil
+	}
+
+	if s, ok := v.(starlark.String); ok {
+		*ls = append(*ls, s.GoString())
+		return nil
+	}
+
+	return fmt.Errorf("got %s, want a string or list of strings", v.Type())
+}
+
 // wildcard(pattern, top=None) expands shell's glob pattern. If 'top' is present,
 // the 'top/pattern' is globbed and then 'top/' prefix is removed.
 func wildcard(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
 	kwargs []starlark.Tuple) (starlark.Value, error) {
-	var pattern string
+	var patterns listOrString
 	var top string
 
-	if err := starlark.UnpackPositionalArgs(b.Name(), args, kwargs, 1, &pattern, &top); err != nil {
+	if err := starlark.UnpackPositionalArgs(b.Name(), args, kwargs, 1, &patterns, &top); err != nil {
 		return starlark.None, err
 	}
 
+	if top != "" {
+		top += string(filepath.Separator)
+	}
+
 	var files []string
-	var err error
-	if top == "" {
-		if files, err = filepath.Glob(pattern); err != nil {
+	for _, pattern := range patterns {
+		if filesFromOne, err := filepath.Glob(top + pattern); err != nil {
 			return starlark.None, err
-		}
-	} else {
-		prefix := top + string(filepath.Separator)
-		if files, err = filepath.Glob(prefix + pattern); err != nil {
-			return starlark.None, err
-		}
-		for i := range files {
-			files[i] = strings.TrimPrefix(files[i], prefix)
+		} else {
+			// This can duplicate results, but that's what make does too
+			files = append(files, filesFromOne...)
 		}
 	}
+
+	if top != "" {
+		for i := range files {
+			files[i] = strings.TrimPrefix(files[i], top)
+		}
+	}
+
 	return makeStringList(files), nil
 }
 

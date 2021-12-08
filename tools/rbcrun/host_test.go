@@ -157,3 +157,10 @@ func TestShell(t *testing.T) {
 	}
 	exerciseStarlarkTestFile(t, "testdata/shell.star")
 }
+
+func TestWildcard(t *testing.T) {
+	if err := os.Setenv("TEST_DATA_DIR", dataDir()); err != nil {
+		t.Fatal(err)
+	}
+	exerciseStarlarkTestFile(t, "testdata/wildcard.star")
+}
