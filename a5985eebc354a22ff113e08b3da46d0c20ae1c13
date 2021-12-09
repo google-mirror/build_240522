@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ac7000_72486786",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-09T04:59:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is specific to Cloudtop as I ran in my desktop.\n\nAdding xunchang@ to see if any idea.",
+      "parentUuid": "ca61d381_3f63675b",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "922fb3b7_b6a7d6d5",
@@ -456,6 +480,30 @@
       "side": 1,
       "message": "Done. I also removed the $(hide) here. I don\u0027t understand why we choose to hide it(for boot.img) vs not hide it(for other images.",
       "parentUuid": "c12cb7bd_288eaf78",
+      "range": {
+        "startLine": 4550,
+        "startChar": 15,
+        "endLine": 4550,
+        "endChar": 32
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c99f27_aa1c6a11",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 4550,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-09T04:59:21Z",
+      "side": 1,
+      "message": "IIRC, $(hide) is an old usage and we don\u0027t use $(hide) some time later.\n\nSo for adding new codes, let\u0027s just remove $(hide).",
+      "parentUuid": "85ff9348_878aedf8",
       "range": {
         "startLine": 4550,
         "startChar": 15,
