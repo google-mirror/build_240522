@@ -16,6 +16,24 @@
       "message": "As the implementation traverses the tree separately for each pattern, IMHO there is no need to fix rblf_wildcard implementation at all, it can all be handled i rbld.expand_wildcard.\nAlso, build/ootls/rbcrun/testdata/file_ops.star already has the tests, testing with multiple items can be added there.",
       "revId": "9938832884f76ac5ebbfc3b4c5a8960d8d6a1e72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "460fd0b8_b8b50e0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2021-12-09T01:53:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b5b54d5_ba32d0a5",
+      "revId": "9938832884f76ac5ebbfc3b4c5a8960d8d6a1e72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
