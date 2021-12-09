@@ -16,6 +16,23 @@
       "message": "Adding Tianjie for reviewing releasetool changes.",
       "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359c9b12_e320bed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-09T16:27:38Z",
+      "side": 1,
+      "message": "+smuckle for some more image building expertise and +xunchang for releasetools review.\nThank you for taking a look!",
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
