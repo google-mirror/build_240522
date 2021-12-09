@@ -68,6 +68,13 @@ endif
 art_target_include_debug_build :=
 apex_test_module :=
 
+# Allow compat symlinks for ART binaries (cf. makeCompatSymlinks in
+# build/soong/apex/vndk.go).
+# TODO(b/124106384): Clean these up.
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+  system/bin/dalvikvm \
+  system/bin/dex2oat% \
+
 # Certificates.
 PRODUCT_PACKAGES += \
     cacerts \
