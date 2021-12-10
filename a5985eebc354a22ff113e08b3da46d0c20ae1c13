@@ -138,6 +138,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6539ff96_6b24f9d3",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "Yes, lgtm",
+      "parentUuid": "e38d783f_e9265451",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 29
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "522fe06d_095639cd",
         "filename": "core/Makefile",
         "patchSetId": 10

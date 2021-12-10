@@ -33,6 +33,190 @@
       "message": "+smuckle for some more image building expertise and +xunchang for releasetools review.\nThank you for taking a look!",
       "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d1f81d_10a6e9f5",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "please also indent these nested if-blocks",
+      "range": {
+        "startLine": 913,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 6
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ece139_d91d271b",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "nit (no action needed): this could be just \"ifdef BUILDING_INIT_BOOT_IMAGE\" / \"ifndef BUILDING_INIT_BOOT_IMAGE\", but I could see both styles (ifeq vs. ifdef) in this file, so probably a matter of taste.",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 40
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd923d9_2e48216a",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "I just realized the SPL value in the boot.img header is PLATFORM_SECURITY_PATCH, but the SPL value in the vbmeta of boot.img is BOOT_SECURITY_PATCH (https://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d3626).\n\nI don\u0027t think this difference is intended. Should we update this to use BOOT_SECURITY_PATCH? We should also sort this out in the email thread... @bowgotsai",
+      "range": {
+        "startLine": 962,
+        "startChar": 4,
+        "endLine": 962,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12100b89_1fe1e1dc",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "missing INTERNAL_MKBOOTIMG_VERSION_ARGS (like L1107)?",
+      "range": {
+        "startLine": 1117,
+        "startChar": 46,
+        "endLine": 1117,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e948dc_2cf0e95b",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "we also need?\n\nelse ifdef BOARD_PREBUILT_INIT_BOOT_IMAGE\n   $(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(BOARD_PREBUILT_INIT_BOOT_IMAGE)\n   cp $(BOARD_PREBUILT_INIT_BOOT_IMAGE) $(INSTALLED_INIT_BOOT_IMAGE_TARGET)\nendif",
+      "range": {
+        "startLine": 1121,
+        "startChar": 31,
+        "endLine": 1121,
+        "endChar": 32
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320d1397_8fb9dc11",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4553,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "this seems unused?",
+      "range": {
+        "startLine": 4553,
+        "startChar": 1,
+        "endLine": 4553,
+        "endChar": 65
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2d16a75_3e59beef",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4936,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "why is this added here? I thought BOARD_USES_RECOVERY_AS_BOOT and BUILDING_INIT_BOOT_IMAGE are mutually exclusive?",
+      "range": {
+        "startLine": 4936,
+        "startChar": 64,
+        "endLine": 4936,
+        "endChar": 100
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca83048_5dec2fbf",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4973,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:05:37Z",
+      "side": 1,
+      "message": "and why isn\u0027t this INSTALLED_INIT_BOOT_IMAGE_TARGET ?",
+      "range": {
+        "startLine": 4973,
+        "startChar": 35,
+        "endLine": 4973,
+        "endChar": 57
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
