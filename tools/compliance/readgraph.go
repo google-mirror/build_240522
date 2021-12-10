@@ -29,6 +29,8 @@ import (
 var (
 	// ConcurrentReaders is the size of the task pool for limiting resource usage e.g. open files.
 	ConcurrentReaders = 5
+	// EdgeGrowthIncrement is the size by which to increase the capacity of the edges.
+	EdgeGrowthIncrement = 5000
 )
 
 // result describes the outcome of reading and parsing a single license metadata file.
@@ -229,6 +231,7 @@ func readFile(recv *receiver, file string) {
 			recv.results <- &result{file, nil, fmt.Errorf("error reading license metadata %q: %w", file, err)}
 			return
 		}
+		f.Close()
 
 		tn := &TargetNode{lg: recv.lg, name: file}
 
