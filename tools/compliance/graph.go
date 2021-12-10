@@ -16,11 +16,19 @@ package compliance
 
 import (
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 	"sync"
 )
 
+var (
+	RecognizedAnnotations = map[string]string{
+		"static":    "static",
+		"dynamic":   "dynamic",
+		"toolchain": "toolchain",
+	}
+)
 // LicenseGraph describes the immutable license metadata for a set of root
 // targets and the transitive closure of their dependencies.
 //
@@ -132,9 +140,11 @@ func newLicenseGraph() *LicenseGraph {
 // indexForward guarantees the `index` map is populated to look up edges by
 // `target`.
 func (lg *LicenseGraph) indexForward() {
+	fmt.Fprintf(os.Stderr, "indexing forward\n")
 	lg.mu.Lock()
 	defer func() {
 		lg.mu.Unlock()
+		fmt.Fprintf(os.Stderr, "/indexed forward\n")
 	}()
 
 	if lg.index != nil {
@@ -246,6 +256,15 @@ func (p *TargetEdgePath) Clear() {
 	*p = (*p)[:0]
 }
 
+// Copy makes a new path with the same value.
+func (p *TargetEdgePath) Copy() *TargetEdgePath {
+	result := make(TargetEdgePath, 0, len(*p))
+	for _, e := range *p {
+		result = append(result, e)
+	}
+	return &result
+}
+
 // String returns a string representation of the path: [n1 -> n2 -> ... -> nn].
 func (p *TargetEdgePath) String() string {
 	if p == nil {
@@ -325,7 +344,7 @@ func (tn *TargetNode) LicenseKinds() []string {
 // e.g. notice or proprietary
 func (tn *TargetNode) LicenseConditions() *LicenseConditionSet {
 	result := newLicenseConditionSet()
-	result.add(tn, tn.proto.LicenseConditions...)
+	result.add(tn, tn.licenseConditions...)
 	return result
 }
 
@@ -350,6 +369,12 @@ func (tn *TargetNode) Built() []string {
 // (unordered)
 func (tn *TargetNode) Installed() []string {
 	return append([]string{}, tn.proto.Installed...)
+}
+
+// TargetFiles returns the list of files built or installed by the module or
+// target. (unordered)
+func (tn *TargetNode) TargetFiles() []string {
+	return append(tn.proto.Built, tn.proto.Installed...)
 }
 
 // InstallMap returns the list of path name transformations to make to move
@@ -387,12 +412,12 @@ type InstallMap struct {
 // Annotations typically distinguish between static linkage versus dynamic
 // versus tools that are used at build time but are not linked in any way.
 type TargetEdgeAnnotations struct {
-	annotations map[string]bool
+	annotations map[string]struct{}
 }
 
 // newEdgeAnnotations creates a new instance of TargetEdgeAnnotations.
 func newEdgeAnnotations() TargetEdgeAnnotations {
-	return TargetEdgeAnnotations{make(map[string]bool)}
+	return TargetEdgeAnnotations{make(map[string]struct{})}
 }
 
 // HasAnnotation returns true if an annotation `ann` is in the set.
@@ -439,7 +464,7 @@ func (ea TargetEdgeAnnotations) AsList() []string {
 
 // TargetNodeSet describes a set of distinct nodes in a license graph.
 type TargetNodeSet struct {
-	nodes map[*TargetNode]bool
+	nodes map[*TargetNode]struct{}
 }
 
 // Contains returns true when `target` is an element of the set.

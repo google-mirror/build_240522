@@ -19,6 +19,18 @@ import (
 	"strings"
 )
 
+var (
+	RecognizedConditionNames = map[string]string{
+		"unencumbered":      "unencumbered",
+		"permissive":        "permissive",
+		"notice":            "notice",
+		"reciprocal":        "reciprocal",
+		"restricted":        "restricted",
+		"proprietary":       "proprietary",
+		"by_exception_only": "by_exception_only",
+	}
+)
+
 // LicenseCondition describes an individual license condition or requirement
 // originating at a specific target node. (immutable)
 //

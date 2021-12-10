@@ -240,7 +240,7 @@ func TestPolicy_edgeConditions(t *testing.T) {
 				otherCondition = fields[1]
 				// other target must exist in graph
 				lg.targets[otherTarget] = &TargetNode{name: otherTarget}
-				lg.targets[otherTarget].proto.LicenseConditions = append(lg.targets[otherTarget].proto.LicenseConditions, otherCondition)
+				lg.targets[otherTarget].licenseConditions = append(lg.targets[otherTarget].licenseConditions, otherCondition)
 			}
 			if tt.expectedDepActions != nil {
 				depActions := make(actionSet)

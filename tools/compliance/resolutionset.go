@@ -117,10 +117,12 @@ func (rs *ResolutionSet) AttachesTo() TargetNodeList {
 // ActsOn identifies the list of targets to act on (share, give notice etc.)
 // to resolve conditions. (unordered)
 func (rs *ResolutionSet) ActsOn() TargetNodeList {
-	tset := make(map[*TargetNode]bool)
+	tset := make(map[*TargetNode]struct{})
 	for _, as := range rs.resolutions {
 		for actsOn := range as {
-			tset[actsOn] = true
+			if _, ok := tset[actsOn]; !ok {
+				tset[actsOn] = struct{}{}
+			}
 		}
 	}
 	targets := make(TargetNodeList, 0, len(tset))
@@ -133,12 +135,14 @@ func (rs *ResolutionSet) ActsOn() TargetNodeList {
 // Origins identifies the list of targets originating conditions to resolve.
 // (unordered)
 func (rs *ResolutionSet) Origins() TargetNodeList {
-	tset := make(map[*TargetNode]bool)
+	tset := make(map[*TargetNode]struct{})
 	for _, as := range rs.resolutions {
 		for _, cs := range as {
 			for _, origins := range cs.conditions {
 				for origin := range origins {
-					tset[origin] = true
+					if _, ok := tset[origin]; !ok {
+						tset[origin] = struct{}{}
+					}
 				}
 			}
 		}
@@ -166,18 +170,25 @@ func (rs *ResolutionSet) Resolutions(attachedTo *TargetNode) ResolutionList {
 	return result
 }
 
+// CountResolutions returns the number of resolutions that `attachedTo`
+// target must resolve. Returns 0 if no conditions apply.
+//
+// Panics if `attachedTo` does not appear in the set.
+func (rs *ResolutionSet) CountResolutions(attachedTo *TargetNode) int {
+	as, ok := rs.resolutions[attachedTo]
+	if !ok {
+		return 0
+	}
+	return len(as)
+}
+
 // ResolutionsByActsOn returns the list of resolutions that must `actOn` to
 // resolvee. Returns empty list if no conditions apply.
 //
 // Panics if `actOn` does not appear in the set.
 func (rs *ResolutionSet) ResolutionsByActsOn(actOn *TargetNode) ResolutionList {
-	c := 0
-	for _, as := range rs.resolutions {
-		if _, ok := as[actOn]; ok {
-			c++
-		}
-	}
-	result := make(ResolutionList, 0, c)
+	size := rs.CountResolutionsByActsOn(actOn)
+	result := make(ResolutionList, 0, size)
 	for attachedTo, as := range rs.resolutions {
 		if cs, ok := as[actOn]; ok {
 			result = append(result, Resolution{attachedTo, actOn, cs.Copy()})
@@ -186,14 +197,30 @@ func (rs *ResolutionSet) ResolutionsByActsOn(actOn *TargetNode) ResolutionList {
 	return result
 }
 
+// CountResolutionsByActsOn returns the number of resolutions that must `actOn`
+// to resolvee. Returns 0 if no conditions apply.
+//
+// Panics if `actOn` does not appear in the set.
+func (rs *ResolutionSet) CountResolutionsByActsOn(actOn *TargetNode) int {
+	count := 0
+	for _, as := range rs.resolutions {
+		if _, ok := as[actOn]; ok {
+			count++
+		}
+	}
+	return count
+}
+
 // AttachesToByOrigin identifies the list of targets requiring action to
 // resolve conditions originating at `origin`. (unordered)
 func (rs *ResolutionSet) AttachesToByOrigin(origin *TargetNode) TargetNodeList {
-	tset := make(map[*TargetNode]bool)
+	tset := make(map[*TargetNode]struct{})
 	for attachesTo, as := range rs.resolutions {
 		for _, cs := range as {
 			if cs.HasAnyByOrigin(origin) {
-				tset[attachesTo] = true
+				if _, ok := tset[attachesTo]; !ok {
+					tset[attachesTo] = struct{}{}
+				}
 				break
 			}
 		}
@@ -256,6 +283,32 @@ func (rs *ResolutionSet) AllByNameAttachToTarget(attachedTo *TargetNode, names .
 		}
 	}
 	return true
+}
+
+// ByReachableList returns the list of resolutions attached to and acting on
+// target nodes in the `reachable` set.
+func (rs *ResolutionSet) ByReachableList(reachable *TargetNodeSet) ResolutionList {
+	rl := make(ResolutionList, 0, rs.CountByReachable(reachable))
+	for attachesTo, as := range rs.resolutions {
+		for actsOn, cs := range as {
+			rl = append(rl, Resolution{attachesTo, actsOn, cs})
+		}
+	}
+	return rl
+}
+
+// CountByReachable returns the number of resolutions attached to and acting on
+// target nodes in the `reachable` set.
+func (rs *ResolutionSet) CountByReachable(reachable *TargetNodeSet) int {
+	size := 0
+	for attachesTo, as := range rs.resolutions {
+		for actsOn := range as {
+			if reachable.Contains(attachesTo) && reachable.Contains(actsOn) {
+				size++
+			}
+		}
+	}
+	return size
 }
 
 // IsEmpty returns true if the set contains no conditions to resolve.

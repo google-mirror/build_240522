@@ -14,6 +14,11 @@
 
 package compliance
 
+import (
+	"fmt"
+	"os"
+)
+
 // ResolveBottomUpConditions performs a bottom-up walk of the LicenseGraph
 // propagating conditions up the graph as necessary according to the properties
 // of each edge and according to each license condition in question.
@@ -37,6 +42,8 @@ func ResolveBottomUpConditions(lg *LicenseGraph) *ResolutionSet {
 	if rs != nil {
 		return rs
 	}
+
+	fmt.Fprintf(os.Stderr, "resolving bottom-up\n")
 
 	// must be indexed for fast lookup
 	lg.indexForward()
@@ -77,23 +84,29 @@ func ResolveTopDownConditions(lg *LicenseGraph) *ResolutionSet {
 	// start with the conditions propagated up the graph
 	rs = ResolveBottomUpConditions(lg)
 
+	fmt.Fprintf(os.Stderr, "resolving top-down\n")
+
 	// rmap maps 'appliesTo' targets to their applicable conditions
 	//
 	// rmap is the resulting ResolutionSet
 	rmap := make(map[*TargetNode]actionSet)
 
 	// cmap contains the set of targets walked as pure aggregates. i.e. containers
-	cmap := make(map[*TargetNode]bool)
+	cmap := make(map[*TargetNode]struct{})
+
+	progress := 0
 
 	var walk func(fnode *TargetNode, cs *LicenseConditionSet, treatAsAggregate bool)
 
 	walk = func(fnode *TargetNode, cs *LicenseConditionSet, treatAsAggregate bool) {
+		progress++
+		fmt.Fprintf(os.Stderr, "\rdown %d %d %d         \r", progress, len(fnode.licenseConditions), rs.CountResolutions(fnode))
 		if _, ok := rmap[fnode]; !ok {
 			rmap[fnode] = make(actionSet)
 		}
 		rmap[fnode].add(fnode, cs)
 		if treatAsAggregate {
-			cmap[fnode] = true
+			cmap[fnode] = struct{}{}
 		}
 		// add conditions attached to `fnode`
 		cs = cs.Copy()
@@ -157,6 +170,8 @@ func ResolveTopDownConditions(lg *LicenseGraph) *ResolutionSet {
 		}
 	}
 
+	fmt.Fprintf(os.Stderr, "\n")
+
 	// propagate any new conditions back up the graph
 	rs = resolveBottomUp(lg, rmap)
 
@@ -179,15 +194,23 @@ func resolveBottomUp(lg *LicenseGraph, priors map[*TargetNode]actionSet) *Resolu
 	rs := newResolutionSet()
 
 	// cmap contains an entry for every target that was previously walked as a pure aggregate only.
-	cmap := make(map[string]bool)
+	cmap := make(map[string]struct{})
 
 	var walk func(f string, treatAsAggregate bool) actionSet
 
+	progress := 0
+
 	walk = func(f string, treatAsAggregate bool) actionSet {
+		progress++
 		target := lg.targets[f]
+		nactions := 0
+		if _, ok := priors[target]; ok {
+			nactions = len(priors[target])
+		}
+		fmt.Fprintf(os.Stderr, "\rwalk %d %d %d        \r", progress, len(target.licenseConditions), nactions)
 		result := make(actionSet)
 		result[target] = newLicenseConditionSet()
-		result[target].add(target, target.proto.LicenseConditions...)
+		result[target].add(target, target.licenseConditions...)
 		if pas, ok := priors[target]; ok {
 			result.addSet(pas)
 		}
@@ -205,7 +228,7 @@ func resolveBottomUp(lg *LicenseGraph, priors map[*TargetNode]actionSet) *Resolu
 			delete(cmap, f)
 		}
 		if treatAsAggregate {
-			cmap[f] = true
+			cmap[f] = struct{}{}
 		}
 
 		// add all the conditions from all the dependencies
@@ -237,5 +260,6 @@ func resolveBottomUp(lg *LicenseGraph, priors map[*TargetNode]actionSet) *Resolu
 		_ = walk(r, lg.targets[r].IsContainer())
 	}
 
+	fmt.Fprintf(os.Stderr, "\n")
 	return rs
 }

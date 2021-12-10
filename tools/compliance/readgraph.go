@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"os"
 	"strings"
 	"sync"
 
@@ -29,6 +30,8 @@ import (
 var (
 	// ConcurrentReaders is the size of the task pool for limiting resource usage e.g. open files.
 	ConcurrentReaders = 5
+	// EdgeGrowthIncrement is the size by which to increase the capacity of the edges.
+	EdgeGrowthIncrement = 5000
 )
 
 // result describes the outcome of reading and parsing a single license metadata file.
@@ -140,6 +143,11 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 				recv.lg.mu.Lock()
 				recv.lg.targets[r.file] = r.target
 				if len(r.edges) > 0 {
+					if len(r.edges) + len(recv.lg.edges) > cap(recv.lg.edges) {
+						newEdges := make([]*dependencyEdge, len(recv.lg.edges), cap(recv.lg.edges) + EdgeGrowthIncrement)
+						copy(newEdges, recv.lg.edges)
+						recv.lg.edges = newEdges
+					}
 					recv.lg.edges = append(recv.lg.edges, r.edges...)
 				}
 				recv.lg.mu.Unlock()
@@ -148,6 +156,11 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 				recv.results = nil
 			}
 		}
+	}
+
+	if lg != nil {
+		fmt.Fprintf(os.Stderr, "%d targets\n", len(lg.targets))
+		fmt.Fprintf(os.Stderr, "%d edges\n", len(lg.edges))
 	}
 
 	return lg, err
@@ -160,6 +173,9 @@ type targetNode struct {
 
 	// name is the path to the metadata file
 	name string
+
+	// licenseConditions is the set of recognized license conditions
+	licenseConditions []string
 }
 
 // dependencyEdge describes a single edge in the license graph.
@@ -188,10 +204,9 @@ func addDependencies(edges *[]*dependencyEdge, target string, dependencies []*li
 		}
 		annotations := newEdgeAnnotations()
 		for _, a := range ad.Annotations {
-			if len(a) == 0 {
-				continue
+			if ann, ok := RecognizedAnnotations[a]; ok {
+				annotations.annotations[ann] = struct{}{}
 			}
-			annotations.annotations[a] = true
 		}
 		*edges = append(*edges, &dependencyEdge{target, dependency, annotations})
 	}
@@ -217,6 +232,8 @@ func readFile(recv *receiver, file string) {
 			return
 		}
 
+		f.Close()
+
 		tn := &TargetNode{name: file}
 
 		err = prototext.Unmarshal(data, &tn.proto)
@@ -232,6 +249,14 @@ func readFile(recv *receiver, file string) {
 			return
 		}
 		tn.proto.Deps = []*license_metadata_proto.AnnotatedDependency{}
+
+		tn.licenseConditions = make([]string, 0, len(tn.proto.LicenseConditions))
+		for _, lc := range tn.proto.LicenseConditions {
+			if cn, ok := RecognizedConditionNames[lc]; ok {
+				tn.licenseConditions = append(tn.licenseConditions, cn)
+			}
+		}
+		tn.proto.LicenseConditions = []string{}
 
 		// send result for this file and release task before scheduling dependencies,
 		// but do not signal done to WaitGroup until dependencies are scheduled.
