@@ -106,6 +106,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b8b3e13_fc9c6893",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-10T11:04:40Z",
+      "side": 1,
+      "message": "--os_patch_level predates BOOT_SECURITY_PATCH.\n\nAnd I\u0027m not sure if all devices actually defines BOOT_SECURITY_PATCH.\n\nWe can probably change this to --os_patch_level $(BOOT_SECURITY_PATCH) but will have to set the default value of BOOT_SECURITY_PATCH to $(PLATFORM_SECURITY_PATCH) if it\u0027s not defined.",
+      "parentUuid": "5fd923d9_2e48216a",
+      "range": {
+        "startLine": 962,
+        "startChar": 4,
+        "endLine": 962,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12100b89_1fe1e1dc",
         "filename": "core/Makefile",
         "patchSetId": 11
