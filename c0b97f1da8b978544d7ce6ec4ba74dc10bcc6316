@@ -248,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aca6f77d_cb4f6d6c",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-10T15:09:40Z",
+      "side": 1,
+      "message": "Yup, I also mentioned this in the e-mail thread, with an example: https://r.android.com/1711437/\n\nAnd I thought this will be done as a separate CL (so it\u0027s easier for us to review a smaller CL here).",
+      "parentUuid": "d3e948dc_2cf0e95b",
+      "range": {
+        "startLine": 1121,
+        "startChar": 31,
+        "endLine": 1121,
+        "endChar": 32
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320d1397_8fb9dc11",
         "filename": "core/Makefile",
         "patchSetId": 11
@@ -282,6 +306,30 @@
       "writtenOn": "2021-12-10T10:05:37Z",
       "side": 1,
       "message": "why is this added here? I thought BOARD_USES_RECOVERY_AS_BOOT and BUILDING_INIT_BOOT_IMAGE are mutually exclusive?",
+      "range": {
+        "startLine": 4936,
+        "startChar": 64,
+        "endLine": 4936,
+        "endChar": 100
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bef61ed_c465e024",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4936,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-10T15:09:40Z",
+      "side": 1,
+      "message": "Good catch.\n\nRight, if a device uses init_boot.img, then it should be a GKI device.\n\nThus, the device might set BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT but will not set BOARD_USES_RECOVERY_AS_BOOT because the /boot partition is generic.",
+      "parentUuid": "b2d16a75_3e59beef",
       "range": {
         "startLine": 4936,
         "startChar": 64,
