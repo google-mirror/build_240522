@@ -152,6 +152,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e40cc9f_7b28f57b",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T11:30:54Z",
+      "side": 1,
+      "message": "oh wait, maybe the current code is correct then? because BOOT_SECURITY_PATCH is not always defined like you said, so it\u0027s reasonable to just use the platform_security_patch here. and BOOT_SECURITY_PATCH is only used for vbmeta signing",
+      "parentUuid": "3cd2bb04_c8cd2fdb",
+      "range": {
+        "startLine": 962,
+        "startChar": 4,
+        "endLine": 962,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12100b89_1fe1e1dc",
