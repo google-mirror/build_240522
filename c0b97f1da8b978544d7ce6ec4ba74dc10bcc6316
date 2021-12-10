@@ -130,6 +130,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cd2bb04_c8cd2fdb",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T11:25:56Z",
+      "side": 1,
+      "message": "yeah use BOOT_SECURITY_PATCH for --os_patch_level if defined and fallback to PLATFORM_SECURITY_PATCH sgtm",
+      "parentUuid": "2b8b3e13_fc9c6893",
+      "range": {
+        "startLine": 962,
+        "startChar": 4,
+        "endLine": 962,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12100b89_1fe1e1dc",
         "filename": "core/Makefile",
         "patchSetId": 11
