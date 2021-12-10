@@ -258,6 +258,32 @@ func (rs *ResolutionSet) AllByNameAttachToTarget(attachedTo *TargetNode, names .
 	return true
 }
 
+// ByReachableList returns the list of resolutions attached to and acting on
+// target nodes in the `reachable` set.
+func (rs *ResolutionSet) ByReachableList(reachable *TargetNodeSet) ResolutionList {
+	rl := make(ResolutionList, 0, rs.CountByReachable(reachable))
+	for attachesTo, as := range rs.resolutions {
+		for actsOn, cs := range as {
+			rl = append(rl, Resolution{attachesTo, actsOn, cs})
+		}
+	}
+	return rl
+}
+
+// CountByReachable returns the number of resolutions attached to and acting on
+// target nodes in the `reachable` set.
+func (rs *ResolutionSet) CountByReachable(reachable *TargetNodeSet) int {
+	size := 0
+	for attachesTo, as := range rs.resolutions {
+		for actsOn := range as {
+			if reachable.Contains(attachesTo) && reachable.Contains(actsOn) {
+				size++
+			}
+		}
+	}
+	return size
+}
+
 // IsEmpty returns true if the set contains no conditions to resolve.
 func (rs *ResolutionSet) IsEmpty() bool {
 	for _, as := range rs.resolutions {

@@ -217,6 +217,8 @@ func readFile(recv *receiver, file string) {
 			return
 		}
 
+		f.Close()
+
 		tn := &TargetNode{name: file}
 
 		err = prototext.Unmarshal(data, &tn.proto)
