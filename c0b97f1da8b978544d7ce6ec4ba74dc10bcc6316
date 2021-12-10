@@ -176,6 +176,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb0a149_b68b4643",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-10T14:58:50Z",
+      "side": 1,
+      "message": "Right, I was thinking about the same thing: this should be a device-specific setting.\n\nIf a device needs \"com.android.build.boot.security_patch\", then the OEM could define BOOT_SECURITY_PATCH. But it could also leave it as empty, depends on whether their bootloader expects \"com.android.build.boot.security_patch\" exists or not.",
+      "parentUuid": "2e40cc9f_7b28f57b",
+      "range": {
+        "startLine": 962,
+        "startChar": 4,
+        "endLine": 962,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12100b89_1fe1e1dc",
