@@ -420,6 +420,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4d01f6_53311e6e",
+        "filename": "core/Makefile",
+        "patchSetId": 10
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-10T10:15:31Z",
+      "side": 1,
+      "message": "For me as well. It has always been a tug of war between me and my editor, where my editor always wants to \"intelligently\" insert tabs/spaces for me, and I\u0027d have to correct the mess my editor make every single time, since Makefile macros are sensitive to spaces I really can\u0027t allow my editor to do any formatting for me, urghh.",
+      "parentUuid": "5525e7ae_47ba6462",
+      "range": {
+        "startLine": 3658,
+        "startChar": 0,
+        "endLine": 3658,
+        "endChar": 1
+      },
+      "revId": "a5985eebc354a22ff113e08b3da46d0c20ae1c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bcd0987_981f3255",
