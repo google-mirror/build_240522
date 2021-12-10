@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"os"
 	"strings"
 	"sync"
 
@@ -30,7 +31,7 @@ var (
 	// ConcurrentReaders is the size of the task pool for limiting resource usage e.g. open files.
 	ConcurrentReaders = 5
 	// ActionMultiplier scales from targets to resolution actions for allocation.
-	ActionMultiplier = 5
+	ActionMultiplier = 9
 )
 
 // result describes the outcome of reading and parsing a single license metadata file.
@@ -193,7 +194,11 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 			lg.rootNodes[i] = tn
 			walkLicenseConditions(tn)
 		}
+		fmt.Fprintf(os.Stderr, "%d targets\n", len(lg.targets))
+		fmt.Fprintf(os.Stderr, "%d edges\n", len(lg.edges))
+		fmt.Fprintf(os.Stderr, "%d actions\n", len(lg.actions))
 	}
+
 	return lg, err
 
 }
@@ -238,10 +243,9 @@ func addDependencies(lg *LicenseGraph, tn *TargetNode, byName map[string]*Target
 		}
 		annotations := newEdgeAnnotations()
 		for _, a := range ad.Annotations {
-			if len(a) == 0 {
-				continue
+			if ann, ok := RecognizedAnnotations[a]; ok {
+				annotations.annotations[ann] = struct{}{}
 			}
-			annotations.annotations[a] = true
 		}
 		edge := &TargetEdge{tn, dtn, annotations}
 		lg.edges = append(lg.edges, edge)
@@ -268,6 +272,8 @@ func readFile(recv *receiver, file string) {
 			recv.results <- &result{file, nil, fmt.Errorf("error reading license metadata %q: %w", file, err)}
 			return
 		}
+
+		f.Close()
 
 		tn := &TargetNode{lg: recv.lg, name: file}
 

@@ -45,6 +45,13 @@ blueprint_go_binary {
     testSrcs: ["cmd/dumpresolutions_test.go"],
 }
 
+blueprint_go_binary {
+    name: "textnotice",
+    srcs: ["cmd/textnotice.go"],
+    deps: ["compliance-module"],
+    testSrcs: ["cmd/textnotice_test.go"],
+}
+
 bootstrap_go_package {
     name: "compliance-module",
     srcs: [
@@ -54,6 +61,7 @@ bootstrap_go_package {
         "doc.go",
         "graph.go",
         "intset.go",
+        "lib/noticeindex.go",
         "policy/policy.go",
         "policy/resolve.go",
         "policy/resolvenotices.go",

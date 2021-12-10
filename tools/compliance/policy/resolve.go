@@ -14,6 +14,11 @@
 
 package compliance
 
+import (
+	"fmt"
+	"os"
+)
+
 // ResolveBottomUpConditions performs a bottom-up walk of the LicenseGraph
 // propagating conditions up the graph as necessary according to the properties
 // of each edge and according to each license condition in question.
@@ -50,6 +55,8 @@ func ResolveBottomUpConditions(lg *LicenseGraph) *ResolutionSet {
 	}
 	lg.mu.Unlock()
 
+	fmt.Fprintf(os.Stderr, "bottom-up %d actions\n", len(lg.actions))
+
 	return rs
 }
 
@@ -80,17 +87,20 @@ func ResolveTopDownConditions(lg *LicenseGraph) *ResolutionSet {
 	rmap := make(map[*TargetNode]actionSet)
 
 	// cmap contains the set of targets walked as pure aggregates. i.e. containers
-	cmap := make(map[*TargetNode]bool)
+	cmap := make(map[*TargetNode]struct{})
+
+	progress := 0
 
 	var walk func(fnode *TargetNode, cs LicenseConditionSet, treatAsAggregate bool)
 
 	walk = func(fnode *TargetNode, cs LicenseConditionSet, treatAsAggregate bool) {
+		progress++
 		if _, ok := rmap[fnode]; !ok {
 			rmap[fnode] = actionSet{lg, &IntervalSet{}}
 		}
 		rmap[fnode].add(fnode, cs)
 		if treatAsAggregate {
-			cmap[fnode] = true
+			cmap[fnode] = struct{}{}
 		}
 		// add conditions attached to `fnode`
 		rs.resolutions[fnode].VisitAll(func(a resolutionAction) {
@@ -162,6 +172,8 @@ func ResolveTopDownConditions(lg *LicenseGraph) *ResolutionSet {
 	}
 	lg.mu.Unlock()
 
+	fmt.Fprintf(os.Stderr, "top-down %d actions\n", len(lg.actions))
+
 	return rs
 }
 
@@ -171,13 +183,15 @@ func resolveBottomUp(lg *LicenseGraph, priors map[*TargetNode]actionSet) *Resolu
 	rs := newResolutionSet()
 
 	// cmap contains an entry for every target that was previously walked as a pure aggregate only.
-	cmap := make(map[*TargetNode]bool)
+	cmap := make(map[*TargetNode]struct{})
 
 	var walk func(target *TargetNode, treatAsAggregate bool) actionSet
 
+	progress := 0
 	walk = func(target *TargetNode, treatAsAggregate bool) actionSet {
 		result := actionSet{lg, &IntervalSet{}}
 		result.add(target, target.licenseConditions)
+		progress++
 		if pas, ok := priors[target]; ok {
 			result.addSet(pas)
 		}
@@ -195,7 +209,7 @@ func resolveBottomUp(lg *LicenseGraph, priors map[*TargetNode]actionSet) *Resolu
 			delete(cmap, target)
 		}
 		if treatAsAggregate {
-			cmap[target] = true
+			cmap[target] = struct{}{}
 		}
 
 		// add all the conditions from all the dependencies

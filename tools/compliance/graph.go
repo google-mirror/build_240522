@@ -24,6 +24,13 @@ import (
 var (
 	// InitialTargetCapacity is the initial size of the array allocated for targets.
 	InitialTargetCapacity = 40
+
+	// RecognizedAnnotations identifies the set of license-affecting annotations. Useful for constant folding.
+	RecognizedAnnotations = map[string]string{
+		"static": "static",
+		"dynamic": "dynamic",
+		"toolchain": "toolchain",
+	}
 )
 
 // TargetNodeIndex determines the size of the integer by which to index target nodes.
@@ -222,6 +229,15 @@ func (p *TargetEdgePath) Clear() {
 	*p = (*p)[:0]
 }
 
+// Copy makes a new path with the same value.
+func (p *TargetEdgePath) Copy() *TargetEdgePath {
+	result := make(TargetEdgePath, 0, len(*p))
+	for _, e := range *p {
+		result = append(result, e)
+	}
+	return &result
+}
+
 // String returns a string representation of the path: [n1 -> n2 -> ... -> nn].
 func (p *TargetEdgePath) String() string {
 	if p == nil {
@@ -339,6 +355,12 @@ func (tn *TargetNode) Installed() []string {
 	return append([]string{}, tn.proto.Installed...)
 }
 
+// TargetFiles returns the list of files built or installed by the module or
+// target. (unordered)
+func (tn *TargetNode) TargetFiles() []string {
+	return append(tn.proto.Built, tn.proto.Installed...)
+}
+
 // InstallMap returns the list of path name transformations to make to move
 // files from their original location in the file system to their destination
 // inside a container. (unordered)
@@ -374,12 +396,12 @@ type InstallMap struct {
 // Annotations typically distinguish between static linkage versus dynamic
 // versus tools that are used at build time but are not linked in any way.
 type TargetEdgeAnnotations struct {
-	annotations map[string]bool
+	annotations map[string]struct{}
 }
 
 // newEdgeAnnotations creates a new instance of TargetEdgeAnnotations.
 func newEdgeAnnotations() TargetEdgeAnnotations {
-	return TargetEdgeAnnotations{make(map[string]bool)}
+	return TargetEdgeAnnotations{make(map[string]struct{})}
 }
 
 // HasAnnotation returns true if an annotation `ann` is in the set.

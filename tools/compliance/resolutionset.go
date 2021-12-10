@@ -144,6 +144,18 @@ func (rs *ResolutionSet) Resolutions(attachedTo *TargetNode) ResolutionList {
 	return result
 }
 
+// CountResolutions returns the number of resolutions that `attachedTo`
+// target must resolve. Returns 0 if no conditions apply.
+//
+// Panics if `attachedTo` does not appear in the set.
+func (rs *ResolutionSet) CountResolutions(attachedTo *TargetNode) int {
+	as, ok := rs.resolutions[attachedTo]
+	if !ok {
+		return 0
+	}
+	return as.indexes.Len()
+}
+
 // ResolutionsByActsOn returns the list of resolutions that must `actOn` to
 // resolvee. Returns empty list if no conditions apply.
 //
@@ -184,6 +196,7 @@ func (rs *ResolutionSet) AnyMatchingAttachToTarget(attachedTo *TargetNode, condi
 	}
 	return as.matchesAnySet(conditions...)
 }
+
 
 // IsEmpty returns true if the set contains no conditions to resolve.
 func (rs *ResolutionSet) IsEmpty() bool {
