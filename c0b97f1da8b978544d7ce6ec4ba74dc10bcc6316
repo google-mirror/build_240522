@@ -81,6 +81,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6160f19_392e6958",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7d1f81d_10a6e9f5",
+      "range": {
+        "startLine": 913,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 6
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8f6b86_d3028de3",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "I\u0027ve been trying to stick to whatever is nearby for these patterns. It is a bit confusing to see them seemingly picked at random. I\u0027ll leave this one as is to stick with the existing pattern of L913.",
+      "parentUuid": "55ece139_d91d271b",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 40
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fd923d9_2e48216a",
@@ -223,6 +271,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa3ae8e_42412fab",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12100b89_1fe1e1dc",
+      "range": {
+        "startLine": 1117,
+        "startChar": 46,
+        "endLine": 1117,
+        "endChar": 47
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3e948dc_2cf0e95b",
@@ -270,6 +342,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b045bd70_81d1a9dc",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "A different CL sounds good after this one lands/sticks.\nI feel like this topic is likely to get reverted for some build/test that isn\u0027t in presubmits, so the fewer changes the better :)",
+      "parentUuid": "aca6f77d_cb4f6d6c",
+      "range": {
+        "startLine": 1121,
+        "startChar": 31,
+        "endLine": 1121,
+        "endChar": 32
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320d1397_8fb9dc11",
@@ -283,6 +379,30 @@
       "writtenOn": "2021-12-10T10:05:37Z",
       "side": 1,
       "message": "this seems unused?",
+      "range": {
+        "startLine": 4553,
+        "startChar": 1,
+        "endLine": 4553,
+        "endChar": 65
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a879179_f8bf2b73",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4553,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "It is! It doesn\u0027t benefit from being configurable. Removed.",
+      "parentUuid": "320d1397_8fb9dc11",
       "range": {
         "startLine": 4553,
         "startChar": 1,
@@ -340,6 +460,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac2b13f_a7a3ea7a",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4936,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "Good point. Removed.",
+      "parentUuid": "2bef61ed_c465e024",
+      "range": {
+        "startLine": 4936,
+        "startChar": 64,
+        "endLine": 4936,
+        "endChar": 100
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ca83048_5dec2fbf",
@@ -353,6 +497,30 @@
       "writtenOn": "2021-12-10T10:05:37Z",
       "side": 1,
       "message": "and why isn\u0027t this INSTALLED_INIT_BOOT_IMAGE_TARGET ?",
+      "range": {
+        "startLine": 4973,
+        "startChar": 35,
+        "endLine": 4973,
+        "endChar": 57
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e42ea10_a5d9169c",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4973,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-10T18:46:53Z",
+      "side": 1,
+      "message": "It\u0027s the same as the BUIDLING_BOOT_IMAGE case on L4965, I figured the ramdisk files were also needed in this case..\nShould this include both INTERNAL_RAMDISK_FILES and INSTALLED_INIT_BOOT_IMAGE_TARGET, or should it only be INSTALLED_INIT_BOOT_IMAGE_TARGET?",
+      "parentUuid": "6ca83048_5dec2fbf",
       "range": {
         "startLine": 4973,
         "startChar": 35,
