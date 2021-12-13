@@ -70,6 +70,24 @@
       "parentUuid": "dda4d569_9d082ab4",
       "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6cf7f2_68f9f340",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-13T22:21:40Z",
+      "side": 1,
+      "message": "I\u0027ll look into presubmit failures. I agree a common implementation of finding the test directory is a better approach. Right now the scope is pretty small. Out of more than 500 host unit tests, only zipalign_tests and aapt2_tests failed due to bazel sandbox.\n\nFYI. Here is a google3 reference implementation https://source.corp.google.com/piper///depot/google3/devtools/build/runtime/get_runfiles_dir.cc;rcl\u003d324048656;l\u003d328",
+      "parentUuid": "f3dbf062_937d82fd",
+      "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
