@@ -16,6 +16,24 @@
       "message": "Hi, \nzipalign_test fails when we migrate the Android\nbuild\u0026test system to Bazel as part of pesto project. Because Bazel is running tests under sandbox environment. method android::base::GetExecutablePath returns a path in $ANDRIOD_HOST_OUT which is not accessible by sandbox. \n\nPlease help reviewing.",
       "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68d42d4_c16dff68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-12-13T19:37:40Z",
+      "side": 1,
+      "message": "The existing implementation is currently the best practice for tests, which means you\u0027ll likely need to make similar changes in many places. (The test executable is expected to be placed next to the test data)\n\nThis new implementation also relies on the GNU extension program_invocation_name, which doesn\u0027t appear to exist in bionic, so this code won\u0027t work for host+device tests. (This happens to be a host-only test, and usually gets built with a libc that has program_invocation_name, but that\u0027s not the case w/host_bionic either)",
+      "parentUuid": "f59f58bb_0cbd1ddf",
+      "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
