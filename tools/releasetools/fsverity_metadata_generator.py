@@ -153,7 +153,9 @@ class FSVerityMetadataGenerator:
 
       # 2. fsverity_descriptor
       with open(desc_file, 'rb') as f:
-        out.write(f.read())
+        descriptor = f.read()
+      out.write(pack('<I', len(descriptor)))
+      out.write(descriptor)
 
       # 3. signature
       SIG_TYPE_NONE = 0
