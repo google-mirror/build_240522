@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc9fd86_70922819",
+        "filename": "core/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 4966,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-13T22:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5144b8a8_39517488",
+      "range": {
+        "startLine": 4964,
+        "startChar": 0,
+        "endLine": 4966,
+        "endChar": 5
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aaa2aa5_fc264004",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-13T10:55:47Z",
       "side": 1,
       "message": "don\u0027t need this because we would be rebuilding init_boot.img in releasetools\n\nInstead we should do something like\n\nifdef BUILDING_INIT_BOOT_IMAGE\n\\t$(hide) $(call package_files-copy-root, \\\n\t    $(TARGET_RAMDISK_OUT),$(zip_root)/INIT_BOOT/RAMDISK)\nendif",
+      "range": {
+        "startLine": 5302,
+        "startChar": 0,
+        "endLine": 5302,
+        "endChar": 38
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3ea6b8_130dad71",
+        "filename": "core/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 5302,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-13T22:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aaa2aa5_fc264004",
       "range": {
         "startLine": 5302,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "134fe0fc_6771f78d",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-13T22:08:24Z",
+      "side": 1,
+      "message": "GetBootableImage already gets some OPTIONS for the ramdisk, so I\u0027ll stick with that instead of passing it in.\nI\u0027m a bit confused with system_root_image and recovery_as_boot because boot.img, recovery.img, and init_boot.img are all created with GetBootableImage.\n\nI think I just want to prevent boot.img from containing the ramdisk under normal conditions when building init_boot (system_root_image \u003d\u003d false \u0026\u0026 recovery_as_boot \u003d\u003d false). Otherwise, include the ramdisk in whatever image we are building here?\nWe can continue the discussion in the release tools CL (assuming this one passes without those changes.)\nhttps://android-review.googlesource.com/c/platform/build/+/1920818",
+      "parentUuid": "d7426856_df12d0b7",
+      "range": {
+        "startLine": 810,
+        "startChar": 52,
+        "endLine": 810,
+        "endChar": 53
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab55154b_cc181333",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 12
@@ -83,6 +155,30 @@
       "writtenOn": "2021-12-13T09:32:03Z",
       "side": 1,
       "message": "typo: hash",
+      "range": {
+        "startLine": 204,
+        "startChar": 36,
+        "endLine": 204,
+        "endChar": 39
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e959e4a_3707bcc8",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-13T22:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab55154b_cc181333",
       "range": {
         "startLine": 204,
         "startChar": 36,
