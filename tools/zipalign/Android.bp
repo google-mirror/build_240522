@@ -60,6 +60,7 @@ cc_test_host {
     name: "zipalign_tests",
     srcs: [
         "tests/src/*_test.cpp",
+        "tests/src/util.cpp",
     ],
     test_options: {
         unit_test: true,
