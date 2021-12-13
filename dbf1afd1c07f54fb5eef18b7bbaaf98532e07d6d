@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab55154b_cc181333",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-13T09:32:03Z",
+      "side": 1,
+      "message": "typo: hash",
+      "range": {
+        "startLine": 204,
+        "startChar": 36,
+        "endLine": 204,
+        "endChar": 39
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
