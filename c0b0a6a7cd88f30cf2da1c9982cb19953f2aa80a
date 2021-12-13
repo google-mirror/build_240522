@@ -52,6 +52,24 @@
       "parentUuid": "c68d42d4_c16dff68",
       "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3dbf062_937d82fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-12-13T21:38:49Z",
+      "side": 1,
+      "message": "It doesn\u0027t appear like this works in the test infra according to presubmit, and it also won\u0027t work when building with host bionic, or any tests that are built for both host and device. It seems like this needs a deeper look/design rather than just changing a bunch of host-only tests for now (if anything, if we went this way, it would be a good idea to have a common implementation of finding the test directory instead of copying it in every user)",
+      "parentUuid": "dda4d569_9d082ab4",
+      "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

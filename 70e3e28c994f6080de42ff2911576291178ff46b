@@ -93,6 +93,30 @@
       },
       "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf81d51_6eb23305",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-12-13T21:38:49Z",
+      "side": 1,
+      "message": "Symlinks are resolved in-process, so in the sandbox. Thus you have to have some access to DIR1, are you only getting the executable there and everything else is hidden somehow?",
+      "parentUuid": "5c184966_7f23dcc2",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
