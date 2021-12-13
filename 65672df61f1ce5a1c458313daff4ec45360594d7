@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abca7c5e_f868b2d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2021-12-13T22:03:29Z",
+      "side": 1,
+      "message": "Sorry for the delay, the updates look good to me.",
+      "revId": "65672df61f1ce5a1c458313daff4ec45360594d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5118ff2c_f35aaa54",
