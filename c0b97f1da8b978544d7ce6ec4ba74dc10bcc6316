@@ -577,6 +577,30 @@
       },
       "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4e5acb_e782ef50",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 4973,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-13T09:35:38Z",
+      "side": 1,
+      "message": "(missed a few sentences)\n\nAdditionally we need to teach releasetools how to create an init_boot.img with a target_files.zip to facilitate GKI certificating",
+      "parentUuid": "37ed3b8f_62af9ed9",
+      "range": {
+        "startLine": 4973,
+        "startChar": 35,
+        "endLine": 4973,
+        "endChar": 57
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
