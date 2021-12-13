@@ -7,12 +7,13 @@
 #include <string>
 
 #include <android-base/file.h>
+#include "util.h"
 
 using namespace android;
 using namespace base;
 
 static std::string GetTestPath(const std::string& filename) {
-  static std::string test_data_dir = android::base::GetExecutableDirectory() + "/tests/data/";
+  static std::string test_data_dir = Dirname(zipalign::GetExecutablePath()) + "/tests/data/";
   return test_data_dir + filename;
 }
 
