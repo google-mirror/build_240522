@@ -414,6 +414,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61049113_17089ab2",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-13T23:59:12Z",
+      "side": 1,
+      "message": "Yeah I think \"m dist\" uses the releasetools somewhere and some of the tests use those artifacts. Adding it back into this topic. At least it\u0027s in its own CL now.",
+      "parentUuid": "5801a6d3_b6fc2fe6",
+      "range": {
+        "startLine": 1121,
+        "startChar": 31,
+        "endLine": 1121,
+        "endChar": 32
+      },
+      "revId": "c0b97f1da8b978544d7ce6ec4ba74dc10bcc6316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320d1397_8fb9dc11",
