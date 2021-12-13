@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f59f58bb_0cbd1ddf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-13T18:41:01Z",
+      "side": 1,
+      "message": "Hi, \nzipalign_test fails when we migrate the Android\nbuild\u0026test system to Bazel as part of pesto project. Because Bazel is running tests under sandbox environment. method android::base::GetExecutablePath returns a path in $ANDRIOD_HOST_OUT which is not accessible by sandbox. \n\nPlease help reviewing.",
+      "revId": "c0b0a6a7cd88f30cf2da1c9982cb19953f2aa80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
