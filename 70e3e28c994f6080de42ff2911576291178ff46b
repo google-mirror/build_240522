@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "092701ee_5a014213",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-13T21:16:39Z",
+      "side": 1,
+      "message": "Yes, I agree it is hermetic, my wording is not accurate. Revised commit message. We can pass the test in RBE since the binary is copied to remote host. It is a problem manifested by bazel with sandbox.",
+      "parentUuid": "46eae182_608dcf52",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12228a6f_f5f53173",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-13T19:46:29Z",
       "side": 1,
       "message": "So instead it\u0027s somehow inferring the paths by argv[0]? Why is that better?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c184966_7f23dcc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-13T21:16:39Z",
+      "side": 1,
+      "message": "currently test binary and data is in $ANDROID_HOST_OUT, say DIR1. Bazel creates DIR2 under the sandbox with symlinks to DIR1. Using android::base::GetExecutablePath will return DIR1, using argv[0] will return DIR2.\nNote bazel cannot access DIR1 since it is outside of its sandbox.",
+      "parentUuid": "12228a6f_f5f53173",
       "range": {
         "startLine": 11,
         "startChar": 0,
