@@ -12,13 +12,21 @@ using namespace android;
 using namespace base;
 
 static std::string GetTestPath(const std::string& filename) {
-  static std::string test_data_dir = android::base::GetExecutableDirectory() + "/tests/data/";
+  static std::string test_data_dir = Dirname(android::base::GetExecutablePath()) + "/tests/data/";
   return test_data_dir + filename;
+}
+
+// From bazel test encyclopedia, No directory, file, or symlink within the
+// runfiles tree (including paths which traverse symlinks) should be writable.
+// Tests must not assume that any part of the runfiles is writable. Creating a
+// temp dir for writing.
+static std::string GetTempPath(const std::string& filename) {
+  return testing::TempDir() + filename;
 }
 
 TEST(Align, Unaligned) {
   const std::string src = GetTestPath("unaligned.zip");
-  const std::string dst = GetTestPath("unaligned_out.zip");
+  const std::string dst = GetTempPath("unaligned_out.zip");
 
   int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
   ASSERT_EQ(0, processed);
@@ -29,8 +37,8 @@ TEST(Align, Unaligned) {
 
 TEST(Align, DoubleAligment) {
   const std::string src = GetTestPath("unaligned.zip");
-  const std::string tmp = GetTestPath("da_aligned.zip");
-  const std::string dst = GetTestPath("da_d_aligner.zip");
+  const std::string tmp = GetTempPath("da_aligned.zip");
+  const std::string dst = GetTempPath("da_d_aligner.zip");
 
   int processed = process(src.c_str(), tmp.c_str(), 4, true, false, 4096);
   ASSERT_EQ(0, processed);
@@ -60,7 +68,7 @@ TEST(Align, DoubleAligment) {
 // Directory.
 TEST(Align, Holes) {
   const std::string src = GetTestPath("holes.zip");
-  const std::string dst = GetTestPath("holes_out.zip");
+  const std::string dst = GetTempPath("holes_out.zip");
 
   int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
   ASSERT_EQ(0, processed);
@@ -72,7 +80,7 @@ TEST(Align, Holes) {
 // Align a zip where LFH order and CD entries differ.
 TEST(Align, DifferenteOrders) {
   const std::string src = GetTestPath("diffOrders.zip");
-  const std::string dst = GetTestPath("diffOrders_out.zip");
+  const std::string dst = GetTempPath("diffOrders_out.zip");
 
   int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
   ASSERT_EQ(0, processed);
