@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46eae182_608dcf52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-12-13T19:46:29Z",
+      "side": 1,
+      "message": "I\u0027ll note that in the current implementation, test data is fully hermetic -- the entire directory of test+test data is a unit that can be moved and executed without external dependencies (except shared libraries needed by the executable). This appears to a problem being introduced by bazel running the tests differently?",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12228a6f_f5f53173",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-12-13T19:46:29Z",
+      "side": 1,
+      "message": "So instead it\u0027s somehow inferring the paths by argv[0]? Why is that better?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
