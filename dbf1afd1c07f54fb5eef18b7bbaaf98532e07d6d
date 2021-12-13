@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5144b8a8_39517488",
+        "filename": "core/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 4966,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-13T10:55:47Z",
+      "side": 1,
+      "message": "ifneq (,$(BUILDING_BOOT_IMAGE)$(BUILDING_INIT_BOOT_IMAGE))\n  $(BUILT_TARGET_FILES_PACKAGE): $(INTERNAL_RAMDISK_FILES)\nendif  # BUILDING_BOOT_IMAGE !\u003d \"\" || BUILDING_INIT_BOOT_IMAGE !\u003d \"\"",
+      "range": {
+        "startLine": 4964,
+        "startChar": 0,
+        "endLine": 4966,
+        "endChar": 5
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aaa2aa5_fc264004",
+        "filename": "core/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 5302,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-13T10:55:47Z",
+      "side": 1,
+      "message": "don\u0027t need this because we would be rebuilding init_boot.img in releasetools\n\nInstead we should do something like\n\nifdef BUILDING_INIT_BOOT_IMAGE\n\\t$(hide) $(call package_files-copy-root, \\\n\t    $(TARGET_RAMDISK_OUT),$(zip_root)/INIT_BOOT/RAMDISK)\nendif",
+      "range": {
+        "startLine": 5302,
+        "startChar": 0,
+        "endLine": 5302,
+        "endChar": 38
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7426856_df12d0b7",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-13T10:55:47Z",
+      "side": 1,
+      "message": "has_init_boot should be passed in, and boot.img should conditionally drop its ramdisk according to has_init_boot",
+      "range": {
+        "startLine": 810,
+        "startChar": 52,
+        "endLine": 810,
+        "endChar": 53
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab55154b_cc181333",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 12
