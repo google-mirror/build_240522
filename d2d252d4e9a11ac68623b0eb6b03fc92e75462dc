@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b703a9f_1d83966f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:31:16Z",
+      "side": 1,
+      "message": "This isn\u0027t very clear. Could you please trying elaborating further? Something like:\n\n```\nPreserve all COMPATIBILITY_SUITES values in module-info\n\nExtend COMPATIBILITY_SUITES in module-info to avoid overwriting previous values. In particular, this happens for the `host-unit-tests` suite which is automatically added by Soong rules only to be clobbered by the modules that have both device and host variants.\n```\n\nI\u0027m not sure if that\u0027s accurate so please review.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "d2d252d4e9a11ac68623b0eb6b03fc92e75462dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
