@@ -22,6 +22,30 @@
       },
       "revId": "d2d252d4e9a11ac68623b0eb6b03fc92e75462dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b22550_6f245148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-14T05:50:48Z",
+      "side": 1,
+      "message": "Thanks, this is much more clear. Just upddate.",
+      "parentUuid": "0b703a9f_1d83966f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "d2d252d4e9a11ac68623b0eb6b03fc92e75462dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
