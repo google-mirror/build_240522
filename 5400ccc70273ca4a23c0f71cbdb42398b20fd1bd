@@ -22,6 +22,30 @@
       },
       "revId": "5400ccc70273ca4a23c0f71cbdb42398b20fd1bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03487276_242c728a",
+        "filename": "core/Makefile",
+        "patchSetId": 14
+      },
+      "lineNbr": 5367,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T22:03:43Z",
+      "side": 1,
+      "message": "Got it! We need this any time we are building init_boot.img (BUIDLING_INIT_BOOT_IMAGE \u003d\u003d true), but we don\u0027t need this when we are using a prebuilt, because the releasetools will find the prebuilt in `IMAGES/`?",
+      "parentUuid": "006087b3_277e5844",
+      "range": {
+        "startLine": 5367,
+        "startChar": 1,
+        "endLine": 5367,
+        "endChar": 98
+      },
+      "revId": "5400ccc70273ca4a23c0f71cbdb42398b20fd1bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
