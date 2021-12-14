@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3674e37e_24f0b242",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "name in (\"boot\", \"init_boot\")",
+      "range": {
+        "startLine": 938,
+        "startChar": 7,
+        "endLine": 938,
+        "endChar": 44
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf38e116_6cd77ade",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "I guess this is causing the presubmit error (no init_boot.img built in *-img-*.zip). We can add a |has_kernel| flag to _BuildBootableImage(), and use it to explicitly tell it to not look for a kernel image when building init_boot.img.",
+      "range": {
+        "startLine": 1546,
+        "startChar": 0,
+        "endLine": 1548,
+        "endChar": 0
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b911a571_2e6c768e",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "we need to populate the GKI pagesize from the Makefile side too",
+      "range": {
+        "startLine": 1586,
+        "startChar": 14,
+        "endLine": 1586,
+        "endChar": 42
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0345e9ba_0206f94c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1598,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "load info_dict.get(\"mkbootimg_init_args\") if partition name is \"ini_boot\"",
+      "range": {
+        "startLine": 1598,
+        "startChar": 4,
+        "endLine": 1598,
+        "endChar": 42
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3609bd16_d6c1c347",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "The misc_info flag is \u0027init_boot\u0027",
+      "range": {
+        "startLine": 1756,
+        "startChar": 9,
+        "endLine": 1756,
+        "endChar": 22
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d42fbaa5_b2ecc701",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-14T06:19:20Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1760,
+        "startChar": 33,
+        "endLine": 1760,
+        "endChar": 46
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
