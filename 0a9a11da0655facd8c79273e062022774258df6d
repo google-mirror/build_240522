@@ -22,6 +22,23 @@
       },
       "revId": "0a9a11da0655facd8c79273e062022774258df6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29a21ef_60e5a138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143404
+      },
+      "writtenOn": "2021-12-14T22:13:51Z",
+      "side": 1,
+      "message": "LGTM, but please check the comment on the commit message",
+      "revId": "0a9a11da0655facd8c79273e062022774258df6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
