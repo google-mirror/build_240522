@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77a10b21_145d9380",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T23:57:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3674e37e_24f0b242",
+      "range": {
+        "startLine": 938,
+        "startChar": 7,
+        "endLine": 938,
+        "endChar": 44
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf38e116_6cd77ade",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-14T06:19:20Z",
       "side": 1,
       "message": "I guess this is causing the presubmit error (no init_boot.img built in *-img-*.zip). We can add a |has_kernel| flag to _BuildBootableImage(), and use it to explicitly tell it to not look for a kernel image when building init_boot.img.",
+      "range": {
+        "startLine": 1546,
+        "startChar": 0,
+        "endLine": 1548,
+        "endChar": 0
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc55ab23_2afd4a3f",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T23:57:41Z",
+      "side": 1,
+      "message": "This was the problem since I stopped adding the full image in IMAGES/!\nSince we are already checking \"recovery\" explicitly right here at L1538 to skip the kernel, does it make sense to explicitly check \"init_boot\" and not look for the kernel instead of passing a new has_kernel?",
+      "parentUuid": "cf38e116_6cd77ade",
       "range": {
         "startLine": 1546,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a8ce79_7092dd8a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1598,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T23:57:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0345e9ba_0206f94c",
+      "range": {
+        "startLine": 1598,
+        "startChar": 4,
+        "endLine": 1598,
+        "endChar": 42
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3609bd16_d6c1c347",
@@ -116,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e87357f_f83922a1",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T23:57:41Z",
+      "side": 1,
+      "message": "Nice catch! Done.",
+      "parentUuid": "3609bd16_d6c1c347",
+      "range": {
+        "startLine": 1756,
+        "startChar": 9,
+        "endLine": 1756,
+        "endChar": 22
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d42fbaa5_b2ecc701",
@@ -129,6 +225,30 @@
       "writtenOn": "2021-12-14T06:19:20Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1760,
+        "startChar": 33,
+        "endLine": 1760,
+        "endChar": 46
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bbf1d1_4813711d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-14T23:57:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d42fbaa5_b2ecc701",
       "range": {
         "startLine": 1760,
         "startChar": 33,
