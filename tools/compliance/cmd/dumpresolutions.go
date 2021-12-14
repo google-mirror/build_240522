@@ -36,7 +36,7 @@ var (
 )
 
 type context struct {
-	conditions      []string
+	conditions      []compliance.LicenseCondition
 	graphViz        bool
 	labelConditions bool
 	stripPrefix     string
@@ -86,13 +86,17 @@ func main() {
 		os.Exit(2)
 	}
 
+	lcs := make([]compliance.LicenseCondition, 0)
+	for _, name := range *conditions {
+		lcs = append(lcs, compliance.RecognizedConditionNames[name])
+	}
 	ctx := &context{
-		conditions:      append([]string{}, *conditions...),
+		conditions:      lcs,
 		graphViz:        *graphViz,
 		labelConditions: *labelConditions,
 		stripPrefix:     *stripPrefix,
 	}
-	err := dumpResolutions(ctx, os.Stdout, os.Stderr, flag.Args()...)
+	_, err := dumpResolutions(ctx, os.Stdout, os.Stderr, flag.Args()...)
 	if err != nil {
 		if err == failNoneRequested {
 			flag.Usage()
@@ -104,18 +108,18 @@ func main() {
 }
 
 // dumpResolutions implements the dumpresolutions utility.
-func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) error {
+func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) (*compliance.LicenseGraph, error) {
 	if len(files) < 1 {
-		return failNoneRequested
+		return nil, failNoneRequested
 	}
 
 	// Read the license graph from the license metadata files (*.meta_lic).
 	licenseGraph, err := compliance.ReadLicenseGraph(os.DirFS("."), stderr, files)
 	if err != nil {
-		return fmt.Errorf("Unable to read license metadata file(s) %q: %v\n", files, err)
+		return nil, fmt.Errorf("Unable to read license metadata file(s) %q: %v\n", files, err)
 	}
 	if licenseGraph == nil {
-		return failNoLicenses
+		return nil, failNoLicenses
 	}
 
 	// resolutions will contain the requested set of resolutions.
@@ -125,7 +129,7 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 	if len(ctx.conditions) > 0 {
 		rlist := make([]*compliance.ResolutionSet, 0, len(ctx.conditions))
 		for _, c := range ctx.conditions {
-			rlist = append(rlist, compliance.WalkResolutionsForCondition(licenseGraph, resolutions, compliance.ConditionNames{c}))
+			rlist = append(rlist, compliance.WalkResolutionsForCondition(licenseGraph, resolutions, compliance.LicenseConditionSet(c)))
 		}
 		if len(rlist) == 1 {
 			resolutions = rlist[0]
@@ -142,11 +146,7 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 	targetOut := func(target *compliance.TargetNode, sep string) string {
 		tOut := strings.TrimPrefix(target.Name(), ctx.stripPrefix)
 		if ctx.labelConditions {
-			conditions := make([]string, 0, target.LicenseConditions().Count())
-			for _, lc := range target.LicenseConditions().AsList() {
-				conditions = append(conditions, lc.Name())
-			}
-			sort.Strings(conditions)
+			conditions := target.LicenseConditions().Names()
 			if len(conditions) > 0 {
 				tOut += sep + strings.Join(conditions, sep)
 			}
@@ -168,26 +168,16 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 	// outputResolution prints a resolution in the requested format to `stdout`, where one can read
 	// a resolution as `tname` resolves `oname`'s conditions named in `cnames`.
 	// `tname` is the name of the target the resolution applies to.
-	// `oname` is the name of the target where the conditions originate.
 	// `cnames` is the list of conditions to resolve.
-	outputResolution := func(tname, aname, oname string, cnames []string) {
+	outputResolution := func(tname, aname string, cnames []string) {
 		if ctx.graphViz {
 			// ... one edge per line labelled with \\n-separated annotations.
 			tNode := nodes[tname]
 			aNode := nodes[aname]
-			oNode := nodes[oname]
-			fmt.Fprintf(stdout, "\t%s -> %s; %s -> %s [label=\"%s\"];\n", tNode, aNode, aNode, oNode, strings.Join(cnames, "\\n"))
+			fmt.Fprintf(stdout, "\t%s -> %s [label=\"%s\"];\n", tNode, aNode, strings.Join(cnames, "\\n"))
 		} else {
 			// ... one edge per line with names in a colon-separated tuple.
-			fmt.Fprintf(stdout, "%s %s %s %s\n", tname, aname, oname, strings.Join(cnames, ":"))
-		}
-	}
-
-	// outputSingleton prints `tname` to plain text in the unexpected event that `tname` is the name of
-	// a target in `resolutions.AppliesTo()` but has no conditions to resolve.
-	outputSingleton := func(tname, aname string) {
-		if !ctx.graphViz {
-			fmt.Fprintf(stdout, "%s %s\n", tname, aname)
+			fmt.Fprintf(stdout, "%s %s %s\n", tname, aname, strings.Join(cnames, ":"))
 		}
 	}
 
@@ -204,11 +194,6 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 			sort.Sort(rl)
 			for _, r := range rl {
 				makeNode(r.ActsOn())
-			}
-			conditions := rl.AllConditions().AsList()
-			sort.Sort(conditions)
-			for _, lc := range conditions {
-				makeNode(lc.Origin())
 			}
 		}
 	}
@@ -232,38 +217,11 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 				aname = targetOut(r.ActsOn(), ":")
 			}
 
-			conditions := r.Resolves().AsList()
-			sort.Sort(conditions)
-
-			// poname is the previous origin name or "" if no previous
-			poname := ""
-
 			// cnames accumulates the list of condition names originating at a single origin that apply to `target`.
-			cnames := make([]string, 0, len(conditions))
+			cnames := r.Resolves().Names()
 
-			// Output 1 line for each attachesTo+actsOn+origin combination.
-			for _, condition := range conditions {
-				var oname string
-				if ctx.graphViz {
-					oname = condition.Origin().Name()
-				} else {
-					oname = targetOut(condition.Origin(), ":")
-				}
-
-				// Detect when origin changes and output prior origin's conditions.
-				if poname != oname && poname != "" {
-					outputResolution(tname, aname, poname, cnames)
-					cnames = cnames[:0]
-				}
-				poname = oname
-				cnames = append(cnames, condition.Name())
-			}
-			// Output last origin's conditions or a singleton if no origins.
-			if poname == "" {
-				outputSingleton(tname, aname)
-			} else {
-				outputResolution(tname, aname, poname, cnames)
-			}
+			// Output 1 line for each attachesTo+actsOn combination.
+			outputResolution(tname, aname, cnames)
 		}
 	}
 	// If graphViz output, rank the root nodes together, and complete the directed graph.
@@ -280,5 +238,5 @@ func dumpResolutions(ctx *context, stdout, stderr io.Writer, files ...string) er
 		}
 		fmt.Fprintf(stdout, "}\n}\n")
 	}
-	return nil
+	return licenseGraph, nil
 }

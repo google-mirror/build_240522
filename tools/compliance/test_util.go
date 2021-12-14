@@ -86,7 +86,6 @@ license_conditions: "proprietary"
 license_kinds: "legacy_by_exception_only"
 license_conditions: "by_exception_only"
 `
-
 )
 
 var (
@@ -111,23 +110,41 @@ var (
 	}
 )
 
-// toConditionList converts a test data map of condition name to origin names into a ConditionList.
-func toConditionList(lg *LicenseGraph, conditions map[string][]string) ConditionList {
-	cl := make(ConditionList, 0)
-	for name, origins := range conditions {
-		for _, origin := range origins {
-			cl = append(cl, LicenseCondition{name, newTestNode(lg, origin)})
-		}
-	}
-	return cl
-}
-
 // newTestNode constructs a test node in the license graph.
 func newTestNode(lg *LicenseGraph, targetName string) *TargetNode {
-	if _, ok := lg.targets[targetName]; !ok {
-		lg.targets[targetName] = &TargetNode{name: targetName}
+	for _, tn := range lg.targets {
+		if tn.name == targetName {
+			return tn
+		}
 	}
-	return lg.targets[targetName]
+	tn := &TargetNode{name: targetName, index: TargetNodeIndex(len(lg.targets))}
+	lg.targets = append(lg.targets, tn)
+	return tn
+}
+
+// newTestCondition constructs a test license condition in the license graph.
+func newTestCondition(lg *LicenseGraph, targetName string, conditionName string) LicenseCondition {
+	tn := newTestNode(lg, targetName)
+	cl := LicenseConditionSetFromNames(tn, conditionName).AsList()
+	if len(cl) == 0 {
+		panic(fmt.Errorf("attempt to create unrecognized condition: %q", conditionName))
+	} else if len(cl) != 1 {
+		panic(fmt.Errorf("unexpected multiple conditions from condition name: %q: got %d, want 1", conditionName, len(cl)))
+	}
+	lc := cl[0]
+	tn.licenseConditions = tn.licenseConditions.Plus(lc)
+	return lc
+}
+
+// newTestConditionSet constructs a test license condition set in the license graph.
+func newTestConditionSet(lg *LicenseGraph, targetName string, conditionName []string) LicenseConditionSet {
+	tn := newTestNode(lg, targetName)
+	cs := LicenseConditionSetFromNames(tn, conditionName...)
+	if cs.IsEmpty() {
+		panic(fmt.Errorf("attempt to create unrecognized condition: %q", conditionName))
+	}
+	tn.licenseConditions = tn.licenseConditions.Union(cs)
+	return cs
 }
 
 // testFS implements a test file system (fs.FS) simulated by a map from filename to []byte content.
@@ -296,6 +313,27 @@ func (l byAnnotatedEdge) Less(i, j int) bool {
 	return l[i].target < l[j].target
 }
 
+// act describes test data resolution actions to define test action sets.
+type act struct {
+	actsOn, origin, condition string
+}
+
+// String returns a human-readable string representing the test action.
+func (a act) String() string {
+	return fmt.Sprintf("%s{%s:%s}", a.actsOn, a.origin, a.condition)
+}
+
+// toActionSet converts a list of act test data into a test action set.
+func toActionSet(lg *LicenseGraph, data []act) actionSet {
+	as := actionSet{lg, &IntervalSet{}}
+	for _, a := range data {
+		actsOn := newTestNode(lg, a.actsOn)
+		cs := newTestConditionSet(lg, a.origin, strings.Split(a.condition, "|"))
+		as.add(actsOn, cs)
+	}
+	return as
+}
+
 // res describes test data resolutions to define test resolution sets.
 type res struct {
 	attachesTo, actsOn, origin, condition string
@@ -307,14 +345,11 @@ func toResolutionSet(lg *LicenseGraph, data []res) *ResolutionSet {
 	for _, r := range data {
 		attachesTo := newTestNode(lg, r.attachesTo)
 		actsOn := newTestNode(lg, r.actsOn)
-		origin := newTestNode(lg, r.origin)
 		if _, ok := rmap[attachesTo]; !ok {
-			rmap[attachesTo] = make(actionSet)
+			rmap[attachesTo] = actionSet{lg, &IntervalSet{}}
 		}
-		if _, ok := rmap[attachesTo][actsOn]; !ok {
-			rmap[attachesTo][actsOn] = newLicenseConditionSet()
-		}
-		rmap[attachesTo][actsOn].add(origin, r.condition)
+		cs := newTestConditionSet(lg, r.origin, strings.Split(r.condition, ":"))
+		rmap[attachesTo].add(actsOn, cs)
 	}
 	return &ResolutionSet{rmap}
 }
@@ -334,8 +369,8 @@ func toConflictList(lg *LicenseGraph, data []confl) []SourceSharePrivacyConflict
 		cprivacy := fields[1]
 		result = append(result, SourceSharePrivacyConflict{
 				newTestNode(lg, c.sourceNode),
-				LicenseCondition{cshare, newTestNode(lg, oshare)},
-				LicenseCondition{cprivacy, newTestNode(lg, oprivacy)},
+				newTestCondition(lg, oshare, cshare),
+				newTestCondition(lg, oprivacy, cprivacy),
 			})
 	}
 	return result
@@ -353,11 +388,21 @@ func checkSameActions(lg *LicenseGraph, asActual, asExpected actionSet, t *testi
 
 // checkSame compares an actual resolution set to an expected resolution set for a test.
 func checkSame(rsActual, rsExpected *ResolutionSet, t *testing.T) {
+	t.Logf("actual resolution set: %s", rsActual.String())
+	t.Logf("expected resolution set: %s", rsExpected.String())
+
+	actualTargets := rsActual.AttachesTo()
+	sort.Sort(actualTargets)
+
 	expectedTargets := rsExpected.AttachesTo()
 	sort.Sort(expectedTargets)
+
+	t.Logf("actual targets: %s", actualTargets.String())
+	t.Logf("expected targets: %s", expectedTargets.String())
+
 	for _, target := range expectedTargets {
 		if !rsActual.AttachesToTarget(target) {
-			t.Errorf("unexpected missing target: got AttachesToTarget(%q) is false in %s, want true in %s", target.name, rsActual, rsExpected)
+			t.Errorf("unexpected missing target: got AttachesToTarget(%q) is false, want true", target.name)
 			continue
 		}
 		expectedRl := rsExpected.Resolutions(target)
@@ -365,8 +410,8 @@ func checkSame(rsActual, rsExpected *ResolutionSet, t *testing.T) {
 		actualRl := rsActual.Resolutions(target)
 		sort.Sort(actualRl)
 		if len(expectedRl) != len(actualRl) {
-			t.Errorf("unexpected number of resolutions attach to %q: got %s with %d elements, want %s with %d elements",
-				target.name, actualRl, len(actualRl), expectedRl, len(expectedRl))
+			t.Errorf("unexpected number of resolutions attach to %q: %d elements, %d elements",
+				target.name, len(actualRl), len(expectedRl))
 			continue
 		}
 		for i := 0; i < len(expectedRl); i++ {
@@ -375,34 +420,75 @@ func checkSame(rsActual, rsExpected *ResolutionSet, t *testing.T) {
 					target.name, i, actualRl[i].asString(), expectedRl[i].asString())
 				continue
 			}
-			expectedConditions := expectedRl[i].Resolves().AsList()
-			actualConditions := actualRl[i].Resolves().AsList()
-			sort.Sort(expectedConditions)
-			sort.Sort(actualConditions)
-			if len(expectedConditions) != len(actualConditions) {
-				t.Errorf("unexpected number of conditions apply to %q acting on %q: got %s with %d elements, want %s with %d elements",
+			expectedConditions := expectedRl[i].Resolves()
+			actualConditions := actualRl[i].Resolves()
+			if expectedConditions != actualConditions {
+				t.Errorf("unexpected conditions apply to %q acting on %q: got %04x with names %s, want %04x with names %s",
 					target.name, expectedRl[i].actsOn.name,
-					actualConditions, len(actualConditions),
-					expectedConditions, len(expectedConditions))
+					actualConditions, actualConditions.Names(),
+					expectedConditions, expectedConditions.Names())
 				continue
-			}
-			for j := 0; j < len(expectedConditions); j++ {
-				if expectedConditions[j] != actualConditions[j] {
-					t.Errorf("unexpected condition attached to %q acting on %q at index %d: got %s at index %d in %s, want %s in %s",
-						target.name, expectedRl[i].actsOn.name, i,
-						actualConditions[j].asString(":"), j, actualConditions,
-						expectedConditions[j].asString(":"), expectedConditions)
-				}
 			}
 		}
 
 	}
+	for _, target := range actualTargets {
+		if !rsExpected.AttachesToTarget(target) {
+			t.Errorf("unexpected extra target: got expected.AttachesTo(%q) is false, want true", target.name)
+		}
+	}
+}
+
+// checkResolves compares an actual resolution set to an expected resolution set for a test verifying the actual set
+// resolves all of the expected conditions.
+func checkResolves(rsActual, rsExpected *ResolutionSet, t *testing.T) {
+	t.Logf("actual resolution set: %s", rsActual.String())
+	t.Logf("expected resolution set: %s", rsExpected.String())
+
 	actualTargets := rsActual.AttachesTo()
 	sort.Sort(actualTargets)
-	for i, target := range actualTargets {
+
+	expectedTargets := rsExpected.AttachesTo()
+	sort.Sort(expectedTargets)
+
+	t.Logf("actual targets: %s", actualTargets.String())
+	t.Logf("expected targets: %s", expectedTargets.String())
+
+	for _, target := range expectedTargets {
+		if !rsActual.AttachesToTarget(target) {
+			t.Errorf("unexpected missing target: got AttachesToTarget(%q) is false, want true", target.name)
+			continue
+		}
+		expectedRl := rsExpected.Resolutions(target)
+		sort.Sort(expectedRl)
+		actualRl := rsActual.Resolutions(target)
+		sort.Sort(actualRl)
+		if len(expectedRl) != len(actualRl) {
+			t.Errorf("unexpected number of resolutions attach to %q: %d elements, %d elements",
+				target.name, len(actualRl), len(expectedRl))
+			continue
+		}
+		for i := 0; i < len(expectedRl); i++ {
+			if expectedRl[i].attachesTo.name != actualRl[i].attachesTo.name || expectedRl[i].actsOn.name != actualRl[i].actsOn.name {
+				t.Errorf("unexpected resolution attaches to %q at index %d: got %s, want %s",
+					target.name, i, actualRl[i].asString(), expectedRl[i].asString())
+				continue
+			}
+			expectedConditions := expectedRl[i].Resolves()
+			actualConditions := actualRl[i].Resolves()
+			if expectedConditions != (expectedConditions & actualConditions) {
+				t.Errorf("expected conditions missing from %q acting on %q: got %04x with names %s, want %04x with names %s",
+					target.name, expectedRl[i].actsOn.name,
+					actualConditions, actualConditions.Names(),
+					expectedConditions, expectedConditions.Names())
+				continue
+			}
+		}
+
+	}
+	for _, target := range actualTargets {
 		if !rsExpected.AttachesToTarget(target) {
-			t.Errorf("unexpected target: got %q element %d in AttachesTo() %s with %d elements in %s, want %s with %d elements in %s",
-				target.name, i, actualTargets, len(actualTargets), rsActual, expectedTargets, len(expectedTargets), rsExpected)
+			t.Errorf("unexpected extra target: got expected.AttachesTo(%q) is false, want true", target.name)
 		}
 	}
 }

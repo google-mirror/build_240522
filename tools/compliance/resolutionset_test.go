@@ -15,7 +15,6 @@
 package compliance
 
 import (
-	"sort"
 	"testing"
 )
 
@@ -85,6 +84,7 @@ func TestResolutionSet_JoinResolutionSets(t *testing.T) {
 	rsExpected := toResolutionSet(lg, append(notice, share...))
 
 	rsActual := JoinResolutionSets(rsNotice, rsShare)
+	t.Logf("Joining %s and %s yields %s, want %s", rsNotice.String(), rsShare.String(), rsActual.String(), rsExpected.String())
 	checkSame(rsActual, rsExpected, t)
 }
 
@@ -96,28 +96,8 @@ func TestResolutionSet_JoinResolutionsEmpty(t *testing.T) {
 	rsExpected := toResolutionSet(lg, append(share, proprietary...))
 
 	rsActual := JoinResolutionSets(rsShare, rsProprietary)
+	t.Logf("Joining %s and %s yields %s, want %s", rsShare.String(), rsProprietary.String(), rsActual.String(), rsExpected.String())
 	checkSame(rsActual, rsExpected, t)
-}
-
-func TestResolutionSet_Origins(t *testing.T) {
-	lg := newLicenseGraph()
-
-	rsShare := toResolutionSet(lg, share)
-
-	origins := make([]string, 0)
-	for _, target := range rsShare.Origins() {
-		origins = append(origins, target.Name())
-	}
-	sort.Strings(origins)
-	if len(origins) != 2 {
-		t.Errorf("unexpected number of origins: got %v with %d elements, want [\"bin1\", \"bin2\"] with 2 elements", origins, len(origins))
-	}
-	if origins[0] != "bin1" {
-		t.Errorf("unexpected origin at element 0: got %s, want \"bin1\"", origins[0])
-	}
-	if origins[1] != "bin2" {
-		t.Errorf("unexpected origin at element 0: got %s, want \"bin2\"", origins[0])
-	}
 }
 
 func TestResolutionSet_AttachedToTarget(t *testing.T) {
@@ -125,65 +105,42 @@ func TestResolutionSet_AttachedToTarget(t *testing.T) {
 
 	rsShare := toResolutionSet(lg, share)
 
+	t.Logf("checking resolution set %s", rsShare.String())
+
 	if rsShare.AttachesToTarget(newTestNode(lg, "binc")) {
-		t.Errorf("unexpected AttachedToTarget(\"binc\"): got true, want false")
+		t.Errorf("actual.AttachedToTarget(\"binc\"): got true, want false")
 	}
 	if !rsShare.AttachesToTarget(newTestNode(lg, "image")) {
-		t.Errorf("unexpected AttachedToTarget(\"image\"): got false want true")
+		t.Errorf("actual.AttachedToTarget(\"image\"): got false want true")
 	}
 }
 
-func TestResolutionSet_AnyByNameAttachToTarget(t *testing.T) {
+func TestResolutionSet_AnyMatchingAttachToTarget(t *testing.T) {
 	lg := newLicenseGraph()
 
 	rs := toResolutionSet(lg, bottomUp)
 
-	pandp := ConditionNames{"permissive", "proprietary"}
-	pandn := ConditionNames{"permissive", "notice"}
-	p := ConditionNames{"proprietary"}
-	r := ConditionNames{"restricted"}
+	t.Logf("checking resolution set %s", rs.String())
 
-	if rs.AnyByNameAttachToTarget(newTestNode(lg, "image"), pandp, p) {
-		t.Errorf("unexpected AnyByNameAttachToTarget(\"image\", \"proprietary\", \"permissive\"): want false, got true")
-	}
-	if !rs.AnyByNameAttachToTarget(newTestNode(lg, "binc"), p) {
-		t.Errorf("unexpected AnyByNameAttachToTarget(\"binc\", \"proprietary\"): want true, got false")
-	}
-	if !rs.AnyByNameAttachToTarget(newTestNode(lg, "image"), pandn) {
-		t.Errorf("unexpected AnyByNameAttachToTarget(\"image\", \"permissive\", \"notice\"): want true, got false")
-	}
-	if !rs.AnyByNameAttachToTarget(newTestNode(lg, "image"), r, pandn) {
-		t.Errorf("unexpected AnyByNameAttachToTarget(\"image\", \"restricted\", \"notice\"): want true, got false")
-	}
-	if !rs.AnyByNameAttachToTarget(newTestNode(lg, "image"), r, p) {
-		t.Errorf("unexpected AnyByNameAttachToTarget(\"image\", \"restricted\", \"proprietary\"): want true, got false")
-	}
-}
+	pandp := LicenseConditionSet(PermissiveCondition | ProprietaryCondition)
+	pandn := LicenseConditionSet(PermissiveCondition | NoticeCondition)
+	p := LicenseConditionSet(ProprietaryCondition)
+	r := LicenseConditionSet(RestrictedCondition)
 
-func TestResolutionSet_AllByNameAttachToTarget(t *testing.T) {
-	lg := newLicenseGraph()
-
-	rs := toResolutionSet(lg, bottomUp)
-
-	pandp := ConditionNames{"permissive", "proprietary"}
-	pandn := ConditionNames{"permissive", "notice"}
-	p := ConditionNames{"proprietary"}
-	r := ConditionNames{"restricted"}
-
-	if rs.AllByNameAttachToTarget(newTestNode(lg, "image"), pandp, p) {
-		t.Errorf("unexpected AllByNameAttachToTarget(\"image\", \"proprietary\", \"permissive\"): want false, got true")
+	if rs.AnyMatchingAttachToTarget(newTestNode(lg, "image"), pandp, p) {
+		t.Errorf("actual.AnyMatchingAttachToTarget(\"image\", \"proprietary\", \"permissive\") in %s: want false, got true", rs.String())
 	}
-	if !rs.AllByNameAttachToTarget(newTestNode(lg, "binc"), p) {
-		t.Errorf("unexpected AllByNameAttachToTarget(\"binc\", \"proprietary\"): want true, got false")
+	if !rs.AnyMatchingAttachToTarget(newTestNode(lg, "binc"), p) {
+		t.Errorf("actual.AnyMatchingAttachToTarget(\"binc\", \"proprietary\"): want true, got false")
 	}
-	if !rs.AllByNameAttachToTarget(newTestNode(lg, "image"), pandn) {
-		t.Errorf("unexpected AllByNameAttachToTarget(\"image\", \"notice\"): want true, got false")
+	if !rs.AnyMatchingAttachToTarget(newTestNode(lg, "image"), pandn) {
+		t.Errorf("actual.AnyMatchingAttachToTarget(\"image\", \"permissive\", \"notice\"): want true, got false")
 	}
-	if !rs.AllByNameAttachToTarget(newTestNode(lg, "image"), r, pandn) {
-		t.Errorf("unexpected AllByNameAttachToTarget(\"image\", \"restricted\", \"notice\"): want true, got false")
+	if !rs.AnyMatchingAttachToTarget(newTestNode(lg, "image"), r, pandn) {
+		t.Errorf("actual.AnyMatchingAttachToTarget(\"image\", \"restricted\", \"notice\"): want true, got false")
 	}
-	if rs.AllByNameAttachToTarget(newTestNode(lg, "image"), r, p) {
-		t.Errorf("unexpected AllByNameAttachToTarget(\"image\", \"restricted\", \"proprietary\"): want false, got true")
+	if !rs.AnyMatchingAttachToTarget(newTestNode(lg, "image"), r, p) {
+		t.Errorf("actual.AnyMatchingAttachToTarget(\"image\", \"restricted\", \"proprietary\"): want true, got false")
 	}
 }
 
@@ -192,10 +149,12 @@ func TestResolutionSet_AttachesToTarget(t *testing.T) {
 
 	rsShare := toResolutionSet(lg, share)
 
+	t.Logf("checking resolution set %s", rsShare.String())
+
 	if rsShare.AttachesToTarget(newTestNode(lg, "binc")) {
-		t.Errorf("unexpected hasTarget(\"binc\"): got true, want false")
+		t.Errorf("actual.AttachesToTarget(\"binc\"): got true, want false")
 	}
 	if !rsShare.AttachesToTarget(newTestNode(lg, "image")) {
-		t.Errorf("unexpected AttachesToTarget(\"image\"): got false want true")
+		t.Errorf("actual.AttachesToTarget(\"image\"): got false want true")
 	}
 }

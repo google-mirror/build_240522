@@ -53,6 +53,7 @@ bootstrap_go_package {
         "conditionset.go",
         "doc.go",
         "graph.go",
+        "intset.go",
         "policy/policy.go",
         "policy/resolve.go",
         "policy/resolvenotices.go",
@@ -66,8 +67,10 @@ bootstrap_go_package {
         "resolutionset.go",
     ],
     testSrcs: [
+        "actionset_test.go",
         "condition_test.go",
         "conditionset_test.go",
+        "intset_test.go",
         "readgraph_test.go",
         "policy/policy_test.go",
         "policy/resolve_test.go",

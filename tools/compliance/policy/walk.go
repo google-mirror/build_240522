@@ -24,31 +24,28 @@ type VisitNode func(*LicenseGraph, *TargetNode, TargetEdgePath) bool
 func WalkTopDown(lg *LicenseGraph, visit VisitNode) {
 	path := NewTargetEdgePath(32)
 
-	// must be indexed for fast lookup
-	lg.indexForward()
-
-	var walk func(f string)
-	walk = func(f string) {
-		visitChildren := visit(lg, lg.targets[f], *path)
+	var walk func(fnode *TargetNode)
+	walk = func(fnode *TargetNode) {
+		visitChildren := visit(lg, fnode, *path)
 		if !visitChildren {
 			return
 		}
-		for _, edge := range lg.index[f] {
-			path.Push(TargetEdge{lg, edge})
+		for _, edge := range fnode.edges {
+			path.Push(edge)
 			walk(edge.dependency)
 			path.Pop()
 		}
 	}
 
-	for _, r := range lg.rootFiles {
+	for _, r := range lg.rootNodes {
 		path.Clear()
 		walk(r)
 	}
 }
 
 // WalkResolutionsForCondition performs a top-down walk of the LicenseGraph
-// resolving all distributed works for condition `names`.
-func WalkResolutionsForCondition(lg *LicenseGraph, rs *ResolutionSet, names ConditionNames) *ResolutionSet {
+// resolving all distributed works for `conditions`.
+func WalkResolutionsForCondition(lg *LicenseGraph, rs *ResolutionSet, conditions LicenseConditionSet) *ResolutionSet {
 	shipped := ShippedNodes(lg)
 
 	// rmap maps 'attachesTo' targets to the `actsOn` targets and applicable conditions
@@ -64,7 +61,10 @@ func WalkResolutionsForCondition(lg *LicenseGraph, rs *ResolutionSet, names Cond
 			return false
 		}
 		if as, ok := rs.resolutions[tn]; ok {
-			fas := as.byActsOn(shipped).byName(names)
+			fas := actionSet{as.lg, &IntervalSet{}}
+			for a := range as.byActsOn(shipped).matchingAnySet(conditions) {
+				fas.add(a.actsOn, a.cs)
+			}
 			if !fas.isEmpty() {
 				rmap[tn] = fas
 			}

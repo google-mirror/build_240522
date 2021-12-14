@@ -28,19 +28,15 @@ type SourceSharePrivacyConflict struct {
 
 // Error returns a string describing the conflict.
 func (conflict SourceSharePrivacyConflict) Error() string {
-	return fmt.Sprintf("%s %s from %s and must share from %s %s\n",
-		conflict.SourceNode.name,
-		conflict.PrivacyCondition.name, conflict.PrivacyCondition.origin.name,
-		conflict.ShareCondition.name, conflict.ShareCondition.origin.name)
+	return fmt.Sprintf("%s %s and must share from %s condition\n", conflict.SourceNode.name,
+		conflict.PrivacyCondition.Name(), conflict.ShareCondition.Name())
 }
 
 // IsEqualTo returns true when `conflict` and `other` describe the same conflict.
 func (conflict SourceSharePrivacyConflict) IsEqualTo(other SourceSharePrivacyConflict) bool {
 	return conflict.SourceNode.name == other.SourceNode.name &&
-		conflict.ShareCondition.name == other.ShareCondition.name &&
-		conflict.ShareCondition.origin.name == other.ShareCondition.origin.name &&
-		conflict.PrivacyCondition.name == other.PrivacyCondition.name &&
-		conflict.PrivacyCondition.origin.name == other.PrivacyCondition.origin.name
+		conflict.ShareCondition == other.ShareCondition &&
+		conflict.PrivacyCondition == other.PrivacyCondition
 }
 
 // ConflictingSharedPrivateSource lists all of the targets where conflicting conditions to
@@ -65,7 +61,7 @@ func ConflictingSharedPrivateSource(lg *LicenseGraph) []SourceSharePrivacyConfli
 	size := 0
 	for _, actsOn := range combined.ActsOn() {
 		rl := combined.ResolutionsByActsOn(actsOn)
-		size += rl.CountConditionsByName(ImpliesShared) * rl.CountConditionsByName(ImpliesPrivate)
+		size += rl.CountMatching(ImpliesShared) * rl.CountMatching(ImpliesPrivate)
 	}
 	if size == 0 {
 		return []SourceSharePrivacyConflict{}
@@ -77,8 +73,8 @@ func ConflictingSharedPrivateSource(lg *LicenseGraph) []SourceSharePrivacyConfli
 			continue
 		}
 
-		pconditions := rl.ByName(ImpliesPrivate).AllConditions().AsList()
-		ssconditions := rl.ByName(ImpliesShared).AllConditions().AsList()
+		pconditions := rl.Matching(ImpliesPrivate).AllConditions().AsList()
+		ssconditions := rl.Matching(ImpliesShared).AllConditions().AsList()
 
 		// report all conflicting condition combinations
 		for _, p := range pconditions {

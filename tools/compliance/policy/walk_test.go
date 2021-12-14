@@ -22,7 +22,7 @@ import (
 func TestWalkResolutionsForCondition(t *testing.T) {
 	tests := []struct {
 		name                string
-		condition           ConditionNames
+		condition           LicenseConditionSet
 		roots               []string
 		edges               []annotated
 		expectedResolutions []res
@@ -625,7 +625,7 @@ func TestWalkResolutionsForCondition(t *testing.T) {
 			}
 			expectedRs := toResolutionSet(lg, tt.expectedResolutions)
 			actualRs := WalkResolutionsForCondition(lg, ResolveTopDownConditions(lg), tt.condition)
-			checkSame(actualRs, expectedRs, t)
+			checkResolves(actualRs, expectedRs, t)
 		})
 	}
 }

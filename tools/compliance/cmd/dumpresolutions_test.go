@@ -1,7 +1,5 @@
 // Copyright 2021 Google LLC
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -16,6 +14,7 @@ package main
 
 import (
 	"bytes"
+	"compliance"
 	"fmt"
 	"strings"
 	"testing"
@@ -34,20 +33,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex",
 			roots:     []string{"highest.apex.meta_lic"},
 			expectedOut: []string{
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/highest.apex.meta_lic testdata/firstparty/highest.apex.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
-				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
-				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/highest.apex.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
+				"testdata/firstparty/highest.apex.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
+				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -56,20 +55,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/firstparty/"},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic notice",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/liba.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libc.a.meta_lic notice",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
+				"lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -77,22 +76,22 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic notice",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/liba.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libc.a.meta_lic notice",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -100,7 +99,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions: compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []string{},
@@ -110,7 +109,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions: compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []string{},
@@ -120,7 +119,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  append(compliance.ImpliesPrivate.AsList(),compliance.ImpliesShared.AsList()...),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []string{},
@@ -131,20 +130,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/firstparty/", labelConditions: true},
 			expectedOut: []string{
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
 			},
 		},
 		{
@@ -152,20 +151,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "container",
 			roots:     []string{"container.zip.meta_lic"},
 			expectedOut: []string{
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/container.zip.meta_lic testdata/firstparty/container.zip.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
-				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
-				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/bin/bin2.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/bin/bin2.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/container.zip.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
+				"testdata/firstparty/container.zip.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
+				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -173,11 +172,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "application",
 			roots:     []string{"application.meta_lic"},
 			expectedOut: []string{
-				"testdata/firstparty/application.meta_lic testdata/firstparty/application.meta_lic testdata/firstparty/application.meta_lic notice",
-				"testdata/firstparty/application.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/bin/bin3.meta_lic testdata/firstparty/bin/bin3.meta_lic testdata/firstparty/bin/bin3.meta_lic notice",
-				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
+				"testdata/firstparty/application.meta_lic testdata/firstparty/application.meta_lic notice",
+				"testdata/firstparty/application.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/bin/bin3.meta_lic testdata/firstparty/bin/bin3.meta_lic notice",
+				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/lib/libb.so.meta_lic testdata/firstparty/lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -185,11 +184,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "binary",
 			roots:     []string{"bin/bin1.meta_lic"},
 			expectedOut: []string{
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
-				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
-				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/bin/bin1.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/bin/bin1.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
+				"testdata/firstparty/lib/liba.so.meta_lic testdata/firstparty/lib/liba.so.meta_lic notice",
+				"testdata/firstparty/lib/libc.a.meta_lic testdata/firstparty/lib/libc.a.meta_lic notice",
 			},
 		},
 		{
@@ -197,7 +196,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "library",
 			roots:     []string{"lib/libd.so.meta_lic"},
 			expectedOut: []string{
-				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
+				"testdata/firstparty/lib/libd.so.meta_lic testdata/firstparty/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -205,20 +204,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex",
 			roots:     []string{"highest.apex.meta_lic"},
 			expectedOut: []string{
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/highest.apex.meta_lic testdata/notice/highest.apex.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
-				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
-				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/bin/bin1.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/bin/bin2.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/highest.apex.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
+				"testdata/notice/highest.apex.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
+				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -227,20 +226,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/notice/"},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic notice",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/liba.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libc.a.meta_lic notice",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
+				"lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -248,22 +247,22 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic notice",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic notice",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/liba.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libc.a.meta_lic notice",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic notice",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -271,7 +270,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions: compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []string{},
@@ -281,7 +280,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions: compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []string{},
@@ -291,7 +290,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  append(compliance.ImpliesShared.AsList(),compliance.ImpliesPrivate.AsList()...),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []string{},
@@ -302,20 +301,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/notice/", labelConditions: true},
 			expectedOut: []string{
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
-				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"lib/liba.so.meta_lic:notice lib/liba.so.meta_lic:notice notice",
+				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"lib/libc.a.meta_lic:notice lib/libc.a.meta_lic:notice notice",
+				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
 			},
 		},
 		{
@@ -323,20 +322,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "container",
 			roots:     []string{"container.zip.meta_lic"},
 			expectedOut: []string{
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/container.zip.meta_lic testdata/notice/container.zip.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
-				"testdata/notice/container.zip.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
-				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/bin/bin2.meta_lic testdata/notice/bin/bin2.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/bin/bin1.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/bin/bin2.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/container.zip.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
+				"testdata/notice/container.zip.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
+				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -344,11 +343,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "application",
 			roots:     []string{"application.meta_lic"},
 			expectedOut: []string{
-				"testdata/notice/application.meta_lic testdata/notice/application.meta_lic testdata/notice/application.meta_lic notice",
-				"testdata/notice/application.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/bin/bin3.meta_lic testdata/notice/bin/bin3.meta_lic testdata/notice/bin/bin3.meta_lic notice",
-				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
+				"testdata/notice/application.meta_lic testdata/notice/application.meta_lic notice",
+				"testdata/notice/application.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/bin/bin3.meta_lic testdata/notice/bin/bin3.meta_lic notice",
+				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/lib/libb.so.meta_lic testdata/notice/lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -356,11 +355,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "binary",
 			roots:     []string{"bin/bin1.meta_lic"},
 			expectedOut: []string{
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
-				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
-				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/bin/bin1.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/bin/bin1.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
+				"testdata/notice/lib/liba.so.meta_lic testdata/notice/lib/liba.so.meta_lic notice",
+				"testdata/notice/lib/libc.a.meta_lic testdata/notice/lib/libc.a.meta_lic notice",
 			},
 		},
 		{
@@ -368,7 +367,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "library",
 			roots:     []string{"lib/libd.so.meta_lic"},
 			expectedOut: []string{
-				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
+				"testdata/notice/lib/libd.so.meta_lic testdata/notice/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -376,20 +375,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex",
 			roots:     []string{"highest.apex.meta_lic"},
 			expectedOut: []string{
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/highest.apex.meta_lic notice",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
-				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
-				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/highest.apex.meta_lic notice",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
+				"testdata/reciprocal/highest.apex.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
+				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -398,20 +397,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/reciprocal/"},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic reciprocal",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/liba.so.meta_lic reciprocal",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
+				"lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -419,17 +418,17 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
+				"highest.apex.meta_lic lib/libb.so.meta_lic notice",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -437,15 +436,15 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions: compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic reciprocal",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal",
+				"highest.apex.meta_lic lib/liba.so.meta_lic reciprocal",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
 			},
 		},
 		{
@@ -453,7 +452,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions: compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []string{},
@@ -463,15 +462,15 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions: append(compliance.ImpliesShared.AsList(),compliance.ImpliesPrivate.AsList()...),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic reciprocal",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal",
+				"highest.apex.meta_lic lib/liba.so.meta_lic reciprocal",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic reciprocal",
 			},
 		},
 		{
@@ -480,20 +479,20 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/reciprocal/", labelConditions: true},
 			expectedOut: []string{
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:reciprocal lib/liba.so.meta_lic:reciprocal reciprocal",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:reciprocal lib/liba.so.meta_lic:reciprocal reciprocal",
-				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"lib/liba.so.meta_lic:reciprocal lib/liba.so.meta_lic:reciprocal lib/liba.so.meta_lic:reciprocal reciprocal",
-				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
-				"lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:reciprocal reciprocal",
+				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:reciprocal reciprocal",
+				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:reciprocal reciprocal",
+				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:reciprocal reciprocal",
+				"lib/liba.so.meta_lic:reciprocal lib/liba.so.meta_lic:reciprocal reciprocal",
+				"lib/libb.so.meta_lic:notice lib/libb.so.meta_lic:notice notice",
+				"lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
+				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
 			},
 		},
 		{
@@ -501,20 +500,20 @@ func Test_plaintext(t *testing.T) {
 			name:      "container",
 			roots:     []string{"container.zip.meta_lic"},
 			expectedOut: []string{
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/container.zip.meta_lic notice",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
-				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
-				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin2.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/bin/bin2.meta_lic notice",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/container.zip.meta_lic notice",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
+				"testdata/reciprocal/container.zip.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
+				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -522,11 +521,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "application",
 			roots:     []string{"application.meta_lic"},
 			expectedOut: []string{
-				"testdata/reciprocal/application.meta_lic testdata/reciprocal/application.meta_lic testdata/reciprocal/application.meta_lic notice",
-				"testdata/reciprocal/application.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin3.meta_lic testdata/reciprocal/bin/bin3.meta_lic testdata/reciprocal/bin/bin3.meta_lic notice",
-				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
+				"testdata/reciprocal/application.meta_lic testdata/reciprocal/application.meta_lic notice",
+				"testdata/reciprocal/application.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin3.meta_lic testdata/reciprocal/bin/bin3.meta_lic notice",
+				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libb.so.meta_lic testdata/reciprocal/lib/libb.so.meta_lic notice",
 			},
 		},
 		{
@@ -534,11 +533,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "binary",
 			roots:     []string{"bin/bin1.meta_lic"},
 			expectedOut: []string{
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
-				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
-				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/bin/bin1.meta_lic notice",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/bin/bin1.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
+				"testdata/reciprocal/lib/liba.so.meta_lic testdata/reciprocal/lib/liba.so.meta_lic reciprocal",
+				"testdata/reciprocal/lib/libc.a.meta_lic testdata/reciprocal/lib/libc.a.meta_lic reciprocal",
 			},
 		},
 		{
@@ -546,7 +545,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "library",
 			roots:     []string{"lib/libd.so.meta_lic"},
 			expectedOut: []string{
-				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
+				"testdata/reciprocal/lib/libd.so.meta_lic testdata/reciprocal/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -554,33 +553,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex",
 			roots:     []string{"highest.apex.meta_lic"},
 			expectedOut: []string{
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/highest.apex.meta_lic testdata/restricted/highest.apex.meta_lic notice",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice:restricted",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libd.so.meta_lic restricted",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/bin/bin2.meta_lic notice:restricted",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/highest.apex.meta_lic notice:restricted:restricted_allows_dynamic_linking",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/highest.apex.meta_lic testdata/restricted/lib/libd.so.meta_lic restricted",
+				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -589,33 +578,23 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/restricted/"},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"highest.apex.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice:restricted",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin2.meta_lic lib/libd.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice:restricted",
+				"highest.apex.meta_lic highest.apex.meta_lic notice:restricted:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/libd.so.meta_lic restricted",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"lib/libd.so.meta_lic lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -623,15 +602,15 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin2.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
 			},
 		},
 		{
@@ -639,26 +618,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions: compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin1.meta_lic bin/bin1.meta_lic restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"bin/bin2.meta_lic bin/bin2.meta_lic restricted",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin1.meta_lic restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic bin/bin2.meta_lic restricted",
+				"highest.apex.meta_lic highest.apex.meta_lic restricted:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -666,7 +642,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions: compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []string{},
@@ -676,26 +652,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  append(compliance.ImpliesShared.AsList(),compliance.ImpliesPrivate.AsList()...),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin1.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/liba.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic reciprocal",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic restricted",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin1.meta_lic bin/bin1.meta_lic restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"bin/bin2.meta_lic bin/bin2.meta_lic restricted",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin1.meta_lic restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic bin/bin2.meta_lic restricted",
+				"highest.apex.meta_lic highest.apex.meta_lic restricted:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -704,33 +677,23 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/restricted/", labelConditions: true},
 			expectedOut: []string{
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice lib/liba.so.meta_lic:restricted restricted",
-				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:restricted lib/liba.so.meta_lic:restricted restricted",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/liba.so.meta_lic:restricted restricted",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"bin/bin2.meta_lic:notice lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"bin/bin2.meta_lic:notice lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice lib/liba.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice lib/liba.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:restricted lib/liba.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/liba.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"highest.apex.meta_lic:notice lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"lib/liba.so.meta_lic:restricted lib/liba.so.meta_lic:restricted lib/liba.so.meta_lic:restricted restricted",
-				"lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal lib/liba.so.meta_lic:restricted restricted",
-				"lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice:restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:restricted_allows_dynamic_linking restricted_allows_dynamic_linking",
+				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:reciprocal reciprocal:restricted_allows_dynamic_linking",
+				"bin/bin2.meta_lic:notice bin/bin2.meta_lic:notice notice:restricted",
+				"bin/bin2.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
+				"bin/bin2.meta_lic:notice lib/libd.so.meta_lic:notice restricted",
+				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice notice:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic:notice bin/bin2.meta_lic:notice notice:restricted",
+				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice:restricted:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:restricted_allows_dynamic_linking restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
+				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:reciprocal reciprocal:restricted_allows_dynamic_linking",
+				"highest.apex.meta_lic:notice lib/libd.so.meta_lic:notice restricted",
+				"lib/liba.so.meta_lic:restricted_allows_dynamic_linking lib/liba.so.meta_lic:restricted_allows_dynamic_linking restricted_allows_dynamic_linking",
+				"lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
+				"lib/libc.a.meta_lic:reciprocal lib/libc.a.meta_lic:reciprocal reciprocal:restricted_allows_dynamic_linking",
+				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice:restricted",
 			},
 		},
 		{
@@ -738,33 +701,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "container",
 			roots:     []string{"container.zip.meta_lic"},
 			expectedOut: []string{
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/container.zip.meta_lic testdata/restricted/container.zip.meta_lic notice",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/container.zip.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/bin/bin2.meta_lic notice:restricted",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/bin/bin2.meta_lic testdata/restricted/lib/libd.so.meta_lic restricted",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/bin/bin2.meta_lic notice:restricted",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/container.zip.meta_lic notice:restricted:restricted_allows_dynamic_linking",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/container.zip.meta_lic testdata/restricted/lib/libd.so.meta_lic restricted",
+				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -772,16 +725,12 @@ func Test_plaintext(t *testing.T) {
 			name:      "application",
 			roots:     []string{"application.meta_lic"},
 			expectedOut: []string{
-				"testdata/restricted/application.meta_lic testdata/restricted/application.meta_lic testdata/restricted/application.meta_lic notice",
-				"testdata/restricted/application.meta_lic testdata/restricted/application.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/application.meta_lic testdata/restricted/application.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/application.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/application.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/application.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/bin/bin3.meta_lic testdata/restricted/bin/bin3.meta_lic testdata/restricted/bin/bin3.meta_lic restricted",
-				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
-				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/application.meta_lic testdata/restricted/application.meta_lic notice:restricted:restricted_allows_dynamic_linking",
+				"testdata/restricted/application.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted:restricted_allows_dynamic_linking",
+				"testdata/restricted/application.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
+				"testdata/restricted/bin/bin3.meta_lic testdata/restricted/bin/bin3.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted:restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libb.so.meta_lic testdata/restricted/lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -789,14 +738,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "binary",
 			roots:     []string{"bin/bin1.meta_lic"},
 			expectedOut: []string{
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
-				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted",
-				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/bin/bin1.meta_lic notice:restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/bin/bin1.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/liba.so.meta_lic testdata/restricted/lib/liba.so.meta_lic restricted_allows_dynamic_linking",
+				"testdata/restricted/lib/libc.a.meta_lic testdata/restricted/lib/libc.a.meta_lic reciprocal:restricted_allows_dynamic_linking",
 			},
 		},
 		{
@@ -804,7 +750,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "library",
 			roots:     []string{"lib/libd.so.meta_lic"},
 			expectedOut: []string{
-				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice",
+				"testdata/restricted/lib/libd.so.meta_lic testdata/restricted/lib/libd.so.meta_lic notice",
 			},
 		},
 		{
@@ -812,27 +758,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex",
 			roots:     []string{"highest.apex.meta_lic"},
 			expectedOut: []string{
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/highest.apex.meta_lic testdata/proprietary/highest.apex.meta_lic notice",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libd.so.meta_lic restricted",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/highest.apex.meta_lic notice:restricted",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/highest.apex.meta_lic testdata/proprietary/lib/libd.so.meta_lic restricted",
+				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -841,27 +783,23 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/proprietary/"},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic by_exception_only:proprietary",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic by_exception_only:proprietary",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic by_exception_only:proprietary",
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic by_exception_only:proprietary",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic by_exception_only:proprietary",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic by_exception_only:proprietary",
-				"highest.apex.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic by_exception_only:proprietary",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/libc.a.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic by_exception_only:proprietary",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/libd.so.meta_lic lib/libd.so.meta_lic lib/libd.so.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic proprietary:by_exception_only",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic proprietary:by_exception_only",
+				"bin/bin2.meta_lic bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin2.meta_lic lib/libd.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"highest.apex.meta_lic highest.apex.meta_lic notice:restricted",
+				"highest.apex.meta_lic lib/liba.so.meta_lic proprietary:by_exception_only",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic lib/libc.a.meta_lic proprietary:by_exception_only",
+				"highest.apex.meta_lic lib/libd.so.meta_lic restricted",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary:by_exception_only",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"lib/libc.a.meta_lic lib/libc.a.meta_lic proprietary:by_exception_only",
+				"lib/libd.so.meta_lic lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -869,13 +807,13 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic bin/bin1.meta_lic bin/bin1.meta_lic notice",
-				"highest.apex.meta_lic highest.apex.meta_lic highest.apex.meta_lic notice",
+				"bin/bin1.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic bin/bin1.meta_lic notice",
+				"highest.apex.meta_lic highest.apex.meta_lic notice",
 			},
 		},
 		{
@@ -883,16 +821,16 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions: compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []string{
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin2.meta_lic bin/bin2.meta_lic restricted",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin2.meta_lic restricted",
+				"highest.apex.meta_lic highest.apex.meta_lic restricted",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -900,17 +838,17 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions: compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic proprietary",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic proprietary",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic proprietary",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic proprietary",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic proprietary",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic proprietary",
+				"bin/bin2.meta_lic bin/bin2.meta_lic proprietary",
+				"highest.apex.meta_lic bin/bin2.meta_lic proprietary",
+				"highest.apex.meta_lic lib/liba.so.meta_lic proprietary",
+				"highest.apex.meta_lic lib/libc.a.meta_lic proprietary",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
 			},
 		},
 		{
@@ -918,23 +856,21 @@ func Test_plaintext(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  append(compliance.ImpliesShared.AsList(),compliance.ImpliesPrivate.AsList()...),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []string{
-				"bin/bin1.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
-				"bin/bin1.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic proprietary",
-				"bin/bin2.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic proprietary",
-				"bin/bin2.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"bin/bin2.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic bin/bin2.meta_lic bin/bin2.meta_lic proprietary",
-				"highest.apex.meta_lic bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic highest.apex.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
-				"highest.apex.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
-				"highest.apex.meta_lic lib/libc.a.meta_lic lib/libc.a.meta_lic proprietary",
-				"lib/liba.so.meta_lic lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
-				"lib/libb.so.meta_lic lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
+				"bin/bin1.meta_lic lib/liba.so.meta_lic proprietary",
+				"bin/bin1.meta_lic lib/libc.a.meta_lic proprietary",
+				"bin/bin2.meta_lic bin/bin2.meta_lic restricted:proprietary",
+				"bin/bin2.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic bin/bin2.meta_lic restricted:proprietary",
+				"highest.apex.meta_lic highest.apex.meta_lic restricted",
+				"highest.apex.meta_lic lib/liba.so.meta_lic proprietary",
+				"highest.apex.meta_lic lib/libb.so.meta_lic restricted",
+				"highest.apex.meta_lic lib/libc.a.meta_lic proprietary",
+				"lib/liba.so.meta_lic lib/liba.so.meta_lic proprietary",
+				"lib/libb.so.meta_lic lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -943,27 +879,23 @@ func Test_plaintext(t *testing.T) {
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx:       context{stripPrefix: "testdata/proprietary/", labelConditions: true},
 			expectedOut: []string{
-				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:by_exception_only:proprietary lib/liba.so.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:by_exception_only:proprietary lib/libc.a.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"bin/bin2.meta_lic:by_exception_only:proprietary bin/bin2.meta_lic:by_exception_only:proprietary bin/bin2.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"bin/bin2.meta_lic:by_exception_only:proprietary bin/bin2.meta_lic:by_exception_only:proprietary lib/libb.so.meta_lic:restricted restricted",
-				"bin/bin2.meta_lic:by_exception_only:proprietary lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"bin/bin2.meta_lic:by_exception_only:proprietary lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:by_exception_only:proprietary bin/bin2.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"highest.apex.meta_lic:notice bin/bin2.meta_lic:by_exception_only:proprietary lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice",
-				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:by_exception_only:proprietary lib/liba.so.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:by_exception_only:proprietary lib/libc.a.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"highest.apex.meta_lic:notice lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"lib/liba.so.meta_lic:by_exception_only:proprietary lib/liba.so.meta_lic:by_exception_only:proprietary lib/liba.so.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
-				"lib/libc.a.meta_lic:by_exception_only:proprietary lib/libc.a.meta_lic:by_exception_only:proprietary lib/libc.a.meta_lic:by_exception_only:proprietary by_exception_only:proprietary",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
-				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"bin/bin1.meta_lic:notice lib/liba.so.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"bin/bin1.meta_lic:notice lib/libc.a.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"bin/bin2.meta_lic:proprietary:by_exception_only bin/bin2.meta_lic:proprietary:by_exception_only restricted:proprietary:by_exception_only",
+				"bin/bin2.meta_lic:proprietary:by_exception_only lib/libb.so.meta_lic:restricted restricted",
+				"bin/bin2.meta_lic:proprietary:by_exception_only lib/libd.so.meta_lic:notice restricted",
+				"highest.apex.meta_lic:notice bin/bin1.meta_lic:notice notice",
+				"highest.apex.meta_lic:notice bin/bin2.meta_lic:proprietary:by_exception_only restricted:proprietary:by_exception_only",
+				"highest.apex.meta_lic:notice highest.apex.meta_lic:notice notice:restricted",
+				"highest.apex.meta_lic:notice lib/liba.so.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"highest.apex.meta_lic:notice lib/libb.so.meta_lic:restricted restricted",
+				"highest.apex.meta_lic:notice lib/libc.a.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"highest.apex.meta_lic:notice lib/libd.so.meta_lic:notice restricted",
+				"lib/liba.so.meta_lic:proprietary:by_exception_only lib/liba.so.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"lib/libb.so.meta_lic:restricted lib/libb.so.meta_lic:restricted restricted",
+				"lib/libc.a.meta_lic:proprietary:by_exception_only lib/libc.a.meta_lic:proprietary:by_exception_only proprietary:by_exception_only",
+				"lib/libd.so.meta_lic:notice lib/libd.so.meta_lic:notice notice:restricted",
 			},
 		},
 		{
@@ -971,27 +903,23 @@ func Test_plaintext(t *testing.T) {
 			name:      "container",
 			roots:     []string{"container.zip.meta_lic"},
 			expectedOut: []string{
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/container.zip.meta_lic testdata/proprietary/container.zip.meta_lic notice",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/bin/bin2.meta_lic testdata/proprietary/lib/libd.so.meta_lic restricted",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/bin/bin2.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/container.zip.meta_lic notice:restricted",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/container.zip.meta_lic testdata/proprietary/lib/libd.so.meta_lic restricted",
+				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice:restricted",
 			},
 		},
 		{
@@ -999,15 +927,12 @@ func Test_plaintext(t *testing.T) {
 			name:      "application",
 			roots:     []string{"application.meta_lic"},
 			expectedOut: []string{
-				"testdata/proprietary/application.meta_lic testdata/proprietary/application.meta_lic testdata/proprietary/application.meta_lic notice",
-				"testdata/proprietary/application.meta_lic testdata/proprietary/application.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/application.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/application.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/application.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/bin/bin3.meta_lic testdata/proprietary/bin/bin3.meta_lic testdata/proprietary/bin/bin3.meta_lic restricted",
-				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
-				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/application.meta_lic testdata/proprietary/application.meta_lic notice:restricted",
+				"testdata/proprietary/application.meta_lic testdata/proprietary/lib/liba.so.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/application.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
+				"testdata/proprietary/bin/bin3.meta_lic testdata/proprietary/bin/bin3.meta_lic restricted_allows_dynamic_linking",
+				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic restricted:proprietary:by_exception_only",
+				"testdata/proprietary/lib/libb.so.meta_lic testdata/proprietary/lib/libb.so.meta_lic restricted",
 			},
 		},
 		{
@@ -1015,11 +940,11 @@ func Test_plaintext(t *testing.T) {
 			name:      "binary",
 			roots:     []string{"bin/bin1.meta_lic"},
 			expectedOut: []string{
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic by_exception_only:proprietary",
-				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic by_exception_only:proprietary",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/bin/bin1.meta_lic notice",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/bin/bin1.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/liba.so.meta_lic testdata/proprietary/lib/liba.so.meta_lic proprietary:by_exception_only",
+				"testdata/proprietary/lib/libc.a.meta_lic testdata/proprietary/lib/libc.a.meta_lic proprietary:by_exception_only",
 			},
 		},
 		{
@@ -1027,7 +952,7 @@ func Test_plaintext(t *testing.T) {
 			name:      "library",
 			roots:     []string{"lib/libd.so.meta_lic"},
 			expectedOut: []string{
-				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice",
+				"testdata/proprietary/lib/libd.so.meta_lic testdata/proprietary/lib/libd.so.meta_lic notice",
 			},
 		},
 	}
@@ -1046,7 +971,7 @@ func Test_plaintext(t *testing.T) {
 			for _, r := range tt.roots {
 				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
 			}
-			err := dumpResolutions(&tt.ctx, stdout, stderr, rootFiles...)
+			_, err := dumpResolutions(&tt.ctx, stdout, stderr, rootFiles...)
 			if err != nil {
 				t.Fatalf("dumpresolutions: error = %v, stderr = %v", err, stderr)
 				return
@@ -1076,7 +1001,7 @@ type testContext struct {
 }
 
 type matcher interface {
-	matchString(*testContext) string
+	matchString(*testContext, *compliance.LicenseGraph) string
 	typeString() string
 }
 
@@ -1085,10 +1010,23 @@ type targetMatcher struct {
 	conditions []string
 }
 
-func (tm *targetMatcher) matchString(ctx *testContext) string {
+// newTestCondition constructs a test license condition in the license graph.
+func newTestCondition(lg *compliance.LicenseGraph, conditionName... string) compliance.LicenseConditionSet {
+	cs := compliance.NewLicenseConditionSet()
+	for _, name := range conditionName {
+		cs = cs.Plus(compliance.RecognizedConditionNames[name])
+	}
+	if cs.IsEmpty() && len(conditionName) != 0 {
+		panic(fmt.Errorf("attempt to create unrecognized condition: %q", conditionName))
+	}
+	return cs
+}
+
+func (tm *targetMatcher) matchString(ctx *testContext, lg *compliance.LicenseGraph) string {
+	cs := newTestCondition(lg, tm.conditions...)
 	m := tm.target
-	if len(tm.conditions) > 0 {
-		m += "\\n" + strings.Join(tm.conditions, "\\n")
+	if !cs.IsEmpty() {
+		m += "\\n" + strings.Join(cs.Names(), "\\n")
 	}
 	m = ctx.nodes[tm.target] + " [label=\"" + m + "\"];"
 	return m
@@ -1101,14 +1039,13 @@ func (tm *targetMatcher) typeString() string {
 type resolutionMatcher struct {
 	appliesTo  string
 	actsOn     string
-	origin     string
 	conditions []string
 }
 
-func (rm *resolutionMatcher) matchString(ctx *testContext) string {
-	return ctx.nodes[rm.appliesTo] + " -> " + ctx.nodes[rm.actsOn] + "; " +
-		ctx.nodes[rm.actsOn] + " -> " + ctx.nodes[rm.origin] +
-		" [label=\"" + strings.Join(rm.conditions, "\\n") + "\"];"
+func (rm *resolutionMatcher) matchString(ctx *testContext, lg *compliance.LicenseGraph) string {
+	cs := newTestCondition(lg, rm.conditions...)
+	return ctx.nodes[rm.appliesTo] + " -> " + ctx.nodes[rm.actsOn] +
+		" [label=\"" + strings.Join(cs.Names(), "\\n") + "\"];"
 }
 
 func (rm *resolutionMatcher) typeString() string {
@@ -1125,7 +1062,7 @@ func matchTarget(target string, conditions ...string) getMatcher {
 	}
 }
 
-func matchResolution(appliesTo, actsOn, origin string, conditions ...string) getMatcher {
+func matchResolution(appliesTo, actsOn string, conditions ...string) getMatcher {
 	return func(ctx *testContext) matcher {
 		if _, ok := ctx.nodes[appliesTo]; !ok {
 			ctx.nodes[appliesTo] = fmt.Sprintf("unknown%d", ctx.nextNode)
@@ -1135,11 +1072,7 @@ func matchResolution(appliesTo, actsOn, origin string, conditions ...string) get
 			ctx.nodes[actsOn] = fmt.Sprintf("unknown%d", ctx.nextNode)
 			ctx.nextNode++
 		}
-		if _, ok := ctx.nodes[origin]; !ok {
-			ctx.nodes[origin] = fmt.Sprintf("unknown%d", ctx.nextNode)
-			ctx.nextNode++
-		}
-		return &resolutionMatcher{appliesTo, actsOn, origin, append([]string{}, conditions...)}
+		return &resolutionMatcher{appliesTo, actsOn, append([]string{}, conditions...)}
 	}
 }
 
@@ -1166,70 +1099,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/bin/bin2.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
-					"testdata/firstparty/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/highest.apex.meta_lic",
-					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/highest.apex.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
-					"testdata/firstparty/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/libc.a.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"notice"),
@@ -1251,70 +1170,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -1325,7 +1230,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []getMatcher{
@@ -1338,60 +1243,48 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
@@ -1402,7 +1295,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions:  compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []getMatcher{},
@@ -1412,7 +1305,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions:  compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []getMatcher{},
@@ -1422,7 +1315,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  compliance.ImpliesShared.Union(compliance.ImpliesPrivate).AsList(),
 				stripPrefix: "testdata/firstparty/",
 			},
 			expectedOut: []getMatcher{},
@@ -1443,70 +1336,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -1527,70 +1406,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/bin/bin2.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/bin/bin2.meta_lic",
-					"testdata/firstparty/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/container.zip.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/container.zip.meta_lic",
-					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/container.zip.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
-					"testdata/firstparty/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/libc.a.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"notice"),
@@ -1608,25 +1473,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/firstparty/application.meta_lic",
 					"testdata/firstparty/application.meta_lic",
-					"testdata/firstparty/application.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/application.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin3.meta_lic",
 					"testdata/firstparty/bin/bin3.meta_lic",
-					"testdata/firstparty/bin/bin3.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"testdata/firstparty/lib/libb.so.meta_lic",
 					"notice"),
@@ -1643,25 +1503,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/bin/bin1.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/firstparty/lib/liba.so.meta_lic",
 					"testdata/firstparty/lib/liba.so.meta_lic",
-					"testdata/firstparty/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/firstparty/lib/libc.a.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
 					"testdata/firstparty/lib/libc.a.meta_lic",
 					"notice"),
@@ -1674,7 +1529,6 @@ func Test_graphviz(t *testing.T) {
 			expectedOut: []getMatcher{
 				matchTarget("testdata/firstparty/lib/libd.so.meta_lic"),
 				matchResolution(
-					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"testdata/firstparty/lib/libd.so.meta_lic",
 					"notice"),
@@ -1695,70 +1549,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/bin/bin2.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
-					"testdata/notice/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/highest.apex.meta_lic",
-					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/highest.apex.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
-					"testdata/notice/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/libc.a.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"notice"),
@@ -1780,70 +1620,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -1854,7 +1680,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []getMatcher{
@@ -1867,60 +1693,48 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
@@ -1931,7 +1745,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions:  compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []getMatcher{},
@@ -1941,7 +1755,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions:  compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []getMatcher{},
@@ -1951,7 +1765,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  compliance.ImpliesShared.Union(compliance.ImpliesPrivate).AsList(),
 				stripPrefix: "testdata/notice/",
 			},
 			expectedOut: []getMatcher{},
@@ -1972,70 +1786,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -2056,70 +1856,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/bin/bin2.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/bin/bin2.meta_lic",
-					"testdata/notice/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/container.zip.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/container.zip.meta_lic",
-					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/container.zip.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
-					"testdata/notice/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/libc.a.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"notice"),
@@ -2137,25 +1923,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/notice/application.meta_lic",
 					"testdata/notice/application.meta_lic",
-					"testdata/notice/application.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/application.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin3.meta_lic",
 					"testdata/notice/bin/bin3.meta_lic",
-					"testdata/notice/bin/bin3.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
 					"testdata/notice/lib/libb.so.meta_lic",
 					"notice"),
@@ -2172,25 +1953,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/bin/bin1.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
-					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/notice/lib/liba.so.meta_lic",
 					"testdata/notice/lib/liba.so.meta_lic",
-					"testdata/notice/lib/liba.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"testdata/notice/lib/libc.a.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
 					"testdata/notice/lib/libc.a.meta_lic",
 					"notice"),
@@ -2203,7 +1979,6 @@ func Test_graphviz(t *testing.T) {
 			expectedOut: []getMatcher{
 				matchTarget("testdata/notice/lib/libd.so.meta_lic"),
 				matchResolution(
-					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"testdata/notice/lib/libd.so.meta_lic",
 					"notice"),
@@ -2224,70 +1999,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/bin/bin1.meta_lic",
-					"testdata/reciprocal/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/bin/bin2.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
 					"testdata/reciprocal/bin/bin1.meta_lic",
-					"testdata/reciprocal/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
-					"testdata/reciprocal/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
 					"testdata/reciprocal/highest.apex.meta_lic",
-					"testdata/reciprocal/highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
-					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/highest.apex.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
-					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"notice"),
@@ -2309,70 +2070,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -2383,7 +2130,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []getMatcher{
@@ -2394,35 +2141,28 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"bin/bin1.meta_lic",
+					"notice"),
+				matchResolution(
+					"highest.apex.meta_lic",
+					"bin/bin2.meta_lic",
+					"notice"),
+				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"notice"),
@@ -2433,7 +2173,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions:  compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []getMatcher{
@@ -2444,25 +2184,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
@@ -2473,7 +2208,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions:  compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []getMatcher{},
@@ -2483,7 +2218,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  compliance.ImpliesShared.Union(compliance.ImpliesPrivate).AsList(),
 				stripPrefix: "testdata/reciprocal/",
 			},
 			expectedOut: []getMatcher{
@@ -2494,25 +2229,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
@@ -2534,70 +2264,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
 					"notice"),
@@ -2618,70 +2334,56 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/bin/bin1.meta_lic",
-					"testdata/reciprocal/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/bin/bin2.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
 					"testdata/reciprocal/bin/bin1.meta_lic",
-					"testdata/reciprocal/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
 					"testdata/reciprocal/bin/bin2.meta_lic",
-					"testdata/reciprocal/bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
 					"testdata/reciprocal/container.zip.meta_lic",
-					"testdata/reciprocal/container.zip.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
-					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/container.zip.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
-					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"notice"),
@@ -2699,25 +2401,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/reciprocal/application.meta_lic",
 					"testdata/reciprocal/application.meta_lic",
-					"testdata/reciprocal/application.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/application.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/bin/bin3.meta_lic",
 					"testdata/reciprocal/bin/bin3.meta_lic",
 					"testdata/reciprocal/bin/bin3.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"testdata/reciprocal/lib/libb.so.meta_lic",
 					"notice"),
@@ -2734,25 +2431,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/bin/bin1.meta_lic",
-					"testdata/reciprocal/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/bin/bin1.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
 				matchResolution(
 					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"testdata/reciprocal/lib/liba.so.meta_lic",
-					"testdata/reciprocal/lib/liba.so.meta_lic",
 					"reciprocal"),
 				matchResolution(
-					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"testdata/reciprocal/lib/libc.a.meta_lic",
 					"reciprocal"),
@@ -2765,7 +2457,6 @@ func Test_graphviz(t *testing.T) {
 			expectedOut: []getMatcher{
 				matchTarget("testdata/reciprocal/lib/libd.so.meta_lic"),
 				matchResolution(
-					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"testdata/reciprocal/lib/libd.so.meta_lic",
 					"notice"),
@@ -2786,137 +2477,80 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking",
+					"notice"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
+					"testdata/restricted/lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/highest.apex.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/highest.apex.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/lib/liba.so.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/lib/libc.a.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/libd.so.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -2936,137 +2570,80 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking",
+					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -3075,7 +2652,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []getMatcher{
@@ -3085,25 +2662,20 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"bin/bin1.meta_lic",
+					"notice"),
+				matchResolution(
+					"highest.apex.meta_lic",
+					"bin/bin2.meta_lic",
+					"notice"),
+				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
@@ -3114,7 +2686,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions:  compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []getMatcher{
@@ -3127,80 +2699,55 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
+					"bin/bin2.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
@@ -3211,7 +2758,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions:  compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []getMatcher{},
@@ -3221,7 +2768,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  compliance.ImpliesShared.Union(compliance.ImpliesPrivate).AsList(),
 				stripPrefix: "testdata/restricted/",
 			},
 			expectedOut: []getMatcher{
@@ -3234,80 +2781,55 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
+					"bin/bin2.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
@@ -3320,7 +2842,7 @@ func Test_graphviz(t *testing.T) {
 			ctx:       context{stripPrefix: "testdata/restricted/", labelConditions: true},
 			expectedOut: []getMatcher{
 				matchTarget("bin/bin1.meta_lic", "notice"),
-				matchTarget("lib/liba.so.meta_lic", "restricted"),
+				matchTarget("lib/liba.so.meta_lic", "restricted_allows_dynamic_linking"),
 				matchTarget("lib/libc.a.meta_lic", "reciprocal"),
 				matchTarget("bin/bin2.meta_lic", "notice"),
 				matchTarget("lib/libb.so.meta_lic", "restricted"),
@@ -3329,137 +2851,80 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin1.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking",
+					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
+					"lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"lib/liba.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -3478,137 +2943,80 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/bin/bin2.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
-					"notice"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/bin/bin2.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/bin/bin2.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/container.zip.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted",
+					"restricted_allows_dynamic_linking",
+					"notice"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
+					"testdata/restricted/lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking"),
+				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/container.zip.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/container.zip.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/lib/liba.so.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/lib/libc.a.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"reciprocal"),
+					"reciprocal",
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/libd.so.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libd.so.meta_lic",
-					"testdata/restricted/lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -3624,50 +3032,28 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/restricted/application.meta_lic",
 					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/application.meta_lic",
+					"restricted",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/application.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/application.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/restricted/bin/bin3.meta_lic",
 					"testdata/restricted/bin/bin3.meta_lic",
-					"testdata/restricted/bin/bin3.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/liba.so.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"restricted"),
 				matchResolution(
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"testdata/restricted/lib/libb.so.meta_lic",
 					"restricted"),
@@ -3684,42 +3070,25 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"notice"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/bin/bin1.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/bin/bin1.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"reciprocal"),
 				matchResolution(
 					"testdata/restricted/lib/liba.so.meta_lic",
 					"testdata/restricted/lib/liba.so.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/restricted/lib/libc.a.meta_lic",
 					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/liba.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
-					"testdata/restricted/lib/libc.a.meta_lic",
+					"restricted_allows_dynamic_linking",
 					"reciprocal"),
 			},
 		},
@@ -3730,7 +3099,6 @@ func Test_graphviz(t *testing.T) {
 			expectedOut: []getMatcher{
 				matchTarget("testdata/restricted/lib/libd.so.meta_lic"),
 				matchResolution(
-					"testdata/restricted/lib/libd.so.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
 					"testdata/restricted/lib/libd.so.meta_lic",
 					"notice"),
@@ -3751,91 +3119,65 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/bin/bin1.meta_lic",
-					"testdata/proprietary/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/highest.apex.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
@@ -3843,10 +3185,8 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
@@ -3854,12 +3194,7 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/lib/libd.so.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -3879,91 +3214,65 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
 					"by_exception_only",
+					"restricted",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"by_exception_only",
@@ -3971,10 +3280,8 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"by_exception_only",
@@ -3982,12 +3289,7 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -3996,7 +3298,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_notice",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"notice"},
+				conditions:  []compliance.LicenseCondition{compliance.NoticeCondition},
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []getMatcher{
@@ -4005,15 +3307,12 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
-					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
 					"notice"),
@@ -4024,7 +3323,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted"},
+				conditions:  compliance.ImpliesShared.AsList(),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []getMatcher{
@@ -4034,30 +3333,24 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
@@ -4068,7 +3361,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"proprietary"},
+				conditions:  compliance.ImpliesPrivate.AsList(),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []getMatcher{
@@ -4080,35 +3373,28 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"proprietary"),
 				matchResolution(
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"proprietary"),
-				matchResolution(
-					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
+					"bin/bin2.meta_lic",
+					"proprietary"),
+				matchResolution(
+					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"proprietary"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"proprietary"),
@@ -4119,7 +3405,7 @@ func Test_graphviz(t *testing.T) {
 			name:      "apex_trimmed_share_private",
 			roots:     []string{"highest.apex.meta_lic"},
 			ctx: context{
-				conditions:  []string{"reciprocal", "restricted", "proprietary"},
+				conditions:  compliance.ImpliesShared.Union(compliance.ImpliesPrivate).AsList(),
 				stripPrefix: "testdata/proprietary/",
 			},
 			expectedOut: []getMatcher{
@@ -4132,65 +3418,46 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"proprietary"),
 				matchResolution(
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"proprietary"),
 				matchResolution(
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
@@ -4212,91 +3479,65 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
-					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/liba.so.meta_lic",
-					"lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"bin/bin1.meta_lic",
 					"lib/libc.a.meta_lic",
-					"lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"bin/bin2.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"bin/bin1.meta_lic",
 					"bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"bin/bin2.meta_lic",
-					"bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"bin/bin2.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"highest.apex.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"highest.apex.meta_lic",
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"highest.apex.meta_lic",
-					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"highest.apex.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"lib/liba.so.meta_lic",
 					"by_exception_only",
@@ -4304,10 +3545,8 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"lib/libb.so.meta_lic",
 					"lib/libb.so.meta_lic",
-					"lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"lib/libc.a.meta_lic",
 					"by_exception_only",
@@ -4315,12 +3554,7 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"lib/libd.so.meta_lic",
 					"lib/libd.so.meta_lic",
-					"lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
-					"lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -4339,91 +3573,65 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/bin/bin1.meta_lic",
-					"testdata/proprietary/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/bin/bin2.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
 					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/bin/bin2.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/container.zip.meta_lic",
+					"restricted",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/container.zip.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
@@ -4431,10 +3639,8 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
@@ -4442,12 +3648,7 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/lib/libd.so.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libd.so.meta_lic",
+					"restricted",
 					"notice"),
 			},
 		},
@@ -4463,47 +3664,29 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/application.meta_lic",
 					"testdata/proprietary/application.meta_lic",
-					"testdata/proprietary/application.meta_lic",
-					"notice"),
-				matchResolution(
-					"testdata/proprietary/application.meta_lic",
-					"testdata/proprietary/application.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
+					"notice",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/application.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/application.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/application.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
 				matchResolution(
 					"testdata/proprietary/bin/bin3.meta_lic",
 					"testdata/proprietary/bin/bin3.meta_lic",
-					"testdata/proprietary/bin/bin3.meta_lic",
-					"restricted"),
+					"restricted_allows_dynamic_linking"),
 				matchResolution(
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
+					"restricted",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
-					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/libb.so.meta_lic",
-					"restricted"),
-				matchResolution(
-					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"testdata/proprietary/lib/libb.so.meta_lic",
 					"restricted"),
@@ -4520,28 +3703,23 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/bin/bin1.meta_lic",
-					"testdata/proprietary/bin/bin1.meta_lic",
 					"notice"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/bin/bin1.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
 					"testdata/proprietary/lib/liba.so.meta_lic",
 					"testdata/proprietary/lib/liba.so.meta_lic",
-					"testdata/proprietary/lib/liba.so.meta_lic",
 					"by_exception_only",
 					"proprietary"),
 				matchResolution(
-					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"testdata/proprietary/lib/libc.a.meta_lic",
 					"by_exception_only",
@@ -4557,7 +3735,6 @@ func Test_graphviz(t *testing.T) {
 				matchResolution(
 					"testdata/proprietary/lib/libd.so.meta_lic",
 					"testdata/proprietary/lib/libd.so.meta_lic",
-					"testdata/proprietary/lib/libd.so.meta_lic",
 					"notice"),
 			},
 		},
@@ -4565,13 +3742,6 @@ func Test_graphviz(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.condition+" "+tt.name, func(t *testing.T) {
 			ctx := &testContext{0, make(map[string]string)}
-
-			expectedOut := &bytes.Buffer{}
-			for _, eo := range tt.expectedOut {
-				m := eo(ctx)
-				expectedOut.WriteString(m.matchString(ctx))
-				expectedOut.WriteString("\n")
-			}
 
 			stdout := &bytes.Buffer{}
 			stderr := &bytes.Buffer{}
@@ -4581,8 +3751,7 @@ func Test_graphviz(t *testing.T) {
 				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
 			}
 			tt.ctx.graphViz = true
-			err := dumpResolutions(&tt.ctx, stdout, stderr, rootFiles...)
-
+			lg, err := dumpResolutions(&tt.ctx, stdout, stderr, rootFiles...)
 			if err != nil {
 				t.Fatalf("dumpresolutions: error = %v, stderr = %v", err, stderr)
 				return
@@ -4590,6 +3759,14 @@ func Test_graphviz(t *testing.T) {
 			if stderr.Len() > 0 {
 				t.Errorf("dumpresolutions: gotStderr = %v, want none", stderr)
 			}
+
+			expectedOut := &bytes.Buffer{}
+			for _, eo := range tt.expectedOut {
+				m := eo(ctx)
+				expectedOut.WriteString(m.matchString(ctx, lg))
+				expectedOut.WriteString("\n")
+			}
+
 			outList := strings.Split(stdout.String(), "\n")
 			outLine := 0
 			if outList[outLine] != "strict digraph {" {

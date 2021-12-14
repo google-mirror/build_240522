@@ -29,6 +29,8 @@ import (
 var (
 	// ConcurrentReaders is the size of the task pool for limiting resource usage e.g. open files.
 	ConcurrentReaders = 5
+	// ActionMultiplier scales from targets to resolution actions for allocation.
+	ActionMultiplier = 5
 )
 
 // result describes the outcome of reading and parsing a single license metadata file.
@@ -39,17 +41,17 @@ type result struct {
 	// target contains the parsed metadata or nil if an error
 	target *TargetNode
 
-	// edges contains the parsed dependencies
-	edges []*dependencyEdge
-
 	// err is nil unless an error occurs
 	err error
 }
 
 // receiver coordinates the tasks for reading and parsing license metadata files.
 type receiver struct {
-	// lg accumulates the read metadata and becomes the final resulting LicensGraph.
+	// lg accumulates the read metadata and becomes the final resulting LicenseGraph.
 	lg *LicenseGraph
+
+	// targets facilitates quick lookup by target name and tracks the scheduled reads.
+	targets map[string]*TargetNode
 
 	// rootFS locates the root of the file system from which to read the files.
 	rootFS fs.FS
@@ -86,6 +88,7 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 			lg.rootFiles = append(lg.rootFiles, f+".meta_lic")
 		}
 	}
+	lg.rootNodes = make([]*TargetNode, len(lg.rootFiles))
 
 	recv := &receiver{
 		lg:      lg,
@@ -93,6 +96,7 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 		stderr:  stderr,
 		task:    make(chan bool, ConcurrentReaders),
 		results: make(chan *result, ConcurrentReaders),
+		targets: make(map[string]*TargetNode),
 		wg:      sync.WaitGroup{},
 	}
 	for i := 0; i < ConcurrentReaders; i++ {
@@ -103,7 +107,7 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 		lg.mu.Lock()
 		// identify the metadata files to schedule reading tasks for
 		for _, f := range lg.rootFiles {
-			lg.targets[f] = nil
+			recv.targets[f] = nil
 		}
 		lg.mu.Unlock()
 
@@ -138,10 +142,14 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 
 				// record the parsed metadata (guarded by mutex)
 				recv.lg.mu.Lock()
-				recv.lg.targets[r.file] = r.target
-				if len(r.edges) > 0 {
-					recv.lg.edges = append(recv.lg.edges, r.edges...)
+				recv.targets[r.target.name] = r.target
+				r.target.index = TargetNodeIndex(len(recv.lg.targets))
+				if len(recv.lg.targets) == cap(recv.lg.targets) {
+					newTargets := make([]*TargetNode, len(recv.lg.targets), cap(recv.lg.targets) * 2)
+					copy(newTargets, recv.lg.targets)
+					recv.lg.targets = newTargets
 				}
+				recv.lg.targets = append(recv.lg.targets, r.target)
 				recv.lg.mu.Unlock()
 			} else {
 				// finished -- nil the results channel
@@ -150,6 +158,42 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 		}
 	}
 
+	if lg != nil {
+		esize := 0
+		for _, tn := range lg.targets {
+			esize += len(tn.proto.Deps)
+		}
+		lg.edges = make(TargetEdgeList, 0, esize)
+		lg.actions = make([]resolutionAction, 0, len(lg.targets) * ActionMultiplier)
+		for _, tn := range lg.targets {
+			tn.licenseConditions = LicenseConditionSetFromNames(tn, tn.proto.LicenseConditions...)
+			err = addDependencies(lg, tn, recv.targets)
+			if err != nil {
+				return nil, fmt.Errorf("error indexing dependencies for %q: %w", tn.name, err)
+			}
+			tn.proto.Deps = []*license_metadata_proto.AnnotatedDependency{}
+		}
+
+		// walk dependencies to group actions and resolutions into bigger intervals
+		var walkLicenseConditions func(*TargetNode)
+		walkLicenseConditions = func(tn *TargetNode) {
+			if !tn.actions.IsEmpty() {
+				return
+			}
+			for _, edge := range tn.edges {
+				walkLicenseConditions(edge.dependency)
+			}
+			tn.actions = IntervalSet{}
+			tn.actions.Insert(len(lg.actions))
+			lg.actions = append(lg.actions, resolutionAction{tn, tn.licenseConditions})
+		}
+
+		for i, r := range lg.rootFiles {
+			tn := recv.targets[r]
+			lg.rootNodes[i] = tn
+			walkLicenseConditions(tn)
+		}
+	}
 	return lg, err
 
 }
@@ -158,33 +202,39 @@ func ReadLicenseGraph(rootFS fs.FS, stderr io.Writer, files []string) (*LicenseG
 type targetNode struct {
 	proto license_metadata_proto.LicenseMetadata
 
-	// name is the path to the metadata file
+	// name is the path to the metadata file.
 	name string
-}
 
-// dependencyEdge describes a single edge in the license graph.
-type dependencyEdge struct {
-	// target identifies the target node being built and/or installed.
-	target string
+	// lg is the license graph the node belongs to.
+	lg *LicenseGraph
 
-	// dependency identifies the target node being depended on.
-	//
-	// i.e. `dependency` is necessary to build `target`.
-	dependency string
+	// index locates the target node in the license graph's list of target nodes.
+	index TargetNodeIndex
 
-	// annotations are a set of text attributes attached to the edge.
-	//
-	// Policy prescribes meaning to a limited set of annotations; others
-	// are preserved and ignored.
-	annotations TargetEdgeAnnotations
+	// edges indentifies the dependencies of the target.
+	edges TargetEdgeList
+
+	// actions identifies the distinct resolution actions that act on the target
+	actions IntervalSet
+
+	// conditions indentifies the license conditions originating at the target.
+	licenseConditions LicenseConditionSet
 }
 
 // addDependencies converts the proto AnnotatedDependencies into `edges`
-func addDependencies(edges *[]*dependencyEdge, target string, dependencies []*license_metadata_proto.AnnotatedDependency) error {
-	for _, ad := range dependencies {
+func addDependencies(lg *LicenseGraph, tn *TargetNode, byName map[string]*TargetNode) error {
+	tn.edges = make(TargetEdgeList, 0,len(tn.proto.Deps))
+	for _, ad := range tn.proto.Deps {
 		dependency := ad.GetFile()
 		if len(dependency) == 0 {
 			return fmt.Errorf("missing dependency name")
+		}
+		dtn, ok := byName[dependency]
+		if !ok {
+			return fmt.Errorf("unknown dependency name %q", dependency)
+		}
+		if dtn == nil {
+			return fmt.Errorf("nil dependency for name %q", dependency)
 		}
 		annotations := newEdgeAnnotations()
 		for _, a := range ad.Annotations {
@@ -193,7 +243,9 @@ func addDependencies(edges *[]*dependencyEdge, target string, dependencies []*li
 			}
 			annotations.annotations[a] = true
 		}
-		*edges = append(*edges, &dependencyEdge{target, dependency, annotations})
+		edge := &TargetEdge{tn, dtn, annotations}
+		lg.edges = append(lg.edges, edge)
+		tn.edges = append(tn.edges, edge)
 	}
 	return nil
 }
@@ -206,50 +258,43 @@ func readFile(recv *receiver, file string) {
 	go func() {
 		f, err := recv.rootFS.Open(file)
 		if err != nil {
-			recv.results <- &result{file, nil, nil, fmt.Errorf("error opening license metadata %q: %w", file, err)}
+			recv.results <- &result{file, nil, fmt.Errorf("error opening license metadata %q: %w", file, err)}
 			return
 		}
 
 		// read the file
 		data, err := io.ReadAll(f)
 		if err != nil {
-			recv.results <- &result{file, nil, nil, fmt.Errorf("error reading license metadata %q: %w", file, err)}
+			recv.results <- &result{file, nil, fmt.Errorf("error reading license metadata %q: %w", file, err)}
 			return
 		}
 
-		tn := &TargetNode{name: file}
+		tn := &TargetNode{lg: recv.lg, name: file}
 
 		err = prototext.Unmarshal(data, &tn.proto)
 		if err != nil {
-			recv.results <- &result{file, nil, nil, fmt.Errorf("error license metadata %q: %w", file, err)}
+			recv.results <- &result{file, nil, fmt.Errorf("error license metadata %q: %w", file, err)}
 			return
 		}
-
-		edges := []*dependencyEdge{}
-		err = addDependencies(&edges, file, tn.proto.Deps)
-		if err != nil {
-			recv.results <- &result{file, nil, nil, fmt.Errorf("error license metadata dependency %q: %w", file, err)}
-			return
-		}
-		tn.proto.Deps = []*license_metadata_proto.AnnotatedDependency{}
 
 		// send result for this file and release task before scheduling dependencies,
 		// but do not signal done to WaitGroup until dependencies are scheduled.
-		recv.results <- &result{file, tn, edges, nil}
+		recv.results <- &result{file, tn, nil}
 		recv.task <- true
 
 		// schedule tasks as necessary to read dependencies
-		for _, e := range edges {
+		for _, ad := range tn.proto.Deps {
+			dependency := ad.GetFile()
 			// decide, signal and record whether to schedule task in critical section
 			recv.lg.mu.Lock()
-			_, alreadyScheduled := recv.lg.targets[e.dependency]
+			_, alreadyScheduled := recv.targets[dependency]
 			if !alreadyScheduled {
-				recv.lg.targets[e.dependency] = nil
+				recv.targets[dependency] = nil
 			}
 			recv.lg.mu.Unlock()
 			// schedule task to read dependency file outside critical section
 			if !alreadyScheduled {
-				readFile(recv, e.dependency)
+				readFile(recv, dependency)
 			}
 		}
 

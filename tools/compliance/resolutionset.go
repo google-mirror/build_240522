@@ -117,31 +117,9 @@ func (rs *ResolutionSet) AttachesTo() TargetNodeList {
 // ActsOn identifies the list of targets to act on (share, give notice etc.)
 // to resolve conditions. (unordered)
 func (rs *ResolutionSet) ActsOn() TargetNodeList {
-	tset := make(map[*TargetNode]bool)
+	tset := make(map[*TargetNode]struct{})
 	for _, as := range rs.resolutions {
-		for actsOn := range as {
-			tset[actsOn] = true
-		}
-	}
-	targets := make(TargetNodeList, 0, len(tset))
-	for target := range tset {
-		targets = append(targets, target)
-	}
-	return targets
-}
-
-// Origins identifies the list of targets originating conditions to resolve.
-// (unordered)
-func (rs *ResolutionSet) Origins() TargetNodeList {
-	tset := make(map[*TargetNode]bool)
-	for _, as := range rs.resolutions {
-		for _, cs := range as {
-			for _, origins := range cs.conditions {
-				for origin := range origins {
-					tset[origin] = true
-				}
-			}
-		}
+		as.VisitAll(func(a resolutionAction) { tset[a.actsOn] = struct{}{} })
 	}
 	targets := make(TargetNodeList, 0, len(tset))
 	for target := range tset {
@@ -159,10 +137,10 @@ func (rs *ResolutionSet) Resolutions(attachedTo *TargetNode) ResolutionList {
 	if !ok {
 		return ResolutionList{}
 	}
-	result := make(ResolutionList, 0, len(as))
-	for actsOn, cs := range as {
-		result = append(result, Resolution{attachedTo, actsOn, cs.Copy()})
-	}
+	result := make(ResolutionList, 0, as.Len())
+	as.VisitAll(func(a resolutionAction) {
+		result = append(result, Resolution{attachedTo, a.actsOn, a.cs})
+	})
 	return result
 }
 
@@ -173,36 +151,21 @@ func (rs *ResolutionSet) Resolutions(attachedTo *TargetNode) ResolutionList {
 func (rs *ResolutionSet) ResolutionsByActsOn(actOn *TargetNode) ResolutionList {
 	c := 0
 	for _, as := range rs.resolutions {
-		if _, ok := as[actOn]; ok {
-			c++
-		}
+		as.VisitAll(func(a resolutionAction) {
+			if a.actsOn == actOn {
+				c++
+			}
+		})
 	}
 	result := make(ResolutionList, 0, c)
 	for attachedTo, as := range rs.resolutions {
-		if cs, ok := as[actOn]; ok {
-			result = append(result, Resolution{attachedTo, actOn, cs.Copy()})
-		}
+		as.VisitAll(func(a resolutionAction) {
+			if a.actsOn == actOn {
+				result = append(result, Resolution{attachedTo, actOn, a.cs})
+			}
+		})
 	}
 	return result
-}
-
-// AttachesToByOrigin identifies the list of targets requiring action to
-// resolve conditions originating at `origin`. (unordered)
-func (rs *ResolutionSet) AttachesToByOrigin(origin *TargetNode) TargetNodeList {
-	tset := make(map[*TargetNode]bool)
-	for attachesTo, as := range rs.resolutions {
-		for _, cs := range as {
-			if cs.HasAnyByOrigin(origin) {
-				tset[attachesTo] = true
-				break
-			}
-		}
-	}
-	targets := make(TargetNodeList, 0, len(tset))
-	for target := range tset {
-		targets = append(targets, target)
-	}
-	return targets
 }
 
 // AttachesToTarget returns true if the set contains conditions that
@@ -212,50 +175,14 @@ func (rs *ResolutionSet) AttachesToTarget(attachedTo *TargetNode) bool {
 	return isPresent
 }
 
-// AnyByNameAttachToTarget returns true if the set contains conditions matching
+// AnyMatchingAttachToTarget returns true if the set contains conditions matching
 // `names` that attach to `attachedTo`.
-func (rs *ResolutionSet) AnyByNameAttachToTarget(attachedTo *TargetNode, names ...ConditionNames) bool {
+func (rs *ResolutionSet) AnyMatchingAttachToTarget(attachedTo *TargetNode, conditions ...LicenseConditionSet) bool {
 	as, isPresent := rs.resolutions[attachedTo]
 	if !isPresent {
 		return false
 	}
-	for _, cs := range as {
-		for _, cn := range names {
-			for _, name := range cn {
-				_, isPresent = cs.conditions[name]
-				if isPresent {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-
-// AllByNameAttachTo returns true if the set contains at least one condition
-// matching each element of `names` for `attachedTo`.
-func (rs *ResolutionSet) AllByNameAttachToTarget(attachedTo *TargetNode, names ...ConditionNames) bool {
-	as, isPresent := rs.resolutions[attachedTo]
-	if !isPresent {
-		return false
-	}
-	for _, cn := range names {
-		found := false
-	asloop:
-		for _, cs := range as {
-			for _, name := range cn {
-				_, isPresent = cs.conditions[name]
-				if isPresent {
-					found = true
-					break asloop
-				}
-			}
-		}
-		if !found {
-			return false
-		}
-	}
-	return true
+	return as.matchesAnySet(conditions...)
 }
 
 // IsEmpty returns true if the set contains no conditions to resolve.
@@ -275,7 +202,7 @@ func newResolutionSet() *ResolutionSet {
 	return &ResolutionSet{make(map[*TargetNode]actionSet)}
 }
 
-// addConditions attaches all of the license conditions in `as` to `attachTo` to act on the originating node if not already applied.
+// addConditions attaches all of the license conditions in `as` to `attachTo` to act on the original node if not already applied.
 func (rs *ResolutionSet) addConditions(attachTo *TargetNode, as actionSet) {
 	_, ok := rs.resolutions[attachTo]
 	if !ok {
@@ -286,19 +213,15 @@ func (rs *ResolutionSet) addConditions(attachTo *TargetNode, as actionSet) {
 }
 
 // add attaches all of the license conditions in `as` to `attachTo` to act on `attachTo` if not already applied.
-func (rs *ResolutionSet) addSelf(attachTo *TargetNode, as actionSet) {
-	for _, cs := range as {
-		if cs.IsEmpty() {
-			return
+func (rs *ResolutionSet) addSelf(attachTo *TargetNode, c chan resolutionAction) {
+	for a := range c {
+		if a.cs.IsEmpty() {
+			continue
 		}
 		_, ok := rs.resolutions[attachTo]
 		if !ok {
-			rs.resolutions[attachTo] = make(actionSet)
+			rs.resolutions[attachTo] = actionSet{attachTo.lg, &IntervalSet{}}
 		}
-		_, ok = rs.resolutions[attachTo][attachTo]
-		if !ok {
-			rs.resolutions[attachTo][attachTo] = newLicenseConditionSet()
-		}
-		rs.resolutions[attachTo][attachTo].AddSet(cs)
+		rs.resolutions[attachTo].add(attachTo, a.cs)
 	}
 }

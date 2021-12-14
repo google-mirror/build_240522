@@ -24,10 +24,10 @@ func ShippedNodes(lg *LicenseGraph) *TargetNodeSet {
 		return shipped
 	}
 
-	tset := make(map[*TargetNode]bool)
+	tset := IntervalSet{}
 
 	WalkTopDown(lg, func(lg *LicenseGraph, tn *TargetNode, path TargetEdgePath) bool {
-		if _, alreadyWalked := tset[tn]; alreadyWalked {
+		if tset.Has(int(tn.index)) {
 			return false
 		}
 		if len(path) > 0 {
@@ -35,11 +35,14 @@ func ShippedNodes(lg *LicenseGraph) *TargetNodeSet {
 				return false
 			}
 		}
-		tset[tn] = true
+		tset.Insert(int(tn.index))
 		return true
 	})
 
-	shipped = &TargetNodeSet{tset}
+	nl := make([]int, 0, tset.Len())
+	nl = tset.AppendTo(nl)
+
+	shipped = &TargetNodeSet{lg, tset}
 
 	lg.mu.Lock()
 	if lg.shippedNodes == nil {
