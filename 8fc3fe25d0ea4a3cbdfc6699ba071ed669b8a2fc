@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09dc713d_c2099289",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "You\u0027ll need to be careful since you also need to test in presubmit since this code is used in non-Bazel contexts.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 4
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a07cdae_7f559fb0",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "The tests seems to be distributed across several projects. Can\u0027t we add a shared test utility library instead (libbase otherwise)? Also, it might be better to have a function that is reveals intent a bit better? I\u0027m thinking of something similar to google3\u0027s helpers:\n\n* http://google3/devtools/build/runtime/get_runfiles_dir.h\n* http://google3/java/com/google/devtools/build/runtime/RunfilesPaths.java\n\nThe function name (and behavior) should make sense in both Bazel and non-Bazel contexts.\n\nOne thing I don\u0027t quite understand is what creates the symlinks to the data files. Do these appear in module-info.json for Atest to symlink? I don\u0027t remember us adding that behavior.\n\nAlso what is the data file path relative to? In Bazel, IIUC, it should be relative to the workspace root. Is that the case here? Will this implementation work or be adaptable when the Android.bp file is genuinely written in Bazel?",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d644912_f49054cc",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "Unnecessary else.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c91b670_bbd2cc25",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "Isn\u0027t there a more portable way to achieve the same effect?",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 46
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1a5f64_274f07de",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "Inline variable.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 15
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25523c0_f831f7f9",
+        "filename": "tools/zipalign/tests/src/util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "Add detailed documentation.",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

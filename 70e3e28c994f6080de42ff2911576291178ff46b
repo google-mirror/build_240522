@@ -141,6 +141,30 @@
       },
       "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5d2abd_0f9e6a0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-14T02:06:11Z",
+      "side": 1,
+      "message": "IMO the commit message is still not clear enough. I would also document some of this context in the function\u0027s implementation.",
+      "parentUuid": "1530caf4_ea6ccb65",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "70e3e28c994f6080de42ff2911576291178ff46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
