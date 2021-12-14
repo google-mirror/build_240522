@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a551478a_cff9cc47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1143404
+      },
+      "writtenOn": "2021-12-14T22:13:27Z",
+      "side": 1,
+      "message": "Please specify what manual test did you run.\n\ndid not we run full regression test ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "0a9a11da0655facd8c79273e062022774258df6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
