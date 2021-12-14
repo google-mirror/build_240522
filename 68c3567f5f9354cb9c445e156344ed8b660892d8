@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e89e9f4_4c7d0599",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-14T16:41:20Z",
+      "side": 1,
+      "message": "I think it\u0027s better to check the version, if you really need. V1 has fixed size.\n\nhttps://www.kernel.org/doc/html/v5.4/filesystems/fsverity.html#fs-verity-descriptor",
+      "revId": "68c3567f5f9354cb9c445e156344ed8b660892d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
