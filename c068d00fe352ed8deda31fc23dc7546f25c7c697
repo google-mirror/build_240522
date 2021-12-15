@@ -157,6 +157,30 @@
       },
       "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0c2009_e964b3fd",
+        "filename": "core/board_config.mk",
+        "patchSetId": 15
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T20:22:32Z",
+      "side": 1,
+      "message": "(1) adding it to the _board_strip_readonly_list list in build/make/core/board_config.mk, so the variable is properly \"declared\", and (2) add rules to copy the prebuilt image to $(PRODUCT_OUT)/init_boot.img.",
+      "parentUuid": "c0d82751_2ab0f63f",
+      "range": {
+        "startLine": 444,
+        "startChar": 13,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
