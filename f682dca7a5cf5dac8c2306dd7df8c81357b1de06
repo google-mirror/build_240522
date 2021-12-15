@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "357dc3b4_842ee743",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2021-12-15T00:32:09Z",
+      "side": 1,
+      "message": "Hey Colin, happy to undo the refactor and just duplicate these rules for the internal @Keep annotation. Don\u0027t have a strong preference either way. It\u0027s unfortunate we need another annotation but I don\u0027t really see a way around it for internal libs where Jetpack deps are prohibited.",
+      "revId": "f682dca7a5cf5dac8c2306dd7df8c81357b1de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
