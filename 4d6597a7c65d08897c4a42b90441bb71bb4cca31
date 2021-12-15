@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37581abf_b2274b3a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-15T19:55:36Z",
+      "side": 1,
+      "message": "Got it. It looks like all of the images use BOARD_KERNEL_PAGESIZE for their pagesize, so I\u0027ll stick with that.\nAnd it looks like it\u0027s only needed when building, not when using a prebuilt init_boot.img, so I\u0027ll only add it for that case.",
+      "parentUuid": "6763f5b1_f24c9b79",
+      "range": {
+        "startLine": 1586,
+        "startChar": 14,
+        "endLine": 1586,
+        "endChar": 42
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0345e9ba_0206f94c",
