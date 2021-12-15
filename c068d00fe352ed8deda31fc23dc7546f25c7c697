@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4dd9c0e_39a39b9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T16:09:05Z",
+      "side": 1,
+      "message": "only with some minor nits, but otherwise LGTM",
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87de48c8_0fb69cc9",
+        "filename": "core/Makefile",
+        "patchSetId": 15
+      },
+      "lineNbr": 3655,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T16:09:05Z",
+      "side": 1,
+      "message": "could you file a bug for this and attach the bug num, either with `TODO(b/xxxx) or FIXME(b/xxxx)`, or at least do `FIXME(username)` so it\u0027s clear who/what is tracking this line.",
+      "range": {
+        "startLine": 3655,
+        "startChar": 2,
+        "endLine": 3655,
+        "endChar": 7
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a49e21_590618fd",
+        "filename": "core/Makefile",
+        "patchSetId": 15
+      },
+      "lineNbr": 4553,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T16:09:05Z",
+      "side": 1,
+      "message": "prefix with `$(hide)` (which is just `@`) to match the style",
+      "range": {
+        "startLine": 4552,
+        "startChar": 1,
+        "endLine": 4553,
+        "endChar": 1
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9bf2462_e82aa83b",
+        "filename": "core/board_config.mk",
+        "patchSetId": 15
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T16:09:05Z",
+      "side": 1,
+      "message": "I suggest just implement the functionality of `BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE` in this change, or at least add it to board_config.mk with a TODO message so it\u0027s clear that it is TBD. This would make the code review from the build team\u0027s side simpler as well.",
+      "range": {
+        "startLine": 444,
+        "startChar": 13,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
