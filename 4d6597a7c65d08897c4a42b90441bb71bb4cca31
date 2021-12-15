@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6763f5b1_f24c9b79",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T16:16:09Z",
+      "side": 1,
+      "message": "i mean like (https://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d5066;drc\u003d1f9408b2b2d2eba9e18c08f2ef52e52c3533d88c) we should define |INIT_BOOT/pagesize| so the |pagesize| of the generic ramdisk image is well-defined.",
+      "parentUuid": "b911a571_2e6c768e",
+      "range": {
+        "startLine": 1586,
+        "startChar": 14,
+        "endLine": 1586,
+        "endChar": 42
+      },
+      "revId": "4d6597a7c65d08897c4a42b90441bb71bb4cca31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0345e9ba_0206f94c",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 1
