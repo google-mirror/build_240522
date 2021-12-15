@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0465b69f_f5db7bfe",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1544,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T15:52:26Z",
+      "side": 1,
+      "message": "this could be \n\u003e pass\n\n`pass` is like \"noop\" (a do nothing block) in python.",
+      "range": {
+        "startLine": 1544,
+        "startChar": 4,
+        "endLine": 1544,
+        "endChar": 17
+      },
+      "revId": "797bf04ce9e57faea7c6e5e70ff53fd02575f000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
