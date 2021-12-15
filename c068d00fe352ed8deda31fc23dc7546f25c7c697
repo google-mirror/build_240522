@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e106b0f1_14f99dd0",
+        "filename": "core/Makefile",
+        "patchSetId": 15
+      },
+      "lineNbr": 3655,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-15T19:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87de48c8_0fb69cc9",
+      "range": {
+        "startLine": 3655,
+        "startChar": 2,
+        "endLine": 3655,
+        "endChar": 7
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8a49e21_590618fd",
@@ -66,6 +90,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7a697c14_a2d97400",
+        "filename": "core/Makefile",
+        "patchSetId": 15
+      },
+      "lineNbr": 4553,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-15T19:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8a49e21_590618fd",
+      "range": {
+        "startLine": 4552,
+        "startChar": 1,
+        "endLine": 4553,
+        "endChar": 1
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a9bf2462_e82aa83b",
         "filename": "core/board_config.mk",
         "patchSetId": 15
@@ -77,6 +125,30 @@
       "writtenOn": "2021-12-15T16:09:05Z",
       "side": 1,
       "message": "I suggest just implement the functionality of `BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE` in this change, or at least add it to board_config.mk with a TODO message so it\u0027s clear that it is TBD. This would make the code review from the build team\u0027s side simpler as well.",
+      "range": {
+        "startLine": 444,
+        "startChar": 13,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d82751_2ab0f63f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 15
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-15T19:56:32Z",
+      "side": 1,
+      "message": "What other functionality is needed, and what needs to be added to board_config.mk?\n\nThe BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE is defined in the device\u0027s BoardConfig.mk file like it is for Cuttlefish in this topic, and it is used in the core/Makefile when creating the init_boot.img.",
+      "parentUuid": "a9bf2462_e82aa83b",
       "range": {
         "startLine": 444,
         "startChar": 13,
