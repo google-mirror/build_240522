@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02bea48d_738d9063",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-15T15:44:52Z",
+      "side": 1,
+      "message": "both works for me, I\u0027m suggesting |has_init_boot| because _BuildBootableImage() has a |has_ramdisk| parameter already (https://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/common.py;l\u003d1517;drc\u003d4fc3aa0bc3043c9fbbe7f25f252e9ea5fb4d50bf), but whichever approach you choose would work for me, so long they achieve the same effect. yeah let\u0027s continue these python related discussion to the other CL.",
+      "parentUuid": "134fe0fc_6771f78d",
+      "range": {
+        "startLine": 810,
+        "startChar": 52,
+        "endLine": 810,
+        "endChar": 53
+      },
+      "revId": "dbf1afd1c07f54fb5eef18b7bbaaf98532e07d6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab55154b_cc181333",
