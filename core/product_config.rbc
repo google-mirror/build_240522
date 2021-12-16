@@ -544,6 +544,10 @@ def _expand_wildcard(pattern):
         result.extend(rblf_wildcard(word))
     return result
 
+def _is_platform_sdk_version_at_least(g, version):
+    """Equivalent to $(is-platform-sdk-version-at-least) defined in some utils.mk makefiles."""
+    return int(g["PLATFORM_SDK_VERSION"]) >= int(version)
+
 def _mkdist_for_goals(g, goal, src_dst_list):
     """Implements dist-for-goals macro."""
     goals_map = g.get(_dist_for_goals_key, {})
@@ -736,6 +740,7 @@ rblf = struct(
     findstring = _findstring,
     inherit = _inherit,
     indirect = _indirect,
+    is_platform_sdk_version_at_least = _is_platform_sdk_version_at_least,
     mk2rbc_error = _mk2rbc_error,
     mkdist_for_goals = _mkdist_for_goals,
     mkinfo = _mkinfo,
