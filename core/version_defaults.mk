@@ -85,7 +85,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (bd99de Merge "Export words function")
     PLATFORM_SECURITY_PATCH := 2021-11-05
+=======
+      PLATFORM_SECURITY_PATCH := 2021-12-05
+>>>>>>> BRANCH (32ce1a Version bump to SQ1A.211205.008 [core/build_id.mk])
 endif
 .KATI_READONLY := PLATFORM_SECURITY_PATCH
 

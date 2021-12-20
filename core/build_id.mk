@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (bd99de Merge "Export words function")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SQ1A.211205.008
+>>>>>>> BRANCH (32ce1a Version bump to SQ1A.211205.008 [core/build_id.mk])
