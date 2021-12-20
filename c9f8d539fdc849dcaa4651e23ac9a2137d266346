@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae05f6b_74232469",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2021-12-20T22:54:51Z",
+      "side": 1,
+      "message": "Can you mark this read only?",
+      "revId": "c9f8d539fdc849dcaa4651e23ac9a2137d266346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
