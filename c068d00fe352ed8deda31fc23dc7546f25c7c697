@@ -205,6 +205,30 @@
       },
       "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff30150e_65aab70d",
+        "filename": "core/board_config.mk",
+        "patchSetId": 15
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2021-12-20T22:30:23Z",
+      "side": 1,
+      "message": "Got it! Thanks. \nAdded both of them to _board_strip_readonly_list and added the rules to copy the prebuilt image to PRODUCT_OUT and IMAGES for the releasetools.",
+      "parentUuid": "4c0c2009_e964b3fd",
+      "range": {
+        "startLine": 444,
+        "startChar": 13,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
