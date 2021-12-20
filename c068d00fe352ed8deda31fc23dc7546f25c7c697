@@ -181,6 +181,30 @@
       },
       "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb5dbb4_36494e8b",
+        "filename": "core/board_config.mk",
+        "patchSetId": 15
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-20T15:41:40Z",
+      "side": 1,
+      "message": "oops sorry I just realized I selected the wrong variable here, I was referring to BOARD_PREBUILT_INIT_BOOT_IMAGE actually. No wonder you were confused... I must have had a brain fart. :/\n\n... but yeah both BOARD_PREBUILT_INIT_BOOT_IMAGE and BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE should be added to _board_strip_readonly_list.",
+      "parentUuid": "4c0c2009_e964b3fd",
+      "range": {
+        "startLine": 444,
+        "startChar": 13,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "c068d00fe352ed8deda31fc23dc7546f25c7c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
