@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8c2c75_127163a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c42789e_c02d7fd3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac32eccf_61abb608",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-21T22:42:13Z",
       "side": 1,
       "message": "?\n\nIdeally, this should be a command anyone can easily run. is there a n Atest command you could use?",
+      "range": {
+        "startLine": 17,
+        "startChar": 29,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "096496dd_a6f7973a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T23:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac32eccf_61abb608",
       "range": {
         "startLine": 17,
         "startChar": 29,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef0763d2_cfd652b3",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T23:41:33Z",
+      "side": 1,
+      "message": "Removed the comment. no other occurrences other than this one.",
+      "parentUuid": "b1057926_2633b769",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcb97f50_e10bdda9",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-12-21T22:42:13Z",
       "side": 1,
       "message": "Is the path returned by TempDir guaranteed to end with a path separator? Is there a \u0027join\u0027 equivalent we could use?",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4549b66_5a66c7a7",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T23:41:33Z",
+      "side": 1,
+      "message": "Done.\nYes, but we have to do string -\u003e path -\u003e string conversion.",
+      "parentUuid": "bcb97f50_e10bdda9",
       "range": {
         "startLine": 24,
         "startChar": 9,
