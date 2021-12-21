@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfbb11c_38a21468",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-12-21T20:41:46Z",
+      "side": 1,
+      "message": "weird, how does presubmit always pass",
+      "revId": "0d0ca5d6a07c79bcb4688b2a4850f3f2745d9be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
