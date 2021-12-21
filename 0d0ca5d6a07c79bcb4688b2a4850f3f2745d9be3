@@ -52,6 +52,24 @@
       "parentUuid": "46940ed5_0172c13a",
       "revId": "0d0ca5d6a07c79bcb4688b2a4850f3f2745d9be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d1739d_c659ba67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-12-21T20:47:32Z",
+      "side": 1,
+      "message": "There\u0027s another issue, local run of release tools test will complain about not enough verbosity, but presubmit doesn\u0027t. No idea why",
+      "parentUuid": "6340dc8a_639236cc",
+      "revId": "0d0ca5d6a07c79bcb4688b2a4850f3f2745d9be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
