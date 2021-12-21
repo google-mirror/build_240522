@@ -981,6 +981,16 @@ ALL_MODULES.$(my_register_name).SHARED_LIBS := \
 ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS := \
     $(ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS) $(LOCAL_SYSTEM_SHARED_LIBRARIES)
 
+
+ifdef LOCAL_TEST_DATA
+  # Store the list of targets which is needed for running this test provided by this
+  # module. Used for generatung the run time dependencies for executing test.
+  ALL_MODULES.$(my_register_name).TEST_DATA := \
+    $(strip $(ALL_MODULES.$(my_register_name).TEST_DATA) \
+      $(foreach f, $(LOCAL_TEST_DATA),\
+        $(word 2,$(subst :,$(space),$(f)))))
+endif
+
 ##########################################################################
 ## When compiling against the VNDK, add the .vendor or .product suffix to
 ## required modules.
