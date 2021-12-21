@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1057926_2633b769",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T22:44:37Z",
+      "side": 1,
+      "message": "I think you can remove this comment and references to Bazel in particular.\n\n\nAre there many occurrences of this pattern? Will you end up having to duplicate this and the documentation several times?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcb97f50_e10bdda9",
         "filename": "tools/zipalign/tests/src/align_test.cpp",
         "patchSetId": 9
