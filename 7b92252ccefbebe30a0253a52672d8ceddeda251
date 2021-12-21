@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "090a676f_a8f53925",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T19:19:42Z",
+      "side": 1,
+      "message": "```\nExport test data dependencies in module-info\n\nAdd the list of targets that are handled as data inputs and required by tests at runtime.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae95c7e1_cfc02973",
         "filename": "core/base_rules.mk",
         "patchSetId": 3
@@ -42,6 +65,52 @@
         "startChar": 21,
         "endLine": 986,
         "endChar": 31
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe0d985_f9437a6d",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T19:19:42Z",
+      "side": 1,
+      "message": "You can simplify to:\n\n```\nExport the list of targets that are handled as data inputs and required by tests at runtime.\n```",
+      "range": {
+        "startLine": 985,
+        "startChar": 4,
+        "endLine": 987,
+        "endChar": 0
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c6d9f09_bff0a7e7",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T19:19:42Z",
+      "side": 1,
+      "message": "Would it make sense to name this `data`? My thought process:\n\n1) All other field are not prefixed by `test_`\n2) This could expand to include non-tests\n3) It aligns with Bazel terms\n\nIn fact, I would see `shared_libs` become `runtime_deps` or `runtime_dependencies` in the future.",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 14
       },
       "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
