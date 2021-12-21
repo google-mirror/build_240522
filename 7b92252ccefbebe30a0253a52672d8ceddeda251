@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae95c7e1_cfc02973",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T17:21:12Z",
+      "side": 1,
+      "message": "test data dependencies needed",
+      "range": {
+        "startLine": 985,
+        "startChar": 22,
+        "endLine": 985,
+        "endChar": 45
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582c4b68_8dc4a7a2",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T17:21:12Z",
+      "side": 1,
+      "message": "generating",
+      "range": {
+        "startLine": 986,
+        "startChar": 21,
+        "endLine": 986,
+        "endChar": 31
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
