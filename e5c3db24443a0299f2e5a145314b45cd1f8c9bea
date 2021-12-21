@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6a127b_f2d71dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T04:21:51Z",
+      "side": 1,
+      "message": "After more understanding of the problem, I think for this test, change the writable path is the best option. \n\nHere is the discussion of the problem:\nhttps://docs.google.com/document/d/1pz38BirqESaq9jdO_7YkiiJzNPug1iRMs5q8E7_z88Y/edit?resourcekey\u003d0-hn6gsMUc9TQKxrP3l6RuYQ",
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

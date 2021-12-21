@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16fb679c_d395cf42",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T04:21:51Z",
+      "side": 1,
+      "message": "from libbase readme, there are a lot of restrictions to be included in libbase. It is suggested \"to start using your routine just in your project, and let it \"graduate\" after you\u0027re certain that the API is solid.\"\nhttps://cs.android.com/android/platform/superproject/+/master:system/libbase/README.md;l\u003d1\nI am not sure if there is a better place for the routine. \n\nYes, data files are included in module-info installed path along with test binary. They live relative to the test binary. Here is the tree structure of bazel sandbox for aapt2_test https://paste.googleplex.com/6703000996282368\n\nFor this example, the test binary real path is /usr/local/google/home/weisu/src/aosp-master-with-phones/out/host/linux-x86/testcases/aapt2_tests/x86_64 (what android::base::GetExecutablePath returns) \nBut we want \n/usr/local/google/home/weisu/.cache/bazel/_bazel_weisu/b37f4c6e619fad0b2cce4bfc3bada009/sandbox/linux-sandbox/9/execroot/__main__/bazel-out/k8-fastbuild/bin/frameworks/base/tools/aapt2/tradefed_test_aapt2_tests_host.sh.runfiles/__main__/frameworks/base/tools/aapt2/aapt2_tests/host/testcases/aapt2_tests/x86_64/ (what program_invocation_name returns)",
+      "parentUuid": "3a07cdae_7f559fb0",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d644912_f49054cc",
@@ -60,6 +84,30 @@
       "writtenOn": "2021-12-14T02:06:11Z",
       "side": 1,
       "message": "Unnecessary else.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9cb1669_77077309",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T04:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d644912_f49054cc",
       "range": {
         "startLine": 27,
         "startChar": 4,
@@ -106,6 +154,30 @@
       "writtenOn": "2021-12-14T02:06:11Z",
       "side": 1,
       "message": "Inline variable.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 15
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144a0d65_15baf189",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2021-12-21T04:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a1a5f64_274f07de",
       "range": {
         "startLine": 33,
         "startChar": 11,
