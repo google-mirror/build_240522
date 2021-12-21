@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83bbd99e_b66a005b",
+        "filename": "tools/zipalign/tests/src/util.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T22:42:13Z",
+      "side": 1,
+      "message": "SG. Did you consider platform_testing/libraries/ as an alternative location?\n\nI\u0027m fine with this approach in the short term but will need others to vet the decision.",
+      "parentUuid": "16fb679c_d395cf42",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "8fc3fe25d0ea4a3cbdfc6699ba071ed669b8a2fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d644912_f49054cc",
         "filename": "tools/zipalign/tests/src/util.cpp",
         "patchSetId": 4

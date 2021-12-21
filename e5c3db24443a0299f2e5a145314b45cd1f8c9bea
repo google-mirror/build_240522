@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c42789e_c02d7fd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T22:42:13Z",
+      "side": 1,
+      "message": "Write files in a temporary directory\n\nAvoid writing test files in the build output directory which fails when run with Bazel. This happens because Bazel\u0027s sandboxing environment ensures that the test\u0027s working directory is unwritable.\n\nSee https://docs.bazel.build/versions/main/sandboxing.html for more information.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac32eccf_61abb608",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T22:42:13Z",
+      "side": 1,
+      "message": "?\n\nIdeally, this should be a command anyone can easily run. is there a n Atest command you could use?",
+      "range": {
+        "startLine": 17,
+        "startChar": 29,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3f6a127b_f2d71dfe",
@@ -14,6 +60,29 @@
       "writtenOn": "2021-12-21T04:21:51Z",
       "side": 1,
       "message": "After more understanding of the problem, I think for this test, change the writable path is the best option. \n\nHere is the discussion of the problem:\nhttps://docs.google.com/document/d/1pz38BirqESaq9jdO_7YkiiJzNPug1iRMs5q8E7_z88Y/edit?resourcekey\u003d0-hn6gsMUc9TQKxrP3l6RuYQ",
+      "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb97f50_e10bdda9",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2021-12-21T22:42:13Z",
+      "side": 1,
+      "message": "Is the path returned by TempDir guaranteed to end with a path separator? Is there a \u0027join\u0027 equivalent we could use?",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 27
+      },
       "revId": "e5c3db24443a0299f2e5a145314b45cd1f8c9bea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
