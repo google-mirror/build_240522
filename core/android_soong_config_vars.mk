@@ -107,3 +107,4 @@ endif
 # TODO(b/196084106): Remove when Java optimizations enabled by default for
 # system packages.
 $(call add_soong_config_var,ANDROID,SYSTEM_OPTIMIZE_JAVA)
+$(call add_soong_config_var,ANDROID,SYSTEMUI_OPTIMIZE_JAVA)
