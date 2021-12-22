@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "752e100d_b16ae8cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885520
+      },
+      "writtenOn": "2021-12-22T12:04:05Z",
+      "side": 1,
+      "message": "Sorry..BCO+1 the wrong one.",
+      "revId": "5d2cf578d6b64e03d0babac436dfbbb4f9886971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
