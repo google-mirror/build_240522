@@ -202,6 +202,7 @@ def BuildSuperImage(inp, out):
 
 def main(argv):
 
+  logger.setLevel(logging.WARNING)
   args = common.ParseOptions(argv, __doc__)
 
   if len(args) != 2:

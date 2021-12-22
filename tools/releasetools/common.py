@@ -192,7 +192,7 @@ def InitLogging():
           '': {
               'handlers': ['default'],
               'propagate': True,
-              'level': 'INFO',
+              'level': 'WARNING',
           }
       }
   }
