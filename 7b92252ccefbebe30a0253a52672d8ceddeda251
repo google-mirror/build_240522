@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b8be3e2_a2fd1aa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-22T07:55:47Z",
+      "side": 1,
+      "message": "Thanks for the suggestion for the commit message.",
+      "parentUuid": "090a676f_a8f53925",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae95c7e1_cfc02973",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-21T17:21:12Z",
       "side": 1,
       "message": "test data dependencies needed",
+      "range": {
+        "startLine": 985,
+        "startChar": 22,
+        "endLine": 985,
+        "endChar": 45
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "154e7ae1_bdd6f63b",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-22T07:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae95c7e1_cfc02973",
       "range": {
         "startLine": 985,
         "startChar": 22,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c09d99b9_6547daeb",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-22T07:55:47Z",
+      "side": 1,
+      "message": "Thanks for the catch!",
+      "parentUuid": "582c4b68_8dc4a7a2",
+      "range": {
+        "startLine": 986,
+        "startChar": 21,
+        "endLine": 986,
+        "endChar": 31
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbe0d985_f9437a6d",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0977ba_dc64caa9",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-22T07:55:47Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.",
+      "parentUuid": "bbe0d985_f9437a6d",
+      "range": {
+        "startLine": 985,
+        "startChar": 4,
+        "endLine": 987,
+        "endChar": 0
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c6d9f09_bff0a7e7",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-12-21T19:19:42Z",
       "side": 1,
       "message": "Would it make sense to name this `data`? My thought process:\n\n1) All other field are not prefixed by `test_`\n2) This could expand to include non-tests\n3) It aligns with Bazel terms\n\nIn fact, I would see `shared_libs` become `runtime_deps` or `runtime_dependencies` in the future.",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "7b92252ccefbebe30a0253a52672d8ceddeda251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60570918_592aa443",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2021-12-22T07:55:47Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "1c6d9f09_bff0a7e7",
       "range": {
         "startLine": 26,
         "startChar": 5,
