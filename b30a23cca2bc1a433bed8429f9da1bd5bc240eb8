@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "140b1b86_d9bfdc20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2021-12-24T04:29:55Z",
+      "side": 1,
+      "message": "Most of the OWNERS of build/target/product/OWNERS are OOO.\n\nLet me remove build/target/product/gsi_keys.mk first. (and send another CL to update the \u0027OWNERS\u0027 file)",
+      "revId": "b30a23cca2bc1a433bed8429f9da1bd5bc240eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
