@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e46297_90e41088",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2021-12-24T02:29:02Z",
+      "side": 1,
+      "message": "If current.txt is required to be sorted, you need to sort PRIVATE_LATEST_VNDK_LIB_LIST here, or sort SOONG_VNDK_LIBRARIES_FILE in build/soong/cc/vndk.go.",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 83
+      },
+      "revId": "15b89d8fcdc5065ad96b36a5fb1ca662dc44c080",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
