@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e28e52_6748b362",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-27T17:22:28Z",
+      "side": 1,
+      "message": "@swillden, Could you confirm that the *boot header OS_VERSION* field is no longer used under AVB? I\u0027d like to remove this for consistency and avoid accidental use of the boot header field, when in reality the SPL value should be read from vbmeta.",
+      "revId": "2db62dd9ae309f1b07a488d85b0663e13ddb9cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
