@@ -951,9 +951,17 @@ else ifndef BUILDING_VENDOR_BOOT_IMAGE # && BOARD_USES_GENERIC_KERNEL_IMAGE != t
   endif
 endif # BUILDING_VENDOR_BOOT_IMAGE == "" && BOARD_USES_GENERIC_KERNEL_IMAGE != true
 
-INTERNAL_MKBOOTIMG_VERSION_ARGS := \
-    --os_version $(PLATFORM_VERSION_LAST_STABLE) \
-    --os_patch_level $(PLATFORM_SECURITY_PATCH)
+# Assign boot partition system version & SPL value for Version Binding
+# (https://source.android.com/security/keystore/version-binding)
+ifdef BOARD_AVB_ENABLE
+  # AVB (VBOOT 2.0) should keep system version and SPL information in vbmeta.
+  INTERNAL_MKBOOTIMG_VERSION_ARGS :=
+else
+  # VBOOT 1.0 can store these value in the boot header.
+  INTERNAL_MKBOOTIMG_VERSION_ARGS := \
+      --os_version $(PLATFORM_VERSION_LAST_STABLE) \
+      --os_patch_level $(PLATFORM_SECURITY_PATCH)
+endif # BOARD_AVB_ENABLE
 
 ifdef BOARD_GKI_SIGNING_KEY_PATH
 ifndef BOARD_GKI_SIGNING_ALGORITHM
