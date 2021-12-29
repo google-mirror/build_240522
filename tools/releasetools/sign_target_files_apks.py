@@ -883,6 +883,15 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   except KeyError:
     raise common.ExternalError("can't read META/otakeys.txt from input")
 
+  extra_ota_keys = misc_info.get("extra_ota_keys")
+  if extra_ota_keys:
+    extra_ota_keys = [OPTIONS.key_map.get(k, k) + ".x509.pem"
+                      for k in extra_ota_keys.split()]
+    if extra_ota_keys:
+      print("extra ota key(s): " + ", ".join(extra_ota_keys))
+  else:
+    extra_ota_keys = []
+
   extra_recovery_keys = misc_info.get("extra_recovery_keys")
   if extra_recovery_keys:
     extra_recovery_keys = [OPTIONS.key_map.get(k, k) + ".x509.pem"
@@ -918,8 +927,12 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
               for info in input_tf_zip.infolist()
               if info.filename.endswith("/otacerts.zip")]
   for info in otacerts:
-    print("Rewriting OTA key:", info.filename, mapped_keys)
-    WriteOtacerts(output_tf_zip, info.filename, mapped_keys)
+    if info.filename.startswith(("BOOT/", "RECOVERY/", "VENDOR_BOOT/")):
+      extra_keys = extra_recovery_keys
+    else:
+      extra_keys = extra_ota_keys
+    print("Rewriting OTA key:", info.filename, mapped_keys + extra_keys)
+    WriteOtacerts(output_tf_zip, info.filename, mapped_keys + extra_keys)
 
 
 def ReplaceVerityPublicKey(output_zip, filename, key_path):
