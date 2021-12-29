@@ -203,7 +203,14 @@ ifneq (1,$(words $(current_product_makefile)))
 $(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
 endif
 
-ifndef RBC_PRODUCT_CONFIG
+# RBC product config is _not_ effective when run from setup
+ifndef CALLED_FROM_SETUP
+ifdef RBC_PRODUCT_CONFIG
+    effective_rbc_product_config:=t
+endif
+endif
+
+ifndef effective_rbc_product_config
 $(call import-products, $(current_product_makefile))
 else
   $(shell mkdir -p $(OUT_DIR)/rbc)
@@ -222,7 +229,7 @@ else
 endif
 endif  # Import all or just the current product makefile
 
-ifndef RBC_PRODUCT_CONFIG
+ifndef effective_rbc_product_config
 # Quick check
 $(check-all-products)
 endif
@@ -245,7 +252,7 @@ ifneq ($(filter dump-products, $(MAKECMDGOALS)),)
 $(dump-products)
 endif
 
-ifndef RBC_PRODUCT_CONFIG
+ifndef effective_rbc_product_config
 # Convert a short name like "sooner" into the path to the product
 # file defining that product.
 #
