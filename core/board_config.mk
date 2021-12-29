@@ -232,7 +232,13 @@ endif
 # TODO(colefaust) change this if to RBC_PRODUCT_CONFIG when
 # the board configuration is known to work on everything
 # the product config works on.
-ifndef RBC_BOARD_CONFIG
+ifndef CALLED_FROM_SETUP
+  ifdef RBC_BOARD_CONFIG
+    effective_rbc_board_config:=t
+  endif
+endif
+
+ifndef effective_rbc_board_config
 include $(board_config_mk)
 else
   $(shell mkdir -p $(OUT_DIR)/rbc)
