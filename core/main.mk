@@ -1933,7 +1933,7 @@ endif # TARGET_BUILD_UNBUNDLED == TARGET_BUILD_UNBUNDLED_IMAGE
 .PHONY: docs
 docs: $(ALL_DOCS)
 
-.PHONY: sdk sdk_addon
+.PHONY: sdk sdk_addon win_sdk
 ifeq ($(HOST_OS),linux)
 ALL_SDK_TARGETS := $(INTERNAL_SDK_TARGET)
 sdk: $(ALL_SDK_TARGETS)
