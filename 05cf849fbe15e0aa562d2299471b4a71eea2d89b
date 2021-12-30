@@ -70,6 +70,30 @@
       },
       "revId": "05cf849fbe15e0aa562d2299471b4a71eea2d89b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be5b4586_e64e7958",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-12-30T17:23:01Z",
+      "side": 1,
+      "message": "\u003e Do you think it should continue instead of terminate if the extra keys do not exist?\n\nProbably error out? I assume if user pass in an extra key and that key doesn\u0027t exist, it\u0027s probably a misconfig/typo on user\u0027s end.",
+      "parentUuid": "42ef6956_4e412c1f",
+      "range": {
+        "startLine": 890,
+        "startChar": 7,
+        "endLine": 890,
+        "endChar": 21
+      },
+      "revId": "05cf849fbe15e0aa562d2299471b4a71eea2d89b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
