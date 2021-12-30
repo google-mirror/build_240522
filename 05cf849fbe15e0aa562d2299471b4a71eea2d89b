@@ -46,6 +46,30 @@
       },
       "revId": "05cf849fbe15e0aa562d2299471b4a71eea2d89b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ef6956_4e412c1f",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-12-30T17:18:54Z",
+      "side": 1,
+      "message": "It it\u0027s going to cause an error later on, then we should detect/prevent such errors as early as possible.",
+      "parentUuid": "7fa205d6_1db26218",
+      "range": {
+        "startLine": 890,
+        "startChar": 7,
+        "endLine": 890,
+        "endChar": 21
+      },
+      "revId": "05cf849fbe15e0aa562d2299471b4a71eea2d89b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
