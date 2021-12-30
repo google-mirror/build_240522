@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e52f0b_a90aadb0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2021-12-30T06:45:03Z",
+      "side": 1,
+      "message": "It seems to be a running bug that our build rules often assume the $(TARGET_*_OUT) paths always exist, but in reality this isn\u0027t always true. I\u0027ve caught a few when cleaning up I33f526bd3c50b9c4010f46e490cab778fcb23371, but apparently there\u0027s still more. I wonder if we should just make fileslist to ignore non-existing directories? https://cs.android.com/android/platform/superproject/+/master:build/soong/cmd/fileslist/fileslist.go;l\u003d125;drc\u003d1b4141fbdf2d6b277d70e06c6e594583d7ca05b3\n\n@ccross",
+      "range": {
+        "startLine": 787,
+        "startChar": 10,
+        "endLine": 787,
+        "endChar": 28
+      },
+      "revId": "c230b0b0c90da793a36678760f3881cfc86cd077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
