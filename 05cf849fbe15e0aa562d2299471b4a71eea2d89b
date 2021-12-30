@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36edc5df_da90428a",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2021-12-30T16:34:36Z",
+      "side": 1,
+      "message": "also check that files in extra_ota_keys actually exist on disk?",
+      "range": {
+        "startLine": 890,
+        "startChar": 7,
+        "endLine": 890,
+        "endChar": 21
+      },
+      "revId": "05cf849fbe15e0aa562d2299471b4a71eea2d89b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
