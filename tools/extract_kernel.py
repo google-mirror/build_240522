@@ -131,6 +131,7 @@ def try_decompress_bytes(cmd, input_bytes):
   sp = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE)
   o, _ = sp.communicate(input=input_bytes)
+  print("tangjiajia++ try_decompress_bytes:", cmd)
   # ignore errors
   return o
 
@@ -152,9 +153,11 @@ def decompress_dump(func, input_bytes):
   False), then try different decompression algorithm before running func.
   """
   o = func(input_bytes)
+  print("tangjiajia-- %s for gzip, result= %s" % (func.__name__, o))
   if o:
     return o
-  for cmd, search_bytes in COMPRESSION_ALGO:
+  # Skip "gzip", try different decompression
+  for cmd, search_bytes in COMPRESSION_ALGO[1:]:
     for decompressed in try_decompress(cmd, search_bytes, input_bytes):
       if decompressed:
         o = decompress_dump(func, decompressed)
