@@ -154,7 +154,8 @@ def decompress_dump(func, input_bytes):
   o = func(input_bytes)
   if o:
     return o
-  for cmd, search_bytes in COMPRESSION_ALGO:
+  # Skip "gzip"
+  for cmd, search_bytes in COMPRESSION_ALGO[1:]:
     for decompressed in try_decompress(cmd, search_bytes, input_bytes):
       if decompressed:
         o = decompress_dump(func, decompressed)
