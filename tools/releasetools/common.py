@@ -847,12 +847,15 @@ def LoadInfoDict(input_file, repacking=False):
   # Set up the salt (based on fingerprint) that will be used when adding AVB
   # hash / hashtree footers.
   if d.get("avb_enable") == "true":
-    build_info = BuildInfo(d, use_legacy_id=True)
-    for partition in PARTITIONS_WITH_BUILD_PROP:
-      fingerprint = build_info.GetPartitionFingerprint(partition)
-      if fingerprint:
-        d["avb_{}_salt".format(partition)] = sha256(
-            fingerprint.encode()).hexdigest()
+    try:
+      build_info = BuildInfo(d, use_legacy_id=True)
+      for partition in PARTITIONS_WITH_BUILD_PROP:
+        fingerprint = build_info.GetPartitionFingerprint(partition)
+        if fingerprint:
+          d["avb_{}_salt".format(partition)] = sha256(
+              fingerprint.encode()).hexdigest()
+    except ExternalError:
+      pass
 
     # Set the vbmeta digest if exists
     try:
