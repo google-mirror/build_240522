@@ -457,6 +457,11 @@ _product_single_value_vars += PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
 # "/system/framework/foo.jar" will be "system/framework/foo.jar.fsv_meta".
 _product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_GENERATE_METADATA
 
+# Unconditionally package the system build.prop into the target_files archive.
+# Used for satisfying releasetools preconditions when building a
+# system-image-less target.
+_product_single_value_vars += PRODUCT_PACKAGE_SYSTEM_BUILD_PROP_IN_TARGET_FILES_PACKAGE
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 

@@ -5079,6 +5079,10 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	@echo "Package target files: $@"
 	$(hide) rm -rf $@ $@.list $(zip_root)
 	$(hide) mkdir -p $(dir $@) $(zip_root)
+ifeq (true,$(PRODUCT_PACKAGE_SYSTEM_BUILD_PROP_IN_TARGET_FILES_PACKAGE))
+	$(hide) mkdir -p $(zip_root)/SYSTEM
+	$(hide) cp $(INSTALLED_BUILD_PROP_TARGET) $(patsubst $(TARGET_OUT)/%,$(zip_root)/SYSTEM/%,$(INSTALLED_BUILD_PROP_TARGET))
+endif
 ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_BOOT))$(filter true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT)))
 	@# Components of the recovery image
 	$(hide) mkdir -p $(zip_root)/$(PRIVATE_RECOVERY_OUT)
