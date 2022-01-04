@@ -707,7 +707,6 @@ for this option to exist.
 * ANDROID_TOOLCHAIN
 * ANDROID_TOOLCHAIN_2ND_ARCH
 * ANDROID_DEV_SCRIPTS
-* ANDROID_EMULATOR_PREBUILTS
 * ANDROID_PRE_BUILD_PATHS
 
 These are all exported from envsetup.sh, but don't have clear equivalents within
