@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ca935f_bf3e3812",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T20:56:33Z",
+      "side": 1,
+      "message": "This can be:\n\n $(addsuffix .x509.pem,$(PRODUCT_EXTRA_OTA_KEYS))",
+      "range": {
+        "startLine": 67,
+        "startChar": 18,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d46bbad_0f8f6267",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T20:56:33Z",
+      "side": 1,
+      "message": "This can be:\n\n $(addprefix -f ,$(PRIVATE_CERT) $(PRIVATE_EXTRA_OTA_KEYS))",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 83
+      },
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a97be94_1f9f1227",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T20:56:33Z",
+      "side": 1,
+      "message": "Is this second if check necessary?",
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e3d523_1ec78273",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T20:56:33Z",
+      "side": 1,
+      "message": "Is this print useful?",
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
