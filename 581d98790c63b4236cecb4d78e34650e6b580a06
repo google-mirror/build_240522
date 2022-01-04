@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45908b8e_f75ec213",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T22:32:51Z",
+      "side": 1,
+      "message": "This can be $(call word-colon,2,$(f))",
+      "range": {
+        "startLine": 993,
+        "startChar": 8,
+        "endLine": 993,
+        "endChar": 43
+      },
+      "revId": "581d98790c63b4236cecb4d78e34650e6b580a06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
