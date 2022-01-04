@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84e1e52_c81d1ad2",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-04T21:45:14Z",
+      "side": 1,
+      "message": "Is this not already handled if you make soong_ui not print status messages?",
+      "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
