@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724759b8_962d2ce1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-01-04T06:29:55Z",
+      "side": 1,
+      "message": "Another solution is to s/INSTALLED_INIT_BOOT_IMAGE_TARGET/INSTALLED_INIT_BOOTIMAGE_TARGET, which aligns with other INSTALLED_$(PARTITION)IMAGE_TARGET (seems better?)\n\nThoughts?",
+      "revId": "518c7ef1f6d1eccb2a84f500f675eb11ec65de30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
