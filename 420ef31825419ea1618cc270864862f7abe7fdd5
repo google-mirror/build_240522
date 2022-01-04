@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3b7c3c_51338f1d",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-01-04T01:56:44Z",
+      "side": 1,
+      "message": "It\u0027s not clear from reading this code why the string manipulation is needed. Is it because of https://cs.android.com/android/platform/superproject/+/master:build/soong/android/androidmk.go;l\u003d925-944;drc\u003dmaster? If so, could you leave a comment here so that readers understand why there\u0027s string manipulation?",
+      "range": {
+        "startLine": 989,
+        "startChar": 6,
+        "endLine": 990,
+        "endChar": 44
+      },
+      "revId": "420ef31825419ea1618cc270864862f7abe7fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
