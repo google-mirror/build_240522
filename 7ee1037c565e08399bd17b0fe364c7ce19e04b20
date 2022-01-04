@@ -22,6 +22,30 @@
       },
       "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec38aad_c3d545f8",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-01-04T09:16:11Z",
+      "side": 1,
+      "message": "removing some I know/care about: https://android-review.googlesource.com/q/topic:win_sdk+owner:hansson",
+      "parentUuid": "cd2ad913_a3d981ed",
+      "range": {
+        "startLine": 1936,
+        "startChar": 22,
+        "endLine": 1936,
+        "endChar": 29
+      },
+      "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
