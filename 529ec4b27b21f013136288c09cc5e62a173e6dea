@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d18ca8cf_5b506461",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-04T09:46:14Z",
+      "side": 1,
+      "message": "I double checked and that variable is noly used to pretty print logs, how about setting to 0?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "529ec4b27b21f013136288c09cc5e62a173e6dea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
