@@ -358,9 +358,14 @@ endif
 ###
 
 is_sdk_build :=
+sdk_goals := sdk sdk_addon
 
-ifneq ($(filter sdk sdk_addon,$(MAKECMDGOALS)),)
-is_sdk_build := true
+ifneq ($(filter $(sdk_goals),$(MAKECMDGOALS)),)
+  is_sdk_build := true
+
+  ifneq ($(PRODUCT_IS_SDK),true)
+    $(error The $(filter $(sdk_goals),$(MAKECMDGOALS)) goal can not be used with lunch $(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT). It can be used only with the sdk targets defined in build/make/target/product)
+  endif
 endif
 
 ## user/userdebug ##
