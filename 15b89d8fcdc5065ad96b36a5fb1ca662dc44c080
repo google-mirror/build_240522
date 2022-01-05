@@ -22,6 +22,30 @@
       },
       "revId": "15b89d8fcdc5065ad96b36a5fb1ca662dc44c080",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b897c2a_7104ea23",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-01-05T22:09:20Z",
+      "side": 1,
+      "message": "It was required to be sorted before (now it isn\u0027t). It\u0027s hard to generate a new list which only has the new libraries added. After this, we might want people to edit the list by hand (or the list that is generated will also be okay). This CL only affects the comparison",
+      "parentUuid": "d0e46297_90e41088",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 83
+      },
+      "revId": "15b89d8fcdc5065ad96b36a5fb1ca662dc44c080",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
