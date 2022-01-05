@@ -46,6 +46,30 @@
       },
       "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7717a1ca_e7afeb03",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-01-05T18:53:12Z",
+      "side": 1,
+      "message": "Even when we remove all usages of win_sdk, won\u0027t we still need a .PHONY win_sdk make rule in order to allow it to be specified on the command line and MAKECMDGOALS?",
+      "parentUuid": "6ec38aad_c3d545f8",
+      "range": {
+        "startLine": 1936,
+        "startChar": 22,
+        "endLine": 1936,
+        "endChar": 29
+      },
+      "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
