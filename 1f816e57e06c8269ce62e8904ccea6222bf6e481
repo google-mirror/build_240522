@@ -34,6 +34,24 @@
       "parentUuid": "8568c13a_b9f7dfcd",
       "revId": "1f816e57e06c8269ce62e8904ccea6222bf6e481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb93ccf_609e3129",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-01-05T14:57:55Z",
+      "side": 1,
+      "message": "\u003e I didn\u0027t realize that anyone would see this code before I requested a review lol\n\nSorry for the surprise-review ;). I subscribe to all the changes in this repo to stay in the loop about what\u0027s going on\n\n\u003e Do you know if this is all of them?\n\nIt\u0027s not - there are more sdk_* products in the internal tree. But like I said on the bug: it\u0027s possible that none of those build the \"sdk\" goal, so this CL may be fine as-is. In general it\u0027s not possible to know how all of these products we have are used, but it isn\u0027t reasonable to keep supporting every conceivable current use-case either.",
+      "parentUuid": "abf8d773_a2c803e9",
+      "revId": "1f816e57e06c8269ce62e8904ccea6222bf6e481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
