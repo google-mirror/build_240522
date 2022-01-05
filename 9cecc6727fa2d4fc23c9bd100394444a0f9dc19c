@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6cb2c0_9ddff6a4",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2022-01-05T10:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22ca935f_bf3e3812",
+      "range": {
+        "startLine": 67,
+        "startChar": 18,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d46bbad_0f8f6267",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-04T20:56:33Z",
       "side": 1,
       "message": "This can be:\n\n $(addprefix -f ,$(PRIVATE_CERT) $(PRIVATE_EXTRA_OTA_KEYS))",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 83
+      },
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0acce807_1eb7e2f2",
+        "filename": "target/product/security/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2022-01-05T10:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d46bbad_0f8f6267",
       "range": {
         "startLine": 76,
         "startChar": 5,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "789226f4_8eb4b1ea",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2022-01-05T10:02:03Z",
+      "side": 1,
+      "message": "Actually `extra_ota_keys` changes it\u0027s value and type so they\u0027re different test.\nI changed the variable to prevent confusing.\nBut it seems the the second if is not needed anyway.",
+      "parentUuid": "1a97be94_1f9f1227",
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19e3d523_1ec78273",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-01-04T20:56:33Z",
       "side": 1,
       "message": "Is this print useful?",
+      "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79d54ba_63dcfadc",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2022-01-05T10:02:03Z",
+      "side": 1,
+      "message": "I feel this is helpful.",
+      "parentUuid": "19e3d523_1ec78273",
       "revId": "9cecc6727fa2d4fc23c9bd100394444a0f9dc19c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
