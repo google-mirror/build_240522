@@ -16,6 +16,24 @@
       "message": "there\u0027s a large number of internal sdk products too. Perhaps not as clean, but checking if PRODUCT_NAME has the prefix \"sdk_*\" is an alternative.",
       "revId": "1f816e57e06c8269ce62e8904ccea6222bf6e481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf8d773_a2c803e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-01-05T14:27:52Z",
+      "side": 1,
+      "message": "I was going to ask someone about those too (I didn\u0027t realize that anyone would see this code before I requested a review lol). I could use that glob, or I could just add the PRODUCT_IS_SDK line to all of those with a quick bash command.\n\nDo you know if this is all of them?\n```\n$ find . -name \"sdk*.mk\" \n./device/generic/goldfish/car/sdk_car_arm64.mk\n./device/generic/goldfish/car/sdk_car_arm.mk\n./device/generic/goldfish/car/sdk_car_x86_64.mk\n./device/generic/goldfish/car/sdk_car_x86.mk\n./device/generic/goldfish/64bitonly/product/sdk_slim_x86_64.mk\n./device/generic/goldfish/64bitonly/product/sdk_phone64_x86_64.mk\n./device/generic/goldfish/64bitonly/product/sdk_phone64_arm64.mk\n./device/generic/goldfish/64bitonly/product/sdk_slim_arm64.mk\n./device/generic/goldfish/64bitonly/product/sdk_tablet_x86_64.mk\n./device/generic/goldfish/sdk_phone_x86_vendor.mk\n./device/google/atv/products/sdk_atv_x86.mk\n./device/google/atv/products/sdk_atv_armv7.mk\n#./development/build/tools/sdk_repo.mk\n./build/make/target/product/sdk_phone_armv7.mk\n#./build/make/target/product/sdk.mk\n./build/make/target/product/sdk_x86.mk\n./build/make/target/product/sdk_arm64.mk\n./build/make/target/product/sdk_phone_x86_64.mk\n./build/make/target/product/sdk_x86_64.mk\n./build/make/target/product/sdk_phone_arm64.mk\n./build/make/target/product/sdk_phone_x86.mk\n#./build/make/core/sdk_check.mk\n#./build/make/core/sdk_font.mk\n#./build/make/core/tasks/sdk-addon.mk\n```\n\nI assume that the files above that don\u0027t have a platform name (x86, arm, etc; marked with a #) are not targets and don\u0027t need this var to be set?",
+      "parentUuid": "8568c13a_b9f7dfcd",
+      "revId": "1f816e57e06c8269ce62e8904ccea6222bf6e481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
