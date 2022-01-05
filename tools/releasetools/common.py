@@ -1756,14 +1756,17 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
 
   logger.info("building image from target_files %s...", tree_subdir)
 
-  # With system_root_image == "true", we don't pack ramdisk into the boot image.
-  # With init_boot == "true", we don't pack the ramdisk into boot.img.
-  # Unless "recovery_as_boot" is specified, in which case we carry the ramdisk
-  # for recovery.
-  has_ramdisk = ((info_dict.get("system_root_image") != "true" and
-                  info_dict.get("init_boot") != "true") or
-                 prebuilt_name != "boot.img" or
-                 info_dict.get("recovery_as_boot") == "true")
+  has_ramdisk = False
+  if prebuilt_name.startswith("boot"):
+    # For a boot.img or a GKI boot-<kernel verion>.img, we don't pack
+    # ramdisk into the boot image if system_root_image == "true" or
+    # init_boot == "true". Unless "recovery_as_boot" is specified, in which
+    # case we carry the ramdisk for the recovery-as-boot boot.img.
+    has_ramdisk = ((info_dict.get("system_root_image") != "true" and
+                    info_dict.get("init_boot") != "true") or
+                   info_dict.get("recovery_as_boot") == "true")
+  else:
+    has_ramdisk = True  # init_boot.img or recovery.img has a ramdisk.
 
   fs_config = "META/" + tree_subdir.lower() + "_filesystem_config.txt"
   data = _BuildBootableImage(prebuilt_name, os.path.join(unpack_dir, tree_subdir),
