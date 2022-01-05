@@ -457,6 +457,11 @@ _product_single_value_vars += PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
 # "/system/framework/foo.jar" will be "system/framework/foo.jar.fsv_meta".
 _product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_GENERATE_METADATA
 
+# Not used by the build system at all, but used in certain
+# product configuration makefiles. It must be in this list to
+# work properly across inherit-product calls.
+_product_single_value_vars += BOARD_WITHOUT_DTLS
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
