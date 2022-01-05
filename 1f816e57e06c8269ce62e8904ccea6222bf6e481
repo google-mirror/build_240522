@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8568c13a_b9f7dfcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-01-05T10:59:51Z",
+      "side": 1,
+      "message": "there\u0027s a large number of internal sdk products too. Perhaps not as clean, but checking if PRODUCT_NAME has the prefix \"sdk_*\" is an alternative.",
+      "revId": "1f816e57e06c8269ce62e8904ccea6222bf6e481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
