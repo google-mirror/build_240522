@@ -34,6 +34,24 @@
       "parentUuid": "b84e1e52_c81d1ad2",
       "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dceae7f7_19cf7d14",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-05T02:33:05Z",
+      "side": 1,
+      "message": "I think soong_ui is already parsing the output to determine which of these lines are status output and which are error output, since it overwrites these status lines but doesn\u0027t overwrite the errors, so it should be possible to fix it to keep printing the errors.",
+      "parentUuid": "7d4b0dee_fb185065",
+      "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
