@@ -22,6 +22,30 @@
       },
       "revId": "252f4619b98f52204210459de48f0049a56b6fe0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1672c4_af0cb716",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-01-05T17:04:28Z",
+      "side": 1,
+      "message": "This is a bit easier to follow with that comment.",
+      "parentUuid": "afd9c931_c81200c4",
+      "range": {
+        "startLine": 1759,
+        "startChar": 2,
+        "endLine": 1772,
+        "endChar": 0
+      },
+      "revId": "252f4619b98f52204210459de48f0049a56b6fe0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
