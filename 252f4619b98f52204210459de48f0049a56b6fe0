@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd9c931_c81200c4",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-05T16:21:51Z",
+      "side": 1,
+      "message": "```\nhas_ramdisk \u003d True\nif prebuilt_name.startswith(\"boot\"):\n  has_ramdisk \u003d (info_dict.get(\"system_root_image\") !\u003d \"true\" and\n                 info_dict.get(\"init_boot\") !\u003d \"true\" and\n                 info_dict.get(\"recovery_as_boot\") !\u003d \"true\")\n                 \n```\nso the code match the comment",
+      "range": {
+        "startLine": 1759,
+        "startChar": 2,
+        "endLine": 1772,
+        "endChar": 0
+      },
+      "revId": "252f4619b98f52204210459de48f0049a56b6fe0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
