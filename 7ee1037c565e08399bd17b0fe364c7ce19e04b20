@@ -70,6 +70,30 @@
       },
       "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e428ea_90d72b2b",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-01-05T19:03:12Z",
+      "side": 1,
+      "message": "The first link above rewrites the command line before we get to the main kati stage (only product configuration gets it -- soong_ui then reads the KATI_GOALS variable to figure out what should be passed onto the make kati execution).\n\nI also meant to go through the build configurations in the build automation and remove it from all the command lines, then we can remove the rewriting above and it just won\u0027t exist. But I haven\u0027t done that yet.",
+      "parentUuid": "7717a1ca_e7afeb03",
+      "range": {
+        "startLine": 1936,
+        "startChar": 22,
+        "endLine": 1936,
+        "endChar": 29
+      },
+      "revId": "7ee1037c565e08399bd17b0fe364c7ce19e04b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
