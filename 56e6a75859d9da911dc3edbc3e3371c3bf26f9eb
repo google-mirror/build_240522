@@ -52,6 +52,24 @@
       "parentUuid": "7d4b0dee_fb185065",
       "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d8967a_2edad56c",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-01-05T03:31:01Z",
+      "side": 1,
+      "message": "Ooh, this is even curioser --\n```\n$(info before)\n$(info [1/1] initializing build system ...)\n$(info after)\n```\nprints `before` but not `after` in the quiet mode. And, I wasn\u0027t dreaming, ```\n$(info [1/1] initializing build system ...)\n$(error error-message)\n```\nwill not print out `error-message` but only `ckati failed with: exit status 1`.",
+      "parentUuid": "dceae7f7_19cf7d14",
+      "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
