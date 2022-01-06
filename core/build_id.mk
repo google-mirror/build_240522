@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (e066f9 Merge changes I36fa0b2f,I00e3bf8d into android12-gsi)
 BUILD_ID=SP1A.211105.003
+=======
+BUILD_ID=SPM1.211110.001
+>>>>>>> BRANCH (39ba1b Make change and version bump to SPM1.211110.001)
