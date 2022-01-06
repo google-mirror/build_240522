@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf4ebf3_ed095030",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-06T05:44:03Z",
+      "side": 1,
+      "message": "ah wait sorry, I read the comments wrong, should be *or ... \u003d\u003d \"true\"* ?",
+      "range": {
+        "startLine": 1766,
+        "startChar": 56,
+        "endLine": 1767,
+        "endChar": 62
+      },
+      "revId": "c7a853089d90b4d5822f559c6477b045df4f0ad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
