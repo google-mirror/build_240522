@@ -46,6 +46,30 @@
       },
       "revId": "c7a853089d90b4d5822f559c6477b045df4f0ad5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb3be161_569fa3bd",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-06T06:09:32Z",
+      "side": 1,
+      "message": "yes the combinations are getting out of hand",
+      "parentUuid": "a97f1764_b36ebc44",
+      "range": {
+        "startLine": 1766,
+        "startChar": 56,
+        "endLine": 1767,
+        "endChar": 62
+      },
+      "revId": "c7a853089d90b4d5822f559c6477b045df4f0ad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
