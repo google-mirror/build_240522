@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "91f08545_fa0a4e3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-06T09:36:44Z",
+      "side": 1,
+      "message": "$ unzip -l out/dist/aosp_oriole_pkvm-target_files-eng.inseob.zip | grep \"fsv_meta\\|BuildManifest\"\n       8192  2008-01-01 00:00   SYSTEM/etc/boot-image.prof.fsv_meta\n       8192  2008-01-01 00:00   SYSTEM/etc/dirty-image-objects.fsv_meta\n      12699  2008-01-01 00:00   SYSTEM/etc/security/fsverity/BuildManifest.apk\n       5957  2008-01-01 00:00   SYSTEM/etc/security/fsverity/BuildManifest.apk.idsig\n       8192  2008-01-01 00:00   SYSTEM/framework/abx.jar.fsv_meta\n      16384  2008-01-01 00:00   SYSTEM/framework/am.jar.fsv_meta\n       8192  2008-01-01 00:00   SYSTEM/framework/android.hidl.base-V1.0-java.jar.fsv_meta\n       8192  2008-01-01 00:00   SYSTEM/framework/android.hidl.manager-V1.0-java.jar.fsv_meta\n       ...\n     \n     \nSo I think everything is fine.",
+      "parentUuid": "54a03639_ab11a17f",
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "56cdd4b4_58f11600",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
