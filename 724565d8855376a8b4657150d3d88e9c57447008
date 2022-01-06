@@ -52,6 +52,24 @@
       "parentUuid": "fd2c0dc1_1a4c6263",
       "revId": "724565d8855376a8b4657150d3d88e9c57447008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0d8963_e236e6fa",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-06T18:36:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e98fe803_45cccd2e",
+      "revId": "724565d8855376a8b4657150d3d88e9c57447008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
