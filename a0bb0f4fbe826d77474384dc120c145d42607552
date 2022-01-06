@@ -34,6 +34,24 @@
       "parentUuid": "146a1f83_47ec43ed",
       "revId": "a0bb0f4fbe826d77474384dc120c145d42607552",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc2ec2c_586fffc9",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 5085,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-06T19:34:06Z",
+      "side": 1,
+      "message": "Done, less product variable \u003d\u003e less mental burden to worry about",
+      "parentUuid": "56b2c6e2_2223833d",
+      "revId": "a0bb0f4fbe826d77474384dc120c145d42607552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
