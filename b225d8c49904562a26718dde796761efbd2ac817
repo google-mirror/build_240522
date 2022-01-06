@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b49b225_d0420cd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-06T06:40:14Z",
+      "side": 1,
+      "message": "Sorry, Colin could you approve again? seems like rebasing can invalidate +1 votes now.",
+      "revId": "b225d8c49904562a26718dde796761efbd2ac817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
