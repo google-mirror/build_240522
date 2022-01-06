@@ -22,6 +22,30 @@
       },
       "revId": "36f65dfb5c84df34c83a4285ee76391133a2dc6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deac00b8_94512051",
+        "filename": "core/package_internal.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-01-06T18:53:00Z",
+      "side": 1,
+      "message": "Good point, I have removed Android.bp from the error message to prevent any confusion",
+      "parentUuid": "c0d3693e_310ff11c",
+      "range": {
+        "startLine": 104,
+        "startChar": 76,
+        "endLine": 105,
+        "endChar": 22
+      },
+      "revId": "36f65dfb5c84df34c83a4285ee76391133a2dc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
