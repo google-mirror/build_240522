@@ -22,6 +22,30 @@
       },
       "revId": "420ef31825419ea1618cc270864862f7abe7fdd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "597a515d_196e19d7",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-01-06T11:33:13Z",
+      "side": 1,
+      "message": "Thanks, update it in comment.",
+      "parentUuid": "7f3b7c3c_51338f1d",
+      "range": {
+        "startLine": 989,
+        "startChar": 6,
+        "endLine": 990,
+        "endChar": 44
+      },
+      "revId": "420ef31825419ea1618cc270864862f7abe7fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
