@@ -16,6 +16,24 @@
       "message": "Does this need to be a product variable, or can it always be done when not building a system image?",
       "revId": "a0bb0f4fbe826d77474384dc120c145d42607552",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b2c6e2_2223833d",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 5085,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-06T19:05:24Z",
+      "side": 1,
+      "message": "Like?\n```\nifndef BUILDING_SYSTEM_IMAGE\n\tmkdir -p $(zip_root)/SYSTEM\n\tcp $(INSTALLED_BUILD_PROP_TARGET) ...\nendif\n```\n\nWould work for my use case (system.img-less build product), but might confuse others; but again I think there isn\u0027t many system.img-less product out there, as far as I know only I am doing such weird stuff...",
+      "parentUuid": "146a1f83_47ec43ed",
+      "revId": "a0bb0f4fbe826d77474384dc120c145d42607552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
