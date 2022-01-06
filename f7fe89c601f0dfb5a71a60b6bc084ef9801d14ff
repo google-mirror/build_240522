@@ -22,6 +22,30 @@
       },
       "revId": "f7fe89c601f0dfb5a71a60b6bc084ef9801d14ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacdaee5_65cef577",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-01-06T08:18:25Z",
+      "side": 1,
+      "message": "Agree.\n\nUpdated, hope that looks clear!",
+      "parentUuid": "4e271863_baadd491",
+      "range": {
+        "startLine": 1764,
+        "startChar": 0,
+        "endLine": 1764,
+        "endChar": 66
+      },
+      "revId": "f7fe89c601f0dfb5a71a60b6bc084ef9801d14ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
