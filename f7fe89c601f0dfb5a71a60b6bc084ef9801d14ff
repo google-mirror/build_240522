@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e271863_baadd491",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-06T07:17:59Z",
+      "side": 1,
+      "message": "Indeed the case is super confusing.... how about make a new function for this?\n\nHasRamdisk():\n if not prebuilt_name.startswith(\"boot\")\n    return false\n if info_dict.get(\"recovery_as_boot\"):\n    return true\n return ....",
+      "range": {
+        "startLine": 1764,
+        "startChar": 0,
+        "endLine": 1764,
+        "endChar": 66
+      },
+      "revId": "f7fe89c601f0dfb5a71a60b6bc084ef9801d14ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
