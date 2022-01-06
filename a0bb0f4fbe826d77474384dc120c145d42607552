@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146a1f83_47ec43ed",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 5085,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-06T18:59:39Z",
+      "side": 1,
+      "message": "Does this need to be a product variable, or can it always be done when not building a system image?",
+      "revId": "a0bb0f4fbe826d77474384dc120c145d42607552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
