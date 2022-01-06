@@ -16,6 +16,24 @@
       "message": "How much data does this add to module-info.mk?  Some tests have a lot of individual test data files.",
       "revId": "724565d8855376a8b4657150d3d88e9c57447008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2c0dc1_1a4c6263",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-01-06T02:14:47Z",
+      "side": 1,
+      "message": "Thanks Colin,\n\nUsing aosp-master + cf target.\n\nw/ CL:  42M\nw/o CL: 40M",
+      "parentUuid": "77cf85b6_991c27b8",
+      "revId": "724565d8855376a8b4657150d3d88e9c57447008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
