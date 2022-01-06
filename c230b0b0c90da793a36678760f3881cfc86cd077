@@ -39,6 +39,30 @@
       },
       "revId": "c230b0b0c90da793a36678760f3881cfc86cd077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b54f24b_28ad7ce3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-01-06T13:54:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c4e52f0b_a90aadb0",
+      "range": {
+        "startLine": 787,
+        "startChar": 10,
+        "endLine": 787,
+        "endChar": 28
+      },
+      "revId": "c230b0b0c90da793a36678760f3881cfc86cd077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
