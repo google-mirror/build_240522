@@ -116,6 +116,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d45388c_812db0f2",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2771,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c95ee4_8fb4e030",
+      "range": {
+        "startLine": 2771,
+        "startChar": 1,
+        "endLine": 2771,
+        "endChar": 9
+      },
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98de1615_f20c003e",
@@ -129,6 +153,30 @@
       "writtenOn": "2022-01-06T18:49:35Z",
       "side": 1,
       "message": "nit: Prefer a tab and then 4 spaces, this will indent very oddly in an editor where tabs are 8 spaces.",
+      "range": {
+        "startLine": 2772,
+        "startChar": 0,
+        "endLine": 2772,
+        "endChar": 4
+      },
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9d1f13_1e051564",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2772,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98de1615_f20c003e",
       "range": {
         "startLine": 2772,
         "startChar": 0,
@@ -156,6 +204,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6cb013_db05e11a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb668e5_ee0d616d",
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6761a8b2_f08fcff0",
@@ -169,6 +235,30 @@
       "writtenOn": "2022-01-06T18:49:35Z",
       "side": 1,
       "message": "tab",
+      "range": {
+        "startLine": 2794,
+        "startChar": 0,
+        "endLine": 2794,
+        "endChar": 4
+      },
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a86c2c_e65b7af9",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2794,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6761a8b2_f08fcff0",
       "range": {
         "startLine": 2794,
         "startChar": 0,
@@ -202,6 +292,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "742cc241_89b8f5f3",
+        "filename": "tools/releasetools/fsverity_manifest_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f193bab_66012182",
+      "range": {
+        "startLine": 67,
+        "startChar": 34,
+        "endLine": 67,
+        "endChar": 35
+      },
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf92feda_8943c8f0",
@@ -215,6 +329,30 @@
       "writtenOn": "2022-01-06T16:55:50Z",
       "side": 1,
       "message": "nit: how about adding \".pb\"?",
+      "range": {
+        "startLine": 78,
+        "startChar": 52,
+        "endLine": 78,
+        "endChar": 66
+      },
+      "revId": "c0e65e47d06f37768ad5a26d28d57eb2993e465a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4100052d_f4045ee9",
+        "filename": "tools/releasetools/fsverity_manifest_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T00:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf92feda_8943c8f0",
       "range": {
         "startLine": 78,
         "startChar": 52,
