@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd94ee3f_473fe908",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2759,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T19:08:37Z",
+      "side": 1,
+      "message": "Oops, removed.",
+      "parentUuid": "9eed3536_5976ce27",
+      "revId": "9e327a4b0ad5339c79f3b884cb3f74f5ad09613b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b85ec87_e97272ad",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-07T19:02:19Z",
       "side": 1,
       "message": "Did you intend to include this in this CL?",
+      "revId": "9e327a4b0ad5339c79f3b884cb3f74f5ad09613b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a6b48b7_f82465ba",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T19:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b85ec87_e97272ad",
       "revId": "9e327a4b0ad5339c79f3b884cb3f74f5ad09613b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
