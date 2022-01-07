@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977988",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "fe1e719e_bf02f809",
+          "description": "Change to \"tools/compliance/conditionset_test.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/conditionset_test.go",
+              "range": {
+                "startLine": 602,
+                "startChar": 71,
+                "endLine": 602,
+                "endChar": 76
+              },
+              "replacement": "false"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "70744bb6_de6b667c",
+        "filename": "tools/compliance/conditionset_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Common typo found: \"fales\" -- should it be \"false\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 602,
+        "startChar": 71,
+        "endLine": 602,
+        "endChar": 76
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977988",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6c467e4d_5eecc15f",
+          "description": "Change to \"tools/compliance/graph.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/graph.go",
+              "range": {
+                "startLine": 143,
+                "startChar": 16,
+                "endLine": 143,
+                "endChar": 27
+              },
+              "replacement": "identifies"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "de276fda_8e091a02",
+        "filename": "tools/compliance/graph.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Common typo found: \"indentifies\" -- should it be \"identifies\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 143,
+        "endChar": 27
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977993",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "040c4322_33860d93",
+        "filename": "tools/compliance/intset_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 274,
+        "startChar": 36,
+        "endLine": 274,
+        "endChar": 37
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977988",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "77cec31f_2219a279",
+          "description": "Change to \"tools/compliance/policy/resolve.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/policy/resolve.go",
+              "range": {
+                "startLine": 167,
+                "startChar": 9,
+                "endLine": 167,
+                "endChar": 20
+              },
+              "replacement": "identifies"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f1e85c59_faaf0a3b",
+        "filename": "tools/compliance/policy/resolve.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Common typo found: \"indentifies\" -- should it be \"identifies\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 167,
+        "startChar": 9,
+        "endLine": 167,
+        "endChar": 20
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977993",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "00208eaa_1310701d",
+        "filename": "tools/compliance/policy/shareprivacyconflicts.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018977988",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1940873?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "ddd09c72_966c0e78",
+          "description": "Change to \"tools/compliance/readgraph.go\"",
+          "replacements": [
+            {
+              "path": "tools/compliance/readgraph.go",
+              "range": {
+                "startLine": 203,
+                "startChar": 10,
+                "endLine": 203,
+                "endChar": 21
+              },
+              "replacement": "identifies"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f7dcc277_b8cc3f31",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-07T07:24:56Z",
+      "side": 1,
+      "message": "Common typo found: \"indentifies\" -- should it be \"identifies\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 203,
+        "startChar": 10,
+        "endLine": 203,
+        "endChar": 21
+      },
+      "revId": "05048c8a0043ce23ead62afbd0f97e08f7d9998e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
