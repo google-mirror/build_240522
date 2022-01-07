@@ -2756,6 +2756,7 @@ endef
 ifeq ($(PRODUCT_SYSTEM_FSVERITY_GENERATE_METADATA),true)
 
 # Generate fsv_meta
+# TODO expand, check in test, /system/framework/services.jar.prof
 fsverity-metadata-targets := $(sort $(filter \
   $(TARGET_OUT)/framework/%.jar \
   $(foreach arch,$(TARGET_ARCH) $(TARGET_2ND_ARCH),$(foreach ext,oat vdex art, \
@@ -2763,6 +2764,7 @@ fsverity-metadata-targets := $(sort $(filter \
   $(TARGET_OUT)/etc/boot-image.prof \
   $(TARGET_OUT)/etc/dirty-image-objects \
   $(TARGET_OUT)/etc/updatable-bcp-packages.txt, \
+  $(TARGET_OUT)/system/etc/classpaths/%.pb, \
   $(ALL_GENERATED_SOURCES) $(ALL_DEFAULT_INSTALLED_MODULES)))
 
 define fsverity-generate-metadata
@@ -2789,7 +2791,8 @@ $(FSVERITY_APK_OUT): PRIVATE_INPUTS := $(fsverity-metadata-targets)
 $(FSVERITY_APK_OUT): $(HOST_OUT_EXECUTABLES)/fsverity_manifest_generator \
     $(HOST_OUT_EXECUTABLES)/fsverity $(HOST_OUT_EXECUTABLES)/aapt2 \
     $(HOST_OUT_EXECUTABLES)/apksigner $(FSVERITY_APK_MANIFEST_PATH) \
-    $(FSVERITY_APK_KEY_PATH).x509.pem $(FSVERITY_APK_KEY_PATH).pk8
+    $(FSVERITY_APK_KEY_PATH).x509.pem $(FSVERITY_APK_KEY_PATH).pk8 \
+    $(fsverity-metadata-targets)
 	$< --fsverity-path $(PRIVATE_FSVERITY) --aapt2-path $(PRIVATE_AAPT2) \
 	    --apksigner-path $(PRIVATE_APKSIGNER) --apk-key-path $(PRIVATE_KEY) \
 	    --apk-manifest-path $(PRIVATE_MANIFEST) --output $@ \
