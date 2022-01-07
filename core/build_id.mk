@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (802c86 Merge "Export test data dependencies in module-info")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SQ1A.220105.002
+>>>>>>> BRANCH (9e5ff9 Version bump to SQ1A.220105.002 [core/build_id.mk])
