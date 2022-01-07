@@ -70,6 +70,24 @@
       "parentUuid": "dceae7f7_19cf7d14",
       "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946d45d1_d90e5152",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-01-07T22:54:30Z",
+      "side": 1,
+      "message": "ccross@:\nI see that you have approved the related changes, what about this one?",
+      "parentUuid": "47d8967a_2edad56c",
+      "revId": "56e6a75859d9da911dc3edbc3e3371c3bf26f9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
