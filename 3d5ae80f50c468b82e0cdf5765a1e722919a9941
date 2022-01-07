@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "396ac97e_33b5ac19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T17:24:13Z",
+      "side": 1,
+      "message": "Not sure why this makes it easier when there is no Merkle tree.  But it\u0027s good to have this consistency anyway.",
+      "revId": "3d5ae80f50c468b82e0cdf5765a1e722919a9941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
