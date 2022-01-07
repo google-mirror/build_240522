@@ -15,7 +15,7 @@
 package compliance
 
 // ResolveSourcePrivacy implements the policy for source privacy.
-func ResolveSourcePrivacy(lg *LicenseGraph) *ResolutionSet {
+func ResolveSourcePrivacy(lg *LicenseGraph) ResolutionSet {
 	rs := ResolveTopDownConditions(lg)
 	return WalkResolutionsForCondition(lg, rs, ImpliesPrivate)
 }

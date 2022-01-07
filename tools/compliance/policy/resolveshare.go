@@ -15,7 +15,7 @@
 package compliance
 
 // ResolveSourceSharing implements the policy for source-sharing.
-func ResolveSourceSharing(lg *LicenseGraph) *ResolutionSet {
+func ResolveSourceSharing(lg *LicenseGraph) ResolutionSet {
 	rs := ResolveTopDownConditions(lg)
 	return WalkResolutionsForCondition(lg, rs, ImpliesShared)
 }

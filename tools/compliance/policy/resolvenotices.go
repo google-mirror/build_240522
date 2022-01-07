@@ -15,7 +15,7 @@
 package compliance
 
 // ResolveNotices implements the policy for notices.
-func ResolveNotices(lg *LicenseGraph) *ResolutionSet {
+func ResolveNotices(lg *LicenseGraph) ResolutionSet {
 	rs := ResolveTopDownConditions(lg)
 	return WalkResolutionsForCondition(lg, rs, ImpliesNotice)
 }
