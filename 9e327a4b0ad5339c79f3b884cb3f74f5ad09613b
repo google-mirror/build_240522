@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec7dec0_4c136a48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T18:52:06Z",
+      "side": 1,
+      "message": "Example: https://android-build.googleplex.com/builds/pending/P28724247/aosp_cf_arm64_phone-userdebug/latest/view/logs/build_error.log",
+      "revId": "9e327a4b0ad5339c79f3b884cb3f74f5ad09613b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
