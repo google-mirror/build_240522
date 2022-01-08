@@ -138,6 +138,23 @@
       "message": "Friendly ping on remaining reviewers",
       "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d7c8f40_306c877a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1093291
+      },
+      "writtenOn": "2022-01-08T12:23:28Z",
+      "side": 1,
+      "message": "\u003e 1 failed\n\nAny info on what failed here so that I can look into fixing it, if possible?",
+      "revId": "83bfe5a0ed3fdac5103b9c064b70e64d75935950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
