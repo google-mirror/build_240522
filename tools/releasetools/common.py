@@ -1396,34 +1396,52 @@ def GetAvbChainedPartitionArg(partition, info_dict, key=None):
   return "{}:{}:{}".format(partition, rollback_index_location, pubkey_path)
 
 
-def AppendGkiSigningArgs(cmd):
-  """Append GKI signing arguments for mkbootimg."""
-  # e.g., --gki_signing_key path/to/signing_key
-  #       --gki_signing_algorithm SHA256_RSA4096"
+def _HasGkiCertificationArgs():
+  if (OPTIONS.info_dict.get("gki_signing_key_path") and
+      OPTIONS.info_dict.get("gki_signing_algorithm")):
+    return True
+  return False
 
+
+def _GenerateGkiCertificate(image, image_name, partition_name):
   key_path = OPTIONS.info_dict.get("gki_signing_key_path")
-  # It's fine that a non-GKI boot.img has no gki_signing_key_path.
-  if not key_path:
-    return
+  algorithm = OPTIONS.info_dict.get("gki_signing_algorithm")
 
   if not os.path.exists(key_path) and OPTIONS.search_path:
     new_key_path = os.path.join(OPTIONS.search_path, key_path)
     if os.path.exists(new_key_path):
       key_path = new_key_path
 
-  # Checks key_path exists, before appending --gki_signing_* args.
+  # Checks key_path exists, before processing --gki_signing_* args.
   if not os.path.exists(key_path):
     raise ExternalError(
         'gki_signing_key_path: "{}" not found'.format(key_path))
 
-  algorithm = OPTIONS.info_dict.get("gki_signing_algorithm")
-  if key_path and algorithm:
-    cmd.extend(["--gki_signing_key", key_path,
-                "--gki_signing_algorithm", algorithm])
+  output_certificate = tempfile.NamedTemporaryFile()
+  cmd = [
+      "generate_gki_certificate",
+      "--name", image_name,
+      "--algorithm", algorithm,
+      "--key", key_path,
+      "--output", output_certificate.name,
+      image,
+  ]
 
-    signature_args = OPTIONS.info_dict.get("gki_signing_signature_args")
-    if signature_args:
-      cmd.extend(["--gki_signing_signature_args", signature_args])
+  signature_args = OPTIONS.info_dict.get("gki_signing_signature_args") or ''
+  signature_args = signature_args.strip()
+  if signature_args:
+    cmd.extend(["--additional_avb_args", signature_args])
+
+  args = OPTIONS.info_dict.get(
+      "avb_" + partition_name + "_add_hash_footer_args") or ''
+  args = args.strip()
+  if args:
+    cmd.extend(["--additional_avb_args", args])
+
+  RunAndCheckOutput(cmd)
+
+  output_certificate.seek(os.SEEK_SET, 0)
+  return output_certificate.read()
 
 
 def BuildVBMeta(image_path, partitions, name, needed_partitions):
@@ -1549,6 +1567,8 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
   if kernel and not os.access(os.path.join(sourcedir, kernel), os.F_OK):
     return None
 
+  kernel_path = os.path.join(sourcedir, kernel) if kernel else None
+
   if has_ramdisk and not os.access(os.path.join(sourcedir, "RAMDISK"), os.F_OK):
     return None
 
@@ -1559,12 +1579,28 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
     ramdisk_img = _MakeRamdisk(sourcedir, fs_config_file,
                                ramdisk_format=ramdisk_format)
 
+  boot_signature_bytes = b''
+  if _HasGkiCertificationArgs():
+    # Certify GKI images
+    if kernel_path is not None:
+      boot_signature_bytes += _GenerateGkiCertificate(
+          kernel_path, "generic_kernel", "boot")
+    if ramdisk_img is not None:
+      boot_signature_bytes += _GenerateGkiCertificate(
+          ramdisk_img.name, "generic_ramdisk", "init_boot")
+
+  boot_signature = None
+  if len(boot_signature_bytes) > 0:
+    boot_signature = tempfile.NamedTemporaryFile()
+    boot_signature.write(boot_signature_bytes)
+    boot_signature.flush()
+
   # use MKBOOTIMG from environ, or "mkbootimg" if empty or not set
   mkbootimg = os.getenv('MKBOOTIMG') or "mkbootimg"
 
   cmd = [mkbootimg]
-  if kernel:
-    cmd += ["--kernel", os.path.join(sourcedir, kernel)]
+  if kernel_path is not None:
+    cmd.extend(["--kernel", kernel_path])
 
   fn = os.path.join(sourcedir, "second")
   if os.access(fn, os.F_OK):
@@ -1604,14 +1640,16 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
   if args and args.strip():
     cmd.extend(shlex.split(args))
 
-  args = info_dict.get("mkbootimg_version_args")
-  if args and args.strip():
-    cmd.extend(shlex.split(args))
+  if not _HasGkiCertificationArgs():
+    args = info_dict.get("mkbootimg_version_args")
+    if args and args.strip():
+      cmd.extend(shlex.split(args))
 
   if has_ramdisk:
     cmd.extend(["--ramdisk", ramdisk_img.name])
 
-  AppendGkiSigningArgs(cmd)
+  if boot_signature is not None:
+    cmd.extend(["--boot_signature", boot_signature.name])
 
   img_unsigned = None
   if info_dict.get("vboot"):
