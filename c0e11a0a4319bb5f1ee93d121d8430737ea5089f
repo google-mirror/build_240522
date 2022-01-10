@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0261097_6a7f53dc",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 5349,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-01-10T18:56:06Z",
+      "side": 1,
+      "message": "You\u0027ll also need to add this as a dependency here:\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;drc\u003d8193900f872db276f8d88ca0d8128fde50f1f158;l\u003d4861\n\nI\u0027ll also note there\u0027s a bug in the current logic there -- it really should have +\u003d for the later additions, not :\u003d, which is overwriting the value. It may also be undefined if one of the conditionals is not set. So the code should likely be clearing it outside the conditional, and always using +\u003d inside the conditionals.",
+      "range": {
+        "startLine": 5349,
+        "startChar": 12,
+        "endLine": 5349,
+        "endChar": 50
+      },
+      "revId": "c0e11a0a4319bb5f1ee93d121d8430737ea5089f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
