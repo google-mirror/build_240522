@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7f51a29_2ddb8602",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-01-10T23:52:00Z",
+      "side": 1,
+      "message": "(Please correct me if I am wrong)",
+      "parentUuid": "1252e1f3_7fb07ca9",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf6a6192_affab275",
         "filename": "tools/extract_kernel.py",
         "patchSetId": 2
