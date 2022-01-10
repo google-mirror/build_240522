@@ -233,6 +233,10 @@ A/B OTA specific options
 
   --enable_zucchini
       Whether to enable to zucchini feature. Will generate smaller OTA but uses more memory.
+
+  --enable_lz4diff
+      Whether to enable lz4diff feature. Will generate smaller OTA for EROFS but
+      uses more memory.
 """
 
 from __future__ import print_function
@@ -303,6 +307,7 @@ OPTIONS.enable_vabc_xor = True
 OPTIONS.force_minor_version = None
 OPTIONS.compressor_types = None
 OPTIONS.enable_zucchini = None
+OPTIONS.enable_lz4diff = None
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
 DYNAMIC_PARTITION_INFO = 'META/dynamic_partitions_info.txt'
@@ -404,16 +409,16 @@ class Payload(object):
     self.payload_properties = None
     self.secondary = secondary
 
-  def _Run(self, cmd):  # pylint: disable=no-self-use
+  def _Run(self, cmd, env=None):  # pylint: disable=no-self-use
     # Don't pipe (buffer) the output if verbose is set. Let
     # brillo_update_payload write to stdout/stderr directly, so its progress can
     # be monitored.
     if OPTIONS.verbose:
-      common.RunAndCheckOutput(cmd, stdout=None, stderr=None)
+      common.RunAndCheckOutput(cmd, stdout=None, stderr=None, env=env)
     else:
-      common.RunAndCheckOutput(cmd)
+      common.RunAndCheckOutput(cmd, env=env)
 
-  def Generate(self, target_file, source_file=None, additional_args=None):
+  def Generate(self, target_file, source_file=None, additional_args=None, env=None):
     """Generates a payload from the given target-files zip(s).
 
     Args:
@@ -437,7 +442,7 @@ class Payload(object):
       if OPTIONS.disable_verity_computation:
         cmd.extend(["--disable_verity_computation", "true"])
     cmd.extend(additional_args)
-    self._Run(cmd)
+    self._Run(cmd, env)
 
     self.payload_file = payload_file
     self.payload_properties = None
@@ -1014,6 +1019,7 @@ def GeneratePartitionTimestampFlagsDowngrade(
         pre_partition_state, post_partition_state):
   assert pre_partition_state is not None
   partition_timestamps = {}
+  logger.info("Pre: %s, Post: %s", pre_partition_state, post_partition_state)
   for part in pre_partition_state:
     partition_timestamps[part.partition_name] = part.version
   for part in post_partition_state:
@@ -1151,7 +1157,23 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     if not ota_utils.IsZucchiniCompatible(source_file, target_file):
       additional_args += ["--enable_zucchini", "false"]
   else:
-    additional_args += ["--enable_zucchini", str(OPTIONS.enable_zucchini).lower()]
+    additional_args += ["--enable_zucchini",
+                        str(OPTIONS.enable_zucchini).lower()]
+
+  if OPTIONS.enable_lz4diff is None:
+    if not ota_utils.IsLz4diffCompatible(source_file, target_file):
+      OPTIONS.enable_lz4diff = False
+      additional_args += ["--enable_lz4diff", "false"]
+    else:
+      OPTIONS.enable_lz4diff = True
+  else:
+    additional_args += ["--enable_lz4diff",
+                        str(OPTIONS.enable_lz4diff).lower()]
+  envs = {}
+  if source_file and OPTIONS.enable_lz4diff is not False:
+    input_tmp = common.UnzipTemp(source_file, "META/liblz4.so")
+    envs["LD_PRELOAD"] = os.path.join(input_tmp, "META", "liblz4.so")
+    logger.info("Enabling lz4diff %s", envs)
 
   if OPTIONS.disable_vabc:
     additional_args += ["--disable_vabc", "true"]
@@ -1171,7 +1193,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   payload.Generate(
       target_file,
       source_file,
-      additional_args + partition_timestamps_flags
+      additional_args + partition_timestamps_flags,
+      envs
   )
 
   # Sign the payload.
@@ -1340,6 +1363,8 @@ def main(argv):
       OPTIONS.compressor_types = a
     elif o == "--enable_zucchini":
       OPTIONS.enable_zucchini = a.lower() != "false"
+    elif o == "--enable_lz4diff":
+      OPTIONS.enable_lz4diff = a.lower() != "false"
     else:
       return False
     return True
@@ -1388,6 +1413,7 @@ def main(argv):
                                  "force_minor_version=",
                                  "compressor_types=",
                                  "enable_zucchin=",
+                                 "enable_lz4diff=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
