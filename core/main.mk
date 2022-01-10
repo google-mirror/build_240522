@@ -334,6 +334,9 @@ ADDITIONAL_VENDOR_PROPERTIES += \
     ro.build.ab_update=$(AB_OTA_UPDATER)
 endif
 
+ADDITIONAL_VENDOR_PROPERTIES += \
+    vendor.powerhal.adpf.rate=16666667
+
 # Set ro.product.vndk.version to know the VNDK version required by product
 # modules. It uses the version in PRODUCT_PRODUCT_VNDK_VERSION. If the value
 # is "current", use PLATFORM_VNDK_VERSION.
