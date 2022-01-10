@@ -33,6 +33,23 @@
       "message": "Thank you for fixing this Jiyong!",
       "revId": "efbb6ffa0032a56cba465a3cd47000d6ae01300d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92dfb714_f847c19d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-10T19:59:46Z",
+      "side": 1,
+      "message": "Thanks Jiyong!",
+      "revId": "efbb6ffa0032a56cba465a3cd47000d6ae01300d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
