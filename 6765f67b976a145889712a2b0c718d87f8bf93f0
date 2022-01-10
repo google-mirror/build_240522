@@ -16,6 +16,126 @@
       "message": "PTAL",
       "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e70307e_5f634bb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "There is way too much here to reasonably review.  I can rubber stamp it, but if you want a real review it needs to be split up into one patch per logical change.",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b926e38_1815f8ad",
+        "filename": "tools/compliance/cmd/dumpresolutions.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "var lcs []compliance.LicenseCondition is more idomiatic.  Or did you mean:\n\n  lcs :\u003d make([]compliance.LicenseCondition, 0, len(conditions))",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439ffd4d_96e2d853",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "Any reason not to make this 0xffff?",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd38a18c_e8a8858d",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "You can use iota for this:\n\n  UnencumberedCondition \u003d LicenseCondition(1 \u003c\u003c iota)\n  PermissiveCondition\n  NoticeCondition\n  ...",
+      "range": {
+        "startLine": 31,
+        "startChar": 25,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028a5e10_d410308e",
+        "filename": "tools/compliance/conditionset.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "Why 0x00?  Seems like 0 would be sufficient, or 0x0000 to be explicit about the uint16 type.\n\nAllLicenseConditions \u0026 lc !\u003d 0 would be more idiomatic.",
+      "range": {
+        "startLine": 151,
+        "startChar": 38,
+        "endLine": 151,
+        "endChar": 42
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342c5711_6cc62626",
+        "filename": "tools/compliance/resolutionset.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-10T19:25:30Z",
+      "side": 1,
+      "message": "Is there a reason not to return nil here?  nil is the idiomatic empty list, and operates nearly identically to an empty list.",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 25
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
