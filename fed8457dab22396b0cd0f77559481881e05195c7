@@ -39,6 +39,30 @@
       },
       "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4f345d_5c74b6be",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-01-10T06:13:52Z",
+      "side": 1,
+      "message": "No, Gzip is necessary for legacy kernel format.\n\nThis change just try to skip \"gzip\" in this loop. Because, gzip has been tried by above 3 lines(the comments above also show the logic) -- If kernel is gzip formatted, it will be resolved by function \"dump_configs()\".\n\n\"COMPRESSION_ALGO[1:]\" split is just to skip trying to gzip twice.\n\n\"COMPRESSION_ALGO[1:]\" seems fragile, I think remove \"gzip\" from tuple COMPRESSION_ALGO also OK",
+      "parentUuid": "cf6a6192_affab275",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 48
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
