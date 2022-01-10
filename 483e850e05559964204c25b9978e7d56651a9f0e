@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46009db0_32984e9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-10T09:27:16Z",
+      "side": 1,
+      "message": "Based on the error message, it seems that we also need to patch system/security/fsverity/AndroidManifest.xml ?",
+      "revId": "483e850e05559964204c25b9978e7d56651a9f0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
