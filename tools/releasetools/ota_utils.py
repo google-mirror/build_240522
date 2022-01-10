@@ -182,6 +182,7 @@ def UpdateDeviceState(device_state, build_info, boot_variable_values,
           '{}.build.prop'.format(partition))
       # Skip if the partition is missing, or it doesn't have a build.prop
       if not partition_prop or not partition_prop.build_props:
+        logger.warning("Skipping timestamp for %s", partition)
         continue
 
       partition_state = partition_states.add()
@@ -638,6 +639,28 @@ def ConstructOtaApexInfo(target_zip, source_file=None):
       target_apex.source_version = source_apex_versions[name]
 
   return target_apex_proto.SerializeToString()
+
+
+def IsLz4diffCompatible(source_file: str, target_file: str):
+  """Check whether lz4diff versions in two builds are compatible
+
+  Args:
+    source_file: Path to source build's target_file.zip
+    target_file: Path to target build's target_file.zip
+
+  Returns:
+    bool true if and only if zucchini versions are compatible
+  """
+  if source_file is None or target_file is None:
+    return False
+  # Right now we enable lz4diff as long as source build has liblz4.so.
+  # In the future we might introduce version system to lz4diff as well.
+  if zipfile.is_zipfile(source_file):
+    with zipfile.ZipFile(source_file, "r") as zfp:
+      return "META/liblz4.so" in zfp.namelist()
+  else:
+    assert os.path.isdir(source_file)
+    return os.path.exists(os.path.join(source_file, "META", "liblz4.so"))
 
 
 def IsZucchiniCompatible(source_file: str, target_file: str):
