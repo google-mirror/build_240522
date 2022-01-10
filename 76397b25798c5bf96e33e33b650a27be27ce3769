@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdd1d07_ca00ec58",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4866,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-01-10T20:08:00Z",
+      "side": 1,
+      "message": "This should just be blank, make doesn\u0027t do quoting, so this a dependency on a file literally called \"\"",
+      "range": {
+        "startLine": 4866,
+        "startChar": 14,
+        "endLine": 4866,
+        "endChar": 16
+      },
+      "revId": "76397b25798c5bf96e33e33b650a27be27ce3769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
