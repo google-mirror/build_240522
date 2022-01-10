@@ -16,6 +16,29 @@
       "message": "Adding the file owners..",
       "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6a6192_affab275",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1726181
+      },
+      "writtenOn": "2022-01-10T04:44:33Z",
+      "side": 1,
+      "message": "This seems fragile (e.g. in case COMPRESSION_ALGO ever changes)\n\nCan you check for a gzip prefix in the cmd instead?\n\n--------\n\nBut, is it actually true that gzip -d is never necessary?",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 48
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
