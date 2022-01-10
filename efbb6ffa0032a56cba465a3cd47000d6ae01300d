@@ -16,6 +16,23 @@
       "message": "Verified: https://android-build.googleplex.com/builds/abtd/run/L27800000952537923",
       "revId": "efbb6ffa0032a56cba465a3cd47000d6ae01300d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6120f07a_01a2d6c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-10T12:01:48Z",
+      "side": 1,
+      "message": "Thank you for fixing this Jiyong!",
+      "revId": "efbb6ffa0032a56cba465a3cd47000d6ae01300d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
