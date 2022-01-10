@@ -63,6 +63,30 @@
       },
       "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9c76d1_4b8876f7",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1726181
+      },
+      "writtenOn": "2022-01-10T22:53:40Z",
+      "side": 1,
+      "message": "func on the 3 lines above is not guaranteed to be gzip, so I don\u0027t think it is safe to skip gzip in the loop\n\nCheck out dump_configs vs dump_version vs dump_release vs dump_compiler. Only the first one, dump_configs, uses gzip as far as I can see\n\n--------\n\nIt\u0027s possible a better change would be to remove gzip from dump_configs instead and rely on gzip being tried in the loop. But I\u0027m not sure if that will break anything else. \n\n--------\n\nIn general I\u0027m not sure why this CL is necessary. Can you quantify the performance improvement of only trying gzip once instead of twice?",
+      "parentUuid": "eb4f345d_5c74b6be",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 48
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
