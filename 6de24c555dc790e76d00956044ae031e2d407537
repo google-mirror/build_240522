@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84dcd957_423abd98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-11T07:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65ee1567_12323aae",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "6de24c555dc790e76d00956044ae031e2d407537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e51ae2d_33695e88",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-11T07:09:25Z",
       "side": 1,
       "message": "generic ramdisk image?",
+      "range": {
+        "startLine": 10,
+        "startChar": 18,
+        "endLine": 10,
+        "endChar": 39
+      },
+      "revId": "6de24c555dc790e76d00956044ae031e2d407537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15da52b_fdc6da51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-11T07:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e51ae2d_33695e88",
       "range": {
         "startLine": 10,
         "startChar": 18,
