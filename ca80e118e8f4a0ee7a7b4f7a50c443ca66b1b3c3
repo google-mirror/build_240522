@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4caa1b1_f46fed1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2022-01-11T14:04:35Z",
+      "side": 1,
+      "message": "Given that we are still debugging the reproxy crash with clang-tidy, I think its better to not turn it on for everyone until that\u0027s fixed?",
+      "revId": "ca80e118e8f4a0ee7a7b4f7a50c443ca66b1b3c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
