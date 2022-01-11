@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f874ef2_d2e06653",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-11T04:28:49Z",
+      "side": 1,
+      "message": "Go expects all files in a single package to be in the same directory.  If you want this in a different directory it has to be a different package.",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
