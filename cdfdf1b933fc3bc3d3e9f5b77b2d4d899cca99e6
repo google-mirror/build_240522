@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95753dae_8d017851",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-11T18:43:21Z",
+      "side": 1,
+      "message": "ah, I C. it\u0027s not obvious that you put the check in IsLz4diffCompatible",
+      "parentUuid": "2293a389_773bb6e9",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 65
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e8cf8fa_d089475f",
         "filename": "tools/releasetools/ota_utils.py",
         "patchSetId": 9
