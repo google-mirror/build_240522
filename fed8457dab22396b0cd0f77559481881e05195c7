@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "158f3d66_f14f63b3",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-01-11T03:36:00Z",
+      "side": 1,
+      "message": "When I said `different decompression algorithms` I actually meant to say `various decompression algorithms`, which includes everything in COMPRESSION_ALGO.\n\nIf the performance improvement is tiny, I think there\u0027s not enough benefit to take this change. If you want, you can fix the comment.",
+      "parentUuid": "830e554c_6093f979",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf6a6192_affab275",
