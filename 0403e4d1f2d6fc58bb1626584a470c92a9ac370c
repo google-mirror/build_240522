@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52804f5c_0ff1147f",
+        "filename": "tools/compliance/policy/policy.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-11T04:24:23Z",
+      "side": 1,
+      "message": "This is a little confusing, as the value is unused.  You could use bool or struct{}",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 42
+      },
+      "revId": "0403e4d1f2d6fc58bb1626584a470c92a9ac370c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
