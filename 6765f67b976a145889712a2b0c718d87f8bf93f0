@@ -170,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71c9574_6d668f07",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-11T04:23:00Z",
+      "side": 1,
+      "message": "Overflowing uint16 would be an error: https://go.dev/play/p/jn4uRcKGUwR",
+      "parentUuid": "ec3e5227_47408b49",
+      "range": {
+        "startLine": 31,
+        "startChar": 25,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "028a5e10_d410308e",
