@@ -94,6 +94,30 @@
       },
       "revId": "0403e4d1f2d6fc58bb1626584a470c92a9ac370c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8bf36b5_c76525fe",
+        "filename": "tools/compliance/policy/policy.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-11T05:07:21Z",
+      "side": 1,
+      "message": "I see, can you add comments both here and where it is used?  Otherwise it will be easy to undo this optimization.",
+      "parentUuid": "f57587f8_26ffc433",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 42
+      },
+      "revId": "0403e4d1f2d6fc58bb1626584a470c92a9ac370c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
