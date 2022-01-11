@@ -189,7 +189,7 @@ func addDependencies(edges *[]*dependencyEdge, target string, dependencies []*li
 		annotations := newEdgeAnnotations()
 		for _, a := range ad.Annotations {
 			if ann, ok := RecognizedAnnotations[a]; ok {
-				annotations.annotations[ann] = true
+				annotations.annotations[ann] = struct{}{}
 			}
 		}
 		*edges = append(*edges, &dependencyEdge{target, dependency, annotations})
