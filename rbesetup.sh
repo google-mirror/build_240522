@@ -67,10 +67,12 @@ function _set_rbe_vars() {
   export RBE_JAVAC_EXEC_STRATEGY="racing"
   export RBE_R8_EXEC_STRATEGY="racing"
   export RBE_D8_EXEC_STRATEGY="racing"
+  export RBE_CLANG_TIDY_EXEC_STRATEGY="remote_local_fallback"
   export RBE_use_unified_cas_ops="true"
   export RBE_JAVAC=1
   export RBE_R8=1
   export RBE_D8=1
+  export RBE_CLANG_TIDY=1
 }
 
 _export_metrics_uploader
