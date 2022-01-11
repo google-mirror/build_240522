@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "508f72e0_cd660359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "I separated a couple of the smaller items into separate changes for review.\n\nI\u0027ll take the rubberstamp for the rest.\n\n\"Remove origin\" + \"change conditionset to bitmask\" are tighly paired.\n\n\"Remove intermediate resolution sets\" + \"parallelize resolves\" are at least paired. For example, on the license graph, the references to the intermediate sets get replaced with waitgroups.\n\nAnd then both pairs are connected in various ways. Trying to break any of them out ends up not being worth the effort in part because most of them basically touch every file and then a bunch of stuff gets deleted.",
+      "parentUuid": "3e70307e_5f634bb5",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b926e38_1815f8ad",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-10T19:25:30Z",
       "side": 1,
       "message": "var lcs []compliance.LicenseCondition is more idomiatic.  Or did you mean:\n\n  lcs :\u003d make([]compliance.LicenseCondition, 0, len(conditions))",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "535ea4d3_dd875a76",
+        "filename": "tools/compliance/cmd/dumpresolutions.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b926e38_1815f8ad",
       "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8817073b_07ee7ca8",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "Ack\n\nYes, there is a reason. The set bits in 0xfc00 are not valid license conditions. This mask becomes the value of AllLicenseConditions, which has the same value but a different type. While this variable is just a bit-mask, which probably should be uint16 rather than LicenseCondition, AllLicenseConditions is a valid set. If AllLicenseConditions set any of the extra bits, it would panic when calling LicenseCondition.Name() for example.",
+      "parentUuid": "439ffd4d_96e2d853",
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd38a18c_e8a8858d",
@@ -82,6 +136,30 @@
       "writtenOn": "2022-01-10T19:25:30Z",
       "side": 1,
       "message": "You can use iota for this:\n\n  UnencumberedCondition \u003d LicenseCondition(1 \u003c\u003c iota)\n  PermissiveCondition\n  NoticeCondition\n  ...",
+      "range": {
+        "startLine": 31,
+        "startChar": 25,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3e5227_47408b49",
+        "filename": "tools/compliance/condition.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "I was unaware of that, so that\u0027s good to know. Thank you!\n\nBut, leaving it as is will make it very clear if future additions require increasing the size from uint16 to uint32.",
+      "parentUuid": "fd38a18c_e8a8858d",
       "range": {
         "startLine": 31,
         "startChar": 25,
@@ -115,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79667a7e_35a7f5de",
+        "filename": "tools/compliance/conditionset.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "Good catch! Some of these were written before I realized I would need to introduce constants for \"with classpath exception\" and \"allow dynamic linking\".\n\nDone.",
+      "parentUuid": "028a5e10_d410308e",
+      "range": {
+        "startLine": 151,
+        "startChar": 38,
+        "endLine": 151,
+        "endChar": 42
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "342c5711_6cc62626",
@@ -128,6 +230,30 @@
       "writtenOn": "2022-01-10T19:25:30Z",
       "side": 1,
       "message": "Is there a reason not to return nil here?  nil is the idiomatic empty list, and operates nearly identically to an empty list.",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 25
+      },
+      "revId": "6765f67b976a145889712a2b0c718d87f8bf93f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4faf9df3_f5cc464b",
+        "filename": "tools/compliance/resolutionset.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T03:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "342c5711_6cc62626",
       "range": {
         "startLine": 82,
         "startChar": 9,
