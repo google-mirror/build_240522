@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59610ae9_07eba9cf",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-01-11T07:31:57Z",
+      "side": 1,
+      "message": "nit: add a comment for why the generic boot.img/init_boot.img doesn\u0027t need `mkbootimg_version_args`?",
+      "range": {
+        "startLine": 1642,
+        "startChar": 5,
+        "endLine": 1642,
+        "endChar": 33
+      },
+      "revId": "129621498205efde2c7c3508e08827aafc4a6edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
