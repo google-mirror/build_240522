@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e15314_1e801236",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-11T18:42:23Z",
+      "side": 1,
+      "message": "note the logic is not symmetric with lz4",
+      "range": {
+        "startLine": 1155,
+        "startChar": 13,
+        "endLine": 1155,
+        "endChar": 28
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2293a389_773bb6e9",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-11T18:42:23Z",
+      "side": 1,
+      "message": "what do you do if the old source file doesn\u0027t have liblz4? Should we proceed the OTA generation anyway?",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 65
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e8cf8fa_d089475f",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-11T18:42:23Z",
+      "side": 1,
+      "message": "update",
+      "range": {
+        "startLine": 651,
+        "startChar": 29,
+        "endLine": 651,
+        "endChar": 37
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
