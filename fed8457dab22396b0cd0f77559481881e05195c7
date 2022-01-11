@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b3c512_96a8be58",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-01-11T03:33:52Z",
+      "side": 1,
+      "message": "Patchset 3 added some log",
+      "parentUuid": "830e554c_6093f979",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf6a6192_affab275",
