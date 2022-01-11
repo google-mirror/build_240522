@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7471cad7_98f5258e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-11T18:48:01Z",
+      "side": 1,
+      "message": "Lz4 is still highly experimental so we want to disable it by default. zucchini has been tested for months, so it\u0027s enabled by default.",
+      "parentUuid": "b6e15314_1e801236",
+      "range": {
+        "startLine": 1155,
+        "startChar": 13,
+        "endLine": 1155,
+        "endChar": 28
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2293a389_773bb6e9",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35570950_a0633f91",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-11T18:48:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "95753dae_8d017851",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 65
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e8cf8fa_d089475f",
@@ -84,6 +132,30 @@
       "writtenOn": "2022-01-11T18:42:23Z",
       "side": 1,
       "message": "update",
+      "range": {
+        "startLine": 651,
+        "startChar": 29,
+        "endLine": 651,
+        "endChar": 37
+      },
+      "revId": "cdfdf1b933fc3bc3d3e9f5b77b2d4d899cca99e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c726051_06fd0fa2",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-11T18:48:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e8cf8fa_d089475f",
       "range": {
         "startLine": 651,
         "startChar": 29,
