@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88375c5_c326273e",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-01-11T02:53:54Z",
+      "side": 1,
+      "message": "This happens before the MAKECMDGOALS rewrite (during product configuration), so it\u0027s actually still used, at least until we drop support for specifying it on the command line.",
+      "revId": "ab6c1e5cf131544df12cbb088ee7e835b9fc70b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
