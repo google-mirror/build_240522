@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ee1567_12323aae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-01-11T07:09:25Z",
+      "side": 1,
+      "message": "effectively?",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "6de24c555dc790e76d00956044ae031e2d407537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e51ae2d_33695e88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-01-11T07:09:25Z",
+      "side": 1,
+      "message": "generic ramdisk image?",
+      "range": {
+        "startLine": 10,
+        "startChar": 18,
+        "endLine": 10,
+        "endChar": 39
+      },
+      "revId": "6de24c555dc790e76d00956044ae031e2d407537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
