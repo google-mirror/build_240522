@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b3215f8_0374f3f0",
+        "filename": "tools/compliance/cmd/dumpresolutions_test.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-11T04:17:56Z",
+      "side": 0,
+      "message": "Unintended delete",
+      "revId": "40b8539335786523da4c037e4777450401eb0aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
