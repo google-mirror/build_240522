@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "830e554c_6093f979",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-01-11T03:32:08Z",
+      "side": 1,
+      "message": "dump_version / dump_compiler / dump_release do not need to check if kernel is gzip compressed. They just check the magic number in input_bytes.\n\nNew commit added some logs:\n\n$ /bin/bash -c \"python3 -m trace --count -C . build/make/tools/extract_kernel.py --tools lz4:out/host/linux-x86/bin/lz4  --input kernel.lz4 --output-release kernel_version.txt\"\ntangjiajia-- dump_release for gzip, result\u003d None\ntangjiajia++ try_decompress_bytes: [\u0027gzip\u0027, \u0027-d\u0027]      \u003c\u003c\u003c\u003c\u003c\u003c\u003cno need try again\ntangjiajia++ try_decompress_bytes: [\u0027xz\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress_bytes: [\u0027bzip2\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress_bytes: [\u0027out/host/linux-x86/bin/lz4\u0027, \u0027-d\u0027, \u0027-l\u0027]\ntangjiajia-- dump_release for gzip, result\u003d None\ntangjiajia++ try_decompress_bytes: [\u0027gzip\u0027, \u0027-d\u0027]      \u003c\u003c\u003c\u003c\u003c\u003c\u003cno need try again\ntangjiajia++ try_decompress_bytes: [\u0027xz\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress_bytes: [\u0027bzip2\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress_bytes: [\u0027out/host/linux-x86/bin/lz4\u0027, \u0027-d\u0027, \u0027-l\u0027]\n\nAfter remove \"gzip\" from tuple COMPRESSION_ALGO as COMPRESSION_ALGO[1:], the log will be:\n$ /bin/bash -c \"python3 -m trace --count -C . build/make/tools/extract_kernel.py --tools lz4:out/host/linux-x86/bin/lz4  --input kernel.lz4 --output-release kernel_version.txt\"\ntangjiajia-- dump_release for gzip, result\u003d None\ntangjiajia++ try_decompress: [\u0027xz\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress: [\u0027bzip2\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress: [\u0027out/host/linux-x86/bin/lz4\u0027, \u0027-d\u0027, \u0027-l\u0027]\ntangjiajia-- dump_release for gzip, result\u003d None\ntangjiajia++ try_decompress: [\u0027xz\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress: [\u0027bzip2\u0027, \u0027-d\u0027]\ntangjiajia++ try_decompress: [\u0027out/host/linux-x86/bin/lz4\u0027, \u0027-d\u0027, \u0027-l\u0027]\n\nThis CL intents to match the comments :\n\"\"\"\nRun func(input_bytes) first; and if that fails (returns value evaluates to\nFalse), then try different decompression algorithm before running func.\n\"\"\"\n-- \"try different decompression\", which means gzip do need to run again.",
+      "parentUuid": "a7f51a29_2ddb8602",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf6a6192_affab275",
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "func on the 3 lines above is not guaranteed to be gzip, so I don\u0027t think it is safe to skip gzip in the loop\n\nCheck out dump_configs vs dump_version vs dump_release vs dump_compiler. Only the first one, dump_configs, uses gzip as far as I can see\n\n--------\n\nIt\u0027s possible a better change would be to remove gzip from dump_configs instead and rely on gzip being tried in the loop. But I\u0027m not sure if that will break anything else. \n\n--------\n\nIn general I\u0027m not sure why this CL is necessary. Can you quantify the performance improvement of only trying gzip once instead of twice?",
       "parentUuid": "eb4f345d_5c74b6be",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 48
+      },
+      "revId": "fed8457dab22396b0cd0f77559481881e05195c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a289dbce_99fcfbd3",
+        "filename": "tools/extract_kernel.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-01-11T03:32:08Z",
+      "side": 1,
+      "message": "------\nIt\u0027s possible a better change would be to remove gzip from dump_configs instead and rely on gzip being tried in the loop. But I\u0027m not sure if that will break anything else.\n \n\u003e\u003e\u003e\u003e\u003e\u003e \nYes, make gzip being tried in the loop is better. I also have tried before. BUT, gzip magic number is different with tuple:\"GZIP_HEADER\" -- the real one in func dump_configs is (CONFIG_PREFIX + GZIP_HEADER). I am not familiar with what \"CONFIG_PREFIX\" means. So, give up this way.\n\n------\nIn general I\u0027m not sure why this CL is necessary. Can you quantify the performance improvement of only trying gzip once instead of twice?\n\u003e\u003e\u003e\u003e\u003e\u003e\nI think the performance improvement will be very tiny. Just intent to match the comments in func decompress_dump() -- \"then try different decompression algorithm\". Please review my reply for Tianjie Xu.",
+      "parentUuid": "7c9c76d1_4b8876f7",
       "range": {
         "startLine": 157,
         "startChar": 0,
