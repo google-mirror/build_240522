@@ -20,6 +20,14 @@ import (
 )
 
 var (
+	// RecognizedAnnotations identifies the set of annotations that have
+	// meaning for compliance policy. (Useful too for constant folding.)
+	RecognizedAnnotations = map[string]string{
+		"static":    "static",
+		"dynamic":   "dynamic",
+		"toolchain": "toolchain",
+	}
+
 	// ImpliesUnencumbered lists the condition names representing an author attempt to disclaim copyright.
 	ImpliesUnencumbered = ConditionNames{"unencumbered"}
 
