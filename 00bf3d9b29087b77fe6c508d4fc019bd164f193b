@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019129356",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1946016?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6b59ba5d_c6ab112c",
+        "filename": "tools/compliance/cmd/testdata/regressgpl1/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-12T00:40:09Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicense...licensed\n",
+      "range": {
+        "startLine": 1,
+        "startChar": 57,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "00bf3d9b29087b77fe6c508d4fc019bd164f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019129356",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1946016?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f967873a_880d83d2",
+        "filename": "tools/compliance/cmd/testdata/regressgpl1/lib/libc++.so.meta_lic",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-12T00:40:09Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD\" license\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "00bf3d9b29087b77fe6c508d4fc019bd164f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019129356",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1946016?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2bd208e0_713baf15",
+        "filename": "tools/compliance/cmd/testdata/regressgpl2/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-12T00:40:09Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicense...licensed\n",
+      "range": {
+        "startLine": 1,
+        "startChar": 55,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "00bf3d9b29087b77fe6c508d4fc019bd164f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019129356",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1946016?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5c327a16_ed42926b",
+        "filename": "tools/compliance/cmd/testdata/regressgpl2/lib/libc++.so.meta_lic",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-12T00:40:09Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD\" license\n",
+      "range": {
+        "startLine": 3,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "00bf3d9b29087b77fe6c508d4fc019bd164f193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
