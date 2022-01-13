@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b889223_02440853",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-13T00:19:54Z",
+      "side": 1,
+      "message": "this should be removed, is it.",
+      "range": {
+        "startLine": 1155,
+        "startChar": 0,
+        "endLine": 1155,
+        "endChar": 37
+      },
+      "revId": "53abcbc52529f962fa623c0f63dac2614a3992fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
