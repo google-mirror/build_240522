@@ -16,6 +16,23 @@
       "message": "I\u0027m not sure if this is needed by anything _real_ out there ( aside me ), but I was trying the updater_sample with an OTA from R and hit this issue.\nIs this fine by you?",
       "revId": "16f120fb152835428f07f6030fedcc9d6826375f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "492e4c41_1767b9a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-13T20:43:45Z",
+      "side": 1,
+      "message": "If you are using S releasetools script to generate OTA for R, then the S script should automatically generate metadata proto? The code to generate metadata proto and the code to check them are added at the same time(they are both in ota_utils.py). How can you run into an issue where package doesn\u0027t have metadata proto but your ota script tries to find it?",
+      "revId": "16f120fb152835428f07f6030fedcc9d6826375f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
