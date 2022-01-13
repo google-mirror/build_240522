@@ -1169,6 +1169,10 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         liblz4_path), "liblz4.so not found in META/ dir of target file {}".format(liblz4_path)
     logger.info("Enabling lz4diff %s", liblz4_path)
     additional_args += ["--liblz4_path", liblz4_path]
+    erofs_compression_param = OPTIONS.source_info_dict.get(
+        "erofs_default_compressor")
+    assert erofs_compression_param is not None, "'erofs_default_compressor' not found in META/misc_info.txt of source build. This is required to enable lz4diff."
+    additional_args += ["--erofs_compression_param", erofs_compression_param]
 
   if OPTIONS.disable_vabc:
     additional_args += ["--disable_vabc", "true"]
