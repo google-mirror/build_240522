@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fb825c_b31667e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2022-01-13T20:49:07Z",
+      "side": 1,
+      "message": "bootable/recovery/updater_sample/tools/gen_update_config.py\nSorry, should\u0027ve used full path, probably forgot to edit commit msg\nIt\u0027s used by SystemUpdaterSample to generate configs that should be passed to the updater app",
+      "parentUuid": "5cd99dcf_0bc10fd8",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "16f120fb152835428f07f6030fedcc9d6826375f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8186a20c_2491b618",
