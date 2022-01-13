@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449bacef_17d4f92a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-13T09:25:37Z",
+      "side": 1,
+      "message": "Hi TIanjie, Could you help owner approve this patch?",
+      "revId": "4695441ff75f68487fb7fed6722dccd2fdb410e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
