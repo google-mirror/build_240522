@@ -70,6 +70,30 @@
       },
       "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bda596_59fef0aa",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-01-14T16:02:38Z",
+      "side": 0,
+      "message": "Thanks for the archeology, Roland. Given that the default was libart with the move to ...lib.2 in ag/474320, I suppose aosp/118287 could just have left it with the default value instead.\n\n\u003e But I don\u0027t want to make a cleanup (which isn\u0027t a simple CL) a blocker for the continuous testing.\n\nDo you mean it\u0027s more complicated to remove this line completely than to set it to the empty string? If so, that could be useful to explain a little in at least the commit message.",
+      "parentUuid": "36b89caa_b9da27b7",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 69
+      },
+      "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
