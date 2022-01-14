@@ -46,6 +46,30 @@
       },
       "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063ef558_e9923cdf",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-01-14T15:54:36Z",
+      "side": 0,
+      "message": "My understanding was that Roland wanted the ability to toggle on/off libart/libartd. Ability to toggle does bring some flexibility for debugging. But I don\u0027t want to make a cleanup (which isn\u0027t a simple CL) a blocker for the continuous testing.",
+      "parentUuid": "36b89caa_b9da27b7",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 69
+      },
+      "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
