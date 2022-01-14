@@ -46,6 +46,30 @@
       },
       "revId": "9e81c4487532a2004df5e37d77d66c55ba07a154",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399f3b78_3550ddf7",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2022-01-14T15:39:28Z",
+      "side": 0,
+      "message": "Oh interesting, when I ran this locally, it showed errors, but ended up exiting cleanly.",
+      "parentUuid": "68a9b723_cb35302f",
+      "range": {
+        "startLine": 532,
+        "startChar": 8,
+        "endLine": 532,
+        "endChar": 12
+      },
+      "revId": "9e81c4487532a2004df5e37d77d66c55ba07a154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
