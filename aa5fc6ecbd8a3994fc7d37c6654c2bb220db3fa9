@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406d064e_5353962e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-01-14T18:26:04Z",
+      "side": 1,
+      "message": "Actually Nucca, looks like this is failing\n\nFAILED: \n\u003e build/make/core/artifact_path_requirements.mk:26: warning:  device/generic/car/gsi_car_arm64.mk produces files inside build/make/target/product/generic_system.mks artifact path requirement. \n\u003e Offending entries:\n\u003e system/bin/for-system/clatd\n\u003e system/etc/init/vendor-464xlat.rc\n\u003e In file included from build/make/core/main.mk:1383:\n\u003e build/make/core/artifact_path_requirements.mk:26: error: Build failed.\n\u003e 15:30:37 ckati failed with: exit status 1\n\npossibly because the car change has to be merged first.",
+      "revId": "aa5fc6ecbd8a3994fc7d37c6654c2bb220db3fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
