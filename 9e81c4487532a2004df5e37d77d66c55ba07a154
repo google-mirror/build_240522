@@ -22,6 +22,30 @@
       },
       "revId": "9e81c4487532a2004df5e37d77d66c55ba07a154",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a9b723_cb35302f",
+        "filename": "tools/releasetools/check_target_files_signatures.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-14T15:34:24Z",
+      "side": 0,
+      "message": "Up on throwing exceptions, python will automatically exit with non-zero code, and print stack traces. So the print here isn\u0027t doing much.",
+      "parentUuid": "c09d9826_9fff72da",
+      "range": {
+        "startLine": 532,
+        "startChar": 8,
+        "endLine": 532,
+        "endChar": 12
+      },
+      "revId": "9e81c4487532a2004df5e37d77d66c55ba07a154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
