@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57ab0e7_74bb133f",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-01-14T11:32:02Z",
+      "side": 0,
+      "message": "It\u0027s not clear to me what the implications are. Do we know why this was added in the first place, rather than relying on the default?\n\nAlso, why not remove it altogether?",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 69
+      },
+      "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
