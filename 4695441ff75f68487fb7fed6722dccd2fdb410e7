@@ -39,6 +39,30 @@
       },
       "revId": "4695441ff75f68487fb7fed6722dccd2fdb410e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8247fdd3_e214e4bc",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-14T11:44:28Z",
+      "side": 1,
+      "message": "Done, no wonder it looked so awkward",
+      "parentUuid": "451a27ab_053c924e",
+      "range": {
+        "startLine": 1430,
+        "startChar": 71,
+        "endLine": 1430,
+        "endChar": 76
+      },
+      "revId": "4695441ff75f68487fb7fed6722dccd2fdb410e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
