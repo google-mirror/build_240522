@@ -16,6 +16,24 @@
       "message": "Well, I didn\u0027t ask about removing the property completely, I just wondered why keeping an assignment to the empty string here in main.mk. I still don\u0027t understand that, but never mind, let\u0027s move on.",
       "revId": "50930076a2e29e1cb9f4d62e52791377943c0bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dbae755_97408a4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-01-14T16:31:33Z",
+      "side": 1,
+      "message": "Ah! I believe we still need to define it because it\u0027s a \"persist\" property. So it needs to be defined so we dedicate the storage space for persisting it.",
+      "parentUuid": "c5c4cf47_269fe869",
+      "revId": "50930076a2e29e1cb9f4d62e52791377943c0bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
