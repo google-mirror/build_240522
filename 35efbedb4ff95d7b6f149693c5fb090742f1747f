@@ -22,6 +22,30 @@
       },
       "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b89caa_b9da27b7",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2022-01-14T15:41:37Z",
+      "side": 0,
+      "message": "\u003e It\u0027s not clear to me what the implications are. Do we know why this was added in the first place, rather than relying on the default?\n\nI think this system property was essentially introduced to be able to switch the runtime of the Android platform between Dalvik and ART; my understanding is that the role of this system property is not as important today.\n\nOut of curiosity, I tracked the history of the definition of this system property; here\u0027s what I found, in reverse chronological order:\n\n* This line was moved from `build/make/core/sysprop.mk` to `build/make/core/main.mk` in aosp/1313598.\n* This line was moved from `build/make/core/Makefile` to `build/make/core/sysprop.mk` in aosp/1313596.\n* This line was moved from `build/make/core/main.mk` to `build/make/core/Makefile` in aosp/909095.\n* This line was changed (addition of the `.so` extension) in aosp/181820.\n* This line was moved from `build/make/core/product_config.mk` to `build/make/core/main.mk` and changed (in particular, changed from `$(DALVIK_VM_LIB)` to `libart`) in aosp/118287.\n* This line was changed (`persist.sys.dalvik.vm.lib.1` replaced with `persist.sys.dalvik.vm.lib.2`) in ag/474320.\n* This line was changed (`persist.sys.dalvik.vm.lib` replaced with `persist.sys.dalvik.vm.lib.1`) in ag/412751.\n* This line, which was defined in both `build/make/target/product/runtime_libart_default.mk` and `build/make/target/product/runtime_libdvm_default.mk`, was moved to `build/make/core/product_config.mk` in aosp/71990.\n* Both lines were changed (`dalvik.vm.lib` replace with `persist.sys.dalvik.vm.lib`) in ag/329211.\n* The definition of `dalvik.vm.lib` was moved from `build/make/target/product/dalvikvm.mk` (renamed as `build/make/target/product/runtime_common.mk`) to `build/make/target/product/runtime_libart.mk` (`dalvik.vm.lib\u003dlibart.so`), `build/make/target/product/runtime_libart_default.mk` (`dalvik.vm.lib\u003dlibart.so`), and `build/make/target/product/runtime_libdvm_default.mk` (`dalvik.vm.lib\u003dlibdvm.so`) in ag/326057.\n* The orignal definition of `dalvik.vm.lib` was introduced in `build/make/target/product/dalvikvm.mk` in ag/322992.\n\n\u003e Also, why not remove it altogether?\n\n+1",
+      "parentUuid": "c57ab0e7_74bb133f",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 69
+      },
+      "revId": "35efbedb4ff95d7b6f149693c5fb090742f1747f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
