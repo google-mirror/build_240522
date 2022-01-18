@@ -22,4 +22,5 @@ PRODUCT_VIRTUAL_AB_COMPRESSION := true
 PRODUCT_PACKAGES += \
     snapuserd.vendor_ramdisk \
     snapuserd \
+    snapuserd_ramdisk \
     snapuserd.recovery
