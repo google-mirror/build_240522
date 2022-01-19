@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7565a691_9c2d528c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-01-19T01:38:18Z",
+      "side": 1,
+      "message": "I use `RBC_PRODUCT_CONFIG\u003d1 get_build_var xxx` often when debugging, could we narrow this down to only use kati when the converter hasn\u0027t been built?",
+      "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
