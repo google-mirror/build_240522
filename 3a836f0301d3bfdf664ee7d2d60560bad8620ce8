@@ -34,6 +34,24 @@
       "parentUuid": "7565a691_9c2d528c",
       "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59a48d0_b17994c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-01-19T23:37:57Z",
+      "side": 1,
+      "message": "For example, here\u0027s a current issue on an internal product (codename stripped):\n\n$ diff \u003c(get_build_var PRODUCT_COPY_FILES | tr \" \" \"\\n\") \u003c(RBC_PRODUCT_CONFIG\u003d1 get_build_var PRODUCT_COPY_FILES | tr \" \" \"\\n\")\n\u003c device/google/CODENAME-kernel/5.10-arm64/Image:kernel\n---\n\u003e [\"device/google/CODENAME-kernel/5.10-arm64/Image\"]:kernel\n\nThe get_build_var allows me to compare the values of product variables with/without RBC without running a full `m nothing`, so it\u0027s faster.\n\nWhat do you mean by \"the old converter\"? I was thinking you\u0027d just fall back to kati if the converter wasn\u0027t built, and use it otherwise. That way it would be built after the first `m nothing`, and get_build_var will work with RBC afterwards.\n\nAlternatively, maybe we could make it so kati runs a $(shell) command that builds mk2rbc if necessary?",
+      "parentUuid": "5beadb63_5f6e2c2d",
+      "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
