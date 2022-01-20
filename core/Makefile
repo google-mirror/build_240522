@@ -1179,6 +1179,52 @@ INSTALLED_INIT_BOOT_IMAGE_TARGET :=
 endif # BOARD_PREBUILT_INIT_BOOT_IMAGE
 
 endif # BUILDING_INIT_BOOT_IMAGE is not true
+
+# -----------------------------------------------------------------
+#  system dlkm image
+ifeq ($(BUILDING_SYSTEM_DLKM_IMAGE),true)
+
+INSTALLED_SYSTEM_DLKM_IMAGE_TARGET := $(PRODUCT_OUT)/system_dlkm.img
+
+# TODO(b/200082547) Build an empty image until we have first GKI module available
+SYSTEM_DLKM_EMPTY_STAGING_DIR := $(PRODUCT_OUT)/system_dlkm_staging
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET): $(MKEROFS) $(AVBTOOL)
+	$(call pretty,"Target system_dlkm image: $@")
+	mkdir -p $(SYSTEM_DLKM_EMPTY_STAGING_DIR)
+	$(MKEROFS) "-zlz4hc" "$@" "$(SYSTEM_DLKM_EMPTY_STAGING_DIR)"
+	$(call assert-max-image-size,$@,$(BOARD_SYSTEM_DLKM_PARTITION_SIZE))
+	$(AVBTOOL) add_hash_footer \
+	    --partition_name system_dlkm \
+	    --partition_size $(BOARD_SYSTEM_DLKM_PARTITION_SIZE) \
+	    --image $@
+else
+$(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET): $(MKFSEROFS)
+	$(call pretty,"Target system_dlkm image: $@")
+	mkdir -p $(SYSTEM_DLKM_EMPTY_STAGING_DIR)
+	$(MKEROFS) "-zlz4hc" "$@" "$(SYSTEM_DLKM_EMPTY_STAGING_DIR)"
+	$(call assert-max-image-size,$@,$(BOARD_SYSTEM_DLKM_PARTITION_SIZE))
+endif # BOARD_AVB_ENABLE
+
+else # BUILDING_SYSTEM_DLKM_IMAGE is not true
+
+ifdef BOARD_PREBUILT_SYSTEM_DLKM_IMAGE
+
+INTERNAL_PREBUILT_SYSTEM_DLKM_IMAGE := $(BOARD_PREBUILT_SYSTEM_DLKM_IMAGE)
+INSTALLED_SYSTEM_DLKM_IMAGE_TARGET := $(PRODUCT_OUT)/system_dlkm.img
+$(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET): $(INTERNAL_PREBUILT_SYSTEM_DLKM_IMAGE)
+	$(call pretty,"Using prebuilt system_dlkm image: $@")
+	cp $(INTERNAL_PREBUILT_SYSTEM_DLKM_IMAGE) $@
+
+else # BOARD_PREBUILT_SYSTEM_DLKM_IMAGE not defined
+
+INSTALLED_SYSTEM_DLKM_IMAGE_TARGET :=
+
+endif # BOARD_PREBUILT_SYSTEM_DLKM_IMAGE
+
+endif # BUILDING_SYSTEM_DLKM_IMAGE is not true
+
 # -----------------------------------------------------------------
 # vendor boot image
 ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
