@@ -77,6 +77,8 @@ _board_strip_readonly_list += BOARD_VENDORIMAGE_PARTITION_SIZE
 _board_strip_readonly_list += BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
 _board_strip_readonly_list += BOARD_PRODUCTIMAGE_PARTITION_SIZE
 _board_strip_readonly_list += BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE
+_board_strip_readonly_list += BOARD_SYSTEM_DLKM_PARTITION_SIZE
+_board_strip_readonly_list += BOARD_SYSTEM_DLKM_FILE_SYSTEM_TYPE
 _board_strip_readonly_list += BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE
 _board_strip_readonly_list += BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE
 _board_strip_readonly_list += BOARD_ODMIMAGE_PARTITION_SIZE
@@ -125,6 +127,7 @@ _board_strip_readonly_list += BOARD_COPY_BOOT_IMAGE_TO_TARGET_FILES
 
 # Prebuilt image variables
 _board_strip_readonly_list += BOARD_PREBUILT_INIT_BOOT_IMAGE
+_board_strip_readonly_list += BOARD_PREBUILT_SYSTEM_DLKM_IMAGE
 
 # Defines the list of logical vendor ramdisk names to build or include in vendor_boot.
 _board_strip_readonly_list += BOARD_VENDOR_RAMDISK_FRAGMENTS
@@ -501,6 +504,19 @@ else ifeq ($(PRODUCT_BUILD_RECOVERY_IMAGE),true)
   BUILDING_RECOVERY_IMAGE := true
 endif
 .KATI_READONLY := BUILDING_RECOVERY_IMAGE
+
+# Are we building a system_dlkm image
+BUILDING_SYSTEM_DLKM_IMAGE :=
+ifeq ($(PRODUCT_BUILD_SYSTEM_DLKM_IMAGE),)
+  ifdef BOARD_PREBUILT_SYSTEM_DLKM_IMAGE
+    BUILDING_SYSTEM_DLKM_IMAGE :=
+  else ifdef BOARD_SYSTEM_DLKM_PARTITION_SIZE
+    BUILDING_SYSTEM_DLKM_IMAGE := true
+  endif
+else ifeq ($(PRODUCT_BUILD_SYSTEM_DLKM_IMAGE),true)
+    BUILDING_SYSTEM_DLKM_IMAGE := true
+endif
+.KATI_READONLY := BUILDING_SYSTEM_DLKM_IMAGE
 
 # Are we building a vendor boot image
 BUILDING_VENDOR_BOOT_IMAGE :=
