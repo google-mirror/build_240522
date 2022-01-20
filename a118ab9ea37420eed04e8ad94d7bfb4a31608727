@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0fa530b_e31be148",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2022-01-20T08:47:50Z",
+      "side": 1,
+      "message": "Instead of putting it here, could you put it in the jni_libs section of some JAR? For example, in the jni_libs section of services.core?\n\nIf all else fails, maybe you could put it in the target_required section of some appropriate target, such as services.core?",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 38
+      },
+      "revId": "a118ab9ea37420eed04e8ad94d7bfb4a31608727",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
