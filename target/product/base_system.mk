@@ -139,6 +139,7 @@ PRODUCT_PACKAGES += \
     libbinder_rpc_unstable \
     libc.bootstrap \
     libcamera2ndk \
+    libcom_android_net_module_util_jni \
     libcutils \
     libdl.bootstrap \
     libdl_android.bootstrap \
