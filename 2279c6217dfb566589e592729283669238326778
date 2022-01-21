@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84f3e37_c7a96978",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-21T22:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "070adf43_11cd453a",
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bcf2bd5_f7e22540",
@@ -54,6 +72,48 @@
       "writtenOn": "2022-01-21T19:31:08Z",
       "side": 1,
       "message": "This is redundant, it is already set to empty",
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ebc5ab_5cb02a64",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-21T22:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bcf2bd5_f7e22540",
+      "range": {
+        "startLine": 524,
+        "startChar": 2,
+        "endLine": 524,
+        "endChar": 4
+      },
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c854d77_b9f37f3e",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-21T22:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84756911_f6773e25",
       "revId": "2279c6217dfb566589e592729283669238326778",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
