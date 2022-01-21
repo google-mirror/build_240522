@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "070adf43_11cd453a",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-21T19:31:08Z",
+      "side": 1,
+      "message": "This is redundant, it is already set to empty",
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcf2bd5_f7e22540",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-21T19:31:08Z",
+      "side": 1,
+      "message": "extra indent",
+      "range": {
+        "startLine": 524,
+        "startChar": 2,
+        "endLine": 524,
+        "endChar": 4
+      },
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84756911_f6773e25",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-21T19:31:08Z",
+      "side": 1,
+      "message": "This is redundant, it is already set to empty",
+      "revId": "2279c6217dfb566589e592729283669238326778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
