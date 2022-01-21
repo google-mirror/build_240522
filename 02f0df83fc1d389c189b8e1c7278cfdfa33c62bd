@@ -16,6 +16,23 @@
       "message": "thanks!",
       "revId": "02f0df83fc1d389c189b8e1c7278cfdfa33c62bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf86b97a_14993cd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2022-01-21T03:53:35Z",
+      "side": 1,
+      "message": "failed 2 tests are unrelated to this CL\n",
+      "revId": "02f0df83fc1d389c189b8e1c7278cfdfa33c62bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
