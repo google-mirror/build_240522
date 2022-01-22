@@ -163,6 +163,30 @@
       },
       "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92ba667_6aee030f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-22T10:34:08Z",
+      "side": 1,
+      "message": "Thanks for the review.\n\nPlan is to have all RO as erofs but it wasn\u0027t concrete; so had this option. I\u0027ll double check internally; and remove this in the forward clean up fix if we are firm on erofs; and can always re-introduce when we have more option in the future.\n\nSorry, missed this comment earlier as it was resolved already not sure; you did it or I did it by mistake.",
+      "parentUuid": "4dd4fadd_5cf587d5",
+      "range": {
+        "startLine": 81,
+        "startChar": 30,
+        "endLine": 81,
+        "endChar": 64
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
