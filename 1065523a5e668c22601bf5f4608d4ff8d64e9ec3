@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f559f25_46f5ae23",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-22T10:14:33Z",
+      "side": 1,
+      "message": "rsync with those options has advantage of incremental update over it. I am not really sure whether \u0027-a\u0027 will do it or not - I\u0027ll test it more and if it takes care of the creating directory and other things; I\u0027ll do an incremental update.",
+      "parentUuid": "3922bfdb_4a6273e1",
+      "range": {
+        "startLine": 1192,
+        "startChar": 7,
+        "endLine": 1192,
+        "endChar": 12
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d127e753_dc3fd0d1",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-22T10:14:33Z",
+      "side": 1,
+      "message": "rsync with those options takes care of it.",
+      "parentUuid": "26b6b049_624e7ad5",
+      "range": {
+        "startLine": 1192,
+        "startChar": 40,
+        "endLine": 1192,
+        "endChar": 65
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42cfdd1e_29d9cb73",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-01-22T07:13:04Z",
       "side": 1,
       "message": "*typo MKEROFS",
+      "range": {
+        "startLine": 1200,
+        "startChar": 67,
+        "endLine": 1200,
+        "endChar": 76
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21da9170_4cf34a01",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-22T10:14:33Z",
+      "side": 1,
+      "message": "Hmm. This is a good catch. Proceeding without fixing it here as this is still not being utilized; as need this CL to go so other dependent changes start testing other stuff; and don\u0027t have to do presubmits and review on this one again. I\u0027ll send the incremental CL to this one.",
+      "parentUuid": "42cfdd1e_29d9cb73",
       "range": {
         "startLine": 1200,
         "startChar": 67,
