@@ -110,7 +110,9 @@ $(call add_json_list, MemtagHeapSyncIncludePaths,        $(MEMTAG_HEAP_SYNC_INCL
 
 $(call add_json_bool, DisableScudo,                      $(filter true,$(PRODUCT_DISABLE_SCUDO)))
 
-$(call add_json_bool, ClangTidy,                         $(filter 1 true,$(WITH_TIDY)))
+# $(call add_json_bool, ClangTidy,                         $(filter 1 true,$(WITH_TIDY)))
+# assume WITH_TIDY=1
+$(call add_json_bool, ClangTidy,                         1)
 $(call add_json_str,  TidyChecks,                        $(WITH_TIDY_CHECKS))
 
 $(call add_json_list, JavaCoveragePaths,                 $(JAVA_COVERAGE_PATHS))

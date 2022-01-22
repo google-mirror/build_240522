@@ -1508,6 +1508,7 @@ endef
 
 # PATH_TO_CLANG_TIDY is defined in build/soong
 define call-clang-tidy
+TIDY_TIMEOUT=90 \
 $(PATH_TO_CLANG_TIDY) \
   $(PRIVATE_TIDY_FLAGS) \
   -checks=$(PRIVATE_TIDY_CHECKS)

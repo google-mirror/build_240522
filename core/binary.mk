@@ -71,7 +71,9 @@ else
   # If LOCAL_TIDY is not defined, use global WITH_TIDY
   my_tidy_enabled := $(LOCAL_TIDY)
   ifeq ($(my_tidy_enabled),)
-    my_tidy_enabled := $(WITH_TIDY)
+    # my_tidy_enabled := $(WITH_TIDY)
+    # assume WITH_TIDY=1
+    my_tidy_enabled := 1
   endif
 endif
 
@@ -94,9 +96,10 @@ ifneq (,$(filter 1 true,$(my_tidy_enabled)))
     my_tidy_flags := $(call default_tidy_header_filter,$(LOCAL_PATH))
   endif
   # If clang-tidy is not enabled globally, add the -quiet flag.
-  ifeq (,$(filter 1 true,$(WITH_TIDY)))
-    my_tidy_flags += -quiet -extra-arg-before=-fno-caret-diagnostics
-  endif
+  # Assume global WITH_TIDY=1
+  #ifeq (,$(filter 1 true,$(WITH_TIDY)))
+  #  my_tidy_flags += -quiet -extra-arg-before=-fno-caret-diagnostics
+  #endif
 
   ifneq ($(my_tidy_checks),)
     # We might be using the static analyzer through clang-tidy.

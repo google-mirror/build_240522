@@ -16,6 +16,9 @@ PWD := $(shell pwd)
 DEFAULT_GOAL := droid
 $(DEFAULT_GOAL): droid_targets
 
+# HACK, to test tidy-soong_subset in every build
+droid: tidy-soong_subset
+
 .PHONY: droid_targets
 droid_targets:
 
