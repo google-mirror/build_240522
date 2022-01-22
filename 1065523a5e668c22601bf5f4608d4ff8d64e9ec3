@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26b6b049_624e7ad5",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-22T07:13:04Z",
+      "side": 1,
+      "message": "mkdir -p $(TARGET_SYSTEM_DLKM_OUT) first to ensure this exist?",
+      "range": {
+        "startLine": 1192,
+        "startChar": 40,
+        "endLine": 1192,
+        "endChar": 65
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3922bfdb_4a6273e1",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-22T07:13:04Z",
+      "side": 1,
+      "message": "how about just use \u0027-a\u0027, \u0027--archive\u0027 for simplicity.",
+      "range": {
+        "startLine": 1192,
+        "startChar": 7,
+        "endLine": 1192,
+        "endChar": 12
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cfdd1e_29d9cb73",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-01-22T07:13:04Z",
+      "side": 1,
+      "message": "*typo MKEROFS",
+      "range": {
+        "startLine": 1200,
+        "startChar": 67,
+        "endLine": 1200,
+        "endChar": 76
+      },
+      "revId": "1065523a5e668c22601bf5f4608d4ff8d64e9ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
