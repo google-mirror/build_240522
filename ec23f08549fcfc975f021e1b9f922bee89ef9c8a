@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019621102",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1917693?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "354ca138_c7bfacbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-23T23:03:27Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicense\n",
+      "range": {
+        "startLine": 11,
+        "startChar": 60,
+        "endLine": 11,
+        "endChar": 67
+      },
+      "revId": "ec23f08549fcfc975f021e1b9f922bee89ef9c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019621102",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1917693?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "943837f4_e75907a4",
+        "filename": "tools/compliance/cmd/testdata/notice/NOTICE_LICENSE",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-23T23:03:27Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nLicense\n",
+      "range": {
+        "startLine": 1,
+        "startChar": 11,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "ec23f08549fcfc975f021e1b9f922bee89ef9c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019621102",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1917693?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6aeadf22_e4ee7182",
+        "filename": "tools/compliance/cmd/testdata/restricted/RESTRICTED_LICENSE",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-23T23:03:27Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nLicense\n",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 22
+      },
+      "revId": "ec23f08549fcfc975f021e1b9f922bee89ef9c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
