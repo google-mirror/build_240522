@@ -1609,6 +1609,10 @@ bootimage: $(INSTALLED_INIT_BOOT_IMAGE_TARGET)
 .PHONY: system_dlkm_image
 system_dlkm_image: $(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET)
 
+ifeq (true,$(PRODUCT_EXPORT_SYSTEM_DLKM_IMAGE_TO_DIST))
+$(call dist-for-goals, system_dlkm_image, $(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET))
+endif
+
 ifeq (true,$(PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST))
 $(call dist-for-goals, bootimage, $(INSTALLED_BOOTIMAGE_TARGET))
 endif
@@ -1883,6 +1887,10 @@ else ifeq ($(TARGET_BUILD_UNBUNDLED),$(TARGET_BUILD_UNBUNDLED_IMAGE))
 
   ifeq ($(PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST),true)
     $(call dist-for-goals, droidcore-unbundled, $(INSTALLED_BOOTIMAGE_TARGET))
+  endif
+
+  ifeq ($(PRODUCT_EXPORT_SYSTEM_DLKM_IMAGE_TO_DIST),true)
+    $(call dist-for-goals, droidcore-unbundled, $(INSTALLED_SYSTEM_DLKM_IMAGE_TARGET))
   endif
 
   ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)

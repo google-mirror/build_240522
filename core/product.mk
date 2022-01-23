@@ -288,6 +288,9 @@ _product_single_value_vars += \
     PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE \
     PRODUCT_USES_DEFAULT_ART_CONFIG \
 
+# system_dlkm image options
+_product_single_value_vars += PRODUCT_EXPORT_SYSTEM_DLKM_IMAGE_TO_DIST
+
 _product_single_value_vars += PRODUCT_SYSTEM_SERVER_COMPILER_FILTER
 # Per-module sanitizer configs
 _product_list_vars += PRODUCT_SANITIZER_MODULE_CONFIGS
