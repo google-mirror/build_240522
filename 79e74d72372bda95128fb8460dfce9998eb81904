@@ -34,6 +34,24 @@
       "parentUuid": "ae2baad1_8507d39c",
       "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6241f838_227e7aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-01-23T21:30:13Z",
+      "side": 1,
+      "message": "4.19 will lose support in T. So, once T is merged into master, I think this change should be landed.",
+      "parentUuid": "3121cf05_6913b669",
+      "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
