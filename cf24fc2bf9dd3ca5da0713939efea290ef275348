@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595ba868_f9626657",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-24T20:24:06Z",
+      "side": 0,
+      "message": "This dependency needs to stay",
+      "range": {
+        "startLine": 1213,
+        "startChar": 39,
+        "endLine": 1213,
+        "endChar": 77
+      },
+      "revId": "cf24fc2bf9dd3ca5da0713939efea290ef275348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
