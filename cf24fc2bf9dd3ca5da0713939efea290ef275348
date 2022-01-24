@@ -22,6 +22,30 @@
       },
       "revId": "cf24fc2bf9dd3ca5da0713939efea290ef275348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6858e400_006799d5",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-24T20:35:14Z",
+      "side": 0,
+      "message": "It result in:\n\nbuild/make/core/Makefile:1214: error: real file \"out/target/product/vsoc_x86_64/system_dlkm.img\"\n depends on PHONY target \"system_dlkm.img\"\n\nThough it should be allowed in normal Makefile; but looks like not in Android build.\n\nIs there a better way to solve it?",
+      "parentUuid": "595ba868_f9626657",
+      "range": {
+        "startLine": 1213,
+        "startChar": 39,
+        "endLine": 1213,
+        "endChar": 77
+      },
+      "revId": "cf24fc2bf9dd3ca5da0713939efea290ef275348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
