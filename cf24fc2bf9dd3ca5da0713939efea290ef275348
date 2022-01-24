@@ -46,6 +46,30 @@
       },
       "revId": "cf24fc2bf9dd3ca5da0713939efea290ef275348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "071f6998_db41cafd",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-24T21:31:54Z",
+      "side": 0,
+      "message": "I see; the issue was testing it wrong by just quickly putting into root; putting it proper place as it is going to be like this: kernel/prebuilts/5.10/x86_64/prebuilt_system_dlkm.img doesn\u0027t resolve into errors; and same predicate is being used for the BOOTIMAGE and INIT_BOOT image.\n\nKeeping the dependency and resolving the comment.",
+      "parentUuid": "6858e400_006799d5",
+      "range": {
+        "startLine": 1213,
+        "startChar": 39,
+        "endLine": 1213,
+        "endChar": 77
+      },
+      "revId": "cf24fc2bf9dd3ca5da0713939efea290ef275348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
