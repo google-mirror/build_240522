@@ -52,6 +52,24 @@
       "parentUuid": "3121cf05_6913b669",
       "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5f285a_a20f185c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-01-24T23:43:23Z",
+      "side": 1,
+      "message": "Is that just for launching on T? As long as Pixel 5 is supported, we should keep this since we are verifying android-4.19-stable with the Pixel 5. I would think that we want to keep it as long as 4.19 is a supported LTS kernel in general.",
+      "parentUuid": "6241f838_227e7aaf",
+      "revId": "79e74d72372bda95128fb8460dfce9998eb81904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
