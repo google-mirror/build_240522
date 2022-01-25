@@ -118,6 +118,30 @@
       },
       "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3759b525_b7426156",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-25T19:27:26Z",
+      "side": 1,
+      "message": "Ack. Add Kelvin for exposure.",
+      "parentUuid": "02cd2ae9_4bcc1746",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
