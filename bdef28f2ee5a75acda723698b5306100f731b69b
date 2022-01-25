@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e74b0b_43a625e1",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-25T04:02:39Z",
+      "side": 1,
+      "message": "Move system_dlkm to this list? The location seems to fit the common image path order, i.e. IMAGES/ then PREBUILT_IMAGES/",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
