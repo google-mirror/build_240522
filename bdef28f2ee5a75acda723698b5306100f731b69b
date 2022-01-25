@@ -94,6 +94,30 @@
       },
       "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02cd2ae9_4bcc1746",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-25T06:08:20Z",
+      "side": 1,
+      "message": "On a detailed look - All of these partitions in the list are getting bundled into the super.img which is not where system_dlkm.img should end up.\n\nThough system_dlkm name may be confusing; but it\u0027s dlkm (dynamically loadable kernel modules) for the system (system here refers to GKI not really system.img/Android system partition).\n\nsystem_dlkm has no ABI stability with kernel image inside the boot.img; so whenever someone wants to update just the kernel and it\u0027s modules for example in development /in future when we release boot.img from Android common kernel repos; both boot.img and system.dlkm needs to be updated together where as other images can still stays the same and no update is required.\n\nIt\u0027s in the same category as boot.img and vendor_boot.img which can be generated from the kernel repository as well and platform code just package the prebuilt for the dist.\n\nReferences:\n\nThis is a detailed version of the design:  go/gki-modules-design-proposal\nThis can be a quick read: go/gki-modules-1pager",
+      "parentUuid": "a4b8dc60_a18d52bb",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
