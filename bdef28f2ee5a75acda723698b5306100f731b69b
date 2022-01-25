@@ -46,6 +46,30 @@
       },
       "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8e92b8_ca456d35",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-25T04:40:43Z",
+      "side": 1,
+      "message": "Yes.. it\u0027s actually for common partitions. see odm_dlkm, vendor_dlkm",
+      "parentUuid": "862f9357_49ba74d2",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
