@@ -70,6 +70,30 @@
       },
       "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b8dc60_a18d52bb",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-25T05:17:30Z",
+      "side": 1,
+      "message": "Both vendor_dlkm and odm_dlkm are dynamic partitions; where as system_dlkm is static partition and by design can be updated independent of the other images. It needs to be part of the images zip which none of the images built in this list seems to be part of:\n\nramjiyani@ramjiyani:~/repos/aosp$ unzip -l out/dist/aosp_cf_x86_64_phone-img-eng.ramjiyani.zip\nArchive:  out/dist/aosp_cf_x86_64_phone-img-eng.ramjiyani.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n       13  2008-01-01 00:00   android-info.txt\n 67108864  2008-01-01 00:00   boot.img\n  1048576  2008-01-01 00:00   bootloader\n  8388608  2008-01-01 00:00   init_boot.img\n 16777216  2008-01-01 00:00   system_dlkm.img\n6442450944  2008-01-01 00:00   userdata.img\n     8192  2008-01-01 00:00   vbmeta.img\n     4096  2008-01-01 00:00   vbmeta_system.img\n 67108864  2008-01-01 00:00   vendor_boot.img\n7516192768  2009-01-01 00:00   super.img\n---------                     -------\n14119088141                     10 files\n\nI think, what I have is the correct implementation for a static partition. Agree?",
+      "parentUuid": "5e8e92b8_ca456d35",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
