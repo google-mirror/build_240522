@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d226c482_f4032921",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-25T00:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc614cfd_04853f98",
+      "revId": "1f001b90e191f9ca01eb429fa3c505a78722c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6111a39d_4aad07da",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-01-24T23:56:53Z",
       "side": 1,
       "message": "These both get handled manually in build/make/core/Makefile and shouldn\u0027t be broadly applied to files in this directory.  Can they be moved somewhere more specific?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "1f001b90e191f9ca01eb429fa3c505a78722c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c6f307_afbc2257",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-25T00:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6111a39d_4aad07da",
       "range": {
         "startLine": 34,
         "startChar": 0,
