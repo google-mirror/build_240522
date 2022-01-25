@@ -22,6 +22,30 @@
       },
       "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862f9357_49ba74d2",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-25T04:15:19Z",
+      "side": 1,
+      "message": "I thought, this list is for the dynamic partitions; system_dlkm is a physical partition. Do you still think it should be added here?",
+      "parentUuid": "95e74b0b_43a625e1",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 21
+      },
+      "revId": "bdef28f2ee5a75acda723698b5306100f731b69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
