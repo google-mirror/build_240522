@@ -16,6 +16,24 @@
       "message": "Go expects all files in a single package to be in the same directory.  If you want this in a different directory it has to be a different package.",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ffdf27_c1560906",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-25T21:19:58Z",
+      "side": 1,
+      "message": "Not sure where you are getting that from. It doesn\u0027t seem to cause a problem for compliance/policy/ as long as the subdirectories don\u0027t have their own build files, but get built from the parent directory.\n\nhttps://go.dev/blog/package-names#package-paths",
+      "parentUuid": "3f874ef2_d2e06653",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
