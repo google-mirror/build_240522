@@ -1,0 +1,238 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "541ed745_067649e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nlicenses\n",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d842a431_6751753c",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (MIT) disallowed in repository platform/build:\nMIT Licensed\n",
+      "range": {
+        "startLine": 5,
+        "startChar": 37,
+        "endLine": 5,
+        "endChar": 49
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6b5da18a_f1694c02",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nLicensed under the GPL\n",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ccd858e8_521979d7",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (GPL3) disallowed in repository platform/build:\nGNU GENERAL PUBLIC LICENSE Version 3,\n",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "733dc30a_81b894e6",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (GPL) disallowed in repository platform/build:\nThis License\" refers to version 3 of the GNU General Public License.\n",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 72
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c83c0fef_bf508629",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (GPL3) disallowed in repository platform/build:\nfree software: you can redistribute it and or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3\n",
+      "range": {
+        "startLine": 652,
+        "startChar": 21,
+        "endLine": 654,
+        "endChar": 51
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2af9fb51_5f7cc8e8",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/build:\nBSD License...BSD License...Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and or other materials provided with the distribution....may be used to endorse or promote products derived from this software without specific prior written permission\n",
+      "range": {
+        "startLine": 696,
+        "startChar": 25,
+        "endLine": 718,
+        "endChar": 38
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668516",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9b52af55_2a578ce8",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 782,
+        "startChar": 34,
+        "endLine": 782,
+        "endChar": 35
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019668507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1959641?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "38b47ac6_2dc44068",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-25T00:21:16Z",
+      "side": 1,
+      "message": "Unrecognized license :\nReleased under the MIT, BSD, and GPL Licenses.\n",
+      "range": {
+        "startLine": 1069,
+        "startChar": 23,
+        "endLine": 1069,
+        "endChar": 49
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
