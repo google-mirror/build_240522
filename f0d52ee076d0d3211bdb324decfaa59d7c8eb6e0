@@ -34,6 +34,24 @@
       "parentUuid": "3f874ef2_d2e06653",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af78ddd0_6ccc6f33",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-25T22:47:38Z",
+      "side": 1,
+      "message": "That\u0027s because we don\u0027t use go\u0027s build system within Soong, we call the go compiler directly, so we give it the exact list of files that Soong thinks are part of the package.  When you run \"go test\" or use a test runner built into a go-aware IDE like intellij it will fail.  From your link, \"Build tools map package paths onto directories\".  \"go build\" or \"go test\" or intellij will map \"compliance\" to \"build/make/tools/compliance\", and will not look at files in the \"policy\" subdirectory, which causes failures:\n\n $ go test .\n # compliance [compliance.test]\n ./test_util.go:126:8: undefined: LicenseConditionSetFromNames\n ./test_util.go:140:8: undefined: LicenseConditionSetFromNames\n ./test_util.go:460:55: undefined: SourceSharePrivacyConflict\n ./test_util.go:461:19: undefined: SourceSharePrivacyConflict\n ./test_util.go:469:27: undefined: SourceSharePrivacyConflict\n ./readgraph.go:154:27: undefined: LicenseConditionSetFromNames\n ./readgraph.go:205:18: undefined: RecognizedAnnotations\n ./condition_test.go:22:18: undefined: ImpliesShared\n FAIL\tcompliance [build failed]\n FAIL\n \nImpliesShared is defined in policy/policy.go.\n\nIt would be nice if Blueprint enforced the same rules as \"go build\", but it does not.",
+      "parentUuid": "e6ffdf27_c1560906",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
