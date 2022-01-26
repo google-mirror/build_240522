@@ -52,6 +52,24 @@
       "parentUuid": "e6ffdf27_c1560906",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2d2a22_6eeaeb81",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-26T01:26:49Z",
+      "side": 1,
+      "message": "If it works in Soong, how important is the rest?\n\nThe code in policy refers to the code in compliance and vice-versa. They are part of the same abstraction boundary but the ownership is different.\n\nIf we try to put them in separate packages, cycles ensue.",
+      "parentUuid": "af78ddd0_6ccc6f33",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
