@@ -142,6 +142,24 @@
       "parentUuid": "19d40dfd_06a32533",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c5e1a3_936c416a",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-26T03:17:54Z",
+      "side": 1,
+      "message": "Done\n\nGot rid of lib/ here. Will look into policy/ at a (probably much) later date.",
+      "parentUuid": "bdc226c0_d5526127",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
