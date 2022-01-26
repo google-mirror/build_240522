@@ -106,6 +106,24 @@
       "parentUuid": "8e211f19_fdd1524a",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d40dfd_06a32533",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-26T01:45:30Z",
+      "side": 1,
+      "message": "The preexisting split between compliance and policy seems harder to deal with immediately, how about just moving this new file into compliance to avoid creating any new splits?",
+      "parentUuid": "8e211f19_fdd1524a",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
