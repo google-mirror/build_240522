@@ -88,6 +88,24 @@
       "parentUuid": "4f2d2a22_6eeaeb81",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b61c4e2_7cb06410",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-26T01:43:03Z",
+      "side": 1,
+      "message": "policy/ has been this way for 3 months and nobody seemed to notice...\n\nI don\u0027t think you can do the equivalent of a \"set noparent\" using per-file entries. Can you?",
+      "parentUuid": "8e211f19_fdd1524a",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
