@@ -70,6 +70,24 @@
       "parentUuid": "af78ddd0_6ccc6f33",
       "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e211f19_fdd1524a",
+        "filename": "tools/compliance/lib/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-26T01:39:30Z",
+      "side": 1,
+      "message": "It is important that Go-aware IDEs can parse the code, otherwise they will show syntax errors and won\u0027t be able to run or debug tests.\n\nWhat do you mean by \"ownership is different\"?  If you literally mean OWNERS files, you can use per-file entries in the OWNERS file to require specific owners reviewers for the policy files.\n\nOtherwise you may need a 3rd package for the code that is shared between policy and compliance, or sometimes there are tricks you can use where only one package has references to the other package, but initializes some global values in it to allow it to call back in without direct references.",
+      "parentUuid": "4f2d2a22_6eeaeb81",
+      "revId": "f0d52ee076d0d3211bdb324decfaa59d7c8eb6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
