@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5ac288_08351dd2",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-27T18:31:52Z",
+      "side": 1,
+      "message": "it\u0027s actually .pb",
+      "range": {
+        "startLine": 1621,
+        "startChar": 36,
+        "endLine": 1621,
+        "endChar": 38
+      },
+      "revId": "25de89c13abb6034a4811e2231822436245de4f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
