@@ -70,6 +70,30 @@
       },
       "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c5177b_5392fc89",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-01-27T18:27:56Z",
+      "side": 1,
+      "message": "One of the motivators for this is so the virtual devices can construct a disk image based on the ZIP file stored data extents without extracting it. I don\u0027t see any reason to make this filesystem specific. If a file is not compressible, it should be stored.",
+      "parentUuid": "c1e402bb_2cc2e9c6",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 58
+      },
+      "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
