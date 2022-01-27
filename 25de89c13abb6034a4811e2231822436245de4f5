@@ -22,6 +22,30 @@
       },
       "revId": "25de89c13abb6034a4811e2231822436245de4f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b458269c_3bb8abd3",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2022-01-27T18:36:32Z",
+      "side": 1,
+      "message": "Fixed it in an edit as I\u0027m not sure if Valentin\u0027s around right now.",
+      "parentUuid": "8f5ac288_08351dd2",
+      "range": {
+        "startLine": 1621,
+        "startChar": 36,
+        "endLine": 1621,
+        "endChar": 38
+      },
+      "revId": "25de89c13abb6034a4811e2231822436245de4f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
