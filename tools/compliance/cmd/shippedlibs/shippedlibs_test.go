@@ -25,7 +25,7 @@ import (
 
 func TestMain(m *testing.M) {
 	// Change into the testdata directory before running the tests.
-	if err := os.Chdir("testdata"); err != nil {
+	if err := os.Chdir("../testdata"); err != nil {
 		fmt.Printf("failed to change to testdata directory: %s\n", err)
 		os.Exit(1)
 	}
