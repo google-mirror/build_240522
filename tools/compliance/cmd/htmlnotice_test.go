@@ -39,6 +39,15 @@ var (
 	libReference   = regexp.MustCompile(`^\s*<li><a href="#[^"]{32}">(.*)</a>\s*$`)
 )
 
+func TestMain(m *testing.M) {
+	// Change into the testdata directory before running the tests.
+	if err := os.Chdir("testdata"); err != nil {
+		fmt.Printf("failed to change to testdata directory: %s\n", err)
+		os.Exit(1)
+	}
+	os.Exit(m.Run())
+}
+
 func Test(t *testing.T) {
 	tests := []struct {
 		condition   string
@@ -553,7 +562,7 @@ func Test(t *testing.T) {
 
 			rootFiles := make([]string, 0, len(tt.roots))
 			for _, r := range tt.roots {
-				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
+				rootFiles = append(rootFiles, tt.condition+"/"+r)
 			}
 
 			ctx := context{stdout, stderr, os.DirFS("."), tt.includeTOC, tt.stripPrefix, tt.title}

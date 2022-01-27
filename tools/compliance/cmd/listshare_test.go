@@ -16,9 +16,20 @@ package main
 
 import (
 	"bytes"
+	"fmt"
+	"os"
 	"strings"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	// Change into the testdata directory before running the tests.
+	if err := os.Chdir("testdata"); err != nil {
+		fmt.Printf("failed to change to testdata directory: %s\n", err)
+		os.Exit(1)
+	}
+	os.Exit(m.Run())
+}
 
 func Test(t *testing.T) {
 	type projectShare struct {
@@ -467,7 +478,7 @@ func Test(t *testing.T) {
 
 			rootFiles := make([]string, 0, len(tt.roots))
 			for _, r := range tt.roots {
-				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
+				rootFiles = append(rootFiles, tt.condition+"/"+r)
 			}
 			err := listShare(stdout, stderr, rootFiles...)
 			if err != nil {

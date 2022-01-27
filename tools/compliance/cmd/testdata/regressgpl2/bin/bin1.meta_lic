@@ -9,6 +9,6 @@ built:  "out/target/product/fictional/obj/EXECUTABLES/bin_intermediates/bin1"
 installed:  "out/target/product/fictional/system/bin/bin1"
 sources:  "out/target/product/fictional/system/lib/libc++.so"
 deps:  {
-  file:  "testdata/regressgpl2/lib/libc++.so.meta_lic"
+  file:  "regressgpl2/lib/libc++.so.meta_lic"
   annotations:  "dynamic"
 }

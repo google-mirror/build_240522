@@ -9,6 +9,6 @@ built:  "out/target/product/fictional/obj/SHARED_LIBRARIES/lib_intermediates/lib
 installed:  "out/target/product/fictional/system/lib/libapache.so"
 sources:  "out/target/product/fictional/system/lib/libc++.so"
 deps:  {
-  file:  "testdata/regressgpl2/lib/libc++.so.meta_lic"
+  file:  "regressgpl2/lib/libc++.so.meta_lic"
   annotations:  "dynamic"
 }

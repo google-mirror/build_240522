@@ -17,9 +17,19 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"strings"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	// Change into the testdata directory before running the tests.
+	if err := os.Chdir("testdata"); err != nil {
+		fmt.Printf("failed to change to testdata directory: %s\n", err)
+		os.Exit(1)
+	}
+	os.Exit(m.Run())
+}
 
 type outcome struct {
 	target           string
@@ -176,7 +186,7 @@ func Test(t *testing.T) {
 			expectedStdout: "FAIL",
 			expectedOutcomes: outcomeList{
 				&outcome{
-					target:           "testdata/proprietary/bin/bin2.meta_lic",
+					target:           "proprietary/bin/bin2.meta_lic",
 					privacyCondition: "proprietary",
 					shareCondition:   "restricted",
 				},
@@ -189,7 +199,7 @@ func Test(t *testing.T) {
 			expectedStdout: "FAIL",
 			expectedOutcomes: outcomeList{
 				&outcome{
-					target:           "testdata/proprietary/bin/bin2.meta_lic",
+					target:           "proprietary/bin/bin2.meta_lic",
 					privacyCondition: "proprietary",
 					shareCondition:   "restricted",
 				},
@@ -202,7 +212,7 @@ func Test(t *testing.T) {
 			expectedStdout: "FAIL",
 			expectedOutcomes: outcomeList{
 				&outcome{
-					target:           "testdata/proprietary/lib/liba.so.meta_lic",
+					target:           "proprietary/lib/liba.so.meta_lic",
 					privacyCondition: "proprietary",
 					shareCondition:   "restricted",
 				},
@@ -215,7 +225,7 @@ func Test(t *testing.T) {
 			expectedStdout: "FAIL",
 			expectedOutcomes: outcomeList{
 				&outcome{
-					target:           "testdata/proprietary/bin/bin2.meta_lic",
+					target:           "proprietary/bin/bin2.meta_lic",
 					privacyCondition: "proprietary",
 					shareCondition:   "restricted",
 				},
@@ -235,7 +245,7 @@ func Test(t *testing.T) {
 
 			rootFiles := make([]string, 0, len(tt.roots))
 			for _, r := range tt.roots {
-				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
+				rootFiles = append(rootFiles, tt.condition+"/"+r)
 			}
 			err := checkShare(stdout, stderr, rootFiles...)
 			if err != nil && err != failConflicts {

@@ -10,14 +10,14 @@ sources:  "out/target/product/fictional/system/lib/libc++.so"
 sources:  "out/target/product/fictional/system/lib/libapache.so"
 sources:  "out/target/product/fictional/system/lib/libgpl.so"
 deps:  {
-  file:  "testdata/regressgpl1/lib/libc++.so.meta_lic"
+  file:  "regressgpl1/lib/libc++.so.meta_lic"
   annotations:  "dynamic"
 }
 deps:  {
-  file:  "testdata/regressgpl1/lib/libapache.so.meta_lic"
+  file:  "regressgpl1/lib/libapache.so.meta_lic"
   annotations:  "dynamic"
 }
 deps:  {
-  file:  "testdata/regressgpl1/lib/libgpl.so.meta_lic"
+  file:  "regressgpl1/lib/libgpl.so.meta_lic"
   annotations:  "dynamic"
 }

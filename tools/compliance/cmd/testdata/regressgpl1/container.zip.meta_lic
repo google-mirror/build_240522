@@ -19,14 +19,14 @@ sources:  "out/target/product/fictional/system/bin/bin2"
 sources:  "out/target/product/fictional/system/bin/bin3"
 sources:  "out/target/product/fictional/system/lib/libapache.so"
 deps:  {
-  file:  "testdata/regressgpl1/bin/bin1.meta_lic"
+  file:  "regressgpl1/bin/bin1.meta_lic"
   annotations:  "static"
 }
 deps:  {
-  file:  "testdata/regressgpl1/bin/bin2.meta_lic"
+  file:  "regressgpl1/bin/bin2.meta_lic"
   annotations:  "static"
 }
 deps:  {
-  file:  "testdata/regressgpl1/bin/bin3.meta_lic"
+  file:  "regressgpl1/bin/bin3.meta_lic"
   annotations:  "static"
 }
