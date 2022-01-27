@@ -22,6 +22,30 @@
       },
       "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70041812_fdc4e861",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-01-27T00:04:17Z",
+      "side": 1,
+      "message": "Because we don\u0027t know how well these images compress before hand. We also don\u0027t know if this image is EROFS or not. Even if it\u0027s EROFS, it could be uncompressed EROFS.",
+      "parentUuid": "b8b4b67a_ca5ec1f3",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 58
+      },
+      "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
