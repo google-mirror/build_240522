@@ -46,6 +46,30 @@
       },
       "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e402bb_2cc2e9c6",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2022-01-27T18:24:36Z",
+      "side": 1,
+      "message": "Can we guard this with some flag, e.g. only do it if EROFS is enabled. I suspect the unzip takes quite a few minutes, so the step doesn\u0027t affect most other formats.",
+      "parentUuid": "70041812_fdc4e861",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 58
+      },
+      "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
