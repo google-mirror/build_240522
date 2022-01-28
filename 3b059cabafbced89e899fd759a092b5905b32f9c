@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99ee928_ba0efdee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-01-28T06:10:14Z",
+      "side": 1,
+      "message": "```\nExport runtime dependencies in module-info\n\nThis change exports the list of dependencies that are required by modules at runtime. Note that only the host case is currently handled.\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f63db3e9_fe24e762",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-01-28T06:10:14Z",
+      "side": 1,
+      "message": "Should this be `runtime_dependencies` as discussed on the other change? We could add another change to merge in shared_libs.\n\nWDYT?",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
