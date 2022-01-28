@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eda48724_667b3ffa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-28T00:57:51Z",
+      "side": 1,
+      "message": "I don\u0027t really like this change... I like being able to create a testdata/ symlink from the root of my client and then run the command-line tools against the testdata from the root of the client.",
+      "revId": "e60f42ea8cd83b186cb95732cefe19413f57909a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
