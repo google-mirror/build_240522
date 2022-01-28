@@ -16,6 +16,24 @@
       "message": "I don\u0027t really like this change... I like being able to create a testdata/ symlink from the root of my client and then run the command-line tools against the testdata from the root of the client.",
       "revId": "e60f42ea8cd83b186cb95732cefe19413f57909a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1635cccf_7651a9f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-28T01:13:28Z",
+      "side": 1,
+      "message": "OK, dropped this change, the next change will have to change to the parent directory instead of the testdata directory.",
+      "parentUuid": "eda48724_667b3ffa",
+      "revId": "e60f42ea8cd83b186cb95732cefe19413f57909a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
