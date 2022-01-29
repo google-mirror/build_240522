@@ -52,6 +52,24 @@
       "parentUuid": "5beadb63_5f6e2c2d",
       "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c76d9b_ecb5ba1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-01-29T01:57:59Z",
+      "side": 1,
+      "message": "First, I think get_build_var is a horrible hack and I don\u0027t want to aggravate it. By \"old\" I mean the following scenario: using the shortcut you described, you find the difference requiring the converter fix. You make a tentative fix and rerun the shortcut. The difference remains, and you go back to figure out why the fix doesn\u0027t work. Actually, it does, you just forgot to rebuild the converter.",
+      "parentUuid": "f59a48d0_b17994c4",
+      "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
