@@ -33,6 +33,23 @@
       "message": "+Colin for Owner Review.",
       "revId": "8caba5e14e5a8875c7e2b28c39dfee79947af763",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c468c8e2_a6e24bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2022-01-29T20:53:12Z",
+      "side": 1,
+      "message": "This change seems to have broken O6/R4 signing [ please see b/216971834 ]",
+      "revId": "8caba5e14e5a8875c7e2b28c39dfee79947af763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
