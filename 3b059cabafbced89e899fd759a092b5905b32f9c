@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb58845_eea2771c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-01-29T05:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b99ee928_ba0efdee",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f63db3e9_fe24e762",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-28T06:10:14Z",
       "side": 1,
       "message": "Should this be `runtime_dependencies` as discussed on the other change? We could add another change to merge in shared_libs.\n\nWDYT?",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ff3099_501d2aa3",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-01-29T05:20:25Z",
+      "side": 1,
+      "message": "Yes, I missed the discuss when uploading the CL, just update.\n\nThanks.",
+      "parentUuid": "f63db3e9_fe24e762",
       "range": {
         "startLine": 27,
         "startChar": 5,
