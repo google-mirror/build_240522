@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5463032_677da7a4",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-31T23:34:43Z",
+      "side": 1,
+      "message": "I don\u0027t think so, this will only be used by build systems where there is no need for stdout.",
+      "parentUuid": "ada55ac3_348da380",
+      "revId": "bb45f8c74dfa186e88a3938d8d47b8f1c3015d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56fd4786_5edead4f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-01-31T21:21:33Z",
       "side": 1,
       "message": "Do you want to support - as stdout?",
+      "revId": "bb45f8c74dfa186e88a3938d8d47b8f1c3015d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d011be_e4cc105f",
+        "filename": "tools/compliance/cmd/textnotice/textnotice.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-01-31T23:34:43Z",
+      "side": 1,
+      "message": "I don\u0027t think so, this will only be used by build systems where there is no need for stdout.",
+      "parentUuid": "56fd4786_5edead4f",
       "revId": "bb45f8c74dfa186e88a3938d8d47b8f1c3015d3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
