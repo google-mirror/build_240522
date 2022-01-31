@@ -46,6 +46,30 @@
       },
       "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4922c2b4_1686f66c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5549,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-01-31T22:52:34Z",
+      "side": 1,
+      "message": "Doesn\u0027t kleaf happening during the platform build depend on the platform build switching to Bazel? (and maybe more?) The platform build isn\u0027t actually going to be built for Bazel for a while still...\n\n\u003e convuluted means of selecting a prebuilt [1]\n\nThat\u0027s very misleading compared to how those variables are supposed to work (especially as there\u0027s equivalent variables for every partition, so it would be best if they all did the same thing...)",
+      "parentUuid": "e02d3e7a_b7e8c8e2",
+      "range": {
+        "startLine": 5549,
+        "startChar": 54,
+        "endLine": 5549,
+        "endChar": 69
+      },
+      "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
