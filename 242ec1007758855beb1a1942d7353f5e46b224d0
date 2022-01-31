@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064912bf_dc5394a1",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-01-31T19:05:05Z",
+      "side": 1,
+      "message": "nit: Add a TODO to handle device runtime dependencies.",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 114
+      },
+      "revId": "242ec1007758855beb1a1942d7353f5e46b224d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
