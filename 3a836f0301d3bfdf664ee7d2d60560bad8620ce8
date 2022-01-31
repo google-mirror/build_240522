@@ -70,6 +70,24 @@
       "parentUuid": "f59a48d0_b17994c4",
       "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e2bef4a_c7301063",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-01-31T22:09:58Z",
+      "side": 1,
+      "message": "In that case, could we just add the mk2rbc/rbcrun runMicroFactory() calls to dumpMakeVars() as well as runMakeProductConfig? That way it will be built even during setup. The mk2rbc/rbcrun builds seem very fast so it shouldn\u0027t be a big performance hit.",
+      "parentUuid": "d1c76d9b_ecb5ba1b",
+      "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
