@@ -22,6 +22,30 @@
       },
       "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02d3e7a_b7e8c8e2",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5549,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-31T22:05:35Z",
+      "side": 1,
+      "message": "It\u0027s in a bit of a messy state at the moment. It\u0027s hoped that the image will be generated as part of the build with kleaf b/199831815, but that isn\u0027t working yet. The gs101 and gs201 targets set PRODUCT_BUILD_PVMFW_IMAGE, but that really just resolve to a convoluted means of selecting a prebuilt [1].\n\nI haven\u0027t seen much movement on the kleaf front for a while so it\u0027s possible gs101 and gs201 should instead use BOARD_PREBUILT_PVMFWIMAGE to keep things clearer for the time being.\n\n[1] -- http://cs/android/build/make/core/Makefile;l\u003d3651;rcl\u003d8bb31e301d1ca094ee7abd82e068f994eb175167",
+      "parentUuid": "8e4e76db_0c0f43c9",
+      "range": {
+        "startLine": 5549,
+        "startChar": 54,
+        "endLine": 5549,
+        "endChar": 69
+      },
+      "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
