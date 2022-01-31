@@ -5546,8 +5546,9 @@ ifdef BOARD_PREBUILT_PVMFWIMAGE
 	$(hide) mkdir -p $(zip_root)/PREBUILT_IMAGES
 	$(hide) cp $(INSTALLED_PVMFWIMAGE_TARGET) $(zip_root)/PREBUILT_IMAGES/
 else ifeq ($(BUILDING_PVMFW_IMAGE),true)
-	$(hide) mkdir -p $(zip_root)/IMAGES
-	$(hide) cp $(INSTALLED_PVMFWIMAGE_TARGET) $(zip_root)/IMAGES/
+	@# TODO(ptosi): move pvmfw.img back to /IMAGES/ once its being built
+	$(hide) mkdir -p $(zip_root)/PREBUILT_IMAGES
+	$(hide) cp $(INSTALLED_PVMFWIMAGE_TARGET) $(zip_root)/PREBUILT_IMAGES/
 endif
 ifdef BOARD_PREBUILT_BOOTLOADER
 	$(hide) mkdir -p $(zip_root)/IMAGES
