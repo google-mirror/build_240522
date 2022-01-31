@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada55ac3_348da380",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-31T21:21:33Z",
+      "side": 1,
+      "message": "Do you want to support - as stdout?",
+      "revId": "bb45f8c74dfa186e88a3938d8d47b8f1c3015d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56fd4786_5edead4f",
+        "filename": "tools/compliance/cmd/textnotice/textnotice.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-31T21:21:33Z",
+      "side": 1,
+      "message": "Do you want to support - as stdout?",
+      "revId": "bb45f8c74dfa186e88a3938d8d47b8f1c3015d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
