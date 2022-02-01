@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"gzip"
 	"html"
 	"io"
 	"io/fs"
@@ -97,6 +98,9 @@ func main() {
 	ofile = os.Stdout
 	if *outputFile != "-" {
 		ofile = &bytes.Buffer{}
+	}
+	if strings.HasSuffix(*outputFile, ".gz") {
+		ofile, _ = gzip.NewWriterLevel(ofile, gzip.BestCompression)
 	}
 
 	var deps []string
