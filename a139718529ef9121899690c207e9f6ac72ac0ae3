@@ -87,6 +87,30 @@
       },
       "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e943871b_7c18bdd3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5549,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-01T14:14:19Z",
+      "side": 1,
+      "message": "I agree that this might seem confusing; as Andrew pointed out, it\u0027s because the code is currently in-between what we now have (shipping a pre-built) and what we would want to have (building the firmware image as part of the Android build).\n\nI have pushed aosp/1966609 to rename that confusing variable and updated this change to conditionally work with pvmfw only if BOARD_USES_PVMFWIMAGE, which seems appropriate in the current state.\n\nNote that the target still requests the image through PRODUCT_BUILD_PVMFW_IMAGE but having such a flag is more robust than setting BOARD_PREBUILT_PVMFWIMAGE to an AOSP path that might change, IMO.",
+      "parentUuid": "4922c2b4_1686f66c",
+      "range": {
+        "startLine": 5549,
+        "startChar": 54,
+        "endLine": 5549,
+        "endChar": 69
+      },
+      "revId": "a139718529ef9121899690c207e9f6ac72ac0ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
