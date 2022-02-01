@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0efd43f5_49949394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2022-02-01T19:48:16Z",
+      "side": 1,
+      "message": "Failed boot test for said device does not seem related and seems to be an existing failure.",
+      "revId": "37aa7e48c25b0b3a55df2f3cb1e058568d911b8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd2f001f_480f2af7",
