@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2f001f_480f2af7",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3651,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-01T16:30:45Z",
+      "side": 1,
+      "message": "Talked offline that the confusing part is that `BUILDING_PVMFW_IMAGE` doesn\u0027t do any building but instead uses a prebuilt. We should continue being explicit about use of a prebuilt until the building is properly integrated.",
+      "range": {
+        "startLine": 3650,
+        "startChar": 13,
+        "endLine": 3651,
+        "endChar": 26
+      },
+      "revId": "37aa7e48c25b0b3a55df2f3cb1e058568d911b8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
