@@ -22,6 +22,30 @@
       },
       "revId": "37aa7e48c25b0b3a55df2f3cb1e058568d911b8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4868093a_c8dc215e",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3651,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2022-02-01T18:00:21Z",
+      "side": 1,
+      "message": "is this a blocking comment, which will block TH from submitting.",
+      "parentUuid": "bd2f001f_480f2af7",
+      "range": {
+        "startLine": 3650,
+        "startChar": 13,
+        "endLine": 3651,
+        "endChar": 26
+      },
+      "revId": "37aa7e48c25b0b3a55df2f3cb1e058568d911b8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
