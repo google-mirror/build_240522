@@ -94,6 +94,30 @@
       },
       "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4ffe8ec_4fa3062c",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-02-02T20:37:10Z",
+      "side": 1,
+      "message": "For most other formats, we wouldn\u0027t call \"zip -d\" because the check in 1017. Note uncompressed sizes are recored in zip headers, so we don\u0027t need to unzip to obtain these information.",
+      "parentUuid": "d1c5177b_5392fc89",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 58
+      },
+      "revId": "a65e1abef199b5e7c9acdb40e5001afc26f31c30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
