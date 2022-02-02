@@ -16,6 +16,24 @@
       "message": "Could mention gzip here.",
       "revId": "b6e0f6488131afdbbfddb05a4b4f46b9527ea634",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c9ae812_b66fc537",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-02-02T01:04:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8d5a030_a6ccd083",
+      "revId": "b6e0f6488131afdbbfddb05a4b4f46b9527ea634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
