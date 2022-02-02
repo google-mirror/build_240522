@@ -34,6 +34,24 @@
       "parentUuid": "4134bf21_1bab64aa",
       "revId": "7e9048ac362611a86540cdab2612952f26d9d292",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fef31d8_0a8fba16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-02-02T23:26:49Z",
+      "side": 1,
+      "message": "I considered that. I prefer it this way. They share almost as much with bom and with shippedlib, and the parts that are different from those are about as different between them.",
+      "parentUuid": "11a2c783_cd7908f5",
+      "revId": "7e9048ac362611a86540cdab2612952f26d9d292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
