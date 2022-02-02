@@ -16,6 +16,24 @@
       "message": "Why don\u0027t we allow system_dlkm prebuilts any more?\n\n(I like the change to delete this variable to be consistent with other partition images, but I am just curious why they were added)",
       "revId": "afe22b9a74172a021cf97b2ba9e531087896c32c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365ca1fb_74951dd5",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-02-02T23:44:09Z",
+      "side": 0,
+      "message": "Because in earlier static partition case image was always going to come from kernel as prebuilt; build support was only for the dev. With dynamic partition it\u0027s always going to be build from kernel prebuilt artifacts. There is still a prebuilt way same as {vendor/odm}_dlkm via BOARD_PREBUILT_SYSTEM_DLKMIMAGE. Line# 780, 849, 883 in this file.",
+      "parentUuid": "20574f0d_f4447246",
+      "revId": "afe22b9a74172a021cf97b2ba9e531087896c32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
