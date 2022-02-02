@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20574f0d_f4447246",
+        "filename": "core/board_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-02-02T23:35:37Z",
+      "side": 0,
+      "message": "Why don\u0027t we allow system_dlkm prebuilts any more?\n\n(I like the change to delete this variable to be consistent with other partition images, but I am just curious why they were added)",
+      "revId": "afe22b9a74172a021cf97b2ba9e531087896c32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
