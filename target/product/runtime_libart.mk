@@ -29,6 +29,9 @@ PRODUCT_PACKAGES += \
 # Runtime (Bionic) APEX module.
 PRODUCT_PACKAGES += com.android.runtime
 
+# libart.so depends on libstatssocket.so which lives in the statsd module.
+PRODUCT_PACKAGES += com.android.os.statsd
+
 # ART APEX module.
 #
 # Select either release (com.android.art) or debug (com.android.art.debug)
