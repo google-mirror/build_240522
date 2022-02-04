@@ -307,6 +307,9 @@ ifneq ($(filter %64,$(TARGET_ARCH)),)
   TARGET_IS_64_BIT := true
 endif
 
+# Setup configuration in Soong namespace
+$(call soong_config_set,frameworks_rs_java,target_is_64_bit,$(TARGET_IS_64_BIT))
+
 ifeq (,$(filter true,$(TARGET_SUPPORTS_32_BIT_APPS) $(TARGET_SUPPORTS_64_BIT_APPS)))
   TARGET_SUPPORTS_32_BIT_APPS := true
 endif
