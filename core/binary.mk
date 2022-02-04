@@ -32,6 +32,16 @@ else
   endif
 endif
 
+# Third party code has additional no-override flags.
+is_first_party := false
+ifneq ($(filter external/%,$(LOCAL_PATH)),)
+  ifneq ($(filter hardware/%,$(LOCAL_PATH)),)
+    ifneq ($(filter vendor/%,$(LOCAL_PATH)),)
+      is_first_party := true
+    endif
+  endif
+endif
+
 my_soong_problems :=
 
 # The following LOCAL_ variables will be modified in this file.
@@ -48,6 +58,10 @@ my_conlyflags := $(LOCAL_CONLYFLAGS)
 my_cppflags := $(LOCAL_CPPFLAGS)
 my_cflags_no_override := $(GLOBAL_CLANG_CFLAGS_NO_OVERRIDE)
 my_cppflags_no_override := $(GLOBAL_CLANG_CPPFLAGS_NO_OVERRIDE)
+ifeq ($(is_first_party),false)
+    my_cflags_no_override += $(GLOBAL_CLANG_EXTERNAL_CFLAGS_NO_OVERRIDE)
+	my_cppflags_no_override += $(GLOBAL_CLANG_EXTERNAL_CFLAGS_NO_OVERRIDE)
+endif
 my_ldflags := $(LOCAL_LDFLAGS)
 my_ldlibs := $(LOCAL_LDLIBS)
 my_asflags := $(LOCAL_ASFLAGS)
