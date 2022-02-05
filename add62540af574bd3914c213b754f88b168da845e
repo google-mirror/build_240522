@@ -16,6 +16,24 @@
       "message": "If you\u0027re adding it here, please also remove it from base_system.mk.",
       "revId": "add62540af574bd3914c213b754f88b168da845e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c4c046_fa2203a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-05T18:50:49Z",
+      "side": 1,
+      "message": "I\u0027d imagine ART isn\u0027t the only thing that depends on statsd in a system image, so it seems somewhat strange to move it here.\n\nWhat\u0027s the reason for this CL? Does it fix some problem?",
+      "parentUuid": "14144bbd_6a04c41a",
+      "revId": "add62540af574bd3914c213b754f88b168da845e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
