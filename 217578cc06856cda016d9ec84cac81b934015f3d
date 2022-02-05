@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f674f724_7d7b7a1c",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-05T02:05:11Z",
+      "side": 1,
+      "message": "Make works better with \"true\" as true and \"\" as false",
+      "revId": "217578cc06856cda016d9ec84cac81b934015f3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fbf6f6d_daa5a1e3",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-05T02:05:11Z",
+      "side": 1,
+      "message": "I think this is backwards, this will only use the inner clause if LOCAL_PATH starts with external/.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 5
+      },
+      "revId": "217578cc06856cda016d9ec84cac81b934015f3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88b2ae5_22591717",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-05T02:05:11Z",
+      "side": 1,
+      "message": "filter can take multiple patterns, I think this can be:\n\n```\nifneq ($(filter external/% hardware/% vendor/%,$(LOCAL_PATH)),)\n```",
+      "revId": "217578cc06856cda016d9ec84cac81b934015f3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef2ed17_b01baec2",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-05T02:05:11Z",
+      "side": 1,
+      "message": "If you use \"\" for false this can be `ifdef is_first_party`.",
+      "revId": "217578cc06856cda016d9ec84cac81b934015f3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
