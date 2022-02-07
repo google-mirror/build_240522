@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36340083_2670137c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-07T12:25:31Z",
+      "side": 1,
+      "message": "Decided to make this CL as myself and a couple others have noticed the current lunch menu language can be clearer - particularly to highlight that the list of choices is not fully comprehensive and it is possible to specify something outside of them. I\u0027ve suggested a slight change to the prompts, but I welcome suggestions to improve it further! Thank you.",
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
