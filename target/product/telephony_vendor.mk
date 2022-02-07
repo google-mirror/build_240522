@@ -18,7 +18,5 @@
 # hardware, and install outside the system partition.
 
 # /vendor packages
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     rild \
-
-PRODUCT_COPY_FILES := \
