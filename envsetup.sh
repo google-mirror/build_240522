@@ -625,7 +625,7 @@ function print_lunch_menu()
         return
     fi
 
-    echo "Lunch menu... pick a combo:"
+    echo "Here are the common lunch combinations:"
 
     local i=1
     local choice
@@ -651,7 +651,7 @@ function lunch()
         answer=$1
     else
         print_lunch_menu
-        echo -n "Which would you like? [aosp_arm-eng] "
+        echo -n "Which would you like? Pick from common choices above (e.g. 13) or specify your own (e.g. aosp_barbet-eng): "
         read answer
     fi
 
