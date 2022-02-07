@@ -117,6 +117,30 @@
       },
       "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62853006_f2e5747b",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-02-07T19:39:12Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand. Nothing but aog/1964682 uses runtime_dependencies. So what would break? Why not the below?\n\n1) Decide on the name in this change and check it in\n2) Align aog/1964682 to use the chosen name\n\nDone.\n\nNote that it\u0027s not the name that\u0027s holding up the change but addressing Colin\u0027s comment above.",
+      "parentUuid": "2c33a7d1_546371bf",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
