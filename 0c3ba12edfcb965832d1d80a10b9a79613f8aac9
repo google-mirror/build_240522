@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9cd5c4_7eb1fb87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-02-07T18:00:50Z",
+      "side": 1,
+      "message": "This is perfectly valid for product makefiles, where you should be using `$(call inherit-product,$(SRC_TARGET_DIR)/product/telephony_vendor.mk` instead of `include $(SRC_TARGET_DIR)/product/telephony_vendor.mk`\n\nThe product inheritance logic will combine the values defined by each makefile, regardless of how they were set. When using `inherit-product`, the value of `PRODUCT_PACKAGES` will always be empty here.",
+      "revId": "0c3ba12edfcb965832d1d80a10b9a79613f8aac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
