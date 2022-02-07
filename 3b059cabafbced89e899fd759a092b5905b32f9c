@@ -93,6 +93,30 @@
       },
       "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c33a7d1_546371bf",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2022-02-07T17:17:59Z",
+      "side": 1,
+      "message": "I have a CL to replace runtime_libs with runtime_dependencies. \nhttps://android-review.googlesource.com/c/platform/tools/asuite/+/1964682\n\nIn order to be compatible with old Atest code. We can:\n1. Adding runtime_dependencies(Keep runtime_libs). This makes sure old and new Atest code will not break.\n2. Checkin aosp/1964682. \n3. A new CL to replace runtime_libs with runtime_dependencies.\n\nWDYT?",
+      "parentUuid": "f63db3e9_fe24e762",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "3b059cabafbced89e899fd759a092b5905b32f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
