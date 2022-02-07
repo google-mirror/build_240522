@@ -16,6 +16,46 @@
       "message": "Decided to make this CL as myself and a couple others have noticed the current lunch menu language can be clearer - particularly to highlight that the list of choices is not fully comprehensive and it is possible to specify something outside of them. I\u0027ve suggested a slight change to the prompts, but I welcome suggestions to improve it further! Thank you.",
       "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68a9ce4e_c3387288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-07T13:22:07Z",
+      "side": 1,
+      "message": "Looks clearer to me, thanks. +ccross also\n\nLeaving +2 to Paul/Colin",
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7130c817_9ab81177",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-07T13:22:07Z",
+      "side": 1,
+      "message": "Just FYI: I have ~never used `lunch` without an argument, you can just specify what you want directly: `lunch aosp_barbet-eng`.",
+      "range": {
+        "startLine": 654,
+        "startChar": 80,
+        "endLine": 654,
+        "endChar": 122
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
