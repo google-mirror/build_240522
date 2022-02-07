@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81fbcf0a_e15df26d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-07T07:10:32Z",
+      "side": 1,
+      "message": "Tianjie, can you help me with how to test this? I verified the change with calling from the commandline \n\n  sign_apex --payload_key external/avb/test/data/testkey_rsa4096.pem \\\n    --container_key packages/modules/Virtualization/apex/com.android.virt \\\n    -e \"android.system.virtualmachine.res.apk\u003dPRESIGNED\" \\\n    --codename_to_api_level_map Tiramisu:32 \\\n    --payload_extra_args \"--signing_helper_with_files\u003dbuild/tools/releasetools/testdata/signing_helper.sh\" \\\n    out/target/product/vsoc_x86_64/system_ext/apex/com.android.virt.apex virt_signed.apex\n\nbut there must be a better way.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 9
+      },
+      "revId": "39259ec1a47a5f710660966fdb691e399a84dd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
