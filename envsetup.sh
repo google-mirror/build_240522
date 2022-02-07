@@ -625,7 +625,7 @@ function print_lunch_menu()
         return
     fi
 
-    echo "Lunch menu... pick a combo:"
+    echo "Lunch menu .. Here are the common combinations:"
 
     local i=1
     local choice
@@ -647,12 +647,16 @@ function lunch()
         return 1
     fi
 
+    local used_lunch_menu=0
+
     if [ "$1" ]; then
         answer=$1
     else
         print_lunch_menu
-        echo -n "Which would you like? [aosp_arm-eng] "
+        echo "Which would you like? [aosp_arm-eng]"
+        echo -n "Pick from common choices above (e.g. 13) or specify your own (e.g. aosp_barbet-eng): "
         read answer
+        used_lunch_menu=1
     fi
 
     local selection=
@@ -722,6 +726,11 @@ function lunch()
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
     destroy_build_var_cache
+
+    if [ $used_lunch_menu -eq 1 ]; then
+      echo
+      echo "Hint: next time you can simply run 'lunch $selection'"
+    fi
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE
