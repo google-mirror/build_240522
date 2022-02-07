@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8db2dc96_320b921f",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-02-07T13:53:48Z",
+      "side": 0,
+      "message": "Agreed.",
+      "parentUuid": "cfd0d6c7_fe1fca17",
+      "range": {
+        "startLine": 628,
+        "startChar": 10,
+        "endLine": 628,
+        "endChar": 20
+      },
+      "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7af3010_2112b2f1",
         "filename": "envsetup.sh",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-07T13:22:07Z",
       "side": 0,
       "message": "This is the default. Maybe keep that mentioned?",
+      "range": {
+        "startLine": 654,
+        "startChar": 39,
+        "endLine": 654,
+        "endChar": 53
+      },
+      "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac06aa76_7531cbe3",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-02-07T13:53:48Z",
+      "side": 0,
+      "message": "Agreed.",
+      "parentUuid": "d7af3010_2112b2f1",
       "range": {
         "startLine": 654,
         "startChar": 39,
