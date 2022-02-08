@@ -122,6 +122,53 @@
       },
       "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1992379_2b9c7253",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-08T20:26:04Z",
+      "side": 1,
+      "message": "Maybe after choosing an option it should give a hint on how to choose that option from the command line without going through the menu.",
+      "parentUuid": "7130c817_9ab81177",
+      "range": {
+        "startLine": 654,
+        "startChar": 80,
+        "endLine": 654,
+        "endChar": 122
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f126d04_4fb6e903",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-08T20:26:04Z",
+      "side": 1,
+      "message": "This is going to become obsolete at some point, maybe use the first entry in the common lunch combinations list?  How about moving this into print_lunch_menu where you have access to $choices, and then replacing `aosp_barbet-eng` with `${choices%% *}`, which should return the first choice.",
+      "range": {
+        "startLine": 654,
+        "startChar": 106,
+        "endLine": 654,
+        "endChar": 121
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
