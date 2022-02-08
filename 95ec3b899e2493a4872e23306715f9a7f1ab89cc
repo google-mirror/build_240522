@@ -141,6 +141,30 @@
       },
       "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f714488_8830ead3",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-08T15:42:21Z",
+      "side": 0,
+      "message": "Yeah, specifying a different one (aosp_barbet-eng or whatever) seemed reasonable. The `[default]` syntax is common in shell commands though, so I was suggesting keeping both.",
+      "parentUuid": "1de66327_ecba75b8",
+      "range": {
+        "startLine": 654,
+        "startChar": 39,
+        "endLine": 654,
+        "endChar": 53
+      },
+      "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
