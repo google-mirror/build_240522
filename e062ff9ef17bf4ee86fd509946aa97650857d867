@@ -98,6 +98,30 @@
       },
       "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95fa1c4d_faddcd78",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-08T15:52:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "698b759e_af8591f5",
+      "range": {
+        "startLine": 654,
+        "startChar": 80,
+        "endLine": 654,
+        "endChar": 122
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
