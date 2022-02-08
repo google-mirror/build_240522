@@ -16,6 +16,29 @@
       "message": "Just noticed the titles in combine-... are really long, and not suitable for replacing the name of the top target, when necessary.\n\nPTAL",
       "revId": "49dd4f75ffcfe04b03796ee145c8cf3900ee3885",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd047528_e2b0bf94",
+        "filename": "tools/compliance/cmd/textnotice/textnotice.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-08T20:33:04Z",
+      "side": 1,
+      "message": "len(ctx.title) \u003e 0 is more idiomatic",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 22
+      },
+      "revId": "49dd4f75ffcfe04b03796ee145c8cf3900ee3885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
