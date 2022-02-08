@@ -34,6 +34,24 @@
       "parentUuid": "14144bbd_6a04c41a",
       "revId": "add62540af574bd3914c213b754f88b168da845e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ed43d1_d0af66da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2022-02-08T02:38:23Z",
+      "side": 1,
+      "message": "Yes, it allows me to run ART tests on the _mini targets that I am adding in r.android.com/1966051 / r.android.com/1966052 .\n\nI agree that it seems strange to remove a dependency from somewhere else because we\u0027re adding it here. It actually seems preferable to me that having an APEX in PRODUCT_PACKAGES would also imply installing its dependencies, but maybe there\u0027s some reason why we can\u0027t do that.",
+      "parentUuid": "62c4c046_fa2203a1",
+      "revId": "add62540af574bd3914c213b754f88b168da845e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
