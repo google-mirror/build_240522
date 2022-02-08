@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7273592f_73066383",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-08T14:58:51Z",
+      "side": 0,
+      "message": "Of course! 😊",
+      "parentUuid": "8db2dc96_320b921f",
+      "range": {
+        "startLine": 628,
+        "startChar": 10,
+        "endLine": 628,
+        "endChar": 20
+      },
+      "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7af3010_2112b2f1",
@@ -85,6 +109,30 @@
       "side": 0,
       "message": "Agreed.",
       "parentUuid": "d7af3010_2112b2f1",
+      "range": {
+        "startLine": 654,
+        "startChar": 39,
+        "endLine": 654,
+        "endChar": 53
+      },
+      "revId": "95ec3b899e2493a4872e23306715f9a7f1ab89cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de66327_ecba75b8",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-08T14:58:51Z",
+      "side": 0,
+      "message": "Sure! The only reason I changed it was because this is included in the Lunch menu options so I wanted to provide an example of specifying your own one. Do you think it\u0027s helpful to do so?",
+      "parentUuid": "ac06aa76_7531cbe3",
       "range": {
         "startLine": 654,
         "startChar": 39,

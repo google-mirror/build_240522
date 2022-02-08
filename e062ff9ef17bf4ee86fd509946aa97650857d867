@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3087117f_f319b98a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-08T14:58:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36340083_2670137c",
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7130c817_9ab81177",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-02-07T13:22:07Z",
       "side": 1,
       "message": "Just FYI: I have ~never used `lunch` without an argument, you can just specify what you want directly: `lunch aosp_barbet-eng`.",
+      "range": {
+        "startLine": 654,
+        "startChar": 80,
+        "endLine": 654,
+        "endChar": 122
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "698b759e_af8591f5",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-08T14:58:51Z",
+      "side": 1,
+      "message": "I do the same nowadays, but when getting started I did use `lunch` on its own (and I know others have) and then they thought they could only select from those options.",
+      "parentUuid": "7130c817_9ab81177",
       "range": {
         "startLine": 654,
         "startChar": 80,
