@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (2624cf Merge "Update default system Proguard config rules")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SQ1A.220205.002
+>>>>>>> BRANCH (49bd33 Version bump to SQ1A.220205.002 [core/build_id.mk])
