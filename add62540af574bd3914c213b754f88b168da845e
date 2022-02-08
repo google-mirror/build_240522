@@ -52,6 +52,24 @@
       "parentUuid": "62c4c046_fa2203a1",
       "revId": "add62540af574bd3914c213b754f88b168da845e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67a736b_76a1c987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-08T15:32:57Z",
+      "side": 1,
+      "message": "From the list in base_system.mk I get the impression that we generally don\u0027t build the set of these fundamental modules to install from dependencies on each other, so the natural extrapolation of that would be to have a similar flat list for your \"mini\" targets.\n\nThat said, I don\u0027t mind registering the dependencies of the ART module, even if it\u0027s a bit ad-hoc compared to the rest. However, in that case shouldn\u0027t it use LOCAL_REQUIRED_MODULES instead? Iow put a `required` list in com.android.art-defaults in art/build/apex/Android.bp.",
+      "parentUuid": "63ed43d1_d0af66da",
+      "revId": "add62540af574bd3914c213b754f88b168da845e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
