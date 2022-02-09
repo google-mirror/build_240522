@@ -39,6 +39,30 @@
       },
       "revId": "49dd4f75ffcfe04b03796ee145c8cf3900ee3885",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbdd687_2217ff28",
+        "filename": "tools/compliance/cmd/textnotice/textnotice.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-02-09T02:06:14Z",
+      "side": 1,
+      "message": "Ack\n\nWill change in separate commit.",
+      "parentUuid": "cd047528_e2b0bf94",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 22
+      },
+      "revId": "49dd4f75ffcfe04b03796ee145c8cf3900ee3885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
