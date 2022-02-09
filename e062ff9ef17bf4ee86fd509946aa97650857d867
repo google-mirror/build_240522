@@ -169,6 +169,54 @@
       },
       "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9178b7ca_1446b231",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-09T11:16:36Z",
+      "side": 1,
+      "message": "The idea behind using aosp_barbet-eng was to deliberately use one that does not appear in the lunch menu (to illustrate that you can choose one outside of the lunch menu). Do you think it\u0027s helpful to have/is there a clearer way to show that you can go outside the menu?",
+      "parentUuid": "8f126d04_4fb6e903",
+      "range": {
+        "startLine": 654,
+        "startChar": 106,
+        "endLine": 654,
+        "endChar": 121
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f92d2ba_aec9b167",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1933825
+      },
+      "writtenOn": "2022-02-09T11:16:36Z",
+      "side": 1,
+      "message": "That\u0027s a good idea, I\u0027ve added that in this CL. Thanks!",
+      "parentUuid": "f1992379_2b9c7253",
+      "range": {
+        "startLine": 654,
+        "startChar": 80,
+        "endLine": 654,
+        "endChar": 122
+      },
+      "revId": "e062ff9ef17bf4ee86fd509946aa97650857d867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
