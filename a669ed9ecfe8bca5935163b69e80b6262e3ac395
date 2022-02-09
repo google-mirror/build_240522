@@ -16,6 +16,24 @@
       "message": "Do we actually support brotli right now?",
       "revId": "a669ed9ecfe8bca5935163b69e80b6262e3ac395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d42e16a_74ff1b19",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5175,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-02-09T19:40:28Z",
+      "side": 1,
+      "message": "https://source.corp.google.com/android/system/core/fs_mgr/libsnapshot/cow_writer.cpp;bpv\u003d1;bpt\u003d1;rcl\u003dHEAD;l\u003d418\n\nCowWriter supports it. \n\nhttps://source.corp.google.com/android/system/core/fs_mgr/libsnapshot/cow_reader.cpp;l\u003d740;bpv\u003d1;bpt\u003d1;rcl\u003dHEAD\n\nCowReader also supports it.\n\nSo yes?",
+      "parentUuid": "f32ac100_bb4d35a0",
+      "revId": "a669ed9ecfe8bca5935163b69e80b6262e3ac395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
