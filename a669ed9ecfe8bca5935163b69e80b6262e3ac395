@@ -34,6 +34,29 @@
       "parentUuid": "f32ac100_bb4d35a0",
       "revId": "a669ed9ecfe8bca5935163b69e80b6262e3ac395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c8a0e3b_4d9e86db",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5176,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-02-09T20:24:41Z",
+      "side": 1,
+      "message": "This means that we\u0027ll only ever pass \"true\" into this variable, which doesn\u0027t seem to align with the comment above. It would be good to do some manual verification to make sure this works (and that the comments don\u0027t mess anything up -- I don\u0027t think they should, but make can be strange...)",
+      "range": {
+        "startLine": 5176,
+        "startChar": 9,
+        "endLine": 5176,
+        "endChar": 20
+      },
+      "revId": "a669ed9ecfe8bca5935163b69e80b6262e3ac395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
