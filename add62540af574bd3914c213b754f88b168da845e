@@ -70,6 +70,24 @@
       "parentUuid": "63ed43d1_d0af66da",
       "revId": "add62540af574bd3914c213b754f88b168da845e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bd9300_19a8d33e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2022-02-09T02:43:16Z",
+      "side": 1,
+      "message": "\u003e Iow put a  required  list in com.android.art-defaults in art/build/apex/Android.bp.\n\nYes that sounds better, sent https://android-review.googlesource.com/c/platform/art/+/1977349",
+      "parentUuid": "a67a736b_76a1c987",
+      "revId": "add62540af574bd3914c213b754f88b168da845e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
