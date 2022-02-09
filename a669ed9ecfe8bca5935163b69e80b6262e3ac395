@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f32ac100_bb4d35a0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5175,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2022-02-09T19:34:16Z",
+      "side": 1,
+      "message": "Do we actually support brotli right now?",
+      "revId": "a669ed9ecfe8bca5935163b69e80b6262e3ac395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
