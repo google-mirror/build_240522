@@ -16,6 +16,24 @@
       "message": "Suggest adding:\n```\nMerged-In: I3b5e9bb3985c2ae83381499a44b339a7b1deb05c\n```",
       "revId": "8b3bbb815a0b1bd74c6957ac664783823869bf22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bdfa7e1_7938c553",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-10T01:47:41Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! Ya, my original thought is also adding this but it pass on the auto merge, but added should be better.",
+      "parentUuid": "e6f99274_58a6cdee",
+      "revId": "8b3bbb815a0b1bd74c6957ac664783823869bf22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
