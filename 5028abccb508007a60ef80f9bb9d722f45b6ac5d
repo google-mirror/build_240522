@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f2a85a_dcd43db5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-02-10T21:23:14Z",
+      "side": 1,
+      "message": "Don\u0027t forget: This change will need a 2nd OSL +2 vote.",
+      "revId": "5028abccb508007a60ef80f9bb9d722f45b6ac5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
