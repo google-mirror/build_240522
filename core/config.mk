@@ -1241,6 +1241,7 @@ include $(BUILD_SYSTEM)/android_soong_config_vars.mk
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
+include $(BUILD_SYSTEM)/bazel_config.mk
 endif
 
 -include external/linux-kselftest/android/kselftest_test_list.mk
