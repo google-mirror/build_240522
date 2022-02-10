@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2caec3_030bb494",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-10T20:16:23Z",
+      "side": 1,
+      "message": "If you use a space separated list this would be:\n```\nPLATFORM_VERSION_KNOWN_CODENAMES\u003d\"$(subst,$(space),$(comma),$(strip $(PLATFORM_VERSION_KNOWN_CODENAMES)))\" \\\n```",
+      "revId": "7e22db7e5ea242b968ac97c2614661a1445f3c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb009e9_47fe20f6",
+        "filename": "core/version_defaults.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-10T20:16:23Z",
+      "side": 1,
+      "message": "I\u0027d suggest a space-separated list here to allow it to be used more easily in Makefiles",
+      "revId": "7e22db7e5ea242b968ac97c2614661a1445f3c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

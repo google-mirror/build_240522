@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01587b71_31e3518f",
+        "filename": "core/version_util.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-10T20:16:23Z",
+      "side": 0,
+      "message": "You could add verification here that if PLATFORM_VERSION_CODENAME !\u003d REL then PLATFORM_VERSION_KNOWN_CODENAMES contains PLATFORM_VERSION_CODENAME, which would provide much faster feedback if PLATFORM_VERSION_CODENAME was bumped without adding to PLATFORM_VERSION_KNOWN_CODENAMES than a presubmit test.",
+      "revId": "44adfa7f8c6ddaf93ebeaa7647c91b7b34830cae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
