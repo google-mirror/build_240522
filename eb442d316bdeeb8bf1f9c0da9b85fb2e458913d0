@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619ccf49_2bbed4c2",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-11T22:07:19Z",
+      "side": 1,
+      "message": "project",
+      "range": {
+        "startLine": 740,
+        "startChar": 47,
+        "endLine": 740,
+        "endChar": 53
+      },
+      "revId": "eb442d316bdeeb8bf1f9c0da9b85fb2e458913d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
