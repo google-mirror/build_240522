@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51447a8f_fe16e820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2022-02-11T13:27:44Z",
+      "side": 1,
+      "message": "PTAL, files changed, so CR+2 was dropped.",
+      "revId": "2d94586cff7adece05361e0f7aad729ef34226f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
