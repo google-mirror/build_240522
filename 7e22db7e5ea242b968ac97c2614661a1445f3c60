@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb9a062_26e90214",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2022-02-11T13:20:58Z",
+      "side": 1,
+      "message": "Did that in version_defaults.mk to keep this one more readable. Let me know if you prefer it here.",
+      "parentUuid": "ae2caec3_030bb494",
+      "revId": "7e22db7e5ea242b968ac97c2614661a1445f3c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb009e9_47fe20f6",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-10T20:16:23Z",
       "side": 1,
       "message": "I\u0027d suggest a space-separated list here to allow it to be used more easily in Makefiles",
+      "revId": "7e22db7e5ea242b968ac97c2614661a1445f3c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "959d6c58_d30b4e1a",
+        "filename": "core/version_defaults.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2022-02-11T13:20:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecb009e9_47fe20f6",
       "revId": "7e22db7e5ea242b968ac97c2614661a1445f3c60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
