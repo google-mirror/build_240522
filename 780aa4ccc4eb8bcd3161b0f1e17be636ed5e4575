@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8f2580_d0a1e168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2022-02-11T22:33:20Z",
+      "side": 1,
+      "message": "Let\u0027s wait until we finalize the design to submit the CL. We may not need to add data_bins to runtime_deps.\nSorry for the confusion.",
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36d6dc7_e6bf8507",
