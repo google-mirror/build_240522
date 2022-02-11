@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36d6dc7_e6bf8507",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-11T22:30:26Z",
+      "side": 1,
+      "message": "The LOCAL_ prefix is usually only used for values set in Android.mk files",
+      "range": {
+        "startLine": 1000,
+        "startChar": 34,
+        "endLine": 1000,
+        "endChar": 40
+      },
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
