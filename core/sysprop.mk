@@ -322,6 +322,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty)))
 
+$(eval $(call declare-1p-target,$(INSTALLED_BUILD_PROP_TARGET)))
+
 # -----------------------------------------------------------------
 # vendor/build.prop
 #
@@ -359,6 +361,8 @@ $(eval $(call build-properties,\
     $(PRODUCT_VENDOR_PROPERTY_BLACKLIST),\
     $(empty),\
     $(empty)))
+
+$(eval $(call declare-1p-target,$(INSTALLED_VENDOR_BUILD_PROP_TARGET)))
 
 # -----------------------------------------------------------------
 # product/etc/build.prop
@@ -412,6 +416,8 @@ $(eval $(call build-properties,\
     $(_footers_),\
     $(_skip_common_properties)))
 
+$(eval $(call declare-1p-target,$(INSTALLED_PRODUCT_BUILD_PROP_TARGET)))
+
 _skip_common_properties :=
 
 # ----------------------------------------------------------------
@@ -437,6 +443,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty)))
 
+$(eval $(call declare-1p-target,$(INSTALLED_ODM_BUILD_PROP_TARGET)))
+
 # ----------------------------------------------------------------
 # vendor_dlkm/etc/build.prop
 #
@@ -450,6 +458,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty),\
     $(empty)))
+
+$(eval $(call declare-1p-target,$(INSTALLED_VENDOR_DLKM_BUILD_PROP_TARGET)))
 
 # ----------------------------------------------------------------
 # odm_dlkm/etc/build.prop
@@ -465,6 +475,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty)))
 
+$(eval $(call declare-1p-target,$(INSTALLED_ODM_DLKM_BUILD_PROP_TARGET)))
+
 # ----------------------------------------------------------------
 # system_dlkm/build.prop
 #
@@ -478,6 +490,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty),\
     $(empty)))
+
+$(eval $(call declare-1p-target,$(INSTALLED_SYSTEM_DLKM_BUILD_PROP_TARGET)))
 
 # -----------------------------------------------------------------
 # system_ext/etc/build.prop
@@ -500,6 +514,8 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty)))
 
+$(eval $(call declare-1p-target,$(INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET)))
+
 # ----------------------------------------------------------------
 # ramdisk/boot/etc/build.prop
 #
@@ -514,3 +530,5 @@ $(eval $(call build-properties,\
     $(empty),\
     $(empty),\
     $(empty)))
+
+$(eval $(call declare-1p-target,$(INSTALLED_RAMDISK_BUILD_PROP_TARGET)))
