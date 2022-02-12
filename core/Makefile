@@ -4,6 +4,17 @@
 # intermedites-dir-for
 LOCAL_PATH := $(BUILD_SYSTEM)
 
+SYSTEM_NOTICE_DEPS :=
+VENDOR_NOTICE_DEPS :=
+UNMOUNTED_NOTICE_DEPS :=
+ODM_NOTICE_DEPS :=
+OEM_NOTICE_DEPS :=
+PRODUCT_NOTICE_DEPS :=
+SYSTEM_EXT_NOTICE_DEPS :=
+VENDOR_DLKM_NOTICE_DEPS :=
+ODM_DLKM_NOTICE_DEPS :=
+SYSTEM_DLKM_NOTICE_DEPS :=
+
 # -----------------------------------------------------------------
 # Define rules to copy PRODUCT_COPY_FILES defined by the product.
 # PRODUCT_COPY_FILES contains words like <source file>:<dest file>[:<owner>].
@@ -780,6 +791,8 @@ $(INSTALLED_FILES_FILE_ROOT) : $(INTERNAL_ROOT_FILES) $(FILESLIST) $(FILESLIST_U
 	$(FILESLIST) $(TARGET_ROOT_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_ROOT)))
+
 ifeq ($(HOST_OS),linux)
 $(call dist-for-goals, sdk sdk_addon, $(INSTALLED_FILES_FILE_ROOT))
 endif
@@ -812,6 +825,8 @@ $(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST) $(FILES
 	$(FILESLIST) $(TARGET_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RAMDISK)))
+
 ifeq ($(HOST_OS),linux)
 $(call dist-for-goals, sdk sdk_addon, $(INSTALLED_FILES_FILE_RAMDISK))
 endif
@@ -838,6 +853,11 @@ ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
 	$(hide) mkdir -p $(addprefix $(TARGET_RAMDISK_OUT)/first_stage_ramdisk/,$(PRIVATE_DIRS))
 endif
 	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(COMPRESSION_COMMAND) > $@
+
+$(call declare-1p-container,$(INSTALLED_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_RAMDISK_TARGET),$(INTERNAL_RAMDISK_FILE),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_RAMDISK_TARGET)
 
 .PHONY: ramdisk-nodeps
 ramdisk-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
@@ -1041,6 +1061,11 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(AVBTOOL) $(INTERNAL_BOOTIMAGE_FILE
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_board_avb_enabled,$@)
 
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_BOOTIMAGE_FILES) $(INTERNAL_GKI_CERTIFICATE_DEPS),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
+
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL) $(BOARD_AVB_BOOT_KEY_PATH) $(INTERNAL_GKI_CERTIFICATE_DEPS)
 	@echo "make $@: ignoring dependencies"
@@ -1058,6 +1083,11 @@ endef
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOT_SIGNER)
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_supports_boot_signer,$@)
+
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_BOOTIMAGE_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(BOOT_SIGNER)
@@ -1077,6 +1107,11 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(VBOOT_
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_supports_vboot,$@)
 
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_BOOTIMAGE_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
+
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG) $(VBOOT_SIGNER) $(FUTILITY)
 	@echo "make $@: ignoring dependencies"
@@ -1093,6 +1128,11 @@ endef
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
 	$(call pretty,"Target boot image: $@")
 	$(call build_boot_novboot,$@)
+
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_BOOTIMAGE_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 
 .PHONY: bootimage-nodeps
 bootimage-nodeps: $(MKBOOTIMG)
@@ -1115,6 +1155,11 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(INTERNAL_PREBUILT_BOOTIMAGE) $(AVBTOOL) $(BOARD
 	    $(call get-partition-size-argument,$(BOARD_BOOTIMAGE_PARTITION_SIZE)) \
 	    --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
 	    $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
+
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_PREBUILT_BOOTIMAGE),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 else
 $(INSTALLED_BOOTIMAGE_TARGET): $(INTERNAL_PREBUILT_BOOTIMAGE)
 	cp $(INTERNAL_PREBUILT_BOOTIMAGE) $@
@@ -1153,12 +1198,19 @@ $(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_INIT_BOOT_KEY_PATH)
 	   $(call get-partition-size-argument,$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE)) \
 	   --partition_name init_boot $(INTERNAL_AVB_INIT_BOOT_SIGNING_ARGS) \
 	   $(BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS)
+
+$(call declare-1p-container,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),$(INTERNAL_GENERIC_RAMDISK_BOOT_SIGNATURE),$(PRODUCT_OUT)/:/)
 else
 $(INSTALLED_INIT_BOOT_IMAGE_TARGET):
 	$(call pretty,"Target init_boot image: $@")
 	$(MKBOOTIMG) $(INTERNAL_INIT_BOOT_IMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_INIT_ARGS) --output $@
 	$(call assert-max-image-size,$@,$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE))
+
+$(call declare-1p-target,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),)
 endif
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_INIT_BOOT_IMAGE_TARGET)
 
 else # BUILDING_INIT_BOOT_IMAGE is not true
 
@@ -1174,10 +1226,17 @@ $(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(INTERNAL_PREBUILT_INIT_BOOT_IMAGE) $(AVBT
 	    $(call get-partition-size-argument,$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE)) \
 	    --partition_name boot $(INTERNAL_AVB_INIT_BOOT_SIGNING_ARGS) \
 	    $(BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS)
+
+$(call declare-1p-container,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),$(INTERNAL_PREBUILT_INIT_BOOT_IMAGE),$(PRODUCT_OUT)/:/)
 else
 $(INSTALLED_INIT_BOOT_IMAGE_TARGET): $(INTERNAL_PREBUILT_INIT_BOOT_IMAGE)
 	cp $(INTERNAL_PREBUILT_INIT_BOOT_IMAGE) $@
+
+$(call declare-1p-target,$(INSTALLED_INIT_BOOT_IMAGE_TARGET),)
 endif # BOARD_AVB_ENABLE
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_INIT_BOOT_IMAGE_TARGET)
 
 else # BOARD_PREBUILT_INIT_BOOT_IMAGE not defined
 INSTALLED_INIT_BOOT_IMAGE_TARGET :=
@@ -1216,6 +1275,11 @@ $(INSTALLED_VENDOR_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET)
 	@echo "Target vendor ramdisk: $@"
 	$(copy-file-to-target)
 
+$(call declare-1p-container,$(INSTALLED_VENDOR_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_RAMDISK_TARGET),$(INTERNAL_VENDOR_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_RAMDISK_TARGET)
+
 INSTALLED_FILES_FILE_VENDOR_RAMDISK := $(PRODUCT_OUT)/installed-files-vendor-ramdisk.txt
 INSTALLED_FILES_JSON_VENDOR_RAMDISK := $(INSTALLED_FILES_FILE_VENDOR_RAMDISK:.txt=.json)
 $(INSTALLED_FILES_FILE_VENDOR_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_RAMDISK)
@@ -1226,6 +1290,8 @@ $(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_FILES) $(FILES
 	rm -f $@
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_RAMDISK)))
 
 ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
   INTERNAL_VENDOR_BOOTIMAGE_ARGS += --dtb $(INSTALLED_DTBIMAGE_TARGET)
@@ -1308,6 +1374,10 @@ $(INSTALLED_VENDOR_BOOTIMAGE_TARGET):
 	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS) --vendor_boot $@
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 endif
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_BOOTIMAGE_TARGET),$(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DTB_IMAGE_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS) $(INTERNAL_VENDOR_BOOTCONDIG_TARGET),$(PRODUCT_OUT)/:/)
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_BOOTIMAGE_TARGET)
 endif # BUILDING_VENDOR_BOOT_IMAGE
 
 # -----------------------------------------------------------------
@@ -1323,6 +1393,54 @@ endif # BUILDING_VENDOR_BOOT_IMAGE
 # go into the systemimage.
 
 .PHONY: notice_files
+
+# Convert license metadata into xml notice file.
+# $(1) - Output target notice filename
+# $(2) - Product name
+# $(3) - File title
+# $(4) - License metadata file roots
+# $(5) - Prefixes to strip
+#
+define xml-notice-rule
+$(1): PRIVATE_PRODUCT := $(2)
+$(1): PRIVATE_MESSAGE := $(3)
+$(1): $(call corresponding-license-metadata,$(4)) $(SOONG_XMLNOTICE) $(BUILD_SYSTEM)/Makefile
+	$(SOONG_XMLNOTICE) -o $$@ -product=$$(PRIVATE_PRODUCT) -title=$$(PRIVATE_MESSAGE) $(foreach prefix, $(5), -strip_prefix=$(prefix)) $(call corresponding-license-metadata,$(4))
+
+notice_files: $(1)
+endef
+
+# Convert license metadata into text notice file.
+# $(1) - Output target notice filename
+# $(2) - Product name
+# $(3) - File title
+# $(4) - License metadata file roots
+# $(5) - Prefixes to strip
+#
+define text-notice-rule
+$(1): PRIVATE_PRODUCT := $(2)
+$(1): PRIVATE_MESSAGE := $(3)
+$(1): $(call corresponding-license-metadata,$(4)) $(SOONG_TEXTNOTICE) $(BUILD_SYSTEM)/Makefile
+	$(SOONG_TEXTNOTICE) -o $$@ -product=$$(PRIVATE_PRODUCT) -title=$$(PRIVATE_MESSAGE) $(foreach prefix, $(5), -strip_prefix=$(prefix)) $(call corresponding-license-metadata,$(4))
+
+notice_files: $(1)
+endef
+
+# Conversion license metadata into html notice file.
+# $(1) - Output target notice filename
+# $(2) - Product name
+# $(3) - File title
+# $(4) - License metadata file roots
+# $(5) - Prefixes to strip
+#
+define html-notice-rule
+$(1): PRIVATE_PRODUCT := $(2)
+$(1): PRIVATE_MESSAGE := $(3)
+$(1): $(call corresponding-license-metadata,$(4)) $(SOONG_HTMLNOTICE) $(BUILD_SYSTEM)/Makefile
+	$(SOONG_HTMLNOTICE) -o $$@ -product=$$(PRIVATE_PRODUCT) -title=$$(PRIVATE_MESSAGE) $(foreach prefix, $(5), -strip_prefix=$(prefix)) $(call corresponding-license-metadata,$(4))
+
+notice_files: $(1)
+endef
 
 # Create the rule to combine the files into text and html/xml forms
 # $(1) - xml_excluded_system_product_odm_vendor_dlkm_odm_dlkm|
@@ -1384,60 +1502,57 @@ exclude_target_dirs := apex
 
 # TODO(b/69865032): Make PRODUCT_NOTICE_SPLIT the default behavior.
 ifneq ($(PRODUCT_NOTICE_SPLIT),true)
-target_notice_file_html := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html
+#target_notice_file_html := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html
 target_notice_file_html_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html.gz
 installed_notice_html_or_xml_gz := $(TARGET_OUT)/etc/NOTICE.html.gz
-$(eval $(call combine-notice-files, html, \
-	        $(target_notice_file_txt), \
-	        $(target_notice_file_html), \
-	        "Notices for files contained in the filesystem images in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file), \
-	        $(exclude_target_dirs)))
-$(target_notice_file_html_gz): $(target_notice_file_html) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(installed_notice_html_or_xml_gz): $(target_notice_file_html_gz)
-	$(copy-file-to-target)
+# $(eval $(call html-notice-rule,$(target_notice_file_html_gz),"Image", \
+#            "Notices for files contained in the filesystem images in this directory:", \
+#            $(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file), \
+#            $(PRODUCT_OUT)))
+# $(eval $(call combine-notice-files, html, \
+# 	        $(target_notice_file_txt), \
+# 	        $(target_notice_file_html), \
+# 	        "Notices for files contained in the filesystem images in this directory:", \
+# 	        $(TARGET_OUT_NOTICE_FILES), \
+# 	        $(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file), \
+# 	        $(exclude_target_dirs)))
+# $(target_notice_file_html_gz): $(target_notice_file_html) | $(MINIGZIP)
+# 	$(hide) $(MINIGZIP) -9 < $< > $@
+# $(installed_notice_html_or_xml_gz): $(target_notice_file_html_gz)
+# 	$(copy-file-to-target)
 
 $(call declare-0p-target,$(target_notice_file_html_gz))
 $(call declare-0p-target,$(installed_notice_html_or_xml_gz))
 else
-target_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml
+# target_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml
 target_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml.gz
 installed_notice_html_or_xml_gz := $(TARGET_OUT)/etc/NOTICE.xml.gz
 
 target_vendor_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.txt
-target_vendor_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.xml
 target_vendor_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR.xml.gz
 installed_vendor_notice_xml_gz := $(TARGET_OUT_VENDOR)/etc/NOTICE.xml.gz
 
 target_product_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_PRODUCT.txt
-target_product_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_PRODUCT.xml
 target_product_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_PRODUCT.xml.gz
 installed_product_notice_xml_gz := $(TARGET_OUT_PRODUCT)/etc/NOTICE.xml.gz
 
 target_system_ext_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_EXT.txt
-target_system_ext_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_EXT.xml
 target_system_ext_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_EXT.xml.gz
 installed_system_ext_notice_xml_gz := $(TARGET_OUT_SYSTEM_EXT)/etc/NOTICE.xml.gz
 
 target_odm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.txt
-target_odm_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.xml
 target_odm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM.xml.gz
 installed_odm_notice_xml_gz := $(TARGET_OUT_ODM)/etc/NOTICE.xml.gz
 
 target_vendor_dlkm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR_DLKM.txt
-target_vendor_dlkm_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR_DLKM.xml
 target_vendor_dlkm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_VENDOR_DLKM.xml.gz
 installed_vendor_dlkm_notice_xml_gz := $(TARGET_OUT_VENDOR_DLKM)/etc/NOTICE.xml.gz
 
 target_odm_dlkm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM_DLKM.txt
-target_odm_dlkm_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM_DLKM.xml
 target_odm_dlkm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_ODM_DLKM.xml.gz
 installed_odm_dlkm_notice_xml_gz := $(TARGET_OUT_ODM_DLKM)/etc/NOTICE.xml.gz
 
 target_system_dlkm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_DLKM.txt
-target_system_dlkm_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_DLKM.xml
 target_system_dlkm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_DLKM.xml.gz
 installed_system_dlkm_notice_xml_gz := $(TARGET_OUT_SYSTEM_DLKM)/etc/NOTICE.xml.gz
 
@@ -1512,129 +1627,6 @@ system_xml_directories := xml_system
 system_notice_file_message := "Notices for files contained in the system filesystem image in this directory:"
 endif
 
-$(eval $(call combine-notice-files, $(system_xml_directories), \
-	        $(target_notice_file_txt), \
-	        $(target_notice_file_xml), \
-	        $(system_notice_file_message), \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_system), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_excluded_system_product_odm_vendor_dlkm_odm_dlkm, \
-	        $(target_vendor_notice_file_txt), \
-	        $(target_vendor_notice_file_xml), \
-	        "Notices for files contained in all filesystem images except system/system_ext/product/odm/vendor_dlkm/odm_dlkm in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_vendor), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_product, \
-	        $(target_product_notice_file_txt), \
-	        $(target_product_notice_file_xml), \
-	        "Notices for files contained in the product filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_product), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_system_ext, \
-	        $(target_system_ext_notice_file_txt), \
-	        $(target_system_ext_notice_file_xml), \
-	        "Notices for files contained in the system_ext filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_system_ext), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_odm, \
-	        $(target_odm_notice_file_txt), \
-	        $(target_odm_notice_file_xml), \
-	        "Notices for files contained in the odm filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_odm), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_vendor_dlkm, \
-	        $(target_vendor_dlkm_notice_file_txt), \
-	        $(target_vendor_dlkm_notice_file_xml), \
-	        "Notices for files contained in the vendor_dlkm filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_vendor_dlkm), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_odm_dlkm, \
-	        $(target_odm_dlkm_notice_file_txt), \
-	        $(target_odm_dlkm_notice_file_xml), \
-	        "Notices for files contained in the odm_dlkm filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_odm_dlkm), \
-	        $(exclude_target_dirs)))
-$(eval $(call combine-notice-files, xml_system_dlkm, \
-	        $(target_system_dlkm_notice_file_txt), \
-	        $(target_system_dlkm_notice_file_xml), \
-	        "Notices for files contained in the system_dlkm filesystem image in this directory:", \
-	        $(TARGET_OUT_NOTICE_FILES), \
-	        $(license_modules_system_dlkm), \
-	        $(exclude_target_dirs)))
-
-$(target_notice_file_xml_gz): $(target_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_vendor_notice_file_xml_gz): $(target_vendor_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_product_notice_file_xml_gz): $(target_product_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_system_ext_notice_file_xml_gz): $(target_system_ext_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_odm_notice_file_xml_gz): $(target_odm_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_vendor_dlkm_notice_file_xml_gz): $(target_vendor_dlkm_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_odm_dlkm_notice_file_xml_gz): $(target_odm_dlkm_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(target_system_dlkm_notice_file_xml_gz): $(target_system_dlkm_notice_file_xml) | $(MINIGZIP)
-	$(hide) $(MINIGZIP) -9 < $< > $@
-$(installed_notice_html_or_xml_gz): $(target_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_vendor_notice_xml_gz): $(target_vendor_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_product_notice_xml_gz): $(target_product_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_system_ext_notice_xml_gz): $(target_system_ext_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_odm_notice_xml_gz): $(target_odm_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_vendor_dlkm_notice_xml_gz): $(target_vendor_dlkm_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_odm_dlkm_notice_xml_gz): $(target_odm_dlkm_notice_file_xml_gz)
-	$(copy-file-to-target)
-$(installed_system_dlkm_notice_xml_gz): $(target_system_dlkm_notice_file_xml_gz)
-	$(copy-file-to-target)
-
-$(call declare-0p-target,$(target_notice_file_xml))
-$(call declare-0p-target,$(target_notice_file_xml_gz))
-$(call declare-0p-target,$(target_vendor_notice_file_xml))
-$(call declare-0p-target,$(target_vendor_notice_file_xml_gz))
-$(call declare-0p-target,$(target_product_notice_file_xml))
-$(call declare-0p-target,$(target_product_notice_file_xml_gz))
-$(call declare-0p-target,$(target_system_ext_notice_file_xml))
-$(call declare-0p-target,$(target_system_ext_notice_file_xml_gz))
-$(call declare-0p-target,$(target_odm_notice_file_xml))
-$(call declare-0p-target,$(target_odm_notice_file_xml_gz))
-$(call declare-0p-target,$(target_vendor_dlkm_notice_file_xml))
-$(call declare-0p-target,$(target_vendor_dlkm_notice_file_xml_gz))
-$(call declare-0p-target,$(target_odm_dlkm_notice_file_xml))
-$(call declare-0p-target,$(target_odm_dlkm_notice_file_xml_gz))
-$(call declare-0p-target,$(target_system_dlkm_notice_file_xml))
-$(call declare-0p-target,$(target_system_dlkm_notice_file_xml_gz))
-$(call declare-0p-target,$(installed_notice_html_or_xml_gz))
-$(call declare-0p-target,$(installed_vendor_notice_xml_gz))
-$(call declare-0p-target,$(installed_product_notice_xml_gz))
-$(call declare-0p-target,$(installed_system_ext_notice_xml_gz))
-$(call declare-0p-target,$(installed_odm_notice_xml_gz))
-$(call declare-0p-target,$(installed_vendor_dlkm_notice_xml_gz))
-$(call declare-0p-target,$(installed_odm_dlkm_notice_xml_gz))
-$(call declare-0p-target,$(installed_sysetm_dlkm_notice_xml_gz))
-
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_notice_html_or_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_ext_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_dlkm_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_dlkm_notice_xml_gz)
-ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_dlkm_notice_xml_gz)
 endif # PRODUCT_NOTICE_SPLIT
 
 ALL_DEFAULT_INSTALLED_MODULES += $(installed_notice_html_or_xml_gz)
@@ -1645,6 +1637,9 @@ endif  # TARGET_BUILD_APPS
 # make the target NOTICE files depend on this particular file too, which will
 # then be in the right directory for the find in combine-notice-files to work.
 $(eval $(call copy-one-file,$(BUILD_SYSTEM)/LINUX_KERNEL_COPYING,$(kernel_notice_file)))
+
+# No matter where it gets copied from, a copied linux kernel is licensed under "GPL 2.0 only"
+$(eval $(call declare-copy-files-license-metadata,,:kernel,SPDX-license-identifier-GPL-2.0-only,notice,$(BUILD_SYSTEM)/LINUX_KERNEL_COPYING,))
 
 $(eval $(call copy-one-file,$(BUILD_SYSTEM)/WINPTHREADS_COPYING,$(winpthreads_notice_file)))
 
@@ -2008,6 +2003,8 @@ INTERNAL_RECOVERYIMAGE_FILES := $(filter $(TARGET_RECOVERY_OUT)/%, \
 
 INSTALLED_FILES_FILE_RECOVERY := $(PRODUCT_OUT)/installed-files-recovery.txt
 INSTALLED_FILES_JSON_RECOVERY := $(INSTALLED_FILES_FILE_RECOVERY:.txt=.json)
+
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RECOVERY)))
 
 ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
 INSTALLED_BOOTIMAGE_TARGET := $(BUILT_BOOTIMAGE_TARGET)
@@ -2422,6 +2419,11 @@ $(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(eval $(call add-dependency,$(b),$(c
 $(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps)
 	$(call pretty,"Target boot image from recovery: $@")
 	$(call build-recoveryimage-target, $@, $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $@))))
+
+$(call declare-1p-container,$(INSTALLED_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(recoveryimage-deps),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 endif # BOARD_USES_RECOVERY_AS_BOOT
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(recoveryimage-deps)
@@ -2434,6 +2436,12 @@ $(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET) | $(ZIPTIME)
 	$(hide) find $(TARGET_RECOVERY_ROOT_OUT)/res -type f | sort | zip -0qrjX $@ -@
 	$(remove-timestamps-from-package)
 endif
+
+
+$(call declare-1p-container,$(INSTALLED_RECOVERYIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_RECOVERYIMAGE_TARGET),$(recoveryimage-deps),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_RECOVERYIMAGE_TARGET)
 
 .PHONY: recoveryimage-nodeps
 recoveryimage-nodeps:
@@ -2497,6 +2505,8 @@ $(INSTALLED_FILES_FILE_DEBUG_RAMDISK): $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(INTERNAL_DEBUG_RAMDISK_SRC_DIRS) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_DEBUG_RAMDISK)))
+
 ifdef BUILDING_DEBUG_BOOT_IMAGE
 
 # -----------------------------------------------------------------
@@ -2512,6 +2522,11 @@ $(INSTALLED_DEBUG_RAMDISK_TARGET): $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
 	$(hide) rm -f $@
 	$(hide) mkdir -p $(dir $@)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(INTERNAL_DEBUG_RAMDISK_SRC_DIRS) | $(COMPRESSION_COMMAND) > $@
+
+$(call declare-1p-container,$(INSTALLED_DEBUG_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_DEBUG_RAMDISK_TARGET),$(INSTALLED_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_DEBUG_RAMDISK_TARGET)
 
 .PHONY: ramdisk_debug-nodeps
 ramdisk_debug-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
@@ -2575,6 +2590,11 @@ $(INSTALLED_DEBUG_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_BOOTIMAGE_TARGET) 
 	$(call pretty,"Target boot debug image: $@")
 	$(call build-debug-bootimage-target, $@)
 
+$(call declare-1p-container,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(INSTALLED_BOOTIMAGE_TARGET),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_DEBUG_BOOTIMAGE_TARGET)
+
 .PHONY: bootimage_debug-nodeps
 bootimage_debug-nodeps: $(MKBOOTIMG) $(AVBTOOL)
 	echo "make $@: ignoring dependencies"
@@ -2619,6 +2639,8 @@ $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(INTERNAL_DEBUG_VENDOR_RAMDISK_SRC_DIRS) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK)))
+
 INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_boot-debug)/vendor_ramdisk-debug.cpio$(RAMDISK_EXT)
 
 $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET): $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK)
@@ -2631,6 +2653,11 @@ INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor_ramdisk-debug.img
 $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET): $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET)
 	@echo "Target debug vendor ramdisk: $@"
 	$(copy-file-to-target)
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET),$(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_DEBUG_RAMDISK_TARGET)
 
 # -----------------------------------------------------------------
 # vendor_boot-debug.img.
@@ -2661,6 +2688,11 @@ $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_T
 	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS) --vendor_boot $@
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET),$(INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_DEBUG_BOOTIMAGE_TARGET)
 
 endif # BUILDING_DEBUG_VENDOR_BOOT_IMAGE
 
@@ -2708,6 +2740,11 @@ $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET): $(MKBOOTFS) | $(COMPRESSION_COMMAND_DE
 	$(hide) mkdir -p $(dir $@)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(INTERNAL_TEST_HARNESS_RAMDISK_SRC_DIRS) | $(COMPRESSION_COMMAND) > $@
 
+$(call declare-1p-container,$(INSTALLED_TEST_HARNESS_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_TEST_HARNESS_RAMDISK_TARGET),$(INTERNAL_TEST_HARNESS_RAMDISK_SRC_DEPS),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
+
 .PHONY: ramdisk_test_harness-nodeps
 ramdisk_test_harness-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
 	@echo "make $@: ignoring dependencies"
@@ -2752,6 +2789,11 @@ $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DEBUG_BOOTI
 	$(call pretty,"Target boot test harness image: $@")
 	$(call build-boot-test-harness-target,$@)
 
+$(call declare-1p-container,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET)
+
 .PHONY: bootimage_test_harness-nodeps
 bootimage_test_harness-nodeps: $(MKBOOTIMG) $(AVBTOOL)
 	echo "make $@: ignoring dependencies"
@@ -2783,6 +2825,11 @@ $(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET): $(INTERNAL_VENDOR_TEST_HARNESS_
 	@echo "Target test harness vendor ramdisk: $@"
 	$(copy-file-to-target)
 
+$(call declare-1p-container,$(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET),$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_TEST_HARNESS_RAMDISK_TARGET)
+
 # -----------------------------------------------------------------
 # vendor_boot-test-harness.img.
 INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_boot-test-harness.img
@@ -2799,6 +2846,11 @@ $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRA
 	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS) --vendor_boot $@
 	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
 	$(if $(BOARD_AVB_VENDOR_BOOT_KEY_PATH),$(call test-key-sign-vendor-bootimage,$@))
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET),$(INTERNAL_VENDOR_TEST_HARNESS_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_TEST_HARNESS_BOOTIMAGE_TARGET)
 
 endif # BUILDING_DEBUG_VENDOR_BOOT_IMAGE
 
@@ -2957,6 +3009,8 @@ $(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(TARGET_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE)))
+
 .PHONY: installed-file-list
 installed-file-list: $(INSTALLED_FILES_FILE)
 
@@ -2989,7 +3043,7 @@ $(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
 	$(call build-systemimage-target,$@)
 
 $(call declare-1p-container,$(BUILT_SYSTEMIMAGE),system/extras)
-$(call declare-container-license-deps,$(BUILT_SYSTEMIMAGE),$(FULL_SYSTEMIMAGE_DEPS),$(PRODUCT_OUT)/:)
+$(call declare-container-license-deps,$(BUILT_SYSTEMIMAGE),$(FULL_SYSTEMIMAGE_DEPS),$(PRODUCT_OUT)/:/)
 
 INSTALLED_SYSTEMIMAGE_TARGET := $(PRODUCT_OUT)/system.img
 SYSTEMIMAGE_SOURCE_DIR := $(TARGET_OUT)
@@ -3037,8 +3091,7 @@ $(call declare-container-license-deps,$(INSTALLED_SYSTEMIMAGE_TARGET),$(BUILT_SY
 
 systemimage: $(INSTALLED_SYSTEMIMAGE_TARGET)
 
-.PHONY: systemlicense
-systemlicense: $(call license-metadata-dir)/$(INSTALLED_SYSTEMIMAGE_TARGET).meta_lic reportmissinglicenses
+SYSTEM_NOTICE_DEPS += $(INSTALLED_SYSTEMIMAGE_TARGET)
 
 .PHONY: systemimage-nodeps snod
 systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
@@ -3095,6 +3148,11 @@ INSTALLED_USERDATAIMAGE_TARGET_DEPS := \
 $(INSTALLED_USERDATAIMAGE_TARGET): $(INSTALLED_USERDATAIMAGE_TARGET_DEPS)
 	$(build-userdataimage-target)
 
+$(call declare-1p-container,$(INSTALLED_USERDATAIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_USERDATAIMAGE_TARGET),$(INSTALLED_USERDATAIMAGE_TARGET_DEPS),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_USERDATAIMAGE_TARGET)
+
 .PHONY: userdataimage-nodeps
 userdataimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
 	$(build-userdataimage-target)
@@ -3142,6 +3200,11 @@ $(BUILT_BPTJSON_TARGET): $(INSTALLED_BPTIMAGE_TARGET)
 $(INSTALLED_BPTIMAGE_TARGET): $(BPTTOOL) $(BOARD_BPT_INPUT_FILES)
 	$(build-bptimage-target)
 
+$(call declare-1p-container,$(INSTALLED_BPTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_BPTIMAGE_TARGET),$(BOARD_BPT_INPUT_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_BPTIMAGE_TARGET)
+
 .PHONY: bptimage-nodeps
 bptimage-nodeps:
 	$(build-bptimage-target)
@@ -3174,6 +3237,11 @@ endef
 INSTALLED_CACHEIMAGE_TARGET := $(BUILT_CACHEIMAGE_TARGET)
 $(INSTALLED_CACHEIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_CACHEIMAGE_FILES)
 	$(build-cacheimage-target)
+
+$(call declare-1p-container,$(INSTALLED_CACHEIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_CACHEIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_CACHEIMAGE_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_CACHEIMAGE_TARGET)
 
 .PHONY: cacheimage-nodeps
 cacheimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3212,6 +3280,8 @@ $(INSTALLED_FILES_FILE_SYSTEMOTHER) : $(INTERNAL_SYSTEMOTHERIMAGE_FILES) $(FILES
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_OTHER) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEMOTHER)))
+
 # Determines partition size for system_other.img.
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
 ifneq ($(filter system,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
@@ -3246,6 +3316,11 @@ ifneq (true,$(SANITIZE_LITE))
 # Only create system_other when not building the second stage of a SANITIZE_LITE build.
 $(INSTALLED_SYSTEMOTHERIMAGE_TARGET): $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEMOTHERIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEMOTHER)
 	$(build-systemotherimage-target)
+
+$(call declare-1p-container,$(INSTALLED_SYSTEMOTHERIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_SYSTEMOTHERIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEMOTHERIMAGE_FILES),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
 endif
 
 .PHONY: systemotherimage-nodeps
@@ -3296,6 +3371,8 @@ $(INSTALLED_FILES_FILE_VENDOR) : $(INTERNAL_VENDORIMAGE_FILES) $(FILESLIST) $(FI
 	$(FILESLIST) $(TARGET_OUT_VENDOR) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR)))
+
 vendorimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,vendor)
 BUILT_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
@@ -3319,6 +3396,11 @@ $(INSTALLED_VENDORIMAGE_TARGET): \
     $(INSTALLED_FILES_FILE_VENDOR) \
     $(RECOVERY_FROM_BOOT_PATCH)
 	$(build-vendorimage-target)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDORIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_VENDORIMAGE_TARGET),vendor)
+$(call declare-container-license-deps,$(INSTALLED_VENDORIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDORIMAGE_FILES) $(RECOVERY_FROM_BOOT_PATH),$(PRODUCT_OUT)/:/)
 
 .PHONY: vendorimage-nodeps vnod
 vendorimage-nodeps vnod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3348,6 +3430,8 @@ $(INSTALLED_FILES_FILE_PRODUCT) : $(INTERNAL_PRODUCTIMAGE_FILES) $(FILESLIST) $(
 	$(FILESLIST) $(TARGET_OUT_PRODUCT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_PRODUCT)))
+
 productimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,product)
 BUILT_PRODUCTIMAGE_TARGET := $(PRODUCT_OUT)/product.img
@@ -3370,6 +3454,11 @@ $(INSTALLED_PRODUCTIMAGE_TARGET): \
     $(INTERNAL_PRODUCTIMAGE_FILES) \
     $(INSTALLED_FILES_FILE_PRODUCT)
 	$(build-productimage-target)
+
+PRODUCT_NOTICE_DEPS += $(INSTALLED_PRODUCTIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_PRODUCTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_PRODUCTIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_PRODUCTIMAGE_FILES) $(INSTALLED_FILES_FILE_PRODUCT),$(PRODUCT_OUT)/:/)
 
 .PHONY: productimage-nodeps pnod
 productimage-nodeps pnod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3399,6 +3488,8 @@ $(INSTALLED_FILES_FILE_SYSTEM_EXT) : $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(FILESLI
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_EXT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_EXT)))
+
 system_extimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,system_ext)
 BUILT_SYSTEM_EXTIMAGE_TARGET := $(PRODUCT_OUT)/system_ext.img
@@ -3423,6 +3514,11 @@ $(INSTALLED_SYSTEM_EXTIMAGE_TARGET): \
     $(INTERNAL_SYSTEM_EXTIMAGE_FILES) \
     $(INSTALLED_FILES_FILE_SYSTEM_EXT)
 	$(build-system_extimage-target)
+
+SYSTEM_EXT_NOTICE_DEPS += $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEM_EXT),$(PRODUCT_OUT)/:/)
 
 .PHONY: systemextimage-nodeps senod
 systemextimage-nodeps senod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3470,6 +3566,8 @@ $(INSTALLED_FILES_FILE_ODM) : $(INTERNAL_ODMIMAGE_FILES) $(FILESLIST) $(FILESLIS
 	$(FILESLIST) $(TARGET_OUT_ODM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM)))
+
 odmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,odm)
 BUILT_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
@@ -3493,6 +3591,11 @@ $(INSTALLED_ODMIMAGE_TARGET): \
     $(INTERNAL_ODMIMAGE_FILES) \
     $(INSTALLED_FILES_FILE_ODM)
 	$(build-odmimage-target)
+
+ODM_NOTICE_DEPS += $(INSTALLED_ODMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_ODMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_ODMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM),$(PRODUCT_OUT)/:/)
 
 .PHONY: odmimage-nodeps onod
 odmimage-nodeps onod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3522,6 +3625,8 @@ $(INSTALLED_FILES_FILE_VENDOR_DLKM) : $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(FILES
 	$(FILESLIST) $(TARGET_OUT_VENDOR_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_DLKM)))
+
 vendor_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,vendor_dlkm)
 BUILT_VENDOR_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/vendor_dlkm.img
@@ -3545,6 +3650,11 @@ $(INSTALLED_VENDOR_DLKMIMAGE_TARGET): \
     $(INTERNAL_VENDOR_DLKMIMAGE_FILES) \
     $(INSTALLED_FILES_FILE_VENDOR_DLKM)
 	$(build-vendor_dlkmimage-target)
+
+VENDOR_DLKM_NOTICE_DEPS += $(INSTALLED_VENDOR_DLKMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_VENDOR_DLKM),$(PRODUCT_OUT)/:/)
 
 .PHONY: vendor_dlkmimage-nodeps vdnod
 vendor_dlkmimage-nodeps vdnod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3574,6 +3684,8 @@ $(INSTALLED_FILES_FILE_ODM_DLKM) : $(INTERNAL_ODM_DLKMIMAGE_FILES) $(FILESLIST) 
 	$(FILESLIST) $(TARGET_OUT_ODM_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM_DLKM)))
+
 odm_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,odm_dlkm)
 BUILT_ODM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/odm_dlkm.img
@@ -3597,6 +3709,11 @@ $(INSTALLED_ODM_DLKMIMAGE_TARGET): \
     $(INTERNAL_ODM_DLKMIMAGE_FILES) \
     $(INSTALLED_FILES_FILE_ODM_DLKM)
 	$(build-odm_dlkmimage-target)
+
+ODM_DLKM_NOTICE_DEPS += $(INSTALLED_ODM_DLKMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_ODM_DLKMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_ODM_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODM_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM_DLKM),$(PRODUCT_OUT)/:/)
 
 .PHONY: odm_dlkmimage-nodeps odnod
 odm_dlkmimage-nodeps odnod: | $(INTERNAL_USERIMAGES_DEPS)
@@ -3628,6 +3745,8 @@ $(INSTALLED_FILES_FILE_SYSTEM_DLKM): $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) $(FILESL
 	rm -f $@
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_DLKM)))
 
 system_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,system_dlkm)
@@ -3677,6 +3796,11 @@ $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE) $(AVBTOOL) $(BOARD_AV
 	    $(call get-partition-size-argument,$(BOARD_DTBOIMG_PARTITION_SIZE)) \
 	    --partition_name dtbo $(INTERNAL_AVB_DTBO_SIGNING_ARGS) \
 	    $(BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS)
+
+$(call declare-1p-container,$(INSTALLED_DTBOIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_DTBOIMAGE_TARGET),$(BOARD_PREBUILT_DTBOIMAGE),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_DTBOIMAGE_TARGET)
 else
 $(INSTALLED_DTBOIMAGE_TARGET): $(BOARD_PREBUILT_DTBOIMAGE)
 	cp $(BOARD_PREBUILT_DTBOIMAGE) $@
@@ -3706,6 +3830,11 @@ $(INSTALLED_PVMFWIMAGE_TARGET): $(PREBUILT_PVMFWIMAGE_TARGET) $(AVBTOOL) $(BOARD
 	    $(call get-partition-size-argument,$(BOARD_PVMFWIMAGE_PARTITION_SIZE)) \
 	    --partition_name pvmfw $(INTERNAL_AVB_PVMFW_SIGNING_ARGS) \
 	    $(BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS)
+
+$(call declare-1p-container,$(INSTALLED_PVMFWIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_PVMFWIMAGE_TARGET),$(PREBUILT_PVMFWIMAGE_TARGET),$(PRODUCT_OUT)/:/)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_PVMFWIMAGE_TARGET)
 else
 $(eval $(call copy-one-file,$(PREBUILT_PVMFWIMAGE_TARGET),$(INSTALLED_PVMFWIMAGE_TARGET)))
 endif
@@ -3792,6 +3921,8 @@ $(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET): $(AVBTOOL) $(BOARD_AVB_SYSTEM_O
 	@rm -f $@
 	@mkdir -p $(dir $@)
 	$(AVBTOOL) extract_public_key --key $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH) --output $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET),))
 
 ifndef BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX
 BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
@@ -4206,6 +4337,10 @@ $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET): \
 	    $(call images-for-partitions,$(BOARD_AVB_VBMETA_SYSTEM)) \
 	    $(BOARD_AVB_VBMETA_SYSTEM_KEY_PATH)
 	$(call build-chained-vbmeta-image,vbmeta_system)
+
+$(call declare-1p-container,$(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET),)
+
+SYSTEM_NOTICE_DEPS += $(INSTALLED_VBMETA_SYSTEMIMAGE_TARGET)
 endif
 endif # BUILDING_SYSTEM_IMAGE
 
@@ -4216,6 +4351,10 @@ $(INSTALLED_VBMETA_VENDORIMAGE_TARGET): \
 	    $(call images-for-partitions,$(BOARD_AVB_VBMETA_VENDOR)) \
 	    $(BOARD_AVB_VBMETA_VENDOR_KEY_PATH)
 	$(call build-chained-vbmeta-image,vbmeta_vendor)
+
+$(call declare-1p-container,$(INSTALLED_VBMETA_VENDORIMAGE_TARGET),)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_VBMETA_VENDORIMAGE_TARGET)
 endif
 
 define build-vbmetaimage-target
@@ -4258,6 +4397,10 @@ $(INSTALLED_VBMETAIMAGE_TARGET): \
 	    $(BOARD_AVB_VBMETA_VENDOR_KEY_PATH) \
 	    $(BOARD_AVB_KEY_PATH)
 	$(build-vbmetaimage-target)
+
+$(call declare-1p-container,$(INSTALLED_VBMETAIMAGE_TARGET),)
+
+UNMOUNTED_NOTICE_DEPS += $(INSTALLED_VBMETAIMAGE_TARGET)
 
 .PHONY: vbmetaimage-nodeps
 vbmetaimage-nodeps: PRIVATE_AVB_VBMETA_SIGNING_ARGS := \
@@ -5008,6 +5151,8 @@ endif
 ifeq ($(TARGET_FLATTEN_APEX),false)
 	$(hide) echo "target_flatten_apex=false" >> $@
 endif
+
+$(call declare-0p-target,$(INSTALLED_MISC_INFO_TARGET))
 
 .PHONY: misc_info
 misc_info: $(INSTALLED_MISC_INFO_TARGET)
@@ -6147,6 +6292,8 @@ $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE) $(BUILD_SUPER_IMAGE)
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
+$(call declare-0p-target,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
+
 endif # BUILDING_SUPER_EMPTY_IMAGE
 
 
@@ -6481,6 +6628,183 @@ include $(BUILD_SYSTEM)/product-graph.mk
 ifneq ($(sdk_repo_goal),)
 include $(TOPDIR)development/build/tools/sdk_repo.mk
 endif
+
+
+# -----------------------------------------------------------------
+# OS Licensing
+
+.PHONY: systemlicense
+systemlicense: $(call corresponding-license-metadata, $(SYSTEM_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(SYSTEM_NOTICE_DEPS))
+
+SYSTEM_NOTICE_DEPS += $(UNMOUNTED_NOTICE_DEPS)
+
+ifneq ($(PRODUCT_NOTICE_SPLIT),true)
+$(eval $(call html-notice-rule,$(target_notice_file_html_gz),"System image",$(system_notice_file_message),$(SYSTEM_NOTICE_DEPS),$(SYSTEM_NOTICE_DEPS)))
+
+$(installed_notice_html_or_xml_gz): $(target_notice_file_html_gz)
+	$(copy-file-to-target)
+else
+$(eval $(call xml-notice-rule,$(target_notice_file_xml_gz),"System image",$(system_notice_file_message),$(SYSTEM_NOTICE_DEPS),$(SYSTEM_NOTICE_DEPS)))
+
+$(eval $(call text-notice-rule,$(target_notice_file_txt),"System image",$(system_notice_file_message),$(SYSTEM_NOTICE_DEPS),$(SYSTEM_NOTICE_DEPS)))
+
+$(installed_notice_html_or_xml_gz): $(target_notice_file_xml_gz)
+	$(copy-file-to-target)
+endif
+
+$(call declare-0p-target,$(target_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_notice_html_or_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_notice_html_or_xml_gz)
+endif
+
+.PHONY: vendorlicense
+vendorlicense: $(call corresponding-license-metadata, $(VENDOR_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(VENDOR_NOTICE_DEPS))
+
+VENDOR_NOTICE_DEPS += $(UNMOUNTED_NOTICE_DEPS)
+
+$(eval $(call text-notice-rule,$(target_vendor_notice_file_txt),"Vendor image", \
+         "Notices for files contained in all filesystem images except system/system_ext/product/odm/vendor_dlkm/odm_dlkm in this directory:", \
+         $(VENDOR_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_vendor_notice_file_xml_gz),"Vendor image", \
+         "Notices for files contained in all filesystem images except system/system_ext/product/odm/vendor_dlkm/odm_dlkm in this directory:", \
+         $(VENDOR_NOTICE_DEPS)))
+
+$(installed_vendor_notice_xml_gz): $(target_vendor_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_vendor_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_vendor_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
+endif
+
+.PHONY: odmlicense
+odmlicense: $(call corresponding-license-metadata, $(ODM_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(ODM_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_odm_notice_file_txt),"ODM filesystem image", \
+         "Notices for files contained in the odm filesystem image in this directory:", \
+         $(ODM_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_odm_notice_file_xml_gz),"ODM filesystem image", \
+         "Notices for files contained in the odm filesystem image in this directory:", \
+         $(ODM_NOTICE_DEPS)))
+
+$(installed_odm_notice_xml_gz): $(target_odm_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_odm_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_odm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_notice_xml_gz)
+endif
+
+.PHONY: oemlicense
+oemlicense: $(call corresponding-license-metadata, $(OEM_NOTICE_DEPS)) reportmissinglicenses
+
+.PHONY: productlicense
+productlicense: $(call corresponding-license-metadata, $(PRODUCT_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(PRODUCT_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_product_notice_file_txt),"Product image", \
+         "Notices for files contained in the product filesystem image in this directory:", \
+         $(PRODUCT_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_product_notice_file_xml_gz),"Product image", \
+         "Notices for files contained in the product filesystem image in this directory:", \
+         $(PRODUCT_NOTICE_DEPS)))
+
+$(installed_product_notice_xml_gz): $(target_product_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_product_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_product_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_notice_xml_gz)
+endif
+
+.PHONY: systemextlicense
+systemextlicense: $(call corresponding-license-metadata, $(SYSTEM_EXT_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(SYSTEM_EXT_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_system_ext_notice_file_txt),"System_ext image", \
+         "Notices for files contained in the system_ext filesystem image in this directory:", \
+         $(SYSTEM_EXT_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_system_ext_notice_file_xml_gz),"System_ext image", \
+         "Notices for files contained in the system_ext filesystem image in this directory:", \
+         $(SYSTEM_EXT_NOTICE_DEPS)))
+
+$(installed_system_ext_notice_xml_gz): $(target_system_ext_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_system_ext_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_system_ext_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_ext_notice_xml_gz)
+endif
+
+.PHONY: vendor_dlkmlicense
+vendor_dlkmlicense: $(call corresponding-license-metadata, $(VENDOR_DLKM_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(VENDOR_DLKM_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_vendor_dlkm_notice_file_txt),"Vendor_dlkm image", \
+         "Notices for files contained in the vendor_dlkm filesystem image in this directory:", \
+         $(VENDOR_DLKM_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_vendor_dlkm_notice_file_xml_gz),"Vendor_dlkm image", \
+         "Notices for files contained in the vendor_dlkm filesystem image in this directory:", \
+         $(VENDOR_DLKM_NOTICE_DEPS)))
+
+$(installed_vendor_dlkm_notice_xml_gz): $(target_vendor_dlkm_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_vendor_dlkm_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_vendor_dlkm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_dlkm_notice_xml_gz)
+endif
+
+.PHONY: odm_dlkmlicense
+odm_dlkmlicense: $(call corresponding-license-metadata, $(ODM_DLKM_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(ODM_DLKM_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_odm_dlkm_notice_file_txt),"ODM_dlkm filesystem image", \
+         "Notices for files contained in the odm_dlkm filesystem image in this directory:", \
+         $(ODM_DLKM_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_odm_dlkm_notice_file_xml_gz),"ODM_dlkm filesystem image", \
+         "Notices for files contained in the odm_dlkm filesystem image in this directory:", \
+         $(ODM_DLMK_NOTICE_DEPS)))
+
+$(installed_odm_dlkm_notice_xml_gz): $(target_odm_dlkm_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_odm_dlkm_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_odm_dlkm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_dlkm_notice_xml_gz)
+endif
+
+.PHONY: system_dlkmlicense
+system_dlkmlicense: $(call corresponding-license-metadata, $(SYSTEM_DLKM_NOTICE_DEPS)) reportmissinglicenses
+
+ifneq (,$(SYSTEM_DLKM_NOTICE_DEPS))
+$(eval $(call text-notice-rule,$(target_system_dlkm_notice_file_txt),"System_dlkm filesystem image", \
+         "Notices for files contained in the system_dlkm filesystem image in this directory:", \
+         $(SYSTEM_DLKM_NOTICE_DEPS)))
+
+$(eval $(call xml-notice-rule,$(target_system_dlkm_notice_file_xml_gz),"System_dlkm filesystem image", \
+         "Notices for files contained in the system_dlkm filesystem image in this directory:", \
+         $(SYSTEM_DLMK_NOTICE_DEPS)))
+
+$(installed_system_dlkm_notice_xml_gz): $(target_system_dlkm_notice_file_xml_gz)
+	$(copy-file-to-target)
+
+$(call declare-0p-target,$(target_system_dlkm_notice_file_xml_gz))
+$(call declare-0p-target,$(installed_sysetm_dlkm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_dlkm_notice_xml_gz)
+endif
+
 
 # -----------------------------------------------------------------
 # Soong generates the list of all shared libraries that are depended on by fuzz
