@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad3f9ced_46545dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2022-02-15T22:30:33Z",
+      "side": 1,
+      "message": "Sorry. Posted to the wrong CL.\nActually, let\u0027s add data_bins to data_deps in module info so that we are not losing the \"data\" property, it is discussed in the following doc.\nhttps://docs.google.com/document/d/1Xbzich-ivmStezOx83GoQcgxMIhGK0o7CwL_yu30ARU/edit?resourcekey\u003d0-BFBZkjA0M2w5yR4u42T8vQ#",
+      "parentUuid": "6f91e209_ba10059d",
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36d6dc7_e6bf8507",
