@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f91e209_ba10059d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077574
+      },
+      "writtenOn": "2022-02-15T22:26:29Z",
+      "side": 1,
+      "message": "LGTM after addressing colin\u0027s comment.",
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36d6dc7_e6bf8507",
