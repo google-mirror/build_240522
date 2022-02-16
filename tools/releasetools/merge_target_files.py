@@ -1315,6 +1315,7 @@ def generate_images(target_files_dir, rebuild_recovery):
 
 
 def rebuild_image_with_sepolicy(target_files_dir,
+                                rebuild_recovery,
                                 vendor_otatools=None,
                                 vendor_target_files=None):
   """Rebuilds odm.img or vendor.img to include merged sepolicy files.
@@ -1333,6 +1334,7 @@ def rebuild_image_with_sepolicy(target_files_dir,
       os.path.join(target_files_dir, 'IMAGES/odm.img')):
     partition = 'odm'
   partition_img = '{}.img'.format(partition)
+  partition_map = '{}.map'.format(partition)
 
   logger.info('Recompiling %s using the merged sepolicy files.', partition_img)
 
@@ -1396,8 +1398,10 @@ def rebuild_image_with_sepolicy(target_files_dir,
         os.path.join(vendor_otatools_dir, 'bin', 'add_img_to_target_files'),
         '--verbose',
         '--add_missing',
-        vendor_target_files_dir,
     ]
+    if rebuild_recovery:
+      rebuild_partition_command.append('--rebuild_recovery')
+    rebuild_partition_command.append(vendor_target_files_dir)
     logger.info('Recompiling %s: %s', partition_img,
                 ' '.join(rebuild_partition_command))
     common.RunAndCheckOutput(rebuild_partition_command, verbose=True)
@@ -1408,6 +1412,23 @@ def rebuild_image_with_sepolicy(target_files_dir,
     shutil.move(
         os.path.join(vendor_target_files_dir, 'IMAGES', partition_img),
         os.path.join(target_files_dir, 'IMAGES', partition_img))
+    shutil.move(
+        os.path.join(vendor_target_files_dir, 'IMAGES', partition_map),
+        os.path.join(target_files_dir, 'IMAGES', partition_map))
+    shutil.move(
+        os.path.join(vendor_target_files_dir, 'IMAGES', partition_map),
+        os.path.join(target_files_dir, 'IMAGES', partition_map))
+    def copy_recovery_file(filename):
+      pathname = 'VENDOR'
+      if not os.path.exists(os.path.join(vendor_target_files_dir, pathname, filename)):
+        pathname = 'SYSTEM/vendor'
+      if not os.path.exists(os.path.join(vendor_target_files_dir, pathname, filename)):
+        logger.info('Skipping copy_recovery_file for %s', filename)
+        return
+      shutil.copy(os.path.join(vendor_target_files_dir, pathname, filename), os.path.join(target_files_dir, pathname, filename))
+    if rebuild_recovery:
+      copy_recovery_file('etc/recovery.img')
+      copy_recovery_file('bin/install-recovery.sh')
 
 
 def generate_super_empty_image(target_dir, output_super_empty):
@@ -1600,8 +1621,8 @@ def merge_target_files(temp_dir, framework_target_files, framework_item_list,
   common.RunAndCheckOutput(split_sepolicy_cmd)
   # Include the compiled policy in an image if requested.
   if rebuild_sepolicy:
-    rebuild_image_with_sepolicy(output_target_files_temp_dir, vendor_otatools,
-                                vendor_target_files)
+    rebuild_image_with_sepolicy(output_target_files_temp_dir, rebuild_recovery, 
+                                vendor_otatools, vendor_target_files)
 
   # Run validation checks on the pre-installed APEX files.
   validate_merged_apex_info(output_target_files_temp_dir, partition_map.keys())
