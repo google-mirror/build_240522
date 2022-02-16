@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f00ff1a_a268f9dc",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-16T21:36:07Z",
+      "side": 1,
+      "message": "I think this workaround is harmless since the fingerprint in the system prop dict on line 1200 here isn\u0027t actually used for any image building (AFAICT, reading build_image.py), so we wouldn\u0027t actually be putting the system fingerprint in the vendor images.",
+      "parentUuid": "01ff59d6_83a88655",
+      "range": {
+        "startLine": 1223,
+        "startChar": 0,
+        "endLine": 1224,
+        "endChar": 38
+      },
+      "revId": "0663ae4f581a7f174d8f88133bd45017ed2869ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25220236_5fed52f7",
