@@ -688,6 +688,22 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         print("    Rewriting AVB public key of system_other in /product")
         common.ZipWrite(output_tf_zip, public_key, filename)
 
+    # Updates pvmfw embedded public key.
+    elif filename == "PREBUILT_IMAGES/pvmfw.img":
+      payload_key, container_key, sign_tool = apex_keys["com.android.virt.apex"]
+      new_pubkey_path = common.ExtractAvbPublicKey(
+          misc_info['avb_avbtool'], payload_key)
+      with open(new_pubkey_path, 'rb') as f:
+        new_pubkey = f.read()
+      old_pubkey = input_tf_zip.read("PREBUILT_IMAGES/pvmfw_embedded.avbpubkey")
+      assert len(old_pubkey) == len(new_pubkey)
+      pos = data.find(old_pubkey)
+      assert pos != -1
+      new_data = data[:pos] + new_pubkey + data[pos+len(old_pubkey):]
+      common.ZipWriteStr(output_tf_zip, filename, new_data)
+      common.ZipWriteStr(
+          output_tf_zip, 'PREBUILT_IMAGES/pvmfw_embedded.avbpubkey', new_pubkey)
+
     # Should NOT sign boot-debug.img.
     elif filename in (
         "BOOT/RAMDISK/force_debuggable",
