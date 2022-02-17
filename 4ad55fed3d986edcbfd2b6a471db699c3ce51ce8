@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2509a532_cf8322d5",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "Can you update this now? Something like\n\n```\nRebuild the recovery patch used by non-A/B devices, used when\nregenerating vendor images with --rebuild-sepolicy.\n```",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca8f6b2_c65a75af",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "and delete this TODO",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1badc2cd_7b53d010",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "This function never uses this var so I think we could clean it up by deleting it here, and in the arg comment on line 1237.",
+      "range": {
+        "startLine": 1213,
+        "startChar": 52,
+        "endLine": 1213,
+        "endChar": 68
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a297b99e_3f6f9a8c",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "and delete this",
+      "range": {
+        "startLine": 1309,
+        "startChar": 0,
+        "endLine": 1309,
+        "endChar": 48
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ce2e2b_7a59943a",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "It looks like this is done twice? Unless I\u0027m missing something.",
+      "range": {
+        "startLine": 1415,
+        "startChar": 4,
+        "endLine": 1420,
+        "endChar": 64
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5d8f49_3961a86b",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "To save some repeated logic, what do you think about this?\n\n```\ndef copy_recovery_file(filename):\n  for subdir in (\u0027VENDOR\u0027, \u0027SYSTEM/vendor\u0027):\n    source \u003d os.path.join(vendor_target_files_dir, subdir, filename)\n    dest \u003d os.path.join(target_files_dir, subdir, filename)\n    if os.path.exists(source):\n      shutil.copy(source, dest)\n      return\n  logger.info(\u0027Skipping copy_recovery_file for %s, file not found\u0027, filename)\n```",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40dc0bf_c4da2a86",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "It think this should be updated now.\n\n\"If true, rebuild the recovery patch used by non-A/B\ndevices and use it when regenerating the vendor images.\"",
+      "range": {
+        "startLine": 1554,
+        "startChar": 22,
+        "endLine": 1555,
+        "endChar": 47
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbcab6c0_930abd25",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "Linter found some extra trailing whitespace",
+      "range": {
+        "startLine": 1624,
+        "startChar": 79,
+        "endLine": 1624,
+        "endChar": 80
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c799302c_0643e9c4",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "and delete this",
+      "range": {
+        "startLine": 1739,
+        "startChar": 35,
+        "endLine": 1739,
+        "endChar": 62
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba2b8da4_6e8c9209",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:41:08Z",
+      "side": 1,
+      "message": "Can you also enforce that --rebuild-sepolicy is provided if --rebuild_recovery is passed?\n\nSomething like\n\n```\n... or\n(OPTIONS.rebuild_recovery and not OPTIONS.rebuild_sepolicy):\n```",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
