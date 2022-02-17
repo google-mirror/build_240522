@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9e1794_cd88b7e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-17T05:17:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c91f9399_8fa07fb6",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "b5da16eafbe9bf7dda723f756ec3c005e8381604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2810f1ea_2131a614",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-17T04:40:02Z",
       "side": 1,
       "message": "Replace all reference of runtime dependencies to data dependencies",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "b5da16eafbe9bf7dda723f756ec3c005e8381604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e29b4f7_f811f1d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-17T05:17:41Z",
+      "side": 1,
+      "message": "Thanks, just update it as well.",
+      "parentUuid": "2810f1ea_2131a614",
       "range": {
         "startLine": 9,
         "startChar": 50,
