@@ -16,6 +16,24 @@
       "message": "Do you need to the same for releasetools_fsverity_metadata_generator as well?",
       "revId": "293112d59a698eeb5c6823c6cc41f9844e0ed0bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "487cd48a_cd9bc73a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-17T01:17:05Z",
+      "side": 1,
+      "message": "Nope, we only need to do to binaries (not libraries).",
+      "parentUuid": "0ef880a5_65fece63",
+      "revId": "293112d59a698eeb5c6823c6cc41f9844e0ed0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
