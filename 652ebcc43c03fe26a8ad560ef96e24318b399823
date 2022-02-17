@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5afa18d_0c13c65e",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3719,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T22:44:44Z",
+      "side": 1,
+      "message": "It works without this because the cd key happens to be the AVB test key which is what everything is signed with in dev builds. Either we assert that assumption (easy) or do another replacement here. Unfortunately it doesn\u0027t initially look easy to use the `replace_bytes` script from the virt apex.\n\nIt also looks from the virt APEX Android.bp that the microdroid_key might not always be the AVB test key. That might mean that keeping everything in sync can be a little tricky unless there someway to define the same aliases across these two build rules?",
+      "range": {
+        "startLine": 3719,
+        "startChar": 1,
+        "endLine": 3719,
+        "endChar": 49
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34a5979_51c6b829",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T22:44:44Z",
+      "side": 1,
+      "message": "This should be the key that signs the virt APEX? But I don\u0027t see how to get access to it from here :/",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
