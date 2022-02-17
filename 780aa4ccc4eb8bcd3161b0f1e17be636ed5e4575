@@ -53,6 +53,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26718c48_42dc5399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-17T04:08:44Z",
+      "side": 1,
+      "message": "NP, jutst modified according the discuss.",
+      "parentUuid": "ad3f9ced_46545dbb",
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b34291ce_608bed33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-17T04:08:44Z",
+      "side": 1,
+      "message": "NP.",
+      "parentUuid": "0e8f2580_d0a1e168",
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36d6dc7_e6bf8507",
@@ -66,6 +102,30 @@
       "writtenOn": "2022-02-11T22:30:26Z",
       "side": 1,
       "message": "The LOCAL_ prefix is usually only used for values set in Android.mk files",
+      "range": {
+        "startLine": 1000,
+        "startChar": 34,
+        "endLine": 1000,
+        "endChar": 40
+      },
+      "revId": "780aa4ccc4eb8bcd3161b0f1e17be636ed5e4575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e889ef_85e8bf69",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-17T04:08:44Z",
+      "side": 1,
+      "message": "Thanks, just corrected.",
+      "parentUuid": "a36d6dc7_e6bf8507",
       "range": {
         "startLine": 1000,
         "startChar": 34,
