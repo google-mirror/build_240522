@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e6591e3_f1e4272f",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-17T20:44:18Z",
+      "side": 1,
+      "message": "Or, since we\u0027re really *copying* the recovery image but not rebuilding it, what about\n\n\u0027Copy the recovery image used by non-A/B devices, used when\nregenerating vendor images with --rebuild-sepolicy.\u0027",
+      "parentUuid": "2509a532_cf8322d5",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ca8f6b2_c65a75af",
         "filename": "tools/releasetools/merge_target_files.py",
         "patchSetId": 4
