@@ -342,17 +342,45 @@ def AddPvmfw(output_zip):
     logger.info("pvmfw.img already exists; no need to rebuild...")
     return img.name
 
+  def ReplaceEmbeddedPubkey(avbtool, key, pvmfw, embedded_pubkey):
+      # Read old pubkey before replacement.
+      with open(embedded_pubkey, 'rb') as f:
+          old_pubkey = f.read()
+
+      # Replace pvmw pubkey (overwrite the old one with the new one).
+      common.RunAndCheckOutput([avbtool, 'extract_public_key',
+               '--key', key, '--output', embedded_pubkey])
+
+      # Read new pubkey.
+      with open(embedded_pubkey, 'rb') as f:
+          new_pubkey = f.read()
+
+      # Replace pubkey embedded in pvmfw.
+      assert len(old_pubkey) == len(new_pubkey)
+      with open(pvmfw, 'r+b') as pvmfw_f:
+          pos = pvmfw_f.read().find(old_pubkey)
+          assert pos != -1
+          pvmfw_f.seek(pos)
+          pvmfw_f.write(new_pubkey)
+
   pvmfw_prebuilt_path = os.path.join(
       OPTIONS.input_tmp, "PREBUILT_IMAGES", "pvmfw.img")
   assert os.path.exists(pvmfw_prebuilt_path)
   shutil.copy(pvmfw_prebuilt_path, img.name)
+
+  avbtool = OPTIONS.info_dict["avb_avbtool"]
+
+  embedded_pubkey = os.path.join(
+      OPTIONS.input_tmp, "PREBUILT_IMAGES", "pvmfw_embedded.pubkey")
+  key = os.path.join(
+      OPTIONS.input_tmp, "PREBUILT_IMAGES", "new.key") # TODO: where to get the right key?
+  ReplaceEmbeddedPubkey(avbtool, key, img.name, embedded_pubkey)
 
   # AVB-sign the image as needed.
   if OPTIONS.info_dict.get("avb_enable") == "true":
     # Signing requires +w
     os.chmod(img.name, os.stat(img.name).st_mode | stat.S_IWUSR)
 
-    avbtool = OPTIONS.info_dict["avb_avbtool"]
     part_size = OPTIONS.info_dict["pvmfw_size"]
     # The AVB hash footer will be replaced if already present.
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
