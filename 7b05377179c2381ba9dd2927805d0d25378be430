@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a5b20b_3f939653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2022-02-17T21:00:26Z",
+      "side": 1,
+      "message": "I\u0027ve never really looked at the board/product config stuff so I\u0027m not entirely sure what I\u0027m looking at, but assuming the things that are being configured are basically the defaults, LGTM. I\u0027m only +1ing so ccross can check to make sure it\u0027s actually right, since I sure don\u0027t know 😊",
+      "revId": "7b05377179c2381ba9dd2927805d0d25378be430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
