@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b11a76b_b4206984",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2022-02-17T22:34:50Z",
+      "side": 1,
+      "message": "The avbtool developers asked me to add a --dynamic_partition_size flag instead of making --partition_size optional; updating this accordingly.",
+      "revId": "730200ec863b385a7c72ae7d8859109afaf13e0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
