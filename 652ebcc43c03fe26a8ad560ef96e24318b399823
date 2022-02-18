@@ -176,6 +176,30 @@
       },
       "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a54d77_c1b9f4bf",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T02:12:29Z",
+      "side": 1,
+      "message": "I guess it was arbitrary to use the same pubkey for the virt apex(its payload.img) and microdroid\u0027s bootloader image. Probably we need to explicitly specify a separate pubkey for both pvmfw and microdroid\u0027s bootloader? Then `sign_virt_apex` can use it instead of re-using the virt apex\u0027es pubkey.",
+      "parentUuid": "e0ef5c93_421b45ab",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
