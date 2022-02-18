@@ -16,6 +16,75 @@
       "message": "Hi, could you please take a look?",
       "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8da7cb4_fbb3e74d",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2022-02-18T09:14:06Z",
+      "side": 1,
+      "message": "Naming nit:\n\nfsverity_tool? To match sign_tool?",
+      "range": {
+        "startLine": 57,
+        "startChar": 104,
+        "endLine": 57,
+        "endChar": 117
+      },
+      "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b76fd7a_7d3694b3",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2022-02-18T09:14:06Z",
+      "side": 1,
+      "message": "I wonder if perhaps we shouldn\u0027t apply this lookup to all apex files? Can/should we narrow this down to just the com.android.sepolicy apex?",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 57
+      },
+      "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971436fd_53deffba",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2022-02-18T09:14:06Z",
+      "side": 1,
+      "message": "this list of arguments is starting to get a bit ridiculous. You don\u0027t need to solve this right now, but at some point I wonder if we should put the signing articles (keys, certs, tools, etc) into an class that can be passed.",
+      "range": {
+        "startLine": 366,
+        "startChar": 25,
+        "endLine": 369,
+        "endChar": 81
+      },
+      "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
