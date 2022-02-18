@@ -22,6 +22,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebe3716_98e7d2a4",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T04:55:20Z",
+      "side": 1,
+      "message": "input_tf_zip should have either of ..\n- no virt apex (if the target product doesn\u0027t support the virt apex)\n- OR com.android.virt.apex\n- OR com.google.android.virt.apex",
+      "parentUuid": "133f2497_e930a91d",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
