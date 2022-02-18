@@ -875,6 +875,13 @@ $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
 endif  # LOCAL_UNINSTALLABLE_MODULE
 endif  # LOCAL_COMPATIBILITY_SUITE
 
+my_support_variant :=
+ifdef LOCAL_IS_HOST_MODULE
+  my_support_variant := HOST
+else
+  my_support_variant := DEVICE
+endif
+
 ###########################################################
 ## Add test module to ALL_DISABLED_PRESUBMIT_TESTS if LOCAL_PRESUBMIT_DISABLED is set to true.
 ###########################################################
@@ -1000,6 +1007,10 @@ ifdef LOCAL_TEST_DATA_BINS
   ALL_MODULES.$(my_register_name).TEST_DATA_BINS := \
     $(ALL_MODULES.$(my_register_name).TEST_DATA_BINS) $(LOCAL_TEST_DATA_BINS)
 endif
+
+ALL_MODULES.$(my_register_name).SUPPORT_VARIANTS := \
+  $(ALL_MODULES.$(my_register_name).SUPPORT_VARIANTS) \
+  $(filter-out $(ALL_MODULES.$(my_register_name).SUPPORT_VARIANTS),$(my_support_variant))
 
 ##########################################################################
 ## When compiling against the VNDK, add the .vendor or .product suffix to
