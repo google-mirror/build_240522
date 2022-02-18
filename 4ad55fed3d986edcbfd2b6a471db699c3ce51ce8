@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e202e047_6b81e301",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e6591e3_f1e4272f",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ca8f6b2_c65a75af",
@@ -65,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a2d791_28e22525",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ca8f6b2_c65a75af",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1badc2cd_7b53d010",
@@ -78,6 +120,30 @@
       "writtenOn": "2022-02-17T20:41:08Z",
       "side": 1,
       "message": "This function never uses this var so I think we could clean it up by deleting it here, and in the arg comment on line 1237.",
+      "range": {
+        "startLine": 1213,
+        "startChar": 52,
+        "endLine": 1213,
+        "endChar": 68
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c665fce_70cfa241",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1badc2cd_7b53d010",
       "range": {
         "startLine": 1213,
         "startChar": 52,
@@ -111,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6acd47_1d7d9b2d",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a297b99e_3f6f9a8c",
+      "range": {
+        "startLine": 1309,
+        "startChar": 0,
+        "endLine": 1309,
+        "endChar": 48
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45ce2e2b_7a59943a",
@@ -124,6 +214,30 @@
       "writtenOn": "2022-02-17T20:41:08Z",
       "side": 1,
       "message": "It looks like this is done twice? Unless I\u0027m missing something.",
+      "range": {
+        "startLine": 1415,
+        "startChar": 4,
+        "endLine": 1420,
+        "endChar": 64
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "001fa35c_b6466a16",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45ce2e2b_7a59943a",
       "range": {
         "startLine": 1415,
         "startChar": 4,
@@ -151,6 +265,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d3d480d_b1d93eab",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b5d8f49_3961a86b",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a40dc0bf_c4da2a86",
@@ -164,6 +296,30 @@
       "writtenOn": "2022-02-17T20:41:08Z",
       "side": 1,
       "message": "It think this should be updated now.\n\n\"If true, rebuild the recovery patch used by non-A/B\ndevices and use it when regenerating the vendor images.\"",
+      "range": {
+        "startLine": 1554,
+        "startChar": 22,
+        "endLine": 1555,
+        "endChar": 47
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb32149_4d132e8c",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40dc0bf_c4da2a86",
       "range": {
         "startLine": 1554,
         "startChar": 22,
@@ -197,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d72806e_c227d2e8",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbcab6c0_930abd25",
+      "range": {
+        "startLine": 1624,
+        "startChar": 79,
+        "endLine": 1624,
+        "endChar": 80
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c799302c_0643e9c4",
@@ -220,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb79de8_98c89428",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c799302c_0643e9c4",
+      "range": {
+        "startLine": 1739,
+        "startChar": 35,
+        "endLine": 1739,
+        "endChar": 62
+      },
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba2b8da4_6e8c9209",
@@ -233,6 +437,24 @@
       "writtenOn": "2022-02-17T20:41:08Z",
       "side": 1,
       "message": "Can you also enforce that --rebuild-sepolicy is provided if --rebuild_recovery is passed?\n\nSomething like\n\n```\n... or\n(OPTIONS.rebuild_recovery and not OPTIONS.rebuild_sepolicy):\n```",
+      "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e31fc0_8d9b624c",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1140383
+      },
+      "writtenOn": "2022-02-18T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba2b8da4_6e8c9209",
       "revId": "4ad55fed3d986edcbfd2b6a471db699c3ce51ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
