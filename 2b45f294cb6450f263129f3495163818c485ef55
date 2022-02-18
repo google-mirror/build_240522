@@ -94,6 +94,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7190b90b_16e7f3b9",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T06:01:59Z",
+      "side": 1,
+      "message": "Wow. Yeah, we should better use the key.\n\nAnd I know that that\u0027s what Andrew asked, but I mentioned that because then we can find an APEX having the public key in it regardless of its name.",
+      "parentUuid": "cedcff9a_2556243a",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
