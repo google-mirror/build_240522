@@ -46,6 +46,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba0bbd6_673026cb",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T05:22:55Z",
+      "side": 1,
+      "message": "If you don\u0027t like this, we may have the public key of the bootloader as a separate file in the APEX. The key file should of course be updated when resigning the APEX. Then we use `deapexer` to extract the key file from the APEX and use it here.",
+      "parentUuid": "2ebe3716_98e7d2a4",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

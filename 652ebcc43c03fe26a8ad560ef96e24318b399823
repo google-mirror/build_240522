@@ -272,6 +272,30 @@
       },
       "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b132cc_9f57e3aa",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T05:22:55Z",
+      "side": 1,
+      "message": "I think it was me and others who worked in the early days of APEX. I don\u0027t see that the reuse is something what the rule prohibits. It basically says that (1) every apex is signed with different keys, and (2) the key for signing the zip container and the apex_payload.img file are different.\n\n(1) was because each APEX is owned by different teams and can be updated in isolation, and (2) was AFAIK because the key formats are different.",
+      "parentUuid": "5073c72f_6322ef18",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
