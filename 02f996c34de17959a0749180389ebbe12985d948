@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a10bfa_46292078",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-02-18T18:48:58Z",
+      "side": 1,
+      "message": "Your commit message has *too many* typos. Consider reviewing the change yourself with a fresh pair of eyes before sending out.\n\n```\nAdd supported variants to module-info\n\nExport the list of variants (host, device) a build module supports to module-info for downstream tools. The values correspond to the Soong `host_supported` and `device_supported` attribute values.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f09e52_cf221fce",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-02-18T18:48:58Z",
+      "side": 1,
+      "message": "Please rename to `my_supported_variant`. Is the `my_` prefix common practice?",
+      "range": {
+        "startLine": 878,
+        "startChar": 0,
+        "endLine": 878,
+        "endChar": 18
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f652a3_8fd0baa0",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-02-18T18:48:58Z",
+      "side": 1,
+      "message": "Please rename to `SUPPORTED_VARIANTS`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 63,
+        "endLine": 30,
+        "endChar": 70
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
