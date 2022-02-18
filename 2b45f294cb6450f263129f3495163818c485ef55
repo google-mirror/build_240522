@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133f2497_e930a91d",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-18T04:40:23Z",
+      "side": 1,
+      "message": "How am I supposed to know which is the actual version of the APEX being used so we get the right key?",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
