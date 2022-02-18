@@ -248,6 +248,30 @@
       },
       "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5073c72f_6322ef18",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-18T02:50:44Z",
+      "side": 1,
+      "message": "Reading [1], there are some quite strict rules about the use of keys with APEXs and the reuse for virt APEX feel like it might be on the side of abuse of the key. Do you know who set those rules so we can validate our use of the key?\n\n[1] -- https://source.android.com/devices/tech/ota/apex#signing",
+      "parentUuid": "1e047ec8_e4dfbdbe",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
