@@ -70,6 +70,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cedcff9a_2556243a",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T05:56:37Z",
+      "side": 1,
+      "message": "We already have the public key of the bootloader stored in the apex.\n\n```\n$ deapexer list out/target/product/vsoc_x86_64/system_ext/apex/com.android.virt.apex\n...\n./etc/microdroid_bootloader\n./etc/microdroid_bootloader.avbpubkey\n```\n\nAnd, for now, since we\u0027re using the same pubkey for both apex_payload.img and bootloader, the same pubkey is available from the APEX container (ZIP) as `apex_pubkey`\n\n```\n$ unzip -l out/target/product/vsoc_x86_64/system_ext/apex/com.android.virt.apex\n...\n     1032  2009-01-01 00:00   apex_pubkey\n```\n\nAnd these pubkeys (one in the container, the other in the payload image) are replaced during the resigning process.\n\nI think Andrew is asking about what to use for `apex_keys`\u0027s key (`com.android.virt` or `com.google.android.virt`).",
+      "parentUuid": "aba0bbd6_673026cb",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
