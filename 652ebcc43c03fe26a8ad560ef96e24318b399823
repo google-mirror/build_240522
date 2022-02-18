@@ -224,6 +224,30 @@
       },
       "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e047ec8_e4dfbdbe",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T02:24:55Z",
+      "side": 1,
+      "message": "What if adding a separate CLI argument so that the caller to override the pvmfw key? AOSP/releasetools can fallback to `com.android.virt`\u0027s key when unspecified.\n\nFor internal signing, the signer could use `com.google.android.virt`\u0027s key for it.",
+      "parentUuid": "a9a54d77_c1b9f4bf",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
