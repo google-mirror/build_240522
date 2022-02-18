@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03eaf672_3cb0154f",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-02-18T07:57:23Z",
+      "side": 1,
+      "message": "support_variants?",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "a5a920c16a08b1273b7fddf7fac41f5ed23c0032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
