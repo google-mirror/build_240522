@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1f265d_2c22c705",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-18T00:54:10Z",
+      "side": 1,
+      "message": "nit: Delete this, now that we removed the function argument",
+      "range": {
+        "startLine": 1237,
+        "startChar": 4,
+        "endLine": 1238,
+        "endChar": 47
+      },
+      "revId": "e871c47043a87edeeef7fb597b9d5b43ffb0f75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67066e56_0e04be9b",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-02-18T00:54:10Z",
+      "side": 1,
+      "message": "On line 149 OPTIONS.rebuild_recovery defaults to False so I think the highlighted section should use \"OPTIONS.rebuild_recovery\" (to check truthiness) instead of comparing to None.\n\nOtherwise, if the default value of False is used, this evaluates to \"False is not None\" which I believe evaluates to True, and then users will get an error if they try to pass --rebuild-sepolicy but not --rebuild_recovery.",
+      "range": {
+        "startLine": 1791,
+        "startChar": 7,
+        "endLine": 1791,
+        "endChar": 43
+      },
+      "revId": "e871c47043a87edeeef7fb597b9d5b43ffb0f75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
