@@ -26,6 +26,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa809489_1ad920e5",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3719,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T01:25:11Z",
+      "side": 1,
+      "message": "Yeah, this is fragile, but I think we at least for now assume that the two keys are identical.",
+      "parentUuid": "a5afa18d_0c13c65e",
+      "range": {
+        "startLine": 3719,
+        "startChar": 1,
+        "endLine": 3719,
+        "endChar": 49
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2851b7f_9cddf374",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5641,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T01:25:11Z",
+      "side": 1,
+      "message": "Drop this duplicated line?",
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e34a5979_51c6b829",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 1
@@ -37,6 +78,30 @@
       "writtenOn": "2022-02-17T22:44:44Z",
       "side": 1,
       "message": "This should be the key that signs the virt APEX? But I don\u0027t see how to get access to it from here :/",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ef5c93_421b45ab",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T01:25:11Z",
+      "side": 1,
+      "message": "I think we can\u0027t have access to the very key here.\n\nIt is available in sign_target_files_apks via the `--extra_apex_payload_key` option. There, you can have access to the key for the com.android.virt APEX, extract the public key from the key, and use it to amend pvmfw.img.",
+      "parentUuid": "e34a5979_51c6b829",
       "range": {
         "startLine": 376,
         "startChar": 55,
