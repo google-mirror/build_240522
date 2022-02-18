@@ -200,6 +200,30 @@
       },
       "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e406c992_5008018a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-18T02:24:14Z",
+      "side": 1,
+      "message": "I\u0027d rather keep using the same key for the APEX and the bootloader images in it, because more keys \u003d more moving parts. If needed, we can assert that.",
+      "parentUuid": "a9a54d77_c1b9f4bf",
+      "range": {
+        "startLine": 376,
+        "startChar": 55,
+        "endLine": 376,
+        "endChar": 90
+      },
+      "revId": "652ebcc43c03fe26a8ad560ef96e24318b399823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
