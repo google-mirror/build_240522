@@ -118,6 +118,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14d9e059_6fd8030a",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-19T18:23:50Z",
+      "side": 1,
+      "message": "I might have got lost on this thread. IIUC, there are 2 things to solve.\n\n 1) Which is the right APEX to use the key of? I\u0027ve gone with a regex match over the input files but I don\u0027t see any documentation to say it\u0027s a reliable approach.\n\n 2) Where to get the APEX key? I\u0027m extracting it from the private key that\u0027s taken from apexkeys.txt (the public key is actually pointed to by that file but exposing it would require adding a tuple field and that sounds like 0 fun without a built time checker..). Other options mentioned here were to look inside the APEX, but that would required first extracting the APEX from the target file and then looking inside the APEX zip which felt like more work.\n \nLet me know if I missed something from the discussion!",
+      "parentUuid": "7190b90b_16e7f3b9",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
