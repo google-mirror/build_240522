@@ -142,6 +142,30 @@
       },
       "revId": "2b45f294cb6450f263129f3495163818c485ef55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849e9d5b_7b4a8873",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-19T22:44:23Z",
+      "side": 1,
+      "message": "1) Which is the right APEX?\n\nRegex approach looks good to me. \n\n2)  Where to get the APEX key?\n\n      payload_key, container_key, sign_tool \u003d apex_keys[virt_apex]\n      new_pubkey_path \u003d common.ExtractAvbPublicKey(\n          misc_info[\u0027avb_avbtool\u0027], payload_key)\n          \nLooks good to me. FYI, `payload_key` can be a public key. (see, the comments #14 in (internal link) b/216971834) `ExtractAvbPublicKey(.. public key)` works just fine. (it returns the input)",
+      "parentUuid": "14d9e059_6fd8030a",
+      "range": {
+        "startLine": 693,
+        "startChar": 56,
+        "endLine": 693,
+        "endChar": 79
+      },
+      "revId": "2b45f294cb6450f263129f3495163818c485ef55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
