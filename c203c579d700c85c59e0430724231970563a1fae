@@ -22,6 +22,30 @@
       },
       "revId": "c203c579d700c85c59e0430724231970563a1fae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "051e1957_3680eab6",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-20T12:37:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7258700f_f6066e1d",
+      "range": {
+        "startLine": 718,
+        "startChar": 37,
+        "endLine": 718,
+        "endChar": 52
+      },
+      "revId": "c203c579d700c85c59e0430724231970563a1fae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
