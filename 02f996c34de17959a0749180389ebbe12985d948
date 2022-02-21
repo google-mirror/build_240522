@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2074445_ad480104",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-21T11:56:40Z",
+      "side": 1,
+      "message": "Sorry for those typos...",
+      "parentUuid": "80a10bfa_46292078",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8f09e52_cf221fce",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-18T18:48:58Z",
       "side": 1,
       "message": "Please rename to `my_supported_variant`. Is the `my_` prefix common practice?",
+      "range": {
+        "startLine": 878,
+        "startChar": 0,
+        "endLine": 878,
+        "endChar": 18
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9740d4_9407d0f8",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-21T11:56:40Z",
+      "side": 1,
+      "message": "Just added, in the same make file use this kind of naming for a temp variable but I am not sure if it is common or not, maybe we could leave it to Colin?",
+      "parentUuid": "e8f09e52_cf221fce",
       "range": {
         "startLine": 878,
         "startChar": 0,
