@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43fadf1_9b46a6ba",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1742951
+      },
+      "writtenOn": "2022-02-21T11:55:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8da7cb4_fbb3e74d",
+      "range": {
+        "startLine": 57,
+        "startChar": 104,
+        "endLine": 57,
+        "endChar": 117
+      },
+      "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b76fd7a_7d3694b3",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-02-18T09:14:06Z",
       "side": 1,
       "message": "I wonder if perhaps we shouldn\u0027t apply this lookup to all apex files? Can/should we narrow this down to just the com.android.sepolicy apex?",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 57
+      },
+      "revId": "e5f73c0fc26d5259315f9f5cc3ee7ccc6840004b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4083f6cc_1d430b66",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1742951
+      },
+      "writtenOn": "2022-02-21T11:55:45Z",
+      "side": 1,
+      "message": "Narrowed to sepolicy.apex",
+      "parentUuid": "8b76fd7a_7d3694b3",
       "range": {
         "startLine": 88,
         "startChar": 0,
