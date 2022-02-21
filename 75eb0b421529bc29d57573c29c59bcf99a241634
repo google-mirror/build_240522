@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b92b4f_810583c8",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-21T17:29:16Z",
+      "side": 1,
+      "message": "This is a no-op, it probably doesn\u0027t do what you want it to do.",
+      "range": {
+        "startLine": 700,
+        "startChar": 8,
+        "endLine": 700,
+        "endChar": 12
+      },
+      "revId": "75eb0b421529bc29d57573c29c59bcf99a241634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
