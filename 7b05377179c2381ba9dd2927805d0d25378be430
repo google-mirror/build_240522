@@ -16,6 +16,23 @@
       "message": "I\u0027ve never really looked at the board/product config stuff so I\u0027m not entirely sure what I\u0027m looking at, but assuming the things that are being configured are basically the defaults, LGTM. I\u0027m only +1ing so ccross can check to make sure it\u0027s actually right, since I sure don\u0027t know 😊",
       "revId": "7b05377179c2381ba9dd2927805d0d25378be430",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c0bb8b_45fda36a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-21T12:42:59Z",
+      "side": 1,
+      "message": "ping for Colin",
+      "revId": "7b05377179c2381ba9dd2927805d0d25378be430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
