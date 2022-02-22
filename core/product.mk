@@ -64,9 +64,22 @@ $(strip $(foreach choice,$(1),\
     $(error $(LOCAL_DIR): $(choice): Invalid lunch choice)) \
   $(if $(filter-out eng userdebug user,$(word 2,$(_parts))), \
     $(error $(LOCAL_DIR): $(choice): Invalid variant: $(word 2,$(_parts)))) \
-  $(if $(filter-out $(foreach p,$(2),$(call _decode-product-name,$(p))),$(word 1,$(_parts))), \
-    $(error $(LOCAL_DIR): $(word 1,$(_parts)): Product not defined in this file)) \
-  ))
+  $(if $(filter-out $(foreach p,$(2),$(word 1,$(call _decode-product-name,$(p)))),$(word 1,$(_parts))), \
+    $(error $(LOCAL_DIR): $(word 1,$(_parts)): Product not defined in this file))))
+endef
+
+#
+# Validates the new starlark opt in proudcts -- ensures that they're in an
+# appropriate form, and are paired with definitions of their products.
+# $(1): The new list of STARLARK_OPT_IN_PRODUCTS
+# $(2): The new list of PRODUCT_MAKEFILES
+#
+define _validate-starlark-opt-in-products
+$(strip $(foreach _product,$(1),\
+  $(if $(call is-c-identifier,$(_product)),, \
+    $(error $(p): Entries in STARLARK_OPT_IN_PRODUCTS must be valid C identifiers, not "$(_product)")) \
+  $(if $(filter-out $(foreach p,$(2),$(word 1,$(call _decode-product-name,$(p)))),$(_product)), \
+    $(error $(LOCAL_DIR): $(_product): Product not defined in this file))))
 endef
 
 #
@@ -81,19 +94,25 @@ endef
 define get-product-makefiles
 $(sort \
   $(eval _COMMON_LUNCH_CHOICES :=) \
+  $(eval _STARLARK_OPT_IN_PRODUCTS :=) \
   $(foreach f,$(1), \
     $(eval PRODUCT_MAKEFILES :=) \
     $(eval COMMON_LUNCH_CHOICES :=) \
+    $(eval STARLARK_OPT_IN_PRODUCTS :=) \
     $(eval LOCAL_DIR := $(patsubst %/,%,$(dir $(f)))) \
     $(eval include $(f)) \
     $(call _validate-common-lunch-choices,$(COMMON_LUNCH_CHOICES),$(PRODUCT_MAKEFILES)) \
     $(eval _COMMON_LUNCH_CHOICES += $(COMMON_LUNCH_CHOICES)) \
+    $(call _validate-starlark-opt-in-products,$(STARLARK_OPT_IN_PRODUCTS),$(PRODUCT_MAKEFILES)) \
+    $(eval _STARLARK_OPT_IN_PRODUCTS += $(STARLARK_OPT_IN_PRODUCTS)) \
     $(PRODUCT_MAKEFILES) \
    ) \
   $(eval PRODUCT_MAKEFILES :=) \
   $(eval LOCAL_DIR :=) \
   $(eval COMMON_LUNCH_CHOICES := $(sort $(_COMMON_LUNCH_CHOICES))) \
   $(eval _COMMON_LUNCH_CHOICES :=) \
+  $(eval STARLARK_OPT_IN_PRODUCTS := $(sort $(_STARLARK_OPT_IN_PRODUCTS))) \
+  $(eval _STARLARK_OPT_IN_PRODUCTS :=) \
  )
 endef
 

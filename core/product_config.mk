@@ -203,6 +203,11 @@ ifneq (1,$(words $(current_product_makefile)))
 $(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
 endif
 
+ifneq (,$(filter $(TARGET_PRODUCT),$(STARLARK_OPT_IN_PRODUCTS)))
+  RBC_PRODUCT_CONFIG := true
+  RBC_BOARD_CONFIG := true
+endif
+
 ifndef RBC_PRODUCT_CONFIG
 $(call import-products, $(current_product_makefile))
 else
