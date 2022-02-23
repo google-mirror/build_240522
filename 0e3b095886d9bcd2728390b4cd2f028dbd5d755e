@@ -16,6 +16,24 @@
       "message": "This looks fine to me. But let me invite Justin to have take look.",
       "revId": "0e3b095886d9bcd2728390b4cd2f028dbd5d755e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6593696c_7d43df45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-02-23T04:18:46Z",
+      "side": 1,
+      "message": "This will not change the system/build.prop for full treble devices, but adds the ro.product.first_api_level properties for the non-full treble devices.\nI think this is a required change.",
+      "parentUuid": "8d2f1d9d_824b8e45",
+      "revId": "0e3b095886d9bcd2728390b4cd2f028dbd5d755e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
