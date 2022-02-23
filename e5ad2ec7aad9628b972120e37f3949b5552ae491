@@ -105,6 +105,24 @@
       "parentUuid": "89d73957_5f494fd5",
       "revId": "e5ad2ec7aad9628b972120e37f3949b5552ae491",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7bb462_7a41fbdd",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-23T06:36:31Z",
+      "side": 1,
+      "message": "@Yike,\n\nIs that be a problem if we have target/host/host_cross in module-info\u0027s supporrtedt_varuants?\n\nI think Colin just want to be the information be more specific for build system.",
+      "parentUuid": "7ba26318_23bd7a78",
+      "revId": "e5ad2ec7aad9628b972120e37f3949b5552ae491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
