@@ -16,6 +16,23 @@
       "message": "Adding Tianjie for sign_target_files_apks.",
       "revId": "7044db0a8e9e302702d9ba6bf9164781c08c4e8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0f8716_1b6e05a3",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 5306,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-02-23T15:20:45Z",
+      "side": 1,
+      "message": "It would be good practice to add INSTALLED_PVMFW_EMBEDDED_AVBKEY_TARGET here as well, even though you\u0027ve added a transitive dependency (line 3724), as there\u0027s a direct use of that file in this rule.",
+      "revId": "7044db0a8e9e302702d9ba6bf9164781c08c4e8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
