@@ -50,6 +50,24 @@
       "message": "Can you add a comment here explaining what this product is for?",
       "revId": "7b05377179c2381ba9dd2927805d0d25378be430",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa9b0af_1b9ffb12",
+        "filename": "target/product/ndk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-23T12:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd6967f9_73752224",
+      "revId": "7b05377179c2381ba9dd2927805d0d25378be430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
