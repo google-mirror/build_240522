@@ -51,6 +51,24 @@
       "parentUuid": "f16b71c8_cb4346ed",
       "revId": "e5ad2ec7aad9628b972120e37f3949b5552ae491",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a490eca_0a79c8f8",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-23T01:55:23Z",
+      "side": 1,
+      "message": "Then this will also need to handle mac, and sometimes HOST_CROSS is Linux+Bionic.",
+      "parentUuid": "c439d6e2_5abe7ff8",
+      "revId": "e5ad2ec7aad9628b972120e37f3949b5552ae491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
