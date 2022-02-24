@@ -45,6 +45,30 @@
       },
       "revId": "5d2fc7b54440197c66abb73b4b622851c2643ed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba8b0ea_6c8be5d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-02-24T12:55:54Z",
+      "side": 1,
+      "message": "should use ` to wrap host_cross_supported instead of \u0027",
+      "parentUuid": "05a4859f_3be287cc",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "5d2fc7b54440197c66abb73b4b622851c2643ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
