@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "e0eb7e8e385d8e17e9764602eb9fdae27398841a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9699716a_0ffe2f6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-25T18:29:53Z",
+      "side": 1,
+      "message": "The user of this was removed by aosp/1859993",
+      "revId": "e0eb7e8e385d8e17e9764602eb9fdae27398841a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
