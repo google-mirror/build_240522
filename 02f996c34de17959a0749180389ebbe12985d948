@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73f01e1_cc6f00ec",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-25T01:30:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc11b534_a291378b",
+      "range": {
+        "startLine": 878,
+        "startChar": 0,
+        "endLine": 878,
+        "endChar": 18
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6f652a3_8fd0baa0",
@@ -132,6 +156,30 @@
       "writtenOn": "2022-02-18T18:48:58Z",
       "side": 1,
       "message": "Please rename to `SUPPORTED_VARIANTS`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 63,
+        "endLine": 30,
+        "endChar": 70
+      },
+      "revId": "02f996c34de17959a0749180389ebbe12985d948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "debce581_94f753eb",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2022-02-25T01:30:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6f652a3_8fd0baa0",
       "range": {
         "startLine": 30,
         "startChar": 63,
