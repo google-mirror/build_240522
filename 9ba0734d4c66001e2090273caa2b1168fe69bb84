@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c292f91d_03385221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-02-25T18:33:17Z",
+      "side": 1,
+      "message": "You know that struct() is Starlark-Go\u0027s extension, right?",
+      "revId": "9ba0734d4c66001e2090273caa2b1168fe69bb84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
