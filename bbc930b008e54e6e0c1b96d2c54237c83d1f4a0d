@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd55be2a_c5cded47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-25T00:54:09Z",
+      "side": 1,
+      "message": "Dan, please take a look.\n",
+      "revId": "bbc930b008e54e6e0c1b96d2c54237c83d1f4a0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9e3fc19_1f50105e",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-02-24T18:53:28Z",
       "side": 1,
       "message": "I recommend make this a function and add a smoke test in the next cl.",
+      "range": {
+        "startLine": 692,
+        "startChar": 38,
+        "endLine": 692,
+        "endChar": 43
+      },
+      "revId": "bbc930b008e54e6e0c1b96d2c54237c83d1f4a0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac25f4d8_a29382da",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-25T00:54:09Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "c9e3fc19_1f50105e",
       "range": {
         "startLine": 692,
         "startChar": 38,
