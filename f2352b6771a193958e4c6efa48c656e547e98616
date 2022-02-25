@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a69d251_370b057e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-25T14:41:54Z",
+      "side": 1,
+      "message": "+mast to review and +paul and brunel-team FYI",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0240f2d4_80808889",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-02-25T14:41:54Z",
+      "side": 1,
+      "message": "I think the above change would break this clause as it\u0027s also using ?\u003d (it would never trigger). Note this is here primarily to counter the `else ifeq` clause following it.\n\n...but I think it also doesn\u0027t really make sense given the other changes you\u0027re making (setting prefer:true everywhere) -- we don\u0027t _always_ want to build the sdk with prebuilts (if the branch is not configured to use prebuilts).\n\nI think the logic we want here (and I\u0027ll leave it to you to make-ify it 😜) is\n\"if the default in this branch is to use prebuilts, we don\u0027t want to disable to use of prebuilts just because com.google.android.conscrypt isn\u0027t installed\"",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
