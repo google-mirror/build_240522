@@ -16,6 +16,24 @@
       "message": "You know that struct() is Starlark-Go\u0027s extension, right?",
       "revId": "9ba0734d4c66001e2090273caa2b1168fe69bb84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "457e0aa1_549f78b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-02-25T18:56:35Z",
+      "side": 1,
+      "message": "I saw it was an extension, but it appears to also be in bazel, so it should be fine to use, right? https://bazel.build/rules/lib/struct",
+      "parentUuid": "c292f91d_03385221",
+      "revId": "9ba0734d4c66001e2090273caa2b1168fe69bb84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
