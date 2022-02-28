@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f80d581_c88f9220",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-02-28T23:59:34Z",
+      "side": 1,
+      "message": "Update arg names",
+      "revId": "b55aeac781a2d51be3a6a408fe2ea4b3e5b2640d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f51ce87_55cfdf76",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-02-28T23:59:34Z",
+      "side": 1,
+      "message": "Checking: line.strip() was used previously",
+      "revId": "b55aeac781a2d51be3a6a408fe2ea4b3e5b2640d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499816ce_01da123a",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-02-28T23:59:34Z",
+      "side": 1,
+      "message": "update args",
+      "revId": "b55aeac781a2d51be3a6a408fe2ea4b3e5b2640d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
