@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e753048_1e44a495",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-28T20:17:50Z",
+      "side": 1,
+      "message": "Just `XMLNOTICE`, the `SOONG_` prefix is part of the comparison used by ctx.Strict to make sure Make doesn\u0027t already have a different definition of `XMLNOTICE`",
+      "range": {
+        "startLine": 1407,
+        "startChar": 52,
+        "endLine": 1407,
+        "endChar": 67
+      },
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6357cc4_3c967537",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-28T20:17:50Z",
+      "side": 1,
+      "message": "Remove this if it is no longer necessary?",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54955789_ac1afaa5",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 6676,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-28T20:17:50Z",
+      "side": 1,
+      "message": "This is not very accurate, as many of the unmounted notice deps are not generally distributed alongside the system image.  For example, INSTALLED_DEBUG_BOOTIMAGE_TARGET is not distributed.  I don\u0027t know what the best source of truth is for which images are distributed alongside the system image, nor if there is something better to do with notice files for non-distributed images.",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709a2883_2f3c04a9",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 6843,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-02-28T20:17:50Z",
+      "side": 1,
+      "message": "Would it make sense to put this in a separate file that is included here?  That will make it more obvious where code that needs to run before this should be inserted.",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
