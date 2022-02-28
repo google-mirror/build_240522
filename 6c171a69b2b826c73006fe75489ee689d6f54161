@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "817f1f35_2cf67b7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-02-28T17:37:26Z",
+      "side": 1,
+      "message": "Hi Bart,\n\nThis has been tested on all three devices O6, R4 and bramble with multiple OTA with the patch. Additionally, CF testing has been going on since last 3 days as part of continuous testing. Thanks.",
+      "revId": "6c171a69b2b826c73006fe75489ee689d6f54161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
