@@ -394,7 +394,6 @@ endef
 # call below. It does three things:
 #  1. Inherits all of the variables from $1.
 #  2. Records the inheritance in the .INHERITS_FROM variable
-#  3. Records the calling makefile in PARENT_PRODUCT_FILES
 #
 # (2) and (3) can be used together to reconstruct the include hierarchy
 # See e.g. product-graph.mk for an example of this.
@@ -408,7 +407,6 @@ define inherit-product
   $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
   $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
   $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
-  $(eval PARENT_PRODUCT_FILES := $(sort $(PARENT_PRODUCT_FILES) $(current_mk))) \
   $(call dump-inherit,$(strip $(word 1,$(_include_stack))),$(1)) \
   $(call dump-config-vals,$(current_mk),inherit)
 endef
