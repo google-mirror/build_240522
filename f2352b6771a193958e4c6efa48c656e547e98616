@@ -51,6 +51,81 @@
       "parentUuid": "0240f2d4_80808889",
       "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82ea1d1_fbbd31e6",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-28T23:53:45Z",
+      "side": 1,
+      "message": "\u003e MODULE_BUILD_FROM_SOURCE ?\u003d $(BRANCH_USES_PREBUILTS_BY_DEFAULT)\n\nIsn\u0027t a negation missing there? Or preferably, call it BRANCH_USES_MODULE_SOURCE_BY_DEFAULT instead.",
+      "parentUuid": "be18210b_6f37b816",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde367e2_6d5db656",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-28T23:53:45Z",
+      "side": 1,
+      "message": "If the intention is to flip a variable like BRANCH_USES_PREBUILTS_BY_DEFAULT in this file in dessert branches close to release, then I suggest you add clauses similar to these to retain some DWIM for unbundled builds.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 46
+      },
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294e4dd6_5a9d1c6d",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-28T23:53:45Z",
+      "side": 1,
+      "message": "It\u0027s probably better if an explicit MODULE_BUILD_FROM_SOURCE\u003dfalse (or BRANCH_USES_PREBUILTS_BY_DEFAULT\u003dtrue) propagates to the ART variable as well.",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f1e8ac_54d91f87",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-02-28T23:53:45Z",
+      "side": 1,
+      "message": "(I should clean up the conditions below - they were a way to track the long-tail cases when the aim was to use ART prebuilts by default, but that\u0027s no longer the case.)",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
