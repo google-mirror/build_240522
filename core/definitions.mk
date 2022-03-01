@@ -874,6 +874,32 @@ reportmissinglicenses:
 
 endef
 
+
+###########################################################
+# Returns the unique list of built license metadata files.
+###########################################################
+define all-license-metadata
+$(sort \
+  $(foreach t,$(ALL_NON_MODULES),$(if $(filter 0p,$(ALL_TARGETS.$(t).META_LIC)),, $(ALL_TARGETS.$(t).META_LIC))) \
+  $(foreach m,$(ALL_MODULES), $(ALL_MODULES.$(m).META_LIC)) \
+)
+endef
+
+###########################################################
+# Declares the rule to report all library names used in any notice files.
+###########################################################
+define report-all-notice-library-names-rule
+.PHONY: reportallnoticelibrarynames
+reportallnoticelibrarynames: PRIVATE_LIST_FILE := $(call license-metadata-dir)/filelist
+reportallnoticelibrarynames: | $(COMPLIANCENOTICE_SHIPPEDLIBS)
+reportallnoticelibrarynames: $(call all-license-metadata)
+	@echo Reporting notice library names for $$(words $(call all-license-metadata)) license metadata files under $$(dir $$(PRIVATE_LIST_FILE))
+	$(hide) rm -f $$(PRIVATE_LIST_FILE)
+	$(hide) mkdir -p $$(dir $$(PRIVATE_LIST_FILE))
+	$(hide) find $$(dir $$(PRIVATE_LIST_FILE)) -name '*meta_lic' -type f >$$(PRIVATE_LIST_FILE)
+	$(COMPLIANCENOTICE_SHIPPEDLIBS) @$$(PRIVATE_LIST_FILE)
+endef
+
 ###########################################################
 ## Declares a license metadata build rule for ALL_MODULES
 ###########################################################
@@ -888,7 +914,8 @@ $(strip \
   ) \
   $(foreach t,$(sort $(ALL_NON_MODULES)),$(eval $(call non-module-license-metadata-rule,$(t)))) \
   $(foreach m,$(sort $(ALL_MODULES)),$(eval $(call license-metadata-rule,$(m)))) \
-  $(eval $(call report-missing-licenses-rule)))
+  $(eval $(call report-missing-licenses-rule)) \
+  $(eval $(call report-all-notice-library-names-rule)))
 endef
 
 ###########################################################
