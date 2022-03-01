@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f7af05_bed3ab7a",
+        "filename": "core/version_util.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-03-01T23:15:47Z",
+      "side": 1,
+      "message": "The logic here is to assign PLATFORM_DISPLAY_VERSION to .KATI_READONLY. One specific case is that: if we defined the PLATFORM_DISPLAY_VERSION var, but did not assign any value to it, or it is empty (is this case possible? I think we still consider the var is defined but with an empty value?), then the .KATI_READONLY var will be empty as well. Is this expected?",
+      "revId": "a492544a03d3293f1048813ff372f23db4aa6e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
