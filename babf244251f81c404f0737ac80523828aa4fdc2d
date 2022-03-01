@@ -16,6 +16,24 @@
       "message": "Update argument name",
       "revId": "babf244251f81c404f0737ac80523828aa4fdc2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046bba63_5ba9cada",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-03-01T00:52:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b00b6034_72f6912d",
+      "revId": "babf244251f81c404f0737ac80523828aa4fdc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
