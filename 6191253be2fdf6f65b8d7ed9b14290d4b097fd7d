@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "416a5ab2_81a98f29",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-01T19:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e753048_1e44a495",
+      "range": {
+        "startLine": 1407,
+        "startChar": 52,
+        "endLine": 1407,
+        "endChar": 67
+      },
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6357cc4_3c967537",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-02-28T20:17:50Z",
       "side": 1,
       "message": "Remove this if it is no longer necessary?",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73eb1a9_4acf3b5e",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-01T19:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6357cc4_3c967537",
       "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9be610ed_8f373681",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 6676,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-01T19:49:55Z",
+      "side": 1,
+      "message": "I agree it is inaccurate. For now, I am trying to reproduce what was happening before as closely as possible. Any notices for these ended up in the system and vendor notice files.",
+      "parentUuid": "54955789_ac1afaa5",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "709a2883_2f3c04a9",
         "filename": "core/Makefile",
         "patchSetId": 6
@@ -71,6 +131,24 @@
       "writtenOn": "2022-02-28T20:17:50Z",
       "side": 1,
       "message": "Would it make sense to put this in a separate file that is included here?  That will make it more obvious where code that needs to run before this should be inserted.",
+      "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4507ef3_9cf4eda5",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 6843,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-01T19:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "709a2883_2f3c04a9",
       "revId": "6191253be2fdf6f65b8d7ed9b14290d4b097fd7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
