@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d967dd0_3d084459",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-03-02T16:08:07Z",
+      "side": 1,
+      "message": "line[0]",
+      "revId": "0374741b7bf5666ab261178a6fe6bbf45359922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
