@@ -561,7 +561,7 @@ python_defaults {
         "validate_target_files.py",
 	"merge/*.py",
 
-        "test_*.py",
+        "test_utils.py",
     ],
     libs: [
         "releasetools_add_img_to_target_files",
