@@ -21,6 +21,11 @@ python_binary_host {
     defaults: ["releasetools_binary_defaults"],
     srcs: [
         "merge_target_files.py",
+
+        "merge_compatibility_checks.py",
+        "merge_dexopt.py",
+        "merge_meta.py",
+        "merge_utils.py",
     ],
     libs: [
         "releasetools_add_img_to_target_files",
