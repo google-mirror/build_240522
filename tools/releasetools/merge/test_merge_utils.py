@@ -20,20 +20,12 @@ import common
 import merge_target_files
 import merge_utils
 import test_utils
-from merge_target_files import (
-    DEFAULT_FRAMEWORK_ITEM_LIST,
-    DEFAULT_VENDOR_ITEM_LIST,
-    DEFAULT_FRAMEWORK_MISC_INFO_KEYS,
-)
 
 
 class MergeUtilsTest(test_utils.ReleaseToolsTestCase):
 
   def setUp(self):
     self.OPTIONS = merge_target_files.OPTIONS
-    self.OPTIONS.framework_item_list = DEFAULT_FRAMEWORK_ITEM_LIST
-    self.OPTIONS.framework_misc_info_keys = DEFAULT_FRAMEWORK_MISC_INFO_KEYS
-    self.OPTIONS.vendor_item_list = DEFAULT_VENDOR_ITEM_LIST
 
   def test_CopyItems_CopiesItemsMatchingPatterns(self):
 
@@ -88,21 +80,30 @@ class MergeUtilsTest(test_utils.ReleaseToolsTestCase):
         os.readlink(os.path.join(output_dir, 'a_link.cpp')), 'a.cpp')
 
   def test_ValidateConfigLists_ReturnsFalseIfSharedExtractedPartition(self):
-    self.OPTIONS.vendor_item_list = list(DEFAULT_VENDOR_ITEM_LIST)
+    self.OPTIONS.system_item_list = [
+        'SYSTEM/*',
+    ]
+    self.OPTIONS.vendor_item_list = [
+        'SYSTEM/my_system_file',
+        'VENDOR/*',
+    ]
     self.OPTIONS.vendor_item_list.append('SYSTEM/my_system_file')
     self.assertFalse(merge_utils.ValidateConfigLists())
 
   def test_ValidateConfigLists_ReturnsFalseIfSharedExtractedPartitionImage(
       self):
-    self.OPTIONS.vendor_item_list = list(DEFAULT_VENDOR_ITEM_LIST)
-    self.OPTIONS.vendor_item_list.append('IMAGES/system.img')
+    self.OPTIONS.system_item_list = [
+        'SYSTEM/*',
+    ]
+    self.OPTIONS.vendor_item_list = [
+        'IMAGES/system.img',
+        'VENDOR/*',
+    ]
     self.assertFalse(merge_utils.ValidateConfigLists())
 
   def test_ValidateConfigLists_ReturnsFalseIfBadSystemMiscInfoKeys(self):
     for bad_key in ['dynamic_partition_list', 'super_partition_groups']:
-      self.OPTIONS.framework_misc_info_keys = list(
-          DEFAULT_FRAMEWORK_MISC_INFO_KEYS)
-      self.OPTIONS.framework_misc_info_keys.append(bad_key)
+      self.OPTIONS.framework_misc_info_keys = [bad_key]
       self.assertFalse(merge_utils.ValidateConfigLists())
 
   def test_ItemListToPartitionSet(self):

@@ -31,20 +31,20 @@ Usage: merge_target_files [args]
       archive.
 
   --framework-item-list framework-item-list-file
-      The optional path to a newline-separated config file that replaces the
-      contents of DEFAULT_FRAMEWORK_ITEM_LIST if provided.
+      The optional path to a newline-separated config file of items that
+      are extracted as-is from the framework target files package.
 
   --framework-misc-info-keys framework-misc-info-keys-file
-      The optional path to a newline-separated config file that replaces the
-      contents of DEFAULT_FRAMEWORK_MISC_INFO_KEYS if provided.
+      The optional path to a newline-separated config file of keys to
+      extract from the framework META/misc_info.txt file.
 
   --vendor-target-files vendor-target-files-zip-archive
       The input target files package containing vendor bits. This is a zip
       archive.
 
   --vendor-item-list vendor-item-list-file
-      The optional path to a newline-separated config file that replaces the
-      contents of DEFAULT_VENDOR_ITEM_LIST if provided.
+      The optional path to a newline-separated config file of items that
+      are extracted as-is from the vendor target files package.
 
   --output-target-files output-target-files-package
       If provided, the output merged target files package. Also a zip archive.
@@ -107,6 +107,7 @@ import os
 import shutil
 import subprocess
 import sys
+import zipfile
 
 import add_img_to_target_files
 import build_image
@@ -127,13 +128,13 @@ OPTIONS = common.OPTIONS
 # Always turn on verbose logging.
 OPTIONS.verbose = True
 OPTIONS.framework_target_files = None
-OPTIONS.framework_item_list = None
-OPTIONS.framework_misc_info_keys = None
+OPTIONS.framework_item_list = []
+OPTIONS.framework_misc_info_keys = []
 OPTIONS.vendor_target_files = None
-OPTIONS.vendor_item_list = None
+OPTIONS.vendor_item_list = []
 OPTIONS.output_target_files = None
 OPTIONS.output_dir = None
-OPTIONS.output_item_list = None
+OPTIONS.output_item_list = []
 OPTIONS.output_ota = None
 OPTIONS.output_img = None
 OPTIONS.output_super_empty = None
@@ -147,63 +148,71 @@ OPTIONS.framework_dexpreopt_config = None
 OPTIONS.framework_dexpreopt_tools = None
 OPTIONS.vendor_dexpreopt_config = None
 
-# DEFAULT_FRAMEWORK_ITEM_LIST is a list of items to extract from the partial
-# framework target files package as is, meaning these items will land in the
-# output target files package exactly as they appear in the input partial
-# framework target files package.
+FRAMEWORK_PARTITIONS = ('system', 'product', 'system_ext', 'system_other',
+                        'root', 'system_dlkm')
+VENDOR_PARTITIONS = ('vendor', 'odm', 'oem', 'boot', 'vendor_boot',
+                     'prebuilt_images', 'radio', 'data', 'vendor_dlkm',
+                     'odm_dlkm')
 
-DEFAULT_FRAMEWORK_ITEM_LIST = (
-    'META/apkcerts.txt',
-    'META/filesystem_config.txt',
-    'META/root_filesystem_config.txt',
-    'META/update_engine_config.txt',
-    'PRODUCT/*',
-    'ROOT/*',
-    'SYSTEM/*',
-)
 
-# DEFAULT_FRAMEWORK_MISC_INFO_KEYS is a list of keys to obtain from the
-# framework instance of META/misc_info.txt. The remaining keys should come
-# from the vendor instance.
+def infer_item_list(input_zip, framework):
+  item_list = []
 
-DEFAULT_FRAMEWORK_MISC_INFO_KEYS = (
-    'avb_system_hashtree_enable',
-    'avb_system_add_hashtree_footer_args',
-    'avb_system_key_path',
-    'avb_system_algorithm',
-    'avb_system_rollback_index_location',
-    'avb_product_hashtree_enable',
-    'avb_product_add_hashtree_footer_args',
-    'avb_system_ext_hashtree_enable',
-    'avb_system_ext_add_hashtree_footer_args',
-    'system_root_image',
-    'root_dir',
-    'ab_update',
-    'default_system_dev_certificate',
-    'system_size',
-    'building_system_image',
-    'building_system_ext_image',
-    'building_product_image',
-)
+  with zipfile.ZipFile(input_zip, allowZip64=True) as input_zipfile:
+    input_namelist = input_zipfile.namelist()
 
-# DEFAULT_VENDOR_ITEM_LIST is a list of items to extract from the partial
-# vendor target files package as is, meaning these items will land in the output
-# target files package exactly as they appear in the input partial vendor target
-# files package.
+  for partition in (FRAMEWORK_PARTITIONS if framework else VENDOR_PARTITIONS):
+    for namelist in input_namelist:
+      if namelist.startswith('%s/' % partition.upper()):
+        fs_config_prefix = '' if partition == 'system' else '%s_' % partition
+        item_list.extend([
+            '%s/*' % partition.upper(),
+            'IMAGES/%s.img' % partition,
+            'IMAGES/%s.map' % partition,
+            'META/%sfilesystem_config.txt' % fs_config_prefix,
+        ])
+        break
 
-DEFAULT_VENDOR_ITEM_LIST = (
-    'META/boot_filesystem_config.txt',
-    'META/otakeys.txt',
-    'META/releasetools.py',
-    'META/vendor_filesystem_config.txt',
-    'BOOT/*',
-    'DATA/*',
-    'ODM/*',
-    'OTA/android-info.txt',
-    'PREBUILT_IMAGES/*',
-    'RADIO/*',
-    'VENDOR/*',
-)
+  if framework:
+    item_list.extend([
+        'META/liblz4.so',
+        'META/postinstall_config.txt',
+        'META/update_engine_config.txt',
+        'META/zucchini_config.txt',
+    ])
+  else:
+    item_list.extend([
+        'META/kernel_configs.txt',
+        'META/kernel_version.txt',
+        'META/otakeys.txt',
+        'META/releasetools.py',
+        'OTA/android-info.txt',
+    ])
+
+  return sorted(item_list)
+
+
+def infer_framework_misc_info_keys():
+  keys = [
+      'ab_update',
+      'avb_vbmeta_system',
+      'avb_vbmeta_system_algorithm',
+      'avb_vbmeta_system_key_path',
+      'avb_vbmeta_system_rollback_index_location',
+      'default_system_dev_certificate',
+  ]
+
+  for partition in FRAMEWORK_PARTITIONS:
+    fs_type_prefix = '' if partition == 'system' else '%s_' % partition
+    keys.extend([
+        'avb_%s_hashtree_enable' % partition,
+        'avb_%s_add_hashtree_footer_args' % partition,
+        '%s_disable_sparse' % partition,
+        'building_%s_image' % partition,
+        '%sfs_type' % fs_type_prefix,
+    ])
+
+  return sorted(keys)
 
 
 def create_merged_package(temp_dir):
@@ -628,7 +637,8 @@ def main():
     OPTIONS.framework_item_list = common.LoadListFromFile(
         OPTIONS.framework_item_list)
   else:
-    OPTIONS.framework_item_list = DEFAULT_FRAMEWORK_ITEM_LIST
+    OPTIONS.framework_item_list = infer_item_list(
+        input_zip=OPTIONS.framework_target_files, framework=True)
   OPTIONS.framework_partition_set = merge_utils.ItemListToPartitionSet(
       OPTIONS.framework_item_list)
 
@@ -636,12 +646,14 @@ def main():
     OPTIONS.framework_misc_info_keys = common.LoadListFromFile(
         OPTIONS.framework_misc_info_keys)
   else:
-    OPTIONS.framework_misc_info_keys = DEFAULT_FRAMEWORK_MISC_INFO_KEYS
+    OPTIONS.framework_misc_info_keys = infer_framework_misc_info_keys()
 
   if OPTIONS.vendor_item_list:
     OPTIONS.vendor_item_list = common.LoadListFromFile(OPTIONS.vendor_item_list)
   else:
-    OPTIONS.vendor_item_list = DEFAULT_VENDOR_ITEM_LIST
+    OPTIONS.vendor_item_list = infer_item_list(
+        input_zip=OPTIONS.vendor_target_files, framework=False)
+
   OPTIONS.vendor_partition_set = merge_utils.ItemListToPartitionSet(
       OPTIONS.vendor_item_list)
 
