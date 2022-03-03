@@ -34,6 +34,24 @@
       "parentUuid": "84d780ee_6d22beab",
       "revId": "77570059cde91c4bc6649ba05d453f4dd3161fc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c2f580f_755ab7f9",
+        "filename": "core/definitions.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-03T20:39:54Z",
+      "side": 1,
+      "message": "Keep in mind, too, this target is meant to be the union of all potential library names that could appear in any notice. I don\u0027t see any harm from accidentally including names from prior lunch targets etc.\n\nIt\u0027s mostly needed for the necessary commms that must go out before we switch to the new notice code.",
+      "parentUuid": "0f825c10_93b5b4b6",
+      "revId": "77570059cde91c4bc6649ba05d453f4dd3161fc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
