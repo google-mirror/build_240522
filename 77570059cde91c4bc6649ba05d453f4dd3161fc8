@@ -16,6 +16,24 @@
       "message": "Can you use `$(call dump-words-to-file,$(PRIVATE_ALL_LICENSE_METADATA),$(PRIVATE_LIST_FILE))`?  That will be a much more accurate list.  Otherwise you\u0027ll pick up random license files left over from other previous lunch targets, removed modules, etc.",
       "revId": "77570059cde91c4bc6649ba05d453f4dd3161fc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f825c10_93b5b4b6",
+        "filename": "core/definitions.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-03T19:57:21Z",
+      "side": 1,
+      "message": "\"Reporting notice library names for at least 67730 license metadata files\"\n\nhttps://android.googlesource.com/platform/build/+/refs/heads/master/core/definitions.mk#2329\n\nThat\u0027s 5x too many words.",
+      "parentUuid": "84d780ee_6d22beab",
+      "revId": "77570059cde91c4bc6649ba05d453f4dd3161fc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
