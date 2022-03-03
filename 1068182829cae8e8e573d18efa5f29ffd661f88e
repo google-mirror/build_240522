@@ -16,6 +16,24 @@
       "message": "I wonder if this is a good opportunity to clean up some of this code. `get-all-product-makefiles` is called only once, and so is `get-product-makefiles`. If the code is just substituted, it will turn out that it can be combined with foreach loop over its result, because what we really are doing here is building two parallel lists, all_named_products and all_product_makefiles. And, the check that opted-in project\u0027s name is valid becomes just a lookup in $(all_named_product).",
       "revId": "1068182829cae8e8e573d18efa5f29ffd661f88e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cc99d1_8544a68c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-03T19:21:45Z",
+      "side": 1,
+      "message": "So if I understand you correctly, you want `get-all-product-makefiles` to produce `all_named_products` and `all_product_makefiles` directly, instead of producing pairs of the product name and makefile? It would also have to produce `current_product_makefile` in that case, or else it would be difficult to recreate it from parallel lists, as make has no `indexof` function. \n\n\u003e And, the check that opted-in project\u0027s name is valid becomes just a lookup in $(all_named_product).\n\nThis would not really work the same way as today, because right now we enforce that the `STARLARK_OPT_IN_PRODUCTS` variable only opts in products that are in the same `AndroidProducts.mk` file. I think at least the most straightforward way to do what you\u0027re suggesting would allow you to opt in products from different AndroidProducts.mk files, which I think is less desirable.\n\nSince these changes don\u0027t seem to be obvious, do you mind if we tackle them in a followup cl? Maybe you could send one out so I could see exactly what you mean.",
+      "parentUuid": "0ad07466_4fb47b38",
+      "revId": "1068182829cae8e8e573d18efa5f29ffd661f88e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
