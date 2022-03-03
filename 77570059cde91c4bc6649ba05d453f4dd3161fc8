@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d780ee_6d22beab",
+        "filename": "core/definitions.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-03T19:23:22Z",
+      "side": 1,
+      "message": "Can you use `$(call dump-words-to-file,$(PRIVATE_ALL_LICENSE_METADATA),$(PRIVATE_LIST_FILE))`?  That will be a much more accurate list.  Otherwise you\u0027ll pick up random license files left over from other previous lunch targets, removed modules, etc.",
+      "revId": "77570059cde91c4bc6649ba05d453f4dd3161fc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
