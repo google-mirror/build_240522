@@ -22,6 +22,30 @@
       },
       "revId": "675973c1f0e5b3da1aa298414ddf82cc506a578e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529dc896_26226a13",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-03T22:00:49Z",
+      "side": 1,
+      "message": "Or actually, I think this is better to never stomp an explicitly set value:\n\n```\nifneq (,$(MODULE_BUILD_FROM_SOURCE))\n  # Keep an explicit setting.\nelse ifeq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS))$(findstring com.google.android.conscrypt,$(PRODUCT_PACKAGES)))\n  # Blah blah\n  MODULE_BUILD_FROM_SOURCE :\u003d true\nelse ifeq (,$(filter-out modules_% mainline_modules_%,$(TARGET_PRODUCT)))\n  # Always build from source in unbundled builds using the module targets.\n  MODULE_BUILD_FROM_SOURCE :\u003d true\nelse\n  MODULE_BUILD_FROM_SOURCE :\u003d $(BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE)\nendif\n```\n\n(Note `?\u003d` is no longer necessary in the last clause.)",
+      "parentUuid": "00689fe2_25078eca",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 61
+      },
+      "revId": "675973c1f0e5b3da1aa298414ddf82cc506a578e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
