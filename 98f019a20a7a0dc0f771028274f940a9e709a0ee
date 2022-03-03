@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf76a26_603758e0",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 6635,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-03T01:17:55Z",
+      "side": 1,
+      "message": "Do you want a comment here so that rules that would affect licensing aren\u0027t added below this?",
+      "revId": "98f019a20a7a0dc0f771028274f940a9e709a0ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
