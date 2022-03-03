@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad07466_4fb47b38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-03T02:01:32Z",
+      "side": 1,
+      "message": "I wonder if this is a good opportunity to clean up some of this code. `get-all-product-makefiles` is called only once, and so is `get-product-makefiles`. If the code is just substituted, it will turn out that it can be combined with foreach loop over its result, because what we really are doing here is building two parallel lists, all_named_products and all_product_makefiles. And, the check that opted-in project\u0027s name is valid becomes just a lookup in $(all_named_product).",
+      "revId": "1068182829cae8e8e573d18efa5f29ffd661f88e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
