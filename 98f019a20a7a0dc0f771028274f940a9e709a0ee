@@ -34,6 +34,24 @@
       "parentUuid": "cbf76a26_603758e0",
       "revId": "98f019a20a7a0dc0f771028274f940a9e709a0ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b88e9e_bf784700",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 6635,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-03T19:36:23Z",
+      "side": 1,
+      "message": "Oops, somehow missed that comment.",
+      "parentUuid": "8313affa_09023801",
+      "revId": "98f019a20a7a0dc0f771028274f940a9e709a0ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
