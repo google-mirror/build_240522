@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f9357f_62228eb0",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-03T01:16:29Z",
+      "side": 1,
+      "message": "After https://android-review.googlesource.com/c/platform/build/+/1910142/1/core/notice_files.mk#132 the meta_lic files are no longer stored in this directory, they are distributed in the per-module directories so that they don\u0027t collide between host vs. device, 32 vs 64 bit and static vs shared variants.",
+      "range": {
+        "startLine": 899,
+        "startChar": 14,
+        "endLine": 899,
+        "endChar": 43
+      },
+      "revId": "7cb7cc41afcd8cc2f0086aa96ab4e13922b0a3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
