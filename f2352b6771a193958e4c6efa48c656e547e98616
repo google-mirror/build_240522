@@ -94,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6a7995_01167b6a",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2022-03-03T16:52:55Z",
+      "side": 1,
+      "message": "unbundled builds set MODULE_BUILD_FROM_SOURCE\u003dtrue explicitly:\n\nhttps://android.googlesource.com/platform/packages/modules/common/+/0a4fe9ad55d318c57b7aeec8c0919f96af446548/build/build_unbundled_mainline_module.sh#142\n\nany reason to set this here?",
+      "parentUuid": "dde367e2_6d5db656",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 46
+      },
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "294e4dd6_5a9d1c6d",
@@ -107,6 +131,24 @@
       "writtenOn": "2022-02-28T23:53:45Z",
       "side": 1,
       "message": "It\u0027s probably better if an explicit MODULE_BUILD_FROM_SOURCE\u003dfalse (or BRANCH_USES_PREBUILTS_BY_DEFAULT\u003dtrue) propagates to the ART variable as well.",
+      "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89bcfe88_77294e1c",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2022-03-03T16:52:55Z",
+      "side": 1,
+      "message": "but where in this set of ifs? with the new logic MODULE_BUILD_FROM_SOURCE is always set, so if I add here a condition for MODULE_BUILD_FROM_SOURCE\u003dfalse too all the following conditions would be invalidated.\n\nCan you suggest a final logic (or follow up in another CL) for this block of ifs?",
+      "parentUuid": "294e4dd6_5a9d1c6d",
       "revId": "f2352b6771a193958e4c6efa48c656e547e98616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
