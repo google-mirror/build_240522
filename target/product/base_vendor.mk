@@ -69,6 +69,12 @@ PRODUCT_PACKAGES += \
     selinux_policy_nonsystem \
     shell_and_utilities_vendor \
 
+PRODUCT_NO_HIDL := true
+ifeq ($(PRODUCT_NO_HIDL),true)
+PRODUCT_PACKAGES := $(filter-out android.hardware.cas@1.2-service,$(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out android.hardware.media.omx@1.0-service,$(PRODUCT_PACKAGES))
+endif
+
 # Base module when shipping api level is less than or equal to 29
 PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29 += \
     android.hardware.configstore@1.1-service \

@@ -287,6 +287,17 @@ PRODUCT_PACKAGES += \
     wifi.rc \
     wm \
 
+PRODUCT_NO_HIDL := true
+ifeq ($(PRODUCT_NO_HIDL),true)
+PRODUCT_PACKAGES := $(filter-out com.android.media.swcodec,$(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out com.android.mediaprovider,$(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out wificond,$(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out libsensorservice,$(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out sensorservice,$(PRODUCT_PACKAGES))
+# causes system_server to hang and be killed by the watchdog
+#PRODUCT_PACKAGES := $(filter-out netd,$(PRODUCT_PACKAGES))
+endif
+
 # VINTF data for system image
 PRODUCT_PACKAGES += \
     system_manifest.xml \

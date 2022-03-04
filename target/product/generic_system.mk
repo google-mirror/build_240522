@@ -82,6 +82,11 @@ PRODUCT_PACKAGES += \
     libnl \
     libprotobuf-cpp-full \
 
+PRODUCT_NO_HIDL := true
+ifeq ($(PRODUCT_NO_HIDL),true)
+PRODUCT_PACKAGES := $(filter-out android.hardware.wifi@1.0,$(PRODUCT_PACKAGES))
+endif
+
 # These libraries are empty and have been combined into libhidlbase, but are still depended
 # on by things off /system.
 # TODO(b/135686713): remove these
