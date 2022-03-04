@@ -123,6 +123,24 @@
       "parentUuid": "b07da350_02b4f6d2",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd19dc52_ee4c1b32",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-04T12:24:37Z",
+      "side": 1,
+      "message": "I feel like banchan should explicitly set M_B_F_S and then this can be deleted. banchan was your only concern, right Martin? Can you take an AI to fix that?",
+      "parentUuid": "e5dddab3_3c93798b",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
