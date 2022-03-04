@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf7cdbb_10491bbe",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2022-03-04T10:49:43Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "6ae652a0_885e954f",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b44692de_4c662639",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I see Martin suggested this in the other comment, so maybe he should respond to this.",
       "parentUuid": "b44692de_4c662639",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0764235f_a4409b8a",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2022-03-04T10:49:43Z",
+      "side": 1,
+      "message": "problem with T_B_A is that we need to list every single module and that list should somehow be kept up to date. I\u0027m inclined to remove this condition until we find a better situation.\n\nMartin?",
+      "parentUuid": "a8a2b92f_7242e9c7",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
