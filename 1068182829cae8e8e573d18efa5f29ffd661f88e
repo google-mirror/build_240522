@@ -34,6 +34,24 @@
       "parentUuid": "0ad07466_4fb47b38",
       "revId": "1068182829cae8e8e573d18efa5f29ffd661f88e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76d78cc_de4325c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-04T23:01:03Z",
+      "side": 1,
+      "message": "Yes, please see aosp/2006783",
+      "parentUuid": "56cc99d1_8544a68c",
+      "revId": "1068182829cae8e8e573d18efa5f29ffd661f88e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
