@@ -87,6 +87,24 @@
       "parentUuid": "a8a2b92f_7242e9c7",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07da350_02b4f6d2",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-04T11:13:38Z",
+      "side": 1,
+      "message": "Agreed this is a bit hacky - what it should actually do is look for some product variable, say, PRODUCT_IS_UNBUNDLED_MODULE\u003dtrue that would get set by these products. (This touches upon the idea to introduce different \"classes\" of products so we could check that users don\u0027t try to lunch modules_arm64 or banchan redfin etc.)\n\nHowever, this is more of a convenience to spare users a headache getting the build system to do something sensible. It doesn\u0027t need to be 100% correct - if there\u0027s a new module product not detected here the user would need to set MODULE_BUILD_FROM_SOURCE manually and get on with it. So I think this is better than nothing.",
+      "parentUuid": "0764235f_a4409b8a",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
