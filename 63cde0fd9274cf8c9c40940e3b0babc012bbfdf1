@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225854b4_dc71782e",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-03-04T17:22:22Z",
+      "side": 1,
+      "message": "Not something you have to do in this CL, it\u0027s preferred to pass OPTIONS.vendor_otatools in instead of reading from global OPTIONS.",
+      "range": {
+        "startLine": 1562,
+        "startChar": 4,
+        "endLine": 1562,
+        "endChar": 25
+      },
+      "revId": "63cde0fd9274cf8c9c40940e3b0babc012bbfdf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
