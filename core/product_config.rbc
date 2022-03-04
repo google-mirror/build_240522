@@ -126,6 +126,8 @@ def _product_configuration(top_pcm_name, top_pcm, input_variables_init):
     # whose body consists of a single init function.
 
     globals, globals_base = _init_globals(input_variables_init)
+    product_list_vars = list(globals["RBC_product_list_vars"].split(" "))
+    product_single_value_vars = list(globals["RBC_product_single_value_vars"].split(" "))
 
     config_postfix = []  # Configs in postfix order
 
@@ -161,7 +163,7 @@ def _product_configuration(top_pcm_name, top_pcm, input_variables_init):
             print("#%d: %s" % (n, name))
 
         # Run PCM.
-        handle = __h_new()
+        handle = __h_new(product_list_vars, product_single_value_vars)
         pcm(globals, handle)
 
         # Now we know everything about this PCM, record it in 'configs'.
@@ -390,12 +392,13 @@ def __words(string_or_list):
 #   product attributes dict ("cfg")
 #   inherited modules dict (maps module name to PCM)
 #   default value list (initially empty, modified by inheriting)
-def __h_new():
+def __h_new(product_list_vars = list(), product_single_value_vars = list()):
     """Constructs a handle which is passed to PCM."""
     return struct(
         cfg = dict(),
         inherited_modules = dict(),
-        default_list_value = list()
+        product_list_vars = product_list_vars,
+        product_single_value_vars = product_single_value_vars,
     )
 
 def __h_cfg(handle):
@@ -406,31 +409,22 @@ def __h_cfg(handle):
     """
     return handle.cfg
 
-def _setdefault(handle, attr):
-    """If attribute has not been set, assigns default value to it.
-
-    This function is exported as rblf.setdefault().
-    Only list attributes are initialized this way. The default
-    value is kept in the PCM's handle. Calling inherit() updates it.
-    """
-    cfg = handle.cfg
-    if cfg.get(attr) == None:
-        cfg[attr] = list(handle.default_list_value)
-    return cfg[attr]
-
 def _inherit(handle, pcm_name, pcm):
     """Records inheritance.
 
     This function is exported as rblf.inherit, PCM calls it when
     a module is inherited.
     """
+    if not handle.product_list_vars:
+        fail("inherit() cannot be called from board configuration")
+
     handle.inherited_modules[pcm_name] = pcm
-    handle.default_list_value.append(_indirect(pcm_name))
 
     # Add inherited module reference to all configuration values
-    for attr, val in handle.cfg.items():
-        if type(val) == "list":
-            val.append(_indirect(pcm_name))
+    for attr in handle.product_list_vars:
+        if attr not in handle.cfg:
+            handle.cfg[attr] = []
+        handle.cfg[attr].append(_indirect(pcm_name))
 
 def __base(path):
     """Returns basename."""
@@ -751,7 +745,6 @@ rblf = struct(
     product_copy_files_by_pattern = _product_copy_files_by_pattern,
     require_artifacts_in_path = _require_artifacts_in_path,
     require_artifacts_in_path_relaxed = _require_artifacts_in_path_relaxed,
-    setdefault = _setdefault,
     shell = rblf_shell,
     warning = _mkwarning,
     words = __words,

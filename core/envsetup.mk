@@ -328,6 +328,8 @@ $(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(.VA
 $(file >$(1),\
 $(foreach v, $(shell grep -he "^[A-Z][A-Z0-9_]*$$" $(OUT_DIR)/dump-variables-rbc-temp.txt | grep -vhE "^(SOONG_.*|LOCAL_PATH|TOPDIR|PRODUCT_COPY_OUT_.*|TRACE_BEGIN_SOONG)$$"),\
 $(v) := $(strip $($(v)))$(newline))\
+RBC_product_list_vars := $(strip $(_product_list_vars))$(newline)\
+RBC_product_single_value_vars := $(strip $(_product_single_value_vars))$(newline)\
 $(foreach ns,$(SOONG_CONFIG_NAMESPACES),\
 $(foreach v,$(SOONG_CONFIG_$(ns)),\
 $$(call soong_config_set,$(ns),$(v),$(SOONG_CONFIG_$(ns)_$(v)))$(newline))))
