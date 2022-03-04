@@ -105,6 +105,24 @@
       "parentUuid": "0764235f_a4409b8a",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dddab3_3c93798b",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1305591
+      },
+      "writtenOn": "2022-03-04T11:18:32Z",
+      "side": 1,
+      "message": "sgtm. Anton?",
+      "parentUuid": "b07da350_02b4f6d2",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
