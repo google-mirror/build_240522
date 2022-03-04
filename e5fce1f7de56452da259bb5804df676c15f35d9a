@@ -177,6 +177,24 @@
       "parentUuid": "174ee698_5b8cbe74",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a4a7f7_201d4273",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-04T20:13:36Z",
+      "side": 1,
+      "message": "Filed b/222723757. I\u0027ll take a look at it once this is in. It ought to be straightforward.",
+      "parentUuid": "bd6dad92_1a410c1e",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
