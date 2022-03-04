@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae652a0_885e954f",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-04T10:39:29Z",
+      "side": 1,
+      "message": "I feel like this comment only applies to Google\u0027s tree.",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44692de_4c662639",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-04T10:39:29Z",
+      "side": 1,
+      "message": "This is not the right way to configure products, it breaks if you inherit these products with some different names (like they want to do for Go variants, for example). Could it look at TARGET_BUILD_APPS instead?\n\n(ART already has carveouts below for T_B_A, FWIW)",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
