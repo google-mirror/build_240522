@@ -690,34 +690,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
     # Updates pvmfw embedded public key with the virt APEX payload key.
     elif filename == "PREBUILT_IMAGES/pvmfw.img":
-      # Find the name of the virt APEX in the target files.
-      namelist = input_tf_zip.namelist()
-      apex_gen = (GetApexFilename(f) for f in namelist if IsApexFile(f))
-      virt_apex_re = re.compile("^com\.([^\.]+\.)?android\.virt\.apex$")
-      virt_apex = next((a for a in apex_gen if virt_apex_re.match(a)), None)
-      if not virt_apex:
-        print("Removing %s from ramdisk: virt APEX not found" % filename)
-      else:
-        print("Replacing %s embedded key with %s key" % (filename, virt_apex))
-        # Get the current and new embedded keys.
-        payload_key, container_key, sign_tool = apex_keys[virt_apex]
-        new_pubkey_path = common.ExtractAvbPublicKey(
-            misc_info['avb_avbtool'], payload_key)
-        with open(new_pubkey_path, 'rb') as f:
-          new_pubkey = f.read()
-        pubkey_info = copy.copy(
-            input_tf_zip.getinfo("PREBUILT_IMAGES/pvmfw_embedded.avbpubkey"))
-        old_pubkey = input_tf_zip.read(pubkey_info.filename)
-        # Validate the keys and image.
-        if len(old_pubkey) != len(new_pubkey):
-          raise common.ExternalError("pvmfw embedded public key size mismatch")
-        pos = data.find(old_pubkey)
-        if pos == -1:
-          raise common.ExternalError("pvmfw embedded public key not found")
-        # Replace the key and copy new files.
-        new_data = data[:pos] + new_pubkey + data[pos+len(old_pubkey):]
-        common.ZipWriteStr(output_tf_zip, out_info, new_data)
-        common.ZipWriteStr(output_tf_zip, pubkey_info, new_pubkey)
+      ReplacePvmfw(input_tf_zip, output_tf_zip, filename, out_info, data, apex_keys, misc_info)
     elif filename == "PREBUILT_IMAGES/pvmfw_embedded.avbpubkey":
       pass
 
@@ -1133,6 +1106,41 @@ def ReplaceGkiSigningKey(misc_info):
   if extra_args:
     print('Setting GKI signing args: "%s"' % (extra_args))
     misc_info["gki_signing_signature_args"] = extra_args
+
+
+def ReplacePvmfw(input_tf_zip, output_tf_zip, filename, out_info, data, apex_keys, misc_info):
+  """Replaces pvmfw.img and pvmfw_embedded.avbpubkey
+
+  - pvmfw.img: replace its embedded pubkey with the pubkey for the virt APEX.
+  - pvmfw_embedded.avbpubkey: replace the contents with the pubkey for the virt APEX.
+  """
+  # Find the name of the virt APEX in the target files.
+  namelist = input_tf_zip.namelist()
+  apex_gen = (GetApexFilename(f) for f in namelist if IsApexFile(f))
+  virt_apex_re = re.compile("^com\.([^\.]+\.)?android\.virt\.apex$")
+  virt_apex = next((a for a in apex_gen if virt_apex_re.match(a)), None)
+  if not virt_apex:
+    print("Removing %s from ramdisk: virt APEX not found" % filename)
+    return
+
+  print("Replacing %s embedded key with %s key" % (filename, virt_apex))
+  # Get the current and new embedded keys.
+  payload_key, _, _ = apex_keys[virt_apex]
+  new_pubkey_path = common.ExtractAvbPublicKey(misc_info['avb_avbtool'], payload_key)
+  with open(new_pubkey_path, 'rb') as f:
+    new_pubkey = f.read()
+  pubkey_info = copy.copy(input_tf_zip.getinfo("PREBUILT_IMAGES/pvmfw_embedded.avbpubkey"))
+  old_pubkey = input_tf_zip.read(pubkey_info.filename)
+  # Validate the keys and image.
+  if len(old_pubkey) != len(new_pubkey):
+    raise common.ExternalError("pvmfw embedded public key size mismatch")
+  pos = data.find(old_pubkey)
+  if pos == -1:
+    raise common.ExternalError("pvmfw embedded public key not found")
+  # Replace the key and copy new files.
+  new_data = data[:pos] + new_pubkey + data[pos+len(old_pubkey):]
+  common.ZipWriteStr(output_tf_zip, out_info, new_data)
+  common.ZipWriteStr(output_tf_zip, pubkey_info, new_pubkey)
 
 
 def BuildKeyMap(misc_info, key_mapping_options):
