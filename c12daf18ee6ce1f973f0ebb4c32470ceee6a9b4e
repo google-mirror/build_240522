@@ -16,6 +16,24 @@
       "message": "Consider including a file group here instead, defined within merge/Android.bp",
       "revId": "c12daf18ee6ce1f973f0ebb4c32470ceee6a9b4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d516c85_80cc8350",
+        "filename": "tools/releasetools/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-03-04T22:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "127661db_783cdf4d",
+      "revId": "c12daf18ee6ce1f973f0ebb4c32470ceee6a9b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
