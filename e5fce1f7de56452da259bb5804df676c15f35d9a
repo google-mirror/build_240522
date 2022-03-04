@@ -33,6 +33,24 @@
       "message": "This is not the right way to configure products, it breaks if you inherit these products with some different names (like they want to do for Go variants, for example). Could it look at TARGET_BUILD_APPS instead?\n\n(ART already has carveouts below for T_B_A, FWIW)",
       "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a2b92f_7242e9c7",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-04T10:40:10Z",
+      "side": 1,
+      "message": "I see Martin suggested this in the other comment, so maybe he should respond to this.",
+      "parentUuid": "b44692de_4c662639",
+      "revId": "e5fce1f7de56452da259bb5804df676c15f35d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
