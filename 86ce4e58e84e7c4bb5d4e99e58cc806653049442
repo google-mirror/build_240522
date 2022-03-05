@@ -81,6 +81,40 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "609a48ee_a484f79a",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:55:13Z",
+      "side": 1,
+      "message": "Optional: Could we add a check that every product name is a valid C identifier?",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d705edb3_2b596fa5",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:55:13Z",
+      "side": 1,
+      "message": "Nit: inconsistent spacing around the :\u003d here and on the following variables.",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3607237c_10489d45",
