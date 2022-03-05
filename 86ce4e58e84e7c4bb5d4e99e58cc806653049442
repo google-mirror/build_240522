@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2afba3fa_24a5900c",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "Call this variable android_products_files or something else that\u0027s more specific than just general makefiles.\n\nAlso/Alternatively, consider moving this down to closer to where it\u0027s used or inline it",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd79b59_5af1959b",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "What\u0027s the third variable? STARLARK_OPT_IN_PRODUCTS hasn\u0027t been added yet and isn\u0027t described here.",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c36662b_4add7389",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "These examples are missing the second argument to the _first/_second calls.",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884ba7fa_16bb173d",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "nit: wrong type of quote",
+      "range": {
+        "startLine": 163,
+        "startChar": 40,
+        "endLine": 163,
+        "endChar": 41
+      },
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3607237c_10489d45",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "Remove for this cl",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e4675c_a94f1bed",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "nit: The product_paths, current_product_makefile, and COMMON_LUNCH_CHOICES lines are missing spaces around the :\u003d",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580a86e5_b3e878a8",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-05T00:50:46Z",
+      "side": 1,
+      "message": "This indentation shouldn\u0027t have been changed, right?",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
