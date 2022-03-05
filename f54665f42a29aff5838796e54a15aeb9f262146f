@@ -16,6 +16,24 @@
       "message": "Hi David, I think 5.4 don\u0027t need such option (5.4 just doesn\u0027t support big pcluster...). 4.19 may need that, but I\u0027m not sure if we care it now..",
       "revId": "f54665f42a29aff5838796e54a15aeb9f262146f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb668ba2_7b540be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2022-03-05T05:28:42Z",
+      "side": 1,
+      "message": ".. I think it may due some vendors backporting big pcluster feature to 5.4 or lower kernels.\nYet if \"-C\" (\u003e 4096) option is not specified, it won\u0027t affect upstream/aosp 5.4 kernel.",
+      "parentUuid": "49b12aa6_b3a35104",
+      "revId": "f54665f42a29aff5838796e54a15aeb9f262146f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
