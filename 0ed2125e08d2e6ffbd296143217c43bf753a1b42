@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ab5593_40c942d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-05T02:25:03Z",
+      "side": 1,
+      "message": "I don\u0027t know why this is requesting \"Build-Team-Review\", but that\u0027s not a vote that I have.",
+      "revId": "0ed2125e08d2e6ffbd296143217c43bf753a1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477a7905_6d494463",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-05T02:25:03Z",
+      "side": 1,
+      "message": "This is a slight change in behavior, this previously would have overridden MODULE_BUILD_FROM_SOURCE\u003dfalse on the command line.",
+      "revId": "0ed2125e08d2e6ffbd296143217c43bf753a1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
