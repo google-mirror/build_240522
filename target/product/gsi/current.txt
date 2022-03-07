@@ -14,6 +14,7 @@ LLNDK: libm.so
 LLNDK: libmediandk.so
 LLNDK: libnativewindow.so
 LLNDK: libneuralnetworks.so
+LLNDK: libprocessgroup.so
 LLNDK: libselinux.so
 LLNDK: libsync.so
 LLNDK: libvndksupport.so
@@ -51,7 +52,6 @@ VNDK-SP: libhidlmemory.so
 VNDK-SP: libion.so
 VNDK-SP: libjsoncpp.so
 VNDK-SP: liblzma.so
-VNDK-SP: libprocessgroup.so
 VNDK-SP: libunwindstack.so
 VNDK-SP: libutils.so
 VNDK-SP: libutilscallstack.so
@@ -225,7 +225,6 @@ VNDK-product: libnl.so
 VNDK-product: libpcre2.so
 VNDK-product: libpiex.so
 VNDK-product: libpng.so
-VNDK-product: libprocessgroup.so
 VNDK-product: libprocinfo.so
 VNDK-product: libspeexresampler.so
 VNDK-product: libssl.so
