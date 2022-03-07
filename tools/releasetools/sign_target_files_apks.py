@@ -137,6 +137,15 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
   --android_jar_path <path>
       Path to the android.jar to repack the apex file.
 
+  --sepolicy_key <key>
+      Optional flag that specifies the sepolicy signing key, defaults to payload_key for the sepolicy.apex.
+
+  --sepolicy_cert <cert>
+      Optional flag that specifies the sepolicy signing cert.
+
+  --fsverity_tool <path>
+      Optional flag that specifies the path to fsverity tool to sign SEPolicy, defaults to fsverity.
+
   --allow_gsi_debug_sepolicy
       Allow the existence of the file 'userdebug_plat_sepolicy.cil' under
       (/system/system_ext|/system_ext)/etc/selinux.
@@ -196,6 +205,9 @@ OPTIONS.gki_signing_extra_args = None
 OPTIONS.android_jar_path = None
 OPTIONS.vendor_partitions = set()
 OPTIONS.vendor_otatools = None
+OPTIONS.sepolicy_key = None
+OPTIONS.sepolicy_cert = None
+OPTIONS.fsverity_tool = None
 OPTIONS.allow_gsi_debug_sepolicy = False
 
 
@@ -1258,7 +1270,7 @@ def ReadApexKeysInfo(tf_zip):
             container_private_key, OPTIONS.private_key_suffix):
       container_key = container_cert[:-len(OPTIONS.public_key_suffix)]
     else:
-      raise ValueError("Failed to parse container keys: \n{}".format(line))
+      raise ValueError("Failed to parse container keys: \n{} {}".format(container_cert, container_private_key))
 
     sign_tool = matches.group("SIGN_TOOL")
     keys[name] = (payload_private_key, container_key, sign_tool)
@@ -1458,6 +1470,12 @@ def main(argv):
       OPTIONS.vendor_otatools = a
     elif o == "--vendor_partitions":
       OPTIONS.vendor_partitions = set(a.split(","))
+    elif o == '--sepolicy_key':
+      OPTIONS.sepolicy_key = a
+    elif o == '--sepolicy_cert':
+      OPTIONS.sepolicy_cert = a
+    elif o == '--fsverity_tool':
+      OPTIONS.fsverity_tool = a
     elif o == "--allow_gsi_debug_sepolicy":
       OPTIONS.allow_gsi_debug_sepolicy = True
     else:
@@ -1512,6 +1530,9 @@ def main(argv):
           "gki_signing_extra_args=",
           "vendor_partitions=",
           "vendor_otatools=",
+          "sepolicy_key=",
+          "sepolicy_cert=",
+          "fsverity_tool=",
           "allow_gsi_debug_sepolicy",
       ],
       extra_option_handler=option_handler)
