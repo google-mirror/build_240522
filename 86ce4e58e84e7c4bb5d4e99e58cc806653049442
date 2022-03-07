@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48634c51_06ada367",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2afba3fa_24a5900c",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dd79b59_5af1959b",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-03-05T00:50:46Z",
       "side": 1,
       "message": "What\u0027s the third variable? STARLARK_OPT_IN_PRODUCTS hasn\u0027t been added yet and isn\u0027t described here.",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4cee816_b6f52bb4",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dd79b59_5af1959b",
       "range": {
         "startLine": 155,
         "startChar": 12,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c558fbc_b532b4a6",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c36662b_4add7389",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "884ba7fa_16bb173d",
@@ -71,6 +131,30 @@
       "writtenOn": "2022-03-05T00:50:46Z",
       "side": 1,
       "message": "nit: wrong type of quote",
+      "range": {
+        "startLine": 163,
+        "startChar": 40,
+        "endLine": 163,
+        "endChar": 41
+      },
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f1633f_32718ad4",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "884ba7fa_16bb173d",
       "range": {
         "startLine": 163,
         "startChar": 40,
@@ -115,6 +199,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "479ba933_76a5ab5d",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d705edb3_2b596fa5",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3607237c_10489d45",
@@ -128,6 +230,24 @@
       "writtenOn": "2022-03-05T00:50:46Z",
       "side": 1,
       "message": "Remove for this cl",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d465a7_21c38597",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3607237c_10489d45",
       "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -149,6 +269,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8191f79f_8f0c1886",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45e4675c_a94f1bed",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "580a86e5_b3e878a8",
@@ -162,6 +300,24 @@
       "writtenOn": "2022-03-05T00:50:46Z",
       "side": 1,
       "message": "This indentation shouldn\u0027t have been changed, right?",
+      "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d1ac32_d4a9fdea",
+        "filename": "core/product_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-07T19:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "580a86e5_b3e878a8",
       "revId": "86ce4e58e84e7c4bb5d4e99e58cc806653049442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
