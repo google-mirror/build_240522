@@ -14,7 +14,13 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_baseline.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch.mk)
 
-PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
-
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.enabled=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.userspace.snapshots.enabled=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.io_uring.enabled=true
+PRODUCT_VIRTUAL_AB_COMPRESSION := true
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD ?= none
+PRODUCT_PACKAGES += \
+    snapuserd \
+    snapuserd.recovery
