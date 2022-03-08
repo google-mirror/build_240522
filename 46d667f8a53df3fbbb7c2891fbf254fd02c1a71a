@@ -16,6 +16,24 @@
       "message": "consider changing function name, update_care_map_image_sizes() ?",
       "revId": "46d667f8a53df3fbbb7c2891fbf254fd02c1a71a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162c6403_e6960c55",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-03-08T19:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4056e88c_85e12fb3",
+      "revId": "46d667f8a53df3fbbb7c2891fbf254fd02c1a71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
