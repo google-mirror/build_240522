@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4056e88c_85e12fb3",
+        "filename": "tools/releasetools/merge_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-03-08T18:01:56Z",
+      "side": 1,
+      "message": "consider changing function name, update_care_map_image_sizes() ?",
+      "revId": "46d667f8a53df3fbbb7c2891fbf254fd02c1a71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
