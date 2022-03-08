@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52bd1f1_ef928d83",
+        "filename": "tools/releasetools/merge/merge_compatibility_checks.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-03-08T18:31:33Z",
+      "side": 1,
+      "message": "Include os.path.exists() status as well to remove repeated code below",
+      "revId": "cb2ae89b46ac7573c82411ae6e3b4c583b93f533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
