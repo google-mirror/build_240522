@@ -131,8 +131,15 @@ def ValidateFileConsistency(input_zip, input_tmp, info_dict):
     logging.warning('Skipped due to target using non-sparse images')
     return
 
-  # Verify IMAGES/system.img.
-  CheckAllFiles('system')
+  # Some targets, e.g., gki_arm64, is system.img-less, and it only has
+  # a file 'SYSTEM/build.prop' to `make add_img_to_target_files` happy.
+  if {'SYSTEM/', 'SYSTEM/build.prop'} == set(filter(
+      lambda x: x.startswith('SYSTEM/'), input_zip.namelist())):
+    logging.info(
+        "SYSTEM target files not present, skipping checking system image.")
+  else:
+    # Verify IMAGES/system.img.
+    CheckAllFiles('system')
 
   # Verify IMAGES/vendor.img if applicable.
   if 'VENDOR/' in input_zip.namelist():
@@ -259,9 +266,6 @@ def symlinkIfNotExists(src, dst):
 
 def ValidatePartitionFingerprints(input_tmp, info_dict):
   build_info = common.BuildInfo(info_dict)
-  if not build_info.avb_enabled:
-    logging.info("AVB not enabled, skipping partition fingerprint checks")
-    return
   # Expected format:
   #  Prop: com.android.build.vendor.fingerprint -> 'generic/aosp_cf_x86_64_phone/vsoc_x86_64:S/AOSP.MASTER/7335886:userdebug/test-keys'
   #  Prop: com.android.build.vendor_boot.fingerprint -> 'generic/aosp_cf_x86_64_phone/vsoc_x86_64:S/AOSP.MASTER/7335886:userdebug/test-keys'
@@ -398,7 +402,7 @@ def ValidateVerifiedBootImages(input_tmp, info_dict, options):
           verity_key_mincrypt, stdoutdata.rstrip())
 
   # Handle the case of Verified Boot 2.0 (AVB).
-  if info_dict.get("avb_enable") == "true":
+  if info_dict.get("avb_building_vbmeta_image") == "true":
     logging.info('Verifying Verified Boot 2.0 (AVB) images...')
 
     key = options['verity_key']
