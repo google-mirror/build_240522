@@ -22,6 +22,29 @@
       },
       "revId": "842733cb6763cef7fa8d175a130501258af6ad9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a7897d_9db8d8b6",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-03-09T19:49:36Z",
+      "side": 0,
+      "message": "Why is this check removed?",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 32
+      },
+      "revId": "842733cb6763cef7fa8d175a130501258af6ad9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
