@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "28059d4a_52f9402c",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-09T08:10:51Z",
+      "side": 1,
+      "message": "From L22 of this file, using \u0027IMAGES/vendor.img\u0027 or \u0027IMAGES/system.img\u0027 is probably fine.\nBecause it just wanted to ensure the \"file consistency\".\n\n   - It verifies the file consistency between the ones in IMAGES/system.img (read                                                                                            \n     via IMAGES/system.map) and the ones under unpacked folder of SYSTEM/. The                                                                                               \n     same check also applies to the vendor image if present.  \n     \nI\u0027ll change this in next PS!",
+      "parentUuid": "f93f8852_a7bf2214",
+      "range": {
+        "startLine": 136,
+        "startChar": 5,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "0183529264d67f2f3450e097b9f58bf11e534e29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1d11c77_97b406eb",
