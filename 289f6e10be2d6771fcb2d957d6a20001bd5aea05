@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c2c7d7_8fe55ba2",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3077,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-09T21:52:41Z",
+      "side": 1,
+      "message": "Does this work when $(3) is an on-device path (/system/lib64/...) instead of a full path ($OUT/system/lib64/...)?",
+      "range": {
+        "startLine": 3077,
+        "startChar": 39,
+        "endLine": 3077,
+        "endChar": 43
+      },
+      "revId": "289f6e10be2d6771fcb2d957d6a20001bd5aea05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
