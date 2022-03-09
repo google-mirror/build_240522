@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a613b90_e00d55a1",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-09T07:20:32Z",
+      "side": 0,
+      "message": "This is not needed because ValidatePartitionFingerprints() will not be called at L412 (right-hand side) if \"avb_building_vbmeta_image\" is not True (L405, right-hand side).",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 10
+      },
+      "revId": "842733cb6763cef7fa8d175a130501258af6ad9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
