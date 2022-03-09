@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93f8852_a7bf2214",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-09T07:58:07Z",
+      "side": 1,
+      "message": "Nice, seems more clean.\n\nHowever, I have two questions:\n\n1) Should we also also check \u0027IMAGES/vendor.img\u0027 at L145 below? (just to make it consistent)\n\n2) If so, will it be a concern? e.g., should validate_target_files raise an error if \u0027IMAGES/vendor.img\u0027 doesn\u0027t exist but \u0027VENDOR/\u0027 exists.",
+      "parentUuid": "30aba8a7_2d7a8a3e",
+      "range": {
+        "startLine": 136,
+        "startChar": 5,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "0183529264d67f2f3450e097b9f58bf11e534e29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1d11c77_97b406eb",
