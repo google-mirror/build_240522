@@ -90,3 +90,8 @@ $(call add_soong_config_var,ANDROID,SYSTEMUI_OPTIMIZE_JAVA)
 # TODO(b/196084106): Remove when Java optimizations enabled by default for
 # system packages.
 $(call add_soong_config_var,ANDROID,SYSTEM_OPTIMIZE_JAVA)
+
+# Messaging app vars
+ifeq (eng,$(TARGET_BUILD_VARIANT))
+  $(call soong_config_set,messaging,build_variant_eng,true)
+endif
