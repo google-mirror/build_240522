@@ -22,6 +22,7 @@
 # Ramdisk
 PRODUCT_PACKAGES += \
     init_first_stage \
+    snapuserd.ramdisk \
 
 # Debug ramdisk
 PRODUCT_PACKAGES += \
