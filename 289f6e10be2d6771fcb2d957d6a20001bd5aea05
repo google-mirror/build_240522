@@ -22,6 +22,30 @@
       },
       "revId": "289f6e10be2d6771fcb2d957d6a20001bd5aea05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f67bb914_083468e3",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3077,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-09T22:06:17Z",
+      "side": 1,
+      "message": "Yes, as a matter of fact, it does work. In the cases where $(2) is /system/lib64/... or /product/..., $(1) is $(PRODUCT_OUT)/system/lib64/... or $(PRODUCT_OUT)/product/...",
+      "parentUuid": "69c2c7d7_8fe55ba2",
+      "range": {
+        "startLine": 3077,
+        "startChar": 39,
+        "endLine": 3077,
+        "endChar": 43
+      },
+      "revId": "289f6e10be2d6771fcb2d957d6a20001bd5aea05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
