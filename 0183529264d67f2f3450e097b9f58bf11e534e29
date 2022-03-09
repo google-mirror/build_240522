@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d11c77_97b406eb",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-09T07:23:48Z",
+      "side": 1,
+      "message": "This function won\u0027t be invoked if the condition at L405 isn\u0027t true.",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 33
+      },
+      "revId": "0183529264d67f2f3450e097b9f58bf11e534e29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
