@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf548fb7_d66f082b",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-09T08:14:39Z",
+      "side": 1,
+      "message": "Re question 1, yeah I think the check can be the same for vendor.img. (The check can be in CheckAllFiles()), but I don\u0027t know if it would be a problem as mentioned in question 2.\n\nQuestion 2, I don\u0027t know... I don\u0027t even know what these checks are doing to begin with. I\u0027d say just change the minimal surface that could fix your use case.",
+      "parentUuid": "f93f8852_a7bf2214",
+      "range": {
+        "startLine": 136,
+        "startChar": 5,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "0183529264d67f2f3450e097b9f58bf11e534e29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1d11c77_97b406eb",
