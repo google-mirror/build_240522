@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79fbe877_75053a1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-03-09T07:41:39Z",
+      "side": 1,
+      "message": "b/210094553\nFileNotFoundError: [Errno 2] No such file or directory: \u0027mkerofsimage.sh\u0027\n\nMaybe we can proceed in this way?\n1. Release new kernel-build-tools\n2. Make sure kernel-t-dev-gs-pixel-5.10 can be build without the mkerofsimage.sh\n3. Formally remove mkerofsimage.sh from erofs-utils",
+      "revId": "7ea4fb1b2a1c77425a71d594e12ff60aaf552302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
