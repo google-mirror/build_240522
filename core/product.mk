@@ -400,17 +400,19 @@ endef
 # See e.g. product-graph.mk for an example of this.
 #
 define inherit-product
-  $(if $(findstring ../,$(1)),\
-    $(eval np := $(call normalize-paths,$(1))),\
-    $(eval np := $(strip $(1))))\
-  $(foreach v,$(_product_var_list), \
-      $(eval $(v) := $($(v)) $(INHERIT_TAG)$(np))) \
-  $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
-  $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
-  $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
-  $(eval PARENT_PRODUCT_FILES := $(sort $(PARENT_PRODUCT_FILES) $(current_mk))) \
-  $(call dump-inherit,$(strip $(word 1,$(_include_stack))),$(1)) \
-  $(call dump-config-vals,$(current_mk),inherit)
+  $(if $(wildcard $(1)),,$(error $(1) does not exist.))\
+  $(foreach part,$(wildcard $(1)),\
+    $(if $(findstring ../,$(part)),\
+      $(eval np := $(call normalize-paths,$(part))),\
+      $(eval np := $(strip $(part))))\
+    $(foreach v,$(_product_var_list), \
+        $(eval $(v) := $($(v)) $(INHERIT_TAG)$(np))) \
+    $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+    $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
+    $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
+    $(eval PARENT_PRODUCT_FILES := $(sort $(PARENT_PRODUCT_FILES) $(current_mk))) \
+    $(call dump-inherit,$(strip $(word 1,$(_include_stack))),$(1)) \
+    $(call dump-config-vals,$(current_mk),inherit))
 endef
 
 # Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
