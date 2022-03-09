@@ -98,6 +98,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d75c17dd_29acf872",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-09T08:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28059d4a_52f9402c",
+      "range": {
+        "startLine": 136,
+        "startChar": 5,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "0183529264d67f2f3450e097b9f58bf11e534e29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c1d11c77_97b406eb",
         "filename": "tools/releasetools/validate_target_files.py",
         "patchSetId": 2
