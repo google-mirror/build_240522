@@ -94,6 +94,30 @@
       },
       "revId": "0c33050d6a999131cc79481325ffdba9e7119077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3cf770_ddb96b5b",
+        "filename": "tools/orchestrator/build_orchestrator.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-10T18:12:34Z",
+      "side": 1,
+      "message": "\u003e Can you add a comment why you can\u0027t just use  tools/bazel  or  bazel  directly?\n\nGood idea. I have added a short description on why this script is using prebuilt bazel directly",
+      "parentUuid": "2935d84e_6252d51e",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 55
+      },
+      "revId": "0c33050d6a999131cc79481325ffdba9e7119077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
