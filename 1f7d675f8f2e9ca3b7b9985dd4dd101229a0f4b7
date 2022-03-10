@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88726dce_95aecb7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-03-10T18:30:27Z",
+      "side": 1,
+      "message": "Should we reconsider the way we hijack the bazel command instead? I think it\u0027s pretty disruptive to have the command do something nonstandard. I\u0027d rather use a nonstandard command like `b` to do whatever specialized stuff we need to do",
+      "revId": "1f7d675f8f2e9ca3b7b9985dd4dd101229a0f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
