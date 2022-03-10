@@ -16,6 +16,24 @@
       "message": "Should we reconsider the way we hijack the bazel command instead? I think it\u0027s pretty disruptive to have the command do something nonstandard. I\u0027d rather use a nonstandard command like `b` to do whatever specialized stuff we need to do",
       "revId": "1f7d675f8f2e9ca3b7b9985dd4dd101229a0f4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edbd143_1fe85024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-10T19:02:53Z",
+      "side": 1,
+      "message": "+jingwen +lberki, What are your thoughts on this? Can it be done by something like (note that this is untested)\n\n1.Expanding the configs in `build/bazel/common.bazelrc` to `[bp2build,queryview,standalone]`. The package path for this new `standalone` config will be the root of the source workspace instead of a synthetic one in out/\n2. Changing `build/bazel/bazel.sh` to support this new config\n2. Changing `b`, so that it can be invoked as something like `b --config\u003dstandalone build [targets...]`\n\nThe other option is to keep the current interface and use `b`, and run bp2build as part of it. But the api surfaces in Bazel have no dependencies on Soong/Make, so it might be a nice optimization to skip this step",
+      "parentUuid": "88726dce_95aecb7f",
+      "revId": "1f7d675f8f2e9ca3b7b9985dd4dd101229a0f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
