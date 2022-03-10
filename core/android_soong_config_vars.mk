@@ -52,7 +52,7 @@ else ifeq (,$(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS))$(findstring com.goog
   # However, sdk/win_sdk/sdk_addon builds might not include com.google.android.xxx
   # packages, so for those we respect the default behavior.
   MODULE_BUILD_FROM_SOURCE := true
-else ifeq (,$(filter-out modules_% mainline_modules_%,$(TARGET_PRODUCT)))
+else ifeq (true,$(PRODUCT_MODULE_BUILD_FROM_SOURCE))
   # Always build from source in unbundled builds using the module targets.
   MODULE_BUILD_FROM_SOURCE := true
 else
