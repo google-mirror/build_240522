@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a15dc6c_e6773671",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-10T20:43:02Z",
+      "side": 1,
+      "message": "It looks like this is before https://r.android.com/2018058. If you rebase and resolve the conflict here I hope you won\u0027t need the cherry-pick in internal.",
+      "revId": "dd36a3aaa88be7bb6f5a42fb4f844dffa114d814",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
