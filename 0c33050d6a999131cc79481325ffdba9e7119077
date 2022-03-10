@@ -46,6 +46,30 @@
       },
       "revId": "0c33050d6a999131cc79481325ffdba9e7119077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c50ab22_28f64179",
+        "filename": "tools/orchestrator/build_orchestrator.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2022-03-10T15:05:29Z",
+      "side": 1,
+      "message": "\u003e why you can\u0027t just use .. `bazel` directly?\nBut using `prebuilts/bazel` \u003d using bazel directly, nope?",
+      "parentUuid": "f36febe4_dc251420",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 55
+      },
+      "revId": "0c33050d6a999131cc79481325ffdba9e7119077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
