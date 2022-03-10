@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994929ed_7a761201",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2022-03-10T01:36:46Z",
+      "side": 1,
+      "message": "Should snapuserd.ramdisk be here, rather than generic_ramdisk?",
+      "revId": "08e20b933e6992b552473a8fd6d6160a48f88984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
