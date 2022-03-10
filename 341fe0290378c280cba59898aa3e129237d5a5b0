@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442e8c11_946e7886",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-10T00:42:35Z",
+      "side": 1,
+      "message": "ValidatePartitionFingerprints() is only invoked here, and it will only be invoked if L400 is True.\n\nWhen \"avb_building_vbmeta_image\" is true, build_info.avb_enabled is also true so no need to check build_info.avb_enabled inside ValidatePartitionFingerprints().\n\nHope that clarifies.",
+      "range": {
+        "startLine": 407,
+        "startChar": 4,
+        "endLine": 407,
+        "endChar": 55
+      },
+      "revId": "341fe0290378c280cba59898aa3e129237d5a5b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
