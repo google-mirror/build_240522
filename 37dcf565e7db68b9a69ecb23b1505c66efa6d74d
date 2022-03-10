@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f94eb32_e7628870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-10T02:10:48Z",
+      "side": 1,
+      "message": "self-review\n",
+      "revId": "37dcf565e7db68b9a69ecb23b1505c66efa6d74d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8b56e7_136360ea",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2676,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-10T02:10:48Z",
+      "side": 1,
+      "message": "s/b target not container",
+      "revId": "37dcf565e7db68b9a69ecb23b1505c66efa6d74d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
