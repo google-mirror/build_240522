@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d9a009_a07ac1a5",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-10T01:32:08Z",
+      "side": 1,
+      "message": "+jingwen, I am using the prebuilt bazel binary here instead of the wrapper bazel function",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "cd323d0f98a41ad396291ba33ba691bd44ba198d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
