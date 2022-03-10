@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37841aa5_09ade9d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-10T13:33:00Z",
+      "side": 1,
+      "message": "overall LGTM, please address the linter issues too",
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40441f7_c06e2c25",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-10T13:33:00Z",
+      "side": 1,
+      "message": "I recall you said you had a bug tracking the vendor_boot / vendor_kernel_boot dtb image handling, could you add a TODO to that bug here for reference?",
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaa39c4_85a7b02d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-10T13:33:00Z",
+      "side": 1,
+      "message": "move this to L1337,\n\n```\nINSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET :\u003d $(PRODUCT_OUT)/vendor_kernel_boot.img\nifdef BOARD_INCLUDE_DTB_IN_BOOTIMG\n  INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS +\u003d --dtb $(INSTALLED_DTBIMAGE_TARGET)\n  $(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET): $(INSTALLED_DTBIMAGE_TARGET)\nendif\n```",
+      "range": {
+        "startLine": 1344,
+        "startChar": 99,
+        "endLine": 1344,
+        "endChar": 127
+      },
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
