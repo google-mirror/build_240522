@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f7e7f7_55357e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-10T23:22:23Z",
+      "side": 1,
+      "message": "Sorry, I couldn\u0027t resist again to use this improvement opportunity:\nThe ultimate goal here is to generate inherit calls graph. That is, if we have a  list of \u003cfrom\u003e:\u003cto\u003e pairs to be the value of, say $(INHERITANCE_GRAPH), all the remaining stuff on lines 85-91  of build/make/core/product-graph.mk can be moved to build/make/tools/filter-product-graph.py, to which we will feed this $(INHERITANCE_GRAPH) as input.\nThen, for makefile-based config INHERITANCE_GRAPH is set via something similar to lines 88-89, and for the Starlark-based config is be set fairly simply when executing inheritance). ",
+      "revId": "f7d5bb6ffac90ab8d5058474c5b393f6a7cc9d07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
