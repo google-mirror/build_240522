@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8736e9fb_1f6978f7",
+        "filename": "tools/orchestrator/build_orchestrator.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2022-03-10T19:30:37Z",
+      "side": 1,
+      "message": "nit: reword as \"Use prebuilt bazel directly instead of the bazel() function added during build/make/envsetup.sh\"",
+      "revId": "a4a2dab4ef07ac32e79ce59ea67435e0354bf9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
