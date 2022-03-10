@@ -16,6 +16,24 @@
       "message": "Should snapuserd.ramdisk be here, rather than generic_ramdisk?",
       "revId": "08e20b933e6992b552473a8fd6d6160a48f88984",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "340f287f_e3902d10",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-03-10T02:27:20Z",
+      "side": 1,
+      "message": "The build rules are setup such that you can only add to init_boot from generic_ramdisk.mk",
+      "parentUuid": "994929ed_7a761201",
+      "revId": "08e20b933e6992b552473a8fd6d6160a48f88984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
