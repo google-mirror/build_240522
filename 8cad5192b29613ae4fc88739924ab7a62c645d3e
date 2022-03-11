@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70909aa8_88845e04",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-11T00:08:43Z",
+      "side": 1,
+      "message": "This introduces a dependency on non-hermetic `jq`, which might not be available on buildbots",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 21
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
