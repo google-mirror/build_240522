@@ -52,6 +52,24 @@
       "parentUuid": "cc4a943d_e70d25b0",
       "revId": "f7d5bb6ffac90ab8d5058474c5b393f6a7cc9d07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7e6f5f_d9cf7a0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-14T18:47:29Z",
+      "side": 1,
+      "message": "Sure, but could you review this CL first, and do the overhaul later? I don\u0027t appreciate discarding my CLs to do a whole unnecessary overhaul first.",
+      "parentUuid": "6405ea11_e89dba19",
+      "revId": "f7d5bb6ffac90ab8d5058474c5b393f6a7cc9d07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
