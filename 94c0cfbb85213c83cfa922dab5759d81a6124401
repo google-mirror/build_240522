@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ace765_b227f6f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-03-14T15:02:19Z",
+      "side": 1,
+      "message": "I think we also need to do the same for build/soong, build/blueprint, and build/bazel.\n\nAnd I apparently have no +2 to give here. :(",
+      "revId": "94c0cfbb85213c83cfa922dab5759d81a6124401",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
