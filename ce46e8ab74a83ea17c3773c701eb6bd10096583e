@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c1a94b1_b93e5d43",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-14T07:56:42Z",
+      "side": 1,
+      "message": "ditto, check BUILDING_VENDOR_KERNEL_BOOT",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61259a13_c7b0d673",
         "filename": "core/Makefile",
         "patchSetId": 3
@@ -14,6 +31,46 @@
       "writtenOn": "2022-03-14T07:45:30Z",
       "side": 1,
       "message": "L1344 need to be moved before this line so it is defined",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946a5451_293da4da",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-14T07:56:42Z",
+      "side": 1,
+      "message": "I think we shouldn\u0027t change this because recovery could ship its own dtb and kernel",
+      "range": {
+        "startLine": 2375,
+        "startChar": 23,
+        "endLine": 2375,
+        "endChar": 34
+      },
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22b24b2_2ab22691",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5491,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-14T07:56:42Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
