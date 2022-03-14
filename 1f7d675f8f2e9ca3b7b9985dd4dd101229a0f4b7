@@ -34,6 +34,24 @@
       "parentUuid": "88726dce_95aecb7f",
       "revId": "1f7d675f8f2e9ca3b7b9985dd4dd101229a0f4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76d63aa_2d8033e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-03-14T11:34:40Z",
+      "side": 1,
+      "message": "We need to hijack it for these reasons:\n\n- setting the path to the checked-in JDK to run Bazel with.\n- ensuring that `bazel` doesn\u0027t accidentally invoke /usr/bin/bazel (calling `bazel` in a workspace will always invoke `tools/bazel`, which is a symlink to the bazel wrapper)\n\nBasically, these lines: https://cs.android.com/android/platform/superproject/+/master:build/bazel/bazel.sh;l\u003d192-195;drc\u003d44c2ed4b5d0a5f405707986b1f6c85227d9a36d4\n\nI like the idea of having `b` for \"Roboleaf Bazel\" with a \"Roboleaf bazelrc\", and keeping `bazel` pure for standalone Bazel (with the server jdk stuff) without any default bazelrc. It probably doesn\u0027t need too much changes other than making `b` pass the default Roboleaf bazelrc (https://cs.android.com/android/platform/superproject/+/master:build/bazel/bazel.sh;l\u003d196;drc\u003d44c2ed4b5d0a5f405707986b1f6c85227d9a36d4) instead of letting bazel.sh do it.",
+      "parentUuid": "0edbd143_1fe85024",
+      "revId": "1f7d675f8f2e9ca3b7b9985dd4dd101229a0f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
