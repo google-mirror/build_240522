@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61259a13_c7b0d673",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-03-14T07:45:30Z",
+      "side": 1,
+      "message": "L1344 need to be moved before this line so it is defined",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
