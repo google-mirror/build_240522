@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b6738b_fd710207",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-14T07:36:16Z",
+      "side": 1,
+      "message": "Solved two. Thanks :)",
+      "parentUuid": "37841aa5_09ade9d5",
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d40441f7_c06e2c25",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb3f82e_f4e17b5b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-14T07:36:16Z",
+      "side": 1,
+      "message": "I have grouped aosp/2018598 together which help to allow empty dtb image for vendor_boot and migrate it to another image. If that patch is submitted, this issue will be solved. So, there is no need to add TODO bug id here. Thanks!",
+      "parentUuid": "d40441f7_c06e2c25",
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aaa39c4_85a7b02d",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-03-10T13:33:00Z",
       "side": 1,
       "message": "move this to L1337,\n\n```\nINSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET :\u003d $(PRODUCT_OUT)/vendor_kernel_boot.img\nifdef BOARD_INCLUDE_DTB_IN_BOOTIMG\n  INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS +\u003d --dtb $(INSTALLED_DTBIMAGE_TARGET)\n  $(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET): $(INSTALLED_DTBIMAGE_TARGET)\nendif\n```",
+      "range": {
+        "startLine": 1344,
+        "startChar": 99,
+        "endLine": 1344,
+        "endChar": 127
+      },
+      "revId": "5d049bfb181743911388b0412c4ac83231b3bef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5294b4_a710c4a9",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-14T07:36:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aaa39c4_85a7b02d",
       "range": {
         "startLine": 1344,
         "startChar": 99,
