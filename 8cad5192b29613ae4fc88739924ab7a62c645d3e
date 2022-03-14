@@ -3,6 +3,144 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a5c7f1f_af4f81b9",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "nit: quote variable references, everywhere",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 10
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f245545_7fab6f6c",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "nit: do you really want to get into the business of parsing Bazel\u0027s text output?\n\nI offer two alternatives:\n- Just use text transformation to get from label to output path (it should be a pretty stable function, shouldn\u0027t it be?)\n- Use --output\u003djsonproto. That would require relying on an installed version of jq, but that\u0027s maybe okay? \n\nHeck, even --output\u003dtextproto then grepping from that is an improvement. Parsing human-readable text is very error-prone.",
+      "range": {
+        "startLine": 47,
+        "startChar": 46,
+        "endLine": 47,
+        "endChar": 59
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e141cdf_d39444ff",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "Can one rely on the presence of rsync in $PATH?",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f4fe4e_5639c9d4",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "❤️",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 75
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b9cb2d_56474643",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "nit: AFAIU rsync takes a source and a destination argument so you don\u0027t need to cd",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8271a2_356d1b44",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "nit: it\u0027s kinda confusing that you swap the order of arguments (in $0, it\u0027s label first then inner tree).\n\nBut then again, does bazel_output_filepath need those two arguments? They seem to be constant during the lifetime of the script so why not refer `$INNER_TREE` and `$BAZEL_LABEL` within the function?",
+      "range": {
+        "startLine": 107,
+        "startChar": 52,
+        "endLine": 107,
+        "endChar": 76
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70909aa8_88845e04",
         "filename": "tools/orchestrator/gen_cc_api_surface.sh",
         "patchSetId": 9
@@ -19,6 +157,76 @@
         "startChar": 19,
         "endLine": 111,
         "endChar": 21
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1671cc5_5c2e1cbb",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "sigh. maybe it\u0027s possible to get it installed? (it\u0027s sometimes useful for json-module-graph and the like)",
+      "parentUuid": "70909aa8_88845e04",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 21
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1ce8ef_a794668a",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "Do I understand correctly that the value of this variable is the actual JSON string (instead of the name of a file containing those strings?)\n\nThen I\u0027m kinda surprised that this works given that for splits the string after \"in\" on spaces. Maybe it\u0027s -c that makes it work?\n\nWhat you could do instead is to list the number of the individual contributions then select that out from the main file with jq in the invocations within the for loop while looping over integers (i.e. `for api_contribution_index in $(seq 1 $api_contribution_count))`\n\nOr at least add a comment to explain how this works. Took me a while to grok it.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202ca010_e4a80d1c",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2022-03-14T12:24:42Z",
+      "side": 1,
+      "message": "What if someone removes an API contribution? Should that get deleted from $OUT_DIR?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 20
       },
       "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
