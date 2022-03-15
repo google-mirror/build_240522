@@ -52,6 +52,24 @@
       "parentUuid": "bc618dee_cce7544c",
       "revId": "255b91bcf6241edfa871d8af811c15fd3e72afb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39fe394a_c966e250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-15T20:15:56Z",
+      "side": 1,
+      "message": "I don\u0027t know why you think that. To get into `$(ALL_MODULES.$(my_register_name).BUILT)` it would have to get into `LOCAL_BUILT_MODULE`, and that gets constructed from `LOCAL_BUILT_MODULE_STEM` and other things. The LOCAL_PREBUILT_MODULE_FILE is treated more like a src property.\n\nI believe the root of the problem is an implicit BUILT-\u003eINSTALLED copy that happens between Soong and Make, which ordinarily would have it\u0027s own `meta_lic` file, but instead just gets a copy of the Soong `meta_lic` from elsewhere.\n\nPointing the LOCAL_PREBUILT_MODULE_FILE target\u0027s `meta_lic` at the copied license metadata resolves the problem.",
+      "parentUuid": "fee7fb99_ad4c1cff",
+      "revId": "255b91bcf6241edfa871d8af811c15fd3e72afb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
