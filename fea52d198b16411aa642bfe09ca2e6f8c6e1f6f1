@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a75658_7c762e22",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4696,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-15T18:28:07Z",
+      "side": 1,
+      "message": "nit: Seems like this list is alphabetized, could you fix the new entry?",
+      "revId": "fea52d198b16411aa642bfe09ca2e6f8c6e1f6f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
