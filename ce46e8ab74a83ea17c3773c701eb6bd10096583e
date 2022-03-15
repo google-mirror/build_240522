@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45ee0ee_b9b4e67b",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-15T16:10:13Z",
+      "side": 1,
+      "message": "Move check of `BUILDING_VENDOR_KERNEL_BOOT_IMAGE` here. Thanks!",
+      "parentUuid": "6c1a94b1_b93e5d43",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61259a13_c7b0d673",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-03-14T07:45:30Z",
       "side": 1,
       "message": "L1344 need to be moved before this line so it is defined",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30b6fab_463324dc",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-15T16:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61259a13_c7b0d673",
       "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa186dde_6581119f",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-15T16:10:13Z",
+      "side": 1,
+      "message": "Yes, thanks for catching that.",
+      "parentUuid": "946a5451_293da4da",
+      "range": {
+        "startLine": 2375,
+        "startChar": 23,
+        "endLine": 2375,
+        "endChar": 34
+      },
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c22b24b2_2ab22691",
@@ -71,6 +131,24 @@
       "writtenOn": "2022-03-14T07:56:42Z",
       "side": 1,
       "message": "ditto",
+      "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb1dab6_c2deeebb",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5491,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-03-15T16:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c22b24b2_2ab22691",
       "revId": "ce46e8ab74a83ea17c3773c701eb6bd10096583e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
