@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7fea63_e98d6abd",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2a5c7f1f_af4f81b9",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 10
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f245545_7fab6f6c",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "586c0e1e_aba0d15f",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "I agree, my previous implementation required too many greps,awks,seds and it felt very brittle.\n\n\u003e I offer two alternatives:\nThank you. \n\n\u003e Just use text transformation to get from label to output path...\nWill it require something like `$bazel info bazel-genfiles` to determine the output directory as well?\n\n\u003e Use --output\u003djsonproto\nI like this. It does not require any assumption on what nomenclature is used by the output files of `cc_api_surface` \nIt does rely on jq, but the script depends on jq anyways. Updating the implementation to this",
+      "parentUuid": "3f245545_7fab6f6c",
+      "range": {
+        "startLine": 47,
+        "startChar": 46,
+        "endLine": 47,
+        "endChar": 59
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e141cdf_d39444ff",
         "filename": "tools/orchestrator/gen_cc_api_surface.sh",
         "patchSetId": 9
@@ -60,6 +108,30 @@
       "writtenOn": "2022-03-14T12:24:42Z",
       "side": 1,
       "message": "Can one rely on the presence of rsync in $PATH?",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a94eace3_fc9394b4",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "Maybe? There are other instances of build files that use rsync https://source.corp.google.com/search?q\u003d%5Cbrsync%5Cb%20f:%5C.mk\u0026sq\u003dpackage:android$\n\nFWIW, I think this can be replaced with `cmp` and a conditional `cp` if needed, which are almost guaranteed to be on PATH",
+      "parentUuid": "1e141cdf_d39444ff",
       "range": {
         "startLine": 57,
         "startChar": 12,
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90f8e118_c436ba82",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "I think a cd might be necessary since the inputs to this function are relative to the workspace root (of the inner tree)\n`#  $3-n: source files to copy, relative to workspace root`\n\nAlternatively, I could have used sed to add the inner tree prefix to the inputs, but a cd seemed a more straightforward option",
+      "parentUuid": "a6b9cb2d_56474643",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a8271a2_356d1b44",
         "filename": "tools/orchestrator/gen_cc_api_surface.sh",
         "patchSetId": 9
@@ -129,6 +225,30 @@
       "writtenOn": "2022-03-14T12:24:42Z",
       "side": 1,
       "message": "nit: it\u0027s kinda confusing that you swap the order of arguments (in $0, it\u0027s label first then inner tree).\n\nBut then again, does bazel_output_filepath need those two arguments? They seem to be constant during the lifetime of the script so why not refer `$INNER_TREE` and `$BAZEL_LABEL` within the function?",
+      "range": {
+        "startLine": 107,
+        "startChar": 52,
+        "endLine": 107,
+        "endChar": 76
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f74798d_3644df21",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "\u003e But then again, does bazel_output_filepath need those two arguments? \n\nI might be overthinking this, but I am not using globals here because I am expecting this function to be eventually refactored into a util .sh script. The util script will be used in `gen_cc_api_surface.sh` and a future `gen_java_api_surface.sh` \n\n\u003e nit: it\u0027s kinda confusing that you swap the order of arguments (in $0, it\u0027s label first then inner tree)\n\nSorry about that. This was by design - since I expect this to be refactored into a separate function (The first argument being the one that will be cd\u0027t into)\n\nTo prevent further confusion, let me do the refactor right now",
+      "parentUuid": "0a8271a2_356d1b44",
       "range": {
         "startLine": 107,
         "startChar": 52,
@@ -211,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1773c406_ff4bf10a",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "\u003e Or at least add a comment to explain how this works. Took me a while to grok it.\n\nSorry about that. You are correct, it is the `-c` flag (compact) which makes this possible.\n\n`# Use -c compact output to enable iteration in a for loop`\nLet me add more details here",
+      "parentUuid": "5a1ce8ef_a794668a",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "202ca010_e4a80d1c",
         "filename": "tools/orchestrator/gen_cc_api_surface.sh",
         "patchSetId": 9
@@ -222,6 +366,30 @@
       "writtenOn": "2022-03-14T12:24:42Z",
       "side": 1,
       "message": "What if someone removes an API contribution? Should that get deleted from $OUT_DIR?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 20
+      },
+      "revId": "8cad5192b29613ae4fc88739924ab7a62c645d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9f9157_bb6419b5",
+        "filename": "tools/orchestrator/gen_cc_api_surface.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-03-15T19:47:52Z",
+      "side": 1,
+      "message": "That\u0027s a great catch. I had not thought about this. Deleting an API contribution should delete it from $OUT_DIR as well.\n\nThe updated algorithm is\n1. Generate everything into a temp directory\n2. rsync using --checksum and --delete flags. --checksum ensures that files will not be copied if the content match, --delete will ensure that extraneous files are deleted\n\nAlso creating an integration test, because this is no longer a simple copy script",
+      "parentUuid": "202ca010_e4a80d1c",
       "range": {
         "startLine": 115,
         "startChar": 4,
