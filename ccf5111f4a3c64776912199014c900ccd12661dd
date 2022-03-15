@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca874c8b_b24fed7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870933
+      },
+      "writtenOn": "2022-03-15T05:08:35Z",
+      "side": 1,
+      "message": "Test com.android.devicehealthchecks.SensorsBootCheck#checkSensors is fail as bug: b/224627425",
+      "revId": "ccf5111f4a3c64776912199014c900ccd12661dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
