@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65af025_daa9ead3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-15T03:42:30Z",
+      "side": 1,
+      "message": "This seems like an odd \"fix\", what makes linkerconfig different from anything else that uses LOCAL_PREBUILT_MODULE_FILE?",
+      "revId": "255b91bcf6241edfa871d8af811c15fd3e72afb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
