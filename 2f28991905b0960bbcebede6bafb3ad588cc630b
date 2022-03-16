@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fb8315_61fa5527",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-16T19:14:32Z",
+      "side": 1,
+      "message": "I don\u0027t like the fact that we have two different backing data sources for the product graph, the INHERITS_FROM variables and the INHERIT_GRAPH variable.\n\nIf I understand this correctly, the point of this CL is to simplify the Starlark graph generation? So the code will go from:\n\n```\nfor config in configs:\n    if len(configs[config][2]) \u003e 0:\n        globals[\"PRODUCTS.\"+config+\".mk.INHERITS_FROM\"] \u003d sorted([x + \".mk\" for x in configs[config][2]])\n```\n\nto:\n\n```\nfor config in configs:\n    for inherited in configs[config][2]:\n        globals[\"INHERIT_GRAPH\"] +\u003d config + \".mk:\" + inherited + \".mk\"\n```\n\nIs that really any simpler? It\u0027s the same number of lines, and theres extra complexity here in order to support the two different formats,",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10c767f_321aba17",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-16T19:14:32Z",
+      "side": 1,
+      "message": "ANDROID_PRODUCT_GRAPH is something we can easily support in Starlark with the old system. Why are we refactoring into less functionality?",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1421a7f_94eb3610",
+        "filename": "tools/generate-inheritance.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-16T19:14:32Z",
+      "side": 1,
+      "message": "While this is technically subjective, I believe python is the better choice for these scripts than bash. Pretty much all of build/make/tools is already written in python. Python is also an approved google language and \"the 3rd most used language ecosystem at google\" (go/programming-language-policy).\n\nIf you really don\u0027t like python, java/go would probably be better choices still for number of people who can read/write it.",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
