@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7865a5_4f4a69ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-16T23:53:01Z",
+      "side": 1,
+      "message": "As mentioned in b/222723757#comment6 I don\u0027t know if there\u0027s a problem with this approach, so I\u0027ll send it out for review.",
+      "revId": "c760d3ed6930bc50807c4710e7fc8a001ee9a101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
