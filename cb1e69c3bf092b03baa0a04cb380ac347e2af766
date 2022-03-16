@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039f9117_516bc002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1594463
+      },
+      "writtenOn": "2022-03-16T16:01:05Z",
+      "side": 1,
+      "message": "captiveportallogin tests are failing due to an known unrelated issue",
+      "revId": "cb1e69c3bf092b03baa0a04cb380ac347e2af766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
