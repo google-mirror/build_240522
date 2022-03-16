@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828739ea_09eb1967",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-16T01:43:56Z",
+      "side": 1,
+      "message": "This copied file needs to be associated with DEXPREOPT_IMAGE_PROFILE_LICENSE_METADATA somehow",
+      "revId": "f4dddc6dd10a57115c339795036de89a6af1e789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
