@@ -70,6 +70,24 @@
       "parentUuid": "6405ea11_e89dba19",
       "revId": "f7d5bb6ffac90ab8d5058474c5b393f6a7cc9d07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "820a5110_050f882c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-16T18:05:29Z",
+      "side": 1,
+      "message": "Please take a look at aosp/2028827. It will require a small additional change in  product_config.rbc to update INHERIT_GRAPH variable in _product_configuration",
+      "parentUuid": "7a7e6f5f_d9cf7a0e",
+      "revId": "f7d5bb6ffac90ab8d5058474c5b393f6a7cc9d07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
