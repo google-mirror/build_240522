@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5745968_49858b0d",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-17T02:29:55Z",
+      "side": 1,
+      "message": "First, I believe the only change needed is to add a single line in _product_configuration in product_config.rbc. I see way more stuff changed in the same file in aosp/2002321\nSecondly, it adds only a single line to the output instead of at least dozen.",
+      "parentUuid": "76fb8315_61fa5527",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b10c767f_321aba17",
         "filename": "core/product-graph.mk",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-03-16T19:14:32Z",
       "side": 1,
       "message": "ANDROID_PRODUCT_GRAPH is something we can easily support in Starlark with the old system. Why are we refactoring into less functionality?",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba14c69b_905a9c5a",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-17T02:29:55Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s very important, the results are dubious for the modules inherited conditionally.",
+      "parentUuid": "b10c767f_321aba17",
       "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2022-03-16T19:14:32Z",
       "side": 1,
       "message": "While this is technically subjective, I believe python is the better choice for these scripts than bash. Pretty much all of build/make/tools is already written in python. Python is also an approved google language and \"the 3rd most used language ecosystem at google\" (go/programming-language-policy).\n\nIf you really don\u0027t like python, java/go would probably be better choices still for number of people who can read/write it.",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75acab82_577d28e0",
+        "filename": "tools/generate-inheritance.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-17T02:29:55Z",
+      "side": 1,
+      "message": "This script is short, runs immediately, is easy to debug and does not leave unwanted artifacts.",
+      "parentUuid": "e1421a7f_94eb3610",
       "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
