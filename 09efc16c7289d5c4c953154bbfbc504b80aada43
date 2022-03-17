@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59dd5e85_7db53d2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-17T01:19:46Z",
+      "side": 1,
+      "message": "Hi Arnaud, could you cherry-pick this change and check whether it fixes the car apps issue?\n",
+      "revId": "09efc16c7289d5c4c953154bbfbc504b80aada43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
