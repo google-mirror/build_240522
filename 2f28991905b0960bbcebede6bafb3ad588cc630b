@@ -38,6 +38,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12607b65_6a99fbc1",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-17T17:56:10Z",
+      "side": 1,
+      "message": "Note that we need the PRODUCTS.\u003cmkfile\u003e.\u003cvariable\u003e variables for artifact path requirements as well. Artifact path requirements need to know the state of the variables after importing intermediate products, not just their state at the end of all of product config. So doing this won\u0027t allow us to remove those variables.\n\nEven when we have the PRODUCTS.\u003cmkfile\u003e.\u003cvariable\u003e, it doesn\u0027t add any lines to the output, because we removed the regular unqualified versions of the variables. Even if it did add output, I don\u0027t see why that\u0027s an issue as the output is not really human-readable anyways.\n\nI don\u0027t really see any upsides to this CL, but there are a lot of downsides (duplicated graph generation code, removing support for ANDROID_PRODUCT_GRAPH, and making it harder to support artifact path requirements)",
+      "parentUuid": "c5745968_49858b0d",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5d94e6_37d95c7f",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-17T17:56:10Z",
+      "side": 1,
+      "message": "Isn\u0027t this duplicated now with the rule below to make $(products_graph)?",
+      "revId": "2f28991905b0960bbcebede6bafb3ad588cc630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b10c767f_321aba17",
         "filename": "core/product-graph.mk",
         "patchSetId": 1
