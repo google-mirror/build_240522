@@ -16,6 +16,23 @@
       "message": "Hi Arnaud, could you cherry-pick this change and check whether it fixes the car apps issue?\n",
       "revId": "09efc16c7289d5c4c953154bbfbc504b80aada43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95dbb90_c8450697",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060724
+      },
+      "writtenOn": "2022-03-17T02:01:23Z",
+      "side": 1,
+      "message": "Fixes b/225050939 for me, thanks Bob!!",
+      "revId": "09efc16c7289d5c4c953154bbfbc504b80aada43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
