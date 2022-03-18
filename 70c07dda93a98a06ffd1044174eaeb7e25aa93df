@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f718944_012c1518",
+        "filename": "core/Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-18T06:29:07Z",
+      "side": 1,
+      "message": "Just FYI, we have some build error on `gki_arm64`. \n\nLet\u0027s follow up on b/225282564.",
+      "range": {
+        "startLine": 1501,
+        "startChar": 35,
+        "endLine": 1501,
+        "endChar": 67
+      },
+      "revId": "70c07dda93a98a06ffd1044174eaeb7e25aa93df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
