@@ -648,6 +648,7 @@ $(MK2BP_REMAINING_HTML): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT)
 	@rm -f $@
 	$(hide) $(MK2BP_CATALOG_SCRIPT) \
 		--device=$(TARGET_DEVICE) \
+		--product_packages="$(PRODUCT_PACKAGES)" \
 		--title="Remaining Android.mk files for $(TARGET_DEVICE)-$(TARGET_BUILD_VARIANT)" \
 		--codesearch=$(PRIVATE_CODE_SEARCH_BASE_URL) \
 		--out_dir="$(OUT_DIR)" \
@@ -660,6 +661,7 @@ $(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT)
 	@rm -f $@
 	$(hide) $(MK2BP_CATALOG_SCRIPT) \
 		--device=$(TARGET_DEVICE) \
+		--product_packages="$(PRODUCT_PACKAGES)" \
 		--out_dir="$(OUT_DIR)" \
 		--mode=csv \
 		> $@
