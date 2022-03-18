@@ -163,7 +163,6 @@ class MergeUtilsTest(test_utils.ReleaseToolsTestCase):
         'META/releasetools.py',
         'META/vendor_filesystem_config.txt',
         'ODM/*',
-        'OTA/android-info.txt',
         'VENDOR/*',
     ]
     self.assertEqual(item_list, expected_vendor_item_list)

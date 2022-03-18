@@ -171,7 +171,8 @@ _FRAMEWORK_PARTITIONS = {
 # Partitions that are grabbed from the vendor partial build by default.
 _VENDOR_PARTITIONS = {
     'vendor', 'odm', 'oem', 'boot', 'vendor_boot', 'recovery',
-    'prebuilt_images', 'radio', 'data', 'vendor_dlkm', 'odm_dlkm'
+    'prebuilt_images', 'radio', 'data', 'vendor_dlkm', 'odm_dlkm', 'ota',
+    'bootloader', 'dt', 'dtbo', 'logo'
 }
 
 
@@ -193,7 +194,6 @@ def InferItemList(input_namelist, framework):
         'META/kernel_version.txt',
         'META/otakeys.txt',
         'META/releasetools.py',
-        'OTA/android-info.txt',
     ])
 
   # Grab a set of items for the expected partitions in the partial build.
