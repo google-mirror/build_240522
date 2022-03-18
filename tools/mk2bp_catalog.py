@@ -12,6 +12,7 @@ import itertools
 import json
 import os
 import re
+import subprocess
 import sys
 
 DIRECTORY_PATTERNS = [x.split("/") for x in (
@@ -308,6 +309,33 @@ def print_analysis_header(link, title):
     print("""<th class="Count Warning">%s</th>""" % analyzer.title)
   print("      </tr>")
 
+def get_top():
+  path = '.'
+  while not os.path.isfile(os.path.join(path, 'build/soong/soong_ui.bash')):
+    if os.path.abspath(path) == '/':
+      sys.exit('Could not find android source tree root.')
+    path = os.path.join(path, '..')
+  return os.path.abspath(path)
+
+# get the values of a build variable
+def get_build_var_values(build_var):
+  # TODO: use the line below to initial the bash_cmd var
+  # bash_cmd = "get_build_var " + build_var
+  bash_cmd = "bash build/soong/soong_ui.bash --dumpvar-mode " + build_var
+  build_var_vals = subprocess.run(bash_cmd, capture_output=True, shell=True, text=True, check=True)
+  return build_var_vals.stdout
+
+# get all modules in $(PRODUCT_PACKAGE) and the corresponding deps
+def get_module_product_packages_plus_deps(initial_modules, soong_data):
+  result = set()
+  for module in initial_modules:
+    if module in result:
+      continue
+    result.add(module)
+    if module in soong_data.deps:
+      result |= get_module_product_packages_plus_deps(soong_data.deps[module], soong_data)
+  return result
+
 def main():
   parser = argparse.ArgumentParser(description="Info about remaining Android.mk files.")
   parser.add_argument("--device", type=str, required=True,
@@ -327,6 +355,8 @@ def main():
                       help="output format: csv or html")
 
   args = parser.parse_args()
+
+  os.chdir(get_top())
 
   # Guess out directory name
   if not args.out_dir:
@@ -354,16 +384,23 @@ def main():
       continue
     all_makefiles[filename] = Makefile(filename)
 
+  # Get all the modules in $(PRODUCT_PACKAGES) and the correspoding deps
+  initial_modules = set(get_build_var_values("PRODUCT_PACKAGES").split())
+  product_package_modules_plus_deps = get_module_product_packages_plus_deps(initial_modules, soong)
+
   if args.mode == "html":
-    HtmlProcessor(args=args, soong=soong, all_makefiles=all_makefiles).execute()
+    HtmlProcessor(args=args, soong=soong, all_makefiles=all_makefiles,
+        product_packages_modules=product_package_modules_plus_deps).execute()
   elif args.mode == "csv":
-    CsvProcessor(args=args, soong=soong, all_makefiles=all_makefiles).execute()
+    CsvProcessor(args=args, soong=soong, all_makefiles=all_makefiles,
+        product_packages_modules=product_package_modules_plus_deps).execute()
 
 class HtmlProcessor(object):
-  def __init__(self, args, soong, all_makefiles):
+  def __init__(self, args, soong, all_makefiles, product_packages_modules):
     self.args = args
     self.soong = soong
     self.all_makefiles = all_makefiles
+    self.product_packages_modules = product_packages_modules
     self.annotations = Annotations()
 
   def execute(self):
@@ -376,6 +413,8 @@ class HtmlProcessor(object):
     modules_by_partition = dict()
     partitions = set()
     for installed, module in self.soong.installed.items():
+      if module not in self.product_packages_modules:
+        continue
       partition = get_partition_from_installed(HOST_OUT_ROOT, PRODUCT_OUT, installed)
       modules_by_partition.setdefault(partition, []).append(module)
       partitions.add(partition)
@@ -985,10 +1024,11 @@ class HtmlProcessor(object):
       return "";
 
 class CsvProcessor(object):
-  def __init__(self, args, soong, all_makefiles):
+  def __init__(self, args, soong, all_makefiles, product_packages_modules):
     self.args = args
     self.soong = soong
     self.all_makefiles = all_makefiles
+    self.product_packages_modules = product_packages_modules
 
   def execute(self):
     csvout = csv.writer(sys.stdout)
@@ -1004,6 +1044,8 @@ class CsvProcessor(object):
     for filename in sorted(self.all_makefiles.keys()):
       makefile = self.all_makefiles[filename]
       for module in self.soong.reverse_makefiles[filename]:
+        if module not in self.product_packages_modules:
+          continue
         row = [filename, module]
         # Partitions
         row.append(";".join(sorted(set([get_partition_from_installed(HOST_OUT_ROOT, PRODUCT_OUT,
