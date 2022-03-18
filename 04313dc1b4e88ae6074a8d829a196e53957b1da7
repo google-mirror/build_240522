@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4fb11d6_7966f2dd",
+        "filename": "core/tasks/host_apex_verifier.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-18T22:07:09Z",
+      "side": 1,
+      "message": "Running checks only on dist builds can be confusing when developers try to repro locally, is this too expensive to add as a dependency of droidcore?",
+      "revId": "04313dc1b4e88ae6074a8d829a196e53957b1da7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
