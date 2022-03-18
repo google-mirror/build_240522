@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b570af0a_d4f1cbc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1076123
+      },
+      "writtenOn": "2022-03-18T00:09:11Z",
+      "side": 1,
+      "message": "Lint: We expect CFI to increase the binary size.  I didn\u0027t realize it would be by that much.",
+      "revId": "d0a9ac08b93312219550ec535b9aa1e02eed60ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
