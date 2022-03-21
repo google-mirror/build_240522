@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b718c34c_c0d426bf",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-03-21T22:47:43Z",
+      "side": 0,
+      "message": "Can you mark this as obsolete in build/make/core/config.mk so that any users in other trees get notified?",
+      "revId": "503b77926620216ac75fdcde03c3778454f2794d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
