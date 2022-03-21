@@ -16,6 +16,24 @@
       "message": "This will cause them to be distributed. Right?\n\nIf so, they need to go into a notice file.",
       "revId": "13c72ac3237ed1c414d260239de70e2d3cb44bc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2f7280_8bb33146",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-21T23:05:35Z",
+      "side": 1,
+      "message": "Alternatively to adding them to the notices, we could add an assertion that the variable must be empty.",
+      "parentUuid": "333ed941_e1db421e",
+      "revId": "13c72ac3237ed1c414d260239de70e2d3cb44bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
