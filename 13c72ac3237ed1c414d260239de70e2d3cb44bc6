@@ -34,6 +34,24 @@
       "parentUuid": "333ed941_e1db421e",
       "revId": "13c72ac3237ed1c414d260239de70e2d3cb44bc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05b860c_c7c958da",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-21T23:24:26Z",
+      "side": 1,
+      "message": "These are intermediates files, not $DIST_DIR files.",
+      "parentUuid": "9a2f7280_8bb33146",
+      "revId": "13c72ac3237ed1c414d260239de70e2d3cb44bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
