@@ -40,6 +40,7 @@ func Test(t *testing.T) {
 	tests := []struct {
 		condition   string
 		name        string
+		outDir      string
 		roots       []string
 		expectedOut []projectShare
 	}{
@@ -473,6 +474,8 @@ func Test(t *testing.T) {
 				}
 				expectedOut.WriteString("\n")
 			}
+
+			os.Setenv("OUT_DIR", tt.outDir)
 
 			stdout := &bytes.Buffer{}
 			stderr := &bytes.Buffer{}

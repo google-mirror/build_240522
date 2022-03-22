@@ -21,6 +21,8 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"android/soong/tools/compliance"
 )
 
 func TestMain(m *testing.M) {
@@ -37,6 +39,7 @@ func Test(t *testing.T) {
 	tests := []struct {
 		condition   string
 		name        string
+		outDir      string
 		roots       []string
 		expectedOut []string
 	}{
@@ -196,12 +199,14 @@ func Test(t *testing.T) {
 			stdout := &bytes.Buffer{}
 			stderr := &bytes.Buffer{}
 
+			os.Setenv("OUT_DIR", tt.outDir)
+
 			rootFiles := make([]string, 0, len(tt.roots))
 			for _, r := range tt.roots {
 				rootFiles = append(rootFiles, "testdata/"+tt.condition+"/"+r)
 			}
 
-			ctx := context{stdout, stderr, os.DirFS(".")}
+			ctx := context{stdout, stderr, compliance.GetFS()}
 
 			err := shippedLibs(&ctx, rootFiles...)
 			if err != nil {
