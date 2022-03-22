@@ -115,7 +115,7 @@ func dumpGraph(ctx *context, stdout, stderr io.Writer, files ...string) error {
 	}
 
 	// Read the license graph from the license metadata files (*.meta_lic).
-	licenseGraph, err := compliance.ReadLicenseGraph(os.DirFS("."), stderr, files)
+	licenseGraph, err := compliance.ReadLicenseGraph(compliance.GetFS(os.Getenv("OUT_DIR")), stderr, files)
 	if err != nil {
 		return fmt.Errorf("Unable to read license metadata file(s) %q: %w\n", files, err)
 	}
