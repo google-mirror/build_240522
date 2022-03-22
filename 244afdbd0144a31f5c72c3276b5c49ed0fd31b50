@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f21865_449d789b",
+        "filename": "tools/compliance/cmd/bom/bom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-22T20:59:44Z",
+      "side": 1,
+      "message": "I worry that this could contaminate later tests in the same process, and also prevents speeding up these tests by running them in parallel by adding t.Parallel().  Maybe tests should use a version of GetFS() that takes tt.outDir instead of using os.Getenv?",
+      "revId": "244afdbd0144a31f5c72c3276b5c49ed0fd31b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31251204_8dbf4f3b",
+        "filename": "tools/compliance/readgraph.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-22T20:59:44Z",
+      "side": 1,
+      "message": "`OUT_DIR\u003d/tmp/out m /tmp/out/target/product/vsoc_x86_64/obj/NOTICE.xml.gz` still fails for me with this CL, I think we hide the OUT_DIR environment variable inside ninja.  You could prefix xmlnotice, etc. rules with OUT_DIR\u003d$(OUT_DIR) in Make, or pass it as a command line argument.",
+      "revId": "244afdbd0144a31f5c72c3276b5c49ed0fd31b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
