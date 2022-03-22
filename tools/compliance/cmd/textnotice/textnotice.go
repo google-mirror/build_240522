@@ -137,7 +137,7 @@ func main() {
 
 	var deps []string
 
-	ctx := &context{ofile, os.Stderr, os.DirFS("."), *product, *stripPrefix, *title, &deps}
+	ctx := &context{ofile, os.Stderr, compliance.GetFS(os.Getenv("OUT_DIR")), *product, *stripPrefix, *title, &deps}
 
 	err := textNotice(ctx, flag.Args()...)
 	if err != nil {
