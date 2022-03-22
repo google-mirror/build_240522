@@ -16,6 +16,24 @@
       "message": "Can you mark this as obsolete in build/make/core/config.mk so that any users in other trees get notified?",
       "revId": "b2f23a20173bba0516056ff3364ed1129b9720ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "045fbbc6_5ba41c55",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-22T06:07:32Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "bbf681fe_8bd2c3ed",
+      "revId": "b2f23a20173bba0516056ff3364ed1129b9720ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
