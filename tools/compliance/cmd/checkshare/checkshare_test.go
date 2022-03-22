@@ -56,6 +56,7 @@ func Test(t *testing.T) {
 	tests := []struct {
 		condition        string
 		name             string
+		outDir           string
 		roots            []string
 		expectedStdout   string
 		expectedOutcomes outcomeList
@@ -243,6 +244,8 @@ func Test(t *testing.T) {
 		t.Run(tt.condition+" "+tt.name, func(t *testing.T) {
 			stdout := &bytes.Buffer{}
 			stderr := &bytes.Buffer{}
+
+			os.Setenv("OUT_DIR", tt.outDir)
 
 			rootFiles := make([]string, 0, len(tt.roots))
 			for _, r := range tt.roots {
