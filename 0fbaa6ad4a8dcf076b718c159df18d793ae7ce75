@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a2747d_5e9683b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-22T23:24:59Z",
+      "side": 1,
+      "message": "If I understand this correctly, product config files use require-artifacts-in-pathxxx macros to specify what\u0027s allowed, and once the particular makefile is inherited, the requirements can be checked, so all the checking can be contained in product_config.rbc. This is the solution that is going to work even when makefile-based product config is gone. Am I wrong?",
+      "revId": "0fbaa6ad4a8dcf076b718c159df18d793ae7ce75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
