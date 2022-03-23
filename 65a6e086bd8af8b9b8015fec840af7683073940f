@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbdf8eeb_66a37e85",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-23T18:49:52Z",
+      "side": 1,
+      "message": "But then references to those paths would fail because the built artifacts are not in the out/ directory but somewhere else.",
+      "parentUuid": "635552cd_0dd5c8de",
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b113f653_59684ae0",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16f06a72_1fb0f810",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-23T18:49:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b113f653_59684ae0",
+      "range": {
+        "startLine": 895,
+        "startChar": 57,
+        "endLine": 895,
+        "endChar": 68
+      },
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae3afa66_21aca83f",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-03-23T18:10:33Z",
       "side": 1,
       "message": "This doesn\u0027t seem useful, $(my_register_name) will never have an extra /",
+      "range": {
+        "startLine": 128,
+        "startChar": 36,
+        "endLine": 128,
+        "endChar": 47
+      },
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7bee00_29154366",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-23T18:49:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae3afa66_21aca83f",
       "range": {
         "startLine": 128,
         "startChar": 36,
