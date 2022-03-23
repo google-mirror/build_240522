@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28bb370f_dc85248e",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-23T20:39:09Z",
+      "side": 1,
+      "message": "A thought occurred to me - would it be better to use `ifneq (,$(...))` to make it possible to propagate either `true` or `false`? I don\u0027t know if that would have any utility.",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 52
+      },
+      "revId": "e1d0af7e30e5d32b504fde891a1cde472d10203c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
