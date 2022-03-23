@@ -16,6 +16,24 @@
       "message": "If I understand this correctly, product config files use require-artifacts-in-pathxxx macros to specify what\u0027s allowed, and once the particular makefile is inherited, the requirements can be checked, so all the checking can be contained in product_config.rbc. This is the solution that is going to work even when makefile-based product config is gone. Am I wrong?",
       "revId": "0fbaa6ad4a8dcf076b718c159df18d793ae7ce75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e30c18_6fbb5ff7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-23T00:43:37Z",
+      "side": 1,
+      "message": "That\u0027s correct. We can do a pure-starlark implementation when getting rid of the makefiles but for now I\u0027d like to keep it consolidated in one implementation.",
+      "parentUuid": "30a2747d_5e9683b5",
+      "revId": "0fbaa6ad4a8dcf076b718c159df18d793ae7ce75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
