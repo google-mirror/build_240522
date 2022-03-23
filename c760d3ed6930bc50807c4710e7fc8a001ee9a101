@@ -33,6 +33,23 @@
       "message": "Ping.",
       "revId": "c760d3ed6930bc50807c4710e7fc8a001ee9a101",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922dcde3_70540ab0",
+        "filename": "target/product/module_common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-23T12:48:39Z",
+      "side": 1,
+      "message": "Please add this as a single-value var in product.mk (and add a \"doc\" comment simila rto this one)",
+      "revId": "c760d3ed6930bc50807c4710e7fc8a001ee9a101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
