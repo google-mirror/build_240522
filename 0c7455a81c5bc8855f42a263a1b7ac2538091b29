@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8e6df2_5eade27a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-03-23T10:17:20Z",
+      "side": 1,
+      "message": "Are you sure this is the case? From the bug it looks like it\u0027s the releasetools python code with the dependency, not mkfs.erofs\n\nIf mkfs.erofs does actually have a runtime dependency, that should also be listed in the `required: ...` in it\u0027s Android.bp definition in addition to this list (which doesn\u0027t yet respect runtime dependencies)",
+      "revId": "0c7455a81c5bc8855f42a263a1b7ac2538091b29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
