@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eec96b82_d0f5a689",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-23T20:34:44Z",
+      "side": 1,
+      "message": "When OUT_DIR\u003d/tmp/verylongpathname, I\u0027m proposing changing the path to the .meta_lic file from `/tmp/verylongpathname/target/product/vsoc_x86_64/gen/META/lic_intermediates/tmp/verylongpathname/target/product/vsoc_x86_64/system.img.meta_lic` to `/tmp/verylongpathname/target/product/vsoc_x86_64/gen/META/lic_intermediates/out/target/product/vsoc_x86_64/system.img.meta_lic`.",
+      "parentUuid": "3c487379_198d3890",
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b113f653_59684ae0",
         "filename": "core/definitions.mk",
         "patchSetId": 6
