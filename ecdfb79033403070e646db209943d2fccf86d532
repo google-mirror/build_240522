@@ -16,6 +16,24 @@
       "message": "I think this includes the vendor_ramdisk variant, but I cannot be sure.",
       "revId": "ecdfb79033403070e646db209943d2fccf86d532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ddace0_87d60273",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-03-23T21:58:49Z",
+      "side": 1,
+      "message": "I just found out, `snapuserd.recovery` causes vendor_ramdisk variant to be included... Thanks for the help!",
+      "parentUuid": "c8097388_ad91dddd",
+      "revId": "ecdfb79033403070e646db209943d2fccf86d532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
