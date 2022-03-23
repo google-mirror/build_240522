@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "635552cd_0dd5c8de",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-23T18:10:33Z",
+      "side": 1,
+      "message": "If you\u0027re going to touch everywhere you compute a path to the .meta_lic file anyways, maybe `$(patsubst $(OUT_DIR)/%,out/%,$(target)` to normalize the paths under license-metadata-dir to always start with `out` instead of `$(OUT_DIR)`?  Then you don\u0027t have to worry about absolute OUT_DIR, or too long values of OUT_DIR that push command lines over the length limit.",
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b113f653_59684ae0",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-23T18:10:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem useful, filelist will never have an extra /",
+      "range": {
+        "startLine": 895,
+        "startChar": 57,
+        "endLine": 895,
+        "endChar": 68
+      },
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae3afa66_21aca83f",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-23T18:10:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem useful, $(my_register_name) will never have an extra /",
+      "range": {
+        "startLine": 128,
+        "startChar": 36,
+        "endLine": 128,
+        "endChar": 47
+      },
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
