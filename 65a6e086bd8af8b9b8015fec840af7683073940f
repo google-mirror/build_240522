@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f726beeb_1b4fd371",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-23T18:57:17Z",
+      "side": 1,
+      "message": "Not sure I understand, this is only for creating the path to the .meta_lic file, which is already inside license-metadata-dir in the out directory.",
+      "parentUuid": "bbdf8eeb_66a37e85",
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b113f653_59684ae0",
         "filename": "core/definitions.mk",
         "patchSetId": 6
