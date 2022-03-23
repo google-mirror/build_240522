@@ -16,6 +16,24 @@
       "message": "Are you sure this is the case? From the bug it looks like it\u0027s the releasetools python code with the dependency, not mkfs.erofs\n\nIf mkfs.erofs does actually have a runtime dependency, that should also be listed in the `required: ...` in it\u0027s Android.bp definition in addition to this list (which doesn\u0027t yet respect runtime dependencies)",
       "revId": "0c7455a81c5bc8855f42a263a1b7ac2538091b29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d36b10_60b8dac2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2022-03-23T10:32:47Z",
+      "side": 1,
+      "message": "I misunderstood the root cause; so turns out it\u0027s aosp/2008730 added change to build_image.py to use fsck.erofs. It has added fsck.erofs to required list, but we still need to add it to INTERNAL_OTATOOLS_MODULES, for it to be packed into otatools.zip. So in this bug it downloads otatools.zip, and repacks the images using the tools and instructions in otatools.zip, but fsck.erofs is missing.\n\n(also updated commit description)",
+      "parentUuid": "fb8e6df2_5eade27a",
+      "revId": "0c7455a81c5bc8855f42a263a1b7ac2538091b29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
