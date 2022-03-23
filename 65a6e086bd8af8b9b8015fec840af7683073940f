@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c487379_198d3890",
+        "filename": "core/definitions.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-23T19:25:24Z",
+      "side": 1,
+      "message": "It\u0027s not in the out/ directory when the OUT_DIR variable is set.",
+      "parentUuid": "f726beeb_1b4fd371",
+      "revId": "65a6e086bd8af8b9b8015fec840af7683073940f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b113f653_59684ae0",
