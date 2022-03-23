@@ -16,6 +16,23 @@
       "message": "As mentioned in b/222723757#comment6 I don\u0027t know if there\u0027s a problem with this approach, so I\u0027ll send it out for review.",
       "revId": "c760d3ed6930bc50807c4710e7fc8a001ee9a101",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de056ed5_2ce96b4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-23T12:28:40Z",
+      "side": 1,
+      "message": "Ping.",
+      "revId": "c760d3ed6930bc50807c4710e7fc8a001ee9a101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
