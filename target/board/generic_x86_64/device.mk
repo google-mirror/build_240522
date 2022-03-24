@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 
 # This is a build configuration for the product aspects that
 # are specific to the emulator.
@@ -44,3 +45,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES := \
     audio.primary.goldfish \
     vibrator.goldfish
+=======
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

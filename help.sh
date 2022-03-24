@@ -40,6 +40,19 @@ Common goals are:
                             Stands for "Vendor, NO Dependencies"
     pnod                    Quickly rebuild the product image from built packages
                             Stands for "Product, NO Dependencies"
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+    senod                   Quickly rebuild the system_ext image from built packages
+                            Stands for "SystemExt, NO Dependencies"
+    onod                    Quickly rebuild the odm image from built packages
+                            Stands for "Odm, NO Dependencies"
+    vdnod                   Quickly rebuild the vendor_dlkm image from built packages
+                            Stands for "VendorDlkm, NO Dependencies"
+    odnod                   Quickly rebuild the odm_dlkm image from built packages
+                            Stands for "OdmDlkm, NO Dependencies"
+    sdnod                   Quickly rebuild the system_dlkm image from built packages
+                            Stands for "SystemDlkm, NO Dependencies"
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 
 So, for example, you could run:

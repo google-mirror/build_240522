@@ -114,8 +114,23 @@ $(built_odex) : $(dir $(LOCAL_BUILT_MODULE))% : $(common_javalib.jar)
   endif
 
   java-dex : $(LOCAL_BUILT_MODULE)
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 else
   $(eval $(call copy-one-file,$(full_classes_jar),$(LOCAL_BUILT_MODULE)))
+=======
+else  # LOCAL_SOONG_DEX_JAR
+  ifndef LOCAL_UNINSTALLABLE_MODULE
+    ifndef LOCAL_IS_HOST_MODULE
+      $(call pretty-error,Installable device module must have LOCAL_SOONG_DEX_JAR set)
+    endif
+  endif
+endif  # LOCAL_SOONG_DEX_JAR
+
+ALL_MODULES.$(my_register_name).CLASSES_JAR := $(full_classes_jar)
+
+ifdef LOCAL_SOONG_AAR
+  ALL_MODULES.$(my_register_name).AAR := $(LOCAL_SOONG_AAR)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 javac-check : $(full_classes_jar)
@@ -143,3 +158,18 @@ my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
 my_common := COMMON
 include $(BUILD_SYSTEM)/link_type.mk
 endif # !LOCAL_IS_HOST_MODULE
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+
+# LOCAL_EXPORT_SDK_LIBRARIES set by soong is written to exported-sdk-libs file
+my_exported_sdk_libs_file := $(intermediates.COMMON)/exported-sdk-libs
+$(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS := $(LOCAL_EXPORT_SDK_LIBRARIES)
+$(my_exported_sdk_libs_file):
+	@echo "Export SDK libs $@"
+	$(hide) mkdir -p $(dir $@) && rm -f $@
+	$(if $(PRIVATE_EXPORTED_SDK_LIBS),\
+		$(hide) echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
+		$(hide) touch $@)
+
+SOONG_ALREADY_CONV += $(LOCAL_MODULE)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

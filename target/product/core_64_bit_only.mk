@@ -24,7 +24,14 @@ PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc
 
 # Set the zygote property to select the 64-bit script.
 # This line must be parsed before the one in core_minimal.mk
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64
+=======
+PRODUCT_VENDOR_PROPERTIES += ro.zygote=zygote64
+# A 64-bit-only platform does not have dex2oat32, so make sure dex2oat64 is
+# used for dexopt.
+PRODUCT_VENDOR_PROPERTIES += dalvik.vm.dex2oat64.enabled=true
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 TARGET_SUPPORTS_32_BIT_APPS := false
 TARGET_SUPPORTS_64_BIT_APPS := true

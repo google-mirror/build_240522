@@ -65,8 +65,19 @@ ifdef LOCAL_DEX_PREOPT
 # defines built_odex along with rule to install odex
 include $(BUILD_SYSTEM)/dex_preopt_odex_install.mk
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 $(built_odex): $(LOCAL_SOONG_DEX_JAR)
 	$(call dexpreopt-one-file,$<,$@)
+=======
+# Copy test suite files.
+ifdef LOCAL_COMPATIBILITY_SUITE
+my_apks_to_install := $(foreach f,$(filter %.apk %.idsig,$(LOCAL_SOONG_BUILT_INSTALLED)),$(call word-colon,1,$(f)))
+$(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+  $(eval my_compat_dist_$(suite) := $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
+    $(foreach a,$(my_apks_to_install),\
+      $(call compat-copy-pair,$(a),$(dir)/$(notdir $(a)))))))
+$(call create-suite-dependencies)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 PACKAGES := $(PACKAGES) $(LOCAL_MODULE)
@@ -102,3 +113,26 @@ ifdef LOCAL_SOONG_RRO_DIRS
       $(LOCAL_EXPORT_PACKAGE_RESOURCES), \
       $(LOCAL_SOONG_RRO_DIRS))
 endif
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+
+ifdef LOCAL_SOONG_PRODUCT_RRO_DIRS
+  $(call append_enforce_rro_sources, \
+      $(my_register_name), \
+      false, \
+      $(LOCAL_FULL_MANIFEST_FILE), \
+      $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
+      $(LOCAL_SOONG_PRODUCT_RRO_DIRS), \
+      product \
+  )
+endif
+
+ifdef LOCAL_PREBUILT_COVERAGE_ARCHIVE
+  my_coverage_dir := $(TARGET_OUT_COVERAGE)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_module_path))
+  my_coverage_copy_pairs := $(foreach f,$(LOCAL_PREBUILT_COVERAGE_ARCHIVE),$(f):$(my_coverage_dir)/$(notdir  $(f)))
+  my_coverage_files := $(call copy-many-files,$(my_coverage_copy_pairs))
+  $(LOCAL_INSTALLED_MODULE): $(my_coverage_files)
+endif
+
+SOONG_ALREADY_CONV += $(LOCAL_MODULE)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

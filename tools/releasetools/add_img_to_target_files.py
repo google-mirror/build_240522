@@ -52,12 +52,21 @@ import shutil
 import subprocess
 import sys
 import uuid
+import tempfile
 import zipfile
 
 import build_image
 import common
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 import rangelib
 import sparse_img
+=======
+import verity_utils
+import ota_metadata_pb2
+
+from apex_utils import GetApexInfoFromTargetFiles
+from common import AddCareMapForAbOta, ZipDelete
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -90,9 +99,10 @@ class OutputFile(object):
     else:
       self.name = self.input_name
 
-  def Write(self):
+  def Write(self, compress_type=None):
     if self._output_zip:
-      common.ZipWrite(self._output_zip, self.name, self._zip_name)
+      common.ZipWrite(self._output_zip, self.name,
+                      self._zip_name, compress_type=compress_type)
 
 
 def GetCareMap(which, imgname):
@@ -140,12 +150,22 @@ def AddSystem(output_zip, recovery_img=None, boot_img=None):
     else:
       common.ZipWrite(output_zip, ofile.name, arc_name)
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   if OPTIONS.rebuild_recovery:
     print("Building new recovery patch")
+=======
+  board_uses_vendorimage = OPTIONS.info_dict.get(
+      "board_uses_vendorimage") == "true"
+
+  if (OPTIONS.rebuild_recovery and not board_uses_vendorimage and
+          recovery_img is not None and boot_img is not None):
+    logger.info("Building new recovery patch on system at system/vendor")
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
     common.MakeRecoveryPatch(OPTIONS.input_tmp, output_sink, recovery_img,
                              boot_img, info_dict=OPTIONS.info_dict)
 
-  block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system.map")
+  block_list = OutputFile(output_zip, OPTIONS.input_tmp,
+                          "IMAGES", "system.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system", img,
               block_list=block_list)
 
@@ -169,11 +189,39 @@ def AddVendor(output_zip):
   output_zip."""
 
   img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.img")
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   if os.path.exists(img.input_name):
     print("vendor.img already exists; no need to rebuild...")
     return img.input_name
+=======
+  if os.path.exists(img.name):
+    logger.info("vendor.img already exists; no need to rebuild...")
+    return img.name
 
-  block_list = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor.map")
+  def output_sink(fn, data):
+    output_file = os.path.join(OPTIONS.input_tmp, "VENDOR", fn)
+    with open(output_file, "wb") as ofile:
+      ofile.write(data)
+
+    if output_zip:
+      arc_name = "VENDOR/" + fn
+      if arc_name in output_zip.namelist():
+        OPTIONS.replace_updated_files_list.append(arc_name)
+      else:
+        common.ZipWrite(output_zip, output_file, arc_name)
+
+  board_uses_vendorimage = OPTIONS.info_dict.get(
+      "board_uses_vendorimage") == "true"
+
+  if (OPTIONS.rebuild_recovery and board_uses_vendorimage and
+          recovery_img is not None and boot_img is not None):
+    logger.info("Building new recovery patch on vendor")
+    common.MakeRecoveryPatch(OPTIONS.input_tmp, output_sink, recovery_img,
+                             boot_img, info_dict=OPTIONS.info_dict)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
+
+  block_list = OutputFile(output_zip, OPTIONS.input_tmp,
+                          "IMAGES", "vendor.map")
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "vendor", img,
               block_list=block_list)
   return img.name
@@ -196,6 +244,90 @@ def AddProduct(output_zip):
   return img.name
 
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+def AddSystemExt(output_zip):
+  """Turn the contents of SYSTEM_EXT into a system_ext image and store it in
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES",
+                   "system_ext.img")
+  if os.path.exists(img.name):
+    logger.info("system_ext.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_ext.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_ext", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdm(output_zip):
+  """Turn the contents of ODM into an odm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm.img")
+  if os.path.exists(img.name):
+    logger.info("odm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddVendorDlkm(output_zip):
+  """Turn the contents of VENDOR_DLKM into an vendor_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("vendor_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "vendor_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdmDlkm(output_zip):
+  """Turn the contents of OdmDlkm into an odm_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("odm_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+def AddSystemDlkm(output_zip):
+  """Turn the contents of SystemDlkm into an system_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("system_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 def AddDtbo(output_zip):
   """Adds the DTBO image.
 
@@ -232,6 +364,95 @@ def AddDtbo(output_zip):
   return img.name
 
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+def AddPvmfw(output_zip):
+  """Adds the pvmfw image.
+
+  Uses the image under IMAGES/ if it already exists. Otherwise looks for the
+  image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.
+  """
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "pvmfw.img")
+  if os.path.exists(img.name):
+    logger.info("pvmfw.img already exists; no need to rebuild...")
+    return img.name
+
+  pvmfw_prebuilt_path = os.path.join(
+      OPTIONS.input_tmp, "PREBUILT_IMAGES", "pvmfw.img")
+  assert os.path.exists(pvmfw_prebuilt_path)
+  shutil.copy(pvmfw_prebuilt_path, img.name)
+
+  # AVB-sign the image as needed.
+  if OPTIONS.info_dict.get("avb_enable") == "true":
+    # Signing requires +w
+    os.chmod(img.name, os.stat(img.name).st_mode | stat.S_IWUSR)
+
+    avbtool = OPTIONS.info_dict["avb_avbtool"]
+    part_size = OPTIONS.info_dict["pvmfw_size"]
+    # The AVB hash footer will be replaced if already present.
+    cmd = [avbtool, "add_hash_footer", "--image", img.name,
+           "--partition_size", str(part_size), "--partition_name", "pvmfw"]
+    common.AppendAVBSigningArgs(cmd, "pvmfw")
+    args = OPTIONS.info_dict.get("avb_pvmfw_add_hash_footer_args")
+    if args and args.strip():
+      cmd.extend(shlex.split(args))
+    common.RunAndCheckOutput(cmd)
+
+  img.Write()
+  return img.name
+
+
+def AddCustomImages(output_zip, partition_name):
+  """Adds and signs custom images in IMAGES/.
+
+  Args:
+    output_zip: The output zip file (needs to be already open), or None to
+        write images to OPTIONS.input_tmp/.
+
+  Uses the image under IMAGES/ if it already exists. Otherwise looks for the
+  image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.
+
+  Raises:
+    AssertionError: If image can't be found.
+  """
+
+  key_path = OPTIONS.info_dict.get("avb_{}_key_path".format(partition_name))
+  algorithm = OPTIONS.info_dict.get("avb_{}_algorithm".format(partition_name))
+  extra_args = OPTIONS.info_dict.get(
+      "avb_{}_add_hashtree_footer_args".format(partition_name))
+  partition_size = OPTIONS.info_dict.get(
+      "avb_{}_partition_size".format(partition_name))
+
+  builder = verity_utils.CreateCustomImageBuilder(
+      OPTIONS.info_dict, partition_name, partition_size,
+      key_path, algorithm, extra_args)
+
+  for img_name in OPTIONS.info_dict.get(
+          "avb_{}_image_list".format(partition_name)).split():
+    custom_image = OutputFile(
+        output_zip, OPTIONS.input_tmp, "IMAGES", img_name)
+    if os.path.exists(custom_image.name):
+      continue
+
+    custom_image_prebuilt_path = os.path.join(
+        OPTIONS.input_tmp, "PREBUILT_IMAGES", img_name)
+    assert os.path.exists(custom_image_prebuilt_path), \
+        "Failed to find %s at %s" % (img_name, custom_image_prebuilt_path)
+
+    shutil.copy(custom_image_prebuilt_path, custom_image.name)
+
+    if builder is not None:
+      builder.Build(custom_image.name)
+
+    custom_image.Write()
+
+  default = os.path.join(OPTIONS.input_tmp, "IMAGES", partition_name + ".img")
+  assert os.path.exists(default), \
+      "There should be one %s.img" % (partition_name)
+  return default
+
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   print("creating " + what + ".img...")
 
@@ -337,7 +558,9 @@ def AddUserdata(output_zip):
   assert succ, "build userdata.img image failed"
 
   common.CheckSize(img.name, "userdata.img", OPTIONS.info_dict)
-  img.Write()
+  # Always use compression for useradata image.
+  # As it's likely huge and consist of lots of 0s.
+  img.Write(zipfile.ZIP_DEFLATED)
 
 
 def AppendVBMetaArgsForPartition(cmd, partition, img_path, public_key_dir):
@@ -622,6 +845,66 @@ def ReplaceUpdatedFiles(zip_filename, files_list):
   common.ZipClose(output_zip)
 
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+def HasPartition(partition_name):
+  """Determines if the target files archive should build a given partition."""
+
+  return ((os.path.isdir(
+      os.path.join(OPTIONS.input_tmp, partition_name.upper())) and
+      OPTIONS.info_dict.get(
+      "building_{}_image".format(partition_name)) == "true") or
+      os.path.exists(
+      os.path.join(OPTIONS.input_tmp, "IMAGES",
+                   "{}.img".format(partition_name))))
+
+
+def AddApexInfo(output_zip):
+  apex_infos = GetApexInfoFromTargetFiles(OPTIONS.input_tmp, 'system',
+                                          compressed_only=False)
+  apex_metadata_proto = ota_metadata_pb2.ApexMetadata()
+  apex_metadata_proto.apex_info.extend(apex_infos)
+  apex_info_bytes = apex_metadata_proto.SerializeToString()
+
+  output_file = os.path.join(OPTIONS.input_tmp, "META", "apex_info.pb")
+  with open(output_file, "wb") as ofile:
+    ofile.write(apex_info_bytes)
+  if output_zip:
+    arc_name = "META/apex_info.pb"
+    if arc_name in output_zip.namelist():
+      OPTIONS.replace_updated_files_list.append(arc_name)
+    else:
+      common.ZipWrite(output_zip, output_file, arc_name)
+
+
+def AddVbmetaDigest(output_zip):
+  """Write the vbmeta digest to the output dir and zipfile."""
+
+  # Calculate the vbmeta digest and put the result in to META/
+  boot_images = OPTIONS.info_dict.get("boot_images")
+  # Disable the digest calculation if the target_file is used as a container
+  # for boot images. A boot container might contain boot-5.4.img, boot-5.10.img
+  # etc., instead of just a boot.img and will fail in vbmeta digest calculation.
+  boot_container = boot_images and (
+      len(boot_images.split()) >= 2 or boot_images.split()[0] != 'boot.img')
+  if (OPTIONS.info_dict.get("avb_enable") == "true" and not boot_container and
+          OPTIONS.info_dict.get("avb_building_vbmeta_image") == "true"):
+    avbtool = OPTIONS.info_dict["avb_avbtool"]
+    digest = verity_utils.CalculateVbmetaDigest(OPTIONS.input_tmp, avbtool)
+    vbmeta_digest_txt = os.path.join(OPTIONS.input_tmp, "META",
+                                     "vbmeta_digest.txt")
+    with open(vbmeta_digest_txt, 'w') as f:
+      f.write(digest)
+    # writes to the output zipfile
+    if output_zip:
+      arc_name = "META/vbmeta_digest.txt"
+      if arc_name in output_zip.namelist():
+        OPTIONS.replace_updated_files_list.append(arc_name)
+      else:
+        common.ZipWriteStr(output_zip, arc_name, digest)
+
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 def AddImagesToTargetFiles(filename):
   """Creates and adds images (boot/recovery/system/...) to a target_files.zip.
 
@@ -647,7 +930,15 @@ def AddImagesToTargetFiles(filename):
   OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+  has_boot = OPTIONS.info_dict.get("no_boot") != "true"
+  has_init_boot = OPTIONS.info_dict.get("init_boot") == "true"
+  has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
+  has_vendor_kernel_boot = OPTIONS.info_dict.get("vendor_kernel_boot") == "true"
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   # {vendor,product}.img is unlike system.img or system_other.img. Because it
   # could be built from source, or dropped into target_files.zip as a prebuilt
   # blob. We consider either of them as {vendor,product}.img being available,
@@ -660,6 +951,21 @@ def AddImagesToTargetFiles(filename):
                                              "product.img")))
   has_system_other = os.path.isdir(os.path.join(OPTIONS.input_tmp,
                                                 "SYSTEM_OTHER"))
+=======
+  # {vendor,odm,product,system_ext,vendor_dlkm,odm_dlkm, system_dlkm, system, system_other}.img
+  # can be built from source, or  dropped into target_files.zip as a prebuilt blob.
+  has_vendor = HasPartition("vendor")
+  has_odm = HasPartition("odm")
+  has_vendor_dlkm = HasPartition("vendor_dlkm")
+  has_odm_dlkm = HasPartition("odm_dlkm")
+  has_system_dlkm = HasPartition("system_dlkm")
+  has_product = HasPartition("product")
+  has_system_ext = HasPartition("system_ext")
+  has_system = HasPartition("system")
+  has_system_other = HasPartition("system_other")
+  has_userdata = OPTIONS.info_dict.get("building_userdata_image") == "true"
+  has_cache = OPTIONS.info_dict.get("building_cache_image") == "true"
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
   # Set up the output destination. It writes to the given directory for dir
   # mode; otherwise appends to the given ZIP.
@@ -684,6 +990,7 @@ def AddImagesToTargetFiles(filename):
   def banner(s):
     print("\n\n++++ " + s + " ++++\n\n")
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   banner("boot")
   # common.GetBootableImage() returns the image directly if present.
   boot_image = common.GetBootableImage(
@@ -695,6 +1002,67 @@ def AddImagesToTargetFiles(filename):
       boot_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         boot_image.AddToZip(output_zip)
+=======
+  boot_image = None
+  if has_boot:
+    banner("boot")
+    boot_images = OPTIONS.info_dict.get("boot_images")
+    if boot_images is None:
+      boot_images = "boot.img"
+    for index, b in enumerate(boot_images.split()):
+      # common.GetBootableImage() returns the image directly if present.
+      boot_image = common.GetBootableImage(
+          "IMAGES/" + b, b, OPTIONS.input_tmp, "BOOT")
+      # boot.img may be unavailable in some targets (e.g. aosp_arm64).
+      if boot_image:
+        boot_image_path = os.path.join(OPTIONS.input_tmp, "IMAGES", b)
+        # Although multiple boot images can be generated, include the image
+        # descriptor of only the first boot image in vbmeta
+        if index == 0:
+          partitions['boot'] = boot_image_path
+        if not os.path.exists(boot_image_path):
+          boot_image.WriteToDir(OPTIONS.input_tmp)
+          if output_zip:
+            boot_image.AddToZip(output_zip)
+
+  if has_init_boot:
+    banner("init_boot")
+    init_boot_image = common.GetBootableImage(
+        "IMAGES/init_boot.img", "init_boot.img", OPTIONS.input_tmp, "INIT_BOOT")
+    if init_boot_image:
+      partitions['init_boot'] = os.path.join(
+          OPTIONS.input_tmp, "IMAGES", "init_boot.img")
+      if not os.path.exists(partitions['init_boot']):
+        init_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          init_boot_image.AddToZip(output_zip)
+
+  if has_vendor_boot:
+    banner("vendor_boot")
+    vendor_boot_image = common.GetVendorBootImage(
+        "IMAGES/vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
+        "VENDOR_BOOT")
+    if vendor_boot_image:
+      partitions['vendor_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_boot.img")
+      if not os.path.exists(partitions['vendor_boot']):
+        vendor_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_boot_image.AddToZip(output_zip)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
+
+  if has_vendor_kernel_boot:
+    banner("vendor_kernel_boot")
+    vendor_kernel_boot_image = common.GetVendorBootImage(
+        "IMAGES/vendor_kernel_boot.img", "vendor_kernel_boot.img", OPTIONS.input_tmp,
+        "VENDOR_KERNEL_BOOT")
+    if vendor_kernel_boot_image:
+      partitions['vendor_kernel_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_kernel_boot.img")
+      if not os.path.exists(partitions['vendor_kernel_boot']):
+        vendor_kernel_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_kernel_boot_image.AddToZip(output_zip)
 
   recovery_image = None
   if has_recovery:
@@ -726,9 +1094,25 @@ def AddImagesToTargetFiles(filename):
   partitions['system'] = AddSystem(
       output_zip, recovery_img=recovery_image, boot_img=boot_image)
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   if has_vendor:
     banner("vendor")
     partitions['vendor'] = AddVendor(output_zip)
+=======
+  add_partition_calls = (
+      ("system", has_system, AddSystem, [recovery_image, boot_image]),
+      ("vendor", has_vendor, AddVendor, [recovery_image, boot_image]),
+      ("product", has_product, AddProduct, []),
+      ("system_ext", has_system_ext, AddSystemExt, []),
+      ("odm", has_odm, AddOdm, []),
+      ("vendor_dlkm", has_vendor_dlkm, AddVendorDlkm, []),
+      ("odm_dlkm", has_odm_dlkm, AddOdmDlkm, []),
+      ("system_dlkm", has_system_dlkm, AddSystemDlkm, []),
+      ("system_other", has_system_other, AddSystemOther, []),
+  )
+  for call in add_partition_calls:
+    add_partition(*call)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
   if has_product:
     banner("product")
@@ -753,8 +1137,51 @@ def AddImagesToTargetFiles(filename):
     partitions['dtbo'] = AddDtbo(output_zip)
 
   if OPTIONS.info_dict.get("avb_enable") == "true":
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     banner("vbmeta")
     AddVBMeta(output_zip, partitions)
+=======
+    # vbmeta_partitions includes the partitions that should be included into
+    # top-level vbmeta.img, which are the ones that are not included in any
+    # chained VBMeta image plus the chained VBMeta images themselves.
+    # Currently custom_partitions are all chained to VBMeta image.
+    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
+
+    vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
+    if vbmeta_system:
+      banner("vbmeta_system")
+      partitions["vbmeta_system"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_system", vbmeta_system.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_system.split()]
+      vbmeta_partitions.append("vbmeta_system")
+
+    vbmeta_vendor = OPTIONS.info_dict.get("avb_vbmeta_vendor", "").strip()
+    if vbmeta_vendor:
+      banner("vbmeta_vendor")
+      partitions["vbmeta_vendor"] = AddVBMeta(
+          output_zip, partitions, "vbmeta_vendor", vbmeta_vendor.split())
+      vbmeta_partitions = [
+          item for item in vbmeta_partitions
+          if item not in vbmeta_vendor.split()]
+      vbmeta_partitions.append("vbmeta_vendor")
+
+    if OPTIONS.info_dict.get("avb_building_vbmeta_image") == "true":
+      banner("vbmeta")
+      AddVBMeta(output_zip, partitions, "vbmeta", vbmeta_partitions)
+
+  if OPTIONS.info_dict.get("use_dynamic_partitions") == "true":
+    if OPTIONS.info_dict.get("build_super_empty_partition") == "true":
+      banner("super_empty")
+      AddSuperEmpty(output_zip)
+
+  if OPTIONS.info_dict.get("build_super_partition") == "true":
+    if OPTIONS.info_dict.get(
+            "build_retrofit_dynamic_partitions_ota_package") == "true":
+      banner("super split images")
+      AddSuperSplit(output_zip)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
   banner("radio")
   ab_partitions_txt = os.path.join(OPTIONS.input_tmp, "META",
@@ -784,6 +1211,36 @@ def AddImagesToTargetFiles(filename):
     if OPTIONS.replace_updated_files_list:
       ReplaceUpdatedFiles(output_zip.filename,
                           OPTIONS.replace_updated_files_list)
+
+
+def OptimizeCompressedEntries(zipfile_path):
+  """Convert files that do not compress well to uncompressed storage
+
+  EROFS images tend to be compressed already, so compressing them again
+  yields little space savings. Leaving them uncompressed will make
+  downstream tooling's job easier, and save compute time.
+  """
+  if not zipfile.is_zipfile(zipfile_path):
+    return
+  entries_to_store = []
+  with tempfile.TemporaryDirectory() as tmpdir:
+    with zipfile.ZipFile(zipfile_path, "r", allowZip64=True) as zfp:
+      for zinfo in zfp.filelist:
+        if not zinfo.filename.startswith("IMAGES/") and not zinfo.filename.startswith("META"):
+          continue
+        # Don't try to store userdata.img uncompressed, it's usually huge.
+        if zinfo.filename.endswith("userdata.img"):
+          continue
+        if zinfo.compress_size > zinfo.file_size * 0.80 and zinfo.compress_type != zipfile.ZIP_STORED:
+          entries_to_store.append(zinfo)
+          zfp.extract(zinfo, tmpdir)
+    if len(entries_to_store) == 0:
+      return
+    # Remove these entries, then re-add them as ZIP_STORED
+    ZipDelete(zipfile_path, [entry.filename for entry in entries_to_store])
+    with zipfile.ZipFile(zipfile_path, "a", allowZip64=True) as zfp:
+      for entry in entries_to_store:
+        zfp.write(os.path.join(tmpdir, entry.filename), entry.filename, compress_type=zipfile.ZIP_STORED)
 
 
 def main(argv):
@@ -816,7 +1273,13 @@ def main(argv):
     sys.exit(1)
 
   AddImagesToTargetFiles(args[0])
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   print("done.")
+=======
+  OptimizeCompressedEntries(args[0])
+  logger.info("done.")
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
+
 
 if __name__ == '__main__':
   try:

@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2006 The Android Open Source Project
+# Copyright (C) 2022 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +13,9 @@
 # limitations under the License.
 #
 
-# Settings to use MinGW as a cross-compiler under Linux
-# Included by combo/select.make
+# This device is suitable for soong-only build that builds for all the architectures
+# needed for the ndk. It is not going to work for normal `lunch <foo> && m` workflows.
 
-define $(combo_var_prefix)transform-shared-lib-to-toc
-$(hide) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)OBJDUMP) -x $(1) | grep "^Name" | cut -f3 -d" " > $(2)
-$(hide) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)NM) -g -f p $(1) | cut -f1-2 -d" " >> $(2)
-endef
+PRODUCT_NAME := ndk
+PRODUCT_BRAND := Android
+PRODUCT_DEVICE := ndk

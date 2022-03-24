@@ -14,13 +14,18 @@
 # limitations under the License.
 #
 
-# the foreach and the if remove the single space entries that creep in because of the evals
+# the sort also acts as a strip to remove the single space entries that creep in because of the evals
 define gather-all-products
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 $(sort $(foreach p, \
 	$(eval _all_products_visited := )
   $(call all-products-inner, $(ALL_PRODUCTS)) \
 	, $(if $(strip $(p)),$(strip $(p)),)) \
 )
+=======
+$(eval _all_products_visited := )\
+$(sort $(call all-products-inner, $(PARENT_PRODUCT_FILES)))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endef
 
 define all-products-inner
@@ -59,9 +64,15 @@ close_parenthesis := )
 # $(2) the output file
 define emit-product-node-props
 $(hide) echo \"$(1)\" [ \
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 label=\"$(dir $(1))\\n$(notdir $(1))\\n\\n$(subst $(close_parenthesis),,$(subst $(open_parethesis),,$(PRODUCTS.$(strip $(1)).PRODUCT_MODEL)))\\n$(PRODUCTS.$(strip $(1)).PRODUCT_DEVICE)\" \
 $(if $(filter $(1),$(PRIVATE_PRODUCTS_FILTER)), style=\"filled\" fillcolor=\"#FFFDB0\",) \
 colorscheme=\"svg\" fontcolor=\"darkblue\" href=\"products/$(1).html\" \
+=======
+label=\"$(dir $(1))\\n$(notdir $(1))\\n\\n$(subst $(close_parenthesis),,$(subst $(open_parethesis),,$(call get-product-var,$(1),PRODUCT_MODEL)))\\n$(call get-product-var,$(1),PRODUCT_DEVICE)\" \
+style=\"filled\" fillcolor=\"$(strip $(call node-color,$(1)))\" \
+colorscheme=\"svg\" fontcolor=\"darkblue\" \
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 ] >> $(2)
 
 endef
@@ -79,6 +90,7 @@ $(products_graph): $(this_makefile)
 	$(hide) echo '}' >> $@.in
 	$(hide) build/make/tools/filter-product-graph.py $(PRIVATE_PRODUCTS_FILTER) < $@.in > $@
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Evaluates to the name of the product file
 # $(1) product file
 define product-debug-filename
@@ -134,6 +146,9 @@ $(foreach p,$(really_all_products), \
 			$(eval $(call transform-product-debug, $(p))) \
 			$(eval product_debug_files += $(call product-debug-filename, $(p))) \
    )
+=======
+ifeq (,$(RBC_PRODUCT_CONFIG)$(RBC_NO_PRODUCT_GRAPH)$(RBC_BOARD_CONFIG))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 $(products_pdf): $(products_graph)
 	@echo Product graph PDF: $@

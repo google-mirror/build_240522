@@ -59,9 +59,16 @@ if sys.hexversion < 0x02070000:
 # extra field anyway).
 # Issue #14315: https://bugs.python.org/issue14315, fixed in Python 2.7.8 and
 # Python 3.5.0 alpha 1.
+
+
 class MyZipInfo(zipfile.ZipInfo):
   def _decodeExtra(self):
     pass
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 zipfile.ZipInfo = MyZipInfo
 
 OPTIONS = common.OPTIONS
@@ -74,6 +81,7 @@ PROBLEMS = []
 PROBLEM_PREFIX = []
 
 def AddProblem(msg):
+  logger.error(msg)
   PROBLEMS.append(" ".join(PROBLEM_PREFIX) + " " + msg)
 def Push(msg):
   PROBLEM_PREFIX.append(msg)
@@ -178,7 +186,32 @@ class APK(object):
     finally:
       Pop()
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+  def ReadCertsDeprecated(self, full_filename):
+    print("reading certs in deprecated way for {}".format(full_filename))
+    cert_digests = set()
+    with zipfile.ZipFile(full_filename) as apk:
+      for info in apk.infolist():
+        filename = info.filename
+        if (filename.startswith("META-INF/") and
+                info.filename.endswith((".DSA", ".RSA"))):
+          pkcs7 = apk.read(filename)
+          cert = CertFromPKCS7(pkcs7, filename)
+          if not cert:
+            continue
+          cert_sha1 = common.sha1(cert).hexdigest()
+          cert_subject = GetCertSubject(cert)
+          ALL_CERTS.Add(cert_sha1, cert_subject)
+          cert_digests.add(cert_sha1)
+    if not cert_digests:
+      AddProblem("No signature found")
+      return
+    self.cert_digests = frozenset(cert_digests)
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
   def RecordCerts(self, full_filename):
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     out = set()
     try:
       f = open(full_filename)
@@ -196,6 +229,50 @@ class APK(object):
     finally:
       f.close()
       self.certs = frozenset(out)
+=======
+    """Parse and save the signature of an apk file."""
+
+    # Dump the cert info with apksigner
+    cmd = ["apksigner", "verify", "--print-certs", full_filename]
+    p = common.Run(cmd, stdout=subprocess.PIPE)
+    output, _ = p.communicate()
+    if p.returncode != 0:
+      self.ReadCertsDeprecated(full_filename)
+      return
+
+    # Sample output:
+    # Signer #1 certificate DN: ...
+    # Signer #1 certificate SHA-256 digest: ...
+    # Signer #1 certificate SHA-1 digest: ...
+    # Signer (minSdkVersion=24, maxSdkVersion=32) certificate SHA-256 digest: 56be132b780656fe2444cd34326eb5d7aac91d2096abf0fe673a99270622ec87
+    # Signer (minSdkVersion=24, maxSdkVersion=32) certificate SHA-1 digest: 19da94896ce4078c38ca695701f1dec741ec6d67
+    # ...
+    certs_info = {}
+    certificate_regex = re.compile(r"(Signer (?:#[0-9]+|\(.*\))) (certificate .*):(.*)")
+    for line in output.splitlines():
+      m = certificate_regex.match(line)
+      if not m:
+        continue
+      signer, key, val = m.group(1), m.group(2), m.group(3)
+      if certs_info.get(signer):
+        certs_info[signer].update({key.strip(): val.strip()})
+      else:
+        certs_info.update({signer: {key.strip(): val.strip()}})
+    if not certs_info:
+      AddProblem("Failed to parse cert info")
+      return
+
+    cert_digests = set()
+    for signer, props in certs_info.items():
+      subject = props.get("certificate DN")
+      digest = props.get("certificate SHA-1 digest")
+      if not subject or not digest:
+        AddProblem("Failed to parse cert subject or digest")
+        return
+      ALL_CERTS.Add(digest, subject)
+      cert_digests.add(digest)
+    self.cert_digests = frozenset(cert_digests)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
   def ReadManifest(self, full_filename):
     p = common.Run(["aapt", "dump", "xmltree", full_filename,
@@ -203,7 +280,7 @@ class APK(object):
                    stdout=subprocess.PIPE)
     manifest, err = p.communicate()
     if err:
-      AddProblem("failed to read manifest")
+      AddProblem("failed to read manifest " + full_filename)
       return
 
     self.shared_uid = None
@@ -216,15 +293,15 @@ class APK(object):
         name = m.group(1)
         if name == "android:sharedUserId":
           if self.shared_uid is not None:
-            AddProblem("multiple sharedUserId declarations")
+            AddProblem("multiple sharedUserId declarations " + full_filename)
           self.shared_uid = m.group(2)
         elif name == "package":
           if self.package is not None:
-            AddProblem("multiple package declarations")
+            AddProblem("multiple package declarations " + full_filename)
           self.package = m.group(2)
 
     if self.package is None:
-      AddProblem("no package declaration")
+      AddProblem("no package declaration " + full_filename)
 
 
 class TargetFiles(object):
@@ -275,8 +352,8 @@ class TargetFiles(object):
           apk = APK(fullname, displayname)
           self.apks[apk.filename] = apk
           self.apks_by_basename[os.path.basename(apk.filename)] = apk
-
-          self.max_pkg_len = max(self.max_pkg_len, len(apk.package))
+          if apk.package:
+            self.max_pkg_len = max(self.max_pkg_len, len(apk.package))
           self.max_fn_len = max(self.max_fn_len, len(apk.filename))
 
   def CheckSharedUids(self):
@@ -321,18 +398,38 @@ class TargetFiles(object):
 
   def PrintCerts(self):
     """Display a table of packages grouped by cert."""
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     by_cert = {}
     for apk in self.apks.itervalues():
       for cert in apk.certs:
         by_cert.setdefault(cert, []).append((apk.package, apk))
+=======
+    by_digest = {}
+    for apk in self.apks.values():
+      for digest in apk.cert_digests:
+        if apk.package:
+          by_digest.setdefault(digest, []).append((apk.package, apk))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
     order = [(-len(v), k) for (k, v) in by_cert.iteritems()]
     order.sort()
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     for _, cert in order:
       print "%s:" % (ALL_CERTS.Get(cert),)
       apks = by_cert[cert]
       apks.sort()
+=======
+    for _, digest in order:
+      print("%s:" % (ALL_CERTS.Get(digest),))
+      apks = by_digest[digest]
+      apks.sort(key=lambda x: x[0])
+      for i in range(1, len(apks)):
+        pkgname, apk = apks[i]
+        if pkgname == apks[i-1][0]:
+          print("Both {} and {} have same package name {}".format(
+              apk.filename, apks[i-1][1].filename, pkgname))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
       for _, apk in apks:
         if apk.shared_uid:
           print "  %-*s  %-*s  [%s]" % (self.max_fn_len, apk.filename,
@@ -457,10 +554,13 @@ if __name__ == '__main__':
   try:
     r = main(sys.argv[1:])
     sys.exit(r)
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   except common.ExternalError as e:
     print
     print "   ERROR: %s" % (e,)
     print
     sys.exit(1)
+=======
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
   finally:
     common.Cleanup()

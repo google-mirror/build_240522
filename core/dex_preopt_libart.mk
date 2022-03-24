@@ -3,6 +3,7 @@
 #
 ####################################
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Default to debug version to help find bugs.
 # Set USE_DEX2OAT_DEBUG to false for only building non-debug versions.
 ifeq ($(USE_DEX2OAT_DEBUG),false)
@@ -32,8 +33,17 @@ define get-product-default-property
 $(strip \
   $(eval _prop := $(patsubst $(1)=%,%,$(filter $(1)=%,$(PRODUCT_DEFAULT_PROPERTY_OVERRIDES))))\
   $(if $(_prop),$(_prop),$(patsubst $(1)=%,%,$(filter $(1)=%,$(PRODUCT_SYSTEM_DEFAULT_PROPERTIES)))))
+=======
+# Takes a list of src:dest install pairs and returns a new list with a path
+# prefixed to each dest value.
+# $(1): list of src:dest install pairs
+# $(2): path to prefix to each dest value
+define prefix-copy-many-files-dest
+$(foreach v,$(1),$(call word-colon,1,$(v)):$(2)$(call word-colon,2,$(v)))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endef
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 DEX2OAT_IMAGE_XMS := $(call get-product-default-property,dalvik.vm.image-dex2oat-Xms)
 DEX2OAT_IMAGE_XMX := $(call get-product-default-property,dalvik.vm.image-dex2oat-Xmx)
 DEX2OAT_XMS := $(call get-product-default-property,dalvik.vm.dex2oat-Xms)
@@ -57,6 +67,35 @@ endif
 # $(2): the full path (including file name) of the corresponding .jar or .apk.
 define get-odex-file-path
 $(dir $(2))oat/$(1)/$(basename $(notdir $(2))).odex
+=======
+# Converts an architecture-specific vdex path into a location that can be shared
+# between architectures.
+define vdex-shared-install-path
+$(dir $(patsubst %/,%,$(dir $(1))))$(notdir $(1))
+endef
+
+# Takes a list of src:dest install pairs of vdex files and returns a new list
+# where each dest has been rewritten to the shared location for vdex files.
+define vdex-copy-many-files-shared-dest
+$(foreach v,$(1),$(call word-colon,1,$(v)):$(call vdex-shared-install-path,$(call word-colon,2,$(v))))
+endef
+
+# Creates a rule to symlink an architecture specific vdex file to the shared
+# location for that vdex file.
+define symlink-vdex-file
+$(strip \
+  $(call symlink-file,\
+    $(call vdex-shared-install-path,$(1)),\
+    ../$(notdir $(1)),\
+    $(1))\
+  $(1))
+endef
+
+# Takes a list of src:dest install pairs of vdex files and creates rules to
+# symlink each dest to the shared location for that vdex file.
+define symlink-vdex-files
+$(foreach v,$(1),$(call symlink-vdex-file,$(call word-colon,2,$(v))))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endef
 
 # Returns the full path to the installed .odex file.
@@ -74,18 +113,39 @@ else
 get-odex-installed-file-path = $(get-odex-file-path)
 endif
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Returns the path to the image file (such as "/system/framework/<arch>/boot.art"
 # $(1): the arch name (such as "arm")
 # $(2): the image location (such as "/system/framework/boot.art")
 define get-image-file-path
 $(dir $(2))$(1)/$(notdir $(2))
 endef
+=======
+my_suffix := $(my_boot_image_name)_$($(my_boot_image_arch))
+my_copy_pairs := $(call prefix-copy-many-files-dest,$(DEXPREOPT_IMAGE_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_out))
+my_vdex_copy_pairs := $(call prefix-copy-many-files-dest,$(DEXPREOPT_IMAGE_VDEX_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_out))
+my_vdex_copy_shared_pairs := $(call vdex-copy-many-files-shared-dest,$(my_vdex_copy_pairs))
+ifeq (,$(filter %_2ND_ARCH,$(my_boot_image_arch)))
+  # Only install the vdex to the shared location for the primary architecture.
+  my_copy_pairs += $(my_vdex_copy_shared_pairs)
+endif
 
+my_unstripped_copy_pairs := $(call prefix-copy-many-files-dest,$(DEXPREOPT_IMAGE_UNSTRIPPED_BUILT_INSTALLED_$(my_suffix)),$(my_boot_image_syms))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # note we use core-libart.jar in place of core.jar for ART.
 LIBART_TARGET_BOOT_JARS := $(patsubst core, core-libart,$(DEXPREOPT_BOOT_JARS_MODULES))
 LIBART_TARGET_BOOT_DEX_LOCATIONS := $(foreach jar,$(LIBART_TARGET_BOOT_JARS),/$(DEXPREOPT_BOOT_JAR_DIR)/$(jar).jar)
 LIBART_TARGET_BOOT_DEX_FILES := $(foreach jar,$(LIBART_TARGET_BOOT_JARS),$(call intermediates-dir-for,JAVA_LIBRARIES,$(jar),,COMMON)/javalib.jar)
+=======
+# Generate the boot image module only if there is any file to install.
+ifneq (,$(strip $(my_copy_pairs)))
+  my_first_pair := $(firstword $(my_copy_pairs))
+  my_rest_pairs := $(wordlist 2,$(words $(my_copy_pairs)),$(my_copy_pairs))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # dex preopt on the bootclasspath produces multiple files.  The first dex file
 # is converted into to boot.art (to match the legacy assumption that boot.art
 # exists), and the rest are converted to boot-<name>.art.
@@ -94,7 +154,12 @@ LIBART_TARGET_BOOT_ART_EXTRA_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TA
 LIBART_TARGET_BOOT_ART_EXTRA_FILES += boot.art.rel boot.oat
 LIBART_TARGET_BOOT_ART_VDEX_FILES := $(foreach jar,$(wordlist 2,999,$(LIBART_TARGET_BOOT_JARS)),boot-$(jar).vdex)
 LIBART_TARGET_BOOT_ART_VDEX_FILES += boot.vdex
+=======
+  my_first_src := $(call word-colon,1,$(my_first_pair))
+  my_first_dest := $(call word-colon,2,$(my_first_pair))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # If we use a boot image profile.
 my_use_profile_for_boot_image := $(PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE)
 ifeq (,$(my_use_profile_for_boot_image))
@@ -104,15 +169,50 @@ ifneq (true,$(TARGET_BUILD_PDK))
 my_use_profile_for_boot_image := true
 endif
 endif
+=======
+  my_installed := $(call copy-many-files,$(my_copy_pairs))
+  my_unstripped_installed := $(call copy-many-files,$(my_unstripped_copy_pairs))
 
+  my_symlinks := $(call symlink-vdex-files,$(my_vdex_copy_pairs))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 ifeq (true,$(my_use_profile_for_boot_image))
+=======
+  # We don't have a LOCAL_PATH for the auto-generated modules, so let it be the $(BUILD_SYSTEM).
+  LOCAL_PATH := $(BUILD_SYSTEM)
+  # Hack to let these pseudo-modules wrapped around Soong modules use LOCAL_SOONG_INSTALLED_MODULE.
+  LOCAL_MODULE_MAKEFILE := $(SOONG_ANDROID_MK)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Location of text based profile for the boot image.
 my_boot_image_profile_location := $(PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION)
 ifeq (,$(my_boot_image_profile_location))
 # If not set, use the default.
 my_boot_image_profile_location := frameworks/base/config/boot-image-profile.txt
 endif
+=======
+  include $(CLEAR_VARS)
+  LOCAL_MODULE := dexpreopt_bootjar.$(my_suffix)
+  LOCAL_PREBUILT_MODULE_FILE := $(my_first_src)
+  LOCAL_MODULE_PATH := $(dir $(my_first_dest))
+  LOCAL_MODULE_STEM := $(notdir $(my_first_dest))
+  LOCAL_SOONG_INSTALL_PAIRS := $(my_copy_pairs)
+  LOCAL_SOONG_INSTALL_SYMLINKS := $(my_symlinks)
+  LOCAL_SOONG_INSTALLED_MODULE := $(my_first_dest)
+  LOCAL_SOONG_LICENSE_METADATA := $(DEXPREOPT_IMAGE_LICENSE_METADATA_$(my_suffix))
+  ifneq (,$(strip $(filter HOST_%,$(my_boot_image_arch))))
+    LOCAL_IS_HOST_MODULE := true
+  endif
+  LOCAL_MODULE_CLASS := ETC
+  include $(BUILD_PREBUILT)
+  $(LOCAL_BUILT_MODULE): | $(my_unstripped_installed)
+  # Installing boot.art causes all boot image bits to be installed.
+  # Keep this old behavior in case anyone still needs it.
+  $(LOCAL_INSTALLED_MODULE): $(wordlist 2,$(words $(my_installed)),$(my_installed)) $(my_symlinks)
+  $(my_all_targets): $(my_installed) $(my_symlinks)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Code to create the boot image profile, not in dex_preopt_libart_boot.mk since the profile is the same for all archs.
 my_out_boot_image_profile_location := $(DEXPREOPT_BOOT_JAR_DIR_FULL_PATH)/boot.prof

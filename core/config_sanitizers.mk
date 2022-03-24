@@ -205,12 +205,26 @@ ifneq ($(filter default-ub,$(my_sanitize)),)
   my_sanitize := $(CLANG_DEFAULT_UB_CHECKS)
 endif
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 ifneq ($(filter coverage,$(my_sanitize)),)
   ifeq ($(filter address,$(my_sanitize)),)
     $(error $(LOCAL_PATH): $(LOCAL_MODULE): Use of 'coverage' also requires 'address')
   endif
   my_cflags += -fsanitize-coverage=trace-pc-guard,indirect-calls,trace-cmp
   my_sanitize := $(filter-out coverage,$(my_sanitize))
+=======
+ifneq ($(filter fuzzer,$(my_sanitize)),)
+  # SANITIZE_TARGET='fuzzer' actually means to create the fuzzer coverage
+  # information, not to link against the fuzzer main().
+  my_sanitize := $(filter-out fuzzer,$(my_sanitize))
+  my_sanitize += fuzzer-no-link
+
+  # TODO(b/131771163): Disable LTO for fuzzer builds. Note that Cfi causes
+  # dependency on LTO.
+  my_sanitize := $(filter-out cfi,$(my_sanitize))
+  my_cflags += -fno-lto
+  my_ldflags += -fno-lto
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 ifneq ($(filter integer_overflow,$(my_sanitize)),)

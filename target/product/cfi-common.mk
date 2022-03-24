@@ -28,8 +28,14 @@ PRODUCT_CFI_INCLUDE_PATHS :=  \
     hardware/broadcom/wlan/bcmdhd/wpa_supplicant_8_lib \
     hardware/interfaces/nfc \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     harware/interfaces/keymaster \
     system/bt \
+=======
+    hardware/interfaces/keymaster \
+    hardware/interfaces/security \
+    packages/modules/Bluetooth/system \
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
     system/chre \
     system/core/libnetutils \
     system/core/libziparchive \

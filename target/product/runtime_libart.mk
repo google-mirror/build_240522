@@ -47,10 +47,27 @@ PRODUCT_PACKAGES += \
     libicui18n \
     libicuuc \
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # ART.
 PRODUCT_PACKAGES += art-runtime
 # ART/dex helpers.
 PRODUCT_PACKAGES += art-tools
+=======
+ifeq (true,$(art_target_include_debug_build))
+  PRODUCT_PACKAGES += com.android.art.debug
+  apex_test_module := art-check-debug-apex-gen-fakebin
+else
+  PRODUCT_PACKAGES += com.android.art
+  apex_test_module := art-check-release-apex-gen-fakebin
+endif
+
+ifeq (true,$(call soong_config_get,art_module,source_build))
+  PRODUCT_HOST_PACKAGES += $(apex_test_module)
+endif
+
+art_target_include_debug_build :=
+apex_test_module :=
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Certificates.
 PRODUCT_PACKAGES += \
@@ -59,11 +76,33 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hiddenapi-package-whitelist.xml \
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.image-dex2oat-Xms=64m \
     dalvik.vm.image-dex2oat-Xmx=64m \
     dalvik.vm.dex2oat-Xms=64m \
     dalvik.vm.dex2oat-Xmx=512m \
+=======
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+  # Don't depend on the framework boot image profile in unbundled builds where
+  # frameworks/base may not be present.
+  # TODO(b/179900989): We may not need this check once we stop using full
+  # platform products on the thin ART manifest branch.
+  PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION += frameworks/base/boot/boot-image-profile.txt
+endif
+
+# The dalvik.vm.dexopt.thermal-cutoff property must contain one of the values
+# listed here:
+#
+# https://source.android.com/devices/architecture/hidl/thermal-mitigation#thermal-api
+#
+# If the thermal status of the device reaches or exceeds the value set here
+# background dexopt will be terminated and rescheduled using an exponential
+# backoff polcy.
+#
+# The thermal cutoff value is currently set to THERMAL_STATUS_MODERATE.
+PRODUCT_SYSTEM_PROPERTIES += \
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
     dalvik.vm.usejit=true \
     dalvik.vm.usejitprofiles=true \
     dalvik.vm.dexopt.secondary=true \
@@ -97,3 +136,16 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Enable minidebuginfo generation unless overridden.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=true
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+
+# Enable Madvising of the whole art, odex and vdex files to MADV_WILLNEED.
+# The size specified here is the size limit of how much of the file
+# (in bytes) is madvised.
+# We madvise the whole .art file to MADV_WILLNEED with UINT_MAX limit.
+# For odex and vdex files, we limit madvising to 100MB.
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.madvise.vdexfile.size=104857600 \
+    dalvik.vm.madvise.odexfile.size=104857600 \
+    dalvik.vm.madvise.artfile.size=4294967295
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

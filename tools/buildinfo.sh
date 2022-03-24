@@ -10,7 +10,14 @@ echo "ro.build.version.sdk=$PLATFORM_SDK_VERSION"
 echo "ro.build.version.preview_sdk=$PLATFORM_PREVIEW_SDK_VERSION"
 echo "ro.build.version.codename=$PLATFORM_VERSION_CODENAME"
 echo "ro.build.version.all_codenames=$PLATFORM_VERSION_ALL_CODENAMES"
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 echo "ro.build.version.release=$PLATFORM_VERSION"
+=======
+echo "ro.build.version.known_codenames=$PLATFORM_VERSION_KNOWN_CODENAMES"
+echo "ro.build.version.release=$PLATFORM_VERSION_LAST_STABLE"
+echo "ro.build.version.release_or_codename=$PLATFORM_VERSION"
+echo "ro.build.version.release_or_preview_display=$PLATFORM_DISPLAY_VERSION"
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 echo "ro.build.version.security_patch=$PLATFORM_SECURITY_PATCH"
 echo "ro.build.version.base_os=$PLATFORM_BASE_OS"
 echo "ro.build.version.min_supported_target_sdk=$PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION"

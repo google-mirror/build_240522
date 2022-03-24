@@ -55,6 +55,7 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_VARIANT := generic
 endif
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -112,6 +113,9 @@ ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 TARGET_SYSTEM_PROP := build/make/target/board/gsi_system.prop
 endif
 BOARD_VNDK_VERSION := current
+=======
+include build/make/target/board/BoardConfigGsiCommon.mk
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Emulator system image is going to be used as GSI and some vendor still hasn't
 # cleaned up all device specific directories under root!

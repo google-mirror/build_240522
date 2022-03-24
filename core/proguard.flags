@@ -15,4 +15,27 @@
 @**.VisibleForTesting *;
 }
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+# Understand the common @Keep annotation from various Android packages:
+#  * android.support.annotation
+#  * androidx.annotation
+#  * com.android.internal.annotations
+-keep class **android**.annotation*.Keep
+
+-keep @**android**.annotation*.Keep class * { *; }
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <init>(...);
+}
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 -include proguard_basic_keeps.flags

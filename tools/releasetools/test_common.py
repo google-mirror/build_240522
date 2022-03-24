@@ -646,7 +646,447 @@ class CommonUtilsTest(unittest.TestCase):
     self.assertTrue(sparse_image.file_map['/system/file2'].extra['incomplete'])
 
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 class InstallRecoveryScriptFormatTest(unittest.TestCase):
+=======
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      sparse_image = common.GetSparseImage('system', tempdir, input_zip, False)
+
+    self.assertEqual(
+        '1-5 9-10',
+        sparse_image.file_map['//system/file1'].extra['text_str'])
+    self.assertTrue(sparse_image.file_map['//system/file2'].extra['incomplete'])
+    self.assertTrue(
+        sparse_image.file_map['/system/app/file3'].extra['incomplete'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetSparseImage_systemRootImage_nonSystemFiles(self):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.write(
+          test_utils.construct_sparse_image([(0xCAC2, 16)]),
+          arcname='IMAGES/system.img')
+      target_files_zip.writestr(
+          'IMAGES/system.map',
+          '\n'.join([
+              '//system/file1 1-5 9-10',
+              '//init.rc 13-15']))
+      target_files_zip.writestr('SYSTEM/file1', os.urandom(4096 * 7))
+      # '/init.rc' has less blocks listed (3) than actual (4).
+      target_files_zip.writestr('ROOT/init.rc', os.urandom(4096 * 4))
+
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      sparse_image = common.GetSparseImage('system', tempdir, input_zip, False)
+
+    self.assertEqual(
+        '1-5 9-10',
+        sparse_image.file_map['//system/file1'].extra['text_str'])
+    self.assertTrue(sparse_image.file_map['//init.rc'].extra['incomplete'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetSparseImage_fileNotFound(self):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      target_files_zip.write(
+          test_utils.construct_sparse_image([(0xCAC2, 16)]),
+          arcname='IMAGES/system.img')
+      target_files_zip.writestr(
+          'IMAGES/system.map',
+          '\n'.join([
+              '//system/file1 1-5 9-10',
+              '//system/file2 11-12']))
+      target_files_zip.writestr('SYSTEM/file1', os.urandom(4096 * 7))
+
+    tempdir = common.UnzipTemp(target_files)
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as input_zip:
+      self.assertRaises(
+          AssertionError, common.GetSparseImage, 'system', tempdir, input_zip,
+          False)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': pubkey,
+        'avb_system_rollback_index_location': 2,
+    }
+    args = common.GetAvbChainedPartitionArg('system', info_dict).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('system', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_withPrivateKey(self):
+    key = os.path.join(self.testdata_dir, 'testkey.key')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_product_key_path': key,
+        'avb_product_rollback_index_location': 2,
+    }
+    args = common.GetAvbChainedPartitionArg('product', info_dict).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('product', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_withSpecifiedKey(self):
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': 'does-not-exist',
+        'avb_system_rollback_index_location': 2,
+    }
+    pubkey = os.path.join(self.testdata_dir, 'testkey.pubkey.pem')
+    args = common.GetAvbChainedPartitionArg(
+        'system', info_dict, pubkey).split(':')
+    self.assertEqual(3, len(args))
+    self.assertEqual('system', args[0])
+    self.assertEqual('2', args[1])
+    self.assertTrue(os.path.exists(args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_GetAvbChainedPartitionArg_invalidKey(self):
+    pubkey = os.path.join(self.testdata_dir, 'testkey_with_passwd.x509.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_system_key_path': pubkey,
+        'avb_system_rollback_index_location': 2,
+    }
+    self.assertRaises(
+        common.ExternalError, common.GetAvbChainedPartitionArg, 'system',
+        info_dict)
+
+  INFO_DICT_DEFAULT = {
+      'recovery_api_version': 3,
+      'fstab_version': 2,
+      'system_root_image': 'true',
+      'no_recovery' : 'true',
+      'recovery_as_boot': 'true',
+  }
+
+  def test_LoadListFromFile(self):
+    file_path = os.path.join(self.testdata_dir,
+                             'merge_config_framework_item_list')
+    contents = common.LoadListFromFile(file_path)
+    expected_contents = [
+        'META/apkcerts.txt',
+        'META/filesystem_config.txt',
+        'META/root_filesystem_config.txt',
+        'META/system_manifest.xml',
+        'META/system_matrix.xml',
+        'META/update_engine_config.txt',
+        'PRODUCT/*',
+        'ROOT/*',
+        'SYSTEM/*',
+    ]
+    self.assertEqual(sorted(contents), sorted(expected_contents))
+
+  @staticmethod
+  def _test_LoadInfoDict_createTargetFiles(info_dict, fstab_path):
+    target_files = common.MakeTempFile(prefix='target_files-', suffix='.zip')
+    with zipfile.ZipFile(target_files, 'w', allowZip64=True) as target_files_zip:
+      info_values = ''.join(
+          ['{}={}\n'.format(k, v) for k, v in sorted(info_dict.items())])
+      common.ZipWriteStr(target_files_zip, 'META/misc_info.txt', info_values)
+
+      FSTAB_TEMPLATE = "/dev/block/system {} ext4 ro,barrier=1 defaults"
+      if info_dict.get('system_root_image') == 'true':
+        fstab_values = FSTAB_TEMPLATE.format('/')
+      else:
+        fstab_values = FSTAB_TEMPLATE.format('/system')
+      common.ZipWriteStr(target_files_zip, fstab_path, fstab_values)
+
+      common.ZipWriteStr(
+          target_files_zip, 'META/file_contexts', 'file-contexts')
+    return target_files
+
+  def test_LoadInfoDict(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_legacyRecoveryFstabPath(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_dirInput(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_dirInput_legacyRecoveryFstabPath(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_systemRootImageFalse(self):
+    # Devices not using system-as-root nor recovery-as-boot. Non-A/B devices
+    # launched prior to P will likely have this config.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['no_recovery']
+    del info_dict['system_root_image']
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertNotIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_recoveryAsBootFalse(self):
+    # Devices using system-as-root, but with standalone recovery image. Non-A/B
+    # devices launched since P will likely have this config.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['no_recovery']
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIn('/', loaded_dict['fstab'])
+      self.assertIn('/system', loaded_dict['fstab'])
+
+  def test_LoadInfoDict_noRecoveryTrue(self):
+    # Device doesn't have a recovery partition at all.
+    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
+    del info_dict['recovery_as_boot']
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        info_dict,
+        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      loaded_dict = common.LoadInfoDict(target_files_zip)
+      self.assertEqual(3, loaded_dict['recovery_api_version'])
+      self.assertEqual(2, loaded_dict['fstab_version'])
+      self.assertIsNone(loaded_dict['fstab'])
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_missingMetaMiscInfoTxt(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    common.ZipDelete(target_files, 'META/misc_info.txt')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      self.assertRaises(ValueError, common.LoadInfoDict, target_files_zip)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_LoadInfoDict_repacking(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    unzipped = common.UnzipTemp(target_files)
+    loaded_dict = common.LoadInfoDict(unzipped, True)
+    self.assertEqual(3, loaded_dict['recovery_api_version'])
+    self.assertEqual(2, loaded_dict['fstab_version'])
+    self.assertIn('/', loaded_dict['fstab'])
+    self.assertIn('/system', loaded_dict['fstab'])
+    self.assertEqual(
+        os.path.join(unzipped, 'ROOT'), loaded_dict['root_dir'])
+    self.assertEqual(
+        os.path.join(unzipped, 'META', 'root_filesystem_config.txt'),
+        loaded_dict['root_fs_config'])
+
+  def test_LoadInfoDict_repackingWithZipFileInput(self):
+    target_files = self._test_LoadInfoDict_createTargetFiles(
+        self.INFO_DICT_DEFAULT,
+        'BOOT/RAMDISK/system/etc/recovery.fstab')
+    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
+      self.assertRaises(
+          AssertionError, common.LoadInfoDict, target_files_zip, True)
+
+  def test_MergeDynamicPartitionInfoDicts_ReturnsMergedDict(self):
+    framework_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a',
+        'dynamic_partition_list': 'system',
+        'super_group_a_partition_list': 'system',
+    }
+    vendor_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'vendor product',
+        'super_block_devices': 'super',
+        'super_super_device_size': '3000',
+        'super_group_a_partition_list': 'vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    merged_dict = common.MergeDynamicPartitionInfoDicts(
+        framework_dict=framework_dict,
+        vendor_dict=vendor_dict)
+    expected_merged_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'product system vendor',
+        'super_block_devices': 'super',
+        'super_super_device_size': '3000',
+        'super_group_a_partition_list': 'system vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    self.assertEqual(merged_dict, expected_merged_dict)
+
+  def test_MergeDynamicPartitionInfoDicts_IgnoringFrameworkGroupSize(self):
+    framework_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a',
+        'dynamic_partition_list': 'system',
+        'super_group_a_partition_list': 'system',
+        'super_group_a_group_size': '5000',
+    }
+    vendor_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'vendor product',
+        'super_group_a_partition_list': 'vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    merged_dict = common.MergeDynamicPartitionInfoDicts(
+        framework_dict=framework_dict,
+        vendor_dict=vendor_dict)
+    expected_merged_dict = {
+        'use_dynamic_partitions': 'true',
+        'super_partition_groups': 'group_a group_b',
+        'dynamic_partition_list': 'product system vendor',
+        'super_group_a_partition_list': 'system vendor',
+        'super_group_a_group_size': '1000',
+        'super_group_b_partition_list': 'product',
+        'super_group_b_group_size': '2000',
+    }
+    self.assertEqual(merged_dict, expected_merged_dict)
+
+  def test_GetAvbPartitionArg(self):
+    info_dict = {}
+    cmd = common.GetAvbPartitionArg('system', '/path/to/system.img', info_dict)
+    self.assertEqual(
+        ['--include_descriptors_from_image', '/path/to/system.img'], cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_vendorAsChainedPartition(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_vendor_key_path': pubkey,
+        'avb_vendor_rollback_index_location': 5,
+    }
+    cmd = common.GetAvbPartitionArg('vendor', '/path/to/vendor.img', info_dict)
+    self.assertEqual(2, len(cmd))
+    self.assertEqual('--chain_partition', cmd[0])
+    chained_partition_args = cmd[1].split(':')
+    self.assertEqual(3, len(chained_partition_args))
+    self.assertEqual('vendor', chained_partition_args[0])
+    self.assertEqual('5', chained_partition_args[1])
+    self.assertTrue(os.path.exists(chained_partition_args[2]))
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_recoveryAsChainedPartition_nonAb(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'avb_avbtool': 'avbtool',
+        'avb_recovery_key_path': pubkey,
+        'avb_recovery_rollback_index_location': 3,
+    }
+    cmd = common.GetAvbPartitionArg(
+        'recovery', '/path/to/recovery.img', info_dict)
+    self.assertFalse(cmd)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AppendVBMetaArgsForPartition_recoveryAsChainedPartition_ab(self):
+    testdata_dir = test_utils.get_testdata_dir()
+    pubkey = os.path.join(testdata_dir, 'testkey.pubkey.pem')
+    info_dict = {
+        'ab_update': 'true',
+        'avb_avbtool': 'avbtool',
+        'avb_recovery_key_path': pubkey,
+        'avb_recovery_rollback_index_location': 3,
+    }
+    cmd = common.GetAvbPartitionArg(
+        'recovery', '/path/to/recovery.img', info_dict)
+    self.assertEqual(2, len(cmd))
+    self.assertEqual('--chain_partition', cmd[0])
+    chained_partition_args = cmd[1].split(':')
+    self.assertEqual(3, len(chained_partition_args))
+    self.assertEqual('recovery', chained_partition_args[0])
+    self.assertEqual('3', chained_partition_args[1])
+    self.assertTrue(os.path.exists(chained_partition_args[2]))
+
+  def test_GenerateGkiCertificate_KeyPathNotFound(self):
+    pubkey = os.path.join(self.testdata_dir, 'no_testkey_gki.pem')
+    self.assertFalse(os.path.exists(pubkey))
+
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    test_file = tempfile.NamedTemporaryFile()
+    self.assertRaises(common.ExternalError, common._GenerateGkiCertificate,
+                      test_file.name, 'generic_kernel')
+
+  def test_GenerateGkiCertificate_SearchKeyPathNotFound(self):
+    pubkey = 'no_testkey_gki.pem'
+    self.assertFalse(os.path.exists(pubkey))
+
+    # Tests it should raise ExternalError if no key found under
+    # OPTIONS.search_path.
+    search_path_dir = common.MakeTempDir()
+    search_pubkey = os.path.join(search_path_dir, pubkey)
+    self.assertFalse(os.path.exists(search_pubkey))
+
+    common.OPTIONS.search_path = search_path_dir
+    common.OPTIONS.info_dict = {
+        'gki_signing_key_path': pubkey,
+        'gki_signing_algorithm': 'SHA256_RSA4096',
+        'gki_signing_signature_args': '--prop foo:bar',
+    }
+    test_file = tempfile.NamedTemporaryFile()
+    self.assertRaises(common.ExternalError, common._GenerateGkiCertificate,
+                      test_file.name, 'generic_kernel')
+
+class InstallRecoveryScriptFormatTest(test_utils.ReleaseToolsTestCase):
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
   """Checks the format of install-recovery.sh.
 
   Its format should match between common.py and validate_target_files.py.

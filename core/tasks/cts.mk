@@ -18,6 +18,9 @@ test_suite_tradefed := cts-tradefed
 test_suite_dynamic_config := test/suite_harness/tools/cts-tradefed/DynamicConfig.xml
 test_suite_readme := test/suite_harness/tools/cts-tradefed/README
 
+$(call declare-1p-target,$(test_suite_dynamic_config),cts)
+$(call declare-1p-target,$(test_suite_readme),cts)
+
 include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
 
 .PHONY: cts

@@ -31,6 +31,12 @@ else
   endif
 endif
 
+# Third party code has additional no-override flags.
+is_third_party :=
+ifneq ($(filter external/% hardware/% vendor/%,$(LOCAL_PATH)),)
+  is_third_party := true
+endif
+
 my_soong_problems :=
 
 # The following LOCAL_ variables will be modified in this file.
@@ -45,8 +51,17 @@ my_header_libraries := $(LOCAL_HEADER_LIBRARIES)
 my_cflags := $(LOCAL_CFLAGS)
 my_conlyflags := $(LOCAL_CONLYFLAGS)
 my_cppflags := $(LOCAL_CPPFLAGS)
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 my_cflags_no_override := $(GLOBAL_CFLAGS_NO_OVERRIDE)
 my_cppflags_no_override := $(GLOBAL_CPPFLAGS_NO_OVERRIDE)
+=======
+my_cflags_no_override := $(GLOBAL_CLANG_CFLAGS_NO_OVERRIDE)
+my_cppflags_no_override := $(GLOBAL_CLANG_CPPFLAGS_NO_OVERRIDE)
+ifdef is_third_party
+    my_cflags_no_override += $(GLOBAL_CLANG_EXTERNAL_CFLAGS_NO_OVERRIDE)
+    my_cppflags_no_override += $(GLOBAL_CLANG_EXTERNAL_CFLAGS_NO_OVERRIDE)
+endif
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 my_ldflags := $(LOCAL_LDFLAGS)
 my_ldlibs := $(LOCAL_LDLIBS)
 my_asflags := $(LOCAL_ASFLAGS)
@@ -737,8 +752,6 @@ my_generated_sources := $(patsubst $(generated_sources_dir)/%,$(intermediates)/%
 # since other compiled sources may depend on them, and we set up
 # the dependencies.
 my_gen_src_files := $(filter %.c %$(LOCAL_CPP_EXTENSION) %.S %.s,$(my_generated_sources))
-
-ALL_GENERATED_SOURCES += $(my_generated_sources)
 
 ####################################################
 ## Compile RenderScript with reflected C++

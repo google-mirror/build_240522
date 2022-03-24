@@ -47,6 +47,10 @@ $(error $(LOCAL_PATH): Package modules may not define LOCAL_MODULE_SUFFIX)
 endif
 LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
 
+ifneq ($(strip $(LOCAL_MODULE_STEM)$(LOCAL_BUILT_MODULE_STEM)),)
+$(error $(LOCAL_PATH): Package modules may not define LOCAL_MODULE_STEM or LOCAL_BUILT_MODULE_STEM)
+endif
+
 ifneq ($(strip $(LOCAL_MODULE)),)
 $(error $(LOCAL_PATH): Package modules may not define LOCAL_MODULE)
 endif
@@ -87,7 +91,63 @@ else
   LOCAL_RESOURCE_DIR := $(foreach d,$(LOCAL_RESOURCE_DIR),$(call clean-path,$(d)))
 endif
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 package_resource_overlays := $(strip \
+=======
+# If LOCAL_MODULE matches a rule in PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES,
+# override the manifest package name by the (first) rule matched
+override_manifest_name := $(strip $(word 1,\
+  $(foreach rule,$(PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES),\
+    $(eval _pkg_name_pat := $(call word-colon,1,$(rule)))\
+    $(eval _manifest_name_pat := $(call word-colon,2,$(rule)))\
+    $(if $(filter $(_pkg_name_pat),$(LOCAL_MODULE)),\
+      $(patsubst $(_pkg_name_pat),$(_manifest_name_pat),$(LOCAL_MODULE))\
+     )\
+   )\
+))
+
+ifneq (,$(override_manifest_name))
+# Note: this can override LOCAL_MANIFEST_PACKAGE_NAME value set in Android.mk
+LOCAL_MANIFEST_PACKAGE_NAME := $(override_manifest_name)
+endif
+
+include $(BUILD_SYSTEM)/force_aapt2.mk
+# validate that app contains a manifest file for aapt2
+ifeq (,$(strip $(LOCAL_MANIFEST_FILE)$(LOCAL_FULL_MANIFEST_FILE)))
+  ifeq (,$(wildcard $(LOCAL_PATH)/AndroidManifest.xml))
+    $(call pretty-error,App missing manifest file which is required by aapt2. \
+Provide a manifest file by either setting LOCAL_MANIFEST_FILE in Android.mk \
+or via a AndroidManifest.xml in this directory)
+  endif
+endif
+
+# Process Support Library dependencies.
+include $(BUILD_SYSTEM)/support_libraries.mk
+
+# Determine whether auto-RRO is enabled for this package.
+enforce_rro_enabled :=
+ifneq (,$(filter *, $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  # * means all system and system_ext APKs, so enable conditionally based on module path.
+
+  # Note that base_rules.mk has not yet been included, so it's likely that only
+  # one of LOCAL_MODULE_PATH and the LOCAL_X_MODULE flags has been set.
+  ifeq (,$(LOCAL_MODULE_PATH))
+    non_rro_target_module := $(filter true,\
+        $(LOCAL_ODM_MODULE) \
+        $(LOCAL_OEM_MODULE) \
+        $(LOCAL_PRODUCT_MODULE) \
+        $(LOCAL_PROPRIETARY_MODULE) \
+        $(LOCAL_VENDOR_MODULE))
+    enforce_rro_enabled := $(if $(non_rro_target_module),,true)
+  else ifneq ($(filter $(TARGET_OUT)/%,$(LOCAL_MODULE_PATH)),)
+    enforce_rro_enabled := true
+  endif
+else ifneq (,$(filter $(LOCAL_PACKAGE_NAME), $(PRODUCT_ENFORCE_RRO_TARGETS)))
+  enforce_rro_enabled := true
+endif
+
+product_package_overlays := $(strip \
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
     $(wildcard $(foreach dir, $(PRODUCT_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))) \
     $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \

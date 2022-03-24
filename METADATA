@@ -1,0 +1,11 @@
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+third_party {
+  license_note: "would be NOTICE save for GPL in:\n"
+  "   core/LINUX_KERNEL_COPYING\n"
+  "   tools/droiddoc/templates-pdk/assets/jquery-1.6.2.min.js\n"
+  "   tools/droiddoc/templates-pdk/assets/jquery-history.js\n"
+  "   tools/droiddoc/templates-pdk/assets/jquery-resizable.min.js"
+  license_type: RESTRICTED
+}
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

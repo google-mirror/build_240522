@@ -79,10 +79,45 @@ endef
 
 # ---------------------------------------------------------------
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # These are the valid values of TARGET_BUILD_VARIANT.  Also, if anything else is passed
 # as the variant in the PRODUCT-$TARGET_BUILD_PRODUCT-$TARGET_BUILD_VARIANT form,
 # it will be treated as a goal, and the eng variant will be used.
 INTERNAL_VALID_VARIANTS := user userdebug eng
+=======
+define copy-files
+$(foreach f,$(1),$(f):$(2)/$(notdir $(f)))
+endef
+
+#
+# Convert the list of file names to the list of PRODUCT_COPY_FILES items
+# $(1): from pattern
+# $(2): to pattern
+# $(3): file names
+# E.g., calling product-copy-files-by-pattern with
+#   (from/%, to/%, a b)
+# returns
+#   from/a:to/a from/b:to/b
+define product-copy-files-by-pattern
+$(join $(patsubst %,$(1),$(3)),$(patsubst %,:$(2),$(3)))
+endef
+
+# Return empty unless the board matches
+define is-board-platform2
+$(filter $(1), $(TARGET_BOARD_PLATFORM))
+endef
+
+# Return empty unless the board is in the list
+define is-board-platform-in-list2
+$(filter $(1),$(TARGET_BOARD_PLATFORM))
+endef
+
+# Return empty unless the board is QCOM
+define is-vendor-board-qcom
+$(if $(strip $(TARGET_BOARD_PLATFORM) $(QCOM_BOARD_PLATFORMS)),$(filter $(TARGET_BOARD_PLATFORM),$(QCOM_BOARD_PLATFORMS)),\
+  $(error both TARGET_BOARD_PLATFORM=$(TARGET_BOARD_PLATFORM) and QCOM_BOARD_PLATFORMS=$(QCOM_BOARD_PLATFORMS)))
+endef
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # ---------------------------------------------------------------
 # Provide "PRODUCT-<prodname>-<goal>" targets, which lets you build
@@ -175,6 +210,7 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 ifneq ($(strip $(TARGET_BUILD_APPS)),)
 # An unbundled app build needs only the core product makefiles.
 all_product_configs := $(call get-product-makefiles,\
@@ -184,9 +220,23 @@ else
 # files in the tree.
 all_product_configs := $(get-all-product-makefiles)
 endif
+=======
+# Read all product definitions.
+#
+# Products are defined in AndroidProducts.mk files:
+android_products_makefiles := $(file <$(OUT_DIR)/.module_paths/AndroidProducts.mk.list) \
+  $(SRC_TARGET_DIR)/product/AndroidProducts.mk
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
-all_named_products :=
+# An AndroidProduct.mk file sets the following variables:
+#   PRODUCT_MAKEFILES specifies product makefiles. Each item in this list
+#     is either a <product>:path/to/file.mk, or just path/to/<product.mk>
+#   COMMON_LUNCH_CHOICES specifies <product>-<variant> values to be shown
+#     in the `lunch` menu
+#   STARLARK_OPT_IN_PRODUCTS specifies products to use Starlark-based
+#     product configuration by default
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Find the product config makefile for the current product.
 # all_product_configs consists items like:
 # <product_name>:<path_to_the_product_makefile>
@@ -212,6 +262,61 @@ _cpm_word1 :=
 _cpm_word2 :=
 current_product_makefile := $(strip $(current_product_makefile))
 all_product_makefiles := $(strip $(all_product_makefiles))
+=======
+# Builds a list of first/second elements of each pair:
+#   $(call _first,a:A b:B,:) returns 'a b'
+#   $(call _second,a-A b-B,-) returns 'A B'
+_first=$(filter-out $(2)%,$(subst $(2),$(space)$(2),$(1)))
+_second=$(filter-out %$(2),$(subst $(2),$(2)$(space),$(1)))
+
+# Returns <product>:<path> pair from a PRODUCT_MAKEFILE item.
+# If an item is <product>:path/to/file.mk, return it as is,
+# otherwise assume that an item is path/to/<product>.mk and
+# return <product>:path/to/<product>.mk
+_product-spec=$(strip $(if $(findstring :,$(1)),$(1),$(basename $(notdir $(1))):$(1)))
+
+# Reads given AndroidProduct.mk file and sets the following variables:
+#  ap_product_paths -- the list of <product>:<path> pairs
+#  ap_common_lunch_choices -- the list of <product>-<build variant> items
+#  ap_products_using_starlark_config -- the list of products using starlark config
+# In addition, validates COMMON_LUNCH_CHOICES and STARLARK_OPT_IN_PRODUCTS values
+define _read-ap-file
+  $(eval PRODUCT_MAKEFILES :=) \
+  $(eval COMMON_LUNCH_CHOICES :=) \
+  $(eval STARLARK_OPT_IN_PRODUCTS := ) \
+  $(eval ap_product_paths :=) \
+  $(eval LOCAL_DIR := $(patsubst %/,%,$(dir $(f)))) \
+  $(eval include $(f)) \
+  $(foreach p, $(PRODUCT_MAKEFILES),$(eval ap_product_paths += $(call _product-spec,$(p)))) \
+  $(eval ap_common_lunch_choices  := $(COMMON_LUNCH_CHOICES)) \
+  $(eval ap_products_using_starlark_config := $(STARLARK_OPT_IN_PRODUCTS)) \
+  $(eval _products := $(call _first,$(ap_product_paths),:)) \
+  $(eval _bad := $(filter-out $(_products),$(call _first,$(ap_common_lunch_choices),-))) \
+  $(if $(_bad),$(error COMMON_LUNCH_CHOICES contains products(s) not defined in this file: $(_bad))) \
+  $(eval _bad := $(filter-out %-eng %-userdebug %-user,$(ap_common_lunch_choices))) \
+  $(if $(_bad),$(error invalid variant in COMMON_LUNCH_CHOICES: $(_bad)))
+  $(eval _bad := $(filter-out $(_products),$(ap_products_using_starlark_config))) \
+  $(if $(_bad),$(error STARLARK_OPT_IN_PRODUCTS contains product(s) not defined in this file: $(_bad)))
+endef
+
+# Build cumulative lists of all product specs/lunch choices/Starlark-based products.
+product_paths :=
+common_lunch_choices :=
+products_using_starlark_config :=
+$(foreach f,$(android_products_makefiles), \
+    $(call _read-ap-file,$(f)) \
+    $(eval product_paths += $(ap_product_paths)) \
+    $(eval common_lunch_choices += $(ap_common_lunch_choices)) \
+    $(eval products_using_starlark_config += $(ap_products_using_starlark_config)) \
+)
+
+# Dedup, extract product names, etc.
+product_paths :=$(sort $(product_paths))
+all_named_products := $(call _first,$(product_paths),:)
+all_product_makefiles := $(call _second,$(product_paths),:)
+current_product_makefile := $(call _second,$(filter $(TARGET_PRODUCT):%,$(product_paths)),:)
+COMMON_LUNCH_CHOICES := $(sort $(common_lunch_choices))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 load_all_product_makefiles :=
 ifneq (,$(filter product-graph, $(MAKECMDGOALS)))
@@ -230,13 +335,30 @@ ifeq ($(load_all_product_makefiles),true)
 $(call import-products, $(all_product_makefiles))
 else
 # Import just the current product.
-ifndef current_product_makefile
-$(error Can not locate config makefile for product "$(TARGET_PRODUCT)")
-endif
-ifneq (1,$(words $(current_product_makefile)))
-$(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
+$(if $(current_product_makefile),,$(error Can not locate config makefile for product "$(TARGET_PRODUCT)"))
+ifneq (,$(filter $(TARGET_PRODUCT),$(products_using_starlark_config)))
+  RBC_PRODUCT_CONFIG := true
+  RBC_BOARD_CONFIG := true
 endif
 $(call import-products, $(current_product_makefile))
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+else
+  $(shell mkdir -p $(OUT_DIR)/rbc)
+  $(call dump-variables-rbc, $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
+
+  $(shell build/soong/scripts/update_out \
+    $(OUT_DIR)/rbc/rbc_product_config_results.mk \
+    build/soong/scripts/rbc-run \
+    $(current_product_makefile) \
+    $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
+  ifneq ($(.SHELLSTATUS),0)
+    $(error product configuration converter failed: $(.SHELLSTATUS))
+  endif
+  include $(OUT_DIR)/rbc/rbc_product_config_results.mk
+  PRODUCTS += $(current_product_makefile)
+endif
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif  # Import all or just the current product makefile
 
 # Sanity check
@@ -305,7 +427,48 @@ PRODUCT_AAPT_CONFIG := \
 
 PRODUCT_BRAND := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BRAND))
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 PRODUCT_MODEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_MODEL))
+=======
+# Extra boot jars must be appended at the end after common boot jars.
+PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
+
+PRODUCT_BOOT_JARS := $(call qualify-platform-jars,$(PRODUCT_BOOT_JARS))
+
+# b/191127295: force core-icu4j onto boot image. It comes from a non-updatable APEX jar, but has
+# historically been part of the boot image; even though APEX jars are not meant to be part of the
+# boot image.
+# TODO(b/191686720): remove PRODUCT_APEX_BOOT_JARS to avoid a special handling of core-icu4j
+# in make rules.
+PRODUCT_APEX_BOOT_JARS := $(filter-out com.android.i18n:core-icu4j,$(PRODUCT_APEX_BOOT_JARS))
+# All APEX jars come after /system and /system_ext jars, so adding core-icu4j at the end of the list
+PRODUCT_BOOT_JARS += com.android.i18n:core-icu4j
+
+# The extra system server jars must be appended at the end after common system server jars.
+PRODUCT_SYSTEM_SERVER_JARS += $(PRODUCT_SYSTEM_SERVER_JARS_EXTRA)
+
+PRODUCT_SYSTEM_SERVER_JARS := $(call qualify-platform-jars,$(PRODUCT_SYSTEM_SERVER_JARS))
+
+# Sort APEX boot and system server jars. We use deterministic alphabetical order
+# when constructing BOOTCLASSPATH and SYSTEMSERVERCLASSPATH definition on device
+# after an update. Enforce it in the build system as well to avoid recompiling
+# everything after an update due a change in the order.
+PRODUCT_APEX_BOOT_JARS := $(sort $(PRODUCT_APEX_BOOT_JARS))
+PRODUCT_APEX_SYSTEM_SERVER_JARS := $(sort $(PRODUCT_APEX_SYSTEM_SERVER_JARS))
+
+PRODUCT_STANDALONE_SYSTEM_SERVER_JARS := \
+  $(call qualify-platform-jars,$(PRODUCT_STANDALONE_SYSTEM_SERVER_JARS))
+
+ifndef PRODUCT_SYSTEM_NAME
+  PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
+endif
+ifndef PRODUCT_SYSTEM_DEVICE
+  PRODUCT_SYSTEM_DEVICE := $(PRODUCT_DEVICE)
+endif
+ifndef PRODUCT_SYSTEM_BRAND
+  PRODUCT_SYSTEM_BRAND := $(PRODUCT_BRAND)
+endif
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 ifndef PRODUCT_MODEL
   PRODUCT_MODEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_NAME))
 endif
@@ -349,6 +512,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_PROPERTY_OVERRIDES))
 .KATI_READONLY := PRODUCT_PROPERTY_OVERRIDES
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 PRODUCT_SHIPPING_API_LEVEL := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SHIPPING_API_LEVEL))
 
 # A list of property assignments, like "key = value", with zero or more
@@ -415,6 +579,11 @@ PRODUCT_SYSTEM_SERVER_DEBUG_INFO := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_SERVER_DEBUG_INFO))
 PRODUCT_OTHER_JAVA_DEBUG_INFO := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_OTHER_JAVA_DEBUG_INFO))
+=======
+PRODUCT_OTA_PUBLIC_KEYS := $(sort $(PRODUCT_OTA_PUBLIC_KEYS))
+PRODUCT_EXTRA_OTA_KEYS := $(sort $(PRODUCT_EXTRA_OTA_KEYS))
+PRODUCT_EXTRA_RECOVERY_KEYS := $(sort $(PRODUCT_EXTRA_RECOVERY_KEYS))
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Resolve and setup per-module dex-preopt configs.
 PRODUCT_DEX_PREOPT_MODULE_CONFIGS := \
@@ -444,6 +613,7 @@ $(foreach c,$(PRODUCT_SANITIZER_MODULE_CONFIGS),\
     $(eval SANITIZER.$(TARGET_PRODUCT).$(m).CONFIG := $(cf))))
 _psmc_modules :=
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Whether the product wants to ship libartd. For rules and meaning, see art/Android.mk.
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD))
@@ -480,15 +650,34 @@ PRODUCT_INTEGER_OVERFLOW_EXCLUDE_PATHS := \
 PRODUCT_ADB_KEYS :=
 ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
   PRODUCT_ADB_KEYS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ADB_KEYS))
+=======
+# Reset ADB keys for non-debuggable builds
+ifeq (,$(filter eng userdebug,$(TARGET_BUILD_VARIANT)))
+  PRODUCT_ADB_KEYS :=
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 ifneq ($(filter-out 0 1,$(words $(PRODUCT_ADB_KEYS))),)
   $(error Only one file may be in PRODUCT_ADB_KEYS: $(PRODUCT_ADB_KEYS))
 endif
 .KATI_READONLY := PRODUCT_ADB_KEYS
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Whether any paths are excluded from sanitization when SANITIZE_TARGET=cfi
 PRODUCT_CFI_EXCLUDE_PATHS := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_CFI_EXCLUDE_PATHS))
+=======
+# Show a warning wall of text if non-compliance-GSI products set this option.
+ifdef PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
+  ifeq (,$(filter gsi_arm gsi_arm64 gsi_x86 gsi_x86_64 gsi_car_arm64 gsi_car_x86_64,$(PRODUCT_NAME)))
+    $(warning PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT is set but \
+      PRODUCT_NAME ($(PRODUCT_NAME)) doesn't look like a GSI for compliance \
+      testing. This is a special configuration for compliance GSI, so do make \
+      sure you understand the security implications before setting this \
+      option. If you don't know what this option does, then you probably \
+      shouldn't set this.)
+  endif
+endif
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Whether any paths should have CFI enabled for components
 PRODUCT_CFI_INCLUDE_PATHS := \
@@ -502,6 +691,140 @@ PRODUCT_SOONG_NAMESPACES := \
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE))
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Whether the whitelist of actionable compatible properties should be disabled or not
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE))
+=======
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),)
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := true
+    endif
+  endif
+endif
+
+ifeq ($(PRODUCT_SET_DEBUGFS_RESTRICTIONS),)
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),31))
+      PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+    endif
+  endif
+endif
+
+ifdef PRODUCT_SHIPPING_API_LEVEL
+  ifneq (,$(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)))
+    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)
+  endif
+endif
+
+# If build command defines OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS,
+# override PRODUCT_EXTRA_VNDK_VERSIONS with it.
+ifdef OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS
+  PRODUCT_EXTRA_VNDK_VERSIONS := $(OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS)
+endif
+
+###########################################
+# APEXes are by default not compressed
+#
+# APEX compression can be forcibly enabled (resp. disabled) by
+# setting OVERRIDE_PRODUCT_COMPRESSED_APEX to true (resp. false), e.g. by
+# setting the OVERRIDE_PRODUCT_COMPRESSED_APEX environment variable.
+ifdef OVERRIDE_PRODUCT_COMPRESSED_APEX
+  PRODUCT_COMPRESSED_APEX := $(OVERRIDE_PRODUCT_COMPRESSED_APEX)
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS \
+    ,Use PRODUCT_EXTRA_VNDK_VERSIONS instead)
+
+# If build command defines OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,
+# override PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE with it unless it is
+# defined as `false`. If the value is `false` clear
+# PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+# OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE can be used for
+# testing only.
+ifdef OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+  ifeq (false,$(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE))
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE :=
+  else
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := $(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)
+  endif
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface if PRODUCT_SHIPPING_API_LEVEL is greater than 29.
+  PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,Use PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE instead)
+
+# If build command defines PRODUCT_USE_PRODUCT_VNDK_OVERRIDE as `false`,
+# PRODUCT_PRODUCT_VNDK_VERSION will not be defined automatically.
+# PRODUCT_USE_PRODUCT_VNDK_OVERRIDE can be used for testing only.
+PRODUCT_USE_PRODUCT_VNDK := false
+ifneq ($(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE),)
+  PRODUCT_USE_PRODUCT_VNDK := $(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE)
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface for VNDK if PRODUCT_SHIPPING_API_LEVEL is greater
+  # than 29.
+  PRODUCT_USE_PRODUCT_VNDK := true
+endif
+
+ifeq ($(PRODUCT_USE_PRODUCT_VNDK),true)
+  ifndef PRODUCT_PRODUCT_VNDK_VERSION
+    PRODUCT_PRODUCT_VNDK_VERSION := current
+  endif
+endif
+
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK_OVERRIDE,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+
+ifdef PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS
+    $(error PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS is deprecated, consider using RRO for \
+      $(PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS))
+endif
+
+define product-overrides-config
+$$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
+    $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
+        $$(error Rule "$$(rule)" in PRODUCT_$(1)_OVERRIDE is not <module_name>:<new_value>)))
+endef
+
+$(foreach var, \
+    MANIFEST_PACKAGE_NAME \
+    PACKAGE_NAME \
+    CERTIFICATE, \
+  $(eval $(call product-overrides-config,$(var))))
+
+# Macro to use below. $(1) is the name of the partition
+define product-build-image-config
+ifneq ($$(filter-out true false,$$(PRODUCT_BUILD_$(1)_IMAGE)),)
+    $$(error Invalid PRODUCT_BUILD_$(1)_IMAGE: $$(PRODUCT_BUILD_$(1)_IMAGE) -- true false and empty are supported)
+endif
+endef
+
+# Copy and check the value of each PRODUCT_BUILD_*_IMAGE variable
+$(foreach image, \
+    PVMFW \
+    SYSTEM \
+    SYSTEM_OTHER \
+    VENDOR \
+    PRODUCT \
+    SYSTEM_EXT \
+    ODM \
+    VENDOR_DLKM \
+    ODM_DLKM \
+    SYSTEM_DLKM \
+    CACHE \
+    RAMDISK \
+    USERDATA \
+    BOOT \
+    RECOVERY, \
+  $(eval $(call product-build-image-config,$(image))))
+
+product-build-image-config :=
+
+$(call readonly-product-vars)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

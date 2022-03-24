@@ -124,12 +124,36 @@ BUILD_OS := $(HOST_OS)
 HOST_CROSS_OS :=
 # We can cross-build Windows binaries on Linux
 ifeq ($(HOST_OS),linux)
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 ifeq ($(BUILD_HOST_static),)
 HOST_CROSS_OS := windows
 HOST_CROSS_ARCH := x86
 HOST_CROSS_2ND_ARCH := x86_64
 2ND_HOST_CROSS_IS_64_BIT := true
 endif
+=======
+  # Windows has been the default host_cross OS
+  ifeq (,$(filter-out windows,$(HOST_CROSS_OS)))
+    # We can only create static host binaries for Linux, so if static host
+    # binaries are requested, turn off Windows cross-builds.
+    ifeq ($(BUILD_HOST_static),)
+      HOST_CROSS_OS := windows
+      HOST_CROSS_ARCH := x86
+      HOST_CROSS_2ND_ARCH := x86_64
+      2ND_HOST_CROSS_IS_64_BIT := true
+    endif
+  else ifeq ($(HOST_CROSS_OS),linux_bionic)
+    ifeq (,$(HOST_CROSS_ARCH))
+      $(error HOST_CROSS_ARCH missing.)
+    endif
+  else
+    $(error Unsupported HOST_CROSS_OS $(HOST_CROSS_OS))
+  endif
+else ifeq ($(HOST_OS),darwin)
+  HOST_CROSS_OS := darwin
+  HOST_CROSS_ARCH := arm64
+  HOST_CROSS_2ND_ARCH :=
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 ifeq ($(HOST_OS),)
@@ -174,6 +198,7 @@ HOST_PREBUILT_TAG := $(BUILD_OS)-$(HOST_PREBUILT_ARCH)
 # TARGET_COPY_OUT_* are all relative to the staging directory, ie PRODUCT_OUT.
 # Define them here so they can be used in product config files.
 TARGET_COPY_OUT_SYSTEM := system
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 TARGET_COPY_OUT_SYSTEM_OTHER := system_other
 TARGET_COPY_OUT_DATA := data
 TARGET_COPY_OUT_ASAN := $(TARGET_COPY_OUT_DATA)/asan
@@ -182,6 +207,31 @@ TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ROOT := root
 TARGET_COPY_OUT_RECOVERY := recovery
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+# The directory used for optional partitions depend on the BoardConfig, so
+# they're defined to placeholder values here and swapped after reading the
+# BoardConfig, to be either the partition dir, or a subdir within 'system'.
+_vendor_path_placeholder := ||VENDOR-PATH-PH||
+_product_path_placeholder := ||PRODUCT-PATH-PH||
+_system_ext_path_placeholder := ||SYSTEM_EXT-PATH-PH||
+_odm_path_placeholder := ||ODM-PATH-PH||
+_vendor_dlkm_path_placeholder := ||VENDOR_DLKM-PATH-PH||
+_odm_dlkm_path_placeholder := ||ODM_DLKM-PATH-PH||
+_system_dlkm_path_placeholder := ||SYSTEM_DLKM-PATH-PH||
+TARGET_COPY_OUT_VENDOR := $(_vendor_path_placeholder)
+TARGET_COPY_OUT_VENDOR_RAMDISK := vendor_ramdisk
+TARGET_COPY_OUT_VENDOR_KERNEL_RAMDISK := vendor_kernel_ramdisk
+TARGET_COPY_OUT_PRODUCT := $(_product_path_placeholder)
+# TODO(b/135957588) TARGET_COPY_OUT_PRODUCT_SERVICES will copy the target to
+# product
+TARGET_COPY_OUT_PRODUCT_SERVICES := $(_product_path_placeholder)
+TARGET_COPY_OUT_SYSTEM_EXT := $(_system_ext_path_placeholder)
+TARGET_COPY_OUT_ODM := $(_odm_path_placeholder)
+TARGET_COPY_OUT_VENDOR_DLKM := $(_vendor_dlkm_path_placeholder)
+TARGET_COPY_OUT_ODM_DLKM := $(_odm_dlkm_path_placeholder)
+TARGET_COPY_OUT_SYSTEM_DLKM := $(_system_dlkm_path_placeholder)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # Returns the non-sanitized version of the path provided in $1.
 define get_non_asan_path
@@ -225,6 +275,22 @@ endif # EMMA_INSTRUMENT
 HOST_CORE_JARS := $(addsuffix -hostdex,$(TARGET_CORE_JARS))
 #################################################################
 
+# Dumps all variables that match [A-Z][A-Z0-9_]* (with a few exceptions)
+# to the file at $(1). It is used to print only the variables that are
+# likely to be relevant to the product or board configuration.
+# Soong config variables are dumped as $(call soong_config_set) calls
+# instead of the raw variable values, because mk2rbc can't read the
+# raw ones.
+define dump-variables-rbc
+$(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(.VARIABLES)))\
+$(file >$(1),\
+$(foreach v, $(shell grep -he "^[A-Z][A-Z0-9_]*$$" $(OUT_DIR)/dump-variables-rbc-temp.txt | grep -vhE "^(SOONG_.*|LOCAL_PATH|TOPDIR|PRODUCT_COPY_OUT_.*|TRACE_BEGIN_SOONG)$$"),\
+$(v) := $(strip $($(v)))$(newline))\
+$(foreach ns,$(SOONG_CONFIG_NAMESPACES),\
+$(foreach v,$(SOONG_CONFIG_$(ns)),\
+$$(call soong_config_set,$(ns),$(v),$(SOONG_CONFIG_$(ns)_$(v)))$(newline))))
+endef
+
 # Read the product specs so we can get TARGET_DEVICE and other
 # variables that we need in order to locate the output files.
 include $(BUILD_SYSTEM)/product_config.mk
@@ -237,6 +303,7 @@ endif
 
 SDK_HOST_ARCH := x86
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 # Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)
 # or under vendor/*/$(TARGET_DEVICE).  Search in both places, but
 # make sure only one exists.
@@ -357,6 +424,15 @@ TARGET_OS := linux
 ifneq ($(filter %64,$(TARGET_ARCH)),)
 TARGET_IS_64_BIT := true
 endif
+=======
+# Some board configuration files use $(PRODUCT_OUT)
+TARGET_OUT_ROOT := $(OUT_DIR)/target
+TARGET_PRODUCT_OUT_ROOT := $(TARGET_OUT_ROOT)/product
+PRODUCT_OUT := $(TARGET_PRODUCT_OUT_ROOT)/$(TARGET_DEVICE)
+.KATI_READONLY := TARGET_OUT_ROOT TARGET_PRODUCT_OUT_ROOT PRODUCT_OUT
+
+include $(BUILD_SYSTEM)/board_config.mk
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 # the target build type defaults to release
 ifneq ($(TARGET_BUILD_TYPE),debug)
@@ -376,24 +452,35 @@ endif
 
 SOONG_OUT_DIR := $(OUT_DIR)/soong
 
-TARGET_OUT_ROOT := $(OUT_DIR)/target
-
 HOST_OUT_ROOT := $(OUT_DIR)/host
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+.KATI_READONLY := SOONG_OUT_DIR HOST_OUT_ROOT
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 # We want to avoid two host bin directories in multilib build.
 HOST_OUT := $(HOST_OUT_ROOT)/$(HOST_OS)-$(HOST_PREBUILT_ARCH)
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 SOONG_HOST_OUT := $(SOONG_OUT_DIR)/host/$(HOST_OS)-$(HOST_PREBUILT_ARCH)
 # TODO: remove
 BUILD_OUT := $(HOST_OUT)
+=======
+
+# Soong now installs to the same directory as Make.
+SOONG_HOST_OUT := $(HOST_OUT)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 HOST_CROSS_OUT := $(HOST_OUT_ROOT)/windows-$(HOST_PREBUILT_ARCH)
-
-TARGET_PRODUCT_OUT_ROOT := $(TARGET_OUT_ROOT)/product
 
 TARGET_COMMON_OUT_ROOT := $(TARGET_OUT_ROOT)/common
 HOST_COMMON_OUT_ROOT := $(HOST_OUT_ROOT)/common
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
 PRODUCT_OUT := $(TARGET_PRODUCT_OUT_ROOT)/$(TARGET_DEVICE)
+=======
+.KATI_READONLY := TARGET_COMMON_OUT_ROOT HOST_COMMON_OUT_ROOT
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 OUT_DOCS := $(TARGET_COMMON_OUT_ROOT)/docs
 OUT_NDK_DOCS := $(TARGET_COMMON_OUT_ROOT)/ndk-docs
@@ -661,6 +748,36 @@ $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_SHARED_LIBRARIES := $(TARGET_OUT_ODM
 endif
 $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_ODM_APPS := $(TARGET_OUT_ODM_APPS)
 
+TARGET_OUT_SYSTEM_DLKM := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_SYSTEM_DLKM)
+
+# Unlike other partitions, system_dlkm should only contain kernel modules.
+TARGET_OUT_SYSTEM_DLKM_EXECUTABLES :=
+TARGET_OUT_SYSTEM_DLKM_OPTIONAL_EXECUTABLES :=
+TARGET_OUT_SYSTEM_DLKM_SHARED_LIBRARIES :=
+TARGET_OUT_SYSTEM_DLKM_RENDERSCRIPT_BITCODE :=
+TARGET_OUT_SYSTEM_DLKM_JAVA_LIBRARIES :=
+TARGET_OUT_SYSTEM_DLKM_APPS :=
+TARGET_OUT_SYSTEM_DLKM_APPS_PRIVILEGED :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_EXECUTABLES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_SHARED_LIBRARIES :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_RENDERSCRIPT_BITCODE :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_APPS :=
+$(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_APPS_PRIVILEGED :=
+$(KATI_obsolete_var \
+    TARGET_OUT_SYSTEM_DLKM_EXECUTABLES \
+    TARGET_OUT_SYSTEM_DLKM_OPTIONAL_EXECUTABLES \
+    TARGET_OUT_SYSTEM_DLKM_SHARED_LIBRARIES \
+    TARGET_OUT_SYSTEM_DLKM_RENDERSCRIPT_BITCODE \
+    TARGET_OUT_SYSTEM_DLKM_JAVA_LIBRARIES \
+    TARGET_OUT_SYSTEM_DLKM_APPS \
+    TARGET_OUT_SYSTEM_DLKM_APPS_PRIVILEGED \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_EXECUTABLES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_SHARED_LIBRARIES \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_RENDERSCRIPT_BITCODE \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_APPS \
+    $(TARGET_2ND_ARCH_VAR_PREFIX)TARGET_OUT_SYSTEM_DLKM_APPS_PRIVILEGED \
+    , system_dlkm should not contain any executables, libraries, or apps)
+
 TARGET_OUT_PRODUCT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_PRODUCT)
 ifneq ($(filter address,$(SANITIZE_TARGET)),)
 target_out_product_shared_libraries_base := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/product
@@ -704,6 +821,29 @@ TARGET_ROOT_OUT_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)
 TARGET_ROOT_OUT_SBIN_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)/sbin
 TARGET_ROOT_OUT_BIN_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)/bin
 TARGET_OUT_COVERAGE := $(PRODUCT_OUT)/coverage
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+.KATI_READONLY := \
+  TARGET_OUT_UNSTRIPPED \
+  TARGET_OUT_EXECUTABLES_UNSTRIPPED \
+  TARGET_OUT_SHARED_LIBRARIES_UNSTRIPPED \
+  TARGET_OUT_VENDOR_SHARED_LIBRARIES_UNSTRIPPED \
+  TARGET_ROOT_OUT_UNSTRIPPED \
+  TARGET_ROOT_OUT_BIN_UNSTRIPPED \
+  TARGET_OUT_COVERAGE
+
+TARGET_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_RAMDISK)
+TARGET_RAMDISK_OUT_UNSTRIPPED := $(TARGET_OUT_UNSTRIPPED)
+TARGET_DEBUG_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_DEBUG_RAMDISK)
+TARGET_VENDOR_DEBUG_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR_DEBUG_RAMDISK)
+TARGET_TEST_HARNESS_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_TEST_HARNESS_RAMDISK)
+
+TARGET_SYSTEM_DLKM_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_SYSTEM_DLKM)
+.KATI_READONLY := TARGET_SYSTEM_DLKM_OUT
+
+TARGET_VENDOR_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR_RAMDISK)
+TARGET_VENDOR_KERNEL_RAMDISK_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR_KERNEL_RAMDISK)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 TARGET_ROOT_OUT := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ROOT)
 TARGET_ROOT_OUT_BIN := $(TARGET_ROOT_OUT)/bin

@@ -24,6 +24,29 @@ import struct
 
 import common
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+# Some test runner doesn't like outputs from stderr.
+logging.basicConfig(stream=sys.stdout)
+
+ALLOWED_TEST_SUBDIRS = ('merge',)
+
+# Use ANDROID_BUILD_TOP as an indicator to tell if the needed tools (e.g.
+# avbtool, mke2fs) are available while running the tests, unless
+# FORCE_RUN_RELEASETOOLS is set to '1'. Not having the required vars means we
+# can't run the tests that require external tools.
+EXTERNAL_TOOLS_UNAVAILABLE = (
+    not os.environ.get('ANDROID_BUILD_TOP') and
+    os.environ.get('FORCE_RUN_RELEASETOOLS') != '1')
+
+
+def SkipIfExternalToolsUnavailable():
+  """Decorator function that allows skipping tests per tools availability."""
+  if EXTERNAL_TOOLS_UNAVAILABLE:
+    return unittest.skip('External tools unavailable')
+  return lambda func: func
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 def get_testdata_dir():
   """Returns the testdata dir, in relative to the script dir."""
@@ -110,3 +133,112 @@ def construct_sparse_image(chunks):
         fp.write(os.urandom(data_size))
 
   return sparse_image
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+
+
+class MockScriptWriter(object):
+  """A class that mocks edify_generator.EdifyGenerator.
+
+  It simply pushes the incoming arguments onto script stack, which is to assert
+  the calls to EdifyGenerator functions.
+  """
+
+  def __init__(self, enable_comments=False):
+    self.lines = []
+    self.enable_comments = enable_comments
+
+  def Mount(self, *args):
+    self.lines.append(('Mount',) + args)
+
+  def AssertDevice(self, *args):
+    self.lines.append(('AssertDevice',) + args)
+
+  def AssertOemProperty(self, *args):
+    self.lines.append(('AssertOemProperty',) + args)
+
+  def AssertFingerprintOrThumbprint(self, *args):
+    self.lines.append(('AssertFingerprintOrThumbprint',) + args)
+
+  def AssertSomeFingerprint(self, *args):
+    self.lines.append(('AssertSomeFingerprint',) + args)
+
+  def AssertSomeThumbprint(self, *args):
+    self.lines.append(('AssertSomeThumbprint',) + args)
+
+  def Comment(self, comment):
+    if not self.enable_comments:
+      return
+    self.lines.append('# {}'.format(comment))
+
+  def AppendExtra(self, extra):
+    self.lines.append(extra)
+
+  def __str__(self):
+    return '\n'.join(self.lines)
+
+
+class ReleaseToolsTestCase(unittest.TestCase):
+  """A common base class for all the releasetools unittests."""
+
+  def tearDown(self):
+    common.Cleanup()
+
+class PropertyFilesTestCase(ReleaseToolsTestCase):
+
+  @staticmethod
+  def construct_zip_package(entries):
+    zip_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(zip_file, 'w', allowZip64=True) as zip_fp:
+      for entry in entries:
+        zip_fp.writestr(
+            entry,
+            entry.replace('.', '-').upper(),
+            zipfile.ZIP_STORED)
+    return zip_file
+
+  @staticmethod
+  def _parse_property_files_string(data):
+    result = {}
+    for token in data.split(','):
+      name, info = token.split(':', 1)
+      result[name] = info
+    return result
+
+  def setUp(self):
+    common.OPTIONS.no_signing = False
+
+  def _verify_entries(self, input_file, tokens, entries):
+    for entry in entries:
+      offset, size = map(int, tokens[entry].split(':'))
+      with open(input_file, 'rb') as input_fp:
+        input_fp.seek(offset)
+        if entry == 'metadata':
+          expected = b'META-INF/COM/ANDROID/METADATA'
+        elif entry == 'metadata.pb':
+          expected = b'META-INF/COM/ANDROID/METADATA-PB'
+        else:
+          expected = entry.replace('.', '-').upper().encode()
+        self.assertEqual(expected, input_fp.read(size))
+
+
+if __name__ == '__main__':
+  # We only want to run tests from the top level directory. Unfortunately the
+  # pattern option of unittest.discover, internally using fnmatch, doesn't
+  # provide a good API to filter the test files based on directory. So we do an
+  # os walk and load them manually.
+  test_modules = []
+  base_path = os.path.dirname(os.path.realpath(__file__))
+  test_dirs = [base_path] + [
+      os.path.join(base_path, subdir) for subdir in ALLOWED_TEST_SUBDIRS
+  ]
+  for dirpath, _, files in os.walk(base_path):
+    for fn in files:
+      if dirpath in test_dirs and re.match('test_.*\\.py$', fn):
+        test_modules.append(fn[:-3])
+
+  test_suite = unittest.TestLoader().loadTestsFromNames(test_modules)
+
+  # atest needs a verbosity level of >= 2 to correctly parse the result.
+  unittest.TextTestRunner(verbosity=2).run(test_suite)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])

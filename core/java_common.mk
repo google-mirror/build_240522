@@ -21,6 +21,7 @@ endif
 # Modules can override this logic by specifying
 # LOCAL_JAVA_LANGUAGE_VERSION explicitly.
 ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_18_SUPPORT)))
     LOCAL_JAVA_LANGUAGE_VERSION := 1.7
   else ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT)))
@@ -31,6 +32,22 @@ ifeq (,$(LOCAL_JAVA_LANGUAGE_VERSION))
   else
     # DEFAULT_JAVA_LANGUAGE_VERSION is 1.8, unless TARGET_OPENJDK9 in which case it is 1.9
     LOCAL_JAVA_LANGUAGE_VERSION := $(DEFAULT_JAVA_LANGUAGE_VERSION)
+=======
+  ifdef LOCAL_IS_HOST_MODULE
+    # Host modules always default to 1.9
+    LOCAL_JAVA_LANGUAGE_VERSION := 1.9
+  else
+    ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_18_SUPPORT)))
+      LOCAL_JAVA_LANGUAGE_VERSION := 1.7
+    else ifneq (,$(filter $(LOCAL_SDK_VERSION), $(TARGET_SDK_VERSIONS_WITHOUT_JAVA_19_SUPPORT)))
+      LOCAL_JAVA_LANGUAGE_VERSION := 1.8
+    else ifneq (,$(LOCAL_SDK_VERSION)$(TARGET_BUILD_USE_PREBUILT_SDKS))
+      # TODO(ccross): allow 1.9 for current and unbundled once we have SDK system modules
+      LOCAL_JAVA_LANGUAGE_VERSION := 1.8
+    else
+      LOCAL_JAVA_LANGUAGE_VERSION := 1.9
+    endif
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
   endif
 endif
 LOCAL_JAVACFLAGS += -source $(LOCAL_JAVA_LANGUAGE_VERSION) -target $(LOCAL_JAVA_LANGUAGE_VERSION)
@@ -332,6 +349,27 @@ else # LOCAL_IS_HOST_MODULE
   endif # USE_CORE_LIB_BOOTCLASSPATH
 endif # !LOCAL_IS_HOST_MODULE
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+# (b/204397180) Record ALL_DEPS by default.
+ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS := $(ALL_DEPS.$(LOCAL_MODULE).ALL_DEPS) $(full_java_bootclasspath_libs)
+
+# Export the SDK libs. The sdk library names listed in LOCAL_SDK_LIBRARIES are first exported.
+# Then sdk library names exported from dependencies are all re-exported.
+$(my_exported_sdk_libs_file): PRIVATE_EXPORTED_SDK_LIBS_FILES := $(exported_sdk_libs_files)
+$(my_exported_sdk_libs_file): PRIVATE_SDK_LIBS := $(sort $(LOCAL_SDK_LIBRARIES))
+$(my_exported_sdk_libs_file): $(exported_sdk_libs_files)
+	@echo "Export SDK libs $@"
+	$(hide) mkdir -p $(dir $@) && rm -f $@ $@.temp
+	$(if $(PRIVATE_SDK_LIBS),\
+		echo $(PRIVATE_SDK_LIBS) | tr ' ' '\n' > $@.temp,\
+		touch $@.temp)
+	$(if $(PRIVATE_EXPORTED_SDK_LIBS_FILES),\
+		cat $(PRIVATE_EXPORTED_SDK_LIBS_FILES) >> $@.temp)
+	$(hide) cat $@.temp | sort -u > $@
+	$(hide) rm -f $@.temp
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 ifdef empty_bootclasspath
   ifdef full_java_bootclasspath_libs
     $(call pretty-error,internal error: empty_bootclasspath and full_java_bootclasspath_libs should not both be set)

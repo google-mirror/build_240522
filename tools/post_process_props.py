@@ -47,12 +47,16 @@ def mangle_default_prop(prop):
         val = "adb"
       else:
         val = val + ",adb"
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
       prop.put("persist.sys.usb.config", val)
   # UsbDeviceManager expects a value here.  If it doesn't get it, it will
   # default to "adb". That might not the right policy there, but it's better
   # to be explicit.
   if not prop.get("persist.sys.usb.config"):
     prop.put("persist.sys.usb.config", "none");
+=======
+      prop_list.put("persist.sys.usb.config", val)
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 
 def validate(prop):
   """Validate the properties.

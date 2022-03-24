@@ -41,8 +41,61 @@ test_tools := $(HOST_OUT_JAVA_LIBRARIES)/hosttestlib.jar \
   $(HOST_OUT_EXECUTABLES)/$(test_suite_tradefed) \
   $(test_suite_readme)
 
+$(foreach f,$(test_suite_readme),$(if $(strip $(ALL_TARGETS.$(f).META_LIC)),,$(eval ALL_TARGETS.$(f).META_LIC := $(module_license_metadata))))
+
 test_tools += $(test_suite_tools)
 
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
+=======
+# The JDK to package into the test suite zip file.  Always package the linux JDK.
+test_suite_jdk_dir := $(ANDROID_JAVA_HOME)/../linux-x86
+test_suite_jdk := $(call intermediates-dir-for,PACKAGING,$(test_suite_name)_jdk,HOST)/jdk.zip
+$(test_suite_jdk): PRIVATE_JDK_DIR := $(test_suite_jdk_dir)
+$(test_suite_jdk): PRIVATE_SUBDIR := $(test_suite_subdir)
+$(test_suite_jdk): $(shell find $(test_suite_jdk_dir) -type f | sort)
+$(test_suite_jdk): $(SOONG_ZIP)
+	$(SOONG_ZIP) -o $@ -P $(PRIVATE_SUBDIR)/jdk -C $(PRIVATE_JDK_DIR) -D $(PRIVATE_JDK_DIR)
+
+$(call declare-license-metadata,$(test_suite_jdk),SPDX-license-identifier-GPL-2.0-with-classpath-exception,restricted,\
+  $(test_suite_jdk_dir)/legal/java.base/LICENSE,JDK,prebuilts/jdk/$(notdir $(patsubst %/,%,$(dir $(test_suite_jdk_dir)))))
+
+
+# Include host shared libraries
+host_shared_libs := $(call copy-many-files, $(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES))
+
+$(if $(strip $(host_shared_libs)),\
+  $(foreach p,$(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES),\
+    $(eval _src := $(call word-colon,1,$(p)))\
+    $(eval _dst := $(call word-colon,2,$(p)))\
+    $(if $(strip $(ALL_TARGETS.$(_src).META_LIC)),\
+      $(eval ALL_TARGETS.$(_dst).META_LIC := $(ALL_TARGETS.$(_src).META_LIC)),\
+      $(warning $(_src) has no license metadata for $(_dst))\
+    )\
+  )\
+)
+
+compatibility_zip_deps := \
+  $(test_artifacts) \
+  $(test_tools) \
+  $(test_suite_prebuilt_tools) \
+  $(test_suite_dynamic_config) \
+  $(test_suite_jdk) \
+  $(MERGE_ZIPS) \
+  $(SOONG_ZIP) \
+  $(host_shared_libs) \
+
+compatibility_zip_resources := $(out_dir)/tools $(out_dir)/testcases $(out_dir)/lib $(out_dir)/lib64
+
+# Test Suite NOTICE files
+test_suite_notice_txt := $(out_dir)/NOTICE.txt
+test_suite_notice_html := $(out_dir)/NOTICE.html
+
+compatibility_zip_deps += $(test_suite_notice_txt)
+compatibility_zip_resources += $(test_suite_notice_txt)
+
+compatibility_tests_list_zip := $(out_dir)-tests_list.zip
+
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 compatibility_zip := $(out_dir).zip
 $(compatibility_zip): PRIVATE_NAME := android-$(test_suite_name)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
@@ -57,6 +110,15 @@ $(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tool
 	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) $(ACP) -fp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
 	$(hide) find $(dir $@)/$(PRIVATE_NAME) | sort >$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
+
+$(call declare-1p-container,$(compatibility_zip),)
+$(call declare-container-license-deps,$(compatibility_zip),$(compatibility_zip_deps) $(test_suite_jdk),$(out_dir)/:/)
+
+$(eval $(call html-notice-rule,$(test_suite_notice_html),"Test suites","Notices for files contained in the test suites filesystem image:",$(compatibility_zip),$(compatibility_zip)))
+$(eval $(call text-notice-rule,$(test_suite_notice_txt),"Test suites","Notices for files contained in the test suites filesystem image:",$(compatibility_zip),$(compatibility_zip)))
+
+$(call declare-0p-target,$(test_suite_notice_html))
+$(call declare-0p-target,$(test_suite_notice_txt))
 
 # Reset all input variables
 test_suite_name :=

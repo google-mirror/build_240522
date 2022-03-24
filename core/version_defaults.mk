@@ -19,6 +19,7 @@
 #
 # Guarantees that the following are defined:
 #     PLATFORM_VERSION
+#     PLATFORM_DISPLAY_VERSION
 #     PLATFORM_SDK_VERSION
 #     PLATFORM_VERSION_CODENAME
 #     DEFAULT_APP_TARGET_SDK
@@ -89,6 +90,11 @@ ifndef PLATFORM_VERSION
   endif
 endif
 
+# This is the user-visible version.  In a final release build it should
+# be empty to use PLATFORM_VERSION as the user-visible version.  For
+# a preview release it can be set to a user-friendly value like `12 Preview 1`
+PLATFORM_DISPLAY_VERSION :=
+
 ifndef PLATFORM_SDK_VERSION
   # This is the canonical definition of the SDK version, which defines
   # the set of APIs and functionality available in the platform.  It
@@ -106,7 +112,11 @@ ifndef PLATFORM_SDK_VERSION
   # When you increment the PLATFORM_SDK_VERSION please ensure you also
   # clear out the following text file of all older PLATFORM_VERSION's:
   # cts/tests/tests/os/assets/platform_versions.txt
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
   PLATFORM_SDK_VERSION := 28
+=======
+  PLATFORM_SDK_VERSION := 32
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_VERSION_CODENAME
@@ -225,13 +235,24 @@ else
 endif
 PLATFORM_SYSTEMSDK_VERSIONS := $(strip $(sort $(PLATFORM_SYSTEMSDK_VERSIONS)))
 
+# This is are all known codenames starting from Q.
+PLATFORM_VERSION_KNOWN_CODENAMES := Q R S Sv2 Tiramisu
+# Convert from space separated list to comma separated
+PLATFORM_VERSION_KNOWN_CODENAMES := \
+  $(call normalize-comma-list,$(PLATFORM_VERSION_KNOWN_CODENAMES))
+.KATI_READONLY := PLATFORM_VERSION_KNOWN_CODENAMES
+
 ifndef PLATFORM_SECURITY_PATCH
     #  Used to indicate the security patch that has been applied to the device.
     #  It must signify that the build includes all security patches issued up through the designated Android Public Security Bulletin.
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+    PLATFORM_SECURITY_PATCH := 2022-03-05
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP

@@ -48,6 +48,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/core.mk \
     $(LOCAL_DIR)/generic.mk \
     $(LOCAL_DIR)/generic_x86.mk \
+<<<<<<< HEAD   (11d6ae Merge "Merge empty history for sparse-8121823-L3120000095288)
     $(LOCAL_DIR)/generic_mips.mk \
     $(LOCAL_DIR)/aosp_arm.mk \
     $(LOCAL_DIR)/aosp_arm_a.mk \
@@ -67,6 +68,16 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk \
     $(LOCAL_DIR)/aosp_x86_64_a.mk \
     $(LOCAL_DIR)/aosp_x86_64_ab.mk \
+=======
+    $(LOCAL_DIR)/mainline_system_arm64.mk \
+    $(LOCAL_DIR)/mainline_system_x86.mk \
+    $(LOCAL_DIR)/mainline_system_x86_64.mk \
+    $(LOCAL_DIR)/mainline_system_x86_arm.mk \
+    $(LOCAL_DIR)/ndk.mk \
+    $(LOCAL_DIR)/sdk_arm64.mk \
+    $(LOCAL_DIR)/sdk.mk \
+    $(LOCAL_DIR)/sdk_phone_arm64.mk \
+>>>>>>> BRANCH (244bfb Merge "Version bump to TKB1.220323.002.A1 [core/build_id.mk])
     $(LOCAL_DIR)/sdk_phone_armv7.mk \
     $(LOCAL_DIR)/sdk_phone_x86.mk \
     $(LOCAL_DIR)/sdk_phone_mips.mk \
