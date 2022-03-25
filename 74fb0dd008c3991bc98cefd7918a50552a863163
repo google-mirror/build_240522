@@ -16,6 +16,381 @@
       "message": "Please review when you have time, thanks!",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa282c8_17aab11a",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "If you\u0027re going to use UserError, catch it and exit with the message so that you don\u0027t get a full stack trace.\n\nAlternatively, just replace it with `sys.exit(\u0027message...\u0027)`",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497efbd1_ed581ad9",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Add `check\u003dTrue` to ensure the command doesn\u0027t fail.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "639d1e44_a58fe801",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "This method can be simplified to `return set(get_build_var_values(\"PRODUCT_PACKAGES\").split())`. And then since it\u0027s only used in 1 place it can be inlined.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144395b9_2e3cebcd",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "All of the stuff that uses get_build_var_value relies on this script being run from a correctly lunch\u0027d terminal. Maybe instead of --device we could have --product, and then use the `get_build_var` from the other file to make sure we\u0027re getting the var in relation to the correct product. And we won\u0027t need --device anymore because we could get it from `get_build_var TARGET_DEVICE`",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f2d606_46b47919",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Make args.out_dir into an absolute path before doing the chdir, or else it could be incorrect if it was a relative dir.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85905ca_4cdaea20",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "just have get_module_product_packages_plus_deps return a set, no need to pass an empty set into it. (to merge the recursive result with the current one, you can use the | symbol to union two sets)",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d15fa131_47556b02",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Same comment about UserError as the other file",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7671d6_cdb9e21f",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "It seems like you just pass \u0027\u0027 for build_variant everywhere. In that case, maybe we could just make this argument default to userdebug or something.",
+      "range": {
+        "startLine": 31,
+        "startChar": 37,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7940c4_47ee6fab",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "I like how you had `text\u003dTrue` instead of `.decode()` in the other file, let\u0027s do that here too.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1cfd02_3f0873c6",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "After getting rid of get_count_lunch_targets(), this is only used in one place and can just be inlined.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5cc68ac_9f737799",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "This function can just be len(get_all_lunch_targets()). I don\u0027t think it warrants its own function.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cbf609_f0bb6cea",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "This function probably isn\u0027t necessary, I\u0027d just inline the get_build_var call",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a831af7_fa53e178",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "use `os.path.join()` for these instead of raw string concatenations",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a3e599_974e4b80",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "set TARGET_BUILD_VARIANT to either user, userdebug, or eng",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7013f715_f9a3a00d",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Add `check\u003dTrue` so the script stops if a build fails.",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5505119f_b0bf2078",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "nit: typo, it should be overwritings",
+      "range": {
+        "startLine": 81,
+        "startChar": 61,
+        "endLine": 81,
+        "endChar": 74
+      },
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd43fdb_8164ad18",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Why are we ignoring errors here?",
+      "range": {
+        "startLine": 86,
+        "startChar": 38,
+        "endLine": 86,
+        "endChar": 53
+      },
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bb0680_bf4c0faa",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "You can make this for loop \"for row in reader\" to avoid having to read the whole file into memory",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362740f2_e2fd47c3",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "`setdefault` already does this if statement, so it\u0027s not necessary here",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbee90c7_62abd722",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "This will eventually produce a map of all partitions to all makefiles, however it doesn\u0027t filter the modules by what actually appears on the device. It seems you have implemented these two parts in separate scripts, but I thought the goal was to have one script that did both aspects?",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023b60a6_af255443",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T19:32:41Z",
+      "side": 1,
+      "message": "Just inline both instance of the row variable into the writerow call",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
