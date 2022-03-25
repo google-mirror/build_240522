@@ -35,13 +35,24 @@ kernel_test_copy_pairs := \
 
 copy_kernel_tests := $(call copy-many-files,$(kernel_test_copy_pairs))
 
+test_suite_extra_deps := $(copy_kernel_tests)
+
+$(if $(strip $(copy_kernel_tests)),\
+  $(foreach p,$(kernel_test_copy_pairs),\
+    $(eval _src := $(call word-colon,1,$(p)))\
+    $(eval _dst := $(call word-colon,2,$(p)))\
+    $(if $(strip $(ALL_TARGETS.$(_src).META_LIC)),\
+      $(eval ALL_TARGETS.$(_dst).META_LIC := $(ALL_TARGETS.$(_src).META_LIC)),\
+      $(warning $(_src) has no license metadata for $(_dst))\
+    )\
+  )\
+)
+
 # PHONY target to be used to build and test `vts_kernel_tests` without building full vts
 .PHONY: vts_kernel_tests
 vts_kernel_tests: $(copy_kernel_tests)
 
 include $(BUILD_SYSTEM)/tasks/tools/compatibility.mk
-
-$(compatibility_zip): $(copy_kernel_tests)
 
 .PHONY: vts
 vts: $(compatibility_zip) $(compatibility_tests_list_zip)
