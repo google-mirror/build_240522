@@ -622,24 +622,29 @@ $(2): PRIVATE_INSTALL_MAP := $(_map)
 $(2): PRIVATE_MODULE_TYPE := $(ALL_MODULES.$(1).MODULE_TYPE)
 $(2): PRIVATE_MODULE_CLASS := $(ALL_MODULES.$(1).MODULE_CLASS)
 $(2): PRIVATE_INSTALL_MAP := $(_map)
+$(2): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,notice)/$(2)/arguments
 $(2): $(BUILD_LICENSE_METADATA)
 $(2) : $(foreach d,$(_deps),$(call word-colon,1,$(d))) $(foreach n,$(_notices),$(call word-colon,1,$(n)) )
 	rm -f $$@
 	mkdir -p $$(dir $$@)
+	rm -f $$(PRIVATE_ARGUMENT_FILE)
+	mkdir -p $$(dir $$(PRIVATE_ARGUMENT_FILE))
+	touch $$(PRIVATE_ARGUMENT_FILE)
+	$$(call append-arguments-to-file,-mt ,$$(PRIVATE_MODULE_TYPE),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-mc ,$$(PRIVATE_MODULE_CLASS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-k ,$$(PRIVATE_KINDS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-c ,$$(PRIVATE_CONDITIONS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-n ,$$(PRIVATE_NOTICES),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-d ,$$(PRIVATE_NOTICE_DEPS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-s ,$$(PRIVATE_SOURCES),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-m ,$$(PRIVATE_INSTALL_MAP),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-t ,$$(PRIVATE_TARGETS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-i ,$$(PRIVATE_INSTALLED),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-r ,$$(PRIVATE_PATH),$$(PRIVATE_ARGUMENT_FILE))
 	OUT_DIR=$(OUT_DIR) $(BUILD_LICENSE_METADATA) \
-	  $$(addprefix -mt ,$$(PRIVATE_MODULE_TYPE)) \
-	  $$(addprefix -mc ,$$(PRIVATE_MODULE_CLASS)) \
-	  $$(addprefix -k ,$$(PRIVATE_KINDS)) \
-	  $$(addprefix -c ,$$(PRIVATE_CONDITIONS)) \
-	  $$(addprefix -n ,$$(PRIVATE_NOTICES)) \
-	  $$(addprefix -d ,$$(PRIVATE_NOTICE_DEPS)) \
-	  $$(addprefix -s ,$$(PRIVATE_SOURCES)) \
-	  $$(addprefix -m ,$$(PRIVATE_INSTALL_MAP)) \
-	  $$(addprefix -t ,$$(PRIVATE_TARGETS)) \
-	  $$(addprefix -i ,$$(PRIVATE_INSTALLED)) \
 	  $$(if $$(PRIVATE_IS_CONTAINER),-is_container) \
 	  -p '$$(PRIVATE_PACKAGE_NAME)' \
-	  $$(addprefix -r ,$$(PRIVATE_PATH)) \
+	  @$$(PRIVATE_ARGUMENT_FILE) \
 	  -o $$@
 endef
 
@@ -693,22 +698,27 @@ $(_meta): PRIVATE_PATH := $(_path)
 $(_meta): PRIVATE_IS_CONTAINER := $(ALL_NON_MODULES.$(_tgt).IS_CONTAINER)
 $(_meta): PRIVATE_PACKAGE_NAME := $(strip $(ALL_NON_MODULES.$(_tgt).LICENSE_PACKAGE_NAME))
 $(_meta): PRIVATE_INSTALL_MAP := $(strip $(_install_map))
+$(_meta): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,notice)/$(_meta)/arguments
 $(_meta): $(BUILD_LICENSE_METADATA)
 $(_meta) : $(foreach d,$(_deps),$(call word-colon,1,$(d))) $(foreach n,$(_notices),$(call word-colon,1,$(n)) )
 	rm -f $$@
 	mkdir -p $$(dir $$@)
+	rm -f $$(PRIVATE_ARGUMENT_FILE)
+	mkdir -p $$(dir $$(PRIVATE_ARGUMENT_FILE))
+	touch $$(PRIVATE_ARGUMENT_FILE)
+	$$(call append-arguments-to-file,-k ,$$(PRIVATE_KINDS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-c ,$$(PRIVATE_CONDITIONS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-n ,$$(PRIVATE_NOTICES),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-d ,$$(PRIVATE_NOTICE_DEPS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-s ,$$(PRIVATE_SOURCES),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-m ,$$(PRIVATE_INSTALL_MAP),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-t ,$$(PRIVATE_TARGETS),$$(PRIVATE_ARGUMENT_FILE))
+	$$(call append-arguments-to-file,-r ,$$(PRIVATE_PATH),$$(PRIVATE_ARGUMENT_FILE))
 	OUT_DIR=$(OUT_DIR) $(BUILD_LICENSE_METADATA) \
           -mt raw -mc unknown \
-	  $$(addprefix -k ,$$(PRIVATE_KINDS)) \
-	  $$(addprefix -c ,$$(PRIVATE_CONDITIONS)) \
-	  $$(addprefix -n ,$$(PRIVATE_NOTICES)) \
-	  $$(addprefix -d ,$$(PRIVATE_NOTICE_DEPS)) \
-	  $$(addprefix -s ,$$(PRIVATE_SOURCES)) \
-	  $$(addprefix -m ,$$(PRIVATE_INSTALL_MAP)) \
-	  $$(addprefix -t ,$$(PRIVATE_TARGETS)) \
 	  $$(if $$(PRIVATE_IS_CONTAINER),-is_container) \
-	  -p '$$(PRIVATE_PACKAGE_NAME)' \
 	  $$(addprefix -r ,$$(PRIVATE_PATH)) \
+	  @$$(PRIVATE_ARGUMENT_FILE) \
 	  -o $$@
 
 endef
@@ -2331,6 +2341,80 @@ endef
 
 ###########################################################
 xlint_unchecked := -Xlint:unchecked
+
+# emit-arguments, <flag>, <word list>, <output file>
+define emit-arguments
+   $(if $(2),echo -n '$(strip $(addprefix $(1),$(2))) ' >> $(3))
+endef
+
+# append-arguments-to-file, <flag> <word list>, <output file>
+define append-arguments-to-file
+        @$(call emit-arguments,$(1),$(wordlist 1,250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 251,500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 501,750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 751,1000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 1001,1250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 1251,1500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 1501,1750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 1751,2000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 2001,2250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 2251,2500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 2501,2750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 2751,3000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 3001,3250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 3251,3500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 3501,3750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 3751,4000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 4001,4250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 4251,4500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 4501,4750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 4751,5000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 5001,5250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 5251,5500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 5501,5750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 5751,6000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 6001,6250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 6251,6500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 6501,6750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 6751,7000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 7001,7250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 7251,7500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 7501,7750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 7751,8000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 8001,8250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 8251,8500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 8501,8750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 8751,9000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 9001,9250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 9251,9500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 9501,9750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 9751,10000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 10001,10250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 10251,10500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 10501,10750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 10751,11000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 11001,11250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 11251,11500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 11501,11750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 11751,12000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 12001,12250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 12251,12500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 12501,12750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 12751,13000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 13001,13250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 13251,13500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 13501,13750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 13751,14000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 14001,14250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 14251,14500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 14501,14750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 14751,15000,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 15001,15250,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 15251,15500,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 15501,15750,$(2)),$(3))
+        @$(call emit-arguments,$(1),$(wordlist 15751,16000,$(2)),$(3))
+        @$(if $(wordlist 16001,16002,$(2)),$(error Too many words ($(words $(2)))))
+endef
 
 # emit-line, <word list>, <output file>
 define emit-line
