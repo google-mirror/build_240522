@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ab78cd5e_3fd86d13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-25T17:31:25Z",
+      "side": 1,
+      "message": "As seen in the bug:\n\n```\nbuild/make/core/product_config.mk:249: warning: BOARD_PLAT_PUBLIC_SEPOLICY_DIR has been deprecated. Use SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS instead.\nbuild/make/core/product_config.mk:249: warning: BOARD_PLAT_PRIVATE_SEPOLICY_DIR has been deprecated. Use SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS instead.\nbuild/make/core/product_config.mk:249: warning: USER has been deprecated. Use BUILD_USERNAME instead. See https://android.googlesource.com/platform/build/+/master/Changes.md#USER.\n```",
+      "parentUuid": "43e5b4bb_7ccabaeb",
+      "revId": "01d19b0bf4bdb1a2effa86dca69463539843b769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3124a59c_fe3dac1d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
