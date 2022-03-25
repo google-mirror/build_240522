@@ -79,12 +79,12 @@ endef
 
 #
 # Convert file file to the PRODUCT_COPY_FILES/PRODUCT_SDK_ADDON_COPY_FILES
-# format: for each file F return $(F):$(PREFIX)/$(notdir $(F))
+# format: for each file F return $(F):$(PREFIX)/$(notdir $(F))[:$(OWNER)]
 # $(1): files list
 # $(2): prefix
-
+# $(3): owner. Optional.
 define copy-files
-$(foreach f,$(1),$(f):$(2)/$(notdir $(f)))
+$(foreach f,$(1),$(f):$(2)/$(notdir $(f))$(if $(3),:$(3)))
 endef
 
 #
