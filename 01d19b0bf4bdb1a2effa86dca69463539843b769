@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e5b4bb_7ccabaeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-25T17:17:51Z",
+      "side": 1,
+      "message": "What warning is shown that needs to be suppressed?",
+      "revId": "01d19b0bf4bdb1a2effa86dca69463539843b769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3124a59c_fe3dac1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-25T17:17:51Z",
+      "side": 1,
+      "message": "I don\u0027t understand ",
+      "revId": "01d19b0bf4bdb1a2effa86dca69463539843b769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
