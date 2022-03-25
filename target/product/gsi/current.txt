@@ -29,10 +29,10 @@ VNDK-SP: android.hardware.graphics.mapper@2.1.so
 VNDK-SP: android.hardware.graphics.mapper@3.0.so
 VNDK-SP: android.hardware.graphics.mapper@4.0.so
 VNDK-SP: android.hardware.renderscript@1.0.so
-VNDK-SP: android.hidl.safe_union@1.0.so
 VNDK-SP: android.hidl.memory.token@1.0.so
 VNDK-SP: android.hidl.memory@1.0-impl.so
 VNDK-SP: android.hidl.memory@1.0.so
+VNDK-SP: android.hidl.safe_union@1.0.so
 VNDK-SP: libRSCpuRef.so
 VNDK-SP: libRSDriver.so
 VNDK-SP: libRS_internal.so
@@ -111,6 +111,8 @@ VNDK-core: android.media.audio.common.types-V1-ndk.so
 VNDK-core: android.system.keystore2-V1-ndk.so
 VNDK-core: android.system.suspend-V1-ndk.so
 VNDK-core: android.system.suspend@1.0.so
+VNDK-core: connectivity_native_aidl_interface-V2-cpp.so
+VNDK-core: connectivity_native_aidl_interface-V2-ndk.so
 VNDK-core: libaudioroute.so
 VNDK-core: libaudioutils.so
 VNDK-core: libbinder.so
@@ -167,6 +169,7 @@ VNDK-core: libwifi-system-iface.so
 VNDK-core: libxml2.so
 VNDK-core: libyuv.so
 VNDK-core: libziparchive.so
+VNDK-private: connectivity_native_aidl_interface-V2-cpp.so
 VNDK-private: libbacktrace.so
 VNDK-private: libblas.so
 VNDK-private: libcompiler_rt.so
