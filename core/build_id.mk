@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (f20e6b Version bump to SP2A.220305.011 [core/build_id.mk] am: d43ab)
 BUILD_ID=SP2A.220305.011
+=======
+BUILD_ID=SPM2.220224.003
+>>>>>>> BRANCH (f67c9f Version bump to SPM2.220224.003 [core/build_id.mk])
