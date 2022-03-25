@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc0b05c_772942d5",
+        "filename": "tools/event_log_tags.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1888650
+      },
+      "writtenOn": "2022-03-25T19:06:18Z",
+      "side": 1,
+      "message": "let\u0027s remove this one",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 58
+      },
+      "revId": "eeb973098294fef4518f2af58b9de907d03e0da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
