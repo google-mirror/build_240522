@@ -2,6 +2,7 @@
 
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@rules_android//rules:rules.bzl", "android_library")
+load("//build/bazel/rules/java:library.bzl", "java_library")
 
 def _event_log_tags_impl(ctx):
     out_files = []
@@ -41,7 +42,10 @@ def event_log_tags(name, srcs):
         srcs = srcs,
     )
 
-    android_library(
+    java_library(
         name = name,
         srcs = [name + "_gen_logtags"],
+        deps = [
+            "//prebuilts/sdk:public_current_android_sdk_java_import"
+        ]
     )
