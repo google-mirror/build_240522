@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac10d5e_942c5ced",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-03-28T17:40:31Z",
+      "side": 1,
+      "message": "I think you could reuse dump-words-to-file here by wrapping the whole block in $(call dump-words-to-file), and extending the maximum number of words there if necessary.",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 81
+      },
+      "revId": "5ce4460d3e7568505c87e3460853331a7578e06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
