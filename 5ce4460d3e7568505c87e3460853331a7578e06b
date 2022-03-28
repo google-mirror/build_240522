@@ -22,6 +22,30 @@
       },
       "revId": "5ce4460d3e7568505c87e3460853331a7578e06b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "024bdc13_b7faa778",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-28T17:43:43Z",
+      "side": 1,
+      "message": "I tried that. It was a hassle. You run the risk of getting flags without arguments that lead to build failures.",
+      "parentUuid": "fac10d5e_942c5ced",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 81
+      },
+      "revId": "5ce4460d3e7568505c87e3460853331a7578e06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
