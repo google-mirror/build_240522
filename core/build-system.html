@@ -14,7 +14,7 @@
      - use plenty of whitespace
      - try to pretty-format (wrt nesting and indenting) any hairy html
    - check your inline javascript for errors using the javascript console
-   
+
   Your readers will be very appreciative.
 -->
 
@@ -305,7 +305,7 @@ is here because the default target has to have a name.</li>
 droid</code> does, plus everything whose <code>LOCAL_MODULE_TAGS</code> do not
 include the "droid" tag.  The build server runs this to make sure
 that everything that is in the tree and has an Android.mk builds.</li>
-<li><b>clean-$(LOCAL_MODULE)</b> and <b>clean-$(LOCAL_PACKAGE_NAME)</b> - 
+<li><b>clean-$(LOCAL_MODULE)</b> and <b>clean-$(LOCAL_PACKAGE_NAME)</b> -
 Let you selectively clean one target.  For example, you can type
 <code>make clean-libutils</code> and it will delete libutils.so and all of the
 intermediate files, or you can type <code>make clean-Home</code> and it will
@@ -316,9 +316,9 @@ out/&lt;configuration&gt;/</code></li>
 <li><b>clobber</b> - <code>make clobber</code> deletes all of the output
 and intermediate files for all configurations.  This is the same as
 <code>rm -rf out/</code>.</li>
-<li><b>dataclean</b> - <code>make dataclean</code> deletes contents of the data 
+<li><b>dataclean</b> - <code>make dataclean</code> deletes contents of the data
 directory inside the current combo directory.  This is especially useful on the
-simulator and emulator, where the persistent data remains present between 
+simulator and emulator, where the persistent data remains present between
 builds.</li>
 <li><b>LOCAL_MODULE</b> - Anything you specify as a <code>LOCAL_MODULE</code>
 in an Android.mk is made into a pseudotarget.  For example, <code>make
@@ -353,7 +353,7 @@ details.</p>
 <p>The interesting thing here is the value of LOCAL_MODULE, which becomes
 the name of the jar file.  (Actually right now, we're not making jar files yet,
 just directories of .class files,  but the directory is named according to
-what you put in LOCAL_MODULE).  This name will be what goes in the 
+what you put in LOCAL_MODULE).  This name will be what goes in the
 LOCAL_JAVA_LIBRARIES variable in modules that depend on your java library.</p>
 
 <h4>C/C++ Executables</h4>
@@ -444,8 +444,12 @@ LOCAL_GENERATED_SOURCES += $(GEN)
 <p>Unbundled build has several meanings by the context.
 Let me explain the meaning by the flags related to "unbundled build"</p>
 <h4>TARGET_BUILD_UNBUNDLED</h4>
-<p>The source tree might not have the full platform sources. It is always set if
-<code>TARGET_BUILD_APPS</code> or <code>TARGET_BUILD_UNBUNDLED_IMAGE</code> is set.</p>
+<p>
+    The source tree might not have the full platform sources. it turns on
+    <code>TARGET_BUILD_USE_PREBUILT_SDKS</code>, unless
+    <code>UNBUNDLED_BUILD_SDKS_FROM_SOURCE</code> is set. It is always set if
+    <code>TARGET_BUILD_APPS</code> or <code>TARGET_BUILD_UNBUNDLED_IMAGE</code> is set.
+</p>
 <h4>TARGET_BUILD_USE_PREBUILT_SDKS</h4>
 <p>It is an internal flag. If it is set, prebuilt SDKs are used, even if a module's
 <code>LOCAL_SDK_VERSION</code> is <code>current</code> (including <code>system_current</code>,
@@ -566,7 +570,7 @@ alphabetically.</p>
     <li><b>PRIVATE_</b> - These variables are make-target-specific variables.  That
     means they're only usable within the commands for that module.  It also
     means that they're unlikely to change behind your back from modules that
-    are included after yours.  This 
+    are included after yours.  This
     <a href="http://www.gnu.org/software/make/manual/make.html#Target_002dspecific">link to the make documentation</a>
     describes more about target-specific variables.  Please note that there
     are a couple of these laying around the tree that aren't prefixed with
@@ -705,7 +709,7 @@ used to, e.g., ensure that necessary shared libraries or providers are
 installed when a given app is installed.
 
 <h4>LOCAL_FORCE_STATIC_EXECUTABLE</h4>
-<p>If your executable should be linked statically, set 
+<p>If your executable should be linked statically, set
 <code>LOCAL_FORCE_STATIC_EXECUTABLE:=true</code>.  There is a very short
 list of libraries that we have in static form (currently only libc).</p>
 
@@ -744,7 +748,7 @@ very important to ld, so test whatever you do on all platforms.</p>
 <h4>LOCAL_LDLIBS</h4>
 <p><code>LOCAL_LDLIBS</code> allows you to specify additional libraries
 that are not part of the build for your executable or library.  Specify
-the libraries you want in -lxxx format; they're passed directly to the 
+the libraries you want in -lxxx format; they're passed directly to the
 link line.  However, keep in mind that there will be no dependency generated
 for these libraries.  It's most useful in simulator builds where you want
 to use a library preinstalled on the host.  The linker (ld) is a particularly
@@ -781,7 +785,7 @@ that exist in libcore and which are inconvenient to move elsewhere.
 <p>The directory your Android.mk file is in. You can set it by putting the
 following as the first line in your Android.mk:</p>
 <p><code>LOCAL_PATH := $(my-dir)</code></p>
-<p>The <code>my-dir</code> macro uses the 
+<p>The <code>my-dir</code> macro uses the
 <code><a href="http://www.gnu.org/software/make/manual/make.html#MAKEFILE_005fLIST-Variable">MAKEFILE_LIST</a></code>
 variable, so you must call it before you include any other makefiles.  Also,
 consider that any subdirectories you inlcude might reset LOCAL_PATH, so do your
@@ -843,7 +847,7 @@ host executables where we use static libraries instead.
 <p><code>LOCAL_MODULE</code> is the name of what's supposed to be generated
 from your Android.mk.  For exmample, for libkjs, the <code>LOCAL_MODULE</code>
 is "libkjs" (the build system adds the appropriate suffix -- .so .dylib .dll).
-For app modules, use <code>LOCAL_PACKAGE_NAME</code> instead of 
+For app modules, use <code>LOCAL_PACKAGE_NAME</code> instead of
 <code>LOCAL_MODULE</code>.  We're planning on switching to ant for the apps,
 so this might become moot.</p>
 
@@ -876,7 +880,7 @@ LOCAL_MODULE_HOST_OS := darwin linux windows</code></p>
 <p>Instructs the build system to put the unstripped version of the module
 somewhere other than what's normal for its type.  Usually, you override this
 because you overrode <code>LOCAL_MODULE_PATH</code> for an executable or a
-shared library.  If you overrode <code>LOCAL_MODULE_PATH</code>, but not 
+shared library.  If you overrode <code>LOCAL_MODULE_PATH</code>, but not
 <code>LOCAL_UNSTRIPPED_PATH</code>, an error will occur.</p>
 <p>See <a href="#moving-modules">Putting modules elsewhere</a> for more.</p>
 
@@ -931,7 +935,7 @@ completely done right.</p>
 
 <h4>LOCAL_ADDITIONAL_DEPENDENCIES</h4>
 <p>If your module needs to depend on anything else that
-isn't actually built in to it, you can add those make targets to 
+isn't actually built in to it, you can add those make targets to
 <code>LOCAL_ADDITIONAL_DEPENDENCIES</code>.  Usually this is a workaround
 for some other dependency that isn't created automatically.</p>
 
