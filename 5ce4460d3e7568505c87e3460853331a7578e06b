@@ -70,6 +70,30 @@
       },
       "revId": "5ce4460d3e7568505c87e3460853331a7578e06b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73035f10_55da8524",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-03-28T18:57:14Z",
+      "side": 1,
+      "message": "It\u0027s also a hassle that dump-words-to-file deletes the file. I prefer the ability to call the macro multiple times: once for each flag. This also increases the effective capacity.",
+      "parentUuid": "80a8c3c6_22ea28d4",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 81
+      },
+      "revId": "5ce4460d3e7568505c87e3460853331a7578e06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
