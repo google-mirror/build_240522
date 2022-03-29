@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc1ae37_ae949c48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945662
+      },
+      "writtenOn": "2022-03-29T06:45:16Z",
+      "side": 1,
+      "message": "2043034: Add additional license dependencies for VTS | https://android-review.googlesource.com/c/platform/build/+/2043034",
+      "revId": "510e20870f1966b6caffc8ae3e0c35f96086e533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
