@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "413c29c4_e4df00ae",
+        "filename": "core/config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-03-29T15:11:57Z",
+      "side": 1,
+      "message": "Right. Deleted this and verified that the logic is still correct.\n\n```\n$ env TARGET_BUILD_APPS\u003dfoo build/soong/soong_ui.bash --dumpvars-mode --vars \"TARGET_BUILD_APPS TARGET_BUILD_UNBUNDLED_IMAGE TARGET_BUILD_UNBUNDLED TARGET_BUILD_USE_PREBUILT_SDKS DISABLE_PREOPT\"\nTARGET_BUILD_APPS\u003d\u0027foo\u0027\nTARGET_BUILD_UNBUNDLED_IMAGE\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED\u003d\u0027true\u0027\nTARGET_BUILD_USE_PREBUILT_SDKS\u003d\u0027true\u0027\nDISABLE_PREOPT\u003d\u0027true\u0027\n\n$ env TARGET_BUILD_UNBUNDLED_IMAGE\u003dfoo build/soong/soong_ui.bash --dumpvars-mode --vars \"TARGET_BUILD_APPS TARGET_BUILD_UNBUNDLED_IMAGE TARGET_BUILD_UNBUNDLED TARGET_BUILD_USE_PREBUILT_SDKS DISABLE_PREOPT\"\nTARGET_BUILD_APPS\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED_IMAGE\u003d\u0027foo\u0027\nTARGET_BUILD_UNBUNDLED\u003d\u0027true\u0027\nTARGET_BUILD_USE_PREBUILT_SDKS\u003d\u0027true\u0027\nDISABLE_PREOPT\u003d\u0027true\u0027\n\n$ env TARGET_BUILD_UNBUNDLED\u003dtrue build/soong/soong_ui.bash --dumpvars-mode --vars \"TARGET_BUILD_APPS TARGET_BUILD_UNBUNDLED_IMAGE TARGET_BUILD_UNBUNDLED TARGET_BUILD_USE_PREBUILT_SDKS DISABLE_PREOPT\"\nTARGET_BUILD_APPS\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED_IMAGE\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED\u003d\u0027true\u0027\nTARGET_BUILD_USE_PREBUILT_SDKS\u003d\u0027true\u0027\nDISABLE_PREOPT\u003d\u0027\u0027\n\n$ env TARGET_BUILD_UNBUNDLED\u003dfalse build/soong/soong_ui.bash --dumpvars-mode --vars \"TARGET_BUILD_APPS TARGET_BUILD_UNBUNDLED_IMAGE TARGET_BUILD_UNBUNDLED TARGET_BUILD_USE_PREBUILT_SDKS DISABLE_PREOPT\"\nTARGET_BUILD_APPS\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED_IMAGE\u003d\u0027\u0027\nTARGET_BUILD_UNBUNDLED\u003d\u0027false\u0027\nTARGET_BUILD_USE_PREBUILT_SDKS\u003d\u0027\u0027\nDISABLE_PREOPT\u003d\u0027\u0027\n```",
+      "parentUuid": "94f97473_75b3771f",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 7
+      },
+      "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c009c97a_b186cc56",
         "filename": "core/config.mk",
         "patchSetId": 4
@@ -108,6 +132,30 @@
       "writtenOn": "2022-03-29T14:51:30Z",
       "side": 1,
       "message": "I\u0027d prefer `ifneq (true,$(UNBUNDLED_BUILD_SDKS_FROM_SOURCE))`, but I see that this is consistent with the condition a few lines up.",
+      "range": {
+        "startLine": 502,
+        "startChar": 2,
+        "endLine": 502,
+        "endChar": 41
+      },
+      "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5e05bc_a3f74310",
+        "filename": "core/config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-03-29T15:11:57Z",
+      "side": 1,
+      "message": "Now there is no consistency issues because the lines above are deleted.",
+      "parentUuid": "c009c97a_b186cc56",
       "range": {
         "startLine": 502,
         "startChar": 2,
