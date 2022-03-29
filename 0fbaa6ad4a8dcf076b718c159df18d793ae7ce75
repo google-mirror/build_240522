@@ -34,6 +34,24 @@
       "parentUuid": "30a2747d_5e9683b5",
       "revId": "0fbaa6ad4a8dcf076b718c159df18d793ae7ce75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1171532f_b319c108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-29T20:40:34Z",
+      "side": 1,
+      "message": "Just as with product graph, IMHO it\u0027s not a good idea to add something which, first, will have to be removed, and second, requires larger change than the proper implementation.",
+      "parentUuid": "b3e30c18_6fbb5ff7",
+      "revId": "0fbaa6ad4a8dcf076b718c159df18d793ae7ce75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
