@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab498134_8e5cf3b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-03-29T12:53:28Z",
+      "side": 1,
+      "message": "I mean, setting TARGET_BUILD_USE_PREBUILT_SDKS in the ART build script doesn\u0027t help because there is a line `TARGET_BUILD_USE_PREBUILT_SDKS :\u003d` in core/config.mk that resets it. Besides, according to core/build-system.html, TARGET_BUILD_USE_PREBUILT_SDKS is an internal flag, so ART is not supposed to use it directly.",
+      "parentUuid": "94cb3bce_9d0e604d",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "c2071f8de69ed14555c867eb3dfb6677e79c7502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96f9e48f_3409fa42",
