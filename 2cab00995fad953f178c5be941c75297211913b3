@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7003f92_45d176b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-03-29T14:54:27Z",
+      "side": 1,
+      "message": "Just to be clear, we will need to re-land this.\n\nThe revert is temporary and just to give more time for b/226312477.\n\nOleg, please let me know if this helps or needed.\n\nThanks,",
+      "revId": "2cab00995fad953f178c5be941c75297211913b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
