@@ -52,6 +52,70 @@
       "parentUuid": "bfc99e3d_fbadc291",
       "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab7a8c26_8e9e5826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-29T14:51:30Z",
+      "side": 1,
+      "message": "Left some comments, but I think Anton still should take a look.",
+      "parentUuid": "3efdf7fd_1bc7500f",
+      "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f97473_75b3771f",
+        "filename": "core/config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-29T14:51:30Z",
+      "side": 1,
+      "message": "You should be able to delete this, because judging from the html doc file TARGET_BUILD_UNBUNDLED always gets set if either TARGET_BUILD_APPS or TARGET_BUILD_UNBUNDLED_IMAGE is set.\n\nI suggest a couple of test runs with\n\n  env TARGET_BUILD_APPS\u003d... TARGET_BUILD_UNBUNDLED_IMAGE\u003d... \u003cetc\u003e \\\n    build/soong/soong_ui.bash --dumpvars-mode --vars \\\n    \"TARGET_BUILD_APPS TARGET_BUILD_UNBUNDLED_IMAGE TARGET_BUILD_UNBUNDLED TARGET_BUILD_USE_PREBUILT_SDKS DISABLE_PREOPT\"\n\nto verify that the logic between all these variables remain as described.",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 7
+      },
+      "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c009c97a_b186cc56",
+        "filename": "core/config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-29T14:51:30Z",
+      "side": 1,
+      "message": "I\u0027d prefer `ifneq (true,$(UNBUNDLED_BUILD_SDKS_FROM_SOURCE))`, but I see that this is consistent with the condition a few lines up.",
+      "range": {
+        "startLine": 502,
+        "startChar": 2,
+        "endLine": 502,
+        "endChar": 41
+      },
+      "revId": "c6dbd48a892c26ae1dff60ca4ec5c5e181ccd5da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
