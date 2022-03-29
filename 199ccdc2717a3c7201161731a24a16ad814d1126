@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e21d30_acbcdfd0",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1733,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-03-29T13:56:08Z",
+      "side": 1,
+      "message": "could we pull this out into a separate variable or use \\ so the line is a bit easier to read?",
+      "range": {
+        "startLine": 1733,
+        "startChar": 62,
+        "endLine": 1733,
+        "endChar": 125
+      },
+      "revId": "199ccdc2717a3c7201161731a24a16ad814d1126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
