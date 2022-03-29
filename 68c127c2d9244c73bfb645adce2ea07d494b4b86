@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e003b208_038de4f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-03-29T13:57:39Z",
+      "side": 1,
+      "message": "Eventually we should move this to build/bazel/rules/java -- can you file an internal cleanup bug for it?",
+      "revId": "68c127c2d9244c73bfb645adce2ea07d494b4b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d06c70c_6712e48a",
+        "filename": "envsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-03-29T13:57:39Z",
+      "side": 1,
+      "message": "looks like this snuck in to this change",
+      "range": {
+        "startLine": 1720,
+        "startChar": 2,
+        "endLine": 1720,
+        "endChar": 108
+      },
+      "revId": "68c127c2d9244c73bfb645adce2ea07d494b4b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
