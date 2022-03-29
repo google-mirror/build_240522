@@ -39,6 +39,30 @@
       },
       "revId": "68c127c2d9244c73bfb645adce2ea07d494b4b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dacb23d8_e0b56883",
+        "filename": "envsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-03-29T14:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d06c70c_6712e48a",
+      "range": {
+        "startLine": 1720,
+        "startChar": 2,
+        "endLine": 1720,
+        "endChar": 108
+      },
+      "revId": "68c127c2d9244c73bfb645adce2ea07d494b4b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
