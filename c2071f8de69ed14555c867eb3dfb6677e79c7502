@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cb3bce_9d0e604d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-03-29T12:49:57Z",
+      "side": 1,
+      "message": "Setting TARGET_BUILD_USE_PREBUILT_SDKS doesn\u0027t help because there is a line `TARGET_BUILD_USE_PREBUILT_SDKS :\u003d` in core.mk that resets it.",
+      "parentUuid": "bef41975_10ead000",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "c2071f8de69ed14555c867eb3dfb6677e79c7502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96f9e48f_3409fa42",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-28T21:22:56Z",
       "side": 1,
       "message": "Typo: \"It\"",
+      "range": {
+        "startLine": 448,
+        "startChar": 62,
+        "endLine": 448,
+        "endChar": 64
+      },
+      "revId": "c2071f8de69ed14555c867eb3dfb6677e79c7502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a46c4b0_897437c2",
+        "filename": "core/build-system.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-03-29T12:49:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96f9e48f_3409fa42",
       "range": {
         "startLine": 448,
         "startChar": 62,
