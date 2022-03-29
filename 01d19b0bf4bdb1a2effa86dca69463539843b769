@@ -51,6 +51,29 @@
       "message": "I don\u0027t understand ",
       "revId": "01d19b0bf4bdb1a2effa86dca69463539843b769",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430b1a08_b8fc2367",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-03-29T20:14:59Z",
+      "side": 1,
+      "message": "can _dump_variables_rbc_excluded contain `SOONG_% PRODUCT_COPY_OUT_%` so that the second `grep` is not needed?",
+      "range": {
+        "startLine": 336,
+        "startChar": 146,
+        "endLine": 336,
+        "endChar": 178
+      },
+      "revId": "01d19b0bf4bdb1a2effa86dca69463539843b769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
