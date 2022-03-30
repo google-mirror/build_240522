@@ -88,6 +88,24 @@
       "parentUuid": "d1c76d9b_ecb5ba1b",
       "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9ebdcb_4df44d16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-30T19:46:33Z",
+      "side": 1,
+      "message": "Now that aosp/2044703 is merged, this change shouldn\u0027t be necessary.",
+      "parentUuid": "1e2bef4a_c7301063",
+      "revId": "3a836f0301d3bfdf664ee7d2d60560bad8620ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
