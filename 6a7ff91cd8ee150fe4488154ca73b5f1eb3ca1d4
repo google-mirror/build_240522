@@ -16,6 +16,24 @@
       "message": "Why not just say that it matches either the whole word or word\u0027s beginning and end. Then it will be more obvious that the whole body can be\nif len(pattern) \u003d\u003d 1:\n  return pattern[0]\u003d\u003dword\nreturn (len(word) \u003e\u003d (len(pattern[0]+len(pattern[1])) and word.startswith(pattern[0]) and word.endswith(pattern[1])",
       "revId": "6a7ff91cd8ee150fe4488154ca73b5f1eb3ca1d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153f6e71_128e2493",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-03-30T19:00:51Z",
+      "side": 1,
+      "message": "I wanted to keep it generic to any length of pattern, but done.",
+      "parentUuid": "48b7badc_872d11b1",
+      "revId": "6a7ff91cd8ee150fe4488154ca73b5f1eb3ca1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
