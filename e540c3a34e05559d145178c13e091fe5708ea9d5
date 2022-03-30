@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d97c7495_0208eb06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1455782
+      },
+      "writtenOn": "2022-03-30T20:42:22Z",
+      "side": 1,
+      "message": "Should not be merged. This just shows which lines to disable.",
+      "revId": "e540c3a34e05559d145178c13e091fe5708ea9d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
