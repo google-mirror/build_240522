@@ -46,6 +46,30 @@
       },
       "revId": "e1d0af7e30e5d32b504fde891a1cde472d10203c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a584f8a_bb629cbb",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-03-30T17:21:22Z",
+      "side": 1,
+      "message": "All right then. I think it\u0027d DTRT for the soong config variable: https://cs.android.com/android/platform/superproject/+/master:build/soong/android/soongconfig/config.go;l\u003d23;drc\u003d432bd598ae5964f045e92aa29bc1cbef3dea04dd\n\n\u003e What would happen for values other than true/false?\n\nI think the answer to that is - like for other boolean make variables - \"please don\u0027t go there\".",
+      "parentUuid": "f455b755_0cb49e5c",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 52
+      },
+      "revId": "e1d0af7e30e5d32b504fde891a1cde472d10203c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
