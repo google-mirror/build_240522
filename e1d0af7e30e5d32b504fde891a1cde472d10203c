@@ -22,6 +22,30 @@
       },
       "revId": "e1d0af7e30e5d32b504fde891a1cde472d10203c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f455b755_0cb49e5c",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-03-30T16:07:37Z",
+      "side": 1,
+      "message": "hmm so that would plumb through and work correctly? If so, no objections. What would happen for values other than true/false?",
+      "parentUuid": "28bb370f_dc85248e",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 52
+      },
+      "revId": "e1d0af7e30e5d32b504fde891a1cde472d10203c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
