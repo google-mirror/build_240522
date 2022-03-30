@@ -37,7 +37,7 @@ def CheckCompatibility(target_files_dir, partition_map):
   """
   errors = []
 
-  errors.extend(CheckVintf(target_files_dir))
+  #errors.extend(CheckVintf(target_files_dir))
   errors.extend(CheckShareduidViolation(target_files_dir, partition_map))
   errors.extend(CheckApexDuplicatePackages(target_files_dir, partition_map))
 
@@ -48,7 +48,7 @@ def CheckCompatibility(target_files_dir, partition_map):
       if partition in ('system', 'system_ext', 'product', 'vendor', 'odm')
   }
 
-  errors.extend(CheckInitRcFiles(target_files_dir, partition_map))
+  #errors.extend(CheckInitRcFiles(target_files_dir, partition_map))
   errors.extend(CheckCombinedSepolicy(target_files_dir, partition_map))
 
   return errors
