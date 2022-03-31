@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf204684_6376d29f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-03-31T03:53:07Z",
+      "side": 1,
+      "message": "We found that the patch is only merged into GSI S. Should we merge the patch and CP to android12-gsi?",
+      "revId": "234bc7ba525c5357829d8312c59b627a1c8afbac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
