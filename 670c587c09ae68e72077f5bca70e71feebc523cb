@@ -16,6 +16,24 @@
       "message": "Aren\u0027t they sorted here: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product_config.rbc;drc\u003ddb13a58184785324fde32846ee95c11c740bd103;l\u003d179",
       "revId": "670c587c09ae68e72077f5bca70e71feebc523cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26770fd_c182ff4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-01T00:36:45Z",
+      "side": 1,
+      "message": "They are sorted there, but in [percolate_inherited](https://cs.android.com/android/platform/superproject/+/master:build/make/core/product_config.rbc;l\u003d290;drc\u003ddb13a58184785324fde32846ee95c11c740bd103) it uses an unsorted list, which is causing the issue.",
+      "parentUuid": "b268c679_58834958",
+      "revId": "670c587c09ae68e72077f5bca70e71feebc523cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
