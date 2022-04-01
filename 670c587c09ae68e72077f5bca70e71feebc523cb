@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b268c679_58834958",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-04-01T00:34:31Z",
+      "side": 1,
+      "message": "Aren\u0027t they sorted here: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product_config.rbc;drc\u003ddb13a58184785324fde32846ee95c11c740bd103;l\u003d179",
+      "revId": "670c587c09ae68e72077f5bca70e71feebc523cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
