@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17989c6c_9b83bf8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-04-01T23:42:49Z",
+      "side": 1,
+      "message": "This can\u0027t happen for anything adopting common system images, as this is being stored on the system partition, which is common across devices. +smoreland who can hopefully point to any current documentation on best practices.",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "5a3b8768f869e60ccb8807514d212a9796423ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
