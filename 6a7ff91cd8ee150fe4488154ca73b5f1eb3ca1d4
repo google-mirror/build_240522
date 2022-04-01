@@ -34,6 +34,24 @@
       "parentUuid": "48b7badc_872d11b1",
       "revId": "6a7ff91cd8ee150fe4488154ca73b5f1eb3ca1d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc12ed0f_fd78a8dd",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-04-01T00:41:08Z",
+      "side": 1,
+      "message": "\u003e I wanted to keep it generic to any length of pattern, but done.\n\nGeneric pattern matching is what you are removing :-)",
+      "parentUuid": "153f6e71_128e2493",
+      "revId": "6a7ff91cd8ee150fe4488154ca73b5f1eb3ca1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
