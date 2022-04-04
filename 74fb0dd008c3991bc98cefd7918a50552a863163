@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ad746b_ee3a4bad",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04016de0_32648d65",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "497efbd1_ed581ad9",
@@ -88,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23ff567_9aed310c",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf8ee064_435a7b29",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "639d1e44_a58fe801",
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "I will update this function to a one-line one.\n\nFor `used inclined`, considering readability, I had prepared separate functions whenever possible. But I do not have strong preference to code style. So having long lines of code is fine to me. Will update this soon.",
       "parentUuid": "639d1e44_a58fe801",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a4deb6_e25b0252",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9728a9d6_02ec1c85",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -174,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "310c0a24_188c74a8",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a85905ca_4cdaea20",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d15fa131_47556b02",
@@ -205,6 +277,24 @@
       "side": 1,
       "message": "Okay.",
       "parentUuid": "d15fa131_47556b02",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e60f42_3d52c9a3",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bd908fa_17104cf3",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -291,6 +381,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70bb547d_39ac7607",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56fe0cb6_81d1a1ef",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb1cfd02_3f0873c6",
@@ -322,6 +430,24 @@
       "side": 1,
       "message": "Will update soon.",
       "parentUuid": "eb1cfd02_3f0873c6",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba1f3f5_96a270ce",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab71811b_bf754c3f",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -361,6 +487,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28297515_6b7d9ee1",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11ab3da7_937d3caa",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07cbf609_f0bb6cea",
@@ -396,6 +540,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee19f64a_efec8c18",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43cbf402_1a6f72df",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a831af7_fa53e178",
@@ -427,6 +589,24 @@
       "side": 1,
       "message": "Okay, will update soon.",
       "parentUuid": "6a831af7_fa53e178",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71edba2_6588b859",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbba0d9d_5785c629",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -497,6 +677,24 @@
       "side": 1,
       "message": "Okay.",
       "parentUuid": "7013f715_f9a3a00d",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9348cc_a1babbab",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "474b5c89_9cafa16e",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -595,6 +793,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3266c255_4ec7ec0e",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e660c186_cf13e215",
+      "range": {
+        "startLine": 86,
+        "startChar": 38,
+        "endLine": 86,
+        "endChar": 53
+      },
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55bb0680_bf4c0faa",
@@ -626,6 +848,24 @@
       "side": 1,
       "message": "Did not know this trick before, will have a try. Thanks!",
       "parentUuid": "55bb0680_bf4c0faa",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3b55dc_062e0ef2",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab26df0_b256439b",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -665,6 +905,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41769b40_397c6b13",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "290b08af_71fd2b18",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbee90c7_62abd722",
@@ -700,6 +958,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd6a706_11a29b1f",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "110660e6_963ad3b1",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "023b60a6_af255443",
@@ -731,6 +1007,24 @@
       "side": 1,
       "message": "Okay, will modify.",
       "parentUuid": "023b60a6_af255443",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30bfc353_986e400c",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-04T21:17:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab77456d_91dd954d",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
