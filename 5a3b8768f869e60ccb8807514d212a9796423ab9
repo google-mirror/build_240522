@@ -22,6 +22,30 @@
       },
       "revId": "5a3b8768f869e60ccb8807514d212a9796423ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "452d3516_9cc73704",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-04T16:13:59Z",
+      "side": 1,
+      "message": "I think probably the property shouldn\u0027t be set at all, and we can read it with the API calls that return \u0027false\u0027 by default. This would be the simplest.",
+      "parentUuid": "17989c6c_9b83bf8d",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "5a3b8768f869e60ccb8807514d212a9796423ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
