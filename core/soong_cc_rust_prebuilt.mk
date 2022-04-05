@@ -62,6 +62,7 @@ ifneq ($(filter STATIC_LIBRARIES SHARED_LIBRARIES RLIB_LIBRARIES DYLIB_LIBRARIES
 
   ifdef LOCAL_SOONG_TOC
     $(eval $(call copy-one-file,$(LOCAL_SOONG_TOC),$(LOCAL_BUILT_MODULE).toc))
+    $(eval ALL_TARGETS.$(LOCAL_BUILT_MODULE).toc.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
     $(call add-dependency,$(LOCAL_BUILT_MODULE).toc,$(LOCAL_BUILT_MODULE))
     $(my_all_targets): $(LOCAL_BUILT_MODULE).toc
   endif
@@ -185,6 +186,7 @@ ifndef LOCAL_IS_HOST_MODULE
       my_unstripped_path := $(patsubst $(TARGET_OUT_UNSTRIPPED)/root/%,$(TARGET_OUT_UNSTRIPPED)/%, $(my_unstripped_path))
       symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
       $(eval $(call copy-one-file,$(LOCAL_SOONG_UNSTRIPPED_BINARY),$(symbolic_output)))
+      $(eval ALL_TARGETS.$(symbolic_output).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
       $(LOCAL_BUILT_MODULE): | $(symbolic_output)
 
       ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
@@ -208,6 +210,7 @@ endif
 ifeq ($(NATIVE_COVERAGE),true)
   ifneq (,$(strip $(LOCAL_PREBUILT_COVERAGE_ARCHIVE)))
     $(eval $(call copy-one-file,$(LOCAL_PREBUILT_COVERAGE_ARCHIVE),$(intermediates)/$(LOCAL_MODULE).zip))
+    $(eval ALL_TARGETS.$(intermediates)/$(LOCAL_MODULE).zip.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
     ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
       ifdef LOCAL_IS_HOST_MODULE
         my_coverage_path := $($(my_prefix)OUT_COVERAGE)/$(patsubst $($(my_prefix)OUT)/%,%,$(my_module_path))
@@ -216,6 +219,7 @@ ifeq ($(NATIVE_COVERAGE),true)
       endif
       my_coverage_path := $(my_coverage_path)/$(patsubst %.so,%,$(my_installed_module_stem)).zip
       $(eval $(call copy-one-file,$(LOCAL_PREBUILT_COVERAGE_ARCHIVE),$(my_coverage_path)))
+      $(eval ALL_TARGETS.$(my_coverage_path).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
       $(LOCAL_BUILT_MODULE): $(my_coverage_path)
     endif
   else

@@ -18,6 +18,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 #######################################
 
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+$(eval ALL_TARGETS.$(LOCAL_BUILT_MODULE).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 
 PACKAGES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
 
