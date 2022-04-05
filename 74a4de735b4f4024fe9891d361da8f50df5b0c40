@@ -16,6 +16,24 @@
       "message": "Can you add a comment here explaining why these conditionals are used?",
       "revId": "74a4de735b4f4024fe9891d361da8f50df5b0c40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b56d9dc_41b1a9a3",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1076723
+      },
+      "writtenOn": "2022-04-05T16:22:20Z",
+      "side": 1,
+      "message": "oh no! I\u0027m sorry I missed this before merging. I\u0027ll put up another CL.",
+      "parentUuid": "034a768c_8aa18344",
+      "revId": "74a4de735b4f4024fe9891d361da8f50df5b0c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
