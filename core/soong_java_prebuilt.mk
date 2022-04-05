@@ -40,7 +40,9 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 ifdef LOCAL_SOONG_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_jar)))
+  $(eval ALL_TARGETS.$(full_classes_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_pre_proguard_jar)))
+  $(eval ALL_TARGETS.$(full_classes_pre_proguard_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(eval $(call add-dependency,$(LOCAL_BUILT_MODULE),$(full_classes_jar)))
 
   ifneq ($(TURBINE_ENABLED),false)
@@ -49,14 +51,17 @@ ifdef LOCAL_SOONG_CLASSES_JAR
     else
       $(eval $(call copy-one-file,$(full_classes_jar),$(full_classes_header_jar)))
     endif
+    $(eval ALL_TARGETS.$(full_classes_header_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   endif # TURBINE_ENABLED != false
 endif
 
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+$(eval ALL_TARGETS.$(LOCAL_BUILT_MODULE).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR),\
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar))
+  $(eval ALL_TARGETS.$(call local-packaging-dir,jacoco)/jacoco-report-classes.jar.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(common_javalib.jar),\
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar)
 endif
@@ -64,10 +69,15 @@ endif
 ifdef LOCAL_SOONG_PROGUARD_DICT
   $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
     $(intermediates.COMMON)/proguard_dictionary))
-  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
-    $(call local-packaging-dir,proguard_dictionary)/proguard_dictionary))
+  $(eval ALL_TARGETS.$(intermediates.COMMON)/proguard_dictionary.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
+  $(eval $(call copy-r8-dictionary-file-with-mapping,\
+    $(LOCAL_SOONG_PROGUARD_DICT),\
+    $(my_proguard_dictionary_directory)/proguard_dictionary,\
+    $(my_proguard_dictionary_mapping_directory)/proguard_dictionary.textproto))
+  $(eval ALL_TARGETS.$(my_proguard_dictionary)/proguard_dictionary.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),\
-    $(call local-packaging-dir,proguard_dictionary)/classes.jar))
+    $(my_proguard_dictionary_directory)/classes.jar))
+  $(eval ALL_TARGETS.$(my_proguard_dictionary)/classes.jar.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(common_javalib.jar),\
     $(intermediates.COMMON)/proguard_dictionary)
   $(call add-dependency,$(common_javalib.jar),\
@@ -79,6 +89,7 @@ endif
 ifdef LOCAL_SOONG_PROGUARD_USAGE_ZIP
   $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_USAGE_ZIP),\
     $(call local-packaging-dir,proguard_usage)/proguard_usage.zip))
+  $(eval ALL_TARGETS.$(call local-packaging-dir,proguard_usage)/proguard_usage.zip.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(common_javalib.jar),\
     $(call local-packaging-dir,proguard_usage)/proguard_usage.zip)
 endif
@@ -90,6 +101,8 @@ ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
   $(my_res_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
 	@echo "Copy: $@"
 	$(copy-file-to-target)
+
+  $(eval ALL_TARGETS.$(my_res_package).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 
   $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_res_package))
 
@@ -103,14 +116,18 @@ ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 		cat $$f >>$@; \
 	done
 
+  $(eval ALL_TARGETS.$(my_proguard_flags).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
+
   $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_proguard_flags))
 
   my_static_library_extra_packages := $(intermediates.COMMON)/extra_packages
   $(eval $(call copy-one-file,$(LOCAL_SOONG_STATIC_LIBRARY_EXTRA_PACKAGES),$(my_static_library_extra_packages)))
+  $(eval ALL_TARGETS.$(my_static_library_extra_packages).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_static_library_extra_packages))
 
   my_static_library_android_manifest := $(intermediates.COMMON)/manifest/AndroidManifest.xml
   $(eval $(call copy-one-file,$(LOCAL_FULL_MANIFEST_FILE),$(my_static_library_android_manifest)))
+  $(eval ALL_TARGETS.$(my_static_library_android_manifest).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),$(my_static_library_android_manifest))
 endif # LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 
@@ -136,6 +153,7 @@ ifdef LOCAL_SOONG_DEX_JAR
     endif # is_boot_jar
 
     $(eval $(call copy-one-file,$(LOCAL_SOONG_DEX_JAR),$(common_javalib.jar)))
+    $(eval ALL_TARGETS.$(common_javalib.jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
     $(eval $(call add-dependency,$(LOCAL_BUILT_MODULE),$(common_javalib.jar)))
     ifdef LOCAL_SOONG_CLASSES_JAR
       $(eval $(call add-dependency,$(common_javalib.jar),$(full_classes_jar)))
@@ -164,8 +182,10 @@ endif
 # modules can find them.
 ifdef LOCAL_SOONG_DEXPREOPT_CONFIG
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(call local-intermediates-dir,)/dexpreopt.config))
+  $(eval ALL_TARGETS.$(call local-intermediates-dir,)/dexpreopt.config.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   my_dexpreopt_config := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(my_dexpreopt_config)))
+  $(eval ALL_TARGETS.$(my_dexpreopt_config).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(LOCAL_BUILT_MODULE): $(my_dexpreopt_config)
 endif
 
@@ -208,4 +228,5 @@ $(my_exported_sdk_libs_file):
 		$(hide) echo $(PRIVATE_EXPORTED_SDK_LIBS) | tr ' ' '\n' > $@,\
 		$(hide) touch $@)
 
+$(eval ALL_TARGETS.$(my_exported_sdk_libs_file).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 SOONG_ALREADY_CONV += $(LOCAL_MODULE)

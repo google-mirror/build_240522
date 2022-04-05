@@ -29,7 +29,6 @@ my_staging_dir := $(intermediates)
 my_package_zip := $(LOCAL_BUILT_MODULE)
 
 my_built_modules := $(foreach p,$(my_copy_pairs),$(call word-colon,1,$(p)))
-my_copy_pairs := $(foreach p,$(my_copy_pairs),$(call word-colon,1,$(p)):$(my_staging_dir)/$(call word-colon,2,$(p)))
 my_pickup_files :=
 my_missing_error :=
 

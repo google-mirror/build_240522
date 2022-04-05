@@ -45,14 +45,18 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 ifdef LOCAL_SOONG_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_jar)))
+  $(eval ALL_TARGETS.$(full_classes_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),$(full_classes_pre_proguard_jar)))
+  $(eval ALL_TARGETS.$(full_classes_pre_proguard_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(eval $(call add-dependency,$(LOCAL_BUILT_MODULE),$(full_classes_jar)))
 
   ifneq ($(TURBINE_ENABLED),false)
     ifdef LOCAL_SOONG_HEADER_JAR
       $(eval $(call copy-one-file,$(LOCAL_SOONG_HEADER_JAR),$(full_classes_header_jar)))
+      $(eval ALL_TARGETS.$(full_classes_header_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
     else
       $(eval $(call copy-one-file,$(full_classes_jar),$(full_classes_header_jar)))
+      $(eval ALL_TARGETS.$(full_classes_header_jar).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
     endif
   endif # TURBINE_ENABLED != false
 
@@ -64,6 +68,7 @@ endif
 ifdef LOCAL_SOONG_DEXPREOPT_CONFIG
   my_dexpreopt_config := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(my_dexpreopt_config)))
+  $(eval ALL_TARGETS.$(my_dexpreopt_config).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(LOCAL_BUILT_MODULE): $(my_dexpreopt_config)
 endif
 
@@ -91,10 +96,12 @@ ifeq ($(module_run_appcompat),true)
 else
   $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
 endif
+$(eval ALL_TARGETS.$(LOCAL_BUILT_MODULE).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR),\
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar))
+  $(eval ALL_TARGETS.$(call local-packaging-dir,jacoco)/jacoco-report-classes.jar.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),\
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar)
 endif
@@ -102,8 +109,11 @@ endif
 ifdef LOCAL_SOONG_PROGUARD_DICT
   $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
     $(intermediates.COMMON)/proguard_dictionary))
-  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
-    $(call local-packaging-dir,proguard_dictionary)/proguard_dictionary))
+  $(eval ALL_TARGETS.$(intermediates.COMMON)/proguard_dictionary.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
+  $(eval $(call copy-r8-dictionary-file-with-mapping,\
+    $(LOCAL_SOONG_PROGUARD_DICT),\
+    $(my_proguard_dictionary_directory)/proguard_dictionary,\
+    $(my_proguard_dictionary_mapping_directory)/proguard_dictionary.textproto))
   $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),\
     $(call local-packaging-dir,proguard_dictionary)/classes.jar))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),\
@@ -117,6 +127,7 @@ endif
 ifdef LOCAL_SOONG_PROGUARD_USAGE_ZIP
   $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_USAGE_ZIP),\
     $(call local-packaging-dir,proguard_usage)/proguard_usage.zip))
+  $(eval ALL_TARGETS.$(call local-packaging-dir,proguard_usage)/proguard_usage.zip.META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),\
     $(call local-packaging-dir,proguard_usage)/proguard_usage.zip)
 endif
@@ -132,6 +143,7 @@ $(resource_export_package): $(LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE)
 	$(copy-file-to-target)
 	touch $(PRIVATE_STAMP)
 $(call add-dependency,$(LOCAL_BUILT_MODULE),$(resource_export_package))
+$(eval ALL_TARGETS.$(resource_export_package).META_LIC := $(LOCAL_SOONG_LICENSE_METADATA))
 
 endif # LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
 
