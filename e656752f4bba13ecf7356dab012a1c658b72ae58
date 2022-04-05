@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e21275_bd617772",
+        "filename": "core/notice_files.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-05T00:34:35Z",
+      "side": 1,
+      "message": "This is often a file in the source tree.  genrules are generally not referenced directly from Make, but if we need to track this we should set ALL_MODULES.$(my_register_name).BUILT for genrules modules.",
+      "range": {
+        "startLine": 130,
+        "startChar": 141,
+        "endLine": 130,
+        "endChar": 167
+      },
+      "revId": "e656752f4bba13ecf7356dab012a1c658b72ae58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
