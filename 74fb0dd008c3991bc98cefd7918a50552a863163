@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "881c128c_f04df580",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-05T21:35:50Z",
+      "side": 1,
+      "message": "You know, since this script will only really be used from `m mk2bp_remaining`, we should probably just remove the `get_build_var PRODUCT_PACKAGES` and require you to pass them in via a `--product-packages` or similar. It would solve this correctness issue, and run faster.\n\nYou could also remove the cd\u0027ing to top in that case.\n\nHowever if `--product-packages` is not supplied, it should disable the filtering.",
+      "parentUuid": "5ce4ef9f_0fa134a2",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51f2d606_46b47919",
         "filename": "tools/mk2bp_catalog.py",
         "patchSetId": 2
@@ -372,6 +390,30 @@
       "side": 1,
       "message": "I had used `userdebug` in one of the previous version, but met with some issue when running the script. So I just removed it. Will check more for the details.\n \nMy questions: if we set this val with a different value, such as `userdebug`, `user`, or `eng`, will we see any differences in the Make file list? Maybe I can run some tests to figure it out...",
       "parentUuid": "5a7671d6_cdb9e21f",
+      "range": {
+        "startLine": 31,
+        "startChar": 37,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bfdef8_3099938c",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-05T21:35:50Z",
+      "side": 1,
+      "message": "Probably not, there are very few differences between the versions. I was just proposing having something valid here instead of something invalid. But not a big deal either way.",
+      "parentUuid": "c164405b_dfd93e7b",
       "range": {
         "startLine": 31,
         "startChar": 37,
@@ -678,6 +720,24 @@
       "side": 1,
       "message": "Seems there is no difference among the three? I think I had set it as \u0027userdebug\u0027, but met errors in some lunch targets, so just removed it.\n\nWhat is the default value if we do not set this var?",
       "parentUuid": "01a3e599_974e4b80",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a60c9a_49dc1d82",
+        "filename": "tools/mk2bp_partition.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-05T21:35:50Z",
+      "side": 1,
+      "message": "It defaults to \"eng\" if not set. Technically this doesn\u0027t really matter, I\u0027m not even really sure what it changes. But I think most developers use userdebug so I default to that.",
+      "parentUuid": "31d046d8_a238dceb",
       "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
