@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ce4ef9f_0fa134a2",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-05T19:19:24Z",
+      "side": 1,
+      "message": "I think this change would request changes in other places, such as https://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d650,%20662. Maybe we can do this in a separate CL if this is really needed?",
+      "parentUuid": "144395b9_2e3cebcd",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51f2d606_46b47919",
         "filename": "tools/mk2bp_catalog.py",
         "patchSetId": 2
