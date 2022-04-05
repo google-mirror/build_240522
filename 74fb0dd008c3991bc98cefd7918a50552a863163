@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e125aba_6b5edc0e",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-05T23:48:18Z",
+      "side": 1,
+      "message": "From offline discussion, 1. add a `--product_packages` option, which will pass the `$(PRODUCT_PACKAGES)` values, so the `get_build_var PRODUCT_PACKAGES` and `get_top()` function are not needed; 2. if the `--product_packages` option is not set, no filtering will be done.",
+      "parentUuid": "881c128c_f04df580",
+      "revId": "74fb0dd008c3991bc98cefd7918a50552a863163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51f2d606_46b47919",
         "filename": "tools/mk2bp_catalog.py",
         "patchSetId": 2
