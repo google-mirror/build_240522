@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1afb71a_66958911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-04-05T18:45:03Z",
+      "side": 1,
+      "message": "self-review",
+      "revId": "416a53f3ad1f28e1f3ff728b3fa3bbb9cdc7dfcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0ff18e_b444b2e3",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-04-05T18:45:03Z",
+      "side": 1,
+      "message": "the mapping stuff got reverted.",
+      "revId": "416a53f3ad1f28e1f3ff728b3fa3bbb9cdc7dfcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
