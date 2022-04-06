@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466f779a_d1a9485e",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T00:23:13Z",
+      "side": 1,
+      "message": "Nit: use \"--product-packages\", to be more consistent with most command line tools. (Argparse will still make the variable name `args.product_packages` with an underscore)",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da3f145_d7bcc4c3",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T00:23:13Z",
+      "side": 1,
+      "message": "Just replace this with `if args.product_packages`. Since you set it its default to None, `len(None)` would crash.",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6912676e_e48355c5",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T00:23:13Z",
+      "side": 1,
+      "message": "Move this before the if. Or else product_package_modules_plus_deps will be undefined when not using --product-packages, and the script will crash.",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
