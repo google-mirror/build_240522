@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< TARGET BRANCH (44cae5 Merge "Merge branch android12L-platform-release" into androi)
 BUILD_ID=SPM2.220224.003
+=======
+BUILD_ID=SPM2.220315.001
+>>>>>>> SOURCE BRANCH (64884d Make change and version bump to SPM2.220315.001)
