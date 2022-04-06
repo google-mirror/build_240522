@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "721e81c8_c003c00d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-06T16:45:56Z",
+      "side": 1,
+      "message": "erofs? EROFS? I\u0027ve never seen this word written like EroFS?",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "83d7a0631810f8c4beed78bef244c0ada3e07977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb0cb47_c05d1bcd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-06T16:45:56Z",
+      "side": 1,
+      "message": "erofs",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "83d7a0631810f8c4beed78bef244c0ada3e07977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
