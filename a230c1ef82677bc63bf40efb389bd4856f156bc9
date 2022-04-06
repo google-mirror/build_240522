@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3249ed42_e97b9d33",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T01:04:39Z",
+      "side": 1,
+      "message": "Oh good point.",
+      "parentUuid": "c1c563eb_9631f714",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1da3f145_d7bcc4c3",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Right, thanks for the good catch.",
       "parentUuid": "6912676e_e48355c5",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3c55f4_6871c8bd",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T01:04:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a1a7d82c_249304d3",
       "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

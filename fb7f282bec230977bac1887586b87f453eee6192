@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2629234_8ceb5159",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-06T01:04:39Z",
+      "side": 1,
+      "message": "nit: update this too",
+      "revId": "fb7f282bec230977bac1887586b87f453eee6192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
