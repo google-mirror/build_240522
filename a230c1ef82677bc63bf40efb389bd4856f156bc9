@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1c563eb_9631f714",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-06T00:55:20Z",
+      "side": 1,
+      "message": "Okay. There is another existing option with name as `out_dir`, so update it as well",
+      "parentUuid": "466f779a_d1a9485e",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1da3f145_d7bcc4c3",
         "filename": "tools/mk2bp_catalog.py",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-06T00:23:13Z",
       "side": 1,
       "message": "Just replace this with `if args.product_packages`. Since you set it its default to None, `len(None)` would crash.",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd1babd_2aee2bff",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-06T00:55:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1da3f145_d7bcc4c3",
       "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2022-04-06T00:23:13Z",
       "side": 1,
       "message": "Move this before the if. Or else product_package_modules_plus_deps will be undefined when not using --product-packages, and the script will crash.",
+      "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a7d82c_249304d3",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-06T00:55:20Z",
+      "side": 1,
+      "message": "Right, thanks for the good catch.",
+      "parentUuid": "6912676e_e48355c5",
       "revId": "a230c1ef82677bc63bf40efb389bd4856f156bc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
