@@ -16,6 +16,24 @@
       "message": "nit: update this too",
       "revId": "fb7f282bec230977bac1887586b87f453eee6192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce4be56_d3e640f0",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2022-04-06T01:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2629234_8ceb5159",
+      "revId": "fb7f282bec230977bac1887586b87f453eee6192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
