@@ -148,6 +148,7 @@ $(call add_json_list, ModulesLoadedByPrivilegedModules,  $(PRODUCT_LOADED_BY_PRI
 $(call add_json_list, BootJars,                          $(PRODUCT_BOOT_JARS))
 $(call add_json_list, ApexBootJars,                      $(PRODUCT_APEX_BOOT_JARS))
 
+$(call add_json_list, SelectedImages,                    $(TARGET_SELECT_IMAGE_VARIANTS))
 $(call add_json_bool, VndkUseCoreVariant,                $(TARGET_VNDK_USE_CORE_VARIANT))
 $(call add_json_bool, VndkSnapshotBuildArtifacts,        $(VNDK_SNAPSHOT_BUILD_ARTIFACTS))
 
