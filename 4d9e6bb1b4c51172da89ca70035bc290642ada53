@@ -16,6 +16,23 @@
       "message": "PTAL when you have time, thanks!",
       "revId": "4d9e6bb1b4c51172da89ca70035bc290642ada53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75acb5b5_6bb2e598",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-07T17:25:13Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "4d9e6bb1b4c51172da89ca70035bc290642ada53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
