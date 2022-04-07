@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34637e50_003fef89",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-04-07T01:38:48Z",
+      "side": 1,
+      "message": "Can\ncat FILE | grep -he \"...\"\nbe written as\ngrep -he \"...\" FILE",
+      "revId": "21f3cb2948876f909558deb7fb614d496543bb3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
