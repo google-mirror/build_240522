@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (d8cf9a Merge "Revert "Revert "Produce mappings of hashes to elf sym)
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SP2A.220405.004
+>>>>>>> BRANCH (e205ba Version bump to SP2A.220405.004 [core/build_id.mk])
