@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da5c73f_17259d01",
+        "filename": "orchestrator/core/lunch_helper.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-04-08T19:30:08Z",
+      "side": 1,
+      "message": "here and elsewhere, this could be os.path.join(), without the \u0027.sep\u0027.",
+      "range": {
+        "startLine": 36,
+        "startChar": 38,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "944358e81780b8612f3caaad9ce6b54e2de6fa39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
