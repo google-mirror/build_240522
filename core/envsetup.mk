@@ -334,12 +334,12 @@ $(eval _dump_variables_rbc_excluded := \
   USER \
   SOONG_% \
   PRODUCT_COPY_OUT_%)\
-$(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(filter-out $(_dump_variables_rbc_excluded),$(.VARIABLES))))
+$(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(sort $(filter-out $(_dump_variables_rbc_excluded),$(.VARIABLES)))))
 $(file >$(1),\
 $(foreach v, $(shell grep -he "^[A-Z][A-Z0-9_]*$$" $(OUT_DIR)/dump-variables-rbc-temp.txt),\
 $(v) := $(strip $($(v)))$(newline))\
-$(foreach ns,$(SOONG_CONFIG_NAMESPACES),\
-$(foreach v,$(SOONG_CONFIG_$(ns)),\
+$(foreach ns,$(sort $(SOONG_CONFIG_NAMESPACES)),\
+$(foreach v,$(sort $(SOONG_CONFIG_$(ns))),\
 $$(call soong_config_set,$(ns),$(v),$(SOONG_CONFIG_$(ns)_$(v)))$(newline))))
 endef
 
