@@ -87,9 +87,7 @@ my_unstripped_path := $(LOCAL_UNSTRIPPED_PATH)
 endif
 symbolic_input := $(relocation_packer_output)
 symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
-$(symbolic_output) : $(symbolic_input)
-	@echo "target Symbolic: $(PRIVATE_MODULE) ($@)"
-	$(copy-file-to-target)
+$(eval $(call copy-unstripped-elf-file-with-mapping,$(symbolic_input),$(symbolic_output)))
 
 ###########################################################
 ## Store breakpad symbols

@@ -542,6 +542,24 @@ ALLOW_MISSING_DEPENDENCIES := true
 endif
 .KATI_READONLY := ALLOW_MISSING_DEPENDENCIES
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+TARGET_BUILD_USE_PREBUILT_SDKS :=
+DISABLE_PREOPT :=
+ifneq (,$(TARGET_BUILD_APPS)$(TARGET_BUILD_UNBUNDLED_IMAGE))
+  DISABLE_PREOPT := true
+endif
+ifeq (true,$(TARGET_BUILD_UNBUNDLED))
+  ifneq (true,$(UNBUNDLED_BUILD_SDKS_FROM_SOURCE))
+    TARGET_BUILD_USE_PREBUILT_SDKS := true
+  endif
+endif
+
+.KATI_READONLY := \
+  TARGET_BUILD_USE_PREBUILT_SDKS \
+  DISABLE_PREOPT \
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 prebuilt_sdk_tools := prebuilts/sdk/tools
 prebuilt_sdk_tools_bin := $(prebuilt_sdk_tools)/$(HOST_OS)/bin
 
@@ -680,7 +698,21 @@ TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
 JARJAR := $(HOST_OUT_JAVA_LIBRARIES)/jarjar.jar
 DATA_BINDING_COMPILER := $(HOST_OUT_JAVA_LIBRARIES)/databinding-compiler.jar
 FAT16COPY := build/make/tools/fat16copy.py
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 CHECK_LINK_TYPE := build/make/tools/check_link_type.py
+=======
+CHECK_ELF_FILE := build/make/tools/check_elf_file.py
+LPMAKE := $(HOST_OUT_EXECUTABLES)/lpmake$(HOST_EXECUTABLE_SUFFIX)
+ADD_IMG_TO_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/add_img_to_target_files$(HOST_EXECUTABLE_SUFFIX)
+BUILD_IMAGE := $(HOST_OUT_EXECUTABLES)/build_image$(HOST_EXECUTABLE_SUFFIX)
+BUILD_SUPER_IMAGE := $(HOST_OUT_EXECUTABLES)/build_super_image$(HOST_EXECUTABLE_SUFFIX)
+IMG_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/img_from_target_files$(HOST_EXECUTABLE_SUFFIX)
+MAKE_RECOVERY_PATCH := $(HOST_OUT_EXECUTABLES)/make_recovery_patch$(HOST_EXECUTABLE_SUFFIX)
+OTA_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/ota_from_target_files$(HOST_EXECUTABLE_SUFFIX)
+SPARSE_IMG := $(HOST_OUT_EXECUTABLES)/sparse_img$(HOST_EXECUTABLE_SUFFIX)
+CHECK_PARTITION_SIZES := $(HOST_OUT_EXECUTABLES)/check_partition_sizes$(HOST_EXECUTABLE_SUFFIX)
+SYMBOLS_MAP := $(HOST_OUT_EXECUTABLES)/symbols_map
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 PROGUARD := external/proguard/bin/proguard.sh
 JAVATAGS := build/make/tools/java-event-log-tags.py

@@ -892,6 +892,7 @@ $(if $(_erm_new_modules),$(eval $(1) += $(_erm_new_modules))\
   $(call expand-required-modules,$(1),$(_erm_new_modules)))
 endef
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 ifdef FULL_BUILD
   # The base list of modules to build for this product is specified
   # by the appropriate product definition file, which was included
@@ -906,6 +907,66 @@ endif
   # Filter out executables as well
   product_MODULES := $(filter-out $(foreach m, $(product_MODULES), \
       $(EXECUTABLES.$(m).OVERRIDES)), $(product_MODULES))
+=======
+# Same as expand-required-modules above, but does not handle module overrides, as
+# we don't intend to support them on the host.
+# $(1): The variable name that holds the initial module name list.
+#       the variable will be modified to hold the expanded results.
+# $(2): The initial module name list.
+# $(3): HOST or HOST_CROSS depending on whether we're expanding host or host cross modules
+# Returns empty string (maybe with some whitespaces).
+define expand-required-host-modules
+$(eval _erm_req := $(foreach m,$(2),$(ALL_MODULES.$(m).REQUIRED_FROM_$(3)))) \
+$(eval _erm_new_modules := $(sort $(filter-out $($(1)),$(_erm_req)))) \
+$(eval $(1) += $(_erm_new_modules)) \
+$(if $(_erm_new_modules),\
+  $(call expand-required-host-modules,$(1),$(_erm_new_modules),$(3)))
+endef
+
+# Transforms paths relative to PRODUCT_OUT to absolute paths.
+# $(1): list of relative paths
+# $(2): optional suffix to append to paths
+define resolve-product-relative-paths
+  $(subst $(_vendor_path_placeholder),$(TARGET_COPY_OUT_VENDOR),\
+    $(subst $(_product_path_placeholder),$(TARGET_COPY_OUT_PRODUCT),\
+      $(subst $(_system_ext_path_placeholder),$(TARGET_COPY_OUT_SYSTEM_EXT),\
+        $(subst $(_odm_path_placeholder),$(TARGET_COPY_OUT_ODM),\
+          $(subst $(_vendor_dlkm_path_placeholder),$(TARGET_COPY_OUT_VENDOR_DLKM),\
+            $(subst $(_odm_dlkm_path_placeholder),$(TARGET_COPY_OUT_ODM_DLKM),\
+              $(subst $(_system_dlkm_path_placeholder),$(TARGET_COPY_OUT_SYSTEM_DLKM),\
+                $(foreach p,$(1),$(call append-path,$(PRODUCT_OUT),$(p)$(2))))))))))
+endef
+
+# Returns modules included automatically as a result of certain BoardConfig
+# variables being set.
+define auto-included-modules
+  $(if $(BOARD_VNDK_VERSION),vndk_package) \
+  $(if $(DEVICE_MANIFEST_FILE),vendor_manifest.xml) \
+  $(if $(DEVICE_MANIFEST_SKUS),$(foreach sku, $(DEVICE_MANIFEST_SKUS),vendor_manifest_$(sku).xml)) \
+  $(if $(ODM_MANIFEST_FILES),odm_manifest.xml) \
+  $(if $(ODM_MANIFEST_SKUS),$(foreach sku, $(ODM_MANIFEST_SKUS),odm_manifest_$(sku).xml)) \
+
+endef
+
+# Lists most of the files a particular product installs, including:
+# - PRODUCT_PACKAGES, and their LOCAL_REQUIRED_MODULES
+# - PRODUCT_COPY_FILES
+# The base list of modules to build for this product is specified
+# by the appropriate product definition file, which was included
+# by product_config.mk.
+# Name resolution for PRODUCT_PACKAGES:
+#   foo:32 resolves to foo_32;
+#   foo:64 resolves to foo;
+#   foo resolves to both foo and foo_32 (if foo_32 is defined).
+#
+# Name resolution for LOCAL_REQUIRED_MODULES:
+#   See the select-bitness-of-required-modules definition.
+# $(1): product makefile
+
+define _product-var
+  $(call get-product-var,$(1),$(2))
+endef
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
   # Resolve the :32 :64 module name
   modules_32 := $(patsubst %:32,%,$(filter %:32, $(product_MODULES)))
@@ -921,11 +982,92 @@ endif
 
   $(call expand-required-modules,product_MODULES,$(product_MODULES))
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
   product_FILES := $(call module-installed-files, $(product_MODULES))
   ifeq (0,1)
     $(info product_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
     $(foreach p,$(product_FILES),$(info :   $(p)))
     $(error done)
+=======
+# Fails the build if the given list is non-empty, and prints it entries (stripping PRODUCT_OUT).
+# $(1): list of files to print
+# $(2): heading to print on failure
+define maybe-print-list-and-error
+$(if $(strip $(1)), \
+  $(warning $(2)) \
+  $(info Offending entries:) \
+  $(foreach e,$(sort $(1)),$(info    $(patsubst $(PRODUCT_OUT)/%,%,$(e)))) \
+  $(error Build failed) \
+)
+endef
+
+ifeq ($(HOST_OS),darwin)
+  # Target builds are not supported on Mac
+  product_target_FILES :=
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+else ifdef FULL_BUILD
+  ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
+    # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
+    ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
+      _allow_list := $(PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST)
+      _modules := $(PRODUCT_PACKAGES)
+      # Strip :32 and :64 suffixes
+      _modules := $(patsubst %:32,%,$(_modules))
+      _modules := $(patsubst %:64,%,$(_modules))
+      # Quickly check all modules in PRODUCT_PACKAGES exist. We check for the
+      # existence if either <module> or the <module>_32 variant.
+      _nonexistent_modules := $(foreach m,$(_modules), \
+        $(if $(or $(ALL_MODULES.$(m).PATH),$(call get-modules-for-2nd-arch,TARGET,$(m))),,$(m)))
+      $(call maybe-print-list-and-error,$(filter-out $(_allow_list),$(_nonexistent_modules)),\
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
+      # TODO(b/182105280): Consider re-enabling this check when the ART modules
+      # have been cleaned up from the allowed_list in target/product/generic.mk.
+      #$(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_allow_list)),\
+      #  $(INTERNAL_PRODUCT) includes redundant allow list entries for non-existent PRODUCT_PACKAGES)
+    endif
+
+    # Check to ensure that all modules in PRODUCT_HOST_PACKAGES exist
+    #
+    # Many host modules are Linux-only, so skip this check on Mac. If we ever have Mac-only modules,
+    # maybe it would make sense to have PRODUCT_HOST_PACKAGES_LINUX/_DARWIN?
+    ifneq ($(HOST_OS),darwin)
+      _modules := $(PRODUCT_HOST_PACKAGES)
+      # Strip :32 and :64 suffixes
+      _modules := $(patsubst %:32,%,$(_modules))
+      _modules := $(patsubst %:64,%,$(_modules))
+      _nonexistent_modules := $(foreach m,$(_modules),\
+        $(if $(ALL_MODULES.$(m).REQUIRED_FROM_HOST)$(filter $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,$(m)))
+      $(call maybe-print-list-and-error,$(_nonexistent_modules),\
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_HOST_PACKAGES)
+    endif
+  endif
+
+  # Modules may produce only host installed files in unbundled builds.
+  ifeq (,$(TARGET_BUILD_UNBUNDLED))
+    _modules := $(call resolve-bitness-for-modules,TARGET, \
+      $(PRODUCT_PACKAGES) \
+      $(PRODUCT_PACKAGES_DEBUG) \
+      $(PRODUCT_PACKAGES_DEBUG_ASAN) \
+      $(PRODUCT_PACKAGES_ENG) \
+      $(PRODUCT_PACKAGES_TESTS))
+    _host_modules := $(foreach m,$(_modules), \
+                  $(if $(ALL_MODULES.$(m).INSTALLED),\
+                    $(if $(filter-out $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,\
+                      $(m))))
+    $(call maybe-print-list-and-error,$(sort $(_host_modules)),\
+      Host modules should be in PRODUCT_HOST_PACKAGES$(comma) not PRODUCT_PACKAGES)
+  endif
+
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  # WARNING: The product_MODULES variable is depended on by external files.
+  product_MODULES := $(_pif_modules)
+
+  # Verify the artifact path requirements made by included products.
+  is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
+  ifeq (,$(or $(is_asan),$(DISABLE_ARTIFACT_PATH_REQUIREMENTS)))
+    include $(BUILD_SYSTEM)/artifact_path_requirements.mk
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
   endif
 else
   # We're not doing a full build, and are probably only including
@@ -1154,10 +1296,10 @@ ifneq ($(TARGET_BUILD_APPS),)
   endif
 
   $(PROGUARD_DICT_ZIP) : $(apps_only_installed_files)
-  $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP))
+  $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP) $(PROGUARD_DICT_MAPPING))
 
   $(SYMBOLS_ZIP) : $(apps_only_installed_files)
-  $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP))
+  $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP) $(SYMBOLS_MAPPING))
 
   $(COVERAGE_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(COVERAGE_ZIP))
@@ -1182,6 +1324,13 @@ else # TARGET_BUILD_APPS
     $(INTERNAL_OTA_PACKAGE_TARGET) \
     $(BUILT_OTATOOLS_PACKAGE) \
     $(SYMBOLS_ZIP) \
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+    $(SYMBOLS_MAPPING) \
+    $(PROGUARD_DICT_ZIP) \
+    $(PROGUARD_DICT_MAPPING) \
+    $(PROGUARD_USAGE_ZIP) \
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
     $(COVERAGE_ZIP) \
     $(INSTALLED_FILES_FILE) \
     $(INSTALLED_FILES_FILE_VENDOR) \
@@ -1226,6 +1375,7 @@ sdk: $(ALL_SDK_TARGETS)
 $(call dist-for-goals,sdk win_sdk, \
     $(ALL_SDK_TARGETS) \
     $(SYMBOLS_ZIP) \
+    $(SYMBOLS_MAPPING) \
     $(COVERAGE_ZIP) \
     $(INSTALLED_BUILD_PROP_TARGET) \
 )

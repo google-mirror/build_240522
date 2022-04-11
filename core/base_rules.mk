@@ -528,6 +528,10 @@ ifeq ($(LOCAL_MODULE_CLASS),NATIVE_BENCHMARK)
 endif
 ifdef LOCAL_MULTILIB
   multi_arch := true
+else ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+    multi_arch := true
+  endif
 endif
 ifdef multi_arch
   arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)

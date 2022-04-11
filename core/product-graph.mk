@@ -16,11 +16,16 @@
 
 # the foreach and the if remove the single space entries that creep in because of the evals
 define gather-all-products
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 $(sort $(foreach p, \
 	$(eval _all_products_visited := )
   $(call all-products-inner, $(ALL_PRODUCTS)) \
 	, $(if $(strip $(p)),$(strip $(p)),)) \
 )
+=======
+$(eval _all_products_visited := )\
+$(sort $(call all-products-inner, $(PRODUCTS)))
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 endef
 
 define all-products-inner
@@ -78,13 +83,17 @@ $(products_graph): $(this_makefile)
 	$(foreach p,$(PRIVATE_PRODUCTS),$(call emit-product-node-props,$(p),$@.in))
 	$(hide) echo '}' >> $@.in
 	$(hide) build/make/tools/filter-product-graph.py $(PRIVATE_PRODUCTS_FILTER) < $@.in > $@
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 
 # Evaluates to the name of the product file
 # $(1) product file
 define product-debug-filename
 $(OUT_DIR)/products/$(strip $(1)).html
 endef
+=======
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 # Makes a rule for the product debug info
 # $(1) product file
 define transform-product-debug
@@ -144,3 +153,10 @@ $(products_svg): $(products_graph) $(product_debug_files)
 	dot -Tsvg -Nshape=box -o $@ $<
 
 product-graph: $(products_pdf) $(products_svg)
+=======
+.PHONY: product-graph
+product-graph: $(products_graph)
+	@echo Product graph .dot file: $(products_graph)
+	@echo Command to convert to pdf: dot -Tpdf -Nshape=box -o $(OUT_DIR)/products.pdf $(products_graph)
+	@echo Command to convert to svg: dot -Tsvg -Nshape=box -o $(OUT_DIR)/products.svg $(products_graph)
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])

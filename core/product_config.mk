@@ -237,10 +237,51 @@ ifneq (1,$(words $(current_product_makefile)))
 $(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
 endif
 $(call import-products, $(current_product_makefile))
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+else
+  $(shell mkdir -p $(OUT_DIR)/rbc)
+  $(call dump-variables-rbc, $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
+
+  $(shell build/soong/scripts/update_out \
+    $(OUT_DIR)/rbc/rbc_product_config_results.mk \
+    build/soong/scripts/rbc-run \
+    $(current_product_makefile) \
+    $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
+  ifneq ($(.SHELLSTATUS),0)
+    $(error product configuration converter failed: $(.SHELLSTATUS))
+  endif
+  include $(OUT_DIR)/rbc/rbc_product_config_results.mk
+endif
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 endif  # Import all or just the current product makefile
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 # Sanity check
+=======
+# Quick check
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 $(check-all-products)
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+
+# This step was already handled in the RBC product configuration.
+# Since the equivalent starlark code will not add the partial products to
+# the PRODUCTS variable, it's ok for them to be set before check-all-products
+ifeq ($(RBC_PRODUCT_CONFIG)$(SKIP_ARTIFACT_PATH_REQUIREMENT_PRODUCTS_CHECK),)
+# Import all the products that have made artifact path requirements, so that we can verify
+# the artifacts they produce.
+# These are imported after check-all-products because some of them might not be real products.
+$(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
+  $(if $(filter-out $(makefile),$(PRODUCTS)),$(eval $(call import-products,$(makefile))))\
+)
+endif
+
+ifneq ($(ALLOW_RULES_IN_PRODUCT_CONFIG),)
+.KATI_ALLOW_RULES := $(_saved_KATI_ALLOW_RULES)
+_product_config_saved_KATI_ALLOW_RULES :=
+endif
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 ifneq ($(filter dump-products, $(MAKECMDGOALS)),)
 $(dump-products)
@@ -254,6 +295,15 @@ INTERNAL_PRODUCT := $(call resolve-short-product-name, $(TARGET_PRODUCT))
 ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
 $(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
 endif
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+
+
+############################################################################
+# Strip and assign the PRODUCT_ variables.
+$(call strip-product-vars)
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=

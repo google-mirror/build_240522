@@ -573,7 +573,43 @@ SOONG_TO_CONVERT := $(PRODUCT_OUT)/soong_to_convert.txt
 $(SOONG_TO_CONVERT): $(SOONG_CONV_DATA) $(SOONG_TO_CONVERT_SCRIPT)
 	@rm -f $@
 	$(hide) $(SOONG_TO_CONVERT_SCRIPT) $< >$@
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 $(call dist-for-goals,droidcore,$(SOONG_TO_CONVERT))
+=======
+$(call dist-for-goals,droidcore-unbundled,$(SOONG_TO_CONVERT))
+
+$(PRODUCT_OUT)/product_packages.txt:
+	@rm -f $@
+	echo "" > $@
+	$(foreach x,$(PRODUCT_PACKAGES),echo $(x) >> $@$(newline))
+
+MK2BP_CATALOG_SCRIPT := build/make/tools/mk2bp_catalog.py
+PRODUCT_PACKAGES_TXT := $(PRODUCT_OUT)/product_packages.txt
+MK2BP_REMAINING_HTML := $(PRODUCT_OUT)/mk2bp_remaining.html
+$(MK2BP_REMAINING_HTML): PRIVATE_CODE_SEARCH_BASE_URL := "https://cs.android.com/android/platform/superproject/+/master:"
+$(MK2BP_REMAINING_HTML): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(PRODUCT_PACKAGES_TXT)
+	@rm -f $@
+	$(hide) $(MK2BP_CATALOG_SCRIPT) \
+		--device=$(TARGET_DEVICE) \
+		--product-packages=$(PRODUCT_PACKAGES_TXT) \
+		--title="Remaining Android.mk files for $(TARGET_DEVICE)-$(TARGET_BUILD_VARIANT)" \
+		--codesearch=$(PRIVATE_CODE_SEARCH_BASE_URL) \
+		--out-dir="$(OUT_DIR)" \
+		--mode=html \
+		> $@
+$(call dist-for-goals,droidcore-unbundled,$(MK2BP_REMAINING_HTML))
+
+MK2BP_REMAINING_CSV := $(PRODUCT_OUT)/mk2bp_remaining.csv
+$(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(PRODUCT_PACKAGES_TXT)
+	@rm -f $@
+	$(hide) $(MK2BP_CATALOG_SCRIPT) \
+		--device=$(TARGET_DEVICE) \
+		--product-packages=$(PRODUCT_PACKAGES_TXT) \
+		--out-dir="$(OUT_DIR)" \
+		--mode=csv \
+		> $@
+$(call dist-for-goals,droidcore-unbundled,$(MK2BP_REMAINING_CSV))
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 # -----------------------------------------------------------------
 # Modules use -Wno-error, or added default -Wall -Werror
@@ -655,6 +691,16 @@ event-log-tags: $(event_log_tags_file)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(event_log_tags_file)
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+# Initialize INSTALLED_FILES_OUTSIDE_IMAGES with the list of all device files,
+# files installed in images will be filtered out later.
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out \
+  $(PRODUCT_OUT)/apex/% \
+  $(PRODUCT_OUT)/fake_packages/% \
+  $(PRODUCT_OUT)/testcases/%, \
+  $(filter $(PRODUCT_OUT)/%,$(ALL_DEFAULT_INSTALLED_MODULES)))
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 # #################################################################
 # Targets for boot/OS images
@@ -834,6 +880,185 @@ INSTALLED_BOOTIMAGE_TARGET := $(INSTALLED_RAMDISK_TARGET)
 endif
 endif
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+$(INTERNAL_VENDOR_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_RAMDISK_FILES) | $(COMPRESSION_COMMAND_DEPS)
+	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_VENDOR_RAMDISK_OUT) $(PRIVATE_ADDITIONAL_DIR) | $(COMPRESSION_COMMAND) > $@
+
+INSTALLED_VENDOR_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor_ramdisk.img
+$(INSTALLED_VENDOR_RAMDISK_TARGET): $(INTERNAL_VENDOR_RAMDISK_TARGET)
+	@echo "Target vendor ramdisk: $@"
+	$(copy-file-to-target)
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_RAMDISK_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_RAMDISK_TARGET),$(INTERNAL_VENDOR_RAMDISK_TARGET),$(PRODUCT_OUT)/:/)
+
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_RAMDISK_TARGET)
+
+INSTALLED_FILES_FILE_VENDOR_RAMDISK := $(PRODUCT_OUT)/installed-files-vendor-ramdisk.txt
+INSTALLED_FILES_JSON_VENDOR_RAMDISK := $(INSTALLED_FILES_FILE_VENDOR_RAMDISK:.txt=.json)
+$(INSTALLED_FILES_FILE_VENDOR_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_RAMDISK)
+$(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_TARGET)
+$(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_RAMDISK)))
+
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+  ifneq ($(BUILDING_VENDOR_KERNEL_BOOT_IMAGE),true)
+    # If we have vendor_kernel_boot partition, we migrate dtb image to that image
+    # and allow dtb in vendor_boot to be empty.
+    INTERNAL_VENDOR_BOOTIMAGE_ARGS += --dtb $(INSTALLED_DTBIMAGE_TARGET)
+  endif
+endif
+ifdef BOARD_KERNEL_BASE
+  INTERNAL_VENDOR_BOOTIMAGE_ARGS += --base $(BOARD_KERNEL_BASE)
+endif
+ifdef BOARD_KERNEL_PAGESIZE
+  INTERNAL_VENDOR_BOOTIMAGE_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+endif
+ifdef INTERNAL_KERNEL_CMDLINE
+  INTERNAL_VENDOR_BOOTIMAGE_ARGS += --vendor_cmdline "$(INTERNAL_KERNEL_CMDLINE)"
+endif
+
+ifdef INTERNAL_BOOTCONFIG
+  INTERNAL_VENDOR_BOOTCONFIG_TARGET := $(PRODUCT_OUT)/vendor-bootconfig.img
+  $(INTERNAL_VENDOR_BOOTCONFIG_TARGET):
+	rm -f $@
+	$(foreach param,$(INTERNAL_BOOTCONFIG), \
+	 printf "%s\n" $(param) >> $@;)
+  INTERNAL_VENDOR_BOOTIMAGE_ARGS += --vendor_bootconfig $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
+endif
+
+# $(1): Build target name
+# $(2): Staging dir to be compressed
+# $(3): Build dependencies
+define build-vendor-ramdisk-fragment-target
+$(1): $(3) $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
+	$(MKBOOTFS) -d $(TARGET_OUT) $(2) | $(COMPRESSION_COMMAND) > $$@
+endef
+
+# $(1): Ramdisk name
+define build-vendor-ramdisk-fragment
+$(strip \
+  $(eval build_target := $(call intermediates-dir-for,PACKAGING,vendor_ramdisk_fragments)/$(1).cpio$(RAMDISK_EXT)) \
+  $(eval $(call build-vendor-ramdisk-fragment-target,$(build_target),$(VENDOR_RAMDISK_FRAGMENT.$(1).STAGING_DIR),$(VENDOR_RAMDISK_FRAGMENT.$(1).FILES))) \
+  $(build_target) \
+)
+endef
+
+# $(1): Ramdisk name
+# $(2): Prebuilt file path
+define build-prebuilt-vendor-ramdisk-fragment
+$(strip \
+  $(eval build_target := $(call intermediates-dir-for,PACKAGING,prebuilt_vendor_ramdisk_fragments)/$(1)) \
+  $(eval $(call copy-one-file,$(2),$(build_target))) \
+  $(build_target) \
+)
+endef
+
+INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS :=
+INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS :=
+
+$(foreach vendor_ramdisk_fragment,$(INTERNAL_VENDOR_RAMDISK_FRAGMENTS), \
+  $(eval prebuilt_vendor_ramdisk_fragment_file := $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)) \
+  $(if $(prebuilt_vendor_ramdisk_fragment_file), \
+    $(eval vendor_ramdisk_fragment_target := $(call build-prebuilt-vendor-ramdisk-fragment,$(vendor_ramdisk_fragment),$(prebuilt_vendor_ramdisk_fragment_file))) \
+    $(eval ### else ###), \
+    $(eval vendor_ramdisk_fragment_target := $(call build-vendor-ramdisk-fragment,$(vendor_ramdisk_fragment)))) \
+  $(eval INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS += $(vendor_ramdisk_fragment_target)) \
+  $(eval INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS += $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS) --vendor_ramdisk_fragment $(vendor_ramdisk_fragment_target)) \
+)
+
+INSTALLED_VENDOR_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_boot.img
+$(INSTALLED_VENDOR_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DTBIMAGE_TARGET)
+$(INSTALLED_VENDOR_BOOTIMAGE_TARGET): $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS) $(INTERNAL_VENDOR_BOOTCONFIG_TARGET)
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(INSTALLED_VENDOR_BOOTIMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_VENDOR_BOOTIMAGE_KEY_PATH)
+	$(call pretty,"Target vendor_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS) --vendor_boot $@
+	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
+	$(AVBTOOL) add_hash_footer \
+           --image $@ \
+	   $(call get-partition-size-argument,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)) \
+	   --partition_name vendor_boot $(INTERNAL_AVB_VENDOR_BOOT_SIGNING_ARGS) \
+	   $(BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS)
+else
+$(INSTALLED_VENDOR_BOOTIMAGE_TARGET):
+	$(call pretty,"Target vendor_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_VENDOR_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_ramdisk $(INTERNAL_VENDOR_RAMDISK_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_ARGS) --vendor_boot $@
+	$(call assert-max-image-size,$@,$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE))
+endif
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_BOOTIMAGE_TARGET),$(INTERNAL_VENDOR_RAMDISK_TARGET) $(INSTALLED_DTB_IMAGE_TARGET) $(INTERNAL_VENDOR_RAMDISK_FRAGMENT_TARGETS) $(INTERNAL_VENDOR_BOOTCONDIG_TARGET),$(PRODUCT_OUT)/:/)
+VENDOR_NOTICE_DEPS += $(INSTALLED_VENDOR_BOOTIMAGE_TARGET)
+endif # BUILDING_VENDOR_BOOT_IMAGE
+
+# -----------------------------------------------------------------
+# vendor kernel boot image
+ifeq ($(BUILDING_VENDOR_KERNEL_BOOT_IMAGE),true)
+
+INTERNAL_VENDOR_KERNEL_RAMDISK_FILES := $(filter $(TARGET_VENDOR_KERNEL_RAMDISK_OUT)/%, \
+    $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_kernel_boot)/vendor_kernel_ramdisk.cpio$(RAMDISK_EXT)
+
+$(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_VENDOR_KERNEL_RAMDISK_FILES) | $(COMPRESSION_COMMAND_DEPS)
+	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_VENDOR_KERNEL_RAMDISK_OUT) | $(COMPRESSION_COMMAND) > $@
+
+INSTALLED_VENDOR_KERNEL_RAMDISK_TARGET := $(PRODUCT_OUT)/vendor_kernel_ramdisk.img
+$(INSTALLED_VENDOR_KERNEL_RAMDISK_TARGET): $(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET)
+	@echo "Target vendor kernel ramdisk: $@"
+	$(copy-file-to-target)
+
+INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK := $(PRODUCT_OUT)/installed-files-vendor-kernel-ramdisk.txt
+INSTALLED_FILES_JSON_VENDOR_KERNEL_RAMDISK := $(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK:.txt=.json)
+$(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_KERNEL_RAMDISK)
+$(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK): $(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET)
+$(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK): $(INTERNAL_VENDOR_KERNEL_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_VENDOR_KERNEL_RAMDISK_OUT) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS := --vendor_ramdisk $(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET)
+INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_kernel_boot.img
+$(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET)
+
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+  INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS += --dtb $(INSTALLED_DTBIMAGE_TARGET)
+  $(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET): $(INSTALLED_DTBIMAGE_TARGET)
+endif
+ifdef BOARD_KERNEL_PAGESIZE
+  INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+endif
+
+
+ifeq ($(BOARD_AVB_ENABLE),true)
+$(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET): $(AVBTOOL) $(BOARD_AVB_VENDOR_KERNEL_BOOTIMAGE_KEY_PATH)
+	$(call pretty,"Target vendor_kernel_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_boot $@
+	$(call assert-max-image-size,$@,$(BOARD_VENDOR_KERNEL_BOOTIMAGE_PARTITION_SIZE))
+	$(AVBTOOL) add_hash_footer \
+	    --image $@ \
+	   $(call get-partition-size-argument,$(BOARD_VENDOR_KERNEL_BOOTIMAGE_PARTITION_SIZE)) \
+	   --partition_name vendor_kernel_boot $(INTERNAL_AVB_VENDOR_KERNEL_BOOT_SIGNING_ARGS) \
+	   $(BOARD_AVB_VENDOR_KERNEL_BOOT_ADD_HASH_FOOTER_ARGS)
+else
+$(INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET):
+	$(call pretty,"Target vendor_kernel_boot image: $@")
+	$(MKBOOTIMG) $(INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --vendor_boot $@
+	$(call assert-max-image-size,$@,$(BOARD_VENDOR_KERNEL_BOOTIMAGE_PARTITION_SIZE))
+endif
+endif # BUILDING_VENDOR_KERNEL_BOOT_IMAGE
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 # -----------------------------------------------------------------
 # NOTICE files
 #
@@ -2117,8 +2342,191 @@ BOARD_AVB_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
 endif
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 INTERNAL_AVB_SIGNING_ARGS := \
     --algorithm $(BOARD_AVB_ALGORITHM) --key $(BOARD_AVB_KEY_PATH)
+=======
+# AVB signing for system_other.img.
+ifdef BUILDING_SYSTEM_OTHER_IMAGE
+ifdef BOARD_AVB_SYSTEM_OTHER_KEY_PATH
+$(if $(BOARD_AVB_SYSTEM_OTHER_ALGORITHM),,$(error BOARD_AVB_SYSTEM_OTHER_ALGORITHM is not defined))
+else
+# If key path isn't specified, use the same key as BOARD_AVB_KEY_PATH.
+BOARD_AVB_SYSTEM_OTHER_KEY_PATH := $(BOARD_AVB_KEY_PATH)
+BOARD_AVB_SYSTEM_OTHER_ALGORITHM := $(BOARD_AVB_ALGORITHM)
+endif
+
+$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET): $(AVBTOOL) $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH)
+	@echo Extracting system_other avb key: $@
+	@rm -f $@
+	@mkdir -p $(dir $@)
+	$(AVBTOOL) extract_public_key --key $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH) --output $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET),))
+
+ifndef BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX
+BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+endif
+
+BOARD_AVB_SYSTEM_OTHER_ADD_HASHTREE_FOOTER_ARGS += --rollback_index $(BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX)
+endif # end of AVB for BUILDING_SYSTEM_OTHER_IMAGE
+
+INTERNAL_AVB_PARTITIONS_IN_CHAINED_VBMETA_IMAGES := \
+    $(BOARD_AVB_VBMETA_SYSTEM) \
+    $(BOARD_AVB_VBMETA_VENDOR)
+
+# Not allowing the same partition to appear in multiple groups.
+ifneq ($(words $(sort $(INTERNAL_AVB_PARTITIONS_IN_CHAINED_VBMETA_IMAGES))),$(words $(INTERNAL_AVB_PARTITIONS_IN_CHAINED_VBMETA_IMAGES)))
+  $(error BOARD_AVB_VBMETA_SYSTEM and BOARD_AVB_VBMETA_VENDOR cannot have duplicates)
+endif
+
+# When building a standalone recovery image for non-A/B devices, recovery image must be self-signed
+# to be verified independently, and cannot be chained into vbmeta.img. See the link below for
+# details.
+ifeq ($(TARGET_OTA_ALLOW_NON_AB),true)
+ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
+$(if $(BOARD_AVB_RECOVERY_KEY_PATH),,\
+    $(error BOARD_AVB_RECOVERY_KEY_PATH must be defined for if non-A/B is supported. \
+            See https://android.googlesource.com/platform/external/avb/+/master/README.md#booting-into-recovery))
+endif
+endif
+
+# Appends os version as a AVB property descriptor.
+SYSTEM_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system.os_version:$(SYSTEM_OS_VERSION)
+
+PRODUCT_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.product.os_version:$(PRODUCT_OS_VERSION)
+
+SYSTEM_EXT_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system_ext.os_version:$(SYSTEM_EXT_OS_VERSION)
+
+INIT_BOOT_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.init_boot.os_version:$(INIT_BOOT_OS_VERSION)
+
+BOOT_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.boot.os_version:$(BOOT_OS_VERSION)
+
+VENDOR_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor.os_version:$(VENDOR_OS_VERSION)
+
+ODM_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm.os_version:$(ODM_OS_VERSION)
+
+VENDOR_DLKM_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor_dlkm.os_version:$(VENDOR_DLKM_OS_VERSION)
+
+ODM_DLKM_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm_dlkm.os_version:$(ODM_DLKM_OS_VERSION)
+
+SYSTEM_DLKM_OS_VERSION ?= $(PLATFORM_VERSION_LAST_STABLE)
+BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system_dlkm.os_version:$(SYSTEM_DLKM_OS_VERSION)
+
+# Appends fingerprint and security patch level as a AVB property descriptor.
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+    --prop com.android.build.system.security_patch:$(PLATFORM_SECURITY_PATCH)
+
+BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.product.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+    --prop com.android.build.product.security_patch:$(PLATFORM_SECURITY_PATCH)
+
+BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system_ext.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+    --prop com.android.build.system_ext.security_patch:$(PLATFORM_SECURITY_PATCH)
+
+BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.init_boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.vendor_boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+
+BOARD_AVB_VENDOR_KERNEL_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.vendor_kernel_boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+
+BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.recovery.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor_dlkm.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm_dlkm.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system_dlkm.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.dtbo.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.pvmfw.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+
+# The following vendor- and odm-specific images needs explicit SPL set per board.
+# TODO(b/210875415) Is this security_patch property used? Should it be removed from
+# boot.img when there is no platform ramdisk included in it?
+ifdef BOOT_SECURITY_PATCH
+BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.boot.security_patch:$(BOOT_SECURITY_PATCH)
+endif
+
+ifdef INIT_BOOT_SECURITY_PATCH
+BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.init_boot.security_patch:$(INIT_BOOT_SECURITY_PATCH)
+else ifdef BOOT_SECURITY_PATCH
+BOARD_AVB_INIT_BOOT_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.init_boot.security_patch:$(BOOT_SECURITY_PATCH)
+endif
+
+ifdef VENDOR_SECURITY_PATCH
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor.security_patch:$(VENDOR_SECURITY_PATCH)
+endif
+
+ifdef ODM_SECURITY_PATCH
+BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm.security_patch:$(ODM_SECURITY_PATCH)
+endif
+
+ifdef VENDOR_DLKM_SECURITY_PATCH
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.vendor_dlkm.security_patch:$(VENDOR_DLKM_SECURITY_PATCH)
+endif
+
+ifdef ODM_DLKM_SECURITY_PATCH
+BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.odm_dlkm.security_patch:$(ODM_DLKM_SECURITY_PATCH)
+endif
+
+ifdef SYSTEM_DLKM_SECURITY_PATCH
+BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += \
+    --prop com.android.build.system_dlkm.security_patch:$(SYSTEM_DLKM_SECURITY_PATCH)
+endif
+
+ifdef PVMFW_SECURITY_PATCH
+BOARD_AVB_PVMFW_ADD_HASH_FOOTER_ARGS += \
+    --prop com.android.build.pvmfw.security_patch:$(PVMFW_SECURITY_PATCH)
+endif
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 BOOT_FOOTER_ARGS := BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS
 DTBO_FOOTER_ARGS := BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS
@@ -2930,14 +3338,21 @@ updatepackage: $(INTERNAL_UPDATE_PACKAGE_TARGET)
 # -----------------------------------------------------------------
 # A zip of the symbols directory.  Keep the full paths to make it
 # more obvious where these files came from.
+# Also produces a textproto containing mappings from elf IDs to symbols
+# filename, which will allow finding the appropriate symbols to deobfuscate
+# a stack trace frame.
 #
+
 name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-symbols-$(FILE_NAME_TAG)
 
-SYMBOLS_ZIP := $(PRODUCT_OUT)/$(name).zip
+# The path to the zip file containing binaries with symbols.
+SYMBOLS_ZIP := $(PRODUCT_OUT)/$(name)-symbols-$(FILE_NAME_TAG).zip
+# The path to a file containing mappings from elf IDs to filenames.
+SYMBOLS_MAPPING := $(PRODUCT_OUT)/$(name)-symbols-mapping-$(FILE_NAME_TAG).textproto
+.KATI_READONLY := SYMBOLS_ZIP SYMBOLS_MAPPING
 # For apps_only build we'll establish the dependency later in build/make/core/main.mk.
 ifndef TARGET_BUILD_APPS
 $(SYMBOLS_ZIP): $(INSTALLED_SYSTEMIMAGE) \
@@ -2948,12 +3363,25 @@ $(SYMBOLS_ZIP): $(INSTALLED_SYSTEMIMAGE) \
 		$(updater_dep)
 endif
 $(SYMBOLS_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,symbols)/filelist
-$(SYMBOLS_ZIP): $(SOONG_ZIP)
+$(SYMBOLS_ZIP): PRIVATE_MAPPING_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,elf_symbol_mapping)
+$(SYMBOLS_ZIP): $(SOONG_ZIP) $(SYMBOLS_MAP)
 	@echo "Package symbols: $@"
 	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_UNSTRIPPED) $(dir $(PRIVATE_LIST_FILE))
 	$(hide) find $(TARGET_OUT_UNSTRIPPED) | sort >$(PRIVATE_LIST_FILE)
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(OUT_DIR)/.. -l $(PRIVATE_LIST_FILE)
+=======
+	$(hide) mkdir -p $(TARGET_OUT_UNSTRIPPED) $(dir $(PRIVATE_LIST_FILE)) $(PRIVATE_MAPPING_PACKAGING_DIR)
+	# Find all of the files in the symbols directory and zip them into the symbols zip.
+	$(hide) find -L $(TARGET_OUT_UNSTRIPPED) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SOONG_ZIP) --ignore_missing_files -d -o $@ -C $(OUT_DIR)/.. -l $(PRIVATE_LIST_FILE)
+	# Find all of the files in the symbols mapping directory and merge them into the symbols mapping textproto.
+	$(hide) find -L $(PRIVATE_MAPPING_PACKAGING_DIR) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SYMBOLS_MAP) -merge $(SYMBOLS_MAPPING) -ignore_missing_files @$(PRIVATE_LIST_FILE)
+$(SYMBOLS_ZIP): .KATI_IMPLICIT_OUTPUTS := $(SYMBOLS_MAPPING)
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 # -----------------------------------------------------------------
 # A zip of the coverage directory.
 #
@@ -3024,13 +3452,40 @@ endif # EMMA_INSTRUMENT=true
 
 #------------------------------------------------------------------
 # A zip of Proguard obfuscation dictionary files.
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 # Only for apps_only build.
+=======
+# Also produces a textproto containing mappings from the hashes of the
+# dictionary contents (which are also stored in the dex files on the
+# devices) to the filename of the proguard dictionary, which will allow
+# finding the appropriate dictionary to deobfuscate a stack trace frame.
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 #
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 ifdef TARGET_BUILD_APPS
+=======
+
+# The path to the zip file containing proguard dictionaries.
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 PROGUARD_DICT_ZIP := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-dict-$(FILE_NAME_TAG).zip
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 # the dependency will be set up later in build/make/core/main.mk.
 $(PROGUARD_DICT_ZIP) :
+=======
+# The path to the zip file containing mappings from dictionary hashes to filenames.
+PROGUARD_DICT_MAPPING := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-dict-mapping-$(FILE_NAME_TAG).textproto
+.KATI_READONLY := PROGUARD_DICT_ZIP PROGUARD_DICT_MAPPING
+# For apps_only build we'll establish the dependency later in build/make/core/main.mk.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(PROGUARD_DICT_ZIP): $(INTERNAL_ALLIMAGES_FILES) $(updater_dep)
+endif
+$(PROGUARD_DICT_ZIP): PRIVATE_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,proguard_dictionary)
+$(PROGUARD_DICT_ZIP): PRIVATE_MAPPING_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,proguard_dictionary_mapping)
+$(PROGUARD_DICT_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,proguard_dictionary_filelist)/filelist
+$(PROGUARD_DICT_ZIP): $(SOONG_ZIP) $(SYMBOLS_MAP)
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 	@echo "Packaging Proguard obfuscation dictionary files."
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 	$(hide) dict_files=`find $(TARGET_OUT_COMMON_INTERMEDIATES)/APPS -name proguard_dictionary`; \
 		if [ -n "$$dict_files" ]; then \
 		  unobfuscated_jars=$${dict_files//proguard_dictionary/classes.jar}; \
@@ -3041,6 +3496,17 @@ $(PROGUARD_DICT_ZIP) :
 		  zip -qd $@ zipdummy; \
 		  rm $(dir $@)/zipdummy; \
 		fi
+=======
+	rm -rf $@ $(PRIVATE_LIST_FILE)
+	mkdir -p $(PRIVATE_PACKAGING_DIR) $(PRIVATE_MAPPING_PACKAGING_DIR) $(dir $(PRIVATE_LIST_FILE))
+	# Zip all of the files in the proguard dictionary directory.
+	$(SOONG_ZIP) --ignore_missing_files -d -o $@ -C $(PRIVATE_PACKAGING_DIR) -D $(PRIVATE_PACKAGING_DIR)
+	# Find all of the files in the proguard dictionary mapping directory and merge them into the mapping textproto.
+	# Strip the PRIVATE_PACKAGING_DIR off the filenames to match soong_zip's -C argument.
+	$(hide) find -L $(PRIVATE_MAPPING_PACKAGING_DIR) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(SYMBOLS_MAP) -merge $(PROGUARD_DICT_MAPPING) -strip_prefix $(PRIVATE_PACKAGING_DIR)/ -ignore_missing_files @$(PRIVATE_LIST_FILE)
+$(PROGUARD_DICT_ZIP): .KATI_IMPLICIT_OUTPUTS := $(PROGUARD_DICT_MAPPING)
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 endif # TARGET_BUILD_APPS
 

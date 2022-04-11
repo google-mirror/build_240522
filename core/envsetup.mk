@@ -225,6 +225,34 @@ endif # EMMA_INSTRUMENT
 HOST_CORE_JARS := $(addsuffix -hostdex,$(TARGET_CORE_JARS))
 #################################################################
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+# Dumps all variables that match [A-Z][A-Z0-9_]* (with a few exceptions)
+# to the file at $(1). It is used to print only the variables that are
+# likely to be relevant to the product or board configuration.
+# Soong config variables are dumped as $(call soong_config_set) calls
+# instead of the raw variable values, because mk2rbc can't read the
+# raw ones.
+define dump-variables-rbc
+$(eval _dump_variables_rbc_excluded := \
+  LOCAL_PATH \
+  TOPDIR \
+  TRACE_BEGIN_SOONG \
+  BOARD_PLAT_PUBLIC_SEPOLICY_DIR \
+  BOARD_PLAT_PRIVATE_SEPOLICY_DIR \
+  USER \
+  SOONG_% \
+  PRODUCT_COPY_OUT_%)\
+$(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(filter-out $(_dump_variables_rbc_excluded),$(.VARIABLES))))
+$(file >$(1),\
+$(foreach v, $(shell grep -he "^[A-Z][A-Z0-9_]*$$" $(OUT_DIR)/dump-variables-rbc-temp.txt),\
+$(v) := $(strip $($(v)))$(newline))\
+$(foreach ns,$(SOONG_CONFIG_NAMESPACES),\
+$(foreach v,$(SOONG_CONFIG_$(ns)),\
+$$(call soong_config_set,$(ns),$(v),$(SOONG_CONFIG_$(ns)_$(v)))$(newline))))
+endef
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 # Read the product specs so we can get TARGET_DEVICE and other
 # variables that we need in order to locate the output files.
 include $(BUILD_SYSTEM)/product_config.mk

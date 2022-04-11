@@ -39,6 +39,38 @@ ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
     $(intermediates.COMMON)/jacoco-report-classes.jar)
 endif
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+ifdef LOCAL_SOONG_PROGUARD_DICT
+  my_proguard_dictionary_directory := $(local-proguard-dictionary-directory)
+  my_proguard_dictionary_mapping_directory := $(local-proguard-dictionary-mapping-directory)
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_DICT),\
+    $(intermediates.COMMON)/proguard_dictionary))
+  $(eval $(call copy-r8-dictionary-file-with-mapping,\
+    $(LOCAL_SOONG_PROGUARD_DICT),\
+    $(my_proguard_dictionary_directory)/proguard_dictionary,\
+    $(my_proguard_dictionary_mapping_directory)/proguard_dictionary.textproto))
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_CLASSES_JAR),\
+    $(my_proguard_dictionary_directory)/classes.jar))
+  $(call add-dependency,$(common_javalib.jar),\
+    $(intermediates.COMMON)/proguard_dictionary)
+  $(call add-dependency,$(common_javalib.jar),\
+    $(my_proguard_dictionary_directory)/proguard_dictionary)
+  $(call add-dependency,$(common_javalib.jar),\
+    $(my_proguard_dictionary_mapping_directory)/proguard_dictionary.textproto)
+  $(call add-dependency,$(common_javalib.jar),\
+    $(my_proguard_dictionary_directory)/classes.jar)
+endif
+
+ifdef LOCAL_SOONG_PROGUARD_USAGE_ZIP
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_PROGUARD_USAGE_ZIP),\
+    $(call local-packaging-dir,proguard_usage)/proguard_usage.zip))
+  $(call add-dependency,$(common_javalib.jar),\
+    $(call local-packaging-dir,proguard_usage)/proguard_usage.zip)
+endif
+
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 ifdef LOCAL_SOONG_RESOURCE_EXPORT_PACKAGE
   my_res_package := $(intermediates.COMMON)/package-res.apk
 

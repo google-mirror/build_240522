@@ -361,6 +361,61 @@ function addcompletions()
     complete -C "bit --tab" bit
 }
 
+function multitree_lunch_help()
+{
+    echo "usage: lunch PRODUCT-VARIANT" 1>&2
+    echo "    Set up android build environment based on a product short name and variant" 1>&2
+    echo 1>&2
+    echo "lunch COMBO_FILE VARIANT" 1>&2
+    echo "    Set up android build environment based on a specific lunch combo file" 1>&2
+    echo "    and variant." 1>&2
+    echo 1>&2
+    echo "lunch --print [CONFIG]" 1>&2
+    echo "    Print the contents of a configuration.  If CONFIG is supplied, that config" 1>&2
+    echo "    will be flattened and printed.  If CONFIG is not supplied, the currently" 1>&2
+    echo "    selected config will be printed.  Returns 0 on success or nonzero on error." 1>&2
+    echo 1>&2
+    echo "lunch --list" 1>&2
+    echo "    List all possible combo files available in the current tree" 1>&2
+    echo 1>&2
+    echo "lunch --help" 1>&2
+    echo "lunch -h" 1>&2
+    echo "    Prints this message." 1>&2
+}
+
+function multitree_lunch()
+{
+    local code
+    local results
+    if $(echo "$1" | grep -q '^-') ; then
+        # Calls starting with a -- argument are passed directly and the function
+        # returns with the lunch.py exit code.
+        build/make/orchestrator/core/lunch.py "$@"
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+    else
+        # All other calls go through the --lunch variant of lunch.py
+        results=($(build/make/orchestrator/core/lunch.py --lunch "$@"))
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+
+        export TARGET_BUILD_COMBO=${results[0]}
+        export TARGET_BUILD_VARIANT=${results[1]}
+    fi
+}
+
 function choosetype()
 {
     echo "Build type choices are:"
@@ -1596,6 +1651,62 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    if T="$(gettop)"; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    local skip_tests=$(echo "$@" | grep -ow -- "--skip-soong-tests")
+    local bazel_args=(${@/--skip-soong-tests/})
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= $skip_tests || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        bazel $bazel_args --config=bp2build
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"

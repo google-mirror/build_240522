@@ -138,6 +138,7 @@ _product_var_list := \
     PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION \
     PRODUCT_DEX_PREOPT_GENERATE_DM_FILES \
     PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE \
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
     PRODUCT_SYSTEM_SERVER_COMPILER_FILTER \
     PRODUCT_SANITIZER_MODULE_CONFIGS \
     PRODUCT_SYSTEM_BASE_FS_PATH \
@@ -158,6 +159,189 @@ _product_var_list := \
     PRODUCT_CFI_EXCLUDE_PATHS \
     PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE \
     PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE \
+=======
+    PRODUCT_USES_DEFAULT_ART_CONFIG \
+
+_product_single_value_vars += PRODUCT_SYSTEM_SERVER_COMPILER_FILTER
+# Per-module sanitizer configs
+_product_list_vars += PRODUCT_SANITIZER_MODULE_CONFIGS
+_product_single_value_vars += PRODUCT_SYSTEM_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_VENDOR_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_PRODUCT_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_SYSTEM_EXT_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_ODM_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_VENDOR_DLKM_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_ODM_DLKM_BASE_FS_PATH
+_product_single_value_vars += PRODUCT_SYSTEM_DLKM_BASE_FS_PATH
+
+# The first API level this product shipped with
+_product_single_value_vars += PRODUCT_SHIPPING_API_LEVEL
+
+_product_list_vars += VENDOR_PRODUCT_RESTRICT_VENDOR_FILES
+_product_list_vars += VENDOR_EXCEPTION_MODULES
+_product_list_vars += VENDOR_EXCEPTION_PATHS
+# Whether the product wants to ship libartd. For rules and meaning, see art/Android.mk.
+_product_single_value_vars += PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD
+
+# Make this art variable visible to soong_config.mk.
+_product_single_value_vars += PRODUCT_ART_USE_READ_BARRIER
+
+# Add reserved headroom to a system image.
+_product_single_value_vars += PRODUCT_SYSTEM_HEADROOM
+
+# Whether to save disk space by minimizing java debug info
+_product_single_value_vars += PRODUCT_MINIMIZE_JAVA_DEBUG_INFO
+
+# Whether any paths are excluded from sanitization when SANITIZE_TARGET=integer_overflow
+_product_list_vars += PRODUCT_INTEGER_OVERFLOW_EXCLUDE_PATHS
+
+_product_single_value_vars += PRODUCT_ADB_KEYS
+
+# Whether any paths should have CFI enabled for components
+_product_list_vars += PRODUCT_CFI_INCLUDE_PATHS
+
+# Whether any paths are excluded from sanitization when SANITIZE_TARGET=cfi
+_product_list_vars += PRODUCT_CFI_EXCLUDE_PATHS
+
+# Whether the Scudo hardened allocator is disabled platform-wide
+_product_single_value_vars += PRODUCT_DISABLE_SCUDO
+
+# List of extra VNDK versions to be included
+_product_list_vars += PRODUCT_EXTRA_VNDK_VERSIONS
+
+# Whether APEX should be compressed or not
+_product_single_value_vars += PRODUCT_COMPRESSED_APEX
+
+# VNDK version of product partition. It can be 'current' if the product
+# partitions uses PLATFORM_VNDK_VERSION.
+_product_single_value_vars += PRODUCT_PRODUCT_VNDK_VERSION
+
+_product_single_value_vars += PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS
+_product_single_value_vars += PRODUCT_ENFORCE_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT
+_product_list_vars += PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_ALLOW_LIST
+_product_list_vars += PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT
+_product_list_vars += PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST
+
+# List of modules that should be forcefully unmarked from being LOCAL_PRODUCT_MODULE, and hence
+# installed on /system directory by default.
+_product_list_vars += PRODUCT_FORCE_PRODUCT_MODULES_TO_SYSTEM_PARTITION
+
+# When this is true, dynamic partitions is retrofitted on a device that has
+# already been launched without dynamic partitions. Otherwise, the device
+# is launched with dynamic partitions.
+# This flag implies PRODUCT_USE_DYNAMIC_PARTITIONS.
+_product_single_value_vars += PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+
+# When this is true, various build time as well as runtime debugfs restrictions are enabled.
+_product_single_value_vars += PRODUCT_SET_DEBUGFS_RESTRICTIONS
+
+# Other dynamic partition feature flags.PRODUCT_USE_DYNAMIC_PARTITION_SIZE and
+# PRODUCT_BUILD_SUPER_PARTITION default to the value of PRODUCT_USE_DYNAMIC_PARTITIONS.
+_product_single_value_vars += \
+    PRODUCT_USE_DYNAMIC_PARTITIONS \
+    PRODUCT_USE_DYNAMIC_PARTITION_SIZE \
+    PRODUCT_BUILD_SUPER_PARTITION \
+
+# If set, kernel configuration requirements are present in OTA package (and will be enforced
+# during OTA). Otherwise, kernel configuration requirements are enforced in VTS.
+# Devices that checks the running kernel (instead of the kernel in OTA package) should not
+# set this variable to prevent OTA failures.
+_product_list_vars += PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+
+# If set to true, this product builds a generic OTA package, which installs generic system images
+# onto matching devices. The product may only build a subset of system images (e.g. only
+# system.img), so devices need to install the package in a system-only OTA manner.
+_product_single_value_vars += PRODUCT_BUILD_GENERIC_OTA_PACKAGE
+
+_product_list_vars += PRODUCT_MANIFEST_PACKAGE_NAME_OVERRIDES
+_product_list_vars += PRODUCT_PACKAGE_NAME_OVERRIDES
+_product_list_vars += PRODUCT_CERTIFICATE_OVERRIDES
+
+# Controls for whether different partitions are built for the current product.
+_product_single_value_vars += PRODUCT_BUILD_SYSTEM_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_SYSTEM_OTHER_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_VENDOR_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_PRODUCT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_SYSTEM_EXT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_ODM_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_VENDOR_DLKM_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_ODM_DLKM_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_SYSTEM_DLKM_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_CACHE_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_RAMDISK_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_USERDATA_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_RECOVERY_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_INIT_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_DEBUG_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_VENDOR_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_VENDOR_KERNEL_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_DEBUG_VENDOR_BOOT_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_VBMETA_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_SUPER_EMPTY_IMAGE
+_product_single_value_vars += PRODUCT_BUILD_PVMFW_IMAGE
+
+# List of boot jars delivered via updatable APEXes, following the same format as
+# PRODUCT_BOOT_JARS.
+_product_list_vars += PRODUCT_APEX_BOOT_JARS
+
+# If set, device uses virtual A/B.
+_product_single_value_vars += PRODUCT_VIRTUAL_AB_OTA
+
+# If set, device uses virtual A/B Compression.
+_product_single_value_vars += PRODUCT_VIRTUAL_AB_COMPRESSION
+
+# If set, device retrofits virtual A/B.
+_product_single_value_vars += PRODUCT_VIRTUAL_AB_OTA_RETROFIT
+
+# If set, forcefully generate a non-A/B update package.
+# Note: A device configuration should inherit from virtual_ab_ota_plus_non_ab.mk
+# instead of setting this variable directly.
+# Note: Use TARGET_OTA_ALLOW_NON_AB in the build system because
+# TARGET_OTA_ALLOW_NON_AB takes the value of AB_OTA_UPDATER into account.
+_product_single_value_vars += PRODUCT_OTA_FORCE_NON_AB_PACKAGE
+
+# If set, Java module in product partition cannot use hidden APIs.
+_product_single_value_vars += PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+
+# If set, only java_sdk_library can be used at inter-partition dependency.
+# Note: Build error if BOARD_VNDK_VERSION is not set while
+#       PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY is true, because
+#       PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY has no meaning if
+#       BOARD_VNDK_VERSION is not set.
+# Note: When PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE is not set, there are
+#       no restrictions at dependency between system and product partition.
+_product_single_value_vars += PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY
+
+# Allowlist for PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY option.
+# Listed modules are allowed at inter-partition dependency even if it isn't
+# a java_sdk_library module.
+_product_list_vars += PRODUCT_INTER_PARTITION_JAVA_LIBRARY_ALLOWLIST
+
+_product_single_value_vars += PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES
+
+# Install a copy of the debug policy to the system_ext partition, and allow
+# init-second-stage to load debug policy from system_ext.
+# This option is only meant to be set by compliance GSI targets.
+_product_single_value_vars += PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
+
+# If set, metadata files for the following artifacts will be generated.
+# - system/framework/*.jar
+# - system/framework/oat/<arch>/*.{oat,vdex,art}
+# - system/etc/boot-image.prof
+# - system/etc/dirty-image-objects
+# One fsverity metadata container file per one input file will be generated in
+# system.img, with a suffix ".fsv_meta". e.g. a container file for
+# "/system/framework/foo.jar" will be "system/framework/foo.jar.fsv_meta".
+_product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_GENERATE_METADATA
+
+# If true, sets the default for MODULE_BUILD_FROM_SOURCE. This overrides
+# BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE but not an explicitly set value.
+_product_single_value_vars += PRODUCT_MODULE_BUILD_FROM_SOURCE
+
+.KATI_READONLY := _product_single_value_vars _product_list_vars
+_product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 
 define dump-product
 $(info ==== $(1) ====)\
@@ -173,12 +357,24 @@ endef
 #
 # $(1): product to inherit
 #
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 # Does three things:
+=======
+# To be called from product makefiles, and is later evaluated during the import-nodes
+# call below. It does the following:
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 #  1. Inherits all of the variables from $1.
 #  2. Records the inheritance in the .INHERITS_FROM variable
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
 #  3. Records that we've visited this node, in ALL_PRODUCTS
+=======
+#
+# (2) and the PRODUCTS variable can be used together to reconstruct the include hierarchy
+# See e.g. product-graph.mk for an example of this.
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 #
 define inherit-product
+<<<<<<< HEAD   (c2b35d Merge "Merge empty history for sparse-8348651-L2230000095368)
   $(if $(findstring ../,$(1)),\
     $(eval np := $(call normalize-paths,$(1))),\
     $(eval np := $(strip $(1))))\
@@ -189,6 +385,21 @@ define inherit-product
   $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
   $(eval inherit_var:=) \
   $(eval ALL_PRODUCTS := $(sort $(ALL_PRODUCTS) $(word 1,$(_include_stack))))
+=======
+  $(eval _inherit_product_wildcard := $(wildcard $(1)))\
+  $(if $(_inherit_product_wildcard),,$(error $(1) does not exist.))\
+  $(foreach part,$(_inherit_product_wildcard),\
+    $(if $(findstring ../,$(part)),\
+      $(eval np := $(call normalize-paths,$(part))),\
+      $(eval np := $(strip $(part))))\
+    $(foreach v,$(_product_var_list), \
+        $(eval $(v) := $($(v)) $(INHERIT_TAG)$(np))) \
+    $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+    $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
+    $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
+    $(call dump-inherit,$(strip $(word 1,$(_include_stack))),$(1)) \
+    $(call dump-config-vals,$(current_mk),inherit))
+>>>>>>> BRANCH (697279 Merge "Version bump to TKB1.220411.001.A1 [core/build_id.mk])
 endef
 
 
