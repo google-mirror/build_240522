@@ -22,6 +22,30 @@
       },
       "revId": "24575c46e368dc0a3b58969110cd6ca7feb57dd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb1c224_520cec54",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-11T15:48:03Z",
+      "side": 1,
+      "message": "I\u0027ll look at ripping out all the goma stuff as a separate change, this is just moving this code from below so that it is available to rbe.mk",
+      "parentUuid": "477dfcac_8240492e",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 9
+      },
+      "revId": "24575c46e368dc0a3b58969110cd6ca7feb57dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
