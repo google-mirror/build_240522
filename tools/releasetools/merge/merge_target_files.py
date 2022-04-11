@@ -286,9 +286,10 @@ def rebuild_image_with_sepolicy(target_files_dir):
   shutil.move(
       os.path.join(vendor_target_files_dir, 'IMAGES', partition_img),
       os.path.join(target_files_dir, 'IMAGES', partition_img))
-  shutil.move(
-      os.path.join(vendor_target_files_dir, 'IMAGES', partition_map),
-      os.path.join(target_files_dir, 'IMAGES', partition_map))
+  if os.path.exists(os.path.join(vendor_target_files_dir, 'IMAGES', partition_map)):
+    shutil.move(
+        os.path.join(vendor_target_files_dir, 'IMAGES', partition_map),
+        os.path.join(target_files_dir, 'IMAGES', partition_map))
 
   def copy_recovery_file(filename):
     for subdir in ('VENDOR', 'SYSTEM/vendor'):
