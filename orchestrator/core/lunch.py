@@ -139,10 +139,12 @@ def ChooseConfigFromArgs(workspace_root, args):
 
 
 class ConfigException(Exception):
+    ERROR_IDENTIFY = "identify"
     ERROR_PARSE = "parse"
     ERROR_CYCLE = "cycle"
+    ERROR_VALIDATE = "validate"
 
-    def __init__(self, kind, message, locations, line=0):
+    def __init__(self, kind, message, locations=[], line=0):
         """Error thrown when loading and parsing configurations.
 
         Args:
@@ -272,6 +274,32 @@ def FindAllLunchable(workspace_root):
         yield f
 
 
+def LoadCurrentConfig():
+    """Load, validate and return the config as specified in TARGET_BUILD_COMBO.  Throws
+    ConfigException if there is a problem."""
+
+    # Identify the config file
+    config_file = os.environ.get("TARGET_BUILD_COMBO")
+    if not config_file:
+        raise ConfigException(ConfigException.ERROR_IDENTIFY,
+                "TARGET_BUILD_COMBO not set. Run lunch or pass a combo file.")
+
+    # Parse the config file
+    config = LoadConfig(config_file)
+
+    # Validate the config file
+    if not config.get("lunchable", False):
+        raise ConfigException(ConfigException.ERROR_VALIDATE,
+                "Lunch config file (or inherited files) does not have the 'lunchable'"
+                    + " flag set, which means it is probably not a complete lunch spec.",
+                [config_file,])
+
+    # TODO: Validate that:
+    #   - there are no modules called system or vendor
+    #   - everything has all the required files
+
+    return config
+
 def List():
     """Handle the --list command."""
     for f in sorted(FindAllLunchable(".")):
@@ -284,7 +312,7 @@ def Print(args):
     if len(args) == 0:
         config_file = os.environ.get("TARGET_BUILD_COMBO")
         if not config_file:
-            sys.stderr.write("TARGET_BUILD_COMBO not set. Run lunch or pass a combo file.\n")
+            sys.stderr.write("TARGET_BUILD_COMBO not set. Run lunch before building.\n")
             return EXIT_STATUS_NEED_HELP
     elif len(args) == 1:
         config_file = args[0]
