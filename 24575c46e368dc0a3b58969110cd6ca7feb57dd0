@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477dfcac_8240492e",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2022-04-11T14:51:43Z",
+      "side": 1,
+      "message": "Do we need to support GOMA_POOL? I think setting USE_GOMA\u003dtrue would result in a build failure so we can ignore it going forward?",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 9
+      },
+      "revId": "24575c46e368dc0a3b58969110cd6ca7feb57dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
