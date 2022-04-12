@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77b8ca4_4983bd69",
+        "filename": "target/product/core_64_bit.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-04-12T16:11:44Z",
+      "side": 1,
+      "message": "Are you aware of the core_64_bit_only.mk file?\n\nMy \"nandroid project\" was to add support for 64-bit only devices to the build system (many years ago now).",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
