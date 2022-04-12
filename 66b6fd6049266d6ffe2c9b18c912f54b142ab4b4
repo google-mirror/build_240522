@@ -70,6 +70,30 @@
       },
       "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c38c73c_e2134033",
+        "filename": "target/product/core_64_bit.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-04-12T16:52:57Z",
+      "side": 1,
+      "message": "In this case, I don\u0027t want to make a major change this close to release. I don\u0027t know all of the fallout from this so make it small right now and then make it more universal later.",
+      "parentUuid": "3fa93a68_71b6fccf",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
