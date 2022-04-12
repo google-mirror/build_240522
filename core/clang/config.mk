@@ -45,8 +45,10 @@ include $(BUILD_SYSTEM)/clang/HOST_$(HOST_2ND_ARCH).mk
 endif
 
 # TARGET config
+ifdef TARGET_ARCH
 clang_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/clang/TARGET_$(TARGET_ARCH).mk
+endif
 
 # TARGET_2ND_ARCH config
 ifdef TARGET_2ND_ARCH
