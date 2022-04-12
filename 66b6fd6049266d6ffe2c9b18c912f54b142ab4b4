@@ -22,6 +22,30 @@
       },
       "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71626987_f4ce4883",
+        "filename": "target/product/core_64_bit.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-04-12T16:43:06Z",
+      "side": 1,
+      "message": "Yes, that\u0027s not what this change does. The idea is to create a single system image that can run either both zygotes or only a single one by only changing the vendor image.\n\nTechnically, this creates the only running 64 bit image zygote by default. But you can modify the vendor properties to make it back into the 64 bit plus 32 bit runner.",
+      "parentUuid": "f77b8ca4_4983bd69",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
