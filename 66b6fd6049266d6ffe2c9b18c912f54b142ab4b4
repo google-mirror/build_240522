@@ -46,6 +46,30 @@
       },
       "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa93a68_71b6fccf",
+        "filename": "target/product/core_64_bit.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-04-12T16:49:17Z",
+      "side": 1,
+      "message": "makes sense, that is different. Is there any reason why we wouldn\u0027t make that the default? i.e. why do we want to have system images that do not support choosing?",
+      "parentUuid": "71626987_f4ce4883",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "66b6fd6049266d6ffe2c9b18c912f54b142ab4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
