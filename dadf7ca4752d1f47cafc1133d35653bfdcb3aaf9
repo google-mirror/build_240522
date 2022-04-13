@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da607748_b3954736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-04-13T18:48:00Z",
+      "side": 1,
+      "message": "i defer to the others on whether this is the right way to do it, but definitely +2 on the functionality. thanks! :-)",
+      "revId": "dadf7ca4752d1f47cafc1133d35653bfdcb3aaf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
