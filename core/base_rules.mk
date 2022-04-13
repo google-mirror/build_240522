@@ -77,6 +77,8 @@ else ifneq ($(filter $(TARGET_OUT_PRODUCT)/%,$(_path)),)
 LOCAL_PRODUCT_MODULE := true
 else ifneq ($(filter $(TARGET_OUT_SYSTEM_EXT)/%,$(_path)),)
 LOCAL_SYSTEM_EXT_MODULE := true
+else ifneq ($(filter $(TARGET_RAMDISK_OUT)/%,$(_path)),)
+LOCAL_RAMDISK_MODULE := true
 endif
 _path :=
 
@@ -594,6 +596,7 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
       # have init.rc files that need to be installed alongside them. Manually handle the case where the
       # output file is in the recovery partition.
       my_init_rc_path := $(if $(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)),$(TARGET_RECOVERY_ROOT_OUT)/system/etc,$(TARGET_OUT$(partition_tag)_ETC))
+      my_init_rc_path := $(if $(filter $(TARGET_RAMDISK_OUT)/%,$(my_module_path)),$(TARGET_RAMDISK_OUT)/first_stage_ramdisk/system/etc,$(my_init_rc_path))
       my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
       my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
 
