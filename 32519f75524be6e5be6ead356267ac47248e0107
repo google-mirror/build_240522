@@ -16,6 +16,24 @@
       "message": "nit: Fix inconsistent spacing",
       "revId": "32519f75524be6e5be6ead356267ac47248e0107",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91b8790_83a3c03f",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-14T00:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc42753e_c597fad7",
+      "revId": "32519f75524be6e5be6ead356267ac47248e0107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
