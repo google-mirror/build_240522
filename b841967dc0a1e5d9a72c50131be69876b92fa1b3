@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8364201_0a860282",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T18:01:18Z",
+      "side": 1,
+      "message": "Unrelated change",
+      "revId": "b841967dc0a1e5d9a72c50131be69876b92fa1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369b213b_a028b291",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T18:01:18Z",
+      "side": 1,
+      "message": "Nothing reads this value",
+      "revId": "b841967dc0a1e5d9a72c50131be69876b92fa1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02272fea_e1b55d4a",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T18:01:18Z",
+      "side": 1,
+      "message": "Can you update this comment to cover ramdisk too?",
+      "revId": "b841967dc0a1e5d9a72c50131be69876b92fa1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84d9529_f0f088d2",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T18:01:18Z",
+      "side": 1,
+      "message": "I think this would be clearer as if statements:\n\n```\nifneq (,$(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)))\n  my_init_rc_path :\u003d $(TARGET_RECOVERY_ROOT_OUT)/system/etc\nelse ifneq (,$(filter $(TARGET_RAMDISK_OUT)/%,$(my_module_path)))\n  my_init_rc_path :\u003d $(TARGET_RAMDISK_OUT)/system/etc\nelse\n  my_init_rc_path :\u003d $(TARGET_OUT$(partition_tag)_ETC)\nendif\n```",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 1
+      },
+      "revId": "b841967dc0a1e5d9a72c50131be69876b92fa1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
