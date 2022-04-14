@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc12db50_0ee675ca",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 6063,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T22:02:34Z",
+      "side": 1,
+      "message": "I\u0027m worried that adding all these isn\u0027t going to scale, does anything ensure they get added or kept up to date in the future?",
+      "revId": "5d10230145b5c4ffa5c9c5e3aab62c51552beec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c182c307_1e793aed",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 6066,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-14T22:02:34Z",
+      "side": 1,
+      "message": "mixing tabs and spaces",
+      "range": {
+        "startLine": 6066,
+        "startChar": 0,
+        "endLine": 6066,
+        "endChar": 5
+      },
+      "revId": "5d10230145b5c4ffa5c9c5e3aab62c51552beec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
