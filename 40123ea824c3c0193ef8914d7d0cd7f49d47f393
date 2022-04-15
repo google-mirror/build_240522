@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f76113e_396757bf",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-15T16:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa70162_d5f788f9",
+      "range": {
+        "startLine": 593,
+        "startChar": 29,
+        "endLine": 593,
+        "endChar": 45
+      },
+      "revId": "40123ea824c3c0193ef8914d7d0cd7f49d47f393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b789f20c_8fc79e00",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-14T21:54:25Z",
       "side": 1,
       "message": "Use spaces instead of tab.\n\nAlso this seems like something isn\u0027t working if it is still being installed to system.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "40123ea824c3c0193ef8914d7d0cd7f49d47f393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a7f0e8_46be02ab",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-15T16:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b789f20c_8fc79e00",
       "range": {
         "startLine": 40,
         "startChar": 0,
