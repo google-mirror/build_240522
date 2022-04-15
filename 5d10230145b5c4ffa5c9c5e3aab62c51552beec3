@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cadcbaa4_3e517752",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 6063,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-04-15T01:11:34Z",
+      "side": 1,
+      "message": "Eventually, a test will break the build if there are targets/dependencies without license metadata.\n\nSee for example https://android-review.googlesource.com/c/platform/build/+/2064290/1/core/distdir.mk#106",
+      "parentUuid": "bc12db50_0ee675ca",
+      "revId": "5d10230145b5c4ffa5c9c5e3aab62c51552beec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c182c307_1e793aed",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-14T22:02:34Z",
       "side": 1,
       "message": "mixing tabs and spaces",
+      "range": {
+        "startLine": 6066,
+        "startChar": 0,
+        "endLine": 6066,
+        "endChar": 5
+      },
+      "revId": "5d10230145b5c4ffa5c9c5e3aab62c51552beec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7397f2d8_3f74abe3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 6066,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-04-15T01:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c182c307_1e793aed",
       "range": {
         "startLine": 6066,
         "startChar": 0,
