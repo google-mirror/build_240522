@@ -16,6 +16,24 @@
       "message": "This looks like a nice improvement, that will facilitate testing. I\u0027m not sure where the USAP stuff is headed. Currently it doesn\u0027t work with the native fork loop, which I think means it still has Java heap growth issues.",
       "revId": "0a1db3c2e0326d3569d64bc43ae42740fbddb912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36f3bb0_e7b1e1fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1047255
+      },
+      "writtenOn": "2022-04-15T21:11:02Z",
+      "side": 1,
+      "message": "Yeah, I figured this was a small amount of work that would make any future testing (to either improve or remove USAPs) easier.  Plus, our partners currently have to apply a source patch to AOSP if they want to enable USAPs so this should make things easier for them.\n\nI haven\u0027t had a chance to finish testing on this but I should be able to wrap it up next week.",
+      "parentUuid": "42b9c913_8aff35ea",
+      "revId": "0a1db3c2e0326d3569d64bc43ae42740fbddb912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
