@@ -123,7 +123,7 @@ ifneq ($(LOCAL_JAVA_RESOURCE_DIRS),)
     $(foreach dir,$(LOCAL_JAVA_RESOURCE_DIRS), \
 	$(subst $(space),:,$(strip \
 		$(LOCAL_PATH)/$(dir): \
-	    $(patsubst ./%,%,$(sort $(shell cd $(LOCAL_PATH)/$(dir) && \
+	    $(patsubst ./%,%,$(sort $(shell (cd $(LOCAL_PATH)/$(dir) && \
 		find . \
 		    -type d -a -name ".svn" -prune -o \
 		    -type f \
@@ -134,7 +134,7 @@ ifneq ($(LOCAL_JAVA_RESOURCE_DIRS),)
 			-a \! -name ".DS_Store" \
 			-a \! -name "*~" \
 			-print \
-		    ))) \
+		    )))) \
 	)) \
     )
   java_resource_file_groups := $(filter-out %:,$(java_resource_file_groups))
