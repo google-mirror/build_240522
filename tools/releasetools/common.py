@@ -114,7 +114,7 @@ SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
 # AVB_FOOTER_ARGS_BY_PARTITION in sign_target_files_apks need to be updated
 # accordingly.
 AVB_PARTITIONS = ('boot', 'init_boot', 'dtbo', 'odm', 'product', 'pvmfw', 'recovery',
-                  'system', 'system_ext', 'vendor', 'vendor_boot',
+                  'system', 'system_ext', 'vendor', 'vendor_boot', 'vendor_kernel_boot',
                   'vendor_dlkm', 'odm_dlkm', 'system_dlkm')
 
 # Chained VBMeta partitions.
@@ -1838,7 +1838,7 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
   return None
 
 
-def _BuildVendorBootImage(sourcedir, info_dict=None):
+def _BuildVendorBootImage(sourcedir, avb_config, info_dict=None):
   """Build a vendor boot image from the specified sourcedir.
 
   Take a ramdisk, dtb, and vendor_cmdline from the input (in 'sourcedir'), and
@@ -1863,8 +1863,13 @@ def _BuildVendorBootImage(sourcedir, info_dict=None):
 
   fn = os.path.join(sourcedir, "dtb")
   if os.access(fn, os.F_OK):
-    cmd.append("--dtb")
-    cmd.append(fn)
+    partition_name = avb_config["partition_name"]
+    has_vendor_kernel_boot = (info_dict.get("vendor_kernel_boot", "") == "true")
+
+    if (not has_vendor_kernel_boot) or \
+        (has_vendor_kernel_boot and partition_name == "vendor_kernel_boot"):
+      cmd.append("--dtb")
+      cmd.append(fn)
 
   fn = os.path.join(sourcedir, "vendor_cmdline")
   if os.access(fn, os.F_OK):
@@ -1924,11 +1929,11 @@ def _BuildVendorBootImage(sourcedir, info_dict=None):
   # AVB: if enabled, calculate and add hash.
   if info_dict.get("avb_enable") == "true":
     avbtool = info_dict["avb_avbtool"]
-    part_size = info_dict["vendor_boot_size"]
+    part_size = info_dict[avb_config["part_size"]]
     cmd = [avbtool, "add_hash_footer", "--image", img.name,
-           "--partition_size", str(part_size), "--partition_name", "vendor_boot"]
-    AppendAVBSigningArgs(cmd, "vendor_boot")
-    args = info_dict.get("avb_vendor_boot_add_hash_footer_args")
+           "--partition_size", str(part_size), "--partition_name", avb_config["partition_name"]]
+    AppendAVBSigningArgs(cmd, avb_config["partition_name"])
+    args = info_dict.get(avb_config['footer_args'])
     if args and args.strip():
       cmd.extend(shlex.split(args))
     RunAndCheckOutput(cmd)
@@ -1961,8 +1966,42 @@ def GetVendorBootImage(name, prebuilt_name, unpack_dir, tree_subdir,
   if info_dict is None:
     info_dict = OPTIONS.info_dict
 
+  avb_config = {
+      'part_size': 'vendor_boot_size',
+      'partition_name': 'vendor_boot',
+      'footer_args': 'avb_vendor_boot_add_hash_footer_args'
+  }
   data = _BuildVendorBootImage(
-      os.path.join(unpack_dir, tree_subdir), info_dict)
+      os.path.join(unpack_dir, tree_subdir), avb_config, info_dict)
+  if data:
+    return File(name, data)
+  return None
+
+
+def GetVendorKernelBootImage(name, prebuilt_name, unpack_dir, tree_subdir,
+                       info_dict=None):
+  """Return a File object with the desired vendor kernel boot image.
+
+  Look for it under 'unpack_dir'/IMAGES, otherwise construct it from
+  the source files in 'unpack_dir'/'tree_subdir'."""
+
+  prebuilt_path = os.path.join(unpack_dir, "IMAGES", prebuilt_name)
+  if os.path.exists(prebuilt_path):
+    logger.info("using prebuilt %s from IMAGES...", prebuilt_name)
+    return File.FromLocalFile(name, prebuilt_path)
+
+  logger.info("building image from target_files %s...", tree_subdir)
+
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  avb_config = {
+      'part_size': 'vendor_kernel_boot_size',
+      'partition_name': 'vendor_kernel_boot',
+      'footer_args': 'avb_vendor_kernel_boot_add_hash_footer_args'
+  }
+  data = _BuildVendorBootImage(
+      os.path.join(unpack_dir, tree_subdir), avb_config, info_dict)
   if data:
     return File(name, data)
   return None
