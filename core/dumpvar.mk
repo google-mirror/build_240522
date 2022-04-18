@@ -29,3 +29,7 @@ dump-many-vars :
 	  echo "$(DUMP_VAR_PREFIX)$(v)='$($(v))'";)
 
 endif # CALLED_FROM_SETUP
+
+ifneq (,$(RBC_DUMP_CONFIG_FILE))
+$(call dump-variables-rbc,$(RBC_DUMP_CONFIG_FILE))
+endif

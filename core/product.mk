@@ -159,6 +159,7 @@ _product_var_list := \
     PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE \
     PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE \
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 define dump-product
 $(info ==== $(1) ====)\
 $(foreach v,$(_product_var_list),\
@@ -170,6 +171,8 @@ define dump-products
 $(foreach p,$(PRODUCTS),$(call dump-product,$(p)))
 endef
 
+=======
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 #
 # $(1): product to inherit
 #
@@ -209,64 +212,18 @@ endef
 
 
 #
-# Does various consistency checks on all of the known products.
+# Does various consistency checks on the current product.
 # Takes no parameters, so $(call ) is not necessary.
 #
-define check-all-products
+define check-current-product
 $(if ,, \
-  $(eval _cap_names :=) \
-  $(foreach p,$(PRODUCTS), \
-    $(eval pn := $(strip $(PRODUCTS.$(p).PRODUCT_NAME))) \
-    $(if $(pn),,$(error $(p): PRODUCT_NAME must be defined.)) \
-    $(if $(filter $(pn),$(_cap_names)), \
-      $(error $(p): PRODUCT_NAME must be unique; "$(pn)" already used by $(strip \
-          $(foreach \
-            pp,$(PRODUCTS),
-              $(if $(filter $(pn),$(PRODUCTS.$(pp).PRODUCT_NAME)), \
-                $(pp) \
-               ))) \
-       ) \
-     ) \
-    $(eval _cap_names += $(pn)) \
-    $(if $(call is-c-identifier,$(pn)),, \
-      $(error $(p): PRODUCT_NAME must be a valid C identifier, not "$(pn)") \
-     ) \
-    $(eval pb := $(strip $(PRODUCTS.$(p).PRODUCT_BRAND))) \
-    $(if $(pb),,$(error $(p): PRODUCT_BRAND must be defined.)) \
-    $(foreach cf,$(strip $(PRODUCTS.$(p).PRODUCT_COPY_FILES)), \
-      $(if $(filter 2 3,$(words $(subst :,$(space),$(cf)))),, \
-        $(error $(p): malformed COPY_FILE "$(cf)") \
-       ) \
-     ) \
-   ) \
-)
-endef
-
-
-#
-# Returns the product makefile path for the product with the provided name
-#
-# $(1): short product name like "generic"
-#
-define _resolve-short-product-name
-  $(eval pn := $(strip $(1)))
-  $(eval p := \
-      $(foreach p,$(PRODUCTS), \
-          $(if $(filter $(pn),$(PRODUCTS.$(p).PRODUCT_NAME)), \
-            $(p) \
-       )) \
-   )
-  $(eval p := $(sort $(p)))
-  $(if $(filter 1,$(words $(p))), \
-    $(p), \
-    $(if $(filter 0,$(words $(p))), \
-      $(error No matches for product "$(pn)"), \
-      $(error Product "$(pn)" ambiguous: matches $(p)) \
-    ) \
-  )
-endef
-define resolve-short-product-name
-$(strip $(call _resolve-short-product-name,$(1)))
+  $(if $(call is-c-identifier,$(PRODUCT_NAME)),, \
+    $(error $(INTERNAL_PRODUCT): PRODUCT_NAME must be a valid C identifier, not "$(pn)")) \
+  $(if $(PRODUCT_BRAND),, \
+    $(error $(INTERNAL_PRODUCT): PRODUCT_BRAND must be defined.)) \
+  $(foreach cf,$(strip $(PRODUCT_COPY_FILES)), \
+    $(if $(filter 2 3,$(words $(subst :,$(space),$(cf)))),, \
+      $(error $(p): malformed COPY_FILE "$(cf)"))))
 endef
 
 

@@ -187,6 +187,7 @@ endif
 
 all_named_products :=
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 # Find the product config makefile for the current product.
 # all_product_configs consists items like:
 # <product_name>:<path_to_the_product_makefile>
@@ -212,19 +213,68 @@ _cpm_word1 :=
 _cpm_word2 :=
 current_product_makefile := $(strip $(current_product_makefile))
 all_product_makefiles := $(strip $(all_product_makefiles))
+=======
+# Builds a list of first/second elements of each pair:
+#   $(call _first,a:A b:B,:) returns 'a b'
+#   $(call _second,a-A b-B,-) returns 'A B'
+_first=$(filter-out $(2)%,$(subst $(2),$(space)$(2),$(1)))
+_second=$(filter-out %$(2),$(subst $(2),$(2)$(space),$(1)))
 
-load_all_product_makefiles :=
-ifneq (,$(filter product-graph, $(MAKECMDGOALS)))
-ifeq ($(ANDROID_PRODUCT_GRAPH),--all)
-load_all_product_makefiles := true
-endif
-endif
-ifneq (,$(filter dump-products,$(MAKECMDGOALS)))
-ifeq ($(ANDROID_DUMP_PRODUCTS),all)
-load_all_product_makefiles := true
-endif
-endif
+# Returns <product>:<path> pair from a PRODUCT_MAKEFILE item.
+# If an item is <product>:path/to/file.mk, return it as is,
+# otherwise assume that an item is path/to/<product>.mk and
+# return <product>:path/to/<product>.mk
+_product-spec=$(strip $(if $(findstring :,$(1)),$(1),$(basename $(notdir $(1))):$(1)))
 
+# Reads given AndroidProduct.mk file and sets the following variables:
+#  ap_product_paths -- the list of <product>:<path> pairs
+#  ap_common_lunch_choices -- the list of <product>-<build variant> items
+#  ap_products_using_starlark_config -- the list of products using starlark config
+# In addition, validates COMMON_LUNCH_CHOICES and STARLARK_OPT_IN_PRODUCTS values
+define _read-ap-file
+  $(eval PRODUCT_MAKEFILES :=) \
+  $(eval COMMON_LUNCH_CHOICES :=) \
+  $(eval STARLARK_OPT_IN_PRODUCTS := ) \
+  $(eval ap_product_paths :=) \
+  $(eval LOCAL_DIR := $(patsubst %/,%,$(dir $(f)))) \
+  $(eval include $(f)) \
+  $(foreach p, $(PRODUCT_MAKEFILES),$(eval ap_product_paths += $(call _product-spec,$(p)))) \
+  $(eval ap_common_lunch_choices  := $(COMMON_LUNCH_CHOICES)) \
+  $(eval ap_products_using_starlark_config := $(STARLARK_OPT_IN_PRODUCTS)) \
+  $(eval _products := $(call _first,$(ap_product_paths),:)) \
+  $(eval _bad := $(filter-out $(_products),$(call _first,$(ap_common_lunch_choices),-))) \
+  $(if $(_bad),$(error COMMON_LUNCH_CHOICES contains products(s) not defined in this file: $(_bad))) \
+  $(eval _bad := $(filter-out %-eng %-userdebug %-user,$(ap_common_lunch_choices))) \
+  $(if $(_bad),$(error invalid variant in COMMON_LUNCH_CHOICES: $(_bad)))
+  $(eval _bad := $(filter-out $(_products),$(ap_products_using_starlark_config))) \
+  $(if $(_bad),$(error STARLARK_OPT_IN_PRODUCTS contains product(s) not defined in this file: $(_bad)))
+endef
+
+# Build cumulative lists of all product specs/lunch choices/Starlark-based products.
+product_paths :=
+common_lunch_choices :=
+products_using_starlark_config :=
+$(foreach f,$(android_products_makefiles), \
+    $(call _read-ap-file,$(f)) \
+    $(eval product_paths += $(ap_product_paths)) \
+    $(eval common_lunch_choices += $(ap_common_lunch_choices)) \
+    $(eval products_using_starlark_config += $(ap_products_using_starlark_config)) \
+)
+
+# Dedup, extract product names, etc.
+product_paths := $(sort $(product_paths))
+all_named_products := $(sort $(call _first,$(product_paths),:))
+all_product_makefiles := $(sort $(call _second,$(product_paths),:))
+current_product_makefile := $(call _second,$(filter $(TARGET_PRODUCT):%,$(product_paths)),:)
+COMMON_LUNCH_CHOICES := $(sort $(common_lunch_choices))
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
+
+# Check that there are no duplicate product names
+$(foreach p,$(all_named_products), \
+  $(if $(filter 1,$(words $(filter $(p):%,$(product_paths)))),, \
+    $(error Product name must be unique, "$(p)" used by $(call _second,$(filter $(p):%,$(product_paths)),:))))
+
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 ifeq ($(load_all_product_makefiles),true)
 # Import all product makefiles.
 $(call import-products, $(all_product_makefiles))
@@ -232,16 +282,48 @@ else
 # Import just the current product.
 ifndef current_product_makefile
 $(error Can not locate config makefile for product "$(TARGET_PRODUCT)")
+=======
+ifneq ($(ALLOW_RULES_IN_PRODUCT_CONFIG),)
+_product_config_saved_KATI_ALLOW_RULES := $(.KATI_ALLOW_RULES)
+.KATI_ALLOW_RULES := $(ALLOW_RULES_IN_PRODUCT_CONFIG)
+endif
+
+ifeq (,$(current_product_makefile))
+  $(error Can not locate config makefile for product "$(TARGET_PRODUCT)")
+endif
+
+ifneq (,$(filter $(TARGET_PRODUCT),$(products_using_starlark_config)))
+  RBC_PRODUCT_CONFIG := true
+  RBC_BOARD_CONFIG := true
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 endif
 ifneq (1,$(words $(current_product_makefile)))
 $(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
 endif
 $(call import-products, $(current_product_makefile))
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 endif  # Import all or just the current product makefile
 
 # Sanity check
 $(check-all-products)
+=======
+else
+  $(shell mkdir -p $(OUT_DIR)/rbc)
+  $(call dump-variables-rbc, $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
 
+  $(shell build/soong/scripts/update_out \
+    $(OUT_DIR)/rbc/rbc_product_config_results.mk \
+    build/soong/scripts/rbc-run \
+    $(current_product_makefile) \
+    $(OUT_DIR)/rbc/make_vars_pre_product_config.mk)
+  ifneq ($(.SHELLSTATUS),0)
+    $(error product configuration converter failed: $(.SHELLSTATUS))
+  endif
+  include $(OUT_DIR)/rbc/rbc_product_config_results.mk
+endif
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 ifneq ($(filter dump-products, $(MAKECMDGOALS)),)
 $(dump-products)
 $(error done)
@@ -254,6 +336,31 @@ INTERNAL_PRODUCT := $(call resolve-short-product-name, $(TARGET_PRODUCT))
 ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
 $(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
 endif
+=======
+# This step was already handled in the RBC product configuration.
+ifeq ($(RBC_PRODUCT_CONFIG)$(SKIP_ARTIFACT_PATH_REQUIREMENT_PRODUCTS_CHECK),)
+# Import all the products that have made artifact path requirements, so that we can verify
+# the artifacts they produce. They might be intermediate makefiles instead of real products.
+$(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
+  $(if $(filter-out $(makefile),$(PRODUCTS)),$(eval $(call import-products,$(makefile))))\
+)
+endif
+
+INTERNAL_PRODUCT := $(current_product_makefile)
+# Strip and assign the PRODUCT_ variables.
+$(call strip-product-vars)
+
+# Quick check
+$(check-current-product)
+
+ifneq ($(ALLOW_RULES_IN_PRODUCT_CONFIG),)
+.KATI_ALLOW_RULES := $(_saved_KATI_ALLOW_RULES)
+_product_config_saved_KATI_ALLOW_RULES :=
+endif
+
+############################################################################
+
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=

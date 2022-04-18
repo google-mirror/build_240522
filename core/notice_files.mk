@@ -35,6 +35,7 @@ endif
 
 ifdef notice_file
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 # This relies on the name of the directory in PRODUCT_OUT matching where
 # it's installed on the target - i.e. system, data, etc.  This does
 # not work for root and isn't exact, but it's probably good enough for
@@ -113,3 +114,10 @@ notice_target := NOTICE-$(if \
     $(LOCAL_IS_HOST_MODULE),HOST,TARGET)-$(LOCAL_MODULE_CLASS)-$(LOCAL_MODULE)
 .PHONY: $(notice_target)
 $(notice_target): $(installed_notice_file)
+=======
+ifdef my_register_name
+ALL_MODULES.$(my_register_name).NOTICES := $(ALL_MODULES.$(my_register_name).NOTICES) $(notice_file)
+endif
+
+endif  # notice_file
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])

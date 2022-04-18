@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 # the foreach and the if remove the single space entries that creep in because of the evals
 define gather-all-products
 $(sort $(foreach p, \
@@ -21,9 +22,15 @@ $(sort $(foreach p, \
   $(call all-products-inner, $(ALL_PRODUCTS)) \
 	, $(if $(strip $(p)),$(strip $(p)),)) \
 )
+=======
+# the sort also acts as a strip to remove the single space entries that creep in because of the evals
+define gather-all-makefiles-for-current-product
+$(eval _all_products_visited := )\
+$(sort $(call gather-all-makefiles-for-current-product-inner,$(INTERNAL_PRODUCT)))
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 endef
 
-define all-products-inner
+define gather-all-makefiles-for-current-product-inner
 	$(foreach p,$(1),\
 		$(if $(filter $(p),$(_all_products_visited)),, \
 			$(p) \
@@ -33,6 +40,7 @@ define all-products-inner
 	)
 endef
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 
 this_makefile := build/make/core/product-graph.mk
 
@@ -50,6 +58,21 @@ endif
 endif
 
 really_all_products := $(call gather-all-products)
+=======
+node_color_target := orange
+node_color_common := beige
+node_color_vendor := lavenderblush
+node_color_default := white
+define node-color
+$(if $(filter $(1),$(PRIVATE_TOP_LEVEL_MAKEFILE)),\
+  $(node_color_target),\
+  $(if $(filter build/make/target/product/%,$(1)),\
+    $(node_color_common),\
+    $(if $(filter vendor/%,$(1)),$(node_color_vendor),$(node_color_default))\
+  )\
+)
+endef
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
 open_parethesis := (
 close_parenthesis := )
@@ -59,25 +82,36 @@ close_parenthesis := )
 # $(2) the output file
 define emit-product-node-props
 $(hide) echo \"$(1)\" [ \
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 label=\"$(dir $(1))\\n$(notdir $(1))\\n\\n$(subst $(close_parenthesis),,$(subst $(open_parethesis),,$(PRODUCTS.$(strip $(1)).PRODUCT_MODEL)))\\n$(PRODUCTS.$(strip $(1)).PRODUCT_DEVICE)\" \
 $(if $(filter $(1),$(PRIVATE_PRODUCTS_FILTER)), style=\"filled\" fillcolor=\"#FFFDB0\",) \
 colorscheme=\"svg\" fontcolor=\"darkblue\" href=\"products/$(1).html\" \
+=======
+label=\"$(dir $(1))\\n$(notdir $(1))$(if $(filter $(1),$(PRIVATE_TOP_LEVEL_MAKEFILE)),$(subst $(open_parethesis),,$(subst $(close_parenthesis),,\\n\\n$(PRODUCT_MODEL)\\n$(PRODUCT_DEVICE))))\" \
+style=\"filled\" fillcolor=\"$(strip $(call node-color,$(1)))\" \
+colorscheme=\"svg\" fontcolor=\"darkblue\" \
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 ] >> $(2)
 
 endef
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 $(products_graph): PRIVATE_PRODUCTS := $(really_all_products)
 $(products_graph): PRIVATE_PRODUCTS_FILTER := $(products_list)
+=======
+products_graph := $(OUT_DIR)/products.dot
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
-$(products_graph): $(this_makefile)
-	@echo Product graph DOT: $@ for $(PRIVATE_PRODUCTS_FILTER)
-	$(hide) echo 'digraph {' > $@.in
-	$(hide) echo 'graph [ ratio=.5 ];' >> $@.in
-	$(hide) $(foreach p,$(PRIVATE_PRODUCTS), \
-	  $(foreach d,$(PRODUCTS.$(strip $(p)).INHERITS_FROM), echo \"$(d)\" -\> \"$(p)\" >> $@.in;))
-	$(foreach p,$(PRIVATE_PRODUCTS),$(call emit-product-node-props,$(p),$@.in))
-	$(hide) echo '}' >> $@.in
-	$(hide) build/make/tools/filter-product-graph.py $(PRIVATE_PRODUCTS_FILTER) < $@.in > $@
+$(products_graph): PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT := $(call gather-all-makefiles-for-current-product)
+$(products_graph): PRIVATE_TOP_LEVEL_MAKEFILE := $(INTERNAL_PRODUCT)
+$(products_graph):
+	@echo Product graph DOT: $@ for $(PRIVATE_TOP_LEVEL_MAKEFILE)
+	$(hide) echo 'digraph {' > $@
+	$(hide) echo 'graph [ ratio=.5 ];' >> $@
+	$(hide) $(foreach p,$(PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT), \
+	  $(foreach d,$(PRODUCTS.$(strip $(p)).INHERITS_FROM), echo \"$(d)\" -\> \"$(p)\" >> $@;))
+	$(foreach p,$(PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT),$(call emit-product-node-props,$(p),$@))
+	$(hide) echo '}' >> $@
 
 # Evaluates to the name of the product file
 # $(1) product file

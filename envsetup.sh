@@ -1596,6 +1596,60 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    if T="$(gettop)"; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$@" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        bazel "$@" --config=bp2build
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"

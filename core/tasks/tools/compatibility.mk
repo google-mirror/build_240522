@@ -53,10 +53,35 @@ $(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tool
 # Make dir structure
 	$(hide) mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
 # Copy tools
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 	$(hide) $(ACP) -fp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
 	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) $(ACP) -fp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
 	$(hide) find $(dir $@)/$(PRIVATE_NAME) | sort >$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
+=======
+	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
+	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
+	find $(PRIVATE_RESOURCES) | sort >$@.list
+	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list
+	$(MERGE_ZIPS) $@ $@.tmp $(PRIVATE_JDK)
+	rm -f $@.tmp
+# Build a list of tests
+	rm -f $(PRIVATE_tests_list)
+	$(hide) grep -e .*\\.config$$ $@.list | sed s%$(PRIVATE_OUT_DIR)/testcases/%%g > $(PRIVATE_tests_list)
+	$(SOONG_ZIP) -d -o $(PRIVATE_tests_list_zip) -j -f $(PRIVATE_tests_list)
+	rm -f $(PRIVATE_tests_list)
+
+$(call declare-0p-target,$(compatibility_tests_list_zip),)
+
+$(call declare-1p-container,$(compatibility_zip),)
+$(call declare-container-license-deps,$(compatibility_zip),$(compatibility_zip_deps) $(test_suite_jdk), $(out_dir)/:/)
+
+$(eval $(call html-notice-rule,$(test_suite_notice_html),"Test suites","Notices for files contained in the test suites filesystem image:",$(compatibility_zip),$(compatibility_zip)))
+$(eval $(call text-notice-rule,$(test_suite_notice_txt),"Test suites","Notices for files contained in the test suites filesystem image:",$(compatibility_zip),$(compatibility_zip)))
+
+$(call declare-0p-target,$(test_suite_notice_html))
+$(call declare-0p-target,$(test_suite_notice_txt))
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
 # Reset all input variables
 test_suite_name :=

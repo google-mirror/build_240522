@@ -284,6 +284,12 @@ $(eval $(call copy-one-file,$(full_classes_header_jarjar),$(full_classes_header_
 
 endif # TURBINE_ENABLED != false
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+# TODO(b/143658984): goma can't handle the --system argument to javac.
+#$(full_classes_compiled_jar): .KATI_NINJA_POOL := $(GOMA_POOL)
+$(full_classes_compiled_jar): .KATI_NINJA_POOL := $(JAVAC_NINJA_POOL)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 $(full_classes_compiled_jar): PRIVATE_JAVACFLAGS := $(LOCAL_JAVACFLAGS) $(annotation_processor_flags)
 $(full_classes_compiled_jar): PRIVATE_JAR_EXCLUDE_FILES := $(LOCAL_JAR_EXCLUDE_FILES)
 $(full_classes_compiled_jar): PRIVATE_JAR_PACKAGES := $(LOCAL_JAR_PACKAGES)
@@ -533,6 +539,7 @@ $(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 
 my_r8 :=
 ifdef LOCAL_PROGUARD_ENABLED
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 ifeq ($(USE_R8),true)
 # These are the dependencies for the proguarded jar when running
 # Proguard + dx. They are used for the generated dex when using R8, as
@@ -541,13 +548,28 @@ my_r8 := true
 $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
 $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
 $(built_dex_intermediate) : $(full_classes_proguard_jar) $(extra_input_jar) $(my_support_library_sdk_raise) $(common_proguard_flag_files) $(proguard_flag_files) $(legacy_proguard_lib_deps) $(R8_COMPAT_PROGUARD)
+=======
+  $(built_dex_intermediate): .KATI_NINJA_POOL := $(R8_NINJA_POOL)
+  $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_DICTIONARY := $(proguard_dictionary)
+  $(built_dex_intermediate) : $(full_classes_pre_proguard_jar) $(extra_input_jar) $(my_proguard_sdk_raise) $(common_proguard_flag_files) $(legacy_proguard_lib_deps) $(R8_COMPAT_PROGUARD) $(LOCAL_PROGUARD_FLAGS_DEPS)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 	$(transform-jar-to-dex-r8)
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 endif # USE_R8
 endif # LOCAL_PROGUARD_ENABLED
 
 ifndef my_r8
 $(built_dex_intermediate): $(full_classes_proguard_jar) $(DX) $(ZIP2ZIP)
 ifneq ($(USE_D8_DESUGAR),true)
+=======
+else # !LOCAL_PROGUARD_ENABLED
+  $(built_dex_intermediate): .KATI_NINJA_POOL := $(D8_NINJA_POOL)
+  $(built_dex_intermediate): PRIVATE_D8_LIBS := $(full_java_bootclasspath_libs) $(full_shared_java_header_libs)
+  $(built_dex_intermediate): $(full_java_bootclasspath_libs) $(full_shared_java_header_libs)
+  $(built_dex_intermediate): $(full_classes_pre_proguard_jar) $(DX) $(ZIP2ZIP)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 	$(transform-classes.jar-to-dex)
 else
 	$(transform-classes-d8.jar-to-dex)

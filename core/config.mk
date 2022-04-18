@@ -305,6 +305,7 @@ $(hide) otool -l $(1) | grep LC_ID_DYLIB -A 5 > $(2)
 $(hide) nm -gP $(1) | cut -f1-2 -d" " | (grep -v U$$ >> $(2) || true)
 endef
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 combo_target := HOST_
 combo_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/combo/select.mk
@@ -342,6 +343,22 @@ combo_target := TARGET_
 combo_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/combo/select.mk
 endif
+=======
+GOMA_POOL :=
+RBE_POOL :=
+GOMA_OR_RBE_POOL :=
+# When goma or RBE are enabled, kati will be passed --default_pool=local_pool to put
+# most rules into the local pool.  Explicitly set the pool to "none" for rules that
+# should be run outside the local pool, i.e. with -j500.
+ifneq (,$(filter-out false,$(USE_GOMA)))
+  GOMA_POOL := none
+  GOMA_OR_RBE_POOL := none
+else ifneq (,$(filter-out false,$(USE_RBE)))
+  RBE_POOL := none
+  GOMA_OR_RBE_POOL := none
+endif
+.KATI_READONLY := GOMA_POOL RBE_POOL GOMA_OR_RBE_POOL
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ccache.mk
@@ -1065,6 +1082,7 @@ endef
 
 # These goals don't need to collect and include Android.mks/CleanSpec.mks
 # in the source tree.
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 dont_bother_goals := out \
     snod systemimage-nodeps \
     stnod systemtarball-nodeps \
@@ -1079,6 +1097,9 @@ dont_bother_goals := out \
     recoveryimage-nodeps \
     vbmetaimage-nodeps \
     product-graph dump-products
+=======
+dont_bother_goals := out product-graph
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ninja_config.mk

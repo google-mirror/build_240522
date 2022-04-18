@@ -561,6 +561,45 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       build_command.append("-c")
     if "selinux_fc" in prop_dict:
       build_command.append(prop_dict["selinux_fc"])
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+  elif fs_type.startswith("erofs"):
+    build_command = ["mkfs.erofs"]
+
+    compressor = None
+    if "erofs_default_compressor" in prop_dict:
+      compressor = prop_dict["erofs_default_compressor"]
+    if "erofs_compressor" in prop_dict:
+      compressor = prop_dict["erofs_compressor"]
+    if compressor:
+      build_command.extend(["-z", compressor])
+
+    build_command.extend(["--mount-point", prop_dict["mount_point"]])
+    if target_out:
+      build_command.extend(["--product-out", target_out])
+    if fs_config:
+      build_command.extend(["--fs-config-file", fs_config])
+    if "selinux_fc" in prop_dict:
+      build_command.extend(["--file-contexts", prop_dict["selinux_fc"]])
+    if "timestamp" in prop_dict:
+      build_command.extend(["-T", str(prop_dict["timestamp"])])
+    if "uuid" in prop_dict:
+      build_command.extend(["-U", prop_dict["uuid"]])
+    if "block_list" in prop_dict:
+      build_command.extend(["--block-list-file", prop_dict["block_list"]])
+    if "erofs_pcluster_size" in prop_dict:
+      build_command.extend(["-C", prop_dict["erofs_pcluster_size"]])
+    if "erofs_share_dup_blocks" in prop_dict:
+      build_command.extend(["--chunksize", "4096"])
+    if "erofs_use_legacy_compression" in prop_dict:
+      build_command.extend(["-E", "legacy-compress"])
+
+    build_command.extend([out_file, in_dir])
+    if "erofs_sparse_flag" in prop_dict and not disable_sparse:
+      manual_sparse = True
+
+    run_fsck = RunErofsFsck
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
   elif fs_type.startswith("squash"):
     build_command = ["mksquashfsimage.sh"]
     build_command.extend([in_dir, out_file])
@@ -703,6 +742,14 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
 
   common_props = (
       "extfs_sparse_flag",
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+      "erofs_default_compressor",
+      "erofs_pcluster_size",
+      "erofs_share_dup_blocks",
+      "erofs_sparse_flag",
+      "erofs_use_legacy_compression",
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
       "squashfs_sparse_flag",
       "selinux_fc",
       "skip_fsck",
@@ -719,6 +766,88 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   for p in common_props:
     copy_prop(p, p)
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+  ro_mount_points = set([
+      "odm",
+      "odm_dlkm",
+      "oem",
+      "product",
+      "system",
+      "system_dlkm",
+      "system_ext",
+      "system_other",
+      "vendor",
+      "vendor_dlkm",
+  ])
+
+  # Tuple layout: (readonly, specific prop, general prop)
+  fmt_props = (
+      # Generic first, then specific file type.
+      (False, "fs_type", "fs_type"),
+      (False, "{}_fs_type", "fs_type"),
+
+      # Ordering for these doesn't matter.
+      (False, "{}_selinux_fc", "selinux_fc"),
+      (False, "{}_size", "partition_size"),
+      (True, "avb_{}_add_hashtree_footer_args", "avb_add_hashtree_footer_args"),
+      (True, "avb_{}_algorithm", "avb_algorithm"),
+      (True, "avb_{}_hashtree_enable", "avb_hashtree_enable"),
+      (True, "avb_{}_key_path", "avb_key_path"),
+      (True, "avb_{}_salt", "avb_salt"),
+      (True, "erofs_use_legacy_compression", "erofs_use_legacy_compression"),
+      (True, "ext4_share_dup_blocks", "ext4_share_dup_blocks"),
+      (True, "{}_base_fs_file", "base_fs_file"),
+      (True, "{}_disable_sparse", "disable_sparse"),
+      (True, "{}_erofs_compressor", "erofs_compressor"),
+      (True, "{}_erofs_pcluster_size", "erofs_pcluster_size"),
+      (True, "{}_erofs_share_dup_blocks", "erofs_share_dup_blocks"),
+      (True, "{}_extfs_inode_count", "extfs_inode_count"),
+      (True, "{}_f2fs_compress", "f2fs_compress"),
+      (True, "{}_f2fs_sldc_flags", "f2fs_sldc_flags"),
+      (True, "{}_reserved_size", "partition_reserved_size"),
+      (True, "{}_squashfs_block_size", "squashfs_block_size"),
+      (True, "{}_squashfs_compressor", "squashfs_compressor"),
+      (True, "{}_squashfs_compressor_opt", "squashfs_compressor_opt"),
+      (True, "{}_squashfs_disable_4k_align", "squashfs_disable_4k_align"),
+      (True, "{}_verity_block_device", "verity_block_device"),
+  )
+
+  # Translate prefixed properties into generic ones.
+  if mount_point == "data":
+    prefix = "userdata"
+  else:
+    prefix = mount_point
+
+  for readonly, src_prop, dest_prop in fmt_props:
+    if readonly and mount_point not in ro_mount_points:
+      continue
+
+    if src_prop == "fs_type":
+      # This property is legacy and only used on a few partitions. b/202600377
+      allowed_partitions = set(["system", "system_other", "data", "oem"])
+      if mount_point not in allowed_partitions:
+          continue
+
+    if (mount_point == "system_other") and (dest_prop != "partition_size"):
+      # Propagate system properties to system_other. They'll get overridden
+      # after as needed.
+      copy_prop(src_prop.format("system"), dest_prop)
+
+    copy_prop(src_prop.format(prefix), dest_prop)
+
+  # Set prefixed properties that need a default value.
+  if mount_point in ro_mount_points:
+    prop = "{}_journal_size".format(prefix)
+    if not copy_prop(prop, "journal_size"):
+      d["journal_size"] = "0"
+
+    prop = "{}_extfs_rsv_pct".format(prefix)
+    if not copy_prop(prop, "extfs_rsv_pct"):
+      d["extfs_rsv_pct"] = "0"
+
+  # Copy partition-specific properties.
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
   d["mount_point"] = mount_point
   if mount_point == "system":
     copy_prop("avb_system_hashtree_enable", "avb_hashtree_enable")

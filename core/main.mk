@@ -680,7 +680,46 @@ $(foreach m,$($(if $(2),$($(1)2ND_ARCH_VAR_PREFIX))$(1)DEPENDENCIES_ON_SHARED_LI
   $(if $(filter $(1),HOST_),\
     $(eval $(call add-required-host-so-deps,$(word 2,$(p)),$(r))),\
     $(eval $(call add-required-deps,$(word 2,$(p)),$(r))))\
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
   $(eval ALL_MODULES.$(mod).REQUIRED += $(deps)))
+=======
+  $(eval ALL_MODULES.$(mod).REQUIRED_FROM_$(patsubst %_,%,$(1)) += $(deps)))
+endef
+
+# Recursively resolve host shared library dependency for a given module.
+# $(1): module name
+# Returns all dependencies of shared library.
+define get-all-shared-libs-deps
+$(if $(_all_deps_for_$(1)_set_),$(_all_deps_for_$(1)_),\
+  $(eval _all_deps_for_$(1)_ :=) \
+  $(foreach dep,$(ALL_MODULES.$(1).HOST_SHARED_LIBRARIES),\
+    $(foreach m,$(call get-all-shared-libs-deps,$(dep)),\
+      $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(m))\
+      $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_))))\
+    $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(dep))\
+    $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_) $(dep)))\
+    $(eval _all_deps_for_$(1)_set_ := true))\
+$(_all_deps_for_$(1)_))
+endef
+
+# Scan all modules in general-tests, device-tests and other selected suites and
+# flatten the shared library dependencies.
+define update-host-shared-libs-deps-for-suites
+$(foreach suite,general-tests device-tests vts tvts art-host-tests host-unit-tests,\
+  $(foreach m,$(COMPATIBILITY.$(suite).MODULES),\
+    $(eval my_deps := $(call get-all-shared-libs-deps,$(m)))\
+    $(foreach dep,$(my_deps),\
+      $(foreach f,$(ALL_MODULES.$(dep).HOST_SHARED_LIBRARY_FILES),\
+        $(if $(filter $(suite),device-tests general-tests),\
+          $(eval my_testcases := $(HOST_OUT_TESTCASES)),\
+          $(eval my_testcases := $$(COMPATIBILITY_TESTCASES_OUT_$(suite))))\
+        $(eval target := $(my_testcases)/$(lastword $(subst /, ,$(dir $(f))))/$(notdir $(f)))\
+        $(if $(strip $(ALL_TARGETS.$(target).META_LIC)),,$(eval ALL_TARGETS.$(target).META_LIC:=$(module_license_metadata)))\
+        $(eval COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES := \
+          $$(COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES) $(f):$(target))\
+        $(eval COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES := \
+          $(sort $(COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES)))))))
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 endef
 
 $(call resolve-shared-libs-depes,TARGET_)
@@ -921,11 +960,146 @@ endif
 
   $(call expand-required-modules,product_MODULES,$(product_MODULES))
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
   product_FILES := $(call module-installed-files, $(product_MODULES))
   ifeq (0,1)
     $(info product_FILES for $(TARGET_DEVICE) ($(INTERNAL_PRODUCT)):)
     $(foreach p,$(product_FILES),$(info :   $(p)))
     $(error done)
+=======
+endef
+
+# Lists most of the files a particular product installs, including:
+# - PRODUCT_PACKAGES, and their LOCAL_REQUIRED_MODULES
+# - PRODUCT_COPY_FILES
+# The base list of modules to build for this product is specified
+# by the appropriate product definition file, which was included
+# by product_config.mk.
+# Name resolution for PRODUCT_PACKAGES:
+#   foo:32 resolves to foo_32;
+#   foo:64 resolves to foo;
+#   foo resolves to both foo and foo_32 (if foo_32 is defined).
+#
+# Name resolution for LOCAL_REQUIRED_MODULES:
+#   See the select-bitness-of-required-modules definition.
+# $(1): product makefile
+
+define product-installed-files
+  $(eval _pif_modules := \
+    $(call get-product-var,$(1),PRODUCT_PACKAGES) \
+    $(if $(filter eng,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_ENG)) \
+    $(if $(filter debug,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_DEBUG)) \
+    $(if $(filter tests,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_TESTS)) \
+    $(if $(filter asan,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_DEBUG_ASAN)) \
+    $(if $(filter java_coverage,$(tags_to_install)),$(call get-product-var,$(1),PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE)) \
+    $(call auto-included-modules) \
+  ) \
+  $(eval ### Filter out the overridden packages and executables before doing expansion) \
+  $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
+  $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _pif_modules := $(sort $(call resolve-bitness-for-modules,TARGET,$(_pif_modules)))) \
+  $(call expand-required-modules,_pif_modules,$(_pif_modules),$(_pif_overrides)) \
+  $(filter-out $(HOST_OUT_ROOT)/%,$(call module-installed-files, $(_pif_modules))) \
+  $(call resolve-product-relative-paths,\
+    $(foreach cf,$(call get-product-var,$(1),PRODUCT_COPY_FILES),$(call word-colon,2,$(cf))))
+endef
+
+# Similar to product-installed-files above, but handles PRODUCT_HOST_PACKAGES instead
+# This does support the :32 / :64 syntax, but does not support module overrides.
+define host-installed-files
+  $(eval _hif_modules := $(call get-product-var,$(1),PRODUCT_HOST_PACKAGES)) \
+  $(eval ### Split host vs host cross modules) \
+  $(eval _hcif_modules := $(filter host_cross_%,$(_hif_modules))) \
+  $(eval _hif_modules := $(filter-out host_cross_%,$(_hif_modules))) \
+  $(eval ### Resolve the :32 :64 module name) \
+  $(eval _hif_modules := $(sort $(call resolve-bitness-for-modules,HOST,$(_hif_modules)))) \
+  $(eval _hcif_modules := $(sort $(call resolve-bitness-for-modules,HOST_CROSS,$(_hcif_modules)))) \
+  $(call expand-required-host-modules,_hif_modules,$(_hif_modules),HOST) \
+  $(call expand-required-host-modules,_hcif_modules,$(_hcif_modules),HOST_CROSS) \
+  $(filter $(HOST_OUT)/%,$(call module-installed-files, $(_hif_modules))) \
+  $(filter $(HOST_CROSS_OUT)/%,$(call module-installed-files, $(_hcif_modules)))
+endef
+
+# Fails the build if the given list is non-empty, and prints it entries (stripping PRODUCT_OUT).
+# $(1): list of files to print
+# $(2): heading to print on failure
+define maybe-print-list-and-error
+$(if $(strip $(1)), \
+  $(warning $(2)) \
+  $(info Offending entries:) \
+  $(foreach e,$(sort $(1)),$(info    $(patsubst $(PRODUCT_OUT)/%,%,$(e)))) \
+  $(error Build failed) \
+)
+endef
+
+ifeq ($(HOST_OS),darwin)
+  # Target builds are not supported on Mac
+  product_target_FILES :=
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+else ifdef FULL_BUILD
+  ifneq (true,$(ALLOW_MISSING_DEPENDENCIES))
+    # Check to ensure that all modules in PRODUCT_PACKAGES exist (opt in per product)
+    ifeq (true,$(PRODUCT_ENFORCE_PACKAGES_EXIST))
+      _allow_list := $(PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST)
+      _modules := $(PRODUCT_PACKAGES)
+      # Strip :32 and :64 suffixes
+      _modules := $(patsubst %:32,%,$(_modules))
+      _modules := $(patsubst %:64,%,$(_modules))
+      # Quickly check all modules in PRODUCT_PACKAGES exist. We check for the
+      # existence if either <module> or the <module>_32 variant.
+      _nonexistent_modules := $(foreach m,$(_modules), \
+        $(if $(or $(ALL_MODULES.$(m).PATH),$(call get-modules-for-2nd-arch,TARGET,$(m))),,$(m)))
+      $(call maybe-print-list-and-error,$(filter-out $(_allow_list),$(_nonexistent_modules)),\
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_PACKAGES)
+      # TODO(b/182105280): Consider re-enabling this check when the ART modules
+      # have been cleaned up from the allowed_list in target/product/generic.mk.
+      #$(call maybe-print-list-and-error,$(filter-out $(_nonexistent_modules),$(_allow_list)),\
+      #  $(INTERNAL_PRODUCT) includes redundant allow list entries for non-existent PRODUCT_PACKAGES)
+    endif
+
+    # Check to ensure that all modules in PRODUCT_HOST_PACKAGES exist
+    #
+    # Many host modules are Linux-only, so skip this check on Mac. If we ever have Mac-only modules,
+    # maybe it would make sense to have PRODUCT_HOST_PACKAGES_LINUX/_DARWIN?
+    ifneq ($(HOST_OS),darwin)
+      _modules := $(PRODUCT_HOST_PACKAGES)
+      # Strip :32 and :64 suffixes
+      _modules := $(patsubst %:32,%,$(_modules))
+      _modules := $(patsubst %:64,%,$(_modules))
+      _nonexistent_modules := $(foreach m,$(_modules),\
+        $(if $(ALL_MODULES.$(m).REQUIRED_FROM_HOST)$(filter $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,$(m)))
+      $(call maybe-print-list-and-error,$(_nonexistent_modules),\
+        $(INTERNAL_PRODUCT) includes non-existent modules in PRODUCT_HOST_PACKAGES)
+    endif
+  endif
+
+  # Modules may produce only host installed files in unbundled builds.
+  ifeq (,$(TARGET_BUILD_UNBUNDLED))
+    _modules := $(call resolve-bitness-for-modules,TARGET, \
+      $(PRODUCT_PACKAGES) \
+      $(PRODUCT_PACKAGES_DEBUG) \
+      $(PRODUCT_PACKAGES_DEBUG_ASAN) \
+      $(PRODUCT_PACKAGES_ENG) \
+      $(PRODUCT_PACKAGES_TESTS))
+    _host_modules := $(foreach m,$(_modules), \
+                  $(if $(ALL_MODULES.$(m).INSTALLED),\
+                    $(if $(filter-out $(HOST_OUT_ROOT)/%,$(ALL_MODULES.$(m).INSTALLED)),,\
+                      $(m))))
+    $(call maybe-print-list-and-error,$(sort $(_host_modules)),\
+      Host modules should be in PRODUCT_HOST_PACKAGES$(comma) not PRODUCT_PACKAGES)
+  endif
+
+  product_host_FILES := $(call host-installed-files,$(INTERNAL_PRODUCT))
+  product_target_FILES := $(call product-installed-files, $(INTERNAL_PRODUCT))
+  # WARNING: The product_MODULES variable is depended on by external files.
+  product_MODULES := $(_pif_modules)
+
+  # Verify the artifact path requirements made by included products.
+  is_asan := $(if $(filter address,$(SANITIZE_TARGET)),true)
+  ifeq (,$(or $(is_asan),$(DISABLE_ARTIFACT_PATH_REQUIREMENTS)))
+    include $(BUILD_SYSTEM)/artifact_path_requirements.mk
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
   endif
 else
   # We're not doing a full build, and are probably only including
@@ -1021,6 +1195,14 @@ modules_to_install := $(sort $(ALL_DEFAULT_INSTALLED_MODULES))
 ALL_DEFAULT_INSTALLED_MODULES :=
 
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
+=======
+# Some notice deps refer to module names without prefix or arch suffix where
+# only the variants with them get built.
+# fix-notice-deps replaces those unadorned module names with every built variant.
+$(call fix-notice-deps)
+
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 # These are additional goals that we build, in order to make sure that there
 # is as little code as possible in the tree that doesn't build.
 modules_to_check := $(foreach m,$(ALL_MODULES),$(ALL_MODULES.$(m).CHECKED))
@@ -1154,13 +1336,28 @@ ifneq ($(TARGET_BUILD_APPS),)
   endif
 
   $(PROGUARD_DICT_ZIP) : $(apps_only_installed_files)
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
   $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP))
+=======
+  $(call dist-for-goals,apps_only, $(PROGUARD_DICT_ZIP) $(PROGUARD_DICT_MAPPING))
+  $(call declare-container-license-deps,$(PROGUARD_DICT_ZIP),$(apps_only_installed_files),$(PRODUCT_OUT)/:/)
+
+  $(PROGUARD_USAGE_ZIP) : $(apps_only_installed_files)
+  $(call dist-for-goals,apps_only, $(PROGUARD_USAGE_ZIP))
+  $(call declare-container-license-deps,$(PROGUARD_USAGE_ZIP),$(apps_only_installed_files),$(PRODUCT_OUT)/:/)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
   $(SYMBOLS_ZIP) : $(apps_only_installed_files)
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
   $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP))
+=======
+  $(call dist-for-goals,apps_only, $(SYMBOLS_ZIP) $(SYMBOLS_MAPPING))
+  $(call declare-container-license-deps,$(SYMBOLS_ZIP),$(apps_only_installed_files),$(PRODUCT_OUT)/:/)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
   $(COVERAGE_ZIP) : $(apps_only_installed_files)
   $(call dist-for-goals,apps_only, $(COVERAGE_ZIP))
+  $(call declare-container-license-deps,$(COVERAGE_ZIP),$(apps_only_installed_files),$(PRODUCT_OUT)/:/)
 
 .PHONY: apps_only
 apps_only: $(unbundled_build_modules)
@@ -1215,7 +1412,47 @@ else # TARGET_BUILD_APPS
 # Building a full system-- the default is to build droidcore
 droid_targets: droidcore dist_files
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 endif # TARGET_BUILD_APPS
+=======
+  api_xmls := $(addprefix $(TARGET_OUT_COMMON_INTERMEDIATES)/,api.xml system-api.xml module-lib-api.xml system-server-api.xml test-api.xml)
+  $(api_xmls):
+	$(hide) echo "Converting API file to XML: $@"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(APICHECK_COMMAND) --input-api-jar $< --api-xml $@
+
+  $(foreach xml,$(sort $(api_xmls)),$(call declare-1p-target,$(xml),))
+
+  $(call dist-for-goals, dist_files, $(api_xmls))
+  api_xmls :=
+
+  ifdef CLANG_COVERAGE
+    $(foreach f,$(SOONG_NDK_API_XML), \
+        $(call dist-for-goals,droidcore,$(f):ndk_apis/$(notdir $(f))))
+    $(foreach f,$(SOONG_CC_API_XML), \
+        $(call dist-for-goals,droidcore,$(f):cc_apis/$(notdir $(f))))
+  endif
+
+  # For full system build (whether unbundled or not), we configure
+  # droid_targets to depend on droidcore-unbundled, which will set up the full
+  # system dependencies and also dist the subset of targets that correspond to
+  # an unbundled build (exclude building some framework sources).
+
+  droid_targets: droidcore-unbundled
+
+  ifeq (,$(TARGET_BUILD_UNBUNDLED_IMAGE))
+
+    # If we're building a full system (including the framework sources excluded
+    # by droidcore-unbundled), we configure droid_targets also to depend on
+    # droidcore, which includes all dist for droidcore, and will build the
+    # necessary framework sources.
+
+    droid_targets: droidcore dist_files
+
+  endif
+
+endif # TARGET_BUILD_UNBUNDLED == TARGET_BUILD_UNBUNDLED_IMAGE
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
 
 .PHONY: docs
 docs: $(ALL_DOCS)
@@ -1288,4 +1525,20 @@ tidy_only:
 ndk: $(SOONG_OUT_DIR)/ndk.timestamp
 .PHONY: ndk
 
+<<<<<<< HEAD   (5f91bd Merge "Merge empty history for sparse-8435393-L9030000095399)
 endif # KATI
+=======
+# Checks that allowed_deps.txt remains up to date
+ifneq ($(UNSAFE_DISABLE_APEX_ALLOWED_DEPS_CHECK),true)
+  droidcore: ${APEX_ALLOWED_DEPS_CHECK}
+endif
+
+# Create a license metadata rule per module. Could happen in base_rules.mk or
+# notice_files.mk; except, it has to happen after fix-notice-deps to avoid
+# missing dependency errors.
+$(call build-license-metadata)
+
+$(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
+
+$(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
+>>>>>>> BRANCH (436489 Merge "Version bump to TKB1.220417.001.A1 [core/build_id.mk])
