@@ -15,6 +15,7 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"io"
@@ -27,9 +28,16 @@ import (
 	"android/soong/tools/compliance"
 )
 
+var (
+	outputFile  = flag.String("o", "-", "Where to write the list of projects to share. (default stdout)")
+
+	failNoneRequested = fmt.Errorf("\nNo license metadata files requested")
+	failNoLicenses    = fmt.Errorf("No licenses found")
+)
+
 func init() {
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, `Usage: %s file.meta_lic {file.meta_lic...}
+		fmt.Fprintf(os.Stderr, `Usage: %s {-o outfile} file.meta_lic {file.meta_lic...}
 
 Outputs a csv file with 1 project per line in the first field followed
 by target:condition pairs describing why the project must be shared.
@@ -41,11 +49,6 @@ restricted (e.g. GPL) or reciprocal (e.g. MPL).
 	}
 }
 
-var (
-	failNoneRequested = fmt.Errorf("\nNo license metadata files requested")
-	failNoLicenses    = fmt.Errorf("No licenses found")
-)
-
 func main() {
 	flag.Parse()
 
@@ -55,13 +58,49 @@ func main() {
 		os.Exit(2)
 	}
 
-	err := listShare(os.Stdout, os.Stderr, compliance.FS, flag.Args()...)
+	if len(*outputFile) == 0 {
+		flag.Usage()
+		fmt.Fprintf(os.Stderr, "must specify file for -o; use - for stdout\n")
+		os.Exit(2)
+	} else {
+		dir, err := filepath.Abs(filepath.Dir(*outputFile))
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "cannot determine path to %q: %s\n", *outputFile, err)
+			os.Exit(1)
+		}
+		fi, err := os.Stat(dir)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "cannot read directory %q of %q: %s\n", dir, *outputFile, err)
+			os.Exit(1)
+		}
+		if !fi.IsDir() {
+			fmt.Fprintf(os.Stderr, "parent %q of %q is not a directory\n", dir, *outputFile)
+			os.Exit(1)
+		}
+	}
+
+	var ofile io.Writer
+	ofile = os.Stdout
+	var obuf *bytes.Buffer
+	if *outputFile != "-" {
+		obuf = &bytes.Buffer{}
+		ofile = obuf
+	}
+
+	err := listShare(ofile, os.Stderr, compliance.FS, flag.Args()...)
 	if err != nil {
 		if err == failNoneRequested {
 			flag.Usage()
 		}
 		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 		os.Exit(1)
+	}
+	if *outputFile != "-" {
+		err := os.WriteFile(*outputFile, obuf.Bytes(), 0666)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "could not write output to %q from %q: %s\n", *outputFile, os.Getenv("PWD"), err)
+			os.Exit(1)
+		}
 	}
 	os.Exit(0)
 }
