@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6586ff7_22707cba",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T18:24:05Z",
+      "side": 1,
+      "message": "I thought your intention is to rebuild vbmeta images when rebuilding recovery? Is setting avb_building_vbmeta_image to false really what you want?",
+      "range": {
+        "startLine": 1363,
+        "startChar": 50,
+        "endLine": 1363,
+        "endChar": 55
+      },
+      "revId": "7d93d32a957df187527bd9a98005411ca8f06c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73cf9f28_4ff3c9d5",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T18:24:05Z",
+      "side": 1,
+      "message": "space before \u003d",
+      "range": {
+        "startLine": 1363,
+        "startChar": 47,
+        "endLine": 1363,
+        "endChar": 48
+      },
+      "revId": "7d93d32a957df187527bd9a98005411ca8f06c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
