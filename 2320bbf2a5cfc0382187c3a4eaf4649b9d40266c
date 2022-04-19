@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff23871a_8e1596a8",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-19T16:51:41Z",
+      "side": 1,
+      "message": "Both \"vendor_boot\" and \"vendor_kernel_boot\" call this function to create image. So we have three cases.\n 1) No vendor_kernel_boot, caller is vender_boot and packewith dtb.\n 2) Has vendor_kernel_boot, caller is vendor_boot. Don\u0027t pack dtb.\n 3) Has vendor_kernel_boot, caller is vendor_kernel_boot and pack dtb.\n \nAnd, agree with what you\u0027re saying. *if we don\u0027t want to pack the \u0027dtb\u0027, then don\u0027t create*\nWe have constrained logic to prevent dtb being put into VENDOR_KERNEL/boot when BUILDING_VENDOR_KERNEL_BOOT_IMAGE is true, but Pixel recovery content will be put in VENDOR_KERNEL and have VENDOR_KERNEL/dtb.\n(http://go/aospsrc/platform/build/+/refs/heads/master/core/Makefile#5685)\nConsidering the complexity of logic, putting check here will be simpler.",
+      "parentUuid": "a21a4164_a6abf208",
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2565f9a5_fa4d51f5",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-19T10:25:03Z",
       "side": 1,
       "message": "can we just pass \u0027partition_name\u0027 to _BuildVendorBootImage(), and the other two properties can be inferred by:\n\n* info_dict[f\"{partition_name}_size\"]\n* info_dict[f\"avb_{partition_name}_add_hash_footer_args\"]",
+      "range": {
+        "startLine": 1975,
+        "startChar": 45,
+        "endLine": 1975,
+        "endChar": 55
+      },
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7dbd71_2ba3e40d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1975,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-19T16:51:41Z",
+      "side": 1,
+      "message": "Done. Good suggestions!",
+      "parentUuid": "2565f9a5_fa4d51f5",
       "range": {
         "startLine": 1975,
         "startChar": 45,
