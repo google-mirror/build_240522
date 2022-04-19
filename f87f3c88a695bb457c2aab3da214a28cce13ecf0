@@ -33,6 +33,40 @@
       "message": "After more discussions, still need this CL because BOARD_BUILD_SYSTEM_ROOT_IMAGE is a deprecated flag, and shouldn\u0027t be used.",
       "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4a7382_aaee3c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T09:41:18Z",
+      "side": 1,
+      "message": "rch",
+      "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14f4b5d_040349cd",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T09:41:18Z",
+      "side": 1,
+      "message": "add a TODO(b/229701033) saying this flag should be cleaned up in the future.",
+      "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
