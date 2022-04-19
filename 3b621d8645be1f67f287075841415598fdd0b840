@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8dc11e_84a40e90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-19T01:04:18Z",
+      "side": 1,
+      "message": "Once this is merged, I\u0027ll add a build in git_master-throttled-nightly.",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
