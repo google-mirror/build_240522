@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c5f343e_84440442",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-19T01:19:33Z",
+      "side": 1,
+      "message": "I want to add a rule that says \"if your interface is under a soong_namespace, then it must have an owner\". WDYT? (I can file this issue separately from putting this in continuous integration too - it would only affect Pixel builds when the release mode is actually flipped)\n\n\u003e By the way, doesn\u0027t vintf AIDL for Pixel sound odd?\n\nMaybe, but \"VINTF\" means \"Vendor Interface\". VINTF AIDL interfaces we define are part of the AOSP-defined VINTF surface, and Pixel VINTF AIDL is part of the Pixel-specific extension to the VINTF surface.",
+      "parentUuid": "f2c6e646_1c91ef70",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e7d0e0c_8bf04fd6",
         "filename": "finalize_branch_for_release.sh",
         "patchSetId": 1
