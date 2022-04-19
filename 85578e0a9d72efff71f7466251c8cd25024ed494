@@ -16,6 +16,24 @@
       "message": "What\u0027s the reason for preferring this over aosp/2066389 ?",
       "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4683c643_a003a107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T14:53:02Z",
+      "side": 1,
+      "message": "Because aosp/2066389 still relies on BOARD_BUILD_SYSTEM_ROOT_IMAGE being set.\n\nIf we want to cleanup BOARD_BUILD_SYSTEM_ROOT_IMAGE ultimately, we would still need some way to tell the build system that \"GKI boot.img mustn\u0027t have ramdisk.img\", which is what this change is adding.",
+      "parentUuid": "f0f97e15_c6deda85",
+      "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
