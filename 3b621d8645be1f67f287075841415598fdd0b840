@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7fb590f_b333f96e",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-19T01:09:49Z",
+      "side": 1,
+      "message": "I guess we should probably specify it here. Probably we need to do multiple? See also b/174520119. I\u0027m not sure how well aidl-freeze-api will work with the sdk build target, but we will need to add some tests with that eventually (so we might build with multiple).\n\nWDYT?",
+      "parentUuid": "492788cd_878c50ee",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e7d0e0c_8bf04fd6",
         "filename": "finalize_branch_for_release.sh",
         "patchSetId": 1
@@ -48,6 +66,30 @@
       "writtenOn": "2022-04-19T01:05:44Z",
       "side": 1,
       "message": "We also want to actually build something after `m nothing` passes.",
+      "range": {
+        "startLine": 20,
+        "startChar": 57,
+        "endLine": 20,
+        "endChar": 64
+      },
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deaa74fd_211357ed",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-19T01:09:49Z",
+      "side": 1,
+      "message": "Probably \u0027m dist\u0027 then also the full SDK",
+      "parentUuid": "6e7d0e0c_8bf04fd6",
       "range": {
         "startLine": 20,
         "startChar": 57,
