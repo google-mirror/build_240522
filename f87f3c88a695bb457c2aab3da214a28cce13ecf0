@@ -67,6 +67,24 @@
       "message": "add a TODO(b/229701033) saying this flag should be cleaned up in the future.",
       "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d2ac7e_d9db988a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-19T10:01:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d14f4b5d_040349cd",
+      "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
