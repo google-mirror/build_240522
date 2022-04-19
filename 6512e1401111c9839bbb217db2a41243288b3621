@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7fbe59_a49ef847",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T16:14:11Z",
+      "side": 1,
+      "message": "Is this line a no-op?",
+      "range": {
+        "startLine": 1866,
+        "startChar": 0,
+        "endLine": 1866,
+        "endChar": 35
+      },
+      "revId": "6512e1401111c9839bbb217db2a41243288b3621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e1e915_c14b71a2",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T16:14:11Z",
+      "side": 1,
+      "message": "tolower() ? just so we can handle True, TRUE.",
+      "range": {
+        "startLine": 1867,
+        "startChar": 30,
+        "endLine": 1867,
+        "endChar": 69
+      },
+      "revId": "6512e1401111c9839bbb217db2a41243288b3621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61286f8b_bc6f4094",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T16:14:11Z",
+      "side": 1,
+      "message": "When we execute the or branch, has_vendor_kernel_boot is guaranteed to be true. `has_vendor_kernel_boot and` can be omitted. This can be simplified to:\n\n```\nif not has_vendor_kernel_boot or partition_name \u003d\u003d \"vendor_kernel_boot\":\n```",
+      "range": {
+        "startLine": 1870,
+        "startChar": 9,
+        "endLine": 1870,
+        "endChar": 31
+      },
+      "revId": "6512e1401111c9839bbb217db2a41243288b3621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
