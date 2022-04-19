@@ -52,6 +52,24 @@
       "parentUuid": "4683c643_a003a107",
       "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ce5058_c16365cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T15:50:54Z",
+      "side": 1,
+      "message": "no. see my other comment location, the build system unconditionally appends `INSTALLED_RAMDISK_TARGET` to the boot.img build command. So if we set `PRODUCT_BUILD_RAMDISK_IMAGE :\u003d false` and remove `BOARD_BUILD_SYSTEM_ROOT_IMAGE`, then there would be a build error because `INSTALLED_RAMDISK_TARGET` is undefined.\n\nNeither can we just check `ifdef INSTALLED_RAMDISK_TARGET` at L980, because releasetools doesn\u0027t have this information (HasRamdisk()). So in order to tell releasetools that we are building \"boot.img without ramdisk.img\", we would need a new flag or option for releasetools, which is what this change did :(",
+      "parentUuid": "610abceb_f390a319",
+      "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
