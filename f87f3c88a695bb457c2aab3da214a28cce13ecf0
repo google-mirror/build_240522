@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc112aa1_4278d8c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-19T04:13:34Z",
+      "side": 1,
+      "message": "The presubmit build failure is another issue: b/229677606#comment2",
+      "revId": "f87f3c88a695bb457c2aab3da214a28cce13ecf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
