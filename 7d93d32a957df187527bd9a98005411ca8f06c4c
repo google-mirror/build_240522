@@ -45,6 +45,54 @@
       },
       "revId": "7d93d32a957df187527bd9a98005411ca8f06c4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab0b8c1_cc136a71",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1347262
+      },
+      "writtenOn": "2022-04-19T18:35:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73cf9f28_4ff3c9d5",
+      "range": {
+        "startLine": 1363,
+        "startChar": 47,
+        "endLine": 1363,
+        "endChar": 48
+      },
+      "revId": "7d93d32a957df187527bd9a98005411ca8f06c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebeef883_4f36ba8e",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1347262
+      },
+      "writtenOn": "2022-04-19T18:35:54Z",
+      "side": 1,
+      "message": "vbmeta gets rebuilt after building the vendor images (the call to add_img_to_target_files on line 1663). Setting avb_building_vbmeta_image to false here is to skip building vbmeta by otatools_vendor before the other images are processed.",
+      "parentUuid": "d6586ff7_22707cba",
+      "range": {
+        "startLine": 1363,
+        "startChar": 50,
+        "endLine": 1363,
+        "endChar": 55
+      },
+      "revId": "7d93d32a957df187527bd9a98005411ca8f06c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
