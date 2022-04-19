@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21a4164_a6abf208",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T10:25:03Z",
+      "side": 1,
+      "message": "Why can\u0027t we just check `os.access(os.path.join(sourcedir, \"dtb\"), os.F_OK)`? why do we need this complex conditional?\n\nunder what case would there be a VENDOR_KERNEL_BOOT/dtb file, but we don\u0027t want to pack it into the image? what I\u0027m saying is if we don\u0027t want to pack the \u0027dtb\u0027, then don\u0027t create VENDOR_KERNEL_BOOT/dtb in the first place?",
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2565f9a5_fa4d51f5",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1975,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-19T10:25:03Z",
+      "side": 1,
+      "message": "can we just pass \u0027partition_name\u0027 to _BuildVendorBootImage(), and the other two properties can be inferred by:\n\n* info_dict[f\"{partition_name}_size\"]\n* info_dict[f\"avb_{partition_name}_add_hash_footer_args\"]",
+      "range": {
+        "startLine": 1975,
+        "startChar": 45,
+        "endLine": 1975,
+        "endChar": 55
+      },
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
