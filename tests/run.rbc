@@ -72,6 +72,13 @@ assert_eq("foo.c no_folder", rblf.notdir("src/foo.c no_folder"))
 assert_eq("", rblf.notdir("/"))
 assert_eq("", rblf.notdir(""))
 
+assert_eq("/ssd/aosp/foo/bar", rblf.testable_abspath("foo/bar", "/ssd/aosp"))
+assert_eq("/ssd/aosp/bar", rblf.testable_abspath("foo/.././bar", "/ssd/aosp"))
+assert_eq("/ssd/aosp/bar", rblf.testable_abspath("foo/..////bar//", "/ssd/aosp"))
+assert_eq("/foo/baz", rblf.testable_abspath("/foo/bar/../baz", "/ssd/aosp"))
+assert_eq("/ssd/aosp/foo/bar /ssd/aosp/foo/baz", rblf.testable_abspath("foo/bar foo/baz", "/ssd/aosp"))
+assert_eq("/baz", rblf.testable_abspath("/../../../../../../../baz", "/ssd/aosp"))
+
 assert_eq(
     ["build/make/tests/board.rbc", "build/make/tests/board_input_vars.rbc"],
     rblf.expand_wildcard("build/make/tests/board*.rbc")

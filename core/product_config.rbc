@@ -400,12 +400,28 @@ def _soong_config_get(g, nsname, var):
     """Gets to the value of the variable in the namespace."""
     return g.get(_soong_config_namespaces_key, {}).get(nsname, {}).get(var, None)
 
+def _abspath(paths):
+    return _testable_abspath(paths, rblf_shell("pwd"))
 
-def _abspath(path):
+def _testable_abspath(paths, cwd):
     """Provided for compatibility, to be removed later."""
-    if type(path) == "list":
-        path = " ".join(path)
-    return rblf_shell("realpath "+path)
+    results = []
+    for path in __words(paths):
+        if path[0] != "/":
+            path = cwd + "/" + path
+
+        resultparts = []
+        for part in path.split('/'):
+            if part == "." or part == "":
+                continue
+            elif part == "..":
+                if resultparts:
+                    resultparts.pop()
+            else:
+                resultparts.append(part)
+        results.append("/" + "/".join(resultparts))
+
+    return " ".join(results)
 
 
 def _addprefix(prefix, string_or_list):
@@ -863,6 +879,7 @@ rblf = struct(
     require_artifacts_in_path_relaxed = _require_artifacts_in_path_relaxed,
     setdefault = _setdefault,
     shell = rblf_shell,
+    testable_abspath = _testable_abspath,
     warning = _mkwarning,
     words = __words,
 )
