@@ -34,6 +34,24 @@
       "parentUuid": "f0f97e15_c6deda85",
       "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610abceb_f390a319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-19T15:39:27Z",
+      "side": 1,
+      "message": "Is `PRODUCT_BUILD_RAMDISK_IMAGE :\u003d false` not enough to tell the build system \"we absolutely do not want ramdisk\" ?",
+      "parentUuid": "4683c643_a003a107",
+      "revId": "85578e0a9d72efff71f7466251c8cd25024ed494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
