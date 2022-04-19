@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c9fda6a_bf3692dc",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:27:25Z",
+      "side": 1,
+      "message": "Yes, that rule SGTM, though I don\u0027t know how we will going to enforce that.\n\nWhen I send AIDLs for Pixel, I meant AIDLs that are used only within the vendor partition. They don\u0027t need to be marked as stability: \"vintf\", right?",
+      "parentUuid": "8c5f343e_84440442",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e7d0e0c_8bf04fd6",
         "filename": "finalize_branch_for_release.sh",
         "patchSetId": 1
