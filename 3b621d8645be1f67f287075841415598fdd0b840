@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2c6e646_1c91ef70",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:13:22Z",
+      "side": 1,
+      "message": "Yes, we need to specify here. One problem is that we might have to specific one of the Pixel names in case when we have vintf AIDLs for Pixel which are under a namespace that is enabled only for Pixels. But that doesn\u0027t look good. \n\nBy the way, doesn\u0027t vintf AIDL for Pixel sound odd?",
+      "parentUuid": "d7fb590f_b333f96e",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e7d0e0c_8bf04fd6",
         "filename": "finalize_branch_for_release.sh",
         "patchSetId": 1
