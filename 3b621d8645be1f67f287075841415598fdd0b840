@@ -16,6 +16,46 @@
       "message": "Once this is merged, I\u0027ll add a build in git_master-throttled-nightly.",
       "revId": "3b621d8645be1f67f287075841415598fdd0b840",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492788cd_878c50ee",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:05:44Z",
+      "side": 1,
+      "message": "what should be the TARGET_PRODUCT when this script is invoked?",
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7d0e0c_8bf04fd6",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:05:44Z",
+      "side": 1,
+      "message": "We also want to actually build something after `m nothing` passes.",
+      "range": {
+        "startLine": 20,
+        "startChar": 57,
+        "endLine": 20,
+        "endChar": 64
+      },
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
