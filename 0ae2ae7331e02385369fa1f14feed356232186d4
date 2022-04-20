@@ -22,6 +22,30 @@
       },
       "revId": "0ae2ae7331e02385369fa1f14feed356232186d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3247fe35_d47b35dc",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1617655
+      },
+      "writtenOn": "2022-04-20T01:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00e484b1_b9237866",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 84
+      },
+      "revId": "0ae2ae7331e02385369fa1f14feed356232186d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
