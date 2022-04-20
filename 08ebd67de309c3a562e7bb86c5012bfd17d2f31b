@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3399ef37_02711ad3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-04-20T22:23:48Z",
+      "side": 1,
+      "message": "Not as familiar with this code, just chased down var names to any potential references.",
+      "revId": "08ebd67de309c3a562e7bb86c5012bfd17d2f31b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
