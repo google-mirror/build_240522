@@ -68,13 +68,13 @@ system_server_jars := \
 
 $(boot_zip): PRIVATE_BOOTCLASSPATH_JARS := $(bootclasspath_jars)
 $(boot_zip): PRIVATE_SYSTEM_SERVER_JARS := $(system_server_jars)
-$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP)
 	@echo "Create boot package: $@"
 	rm -f $@
 	$(SOONG_ZIP) -o $@.tmp \
 	  -C $(dir $(firstword $(PRIVATE_BOOTCLASSPATH_JARS)))/.. $(addprefix -f ,$(PRIVATE_BOOTCLASSPATH_JARS)) \
 	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_SYSTEM_SERVER_JARS))
-	$(MERGE_ZIPS) $@ $@.tmp $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+	$(MERGE_ZIPS) $@ $@.tmp $(DEXPREOPT_IMAGE_ZIP)
 	rm -f $@.tmp
 
 $(call dist-for-goals, droidcore, $(boot_zip))
