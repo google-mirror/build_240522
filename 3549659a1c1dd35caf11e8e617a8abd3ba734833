@@ -33,6 +33,29 @@
       "message": "This is a small step, but let\u0027s see how far we can get.",
       "revId": "3549659a1c1dd35caf11e8e617a8abd3ba734833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c21892_856c7e42",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-04-20T03:39:34Z",
+      "side": 1,
+      "message": "nits: how about checkbuild? is it too much?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "3549659a1c1dd35caf11e8e617a8abd3ba734833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
