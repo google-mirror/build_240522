@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46af615_2dcb6652",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-20T07:32:44Z",
+      "side": 1,
+      "message": "nit:\n\n# The chained vbmeta settings for boot images, needed for the signing tool to work\n# on gsi_arm64 for Android-12 and Android-13, simultaneously.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "97064c53ff24d458b7de7f654605b7a4c5bd6ee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
