@@ -34,6 +34,24 @@
       "parentUuid": "d2eee0fb_22e2381b",
       "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d509d392_c5040c29",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-20T22:58:24Z",
+      "side": 1,
+      "message": "I see. It might still be better to do this in that provenance_singleton.go file, as I do see there\u0027s a DistForGoals() function in soong, but it\u0027s on a different context that might be difficult to access.",
+      "parentUuid": "14de5711_f8288aae",
+      "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
