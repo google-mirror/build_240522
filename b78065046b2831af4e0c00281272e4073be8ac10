@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371fae0b_429f6e26",
+        "filename": "core/distdir.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-20T23:20:29Z",
+      "side": 1,
+      "message": "This shouldn\u0027t matter, ninja already creates the directory for the output file.",
+      "revId": "b78065046b2831af4e0c00281272e4073be8ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
