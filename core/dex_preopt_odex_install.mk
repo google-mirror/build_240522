@@ -272,11 +272,7 @@ my_dexpreopt_images :=
 my_dexpreopt_images_deps :=
 my_dexpreopt_image_locations_on_host :=
 my_dexpreopt_image_locations_on_device :=
-my_dexpreopt_infix := boot
 my_create_dexpreopt_config :=
-ifeq (true, $(DEXPREOPT_USE_ART_IMAGE))
-  my_dexpreopt_infix := art
-endif
 
 ifdef LOCAL_DEX_PREOPT
   ifeq (,$(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
@@ -319,15 +315,15 @@ ifeq ($(my_create_dexpreopt_config), true)
     # #################################################
     # Odex for the 1st arch
     my_dexpreopt_archs += $(TARGET_ARCH)
-    my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_ARCH))
-    my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_ARCH))
+    my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(TARGET_ARCH))
+    my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(TARGET_ARCH))
     # Odex for the 2nd arch
     ifdef TARGET_2ND_ARCH
       ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
         ifneq (first,$(my_module_multilib))
           my_dexpreopt_archs += $(TARGET_2ND_ARCH)
-          my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_2ND_ARCH))
-          my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_2ND_ARCH))
+          my_dexpreopt_images += $(DEXPREOPT_IMAGE_$(TARGET_2ND_ARCH))
+          my_dexpreopt_images_deps += $(DEXPREOPT_IMAGE_DEPS_$(TARGET_2ND_ARCH))
         endif  # my_module_multilib is not first.
       endif  # TARGET_TRANSLATE_2ND_ARCH not true
     endif  # TARGET_2ND_ARCH
@@ -338,24 +334,24 @@ ifeq ($(my_create_dexpreopt_config), true)
     my_2nd_arch_prefix := $(LOCAL_2ND_ARCH_VAR_PREFIX)
     my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
     my_dexpreopt_images += \
-        $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+        $(DEXPREOPT_IMAGE_$(TARGET_$(my_2nd_arch_prefix)ARCH))
     my_dexpreopt_images_deps += \
-        $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+        $(DEXPREOPT_IMAGE_DEPS_$(TARGET_$(my_2nd_arch_prefix)ARCH))
     ifdef TARGET_2ND_ARCH
       ifeq ($(my_module_multilib),both)
         # The non-preferred arch
         my_2nd_arch_prefix := $(if $(LOCAL_2ND_ARCH_VAR_PREFIX),,$(TARGET_2ND_ARCH_VAR_PREFIX))
         my_dexpreopt_archs += $(TARGET_$(my_2nd_arch_prefix)ARCH)
         my_dexpreopt_images += \
-            $(DEXPREOPT_IMAGE_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+            $(DEXPREOPT_IMAGE_$(TARGET_$(my_2nd_arch_prefix)ARCH))
         my_dexpreopt_images_deps += \
-            $(DEXPREOPT_IMAGE_DEPS_$(my_dexpreopt_infix)_$(TARGET_$(my_2nd_arch_prefix)ARCH))
+            $(DEXPREOPT_IMAGE_DEPS_$(TARGET_$(my_2nd_arch_prefix)ARCH))
       endif  # LOCAL_MULTILIB is both
     endif  # TARGET_2ND_ARCH
   endif  # LOCAL_MODULE_CLASS
 
-  my_dexpreopt_image_locations_on_host += $(DEXPREOPT_IMAGE_LOCATIONS_ON_HOST$(my_dexpreopt_infix))
-  my_dexpreopt_image_locations_on_device += $(DEXPREOPT_IMAGE_LOCATIONS_ON_DEVICE$(my_dexpreopt_infix))
+  my_dexpreopt_image_locations_on_host += $(DEXPREOPT_IMAGE_LOCATIONS_ON_HOST)
+  my_dexpreopt_image_locations_on_device += $(DEXPREOPT_IMAGE_LOCATIONS_ON_DEVICE)
 
   # Record dex-preopt config.
   DEXPREOPT.$(LOCAL_MODULE).DEX_PREOPT := $(LOCAL_DEX_PREOPT)
