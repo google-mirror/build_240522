@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa09b79_ca4c44da",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-20T16:19:59Z",
+      "side": 1,
+      "message": "Are images also optional? The commit message suggests that only .map files are optional.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 82
+      },
+      "revId": "390d40161bddcda07facae0d86aa89de266f342b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
