@@ -16,6 +16,24 @@
       "message": "Isn\u0027t this already done here? http://cs/android-internal/build/soong/provenance/provenance_singleton.go;l\u003d87;rcl\u003d10b85f0ba9e168b3340445d9cc62b39035c2c49c",
       "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14de5711_f8288aae",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-04-20T22:50:08Z",
+      "side": 1,
+      "message": "That change adds \"provenance_metadata\" as a dependency to \"droidcore\" so the provenance metadata is generated and put in out/soong/provenance_metadata.textproto when running \"m\", but it doesn\u0027t copy file provenance_metadata.textproto to dist directory. It looks this has to be done explicitly in make.",
+      "parentUuid": "d2eee0fb_22e2381b",
+      "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
