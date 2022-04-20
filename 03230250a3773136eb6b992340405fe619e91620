@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6dcb7b6_abe73b9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-20T16:34:54Z",
+      "side": 1,
+      "message": "overall LGTM, but I\u0027m not familiar enough to understand the VBMETA-related changes, please require review vote from Bowgo too.",
+      "revId": "03230250a3773136eb6b992340405fe619e91620",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
