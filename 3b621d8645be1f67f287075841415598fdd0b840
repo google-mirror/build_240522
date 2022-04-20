@@ -188,6 +188,30 @@
       },
       "revId": "3b621d8645be1f67f287075841415598fdd0b840",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97381359_ff367bee",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-04-20T00:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deaa74fd_211357ed",
+      "range": {
+        "startLine": 20,
+        "startChar": 57,
+        "endLine": 20,
+        "endChar": 64
+      },
+      "revId": "3b621d8645be1f67f287075841415598fdd0b840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
