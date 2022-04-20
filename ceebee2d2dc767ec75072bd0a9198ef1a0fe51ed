@@ -93,6 +93,29 @@
       },
       "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62189106_4a33d665",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-20T15:35:34Z",
+      "side": 1,
+      "message": "Pack dtb into vendor_kernel_boot if building vendor_kernel_boot.\nOtherwise pack dtb into vendor_boot.",
+      "range": {
+        "startLine": 1868,
+        "startChar": 4,
+        "endLine": 1869,
+        "endChar": 84
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

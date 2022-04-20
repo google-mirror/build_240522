@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7d3c05_de7aa65d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-04-20T15:35:34Z",
+      "side": 1,
+      "message": "I see",
+      "parentUuid": "a93003c2_b22c5c39",
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2565f9a5_fa4d51f5",
