@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5141be19_fdb43286",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-04-20T11:49:38Z",
+      "side": 1,
+      "message": "Nit: launch_cvd (for a few seconds I wondered what kind of tool combined lunching with AVD\u0027s)",
+      "range": {
+        "startLine": 10,
+        "startChar": 51,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "0ed04d98a7e03067acfc039c90033a73bb9ab966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
