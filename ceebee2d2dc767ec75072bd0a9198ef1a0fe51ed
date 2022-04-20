@@ -116,6 +116,30 @@
       },
       "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e3d23d_2155bcc3",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-20T16:28:32Z",
+      "side": 1,
+      "message": "Sounds better!\nUpdated. Thanks.",
+      "parentUuid": "62189106_4a33d665",
+      "range": {
+        "startLine": 1868,
+        "startChar": 4,
+        "endLine": 1869,
+        "endChar": 84
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
