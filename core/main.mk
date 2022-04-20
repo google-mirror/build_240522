@@ -2009,6 +2009,9 @@ ifneq ($(UNSAFE_DISABLE_APEX_ALLOWED_DEPS_CHECK),true)
   droidcore: ${APEX_ALLOWED_DEPS_CHECK}
 endif
 
+# Put provenance metadata in dist directory.
+$(call dist-for-goals, droidcore, $(SOONG_OUT_DIR)/provenance_metadata.textproto)
+
 # Create a license metadata rule per module. Could happen in base_rules.mk or
 # notice_files.mk; except, it has to happen after fix-notice-deps to avoid
 # missing dependency errors.
