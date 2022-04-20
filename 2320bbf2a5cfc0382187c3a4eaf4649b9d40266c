@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "758b1c84_e497343b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-20T03:05:50Z",
+      "side": 1,
+      "message": "What does VENDOR_KERNEL/boot mean?",
+      "parentUuid": "ff23871a_8e1596a8",
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2565f9a5_fa4d51f5",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2

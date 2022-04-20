@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d429d04_0386d83a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-20T03:05:50Z",
+      "side": 1,
+      "message": "nit: a vendor boot image or a vendor kernel boot image?",
+      "range": {
+        "startLine": 1842,
+        "startChar": 11,
+        "endLine": 1842,
+        "endChar": 30
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc019af_57a3158a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1845,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-04-20T03:05:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1845,
+        "startChar": 17,
+        "endLine": 1845,
+        "endChar": 36
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
