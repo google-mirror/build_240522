@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87071f7c_25d45726",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-20T03:16:30Z",
+      "side": 1,
+      "message": "We will have vendor_boot and vendor_kernel_boot.\n`_BuildVendorBootImage` is the core to build both vendor_boot and vendor_kernel_boot into vendor boot header format. I think we can name them vendor boot image here.",
+      "parentUuid": "7d429d04_0386d83a",
+      "range": {
+        "startLine": 1842,
+        "startChar": 11,
+        "endLine": 1842,
+        "endChar": 30
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cc019af_57a3158a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-20T03:05:50Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1845,
+        "startChar": 17,
+        "endLine": 1845,
+        "endChar": 36
+      },
+      "revId": "ceebee2d2dc767ec75072bd0a9198ef1a0fe51ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b77d8e1_deb44dae",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1845,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-20T03:16:30Z",
+      "side": 1,
+      "message": "Ack as previous comment.",
+      "parentUuid": "2cc019af_57a3158a",
       "range": {
         "startLine": 1845,
         "startChar": 17,

@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a93003c2_b22c5c39",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2022-04-20T03:16:30Z",
+      "side": 1,
+      "message": "\"... being put into VENDOR_KERNEL/*dtb* when BUILDING_VENDOR_KERNEL_BOOT_IMAGE ...\"\nSorry typo.",
+      "parentUuid": "758b1c84_e497343b",
+      "revId": "2320bbf2a5cfc0382187c3a4eaf4649b9d40266c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2565f9a5_fa4d51f5",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2
