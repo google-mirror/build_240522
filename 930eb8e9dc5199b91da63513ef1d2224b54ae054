@@ -52,6 +52,24 @@
       "parentUuid": "14de5711_f8288aae",
       "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f5f6a0_4aae9c62",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-04-21T00:06:14Z",
+      "side": 1,
+      "message": "Found another way of dist files from singleton and the change is in aosp/2069478. Will abandon this CL.",
+      "parentUuid": "d509d392_c5040c29",
+      "revId": "930eb8e9dc5199b91da63513ef1d2224b54ae054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
