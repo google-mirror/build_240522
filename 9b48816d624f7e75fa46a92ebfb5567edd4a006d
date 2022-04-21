@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8439c460_7aec3df8",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-21T21:23:07Z",
+      "side": 1,
+      "message": "You can use $0 to find the path to the top of the tree, and then use that to find envsetup.sh",
+      "revId": "9b48816d624f7e75fa46a92ebfb5567edd4a006d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
