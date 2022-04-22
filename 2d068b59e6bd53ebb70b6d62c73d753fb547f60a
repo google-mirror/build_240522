@@ -39,6 +39,30 @@
       },
       "revId": "2d068b59e6bd53ebb70b6d62c73d753fb547f60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade2467d_517b463b",
+        "filename": "target/board/linux_bionic/BoardConfig.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-04-22T17:37:38Z",
+      "side": 1,
+      "message": "I\u0027ll leave that for Colin to answer.\n\nEven so, it may be better to have a separate product for this since the use case is different (similar to how we introduced `banchan` even though `tapas` technically would fit the bill right now).",
+      "parentUuid": "6e386782_305720cc",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "2d068b59e6bd53ebb70b6d62c73d753fb547f60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
