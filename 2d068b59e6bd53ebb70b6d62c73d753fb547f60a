@@ -16,6 +16,29 @@
       "message": "Uploaded PS4 only to fix a typo and extend the README file slightly. CR+2 still good.",
       "revId": "2d068b59e6bd53ebb70b6d62c73d753fb547f60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e386782_305720cc",
+        "filename": "target/board/linux_bionic/BoardConfig.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-04-22T09:55:23Z",
+      "side": 1,
+      "message": "Just checking -- is there a reason the ndk product should not set the HOST_CROSS_* flags? That way, it could be reused instead of introducing this new one.",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "2d068b59e6bd53ebb70b6d62c73d753fb547f60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
