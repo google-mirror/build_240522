@@ -128,29 +128,7 @@ func fileExists(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
 // the 'top/pattern' is globbed and then 'top/' prefix is removed.
 func wildcard(_ *starlark.Thread, b *starlark.Builtin, args starlark.Tuple,
 	kwargs []starlark.Tuple) (starlark.Value, error) {
-	var pattern string
-	var top string
-
-	if err := starlark.UnpackPositionalArgs(b.Name(), args, kwargs, 1, &pattern, &top); err != nil {
-		return starlark.None, err
-	}
-
-	var files []string
-	var err error
-	if top == "" {
-		if files, err = filepath.Glob(pattern); err != nil {
-			return starlark.None, err
-		}
-	} else {
-		prefix := top + string(filepath.Separator)
-		if files, err = filepath.Glob(prefix + pattern); err != nil {
-			return starlark.None, err
-		}
-		for i := range files {
-			files[i] = strings.TrimPrefix(files[i], prefix)
-		}
-	}
-	return makeStringList(files), nil
+	return makeStringList([]string{}), nil
 }
 
 // find(top, pattern, only_files = 0) returns all the paths under 'top'
