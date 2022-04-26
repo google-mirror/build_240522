@@ -326,6 +326,22 @@ python_binary_host {
 }
 
 python_binary_host {
+    name: "merge_ota",
+    version: {
+        py3: {
+            embedded_launcher: true,
+        },
+    },
+    srcs: [
+        "merge_ota.py",
+    ],
+    libs: [
+        "ota_metadata_proto",
+        "update_payload",
+    ],
+}
+
+python_binary_host {
     name: "build_image",
     defaults: [
         "releasetools_binary_defaults",
