@@ -62,6 +62,7 @@ ifndef PLATFORM_VERSION_CODENAME
     # PLATFORM_VERSION_CODENAME falls back to TARGET_PLATFORM_VERSION
     PLATFORM_VERSION_CODENAME := $(TARGET_PLATFORM_VERSION)
   endif
+endif
 
   # This is all of the *active* development codenames.
   # This confusing name is needed because
@@ -85,7 +86,6 @@ ifndef PLATFORM_VERSION_CODENAME
   PLATFORM_VERSION_ALL_CODENAMES := \
     $(subst $(space),$(comma),$(strip $(PLATFORM_VERSION_ALL_CODENAMES)))
 
-endif
 .KATI_READONLY := \
   PLATFORM_VERSION_CODENAME \
   PLATFORM_VERSION_ALL_CODENAMES
