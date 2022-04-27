@@ -96,6 +96,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49b627ef_b566f5b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-27T23:15:15Z",
+      "side": 1,
+      "message": "What is the desired behavior?  aosp_master contains U APIs now, so there is no way to build anything T-like any more.",
+      "parentUuid": "260c635f_21b12f80",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ee36d9_7a49708e",
         "filename": "core/version_util.mk",
         "patchSetId": 4
