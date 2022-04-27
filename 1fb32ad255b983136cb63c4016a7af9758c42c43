@@ -46,6 +46,30 @@
       },
       "revId": "1fb32ad255b983136cb63c4016a7af9758c42c43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a7f009_8e7b6c8f",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2022-04-27T12:42:29Z",
+      "side": 1,
+      "message": "After looking at the failures: no, we cannot remove the infix. I added a comment with an explanation.",
+      "parentUuid": "080d8b0f_cebf7efb",
+      "range": {
+        "startLine": 318,
+        "startChar": 45,
+        "endLine": 318,
+        "endChar": 49
+      },
+      "revId": "1fb32ad255b983136cb63c4016a7af9758c42c43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
