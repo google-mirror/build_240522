@@ -114,6 +114,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d8a1f35_ef8a598b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-27T23:20:49Z",
+      "side": 1,
+      "message": "He wanted to build the demo app on AOSP and run it on a T-based device.\n\nI think the correct way of doing that is unbundling the demo app (i.e. set sdk_version, min_sdk_version, etc.). \n\nBy the way, my question was whether PLATFORM_VERSION and PLATFORM_VERSION_CODENAME are designed to be set like the above. (I guess not)",
+      "parentUuid": "49b627ef_b566f5b7",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ee36d9_7a49708e",
         "filename": "core/version_util.mk",
         "patchSetId": 4
