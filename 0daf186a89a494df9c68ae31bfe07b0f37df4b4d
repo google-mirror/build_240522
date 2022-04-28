@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beea1b03_b4522467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-04-28T17:09:24Z",
+      "side": 1,
+      "message": "For others following along who see this, as part of multitree prototype, we\u0027re going to bulk-import the changes that Justin \u0026 team have been working on, and continue to iterate on them in aosp master.",
+      "revId": "0daf186a89a494df9c68ae31bfe07b0f37df4b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
