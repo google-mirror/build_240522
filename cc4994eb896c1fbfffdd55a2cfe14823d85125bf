@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514f98f0_f6bc5f50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-28T23:47:32Z",
+      "side": 1,
+      "message": "As Colin said, I don\u0027t think this should be the reason for this change. We still don\u0027t (and won\u0027t) support setting it via cmdline.\n\nI think we should instead assert that PLATFORM_VERSION_CODE is NOT defined when version_util.mk is evaluated.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "cc4994eb896c1fbfffdd55a2cfe14823d85125bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24534e7e_87b88f2e",
+        "filename": "core/version_util.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-28T23:47:32Z",
+      "side": 1,
+      "message": "Wasn\u0027t it the ask to drop this ifndef condition?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "cc4994eb896c1fbfffdd55a2cfe14823d85125bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
