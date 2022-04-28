@@ -132,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0434b02_c0862fbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-28T00:06:36Z",
+      "side": 1,
+      "message": "I don\u0027t think they were ever expected to be set from the command line.  I don\u0027t remember why those are even conditional, they should probably always be computed in version_defaults.mk.",
+      "parentUuid": "1d8a1f35_ef8a598b",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ee36d9_7a49708e",
         "filename": "core/version_util.mk",
         "patchSetId": 4
