@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a773d6_617e74df",
+        "filename": "core/version_util.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-28T17:28:32Z",
+      "side": 0,
+      "message": "Dropped the final newline",
+      "revId": "4faef3876d32886a5f6bc21ad775c8d2830713ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
