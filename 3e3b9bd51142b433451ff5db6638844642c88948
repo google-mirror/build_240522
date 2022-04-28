@@ -16,6 +16,24 @@
       "message": "Please add tests",
       "revId": "3e3b9bd51142b433451ff5db6638844642c88948",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76434a23_2a57a9ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-28T22:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bb830ba_d0b191fd",
+      "revId": "3e3b9bd51142b433451ff5db6638844642c88948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
