@@ -150,6 +150,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c34ca89_bb950217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-28T00:11:11Z",
+      "side": 1,
+      "message": "Ack. Then the proper fix(?) would be removing the ifndef conditionals.",
+      "parentUuid": "b0434b02_c0862fbd",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ee36d9_7a49708e",
         "filename": "core/version_util.mk",
         "patchSetId": 4
