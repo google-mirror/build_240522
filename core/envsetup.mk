@@ -332,7 +332,6 @@ $(eval _dump_variables_rbc_excluded := \
   DATE \
   LOCAL_PATH \
   MAKEFILE_LIST \
-  PRODUCTS \
   PRODUCT_COPY_OUT_% \
   RBC_PRODUCT_CONFIG \
   RBC_BOARD_CONFIG \
