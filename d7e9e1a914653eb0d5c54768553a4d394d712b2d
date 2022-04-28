@@ -41,6 +41,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc43a14_33757452",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-28T11:45:39Z",
+      "side": 1,
+      "message": "I updated the commit message. Seems like the code edit from the web doesn\u0027t have the option to specify one line summary.",
+      "parentUuid": "c3ac4034_aa8883d4",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9722b566_f633d180",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-28T11:45:39Z",
+      "side": 1,
+      "message": "Thanks, I created the PR from \u0027edit\u0027 web interface, this is why it looked terrible.",
+      "parentUuid": "2a7128e5_f2ea7601",
+      "range": {
+        "startLine": 7,
+        "startChar": 72,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aaba526_8cc5e506",
@@ -168,6 +210,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b86a674_ffc56512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-28T11:45:39Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this break anything else ?",
+      "parentUuid": "1c34ca89_bb950217",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8783e384_a660ce32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-28T11:45:39Z",
+      "side": 1,
+      "message": "Thanks for the review !",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ee36d9_7a49708e",
         "filename": "core/version_util.mk",
         "patchSetId": 4
@@ -179,6 +256,30 @@
       "writtenOn": "2022-04-27T22:24:33Z",
       "side": 1,
       "message": "this block should be dedented.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 73
+      },
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20dfed5_7507810e",
+        "filename": "core/version_util.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-28T11:45:39Z",
+      "side": 1,
+      "message": "Fixed the alignment",
+      "parentUuid": "d0ee36d9_7a49708e",
       "range": {
         "startLine": 67,
         "startChar": 0,
