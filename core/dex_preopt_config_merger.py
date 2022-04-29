@@ -31,6 +31,7 @@ from __future__ import print_function
 
 import json
 from collections import OrderedDict
+import os
 import sys
 
 
@@ -42,8 +43,9 @@ def main():
   # Read all JSON configs.
   cfgs = []
   for arg in sys.argv[1:]:
-    with open(arg, 'r') as f:
-      cfgs.append(json.load(f, object_pairs_hook=OrderedDict))
+    if os.stat(arg).st_size != 0:
+      with open(arg, 'r') as f:
+        cfgs.append(json.load(f, object_pairs_hook=OrderedDict))
 
   # The first config is the dexpreopted library/app, the rest are its
   # <uses-library> dependencies.
@@ -87,6 +89,23 @@ def main():
         pass
       clcs2.append(clc)
     clc_map2[sdk_ver] = clcs2
+
+  # Go over all uses-libraries in dependency dexpreopt.config files (these don't
+  # have to be uses-libraries themselves, they can be e.g. transitive static
+  # library dependencies) and merge their CLC to the current one, unless it CLC
+  # for these libraries is already present.
+  for ulib, cfg in uses_libs.items():
+    any_sdk_ver = 'any' # not interested in compatibility libraries
+    clcs = cfg['ClassLoaderContexts'].get(any_sdk_ver, [])
+    # Don't bother optimizing quadratic loop, since CLC is typically small.
+    for clc in clcs:
+      already_in_clc = False
+      for clc2 in clc_map2[any_sdk_ver]:
+        if clc2['Name'] == clc['Name']:
+          already_in_clc = True
+          break
+      if not already_in_clc:
+        clc_map2[any_sdk_ver] += clcs
 
   # Overwrite the original class loader context with the patched one.
   cfg0['ClassLoaderContexts'] = clc_map2
