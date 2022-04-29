@@ -110,7 +110,8 @@ endif
 # Local module variables and functions used in dexpreopt and manifest_check.
 ################################################################################
 
-my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
+my_dexpreopt_libs_required := $(LOCAL_USES_LIBRARIES)
+my_dexpreopt_libs_optional := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
   $(LOCAL_OPTIONAL_USES_LIBRARIES))
 
 # TODO(b/132357300): This may filter out too much, as PRODUCT_PACKAGES doesn't
@@ -120,8 +121,7 @@ my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_
 # to load dexpreopt code on device. We should fix this, either by deferring
 # dependency computation until the full list of product packages is known, or
 # by adding product-specific lists of missing libraries.
-my_filtered_optional_uses_libraries := $(filter $(PRODUCT_PACKAGES), \
-  $(my_filtered_optional_uses_libraries))
+my_dexpreopt_libs_optional := $(filter $(PRODUCT_PACKAGES), $(my_dexpreopt_libs_optional))
 
 ifeq ($(LOCAL_MODULE_CLASS),APPS)
   # compatibility libraries are added to class loader context of an app only if
@@ -146,10 +146,6 @@ else
   my_dexpreopt_libs_compat :=
 endif
 
-my_dexpreopt_libs := \
-  $(LOCAL_USES_LIBRARIES) \
-  $(my_filtered_optional_uses_libraries)
-
 # Module dexpreopt.config depends on dexpreopt.config files of each
 # <uses-library> dependency, because these libraries may be processed after
 # the current module by Make (there's no topological order), so the dependency
@@ -157,11 +153,12 @@ my_dexpreopt_libs := \
 # this dexpreopt.config is generated. So it's necessary to add file-level
 # dependencies between dexpreopt.config files.
 my_dexpreopt_dep_configs := $(foreach lib, \
-  $(filter-out $(my_dexpreopt_libs_compat),$(LOCAL_USES_LIBRARIES) $(my_filtered_optional_uses_libraries)), \
+  $(filter-out $(my_dexpreopt_libs_compat),$(my_dexpreopt_libs_required) $(my_dexpreopt_libs_optional)), \
   $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,)/dexpreopt.config)
 
 # 1: SDK version
 # 2: list of libraries
+# 3: boolean, true if optional, else required
 #
 # Make does not process modules in topological order wrt. <uses-library>
 # dependencies, therefore we cannot rely on variables to get the information
@@ -180,6 +177,7 @@ add_json_class_loader_context = \
   $(foreach lib, $(2),\
     $(call add_json_map_anon) \
     $(call add_json_str, Name, $(lib)) \
+    $(call add_json_bool, Optional, $(filter true,$(3))) \
     $(call add_json_str, Host, $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar) \
     $(call add_json_str, Device, /system/framework/$(lib).jar) \
     $(call add_json_val, Subcontexts, null) \
@@ -238,7 +236,7 @@ ifeq (true,$(LOCAL_ENFORCE_USES_LIBRARIES))
     $(LOCAL_OPTIONAL_USES_LIBRARIES))
   my_relax_check_arg := $(if $(filter true,$(RELAX_USES_LIBRARY_CHECK)), \
     --enforce-uses-libraries-relax,)
-  my_dexpreopt_config_args := $(patsubst %,--dexpreopt-config %,$(my_dexpreopt_dep_configs))
+  my_dexpreopt_config_args := $(patsubst %,--dexpreopt-dep-config %,$(my_dexpreopt_dep_configs))
 
   my_enforced_uses_libraries := $(intermediates.COMMON)/enforce_uses_libraries.status
   $(my_enforced_uses_libraries): PRIVATE_USES_LIBRARIES := $(my_uses_libs_args)
@@ -389,10 +387,11 @@ ifeq ($(my_create_dexpreopt_config), true)
   $(call add_json_bool, EnforceUsesLibraries,           $(filter true,$(LOCAL_ENFORCE_USES_LIBRARIES)))
   $(call add_json_str,  ProvidesUsesLibrary,            $(firstword $(LOCAL_PROVIDES_USES_LIBRARY) $(LOCAL_MODULE)))
   $(call add_json_map,  ClassLoaderContexts)
-  $(call add_json_class_loader_context, any, $(my_dexpreopt_libs))
-  $(call add_json_class_loader_context,  28, $(my_dexpreopt_libs_compat_28))
-  $(call add_json_class_loader_context,  29, $(my_dexpreopt_libs_compat_29))
-  $(call add_json_class_loader_context,  30, $(my_dexpreopt_libs_compat_30))
+  $(call add_json_class_loader_context, any, $(my_dexpreopt_libs_required),)
+  $(call add_json_class_loader_context, any, $(my_dexpreopt_libs_optional),true)
+  $(call add_json_class_loader_context,  28, $(my_dexpreopt_libs_compat_28),)
+  $(call add_json_class_loader_context,  29, $(my_dexpreopt_libs_compat_29),)
+  $(call add_json_class_loader_context,  30, $(my_dexpreopt_libs_compat_30),)
   $(call end_json_map)
   $(call add_json_list, Archs,                          $(my_dexpreopt_archs))
   $(call add_json_list, DexPreoptImages,                $(my_dexpreopt_images))
@@ -466,7 +465,7 @@ ifdef LOCAL_DEX_PREOPT
   my_dexpreopt_deps := $(my_dex_jar)
   my_dexpreopt_deps += $(if $(my_process_profile),$(LOCAL_DEX_PREOPT_PROFILE))
   my_dexpreopt_deps += \
-    $(foreach lib, $(my_dexpreopt_libs) $(my_dexpreopt_libs_compat), \
+    $(foreach lib, $(my_dexpreopt_libs_required) $(my_dexpreopt_libs_optional) $(my_dexpreopt_libs_compat), \
       $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar)
   my_dexpreopt_deps += $(my_dexpreopt_images_deps)
   my_dexpreopt_deps += $(DEXPREOPT_BOOTCLASSPATH_DEX_FILES)
