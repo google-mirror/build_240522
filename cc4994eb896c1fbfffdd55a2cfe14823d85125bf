@@ -45,6 +45,30 @@
       },
       "revId": "cc4994eb896c1fbfffdd55a2cfe14823d85125bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a63978_1bacda6f",
+        "filename": "core/version_util.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-29T09:03:46Z",
+      "side": 1,
+      "message": "I dropped it.",
+      "parentUuid": "24534e7e_87b88f2e",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "cc4994eb896c1fbfffdd55a2cfe14823d85125bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
