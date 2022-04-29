@@ -16,6 +16,23 @@
       "message": "Used to merge adt3_gtv on http://ab/git_master-tv-dev without merge configs, and compared with\nusing merge configs.",
       "revId": "5c03ef8d9597c276fb86d897a38c0bc02f622ae1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "544220e9_28623175",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-04-29T00:58:24Z",
+      "side": 1,
+      "message": "extra config in string",
+      "revId": "5c03ef8d9597c276fb86d897a38c0bc02f622ae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
