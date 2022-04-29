@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b61d5c_ed9277ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-29T09:12:04Z",
+      "side": 1,
+      "message": "I updated the commit message to reflect the reason for this change.",
+      "parentUuid": "514f98f0_f6bc5f50",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "cc4994eb896c1fbfffdd55a2cfe14823d85125bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24534e7e_87b88f2e",
