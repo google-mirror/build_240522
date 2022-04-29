@@ -243,6 +243,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f8dfc36_0a535c26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-29T09:13:50Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "1b86a674_ffc56512",
+      "revId": "d7e9e1a914653eb0d5c54768553a4d394d712b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0ee36d9_7a49708e",
