@@ -16,6 +16,24 @@
       "message": "Dropped the final newline",
       "revId": "4faef3876d32886a5f6bc21ad775c8d2830713ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab83f644_af527415",
+        "filename": "core/version_util.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-29T09:10:18Z",
+      "side": 0,
+      "message": "Now it should be fine, I double checked on that. Thanks for the notice !",
+      "parentUuid": "30a773d6_617e74df",
+      "revId": "4faef3876d32886a5f6bc21ad775c8d2830713ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
