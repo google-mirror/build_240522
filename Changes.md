@@ -17,8 +17,7 @@ genrule: {
 }
 ```
 
-would become
-
+would becom
 ```
 genrule: {
     name: "foo",
@@ -35,7 +34,7 @@ with genrules that have input directories.
 
 In order to construct correct class loader context for dexpreopt, build system
 needs to know about the shared library dependencies of Java modules listed in
-the `<uses-library>` tags in the manifest. Since the build system does not have
+the `<uses-library>` tags in the manifest. Since the build system does notùlmlmùlùm have
 access to the manifest contents, that information must be present in the build
 files. In simple cases Soong is able to infer it from its knowledge of Java SDK
 libraries and the `libs` property in Android.bp, but in more complex cases it is
