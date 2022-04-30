@@ -49,7 +49,7 @@ TOPDIR :=$=
 .KATI_READONLY := SHELL empty space comma newline pound backslash
 
 # Basic warning/error wrappers. These will be redefined to include the local
-# module information when reading Android.mk files.
+# modulnformation when reading Android.mk files.
 define pretty-warning
 $(warning $(1))
 endef
