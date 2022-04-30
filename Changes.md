@@ -17,8 +17,7 @@ genrule: {
 }
 ```
 
-would become
-
+would becom
 ```
 genrule: {
     name: "foo",
