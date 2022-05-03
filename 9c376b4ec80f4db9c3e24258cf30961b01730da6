@@ -16,6 +16,24 @@
       "message": "...until bpmodify implements the file locking?",
       "revId": "9c376b4ec80f4db9c3e24258cf30961b01730da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "def1a6d8_33e81b8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-05-03T02:03:50Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "98b93da6_4c980c97",
+      "revId": "9c376b4ec80f4db9c3e24258cf30961b01730da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
