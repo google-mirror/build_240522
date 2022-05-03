@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (7d2d41 Merge "Remove RBC_BOARD_CONFIG")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SP2A.220505.002
+>>>>>>> BRANCH (e344c8 Version bump to SP2A.220505.002 [core/build_id.mk])
