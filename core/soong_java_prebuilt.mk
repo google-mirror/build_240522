@@ -173,7 +173,12 @@ ifdef LOCAL_SOONG_DEXPREOPT_CONFIG
   my_dexpreopt_config := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(my_dexpreopt_config)))
   $(LOCAL_BUILT_MODULE): $(my_dexpreopt_config)
-endif
+else # LOCAL_SOONG_DEXPREOPT_CONFIG
+  ifneq ($(LOCAL_IS_HOST_MODULE),true)
+    $(call intermediates-dir-for,JAVA_LIBRARIES,$(LOCAL_MODULE),,)/dexpreopt.config:
+		echo -n > $@
+  endif
+endif # LOCAL_SOONG_DEXPREOPT_CONFIG
 
 ifdef LOCAL_SOONG_CLASSES_JAR
 javac-check : $(full_classes_jar)

@@ -153,7 +153,7 @@ endif
 # this dexpreopt.config is generated. So it's necessary to add file-level
 # dependencies between dexpreopt.config files.
 my_dexpreopt_dep_configs := $(foreach lib, \
-  $(filter-out $(my_dexpreopt_libs_compat),$(my_dexpreopt_libs_required) $(my_dexpreopt_libs_optional)), \
+  $(filter-out $(my_dexpreopt_libs_compat),$(my_dexpreopt_libs_required) $(my_dexpreopt_libs_optional) $(LOCAL_JAVA_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES)), \
   $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,)/dexpreopt.config)
 
 # 1: SDK version
@@ -195,6 +195,7 @@ my_dexpreopt_image_locations_on_device :=
 # (art golem benchmarks). Install rules that use those variables are in
 # dex_preopt_libart.mk. Here for dexpreopt purposes the infix is always 'boot'.
 my_dexpreopt_infix := boot
+my_create_dexpreopt_config :=
 
 ifdef LOCAL_DEX_PREOPT
   ifeq (,$(filter PRESIGNED,$(LOCAL_CERTIFICATE)))
@@ -214,6 +215,14 @@ endif
 # but dexpreopt config files are required to dexpreopt in post-processing.
 ifeq ($(TARGET_BUILD_UNBUNDLED_IMAGE),true)
   my_create_dexpreopt_config := true
+endif
+
+ifeq ($(LOCAL_MODULE_CLASS),JAVA_LIBRARIES)
+  ifneq ($(LOCAL_IS_HOST_MODULE),true)
+    ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
+      my_create_dexpreopt_config := true
+    endif
+  endif
 endif
 
 # This is needed for both <uses-library> check and dexpreopt command.
