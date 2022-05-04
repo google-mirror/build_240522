@@ -53,6 +53,12 @@ $(built_module) : $(my_prebuilt_src_file)
 else  # ! prebuilt_module_is_dex_javalib
 $(built_module) : $(my_prebuilt_src_file)
 	$(transform-prebuilt-to-target)
+
+ifneq ($(LOCAL_IS_HOST_MODULE),true)
+  $(call intermediates-dir-for,JAVA_LIBRARIES,$(LOCAL_MODULE),,)/dexpreopt.config:
+	echo -n > $@
+endif
+
 endif # ! prebuilt_module_is_dex_javalib
 
 my_src_jar := $(my_prebuilt_src_file)
