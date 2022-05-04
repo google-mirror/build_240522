@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b8b52a_189ae646",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-04T14:14:56Z",
+      "side": 1,
+      "message": "maybe fail audibly if this is false?",
+      "revId": "030474b0d6ae4a5032b1bb45d52d22315910546b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
