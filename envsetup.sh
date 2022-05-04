@@ -395,7 +395,7 @@ function addcompletions()
     fi
 
     local completion_files=(
-      system/core/adb/adb.bash
+      packages/modules/adb/adb.bash
       system/core/fastboot/fastboot.bash
       tools/asuite/asuite.sh
     )
