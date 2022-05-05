@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afad064_5b121640",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-05-05T00:47:38Z",
+      "side": 1,
+      "message": "Since this will be specific to Android TV, we don\u0027t want this to be in AOSP. So, let\u0027s hold this for now and get this is in only for Android TV branch.",
+      "revId": "a9a87ec204b199c0ac798a47b81b754bfb3adff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
