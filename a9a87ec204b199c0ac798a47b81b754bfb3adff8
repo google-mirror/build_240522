@@ -16,6 +16,24 @@
       "message": "Since this will be specific to Android TV, we don\u0027t want this to be in AOSP. So, let\u0027s hold this for now and get this is in only for Android TV branch.",
       "revId": "a9a87ec204b199c0ac798a47b81b754bfb3adff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2dae3f4_c2471294",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-05-05T16:29:39Z",
+      "side": 1,
+      "message": "It should be fine, because no other targets have VABC enabled on R. This patch will have no impact on S/T devices, or R devices other than TV. If we accidentally generated a verity enabled OTA for TV, it would result in runtime crash of update_engine, which is really bad. So I prefer to merge this in AOSP(and possibly sc-dev/rvc-dev)",
+      "parentUuid": "0afad064_5b121640",
+      "revId": "a9a87ec204b199c0ac798a47b81b754bfb3adff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
