@@ -34,6 +34,24 @@
       "parentUuid": "0afad064_5b121640",
       "revId": "a9a87ec204b199c0ac798a47b81b754bfb3adff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e31c5a0_48373469",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-05-06T00:02:37Z",
+      "side": 1,
+      "message": "Ok.. This should be cherry-picked to TV branch..",
+      "parentUuid": "e2dae3f4_c2471294",
+      "revId": "a9a87ec204b199c0ac798a47b81b754bfb3adff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
