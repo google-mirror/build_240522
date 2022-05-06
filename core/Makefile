@@ -659,10 +659,11 @@ $(PRODUCT_OUT)/product_packages.txt:
 	$(foreach x,$(PRODUCT_PACKAGES),echo $(x) >> $@$(newline))
 
 MK2BP_CATALOG_SCRIPT := build/make/tools/mk2bp_catalog.py
+ANDROIDMK_TOOL := $(HOST_OUT_EXECUTABLES)/androidmk
 PRODUCT_PACKAGES_TXT := $(PRODUCT_OUT)/product_packages.txt
 MK2BP_REMAINING_HTML := $(PRODUCT_OUT)/mk2bp_remaining.html
 $(MK2BP_REMAINING_HTML): PRIVATE_CODE_SEARCH_BASE_URL := "https://cs.android.com/android/platform/superproject/+/master:"
-$(MK2BP_REMAINING_HTML): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(PRODUCT_PACKAGES_TXT)
+$(MK2BP_REMAINING_HTML): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(ANDROIDMK_TOOL) $(PRODUCT_PACKAGES_TXT)
 	@rm -f $@
 	$(hide) $(MK2BP_CATALOG_SCRIPT) \
 		--device=$(TARGET_DEVICE) \
@@ -676,7 +677,7 @@ $(call declare-1p-target,$(MK2BP_REMAINING_HTML),build)
 $(call dist-for-goals,droidcore-unbundled,$(MK2BP_REMAINING_HTML))
 
 MK2BP_REMAINING_CSV := $(PRODUCT_OUT)/mk2bp_remaining.csv
-$(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(PRODUCT_PACKAGES_TXT)
+$(MK2BP_REMAINING_CSV): $(SOONG_CONV_DATA) $(MK2BP_CATALOG_SCRIPT) $(ANDROIDMK_TOOL) $(PRODUCT_PACKAGES_TXT)
 	@rm -f $@
 	$(hide) $(MK2BP_CATALOG_SCRIPT) \
 		--device=$(TARGET_DEVICE) \

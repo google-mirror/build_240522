@@ -12,6 +12,7 @@ import itertools
 import json
 import os
 import re
+import subprocess
 import sys
 
 DIRECTORY_PATTERNS = [x.split("/") for x in (
@@ -110,6 +111,15 @@ ANALYZERS = (
   Analyzer("COPY_&#8203;HEADERS", lambda line: "LOCAL_COPY_HEADERS" in line),
 )
 
+def CanAutoConvert(filename):
+  try:
+    with open("/dev/null", "w") as devnull:
+      result = subprocess.run("out/host/linux-x86/bin/androidmk %s" % filename, shell=True,
+          stdout=devnull, stderr=devnull)
+    return result.returncode == 0
+  except:
+    return False
+
 class Summary(object):
   def __init__(self):
     self.makefiles = dict()
@@ -134,6 +144,8 @@ class Makefile(object):
 
     self.analyses = dict([(analyzer, analyze_lines(filename, lines, analyzer.func)) for analyzer
         in ANALYZERS])
+
+    self.canAutoConvert = CanAutoConvert(filename)
 
 def find_android_mk():
   cwd = os.getcwd()
@@ -300,6 +312,8 @@ def print_analysis_header(link, title):
         <th class="Count Unblocked">Unblocked</th>
         <th class="Count Blocked">Blocked</th>
         <th class="Count Clean">Clean</th>
+        <th class="Count AutoConvert">Auto-convert</th>
+        <th class="Count AutoConvertUnblocked">Auto-convert Unblocked</th>
   """ % {
     "link": link,
     "title": title
@@ -634,12 +648,22 @@ class HtmlProcessor(object):
               </tr>
               <tr>
                 <th class="Blocked">Blocked</th>
-                <td>Makefiles containiong one or more modules which <i>do</i> have
+                <td>Makefiles containing one or more modules which <i>do</i> have
                     additional prerequesite depenedencies that are not yet converted.</td>
               </tr>
               <tr>
                 <th class="Clean">Clean</th>
                 <td>The number of makefiles that have none of the following warnings.</td>
+              </tr>
+              <tr>
+                <th class="AutoConvert">Auto-convert</th>
+                <td>The number of makefiles that pass the androidmk autoconversion tool with no
+                warnings or errors.</td>
+              </tr>
+              <tr>
+                <th class="AutoConvertUnblocked">Auto-convert Unblocked</th>
+                <td>The number of makefiles that pass the androidmk autoconversion tool with no
+                warnings or errors and are also in the Unblocked category (see above).</td>
               </tr>
               <tr>
                 <th class="Warning">ifeq / ifneq</th>
@@ -970,6 +994,10 @@ class HtmlProcessor(object):
         if self.soong.contains_unblocked_modules(makefile.filename)]
     blocked_makefiles = [Analysis(makefile.filename, []) for makefile in makefiles
         if self.soong.contains_blocked_modules(makefile.filename)]
+    auto_makefiles = [Analysis(makefile.filename, []) for makefile in makefiles
+        if makefile.canAutoConvert]
+    auto_unblocked_makefiles = [Analysis(makefile.filename, []) for makefile in makefiles
+        if makefile.canAutoConvert and self.soong.contains_unblocked_modules(makefile.filename)]
 
     print("""
       <tr class="%(rowclass)s">
@@ -980,6 +1008,8 @@ class HtmlProcessor(object):
         <td class="Count">%(unblocked)s</td>
         <td class="Count">%(blocked)s</td>
         <td class="Count">%(clean)s</td>
+        <td class="Count">%(auto)s</td>
+        <td class="Count">%(auto_unblocked)s</td>
     """ % {
       "rowclass": rowclass,
       "rowtitle": rowtitle,
@@ -989,6 +1019,8 @@ class HtmlProcessor(object):
       "clean": self.make_annotation_link(clean_makefiles, modules),
       "unblocked_clean": self.make_annotation_link(unblocked_clean_makefiles, modules),
       "easy": self.make_annotation_link(easy_makefiles, modules),
+      "auto": self.make_annotation_link(auto_makefiles, modules),
+      "auto_unblocked": self.make_annotation_link(auto_unblocked_makefiles, modules),
     })
 
     for analyzer in ANALYZERS:
