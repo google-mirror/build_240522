@@ -88,6 +88,24 @@
       "parentUuid": "2dbb1ac8_5a60a130",
       "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a021b2_7fa65148",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2022-05-10T23:35:51Z",
+      "side": 1,
+      "message": "Sorry this was never submitted; I was awaiting feedback from originator of the bug to confirm it met their requirements. If this patch works for you (with the modified name), I can rebase and submit.",
+      "parentUuid": "0b397051_b4600a2c",
+      "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
