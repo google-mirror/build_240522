@@ -52,6 +52,24 @@
       "parentUuid": "147fc2d2_509ff561",
       "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386c3bcc_4a773b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2022-05-10T23:23:29Z",
+      "side": 1,
+      "message": "https://issuetracker.google.com/232134730",
+      "parentUuid": "2dbb1ac8_5a60a130",
+      "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
