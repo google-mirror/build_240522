@@ -16,6 +16,24 @@
       "message": "Are we still planning to merge this?",
       "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d8fb43_1dcbb265",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-05-10T23:01:17Z",
+      "side": 1,
+      "message": "both the bugs listed in the checkin comment were closed as obsolete (by a machine, for lack of activity from the original submitter), so if you have a use case that\u0027s blocked on this, it might be worth filing a bug/explicitly stating it, especially now the change is stale enough to require rebasing...",
+      "parentUuid": "147fc2d2_509ff561",
+      "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
