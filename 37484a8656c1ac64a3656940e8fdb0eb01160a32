@@ -70,6 +70,24 @@
       "parentUuid": "2dbb1ac8_5a60a130",
       "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b397051_b4600a2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-05-10T23:24:53Z",
+      "side": 1,
+      "message": "\u003e Can someone grant me permission or should I just submit a new change?\n\nthat\u0027s a good question that i don\u0027t know the answer to... i know _googlers_ can clobber each other\u0027s patchsets on the same change, but -- although i don\u0027t _know_ -- i\u0027d guess there\u0027s probably an ACL that says only googlers can do that.\n\nsince you\u0027ve already done the work, new change is probably easiest... it\u0027s easy to hit \"abandon\" :-)",
+      "parentUuid": "2dbb1ac8_5a60a130",
+      "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
