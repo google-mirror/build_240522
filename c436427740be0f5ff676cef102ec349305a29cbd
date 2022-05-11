@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbfdab4d_61ef7ac4",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1127078
+      },
+      "writtenOn": "2022-05-11T05:51:16Z",
+      "side": 1,
+      "message": "for this keep rule, just add a @Keep on the interface itself?",
+      "revId": "c436427740be0f5ff676cef102ec349305a29cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
