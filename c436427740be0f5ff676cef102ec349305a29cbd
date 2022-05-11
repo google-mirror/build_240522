@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9462243d_f48872a9",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-05-11T17:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbfdab4d_61ef7ac4",
+      "revId": "c436427740be0f5ff676cef102ec349305a29cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce34e9e0_08d0b02c",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-05-11T08:37:56Z",
       "side": 1,
       "message": "Maybe extend this to: allowaccessmodification,allowobfuscation,allowshrinking",
+      "range": {
+        "startLine": 21,
+        "startChar": 18,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "c436427740be0f5ff676cef102ec349305a29cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4469787_17746664",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-05-11T17:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce34e9e0_08d0b02c",
       "range": {
         "startLine": 21,
         "startChar": 18,
