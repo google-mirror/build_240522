@@ -124,6 +124,24 @@
       "parentUuid": "15a021b2_7fa65148",
       "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7537bb9c_83a3107f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2022-05-11T20:55:06Z",
+      "side": 1,
+      "message": "I have rebased the patchset; if everything looks ok to you, I\u0027ll submit after a successful presubmit verification.",
+      "parentUuid": "37397c5f_99f94424",
+      "revId": "37484a8656c1ac64a3656940e8fdb0eb01160a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
