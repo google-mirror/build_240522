@@ -16,6 +16,29 @@
       "message": "for this keep rule, just add a @Keep on the interface itself?",
       "revId": "c436427740be0f5ff676cef102ec349305a29cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce34e9e0_08d0b02c",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1327199
+      },
+      "writtenOn": "2022-05-11T08:37:56Z",
+      "side": 1,
+      "message": "Maybe extend this to: allowaccessmodification,allowobfuscation,allowshrinking",
+      "range": {
+        "startLine": 21,
+        "startChar": 18,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "c436427740be0f5ff676cef102ec349305a29cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
