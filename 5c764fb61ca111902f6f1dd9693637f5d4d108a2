@@ -22,6 +22,46 @@
       },
       "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0122bef5_f6d8cfe2",
+        "filename": "orchestrator/ninja/ninja_syntax.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:02:53Z",
+      "side": 1,
+      "message": "probably clearer with a trailing comma and one variable per line.",
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8042a189_bdfc9364",
+        "filename": "orchestrator/ninja/ninja_syntax.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:02:53Z",
+      "side": 1,
+      "message": "no leading space in docstrings (here and elsewhere)",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
