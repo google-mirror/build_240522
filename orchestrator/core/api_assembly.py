@@ -16,9 +16,12 @@
 
 import json
 import os
+import sys
 
-def assemble_apis(inner_trees):
+import api_assembly_cc
+import ninja_tools
 
+def assemble_apis(context, inner_trees):
     # Find all of the contributions from the inner tree
     contribution_files_dict = inner_trees.for_each_tree(api_contribution_files_for_inner_tree)
 
@@ -32,20 +35,28 @@ def assemble_apis(inner_trees):
                 continue
             # TODO: Validate the configs, especially that the domains match what we asked for
             # from the lunch config.
-            contributions.append(contribution_data)
+            contributions.append((inner_trees.get(tree_key), contribution_data))
 
     # Group contributions by language and API surface
     stub_libraries = collate_contributions(contributions)
 
-    # Iterate through all of the stub libraries and generate rules to assemble them
-    # and Android.bp/BUILD files to make those available to inner trees.
-    # TODO: Parallelize? Skip unnecessary work?
-    ninja_file = NinjaFile() # TODO: parameters?
-    build_file = BuildFile() # TODO: parameters?
-    for stub_library in stub_libraries:
-        STUB_LANGUAGE_HANDLERS[stub_library.language](ninja_file, build_file, stub_library)
+    # Initialize the ninja file writer
+    with open(context.out.api_ninja_file(), "w") as ninja_file:
+        ninja = ninja_tools.Ninja(context, ninja_file)
 
-    # TODO: Handle host_executables separately or as a StubLibrary language?
+        # Initialize the build file writer
+        build_file = BuildFile() # TODO: parameters?
+
+        # Iterate through all of the stub libraries and generate rules to assemble them
+        # and Android.bp/BUILD files to make those available to inner trees.
+        # TODO: Parallelize? Skip unnecessary work?
+        for stub_library in stub_libraries:
+            STUB_LANGUAGE_HANDLERS[stub_library.language](context, ninja, build_file, stub_library)
+
+        # TODO: Handle host_executables separately or as a StubLibrary language?
+
+        # Finish writing the ninja file
+        ninja.write()
 
 
 def api_contribution_files_for_inner_tree(tree_key, inner_tree, cookie):
@@ -72,7 +83,8 @@ def load_contribution_file(filename):
 
 
 class StubLibraryContribution(object):
-    def __init__(self, api_domain, library_contribution):
+    def __init__(self, inner_tree, api_domain, library_contribution):
+        self.inner_tree = inner_tree
         self.api_domain = api_domain
         self.library_contribution = library_contribution
 
@@ -94,7 +106,7 @@ def collate_contributions(contributions):
     language and library name, and return a StubLibrary object for each of those.
     """
     grouped = {}
-    for contribution in contributions:
+    for inner_tree, contribution in contributions:
         for language in STUB_LANGUAGE_HANDLERS.keys():
             for library in contribution.get(language, []):
                 key = (language, contribution["name"], contribution["version"], library["name"])
@@ -103,45 +115,32 @@ def collate_contributions(contributions):
                     stub_library = StubLibrary(language, contribution["name"],
                             contribution["version"], library["name"])
                     grouped[key] = stub_library
-                stub_library.add_contribution(StubLibraryContribution(
+                stub_library.add_contribution(StubLibraryContribution(inner_tree,
                         contribution["api_domain"], library))
     return list(grouped.values())
 
 
-def assemble_cc_api_library(ninja_file, build_file, stub_library):
-    print("assembling cc_api_library %s-%s %s from:" % (stub_library.api_surface, stub_library.api_surface_version,
-            stub_library.name))
+def assemble_java_api_library(context, ninja, build_file, stub_library):
+    print("assembling java_api_library %s-%s %s from:" % (stub_library.api_surface,
+            stub_library.api_surface_version, stub_library.name))
     for contrib in stub_library.contributions:
         print("  %s %s" % (contrib.api_domain, contrib.library_contribution["api"]))
     # TODO: Implement me
 
 
-def assemble_java_api_library(ninja_file, build_file, stub_library):
-    print("assembling java_api_library %s-%s %s from:" % (stub_library.api_surface, stub_library.api_surface_version,
-            stub_library.name))
-    for contrib in stub_library.contributions:
-        print("  %s %s" % (contrib.api_domain, contrib.library_contribution["api"]))
-    # TODO: Implement me
-
-
-def assemble_resource_api_library(ninja_file, build_file, stub_library):
-    print("assembling resource_api_library %s-%s %s from:" % (stub_library.api_surface, stub_library.api_surface_version,
-            stub_library.name))
+def assemble_resource_api_library(context, ninja, build_file, stub_library):
+    print("assembling resource_api_library %s-%s %s from:" % (stub_library.api_surface,
+            stub_library.api_surface_version, stub_library.name))
     for contrib in stub_library.contributions:
         print("  %s %s" % (contrib.api_domain, contrib.library_contribution["api"]))
     # TODO: Implement me
 
 
 STUB_LANGUAGE_HANDLERS = {
-    "cc_libraries": assemble_cc_api_library,
+    "cc_libraries": api_assembly_cc.assemble_cc_api_library,
     "java_libraries": assemble_java_api_library,
     "resource_libraries": assemble_resource_api_library,
 }
-
-
-class NinjaFile(object):
-    "Generator for build actions and dependencies."
-    pass
 
 
 class BuildFile(object):
