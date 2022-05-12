@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efbbf79_15beec82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "Yeah, I know... Most of this code is scaffolding and I just want to get something in to unblock everyone else.  I promise I will come back and write tests.",
+      "parentUuid": "2442a930_fc57789d",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64b454b5_17aee178",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-12T17:00:46Z",
       "side": 1,
       "message": "Here and elsewhere: should be \"TODO(b/NNNN):\" or similar, with a tracking bug so that the TODO doesn\u0027t get lost.",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a107a5f_bab32ea5",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "Nah. Too much paperwork. We\u0027ll go through the code and fix these when we launch. The final UX isn\u0027t really decided anyway.",
+      "parentUuid": "64b454b5_17aee178",
       "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "752fe473_e875cca7",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "This is copied from the other gettop, so let\u0027s not change it.",
+      "parentUuid": "1d881449_7cb26829",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58a29be5_8c12458e",
@@ -69,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61657d5e_cc985878",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "This is copied from the other gettop, so let\u0027s not change it.",
+      "parentUuid": "58a29be5_8c12458e",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef37e9fb_dd925256",
@@ -82,6 +154,24 @@
       "writtenOn": "2022-05-12T17:00:46Z",
       "side": 1,
       "message": "Here and elsewhere: docstring for every class and function...",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21f70473_0ee3f8e6",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ef37e9fb_dd925256",
       "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -172,6 +262,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "549b5613_f3b4ad2d",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e971e778_48393255",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2b03aff_816a5805",
@@ -195,6 +303,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fdd115f_048a9ed9",
+        "filename": "orchestrator/core/lunch.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "described the return (yield)\n\nBut for the constant, I disagree. This puts the actual constant right there where you can see it, instead of creating another indirection which might also secretly get used for something else unrelated.",
+      "parentUuid": "d2b03aff_816a5805",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e23259ef_12aa3f96",
@@ -208,6 +340,24 @@
       "writtenOn": "2022-05-12T17:00:46Z",
       "side": 1,
       "message": "Any reason not to make this a class method?",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5043d9c9_1e1b8471",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "It doesn\u0027t need `self` so it\u0027s just an outer helper function.",
+      "parentUuid": "e23259ef_12aa3f96",
       "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -271,6 +421,30 @@
       "writtenOn": "2022-05-12T17:00:46Z",
       "side": 1,
       "message": "use textwrap.dedent()",
+      "range": {
+        "startLine": 47,
+        "startChar": 24,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53764517_3f385919",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T18:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58a04ec6_3fd6b340",
       "range": {
         "startLine": 47,
         "startChar": 24,
