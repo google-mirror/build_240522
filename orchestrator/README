@@ -1,0 +1,7 @@
+DEMO
+
+from the root of the workspace
+
+ln -s ../build/orchestrator/inner_build/inner_build_demo.py master/.inner_build
+ln -s ../build/orchestrator/inner_build/inner_build_demo.py sc-mainline-prod/.inner_build
+
