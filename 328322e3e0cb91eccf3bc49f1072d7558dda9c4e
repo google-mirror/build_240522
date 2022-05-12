@@ -132,6 +132,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ba125e_2e159f7f",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:43:36Z",
+      "side": 1,
+      "message": "nit: I think an exception to this rule is the `interrogate the inner tree` step, which only depends on root",
+      "range": {
+        "startLine": 23,
+        "startChar": 40,
+        "endLine": 23,
+        "endChar": 73
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e971e778_48393255",
