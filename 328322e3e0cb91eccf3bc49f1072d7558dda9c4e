@@ -88,6 +88,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6362bfe_eecba8f5",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:29:34Z",
+      "side": 1,
+      "message": "nit: This feels like something that should be deferred to a build system (as part of a bootstrapping process. But that can get complicated quickly)",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 54
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e18f3e0_441f03fe",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:29:34Z",
+      "side": 1,
+      "message": "Should this contain another argument for the lunch config?\n\ne.g. both system and bionic inner tree can export an API contribution for `bionic`. But if the chosen lunch combo uses `bionic` from the bionic inner tree, the collated API contribution from come from there.",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 25
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e971e778_48393255",
         "filename": "orchestrator/core/inner_tree.py",
         "patchSetId": 2
@@ -145,6 +191,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebfd5fac_1679fcd9",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:29:34Z",
+      "side": 1,
+      "message": "nit: the program name should not be hardcoded here since it can be bazel or `inner_build_demo.py`",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb37559_f9f6426c",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:29:34Z",
+      "side": 1,
+      "message": "I think you missed updating the help description for `api_domain` here",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 86
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58a04ec6_3fd6b340",
         "filename": "orchestrator/inner_build/inner_build_demo.py",
         "patchSetId": 2
@@ -161,6 +253,29 @@
         "startChar": 24,
         "endLine": 47,
         "endChar": 26
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b2ee2e_8f123ecb",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T17:29:34Z",
+      "side": 1,
+      "message": "Should the api_domain be bionic and not system?",
+      "range": {
+        "startLine": 103,
+        "startChar": 35,
+        "endLine": 103,
+        "endChar": 41
       },
       "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
