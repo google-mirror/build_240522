@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7a37731_6ae96986",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T20:35:36Z",
+      "side": 1,
+      "message": "Does the existing (your link) ninja writer meet our needs without changes?  If so, we should update the manifest to include ninja.  We\u0027ll need that for step 4: execute anyway.",
+      "parentUuid": "ca9ba200_b101761a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0122bef5_f6d8cfe2",
         "filename": "orchestrator/ninja/ninja_syntax.py",
         "patchSetId": 2
