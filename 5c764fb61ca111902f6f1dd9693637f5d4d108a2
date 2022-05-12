@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b456d25_2a95a91b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T22:44:51Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "50d1be45_a52986dd",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0122bef5_f6d8cfe2",
