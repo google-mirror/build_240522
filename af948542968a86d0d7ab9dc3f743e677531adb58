@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc8f454_7f45fa21",
+        "filename": "target/product/sdk.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-12T22:42:38Z",
+      "side": 1,
+      "message": "I\u0027m going to migrate the continuous sdk build to use this product instead of the variety of sdk products that are used across branches at the moment.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "af948542968a86d0d7ab9dc3f743e677531adb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
