@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9ba200_b101761a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T15:57:33Z",
+      "side": 1,
+      "message": "The ninja project itself contains its own ninja writer https://github.com/ninja-build/ninja/blob/master/misc/ninja_syntax.py\n\nThe current CL can help keep the build orchestrator isolated for now and is lightweight enough. But it might be nice to combine the two in the future",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
