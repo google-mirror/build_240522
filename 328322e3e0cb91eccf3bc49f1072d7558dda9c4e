@@ -199,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b8799a_c553868f",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T19:12:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6362bfe_eecba8f5",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 54
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e18f3e0_441f03fe",
@@ -212,6 +236,30 @@
       "writtenOn": "2022-05-12T17:29:34Z",
       "side": 1,
       "message": "Should this contain another argument for the lunch config?\n\ne.g. both system and bionic inner tree can export an API contribution for `bionic`. But if the chosen lunch combo uses `bionic` from the bionic inner tree, the collated API contribution from come from there.",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 25
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c0e090_ec9ac390",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T19:12:53Z",
+      "side": 1,
+      "message": "I was thinking that this should be done in the TODO on line 33 that ought to make sure that the domains and contributions match.  In theory, the inner builds shouldn\u0027t produce unnecessary contribution json files, but it\u0027ll happen because of latent files or something, so we\u0027ll still need that filtering.",
+      "parentUuid": "2e18f3e0_441f03fe",
       "range": {
         "startLine": 92,
         "startChar": 4,
@@ -385,6 +433,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cad0a2d_aeda06c2",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T19:12:53Z",
+      "side": 1,
+      "message": "Yes. In fact it should just be .inner_build",
+      "parentUuid": "ebfd5fac_1679fcd9",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeb37559_f9f6426c",
@@ -398,6 +470,30 @@
       "writtenOn": "2022-05-12T17:29:34Z",
       "side": 1,
       "message": "I think you missed updating the help description for `api_domain` here",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 86
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "889a59d6_fc28d184",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T19:12:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeb37559_f9f6426c",
       "range": {
         "startLine": 30,
         "startChar": 18,
@@ -468,6 +564,30 @@
       "writtenOn": "2022-05-12T17:29:34Z",
       "side": 1,
       "message": "Should the api_domain be bionic and not system?",
+      "range": {
+        "startLine": 103,
+        "startChar": 35,
+        "endLine": 103,
+        "endChar": 41
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1d1fe6_97650d19",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-12T19:12:53Z",
+      "side": 1,
+      "message": "Yeah. It\u0027s a mess. This is just sample to cover the different types. I didn\u0027t want to start adding too many different domains, just to keep the config simple.",
+      "parentUuid": "f5b2ee2e_8f123ecb",
       "range": {
         "startLine": 103,
         "startChar": 35,
