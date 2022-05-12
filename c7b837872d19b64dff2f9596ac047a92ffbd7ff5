@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1862f5a_ba57b31d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5978,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-05-12T20:40:05Z",
+      "side": 1,
+      "message": "The SYSTEM/ directory contains the individual files that are packaged into system.img, but IIUC this is the image itself?  That doesn\u0027t seem useful.  Maybe ATC should be looking at the PREBUILT_IMAGES directory too?",
+      "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
