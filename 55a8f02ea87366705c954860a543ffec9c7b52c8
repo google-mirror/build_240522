@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6adc0e0_6e386711",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-12T12:46:20Z",
+      "side": 1,
+      "message": "Removed the ramdisk target which cleaned up another ~1000 targets",
+      "revId": "55a8f02ea87366705c954860a543ffec9c7b52c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
