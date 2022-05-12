@@ -16,6 +16,154 @@
       "message": "tests?",
       "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b454b5_17aee178",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "Here and elsewhere: should be \"TODO(b/NNNN):\" or similar, with a tracking bug so that the TODO doesn\u0027t get lost.",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d881449_7cb26829",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "eliminate the `cd` with `realpath --canonicalize-existing \"${TOP}\"`",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a29be5_8c12458e",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "use `realpath --canonicalize-existing \"${PWD}\"`, and then `PWD\u003d\"$(dirname \"${PWD}\")` to move up.  (eliminates `cd` commands, and complexity of self-parsing the path.",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef37e9fb_dd925256",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "Here and elsewhere: docstring for every class and function...",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e971e778_48393255",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "Reads cleaner as:\n```\n       from textwrap import dedent\n       return dedent(\"\"\"\n           InnerTrees {\n               trees: [\n                   %(trees)s\n               ]\n               ...\n       \"\"\")\n```",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b03aff_816a5805",
+        "filename": "orchestrator/core/lunch.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "Maybe make this a constant defined above?\ndocstring should describe args and return.",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23259ef_12aa3f96",
+        "filename": "orchestrator/inner_build/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "Any reason not to make this a class method?",
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a04ec6_3fd6b340",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-12T17:00:46Z",
+      "side": 1,
+      "message": "use textwrap.dedent()",
+      "range": {
+        "startLine": 47,
+        "startChar": 24,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "328322e3e0cb91eccf3bc49f1072d7558dda9c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
