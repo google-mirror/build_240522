@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2c67af7d_5f75e856",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-12T09:15:20Z",
+      "side": 1,
+      "message": "I\u0027ll also add: it\u0027s not entirely identical, but it\u0027s identical for the purposes of what matters here: the only diffs are in the build prop files, which change based on timestamps on so forth.",
+      "range": {
+        "startLine": 30,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 66
+      },
+      "revId": "4f2a21334566468ca3ae34986782f2692c57d987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "134b3658_d30a5f36",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
