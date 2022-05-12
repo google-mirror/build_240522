@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b683842e_9ebed90e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-12T21:03:53Z",
+      "side": 1,
+      "message": "\u003e Does the existing (your link) ninja writer meet our needs without changes? \nsubninja will become one exception once chDir lands. But we can add that to `ninja_syntax.py` in Android\u0027s ninja fork\n\n\u003e If so, we should update the manifest to include ninja.  We\u0027ll need that for step 4: execute anyway.\nRegarding ninja execution, another option to get ninja is in the prebuilt form (similar to aosp). So the build orchestrator manifest can include a prebuilts/ project which contains ninja, kati, make etc. \n\nIf we do decide to include ninja as source in the build orchestrator\u0027s manifest, I think we should also switch to the writer provided by the ninja project",
+      "parentUuid": "f7a37731_6ae96986",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "5c764fb61ca111902f6f1dd9693637f5d4d108a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0122bef5_f6d8cfe2",
         "filename": "orchestrator/ninja/ninja_syntax.py",
         "patchSetId": 2
