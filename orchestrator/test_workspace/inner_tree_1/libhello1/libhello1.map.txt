@@ -1,0 +1,6 @@
+LIBHELLO {
+    global:
+        hello1; # apex # introduced=1
+    local:
+        *;
+};
