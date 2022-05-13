@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4c1b9fb2_3ef2a3f5",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-13T19:23:58Z",
+      "side": 1,
+      "message": "done\n\nI learn some new language / library feature every day.  I\u0027ll fix this in the next CL, and now the thing I hated most about python, having a bunch of anonymous tuples everywhere, is fixed.",
+      "parentUuid": "5e92b13a_d312aaba",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 79
+      },
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc54aba0_3f9273a6",
         "filename": "orchestrator/core/final_packaging.py",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2022-05-13T17:02:58Z",
       "side": 1,
       "message": "Is final_packaging.py the place where we generate the ninja rules to copy apexes/top-level artifacts and build img files?",
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baef1c7f_1693b7e5",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-13T19:23:58Z",
+      "side": 1,
+      "message": "It will be.\n\nWell, not actually build the images, but generate rules to copy the apexes to somewhere where the system\u0027s inner tree can use them.",
+      "parentUuid": "bc54aba0_3f9273a6",
       "revId": "41bf2e0a32704d686a454335269d74e802053a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +113,24 @@
       "writtenOn": "2022-05-13T17:02:58Z",
       "side": 1,
       "message": "nit: `add_phony` is staple enough that it can probably go inside `ninja_writer.py`",
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b34ef50_3a20e3d1",
+        "filename": "orchestrator/core/ninja_tools.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-13T19:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79489d50_bc38081d",
       "revId": "41bf2e0a32704d686a454335269d74e802053a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
