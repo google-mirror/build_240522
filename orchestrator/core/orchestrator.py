@@ -24,6 +24,7 @@ import api_domain
 import api_export
 import final_packaging
 import inner_tree
+import tree_analysis
 import interrogate
 import lunch
 import ninja_runner
@@ -102,8 +103,9 @@ def build():
     api_assembly.assemble_apis(context, inner_trees)
 
     #
-    # 3a. API Domain Analysis
+    # 3a. Inner tree analysis
     #
+    inner_trees.for_each_tree(api_export.export_apis_from_tree)
 
     #
     # 3b. Final Packaging Rules
