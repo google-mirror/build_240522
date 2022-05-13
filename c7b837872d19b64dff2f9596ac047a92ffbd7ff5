@@ -16,6 +16,24 @@
       "message": "The SYSTEM/ directory contains the individual files that are packaged into system.img, but IIUC this is the image itself?  That doesn\u0027t seem useful.  Maybe ATC should be looking at the PREBUILT_IMAGES directory too?",
       "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab849ec5_b7159c28",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5978,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-13T13:57:03Z",
+      "side": 1,
+      "message": "The difference with system.img is that the pvmfw partition is intended to contain a single binary (no file system) so the \"disk image\" and the \"file\" it contains are identical.\n\n\u003e Maybe ATC should be looking at the PREBUILT_IMAGES directory too?\n\nWouldn\u0027t that result in false positives due to the images being AVB-signed using different salts across builds?",
+      "parentUuid": "c1862f5a_ba57b31d",
+      "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
