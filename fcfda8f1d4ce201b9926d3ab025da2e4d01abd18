@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263c5c2b_41e531b4",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-13T23:20:51Z",
+      "side": 1,
+      "message": "??",
+      "revId": "fcfda8f1d4ce201b9926d3ab025da2e4d01abd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c1900d_028de01d",
+        "filename": "orchestrator/core/ninja_runner.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-13T23:20:51Z",
+      "side": 1,
+      "message": "Generally one line if it\u0027s only one line of text.",
+      "revId": "fcfda8f1d4ce201b9926d3ab025da2e4d01abd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddcee570_28270b08",
+        "filename": "orchestrator/core/orchestrator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-13T23:20:51Z",
+      "side": 1,
+      "message": "any reason not to use \"context\"?",
+      "range": {
+        "startLine": 39,
+        "startChar": 19,
+        "endLine": 39,
+        "endChar": 23
+      },
+      "revId": "fcfda8f1d4ce201b9926d3ab025da2e4d01abd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
