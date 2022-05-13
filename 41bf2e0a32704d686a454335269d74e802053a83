@@ -16,6 +16,86 @@
       "message": "previous build failure was flake",
       "revId": "41bf2e0a32704d686a454335269d74e802053a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e92b13a_d312aaba",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-13T17:02:58Z",
+      "side": 1,
+      "message": "nit: Make this a class or a named tuple?",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 79
+      },
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc54aba0_3f9273a6",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-13T17:02:58Z",
+      "side": 1,
+      "message": "Is final_packaging.py the place where we generate the ninja rules to copy apexes/top-level artifacts and build img files?",
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79489d50_bc38081d",
+        "filename": "orchestrator/core/ninja_tools.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-13T17:02:58Z",
+      "side": 1,
+      "message": "nit: `add_phony` is staple enough that it can probably go inside `ninja_writer.py`",
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c954c95f_f5549c71",
+        "filename": "orchestrator/ninja/ninja_syntax.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-13T17:02:58Z",
+      "side": 1,
+      "message": "Thanks!",
+      "range": {
+        "startLine": 162,
+        "startChar": 13,
+        "endLine": 162,
+        "endChar": 17
+      },
+      "revId": "41bf2e0a32704d686a454335269d74e802053a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
