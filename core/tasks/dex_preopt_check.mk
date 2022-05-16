@@ -12,7 +12,8 @@ ifneq (true,$(DISABLE_DEXPREOPT_CHECK))
   ifneq (,$(filter services,$(PRODUCT_PACKAGES)))
     $(call maybe-print-list-and-error,\
       $(filter-out $(ALL_DEFAULT_INSTALLED_MODULES),$(DEXPREOPT_SYSTEMSERVER_ARTIFACTS)),\
-      Missing compilation artifacts. Dexpreopting is not working for some system server jars \
+      Missing compilation artifacts. Dexpreopting is not working for some system server jars. See \
+      go/android-art/art/aot/dexpreopt.md#debugging-dex-preopt-check-error \
     )
   endif
 endif
