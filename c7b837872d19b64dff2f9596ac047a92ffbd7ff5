@@ -34,6 +34,24 @@
       "parentUuid": "c1862f5a_ba57b31d",
       "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a07623_c075fe48",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5978,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-05-16T21:38:31Z",
+      "side": 1,
+      "message": "I like this better, although its a little weird as the `PVMFW/` doesn\u0027t contain the files inside the filesystem image like the other directories, it has the unsigned image.\n\nAnother option would be to have ATC track a set of images in the `IMAGES/` directory, but strip the AVB signing from them to avoid false positives.",
+      "parentUuid": "ab849ec5_b7159c28",
+      "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
