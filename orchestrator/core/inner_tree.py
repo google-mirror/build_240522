@@ -84,7 +84,11 @@ class InnerTree(object):
         # TODO: This is where we should set up the shared trees
 
         # Build the command
-        cmd = [inner_build_tool, "--out_dir", self.out.root()]
+        cmd = [inner_build_tool,
+               "--out_dir",
+               self.out.root(),
+               "--inner_tree",
+               self.root]
         for domain_name in sorted(self.domains.keys()):
             cmd.append("--api_domain")
             cmd.append(domain_name)

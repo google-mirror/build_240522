@@ -29,6 +29,9 @@ def _parse_arguments(argv):
     parser.add_argument("--api_domain", action="append", required=True,
             help="which API domains are to be built in this inner tree")
 
+    parser.add_argument("--inner_tree", action="store",
+            help="root of the inner tree")
+
     subparsers = parser.add_subparsers(required=True, dest="command",
             help="subcommands")
 
