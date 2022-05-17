@@ -52,6 +52,24 @@
       "parentUuid": "ab849ec5_b7159c28",
       "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8320afcc_5fbf4001",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5978,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-17T10:09:06Z",
+      "side": 1,
+      "message": "I agree it\u0027s different; this approach should however come in handy once we stop dropping prebuilts in the AOSP tree (urgh!) and instead start building the firmware during the Android build. At that point, the partition will still contain the stripped binary but we\u0027ll be able to archive the ELF under `PVMFW/`, easing the debug process for a particular build.",
+      "parentUuid": "e8a07623_c075fe48",
+      "revId": "c7b837872d19b64dff2f9596ac047a92ffbd7ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
