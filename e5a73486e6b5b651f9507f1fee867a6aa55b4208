@@ -22,6 +22,30 @@
       },
       "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78ca812_d9bd74da",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-17T14:57:54Z",
+      "side": 1,
+      "message": "Markdown can render them correctly as 1, 2, 3... This style is recommended by go/g3doc-style#lists.",
+      "parentUuid": "d818d615_4cad6403",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 2
+      },
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
