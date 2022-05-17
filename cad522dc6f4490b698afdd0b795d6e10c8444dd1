@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fa387d_eeba46e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-17T09:59:29Z",
+      "side": 1,
+      "message": "Nicolas, could you please give an owner\u0027s approval? Thanks.",
+      "revId": "cad522dc6f4490b698afdd0b795d6e10c8444dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
