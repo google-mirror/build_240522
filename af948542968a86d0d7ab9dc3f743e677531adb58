@@ -22,6 +22,30 @@
       },
       "revId": "af948542968a86d0d7ab9dc3f743e677531adb58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f61d469_8d8f9c87",
+        "filename": "target/product/sdk.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-17T13:42:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ddc8f454_7f45fa21",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "af948542968a86d0d7ab9dc3f743e677531adb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
