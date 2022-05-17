@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8460e33f_f2ebc5c1",
+        "filename": "tools/warn/warn_common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-05-17T21:22:47Z",
+      "side": 1,
+      "message": "nit: This is fragile, and can probably be rewritten to use `os.path.dirname(__file__)` along with resolving after concatenating the right number of `..`. See https://stackoverflow.com/questions/9271464/what-does-the-file-variable-mean-do for some examples.",
+      "revId": "a55837c7d1e7823f1c56427c94be43b2ea99ac3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
