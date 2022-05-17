@@ -16,6 +16,29 @@
       "message": "Nicolas, could you please give an owner\u0027s approval? Thanks.",
       "revId": "cad522dc6f4490b698afdd0b795d6e10c8444dd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "791039b2_aef72e72",
+        "filename": "core/tasks/dex_preopt_check.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-05-17T10:32:45Z",
+      "side": 1,
+      "message": "This is an internal link. Could we have something in aosp for that documentation?",
+      "range": {
+        "startLine": 15,
+        "startChar": 94,
+        "endLine": 16,
+        "endChar": 76
+      },
+      "revId": "cad522dc6f4490b698afdd0b795d6e10c8444dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
