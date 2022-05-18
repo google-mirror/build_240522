@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb327a9_c335db3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-05-18T16:28:53Z",
+      "side": 1,
+      "message": "AIUI prior to this change a thin manifest that excluded art/ would fail here.\nWhat are the consequences of not finding the file in such a manifest? Is it only used when art/ is present?",
+      "revId": "e9d42390846e76b1e67537b56993e81f724c2b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
