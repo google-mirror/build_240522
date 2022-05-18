@@ -63,6 +63,30 @@
       },
       "revId": "e9d42390846e76b1e67537b56993e81f724c2b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f158956f_55fa410a",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-05-18T17:46:35Z",
+      "side": 1,
+      "message": "I thought my suggestion would accomplish that - if TARGET_BUILD_APPS doesn\u0027t mention the ART module in a Mainline module build it\u0027s not getting built at all and this would be moot. But I see no problem with your suggestion either.",
+      "parentUuid": "6dcb79b6_e9efe40d",
+      "range": {
+        "startLine": 81,
+        "startChar": 50,
+        "endLine": 81,
+        "endChar": 60
+      },
+      "revId": "e9d42390846e76b1e67537b56993e81f724c2b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
