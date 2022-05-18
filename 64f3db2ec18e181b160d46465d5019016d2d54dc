@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0671bf49_c00ca1d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-18T09:37:26Z",
+      "side": 1,
+      "message": "(resolving old comments to get it off my dashboard. this code isn\u0027t used)",
+      "revId": "64f3db2ec18e181b160d46465d5019016d2d54dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
