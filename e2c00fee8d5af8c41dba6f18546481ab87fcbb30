@@ -16,6 +16,24 @@
       "message": "__iter__ returns the first element, __next__ is required and returns the subsequent element.",
       "revId": "e2c00fee8d5af8c41dba6f18546481ab87fcbb30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ebcdf0_3231054f",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-18T14:53:49Z",
+      "side": 1,
+      "message": "Ugh.  I hate python iterators!!!!!!!!!!  I\u0027ll just remove this shorthand...",
+      "parentUuid": "49c155da_e3f4064d",
+      "revId": "e2c00fee8d5af8c41dba6f18546481ab87fcbb30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
