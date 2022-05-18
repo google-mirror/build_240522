@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c155da_e3f4064d",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-18T13:35:12Z",
+      "side": 1,
+      "message": "__iter__ returns the first element, __next__ is required and returns the subsequent element.",
+      "revId": "e2c00fee8d5af8c41dba6f18546481ab87fcbb30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
