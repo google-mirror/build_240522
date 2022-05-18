@@ -39,6 +39,30 @@
       },
       "revId": "e9d42390846e76b1e67537b56993e81f724c2b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dcb79b6_e9efe40d",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-05-18T17:42:20Z",
+      "side": 1,
+      "message": "It seems even more dangerous to accidentally turn this off during a mainline build that needs it.  I could use a `$(wildcard art/)` conditional instead, so that it will at least fail to build if you rename the file.",
+      "parentUuid": "2d14aa6a_aec6202d",
+      "range": {
+        "startLine": 81,
+        "startChar": 50,
+        "endLine": 81,
+        "endChar": 60
+      },
+      "revId": "e9d42390846e76b1e67537b56993e81f724c2b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
