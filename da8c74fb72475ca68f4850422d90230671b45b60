@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b69ad6_54e3a585",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-18T19:14:42Z",
+      "side": 1,
+      "message": "TODO for spandandas@\n\nWill try to have a first draft of the doc ready by EOD today MTV time",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "da8c74fb72475ca68f4850422d90230671b45b60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
