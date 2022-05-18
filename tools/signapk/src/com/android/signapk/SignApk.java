@@ -779,7 +779,7 @@ class SignApk {
      * Tries to load a JSE Provider by class name. This is for custom PrivateKey
      * types that might be stored in PKCS#11-like storage.
      */
-    private static void loadProviderIfNecessary(String providerClassName) {
+    private static void loadProviderIfNecessary(String providerClassName, String providerArg) {
         if (providerClassName == null) {
             return;
         }
@@ -798,27 +798,41 @@ class SignApk {
             return;
         }
 
-        Constructor<?> constructor = null;
-        for (Constructor<?> c : klass.getConstructors()) {
-            if (c.getParameterTypes().length == 0) {
-                constructor = c;
-                break;
+        Constructor<?> constructor;
+        Object o = null;
+        if (providerArg == null) {
+            try {
+                constructor = klass.getConstructor();
+                o = constructor.newInstance();
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+                System.err.println("Unable to instantiate " + providerClassName
+                        + " with a zero-arg constructor");
+                System.exit(1);
+            }
+        } else {
+            try {
+                constructor = klass.getConstructor(String.class);
+                o = constructor.newInstance(providerArg);
+            } catch (ReflectiveOperationException e) {
+                // This is expected from JDK 9+; the single-arg constructor accepting the
+                // configuration has been replaced with a configure(String) method to be invoked
+                // after instantiating the Provider with the zero-arg constructor.
+                try {
+                    constructor = klass.getConstructor();
+                    o = constructor.newInstance();
+                    // The configure method will return either the modified Provider or a new
+                    // Provider if this one cannot be configured in-place.
+                    o = klass.getMethod("configure", String.class).invoke(o, providerArg);
+                } catch (ReflectiveOperationException roe) {
+                    roe.printStackTrace();
+                    System.err.println("Unable to instantiate " + providerClassName
+                            + " with the provided argument " + providerArg);
+                    System.exit(1);
+                }
             }
         }
-        if (constructor == null) {
-            System.err.println("No zero-arg constructor found for " + providerClassName);
-            System.exit(1);
-            return;
-        }
 
-        final Object o;
-        try {
-            o = constructor.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-            return;
-        }
         if (!(o instanceof Provider)) {
             System.err.println("Not a Provider class: " + providerClassName);
             System.exit(1);
@@ -926,6 +940,12 @@ class SignApk {
         System.err.println("Usage: signapk [-w] " +
                            "[-a <alignment>] " +
                            "[-providerClass <className>] " +
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+                           "[-providerArg <configureArg>] " +
+                           "[-loadPrivateKeysFromKeyStore <keyStoreName>]" +
+                           "[-keyStorePin <pin>]" +
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
                            "[--min-sdk-version <n>] " +
                            "[--disable-v2] " +
                            "publickey.x509[.pem] privatekey.pk8 " +
@@ -947,6 +967,12 @@ class SignApk {
 
         boolean signWholeFile = false;
         String providerClass = null;
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+        String providerArg = null;
+        String keyStoreName = null;
+        String keyStorePin = null;
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
         int alignment = 4;
         Integer minSdkVersionOverride = null;
         boolean signUsingApkSignatureSchemeV2 = true;
@@ -962,6 +988,27 @@ class SignApk {
                 }
                 providerClass = args[++argstart];
                 ++argstart;
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+            } else if("-providerArg".equals(args[argstart])) {
+                if (argstart + 1 >= args.length) {
+                    usage();
+                }
+                providerArg = args[++argstart];
+                ++argstart;
+            } else if ("-loadPrivateKeysFromKeyStore".equals(args[argstart])) {
+                if (argstart + 1 >= args.length) {
+                    usage();
+                }
+                keyStoreName = args[++argstart];
+                ++argstart;
+            } else if ("-keyStorePin".equals(args[argstart])) {
+                if (argstart + 1 >= args.length) {
+                    usage();
+                }
+                keyStorePin = args[++argstart];
+                ++argstart;
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
             } else if ("-a".equals(args[argstart])) {
                 alignment = Integer.parseInt(args[++argstart]);
                 ++argstart;
@@ -989,7 +1036,7 @@ class SignApk {
             System.exit(2);
         }
 
-        loadProviderIfNecessary(providerClass);
+        loadProviderIfNecessary(providerClass, providerArg);
 
         String inputFilename = args[args.length-2];
         String outputFilename = args[args.length-1];

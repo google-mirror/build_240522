@@ -15,4 +15,33 @@
 @**.VisibleForTesting *;
 }
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+# Keep rule for members that are needed solely to keep alive downstream weak
+# references, and could otherwise be removed after tree shaking optimizations.
+-keepclassmembers,allowaccessmodification,allowobfuscation,allowshrinking class * {
+  @com.android.internal.annotations.KeepForWeakReference <fields>;
+}
+
+# Understand the common @Keep annotation from various Android packages:
+#  * android.support.annotation
+#  * androidx.annotation
+#  * com.android.internal.annotations
+-keep class **android**.annotation*.Keep
+
+-keep @**android**.annotation*.Keep class * { *; }
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @**android**.annotation*.Keep <init>(...);
+}
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 -include proguard_basic_keeps.flags

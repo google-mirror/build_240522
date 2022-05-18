@@ -58,6 +58,9 @@ $(compatibility_zip): $(test_artifacts) $(test_tools) $(test_suite_prebuilt_tool
 	$(hide) find $(dir $@)/$(PRIVATE_NAME) | sort >$@.list
 	$(hide) $(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
 
+$(call declare-1p-copy-files,$(test_suite_dynamic_config),)
+$(call declare-1p-copy-files,$(test_suite_prebuilt_tools),)
+
 # Reset all input variables
 test_suite_name :=
 test_suite_tradefed :=

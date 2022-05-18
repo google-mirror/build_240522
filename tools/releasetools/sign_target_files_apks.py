@@ -128,6 +128,66 @@ OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
 OPTIONS.avb_extra_args = {}
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+OPTIONS.gki_signing_key = None
+OPTIONS.gki_signing_algorithm = None
+OPTIONS.gki_signing_extra_args = None
+OPTIONS.android_jar_path = None
+OPTIONS.vendor_partitions = set()
+OPTIONS.vendor_otatools = None
+OPTIONS.sepolicy_key = None
+OPTIONS.sepolicy_cert = None
+OPTIONS.fsverity_tool = None
+OPTIONS.allow_gsi_debug_sepolicy = False
+
+
+AVB_FOOTER_ARGS_BY_PARTITION = {
+    'boot': 'avb_boot_add_hash_footer_args',
+    'init_boot': 'avb_init_boot_add_hash_footer_args',
+    'dtbo': 'avb_dtbo_add_hash_footer_args',
+    'product': 'avb_product_add_hashtree_footer_args',
+    'recovery': 'avb_recovery_add_hash_footer_args',
+    'system': 'avb_system_add_hashtree_footer_args',
+    'system_dlkm': "avb_system_dlkm_add_hashtree_footer_args",
+    'system_ext': 'avb_system_ext_add_hashtree_footer_args',
+    'system_other': 'avb_system_other_add_hashtree_footer_args',
+    'odm': 'avb_odm_add_hashtree_footer_args',
+    'odm_dlkm': 'avb_odm_dlkm_add_hashtree_footer_args',
+    'pvmfw': 'avb_pvmfw_add_hash_footer_args',
+    'vendor': 'avb_vendor_add_hashtree_footer_args',
+    'vendor_boot': 'avb_vendor_boot_add_hash_footer_args',
+    'vendor_kernel_boot': 'avb_vendor_kernel_boot_add_hash_footer_args',
+    'vendor_dlkm': "avb_vendor_dlkm_add_hashtree_footer_args",
+    'vbmeta': 'avb_vbmeta_args',
+    'vbmeta_system': 'avb_vbmeta_system_args',
+    'vbmeta_vendor': 'avb_vbmeta_vendor_args',
+}
+
+
+# Check that AVB_FOOTER_ARGS_BY_PARTITION is in sync with AVB_PARTITIONS.
+for partition in common.AVB_PARTITIONS:
+  if partition not in AVB_FOOTER_ARGS_BY_PARTITION:
+    raise RuntimeError("Missing {} in AVB_FOOTER_ARGS".format(partition))
+
+# Partitions that can be regenerated after signing using a separate
+# vendor otatools package.
+ALLOWED_VENDOR_PARTITIONS = set(["vendor", "odm"])
+
+
+def IsApexFile(filename):
+  return filename.endswith(".apex") or filename.endswith(".capex")
+
+def IsSepolicyApex(filename):
+  return filename.endswith(OPTIONS.sepolicy_name)
+
+def GetApexFilename(filename):
+  name = os.path.basename(filename)
+  # Replace the suffix for compressed apex
+  if name.endswith(".capex"):
+    return name.replace(".capex", ".apex")
+  return name
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 
 def GetApkCerts(certmap):
@@ -753,6 +813,186 @@ def GetCodenameToApiLevelMap(input_tf_zip):
   return result
 
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+def ReadApexKeysInfo(tf_zip):
+  """Parses the APEX keys info from a given target-files zip.
+
+  Given a target-files ZipFile, parses the META/apexkeys.txt entry and returns
+  two dicts, the first one contains the mapping from APEX names
+  (e.g. com.android.tzdata) to a tuple of (payload_key, container_key,
+  sign_tool). The second one maps the sepolicy APEX name to a tuple containing
+  (sepolicy_key, sepolicy_cert, fsverity_tool).
+
+  Args:
+    tf_zip: The input target_files ZipFile (already open).
+
+  Returns:
+    name : (payload_key, container_key, sign_tool)
+      - payload_key contains the path to the payload signing key
+      - container_key contains the path to the container signing key
+      - sign_tool is an apex-specific signing tool for its payload contents
+    name : (sepolicy_key, sepolicy_cert, fsverity_tool)
+  """
+  keys = {}
+  sepolicy_keys = {}
+  for line in tf_zip.read('META/apexkeys.txt').decode().split('\n'):
+    line = line.strip()
+    if not line:
+      continue
+    matches = re.match(
+        r'^name="(?P<NAME>.*)"\s+'
+        r'public_key="(?P<PAYLOAD_PUBLIC_KEY>.*)"\s+'
+        r'private_key="(?P<PAYLOAD_PRIVATE_KEY>.*)"\s+'
+        r'container_certificate="(?P<CONTAINER_CERT>.*)"\s+'
+        r'container_private_key="(?P<CONTAINER_PRIVATE_KEY>.*?)"'
+        r'(\s+sepolicy_key="(?P<SEPOLICY_KEY>.*?)")?'
+        r'(\s+sepolicy_certificate="(?P<SEPOLICY_CERT>.*?)")?'
+        r'(\s+fsverity_tool="(?P<FSVERITY_TOOL>.*?)")?'
+        r'(\s+partition="(?P<PARTITION>.*?)")?'
+        r'(\s+sign_tool="(?P<SIGN_TOOL>.*?)")?$',
+        line)
+    if not matches:
+      continue
+
+    name = matches.group('NAME')
+    payload_private_key = matches.group("PAYLOAD_PRIVATE_KEY")
+
+    def CompareKeys(pubkey, pubkey_suffix, privkey, privkey_suffix):
+      pubkey_suffix_len = len(pubkey_suffix)
+      privkey_suffix_len = len(privkey_suffix)
+      return (pubkey.endswith(pubkey_suffix) and
+              privkey.endswith(privkey_suffix) and
+              pubkey[:-pubkey_suffix_len] == privkey[:-privkey_suffix_len])
+
+    # Check the container key names, as we'll carry them without the
+    # extensions. This doesn't apply to payload keys though, which we will use
+    # full names only.
+    container_cert = matches.group("CONTAINER_CERT")
+    container_private_key = matches.group("CONTAINER_PRIVATE_KEY")
+    if container_cert == 'PRESIGNED' and container_private_key == 'PRESIGNED':
+      container_key = 'PRESIGNED'
+    elif CompareKeys(
+            container_cert, OPTIONS.public_key_suffix,
+            container_private_key, OPTIONS.private_key_suffix):
+      container_key = container_cert[:-len(OPTIONS.public_key_suffix)]
+    else:
+      raise ValueError("Failed to parse container keys: \n{} **** {}".format(container_cert, container_private_key))
+
+    sign_tool = matches.group("SIGN_TOOL")
+    keys[name] = (payload_private_key, container_key, sign_tool)
+
+    if IsSepolicyApex(name):
+      sepolicy_key = matches.group('SEPOLICY_KEY')
+      sepolicy_cert = matches.group('SEPOLICY_CERT')
+      fsverity_tool = matches.group('FSVERITY_TOOL')
+      sepolicy_keys[name] = (sepolicy_key, sepolicy_cert, fsverity_tool)
+
+  return keys, sepolicy_keys
+
+
+def BuildVendorPartitions(output_zip_path):
+  """Builds OPTIONS.vendor_partitions using OPTIONS.vendor_otatools."""
+  if OPTIONS.vendor_partitions.difference(ALLOWED_VENDOR_PARTITIONS):
+    logger.warning("Allowed --vendor_partitions: %s",
+                   ",".join(ALLOWED_VENDOR_PARTITIONS))
+    OPTIONS.vendor_partitions = ALLOWED_VENDOR_PARTITIONS.intersection(
+        OPTIONS.vendor_partitions)
+
+  logger.info("Building vendor partitions using vendor otatools.")
+  vendor_tempdir = common.UnzipTemp(output_zip_path, [
+      "META/*",
+      "SYSTEM/build.prop",
+      "RECOVERY/*",
+      "BOOT/*",
+      "OTA/",
+  ] + ["{}/*".format(p.upper()) for p in OPTIONS.vendor_partitions])
+
+  # Disable various partitions that build based on misc_info fields.
+  # Only partitions in ALLOWED_VENDOR_PARTITIONS can be rebuilt using
+  # vendor otatools. These other partitions will be rebuilt using the main
+  # otatools if necessary.
+  vendor_misc_info_path = os.path.join(vendor_tempdir, "META/misc_info.txt")
+  vendor_misc_info = common.LoadDictionaryFromFile(vendor_misc_info_path)
+  # Ignore if not rebuilding recovery
+  if not OPTIONS.rebuild_recovery:
+    vendor_misc_info["no_boot"] = "true"  # boot
+    vendor_misc_info["vendor_boot"] = "false"  # vendor_boot
+    vendor_misc_info["no_recovery"] = "true"  # recovery
+    vendor_misc_info["avb_enable"] = "false"  # vbmeta
+
+  vendor_misc_info["board_bpt_enable"] = "false"  # partition-table
+  vendor_misc_info["has_dtbo"] = "false"  # dtbo
+  vendor_misc_info["has_pvmfw"] = "false"  # pvmfw
+  vendor_misc_info["avb_custom_images_partition_list"] = ""  # custom images
+  vendor_misc_info["avb_building_vbmeta_image"] = "false" # skip building vbmeta
+  vendor_misc_info["use_dynamic_partitions"] = "false"  # super_empty
+  vendor_misc_info["build_super_partition"] = "false"  # super split
+  with open(vendor_misc_info_path, "w") as output:
+    for key in sorted(vendor_misc_info):
+      output.write("{}={}\n".format(key, vendor_misc_info[key]))
+
+  # Disable system partition by a placeholder of IMAGES/system.img,
+  # instead of removing SYSTEM folder.
+  # Because SYSTEM/build.prop is still needed for:
+  #   add_img_to_target_files.CreateImage ->
+  #   common.BuildInfo ->
+  #   common.BuildInfo.CalculateFingerprint
+  vendor_images_path = os.path.join(vendor_tempdir, "IMAGES")
+  if not os.path.exists(vendor_images_path):
+    os.makedirs(vendor_images_path)
+  with open(os.path.join(vendor_images_path, "system.img"), "w") as output:
+    pass
+
+  # Disable care_map.pb as not all ab_partitions are available when
+  # vendor otatools regenerates vendor images.
+  if os.path.exists(os.path.join(vendor_tempdir, "META/ab_partitions.txt")):
+    os.remove(os.path.join(vendor_tempdir, "META/ab_partitions.txt"))
+  # Disable RADIO images
+  if os.path.exists(os.path.join(vendor_tempdir, "META/pack_radioimages.txt")):
+    os.remove(os.path.join(vendor_tempdir, "META/pack_radioimages.txt"))
+
+  # Build vendor images using vendor otatools.
+  # Accept either a zip file or extracted directory.
+  if os.path.isfile(OPTIONS.vendor_otatools):
+    vendor_otatools_dir = common.MakeTempDir(prefix="vendor_otatools_")
+    common.UnzipToDir(OPTIONS.vendor_otatools, vendor_otatools_dir)
+  else:
+    vendor_otatools_dir = OPTIONS.vendor_otatools
+  cmd = [
+      os.path.join(vendor_otatools_dir, "bin", "add_img_to_target_files"),
+      "--is_signing",
+      "--add_missing",
+      "--verbose",
+      vendor_tempdir,
+  ]
+  if OPTIONS.rebuild_recovery:
+    cmd.insert(4, "--rebuild_recovery")
+
+  common.RunAndCheckOutput(cmd, verbose=True)
+
+  logger.info("Writing vendor partitions to output archive.")
+  with zipfile.ZipFile(
+      output_zip_path, "a", compression=zipfile.ZIP_DEFLATED,
+      allowZip64=True) as output_zip:
+    for p in OPTIONS.vendor_partitions:
+      img_file_path = "IMAGES/{}.img".format(p)
+      map_file_path = "IMAGES/{}.map".format(p)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, img_file_path), img_file_path)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, map_file_path), map_file_path)
+    # copy recovery.img, boot.img, recovery patch & install.sh
+    if OPTIONS.rebuild_recovery:
+      recovery_img = "IMAGES/recovery.img"
+      boot_img = "IMAGES/boot.img"
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_img), recovery_img)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, boot_img), boot_img)
+      recovery_patch_path = "VENDOR/recovery-from-boot.p"
+      recovery_sh_path = "VENDOR/bin/install-recovery.sh"
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_patch_path), recovery_patch_path)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_sh_path), recovery_sh_path)
+
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 def main(argv):
 
   key_mapping_options = []

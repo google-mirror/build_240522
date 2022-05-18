@@ -175,10 +175,100 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 ifneq ($(strip $(TARGET_BUILD_APPS)),)
 # An unbundled app build needs only the core product makefiles.
 all_product_configs := $(call get-product-makefiles,\
     $(SRC_TARGET_DIR)/product/AndroidProducts.mk)
+=======
+# Read all product definitions.
+#
+# Products are defined in AndroidProducts.mk files:
+android_products_makefiles := $(file <$(OUT_DIR)/.module_paths/AndroidProducts.mk.list) \
+  $(SRC_TARGET_DIR)/product/AndroidProducts.mk
+
+# An AndroidProduct.mk file sets the following variables:
+#   PRODUCT_MAKEFILES specifies product makefiles. Each item in this list
+#     is either a <product>:path/to/file.mk, or just path/to/<product.mk>
+#   COMMON_LUNCH_CHOICES specifies <product>-<variant> values to be shown
+#     in the `lunch` menu
+#   STARLARK_OPT_IN_PRODUCTS specifies products to use Starlark-based
+#     product configuration by default
+
+# Builds a list of first/second elements of each pair:
+#   $(call _first,a:A b:B,:) returns 'a b'
+#   $(call _second,a-A b-B,-) returns 'A B'
+_first=$(filter-out $(2)%,$(subst $(2),$(space)$(2),$(1)))
+_second=$(filter-out %$(2),$(subst $(2),$(2)$(space),$(1)))
+
+# Returns <product>:<path> pair from a PRODUCT_MAKEFILE item.
+# If an item is <product>:path/to/file.mk, return it as is,
+# otherwise assume that an item is path/to/<product>.mk and
+# return <product>:path/to/<product>.mk
+_product-spec=$(strip $(if $(findstring :,$(1)),$(1),$(basename $(notdir $(1))):$(1)))
+
+# Reads given AndroidProduct.mk file and sets the following variables:
+#  ap_product_paths -- the list of <product>:<path> pairs
+#  ap_common_lunch_choices -- the list of <product>-<build variant> items
+#  ap_products_using_starlark_config -- the list of products using starlark config
+# In addition, validates COMMON_LUNCH_CHOICES and STARLARK_OPT_IN_PRODUCTS values
+define _read-ap-file
+  $(eval PRODUCT_MAKEFILES :=) \
+  $(eval COMMON_LUNCH_CHOICES :=) \
+  $(eval STARLARK_OPT_IN_PRODUCTS := ) \
+  $(eval ap_product_paths :=) \
+  $(eval LOCAL_DIR := $(patsubst %/,%,$(dir $(f)))) \
+  $(eval include $(f)) \
+  $(foreach p, $(PRODUCT_MAKEFILES),$(eval ap_product_paths += $(call _product-spec,$(p)))) \
+  $(eval ap_common_lunch_choices  := $(COMMON_LUNCH_CHOICES)) \
+  $(eval ap_products_using_starlark_config := $(STARLARK_OPT_IN_PRODUCTS)) \
+  $(eval _products := $(call _first,$(ap_product_paths),:)) \
+  $(eval _bad := $(filter-out $(_products),$(call _first,$(ap_common_lunch_choices),-))) \
+  $(if $(_bad),$(error COMMON_LUNCH_CHOICES contains products(s) not defined in this file: $(_bad))) \
+  $(eval _bad := $(filter-out %-eng %-userdebug %-user,$(ap_common_lunch_choices))) \
+  $(if $(_bad),$(error invalid variant in COMMON_LUNCH_CHOICES: $(_bad)))
+  $(eval _bad := $(filter-out $(_products),$(ap_products_using_starlark_config))) \
+  $(if $(_bad),$(error STARLARK_OPT_IN_PRODUCTS contains product(s) not defined in this file: $(_bad)))
+endef
+
+# Build cumulative lists of all product specs/lunch choices/Starlark-based products.
+product_paths :=
+common_lunch_choices :=
+products_using_starlark_config :=
+$(foreach f,$(android_products_makefiles), \
+    $(call _read-ap-file,$(f)) \
+    $(eval product_paths += $(ap_product_paths)) \
+    $(eval common_lunch_choices += $(ap_common_lunch_choices)) \
+    $(eval products_using_starlark_config += $(ap_products_using_starlark_config)) \
+)
+
+# Dedup, extract product names, etc.
+product_paths := $(sort $(product_paths))
+all_named_products := $(sort $(call _first,$(product_paths),:))
+current_product_makefile := $(call _second,$(filter $(TARGET_PRODUCT):%,$(product_paths)),:)
+COMMON_LUNCH_CHOICES := $(sort $(common_lunch_choices))
+
+# Check that there are no duplicate product names
+$(foreach p,$(all_named_products), \
+  $(if $(filter 1,$(words $(filter $(p):%,$(product_paths)))),, \
+    $(error Product name must be unique, "$(p)" used by $(call _second,$(filter $(p):%,$(product_paths)),:))))
+
+ifneq ($(ALLOW_RULES_IN_PRODUCT_CONFIG),)
+_product_config_saved_KATI_ALLOW_RULES := $(.KATI_ALLOW_RULES)
+.KATI_ALLOW_RULES := $(ALLOW_RULES_IN_PRODUCT_CONFIG)
+endif
+
+ifeq (,$(current_product_makefile))
+  $(error Can not locate config makefile for product "$(TARGET_PRODUCT)")
+endif
+
+ifneq (,$(filter $(TARGET_PRODUCT),$(products_using_starlark_config)))
+  RBC_PRODUCT_CONFIG := true
+endif
+
+ifndef RBC_PRODUCT_CONFIG
+$(call import-products, $(current_product_makefile))
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 else
 # Read in all of the product definitions specified by the AndroidProducts.mk
 # files in the tree.
@@ -255,8 +345,6 @@ ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
 $(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
 endif
 current_product_makefile :=
-all_product_makefiles :=
-all_product_configs :=
 
 
 #############################################################################

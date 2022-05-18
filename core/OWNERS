@@ -1,0 +1,9 @@
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+per-file dex_preopt*.* = ngeoffray@google.com,skvadrik@google.com
+per-file verify_uses_libraries.sh = ngeoffray@google.com,skvadrik@google.com
+
+# For version updates
+per-file version_defaults.mk = aseaton@google.com,lubomir@google.com,pscovanner@google.com,bkhalife@google.com,jainne@google.com
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])

@@ -533,6 +533,7 @@ $(built_dex_intermediate): PRIVATE_DX_FLAGS := $(LOCAL_DX_FLAGS)
 
 my_r8 :=
 ifdef LOCAL_PROGUARD_ENABLED
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 ifeq ($(USE_R8),true)
 # These are the dependencies for the proguarded jar when running
 # Proguard + dx. They are used for the generated dex when using R8, as
@@ -541,13 +542,28 @@ my_r8 := true
 $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
 $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
 $(built_dex_intermediate) : $(full_classes_proguard_jar) $(extra_input_jar) $(my_support_library_sdk_raise) $(common_proguard_flag_files) $(proguard_flag_files) $(legacy_proguard_lib_deps) $(R8_COMPAT_PROGUARD)
+=======
+  $(built_dex_intermediate): .KATI_NINJA_POOL := $(R8_NINJA_POOL)
+  $(built_dex_intermediate): PRIVATE_EXTRA_INPUT_JAR := $(extra_input_jar)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_FLAGS := $(legacy_proguard_flags) $(common_proguard_flags) $(LOCAL_PROGUARD_FLAGS)
+  $(built_dex_intermediate): PRIVATE_PROGUARD_DICTIONARY := $(proguard_dictionary)
+  $(built_dex_intermediate) : $(full_classes_pre_proguard_jar) $(extra_input_jar) $(my_proguard_sdk_raise) $(common_proguard_flag_files) $(legacy_proguard_lib_deps) $(R8) $(LOCAL_PROGUARD_FLAGS_DEPS)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 	$(transform-jar-to-dex-r8)
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 endif # USE_R8
 endif # LOCAL_PROGUARD_ENABLED
 
 ifndef my_r8
 $(built_dex_intermediate): $(full_classes_proguard_jar) $(DX) $(ZIP2ZIP)
 ifneq ($(USE_D8_DESUGAR),true)
+=======
+else # !LOCAL_PROGUARD_ENABLED
+  $(built_dex_intermediate): .KATI_NINJA_POOL := $(D8_NINJA_POOL)
+  $(built_dex_intermediate): PRIVATE_D8_LIBS := $(full_java_bootclasspath_libs) $(full_shared_java_header_libs)
+  $(built_dex_intermediate): $(full_java_bootclasspath_libs) $(full_shared_java_header_libs)
+  $(built_dex_intermediate): $(full_classes_pre_proguard_jar) $(D8) $(ZIP2ZIP)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 	$(transform-classes.jar-to-dex)
 else
 	$(transform-classes-d8.jar-to-dex)

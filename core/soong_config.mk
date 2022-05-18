@@ -50,7 +50,14 @@ $(call add_json_val,  Platform_sdk_version,              $(PLATFORM_SDK_VERSION)
 $(call add_json_str,  Platform_sdk_codename,             $(PLATFORM_VERSION_CODENAME))
 $(call add_json_bool, Platform_sdk_final,                $(filter REL,$(PLATFORM_VERSION_CODENAME)))
 $(call add_json_csv,  Platform_version_active_codenames, $(PLATFORM_VERSION_ALL_CODENAMES))
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 $(call add_json_csv,  Platform_version_future_codenames, $(PLATFORM_VERSION_FUTURE_CODENAMES))
+=======
+$(call add_json_str,  Platform_security_patch,           $(PLATFORM_SECURITY_PATCH))
+$(call add_json_str,  Platform_preview_sdk_version,      $(PLATFORM_PREVIEW_SDK_VERSION))
+$(call add_json_str,  Platform_base_os,                  $(PLATFORM_BASE_OS))
+$(call add_json_str,  Platform_version_last_stable,      $(PLATFORM_VERSION_LAST_STABLE))
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 $(call add_json_bool, Allow_missing_dependencies,        $(ALLOW_MISSING_DEPENDENCIES))
 $(call add_json_bool, Unbundled_build,                   $(TARGET_BUILD_APPS))
@@ -124,6 +131,38 @@ $(call add_json_list, Platform_systemsdk_versions,       $(PLATFORM_SYSTEMSDK_VE
 $(call add_json_bool, Malloc_not_svelte,                 $(call invert_bool,$(filter true,$(MALLOC_SVELTE))))
 $(call add_json_str,  Override_rs_driver,                $(OVERRIDE_RS_DRIVER))
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+$(call add_json_bool, UncompressPrivAppDex,              $(call invert_bool,$(filter true,$(DONT_UNCOMPRESS_PRIV_APPS_DEXS))))
+$(call add_json_list, ModulesLoadedByPrivilegedModules,  $(PRODUCT_LOADED_BY_PRIVILEGED_MODULES))
+
+$(call add_json_list, BootJars,                          $(PRODUCT_BOOT_JARS))
+$(call add_json_list, ApexBootJars,                      $(PRODUCT_APEX_BOOT_JARS))
+
+$(call add_json_bool, VndkUseCoreVariant,                $(TARGET_VNDK_USE_CORE_VARIANT))
+$(call add_json_bool, VndkSnapshotBuildArtifacts,        $(VNDK_SNAPSHOT_BUILD_ARTIFACTS))
+
+$(call add_json_bool, DirectedVendorSnapshot,            $(DIRECTED_VENDOR_SNAPSHOT))
+$(call add_json_map,  VendorSnapshotModules)
+$(foreach module,$(VENDOR_SNAPSHOT_MODULES),\
+  $(call add_json_bool,$(module),true))
+$(call end_json_map)
+
+$(call add_json_bool, DirectedRecoverySnapshot,          $(DIRECTED_RECOVERY_SNAPSHOT))
+$(call add_json_map,  RecoverySnapshotModules)
+$(foreach module,$(RECOVERY_SNAPSHOT_MODULES),\
+  $(call add_json_bool,$(module),true))
+$(call end_json_map)
+
+$(call add_json_list, VendorSnapshotDirsIncluded,        $(VENDOR_SNAPSHOT_DIRS_INCLUDED))
+$(call add_json_list, VendorSnapshotDirsExcluded,        $(VENDOR_SNAPSHOT_DIRS_EXCLUDED))
+$(call add_json_list, RecoverySnapshotDirsIncluded,      $(RECOVERY_SNAPSHOT_DIRS_INCLUDED))
+$(call add_json_list, RecoverySnapshotDirsExcluded,      $(RECOVERY_SNAPSHOT_DIRS_EXCLUDED))
+$(call add_json_bool, HostFakeSnapshotEnabled,           $(HOST_FAKE_SNAPSHOT_ENABLE))
+
+$(call add_json_bool, MultitreeUpdateMeta,               $(filter true,$(TARGET_MULTITREE_UPDATE_META)))
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 $(call add_json_bool, Treble_linker_namespaces,          $(filter true,$(PRODUCT_TREBLE_LINKER_NAMESPACES)))
 $(call add_json_bool, Enforce_vintf_manifest,            $(filter true,$(PRODUCT_ENFORCE_VINTF_MANIFEST)))
 

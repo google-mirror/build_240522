@@ -845,14 +845,25 @@ def LoadGlobalDict(filename):
 
 
 def main(argv):
-  if len(argv) != 4:
+  args = common.ParseOptions(argv, __doc__)
+
+  if len(args) != 4:
     print(__doc__)
     sys.exit(1)
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
   in_dir = argv[0]
   glob_dict_file = argv[1]
   out_file = argv[2]
   target_out = argv[3]
+=======
+  common.InitLogging()
+
+  in_dir = args[0]
+  glob_dict_file = args[1]
+  out_file = args[2]
+  target_out = args[3]
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
   glob_dict = LoadGlobalDict(glob_dict_file)
   if "mount_point" in glob_dict:

@@ -76,6 +76,17 @@ OPTIONS = Options()
 # Values for "certificate" in apkcerts that mean special things.
 SPECIAL_CERT_STRINGS = ("PRESIGNED", "EXTERNAL")
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+# The partitions allowed to be signed by AVB (Android Verified Boot 2.0). Note
+# that system_other is not in the list because we don't want to include its
+# descriptor into vbmeta.img. When adding a new entry here, the
+# AVB_FOOTER_ARGS_BY_PARTITION in sign_target_files_apks need to be updated
+# accordingly.
+AVB_PARTITIONS = ('boot', 'init_boot', 'dtbo', 'odm', 'product', 'pvmfw', 'recovery',
+                  'system', 'system_ext', 'vendor', 'vendor_boot', 'vendor_kernel_boot',
+                  'vendor_dlkm', 'odm_dlkm', 'system_dlkm')
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 # The partitions allowed to be signed by AVB (Android verified boot 2.0).
 AVB_PARTITIONS = ('boot', 'recovery', 'system', 'vendor', 'product', 'dtbo')
@@ -147,9 +158,447 @@ def CloseInheritedPipes():
       pass
 
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 def LoadInfoDict(input_file, input_dir=None):
   """Read and parse the META/misc_info.txt key/value pairs from the
   input target files and return a dict."""
+=======
+class BuildInfo(object):
+  """A class that holds the information for a given build.
+
+  This class wraps up the property querying for a given source or target build.
+  It abstracts away the logic of handling OEM-specific properties, and caches
+  the commonly used properties such as fingerprint.
+
+  There are two types of info dicts: a) build-time info dict, which is generated
+  at build time (i.e. included in a target_files zip); b) OEM info dict that is
+  specified at package generation time (via command line argument
+  '--oem_settings'). If a build doesn't use OEM-specific properties (i.e. not
+  having "oem_fingerprint_properties" in build-time info dict), all the queries
+  would be answered based on build-time info dict only. Otherwise if using
+  OEM-specific properties, some of them will be calculated from two info dicts.
+
+  Users can query properties similarly as using a dict() (e.g. info['fstab']),
+  or to query build properties via GetBuildProp() or GetPartitionBuildProp().
+
+  Attributes:
+    info_dict: The build-time info dict.
+    is_ab: Whether it's a build that uses A/B OTA.
+    oem_dicts: A list of OEM dicts.
+    oem_props: A list of OEM properties that should be read from OEM dicts; None
+        if the build doesn't use any OEM-specific property.
+    fingerprint: The fingerprint of the build, which would be calculated based
+        on OEM properties if applicable.
+    device: The device name, which could come from OEM dicts if applicable.
+  """
+
+  _RO_PRODUCT_RESOLVE_PROPS = ["ro.product.brand", "ro.product.device",
+                               "ro.product.manufacturer", "ro.product.model",
+                               "ro.product.name"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_CURRENT = [
+      "product", "odm", "vendor", "system_ext", "system"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_ANDROID_10 = [
+      "product", "product_services", "odm", "vendor", "system"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_LEGACY = []
+
+  # The length of vbmeta digest to append to the fingerprint
+  _VBMETA_DIGEST_SIZE_USED = 8
+
+  def __init__(self, info_dict, oem_dicts=None, use_legacy_id=False):
+    """Initializes a BuildInfo instance with the given dicts.
+
+    Note that it only wraps up the given dicts, without making copies.
+
+    Arguments:
+      info_dict: The build-time info dict.
+      oem_dicts: A list of OEM dicts (which is parsed from --oem_settings). Note
+          that it always uses the first dict to calculate the fingerprint or the
+          device name. The rest would be used for asserting OEM properties only
+          (e.g. one package can be installed on one of these devices).
+      use_legacy_id: Use the legacy build id to construct the fingerprint. This
+          is used when we need a BuildInfo class, while the vbmeta digest is
+          unavailable.
+
+    Raises:
+      ValueError: On invalid inputs.
+    """
+    self.info_dict = info_dict
+    self.oem_dicts = oem_dicts
+
+    self._is_ab = info_dict.get("ab_update") == "true"
+    self.use_legacy_id = use_legacy_id
+
+    # Skip _oem_props if oem_dicts is None to use BuildInfo in
+    # sign_target_files_apks
+    if self.oem_dicts:
+      self._oem_props = info_dict.get("oem_fingerprint_properties")
+    else:
+      self._oem_props = None
+
+    def check_fingerprint(fingerprint):
+      if (" " in fingerprint or any(ord(ch) > 127 for ch in fingerprint)):
+        raise ValueError(
+            'Invalid build fingerprint: "{}". See the requirement in Android CDD '
+            "3.2.2. Build Parameters.".format(fingerprint))
+
+    self._partition_fingerprints = {}
+    for partition in PARTITIONS_WITH_BUILD_PROP:
+      try:
+        fingerprint = self.CalculatePartitionFingerprint(partition)
+        check_fingerprint(fingerprint)
+        self._partition_fingerprints[partition] = fingerprint
+      except ExternalError:
+        continue
+    if "system" in self._partition_fingerprints:
+      # system_other is not included in PARTITIONS_WITH_BUILD_PROP, but does
+      # need a fingerprint when creating the image.
+      self._partition_fingerprints[
+          "system_other"] = self._partition_fingerprints["system"]
+
+    # These two should be computed only after setting self._oem_props.
+    self._device = self.GetOemProperty("ro.product.device")
+    self._fingerprint = self.CalculateFingerprint()
+    check_fingerprint(self._fingerprint)
+
+  @property
+  def is_ab(self):
+    return self._is_ab
+
+  @property
+  def device(self):
+    return self._device
+
+  @property
+  def fingerprint(self):
+    return self._fingerprint
+
+  @property
+  def is_vabc(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_enabled = vendor_prop and \
+        vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true"
+    return vabc_enabled
+
+  @property
+  def is_android_r(self):
+    system_prop = self.info_dict.get("system.build.prop")
+    return system_prop and system_prop.GetProp("ro.build.version.release") == "11"
+
+  @property
+  def is_vabc_xor(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_xor_enabled = vendor_prop and \
+        vendor_prop.GetProp("ro.virtual_ab.compression.xor.enabled") == "true"
+    return vabc_xor_enabled
+
+  @property
+  def vendor_suppressed_vabc(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_suppressed = vendor_prop and \
+        vendor_prop.GetProp("ro.vendor.build.dont_use_vabc")
+    return vabc_suppressed and vabc_suppressed.lower() == "true"
+
+  @property
+  def oem_props(self):
+    return self._oem_props
+
+  def __getitem__(self, key):
+    return self.info_dict[key]
+
+  def __setitem__(self, key, value):
+    self.info_dict[key] = value
+
+  def get(self, key, default=None):
+    return self.info_dict.get(key, default)
+
+  def items(self):
+    return self.info_dict.items()
+
+  def _GetRawBuildProp(self, prop, partition):
+    prop_file = '{}.build.prop'.format(
+        partition) if partition else 'build.prop'
+    partition_props = self.info_dict.get(prop_file)
+    if not partition_props:
+      return None
+    return partition_props.GetProp(prop)
+
+  def GetPartitionBuildProp(self, prop, partition):
+    """Returns the inquired build property for the provided partition."""
+
+    # Boot image and init_boot image uses ro.[product.]bootimage instead of boot.
+    # This comes from the generic ramdisk
+    prop_partition = "bootimage" if partition == "boot" or partition == "init_boot" else partition
+
+    # If provided a partition for this property, only look within that
+    # partition's build.prop.
+    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+      prop = prop.replace("ro.product", "ro.product.{}".format(prop_partition))
+    else:
+      prop = prop.replace("ro.", "ro.{}.".format(prop_partition))
+
+    prop_val = self._GetRawBuildProp(prop, partition)
+    if prop_val is not None:
+      return prop_val
+    raise ExternalError("couldn't find %s in %s.build.prop" %
+                        (prop, partition))
+
+  def GetBuildProp(self, prop):
+    """Returns the inquired build property from the standard build.prop file."""
+    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+      return self._ResolveRoProductBuildProp(prop)
+
+    if prop == "ro.build.id":
+      return self._GetBuildId()
+
+    prop_val = self._GetRawBuildProp(prop, None)
+    if prop_val is not None:
+      return prop_val
+
+    raise ExternalError("couldn't find %s in build.prop" % (prop,))
+
+  def _ResolveRoProductBuildProp(self, prop):
+    """Resolves the inquired ro.product.* build property"""
+    prop_val = self._GetRawBuildProp(prop, None)
+    if prop_val:
+      return prop_val
+
+    default_source_order = self._GetRoProductPropsDefaultSourceOrder()
+    source_order_val = self._GetRawBuildProp(
+        "ro.product.property_source_order", None)
+    if source_order_val:
+      source_order = source_order_val.split(",")
+    else:
+      source_order = default_source_order
+
+    # Check that all sources in ro.product.property_source_order are valid
+    if any([x not in default_source_order for x in source_order]):
+      raise ExternalError(
+          "Invalid ro.product.property_source_order '{}'".format(source_order))
+
+    for source_partition in source_order:
+      source_prop = prop.replace(
+          "ro.product", "ro.product.{}".format(source_partition), 1)
+      prop_val = self._GetRawBuildProp(source_prop, source_partition)
+      if prop_val:
+        return prop_val
+
+    raise ExternalError("couldn't resolve {}".format(prop))
+
+  def _GetRoProductPropsDefaultSourceOrder(self):
+    # NOTE: refer to CDDs and android.os.Build.VERSION for the definition and
+    # values of these properties for each Android release.
+    android_codename = self._GetRawBuildProp("ro.build.version.codename", None)
+    if android_codename == "REL":
+      android_version = self._GetRawBuildProp("ro.build.version.release", None)
+      if android_version == "10":
+        return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_ANDROID_10
+      # NOTE: float() conversion of android_version will have rounding error.
+      # We are checking for "9" or less, and using "< 10" is well outside of
+      # possible floating point rounding.
+      try:
+        android_version_val = float(android_version)
+      except ValueError:
+        android_version_val = 0
+      if android_version_val < 10:
+        return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_LEGACY
+    return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_CURRENT
+
+  def _GetPlatformVersion(self):
+    version_sdk = self.GetBuildProp("ro.build.version.sdk")
+    # init code switches to version_release_or_codename (see b/158483506). After
+    # API finalization, release_or_codename will be the same as release. This
+    # is the best effort to support pre-S dev stage builds.
+    if int(version_sdk) >= 30:
+      try:
+        return self.GetBuildProp("ro.build.version.release_or_codename")
+      except ExternalError:
+        logger.warning('Failed to find ro.build.version.release_or_codename')
+
+    return self.GetBuildProp("ro.build.version.release")
+
+  def _GetBuildId(self):
+    build_id = self._GetRawBuildProp("ro.build.id", None)
+    if build_id:
+      return build_id
+
+    legacy_build_id = self.GetBuildProp("ro.build.legacy.id")
+    if not legacy_build_id:
+      raise ExternalError("Couldn't find build id in property file")
+
+    if self.use_legacy_id:
+      return legacy_build_id
+
+    # Append the top 8 chars of vbmeta digest to the existing build id. The
+    # logic needs to match the one in init, so that OTA can deliver correctly.
+    avb_enable = self.info_dict.get("avb_enable") == "true"
+    if not avb_enable:
+      raise ExternalError("AVB isn't enabled when using legacy build id")
+
+    vbmeta_digest = self.info_dict.get("vbmeta_digest")
+    if not vbmeta_digest:
+      raise ExternalError("Vbmeta digest isn't provided when using legacy build"
+                          " id")
+    if len(vbmeta_digest) < self._VBMETA_DIGEST_SIZE_USED:
+      raise ExternalError("Invalid vbmeta digest " + vbmeta_digest)
+
+    digest_prefix = vbmeta_digest[:self._VBMETA_DIGEST_SIZE_USED]
+    return legacy_build_id + '.' + digest_prefix
+
+  def _GetPartitionPlatformVersion(self, partition):
+    try:
+      return self.GetPartitionBuildProp("ro.build.version.release_or_codename",
+                                        partition)
+    except ExternalError:
+      return self.GetPartitionBuildProp("ro.build.version.release",
+                                        partition)
+
+  def GetOemProperty(self, key):
+    if self.oem_props is not None and key in self.oem_props:
+      return self.oem_dicts[0][key]
+    return self.GetBuildProp(key)
+
+  def GetPartitionFingerprint(self, partition):
+    return self._partition_fingerprints.get(partition, None)
+
+  def CalculatePartitionFingerprint(self, partition):
+    try:
+      return self.GetPartitionBuildProp("ro.build.fingerprint", partition)
+    except ExternalError:
+      return "{}/{}/{}:{}/{}/{}:{}/{}".format(
+          self.GetPartitionBuildProp("ro.product.brand", partition),
+          self.GetPartitionBuildProp("ro.product.name", partition),
+          self.GetPartitionBuildProp("ro.product.device", partition),
+          self._GetPartitionPlatformVersion(partition),
+          self.GetPartitionBuildProp("ro.build.id", partition),
+          self.GetPartitionBuildProp(
+              "ro.build.version.incremental", partition),
+          self.GetPartitionBuildProp("ro.build.type", partition),
+          self.GetPartitionBuildProp("ro.build.tags", partition))
+
+  def CalculateFingerprint(self):
+    if self.oem_props is None:
+      try:
+        return self.GetBuildProp("ro.build.fingerprint")
+      except ExternalError:
+        return "{}/{}/{}:{}/{}/{}:{}/{}".format(
+            self.GetBuildProp("ro.product.brand"),
+            self.GetBuildProp("ro.product.name"),
+            self.GetBuildProp("ro.product.device"),
+            self._GetPlatformVersion(),
+            self.GetBuildProp("ro.build.id"),
+            self.GetBuildProp("ro.build.version.incremental"),
+            self.GetBuildProp("ro.build.type"),
+            self.GetBuildProp("ro.build.tags"))
+    return "%s/%s/%s:%s" % (
+        self.GetOemProperty("ro.product.brand"),
+        self.GetOemProperty("ro.product.name"),
+        self.GetOemProperty("ro.product.device"),
+        self.GetBuildProp("ro.build.thumbprint"))
+
+  def WriteMountOemScript(self, script):
+    assert self.oem_props is not None
+    recovery_mount_options = self.info_dict.get("recovery_mount_options")
+    script.Mount("/oem", recovery_mount_options)
+
+  def WriteDeviceAssertions(self, script, oem_no_mount):
+    # Read the property directly if not using OEM properties.
+    if not self.oem_props:
+      script.AssertDevice(self.device)
+      return
+
+    # Otherwise assert OEM properties.
+    if not self.oem_dicts:
+      raise ExternalError(
+          "No OEM file provided to answer expected assertions")
+
+    for prop in self.oem_props.split():
+      values = []
+      for oem_dict in self.oem_dicts:
+        if prop in oem_dict:
+          values.append(oem_dict[prop])
+      if not values:
+        raise ExternalError(
+            "The OEM file is missing the property %s" % (prop,))
+      script.AssertOemProperty(prop, values, oem_no_mount)
+
+
+def ReadFromInputFile(input_file, fn):
+  """Reads the contents of fn from input zipfile or directory."""
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn).decode()
+  else:
+    path = os.path.join(input_file, *fn.split("/"))
+    try:
+      with open(path) as f:
+        return f.read()
+    except IOError as e:
+      if e.errno == errno.ENOENT:
+        raise KeyError(fn)
+
+
+def ExtractFromInputFile(input_file, fn):
+  """Extracts the contents of fn from input zipfile or directory into a file."""
+  if isinstance(input_file, zipfile.ZipFile):
+    tmp_file = MakeTempFile(os.path.basename(fn))
+    with open(tmp_file, 'wb') as f:
+      f.write(input_file.read(fn))
+    return tmp_file
+  else:
+    file = os.path.join(input_file, *fn.split("/"))
+    if not os.path.exists(file):
+      raise KeyError(fn)
+    return file
+
+
+class RamdiskFormat(object):
+  LZ4 = 1
+  GZ = 2
+
+
+def GetRamdiskFormat(info_dict):
+  if info_dict.get('lz4_ramdisks') == 'true':
+    ramdisk_format = RamdiskFormat.LZ4
+  else:
+    ramdisk_format = RamdiskFormat.GZ
+  return ramdisk_format
+
+
+def LoadInfoDict(input_file, repacking=False):
+  """Loads the key/value pairs from the given input target_files.
+
+  It reads `META/misc_info.txt` file in the target_files input, does validation
+  checks and returns the parsed key/value pairs for to the given build. It's
+  usually called early when working on input target_files files, e.g. when
+  generating OTAs, or signing builds. Note that the function may be called
+  against an old target_files file (i.e. from past dessert releases). So the
+  property parsing needs to be backward compatible.
+
+  In a `META/misc_info.txt`, a few properties are stored as links to the files
+  in the PRODUCT_OUT directory. It works fine with the build system. However,
+  they are no longer available when (re)generating images from target_files zip.
+  When `repacking` is True, redirect these properties to the actual files in the
+  unzipped directory.
+
+  Args:
+    input_file: The input target_files file, which could be an open
+        zipfile.ZipFile instance, or a str for the dir that contains the files
+        unzipped from a target_files file.
+    repacking: Whether it's trying repack an target_files file after loading the
+        info dict (default: False). If so, it will rewrite a few loaded
+        properties (e.g. selinux_fc, root_dir) to point to the actual files in
+        target_files file. When doing repacking, `input_file` must be a dir.
+
+  Returns:
+    A dict that contains the parsed key/value pairs.
+
+  Raises:
+    AssertionError: On invalid input arguments.
+    ValueError: On malformed input values.
+  """
+  if repacking:
+    assert isinstance(input_file, str), \
+        "input_file must be a path str when doing repacking"
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
   def read_helper(fn):
     if isinstance(input_file, zipfile.ZipFile):
@@ -247,8 +696,14 @@ def LoadInfoDict(input_file, input_dir=None):
   else:
     d["fstab"] = None
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
   d["build.prop"] = LoadBuildProp(read_helper, 'SYSTEM/build.prop')
   d["vendor.build.prop"] = LoadBuildProp(read_helper, 'VENDOR/build.prop')
+=======
+  # Load recovery fstab if applicable.
+  d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, read_helper)
+  ramdisk_format = GetRamdiskFormat(d)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
   # Set up the salt (based on fingerprint or thumbprint) that will be used when
   # adding AVB footer.
@@ -353,7 +808,165 @@ def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
 
 def DumpInfoDict(d):
   for k, v in sorted(d.items()):
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     print("%-25s = (%s) %s" % (k, type(v).__name__, v))
+=======
+    logger.info("%-25s = (%s) %s", k, type(v).__name__, v)
+
+
+def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
+  """Merges dynamic partition info variables.
+
+  Args:
+    framework_dict: The dictionary of dynamic partition info variables from the
+      partial framework target files.
+    vendor_dict: The dictionary of dynamic partition info variables from the
+      partial vendor target files.
+
+  Returns:
+    The merged dynamic partition info dictionary.
+  """
+
+  def uniq_concat(a, b):
+    combined = set(a.split(" "))
+    combined.update(set(b.split(" ")))
+    combined = [item.strip() for item in combined if item.strip()]
+    return " ".join(sorted(combined))
+
+  if (framework_dict.get("use_dynamic_partitions") !=
+        "true") or (vendor_dict.get("use_dynamic_partitions") != "true"):
+    raise ValueError("Both dictionaries must have use_dynamic_partitions=true")
+
+  merged_dict = {"use_dynamic_partitions": "true"}
+  # For keys-value pairs that are the same, copy to merged dict
+  for key in vendor_dict.keys():
+    if key in framework_dict and framework_dict[key] == vendor_dict[key]:
+      merged_dict[key] = vendor_dict[key]
+
+  merged_dict["dynamic_partition_list"] = uniq_concat(
+      framework_dict.get("dynamic_partition_list", ""),
+      vendor_dict.get("dynamic_partition_list", ""))
+
+  # Super block devices are defined by the vendor dict.
+  if "super_block_devices" in vendor_dict:
+    merged_dict["super_block_devices"] = vendor_dict["super_block_devices"]
+    for block_device in merged_dict["super_block_devices"].split(" "):
+      key = "super_%s_device_size" % block_device
+      if key not in vendor_dict:
+        raise ValueError("Vendor dict does not contain required key %s." % key)
+      merged_dict[key] = vendor_dict[key]
+
+  # Partition groups and group sizes are defined by the vendor dict because
+  # these values may vary for each board that uses a shared system image.
+  merged_dict["super_partition_groups"] = vendor_dict["super_partition_groups"]
+  for partition_group in merged_dict["super_partition_groups"].split(" "):
+    # Set the partition group's size using the value from the vendor dict.
+    key = "super_%s_group_size" % partition_group
+    if key not in vendor_dict:
+      raise ValueError("Vendor dict does not contain required key %s." % key)
+    merged_dict[key] = vendor_dict[key]
+
+    # Set the partition group's partition list using a concatenation of the
+    # framework and vendor partition lists.
+    key = "super_%s_partition_list" % partition_group
+    merged_dict[key] = uniq_concat(
+        framework_dict.get(key, ""), vendor_dict.get(key, ""))
+
+  # Various other flags should be copied from the vendor dict, if defined.
+  for key in ("virtual_ab", "virtual_ab_retrofit", "lpmake",
+              "super_metadata_device", "super_partition_error_limit",
+              "super_partition_size"):
+    if key in vendor_dict.keys():
+      merged_dict[key] = vendor_dict[key]
+
+  return merged_dict
+
+
+def PartitionMapFromTargetFiles(target_files_dir):
+  """Builds a map from partition -> path within an extracted target files directory."""
+  # Keep possible_subdirs in sync with build/make/core/board_config.mk.
+  possible_subdirs = {
+      "system": ["SYSTEM"],
+      "vendor": ["VENDOR", "SYSTEM/vendor"],
+      "product": ["PRODUCT", "SYSTEM/product"],
+      "system_ext": ["SYSTEM_EXT", "SYSTEM/system_ext"],
+      "odm": ["ODM", "VENDOR/odm", "SYSTEM/vendor/odm"],
+      "vendor_dlkm": [
+          "VENDOR_DLKM", "VENDOR/vendor_dlkm", "SYSTEM/vendor/vendor_dlkm"
+      ],
+      "odm_dlkm": ["ODM_DLKM", "VENDOR/odm_dlkm", "SYSTEM/vendor/odm_dlkm"],
+      "system_dlkm": ["SYSTEM_DLKM", "SYSTEM/system_dlkm"],
+  }
+  partition_map = {}
+  for partition, subdirs in possible_subdirs.items():
+    for subdir in subdirs:
+      if os.path.exists(os.path.join(target_files_dir, subdir)):
+        partition_map[partition] = subdir
+        break
+  return partition_map
+
+
+def SharedUidPartitionViolations(uid_dict, partition_groups):
+  """Checks for APK sharedUserIds that cross partition group boundaries.
+
+  This uses a single or merged build's shareduid_violation_modules.json
+  output file, as generated by find_shareduid_violation.py or
+  core/tasks/find-shareduid-violation.mk.
+
+  An error is defined as a sharedUserId that is found in a set of partitions
+  that span more than one partition group.
+
+  Args:
+    uid_dict: A dictionary created by using the standard json module to read a
+      complete shareduid_violation_modules.json file.
+    partition_groups: A list of groups, where each group is a list of
+      partitions.
+
+  Returns:
+    A list of error messages.
+  """
+  errors = []
+  for uid, partitions in uid_dict.items():
+    found_in_groups = [
+        group for group in partition_groups
+        if set(partitions.keys()) & set(group)
+    ]
+    if len(found_in_groups) > 1:
+      errors.append(
+          "APK sharedUserId \"%s\" found across partition groups in partitions \"%s\""
+          % (uid, ",".join(sorted(partitions.keys()))))
+  return errors
+
+
+def RunHostInitVerifier(product_out, partition_map):
+  """Runs host_init_verifier on the init rc files within partitions.
+
+  host_init_verifier searches the etc/init path within each partition.
+
+  Args:
+    product_out: PRODUCT_OUT directory, containing partition directories.
+    partition_map: A map of partition name -> relative path within product_out.
+  """
+  allowed_partitions = ("system", "system_ext", "product", "vendor", "odm")
+  cmd = ["host_init_verifier"]
+  for partition, path in partition_map.items():
+    if partition not in allowed_partitions:
+      raise ExternalError("Unable to call host_init_verifier for partition %s" %
+                          partition)
+    cmd.extend(["--out_%s" % partition, os.path.join(product_out, path)])
+    # Add --property-contexts if the file exists on the partition.
+    property_contexts = "%s_property_contexts" % (
+        "plat" if partition == "system" else partition)
+    property_contexts_path = os.path.join(product_out, path, "etc", "selinux",
+                                          property_contexts)
+    if os.path.exists(property_contexts_path):
+      cmd.append("--property-contexts=%s" % property_contexts_path)
+    # Add the passwd file if the file exists on the partition.
+    passwd_path = os.path.join(product_out, path, "etc", "passwd")
+    if os.path.exists(passwd_path):
+      cmd.extend(["-p", passwd_path])
+  return RunAndCheckOutput(cmd)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 
 def AppendAVBSigningArgs(cmd, partition):
@@ -412,7 +1025,13 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
   img = tempfile.NamedTemporaryFile()
 
   if has_ramdisk:
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     ramdisk_img = make_ramdisk()
+=======
+    ramdisk_format = GetRamdiskFormat(info_dict)
+    ramdisk_img = _MakeRamdisk(sourcedir, fs_config_file,
+                               ramdisk_format=ramdisk_format)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
   # use MKBOOTIMG from environ, or "mkbootimg" if empty or not set
   mkbootimg = os.getenv('MKBOOTIMG') or "mkbootimg"
@@ -536,6 +1155,73 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
   return data
 
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+def _SignBootableImage(image_path, prebuilt_name, partition_name,
+                       info_dict=None):
+  """Performs AVB signing for a prebuilt boot.img.
+
+  Args:
+    image_path: The full path of the image, e.g., /path/to/boot.img.
+    prebuilt_name: The prebuilt image name, e.g., boot.img, boot-5.4-gz.img,
+        boot-5.10.img, recovery.img or init_boot.img.
+    partition_name: The partition name, e.g., 'boot', 'init_boot' or 'recovery'.
+    info_dict: The information dict read from misc_info.txt.
+  """
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
+  if info_dict.get("avb_enable") == "true":
+    avbtool = info_dict["avb_avbtool"]
+    if partition_name == "recovery":
+      part_size = info_dict["recovery_size"]
+    else:
+      part_size = info_dict[prebuilt_name.replace(".img", "_size")]
+
+    cmd = [avbtool, "add_hash_footer", "--image", image_path,
+           "--partition_size", str(part_size), "--partition_name",
+           partition_name]
+    AppendAVBSigningArgs(cmd, partition_name)
+    args = info_dict.get("avb_" + partition_name + "_add_hash_footer_args")
+    if args and args.strip():
+      cmd.extend(shlex.split(args))
+    RunAndCheckOutput(cmd)
+
+
+def HasRamdisk(partition_name, info_dict=None):
+  """Returns true/false to see if a bootable image should have a ramdisk.
+
+  Args:
+    partition_name: The partition name, e.g., 'boot', 'init_boot' or 'recovery'.
+    info_dict: The information dict read from misc_info.txt.
+  """
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  if partition_name != "boot":
+    return True  # init_boot.img or recovery.img has a ramdisk.
+
+  if info_dict.get("recovery_as_boot") == "true":
+    return True  # the recovery-as-boot boot.img has a RECOVERY ramdisk.
+
+  if info_dict.get("gki_boot_image_without_ramdisk") == "true":
+    return False  # A GKI boot.img has no ramdisk since Android-13.
+
+  if info_dict.get("system_root_image") == "true":
+    # The ramdisk content is merged into the system.img, so there is NO
+    # ramdisk in the boot.img or boot-<kernel version>.img.
+    return False
+
+  if info_dict.get("init_boot") == "true":
+    # The ramdisk is moved to the init_boot.img, so there is NO
+    # ramdisk in the boot.img or boot-<kernel version>.img.
+    return False
+
+  return True
+
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
                      info_dict=None, two_step_image=False):
   """Return a File object with the desired bootable image.
@@ -575,6 +1261,168 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
   return None
 
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+def _BuildVendorBootImage(sourcedir, partition_name, info_dict=None):
+  """Build a vendor boot image from the specified sourcedir.
+
+  Take a ramdisk, dtb, and vendor_cmdline from the input (in 'sourcedir'), and
+  turn them into a vendor boot image.
+
+  Return the image data, or None if sourcedir does not appear to contains files
+  for building the requested image.
+  """
+
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  img = tempfile.NamedTemporaryFile()
+
+  ramdisk_format = GetRamdiskFormat(info_dict)
+  ramdisk_img = _MakeRamdisk(sourcedir, ramdisk_format=ramdisk_format)
+
+  # use MKBOOTIMG from environ, or "mkbootimg" if empty or not set
+  mkbootimg = os.getenv('MKBOOTIMG') or "mkbootimg"
+
+  cmd = [mkbootimg]
+
+  fn = os.path.join(sourcedir, "dtb")
+  if os.access(fn, os.F_OK):
+    has_vendor_kernel_boot = (info_dict.get("vendor_kernel_boot", "").lower() == "true")
+
+    # Pack dtb into vendor_kernel_boot if building vendor_kernel_boot.
+    # Otherwise pack dtb into vendor_boot.
+    if not has_vendor_kernel_boot or partition_name == "vendor_kernel_boot":
+      cmd.append("--dtb")
+      cmd.append(fn)
+
+  fn = os.path.join(sourcedir, "vendor_cmdline")
+  if os.access(fn, os.F_OK):
+    cmd.append("--vendor_cmdline")
+    cmd.append(open(fn).read().rstrip("\n"))
+
+  fn = os.path.join(sourcedir, "base")
+  if os.access(fn, os.F_OK):
+    cmd.append("--base")
+    cmd.append(open(fn).read().rstrip("\n"))
+
+  fn = os.path.join(sourcedir, "pagesize")
+  if os.access(fn, os.F_OK):
+    cmd.append("--pagesize")
+    cmd.append(open(fn).read().rstrip("\n"))
+
+  args = info_dict.get("mkbootimg_args")
+  if args and args.strip():
+    cmd.extend(shlex.split(args))
+
+  args = info_dict.get("mkbootimg_version_args")
+  if args and args.strip():
+    cmd.extend(shlex.split(args))
+
+  cmd.extend(["--vendor_ramdisk", ramdisk_img.name])
+  cmd.extend(["--vendor_boot", img.name])
+
+  fn = os.path.join(sourcedir, "vendor_bootconfig")
+  if os.access(fn, os.F_OK):
+    cmd.append("--vendor_bootconfig")
+    cmd.append(fn)
+
+  ramdisk_fragment_imgs = []
+  fn = os.path.join(sourcedir, "vendor_ramdisk_fragments")
+  if os.access(fn, os.F_OK):
+    ramdisk_fragments = shlex.split(open(fn).read().rstrip("\n"))
+    for ramdisk_fragment in ramdisk_fragments:
+      fn = os.path.join(sourcedir, "RAMDISK_FRAGMENTS",
+                        ramdisk_fragment, "mkbootimg_args")
+      cmd.extend(shlex.split(open(fn).read().rstrip("\n")))
+      fn = os.path.join(sourcedir, "RAMDISK_FRAGMENTS",
+                        ramdisk_fragment, "prebuilt_ramdisk")
+      # Use prebuilt image if found, else create ramdisk from supplied files.
+      if os.access(fn, os.F_OK):
+        ramdisk_fragment_pathname = fn
+      else:
+        ramdisk_fragment_root = os.path.join(
+            sourcedir, "RAMDISK_FRAGMENTS", ramdisk_fragment)
+        ramdisk_fragment_img = _MakeRamdisk(ramdisk_fragment_root,
+                                            ramdisk_format=ramdisk_format)
+        ramdisk_fragment_imgs.append(ramdisk_fragment_img)
+        ramdisk_fragment_pathname = ramdisk_fragment_img.name
+      cmd.extend(["--vendor_ramdisk_fragment", ramdisk_fragment_pathname])
+
+  RunAndCheckOutput(cmd)
+
+  # AVB: if enabled, calculate and add hash.
+  if info_dict.get("avb_enable") == "true":
+    avbtool = info_dict["avb_avbtool"]
+    part_size = info_dict[f'{partition_name}_size']
+    cmd = [avbtool, "add_hash_footer", "--image", img.name,
+           "--partition_size", str(part_size), "--partition_name", partition_name]
+    AppendAVBSigningArgs(cmd, partition_name)
+    args = info_dict.get(f'avb_{partition_name}_add_hash_footer_args')
+    if args and args.strip():
+      cmd.extend(shlex.split(args))
+    RunAndCheckOutput(cmd)
+
+  img.seek(os.SEEK_SET, 0)
+  data = img.read()
+
+  for f in ramdisk_fragment_imgs:
+    f.close()
+  ramdisk_img.close()
+  img.close()
+
+  return data
+
+
+def GetVendorBootImage(name, prebuilt_name, unpack_dir, tree_subdir,
+                       info_dict=None):
+  """Return a File object with the desired vendor boot image.
+
+  Look for it under 'unpack_dir'/IMAGES, otherwise construct it from
+  the source files in 'unpack_dir'/'tree_subdir'."""
+
+  prebuilt_path = os.path.join(unpack_dir, "IMAGES", prebuilt_name)
+  if os.path.exists(prebuilt_path):
+    logger.info("using prebuilt %s from IMAGES...", prebuilt_name)
+    return File.FromLocalFile(name, prebuilt_path)
+
+  logger.info("building image from target_files %s...", tree_subdir)
+
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  data = _BuildVendorBootImage(
+      os.path.join(unpack_dir, tree_subdir), "vendor_boot", info_dict)
+  if data:
+    return File(name, data)
+  return None
+
+
+def GetVendorKernelBootImage(name, prebuilt_name, unpack_dir, tree_subdir,
+                       info_dict=None):
+  """Return a File object with the desired vendor kernel boot image.
+
+  Look for it under 'unpack_dir'/IMAGES, otherwise construct it from
+  the source files in 'unpack_dir'/'tree_subdir'."""
+
+  prebuilt_path = os.path.join(unpack_dir, "IMAGES", prebuilt_name)
+  if os.path.exists(prebuilt_path):
+    logger.info("using prebuilt %s from IMAGES...", prebuilt_name)
+    return File.FromLocalFile(name, prebuilt_path)
+
+  logger.info("building image from target_files %s...", tree_subdir)
+
+  if info_dict is None:
+    info_dict = OPTIONS.info_dict
+
+  data = _BuildVendorBootImage(
+      os.path.join(unpack_dir, tree_subdir), "vendor_kernel_boot", info_dict)
+  if data:
+    return File(name, data)
+  return None
+
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 def Gunzip(in_filename, out_filename):
   """Gunzip the given gzip compressed file to a given output file.
   """

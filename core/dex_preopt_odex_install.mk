@@ -168,6 +168,7 @@ dex_preopt_profile_src_file :=
 # Remove compressed APK extension.
 my_installed_profile := $(patsubst %.gz,%,$(LOCAL_INSTALLED_MODULE)).prof
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 # my_installed_profile := $(LOCAL_INSTALLED_MODULE).prof
 $(eval $(call copy-one-file,$(my_built_profile),$(my_installed_profile)))
 build_installed_profile:=$(my_built_profile):$(my_installed_profile)
@@ -175,6 +176,127 @@ else
 build_installed_profile:=
 my_installed_profile :=
 endif
+=======
+# 1: SDK version
+# 2: list of libraries
+#
+# Make does not process modules in topological order wrt. <uses-library>
+# dependencies, therefore we cannot rely on variables to get the information
+# about dependencies (in particular, their on-device path and class loader
+# context). This information is communicated via dexpreopt.config files: each
+# config depends on configs for <uses-library> dependencies of this module,
+# and the dex_preopt_config_merger.py script reads all configs and inserts the
+# missing bits from dependency configs into the module config.
+#
+# By default on-device path is /system/framework/*.jar, and class loader
+# subcontext is empty. These values are correct for compatibility libraries,
+# which are special and not handled by dex_preopt_config_merger.py.
+#
+add_json_class_loader_context = \
+  $(call add_json_array, $(1)) \
+  $(foreach lib, $(2),\
+    $(call add_json_map_anon) \
+    $(call add_json_str, Name, $(lib)) \
+    $(call add_json_str, Host, $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/javalib.jar) \
+    $(call add_json_str, Device, /system/framework/$(lib).jar) \
+    $(call add_json_val, Subcontexts, null) \
+    $(call end_json_map)) \
+  $(call end_json_array)
+
+################################################################################
+# Verify <uses-library> coherence between the build system and the manifest.
+################################################################################
+
+# Some libraries do not have a manifest, so there is nothing to check against.
+# Handle it as if the manifest had zero <uses-library> tags: it is ok unless the
+# module has non-empty LOCAL_USES_LIBRARIES or LOCAL_OPTIONAL_USES_LIBRARIES.
+ifndef my_manifest_or_apk
+  ifneq (,$(strip $(LOCAL_USES_LIBRARIES)$(LOCAL_OPTIONAL_USES_LIBRARIES)))
+    $(error $(LOCAL_MODULE) has non-empty <uses-library> list but no manifest)
+  else
+    LOCAL_ENFORCE_USES_LIBRARIES := false
+  endif
+endif
+
+# Disable the check for tests.
+ifneq (,$(filter $(LOCAL_MODULE_TAGS),tests))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+endif
+ifneq (,$(LOCAL_COMPATIBILITY_SUITE))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+endif
+
+# Disable the check if the app contains no java code.
+ifeq (,$(strip $(built_dex)$(my_prebuilt_src_file)$(LOCAL_SOONG_DEX_JAR)))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+endif
+
+# Disable <uses-library> checks if dexpreopt is globally disabled.
+# Without dexpreopt the check is not necessary, and although it is good to have,
+# it is difficult to maintain on non-linux build platforms where dexpreopt is
+# generally disabled (the check may fail due to various unrelated reasons, such
+# as a failure to get manifest from an APK).
+ifneq (true,$(WITH_DEXPREOPT))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+else ifeq (true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
+  LOCAL_ENFORCE_USES_LIBRARIES := false
+endif
+
+# Verify LOCAL_USES_LIBRARIES/LOCAL_OPTIONAL_USES_LIBRARIES against the manifest.
+ifndef LOCAL_ENFORCE_USES_LIBRARIES
+  LOCAL_ENFORCE_USES_LIBRARIES := true
+endif
+
+my_enforced_uses_libraries :=
+ifeq (true,$(LOCAL_ENFORCE_USES_LIBRARIES))
+  my_verify_script := build/soong/scripts/manifest_check.py
+  my_uses_libs_args := $(patsubst %,--uses-library %,$(LOCAL_USES_LIBRARIES))
+  my_optional_uses_libs_args := $(patsubst %,--optional-uses-library %, \
+    $(LOCAL_OPTIONAL_USES_LIBRARIES))
+  my_relax_check_arg := $(if $(filter true,$(RELAX_USES_LIBRARY_CHECK)), \
+    --enforce-uses-libraries-relax,)
+  my_dexpreopt_config_args := $(patsubst %,--dexpreopt-config %,$(my_dexpreopt_dep_configs))
+
+  my_enforced_uses_libraries := $(intermediates.COMMON)/enforce_uses_libraries.status
+  $(my_enforced_uses_libraries): PRIVATE_USES_LIBRARIES := $(my_uses_libs_args)
+  $(my_enforced_uses_libraries): PRIVATE_OPTIONAL_USES_LIBRARIES := $(my_optional_uses_libs_args)
+  $(my_enforced_uses_libraries): PRIVATE_DEXPREOPT_CONFIGS := $(my_dexpreopt_config_args)
+  $(my_enforced_uses_libraries): PRIVATE_RELAX_CHECK := $(my_relax_check_arg)
+  $(my_enforced_uses_libraries): $(AAPT)
+  $(my_enforced_uses_libraries): $(my_verify_script)
+  $(my_enforced_uses_libraries): $(my_dexpreopt_dep_configs)
+  $(my_enforced_uses_libraries): $(my_manifest_or_apk)
+	@echo Verifying uses-libraries: $<
+	rm -f $@
+	$(my_verify_script) \
+	  --enforce-uses-libraries \
+	  --enforce-uses-libraries-status $@ \
+	  --aapt $(AAPT) \
+	  $(PRIVATE_USES_LIBRARIES) \
+	  $(PRIVATE_OPTIONAL_USES_LIBRARIES) \
+	  $(PRIVATE_DEXPREOPT_CONFIGS) \
+	  $(PRIVATE_RELAX_CHECK) \
+	  $<
+  $(LOCAL_BUILT_MODULE) : $(my_enforced_uses_libraries)
+endif
+
+################################################################################
+# Dexpreopt command.
+################################################################################
+
+my_dexpreopt_archs :=
+my_dexpreopt_images :=
+my_dexpreopt_images_deps :=
+my_dexpreopt_image_locations_on_host :=
+my_dexpreopt_image_locations_on_device :=
+# Infix can be 'boot' or 'art'. Soong creates a set of variables for Make, one
+# for each boot image (primary and the framework extension). The only reason why
+# the primary image is exposed to Make is testing (art gtests) and benchmarking
+# (art golem benchmarks). Install rules that use those variables are in
+# dex_preopt_libart.mk. Here for dexpreopt purposes the infix is always 'boot'.
+my_dexpreopt_infix := boot
+my_create_dexpreopt_config :=
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 ifdef LOCAL_DEX_PREOPT
 

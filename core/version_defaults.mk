@@ -39,9 +39,16 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 DEFAULT_PLATFORM_VERSION := PPR1
 MIN_PLATFORM_VERSION := PPR1
 MAX_PLATFORM_VERSION := PPR1
+=======
+DEFAULT_PLATFORM_VERSION := UP1A
+.KATI_READONLY := DEFAULT_PLATFORM_VERSION
+MIN_PLATFORM_VERSION := TP1A
+MAX_PLATFORM_VERSION := UP1A
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 ALLOWED_VERSIONS := $(call allowed-platform-versions,\
   $(MIN_PLATFORM_VERSION),\
@@ -79,7 +86,12 @@ PLATFORM_VERSION.PPR1 := 9
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 PLATFORM_VERSION_CODENAME.PPR1 := REL
+=======
+PLATFORM_VERSION_CODENAME.TP1A := Tiramisu
+PLATFORM_VERSION_CODENAME.UP1A := UpsideDownCake
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 ifndef PLATFORM_VERSION
   PLATFORM_VERSION := $(PLATFORM_VERSION.$(TARGET_PLATFORM_VERSION))
@@ -124,6 +136,7 @@ ifndef PLATFORM_VERSION_CODENAME
   # list of additional codenames after PLATFORM_VERSION_CODENAME.
   PLATFORM_VERSION_ALL_CODENAMES :=
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
   # Build a list of all active code names. Avoid duplicates, and stop when we
   # reach a codename that matches PLATFORM_VERSION_CODENAME (anything beyond
   # that is not included in our build).
@@ -224,6 +237,19 @@ else
   PLATFORM_SYSTEMSDK_VERSIONS += $(PLATFORM_VERSION_CODENAME)
 endif
 PLATFORM_SYSTEMSDK_VERSIONS := $(strip $(sort $(PLATFORM_SYSTEMSDK_VERSIONS)))
+=======
+# This are all known codenames.
+PLATFORM_VERSION_KNOWN_CODENAMES := \
+Base Base11 Cupcake Donut Eclair Eclair01 EclairMr1 Froyo Gingerbread GingerbreadMr1 \
+Honeycomb HoneycombMr1 HoneycombMr2 IceCreamSandwich IceCreamSandwichMr1 \
+JellyBean JellyBeanMr1 JellyBeanMr2 Kitkat KitkatWatch Lollipop LollipopMr1 M N NMr1 O OMr1 P \
+Q R S Sv2 Tiramisu UpsideDownCake
+
+# Convert from space separated list to comma separated
+PLATFORM_VERSION_KNOWN_CODENAMES := \
+  $(call normalize-comma-list,$(PLATFORM_VERSION_KNOWN_CODENAMES))
+.KATI_READONLY := PLATFORM_VERSION_KNOWN_CODENAMES
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 ifndef PLATFORM_SECURITY_PATCH
     #  Used to indicate the security patch that has been applied to the device.
@@ -231,7 +257,11 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+    PLATFORM_SECURITY_PATCH := 2022-05-05
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 endif
 
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP

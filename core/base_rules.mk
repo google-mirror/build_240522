@@ -20,7 +20,11 @@ $(call record-module-type,base_rules)
 # Users can define base-rules-hook in their buildspec.mk to perform
 # arbitrary operations as each module is included.
 ifdef base-rules-hook
-$(if $(base-rules-hook),)
+  ifndef _has_warned_about_base_rules_hook
+    $(warning base-rules-hook is deprecated, please remove usages of it and/or convert to Soong.)
+    _has_warned_about_base_rules_hook := true
+  endif
+  $(if $(base-rules-hook),)
 endif
 
 ###########################################################
@@ -437,6 +441,51 @@ $(foreach symlink,$(my_installed_symlinks),\
 
 $(my_all_targets) : | $(my_installed_symlinks)
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+      # Only set up copy rules once, even if another arch variant shares it
+      my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS_LIST),$(my_vintf_pairs))
+      my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
+
+      ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
+
+      $(my_all_targets) : $(my_vintf_new_installed)
+    endif # my_vintf_fragments
+
+    # Rule to install the module's companion init.rc.
+    ifneq ($(strip $(LOCAL_FULL_INIT_RC)),)
+      my_init_rc := $(LOCAL_FULL_INIT_RC)
+    else
+      my_init_rc := $(foreach rc,$(LOCAL_INIT_RC_$(my_32_64_bit_suffix)) $(LOCAL_INIT_RC),$(LOCAL_PATH)/$(rc))
+    endif
+    ifneq ($(strip $(my_init_rc)),)
+      # Make doesn't support recovery or ramdisk as an output partition,
+      # but some Soong modules installed in recovery or ramdisk
+      # have init.rc files that need to be installed alongside them.
+      # Manually handle the case where the
+      # output file is in the recovery or ramdisk partition.
+      ifneq (,$(filter $(TARGET_RECOVERY_ROOT_OUT)/%,$(my_module_path)))
+        my_init_rc_path := $(TARGET_RECOVERY_ROOT_OUT)/system/etc
+      else ifneq (,$(filter $(TARGET_RAMDISK_OUT)/%,$(my_module_path)))
+        my_init_rc_path := $(TARGET_RAMDISK_OUT)/system/etc
+      else
+        my_init_rc_path := $(TARGET_OUT$(partition_tag)_ETC)
+      endif
+      my_init_rc_pairs := $(foreach rc,$(my_init_rc),$(rc):$(my_init_rc_path)/init/$(notdir $(rc)))
+      my_init_rc_installed := $(foreach rc,$(my_init_rc_pairs),$(call word-colon,2,$(rc)))
+
+      # Make sure we only set up the copy rules once, even if another arch variant
+      # shares a common LOCAL_INIT_RC.
+      my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
+      my_init_rc_new_installed := $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
+
+      ALL_INIT_RC_INSTALLED_PAIRS += $(my_init_rc_new_pairs)
+
+      $(my_all_targets) : $(my_init_rc_installed)
+    endif # my_init_rc
+
+  endif # !LOCAL_IS_HOST_MODULE
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 endif # !LOCAL_UNINSTALLABLE_MODULE
 
 ###########################################################
@@ -528,6 +577,14 @@ ifeq ($(LOCAL_MODULE_CLASS),NATIVE_BENCHMARK)
 endif
 ifdef LOCAL_MULTILIB
   multi_arch := true
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+# These conditionals allow this functionality to be mimicked in Soong
+else ifeq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+  ifeq ($(LOCAL_MODULE_CLASS),SHARED_LIBRARIES)
+    multi_arch := true
+  endif
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 endif
 ifdef multi_arch
   arch_dir := /$($(my_prefix)$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)

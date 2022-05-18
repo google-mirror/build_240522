@@ -350,15 +350,94 @@ function addcompletions()
         return
     fi
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     dir="sdk/bash_completion"
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do
             echo "including $f"
+=======
+    local completion_files=(
+      packages/modules/adb/adb.bash
+      system/core/fastboot/fastboot.bash
+      tools/asuite/asuite.sh
+    )
+    # Completion can be disabled selectively to allow users to use non-standard completion.
+    # e.g.
+    # ENVSETUP_NO_COMPLETION=adb # -> disable adb completion
+    # ENVSETUP_NO_COMPLETION=adb:bit # -> disable adb and bit completion
+    for f in ${completion_files[*]}; do
+        if [ ! -f "$f" ]; then
+          echo "Warning: completion file $f not found"
+        elif should_add_completion "$f"; then
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
             . $f
         done
     fi
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     complete -C "bit --tab" bit
+=======
+    complete -F _complete_android_module_names pathmod
+    complete -F _complete_android_module_names gomod
+    complete -F _complete_android_module_names outmod
+    complete -F _complete_android_module_names installmod
+    complete -F _complete_android_module_names m
+}
+
+function multitree_lunch_help()
+{
+    echo "usage: lunch PRODUCT-VARIANT" 1>&2
+    echo "    Set up android build environment based on a product short name and variant" 1>&2
+    echo 1>&2
+    echo "lunch COMBO_FILE VARIANT" 1>&2
+    echo "    Set up android build environment based on a specific lunch combo file" 1>&2
+    echo "    and variant." 1>&2
+    echo 1>&2
+    echo "lunch --print [CONFIG]" 1>&2
+    echo "    Print the contents of a configuration.  If CONFIG is supplied, that config" 1>&2
+    echo "    will be flattened and printed.  If CONFIG is not supplied, the currently" 1>&2
+    echo "    selected config will be printed.  Returns 0 on success or nonzero on error." 1>&2
+    echo 1>&2
+    echo "lunch --list" 1>&2
+    echo "    List all possible combo files available in the current tree" 1>&2
+    echo 1>&2
+    echo "lunch --help" 1>&2
+    echo "lunch -h" 1>&2
+    echo "    Prints this message." 1>&2
+}
+
+function multitree_lunch()
+{
+    local code
+    local results
+    if $(echo "$1" | grep -q '^-') ; then
+        # Calls starting with a -- argument are passed directly and the function
+        # returns with the lunch.py exit code.
+        build/build/make/orchestrator/core/lunch.py "$@"
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+    else
+        # All other calls go through the --lunch variant of lunch.py
+        results=($(build/build/make/orchestrator/core/lunch.py --lunch "$@"))
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+
+        export TARGET_BUILD_COMBO=${results[0]}
+        export TARGET_BUILD_VARIANT=${results[1]}
+    fi
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 }
 
 function choosetype()
@@ -741,6 +820,7 @@ function gettop
     fi
 }
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 function m()
 {
     local T=$(gettop)
@@ -942,6 +1022,34 @@ function mmma()
     echo "Couldn't locate the top of the tree.  Try setting TOP."
     return 1
   fi
+=======
+# TODO: Merge into gettop as part of launching multitree
+function multitree_gettop
+{
+    local TOPFILE=build/build/make/core/envsetup.mk
+    if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ] ; then
+        # The following circumlocution ensures we remove symlinks from TOP.
+        (cd "$TOP"; PWD= /bin/pwd)
+    else
+        if [ -f $TOPFILE ] ; then
+            # The following circumlocution (repeated below as well) ensures
+            # that we record the true directory name and not one that is
+            # faked up with symlink names.
+            PWD= /bin/pwd
+        else
+            local HERE=$PWD
+            local T=
+            while [ \( ! \( -f $TOPFILE \) \) -a \( "$PWD" != "/" \) ]; do
+                \cd ..
+                T=`PWD= /bin/pwd -P`
+            done
+            \cd "$HERE"
+            if [ -f "$T/$TOPFILE" ]; then
+                echo "$T"
+            fi
+        fi
+    fi
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 }
 
 function croot()
@@ -1599,6 +1707,21 @@ function _wrap_build()
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"
+}
+
+function _multitree_lunch_error()
+{
+      >&2 echo "Couldn't locate the top of the tree. Please run \'source build/envsetup.sh\' and multitree_lunch from the root of your workspace."
+}
+
+function multitree_build()
+{
+    if T="$(multitree_gettop)"; then
+      "$T/build/build/orchestrator/core/orchestrator.py" "$@"
+    else
+      _multitree_lunch_error
+      return 1
+    fi
 }
 
 function provision()

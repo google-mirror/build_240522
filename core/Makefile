@@ -677,11 +677,62 @@ else
 endif
 
 # -----------------------------------------------------------------
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+# the root dir
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_ROOT_OUT)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+INTERNAL_ROOT_FILES := $(filter $(TARGET_ROOT_OUT)/%, \
+	$(ALL_DEFAULT_INSTALLED_MODULES))
+
+
+INSTALLED_FILES_FILE_ROOT := $(PRODUCT_OUT)/installed-files-root.txt
+INSTALLED_FILES_JSON_ROOT := $(INSTALLED_FILES_FILE_ROOT:.txt=.json)
+$(INSTALLED_FILES_FILE_ROOT): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_ROOT)
+$(INSTALLED_FILES_FILE_ROOT) : $(INTERNAL_ROOT_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(TARGET_ROOT_OUT)
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_ROOT_OUT) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_ROOT))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_ROOT))
+
+#------------------------------------------------------------------
+# dtb
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+INSTALLED_DTBIMAGE_TARGET := $(PRODUCT_OUT)/dtb.img
+ifdef BOARD_PREBUILT_DTBIMAGE_DIR
+$(INSTALLED_DTBIMAGE_TARGET) : $(sort $(wildcard $(BOARD_PREBUILT_DTBIMAGE_DIR)/*.dtb))
+	cat $^ > $@
+endif
+endif
+
+# -----------------------------------------------------------------
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 # the ramdisk
 INTERNAL_RAMDISK_FILES := $(filter $(TARGET_ROOT_OUT)/%, \
 	$(ALL_GENERATED_SOURCES) \
 	$(ALL_DEFAULT_INSTALLED_MODULES))
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+INSTALLED_FILES_FILE_RAMDISK := $(PRODUCT_OUT)/installed-files-ramdisk.txt
+INSTALLED_FILES_JSON_RAMDISK := $(INSTALLED_FILES_FILE_RAMDISK:.txt=.json)
+$(INSTALLED_FILES_FILE_RAMDISK): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_RAMDISK)
+$(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(TARGET_RAMDISK_OUT)
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_RAMDISK_OUT) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RAMDISK)))
+$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
+
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
 # We just build this directly to the install location.
@@ -705,8 +756,26 @@ INTERNAL_BOOTIMAGE_ARGS := \
 	$(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET)) \
 	--kernel $(INSTALLED_KERNEL_TARGET)
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
 INTERNAL_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+=======
+# TODO(b/229701033): clean up BOARD_BUILD_GKI_BOOT_IMAGE_WITHOUT_RAMDISK.
+ifneq ($(BOARD_BUILD_GKI_BOOT_IMAGE_WITHOUT_RAMDISK),true)
+  ifneq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    ifneq ($(BUILDING_INIT_BOOT_IMAGE),true)
+      INTERNAL_BOOTIMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+    else
+      INTERNAL_INIT_BOOT_IMAGE_ARGS += --ramdisk $(INSTALLED_RAMDISK_TARGET)
+    endif
+  endif
+endif
+
+ifndef BUILDING_VENDOR_BOOT_IMAGE
+ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
+  INTERNAL_BOOTIMAGE_ARGS += --dtb $(INSTALLED_DTBIMAGE_TARGET)
+endif
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 endif
 
 INTERNAL_BOOTIMAGE_FILES := $(filter-out --%,$(INTERNAL_BOOTIMAGE_ARGS))
@@ -884,6 +953,11 @@ endef
 # TODO These intermediate NOTICE.txt/NOTICE.html files should go into
 # TARGET_OUT_NOTICE_FILES now that the notice files are gathered from
 # the src subdirectory.
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+kernel_notice_file := $(TARGET_OUT_NOTICE_FILES)/src/kernel.txt
+winpthreads_notice_file := $(TARGET_OUT_NOTICE_FILES)/src/winpthreads.txt
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 target_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE.txt
 target_notice_file_html_or_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html
@@ -1175,9 +1249,19 @@ $(if $(BOARD_AVB_ENABLE),\
 $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
     $(hide) echo "recovery_as_boot=true" >> $(1))
 $(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)),\
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     $(hide) echo "system_root_image=true" >> $(1);\
     echo "ramdisk_dir=$(TARGET_ROOT_OUT)" >> $(1))
 $(if $(2),$(hide) $(foreach kv,$(2),echo "$(kv)" >> $(1);))
+=======
+    $(hide) echo "system_root_image=true" >> $(1))
+$(if $(filter true,$(BOARD_BUILD_GKI_BOOT_IMAGE_WITHOUT_RAMDISK)),\
+    $(hide) echo "gki_boot_image_without_ramdisk=true" >> $(1))
+$(hide) echo "root_dir=$(TARGET_ROOT_OUT)" >> $(1)
+$(if $(filter true,$(PRODUCT_USE_DYNAMIC_PARTITION_SIZE)),\
+    $(hide) echo "use_dynamic_partition_size=true" >> $(1))
+$(if $(3),$(hide) $(foreach kv,$(3),echo "$(kv)" >> $(1);))
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 endef
 
 # $(1): modules list
@@ -1516,8 +1600,11 @@ $(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST)
 .PHONY: installed-file-list
 installed-file-list: $(INSTALLED_FILES_FILE)
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 $(call dist-for-goals, sdk win_sdk sdk_addon, $(INSTALLED_FILES_FILE))
 
+=======
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
@@ -2490,6 +2577,10 @@ tool_extension := $(wildcard $(tool_extensions)/releasetools.py)
 $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_TOOL_EXTENSIONS := $(tool_extensions)
 $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_TOOL_EXTENSION := $(tool_extension)
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+updater_dep :=
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 ifeq ($(AB_OTA_UPDATER),true)
 updater_dep := system/update_engine/update_engine.conf
 else
@@ -3137,8 +3228,6 @@ ATREE_FILES :=
 # if we don't have a real list, then use "everything"
 ifeq ($(strip $(ATREE_FILES)),)
 ATREE_FILES := \
-	$(ALL_DEFAULT_INSTALLED_MODULES) \
-	$(INSTALLED_RAMDISK_TARGET) \
 	$(ALL_DOCS) \
 	$(ALL_SDK_FILES)
 endif
@@ -3167,9 +3256,13 @@ endif
 include $(BUILD_SYSTEM)/sdk_font.mk
 
 deps := \
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 	$(target_notice_file_txt) \
 	$(tools_notice_file_txt) \
+=======
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 	$(OUT_DOCS)/offline-sdk-timestamp \
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 	$(SYMBOLS_ZIP) \
 	$(COVERAGE_ZIP) \
 	$(INSTALLED_SYSTEMIMAGE) \
@@ -3179,6 +3272,10 @@ deps := \
 	$(INSTALLED_RAMDISK_TARGET) \
 	$(INSTALLED_SDK_BUILD_PROP_TARGET) \
 	$(INSTALLED_BUILD_PROP_TARGET) \
+=======
+	$(SDK_METADATA_FILES) \
+  $(INSTALLED_SDK_BUILD_PROP_TARGET) \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 	$(ATREE_FILES) \
 	$(sdk_atree_files) \
 	$(HOST_OUT_EXECUTABLES)/atree \
@@ -3208,6 +3305,7 @@ $(INTERNAL_SDK_TARGET): $(deps)
 	if [ $$FAIL ]; then exit 1; fi
 	$(hide) echo $(notdir $(SDK_FONT_DEPS)) | tr " " "\n"  > $(SDK_FONT_TEMP)/fontsInSdk.txt
 	$(hide) ( \
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 		ATREE_STRIP="strip -x" \
 		$(HOST_OUT_EXECUTABLES)/atree \
 		$(addprefix -f ,$(PRIVATE_INPUT_FILES)) \
@@ -3231,6 +3329,28 @@ $(INTERNAL_SDK_TARGET): $(deps)
 			development/build/tools/sdk_clean.sh $(PRIVATE_DIR) && \
 		chmod -R ug+rwX $(PRIVATE_DIR) && \
 		cd $(dir $@) && zip -rqX $(notdir $@) $(PRIVATE_NAME) \
+=======
+	    ATREE_STRIP="$(HOST_STRIP) -x" \
+	    $(HOST_OUT_EXECUTABLES)/atree \
+	    $(addprefix -f ,$(PRIVATE_INPUT_FILES)) \
+	        -m $(PRIVATE_DEP_FILE) \
+	        -I . \
+	        -I $(PRODUCT_OUT) \
+	        -I $(HOST_OUT) \
+	        -I $(TARGET_COMMON_OUT_ROOT) \
+	        -v "PLATFORM_NAME=android-$(PLATFORM_VERSION)" \
+	        -v "OUT_DIR=$(OUT_DIR)" \
+	        -v "HOST_OUT=$(HOST_OUT)" \
+	        -v "TARGET_ARCH=$(TARGET_ARCH)" \
+	        -v "TARGET_CPU_ABI=$(TARGET_CPU_ABI)" \
+	        -v "DLL_EXTENSION=$(HOST_SHLIB_SUFFIX)" \
+	        -v "FONT_OUT=$(SDK_FONT_TEMP)" \
+	        -o $(PRIVATE_DIR) && \
+	    HOST_OUT_EXECUTABLES=$(HOST_OUT_EXECUTABLES) HOST_OS=$(HOST_OS) \
+	        development/build/tools/sdk_clean.sh $(PRIVATE_DIR) && \
+	    chmod -R ug+rwX $(PRIVATE_DIR) && \
+	    cd $(dir $@) && zip -rqX $(notdir $@) $(PRIVATE_NAME) \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 	) || ( rm -rf $(PRIVATE_DIR) $@ && exit 44 )
 
 

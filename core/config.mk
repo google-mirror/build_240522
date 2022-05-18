@@ -148,9 +148,13 @@ BUILD_HOST_SHARED_TEST_LIBRARY := $(BUILD_SYSTEM)/host_shared_test_lib.mk
 BUILD_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/static_test_lib.mk
 BUILD_HOST_STATIC_TEST_LIBRARY := $(BUILD_SYSTEM)/host_static_test_lib.mk
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk
 BUILD_HOST_DALVIK_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_java_library.mk
 BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_static_java_library.mk
+=======
+BUILD_NOTICE_FILE :=$= $(BUILD_SYSTEM)/notice_files.mk
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 BUILD_HOST_TEST_CONFIG := $(BUILD_SYSTEM)/host_test_config.mk
 BUILD_TARGET_TEST_CONFIG := $(BUILD_SYSTEM)/target_test_config.mk
@@ -305,6 +309,7 @@ $(hide) otool -l $(1) | grep LC_ID_DYLIB -A 5 > $(2)
 $(hide) nm -gP $(1) | cut -f1-2 -d" " | (grep -v U$$ >> $(2) || true)
 endef
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 combo_target := HOST_
 combo_2nd_arch_prefix :=
 include $(BUILD_SYSTEM)/combo/select.mk
@@ -343,6 +348,8 @@ combo_2nd_arch_prefix := $(TARGET_2ND_ARCH_VAR_PREFIX)
 include $(BUILD_SYSTEM)/combo/select.mk
 endif
 
+=======
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ccache.mk
 include $(BUILD_SYSTEM)/goma.mk
@@ -918,8 +925,17 @@ sepolicy_minor_vers :=
 
 # A list of SEPolicy versions, besides PLATFORM_SEPOLICY_VERSION, that the framework supports.
 PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
     26.0 \
     27.0
+=======
+    28.0 \
+    29.0 \
+    30.0 \
+    31.0 \
+    32.0 \
+    33.0 \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
 .KATI_READONLY := \
     PLATFORM_SEPOLICY_COMPAT_VERSIONS \
@@ -1062,6 +1078,39 @@ endif
 define find_warning_allowed_projects
     $(filter $(ANDROID_WARNING_ALLOWED_PROJECTS),$(1)/)
 endef
+
+GOMA_POOL :=
+RBE_POOL :=
+GOMA_OR_RBE_POOL :=
+# When goma or RBE are enabled, kati will be passed --default_pool=local_pool to put
+# most rules into the local pool.  Explicitly set the pool to "none" for rules that
+# should be run outside the local pool, i.e. with -j500.
+ifneq (,$(filter-out false,$(USE_GOMA)))
+  GOMA_POOL := none
+  GOMA_OR_RBE_POOL := none
+else ifneq (,$(filter-out false,$(USE_RBE)))
+  RBE_POOL := none
+  GOMA_OR_RBE_POOL := none
+endif
+.KATI_READONLY := GOMA_POOL RBE_POOL GOMA_OR_RBE_POOL
+
+JAVAC_NINJA_POOL :=
+R8_NINJA_POOL :=
+D8_NINJA_POOL :=
+
+ifneq ($(filter-out false,$(USE_RBE)),)
+  ifdef RBE_JAVAC
+    JAVAC_NINJA_POOL := $(RBE_POOL)
+  endif
+  ifdef RBE_R8
+    R8_NINJA_POOL := $(RBE_POOL)
+  endif
+  ifdef RBE_D8
+    D8_NINJA_POOL := $(RBE_POOL)
+  endif
+endif
+
+.KATI_READONLY := JAVAC_NINJA_POOL R8_NINJA_POOL D8_NINJA_POOL
 
 # These goals don't need to collect and include Android.mks/CleanSpec.mks
 # in the source tree.

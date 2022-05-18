@@ -79,3 +79,20 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/sdk_arm64.mk \
     $(LOCAL_DIR)/sdk_x86_64.mk
 endif
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
+=======
+
+PRODUCT_MAKEFILES += \
+    $(LOCAL_DIR)/linux_bionic.mk \
+    $(LOCAL_DIR)/mainline_sdk.mk \
+    $(LOCAL_DIR)/module_arm.mk \
+    $(LOCAL_DIR)/module_arm64.mk \
+    $(LOCAL_DIR)/module_x86.mk \
+    $(LOCAL_DIR)/module_x86_64.mk \
+
+COMMON_LUNCH_CHOICES := \
+    aosp_arm64-eng \
+    aosp_arm-eng \
+    aosp_x86_64-eng \
+    aosp_x86-eng \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])

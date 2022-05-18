@@ -2402,8 +2402,14 @@ define transform-classes-d8.jar-to-dex
 @mkdir -p $(dir $@)
 $(hide) rm -f $(dir $@)classes*.dex $(dir $@)d8_input.jar
 $(hide) $(ZIP2ZIP) -j -i $< -o $(dir $@)d8_input.jar "**/*.class"
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 $(hide) $(DX_COMMAND) \
     --output $(dir $@) \
+=======
+$(hide) $(D8_WRAPPER) $(D8_COMMAND) \
+    --output $(dir $@)tmp \
+    $(addprefix --lib ,$(PRIVATE_D8_LIBS)) \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
     --min-api $(PRIVATE_MIN_SDK_VERSION) \
     $(subst --main-dex-list=, --main-dex-list , \
         $(filter-out --core-library --multi-dex --minimal-main-dex,$(PRIVATE_DX_FLAGS))) \
@@ -2838,7 +2844,13 @@ endif
 ###########################################################
 define transform-jar-to-dex-r8
 @echo R8: $@
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 $(hide) $(R8_COMPAT_PROGUARD) -injars '$<' \
+=======
+$(hide) rm -f $(PRIVATE_PROGUARD_DICTIONARY)
+$(hide) $(R8_WRAPPER) $(R8_COMMAND) \
+    -injars '$<' \
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
     --min-api $(PRIVATE_MIN_SDK_VERSION) \
     --force-proguard-compatibility --output $(subst classes.dex,,$@) \
     $(PRIVATE_PROGUARD_FLAGS) \
@@ -3058,8 +3070,6 @@ STATS.MODULE_TYPE := \
   STATIC_TEST_LIBRARY \
   HOST_STATIC_TEST_LIBRARY \
   NOTICE_FILE \
-  HOST_DALVIK_JAVA_LIBRARY \
-  HOST_DALVIK_STATIC_JAVA_LIBRARY \
   base_rules \
   HEADER_LIBRARY \
   HOST_TEST_CONFIG \

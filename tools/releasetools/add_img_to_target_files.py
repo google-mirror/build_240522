@@ -684,6 +684,7 @@ def AddImagesToTargetFiles(filename):
   def banner(s):
     print("\n\n++++ " + s + " ++++\n\n")
 
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
   banner("boot")
   # common.GetBootableImage() returns the image directly if present.
   boot_image = common.GetBootableImage(
@@ -695,6 +696,67 @@ def AddImagesToTargetFiles(filename):
       boot_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         boot_image.AddToZip(output_zip)
+=======
+  boot_image = None
+  if has_boot:
+    banner("boot")
+    boot_images = OPTIONS.info_dict.get("boot_images")
+    if boot_images is None:
+      boot_images = "boot.img"
+    for index, b in enumerate(boot_images.split()):
+      # common.GetBootableImage() returns the image directly if present.
+      boot_image = common.GetBootableImage(
+          "IMAGES/" + b, b, OPTIONS.input_tmp, "BOOT")
+      # boot.img may be unavailable in some targets (e.g. aosp_arm64).
+      if boot_image:
+        boot_image_path = os.path.join(OPTIONS.input_tmp, "IMAGES", b)
+        # Although multiple boot images can be generated, include the image
+        # descriptor of only the first boot image in vbmeta
+        if index == 0:
+          partitions['boot'] = boot_image_path
+        if not os.path.exists(boot_image_path):
+          boot_image.WriteToDir(OPTIONS.input_tmp)
+          if output_zip:
+            boot_image.AddToZip(output_zip)
+
+  if has_init_boot:
+    banner("init_boot")
+    init_boot_image = common.GetBootableImage(
+        "IMAGES/init_boot.img", "init_boot.img", OPTIONS.input_tmp, "INIT_BOOT")
+    if init_boot_image:
+      partitions['init_boot'] = os.path.join(
+          OPTIONS.input_tmp, "IMAGES", "init_boot.img")
+      if not os.path.exists(partitions['init_boot']):
+        init_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          init_boot_image.AddToZip(output_zip)
+
+  if has_vendor_boot:
+    banner("vendor_boot")
+    vendor_boot_image = common.GetVendorBootImage(
+        "IMAGES/vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
+        "VENDOR_BOOT")
+    if vendor_boot_image:
+      partitions['vendor_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_boot.img")
+      if not os.path.exists(partitions['vendor_boot']):
+        vendor_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_boot_image.AddToZip(output_zip)
+
+  if has_vendor_kernel_boot:
+    banner("vendor_kernel_boot")
+    vendor_kernel_boot_image = common.GetVendorKernelBootImage(
+        "IMAGES/vendor_kernel_boot.img", "vendor_kernel_boot.img", OPTIONS.input_tmp,
+        "VENDOR_KERNEL_BOOT")
+    if vendor_kernel_boot_image:
+      partitions['vendor_kernel_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_kernel_boot.img")
+      if not os.path.exists(partitions['vendor_kernel_boot']):
+        vendor_kernel_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_kernel_boot_image.AddToZip(output_zip)
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
 
   recovery_image = None
   if has_recovery:

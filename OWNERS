@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 ccross@android.com
 dwillemsen@google.com
 nanzhang@google.com
@@ -9,3 +10,8 @@ per-file * = nanzhang@google.com
 # for version updates
 per-file version_defaults.mk = aseaton@google.com
 per-file version_defaults.mk = elisapascual@google.com
+=======
+include platform/build/soong:/OWNERS
+
+per-file finalize_branch_for_release.sh = smoreland@google.com
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])

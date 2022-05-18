@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (f7b9b7 Merge "Merge empty history for sparse-8547496-L6510000095455)
 #
 # Copyright (C) 2013 The Android Open Source Project
 #
@@ -222,3 +223,5 @@ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_MIN_SDK_VERSION := $(my_min_sdk_version)
 USE_CORE_LIB_BOOTCLASSPATH :=
 
 endif
+=======
+>>>>>>> BRANCH (c458fa Merge "Version bump to TKB1.220517.001.A1 [core/build_id.mk])
