@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27a58ed6_88e44af5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2022-05-18T03:53:26Z",
+      "side": 1,
+      "message": "Yeah, I think we could leave apexs uncompressed, otherwise apex files are double caching. That is a huge difference from ext4 after apex infrastructre is landed.",
+      "revId": "8ab6603a430d0355778fa02faf2ce6f64f9b21a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
