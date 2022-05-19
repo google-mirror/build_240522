@@ -33,6 +33,23 @@
       "message": "could -\u003e should.",
       "revId": "8ab6603a430d0355778fa02faf2ce6f64f9b21a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e954ed_14dba1cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-05-19T10:23:47Z",
+      "side": 1,
+      "message": "IIUC, this file is passed directly as an input to the mkfs host tool (https://cs.android.com/android/platform/superproject/+/master:external/erofs-utils/mkfs/main.c;l\u003d91;drc\u003d59fe8bb5df743ad4bae13b364dcfc009641dc5fa) when building an erofs image.\n\nThis should be compatible with Bazel moving forward. Adding colefaust@ to take a look as well.",
+      "revId": "8ab6603a430d0355778fa02faf2ce6f64f9b21a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
