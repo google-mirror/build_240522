@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27fc96e_926533d0",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-19T12:42:25Z",
+      "side": 1,
+      "message": "See go/pystyle#default-iterators-operators-decision",
+      "revId": "006b94999f89189354c99f2aca1c13c54f9a0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c74ca3_ccec139b",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-05-19T12:42:25Z",
+      "side": 1,
+      "message": "assuming that the key is `tree.name`, this could be:\nreturn sorted(self.keys.values(), key\u003dlambda tree: tree.name)",
+      "revId": "006b94999f89189354c99f2aca1c13c54f9a0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
