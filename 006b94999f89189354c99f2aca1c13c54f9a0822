@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8a76ee_971c6418",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-19T15:11:39Z",
+      "side": 1,
+      "message": "I think the rule makes sense but doesn\u0027t apply. The list is mutated (sorted) so a direct iterator won\u0027t work, unless there\u0027s a SortingIterator or something.",
+      "parentUuid": "a27fc96e_926533d0",
+      "revId": "006b94999f89189354c99f2aca1c13c54f9a0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c74ca3_ccec139b",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-05-19T12:42:25Z",
       "side": 1,
       "message": "assuming that the key is `tree.name`, this could be:\nreturn sorted(self.keys.values(), key\u003dlambda tree: tree.name)",
+      "revId": "006b94999f89189354c99f2aca1c13c54f9a0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca947ef6_6440d124",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-19T15:11:39Z",
+      "side": 1,
+      "message": "(See the comment which I replied in email...) It\u0027s a TreeKey.",
+      "parentUuid": "e3c74ca3_ccec139b",
       "revId": "006b94999f89189354c99f2aca1c13c54f9a0822",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
