@@ -19,7 +19,7 @@ import json
 import os
 import sys
 
-import api_assembly_cc
+import cc.api_assembly as api_assembly_cc
 import ninja_tools
 
 
