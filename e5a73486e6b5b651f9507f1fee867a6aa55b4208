@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaed5355_d0ad3853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-20T08:46:25Z",
+      "side": 1,
+      "message": "thanks for adding this",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d818d615_4cad6403",
@@ -77,6 +94,29 @@
         "startChar": 1,
         "endLine": 18,
         "endChar": 2
+      },
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74395c47_2984792c",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-20T08:46:25Z",
+      "side": 1,
+      "message": "seems like this one could be folded into #1 perhaps (\"prebuilt configuration issues\"), but fine as-is too",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 14
       },
       "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
