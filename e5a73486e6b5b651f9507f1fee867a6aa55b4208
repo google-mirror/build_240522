@@ -86,6 +86,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f35fc440_f90fb657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-20T15:22:34Z",
+      "side": 1,
+      "message": "Thanks for the suggestions!",
+      "parentUuid": "22a51be4_7dd6be52",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27ad7f53_3831d242",
@@ -99,6 +117,24 @@
       "writtenOn": "2022-05-20T15:15:26Z",
       "side": 1,
       "message": "Another one I just found. Forgetting to set \"installable: true\" (or as in my case accidentally removing it instead of just moving it).",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5527918_258d05c0",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-20T15:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27ad7f53_3831d242",
       "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -210,6 +246,30 @@
       "writtenOn": "2022-05-20T15:15:26Z",
       "side": 1,
       "message": "Or sanitizer is enabled.",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cdeafdf_c611d5f1",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-20T15:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f542de_be080c0c",
       "range": {
         "startLine": 27,
         "startChar": 20,
