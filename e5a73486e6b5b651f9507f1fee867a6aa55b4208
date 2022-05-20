@@ -69,6 +69,40 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a51be4_7dd6be52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-05-20T15:15:26Z",
+      "side": 1,
+      "message": "This is really helpful. I just had to deal with some of these issues so the pain is fresh.",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ad7f53_3831d242",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-05-20T15:15:26Z",
+      "side": 1,
+      "message": "Another one I just found. Forgetting to set \"installable: true\" (or as in my case accidentally removing it instead of just moving it).",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d818d615_4cad6403",
@@ -158,6 +192,29 @@
         "startChar": 0,
         "endLine": 25,
         "endChar": 14
+      },
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f542de_be080c0c",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-05-20T15:15:26Z",
+      "side": 1,
+      "message": "Or sanitizer is enabled.",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 28
       },
       "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
