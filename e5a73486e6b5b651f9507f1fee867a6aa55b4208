@@ -52,6 +52,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade7ff1a_b0766af9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-20T10:00:52Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d818d615_4cad6403",
@@ -112,6 +129,30 @@
       "writtenOn": "2022-05-20T08:46:25Z",
       "side": 1,
       "message": "seems like this one could be folded into #1 perhaps (\"prebuilt configuration issues\"), but fine as-is too",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 14
+      },
+      "revId": "e5a73486e6b5b651f9507f1fee867a6aa55b4208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a3ae80_d6b41554",
+        "filename": "core/tasks/README.dex_preopt_check.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-20T10:00:52Z",
+      "side": 1,
+      "message": "In theory, yes, this and #1 can be considered as the same issue, but I want to keep this separate from #1 to emphasize that the problem can be on an individual Soong module, while #1 is more about a problem in the overall configuration.",
+      "parentUuid": "74395c47_2984792c",
       "range": {
         "startLine": 22,
         "startChar": 0,
