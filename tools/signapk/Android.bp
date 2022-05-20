@@ -40,3 +40,8 @@ java_binary_host {
         targets: ["droidcore"],
     },
 }
+
+cc_binary_host  {
+    name: "signapkdummy",
+    srcs: ["signapkdummy.c"],
+}
