@@ -16,33 +16,70 @@
 
 import os
 
-def assemble_cc_api_library(context, ninja, build_file, stub_library):
-    staging_dir = context.out.api_library_dir(stub_library.api_surface,
-            stub_library.api_surface_version, stub_library.name)
-    work_dir = context.out.api_library_work_dir(stub_library.api_surface,
-            stub_library.api_surface_version, stub_library.name)
+from cc.stub_generator import StubGenerator, GenCcStubsInput
 
-    # Generate rules to copy headers
-    includes = []
-    include_dir = os.path.join(staging_dir, "include")
-    for contrib in stub_library.contributions:
-        for headers in contrib.library_contribution["headers"]:
-            root = headers["root"]
-            for file in headers["files"]:
-                # TODO: Deal with collisions of the same name from multiple contributions
-                include = os.path.join(include_dir, file)
-                ninja.add_copy_file(include, os.path.join(contrib.inner_tree.root, root, file))
-                includes.append(include)
+ARCH = ["arm", "arm64", "x86", "x86_64"]
 
-    # Generate rule to run ndkstubgen
+class CcApiAssemblyContext(object):
+    """Context object for managing global state of CC API Assembly"""
+    def __init__(self):
+        self._stub_generator = StubGenerator()
 
+    def get_cc_api_library_assembler(self):
+        """Return a callback function to assemble CC library APIs
+        The callback is a member of the context object, and therefore has access to its state"""
+        return self.assemble_cc_api_library
 
-    # Generate rule to compile stubs to library
+    def assemble_cc_api_library(self, context, ninja, build_file, stub_library):
+        staging_dir = context.out.api_library_dir(stub_library.api_surface,
+                stub_library.api_surface_version, stub_library.name)
+        work_dir = context.out.api_library_work_dir(stub_library.api_surface,
+                stub_library.api_surface_version, stub_library.name)
 
-    # Generate phony rule to build the library
-    # TODO: This name probably conflictgs with something
-    ninja.add_phony("-".join((stub_library.api_surface, str(stub_library.api_surface_version),
-            stub_library.name)), includes)
+        # Generate rules to copy headers
+        includes = []
+        include_dir = os.path.join(staging_dir, "include")
+        for contrib in stub_library.contributions:
+            for headers in contrib.library_contribution["headers"]:
+                root = headers["root"]
+                for file in headers["files"]:
+                    # TODO: Deal with collisions of the same name from multiple contributions
+                    include = os.path.join(include_dir, file)
+                    ninja.add_copy_file(include, os.path.join(contrib.inner_tree.root, root, file))
+                    includes.append(include)
 
-    # Generate build files
+        # Generate rule to run ndkstubgen
+        self._stub_generator.add_stub_gen_rule(ninja)
 
+        for contrib in stub_library.contributions:
+            # Copy API file from inner tree to staging directory
+            api = contrib.library_contribution["api"]
+            api_file_staging_dir = os.path.join(staging_dir, api)
+            ninja.add_copy_file(api_file_staging_dir,
+                                os.path.join(contrib.inner_tree.root, api))
+
+            # Generate ninja _build actions_ for every single arch
+            # The artifacts will not be built unless the arch matches the current lunch config
+            #
+            # This redundancy is acceptable since this means that we can choose to not
+            # recompile the ninja file if we use a different lunch config
+            for arch in ARCH:
+                # Generate stub .c files using ndkstubgen
+                # TODO: Add --llndk or --apex to additonal_args for the correct API surfaces
+                inputs = GenCcStubsInput(arch=arch,
+                                         version= stub_library.api_surface_version,
+                                         api=api_file_staging_dir,
+                                         additional_args="",
+                                         )
+                stub_outputs = self._stub_generator.add_stub_gen_action(ninja, inputs, work_dir)
+
+                # Compile stub .c files to .o files
+
+                # Link .o file to .so file
+
+        # Generate phony rule to build the library
+        # TODO: This name probably conflictgs with something
+        ninja.add_phony("-".join((stub_library.api_surface, str(stub_library.api_surface_version),
+                stub_library.name)), includes)
+
+        # Generate build files
