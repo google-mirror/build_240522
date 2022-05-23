@@ -16,6 +16,11 @@
 
 import os
 
+from cc.stub_generator import StubGenerator, GenCcStubsInput
+
+# TODO: Move this from global scope to some context object
+stub_generator = StubGenerator()
+
 def assemble_cc_api_library(context, ninja, build_file, stub_library):
     print("\nassembling cc_api_library %s-%s %s from:" % (stub_library.api_surface,
         stub_library.api_surface_version, stub_library.name))
@@ -42,9 +47,29 @@ def assemble_cc_api_library(context, ninja, build_file, stub_library):
                 includes.append(include)
 
     # Generate rule to run ndkstubgen
+    stub_generator.add_stub_gen_rule(ninja)
 
+    arch = _get_device_arch()
+    for contrib in stub_library.contributions:
+        # Copy API file from inner tree to staging directory
+        api = contrib.library_contribution["api"]
+        # TODO: This should be a single element, list check should not be required
+        # TODO: Update configs/bazel rules to reflect this
+        api = api[0] if isinstance(api, list) else api
+        api_file_staging_dir = os.path.join(staging_dir, api)
+        ninja.add_copy_file(api_file_staging_dir,
+                            os.path.join(contrib.inner_tree.root, api))
 
-    # Generate rule to compile stubs to library
+        # Generate stub .c files using ndkstubgen
+        inputs = GenCcStubsInput(arch=arch,
+                                 version= stub_library.api_surface_version,
+                                 api=api_file_staging_dir,
+                                 )
+        stub_outputs = stub_generator.add_stub_gen_action(ninja, inputs, work_dir)
+
+        # Compile stub .c files to .o files
+
+        # Link .o file to .so file
 
     # Generate phony rule to build the library
     # TODO: This name probably conflictgs with something
@@ -53,3 +78,10 @@ def assemble_cc_api_library(context, ninja, build_file, stub_library):
 
     # Generate build files
 
+def _get_device_arch() -> str:
+    """Returns architecture of the target device
+    This is used by ndkstubgen to gate arch-specific APIs defined in .map.txt
+    files"""
+    # TODO: This should be configured somewhere (probably lunch?)
+    # TODO: Return "arm64" for now
+    return "arm64"

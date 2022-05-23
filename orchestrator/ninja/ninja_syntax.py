@@ -97,8 +97,8 @@ class BuildAction(Node):
   '''Describes the dependency edge between inputs and output
   https://ninja-build.org/manual.html#_build_statements'''
 
-  def __init__(self, output: str, rule: str, inputs: List[str]=None, implicits: List[str]=None, order_only: List[str]=None):
-    self.output = output
+  def __init__(self, output: List[str], rule: str, inputs: List[str]=None, implicits: List[str]=None, order_only: List[str]=None):
+    self.output = self._as_list(output)
     self.rule = rule
     self.inputs = self._as_list(inputs)
     self.implicits = self._as_list(implicits)
@@ -112,7 +112,8 @@ class BuildAction(Node):
   def stream(self) -> Iterator[str]:
     self._validate()
 
-    build_statement = f"build {self.output}: {self.rule}"
+    output = " ".join(self.output)
+    build_statement = f"build {output}: {self.rule}"
     if len(self.inputs) > 0:
       build_statement += " "
       build_statement += " ".join(self.inputs)
