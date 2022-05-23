@@ -48,6 +48,8 @@ def assemble_cc_api_library(context, ninja, build_file, stub_library):
 
     # Generate rule to run ndkstubgen
     stub_generator.add_stub_gen_rule(ninja)
+    # Generate rule to build api_levels.json
+    stub_generator.add_version_map_file(ninja, context.out.api_library_dir("", "", ""))
 
     arch = _get_device_arch()
     for contrib in stub_library.contributions:
