@@ -30,6 +30,7 @@ class Ninja(ninja_writer.Writer):
         super(Ninja, self).__init__(file)
         self._context = context
         self._did_copy_file = False
+        self._did_write_file = False
         self._phonies = {}
 
     def add_copy_file(self, copy_to, copy_from):
@@ -56,4 +57,17 @@ class Ninja(ninja_writer.Writer):
             self.add_phony(phony, deps)
         super(Ninja, self).write()
 
+    def add_write_file(self, filepath:str , content:str):
+        """Writes the content as a string to filepath
+        The content is written as-is, special characters are not escaped
+        """
+        if not self._did_write_file:
+            self._did_write_file = True
+            rule = Rule("write_file")
+            rule.add_variable("description", "Writes content to filepath")
+            rule.add_variable("command", f"printf '{content}' > {filepath}")
+            self.add_rule(rule)
 
+        build_action = BuildAction(filepath, "write_file")
+        build_action.add_variable("content", content)
+        self.add_build_action(build_action)

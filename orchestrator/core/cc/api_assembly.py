@@ -50,6 +50,10 @@ class CcApiAssemblyContext(object):
 
         # Generate rule to run ndkstubgen
         self._stub_generator.add_stub_gen_rule(ninja)
+        # Generate rule to build api_levels.json
+        # This file does not vary across (surface,version,lib) tuples. Write this file to the top-level
+        # work directory
+        self._stub_generator.add_version_map_file(ninja, context.out.api_library_work_dir("", "", ""))
 
         for contrib in stub_library.contributions:
             # Copy API file from inner tree to staging directory
