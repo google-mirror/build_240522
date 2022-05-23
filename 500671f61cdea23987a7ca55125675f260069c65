@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46928bc6_a779c447",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-05-23T10:11:36Z",
+      "side": 1,
+      "message": "I need a new CR vote because I updated OWNERS. Thanks.",
+      "revId": "500671f61cdea23987a7ca55125675f260069c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
