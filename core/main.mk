@@ -1966,12 +1966,14 @@ LSDUMP_PATHS_FILE := $(PRODUCT_OUT)/lsdump_paths.txt
 
 .PHONY: findlsdumps
 # LSDUMP_PATHS is a list of tag:path.
-findlsdumps: $(LSDUMP_PATHS_FILE) $(foreach p,$(LSDUMP_PATHS),$(call word-colon,2,$(p)))
+findlsdumps: lsdump_paths
+findlsdumps: $(foreach p,$(LSDUMP_PATHS),$(call word-colon,2,$(p)))
 
-$(LSDUMP_PATHS_FILE): PRIVATE_LSDUMP_PATHS := $(LSDUMP_PATHS)
-$(LSDUMP_PATHS_FILE):
-	@echo "Generate $@"
-	@rm -rf $@ && echo -e "$(subst :,:$(space),$(subst $(space),\n,$(PRIVATE_LSDUMP_PATHS)))" > $@
+.PHONY: lsdump_paths
+lsdump_paths:
+	@echo "Generate $(LSDUMP_PATHS_FILE)"
+	@rm -rf "$(LSDUMP_PATHS_FILE)"
+	@echo -e "$(subst :,:$(space),$(subst $(space),\n,$(LSDUMP_PATHS)))" > "$(LSDUMP_PATHS_FILE)"
 
 .PHONY: check-elf-files
 check-elf-files:
