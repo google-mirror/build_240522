@@ -1,0 +1,1 @@
+../../../../soong/cc/ndkstubgen/__init__.py
