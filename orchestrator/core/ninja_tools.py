@@ -30,6 +30,7 @@ class Ninja(ninja_writer.Writer):
         super(Ninja, self).__init__(file)
         self._context = context
         self._did_copy_file = False
+        self._did_write_file = False
 
     def add_copy_file(self, copy_to, copy_from):
         if not self._did_copy_file:
@@ -43,4 +44,18 @@ class Ninja(ninja_writer.Writer):
         build_action.add_variable("out_dir", os.path.dirname(copy_to))
         self.add_build_action(build_action)
 
+    def add_write_file(self, filepath:str , content:str):
+        """Writes the content as a string to filepath
+        The content is written as-is, special characters will not be escaped
+        """
+        if not self._did_write_file:
+            self._did_write_file = True
+            rule = Rule("write_file")
+            rule.add_variable("description", "Writes content to filepath")
+            rule.add_variable("command", f"printf '{content}' > {filepath}")
+            self.add_rule(rule)
+
+        build_action = BuildAction(filepath, "write_file")
+        build_action.add_variable("content", content)
+        self.add_build_action(build_action)
 

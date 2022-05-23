@@ -41,24 +41,30 @@ class TestStubGenerator(unittest.TestCase):
         with self.assertRaises(Exception):
             stub_generator.add_stub_gen_action(ninja, stub_inputs, "out")
 
-    # the ndkstubgen binary is an implicit deps
-    # ninja should recompile stubs if it changes
+    # the ndkstubgen binary and api_levels.json are implicit deps
+    # ninja should recompile stubs if any of these changes
     def test_implicit_deps(self):
         ninja = Ninja(context=None, file=None)
         stub_generator = StubGenerator()
         stub_generator.add_stub_gen_rule(ninja)
+        stub_generator.add_version_map_file(ninja, "out/api_surfaces")
         stub_inputs = GenCcStubsInput("x86", "33", "libfoo.map.txt")
         stub_generator.add_stub_gen_action(ninja, stub_inputs, "out")
         build_actions = [node for node in ninja.nodes if isinstance(node,
                                                                     BuildAction)]
         assert build_actions
+        # filter out build action for api_levels.json
+        build_actions = [build_action for build_action in build_actions if not build_action.output == ["out/api_surfaces/api_levels.json"]]
         assert all([NDKSTUBGEN in build_action.implicits for build_action in
+                    build_actions])
+        assert all(["out/api_surfaces/api_levels.json" in build_action.implicits for build_action in
                     build_actions])
 
     def test_output_contains_c_stubs(self):
         ninja = Ninja(context=None, file=None)
         stub_generator = StubGenerator()
         stub_generator.add_stub_gen_rule(ninja)
+        stub_generator.add_version_map_file(ninja, "out/api_surfaces")
         stub_inputs = GenCcStubsInput("x86", "33", "libfoo.map.txt")
         outputs = stub_generator.add_stub_gen_action(ninja, stub_inputs, "out")
         assert len(outputs) > 0
