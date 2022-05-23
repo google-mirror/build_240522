@@ -62,9 +62,7 @@ class InnerBuildSoong(common.Commands):
                                     ]
                                 }
                             ],
-                            "api": [
-                                "build/build/make/orchestrator/test_workspace/inner_tree_1/libhello1"
-                            ]
+                            "api": "build/build/make/orchestrator/test_workspace/inner_tree_1/libhello1"
                         }
                     ]
                 }"""))
