@@ -1,0 +1,1 @@
+../../../../soong/cc/symbolfile/__init__.py

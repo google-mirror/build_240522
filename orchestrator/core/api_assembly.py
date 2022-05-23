@@ -19,7 +19,7 @@ import json
 import os
 import sys
 
-import cc.api_assembly as api_assembly_cc
+from cc.api_assembly import CcApiAssemblyContext
 import ninja_tools
 
 
@@ -143,7 +143,7 @@ def assemble_resource_api_library(context, ninja, build_file, stub_library):
 
 
 STUB_LANGUAGE_HANDLERS = {
-    "cc_libraries": api_assembly_cc.assemble_cc_api_library,
+    "cc_libraries": CcApiAssemblyContext().get_cc_api_library_assembler(),
     "java_libraries": assemble_java_api_library,
     "resource_libraries": assemble_resource_api_library,
 }
