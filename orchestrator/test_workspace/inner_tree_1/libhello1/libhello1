@@ -1,0 +1,6 @@
+LIBHELLO {
+    global:
+        hello1; # introduced=1
+    local:
+        *;
+};
