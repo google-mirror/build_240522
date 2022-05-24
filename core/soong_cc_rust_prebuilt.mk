@@ -155,6 +155,13 @@ ifeq ($(my_check_same_vndk_variants),true)
 	    $(PRIVATE_TOOLS_PREFIX))
 	touch $@
 
+  # Add the timestamp to the CHECKED list so that `checkbuild` can run it.
+  # Note that because `checkbuild` doesn't check LOCAL_BUILT_MODULE for soong-built modules adding
+  # the timestamp to LOCAL_BUILT_MODULE isn't enough. It is skipped when the vendor variant
+  # isn't used at all and it may break in the downstream trees.
+  ALL_MODULES.$(my_register_name).CHECKED := \
+    $(ALL_MODULES.$(my_register_name).CHECKED) $(same_vndk_variants_stamp)
+
   $(LOCAL_BUILT_MODULE): $(same_vndk_variants_stamp)
 endif
 
