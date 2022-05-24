@@ -22,6 +22,75 @@
       },
       "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d803fdd_9e060106",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-05-24T16:17:18Z",
+      "side": 1,
+      "message": "... and maybe even this?",
+      "range": {
+        "startLine": 551,
+        "startChar": 22,
+        "endLine": 551,
+        "endChar": 30
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e229f8_a5552554",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-05-24T16:17:18Z",
+      "side": 1,
+      "message": "... and this too.",
+      "range": {
+        "startLine": 723,
+        "startChar": 18,
+        "endLine": 723,
+        "endChar": 26
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d31e8c5_c0450d75",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-05-24T16:17:18Z",
+      "side": 1,
+      "message": "This should probably change as well, for the sake of consistency.",
+      "range": {
+        "startLine": 838,
+        "startChar": 18,
+        "endLine": 838,
+        "endChar": 26
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
