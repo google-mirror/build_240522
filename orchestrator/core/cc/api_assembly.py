@@ -17,9 +17,12 @@
 import os
 
 from cc.stub_generator import StubGenerator, GenCcStubsInput
+from cc.library import CompileContext, Compiler, LinkContext, Linker
 
 # TODO: Move this from global scope to some context object
 stub_generator = StubGenerator()
+compiler = Compiler()
+linker = Linker()
 
 def assemble_cc_api_library(context, ninja, build_file, stub_library):
     print("\nassembling cc_api_library %s-%s %s from:" % (stub_library.api_surface,
@@ -70,8 +73,32 @@ def assemble_cc_api_library(context, ninja, build_file, stub_library):
         stub_outputs = stub_generator.add_stub_gen_action(ninja, inputs, work_dir)
 
         # Compile stub .c files to .o files
+        object_file = stub_outputs.stub_src + ".o"
+        # These compile flags have been plugged in from ndk_library.go
+        flags = " ".join(["-Wno-incompatible-library-redeclaration",
+                "-Wno-incomplete-setjmp-declaration",
+                "-Wno-builtin-requires-header",
+                "-Wno-invalid-noreturn",
+                "-Wall",
+                "-Werror",
+                ])
+        compile_context = CompileContext(src=stub_outputs.stub_src,
+                flags=flags,
+                out=object_file)
+        compiler.compile(ninja, compile_context)
 
         # Link .o file to .so file
+        soname = stub_library.name + ".so"
+        shared_library = os.path.join(staging_dir, soname)
+        flags = " ".join([
+            "-shared",
+            f"-Wl,-soname,{soname}",
+            f"-Wl,--version-script,{stub_outputs.version_script}",
+            ])
+        link_context = LinkContext(objs=[object_file],
+                flags=flags,
+                out=shared_library)
+        linker.link(ninja, link_context)
 
     # Generate phony rule to build the library
     # TODO: This name probably conflictgs with something
