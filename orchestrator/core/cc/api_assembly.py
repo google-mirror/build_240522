@@ -17,6 +17,7 @@
 import os
 
 from cc.stub_generator import StubGenerator, GenCcStubsInput
+from cc.library import CompileContext, Compiler, LinkContext, Linker
 
 ARCH = ["arm", "arm64", "x86", "x86_64"]
 
@@ -24,6 +25,8 @@ class CcApiAssemblyContext(object):
     """Context object for managing global state of CC API Assembly"""
     def __init__(self):
         self._stub_generator = StubGenerator()
+        self._compiler = Compiler()
+        self._linker = Linker()
 
     def get_cc_api_library_assembler(self):
         """Return a callback function to assemble CC library APIs
@@ -76,10 +79,40 @@ class CcApiAssemblyContext(object):
                                          additional_args="",
                                          )
                 stub_outputs = self._stub_generator.add_stub_gen_action(ninja, inputs, work_dir)
-
                 # Compile stub .c files to .o files
+                object_file = stub_outputs.stub_src + ".o"
+                # These compile flags have been plugged in from ndk_library.go
+                flags = " ".join(["-Wno-incompatible-library-redeclaration",
+                        "-Wno-incomplete-setjmp-declaration",
+                        "-Wno-builtin-requires-header",
+                        "-Wno-invalid-noreturn",
+                        "-Wall",
+                        "-Werror",
+                        ])
+                compile_context = CompileContext(
+                        src=stub_outputs.stub_src,
+                        flags=flags,
+                        out=object_file,
+                        frontend=context.tools.clang(),
+                )
+                self._compiler.compile(ninja, compile_context)
 
                 # Link .o file to .so file
+                soname = stub_library.name + ".so"
+                shared_library = os.path.join(staging_dir, arch, soname)
+                flags = " ".join([
+                    "-shared",
+                    f"-Wl,-soname,{soname}",
+                    f"-Wl,--version-script,{stub_outputs.version_script}",
+                    ])
+                link_context = LinkContext(
+                        objs=[object_file],
+                        flags=flags,
+                        out=shared_library,
+                        frontend=context.tools.clang_cc(),
+                )
+                self._linker.link(ninja, link_context)
+
 
         # Generate phony rule to build the library
         # TODO: This name probably conflictgs with something

@@ -111,7 +111,6 @@ class Errors(object):
         """Get all errors that were reported."""
         return self._all
 
-
 class HostTools(object):
     def __init__(self):
         if platform.system() == "Linux":
@@ -130,6 +129,11 @@ class HostTools(object):
     def ninja(self):
         return self._ninja
 
+    def clang(self):
+        return "/usr/bin/clang" # TODO: Use the hermetic toolchain
+
+    def clang_cc(self):
+        return "/usr/bin/clang++" # TODO: Use the hermetic toolchain
 
 def choose_out_dir():
     """Get the root of the out dir, either from the environment or by picking
