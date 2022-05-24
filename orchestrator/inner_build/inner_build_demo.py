@@ -56,13 +56,13 @@ class InnerBuildSoong(common.Commands):
                             "name": "libhello1",
                             "headers": [
                                 {
-                                    "root": "build/build/make/orchestrator/test_workspace/inner_tree_1",
+                                    "root": "include",
                                     "files": [
                                         "hello1.h"
                                     ]
                                 }
                             ],
-                            "api": "build/build/make/orchestrator/test_workspace/inner_tree_1/libhello1"
+                            "api": "libhello1/libhello1"
                         }
                     ]
                 }"""))
