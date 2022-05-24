@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad688192_0fb0d5ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-24T15:53:28Z",
+      "side": 1,
+      "message": "could arguably be x86 or x86_64 (for cf), but arm64 is at least better than arm.",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
