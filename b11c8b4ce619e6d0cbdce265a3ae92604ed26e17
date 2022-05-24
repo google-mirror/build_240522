@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8169243_6adea273",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2022-05-24T02:50:22Z",
+      "side": 1,
+      "message": "I don\u0027t think makefile is responsible for reverting the edit.\nYou can have create_reference_dumps.py delete the file before building it.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 10
+      },
+      "revId": "b11c8b4ce619e6d0cbdce265a3ae92604ed26e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4101a353_6985b331",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2022-05-24T02:50:22Z",
+      "side": 1,
+      "message": "Unconditional targets should be avoided because they are not good for incremental builds.",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "b11c8b4ce619e6d0cbdce265a3ae92604ed26e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
