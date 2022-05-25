@@ -77,6 +77,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b80bfe3_72182c93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-25T11:00:54Z",
+      "side": 1,
+      "message": "I\u0027d agree for tapas, which is why I left it out, but not for banchan. I can send a heads up to the module authors list once our other banchan fix is in as well.",
+      "parentUuid": "2b8bb5d8_cb17b1e0",
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d803fdd_9e060106",
