@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a4be9b_c33d4ed1",
+        "filename": "orchestrator/core/api_assembly.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "This can probably be removed now",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 35
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89b920dd_38fd3b7d",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "Should this be an error instead?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bd3c927_3ab53ded",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "Is there a reason to explicitly distinguish `src` from `obj`? If we make `build_targets.json` output the files in a format that is always relative to the top of the inner tree, we can collapse this if-else clause to\n\n`ninja.add_copy_file(dest, os.path.join(tree.root, staged[\"file\"])`",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 83
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fa4559_e59e4e8a",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "nit: Replace with `out +\u003d \"_product\" if product else \"_unbundled\"`\n\n(I looked at Google\u0027s python style guide, and it seems that ternarys are ok for simple cases go/pystyle#conditional-expressions-decision)",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c6e720_f3db8dca",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "Does the new `m` override this with the checked-in g++ binary implicitly? IOW, is this hermetic?",
+      "range": {
+        "startLine": 81,
+        "startChar": 57,
+        "endLine": 81,
+        "endChar": 60
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9583c29_2d5b96f2",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-05-25T21:30:38Z",
+      "side": 1,
+      "message": "Discussed offline, the object file should be compiled from stub.c generated from the .map.txt file (and not the source hello1.c file) \n\nThis can be done in a followup CL",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 144
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
