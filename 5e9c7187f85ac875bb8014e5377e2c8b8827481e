@@ -22,6 +22,30 @@
       },
       "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57af4f6_47a4ac70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-05-25T07:42:26Z",
+      "side": 1,
+      "message": "Cool! At least it shows this change works as expected.;-)\nAnd also I expected this will find more modules missing in the list.\n\nThe other change (aosp/2104586) will fix the issue. I\u0027ll add this to the topic.",
+      "parentUuid": "cf0e1f18_6810ed00",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 4
+      },
+      "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
