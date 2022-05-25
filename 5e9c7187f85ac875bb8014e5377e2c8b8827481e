@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0e1f18_6810ed00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-05-25T07:37:48Z",
+      "side": 1,
+      "message": "also run `m checkbuild` to verify no breakage\n\nI\u0027ve kicked a checkbuild on internal master, and there are some errors \nhttps://android-build.googleplex.com/builds/pending/P35403493/aosp_bramble-userdebug/latest/view/logs/error.log\n\nandroid.hardware.audio.core-V1-ndk\nandroid.hardware.camera.provider-V1-ndk\n(The build failed as soon as first error, so there might be more!)",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 4
+      },
+      "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
