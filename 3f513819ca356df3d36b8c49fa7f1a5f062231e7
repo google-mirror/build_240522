@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9bb06ac_62c88be7",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-25T23:11:16Z",
+      "side": 1,
+      "message": "It should be allowed for an inner tree not to produce APIs and not any artifacts.  There is probably a check of context.errors.had_error() and bail out that should happen, in case that tree had errors instead of just not producing artifacts.",
+      "parentUuid": "89b920dd_38fd3b7d",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bd3c927_3ab53ded",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-05-25T21:30:38Z",
       "side": 1,
       "message": "Is there a reason to explicitly distinguish `src` from `obj`? If we make `build_targets.json` output the files in a format that is always relative to the top of the inner tree, we can collapse this if-else clause to\n\n`ninja.add_copy_file(dest, os.path.join(tree.root, staged[\"file\"])`",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 83
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e80152c2_8695bf2c",
+        "filename": "orchestrator/core/final_packaging.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-25T23:11:16Z",
+      "side": 1,
+      "message": "I waffled on this.  What I was worried about here is whether the path is relative to the root of the workspace or the root of the inner tree, and keeping track of that correctly.  That said, it strikes me that the inner trees compute the subdirectories of out/ all by appending to OUT_DIR, and they don\u0027t really know anything relative to out itself.  So I think you\u0027re right.  I\u0027ll do this change in a followup CL.",
+      "parentUuid": "2bd3c927_3ab53ded",
       "range": {
         "startLine": 85,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05aaabd5_4d3a5206",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-25T23:11:16Z",
+      "side": 1,
+      "message": "I\u0027ll fix this in a followup CL. I agree it\u0027s clearer on one line.",
+      "parentUuid": "87fa4559_e59e4e8a",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37c6e720_f3db8dca",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-05-25T21:30:38Z",
       "side": 1,
       "message": "Does the new `m` override this with the checked-in g++ binary implicitly? IOW, is this hermetic?",
+      "range": {
+        "startLine": 81,
+        "startChar": 57,
+        "endLine": 81,
+        "endChar": 60
+      },
+      "revId": "3f513819ca356df3d36b8c49fa7f1a5f062231e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a808d7cb_81fbf0dc",
+        "filename": "orchestrator/inner_build/inner_build_demo.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-05-25T23:11:16Z",
+      "side": 1,
+      "message": "This is completely not hermetic.  It\u0027s using whatever random g++ is in $PATH, if any.  Just a demo...",
+      "parentUuid": "37c6e720_f3db8dca",
       "range": {
         "startLine": 81,
         "startChar": 57,
