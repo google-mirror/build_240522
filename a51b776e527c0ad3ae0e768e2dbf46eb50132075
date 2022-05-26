@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3a4497_1cb61466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-05-26T13:34:59Z",
+      "side": 1,
+      "message": "Is there a bug associated with this?\n\nCould you add more helpful test instructions in the commit message? Something like this from the email would be fine:\n     # core - send SIGV and pull the core for process\n\n",
+      "revId": "a51b776e527c0ad3ae0e768e2dbf46eb50132075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
