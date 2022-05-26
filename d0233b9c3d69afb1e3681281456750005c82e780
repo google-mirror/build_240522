@@ -22,6 +22,30 @@
       },
       "revId": "d0233b9c3d69afb1e3681281456750005c82e780",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b8e139_96c49a7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-05-26T17:47:11Z",
+      "side": 1,
+      "message": "I know, but the sizing issue can\u0027t be avoided. Init is 3M, snapuserd is 1M, if we add these _ramdisk binaries, we can easily overflow init_boot\u0027s 8MB room.",
+      "parentUuid": "bfdb5f53_1980d803",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "d0233b9c3d69afb1e3681281456750005c82e780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
