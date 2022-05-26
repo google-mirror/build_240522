@@ -46,6 +46,30 @@
       },
       "revId": "d0233b9c3d69afb1e3681281456750005c82e780",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de16ee3b_1da1467a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-05-26T17:51:16Z",
+      "side": 1,
+      "message": "Yep, it was more of a nit about the wording here, since the next sentence would still apply.",
+      "parentUuid": "36b8e139_96c49a7c",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "d0233b9c3d69afb1e3681281456750005c82e780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
