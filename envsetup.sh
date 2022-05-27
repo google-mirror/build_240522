@@ -350,10 +350,28 @@ function addcompletions()
         return
     fi
 
+<<<<<<< HEAD   (3140a8 Merge "Merge empty history for sparse-8604412-L7750000095459)
     dir="sdk/bash_completion"
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do
             echo "including $f"
+=======
+    local completion_files=(
+      packages/modules/adb/adb.bash
+      system/core/fastboot/fastboot.bash
+      tools/asuite/asuite.sh
+    )
+    # Completion can be disabled selectively to allow users to use non-standard completion.
+    # e.g.
+    # ENVSETUP_NO_COMPLETION=adb # -> disable adb completion
+    # ENVSETUP_NO_COMPLETION=adb:bit # -> disable adb and bit completion
+    local T=$(gettop)
+    for f in ${completion_files[*]}; do
+        f="$T/$f"
+        if [ ! -f "$f" ]; then
+          echo "Warning: completion file $f not found"
+        elif should_add_completion "$f"; then
+>>>>>>> BRANCH (f327c7 Merge "Version bump to TKB1.220526.001.A1 [core/build_id.mk])
             . $f
         done
     fi

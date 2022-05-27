@@ -1650,6 +1650,7 @@ ifeq ($(my_strict),true)
 endif
 
 # Check if -Werror or -Wno-error is used in C compiler flags.
+<<<<<<< HEAD   (3140a8 Merge "Merge empty history for sparse-8604412-L7750000095459)
 # Modules defined in $(SOONG_ANDROID_MK) are checked in soong's cc.go.
 ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
   # Header libraries do not need cflags.
@@ -1670,6 +1671,25 @@ ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
             $(eval MODULES_ADDED_WALL := $(MODULES_ADDED_WALL) $(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE))
             my_cflags := -Wall $(my_cflags)
           endif
+=======
+# Header libraries do not need cflags.
+my_all_cflags := $(my_cflags) $(my_cppflags) $(my_cflags_no_override)
+ifneq (HEADER_LIBRARIES,$(LOCAL_MODULE_CLASS))
+  # Prebuilt modules do not need cflags.
+  ifeq (,$(LOCAL_PREBUILT_MODULE_FILE))
+    # Issue warning if -Wno-error is used.
+    ifneq (,$(filter -Wno-error,$(my_all_cflags)))
+      $(eval MODULES_USING_WNO_ERROR := $(MODULES_USING_WNO_ERROR) $(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE))
+    else
+      # Issue warning if -Werror is not used. Add it.
+      ifeq (,$(filter -Werror,$(my_all_cflags)))
+        # Add -Wall -Werror unless the project is in the WARNING_ALLOWED project list.
+        ifeq (,$(strip $(call find_warning_allowed_projects,$(LOCAL_PATH))))
+          my_cflags := -Wall -Werror $(my_cflags)
+        else
+          $(eval MODULES_WARNINGS_ALLOWED := $(MODULES_USING_WNO_ERROR) $(LOCAL_MODULE_MAKEFILE):$(LOCAL_MODULE))
+          my_cflags := -Wall $(my_cflags)
+>>>>>>> BRANCH (f327c7 Merge "Version bump to TKB1.220526.001.A1 [core/build_id.mk])
         endif
       endif
     endif
