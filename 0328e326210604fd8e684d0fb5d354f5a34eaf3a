@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733f8ff3_4772f55d",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-31T09:12:18Z",
+      "side": 1,
+      "message": "Leaving these old functions alone.",
+      "parentUuid": "0d803fdd_9e060106",
+      "range": {
+        "startLine": 551,
+        "startChar": 22,
+        "endLine": 551,
+        "endChar": 30
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11e229f8_a5552554",
@@ -141,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e22cdac_5963f41f",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-31T09:12:18Z",
+      "side": 1,
+      "message": "leaving lunch alone for now",
+      "parentUuid": "11e229f8_a5552554",
+      "range": {
+        "startLine": 723,
+        "startChar": 18,
+        "endLine": 723,
+        "endChar": 26
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d31e8c5_c0450d75",
@@ -154,6 +202,30 @@
       "writtenOn": "2022-05-24T16:17:18Z",
       "side": 1,
       "message": "This should probably change as well, for the sake of consistency.",
+      "range": {
+        "startLine": 838,
+        "startChar": 18,
+        "endLine": 838,
+        "endChar": 26
+      },
+      "revId": "0328e326210604fd8e684d0fb5d354f5a34eaf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3446df6_af9849f6",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-05-31T09:12:18Z",
+      "side": 1,
+      "message": "I\u0027m going to leave tapas alone for now. I don\u0027t really know who uses it.",
+      "parentUuid": "0d31e8c5_c0450d75",
       "range": {
         "startLine": 838,
         "startChar": 18,
