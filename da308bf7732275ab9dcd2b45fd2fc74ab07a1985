@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb43a8c_b2b57031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1742951
+      },
+      "writtenOn": "2022-05-31T13:28:04Z",
+      "side": 1,
+      "message": "Reverting changes to implementation of SePolicy signing",
+      "revId": "da308bf7732275ab9dcd2b45fd2fc74ab07a1985",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
