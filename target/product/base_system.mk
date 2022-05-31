@@ -286,6 +286,8 @@ PRODUCT_PACKAGES += \
     wifi.rc \
     wm \
 
+PRODUCT_PACKAGES += OfflineLocationTimeZoneProviderService
+
 # VINTF data for system image
 PRODUCT_PACKAGES += \
     system_manifest.xml \
