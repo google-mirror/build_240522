@@ -88,6 +88,39 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+
+  --avb_extra_custom_image_key <partition=key>
+  --avb_extra_custom_image_algorithm <partition=algorithm>
+      Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
+      the specified custom images mounted on the partition. Otherwise it uses
+      the existing values in info dict.
+
+  --avb_extra_custom_image_extra_args <partition=extra_args>
+      Specify any additional args that are needed to AVB-sign the custom images
+      mounted on the partition (e.g. "--signing_helper /path/to/helper"). The
+      args will be appended to the existing ones in info dict.
+
+  --gki_signing_algorithm <algorithm>
+  --gki_signing_key <key>
+      Use the specified algorithm (e.g. SHA256_RSA4096) and the key to generate
+      'boot signature' in a v4 boot.img. Otherwise it uses the existing values
+      in info dict.
+
+  --gki_signing_extra_args <args>
+      Specify any additional args that are needed to generate 'boot signature'
+      (e.g. --prop foo:bar). The args will be appended to the existing ones
+      in info dict.
+
+  --android_jar_path <path>
+      Path to the android.jar to repack the apex file.
+
+  --allow_gsi_debug_sepolicy
+      Allow the existence of the file 'userdebug_plat_sepolicy.cil' under
+      (/system/system_ext|/system_ext)/etc/selinux.
+      If not set, error out when the file exists.
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
 """
 
 from __future__ import print_function
@@ -128,6 +161,61 @@ OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
 OPTIONS.avb_extra_args = {}
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+OPTIONS.gki_signing_key = None
+OPTIONS.gki_signing_algorithm = None
+OPTIONS.gki_signing_extra_args = None
+OPTIONS.android_jar_path = None
+OPTIONS.vendor_partitions = set()
+OPTIONS.vendor_otatools = None
+OPTIONS.allow_gsi_debug_sepolicy = False
+
+
+AVB_FOOTER_ARGS_BY_PARTITION = {
+    'boot': 'avb_boot_add_hash_footer_args',
+    'init_boot': 'avb_init_boot_add_hash_footer_args',
+    'dtbo': 'avb_dtbo_add_hash_footer_args',
+    'product': 'avb_product_add_hashtree_footer_args',
+    'recovery': 'avb_recovery_add_hash_footer_args',
+    'system': 'avb_system_add_hashtree_footer_args',
+    'system_dlkm': "avb_system_dlkm_add_hashtree_footer_args",
+    'system_ext': 'avb_system_ext_add_hashtree_footer_args',
+    'system_other': 'avb_system_other_add_hashtree_footer_args',
+    'odm': 'avb_odm_add_hashtree_footer_args',
+    'odm_dlkm': 'avb_odm_dlkm_add_hashtree_footer_args',
+    'pvmfw': 'avb_pvmfw_add_hash_footer_args',
+    'vendor': 'avb_vendor_add_hashtree_footer_args',
+    'vendor_boot': 'avb_vendor_boot_add_hash_footer_args',
+    'vendor_kernel_boot': 'avb_vendor_kernel_boot_add_hash_footer_args',
+    'vendor_dlkm': "avb_vendor_dlkm_add_hashtree_footer_args",
+    'vbmeta': 'avb_vbmeta_args',
+    'vbmeta_system': 'avb_vbmeta_system_args',
+    'vbmeta_vendor': 'avb_vbmeta_vendor_args',
+}
+
+
+# Check that AVB_FOOTER_ARGS_BY_PARTITION is in sync with AVB_PARTITIONS.
+for partition in common.AVB_PARTITIONS:
+  if partition not in AVB_FOOTER_ARGS_BY_PARTITION:
+    raise RuntimeError("Missing {} in AVB_FOOTER_ARGS".format(partition))
+
+# Partitions that can be regenerated after signing using a separate
+# vendor otatools package.
+ALLOWED_VENDOR_PARTITIONS = set(["vendor", "odm"])
+
+
+def IsApexFile(filename):
+  return filename.endswith(".apex") or filename.endswith(".capex")
+
+
+def GetApexFilename(filename):
+  name = os.path.basename(filename)
+  # Replace the suffix for compressed apex
+  if name.endswith(".capex"):
+    return name.replace(".capex", ".apex")
+  return name
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
 
 
 def GetApkCerts(certmap):
@@ -144,6 +232,7 @@ def GetApkCerts(certmap):
   return certmap
 
 
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
 def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
   """Check that all the APKs we want to sign have keys specified, and
   error out if they don't."""
@@ -151,6 +240,131 @@ def CheckAllApksSigned(input_tf_zip, apk_key_map, compressed_extension):
   compressed_apk_extension = None
   if compressed_extension:
     compressed_apk_extension = ".apk" + compressed_extension
+=======
+def GetApexKeys(keys_info, key_map):
+  """Gets APEX payload and container signing keys by applying the mapping rules.
+
+  Presigned payload / container keys will be set accordingly.
+
+  Args:
+    keys_info: A dict that maps from APEX filenames to a tuple of (payload_key,
+        container_key, sign_tool).
+    key_map: A dict that overrides the keys, specified via command-line input.
+
+  Returns:
+    A dict that contains the updated APEX key mapping, which should be used for
+    the current signing.
+
+  Raises:
+    AssertionError: On invalid container / payload key overrides.
+  """
+  # Apply all the --extra_apex_payload_key options to override the payload
+  # signing keys in the given keys_info.
+  for apex, key in OPTIONS.extra_apex_payload_keys.items():
+    if not key:
+      key = 'PRESIGNED'
+    if apex not in keys_info:
+      logger.warning('Failed to find %s in target_files; Ignored', apex)
+      continue
+    keys_info[apex] = (key, keys_info[apex][1], keys_info[apex][2])
+
+  # Apply the key remapping to container keys.
+  for apex, (payload_key, container_key, sign_tool) in keys_info.items():
+    keys_info[apex] = (payload_key, key_map.get(container_key, container_key), sign_tool)
+
+  # Apply all the --extra_apks options to override the container keys.
+  for apex, key in OPTIONS.extra_apks.items():
+    # Skip non-APEX containers.
+    if apex not in keys_info:
+      continue
+    if not key:
+      key = 'PRESIGNED'
+    keys_info[apex] = (keys_info[apex][0], key_map.get(key, key), keys_info[apex][2])
+
+  # A PRESIGNED container entails a PRESIGNED payload. Apply this to all the
+  # APEX key pairs. However, a PRESIGNED container with non-PRESIGNED payload
+  # (overridden via commandline) indicates a config error, which should not be
+  # allowed.
+  for apex, (payload_key, container_key, sign_tool) in keys_info.items():
+    if container_key != 'PRESIGNED':
+      continue
+    if apex in OPTIONS.extra_apex_payload_keys:
+      payload_override = OPTIONS.extra_apex_payload_keys[apex]
+      assert payload_override == '', \
+          ("Invalid APEX key overrides: {} has PRESIGNED container but "
+           "non-PRESIGNED payload key {}").format(apex, payload_override)
+    if payload_key != 'PRESIGNED':
+      print(
+          "Setting {} payload as PRESIGNED due to PRESIGNED container".format(
+              apex))
+    keys_info[apex] = ('PRESIGNED', 'PRESIGNED', None)
+
+  return keys_info
+
+
+def GetApkFileInfo(filename, compressed_extension, skipped_prefixes):
+  """Returns the APK info based on the given filename.
+
+  Checks if the given filename (with path) looks like an APK file, by taking the
+  compressed extension into consideration. If it appears to be an APK file,
+  further checks if the APK file should be skipped when signing, based on the
+  given path prefixes.
+
+  Args:
+    filename: Path to the file.
+    compressed_extension: The extension string of compressed APKs (e.g. ".gz"),
+        or None if there's no compressed APKs.
+    skipped_prefixes: A set/list/tuple of the path prefixes to be skipped.
+
+  Returns:
+    (is_apk, is_compressed, should_be_skipped): is_apk indicates whether the
+    given filename is an APK file. is_compressed indicates whether the APK file
+    is compressed (only meaningful when is_apk is True). should_be_skipped
+    indicates whether the filename matches any of the given prefixes to be
+    skipped.
+
+  Raises:
+    AssertionError: On invalid compressed_extension or skipped_prefixes inputs.
+  """
+  assert compressed_extension is None or compressed_extension.startswith('.'), \
+      "Invalid compressed_extension arg: '{}'".format(compressed_extension)
+
+  # skipped_prefixes should be one of set/list/tuple types. Other types such as
+  # str shouldn't be accepted.
+  assert isinstance(skipped_prefixes, (set, list, tuple)), \
+      "Invalid skipped_prefixes input type: {}".format(type(skipped_prefixes))
+
+  compressed_apk_extension = (
+      ".apk" + compressed_extension if compressed_extension else None)
+  is_apk = (filename.endswith(".apk") or
+            (compressed_apk_extension and
+             filename.endswith(compressed_apk_extension)))
+  if not is_apk:
+    return (False, False, False)
+
+  is_compressed = (compressed_apk_extension and
+                   filename.endswith(compressed_apk_extension))
+  should_be_skipped = filename.startswith(tuple(skipped_prefixes))
+  return (True, is_compressed, should_be_skipped)
+
+
+def CheckApkAndApexKeysAvailable(input_tf_zip, known_keys,
+                                 compressed_extension, apex_keys):
+  """Checks that all the APKs and APEXes have keys specified.
+
+  Args:
+    input_tf_zip: An open target_files zip file.
+    known_keys: A set of APKs and APEXes that have known signing keys.
+    compressed_extension: The extension string of compressed APKs, such as
+        '.gz', or None if there's no compressed APKs.
+    apex_keys: A dict that contains the key mapping from APEX name to
+        (payload_key, container_key, sign_tool).
+
+  Raises:
+    AssertionError: On finding unknown APKs and APEXes.
+  """
+  unknown_files = []
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
   for info in input_tf_zip.infolist():
     if (info.filename.endswith(".apk") or
         (compressed_apk_extension and
@@ -232,9 +446,24 @@ def SignApk(data, keyname, pw, platform_api_level, codename_to_api_level_map,
 
 
 def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
                        apk_key_map, key_passwords, platform_api_level,
                        codename_to_api_level_map,
                        compressed_extension):
+=======
+                       apk_keys, apex_keys, key_passwords,
+                       platform_api_level, codename_to_api_level_map,
+                       compressed_extension):
+  # maxsize measures the maximum filename length, including the ones to be
+  # skipped.
+  try:
+    maxsize = max(
+        [len(os.path.basename(i.filename)) for i in input_tf_zip.infolist()
+         if GetApkFileInfo(i.filename, compressed_extension, [])[0]])
+  except ValueError:
+    # Sets this to zero for targets without APK files, e.g., gki_arm64.
+    maxsize = 0
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
 
   compressed_apk_extension = None
   if compressed_extension:
@@ -272,7 +501,46 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
         common.ZipWriteStr(output_tf_zip, out_info, signed_data)
       else:
         # an APK we're not supposed to sign.
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
         print("NOT signing: %s" % (name,))
+=======
+        print(
+            "NOT signing: %s\n"
+            "        (skipped due to special cert string)" % (name,))
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+
+    # Sign bundled APEX files on all partitions
+    elif IsApexFile(filename):
+      name = GetApexFilename(filename)
+
+      payload_key, container_key, sign_tool = apex_keys[name]
+
+      # We've asserted not having a case with only one of them PRESIGNED.
+      if (payload_key not in common.SPECIAL_CERT_STRINGS and
+              container_key not in common.SPECIAL_CERT_STRINGS):
+        print("    signing: %-*s container (%s)" % (
+            maxsize, name, container_key))
+        print("           : %-*s payload   (%s)" % (
+            maxsize, name, payload_key))
+
+        signed_apex = apex_utils.SignApex(
+            misc_info['avb_avbtool'],
+            data,
+            payload_key,
+            container_key,
+            key_passwords,
+            apk_keys,
+            codename_to_api_level_map,
+            no_hashtree=None,  # Let apex_util determine if hash tree is needed
+            signing_args=OPTIONS.avb_extra_args.get('apex'),
+            sign_tool=sign_tool)
+        common.ZipWrite(output_tf_zip, signed_apex, filename)
+
+      else:
+        print(
+            "NOT signing: %s\n"
+            "        (skipped due to special cert string)" % (name,))
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
     # System properties.
@@ -753,6 +1021,173 @@ def GetCodenameToApiLevelMap(input_tf_zip):
   return result
 
 
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+def ReadApexKeysInfo(tf_zip):
+  """Parses the APEX keys info from a given target-files zip.
+
+  Given a target-files ZipFile, parses the META/apexkeys.txt entry and returns a
+  dict that contains the mapping from APEX names (e.g. com.android.tzdata) to a
+  tuple of (payload_key, container_key, sign_tool).
+
+  Args:
+    tf_zip: The input target_files ZipFile (already open).
+
+  Returns:
+    (payload_key, container_key, sign_tool):
+      - payload_key contains the path to the payload signing key
+      - container_key contains the path to the container signing key
+      - sign_tool is an apex-specific signing tool for its payload contents
+  """
+  keys = {}
+  for line in tf_zip.read('META/apexkeys.txt').decode().split('\n'):
+    line = line.strip()
+    if not line:
+      continue
+    matches = re.match(
+        r'^name="(?P<NAME>.*)"\s+'
+        r'public_key="(?P<PAYLOAD_PUBLIC_KEY>.*)"\s+'
+        r'private_key="(?P<PAYLOAD_PRIVATE_KEY>.*)"\s+'
+        r'container_certificate="(?P<CONTAINER_CERT>.*)"\s+'
+        r'container_private_key="(?P<CONTAINER_PRIVATE_KEY>.*?)"'
+        r'(\s+partition="(?P<PARTITION>.*?)")?'
+        r'(\s+sign_tool="(?P<SIGN_TOOL>.*?)")?$',
+        line)
+    if not matches:
+      continue
+
+    name = matches.group('NAME')
+    payload_private_key = matches.group("PAYLOAD_PRIVATE_KEY")
+
+    def CompareKeys(pubkey, pubkey_suffix, privkey, privkey_suffix):
+      pubkey_suffix_len = len(pubkey_suffix)
+      privkey_suffix_len = len(privkey_suffix)
+      return (pubkey.endswith(pubkey_suffix) and
+              privkey.endswith(privkey_suffix) and
+              pubkey[:-pubkey_suffix_len] == privkey[:-privkey_suffix_len])
+
+    # Check the container key names, as we'll carry them without the
+    # extensions. This doesn't apply to payload keys though, which we will use
+    # full names only.
+    container_cert = matches.group("CONTAINER_CERT")
+    container_private_key = matches.group("CONTAINER_PRIVATE_KEY")
+    if container_cert == 'PRESIGNED' and container_private_key == 'PRESIGNED':
+      container_key = 'PRESIGNED'
+    elif CompareKeys(
+            container_cert, OPTIONS.public_key_suffix,
+            container_private_key, OPTIONS.private_key_suffix):
+      container_key = container_cert[:-len(OPTIONS.public_key_suffix)]
+    else:
+      raise ValueError("Failed to parse container keys: \n{}".format(line))
+
+    sign_tool = matches.group("SIGN_TOOL")
+    keys[name] = (payload_private_key, container_key, sign_tool)
+
+  return keys
+
+
+def BuildVendorPartitions(output_zip_path):
+  """Builds OPTIONS.vendor_partitions using OPTIONS.vendor_otatools."""
+  if OPTIONS.vendor_partitions.difference(ALLOWED_VENDOR_PARTITIONS):
+    logger.warning("Allowed --vendor_partitions: %s",
+                   ",".join(ALLOWED_VENDOR_PARTITIONS))
+    OPTIONS.vendor_partitions = ALLOWED_VENDOR_PARTITIONS.intersection(
+        OPTIONS.vendor_partitions)
+
+  logger.info("Building vendor partitions using vendor otatools.")
+  vendor_tempdir = common.UnzipTemp(output_zip_path, [
+      "META/*",
+      "SYSTEM/build.prop",
+      "RECOVERY/*",
+      "BOOT/*",
+      "OTA/",
+  ] + ["{}/*".format(p.upper()) for p in OPTIONS.vendor_partitions])
+
+  # Disable various partitions that build based on misc_info fields.
+  # Only partitions in ALLOWED_VENDOR_PARTITIONS can be rebuilt using
+  # vendor otatools. These other partitions will be rebuilt using the main
+  # otatools if necessary.
+  vendor_misc_info_path = os.path.join(vendor_tempdir, "META/misc_info.txt")
+  vendor_misc_info = common.LoadDictionaryFromFile(vendor_misc_info_path)
+  # Ignore if not rebuilding recovery
+  if not OPTIONS.rebuild_recovery:
+    vendor_misc_info["no_boot"] = "true"  # boot
+    vendor_misc_info["vendor_boot"] = "false"  # vendor_boot
+    vendor_misc_info["no_recovery"] = "true"  # recovery
+    vendor_misc_info["avb_enable"] = "false"  # vbmeta
+
+  vendor_misc_info["board_bpt_enable"] = "false"  # partition-table
+  vendor_misc_info["has_dtbo"] = "false"  # dtbo
+  vendor_misc_info["has_pvmfw"] = "false"  # pvmfw
+  vendor_misc_info["avb_custom_images_partition_list"] = ""  # custom images
+  vendor_misc_info["avb_building_vbmeta_image"] = "false" # skip building vbmeta
+  vendor_misc_info["use_dynamic_partitions"] = "false"  # super_empty
+  vendor_misc_info["build_super_partition"] = "false"  # super split
+  with open(vendor_misc_info_path, "w") as output:
+    for key in sorted(vendor_misc_info):
+      output.write("{}={}\n".format(key, vendor_misc_info[key]))
+
+  # Disable system partition by a placeholder of IMAGES/system.img,
+  # instead of removing SYSTEM folder.
+  # Because SYSTEM/build.prop is still needed for:
+  #   add_img_to_target_files.CreateImage ->
+  #   common.BuildInfo ->
+  #   common.BuildInfo.CalculateFingerprint
+  vendor_images_path = os.path.join(vendor_tempdir, "IMAGES")
+  if not os.path.exists(vendor_images_path):
+    os.makedirs(vendor_images_path)
+  with open(os.path.join(vendor_images_path, "system.img"), "w") as output:
+    pass
+
+  # Disable care_map.pb as not all ab_partitions are available when
+  # vendor otatools regenerates vendor images.
+  if os.path.exists(os.path.join(vendor_tempdir, "META/ab_partitions.txt")):
+    os.remove(os.path.join(vendor_tempdir, "META/ab_partitions.txt"))
+  # Disable RADIO images
+  if os.path.exists(os.path.join(vendor_tempdir, "META/pack_radioimages.txt")):
+    os.remove(os.path.join(vendor_tempdir, "META/pack_radioimages.txt"))
+
+  # Build vendor images using vendor otatools.
+  # Accept either a zip file or extracted directory.
+  if os.path.isfile(OPTIONS.vendor_otatools):
+    vendor_otatools_dir = common.MakeTempDir(prefix="vendor_otatools_")
+    common.UnzipToDir(OPTIONS.vendor_otatools, vendor_otatools_dir)
+  else:
+    vendor_otatools_dir = OPTIONS.vendor_otatools
+  cmd = [
+      os.path.join(vendor_otatools_dir, "bin", "add_img_to_target_files"),
+      "--is_signing",
+      "--add_missing",
+      "--verbose",
+      vendor_tempdir,
+  ]
+  if OPTIONS.rebuild_recovery:
+    cmd.insert(4, "--rebuild_recovery")
+
+  common.RunAndCheckOutput(cmd, verbose=True)
+
+  logger.info("Writing vendor partitions to output archive.")
+  with zipfile.ZipFile(
+      output_zip_path, "a", compression=zipfile.ZIP_DEFLATED,
+      allowZip64=True) as output_zip:
+    for p in OPTIONS.vendor_partitions:
+      img_file_path = "IMAGES/{}.img".format(p)
+      map_file_path = "IMAGES/{}.map".format(p)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, img_file_path), img_file_path)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, map_file_path), map_file_path)
+    # copy recovery.img, boot.img, recovery patch & install.sh
+    if OPTIONS.rebuild_recovery:
+      recovery_img = "IMAGES/recovery.img"
+      boot_img = "IMAGES/boot.img"
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_img), recovery_img)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, boot_img), boot_img)
+      recovery_patch_path = "VENDOR/recovery-from-boot.p"
+      recovery_sh_path = "VENDOR/bin/install-recovery.sh"
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_patch_path), recovery_patch_path)
+      common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_sh_path), recovery_sh_path)
+
+
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
 def main(argv):
 
   key_mapping_options = []
@@ -813,6 +1248,47 @@ def main(argv):
       OPTIONS.avb_algorithms['vendor'] = a
     elif o == "--avb_vendor_extra_args":
       OPTIONS.avb_extra_args['vendor'] = a
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+    elif o == "--avb_vbmeta_system_key":
+      OPTIONS.avb_keys['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_system_algorithm":
+      OPTIONS.avb_algorithms['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_system_extra_args":
+      OPTIONS.avb_extra_args['vbmeta_system'] = a
+    elif o == "--avb_vbmeta_vendor_key":
+      OPTIONS.avb_keys['vbmeta_vendor'] = a
+    elif o == "--avb_vbmeta_vendor_algorithm":
+      OPTIONS.avb_algorithms['vbmeta_vendor'] = a
+    elif o == "--avb_vbmeta_vendor_extra_args":
+      OPTIONS.avb_extra_args['vbmeta_vendor'] = a
+    elif o == "--avb_apex_extra_args":
+      OPTIONS.avb_extra_args['apex'] = a
+    elif o == "--avb_extra_custom_image_key":
+      partition, key = a.split("=")
+      OPTIONS.avb_keys[partition] = key
+    elif o == "--avb_extra_custom_image_algorithm":
+      partition, algorithm = a.split("=")
+      OPTIONS.avb_algorithms[partition] = algorithm
+    elif o == "--avb_extra_custom_image_extra_args":
+      # Setting the maxsplit parameter to one, which will return a list with
+      # two elements. e.g., the second '=' should not be splitted for
+      # 'oem=--signing_helper_with_files=/tmp/avbsigner.sh'.
+      partition, extra_args = a.split("=", 1)
+      OPTIONS.avb_extra_args[partition] = extra_args
+    elif o == "--gki_signing_key":
+      OPTIONS.gki_signing_key = a
+    elif o == "--gki_signing_algorithm":
+      OPTIONS.gki_signing_algorithm = a
+    elif o == "--gki_signing_extra_args":
+      OPTIONS.gki_signing_extra_args = a
+    elif o == "--vendor_otatools":
+      OPTIONS.vendor_otatools = a
+    elif o == "--vendor_partitions":
+      OPTIONS.vendor_partitions = set(a.split(","))
+    elif o == "--allow_gsi_debug_sepolicy":
+      OPTIONS.allow_gsi_debug_sepolicy = True
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
     else:
       return False
     return True
@@ -844,6 +1320,24 @@ def main(argv):
           "avb_vendor_algorithm=",
           "avb_vendor_key=",
           "avb_vendor_extra_args=",
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+          "avb_vbmeta_system_algorithm=",
+          "avb_vbmeta_system_key=",
+          "avb_vbmeta_system_extra_args=",
+          "avb_vbmeta_vendor_algorithm=",
+          "avb_vbmeta_vendor_key=",
+          "avb_vbmeta_vendor_extra_args=",
+          "avb_extra_custom_image_key=",
+          "avb_extra_custom_image_algorithm=",
+          "avb_extra_custom_image_extra_args=",
+          "gki_signing_key=",
+          "gki_signing_algorithm=",
+          "gki_signing_extra_args=",
+          "vendor_partitions=",
+          "vendor_otatools=",
+          "allow_gsi_debug_sepolicy",
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
       ],
       extra_option_handler=option_handler)
 
@@ -864,14 +1358,35 @@ def main(argv):
   apk_key_map = GetApkCerts(certmap)
   CheckAllApksSigned(input_zip, apk_key_map, compressed_extension)
 
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
   key_passwords = common.GetKeyPasswords(set(apk_key_map.values()))
+=======
+  apex_keys_info = ReadApexKeysInfo(input_zip)
+  apex_keys = GetApexKeys(apex_keys_info, apk_keys)
+
+  # TODO(xunchang) check for the apks inside the apex files, and abort early if
+  # the keys are not available.
+  CheckApkAndApexKeysAvailable(
+      input_zip,
+      set(apk_keys.keys()) | set(apex_keys.keys()),
+      compressed_extension,
+      apex_keys)
+
+  key_passwords = common.GetKeyPasswords(
+      set(apk_keys.values()) | set(itertools.chain(*apex_keys.values())))
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
   platform_api_level, _ = GetApiLevelAndCodename(input_zip)
   codename_to_api_level_map = GetCodenameToApiLevelMap(input_zip)
 
   ProcessTargetFiles(input_zip, output_zip, misc_info,
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
                      apk_key_map, key_passwords,
                      platform_api_level,
                      codename_to_api_level_map,
+=======
+                     apk_keys, apex_keys, key_passwords,
+                     platform_api_level, codename_to_api_level_map,
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
                      compressed_extension)
 
   common.ZipClose(input_zip)

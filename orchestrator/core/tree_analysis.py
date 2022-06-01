@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2008 The Android Open Source Project
+# Copyright (C) 2022 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# BUILD_ID is usually used to specify the branch name
-# (like "MAIN") or a branch name and a release candidate
-# (like "CRB01").  It must be a single word, and is
-# capitalized by convention.
 
-<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
-export BUILD_ID=PVS1.180830.001.A1
-=======
-BUILD_ID=TKB1.220531.001.A1
->>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
+
+def analyze_trees(context, inner_trees):
+    inner_trees.for_each_tree(run_analysis)
+
+def run_analysis(tree_key, inner_tree, cookie):
+    inner_tree.invoke(["analyze"])
+
+
+
+

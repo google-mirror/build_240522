@@ -68,6 +68,11 @@ class Options(object):
     # Stash size cannot exceed cache_size * threshold.
     self.cache_size = None
     self.stash_threshold = 0.8
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+    self.logfile = None
+    self.host_tools = {}
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
 
 
 OPTIONS = Options()

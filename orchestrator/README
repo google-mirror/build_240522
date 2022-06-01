@@ -1,0 +1,11 @@
+<<<<<<< HEAD   (a431b8 Merge "Merge empty history for sparse-8651103-L9450000095480)
+=======
+DEMO
+
+from the root of the workspace
+
+multitree_lunch build/build/make/orchestrator/test_workspace/combo.mcombo eng
+
+rm -rf out && multitree_build && echo "==== Files ====" && find out -type f
+
+>>>>>>> BRANCH (070e77 Merge "Version bump to TKB1.220531.001.A1 [core/build_id.mk])
