@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b08854_fcf6cbe7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-01T23:43:30Z",
+      "side": 1,
+      "message": "Is it worth fixing this vs. converting affect modules to Android.bp?",
+      "revId": "51ad6b81a8f991cf8c7e32cd4c36f9a8155fa217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
