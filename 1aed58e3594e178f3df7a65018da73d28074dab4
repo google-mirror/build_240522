@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1acb7b_425067b2",
+        "filename": "core/definitions.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-01T23:46:03Z",
+      "side": 1,
+      "message": "What is this for?  It doesn\u0027t seem related to licensing, and I can\u0027t see an reason it would be necessary.",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 305,
+        "endChar": 11
+      },
+      "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
