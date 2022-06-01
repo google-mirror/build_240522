@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d67d3a_72e86690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1742951
+      },
+      "writtenOn": "2022-06-01T14:51:27Z",
+      "side": 1,
+      "message": "Reverting to restart implementation of SEPolicy signing",
+      "revId": "8e3198ace3f89639e9e05eb5d89f6fab891fc4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
