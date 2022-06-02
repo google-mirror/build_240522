@@ -104,6 +104,24 @@
       "message": "Add here:\n```\nifeq ($(my_check_same_vndk_variants),true)\n  same_vndk_variants_stamp :\u003d $(intermediates)/same_vndk_variants.timestamp\n  LOCAL_ADDITIONAL_CHECKED_MODULE :\u003d $(same_vndk_variants_stamp)\nendif\n```",
       "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403eff68_ff9f29ce",
+        "filename": "core/soong_cc_rust_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-06-02T00:21:42Z",
+      "side": 1,
+      "message": "Thanks Colin, at first, I wanted to use `LOCAL_ADDITIONAL_CHECKED_MODULE` but found that `intermediates` are not available before including `base_rules.mk`. How can I get the intermidates dir for the timestamps here?",
+      "parentUuid": "f496d0a9_ea7ec22a",
+      "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
