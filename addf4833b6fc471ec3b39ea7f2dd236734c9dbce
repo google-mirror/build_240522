@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76572b72_a4477d54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840920
+      },
+      "writtenOn": "2022-06-02T03:21:36Z",
+      "side": 1,
+      "message": "Hello, please help to merge this patch, thanks!",
+      "revId": "addf4833b6fc471ec3b39ea7f2dd236734c9dbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
