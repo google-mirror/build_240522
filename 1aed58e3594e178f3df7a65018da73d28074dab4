@@ -46,6 +46,30 @@
       },
       "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d604f9_49c25f9f",
+        "filename": "core/definitions.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-02T17:33:20Z",
+      "side": 1,
+      "message": "`$(shell)` is already going to create a subshell, and shouldn\u0027t affect the working directory of kati or of any other call to `$(shell)`.  I could see the parenthesis being needed if you had multiple commands in a single `$(shell)`, but they seem extraneous here and in most of the others below.",
+      "parentUuid": "e9c6bec8_353a9b37",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 305,
+        "endChar": 11
+      },
+      "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
