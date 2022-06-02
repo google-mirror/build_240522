@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c22a82_805a88ed",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-02T00:23:44Z",
+      "side": 1,
+      "message": "Does this actually happen?  Warning spam is generally not useful.  Can this be $(error) instead?",
+      "range": {
+        "startLine": 732,
+        "startChar": 43,
+        "endLine": 732,
+        "endChar": 79
+      },
+      "revId": "3c1b0943df1b04fcaf9bec90b8eec616d8d33cdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
