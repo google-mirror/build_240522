@@ -22,6 +22,30 @@
       },
       "revId": "3c1b0943df1b04fcaf9bec90b8eec616d8d33cdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6e0e58_c6677600",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-02T02:17:46Z",
+      "side": 1,
+      "message": "Yes it happens, and no it cannot be $(error).\n\nFAILED: \nbuild/make/core/main.mk:2011: error: out/host/linux-x86/vts/android-vts/testcases/lib/libandroid_runtime_lazy.so already has metadata.",
+      "parentUuid": "84c22a82_805a88ed",
+      "range": {
+        "startLine": 732,
+        "startChar": 43,
+        "endLine": 732,
+        "endChar": 79
+      },
+      "revId": "3c1b0943df1b04fcaf9bec90b8eec616d8d33cdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
