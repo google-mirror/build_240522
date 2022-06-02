@@ -34,6 +34,24 @@
       "parentUuid": "6849f358_31a753da",
       "revId": "c76dc8f0dc2bccb87d0d4b3bf7ebd1d24c388d1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5745d0_0d95a596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-06-02T20:11:11Z",
+      "side": 1,
+      "message": "I\u0027ve added Ramy and Kousik as the builder side of things should be configured in the builder config, not in this script (as local users probably should still be using LOAS). I\u0027m not really sure what\u0027s conflicting between the build server configs and envsetup.sh, but I\u0027m hoping one of them can shed some insight.\n\nOne alternative would be to stop using envsetup.sh and call into the build directly, but what you\u0027re doing should still work.",
+      "parentUuid": "dffa2635_dc28e404",
+      "revId": "c76dc8f0dc2bccb87d0d4b3bf7ebd1d24c388d1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
