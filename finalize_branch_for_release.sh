@@ -2,6 +2,9 @@
 
 set -e
 
+# see: b/234734342, b/234458494
+RBE_use_external_auth_token=false RBE_use_application_default_credentials=true
+
 source "$(dirname "$0")"/envsetup.sh
 
 # default target to modify tree and build SDK
