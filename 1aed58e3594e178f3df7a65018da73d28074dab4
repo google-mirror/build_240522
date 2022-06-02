@@ -22,6 +22,30 @@
       },
       "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c6bec8_353a9b37",
+        "filename": "core/definitions.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-02T04:13:14Z",
+      "side": 1,
+      "message": "I ran into a situation where the side-effect of changing directories caused unpredictable results and errors, so I put all of the operations that temporarily need to run from a different directory in parentheses.\n\nI believe the issue was caused by more and more of the logic getting deferred later in the process where changing the directory could affect it.",
+      "parentUuid": "0a1acb7b_425067b2",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 305,
+        "endChar": 11
+      },
+      "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
