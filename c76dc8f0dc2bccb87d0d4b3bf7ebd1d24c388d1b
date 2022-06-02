@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6849f358_31a753da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-06-02T19:43:04Z",
+      "side": 1,
+      "message": "It doesn\u0027t feel like this should be embedded in a script, since it\u0027s user-specific configuration.",
+      "revId": "c76dc8f0dc2bccb87d0d4b3bf7ebd1d24c388d1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
