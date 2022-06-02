@@ -140,6 +140,24 @@
       "parentUuid": "403eff68_ff9f29ce",
       "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92cdb31b_8dd16759",
+        "filename": "core/soong_cc_rust_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-06-02T02:41:22Z",
+      "side": 1,
+      "message": "Done. I had to pass `$(LOCAL_2ND_ARCH_VAR_PREFIX)` to avoid conflicting goals for 32/64 targets.",
+      "parentUuid": "1155fa49_5f977167",
+      "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
