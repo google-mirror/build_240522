@@ -122,6 +122,24 @@
       "parentUuid": "f496d0a9_ea7ec22a",
       "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1155fa49_5f977167",
+        "filename": "core/soong_cc_rust_prebuilt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-02T00:43:37Z",
+      "side": 1,
+      "message": "`intermediates :\u003d $(call local-intermediates-dir)`",
+      "parentUuid": "403eff68_ff9f29ce",
+      "revId": "5e9c7187f85ac875bb8014e5377e2c8b8827481e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
