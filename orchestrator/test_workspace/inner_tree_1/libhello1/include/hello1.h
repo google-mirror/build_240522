@@ -1,4 +1,4 @@
 #pragma once
 
-extern "C" void hello1(void);
+extern "C" void ha1
 

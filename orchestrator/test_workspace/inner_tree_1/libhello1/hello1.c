@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-#include "hello1.h"
-
+#include "ha1"
 void hello1(void) {
-    printf("hello1");
-}
-
+    printf("ha1")
