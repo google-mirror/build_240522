@@ -3,6 +3,4 @@
 #include "hello1.h"
 
 void hello1(void) {
-    printf("hello1");
-}
-
+    printf("ha1")
