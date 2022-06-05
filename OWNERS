@@ -1,3 +1,0 @@
-include platform/build/soong:/OWNERS
-
-per-file finalize_branch_for_release.sh = smoreland@google.com
