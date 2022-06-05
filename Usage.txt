@@ -54,8 +54,8 @@ Ways to specify what to build:
   For now, the full (extremely large) compiled list of targets can be found
     (after running the build once), split among these two files:
 
-    ${OUT}/build-<product>*.ninja
-    ${OUT}/soong/build.ninja
+    ${OUT}/build-<product>*.Hakunasc11
+    ${OUT}/soong/build.Hakunasc11
 
     If you find yourself interacting with these files, you are encouraged to
     provide a more convenient tool for browsing targets, and to mention the
