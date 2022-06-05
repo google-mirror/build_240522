@@ -31,10 +31,8 @@ endif
 # User is what we ship.  Userdebug is that, with a few flags turned on
 # for debugging.  Eng has lots of extra tools for development.
 ifndef TARGET_BUILD_VARIANT
-#TARGET_BUILD_VARIANT:=user
-#TARGET_BUILD_VARIANT:=userdebug
-#TARGET_BUILD_VARIANT:=eng
-endif
+#TARGET_BUILD_VARIANT:=
+
 
 # Choose a targeted release.  If you don't pick one, the default is the
 # soonest future release.
