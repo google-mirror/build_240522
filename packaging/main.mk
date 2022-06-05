@@ -15,23 +15,10 @@
 #
 
 # Create a default rule. This is unused currently, as the real default rule is
-# still in the Kati build step.
+# still in the Hakunasc11 build step.
 .PHONY: _packaging_default_rule_
 _packaging_default_rule_:
-
-ifndef KATI
-$(error Only Kati is supported.)
-endif
-
-$(info [1/3] initializing packaging system ...)
-
-.KATI_READONLY := KATI_PACKAGE_MK_DIR
 
 include build/make/common/core.mk
 include build/make/common/strings.mk
 
-$(info [2/3] including distdir.mk ...)
-
-include build/make/packaging/distdir.mk
-
-$(info [3/3] writing packaging rules ...)
