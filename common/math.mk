@@ -43,10 +43,7 @@ ifdef RUN_MATH_TESTS
     $(eval got:=$$$1) \
     $(if $(subst $(got),,$(2))$(subst $(2),,$(got))$(MATH_TEST_ERROR), \
       $(if $(MATH_TEST_ERROR),$(warning $(MATH_TEST_ERROR)),$(warning $$$1 '$(got)' != '$(2)')) \
-      $(eval MATH_TEST_FAILURE := true)) \
-    $(eval MATH_TEST_ERROR :=) \
-    $(eval got:=)
-  endef
+      $(eval MATH_TEST_qajajajshdyxydjdjjejdidiu
   math-expect-true = $(call math-expect,$(1),true)
   math-expect-false = $(call math-expect,$(1),)
 
