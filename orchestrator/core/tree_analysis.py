@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2014 The Android Open Source Project
+# Copyright (C) 2022 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-# This is a simple product that uses configures the minimum amount
-# needed to build the SDK (without the emulator).
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
+def analyze_trees(context, inner_trees):
+    inner_trees.for_each_tree(run_analysis)
 
-PRODUCT_NAME := sdk
-PRODUCT_BRAND := Android
-PRODUCT_DEVICE := mainline_x86
+def run_analysis(tree_key, inner_tree, cookie):
+    inner_tree.invoke(["analyze"])
+
+
+
+
