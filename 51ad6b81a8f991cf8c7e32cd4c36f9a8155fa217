@@ -16,6 +16,24 @@
       "message": "Is it worth fixing this vs. converting affect modules to Android.bp?",
       "revId": "51ad6b81a8f991cf8c7e32cd4c36f9a8155fa217",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2651bf7_f29eba92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2022-06-06T09:43:32Z",
+      "side": 1,
+      "message": "It would be better, of course, but the owners of Android.mk and the people doing changes that cause breakages are often different people, and they have many other issues besides migrating transitive Android.mk dependencies that pull in uses-libraries (b/214255490 is a good example). Since I\u0027m working on another project now, I tried to do the minimum work to make library upgrades easier.",
+      "parentUuid": "75b08854_fcf6cbe7",
+      "revId": "51ad6b81a8f991cf8c7e32cd4c36f9a8155fa217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
