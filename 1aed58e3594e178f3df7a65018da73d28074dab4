@@ -70,6 +70,30 @@
       },
       "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59007bb6_19689780",
+        "filename": "core/definitions.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-06T19:43:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8d604f9_49c25f9f",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 305,
+        "endChar": 11
+      },
+      "revId": "1aed58e3594e178f3df7a65018da73d28074dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
