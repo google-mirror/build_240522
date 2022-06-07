@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1979d97_64e04ec2",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-06-07T18:37:19Z",
+      "side": 1,
+      "message": "It really only requires that you set ANDROID_BUILD_TOP, which is `local top\u003d...` here.",
+      "range": {
+        "startLine": 21,
+        "startChar": 60,
+        "endLine": 21,
+        "endChar": 88
+      },
+      "revId": "4d4b5802fd1e1cf1b858a00d884b5cfd65c4a04c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
