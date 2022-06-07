@@ -22,6 +22,30 @@
       },
       "revId": "4d4b5802fd1e1cf1b858a00d884b5cfd65c4a04c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "588daa2b_18143546",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-06-07T18:54:41Z",
+      "side": 1,
+      "message": "Yup. I was being slightly lazy (this step will be removed - noted on b/234181591#comment7).",
+      "parentUuid": "d1979d97_64e04ec2",
+      "range": {
+        "startLine": 21,
+        "startChar": 60,
+        "endLine": 21,
+        "endChar": 88
+      },
+      "revId": "4d4b5802fd1e1cf1b858a00d884b5cfd65c4a04c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
