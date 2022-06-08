@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae49ccd3_07a367b7",
+        "filename": "core/definitions.mk",
+        "patchSetId": 22
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-08T20:25:52Z",
+      "side": 1,
+      "message": "Can you keep this as a separate change and see if you can get away without it?  Keeping the metadata files in the intermediates directory is nice, as that is where people expect to find per-module files.",
+      "revId": "4f29d55c1aed2c7cb41f7c005acc0e951ec0a46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
