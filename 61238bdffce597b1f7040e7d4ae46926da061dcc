@@ -16,6 +16,24 @@
       "message": "Is there a plan to get the rest of the configuration out of the environment and into the config file?",
       "revId": "61238bdffce597b1f7040e7d4ae46926da061dcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9d3e7c_8fe21eae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2022-06-08T16:52:51Z",
+      "side": 1,
+      "message": "This script is only needed for developers building aosp/ directly. The recommendation for users building any internal branch is to directly run `build/envsetup.sh` which would source the variables from the config file directly (all the necessary variables are already set in the config file).",
+      "parentUuid": "8a615afb_486e5896",
+      "revId": "61238bdffce597b1f7040e7d4ae46926da061dcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
