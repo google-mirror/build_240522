@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0397c1ec_95fe00a9",
+        "filename": "core/distdir.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-08T20:29:24Z",
+      "side": 1,
+      "message": "Why move this out of PACKAGING?  You already control this subdirectory of PACKAGING.",
+      "range": {
+        "startLine": 52,
+        "startChar": 61,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "4809fda3abd62054b1b2f3a5e2b0ace25965fbe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
