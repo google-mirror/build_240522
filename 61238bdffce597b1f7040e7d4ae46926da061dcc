@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a615afb_486e5896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-06-08T16:50:27Z",
+      "side": 1,
+      "message": "Is there a plan to get the rest of the configuration out of the environment and into the config file?",
+      "revId": "61238bdffce597b1f7040e7d4ae46926da061dcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
