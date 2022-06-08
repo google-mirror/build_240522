@@ -16,6 +16,24 @@
       "message": "Can you keep this as a separate change and see if you can get away without it?  Keeping the metadata files in the intermediates directory is nice, as that is where people expect to find per-module files.",
       "revId": "4f29d55c1aed2c7cb41f7c005acc0e951ec0a46c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a359684_bb7a2c79",
+        "filename": "core/definitions.mk",
+        "patchSetId": 22
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-08T22:52:51Z",
+      "side": 1,
+      "message": "It\u0027s a real pain at this point when everything has gone through presubmit and is otherwise ready to merge. I would be happy to prepare a change to undo it that you can copy and try to merge after this goes in.\n\nIt would be a lot less effort for me.",
+      "parentUuid": "ae49ccd3_07a367b7",
+      "revId": "4f29d55c1aed2c7cb41f7c005acc0e951ec0a46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
