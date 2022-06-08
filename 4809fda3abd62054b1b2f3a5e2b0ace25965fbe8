@@ -22,6 +22,30 @@
       },
       "revId": "4809fda3abd62054b1b2f3a5e2b0ace25965fbe8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe3b068_d7ce4cf4",
+        "filename": "core/distdir.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-08T22:54:46Z",
+      "side": 1,
+      "message": "Putting everything metadata-related into a META-prefixed class obviates any potential conflicts.\n\nWhen I prepare the change to undo the defensive coding, I can undo this too.",
+      "parentUuid": "0397c1ec_95fe00a9",
+      "range": {
+        "startLine": 52,
+        "startChar": 61,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "4809fda3abd62054b1b2f3a5e2b0ace25965fbe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
