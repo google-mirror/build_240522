@@ -34,6 +34,24 @@
       "parentUuid": "8a615afb_486e5896",
       "revId": "61238bdffce597b1f7040e7d4ae46926da061dcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8823168_ffa0cb90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-06-08T17:00:00Z",
+      "side": 1,
+      "message": "I mean, can we get all these configuration flags out of the user\u0027s shell environment since nobody but the build/rbe teams changes the settings.  Having them there makes maintenance a hassle (e.g. how do we deal with stale flags, or syncs that require new flags). They should be loaded from a config file inside the build somewhere. It\u0027s not technically required to source envsetup.sh to do a build, and this introduces that requirement.  It also pollutes the build server command lines, and makes another place we have to keep up to date with evolving behaviors.\n\nBut let\u0027s take this discussion off of this CL. This CL LGTM.",
+      "parentUuid": "cf9d3e7c_8fe21eae",
+      "revId": "61238bdffce597b1f7040e7d4ae46926da061dcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
