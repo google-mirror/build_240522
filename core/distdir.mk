@@ -69,7 +69,7 @@ define __license-texts-rule
 $(2) : PRIVATE_GOAL := $(1)
 $(2) : PRIVATE_TARGETS := $(3)
 $(2) : PRIVATE_ROOTS := $(4)
-$(2) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,METAPACKAGING,licensetexts)/$(2)/arguments
+$(2) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,licensetexts)/$(2)/arguments
 $(2): $(3) $(TEXTNOTICE)
 	$(hide) rm -f $$@
 	mkdir -p $$(dir $$@)
@@ -121,7 +121,7 @@ $(_meta): PRIVATE_CONDITIONS := unencumbered
 $(_meta): PRIVATE_SOURCES := $(3)
 $(_meta): PRIVATE_INSTALLED := $(1)
 # use `$(1)` which is the unique and relatively short `out/dist/$(target)`
-$(_meta): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,METAPACKAGING,notice)/$(1)/arguments
+$(_meta): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,notice)/$(1)/arguments
 $(_meta): $(BUILD_LICENSE_METADATA)
 $(_meta) :
 	rm -f $$@
@@ -143,7 +143,7 @@ $(_meta): PRIVATE_DEST_TARGET := $(1)
 $(_meta): PRIVATE_SOURCE_TARGETS := $(3)
 $(_meta): PRIVATE_SOURCE_METADATA := $(_dep)
 # use `$(1)` which is the unique and relatively short `out/dist/$(target)`
-$(_meta): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,METAPACKAGING,copynotice)/$(1)/arguments
+$(_meta): PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,copynotice)/$(1)/arguments
 $(_meta) : $(_dep) $(COPY_LICENSE_METADATA)
 	rm -f $$@
 	mkdir -p $$(dir $$@)
@@ -162,9 +162,9 @@ endef
 
 # use `out/dist/` as a proxy for 'DIST_DIR'
 define _add_projects_to_share
-$(strip $(eval _mdir := $(call intermediates-dir-for,METAPACKAGING,meta)/out/dist)) \
-$(strip $(eval _idir := $(call intermediates-dir-for,METAPACKAGING,shareprojects))) \
-$(strip $(eval _tdir := $(call intermediates-dir-for,METAPACKAGING,licensetexts))) \
+$(strip $(eval _mdir := $(call intermediates-dir-for,PACKAGING,meta)/out/dist)) \
+$(strip $(eval _idir := $(call intermediates-dir-for,PACKAGING,shareprojects))) \
+$(strip $(eval _tdir := $(call intermediates-dir-for,PACKAGING,licensetexts))) \
 $(strip $(eval _allt := $(sort $(foreach goal,$(_all_dist_goal_output_pairs),$(call word-colon,2,$(goal)))))) \
 $(foreach target,$(_allt), \
   $(eval _goals := $(sort $(foreach dg,$(filter %:$(target),$(_all_dist_goal_output_pairs)),$(call word-colon,1,$(dg))))) \
