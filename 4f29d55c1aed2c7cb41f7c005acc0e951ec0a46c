@@ -34,6 +34,24 @@
       "parentUuid": "ae49ccd3_07a367b7",
       "revId": "4f29d55c1aed2c7cb41f7c005acc0e951ec0a46c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96129f0_9279e973",
+        "filename": "core/definitions.mk",
+        "patchSetId": 22
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-09T01:48:31Z",
+      "side": 1,
+      "message": "If you want to use this code to chase down folks deleting their intermediates directories, after this series gets merged, you can download http://aosp/2120587 and re-upload it as your change. You can use presubmit errors and any postsubmit rollback requests to track down the offenders.",
+      "parentUuid": "8a359684_bb7a2c79",
+      "revId": "4f29d55c1aed2c7cb41f7c005acc0e951ec0a46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
