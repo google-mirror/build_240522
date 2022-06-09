@@ -49,7 +49,7 @@ endef
 
 define __share-projects-rule
 $(1) : PRIVATE_TARGETS := $(2)
-$(1) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,METAPACKAGING,codesharing)/$(1)/arguments
+$(1) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,codesharing)/$(1)/arguments
 $(1): $(2) $(COMPLIANCE_LISTSHARE)
 	$(hide) rm -f $$@
 	mkdir -p $$(dir $$@)
@@ -80,7 +80,7 @@ define __license-texts-rule
 $(2) : PRIVATE_GOAL := $(1)
 $(2) : PRIVATE_TARGETS := $(3)
 $(2) : PRIVATE_ROOTS := $(4)
-$(2) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,METAPACKAGING,licensetexts)/$(2)/arguments
+$(2) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,licensetexts)/$(2)/arguments
 $(2): $(3) $(TEXTNOTICE)
 	$(hide) rm -f $$@
 	mkdir -p $$(dir $$@)
@@ -112,8 +112,8 @@ $(1): $(2)
 endef
 
 define _add_projects_to_share
-$(strip $(eval _idir := $(call intermediates-dir-for,METAPACKAGING,shareprojects))) \
-$(strip $(eval _tdir := $(call intermediates-dir-for,METAPACKAGING,licensetexts))) \
+$(strip $(eval _idir := $(call intermediates-dir-for,PACKAGING,shareprojects))) \
+$(strip $(eval _tdir := $(call intermediates-dir-for,PACKAGING,licensetexts))) \
 $(strip $(eval _goals := $(sort $(_all_dist_goals)))) \
 $(strip $(eval _opairs := $(sort $(_all_dist_goal_output_pairs)))) \
 $(strip $(eval _dpairs := $(sort $(_all_dist_src_dst_pairs)))) \

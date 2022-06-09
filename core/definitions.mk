@@ -1062,22 +1062,6 @@ $(strip \
 )
 endef
 
-# Uses LOCAL_MODULE_CLASS, LOCAL_MODULE, and LOCAL_IS_HOST_MODULE
-# to determine the intermediates directory.
-#
-# $(1): if non-empty, force the intermediates to be COMMON
-# $(2): if non-empty, force the intermediates to be for the 2nd arch
-# $(3): if non-empty, force the intermediates to be for the host cross os
-define local-meta-intermediates-dir
-$(strip \
-    $(if $(strip $(LOCAL_MODULE_CLASS)),, \
-        $(error $(LOCAL_PATH): LOCAL_MODULE_CLASS not defined before call to local-meta-intermediates-dir)) \
-    $(if $(strip $(LOCAL_MODULE)),, \
-        $(error $(LOCAL_PATH): LOCAL_MODULE not defined before call to local-meta-intermediates-dir)) \
-    $(call intermediates-dir-for,META$(LOCAL_MODULE_CLASS),$(LOCAL_MODULE),$(if $(strip $(LOCAL_IS_HOST_MODULE)),HOST),$(1),$(2),$(3)) \
-)
-endef
-
 ###########################################################
 ## The generated sources directory.  Placing generated
 ## source files directly in the intermediates directory
