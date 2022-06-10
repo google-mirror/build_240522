@@ -56,6 +56,30 @@
       },
       "revId": "c71dac440a48a43e78be29ac1bfdfc1804a68f7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae336ef_ab92a280",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-06-10T11:27:03Z",
+      "side": 1,
+      "message": "Done.\n\n\u003e BTW, should ART_MODULE_BUILD_FROM_SOURCE be moved into the same mechanism?\n\nMaybe but not as part of this. This is the minimum necessary to ensure that updating the prebuilts with snapshots created after the related changes to the build script does not break the build. Integrating ART into this would require more work which I don\u0027t have time to do right now and it is not necessary.\n\nAlso, I am hoping that we can move away from using Soong config to control prefer property settings in U.",
+      "parentUuid": "59af3f04_053e3a55",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "c71dac440a48a43e78be29ac1bfdfc1804a68f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
