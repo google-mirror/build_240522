@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "effd56fd_871db929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2022-06-10T11:16:51Z",
+      "side": 1,
+      "message": "FWIW, I don\u0027t have a strong opinion on the naming, as long as we make sure the comment highlights Anton\u0027s concern.",
+      "revId": "c71dac440a48a43e78be29ac1bfdfc1804a68f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59af3f04_053e3a55",
