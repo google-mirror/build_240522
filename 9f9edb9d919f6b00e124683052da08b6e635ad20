@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a9ae002_40c8c453",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-06-14T13:27:48Z",
+      "side": 1,
+      "message": "Why? AIUI the docs build specifically and purposely uses modules that are not provided as prebuilts, e.g. implementation sources filegroups are used here - http://cs/android/frameworks/base/ApiDocs.bp?l\u003d75\n\nBuilding docs from prebuilts does not actually build docs from prebuilts - except for ART/conscrypt/i18n where it does use prebuilt stub sources.",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d4ed7ccb_e60cb9bb",
