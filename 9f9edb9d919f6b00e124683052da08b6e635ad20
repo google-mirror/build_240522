@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "096bc994_f13930b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-06-14T14:18:39Z",
+      "side": 1,
+      "message": "Your link is to the systemapi docs. The public docs builds from module sdks, which will use prebuilts.\n\nWe\u0027re going to either fix the systemapi docs or delete them (they aren\u0027t used atm).",
+      "parentUuid": "1a9ae002_40c8c453",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d4ed7ccb_e60cb9bb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-14T13:20:31Z",
       "side": 1,
       "message": "nit: docs as well",
+      "range": {
+        "startLine": 52,
+        "startChar": 13,
+        "endLine": 52,
+        "endChar": 34
+      },
+      "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78c482f_6c3d4519",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-06-14T14:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09531ee3_b3d534a6",
       "range": {
         "startLine": 52,
         "startChar": 13,
