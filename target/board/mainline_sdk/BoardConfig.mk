@@ -1,5 +1,6 @@
-#
-# Copyright (C) 2008 The Android Open Source Project
+<<<<<<< HEAD   (ae245c Merge "Merge empty history for sparse-8690516-L8170000095498)
+=======
+# Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# BUILD_ID is usually used to specify the branch name
-# (like "MAIN") or a branch name and a release candidate
-# (like "CRB01").  It must be a single word, and is
-# capitalized by convention.
 
-<<<<<<< HEAD   (ae245c Merge "Merge empty history for sparse-8690516-L8170000095498)
-export BUILD_ID=PVS1.180830.001.A1
-=======
-BUILD_ID=TKB1.220613.001.A1
+TARGET_ARCH_SUITE := mainline_sdk
+
+HOST_CROSS_OS := linux_bionic
+HOST_CROSS_ARCH := x86_64
+HOST_CROSS_2ND_ARCH :=
+
+# Required flag for non-64 bit devices from P.
+TARGET_USES_64_BIT_BINDER := true
 >>>>>>> BRANCH (4edd72 Merge "Version bump to TKB1.220613.001.A1 [core/build_id.mk])

@@ -59,10 +59,93 @@ $(foreach file,$(2), \
 )
 endef
 
+<<<<<<< HEAD   (ae245c Merge "Merge empty history for sparse-8690516-L8170000095498)
 else # !dist_goal
+=======
+.PHONY: shareprojects
+#shareprojects:
 
+define __share-projects-rule
+$(1) : PRIVATE_TARGETS := $(2)
+$(1) : PRIVATE_ARGUMENT_FILE := $(call intermediates-dir-for,PACKAGING,codesharing)/$(1)/arguments
+$(1): $(2) $(COMPLIANCE_LISTSHARE)
+	$(hide) rm -f $$@
+	mkdir -p $$(dir $$@)
+	mkdir -p $$(dir $$(PRIVATE_ARGUMENT_FILE))
+	$$(if $$(strip $$(PRIVATE_TARGETS)),$$(call dump-words-to-file,$$(PRIVATE_TARGETS),$$(PRIVATE_ARGUMENT_FILE)))
+	$$(if $$(strip $$(PRIVATE_TARGETS)),OUT_DIR=$(OUT_DIR) $(COMPLIANCE_LISTSHARE) -o $$@ @$$(PRIVATE_ARGUMENT_FILE),touch $$@)
+endef
+
+# build list of projects to share in $(1) for dist targets in $(2)
+#
+# $(1): the intermediate project sharing file
+# $(2): the dist files to base the sharing on
+define _share-projects-rule
+$(eval $(call __share-projects-rule,$(1),$(call corresponding-license-metadata,$(2))))
+endef
+
+# Add a build dependency
+#
+# $(1): the goal phony target
+# $(2): the intermediate shareprojects file
+define _share-projects-dep
+$(1): $(2)
+endef
+
+define _add_projects_to_share
+$(strip $(eval _idir := $(call intermediates-dir-for,PACKAGING,shareprojects))) \
+$(strip $(eval _goals := $(sort $(_all_dist_goals)))) \
+$(strip $(eval _opairs := $(sort $(_all_dist_goal_output_pairs)))) \
+$(strip $(eval _dpairs := $(sort $(_all_dist_src_dst_pairs)))) \
+$(strip $(eval _allt :=)) \
+$(foreach goal,$(_goals), \
+  $(eval _f := $(_idir)/$(goal).shareprojects) \
+  $(call dist-for-goals,$(goal),$(_f):shareprojects/$(basename $(notdir $(_f)))) \
+  $(eval _targets :=) \
+  $(foreach op,$(filter $(goal):%,$(_opairs)),$(foreach p,$(filter %:$(call word-colon,2,$(op)),$(_dpairs)),$(eval _targets += $(call word-colon,1,$(p))))) \
+  $(eval _allt += $(_targets)) \
+  $(eval $(call _share-projects-rule,$(_f),$(_targets))) \
+)\
+$(eval _f := $(_idir)/all.shareprojects)\
+$(eval $(call _share-projects-dep,shareprojects,$(_f))) \
+$(call dist-for-goals,droid shareprojects,$(_f):shareprojects/all)\
+$(eval $(call _share-projects-rule,$(_f),$(sort $(_allt))))
+endef
+
+#------------------------------------------------------------------
+# To be used at the end of the build to collect all the uses of
+# dist-for-goals, and write them into a file for the packaging step to use.
+>>>>>>> BRANCH (4edd72 Merge "Version bump to TKB1.220613.001.A1 [core/build_id.mk])
+
+<<<<<<< HEAD   (ae245c Merge "Merge empty history for sparse-8690516-L8170000095498)
 # empty definition when not building dist
 define dist-for-goals
+=======
+# $(1): The file to write
+define dist-write-file
+$(strip \
+  $(call _add_projects_to_share)\
+  $(if $(strip $(ANDROID_REQUIRE_LICENSE_METADATA)),\
+    $(foreach target,$(sort $(TARGETS_MISSING_LICENSE_METADATA)),$(warning target $(target) missing license metadata))\
+    $(if $(strip $(TARGETS_MISSING_LICENSE_METADATA)),\
+      $(if $(filter true error,$(ANDROID_REQUIRE_LICENSE_METADATA)),\
+        $(error $(words $(sort $(TARGETS_MISSING_LICENSE_METADATA))) targets need license metadata))))\
+  $(foreach t,$(sort $(ALL_NON_MODULES)),$(call record-missing-non-module-dependencies,$(t))) \
+  $(eval $(call report-missing-licenses-rule)) \
+  $(eval $(call report-all-notice-library-names-rule)) \
+  $(KATI_obsolete_var dist-for-goals,Cannot be used after dist-write-file) \
+  $(foreach goal,$(sort $(_all_dist_goals)), \
+    $(eval $$(goal): _dist_$$(goal))) \
+  $(shell mkdir -p $(dir $(1))) \
+  $(file >$(1).tmp, \
+    DIST_GOAL_OUTPUT_PAIRS := $(sort $(_all_dist_goal_output_pairs)) \
+    $(newline)DIST_SRC_DST_PAIRS := $(sort $(_all_dist_src_dst_pairs))) \
+  $(shell if ! cmp -s $(1).tmp $(1); then \
+            mv $(1).tmp $(1); \
+          else \
+            rm $(1).tmp; \
+          fi))
+>>>>>>> BRANCH (4edd72 Merge "Version bump to TKB1.220613.001.A1 [core/build_id.mk])
 endef
 
 endif # !dist_goal
