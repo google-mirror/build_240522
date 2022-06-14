@@ -52,6 +52,24 @@
       "parentUuid": "e2d83536_a2585f09",
       "revId": "d227fac95b7a8bbaf7a6f02ac8096820e5b871c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0f610f_d3e4b70b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-14T21:03:20Z",
+      "side": 1,
+      "message": "With all the crazy combinations of options we don\u0027t have presubmits for? There are no guarantees.\n\nBut both of the roll-backs so far involved \"ALLOW_MISSING_DEPENDENCIES\" projects like tradefed. There doesn\u0027t appear to be any such project configured for presubmit in either of the automerge paths from aosp-master or from tm-dev down through git-master.\n\nThere was nearly an 8 week gap between the 1st rollback and the 1st rollforward while I worked on a different P1. I apologize for not hunting down the exact build configuration when I got back to it after 7 weeks. I added support for ALLOW_MISSING_DEPENDENCIES, which doesn\u0027t break for targets not built, but got tripped up by the `all` target building metadata for every target.\n\nI have now created the tradefed branch locally, which is thankfully small enough to fit, and tested these changes.\n\nIf the next merge turns up something it will likely be on some oddball tv, auto, or wear branch. The mainline branches are known to reverse merge paths for some projects, which can cause issues, but this change is not in a topic where that could cause a problem.\n\nEven for the oddball tv, auto or wear branches, I think further breakage is unlikely at this point, though.\n\nI have already recommended removing http://b/235333302 from the blockers list, so even if it causes breakage, there will be no urgency to try to fix forward.",
+      "parentUuid": "5d71129f_5f03c059",
+      "revId": "d227fac95b7a8bbaf7a6f02ac8096820e5b871c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
