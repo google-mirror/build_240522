@@ -16,6 +16,24 @@
       "message": "Before you submit this, can you do an analysis of why this needed to be rolled back so many times, and how you\u0027re confident that it won\u0027t break another time.  There\u0027s obviously some kind of gap in the testing.",
       "revId": "d227fac95b7a8bbaf7a6f02ac8096820e5b871c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d83536_a2585f09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-14T19:21:24Z",
+      "side": 1,
+      "message": "The 2nd test stanza addresses the prior gap in testing. This morning, Colin and I discussed the approach of rolling forward without the \u0027all\u0027 target as the next stop.",
+      "parentUuid": "8bc2282d_67611abd",
+      "revId": "d227fac95b7a8bbaf7a6f02ac8096820e5b871c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
