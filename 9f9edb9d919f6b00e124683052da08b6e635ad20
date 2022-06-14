@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ed7ccb_e60cb9bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-06-14T13:12:16Z",
+      "side": 1,
+      "message": "Will add merged-in to whichever one is submitted 2nd",
+      "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
