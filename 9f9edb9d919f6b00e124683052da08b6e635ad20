@@ -16,6 +16,29 @@
       "message": "Will add merged-in to whichever one is submitted 2nd",
       "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09531ee3_b3d534a6",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1061164
+      },
+      "writtenOn": "2022-06-14T13:20:31Z",
+      "side": 1,
+      "message": "nit: docs as well",
+      "range": {
+        "startLine": 52,
+        "startChar": 13,
+        "endLine": 52,
+        "endChar": 34
+      },
+      "revId": "9f9edb9d919f6b00e124683052da08b6e635ad20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
