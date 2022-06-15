@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d397b55b_4c141321",
+        "filename": "core/java_prebuilt_internal.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-15T17:42:54Z",
+      "side": 1,
+      "message": "This should already be available here as `$(intermediates)`",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 64
+      },
+      "revId": "55d84b76045cbbb739e4c19d834d7fda7447b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e69620a_53d5bb75",
+        "filename": "core/soong_java_prebuilt.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-15T17:42:54Z",
+      "side": 1,
+      "message": "This should already be available here as `$(intermediates)`",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 66
+      },
+      "revId": "55d84b76045cbbb739e4c19d834d7fda7447b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
