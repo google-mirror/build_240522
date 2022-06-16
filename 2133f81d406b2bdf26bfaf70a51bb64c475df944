@@ -43,6 +43,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f36c76c4_3d835c51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-06-16T00:19:27Z",
+      "side": 1,
+      "message": "Done, I have added a unit test.",
+      "parentUuid": "bf0373f5_646a6fa0",
+      "revId": "2133f81d406b2bdf26bfaf70a51bb64c475df944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "be649bfd_ea3e09d8",
         "filename": "orchestrator/inner_build/finder.py",
         "patchSetId": 2
@@ -54,6 +72,30 @@
       "writtenOn": "2022-06-15T16:06:09Z",
       "side": 1,
       "message": "maybe ignore all directories starting with \".\"?",
+      "range": {
+        "startLine": 29,
+        "startChar": 29,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "2133f81d406b2bdf26bfaf70a51bb64c475df944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f35770_a0a4fdc6",
+        "filename": "orchestrator/inner_build/finder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-06-16T00:19:27Z",
+      "side": 1,
+      "message": "Done, I have updated the function signature to `prune_hidden_dirs`, a boolean\n\nHidden dirs need special handling on Windows, which I have not implemented here to keep the code simple. That should be ok, since we probably do not need to support Windows anytime soon",
+      "parentUuid": "be649bfd_ea3e09d8",
       "range": {
         "startLine": 29,
         "startChar": 29,
