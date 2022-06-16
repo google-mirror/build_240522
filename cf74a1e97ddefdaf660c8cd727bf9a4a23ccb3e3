@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2edac4_ccc69e4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T22:07:23Z",
+      "side": 1,
+      "message": "Can you put some useful information here, why is this change being made, what does it do, etc.",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06d778b_b066aa3c",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T22:07:23Z",
+      "side": 1,
+      "message": "It would be worth a comment in these two clauses explaining what they are.",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07e6bf3_a258f828",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T22:07:23Z",
+      "side": 1,
+      "message": "Where does this come from?",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545d52ef_b75eac6a",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T22:07:23Z",
+      "side": 1,
+      "message": "This is going to cause problems if OUT_DIR is long or absolute.  Would it be better to use $(3) and remove the $(DIST_DIR) prefix?",
+      "range": {
+        "startLine": 116,
+        "startChar": 86,
+        "endLine": 116,
+        "endChar": 90
+      },
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
