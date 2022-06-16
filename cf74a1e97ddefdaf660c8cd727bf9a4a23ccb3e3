@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e05ceb_836cc763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-16T22:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee2edac4_ccc69e4e",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a06d778b_b066aa3c",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-16T22:07:23Z",
       "side": 1,
       "message": "It would be worth a comment in these two clauses explaining what they are.",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9ad26f_3250ffe9",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-16T22:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a06d778b_b066aa3c",
       "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a3df9e_2a60b954",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-16T22:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f07e6bf3_a258f828",
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "545d52ef_b75eac6a",
@@ -65,6 +119,30 @@
       "writtenOn": "2022-06-16T22:07:23Z",
       "side": 1,
       "message": "This is going to cause problems if OUT_DIR is long or absolute.  Would it be better to use $(3) and remove the $(DIST_DIR) prefix?",
+      "range": {
+        "startLine": 116,
+        "startChar": 86,
+        "endLine": 116,
+        "endChar": 90
+      },
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb20c93a_3d8ce53b",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-16T22:58:49Z",
+      "side": 1,
+      "message": "Switched to $(1), which will always start with out/dist/",
+      "parentUuid": "545d52ef_b75eac6a",
       "range": {
         "startLine": 116,
         "startChar": 86,
