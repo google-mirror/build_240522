@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f163880_052be48d",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T22:38:51Z",
+      "side": 1,
+      "message": "This doesn\u0027t support the static minimal runtime for static executables.  Maybe that\u0027s fine though.",
+      "revId": "943538255ed61400d324a677871135c6dc309ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
