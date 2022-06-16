@@ -151,6 +151,30 @@
       },
       "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36316ce9_cce6057c",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-16T23:06:34Z",
+      "side": 1,
+      "message": "DIST_DIR can also be overridden, and is always a long absolute path on the buildbots.  Use `$(patsubst $(DIST_DIR)/%,%,$(1))`",
+      "parentUuid": "fb20c93a_3d8ce53b",
+      "range": {
+        "startLine": 116,
+        "startChar": 86,
+        "endLine": 116,
+        "endChar": 90
+      },
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
