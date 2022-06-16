@@ -175,6 +175,30 @@
       },
       "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5384fb7_c66dac7b",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-06-16T23:44:08Z",
+      "side": 1,
+      "message": "It doesn\u0027t use `$(DIST_DIR)` that would give an error to use `dist-for-goals` instead. It uses `out/dist/` per line 168.",
+      "parentUuid": "36316ce9_cce6057c",
+      "range": {
+        "startLine": 116,
+        "startChar": 86,
+        "endLine": 116,
+        "endChar": 90
+      },
+      "revId": "cf74a1e97ddefdaf660c8cd727bf9a4a23ccb3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
