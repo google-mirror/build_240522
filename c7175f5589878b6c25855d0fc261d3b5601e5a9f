@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7666c0_de746c6f",
+        "filename": "core/distdir.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-17T17:17:08Z",
+      "side": 1,
+      "message": "Can you add some comments explaining the use of `out/dist` here?  If I understand correctly, it only ends up in the license metadata, and the actual files are always created through `$(DIST_DIR)`?",
+      "range": {
+        "startLine": 168,
+        "startChar": 51,
+        "endLine": 168,
+        "endChar": 60
+      },
+      "revId": "c7175f5589878b6c25855d0fc261d3b5601e5a9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
