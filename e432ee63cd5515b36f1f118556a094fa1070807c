@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc95d1e_fd892d08",
+        "filename": "orchestrator/core/cc/ndkstubgen.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-06-17T23:10:04Z",
+      "side": 1,
+      "message": "This is a hard symlink to ndkstubgen\u0027s source in build/soong, which is a different git project",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 61
+      },
+      "revId": "e432ee63cd5515b36f1f118556a094fa1070807c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
