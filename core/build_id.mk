@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (a2ed26 Merge "Inline some variables that are only used in 1 place")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SQ3A.220605.009
+>>>>>>> BRANCH (1f6930 Version bump to SQ3A.220605.009 [core/build_id.mk])
