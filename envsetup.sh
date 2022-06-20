@@ -664,7 +664,13 @@ function tapas()
     local arch="$(echo $* | xargs -n 1 echo | \grep -E '^(arm|x86|mips|arm64|x86_64|mips64)$' | xargs)"
     local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
     local density="$(echo $* | xargs -n 1 echo | \grep -E '^(ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi)$' | xargs)"
+<<<<<<< HEAD   (cbb40d Merge "Merge empty history for sparse-8719481-L1140000095509)
     local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|arm|x86|mips|arm64|x86_64|mips64|ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi)$' | xargs)"
+=======
+    local keys="$(echo $* | xargs -n 1 echo | \grep -E '^(devkeys)$' | xargs)"
+    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|arm|x86|arm64|x86_64|ldpi|mdpi|tvdpi|hdpi|xhdpi|xxhdpi|xxxhdpi|alldpi|devkeys)$' | xargs)"
+
+>>>>>>> BRANCH (eedaac Merge "Version bump to TKB1.220618.001.A1 [core/build_id.mk])
 
     if [ "$showHelp" != "" ]; then
       $(gettop)/build/make/tapasHelp.sh
@@ -683,6 +689,10 @@ function tapas()
         echo "tapas: Error: Multiple densities supplied: $density"
         return
     fi
+    if [ $(echo $keys | wc -w) -gt 1 ]; then
+        echo "tapas: Error: Multiple keys supplied: $keys"
+        return
+    fi
 
     local product=aosp_arm
     case $arch in
@@ -692,6 +702,10 @@ function tapas()
       x86_64) product=aosp_x86_64;;
       mips64)  product=aosp_mips64;;
     esac
+    if [ -n "$keys" ]; then
+        product=${product/aosp_/aosp_${keys}_}
+    fi;
+
     if [ -z "$variant" ]; then
         variant=eng
     fi
