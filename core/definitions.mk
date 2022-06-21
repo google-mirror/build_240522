@@ -3279,13 +3279,12 @@ define transform-jar-to-dex-r8
 @echo R8: $@
 $(hide) rm -f $(PRIVATE_PROGUARD_DICTIONARY)
 $(hide) $(R8_WRAPPER) $(R8_COMMAND) \
-    -injars '$<' \
+    '$<' $(PRIVATE_EXTRA_INPUT_JAR) \
     --min-api $(PRIVATE_MIN_SDK_VERSION) \
     --no-data-resources \
-    --force-proguard-compatibility --output $(subst classes.dex,,$@) \
+    --pg-compat --output $(subst classes.dex,,$@) \
     $(R8_DEBUG_MODE) \
     $(PRIVATE_PROGUARD_FLAGS) \
-    $(addprefix -injars , $(PRIVATE_EXTRA_INPUT_JAR)) \
     $(PRIVATE_DX_FLAGS) \
     -ignorewarnings
 $(hide) touch $(PRIVATE_PROGUARD_DICTIONARY)
