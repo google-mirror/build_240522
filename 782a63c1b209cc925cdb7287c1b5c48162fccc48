@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a38d5c_6d611677",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1938760
+      },
+      "writtenOn": "2022-06-21T17:24:05Z",
+      "side": 1,
+      "message": "To enable the var, we need to explicitly set\n```\nBUILD_BROKEN_DEPFILE :\u003d true\n```\nhere or use `BUILD_BROKEN_DEPFILE` inline when building.",
+      "revId": "782a63c1b209cc925cdb7287c1b5c48162fccc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
