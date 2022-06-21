@@ -69,7 +69,8 @@ $(foreach m,$(my_modules_and_deps),\
   $(eval _module_class_folder := $($(strip MODULE_CLASS_$(word 1, $(strip $(ALL_MODULES.$(m).CLASS)\
     $(ALL_MODULES.$(m)$(TARGET_2ND_ARCH_MODULE_SUFFIX).CLASS))))))\
   $(if $(_pickup_files)$(_built_files),,\
-    $(call my_missing_files,$(m)))\
+    $(if $(filter $(m),$(ALLOWED_MISSING_MODULES)),,\
+      $(call my_missing_files,$(m))))\
   $(eval my_pickup_files += $(_pickup_files))\
   $(foreach i, $(_built_files),\
     $(eval bui_ins := $(subst :,$(space),$(i)))\
