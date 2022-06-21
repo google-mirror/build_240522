@@ -174,6 +174,7 @@ _board_strip_list += ODM_MANIFEST_SKUS
 
 
 _build_broken_var_list := \
+  BUILD_BROKEN_DEPFILE \
   BUILD_BROKEN_DUP_RULES \
   BUILD_BROKEN_DUP_SYSPROP \
   BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES \
@@ -207,6 +208,7 @@ endif
 # ###############################################################
 $(foreach v,$(_build_broken_var_list),$(eval $(v) :=))
 BUILD_BROKEN_NINJA_USES_ENV_VARS :=
+BUILD_BROKEN_DEPFILE := true
 
 # Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)
 # or under vendor/*/$(TARGET_DEVICE).  Search in both places, but
