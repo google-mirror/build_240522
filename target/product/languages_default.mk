@@ -14,8 +14,17 @@
 # limitations under the License.
 #
 
+# Note: To make the language visible in the Language settings in Android,
+# it must be defined both in this file (in the format xx_YY or xx_yyyy_ZZ)
+# and in platform/frameworks/base/core/res/res/values-xx-rYY/,
+# where xx is the language code and YY is the country code (all caps),
+# or in platform/frameworks/base/core/res/res/values-b+xx+yyyy+ZZ/,
+# or in platform/frameworks/base/core/res/res/values-b+xx+ZZ/,
+# where xx is the language code, yyyy is the variant code (optional, first letter capitalized),
+# and ZZ is the country code (all caps).
+
 # This is a build configuration that just contains a list of languages, with
-# en_US set as the default language.
+# en_US (English (United States)) set as the default language.
 PRODUCT_LOCALES := \
         en_US \
         af_ZA \
@@ -31,20 +40,39 @@ PRODUCT_LOCALES := \
         ca_ES \
         cs_CZ \
         da_DK \
+        de_AT \
+        de_CH \
         de_DE \
+        de_LI \
         el_GR \
         en_AU \
         en_CA \
         en_GB \
+        en_IE \
         en_IN \
+        en_NZ \
+        en_SG \
         en_XA \
+        en_ZA \
+        es_CO \
+        es_CR \
+        es_EC \
         es_ES \
+        es_GT \
+        es_HN \
+        es_MX \
+        es_NI \
+        es_PA \
+        es_PE \
+        es_SV \
         es_US \
         et_EE \
         eu_ES \
         fa_IR \
         fi_FI \
+        fr_BE \
         fr_CA \
+        fr_CH \
         fr_FR \
         gl_ES \
         gu_IN \
@@ -54,6 +82,7 @@ PRODUCT_LOCALES := \
         hy_AM \
         in_ID \
         is_IS \
+        it_CH \
         it_IT \
         iw_IL \
         ja_JP \
@@ -74,6 +103,7 @@ PRODUCT_LOCALES := \
         my_MM \
         nb_NO \
         ne_NP \
+        nl_BE \
         nl_NL \
         or_IN \
         pa_IN \
