@@ -39,6 +39,30 @@
       },
       "revId": "d496e2a966dbdc6a661add651e9f94b3260eb538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f642bf_ec1e0676",
+        "filename": "target/product/gsi/current.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-06-22T17:07:26Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem like there were any conflicts detected.",
+      "parentUuid": "0e662f0a_6f44a314",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "d496e2a966dbdc6a661add651e9f94b3260eb538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
