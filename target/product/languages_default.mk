@@ -14,92 +14,113 @@
 # limitations under the License.
 #
 
+# Note: To make the language visible in the Language settings in Android,
+# it must be defined both in this file (in the format xx_YY or xx_yyyy_ZZ)
+# and in platform/frameworks/base/core/res/res/values-xx-rYY/,
+# where xx is the language code and YY is the country code (all caps),
+# or in platform/frameworks/base/core/res/res/values-b+xx+yyyy+ZZ/,
+# or in platform/frameworks/base/core/res/res/values-b+xx+ZZ/,
+# where xx is the language code, yyyy is the variant code (optional, first letter capitalized),
+# and ZZ is the country code (all caps).
+
 # This is a build configuration that just contains a list of languages, with
-# en_US set as the default language.
+# en_US (English (United States)) set as the default language.
 PRODUCT_LOCALES := \
-        en_US \
-        af_ZA \
-        am_ET \
-        ar_EG \
-        ar_XB \
-        as_IN \
-        az_AZ \
-        be_BY \
-        bg_BG \
-        bn_BD \
-        bs_BA \
-        ca_ES \
-        cs_CZ \
-        da_DK \
-        de_DE \
-        el_GR \
-        en_AU \
-        en_CA \
-        en_GB \
-        en_IN \
-        en_XA \
-        es_ES \
-        es_US \
-        et_EE \
-        eu_ES \
-        fa_IR \
-        fi_FI \
-        fr_CA \
-        fr_FR \
-        gl_ES \
-        gu_IN \
-        hi_IN \
-        hr_HR \
-        hu_HU \
-        hy_AM \
-        in_ID \
-        is_IS \
-        it_IT \
-        iw_IL \
-        ja_JP \
-        ka_GE \
-        kk_KZ \
-        km_KH \
-        kn_IN \
-        ko_KR \
-        ky_KG \
-        lo_LA \
-        lt_LT \
-        lv_LV \
-        mk_MK \
-        ml_IN \
-        mn_MN \
-        mr_IN \
-        ms_MY \
-        my_MM \
-        nb_NO \
-        ne_NP \
-        nl_NL \
-        or_IN \
-        pa_IN \
-        pl_PL \
-        pt_BR \
-        pt_PT \
-        ro_RO \
-        ru_RU \
-        si_LK \
-        sk_SK \
-        sl_SI \
-        sq_AL \
-        sr_Latn_RS \
-        sr_RS \
-        sv_SE \
-        sw_TZ \
-        ta_IN \
-        te_IN \
-        th_TH \
-        tl_PH \
-        tr_TR \
-        uk_UA \
-        ur_PK \
-        uz_UZ \
-        vi_VN \
-        zh_CN \
-        zh_HK \
-        zh_TW \
-        zu_ZA \
+        en_US \         # English (United States)
+        af_ZA \         # Afrikaans
+        am_ET \         # Amharic
+        ar_EG \         # Arabic (Egypt)
+        ar_XB \         # Arabic (Pseudo-Bidi)
+        as_IN \         # Assamese
+        az_AZ \         # Azerbaijani
+        be_BY \         # Belarusian
+        bg_BG \         # Bulgarian
+        bn_BD \         # Bangla
+        bs_BA \         # Bosnian
+        ca_ES \         # Catalan
+        cs_CZ \         # Czech
+        da_DK \         # Danish
+        de_AT \         # German (Austria)
+        de_CH \         # German (Switzerland)
+        de_DE \         # German (Germany)
+        de_LI \         # German (Liechtenstein)
+        el_GR \         # Greek
+        en_AU \         # English (Australia)
+        en_CA \         # English (Canada)
+        en_GB \         # English (United Kingdom)
+        en_IE \         # English (Ireland)
+        en_IN \         # English (India)
+        en_NZ \         # English (New Zealand)
+        en_SG \         # English (Singapore)
+        en_XA \         # English (Pseudo-Accents)
+        en_ZA \         # English (South Africa)
+        es_ES \         # Spanish (Spain)
+        es_MX \         # Spanish (Mexico)
+        es_US \         # Spanish (United States)
+        et_EE \         # Estonian
+        eu_ES \         # Basque
+        fa_IR \         # Persian
+        fi_FI \         # Finnish
+        fr_BE \         # French (Belgium)
+        fr_CA \         # French (Canada)
+        fr_CH \         # French (Switzerland)
+        fr_FR \         # French (France)
+        gl_ES \         # Galician
+        gu_IN \         # Gujarati
+        hi_IN \         # Hindi
+        hr_HR \         # Croatian
+        hu_HU \         # Hungarian
+        hy_AM \         # Armenian
+        in_ID \         # Indonesian
+        is_IS \         # Icelandic
+        it_CH \         # Italian (Switzerland)
+        it_IT \         # Italian (Italy)
+        iw_IL \         # Hebrew
+        ja_JP \         # Japanese
+        ka_GE \         # Georgian
+        kk_KZ \         # Kazakh
+        km_KH \         # Khmer
+        kn_IN \         # Kannada
+        ko_KR \         # Korean
+        ky_KG \         # Kyrgyz
+        lo_LA \         # Lao
+        lt_LT \         # Lithuanian
+        lv_LV \         # Latvian
+        mk_MK \         # Macedonian
+        ml_IN \         # Malayalam
+        mn_MN \         # Mongolian
+        mr_IN \         # Marathi
+        ms_MY \         # Malay
+        my_MM \         # Burmese
+        nb_NO \         # Norwegian Bokmål
+        ne_NP \         # Nepali
+	nl_BE \         # Dutch (Belgium)
+        nl_NL \         # Dutch (Netherlands)
+        or_IN \         # Odia
+        pa_IN \         # Punjabi
+        pl_PL \         # Polish
+        pt_BR \         # Portuguese (Brazil)
+        pt_PT \         # Portuguese (Portugal)
+        ro_RO \         # Romanian
+        ru_RU \         # Russian
+        si_LK \         # Sinhala
+        sk_SK \         # Slovak
+        sl_SI \         # Slovenian
+        sq_AL \         # Albanian
+        sr_Latn_RS \    # Serbian (Latin, Serbia)
+        sr_RS \         # Serbian (Serbia)
+        sv_SE \         # Swedish
+        sw_TZ \         # Swahili
+        ta_IN \         # Tamil
+        te_IN \         # Telugu
+        th_TH \         # Thai
+        tl_PH \         # Filipino/Tagalog
+        tr_TR \         # Turkish
+        uk_UA \         # Ukrainian
+        ur_PK \         # Urdu
+        uz_UZ \         # Uzbek
+        vi_VN \         # Vietnamese
+        zh_CN \         # Chinese (Simplified, China)
+        zh_HK \         # Chinese (Traditional, Hong Kong)
+        zh_TW \         # Chinese (Traditional, Taiwan)
+        zu_ZA \         # Zulu
