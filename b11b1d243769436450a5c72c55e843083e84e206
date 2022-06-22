@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b82d94_d6678420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-06-22T20:55:44Z",
+      "side": 1,
+      "message": "Note for future reference: The slight odex size growth for Wembley is from improved dex2oat inlining due to slightly reduced method sizes from R8 (even with just shrinking).",
+      "revId": "b11b1d243769436450a5c72c55e843083e84e206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
