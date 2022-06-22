@@ -31,6 +31,8 @@ PRODUCT_LOCALES := \
         ca_ES \
         cs_CZ \
         da_DK \
+        de_AT \
+        de_CH \
         de_DE \
         el_GR \
         en_AU \
@@ -39,12 +41,15 @@ PRODUCT_LOCALES := \
         en_IN \
         en_XA \
         es_ES \
+        es_MX \
         es_US \
         et_EE \
         eu_ES \
         fa_IR \
         fi_FI \
+        fr_BE \
         fr_CA \
+        fr_CH \
         fr_FR \
         gl_ES \
         gu_IN \
@@ -54,6 +59,7 @@ PRODUCT_LOCALES := \
         hy_AM \
         in_ID \
         is_IS \
+        it_CH \
         it_IT \
         iw_IL \
         ja_JP \
@@ -74,6 +80,7 @@ PRODUCT_LOCALES := \
         my_MM \
         nb_NO \
         ne_NP \
+        nl_BE \
         nl_NL \
         or_IN \
         pa_IN \
