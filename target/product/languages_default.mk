@@ -87,6 +87,7 @@ PRODUCT_LOCALES := \
         sl_SI \
         sq_AL \
         sr_Latn_RS \
+        sr_ME \
         sr_RS \
         sv_SE \
         sw_TZ \
