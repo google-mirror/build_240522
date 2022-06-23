@@ -131,6 +131,11 @@ ifdef my_register_name
       $(my_test_data) $(my_test_config),\
     $(eval ALL_TARGETS.$(target).META_LIC := $(module_license_metadata)))
 
+  $(foreach f,$(my_test_data) $(my_test_config),\
+    $(if $(strip $(ALL_TARGETS.$(call word-colon,1,$(f)).META_LIC)), \
+      $(call declare-copy-target-license-metadata,$(call word-colon,2,$(f)),$(call word-colon,1,$(f))), \
+      $(eval ALL_TARGETS.$(call word-colon,1,$(f)).META_LIC := $(module_license_metadata))))
+
   ALL_MODULES.$(my_register_name).META_LIC := $(strip $(ALL_MODULES.$(my_register_name).META_LIC) $(module_license_metadata))
 
   ifdef LOCAL_SOONG_LICENSE_METADATA
