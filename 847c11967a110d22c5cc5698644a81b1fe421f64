@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da587cbc_0a0a7868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-06-23T23:16:19Z",
+      "side": 1,
+      "message": "Added more LATAM languages, to bring more parity with the locales from Apple\u0027s iOS.\n(iOS 10 added additional support for Latin American locales.)",
+      "revId": "847c11967a110d22c5cc5698644a81b1fe421f64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
