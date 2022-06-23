@@ -14,11 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import collections
 import json
 import os
 import subprocess
 import sys
 import textwrap
+
+import nsjail
+
+_INNER_BUILD = ".inner_build"
 
 
 class InnerTreeKey(object):
@@ -93,6 +98,7 @@ class InnerTree(object):
         self.meld_dirs = paths[1:]
         self.product = product
         self.domains = {}
+        self.nsjail = context.tools.nsjail()
         # TODO: Base directory on OUT_DIR
         out_root = context.out.inner_tree_dir(self.root)
         if product:
@@ -100,6 +106,7 @@ class InnerTree(object):
         else:
             out_root += "_unbundled"
         self.out = OutDirLayout(out_root)
+        self._meld_config = None
 
     def __str__(self):
         return (f"InnerTree(root={enquote(self.root)} "
@@ -107,23 +114,90 @@ class InnerTree(object):
                 f"domains={enquote(list(self.domains.keys()))} "
                 f"meld={enquote(self.meld_dirs)})")
 
+    @property
+    def meld_config(self):
+        """Return the meld configuration for invoking inner_build."""
+        if self._meld_config:
+            return self._meld_config
+
+        config = nsjail.Nsjail()
+        inner_tree_src_path = config.cwd
+        inner_tree_out_path = os.path.join(inner_tree_src_path, "out")
+        # Place the inner tree at /src.
+        config.add_mountpt(src=os.path.abspath(self.root),
+                           dst=inner_tree_src_path,
+                           is_bind=True,
+                           rw=False,
+                           mandatory=True)
+        # Place OUTDIR at /out
+        config.add_mountpt(src=os.path.abspath(self.out.root()),
+                           dst=inner_tree_out_path,
+                           is_bind=True,
+                           rw=True,
+                           mandatory=True)
+
+        def _meld_git(shared, src):
+            dst = os.path.join(self.root, src[len(shared) + 1:])
+            dst_jail = os.path.join(inner_tree_src_path, src[len(shared) + 1:])
+            # Only meld if the project is missing, or is an empty
+            # directory:  nsjail creates empty directories when it
+            # mounts the directory.
+            if not os.path.isdir(dst) or os.stat(dst).st_nlink == 2:
+                sys.stderr.write(f'melding {src} into {dst}\n')
+                config.add_mountpt(src=os.path.abspath(src),
+                                   dst=dst_jail,
+                                   is_bind=True,
+                                   rw=False,
+                                   mandatory=True)
+
+        for shared in self.meld_dirs:
+            if os.path.isdir(os.path.join(shared, '.git')):
+                # TODO: If this is the root of the meld_dir, process the
+                # modules instead of the git project.
+                print(f'TODO: handle git submodules case')
+                continue
+
+            # Use os.walk (which uses os.scandir), so that we get recursion
+            # for free.
+            for src, dirs, _ in os.walk(shared):
+                # When repo syncs the workspace, .git is a symlink.
+                if '.git' in dirs or os.path.isdir(os.path.join(src, '.git')):
+                    _meld_git(shared, src)
+                    # Stop recursing.
+                    dirs[:] = []
+                # TODO: determine what other source control systems we need
+                # to detect and support here.
+
+        self._meld_config = config
+        return self._meld_config
+
     def invoke(self, args):
         """Call the inner tree command for this inner tree. Exits on failure."""
         # TODO: Build time tracing
 
         # Validate that there is a .inner_build command to run at the root of the tree
         # so we can print a good error message
-        inner_build_tool = os.path.join(self.root, ".inner_build")
+        inner_build_tool = os.path.join(self.root, _INNER_BUILD)
         if not os.access(inner_build_tool, os.X_OK):
             sys.stderr.write(
                 f"Unable to execute {inner_build_tool}. Is there an inner tree "
-                "or lunch combo misconfiguration?\n")
+                f"or lunch combo misconfiguration?\n")
             sys.exit(1)
 
-        # TODO: This is where we should set up the shared trees
+        meld_config = self.meld_config
+        inner_tree_src_path = meld_config.cwd
+        inner_tree_out_path = os.path.join(inner_tree_src_path, "out")
+
+        # Write the nsjail config
+        nsjail_config_file = self.out.nsjail_config_file()
+        meld_config.generate_config(nsjail_config_file)
 
         # Build the command
-        cmd = [inner_build_tool, "--out_dir", self.out.root()]
+        cmd = [
+            self.nsjail, "--config", nsjail_config_file, "--",
+            os.path.join(inner_tree_src_path, _INNER_BUILD), "--out_dir",
+            inner_tree_out_path
+        ]
         for domain_name in sorted(self.domains.keys()):
             cmd.append("--api_domain")
             cmd.append(domain_name)
@@ -136,7 +210,7 @@ class InnerTree(object):
         if process.returncode:
             sys.stderr.write(
                 f"Build error in inner tree: {self.root}\nstopping "
-                "multitree build.\n")
+                f"multitree build.\n")
             sys.exit(1)
 
 
@@ -204,6 +278,9 @@ class OutDirLayout(object):
 
     def main_ninja_file(self):
         return os.path.join(self._root, "inner_tree.ninja")
+
+    def nsjail_config_file(self):
+        return os.path.join(self._root, "nsjail.cfg")
 
 
 def enquote(s):
