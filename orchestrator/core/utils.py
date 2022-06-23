@@ -123,12 +123,16 @@ class HostTools(object):
         self._prebuilts = os.path.join("build", "prebuilts", "build-tools", self._arch, "bin")
         self._acp = os.path.join(self._prebuilts, "acp")
         self._ninja = os.path.join(self._prebuilts, "ninja")
+        self._nsjail = os.path.join(self._prebuilts, "nsjail")
 
     def acp(self):
         return self._acp
 
     def ninja(self):
         return self._ninja
+
+    def nsjail(self):
+        return self._nsjail
 
 
 def choose_out_dir():
