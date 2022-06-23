@@ -98,7 +98,9 @@ def find_config_dirs(workspace_root):
 
     dirs = ["vendor", "device"]
     for d in dirs:
-        yield from find_dirs(os.path.join(workspace_root, d), "multitree_combos")
+        full_path = os.path.join(workspace_root, d)
+        if os.path.isdir(full_path):
+            yield from find_dirs(full_path, "multitree_combos")
 
 
 def find_named_config(workspace_root, shortname):
@@ -235,9 +237,12 @@ def make_config_header(config_file, config, variant):
     trees = [("Component", "Path", "Product"),
              ("---------", "----", "-------")]
     entry = config.get("system", None)
+
     def add_config_tuple(trees, entry, name):
         if entry:
-            trees.append((name, entry.get("tree"), entry.get("product", "")))
+            trees.append(
+                (name, entry.get("inner-tree"), entry.get("product", "")))
+
     add_config_tuple(trees, config.get("system"), "system")
     add_config_tuple(trees, config.get("vendor"), "vendor")
     for k, v in config.get("modules", {}).items():

@@ -27,6 +27,11 @@ class InnerTreeKey(object):
     products at the same time in a single tree, so there's an optimization there to do
     eventually."""
     def __init__(self, root, product):
+        if isinstance(root, list):
+            self.melds = root[1:]
+            root = root[0]
+        else:
+            self.melds = []
         self.root = root
         self.product = product
 
@@ -37,9 +42,14 @@ class InnerTreeKey(object):
         return hash((self.root, self.product))
 
     def _cmp(self, other):
+        assert isinstance(other, InnerTreeKey)
         if self.root < other.root:
             return -1
         if self.root > other.root:
+            return 1
+        if self.melds < other.melds:
+            return -1
+        if self.melds > other.melds:
             return 1
         if self.product == other.product:
             return 0
@@ -71,13 +81,16 @@ class InnerTreeKey(object):
 
 
 class InnerTree(object):
-    def __init__(self, context, root, product):
+    def __init__(self, context, paths, product):
         """Initialize with the inner tree root (relative to the workspace root)"""
-        self.root = root
+        if not isinstance(paths, list):
+            paths = [paths]
+        self.root = paths[0]
+        self.meld_dirs = paths[1:]
         self.product = product
         self.domains = {}
         # TODO: Base directory on OUT_DIR
-        out_root = context.out.inner_tree_dir(root)
+        out_root = context.out.inner_tree_dir(self.root)
         if product:
             out_root += "_" + product
         else:
@@ -85,9 +98,10 @@ class InnerTree(object):
         self.out = OutDirLayout(out_root)
 
     def __str__(self):
-        return "InnerTree(root=%s product=%s domains=[%s])" % (enquote(self.root),
-                enquote(self.product),
-                " ".join([enquote(d) for d in sorted(self.domains.keys())]))
+        return (
+            f"InnerTree(root={enquote(self.root)} product={encode(self.product)}"
+            f"domains={enquote(self.domains.keys())} meld={enquote(self.meld_dirs)})"
+        )
 
     def invoke(self, args):
         """Call the inner tree command for this inner tree. Exits on failure."""
@@ -153,7 +167,6 @@ class InnerTrees(object):
             result[key] = func(key, self.trees[key], cookie)
         return result
 
-
     def get(self, tree_key):
         """Get an inner tree for tree_key"""
         return self.trees.get(tree_key)
@@ -188,6 +201,4 @@ class OutDirLayout(object):
 
 
 def enquote(s):
-    return "None" if s is None else "\"%s\"" % s
-
-
+    return json.dumps(s)
