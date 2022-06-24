@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402789db_b5750853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-06-24T17:54:47Z",
+      "side": 1,
+      "message": "I ran into the same problem, and my attempted fix was to create a Context class to handle path prefixes aosp/2120577",
+      "revId": "919df122e0843d1d530065004405bb2cc13e4ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
