@@ -52,6 +52,24 @@
       "parentUuid": "d4ebbc9c_d751cd93",
       "revId": "e5ddfcd004667bbbc47e017dc609ae3c4ef154b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff87f84_fcc2759d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-06-24T09:51:05Z",
+      "side": 1,
+      "message": "No, each of these files have tests in the `tools/releasetools` directory as well. Please add unit tests to verify this splitting behavior.",
+      "parentUuid": "32c93c4c_bc9c2de1",
+      "revId": "e5ddfcd004667bbbc47e017dc609ae3c4ef154b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
