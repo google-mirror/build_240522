@@ -16,6 +16,24 @@
       "message": "The change is technically correct.\nBut what worries me a bit are the implications.\n\nBetween this change and the one that adds region folders in framework/base/core,\nall of a sudden a lot of locales will become available for selection on some devices.\nAnd those are locales that have never been tested on those devices.\nWe don\u0027t know if they have fonts, keyboards, etc.\n\nThis is adding locales to all kind of devices.\nAnd this goes beyond testing, it is commitment to support them, for a long time.\n\nI don\u0027t know who can approve that, but it\u0027s not me.\nIt is not a technical decision, it is a product management decision.\n\n---\n\nThe locales added fall in two main cathegories:\n\n- Existing languages that had regions before, adding new regions.\n  For example ar-IK, de-AT/CH/LI, a lot of en-* and es-*, fr-BE/CH, it-CH, nl-BE)\n  These are likely safe, but they are incomplete. For example we go from 2 Frech regions to 4.\n  But there are actually 46 supported. Why those 4 and not all?\n- Existing languages that didn\u0027t have ANY region folders.\n  For example as, az, be, bn, bs, et, eu, gl, gu, more.\n  These are technically new locales for certain devices.\n  Never tested for those classes of devices (TVs, cars, etc).\n  See above.\n\n---\n\nNote: all of the above only applies to devices that (still) use the pre-N locale selector (a flat list of locales).\nIt does not affect devices that use the post-N locale selector (two steps, language the, then region)\n\n---\n\nThank you very much,\nMihai\n",
       "revId": "907c2bda20856eb19b52c1fdc97f6beb666a818e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b7102f_9c2a70c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-06-24T07:57:48Z",
+      "side": 1,
+      "message": "Here\u0027s the 1st case.\n\u003e Existing languages that had regions before, adding new regions.\n\u003e (For example, ... de-AT/CH/LI, a lot of en-* and es-*, fr-BE/CH, it-CH, nl-BE)\n\u003e These are likely safe, but they are incomplete. For example, we go from 2 French regions to 4.\n\u003e But there are actually 46 supported. Why those 4 and not all?\n\nWe have cut down to the following locales for the current patchset:\n* German: Germany, Austria, Switzerland (3 regions, removed Liechtenstein)\n* English: Australia, Canada, India, UK, US (5 regions, default, removed Ireland, New Zealand, Singapore, South Africa)\n* Spanish: Spain, US, Mexico (3 regions, removed some LATAM locales, but kept Mexico since the date/time formats appear to be different)\n* French: Belgium, Canada, France, Switzerland (4 regions)\n* Italian: Italy, Switzerland (2 regions)\n* Dutch: Belgium, Netherlands (2 regions)\nSource: Android TV/Google TV Emulators from the Android SDK, versions 12 and up. These are the only platforms to this day to use the pre-Nougat locale picker. \n\nIf we want to effectively fix this issue, there needs to be a Region setting in Settings \u003e System \u003e Region, just like on Sony TVs. The options will change depending on the language currently being used.\n(Currently, for Sony TVs, the regions listed depend on where the TV was purchased from, even though all display languages are shown.)\n\nHere\u0027s the 2nd case.\n\u003e Existing languages that didn\u0027t have ANY region folders.\n\u003e * For example as, az, be, bn, bs, et, eu, gl, gu, more.\n\u003e * These are technically new locales for certain devices.\n\u003e * Never tested for those classes of devices (TVs, cars, etc).\n\u003e Note: all of the above only applies to devices that (still) use the pre-N locale selector (a flat list of locales).\n\u003e It does not affect devices that use the post-N locale selector (two steps, language, then region).\n\nTo resolve that case, we first need to get the other case resolved (see https://android-review.googlesource.com/c/platform/frameworks/base/+/2134012 for more info) before proceeding with the issue on this page.\n(Once again, Android TV devices still use the pre-Nougat locale picker to this day.)",
+      "parentUuid": "93b51dad_edd02809",
+      "revId": "907c2bda20856eb19b52c1fdc97f6beb666a818e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
