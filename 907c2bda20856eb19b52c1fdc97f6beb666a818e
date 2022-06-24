@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b51dad_edd02809",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065394
+      },
+      "writtenOn": "2022-06-24T06:15:09Z",
+      "side": 1,
+      "message": "The change is technically correct.\nBut what worries me a bit are the implications.\n\nBetween this change and the one that adds region folders in framework/base/core,\nall of a sudden a lot of locales will become available for selection on some devices.\nAnd those are locales that have never been tested on those devices.\nWe don\u0027t know if they have fonts, keyboards, etc.\n\nThis is adding locales to all kind of devices.\nAnd this goes beyond testing, it is commitment to support them, for a long time.\n\nI don\u0027t know who can approve that, but it\u0027s not me.\nIt is not a technical decision, it is a product management decision.\n\n---\n\nThe locales added fall in two main cathegories:\n\n- Existing languages that had regions before, adding new regions.\n  For example ar-IK, de-AT/CH/LI, a lot of en-* and es-*, fr-BE/CH, it-CH, nl-BE)\n  These are likely safe, but they are incomplete. For example we go from 2 Frech regions to 4.\n  But there are actually 46 supported. Why those 4 and not all?\n- Existing languages that didn\u0027t have ANY region folders.\n  For example as, az, be, bn, bs, et, eu, gl, gu, more.\n  These are technically new locales for certain devices.\n  Never tested for those classes of devices (TVs, cars, etc).\n  See above.\n\n---\n\nNote: all of the above only applies to devices that (still) use the pre-N locale selector (a flat list of locales).\nIt does not affect devices that use the post-N locale selector (two steps, language the, then region)\n\n---\n\nThank you very much,\nMihai\n",
+      "revId": "907c2bda20856eb19b52c1fdc97f6beb666a818e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
