@@ -16,6 +16,23 @@
       "message": "We added a few languages to the list, taken from the Android TV/Google TV 12 Emulators. They still use the old-style locale picker for both the UI language and the caption language.",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c267b2fb_1bed6857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-06-24T08:07:39Z",
+      "side": 1,
+      "message": "We added some additional languages to this list, taken from the Android TV/Google TV Emulators in the Android SDK, versions 12 and up. I added these languages because I found that currently there is no separate Region setting in Settings \u003e System for Android TV/Google TV.",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
