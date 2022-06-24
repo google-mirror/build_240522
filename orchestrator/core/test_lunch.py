@@ -24,7 +24,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_find_dirs(self):
         self.assertEqual([x for x in lunch.find_dirs("test/configs", "multitree_combos")], [
-                    "test/configs/build/make/orchestrator/multitree_combos",
+                    "test/configs/build/build/make/orchestrator/multitree_combos",
                     "test/configs/device/aa/bb/multitree_combos",
                     "test/configs/vendor/aa/bb/multitree_combos"])
 
@@ -36,18 +36,18 @@ class TestStringMethods(unittest.TestCase):
 
     def test_find_config_dirs(self):
         self.assertEqual([x for x in lunch.find_config_dirs("test/configs")], [
-                    "test/configs/build/make/orchestrator/multitree_combos",
+                    "test/configs/build/build/make/orchestrator/multitree_combos",
                     "test/configs/vendor/aa/bb/multitree_combos",
                     "test/configs/device/aa/bb/multitree_combos"])
 
     def test_find_named_config(self):
         # Inside build/orchestrator, overriding device and vendor
         self.assertEqual(lunch.find_named_config("test/configs", "b"),
-                    "test/configs/build/make/orchestrator/multitree_combos/b.mcombo")
+                    "test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo")
 
         # Nested dir inside a combo dir
         self.assertEqual(lunch.find_named_config("test/configs", "nested"),
-                    "test/configs/build/make/orchestrator/multitree_combos/nested/nested.mcombo")
+                    "test/configs/build/build/make/orchestrator/multitree_combos/nested/nested.mcombo")
 
         # Inside vendor, overriding device
         self.assertEqual(lunch.find_named_config("test/configs", "v"),
@@ -72,7 +72,7 @@ class TestStringMethods(unittest.TestCase):
 
         # A PRODUCT-VARIANT name that conflicts with a file
         self.assertEqual(lunch.choose_config_from_args("test/configs", ["b-eng"]),
-                    ("test/configs/build/make/orchestrator/multitree_combos/b.mcombo", "eng"))
+                    ("test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo", "eng"))
 
         # A PRODUCT-VARIANT that doesn't exist
         self.assertEqual(lunch.choose_config_from_args("test/configs", ["z-user"]),
@@ -80,8 +80,8 @@ class TestStringMethods(unittest.TestCase):
 
         # An explicit file
         self.assertEqual(lunch.choose_config_from_args("test/configs",
-                        ["test/configs/build/make/orchestrator/multitree_combos/b.mcombo", "eng"]),
-                    ("test/configs/build/make/orchestrator/multitree_combos/b.mcombo", "eng"))
+                        ["test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo", "eng"]),
+                    ("test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo", "eng"))
 
         # An explicit file that doesn't exist
         self.assertEqual(lunch.choose_config_from_args("test/configs",
@@ -90,8 +90,8 @@ class TestStringMethods(unittest.TestCase):
 
         # An explicit file without a variant should fail
         self.assertEqual(lunch.choose_config_from_args("test/configs",
-                        ["test/configs/build/make/orchestrator/multitree_combos/b.mcombo"]),
-                    ("test/configs/build/make/orchestrator/multitree_combos/b.mcombo", None))
+                        ["test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo"]),
+                    ("test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo", None))
 
 
     def test_config_cycles(self):
@@ -120,7 +120,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_list(self):
         self.assertEqual(sorted(lunch.find_all_lunchable("test/configs")),
-                ["test/configs/build/make/orchestrator/multitree_combos/b.mcombo"])
+                ["test/configs/build/build/make/orchestrator/multitree_combos/b.mcombo"])
 
 if __name__ == "__main__":
     unittest.main()
