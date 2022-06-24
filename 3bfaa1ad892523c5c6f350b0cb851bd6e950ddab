@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b16c37ca_bbf336e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-06-24T07:25:00Z",
+      "side": 1,
+      "message": "We added a few languages to the list, taken from the Android TV/Google TV 12 Emulators. They still use the old-style locale picker for both the UI language and the caption language.",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
