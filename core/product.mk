@@ -395,17 +395,18 @@ _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 define inherit-product
   $(eval _inherit_product_wildcard := $(wildcard $(1)))\
   $(if $(_inherit_product_wildcard),,$(error $(1) does not exist.))\
+  $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+  $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
   $(foreach part,$(_inherit_product_wildcard),\
     $(if $(findstring ../,$(part)),\
       $(eval np := $(call normalize-paths,$(part))),\
       $(eval np := $(strip $(part))))\
-    $(foreach v,$(_product_var_list), \
+    $(if $(filter $(np),$($(inherit_var))),,\
+      $(foreach v,$(_product_var_list), \
         $(eval $(v) := $($(v)) $(INHERIT_TAG)$(np))) \
-    $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
-    $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
-    $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
-    $(call dump-inherit,$(strip $(word 1,$(_include_stack))),$(1)) \
-    $(call dump-config-vals,$(current_mk),inherit))
+      $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
+      $(call dump-inherit,$(current_mk),$(1)) \
+      $(call dump-config-vals,$(current_mk),inherit)))
 endef
 
 # Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
