@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c5643f_645287a4",
+        "filename": "Changes.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1938760
+      },
+      "writtenOn": "2022-06-27T16:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0999b21_2a05381d",
+      "range": {
+        "startLine": 51,
+        "startChar": 6,
+        "endLine": 51,
+        "endChar": 18
+      },
+      "revId": "9e6a608b49c18e8a83f940c296193af41de1bf5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c88890b_40974a99",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-27T15:14:01Z",
       "side": 1,
       "message": "Same as Liz\u0027s comment here.",
+      "range": {
+        "startLine": 56,
+        "startChar": 46,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "9e6a608b49c18e8a83f940c296193af41de1bf5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64a886a_265c9b59",
+        "filename": "Changes.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1938760
+      },
+      "writtenOn": "2022-06-27T16:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c88890b_40974a99",
       "range": {
         "startLine": 56,
         "startChar": 46,
