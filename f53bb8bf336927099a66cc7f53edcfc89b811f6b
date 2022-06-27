@@ -68,6 +68,29 @@
       },
       "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1255b0_d0d7e30e",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-27T18:22:53Z",
+      "side": 1,
+      "message": "Maybe `host_dependencies` to match everything else here?  This is getting its values from `host_required`, but that\u0027s an implementation detail in Soong and you could want to list other host dependencies here too.",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
