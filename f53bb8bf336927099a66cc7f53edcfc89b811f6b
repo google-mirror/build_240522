@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c029a688_b9929148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-06-27T16:51:09Z",
+      "side": 1,
+      "message": "Export the",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00bfcc4a_ffcd91d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-06-27T16:51:09Z",
+      "side": 1,
+      "message": "to",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e50b32d_9d8ccdcd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-06-27T16:51:09Z",
+      "side": 1,
+      "message": "Some test modules such as `android_test` use the `host_required` attribute to include additional harness dependencies. For example, `CtsLibcoreTestCases` references `cts-dalvik-host-test-runner` in the `host_required` attribute since those jars are required by Tradefed at runtime.\n\nThis information needs to present in module_info.json and exported to properly generate Bazel targets that include these runtime dependencies.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 166
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
