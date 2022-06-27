@@ -2654,7 +2654,68 @@ $(foreach f, $(1), $(strip \
     $(eval _cmf_tuple := $(subst :, ,$(f))) \
     $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
     $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+<<<<<<< HEAD   (326d62 Merge "Merge empty history for sparse-8747889-L1870000095520)
     $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest))) \
+=======
+    $(if $(strip $(2)), \
+      $(eval _cmf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_cmf_dest)))) \
+    $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
+      $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest)))) \
+    $(_cmf_dest)))
+endef
+
+# Copy the file only if it's a well-formed init script file. For use via $(eval).
+# $(1): source file
+# $(2): destination file
+define copy-init-script-file-checked
+ifdef TARGET_BUILD_UNBUNDLED
+# TODO (b/185624993): Remove the check on TARGET_BUILD_UNBUNDLED when host_init_verifier can run
+# without requiring the HIDL interface map.
+$(2): $(1)
+else ifneq ($(HOST_OS),darwin)
+# Host init verifier doesn't exist on darwin.
+$(2): \
+	$(1) \
+	$(HOST_INIT_VERIFIER) \
+	$(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	$(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext \
+	$(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	$(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	$(call intermediates-dir-for,ETC,passwd_product)/passwd_product \
+	$(call intermediates-dir-for,ETC,plat_property_contexts)/plat_property_contexts \
+	$(call intermediates-dir-for,ETC,system_ext_property_contexts)/system_ext_property_contexts \
+	$(call intermediates-dir-for,ETC,product_property_contexts)/product_property_contexts \
+	$(call intermediates-dir-for,ETC,vendor_property_contexts)/vendor_property_contexts \
+	$(call intermediates-dir-for,ETC,odm_property_contexts)/odm_property_contexts
+	$(hide) $(HOST_INIT_VERIFIER) \
+	  -p $(call intermediates-dir-for,ETC,passwd_system)/passwd_system \
+	  -p $(call intermediates-dir-for,ETC,passwd_system_ext)/passwd_system_ext \
+	  -p $(call intermediates-dir-for,ETC,passwd_vendor)/passwd_vendor \
+	  -p $(call intermediates-dir-for,ETC,passwd_odm)/passwd_odm \
+	  -p $(call intermediates-dir-for,ETC,passwd_product)/passwd_product \
+	  --property-contexts=$(call intermediates-dir-for,ETC,plat_property_contexts)/plat_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,system_ext_property_contexts)/system_ext_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,product_property_contexts)/product_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,vendor_property_contexts)/vendor_property_contexts \
+	  --property-contexts=$(call intermediates-dir-for,ETC,odm_property_contexts)/odm_property_contexts \
+	  $$<
+else
+$(2): $(1)
+endif
+	@echo "Copy init script: $$@"
+	$$(copy-file-to-target)
+endef
+
+# Copies many init script files and check they are well-formed.
+# $(1): The init script files to copy.  Each entry is a ':' separated src:dst pair.
+# Evaluates to the list of the dst files. (ie suitable for a dependency list.)
+define copy-many-init-script-files-checked
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(eval $(call copy-init-script-file-checked,$(_cmf_src),$(_cmf_dest))) \
+>>>>>>> BRANCH (a6db6e Merge "Version bump to TKB1.220626.001.A1 [core/build_id.mk])
     $(_cmf_dest)))
 endef
 

@@ -463,8 +463,13 @@ def RewriteProps(data):
         pieces[-1] = EditTags(pieces[-1])
         value = "/".join(pieces)
       elif key == "ro.build.description":
+<<<<<<< HEAD   (326d62 Merge "Merge empty history for sparse-8747889-L1870000095520)
         pieces = value.split(" ")
         assert len(pieces) == 5
+=======
+        pieces = value.split()
+        assert pieces[-1].endswith("-keys")
+>>>>>>> BRANCH (a6db6e Merge "Version bump to TKB1.220626.001.A1 [core/build_id.mk])
         pieces[-1] = EditTags(pieces[-1])
         value = " ".join(pieces)
       elif key == "ro.build.tags":
@@ -685,6 +690,60 @@ def ReplaceAvbSigningKeys(misc_info):
   for partition in AVB_FOOTER_ARGS_BY_PARTITION:
     ReplaceAvbPartitionSigningKey(partition)
 
+<<<<<<< HEAD   (326d62 Merge "Merge empty history for sparse-8747889-L1870000095520)
+=======
+  for custom_partition in misc_info.get(
+          "avb_custom_images_partition_list", "").strip().split():
+    ReplaceAvbPartitionSigningKey(custom_partition)
+
+
+def RewriteAvbProps(misc_info):
+  """Rewrites the props in AVB signing args."""
+  for partition, args_key in AVB_FOOTER_ARGS_BY_PARTITION.items():
+    args = misc_info.get(args_key)
+    if not args:
+      continue
+
+    tokens = []
+    changed = False
+    for token in args.split():
+      fingerprint_key = 'com.android.build.{}.fingerprint'.format(partition)
+      if not token.startswith(fingerprint_key):
+        tokens.append(token)
+        continue
+      prefix, tag = token.rsplit('/', 1)
+      tokens.append('{}/{}'.format(prefix, EditTags(tag)))
+      changed = True
+
+    if changed:
+      result = ' '.join(tokens)
+      print('Rewriting AVB prop for {}:\n'.format(partition))
+      print('  replace: {}'.format(args))
+      print('     with: {}'.format(result))
+      misc_info[args_key] = result
+
+
+def ReplaceGkiSigningKey(misc_info):
+  """Replaces the GKI signing key."""
+
+  key = OPTIONS.gki_signing_key
+  if not key:
+    return
+
+  algorithm = OPTIONS.gki_signing_algorithm
+  if not algorithm:
+    raise ValueError("Missing --gki_signing_algorithm")
+
+  print('Replacing GKI signing key with "%s" (%s)' % (key, algorithm))
+  misc_info["gki_signing_algorithm"] = algorithm
+  misc_info["gki_signing_key_path"] = key
+
+  extra_args = OPTIONS.gki_signing_extra_args
+  if extra_args:
+    print('Setting GKI signing args: "%s"' % (extra_args))
+    misc_info["gki_signing_signature_args"] = extra_args
+
+>>>>>>> BRANCH (a6db6e Merge "Version bump to TKB1.220626.001.A1 [core/build_id.mk])
 
 def BuildKeyMap(misc_info, key_mapping_options):
   for s, d in key_mapping_options:

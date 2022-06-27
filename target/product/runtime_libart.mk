@@ -97,3 +97,24 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Enable minidebuginfo generation unless overridden.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=true
+<<<<<<< HEAD   (326d62 Merge "Merge empty history for sparse-8747889-L1870000095520)
+=======
+
+# Enable Madvising of the whole art, odex and vdex files to MADV_WILLNEED.
+# The size specified here is the size limit of how much of the file
+# (in bytes) is madvised.
+# We madvise the whole .art file to MADV_WILLNEED with UINT_MAX limit.
+# For odex and vdex files, we limit madvising to 100MB.
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.madvise.vdexfile.size=104857600 \
+    dalvik.vm.madvise.odexfile.size=104857600 \
+    dalvik.vm.madvise.artfile.size=4294967295
+
+# Properties for the Unspecialized App Process Pool
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.usap_pool_enabled?=false \
+    dalvik.vm.usap_refill_threshold?=1 \
+    dalvik.vm.usap_pool_size_max?=3 \
+    dalvik.vm.usap_pool_size_min?=1 \
+    dalvik.vm.usap_pool_refill_delay_ms?=3000
+>>>>>>> BRANCH (a6db6e Merge "Version bump to TKB1.220626.001.A1 [core/build_id.mk])
