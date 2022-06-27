@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0999b21_2a05381d",
+        "filename": "Changes.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-06-27T15:05:32Z",
+      "side": 1,
+      "message": "I believe this will only work internally, can you use the whole url instead here and below?",
+      "range": {
+        "startLine": 51,
+        "startChar": 6,
+        "endLine": 51,
+        "endChar": 18
+      },
+      "revId": "9e6a608b49c18e8a83f940c296193af41de1bf5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
