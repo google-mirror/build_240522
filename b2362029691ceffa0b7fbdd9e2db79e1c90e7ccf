@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4894a41_498e94db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-06-27T17:00:17Z",
+      "side": 1,
+      "message": "Does this accomplish the same thing as what I described in go/soong-analyze-only?\n\nI think that having a list of the desired modules, and walking through those to make sure they are buildable is better than having an allowlist of excepted modules, because it\u0027ll be really hard to know which modules we *don\u0027t* need.",
+      "revId": "b2362029691ceffa0b7fbdd9e2db79e1c90e7ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
