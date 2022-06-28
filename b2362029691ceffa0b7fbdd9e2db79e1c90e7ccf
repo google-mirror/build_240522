@@ -16,6 +16,24 @@
       "message": "Does this accomplish the same thing as what I described in go/soong-analyze-only?\n\nI think that having a list of the desired modules, and walking through those to make sure they are buildable is better than having an allowlist of excepted modules, because it\u0027ll be really hard to know which modules we *don\u0027t* need.",
       "revId": "b2362029691ceffa0b7fbdd9e2db79e1c90e7ccf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "063fa0ae_7dd27d42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-06-28T08:07:24Z",
+      "side": 1,
+      "message": "Yes, I think we are addressing the same problem.\nI wanted to list the missing modules by collecting the missing dependencies using `ALLOW_MISSING_DEPENDENCIES` command. So that it will not be that difficult to create the list.\n\nIn soong, a module have multiple variants that have different dependencies. Do you want to list the modules with the specific variants information to include in the api domain?",
+      "parentUuid": "f4894a41_498e94db",
+      "revId": "b2362029691ceffa0b7fbdd9e2db79e1c90e7ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
