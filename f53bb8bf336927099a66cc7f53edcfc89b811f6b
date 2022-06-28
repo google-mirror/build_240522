@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c30ef8_46a33fc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-06-28T02:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c029a688_b9929148",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97cd9410_94c865ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-06-28T02:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00bfcc4a_ffcd91d2",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e50b32d_9d8ccdcd",
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46a78ee_a14ff58e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-06-28T02:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e50b32d_9d8ccdcd",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 166
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee1255b0_d0d7e30e",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-06-27T18:22:53Z",
       "side": 1,
       "message": "Maybe `host_dependencies` to match everything else here?  This is getting its values from `host_required`, but that\u0027s an implementation detail in Soong and you could want to list other host dependencies here too.",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "f53bb8bf336927099a66cc7f53edcfc89b811f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3b67da_a05a1b73",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-06-28T02:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee1255b0_d0d7e30e",
       "range": {
         "startLine": 31,
         "startChar": 5,
