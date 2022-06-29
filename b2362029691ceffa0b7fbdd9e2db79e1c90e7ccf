@@ -52,6 +52,24 @@
       "tag": "mailMessageId\u003d\u003cCAOye\u003d2Ecn49x5xrs5z4c_vAQ+T8+9Xi+s4rTDcCNi\u003dn\u003d_PDJ4w@mail.gmail.com\u003e",
       "revId": "b2362029691ceffa0b7fbdd9e2db79e1c90e7ccf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a65361_1af30b23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-06-29T05:40:04Z",
+      "side": 1,
+      "message": "Interface can be changed. I originally though having a list as a file that is included in the .mcombo or whatever configuration of the inner-tree. Let me add comments on your doc to discuss further about this.",
+      "parentUuid": "6b107e0d_b2905619",
+      "revId": "b2362029691ceffa0b7fbdd9e2db79e1c90e7ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
