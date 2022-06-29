@@ -5,6 +5,7 @@
 To migrate all gensrcs to Bazel, we are restricting the use of depfile property
 because Bazel requires specifying the dependencies directly.
 
+
 To fix existing uses, remove depfile and directly specify all the dependencies
 in .bp files. For example:
 
