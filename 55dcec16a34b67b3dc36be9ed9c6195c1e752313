@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9728adda_8c0b7a34",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-06-29T16:27:42Z",
+      "side": 1,
+      "message": "Maybe extract this into its own function so it can be unit tested.  I predict that we\u0027ll have a bunch of churn in the layout.",
+      "revId": "55dcec16a34b67b3dc36be9ed9c6195c1e752313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
