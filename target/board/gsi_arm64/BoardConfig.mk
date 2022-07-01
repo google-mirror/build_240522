@@ -35,3 +35,6 @@ BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 # TODO(b/36764215): remove this setting when the generic system image
 # no longer has QCOM-specific directories under /.
 BOARD_SEPOLICY_DIRS += build/make/target/board/generic_arm64/sepolicy
+
+# Include 64-bit mediaserver to support 64-bit only devices
+TARGET_DYNAMIC_64_32_MEDIASERVER := true

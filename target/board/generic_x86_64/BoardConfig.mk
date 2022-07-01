@@ -24,7 +24,11 @@ TARGET_2ND_ARCH_VARIANT := x86_64
 
 include build/make/target/board/BoardConfigGsiCommon.mk
 
-ifndef BUILDING_GSI
+ifdef BUILDING_GSI
+# Include 64-bit mediaserver to support 64-bit only devices
+TARGET_DYNAMIC_64_32_MEDIASERVER := true
+else
+
 include build/make/target/board/BoardConfigEmuCommon.mk
 
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
