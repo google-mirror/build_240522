@@ -16,6 +16,24 @@
       "message": "Jooyung, do we need this now that AIDL libs are removed from VMDK?\nhttps://android-review.googlesource.com/q/topic:remove-aidl-from-vndk",
       "revId": "075e09ce95f609e058e8ba7c0309b7e94a9c6d5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f094dd_982f0aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-07-01T06:05:36Z",
+      "side": 1,
+      "message": "No, unless it\u0027s used by other existing VNDK libs.",
+      "parentUuid": "8818d177_84012047",
+      "revId": "075e09ce95f609e058e8ba7c0309b7e94a9c6d5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
