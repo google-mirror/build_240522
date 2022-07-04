@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ff95c1ae_8781c050",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1047684
+      },
+      "writtenOn": "2022-07-04T10:58:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a85381f_88790159",
+      "range": {
+        "startLine": 7,
+        "startChar": 115,
+        "endLine": 7,
+        "endChar": 141
+      },
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b16c37ca_bbf336e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -54,6 +78,24 @@
       "writtenOn": "2022-06-24T08:07:39Z",
       "side": 1,
       "message": "We added some additional languages to this list, taken from the Android TV/Google TV Emulators in the Android SDK, versions 12 and up. I added these languages because I found that currently there is no separate Region setting in Settings \u003e System for Android TV/Google TV.",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf7bbe3_3a048877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1047684
+      },
+      "writtenOn": "2022-07-04T10:58:47Z",
+      "side": 1,
+      "message": "\u003e We added some additional languages to this list, taken from the Android TV/Google TV Emulators in the Android SDK, versions 12 and up. I added these languages because I found that currently there is no separate Region setting in Settings \u003e System for Android TV/Google TV.\n\nNougat is like 6 years old and it sounds like a bad reason to change the sources here in order to be compatible with a very old picker app in the platform. We should just try to update the picker.\n\nIs the Android TV locale picker the only problem here? Have you talked to the Android TV team in Google?\n\nOtherwise, I am happy to help talk to the Android TV team to update their locale picker.",
+      "parentUuid": "c267b2fb_1bed6857",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
