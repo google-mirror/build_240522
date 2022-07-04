@@ -134,6 +134,24 @@
       "parentUuid": "b13b823a_41d8a2bf",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90895f3c_7bf393cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-07-04T20:55:47Z",
+      "side": 1,
+      "message": "\u003e Is the Android TV locale picker the only problem here?\nVictor, this bug is affecting most Android TV devices on Android 8.0 and up, including Google\u0027s own Nexus Player and the Chromecast with Google TV. This also affects the caption language picker on most Android devices (including Pixel devices and Emulators), which also use the old picker.\nTLDR: The Android TV locale picker is not the only problem. The captions language picker is also the culprit, and it affects many AOSP devices, not just Android TV devices.",
+      "parentUuid": "6b7d5fa2_b0bb4a5f",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
