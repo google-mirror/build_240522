@@ -152,6 +152,24 @@
       "parentUuid": "6b7d5fa2_b0bb4a5f",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b708eba7_a4623f2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1047684
+      },
+      "writtenOn": "2022-07-04T21:46:19Z",
+      "side": 1,
+      "message": "Kevin, are you going to cherry-pick this CL to Android 8.0 and up device? How does it help older devices which will never upgrade to Android 13 or newer?",
+      "parentUuid": "90895f3c_7bf393cb",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
