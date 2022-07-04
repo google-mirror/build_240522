@@ -98,6 +98,24 @@
       "parentUuid": "c267b2fb_1bed6857",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13b823a_41d8a2bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2022-07-04T12:28:55Z",
+      "side": 1,
+      "message": "The setup folks are working on this. Please see internal bug b/232443481. Since those changes are in an unbundled APK I don\u0027t think we\u0027ll need the res change to accomplish this.",
+      "parentUuid": "7cf7bbe3_3a048877",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
