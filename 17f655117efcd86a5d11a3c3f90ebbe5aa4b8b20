@@ -22,6 +22,29 @@
       },
       "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af409590_9b3b0d3b",
+        "filename": "target/board/generic_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-07-04T13:02:14Z",
+      "side": 1,
+      "message": "we still need this? Didn\u0027t emulator migrate to emulator_arm64 already?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
