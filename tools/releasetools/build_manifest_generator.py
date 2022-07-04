@@ -15,9 +15,8 @@
 # limitations under the License.
 
 """
-`fsverity_manifest_generator` generates build manifest APK file containing
-digests of target files. The APK file is signed so the manifest inside the APK
-can be trusted.
+`build_manifest_generator` generates build manifest APK file containing digests
+of target files.
 """
 
 import argparse
@@ -25,7 +24,6 @@ import common
 import os
 import subprocess
 import sys
-from fsverity_digests_pb2 import FSVerityDigests
 
 HASH_ALGORITHM = 'sha256'
 
@@ -45,6 +43,10 @@ if __name__ == '__main__':
   p.add_argument(
       '--fsverity-path',
       help='path to the fsverity program',
+      required=True)
+  p.add_argument(
+      '--fsverity-manifest-generator-path',
+      help='path to the fsverity_manifest_generator program',
       required=True)
   p.add_argument(
       '--aapt2-path',
@@ -88,19 +90,14 @@ if __name__ == '__main__':
       help='input file for the build manifest')
   args = p.parse_args(sys.argv[1:])
 
-  digests = FSVerityDigests()
-  for f in sorted(args.inputs):
-    # f is a full path for now; make it relative so it starts with {mount_point}/
-    digest = digests.digests[os.path.relpath(f, args.base_dir)]
-    digest.digest = _digest(args.fsverity_path, f)
-    digest.hash_alg = HASH_ALGORITHM
-
   temp_dir = common.MakeTempDir()
 
   os.mkdir(os.path.join(temp_dir, "assets"))
-  metadata_path = os.path.join(temp_dir, "assets", "build_manifest.pb")
-  with open(metadata_path, "wb") as f:
-    f.write(digests.SerializeToString())
+  manifest_path = os.path.join(temp_dir, "assets", "build_manifest.pb")
+  common.RunAndCheckOutput([args.fsverity_manifest_generator_path,
+      "--fsverity-path", args.fsverity_path,
+      "--base-dir", args.base_dir,
+      "--output" manifest_path].append(args.inputs))
 
   common.RunAndCheckOutput([args.aapt2_path, "link",
       "-A", os.path.join(temp_dir, "assets"),
