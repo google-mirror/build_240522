@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8aa2de3_f1ae27b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-07-04T12:56:25Z",
+      "side": 1,
+      "message": "\"TARGET_ENABLE_MEDIASERVER_64\" sounds like we\u0027re installing the 64-bit but not 32-bit mediaserver.\nBut in reality we want to install both and choose one of them dynamically. Could you come up with a name that describes the expected behavior better?\n\n\"TARGET_DYNAMIC_64_32_MEDIASERVER\" for example",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
