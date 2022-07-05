@@ -170,6 +170,24 @@
       "parentUuid": "90895f3c_7bf393cb",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a382a3e_1246bb32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-07-05T08:44:41Z",
+      "side": 1,
+      "message": "I appreciate what you said, Victor and Robin, but here are the implications that may arise.\n\nMULTIPLE LOCALES OR NOT?\nWith the new Locale Picker, how will users select which language to use? Android TVs do not have touch screens, so how will users drag the locales in the order that they prefer? That would require lots of tweaking to the Java implementation of the Locale Picker. If two or more languages are added, we could face inconsistencies, such as the audio language not being the same as the menu language by default.\n\nWHAT HAPPENS\nIf you proceed with this bug fix, the Language option on Android TVs will become Language \u0026 Region. Two additional options will appear.\n* Language is where one sets the display language to be used.\n* Region is where one sets their geographic location, which varies depending on the language. The Region setting is grayed out if only one region exists for a language, and not all regions are available in all languages. For example, Taiwan cannot be set as the region when Simplified Chinese is the display language.\n(Side note: Android Automotive doesn\u0027t support multiple locales at the same time, even though they already use the new locale picker.)\n\nLONG-TERM EFFECTS\n(For TVs, let\u0027s choose Sony as an example, since it is the only known TV brand to support all menu languages in the Americas and worldwide.)\nWe also need to consider what the long-term effects will be after the bug fix is applied. For example, in the current setup, Sony is showing all supported display languages on their 2020 and newer Bravia TVs (models ending in H, J, or K), which partially removes regional restrictions. However, the region selection only shows the countries made for a particular market, instead of being dependent on the menu language. If you proceed with this bug fix and it is approved, it could make Sony change their mind and fully reinstate regional restrictions on any future TVs released.\n\nTEST CASES\nSuppose we have two methods:\n1. Adding values-\u003clanguage\u003e-r\u003cREGION\u003e folders with donotttranslate-maps.xml files (https://android-review.googlesource.com/c/platform/frameworks/base/+/2134012)\n2. Implementing the new locale picker\n\nMethod 1 is approved and submitted. Sony reviews the code and thinks it is a good fit for their future TVs, thus adding them to the next update.\nBut what if Method 2 is approved and submitted instead? This new locale picker is more like LG\u0027s language picker. Sony doesn\u0027t like it and doesn\u0027t want to implement this. However, if it is forced to implement the new locale picker, it could reduce the number of menu languages shown depending on the region, thus fully reinstating regional restrictions for the first time since 2020. What if there is a user who speaks both English and Japanese using a Sony TV in the US with Method 2 being applied (despite Sony being a Japanese company)? It could reduce the number to just three languages (English, Spanish, and French) once again, and as a result, only English can be used as the voice recognition language.\n\nCONCLUSION\nWith that being said, Method 1 is the most effective approach, without making any changes to the implementation to the code. Many Android TV devices use stock Android TV, not a skinned version. For example, the Xperia UI does not exist on Sony Android TVs, even though it exists on Sony smartphones.",
+      "parentUuid": "b708eba7_a4623f2c",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
