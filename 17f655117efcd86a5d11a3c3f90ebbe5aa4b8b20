@@ -141,6 +141,30 @@
       },
       "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9c1058_b2d7befb",
+        "filename": "target/board/generic_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-07-05T07:28:59Z",
+      "side": 1,
+      "message": "I really agree the stance. However, many usage came from before GSI. The patch is for an urgent project. I would like to focus on merging the patch and avoid branch lines. \n\nHowever, reviewed again this feature again. Looks there is no harm to enable the flag without the condition. Let me consider remove the condition...",
+      "parentUuid": "fe3d7520_250b53ad",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
