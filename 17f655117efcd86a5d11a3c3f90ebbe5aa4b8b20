@@ -117,6 +117,30 @@
       },
       "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe3d7520_250b53ad",
+        "filename": "target/board/generic_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-07-05T06:33:59Z",
+      "side": 1,
+      "message": "My stance is that if they are unknown to us, then it\u0027s not our obligation.\n\n\nIf this breaks their target, then it only means they should define their own board config. We\u0027ve spent non-trivial amount of time cleaning these Makefiles up, removing conditionals / divergences / special settings and such, I really hope we don\u0027t regress to add new conditionals unless we absolutely must.",
+      "parentUuid": "72e36d4d_51d5f921",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
