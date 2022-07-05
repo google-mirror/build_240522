@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80f53bcd_c3820dd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-07-05T02:17:51Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "b8aa2de3_f1ae27b6",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af409590_9b3b0d3b",
         "filename": "target/board/generic_arm64/BoardConfig.mk",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-04T13:02:14Z",
       "side": 1,
       "message": "we still need this? Didn\u0027t emulator migrate to emulator_arm64 already?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "17f655117efcd86a5d11a3c3f90ebbe5aa4b8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e36d4d_51d5f921",
+        "filename": "target/board/generic_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-07-05T02:17:51Z",
+      "side": 1,
+      "message": "Some unknown makefile might use the board config file. Adding this is for avoiding pollute them.",
+      "parentUuid": "af409590_9b3b0d3b",
       "range": {
         "startLine": 69,
         "startChar": 0,
