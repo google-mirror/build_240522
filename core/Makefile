@@ -1632,6 +1632,13 @@ license_modules_odm := $(filter $(TARGET_OUT_ODM)/%,$(license_modules))
 license_modules_vendor_dlkm := $(filter $(TARGET_OUT_VENDOR_DLKM)/%,$(license_modules))
 license_modules_odm_dlkm := $(filter $(TARGET_OUT_ODM_DLKM)/%,$(license_modules))
 license_modules_odm_dlkm := $(filter $(TARGET_OUT_SYSTEM_DLKM)/%,$(license_modules))
+# Some files in userdata are relevant to system partitions.
+ifneq ($(filter address,$(SANITIZE_TARGET)),)
+  license_modules_system += $(filter $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/system/%,$(license_modules))
+  license_modules_system += $(filter $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/$(TARGET_COPY_OUT_SYSTEM_OTHER)/%,$(license_modules))
+  license_modules_product += $(filter $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/$(TARGET_COPY_OUT_PRODUCT)/%,$(license_modules))
+  license_modules_system_ext += $(filter $(PRODUCT_OUT)/$(TARGET_COPY_OUT_ASAN)/$(TARGET_COPY_OUT_SYSTEM_EXT)/%,$(license_modules))
+endif
 license_modules_agg := $(license_modules_system) \
                        $(license_modules_vendor) \
                        $(license_modules_product) \
