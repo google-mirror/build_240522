@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "078fc1df_903d8b4f",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-07T20:17:29Z",
+      "side": 1,
+      "message": "Reverted this list to the original state, not need to risk breaking it.",
+      "parentUuid": "078d668c_e01663be",
+      "range": {
+        "startLine": 2979,
+        "startChar": 6,
+        "endLine": 2979,
+        "endChar": 27
+      },
+      "revId": "415fa08f2cf9ce2dcf16189357a49a434b427dda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1f13a90_705426a0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-07T17:08:57Z",
       "side": 1,
       "message": "Remove this directory first, so that we\u0027re sure it\u0027s empty.",
+      "range": {
+        "startLine": 2983,
+        "startChar": 1,
+        "endLine": 2983,
+        "endChar": 27
+      },
+      "revId": "415fa08f2cf9ce2dcf16189357a49a434b427dda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "205434dc_d055e568",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-07T20:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1f13a90_705426a0",
       "range": {
         "startLine": 2983,
         "startChar": 1,

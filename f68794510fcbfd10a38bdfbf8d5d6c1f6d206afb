@@ -70,6 +70,30 @@
       },
       "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d8981a_bb4583ce",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2978,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-07T20:17:29Z",
+      "side": 0,
+      "message": "Following your cautions, I\u0027ve reverted this much closer to what it was before. I\u0027ve kept all the PRIVATE_ variables and use those in the commands.",
+      "parentUuid": "a6e28bc7_c4383e75",
+      "range": {
+        "startLine": 2978,
+        "startChar": 0,
+        "endLine": 2978,
+        "endChar": 70
+      },
+      "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
