@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c86dcd1b_a8eb64ec",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2978,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-07-07T17:08:57Z",
+      "side": 0,
+      "message": "The rest of these should be fine to embed (as I think they\u0027re all readonly variables), but unless you\u0027re marking this readonly, something later could change the value of this. (The command lines don\u0027t do variable expansion until after all makefile contents are read -- even readonly isn\u0027t 100% safe, but it\u0027s far safer)",
+      "range": {
+        "startLine": 2978,
+        "startChar": 0,
+        "endLine": 2978,
+        "endChar": 70
+      },
+      "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

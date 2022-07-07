@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f13a90_705426a0",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-07-07T17:08:57Z",
+      "side": 1,
+      "message": "Remove this directory first, so that we\u0027re sure it\u0027s empty.",
+      "range": {
+        "startLine": 2983,
+        "startChar": 1,
+        "endLine": 2983,
+        "endChar": 27
+      },
+      "revId": "415fa08f2cf9ce2dcf16189357a49a434b427dda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
