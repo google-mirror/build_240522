@@ -22,6 +22,30 @@
       },
       "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d184bc_e1899173",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2978,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-07T19:17:46Z",
+      "side": 0,
+      "message": "I didn\u0027t follow you recommendation. Do you mean I should keep the private variable assignments or get rid of them all?",
+      "parentUuid": "c86dcd1b_a8eb64ec",
+      "range": {
+        "startLine": 2978,
+        "startChar": 0,
+        "endLine": 2978,
+        "endChar": 70
+      },
+      "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
