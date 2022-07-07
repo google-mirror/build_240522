@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "078d668c_e01663be",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-07-07T19:23:42Z",
+      "side": 1,
+      "message": "Oh, this doesn\u0027t work either. These are evaluated immediately in the current context, without the target-specific variables defined.",
+      "range": {
+        "startLine": 2979,
+        "startChar": 6,
+        "endLine": 2979,
+        "endChar": 27
+      },
+      "revId": "415fa08f2cf9ce2dcf16189357a49a434b427dda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1f13a90_705426a0",
         "filename": "core/Makefile",
         "patchSetId": 4

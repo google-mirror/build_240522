@@ -46,6 +46,30 @@
       },
       "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6e28bc7_c4383e75",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2978,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-07-07T19:23:42Z",
+      "side": 0,
+      "message": "From the ones you removed, I\u0027d recommend keeping PRIVATE_MANIFEST, PRIVATE_KEY, and PRIVATE_INPUTS. The rest should be safe enough to remove the target-specific PRIVATE_* variables and embed the values like you\u0027ve done.",
+      "parentUuid": "95d184bc_e1899173",
+      "range": {
+        "startLine": 2978,
+        "startChar": 0,
+        "endLine": 2978,
+        "endChar": 70
+      },
+      "revId": "f68794510fcbfd10a38bdfbf8d5d6c1f6d206afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
