@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (b4f831 Merge "Fix broken test_lunch.py")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=SQ3A.220705.003
+>>>>>>> BRANCH (71339f Version bump to SQ3A.220705.003 [core/build_id.mk])
