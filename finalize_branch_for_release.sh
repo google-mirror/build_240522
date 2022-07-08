@@ -18,13 +18,21 @@ function finalize_main() {
 
     AIDL_TRANSITIVE_FREEZE=true $m aidl-freeze-api
 
+    # Generate ABI dumps
+    ANDROID_BUILD_TOP="$top" \
+        $top/development/vndk/tools/header-checker/utils/create_reference_dumps.py \
+        -p aosp_arm64 --build-variant user
+
     # Update new versions of files. See update-vndk-list.sh (which requires envsetup.sh)
     $m check-vndk-list || \
         { cp $top/out/soong/vndk/vndk.libraries.txt $top/build/make/target/product/gsi/current.txt; }
 
-    # for now, we simulate the release state for AIDL, but in the future, we would want
-    # to actually turn the branch into the REL state and test with that
-    AIDL_FROZEN_REL=true $m nothing # test build
+    # This command tests:
+    #   The release state for AIDL.
+    #   ABI difference between user and userdebug builds.
+    # In the future, we would want to actually turn the branch into the REL
+    # state and test with that.
+    AIDL_FROZEN_REL=true $m droidcore
 
     # Build SDK (TODO)
     # lunch sdk...
