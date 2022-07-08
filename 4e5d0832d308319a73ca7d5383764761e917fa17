@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82ffb244_05e51469",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-07-08T17:07:27Z",
+      "side": 1,
+      "message": "Actually, this might create a new VNDK module. We can see the forrest run, but we might want to move L20 after this.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 50
+      },
+      "revId": "4e5d0832d308319a73ca7d5383764761e917fa17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f642d7dd_33d32386",
         "filename": "finalize_branch_for_release.sh",
         "patchSetId": 1
