@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1c7e24_816a95ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-07-12T04:26:09Z",
+      "side": 1,
+      "message": "Hi Colin,\n\nThe patch adds a new target variable. This is a blocking issue for release.\nPlease take a look and Owner+1 if you have no concern.\n\nThanks!",
+      "revId": "951279493dcd43973468d6432b6ae8680bd61810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
