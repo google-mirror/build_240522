@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39dff965_b7a1c3de",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-07-13T19:44:02Z",
+      "side": 1,
+      "message": "is it intended that we pass None here? This doens\u0027t match logic in SignUncompressedApex",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 419,
+        "endChar": 28
+      },
+      "revId": "6068e8dd525dbb6f1441d8e433865d22262bb17e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
