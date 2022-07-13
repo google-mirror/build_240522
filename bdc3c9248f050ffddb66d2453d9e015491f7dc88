@@ -16,6 +16,24 @@
       "message": "submit internal change, and use it\u0027s change-id here as merged-in tag.",
       "revId": "bdc3c9248f050ffddb66d2453d9e015491f7dc88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a00f776_e00fca9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2022-07-13T13:09:34Z",
+      "side": 1,
+      "message": "Great, thank you!",
+      "parentUuid": "d4333551_d6fa5ce1",
+      "revId": "bdc3c9248f050ffddb66d2453d9e015491f7dc88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
