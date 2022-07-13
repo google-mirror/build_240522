@@ -223,6 +223,41 @@
       "message": "My vote remains -1 for the reasons I gave. I\u0027m upgrading to -2 to make it sticky and prevent submission.",
       "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee0e3d9_94e4516a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-07-13T20:21:14Z",
+      "side": 1,
+      "message": "The bug also persists in the Settings app (which drives the menu system), affecting both the menu language and caption language on Android TV devices (the latter also being present on AOSP-based phoned and tablets). I want to see what happens in the next Android 13 Beta update or so before it gets finalized in August.",
+      "parentUuid": "4000a915_f015f297",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c30b1d_6e661d71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1189505
+      },
+      "writtenOn": "2022-07-13T20:21:14Z",
+      "side": 1,
+      "message": "Hi everyone,\nSorry for the late response. Here are some additional findings.\n* sr_BA, sr_RS, and sr_XK use the Cyrillic script by default if no specific script is provided.\n* sr_ME uses the Latin script by default.",
+      "revId": "3bfaa1ad892523c5c6f350b0cb851bd6e950ddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
