@@ -71,6 +71,8 @@ function _set_rbe_vars() {
   export RBE_JAVAC=1
   export RBE_R8=1
   export RBE_D8=1
+  export RBE_ART_JAVAC=1
+  export RBE_ART_D8=1
 }
 
 _export_metrics_uploader
