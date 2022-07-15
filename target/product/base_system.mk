@@ -284,6 +284,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi.rc \
     wm \
+    frameworks-base-overlays \
 
 # VINTF data for system image
 PRODUCT_PACKAGES += \
