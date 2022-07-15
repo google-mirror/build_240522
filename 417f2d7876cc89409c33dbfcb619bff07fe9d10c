@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e881f9_1b1c151a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-07-15T19:06:07Z",
+      "side": 1,
+      "message": "lg to me, though you said there is still the libutils issue we should fix before submitting?",
+      "revId": "417f2d7876cc89409c33dbfcb619bff07fe9d10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
