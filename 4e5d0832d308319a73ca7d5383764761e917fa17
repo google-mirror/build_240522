@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40cc4b2d_66734511",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2022-07-15T03:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82ffb244_05e51469",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 50
+      },
+      "revId": "4e5d0832d308319a73ca7d5383764761e917fa17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f642d7dd_33d32386",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-08T17:06:50Z",
       "side": 1,
       "message": "nit: we could combine the checks and only do one build for now",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "4e5d0832d308319a73ca7d5383764761e917fa17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3db928ea_6ab2ec68",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2022-07-15T03:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f642d7dd_33d32386",
       "range": {
         "startLine": 32,
         "startChar": 28,
