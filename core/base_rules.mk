@@ -1208,3 +1208,18 @@ endif
 ###########################################################
 
 include $(BUILD_NOTICE_FILE)
+
+###########################################################
+## Soong conversion tracking process
+###########################################################
+# The existence of the module is tracked here. Other module include files include additional
+# info in SOON_CONV
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+
+SOONG_CONV.$(LOCAL_MODULE).MAKEFILES := \
+    $(SOONG_CONV.$(LOCAL_MODULE).MAKEFILES) $(LOCAL_MODULE_MAKEFILE)
+SOONG_CONV.$(LOCAL_MODULE).INSTALLED:= \
+    $(SOONG_CONV.$(LOCAL_MODULE).INSTALLED) $(LOCAL_INSTALLED_MODULE)
+SOONG_CONV := $(SOONG_CONV) $(LOCAL_MODULE)
+
+endif

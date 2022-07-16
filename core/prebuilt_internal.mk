@@ -59,5 +59,10 @@ endif
 
 $(built_module) : $(LOCAL_ADDITIONAL_DEPENDENCIES)
 
+ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+SOONG_CONV.$(LOCAL_MODULE).IS_PREBUILT := \
+    $(SOONG_CONV.$(LOCAL_MODULE).IS_PREBUILT) true
+endif
+
 my_prebuilt_src_file :=
 my_preopt_for_extracted_apk :=

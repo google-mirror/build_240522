@@ -210,7 +210,7 @@ class SoongData(object):
     self.reverse_installed = dict()
     self.modules = set()
 
-    for (module, module_type, problem, dependencies, makefiles, installed) in reader:
+    for (module, module_type, problem, dependencies, makefiles, installed, is_prebuilt) in reader:
       self.modules.add(module)
       makefiles = [f for f in makefiles.strip().split(' ') if f != ""]
       self.module_types[module] = module_type
