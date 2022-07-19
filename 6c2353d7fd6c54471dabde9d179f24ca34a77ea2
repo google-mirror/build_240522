@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "955aa78a_feb52ec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2022-07-19T09:00:52Z",
+      "side": 1,
+      "message": "Hi Steven,\n\nYi-yo suggested that we convert the python script to a binary so that it doesn\u0027t depend on the build server environment.\nI verified this topic with go/ab/P37626547\n",
+      "revId": "6c2353d7fd6c54471dabde9d179f24ca34a77ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
