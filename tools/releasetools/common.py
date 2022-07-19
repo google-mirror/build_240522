@@ -47,7 +47,13 @@ class Options(object):
     self.search_path = platform_search_path.get(sys.platform, None)
     self.signapk_path = "framework/signapk.jar"  # Relative to search_path
     self.signapk_shared_library_path = "lib64"   # Relative to search_path
+    self.sign_sepolicy_path = None
     self.extra_signapk_args = []
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+    self.extra_sign_sepolicy_args = []
+    self.aapt2_path = "aapt2"
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
     self.java_path = "java"  # Use the one on the path by default.
     self.java_args = ["-Xmx2048m"]  # The default JVM args.
     self.public_key_suffix = ".x509.pem"
@@ -68,6 +74,12 @@ class Options(object):
     # Stash size cannot exceed cache_size * threshold.
     self.cache_size = None
     self.stash_threshold = 0.8
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+    self.logfile = None
+    self.host_tools = {}
+    self.sepolicy_name = 'sepolicy.apex'
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
 
 
 OPTIONS = Options()
@@ -807,6 +819,35 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
   if p.returncode != 0:
     raise ExternalError("signapk.jar failed: return code %s" % (p.returncode,))
 
+def SignSePolicy(sepolicy, key, password):
+  """Sign the sepolicy zip, producing an fsverity .fsv_sig and
+  an RSA .sig signature files.
+  """
+
+  if OPTIONS.sign_sepolicy_path is None:
+    return False
+
+  java_library_path = os.path.join(
+      OPTIONS.search_path, OPTIONS.signapk_shared_library_path)
+
+  cmd = ([OPTIONS.java_path] + OPTIONS.java_args +
+          ["-Djava.library.path=" + java_library_path,
+          "-jar", os.path.join(OPTIONS.search_path, OPTIONS.sign_sepolicy_path)] +
+          OPTIONS.extra_sign_sepolicy_args)
+
+  cmd.extend([key + OPTIONS.public_key_suffix,
+              key + OPTIONS.private_key_suffix,
+              sepolicy])
+
+  proc = Run(cmd, stdin=subprocess.PIPE)
+  if password is not None:
+    password += "\n"
+  stdoutdata, _ = proc.communicate(password)
+  if proc.returncode != 0:
+    raise ExternalError(
+        "Failed to run sign sepolicy: return code {}:\n{}".format(
+            proc.returncode, stdoutdata))
+  return True
 
 def CheckSize(data, target, info_dict):
   """Checks the data string passed against the max size limit.
@@ -977,7 +1018,12 @@ def ParseOptions(argv,
         argv, "hvp:s:x:" + extra_opts,
         ["help", "verbose", "path=", "signapk_path=",
          "signapk_shared_library_path=", "extra_signapk_args=",
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
          "java_path=", "java_args=", "public_key_suffix=",
+=======
+         "sign_sepolicy_path=", "extra_sign_sepolicy_args=", "aapt2_path=",
+         "java_path=", "java_args=", "android_jar_path=", "public_key_suffix=",
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
          "private_key_suffix=", "boot_signer_path=", "boot_signer_args=",
          "verity_signer_path=", "verity_signer_args=", "device_specific=",
          "extra="] +
@@ -1001,6 +1047,15 @@ def ParseOptions(argv,
       OPTIONS.signapk_shared_library_path = a
     elif o in ("--extra_signapk_args",):
       OPTIONS.extra_signapk_args = shlex.split(a)
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+    elif o in ("--sign_sepolicy_path",):
+      OPTIONS.sign_sepolicy_path = a
+    elif o in ("--extra_sign_sepolicy_args",):
+      OPTIONS.extra_sign_sepolicy_args = shlex.split(a)
+    elif o in ("--aapt2_path",):
+      OPTIONS.aapt2_path = a
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
     elif o in ("--java_path",):
       OPTIONS.java_path = a
     elif o in ("--java_args",):

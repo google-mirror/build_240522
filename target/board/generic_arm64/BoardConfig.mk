@@ -55,6 +55,13 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_VARIANT := generic
 endif
 
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+# Include 64-bit mediaserver to support 64-bit only devices
+TARGET_DYNAMIC_64_32_MEDIASERVER := true
+
+include build/make/target/board/BoardConfigGsiCommon.mk
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
 
 TARGET_USES_64_BIT_BINDER := true
 

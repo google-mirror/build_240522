@@ -561,6 +561,53 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       build_command.append("-c")
     if "selinux_fc" in prop_dict:
       build_command.append(prop_dict["selinux_fc"])
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+  elif fs_type.startswith("erofs"):
+    build_command = ["mkfs.erofs"]
+
+    compressor = None
+    if "erofs_default_compressor" in prop_dict:
+      compressor = prop_dict["erofs_default_compressor"]
+    if "erofs_compressor" in prop_dict:
+      compressor = prop_dict["erofs_compressor"]
+    if compressor and compressor != "none":
+      build_command.extend(["-z", compressor])
+
+    compress_hints = None
+    if "erofs_default_compress_hints" in prop_dict:
+      compress_hints = prop_dict["erofs_default_compress_hints"]
+    if "erofs_compress_hints" in prop_dict:
+      compress_hints = prop_dict["erofs_compress_hints"]
+    if compress_hints:
+      build_command.extend(["--compress-hints", compress_hints])
+
+    build_command.extend(["--mount-point", prop_dict["mount_point"]])
+    if target_out:
+      build_command.extend(["--product-out", target_out])
+    if fs_config:
+      build_command.extend(["--fs-config-file", fs_config])
+    if "selinux_fc" in prop_dict:
+      build_command.extend(["--file-contexts", prop_dict["selinux_fc"]])
+    if "timestamp" in prop_dict:
+      build_command.extend(["-T", str(prop_dict["timestamp"])])
+    if "uuid" in prop_dict:
+      build_command.extend(["-U", prop_dict["uuid"]])
+    if "block_list" in prop_dict:
+      build_command.extend(["--block-list-file", prop_dict["block_list"]])
+    if "erofs_pcluster_size" in prop_dict:
+      build_command.extend(["-C", prop_dict["erofs_pcluster_size"]])
+    if "erofs_share_dup_blocks" in prop_dict:
+      build_command.extend(["--chunksize", "4096"])
+    if "erofs_use_legacy_compression" in prop_dict:
+      build_command.extend(["-E", "legacy-compress"])
+
+    build_command.extend([out_file, in_dir])
+    if "erofs_sparse_flag" in prop_dict and not disable_sparse:
+      manual_sparse = True
+
+    run_fsck = RunErofsFsck
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
   elif fs_type.startswith("squash"):
     build_command = ["mksquashfsimage.sh"]
     build_command.extend([in_dir, out_file])

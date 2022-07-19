@@ -179,6 +179,7 @@ endef
 #  3. Records that we've visited this node, in ALL_PRODUCTS
 #
 define inherit-product
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
   $(if $(findstring ../,$(1)),\
     $(eval np := $(call normalize-paths,$(1))),\
     $(eval np := $(strip $(1))))\
@@ -189,6 +190,21 @@ define inherit-product
   $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
   $(eval inherit_var:=) \
   $(eval ALL_PRODUCTS := $(sort $(ALL_PRODUCTS) $(word 1,$(_include_stack))))
+=======
+  $(eval _inherit_product_wildcard := $(wildcard $(1)))\
+  $(if $(_inherit_product_wildcard),,$(error $(1) does not exist.))\
+  $(foreach part,$(_inherit_product_wildcard),\
+    $(if $(findstring ../,$(part)),\
+      $(eval np := $(call normalize-paths,$(part))),\
+      $(eval np := $(strip $(part))))\
+    $(foreach v,$(_product_var_list), \
+        $(eval $(v) := $($(v)) $(INHERIT_TAG)$(np))) \
+    $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+    $(eval inherit_var := PRODUCTS.$(current_mk).INHERITS_FROM) \
+    $(eval $(inherit_var) := $(sort $($(inherit_var)) $(np))) \
+    $(call dump-inherit,$(current_mk),$(1)) \
+    $(call dump-config-vals,$(current_mk),inherit))
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
 endef
 
 

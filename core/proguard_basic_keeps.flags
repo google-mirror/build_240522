@@ -72,3 +72,11 @@
 
 # Less spammy.
 -dontnote
+<<<<<<< HEAD   (01383a Merge "Merge empty history for sparse-8771784-L1160000095526)
+=======
+
+# The lite proto runtime uses reflection to access fields based on the names in
+# the schema, keep all the fields. Wildcard is used to apply the rule to classes
+# that have been renamed with jarjar.
+-keepclassmembers class * extends **.protobuf.MessageLite { <fields>; }
+>>>>>>> BRANCH (df5b28 Merge "Version bump to TKB1.220718.001.A1 [core/build_id.mk])
