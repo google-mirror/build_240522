@@ -16,6 +16,24 @@
       "message": "We found that the patch is only merged into GSI S. Should we merge the patch and CP to android12-gsi?",
       "revId": "234bc7ba525c5357829d8312c59b627a1c8afbac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6681a1_da064198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-07-20T09:43:57Z",
+      "side": 1,
+      "message": "i think there\u0027s no need as this affects UI/UX only, and nobody complained without this change so far.",
+      "parentUuid": "bf204684_6376d29f",
+      "revId": "234bc7ba525c5357829d8312c59b627a1c8afbac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
