@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f5783c_fff1984d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-07-21T14:18:15Z",
+      "side": 1,
+      "message": "This is only using the JDK 17 in a few places (remote D8/R8 actions and tradefed robolectric executions), is that intended?  If so, can you comment on why those specifically are being changed?  Should they depend on EXPERIMENTAL_USE_OPENJDK17_TOOLCHAIN?",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cad68c8_6595b541",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-07-21T14:18:15Z",
+      "side": 1,
+      "message": "This is only switching the toolchain for remote RBE actinos, but not local actions, which is undesirable.",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
