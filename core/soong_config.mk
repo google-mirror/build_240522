@@ -102,6 +102,8 @@ $(call add_json_list, SanitizeDevice,                    $(SANITIZE_TARGET))
 $(call add_json_list, SanitizeDeviceDiag,                $(SANITIZE_TARGET_DIAG))
 $(call add_json_list, SanitizeDeviceArch,                $(SANITIZE_TARGET_ARCH))
 
+$(call add_json_str, FuzzFramework,                	 	 $(FUZZ_FRAMEWORK))
+
 $(call add_json_bool, Safestack,                         $(filter true,$(USE_SAFESTACK)))
 $(call add_json_bool, EnableCFI,                         $(call invert_bool,$(filter false,$(ENABLE_CFI))))
 $(call add_json_list, CFIExcludePaths,                   $(CFI_EXCLUDE_PATHS) $(PRODUCT_CFI_EXCLUDE_PATHS))
