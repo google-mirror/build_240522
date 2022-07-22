@@ -69,6 +69,24 @@
       "parentUuid": "8cad68c8_6595b541",
       "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09c7d42_d4c7b87d",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-07-22T17:20:21Z",
+      "side": 1,
+      "message": "Make gets it from Soong, this should probably be `$(JAVA)`",
+      "parentUuid": "38d5cd7c_d39aec96",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
