@@ -51,6 +51,24 @@
       "message": "This is only switching the toolchain for remote RBE actinos, but not local actions, which is undesirable.",
       "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d5cd7c_d39aec96",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-07-22T16:31:04Z",
+      "side": 1,
+      "message": "I don\u0027t see anywhere else in build/make where the JDK is selected specifically, it\u0027s only for these wrappers.",
+      "parentUuid": "8cad68c8_6595b541",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
