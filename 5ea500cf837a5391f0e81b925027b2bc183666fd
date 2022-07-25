@@ -1,0 +1,288 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a1a921_ac245c0f",
+        "filename": "tools/mk2bp_unblocked",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Do everything that this bash file does inside the python script. No need for a separate wrapper script.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911f3664_d1ac61b2",
+        "filename": "tools/mk2bp_unblocked",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "I think you don\u0027t use TARGET_DEVICE anywhere, you can do `get_build_var PRODUCT_OUT` directly.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61ba71b_83512f18",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Consider making an Android.bp entry for this so that it can be `b run` and an up-to-date python version will be used on all distros.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db627458_7dfeede8",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Throughout the whole file, use f strings instead of %s. Potentially except for strings that only have 1 %s at the very end, in which case you can just use + for concatenation.\n\n`\"building: \" + \" \".join(modules)`\n\n`f\"androidmk {makefile} \u003e {bpfile}\"`",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca29cc3a_661b7aba",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Use `.removesuffix()`",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963caa2d_9069bf08",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Add `check\u003dTrue` or use `subprocess.check_output`, which is the same as `.run()` but implies `check\u003dTrue` and captures stdout. (but not stderr)",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ab68d1_589a151f",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "You use of \"leaf\" and \"left\" is inconsistent. Consider using _ to indicate it\u0027s unused.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026162fd_af90d305",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Unused?",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08a2c28_0ac1247d",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Doesn\u0027t need to be global",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec632aea_2c1d0d69",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Don\u0027t ignore errors",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 41
+      },
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "799bb08e_08ac2fef",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Unused?",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1e6d4f_5a22cec7",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Consider doing this and the `os.path.exists(bpfile_name(makefile))` in the `for module in unblocked_modules:` loop, and outputting a message.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e322d6a9_626a7757",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "You use this expression a lot, consider pulling it out into a local variable. Also consider using `.removeprefix()`",
+      "range": {
+        "startLine": 121,
+        "startChar": 35,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a219743_939ebb93",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "For all of these git commands, add `check\u003dTrue` or use `subprocess.check_output`",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9dd34ef_93fa2b4d",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Optional: I would request a rename of soong.reverse_makefiles. Initially I thought it was a list of makefiles that depend on this one, but it appears it\u0027s actually a list of modules in that makefile.",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833e0868_61d4346a",
+        "filename": "tools/mk2bp_unblocked.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:15:46Z",
+      "side": 1,
+      "message": "Can you use project_converted_modules here instead, and then remove project_converted_files?",
+      "revId": "5ea500cf837a5391f0e81b925027b2bc183666fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
