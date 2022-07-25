@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2e2614_e7b10145",
+        "filename": "core/prebuilt_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-07-25T04:23:52Z",
+      "side": 1,
+      "message": "Do you really want to append to this variable as opposed to just setting it? Same for `SOONG_CONV.$(LOCAL_MODULE).INSTALLED`\n\nIf you do remove the append, also remove the `$(sort)` in the csv writing code.",
+      "revId": "b717eb44abaf82aab728d09708a0361496d3402e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
