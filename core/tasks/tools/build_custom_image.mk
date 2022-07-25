@@ -22,6 +22,10 @@ $(call clear-var-list, $(custom_image_parameter_variables))
 
 include $(my_custom_imag_makefile)
 
+_my_module_overrides := $(call module-overrides,$(CUSTOM_IMAGE_MODULES))
+CUSTOM_IMAGE_MODULES := $(filter-out $(_my_module_overrides),$(CUSTOM_IMAGE_MODULES))
+$(call expand-required-modules,CUSTOM_IMAGE_MODULES,$(CUSTOM_IMAGE_MODULES),$(_my_module_overrides))
+
 my_custom_image_name := $(basename $(notdir $(my_custom_imag_makefile)))
 
 intermediates := $(call intermediates-dir-for,PACKAGING,$(my_custom_image_name))
