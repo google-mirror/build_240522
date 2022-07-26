@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f29bb8a_6b9380d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-07-26T19:59:51Z",
+      "side": 1,
+      "message": "Running `diff -b` ignores whitespace differences, but your solution works, too.",
+      "revId": "a1b215cf2a52945747a1db3a6f5848b73de2eb30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
