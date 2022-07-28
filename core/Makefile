@@ -4613,8 +4613,16 @@ INTERNAL_ALLIMAGES_FILES := \
 # Note: vendor_dlkm, odm_dlkm, and system_dlkm does not have VINTF files.
 ifeq (,$(TARGET_BUILD_UNBUNDLED))
 
+# -----------------------------------------------------------------
+# Create apex-info-file.xsd
+.PHONY: dump-apex-info-file
+dump-apex-info-file: $(HOST_OUT_EXECUTABLES)/dump_apex_info
+	@echo "Creating apex-info-file in $(PRODUCT_OUT) "
+	$(HOST_OUT_EXECUTABLES)/dump_apex_info --root_dir $(PRODUCT_OUT) --out_file $(PRODUCT_OUT)/apex/apex-info-list.xml
+
+
 intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
-check_vintf_all_deps :=
+check_vintf_all_deps := dump-apex-info-file
 
 # The build system only writes VINTF metadata to */etc/vintf paths. Legacy paths aren't needed here
 # because they are only used for prebuilt images.
@@ -4798,6 +4806,7 @@ check_vintf_compatible_args += --kernel $(BUILT_KERNEL_VERSION_FILE):$(BUILT_KER
 check_vintf_compatible_deps += $(BUILT_KERNEL_CONFIGS_FILE) $(BUILT_KERNEL_VERSION_FILE)
 endif # BUILT_KERNEL_VERSION_FILE != "" || BUILT_KERNEL_CONFIGS_FILE != ""
 endif # PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+APEX_OUT:=$(PRODUCT_OUT)/apex
 
 check_vintf_compatible_args += \
   --dirmap /system:$(TARGET_OUT) \
@@ -4805,10 +4814,12 @@ check_vintf_compatible_args += \
   --dirmap /odm:$(TARGET_OUT_ODM) \
   --dirmap /product:$(TARGET_OUT_PRODUCT) \
   --dirmap /system_ext:$(TARGET_OUT_SYSTEM_EXT) \
+  --dirmap /apex:$(APEX_OUT) \
 
 ifdef PRODUCT_SHIPPING_API_LEVEL
 check_vintf_compatible_args += --property ro.product.first_api_level=$(PRODUCT_SHIPPING_API_LEVEL)
 endif # PRODUCT_SHIPPING_API_LEVEL
+check_vintf_compatible_args += --apex-info-file $(APEX_OUT)/apex-info-list.xml
 
 $(check_vintf_compatible_log): PRIVATE_CHECK_VINTF_ARGS := $(check_vintf_compatible_args)
 $(check_vintf_compatible_log): PRIVATE_CHECK_VINTF_DEPS := $(check_vintf_compatible_deps)
@@ -6997,7 +7008,6 @@ $(call dist-for-goals,haiku-java,$(SOONG_JAVA_FUZZ_PACKAGING_ARCH_MODULES))
 .PHONY: haiku-rust
 haiku-rust: $(SOONG_RUST_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_RUST_FUZZ_TARGETS)
 $(call dist-for-goals,haiku-rust,$(SOONG_RUST_FUZZ_PACKAGING_ARCH_MODULES))
-
 
 # -----------------------------------------------------------------
 # OS Licensing
