@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526ecef7_b88594a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887575
+      },
+      "writtenOn": "2022-07-29T18:55:36Z",
+      "side": 1,
+      "message": "LGTM, but I don\u0027t (regularly) live in the Makefile side of this buildsystem",
+      "revId": "47f47b89da565a9b6337d0b2e3b2cce040848a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
