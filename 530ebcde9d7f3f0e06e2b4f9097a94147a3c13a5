@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae65ea7d_46b15229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-07-29T23:32:56Z",
+      "side": 1,
+      "message": "This is mostly cleanup, as well as allowing inner-tree (renamed from tree) to be a list.",
+      "revId": "530ebcde9d7f3f0e06e2b4f9097a94147a3c13a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f46a89b_1fb0d176",
+        "filename": "orchestrator/multitree_combos/aosp_cf_arm64_phone.mcombo",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-07-29T23:32:56Z",
+      "side": 1,
+      "message": "The path name is consistent with the aosp-master-build-dev outer manifest that is being created.",
+      "revId": "530ebcde9d7f3f0e06e2b4f9097a94147a3c13a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
