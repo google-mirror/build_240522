@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c0d8a1_7883c619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-08-01T19:38:56Z",
+      "side": 1,
+      "message": "This is a bit messy but hopefully somewhat temporary, maybe there\u0027s a better place for this logic (e.g., in product_config.mk?)",
+      "revId": "1687d842d4ff487494988b2d9f822757736dd696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
