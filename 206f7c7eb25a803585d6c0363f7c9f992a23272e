@@ -33,6 +33,23 @@
       "message": "I am working to remove the cc_afl_fuzz target to fix the build breaks. I have a CL out here:\n\nhttps://googleplex-android-review.git.corp.google.com/c/platform/external/dtc/+/19484254",
       "revId": "206f7c7eb25a803585d6c0363f7c9f992a23272e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d127dbd_588b624e",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-01T21:26:49Z",
+      "side": 1,
+      "message": "If this is never used or controlled by Make you don\u0027t need a soong config variable, you can use `ctx.Config().Getenv(\"FUZZ_FRAMEWORK\")` in Soong.",
+      "revId": "206f7c7eb25a803585d6c0363f7c9f992a23272e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
