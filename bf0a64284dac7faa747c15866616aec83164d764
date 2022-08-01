@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68679456_1438616e",
+        "filename": "envsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-08-01T18:17:18Z",
+      "side": 1,
+      "message": "nit: Replacing this with the following makes it more consistent with other instances of similar checks in `envsetup.sh`. It is also more readable imo\n```\nlocal T\u003d$(multitree_gettop)\nif [ ! \"$T\" ]; then\n```",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 460,
+        "endChar": 30
+      },
+      "revId": "bf0a64284dac7faa747c15866616aec83164d764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdc9889_9981fea5",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-08-01T18:17:18Z",
+      "side": 1,
+      "message": "In this mcombo schema, my understanding is that the shared trees are entries [1:...] in `inner_trees` attribute.\n\nWDYT about making `melds` a separate attribute in mcombo file altogether? That way we do not need an if-else check in several places. \n\nThis separation _might_ also help in Automerger? (though I am not completely sure)",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 27
+      },
+      "revId": "bf0a64284dac7faa747c15866616aec83164d764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
