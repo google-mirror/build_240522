@@ -69,6 +69,30 @@
       },
       "revId": "bf0a64284dac7faa747c15866616aec83164d764",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd982d2_4e83f43c",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-08-01T19:01:25Z",
+      "side": 1,
+      "message": "I like the simplicity of the format for the mcombo file, by just having one place to list them.\n\nBut also, thisis just a simple data structure for a key which might not come directly from the mcombo file (even if that\u0027s all we do now). I think the melding parameter  parsing should be somewhere else, but I like how you\u0027re keeping the tree identity as root[0].",
+      "parentUuid": "fcdc9889_9981fea5",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 27
+      },
+      "revId": "bf0a64284dac7faa747c15866616aec83164d764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
