@@ -93,6 +93,30 @@
       },
       "revId": "bf0a64284dac7faa747c15866616aec83164d764",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b94b84_a5cc346f",
+        "filename": "orchestrator/core/inner_tree.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-08-02T21:00:07Z",
+      "side": 1,
+      "message": "discussed offline -- the main point is that this lets us have multiple inner trees with the same first element.",
+      "parentUuid": "ebd982d2_4e83f43c",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 27
+      },
+      "revId": "bf0a64284dac7faa747c15866616aec83164d764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
