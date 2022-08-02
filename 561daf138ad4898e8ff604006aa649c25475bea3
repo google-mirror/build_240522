@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb7ede6_a1eb4adb",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4752,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-08-02T22:42:24Z",
+      "side": 1,
+      "message": "Add support to call dump_apex_info to create apex-info-list.xml.",
+      "revId": "561daf138ad4898e8ff604006aa649c25475bea3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
