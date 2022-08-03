@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "614aa2a6_7aafea74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-03T07:29:31Z",
+      "side": 1,
+      "message": "Let\u0027s make it clear and add a bit more background info.\n\ne.g.,\n\nRemove AVB 1.0 support in build system\n\nAVB 1.0 related sources on the device have been removed in\ncommit Ibfb46aa6c2f761dbb3a9b5f0b16336e510417620. This change\nremoves the related sources in the build system and release tools.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcba7625_3e5fa9d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-03T07:29:31Z",
+      "side": 1,
+      "message": "Did you run some special unit test? e.g., `atest --host releasetools_test` ?",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6585e31_5ef7b42f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-03T07:29:31Z",
+      "side": 1,
+      "message": "I wonder should we just use `KATI_deprecated_var` in `build/make/core/config.mk` to show the warning. Let\u0027s see if Yi-yo or other build system expert has any thoughts on this.\n\ne.g., similar to\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/config.mk;l\u003d102;drc\u003db34c387441b9c3a54cdde8e1d9e6e3d68ef6b6b0",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 9
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3678f2_202ace28",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-03T07:29:31Z",
+      "side": 1,
+      "message": "IIRC, those verity* params are for AVB 1.0.\nSo they should probably be removed all together if we want to remove it.\nAnd we may also remove \"build/make/target/product/verity.mk\", which used for device to enable AVB 1.0.\n\nBtw, I just found that some device is still using \"build/make/target/product/verity.mk\":\n\nhttps://cs.android.com/android/platform/superproject/+/master:device/linaro/hikey/hikey.mk;l\u003d9;drc\u003dec36f2d62fe5ce2b76e1ee51d3656455480831ac\n\nWe probably need to check with the device owner, to see if we can disable AVB 1.0 there.",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 677,
+        "endChar": 23
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
