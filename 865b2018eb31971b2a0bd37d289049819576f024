@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "922027ba_637bfba3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003801
+      },
+      "writtenOn": "2022-08-03T15:04:45Z",
+      "side": 1,
+      "message": "Could you try running `atest ContactsProviderTests` too?",
+      "revId": "865b2018eb31971b2a0bd37d289049819576f024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5bcfa26a_469b044b",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-08-03T04:43:25Z",
       "side": 1,
       "message": "That is some pretty amazing savings!",
+      "revId": "865b2018eb31971b2a0bd37d289049819576f024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e68025_47928409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003801
+      },
+      "writtenOn": "2022-08-03T15:04:45Z",
+      "side": 1,
+      "message": "Posted a comment on the bug, http://b/239961360#comment11. This change might cause test failures at runtime...",
       "revId": "865b2018eb31971b2a0bd37d289049819576f024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
