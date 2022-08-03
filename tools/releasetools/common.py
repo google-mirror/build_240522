@@ -84,8 +84,6 @@ class Options(object):
     # use otatools built boot_signer by default
     self.boot_signer_path = "boot_signer"
     self.boot_signer_args = []
-    self.verity_signer_path = None
-    self.verity_signer_args = []
     self.verbose = False
     self.tempfiles = []
     self.device_specific = None
@@ -2591,8 +2589,7 @@ def ParseOptions(argv,
          "sign_sepolicy_path=", "extra_sign_sepolicy_args=", "aapt2_path=",
          "java_path=", "java_args=", "android_jar_path=", "public_key_suffix=",
          "private_key_suffix=", "boot_signer_path=", "boot_signer_args=",
-         "verity_signer_path=", "verity_signer_args=", "device_specific=",
-         "extra=", "logfile="] + list(extra_long_opts))
+         "device_specific=", "extra=", "logfile="] + list(extra_long_opts))
   except getopt.GetoptError as err:
     Usage(docstring)
     print("**", str(err), "**")
@@ -2632,10 +2629,6 @@ def ParseOptions(argv,
       OPTIONS.boot_signer_path = a
     elif o in ("--boot_signer_args",):
       OPTIONS.boot_signer_args = shlex.split(a)
-    elif o in ("--verity_signer_path",):
-      OPTIONS.verity_signer_path = a
-    elif o in ("--verity_signer_args",):
-      OPTIONS.verity_signer_args = shlex.split(a)
     elif o in ("-s", "--device_specific"):
       OPTIONS.device_specific = a
     elif o in ("-x", "--extra"):
