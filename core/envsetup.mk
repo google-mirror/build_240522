@@ -225,6 +225,41 @@ endif # EMMA_INSTRUMENT
 HOST_CORE_JARS := $(addsuffix -hostdex,$(TARGET_CORE_JARS))
 #################################################################
 
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
+=======
+# Dumps all variables that match [A-Z][A-Z0-9_]* (with a few exceptions)
+# to the file at $(1). It is used to print only the variables that are
+# likely to be relevant to the product or board configuration.
+# Soong config variables are dumped as $(call soong_config_set) calls
+# instead of the raw variable values, because mk2rbc can't read the
+# raw ones. There is a final sed command on the output file to
+# remove leading spaces because I couldn't figure out how to remove
+# them in pure make code.
+define dump-variables-rbc
+$(eval _dump_variables_rbc_excluded := \
+  BUILD_NUMBER \
+  DATE \
+  LOCAL_PATH \
+  MAKEFILE_LIST \
+  PRODUCTS \
+  PRODUCT_COPY_OUT_% \
+  RBC_PRODUCT_CONFIG \
+  RBC_BOARD_CONFIG \
+  SOONG_% \
+  TOPDIR \
+  TRACE_BEGIN_SOONG \
+  USER)
+$(file >$(OUT_DIR)/dump-variables-rbc-temp.txt,$(subst $(space),$(newline),$(sort $(filter-out $(_dump_variables_rbc_excluded),$(.VARIABLES)))))
+$(file >$(1),\
+$(foreach v, $(shell grep -he "^[A-Z][A-Z0-9_]*$$" $(OUT_DIR)/dump-variables-rbc-temp.txt),\
+$(v) := $(strip $($(v)))$(newline))\
+$(foreach ns,$(sort $(SOONG_CONFIG_NAMESPACES)),\
+$(foreach v,$(sort $(SOONG_CONFIG_$(ns))),\
+$$(call soong_config_set,$(ns),$(v),$(SOONG_CONFIG_$(ns)_$(v)))$(newline))))
+$(shell sed -i "s/^ *//g" $(1))
+endef
+
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
 # Read the product specs so we can get TARGET_DEVICE and other
 # variables that we need in order to locate the output files.
 include $(BUILD_SYSTEM)/product_config.mk

@@ -21,11 +21,31 @@ target-files zip.
 Usage:  sign_target_files_apks [flags] input_target_files output_target_files
 
   -e  (--extra_apks)  <name,name,...=key>
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
       Add extra APK name/key pairs as though they appeared in
       apkcerts.txt (so mappings specified by -k and -d are applied).
       Keys specified in -e override any value for that app contained
       in the apkcerts.txt file.  Option may be repeated to give
       multiple extra packages.
+=======
+      Add extra APK/APEX name/key pairs as though they appeared in apkcerts.txt
+      or apexkeys.txt (so mappings specified by -k and -d are applied). Keys
+      specified in -e override any value for that app contained in the
+      apkcerts.txt file, or the container key for an APEX. Option may be
+      repeated to give multiple extra packages.
+
+  --extra_apex_payload_key <name,name,...=key>
+      Add a mapping for APEX package name to payload signing key, which will
+      override the default payload signing key in apexkeys.txt. Note that the
+      container key should be overridden via the `--extra_apks` flag above.
+      Option may be repeated for multiple APEXes.
+
+  --skip_apks_with_path_prefix  <prefix>
+      Skip signing an APK if it has the matching prefix in its path. The prefix
+      should be matching the entry name, which has partition names in upper
+      case, e.g. "VENDOR/app/", or "SYSTEM_OTHER/preloads/". Option may be
+      repeated to give multiple prefixes.
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
 
   -k  (--key_mapping)  <src_key=dest_key>
       Add a mapping from the key name as specified in apkcerts.txt (the
@@ -763,6 +783,19 @@ def main(argv):
       names = names.split(",")
       for n in names:
         OPTIONS.extra_apks[n] = key
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
+=======
+    elif o == "--extra_apex_payload_key":
+      apex_names, key = a.split("=")
+      for name in apex_names.split(","):
+        OPTIONS.extra_apex_payload_keys[name] = key
+    elif o == "--skip_apks_with_path_prefix":
+      # Check the prefix, which must be in all upper case.
+      prefix = a.split('/')[0]
+      if not prefix or prefix != prefix.upper():
+        raise ValueError("Invalid path prefix '%s'" % (a,))
+      OPTIONS.skip_apks_with_path_prefix.add(a)
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
     elif o in ("-d", "--default_key_mappings"):
       key_mapping_options.append((None, a))
     elif o in ("-k", "--key_mapping"):

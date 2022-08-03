@@ -931,6 +931,7 @@ $(eval $(call combine-notice-files, html, \
 			$(ALL_DEFAULT_INSTALLED_MODULES) $(kernel_notice_file) $(pdk_fusion_notice_files)))
 endif
 
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
 $(eval $(call combine-notice-files, html, \
 			$(tools_notice_file_txt), \
 			$(tools_notice_file_html), \
@@ -964,6 +965,65 @@ ifeq ($(ONE_SHOT_MAKEFILE),)
     ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
   endif
 endif
+=======
+need_vendor_notice:=false
+ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
+   need_vendor_notice:=true
+endif
+
+ifdef BUILDING_DEBUG_VENDOR_BOOT_IMAGE
+   need_vendor_notice:=true
+endif
+
+ifdef BUILDING_VENDOR_IMAGE
+   need_vendor_notice:=true
+endif
+
+ifeq (true,$(need_vendor_notice))
+ifneq (,$(installed_vendor_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_notice_xml_gz)
+endif
+endif
+
+need_vendor_notice:=
+
+ifdef BUILDING_ODM_IMAGE
+ifneq (,$(installed_odm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_notice_xml_gz)
+endif
+endif
+
+ifdef BUILDING_PRODUCT_IMAGE
+ifneq (,$(installed_product_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_product_notice_xml_gz)
+endif
+endif
+
+ifdef BUILDING_SYSTEM_EXT_IMAGE
+ifneq (,$(installed_system_ext_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_ext_notice_xml_gz)
+endif
+endif
+
+ifdef BUILDING_VENDOR_DLKM_IMAGE
+ifneq (,$(installed_vendor_dlkm_notice_xml_gz)
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_vendor_dlkm_notice_xml_gz)
+endif
+endif
+
+ifdef BUILDING_ODM_DLKM_IMAGE
+ifneq (,$(installed_odm_dlkm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_odm_dlkm_notice_xml_gz)
+endif
+endif
+
+ifdef BUILDING_SYSTEM_DLKM_IMAGE
+ifneq (,$(installed_system_dlkm_notice_xml_gz))
+ALL_DEFAULT_INSTALLED_MODULES += $(installed_system_dlkm_notice_xml_gz)
+endif
+endif
+
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
 endif  # TARGET_BUILD_APPS
 
 # The kernel isn't really a module, so to get its module file in there, we
@@ -2083,6 +2143,336 @@ $(eval $(call copy-one-file,$(BOARD_PREBUILT_PRODUCTIMAGE),$(INSTALLED_PRODUCTIM
 endif
 
 # -----------------------------------------------------------------
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
+=======
+# system_ext partition image
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_OUT_SYSTEM_EXT)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ifdef BUILDING_SYSTEM_EXT_IMAGE
+INTERNAL_SYSTEM_EXTIMAGE_FILES := \
+    $(filter $(TARGET_OUT_SYSTEM_EXT)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INSTALLED_FILES_FILE_SYSTEM_EXT := $(PRODUCT_OUT)/installed-files-system_ext.txt
+INSTALLED_FILES_JSON_SYSTEM_EXT := $(INSTALLED_FILES_FILE_SYSTEM_EXT:.txt=.json)
+$(INSTALLED_FILES_FILE_SYSTEM_EXT): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_SYSTEM_EXT)
+$(INSTALLED_FILES_FILE_SYSTEM_EXT) : $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_OUT_SYSTEM_EXT) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_EXT))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEM_EXT))
+
+system_extimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,system_ext)
+BUILT_SYSTEM_EXTIMAGE_TARGET := $(PRODUCT_OUT)/system_ext.img
+define build-system_extimage-target
+  $(call pretty,"Target system_ext fs image: $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_SYSTEM_EXT)
+  @mkdir -p $(system_extimage_intermediates) && rm -rf $(system_extimage_intermediates)/system_ext_image_info.txt
+  $(call generate-image-prop-dictionary, $(system_extimage_intermediates)/system_ext_image_info.txt,system_ext, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_SYSTEM_EXT) \
+          $(system_extimage_intermediates)/system_ext_image_info.txt \
+          $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+          $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_PRODUCT_SERVICESIMAGE_TARGET),$(BOARD_PRODUCT_SERVICESIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_SYSTEM_EXTIMAGE_TARGET := $(BUILT_SYSTEM_EXTIMAGE_TARGET)
+$(INSTALLED_SYSTEM_EXTIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_SYSTEM_EXTIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_SYSTEM_EXT)
+	$(build-system_extimage-target)
+
+SYSTEM_EXT_NOTICE_DEPS += $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEM_EXT),$(PRODUCT_OUT)/:/)
+
+.PHONY: systemextimage-nodeps senod
+systemextimage-nodeps senod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-system_extimage-target)
+
+sync: $(INTERNAL_SYSTEM_EXTIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
+INSTALLED_SYSTEM_EXTIMAGE_TARGET := $(PRODUCT_OUT)/system_ext.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_SYSTEM_EXTIMAGE),$(INSTALLED_SYSTEM_EXTIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
+# odm partition image
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_OUT_ODM)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ifdef BUILDING_ODM_IMAGE
+INTERNAL_ODMIMAGE_FILES := \
+    $(filter $(TARGET_OUT_ODM)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES))
+
+# Create symlinks for odm_dlkm on devices with a odm_dlkm partition:
+# /odm/lib/modules -> /odm_dlkm/lib/modules
+#
+# On devices with a odm_dlkm partition,
+# - /odm/lib/modules is a symlink to a directory that stores odm DLKMs.
+# - /odm_dlkm/{etc,...} store other odm_dlkm files directly. The odm_dlkm partition is
+#   mounted at /odm_dlkm at runtime and the symlinks created in system/core/rootdir/Android.mk
+#   are hidden.
+# On devices without a odm_dlkm partition,
+# - /odm/lib/modules stores odm DLKMs directly.
+# - /odm_dlkm/{etc,...} are symlinks to directories that store other odm_dlkm files.
+#   See system/core/rootdir/Android.mk for a list of created symlinks.
+# The odm DLKMs and other odm_dlkm files must not be accessed using other paths because they
+# are not guaranteed to exist on all devices.
+ifdef BOARD_USES_ODM_DLKMIMAGE
+  INTERNAL_ODMIMAGE_FILES += $(call create-partition-compat-symlink,$(TARGET_OUT_ODM)/lib/modules,/odm_dlkm/lib/modules,odm_dlkm.img)
+endif
+
+INSTALLED_FILES_FILE_ODM := $(PRODUCT_OUT)/installed-files-odm.txt
+INSTALLED_FILES_JSON_ODM := $(INSTALLED_FILES_FILE_ODM:.txt=.json)
+$(INSTALLED_FILES_FILE_ODM): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_ODM)
+$(INSTALLED_FILES_FILE_ODM) : $(INTERNAL_ODMIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_OUT_ODM) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_ODM))
+
+odmimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,odm)
+BUILT_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
+define build-odmimage-target
+  $(call pretty,"Target odm fs image: $(INSTALLED_ODMIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_ODM)
+  @mkdir -p $(odmimage_intermediates) && rm -rf $(odmimage_intermediates)/odm_image_info.txt
+  $(call generate-image-prop-dictionary, $(odmimage_intermediates)/odm_image_info.txt, odm, \
+	  skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_ODM) $(odmimage_intermediates)/odm_image_info.txt \
+          $(INSTALLED_ODMIMAGE_TARGET) $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_ODMIMAGE_TARGET),$(BOARD_ODMIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_ODMIMAGE_TARGET := $(BUILT_ODMIMAGE_TARGET)
+$(INSTALLED_ODMIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_ODMIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_ODM)
+	$(build-odmimage-target)
+
+ODM_NOTICE_DEPS += $(INSTALLED_ODMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_ODMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_ODMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM),$(PRODUCT_OUT)/:/)
+
+.PHONY: odmimage-nodeps onod
+odmimage-nodeps onod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-odmimage-target)
+
+sync: $(INTERNAL_ODMIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_ODMIMAGE
+INSTALLED_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_ODMIMAGE),$(INSTALLED_ODMIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
+# vendor_dlkm partition image
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_OUT_VENDOR_DLKM)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ifdef BUILDING_VENDOR_DLKM_IMAGE
+INTERNAL_VENDOR_DLKMIMAGE_FILES := \
+    $(filter $(TARGET_OUT_VENDOR_DLKM)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INSTALLED_FILES_FILE_VENDOR_DLKM := $(PRODUCT_OUT)/installed-files-vendor_dlkm.txt
+INSTALLED_FILES_JSON_VENDOR_DLKM := $(INSTALLED_FILES_FILE_VENDOR_DLKM:.txt=.json)
+$(INSTALLED_FILES_FILE_VENDOR_DLKM): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR_DLKM)
+$(INSTALLED_FILES_FILE_VENDOR_DLKM) : $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_OUT_VENDOR_DLKM) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_DLKM))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_DLKM))
+
+vendor_dlkmimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,vendor_dlkm)
+BUILT_VENDOR_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/vendor_dlkm.img
+define build-vendor_dlkmimage-target
+  $(call pretty,"Target vendor_dlkm fs image: $(INSTALLED_VENDOR_DLKMIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_VENDOR_DLKM)
+  @mkdir -p $(vendor_dlkmimage_intermediates) && rm -rf $(vendor_dlkmimage_intermediates)/vendor_dlkm_image_info.txt
+  $(call generate-image-prop-dictionary, $(vendor_dlkmimage_intermediates)/vendor_dlkm_image_info.txt, \
+	  vendor_dlkm, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_VENDOR_DLKM) $(vendor_dlkmimage_intermediates)/vendor_dlkm_image_info.txt \
+          $(INSTALLED_VENDOR_DLKMIMAGE_TARGET) $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),$(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_VENDOR_DLKMIMAGE_TARGET := $(BUILT_VENDOR_DLKMIMAGE_TARGET)
+$(INSTALLED_VENDOR_DLKMIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_VENDOR_DLKMIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_VENDOR_DLKM)
+	$(build-vendor_dlkmimage-target)
+
+VENDOR_DLKM_NOTICE_DEPS += $(INSTALLED_VENDOR_DLKMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_VENDOR_DLKM),$(PRODUCT_OUT)/:/)
+
+.PHONY: vendor_dlkmimage-nodeps vdnod
+vendor_dlkmimage-nodeps vdnod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-vendor_dlkmimage-target)
+
+sync: $(INTERNAL_VENDOR_DLKMIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_VENDOR_DLKMIMAGE
+INSTALLED_VENDOR_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/vendor_dlkm.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_VENDOR_DLKMIMAGE),$(INSTALLED_VENDOR_DLKMIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
+# odm_dlkm partition image
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_OUT_ODM_DLKM)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ifdef BUILDING_ODM_DLKM_IMAGE
+INTERNAL_ODM_DLKMIMAGE_FILES := \
+    $(filter $(TARGET_OUT_ODM_DLKM)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INSTALLED_FILES_FILE_ODM_DLKM := $(PRODUCT_OUT)/installed-files-odm_dlkm.txt
+INSTALLED_FILES_JSON_ODM_DLKM := $(INSTALLED_FILES_FILE_ODM_DLKM:.txt=.json)
+$(INSTALLED_FILES_FILE_ODM_DLKM): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_ODM_DLKM)
+$(INSTALLED_FILES_FILE_ODM_DLKM) : $(INTERNAL_ODM_DLKMIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	rm -f $@
+	$(FILESLIST) $(TARGET_OUT_ODM_DLKM) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM_DLKM))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_ODM_DLKM))
+
+odm_dlkmimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,odm_dlkm)
+BUILT_ODM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/odm_dlkm.img
+define build-odm_dlkmimage-target
+  $(call pretty,"Target odm_dlkm fs image: $(INSTALLED_ODM_DLKMIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_ODM_DLKM)
+  @mkdir -p $(odm_dlkmimage_intermediates) && rm -rf $(odm_dlkmimage_intermediates)/odm_dlkm_image_info.txt
+  $(call generate-image-prop-dictionary, $(odm_dlkmimage_intermediates)/odm_dlkm_image_info.txt, \
+	  odm_dlkm, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_ODM_DLKM) $(odm_dlkmimage_intermediates)/odm_dlkm_image_info.txt \
+          $(INSTALLED_ODM_DLKMIMAGE_TARGET) $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_ODM_DLKMIMAGE_TARGET),$(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_ODM_DLKMIMAGE_TARGET := $(BUILT_ODM_DLKMIMAGE_TARGET)
+$(INSTALLED_ODM_DLKMIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_ODM_DLKMIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_ODM_DLKM)
+	$(build-odm_dlkmimage-target)
+
+ODM_DLKM_NOTICE_DEPS += $(INSTALLED_ODM_DLKMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_ODM_DLKMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_ODM_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODM_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM_DLKM),$(PRODUCT_OUT)/:/)
+
+.PHONY: odm_dlkmimage-nodeps odnod
+odm_dlkmimage-nodeps odnod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-odm_dlkmimage-target)
+
+sync: $(INTERNAL_ODM_DLKMIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_ODM_DLKMIMAGE
+INSTALLED_ODM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/odm_dlkm.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_ODM_DLKMIMAGE),$(INSTALLED_ODM_DLKMIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
+# system_dlkm partition image
+
+INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_OUT_SYSTEM_DLKM)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ifdef BUILDING_SYSTEM_DLKM_IMAGE
+
+INTERNAL_SYSTEM_DLKMIMAGE_FILES := \
+    $(filter $(TARGET_OUT_SYSTEM_DLKM)/%,\
+      $(ALL_DEFAULT_INSTALLED_MODULES))
+
+INSTALLED_FILES_FILE_SYSTEM_DLKM := $(PRODUCT_OUT)/installed-files-system_dlkm.txt
+INSTALLED_FILES_JSON_SYSTEM_DLKM := $(INSTALLED_FILES_FILE_SYSTEM_DLKM:.txt=.json)
+$(INSTALLED_FILES_FILE_SYSTEM_DLKM): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_SYSTEM_DLKM)
+$(INSTALLED_FILES_FILE_SYSTEM_DLKM): $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) $(FILESLIST) $(FILESLIST_UTIL)
+	@echo Installed file list: $@
+	mkdir -p $(dir $@)
+	if [ -d "$(BOARD_SYSTEM_DLKM_SRC)" ]; then rsync -rupE $(BOARD_SYSTEM_DLKM_SRC)/ $(TARGET_OUT_SYSTEM_DLKM); fi
+	rm -f $@
+	$(FILESLIST) $(TARGET_OUT_SYSTEM_DLKM) > $(@:.txt=.json)
+	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+
+$(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_DLKM))
+$(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEM_DLKM))
+
+system_dlkmimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,system_dlkm)
+BUILT_SYSTEM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/system_dlkm.img
+define build-system_dlkmimage-target
+  $(call pretty,"Target system_dlkm fs image: $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET)")
+  @mkdir -p $(TARGET_OUT_SYSTEM_DLKM)
+  @mkdir -p $(system_dlkmimage_intermediates) && rm -rf $(system_dlkmimage_intermediates)/system_dlkm_image_info.txt
+  $(call generate-image-prop-dictionary, $(system_dlkmimage_intermediates)/system_dlkm_image_info.txt, \
+	  system_dlkm, skip_fsck=true)
+  PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
+      $(BUILD_IMAGE) \
+          $(TARGET_OUT_SYSTEM_DLKM) $(system_dlkmimage_intermediates)/system_dlkm_image_info.txt \
+          $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET) $(TARGET_OUT)
+  $(call assert-max-image-size,$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET),$(BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE))
+endef
+
+# We just build this directly to the install location.
+INSTALLED_SYSTEM_DLKMIMAGE_TARGET := $(BUILT_SYSTEM_DLKMIMAGE_TARGET)
+$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET): \
+    $(INTERNAL_USERIMAGES_DEPS) \
+    $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) \
+    $(INSTALLED_FILES_FILE_SYSTEM_DLKM)
+	$(build-system_dlkmimage-target)
+
+SYSTEM_DLKM_NOTICE_DEPS += $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET)
+
+$(call declare-1p-container,$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET),)
+$(call declare-container-license-deps,$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEM_DLKM),$(PRODUCT_OUT)/:/)
+
+.PHONY: system_dlkmimage-nodeps sdnod
+system_dlkmimage-nodeps sdnod: | $(INTERNAL_USERIMAGES_DEPS)
+	$(build-system_dlkmimage-target)
+
+sync: $(INTERNAL_SYSTEM_DLKMIMAGE_FILES)
+
+else ifdef BOARD_PREBUILT_SYSTEM_DLKMIMAGE
+INSTALLED_SYSTEM_DLKMIMAGE_TARGET := $(PRODUCT_OUT)/system_dlkm.img
+$(eval $(call copy-one-file,$(BOARD_PREBUILT_SYSTEM_DLKMIMAGE),$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET)))
+endif
+
+# -----------------------------------------------------------------
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
 # dtbo image
 ifdef BOARD_PREBUILT_DTBOIMAGE
 INSTALLED_DTBOIMAGE_TARGET := $(PRODUCT_OUT)/dtbo.img

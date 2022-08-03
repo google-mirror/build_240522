@@ -33,6 +33,101 @@ else
 endif
 endif
 
+<<<<<<< HEAD   (0ff8c6 Merge "Merge empty history for sparse-8814173-L7490000095568)
+=======
+installed_notice_file :=
+
+is_container:=$(strip $(LOCAL_MODULE_IS_CONTAINER))
+ifeq (,$(is_container))
+ifneq (,$(strip $(filter %.zip %.tar %.tgz %.tar.gz %.apk %.img %.srcszip %.apex, $(LOCAL_BUILT_MODULE))))
+is_container:=true
+else
+is_container:=false
+endif
+else ifneq (,$(strip $(filter-out true false,$(is_container))))
+$(error Unrecognized value '$(is_container)' for LOCAL_MODULE_IS_CONTAINER)
+endif
+
+ifeq (true,$(is_container))
+# Include shared libraries' notices for "container" types, but not for binaries etc.
+notice_deps := \
+    $(strip \
+        $(foreach d, \
+            $(LOCAL_REQUIRED_MODULES) \
+            $(LOCAL_STATIC_LIBRARIES) \
+            $(LOCAL_WHOLE_STATIC_LIBRARIES) \
+            $(LOCAL_SHARED_LIBRARIES) \
+            $(LOCAL_DYLIB_LIBRARIES) \
+            $(LOCAL_RLIB_LIBRARIES) \
+            $(LOCAL_PROC_MACRO_LIBRARIES) \
+            $(LOCAL_HEADER_LIBRARIES) \
+            $(LOCAL_STATIC_JAVA_LIBRARIES) \
+            $(LOCAL_JAVA_LIBRARIES) \
+            $(LOCAL_JNI_SHARED_LIBRARIES) \
+            ,$(subst :,_,$(d)):static \
+        ) \
+    )
+else
+notice_deps := \
+    $(strip \
+        $(foreach d, \
+            $(LOCAL_REQUIRED_MODULES) \
+            $(LOCAL_STATIC_LIBRARIES) \
+            $(LOCAL_WHOLE_STATIC_LIBRARIES) \
+            $(LOCAL_RLIB_LIBRARIES) \
+            $(LOCAL_PROC_MACRO_LIBRARIES) \
+            $(LOCAL_HEADER_LIBRARIES) \
+            $(LOCAL_STATIC_JAVA_LIBRARIES) \
+            ,$(subst :,_,$(d)):static \
+        )$(foreach d, \
+            $(LOCAL_SHARED_LIBRARIES) \
+            $(LOCAL_DYLIB_LIBRARIES) \
+            $(LOCAL_JAVA_LIBRARIES) \
+            $(LOCAL_JNI_SHARED_LIBRARIES) \
+            ,$(subst :,_,$(d)):dynamic \
+        ) \
+    )
+endif
+ifeq ($(LOCAL_IS_HOST_MODULE),true)
+notice_deps := $(strip $(notice_deps) $(foreach d,$(LOCAL_HOST_REQUIRED_MODULES),$(subst :,_,$(d)):static))
+else
+notice_deps := $(strip $(notice_deps) $(foreach d,$(LOCAL_TARGET_REQUIRED_MODULES),$(subst :,_,$(d)):static))
+endif
+
+local_path := $(LOCAL_PATH)
+
+
+module_license_metadata :=
+
+ifdef my_register_name
+  module_license_metadata := $(call local-meta-intermediates-dir)/$(my_register_name).meta_lic
+
+  $(foreach target,$(ALL_MODULES.$(my_register_name).BUILT) $(ALL_MODULES.$(my_register_name).INSTALLED) $(foreach bi,$(LOCAL_SOONG_BUILT_INSTALLED),$(call word-colon,1,$(bi))) \
+      $(my_test_data) $(my_test_config),\
+    $(eval ALL_TARGETS.$(target).META_LIC := $(module_license_metadata)))
+
+  ALL_MODULES.$(my_register_name).META_LIC := $(strip $(ALL_MODULES.$(my_register_name).META_LIC) $(module_license_metadata))
+
+  ifdef LOCAL_SOONG_LICENSE_METADATA
+    # Soong modules have already produced a license metadata file, copy it to where Make expects it.
+    $(eval $(call copy-one-license-metadata-file, $(LOCAL_SOONG_LICENSE_METADATA), $(module_license_metadata),$(ALL_MODULES.$(my_register_name).BUILT),$(ALL_MODUES.$(my_register_name).INSTALLED)))
+  else
+    # Make modules don't have enough information to produce a license metadata rule until after fix-notice-deps
+    # has been called, store the necessary information until later.
+    ALL_MODULES.$(my_register_name).DELAYED_META_LIC := $(strip $(ALL_MODULES.$(my_register_name).DELAYED_META_LIC) $(module_license_metadata))
+    ALL_MODULES.$(my_register_name).LICENSE_PACKAGE_NAME := $(strip $(license_package_name))
+    ALL_MODULES.$(my_register_name).MODULE_TYPE := $(strip $(ALL_MODULES.$(my_register_name).MODULE_TYPE) $(LOCAL_MODULE_TYPE))
+    ALL_MODULES.$(my_register_name).MODULE_CLASS := $(strip $(ALL_MODULES.$(my_register_name).MODULE_CLASS) $(LOCAL_MODULE_CLASS))
+    ALL_MODULES.$(my_register_name).LICENSE_KINDS := $(ALL_MODULES.$(my_register_name).LICENSE_KINDS) $(license_kinds)
+    ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS := $(ALL_MODULES.$(my_register_name).LICENSE_CONDITIONS) $(license_conditions)
+    ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP := $(ALL_MODULES.$(my_register_name).LICENSE_INSTALL_MAP) $(install_map)
+    ALL_MODULES.$(my_register_name).NOTICE_DEPS := $(ALL_MODULES.$(my_register_name).NOTICE_DEPS) $(notice_deps)
+    ALL_MODULES.$(my_register_name).IS_CONTAINER := $(strip $(filter-out false,$(ALL_MODULES.$(my_register_name).IS_CONTAINER) $(is_container)))
+    ALL_MODULES.$(my_register_name).PATH := $(strip $(ALL_MODULES.$(my_register_name).PATH) $(local_path))
+  endif
+endif
+
+>>>>>>> BRANCH (deebb4 Merge "Version bump to TKB1.220803.001.A1 [core/build_id.mk])
 ifdef notice_file
 
 # This relies on the name of the directory in PRODUCT_OUT matching where
