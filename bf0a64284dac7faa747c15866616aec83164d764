@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65183188_2252ab68",
+        "filename": "envsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2022-08-03T20:07:28Z",
+      "side": 1,
+      "message": "I copied it from multitree_build() around line 1884. I\u0027ll change both of them to match the more common form.",
+      "parentUuid": "bc386123_daee40d8",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 460,
+        "endChar": 30
+      },
+      "revId": "bf0a64284dac7faa747c15866616aec83164d764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcdc9889_9981fea5",
         "filename": "orchestrator/core/inner_tree.py",
         "patchSetId": 6
