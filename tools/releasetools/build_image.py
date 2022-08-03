@@ -673,7 +673,6 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "ext_mkuserimg",
       "verity",
       "verity_key",
-      "verity_signer_cmd",
       "verity_fec",
       "verity_disable",
       "avb_enable",

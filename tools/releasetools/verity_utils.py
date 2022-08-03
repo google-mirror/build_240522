@@ -166,23 +166,6 @@ def CreateVerityImageBuilder(prop_dict):
   if partition_size:
     partition_size = int(partition_size)
 
-  # Verified Boot 1.0
-  verity_supported = prop_dict.get("verity") == "true"
-  is_verity_partition = "verity_block_device" in prop_dict
-  if verity_supported and is_verity_partition:
-    if OPTIONS.verity_signer_path is not None:
-      signer_path = OPTIONS.verity_signer_path
-    else:
-      signer_path = prop_dict["verity_signer_cmd"]
-    return Version1VerityImageBuilder(
-        partition_size,
-        prop_dict["verity_block_device"],
-        prop_dict.get("verity_fec") == "true",
-        signer_path,
-        prop_dict["verity_key"] + ".pk8",
-        OPTIONS.verity_signer_args,
-        "verity_disable" in prop_dict)
-
   # Verified Boot 2.0
   if (prop_dict.get("avb_hash_enable") == "true" or
       prop_dict.get("avb_hashtree_enable") == "true"):

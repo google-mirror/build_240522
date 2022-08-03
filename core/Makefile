@@ -984,6 +984,10 @@ endif
 
 INTERNAL_BOOTIMAGE_FILES := $(filter-out --%,$(INTERNAL_BOOTIMAGE_ARGS))
 
+ifneq ($(PRODUCT_VERITY_SIGNING_KEY), '')
+$(warning PRODUCT_VERITY_SIGNING_KEY is going to deprecated, please switch to AVB 2.0.)
+endif
+
 ifeq ($(PRODUCT_SUPPORTS_VERITY),true)
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
 VERITY_KEYID := veritykeyid=id:`openssl x509 -in $(PRODUCT_VERITY_SIGNING_KEY).x509.pem -text \
