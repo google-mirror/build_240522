@@ -50,6 +50,24 @@
       "message": "Posted a comment on the bug, http://b/239961360#comment11. This change might cause test failures at runtime...",
       "revId": "865b2018eb31971b2a0bd37d289049819576f024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222cf029_a5cd62bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-08-03T15:35:19Z",
+      "side": 1,
+      "message": "Replied on the bug, I think we should be OK unless platform developers are putting code in androidx.** or com.google.common.** packages, which I don\u0027t think is the case? All other code on the platform will still be kept if it uses the androidx.* or com.google.common-defined @VisibleForTesting annotations.",
+      "parentUuid": "53e68025_47928409",
+      "revId": "865b2018eb31971b2a0bd37d289049819576f024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
