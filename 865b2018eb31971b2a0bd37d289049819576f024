@@ -68,6 +68,24 @@
       "parentUuid": "53e68025_47928409",
       "revId": "865b2018eb31971b2a0bd37d289049819576f024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b4cba8_362ff7a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-08-03T15:37:46Z",
+      "side": 1,
+      "message": "Added a note in the CL description to clarify.",
+      "parentUuid": "222cf029_a5cd62bf",
+      "revId": "865b2018eb31971b2a0bd37d289049819576f024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
