@@ -77,20 +77,6 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       removed.  Changes are processed in the order they appear.
       Default value is "-test-keys,-dev-keys,+release-keys".
 
-  --replace_verity_private_key <key>
-      Replace the private key used for verity signing. It expects a filename
-      WITHOUT the extension (e.g. verity_key).
-
-  --replace_verity_public_key <key>
-      Replace the certificate (public key) used for verity verification. The
-      key file replaces the one at BOOT/RAMDISK/verity_key (or ROOT/verity_key
-      for devices using system_root_image). It expects the key filename WITH
-      the extension (e.g. verity_key.pub).
-
-  --replace_verity_keyid <path_to_X509_PEM_cert_file>
-      Replace the veritykeyid in BOOT/cmdline of input_target_file_zip
-      with keyid of the cert pointed by <path_to_X509_PEM_cert_file>.
-
   --remove_avb_public_keys <key1>,<key2>,...
       Remove AVB public keys from the first-stage ramdisk. The key file to
       remove is located at either of the following dirs:
@@ -182,9 +168,6 @@ OPTIONS.skip_apks_with_path_prefix = set()
 OPTIONS.key_map = {}
 OPTIONS.rebuild_recovery = False
 OPTIONS.replace_ota_keys = False
-OPTIONS.replace_verity_public_key = False
-OPTIONS.replace_verity_private_key = False
-OPTIONS.replace_verity_keyid = False
 OPTIONS.remove_avb_public_keys = None
 OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
@@ -642,11 +625,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     elif filename == "META/misc_info.txt":
       pass
 
-    # Skip verity public key if we will replace it.
-    elif (OPTIONS.replace_verity_public_key and
-          filename in ("BOOT/RAMDISK/verity_key",
-                       "ROOT/verity_key")):
-      pass
     elif (OPTIONS.remove_avb_public_keys and
           (filename.startswith("BOOT/RAMDISK/avb/") or
            filename.startswith("BOOT/RAMDISK/first_stage_ramdisk/avb/"))):
@@ -659,10 +637,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       if not matched_removal:
         # Copy it verbatim if we don't want to remove it.
         common.ZipWriteStr(output_tf_zip, out_info, data)
-
-    # Skip verity keyid (for system_root_image use) if we will replace it.
-    elif OPTIONS.replace_verity_keyid and filename == "BOOT/cmdline":
-      pass
 
     # Skip the vbmeta digest as we will recalculate it.
     elif filename == "META/vbmeta_digest.txt":
@@ -744,27 +718,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
 
   if OPTIONS.replace_ota_keys:
     ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info)
-
-  # Replace the keyid string in misc_info dict.
-  if OPTIONS.replace_verity_private_key:
-    ReplaceVerityPrivateKey(misc_info, OPTIONS.replace_verity_private_key[1])
-
-  if OPTIONS.replace_verity_public_key:
-    # Replace the one in root dir in system.img.
-    ReplaceVerityPublicKey(
-        output_tf_zip, 'ROOT/verity_key', OPTIONS.replace_verity_public_key[1])
-
-    if not system_root_image:
-      # Additionally replace the copy in ramdisk if not using system-as-root.
-      ReplaceVerityPublicKey(
-          output_tf_zip,
-          'BOOT/RAMDISK/verity_key',
-          OPTIONS.replace_verity_public_key[1])
-
-  # Replace the keyid string in BOOT/cmdline.
-  if OPTIONS.replace_verity_keyid:
-    ReplaceVerityKeyId(input_tf_zip, output_tf_zip,
-                       OPTIONS.replace_verity_keyid[1])
 
   # Replace the AVB signing keys, if any.
   ReplaceAvbSigningKeys(misc_info)
@@ -980,64 +933,6 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
       extra_keys = extra_ota_keys
     print("Rewriting OTA key:", info.filename, mapped_keys + extra_keys)
     WriteOtacerts(output_tf_zip, info.filename, mapped_keys + extra_keys)
-
-
-def ReplaceVerityPublicKey(output_zip, filename, key_path):
-  """Replaces the verity public key at the given path in the given zip.
-
-  Args:
-    output_zip: The output target_files zip.
-    filename: The archive name in the output zip.
-    key_path: The path to the public key.
-  """
-  print("Replacing verity public key with %s" % (key_path,))
-  common.ZipWrite(output_zip, key_path, arcname=filename)
-
-
-def ReplaceVerityPrivateKey(misc_info, key_path):
-  """Replaces the verity private key in misc_info dict.
-
-  Args:
-    misc_info: The info dict.
-    key_path: The path to the private key in PKCS#8 format.
-  """
-  print("Replacing verity private key with %s" % (key_path,))
-  misc_info["verity_key"] = key_path
-
-
-def ReplaceVerityKeyId(input_zip, output_zip, key_path):
-  """Replaces the veritykeyid parameter in BOOT/cmdline.
-
-  Args:
-    input_zip: The input target_files zip, which should be already open.
-    output_zip: The output target_files zip, which should be already open and
-        writable.
-    key_path: The path to the PEM encoded X.509 certificate.
-  """
-  in_cmdline = input_zip.read("BOOT/cmdline").decode()
-  # Copy in_cmdline to output_zip if veritykeyid is not present.
-  if "veritykeyid" not in in_cmdline:
-    common.ZipWriteStr(output_zip, "BOOT/cmdline", in_cmdline)
-    return
-
-  out_buffer = []
-  for param in in_cmdline.split():
-    if "veritykeyid" not in param:
-      out_buffer.append(param)
-      continue
-
-    # Extract keyid using openssl command.
-    p = common.Run(["openssl", "x509", "-in", key_path, "-text"],
-                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    keyid, stderr = p.communicate()
-    assert p.returncode == 0, "Failed to dump certificate: {}".format(stderr)
-    keyid = re.search(
-        r'keyid:([0-9a-fA-F:]*)', keyid).group(1).replace(':', '').lower()
-    print("Replacing verity keyid with {}".format(keyid))
-    out_buffer.append("veritykeyid=id:%s" % (keyid,))
-
-  out_cmdline = ' '.join(out_buffer).strip() + '\n'
-  common.ZipWriteStr(output_zip, "BOOT/cmdline", out_cmdline)
 
 
 def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
@@ -1403,12 +1298,6 @@ def main(argv):
           raise ValueError("Bad tag change '%s'" % (i,))
         new.append(i[0] + i[1:].strip())
       OPTIONS.tag_changes = tuple(new)
-    elif o == "--replace_verity_public_key":
-      OPTIONS.replace_verity_public_key = (True, a)
-    elif o == "--replace_verity_private_key":
-      OPTIONS.replace_verity_private_key = (True, a)
-    elif o == "--replace_verity_keyid":
-      OPTIONS.replace_verity_keyid = (True, a)
     elif o == "--remove_avb_public_keys":
       OPTIONS.remove_avb_public_keys = a.split(",")
     elif o == "--avb_vbmeta_key":
@@ -1500,9 +1389,6 @@ def main(argv):
           "key_mapping=",
           "replace_ota_keys",
           "tag_changes=",
-          "replace_verity_public_key=",
-          "replace_verity_private_key=",
-          "replace_verity_keyid=",
           "remove_avb_public_keys=",
           "avb_apex_extra_args=",
           "avb_vbmeta_algorithm=",

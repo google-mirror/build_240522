@@ -100,6 +100,7 @@ $(KATI_obsolete_var \
 $(KATI_obsolete_var DIST_DIR dist_goal,Use dist-for-goals instead. See $(CHANGES_URL)#dist)
 $(KATI_obsolete_var TARGET_ANDROID_FILESYSTEM_CONFIG_H,Use TARGET_FS_CONFIG_GEN instead)
 $(KATI_deprecated_var USER,Use BUILD_USERNAME instead. See $(CHANGES_URL)#USER)
+$(KATI_obsolete_var PRODUCT_VERITY_SIGNING_KEY,PRODUCT_VERITY_SIGNING_KEY is deprecated, please switch to AVB 2.0.)
 $(KATI_obsolete_var TARGET_ROOT_OUT_SBIN,/sbin has been removed, use /system/bin instead)
 $(KATI_obsolete_var TARGET_ROOT_OUT_SBIN_UNSTRIPPED,/sbin has been removed, use /system/bin instead)
 $(KATI_obsolete_var BUILD_BROKEN_PHONY_TARGETS)

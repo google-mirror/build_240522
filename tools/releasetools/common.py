@@ -84,8 +84,6 @@ class Options(object):
     # use otatools built boot_signer by default
     self.boot_signer_path = "boot_signer"
     self.boot_signer_args = []
-    self.verity_signer_path = None
-    self.verity_signer_args = []
     self.verbose = False
     self.tempfiles = []
     self.device_specific = None
@@ -2633,9 +2631,9 @@ def ParseOptions(argv,
     elif o in ("--boot_signer_args",):
       OPTIONS.boot_signer_args = shlex.split(a)
     elif o in ("--verity_signer_path",):
-      OPTIONS.verity_signer_path = a
+      raise KeyError("--verity_signer_path is deprecated, please switch to AVB 2.0")
     elif o in ("--verity_signer_args",):
-      OPTIONS.verity_signer_args = shlex.split(a)
+      raise KeyError("--verity_signer_args is deprecated, please switch to AVB 2.0")
     elif o in ("-s", "--device_specific"):
       OPTIONS.device_specific = a
     elif o in ("-x", "--extra"):
