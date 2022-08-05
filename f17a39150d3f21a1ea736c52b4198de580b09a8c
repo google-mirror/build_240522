@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4fa9d8_aaf61ad8",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T05:38:18Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "f17a39150d3f21a1ea736c52b4198de580b09a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc52bdb_b9fb9710",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T05:38:18Z",
+      "side": 1,
+      "message": "I strongly advise just bump this to an error (KATI_obsolete_var).\n\nFrom my experience emitting warning is almost useless. 99% of the time people just don\u0027t see or ignore the warning due to the sheer size of the build log.",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 21
+      },
+      "revId": "f17a39150d3f21a1ea736c52b4198de580b09a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
