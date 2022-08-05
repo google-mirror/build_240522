@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "636021c0_f4509bad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T04:25:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614aa2a6_7aafea74",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcba7625_3e5fa9d4",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "312f31d3_25a47e1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T04:25:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcba7625_3e5fa9d4",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6585e31_5ef7b42f",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-08-03T07:29:31Z",
       "side": 1,
       "message": "I wonder should we just use `KATI_deprecated_var` in `build/make/core/config.mk` to show the warning. Let\u0027s see if Yi-yo or other build system expert has any thoughts on this.\n\ne.g., similar to\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/config.mk;l\u003d102;drc\u003db34c387441b9c3a54cdde8e1d9e6e3d68ef6b6b0",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 9
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25c9fc9_867db3c6",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T04:25:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6585e31_5ef7b42f",
       "range": {
         "startLine": 988,
         "startChar": 2,
