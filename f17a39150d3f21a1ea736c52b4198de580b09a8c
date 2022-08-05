@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b84af2_eeb4b2d6",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T06:55:14Z",
+      "side": 1,
+      "message": "Failed to cleanup completely from previous patchset.",
+      "parentUuid": "5f4fa9d8_aaf61ad8",
+      "revId": "f17a39150d3f21a1ea736c52b4198de580b09a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dc52bdb_b9fb9710",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "Yup, agree that using KATI_obsolete_var (build error) can ensure no clients are still using the code.\n\nMaybe we could consider:\n1. removing existing references\n2. setting KATI_obsolete_var in a small CL first, merge it to observe.\n3. removes more sources, after step-2 is done for, e.g., 1 week.\n\nJust in case if we need to revert when some client is still using the config.\nReverting a small CL is trivial (e.g., CL-2) but reverting large CL (e.g., CL-3) might have conflicts.\n\nThoughts?",
       "parentUuid": "8dc52bdb_b9fb9710",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 21
+      },
+      "revId": "f17a39150d3f21a1ea736c52b4198de580b09a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71eee77_9889c119",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T06:55:14Z",
+      "side": 1,
+      "message": "I think maybe we can do step 2. first ? Ensuring no one is using the arguments first, and clean up the related resources at once.",
+      "parentUuid": "7d46a9a7_2ad6a16b",
       "range": {
         "startLine": 103,
         "startChar": 2,

@@ -211,6 +211,30 @@
       },
       "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "075c00a6_a2a6518f",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T06:55:14Z",
+      "side": 1,
+      "message": "correct my previous comment. verity.mk can now be removed after aosp/2173783. But maybe we should block users from using PRODUCT_VERITY_SIGNING_KEY first?",
+      "parentUuid": "9573db23_ad1867a4",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 677,
+        "endChar": 23
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
