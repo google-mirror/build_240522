@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3c0dd3_1bc4a2e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-08-05T17:37:11Z",
+      "side": 1,
+      "message": "Minor nit:\n\n```\nExport test_options.tags to module-info\n\nThe test_options.tags attribute modifies execution behavior when running tests in ATest Bazel mode. Exporting the value to module-info enables ATest to add them to the corresponding Bazel target.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2d2b59_ef15d63e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-08-05T17:37:11Z",
+      "side": 1,
+      "message": "Ideally this should be a command:\n\n```\nm out/target/product/generic/module-info.json \u0026\u0026 grep ...\n```",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 47
+      },
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "23be1047_260178a2",
@@ -14,6 +60,29 @@
       "writtenOn": "2022-08-05T17:32:23Z",
       "side": 1,
       "message": "Adding Kevin to show an example of how every change to Soong needs to be piped to module-info.",
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb457d9_12365e20",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-08-05T17:37:11Z",
+      "side": 1,
+      "message": "A nit really but would it be clearer to name this TEST_OPTIONS_TAGS since we might be adding other test options? This also helps the reader easily relate the concept to what they see in Soong.",
+      "range": {
+        "startLine": 1125,
+        "startChar": 32,
+        "endLine": 1125,
+        "endChar": 41
+      },
       "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
