@@ -16,6 +16,24 @@
       "message": "I don\u0027t fully understand the code here, but just by comparing with the lines below, do you have to do\n```\nkey \u003d key_map.get(OPTIONS.override_apex_keys, OPTIONS.override_apex_keys)\n```\nhere?",
       "revId": "e50bb51fa9dc42dea22c4bc6f54c5fe397f11c1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c13f1485_7a86af45",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-08-05T20:29:09Z",
+      "side": 1,
+      "message": "This mimics logic of OPTIONS.extra_apex_payload_keys. So no we do not need to read from keymap, as old code didn\u0027t do it either.",
+      "parentUuid": "5d892f91_69b63884",
+      "revId": "e50bb51fa9dc42dea22c4bc6f54c5fe397f11c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
