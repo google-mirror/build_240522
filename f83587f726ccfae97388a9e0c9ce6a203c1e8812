@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0d6b5f_8ba69d24",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:05:40Z",
+      "side": 1,
+      "message": "I think ValueError fits the semantic better? As the issue is not \"missing some key to a dictionary\", but \"an invalid option is specified\"",
+      "range": {
+        "startLine": 2634,
+        "startChar": 12,
+        "endLine": 2634,
+        "endChar": 20
+      },
+      "revId": "f83587f726ccfae97388a9e0c9ce6a203c1e8812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
