@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650fdee9_9d54151d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 0,
+      "message": "remove whole branch",
+      "range": {
+        "startLine": 1111,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 0
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a1904d_94a0a2cd",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 0,
+      "message": "@bowgotsai I think this can be removed too?",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f64963_34ecdc93",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 0,
+      "message": "we should remove all reference to this file from internal gerrit first",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b88867c_4e91662f",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 0,
+      "message": "@Bowgo, should the module definition of this be removed too?\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/target/product/security/Android.mk;drc\u003dd2c7c08e7c212db7e9f7ce6b68d35a6e86094de4;l\u003d7\n\n(I have no idea what this is and why there are both `verity_key` and `PRODUCT_VERITY_SIGNING_KEY`)",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

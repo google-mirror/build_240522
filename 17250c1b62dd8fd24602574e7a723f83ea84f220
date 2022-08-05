@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8935b3_d03e341f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 1,
+      "message": "technically speaking, VB 1.0 is already not deprecated (runtime code were removed already). We are cleaning up dead code in our build system.",
+      "revId": "17250c1b62dd8fd24602574e7a723f83ea84f220",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07698706_ff149cfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T09:54:42Z",
+      "side": 1,
+      "message": "delete repeated words",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "17250c1b62dd8fd24602574e7a723f83ea84f220",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
