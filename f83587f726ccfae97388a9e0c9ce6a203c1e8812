@@ -22,6 +22,30 @@
       },
       "revId": "f83587f726ccfae97388a9e0c9ce6a203c1e8812",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1297fa8_1bcaa05d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T09:39:26Z",
+      "side": 1,
+      "message": "I think both key error \u0026 value error sound reasonable to me, so I just pick one. But we can certainly move to ValueError.",
+      "parentUuid": "9a0d6b5f_8ba69d24",
+      "range": {
+        "startLine": 2634,
+        "startChar": 12,
+        "endLine": 2634,
+        "endChar": 20
+      },
+      "revId": "f83587f726ccfae97388a9e0c9ce6a203c1e8812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
