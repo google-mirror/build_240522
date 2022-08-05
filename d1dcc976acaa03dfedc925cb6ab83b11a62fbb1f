@@ -187,6 +187,30 @@
       },
       "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9573db23_ad1867a4",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-05T05:32:29Z",
+      "side": 1,
+      "message": "There is still some users in internal gerrit https://source.corp.google.com/search?q\u003dtarget%2Fproduct%2Fverity.mk\u0026sq\u003dpackage:%5Eandroid$%20-f:%5E(prebuilts%7Ctools%2Fidea)%2F\n\nThey should all be stale targets, but need to be double checked nonetheless.",
+      "parentUuid": "ae5a6709_09f1b866",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 677,
+        "endChar": 23
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
