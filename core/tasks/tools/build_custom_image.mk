@@ -93,7 +93,6 @@ $(my_built_custom_image): PRIVATE_PICKUP_FILES := $(my_pickup_files)
 $(my_built_custom_image): PRIVATE_SELINUX := $(CUSTOM_IMAGE_SELINUX)
 $(my_built_custom_image): PRIVATE_SUPPORT_VERITY := $(CUSTOM_IMAGE_SUPPORT_VERITY)
 $(my_built_custom_image): PRIVATE_SUPPORT_VERITY_FEC := $(CUSTOM_IMAGE_SUPPORT_VERITY_FEC)
-$(my_built_custom_image): PRIVATE_VERITY_KEY := $(PRODUCT_VERITY_SIGNING_KEY)
 $(my_built_custom_image): PRIVATE_VERITY_BLOCK_DEVICE := $(CUSTOM_IMAGE_VERITY_BLOCK_DEVICE)
 $(my_built_custom_image): PRIVATE_DICT_FILE := $(CUSTOM_IMAGE_DICT_FILE)
 $(my_built_custom_image): PRIVATE_AVB_AVBTOOL := $(AVBTOOL)
@@ -132,7 +131,6 @@ $(my_built_custom_image): $(INTERNAL_USERIMAGES_DEPS) $(my_built_modules) $(my_i
 	$(if $(PRIVATE_SELINUX),$(hide) echo "selinux_fc=$(SELINUX_FC)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt)
 	$(if $(PRIVATE_SUPPORT_VERITY),\
 	  $(hide) echo "verity=$(PRIVATE_SUPPORT_VERITY)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt;\
-	    echo "verity_key=$(PRIVATE_VERITY_KEY)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt;\
 	    echo "verity_signer_cmd=$(VERITY_SIGNER)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt;\
 	    echo "verity_block_device=$(PRIVATE_VERITY_BLOCK_DEVICE)" >> $(PRIVATE_INTERMEDIATES)/image_info.txt)
 	$(if $(PRIVATE_SUPPORT_VERITY_FEC),\
