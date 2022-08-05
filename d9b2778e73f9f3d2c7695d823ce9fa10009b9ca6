@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23be1047_260178a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-08-05T17:32:23Z",
+      "side": 1,
+      "message": "Adding Kevin to show an example of how every change to Soong needs to be piped to module-info.",
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
