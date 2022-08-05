@@ -163,6 +163,30 @@
       },
       "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5a6709_09f1b866",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-05T04:36:02Z",
+      "side": 1,
+      "message": "verity.mk is removed by aosp/2173783.",
+      "parentUuid": "8c3678f2_202ace28",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 677,
+        "endChar": 23
+      },
+      "revId": "d1dcc976acaa03dfedc925cb6ab83b11a62fbb1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
