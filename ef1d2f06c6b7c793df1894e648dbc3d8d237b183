@@ -168,6 +168,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d0d7848_2736b3cf",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-08T08:35:51Z",
+      "side": 0,
+      "message": "Let\u0027s remove this variable in other CL.",
+      "parentUuid": "15e2c53d_e9f73df4",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f64963_34ecdc93",
         "filename": "target/product/verity.mk",
         "patchSetId": 1
@@ -179,6 +197,30 @@
       "writtenOn": "2022-08-05T09:54:42Z",
       "side": 0,
       "message": "we should remove all reference to this file from internal gerrit first",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcee8b9_987e589a",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-08T08:35:51Z",
+      "side": 0,
+      "message": "Let\u0027s remove this file in other cl.",
+      "parentUuid": "81f64963_34ecdc93",
       "range": {
         "startLine": 1,
         "startChar": 0,
