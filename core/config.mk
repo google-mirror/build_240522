@@ -162,6 +162,7 @@ $(KATI_obsolete_var PRODUCT_CHECK_ELF_FILES,Use BUILD_BROKEN_PREBUILT_ELF_FILES 
 $(KATI_obsolete_var ALL_GENERATED_SOURCES,ALL_GENERATED_SOURCES is no longer used)
 $(KATI_obsolete_var ALL_ORIGINAL_DYNAMIC_BINARIES,ALL_ORIGINAL_DYNAMIC_BINARIES is no longer used)
 $(KATI_obsolete_var PRODUCT_VERITY_SIGNING_KEY,AVB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_BOOT_SIGNER,AVB 1.0 and related variables are no longer supported)
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
 FORCE:
@@ -629,7 +630,6 @@ APPEND2SIMG := $(HOST_OUT_EXECUTABLES)/append2simg
 VERITY_SIGNER := $(HOST_OUT_EXECUTABLES)/verity_signer
 BUILD_VERITY_METADATA := $(HOST_OUT_EXECUTABLES)/build_verity_metadata
 BUILD_VERITY_TREE := $(HOST_OUT_EXECUTABLES)/build_verity_tree
-BOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/boot_signer
 FUTILITY := $(HOST_OUT_EXECUTABLES)/futility-host
 VBOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/vboot_signer
 FEC := $(HOST_OUT_EXECUTABLES)/fec
