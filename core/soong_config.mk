@@ -147,9 +147,15 @@ _contents := $(_contents)    "VendorVars": {$(newline)
 $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
   $(eval _contents := $$(_contents)        "$(namespace)": {$$(newline)) \
   $(foreach key,$(SOONG_CONFIG_$(namespace)),\
+<<<<<<< HEAD   (fb1d6b Merge "Merge empty history for sparse-8904354-L9380000095577)
     $(eval _contents := $$(_contents)            "$(key)": "$(SOONG_CONFIG_$(namespace)_$(key))",$$(newline)))\
   $(eval _contents := $$(_contents)$(if $(strip $(SOONG_CONFIG_$(namespace))),__SV_END)        },$$(newline)))
 _contents := $(_contents)$(if $(strip $(SOONG_CONFIG_NAMESPACES)),__SV_END)    },$(newline)
+=======
+    $(call add_json_str,$(key),$(subst ",\",$(SOONG_CONFIG_$(namespace)_$(key)))))\
+  $(call end_json_map))
+$(call end_json_map)
+>>>>>>> BRANCH (ded4e7 Merge "Version bump to TKB1.220807.001.A1 [core/build_id.mk])
 
 _contents := $(subst $(comma)$(newline)__SV_END,$(newline),$(_contents)__SV_END}$(newline))
 
