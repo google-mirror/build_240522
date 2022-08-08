@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97fb9192_de327f80",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-08T17:13:38Z",
+      "side": 0,
+      "message": "Also make sure build_test on git_master can pass with the variables being marked as obsolete",
+      "parentUuid": "cfdbd4ba_6eb0a039",
+      "range": {
+        "startLine": 1920,
+        "startChar": 51,
+        "endLine": 1920,
+        "endChar": 63
+      },
+      "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea0ee97d_5a92591e",
         "filename": "core/product.mk",
         "patchSetId": 1
