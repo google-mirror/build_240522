@@ -154,7 +154,8 @@ name="apex.apexd_test_different_app.apex" public_key="system/apex/apexd/apexd_te
         '\n'.join([prop[1] for prop in props]) + '\n',
         RewriteProps('\n'.join([prop[0] for prop in props])))
 
-  def test_ReplaceVerityKeyId(self):
+  #TODO(b/241044073) clear support of VB 1.0 in release tools
+  def ___test_ReplaceVerityKeyId(self):
     BOOT_CMDLINE1 = (
         "console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 "
         "androidboot.hardware=marlin user_debug=31 ehci-hcd.park=3 "
