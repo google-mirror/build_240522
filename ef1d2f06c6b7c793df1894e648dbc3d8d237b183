@@ -150,6 +150,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15e2c53d_e9f73df4",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-08T06:49:41Z",
+      "side": 0,
+      "message": "Seems like we won\u0027t need this variable anymore, I think we can just remove it.",
+      "parentUuid": "2ae9aaec_05119385",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f64963_34ecdc93",
         "filename": "target/product/verity.mk",
         "patchSetId": 1
@@ -232,6 +250,30 @@
       "side": 0,
       "message": "From the history, the verity_key module can probably be removed as well:\n\nhttps://cs.android.com/android/_/android/platform/build/+/fd6f7513f82a4b2ec9810d6cb6c33a94060d14e9",
       "parentUuid": "ec305fcf_fdb91292",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c9d5cb_999a1d75",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-08T06:49:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "cdc47685_c893f166",
       "range": {
         "startLine": 29,
         "startChar": 8,
