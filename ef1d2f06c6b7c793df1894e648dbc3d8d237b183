@@ -204,6 +204,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4facfea7_0b4a5037",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-08T11:39:46Z",
+      "side": 0,
+      "message": "this is mis-delete?",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f64963_34ecdc93",
         "filename": "target/product/verity.mk",
         "patchSetId": 1
