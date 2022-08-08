@@ -221,6 +221,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "125012e2_73d13e60",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-08T11:43:56Z",
+      "side": 0,
+      "message": "this hunk should be in aosp/2176950",
+      "range": {
+        "startLine": 1111,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 0
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c33619_1e198d1f",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2491,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-08T11:43:56Z",
+      "side": 0,
+      "message": "this hunk in aosp/2176950 too",
+      "range": {
+        "startLine": 2486,
+        "startChar": 1,
+        "endLine": 2491,
+        "endChar": 3
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f64963_34ecdc93",
         "filename": "target/product/verity.mk",
         "patchSetId": 1
