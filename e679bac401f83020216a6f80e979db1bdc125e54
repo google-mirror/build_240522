@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfdbd4ba_6eb0a039",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-08T14:32:21Z",
+      "side": 0,
+      "message": "The related reference to `boot_signer` in the release tool can probably be removed as well. But we can do that in a separate CL (e.g., after marking PRODUCT_SUPPORTS_BOOT_SIGNER as obsolete and see if any breaking targets).\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/validate_target_files.py;l\u003d319;drc\u003d341fe0290378c280cba59898aa3e129237d5a5b0",
+      "range": {
+        "startLine": 1920,
+        "startChar": 51,
+        "endLine": 1920,
+        "endChar": 63
+      },
+      "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea0ee97d_5a92591e",
         "filename": "core/product.mk",
         "patchSetId": 1
