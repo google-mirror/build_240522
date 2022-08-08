@@ -984,11 +984,6 @@ endif
 
 INTERNAL_BOOTIMAGE_FILES := $(filter-out --%,$(INTERNAL_BOOTIMAGE_ARGS))
 
-ifeq ($(PRODUCT_SUPPORTS_VERITY),true)
-ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
-endif
-endif
-
 INTERNAL_KERNEL_CMDLINE := $(strip $(INTERNAL_KERNEL_CMDLINE) buildvariant=$(TARGET_BUILD_VARIANT) $(VERITY_KEYID))
 
 # kernel cmdline/base/pagesize in boot.
@@ -1259,10 +1254,6 @@ endif # BUILDING_INIT_BOOT_IMAGE is not true
 # vendor boot image
 INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_VENDOR_RAMDISK_OUT)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
 ifeq ($(BUILDING_VENDOR_BOOT_IMAGE),true)
-
-ifeq ($(PRODUCT_SUPPORTS_VERITY),true)
-  $(error vboot 1.0 does not support vendor_boot partition)
-endif
 
 INTERNAL_VENDOR_RAMDISK_FILES := $(filter $(TARGET_VENDOR_RAMDISK_OUT)/%, \
     $(ALL_DEFAULT_INSTALLED_MODULES))
@@ -1784,13 +1775,6 @@ ifneq ($(filter \
 INTERNAL_USERIMAGES_DEPS += $(MKSQUASHFSUSERIMG)
 endif
 
-ifeq (true,$(PRODUCT_SUPPORTS_VERITY))
-INTERNAL_USERIMAGES_DEPS += $(BUILD_VERITY_METADATA) $(BUILD_VERITY_TREE) $(APPEND2SIMG) $(VERITY_SIGNER)
-ifeq (true,$(PRODUCT_SUPPORTS_VERITY_FEC))
-INTERNAL_USERIMAGES_DEPS += $(FEC)
-endif
-endif
-
 ifeq ($(BOARD_AVB_ENABLE),true)
 INTERNAL_USERIMAGES_DEPS += $(AVBTOOL)
 endif
@@ -1806,14 +1790,6 @@ $(call merge-fc-files, \
 SELINUX_FC := $(call intermediates-dir-for,ETC,file_contexts.bin)/file_contexts.bin
 
 INTERNAL_USERIMAGES_DEPS += $(SELINUX_FC)
-
-ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
-
-ifeq ($(PRODUCT_SUPPORTS_VERITY),true)
-  $(error vboot 1.0 doesn't support logical partition)
-endif
-
-endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 
 # $(1) the partition name (eg system)
 # $(2) the image prop file
@@ -1924,10 +1900,6 @@ $(if $(BOARD_EROFS_USE_LEGACY_COMPRESSION),$(hide) echo "erofs_use_legacy_compre
 $(if $(BOARD_EXT4_SHARE_DUP_BLOCKS),$(hide) echo "ext4_share_dup_blocks=$(BOARD_EXT4_SHARE_DUP_BLOCKS)" >> $(1))
 $(if $(BOARD_FLASH_LOGICAL_BLOCK_SIZE), $(hide) echo "flash_logical_block_size=$(BOARD_FLASH_LOGICAL_BLOCK_SIZE)" >> $(1))
 $(if $(BOARD_FLASH_ERASE_BLOCK_SIZE), $(hide) echo "flash_erase_block_size=$(BOARD_FLASH_ERASE_BLOCK_SIZE)" >> $(1))
-$(if $(PRODUCT_SUPPORTS_VERITY),$(hide) echo "verity=$(PRODUCT_SUPPORTS_VERITY)" >> $(1))
-$(if $(PRODUCT_SUPPORTS_VERITY),$(hide) echo "verity_key=$(PRODUCT_VERITY_SIGNING_KEY)" >> $(1))
-$(if $(PRODUCT_SUPPORTS_VERITY),$(hide) echo "verity_signer_cmd=$(notdir $(VERITY_SIGNER))" >> $(1))
-$(if $(PRODUCT_SUPPORTS_VERITY_FEC),$(hide) echo "verity_fec=$(PRODUCT_SUPPORTS_VERITY_FEC)" >> $(1))
 $(if $(filter eng, $(TARGET_BUILD_VARIANT)),$(hide) echo "verity_disable=true" >> $(1))
 $(if $(PRODUCT_SYSTEM_VERITY_PARTITION),$(hide) echo "system_verity_block_device=$(PRODUCT_SYSTEM_VERITY_PARTITION)" >> $(1))
 $(if $(PRODUCT_VENDOR_VERITY_PARTITION),$(hide) echo "vendor_verity_block_device=$(PRODUCT_VENDOR_VERITY_PARTITION)" >> $(1))

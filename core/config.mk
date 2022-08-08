@@ -163,6 +163,8 @@ $(KATI_obsolete_var ALL_GENERATED_SOURCES,ALL_GENERATED_SOURCES is no longer use
 $(KATI_obsolete_var ALL_ORIGINAL_DYNAMIC_BINARIES,ALL_ORIGINAL_DYNAMIC_BINARIES is no longer used)
 $(KATI_obsolete_var PRODUCT_VERITY_SIGNING_KEY,AVB 1.0 and related variables are no longer supported)
 $(KATI_obsolete_var PRODUCT_SUPPORTS_BOOT_SIGNER,AVB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY,AVB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY_FEC,AVB 1.0 and related variables are no longer supported)
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
 FORCE:
