@@ -22,6 +22,30 @@
       },
       "revId": "aef876fddc25db20e8d8132e3beffa3bd15a40f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5f0021_7402ead5",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T08:21:13Z",
+      "side": 1,
+      "message": "Also change the commit message.",
+      "parentUuid": "df62d52a_dc73d892",
+      "range": {
+        "startLine": 166,
+        "startChar": 44,
+        "endLine": 166,
+        "endChar": 51
+      },
+      "revId": "aef876fddc25db20e8d8132e3beffa3bd15a40f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
