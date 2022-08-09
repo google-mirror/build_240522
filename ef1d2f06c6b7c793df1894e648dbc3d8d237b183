@@ -286,6 +286,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00c3c07f_f0067606",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T04:50:10Z",
+      "side": 0,
+      "message": "only $(VERITY_KEYID) needs to be removed\n\nyou can replace this line with \n```\nINTERNAL_KERNEL_CMDLINE +\u003d buildvariant\u003d$(TARGET_BUILD_VARIANT)\n```",
+      "parentUuid": "bacc4d54_0e25476e",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "125012e2_73d13e60",
         "filename": "core/Makefile",
         "patchSetId": 4
