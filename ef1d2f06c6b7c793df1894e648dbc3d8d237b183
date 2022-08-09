@@ -338,6 +338,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "084e7581_714c6e96",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T08:20:25Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "bed9393a_e00d9ada",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "125012e2_73d13e60",
