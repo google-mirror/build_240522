@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911b9f2e_ad4b69ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:52:32Z",
+      "side": 1,
+      "message": "remove this too? https://cs.android.com/android/platform/superproject/+/master:build/make/target/product/verity.mk;l\u003d19",
+      "revId": "7c8946deb449bcbd5a37b4fdf4a3fcb8581b40f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
