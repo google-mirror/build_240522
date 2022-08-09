@@ -16,6 +16,24 @@
       "message": "remove this too? https://cs.android.com/android/platform/superproject/+/master:build/make/target/product/verity.mk;l\u003d19",
       "revId": "7c8946deb449bcbd5a37b4fdf4a3fcb8581b40f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ff398bc_0ba3486f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T08:55:02Z",
+      "side": 1,
+      "message": "I think this will eventually be removed in aosp/2176952 ?",
+      "parentUuid": "911b9f2e_ad4b69ad",
+      "revId": "7c8946deb449bcbd5a37b4fdf4a3fcb8581b40f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
