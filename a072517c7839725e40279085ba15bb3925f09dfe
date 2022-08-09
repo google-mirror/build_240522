@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09776d66_407dc513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:44:55Z",
+      "side": 1,
+      "message": "I think in terms of the topological order, this change can be merged with aosp/2176952, or as a change after aosp/2176952...\n\nWe first remove the VERITY feature, and then remove stale key files after the VERITY feature had no user (VERITY marked obsolete)",
+      "revId": "a072517c7839725e40279085ba15bb3925f09dfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -487,6 +487,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "064afccc_eac0725f",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:44:55Z",
+      "side": 0,
+      "message": "these should be part of the PRODUCT_SUPPORTS_VERITY change too,",
+      "range": {
+        "startLine": 987,
+        "startChar": 0,
+        "endLine": 994,
+        "endChar": 115
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01d2a27_df649e4a",
+        "filename": "core/tasks/tools/build_custom_image.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:44:55Z",
+      "side": 0,
+      "message": "we should remove these in aosp/2176951 too. these CUSTOM_* vars are really just PRODUCT_SUPPORTS_VERITY(_FEC) renamed",
+      "range": {
+        "startLine": 94,
+        "startChar": 26,
+        "endLine": 96,
+        "endChar": 77
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e735fb76_96c18ecb",
+        "filename": "core/tasks/tools/build_custom_image.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:44:55Z",
+      "side": 0,
+      "message": "these are all for VB 1.0 too",
+      "range": {
+        "startLine": 133,
+        "startChar": 1,
+        "endLine": 139,
+        "endChar": 102
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f64963_34ecdc93",
         "filename": "target/product/verity.mk",
         "patchSetId": 1
