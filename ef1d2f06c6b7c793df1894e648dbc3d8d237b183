@@ -225,6 +225,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98cf22d7_97c00825",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:41:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "bb6cda0f_933a04ae",
+      "range": {
+        "startLine": 987,
+        "startChar": 0,
+        "endLine": 987,
+        "endChar": 38
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4facfea7_0b4a5037",
@@ -238,6 +262,24 @@
       "writtenOn": "2022-08-08T11:39:46Z",
       "side": 0,
       "message": "this is mis-delete?",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacc4d54_0e25476e",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:41:41Z",
+      "side": 0,
+      "message": "Not quite sure, following https://android-review.googlesource.com/c/platform/build/+/2175133/comments/9415a183_c56642d1 . But maybe we should discuss more about it.",
+      "parentUuid": "4facfea7_0b4a5037",
       "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -265,6 +307,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ea20a5_5be4b492",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:41:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "125012e2_73d13e60",
+      "range": {
+        "startLine": 1111,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 0
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70a4e8e6_65d63fbd",
@@ -282,6 +348,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2466cf_d8f716b0",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:41:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "70a4e8e6_65d63fbd",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3c33619_1e198d1f",
@@ -295,6 +379,30 @@
       "writtenOn": "2022-08-08T11:43:56Z",
       "side": 0,
       "message": "this hunk in aosp/2176950 too",
+      "range": {
+        "startLine": 2486,
+        "startChar": 1,
+        "endLine": 2491,
+        "endChar": 3
+      },
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e67e0c_8410e6d9",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2491,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:41:41Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b3c33619_1e198d1f",
       "range": {
         "startLine": 2486,
         "startChar": 1,
