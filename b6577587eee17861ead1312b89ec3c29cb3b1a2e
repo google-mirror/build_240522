@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0962449f_52f0fe92",
+        "filename": "core/config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T04:55:36Z",
+      "side": 1,
+      "message": "@bowgotsai is this accurate? I want to make sure we don\u0027t accidentally create a new term in the process.\n\nfrom what I know, \"AVB\" usually implies to \"Verified Boot 2.0\" \u003d \"VB 2.0\"\n\"Verified Boot\" usually implies \"Verified Boot 1.0\" \u003d \"VB 1.0\"",
+      "range": {
+        "startLine": 164,
+        "startChar": 47,
+        "endLine": 164,
+        "endChar": 55
+      },
+      "revId": "b6577587eee17861ead1312b89ec3c29cb3b1a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
