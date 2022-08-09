@@ -69,6 +69,30 @@
       },
       "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa521ca_3ba73154",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:26:23Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ea0ee97d_5a92591e",
+      "range": {
+        "startLine": 139,
+        "startChar": 30,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
