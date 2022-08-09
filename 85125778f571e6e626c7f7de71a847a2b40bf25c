@@ -16,6 +16,24 @@
       "message": "Everything except AAPT2 needs to stay",
       "revId": "85125778f571e6e626c7f7de71a847a2b40bf25c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edcfdd04_ef2880d0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6261,
+      "author": {
+        "id": 1600736
+      },
+      "writtenOn": "2022-08-09T16:15:25Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e0b9ba2d_d869d376",
+      "revId": "85125778f571e6e626c7f7de71a847a2b40bf25c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
