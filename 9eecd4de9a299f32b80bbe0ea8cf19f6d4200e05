@@ -16,6 +16,24 @@
       "message": "same suggestion, mark as KATI_obsolete",
       "revId": "9eecd4de9a299f32b80bbe0ea8cf19f6d4200e05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cffbe507_98420b3f",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-09T03:27:20Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "bb332975_cd55b981",
+      "revId": "9eecd4de9a299f32b80bbe0ea8cf19f6d4200e05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
