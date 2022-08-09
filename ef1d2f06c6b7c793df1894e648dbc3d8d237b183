@@ -304,6 +304,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4ae3d33_f2dc8c8a",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-09T05:02:47Z",
+      "side": 0,
+      "message": "Yup, my original comment is just to remove $(VERITY_KEYID) since we\u0027re removing VERITY_KEYID here\n\nbuildvariant\u003d$(TARGET_BUILD_VARIANT) was added:\nhttps://android-review.googlesource.com/c/platform/build/+/243952\n\nThis is for kernel to enable dm-verity when mounting a \"system-as-root\" system.img.\nIt can probably be removed as well, maybe in b/241346584?",
+      "parentUuid": "00c3c07f_f0067606",
+      "revId": "ef1d2f06c6b7c793df1894e648dbc3d8d237b183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "125012e2_73d13e60",
         "filename": "core/Makefile",
         "patchSetId": 4

@@ -22,6 +22,30 @@
       },
       "revId": "b6577587eee17861ead1312b89ec3c29cb3b1a2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d580244_698ee36c",
+        "filename": "core/config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-09T05:02:47Z",
+      "side": 1,
+      "message": "Yes, let\u0027s using \"VB 1.0\".\n\nAs you said, \"AVB\" \u003d\u003d \"Android Verified Boot\" \u003d\u003d \"Verified Boot 2.0\" \u003d\u003d \"VB 2.0\"",
+      "parentUuid": "0962449f_52f0fe92",
+      "range": {
+        "startLine": 164,
+        "startChar": 47,
+        "endLine": 164,
+        "endChar": 55
+      },
+      "revId": "b6577587eee17861ead1312b89ec3c29cb3b1a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
