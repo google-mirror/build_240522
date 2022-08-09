@@ -34,6 +34,24 @@
       "parentUuid": "911b9f2e_ad4b69ad",
       "revId": "7c8946deb449bcbd5a37b4fdf4a3fcb8581b40f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2116df68_2ee630ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-09T08:57:49Z",
+      "side": 1,
+      "message": "that would create unnecessary dependency between the two changes, because PRODUCT_SUPPORTS_BOOT_SIGNER is marked as deprecated in this change, the two changes would have to be submitted together.\n\nremove this line here, then \"mark as deprecated\" can be an atomic operation in this change.",
+      "parentUuid": "0ff398bc_0ba3486f",
+      "revId": "7c8946deb449bcbd5a37b4fdf4a3fcb8581b40f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
