@@ -46,4 +46,13 @@
     @**android**.annotation*.Keep <init>(...);
 }
 
+# Ignore missing annotation references for annotations stripped at compile-time.
+# TODO(b/242088131): Remove these exemptions after resolving transitive libs
+# dependencies that are provided to R8.
+-dontwarn android.compat.annotation.**
+-dontwarn android.support.annotation.**
+-dontwarn androidx.annotation.**
+-dontwarn com.google.errorprone.annotations.**
+-dontwarn org.jetbrains.annotations.**
+
 -include proguard_basic_keeps.flags
