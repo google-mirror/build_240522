@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a449e186_df7c5f10",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-10T16:17:19Z",
+      "side": 0,
+      "message": "can also remove the actual key files\n\nhttps://cs.android.com/search?q\u003df:%5Ebuild%2Fmake%2Ftarget%2Fproduct%2Fsecurity%2Fverity\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject\n\ncan do it in this patch, or as a follow-up.",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 71
+      },
+      "revId": "4e74a706698170ee17d645368aa96d85d57080d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
