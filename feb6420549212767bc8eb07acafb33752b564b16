@@ -34,6 +34,24 @@
       "parentUuid": "50e2ea73_a8b76df7",
       "revId": "feb6420549212767bc8eb07acafb33752b564b16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1eff01f_91fd49f4",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-08-10T22:26:44Z",
+      "side": 1,
+      "message": "The command parameters for this are all obscure stuff in the out dir, so I don\u0027t think it\u0027s necessary to make this script runnable outside the build. It\u0027ll still fail if someone did it and didn\u0027t have androidmk built.",
+      "parentUuid": "50e2ea73_a8b76df7",
+      "revId": "feb6420549212767bc8eb07acafb33752b564b16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
