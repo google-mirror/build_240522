@@ -22,6 +22,30 @@
       },
       "revId": "4e74a706698170ee17d645368aa96d85d57080d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a3b72a3_fac85031",
+        "filename": "target/product/verity.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-11T07:12:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a449e186_df7c5f10",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 71
+      },
+      "revId": "4e74a706698170ee17d645368aa96d85d57080d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
