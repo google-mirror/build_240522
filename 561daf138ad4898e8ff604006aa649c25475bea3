@@ -16,6 +16,24 @@
       "message": "Add support to call dump_apex_info to create apex-info-list.xml.",
       "revId": "561daf138ad4898e8ff604006aa649c25475bea3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27876750_95d46caf",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4752,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-08-11T22:08:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcb7ede6_a1eb4adb",
+      "revId": "561daf138ad4898e8ff604006aa649c25475bea3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
