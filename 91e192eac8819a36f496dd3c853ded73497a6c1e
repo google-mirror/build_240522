@@ -16,6 +16,24 @@
       "message": "any reason not to remove the entire function?\n\nAlso TODO format is\n\n#\u003cspace\u003eTODO(b/\u003cbug number\u003e)\u003ccolon\u003e\u003cspace\u003e\u003creason text\u003e",
       "revId": "91e192eac8819a36f496dd3c853ded73497a6c1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14a24bb_a48275c5",
+        "filename": "tools/releasetools/test_sign_target_files_apks.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-11T08:17:23Z",
+      "side": 1,
+      "message": "I thought we can trace and completely remove this test code in the next CL. But it seems like our CLs aren\u0027t the root cause of the failed test.",
+      "parentUuid": "3eb84214_76977244",
+      "revId": "91e192eac8819a36f496dd3c853ded73497a6c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

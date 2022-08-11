@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "400701f5_e988bc3d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-11T08:17:23Z",
+      "side": 0,
+      "message": "After further testing, the failed test has nothing to do with these CLs. I will recovered it",
+      "parentUuid": "09e6058b_5d65c82e",
+      "range": {
+        "startLine": 1920,
+        "startChar": 51,
+        "endLine": 1920,
+        "endChar": 63
+      },
+      "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea0ee97d_5a92591e",
