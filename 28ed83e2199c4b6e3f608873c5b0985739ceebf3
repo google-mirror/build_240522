@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1508c2e8_649c857e",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-11T06:07:25Z",
+      "side": 1,
+      "message": "go/cstyle#TODO_Comments\n\nTODO should be followed by a comment explaining what is left \"to do\"\n\nTODO(b/241346584): Remove this when BOARD_BUILD_SYSTEM_ROOT_IMAGE is deprecated",
+      "range": {
+        "startLine": 987,
+        "startChar": 18,
+        "endLine": 987,
+        "endChar": 19
+      },
+      "revId": "28ed83e2199c4b6e3f608873c5b0985739ceebf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
