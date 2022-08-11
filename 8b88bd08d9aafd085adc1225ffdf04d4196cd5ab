@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebc4344f_082c4531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2022-08-11T21:43:12Z",
+      "side": 1,
+      "message": "OK, I think this covers most of the benign missing annotations in the build.",
+      "revId": "8b88bd08d9aafd085adc1225ffdf04d4196cd5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
