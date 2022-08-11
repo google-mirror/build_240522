@@ -52,6 +52,24 @@
       "parentUuid": "50e2ea73_a8b76df7",
       "revId": "feb6420549212767bc8eb07acafb33752b564b16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61d7bf2_4c866cc3",
+        "filename": "tools/mk2bp_catalog.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2022-08-11T14:03:20Z",
+      "side": 1,
+      "message": "could you add a file-level doc that this should not be invoked as a standalone script, then?",
+      "parentUuid": "c1eff01f_91fd49f4",
+      "revId": "feb6420549212767bc8eb07acafb33752b564b16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
