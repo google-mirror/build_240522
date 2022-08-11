@@ -29,6 +29,7 @@ $(MODULE_INFO_JSON):
 			'"data_dependencies": [$(foreach w,$(sort $(ALL_MODULES.$(m).TEST_DATA_BINS)),"$(w)", )], ' \
 			'"supported_variants": [$(foreach w,$(sort $(ALL_MODULES.$(m).SUPPORTED_VARIANTS)),"$(w)", )], ' \
 			'"host_dependencies": [$(foreach w,$(sort $(ALL_MODULES.$(m).HOST_REQUIRED_FROM_TARGET)),"$(w)", )], ' \
+			'"required_dependencies": [$(foreach w,$(sort $(ALL_MODULES.$(m).REQUIRED_MODULES)),"$(w)", )], ' \
 			'},\n' \
 	 ) | sed -e 's/, *\]/]/g' -e 's/, *\}/ }/g' -e '$$s/,$$//' >> $@
 	$(hide) echo '}' >> $@
