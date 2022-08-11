@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14f0abd4_71eafca2",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-11T18:13:41Z",
+      "side": 1,
+      "message": "There\u0027s some previous discussion at https://android-review.googlesource.com/c/platform/build/+/1964821/comments/e7f96414_0f03042f.\n\n`required` is inherited from Make and is very vague.  I\u0027d suggest creating a more specific property for your use case and moving tests over to it, otherwise it is very hard to interpret the various ways different modules use `required`.",
+      "revId": "d8b1eb0b965df0c4595a8a78085d4d2fee72d2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
