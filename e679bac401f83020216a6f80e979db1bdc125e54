@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09e6058b_5d65c82e",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-11T07:12:08Z",
+      "side": 0,
+      "message": "build_test will pass if we merge the internal fix. But the test of release tools will break. I think we can remove the test, and then clean the reference in release tools in another CL ?",
+      "parentUuid": "97fb9192_de327f80",
+      "range": {
+        "startLine": 1920,
+        "startChar": 51,
+        "endLine": 1920,
+        "endChar": 63
+      },
+      "revId": "e679bac401f83020216a6f80e979db1bdc125e54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea0ee97d_5a92591e",
         "filename": "core/product.mk",
         "patchSetId": 1
