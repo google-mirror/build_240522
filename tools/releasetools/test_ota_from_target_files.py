@@ -31,10 +31,12 @@ from ota_from_target_files import (
     GetTargetFilesZipForPartialUpdates,
     GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig,
-    Payload, PayloadSigner, POSTINSTALL_CONFIG,
+    Payload, POSTINSTALL_CONFIG,
     StreamingPropertyFiles, AB_PARTITIONS)
 from apex_utils import GetApexInfoFromTargetFiles
 from test_utils import PropertyFilesTestCase
+from common import OPTIONS
+from payload_signer import PayloadSigner
 
 
 def construct_target_files(secondary=False, compressedApex=False):
@@ -1180,7 +1182,8 @@ class PayloadSignerTest(test_utils.ReleaseToolsTestCase):
         'pkeyutl', '-sign', '-keyform', 'DER', '-inkey',
         os.path.join(self.testdata_dir, 'testkey.pk8'),
         '-pkeyopt', 'digest:sha256']
-    payload_signer = PayloadSigner()
+    payload_signer = PayloadSigner(
+        OPTIONS.package_key, OPTIONS.private_key_suffix)
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
     signed_file = payload_signer.Sign(input_file)
 
