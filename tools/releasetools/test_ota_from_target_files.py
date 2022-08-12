@@ -31,10 +31,12 @@ from ota_from_target_files import (
     GetTargetFilesZipForPartialUpdates,
     GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig,
-    Payload, PayloadSigner, POSTINSTALL_CONFIG,
+    Payload, POSTINSTALL_CONFIG,
     StreamingPropertyFiles, AB_PARTITIONS)
 from apex_utils import GetApexInfoFromTargetFiles
 from test_utils import PropertyFilesTestCase
+from common import OPTIONS
+from payload_signer import PayloadSigner
 
 
 def construct_target_files(secondary=False, compressedApex=False):
@@ -1175,12 +1177,12 @@ class PayloadSignerTest(test_utils.ReleaseToolsTestCase):
 
   def test_Sign_withExternalSigner_openssl(self):
     """Uses openssl as the external payload signer."""
-    common.OPTIONS.payload_signer = 'openssl'
     common.OPTIONS.payload_signer_args = [
         'pkeyutl', '-sign', '-keyform', 'DER', '-inkey',
         os.path.join(self.testdata_dir, 'testkey.pk8'),
         '-pkeyopt', 'digest:sha256']
-    payload_signer = PayloadSigner()
+    payload_signer = PayloadSigner(
+        OPTIONS.package_key, OPTIONS.private_key_suffix, payload_signer="openssl")
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
     signed_file = payload_signer.Sign(input_file)
 
@@ -1189,12 +1191,12 @@ class PayloadSignerTest(test_utils.ReleaseToolsTestCase):
 
   def test_Sign_withExternalSigner_script(self):
     """Uses testdata/payload_signer.sh as the external payload signer."""
-    common.OPTIONS.payload_signer = os.path.join(
+    external_signer = os.path.join(
         self.testdata_dir, 'payload_signer.sh')
     os.chmod(common.OPTIONS.payload_signer, 0o700)
     common.OPTIONS.payload_signer_args = [
         os.path.join(self.testdata_dir, 'testkey.pk8')]
-    payload_signer = PayloadSigner()
+    payload_signer = PayloadSigner(OPTIONS.package_key, OPTIONS.private_key_suffix, payload_signer=external_signer)
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
     signed_file = payload_signer.Sign(input_file)
 
