@@ -16,6 +16,24 @@
       "message": "There\u0027s some previous discussion at https://android-review.googlesource.com/c/platform/build/+/1964821/comments/e7f96414_0f03042f.\n\n`required` is inherited from Make and is very vague.  I\u0027d suggest creating a more specific property for your use case and moving tests over to it, otherwise it is very hard to interpret the various ways different modules use `required`.",
       "revId": "d8b1eb0b965df0c4595a8a78085d4d2fee72d2f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed93e6b_80bf9fb5",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-08-12T03:46:46Z",
+      "side": 1,
+      "message": "I wonder if you mean to create a new property in Soong modules(android_test, java_test, etc) and declare dependencies in there instead of `required`? If yes, can we move the dependencies declared in `required` into other existing attribute such as `data`? If no, could you provide an example for more details?\n\nBesides, we won\u0027t build anything around `required`. We just want to get the dependencies in `required` and add the dependencies into a more general attribute(not specific for required) in Bazel definitions.",
+      "parentUuid": "14f0abd4_71eafca2",
+      "revId": "d8b1eb0b965df0c4595a8a78085d4d2fee72d2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
