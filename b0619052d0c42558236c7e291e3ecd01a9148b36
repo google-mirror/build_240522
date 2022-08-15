@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e9c5d0_c7f40e50",
+        "filename": "Changes.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-08-15T20:17:37Z",
+      "side": 1,
+      "message": "Can you add a snippet of the error one may get by depending directly on \"foo\"?",
+      "range": {
+        "startLine": 17,
+        "startChar": 44,
+        "endLine": 17,
+        "endChar": 46
+      },
+      "revId": "b0619052d0c42558236c7e291e3ecd01a9148b36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
