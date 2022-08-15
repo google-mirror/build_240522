@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0507b0cf_55368409",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-15T07:25:50Z",
+      "side": 1,
+      "message": "lgtm, as we have \u0027BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE\u0027 to control whether a recovery.img contains a kernel or not.\n\nhttps://android-review.googlesource.com/c/platform/build/+/1455951",
+      "range": {
+        "startLine": 10,
+        "startChar": 13,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "e3d43208d952f1f7d2f94d1f6bffd3b3f2a33a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e414cc2c_5cf10f50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-08-15T07:25:50Z",
+      "side": 1,
+      "message": "Root cause analysis: b/187157581#comment16",
+      "revId": "e3d43208d952f1f7d2f94d1f6bffd3b3f2a33a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
