@@ -24,15 +24,14 @@ import ota_metadata_pb2
 import test_utils
 from ota_utils import (
     BuildLegacyOtaMetadata, CalculateRuntimeDevicesAndFingerprints,
-    ConstructOtaApexInfo, FinalizeMetadata, GetPackageMetadata, PropertyFiles)
+    ConstructOtaApexInfo, FinalizeMetadata, GetPackageMetadata, PropertyFiles, AbOtaPropertyFiles, PayloadGenerator, StreamingPropertyFiles)
 from ota_from_target_files import (
-    _LoadOemDicts, AbOtaPropertyFiles,
+    _LoadOemDicts,
     GetTargetFilesZipForCustomImagesUpdates,
     GetTargetFilesZipForPartialUpdates,
     GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig,
-    Payload, POSTINSTALL_CONFIG,
-    StreamingPropertyFiles, AB_PARTITIONS)
+    POSTINSTALL_CONFIG, AB_PARTITIONS)
 from apex_utils import GetApexInfoFromTargetFiles
 from test_utils import PropertyFilesTestCase
 from common import OPTIONS
@@ -975,7 +974,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTestCase):
   @test_utils.SkipIfExternalToolsUnavailable()
   def test_GetPayloadMetadataOffsetAndSize(self):
     target_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file)
 
     payload_signer = PayloadSigner()
@@ -1040,7 +1039,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTestCase):
   def construct_zip_package_withValidPayload(with_metadata=False):
     # Cannot use construct_zip_package() since we need a "valid" payload.bin.
     target_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file)
 
     payload_signer = PayloadSigner()
@@ -1221,7 +1220,7 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
   @staticmethod
   def _create_payload_full(secondary=False):
     target_file = construct_target_files(secondary)
-    payload = Payload(secondary)
+    payload = PayloadGenerator(secondary)
     payload.Generate(target_file)
     return payload
 
@@ -1229,7 +1228,7 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
   def _create_payload_incremental():
     target_file = construct_target_files()
     source_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file, source_file)
     return payload
 
@@ -1247,7 +1246,7 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
   def test_Generate_additionalArgs(self):
     target_file = construct_target_files()
     source_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     # This should work the same as calling payload.Generate(target_file,
     # source_file).
     payload.Generate(
@@ -1258,7 +1257,7 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
   def test_Generate_invalidInput(self):
     target_file = construct_target_files()
     common.ZipDelete(target_file, 'IMAGES/vendor.img')
-    payload = Payload()
+    payload = PayloadGenerator()
     self.assertRaises(common.ExternalError, payload.Generate, target_file)
 
   @test_utils.SkipIfExternalToolsUnavailable()
@@ -1326,13 +1325,13 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
     with zipfile.ZipFile(output_file) as verify_zip:
       # First make sure we have the essential entries.
       namelist = verify_zip.namelist()
-      self.assertIn(Payload.PAYLOAD_BIN, namelist)
-      self.assertIn(Payload.PAYLOAD_PROPERTIES_TXT, namelist)
+      self.assertIn(PayloadGenerator.PAYLOAD_BIN, namelist)
+      self.assertIn(PayloadGenerator.PAYLOAD_PROPERTIES_TXT, namelist)
 
       # Then assert these entries are stored.
       for entry_info in verify_zip.infolist():
-        if entry_info.filename not in (Payload.PAYLOAD_BIN,
-                                       Payload.PAYLOAD_PROPERTIES_TXT):
+        if entry_info.filename not in (PayloadGenerator.PAYLOAD_BIN,
+                                       PayloadGenerator.PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
 
@@ -1364,14 +1363,14 @@ class PayloadTest(test_utils.ReleaseToolsTestCase):
     with zipfile.ZipFile(output_file) as verify_zip:
       # First make sure we have the essential entries.
       namelist = verify_zip.namelist()
-      self.assertIn(Payload.SECONDARY_PAYLOAD_BIN, namelist)
-      self.assertIn(Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT, namelist)
+      self.assertIn(PayloadGenerator.SECONDARY_PAYLOAD_BIN, namelist)
+      self.assertIn(PayloadGenerator.SECONDARY_PAYLOAD_PROPERTIES_TXT, namelist)
 
       # Then assert these entries are stored.
       for entry_info in verify_zip.infolist():
         if entry_info.filename not in (
-                Payload.SECONDARY_PAYLOAD_BIN,
-                Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
+                PayloadGenerator.SECONDARY_PAYLOAD_BIN,
+                PayloadGenerator.SECONDARY_PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
 
