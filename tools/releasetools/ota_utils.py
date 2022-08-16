@@ -48,7 +48,7 @@ UNZIP_PATTERN = ['IMAGES/*', 'META/*', 'OTA/*', 'RADIO/*']
 SECURITY_PATCH_LEVEL_PROP_NAME = "ro.build.version.security_patch"
 
 
-def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
+def FinalizeMetadata(metadata, input_file, output_file, needed_property_files=None, package_key=None, pw=None, no_signing=None):
   """Finalizes the metadata and signs an A/B OTA package.
 
   In order to stream an A/B OTA package, we need 'ota-streaming-property-files'
@@ -66,8 +66,21 @@ def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
     input_file: The input ZIP filename that doesn't contain the package METADATA
         entry yet.
     output_file: The final output ZIP filename.
-    needed_property_files: The list of PropertyFiles' to be generated.
+    needed_property_files: The list of PropertyFiles' to be generated. Default is [AbOtaPropertyFiles(), StreamingPropertyFiles()]
   """
+
+  if needed_property_files is None:
+    # AbOtaPropertyFiles intends to replace StreamingPropertyFiles, as it covers
+    # all the info of the latter. However, system updaters and OTA servers need to
+    # take time to switch to the new flag. We keep both of the flags for
+    # P-timeframe, and will remove StreamingPropertyFiles in later release.
+    needed_property_files = (
+        AbOtaPropertyFiles(),
+        StreamingPropertyFiles(),
+    )
+
+  if no_signing is None:
+    no_signing = OPTIONS.no_signing
 
   def ComputeAllPropertyFiles(input_file, needed_property_files):
     # Write the current metadata entry with placeholders.
@@ -83,11 +96,11 @@ def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
     WriteMetadata(metadata, output_zip)
     ZipClose(output_zip)
 
-    if OPTIONS.no_signing:
+    if no_signing:
       return input_file
 
     prelim_signing = MakeTempFile(suffix='.zip')
-    SignOutput(input_file, prelim_signing)
+    SignOutput(input_file, prelim_signing, package_key, pw)
     return prelim_signing
 
   def FinalizeAllPropertyFiles(prelim_signing, needed_property_files):
@@ -122,10 +135,10 @@ def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
   ZipClose(output_zip)
 
   # Re-sign the package after updating the metadata entry.
-  if OPTIONS.no_signing:
+  if no_signing:
     shutil.copy(prelim_signing, output_file)
   else:
-    SignOutput(prelim_signing, output_file)
+    SignOutput(prelim_signing, output_file, package_key, pw)
 
   # Reopen the final signed zip to double check the streaming metadata.
   with zipfile.ZipFile(output_file, allowZip64=True) as output_zip:
@@ -600,10 +613,13 @@ class PropertyFiles(object):
     return []
 
 
-def SignOutput(temp_zip_name, output_zip_name):
-  pw = OPTIONS.key_passwords[OPTIONS.package_key]
+def SignOutput(temp_zip_name, output_zip_name, package_key=None, pw=None):
+  if package_key is None:
+    package_key = OPTIONS.package_key
+  if pw is None and OPTIONS.key_passwords:
+    pw = OPTIONS.key_passwords[package_key]
 
-  SignFile(temp_zip_name, output_zip_name, OPTIONS.package_key, pw,
+  SignFile(temp_zip_name, output_zip_name, package_key, pw,
            whole_file=True)
 
 
@@ -707,7 +723,7 @@ def IsZucchiniCompatible(source_file: str, target_file: str):
   return sourceEntry and targetEntry and sourceEntry == targetEntry
 
 
-class Payload(object):
+class PayloadGenerator(object):
   """Manages the creation and the signing of an A/B OTA Payload."""
 
   PAYLOAD_BIN = 'payload.bin'
@@ -785,8 +801,8 @@ class Payload(object):
     self._Run(cmd)
 
     # 2. Sign the hashes.
-    signed_payload_sig_file = payload_signer.Sign(payload_sig_file)
-    signed_metadata_sig_file = payload_signer.Sign(metadata_sig_file)
+    signed_payload_sig_file = payload_signer.SignHashFile(payload_sig_file)
+    signed_metadata_sig_file = payload_signer.SignHashFile(metadata_sig_file)
 
     # 3. Insert the signatures back into the payload file.
     signed_payload_file = common.MakeTempFile(prefix="signed-payload-",
@@ -828,11 +844,11 @@ class Payload(object):
     assert self.payload_properties is not None
 
     if self.secondary:
-      payload_arcname = Payload.SECONDARY_PAYLOAD_BIN
-      payload_properties_arcname = Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT
+      payload_arcname = PayloadGenerator.SECONDARY_PAYLOAD_BIN
+      payload_properties_arcname = PayloadGenerator.SECONDARY_PAYLOAD_PROPERTIES_TXT
     else:
-      payload_arcname = Payload.PAYLOAD_BIN
-      payload_properties_arcname = Payload.PAYLOAD_PROPERTIES_TXT
+      payload_arcname = PayloadGenerator.PAYLOAD_BIN
+      payload_properties_arcname = PayloadGenerator.PAYLOAD_PROPERTIES_TXT
 
     # Add the signed payload file and properties into the zip. In order to
     # support streaming, we pack them as ZIP_STORED. So these entries can be
