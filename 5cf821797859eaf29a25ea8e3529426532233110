@@ -22,6 +22,30 @@
       },
       "revId": "5cf821797859eaf29a25ea8e3529426532233110",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92207c4b_376b6fb8",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-08-17T18:43:31Z",
+      "side": 0,
+      "message": "PRODUCT_USE_VNDK_OVERRIDE is pretty old. PRODUCT_USE_VNDK is only used locally. I didn\u0027t expect it to be an issue, and since they don\u0027t exist anywhere now, I don\u0027t see a reason anyone would add a reference to them now",
+      "parentUuid": "afef2f20_50a13741",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 0
+      },
+      "revId": "5cf821797859eaf29a25ea8e3529426532233110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
