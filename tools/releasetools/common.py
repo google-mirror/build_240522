@@ -2633,9 +2633,9 @@ def ParseOptions(argv,
     elif o in ("--boot_signer_args",):
       OPTIONS.boot_signer_args = shlex.split(a)
     elif o in ("--verity_signer_path",):
-      OPTIONS.verity_signer_path = a
+      raise ValueError("--verity_signer_path is no longer supported, please switch to AVB")
     elif o in ("--verity_signer_args",):
-      OPTIONS.verity_signer_args = shlex.split(a)
+      raise ValueError("--verity_signer_args is no longer supported, please switch to AVB")
     elif o in ("-s", "--device_specific"):
       OPTIONS.device_specific = a
     elif o in ("-x", "--extra"):
