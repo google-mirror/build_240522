@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4969d730_8696107c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5024,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-17T08:11:55Z",
+      "side": 0,
+      "message": "sorry for not being precies. We only need to remove this clause as we removed the \u0027verity_key\u0027 file. Other find clause should not be altered as there are other test key files under build/make/target/product/security",
+      "range": {
+        "startLine": 5024,
+        "startChar": 20,
+        "endLine": 5024,
+        "endChar": 39
+      },
+      "revId": "a7dfb456a12dad7b5484a373da8327f39eda7c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
