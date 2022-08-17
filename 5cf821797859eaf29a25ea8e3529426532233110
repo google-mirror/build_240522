@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afef2f20_50a13741",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-17T18:28:18Z",
+      "side": 0,
+      "message": "Is it worth keeping these and updating the error message?",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 0
+      },
+      "revId": "5cf821797859eaf29a25ea8e3529426532233110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
