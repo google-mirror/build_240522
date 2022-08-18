@@ -16,6 +16,29 @@
       "message": "Address the linter comment please",
       "revId": "68c1d0f4604bcdf0f0296681bcfee624027587f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cf59531_9075b819",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-18T18:45:15Z",
+      "side": 1,
+      "message": "In case the linter comment is not visible externally, it\u0027s flagging this trailing whitespace.",
+      "range": {
+        "startLine": 866,
+        "startChar": 73,
+        "endLine": 866,
+        "endChar": 81
+      },
+      "revId": "68c1d0f4604bcdf0f0296681bcfee624027587f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
