@@ -1846,7 +1846,23 @@ function b()
         bazel help
     else
         # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
-        bazel "$@" --config=bp2build
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local previous_args=""
+        for arg in $@;
+        do
+            if [[ $arg == -* ]]; # if $arg starts with a dash
+            then
+                previous_args+="$arg "
+                shift
+            else
+                previous_args+="$arg "
+                shift
+                break
+            fi
+        done
+        bazel $previous_args --config=bp2build $@
     fi
 )
 
