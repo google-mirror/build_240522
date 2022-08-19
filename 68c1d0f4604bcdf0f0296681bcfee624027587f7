@@ -39,6 +39,30 @@
       },
       "revId": "68c1d0f4604bcdf0f0296681bcfee624027587f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904ec43e_9c9aff1a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1963435
+      },
+      "writtenOn": "2022-08-19T02:13:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cf59531_9075b819",
+      "range": {
+        "startLine": 866,
+        "startChar": 73,
+        "endLine": 866,
+        "endChar": 81
+      },
+      "revId": "68c1d0f4604bcdf0f0296681bcfee624027587f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
