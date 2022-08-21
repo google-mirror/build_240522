@@ -49,14 +49,14 @@ gensrcs {
     srcs: [
         "bar.proto",
     ],
-    output_extension: "srcjar",
-}
+
+    output_extension: "",
+..
 ```
 where `bar.proto` imports `external.proto` would become
 
 ```
-gensrcs {
-    name: "framework-cppstream-protos",
+m-protos",
     tools: [
         "aprotoc",
         "protoc-gen-cpptream",
@@ -71,7 +71,7 @@ gensrcs {
     srcs: [
         "bar.proto",
     ],
-    output_extension: "srcjar",
+    output_extension: "",
 }
 ```
 as in https://android-review.googlesource.com/c/platform/frameworks/base/+/2125692/.
