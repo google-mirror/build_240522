@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf37727_da34e646",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-22T23:49:13Z",
+      "side": 1,
+      "message": "I assume there are no functional changes with this CL. Right?",
+      "revId": "a70093103108fb298543db3e9c9105d0d8f9039e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3220ee84_8b1a2d1f",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-22T23:49:13Z",
+      "side": 1,
+      "message": "Update",
+      "revId": "a70093103108fb298543db3e9c9105d0d8f9039e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
