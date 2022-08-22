@@ -19,7 +19,9 @@ test_suite_readme := test/vts/tools/vts-core-tradefed/README
 include $(BUILD_SYSTEM)/tasks/tools/vts-kernel-tests.mk
 
 kernel_test_copy_pairs := \
-  $(call target-native-copy-pairs,$(kernel_test_modules),$(kernel_test_vts_out))
+  $(call target-native-copy-pairs,$(ltp_modules),$(ltp_vts_out))
+kernel_test_copy_pairs += \
+  $(call target-native-copy-pairs,$(kselftest_modules),$(kselftest_vts_out))
 
 copy_kernel_tests := $(call copy-many-files,$(kernel_test_copy_pairs))
 
