@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe5fb7b_7e434cf6",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1683,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-22T10:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62867e0_f5d59e2a",
+      "range": {
+        "startLine": 1683,
+        "startChar": 2,
+        "endLine": 1683,
+        "endChar": 6
+      },
+      "revId": "f5ab0370f0ed35bea68347749261e5450f533ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4487363f_ec1063ea",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-22T08:44:53Z",
       "side": 1,
       "message": "don\u0027t need the surrounding () if the if-clause is only one line",
+      "revId": "f5ab0370f0ed35bea68347749261e5450f533ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9185d93_e9f3f02e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-22T10:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4487363f_ec1063ea",
       "revId": "f5ab0370f0ed35bea68347749261e5450f533ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
