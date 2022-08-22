@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c01e86_adf9de8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1933450
+      },
+      "writtenOn": "2022-08-22T08:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af3c0dd3_1bc4a2e7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f2d2b59_ef15d63e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-05T17:37:11Z",
       "side": 1,
       "message": "Ideally this should be a command:\n\n```\nm out/target/product/generic/module-info.json \u0026\u0026 grep ...\n```",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 47
+      },
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6485a9c8_c5365200",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1933450
+      },
+      "writtenOn": "2022-08-22T08:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f2d2b59_ef15d63e",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2022-08-05T17:37:11Z",
       "side": 1,
       "message": "A nit really but would it be clearer to name this TEST_OPTIONS_TAGS since we might be adding other test options? This also helps the reader easily relate the concept to what they see in Soong.",
+      "range": {
+        "startLine": 1125,
+        "startChar": 32,
+        "endLine": 1125,
+        "endChar": 41
+      },
+      "revId": "d9b2778e73f9f3d2c7695d823ce9fa10009b9ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228343f4_ba28feb5",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1933450
+      },
+      "writtenOn": "2022-08-22T08:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acb457d9_12365e20",
       "range": {
         "startLine": 1125,
         "startChar": 32,
