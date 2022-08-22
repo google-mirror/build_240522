@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c299ae59_dae3a512",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-22T09:53:51Z",
+      "side": 1,
+      "message": "Some internal code are still using this function.\nhttps://source.corp.google.com/search?q\u003dCreateHashtreeInfoGenerator%20package:android$. But let me add another CL to clean hashtreeinfo related code.",
+      "parentUuid": "79770408_1ca581fc",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6be9bff_3b9fb2e9",
         "filename": "tools/releasetools/verity_utils.py",
         "patchSetId": 3
