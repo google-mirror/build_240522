@@ -43,7 +43,8 @@ general_tests_host_shared_libs_zip := $(PRODUCT_OUT)/general-tests_host-shared-l
 # Copy kernel test modules to testcases directories
 include $(BUILD_SYSTEM)/tasks/tools/vts-kernel-tests.mk
 kernel_test_copy_pairs := \
-  $(call target-native-copy-pairs,$(kernel_test_modules),$(kernel_test_host_out))
+  $(call target-native-copy-pairs,$(ltp_modules),$(ltp_host_out)) \
+  $(call target-native-copy-pairs,$(kselftest_modules),$(kselftest_host_out))
 copy_kernel_tests := $(call copy-many-files,$(kernel_test_copy_pairs))
 
 # PHONY target to be used to build and test `vts_kernel_tests` without building full vts

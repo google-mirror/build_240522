@@ -18,9 +18,13 @@
 include $(BUILD_SYSTEM)/tasks/tools/vts_package_utils.mk
 
 # Copy kernel test modules to testcases directories
-kernel_test_host_out := $(HOST_OUT_TESTCASES)/vts_kernel_tests
-kernel_test_vts_out := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name)/testcases/vts_kernel_tests
-kernel_test_modules := \
-    $(kselftest_modules) \
+ltp_host_out := $(HOST_OUT_TESTCASES)/vts_ltp_tests
+ltp_vts_out := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name)/testcases/vts_ltp_tests
+ltp_modules := \
     ltp \
     $(ltp_packages)
+
+kselftest_host_out := $(HOST_OUT_TESTCASES)/vts_kselftest_tests
+kselftest_vts_out := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name)/testcases/vts_kselftest_tests
+kselftest_modules := \
+    $(kselftest_modules) \
