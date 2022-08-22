@@ -33,6 +33,24 @@
       "message": "this is unused too?",
       "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd530c5_1c933bba",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-22T08:38:21Z",
+      "side": 1,
+      "message": "ah nvm saw your next change",
+      "parentUuid": "d6be9bff_3b9fb2e9",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

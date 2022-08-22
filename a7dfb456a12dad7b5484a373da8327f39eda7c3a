@@ -22,6 +22,30 @@
       },
       "revId": "a7dfb456a12dad7b5484a373da8327f39eda7c3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaa70bd2_46b741ec",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-22T08:38:21Z",
+      "side": 0,
+      "message": "ah nvm saw your next change",
+      "parentUuid": "907069bd_475ba6cd",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "a7dfb456a12dad7b5484a373da8327f39eda7c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
