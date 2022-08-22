@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79770408_1ca581fc",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-22T08:37:42Z",
+      "side": 1,
+      "message": "why leave a \"shell\" like this? why not remove the whole thing?",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6be9bff_3b9fb2e9",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-22T08:37:42Z",
+      "side": 1,
+      "message": "this is unused too?",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

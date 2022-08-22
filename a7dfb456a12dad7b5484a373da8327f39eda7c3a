@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907069bd_475ba6cd",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-22T08:37:42Z",
+      "side": 0,
+      "message": "these are unused too?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "a7dfb456a12dad7b5484a373da8327f39eda7c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
