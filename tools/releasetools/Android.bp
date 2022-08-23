@@ -62,7 +62,7 @@ python_defaults {
         "mkuserimg_mke2fs",
         "simg2img",
         "tune2fs",
-        "mkf2fsuserimg.sh",
+        "mkf2fsuserimg.sh_lib",
         "fsck.f2fs",
     ],
 }
@@ -104,7 +104,7 @@ python_defaults {
 python_library_host {
     name: "ota_metadata_proto",
     srcs: [
-       "ota_metadata.proto",
+        "ota_metadata.proto",
     ],
     proto: {
         canonical_path_from_root: false,
@@ -114,7 +114,7 @@ python_library_host {
 cc_library_static {
     name: "ota_metadata_proto_cc",
     srcs: [
-       "ota_metadata.proto",
+        "ota_metadata.proto",
     ],
     host_supported: true,
     recovery_available: true,
@@ -141,7 +141,7 @@ java_library_static {
             static_libs: ["libprotobuf-java-nano"],
         },
     },
-    visibility: ["//frameworks/base:__subpackages__"]
+    visibility: ["//frameworks/base:__subpackages__"],
 }
 
 python_defaults {
@@ -391,7 +391,7 @@ python_binary_host {
     name: "check_target_files_vintf",
     defaults: [
         "releasetools_binary_defaults",
-        "releasetools_check_target_files_vintf_defaults"
+        "releasetools_check_target_files_vintf_defaults",
     ],
 }
 
