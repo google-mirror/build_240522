@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "409270d5_e2cce20e",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-08-23T16:26:36Z",
+      "side": 1,
+      "message": "are you going to clean the internal users as well?",
+      "parentUuid": "a2598446_4f62a338",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6be9bff_3b9fb2e9",
