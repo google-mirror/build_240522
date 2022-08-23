@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6378e32_564fcb41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-23T05:52:23Z",
+      "side": 1,
+      "message": "r",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79770408_1ca581fc",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "Some internal code are still using this function.\nhttps://source.corp.google.com/search?q\u003dCreateHashtreeInfoGenerator%20package:android$. But let me add another CL to clean hashtreeinfo related code.",
       "parentUuid": "79770408_1ca581fc",
+      "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2598446_4f62a338",
+        "filename": "tools/releasetools/verity_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1954181
+      },
+      "writtenOn": "2022-08-23T05:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c299ae59_dae3a512",
       "revId": "65ba375a8e62e67b7253470279effaaadaabdaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
