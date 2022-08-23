@@ -33,7 +33,7 @@ endif
 
 # Ensure we package the BIOS files too.
 PRODUCT_HOST_PACKAGES += \
-	bios.bin \
+	bios.bin_lib \
 	vgabios-cirrus.bin \
 
 # Enable dynamic partition size
