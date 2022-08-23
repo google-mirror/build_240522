@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d244ff_12d9e6eb",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-23T14:01:01Z",
+      "side": 1,
+      "message": "Maybe want to quote `\"$previous_args\"` and `\"$@\"`? I\u0027m not a bash expert, so only mentioning since `$@` is quoted in the original script.",
+      "revId": "a68f5166fadb8e7e53a135360a12a33911e5c82c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

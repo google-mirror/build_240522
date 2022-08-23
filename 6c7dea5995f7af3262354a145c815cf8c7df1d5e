@@ -16,6 +16,24 @@
       "message": "Sam, let me know if there\u0027s anything I should know from your experience with aosp/2060119 that may apply to this cl.",
       "revId": "6c7dea5995f7af3262354a145c815cf8c7df1d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b7743e_1f1e64e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-23T14:01:01Z",
+      "side": 1,
+      "message": "Unfortunately, I\u0027m not sure what the issue was with my old CL (I still use it locally and haven\u0027t had any problems). This CL looks as good to me as I can tell.",
+      "parentUuid": "eef5eaee_4176fe4b",
+      "revId": "6c7dea5995f7af3262354a145c815cf8c7df1d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
