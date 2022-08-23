@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2289c976_34d3d315",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-08-23T21:34:36Z",
+      "side": 1,
+      "message": "yeah, this command is breaking after \u0027adb root\u0027 these days. We could add a sleep after \u0027adb root\u0027. I have been running this command a few times locally to get it working instead.",
+      "range": {
+        "startLine": 1076,
+        "startChar": 3,
+        "endLine": 1076,
+        "endChar": 21
+      },
+      "revId": "e59a87946fdff155537c03acff71135b994a2e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
