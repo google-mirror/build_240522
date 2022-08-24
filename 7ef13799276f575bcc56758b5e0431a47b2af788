@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9481967_ac3e682e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1742951
+      },
+      "writtenOn": "2022-08-24T13:21:59Z",
+      "side": 1,
+      "message": "Adding one parameter necessary for the signing binary.",
+      "revId": "7ef13799276f575bcc56758b5e0431a47b2af788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
