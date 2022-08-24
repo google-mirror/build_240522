@@ -16,6 +16,24 @@
       "message": "Maybe want to quote `\"$previous_args\"` and `\"$@\"`? I\u0027m not a bash expert, so only mentioning since `$@` is quoted in the original script.",
       "revId": "a68f5166fadb8e7e53a135360a12a33911e5c82c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3e046a_ebfe20d9",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-08-24T00:31:42Z",
+      "side": 1,
+      "message": "This confused me, because I thought that if you were to use \"$@\" it would make all of the arguments into 1 argument passed to bazel, like:\n\n```\n$ printf \"%s\\n\" foo bar\nfoo\nbar\n$ printf \"%s\\n\" \"foo bar\"\nfoo bar\n```\n\nBut apparently it doesn\u0027t actually work like that? Or bazel is still parsing out individual arguments from what should be one argument?\n\nI asked a couple of people who didn\u0027t know either, I would ask Sasha but he\u0027s OOO the next two weeks.\n\nI\u0027ll try without the quotes but keep my eyes open for potential bugs. It seemed fine during my testing though.",
+      "parentUuid": "57d244ff_12d9e6eb",
+      "revId": "a68f5166fadb8e7e53a135360a12a33911e5c82c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

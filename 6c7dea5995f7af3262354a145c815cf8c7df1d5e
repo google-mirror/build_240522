@@ -34,6 +34,24 @@
       "parentUuid": "eef5eaee_4176fe4b",
       "revId": "6c7dea5995f7af3262354a145c815cf8c7df1d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a819bfaa_1966ef7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-08-24T00:31:42Z",
+      "side": 1,
+      "message": "I asked Yu about his issues with your old CL and he doesn\u0027t remember them either. Maybe we could try resubmitting your CL as Yu seemed to be the only person having issues with it?",
+      "parentUuid": "98b7743e_1f1e64e2",
+      "revId": "6c7dea5995f7af3262354a145c815cf8c7df1d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
