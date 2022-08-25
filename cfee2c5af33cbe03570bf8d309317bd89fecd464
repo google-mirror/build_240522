@@ -105,6 +105,24 @@
       "parentUuid": "3a1e9892_80632385",
       "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b54623_daab51f4",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1124746
+      },
+      "writtenOn": "2022-08-25T18:58:40Z",
+      "side": 1,
+      "message": "found this old chat thread: https://chat.google.com/room/AAAA3a_lTxQ/vJyxRuSfvyU",
+      "parentUuid": "7494390d_2ef90949",
+      "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
