@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c086bbc6_c7ef063b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-25T17:31:25Z",
+      "side": 1,
+      "message": "Not necessarily part of the bug, but thought I\u0027d reference it since it\u0027s related.",
+      "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
