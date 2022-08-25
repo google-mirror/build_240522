@@ -1345,6 +1345,28 @@ def AppendAVBSigningArgs(cmd, partition):
   if avb_salt and not partition.startswith("vbmeta"):
     cmd.extend(["--salt", avb_salt])
 
+def ResolveAVBSigningPathArgs(split_args):
+  """ Resolve avb signing args which path relative to source code """
+  # Check if the '--signing_helper' tool path exists.
+  # The tool path maybe relative to the build environment, which will not
+  # be available when without build environment and make many cmds like
+  # 'make_vbmeta_images' and 'add_hash_footer' failed to execute. Try using
+  # OPTIONS.search_path in this case.
+  for index, arg in enumerate(split_args[:-1]):
+    if arg == '--signing_helper':
+      signing_helper_path = split_args[index + 1]
+      if os.path.exists(signing_helper_path):
+        continue
+
+      new_signing_helper_path = os.path.join(
+        OPTIONS.search_path, signing_helper_path)
+      if os.path.exists(new_signing_helper_path):
+        split_args[index + 1] = new_signing_helper_path
+      else:
+        raise ExternalError(
+          'Failed to find {}'. format(new_signing_helper_path))
+
+  return split_args
 
 def GetAvbPartitionArg(partition, image, info_dict=None):
   """Returns the VBMeta arguments for partition.
@@ -1514,6 +1536,8 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
             found = True
             break
         assert found, 'Failed to find {}'.format(chained_image)
+
+    split_args = ResolveAVBSigningPathArgs(split_args)
     cmd.extend(split_args)
 
   RunAndCheckOutput(cmd)
@@ -1718,7 +1742,9 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get("avb_" + partition_name + "_add_hash_footer_args")
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = ResolveAVBSigningPathArgs(shlex.split(args))
+      cmd.extend(split_args)
+
     RunAndCheckOutput(cmd)
 
   img.seek(os.SEEK_SET, 0)
@@ -1759,7 +1785,8 @@ def _SignBootableImage(image_path, prebuilt_name, partition_name,
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get("avb_" + partition_name + "_add_hash_footer_args")
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = ResolveAVBSigningPathArgs(shlex.split(args))
+      cmd.extend(split_args)
     RunAndCheckOutput(cmd)
 
 
@@ -1935,7 +1962,8 @@ def _BuildVendorBootImage(sourcedir, partition_name, info_dict=None):
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get(f'avb_{partition_name}_add_hash_footer_args')
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = ResolveAVBSigningPathArgs(shlex.split(args))
+      cmd.extend(split_args)
     RunAndCheckOutput(cmd)
 
   img.seek(os.SEEK_SET, 0)
