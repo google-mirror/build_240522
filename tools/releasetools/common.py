@@ -1518,6 +1518,11 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
             found = True
             break
         assert found, 'Failed to find {}'.format(chained_image)
+      elif arg == '--signing_helper':
+        signing_helper_path = split_args[index + 1]
+        new_signing_helper_path = os.path.join(OPTIONS.search_path, signing_helper_path)
+        if os.path.exists(new_signing_helper_path):
+          split_args[index + 1] = new_signing_helper_path
     cmd.extend(split_args)
 
   RunAndCheckOutput(cmd)
@@ -1736,7 +1741,15 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get("avb_" + partition_name + "_add_hash_footer_args")
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = shlex.split(args)
+      for index, arg in enumerate(split_args[:-1]):
+          if arg == '--signing_helper':
+            signing_helper_path = split_args[index + 1]
+            new_signing_helper_path = os.path.join(OPTIONS.search_path, signing_helper_path)
+            if os.path.exists(new_signing_helper_path):
+              split_args[index + 1] = new_signing_helper_path
+      cmd.extend(split_args)
+
     RunAndCheckOutput(cmd)
 
   img.seek(os.SEEK_SET, 0)
@@ -1777,7 +1790,14 @@ def _SignBootableImage(image_path, prebuilt_name, partition_name,
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get("avb_" + partition_name + "_add_hash_footer_args")
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = shlex.split(args)
+      for index, arg in enumerate(split_args[:-1]):
+          if arg == '--signing_helper':
+            signing_helper_path = split_args[index + 1]
+            new_signing_helper_path = os.path.join(OPTIONS.search_path, signing_helper_path)
+            if os.path.exists(new_signing_helper_path):
+              split_args[index + 1] = new_signing_helper_path
+      cmd.extend(split_args)
     RunAndCheckOutput(cmd)
 
 
@@ -1953,7 +1973,14 @@ def _BuildVendorBootImage(sourcedir, partition_name, info_dict=None):
     AppendAVBSigningArgs(cmd, partition_name)
     args = info_dict.get(f'avb_{partition_name}_add_hash_footer_args')
     if args and args.strip():
-      cmd.extend(shlex.split(args))
+      split_args = shlex.split(args)
+      for index, arg in enumerate(split_args[:-1]):
+          if arg == '--signing_helper':
+            signing_helper_path = split_args[index + 1]
+            new_signing_helper_path = os.path.join(OPTIONS.search_path, signing_helper_path)
+            if os.path.exists(new_signing_helper_path):
+              split_args[index + 1] = new_signing_helper_path
+      cmd.extend(split_args)
     RunAndCheckOutput(cmd)
 
   img.seek(os.SEEK_SET, 0)
