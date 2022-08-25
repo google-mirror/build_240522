@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "10c70988_d91060a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-25T18:25:52Z",
+      "side": 1,
+      "message": "Good point, it was easy enough to just adapt what I\u0027d written to address the bug.",
+      "parentUuid": "c09ee318_cda66d9f",
+      "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4016aa23_1b1c0011",
         "filename": "envsetup.sh",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Do you know what\u0027s different about `eval` vs just having the raw command? Why does this fix Yu\u0027s issue?",
       "parentUuid": "4016aa23_1b1c0011",
+      "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7494390d_2ef90949",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-25T18:25:52Z",
+      "side": 1,
+      "message": "Good question. What I\u0027ve gathered is that `eval` runs the command the same way that it would be if typed into the terminal: i.e. ignoring extra spaces between args. (I think `eval` is actually executed on the terminal input). I thought that Bash already worked this way, but apparently it\u0027s not the case.\n\nIn digging a little more, I realized that this particular error message comes because we\u0027re adding the args with a space afterwards `pre_config_args\u003d\"$arg \"`. Which couldn\u0027t have caused Yu\u0027s error before (since you just added that code).\n\n@yudiliu, do you happen to remember what the error you got was? I think it\u0027s gone from my chat.",
+      "parentUuid": "3a1e9892_80632385",
       "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
