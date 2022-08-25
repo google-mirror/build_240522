@@ -316,6 +316,10 @@ ifeq ($(EMMA_INSTRUMENT),true)
   endif # EMMA_INSTRUMENT_STATIC
 endif # EMMA_INSTRUMENT
 
+ifeq ($(TARGET_NOAUDIO, true))
+    PRODUCT_SYSTEM_PROPERTIES += ro.audio.silent=1
+endif
+
 # Host tools to install
 PRODUCT_HOST_PACKAGES += \
     BugReport \
