@@ -16,6 +16,23 @@
       "message": "Not necessarily part of the bug, but thought I\u0027d reference it since it\u0027s related.",
       "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4016aa23_1b1c0011",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-25T17:32:22Z",
+      "side": 1,
+      "message": "I think this should resolve the issue that Yu was hitting last time I tried this CL which caused an error like:\n```\nCommand \u0027build \u0027 not found. Try \u0027bazel help\u0027.\n```",
+      "revId": "cfee2c5af33cbe03570bf8d309317bd89fecd464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
