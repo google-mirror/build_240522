@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c3c8dd_38e1023e",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-08-25T22:49:53Z",
+      "side": 1,
+      "message": "Bazel also supports `--foo bar` as another way to mean `--foo\u003dbar`, wouldn\u0027t this accidentally catch that and make it `--foo --config\u003dbp2build bar`?",
+      "range": {
+        "startLine": 1870,
+        "startChar": 12,
+        "endLine": 1870,
+        "endChar": 68
+      },
+      "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
