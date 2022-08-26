@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 #
 # Copyright (C) 2014 The Android Open Source Project
 #
@@ -27,3 +28,5 @@ PRODUCT_VERITY_SIGNING_KEY := build/target/product/security/verity
 
 PRODUCT_PACKAGES += \
         verity_key
+=======
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])

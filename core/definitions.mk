@@ -2538,7 +2538,13 @@ endef
 # $(1): the package file we are signing.
 define sign-package-arg
 $(hide) mv $(1) $(1).unsigned
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 $(hide) $(JAVA) -Djava.library.path=$(SIGNAPK_JNI_LIBRARY_PATH) -jar $(SIGNAPK_JAR) \
+=======
+$(hide) $(JAVA) -Djava.library.path=$$(dirname $(SIGNAPK_JNI_LIBRARY_PATH)) -jar $(SIGNAPK_JAR) \
+    $(if $(strip $(PRIVATE_CERTIFICATE_LINEAGE)), --lineage $(PRIVATE_CERTIFICATE_LINEAGE)) \
+    $(if $(strip $(PRIVATE_ROTATION_MIN_SDK_VERSION)), --rotation-min-sdk-version $(PRIVATE_ROTATION_MIN_SDK_VERSION)) \
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
     $(PRIVATE_CERTIFICATE) $(PRIVATE_PRIVATE_KEY) \
     $(PRIVATE_ADDITIONAL_CERTIFICATES) $(1).unsigned $(1).signed
 $(hide) mv $(1).signed $(1)
@@ -3364,6 +3370,10 @@ include $(BUILD_SYSTEM)/distdir.mk
 -include $(TOPDIR)vendor/*/build/core/definitions.mk
 -include $(TOPDIR)device/*/build/core/definitions.mk
 -include $(TOPDIR)product/*/build/core/definitions.mk
+# Also the project-specific definitions.mk file
+-include $(TOPDIR)vendor/*/*/build/core/definitions.mk
+-include $(TOPDIR)device/*/*/build/core/definitions.mk
+-include $(TOPDIR)product/*/*/build/core/definitions.mk
 
 # broken:
 #	$(foreach file,$^,$(if $(findstring,.a,$(suffix $file)),-l$(file),$(file)))

@@ -79,12 +79,32 @@ Usage:  sign_target_files_apks [flags] input_target_files output_target_files
       Replace the veritykeyid in BOOT/cmdline of input_target_file_zip
       with keyid of the cert pointed by <path_to_X509_PEM_cert_file>.
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
   --avb_{boot,system,vendor,dtbo,vbmeta}_algorithm <algorithm>
   --avb_{boot,system,vendor,dtbo,vbmeta}_key <key>
+=======
+  --remove_avb_public_keys <key1>,<key2>,...
+      Remove AVB public keys from the first-stage ramdisk. The key file to
+      remove is located at either of the following dirs:
+        - BOOT/RAMDISK/avb/ or
+        - BOOT/RAMDISK/first_stage_ramdisk/avb/
+      The second dir will be used for lookup if BOARD_USES_RECOVERY_AS_BOOT is
+      set to true.
+
+  --avb_{boot,recovery,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
+         vbmeta_vendor}_algorithm <algorithm>
+  --avb_{boot,recovery,system,system_other,vendor,dtbo,vbmeta,vbmeta_system,
+         vbmeta_vendor}_key <key>
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
       Use the specified algorithm (e.g. SHA256_RSA4096) and the key to AVB-sign
       the specified image. Otherwise it uses the existing values in info dict.
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
   --avb_{boot,system,vendor,dtbo,vbmeta}_extra_args <args>
+=======
+  --avb_{apex,boot,recovery,system,system_other,vendor,dtbo,vbmeta,
+         vbmeta_system,vbmeta_vendor}_extra_args <args>
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
       Specify any additional args that are needed to AVB-sign the image
       (e.g. "--signing_helper /path/to/helper"). The args will be appended to
       the existing ones in info dict.
@@ -801,6 +821,12 @@ def main(argv):
       OPTIONS.avb_algorithms['dtbo'] = a
     elif o == "--avb_dtbo_extra_args":
       OPTIONS.avb_extra_args['dtbo'] = a
+    elif o == "--avb_recovery_key":
+      OPTIONS.avb_keys['recovery'] = a
+    elif o == "--avb_recovery_algorithm":
+      OPTIONS.avb_algorithms['recovery'] = a
+    elif o == "--avb_recovery_extra_args":
+      OPTIONS.avb_extra_args['recovery'] = a
     elif o == "--avb_system_key":
       OPTIONS.avb_keys['system'] = a
     elif o == "--avb_system_algorithm":
@@ -838,6 +864,9 @@ def main(argv):
           "avb_dtbo_algorithm=",
           "avb_dtbo_key=",
           "avb_dtbo_extra_args=",
+          "avb_recovery_algorithm=",
+          "avb_recovery_key=",
+          "avb_recovery_extra_args=",
           "avb_system_algorithm=",
           "avb_system_key=",
           "avb_system_extra_args=",

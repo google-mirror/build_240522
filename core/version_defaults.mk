@@ -39,10 +39,18 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 DEFAULT_PLATFORM_VERSION := PPR1
 MIN_PLATFORM_VERSION := PPR1
 MAX_PLATFORM_VERSION := PPR1
+=======
+DEFAULT_PLATFORM_VERSION := UP1A
+.KATI_READONLY := DEFAULT_PLATFORM_VERSION
+MIN_PLATFORM_VERSION := UP1A
+MAX_PLATFORM_VERSION := UP1A
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ALLOWED_VERSIONS := $(call allowed-platform-versions,\
   $(MIN_PLATFORM_VERSION),\
   $(MAX_PLATFORM_VERSION),\
@@ -76,11 +84,23 @@ endif
 # in the following text file:
 # cts/tests/tests/os/assets/platform_versions.txt
 PLATFORM_VERSION.PPR1 := 9
+=======
+# The last stable version name of the platform that was released.  During
+# development, this stays at that previous version, while the codename indicates
+# further work based on the previous version.
+PLATFORM_VERSION_LAST_STABLE := 13
+.KATI_READONLY := PLATFORM_VERSION_LAST_STABLE
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 PLATFORM_VERSION_CODENAME.PPR1 := REL
+=======
+PLATFORM_VERSION_CODENAME.UP1A := UpsideDownCake
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ifndef PLATFORM_VERSION
   PLATFORM_VERSION := $(PLATFORM_VERSION.$(TARGET_PLATFORM_VERSION))
   ifndef PLATFORM_VERSION
@@ -88,6 +108,12 @@ ifndef PLATFORM_VERSION
     PLATFORM_VERSION := $(TARGET_PLATFORM_VERSION)
   endif
 endif
+=======
+# This is the user-visible version.  In a final release build it should
+# be empty to use PLATFORM_VERSION as the user-visible version.  For
+# a preview release it can be set to a user-friendly value like `12 Preview 1`
+PLATFORM_DISPLAY_VERSION := 13
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 ifndef PLATFORM_SDK_VERSION
   # This is the canonical definition of the SDK version, which defines
@@ -106,16 +132,27 @@ ifndef PLATFORM_SDK_VERSION
   # When you increment the PLATFORM_SDK_VERSION please ensure you also
   # clear out the following text file of all older PLATFORM_VERSION's:
   # cts/tests/tests/os/assets/platform_versions.txt
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
   PLATFORM_SDK_VERSION := 28
+=======
+  PLATFORM_SDK_VERSION := 33
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 endif
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ifndef PLATFORM_VERSION_CODENAME
   PLATFORM_VERSION_CODENAME := $(PLATFORM_VERSION_CODENAME.$(TARGET_PLATFORM_VERSION))
   ifndef PLATFORM_VERSION_CODENAME
     # PLATFORM_VERSION_CODENAME falls back to TARGET_PLATFORM_VERSION
     PLATFORM_VERSION_CODENAME := $(TARGET_PLATFORM_VERSION)
   endif
+=======
+# This is the sdk extension version of this tree.
+PLATFORM_SDK_EXTENSION_VERSION := 3
+.KATI_READONLY := PLATFORM_SDK_EXTENSION_VERSION
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
   # This is all of the *active* development codenames. There are future
   # codenames not included in this list. This confusing name is needed because
   # all_codenames has been baked into build.prop for ages.
@@ -123,6 +160,11 @@ ifndef PLATFORM_VERSION_CODENAME
   # Should be either the same as PLATFORM_VERSION_CODENAME or a comma-separated
   # list of additional codenames after PLATFORM_VERSION_CODENAME.
   PLATFORM_VERSION_ALL_CODENAMES :=
+=======
+# This is the sdk extension version that PLATFORM_SDK_VERSION ships with.
+PLATFORM_BASE_SDK_EXTENSION_VERSION := 3
+.KATI_READONLY := PLATFORM_BASE_SDK_EXTENSION_VERSION
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
   # Build a list of all active code names. Avoid duplicates, and stop when we
   # reach a codename that matches PLATFORM_VERSION_CODENAME (anything beyond
@@ -231,9 +273,14 @@ ifndef PLATFORM_SECURITY_PATCH
     #  It must be of the form "YYYY-MM-DD" on production devices.
     #  It must match one of the Android Security Patch Level strings of the Public Security Bulletins.
     #  If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
       PLATFORM_SECURITY_PATCH := 2018-08-05
+=======
+    PLATFORM_SECURITY_PATCH := 2022-08-05
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 endif
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ifndef PLATFORM_SECURITY_PATCH_TIMESTAMP
   # Used to indicate the matching timestamp for the security patch string in PLATFORM_SECURITY_PATCH.
   ifneq (,$(findstring Darwin,$(UNAME)))
@@ -299,3 +346,6 @@ ifndef PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION
   # device.
   PLATFORM_MIN_SUPPORTED_TARGET_SDK_VERSION := 17
 endif
+=======
+include $(BUILD_SYSTEM)/version_util.mk
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])

@@ -33,12 +33,6 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     PhotoTable
 
-# Bluetooth:
-#   audio.a2dp.default is a system module. Generic system image includes
-#   audio.a2dp.default to support A2DP if board has the capability.
-PRODUCT_PACKAGES += \
-    audio.a2dp.default
-
 # Net:
 #   Vendors can use the platform-provided network configuration utilities (ip,
 #   iptable, etc.) to configure the Linux networking stack, but these utilities

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ###############################################################################
 # Fonts shipped with the SDK need to be renamed for Java to handle them
 # properly. Hence, a special script is used to rename the fonts. We bundle all
@@ -64,3 +65,5 @@ $(eval $(call sdk-extra-font-rule,NanumGothic.ttf,external/naver-fonts/NanumGoth
 $(eval $(call sdk-extra-font-rule,DroidSansFallback.ttf,frameworks/base/data/fonts/DroidSansFallbackFull.ttf))
 
 sdk-extra-font-rule :=
+=======
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])

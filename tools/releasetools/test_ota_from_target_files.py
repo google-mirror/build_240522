@@ -24,11 +24,25 @@ import zipfile
 import common
 import test_utils
 from ota_from_target_files import (
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
     _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
     GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
+=======
+    _LoadOemDicts, AbOtaPropertyFiles,
+    GetTargetFilesZipForCustomImagesUpdates,
+    GetTargetFilesZipForPartialUpdates,
+    GetTargetFilesZipForSecondaryImages,
+    GetTargetFilesZipWithoutPostinstallConfig,
+    Payload, POSTINSTALL_CONFIG,
+    StreamingPropertyFiles, AB_PARTITIONS)
+from apex_utils import GetApexInfoFromTargetFiles
+from test_utils import PropertyFilesTestCase
+from common import OPTIONS
+from payload_signer import PayloadSigner
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 
 def construct_target_files(secondary=False):
@@ -1131,9 +1145,14 @@ class PayloadSignerTest(unittest.TestCase):
     self.assertEqual('openssl', payload_signer.signer)
 
   def test_init_withExternalSigner(self):
-    common.OPTIONS.payload_signer = 'abc'
     common.OPTIONS.payload_signer_args = ['arg1', 'arg2']
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
     payload_signer = PayloadSigner()
+=======
+    common.OPTIONS.payload_signer_maximum_signature_size = '512'
+    payload_signer = PayloadSigner(
+        OPTIONS.package_key, OPTIONS.private_key_suffix, payload_signer='abc')
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
     self.assertEqual('abc', payload_signer.signer)
     self.assertEqual(['arg1', 'arg2'], payload_signer.signer_args)
 
@@ -1147,12 +1166,12 @@ class PayloadSignerTest(unittest.TestCase):
 
   def test_Sign_withExternalSigner_openssl(self):
     """Uses openssl as the external payload signer."""
-    common.OPTIONS.payload_signer = 'openssl'
     common.OPTIONS.payload_signer_args = [
         'pkeyutl', '-sign', '-keyform', 'DER', '-inkey',
         os.path.join(self.testdata_dir, 'testkey.pk8'),
         '-pkeyopt', 'digest:sha256']
-    payload_signer = PayloadSigner()
+    payload_signer = PayloadSigner(
+        OPTIONS.package_key, OPTIONS.private_key_suffix, payload_signer="openssl")
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
     signed_file = payload_signer.Sign(input_file)
 
@@ -1161,11 +1180,16 @@ class PayloadSignerTest(unittest.TestCase):
 
   def test_Sign_withExternalSigner_script(self):
     """Uses testdata/payload_signer.sh as the external payload signer."""
-    common.OPTIONS.payload_signer = os.path.join(
+    external_signer = os.path.join(
         self.testdata_dir, 'payload_signer.sh')
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+    os.chmod(external_signer, 0o700)
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
     common.OPTIONS.payload_signer_args = [
         os.path.join(self.testdata_dir, 'testkey.pk8')]
-    payload_signer = PayloadSigner()
+    payload_signer = PayloadSigner(
+        OPTIONS.package_key, OPTIONS.private_key_suffix, payload_signer=external_signer)
     input_file = os.path.join(self.testdata_dir, self.SIGFILE)
     signed_file = payload_signer.Sign(input_file)
 

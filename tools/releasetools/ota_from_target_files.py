@@ -171,7 +171,18 @@ import tempfile
 import zipfile
 
 import common
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 import edify_generator
+=======
+import ota_utils
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PropertyFiles, SECURITY_PATCH_LEVEL_PROP_NAME, GetZipEntryOffset)
+from common import IsSparseImage
+import target_files_diff
+from check_target_files_vintf import CheckVintfIfTrebleEnabled
+from non_ab_ota import GenerateNonAbOtaPackage
+from payload_signer import PayloadSigner
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -344,6 +355,7 @@ class BuildInfo(object):
       script.AssertOemProperty(prop, values, oem_no_mount)
 
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 class PayloadSigner(object):
   """A class that wraps the payload signing works.
 
@@ -394,6 +406,8 @@ class PayloadSigner(object):
     return out_file
 
 
+=======
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 class Payload(object):
   """Manages the creation and the signing of an A/B OTA Payload."""
 
@@ -1680,8 +1694,311 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
   return target_file
 
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 def WriteABOTAPackageWithBrilloScript(target_file, output_file,
                                       source_file=None):
+=======
+def ParseInfoDict(target_file_path):
+  with zipfile.ZipFile(target_file_path, 'r', allowZip64=True) as zfp:
+    return common.LoadInfoDict(zfp)
+
+
+def GetTargetFilesZipForCustomVABCCompression(input_file, vabc_compression_param):
+  """Returns a target-files.zip with a custom VABC compression param.
+  Args:
+    input_file: The input target-files.zip path
+    vabc_compression_param: Custom Virtual AB Compression algorithm
+
+  Returns:
+    The path to modified target-files.zip
+  """
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  shutil.copyfile(input_file, target_file)
+  common.ZipDelete(target_file, DYNAMIC_PARTITION_INFO)
+  with zipfile.ZipFile(input_file, 'r', allowZip64=True) as zfp:
+    dynamic_partition_info = zfp.read(DYNAMIC_PARTITION_INFO).decode()
+    dynamic_partition_info = ModifyVABCCompressionParam(
+        dynamic_partition_info, vabc_compression_param)
+    with zipfile.ZipFile(target_file, "a", allowZip64=True) as output_zip:
+      output_zip.writestr(DYNAMIC_PARTITION_INFO, dynamic_partition_info)
+  return target_file
+
+
+def GetTargetFilesZipForPartialUpdates(input_file, ab_partitions):
+  """Returns a target-files.zip for partial ota update package generation.
+
+  This function modifies ab_partitions list with the desired partitions before
+  calling the brillo_update_payload script. It also cleans up the reference to
+  the excluded partitions in the info file, e.g misc_info.txt.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    ab_partitions: A list of partitions to include in the partial update
+
+  Returns:
+    The filename of target-files.zip used for partial ota update.
+  """
+
+  def AddImageForPartition(partition_name):
+    """Add the archive name for a given partition to the copy list."""
+    for prefix in ['IMAGES', 'RADIO']:
+      image_path = '{}/{}.img'.format(prefix, partition_name)
+      if image_path in namelist:
+        copy_entries.append(image_path)
+        map_path = '{}/{}.map'.format(prefix, partition_name)
+        if map_path in namelist:
+          copy_entries.append(map_path)
+        return
+
+    raise ValueError("Cannot find {} in input zipfile".format(partition_name))
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    original_ab_partitions = input_zip.read(
+        AB_PARTITIONS).decode().splitlines()
+    namelist = input_zip.namelist()
+
+  unrecognized_partitions = [partition for partition in ab_partitions if
+                             partition not in original_ab_partitions]
+  if unrecognized_partitions:
+    raise ValueError("Unrecognized partitions when generating partial updates",
+                     unrecognized_partitions)
+
+  logger.info("Generating partial updates for %s", ab_partitions)
+
+  copy_entries = ['META/update_engine_config.txt']
+  for partition_name in ab_partitions:
+    AddImageForPartition(partition_name)
+
+  # Use zip2zip to avoid extracting the zipfile.
+  partial_target_file = common.MakeTempFile(suffix='.zip')
+  cmd = ['zip2zip', '-i', input_file, '-o', partial_target_file]
+  cmd.extend(['{}:{}'.format(name, name) for name in copy_entries])
+  common.RunAndCheckOutput(cmd)
+
+  partial_target_zip = zipfile.ZipFile(partial_target_file, 'a',
+                                       allowZip64=True)
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    common.ZipWriteStr(partial_target_zip, 'META/ab_partitions.txt',
+                       '\n'.join(ab_partitions))
+    CARE_MAP_ENTRY = "META/care_map.pb"
+    if CARE_MAP_ENTRY in input_zip.namelist():
+      caremap = care_map_pb2.CareMap()
+      caremap.ParseFromString(input_zip.read(CARE_MAP_ENTRY))
+      filtered = [
+          part for part in caremap.partitions if part.name in ab_partitions]
+      del caremap.partitions[:]
+      caremap.partitions.extend(filtered)
+      common.ZipWriteStr(partial_target_zip, CARE_MAP_ENTRY,
+                         caremap.SerializeToString())
+
+    for info_file in ['META/misc_info.txt', DYNAMIC_PARTITION_INFO]:
+      if info_file not in input_zip.namelist():
+        logger.warning('Cannot find %s in input zipfile', info_file)
+        continue
+      content = input_zip.read(info_file).decode()
+      modified_info = UpdatesInfoForSpecialUpdates(
+          content, lambda p: p in ab_partitions)
+      if OPTIONS.vabc_compression_param and info_file == DYNAMIC_PARTITION_INFO:
+        modified_info = ModifyVABCCompressionParam(
+            modified_info, OPTIONS.vabc_compression_param)
+      common.ZipWriteStr(partial_target_zip, info_file, modified_info)
+
+    # TODO(xunchang) handle META/postinstall_config.txt'
+
+  common.ZipClose(partial_target_zip)
+
+  return partial_target_file
+
+
+def GetTargetFilesZipForRetrofitDynamicPartitions(input_file,
+                                                  super_block_devices,
+                                                  dynamic_partition_list):
+  """Returns a target-files.zip for retrofitting dynamic partitions.
+
+  This allows brillo_update_payload to generate an OTA based on the exact
+  bits on the block devices. Postinstall is disabled.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    super_block_devices: The list of super block devices
+    dynamic_partition_list: The list of dynamic partitions
+
+  Returns:
+    The filename of target-files.zip with *.img replaced with super_*.img for
+    each block device in super_block_devices.
+  """
+  assert super_block_devices, "No super_block_devices are specified."
+
+  replace = {'OTA/super_{}.img'.format(dev): 'IMAGES/{}.img'.format(dev)
+             for dev in super_block_devices}
+
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  shutil.copyfile(input_file, target_file)
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  input_tmp = common.UnzipTemp(input_file, RETROFIT_DAP_UNZIP_PATTERN)
+
+  # Remove partitions from META/ab_partitions.txt that is in
+  # dynamic_partition_list but not in super_block_devices so that
+  # brillo_update_payload won't generate update for those logical partitions.
+  ab_partitions_file = os.path.join(input_tmp, *AB_PARTITIONS.split('/'))
+  with open(ab_partitions_file) as f:
+    ab_partitions_lines = f.readlines()
+    ab_partitions = [line.strip() for line in ab_partitions_lines]
+  # Assert that all super_block_devices are in ab_partitions
+  super_device_not_updated = [partition for partition in super_block_devices
+                              if partition not in ab_partitions]
+  assert not super_device_not_updated, \
+      "{} is in super_block_devices but not in {}".format(
+          super_device_not_updated, AB_PARTITIONS)
+  # ab_partitions -= (dynamic_partition_list - super_block_devices)
+  new_ab_partitions = common.MakeTempFile(
+      prefix="ab_partitions", suffix=".txt")
+  with open(new_ab_partitions, 'w') as f:
+    for partition in ab_partitions:
+      if (partition in dynamic_partition_list and
+              partition not in super_block_devices):
+        logger.info("Dropping %s from ab_partitions.txt", partition)
+        continue
+      f.write(partition + "\n")
+  to_delete = [AB_PARTITIONS]
+
+  # Always skip postinstall for a retrofit update.
+  to_delete += [POSTINSTALL_CONFIG]
+
+  # Delete dynamic_partitions_info.txt so that brillo_update_payload thinks this
+  # is a regular update on devices without dynamic partitions support.
+  to_delete += [DYNAMIC_PARTITION_INFO]
+
+  # Remove the existing partition images as well as the map files.
+  to_delete += list(replace.values())
+  to_delete += ['IMAGES/{}.map'.format(dev) for dev in super_block_devices]
+
+  common.ZipDelete(target_file, to_delete)
+
+  target_zip = zipfile.ZipFile(target_file, 'a', allowZip64=True)
+
+  # Write super_{foo}.img as {foo}.img.
+  for src, dst in replace.items():
+    assert src in namelist, \
+        'Missing {} in {}; {} cannot be written'.format(src, input_file, dst)
+    unzipped_file = os.path.join(input_tmp, *src.split('/'))
+    common.ZipWrite(target_zip, unzipped_file, arcname=dst)
+
+  # Write new ab_partitions.txt file
+  common.ZipWrite(target_zip, new_ab_partitions, arcname=AB_PARTITIONS)
+
+  common.ZipClose(target_zip)
+
+  return target_file
+
+
+def GetTargetFilesZipForCustomImagesUpdates(input_file, custom_images):
+  """Returns a target-files.zip for custom partitions update.
+
+  This function modifies ab_partitions list with the desired custom partitions
+  and puts the custom images into the target target-files.zip.
+
+  Args:
+    input_file: The input target-files.zip filename.
+    custom_images: A map of custom partitions and custom images.
+
+  Returns:
+    The filename of a target-files.zip which has renamed the custom images in
+    the IMAGS/ to their partition names.
+  """
+  # Use zip2zip to avoid extracting the zipfile.
+  target_file = common.MakeTempFile(prefix="targetfiles-", suffix=".zip")
+  cmd = ['zip2zip', '-i', input_file, '-o', target_file]
+
+  with zipfile.ZipFile(input_file, allowZip64=True) as input_zip:
+    namelist = input_zip.namelist()
+
+  # Write {custom_image}.img as {custom_partition}.img.
+  for custom_partition, custom_image in custom_images.items():
+    default_custom_image = '{}.img'.format(custom_partition)
+    if default_custom_image != custom_image:
+      logger.info("Update custom partition '%s' with '%s'",
+                  custom_partition, custom_image)
+      # Default custom image need to be deleted first.
+      namelist.remove('IMAGES/{}'.format(default_custom_image))
+      # IMAGES/{custom_image}.img:IMAGES/{custom_partition}.img.
+      cmd.extend(['IMAGES/{}:IMAGES/{}'.format(custom_image,
+                                               default_custom_image)])
+
+  cmd.extend(['{}:{}'.format(name, name) for name in namelist])
+  common.RunAndCheckOutput(cmd)
+
+  return target_file
+
+
+def GeneratePartitionTimestampFlags(partition_state):
+  partition_timestamps = [
+      part.partition_name + ":" + part.version
+      for part in partition_state]
+  return ["--partition_timestamps", ",".join(partition_timestamps)]
+
+
+def GeneratePartitionTimestampFlagsDowngrade(
+        pre_partition_state, post_partition_state):
+  assert pre_partition_state is not None
+  partition_timestamps = {}
+  for part in post_partition_state:
+    partition_timestamps[part.partition_name] = part.version
+  for part in pre_partition_state:
+    if part.partition_name in partition_timestamps:
+      partition_timestamps[part.partition_name] = \
+          max(part.version, partition_timestamps[part.partition_name])
+  return [
+      "--partition_timestamps",
+      ",".join([key + ":" + val for (key, val)
+                in partition_timestamps.items()])
+  ]
+
+
+def SupportsMainlineGkiUpdates(target_file):
+  """Return True if the build supports MainlineGKIUpdates.
+
+  This function scans the product.img file in IMAGES/ directory for
+  pattern |*/apex/com.android.gki.*.apex|. If there are files
+  matching this pattern, conclude that build supports mainline
+  GKI and return True
+
+  Args:
+    target_file: Path to a target_file.zip, or an extracted directory
+  Return:
+    True if thisb uild supports Mainline GKI Updates.
+  """
+  if target_file is None:
+    return False
+  if os.path.isfile(target_file):
+    target_file = common.UnzipTemp(target_file, ["IMAGES/product.img"])
+  if not os.path.isdir(target_file):
+    assert os.path.isdir(target_file), \
+        "{} must be a path to zip archive or dir containing extracted"\
+        " target_files".format(target_file)
+  image_file = os.path.join(target_file, "IMAGES", "product.img")
+
+  if not os.path.isfile(image_file):
+    return False
+
+  if IsSparseImage(image_file):
+    # Unsparse the image
+    tmp_img = common.MakeTempFile(suffix=".img")
+    subprocess.check_output(["simg2img", image_file, tmp_img])
+    image_file = tmp_img
+
+  cmd = ["debugfs_static", "-R", "ls -p /apex", image_file]
+  output = subprocess.check_output(cmd).decode()
+
+  pattern = re.compile(r"com\.android\.gki\..*\.apex")
+  return pattern.search(output) is not None
+
+
+def GenerateAbOtaPackage(target_file, output_file, source_file=None):
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
   """Generates an Android OTA package that has A/B update payload."""
   # Stage the output zip package for package signing.
   if not OPTIONS.no_signing:
@@ -1717,7 +2034,8 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   payload.Generate(target_file, source_file, additional_args)
 
   # Sign the payload.
-  payload_signer = PayloadSigner()
+  payload_signer = PayloadSigner(
+      OPTIONS.package_key, OPTIONS.private_key_suffix)
   payload.Sign(payload_signer)
 
   # Write the payload into output zip.

@@ -77,9 +77,118 @@ $(KATI_obsolete_var \
   ,See $(CHANGES_URL)#other_envsetup_variables)
 $(KATI_obsolete_var PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE,Set FCM Version in device manifest instead. See $(CHANGES_URL)#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE)
 $(KATI_obsolete_var USE_CLANG_PLATFORM_BUILD,Clang is the only supported Android compiler. See $(CHANGES_URL)#USE_CLANG_PLATFORM_BUILD)
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 
 CHANGES_URL :=
 
+=======
+$(KATI_obsolete_var BUILD_DROIDDOC,Droiddoc is only supported in Soong. See details on build/soong/java/droiddoc.go)
+$(KATI_obsolete_var BUILD_APIDIFF,Apidiff is only supported in Soong. See details on build/soong/java/droiddoc.go)
+$(KATI_obsolete_var \
+  DEFAULT_GCC_CPP_STD_VERSION \
+  HOST_GLOBAL_CFLAGS 2ND_HOST_GLOBAL_CFLAGS \
+  HOST_GLOBAL_CONLYFLAGS 2ND_HOST_GLOBAL_CONLYFLAGS \
+  HOST_GLOBAL_CPPFLAGS 2ND_HOST_GLOBAL_CPPFLAGS \
+  HOST_GLOBAL_LDFLAGS 2ND_HOST_GLOBAL_LDFLAGS \
+  HOST_GLOBAL_LLDFLAGS 2ND_HOST_GLOBAL_LLDFLAGS \
+  HOST_CLANG_SUPPORTED 2ND_HOST_CLANG_SUPPORTED \
+  HOST_CC 2ND_HOST_CC \
+  HOST_CXX 2ND_HOST_CXX \
+  HOST_CROSS_GLOBAL_CFLAGS 2ND_HOST_CROSS_GLOBAL_CFLAGS \
+  HOST_CROSS_GLOBAL_CONLYFLAGS 2ND_HOST_CROSS_GLOBAL_CONLYFLAGS \
+  HOST_CROSS_GLOBAL_CPPFLAGS 2ND_HOST_CROSS_GLOBAL_CPPFLAGS \
+  HOST_CROSS_GLOBAL_LDFLAGS 2ND_HOST_CROSS_GLOBAL_LDFLAGS \
+  HOST_CROSS_GLOBAL_LLDFLAGS 2ND_HOST_CROSS_GLOBAL_LLDFLAGS \
+  HOST_CROSS_CLANG_SUPPORTED 2ND_HOST_CROSS_CLANG_SUPPORTED \
+  HOST_CROSS_CC 2ND_HOST_CROSS_CC \
+  HOST_CROSS_CXX 2ND_HOST_CROSS_CXX \
+  TARGET_GLOBAL_CFLAGS 2ND_TARGET_GLOBAL_CFLAGS \
+  TARGET_GLOBAL_CONLYFLAGS 2ND_TARGET_GLOBAL_CONLYFLAGS \
+  TARGET_GLOBAL_CPPFLAGS 2ND_TARGET_GLOBAL_CPPFLAGS \
+  TARGET_GLOBAL_LDFLAGS 2ND_TARGET_GLOBAL_LDFLAGS \
+  TARGET_GLOBAL_LLDFLAGS 2ND_TARGET_GLOBAL_LLDFLAGS \
+  TARGET_CLANG_SUPPORTED 2ND_TARGET_CLANG_SUPPORTED \
+  TARGET_CC 2ND_TARGET_CC \
+  TARGET_CXX 2ND_TARGET_CXX \
+  TARGET_TOOLCHAIN_ROOT 2ND_TARGET_TOOLCHAIN_ROOT \
+  HOST_TOOLCHAIN_ROOT 2ND_HOST_TOOLCHAIN_ROOT \
+  HOST_CROSS_TOOLCHAIN_ROOT 2ND_HOST_CROSS_TOOLCHAIN_ROOT \
+  HOST_TOOLS_PREFIX 2ND_HOST_TOOLS_PREFIX \
+  HOST_CROSS_TOOLS_PREFIX 2ND_HOST_CROSS_TOOLS_PREFIX \
+  HOST_GCC_VERSION 2ND_HOST_GCC_VERSION \
+  HOST_CROSS_GCC_VERSION 2ND_HOST_CROSS_GCC_VERSION \
+  TARGET_NDK_GCC_VERSION 2ND_TARGET_NDK_GCC_VERSION \
+  GLOBAL_CFLAGS_NO_OVERRIDE GLOBAL_CPPFLAGS_NO_OVERRIDE \
+  ,GCC support has been removed. Use Clang instead)
+$(KATI_obsolete_var DIST_DIR dist_goal,Use dist-for-goals instead. See $(CHANGES_URL)#dist)
+$(KATI_obsolete_var TARGET_ANDROID_FILESYSTEM_CONFIG_H,Use TARGET_FS_CONFIG_GEN instead)
+$(KATI_deprecated_var USER,Use BUILD_USERNAME instead. See $(CHANGES_URL)#USER)
+$(KATI_obsolete_var TARGET_ROOT_OUT_SBIN,/sbin has been removed, use /system/bin instead)
+$(KATI_obsolete_var TARGET_ROOT_OUT_SBIN_UNSTRIPPED,/sbin has been removed, use /system/bin instead)
+$(KATI_obsolete_var BUILD_BROKEN_PHONY_TARGETS)
+$(KATI_obsolete_var BUILD_BROKEN_DUP_COPY_HEADERS)
+$(KATI_obsolete_var BUILD_BROKEN_ENG_DEBUG_TAGS)
+$(KATI_obsolete_export It is a global setting. See $(CHANGES_URL)#export_keyword)
+$(KATI_obsolete_var BUILD_BROKEN_ANDROIDMK_EXPORTS)
+$(KATI_obsolete_var PRODUCT_STATIC_BOOT_CONTROL_HAL,Use shared library module instead. See $(CHANGES_URL)#PRODUCT_STATIC_BOOT_CONTROL_HAL)
+$(KATI_obsolete_var \
+  ARCH_ARM_HAVE_ARMV7A \
+  ARCH_DSP_REV \
+  ARCH_HAVE_ALIGNED_DOUBLES \
+  ARCH_MIPS_HAS_DSP \
+  ARCH_MIPS_HAS_FPU \
+  ARCH_MIPS_REV6 \
+  ARCH_X86_HAVE_AES_NI \
+  ARCH_X86_HAVE_AVX \
+  ARCH_X86_HAVE_AVX2 \
+  ARCH_X86_HAVE_AVX512 \
+  ARCH_X86_HAVE_MOVBE \
+  ARCH_X86_HAVE_POPCNT \
+  ARCH_X86_HAVE_SSE4 \
+  ARCH_X86_HAVE_SSE4_2 \
+  ARCH_X86_HAVE_SSSE3 \
+)
+$(KATI_obsolete_var PRODUCT_IOT)
+$(KATI_obsolete_var MD5SUM)
+$(KATI_obsolete_var BOARD_HAL_STATIC_LIBRARIES, See $(CHANGES_URL)#BOARD_HAL_STATIC_LIBRARIES)
+$(KATI_obsolete_var LOCAL_HAL_STATIC_LIBRARIES, See $(CHANGES_URL)#BOARD_HAL_STATIC_LIBRARIES)
+$(KATI_obsolete_var \
+  TARGET_AUX_OS_VARIANT_LIST \
+  LOCAL_AUX_ARCH \
+  LOCAL_AUX_CPU \
+  LOCAL_AUX_OS \
+  LOCAL_AUX_OS_VARIANT \
+  LOCAL_AUX_SUBARCH \
+  LOCAL_AUX_TOOLCHAIN \
+  LOCAL_CUSTOM_BUILD_STEP_INPUT \
+  LOCAL_CUSTOM_BUILD_STEP_OUTPUT \
+  LOCAL_IS_AUX_MODULE \
+  ,AUX support has been removed)
+$(KATI_obsolete_var HOST_OUT_TEST_CONFIG TARGET_OUT_TEST_CONFIG LOCAL_TEST_CONFIG_OPTIONS)
+$(KATI_obsolete_var \
+  TARGET_PROJECT_INCLUDES \
+  2ND_TARGET_PROJECT_INCLUDES \
+  TARGET_PROJECT_SYSTEM_INCLUDES \
+  2ND_TARGET_PROJECT_SYSTEM_INCLUDES \
+  ,Project include variables have been removed)
+$(KATI_obsolete_var TARGET_PREFER_32_BIT TARGET_PREFER_32_BIT_APPS TARGET_PREFER_32_BIT_EXECUTABLES)
+$(KATI_obsolete_var PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_WHITELIST,Use PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_REQUIREMENT_ALLOW_LIST)
+$(KATI_obsolete_var PRODUCT_ARTIFACT_PATH_REQUIREMENT_WHITELIST,Use PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST)
+$(KATI_obsolete_var COVERAGE_PATHS,Use NATIVE_COVERAGE_PATHS instead)
+$(KATI_obsolete_var COVERAGE_EXCLUDE_PATHS,Use NATIVE_COVERAGE_EXCLUDE_PATHS instead)
+$(KATI_obsolete_var BOARD_VNDK_RUNTIME_DISABLE,VNDK-Lite is no longer supported)
+$(KATI_obsolete_var LOCAL_SANITIZE_BLACKLIST,Use LOCAL_SANITIZE_BLOCKLIST instead)
+$(KATI_obsolete_var BOARD_PLAT_PUBLIC_SEPOLICY_DIR,Use SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS instead)
+$(KATI_obsolete_var BOARD_PLAT_PRIVATE_SEPOLICY_DIR,Use SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS instead)
+$(KATI_obsolete_var TARGET_NO_VENDOR_BOOT,Use PRODUCT_BUILD_VENDOR_BOOT_IMAGE instead)
+$(KATI_obsolete_var PRODUCT_CHECK_ELF_FILES,Use BUILD_BROKEN_PREBUILT_ELF_FILES instead)
+$(KATI_obsolete_var ALL_GENERATED_SOURCES,ALL_GENERATED_SOURCES is no longer used)
+$(KATI_obsolete_var ALL_ORIGINAL_DYNAMIC_BINARIES,ALL_ORIGINAL_DYNAMIC_BINARIES is no longer used)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY_FEC,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_BOOT_SIGNER,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_VERITY_SIGNING_KEY,VB 1.0 and related variables are no longer supported)
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
 FORCE:
@@ -689,11 +798,14 @@ BUILD_IMAGE_SRCS := $(wildcard build/make/tools/releasetools/*.py)
 APPEND2SIMG := $(HOST_OUT_EXECUTABLES)/append2simg
 VERITY_SIGNER := $(HOST_OUT_EXECUTABLES)/verity_signer
 BUILD_VERITY_TREE := $(HOST_OUT_EXECUTABLES)/build_verity_tree
-BOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/boot_signer
 FUTILITY := $(HOST_OUT_EXECUTABLES)/futility-host
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 VBOOT_SIGNER := prebuilts/misc/scripts/vboot_signer/vboot_signer.sh
 FEC := $(HOST_OUT_EXECUTABLES)/fec
 BRILLO_UPDATE_PAYLOAD := $(HOST_OUT_EXECUTABLES)/brillo_update_payload
+=======
+VBOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/vboot_signer
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump2$(BUILD_EXECUTABLE_SUFFIX)
 PROFMAN := $(HOST_OUT_EXECUTABLES)/profman
@@ -818,6 +930,7 @@ ifeq ($(PRODUCT_FULL_TREBLE),true)
   BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 endif
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 # If PRODUCT_USE_VNDK is true and BOARD_VNDK_VERSION is not defined yet,
 # BOARD_VNDK_VERSION will be set to "current" as default.
 # PRODUCT_USE_VNDK will be true in Android-P or later launching devices.
@@ -828,8 +941,14 @@ else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
   # No shipping level defined
 else ifeq ($(call math_gt_or_eq,27,$(PRODUCT_SHIPPING_API_LEVEL)),)
   PRODUCT_USE_VNDK := $(PRODUCT_FULL_TREBLE)
+=======
+# Starting in Android U, non-VNDK devices not supported
+ifndef BOARD_VNDK_VERSION
+BOARD_VNDK_VERSION := current
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 endif
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ifeq ($(PRODUCT_USE_VNDK),true)
   ifndef BOARD_VNDK_VERSION
     BOARD_VNDK_VERSION := current
@@ -839,6 +958,15 @@ endif
 $(KATI_obsolete_var PRODUCT_USE_VNDK_OVERRIDE,Use PRODUCT_USE_VNDK instead)
 .KATI_READONLY := \
     PRODUCT_USE_VNDK
+=======
+ifdef PRODUCT_PRODUCT_VNDK_VERSION
+  ifndef BOARD_VNDK_VERSION
+    # VNDK for product partition is not available unless BOARD_VNDK_VERSION
+    # defined.
+    $(error PRODUCT_PRODUCT_VNDK_VERSION cannot be defined without defining BOARD_VNDK_VERSION)
+  endif
+endif
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 # Set BOARD_SYSTEMSDK_VERSIONS to the latest SystemSDK version starting from P-launching
 # devices if unset.
@@ -884,6 +1012,7 @@ ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
 else
   DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
 endif
+.KATI_READONLY := MAINLINE_SEPOLICY_DEV_CERTIFICATES
 
 BUILD_NUMBER_FROM_FILE := $$(cat $(OUT_DIR)/build_number.txt)
 BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
@@ -900,7 +1029,11 @@ BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 # is made which breaks compatibility with the previous platform sepolicy version,
 # not just on every increase in PLATFORM_SDK_VERSION.  The minor version should
 # be reset to 0 on every bump of the PLATFORM_SDK_VERSION.
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 sepolicy_major_vers := 28
+=======
+sepolicy_major_vers := 33
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 sepolicy_minor_vers := 0
 
 ifneq ($(sepolicy_major_vers), $(PLATFORM_SDK_VERSION))
@@ -926,6 +1059,214 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+  ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    $(error PRODUCT_USE_DYNAMIC_PARTITIONS must be true when PRODUCT_RETROFIT_DYNAMIC_PARTITIONS \
+        is set)
+  endif
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      $(error Devices with shipping API level $(PRODUCT_SHIPPING_API_LEVEL) must not set \
+          PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
+    endif
+  endif
+endif
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+        $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE cannot be true for devices with dynamic partitions)
+    endif
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+        $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
+    endif
+endif
+
+ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+        $(error Can only build super partition for devices with dynamic partitions)
+    endif
+endif
+
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_VENDORIMAGE_PARTITION_SIZE and \
+    BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_ODMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_ODMIMAGE_PARTITION_SIZE and \
+    BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_ODM_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
+    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+endif # PRODUCT_USE_DYNAMIC_PARTITION_SIZE
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+
+# BOARD_SUPER_PARTITION_GROUPS defines a list of "updatable groups". Each updatable group is a
+# group of partitions that share the same pool of free spaces.
+# For each group in BOARD_SUPER_PARTITION_GROUPS, a BOARD_{GROUP}_SIZE and
+# BOARD_{GROUP}_PARTITION_PARTITION_LIST may be defined.
+#     - BOARD_{GROUP}_SIZE: The maximum sum of sizes of all partitions in the group.
+#       Must not be empty.
+#     - BOARD_{GROUP}_PARTITION_PARTITION_LIST: the list of partitions that belongs to this group.
+#       If empty, no partitions belong to this group, and the sum of sizes is effectively 0.
+$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
+    $(eval BOARD_$(group)_SIZE := $(strip $(BOARD_$(group)_SIZE))) \
+    $(if $(BOARD_$(group)_SIZE),,$(error BOARD_$(group)_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_$(group)_SIZE) \
+    $(eval BOARD_$(group)_PARTITION_LIST ?=) \
+    $(eval .KATI_READONLY := BOARD_$(group)_PARTITION_LIST) \
+)
+
+# Define BOARD_SUPER_PARTITION_PARTITION_LIST, the sum of all BOARD_*_PARTITION_LIST
+ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
+$(error BOARD_SUPER_PARTITION_PARTITION_LIST should not be defined, but computed from \
+    BOARD_SUPER_PARTITION_GROUPS and BOARD_*_PARTITION_LIST)
+endif
+BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)),$(BOARD_$(group)_PARTITION_LIST))
+.KATI_READONLY := BOARD_SUPER_PARTITION_PARTITION_LIST
+
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+
+# The metadata device must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+$(error Must specify BOARD_SUPER_PARTITION_METADATA_DEVICE if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The super partition block device list must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+$(error Must specify BOARD_SUPER_PARTITION_BLOCK_DEVICES if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The metadata device must be included in the super partition block device list.
+ifeq (,$(filter $(BOARD_SUPER_PARTITION_METADATA_DEVICE),$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))
+$(error BOARD_SUPER_PARTITION_METADATA_DEVICE is not listed in BOARD_SUPER_PARTITION_BLOCK_DEVICES.)
+endif
+
+# The metadata device must be supplied to init via the kernel command-line.
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := true
+
+# If "vendor" is listed as one of the dynamic partitions but without its image available (e.g. an
+# AOSP target built without vendor image), don't build the retrofit full OTA package. Because we
+# won't be able to build meaningful super_* images for retrofitting purpose.
+ifneq (,$(filter vendor,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+ifndef BUILDING_VENDOR_IMAGE
+ifndef BOARD_PREBUILT_VENDORIMAGE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+endif # BOARD_PREBUILT_VENDORIMAGE
+endif # BUILDING_VENDOR_IMAGE
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
+else # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+
+# For normal devices, we populate BOARD_SUPER_PARTITION_BLOCK_DEVICES so the
+# build can handle both cases consistently.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+BOARD_SUPER_PARTITION_METADATA_DEVICE := super
+endif
+
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+BOARD_SUPER_PARTITION_BLOCK_DEVICES := $(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+
+# If only one super block device, default to super partition size.
+ifeq ($(word 2,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
+BOARD_SUPER_PARTITION_$(call to-upper,$(strip $(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))_DEVICE_SIZE ?= \
+    $(BOARD_SUPER_PARTITION_SIZE)
+endif
+
+ifneq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),super)
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+endif # BOARD_SUPER_PARTITION_SIZE
+BOARD_SUPER_PARTITION_BLOCK_DEVICES ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_BLOCK_DEVICES
+BOARD_SUPER_PARTITION_METADATA_DEVICE ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_METADATA_DEVICE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE ?=
+.KATI_READONLY := BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE
+
+$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)), \
+    $(eval BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE := $(strip $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))) \
+    $(if $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE),, \
+        $(error BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))
+
+endif # PRODUCT_USE_DYNAMIC_PARTITIONS
+
+# By default, we build the hidden API csv files from source. You can use
+# prebuilt hiddenapi files by setting BOARD_PREBUILT_HIDDENAPI_DIR to the name
+# of a directory containing both prebuilt hiddenapi-flags.csv and
+# hiddenapi-index.csv.
+BOARD_PREBUILT_HIDDENAPI_DIR ?=
+.KATI_READONLY := BOARD_PREBUILT_HIDDENAPI_DIR
+
+ifdef USE_HOST_MUSL
+  ifneq (,$(or $(BUILD_BROKEN_USES_BUILD_HOST_EXECUTABLE),\
+               $(BUILD_BROKEN_USES_BUILD_HOST_SHARED_LIBRARY),\
+               $(BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY)))
+    $(error USE_HOST_MUSL can't be set when native host builds are enabled in Make with BUILD_BROKEN_USES_BUILD_HOST_*)
+  endif
+endif
+
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 # ###############################################################
 # Set up final options.
 # ###############################################################

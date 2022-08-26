@@ -641,6 +641,10 @@ function lunch()
     set_stuff_for_environment
     printconfig
     destroy_build_var_cache
+
+    if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
+      check_mu_config
+    fi
 }
 
 # Tab completion for lunch.
@@ -999,6 +1003,7 @@ function qpid() {
     fi
 }
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 function pid()
 {
     local prepend=''
@@ -1019,6 +1024,18 @@ function pid()
         echo "usage: pid [--exact] <process name>"
         return 255
     fi
+=======
+# syswrite - disable verity, reboot if needed, and remount image
+#
+# Easy way to make system.img/etc writable
+function syswrite() {
+  adb wait-for-device && adb root || return 1
+  if [[ $(adb disable-verity | grep -i "reboot") ]]; then
+      echo "rebooting"
+      adb reboot && adb wait-for-device && adb root || return 1
+  fi
+  adb wait-for-device && adb remount || return 1
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 }
 
 # coredump_setup - enable core dumps globally for any process
@@ -1596,6 +1613,74 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    local T=$(gettop)
+    if [ -n "$T" ]; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$@" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local previous_args=""
+        for arg in $@;
+        do
+            previous_args+="$arg "
+            shift
+            if [[ $arg != -* ]]; # if $arg doesn't start with a dash
+            then
+                break
+            fi
+        done
+        bazel $previous_args --config=bp2build $@
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"

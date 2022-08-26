@@ -263,6 +263,23 @@ def LoadInfoDict(input_file, input_dir=None):
     if fp:
       d["avb_salt"] = sha256(fp).hexdigest()
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+    # Set up the salt for partitions without build.prop
+    if build_info.fingerprint:
+      d["avb_salt"] = sha256(build_info.fingerprint.encode()).hexdigest()
+
+    # Set the vbmeta digest if exists
+    try:
+      d["vbmeta_digest"] = read_helper("META/vbmeta_digest.txt").rstrip()
+    except KeyError:
+      pass
+
+  try:
+    d["ab_partitions"] = read_helper("META/ab_partitions.txt").split("\n")
+  except KeyError:
+    logger.warning("Can't find META/ab_partitions.txt")
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
   return d
 
 

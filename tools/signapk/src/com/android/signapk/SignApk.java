@@ -950,6 +950,12 @@ class SignApk {
         int alignment = 4;
         Integer minSdkVersionOverride = null;
         boolean signUsingApkSignatureSchemeV2 = true;
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+        boolean signUsingApkSignatureSchemeV4 = false;
+        SigningCertificateLineage certLineage = null;
+        Integer rotationMinSdkVersion = null;
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
         int argstart = 0;
         while (argstart < args.length && args[argstart].startsWith("-")) {
@@ -977,6 +983,30 @@ class SignApk {
             } else if ("--disable-v2".equals(args[argstart])) {
                 signUsingApkSignatureSchemeV2 = false;
                 ++argstart;
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+            } else if ("--enable-v4".equals(args[argstart])) {
+                signUsingApkSignatureSchemeV4 = true;
+                ++argstart;
+            } else if ("--lineage".equals(args[argstart])) {
+                File lineageFile = new File(args[++argstart]);
+                try {
+                    certLineage = SigningCertificateLineage.readFromFile(lineageFile);
+                } catch (Exception e) {
+                    throw new IllegalArgumentException(
+                            "Error reading lineage file: " + e.getMessage());
+                }
+                ++argstart;
+            } else if ("--rotation-min-sdk-version".equals(args[argstart])) {
+                String rotationMinSdkVersionString = args[++argstart];
+                try {
+                    rotationMinSdkVersion = Integer.parseInt(rotationMinSdkVersionString);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException(
+                            "--rotation-min-sdk-version must be a decimal number: " + rotationMinSdkVersionString);
+                }
+                ++argstart;
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
             } else {
                 usage();
             }
@@ -1050,6 +1080,7 @@ class SignApk {
                     }
                 }
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
                 try (ApkSignerEngine apkSigner =
                         new DefaultApkSignerEngine.Builder(
                                 createSignerConfigs(privateKey, publicKey), minSdkVersion)
@@ -1058,6 +1089,24 @@ class SignApk {
                                 .setOtherSignersSignaturesPreserved(false)
                                 .setCreatedBy("1.0 (Android SignApk)")
                                 .build()) {
+=======
+                DefaultApkSignerEngine.Builder builder = new DefaultApkSignerEngine.Builder(
+                    createSignerConfigs(privateKey, publicKey), minSdkVersion)
+                    .setV1SigningEnabled(true)
+                    .setV2SigningEnabled(signUsingApkSignatureSchemeV2)
+                    .setOtherSignersSignaturesPreserved(false)
+                    .setCreatedBy("1.0 (Android SignApk)");
+
+                if (certLineage != null) {
+                   builder = builder.setSigningCertificateLineage(certLineage);
+                }
+
+                if (rotationMinSdkVersion != null) {
+                   builder = builder.setMinSdkVersionForRotation(rotationMinSdkVersion);
+                }
+
+                try (ApkSignerEngine apkSigner = builder.build()) {
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
                     // We don't preserve the input APK's APK Signing Block (which contains v2
                     // signatures)
                     apkSigner.inputApkSigningBlock(null);

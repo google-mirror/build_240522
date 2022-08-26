@@ -486,9 +486,23 @@ ifneq ($(filter-out 0 1,$(words $(PRODUCT_ADB_KEYS))),)
 endif
 .KATI_READONLY := PRODUCT_ADB_KEYS
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 # Whether any paths are excluded from sanitization when SANITIZE_TARGET=cfi
 PRODUCT_CFI_EXCLUDE_PATHS := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_CFI_EXCLUDE_PATHS))
+=======
+# Show a warning wall of text if non-compliance-GSI products set this option.
+ifdef PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
+  ifeq (,$(filter gsi_arm gsi_arm64 gsi_x86 gsi_x86_64 gsi_car_arm64 gsi_car_x86_64 gsi_tv_arm gsi_tv_arm64,$(PRODUCT_NAME)))
+    $(warning PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT is set but \
+      PRODUCT_NAME ($(PRODUCT_NAME)) doesn't look like a GSI for compliance \
+      testing. This is a special configuration for compliance GSI, so do make \
+      sure you understand the security implications before setting this \
+      option. If you don't know what this option does, then you probably \
+      shouldn't set this.)
+  endif
+endif
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 # Whether any paths should have CFI enabled for components
 PRODUCT_CFI_INCLUDE_PATHS := \

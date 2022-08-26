@@ -567,6 +567,17 @@ PACKAGES.$(LOCAL_PACKAGE_NAME).CERTIFICATE := $(certificate)
 $(LOCAL_BUILT_MODULE): $(additional_certificates)
 $(LOCAL_BUILT_MODULE): PRIVATE_ADDITIONAL_CERTIFICATES := $(additional_certificates)
 
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
+=======
+$(LOCAL_BUILT_MODULE): $(LOCAL_CERTIFICATE_LINEAGE)
+$(LOCAL_BUILT_MODULE): PRIVATE_CERTIFICATE_LINEAGE := $(LOCAL_CERTIFICATE_LINEAGE)
+
+$(LOCAL_BUILT_MODULE): PRIVATE_ROTATION_MIN_SDK_VERSION := $(LOCAL_ROTATION_MIN_SDK_VERSION)
+
+# Set a actual_partition_tag (calculated in base_rules.mk) for the package.
+PACKAGES.$(LOCAL_PACKAGE_NAME).PARTITION := $(actual_partition_tag)
+
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 # Define the rule to build the actual package.
 # PRIVATE_JNI_SHARED_LIBRARIES is a list of <abi>:<path_of_built_lib>.
 $(LOCAL_BUILT_MODULE): PRIVATE_JNI_SHARED_LIBRARIES := $(jni_shared_libraries_with_abis)

@@ -683,7 +683,27 @@ ifdef LOCAL_2ND_ARCH_VAR_PREFIX
 ALL_MODULES.$(my_register_name).FOR_2ND_ARCH := true
 endif
 ALL_MODULES.$(my_register_name).FOR_HOST_CROSS := $(my_host_cross)
+<<<<<<< HEAD   (6aa08a Merge "Merge empty history for sparse-8898769-L4880000095594)
 ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := $(LOCAL_COMPATIBILITY_SUITE)
+=======
+ALL_MODULES.$(my_register_name).MODULE_NAME := $(LOCAL_MODULE)
+ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES := \
+  $(ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES) \
+  $(filter-out $(ALL_MODULES.$(my_register_name).COMPATIBILITY_SUITES),$(LOCAL_COMPATIBILITY_SUITE))
+ALL_MODULES.$(my_register_name).TEST_CONFIG := $(test_config)
+ALL_MODULES.$(my_register_name).EXTRA_TEST_CONFIGS := $(LOCAL_EXTRA_FULL_TEST_CONFIGS)
+ALL_MODULES.$(my_register_name).TEST_MAINLINE_MODULES := $(LOCAL_TEST_MAINLINE_MODULES)
+ifndef LOCAL_IS_HOST_MODULE
+ALL_MODULES.$(my_register_name).FILE_CONTEXTS := $(LOCAL_FILE_CONTEXTS)
+endif
+ifdef LOCAL_IS_UNIT_TEST
+ALL_MODULES.$(my_register_name).IS_UNIT_TEST := $(LOCAL_IS_UNIT_TEST)
+endif
+ifdef LOCAL_TEST_OPTIONS_TAGS
+ALL_MODULES.$(my_register_name).TEST_OPTIONS_TAGS := $(LOCAL_TEST_OPTIONS_TAGS)
+endif
+test_config :=
+>>>>>>> BRANCH (3e436e Merge "Version bump to TKB1.220825.001.A1 [core/build_id.mk])
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)
 
