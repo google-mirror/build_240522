@@ -16,6 +16,24 @@
       "message": "Where is this intended to be set?  `TARGET_*` variables are usually set in BoardConfig.mk files, but I think this is read before BoardConfig.mk files.  If it is expected to be from the command line, maybe something like `FORCE_AUDIO_SILENT`?",
       "revId": "7c14860093036b31bb94ee22aad124902960dd3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4584dd9b_75cf43d4",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-08-26T21:53:12Z",
+      "side": 1,
+      "message": "Yes, this is intended to be set on the command line. `FORCE_AUDIO_SILENT` sounds good.",
+      "parentUuid": "8adfd6a0_b9023860",
+      "revId": "7c14860093036b31bb94ee22aad124902960dd3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
