@@ -65,6 +65,17 @@ ifneq ($(filter memtag_heap, $(my_global_sanitize)),)
   endif
 endif
 
+# Disable global memtag_stack in excluded paths
+ifneq ($(filter memtag_stack, $(my_global_sanitize)),)
+  combined_exclude_paths := $(MEMTAG_STACK_EXCLUDE_PATHS) \
+                            $(PRODUCT_MEMTAG_STACK_EXCLUDE_PATHS)
+
+  ifneq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_exclude_paths)),\
+         $(filter $(dir)%,$(LOCAL_PATH)))),)
+    my_global_sanitize := $(filter-out memtag_stack,$(my_global_sanitize))
+  endif
+endif
+
 ifneq ($(my_global_sanitize),)
   my_sanitize := $(my_global_sanitize) $(my_sanitize)
 endif
@@ -155,6 +166,24 @@ ifeq ($(filter memtag_heap, $(my_sanitize)),)
   endif
 endif
 
+# Enable memtag_stack in included paths (for Arm64 only).
+ifeq ($(filter memtag_stack, $(my_sanitize)),)
+  ifneq ($(filter arm64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
+    combined_include_paths := $(MEMTAG_STACK_INCLUDE_PATHS) \
+                              $(PRODUCT_MEMTAG_STACK_INCLUDE_PATHS)
+    combined_exclude_paths := $(MEMTAG_STACK_EXCLUDE_PATHS) \
+                              $(PRODUCT_MEMTAG_STACK_EXCLUDE_PATHS)
+
+    ifeq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_exclude_paths)),\
+          $(filter $(dir)%,$(LOCAL_PATH)))),)
+      ifneq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_include_paths)),\
+             $(filter $(dir)%,$(LOCAL_PATH)))),)
+        my_sanitize := memtag_stack $(my_sanitize)
+      endif
+    endif
+  endif
+endif
+
 # If CFI is disabled globally, remove it from my_sanitize.
 ifeq ($(strip $(ENABLE_CFI)),false)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
@@ -202,9 +231,14 @@ ifneq ($(my_nosanitize),)
   my_sanitize := $(filter-out $(my_nosanitize),$(my_sanitize))
 endif
 
+ifneq ($(filter memtag_stack,$(my_sanitize)),)
+  my_sanitize := $(filter-out hwaddress,$(my_sanitize))
+endif
+
 ifneq ($(filter arm x86 x86_64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize := $(filter-out hwaddress,$(my_sanitize))
   my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
 endif
 
 ifneq ($(filter hwaddress,$(my_sanitize)),)
@@ -225,20 +259,24 @@ ifneq ($(filter hwaddress,$(my_sanitize)),)
 endif
 
 ifneq ($(filter memtag_heap,$(my_sanitize)),)
-  # Add memtag ELF note.
-  ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
-    ifneq ($(filter memtag_heap,$(my_sanitize_diag)),)
-      my_whole_static_libraries += note_memtag_heap_sync
-    else
-      my_whole_static_libraries += note_memtag_heap_async
-    endif
-  endif
-  # This is all that memtag_heap does - it is not an actual -fsanitize argument.
-  # Remove it from the list.
+  my_cflags += -fsanitize=memtag-heap
   my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
 endif
 
-my_sanitize_diag := $(filter-out memtag_heap,$(my_sanitize_diag))
+ifneq ($(filter memtag_stack,$(my_sanitize)),)
+  my_cflags += -fsanitize=memtag-stack
+  my_cflags += -march=armv8a+memtag
+  my_ldflags += -march=armv8a+memtag
+  my_asflags += -march=armv8a+memtag
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
+endif
+
+ifneq ($(filter memtag_heap,$(my_sanitize_diag)),)
+  my_cflags += -fsanitize-memtag-mode=sync
+  my_sanitize_diag := $(filter-out memtag_heap,$(my_sanitize_diag))
+else
+  my_cflags += -fsanitize-memtag-mode=async
+endif
 
 # TSAN is not supported on 32-bit architectures. For non-multilib cases, make
 # its use an error. For multilib cases, don't use it for the 32-bit case.
