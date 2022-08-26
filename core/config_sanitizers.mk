@@ -225,17 +225,11 @@ ifneq ($(filter hwaddress,$(my_sanitize)),)
 endif
 
 ifneq ($(filter memtag_heap,$(my_sanitize)),)
-  # Add memtag ELF note.
-  ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
-    ifneq ($(filter memtag_heap,$(my_sanitize_diag)),)
-      my_whole_static_libraries += note_memtag_heap_sync
-    else
-      my_whole_static_libraries += note_memtag_heap_async
-    endif
-  endif
-  # This is all that memtag_heap does - it is not an actual -fsanitize argument.
-  # Remove it from the list.
-  my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
+  my_sanitize := $(subst memtag_heap,memtag-heap,$(my_sanitize))
+endif
+
+ifneq ($(filter memtag_stack,$(my_sanitize)),)
+  my_sanitize := $(subst memtag_stack,memtag-stack,$(my_sanitize))
 endif
 
 my_sanitize_diag := $(filter-out memtag_heap,$(my_sanitize_diag))
