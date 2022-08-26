@@ -807,6 +807,39 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
   if p.returncode != 0:
     raise ExternalError("signapk.jar failed: return code %s" % (p.returncode,))
 
+<<<<<<< HEAD   (4f8dfd Merge "Merge empty history for sparse-8992170-L9640000095613)
+=======
+def SignSePolicy(sepolicy, key, password):
+  """Sign the sepolicy zip, producing an fsverity .fsv_sig and
+  an RSA .sig signature files.
+  """
+
+  if OPTIONS.sign_sepolicy_path is None:
+    logger.info("No sign_sepolicy_path specified, %s was not signed", sepolicy)
+    return False
+
+  java_library_path = os.path.join(
+      OPTIONS.search_path, OPTIONS.signapk_shared_library_path)
+
+  cmd = ([OPTIONS.java_path] + OPTIONS.java_args +
+          ["-Djava.library.path=" + java_library_path,
+          "-jar", os.path.join(OPTIONS.search_path, OPTIONS.sign_sepolicy_path)] +
+          OPTIONS.extra_sign_sepolicy_args)
+
+  cmd.extend([key + OPTIONS.public_key_suffix,
+              key + OPTIONS.private_key_suffix,
+              sepolicy, os.path.dirname(sepolicy)])
+
+  proc = Run(cmd, stdin=subprocess.PIPE)
+  if password is not None:
+    password += "\n"
+  stdoutdata, _ = proc.communicate(password)
+  if proc.returncode != 0:
+    raise ExternalError(
+        "Failed to run sign sepolicy: return code {}:\n{}".format(
+            proc.returncode, stdoutdata))
+  return True
+>>>>>>> BRANCH (cc81b6 Merge "Version bump to TKB1.220825.002.A1 [core/build_id.mk])
 
 def CheckSize(data, target, info_dict):
   """Checks the data string passed against the max size limit.
