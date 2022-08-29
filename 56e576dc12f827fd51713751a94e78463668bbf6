@@ -70,6 +70,30 @@
       },
       "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a66435_0e596d6c",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-29T21:56:40Z",
+      "side": 1,
+      "message": "aosp/2199006",
+      "parentUuid": "4bc82979_e15bdec0",
+      "range": {
+        "startLine": 1870,
+        "startChar": 12,
+        "endLine": 1870,
+        "endChar": 68
+      },
+      "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
