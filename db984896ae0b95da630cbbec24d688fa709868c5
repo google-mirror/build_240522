@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe277e0_4504775b",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-08-29T21:04:19Z",
+      "side": 1,
+      "message": "changed this to make sure we never get \"unused argument during compliation\" for the \u003dsync case.",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 5
+      },
+      "revId": "db984896ae0b95da630cbbec24d688fa709868c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
