@@ -46,6 +46,30 @@
       },
       "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc82979_e15bdec0",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-29T21:49:58Z",
+      "side": 1,
+      "message": "Since this CL just adds the `--skip-soong-tests`, and I\u0027m not changing the semantics of the `--config\u003dbp2build` flag. I\u0027ll just open a new CL and address it there.",
+      "parentUuid": "41fbd9f2_f02c945a",
+      "range": {
+        "startLine": 1870,
+        "startChar": 12,
+        "endLine": 1870,
+        "endChar": 68
+      },
+      "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
