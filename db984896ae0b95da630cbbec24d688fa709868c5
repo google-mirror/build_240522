@@ -22,6 +22,30 @@
       },
       "revId": "db984896ae0b95da630cbbec24d688fa709868c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1784860c_7a6280a2",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-08-29T22:18:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5fe277e0_4504775b",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 5
+      },
+      "revId": "db984896ae0b95da630cbbec24d688fa709868c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
