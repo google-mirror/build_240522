@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0809da3e_54119ced",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-08-29T20:42:22Z",
+      "side": 1,
+      "message": "OK, that\u0027s easier then :)",
+      "parentUuid": "f3a247c9_442bf23c",
+      "revId": "2ea98bd1fba3a4e6af3293d815109034a944b0d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0241349b_867d5aea",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-29T20:39:15Z",
       "side": 1,
       "message": "this happens for all sanitizers universally (line 336), just do not remove it from my_sanitize",
+      "revId": "2ea98bd1fba3a4e6af3293d815109034a944b0d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "986c77b2_f99e5f80",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-08-29T20:42:22Z",
+      "side": 1,
+      "message": "This swaps the underscore with a dash.",
+      "parentUuid": "0241349b_867d5aea",
       "revId": "2ea98bd1fba3a4e6af3293d815109034a944b0d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
