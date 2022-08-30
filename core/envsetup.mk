@@ -180,17 +180,11 @@ endif
 # HOST_ARCH
 ifneq (,$(findstring x86_64,$(UNAME)))
   HOST_ARCH := x86_64
-  HOST_2ND_ARCH := x86
   HOST_IS_64_BIT := true
 else
 ifneq (,$(findstring i686,$(UNAME))$(findstring x86,$(UNAME)))
 $(error Building on a 32-bit x86 host is not supported: $(UNAME)!)
 endif
-endif
-
-ifeq ($(HOST_OS),darwin)
-  # Mac no longer supports 32-bit executables
-  HOST_2ND_ARCH :=
 endif
 
 HOST_2ND_ARCH_VAR_PREFIX := 2ND_
