@@ -16,6 +16,24 @@
       "message": "Might be too early to remove this?\nI.e. _trigger_build calls soong_ui.bash which takes name-value pairs to override env vars for, so maybe this should be removed only AFTER USE_BAZEL_ANALYSIS is completely unsupported.",
       "revId": "7baf408c29c32ca1bb2e1dda6a85eafd2f7abcda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968d742f_6a69e8ce",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2022-08-30T17:11:54Z",
+      "side": 1,
+      "message": "Alright, fair enough. I will leave this CL blocked on full removal of USE_BAZEL_ANALYSIS",
+      "parentUuid": "0a0bc5a9_6100b35b",
+      "revId": "7baf408c29c32ca1bb2e1dda6a85eafd2f7abcda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
