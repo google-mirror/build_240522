@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fa5d933_8e655dcd",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-30T14:06:24Z",
+      "side": 1,
+      "message": "Huh, apparently this is not the case on `zsh`, but it is on `bash` (at least on my computer). I\u0027ll see if I can find a cross-terminal solution... 😞",
+      "parentUuid": "14203f88_a65dea34",
+      "range": {
+        "startLine": 1843,
+        "startChar": 4,
+        "endLine": 1843,
+        "endChar": 45
+      },
+      "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18c3c8dd_38e1023e",
         "filename": "envsetup.sh",
         "patchSetId": 3
