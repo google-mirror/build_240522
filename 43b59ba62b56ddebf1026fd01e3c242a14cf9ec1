@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa25717_446f198a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1946265
+      },
+      "writtenOn": "2022-08-30T20:45:41Z",
+      "side": 1,
+      "message": "This cl https://partner-android-review.googlesource.com/c/platform/vendor/amlogic/common/+/2276181\nshould fix the broken build. I am waiting for presubmits to finish running.",
+      "revId": "43b59ba62b56ddebf1026fd01e3c242a14cf9ec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
