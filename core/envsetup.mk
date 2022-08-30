@@ -180,7 +180,7 @@ endif
 # HOST_ARCH
 ifneq (,$(findstring x86_64,$(UNAME)))
   HOST_ARCH := x86_64
-  HOST_2ND_ARCH := x86
+  HOST_2ND_ARCH :=
   HOST_IS_64_BIT := true
 else
 ifneq (,$(findstring i686,$(UNAME))$(findstring x86,$(UNAME)))
