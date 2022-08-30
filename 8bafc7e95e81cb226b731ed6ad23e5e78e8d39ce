@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e48135_28b67aba",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-08-30T00:23:35Z",
+      "side": 1,
+      "message": "I was originally thinking you\u0027d just keep everything the same, just move change the `if [[ $arg !\u003d -* ]];` to `if [[ $arg \u003d\u003d \"--\" ]];` and move it above the `if [[ $start_post_config_args -eq 0 ]];`, but this works too.",
+      "revId": "8bafc7e95e81cb226b731ed6ad23e5e78e8d39ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
