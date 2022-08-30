@@ -16,6 +16,23 @@
       "message": "Let me know if you want me to change it to run the avbtool.py directly instead of building with soong, but I felt this was more correct.",
       "revId": "45844ab338c02240c22d9427aa78ee4eb2771d0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c7255b_273840eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2022-08-30T21:23:43Z",
+      "side": 1,
+      "message": "LGTM, thanks",
+      "revId": "45844ab338c02240c22d9427aa78ee4eb2771d0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
