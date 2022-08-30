@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a4b67e_c25944a5",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-08-30T17:27:29Z",
+      "side": 1,
+      "message": "Resolved in aosp/2200736",
+      "parentUuid": "8fa5d933_8e655dcd",
+      "range": {
+        "startLine": 1843,
+        "startChar": 4,
+        "endLine": 1843,
+        "endChar": 45
+      },
+      "revId": "56e576dc12f827fd51713751a94e78463668bbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18c3c8dd_38e1023e",
