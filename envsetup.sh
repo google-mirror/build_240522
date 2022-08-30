@@ -1838,6 +1838,16 @@ function _trigger_build()
 # Convenience entry point (like m) to use Bazel in AOSP.
 function b()
 (
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
     # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
     _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= || return 1
     # Then, run Bazel using the synthetic workspace as the --package_path.
