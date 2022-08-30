@@ -1010,15 +1010,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   # FinalizeMetadata().
   common.ZipClose(output_zip)
 
-  # AbOtaPropertyFiles intends to replace StreamingPropertyFiles, as it covers
-  # all the info of the latter. However, system updaters and OTA servers need to
-  # take time to switch to the new flag. We keep both of the flags for
-  # P-timeframe, and will remove StreamingPropertyFiles in later release.
-  needed_property_files = (
-      AbOtaPropertyFiles(),
-      StreamingPropertyFiles(),
-  )
-  FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
+  FinalizeMetadata(metadata, staging_file, output_file)
 
 
 def main(argv):
