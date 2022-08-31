@@ -121,9 +121,13 @@ OPTIONS.extra_apks = {}
 OPTIONS.key_map = {}
 OPTIONS.rebuild_recovery = False
 OPTIONS.replace_ota_keys = False
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 OPTIONS.replace_verity_public_key = False
 OPTIONS.replace_verity_private_key = False
 OPTIONS.replace_verity_keyid = False
+=======
+OPTIONS.remove_avb_public_keys = None
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 OPTIONS.tag_changes = ("-test-keys", "-dev-keys", "+release-keys")
 OPTIONS.avb_keys = {}
 OPTIONS.avb_algorithms = {}
@@ -318,15 +322,35 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     elif info.filename == "META/misc_info.txt":
       pass
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
     # Skip verity public key if we will replace it.
     elif (OPTIONS.replace_verity_public_key and
           info.filename in ("BOOT/RAMDISK/verity_key",
                             "ROOT/verity_key")):
       pass
+=======
+    elif (OPTIONS.remove_avb_public_keys and
+          (filename.startswith("BOOT/RAMDISK/avb/") or
+           filename.startswith("BOOT/RAMDISK/first_stage_ramdisk/avb/"))):
+      matched_removal = False
+      for key_to_remove in OPTIONS.remove_avb_public_keys:
+        if filename.endswith(key_to_remove):
+          matched_removal = True
+          print("Removing AVB public key from ramdisk: %s" % filename)
+          break
+      if not matched_removal:
+        # Copy it verbatim if we don't want to remove it.
+        common.ZipWriteStr(output_tf_zip, out_info, data)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
     # Skip verity keyid (for system_root_image use) if we will replace it.
     elif (OPTIONS.replace_verity_keyid and
           info.filename == "BOOT/cmdline"):
+=======
+    # Skip the vbmeta digest as we will recalculate it.
+    elif filename == "META/vbmeta_digest.txt":
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
       pass
 
     # Skip the care_map as we will regenerate the system/vendor images.
@@ -340,6 +364,7 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
   if OPTIONS.replace_ota_keys:
     ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info)
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   # Replace the keyid string in misc_info dict.
   if OPTIONS.replace_verity_private_key:
     ReplaceVerityPrivateKey(misc_info, OPTIONS.replace_verity_private_key[1])
@@ -356,6 +381,8 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     ReplaceVerityKeyId(input_tf_zip, output_tf_zip,
                        OPTIONS.replace_verity_keyid[1])
 
+=======
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
   # Replace the AVB signing keys, if any.
   ReplaceAvbSigningKeys(misc_info)
 
@@ -577,6 +604,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
   return new_recovery_keys
 
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 def ReplaceVerityPublicKey(output_zip, filename, key_path):
   """Replaces the verity public key at the given path in the given zip.
 
@@ -635,6 +663,8 @@ def ReplaceVerityKeyId(input_zip, output_zip, key_path):
   common.ZipWriteStr(output_zip, "BOOT/cmdline", out_cmdline)
 
 
+=======
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 def ReplaceMiscInfoTxt(input_zip, output_zip, misc_info):
   """Replaces META/misc_info.txt.
 
@@ -778,11 +808,20 @@ def main(argv):
         new.append(i[0] + i[1:].strip())
       OPTIONS.tag_changes = tuple(new)
     elif o == "--replace_verity_public_key":
-      OPTIONS.replace_verity_public_key = (True, a)
+      raise ValueError("--replace_verity_public_key is no longer supported,"
+                       " please switch to AVB")
     elif o == "--replace_verity_private_key":
-      OPTIONS.replace_verity_private_key = (True, a)
+      raise ValueError("--replace_verity_private_key is no longer supported,"
+                       " please switch to AVB")
     elif o == "--replace_verity_keyid":
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
       OPTIONS.replace_verity_keyid = (True, a)
+=======
+      raise ValueError("--replace_verity_keyid is no longer supported, please"
+                       " switch to AVB")
+    elif o == "--remove_avb_public_keys":
+      OPTIONS.remove_avb_public_keys = a.split(",")
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
     elif o == "--avb_vbmeta_key":
       OPTIONS.avb_keys['vbmeta'] = a
     elif o == "--avb_vbmeta_algorithm":

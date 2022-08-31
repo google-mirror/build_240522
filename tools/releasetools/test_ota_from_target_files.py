@@ -17,18 +17,41 @@
 import copy
 import os
 import os.path
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 import subprocess
 import unittest
+=======
+import tempfile
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 import zipfile
 
 import common
 import test_utils
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
+=======
+from ota_utils import (
+    BuildLegacyOtaMetadata, CalculateRuntimeDevicesAndFingerprints,
+    ConstructOtaApexInfo, FinalizeMetadata, GetPackageMetadata, PropertyFiles, AbOtaPropertyFiles, PayloadGenerator, StreamingPropertyFiles)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 from ota_from_target_files import (
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
     _LoadOemDicts, AbOtaPropertyFiles, BuildInfo, FinalizeMetadata,
     GetPackageMetadata, GetTargetFilesZipForSecondaryImages,
     GetTargetFilesZipWithoutPostinstallConfig, NonAbOtaPropertyFiles,
     Payload, PayloadSigner, POSTINSTALL_CONFIG, PropertyFiles,
     StreamingPropertyFiles, WriteFingerprintAssertion)
+=======
+    _LoadOemDicts,
+    GetTargetFilesZipForCustomImagesUpdates,
+    GetTargetFilesZipForPartialUpdates,
+    GetTargetFilesZipForSecondaryImages,
+    GetTargetFilesZipWithoutPostinstallConfig,
+    POSTINSTALL_CONFIG, AB_PARTITIONS)
+from apex_utils import GetApexInfoFromTargetFiles
+from test_utils import PropertyFilesTestCase
+from common import OPTIONS
+from payload_signer import PayloadSigner
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
 
 def construct_target_files(secondary=False):
@@ -931,7 +954,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
 
   def test_GetPayloadMetadataOffsetAndSize(self):
     target_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file)
 
     payload_signer = PayloadSigner()
@@ -978,7 +1001,7 @@ class AbOtaPropertyFilesTest(PropertyFilesTest):
   def construct_zip_package_withValidPayload(with_metadata=False):
     # Cannot use construct_zip_package() since we need a "valid" payload.bin.
     target_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file)
 
     payload_signer = PayloadSigner()
@@ -1193,7 +1216,7 @@ class PayloadTest(unittest.TestCase):
   @staticmethod
   def _create_payload_full(secondary=False):
     target_file = construct_target_files(secondary)
-    payload = Payload(secondary)
+    payload = PayloadGenerator(secondary)
     payload.Generate(target_file)
     return payload
 
@@ -1201,7 +1224,7 @@ class PayloadTest(unittest.TestCase):
   def _create_payload_incremental():
     target_file = construct_target_files()
     source_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     payload.Generate(target_file, source_file)
     return payload
 
@@ -1216,7 +1239,7 @@ class PayloadTest(unittest.TestCase):
   def test_Generate_additionalArgs(self):
     target_file = construct_target_files()
     source_file = construct_target_files()
-    payload = Payload()
+    payload = PayloadGenerator()
     # This should work the same as calling payload.Generate(target_file,
     # source_file).
     payload.Generate(
@@ -1226,8 +1249,13 @@ class PayloadTest(unittest.TestCase):
   def test_Generate_invalidInput(self):
     target_file = construct_target_files()
     common.ZipDelete(target_file, 'IMAGES/vendor.img')
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
     payload = Payload()
     self.assertRaises(AssertionError, payload.Generate, target_file)
+=======
+    payload = PayloadGenerator()
+    self.assertRaises(common.ExternalError, payload.Generate, target_file)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
   def test_Sign_full(self):
     payload = self._create_payload_full()
@@ -1288,13 +1316,13 @@ class PayloadTest(unittest.TestCase):
     with zipfile.ZipFile(output_file) as verify_zip:
       # First make sure we have the essential entries.
       namelist = verify_zip.namelist()
-      self.assertIn(Payload.PAYLOAD_BIN, namelist)
-      self.assertIn(Payload.PAYLOAD_PROPERTIES_TXT, namelist)
+      self.assertIn(PayloadGenerator.PAYLOAD_BIN, namelist)
+      self.assertIn(PayloadGenerator.PAYLOAD_PROPERTIES_TXT, namelist)
 
       # Then assert these entries are stored.
       for entry_info in verify_zip.infolist():
-        if entry_info.filename not in (Payload.PAYLOAD_BIN,
-                                       Payload.PAYLOAD_PROPERTIES_TXT):
+        if entry_info.filename not in (PayloadGenerator.PAYLOAD_BIN,
+                                       PayloadGenerator.PAYLOAD_PROPERTIES_TXT):
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)
 
@@ -1324,13 +1352,18 @@ class PayloadTest(unittest.TestCase):
     with zipfile.ZipFile(output_file) as verify_zip:
       # First make sure we have the essential entries.
       namelist = verify_zip.namelist()
-      self.assertIn(Payload.SECONDARY_PAYLOAD_BIN, namelist)
-      self.assertIn(Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT, namelist)
+      self.assertIn(PayloadGenerator.SECONDARY_PAYLOAD_BIN, namelist)
+      self.assertIn(PayloadGenerator.SECONDARY_PAYLOAD_PROPERTIES_TXT, namelist)
 
       # Then assert these entries are stored.
       for entry_info in verify_zip.infolist():
         if entry_info.filename not in (
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
             Payload.SECONDARY_PAYLOAD_BIN,
             Payload.SECONDARY_PAYLOAD_PROPERTIES_TXT):
+=======
+                PayloadGenerator.SECONDARY_PAYLOAD_BIN,
+                PayloadGenerator.SECONDARY_PAYLOAD_PROPERTIES_TXT):
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
           continue
         self.assertEqual(zipfile.ZIP_STORED, entry_info.compress_type)

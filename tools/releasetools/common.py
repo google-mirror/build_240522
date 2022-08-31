@@ -53,10 +53,6 @@ class Options(object):
     self.public_key_suffix = ".x509.pem"
     self.private_key_suffix = ".pk8"
     # use otatools built boot_signer by default
-    self.boot_signer_path = "boot_signer"
-    self.boot_signer_args = []
-    self.verity_signer_path = None
-    self.verity_signer_args = []
     self.verbose = False
     self.tempfiles = []
     self.device_specific = None
@@ -469,6 +465,7 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
   p.communicate()
   assert p.returncode == 0, "mkbootimg of %s image failed" % (partition_name,)
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   if (info_dict.get("boot_signer", None) == "true" and
       info_dict.get("verity_key", None)):
     # Hard-code the path as "/boot" for two-step special recovery image (which
@@ -485,9 +482,32 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     p = Run(cmd, stdout=subprocess.PIPE)
     p.communicate()
     assert p.returncode == 0, "boot_signer of %s image failed" % path
+=======
+    # Certify GKI images.
+    boot_signature_bytes = b''
+    boot_signature_bytes += _GenerateGkiCertificate(img.name, "boot")
+    boot_signature_bytes += _GenerateGkiCertificate(
+        kernel_path, "generic_kernel")
+
+    BOOT_SIGNATURE_SIZE = 16 * 1024
+    if len(boot_signature_bytes) > BOOT_SIGNATURE_SIZE:
+      raise ValueError(
+          f"GKI boot_signature size must be <= {BOOT_SIGNATURE_SIZE}")
+    boot_signature_bytes += (
+        b'\0' * (BOOT_SIGNATURE_SIZE - len(boot_signature_bytes)))
+    assert len(boot_signature_bytes) == BOOT_SIGNATURE_SIZE
+
+    with open(img.name, 'ab') as f:
+      f.write(boot_signature_bytes)
+
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
   # Sign the image if vboot is non-empty.
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   elif info_dict.get("vboot", None):
+=======
+  if info_dict.get("vboot"):
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
     path = "/" + partition_name
     img_keyblock = tempfile.NamedTemporaryFile()
     # We have switched from the prebuilt futility binary to using the tool
@@ -614,6 +634,77 @@ def UnzipTemp(filename, pattern=None):
   return tmp
 
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
+=======
+def GetUserImage(which, tmpdir, input_zip,
+                 info_dict=None,
+                 allow_shared_blocks=None,
+                 reset_file_map=False):
+  """Returns an Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified image from the given path. If the specified
+  image is sparse, it also performs additional processing for OTA purpose. For
+  example, it always adds block 0 to clobbered blocks list. It also detects
+  files that cannot be reconstructed from the block list, for whom we should
+  avoid applying imgdiff.
+
+  Args:
+    which: The partition name.
+    tmpdir: The directory that contains the prebuilt image and block map file.
+    input_zip: The target-files ZIP archive.
+    info_dict: The dict to be looked up for relevant info.
+    allow_shared_blocks: If image is sparse, whether having shared blocks is
+        allowed. If none, it is looked up from info_dict.
+    reset_file_map: If true and image is sparse, reset file map before returning
+        the image.
+  Returns:
+    A Image object. If it is a sparse image and reset_file_map is False, the
+    image will have file_map info loaded.
+  """
+  if info_dict is None:
+    info_dict = LoadInfoDict(input_zip)
+
+  is_sparse = info_dict.get("extfs_sparse_flag")
+  if info_dict.get(which + "_disable_sparse"):
+    is_sparse = False
+
+  # When target uses 'BOARD_EXT4_SHARE_DUP_BLOCKS := true', images may contain
+  # shared blocks (i.e. some blocks will show up in multiple files' block
+  # list). We can only allocate such shared blocks to the first "owner", and
+  # disable imgdiff for all later occurrences.
+  if allow_shared_blocks is None:
+    allow_shared_blocks = info_dict.get("ext4_share_dup_blocks") == "true"
+
+  if is_sparse:
+    img = GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks)
+    if reset_file_map:
+      img.ResetFileMap()
+    return img
+  return GetNonSparseImage(which, tmpdir)
+
+
+def GetNonSparseImage(which, tmpdir):
+  """Returns a Image object suitable for passing to BlockImageDiff.
+
+  This function loads the specified non-sparse image from the given path.
+
+  Args:
+    which: The partition name.
+    tmpdir: The directory that contains the prebuilt image and block map file.
+  Returns:
+    A Image object.
+  """
+  path = os.path.join(tmpdir, "IMAGES", which + ".img")
+  mappath = os.path.join(tmpdir, "IMAGES", which + ".map")
+
+  # The image and map files must have been created prior to calling
+  # ota_from_target_files.py (since LMP).
+  assert os.path.exists(path) and os.path.exists(mappath)
+
+  return images.FileImage(path)
+
+
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks):
   """Returns a SparseImage object suitable for passing to BlockImageDiff.
 
@@ -627,7 +718,10 @@ def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks):
     tmpdir: The directory that contains the prebuilt image and block map file.
     input_zip: The target-files ZIP archive.
     allow_shared_blocks: Whether having shared blocks is allowed.
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 
+=======
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
   Returns:
     A SparseImage object, with file_map info loaded.
   """
@@ -645,8 +739,13 @@ def GetSparseImage(which, tmpdir, input_zip, allow_shared_blocks):
   # unconditionally. Note that they are still part of care_map. (Bug: 20939131)
   clobbered_blocks = "0"
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   image = sparse_img.SparseImage(path, mappath, clobbered_blocks,
                                  allow_shared_blocks=allow_shared_blocks)
+=======
+  image = sparse_img.SparseImage(
+      path, mappath, clobbered_blocks, allow_shared_blocks=allow_shared_blocks)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
   # block.map may contain less blocks, because mke2fs may skip allocating blocks
   # if they contain all zeros. We can't reconstruct such a file from its block
@@ -1010,13 +1109,13 @@ def ParseOptions(argv,
     elif o in ("--private_key_suffix",):
       OPTIONS.private_key_suffix = a
     elif o in ("--boot_signer_path",):
-      OPTIONS.boot_signer_path = a
+      raise ValueError("--boot_signer_path is no longer supported, please switch to AVB")
     elif o in ("--boot_signer_args",):
-      OPTIONS.boot_signer_args = shlex.split(a)
+      raise ValueError("--boot_signer_args is no longer supported, please switch to AVB")
     elif o in ("--verity_signer_path",):
-      OPTIONS.verity_signer_path = a
+      raise ValueError("--verity_signer_path is no longer supported, please switch to AVB")
     elif o in ("--verity_signer_args",):
-      OPTIONS.verity_signer_args = shlex.split(a)
+      raise ValueError("--verity_signer_args is no longer supported, please switch to AVB")
     elif o in ("-s", "--device_specific"):
       OPTIONS.device_specific = a
     elif o in ("-x", "--extra"):

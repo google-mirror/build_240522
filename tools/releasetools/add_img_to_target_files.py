@@ -68,8 +68,6 @@ OPTIONS = common.OPTIONS
 OPTIONS.add_missing = False
 OPTIONS.rebuild_recovery = False
 OPTIONS.replace_updated_files_list = []
-OPTIONS.replace_verity_public_key = False
-OPTIONS.replace_verity_private_key = False
 OPTIONS.is_signing = False
 
 
@@ -288,8 +286,7 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   # given image. When avb is enabled, this size is the max image size returned
   # by the avb tool.
   is_verity_partition = "verity_block_device" in image_props
-  verity_supported = (image_props.get("verity") == "true" or
-                      image_props.get("avb_enable") == "true")
+  verity_supported = (image_props.get("avb_enable") == "true")
   is_avb_enable = image_props.get("avb_hashtree_enable") == "true"
   if verity_supported and (is_verity_partition or is_avb_enable):
     adjusted_blocks_value = image_props.get("partition_size")
@@ -793,9 +790,11 @@ def main(argv):
     elif o in ("-r", "--rebuild_recovery",):
       OPTIONS.rebuild_recovery = True
     elif o == "--replace_verity_private_key":
-      OPTIONS.replace_verity_private_key = (True, a)
+      raise ValueError("--replace_verity_private_key is no longer supported,"
+                       " please switch to AVB")
     elif o == "--replace_verity_public_key":
-      OPTIONS.replace_verity_public_key = (True, a)
+      raise ValueError("--replace_verity_public_key is no longer supported,"
+                       " please switch to AVB")
     elif o == "--is_signing":
       OPTIONS.is_signing = True
     else:

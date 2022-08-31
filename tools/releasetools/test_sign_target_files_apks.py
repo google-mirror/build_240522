@@ -24,7 +24,13 @@ import zipfile
 import common
 import test_utils
 from sign_target_files_apks import (
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
     EditTags, ReplaceCerts, ReplaceVerityKeyId, RewriteProps)
+=======
+    CheckApkAndApexKeysAvailable, EditTags, GetApkFileInfo, ReadApexKeysInfo,
+    ReplaceCerts, ReplaceGkiSigningKey, RewriteAvbProps, RewriteProps,
+    WriteOtacerts)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
 
 class SignTargetFilesApksTest(unittest.TestCase):
@@ -84,6 +90,7 @@ class SignTargetFilesApksTest(unittest.TestCase):
     self.assertEqual(RewriteProps('\n'.join([prop[0] for prop in props])),
                      ''.join([prop[1] for prop in props]))
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   def test_ReplaceVerityKeyId(self):
     BOOT_CMDLINE1 = (
         "console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 "
@@ -142,6 +149,8 @@ class SignTargetFilesApksTest(unittest.TestCase):
     with zipfile.ZipFile(output_file) as output_zip:
       self.assertEqual(BOOT_CMDLINE, output_zip.read('BOOT/cmdline'))
 
+=======
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
   def test_ReplaceCerts(self):
     cert1_path = os.path.join(self.testdata_dir, 'platform.x509.pem')
     with open(cert1_path) as cert1_fp:

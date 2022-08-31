@@ -102,8 +102,13 @@ class SparseImage(object):
         if data_sz != 0:
           raise ValueError("Don't care chunk input size is non-zero (%u)" %
                            (data_sz))
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
         else:
           pos += chunk_sz
+=======
+
+        pos += chunk_sz
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
       elif chunk_type == 0xCAC4:
         raise ValueError("CRC32 chunks are not supported")

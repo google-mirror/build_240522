@@ -1596,6 +1596,88 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    local T=$(gettop)
+    if [ -n "$T" ]; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local config_set=0
+        local bazel_args_with_config=""
+        for arg in $bazel_args; do
+            if [[ $arg == "--" && $config_set -ne 1 ]]; # if we find --, insert config argument here
+            then
+                bazel_args_with_config+="--config=bp2build -- "
+                config_set=1
+            else
+                bazel_args_with_config+="$arg "
+            fi
+        done
+        if [[ $config_set -ne 1 ]]; then
+            bazel_args_with_config+="--config=bp2build "
+        fi
+        eval "bazel $bazel_args_with_config"
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"
@@ -1658,4 +1740,66 @@ do
 done
 unset f
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
+=======
+    allowed_files=
+    [ -n "$allowed" ] && allowed_files=$(cat "$allowed")
+    for dir in device vendor product; do
+        for f in $(cd "$T" && test -d $dir && \
+            find -L $dir -maxdepth 4 -name 'vendorsetup.sh' 2>/dev/null | sort); do
+
+            if [[ -z "$allowed" || "$allowed_files" =~ $f ]]; then
+                echo "including $f"; . "$T/$f"
+            else
+                echo "ignoring $f, not in $allowed"
+            fi
+        done
+    done
+}
+
+function showcommands() {
+    local T=$(gettop)
+    if [[ -z "$TARGET_PRODUCT" ]]; then
+        >&2 echo "TARGET_PRODUCT not set. Run lunch."
+        return
+    fi
+    case $(uname -s) in
+        Darwin)
+            PREBUILT_NAME=darwin-x86
+            ;;
+        Linux)
+            PREBUILT_NAME=linux-x86
+            ;;
+        *)
+            >&2 echo Unknown host $(uname -s)
+            return
+            ;;
+    esac
+    if [[ -z "$OUT_DIR" ]]; then
+      if [[ -z "$OUT_DIR_COMMON_BASE" ]]; then
+        OUT_DIR=out
+      else
+        OUT_DIR=${OUT_DIR_COMMON_BASE}/${PWD##*/}
+      fi
+    fi
+    if [[ "$1" == "--regenerate" ]]; then
+      shift 1
+      NINJA_ARGS="-t commands $@" m
+    else
+      (cd $T && prebuilts/build-tools/$PREBUILT_NAME/bin/ninja \
+          -f $OUT_DIR/combined-${TARGET_PRODUCT}.ninja \
+          -t commands "$@")
+    fi
+}
+
+function avbtool() {
+    if [[ ! -f "$ANDROID_SOONG_HOST_OUT"/bin/avbtool ]]; then
+        m avbtool
+    fi
+    "$ANDROID_SOONG_HOST_OUT"/bin/avbtool $@
+}
+
+validate_current_shell
+source_vendorsetup
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 addcompletions

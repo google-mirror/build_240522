@@ -164,14 +164,24 @@ import multiprocessing
 import os.path
 import shlex
 import shutil
-import struct
 import subprocess
 import sys
 import tempfile
 import zipfile
 
 import common
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 import edify_generator
+=======
+import ota_utils
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PayloadGenerator, SECURITY_PATCH_LEVEL_PROP_NAME, StreamingPropertyFiles, AbOtaPropertyFiles)
+from common import IsSparseImage
+import target_files_diff
+from check_target_files_vintf import CheckVintfIfTrebleEnabled
+from non_ab_ota import GenerateNonAbOtaPackage
+from payload_signer import PayloadSigner
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -394,6 +404,7 @@ class PayloadSigner(object):
     return out_file
 
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 class Payload(object):
   """Manages the creation and the signing of an A/B OTA Payload."""
 
@@ -536,6 +547,8 @@ def SignOutput(temp_zip_name, output_zip_name):
                   whole_file=True)
 
 
+=======
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 def _LoadOemDicts(oem_source):
   """Returns the list of loaded OEM properties dict."""
   if not oem_source:
@@ -548,6 +561,7 @@ def _LoadOemDicts(oem_source):
   return oem_dicts
 
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
 def _WriteRecoveryImageToBoot(script, output_zip):
   """Find and write recovery image to /boot in two-step OTA.
 
@@ -1225,6 +1239,24 @@ class AbOtaPropertyFiles(StreamingPropertyFiles):
 
 class NonAbOtaPropertyFiles(PropertyFiles):
   """The property-files for non-A/B OTA.
+=======
+def ModifyVABCCompressionParam(content, algo):
+  """ Update update VABC Compression Param in dynamic_partitions_info.txt
+  Args:
+    content: The string content of dynamic_partitions_info.txt
+    algo: The compression algorithm should be used for VABC. See
+          https://cs.android.com/android/platform/superproject/+/master:system/core/fs_mgr/libsnapshot/cow_writer.cpp;l=127;bpv=1;bpt=1?q=CowWriter::ParseOptions&sq=
+  Returns:
+    Updated content of dynamic_partitions_info.txt , with custom compression algo
+  """
+  output_list = []
+  for line in content.splitlines():
+    if line.startswith("virtual_ab_compression_method="):
+      continue
+    output_list.append(line)
+  output_list.append("virtual_ab_compression_method="+algo)
+  return "\n".join(output_list)
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 
   For non-A/B OTA, the property-files string contains the info for METADATA
   entry, with which a system updater can be fetched the package metadata prior
@@ -1705,7 +1737,7 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
 
   # Generate payload.
-  payload = Payload()
+  payload = PayloadGenerator()
 
   # Enforce a max timestamp this payload can be applied on top of.
   if OPTIONS.downgrade:
@@ -1730,7 +1762,7 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     # building an incremental OTA. See the comments for "--include_secondary".
     secondary_target_file = GetTargetFilesZipForSecondaryImages(
         target_file, OPTIONS.skip_postinstall)
-    secondary_payload = Payload(secondary=True)
+    secondary_payload = PayloadGenerator(secondary=True)
     secondary_payload.Generate(secondary_target_file,
                                additional_args=additional_args)
     secondary_payload.Sign(payload_signer)
@@ -1738,6 +1770,7 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
 
   # If dm-verity is supported for the device, copy contents of care_map
   # into A/B OTA package.
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
   target_zip = zipfile.ZipFile(target_file, "r")
   if (target_info.get("verity") == "true" or
       target_info.get("avb_enable") == "true"):
@@ -1746,6 +1779,18 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     if care_map_path in namelist:
       care_map_data = target_zip.read(care_map_path)
       # In order to support streaming, care_map.txt needs to be packed as
+=======
+  target_zip = zipfile.ZipFile(target_file, "r", allowZip64=True)
+  if target_info.get("avb_enable") == "true":
+    care_map_list = [x for x in ["care_map.pb", "care_map.txt"] if
+                     "META/" + x in target_zip.namelist()]
+
+    # Adds care_map if either the protobuf format or the plain text one exists.
+    if care_map_list:
+      care_map_name = care_map_list[0]
+      care_map_data = target_zip.read("META/" + care_map_name)
+      # In order to support streaming, care_map needs to be packed as
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
       # ZIP_STORED.
       common.ZipWriteStr(output_zip, "care_map.txt", care_map_data,
                          compress_type=zipfile.ZIP_STORED)

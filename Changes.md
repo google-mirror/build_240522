@@ -97,6 +97,20 @@ is 26 or 27, you can add `"target-level"="1"` to your device manifest instead.
 Clang is the default and only supported Android compiler, so there is no reason
 for this option to exist.
 
+<<<<<<< HEAD   (10de0b Merge "Merge empty history for sparse-8997228-L0610000095613)
+=======
+### Stop using clang property
+
+Clang has been deleted from Soong. To fix any build errors, remove the clang
+property from affected Android.bp files using bpmodify.
+
+
+``` make
+go run bpmodify.go -w -m=module_name -remove-property=true -property=clang filepath
+```
+
+`BUILD_BROKEN_CLANG_PROPERTY` can be used as temporarily workaround
+>>>>>>> BRANCH (e3c9a4 Merge "Version bump to TKB1.220831.001.A1 [core/build_id.mk])
 ### Other envsetup.sh variables  {#other_envsetup_variables}
 
 * ANDROID_TOOLCHAIN
