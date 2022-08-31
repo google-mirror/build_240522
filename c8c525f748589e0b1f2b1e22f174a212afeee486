@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca42b0c_e4407586",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1211,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-31T07:04:50Z",
+      "side": 1,
+      "message": "We first try adding \".vendor\" prefix above (Line 1170~1179). Doesn\u0027t this conflict with that?",
+      "range": {
+        "startLine": 1205,
+        "startChar": 0,
+        "endLine": 1211,
+        "endChar": 0
+      },
+      "revId": "c8c525f748589e0b1f2b1e22f174a212afeee486",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
