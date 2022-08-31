@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e57ca4e4_afc22ff7",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2022-08-31T20:43:00Z",
+      "side": 1,
+      "message": "what\u0027s `-o nospace` for?",
+      "revId": "5b9696e0d9a7bfc47355cab5e88ea45175e9c865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
