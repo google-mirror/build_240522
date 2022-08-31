@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05bf4e2_c7e18552",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2022-08-31T22:42:10Z",
+      "side": 1,
+      "message": "We should bundle the module, not the binary, right?\n\n`com.android.rkpd`",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 8
+      },
+      "revId": "2a8ffc0bfce9e3a52cdbb6ef5d5cd7a164cd5e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
