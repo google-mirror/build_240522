@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efc6506d_c3eb1fd5",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-08-31T22:35:49Z",
+      "side": 1,
+      "message": "IIUC, we are creating variants of a library for each consuming API domain. Should this be per API surface instead?\n\nOr put differently, do the set of symbols in `libc.apiimport.product` and `libc.apiimport.vendor` differ? I thought both of them point to the \u003cllndk/name_tbd\u003e API surface",
+      "range": {
+        "startLine": 1199,
+        "startChar": 36,
+        "endLine": 1199,
+        "endChar": 43
+      },
+      "revId": "c8c525f748589e0b1f2b1e22f174a212afeee486",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ca42b0c_e4407586",
         "filename": "core/binary.mk",
         "patchSetId": 1
