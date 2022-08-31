@@ -4971,7 +4971,7 @@ INTERNAL_OTATOOLS_MODULES := \
   secilc \
   sefcontext_compile \
   sgdisk \
-  shflags \
+  shflags_lib \
   sign_apex \
   sign_target_files_apks \
   sign_virt_apex \
