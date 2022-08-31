@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4298eeb3_0fea4a20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-31T17:11:03Z",
+      "side": 1,
+      "message": "Why does bazel need to know about `LOCAL_STATIC_JAVA_LIBRARIES`?  The classes are already in the output jar of the module.\n\n`LOCAL_JAVA_LIBRARIES` is a bigger problem.  Similarly to `required`, there isn\u0027t enough information on meaning of `LOCAL_JAVA_LIBRARIES` for the build to know what to do with them.  Sometimes they are just annotation classes that are only needed at build time.  Sometimes they are references to modules that are already on the bootclasspath and shouldn\u0027t be packaged with the test.  Sometimes they are to make classes from another module available at compile time, but at runtime they will be loaded from some 3rd module that is already available.  And sometimes they really are classes that have to be packaged with the test.\n\nAlso, git commit messages should be wrapped at 70 columns.",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
