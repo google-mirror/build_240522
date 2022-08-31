@@ -126,6 +126,7 @@ PRODUCT_PACKAGES += \
     ip-up-vpn \
     javax.obex \
     keystore2 \
+    rkpd \
     credstore \
     ld.mc \
     libaaudio \
