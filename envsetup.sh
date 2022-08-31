@@ -398,6 +398,7 @@ function addcompletions()
       packages/modules/adb/adb.bash
       system/core/fastboot/fastboot.bash
       tools/asuite/asuite.sh
+      prebuilts/bazel/common/bazel-complete.bash
     )
     # Completion can be disabled selectively to allow users to use non-standard completion.
     # e.g.
@@ -427,6 +428,8 @@ function addcompletions()
     complete -F _complete_android_module_names outmod
     complete -F _complete_android_module_names installmod
     complete -F _complete_android_module_names m
+
+    complete -F _bazel__complete -o nospace b
 }
 
 function multitree_lunch_help()
