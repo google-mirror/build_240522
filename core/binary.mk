@@ -1187,6 +1187,29 @@ ifeq ($(LOCAL_USE_VNDK),)
     $(if $(filter $(l),$(VENDOR_PUBLIC_LIBRARIES)),$(l).vendorpublic,$(l)))
 endif
 
+###################################################################
+## When compiling against API imported module, use API import stub
+## libraries.
+##################################################################
+
+apiimport_postfix := .apiimport
+
+ifneq ($(LOCAL_USE_VNDK),)
+  ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+    apiimport_postfix := .apiimport.product
+  else
+    apiimport_postfix := .apiimport.vendor
+  endif
+endif
+
+my_shared_libraries := $(foreach l,$(my_shared_libraries), \
+ $(if $(filter $(l), $(API_IMPORTED_SHARED_LIBRARIES)), $(l)$(apiimport_postfix), $(l)))
+my_system_shared_libraries := $(foreach l,$(my_system_shared_libraries), \
+ $(if $(filter $(l), $(API_IMPORTED_SHARED_LIBRARIES)), $(l)$(apiimport_postfix), $(l)))
+my_header_libraries := $(foreach l,$(my_header_libraries), \
+ $(if $(filter $(l), $(API_IMPORTED_HEADER_LIBRARIES)), $(l)$(apiimport_postfix), $(l)))
+
+
 ###########################################################
 ## When compiling against the NDK, use SDK variants of Soong libraries
 ###########################################################
