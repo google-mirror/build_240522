@@ -70,6 +70,24 @@
       "parentUuid": "a549dc50_346feb3e",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f9b471_9542e688",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-09-01T16:28:12Z",
+      "side": 1,
+      "message": "GtsArtManagerHostTestCases is an example(internal branch), it declares xts-host-util in LOCAL_JAVA_LIBRARIES.",
+      "parentUuid": "54933d03_430c3c7d",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
