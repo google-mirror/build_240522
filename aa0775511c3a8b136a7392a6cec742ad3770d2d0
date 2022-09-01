@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22be3028_66feeeb8",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-09-01T17:25:25Z",
+      "side": 1,
+      "message": "Considering presubmit passed despite the \"scritps\" misspelling I would say no. I guess we should add it.\n\nWe should also make sure that whatever CI we add runs this in both bash and zsh.",
+      "parentUuid": "1eab5603_5e15f350",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9312ea88_b5d78bfd",
         "filename": "tests/envsetup_tests.sh",
         "patchSetId": 3
