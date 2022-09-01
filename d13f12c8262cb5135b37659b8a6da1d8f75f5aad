@@ -88,6 +88,24 @@
       "parentUuid": "54933d03_430c3c7d",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a83330b_adebc353",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-01T17:29:03Z",
+      "side": 1,
+      "message": "What happens if you don\u0027t propagate that dependency?  I don\u0027t see anything in the AndroidTest.xml file that would make classes from that jar available at runtime, so how is the test working outside of bazel?  Is it because the test infrastructure is putting `out/host/linux-x86/framework/*.jar` in the classpath?\n\nYou can see the problem with `LOCAL_JAVA_LIBRARIES` in that module.  There are lots of dependencies there, including `tradefed`, that are already provided at runtime, and packaging a duplicate copy might cause other problems.\n\nOne option would be moving `xts-host-util` into `LOCAL_STATIC_JAVA_LIBRARIES` so that it is packaged with the test.",
+      "parentUuid": "54933d03_430c3c7d",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
