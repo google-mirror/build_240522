@@ -52,6 +52,24 @@
       "parentUuid": "b11861f6_e387e161",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54933d03_430c3c7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-01T15:54:21Z",
+      "side": 1,
+      "message": "We generally don\u0027t support transitive dependencies of static libraries in Make and Soong, so it would be reasonable (although unfortunate) to require transitive runtime dependencies to be repeated on the top level module.\n\nDo you have a concrete example of the tests that use LOCAL_JAVA_LIBRARIES that you are trying to support?",
+      "parentUuid": "a549dc50_346feb3e",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
