@@ -16,6 +16,24 @@
       "message": "Maybe it would be good to have a test suite for this since it seems like it\u0027s hard to land a good way to do everything.\n\nI originally added the `eval` because I was getting errors like\n```\nCommand \u0027build \u0027 not found. Try \u0027bazel help\u0027.\n```\n\nAnd indeed after trying again, I still get that error: (most recently)\n```\nCommand \u0027build //system/tools/aidl/build/tests_bp2build:example-aidl-test  --config\u003dbp2build \u0027 not found. Try \u0027bazel help\u0027.\n```",
       "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d716c6b_46d32218",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-01T13:23:15Z",
+      "side": 1,
+      "message": "Agree on the test suite, this is more fragile than I\u0027d be ok with.\n\nI can\u0027t reproduce that -- is it an issue with zsh?",
+      "parentUuid": "7e7bdd73_fdbdc851",
+      "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
