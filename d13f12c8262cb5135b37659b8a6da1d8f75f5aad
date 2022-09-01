@@ -34,6 +34,24 @@
       "parentUuid": "4298eeb3_0fea4a20",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a549dc50_346feb3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-09-01T07:12:32Z",
+      "side": 1,
+      "message": "Fixed the commit message. Thanks",
+      "parentUuid": "b11861f6_e387e161",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
