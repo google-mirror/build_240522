@@ -35,3 +35,11 @@ check_lunch "-userdebug-"                               "" "" ""
 check_lunch "-userdebug-$valid_version"                 "" "" ""
 check_lunch "aosp_arm64-userdebug-$valid_version-"      "" "" ""
 check_lunch "aosp_arm64-userdebug-$valid_version-abc"   "" "" ""
+
+# b tests
+test_target=//build/bazel/scritps/difftool:difftool
+b cquery 'kind(test, //build/bazel/...)'
+b build "$test_target"
+b build "$test_target" --run-soong-tests
+b build --run-soong-tests "$test_target"
+b --run-soong-tests build "$test_target"
