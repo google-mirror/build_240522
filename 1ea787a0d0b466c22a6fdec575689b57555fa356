@@ -52,6 +52,24 @@
       "parentUuid": "9d716c6b_46d32218",
       "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5098b3b6_2eaa69da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-01T13:32:42Z",
+      "side": 1,
+      "message": "Can we submit this first to fix the general bash case, and you can follow up with a conditional to handle zsh cases (similar to the autocomplete issue)?",
+      "parentUuid": "c77d9e5e_a8a56674",
+      "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
