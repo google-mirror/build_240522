@@ -3997,3 +3997,29 @@ define use_soong_sdk_libraries
   $(foreach l,$(1),$(if $(filter $(l),$(SOONG_SDK_VARIANT_MODULES)),\
       $(l).sdk,$(l)))
 endef
+
+###########################################################
+## Get the API domain of the partition
+##
+## $(1): Partition tag (e.g. _SYSTEM_EXT, _PRODUCT)
+###########################################################
+define get-api-domain
+$(firstword $(call substlist,RAMDISK ODM VENDOR,vendor,$(call substlist,RECOVERY,recovery,$(call substlist,PRODUCT,product,$(call substlist,SYSTEM_EXT SYSTEM,system,$(patsubst _%,%,$(1)))))))
+endef
+
+###########################################################
+## Find and substitute any occurrence of the word.
+## Example:
+##
+##  a := foo bar baz
+##  b := file
+##  c := bar
+##  substlist a, b, c -> file
+##
+## $(1): whitespace separated words to search for an occurrence
+## $(2): word to be substituted to
+## $(3): word to be searched and substituted from
+###########################################################
+define substlist
+$(if $(findstring $(3), $(1)), $(2), $(3))
+endef
