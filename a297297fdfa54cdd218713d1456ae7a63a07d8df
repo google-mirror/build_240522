@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8823778_251861f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2022-09-01T12:44:49Z",
+      "side": 1,
+      "message": "I\u0027ve moved the autocompletion into a non-zsh stanza for now. PTAL",
+      "revId": "a297297fdfa54cdd218713d1456ae7a63a07d8df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
