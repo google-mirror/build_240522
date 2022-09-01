@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eab5603_5e15f350",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-01T14:07:33Z",
+      "side": 1,
+      "message": "Does this test run on CI? If so, where?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9312ea88_b5d78bfd",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-01T14:07:33Z",
+      "side": 1,
+      "message": "scripts?",
+      "range": {
+        "startLine": 41,
+        "startChar": 26,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f44bed0_65f9e283",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-01T14:07:33Z",
+      "side": 1,
+      "message": "a few more: \n\n- b run $test_target\n- b run $test_target -- --args\n- b cquery --output\u003dbuild \u0027kind(test, //build/bazel/...)\u0027\n- b cquery \u0027kind(test, //build/bazel/...)\u0027 --output\u003dbuild",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
