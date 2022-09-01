@@ -34,6 +34,24 @@
       "parentUuid": "7e7bdd73_fdbdc851",
       "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77d9e5e_a8a56674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-01T13:27:12Z",
+      "side": 1,
+      "message": "Looks like it is. The same command works in `bash` for me.\n\naside: moving to `bash` would be sad 😢:\nhttps://screenshot.googleplex.com/5NeCHAoKpHPFWfp\nhttps://screenshot.googleplex.com/69AZBQKqNmWGimF",
+      "parentUuid": "9d716c6b_46d32218",
+      "revId": "1ea787a0d0b466c22a6fdec575689b57555fa356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
