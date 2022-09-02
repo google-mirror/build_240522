@@ -106,6 +106,24 @@
       "parentUuid": "54933d03_430c3c7d",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f3ea0d_c002b95c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1890551
+      },
+      "writtenOn": "2022-09-02T02:38:11Z",
+      "side": 1,
+      "message": "`xts-host-util` is required because the `InstallDexMetadataHostTest.java`(src of `GtsArtManagerHostTestCases`) imports `GmsUtil` class that is in `xts-host-util`.\n\nDeclaring every dependencies explicitly including `tradefed` is the the correct thing that Bazel wants users to do. The reason we provide `tradefed` by default is that it\u0027s hard to add `tradefed` for every test module, but we still want users to declare it explicitly.\n\n`GtsArtManagerHostTestCases` and `xts-host-util` is just an example, there are many other tests and dependencies. We can\u0027t distinguish and verify them one by one, since that will block the whole project progress. Otherwise, we need to add all dependencies declared in `LOCAL_JAVA_LIBRARIES` into `LOCAL_STATIC_JAVA_LIBRARIES`, but this will significantly increase the package size. I think it\u0027s not worth. WDYT?",
+      "parentUuid": "2a83330b_adebc353",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
