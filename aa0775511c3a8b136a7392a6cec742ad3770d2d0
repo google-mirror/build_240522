@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67358c9_296336f4",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-02T21:21:57Z",
+      "side": 1,
+      "message": "Well just noticed that this file hasn\u0027t been updated since 2017, but no it\u0027s not on CI yet. Not sure that we want the lunch tests on CI, but I opened [a CL to run `envsetup_tests.sh`](cl/471884041). We could disable the lunch tests if we decide we don\u0027t want them.",
+      "parentUuid": "22be3028_66feeeb8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9312ea88_b5d78bfd",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46d4d81_c1b40128",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-02T21:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9312ea88_b5d78bfd",
+      "range": {
+        "startLine": 41,
+        "startChar": 26,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f44bed0_65f9e283",
@@ -84,6 +132,30 @@
       "writtenOn": "2022-09-01T14:07:33Z",
       "side": 1,
       "message": "a few more: \n\n- b run $test_target\n- b run $test_target -- --args\n- b cquery --output\u003dbuild \u0027kind(test, //build/bazel/...)\u0027\n- b cquery \u0027kind(test, //build/bazel/...)\u0027 --output\u003dbuild",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "aa0775511c3a8b136a7392a6cec742ad3770d2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4738d2_6ea1b1ec",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-02T21:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44bed0_65f9e283",
       "range": {
         "startLine": 47,
         "startChar": 1,
