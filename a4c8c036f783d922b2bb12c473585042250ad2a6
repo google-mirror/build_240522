@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33aa4f42_6f016c89",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-09-02T21:37:08Z",
+      "side": 1,
+      "message": "Move this to the top of the script, and remove the `set -e` at the end",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a915333d_82460af7",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-09-02T21:37:08Z",
+      "side": 1,
+      "message": "I would just remove all the extra features we added to b recently that don\u0027t work in ZSH. Or fix them for zsh.",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
