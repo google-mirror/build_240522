@@ -39,6 +39,30 @@
       },
       "revId": "e4c74c5eefe0b14d03812bf64a49d38ff59a4413",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a366069b_1602595f",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1852,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-02T19:19:19Z",
+      "side": 1,
+      "message": "Woops. For posterity, fixed in aosp/2200644",
+      "parentUuid": "2bdbe3ed_4b19b523",
+      "range": {
+        "startLine": 1852,
+        "startChar": 41,
+        "endLine": 1852,
+        "endChar": 42
+      },
+      "revId": "e4c74c5eefe0b14d03812bf64a49d38ff59a4413",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
