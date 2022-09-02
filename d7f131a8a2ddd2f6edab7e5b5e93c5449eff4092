@@ -16,6 +16,24 @@
       "message": "This said PPR1 previously, but that version no longer works.\n\nAt time of writing `default_version` is also UP1a, so I can change this to another version if there is a better one.",
       "revId": "d7f131a8a2ddd2f6edab7e5b5e93c5449eff4092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "729e7741_8df69366",
+        "filename": "tests/lunch_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-09-02T21:32:32Z",
+      "side": 1,
+      "message": "This is probably going to break the test every android release, right? I\u0027d vote for removing valid_version and only using default_version.",
+      "parentUuid": "cb60411a_ff8cf934",
+      "revId": "d7f131a8a2ddd2f6edab7e5b5e93c5449eff4092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
