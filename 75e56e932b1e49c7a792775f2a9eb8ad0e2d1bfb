@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a1ce82_f3c65233",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-05T17:47:52Z",
+      "side": 1,
+      "message": "ResolveAVBSigningPathArgs",
+      "range": {
+        "startLine": 1352,
+        "startChar": 4,
+        "endLine": 1352,
+        "endChar": 30
+      },
+      "revId": "75e56e932b1e49c7a792775f2a9eb8ad0e2d1bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e76874b_02dc541a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-05T17:47:52Z",
+      "side": 1,
+      "message": "Resolve",
+      "range": {
+        "startLine": 1353,
+        "startChar": 6,
+        "endLine": 1353,
+        "endChar": 15
+      },
+      "revId": "75e56e932b1e49c7a792775f2a9eb8ad0e2d1bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8dc3d9_d3964a29",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-05T17:47:52Z",
+      "side": 1,
+      "message": "space after #",
+      "range": {
+        "startLine": 1355,
+        "startChar": 3,
+        "endLine": 1355,
+        "endChar": 4
+      },
+      "revId": "75e56e932b1e49c7a792775f2a9eb8ad0e2d1bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728d9f94_47cb658c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-05T17:47:52Z",
+      "side": 1,
+      "message": "space after #",
+      "range": {
+        "startLine": 1356,
+        "startChar": 3,
+        "endLine": 1356,
+        "endChar": 4
+      },
+      "revId": "75e56e932b1e49c7a792775f2a9eb8ad0e2d1bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c63ebe_52af4212",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-05T17:47:52Z",
+      "side": 1,
+      "message": "space after #",
+      "range": {
+        "startLine": 1357,
+        "startChar": 3,
+        "endLine": 1357,
+        "endChar": 4
+      },
+      "revId": "75e56e932b1e49c7a792775f2a9eb8ad0e2d1bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
