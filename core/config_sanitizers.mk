@@ -116,6 +116,7 @@ ifeq ($(strip $(ENABLE_CFI)),false)
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
 # Disable CFI for arm32 (b/35157333).
 ifneq ($(filter arm,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
@@ -123,15 +124,28 @@ ifneq ($(filter arm,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
 endif
 
 # Also disable CFI if ASAN is enabled.
+=======
+# Also disable CFI and MTE if ASAN is enabled.
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 ifneq ($(filter address,$(my_sanitize)),)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
 endif
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
 # CFI needs gold linker, and mips toolchain does not have one.
 ifneq ($(filter mips mips64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
   my_sanitize := $(filter-out cfi,$(my_sanitize))
   my_sanitize_diag := $(filter-out cfi,$(my_sanitize_diag))
+=======
+# Disable memtag for host targets. Host executables in AndroidMk files are
+# deprecated, but some partners still have them floating around.
+ifdef LOCAL_IS_HOST_MODULE
+  my_sanitize := $(filter-out memtag_heap memtag_stack,$(my_sanitize))
+  my_sanitize_diag := $(filter-out memtag_heap memtag_stack,$(my_sanitize_diag))
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 endif
 
 # Disable CFI for host targets
@@ -160,6 +174,56 @@ ifneq ($(my_nosanitize),)
   my_sanitize := $(filter-out $(my_nosanitize),$(my_sanitize))
 endif
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+ifneq ($(filter arm x86 x86_64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)
+  my_sanitize := $(filter-out hwaddress,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
+endif
+
+ifneq ($(filter hwaddress,$(my_sanitize)),)
+  my_sanitize := $(filter-out address,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
+  my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
+  my_sanitize := $(filter-out thread,$(my_sanitize))
+  my_sanitize := $(filter-out cfi,$(my_sanitize))
+endif
+
+ifneq ($(filter hwaddress,$(my_sanitize)),)
+  my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)HWADDRESS_SANITIZER_RUNTIME_LIBRARY)
+  ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
+    ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
+      my_static_libraries := $(my_static_libraries) \
+                             $($(LOCAL_2ND_ARCH_VAR_PREFIX)HWADDRESS_SANITIZER_STATIC_LIBRARY) \
+                             libdl
+    endif
+  endif
+endif
+
+ifneq ($(filter memtag_heap memtag_stack,$(my_sanitize)),)
+  ifneq ($(filter memtag_heap,$(my_sanitize_diag)),)
+    my_cflags += -fsanitize-memtag-mode=sync
+    my_sanitize_diag := $(filter-out memtag_heap,$(my_sanitize_diag))
+  else
+    my_cflags += -fsanitize-memtag-mode=async
+  endif
+endif
+
+ifneq ($(filter memtag_heap,$(my_sanitize)),)
+  my_cflags += -fsanitize=memtag-heap
+  my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
+endif
+
+ifneq ($(filter memtag_stack,$(my_sanitize)),)
+  my_cflags += -fsanitize=memtag-stack
+  my_cflags += -march=armv8a+memtag
+  my_ldflags += -march=armv8a+memtag
+  my_asflags += -march=armv8a+memtag
+  my_sanitize := $(filter-out memtag_stack,$(my_sanitize))
+endif
+
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 # TSAN is not supported on 32-bit architectures. For non-multilib cases, make
 # its use an error. For multilib cases, don't use it for the 32-bit case.
 ifneq ($(filter thread,$(my_sanitize)),)

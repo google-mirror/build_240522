@@ -350,13 +350,42 @@ function addcompletions()
         return
     fi
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
     dir="sdk/bash_completion"
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do
             echo "including $f"
+=======
+    local completion_files=(
+      packages/modules/adb/adb.bash
+      system/core/fastboot/fastboot.bash
+      tools/asuite/asuite.sh
+      prebuilts/bazel/common/bazel-complete.bash
+    )
+    # Completion can be disabled selectively to allow users to use non-standard completion.
+    # e.g.
+    # ENVSETUP_NO_COMPLETION=adb # -> disable adb completion
+    # ENVSETUP_NO_COMPLETION=adb:bit # -> disable adb and bit completion
+    local T=$(gettop)
+    for f in ${completion_files[*]}; do
+        f="$T/$f"
+        if [ ! -f "$f" ]; then
+          echo "Warning: completion file $f not found"
+        elif should_add_completion "$f"; then
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
             . $f
         done
     fi
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+    if [ -z "$ZSH_VERSION" ]; then
+        # Doesn't work in zsh.
+        complete -o nospace -F _croot croot
+        # TODO(b/244559459): Support b autocompletion for zsh
+        complete -F _bazel__complete -o nospace b
+    fi
+    complete -F _lunch lunch
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 
     complete -C "bit --tab" bit
 }
@@ -1596,6 +1625,88 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    local T=$(gettop)
+    if [ -n "$T" ]; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build $skip_tests USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local config_set=0
+        local bazel_args_with_config=""
+        for arg in $bazel_args; do
+            if [[ $arg == "--" && $config_set -ne 1 ]]; # if we find --, insert config argument here
+            then
+                bazel_args_with_config+="--config=bp2build -- "
+                config_set=1
+            else
+                bazel_args_with_config+="$arg "
+            fi
+        done
+        if [[ $config_set -ne 1 ]]; then
+            bazel_args_with_config+="--config=bp2build "
+        fi
+        bazel $bazel_args_with_config
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"

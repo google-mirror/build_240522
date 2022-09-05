@@ -156,6 +156,54 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       ones. Should only be used if caller knows it's safe to do so (e.g. all the
       postinstall work is to dexopt apps and a data wipe will happen immediately
       after). Only meaningful when generating A/B OTAs.
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+
+  --partial "<PARTITION> [<PARTITION>[...]]"
+      Generate partial updates, overriding ab_partitions list with the given
+      list.
+
+  --custom_image <custom_partition=custom_image>
+      Use the specified custom_image to update custom_partition when generating
+      an A/B OTA package. e.g. "--custom_image oem=oem.img --custom_image
+      cus=cus_test.img"
+
+  --disable_vabc
+      Disable Virtual A/B Compression, for builds that have compression enabled
+      by default.
+
+  --vabc_downgrade
+      Don't disable Virtual A/B Compression for downgrading OTAs.
+      For VABC downgrades, we must finish merging before doing data wipe, and
+      since data wipe is required for downgrading OTA, this might cause long
+      wait time in recovery.
+
+  --enable_vabc_xor
+      Enable the VABC xor feature. Will reduce space requirements for OTA
+
+  --force_minor_version
+      Override the update_engine minor version for delta generation.
+
+  --compressor_types
+      A colon ':' separated list of compressors. Allowed values are bz2 and brotli.
+
+  --enable_zucchini
+      Whether to enable to zucchini feature. Will generate smaller OTA but uses more memory.
+
+  --enable_lz4diff
+      Whether to enable lz4diff feature. Will generate smaller OTA for EROFS but
+      uses more memory.
+
+  --spl_downgrade
+      Force generate an SPL downgrade OTA. Only needed if target build has an
+      older SPL.
+
+  --vabc_compression_param
+      Compression algorithm to be used for VABC. Available options: gz, brotli, none
+
+  --security_patch_level
+      Override the security patch level in target files
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 """
 
 from __future__ import print_function
@@ -207,6 +255,24 @@ OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
 OPTIONS.skip_postinstall = False
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+OPTIONS.skip_compatibility_check = False
+OPTIONS.disable_fec_computation = False
+OPTIONS.disable_verity_computation = False
+OPTIONS.partial = None
+OPTIONS.custom_images = {}
+OPTIONS.disable_vabc = False
+OPTIONS.spl_downgrade = False
+OPTIONS.vabc_downgrade = False
+OPTIONS.enable_vabc_xor = True
+OPTIONS.force_minor_version = None
+OPTIONS.compressor_types = None
+OPTIONS.enable_zucchini = True
+OPTIONS.enable_lz4diff = False
+OPTIONS.vabc_compression_param = None
+OPTIONS.security_patch_level = None
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 
 
 METADATA_NAME = 'META-INF/com/android/metadata'
@@ -1714,7 +1780,65 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
     max_timestamp = metadata["post-timestamp"]
   additional_args = ["--max_timestamp", max_timestamp]
 
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
   payload.Generate(target_file, source_file, additional_args)
+=======
+  if not ota_utils.IsZucchiniCompatible(source_file, target_file):
+    logger.warning(
+        "Builds doesn't support zucchini, or source/target don't have compatible zucchini versions. Disabling zucchini.")
+    OPTIONS.enable_zucchini = False
+
+  security_patch_level = target_info.GetBuildProp(
+      "ro.build.version.security_patch")
+  if OPTIONS.security_patch_level is not None:
+    security_patch_level = OPTIONS.security_patch_level
+
+  additional_args += ["--security_patch_level", security_patch_level]
+
+  additional_args += ["--enable_zucchini",
+                      str(OPTIONS.enable_zucchini).lower()]
+
+  if not ota_utils.IsLz4diffCompatible(source_file, target_file):
+    logger.warning(
+        "Source build doesn't support lz4diff, or source/target don't have compatible lz4diff versions. Disabling lz4diff.")
+    OPTIONS.enable_lz4diff = False
+
+  additional_args += ["--enable_lz4diff",
+                      str(OPTIONS.enable_lz4diff).lower()]
+
+  if source_file and OPTIONS.enable_lz4diff:
+    input_tmp = common.UnzipTemp(source_file, ["META/liblz4.so"])
+    liblz4_path = os.path.join(input_tmp, "META", "liblz4.so")
+    assert os.path.exists(
+        liblz4_path), "liblz4.so not found in META/ dir of target file {}".format(liblz4_path)
+    logger.info("Enabling lz4diff %s", liblz4_path)
+    additional_args += ["--liblz4_path", liblz4_path]
+    erofs_compression_param = OPTIONS.target_info_dict.get(
+        "erofs_default_compressor")
+    assert erofs_compression_param is not None, "'erofs_default_compressor' not found in META/misc_info.txt of target build. This is required to enable lz4diff."
+    additional_args += ["--erofs_compression_param", erofs_compression_param]
+
+  if OPTIONS.disable_vabc:
+    additional_args += ["--disable_vabc", "true"]
+  if OPTIONS.enable_vabc_xor:
+    additional_args += ["--enable_vabc_xor", "true"]
+  if OPTIONS.force_minor_version:
+    additional_args += ["--force_minor_version", OPTIONS.force_minor_version]
+  if OPTIONS.compressor_types:
+    additional_args += ["--compressor_types", OPTIONS.compressor_types]
+  additional_args += ["--max_timestamp", max_timestamp]
+
+  if SupportsMainlineGkiUpdates(source_file):
+    logger.warning(
+        "Detected build with mainline GKI, include full boot image.")
+    additional_args.extend(["--full_boot", "true"])
+
+  payload.Generate(
+      target_file,
+      source_file,
+      additional_args + partition_timestamps_flags
+  )
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
 
   # Sign the payload.
   payload_signer = PayloadSigner()
@@ -1830,6 +1954,55 @@ def main(argv):
       OPTIONS.extracted_input = a
     elif o == "--skip_postinstall":
       OPTIONS.skip_postinstall = True
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+    elif o == "--retrofit_dynamic_partitions":
+      OPTIONS.retrofit_dynamic_partitions = True
+    elif o == "--skip_compatibility_check":
+      OPTIONS.skip_compatibility_check = True
+    elif o == "--output_metadata_path":
+      OPTIONS.output_metadata_path = a
+    elif o == "--disable_fec_computation":
+      OPTIONS.disable_fec_computation = True
+    elif o == "--disable_verity_computation":
+      OPTIONS.disable_verity_computation = True
+    elif o == "--force_non_ab":
+      OPTIONS.force_non_ab = True
+    elif o == "--boot_variable_file":
+      OPTIONS.boot_variable_file = a
+    elif o == "--partial":
+      partitions = a.split()
+      if not partitions:
+        raise ValueError("Cannot parse partitions in {}".format(a))
+      OPTIONS.partial = partitions
+    elif o == "--custom_image":
+      custom_partition, custom_image = a.split("=")
+      OPTIONS.custom_images[custom_partition] = custom_image
+    elif o == "--disable_vabc":
+      OPTIONS.disable_vabc = True
+    elif o == "--spl_downgrade":
+      OPTIONS.spl_downgrade = True
+      OPTIONS.wipe_user_data = True
+    elif o == "--vabc_downgrade":
+      OPTIONS.vabc_downgrade = True
+    elif o == "--enable_vabc_xor":
+      assert a.lower() in ["true", "false"]
+      OPTIONS.enable_vabc_xor = a.lower() != "false"
+    elif o == "--force_minor_version":
+      OPTIONS.force_minor_version = a
+    elif o == "--compressor_types":
+      OPTIONS.compressor_types = a
+    elif o == "--enable_zucchini":
+      assert a.lower() in ["true", "false"]
+      OPTIONS.enable_zucchini = a.lower() != "false"
+    elif o == "--enable_lz4diff":
+      assert a.lower() in ["true", "false"]
+      OPTIONS.enable_lz4diff = a.lower() != "false"
+    elif o == "--vabc_compression_param":
+      OPTIONS.vabc_compression_param = a.lower()
+    elif o == "--security_patch_level":
+      OPTIONS.security_patch_level = a
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
     else:
       return False
     return True
@@ -1860,6 +2033,28 @@ def main(argv):
                                  "payload_signer_args=",
                                  "extracted_input_target_files=",
                                  "skip_postinstall",
+<<<<<<< HEAD   (b3278d Merge "Merge empty history for sparse-9013032-L2200000095623)
+=======
+                                 "retrofit_dynamic_partitions",
+                                 "skip_compatibility_check",
+                                 "output_metadata_path=",
+                                 "disable_fec_computation",
+                                 "disable_verity_computation",
+                                 "force_non_ab",
+                                 "boot_variable_file=",
+                                 "partial=",
+                                 "custom_image=",
+                                 "disable_vabc",
+                                 "spl_downgrade",
+                                 "vabc_downgrade",
+                                 "enable_vabc_xor=",
+                                 "force_minor_version=",
+                                 "compressor_types=",
+                                 "enable_zucchini=",
+                                 "enable_lz4diff=",
+                                 "vabc_compression_param=",
+                                 "security_patch_level=",
+>>>>>>> BRANCH (10f445 Merge "Version bump to TKB1.220904.001.A1 [core/build_id.mk])
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
