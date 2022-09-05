@@ -33,6 +33,24 @@
       "message": "I would just remove all the extra features we added to b recently that don\u0027t work in ZSH. Or fix them for zsh.",
       "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84a0bf5_13096b98",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-05T09:13:16Z",
+      "side": 1,
+      "message": "Given that there\u0027s no support for zsh on buildbots, I would suggest that we keep the build environment to just bash (sorry, Sam :(), similar to how we dropped mac builds.\n\nUnless there\u0027s a strong business reason to support zsh, I think we should update the wording on SAC to mention a hard requirement for bash shells.",
+      "parentUuid": "a915333d_82460af7",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
