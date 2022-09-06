@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8451448f_f9f1af37",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-09-06T16:16:07Z",
+      "side": 1,
+      "message": "Almost missed this. Please update.",
+      "range": {
+        "startLine": 13,
+        "startChar": 49,
+        "endLine": 13,
+        "endChar": 69
+      },
+      "revId": "2bcb51a3418d249de0602687ec6402b52a76909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
