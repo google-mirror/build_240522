@@ -51,6 +51,24 @@
       "parentUuid": "a915333d_82460af7",
       "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3e4caf_b31a7a8f",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-09-06T17:41:29Z",
+      "side": 1,
+      "message": "I\u0027ve been told to test/support zsh when making changes to envsetup.sh before in aosp/1558972",
+      "parentUuid": "e84a0bf5_13096b98",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
