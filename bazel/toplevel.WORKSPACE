@@ -32,3 +32,8 @@ new_local_repository(
     build_file = "build/bazel/toolchains/cc/BUILD.gcc_lib",
     path = "prebuilts/gcc/linux-x86/host",
 )
+
+# CC toolchains
+register_toolchains(
+    "//build/bazel/toolchains/cc:linux_clang_x64_toolchain",
+)
