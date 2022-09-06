@@ -16,6 +16,24 @@
       "message": "Add arguments?",
       "revId": "9f8f0f5397efc0c03e705f5de6f63148dff0cd06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c67c82_e67dd455",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-06T22:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e689d10_01b1291b",
+      "revId": "9f8f0f5397efc0c03e705f5de6f63148dff0cd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
