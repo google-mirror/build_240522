@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8a5bc7f_45e7b4e8",
+        "filename": "core/binary.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-09-06T16:54:44Z",
+      "side": 1,
+      "message": "\u003e but vendor and product partition can have different target version\nYeah I think you are correct. `BOARD_VNDK_VERSION` can be different that `PRODUCT_PRODUCT_VNDK_VERSION`\n\nSome talking points for further discussion offline\n1. Should the granularity be per API domain or per Soong/Make module. IOW, can a cc_library in product build against an llndk library version that is different than `PRODUCT_PRODUCT_VNDK_VERSION`\n2. As an optimization, can we dedupe stub modules if product and vendor build against the same vndk version. (We will get this as a useful side affect if we create stub variants per API surface instead of per consuming API domain)",
+      "parentUuid": "5739edf8_846e3d09",
+      "range": {
+        "startLine": 1199,
+        "startChar": 36,
+        "endLine": 1199,
+        "endChar": 43
+      },
+      "revId": "c8c525f748589e0b1f2b1e22f174a212afeee486",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ca42b0c_e4407586",
         "filename": "core/binary.mk",
         "patchSetId": 1
