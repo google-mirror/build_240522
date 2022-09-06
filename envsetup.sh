@@ -896,7 +896,7 @@ function tapas()
 function banchan()
 {
     local showHelp="$(echo $* | xargs -n 1 echo | \grep -E '^(help)$' | xargs)"
-    local product="$(echo $* | xargs -n 1 echo | \grep -E '^(.*_)?(arm|x86|arm64|x86_64)$' | xargs)"
+    local product="$(echo $* | xargs -n 1 echo | \grep -E '^(.*_)?(arm|x86|arm64|x86_64|arm64only|x86_64only)$' | xargs)"
     local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
     local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|(.*_)?(arm|x86|arm64|x86_64))$' | xargs)"
 
@@ -925,6 +925,8 @@ function banchan()
       x86)    product=module_x86;;
       arm64)  product=module_arm64;;
       x86_64) product=module_x86_64;;
+      arm64only)  product=module_arm64only;;
+      x86_64only) product=module_x86_64only;;
     esac
     if [ -z "$variant" ]; then
         variant=eng
