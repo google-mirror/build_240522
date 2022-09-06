@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c867b7_25d3e4eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887575
+      },
+      "writtenOn": "2022-09-06T19:45:54Z",
+      "side": 1,
+      "message": "Properly formatting build/make/tools/BUILD.bazel so that aosp/2208415 can be cleanly submitted (passing the buildifier).",
+      "revId": "cc8cd1242dfd30636b72134097a8d5b21dd1d2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
