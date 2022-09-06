@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000028690297",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2208415?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "e60e5502_269adb4f",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"event_log_tags\",\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"java-event-log-tags\",\n    srcs \u003d [\"java-event-log-tags.py\"],\n    python_version \u003d \"PY3\",\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "    deps \u003d [\":event_log_tags\"],\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"merge-event-log-tags\",\n    srcs \u003d [\"merge-event-log-tags.py\"],\n    python_version \u003d \"PY3\",\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "    deps \u003d [\":event_log_tags\"],\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"check_elf_file\",\n    srcs \u003d [\"check_elf_file.py\"],\n    python_version \u003d \"PY3\",\n"
+            },
+            {
+              "path": "tools/BUILD.bazel",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "82a499bc_539617bc",
+        "filename": "tools/BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-09-06T19:36:27Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "53c56d800c5eec1b72c61e8339f82cc4d3fa8ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
