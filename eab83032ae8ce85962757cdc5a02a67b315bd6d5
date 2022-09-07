@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffd8b59_2487da0a",
+        "filename": "target/board/module_x86_64only/BoardConfig.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-09-07T12:00:04Z",
+      "side": 1,
+      "message": "Thanks for the comment, but this is a CP so I\u0027m going to leave as-is. Unclear if it\u0027s worth following up to update (in both branches). Sam, I\u0027m going to leave this to you!",
+      "parentUuid": "4d102454_c626891f",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "eab83032ae8ce85962757cdc5a02a67b315bd6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9de18081_cffac23b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-07T03:03:01Z",
       "side": 1,
       "message": "2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "eab83032ae8ce85962757cdc5a02a67b315bd6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e1695d_a07c6a3d",
+        "filename": "target/product/module_x86_64only.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-09-07T12:00:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9de18081_cffac23b",
       "range": {
         "startLine": 2,
         "startChar": 16,
