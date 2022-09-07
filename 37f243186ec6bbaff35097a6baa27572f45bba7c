@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6775564f_cdfc5eb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T19:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f95a27_d41d2cc3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "37f243186ec6bbaff35097a6baa27572f45bba7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b17a455_7c88a089",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-09-06T22:05:46Z",
       "side": 1,
       "message": "Could you please create unit test for merge_ota.py?",
+      "revId": "37f243186ec6bbaff35097a6baa27572f45bba7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41457ce_27231831",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T19:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b17a455_7c88a089",
       "revId": "37f243186ec6bbaff35097a6baa27572f45bba7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
