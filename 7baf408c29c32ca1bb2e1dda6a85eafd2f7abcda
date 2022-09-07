@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e7375c_721a6732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2022-09-07T21:03:51Z",
+      "side": 1,
+      "message": "Going to abandon this change for now, as it conflicts with Joe\u0027s moving `b` into a script.\nCan follow up and fix this later.",
+      "revId": "7baf408c29c32ca1bb2e1dda6a85eafd2f7abcda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a0bc5a9_6100b35b",
