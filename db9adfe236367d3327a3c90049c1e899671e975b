@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d974a3_b46e0200",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T20:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "157f9e56_efcdd18d",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bbd8530_6bf5a7b9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-07T19:59:28Z",
       "side": 1,
       "message": "CPU",
+      "range": {
+        "startLine": 10,
+        "startChar": 62,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45280d04_3603547d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T20:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bbd8530_6bf5a7b9",
       "range": {
         "startLine": 10,
         "startChar": 62,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3ce0b6b_433ee763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T20:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e3ef860_f836e4af",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b71945f_627c3230",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-09-07T19:59:28Z",
       "side": 1,
       "message": "Is it possible to generate these images / ZIP files with genrules rather than checking in prebuilts? prebuilts should always be frowned upon 😞",
+      "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28c90cf_bd39db09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T20:36:25Z",
+      "side": 1,
+      "message": "Not really, because in order to generate OTAs we need prebuilt target_files.",
+      "parentUuid": "4b71945f_627c3230",
       "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

@@ -98,6 +98,24 @@
       "message": "nit: though \"oriole\" is a codename of a already-released product, I think it is not very suitable to be used as the name of a test data file.\n\nPerhaps \"tuna_vbmeta\"? I think the name \"tuna\" is used in a lot of places as a fake name.",
       "revId": "37f243186ec6bbaff35097a6baa27572f45bba7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "013404c5_2b84a137",
+        "filename": "tools/releasetools/testdata/oriole_vbmeta.zip",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T20:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9450b466_daa146b6",
+      "revId": "37f243186ec6bbaff35097a6baa27572f45bba7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
