@@ -211,6 +211,24 @@
       "parentUuid": "4a4f27c9_1a37a0c9",
       "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9520752e_5cb2f13a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-07T22:11:09Z",
+      "side": 1,
+      "message": "We can\u0027t easily generate target_files. Logic for doing that span across core/Makefile and releasetools. We could of course hardcode some values in a custom script and fake a target_file. But \n\n1. That\u0027s still a lot of hard coding, not much better than using a prebuilt\n2. Too much effort",
+      "parentUuid": "a508f6b6_b8675c3a",
+      "revId": "db9adfe236367d3327a3c90049c1e899671e975b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
