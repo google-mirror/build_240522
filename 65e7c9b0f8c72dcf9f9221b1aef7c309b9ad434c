@@ -16,6 +16,24 @@
       "message": "Need to account for change in this file as well.",
       "revId": "65e7c9b0f8c72dcf9f9221b1aef7c309b9ad434c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039dac25_9bd52458",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-08T17:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2602f376_0d7bc20a",
+      "revId": "65e7c9b0f8c72dcf9f9221b1aef7c309b9ad434c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
