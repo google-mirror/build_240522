@@ -52,6 +52,24 @@
       "parentUuid": "ed904ef1_e8b46baf",
       "revId": "6f908010eb7e17f4c60b6d23452a9b5ff264b4f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbcbe36_f996df32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2022-09-08T01:56:40Z",
+      "side": 1,
+      "message": "Hi Jingwen, Bob has approved my CL. But I still an owner approve. Could you have a review? Thanks!",
+      "parentUuid": "c723c1e7_dd59d589",
+      "revId": "6f908010eb7e17f4c60b6d23452a9b5ff264b4f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
