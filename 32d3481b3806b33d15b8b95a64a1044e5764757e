@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c508764d_e42ae772",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-08T17:19:28Z",
+      "side": 1,
+      "message": "What definition of \"module\" are you using here?  From the Soong or Make definition it is not a module (there is no Android.bp or Android.mk file entry for it).",
+      "range": {
+        "startLine": 1718,
+        "startChar": 20,
+        "endLine": 1718,
+        "endChar": 31
+      },
+      "revId": "32d3481b3806b33d15b8b95a64a1044e5764757e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
