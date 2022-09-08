@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de04801_93e26dd0",
+        "filename": "core/tasks/tools/vts-kernel-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2022-09-08T22:46:34Z",
+      "side": 0,
+      "message": "Please make sure all test config files refer to vts_kernel_tests https://source.corp.google.com/search?q\u003dvts_kernel_tests\u0026sq\u003dpackage:android are updated.",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 21,
+        "endChar": 62
+      },
+      "revId": "061479c528593ea629584f5c8dce85a80b3c4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
