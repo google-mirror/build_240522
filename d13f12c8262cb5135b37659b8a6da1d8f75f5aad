@@ -142,6 +142,24 @@
       "parentUuid": "c3f3ea0d_c002b95c",
       "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a44e9c_06d5e794",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-08T00:23:57Z",
+      "side": 1,
+      "message": "Talked to Yike, tests defined in Android.bp files are already using the `libs` property as runtime libs, so we might as well do the same in Make.",
+      "parentUuid": "746747af_00f2b4b5",
+      "revId": "d13f12c8262cb5135b37659b8a6da1d8f75f5aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
