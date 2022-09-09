@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84d2473_539c65c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-09-09T01:26:54Z",
+      "side": 1,
+      "message": "Should you be mapping in the platform/build/bazel project instead of adding a bazel folder to this project? (This project has been remapped to build/make in the platform manifest so that it doesn\u0027t conflict with the other build/* projects)",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
