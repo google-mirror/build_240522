@@ -52,6 +52,24 @@
       "parentUuid": "a84d2473_539c65c7",
       "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375b6425_f938c507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-09-09T21:17:13Z",
+      "side": 1,
+      "message": "In old manifests, the platform had a mapping of `\u003cserver\u003e/platform/build` -\u003e `\u003csrcdir\u003e/build`:\n\n```\n  \u003cproject path\u003d\"build\" name\u003d\"platform/build\"\u003e\n```\n\nIn modern platform manifests, it\u0027s instead `\u003cserver\u003e/platform/build` -\u003e `\u003csrcdir\u003e/build/make`\n\n```\n  \u003cproject path\u003d\"build/make\" name\u003d\"platform/build\"\u003e\n```\n\nThis lets `build/{blueprint,soong,bazel}` exist next to this project, without any nesting happening (nesting projects will not be supported with newer tools).\n\nI primarily asked about this because this project exists on this branch to make the release tooling happy (`core/build_id.mk`), but it\u0027s really a project for the old make-based build system. We\u0027ve got a separate project for bazel: https://android.googlesource.com/platform/build/bazel",
+      "parentUuid": "e0a771ee_89ce3d1a",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
