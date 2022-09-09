@@ -16,6 +16,24 @@
       "message": "Should you be mapping in the platform/build/bazel project instead of adding a bazel folder to this project? (This project has been remapped to build/make in the platform manifest so that it doesn\u0027t conflict with the other build/* projects)",
       "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a771ee_89ce3d1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1356264
+      },
+      "writtenOn": "2022-09-09T21:08:56Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment about project mapping. I don\u0027t have much experience with how projects are commonly mapped or have any idea about good practices with android/AOSP projects. Could you elaborate more on what you mean?",
+      "parentUuid": "a84d2473_539c65c7",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
