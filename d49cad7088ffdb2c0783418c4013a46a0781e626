@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c49c9974_4478c3cc",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-09T18:03:48Z",
+      "side": 1,
+      "message": "Here\u0027s an example of obsoleting a variable.",
+      "revId": "d49cad7088ffdb2c0783418c4013a46a0781e626",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
