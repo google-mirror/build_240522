@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc01bee_578ff4c0",
+        "filename": "bazel/toolchains/cc/cc_toolchain_config.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1356264
+      },
+      "writtenOn": "2022-09-09T21:17:23Z",
+      "side": 1,
+      "message": "nit: could you break this into another private helper? to reduce the size of cc_toolchain_config_impl",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 9
+      },
+      "revId": "181a58b5709bcfd88020944700bcc3ba5c8dacd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc4e05f_7fb3bff7",
+        "filename": "bazel/toolchains/cc/cc_toolchain_config.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1356264
+      },
+      "writtenOn": "2022-09-09T21:17:23Z",
+      "side": 1,
+      "message": "it\u0027s odd to no_legacy_features, but then below on lines 158-161 it lists legacy_features_* in the same list. What does no_legacy_features do?",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 5
+      },
+      "revId": "181a58b5709bcfd88020944700bcc3ba5c8dacd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
