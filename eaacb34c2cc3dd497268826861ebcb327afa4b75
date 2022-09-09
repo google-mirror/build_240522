@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c37891_0fc0b704",
+        "filename": "bazel/toolchains/cc/features.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1356264
+      },
+      "writtenOn": "2022-09-09T21:14:16Z",
+      "side": 1,
+      "message": "could you explain why the ordering matters for [legacy] features?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 62
+      },
+      "revId": "eaacb34c2cc3dd497268826861ebcb327afa4b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
