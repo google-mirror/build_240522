@@ -1,0 +1,155 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000028823625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2212601?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6286ba4e_2646a6f2",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "bazel/toolchains/cc/cc_toolchain_config.bzl",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "bazel/toolchains/cc/cc_toolchain_config.bzl",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "    \"toolchain_link_flags_feature\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "b76d12b8_1686256c",
+        "filename": "bazel/toolchains/cc/cc_toolchain_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-09-09T00:44:53Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier bazel/toolchains/cc/cc_toolchain_config.bzl` to format the file, or apply the suggested fix.",
+      "revId": "552a930ad9645be8993c8e8a24511ca941056a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000028823625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2212601?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "f3fd877f_0994fefe",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "bazel/toolchains/cc/utils.bzl",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "80d148e3_bdf7db77",
+        "filename": "bazel/toolchains/cc/utils.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-09-09T00:44:53Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier bazel/toolchains/cc/utils.bzl` to format the file, or apply the suggested fix.",
+      "revId": "552a930ad9645be8993c8e8a24511ca941056a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000028823625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2212601?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "daa371b7_da92716f",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "bazel/toplevel.WORKSPACE",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "    sha256 \u003d \"f7be3474d42aae265405a592bb7da8e171919d74c16f082a5457840f06054728\",\n"
+            },
+            {
+              "path": "bazel/toplevel.WORKSPACE",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "bazel/toplevel.WORKSPACE",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "bazel/toplevel.WORKSPACE",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2f94c319_a1960be0",
+        "filename": "bazel/toplevel.WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-09-09T00:44:53Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier bazel/toplevel.WORKSPACE` to format the file, or apply the suggested fix.",
+      "revId": "552a930ad9645be8993c8e8a24511ca941056a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
