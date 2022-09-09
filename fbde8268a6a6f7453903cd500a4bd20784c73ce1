@@ -34,6 +34,24 @@
       "parentUuid": "a84d2473_539c65c7",
       "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a31f514_174d2dde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872231
+      },
+      "writtenOn": "2022-09-09T21:16:26Z",
+      "side": 1,
+      "message": "tomrenn@ - I think Dan means that instead of adding new files to https://android.googlesource.com/platform/build/+/refs/heads/emu-master-dev, we should use a smaller-scope git project (https://android.googlesource.com/platform/build/bazel).\n\nCurrently there\u0027s no emu-master-dev branch for /build/bazel. So that would require aa new branch - which does seem cleaner, though.\n\nAlso, since we\u0027re requesting a new branch, I\u0027d just request them for /prebuilts/bazel/\u003cplatform\u003e as well to hold bazel binaries - so we no longer need to map in /prebuilts/tools:studio-main and things are more isolated - WDYT?",
+      "parentUuid": "a84d2473_539c65c7",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
