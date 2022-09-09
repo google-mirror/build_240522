@@ -70,6 +70,24 @@
       "parentUuid": "e0a771ee_89ce3d1a",
       "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3240b8a_764aa30d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1356264
+      },
+      "writtenOn": "2022-09-09T21:37:06Z",
+      "side": 1,
+      "message": "Ah, thanks for the explanation! I think creating a new branch for the platform/build/bazel makes sense, along with a prebuilts project too",
+      "parentUuid": "375b6425_f938c507",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
