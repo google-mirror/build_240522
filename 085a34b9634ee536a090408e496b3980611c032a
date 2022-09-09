@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a917cb0_8f8edf5a",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-09T17:57:17Z",
+      "side": 0,
+      "message": "Do you want to mark the variable as obsolete so that it is an error to set it?",
+      "revId": "085a34b9634ee536a090408e496b3980611c032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
