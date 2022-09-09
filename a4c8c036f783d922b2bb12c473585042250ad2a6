@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3284adff_64d21781",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-09T21:32:47Z",
+      "side": 1,
+      "message": "Done. Ended up replacing this with a trap instead anyways.",
+      "parentUuid": "33aa4f42_6f016c89",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a915333d_82460af7",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I\u0027ve been told to test/support zsh when making changes to envsetup.sh before in aosp/1558972",
       "parentUuid": "e84a0bf5_13096b98",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206ae9d8_76c7b461",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-09T21:32:47Z",
+      "side": 1,
+      "message": "@jin, do you mean that the buildbots don\u0027t have the zsh binary at all?\n\nIf they do, since we\u0027ve had the recent fix for zsh in aosp/2213096, I\u0027ll leave in the zsh tests.\n\nIf not, I can remove that line again.",
+      "parentUuid": "2a3e4caf_b31a7a8f",
       "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
